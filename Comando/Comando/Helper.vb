@@ -3,7 +3,7 @@ Imports System.Text.RegularExpressions
 
 Module Helper
 
-    Private empresas As New List(Of String) From {"SurfactanSA", "surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII"}
+    Private empresas As New List(Of String) From {"SurfactanSA", "surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII", "Pellital_III"}
 
     Private Const VALIDA_CUIT = "54327654321"
 
@@ -44,6 +44,8 @@ Module Helper
     End Function
 
     Public Function _ConectarA(Optional ByVal empresa As String = "SurfactanSA") As String
+
+        If Globales.EmpresaActual = 1 Then empresa = "Pellital_III"
 
         Dim _empresa = empresas.Find(Function(e) UCase(e) = UCase(empresa))
 
@@ -601,28 +603,57 @@ Module Helper
 
     Public Function _NombreLineaSegunNumero(ByVal item As Object) As String
 
-        Select Case Val(item)
-            Case 1
-                Return "Químicos"
-            Case 2
-                Return "Colorantes"
-            Case 3
-                Return "Farma"
-            Case 4
-                Return "Biocidas"
-            Case 5
-                Return "Papel"
-            Case 6
-                Return "Fazón Pellital"
-            Case 7
-                Return "Fazón Farma"
-            Case 8
-                Return "Fazón Químicos"
-            Case 9
-                Return "Varios"
-            Case Else
-                Return ""
-        End Select
+        If Globales.EmpresaActual = 0 Then
+
+            Select Case Val(item)
+                Case 1
+                    Return "Químicos"
+                Case 2
+                    Return "Colorantes"
+                Case 3
+                    Return "Farma"
+                Case 4
+                    Return "Biocidas"
+                Case 5
+                    Return "Papel"
+                Case 6
+                    Return "Fazón Pellital"
+                Case 7
+                    Return "Fazón Farma"
+                Case 8
+                    Return "Fazón Químicos"
+                Case 9
+                    Return "Varios"
+                Case Else
+                    Return ""
+            End Select
+
+        Else
+
+            Select Case Val(item)
+                Case 1
+                    Return "Aceites Naturales"
+                Case 2
+                    Return "Recurtientes"
+                Case 3
+                    Return "Depilantes"
+                Case 4
+                    Return "Purgas Enzimáticas"
+                Case 5
+                    Return "Complejantes"
+                Case 6
+                    Return "Desencalantes"
+                Case 7
+                    Return "Bactericidas"
+                Case 8
+                    Return "Colorantes"
+                Case 9
+                    Return "Varios"
+                Case Else
+                    Return ""
+            End Select
+
+        End If
 
     End Function
 

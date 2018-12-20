@@ -80,12 +80,27 @@ Partial Class ComparacionesMensualesValorUnico
         Me.rbDiaria = New System.Windows.Forms.RadioButton()
         Me.rbMenusal = New System.Windows.Forms.RadioButton()
         Me.gbComparativoDiario = New System.Windows.Forms.GroupBox()
+        Me.ckSumarDiario = New System.Windows.Forms.CheckBox()
         Me.txtFechaDiaria = New System.Windows.Forms.MaskedTextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.gbMensualComparativo = New System.Windows.Forms.GroupBox()
         Me.txtMesComparativo = New System.Windows.Forms.MaskedTextBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.ckSumarDiario = New System.Windows.Forms.CheckBox()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.gbLineasPellital = New System.Windows.Forms.GroupBox()
+        Me.ckColorantesPellital = New System.Windows.Forms.CheckBox()
+        Me.ckVariosPellital = New System.Windows.Forms.CheckBox()
+        Me.ckBactericidas = New System.Windows.Forms.CheckBox()
+        Me.ckDesencalantes = New System.Windows.Forms.CheckBox()
+        Me.ckPurgasEnzimaticas = New System.Windows.Forms.CheckBox()
+        Me.ckDepilantes = New System.Windows.Forms.CheckBox()
+        Me.ckComplejantes = New System.Windows.Forms.CheckBox()
+        Me.ckRecurtientes = New System.Windows.Forms.CheckBox()
+        Me.ckAceitesNaturales = New System.Windows.Forms.CheckBox()
+        Me.ckConsolidadoPellital = New System.Windows.Forms.CheckBox()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -100,12 +115,14 @@ Partial Class ComparacionesMensualesValorUnico
         Me.GroupBox9.SuspendLayout()
         Me.gbComparativoDiario.SuspendLayout()
         Me.gbMensualComparativo.SuspendLayout()
+        Me.Panel1.SuspendLayout()
+        Me.gbLineasPellital.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnGenerar
         '
         Me.btnGenerar.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
-        Me.btnGenerar.Location = New System.Drawing.Point(394, 328)
+        Me.btnGenerar.Location = New System.Drawing.Point(395, 405)
         Me.btnGenerar.Name = "btnGenerar"
         Me.btnGenerar.Size = New System.Drawing.Size(153, 38)
         Me.btnGenerar.TabIndex = 0
@@ -116,7 +133,7 @@ Partial Class ComparacionesMensualesValorUnico
         '
         Me.cmbTipoGrafico.FormattingEnabled = True
         Me.cmbTipoGrafico.Items.AddRange(New Object() {"Barras", "Lineas"})
-        Me.cmbTipoGrafico.Location = New System.Drawing.Point(13, 85)
+        Me.cmbTipoGrafico.Location = New System.Drawing.Point(20, 164)
         Me.cmbTipoGrafico.Name = "cmbTipoGrafico"
         Me.cmbTipoGrafico.Size = New System.Drawing.Size(14, 21)
         Me.cmbTipoGrafico.TabIndex = 2
@@ -135,7 +152,7 @@ Partial Class ComparacionesMensualesValorUnico
         Me.GroupBox2.Controls.Add(Me.ckQuimicos)
         Me.GroupBox2.Controls.Add(Me.ckConsolidado)
         Me.GroupBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
-        Me.GroupBox2.Location = New System.Drawing.Point(411, 154)
+        Me.GroupBox2.Location = New System.Drawing.Point(419, 233)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(270, 148)
         Me.GroupBox2.TabIndex = 4
@@ -254,7 +271,7 @@ Partial Class ComparacionesMensualesValorUnico
         Me.GroupBox3.Controls.Add(Me.ckPedidos)
         Me.GroupBox3.Controls.Add(Me.ckTodosValores)
         Me.GroupBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
-        Me.GroupBox3.Location = New System.Drawing.Point(13, 185)
+        Me.GroupBox3.Location = New System.Drawing.Point(12, 264)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(375, 181)
         Me.GroupBox3.TabIndex = 4
@@ -399,7 +416,7 @@ Partial Class ComparacionesMensualesValorUnico
         Me.GroupBox4.Controls.Add(Me.rbMonto)
         Me.GroupBox4.Controls.Add(Me.ckPorcentajeAtrasos)
         Me.GroupBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
-        Me.GroupBox4.Location = New System.Drawing.Point(12, 62)
+        Me.GroupBox4.Location = New System.Drawing.Point(19, 141)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(27, 19)
         Me.GroupBox4.TabIndex = 7
@@ -434,7 +451,7 @@ Partial Class ComparacionesMensualesValorUnico
         Me.GroupBox5.Controls.Add(Me.btnSeleccionarAnios)
         Me.GroupBox5.Controls.Add(Me.cmbPeriodo)
         Me.GroupBox5.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
-        Me.GroupBox5.Location = New System.Drawing.Point(411, 65)
+        Me.GroupBox5.Location = New System.Drawing.Point(418, 144)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.Size = New System.Drawing.Size(270, 83)
         Me.GroupBox5.TabIndex = 7
@@ -481,7 +498,7 @@ Partial Class ComparacionesMensualesValorUnico
         DataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle17
-        Me.DataGridView1.Location = New System.Drawing.Point(12, 428)
+        Me.DataGridView1.Location = New System.Drawing.Point(12, 486)
         Me.DataGridView1.Name = "DataGridView1"
         DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Control
@@ -498,7 +515,7 @@ Partial Class ComparacionesMensualesValorUnico
         '
         Me.pnlAnios.Controls.Add(Me.GroupBox6)
         Me.pnlAnios.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.25!)
-        Me.pnlAnios.Location = New System.Drawing.Point(144, 418)
+        Me.pnlAnios.Location = New System.Drawing.Point(144, 476)
         Me.pnlAnios.Name = "pnlAnios"
         Me.pnlAnios.Size = New System.Drawing.Size(374, 220)
         Me.pnlAnios.TabIndex = 9
@@ -541,7 +558,7 @@ Partial Class ComparacionesMensualesValorUnico
         Me.gbDesde.Controls.Add(Me.Label4)
         Me.gbDesde.Controls.Add(Me.Label3)
         Me.gbDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
-        Me.gbDesde.Location = New System.Drawing.Point(143, 11)
+        Me.gbDesde.Location = New System.Drawing.Point(150, 90)
         Me.gbDesde.Name = "gbDesde"
         Me.gbDesde.Size = New System.Drawing.Size(265, 51)
         Me.gbDesde.TabIndex = 10
@@ -574,7 +591,7 @@ Partial Class ComparacionesMensualesValorUnico
         Me.gbHasta.Controls.Add(Me.Label5)
         Me.gbHasta.Controls.Add(Me.Label6)
         Me.gbHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
-        Me.gbHasta.Location = New System.Drawing.Point(411, 11)
+        Me.gbHasta.Location = New System.Drawing.Point(418, 90)
         Me.gbHasta.Name = "gbHasta"
         Me.gbHasta.Size = New System.Drawing.Size(230, 51)
         Me.gbHasta.TabIndex = 10
@@ -622,9 +639,9 @@ Partial Class ComparacionesMensualesValorUnico
         'PanelSeleccionAnios
         '
         Me.PanelSeleccionAnios.Controls.Add(Me.GroupBox1)
-        Me.PanelSeleccionAnios.Location = New System.Drawing.Point(203, 89)
+        Me.PanelSeleccionAnios.Location = New System.Drawing.Point(210, 168)
         Me.PanelSeleccionAnios.Name = "PanelSeleccionAnios"
-        Me.PanelSeleccionAnios.Size = New System.Drawing.Size(294, 212)
+        Me.PanelSeleccionAnios.Size = New System.Drawing.Size(294, 213)
         Me.PanelSeleccionAnios.TabIndex = 11
         Me.PanelSeleccionAnios.Visible = False
         '
@@ -665,7 +682,7 @@ Partial Class ComparacionesMensualesValorUnico
         Me.GroupBox9.Controls.Add(Me.rbDiaria)
         Me.GroupBox9.Controls.Add(Me.rbMenusal)
         Me.GroupBox9.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.GroupBox9.Location = New System.Drawing.Point(5, 11)
+        Me.GroupBox9.Location = New System.Drawing.Point(12, 90)
         Me.GroupBox9.Name = "GroupBox9"
         Me.GroupBox9.Size = New System.Drawing.Size(132, 166)
         Me.GroupBox9.TabIndex = 12
@@ -709,12 +726,21 @@ Partial Class ComparacionesMensualesValorUnico
         Me.gbComparativoDiario.Controls.Add(Me.ckSumarDiario)
         Me.gbComparativoDiario.Controls.Add(Me.txtFechaDiaria)
         Me.gbComparativoDiario.Controls.Add(Me.Label10)
-        Me.gbComparativoDiario.Location = New System.Drawing.Point(143, 67)
+        Me.gbComparativoDiario.Location = New System.Drawing.Point(150, 146)
         Me.gbComparativoDiario.Name = "gbComparativoDiario"
         Me.gbComparativoDiario.Size = New System.Drawing.Size(263, 57)
         Me.gbComparativoDiario.TabIndex = 13
         Me.gbComparativoDiario.TabStop = False
         Me.gbComparativoDiario.Text = "Comparativo Diario"
+        '
+        'ckSumarDiario
+        '
+        Me.ckSumarDiario.Location = New System.Drawing.Point(148, 10)
+        Me.ckSumarDiario.Name = "ckSumarDiario"
+        Me.ckSumarDiario.Size = New System.Drawing.Size(111, 43)
+        Me.ckSumarDiario.TabIndex = 10
+        Me.ckSumarDiario.Text = "Sumar Acumulado Diario"
+        Me.ckSumarDiario.UseVisualStyleBackColor = True
         '
         'txtFechaDiaria
         '
@@ -741,7 +767,7 @@ Partial Class ComparacionesMensualesValorUnico
         '
         Me.gbMensualComparativo.Controls.Add(Me.txtMesComparativo)
         Me.gbMensualComparativo.Controls.Add(Me.Label1)
-        Me.gbMensualComparativo.Location = New System.Drawing.Point(143, 125)
+        Me.gbMensualComparativo.Location = New System.Drawing.Point(150, 204)
         Me.gbMensualComparativo.Name = "gbMensualComparativo"
         Me.gbMensualComparativo.Size = New System.Drawing.Size(263, 52)
         Me.gbMensualComparativo.TabIndex = 13
@@ -769,20 +795,179 @@ Partial Class ComparacionesMensualesValorUnico
         Me.Label1.TabIndex = 6
         Me.Label1.Text = "Mes/Año:"
         '
-        'ckSumarDiario
+        'Panel1
         '
-        Me.ckSumarDiario.Location = New System.Drawing.Point(148, 10)
-        Me.ckSumarDiario.Name = "ckSumarDiario"
-        Me.ckSumarDiario.Size = New System.Drawing.Size(111, 43)
-        Me.ckSumarDiario.TabIndex = 10
-        Me.ckSumarDiario.Text = "Sumar Acumulado Diario"
-        Me.ckSumarDiario.UseVisualStyleBackColor = True
+        Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(32, Byte), Integer), CType(CType(74, Byte), Integer), CType(CType(95, Byte), Integer))
+        Me.Panel1.Controls.Add(Me.Label7)
+        Me.Panel1.Controls.Add(Me.Label2)
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel1.Location = New System.Drawing.Point(0, 0)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(708, 59)
+        Me.Panel1.TabIndex = 14
+        '
+        'Label7
+        '
+        Me.Label7.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label7.Location = New System.Drawing.Point(508, 21)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(155, 20)
+        Me.Label7.TabIndex = 0
+        Me.Label7.Text = "SURFACTAN S.A."
+        '
+        'Label2
+        '
+        Me.Label2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label2.Location = New System.Drawing.Point(31, 21)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(177, 20)
+        Me.Label2.TabIndex = 0
+        Me.Label2.Text = "- Sistema Comando -"
+        '
+        'Button3
+        '
+        Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
+        Me.Button3.Location = New System.Drawing.Point(553, 404)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(148, 38)
+        Me.Button3.TabIndex = 0
+        Me.Button3.Text = "Cambiar Empresa"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'gbLineasPellital
+        '
+        Me.gbLineasPellital.Controls.Add(Me.ckColorantesPellital)
+        Me.gbLineasPellital.Controls.Add(Me.ckVariosPellital)
+        Me.gbLineasPellital.Controls.Add(Me.ckBactericidas)
+        Me.gbLineasPellital.Controls.Add(Me.ckDesencalantes)
+        Me.gbLineasPellital.Controls.Add(Me.ckPurgasEnzimaticas)
+        Me.gbLineasPellital.Controls.Add(Me.ckDepilantes)
+        Me.gbLineasPellital.Controls.Add(Me.ckComplejantes)
+        Me.gbLineasPellital.Controls.Add(Me.ckRecurtientes)
+        Me.gbLineasPellital.Controls.Add(Me.ckAceitesNaturales)
+        Me.gbLineasPellital.Controls.Add(Me.ckConsolidadoPellital)
+        Me.gbLineasPellital.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
+        Me.gbLineasPellital.Location = New System.Drawing.Point(419, 233)
+        Me.gbLineasPellital.Name = "gbLineasPellital"
+        Me.gbLineasPellital.Size = New System.Drawing.Size(270, 148)
+        Me.gbLineasPellital.TabIndex = 4
+        Me.gbLineasPellital.TabStop = False
+        Me.gbLineasPellital.Text = "Lineas a Comparar"
+        '
+        'ckColorantesPellital
+        '
+        Me.ckColorantesPellital.AutoSize = True
+        Me.ckColorantesPellital.Location = New System.Drawing.Point(137, 95)
+        Me.ckColorantesPellital.Name = "ckColorantesPellital"
+        Me.ckColorantesPellital.Size = New System.Drawing.Size(100, 22)
+        Me.ckColorantesPellital.TabIndex = 0
+        Me.ckColorantesPellital.Text = "Colorantes"
+        Me.ckColorantesPellital.UseVisualStyleBackColor = True
+        '
+        'ckVariosPellital
+        '
+        Me.ckVariosPellital.AutoSize = True
+        Me.ckVariosPellital.Location = New System.Drawing.Point(137, 117)
+        Me.ckVariosPellital.Name = "ckVariosPellital"
+        Me.ckVariosPellital.Size = New System.Drawing.Size(69, 22)
+        Me.ckVariosPellital.TabIndex = 0
+        Me.ckVariosPellital.Text = "Varios"
+        Me.ckVariosPellital.UseVisualStyleBackColor = True
+        '
+        'ckBactericidas
+        '
+        Me.ckBactericidas.AutoSize = True
+        Me.ckBactericidas.Location = New System.Drawing.Point(137, 73)
+        Me.ckBactericidas.Name = "ckBactericidas"
+        Me.ckBactericidas.Size = New System.Drawing.Size(108, 22)
+        Me.ckBactericidas.TabIndex = 0
+        Me.ckBactericidas.Text = "Bactericidas"
+        Me.ckBactericidas.UseVisualStyleBackColor = True
+        '
+        'ckDesencalantes
+        '
+        Me.ckDesencalantes.AutoSize = True
+        Me.ckDesencalantes.Location = New System.Drawing.Point(137, 51)
+        Me.ckDesencalantes.Name = "ckDesencalantes"
+        Me.ckDesencalantes.Size = New System.Drawing.Size(125, 22)
+        Me.ckDesencalantes.TabIndex = 0
+        Me.ckDesencalantes.Text = "Desencalantes"
+        Me.ckDesencalantes.UseVisualStyleBackColor = True
+        '
+        'ckPurgasEnzimaticas
+        '
+        Me.ckPurgasEnzimaticas.AutoSize = True
+        Me.ckPurgasEnzimaticas.Location = New System.Drawing.Point(13, 117)
+        Me.ckPurgasEnzimaticas.Name = "ckPurgasEnzimaticas"
+        Me.ckPurgasEnzimaticas.Size = New System.Drawing.Size(124, 22)
+        Me.ckPurgasEnzimaticas.TabIndex = 0
+        Me.ckPurgasEnzimaticas.Text = "Purgas Enzim."
+        Me.ckPurgasEnzimaticas.UseVisualStyleBackColor = True
+        '
+        'ckDepilantes
+        '
+        Me.ckDepilantes.AutoSize = True
+        Me.ckDepilantes.Location = New System.Drawing.Point(13, 95)
+        Me.ckDepilantes.Name = "ckDepilantes"
+        Me.ckDepilantes.Size = New System.Drawing.Size(96, 22)
+        Me.ckDepilantes.TabIndex = 0
+        Me.ckDepilantes.Text = "Depilantes"
+        Me.ckDepilantes.UseVisualStyleBackColor = True
+        '
+        'ckComplejantes
+        '
+        Me.ckComplejantes.AutoSize = True
+        Me.ckComplejantes.Location = New System.Drawing.Point(137, 27)
+        Me.ckComplejantes.Name = "ckComplejantes"
+        Me.ckComplejantes.Size = New System.Drawing.Size(118, 22)
+        Me.ckComplejantes.TabIndex = 0
+        Me.ckComplejantes.Text = "Complejantes"
+        Me.ckComplejantes.UseVisualStyleBackColor = True
+        '
+        'ckRecurtientes
+        '
+        Me.ckRecurtientes.AutoSize = True
+        Me.ckRecurtientes.Location = New System.Drawing.Point(13, 71)
+        Me.ckRecurtientes.Name = "ckRecurtientes"
+        Me.ckRecurtientes.Size = New System.Drawing.Size(110, 22)
+        Me.ckRecurtientes.TabIndex = 0
+        Me.ckRecurtientes.Text = "Recurtientes"
+        Me.ckRecurtientes.UseVisualStyleBackColor = True
+        '
+        'ckAceitesNaturales
+        '
+        Me.ckAceitesNaturales.AutoSize = True
+        Me.ckAceitesNaturales.Location = New System.Drawing.Point(13, 49)
+        Me.ckAceitesNaturales.Name = "ckAceitesNaturales"
+        Me.ckAceitesNaturales.Size = New System.Drawing.Size(106, 22)
+        Me.ckAceitesNaturales.TabIndex = 0
+        Me.ckAceitesNaturales.Text = "Aceites Nat."
+        Me.ckAceitesNaturales.UseVisualStyleBackColor = True
+        '
+        'ckConsolidadoPellital
+        '
+        Me.ckConsolidadoPellital.AutoSize = True
+        Me.ckConsolidadoPellital.Location = New System.Drawing.Point(13, 27)
+        Me.ckConsolidadoPellital.Name = "ckConsolidadoPellital"
+        Me.ckConsolidadoPellital.Size = New System.Drawing.Size(111, 22)
+        Me.ckConsolidadoPellital.TabIndex = 0
+        Me.ckConsolidadoPellital.Text = "Consolidado"
+        Me.ckConsolidadoPellital.UseVisualStyleBackColor = True
         '
         'ComparacionesMensualesValorUnico
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(694, 391)
+        Me.ClientSize = New System.Drawing.Size(708, 463)
+        Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.PanelSeleccionAnios)
         Me.Controls.Add(Me.gbMensualComparativo)
         Me.Controls.Add(Me.gbComparativoDiario)
@@ -792,8 +977,10 @@ Partial Class ComparacionesMensualesValorUnico
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GroupBox3)
+        Me.Controls.Add(Me.gbLineasPellital)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.cmbTipoGrafico)
+        Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.btnGenerar)
         Me.Controls.Add(Me.pnlAnios)
         Me.Controls.Add(Me.DataGridView1)
@@ -802,7 +989,6 @@ Partial Class ComparacionesMensualesValorUnico
         Me.MaximizeBox = False
         Me.Name = "ComparacionesMensualesValorUnico"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
-        Me.Text = "Comando"
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
@@ -825,6 +1011,10 @@ Partial Class ComparacionesMensualesValorUnico
         Me.gbComparativoDiario.PerformLayout()
         Me.gbMensualComparativo.ResumeLayout(False)
         Me.gbMensualComparativo.PerformLayout()
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
+        Me.gbLineasPellital.ResumeLayout(False)
+        Me.gbLineasPellital.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -889,4 +1079,19 @@ Partial Class ComparacionesMensualesValorUnico
     Friend WithEvents txtMesComparativo As System.Windows.Forms.MaskedTextBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents ckSumarDiario As System.Windows.Forms.CheckBox
+    Friend WithEvents Panel1 As System.Windows.Forms.Panel
+    Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents Label7 As System.Windows.Forms.Label
+    Friend WithEvents Button3 As System.Windows.Forms.Button
+    Friend WithEvents gbLineasPellital As System.Windows.Forms.GroupBox
+    Friend WithEvents ckColorantesPellital As System.Windows.Forms.CheckBox
+    Friend WithEvents ckVariosPellital As System.Windows.Forms.CheckBox
+    Friend WithEvents ckBactericidas As System.Windows.Forms.CheckBox
+    Friend WithEvents ckDesencalantes As System.Windows.Forms.CheckBox
+    Friend WithEvents ckPurgasEnzimaticas As System.Windows.Forms.CheckBox
+    Friend WithEvents ckDepilantes As System.Windows.Forms.CheckBox
+    Friend WithEvents ckComplejantes As System.Windows.Forms.CheckBox
+    Friend WithEvents ckRecurtientes As System.Windows.Forms.CheckBox
+    Friend WithEvents ckAceitesNaturales As System.Windows.Forms.CheckBox
+    Friend WithEvents ckConsolidadoPellital As System.Windows.Forms.CheckBox
 End Class

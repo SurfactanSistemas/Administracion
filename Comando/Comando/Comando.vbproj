@@ -90,6 +90,12 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CambioEmpresa.Designer.vb">
+      <DependentUpon>CambioEmpresa.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CambioEmpresa.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Clases\Query.vb" />
     <Compile Include="Formularios\ComparacionesMensualesValorUnico.Designer.vb">
       <DependentUpon>ComparacionesMensualesValorUnico.vb</DependentUpon>
@@ -153,6 +159,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="CambioEmpresa.resx">
+      <DependentUpon>CambioEmpresa.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\ComparacionesMensualesValorUnico.resx">
       <DependentUpon>ComparacionesMensualesValorUnico.vb</DependentUpon>
     </EmbeddedResource>

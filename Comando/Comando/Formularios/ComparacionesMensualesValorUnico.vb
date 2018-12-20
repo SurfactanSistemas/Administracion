@@ -4,6 +4,11 @@
 Public Class ComparacionesMensualesValorUnico
 
     Private Sub ComparacionesMensuales_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        Label7.Text = IIf(Globales.EmpresaActual = 0, "SURFACTAN S.A.", "PELLITAL S.A.")
+
+        GroupBox2.Visible = Globales.EmpresaActual = 0
+        gbLineasPellital.Visible = Globales.EmpresaActual = 1
+
         _Limpiar()
     End Sub
 
@@ -11,7 +16,8 @@ Public Class ComparacionesMensualesValorUnico
         _CargarAniosComparables()
 
         rbMenusal.Checked = True
-        ckConsolidado.Checked = True
+        If Globales.EmpresaActual = 0 then ckConsolidado.Checked = True
+        If Globales.EmpresaActual = 1 Then ckConsolidadoPellital.Checked = True
         cmbTipoGrafico.SelectedIndex = 0
         cmbPeriodo.SelectedIndex = 0
         txtAnioDesde.Text = _BuscarAnoPorDefecto()
@@ -39,7 +45,7 @@ Public Class ComparacionesMensualesValorUnico
 
                 dr.Read()
 
-                Return dr.Item("Anio")
+                Return IIf(IsDBNull(dr.Item("Anio")), 0, dr.Item("Anio"))
 
             End If
 
@@ -102,10 +108,15 @@ Public Class ComparacionesMensualesValorUnico
     End Sub
 
     Private Function _ArmarBuscarFamilias() As String
-        Dim chks() As CheckBox = {ckQuimicos, ckColorantes, ckFarma, ckBiocidas, ckPapel, ckFazonPellital, _
+        Dim chks As New List(Of CheckBox) From {ckQuimicos, ckColorantes, ckFarma, ckBiocidas, ckPapel, ckFazonPellital, _
                                   ckFazonFarma, ckFazonQuimicos, ckVarios}
 
-        If (cmbPeriodo.SelectedIndex = 2 Or (rbDiaria.Checked And cmbPeriodo.SelectedIndex = 1)) And ckConsolidado.Checked Then
+        If Globales.EmpresaActual = 1 Then
+            chks = New List(Of CheckBox) From {ckConsolidadoPellital, ckAceitesNaturales, ckRecurtientes, ckDepilantes, ckPurgasEnzimaticas, ckComplejantes, ckDesencalantes, ckBactericidas, ckColorantesPellital, ckVariosPellital}
+        End If
+
+        If (cmbPeriodo.SelectedIndex = 2 Or (rbDiaria.Checked And cmbPeriodo.SelectedIndex = 1)) And _EsConsolidado() Then
+            If Globales.EmpresaActual = 1 Then Return "Linea IN('1', '2', '3', '4', '5', '6', '7', '8', '9')"
             Return "Linea IN('1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11')"
         End If
 
@@ -117,9 +128,7 @@ Public Class ComparacionesMensualesValorUnico
             End If
         Next
 
-        If WBuscarFamilias.EndsWith(",") Then
-            WBuscarFamilias = Mid(WBuscarFamilias, 1, WBuscarFamilias.Length - 1)
-        End If
+        WBuscarFamilias = Trim(WBuscarFamilias).TrimEnd(",")
 
         Return WBuscarFamilias & ")"
 
@@ -244,7 +253,7 @@ Public Class ComparacionesMensualesValorUnico
         Dim datos2 As DataTable = datos.Copy
         datos2.TableName = "TablaGrilla"
 
-        If ckConsolidado.Checked Then
+        If (_EsConsolidado) Then
             Dim WTemp As DataTable = datos.Clone
             WTemp.Rows.Clear()
 
@@ -285,7 +294,7 @@ Public Class ComparacionesMensualesValorUnico
                     WTemp.Rows.Add(rw)
                     Exit For
                 Next
-                
+
 
             Next
 
@@ -315,7 +324,7 @@ Public Class ComparacionesMensualesValorUnico
         ' Obtenemos los meses con los cuales trabajar.
         '
         _TraerMesesAConsultar(WMeses, WAnios, WMesesCompletos)
-        
+
         '
         ' Obtenemos los valores a comparar.
         '
@@ -335,7 +344,7 @@ Public Class ComparacionesMensualesValorUnico
                 DataGridView1.DataSource = datos
 
                 ' Si es consolidado, rearmamos la tabla con los totales por valor comparable.
-                If ckConsolidado.Checked Then
+                If (_EsConsolidado) Then
                     _FormatearConsolidado(datos)
                 End If
 
@@ -350,7 +359,7 @@ Public Class ComparacionesMensualesValorUnico
 
                 Dim anios(4) As Integer
 
-                If ckConsolidado.Checked And Not _ValidoParaConsolidarEntrePeriodos() Then
+                If _EsConsolidado() And Not _ValidoParaConsolidarEntrePeriodos() Then
                     Return Nothing
                 End If
 
@@ -379,7 +388,7 @@ Public Class ComparacionesMensualesValorUnico
                     Throw New Exception("No existen datos para alguno de los siguientes Años: " & anios(1) & " o " & anios(3))
                 End If
 
-                If ckConsolidado.Checked Then
+                If (_EsConsolidado) Then
 
                     _FormatearConsolidadoComparativoMensual(datos)
 
@@ -458,7 +467,7 @@ Public Class ComparacionesMensualesValorUnico
 
         Next
 
-        If (cmbPeriodo.SelectedIndex = 0 And ckConsolidado.Checked) Or cmbPeriodo.SelectedIndex = 1 Then
+        If (cmbPeriodo.SelectedIndex = 0 And _EsConsolidado()) Or cmbPeriodo.SelectedIndex = 1 Then
 
             For i = 1 To 4
                 datos_restantes.Rows.Add(99999)
@@ -472,7 +481,7 @@ Public Class ComparacionesMensualesValorUnico
 
         WTablaConsolidado.TableName = "Consolidados"
 
-        If (cmbPeriodo.SelectedIndex = 0 And ckConsolidado.Checked) Or cmbPeriodo.SelectedIndex = 1 Then
+        If (cmbPeriodo.SelectedIndex = 0 And _EsConsolidado()) Or cmbPeriodo.SelectedIndex = 1 Then
 
             _FormatearConsolidado(WTablaConsolidado, _ValoresComparables.Count, True, WDatos)
 
@@ -484,6 +493,11 @@ Public Class ComparacionesMensualesValorUnico
 
         Return ds
 
+    End Function
+
+    Private Function _EsConsolidado() As Boolean
+
+        Return (_EsConsolidado)
     End Function
 
     Private Sub _FormatearConsolidadoComparativoMensual(ByRef datos As DataTable)
@@ -572,7 +586,7 @@ Public Class ComparacionesMensualesValorUnico
 
                     If Not IsNothing(wDatos(j)) OrElse wDatos(j) <> "" Then
 
-                        If ckConsolidado.Checked Then
+                        If _EsConsolidado() Then
                             Select Case Val(wDatos(j))
 
                                 Case 1, 2, 5, 6
@@ -596,7 +610,7 @@ Public Class ComparacionesMensualesValorUnico
 
                         If wMeses(i) > -1 AndAlso Not IsNothing(wMeses(i)) Then
 
-                                WValoresABuscar &= "Importe" & i & ","
+                            WValoresABuscar &= "Importe" & i & ","
 
                         End If
 
@@ -1788,7 +1802,7 @@ Public Class ComparacionesMensualesValorUnico
 
         End If
 
-        If ckPrecio.Checked And Not ckConsolidado.Checked Then
+        If ckPrecio.Checked And Not _EsConsolidado() Then
             i += 1
             WDatos(i) = "8"
         End If
@@ -1935,7 +1949,10 @@ Public Class ComparacionesMensualesValorUnico
 
     Private Function Familias() As CheckBox()
 
+        If Globales.EmpresaActual = 1 Then Return {ckConsolidadoPellital, ckAceitesNaturales, ckRecurtientes, ckDepilantes, ckPurgasEnzimaticas, ckComplejantes, ckDesencalantes, ckBactericidas, ckColorantesPellital, ckVariosPellital}
+
         Return {ckColorantes, ckFarma, ckFazonFarma, ckFazonPellital, ckFazonQuimicos, ckQuimicos, ckVarios, ckBiocidas, ckPapel}
+
     End Function
 
     Private Sub btnGenerar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerar.Click
@@ -2004,7 +2021,7 @@ Public Class ComparacionesMensualesValorUnico
             Select Case cmbPeriodo.SelectedIndex
                 Case 0 ' Mensual
 
-                    If ckConsolidado.Checked Then
+                    If (_EsConsolidado()) Then
                         .Tipo = 1
                     Else
                         .Tipo = 2
@@ -2095,8 +2112,8 @@ Public Class ComparacionesMensualesValorUnico
                 Case 1
 
                     ' Obtenemos los datos del mes indicado.
-                    
-                    If ckConsolidado.Checked Then
+
+                    If (_EsConsolidado) Then
 
                         WDatosRows = _TraerDatosDiariosEntrePeriodosConsolidado(WMes, WDesde, WAnio, WValores)
 
@@ -2115,10 +2132,10 @@ Public Class ComparacionesMensualesValorUnico
                         Next
 
                     End If
-                    
+
                     WTipo = 1
 
-                    If ckConsolidado.Checked Then
+                    If (_EsConsolidado) Then
                         WTipo = 2
                     End If
 
@@ -2154,7 +2171,7 @@ Public Class ComparacionesMensualesValorUnico
                 .SumarDiario = ckSumarDiario.Checked
 
                 .TablaGrilla = WTablaGrilla
-                
+
                 .WindowState = FormWindowState.Maximized
                 .Show()
                 .Focus()
@@ -2191,7 +2208,7 @@ Public Class ComparacionesMensualesValorUnico
 
             If WBuscarTipos = "" Then Return Nothing
 
-            WBuscarTipos = Trim(WBuscarTipos).Substring(0, Trim(WBuscarTipos).Length - 1)
+            WBuscarTipos = Trim(WBuscarTipos).TrimEnd(",")
 
             cn.ConnectionString = Helper._ConectarA
             cn.Open()
@@ -2363,7 +2380,8 @@ Public Class ComparacionesMensualesValorUnico
 
         If rbDiaria.Checked Then
 
-            ckConsolidado.Checked = cmbPeriodo.SelectedIndex = 1
+            If Globales.EmpresaActual = 0 Then ckConsolidado.Checked = cmbPeriodo.SelectedIndex = 1
+            If Globales.EmpresaActual = 1 Then ckConsolidadoPellital.Checked = cmbPeriodo.SelectedIndex = 1
 
         Else
 
@@ -2372,7 +2390,8 @@ Public Class ComparacionesMensualesValorUnico
 
                     cmbTipoGrafico.SelectedIndex = 0
                     btnSeleccionarAnios.Visible = False
-                    ckConsolidado.Checked = True
+                    If Globales.EmpresaActual = 0 Then ckConsolidado.Checked = True
+                    If Globales.EmpresaActual = 1 Then ckConsolidadoPellital.Checked = True
 
                 Case 2
 
@@ -2424,10 +2443,13 @@ Public Class ComparacionesMensualesValorUnico
                     End If
 
 
-                    If ckConsolidado.Checked Then
+                    If ckConsolidado.Checked And Globales.EmpresaActual = 0 Then
                         ckConsolidado.Checked = False
                     End If
 
+                    If ckConsolidadoPellital.Checked And Globales.EmpresaActual = 1 Then
+                        ckConsolidadoPellital.Checked = False
+                    End If
 
                     If ckTodosValores.Checked Then
                         ckTodosValores.Checked = False
@@ -2449,7 +2471,7 @@ Public Class ComparacionesMensualesValorUnico
 
             End Select
 
-            If Not ckConsolidado.Checked Then
+            If Not _EsConsolidado() Then
                 For Each ck As CheckBox In Familias()
                     If Familias.Count(Function(c) c.Checked) > 1 Then
                         ck.Checked = False
@@ -2457,7 +2479,7 @@ Public Class ComparacionesMensualesValorUnico
                 Next
             End If
         End If
-        
+
     End Sub
 
     Private Sub txtMesDesde_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtMesDesde.KeyDown
@@ -2616,9 +2638,9 @@ Public Class ComparacionesMensualesValorUnico
         End If
     End Sub
 
-    Private Sub ckConsolidado_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ckConsolidado.CheckedChanged
+    Private Sub ckConsolidado_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ckConsolidado.CheckedChanged, ckConsolidadoPellital.CheckedChanged
 
-        If ckConsolidado.Checked Then
+        If (_EsConsolidado) Then
 
             If rbDiaria.Checked Then
 
@@ -2809,7 +2831,7 @@ Public Class ComparacionesMensualesValorUnico
 
     End Sub
 
-    Private Sub Lineas_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ckBiocidas.CheckedChanged, ckColorantes.CheckedChanged, ckFarma.CheckedChanged, ckFazonFarma.CheckedChanged, ckFazonPellital.CheckedChanged, ckFazonQuimicos.CheckedChanged, ckPapel.CheckedChanged, ckQuimicos.CheckedChanged, ckVarios.CheckedChanged
+    Private Sub Lineas_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ckBiocidas.CheckedChanged, ckColorantes.CheckedChanged, ckFarma.CheckedChanged, ckFazonFarma.CheckedChanged, ckFazonPellital.CheckedChanged, ckFazonQuimicos.CheckedChanged, ckPapel.CheckedChanged, ckQuimicos.CheckedChanged, ckVarios.CheckedChanged, ckAceitesNaturales.CheckedChanged, ckRecurtientes.CheckedChanged, ckComplejantes.CheckedChanged, ckDepilantes.CheckedChanged, ckPurgasEnzimaticas.CheckedChanged, ckDesencalantes.CheckedChanged, ckBactericidas.CheckedChanged, ckVariosPellital.CheckedChanged, ckColorantesPellital.CheckedChanged
 
         Dim control As CheckBox = sender
 
@@ -2831,4 +2853,8 @@ Public Class ComparacionesMensualesValorUnico
 
     End Sub
 
+    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
+        CambioEmpresa.Show()
+        Close()
+    End Sub
 End Class
