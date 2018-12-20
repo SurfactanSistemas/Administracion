@@ -112,7 +112,7 @@ Public Class ComparacionesMensualesValorUnico
                                   ckFazonFarma, ckFazonQuimicos, ckVarios}
 
         If Globales.EmpresaActual = 1 Then
-            chks = New List(Of CheckBox) From {ckConsolidadoPellital, ckAceitesNaturales, ckRecurtientes, ckDepilantes, ckPurgasEnzimaticas, ckComplejantes, ckDesencalantes, ckBactericidas, ckColorantesPellital, ckVariosPellital}
+            chks = New List(Of CheckBox) From {ckAceitesNaturales, ckRecurtientes, ckDepilantes, ckPurgasEnzimaticas, ckComplejantes, ckDesencalantes, ckBactericidas, ckColorantesPellital, ckVariosPellital}
         End If
 
         If (cmbPeriodo.SelectedIndex = 2 Or (rbDiaria.Checked And cmbPeriodo.SelectedIndex = 1)) And _EsConsolidado() Then
@@ -1825,7 +1825,7 @@ Public Class ComparacionesMensualesValorUnico
 
     Private Function Familias() As CheckBox()
 
-        If Globales.EmpresaActual = 1 Then Return {ckConsolidadoPellital, ckAceitesNaturales, ckRecurtientes, ckDepilantes, ckPurgasEnzimaticas, ckComplejantes, ckDesencalantes, ckBactericidas, ckColorantesPellital, ckVariosPellital}
+        If Globales.EmpresaActual = 1 Then Return {ckAceitesNaturales, ckRecurtientes, ckDepilantes, ckPurgasEnzimaticas, ckComplejantes, ckDesencalantes, ckBactericidas, ckColorantesPellital, ckVariosPellital}
 
         Return {ckColorantes, ckFarma, ckFazonFarma, ckFazonPellital, ckFazonQuimicos, ckQuimicos, ckVarios, ckBiocidas, ckPapel}
 
@@ -1833,6 +1833,7 @@ Public Class ComparacionesMensualesValorUnico
 
     Private Sub btnGenerar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnGenerar.Click
         Dim tabla As DataSet
+
 
         '
         ' VERIFICAMOS SI ES UNA COMPARACIÓN DIARIA. EN CASO DE QUE SI, LO PROCESAMOS A PARTE.
