@@ -27,6 +27,17 @@ Public Class ImpreProcesos
                         
                         _GenerarCertificadoAnalisisFarma(WTipoReporte, WPartida, WTipoSalida)
 
+                    Case 3 ' Resultados de Calidad (PrueterFarma -> Registro de Producción)
+
+                        Dim WPartida As Integer = Environment.GetCommandLineArgs(2)
+                        Dim WTipoSalida As Integer = 0
+
+                        If Environment.GetCommandLineArgs.Length > 2 Then
+                            WTipoSalida = Environment.GetCommandLineArgs(3)
+                        End If
+
+                        _GenerarReporteResultadosCalidad(WPartida, WTipoSalida)
+
                     Case Else
                         Close()
                 End Select
@@ -53,6 +64,25 @@ Public Class ImpreProcesos
             Close()
 
         End Try
+
+    End Sub
+
+    Private Sub _GenerarReporteResultadosCalidad(ByVal wPartida As Integer, ByVal wTipoSalida As Integer)
+
+        With New VistaPrevia
+            .Reporte = New imprecalidadresultado
+            .Formula = "{Prueterfarma.Partida} = " & wPartida & " And {Hoja.Hoja} = {Prueterfarma.Partida} And {Hoja.Renglon} = 1"
+
+            Select Case wTipoSalida
+                Case 0, 1
+                    .Imprimir()
+                Case 2
+                    .Mostrar()
+                Case 3
+                    .Exportar("Resultados de Calidad " & wPartida & " " & Date.Now.ToString("dd-MM-yyyy"), CrystalDecisions.Shared.ExportFormatType.WordForWindows)
+            End Select
+
+        End With
 
     End Sub
 

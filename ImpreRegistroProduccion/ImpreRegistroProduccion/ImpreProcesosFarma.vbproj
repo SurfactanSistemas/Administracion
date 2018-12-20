@@ -125,6 +125,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Reportes\CalidadResultados\imprecalidadresultado.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>imprecalidadresultado.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\CertificadosFarma\certificadonuevofarma.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -270,6 +276,10 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\CalidadResultados\imprecalidadresultado.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>imprecalidadresultado.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\CertificadosFarma\certificadonuevofarma.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
