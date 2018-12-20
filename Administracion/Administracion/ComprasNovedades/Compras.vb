@@ -837,9 +837,45 @@ Public Class Compras
         mostrarImputaciones(compra.imputaciones)
 
         ckChequeRechazado.Checked = _BuscarRechazado(compra.nroInterno)
+        ckMarcaDifCambio.Checked = _BuscarMarcaDifCambio(compra.nroInterno)
 
         calcularAsiento()
     End Sub
+
+    Private Function _BuscarMarcaDifCambio(ByVal nroInterno As Integer) As Boolean
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT TOP 1 MarcaDifCambio FROM IvaComp WHERE NroInterno = '" & nroInterno & "'")
+        Dim dr As SqlDataReader
+
+        Try
+
+            cn.ConnectionString = Proceso._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                dr.Read()
+
+                Return Not IsDBNull(dr.Item("MarcaDifCambio")) AndAlso Val(dr.Item("MarcadifCambio")) = 1
+
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Return False
+    End Function
 
     Private Function _BuscarRechazado(ByVal nroInterno As Integer) As Boolean
         Dim cn = New SqlConnection()
@@ -936,6 +972,7 @@ Public Class Compras
             End If
 
             _BuscarCompraPorNumeroInterno()
+
         ElseIf e.KeyData = Keys.Escape Then
             txtNroInterno.Text = ""
         End If
