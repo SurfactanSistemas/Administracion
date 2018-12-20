@@ -1,4 +1,5 @@
 ﻿Imports System.Configuration
+Imports System.Globalization
 Imports System.Text.RegularExpressions
 
 Module Helper
@@ -88,7 +89,7 @@ Module Helper
 
         Dim txtleederecha As String
 
-        Dim subString As String = Microsoft.VisualBasic.Left(leederechaII, largoderecha)
+        Dim subString As String = Left(leederechaII, largoderecha)
         txtleederecha = subString
 
         Return txtleederecha
@@ -374,7 +375,6 @@ Module Helper
                     varMinimo = 30000
                 Case 7
                     varMinimo = 30000
-                Case Else
             End Select
 
             varAcumuladPago = varAcumulaNeto + varBase
@@ -520,8 +520,6 @@ Module Helper
     End Function
 
     Public Function _FormatoValidoFecha(ByVal fecha As String) As Boolean
-        Dim xfecha As String = ""
-        Dim _temp As String = fecha
         Dim _Fecha As String() = fecha.Split("/")
         ' Se normaliza la fecha (Ej: 3/04/2000 => 03/04/2000 ó 3/4/2000 => 03/04/2000) y se controla que tenga los ocho digitos obligatoriamente.
         'Return Trim(_Normalizarfecha(Trim(fecha))).Replace("/", "").Length = 8
@@ -530,9 +528,9 @@ Module Helper
             _Fecha(1) = Val(_Fecha(1)).ToString() ' 04 => 4, 12 => 12
             _Fecha(2) = Val(_Fecha(2)).ToString() ' 2000 => 2000, 0201 => 201
 
-            xfecha = String.Join("/", _Fecha) ' 3/4/2000, 12/12/201
+            ' 3/4/2000, 12/12/201
 
-            fecha = Date.ParseExact(fecha, "d/M/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo).ToString("dd/MM/yyyy")
+            fecha = Date.ParseExact(fecha, "d/M/yyyy", DateTimeFormatInfo.InvariantInfo).ToString("dd/MM/yyyy")
 
             Return True
         Catch ex As Exception
@@ -553,7 +551,7 @@ Module Helper
             xfecha = String.Join("/", _Fecha) ' 3/4/2000, 12/12/201
 
             ' En la primera (3/4/2001), se parsearia y devolveria: 03/04/2000. En el segundo caso lanzaria una excepcion ya que la fecha (12/12/201), no es un formato de fecha posible.
-            xfecha = Date.ParseExact(fecha, "d/M/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo).ToString("dd/MM/yyyy")
+            xfecha = Date.ParseExact(fecha, "d/M/yyyy", DateTimeFormatInfo.InvariantInfo).ToString("dd/MM/yyyy")
         Catch ex As Exception
             ' En caso de excepcion, se retorna el mismo valor que se introdujo sin cambios.
             xfecha = _temp
@@ -563,11 +561,11 @@ Module Helper
     End Function
 
     Public Function _Left(ByVal str As String, ByVal len As Integer)
-        Return Microsoft.VisualBasic.Left(Trim(str), len)
+        Return Left(Trim(str), len)
     End Function
 
     Public Function _Right(ByVal str As String, ByVal len As Integer)
-        Return Microsoft.VisualBasic.Right(Trim(str), len)
+        Return Right(Trim(str), len)
     End Function
 
     Public Function _DescripcionSegunTipo(ByVal item As Object) As String

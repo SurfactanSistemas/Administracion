@@ -1,6 +1,6 @@
 ﻿Imports System.Data.SqlClient
+Imports System.Drawing.Printing
 Imports System.Windows.Forms.DataVisualization.Charting
-Imports System.Windows.Forms.DataVisualization
 
 Public Class GraficoDiario
     Public Property Tabla As DataTable
@@ -19,7 +19,7 @@ Public Class GraficoDiario
 
     Private _wValoresDibujados As String()
 
-    Private Sub Grafico_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+    Private Sub Grafico_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
 
         _wValoresDibujados = {Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing}
 
@@ -96,14 +96,14 @@ Public Class GraficoDiario
                     WRow = WTablaGrilla.NewRow
 
                     WRow.Item("Linea") = .Item("Linea")
-                    WRow.Item("DescLinea") = Helper._NombreLineaSegunNumero(.Item("Linea"))
+                    WRow.Item("DescLinea") = _NombreLineaSegunNumero(.Item("Linea"))
                     WRow.Item("Tipo") = .Item("Tipo")
                     WRow.Item("Fecha") = .Item("Dia") & "/" & .Item("Mes") & "/" & .Item("Ano")
-                    WRow.Item("DescTipo") = Helper._DescripcionSegunTipo(.Item("Tipo"))
-                    WRow.Item("Actual") = Helper.formatonumerico(.Item("Importe1"))
-                    WRow.Item("MesAnterior") = Helper.formatonumerico(.Item("Importe2"))
-                    WRow.Item("AnioAnterior") = Helper.formatonumerico(.Item("Importe3"))
-                    WRow.Item("AcumuladoVentas") = Helper.formatonumerico(.Item("Importe4"))
+                    WRow.Item("DescTipo") = _DescripcionSegunTipo(.Item("Tipo"))
+                    WRow.Item("Actual") = formatonumerico(.Item("Importe1"))
+                    WRow.Item("MesAnterior") = formatonumerico(.Item("Importe2"))
+                    WRow.Item("AnioAnterior") = formatonumerico(.Item("Importe3"))
+                    WRow.Item("AcumuladoVentas") = formatonumerico(.Item("Importe4"))
 
                     WRow.Item("Acumulado") = WRow.Item("AcumuladoVentas")
 
@@ -119,19 +119,19 @@ Public Class GraficoDiario
                 Select Case Val(row.Item("Tipo"))
                     Case 1
 
-                        WVectow(1, 1) += Val(Helper.formatonumerico(row.Item("Actual")))
-                        WVectow(1, 2) += Val(Helper.formatonumerico(row.Item("MesAnterior")))
-                        WVectow(1, 3) += Val(Helper.formatonumerico(row.Item("AnioAnterior")))
-                        WVectow(1, 4) += Val(Helper.formatonumerico(row.Item("AcumuladoVentas")))
-                        WVectow(1, 5) += Val(Helper.formatonumerico(row.Item("Acumulado")))
+                        WVectow(1, 1) += Val(formatonumerico(row.Item("Actual")))
+                        WVectow(1, 2) += Val(formatonumerico(row.Item("MesAnterior")))
+                        WVectow(1, 3) += Val(formatonumerico(row.Item("AnioAnterior")))
+                        WVectow(1, 4) += Val(formatonumerico(row.Item("AcumuladoVentas")))
+                        WVectow(1, 5) += Val(formatonumerico(row.Item("Acumulado")))
 
                     Case 2
 
-                        WVectow(2, 1) += Val(Helper.formatonumerico(row.Item("Actual")))
-                        WVectow(2, 2) += Val(Helper.formatonumerico(row.Item("MesAnterior")))
-                        WVectow(2, 3) += Val(Helper.formatonumerico(row.Item("AnioAnterior")))
-                        WVectow(2, 4) += Val(Helper.formatonumerico(row.Item("AcumuladoVentas")))
-                        WVectow(2, 5) += Val(Helper.formatonumerico(row.Item("Acumulado")))
+                        WVectow(2, 1) += Val(formatonumerico(row.Item("Actual")))
+                        WVectow(2, 2) += Val(formatonumerico(row.Item("MesAnterior")))
+                        WVectow(2, 3) += Val(formatonumerico(row.Item("AnioAnterior")))
+                        WVectow(2, 4) += Val(formatonumerico(row.Item("AcumuladoVentas")))
+                        WVectow(2, 5) += Val(formatonumerico(row.Item("Acumulado")))
 
                     Case Else
                         Continue For
@@ -147,11 +147,11 @@ Public Class GraficoDiario
                 .Item("DescLinea") = "Consolidado"
                 .Item("Tipo") = 99
                 .Item("DescTipo") = ""
-                .Item("Actual") = Helper.formatonumerico(WVectow(1, 1))
-                .Item("MesAnterior") = Helper.formatonumerico(WVectow(1, 2))
-                .Item("AnioAnterior") = Helper.formatonumerico(WVectow(1, 3))
-                .Item("Acumulado") = Helper.formatonumerico(WVectow(1, 5))
-                .Item("AcumuladoVentas") = Helper.formatonumerico(WVectow(1, 4))
+                .Item("Actual") = formatonumerico(WVectow(1, 1))
+                .Item("MesAnterior") = formatonumerico(WVectow(1, 2))
+                .Item("AnioAnterior") = formatonumerico(WVectow(1, 3))
+                .Item("Acumulado") = formatonumerico(WVectow(1, 5))
+                .Item("AcumuladoVentas") = formatonumerico(WVectow(1, 4))
 
             End With
 
@@ -165,11 +165,11 @@ Public Class GraficoDiario
                 .Item("DescLinea") = "Consolidado"
                 .Item("Tipo") = 99
                 .Item("DescTipo") = ""
-                .Item("Actual") = Helper.formatonumerico(WVectow(2, 1))
-                .Item("MesAnterior") = Helper.formatonumerico(WVectow(2, 2))
-                .Item("AnioAnterior") = Helper.formatonumerico(WVectow(2, 3))
-                .Item("Acumulado") = Helper.formatonumerico(WVectow(2, 5))
-                .Item("AcumuladoVentas") = Helper.formatonumerico(WVectow(2, 4))
+                .Item("Actual") = formatonumerico(WVectow(2, 1))
+                .Item("MesAnterior") = formatonumerico(WVectow(2, 2))
+                .Item("AnioAnterior") = formatonumerico(WVectow(2, 3))
+                .Item("Acumulado") = formatonumerico(WVectow(2, 5))
+                .Item("AcumuladoVentas") = formatonumerico(WVectow(2, 4))
 
             End With
 
@@ -189,7 +189,7 @@ Public Class GraficoDiario
                             .Columns(i).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                         Next
 
-                        Dim Wtemp As String = ""
+                        Dim Wtemp = ""
 
                         For Each row As DataGridViewRow In .Rows
 
@@ -227,7 +227,7 @@ Public Class GraficoDiario
 
     Private Sub _ProcesarMesAnteriorEntrePeriodoConsolidado()
 
-        Dim WMes As String = ""
+        Dim WMes = ""
         Dim WSeries() As String = {"", "Actual", "Mes Anterior", "Año Anterior", "Acumulado " & Date.Now.ToString("dd/MM/yyyy")}
 
         Dim WLimiteColumnas As Integer = IIf(SumarDiario, 3, 4)
@@ -246,7 +246,7 @@ Public Class GraficoDiario
             Next
 
         Next
-        Dim WTipo As String = ""
+        Dim WTipo = ""
         For Each row As DataRow In Tabla.Rows
 
             With row
@@ -255,16 +255,16 @@ Public Class GraficoDiario
 
                     WMes = ""
 
-                    WTipo = Helper._DescripcionSegunTipo(row.Item("Tipo"))
+                    WTipo = _DescripcionSegunTipo(row.Item("Tipo"))
 
                     WMes = WSeries(i)
 
-                    Dim WValor As Double = Val(Helper.formatonumerico(.Item("Importe" & i)))
+                    Dim WValor As Double = Val(formatonumerico(.Item("Importe" & i)))
 
                     If i > 3 Then
-                        WValor = Val(Helper.formatonumerico(.Item("Importe4")))
+                        WValor = Val(formatonumerico(.Item("Importe4")))
                     ElseIf i = 1 And SumarDiario Then
-                        WValor += Val(Helper.formatonumerico(.Item("Importe4")))
+                        WValor += Val(formatonumerico(.Item("Importe4")))
                     End If
 
                     Chart1.Series(WMes).Points.AddXY(WTipo, WValor)
@@ -281,8 +281,8 @@ Public Class GraficoDiario
 
     Private Sub _ProcesarMesAnteriorEntrePeriodo()
 
-        Dim WMes As String = ""
-        
+        Dim WMes = ""
+
         For Each row As DataRow In Tabla.Rows
 
             WMes = ""
@@ -301,7 +301,7 @@ Public Class GraficoDiario
                 WMes = ""
                 WMes = row.Item("Mes") & "/" & row.Item("Ano")
 
-                Chart1.Series(WMes).Points.AddXY(row.Item("Dia") & "/" & row.Item("Mes"), Helper.formatonumerico(.Item("Importe")))
+                Chart1.Series(WMes).Points.AddXY(row.Item("Dia") & "/" & row.Item("Mes"), formatonumerico(.Item("Importe")))
 
             End With
 
@@ -312,7 +312,7 @@ Public Class GraficoDiario
 
     Private Sub _ProcesarMesAnteriorEntrLineas()
 
-        Dim WMes As String = ""
+        Dim WMes = ""
         Dim WSeries() As String = {"", "Actual", "Mes Anterior", "Año Anterior", "Acumulado " & Date.Now.ToString("dd/MM/yyyy")}
 
         Dim WLimiteColumnas As Integer = IIf(SumarDiario, 3, 4)
@@ -322,7 +322,7 @@ Public Class GraficoDiario
             For i = 1 To WLimiteColumnas
 
                 WMes = ""
-                WMes = Helper._DescripcionSegunTipo(row.Item("Tipo")) & " - " & WSeries(i)
+                WMes = _DescripcionSegunTipo(row.Item("Tipo")) & " - " & WSeries(i)
 
                 If Chart1.Series.IsUniqueName(WMes) Then
                     Chart1.Series.Add(WMes)
@@ -339,17 +339,17 @@ Public Class GraficoDiario
                 For i = 1 To WLimiteColumnas
 
                     WMes = ""
-                    WMes = Helper._DescripcionSegunTipo(row.Item("Tipo")) & " - " & WSeries(i)
+                    WMes = _DescripcionSegunTipo(row.Item("Tipo")) & " - " & WSeries(i)
 
-                    Dim WValor As Double = Val(Helper.formatonumerico(.Item("Importe" & i)))
+                    Dim WValor As Double = Val(formatonumerico(.Item("Importe" & i)))
 
                     If i > 3 Then
-                        WValor = Val(Helper.formatonumerico(.Item("Importe4")))
+                        WValor = Val(formatonumerico(.Item("Importe4")))
                     ElseIf i = 1 And SumarDiario Then
-                        WValor += Val(Helper.formatonumerico(.Item("Importe4")))
+                        WValor += Val(formatonumerico(.Item("Importe4")))
                     End If
 
-                    Chart1.Series(WMes).Points.AddXY(Helper._NombreLineaSegunNumero(.Item("Linea")), WValor)
+                    Chart1.Series(WMes).Points.AddXY(_NombreLineaSegunNumero(.Item("Linea")), WValor)
 
                 Next
 
@@ -366,7 +366,7 @@ Public Class GraficoDiario
             _LabelsComoPorcentaje()
         Next
 
-        Dim gd As New Charting.Grid
+        Dim gd As New Grid
 
         gd.LineWidth = 0
 
@@ -383,7 +383,7 @@ Public Class GraficoDiario
         End With
     End Sub
 
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button1.Click
 
         With ComparacionesMensualesValorUnico
             .WindowState = FormWindowState.Normal
@@ -393,7 +393,7 @@ Public Class GraficoDiario
 
     End Sub
 
-    Private Sub DataGridView1_RowHeaderMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles DataGridView1.RowHeaderMouseDoubleClick
+    Private Sub DataGridView1_RowHeaderMouseDoubleClick(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles DataGridView1.RowHeaderMouseDoubleClick
 
         _RedibujarDatos(e.RowIndex)
 
@@ -403,11 +403,11 @@ Public Class GraficoDiario
         ComparacionesMensualesValorUnico._RegraficarConsolidado(DataGridView1.Rows(rowIndex).Cells("DescTipo").Value, True)
     End Sub
 
-    Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button4.Click
+    Private Sub Button4_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button4.Click
 
         For Each serie As Series In Chart1.Series
 
-            serie.ChartType = DataVisualization.Charting.SeriesChartType.Line
+            serie.ChartType = SeriesChartType.Line
 
             _LabelsComoPorcentaje()
 
@@ -434,7 +434,7 @@ Public Class GraficoDiario
                 WValorComparativo(WIndice) = p.YValues(0)
                 WIndice += 1
 
-                p.Label = Helper.formatonumerico(p.YValues(0))
+                p.Label = formatonumerico(p.YValues(0))
 
             Next
 
@@ -444,7 +444,7 @@ Public Class GraficoDiario
 
                 aux = p.YValues(0)
 
-                p.Label = Helper.formatonumerico(aux) & " (" & Helper.formatonumerico(((100 * aux) / WValorComparativo(WIndice)) - 100) & " %)"
+                p.Label = formatonumerico(aux) & " (" & formatonumerico(((100 * aux) / WValorComparativo(WIndice)) - 100) & " %)"
 
                 WIndice += 1
 
@@ -456,7 +456,7 @@ Public Class GraficoDiario
 
                 aux = p.YValues(0)
 
-                p.Label = Helper.formatonumerico(aux) & " (" & Helper.formatonumerico(((100 * aux) / WValorComparativo(WIndice)) - 100) & " %)"
+                p.Label = formatonumerico(aux) & " (" & formatonumerico(((100 * aux) / WValorComparativo(WIndice)) - 100) & " %)"
 
                 WIndice += 1
 
@@ -469,7 +469,7 @@ Public Class GraficoDiario
 
                     aux = p.YValues(0)
 
-                    p.Label = Helper.formatonumerico(aux) & " (" & Helper.formatonumerico(((100 * aux) / WValorComparativo(WIndice)) - 100) & " %)"
+                    p.Label = formatonumerico(aux) & " (" & formatonumerico(((100 * aux) / WValorComparativo(WIndice)) - 100) & " %)"
 
                     WIndice += 1
 
@@ -480,11 +480,11 @@ Public Class GraficoDiario
 
     End Sub
 
-    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
+    Private Sub Button3_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button3.Click
 
         For Each serie As Series In Chart1.Series
 
-            serie.ChartType = DataVisualization.Charting.SeriesChartType.Pie
+            serie.ChartType = SeriesChartType.Pie
 
             For Each p As DataPoint In serie.Points
                 With p
@@ -500,29 +500,29 @@ Public Class GraficoDiario
 
     End Sub
 
-    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+    Private Sub Button2_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button2.Click
 
         For Each serie As Series In Chart1.Series
 
-            serie.ChartType = DataVisualization.Charting.SeriesChartType.Column
+            serie.ChartType = SeriesChartType.Column
 
             _LabelsComoPorcentaje()
 
         Next
     End Sub
 
-    Private Sub Button5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button5.Click
+    Private Sub Button5_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button5.Click
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("DELETE FROM ComandoII")
-        Dim ZSQL As String = ""
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("DELETE FROM ComandoII")
+        Dim ZSQL = ""
         Dim WImporte1, WImporte2, WImporte3, WImporte4, WImporte5, WImporte6 As Double
         Dim WDia As String
         Dim WDatos(9, 2, 3) As String ' Linea, Ventas|Kilos, Actual|MesAnt|AñoAnt
 
         Try
             ' Limpiamos los datos que esten presentes con anterioridad.
-            cn.ConnectionString = Helper._ConectarA
+            cn.ConnectionString = _ConectarA
             cn.Open()
             cm.Connection = cn
 
@@ -532,9 +532,9 @@ Public Class GraficoDiario
 
                 If Val(row.Cells("Linea").Value) > 9 Then Exit For
 
-                WDatos(row.Cells("Linea").Value, row.Cells("Tipo").Value, 1) = Helper.formatonumerico(row.Cells(5).Value)
-                WDatos(row.Cells("Linea").Value, row.Cells("Tipo").Value, 2) = Helper.formatonumerico(row.Cells(6).Value)
-                WDatos(row.Cells("Linea").Value, row.Cells("Tipo").Value, 3) = Helper.formatonumerico(row.Cells(7).Value)
+                WDatos(row.Cells("Linea").Value, row.Cells("Tipo").Value, 1) = formatonumerico(row.Cells(5).Value)
+                WDatos(row.Cells("Linea").Value, row.Cells("Tipo").Value, 2) = formatonumerico(row.Cells(6).Value)
+                WDatos(row.Cells("Linea").Value, row.Cells("Tipo").Value, 3) = formatonumerico(row.Cells(7).Value)
 
                 WDia = row.Cells("Fecha").Value
 
@@ -554,7 +554,7 @@ Public Class GraficoDiario
 
                 ZSQL = ""
                 ZSQL = "INSERT INTO ComandoII (Tipo, Venta1, Venta2, Venta3, Kilos1, Kilos2, Kilos3, Impre1, Impre2, Impre3, Descripcion)"
-                ZSQL &= " VALUES(" & i & ", " & Str$(WImporte1) & ", " & Str$(WImporte2) & ", " & Str$(WImporte3) & ", " & Str$(WImporte4) & ", " & Str$(WImporte5) & ", " & Str$(WImporte6) & ", '" & WDia & "', 'Mes Ant', 'Año Ant', '" & Helper._NombreLineaSegunNumero(i) & "')"
+                ZSQL &= " VALUES(" & i & ", " & Str$(WImporte1) & ", " & Str$(WImporte2) & ", " & Str$(WImporte3) & ", " & Str$(WImporte4) & ", " & Str$(WImporte5) & ", " & Str$(WImporte6) & ", '" & WDia & "', 'Mes Ant', 'Año Ant', '" & _NombreLineaSegunNumero(i) & "')"
 
                 cm.CommandText = ZSQL
                 cm.ExecuteNonQuery()
@@ -586,15 +586,15 @@ Public Class GraficoDiario
         Chart1.Printing.Print(False) ' True/False -> show print dialog
     End Sub
 
-    Private Sub PrintDocument1_PrintPage(ByVal sender As System.Object, ByVal e As System.Drawing.Printing.PrintPageEventArgs) Handles PrintDocument1.PrintPage
+    Private Sub PrintDocument1_PrintPage(ByVal sender As Object, ByVal e As PrintPageEventArgs) Handles PrintDocument1.PrintPage
         Chart1.Printing.PrintPaint(e.Graphics, New Rectangle(0, 0, Chart1.Width, Chart1.Height)) ' draw the chart
     End Sub
 
-    Private Sub Button6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button6.Click
+    Private Sub Button6_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button6.Click
         _ImprimirGrafico()
     End Sub
 
-    Private Sub DataGridView1_CellDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView1.CellDoubleClick
+    Private Sub DataGridView1_CellDoubleClick(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles DataGridView1.CellDoubleClick
 
         _RedibujarDatos(e.RowIndex)
 

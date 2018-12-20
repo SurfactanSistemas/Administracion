@@ -3,7 +3,7 @@
 ' ReSharper disable once CheckNamespace
 Public Class ComparacionesMensualesValorUnico
 
-    Private Sub ComparacionesMensuales_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+    Private Sub ComparacionesMensuales_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
         Label7.Text = IIf(Globales.EmpresaActual = 0, "SURFACTAN S.A.", "PELLITAL S.A.")
 
         GroupBox2.Visible = Globales.EmpresaActual = 0
@@ -16,7 +16,7 @@ Public Class ComparacionesMensualesValorUnico
         _CargarAniosComparables()
 
         rbMenusal.Checked = True
-        If Globales.EmpresaActual = 0 then ckConsolidado.Checked = True
+        If Globales.EmpresaActual = 0 Then ckConsolidado.Checked = True
         If Globales.EmpresaActual = 1 Then ckConsolidadoPellital.Checked = True
         cmbTipoGrafico.SelectedIndex = 0
         cmbPeriodo.SelectedIndex = 0
@@ -29,13 +29,13 @@ Public Class ComparacionesMensualesValorUnico
 
     Private Function _BuscarAnoPorDefecto() As String
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT MAX(Ano) as Anio FROM ComandoDatosII")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT MAX(Ano) as Anio FROM ComandoDatosII")
         Dim dr As SqlDataReader
 
         Try
 
-            cn.ConnectionString = Helper._ConectarA
+            cn.ConnectionString = _ConectarA
             cn.Open()
             cm.Connection = cn
 
@@ -66,14 +66,14 @@ Public Class ComparacionesMensualesValorUnico
 
     Private Sub _CargarAniosComparables()
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Distinct Ano FROM ComandoDatosII")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Distinct Ano FROM ComandoDatosII")
         Dim dr As SqlDataReader
         Dim Aux = ""
 
         Try
 
-            cn.ConnectionString = Helper._ConectarA
+            cn.ConnectionString = _ConectarA
             cn.Open()
             cm.Connection = cn
 
@@ -136,7 +136,6 @@ Public Class ComparacionesMensualesValorUnico
 
     Private Function _ArmarTablaYDatosMensualComparativo() As DataSet
         Dim WMeses(12) As String
-        Dim WMesesCompletos(12) As String
         Dim WAnios(12) As String
 
         Dim datos As DataTable = _CrearTablaDetalles()
@@ -165,8 +164,6 @@ Public Class ComparacionesMensualesValorUnico
         ' Mismo Mes Año Anterior
         WMeses(2) = WMesTrabajo.AddYears(-1).Month
         WAnios(2) = WMesTrabajo.AddYears(-1).Year
-
-        WMesesCompletos = WMeses
 
         'Dim WIndice = 0
 
@@ -202,8 +199,7 @@ Public Class ComparacionesMensualesValorUnico
         ' Buscamos los datos del mes actual.
         '
         Dim WBuscarFamilias As String = _ArmarBuscarFamilias()
-        Dim WValoresABuscar As String = "Importe" & Trim(WMeses(0))
-        Dim WDatosABuscar As String = ""
+        Dim WDatosABuscar = ""
 
         For i = 0 To 10
             If OrDefault(WDatos(i), "").ToString.Trim = "" Then Continue For
@@ -217,8 +213,6 @@ Public Class ComparacionesMensualesValorUnico
         Dim WActual As DataTable = GetAll("SELECT Linea, Tipo, DesTipo as Descripcion, " & "Importe" & Trim(WMeses(0)) & " FROM ComandoDatosII WHERE Tipo IN (" & WDatosABuscar & ") and " & WBuscarFamilias & " AND Ano = '" & Trim(WAnios(0)) & "' order by linea, ano, tipo")
         Dim WMismoAnio As DataTable = GetAll("SELECT Linea, Tipo, DesTipo as Descripcion, " & "Importe" & Trim(WMeses(1)) & " FROM ComandoDatosII WHERE Tipo IN (" & WDatosABuscar & ") and " & WBuscarFamilias & " AND Ano = '" & Trim(WAnios(1)) & "' order by linea, ano, tipo")
         Dim WAnioAnterior As DataTable = GetAll("SELECT Linea, Tipo, DesTipo as Descripcion, " & "Importe" & Trim(WMeses(2)) & " FROM ComandoDatosII WHERE Tipo IN (" & WDatosABuscar & ") and " & WBuscarFamilias & " AND Ano = '" & Trim(WAnios(2)) & "' order by linea, ano, tipo")
-
-        Dim WIndice = 0
 
         For i = 0 To (WCantLineas * WCantValores) - 1
 
@@ -253,7 +247,7 @@ Public Class ComparacionesMensualesValorUnico
         Dim datos2 As DataTable = datos.Copy
         datos2.TableName = "TablaGrilla"
 
-        If (_EsConsolidado) Then
+        If (_EsConsolidado()) Then
             Dim WTemp As DataTable = datos.Clone
             WTemp.Rows.Clear()
 
@@ -344,7 +338,7 @@ Public Class ComparacionesMensualesValorUnico
                 DataGridView1.DataSource = datos
 
                 ' Si es consolidado, rearmamos la tabla con los totales por valor comparable.
-                If (_EsConsolidado) Then
+                If (_EsConsolidado()) Then
                     _FormatearConsolidado(datos)
                 End If
 
@@ -388,7 +382,7 @@ Public Class ComparacionesMensualesValorUnico
                     Throw New Exception("No existen datos para alguno de los siguientes Años: " & anios(1) & " o " & anios(3))
                 End If
 
-                If (_EsConsolidado) Then
+                If (_EsConsolidado()) Then
 
                     _FormatearConsolidadoComparativoMensual(datos)
 
@@ -451,7 +445,7 @@ Public Class ComparacionesMensualesValorUnico
 
                             If Not IsDBNull(.Item("Valor" & i)) Then
 
-                                WAcum += Val(Helper.formatonumerico(.Item("Valor" & i)))
+                                WAcum += Val(formatonumerico(.Item("Valor" & i)))
 
                             End If
 
@@ -497,7 +491,8 @@ Public Class ComparacionesMensualesValorUnico
 
     Private Function _EsConsolidado() As Boolean
 
-        Return (_EsConsolidado)
+        Return (ckConsolidado.Checked And Globales.EmpresaActual = 0) Or (ckConsolidadoPellital.Checked And Globales.EmpresaActual = 1)
+
     End Function
 
     Private Sub _FormatearConsolidadoComparativoMensual(ByRef datos As DataTable)
@@ -574,7 +569,7 @@ Public Class ComparacionesMensualesValorUnico
 
         Try
 
-            cn.ConnectionString = Helper._ConectarA
+            cn.ConnectionString = _ConectarA
             cn.Open()
 
             ' Armamos la consulta de los campos a comparar para cada mes.
@@ -661,7 +656,7 @@ Public Class ComparacionesMensualesValorUnico
 
                                         WDato = dr.Item("Importe" & Trim(wMeses(i)))
 
-                                        .Item("Valor" & rowIndex) = Val(Helper.formatonumerico(WDato))
+                                        .Item("Valor" & rowIndex) = Val(formatonumerico(WDato))
                                         .Item("Titulo" & rowIndex) = WMes
 
                                     End If
@@ -769,7 +764,7 @@ Public Class ComparacionesMensualesValorUnico
 
                                         WDato = dr.Item("Importe" & Val(wMeses(i)))
 
-                                        .Item("Valor" & rowIndex) = Val(Helper.formatonumerico(WDato))
+                                        .Item("Valor" & rowIndex) = Val(formatonumerico(WDato))
                                         .Item("Titulo" & rowIndex) = WMes
 
                                     End If
@@ -791,7 +786,7 @@ Public Class ComparacionesMensualesValorUnico
 
                                             WDato = dr.Item("Importe" & Val(wMeses(auxi2)))
 
-                                            .Item("Valor" & rowIndex) = Val(Helper.formatonumerico(WDato))
+                                            .Item("Valor" & rowIndex) = Val(formatonumerico(WDato))
                                             .Item("Titulo" & rowIndex) = WMes
 
                                             auxi2 += 1
@@ -878,7 +873,7 @@ Public Class ComparacionesMensualesValorUnico
                     For x = 4 To 15
 
                         If Not IsDBNull(_rows(j).Item(x)) Then
-                            wacu += Val(Helper.formatonumerico(_rows(j).Item(x)))
+                            wacu += Val(formatonumerico(_rows(j).Item(x)))
                         End If
 
                     Next
@@ -1043,7 +1038,7 @@ Public Class ComparacionesMensualesValorUnico
 
                                     WAux = WAux / WAux2
 
-                                    .Item("Valor" & j) = Val(Helper.formatonumerico(WAux))
+                                    .Item("Valor" & j) = Val(formatonumerico(WAux))
 
                                 End If
 
@@ -1090,7 +1085,7 @@ Public Class ComparacionesMensualesValorUnico
 
                                     WAux2 = _BuscarDato(WMes, WAnio, 1) ' Nro Pedidos
 
-                                    .Item("Valor" & j) = Val(Helper.formatonumerico(((WAux2 / WAux) - 1) * 100))
+                                    .Item("Valor" & j) = Val(formatonumerico(((WAux2 / WAux) - 1) * 100))
 
                                 End If
 
@@ -1117,7 +1112,7 @@ Public Class ComparacionesMensualesValorUnico
                                     WAux = _BuscarDato(WMes, WAnio, 6) ' Nro Atrasos
                                     WAux2 = _BuscarDato(WMes, WAnio, 5) ' Nro Pedidos
 
-                                    .Item("Valor" & j) = Val(Helper.formatonumerico((WAux / WAux2) * 100))
+                                    .Item("Valor" & j) = Val(formatonumerico((WAux / WAux2) * 100))
 
                                 End If
 
@@ -1144,7 +1139,7 @@ Public Class ComparacionesMensualesValorUnico
                                     WAux = _BuscarDato(WMes, WAnio, 4) ' Stock
                                     WAux2 = _BuscarDato(WMes, WAnio, 3) ' Costo
 
-                                    .Item("Valor" & j) = Val(Helper.formatonumerico(WAux / WAux2))
+                                    .Item("Valor" & j) = Val(formatonumerico(WAux / WAux2))
 
                                 End If
 
@@ -1208,7 +1203,7 @@ Public Class ComparacionesMensualesValorUnico
                                     WAux = _BuscarDato(WMes, WAnio, 1) ' Venta
                                     WAux2 = _BuscarDato(WMes, WAnio, 3) ' Costo
 
-                                    .Item("Valor" & j) = Val(Helper.formatonumerico(WAux / WAux2))
+                                    .Item("Valor" & j) = Val(formatonumerico(WAux / WAux2))
 
                                 End If
 
@@ -1253,7 +1248,7 @@ Public Class ComparacionesMensualesValorUnico
 
                                     WAux2 = _BuscarDato(WMes, WAnio, 1) ' Nro Pedidos
 
-                                    .Item("Valor" & j) = Val(Helper.formatonumerico(((WAux2 / WAux) - 1) * 100))
+                                    .Item("Valor" & j) = Val(formatonumerico(((WAux2 / WAux) - 1) * 100))
 
                                 End If
 
@@ -1279,7 +1274,7 @@ Public Class ComparacionesMensualesValorUnico
                                     WAux = _BuscarDato(WMes, WAnio, 6) ' Nro Atrasos
                                     WAux2 = _BuscarDato(WMes, WAnio, 5) ' Nro Pedidos
 
-                                    .Item("Valor" & j) = Val(Helper.formatonumerico((WAux / WAux2) * 100))
+                                    .Item("Valor" & j) = Val(formatonumerico((WAux / WAux2) * 100))
 
                                 End If
 
@@ -1305,7 +1300,7 @@ Public Class ComparacionesMensualesValorUnico
                                     WAux = _BuscarDato(WMes, WAnio, 4) ' Stock
                                     WAux2 = _BuscarDato(WMes, WAnio, 3) ' Costo
 
-                                    .Item("Valor" & j) = Val(Helper.formatonumerico(WAux / WAux2))
+                                    .Item("Valor" & j) = Val(formatonumerico(WAux / WAux2))
 
                                 End If
 
@@ -1327,13 +1322,13 @@ Public Class ComparacionesMensualesValorUnico
 
     Private Function _BuscarDato(ByVal wMes As Object, ByVal wAnio As Object, ByVal _Tipo As Integer) As Double
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT sum(Importe" & wMes & ") as Valor FROM ComandoDatosII WHERE Tipo = '" & _Tipo & "' AND Ano = '" & wAnio & "'")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT sum(Importe" & wMes & ") as Valor FROM ComandoDatosII WHERE Tipo = '" & _Tipo & "' AND Ano = '" & wAnio & "'")
         Dim dr As SqlDataReader
 
         Try
 
-            cn.ConnectionString = Helper._ConectarA
+            cn.ConnectionString = _ConectarA
             cn.Open()
             cm.Connection = cn
 
@@ -1343,7 +1338,7 @@ Public Class ComparacionesMensualesValorUnico
 
                 dr.Read()
 
-                Return IIf(IsDBNull(dr.Item("Valor")), 0, Val(Helper.formatonumerico(dr.Item("Valor"))))
+                Return IIf(IsDBNull(dr.Item("Valor")), 0, Val(formatonumerico(dr.Item("Valor"))))
 
             End If
 
@@ -1363,8 +1358,8 @@ Public Class ComparacionesMensualesValorUnico
 
     Private Sub _BuscarDatosBrutos(ByVal wMeses() As String, ByVal WDatos As String(), ByRef tabla As DataTable)
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("")
         Dim dr As SqlDataReader
         Dim row As DataRow
         Dim rowIndex = 0
@@ -1376,7 +1371,7 @@ Public Class ComparacionesMensualesValorUnico
 
         Try
 
-            cn.ConnectionString = Helper._ConectarA
+            cn.ConnectionString = _ConectarA
             cn.Open()
 
             ' Armamos la consulta de los campos a comparar para cada mes.
@@ -1448,7 +1443,7 @@ Public Class ComparacionesMensualesValorUnico
 
                                         WDato = dr.Item("Importe" & i)
 
-                                        .Item("Valor" & rowIndex) = Val(Helper.formatonumerico(WDato))
+                                        .Item("Valor" & rowIndex) = Val(formatonumerico(WDato))
                                         .Item("Titulo" & rowIndex) = WMes
 
                                     End If
@@ -1564,7 +1559,7 @@ Public Class ComparacionesMensualesValorUnico
 
                                         WDato = dr.Item("Importe" & Val(wMeses(i)))
 
-                                        .Item("Valor" & rowIndex) = Val(Helper.formatonumerico(WDato))
+                                        .Item("Valor" & rowIndex) = Val(formatonumerico(WDato))
                                         .Item("Titulo" & rowIndex) = WMes
 
                                     End If
@@ -1586,7 +1581,7 @@ Public Class ComparacionesMensualesValorUnico
 
                                             WDato = dr.Item("Importe" & i)
 
-                                            .Item("Valor" & rowIndex) = Val(Helper.formatonumerico(WDato))
+                                            .Item("Valor" & rowIndex) = Val(formatonumerico(WDato))
                                             .Item("Titulo" & rowIndex) = WMes
 
                                             aux2 += 1
@@ -1610,125 +1605,6 @@ Public Class ComparacionesMensualesValorUnico
                     End If
 
                 End If
-
-            Next
-
-
-        Catch ex As Exception
-            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
-        Finally
-
-            dr = Nothing
-            cn.Close()
-            cn = Nothing
-            cm = Nothing
-
-        End Try
-
-        Return
-    End Sub
-
-    Private Sub _BuscarDatosBrutosMensualComparativo(ByVal wMeses As String(), ByVal wAnios As String(), ByVal WDatos As String(), ByRef tabla As DataTable)
-
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("")
-        Dim dr As SqlDataReader
-        Dim row As DataRow
-        Dim rowIndex = 0
-        Dim WBuscarFamilias = _ArmarBuscarFamilias()
-        Dim WDatosABuscar = "", WValoresABuscar = ""
-        Dim WMes = ""
-        Dim WAnio = ""
-        Dim WDato = ""
-
-        Try
-
-            cn.ConnectionString = Helper._ConectarA
-            cn.Open()
-
-            ' Armamos la consulta de los campos a comparar para cada mes.
-            For j = 1 To 10
-
-                ' Recorremos los meses pedidos.
-                WDatosABuscar = ""
-
-                If Not IsNothing(WDatos(j)) OrElse WDatos(j) <> "" Then
-                    WDatosABuscar &= "'" & WDatos(j) & "',"
-                End If
-
-                WValoresABuscar = ""
-                'For i = 0 To 12
-
-                '    If Val(wMeses(i)) > 0 AndAlso Not IsNothing(wMeses(i)) Then
-
-                '        WValoresABuscar &= "Importe" & wMeses(i) & ","
-
-                '    End If
-
-                'Next
-
-
-                ' Chequeamos que hayan datos que buscar.
-                If Trim(WDatosABuscar) = "" Then
-                    Continue For
-                End If
-
-                ' Eliminamos la ultima coma.
-                WDatosABuscar = WDatosABuscar.Trim.TrimEnd(",")
-                WValoresABuscar = WValoresABuscar.Trim.TrimEnd(",")
-
-
-                ' Buscamos el registro correspondiente a ese mes y buscamos los datos de los meses, segun datos de mas arriba.
-                WMes = ""
-                ' Los meses y años se estan guardando como ' 1/ 2017 '
-
-                For i = 0 To 2
-
-                    WValoresABuscar = "Importe" & wMeses(i)
-
-                    WAnio = Trim(wAnios(i))
-
-                    cm.CommandText = "SELECT Linea, Tipo, DesTipo as Descripcion, " & WValoresABuscar & " FROM ComandoDatosII WHERE Ano = '" & WAnio & "' AND " & WBuscarFamilias & " AND Tipo in (" & WDatosABuscar & ") order by linea, ano, tipo"
-
-                    cm.Connection = cn
-
-                    dr = cm.ExecuteReader()
-
-                    If dr.HasRows Then
-
-                        ' Agregamos una fila por cada familia.
-                        Do While dr.Read()
-
-                            row = tabla.NewRow
-                            rowIndex = 1
-                            With row
-                                .Item("Tipo") = dr.Item("Linea")
-                                .Item("Descripcion") = _NombreLineaSegunNumero(.Item("Tipo"))
-                                .Item("Corte") = Val(dr.Item("Tipo"))
-                                .Item("Titulo") = _DescripcionSegunTipo(.Item("Corte"))
-
-                                WMes = ""
-                                WMes = Val(wMeses(i)) & "/" & Trim(Str$(WAnio))
-
-                                WDato = dr.Item("Importe" & Trim(wMeses(i)))
-
-                                .Item("Valor" & rowIndex) = Val(Helper.formatonumerico(WDato))
-                                .Item("Titulo" & rowIndex) = WMes
-
-                            End With
-
-                            tabla.Rows.Add(row)
-
-                        Loop
-
-                    End If
-
-                    If Not dr.IsClosed Then
-                        dr.Close()
-                        dr = Nothing
-                    End If
-
-                Next
 
             Next
 
@@ -1920,20 +1796,20 @@ Public Class ComparacionesMensualesValorUnico
 
         With tabla
 
-            .Columns.Add("Tipo", System.Type.GetType("System.Double"))
+            .Columns.Add("Tipo", Type.GetType("System.Double"))
             .Columns.Add("Descripcion")
             .Columns.Add("Titulo")
-            .Columns.Add("Corte", System.Type.GetType("System.Double"))
+            .Columns.Add("Corte", Type.GetType("System.Double"))
 
             For i = 1 To 12
-                .Columns.Add("Valor" & i, System.Type.GetType("System.Double"))
+                .Columns.Add("Valor" & i, Type.GetType("System.Double"))
             Next
 
             For i = 1 To 12
                 .Columns.Add("Titulo" & i)
             Next
 
-            .Columns.Add("TotalFila", System.Type.GetType("System.Double"))
+            .Columns.Add("TotalFila", Type.GetType("System.Double"))
 
         End With
 
@@ -1955,7 +1831,7 @@ Public Class ComparacionesMensualesValorUnico
 
     End Function
 
-    Private Sub btnGenerar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerar.Click
+    Private Sub btnGenerar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnGenerar.Click
         Dim tabla As DataSet
 
         '
@@ -1991,7 +1867,7 @@ Public Class ComparacionesMensualesValorUnico
         '
 
         Try
-
+            tabla = Nothing
             If rbMenusal.Checked Then tabla = _ArmarTablaYDatos() '_TraerDatosParaGraficos()
             If rbMensualComparativo.Checked Then tabla = _ArmarTablaYDatosMensualComparativo()
 
@@ -2100,7 +1976,7 @@ Public Class ComparacionesMensualesValorUnico
                     Next
                     WLineas = Trim(WLineas)
                     If WLineas.Length > 0 Then WLineas = WLineas.Substring(0, WLineas.Length - 1)
-                    WLineas = Helper.ReplaceLastComma(WLineas)
+                    WLineas = ReplaceLastComma(WLineas)
 
 
                     WTipo = 1
@@ -2113,7 +1989,7 @@ Public Class ComparacionesMensualesValorUnico
 
                     ' Obtenemos los datos del mes indicado.
 
-                    If (_EsConsolidado) Then
+                    If (_EsConsolidado()) Then
 
                         WDatosRows = _TraerDatosDiariosEntrePeriodosConsolidado(WMes, WDesde, WAnio, WValores)
 
@@ -2135,7 +2011,7 @@ Public Class ComparacionesMensualesValorUnico
 
                     WTipo = 1
 
-                    If (_EsConsolidado) Then
+                    If (_EsConsolidado()) Then
                         WTipo = 2
                     End If
 
@@ -2189,10 +2065,10 @@ Public Class ComparacionesMensualesValorUnico
     Private Function _TraerDatosDiariosEntrePeriodosConsolidado(ByVal wMes As String, ByVal wDesde As String, ByVal wAnio As String, ByVal wValores As String()) As DataRowCollection
         Dim Tabla As DataTable = _ArmarTablaDiario()
         Dim WBuscarLineas As String = _ArmarBuscarFamilias()
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("")
         Dim dr As SqlDataReader
-        Dim WBuscarTipos As String = ""
+        Dim WBuscarTipos = ""
 
         Try
 
@@ -2210,7 +2086,7 @@ Public Class ComparacionesMensualesValorUnico
 
             WBuscarTipos = Trim(WBuscarTipos).TrimEnd(",")
 
-            cn.ConnectionString = Helper._ConectarA
+            cn.ConnectionString = _ConectarA
             cn.Open()
             cm.Connection = cn
 
@@ -2242,10 +2118,10 @@ Public Class ComparacionesMensualesValorUnico
     Private Function _TraerDatosDiariosEntreLineas(ByVal wMes As String, ByVal wDesde As String, ByVal wAnio As String, ByVal wValores As String(), Optional ByVal WConsolidado As Boolean = False) As DataRowCollection
         Dim Tabla As DataTable = _ArmarTablaDiario()
         Dim WBuscarLineas As String = IIf(WConsolidado, "Linea IN('1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11')", _ArmarBuscarFamilias())
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("")
         Dim dr As SqlDataReader
-        Dim WBuscarTipos As String = ""
+        Dim WBuscarTipos = ""
 
         Try
 
@@ -2263,7 +2139,7 @@ Public Class ComparacionesMensualesValorUnico
 
             WBuscarTipos = Trim(WBuscarTipos).Substring(0, Trim(WBuscarTipos).Length - 1)
 
-            cn.ConnectionString = Helper._ConectarA
+            cn.ConnectionString = _ConectarA
             cn.Open()
             cm.Connection = cn
 
@@ -2300,10 +2176,10 @@ Public Class ComparacionesMensualesValorUnico
             .Add("Dia")
             .Add("Mes")
             .Add("Ano")
-            .Add("Importe1", System.Type.GetType("System.Double"))
-            .Add("Importe2", System.Type.GetType("System.Double"))
-            .Add("Importe3", System.Type.GetType("System.Double"))
-            .Add("Importe4", System.Type.GetType("System.Double"))
+            .Add("Importe1", Type.GetType("System.Double"))
+            .Add("Importe2", Type.GetType("System.Double"))
+            .Add("Importe3", Type.GetType("System.Double"))
+            .Add("Importe4", Type.GetType("System.Double"))
             .Add("LineaDesc")
         End With
 
@@ -2332,7 +2208,7 @@ Public Class ComparacionesMensualesValorUnico
         Return valido
     End Function
 
-    Private Sub ckTodosValores_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ckTodosValores.CheckedChanged
+    Private Sub ckTodosValores_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles ckTodosValores.CheckedChanged
         For Each ck As CheckBox In _ValoresComparables()
             ck.Checked = ckTodosValores.Checked
         Next
@@ -2342,7 +2218,7 @@ Public Class ComparacionesMensualesValorUnico
         Return {ckVenta, ckAtrasados, ckFactor, ckKilos, ckPedidos, ckPorcentajeAtrasos, ckPrecio, ckRotacion, ckStock, ckPorcentaje}
     End Function
 
-    Private Sub ckValoresAComparar_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ckVenta.CheckedChanged, ckAtrasados.CheckedChanged, ckFactor.CheckedChanged, ckKilos.CheckedChanged, ckPedidos.CheckedChanged, ckPorcentajeAtrasos.CheckedChanged, ckPrecio.CheckedChanged, ckRotacion.CheckedChanged, ckStock.CheckedChanged, ckPorcentaje.CheckedChanged
+    Private Sub ckValoresAComparar_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles ckVenta.CheckedChanged, ckAtrasados.CheckedChanged, ckFactor.CheckedChanged, ckKilos.CheckedChanged, ckPedidos.CheckedChanged, ckPorcentajeAtrasos.CheckedChanged, ckPrecio.CheckedChanged, ckRotacion.CheckedChanged, ckStock.CheckedChanged, ckPorcentaje.CheckedChanged
 
         Dim control As CheckBox = sender
 
@@ -2364,13 +2240,13 @@ Public Class ComparacionesMensualesValorUnico
 
     End Sub
 
-    Private Sub btnSeleccionarAnios_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSeleccionarAnios.Click
+    Private Sub btnSeleccionarAnios_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSeleccionarAnios.Click
 
         PanelSeleccionAnios.Visible = True
 
     End Sub
 
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click, Button2.Click
+    Private Sub Button1_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button1.Click, Button2.Click
         PanelSeleccionAnios.Visible = False
     End Sub
 
@@ -2482,7 +2358,7 @@ Public Class ComparacionesMensualesValorUnico
 
     End Sub
 
-    Private Sub txtMesDesde_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtMesDesde.KeyDown
+    Private Sub txtMesDesde_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtMesDesde.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtMesDesde.Text) = "" Then : Exit Sub : End If
@@ -2494,7 +2370,7 @@ Public Class ComparacionesMensualesValorUnico
 
             ' Deberiamos validar el periodo. O Capaz despues ya en la generacion?
 
-            txtMesDesde.Text = Helper.ceros(txtMesDesde.Text, 2)
+            txtMesDesde.Text = ceros(txtMesDesde.Text, 2)
             txtAnioDesde.Focus()
 
         ElseIf e.KeyData = Keys.Escape Then
@@ -2507,7 +2383,7 @@ Public Class ComparacionesMensualesValorUnico
         Return Val(WMes) >= 1 And Val(WMes) <= 12
     End Function
 
-    Private Sub txtAnioDesde_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtAnioDesde.KeyDown
+    Private Sub txtAnioDesde_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtAnioDesde.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtAnioDesde.Text) = "" Then : Exit Sub : End If
@@ -2529,7 +2405,7 @@ Public Class ComparacionesMensualesValorUnico
         Return Trim(WAnio).Length = 4 And Val(WAnio) >= 1900 And Val(WAnio) <= 2999
     End Function
 
-    Private Sub txtMesHasta_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtMesHasta.KeyDown
+    Private Sub txtMesHasta_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtMesHasta.KeyDown
         If e.KeyData = Keys.Enter Then
             If Trim(txtMesHasta.Text) = "" Then : Exit Sub : End If
 
@@ -2540,7 +2416,7 @@ Public Class ComparacionesMensualesValorUnico
 
             ' Deberiamos validar el periodo. O Capaz despues ya en la generacion?
 
-            txtMesHasta.Text = Helper.ceros(txtMesHasta.Text, 2)
+            txtMesHasta.Text = ceros(txtMesHasta.Text, 2)
             txtAnioHasta.Focus()
 
         ElseIf e.KeyData = Keys.Escape Then
@@ -2548,7 +2424,7 @@ Public Class ComparacionesMensualesValorUnico
         End If
     End Sub
 
-    Private Sub txtAnioHasta_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtAnioHasta.KeyDown
+    Private Sub txtAnioHasta_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtAnioHasta.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtAnioHasta.Text) = "" Then : Exit Sub : End If
@@ -2625,11 +2501,11 @@ Public Class ComparacionesMensualesValorUnico
         Return _PeriodoValido()
     End Function
 
-    Private Sub ComparacionesMensualesValorUnico_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+    Private Sub ComparacionesMensualesValorUnico_Shown(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Shown
         txtMesDesde.Focus()
     End Sub
 
-    Private Sub cmbTipoGrafico_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbTipoGrafico.KeyDown
+    Private Sub cmbTipoGrafico_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles cmbTipoGrafico.KeyDown
         If e.KeyData = Keys.Enter Then
 
             cmbPeriodo.DroppedDown = True
@@ -2638,7 +2514,7 @@ Public Class ComparacionesMensualesValorUnico
         End If
     End Sub
 
-    Private Sub ckConsolidado_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ckConsolidado.CheckedChanged, ckConsolidadoPellital.CheckedChanged
+    Private Sub ckConsolidado_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles ckConsolidado.CheckedChanged, ckConsolidadoPellital.CheckedChanged
 
         If (_EsConsolidado) Then
 
@@ -2683,7 +2559,7 @@ Public Class ComparacionesMensualesValorUnico
 
     End Sub
 
-    Private Sub cmbPeriodo_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbPeriodo.KeyDown
+    Private Sub cmbPeriodo_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles cmbPeriodo.KeyDown
 
         If e.KeyData = Keys.Enter Then
 
@@ -2695,7 +2571,7 @@ Public Class ComparacionesMensualesValorUnico
 
     End Sub
 
-    Private Sub cmbPeriodo_DropDownClosed(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbPeriodo.DropDownClosed
+    Private Sub cmbPeriodo_DropDownClosed(ByVal sender As Object, ByVal e As EventArgs) Handles cmbPeriodo.DropDownClosed
         _ProcesarPeriodo()
     End Sub
 
@@ -2775,7 +2651,7 @@ Public Class ComparacionesMensualesValorUnico
 
     'End Sub
 
-    Private Sub rbMenusal_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbMenusal.CheckedChanged
+    Private Sub rbMenusal_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles rbMenusal.CheckedChanged
 
         If rbMenusal.Checked Then
             gbDesde.Enabled = True
@@ -2790,7 +2666,7 @@ Public Class ComparacionesMensualesValorUnico
     End Sub
 
 
-    Private Sub rbMensualComparativo_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbMensualComparativo.CheckedChanged
+    Private Sub rbMensualComparativo_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles rbMensualComparativo.CheckedChanged
 
         If rbMensualComparativo.Checked Then
             gbMensualComparativo.Enabled = True
@@ -2810,7 +2686,7 @@ Public Class ComparacionesMensualesValorUnico
 
     End Sub
 
-    Private Sub rbDiaria_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbDiaria.CheckedChanged
+    Private Sub rbDiaria_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles rbDiaria.CheckedChanged
 
         If rbDiaria.Checked Then
             gbDesde.Enabled = False
@@ -2831,7 +2707,7 @@ Public Class ComparacionesMensualesValorUnico
 
     End Sub
 
-    Private Sub Lineas_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ckBiocidas.CheckedChanged, ckColorantes.CheckedChanged, ckFarma.CheckedChanged, ckFazonFarma.CheckedChanged, ckFazonPellital.CheckedChanged, ckFazonQuimicos.CheckedChanged, ckPapel.CheckedChanged, ckQuimicos.CheckedChanged, ckVarios.CheckedChanged, ckAceitesNaturales.CheckedChanged, ckRecurtientes.CheckedChanged, ckComplejantes.CheckedChanged, ckDepilantes.CheckedChanged, ckPurgasEnzimaticas.CheckedChanged, ckDesencalantes.CheckedChanged, ckBactericidas.CheckedChanged, ckVariosPellital.CheckedChanged, ckColorantesPellital.CheckedChanged
+    Private Sub Lineas_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles ckBiocidas.CheckedChanged, ckColorantes.CheckedChanged, ckFarma.CheckedChanged, ckFazonFarma.CheckedChanged, ckFazonPellital.CheckedChanged, ckFazonQuimicos.CheckedChanged, ckPapel.CheckedChanged, ckQuimicos.CheckedChanged, ckVarios.CheckedChanged, ckAceitesNaturales.CheckedChanged, ckRecurtientes.CheckedChanged, ckComplejantes.CheckedChanged, ckDepilantes.CheckedChanged, ckPurgasEnzimaticas.CheckedChanged, ckDesencalantes.CheckedChanged, ckBactericidas.CheckedChanged, ckVariosPellital.CheckedChanged, ckColorantesPellital.CheckedChanged
 
         Dim control As CheckBox = sender
 
@@ -2853,7 +2729,7 @@ Public Class ComparacionesMensualesValorUnico
 
     End Sub
 
-    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
+    Private Sub Button3_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button3.Click
         CambioEmpresa.Show()
         Close()
     End Sub

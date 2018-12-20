@@ -1,8 +1,9 @@
 ﻿
+Imports System.ComponentModel
 Imports System.Data.SqlClient
+Imports System.Drawing.Printing
 Imports System.Text.RegularExpressions
 Imports System.Windows.Forms.DataVisualization.Charting
-Imports System.Windows.Forms.DataVisualization
 
 Public Class Grafico
     Public Property Tabla As DataTable
@@ -19,7 +20,7 @@ Public Class Grafico
 
     Private _wValoresDibujados As String()
 
-    Private Sub Grafico_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+    Private Sub Grafico_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
 
         _wValoresDibujados = {Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing}
 
@@ -141,7 +142,7 @@ Public Class Grafico
                     End If
 
                     If Tipo = -1 Then
-                        .Sort(.Columns(1), System.ComponentModel.ListSortDirection.Descending)
+                        .Sort(.Columns(1), ListSortDirection.Descending)
                         .CurrentCell = .Rows(0).Cells("Descripcion")
                     Else
                         .Columns(0).Visible = False
@@ -160,7 +161,7 @@ Public Class Grafico
                         .Columns(1).HeaderText = "Linea"
                         .Columns(2).HeaderText = "Concepto"
 
-                        .Sort(.Columns(0), System.ComponentModel.ListSortDirection.Ascending)
+                        .Sort(.Columns(0), ListSortDirection.Ascending)
                         .CurrentCell = .Rows(0).Cells(1)
                     End If
 
@@ -233,16 +234,16 @@ Public Class Grafico
                             WVenta = 0.0
 
                             If Not IsDBNull(r.Cells(i).Value) Then
-                                WVenta = Val(Helper.formatonumerico(r.Cells(i).Value))
+                                WVenta = Val(formatonumerico(r.Cells(i).Value))
                             End If
 
                             If Not IsDBNull(.Cells(i).Value) Then
 
-                                WVenta += Val(Helper.formatonumerico(.Cells(i).Value))
+                                WVenta += Val(formatonumerico(.Cells(i).Value))
 
                             End If
 
-                            r.Cells(i).Value = Val(Helper.formatonumerico(WVenta))
+                            r.Cells(i).Value = Val(formatonumerico(WVenta))
                         Next
 
                     Case "KILOS"
@@ -252,16 +253,16 @@ Public Class Grafico
                             WKilos = 0.0
 
                             If Not IsDBNull(r.Cells(i).Value) Then
-                                WKilos = Val(Helper.formatonumerico(r.Cells(i).Value))
+                                WKilos = Val(formatonumerico(r.Cells(i).Value))
                             End If
 
                             If Not IsDBNull(.Cells(i).Value) Then
 
-                                WKilos += Val(Helper.formatonumerico(.Cells(i).Value))
+                                WKilos += Val(formatonumerico(.Cells(i).Value))
 
                             End If
 
-                            r.Cells(i).Value = Val(Helper.formatonumerico(WKilos))
+                            r.Cells(i).Value = Val(formatonumerico(WKilos))
                         Next
 
                     Case "PEDIDOS"
@@ -271,16 +272,16 @@ Public Class Grafico
                             WPedidos = 0.0
 
                             If Not IsDBNull(r.Cells(i).Value) Then
-                                WPedidos = Val(Helper.formatonumerico(r.Cells(i).Value))
+                                WPedidos = Val(formatonumerico(r.Cells(i).Value))
                             End If
 
                             If Not IsDBNull(.Cells(i).Value) Then
 
-                                WPedidos += Val(Helper.formatonumerico(.Cells(i).Value))
+                                WPedidos += Val(formatonumerico(.Cells(i).Value))
 
                             End If
 
-                            r.Cells(i).Value = Val(Helper.formatonumerico(WPedidos))
+                            r.Cells(i).Value = Val(formatonumerico(WPedidos))
                         Next
 
                     Case "ATRASO"
@@ -290,16 +291,16 @@ Public Class Grafico
                             WAtrasos = 0.0
 
                             If Not IsDBNull(r.Cells(i).Value) Then
-                                WAtrasos = Val(Helper.formatonumerico(r.Cells(i).Value))
+                                WAtrasos = Val(formatonumerico(r.Cells(i).Value))
                             End If
 
                             If Not IsDBNull(.Cells(i).Value) Then
 
-                                WAtrasos += Val(Helper.formatonumerico(.Cells(i).Value))
+                                WAtrasos += Val(formatonumerico(.Cells(i).Value))
 
                             End If
 
-                            r.Cells(i).Value = Val(Helper.formatonumerico(WAtrasos))
+                            r.Cells(i).Value = Val(formatonumerico(WAtrasos))
                         Next
                 End Select
 
@@ -353,14 +354,14 @@ Public Class Grafico
 
             Titulo &= " -" & vbCrLf & " - "
 
-            Titulo &= "Meses: " & Helper._Left(Tabla.Rows(0).Item(16), 2) & " Al "
+            Titulo &= "Meses: " & _Left(Tabla.Rows(0).Item(16), 2) & " Al "
 
             Dim WUltimoMes = 0
             For i = 27 To 16 Step -1
 
                 If Not IsDBNull(Tabla.Rows(0).Item(i)) Then
 
-                    Titulo &= Helper._Left(Tabla.Rows(0).Item(i), 2)
+                    Titulo &= _Left(Tabla.Rows(0).Item(i), 2)
                     WUltimoMes = i
                     Exit For
 
@@ -368,11 +369,11 @@ Public Class Grafico
 
             Next
 
-            Titulo &= " -" & vbCrLf & "- Periodos: " & Helper._Right(Tabla.Rows(0).Item(16), 4)
+            Titulo &= " -" & vbCrLf & "- Periodos: " & _Right(Tabla.Rows(0).Item(16), 4)
 
             For i = 1 To Tabla.Rows.Count - 1
 
-                Titulo &= ", " & Helper._Right(Tabla.Rows(i).Item(WUltimoMes), 4)
+                Titulo &= ", " & _Right(Tabla.Rows(i).Item(WUltimoMes), 4)
 
             Next
 
@@ -433,7 +434,7 @@ Public Class Grafico
 
                     If Not IsDBNull(.Item("Valor" & i)) Then
 
-                        wacu = Val(Helper.formatonumerico(.Item("Valor" & i)))
+                        wacu = Val(formatonumerico(.Item("Valor" & i)))
 
                     End If
 
@@ -508,7 +509,7 @@ Public Class Grafico
 
                     If Not IsDBNull(.Item("Valor" & i)) Then
 
-                        wacu = Val(Helper.formatonumerico(.Item("Valor" & i)))
+                        wacu = Val(formatonumerico(.Item("Valor" & i)))
 
                     End If
 
@@ -604,7 +605,7 @@ Public Class Grafico
                     wacu = 0.0
 
                     If Not IsDBNull(.Item("Valor" & i)) Then
-                        wacu = Val(Helper.formatonumerico(.Item("Valor" & i)))
+                        wacu = Val(formatonumerico(.Item("Valor" & i)))
                     End If
 
 
@@ -666,11 +667,11 @@ Public Class Grafico
         For Each row As DataRow In Tabla.Rows
 
             With row
-                
+
                 For i = 1 To 12
 
                     If Not IsDBNull(.Item("Valor" & i)) Then
-                        wacu = Val(Helper.formatonumerico(.Item("Valor" & i)))
+                        wacu = Val(formatonumerico(.Item("Valor" & i)))
                     End If
 
                     If (Not IsDBNull(.Item(1)) AndAlso Trim(.Item(1)) <> "") Then
@@ -695,11 +696,10 @@ Public Class Grafico
     End Sub
 
     Private Sub _ProcesarAcumulado3()
-        Dim wacu As Double = 0.0
-        Dim wacu1 As Double = 0.0
-        Dim wacu2 As Double = 0.0
-        Dim wacu3 As Double = 0.0
-        Dim WIndice = 0
+        Dim wacu = 0.0
+        Dim wacu1 = 0.0
+        Dim wacu2 = 0.0
+        Dim wacu3 = 0.0
 
         Titulo = "CONSOLIDADO" & vbCrLf & " - "
 
@@ -750,7 +750,7 @@ Public Class Grafico
             _LabelsComoPorcentaje(serie)
         Next
 
-        Dim gd As New Charting.Grid
+        Dim gd As New Grid
 
         gd.LineWidth = 0
 
@@ -767,7 +767,7 @@ Public Class Grafico
         End With
     End Sub
 
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button1.Click
 
         With ComparacionesMensualesValorUnico
             .WindowState = FormWindowState.Normal
@@ -777,7 +777,7 @@ Public Class Grafico
 
     End Sub
 
-    Private Sub DataGridView1_RowHeaderMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles DataGridView1.RowHeaderMouseDoubleClick
+    Private Sub DataGridView1_RowHeaderMouseDoubleClick(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles DataGridView1.RowHeaderMouseDoubleClick
 
         _RedibujarDatos(e.RowIndex)
 
@@ -1043,11 +1043,11 @@ Public Class Grafico
         End If
     End Sub
 
-    Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button4.Click
+    Private Sub Button4_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button4.Click
 
         For Each serie As Series In Chart1.Series
 
-            serie.ChartType = DataVisualization.Charting.SeriesChartType.Line
+            serie.ChartType = SeriesChartType.Line
 
             _LabelsComoPorcentaje(serie)
 
@@ -1100,9 +1100,9 @@ Public Class Grafico
                         End If
 
                         If ComoPorce Then
-                            .Label = "% " & Helper.formatonumerico((.YValues(0) * 100) / aux)
+                            .Label = "% " & formatonumerico((.YValues(0) * 100) / aux)
                         Else
-                            .Label = Helper.formatonumerico(.YValues(0))
+                            .Label = formatonumerico(.YValues(0))
                         End If
 
                     End If
@@ -1115,11 +1115,11 @@ Public Class Grafico
 
     End Sub
 
-    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
+    Private Sub Button3_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button3.Click
 
         For Each serie As Series In Chart1.Series
 
-            serie.ChartType = DataVisualization.Charting.SeriesChartType.Pie
+            serie.ChartType = SeriesChartType.Pie
 
             For Each p As DataPoint In serie.Points
                 With p
@@ -1135,11 +1135,11 @@ Public Class Grafico
 
     End Sub
 
-    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+    Private Sub Button2_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button2.Click
 
         For Each serie As Series In Chart1.Series
 
-            serie.ChartType = DataVisualization.Charting.SeriesChartType.Column
+            serie.ChartType = SeriesChartType.Column
 
             _LabelsComoPorcentaje(serie)
 
@@ -1150,21 +1150,21 @@ Public Class Grafico
     '    MsgBox(DataGridView1.Columns(e.ColumnIndex).Width)
     'End Sub
 
-    Private Sub Button5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button5.Click
+    Private Sub Button5_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button5.Click
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("DELETE FROM ComandoII")
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("DELETE FROM ComandoII")
         Dim WCampo = ""
         Dim WCampos = ""
         Dim WValores = ""
-        Dim aux As String = ""
+        Dim aux = ""
         Dim WRow() As DataRow
         Dim WTabla As DataTable
         Dim WLineaDes = ""
 
         Try
             ' Limpiamos los datos que esten presentes con anterioridad.
-            cn.ConnectionString = Helper._ConectarA
+            cn.ConnectionString = _ConectarA
             cn.Open()
             cm.Connection = cn
 
@@ -1232,7 +1232,7 @@ Public Class Grafico
 
                         aux = IIf(IsDBNull(WRow(j).Item("Valor" & x)), "0", WRow(j).Item("Valor" & x))
 
-                        WValores &= Helper.formatonumerico(aux) & ","
+                        WValores &= formatonumerico(aux) & ","
 
                     Next
 
@@ -1274,15 +1274,15 @@ Public Class Grafico
         Chart1.Printing.Print(False) ' True/False -> show print dialog
     End Sub
 
-    Private Sub PrintDocument1_PrintPage(ByVal sender As System.Object, ByVal e As System.Drawing.Printing.PrintPageEventArgs) Handles PrintDocument1.PrintPage
+    Private Sub PrintDocument1_PrintPage(ByVal sender As Object, ByVal e As PrintPageEventArgs) Handles PrintDocument1.PrintPage
         Chart1.Printing.PrintPaint(e.Graphics, New Rectangle(0, 0, Chart1.Width, Chart1.Height)) ' draw the chart
     End Sub
 
-    Private Sub Button6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button6.Click
+    Private Sub Button6_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button6.Click
         _ImprimirGrafico()
     End Sub
 
-    Private Sub DataGridView1_CellDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView1.CellDoubleClick
+    Private Sub DataGridView1_CellDoubleClick(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles DataGridView1.CellDoubleClick
 
         _RedibujarDatos(e.RowIndex)
 
