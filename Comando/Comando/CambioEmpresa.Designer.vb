@@ -85,6 +85,7 @@ Partial Class CambioEmpresa
         '
         'cmbEmpresas
         '
+        Me.cmbEmpresas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbEmpresas.FormattingEnabled = True
         Me.cmbEmpresas.Items.AddRange(New Object() {"SURFACTAN S.A.", "PELLITAL S.A."})
         Me.cmbEmpresas.Location = New System.Drawing.Point(105, 91)

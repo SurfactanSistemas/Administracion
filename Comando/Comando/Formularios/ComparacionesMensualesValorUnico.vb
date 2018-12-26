@@ -1929,7 +1929,9 @@ Public Class ComparacionesMensualesValorUnico
         Dim WMes, WDesde, WAnio, WTitulo, WLineas As String
         Dim WValores() As String
         Dim WDatosRows As DataRowCollection
+        Dim WDatosRows2 As DataRowCollection
         Dim WDatos As DataTable = _ArmarTablaDiario()
+        Dim WDatos2 As DataTable = _ArmarTablaDiario()
         Dim WTipo As Short = -1
         Dim WTablaGrilla As DataTable = WDatos.Clone
 
@@ -1955,13 +1957,20 @@ Public Class ComparacionesMensualesValorUnico
                 Case 0
 
                     ' Obtenemos los datos del mes indicado.
+
+                    If ckSumarDiario.Checked Then
+
+                        WMes = Date.Now.Month
+                        WAnio = Date.Now.Year
+                        WDesde = Date.Now.Day
+
+                    End If
+
                     WDatosRows = _TraerDatosDiariosEntreLineas(WMes, WDesde, WAnio, WValores) '_TraerDatosDiarios(WMes, WDia, WAnio, WValores)
 
                     For Each WRow As DataRow In WDatosRows
                         WDatos.ImportRow(WRow)
                     Next
-
-
 
                     ' Armamos el titulo.
                     WLineas = ""
@@ -1986,11 +1995,21 @@ Public Class ComparacionesMensualesValorUnico
 
                     WTitulo = "Comparación Entre Lineas" & vbCrLf & "- Fecha: " & txtFechaDiaria.Text & " -" & vbCrLf & "( " & WLineas & " )"
 
+                    If ckSumarDiario.Checked Then WTitulo = "Comparación Entre Lineas" & vbCrLf & "- Fecha: " & Date.Now.ToString("dd/MM/yyyy") & " -" & vbCrLf & "( " & WLineas & " )"
+
                 Case 1
 
                     ' Obtenemos los datos del mes indicado.
 
                     If (_EsConsolidado()) Then
+
+                        If ckSumarDiario.Checked Then
+
+                            WMes = Date.Now.Month
+                            WAnio = Date.Now.Year
+                            WDesde = Date.Now.Day
+
+                        End If
 
                         WDatosRows = _TraerDatosDiariosEntrePeriodosConsolidado(WMes, WDesde, WAnio, WValores)
 
@@ -2000,7 +2019,17 @@ Public Class ComparacionesMensualesValorUnico
 
                         WTitulo = "Comparación Entre Periodos" & vbCrLf & "- Fecha: " & txtFechaDiaria.Text & " -" & vbCrLf & "( CONSOLIDADO )"
 
+                        If ckSumarDiario.Checked Then WTitulo = "Comparación Entre Periodos" & vbCrLf & "- Fecha: " & Date.Now.ToString("dd/MM/yyyy") & " -" & vbCrLf & "( CONSOLIDADO )"
+
                     Else
+
+                        If ckSumarDiario.Checked Then
+
+                            WMes = Date.Now.Month
+                            WAnio = Date.Now.Year
+                            WDesde = Date.Now.Day
+
+                        End If
 
                         WDatosRows = _TraerDatosDiariosEntreLineas(WMes, WDesde, WAnio, WValores) '_TraerDatosDiariosEntrePeriodos(WMes, WDesde, WAnio, WValores)
 
@@ -2016,9 +2045,6 @@ Public Class ComparacionesMensualesValorUnico
                         WTipo = 2
                     End If
 
-                    '    DataGridView1.DataSource = WDatos
-
-
             End Select
 
             If WDatos.Rows.Count = 0 Then Throw New Exception("No hay datos que graficar.")
@@ -2033,6 +2059,14 @@ Public Class ComparacionesMensualesValorUnico
 
             WValores(1) = "1"
             WValores(2) = "2"
+
+            If ckSumarDiario.Checked Then
+
+                WMes = Date.Now.Month
+                WAnio = Date.Now.Year
+                WDesde = Date.Now.Day
+
+            End If
 
             WDatosRows = _TraerDatosDiariosEntreLineas(WMes, WDesde, WAnio, WValores, True) '_TraerDatosDiarios(WMes, WDia, WAnio, WValores)
 
@@ -2091,7 +2125,11 @@ Public Class ComparacionesMensualesValorUnico
             cn.Open()
             cm.Connection = cn
 
-            cm.CommandText = "SELECT Tipo, Dia, Mes, Ano, sum(Importe1) as Importe1, sum(Importe2) as Importe2, sum(Importe3) as Importe3, ISNULL(sum(Importe4), 0) As Importe4 FROM ComandoDatosDiario WHERE Tipo IN(" & WBuscarTipos & ") AND " & WBuscarLineas & " AND Dia = " & wDesde & " AND Mes = '" & wMes & "' AND Ano = '" & wAnio & "' GROUP BY Tipo, Dia, Mes, Ano"
+            Dim WMes2 = Date.Now.Month
+            Dim WAnio2 = Date.Now.Year
+            Dim WDia2 = Date.Now.Day
+
+            cm.CommandText = "SELECT cd.Tipo, cd.Dia, cd.Mes, cd.Ano, sum(cd.Importe1) as Importe1, sum(cd.Importe2) as Importe2, sum(cd.Importe3) as Importe3, ISNULL((SELECT sum(cd2.Importe4) FROM ComandoDatosDiario cd2 WHERE cd2.Dia = '" & WDia2 & "' And cd2.Mes = '" & WMes2 & "' And cd2.Ano = '" & WAnio2 & "' And cd2.Tipo = cd.Tipo GROUP BY Tipo,Dia, Mes, Ano), 0) As Importe4 FROM ComandoDatosDiario cd WHERE cd.Tipo IN(" & WBuscarTipos & ") AND " & WBuscarLineas & " AND cd.Dia = " & wDesde & " AND cd.Mes = '" & wMes & "' AND cd.Ano = '" & wAnio & "' GROUP BY cd.Tipo, cd.Dia, cd.Mes, cd.Ano"
 
             dr = cm.ExecuteReader()
 
@@ -2144,7 +2182,11 @@ Public Class ComparacionesMensualesValorUnico
             cn.Open()
             cm.Connection = cn
 
-            cm.CommandText = "SELECT Linea, Tipo, Dia, Mes, Ano, sum(Importe1) as Importe1, sum(Importe2) as Importe2, sum(Importe3) as Importe3, ISNULL(sum(Importe4), 0) As Importe4 FROM ComandoDatosDiario WHERE Tipo IN(" & WBuscarTipos & ") AND " & WBuscarLineas & " AND Dia = " & wDesde & " AND Mes = '" & wMes & "' AND Ano = '" & wAnio & "' GROUP BY Linea, Tipo,Dia, Mes, Ano"
+            Dim WMes2 = Date.Now.Month
+            Dim WAnio2 = Date.Now.Year
+            Dim WDia2 = Date.Now.Day
+
+            cm.CommandText = "SELECT cd.Linea, cd.Tipo, cd.Dia, cd.Mes, cd.Ano, sum(cd.Importe1) as Importe1, sum(cd.Importe2) as Importe2, sum(cd.Importe3) as Importe3, ISNULL((SELECT sum(cd2.Importe4) FROM ComandoDatosDiario cd2 WHERE cd2.Dia = '" & WDia2 & "' And cd2.Mes = '" & WMes2 & "' And cd2.Ano = '" & WAnio2 & "' And cd2.Tipo = cd.Tipo And cd2.Linea = cd.Linea GROUP BY Linea, Tipo,Dia, Mes, Ano), 0) As Importe4 FROM ComandoDatosDiario cd WHERE Tipo IN(" & WBuscarTipos & ") AND " & WBuscarLineas & " AND Dia = " & wDesde & " AND Mes = '" & wMes & "' AND Ano = '" & wAnio & "' GROUP BY Linea, Tipo,Dia, Mes, Ano"
 
             dr = cm.ExecuteReader()
 
