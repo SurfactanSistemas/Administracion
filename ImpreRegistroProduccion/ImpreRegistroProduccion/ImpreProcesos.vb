@@ -144,6 +144,8 @@ Public Class ImpreProcesos
                 Case 2
                     .Mostrar()
                 Case 3
+                    .Exportar("Certificado Calidad " & wPartida & " " & Date.Now.ToString("dd-MM-yyyy"), CrystalDecisions.Shared.ExportFormatType.PortableDocFormat)
+                Case 4
                     .Exportar("Certificado Calidad " & wPartida & " " & Date.Now.ToString("dd-MM-yyyy"), CrystalDecisions.Shared.ExportFormatType.WordForWindows)
             End Select
 
