@@ -902,11 +902,12 @@ Public Class ProveedoresABM
     End Sub
 
     Private Sub _TraerProveedor(ByVal nombre As String)
-        Dim proveedor As List(Of Proveedor) = DAOProveedor.buscarProveedorPorNombre(Trim(nombre.Substring(11, nombre.Length - 11)))
+        'Dim proveedor As List(Of Proveedor) = DAOProveedor.buscarProveedorPorNombre(Trim(nombre.Substring(11, nombre.Length - 11)))
+        Dim proveedor As Proveedor = DAOProveedor.buscarProveedorPorCodigo(Trim(Microsoft.VisualBasic.Left(nombre, 11)))
 
-        If Not IsNothing(proveedor) AndAlso proveedor.Count > 0 Then
+        If Not IsNothing(proveedor) Then
 
-            mostrarProveedor(proveedor(0))
+            mostrarProveedor(proveedor)
 
             _ContraerFormulario()
 
