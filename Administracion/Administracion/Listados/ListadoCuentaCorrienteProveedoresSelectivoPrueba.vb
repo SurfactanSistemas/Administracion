@@ -706,7 +706,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
                             varRetIva = varAcumulaIva
                         End If
 
-                        If compra.Item("MarcaDifCambio") = 1 Then
+                        If compra IsNot Nothing AndAlso compra.Item("MarcaDifCambio") = 1 Then
                             varParidad = 0
                             varTotalUs = 0
                             varSaldoUs = 0

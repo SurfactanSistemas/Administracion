@@ -2814,6 +2814,7 @@ Public Class Recibos
     Private Sub txtObservaciones_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtObservaciones.KeyDown
         If e.KeyValue = Keys.Enter Then
             With gridFormasPago2
+                If .Rows.Count = 0 Then .Rows.Add()
                 .CurrentCell = .Rows(0).Cells(0)
                 .Focus()
             End With
