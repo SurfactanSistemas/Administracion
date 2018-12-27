@@ -30,6 +30,7 @@ Partial Class ContinuarSalirMsgBox
         '
         'btnContinuar
         '
+        Me.btnContinuar.DialogResult = System.Windows.Forms.DialogResult.OK
         Me.btnContinuar.Location = New System.Drawing.Point(36, 98)
         Me.btnContinuar.Name = "btnContinuar"
         Me.btnContinuar.Size = New System.Drawing.Size(183, 27)
