@@ -791,82 +791,74 @@ namespace Eval_Proveedores.Novedades
 
         private void CargarEva()
         {
-            
+
+            SacarPromedio1();
+            SacarPromedio2();
+            SacarPromedio3();
+
+            CalificarProve();
+            EVAR.Clave = TB_CodProveedor.Text + TB_Mes.Text + TB_Año.Text;
+            EVAR.Proveedor = TB_CodProveedor.Text;
+            EVAR.Mes = int.Parse(TB_Mes.Text);
+            EVAR.Año = int.Parse(TB_Año.Text);
+            EVAR.PromedioTot = double.Parse(TB_PromedioTot.Text);
                 
+            EVAR.Promedio11 = double.Parse(TB_Promedio1.Text);
+
+            EVAR.Promedio22 = double.Parse(TB_Promedio2.Text);
+            EVAR.Promedio33 = double.Parse(TB_Promedio3.Text);
+            EVAR.Observ = TB_ObservEva.Text;
+            EVAR.Periodo = TB_Año.Text + TB_Mes.Text;
+            EVAR.Tipo = Tipo;
+            EVAR.Param1 = LB_Param1.Text;
+            EVAR.Param2 = LB_Param2.Text;
+            EVAR.Param3 = LB_Param3.Text;
+            EVAR.Param4 = LB_Param41.Text + " " + LB_Param42.Text.Substring(0, 7);
+            EVAR.Criterio1 = LB_Crit11.Text + " " + LB_Crit12.Text.Substring(0, 13);
+            EVAR.Criterio2 = LB_Crit21.Text + " " + LB_Crit22.Text.Substring(0, 13);
+            EVAR.Criterio3 = LB_Crit31.Text + " " + LB_Crit32.Text;
+            EVAR.Criterio4 = LB_Crit41.Text + " " + LB_Crit42.Text.Substring(0, 12);
 
 
-                CalificarProve();
-                EVAR.Clave = TB_CodProveedor.Text + TB_Mes.Text + TB_Año.Text;
-                EVAR.Proveedor = TB_CodProveedor.Text;
-                EVAR.Mes = int.Parse(TB_Mes.Text);
-                EVAR.Año = int.Parse(TB_Año.Text);
-                EVAR.PromedioTot = double.Parse(TB_PromedioTot.Text);
+            EVAR.Calif11 = CB_Calif11.SelectedIndex;
+            EVAR.Calif12 = CB_Calif12.SelectedIndex;
+            EVAR.Calif13 = CB_Calif13.SelectedIndex;
+            EVAR.Calif14 = CB_Calif14.SelectedIndex;
 
-                
-                EVAR.Promedio11 = double.Parse(TB_Promedio1.Text);
+            EVAR.Calif21 = CB_Calif21.SelectedIndex;
+            EVAR.Calif22 = CB_Calif22.SelectedIndex;
+            EVAR.Calif23 = CB_Calif23.SelectedIndex;
+            EVAR.Calif24 = CB_Calif24.SelectedIndex;
 
-                EVAR.Promedio22 = double.Parse(TB_Promedio2.Text);
-                EVAR.Promedio33 = double.Parse(TB_Promedio3.Text);
-                EVAR.Observ = TB_ObservEva.Text;
-                EVAR.Periodo = TB_Año.Text + TB_Mes.Text;
-                EVAR.Tipo = Tipo;
-                EVAR.Param1 = LB_Param1.Text;
-                EVAR.Param2 = LB_Param2.Text;
-                EVAR.Param3 = LB_Param3.Text;
-                EVAR.Param4 = LB_Param41.Text + " " + LB_Param42.Text.Substring(0, 7);
-                EVAR.Criterio1 = LB_Crit11.Text + " " + LB_Crit12.Text.Substring(0, 13);
-                EVAR.Criterio2 = LB_Crit21.Text + " " + LB_Crit22.Text.Substring(0, 13);
-                EVAR.Criterio3 = LB_Crit31.Text + " " + LB_Crit32.Text;
-                EVAR.Criterio4 = LB_Crit41.Text + " " + LB_Crit42.Text.Substring(0, 12);
+            EVAR.Calif31 = CB_Calif31.SelectedIndex;
+            EVAR.Calif32 = CB_Calif32.SelectedIndex;
+            EVAR.Calif33 = CB_Calif33.SelectedIndex;
+            EVAR.Calif34 = CB_Calif34.SelectedIndex;
 
+            EVAR.Sector1 = CB_Sec1.SelectedIndex;
+            EVAR.Sector2 = CB_Sec2.SelectedIndex;
+            EVAR.Sector3 = CB_Sec3.SelectedIndex;
 
-                EVAR.Calif11 = CB_Calif11.SelectedIndex;
-                EVAR.Calif12 = CB_Calif12.SelectedIndex;
-                EVAR.Calif13 = CB_Calif13.SelectedIndex;
-                EVAR.Calif14 = CB_Calif14.SelectedIndex;
+            EVAR.DesSector1 = CB_Sec1.Text;
+            EVAR.DesSector2 = CB_Sec2.Text;
+            EVAR.DesSector3 = CB_Sec3.Text;
 
-                EVAR.Calif21 = CB_Calif21.SelectedIndex;
-                EVAR.Calif22 = CB_Calif22.SelectedIndex;
-                EVAR.Calif23 = CB_Calif23.SelectedIndex;
-                EVAR.Calif24 = CB_Calif24.SelectedIndex;
+            if (Modificar == false)
+            {
+                EVABOL.Insertar(EVAR);
 
-                EVAR.Calif31 = CB_Calif31.SelectedIndex;
-                EVAR.Calif32 = CB_Calif32.SelectedIndex;
-                EVAR.Calif33 = CB_Calif33.SelectedIndex;
-                EVAR.Calif34 = CB_Calif34.SelectedIndex;
+                MessageBox.Show("La evaluación se agregó con éxito", "Agregar Evaluación",
+                MessageBoxButtons.OK, MessageBoxIcon.None);
+            }
+            else
+            {
+                EVABOL.Modificar(EVAR);
+                MessageBox.Show("La evaluación se modifico con éxito", "Modificar Evaluación",
+                MessageBoxButtons.OK, MessageBoxIcon.None);
+            }
 
-                EVAR.Sector1 = CB_Sec1.SelectedIndex;
-                EVAR.Sector2 = CB_Sec2.SelectedIndex;
-                EVAR.Sector3 = CB_Sec3.SelectedIndex;
+            Close();
 
-                EVAR.DesSector1 = CB_Sec1.Text;
-                EVAR.DesSector2 = CB_Sec2.Text;
-                EVAR.DesSector3 = CB_Sec3.Text;
-
-                if (Modificar == false)
-                {
-                    EVABOL.Insertar(EVAR);
-
-                    MessageBox.Show("La evaluación se agregó con éxito", "Agregar Evaluación",
-                    MessageBoxButtons.OK, MessageBoxIcon.None);
-                }
-                else
-                {
-                    EVABOL.Modificar(EVAR);
-                    MessageBox.Show("La evaluación se modifico con éxito", "Modificar Evaluación",
-                    MessageBoxButtons.OK, MessageBoxIcon.None);
-                }
-
-                Close();
-
-            
-            
-            
-           
-            
-            
-
-            
         }
 
         
