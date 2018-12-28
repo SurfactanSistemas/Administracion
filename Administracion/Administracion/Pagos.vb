@@ -490,11 +490,53 @@ Public Class Pagos
                     .Cells(6).Value = _NormalizarNumero(pago.impoNeto)
                 End If
 
+                Dim WIVaComp As DataRow = _BuscarInfoIvaCompPorClave(pago.tipo, pago.letra, pago.punto, pago.numero)
+                .Cells("MarcaDifCambio").Value = "0"
+                .Cells("MarcaCHR").Value = "0"
+                If Not IsNothing(WIVaComp) Then
+                    .Cells("MarcaDifCambio").Value = WIVaComp.Item("MarcaDifCambio")
+                    .Cells("MarcaCHR").Value = WIVaComp.Item("Rechazado")
+                End If
+
             End With
             renglon += 1
         Next
         'sumarImportes()
     End Sub
+
+    Private Function _BuscarInfoIvaCompPorClave(ByVal tipo1 As String, ByVal letra1 As String, ByVal punto1 As String, ByVal numero1 As String) As DataRow
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT Paridad, Pago, ISNULL(MarcaDifCambio, 0) As MarcaDifCambio, ISNULL(Rechazado, 0) As Rechazado FROM IvaComp WHERE Tipo =  '" & tipo1 & "' And Letra = '" & letra1 & "' And Punto = '" & punto1 & "' And Numero = '" & numero1 & "'")
+        Dim dr As SqlDataReader
+        Dim tabla As New DataTable
+
+        Try
+
+            cn.ConnectionString = _ConectarA()
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            tabla.Load(dr)
+
+            If tabla.Rows.Count > 0 Then
+                Return tabla.Rows(0)
+            Else
+                Return Nothing
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la informacion de la factura en la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+    End Function
 
     Private Function _CalcularImpoNeto(ByVal tipo, ByVal letra, ByVal punto, ByVal numero, ByVal importe)
         Dim WImpoNeto = 0.0
@@ -821,7 +863,7 @@ Public Class Pagos
 
     Private Function _BuscarInfoIvaComp(ByVal xNroInterno As String) As DataRow
         Dim cn = New SqlConnection()
-        Dim cm = New SqlCommand("SELECT Paridad, Pago, ISNULL(MarcaDifCambio, 0) As MarcaDifCambio FROM IvaComp WHERE NroInterno =  '" & xNroInterno & "'")
+        Dim cm = New SqlCommand("SELECT Paridad, Pago, ISNULL(MarcaDifCambio, 0) As MarcaDifCambio, ISNULL(Rechazado, 0) As Rechazado FROM IvaComp WHERE NroInterno =  '" & xNroInterno & "'")
         Dim dr As SqlDataReader
         Dim tabla As New DataTable
 
@@ -1354,6 +1396,7 @@ Public Class Pagos
                                               & Trim(txtProveedor.Text) & "' and cp.Clave = '" & clave & "' and cp.Saldo <> 0 ORDER BY cp.OrdFecha DESC")
         Dim dr As SqlDataReader
         Dim WMarcaDifCambio As Integer = 0
+        Dim WMarcaCHR As Integer = 0
 
         'SQLConnector.conexionSql(cn, cm)
 
@@ -1400,9 +1443,15 @@ Public Class Pagos
                                 XParidad = IIf(IsDBNull(.Item("Paridad")), "0", formatonumerico(.Item("Paridad"), 4))
                                 XPago = IIf(IsDBNull(.Item("Pago")), "0", Val(.Item("Pago")))
                                 WMarcaDifCambio = WIvaComp.Item("MarcaDifCambio")
+                                WMarcaCHR = WIvaComp.Item("Rechazado")
                             End With
                         End If
 
+                    End If
+
+                    If WMarcaDifCambio = 1 Then
+                        ckNoCalcRetenciones.Checked = True
+                        ckNoCalcRetenciones_CheckedChanged(Nothing, Nothing)
                     End If
 
                     With gridPagos.Rows(XRow)
@@ -1424,7 +1473,8 @@ Public Class Pagos
                             Case Else
                                 .Cells(5).Value = ""
                         End Select
-
+                        .Cells("MarcaDifCambio").Value = WMarcaDifCambio
+                        .Cells("MarcaCHR").Value = WMarcaCHR
                     End With
 
                     If Val(XPago) = 2 Then
@@ -1449,6 +1499,8 @@ Public Class Pagos
                                     .Cells(3).Value = "99999999"
                                     .Cells(4).Value = _NormalizarNumero(diferencia)
                                     .Cells(5).Value = IIf(Val(diferencia) > 0, "N/D por Diferencia de Cambio ", "N/C por Diferencia de Cambio ") ' "N/D por Diferencia de Cambio "
+                                    .Cells("MarcaDifCambio").Value = WMarcaDifCambio
+                                    .Cells("MarcaCHR").Value = WMarcaCHR
 
                                 End With
 
@@ -1772,6 +1824,8 @@ Public Class Pagos
         txtFechaAux.Visible = False
 
         optCtaCte.Checked = True
+
+        ckNoCalcRetenciones.Checked = False
 
     End Sub
 
@@ -4695,6 +4749,14 @@ Public Class Pagos
                     Case Else
                         WImpresion(XCantidad, 2) = ""
                 End Select
+
+                If Val(.Cells("MarcaDifCambio").Value) = 1 Then
+                    WImpresion(XCantidad, 2) = "NDC"
+                End If
+
+                If Val(.Cells("MarcaCHR").Value) = 1 Then
+                    WImpresion(XCantidad, 2) = "CHR"
+                End If
 
                 WImpresion(XCantidad, 3) = Mid(.Cells(3).Value, 1, 8)
                 WImpresion(XCantidad, 4) = .Cells(5).Value

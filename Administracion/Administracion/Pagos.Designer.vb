@@ -25,10 +25,6 @@ Partial Class Pagos
         Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -36,6 +32,10 @@ Partial Class Pagos
         Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.optTransferencias = New System.Windows.Forms.RadioButton()
         Me.optAnticipos = New System.Windows.Forms.RadioButton()
@@ -43,14 +43,6 @@ Partial Class Pagos
         Me.optVarios = New System.Windows.Forms.RadioButton()
         Me.optCtaCte = New System.Windows.Forms.RadioButton()
         Me.gridPagos = New System.Windows.Forms.DataGridView()
-        Me.Tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Letra = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Punto = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Numero = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Importe = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ImpoNeto = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CuentaContable = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.gridFormaPagos = New System.Windows.Forms.DataGridView()
         Me.Tipo2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Numero2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -63,6 +55,7 @@ Partial Class Pagos
         Me.Cuenta = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.UltTipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.btnEliminarFila = New System.Windows.Forms.Button()
         Me.ckNoCalcRetenciones = New System.Windows.Forms.CheckBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.btnDifeCambio = New System.Windows.Forms.Button()
@@ -73,7 +66,6 @@ Partial Class Pagos
         Me.txtFechaParidad = New System.Windows.Forms.MaskedTextBox()
         Me.txtFecha = New System.Windows.Forms.MaskedTextBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.btnEliminarFila = New System.Windows.Forms.Button()
         Me.btnCarpetas = New Administracion.CustomButton()
         Me.btnImprimir = New Administracion.CustomButton()
         Me.btnCalcular = New Administracion.CustomButton()
@@ -121,6 +113,16 @@ Partial Class Pagos
         Me.CustomLabel10 = New Administracion.CustomLabel()
         Me.CustomLabel9 = New Administracion.CustomLabel()
         Me.txtIBCiudad = New Administracion.CustomTextBox()
+        Me.Tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Letra = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Punto = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Numero = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Importe = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ImpoNeto = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CuentaContable = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MarcaDifCambio = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MarcaCHR = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1.SuspendLayout()
         CType(Me.gridPagos, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gridFormaPagos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -215,7 +217,7 @@ Partial Class Pagos
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.gridPagos.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.gridPagos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-        Me.gridPagos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Tipo, Me.Letra, Me.Punto, Me.Numero, Me.Importe, Me.Descripcion, Me.ImpoNeto, Me.CuentaContable})
+        Me.gridPagos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Tipo, Me.Letra, Me.Punto, Me.Numero, Me.Importe, Me.Descripcion, Me.ImpoNeto, Me.CuentaContable, Me.MarcaDifCambio, Me.MarcaCHR})
         DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
         DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -230,74 +232,6 @@ Partial Class Pagos
         Me.gridPagos.RowHeadersWidth = 25
         Me.gridPagos.Size = New System.Drawing.Size(374, 143)
         Me.gridPagos.TabIndex = 56
-        '
-        'Tipo
-        '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Tipo.DefaultCellStyle = DataGridViewCellStyle2
-        Me.Tipo.HeaderText = "Tipo"
-        Me.Tipo.MaxInputLength = 2
-        Me.Tipo.Name = "Tipo"
-        Me.Tipo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Tipo.Width = 35
-        '
-        'Letra
-        '
-        Me.Letra.HeaderText = "Letra"
-        Me.Letra.MaxInputLength = 1
-        Me.Letra.Name = "Letra"
-        Me.Letra.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Letra.Width = 40
-        '
-        'Punto
-        '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Punto.DefaultCellStyle = DataGridViewCellStyle3
-        Me.Punto.HeaderText = "Punto"
-        Me.Punto.MaxInputLength = 6
-        Me.Punto.Name = "Punto"
-        Me.Punto.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Punto.Width = 45
-        '
-        'Numero
-        '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Numero.DefaultCellStyle = DataGridViewCellStyle4
-        Me.Numero.HeaderText = "Número"
-        Me.Numero.MaxInputLength = 8
-        Me.Numero.Name = "Numero"
-        Me.Numero.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Numero.Width = 70
-        '
-        'Importe
-        '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Importe.DefaultCellStyle = DataGridViewCellStyle5
-        Me.Importe.HeaderText = "Importe"
-        Me.Importe.Name = "Importe"
-        Me.Importe.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Importe.Width = 75
-        '
-        'Descripcion
-        '
-        Me.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.Descripcion.HeaderText = "Descripción"
-        Me.Descripcion.Name = "Descripcion"
-        Me.Descripcion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'ImpoNeto
-        '
-        Me.ImpoNeto.HeaderText = "ImpoNeto"
-        Me.ImpoNeto.Name = "ImpoNeto"
-        Me.ImpoNeto.ReadOnly = True
-        Me.ImpoNeto.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.ImpoNeto.Visible = False
-        '
-        'CuentaContable
-        '
-        Me.CuentaContable.HeaderText = "CuentaContable"
-        Me.CuentaContable.Name = "CuentaContable"
-        Me.CuentaContable.Visible = False
         '
         'gridFormaPagos
         '
@@ -469,6 +403,20 @@ Partial Class Pagos
         Me.Panel2.Size = New System.Drawing.Size(778, 447)
         Me.Panel2.TabIndex = 73
         '
+        'btnEliminarFila
+        '
+        Me.btnEliminarFila.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnEliminarFila.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnEliminarFila.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnEliminarFila.ForeColor = System.Drawing.SystemColors.Control
+        Me.btnEliminarFila.Location = New System.Drawing.Point(223, 412)
+        Me.btnEliminarFila.Name = "btnEliminarFila"
+        Me.btnEliminarFila.Size = New System.Drawing.Size(148, 23)
+        Me.btnEliminarFila.TabIndex = 128
+        Me.btnEliminarFila.Text = "Limpiar Fila"
+        Me.ToolTip1.SetToolTip(Me.btnEliminarFila, "Análisis Diferencia de Cambio en Orden de Pago")
+        Me.btnEliminarFila.UseVisualStyleBackColor = True
+        '
         'ckNoCalcRetenciones
         '
         Me.ckNoCalcRetenciones.AutoSize = True
@@ -575,20 +523,6 @@ Partial Class Pagos
         Me.txtFecha.Size = New System.Drawing.Size(100, 20)
         Me.txtFecha.TabIndex = 72
         Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'btnEliminarFila
-        '
-        Me.btnEliminarFila.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnEliminarFila.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnEliminarFila.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnEliminarFila.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnEliminarFila.Location = New System.Drawing.Point(223, 412)
-        Me.btnEliminarFila.Name = "btnEliminarFila"
-        Me.btnEliminarFila.Size = New System.Drawing.Size(148, 23)
-        Me.btnEliminarFila.TabIndex = 128
-        Me.btnEliminarFila.Text = "Limpiar Fila"
-        Me.ToolTip1.SetToolTip(Me.btnEliminarFila, "Análisis Diferencia de Cambio en Orden de Pago")
-        Me.btnEliminarFila.UseVisualStyleBackColor = True
         '
         'btnCarpetas
         '
@@ -1275,6 +1209,86 @@ Partial Class Pagos
         Me.txtIBCiudad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtIBCiudad.Validator = Administracion.ValidatorType.Float
         '
+        'Tipo
+        '
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Tipo.DefaultCellStyle = DataGridViewCellStyle2
+        Me.Tipo.HeaderText = "Tipo"
+        Me.Tipo.MaxInputLength = 2
+        Me.Tipo.Name = "Tipo"
+        Me.Tipo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Tipo.Width = 35
+        '
+        'Letra
+        '
+        Me.Letra.HeaderText = "Letra"
+        Me.Letra.MaxInputLength = 1
+        Me.Letra.Name = "Letra"
+        Me.Letra.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Letra.Width = 40
+        '
+        'Punto
+        '
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Punto.DefaultCellStyle = DataGridViewCellStyle3
+        Me.Punto.HeaderText = "Punto"
+        Me.Punto.MaxInputLength = 6
+        Me.Punto.Name = "Punto"
+        Me.Punto.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Punto.Width = 45
+        '
+        'Numero
+        '
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Numero.DefaultCellStyle = DataGridViewCellStyle4
+        Me.Numero.HeaderText = "Número"
+        Me.Numero.MaxInputLength = 8
+        Me.Numero.Name = "Numero"
+        Me.Numero.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Numero.Width = 70
+        '
+        'Importe
+        '
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Importe.DefaultCellStyle = DataGridViewCellStyle5
+        Me.Importe.HeaderText = "Importe"
+        Me.Importe.Name = "Importe"
+        Me.Importe.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Importe.Width = 75
+        '
+        'Descripcion
+        '
+        Me.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Descripcion.HeaderText = "Descripción"
+        Me.Descripcion.Name = "Descripcion"
+        Me.Descripcion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'ImpoNeto
+        '
+        Me.ImpoNeto.HeaderText = "ImpoNeto"
+        Me.ImpoNeto.Name = "ImpoNeto"
+        Me.ImpoNeto.ReadOnly = True
+        Me.ImpoNeto.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.ImpoNeto.Visible = False
+        '
+        'CuentaContable
+        '
+        Me.CuentaContable.HeaderText = "CuentaContable"
+        Me.CuentaContable.Name = "CuentaContable"
+        Me.CuentaContable.Visible = False
+        '
+        'MarcaDifCambio
+        '
+        Me.MarcaDifCambio.HeaderText = "MarcaDifCambio"
+        Me.MarcaDifCambio.Name = "MarcaDifCambio"
+        Me.MarcaDifCambio.Visible = False
+        '
+        'MarcaCHR
+        '
+        Me.MarcaCHR.HeaderText = "MarcaCHR"
+        Me.MarcaCHR.Name = "MarcaCHR"
+        Me.MarcaCHR.Visible = False
+        '
         'Pagos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1375,14 +1389,6 @@ Partial Class Pagos
     Friend WithEvents btnDifeCambio As System.Windows.Forms.Button
     Friend WithEvents WProceso As System.Windows.Forms.Label
     Friend WithEvents Button1 As System.Windows.Forms.Button
-    Friend WithEvents Tipo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Letra As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Punto As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Numero As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Importe As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ImpoNeto As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents CuentaContable As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Tipo2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Numero2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Fecha2 As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -1395,4 +1401,14 @@ Partial Class Pagos
     Friend WithEvents UltTipo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ckNoCalcRetenciones As System.Windows.Forms.CheckBox
     Friend WithEvents btnEliminarFila As System.Windows.Forms.Button
+    Friend WithEvents Tipo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Letra As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Punto As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Numero As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Importe As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ImpoNeto As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents CuentaContable As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents MarcaDifCambio As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents MarcaCHR As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

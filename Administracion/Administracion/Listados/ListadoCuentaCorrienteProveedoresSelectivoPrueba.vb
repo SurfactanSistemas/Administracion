@@ -354,7 +354,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
     Private Function _BuscarCompra(ByVal NroInterno As Integer) As DataRow
         Dim compra As New DataTable
         Dim cn = New SqlConnection()
-        Dim cm = "SELECT Letra, Neto, Iva21, Iva5, Iva27, Iva105, Ib, Exento, ISNULL(MarcaDifCambio, 0) As MarcaDifCambio FROM IvaComp WHERE NroInterno = '" & NroInterno & "'"
+        Dim cm = "SELECT Letra, Neto, Iva21, Iva5, Iva27, Iva105, Ib, Exento, ISNULL(MarcaDifCambio, 0) As MarcaDifCambio, ISNULL(Rechazado, 0) As Rechazado FROM IvaComp WHERE NroInterno = '" & NroInterno & "'"
         Dim dr As New SqlDataAdapter(cm, cn)
 
         Try
@@ -639,12 +639,14 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
                         '
                         'calculo de rtencion de Ingresos brutos Pcia
                         '
-                        varRetIbI = CaculoRetencionIngresosBrutos(varTipoIb, varPorceIb, varAcumulaNeto)
+                        If compra Is Nothing OrElse compra.Item("Rechazado") <> 1 Then
+                            varRetIbI = CaculoRetencionIngresosBrutos(varTipoIb, varPorceIb, varAcumulaNeto)
+                        End If
 
                         '
                         'calculo de retencion de Ingresos brutos CABA. SOLO PARA SURFACTAN.
                         '
-                        If varEmpresa = 1 Then
+                        If varEmpresa = 1 And (compra Is Nothing OrElse compra.Item("Rechazado") <> 1) Then
 
                             If Val(varPorceIbCaba) <> 0 And Val(varTipoIbCaba) <> 2 Then
                                 varRetIbII = CaculoRetencionIngresosBrutosCaba(varTipoIbCaba, varPorceIbCaba, varAcumulaNeto)
@@ -693,13 +695,14 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
 
                         End If
 
-                        varRetGan = CaculoRetencionGanancia(varTipoPrv, varAcumulaNeto, varAcuNeto, varAcuRetenido, varAcuAnticipo, varAcuBruto, varAcuIva)
-
+                        If compra Is Nothing OrElse compra.Item("Rechazado") <> 1 Then
+                            varRetGan = CaculoRetencionGanancia(varTipoPrv, varAcumulaNeto, varAcuNeto, varAcuRetenido, varAcuAnticipo, varAcuBruto, varAcuIva)
+                        End If
 
                         '
                         'calculo de rtencion de IVA
                         '
-                        If varLetra = "M" Then
+                        If varLetra = "M" And (compra Is Nothing OrElse compra.Item("Rechazado") <> 1) Then
                             If varNeto >= 1000 Then
                                 varAcumulaIva = varAcumulaIva + varIva
                             End If

@@ -358,6 +358,7 @@ Public Class Apertura
 
     End Sub
 
+
     Private Sub txtNumericWithComma_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtNumericWithComma.KeyPress
         If _EsNumero(e) Or e.KeyChar = ChrW(Keys.Back) Or e.KeyChar = ChrW(Keys.Left) Or e.KeyChar = ChrW(Keys.Right) Or e.KeyChar = CChar(","c) Or e.KeyChar = CChar("."c) Then
             e.Handled = False
