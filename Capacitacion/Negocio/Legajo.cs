@@ -341,7 +341,7 @@ namespace Negocio
             Conexion repo = new Conexion();
             string consulta = "select L.Curso as Tema, C.Descripcion as DesTema,  ISNULL(L.Tema, 0) as Curso, " +
                 "'' as DesCurso, C.Horas, 0.0 as Realizado  from legajo L " +
-            " inner join Curso C on C.Codigo = L.Curso  where L.codigo = " + p + " and L.EstaCurso <> 1 and L.EstaCurso <> 2 and L.EstaCurso<>6 ";
+            " inner join Curso C on C.Codigo = L.Curso  where L.codigo = " + p + " and L.EstaCurso <> 1 and L.EstaCurso <> 2 and L.EstaCurso<>6 and L.EstaCurso<>8 ";
 
             DataTable DT = repo.BuscarUno(consulta);
             return DT;

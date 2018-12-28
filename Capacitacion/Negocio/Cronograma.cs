@@ -103,7 +103,8 @@ namespace Negocio
         {
             Conexion repo = new Conexion();
 
-            string consulta = "select Cr.Curso,C.Descripcion, (count(*) + sum(CASE WHEN ISNULL(cr.Tema2, 0) <> 0 then 1 else 0 end)) as Personas, sum(ISNULL(t1.horas, 0) + ISNULL(t2.horas, 0)) as Horas," +
+            //string consulta = "select Cr.Curso,C.Descripcion, (count(*) + sum(CASE WHEN ISNULL(cr.Tema2, 0) <> 0 then 1 else 0 end)) as Personas, sum(ISNULL(t1.horas, 0) + ISNULL(t2.horas, 0)) as Horas," +
+            string consulta = "select Cr.Curso,C.Descripcion, count(Distinct cr.Legajo) as Personas, sum(ISNULL(t1.horas, 0) + ISNULL(t2.horas, 0)) as Horas," +
                               " sum(Cr.Realizado) as HorasRealizado, Resta = CASE WHEN (sum(Cr.horas) -sum(Cr.Realizado)) > 0 THEN (sum(Cr.horas) -sum(Cr.Realizado)) ELSE 0 END," +
                               " Cr2.Mes1,  Cr2.Mes2, Cr2.Mes3, Cr2.Mes4, Cr2.Mes5, Cr2.Mes6, Cr2.Mes7, Cr2.Mes8, " +
                               " Cr2.Mes9,Cr2.Mes10,Cr2.Mes11,Cr2.Mes12  from cronograma Cr LEFT OUTER join Curso C on C.Codigo = Cr.Curso " +
