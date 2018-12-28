@@ -124,7 +124,7 @@ namespace Eval_Proveedores.IngCamiones
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = conn;
-                    cmd.CommandText = "SELECT * FROM Camion WHERE Codigo = '" + codigo + "'";
+                    cmd.CommandText = "SELECT c.*, p.Nombre, ch.Descripcion as NomChofer FROM Camion c LEFT OUTER JOIN Chofer ch ON ch.Codigo = c.Chofer LEFT OUTER JOIN Proveedor p ON c.Proveedor = p.Proveedor WHERE c.Codigo = '" + codigo + "'";
 
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
@@ -135,8 +135,8 @@ namespace Eval_Proveedores.IngCamiones
                             this.Codigo = dr["Codigo"] == null ? "" : dr["Codigo"].ToString();
                             this.Desc = dr["Descripcion"] == null ? "" : dr["Descripcion"].ToString();
                             this.Patent = dr["Patente"] == null ? "" : dr["Patente"].ToString();
-                            this.NomProve = "";
-                            this.NomChof = "";
+                            this.NomProve = dr["Nombre"] == null ? "" : dr["Nombre"].ToString();
+                            this.NomChof = dr["NomChofer"] == null ? "" : dr["NomChofer"].ToString();
                             this.Estado = dr["Estado"] == null ? "0" : dr["Estado"].ToString();
                             this.CodEmp = dr["CodigoEmpresa"] == null ? "" : dr["CodigoEmpresa"].ToString();
                             this.Aplica = dr["AplicaV"] == null ? "" : dr["AplicaV"].ToString();

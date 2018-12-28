@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-
 using Logica_Negocio;
 using Negocio;
 
@@ -16,11 +12,9 @@ namespace Eval_Proveedores.Novedades
     {
         ProveedorBOL PBOL = new ProveedorBOL();
         DataTable dtProveedores = new DataTable();
-        DataTable dtAyudaProve = new DataTable();
         DataTable dtChoferes = new DataTable();
         DataTable dtChoferes2 = new DataTable();
         DataTable dtChoferes3 = new DataTable();
-        DataTable dtAyudaChof = new DataTable();
         DataTable dtCamion = new DataTable();
         DataTable dtCamion2 = new DataTable();
         DataTable dtCamion3 = new DataTable();
@@ -29,25 +23,22 @@ namespace Eval_Proveedores.Novedades
         EvaluaTransp EVATRA = new EvaluaTransp();
         EvaTransBOL EVATRABOL = new EvaTransBOL();
         Proveedor P = new Proveedor();
-        Chofer C = new Chofer();
         Camion CA = new Camion();
-        
-        int NChof = 0;
-        int NDom = 0;
-        double PromedioTot = 0;
-        double Promedio11 = 0;
-        double Promedio22 = 0;
-        double Promedio33 = 0;
-        double Promedio1 = 0;
-        double Promedio2 = 0;
-        double Promedio3 = 0;
-        double Promedio4 = 0;
-        double Promedio5 = 0;
+
+        int NDom;
+        double PromedioTot;
+        double Promedio11;
+        double Promedio22;
+        double Promedio33;
+        double Promedio1;
+        double Promedio2;
+        double Promedio3;
+        double Promedio4;
+        double Promedio5;
         Dictionary<int, string> Lista1 = new Dictionary<int, string>();
-        bool Modificar = false;
+        bool Modificar;
         bool Cargado;
         bool CargadoD;
-        bool CargadoP;
         int IdCamion1;
         int IdCamion2;
         int IdCamion3;
@@ -94,7 +85,7 @@ namespace Eval_Proveedores.Novedades
         {
             CargarCombos();
             OcultarTextCalif();
-            if (Modificar == true)
+            if (Modificar)
             {
                 LB_TitEva.Text = "MODIFICAR EVALUACION DE TRANSPORTISTA";
                 TB_CodProveedor.Text = EvaTrans.Proveedor;
@@ -105,7 +96,7 @@ namespace Eval_Proveedores.Novedades
                 if (Estado == "Inhabilitado") TB_Estado.Visible = true;
                 if (EvaTrans.Mes < 10)
                 {
-                    TB_Mes.Text = "0" + EvaTrans.Mes.ToString();
+                    TB_Mes.Text = "0" + EvaTrans.Mes;
                 }
                 else
                 {
@@ -113,17 +104,17 @@ namespace Eval_Proveedores.Novedades
                 }
                
                 TB_Año.Text = EvaTrans.Año.ToString();
-                TB_Evaluador.Text = EvaTrans.Evaluador.ToString();
-                TB_Fecha.Text = EvaTrans.Fecha.ToString();
-                TB_Venc.Text = EvaTrans.FechaVenc.ToString();
+                TB_Evaluador.Text = EvaTrans.Evaluador;
+                TB_Fecha.Text = EvaTrans.Fecha;
+                TB_Venc.Text = EvaTrans.FechaVenc;
                 if ((EvaTrans.Chofer1 != 0) && (EvaTrans.Camion1 != 0))
                 {
                     TB_CodChof1.Text = EvaTrans.Chofer1.ToString();
-                    TB_DescChof1.Text = EvaTrans.DescChofer1.ToString();
+                    TB_DescChof1.Text = EvaTrans.DescChofer1;
                     int Chapa1 = int.Parse(EvaTrans.Camion1.ToString());
                     CA = CABOL.Find(Chapa1);
                     TB_Dom1.Text = CA.Patente;
-                    TB_DescDom1.Text = EvaTrans.Dominio1.ToString();
+                    TB_DescDom1.Text = EvaTrans.Dominio1;
                     CB_Punt11.Text = EvaTrans.Puntaje11.ToString();
                     CB_Punt12.Text = EvaTrans.Puntaje12.ToString();
                     CB_Punt13.Text = EvaTrans.Puntaje13.ToString();
@@ -142,9 +133,9 @@ namespace Eval_Proveedores.Novedades
                 if ((EvaTrans.Chofer2 != 0) && (EvaTrans.Camion2 != 0))
                 {
                     TB_CodChof2.Text = EvaTrans.Chofer2.ToString();
-                    TB_DescChof2.Text = EvaTrans.DescChofer2.ToString();
+                    TB_DescChof2.Text = EvaTrans.DescChofer2;
                     TB_Dom2.Text = EvaTrans.Camion2.ToString();
-                    TB_DescDom2.Text = EvaTrans.Dominio2.ToString();
+                    TB_DescDom2.Text = EvaTrans.Dominio2;
                     CB_Punt21.Text = EvaTrans.Puntaje21.ToString();
                     CB_Punt22.Text = EvaTrans.Puntaje22.ToString();
                     CB_Punt23.Text = EvaTrans.Puntaje23.ToString();
@@ -163,9 +154,9 @@ namespace Eval_Proveedores.Novedades
                 if ((EvaTrans.Chofer2 != 0) && (EvaTrans.Camion2 != 0))
                 {
                     TB_CodChof3.Text = EvaTrans.Chofer3.ToString();
-                    TB_DescChof3.Text = EvaTrans.DescChofer3.ToString();
+                    TB_DescChof3.Text = EvaTrans.DescChofer3;
                     TB_Dom3.Text = EvaTrans.Camion3.ToString();
-                    TB_DescDom3.Text = EvaTrans.Dominio3.ToString();
+                    TB_DescDom3.Text = EvaTrans.Dominio3;
                     CB_Punt31.Text = EvaTrans.Puntaje31.ToString();
                     CB_Punt32.Text = EvaTrans.Puntaje32.ToString();
                     CB_Punt33.Text = EvaTrans.Puntaje33.ToString();
@@ -181,7 +172,7 @@ namespace Eval_Proveedores.Novedades
                 }
                 
                 TB_PromedioTot.Text = EvaTrans.PromedioTot.ToString();
-                TB_ObservEva.Text = EvaTrans.Observ.ToString();
+                TB_ObservEva.Text = EvaTrans.Observ;
 
                 Modificar = true;
 
@@ -191,7 +182,6 @@ namespace Eval_Proveedores.Novedades
             }
             else
             {
-                CargadoP = false;
                 CargarProveedores();
                 LB_TitEva.Text = "INGRESO EVALUACION DE TRANSPORTISTA";
                 OcultarTextCalif();
@@ -208,8 +198,7 @@ namespace Eval_Proveedores.Novedades
             //dtProveedores = PBOL.ListaTipo(15);
             dtProveedores = PBOL.ListaSinTipo();
 
-            DataRow fila;
-            fila = dtProveedores.NewRow();
+            var fila = dtProveedores.NewRow();
             dtProveedores.Rows.InsertAt(fila, 0);
 
 
@@ -384,54 +373,21 @@ namespace Eval_Proveedores.Novedades
                 }
             }
             EVATRA.Camion1 = IdCamion1;
-            if (TB_Dom2.Text == "")
-            {
-                EVATRA.Camion2 = 0;
-            }
-            else
-            {
-                EVATRA.Camion2 = IdCamion2;
-            }
+            EVATRA.Camion2 = TB_Dom2.Text == "" ? 0 : IdCamion2;
 
-            if (TB_Dom3.Text == "")
-            {
-                EVATRA.Camion3 = 0;
-            }
-            else
-            {
-                EVATRA.Camion3 = IdCamion3;
-            }
+            EVATRA.Camion3 = TB_Dom3.Text == "" ? 0 : IdCamion3;
 
-            if (TB_CodChof1.Text == "")
-            {
-                EVATRA.Chofer1 = 0;
-            }
-            else
-            {
-                EVATRA.Chofer1 = int.Parse(TB_CodChof1.Text);
-            }
+            EVATRA.Chofer1 = TB_CodChof1.Text == "" ? 0 : int.Parse(TB_CodChof1.Text);
 
-            if (TB_CodChof2.Text == "")
-            {
-                EVATRA.Chofer2 = 0;
-            }
-            else
-            {
-                EVATRA.Chofer2 = int.Parse(TB_CodChof2.Text);
-            }
+            EVATRA.Chofer2 = TB_CodChof2.Text == "" ? 0 : int.Parse(TB_CodChof2.Text);
 
 
-            if (TB_CodChof3.Text == "")
-            {
-                EVATRA.Chofer3 = 0;
-            }
-            else
-            {
-                EVATRA.Chofer3 = int.Parse(TB_CodChof3.Text);
-            }
+            EVATRA.Chofer3 = TB_CodChof3.Text == "" ? 0 : int.Parse(TB_CodChof3.Text);
 
             if ((TB_Dom1.Text != "") && (TB_CodChof1.Text != ""))
             {
+                SacarPromedio11();
+
                 EVATRA.Puntaje11 = double.Parse(CB_Punt11.Text);
                 EVATRA.Puntaje12 = double.Parse(CB_Punt12.Text);
                 EVATRA.Puntaje13 = double.Parse(CB_Punt13.Text);
@@ -451,7 +407,7 @@ namespace Eval_Proveedores.Novedades
 
             if ((TB_Dom2.Text != "") && (TB_CodChof2.Text != ""))
             {
-
+                SacarPromedio22();
                 EVATRA.Puntaje21 = double.Parse(CB_Punt21.Text);
                 EVATRA.Puntaje22 = double.Parse(CB_Punt22.Text);
                 EVATRA.Puntaje23 = double.Parse(CB_Punt23.Text);
@@ -471,6 +427,7 @@ namespace Eval_Proveedores.Novedades
 
             if ((TB_Dom3.Text != "") && (TB_CodChof3.Text != ""))
             {
+                SacarPromedio33();
                 EVATRA.Puntaje31 = double.Parse(CB_Punt31.Text);
                 EVATRA.Puntaje32 = double.Parse(CB_Punt32.Text);
                 EVATRA.Puntaje33 = double.Parse(CB_Punt33.Text);
@@ -512,7 +469,7 @@ namespace Eval_Proveedores.Novedades
 
             EVATRA.Fecha = TB_Fecha.Text;
             EVATRA.FechaVenc = TB_Venc.Text;
-            EVATRA.Periodo = TB_Año.Text + TB_Mes.Text; ;
+            EVATRA.Periodo = TB_Año.Text + TB_Mes.Text;
             EVATRA.Tipo = Tipo;
 
             if (Modificar == false)
@@ -535,50 +492,6 @@ namespace Eval_Proveedores.Novedades
 
         }
 
-
-
-        #region Ayuda Proveedor
-
-        private void TB_CodProve_TextChanged(object sender, EventArgs e)
-        {
-           
-        }
-
-        private void TB_CodProve_MouseClick(object sender, MouseEventArgs e)
-        {
-           
-        }
-
-        private void RBDescripcion_CheckedChanged(object sender, EventArgs e)
-        {
-            dtProveedores.Clear();
-            dtProveedores = PBOL.Lista();
-            //dtAyudaProve = dtProveedores.Clone();
-
-            //RECORRO LA TABLA Y GUARDO SOLO LOS PROVEEDORES QUE SEAN DEL TIPO ELEGIDO
-            /*
-            LBProveedor.DataSource = dtProveedores;
-            LBProveedor.DisplayMember = "Nombre";*/
-        }
-
-        private void RBCodigo_CheckedChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void TBFiltro_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void LBProveedor_MouseCaptureChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-
-        #endregion
-
         #region Ayuda Chofer
 
        
@@ -600,341 +513,11 @@ namespace Eval_Proveedores.Novedades
             
         }
 
-        private void RB_NombreChof_CheckedChanged_1(object sender, EventArgs e)
-        {
-            
-            
-        }
-
-        private void RB_CodChofer_CheckedChanged_1(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void TB_FiltroChof_TextChanged_1(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void LB_Chofer_MouseCaptureChanged_1(object sender, EventArgs e)
-        {
-           
-           
-                
-            
-        }
-
-        
-
-        
-
-
-        private void LlamarAyuda()
-        {
-            
-        }
-
-        
-
-        
-
-               
-
-        private void LlenarCher1()
-        {
-            
-        }
-
-
-        private void LlenarCher2()
-        {
-            
-            
-        }
-
-
-
-        private void LlenarCher3()
-        {
-            
-            
-        }
-
-
-        #endregion
-
-        #region Ayuda Dominio
-
-        private void TB_Dom1_MouseClick(object sender, MouseEventArgs e)
-        {
-            LlamarAyudaDom();
-            NDom = 1;
-        }
-
-       
-
-        private void TB_Dom2_MouseClick(object sender, MouseEventArgs e)
-        {
-            try
-            {
-                if (TB_Dom1.Text == "") throw new Exception("Primero se debe ingresar el Dominio 1");
-
-                LlamarAyudaDom();
-                NDom = 2;
-            }
-            catch (Exception err)
-            {
-
-                MessageBox.Show(err.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void TB_Dom3_MouseClick(object sender, MouseEventArgs e)
-        {
-            try
-            {
-                if (TB_Dom1.Text == "") throw new Exception("Primero se debe ingresar el Dominio 1");
-                if (TB_Dom2.Text == "") throw new Exception("Primero se debe ingresar el Dominio 2");
-
-                LlamarAyudaDom();
-                NDom = 3;
-
-            }
-            catch (Exception err)
-            {
-
-                MessageBox.Show(err.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-
-        private void LlamarAyudaDom()
-        {
-            
-        }
-
-        private void RB_DescDominio_CheckedChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        
-
-        private void RB_Patente_CheckedChanged(object sender, EventArgs e)
-        {
-            LlenarListaDominio();
-
-            
-        }
-
-        
-
-        private void TB_FiltroDominio_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-
-        private void LB_Dominio_MouseCaptureChanged(object sender, EventArgs e)
-        {
-            if (NDom == 1)
-            {
-                LlenarDom1();
-                if (TB_CodChof1.Text != "") HabilitarCalif1();
-            }
-
-            if (NDom == 2)
-            {
-
-                LlenarDom2();
-                if (TB_CodChof2.Text != "") HabilitarCalif2();
-            }
-
-            if (NDom == 3)
-            {
-
-                LlenarDom3();
-                if (TB_CodChof3.Text != "") HabilitarCalif3();
-            }
-
-            
-           
-            //GB_Dom.Visible = false;
-            
-        }
-
-        private void LlenarDom1()
-        {
-            
-        }
-
-        private void LlenarDom2()
-        {/*
-            try
-            {
-                string elegido = LB_Dominio.Text;
-
-                
-
-                if (RB_Patente.Checked)
-                {
-                    if (elegido == TB_Dom1.Text) throw new Exception("Ya se ha elegido ese Camión");
-                    foreach (DataRow Des in dtCamion.Rows)
-                    {
-                        if (Des[2].ToString() == elegido)
-                        {
-                            TB_DescDom2.Text = Des[1].ToString();
-                            TB_Dom2.Text = elegido;
-                        }
-                    }
-
-                }
-                else
-                {
-                    if (elegido == TB_DescDom1.Text) throw new Exception("Ya se ha elegido ese Camión");
-                    foreach (DataRow Des in dtCamion.Rows)
-                    {
-                        if (Des[1].ToString() == elegido)
-                        {
-                            TB_Dom2.Text = Des[2].ToString();
-                            TB_DescDom2.Text = elegido;
-                        }
-                    }
-                }
-            }
-            catch (Exception err)
-            {
-
-                MessageBox.Show(err.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }*/
-            
-        }
-
-        private void LlenarDom3()
-        {/*
-            try
-            {
-                string elegido = LB_Dominio.Text;
-
-                if (RB_Patente.Checked)
-                {
-                    if ((elegido == TB_Dom1.Text) || (elegido == TB_Dom2.Text)) throw new Exception("Ya se ha elegido ese Camión");
-                    foreach (DataRow Des in dtCamion.Rows)
-                    {
-                        if (Des[2].ToString() == elegido)
-                        {
-                            TB_DescDom3.Text = Des[1].ToString();
-                            TB_Dom3.Text = elegido;
-                        }
-                    }
-
-                }
-                else
-                {
-                    if ((elegido == TB_DescDom1.Text) || (elegido == TB_DescDom2.Text)) throw new Exception("Ya se ha elegido ese Camión");
-                    foreach (DataRow Des in dtCamion.Rows)
-                    {
-                        if (Des[1].ToString() == elegido)
-                        {
-                            TB_Dom3.Text = Des[2].ToString();
-                            TB_DescDom3.Text = elegido;
-                        }
-                    }
-                }
-            }
-            catch (Exception err)
-            {
-                
-                MessageBox.Show(err.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            */
-        }
-
         #endregion
 
         #region Ocultar Paneles
 
-        private void TB_NombProve_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-
-        }
-
         private void TB_Evaluador_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-
-        private void TB_Punt11_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-
-        private void TB_Punt21_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-
-        private void TB_Punt31_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-
-        private void TB_Punt12_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-
-        private void TB_Punt22_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-
-        private void TB_Punt32_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-
-        private void TB_Punt13_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-
-        private void TB_Punt23_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-
-        private void TB_Punt33_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-
-        private void TB_Punt14_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-
-        private void TB_Punt24_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-
-        private void TB_Punt34_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-
-        private void TB_Punt15_MouseClick(object sender, MouseEventArgs e)
-        {
-        }
-
-        private void TB_Punt25_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-
-        private void TB_Punt35_MouseClick(object sender, MouseEventArgs e)
         {
             
         }
@@ -989,27 +572,6 @@ namespace Eval_Proveedores.Novedades
             
         }
 
-        private void TB_Mes_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-
-        private void TB_Año_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-
-        private void maskedTextBox1_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-
-        private void maskedTextBox2_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-
-
         #endregion
 
         #region Ocultar TexBox de Calificación
@@ -1062,9 +624,6 @@ namespace Eval_Proveedores.Novedades
 
             TB_Promedio11.Visible = true;
         }
-
-
-        
 
         private void HabilitarCalif2()
         {
@@ -1162,7 +721,7 @@ namespace Eval_Proveedores.Novedades
         private void SacarPromedio11()
         {
 
-            Promedio11 = ((double.Parse(CB_Punt11.Text)) * 0.1) + ((double.Parse(CB_Punt12.Text)) * 0.2) + ((double.Parse(CB_Punt13.Text)) * 0.2) + ((double.Parse(CB_Punt14.Text)) * 0.2) + ((double.Parse(CB_Punt15.Text)) * 0.2);
+            Promedio11 = ((double.Parse(CB_Punt11.Text)) * 0.1) + ((double.Parse(CB_Punt12.Text)) * 0.2) + ((double.Parse(CB_Punt13.Text)) * 0.2) + ((double.Parse(CB_Punt14.Text)) * 0.2) + ((double.Parse(CB_Punt15.Text)) * 0.3);
         }
 
         #region Sacar Promedio 2
@@ -1228,7 +787,7 @@ namespace Eval_Proveedores.Novedades
 
         private void SacarPromedio22()
         {
-            Promedio22 = ((double.Parse(CB_Punt21.Text)) * 0.1) + ((double.Parse(CB_Punt22.Text)) * 0.2) + ((double.Parse(CB_Punt23.Text)) * 0.2) + ((double.Parse(CB_Punt24.Text)) * 0.2) + ((double.Parse(CB_Punt25.Text)) * 0.2);
+            Promedio22 = ((double.Parse(CB_Punt21.Text)) * 0.1) + ((double.Parse(CB_Punt22.Text)) * 0.2) + ((double.Parse(CB_Punt23.Text)) * 0.2) + ((double.Parse(CB_Punt24.Text)) * 0.2) + ((double.Parse(CB_Punt25.Text)) * 0.3);
         }
 
 
@@ -1295,7 +854,7 @@ namespace Eval_Proveedores.Novedades
 
         private void SacarPromedio33()
         {
-            Promedio33 = ((double.Parse(CB_Punt31.Text)) * 0.1) + ((double.Parse(CB_Punt32.Text)) * 0.2) + ((double.Parse(CB_Punt33.Text)) * 0.2) + ((double.Parse(CB_Punt34.Text)) * 0.2) + ((double.Parse(CB_Punt35.Text)) * 0.2);
+            Promedio33 = ((double.Parse(CB_Punt31.Text)) * 0.1) + ((double.Parse(CB_Punt32.Text)) * 0.2) + ((double.Parse(CB_Punt33.Text)) * 0.2) + ((double.Parse(CB_Punt34.Text)) * 0.2) + ((double.Parse(CB_Punt35.Text)) * 0.3);
         }
 
 
@@ -1382,9 +941,7 @@ namespace Eval_Proveedores.Novedades
                   
                 }
 
-                Promedio1 = Suma / Cantidad;
-            
-            
+                Promedio1 = (double) Suma / Cantidad;
             
         }
 
@@ -1645,9 +1202,6 @@ namespace Eval_Proveedores.Novedades
 
                 }
             }
-
-            CargadoP = true;
-
             
         }
 
@@ -2073,7 +1627,7 @@ namespace Eval_Proveedores.Novedades
                 }
             }
             
-            if ((TB_Dom1.Text != "") && (CargadoD == true))
+            if ((TB_Dom1.Text != "") && CargadoD)
             {
                 HabilitarCalif1();
             }
@@ -2090,7 +1644,7 @@ namespace Eval_Proveedores.Novedades
             {
                 foreach (DataRow Des in dtCamion2.Rows)
                 {
-                    if (CargadoD != false)
+                    if (CargadoD)
                     {
                         if (Des[2].ToString() == TB_Dom2.Text)
                         {
@@ -2106,7 +1660,7 @@ namespace Eval_Proveedores.Novedades
                 }
             }
             
-            if ((TB_Dom2.Text != "") && (CargadoD == true))
+            if ((TB_Dom2.Text != "") && CargadoD)
             {
                 HabilitarCalif2();
             }
@@ -2121,7 +1675,7 @@ namespace Eval_Proveedores.Novedades
             {
                 foreach (DataRow Des in dtCamion3.Rows)
                 {
-                    if (CargadoD != false)
+                    if (CargadoD)
                     {
                         if (Des[2].ToString() == TB_Dom3.Text)
                         {
@@ -2138,7 +1692,7 @@ namespace Eval_Proveedores.Novedades
             }
             if (TB_Dom3.Text != "System.Data.DataRowView")
             {
-                if ((TB_Dom3.Text != "") && (CargadoD == true))
+                if ((TB_Dom3.Text != "") && CargadoD)
                 {
                     HabilitarCalif3();
                 }
@@ -2154,7 +1708,7 @@ namespace Eval_Proveedores.Novedades
             {
                 foreach (DataRow Des in dtCamion.Rows)
                 {
-                    if (CargadoD != false)
+                    if (CargadoD)
                     {
                         if (Des[2].ToString() == TB_Dom1.Text)
                         {
@@ -2180,7 +1734,7 @@ namespace Eval_Proveedores.Novedades
             {
                 foreach (DataRow Des in dtChoferes2.Rows)
                 {
-                    if (Cargado != false)
+                    if (Cargado)
                     {
                         if (Des[1].ToString() == TB_DescChof2.Text)
                         {
@@ -2206,7 +1760,7 @@ namespace Eval_Proveedores.Novedades
             {
                 foreach (DataRow Des in dtChoferes3.Rows)
                 {
-                    if (Cargado != false)
+                    if (Cargado)
                     {
                         if (Des[1].ToString() == TB_DescChof3.Text)
                         {
