@@ -111,7 +111,7 @@ namespace Negocio
                               " LEFT OUTER JOIN CronogramaII Cr2 ON Cr.Ano = Cr2.Ano AND Cr.Curso = Cr2.Curso " +
                               " LEFT OUTER JOIN Tema t1 ON t1.Curso = cr.Curso And t1.Tema = cr.Tema" +
                               " LEFT OUTER JOIN Tema t2 ON t2.Curso = cr.Curso And t2.Tema = cr.Tema2" +
-                              " where Cr.ano = '" + p + "' " +
+                              " where Cr.ano = '" + p + "' and Cr.Legajo > 0 " +
                               " group by Cr.curso, C.descripcion, Cr2.Mes1, Cr2.Mes2, Cr2.Mes3, Cr2.Mes4, Cr2.Mes5, Cr2.Mes6, Cr2.Mes7, Cr2.Mes8, " +
                               " Cr2.Mes9, Cr2.Mes10, Cr2.Mes11, Cr2.Mes12  order by Cr.curso asc";
 

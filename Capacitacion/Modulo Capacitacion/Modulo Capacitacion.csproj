@@ -34,7 +34,7 @@
     <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -75,6 +75,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Auxiliares\AyudaLegajosActivos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Auxiliares\AyudaLegajosActivos.Designer.cs">
+      <DependentUpon>AyudaLegajosActivos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Auxiliares\CursosDisponibles.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,6 +94,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Inicio.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\IAyudaLegajos.cs" />
     <Compile Include="Listados\AvisoCronograma\AvisoCronograma.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -731,6 +738,9 @@
       <DependentUpon>wlistacursoplani.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <EmbeddedResource Include="Auxiliares\AyudaLegajosActivos.resx">
+      <DependentUpon>AyudaLegajosActivos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Auxiliares\CursosDisponibles.resx">
       <DependentUpon>CursosDisponibles.cs</DependentUpon>
     </EmbeddedResource>

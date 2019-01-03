@@ -4,11 +4,12 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using Modulo_Capacitacion.Interfaces;
 using Negocio;
 
 namespace Modulo_Capacitacion.Novedades
 {
-    public partial class IngrePlanificacionAnual : Form
+    public partial class IngrePlanificacionAnual : Form, IAyudaLegajos
     {
         Tema T = new Tema();
         Curso C = new Curso();
@@ -119,17 +120,22 @@ namespace Modulo_Capacitacion.Novedades
                 
             }
 
-            CargarDescLegajos();
-            CargarCodigosLegajos();
+            //CargarDescLegajos();
+            //CargarCodigosLegajos();
             
+        }
+
+        private void SoloNumeros(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsNumber(e.KeyChar) && e.KeyChar != Convert.ToChar(Keys.Back);
         }
 
         private void CargarDescLegajos()
         {
-            TB_DesLegajo.DataSource = dtLegajosSinFechaEgreso;
-            TB_DesLegajo.DisplayMember = "Descripcion";
-            TB_DesLegajo.ValueMember = "Codigo";
-            TB_DesLegajo.Text = "";
+            TB_DesLegajob.DataSource = dtLegajosSinFechaEgreso;
+            TB_DesLegajob.DisplayMember = "Descripcion";
+            TB_DesLegajob.ValueMember = "Codigo";
+            TB_DesLegajob.Text = "";
 
             AutoCompleteStringCollection stringCodArti = new AutoCompleteStringCollection();
             foreach (DataRow row in dtLegajosSinFechaEgreso.Rows)
@@ -138,29 +144,29 @@ namespace Modulo_Capacitacion.Novedades
 
             }
 
-            TB_DesLegajo.AutoCompleteCustomSource = stringCodArti;
-            TB_DesLegajo.AutoCompleteMode = AutoCompleteMode.Suggest;
-            TB_DesLegajo.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            TB_DesLegajob.AutoCompleteCustomSource = stringCodArti;
+            TB_DesLegajob.AutoCompleteMode = AutoCompleteMode.Suggest;
+            TB_DesLegajob.AutoCompleteSource = AutoCompleteSource.CustomSource;
         }
 
-        private void CargarCodigosLegajos()
-        {
-            TB_CodLegajo.DataSource = dtLegajosSinFechaEgreso;
-            TB_CodLegajo.DisplayMember = "Codigo";
-            TB_CodLegajo.ValueMember = "Codigo";
-            TB_CodLegajo.Text = "";
+        //private void CargarCodigosLegajos()
+        //{
+        //    TB_CodLegajo.DataSource = dtLegajosSinFechaEgreso;
+        //    TB_CodLegajo.DisplayMember = "Codigo";
+        //    TB_CodLegajo.ValueMember = "Codigo";
+        //    TB_CodLegajo.Text = "";
 
-            AutoCompleteStringCollection stringCodArti = new AutoCompleteStringCollection();
-            foreach (DataRow row in dtLegajosSinFechaEgreso.Rows)
-            {
-                stringCodArti.Add(Convert.ToString(row["Codigo"]));
+        //    AutoCompleteStringCollection stringCodArti = new AutoCompleteStringCollection();
+        //    foreach (DataRow row in dtLegajosSinFechaEgreso.Rows)
+        //    {
+        //        stringCodArti.Add(Convert.ToString(row["Codigo"]));
 
-            }
+        //    }
 
-            TB_CodLegajo.AutoCompleteCustomSource = stringCodArti;
-            TB_CodLegajo.AutoCompleteMode = AutoCompleteMode.Suggest;
-            TB_CodLegajo.AutoCompleteSource = AutoCompleteSource.CustomSource;
-        }
+        //    TB_CodLegajo.AutoCompleteCustomSource = stringCodArti;
+        //    TB_CodLegajo.AutoCompleteMode = AutoCompleteMode.Suggest;
+        //    TB_CodLegajo.AutoCompleteSource = AutoCompleteSource.CustomSource;
+        //}
 
         private void BT_Salir_Click(object sender, EventArgs e)
         {
@@ -170,7 +176,7 @@ namespace Modulo_Capacitacion.Novedades
         private void BT_LimpiarPant_Click(object sender, EventArgs e)
         {
             TB_CodLegajo.Text = "";
-            TB_DesLegajo.Text = "";
+            TB_DesLegajob.Text = "";
             TB_Año.Text = "";
             LimpiarCamposTema();
             //DGV_Cronograma.Rows.Clear();
@@ -181,12 +187,13 @@ namespace Modulo_Capacitacion.Novedades
 
         private void BT_Guardar_Click(object sender, EventArgs e)
         {
-            ValidarDatosIngresados();
-
+            
             SqlTransaction trans = null;
 
             try
             {
+                ValidarDatosIngresados();
+
                 using (SqlConnection conn = new SqlConnection())
                 {
                     conn.ConnectionString = ConfigurationManager.ConnectionStrings["Surfactan"].ConnectionString;
@@ -239,7 +246,7 @@ namespace Modulo_Capacitacion.Novedades
 
                                     consulta = "insert into cronograma (Clave,Legajo,Ano,Renglon,Curso,Horas,Realizado, DesLegajo, Tema,DesTema, Tema2, DesTema2) " +
                                     " values ('"+ clave1 + clave2 + clave3 +"', "+ TB_CodLegajo.Text +", "+ TB_Año.Text +"," + WRenglon + ", " + WCurso + ", "
-                                    + WHoras + ", " + WRealizado + ", '" + TB_DesLegajo.Text.Trim() + "', " + WTema + ", '', 0, '')";
+                                    + WHoras + ", " + WRealizado + ", '" + TB_DesLegajob.Text.Trim() + "', " + WTema + ", '', 0, '')";
                                 }
                             }
 
@@ -257,14 +264,18 @@ namespace Modulo_Capacitacion.Novedades
             catch (Exception ex)
             {
                 if (trans != null && trans.Connection != null) trans.Rollback();
-                throw new Exception("Error al procesar la consulta a la Base de Datos. Motivo: " + ex.Message);
+                MessageBox.Show("Error al procesar la consulta a la Base de Datos. Motivo: " + ex.Message);
             }
         }
 
         private void ValidarDatosIngresados()
         {
             if (TB_CodLegajo.Text == "") throw new Exception("Debe estar cargado el campo Legajo");
-            if (TB_DesLegajo.Text == "") throw new Exception("Debe estar cargado el campo descripcion");
+
+            Legajo leg = (new Legajo()).BuscarUno(TB_CodLegajo.Text);
+
+            if (leg.Codigo == 0) throw new Exception("Debe cargar un legajo válido.");
+
             if (TB_Año.Text == "") throw new Exception("Debe estar cargado el campo año");
             if (DGV_Crono.Rows.Count == 0) throw new Exception("No hay datos en la grilla");
         }
@@ -464,7 +475,29 @@ namespace Modulo_Capacitacion.Novedades
 
         private void TB_CodLegajo_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Escape) TB_CodLegajo.Text = "";
+            if (e.KeyCode == Keys.Escape)
+            {
+                TB_CodLegajo.Text = "";
+                TB_DesLegajo.Text = "";
+            }
+
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (TB_CodLegajo.Text.Trim() != "")
+                {
+                    Legajo _Leg = (new Legajo()).BuscarUno(TB_CodLegajo.Text);
+
+                    if (_Leg.Codigo != 0)
+                    {
+                        TB_DesLegajo.Text = _Leg.Descripcion.Trim();
+                        TB_Año.Focus();
+                    }
+                    else
+                    {
+                        TB_DesLegajo.Text = "";
+                    }
+                }
+            }
         }
 
         internal bool AsignarCurso(string zTema, object wCurso, object wDesCurso, object WHoras, int wRowIndex)
@@ -531,6 +564,26 @@ namespace Modulo_Capacitacion.Novedades
 
             DGV_Crono.DataSource = dtCronograma;
             if (DGV_Crono.Columns["Tema"] != null) DGV_Crono.Sort(DGV_Crono.Columns["Tema"], ListSortDirection.Ascending);
+        }
+
+        private void TB_DesLegajo_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            Auxiliares.AyudaLegajosActivos frm = new Auxiliares.AyudaLegajosActivos();
+
+            frm.Show(this);
+        }
+
+        public void _ProcesarAyudaLegajos(object WCodigo, object WLegajo)
+        {
+            TB_CodLegajo.Text = WCodigo.ToString();
+            TB_CodLegajo_KeyDown(null, new KeyEventArgs(Keys.Enter));
+        }
+
+        private void TB_CodLegajo_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            Auxiliares.AyudaLegajosActivos frm = new Auxiliares.AyudaLegajosActivos();
+
+            frm.Show(this);
         }
     }
 }

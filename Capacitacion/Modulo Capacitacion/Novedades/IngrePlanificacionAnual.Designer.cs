@@ -28,13 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.LBPerfil = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -47,7 +47,6 @@
             this.CB_Curso = new System.Windows.Forms.ComboBox();
             this.TB_DescTemas = new System.Windows.Forms.ComboBox();
             this.LB_Curso = new System.Windows.Forms.Label();
-            this.BT_AgregarCurso = new System.Windows.Forms.Button();
             this.lblAtencion = new System.Windows.Forms.Label();
             this.DGV_Crono = new System.Windows.Forms.DataGridView();
             this.Tema = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -57,16 +56,19 @@
             this.Horas = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Realizado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TB_Buscar = new System.Windows.Forms.Button();
-            this.BT_LimpiarPant = new System.Windows.Forms.Button();
-            this.BT_Guardar = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.TB_DesLegajo = new System.Windows.Forms.ComboBox();
+            this.TB_DesLegajob = new System.Windows.Forms.ComboBox();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.TB_CodLegajo = new System.Windows.Forms.ComboBox();
+            this.TB_CodLegajob = new System.Windows.Forms.ComboBox();
             this.TB_Año = new System.Windows.Forms.TextBox();
-            this.BT_Salir = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.LFechaAviso = new System.Windows.Forms.Label();
+            this.TB_DesLegajo = new System.Windows.Forms.TextBox();
+            this.BT_AgregarCurso = new System.Windows.Forms.Button();
+            this.BT_LimpiarPant = new System.Windows.Forms.Button();
+            this.BT_Guardar = new System.Windows.Forms.Button();
+            this.BT_Salir = new System.Windows.Forms.Button();
+            this.TB_CodLegajo = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -106,6 +108,8 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.Control;
+            this.panel3.Controls.Add(this.TB_CodLegajo);
+            this.panel3.Controls.Add(this.TB_DesLegajo);
             this.panel3.Controls.Add(this.groupBox1);
             this.panel3.Controls.Add(this.lblAtencion);
             this.panel3.Controls.Add(this.DGV_Crono);
@@ -113,9 +117,9 @@
             this.panel3.Controls.Add(this.BT_LimpiarPant);
             this.panel3.Controls.Add(this.BT_Guardar);
             this.panel3.Controls.Add(this.panel5);
-            this.panel3.Controls.Add(this.TB_DesLegajo);
+            this.panel3.Controls.Add(this.TB_DesLegajob);
             this.panel3.Controls.Add(this.panel4);
-            this.panel3.Controls.Add(this.TB_CodLegajo);
+            this.panel3.Controls.Add(this.TB_CodLegajob);
             this.panel3.Controls.Add(this.TB_Año);
             this.panel3.Controls.Add(this.BT_Salir);
             this.panel3.Controls.Add(this.label1);
@@ -202,20 +206,6 @@
             this.LB_Curso.Text = "Curso:";
             this.LB_Curso.Visible = false;
             // 
-            // BT_AgregarCurso
-            // 
-            this.BT_AgregarCurso.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.agregar_cursos;
-            this.BT_AgregarCurso.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BT_AgregarCurso.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BT_AgregarCurso.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_AgregarCurso.Location = new System.Drawing.Point(585, 37);
-            this.BT_AgregarCurso.Margin = new System.Windows.Forms.Padding(0);
-            this.BT_AgregarCurso.Name = "BT_AgregarCurso";
-            this.BT_AgregarCurso.Size = new System.Drawing.Size(40, 40);
-            this.BT_AgregarCurso.TabIndex = 139;
-            this.BT_AgregarCurso.UseVisualStyleBackColor = true;
-            this.BT_AgregarCurso.Click += new System.EventHandler(this.BT_AgregarCurso_Click);
-            // 
             // lblAtencion
             // 
             this.lblAtencion.BackColor = System.Drawing.Color.Red;
@@ -249,18 +239,18 @@
             this.DGV_Crono.Margin = new System.Windows.Forms.Padding(0);
             this.DGV_Crono.Name = "DGV_Crono";
             this.DGV_Crono.ReadOnly = true;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGV_Crono.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle27.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle27.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle27.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle27.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            dataGridViewCellStyle27.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle27.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle27.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV_Crono.RowHeadersDefaultCellStyle = dataGridViewCellStyle27;
             this.DGV_Crono.RowHeadersWidth = 15;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.DGV_Crono.RowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.DGV_Crono.RowsDefaultCellStyle = dataGridViewCellStyle28;
             this.DGV_Crono.RowTemplate.Height = 18;
             this.DGV_Crono.ShowCellToolTips = false;
             this.DGV_Crono.Size = new System.Drawing.Size(775, 266);
@@ -271,8 +261,8 @@
             // Tema
             // 
             this.Tema.DataPropertyName = "Tema";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Tema.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Tema.DefaultCellStyle = dataGridViewCellStyle22;
             this.Tema.HeaderText = "Tema";
             this.Tema.Name = "Tema";
             this.Tema.ReadOnly = true;
@@ -290,9 +280,9 @@
             // Curso
             // 
             this.Curso.DataPropertyName = "Curso";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.NullValue = "0";
-            this.Curso.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle23.NullValue = "0";
+            this.Curso.DefaultCellStyle = dataGridViewCellStyle23;
             this.Curso.HeaderText = "Curso";
             this.Curso.Name = "Curso";
             this.Curso.ReadOnly = true;
@@ -301,8 +291,8 @@
             // DesCurso
             // 
             this.DesCurso.DataPropertyName = "DesCurso";
-            dataGridViewCellStyle3.NullValue = " ";
-            this.DesCurso.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle24.NullValue = " ";
+            this.DesCurso.DefaultCellStyle = dataGridViewCellStyle24;
             this.DesCurso.HeaderText = "Descripcion Curso";
             this.DesCurso.Name = "DesCurso";
             this.DesCurso.ReadOnly = true;
@@ -311,8 +301,8 @@
             // Horas
             // 
             this.Horas.DataPropertyName = "Horas";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Horas.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Horas.DefaultCellStyle = dataGridViewCellStyle25;
             this.Horas.HeaderText = "Horas";
             this.Horas.Name = "Horas";
             this.Horas.ReadOnly = true;
@@ -321,8 +311,8 @@
             // Realizado
             // 
             this.Realizado.DataPropertyName = "Realizado";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Realizado.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Realizado.DefaultCellStyle = dataGridViewCellStyle26;
             this.Realizado.HeaderText = "Realizado";
             this.Realizado.Name = "Realizado";
             this.Realizado.ReadOnly = true;
@@ -337,6 +327,94 @@
             this.TB_Buscar.Text = "Buscar";
             this.TB_Buscar.UseVisualStyleBackColor = true;
             this.TB_Buscar.Click += new System.EventHandler(this.TB_Buscar_Click);
+            // 
+            // panel5
+            // 
+            this.panel5.Location = new System.Drawing.Point(422, 16);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(19, 29);
+            this.panel5.TabIndex = 130;
+            // 
+            // TB_DesLegajob
+            // 
+            this.TB_DesLegajob.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.TB_DesLegajob.FormattingEnabled = true;
+            this.TB_DesLegajob.Location = new System.Drawing.Point(401, 79);
+            this.TB_DesLegajob.Name = "TB_DesLegajob";
+            this.TB_DesLegajob.Size = new System.Drawing.Size(19, 21);
+            this.TB_DesLegajob.TabIndex = 129;
+            this.TB_DesLegajob.Visible = false;
+            this.TB_DesLegajob.SelectedIndexChanged += new System.EventHandler(this.TB_DesLegajo_SelectedIndexChanged);
+            // 
+            // panel4
+            // 
+            this.panel4.Location = new System.Drawing.Point(143, 16);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(19, 29);
+            this.panel4.TabIndex = 128;
+            // 
+            // TB_CodLegajob
+            // 
+            this.TB_CodLegajob.FormattingEnabled = true;
+            this.TB_CodLegajob.Location = new System.Drawing.Point(422, 80);
+            this.TB_CodLegajob.Name = "TB_CodLegajob";
+            this.TB_CodLegajob.Size = new System.Drawing.Size(10, 21);
+            this.TB_CodLegajob.TabIndex = 127;
+            this.TB_CodLegajob.Visible = false;
+            this.TB_CodLegajob.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_CodLegajo_KeyDown);
+            this.TB_CodLegajob.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.TB_CodLegajo_MouseDoubleClick);
+            // 
+            // TB_Año
+            // 
+            this.TB_Año.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TB_Año.Location = new System.Drawing.Point(83, 54);
+            this.TB_Año.Name = "TB_Año";
+            this.TB_Año.Size = new System.Drawing.Size(54, 20);
+            this.TB_Año.TabIndex = 35;
+            this.TB_Año.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.TB_Año.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Año_KeyDown);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(14, 54);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(37, 18);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Año:";
+            // 
+            // LFechaAviso
+            // 
+            this.LFechaAviso.AutoSize = true;
+            this.LFechaAviso.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LFechaAviso.Location = new System.Drawing.Point(14, 21);
+            this.LFechaAviso.Name = "LFechaAviso";
+            this.LFechaAviso.Size = new System.Drawing.Size(52, 18);
+            this.LFechaAviso.TabIndex = 4;
+            this.LFechaAviso.Text = "Legajo:";
+            // 
+            // TB_DesLegajo
+            // 
+            this.TB_DesLegajo.Location = new System.Drawing.Point(171, 20);
+            this.TB_DesLegajo.Name = "TB_DesLegajo";
+            this.TB_DesLegajo.Size = new System.Drawing.Size(249, 20);
+            this.TB_DesLegajo.TabIndex = 145;
+            this.TB_DesLegajo.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.TB_DesLegajo_MouseDoubleClick);
+            // 
+            // BT_AgregarCurso
+            // 
+            this.BT_AgregarCurso.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.agregar_cursos;
+            this.BT_AgregarCurso.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BT_AgregarCurso.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BT_AgregarCurso.ForeColor = System.Drawing.SystemColors.Control;
+            this.BT_AgregarCurso.Location = new System.Drawing.Point(585, 37);
+            this.BT_AgregarCurso.Margin = new System.Windows.Forms.Padding(0);
+            this.BT_AgregarCurso.Name = "BT_AgregarCurso";
+            this.BT_AgregarCurso.Size = new System.Drawing.Size(40, 40);
+            this.BT_AgregarCurso.TabIndex = 139;
+            this.BT_AgregarCurso.UseVisualStyleBackColor = true;
+            this.BT_AgregarCurso.Click += new System.EventHandler(this.BT_AgregarCurso_Click);
             // 
             // BT_LimpiarPant
             // 
@@ -366,49 +444,6 @@
             this.BT_Guardar.UseVisualStyleBackColor = true;
             this.BT_Guardar.Click += new System.EventHandler(this.BT_Guardar_Click);
             // 
-            // panel5
-            // 
-            this.panel5.Location = new System.Drawing.Point(422, 16);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(19, 29);
-            this.panel5.TabIndex = 130;
-            // 
-            // TB_DesLegajo
-            // 
-            this.TB_DesLegajo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.TB_DesLegajo.FormattingEnabled = true;
-            this.TB_DesLegajo.Location = new System.Drawing.Point(165, 21);
-            this.TB_DesLegajo.Name = "TB_DesLegajo";
-            this.TB_DesLegajo.Size = new System.Drawing.Size(276, 21);
-            this.TB_DesLegajo.TabIndex = 129;
-            this.TB_DesLegajo.SelectedIndexChanged += new System.EventHandler(this.TB_DesLegajo_SelectedIndexChanged);
-            // 
-            // panel4
-            // 
-            this.panel4.Location = new System.Drawing.Point(143, 16);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(19, 29);
-            this.panel4.TabIndex = 128;
-            // 
-            // TB_CodLegajo
-            // 
-            this.TB_CodLegajo.FormattingEnabled = true;
-            this.TB_CodLegajo.Location = new System.Drawing.Point(84, 22);
-            this.TB_CodLegajo.Name = "TB_CodLegajo";
-            this.TB_CodLegajo.Size = new System.Drawing.Size(53, 21);
-            this.TB_CodLegajo.TabIndex = 127;
-            this.TB_CodLegajo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_CodLegajo_KeyDown);
-            // 
-            // TB_Año
-            // 
-            this.TB_Año.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TB_Año.Location = new System.Drawing.Point(83, 54);
-            this.TB_Año.Name = "TB_Año";
-            this.TB_Año.Size = new System.Drawing.Size(54, 20);
-            this.TB_Año.TabIndex = 35;
-            this.TB_Año.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.TB_Año.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Año_KeyDown);
-            // 
             // BT_Salir
             // 
             this.BT_Salir.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.apagar1;
@@ -422,25 +457,15 @@
             this.BT_Salir.UseVisualStyleBackColor = true;
             this.BT_Salir.Click += new System.EventHandler(this.BT_Salir_Click);
             // 
-            // label1
+            // TB_CodLegajo
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(14, 54);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(37, 18);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Año:";
-            // 
-            // LFechaAviso
-            // 
-            this.LFechaAviso.AutoSize = true;
-            this.LFechaAviso.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LFechaAviso.Location = new System.Drawing.Point(14, 21);
-            this.LFechaAviso.Name = "LFechaAviso";
-            this.LFechaAviso.Size = new System.Drawing.Size(52, 18);
-            this.LFechaAviso.TabIndex = 4;
-            this.LFechaAviso.Text = "Legajo:";
+            this.TB_CodLegajo.Location = new System.Drawing.Point(83, 19);
+            this.TB_CodLegajo.Name = "TB_CodLegajo";
+            this.TB_CodLegajo.Size = new System.Drawing.Size(54, 20);
+            this.TB_CodLegajo.TabIndex = 145;
+            this.TB_CodLegajo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_CodLegajo_KeyDown);
+            this.TB_CodLegajo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SoloNumeros);
+            this.TB_CodLegajo.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.TB_DesLegajo_MouseDoubleClick);
             // 
             // IngrePlanificacionAnual
             // 
@@ -475,9 +500,9 @@
         private System.Windows.Forms.Label LFechaAviso;
         private System.Windows.Forms.TextBox TB_Año;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.ComboBox TB_DesLegajo;
+        private System.Windows.Forms.ComboBox TB_DesLegajob;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.ComboBox TB_CodLegajo;
+        private System.Windows.Forms.ComboBox TB_CodLegajob;
         private System.Windows.Forms.Button BT_LimpiarPant;
         private System.Windows.Forms.Button BT_Guardar;
         private System.Windows.Forms.Button TB_Buscar;
@@ -498,5 +523,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn DesCurso;
         private System.Windows.Forms.DataGridViewTextBoxColumn Horas;
         private System.Windows.Forms.DataGridViewTextBoxColumn Realizado;
+        private System.Windows.Forms.TextBox TB_DesLegajo;
+        private System.Windows.Forms.TextBox TB_CodLegajo;
     }
 }
