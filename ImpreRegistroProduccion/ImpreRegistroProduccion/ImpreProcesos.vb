@@ -46,11 +46,9 @@ Public Class ImpreProcesos
 
             'Dim WTipoReporte2 As Integer = 1
             'Dim WPartida2 As Integer = 308719
-            'Dim WCliente2 As String = ""
-            'Dim WCantidad2 As String = "100.00"
             'Dim WTipoSalida2 As Integer = 3
 
-            '_GenerarCertificadoAnalisisFarma(WTipoReporte2, WPartida2, WCliente2, WCantidad2, WTipoSalida2)
+            '_GenerarCertificadoAnalisisFarma(WTipoReporte2, WPartida2, WTipoSalida2)
 
             'Dim WTerminado2 As String = "PT-25021-126"
             'Dim WPartida2 As Integer = "308351"
@@ -133,6 +131,11 @@ Public Class ImpreProcesos
             frm.DataDefinition.FormulaFields(WDato(0)).Text = WDato(1)
 
         Next
+
+        If WTipoReporte = 1 And wTipoSalida = 3 Then
+            frm.SetParameterValue("MostrarLogo", 1)
+            frm.SetParameterValue("MostrarPie", 1)
+        End If
 
         With New VistaPrevia
             .Reporte = frm

@@ -182,7 +182,7 @@ Public Class VistaPrevia
         _ReconectarBaseDatos()
 
         Me.Reporte.RecordSelectionFormula = IIf(IsNothing(Me.Formula), "", Me.Formula)
-        Me.Reporte.Refresh()
+        'Me.Reporte.Refresh()
         Me.Reporte.ExportToDisk(Formato, ruta & NombreArchivo)
 
     End Sub
