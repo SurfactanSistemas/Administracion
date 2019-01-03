@@ -752,21 +752,25 @@ Public Class IngresoPruebasEnsayo
 
     Private Sub btnAceptar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAceptar.Click
 
-        'Try
-        If Trim(txtOrden.Text).Replace("-", "") = "" OrElse Trim(txtOrden.Text).Length < 8 Then Exit Sub
+        Try
+            If Trim(txtOrden.Text).Replace("-", "") = "" OrElse Trim(txtOrden.Text).Length < 8 Then Exit Sub
 
-        ' Eliminamos las comas que pudiesen existir para que no rompa la Consulta SQL.
-        For Each txt As TextBox In _CamposDeTexto()
-            txt.Text = txt.Text.Replace(",", " ")
-        Next
+            ' Eliminamos las comas que pudiesen existir para que no rompa la Consulta SQL.
+            For Each txt As TextBox In _CamposDeTexto()
+                txt.Text = txt.Text.Replace(",", " ")
+            Next
 
-        GuardarVersionDeOrdenTrabajo()
+            For Each dgv As DataGridView In {dgvArchivos, dgvCosto, dgvFormula, dgvLaboratorio, dgvProceso, dgvRevisiones}
+                dgv.CommitEdit(DataGridViewDataErrorContexts.Commit)
+            Next
 
-        btnLimpiar.PerformClick()
+            GuardarVersionDeOrdenTrabajo()
 
-        'Catch ex As Exception
-        '    MsgBox(ex.Message, MsgBoxStyle.Exclamation)
-        'End Try
+            btnLimpiar.PerformClick()
+
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+        End Try
 
     End Sub
 
@@ -779,7 +783,7 @@ Public Class IngresoPruebasEnsayo
 
         Try
 
-            btnRecalculaCosto.PerformClick()
+            btnRecalculaCosto_Click(Nothing, Nothing)
 
             cn.ConnectionString = Helper._ConectarA
             cn.Open()
