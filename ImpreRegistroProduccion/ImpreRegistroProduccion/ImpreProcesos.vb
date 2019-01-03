@@ -52,8 +52,8 @@ Public Class ImpreProcesos
 
             '_GenerarCertificadoAnalisisFarma(WTipoReporte2, WPartida2, WCliente2, WCantidad2, WTipoSalida2)
 
-            'Dim WTerminado2 As String = "PT-25015-110"
-            'Dim WPartida2 As Integer = "308933"
+            'Dim WTerminado2 As String = "PT-25021-126"
+            'Dim WPartida2 As Integer = "308351"
 
             '_GenerarRegistroProduccion(WTerminado2, WPartida2)
 
