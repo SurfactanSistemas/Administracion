@@ -38,6 +38,11 @@
 
         txtClave.Text = ""
 
+        'With cmbEmpresas
+        '    .BackColor = Color.Red
+        '    .ForeColor = Color.White
+        'End With
+
     End Sub
 
     Private Sub Login_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
@@ -78,5 +83,35 @@
             End With
 
         End Try
+    End Sub
+
+    Private Sub ComboBox1_DrawItem(ByVal sender As Object, ByVal e As DrawItemEventArgs) Handles cmbEmpresas.DrawItem
+        If e.Index >= 0 Then
+            Using st As New StringFormat With {.Alignment = StringAlignment.Center}
+                e.Graphics.DrawString(CType(sender.Items(e.Index), DataRowView).Item("Nombre").ToString, e.Font, New SolidBrush(Color.Black), e.Bounds, st)
+            End Using
+        End If
+    End Sub
+
+    Private Sub cmbEmpresas_DropDownClosed(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbEmpresas.DropDownClosed
+        With txtClave
+            .Focus()
+            .SelectionStart = 0
+            .SelectionLength = .Text.Length
+        End With
+
+    End Sub
+
+    Private Sub txtClave_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtClave.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtClave.Text) = "" Then : Exit Sub : End If
+
+            btnIniciar.PerformClick()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtClave.Text = ""
+        End If
+
     End Sub
 End Class

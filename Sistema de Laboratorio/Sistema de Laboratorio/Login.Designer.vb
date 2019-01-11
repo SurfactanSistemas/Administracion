@@ -26,11 +26,11 @@ Partial Class Login
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.txtClave = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.cmbEmpresas = New System.Windows.Forms.ComboBox()
         Me.btnIniciar = New System.Windows.Forms.Button()
         Me.btnCerrar = New System.Windows.Forms.Button()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.txtClave = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
@@ -84,10 +84,33 @@ Partial Class Login
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "SELECCIONE EMPRESA"
         '
+        'txtClave
+        '
+        Me.txtClave.Location = New System.Drawing.Point(73, 70)
+        Me.txtClave.Name = "txtClave"
+        Me.txtClave.Size = New System.Drawing.Size(209, 20)
+        Me.txtClave.TabIndex = 2
+        Me.txtClave.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtClave.UseSystemPasswordChar = True
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(154, 51)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(47, 15)
+        Me.Label3.TabIndex = 1
+        Me.Label3.Text = "CLAVE:"
+        '
         'cmbEmpresas
         '
+        Me.cmbEmpresas.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbEmpresas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbEmpresas.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbEmpresas.FormattingEnabled = True
         Me.cmbEmpresas.Location = New System.Drawing.Point(73, 24)
+        Me.cmbEmpresas.MaxDropDownItems = 11
         Me.cmbEmpresas.Name = "cmbEmpresas"
         Me.cmbEmpresas.Size = New System.Drawing.Size(209, 21)
         Me.cmbEmpresas.TabIndex = 0
@@ -109,25 +132,6 @@ Partial Class Login
         Me.btnCerrar.TabIndex = 4
         Me.btnCerrar.Text = "CERRAR"
         Me.btnCerrar.UseVisualStyleBackColor = True
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(154, 51)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(47, 15)
-        Me.Label3.TabIndex = 1
-        Me.Label3.Text = "CLAVE:"
-        '
-        'txtClave
-        '
-        Me.txtClave.Location = New System.Drawing.Point(73, 70)
-        Me.txtClave.Name = "txtClave"
-        Me.txtClave.Size = New System.Drawing.Size(209, 20)
-        Me.txtClave.TabIndex = 2
-        Me.txtClave.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.txtClave.UseSystemPasswordChar = True
         '
         'Login
         '

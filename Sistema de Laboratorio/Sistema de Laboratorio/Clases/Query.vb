@@ -1,10 +1,11 @@
 ﻿Imports System.Data.SqlClient
-Imports ImpreProcesosFarma.Clases
 Imports Laboratorio.Clases
 
 Module Query
 
-    Public Function GetSingle(ByVal q As String, Optional ByVal WBase As String = "SurfactanSa") As DataRow
+    Public Function GetSingle(ByVal q As String, Optional ByVal WBase As String = "") As DataRow
+
+        If WBase.Trim = "" Then WBase = Operador.Base
 
         Dim tabla As New DataTable
 
@@ -31,7 +32,9 @@ Module Query
 
     End Function
 
-    Public Function GetAll(ByVal q As String, Optional ByVal WBase As String = "SurfactanSa") As DataTable
+    Public Function GetAll(ByVal q As String, Optional ByVal WBase As String = "") As DataTable
+
+        If WBase.Trim = "" Then WBase = Operador.Base
 
         Dim tabla As New DataTable
 
@@ -81,7 +84,7 @@ Module Query
             If q.Length = 0 Then Throw New Exception("No se han pasado consultas para ejecutar.")
 
             Using cn As New SqlConnection
-                cn.ConnectionString = _ConectarA(Conexion.EmpresaDeTrabajo) 'ConfigurationManager.ConnectionStrings("CS").ToString
+                cn.ConnectionString = _ConectarA(Operador.Base) 'ConfigurationManager.ConnectionStrings("CS").ToString
                 cn.Open()
                 trans = cn.BeginTransaction
 
@@ -91,6 +94,7 @@ Module Query
                     cm.Transaction = trans
 
                     For Each _q As String In q
+                        Debug.Print(_q)
                         cm.CommandText = _q
                         cm.ExecuteNonQuery()
                     Next

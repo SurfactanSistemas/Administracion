@@ -84,6 +84,28 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Auxiliares\Extensiones\AuxiExtensiones.vb" />
+    <Compile Include="Auxiliares\Interfaces\IIngresoClaveSeguridad.vb" />
+    <Compile Include="Auxiliares\Interfaces\IIngresoMotivoDesvio.vb" />
+    <Compile Include="Auxiliares\Interfaces\INotasEnsayosProductosTerminados.vb" />
+    <Compile Include="Auxiliares\VentanasIntermedias\IngresoClaveSeguridad.Designer.vb">
+      <DependentUpon>IngresoClaveSeguridad.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Auxiliares\VentanasIntermedias\IngresoClaveSeguridad.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Auxiliares\VentanasIntermedias\IngresoEnsayosPT\IngresoMotivoDesvio.Designer.vb">
+      <DependentUpon>IngresoMotivoDesvio.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Auxiliares\VentanasIntermedias\IngresoEnsayosPT\IngresoMotivoDesvio.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Auxiliares\VentanasIntermedias\IngresoEnsayosPT\NotasEnsayosProductosTerminados.Designer.vb">
+      <DependentUpon>NotasEnsayosProductosTerminados.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Auxiliares\VentanasIntermedias\IngresoEnsayosPT\NotasEnsayosProductosTerminados.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Clases\Conexion.vb" />
     <Compile Include="Clases\Helper.vb" />
     <Compile Include="Clases\Operador.vb" />
@@ -92,6 +114,12 @@
       <DependentUpon>Login.vb</DependentUpon>
     </Compile>
     <Compile Include="Login.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestros\Productos Terminados\Ensayos Intermedios\IngresoEnsayosIntermediosPT.Designer.vb">
+      <DependentUpon>IngresoEnsayosIntermediosPT.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\Productos Terminados\Ensayos Intermedios\IngresoEnsayosIntermediosPT.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MenuPrincipal.Designer.vb">
@@ -123,8 +151,20 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Auxiliares\VentanasIntermedias\IngresoClaveSeguridad.resx">
+      <DependentUpon>IngresoClaveSeguridad.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Auxiliares\VentanasIntermedias\IngresoEnsayosPT\IngresoMotivoDesvio.resx">
+      <DependentUpon>IngresoMotivoDesvio.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Auxiliares\VentanasIntermedias\IngresoEnsayosPT\NotasEnsayosProductosTerminados.resx">
+      <DependentUpon>NotasEnsayosProductosTerminados.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\Productos Terminados\Ensayos Intermedios\IngresoEnsayosIntermediosPT.resx">
+      <DependentUpon>IngresoEnsayosIntermediosPT.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MenuPrincipal.resx">
       <DependentUpon>MenuPrincipal.vb</DependentUpon>
@@ -151,6 +191,9 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Auxiliares\Ayudas\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -24,6 +24,8 @@ Partial Class MenuPrincipal
     Private Sub InitializeComponent()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.MaestrosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.IngresoDeEnsayosProductosTerminadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ControlesIntermedisToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -42,9 +44,23 @@ Partial Class MenuPrincipal
         '
         'MaestrosToolStripMenuItem
         '
+        Me.MaestrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IngresoDeEnsayosProductosTerminadosToolStripMenuItem})
         Me.MaestrosToolStripMenuItem.Name = "MaestrosToolStripMenuItem"
         Me.MaestrosToolStripMenuItem.Size = New System.Drawing.Size(67, 20)
         Me.MaestrosToolStripMenuItem.Text = "Maestros"
+        '
+        'IngresoDeEnsayosProductosTerminadosToolStripMenuItem
+        '
+        Me.IngresoDeEnsayosProductosTerminadosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ControlesIntermedisToolStripMenuItem})
+        Me.IngresoDeEnsayosProductosTerminadosToolStripMenuItem.Name = "IngresoDeEnsayosProductosTerminadosToolStripMenuItem"
+        Me.IngresoDeEnsayosProductosTerminadosToolStripMenuItem.Size = New System.Drawing.Size(193, 22)
+        Me.IngresoDeEnsayosProductosTerminadosToolStripMenuItem.Text = "Productos Terminados"
+        '
+        'ControlesIntermedisToolStripMenuItem
+        '
+        Me.ControlesIntermedisToolStripMenuItem.Name = "ControlesIntermedisToolStripMenuItem"
+        Me.ControlesIntermedisToolStripMenuItem.Size = New System.Drawing.Size(191, 22)
+        Me.ControlesIntermedisToolStripMenuItem.Text = "Controles Intermedios"
         '
         'Panel1
         '
@@ -87,11 +103,13 @@ Partial Class MenuPrincipal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(662, 230)
+        Me.ClientSize = New System.Drawing.Size(662, 317)
         Me.Controls.Add(Me.MenuStrip1)
         Me.Controls.Add(Me.Panel1)
         Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "MenuPrincipal"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
         Me.Panel1.ResumeLayout(False)
@@ -105,4 +123,6 @@ Partial Class MenuPrincipal
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents IngresoDeEnsayosProductosTerminadosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ControlesIntermedisToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class
