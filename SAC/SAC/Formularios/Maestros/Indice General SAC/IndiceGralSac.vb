@@ -1,10 +1,13 @@
-﻿Imports CrystalDecisions.CrystalReports.Engine
+﻿Imports System.IO
+Imports System.Reflection
+Imports CrystalDecisions.CrystalReports.Engine
+Imports CrystalDecisions.Shared
 
 Public Class IndiceGralSac : Implements INuevoSAC, IExportarIndice
 
     Private WDatosSac As DataTable
 
-    Private Sub IndiceGralSac_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub IndiceGralSac_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         _CargarTiposSolicitud()
         _CargarEmisores()
         _CargarCentros()
@@ -17,7 +20,7 @@ Public Class IndiceGralSac : Implements INuevoSAC, IExportarIndice
         txtHastaAnio.Text = Date.Now.ToString("yyyy")
 
         For Each o As CheckedListBox In {clbCentros, clbEmisores, clbEstados, clbOrigenes, clbResponsables, clbTiposSolicitud}
-            For i As Integer = 0 To o.Items.Count - 1
+            For i = 0 To o.Items.Count - 1
                 o.SetItemCheckState(i, CheckState.Checked)
             Next
         Next
@@ -77,10 +80,10 @@ Public Class IndiceGralSac : Implements INuevoSAC, IExportarIndice
 
     End Sub
 
-    Private Sub clbCheckedListBoxs_MouseUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles clbEstados.MouseUp, clbCentros.MouseUp, clbEmisores.MouseUp, clbOrigenes.MouseUp, clbResponsables.MouseUp, clbTiposSolicitud.MouseUp
+    Private Sub clbCheckedListBoxs_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles clbEstados.MouseUp, clbCentros.MouseUp, clbEmisores.MouseUp, clbOrigenes.MouseUp, clbResponsables.MouseUp, clbTiposSolicitud.MouseUp
         With CType(sender, CheckedListBox)
             If .SelectedIndex = 0 Then
-                For i As Integer = 1 To .Items.Count - 1
+                For i = 1 To .Items.Count - 1
 
                     If .GetItemCheckState(0) = CheckState.Checked Then
                         .SetItemChecked(i, True)
@@ -95,11 +98,11 @@ Public Class IndiceGralSac : Implements INuevoSAC, IExportarIndice
         End With
     End Sub
 
-    Private Sub btnCancelar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancelar.Click
+    Private Sub btnCancelar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCancelar.Click
         Close()
     End Sub
 
-    Private Sub btnAceptar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAceptar.Click
+    Private Sub btnAceptar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAceptar.Click
 
         '
         ' Chequeamos que tenga un año indicado, sino indicamos por defecto el año actual.
@@ -140,7 +143,7 @@ Public Class IndiceGralSac : Implements INuevoSAC, IExportarIndice
         '
         ' Armamos la cadena de Ordenamiento.
         '
-        Dim WOrderBy As String = "ORDER BY cs.Ano, "
+        Dim WOrderBy = "ORDER BY cs.Ano, "
 
         If WOrdenI.Trim <> "" Then WOrderBy &= WOrdenI & ","
         If WOrdenII.Trim <> "" Then WOrderBy &= WOrdenII & ","
@@ -148,7 +151,7 @@ Public Class IndiceGralSac : Implements INuevoSAC, IExportarIndice
 
         WOrderBy = WOrderBy.Remove(WOrderBy.Length - 1, 1)
 
-        WDatosSac = Query.GetAll("SELECT cs.Tipo As idTipo, Tipo = CASE WHEN ISNULL(t.Abreviatura, '') = '' THEN LTRIM(RTRIM(t.Descripcion)) ELSE LTRIM(RTRIM(t.Abreviatura)) END, cs.Ano As Anio, cs.Fecha, cs.Numero, LTRIM(RTRIM(cs.Referencia)) Referencia, " &
+        WDatosSac = GetAll("SELECT cs.Tipo As idTipo, Tipo = CASE WHEN ISNULL(t.Abreviatura, '') = '' THEN LTRIM(RTRIM(t.Descripcion)) ELSE LTRIM(RTRIM(t.Abreviatura)) END, cs.Ano As Anio, cs.Fecha, cs.Numero, LTRIM(RTRIM(cs.Referencia)) Referencia, " &
                                  " Estado = CASE cs.Estado WHEN 1 THEN 'Iniciada' WHEN 2 THEN 'Investig.' WHEN 3 THEN 'Implement.' WHEN 4 THEN 'Implem. A Ver.' WHEN 5 THEN 'Implem. Verif.' ELSE 'Cerrada' END, " &
                                  " Origen = CASE cs.Origen WHEN 1 THEN 'Auditoría' WHEN 2 THEN 'Reclamo' WHEN 3 THEN 'I. No Conf.' WHEN 4 THEN 'Proc./Sist.' WHEN 5 THEN 'Otro' END, " &
                                  " LTRIM(RTRIM(cs.Titulo)) Titulo, LTRIM(RTRIM(ce.Descripcion)) Centro, LTRIM(RTRIM(rs.Descripcion)) Emisor, LTRIM(RTRIM(rs2.Descripcion)) Responsable " &
@@ -173,13 +176,13 @@ Public Class IndiceGralSac : Implements INuevoSAC, IExportarIndice
 
         Next
 
-        dgvListado.GetType.InvokeMember("DoubleBuffered", Reflection.BindingFlags.NonPublic Or Reflection.BindingFlags.Instance Or System.Reflection.BindingFlags.SetProperty, Nothing, dgvListado, New Object() {True})
+        dgvListado.GetType.InvokeMember("DoubleBuffered", BindingFlags.NonPublic Or BindingFlags.Instance Or BindingFlags.SetProperty, Nothing, dgvListado, New Object() {True})
 
     End Sub
 
     Private Function _GenerarStringOrdenamiento(ByVal cmb As ComboBox)
 
-        Dim WString As String = ""
+        Dim WString = ""
 
         With cmb
             Select Case .SelectedIndex
@@ -195,7 +198,7 @@ Public Class IndiceGralSac : Implements INuevoSAC, IExportarIndice
 
     Private Function _GenerarStringConsulta(ByVal clb As CheckedListBox) As String
 
-        Dim WString As String = ""
+        Dim WString = ""
 
         For Each o As Object In clb.CheckedItems
             WString &= CType(o, DataRowView).Item("Codigo") & ","
@@ -208,9 +211,9 @@ Public Class IndiceGralSac : Implements INuevoSAC, IExportarIndice
 
     Private Function _GenerarStringConsultaII(ByVal clb As CheckedListBox) As String
 
-        Dim WString As String = ""
+        Dim WString = ""
 
-        For i As Integer = 1 To clb.Items.Count - 1
+        For i = 1 To clb.Items.Count - 1
             If clb.GetItemCheckState(i) = CheckState.Checked Then
                 WString &= i & ","
             End If
@@ -221,7 +224,7 @@ Public Class IndiceGralSac : Implements INuevoSAC, IExportarIndice
 
     End Function
 
-    Private Sub dgvListado_SortCompare(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewSortCompareEventArgs) Handles dgvListado.SortCompare
+    Private Sub dgvListado_SortCompare(ByVal sender As Object, ByVal e As DataGridViewSortCompareEventArgs) Handles dgvListado.SortCompare
 
         dgvListado.ClearSelection()
 
@@ -242,7 +245,7 @@ Public Class IndiceGralSac : Implements INuevoSAC, IExportarIndice
 
     End Sub
 
-    Private Sub dgvListado_CellMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgvListado.CellMouseDoubleClick
+    Private Sub dgvListado_CellMouseDoubleClick(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles dgvListado.CellMouseDoubleClick
 
         Try
 
@@ -263,7 +266,7 @@ Public Class IndiceGralSac : Implements INuevoSAC, IExportarIndice
 
     End Sub
 
-    Private Sub txtAnio_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtAnio.KeyDown
+    Private Sub txtAnio_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtAnio.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtAnio.Text).Length < 4 Then : Exit Sub : End If
@@ -276,7 +279,7 @@ Public Class IndiceGralSac : Implements INuevoSAC, IExportarIndice
 
     End Sub
 
-    Private Sub btnNuevaSolicitud_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNuevaSolicitud.Click
+    Private Sub btnNuevaSolicitud_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnNuevaSolicitud.Click
         Dim frm As New NuevoSac
         frm.Show(Me)
     End Sub
@@ -285,12 +288,12 @@ Public Class IndiceGralSac : Implements INuevoSAC, IExportarIndice
         btnAceptar.PerformClick()
     End Sub
 
-    Private Sub CopiarConCabecerasToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CopiarConCabecerasToolStripMenuItem.Click
+    Private Sub CopiarConCabecerasToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles CopiarConCabecerasToolStripMenuItem.Click
         dgvListado.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText
         _CopiarSeleccion()
     End Sub
 
-    Private Sub CopiarSóloDatosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CopiarSóloDatosToolStripMenuItem.Click
+    Private Sub CopiarSóloDatosToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles CopiarSóloDatosToolStripMenuItem.Click
         dgvListado.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText
         _CopiarSeleccion()
     End Sub
@@ -311,7 +314,7 @@ Public Class IndiceGralSac : Implements INuevoSAC, IExportarIndice
         End If
     End Sub
 
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button1.Click
         With ExportarIndice
             .Show(Me)
         End With
@@ -329,11 +332,11 @@ Public Class IndiceGralSac : Implements INuevoSAC, IExportarIndice
                 Case 1 ' Mostrar por Pantalla
                     .Mostrar()
                 Case 2 ' PDF
-                    .Exportar(WNombreArchivo, CrystalDecisions.Shared.ExportFormatType.PortableDocFormat)
+                    .Exportar(WNombreArchivo, ExportFormatType.PortableDocFormat)
                 Case 3 ' Excel
-                    .Exportar(WNombreArchivo, CrystalDecisions.Shared.ExportFormatType.Excel)
+                    .Exportar(WNombreArchivo, ExportFormatType.Excel)
                 Case 4 ' Word
-                    .Exportar(WNombreArchivo, CrystalDecisions.Shared.ExportFormatType.WordForWindows)
+                    .Exportar(WNombreArchivo, ExportFormatType.WordForWindows)
             End Select
 
         End With
@@ -385,15 +388,15 @@ Public Class IndiceGralSac : Implements INuevoSAC, IExportarIndice
 
             If WFormato = 5 Then
 
-                Dim WRuta As String = "C:/tempIndice/"
+                Dim WRuta = "C:/tempIndice/"
 
-                If IO.Directory.Exists(WRuta) Then IO.Directory.Delete(WRuta, True)
+                If Directory.Exists(WRuta) Then Directory.Delete(WRuta, True)
 
-                IO.Directory.CreateDirectory(WRuta)
+                Directory.CreateDirectory(WRuta)
 
                 Dim WNombreArchivo = String.Format("Indice Gral {0} al {2} - {1}.pdf", txtAnio.Text, Date.Now.ToString("dd-MM-yyyy"), txtHastaAnio.Text)
 
-                frm.Exportar(WNombreArchivo, CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, WRuta)
+                frm.Exportar(WNombreArchivo, ExportFormatType.PortableDocFormat, WRuta)
 
                 With VistaPrevia
                     .EnviarPorEmail(WRuta & WNombreArchivo)
@@ -411,7 +414,7 @@ Public Class IndiceGralSac : Implements INuevoSAC, IExportarIndice
 
     End Sub
 
-    Private Sub txtHastaAnio_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtHastaAnio.KeyDown
+    Private Sub txtHastaAnio_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtHastaAnio.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtHastaAnio.Text) = "" Then txtHastaAnio.Text = txtAnio.Text

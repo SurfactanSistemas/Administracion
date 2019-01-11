@@ -12,7 +12,7 @@ Module ExtensionesTipoString
 
         If text.Length <= length Then Return text
 
-        Return Microsoft.VisualBasic.Left(text, length)
+        Return Left(text, length)
 
     End Function
 
@@ -24,7 +24,7 @@ Module ExtensionesTipoString
 
         If text.Length <= length Then Return text
 
-        Return Microsoft.VisualBasic.Right(text, length)
+        Return Right(text, length)
 
     End Function
 
@@ -36,7 +36,7 @@ Module ExtensionesTipoString
 
         If String.IsNullOrEmpty(texto) OrElse texto.Length = 0 Then Return texto
 
-        Dim temp As String = ""
+        Dim temp = ""
 
         texto = LCase(texto)
 

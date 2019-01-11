@@ -47,19 +47,19 @@
 
     End Sub
 
-    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrar.Click
+    Private Sub Button3_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCerrar.Click
         Close()
     End Sub
 
-    Private Sub txtAccionCorrectiva_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtAccionCorrectiva.KeyUp
+    Private Sub txtAccionCorrectiva_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtAccionCorrectiva.KeyUp
         lblRestantes.Text = String.Format("Caracteres Restantes: {0}/120", 120 - txtAccionCorrectiva.Text.Length)
     End Sub
 
-    Private Sub NuevaAccion_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+    Private Sub NuevaAccion_Shown(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Shown
         txtResponsable.Focus()
     End Sub
 
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGrabar.Click
+    Private Sub Button1_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnGrabar.Click
 
         '
         ' Actualizamos Segun sea tabla vieja o no.
@@ -72,10 +72,10 @@
         Dim ZSql As String = String.Format("UPDATE CargaSacII SET Responsable{0} = '{1}', Plazo{0} = '{2}', Accion{0}1 = '{3}', Accion{0}2 = '{4}' WHERE Tipo = '{5}' and Ano = '{6}' And Numero = '{7}'",
                                             WNroAccion, txtResponsable.Text, txtPlazo.Text, WAccionI, WAccionII, WTipo, WAnio, WNumero)
 
-        Query.ExecuteNonQueries(ZSql)
+        ExecuteNonQueries(ZSql)
 
 
-        Dim WWOwner As INuevaAccion = CType(Owner, INuevaAccion)
+        Dim WWOwner = CType(Owner, INuevaAccion)
 
         If Not IsNothing(WWOwner) Then
             WWOwner._ProcesarNuevaAccion()
@@ -85,7 +85,7 @@
 
     End Sub
 
-    Private Sub txtResponsable_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtResponsable.KeyDown
+    Private Sub txtResponsable_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtResponsable.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtResponsable.Text) = "" Then : Exit Sub : End If
@@ -107,7 +107,7 @@
 
     End Sub
 
-    Private Sub txtPlazo_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtPlazo.KeyDown
+    Private Sub txtPlazo_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtPlazo.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If txtPlazo.Text.Replace(" ", "").Replace("/", "").Length = 8 Then
@@ -122,7 +122,7 @@
 
     End Sub
 
-    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEliminar.Click
+    Private Sub Button2_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnEliminar.Click
 
         Dim WResp = txtResponsable.Text
         Dim WPlazo = txtPlazo.Text

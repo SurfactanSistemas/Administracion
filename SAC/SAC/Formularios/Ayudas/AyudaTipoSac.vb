@@ -1,7 +1,7 @@
 ﻿Public Class AyudaTipoSac : Implements INuevoTipoSolicitud
 
-    Private Sub txtFiltrar_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtFiltrar.KeyPress
-        Dim tabla As DataTable = CType(dgvCentros.DataSource, DataTable)
+    Private Sub txtFiltrar_KeyPress(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txtFiltrar.KeyPress
+        Dim tabla = CType(dgvCentros.DataSource, DataTable)
 
         If Not IsNothing(tabla) Then
             tabla.DefaultView.RowFilter = String.Format("Convert(Codigo, System.String) LIKE '%{0}%' Or Descripcion LIKE '%{0}%'", txtFiltrar.Text)
@@ -9,7 +9,7 @@
 
     End Sub
 
-    Private Sub txtFiltrar_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFiltrar.KeyDown
+    Private Sub txtFiltrar_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtFiltrar.KeyDown
 
         If e.KeyData = Keys.Escape Then
             txtFiltrar.Text = ""
@@ -17,10 +17,10 @@
 
     End Sub
 
-    Private Sub dgvResponsables_CellMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgvCentros.CellMouseDoubleClick
+    Private Sub dgvResponsables_CellMouseDoubleClick(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles dgvCentros.CellMouseDoubleClick
         If e.RowIndex < 0 Then Exit Sub
 
-        Dim WOwner As IAyudaTipoSac = CType(Owner, IAyudaTipoSac)
+        Dim WOwner = CType(Owner, IAyudaTipoSac)
 
         If Not IsNothing(WOwner) Then
             WOwner._ProcesarAyudaTipoSac(OrDefault(dgvCentros.CurrentRow.Cells("Codigo").Value, ""))
@@ -29,12 +29,12 @@
         Close()
     End Sub
 
-    Private Sub btnNuevo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNuevo.Click
+    Private Sub btnNuevo_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnNuevo.Click
         Dim frm As New NuevoTipoSolicitud()
         frm.ShowDialog(Me)
     End Sub
 
-    Private Sub AyudaCentrosSac_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub AyudaCentrosSac_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         _CargarTipos()
     End Sub
 
@@ -43,7 +43,7 @@
         dgvCentros.DataSource = WTiposSac
     End Sub
 
-    Private Sub btnCerrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrar.Click
+    Private Sub btnCerrar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCerrar.Click
         Close()
     End Sub
 

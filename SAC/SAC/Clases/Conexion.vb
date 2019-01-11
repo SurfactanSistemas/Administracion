@@ -1,4 +1,5 @@
-﻿Imports System.Data.SqlClient
+﻿Imports System.Configuration
+Imports System.Data.SqlClient
 
 Namespace Clases
 
@@ -88,7 +89,7 @@ Namespace Clases
 
             If Not String.IsNullOrEmpty(WEmpresa) Then
 
-                Dim cs = Configuration.ConfigurationManager.ConnectionStrings("CS").ToString
+                Dim cs = ConfigurationManager.ConnectionStrings("CS").ToString
 
                 Return cs.Replace("#EMPRESA#", WEmpresa)
 
@@ -174,10 +175,10 @@ Namespace Clases
         ''' <remarks>True en caso de existir. Se almacena en la Propiedad Operador de la Clase Conexion, el número correspondiente para esa Clave.</remarks>
         Public Shared Function _Login(ByVal Clave As String, ByVal WProceso As Integer) As Boolean
 
-            Dim cn As SqlConnection = New SqlConnection()
-            Dim cm As SqlCommand = New SqlCommand("SELECT Codigo FROM ResponsableSac WHERE UPPER(ClaveSeguridad) = '" & UCase(Clave) & "'")
+            Dim cn = New SqlConnection()
+            Dim cm = New SqlCommand("SELECT Codigo FROM ResponsableSac WHERE UPPER(ClaveSeguridad) = '" & UCase(Clave) & "'")
             Dim dr As SqlDataReader
-            
+
             Try
 
                 cn.ConnectionString = Helper._ConectarA

@@ -1,10 +1,10 @@
 ﻿Public Class ExportarIndice
 
-    Private Sub btnAceptar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAceptar.Click
+    Private Sub btnAceptar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAceptar.Click
 
         Try
 
-            Dim WOwner As IExportarIndice = CType(Owner, IExportarIndice)
+            Dim WOwner = CType(Owner, IExportarIndice)
 
             If Not IsNothing(WOwner) Then
                 WOwner._ProcesarExportarIndice(CheckBox1.Checked, ComboBox1.SelectedIndex)
@@ -18,11 +18,11 @@
 
     End Sub
 
-    Private Sub btnCancelar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancelar.Click
+    Private Sub btnCancelar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCancelar.Click
         Close()
     End Sub
 
-    Private Sub ExportarSAC_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub ExportarSAC_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         CheckBox1.Checked = True
         ComboBox1.SelectedIndex = 0
     End Sub

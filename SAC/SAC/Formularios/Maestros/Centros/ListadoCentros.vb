@@ -1,7 +1,7 @@
 ﻿Public Class ListadoCentros : Implements INuevoCentro
 
-    Private Sub ListadoTiposSolicitud_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Label1.Text = Helper.NombreEmpresa
+    Private Sub ListadoTiposSolicitud_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
+        Label1.Text = NombreEmpresa
 
         _CargarCentros()
     End Sub
@@ -16,11 +16,11 @@
 
     End Sub
 
-    Private Sub btnCerrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrar.Click
+    Private Sub btnCerrar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCerrar.Click
         Close()
     End Sub
 
-    Private Sub btnEditar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEditar.Click
+    Private Sub btnEditar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnEditar.Click
 
         If dgvCentros.SelectedRows.Count = 0 Then Exit Sub
 
@@ -31,9 +31,9 @@
 
     End Sub
 
-    Private Sub txtFiltrar_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtFiltrar.KeyPress
+    Private Sub txtFiltrar_KeyPress(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txtFiltrar.KeyPress
         Try
-            Dim tabla As DataTable = CType(dgvCentros.DataSource, DataTable)
+            Dim tabla = CType(dgvCentros.DataSource, DataTable)
 
             If Not IsNothing(tabla) Then
                 tabla.DefaultView.RowFilter = String.Format("Descripcion LIKE '%{0}%' " & _
@@ -46,7 +46,7 @@
         End Try
     End Sub
 
-    Private Sub txtFiltrar_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFiltrar.KeyDown
+    Private Sub txtFiltrar_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtFiltrar.KeyDown
 
         If e.KeyData = Keys.Escape Then
             txtFiltrar.Text = ""
@@ -54,12 +54,12 @@
 
     End Sub
 
-    Private Sub btnNuevo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNuevo.Click
+    Private Sub btnNuevo_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnNuevo.Click
         Dim frm As New NuevoCentro
         frm.ShowDialog(Me)
     End Sub
 
-    Private Sub dgvTIpos_CellMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgvCentros.CellMouseDoubleClick
+    Private Sub dgvTIpos_CellMouseDoubleClick(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles dgvCentros.CellMouseDoubleClick
         If e.ColumnIndex < 0 Then Exit Sub
 
         Dim WCodigo As String = OrDefault(dgvCentros.CurrentRow.Cells("Codigo").Value, "")
@@ -69,12 +69,12 @@
 
     End Sub
 
-    Private Sub txtCodigo_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCodigo.KeyDown
+    Private Sub txtCodigo_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtCodigo.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtCodigo.Text) = "" Then : Exit Sub : End If
 
-            Dim WTipo As DataRow = Query.GetSingle("SELECT Codigo FROM CentroSac WHERE Codigo = '" & txtCodigo.Text & "'")
+            Dim WTipo As DataRow = GetSingle("SELECT Codigo FROM CentroSac WHERE Codigo = '" & txtCodigo.Text & "'")
             If Not IsNothing(WTipo) Then
                 Dim frm As New NuevoCentro(txtCodigo.Text)
                 frm.ShowDialog(Me)
@@ -86,11 +86,11 @@
 
     End Sub
 
-    Private Sub dgvTIpos_RowHeaderMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgvCentros.RowHeaderMouseDoubleClick
+    Private Sub dgvTIpos_RowHeaderMouseDoubleClick(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles dgvCentros.RowHeaderMouseDoubleClick
         btnEditar.PerformClick()
     End Sub
 
-    Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtCodigo.KeyPress
+    Private Sub SoloNumero(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txtCodigo.KeyPress
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
             e.Handled = True
         End If

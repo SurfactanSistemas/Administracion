@@ -1,8 +1,11 @@
-﻿Imports System.IO
+﻿Imports System.Data.SqlClient
+Imports System.IO
 Imports CrystalDecisions.CrystalReports.Engine
 Imports CrystalDecisions.Shared
 Imports System.Text.RegularExpressions
+Imports ClasesCompartidas
 Imports Microsoft.Office.Interop
+Imports Microsoft.Office.Interop.Outlook
 Imports PdfSharp.Pdf
 Imports PdfSharp.Pdf.IO
 Imports TallComponents.PDF
@@ -12,7 +15,7 @@ Public Class VistaPrevia
 
     Public Property Formula As String
 
-    Private Sub Reporte_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub Reporte_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
 
         With Me.CrystalReportViewer1
             .ReportSource = Me.Reporte
@@ -33,7 +36,7 @@ Public Class VistaPrevia
         ' MANDAMOS EL PARÁMETRO DE LA EMPRESA.
 
         If Reporte.ParameterFields.Count > 0 Then
-            Reporte.SetParameterValue(0, ClasesCompartidas.Globals.NombreEmpresa)
+            Reporte.SetParameterValue(0, Globals.NombreEmpresa)
         End If
 
         ' CONECTAMOS CON LA BASE DE DATOS QUE CORRESPONDA.
@@ -41,14 +44,14 @@ Public Class VistaPrevia
 
         Try
             ' Buscamos el string de conexion.
-            cs = Helper._ConectarA 'ClasesCompartidas.Globals.getConnectionString()
-        Catch ex As Exception
+            cs = _ConectarA 'ClasesCompartidas.Globals.getConnectionString()
+        Catch ex As System.Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical)
             Return
         End Try
 
         ' Extraemos los datos de conexion del string de conexion.
-        Dim cnsb As New SqlClient.SqlConnectionStringBuilder(cs)
+        Dim cnsb As New SqlConnectionStringBuilder(cs)
 
         ' Asignamos los datos al reporte.
         Reporte.SetDatabaseLogon(cnsb.UserID, cnsb.Password, cnsb.DataSource, cnsb.InitialCatalog)
@@ -64,7 +67,7 @@ Public Class VistaPrevia
         tli.ConnectionInfo = conexion
 
         ' Volvemos a asignar los datos de conexion pero ahora a cada una de las tablas que tenga el reporte.
-        For Each tabla As Table In Reporte.Database.Tables
+        For Each tabla As CrystalDecisions.CrystalReports.Engine.Table In Reporte.Database.Tables
 
             Dim _logInfo As TableLogOnInfo = tabla.LogOnInfo
 
@@ -108,7 +111,7 @@ Public Class VistaPrevia
     End Sub
 
     Public Sub GuardarPDF(ByVal NombreArchivo As String, Optional ByVal ruta As String = "")
-        ruta = IIf(ruta = "", Application.StartupPath & "/", ruta)
+        ruta = IIf(ruta = "", System.Windows.Forms.Application.StartupPath & "/", ruta)
 
         NombreArchivo = IIf(Regex.IsMatch(NombreArchivo, "(\.pdf)$"), NombreArchivo, NombreArchivo & ".pdf")
 
@@ -137,7 +140,7 @@ Public Class VistaPrevia
                         .Filter = "Word|*.doc"
                 End Select
 
-                If .ShowDialog(Me) <> Windows.Forms.DialogResult.OK Then Exit Sub
+                If .ShowDialog(Me) <> DialogResult.OK Then Exit Sub
 
                 If .FileName <> "" Then
                     ruta = .FileName
@@ -162,13 +165,13 @@ Public Class VistaPrevia
     End Sub
 
     Private Sub EnviarEmail(ByVal Archivo As String, ByVal EnvioAutomatico As Boolean)
-        Dim oApp As Outlook._Application
-        Dim oMsg As Outlook._MailItem
+        Dim oApp As _Application
+        Dim oMsg As _MailItem
 
         Try
-            oApp = New Outlook.Application()
+            oApp = New Application()
 
-            oMsg = oApp.CreateItem(Outlook.OlItemType.olMailItem)
+            oMsg = oApp.CreateItem(OlItemType.olMailItem)
             oMsg.Subject = "SAC"
             oMsg.Body = "Envio de SAC"
 
@@ -183,16 +186,16 @@ Public Class VistaPrevia
                 oMsg.Display()
             End If
 
-        Catch ex As Exception
-            Throw New Exception("No se pudo crear el E-Mail solicitado." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Catch ex As System.Exception
+            Throw New System.Exception("No se pudo crear el E-Mail solicitado." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
         End Try
 
     End Sub
 
     Public Sub MergePDFs(ByVal WRuta As String, ByVal WNombreArchivo As String)
-        
-        Dim Archivos As String() = System.IO.Directory.GetFiles(WRuta, "*.pdf")
-        Dim outPdf As PdfDocument = New PdfDocument()
+
+        Dim Archivos As String() = Directory.GetFiles(WRuta, "*.pdf")
+        Dim outPdf = New PdfDocument()
 
         For Each file As String In Archivos
             Using one As PdfDocument = PdfReader.Open(file, PdfDocumentOpenMode.Import)

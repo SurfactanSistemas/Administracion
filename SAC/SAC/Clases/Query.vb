@@ -10,7 +10,7 @@ Module Query
 
         Using cn As New SqlConnection
 
-            cn.ConnectionString = Helper._ConectarA(WBase) 'ConfigurationManager.ConnectionStrings("CS").ToString
+            cn.ConnectionString = _ConectarA(WBase) 'ConfigurationManager.ConnectionStrings("CS").ToString
             cn.Open()
 
             Using cm As New SqlCommand(q)
@@ -37,7 +37,7 @@ Module Query
 
         Using cn As New SqlConnection
 
-            cn.ConnectionString = Helper._ConectarA(WBase) 'ConfigurationManager.ConnectionStrings("CS").ToString
+            cn.ConnectionString = _ConectarA(WBase) 'ConfigurationManager.ConnectionStrings("CS").ToString
             cn.Open()
 
             Using cm As New SqlCommand(q)
@@ -62,7 +62,7 @@ Module Query
         Dim cm As New SqlCommand
         Dim dr As SqlDataReader
 
-        cn.ConnectionString = Helper._ConectarA(WBase) 'ConfigurationManager.ConnectionStrings("CS").ToString
+        cn.ConnectionString = _ConectarA(WBase) 'ConfigurationManager.ConnectionStrings("CS").ToString
         cn.Open()
 
         cm.Connection = cn

@@ -2117,11 +2117,11 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
     End Sub
 
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button1.Click
         Try
             With OpenFileDialog1
                 .Filter = "Imágenes (bmp, jpg, png) | " & String.Join(";", EXTENSIONES_PERMITIDAS.Split("|"))
-                If .ShowDialog() = Windows.Forms.DialogResult.OK Then
+                If .ShowDialog() = DialogResult.OK Then
                     Dim WArchivos() = .FileNames
 
                     If WArchivos.Length > 0 Then
@@ -2136,7 +2136,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
         End Try
     End Sub
 
-    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+    Private Sub Button2_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button2.Click
         Try
             If dgvArchivos.SelectedRows.Count > 0 Then
                 EliminarArchivoToolStripMenuItem_Click(Nothing, Nothing)

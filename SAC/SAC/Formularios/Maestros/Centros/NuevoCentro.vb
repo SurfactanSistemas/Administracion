@@ -18,12 +18,12 @@
     End Sub
 
     Private Function _ProximoNumero() As String
-        Dim WUltimo As DataRow = Query.GetSingle("SELECT ISNULL(Max(Codigo), 0) Ultimo FROM CentroSac")
+        Dim WUltimo As DataRow = GetSingle("SELECT ISNULL(Max(Codigo), 0) Ultimo FROM CentroSac")
 
         Return WUltimo.Item("Ultimo") + 1
     End Function
 
-    Private Sub txtCodigo_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCodigo.KeyDown
+    Private Sub txtCodigo_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtCodigo.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtCodigo.Text) = "" Then : Exit Sub : End If
@@ -52,7 +52,7 @@
 
     End Sub
 
-    Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
+    Private Sub btnLimpiar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLimpiar.Click
         txtCodigo.Text = _ProximoNumero()
         txtDescripcion.Text = ""
         txtResponsable.Text = ""
@@ -60,7 +60,7 @@
         txtCodigo.Focus()
     End Sub
 
-    Private Sub btnGrabar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGrabar.Click
+    Private Sub btnGrabar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnGrabar.Click
         Try
             If {txtDescripcion, txtCodigo, txtResponsable}.Any(Function(txt) txt.Text.Trim = "") Then
                 Throw New Exception("Los campos 'Descripcion', 'Codigo', y 'Responsable' son obligatorios y no pueden estar vacíos.")
@@ -72,9 +72,9 @@
 
             If IsNothing(WResponsable) Then Throw New Exception("El responsable indicado es inexistente")
 
-            Query.ExecuteNonQueries("DELETE FROM CentroSac WHERE Codigo = '" & txtCodigo.Text & "'", "INSERT INTO CentroSac (Codigo, Descripcion, Responsable) VALUES (" & txtCodigo.Text & ", '" & txtDescripcion.Text & "', '" & txtResponsable.Text & "')")
+            ExecuteNonQueries("DELETE FROM CentroSac WHERE Codigo = '" & txtCodigo.Text & "'", "INSERT INTO CentroSac (Codigo, Descripcion, Responsable) VALUES (" & txtCodigo.Text & ", '" & txtDescripcion.Text & "', '" & txtResponsable.Text & "')")
 
-            Dim WOwner As INuevoCentro = CType(Owner, INuevoCentro)
+            Dim WOwner = CType(Owner, INuevoCentro)
 
             If Not IsNothing(WOwner) Then
                 WOwner._ProcesarNuevoCentro(txtCodigo.Text)
@@ -87,13 +87,13 @@
         End Try
     End Sub
 
-    Private Sub btnEliminar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEliminar.Click
+    Private Sub btnEliminar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnEliminar.Click
         Try
             If MsgBox("¿Está seguro de querer eliminar este Centro Sac?", MsgBoxStyle.YesNoCancel) <> MsgBoxResult.Yes Then Exit Sub
 
-            Query.ExecuteNonQueries("DELETE FROM CentroSac WHERE Codigo = '" & txtCodigo.Text & "'")
+            ExecuteNonQueries("DELETE FROM CentroSac WHERE Codigo = '" & txtCodigo.Text & "'")
 
-            Dim WOwner As INuevoCentro = CType(Owner, INuevoCentro)
+            Dim WOwner = CType(Owner, INuevoCentro)
 
             If Not IsNothing(WOwner) Then
                 WOwner._ProcesarNuevoCentro(txtCodigo.Text)
@@ -106,17 +106,17 @@
         End Try
     End Sub
 
-    Private Sub btnCerrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrar.Click
+    Private Sub btnCerrar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCerrar.Click
         Close()
     End Sub
 
-    Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtCodigo.KeyPress, txtResponsable.KeyPress
+    Private Sub SoloNumero(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txtCodigo.KeyPress, txtResponsable.KeyPress
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
             e.Handled = True
         End If
     End Sub
 
-    Private Sub txtDescripcion_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDescripcion.KeyDown
+    Private Sub txtDescripcion_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtDescripcion.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtDescripcion.Text) = "" Then : Exit Sub : End If
@@ -129,14 +129,14 @@
 
     End Sub
 
-    Private Sub txtReponsable_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtResponsable.KeyDown
+    Private Sub txtReponsable_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtResponsable.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If txtResponsable.Text.Trim = "" Then
                 btnConsultaResp.PerformClick()
             End If
 
-            Dim WResponsable As DataRow = Query.GetSingle("SELECT Codigo, LTRIM(RTRIM(Descripcion)) Descripcion FROM ResponsableSac WHERE Codigo = '" & txtResponsable.Text & "'")
+            Dim WResponsable As DataRow = GetSingle("SELECT Codigo, LTRIM(RTRIM(Descripcion)) Descripcion FROM ResponsableSac WHERE Codigo = '" & txtResponsable.Text & "'")
 
             lblDescResponsable.Text = ""
 
@@ -154,15 +154,15 @@
 
     End Sub
 
-    Private Sub NuevoResponsableSAC_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+    Private Sub NuevoResponsableSAC_Shown(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Shown
         txtDescripcion.Focus()
     End Sub
 
-    Private Sub txtResponsable_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtResponsable.MouseDoubleClick
+    Private Sub txtResponsable_MouseDoubleClick(ByVal sender As Object, ByVal e As MouseEventArgs) Handles txtResponsable.MouseDoubleClick
         btnConsultaResp.PerformClick()
     End Sub
 
-    Private Sub NuevoCentro_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub NuevoCentro_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
 
     End Sub
 
@@ -171,7 +171,7 @@
         txtReponsable_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
     End Sub
 
-    Private Sub btnConsultaResp_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsultaResp.Click
+    Private Sub btnConsultaResp_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnConsultaResp.Click
         Dim frm As New AyudaResponsablesSac
         frm.ShowDialog(Me)
     End Sub

@@ -9,15 +9,15 @@
         lstOpciones.Items.AddRange(WOpciones)
     End Sub
     
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button1.Click
         Close()
     End Sub
 
-    Private Sub lstOpciones_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lstOpciones.MouseDoubleClick
+    Private Sub lstOpciones_MouseDoubleClick(ByVal sender As Object, ByVal e As MouseEventArgs) Handles lstOpciones.MouseDoubleClick
         With lstOpciones
             If .SelectedIndex < 0 Then Exit Sub
 
-            Dim WOwner As IAyudaContenedor = CType(Owner, IAyudaContenedor)
+            Dim WOwner = CType(Owner, IAyudaContenedor)
             If Not IsNothing(WOwner) Then WOwner._ProcesarAyudaContenedor(.SelectedIndex)
 
             Close()

@@ -18,12 +18,12 @@
     End Sub
 
     Private Function _ProximoNumero() As String
-        Dim WUltimo As DataRow = Query.GetSingle("SELECT ISNULL(Max(Codigo), 0) Ultimo FROM ResponsableSac")
+        Dim WUltimo As DataRow = GetSingle("SELECT ISNULL(Max(Codigo), 0) Ultimo FROM ResponsableSac")
 
         Return WUltimo.Item("Ultimo") + 1
     End Function
 
-    Private Sub txtCodigo_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCodigo.KeyDown
+    Private Sub txtCodigo_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtCodigo.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtCodigo.Text) = "" Then : Exit Sub : End If
@@ -51,7 +51,7 @@
 
     End Sub
 
-    Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
+    Private Sub btnLimpiar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLimpiar.Click
         txtCodigo.Text = _ProximoNumero()
         txtDescripcion.Text = ""
         txtEmail.Text = ""
@@ -59,7 +59,7 @@
         txtCodigo.Focus()
     End Sub
 
-    Private Sub btnGrabar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGrabar.Click
+    Private Sub btnGrabar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnGrabar.Click
         Try
             If {txtDescripcion, txtClaveSegunridad, txtCodigo}.Any(Function(txt) txt.Text.Trim = "") Then
                 Throw New Exception("Los campos 'Descripcion', 'Codigo', y 'Clave' son obligatorios y no pueden estar vacíos.")
@@ -69,9 +69,9 @@
             txtEmail.Text = Microsoft.VisualBasic.Left(txtEmail.Text, 50)
             txtClaveSegunridad.Text = Microsoft.VisualBasic.Left(txtClaveSegunridad.Text, 10)
 
-            Query.ExecuteNonQueries("DELETE FROM ResponsableSac WHERE Codigo = '" & txtCodigo.Text & "'", "INSERT INTO ResponsableSac (Codigo, Descripcion, Email, ClaveSeguridad) VALUES (" & txtCodigo.Text & ", '" & txtDescripcion.Text & "', '" & txtEmail.Text & "', '" & txtClaveSegunridad.Text & "')")
+            ExecuteNonQueries("DELETE FROM ResponsableSac WHERE Codigo = '" & txtCodigo.Text & "'", "INSERT INTO ResponsableSac (Codigo, Descripcion, Email, ClaveSeguridad) VALUES (" & txtCodigo.Text & ", '" & txtDescripcion.Text & "', '" & txtEmail.Text & "', '" & txtClaveSegunridad.Text & "')")
 
-            Dim WOwner As INuevoResponsableSac = CType(Owner, INuevoResponsableSac)
+            Dim WOwner = CType(Owner, INuevoResponsableSac)
 
             If Not IsNothing(WOwner) Then
                 WOwner._ProcesarNuevoResponsableSac(txtCodigo.Text)
@@ -84,13 +84,13 @@
         End Try
     End Sub
 
-    Private Sub btnEliminar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEliminar.Click
+    Private Sub btnEliminar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnEliminar.Click
         Try
             If MsgBox("¿Está seguro de querer eliminar este Responsable Sac?", MsgBoxStyle.YesNoCancel) <> MsgBoxResult.Yes Then Exit Sub
 
-            Query.ExecuteNonQueries("DELETE FROM ResponsableSac WHERE Codigo = '" & txtCodigo.Text & "'")
+            ExecuteNonQueries("DELETE FROM ResponsableSac WHERE Codigo = '" & txtCodigo.Text & "'")
 
-            Dim WOwner As INuevoResponsableSac = CType(Owner, INuevoResponsableSac)
+            Dim WOwner = CType(Owner, INuevoResponsableSac)
 
             If Not IsNothing(WOwner) Then
                 WOwner._ProcesarNuevoResponsableSac(txtCodigo.Text)
@@ -103,17 +103,17 @@
         End Try
     End Sub
 
-    Private Sub btnCerrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrar.Click
+    Private Sub btnCerrar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCerrar.Click
         Close()
     End Sub
 
-    Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtCodigo.KeyPress
+    Private Sub SoloNumero(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txtCodigo.KeyPress
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
             e.Handled = True
         End If
     End Sub
 
-    Private Sub txtDescripcion_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDescripcion.KeyDown
+    Private Sub txtDescripcion_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtDescripcion.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtDescripcion.Text) = "" Then : Exit Sub : End If
@@ -126,7 +126,7 @@
 
     End Sub
 
-    Private Sub txtEmail_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtEmail.KeyDown
+    Private Sub txtEmail_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtEmail.KeyDown
 
         If e.KeyData = Keys.Enter Then
 
@@ -138,7 +138,7 @@
 
     End Sub
 
-    Private Sub txtClaveSegunridad_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtClaveSegunridad.KeyDown
+    Private Sub txtClaveSegunridad_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtClaveSegunridad.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtClaveSegunridad.Text) = "" Then : Exit Sub : End If
@@ -151,7 +151,7 @@
 
     End Sub
 
-    Private Sub NuevoResponsableSAC_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+    Private Sub NuevoResponsableSAC_Shown(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Shown
         txtDescripcion.Focus()
     End Sub
 End Class

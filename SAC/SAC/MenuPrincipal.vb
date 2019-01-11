@@ -3,7 +3,7 @@ Imports SAC.Clases
 
 Public Class MenuPrincipal
 
-    Private Sub CerrarSistemaToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CerrarSistemaToolStripMenuItem.Click
+    Private Sub CerrarSistemaToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles CerrarSistemaToolStripMenuItem.Click
         Login.Dispose()
         Close()
     End Sub
@@ -12,7 +12,7 @@ Public Class MenuPrincipal
         frm.Show(Me)
     End Sub
 
-    Private Sub MenuPrincipal_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub MenuPrincipal_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         If Val(Operador.CodigoResponsableSac) = 0 Or Val(Operador.Codigo) = 3 Or Val(Operador.Codigo) = 21 Then
             For Each i As ToolStripMenuItem In {TiposDeSolicitudToolStripMenuItem, ResponsablesToolStripMenuItem}
                 i.Enabled = False
@@ -20,28 +20,28 @@ Public Class MenuPrincipal
         End If
     End Sub
 
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button1.Click
         Login.Show()
         Close()
     End Sub
 
-    Private Sub TiposDeSolicitudToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TiposDeSolicitudToolStripMenuItem.Click
+    Private Sub TiposDeSolicitudToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles TiposDeSolicitudToolStripMenuItem.Click
         Abrir(New ListadoTiposSolicitud)
     End Sub
 
-    Private Sub ResponsablesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ResponsablesToolStripMenuItem.Click
+    Private Sub ResponsablesToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ResponsablesToolStripMenuItem.Click
         Abrir(New ListadoResponsablesSAC)
     End Sub
 
-    Private Sub CentrosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CentrosToolStripMenuItem.Click
+    Private Sub CentrosToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles CentrosToolStripMenuItem.Click
         Abrir(New ListadoCentros)
     End Sub
 
-    Private Sub IndiceGeneralDeAccionesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles IndiceGeneralDeAccionesToolStripMenuItem.Click
+    Private Sub IndiceGeneralDeAccionesToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles IndiceGeneralDeAccionesToolStripMenuItem.Click
         Abrir(New IndiceGralSac)
     End Sub
 
-    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+    Private Sub Button2_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button2.Click
 
         Dim WGuiasOrigen As DataTable = GetAll("SELECT * FROM Guia WHERE FechaOrd >= '20180801' And upper(Movi) = 'S' Order by Codigo", ComboBox1.SelectedItem)
         Dim WGuiasAImprimir As DataTable = WGuiasOrigen.Clone

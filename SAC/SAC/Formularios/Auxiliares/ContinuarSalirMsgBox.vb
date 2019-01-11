@@ -20,17 +20,17 @@
         Return frm.ShowDialog()
     End Function
 
-    Private Sub btnContinuar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnContinuar.Click
-        DialogResult = Windows.Forms.DialogResult.OK
+    Private Sub btnContinuar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnContinuar.Click
+        DialogResult = DialogResult.OK
         Close()
     End Sub
 
-    Private Sub btnSalir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSalir.Click
-        DialogResult = Windows.Forms.DialogResult.Cancel
+    Private Sub btnSalir_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSalir.Click
+        DialogResult = DialogResult.Cancel
         Close()
     End Sub
 
-    Private Sub ContinuarSalirMsgBox_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub ContinuarSalirMsgBox_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         Label1.Text = _Msg
         btnContinuar.Text = _MsgOk
         btnSalir.Text = _MsgCancel

@@ -15,7 +15,7 @@ Module ExtensionesTipoFecha
     ''' </summary>
     <Extension()>
     Function esMenorA(ByVal fecha1 As String, ByVal fecha2 As String) As Boolean
-        Return Helper.ordenaFecha(fecha1) < Helper.ordenaFecha(fecha2)
+        Return ordenaFecha(fecha1) < ordenaFecha(fecha2)
     End Function
 
     ''' <summary>
@@ -23,7 +23,7 @@ Module ExtensionesTipoFecha
     ''' </summary>
     <Extension()>
     Function esMayorA(ByVal fecha1 As String, ByVal fecha2 As String) As Boolean
-        Return Helper.ordenaFecha(fecha1) > Helper.ordenaFecha(fecha2)
+        Return ordenaFecha(fecha1) > ordenaFecha(fecha2)
     End Function
 
     ''' <summary>
@@ -31,7 +31,7 @@ Module ExtensionesTipoFecha
     ''' </summary>
     <Extension()>
     Function esIgualA(ByVal fecha1 As String, ByVal fecha2 As String) As Boolean
-        Return Helper.ordenaFecha(fecha1) = Helper.ordenaFecha(fecha2)
+        Return ordenaFecha(fecha1) = ordenaFecha(fecha2)
     End Function
 
     ''' <summary>

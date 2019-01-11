@@ -5,11 +5,11 @@ Public Class Login
 
     Private WAbiertoporComando As Boolean = False
 
-    Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
+    Private Sub btnCancel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCancel.Click
         Close()
     End Sub
 
-    Private Sub Login_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub Login_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
 
         Dim tabla As New DataTable
         With tabla
@@ -49,7 +49,7 @@ Public Class Login
 
     End Sub
 
-    Private Sub btnAccept_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAccept.Click
+    Private Sub btnAccept_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAccept.Click
 
         'Globals.empresa = cmbEntity.SelectedItem
 
@@ -62,7 +62,7 @@ Public Class Login
             Exit Sub
         End If
 
-        If Helper._EsPellital Then
+        If _EsPellital Then
             ' En caso de ser PELLITAL, validamos que la conexion se haga desde una pc con Permisos. Los mismos se definen segun nombre de PC.
 
             If Not _PermisosPellitalValidos() Then
@@ -84,20 +84,20 @@ Public Class Login
     Private Function _PermisosPellitalValidos() As Boolean
 
         Dim WPermitidos() = ConfigurationManager.AppSettings("PERMISOS_PELLITAL").ToString.Split(",")
-        Dim WNombrePC = Helper.getNombrePC
+        Dim WNombrePC = getNombrePC
 
         Return (From N In WPermitidos Where UCase(Trim(N)) = UCase(Trim(WNombrePC))).Any()
 
     End Function
 
-    Private Sub Login_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+    Private Sub Login_Shown(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Shown
         If WAbiertoporComando Then
             btnCancel_Click(Nothing, Nothing)
         End If
         txtPsw.Focus()
     End Sub
 
-    Private Sub txtPsw_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtPsw.KeyDown
+    Private Sub txtPsw_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtPsw.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtPsw.Text) = "" Then : Exit Sub : End If
