@@ -1362,13 +1362,13 @@
             "Cumple Act"});
             this.Estado.MinimumWidth = 46;
             this.Estado.Name = "Estado";
-            this.Estado.Width = 57;
+            this.Estado.Width = 51;
             // 
             // Observaciones
             // 
             this.Observaciones.HeaderText = "Observaciones";
             this.Observaciones.Name = "Observaciones";
-            this.Observaciones.Width = 126;
+            this.Observaciones.Width = 113;
             // 
             // tabPage3
             // 
@@ -1558,10 +1558,10 @@
             this.TB_Codigo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Codigo.Location = new System.Drawing.Point(76, 22);
             this.TB_Codigo.Name = "TB_Codigo";
-            this.TB_Codigo.ReadOnly = true;
             this.TB_Codigo.Size = new System.Drawing.Size(84, 20);
             this.TB_Codigo.TabIndex = 5;
             this.TB_Codigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.TB_Codigo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Codigo_KeyDown);
             // 
             // textBox2
             // 

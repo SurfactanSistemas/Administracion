@@ -81,4 +81,8 @@ Public Class MenuPrincipal
         ProgressBar1.Value = 0
 
     End Sub
+
+    Private Sub ListadoDeIncidenciasToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListadoDeIncidenciasToolStripMenuItem.Click
+        Abrir(New ListadoIncidencias)
+    End Sub
 End Class

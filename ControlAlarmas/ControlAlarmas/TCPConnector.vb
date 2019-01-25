@@ -108,7 +108,7 @@ Public Class TCPConnector
 
                 W.Write(data, 0, data.Length)
 
-                Threading.Thread.Sleep(100)
+                Threading.Thread.Sleep(500)
 
                 If W.DataAvailable AndAlso Not IsNothing(wData) Then
                     W.Read(wData, 0, wData.Length)

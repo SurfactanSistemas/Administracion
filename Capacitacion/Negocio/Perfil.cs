@@ -366,7 +366,7 @@ namespace Negocio
         public Perfil BuscarUno(string IdAModificar, string version)
         {
             Conexion repo = new Conexion();
-            string consulta = "select * from Tarea where Codigo = " + IdAModificar + " and version = " + version;
+            string consulta = "select *, Vigencia = HastaVigencia, Responsable = 0, ResponsableII = 0 from TareaVersion where Codigo = " + IdAModificar + " and version = " + version;
             System.Data.DataTable DT = repo.BuscarUno(consulta);
             Perfil obj = new Perfil();
 

@@ -123,6 +123,7 @@
     <Compile Include="Clases\ExtensionesTipoSqlConnection.vb" />
     <Compile Include="Clases\ExtensionesTipoString.vb" />
     <Compile Include="Clases\ExtensionesTipoFecha.vb" />
+    <Compile Include="Clases\Globales.vb" />
     <Compile Include="Clases\Operador.vb" />
     <Compile Include="Clases\Query.vb" />
     <Compile Include="Formularios\Auxiliares\ContinuarSalirMsgBox.Designer.vb">
@@ -167,6 +168,54 @@
     <Compile Include="Formularios\Maestros\Centros\NuevoCentro.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formularios\Maestros\Incidencias\DetallesIncidenciaRechazoMP.Designer.vb">
+      <DependentUpon>DetallesIncidenciaRechazoMP.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Maestros\Incidencias\DetallesIncidenciaRechazoMP.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Maestros\Incidencias\DetalleMovimientosPT.Designer.vb">
+      <DependentUpon>DetalleMovimientosPT.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Maestros\Incidencias\DetalleMovimientosPT.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Maestros\Incidencias\DetalleMovimientosMP.Designer.vb">
+      <DependentUpon>DetalleMovimientosMP.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Maestros\Incidencias\DetalleMovimientosMP.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Maestros\Incidencias\DetallesEnsayosPT.Designer.vb">
+      <DependentUpon>DetallesEnsayosPT.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Maestros\Incidencias\DetallesEnsayosPT.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Maestros\Incidencias\DetallesEnsayosMP.Designer.vb">
+      <DependentUpon>DetallesEnsayosMP.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Maestros\Incidencias\DetallesEnsayosMP.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Maestros\Incidencias\DetallesHojaProduccion.Designer.vb">
+      <DependentUpon>DetallesHojaProduccion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Maestros\Incidencias\DetallesHojaProduccion.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Maestros\Incidencias\DetallesIncidencia.Designer.vb">
+      <DependentUpon>DetallesIncidencia.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Maestros\Incidencias\DetallesIncidencia.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Maestros\Incidencias\SeleccionTipoIncidencia.Designer.vb">
+      <DependentUpon>SeleccionTipoIncidencia.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Maestros\Incidencias\SeleccionTipoIncidencia.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\Maestros\Indice General SAC\ExportarIndice.Designer.vb">
       <DependentUpon>ExportarIndice.vb</DependentUpon>
     </Compile>
@@ -197,6 +246,12 @@
     <Compile Include="Formularios\Maestros\Indice General SAC\NuevoSac.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formularios\Maestros\Incidencias\ListadoIncidencias.Designer.vb">
+      <DependentUpon>ListadoIncidencias.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Maestros\Incidencias\ListadoIncidencias.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\Maestros\Responsables SAC\ListadoResponsableSAC.Designer.vb">
       <DependentUpon>ListadoResponsableSAC.vb</DependentUpon>
     </Compile>
@@ -224,6 +279,7 @@
     <Compile Include="Helper.vb" />
     <Compile Include="Interfaces\IExportarIndice.vb" />
     <Compile Include="Interfaces\IExportarSac.vb" />
+    <Compile Include="Interfaces\INuevaIncidencia.vb" />
     <Compile Include="Interfaces\INuevoSac.vb" />
     <Compile Include="Interfaces\IAyudaContenedor.vb" />
     <Compile Include="Interfaces\IAyudaCentroSac.vb" />
@@ -233,6 +289,7 @@
     <Compile Include="Interfaces\INuevoCentro.vb" />
     <Compile Include="Interfaces\INuevoResponsableSac.vb" />
     <Compile Include="Interfaces\INuevoTipoSolicitud.vb" />
+    <Compile Include="Interfaces\ISeleccionNuevaIncidencia.vb" />
     <Compile Include="Login.designer.vb">
       <DependentUpon>Login.vb</DependentUpon>
     </Compile>
@@ -355,6 +412,30 @@
     <EmbeddedResource Include="Formularios\Maestros\Centros\NuevoCentro.resx">
       <DependentUpon>NuevoCentro.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Maestros\Incidencias\DetallesIncidenciaRechazoMP.resx">
+      <DependentUpon>DetallesIncidenciaRechazoMP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Maestros\Incidencias\DetalleMovimientosPT.resx">
+      <DependentUpon>DetalleMovimientosPT.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Maestros\Incidencias\DetalleMovimientosMP.resx">
+      <DependentUpon>DetalleMovimientosMP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Maestros\Incidencias\DetallesEnsayosPT.resx">
+      <DependentUpon>DetallesEnsayosPT.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Maestros\Incidencias\DetallesEnsayosMP.resx">
+      <DependentUpon>DetallesEnsayosMP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Maestros\Incidencias\DetallesHojaProduccion.resx">
+      <DependentUpon>DetallesHojaProduccion.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Maestros\Incidencias\DetallesIncidencia.resx">
+      <DependentUpon>DetallesIncidencia.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Maestros\Incidencias\SeleccionTipoIncidencia.resx">
+      <DependentUpon>SeleccionTipoIncidencia.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Maestros\Indice General SAC\ExportarIndice.resx">
       <DependentUpon>ExportarIndice.vb</DependentUpon>
     </EmbeddedResource>
@@ -369,6 +450,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Maestros\Indice General SAC\NuevoSac.resx">
       <DependentUpon>NuevoSac.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Maestros\Incidencias\ListadoIncidencias.resx">
+      <DependentUpon>ListadoIncidencias.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Maestros\Responsables SAC\ListadoResponsableSAC.resx">
       <DependentUpon>ListadoResponsableSAC.vb</DependentUpon>

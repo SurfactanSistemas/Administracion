@@ -78,33 +78,40 @@ Public Class Form1
             Exit Sub
         End If
 
+        Select Case WBoton.Name
+            Case btnSurfac1.Name
+                WCheck = Surfac1Encendido
+            Case btnSurfac2.Name
+                WCheck = Surfac2Encendido
+            Case btnSurfac3.Name
+                WCheck = Surfac3Encendido
+            Case btnSurfac5.Name
+                WCheck = Surfac5Encendido
+            Case btnPellital.Name
+                WCheck = PellitalEncendido
+        End Select
 
-            Select Case WBoton.Name
-                Case btnSurfac1.Name
-                    WCheck = Surfac1Encendido
-                Case btnSurfac2.Name
-                    WCheck = Surfac2Encendido
-                Case btnSurfac3.Name
-                    WCheck = Surfac3Encendido
-                Case btnSurfac5.Name
-                    WCheck = Surfac5Encendido
-                Case btnPellital.Name
-                    WCheck = PellitalEncendido
-            End Select
+        WBoton.BackgroundImage = IIf(WCheck.Checked, My.Resources.btn_off, My.Resources.btn_on)
 
-            WBoton.BackgroundImage = IIf(WCheck.Checked, My.Resources.btn_off, My.Resources.btn_on)
+        If WCheck.Checked Then
+            WComando = "21"
+        Else
+            WComando = "11:" & WDelay
+        End If
 
-            If WCheck.Checked Then
-                WComando = "2X"
-            Else
-                WComando = "1X:" & WDelay
-            End If
+        WTCP.SendData(WComando, WIp, "6722")
 
-            WTCP.SendData(WComando, WIp, "6722")
+        If WCheck.Checked Then
+            WComando = "22"
+        Else
+            WComando = "12:" & WDelay
+        End If
 
-            WCheck.Checked = Not WCheck.Checked
+        WTCP.SendData(WComando, WIp, "6722")
 
-            Timer1.Start()
+        WCheck.Checked = Not WCheck.Checked
+
+        Timer1.Start()
 
     End Sub
 
@@ -143,7 +150,7 @@ Public Class Form1
 
             Dim W As String
 
-            For i = 0 To 1
+            For i = 0 To 8
                 Dim o As Object = WData(i)
                 W &= Chr(o.ToString)
             Next
@@ -181,7 +188,7 @@ Public Class Form1
 
         Try
             pinger = New Ping
-            Dim reply As PingReply = pinger.Send(ipAddress, 500)
+            Dim reply As PingReply = pinger.Send(ipAddress, 1000)
             pingable = reply.Status = IPStatus.Success
 
         Catch ex As Exception

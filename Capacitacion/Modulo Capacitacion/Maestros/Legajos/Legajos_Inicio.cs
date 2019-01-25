@@ -167,7 +167,7 @@ namespace Modulo_Capacitacion.Maestros.Legajos
 
                 if (MessageBox.Show("¿Está seguro de querer eliminar el Legajo indicado?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    L.Eliminar(DGV_Legajos.SelectedRows[0].Cells[0].Value.ToString());
+                    L.Eliminar(DGV_Legajos.SelectedRows[0].Cells[1].Value.ToString());
                 }
 
                 ActualizarGrilla();

@@ -53,6 +53,11 @@ namespace Modulo_Capacitacion.Maestros.Legajos
         public AgModLegajo(Legajo LegajoAModificar)
         {
             InitializeComponent();
+            _CargarLegajo(LegajoAModificar);
+        }
+
+        private void _CargarLegajo(Legajo LegajoAModificar)
+        {
             L = LegajoAModificar;
             LegajoViejo = LegajoAModificar;
 
@@ -60,7 +65,7 @@ namespace Modulo_Capacitacion.Maestros.Legajos
             CargarPerfil();
             Cargado = true;
 
-            AModificar = true;
+            AModificar = L.Codigo != 0;
             CargarDatosABM();
             CargarDatosPefil();
             //CargarTemas(L.Temas);
@@ -189,29 +194,32 @@ namespace Modulo_Capacitacion.Maestros.Legajos
             dtTemasGuardados.Columns.Add("Estado", typeof(string));
             dtTemasGuardados.Columns.Add("Observaciones", typeof(string));
 
-            foreach (var item in list)
+            if (list != null)
             {
-                DataGridViewRow row = new DataGridViewRow();
-                row.CreateCells(DGV_Temas);
-                row.Cells[0].Value = item.Codigo;
-                row.Cells[1].Value = item.Descripcion;
-                //necesario
-                row.Cells[2].Value = item.Necesaria == 1 ? "X" : "";
-                //deseable
-                row.Cells[3].Value = item.Deseable == 1 ? "X" : "";
-                //combo
-               // DataGridViewComboBoxColumn Estado = new DataGridViewComboBoxColumn();
-               // Estado.DisplayStyle = DataGridViewComboBoxDisplayStyle.DropDownButton;
-               // Estado.HeaderText = "Estado";
-                //Estado. = 1;
-                row.Cells[4].Value = _BuscarEstadoCurso(item.Codigo);
+                foreach (var item in list)
+                {
+                    DataGridViewRow row = new DataGridViewRow();
+                    row.CreateCells(DGV_Temas);
+                    row.Cells[0].Value = item.Codigo;
+                    row.Cells[1].Value = item.Descripcion;
+                    //necesario
+                    row.Cells[2].Value = item.Necesaria == 1 ? "X" : "";
+                    //deseable
+                    row.Cells[3].Value = item.Deseable == 1 ? "X" : "";
+                    //combo
+                    // DataGridViewComboBoxColumn Estado = new DataGridViewComboBoxColumn();
+                    // Estado.DisplayStyle = DataGridViewComboBoxDisplayStyle.DropDownButton;
+                    // Estado.HeaderText = "Estado";
+                    //Estado. = 1;
+                    row.Cells[4].Value = _BuscarEstadoCurso(item.Codigo);
                     //ObtenerValor(item.EstaCurso);
-                //observacion
-                //row.Cells[5].Value = item.Observacion;
-                row.Cells[5].Value = item.EstadoCurso;
-                //row.Cells[5].Value = item.Estado;
+                    //observacion
+                    //row.Cells[5].Value = item.Observacion;
+                    row.Cells[5].Value = item.EstadoCurso;
+                    //row.Cells[5].Value = item.Estado;
 
-                DGV_Temas.Rows.Add(row);
+                    DGV_Temas.Rows.Add(row);
+                }
             }
         }
 
@@ -280,54 +288,60 @@ namespace Modulo_Capacitacion.Maestros.Legajos
 
         private void CargarDatosABM()
         {
-            TB_Codigo.Text = L.Codigo.ToString().Trim();
-            TB_DescLegajo.Text = L.Descripcion.Trim();
-            TB_DNI.Text = L.DNI;
-            TB_CUIL.Text = L.CUIL;
-            TB_FechaIng.Text = L.FIngreso;
-
-            DateTime FEgresoParse;
-            DateTime.TryParse(L.FEgreso, out FEgresoParse);
-
-            if (FEgresoParse.ToString("d/M/yyyy") == "1/1/0001")
+            if (L.Codigo != 0)
             {
-                TB_FechaEgreso.Text = "00/00/0000";
-            } 
-            else 
-            {
-                TB_FechaEgreso.Text = FEgresoParse.ToShortDateString();
-                TB_FechaEgreso.BackColor = Color.Red;
+                TB_Codigo.Text = L.Codigo.ToString().Trim();
+                TB_DescLegajo.Text = L.Descripcion.Trim();
+                TB_DNI.Text = L.DNI;
+                TB_CUIL.Text = L.CUIL;
+                if (L.FIngreso.Trim() != "")
+                {
+                    TB_FechaIng.Text = L.FIngreso;
+                }
+
+                DateTime FEgresoParse;
+                DateTime.TryParse(L.FEgreso, out FEgresoParse);
+
+                if (FEgresoParse.ToString("d/M/yyyy") == "1/1/0001")
+                {
+                    TB_FechaEgreso.Text = "00/00/0000";
+                }
+                else
+                {
+                    TB_FechaEgreso.Text = FEgresoParse.ToShortDateString();
+                    TB_FechaEgreso.BackColor = Color.Red;
+                }
+
+                int valorVersion = int.Parse(L.Version);
+                TB_Version.Text = valorVersion.ToString().Trim();
+                DTP_Fecha.Text = L.FechaVersion;
+                TB_CodPerfil.Text = L.Perfil.Codigo.ToString();
+
+                //Falta los combos y observaciones
+                TB_ObservPrimariaLeg.Text = L.EstadoI.Trim();
+                TB_ObservSecundariaLeg.Text = L.EstadoII.Trim();
+                TB_ObservTerciariaLeg.Text = L.EstadoIII.Trim();
+                TB_ObservIdiomaLeg.Text = L.EstadoIV.Trim();
+                TB_ObservExpLeg.Text = L.EstadoV.Trim();
+                TB_ObservCondFisicaLeg.Text = L.EstadoVI.Trim();
+                TB_Otros1Leg.Text = L.EstadoVII.Trim();
+                TB_Otros2Leg.Text = L.EstadoVIII.Trim();
+                TB_Equiv1Leg.Text = L.EstadoIX.Trim();
+                TB_Equiv2Leg.Text = L.EstadoX.Trim();
+
+                L.EstaX = string.IsNullOrEmpty(L.EstaX.Trim()) ? "0" : L.EstaX;
+
+                CB_EstPrim.SelectedIndex = int.Parse(L.EstaI);
+                CB_EstSec.SelectedIndex = int.Parse(L.EstaII);
+                CB_EstTerc.SelectedIndex = int.Parse(L.EstaIII);
+                CB_EstIdioma.SelectedIndex = int.Parse(L.EstaIV);
+                CB_EstExp.SelectedIndex = int.Parse(L.EstaV);
+                CB_EstCondFisic.SelectedIndex = int.Parse(L.EstaVI);
+                CB_EstOtros1.SelectedIndex = int.Parse(L.EstaVII);
+                CB_EstOtros2.SelectedIndex = int.Parse(L.EstaVIII);
+                CB_EstEquiv1.SelectedIndex = int.Parse(L.EstaIX);
+                CB_Estequiv2.SelectedIndex = int.Parse(L.EstaX);
             }
-
-            int valorVersion = int.Parse(L.Version);
-            TB_Version.Text = valorVersion.ToString().Trim();
-            DTP_Fecha.Text = L.FechaVersion;
-            TB_CodPerfil.Text = L.Perfil.Codigo.ToString();
-
-            //Falta los combos y observaciones
-            TB_ObservPrimariaLeg.Text = L.EstadoI.Trim();
-            TB_ObservSecundariaLeg.Text = L.EstadoII.Trim();
-            TB_ObservTerciariaLeg.Text = L.EstadoIII.Trim();
-            TB_ObservIdiomaLeg.Text = L.EstadoIV.Trim();
-            TB_ObservExpLeg.Text = L.EstadoV.Trim();
-            TB_ObservCondFisicaLeg.Text = L.EstadoVI.Trim();
-            TB_Otros1Leg.Text = L.EstadoVII.Trim();
-            TB_Otros2Leg.Text = L.EstadoVIII.Trim();
-            TB_Equiv1Leg.Text = L.EstadoIX.Trim();
-            TB_Equiv2Leg.Text = L.EstadoX.Trim();
-
-            L.EstaX = string.IsNullOrEmpty(L.EstaX.Trim()) ? "0" : L.EstaX;
-
-            CB_EstPrim.SelectedIndex = int.Parse(L.EstaI);
-            CB_EstSec.SelectedIndex = int.Parse(L.EstaII);
-            CB_EstTerc.SelectedIndex = int.Parse(L.EstaIII);
-            CB_EstIdioma.SelectedIndex = int.Parse(L.EstaIV);
-            CB_EstExp.SelectedIndex = int.Parse(L.EstaV);
-            CB_EstCondFisic.SelectedIndex = int.Parse(L.EstaVI);
-            CB_EstOtros1.SelectedIndex = int.Parse(L.EstaVII);
-            CB_EstOtros2.SelectedIndex = int.Parse(L.EstaVIII);
-            CB_EstEquiv1.SelectedIndex = int.Parse(L.EstaIX);
-            CB_Estequiv2.SelectedIndex = int.Parse(L.EstaX);
         }
 
         private void CargarTemas(Perfil PerfilTemas)
@@ -353,12 +367,13 @@ namespace Modulo_Capacitacion.Maestros.Legajos
 
         private void CargarDatosPefil()
         {
-            //if (TB_CodPerfil.Text == "") return;
             BuscarCodperfil();
 
             Per = _BuscarPerfilPorVersion() ? Per.BuscarUno(TB_CodPerfil.Text, TB_VersPer.Text) : Per.BuscarUno(TB_CodPerfil.Text);
 
-            if (Per.Codigo == 0) throw new Exception("No se encontro elemento con el codigo ingresado");
+            if (Per.Codigo == 0 && TB_CodPerfil.Text != "") throw new Exception("No se encontro elemento con el codigo ingresado");
+
+            if (TB_CodPerfil.Text == "") return;
 
             TB_DescPerfil.Text = Per.Descripcion.Trim();
             TB_CodSector.Text = Per.sector.Codigo.ToString().Trim();
@@ -653,7 +668,7 @@ namespace Modulo_Capacitacion.Maestros.Legajos
             L.Descripcion = TB_DescLegajo.Text;
             L.DNI = TB_DNI.Text;
             L.CUIL = TB_CUIL.Text;
-            //L.FIngreso = TB_Fechaing.Text;
+            L.FIngreso = TB_FechaIng.Text;
             L.EstadoI = TB_ObservPrimariaLeg.Text;
             L.EstadoII = TB_ObservSecundariaLeg.Text;
             L.EstadoIII = TB_ObservTerciariaLeg.Text;
@@ -903,8 +918,12 @@ namespace Modulo_Capacitacion.Maestros.Legajos
                 {
                     TB_CodPerfil.Enabled = true;
                     TB_DescPerfil.Enabled = true;
-                    TB_CodPerfil.SelectedValue = fila[0].ToString();
-                    TB_DescPerfil.SelectedValue = TB_CodPerfil.SelectedValue;
+                    if (fila[0].ToString() != "")
+                    {
+                        TB_CodPerfil.SelectedValue = fila[0].ToString();
+                        TB_DescPerfil.SelectedValue = TB_CodPerfil.SelectedValue ?? 0;
+                    }
+                    
                     break;
                 }
             }
@@ -1062,6 +1081,28 @@ namespace Modulo_Capacitacion.Maestros.Legajos
             else if (e.KeyData == Keys.Escape)
             {
                 TB_DNI.Text = "";
+            }
+	        
+        }
+
+        private void TB_Codigo_KeyDown(object sender, KeyEventArgs e)
+        {
+
+            if (e.KeyData == Keys.Enter)
+            {
+                if (TB_Codigo.Text.Trim() == "") return;
+
+                Legajo LegajoAModificar = new Legajo();
+                LegajoAModificar = L.BuscarUno(TB_Codigo.Text);
+
+                _CargarLegajo(LegajoAModificar);
+
+                TB_DescLegajo.Focus();
+
+            }
+            else if (e.KeyData == Keys.Escape)
+            {
+                TB_Codigo.Text = "";
             }
 	        
         }
