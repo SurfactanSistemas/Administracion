@@ -425,6 +425,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Dim WOrden = 0
         Dim txtEmpresa As String
 
+        Dim varAcumPesosNetoParaIB, varAcumPesosNetoParaGanancias As Double
         Dim varOrdFecha As String
         Dim varCiclo As Integer
         Dim varPorce As Double
@@ -436,7 +437,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Dim varPorceIb, varPorceIbCaba As Double
         Dim varTipoIbCaba, varTipoIva, varTipoPrv, varTipoIb As Integer
         Dim varPago, varEmpresa As Integer
-        Dim varAcumulaNeto, varAcumulaNetoII, varAcumulaIva, varPesosOrig, varDifCambio, AcumPesosOrig, AcumDifCambio As Double
+        Dim varAcumulaNeto, varAcumulaNetoII, varAcumulaIva, varPesosOrig, varDifCambio, AcumPesosOrig, AcumPesosOrigII, AcumDifCambio As Double
         Dim varRetIbI, varRetIbII As Double
 
         Try
@@ -489,6 +490,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
 
                 AcumDifCambio = 0
                 AcumPesosOrig = 0
+                AcumPesosOrigII = 0
 
                 varTotal = 0
                 varSaldo = 0
@@ -496,6 +498,9 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
                 varSaldoUs = 0
                 varSaldoOriginal = 0
                 varDife = 0
+
+                varAcumPesosNetoParaIB = 0
+                varAcumPesosNetoParaGanancias = 0
 
                 Dim tabla As New DataTable
 
@@ -695,6 +700,8 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
 
                         End If
 
+                        Dim varAcuNetoOrig As Double = varAcuNeto
+
                         If compra Is Nothing OrElse compra.Item("Rechazado") <> 1 Then
                             varRetGan = CaculoRetencionGanancia(varTipoPrv, varAcumulaNeto, varAcuNeto, varAcuRetenido, varAcuAnticipo, varAcuBruto, varAcuIva)
                         End If
@@ -719,29 +726,73 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
 
                         varRetIb = varRetIbI + varRetIbII + varRetIva
 
-                        varPesosOrig = varParidad * varSaldoUs
                         varDifCambio = 0
 
                         varAcuNeto = (varAcumulado - varRetIb - varRetGan)
+
+                        If varParidad = 0 Then
+                            varPesosOrig = varSaldo
+                        Else
+                            varPesosOrig = varParidad * varSaldoUs
+                        End If
+
+                        AcumPesosOrigII += varPesosOrig
+                        varAcumPesosNetoParaIB += varAcumulaNetoII
+                        varAcumPesosNetoParaGanancias += varAcumulaNetoII - (varDife / 1.21)
 
                         If varParidad <> 0 Then
 
                             If compra.Item("MarcaDifCambio") = 0 Then
 
-                                varDifCambio = varSaldo - varPesosOrig
+                                Dim WIbI As Double = 0.0
+                                Dim WIbII As Double = 0.0
+                                Dim WIbIII = 0.0
+                                Dim WIbIV = 0.0
+
+                                If compra Is Nothing OrElse compra.Item("Rechazado") <> 1 Then
+                                    WIbI = CaculoRetencionIngresosBrutos(varTipoIb, varPorceIb, varAcumPesosNetoParaIB)
+                                    WIbIII = CaculoRetencionIngresosBrutos(varTipoIb, varPorceIb, varAcumPesosNetoParaGanancias)
+                                End If
+
+                                If varEmpresa = 1 And (compra Is Nothing OrElse compra.Item("Rechazado") <> 1) Then
+
+                                    If Val(varPorceIbCaba) <> 0 And Val(varTipoIbCaba) <> 2 Then
+                                        WIbII = CaculoRetencionIngresosBrutosCaba(varTipoIbCaba, varPorceIbCaba, varAcumPesosNetoParaIB)
+                                        WIbIV = CaculoRetencionIngresosBrutosCaba(varTipoIbCaba, varPorceIbCaba, varAcumPesosNetoParaGanancias)
+                                    End If
+
+                                End If
+
+                                Dim WRetGananciasDC As Double
+
+                                If compra Is Nothing OrElse compra.Item("Rechazado") <> 1 Then
+                                    
+                                    WRetGananciasDC = CaculoRetencionGanancia(varTipoPrv, varAcumPesosNetoParaGanancias, varAcuNetoOrig, varAcuRetenido, varAcuAnticipo, varAcuBruto, varAcuIva)
+
+                                End If
+
+                                If varRetGan <> 0 Or varPago = 2 Then
+                                    varDifCambio = varAcuNeto - (AcumPesosOrigII - WIbIII - WIbIV - WRetGananciasDC) - AcumDifCambio
+                                Else
+                                    varDifCambio = varAcuNeto - (AcumPesosOrigII - WIbI - WIbII - WRetGananciasDC) - AcumDifCambio
+                                End If
 
                                 AcumDifCambio += varDifCambio
 
                             End If
 
-                            AcumPesosOrig = IIf(varDifCambio >= 0, (varAcuNeto - AcumDifCambio), varAcuNeto)
+                            'AcumPesosOrig = IIf(varDifCambio >= 0, (varAcuNeto - AcumDifCambio), varAcuNeto)
+                            AcumPesosOrig = varAcuNeto - AcumDifCambio
 
+
+                        ElseIf compra IsNot Nothing AndAlso compra.Item("Rechazado") = 1 Then
+                            AcumPesosOrig += varPesosOrig
                         Else
-                            AcumPesosOrig = varAcuNeto
+                            AcumPesosOrig = varAcuNeto - AcumDifCambio
                         End If
 
                         Try
-                            SQLConnector.executeProcedure("alta_impCtaCtePrvNetII", CCPrv.Clave, CCPrv.Proveedor, CCPrv.Tipo, CCPrv.letra, CCPrv.punto, CCPrv.numero, varTotal, varSaldo, CCPrv.fecha, CCPrv.vencimiento, CCPrv.VencimientoII, CCPrv.Impre, CCPrv.nroInterno, txtEmpresa, varAcumulado, WOrden, txtFechaEmision.Text, "", "", "", varParidadTotal, varSaldoOriginal, varDife, 0, 0, "", varRetIb, varRetGan, varAcuNeto, varParidad, varTotalUs, varSaldoUs, varAcumulaUs, varPago, varPesosOrig, varDifCambio, AcumDifCambio, AcumPesosOrig)
+                            SQLConnector.executeProcedure("alta_impCtaCtePrvNetII", CCPrv.Clave, CCPrv.Proveedor, CCPrv.Tipo, CCPrv.letra, CCPrv.punto, CCPrv.numero, varTotal, varSaldo, CCPrv.fecha, CCPrv.vencimiento, CCPrv.VencimientoII, CCPrv.Impre, CCPrv.nroInterno, txtEmpresa, varAcumulado, WOrden, txtFechaEmision.Text, "", "", "", varParidadTotal, varSaldoOriginal, varDife, 0, 0, "", varRetIb, varRetGan, varAcuNeto, varParidad, varTotalUs, varSaldoUs, varAcumulaUs, varPago, IIf(varParidad = 0, 0, varPesosOrig), varDifCambio, AcumDifCambio, AcumPesosOrig)
                         Catch ex As Exception
                             MsgBox(ex.Message, MsgBoxStyle.Critical)
                             Exit Sub

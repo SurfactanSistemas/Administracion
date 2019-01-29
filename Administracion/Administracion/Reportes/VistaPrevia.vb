@@ -90,8 +90,8 @@ Public Class VistaPrevia
 
         Me.CrystalReportViewer1.SelectionFormula = IIf(IsNothing(Me.Formula), "", Me.Formula)
         Me.CrystalReportViewer1.Refresh()
-        Me.ShowDialog()
-        Me.Dispose()
+        Me.Show()
+        'Me.Dispose()
     End Sub
 
     Public Sub Imprimir(Optional ByVal cant As Integer = 1)

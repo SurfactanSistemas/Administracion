@@ -52,12 +52,12 @@ Partial Class DetallesIncidenciaRechazoMP
         Me.txtDescProducto = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.txtMotivos = New System.Windows.Forms.TextBox()
         Me.btnMovimientos = New System.Windows.Forms.Button()
         Me.btnHojaProduccion = New System.Windows.Forms.Button()
         Me.btnControles = New System.Windows.Forms.Button()
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.btnGrabar = New System.Windows.Forms.Button()
-        Me.txtMotivos = New System.Windows.Forms.TextBox()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
@@ -383,6 +383,16 @@ Partial Class DetallesIncidenciaRechazoMP
         Me.GroupBox2.TabIndex = 5
         Me.GroupBox2.TabStop = False
         '
+        'txtMotivos
+        '
+        Me.txtMotivos.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtMotivos.Location = New System.Drawing.Point(13, 15)
+        Me.txtMotivos.Margin = New System.Windows.Forms.Padding(10)
+        Me.txtMotivos.Multiline = True
+        Me.txtMotivos.Name = "txtMotivos"
+        Me.txtMotivos.Size = New System.Drawing.Size(716, 185)
+        Me.txtMotivos.TabIndex = 0
+        '
         'btnMovimientos
         '
         Me.btnMovimientos.Location = New System.Drawing.Point(598, 483)
@@ -430,16 +440,6 @@ Partial Class DetallesIncidenciaRechazoMP
         Me.btnGrabar.TabIndex = 1
         Me.btnGrabar.Text = "GRABAR"
         Me.btnGrabar.UseVisualStyleBackColor = True
-        '
-        'txtMotivos
-        '
-        Me.txtMotivos.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtMotivos.Location = New System.Drawing.Point(13, 15)
-        Me.txtMotivos.Margin = New System.Windows.Forms.Padding(10)
-        Me.txtMotivos.Multiline = True
-        Me.txtMotivos.Name = "txtMotivos"
-        Me.txtMotivos.Size = New System.Drawing.Size(716, 185)
-        Me.txtMotivos.TabIndex = 0
         '
         'TabControl1
         '

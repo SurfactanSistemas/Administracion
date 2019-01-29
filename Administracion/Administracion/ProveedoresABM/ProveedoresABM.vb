@@ -83,6 +83,7 @@ Public Class ProveedoresABM
         txtNroIB.Text = ""
         txtPorcelProv.Text = ""
         txtPorcelCABA.Text = ""
+        txtMailOp.Text = ""
 
         CKBProveedorInactivo.Checked = False
 
@@ -127,6 +128,7 @@ Public Class ProveedoresABM
                     & "Cuit =  '" & Mid(Trim(txtCUIT.Text), 1, 15) & "', " _
                     & "Telefono =  '" & Mid(Trim(txtTelefono.Text), 1, 100) & "', " _
                     & "Email =  '" & Mid(Trim(txtEmail.Text), 1, 400) & "', " _
+                    & "MailOp =  '" & Mid(Trim(txtMailOp.Text), 1, 60) & "', " _
                     & "Observaciones =  '" & Mid(Trim(txtObservaciones.Text), 1, 200) & "', " _
                     & "Tipo =  '" & NormalizarIndex(cmbTipoProveedor.SelectedIndex) & "', " _
                     & "Iva =  '" & NormalizarIndex(cmbIVA.SelectedIndex) & "', " _
@@ -423,6 +425,7 @@ Public Class ProveedoresABM
 
             If (_ProveedorExistente(txtCodigo.Text)) Then
                 _ActualizarCertificadosProveedor(txtCodigo.Text)
+                _ActualizarMailOpProveedor(txtCodigo.Text)
             End If
 
             MsgBox("Proveedor guardado correctamente.", MsgBoxStyle.Information)
@@ -430,6 +433,35 @@ Public Class ProveedoresABM
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
+    End Sub
+
+    Private Sub _ActualizarMailOpProveedor(ByVal WProveedor As String)
+
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand()
+        Dim dr As SqlDataReader
+
+        Try
+
+            cn.ConnectionString = Proceso._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            cm.CommandText = "UPDATE Proveedor SET MailOp = '" & txtMailOp.Text.Trim & "' WHERE Proveedor = '" & WProveedor & "'"
+
+            cm.ExecuteNonQuery()
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer actualizar los certificados del Proveeodr en la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
     End Sub
 
     Private Sub _ActualizarCertificadosProveedor(ByVal WProveedor As String)
@@ -577,6 +609,8 @@ Public Class ProveedoresABM
             txtRazonSocial.ForeColor = Color.White
         End If
 
+        txtMailOp.Text = _ProveedorMailOp().Trim
+
         ' Verificas si se encuentra en estado
         If Val(proveedor.estado) = 2 Then
             cmbEstado.BackColor = Color.Red
@@ -618,6 +652,38 @@ Public Class ProveedoresABM
         End Try
 
         Return embargado
+    End Function
+
+    Private Function _ProveedorMailOp() As String
+        Dim cn = New SqlConnection()
+        Dim cm = New SqlCommand("SELECT MailOp FROM Proveedor WHERE Proveedor = '" & Trim(txtCodigo.Text) & "'")
+        Dim dr As SqlDataReader
+
+        SQLConnector.conexionSql(cn, cm)
+
+        Try
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+                dr.Read()
+
+                Return IIf(IsDBNull(dr.Item("MailOp")), "", dr.Item("MailOp"))
+
+            End If
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Return ""
     End Function
 
     Private Sub mostrarCuenta(ByVal cuenta As CuentaContable)
@@ -1117,9 +1183,17 @@ Public Class ProveedoresABM
 
     Private Sub txtEmail_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtEmail.KeyDown
         If e.KeyData = Keys.Enter Then
-            _SaltarA(txtDiasPlazo)
+            _SaltarA(txtMailOp)
         ElseIf e.KeyData = Keys.Escape Then
             txtEmail.Text = ""
+        End If
+    End Sub
+
+    Private Sub txtEmailOp_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtMailOp.KeyDown
+        If e.KeyData = Keys.Enter Then
+            _SaltarA(txtDiasPlazo)
+        ElseIf e.KeyData = Keys.Escape Then
+            txtMailOp.Text = ""
         End If
     End Sub
 

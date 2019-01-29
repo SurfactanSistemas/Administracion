@@ -506,5 +506,16 @@
 
     Private Sub btnSac_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSac.Click
 
+        Select Case CType(sender, Button).Name
+            Case TextoBtnGenerarSac
+                _GenerarNuevaSAC()
+            Case TextoBtnVerSac
+
+        End Select
+
+    End Sub
+
+    Private Sub _GenerarNuevaSAC()
+
     End Sub
 End Class

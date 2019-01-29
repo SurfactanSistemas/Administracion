@@ -6982,25 +6982,25 @@ Public Class Pagos
             With row
                 If Trim(.Cells(4).Value) <> "" Then
 
-                    ZNeto = 0
-                    ZIva = 0
-                    ZIva5 = 0
-                    ZIva27 = 0
-                    ZIva105 = 0
-                    ZIb = 0
-                    ZExento = 0
-                    ZPorce = 0
-                    ZImporte = 0
-                    ZZSuma = 0
-                    ZZTotal = 0
-                    ZZSumaNeto = 0
+                    ZNeto = 0.0
+                    ZIva = 0.0
+                    ZIva5 = 0.0
+                    ZIva27 = 0.0
+                    ZIva105 = 0.0
+                    ZIb = 0.0
+                    ZExento = 0.0
+                    ZPorce = 0.0
+                    ZImporte = 0.0
+                    ZZSuma = 0.0
+                    ZZTotal = 0.0
+                    ZZSumaNeto = 0.0
 
                     ZTipo = ""
                     ZNumero = ""
                     ZPunto = ""
                     ZLetra = ""
-                    ZTotal = 0
-                    ZZSaldo = 0
+                    ZTotal = 0.0
+                    ZZSaldo = 0.0
 
                     ' Recalculo sobre porcentaje neto en Iva Comp.
                     If Trim(.Cells(4).Value) <> "" Then
@@ -7025,7 +7025,7 @@ Public Class Pagos
 
                             ZTotal = ZNeto + ZIva + ZIva27 + ZIva105 + ZIb + ZIva5 + ZExento
 
-                            If Val(ZImporte) = Val(ZTotal) Then
+                            If Val(_NormalizarNumero(ZImporte)) = Val(_NormalizarNumero(ZTotal)) Then
 
                                 ZZSuma = ZNeto
 
