@@ -44,9 +44,13 @@ Public Class ImpreProcesos
 
             End If
 
-            'Dim WTipoReporte2 As Integer = 1
-            'Dim WPartida2 As Integer = 308719
-            'Dim WTipoSalida2 As Integer = 3
+            'Dim WTipoReporte2 As Integer = 2
+            'Dim WPartida2 As Integer = 309053
+            'Dim WTipoSalida2 As Integer = 4
+
+            '_GenerarCertificadoAnalisisFarma(WTipoReporte2, WPartida2, WTipoSalida2)
+
+            'WTipoReporte2 = 3
 
             '_GenerarCertificadoAnalisisFarma(WTipoReporte2, WPartida2, WTipoSalida2)
 
@@ -132,7 +136,10 @@ Public Class ImpreProcesos
 
         Next
 
-        If WTipoReporte = 1 And wTipoSalida = 3 Then
+        frm.SetParameterValue("MostrarLogo", 0)
+        frm.SetParameterValue("MostrarPie", 0)
+
+        If wTipoSalida = 3 Or wTipoSalida = 4 Then
             frm.SetParameterValue("MostrarLogo", 1)
             frm.SetParameterValue("MostrarPie", 1)
         End If
@@ -140,16 +147,27 @@ Public Class ImpreProcesos
         With New VistaPrevia
             .Reporte = frm
             .Formula = "{Certificado.Partida} = " & wPartida & ""
-            
+
+            Dim WNombre = "Certificado " & wPartida
+
+            Select Case WTipoReporte
+                Case 2
+                    WNombre &= " - Primera"
+                Case 3
+                    WNombre &= " - Segunda"
+            End Select
+
             Select Case wTipoSalida
                 Case 1
                     .Imprimir()
                 Case 2
                     .Mostrar()
                 Case 3
-                    .Exportar("Certificado Calidad " & wPartida & " " & Date.Now.ToString("dd-MM-yyyy"), CrystalDecisions.Shared.ExportFormatType.PortableDocFormat)
+                    .Exportar(WNombre, CrystalDecisions.Shared.ExportFormatType.PortableDocFormat)
                 Case 4
-                    .Exportar("Certificado Calidad " & wPartida & " " & Date.Now.ToString("dd-MM-yyyy"), CrystalDecisions.Shared.ExportFormatType.WordForWindows)
+                    .Exportar(WNombre & ".pdf", CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, "C:\ImpreCertificados\")
+                Case 5
+                    .Exportar(WNombre, CrystalDecisions.Shared.ExportFormatType.WordForWindows)
             End Select
 
 
