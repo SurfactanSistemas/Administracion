@@ -51,18 +51,18 @@ Partial Class DetallesIncidencia
         Me.btnGrabar = New System.Windows.Forms.Button()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.txtMotivos = New System.Windows.Forms.TextBox()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.txtPosiblesUsos = New System.Windows.Forms.TextBox()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.txtMotivos = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
-        Me.GroupBox3.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -135,7 +135,7 @@ Partial Class DetallesIncidencia
         Me.txtLotePartida.MaxLength = 6
         Me.txtLotePartida.Name = "txtLotePartida"
         Me.txtLotePartida.Size = New System.Drawing.Size(53, 20)
-        Me.txtLotePartida.TabIndex = 6
+        Me.txtLotePartida.TabIndex = 7
         Me.txtLotePartida.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'btnSac
@@ -143,7 +143,7 @@ Partial Class DetallesIncidencia
         Me.btnSac.Location = New System.Drawing.Point(556, 13)
         Me.btnSac.Name = "btnSac"
         Me.btnSac.Size = New System.Drawing.Size(157, 31)
-        Me.btnSac.TabIndex = 5
+        Me.btnSac.TabIndex = 12
         Me.btnSac.Text = "Ver SAC Asociada"
         Me.btnSac.UseVisualStyleBackColor = True
         '
@@ -154,7 +154,7 @@ Partial Class DetallesIncidencia
         Me.cmbEstado.Location = New System.Drawing.Point(338, 18)
         Me.cmbEstado.Name = "cmbEstado"
         Me.cmbEstado.Size = New System.Drawing.Size(164, 21)
-        Me.cmbEstado.TabIndex = 4
+        Me.cmbEstado.TabIndex = 3
         '
         'txtFecha
         '
@@ -163,7 +163,7 @@ Partial Class DetallesIncidencia
         Me.txtFecha.Name = "txtFecha"
         Me.txtFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.txtFecha.Size = New System.Drawing.Size(67, 20)
-        Me.txtFecha.TabIndex = 3
+        Me.txtFecha.TabIndex = 2
         Me.txtFecha.Text = "99999999"
         Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -174,7 +174,7 @@ Partial Class DetallesIncidencia
         Me.txtProducto.Name = "txtProducto"
         Me.txtProducto.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.txtProducto.Size = New System.Drawing.Size(78, 20)
-        Me.txtProducto.TabIndex = 3
+        Me.txtProducto.TabIndex = 6
         Me.txtProducto.Text = "PT00000000"
         Me.txtProducto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -184,7 +184,7 @@ Partial Class DetallesIncidencia
         Me.rbProdTerminado.Location = New System.Drawing.Point(179, 50)
         Me.rbProdTerminado.Name = "rbProdTerminado"
         Me.rbProdTerminado.Size = New System.Drawing.Size(103, 17)
-        Me.rbProdTerminado.TabIndex = 2
+        Me.rbProdTerminado.TabIndex = 5
         Me.rbProdTerminado.Text = "Prod. Terminado"
         Me.rbProdTerminado.UseVisualStyleBackColor = True
         '
@@ -195,7 +195,7 @@ Partial Class DetallesIncidencia
         Me.rbMatPrima.Location = New System.Drawing.Point(101, 50)
         Me.rbMatPrima.Name = "rbMatPrima"
         Me.rbMatPrima.Size = New System.Drawing.Size(75, 17)
-        Me.rbMatPrima.TabIndex = 2
+        Me.rbMatPrima.TabIndex = 4
         Me.rbMatPrima.TabStop = True
         Me.rbMatPrima.Text = "Mat. Prima"
         Me.rbMatPrima.UseVisualStyleBackColor = True
@@ -206,7 +206,7 @@ Partial Class DetallesIncidencia
         Me.txtReferencia.MaxLength = 100
         Me.txtReferencia.Name = "txtReferencia"
         Me.txtReferencia.Size = New System.Drawing.Size(659, 20)
-        Me.txtReferencia.TabIndex = 1
+        Me.txtReferencia.TabIndex = 9
         '
         'Label8
         '
@@ -242,6 +242,7 @@ Partial Class DetallesIncidencia
         Me.txtDescProducto.ReadOnly = True
         Me.txtDescProducto.Size = New System.Drawing.Size(205, 20)
         Me.txtDescProducto.TabIndex = 1
+        Me.txtDescProducto.TabStop = False
         '
         'txtTitulo
         '
@@ -249,7 +250,7 @@ Partial Class DetallesIncidencia
         Me.txtTitulo.MaxLength = 100
         Me.txtTitulo.Name = "txtTitulo"
         Me.txtTitulo.Size = New System.Drawing.Size(659, 20)
-        Me.txtTitulo.TabIndex = 1
+        Me.txtTitulo.TabIndex = 8
         '
         'Label9
         '
@@ -301,7 +302,7 @@ Partial Class DetallesIncidencia
         Me.btnMovimientos.Location = New System.Drawing.Point(606, 509)
         Me.btnMovimientos.Name = "btnMovimientos"
         Me.btnMovimientos.Size = New System.Drawing.Size(120, 41)
-        Me.btnMovimientos.TabIndex = 1
+        Me.btnMovimientos.TabIndex = 17
         Me.btnMovimientos.Text = "SEGUIMIENTO DE MOVIMIENTOS"
         Me.btnMovimientos.UseVisualStyleBackColor = True
         '
@@ -310,7 +311,7 @@ Partial Class DetallesIncidencia
         Me.btnHojaProduccion.Location = New System.Drawing.Point(469, 509)
         Me.btnHojaProduccion.Name = "btnHojaProduccion"
         Me.btnHojaProduccion.Size = New System.Drawing.Size(115, 41)
-        Me.btnHojaProduccion.TabIndex = 1
+        Me.btnHojaProduccion.TabIndex = 16
         Me.btnHojaProduccion.Text = "VER HOJA PROD."
         Me.btnHojaProduccion.UseVisualStyleBackColor = True
         '
@@ -319,7 +320,7 @@ Partial Class DetallesIncidencia
         Me.btnControles.Location = New System.Drawing.Point(332, 509)
         Me.btnControles.Name = "btnControles"
         Me.btnControles.Size = New System.Drawing.Size(115, 41)
-        Me.btnControles.TabIndex = 1
+        Me.btnControles.TabIndex = 15
         Me.btnControles.Text = "VER CONTROLES"
         Me.btnControles.UseVisualStyleBackColor = True
         '
@@ -328,7 +329,7 @@ Partial Class DetallesIncidencia
         Me.btnCerrar.Location = New System.Drawing.Point(203, 509)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(107, 41)
-        Me.btnCerrar.TabIndex = 1
+        Me.btnCerrar.TabIndex = 14
         Me.btnCerrar.Text = "CERRAR"
         Me.btnCerrar.UseVisualStyleBackColor = True
         '
@@ -337,7 +338,7 @@ Partial Class DetallesIncidencia
         Me.btnGrabar.Location = New System.Drawing.Point(74, 509)
         Me.btnGrabar.Name = "btnGrabar"
         Me.btnGrabar.Size = New System.Drawing.Size(107, 41)
-        Me.btnGrabar.TabIndex = 1
+        Me.btnGrabar.TabIndex = 13
         Me.btnGrabar.Text = "GRABAR"
         Me.btnGrabar.UseVisualStyleBackColor = True
         '
@@ -365,6 +366,25 @@ Partial Class DetallesIncidencia
         Me.TabPage1.Size = New System.Drawing.Size(768, 261)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "MOTIVOS"
+        '
+        'GroupBox3
+        '
+        Me.GroupBox3.Controls.Add(Me.txtMotivos)
+        Me.GroupBox3.Location = New System.Drawing.Point(11, 5)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(742, 246)
+        Me.GroupBox3.TabIndex = 0
+        Me.GroupBox3.TabStop = False
+        '
+        'txtMotivos
+        '
+        Me.txtMotivos.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtMotivos.Location = New System.Drawing.Point(12, 17)
+        Me.txtMotivos.Margin = New System.Windows.Forms.Padding(10)
+        Me.txtMotivos.Multiline = True
+        Me.txtMotivos.Name = "txtMotivos"
+        Me.txtMotivos.Size = New System.Drawing.Size(719, 219)
+        Me.txtMotivos.TabIndex = 10
         '
         'TabPage2
         '
@@ -395,26 +415,7 @@ Partial Class DetallesIncidencia
         Me.txtPosiblesUsos.Multiline = True
         Me.txtPosiblesUsos.Name = "txtPosiblesUsos"
         Me.txtPosiblesUsos.Size = New System.Drawing.Size(719, 225)
-        Me.txtPosiblesUsos.TabIndex = 0
-        '
-        'GroupBox3
-        '
-        Me.GroupBox3.Controls.Add(Me.txtMotivos)
-        Me.GroupBox3.Location = New System.Drawing.Point(11, 5)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(742, 246)
-        Me.GroupBox3.TabIndex = 0
-        Me.GroupBox3.TabStop = False
-        '
-        'txtMotivos
-        '
-        Me.txtMotivos.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtMotivos.Location = New System.Drawing.Point(12, 17)
-        Me.txtMotivos.Margin = New System.Windows.Forms.Padding(10)
-        Me.txtMotivos.Multiline = True
-        Me.txtMotivos.Name = "txtMotivos"
-        Me.txtMotivos.Size = New System.Drawing.Size(719, 219)
-        Me.txtMotivos.TabIndex = 1
+        Me.txtPosiblesUsos.TabIndex = 11
         '
         'DetallesIncidencia
         '
@@ -439,11 +440,11 @@ Partial Class DetallesIncidencia
         Me.GroupBox1.PerformLayout()
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox3.PerformLayout()
         Me.TabPage2.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
-        Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox3.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub

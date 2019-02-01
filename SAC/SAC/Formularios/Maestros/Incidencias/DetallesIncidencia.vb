@@ -1,8 +1,14 @@
-﻿Public Class DetallesIncidencia
+﻿Imports System.Configuration
+Imports System.IO
+Imports System.Text.RegularExpressions
+
+Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListadoSACs
 
     Const TextoBtnGenerarSac = "Generar/Asociar SAC"
     Const TextoBtnVerSac = "Ver SAC Asociado"
     Private WControlRetornoError As Control = Nothing
+
+    Public Property MostrarBotonVerSac As Boolean = True
 
     Sub New(Optional ByVal WNroIncidencia As Object = "")
 
@@ -18,7 +24,7 @@
     End Sub
 
     Private Sub DetallesIncidencia_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
-        txtDescProducto.BackColor = Globales.WBackColorTerciario
+        txtDescProducto.BackColor = WBackColorTerciario
 
         If txtIncidencia.Text.Trim <> "" Then
             txtIncidencia_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
@@ -54,6 +60,9 @@
         txtIncidencia.Text = WIncidencia
 
         TabControl1.SelectTab(0)
+
+        btnSac.Enabled = MostrarBotonVerSac
+        txtIncidencia.Enabled = MostrarBotonVerSac
 
     End Sub
 
@@ -367,7 +376,7 @@
             btnCerrar.PerformClick()
 
         Catch ex As Exception
-            MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+            If Trim(ex.Message) <> "" Then MsgBox(ex.Message, MsgBoxStyle.Exclamation)
             If WControlRetornoError IsNot Nothing Then WControlRetornoError.Focus()
         End Try
     End Sub
@@ -383,7 +392,7 @@
 
         If cmbEstado.SelectedIndex < 0 Then
             WControlRetornoError = cmbEstado
-            Throw New Exception("Debe indicarse un estado válido para la actual Incidencia.")
+            Throw New Exception("Debe indicarse un estado válido para este Informe de No Conformidad.")
         End If
 
         If txtProducto.Text.Replace(" ", "").Length > 2 Then
@@ -427,14 +436,19 @@
             End If
 
         End If
-
+        
         If txtTitulo.Text.Trim = "" Then
             WControlRetornoError = txtTitulo
-            Throw New Exception("Debe indicarse un Título para la actual Incidencia.")
+            If MsgBox("No ha agregado nigún Título para este Informe de No Conformidad ¿Quiere proseguir con la grabación del mismo?", MsgBoxStyle.YesNoCancel) <> MsgBoxResult.Yes Then
+                Throw New Exception("")
+            End If
+
         End If
         If txtReferencia.Text.Trim = "" Then
             WControlRetornoError = txtReferencia
-            Throw New Exception("Debe indicarse una Referencia para la actual Incidencia.")
+            If MsgBox("No ha agregado niguna Referencia para este Informe de No Conformidad ¿Quiere proseguir con la grabación del mismo?", MsgBoxStyle.YesNoCancel) <> MsgBoxResult.Yes Then
+                Throw New Exception("")
+            End If
         End If
 
     End Sub
@@ -445,7 +459,7 @@
         End If
     End Sub
 
-    Private Sub btnControles_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnControles.Click
+    Private Sub btnControles_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnControles.Click
 
         If Val(txtLotePartida.Text) = 0 Then Exit Sub
 
@@ -478,7 +492,7 @@
 
     End Sub
 
-    Private Sub txtLotePartida_Enter(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtLotePartida.Enter
+    Private Sub txtLotePartida_Enter(ByVal sender As Object, ByVal e As EventArgs) Handles txtLotePartida.Enter
         With txtLotePartida
             .Text = .Text.Trim
             .SelectionStart = 0
@@ -486,13 +500,13 @@
         End With
     End Sub
 
-    Private Sub btnHojaProduccion_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnHojaProduccion.Click
+    Private Sub btnHojaProduccion_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnHojaProduccion.Click
         With New DetallesHojaProduccion(txtLotePartida.Text)
             .Show(Me)
         End With
     End Sub
 
-    Private Sub btnMovimientos_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnMovimientos.Click
+    Private Sub btnMovimientos_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnMovimientos.Click
         If rbMatPrima.Checked Then
             With New DetalleMovimientosMP(txtLotePartida.Text)
                 .Show(Me)
@@ -504,18 +518,135 @@
         End If
     End Sub
 
-    Private Sub btnSac_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSac.Click
+    Private Sub btnSac_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSac.Click
 
-        Select Case CType(sender, Button).Name
-            Case TextoBtnGenerarSac
-                _GenerarNuevaSAC()
-            Case TextoBtnVerSac
+        Try
+            Dim WNC As DataRow = GetSingle("SELECT ClaveSac FROM CargaIncidencias WHERE Incidencia = '" & txtIncidencia.Text & "' And Renglon = 1")
 
-        End Select
+            If WNC Is Nothing Then Exit Sub
+
+            Dim WClaveSAC As String = Trim(OrDefault(WNC.Item("ClaveSac"), ""))
+
+            If WClaveSAC = "" Then
+                '
+                ' Consultamos si quieren abrir nueva Sac o asignar una ya abierta.
+                '
+                Dim WPregunta = New ContinuarSalirMsgBox("¿Como desea asignarle una SAC a este Informe de No Conformidad?",
+                                              "Abrir Nueva SAC", "Asignar SAC ya Abierta")
+                WPregunta._DrBtn1 = Windows.Forms.DialogResult.Yes
+                WPregunta._DrBtn2 = Windows.Forms.DialogResult.No
+
+                Dim Resp As DialogResult = WPregunta.ShowDialog(Me)
+
+                Select Case Resp
+                    Case DialogResult.Yes
+                        '
+                        ' Creamos nueva SAC, colocando como datos por Default los provistos por el actual
+                        ' Informe de No Conformidad.
+                        '
+                        Dim frm As New AuxiNuevaSACDesdeINC(txtIncidencia.Text, txtFecha.Text, txtTitulo.Text, txtReferencia.Text, txtMotivos.Text)
+                        frm.Show(Me)
+
+                    Case DialogResult.No
+                        '
+                        ' Mostramos Listado con todas las SAC's Disponibles.
+                        '
+                        Dim frm As New AyudaListadoSACs()
+                        frm.Show(Me)
+
+                End Select
+
+            Else
+                _AbrirSACPorClave(WClaveSAC)
+            End If
+
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+        End Try
 
     End Sub
 
-    Private Sub _GenerarNuevaSAC()
+    Private Sub _AbrirSACPorClave(ByVal WClaveSAC As String)
 
+        Dim pattern = "(?<Tipo>[0-9]{4})(?<Anio>[0-9]{4})(?<Numero>[0-9]{6})"
+
+        If Regex.IsMatch(WClaveSAC, pattern) Then
+            Dim matches As MatchCollection = Regex.Matches(WClaveSAC, pattern)
+
+            Dim WTipo = matches.Item(0).Groups("Tipo").Value
+            Dim WAnio = matches.Item(0).Groups("Anio").Value
+            Dim WNum = matches.Item(0).Groups("Numero").Value
+
+            Dim frm As New NuevoSac(WTipo, WNum, WAnio, True)
+            frm.Show(Me)
+        End If
+
+    End Sub
+
+    Public Sub _ProcesarNuevaSACDesdeINC(ByVal WClaveSAC As String) Implements IAuxiNuevaSACDesdeINC._ProcesarNuevaSACDesdeINC
+        If WClaveSAC.Trim = "" Then Exit Sub
+
+        btnSac.Text = TextoBtnVerSac
+
+        WClaveSAC = WClaveSAC.PadLeft(14, "0")
+
+        Dim WAnio = WClaveSAC.Substring(4, 4)
+        Dim WNum = WClaveSAC.Substring(8, 6)
+
+        _CopiarArchivosINCASAC(WClaveSAC)
+
+        MsgBox(String.Format("Se ha generado SAC Bajo la siguiente referencia {0} {2} / {1}", "", WAnio, WNum), MsgBoxStyle.Information)
+
+        If MsgBox("¿Desea Abrir la SAC generada?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+            _AbrirSACPorClave(WClaveSAC)
+            Exit Sub
+        End If
+
+
+
+        Close()
+
+    End Sub
+
+    Private Sub _CopiarArchivosINCASAC(ByVal WClaveSAC As String)
+
+        Dim WDirectorioRaiz = ConfigurationManager.AppSettings("ARCHIVOS_RELACIONADOS")
+
+        Dim WDIrRaizINC As String = WDirectorioRaiz & "Informes No Conformidad\INC_" & txtIncidencia.Text
+        Dim WDIrRaizSAC As String = WDirectorioRaiz & "SAC_" & WClaveSAC
+
+        If Not Directory.Exists(WDIrRaizINC) Then Directory.CreateDirectory(WDIrRaizINC)
+        If Not Directory.Exists(WDIrRaizSAC) Then Directory.CreateDirectory(WDIrRaizSAC)
+
+        For Each f As String In Directory.GetFiles(WDIrRaizINC)
+            If Not File.Exists(WDIrRaizSAC & "\" & Path.GetFileName(f)) Then
+                File.Copy(f, WDIrRaizSAC & "\" & Path.GetFileName(f))
+            End If
+
+        Next
+    End Sub
+
+    Public Sub _ProcesarAyudaListadoSACs(ByVal WClaveSAC As String) Implements IAyudaListadoSACs._ProcesarAyudaListadoSACs
+        If WClaveSAC.Trim = "" Then Exit Sub
+
+        btnSac.Text = TextoBtnVerSac
+
+        WClaveSAC = WClaveSAC.PadLeft(14, "0")
+
+        Dim WAnio = WClaveSAC.Substring(4, 4)
+        Dim WNum = WClaveSAC.Substring(8, 6)
+
+        ExecuteNonQueries("UPDATE CargaIncidencias SET ClaveSac = '" & WClaveSAC & "' WHERE Incidencia = '" & txtIncidencia.Text & "'")
+
+        _CopiarArchivosINCASAC(WClaveSAC)
+
+        MsgBox(String.Format("Se ha Asociado la siguiente SAC {0} {2} / {1} al Informe de No Conformidad Actual.", "", WAnio, WNum), MsgBoxStyle.Information)
+
+        If MsgBox("¿Desea Abrir la SAC asociada?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+            _AbrirSACPorClave(WClaveSAC)
+            Exit Sub
+        End If
+
+        Close()
     End Sub
 End Class

@@ -3,6 +3,8 @@
     Property _Msg As String
     Property _MsgOk As String
     Property _MsgCancel As String
+    Property _DrBtn1 As DialogResult = Windows.Forms.DialogResult.OK
+    Property _DrBtn2 As DialogResult = Windows.Forms.DialogResult.Cancel
 
     Sub New(Optional ByVal msg As Object = "", Optional ByVal msgOk As Object = "", Optional ByVal msgCancel As Object = "")
 
@@ -21,12 +23,12 @@
     End Function
 
     Private Sub btnContinuar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnContinuar.Click
-        DialogResult = DialogResult.OK
+        DialogResult = _DrBtn1
         Close()
     End Sub
 
     Private Sub btnSalir_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSalir.Click
-        DialogResult = DialogResult.Cancel
+        DialogResult = _DrBtn2
         Close()
     End Sub
 

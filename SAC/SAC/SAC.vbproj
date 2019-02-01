@@ -126,10 +126,22 @@
     <Compile Include="Clases\Globales.vb" />
     <Compile Include="Clases\Operador.vb" />
     <Compile Include="Clases\Query.vb" />
+    <Compile Include="Formularios\Auxiliares\AuxiNuevaSACDesdeINC.Designer.vb">
+      <DependentUpon>AuxiNuevaSACDesdeINC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Auxiliares\AuxiNuevaSACDesdeINC.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\Auxiliares\ContinuarSalirMsgBox.Designer.vb">
       <DependentUpon>ContinuarSalirMsgBox.vb</DependentUpon>
     </Compile>
     <Compile Include="Formularios\Auxiliares\ContinuarSalirMsgBox.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Ayudas\AyudaListadoSACs.Designer.vb">
+      <DependentUpon>AyudaListadoSACs.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Ayudas\AyudaListadoSACs.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Formularios\Ayudas\AyudaResponsablesSac.Designer.vb">
@@ -154,6 +166,12 @@
       <DependentUpon>AyudaTipoSac.vb</DependentUpon>
     </Compile>
     <Compile Include="Formularios\Ayudas\AyudaTipoSac.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Ayudas\MPAsociadasOC.Designer.vb">
+      <DependentUpon>MPAsociadasOC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Ayudas\MPAsociadasOC.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Formularios\Maestros\Centros\ListadoCentros.Designer.vb">
@@ -277,6 +295,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Helper.vb" />
+    <Compile Include="Interfaces\IAuxiNuevaSACDesdeINC.vb" />
+    <Compile Include="Interfaces\IAyudaListadoSACs.vb" />
+    <Compile Include="Interfaces\IAyudaMPAsociadasOC.vb" />
     <Compile Include="Interfaces\IExportarIndice.vb" />
     <Compile Include="Interfaces\IExportarSac.vb" />
     <Compile Include="Interfaces\INuevaIncidencia.vb" />
@@ -391,8 +412,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Formularios\Auxiliares\AuxiNuevaSACDesdeINC.resx">
+      <DependentUpon>AuxiNuevaSACDesdeINC.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Auxiliares\ContinuarSalirMsgBox.resx">
       <DependentUpon>ContinuarSalirMsgBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Ayudas\AyudaListadoSACs.resx">
+      <DependentUpon>AyudaListadoSACs.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Ayudas\AyudaResponsablesSac.resx">
       <DependentUpon>AyudaResponsablesSac.vb</DependentUpon>
@@ -405,6 +432,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Ayudas\AyudaTipoSac.resx">
       <DependentUpon>AyudaTipoSac.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Ayudas\MPAsociadasOC.resx">
+      <DependentUpon>MPAsociadasOC.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Maestros\Centros\ListadoCentros.resx">
       <DependentUpon>ListadoCentros.vb</DependentUpon>

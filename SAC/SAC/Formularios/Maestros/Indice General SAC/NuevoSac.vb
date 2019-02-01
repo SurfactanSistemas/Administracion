@@ -4,7 +4,7 @@ Imports System.IO
 Imports CrystalDecisions.Shared
 Imports Microsoft.VisualBasic.FileIO
 
-Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroSac, IAyudaReponsableSac, IAyudaTipoSac, IExportarSac
+Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroSac, IAyudaReponsableSac, IAyudaTipoSac, IExportarSac, INuevaIncidencia
 
     Private Const YMARGEN = 2
     Private Const XMARGEN = 7
@@ -12,6 +12,8 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
     Private WRefTipoResp As Control
 
     Private WAbiertoPorCmd As Boolean = False
+
+    Private WListTabPages As New List(Of TabPage)
 
     Private Const EXTENSIONES_PERMITIDAS = "*.bmp|*.png|*.jpg|*.jpeg"
 
@@ -87,10 +89,45 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
             _CargarVerificaciones()
             _CargarComentarios()
             _CargarArchivosRelacionados()
+            _CargarIncidenciasVinculadas()
+
+            _EstructurarTabs()
 
         ElseIf e.KeyData = Keys.Escape Then
             txtNumero.Text = ""
         End If
+
+    End Sub
+
+    Private Sub _EstructurarTabs()
+        With TabControl1
+            .Multiline = False
+            If TabControl1.TabPages.Count = 7 Then
+                .ItemSize = New Size(145, .ItemSize.Height)
+            Else
+                .ItemSize = New Size(165, .ItemSize.Height)
+            End If
+        End With
+    End Sub
+
+    Private Sub _CargarIncidenciasVinculadas()
+
+        TabControl1.TabPages.Remove(WListTabPages.Item(0))
+
+        Dim WClave = txtTipo.Text.PadLeft(4, "0") & txtAnio.Text.PadLeft(4, "0") & txtNumero.Text.PadLeft(6, "0")
+
+        Dim ZSql = ""
+        ZSql = "SELECT Incidencia, Fecha, Tipo, Estado, Titulo, Referencia, DescTipo = CASE ISNULL(Tipo, 0) WHEN 1 THEN 'General' WHEN 2 THEN 'Rechazo MP' ELSE '' END, " _
+            & " DescEstado = CASE ISNULL(Estado, 0) WHEN 1 THEN 'Genera SAC' WHEN 2 THEN 'No Genera SAC' ELSE 'Pend. Análisis' END " _
+            & " FROM CargaIncidencias WHERE ClaveSac = '" & WClave & "'"
+
+        Dim WINC As DataTable = GetAll(ZSql)
+
+        If WINC.Rows.Count = 0 Then Exit Sub
+
+        dgvIncidencias.DataSource = WINC
+
+        TabControl1.TabPages.Add(WListTabPages.Item(0))
 
     End Sub
 
@@ -454,6 +491,8 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
         Dim WAnio = txtAnio.Text
 
         If WAnio = "" Then WAnio = Date.Now.Year
+
+        WListTabPages.Add(TabControl1.TabPages(6))
 
         btnLimpiar_Click(Nothing, Nothing)
 
@@ -1094,6 +1133,8 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
         TabControl1.SelectedIndex = 0
 
+        TabControl1.TabPages.Remove(WListTabPages.Item(0))
+
         txtTipo.Focus()
     End Sub
 
@@ -1446,7 +1487,10 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
             trans.Commit()
 
-            If WAbiertoPorCmd Then Close()
+            If WAbiertoPorCmd Then
+                Close()
+                Exit Sub
+            End If
 
             If ContinuarSalirMsgBox.Show("Actualización se ha realizado con Éxito" & vbCrLf _
                                          & "Indique como quiere proseguir.", "Continuar editando SAC", "Volver a Indice") = DialogResult.OK Then
@@ -1974,7 +2018,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
     End Sub
 
     Private Sub _SubirArchvios(ByVal archivos As String())
-        Dim WNombreCarpetaArchivos As String = "SAC_" & txtNumero.Text.PadLeft(4, "0") & txtAnio.Text.PadLeft(4, "0") & txtNumero.Text.PadLeft(6, "0")
+        Dim WNombreCarpetaArchivos As String = "SAC_" & txtTipo.Text.PadLeft(4, "0") & txtAnio.Text.PadLeft(4, "0") & txtNumero.Text.PadLeft(6, "0")
         Dim WRutaArchivosRelacionados = _RutaCarpetaArchivos() & "\" & WNombreCarpetaArchivos
 
         Dim WDestino = ""
@@ -2038,7 +2082,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
     Private Sub _CargarArchivosRelacionados()
         Dim WRutaArchivosRelacionados = ""
-        Dim WNombreCarpetaArchivos As String = "SAC_" & txtNumero.Text.PadLeft(4, "0") & txtAnio.Text.PadLeft(4, "0") & txtNumero.Text.PadLeft(6, "0")
+        Dim WNombreCarpetaArchivos As String = "SAC_" & txtTipo.Text.PadLeft(4, "0") & txtAnio.Text.PadLeft(4, "0") & txtNumero.Text.PadLeft(6, "0")
 
         If Not Directory.Exists(_RutaCarpetaArchivos) Then
             Throw New Exception("No se ha logrado tener acceso a la Carpeta Compartida de Archivos Relacionados.")
@@ -2144,5 +2188,34 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
         End Try
+    End Sub
+
+    Private Sub dgvIncidencias_CellDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvIncidencias.CellDoubleClick
+        If e.RowIndex < 0 Then Exit Sub
+
+        Dim WTipo = dgvIncidencias.CurrentRow.Cells("Tipo").Value
+        Dim WIncid = dgvIncidencias.CurrentRow.Cells("Incidencia").Value
+
+
+        Select Case WTipo
+            Case TipoIncidencias.General
+                Dim frm As New DetallesIncidencia(WIncid)
+                With frm
+                    .MostrarBotonVerSac = False
+                    .Show(Me)
+                End With
+            Case TipoIncidencias.RechazoMP
+                Dim frm As New DetallesIncidenciaRechazoMP(WIncid)
+                With frm
+                    .MostrarBotonVerSac = False
+                    .Show(Me)
+                End With
+        End Select
+
+
+    End Sub
+
+    Public Sub _ProcesarNuevaIncidencia(ByVal WIncidencia As Object) Implements INuevaIncidencia._ProcesarNuevaIncidencia
+        If dgvIncidencias.Rows.Count > 0 Then dgvIncidencias.CurrentCell = dgvIncidencias.Rows(0).Cells("Incidencia")
     End Sub
 End Class

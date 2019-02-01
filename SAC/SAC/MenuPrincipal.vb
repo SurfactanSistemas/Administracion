@@ -1,5 +1,4 @@
-﻿Imports System.Data.SqlClient
-Imports SAC.Clases
+﻿Imports SAC.Clases
 
 Public Class MenuPrincipal
 
@@ -82,7 +81,7 @@ Public Class MenuPrincipal
 
     End Sub
 
-    Private Sub ListadoDeIncidenciasToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListadoDeIncidenciasToolStripMenuItem.Click
+    Private Sub ListadoDeIncidenciasToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ListadoDeIncidenciasToolStripMenuItem.Click
         Abrir(New ListadoIncidencias)
     End Sub
 End Class

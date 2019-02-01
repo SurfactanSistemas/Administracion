@@ -26,69 +26,66 @@ Partial Class ContinuarSalirMsgBox
     'Do not modify it using the code editor.
     <DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.btnContinuar = New Button()
-        Me.btnSalir = New Button()
-        Me.Label1 = New Label()
-        Me.Panel1 = New Panel()
+        Me.btnContinuar = New System.Windows.Forms.Button()
+        Me.btnSalir = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Panel1 = New System.Windows.Forms.Panel()
         Me.SuspendLayout()
         '
         'btnContinuar
         '
-        Me.btnContinuar.DialogResult = DialogResult.OK
-        Me.btnContinuar.Location = New Point(36, 98)
+        Me.btnContinuar.Location = New System.Drawing.Point(36, 98)
         Me.btnContinuar.Name = "btnContinuar"
-        Me.btnContinuar.Size = New Size(183, 27)
+        Me.btnContinuar.Size = New System.Drawing.Size(183, 27)
         Me.btnContinuar.TabIndex = 0
         Me.btnContinuar.Text = "Continuar"
         Me.btnContinuar.UseVisualStyleBackColor = True
         '
         'btnSalir
         '
-        Me.btnSalir.DialogResult = DialogResult.Cancel
-        Me.btnSalir.Location = New Point(235, 98)
+        Me.btnSalir.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.btnSalir.Location = New System.Drawing.Point(235, 98)
         Me.btnSalir.Name = "btnSalir"
-        Me.btnSalir.Size = New Size(183, 27)
+        Me.btnSalir.Size = New System.Drawing.Size(183, 27)
         Me.btnSalir.TabIndex = 0
         Me.btnSalir.Text = "Salir"
         Me.btnSalir.UseVisualStyleBackColor = True
         '
         'Label1
         '
-        Me.Label1.Font = New Font("Microsoft Sans Serif", 10.0!, FontStyle.Regular, GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New Point(33, 6)
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(33, 6)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New Size(300, 86)
+        Me.Label1.Size = New System.Drawing.Size(300, 86)
         Me.Label1.TabIndex = 1
-        Me.Label1.TextAlign = ContentAlignment.MiddleCenter
+        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Panel1
         '
-        Me.Panel1.BackgroundImage = exm
-        Me.Panel1.BackgroundImageLayout = ImageLayout.Zoom
-        Me.Panel1.Location = New Point(339, 18)
+        Me.Panel1.BackgroundImage = Global.SAC.My.Resources.Resources.exm
+        Me.Panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Panel1.Location = New System.Drawing.Point(339, 18)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New Size(79, 62)
+        Me.Panel1.Size = New System.Drawing.Size(79, 62)
         Me.Panel1.TabIndex = 2
         '
         'ContinuarSalirMsgBox
         '
         Me.AcceptButton = Me.btnContinuar
-        Me.AutoScaleDimensions = New SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = AutoScaleMode.Font
         Me.CancelButton = Me.btnSalir
-        Me.ClientSize = New Size(455, 137)
+        Me.ClientSize = New System.Drawing.Size(455, 137)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.btnSalir)
         Me.Controls.Add(Me.btnContinuar)
-        Me.FormBorderStyle = FormBorderStyle.FixedDialog
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.HelpButton = True
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "ContinuarSalirMsgBox"
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
-        Me.StartPosition = FormStartPosition.CenterParent
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.ResumeLayout(False)
 
     End Sub

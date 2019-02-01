@@ -1,8 +1,15 @@
-﻿Public Class DetallesIncidenciaRechazoMP
+﻿Imports System.Configuration
+Imports System.IO
+Imports System.Text.RegularExpressions
+
+Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAyudaListadoSACs, IAyudaMPAsociadasOC
 
     Const TextoBtnGenerarSac = "Generar/Asociar SAC"
     Const TextoBtnVerSac = "Ver SAC Asociado"
     Private WControlRetornoError As Control = Nothing
+
+    Public Property MostrarBotonVerSac As Boolean = True
+    Public Property WPrimeraCarga As Boolean = False
 
     Sub New(Optional ByVal WNroIncidencia As Object = "")
 
@@ -89,6 +96,10 @@
 
         TabControl1.SelectTab(0)
 
+        btnSac.Enabled = MostrarBotonVerSac
+        txtIncidencia.Enabled = MostrarBotonVerSac
+        WPrimeraCarga = True
+
     End Sub
 
     Private Sub rbProdTerminado_Click(ByVal sender As Object, ByVal e As EventArgs) Handles rbProdTerminado.Click, rbMatPrima.Click
@@ -139,7 +150,7 @@
                         cmbEstado.SelectedIndex = OrDefault(.Item("Estado"), 0)
                         'rbProdTerminado.Checked = OrDefault(.Item("TipoProd"), "M") = "T"
                         'rbProdTerminado_Click(Nothing, Nothing)
-                        'txtProducto.Text = OrDefault(.Item("Producto"), "")
+                        txtProducto.Text = OrDefault(.Item("Producto"), "")
                         'txtLotePartida.Text = OrDefault(.Item("Lote"), "")
                         'txtProducto_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
                         txtTitulo.Text = OrDefault(.Item("Titulo"), "")
@@ -150,7 +161,7 @@
 
                         Dim Auxi = OrDefault(.Item("Empresa"), 1)
 
-                        For Each rowView As datarowview In cmbEmpresa.Items
+                        For Each rowView As DataRowView In cmbEmpresa.Items
                             With rowView
                                 If rowView.Item("Id") = Auxi Then
                                     cmbEmpresa.SelectedItem = rowView
@@ -172,6 +183,8 @@
             For Each c As Control In {txtDescProducto, txtFecha, txtIncidencia, txtLotePartida, txtMotivos, txtProducto, txtReferencia, txtTitulo}
                 c.Text = c.Text.Trim
             Next
+
+            WPrimeraCarga = False
 
             txtFecha.Focus()
 
@@ -248,20 +261,17 @@
 
             Dim WProd As DataRow = Nothing
 
-            If rbMatPrima.Checked Then
-                WProd = GetSingle("SELECT Descripcion FROM Articulo WHERE Codigo = '" & txtProducto.Text & "'")
-            Else
-                WProd = GetSingle("SELECT Descripcion FROM Terminado WHERE Codigo = '" & txtProducto.Text & "'")
-            End If
+            WProd = GetSingle("SELECT TOP 1 o.Cantidad, LTRIM(a.Descripcion) Descripcion FROM Orden o LEFT OUTER JOIN Articulo a ON a.Codigo = o.Articulo WHERE o.Orden = '" & txtOrden.Text & "' And o.Articulo = '" & txtProducto.Text & "'", CType(cmbEmpresa.SelectedItem, DataRowView).Item("Base"))
 
             If IsNothing(WProd) Then Exit Sub
 
-            txtDescProducto.Text = OrDefault(WProd.Item("Descripcion"), "").ToString.Trim
+            txtDescMP.Text = OrDefault(WProd.Item("Descripcion"), "").ToString.Trim
+            txtCantidadMP.Text = formatonumerico(OrDefault(WProd.Item("Cantidad"), 0))
 
             btnControles.Enabled = Val(txtLotePartida.Text) <> 0
             btnHojaProduccion.Enabled = rbProdTerminado.Checked
 
-            txtLotePartida.Focus()
+            txtTitulo.Focus()
 
         ElseIf e.KeyData = Keys.Escape Then
             txtProducto.Text = ""
@@ -441,7 +451,7 @@
             btnCerrar.PerformClick()
 
         Catch ex As Exception
-            MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+            If Trim(ex.Message) <> "" Then MsgBox(ex.Message, MsgBoxStyle.Exclamation)
             If WControlRetornoError IsNot Nothing Then WControlRetornoError.Focus()
         End Try
     End Sub
@@ -457,58 +467,30 @@
 
         If cmbEstado.SelectedIndex < 0 Then
             WControlRetornoError = cmbEstado
-            Throw New Exception("Debe indicarse un estado válido para la actual Incidencia.")
+            Throw New Exception("Debe indicarse un estado válido para este Informe de No Conformidad.")
         End If
 
-        If txtProducto.Text.Replace(" ", "").Length > 2 Then
-
-            If rbMatPrima.Checked And txtProducto.Text.Replace(" ", "").Length < 10 Then Throw New Exception("Debe cargar una Materia Prima válida")
-            If rbProdTerminado.Checked And txtProducto.Text.Replace(" ", "").Length < 12 Then Throw New Exception("Debe cargar un Producto Terminado válido")
-
-            If Val(txtLotePartida.Text) = 0 Then Throw New Exception("Se debe indicar un Lote/Partida válida para el Producto indicado.")
-
-            Dim WProd As DataRow = _ObtenerProductoAsociado()
+        If Val(txtOrden.Text) <> 0 Then
+            Dim WProd As DataRow = GetSingle("SELECT Orden FROM Orden WHERE Orden = '" & txtOrden.Text & "' And Articulo = '" & txtProducto.Text & "'", CType(cmbEmpresa.SelectedItem, DataRowView).Item("Base"))
 
             If WProd Is Nothing Then
                 WControlRetornoError = txtProducto
-                Throw New Exception("No se ha podido validar la correspondencia entre el Producto y la Partida informados.")
+                Throw New Exception("La Materia Prima indicada no corresponde a la Orden de Compra informada.")
             End If
-
-            If txtProducto.Text.ToUpper <> OrDefault(WProd.Item("Producto"), "") Then
-                If MsgBox("El Lote/Partida que se indicó, tiene asociado un Código de Producto distinto al informado en el Campo Producto de este formulario." _
-                          & vbCrLf _
-                          & vbCrLf _
-                          & "Producto Indicado: " & txtProducto.Text _
-                          & vbCrLf _
-                          & "Producto Asociado Lote/Partida: " & WProd.Item("Producto") _
-                          & vbCrLf _
-                          & vbCrLf _
-                          & "¿Desea modificarlo por el asociado al Lote/Partida?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
-
-                    txtProducto.Text = OrDefault(WProd.Item("Producto"), "")
-                Else
-                    WControlRetornoError = txtProducto
-                    Throw New Exception("El Producto indicado no se corresponde con el informado en la Hoja/Laudo.")
-                End If
-
-            End If
-        Else
-
-            If Val(txtLotePartida.Text) <> 0 Then
-                Dim WProd As DataRow = _ObtenerProductoAsociado()
-
-                If WProd IsNot Nothing Then txtProducto.Text = OrDefault(WProd.Item("Producto"), "")
-            End If
-
         End If
 
         If txtTitulo.Text.Trim = "" Then
             WControlRetornoError = txtTitulo
-            Throw New Exception("Debe indicarse un Título para la actual Incidencia.")
+            If MsgBox("No ha agregado nigún Título para este Informe de No Conformidad ¿Quiere proseguir con la grabación del mismo?", MsgBoxStyle.YesNoCancel) <> MsgBoxResult.Yes Then
+                Throw New Exception("")
+            End If
+
         End If
         If txtReferencia.Text.Trim = "" Then
             WControlRetornoError = txtReferencia
-            Throw New Exception("Debe indicarse una Referencia para la actual Incidencia.")
+            If MsgBox("No ha agregado niguna Referencia para este Informe de No Conformidad ¿Quiere proseguir con la grabación del mismo?", MsgBoxStyle.YesNoCancel) <> MsgBoxResult.Yes Then
+                Throw New Exception("")
+            End If
         End If
 
     End Sub
@@ -586,18 +568,21 @@
             Dim WEmpresa As String = CType(cmbEmpresa.SelectedItem, DataRowView).Item("Base")
 
             If WEmpresa <> "" And Val(txtOrden.Text) <> 0 Then
-                Dim WOrden As DataTable = GetAll("SELECT Articulo, Cantidad, o.Proveedor, DescProv = p.Nombre FROM Orden o LEFT OUTER JOIN Proveedor p ON p.Proveedor = o.Proveedor WHERE Orden = '" & txtOrden.Text & "' Order by o.Renglon", WEmpresa)
+                Dim WOrden As DataRow = GetSingle("SELECT o.Proveedor, DescProv = p.Nombre FROM Orden o LEFT OUTER JOIN Proveedor p ON p.Proveedor = o.Proveedor WHERE Orden = '" & txtOrden.Text & "' Order by o.Renglon", WEmpresa)
 
-                If WOrden.Rows.Count > 0 Then
+                If WOrden IsNot Nothing Then
 
-                    For Each row As DataRow In WOrden.Rows
-                        With row
+                    With WOrden
+                        txtProveedor.Text = OrDefault(.Item("Proveedor"), "")
+                        txtDescProv.Text = Trim(OrDefault(.Item("DescProv"), ""))
+                    End With
 
-                            txtProveedor.Text = OrDefault(.Item("Proveedor"), "")
-                            txtDescProv.Text = Trim(OrDefault(.Item("DescProv"), ""))
+                    If Not WPrimeraCarga Then
+                        btnMPAsociadasOC_Click(Nothing, Nothing)
+                    ElseIf txtProducto.Text.Replace(" ", "").Length = 10 Then
+                        txtProducto_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+                    End If
 
-                        End With
-                    Next
                     txtTitulo.Focus()
                 Else
                     MsgBox("No se encontró la Orden de Compra en la Empresa indicada.", MsgBoxStyle.Exclamation)
@@ -613,5 +598,172 @@
 
     Private Sub btnSac_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSac.Click
 
+        Try
+            Dim WNC As DataRow = GetSingle("SELECT ClaveSac FROM CargaIncidencias WHERE Incidencia = '" & txtIncidencia.Text & "' And Renglon = 1")
+
+            If WNC Is Nothing Then Exit Sub
+
+            Dim WClaveSAC As String = Trim(OrDefault(WNC.Item("ClaveSac"), ""))
+
+            If WClaveSAC = "" Then
+                '
+                ' Consultamos si quieren abrir nueva Sac o asignar una ya abierta.
+                '
+                Dim WPregunta = New ContinuarSalirMsgBox("¿Como desea asignarle una SAC a este Informe de No Conformidad?",
+                                              "Abrir Nueva SAC", "Asignar SAC ya Abierta")
+                WPregunta._DrBtn1 = Windows.Forms.DialogResult.Yes
+                WPregunta._DrBtn2 = Windows.Forms.DialogResult.No
+
+                Dim Resp As DialogResult = WPregunta.ShowDialog(Me)
+
+
+                Select Case Resp
+                    Case DialogResult.Yes
+
+                        '
+                        ' Creamos nueva SAC, colocando como datos por Default los provistos por el actual
+                        ' Informe de No Conformidad.
+                        '
+
+                        Dim WMotivos As String = ""
+
+                        If Val(txtOrden.Text) <> 0 Then
+                            WMotivos &= vbCrLf & "======================================================================="
+
+                            WMotivos &= vbCrLf & vbCrLf & String.Format("Orden de Compra: {0} {4}Articulo: ({1}) {2} {4}Cantidad: {3}", txtOrden.Text, txtProducto.Text, txtDescMP.Text.Trim, txtCantidadMP.Text, vbTab)
+
+                            WMotivos &= vbCrLf & vbCrLf & "=======================================================================" & vbCrLf & vbCrLf
+                        End If
+
+                        WMotivos &= txtMotivos.Text.Trim
+
+
+                        Dim frm As New AuxiNuevaSACDesdeINC(txtIncidencia.Text, txtFecha.Text, txtTitulo.Text, txtReferencia.Text, WMotivos)
+
+                        frm.Show(Me)
+
+                    Case DialogResult.No
+                        '
+                        ' Desplegamos el listado con las SAC's disponibles.
+                        '
+                        Dim frm As New AyudaListadoSACs
+                        frm.Show(Me)
+
+                End Select
+
+            Else
+                _AbrirSACPorClave(WClaveSAC)
+            End If
+
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+        End Try
+
+    End Sub
+
+    Private Sub _AbrirSACPorClave(ByVal WClaveSAC As String)
+
+        Dim pattern = "(?<Tipo>[0-9]{4})(?<Anio>[0-9]{4})(?<Numero>[0-9]{6})"
+
+        If Regex.IsMatch(WClaveSAC, pattern) Then
+            Dim matches As MatchCollection = Regex.Matches(WClaveSAC, pattern)
+
+            Dim WTipo = matches.Item(0).Groups("Tipo").Value
+            Dim WAnio = matches.Item(0).Groups("Anio").Value
+            Dim WNum = matches.Item(0).Groups("Numero").Value
+
+            Dim frm As New NuevoSac(WTipo, WNum, WAnio, True)
+            frm.Show(Me)
+        End If
+
+    End Sub
+
+    Public Sub _ProcesarNuevaSACDesdeINC(ByVal WClaveSAC As String) Implements IAuxiNuevaSACDesdeINC._ProcesarNuevaSACDesdeINC
+        If WClaveSAC.Trim = "" Then Exit Sub
+
+        btnSac.Text = TextoBtnVerSac
+
+        WClaveSAC = WClaveSAC.PadLeft(14, "0")
+
+        Dim WAnio = WClaveSAC.Substring(4, 4)
+        Dim WNum = WClaveSAC.Substring(8, 6)
+
+        _CopiarArchivosINCASAC(WClaveSAC)
+
+        MsgBox(String.Format("Se ha generado SAC Bajo la siguiente referencia {0} {2} / {1}", "", WAnio, WNum), MsgBoxStyle.Information)
+
+        If MsgBox("¿Desea Abrir la SAC generada?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+            _AbrirSACPorClave(WClaveSAC)
+            Exit Sub
+        End If
+
+        Close()
+
+    End Sub
+
+    Private Sub _CopiarArchivosINCASAC(ByVal WClaveSAC As String)
+
+        Dim WDirectorioRaiz = ConfigurationManager.AppSettings("ARCHIVOS_RELACIONADOS")
+
+        Dim WDIrRaizINC As String = WDirectorioRaiz & "Informes No Conformidad\INC_" & txtIncidencia.Text
+        Dim WDIrRaizSAC As String = WDirectorioRaiz & "SAC_" & WClaveSAC
+
+        If Not Directory.Exists(WDIrRaizINC) Then Directory.CreateDirectory(WDIrRaizINC)
+        If Not Directory.Exists(WDIrRaizSAC) Then Directory.CreateDirectory(WDIrRaizSAC)
+
+        For Each f As String In Directory.GetFiles(WDIrRaizINC)
+            If Not File.Exists(WDIrRaizSAC & "\" & Path.GetFileName(f)) Then
+                File.Copy(f, WDIrRaizSAC & "\" & Path.GetFileName(f))
+            End If
+
+        Next
+    End Sub
+
+    Public Sub _ProcesarAyudaListadoSACs(ByVal WClaveSac As String) Implements IAyudaListadoSACs._ProcesarAyudaListadoSACs
+        If WClaveSac.Trim = "" Then Exit Sub
+
+        btnSac.Text = TextoBtnVerSac
+
+        WClaveSac = WClaveSac.PadLeft(14, "0")
+
+        Dim WAnio = WClaveSac.Substring(4, 4)
+        Dim WNum = WClaveSac.Substring(8, 6)
+
+        ExecuteNonQueries("UPDATE CargaIncidencias SET ClaveSac = '" & WClaveSac & "' WHERE Incidencia = '" & txtIncidencia.Text & "'")
+
+        _CopiarArchivosINCASAC(WClaveSac)
+
+        MsgBox(String.Format("Se ha Asociado la siguiente SAC {0} {2} / {1} al Informe de No Conformidad Actual.", "", WAnio, WNum), MsgBoxStyle.Information)
+
+        If MsgBox("¿Desea Abrir la SAC asociada?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+            _AbrirSACPorClave(WClaveSac)
+            Exit Sub
+        End If
+
+        Close()
+    End Sub
+
+    Private Sub txtOrden_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtOrden.KeyUp
+        btnMPAsociadasOC.Enabled = Trim(txtOrden.Text) <> ""
+    End Sub
+
+    Private Sub btnMPAsociadasOC_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnMPAsociadasOC.Click
+        Dim WEmp As DataRowView = cmbEmpresa.SelectedItem
+
+        If WEmp Is Nothing Then Exit Sub
+
+        Dim frm As New MPAsociadasOC(txtOrden.Text, WEmp.Item("Nombre"), WEmp.Item("Base"))
+        frm.Show(Me)
+    End Sub
+
+    Public Sub _ProcesarMPAsociadasOC(ByVal WCodigo As Object, ByVal WDescripcion As Object, ByVal WCantidad As Object) Implements IAyudaMPAsociadasOC._ProcesarMPAsociadasOC
+        txtProducto.Text = WCodigo
+        txtDescMP.Text = WDescripcion
+        txtCantidadMP.Text = formatonumerico(WCantidad)
+        txtTitulo.Focus()
+    End Sub
+
+    Private Sub txtProducto_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtProducto.DoubleClick
+        btnMPAsociadasOC_Click(Nothing, Nothing)
     End Sub
 End Class
