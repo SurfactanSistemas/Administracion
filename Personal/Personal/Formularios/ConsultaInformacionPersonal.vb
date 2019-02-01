@@ -58,6 +58,7 @@ Public Class ConsultaInformacionPersonal
         txtCuenta.Text = ""
         txtCbu.Text = ""
         txtCuil.Text = ""
+        txtSucursal.Text = ""
 
         txtFechaAux.Visible=False
         pnlConsulta.Visible = False
@@ -514,7 +515,7 @@ Public Class ConsultaInformacionPersonal
 
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("SELECT Codigo, FechaVersion, FIngreso, FEgreso, Descripcion, " _
-                                              & " EstaI, EstaII, EstaIII, EstadoI, EstadoII, EstadoIII, Dni " _
+                                              & " EstaI, EstaII, EstaIII, EstadoI, EstadoII, EstadoIII, Dni, Cuil " _
                                               & " FROM Legajo WHERE Descripcion = '" & txtNombreCompleto.Text & "' AND Renglon = 1")
         Dim dr As SqlDataReader
         Dim WLegajoActual,
@@ -526,7 +527,8 @@ Public Class ConsultaInformacionPersonal
             WFechaIngreso,
             WFechaEgreso,
             WEstado,
-            WDni As String
+            WDni,
+            WCuil As String
         Dim WFilaFormacion As Short
 
         Try
@@ -564,6 +566,7 @@ Public Class ConsultaInformacionPersonal
                             ' Grabamos Primaria.
                             WEstado = IIf(IsDBNull(.Item("EstaI")), "", .Item("EstaI"))
                             WDni = IIf(IsDBNull(.Item("Dni")), "", .Item("Dni"))
+                            WCuil = IIf(IsDBNull(.Item("Cuil")), "", .Item("Cuil"))
 
                             Select Case Val(WEstado)
                                 Case 1, 2, 8
@@ -626,6 +629,7 @@ Public Class ConsultaInformacionPersonal
                 txtFechaEgreso.Text = IIf(WFechaEgreso = "00/00/0000", "  /  /    ", WFechaEgreso)
                 txtNombreCompleto.Text = trim(WNombreCompleto)
                 txtDni.Text = trim(WDni)
+                txtCuil.Text = Trim(WCuil)
 
             End If
 
