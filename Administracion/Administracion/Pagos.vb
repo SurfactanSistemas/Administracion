@@ -1,6 +1,7 @@
 ﻿Imports ClasesCompartidas
 Imports System.Data.SqlClient
 Imports CrystalDecisions.CrystalReports.Engine
+Imports Microsoft.Office.Interop
 
 Public Class Pagos
 
@@ -2837,8 +2838,90 @@ Public Class Pagos
         ' Imprimimos los comprobantes pertinentes.
         btnImprimir.PerformClick()
 
+        '
+        ' Corroboramos que si en caso de tener cargado proveedor, éste tiene indicado un email donde enviar el aviso de OP disponible.
+        '
+
+        _EnviarAvisoOPDisponible()
+
         ' Limpiamos pantalla.
         btnLimpiar.PerformClick()
+
+    End Sub
+
+    Private Sub _EnviarAvisoOPDisponible()
+
+        If txtProveedor.Text.Trim = "" Then Exit Sub
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT ISNULL(MailOP, '') MailOP FROM Proveedor WHERE Proveedor = '" & txtProveedor.Text & "'")
+        Dim dr As SqlDataReader
+
+        Try
+
+            cn.ConnectionString = Proceso._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                dr.Read()
+
+                Dim WMailOp As String = dr.Item("MailOp")
+
+                If WMailOp.Trim = "" Then Exit Sub
+
+                If MsgBox("¿Desea Enviar un aviso de Orden de Pago Disponible a '" & WMailOp & "'?", MsgBoxStyle.YesNoCancel) = MsgBoxResult.Yes Then
+
+                    Dim WBody = ""
+
+                    _EnviarEmail(WMailOp, "", "Orden de Pago Disponible - SURFACTTAN S.A - ", WBody, "")
+
+                End If
+                
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+    End Sub
+
+    Private Sub _EnviarEmail(ByVal _to As String, ByVal _bcc As String, ByVal _subject As String, ByVal _body As String, ByVal _adjunto As String)
+        Dim _Outlook As New Outlook.Application
+
+        Try
+            Dim _Mail As Outlook.MailItem = _Outlook.CreateItem(Outlook.OlItemType.olMailItem)
+
+            With _Mail
+
+                .To = _to
+                .BCC = _bcc
+                .Subject = _subject
+                .Body = _body
+
+                If Trim(_adjunto) <> "" Then
+                    .Attachments.Add(_adjunto)
+                End If
+                .Send()
+            End With
+            
+            _Mail = Nothing
+            
+        Catch ex As Exception
+            Throw New Exception("Ocurrió un problema al querer enviar Aviso de Orden de Pago disponible.")
+        Finally
+            _Outlook = Nothing
+        End Try
 
     End Sub
 
