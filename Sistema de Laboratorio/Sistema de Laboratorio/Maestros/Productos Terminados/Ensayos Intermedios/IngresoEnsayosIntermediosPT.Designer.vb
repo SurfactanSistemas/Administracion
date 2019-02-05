@@ -75,6 +75,7 @@ Partial Class IngresoEnsayosIntermediosPT
         Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.btnActualizarEspecif = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         CType(Me.dgvEnsayos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -351,7 +352,7 @@ Partial Class IngresoEnsayosIntermediosPT
         Me.GroupBox2.Controls.Add(Me.Label10)
         Me.GroupBox2.Controls.Add(Me.txtLibros)
         Me.GroupBox2.Controls.Add(Me.Label8)
-        Me.GroupBox2.Location = New System.Drawing.Point(9, 11)
+        Me.GroupBox2.Location = New System.Drawing.Point(9, 9)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(474, 106)
         Me.GroupBox2.TabIndex = 5
@@ -466,11 +467,12 @@ Partial Class IngresoEnsayosIntermediosPT
         'GroupBox3
         '
         Me.GroupBox3.Controls.Add(Me.btnGrabar)
+        Me.GroupBox3.Controls.Add(Me.btnActualizarEspecif)
         Me.GroupBox3.Controls.Add(Me.btnRegistroProd)
         Me.GroupBox3.Controls.Add(Me.btnNotas)
         Me.GroupBox3.Controls.Add(Me.btnCerrar)
         Me.GroupBox3.Controls.Add(Me.btnLimpiar)
-        Me.GroupBox3.Location = New System.Drawing.Point(489, 11)
+        Me.GroupBox3.Location = New System.Drawing.Point(489, 9)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(411, 106)
         Me.GroupBox3.TabIndex = 6
@@ -489,7 +491,7 @@ Partial Class IngresoEnsayosIntermediosPT
         '
         Me.btnRegistroProd.Location = New System.Drawing.Point(259, 11)
         Me.btnRegistroProd.Name = "btnRegistroProd"
-        Me.btnRegistroProd.Size = New System.Drawing.Size(131, 87)
+        Me.btnRegistroProd.Size = New System.Drawing.Size(131, 42)
         Me.btnRegistroProd.TabIndex = 0
         Me.btnRegistroProd.Text = "REGISTRO PRODUCCIÓN"
         Me.btnRegistroProd.UseVisualStyleBackColor = True
@@ -548,6 +550,15 @@ Partial Class IngresoEnsayosIntermediosPT
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(920, 126)
         Me.Panel2.TabIndex = 5
+        '
+        'btnActualizarEspecif
+        '
+        Me.btnActualizarEspecif.Location = New System.Drawing.Point(259, 58)
+        Me.btnActualizarEspecif.Name = "btnActualizarEspecif"
+        Me.btnActualizarEspecif.Size = New System.Drawing.Size(131, 42)
+        Me.btnActualizarEspecif.TabIndex = 0
+        Me.btnActualizarEspecif.Text = "ACTUALIZA ESPECIFICACIONES"
+        Me.btnActualizarEspecif.UseVisualStyleBackColor = True
         '
         'IngresoEnsayosIntermediosPT
         '
@@ -622,4 +633,5 @@ Partial Class IngresoEnsayosIntermediosPT
     Friend WithEvents MenorIgualEspecif As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents InformaEspecif As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Observaciones As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents btnActualizarEspecif As System.Windows.Forms.Button
 End Class

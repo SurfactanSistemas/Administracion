@@ -616,31 +616,67 @@
             ' Obtenemos el Producto Original en caso de que se haya ingresado como RE/NK.
             '
             If txtCodigo.Text.ToUpper.StartsWith("RE") Or txtCodigo.Text.ToUpper.StartsWith("NK") Then
-                Dim WHoja As DataRow = GetSingle("SELECT ISNULL(TipoOri, '') TipoOri FROM Hoja WHERE Hoja = '" & WPartida & "' And Renglon IN ('1', '01')")
+                Dim _Hoja As DataRow = GetSingle("SELECT ISNULL(TipoOri, '') TipoOri FROM Hoja WHERE Hoja = '" & WPartida & "' And Renglon IN ('1', '01')")
 
-                If Not IsNothing(WHoja) Then
+                If Not IsNothing(_Hoja) Then
 
-                    If {"PT", "RE"}.Contains(WHoja.Item("TipoOri")) Then
-                        WCodigo = WCodigo.Replace("RE", WHoja.Item("TipoOri"))
-                        WCodigo = WCodigo.Replace("NK", WHoja.Item("TipoOri"))
+                    If {"PT", "RE"}.Contains(_Hoja.Item("TipoOri")) Then
+                        WCodigo = WCodigo.Replace("RE", _Hoja.Item("TipoOri"))
+                        WCodigo = WCodigo.Replace("NK", _Hoja.Item("TipoOri"))
                     End If
 
                 End If
 
             End If
 
+            Dim WConfecciono As String = txtConfecciono.Text.left(50)
+
+            WSqls.Add("UPDATE CargaV SET ObservaIV = '" & WConfecciono & "' WHERE Terminado = '" & WCodigo & "' And Paso = '" & txtEtapa.Text & "'")
+
             For Each row As datarow In WPrueterfarma.Rows
                 With row
                     '
                     ' Actualizamos los resultados y la confeccion en CargaV.
                     '
+                    Dim WResultado As String = OrDefault(row.Item("Resultado"), "")
 
-                    '
-                    ' Definimos las especificaciones para generar los textos a imprimir.
-                    '
+                    WResultado = WResultado.left(50)
+
+                    WSqls.Add("UPDATE CargaV SET Resultado = '" & WResultado & "' WHERE Terminado = '" & WCodigo & "' And Paso = '" & txtEtapa.Text & "'")
+
+                    Dim WTipo = OrDefault(row.Item("TipoEspecif"), "")
+                    Dim WMenorIgual = OrDefault(row.Item("MenorIgualEspecif"), "")
+                    Dim WDesde = OrDefault(row.Item("DesdeEspecif"), "")
+                    Dim WHasta = OrDefault(row.Item("HastaEspecif"), "")
+                    Dim WUnidad = OrDefault(row.Item("UnidadEspecif"), "")
+                    Dim WClave = OrDefault(row.Item("Clave"), "")
+                    Dim WValor = OrDefault(row.Item("Valor"), "")
+
+                    Dim WImpreParametro As String = _GenerarImpreParametro(WTipo, WDesde, WHasta, WUnidad, WMenorIgual)
+
+                    WSqls.Add("UPDATE PrueterFarmaIntermedio SET Impre1 = '" & WImpreParametro & "', Impre2 = '" & WValor & "' WHERE Clave = '" & WClave & "'")
 
                 End With
             Next
+
+            Dim WHoja As DataRow = GetSingle("SELECT Teorico, Cantidad FROM Hoja WHERE Hoja = '" & txtPartida.Text & "'")
+            Dim WTeorico As Double = 0
+
+            If WHoja IsNot Nothing Then
+                WTeorico = OrDefault(WHoja.Item("Teorico"), 0)
+            End If
+
+            WSqls.Add("UPDATE CargaV SET ImpreTerminado = '" & txtCodigo.Text & "', Partida = '" & txtPartida.Text & "', FechaIng = '" & txtFecha.Text & "', CantidadPartida = '" & formatonumerico(WTeorico) & "', ImprePaso = '" & txtEtapa.Text & "' WHERE Terminado = '" & txtCodigo.Text & "'")
+
+            ExecuteNonQueries(WSqls.ToArray)
+
+            Dim frm As New VistaPrevia
+
+            With frm
+                .Reporte = New ResultadosIntermediosPT
+                .Formula = "{PrueterFarma.Producto} = {Terminado.Codigo} And {PrueterFarma.Paso} = " & txtEtapa.Text & " And {PrueterFarma.Codigo} = {Ensayos.Codigo} And {PrueterFarma.Partida}  = " & txtPartida.Text & ""
+                .Mostrar()
+            End With
 
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
@@ -684,5 +720,50 @@
 
         ExecuteNonQueries(WSqls.ToArray)
 
+    End Sub
+
+    Private Sub btnActualizarEspecif_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnActualizarEspecif.Click
+        Dim WCargaV As DataTable = GetAll("SELECT * FROM CargaV WHERE Terminado = '" & txtCodigo.Text & "' And Paso = '" & txtEtapa.Text & "' Order By Clave")
+
+        If WCargaV.Rows.Count = 0 Then Exit Sub
+
+        Dim WRenglon = 0
+
+        For Each row As DataRow In WCargaV.Rows
+            With row
+                Dim WEns = OrDefault(.Item("Ensayo"), 0)
+                Dim WEspecificacion = OrDefault(.Item("Valor"), "")
+                Dim WFarmacopea = OrDefault(.Item("Farmacopea"), "")
+                Dim WTipoEspecif = OrDefault(.Item("TipoEspecif"), "")
+                Dim WDesdeEspecif = OrDefault(.Item("DesdeEspecif"), "")
+                Dim WHastaEspecif = OrDefault(.Item("HastaEspecif"), "")
+                Dim WUnidadEspecif = OrDefault(.Item("UnidadEspecif"), "")
+                Dim WMenorIgualEspecif = OrDefault(.Item("MenorIgualEspecif"), "")
+                Dim WInformaEspecif = OrDefault(.Item("InformaEspecif"), "")
+                Dim WImpreParametro = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif)
+
+                If Val(WTipoEspecif) = 0 And WImpreParametro <> "" Then WImpreParametro &= " (c)"
+
+                Dim WDescripcion = "" 'OrDefault(.Item("Ensayo"), 0)
+
+                If WRenglon > dgvEnsayos.Rows.Count - 1 Then WRenglon = dgvEnsayos.Rows.Add
+
+                With dgvEnsayos.Rows(WRenglon)
+                    .Cells("Ensayo").Value = WEns
+                    .Cells("Especificacion").Value = Trim(WEspecificacion)
+                    .Cells("Descripcion").Value = Trim(WDescripcion)
+                    .Cells("Farmacopea").Value = Trim(WFarmacopea)
+                    .Cells("TipoEspecif").Value = WTipoEspecif
+                    .Cells("DesdeEspecif").Value = WDesdeEspecif
+                    .Cells("HastaEspecif").Value = WHastaEspecif
+                    .Cells("UnidadEspecif").Value = WUnidadEspecif
+                    .Cells("MenorIgualEspecif").Value = WMenorIgualEspecif
+                    .Cells("InformaEspecif").Value = WInformaEspecif
+                    .Cells("Parametro").Value = Trim(WImpreParametro)
+                End With
+                WRenglon += 1
+            End With
+
+        Next
     End Sub
 End Class
