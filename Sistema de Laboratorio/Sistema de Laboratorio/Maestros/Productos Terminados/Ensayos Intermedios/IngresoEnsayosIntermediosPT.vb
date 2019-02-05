@@ -3,6 +3,10 @@
     Private WNotas As New List(Of String)
     Private WEsPorDesvio As Boolean = False
     Private WMotivoDesvio As String = ""
+    Private WMotivoClaveSeguridad As TiposSolicitudClaveSeguridad = TiposSolicitudClaveSeguridad.General
+    Private WActualizacionBloqueada As Boolean = False
+    Private WAutorizaActualizacionBloqueado As Boolean = False
+
 
     Private Sub btnCerrar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCerrar.Click
         Close()
@@ -21,6 +25,10 @@
 
         WEsPorDesvio = False
         WMotivoDesvio = ""
+
+        WMotivoClaveSeguridad = TiposSolicitudClaveSeguridad.General
+        WActualizacionBloqueada = False
+        WAutorizaActualizacionBloqueado = False
 
         txtPartida.Focus()
     End Sub
@@ -286,6 +294,19 @@
 
             _ValidarDatos()
 
+            If WActualizacionBloqueada Then
+
+                WMotivoClaveSeguridad = TiposSolicitudClaveSeguridad.ActualizarEnsayoBloqueado
+
+                Dim frm As New IngresoClaveSeguridad()
+                frm.ShowDialog(Me)
+
+                txtPartida.Focus()
+
+                Exit Sub
+
+            End If
+
             If Not _ValidarValoresIngresados() And Not WEsPorDesvio Then
 
                 If MsgBox("Algunos de los valores introducidos no se encuentran dentro de los valores especificados para este Producto." & vbCrLf & vbCrLf & vbCrLf & "¿Desea Continuar con la Grabación por Desvío?", MsgBoxStyle.YesNoCancel) <> MsgBoxResult.Yes Then
@@ -299,6 +320,8 @@
                 Dim mot As New IngresoMotivoDesvio(WMotivoDesvio)
 
                 If mot.ShowDialog(Me) <> DialogResult.OK Then Exit Sub
+
+                WMotivoClaveSeguridad = TiposSolicitudClaveSeguridad.IngresoEnsayoIntermedioPorDesvio
 
                 Dim frm As New IngresoClaveSeguridad
                 frm.ShowDialog(Me)
@@ -569,17 +592,59 @@
 
         If WHoja.Item("Producto").ToString.ToUpper <> txtCodigo.Text.ToUpper Then Throw New Exception("El Código de Producto Terminado indicado no se corresponde con el indicado en la Hoja de Producción.")
 
+        '
+        ' Verificamos en caso de que ya se encuentre grabado, si tenia algun dato como Pendiente. En caso de que no, se pide la clave de seguridad para poder actualizar.
+        '
+        Dim WDatos As DataTable = GetAll("SELECT ValorReal FROM PrueterFarmaIntermedio WHERE Producto = '" & txtCodigo.Text & "' AND Partida = '" & txtPartida.Text & "' AND Paso = '" & txtEtapa.Text & "' ORDER BY Clave")
+
+        If WDatos.Rows.Count > 0 Then
+            Dim WBloqueado = True
+
+            For Each row As DataRow In WDatos.Rows
+                Dim WValor As String = OrDefault(row.Item("ValorReal"), "")
+
+                If WValor.Trim.ToUpper = "P" Then WBloqueado = False
+
+            Next
+
+            WActualizacionBloqueada = WBloqueado And Not WAutorizaActualizacionBloqueado
+
+        End If
+
     End Sub
 
     Public Sub _ProcesarIngresoClaveSeguridad(ByVal WClave As Object) Implements IIngresoClaveSeguridad._ProcesarIngresoClaveSeguridad
-        If WClave.ToString.ToUpper = "SEGURO" Then
-            WEsPorDesvio = True
-            btnGrabar.PerformClick()
-        Else
-            MsgBox("Clave Incorrecta")
-            Dim frm As New IngresoClaveSeguridad
-            frm.ShowDialog(Me)
-        End If
+
+
+        Select Case WMotivoClaveSeguridad
+            Case TiposSolicitudClaveSeguridad.IngresoEnsayoIntermedioPorDesvio
+                If WClave.ToString.ToUpper = "SEGURO" Then
+                    WEsPorDesvio = True
+                    btnGrabar.PerformClick()
+                End If
+            Case TiposSolicitudClaveSeguridad.ActualizarEnsayoBloqueado
+
+                Dim WDatos As DataRow = GetSingle("SELECT GrabaV, FechaGrabaV FROM Operador WHERE Clave = '" & UCase(WClave) & "'")
+
+                If WDatos IsNot Nothing Then
+                    Dim WGrabaV As String = OrDefault(WDatos.Item("GrabaV"), "")
+                    If WGrabaV.ToUpper = "S" Then
+                        WAutorizaActualizacionBloqueado = True
+                        btnGrabar.PerformClick()
+                        Exit Sub
+                    End If
+                End If
+
+                MsgBox("Clave Incorrecta")
+                Dim frm As New IngresoClaveSeguridad
+                frm.ShowDialog(Me)
+
+            Case Else
+                MsgBox("Clave Incorrecta")
+                Dim frm As New IngresoClaveSeguridad
+                frm.ShowDialog(Me)
+        End Select
+
     End Sub
 
     Public Sub _ProcesarIngresoMotivoDesvio(ByVal _Motivo As Object) Implements IIngresoMotivoDesvio._ProcesarIngresoMotivoDesvio

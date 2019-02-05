@@ -107,6 +107,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Clases\Conexion.vb" />
+    <Compile Include="Clases\Enumeraciones.vb" />
     <Compile Include="Clases\Helper.vb" />
     <Compile Include="Clases\Operador.vb" />
     <Compile Include="Clases\Query.vb" />
