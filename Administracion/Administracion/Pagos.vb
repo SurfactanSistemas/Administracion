@@ -4492,7 +4492,7 @@ Public Class Pagos
     Private Sub txtObservaciones_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtObservaciones.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            If Not optVarios.Checked Then
+            If Not optVarios.Checked And Not optTransferencias.Checked Then
                 With gridPagos
                     .CurrentCell = .Rows(0).Cells(4)
                     .Focus()
