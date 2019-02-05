@@ -866,6 +866,7 @@ Public Class Depositos
                                 txtNroDeposito.Text = WDeposito
                                 txtFecha.Text = WFecha
                                 txtCodigoBanco.Text = WBanco
+                                txtCodigoBanco_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
                                 txtFechaAcreditacion.Text = WFechaAcredita
                                 txtImporte.Text = WImporte
                             End If
