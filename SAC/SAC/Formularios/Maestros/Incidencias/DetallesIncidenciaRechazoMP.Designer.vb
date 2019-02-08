@@ -22,6 +22,7 @@ Partial Class DetallesIncidenciaRechazoMP
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -35,10 +36,15 @@ Partial Class DetallesIncidenciaRechazoMP
         Me.Label8 = New System.Windows.Forms.Label()
         Me.txtProveedor = New System.Windows.Forms.TextBox()
         Me.txtOrden = New System.Windows.Forms.TextBox()
+        Me.txtProducto = New System.Windows.Forms.MaskedTextBox()
+        Me.txtCantidadMP = New System.Windows.Forms.TextBox()
+        Me.txtDescMP = New System.Windows.Forms.TextBox()
         Me.txtDescProv = New System.Windows.Forms.TextBox()
         Me.txtIncidencia = New System.Windows.Forms.TextBox()
         Me.txtTitulo = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
@@ -46,12 +52,10 @@ Partial Class DetallesIncidenciaRechazoMP
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txtLotePartida = New System.Windows.Forms.TextBox()
-        Me.txtProducto = New System.Windows.Forms.MaskedTextBox()
         Me.rbProdTerminado = New System.Windows.Forms.RadioButton()
         Me.rbMatPrima = New System.Windows.Forms.RadioButton()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.txtDescProducto = New System.Windows.Forms.TextBox()
-        Me.Label6 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.txtMotivos = New System.Windows.Forms.TextBox()
         Me.btnMovimientos = New System.Windows.Forms.Button()
@@ -64,9 +68,17 @@ Partial Class DetallesIncidenciaRechazoMP
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.txtAcciones = New System.Windows.Forms.TextBox()
-        Me.txtDescMP = New System.Windows.Forms.TextBox()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.txtCantidadMP = New System.Windows.Forms.TextBox()
+        Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.dgvArchivos = New System.Windows.Forms.DataGridView()
+        Me.FechaArchivo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DescArchivo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Icono = New System.Windows.Forms.DataGridViewImageColumn()
+        Me.PathArchivo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ContextMenuStrip2 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.EliminarArchivoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -74,6 +86,9 @@ Partial Class DetallesIncidenciaRechazoMP
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
+        Me.TabPage3.SuspendLayout()
+        CType(Me.dgvArchivos, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ContextMenuStrip2.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -229,6 +244,39 @@ Partial Class DetallesIncidenciaRechazoMP
         Me.txtOrden.TabIndex = 5
         Me.txtOrden.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
+        'txtProducto
+        '
+        Me.txtProducto.Location = New System.Drawing.Point(79, 71)
+        Me.txtProducto.Mask = ">LL-00000-000"
+        Me.txtProducto.Name = "txtProducto"
+        Me.txtProducto.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtProducto.Size = New System.Drawing.Size(78, 20)
+        Me.txtProducto.TabIndex = 3
+        Me.txtProducto.Text = "PT00000000"
+        Me.txtProducto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtCantidadMP
+        '
+        Me.txtCantidadMP.BackColor = System.Drawing.Color.Cyan
+        Me.txtCantidadMP.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCantidadMP.Location = New System.Drawing.Point(607, 71)
+        Me.txtCantidadMP.Name = "txtCantidadMP"
+        Me.txtCantidadMP.ReadOnly = True
+        Me.txtCantidadMP.Size = New System.Drawing.Size(77, 20)
+        Me.txtCantidadMP.TabIndex = 1
+        Me.txtCantidadMP.TabStop = False
+        Me.txtCantidadMP.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtDescMP
+        '
+        Me.txtDescMP.BackColor = System.Drawing.Color.Cyan
+        Me.txtDescMP.Location = New System.Drawing.Point(163, 71)
+        Me.txtDescMP.Name = "txtDescMP"
+        Me.txtDescMP.ReadOnly = True
+        Me.txtDescMP.Size = New System.Drawing.Size(379, 20)
+        Me.txtDescMP.TabIndex = 1
+        Me.txtDescMP.TabStop = False
+        '
         'txtDescProv
         '
         Me.txtDescProv.BackColor = System.Drawing.Color.Cyan
@@ -263,6 +311,24 @@ Partial Class DetallesIncidenciaRechazoMP
         Me.Label12.Size = New System.Drawing.Size(51, 13)
         Me.Label12.TabIndex = 0
         Me.Label12.Text = "Empresa:"
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(549, 75)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(52, 13)
+        Me.Label13.TabIndex = 0
+        Me.Label13.Text = "Cantidad:"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(20, 75)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(53, 13)
+        Me.Label6.TabIndex = 0
+        Me.Label6.Text = "Producto:"
         '
         'Label11
         '
@@ -328,17 +394,6 @@ Partial Class DetallesIncidenciaRechazoMP
         Me.txtLotePartida.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtLotePartida.Visible = False
         '
-        'txtProducto
-        '
-        Me.txtProducto.Location = New System.Drawing.Point(79, 71)
-        Me.txtProducto.Mask = ">LL-00000-000"
-        Me.txtProducto.Name = "txtProducto"
-        Me.txtProducto.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtProducto.Size = New System.Drawing.Size(78, 20)
-        Me.txtProducto.TabIndex = 3
-        Me.txtProducto.Text = "PT00000000"
-        Me.txtProducto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
         'rbProdTerminado
         '
         Me.rbProdTerminado.AutoSize = True
@@ -382,15 +437,6 @@ Partial Class DetallesIncidenciaRechazoMP
         Me.txtDescProducto.Size = New System.Drawing.Size(205, 20)
         Me.txtDescProducto.TabIndex = 1
         Me.txtDescProducto.Visible = False
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(20, 75)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(53, 13)
-        Me.Label6.TabIndex = 0
-        Me.Label6.Text = "Producto:"
         '
         'GroupBox2
         '
@@ -464,8 +510,9 @@ Partial Class DetallesIncidenciaRechazoMP
         '
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
+        Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TabControl1.ItemSize = New System.Drawing.Size(300, 30)
+        Me.TabControl1.ItemSize = New System.Drawing.Size(250, 30)
         Me.TabControl1.Location = New System.Drawing.Point(13, 216)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
@@ -492,7 +539,7 @@ Partial Class DetallesIncidenciaRechazoMP
         Me.TabPage2.Location = New System.Drawing.Point(4, 34)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(768, 222)
+        Me.TabPage2.Size = New System.Drawing.Size(768, 221)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "ACCIONES"
         '
@@ -516,36 +563,104 @@ Partial Class DetallesIncidenciaRechazoMP
         Me.txtAcciones.Size = New System.Drawing.Size(716, 185)
         Me.txtAcciones.TabIndex = 9
         '
-        'txtDescMP
+        'TabPage3
         '
-        Me.txtDescMP.BackColor = System.Drawing.Color.Cyan
-        Me.txtDescMP.Location = New System.Drawing.Point(163, 71)
-        Me.txtDescMP.Name = "txtDescMP"
-        Me.txtDescMP.ReadOnly = True
-        Me.txtDescMP.Size = New System.Drawing.Size(379, 20)
-        Me.txtDescMP.TabIndex = 1
-        Me.txtDescMP.TabStop = False
+        Me.TabPage3.BackColor = System.Drawing.SystemColors.Control
+        Me.TabPage3.Controls.Add(Me.Button2)
+        Me.TabPage3.Controls.Add(Me.Button1)
+        Me.TabPage3.Controls.Add(Me.dgvArchivos)
+        Me.TabPage3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TabPage3.Location = New System.Drawing.Point(4, 34)
+        Me.TabPage3.Name = "TabPage3"
+        Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage3.Size = New System.Drawing.Size(768, 221)
+        Me.TabPage3.TabIndex = 2
+        Me.TabPage3.Text = "ARCHIVOS"
         '
-        'Label13
+        'Button2
         '
-        Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(549, 75)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(52, 13)
-        Me.Label13.TabIndex = 0
-        Me.Label13.Text = "Cantidad:"
+        Me.Button2.Location = New System.Drawing.Point(173, 5)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(164, 23)
+        Me.Button2.TabIndex = 6
+        Me.Button2.Text = "Eliminar Archivo(s)"
+        Me.Button2.UseVisualStyleBackColor = True
         '
-        'txtCantidadMP
+        'Button1
         '
-        Me.txtCantidadMP.BackColor = System.Drawing.Color.Cyan
-        Me.txtCantidadMP.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCantidadMP.Location = New System.Drawing.Point(607, 71)
-        Me.txtCantidadMP.Name = "txtCantidadMP"
-        Me.txtCantidadMP.ReadOnly = True
-        Me.txtCantidadMP.Size = New System.Drawing.Size(77, 20)
-        Me.txtCantidadMP.TabIndex = 1
-        Me.txtCantidadMP.TabStop = False
-        Me.txtCantidadMP.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.Button1.Location = New System.Drawing.Point(3, 5)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(164, 23)
+        Me.Button1.TabIndex = 5
+        Me.Button1.Text = "Agregar Archivo(s)"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'dgvArchivos
+        '
+        Me.dgvArchivos.AllowDrop = True
+        Me.dgvArchivos.AllowUserToAddRows = False
+        Me.dgvArchivos.AllowUserToDeleteRows = False
+        Me.dgvArchivos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvArchivos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.FechaArchivo, Me.DescArchivo, Me.Icono, Me.PathArchivo})
+        Me.dgvArchivos.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.dgvArchivos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
+        Me.dgvArchivos.Location = New System.Drawing.Point(3, 34)
+        Me.dgvArchivos.Name = "dgvArchivos"
+        Me.dgvArchivos.ReadOnly = True
+        Me.dgvArchivos.RowHeadersWidth = 15
+        Me.dgvArchivos.RowTemplate.Height = 30
+        Me.dgvArchivos.ShowCellToolTips = False
+        Me.dgvArchivos.Size = New System.Drawing.Size(762, 184)
+        Me.dgvArchivos.TabIndex = 4
+        '
+        'FechaArchivo
+        '
+        Me.FechaArchivo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.FechaArchivo.HeaderText = "Fecha"
+        Me.FechaArchivo.Name = "FechaArchivo"
+        Me.FechaArchivo.ReadOnly = True
+        Me.FechaArchivo.Width = 62
+        '
+        'DescArchivo
+        '
+        Me.DescArchivo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.DescArchivo.HeaderText = "Descripción"
+        Me.DescArchivo.Name = "DescArchivo"
+        Me.DescArchivo.ReadOnly = True
+        '
+        'Icono
+        '
+        Me.Icono.HeaderText = ""
+        Me.Icono.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom
+        Me.Icono.Name = "Icono"
+        Me.Icono.ReadOnly = True
+        Me.Icono.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Icono.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.Icono.Width = 50
+        '
+        'PathArchivo
+        '
+        Me.PathArchivo.HeaderText = "Path"
+        Me.PathArchivo.Name = "PathArchivo"
+        Me.PathArchivo.ReadOnly = True
+        Me.PathArchivo.Visible = False
+        '
+        'ContextMenuStrip2
+        '
+        Me.ContextMenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EliminarArchivoToolStripMenuItem})
+        Me.ContextMenuStrip2.Name = "ContextMenuStrip2"
+        Me.ContextMenuStrip2.Size = New System.Drawing.Size(162, 26)
+        Me.ContextMenuStrip2.Text = "Eliminar Archivo"
+        '
+        'EliminarArchivoToolStripMenuItem
+        '
+        Me.EliminarArchivoToolStripMenuItem.Name = "EliminarArchivoToolStripMenuItem"
+        Me.EliminarArchivoToolStripMenuItem.Size = New System.Drawing.Size(161, 22)
+        Me.EliminarArchivoToolStripMenuItem.Text = "Eliminar Archivo"
+        '
+        'OpenFileDialog1
+        '
+        Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
         'DetallesIncidenciaRechazoMP
         '
@@ -580,6 +695,9 @@ Partial Class DetallesIncidenciaRechazoMP
         Me.TabPage2.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
+        Me.TabPage3.ResumeLayout(False)
+        CType(Me.dgvArchivos, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ContextMenuStrip2.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -629,4 +747,15 @@ Partial Class DetallesIncidenciaRechazoMP
     Friend WithEvents txtCantidadMP As System.Windows.Forms.TextBox
     Friend WithEvents txtDescMP As System.Windows.Forms.TextBox
     Friend WithEvents Label13 As System.Windows.Forms.Label
+    Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
+    Friend WithEvents Button2 As System.Windows.Forms.Button
+    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents dgvArchivos As System.Windows.Forms.DataGridView
+    Friend WithEvents FechaArchivo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DescArchivo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Icono As System.Windows.Forms.DataGridViewImageColumn
+    Friend WithEvents PathArchivo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ContextMenuStrip2 As System.Windows.Forms.ContextMenuStrip
+    Friend WithEvents EliminarArchivoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
 End Class

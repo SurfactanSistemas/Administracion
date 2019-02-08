@@ -22,6 +22,7 @@ Partial Class DetallesIncidencia
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -56,6 +57,17 @@ Partial Class DetallesIncidencia
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.txtPosiblesUsos = New System.Windows.Forms.TextBox()
+        Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.dgvArchivos = New System.Windows.Forms.DataGridView()
+        Me.FechaArchivo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DescArchivo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Icono = New System.Windows.Forms.DataGridViewImageColumn()
+        Me.PathArchivo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ContextMenuStrip2 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.EliminarArchivoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -63,6 +75,9 @@ Partial Class DetallesIncidencia
         Me.GroupBox3.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
+        Me.TabPage3.SuspendLayout()
+        CType(Me.dgvArchivos, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ContextMenuStrip2.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -346,8 +361,9 @@ Partial Class DetallesIncidencia
         '
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
+        Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TabControl1.ItemSize = New System.Drawing.Size(300, 30)
+        Me.TabControl1.ItemSize = New System.Drawing.Size(250, 30)
         Me.TabControl1.Location = New System.Drawing.Point(13, 204)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
@@ -417,6 +433,105 @@ Partial Class DetallesIncidencia
         Me.txtPosiblesUsos.Size = New System.Drawing.Size(719, 225)
         Me.txtPosiblesUsos.TabIndex = 11
         '
+        'TabPage3
+        '
+        Me.TabPage3.BackColor = System.Drawing.SystemColors.Control
+        Me.TabPage3.Controls.Add(Me.Button2)
+        Me.TabPage3.Controls.Add(Me.Button1)
+        Me.TabPage3.Controls.Add(Me.dgvArchivos)
+        Me.TabPage3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TabPage3.Location = New System.Drawing.Point(4, 34)
+        Me.TabPage3.Name = "TabPage3"
+        Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage3.Size = New System.Drawing.Size(768, 261)
+        Me.TabPage3.TabIndex = 2
+        Me.TabPage3.Text = "ARCHIVOS"
+        '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(173, 6)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(164, 23)
+        Me.Button2.TabIndex = 3
+        Me.Button2.Text = "Eliminar Archivo(s)"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(3, 6)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(164, 23)
+        Me.Button1.TabIndex = 2
+        Me.Button1.Text = "Agregar Archivo(s)"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'dgvArchivos
+        '
+        Me.dgvArchivos.AllowDrop = True
+        Me.dgvArchivos.AllowUserToAddRows = False
+        Me.dgvArchivos.AllowUserToDeleteRows = False
+        Me.dgvArchivos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvArchivos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.FechaArchivo, Me.DescArchivo, Me.Icono, Me.PathArchivo})
+        Me.dgvArchivos.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.dgvArchivos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
+        Me.dgvArchivos.Location = New System.Drawing.Point(3, 32)
+        Me.dgvArchivos.Name = "dgvArchivos"
+        Me.dgvArchivos.ReadOnly = True
+        Me.dgvArchivos.RowHeadersWidth = 15
+        Me.dgvArchivos.RowTemplate.Height = 30
+        Me.dgvArchivos.ShowCellToolTips = False
+        Me.dgvArchivos.Size = New System.Drawing.Size(762, 226)
+        Me.dgvArchivos.TabIndex = 1
+        '
+        'FechaArchivo
+        '
+        Me.FechaArchivo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.FechaArchivo.HeaderText = "Fecha"
+        Me.FechaArchivo.Name = "FechaArchivo"
+        Me.FechaArchivo.ReadOnly = True
+        Me.FechaArchivo.Width = 62
+        '
+        'DescArchivo
+        '
+        Me.DescArchivo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.DescArchivo.HeaderText = "Descripción"
+        Me.DescArchivo.Name = "DescArchivo"
+        Me.DescArchivo.ReadOnly = True
+        '
+        'Icono
+        '
+        Me.Icono.HeaderText = ""
+        Me.Icono.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom
+        Me.Icono.Name = "Icono"
+        Me.Icono.ReadOnly = True
+        Me.Icono.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Icono.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.Icono.Width = 50
+        '
+        'PathArchivo
+        '
+        Me.PathArchivo.HeaderText = "Path"
+        Me.PathArchivo.Name = "PathArchivo"
+        Me.PathArchivo.ReadOnly = True
+        Me.PathArchivo.Visible = False
+        '
+        'ContextMenuStrip2
+        '
+        Me.ContextMenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EliminarArchivoToolStripMenuItem})
+        Me.ContextMenuStrip2.Name = "ContextMenuStrip2"
+        Me.ContextMenuStrip2.Size = New System.Drawing.Size(162, 26)
+        Me.ContextMenuStrip2.Text = "Eliminar Archivo"
+        '
+        'EliminarArchivoToolStripMenuItem
+        '
+        Me.EliminarArchivoToolStripMenuItem.Name = "EliminarArchivoToolStripMenuItem"
+        Me.EliminarArchivoToolStripMenuItem.Size = New System.Drawing.Size(161, 22)
+        Me.EliminarArchivoToolStripMenuItem.Text = "Eliminar Archivo"
+        '
+        'OpenFileDialog1
+        '
+        Me.OpenFileDialog1.FileName = "OpenFileDialog1"
+        '
         'DetallesIncidencia
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -445,6 +560,9 @@ Partial Class DetallesIncidencia
         Me.TabPage2.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
+        Me.TabPage3.ResumeLayout(False)
+        CType(Me.dgvArchivos, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ContextMenuStrip2.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -482,4 +600,15 @@ Partial Class DetallesIncidencia
     Friend WithEvents txtPosiblesUsos As System.Windows.Forms.TextBox
     Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
     Friend WithEvents txtMotivos As System.Windows.Forms.TextBox
+    Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
+    Friend WithEvents dgvArchivos As System.Windows.Forms.DataGridView
+    Friend WithEvents FechaArchivo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DescArchivo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Icono As System.Windows.Forms.DataGridViewImageColumn
+    Friend WithEvents PathArchivo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Button2 As System.Windows.Forms.Button
+    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents ContextMenuStrip2 As System.Windows.Forms.ContextMenuStrip
+    Friend WithEvents EliminarArchivoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
 End Class

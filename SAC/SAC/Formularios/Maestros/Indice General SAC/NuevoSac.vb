@@ -2147,7 +2147,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
         If MsgBox("¿Está seguro de querer eliminar todos los archivos indicados?", MsgBoxStyle.YesNoCancel) <> MsgBoxResult.Yes Then Exit Sub
 
-        For Each row As DataGridViewRow In dgvArchivos.Rows
+        For Each row As DataGridViewRow In dgvArchivos.SelectedRows
             With row
 
                 If OrDefault(.Cells("PathArchivo").Value, "") = "" Then Continue For

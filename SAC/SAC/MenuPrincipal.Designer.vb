@@ -218,7 +218,7 @@ Partial Class MenuPrincipal
         '
         'MaestrosToolStripMenuItem
         '
-        Me.MaestrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TiposDeSolicitudToolStripMenuItem, Me.ResponsablesToolStripMenuItem, Me.CentrosToolStripMenuItem, Me.IndiceGeneralDeAccionesToolStripMenuItem, Me.ListadoDeIncidenciasToolStripMenuItem})
+        Me.MaestrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TiposDeSolicitudToolStripMenuItem, Me.ResponsablesToolStripMenuItem, Me.CentrosToolStripMenuItem, Me.ListadoDeIncidenciasToolStripMenuItem, Me.IndiceGeneralDeAccionesToolStripMenuItem})
         Me.MaestrosToolStripMenuItem.Name = "MaestrosToolStripMenuItem"
         Me.MaestrosToolStripMenuItem.Size = New System.Drawing.Size(67, 20)
         Me.MaestrosToolStripMenuItem.Text = "Maestros"
@@ -226,32 +226,32 @@ Partial Class MenuPrincipal
         'TiposDeSolicitudToolStripMenuItem
         '
         Me.TiposDeSolicitudToolStripMenuItem.Name = "TiposDeSolicitudToolStripMenuItem"
-        Me.TiposDeSolicitudToolStripMenuItem.Size = New System.Drawing.Size(287, 22)
+        Me.TiposDeSolicitudToolStripMenuItem.Size = New System.Drawing.Size(230, 22)
         Me.TiposDeSolicitudToolStripMenuItem.Text = "Tipos de Solicitud"
         '
         'ResponsablesToolStripMenuItem
         '
         Me.ResponsablesToolStripMenuItem.Name = "ResponsablesToolStripMenuItem"
-        Me.ResponsablesToolStripMenuItem.Size = New System.Drawing.Size(287, 22)
+        Me.ResponsablesToolStripMenuItem.Size = New System.Drawing.Size(230, 22)
         Me.ResponsablesToolStripMenuItem.Text = "Responsables"
         '
         'CentrosToolStripMenuItem
         '
         Me.CentrosToolStripMenuItem.Name = "CentrosToolStripMenuItem"
-        Me.CentrosToolStripMenuItem.Size = New System.Drawing.Size(287, 22)
+        Me.CentrosToolStripMenuItem.Size = New System.Drawing.Size(230, 22)
         Me.CentrosToolStripMenuItem.Text = "Centros"
         '
         'IndiceGeneralDeAccionesToolStripMenuItem
         '
         Me.IndiceGeneralDeAccionesToolStripMenuItem.Name = "IndiceGeneralDeAccionesToolStripMenuItem"
-        Me.IndiceGeneralDeAccionesToolStripMenuItem.Size = New System.Drawing.Size(287, 22)
+        Me.IndiceGeneralDeAccionesToolStripMenuItem.Size = New System.Drawing.Size(230, 22)
         Me.IndiceGeneralDeAccionesToolStripMenuItem.Text = "Indice General de Acciones"
         '
         'ListadoDeIncidenciasToolStripMenuItem
         '
         Me.ListadoDeIncidenciasToolStripMenuItem.Name = "ListadoDeIncidenciasToolStripMenuItem"
-        Me.ListadoDeIncidenciasToolStripMenuItem.Size = New System.Drawing.Size(287, 22)
-        Me.ListadoDeIncidenciasToolStripMenuItem.Text = "Listado de Informes de No Conformidad"
+        Me.ListadoDeIncidenciasToolStripMenuItem.Size = New System.Drawing.Size(230, 22)
+        Me.ListadoDeIncidenciasToolStripMenuItem.Text = "Informes de No Conformidad"
         '
         'ProcesosToolStripMenuItem
         '
