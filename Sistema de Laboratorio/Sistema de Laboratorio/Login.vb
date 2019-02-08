@@ -114,4 +114,21 @@
         End If
 
     End Sub
+
+    Private Sub cmbEmpresas_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbEmpresas.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(cmbEmpresas.Text) = "" Then : Exit Sub : End If
+
+            If txtClave.Text.Trim <> "" Then
+                btnIniciar_Click(Nothing, Nothing)
+            End If
+
+            txtClave.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            cmbEmpresas.SelectedIndex = 0
+        End If
+
+    End Sub
 End Class

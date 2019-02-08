@@ -29,6 +29,8 @@ Partial Class MenuPrincipal
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.btnCambioEmpresa = New System.Windows.Forms.Button()
+        Me.EspecificacionesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -38,7 +40,7 @@ Partial Class MenuPrincipal
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MaestrosToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 49)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(662, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(835, 24)
         Me.MenuStrip1.TabIndex = 0
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -51,7 +53,7 @@ Partial Class MenuPrincipal
         '
         'IngresoDeEnsayosProductosTerminadosToolStripMenuItem
         '
-        Me.IngresoDeEnsayosProductosTerminadosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ControlesIntermedisToolStripMenuItem})
+        Me.IngresoDeEnsayosProductosTerminadosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ControlesIntermedisToolStripMenuItem, Me.EspecificacionesToolStripMenuItem})
         Me.IngresoDeEnsayosProductosTerminadosToolStripMenuItem.Name = "IngresoDeEnsayosProductosTerminadosToolStripMenuItem"
         Me.IngresoDeEnsayosProductosTerminadosToolStripMenuItem.Size = New System.Drawing.Size(193, 22)
         Me.IngresoDeEnsayosProductosTerminadosToolStripMenuItem.Text = "Productos Terminados"
@@ -70,7 +72,7 @@ Partial Class MenuPrincipal
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(662, 49)
+        Me.Panel1.Size = New System.Drawing.Size(835, 49)
         Me.Panel1.TabIndex = 1
         '
         'Label2
@@ -80,7 +82,7 @@ Partial Class MenuPrincipal
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label2.Location = New System.Drawing.Point(472, 12)
+        Me.Label2.Location = New System.Drawing.Point(645, 12)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(179, 24)
         Me.Label2.TabIndex = 0
@@ -99,11 +101,27 @@ Partial Class MenuPrincipal
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "SISTEMA DE LABORATORIO"
         '
+        'btnCambioEmpresa
+        '
+        Me.btnCambioEmpresa.Location = New System.Drawing.Point(12, 281)
+        Me.btnCambioEmpresa.Name = "btnCambioEmpresa"
+        Me.btnCambioEmpresa.Size = New System.Drawing.Size(149, 51)
+        Me.btnCambioEmpresa.TabIndex = 2
+        Me.btnCambioEmpresa.Text = "CAMBIAR EMPRESA"
+        Me.btnCambioEmpresa.UseVisualStyleBackColor = True
+        '
+        'EspecificacionesToolStripMenuItem
+        '
+        Me.EspecificacionesToolStripMenuItem.Name = "EspecificacionesToolStripMenuItem"
+        Me.EspecificacionesToolStripMenuItem.Size = New System.Drawing.Size(191, 22)
+        Me.EspecificacionesToolStripMenuItem.Text = "Especificaciones"
+        '
         'MenuPrincipal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(662, 317)
+        Me.ClientSize = New System.Drawing.Size(835, 465)
+        Me.Controls.Add(Me.btnCambioEmpresa)
         Me.Controls.Add(Me.MenuStrip1)
         Me.Controls.Add(Me.Panel1)
         Me.MainMenuStrip = Me.MenuStrip1
@@ -125,4 +143,6 @@ Partial Class MenuPrincipal
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents IngresoDeEnsayosProductosTerminadosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ControlesIntermedisToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents btnCambioEmpresa As System.Windows.Forms.Button
+    Friend WithEvents EspecificacionesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class

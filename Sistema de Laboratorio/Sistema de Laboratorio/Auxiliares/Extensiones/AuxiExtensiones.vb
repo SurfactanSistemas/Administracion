@@ -17,4 +17,15 @@ Module AuxiExtensiones
         Return Microsoft.VisualBasic.Left$(obj.ToString, longitud)
     End Function
 
+    <Extension()>
+    Public Function toDbl(ByVal obj As Object) As Double
+        Return CDbl(OrDefault(obj, 0).ToString.Replace(".", ","))
+    End Function
+
+    <Extension()>
+    Public Function toDbl(ByVal obj As String) As Double
+        If obj.Trim = "" Then obj = "0"
+        Return CDbl(obj.Replace(".", ","))
+    End Function
+
 End Module

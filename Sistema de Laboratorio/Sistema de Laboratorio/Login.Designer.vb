@@ -105,22 +105,20 @@ Partial Class Login
         '
         'cmbEmpresas
         '
-        Me.cmbEmpresas.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbEmpresas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbEmpresas.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbEmpresas.FormattingEnabled = True
         Me.cmbEmpresas.Location = New System.Drawing.Point(73, 24)
         Me.cmbEmpresas.MaxDropDownItems = 11
         Me.cmbEmpresas.Name = "cmbEmpresas"
         Me.cmbEmpresas.Size = New System.Drawing.Size(209, 21)
-        Me.cmbEmpresas.TabIndex = 0
+        Me.cmbEmpresas.TabIndex = 1
         '
         'btnIniciar
         '
         Me.btnIniciar.Location = New System.Drawing.Point(53, 174)
         Me.btnIniciar.Name = "btnIniciar"
         Me.btnIniciar.Size = New System.Drawing.Size(133, 42)
-        Me.btnIniciar.TabIndex = 4
+        Me.btnIniciar.TabIndex = 3
         Me.btnIniciar.Text = "INICIAR"
         Me.btnIniciar.UseVisualStyleBackColor = True
         '

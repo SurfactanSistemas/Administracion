@@ -61,6 +61,10 @@
     <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="info.lundin.math, Version=1.2.5.0, Culture=neutral, PublicKeyToken=2f7fe9ec5efab85f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>libs\info.lundin.math.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
@@ -87,8 +91,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Auxiliares\Extensiones\AuxiExtensiones.vb" />
+    <Compile Include="Auxiliares\Interfaces\IDefinicionFormulaEspecificacion.vb" />
     <Compile Include="Auxiliares\Interfaces\IIngresoClaveSeguridad.vb" />
     <Compile Include="Auxiliares\Interfaces\IIngresoMotivoDesvio.vb" />
+    <Compile Include="Auxiliares\Interfaces\IIngresoParametrosEspecificaciones.vb" />
     <Compile Include="Auxiliares\Interfaces\INotasEnsayosProductosTerminados.vb" />
     <Compile Include="Auxiliares\VentanasIntermedias\IngresoClaveSeguridad.Designer.vb">
       <DependentUpon>IngresoClaveSeguridad.vb</DependentUpon>
@@ -123,6 +129,24 @@
       <DependentUpon>IngresoEnsayosIntermediosPT.vb</DependentUpon>
     </Compile>
     <Compile Include="Maestros\Productos Terminados\Ensayos Intermedios\IngresoEnsayosIntermediosPT.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestros\Productos Terminados\Especificaciones\DefinicionFormulaEspecificacion.Designer.vb">
+      <DependentUpon>DefinicionFormulaEspecificacion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\Productos Terminados\Especificaciones\DefinicionFormulaEspecificacion.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestros\Productos Terminados\Especificaciones\IngresoEspecificacionesPT.Designer.vb">
+      <DependentUpon>IngresoEspecificacionesPT.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\Productos Terminados\Especificaciones\IngresoEspecificacionesPT.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestros\Productos Terminados\Especificaciones\IngresoParametrosEspecificaciones.Designer.vb">
+      <DependentUpon>IngresoParametrosEspecificaciones.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\Productos Terminados\Especificaciones\IngresoParametrosEspecificaciones.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MenuPrincipal.Designer.vb">
@@ -175,6 +199,15 @@
     <EmbeddedResource Include="Maestros\Productos Terminados\Ensayos Intermedios\IngresoEnsayosIntermediosPT.resx">
       <DependentUpon>IngresoEnsayosIntermediosPT.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\Productos Terminados\Especificaciones\DefinicionFormulaEspecificacion.resx">
+      <DependentUpon>DefinicionFormulaEspecificacion.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\Productos Terminados\Especificaciones\IngresoEspecificacionesPT.resx">
+      <DependentUpon>IngresoEspecificacionesPT.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\Productos Terminados\Especificaciones\IngresoParametrosEspecificaciones.resx">
+      <DependentUpon>IngresoParametrosEspecificaciones.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MenuPrincipal.resx">
       <DependentUpon>MenuPrincipal.vb</DependentUpon>
     </EmbeddedResource>
@@ -210,6 +243,11 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="libs\info.lundin.math.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
