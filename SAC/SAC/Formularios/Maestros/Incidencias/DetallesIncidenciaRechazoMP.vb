@@ -61,11 +61,24 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
             .ValueMember = "Id"
         End With
 
+        _CargarEstados()
+
         If txtIncidencia.Text.Trim <> "" Then
             txtIncidencia_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
         Else
             _Limpiar()
         End If
+    End Sub
+
+    Private Sub _CargarEstados()
+        Dim WEstados As DataTable = GetAll("SELECT Estado, LTrim(Descripcion) Descripcion FROM EstadosINC Order By Estado")
+
+        With cmbEstado
+            .DataSource = WEstados
+            .DisplayMember = "Descripcion"
+            .ValueMember = "Estado"
+            If .Items.Count > 0 Then .SelectedIndex = 0
+        End With
     End Sub
 
     Private Sub _Limpiar()
@@ -81,6 +94,9 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
 
         rbMatPrima.Checked = True
         rbProdTerminado_Click(Nothing, Nothing)
+
+        _CargarEstados()
+
         cmbEstado.SelectedIndex = 0
 
         cmbEmpresa.SelectedIndex = 0
@@ -150,7 +166,15 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
                         End If
 
                         txtFecha.Text = OrDefault(.Item("Fecha"), "")
-                        cmbEstado.SelectedIndex = OrDefault(.Item("Estado"), 0)
+                        Dim WTempEstado = OrDefault(.Item("Estado"), 0)
+
+                        For Each rowView As datarowview In cmbEstado.items
+                            If rowView.Item("Estado") = WTempEstado Then
+                                cmbEstado.SelectedItem = rowView
+                                Exit Sub
+                            End If
+                        Next
+
                         'rbProdTerminado.Checked = OrDefault(.Item("TipoProd"), "M") = "T"
                         'rbProdTerminado_Click(Nothing, Nothing)
                         txtProducto.Text = OrDefault(.Item("Producto"), "")
@@ -434,6 +458,8 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
                 txtIncidencia.Text = Val(txtIncidencia.Text) + 1
             End If
 
+            Dim WEstado As Integer = CType(cmbEstado.SelectedItem, DataRowView).Item("Estado")
+
             Dim WEmpresa = CType(cmbEmpresa.SelectedItem, DataRowView).Item("Id")
             Dim WOrden = txtOrden.Text
 
@@ -443,7 +469,7 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
                        & "(Incidencia, Renglon, Tipo, Fecha, FechaOrd, Estado, Titulo, Referencia, Producto, Lote, ClaveSac, TipoProd, Motivos, Empresa, Orden, Acciones) " _
                        & "VALUES " _
                        & " ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}','{15}') ", _
-                       txtIncidencia.Text, 1, WTipo, txtFecha.Text, ordenaFecha(txtFecha.Text), cmbEstado.SelectedIndex, txtTitulo.Text, txtReferencia.Text, txtProducto.Text, txtLotePartida.Text, WClaveSAC, IIf(rbMatPrima.Checked, "M", "T"), txtMotivos.Text, WEmpresa, WOrden, txtAcciones.Text)
+                       txtIncidencia.Text, 1, WTipo, txtFecha.Text, ordenaFecha(txtFecha.Text), WEstado, txtTitulo.Text, txtReferencia.Text, txtProducto.Text, txtLotePartida.Text, WClaveSAC, IIf(rbMatPrima.Checked, "M", "T"), txtMotivos.Text, WEmpresa, WOrden, txtAcciones.Text)
             WSqls.Add(ZSql)
 
             ExecuteNonQueries(WSqls.ToArray)
@@ -569,7 +595,7 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
     Private Sub txtOrden_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtOrden.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            If Trim(txtOrden.Text) = "" Then : Exit Sub : End If
+            'If Trim(txtOrden.Text) = "" Then : Exit Sub : End If
 
             Dim WEmpresa As String = CType(cmbEmpresa.SelectedItem, DataRowView).Item("Base")
 

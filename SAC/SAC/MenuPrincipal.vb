@@ -81,7 +81,15 @@ Public Class MenuPrincipal
 
     End Sub
 
-    Private Sub ListadoDeIncidenciasToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ListadoDeIncidenciasToolStripMenuItem.Click
+    Private Sub IndiceGeneralToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles IndiceGeneralToolStripMenuItem.Click
         Abrir(New ListadoIncidencias)
+    End Sub
+
+    Private Sub ListadoDeEstadosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListadoDeEstadosToolStripMenuItem.Click
+        Abrir(New ListadoEstadosINC)
+    End Sub
+
+    Private Sub ListadoDeTiposToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListadoDeTiposToolStripMenuItem.Click
+        Abrir(New ListadoTiposINC)
     End Sub
 End Class

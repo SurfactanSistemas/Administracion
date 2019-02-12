@@ -43,8 +43,11 @@ Partial Class MenuPrincipal
         Me.TiposDeSolicitudToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ResponsablesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CentrosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.IndiceGeneralDeAccionesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListadoDeIncidenciasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.IndiceGeneralToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ListadoDeEstadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ListadoDeTiposToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.IndiceGeneralDeAccionesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProcesosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CerrarSistemaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LayoutPrincipal.SuspendLayout()
@@ -241,17 +244,36 @@ Partial Class MenuPrincipal
         Me.CentrosToolStripMenuItem.Size = New System.Drawing.Size(230, 22)
         Me.CentrosToolStripMenuItem.Text = "Centros"
         '
+        'ListadoDeIncidenciasToolStripMenuItem
+        '
+        Me.ListadoDeIncidenciasToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IndiceGeneralToolStripMenuItem, Me.ListadoDeEstadosToolStripMenuItem, Me.ListadoDeTiposToolStripMenuItem})
+        Me.ListadoDeIncidenciasToolStripMenuItem.Name = "ListadoDeIncidenciasToolStripMenuItem"
+        Me.ListadoDeIncidenciasToolStripMenuItem.Size = New System.Drawing.Size(230, 22)
+        Me.ListadoDeIncidenciasToolStripMenuItem.Text = "Informes de No Conformidad"
+        '
+        'IndiceGeneralToolStripMenuItem
+        '
+        Me.IndiceGeneralToolStripMenuItem.Name = "IndiceGeneralToolStripMenuItem"
+        Me.IndiceGeneralToolStripMenuItem.Size = New System.Drawing.Size(210, 22)
+        Me.IndiceGeneralToolStripMenuItem.Text = "Indice General INC"
+        '
+        'ListadoDeEstadosToolStripMenuItem
+        '
+        Me.ListadoDeEstadosToolStripMenuItem.Name = "ListadoDeEstadosToolStripMenuItem"
+        Me.ListadoDeEstadosToolStripMenuItem.Size = New System.Drawing.Size(210, 22)
+        Me.ListadoDeEstadosToolStripMenuItem.Text = "Listado de Estados de INC"
+        '
+        'ListadoDeTiposToolStripMenuItem
+        '
+        Me.ListadoDeTiposToolStripMenuItem.Name = "ListadoDeTiposToolStripMenuItem"
+        Me.ListadoDeTiposToolStripMenuItem.Size = New System.Drawing.Size(210, 22)
+        Me.ListadoDeTiposToolStripMenuItem.Text = "Listado de Tipos de INC"
+        '
         'IndiceGeneralDeAccionesToolStripMenuItem
         '
         Me.IndiceGeneralDeAccionesToolStripMenuItem.Name = "IndiceGeneralDeAccionesToolStripMenuItem"
         Me.IndiceGeneralDeAccionesToolStripMenuItem.Size = New System.Drawing.Size(230, 22)
         Me.IndiceGeneralDeAccionesToolStripMenuItem.Text = "Indice General de Acciones"
-        '
-        'ListadoDeIncidenciasToolStripMenuItem
-        '
-        Me.ListadoDeIncidenciasToolStripMenuItem.Name = "ListadoDeIncidenciasToolStripMenuItem"
-        Me.ListadoDeIncidenciasToolStripMenuItem.Size = New System.Drawing.Size(230, 22)
-        Me.ListadoDeIncidenciasToolStripMenuItem.Text = "Informes de No Conformidad"
         '
         'ProcesosToolStripMenuItem
         '
@@ -310,5 +332,8 @@ Partial Class MenuPrincipal
     Friend WithEvents ComboBox1 As ComboBox
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents ListadoDeIncidenciasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents IndiceGeneralToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ListadoDeEstadosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ListadoDeTiposToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

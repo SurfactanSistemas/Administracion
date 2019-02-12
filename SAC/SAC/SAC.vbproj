@@ -228,10 +228,34 @@
     <Compile Include="Formularios\Maestros\Incidencias\DetallesIncidencia.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formularios\Maestros\Incidencias\Estados de INC\ListadoEstadosINC.Designer.vb">
+      <DependentUpon>ListadoEstadosINC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Maestros\Incidencias\Estados de INC\ListadoEstadosINC.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Maestros\Incidencias\Estados de INC\NuevoEstadoINc.Designer.vb">
+      <DependentUpon>NuevoEstadoINc.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Maestros\Incidencias\Estados de INC\NuevoEstadoINc.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\Maestros\Incidencias\SeleccionTipoIncidencia.Designer.vb">
       <DependentUpon>SeleccionTipoIncidencia.vb</DependentUpon>
     </Compile>
     <Compile Include="Formularios\Maestros\Incidencias\SeleccionTipoIncidencia.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Maestros\Incidencias\Tipos de INC\ListadoTiposINC.Designer.vb">
+      <DependentUpon>ListadoTiposINC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Maestros\Incidencias\Tipos de INC\ListadoTiposINC.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Maestros\Incidencias\Tipos de INC\NuevoTipoINc.Designer.vb">
+      <DependentUpon>NuevoTipoINc.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Maestros\Incidencias\Tipos de INC\NuevoTipoINc.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Formularios\Maestros\Indice General SAC\ExportarIndice.Designer.vb">
@@ -295,12 +319,14 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Helper.vb" />
+    <Compile Include="Interfaces\INuevoTipoINC.vb" />
     <Compile Include="Interfaces\IAuxiNuevaSACDesdeINC.vb" />
     <Compile Include="Interfaces\IAyudaListadoSACs.vb" />
     <Compile Include="Interfaces\IAyudaMPAsociadasOC.vb" />
     <Compile Include="Interfaces\IExportarIndice.vb" />
     <Compile Include="Interfaces\IExportarSac.vb" />
     <Compile Include="Interfaces\INuevaIncidencia.vb" />
+    <Compile Include="Interfaces\INuevoEstadoINC.vb" />
     <Compile Include="Interfaces\INuevoSac.vb" />
     <Compile Include="Interfaces\IAyudaContenedor.vb" />
     <Compile Include="Interfaces\IAyudaCentroSac.vb" />
@@ -463,8 +489,20 @@
     <EmbeddedResource Include="Formularios\Maestros\Incidencias\DetallesIncidencia.resx">
       <DependentUpon>DetallesIncidencia.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Maestros\Incidencias\Estados de INC\ListadoEstadosINC.resx">
+      <DependentUpon>ListadoEstadosINC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Maestros\Incidencias\Estados de INC\NuevoEstadoINc.resx">
+      <DependentUpon>NuevoEstadoINc.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Maestros\Incidencias\SeleccionTipoIncidencia.resx">
       <DependentUpon>SeleccionTipoIncidencia.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Maestros\Incidencias\Tipos de INC\ListadoTiposINC.resx">
+      <DependentUpon>ListadoTiposINC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Maestros\Incidencias\Tipos de INC\NuevoTipoINc.resx">
+      <DependentUpon>NuevoTipoINc.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Maestros\Indice General SAC\ExportarIndice.resx">
       <DependentUpon>ExportarIndice.vb</DependentUpon>

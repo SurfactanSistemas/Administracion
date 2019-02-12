@@ -15,7 +15,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
     Private WListTabPages As New List(Of TabPage)
 
-    Private Const EXTENSIONES_PERMITIDAS = "*.bmp|*.png|*.jpg|*.jpeg"
+    Private Const EXTENSIONES_PERMITIDAS = "*.bmp|*.png|*.jpg|*.jpeg|*.pdf|*.doc|*.docx|*.xls|*.xlsx|*.xlsm|*.txt"
 
     Sub New()
 
@@ -230,13 +230,13 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
         Select Case OrDefault(item, 0)
             Case 0
-                Return "No Imple."
+                Return "No Efect."
             Case 1
-                Return "Imple."
+                Return "Parc. Efect."
             Case 2
                 Return "Nula"
             Case 3
-                Return "Cerrada"
+                Return "Efectiva"
             Case Else
                 Return ""
         End Select
@@ -1206,13 +1206,13 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
     Private Function _TraerValorRefEstadoVerif(ByVal valor As Object)
 
         Select Case OrDefault(valor, "")
-            Case "No Imple."
+            Case "No Efect."
                 Return 0
-            Case "Imple."
+            Case "Parc. Efect."
                 Return 1
             Case "Nula"
                 Return 2
-            Case "Cerrada"
+            Case "Efectiva"
                 Return 2
             Case Else
                 Return 0
@@ -2164,7 +2164,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
     Private Sub Button1_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button1.Click
         Try
             With OpenFileDialog1
-                .Filter = "Imágenes (bmp, jpg, png) | " & String.Join(";", EXTENSIONES_PERMITIDAS.Split("|"))
+                .Filter = "Archivos Permitidos | " & String.Join(";", EXTENSIONES_PERMITIDAS.Split("|"))
                 If .ShowDialog() = DialogResult.OK Then
                     Dim WArchivos() = .FileNames
 

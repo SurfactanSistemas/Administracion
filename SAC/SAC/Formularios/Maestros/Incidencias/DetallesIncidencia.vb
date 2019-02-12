@@ -42,6 +42,8 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
             c.Text = ""
         Next
 
+        _CargarEstados()
+
         txtFecha.Text = Date.Now.ToString("dd/MM/yyyy")
 
         btnControles.Enabled = True
@@ -66,6 +68,18 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
 
         btnSac.Enabled = MostrarBotonVerSac
         txtIncidencia.Enabled = MostrarBotonVerSac
+
+    End Sub
+
+    Private Sub _CargarEstados()
+        Dim WEstados As DataTable = GetAll("SELECT Estado, LTRIM(Descripcion) Descripcion FROM EstadosINC ORDER BY Estado")
+
+        With cmbEstado
+            .DataSource = WEstados
+            .DisplayMember = "Descripcion"
+            .ValueMember = "Estado"
+            If .Items.Count > 0 Then .SelectedIndex = 0
+        End With
 
     End Sub
 
@@ -114,7 +128,16 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
                         End If
 
                         txtFecha.Text = OrDefault(.Item("Fecha"), "")
-                        cmbEstado.SelectedIndex = OrDefault(.Item("Estado"), 0)
+
+                        Dim WTempEstado = OrDefault(.Item("Estado"), 0)
+
+                        For Each rowView As DataRowView In cmbEstado.Items
+                            If rowView.Item("Estado") = WTempEstado Then
+                                cmbEstado.SelectedItem = rowView
+                                Exit Sub
+                            End If
+                        Next
+
                         txtLotePartida.Text = OrDefault(.Item("Lote"), "")
                         rbProdTerminado.Checked = OrDefault(.Item("TipoProd"), "M") = "T"
                         rbProdTerminado_Click(Nothing, Nothing)
@@ -362,13 +385,15 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
                 txtIncidencia.Text = Val(txtIncidencia.Text) + 1
             End If
 
+            Dim WEstado As Integer = CType(cmbEstado.SelectedItem, DataRowView).Item("Estado")
+
             WSqls.Add("DELETE CargaIncidencias WHERE Incidencia = '" & txtIncidencia.Text & "'")
 
             Dim ZSql = String.Format("INSERT INTO CargaIncidencias " _
                        & "(Incidencia, Renglon, Tipo, Fecha, FechaOrd, Estado, Titulo, Referencia, Producto, Lote, ClaveSac, TipoProd, Posiblesusos, Motivos) " _
                        & "VALUES " _
                        & " ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}') ", _
-                       txtIncidencia.Text, 1, WTipo, txtFecha.Text, ordenaFecha(txtFecha.Text), cmbEstado.SelectedIndex, txtTitulo.Text, txtReferencia.Text, txtProducto.Text, txtLotePartida.Text, WClaveSAC, IIf(rbMatPrima.Checked, "M", "T"), txtPosiblesUsos.Text, txtMotivos.Text)
+                       txtIncidencia.Text, 1, WTipo, txtFecha.Text, ordenaFecha(txtFecha.Text), WEstado, txtTitulo.Text, txtReferencia.Text, txtProducto.Text, txtLotePartida.Text, WClaveSAC, IIf(rbMatPrima.Checked, "M", "T"), txtPosiblesUsos.Text, txtMotivos.Text)
             WSqls.Add(ZSql)
 
             ExecuteNonQueries(WSqls.ToArray)
