@@ -13,7 +13,7 @@ Public Class MenuPrincipal
 
     Private Sub MenuPrincipal_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         If Val(Operador.CodigoResponsableSac) = 0 Or Val(Operador.Codigo) = 3 Or Val(Operador.Codigo) = 21 Then
-            For Each i As ToolStripMenuItem In {TiposDeSolicitudToolStripMenuItem, ResponsablesToolStripMenuItem}
+            For Each i As ToolStripMenuItem In {TiposDeSolicitudSACToolStripMenuItem, ResponsablesSACToolStripMenuItem, EstadosDeINCToolStripMenuItem, TiposDeINCToolStripMenuItem, CentrosSACToolStripMenuItem}
                 i.Enabled = False
             Next
         End If
@@ -24,17 +24,6 @@ Public Class MenuPrincipal
         Close()
     End Sub
 
-    Private Sub TiposDeSolicitudToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles TiposDeSolicitudToolStripMenuItem.Click
-        Abrir(New ListadoTiposSolicitud)
-    End Sub
-
-    Private Sub ResponsablesToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ResponsablesToolStripMenuItem.Click
-        Abrir(New ListadoResponsablesSAC)
-    End Sub
-
-    Private Sub CentrosToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles CentrosToolStripMenuItem.Click
-        Abrir(New ListadoCentros)
-    End Sub
 
     Private Sub IndiceGeneralDeAccionesToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles IndiceGeneralDeAccionesToolStripMenuItem.Click
         Abrir(New IndiceGralSac)
@@ -81,15 +70,27 @@ Public Class MenuPrincipal
 
     End Sub
 
-    Private Sub IndiceGeneralToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles IndiceGeneralToolStripMenuItem.Click
+    Private Sub ListadoDeIncidenciasToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListadoDeIncidenciasToolStripMenuItem.Click
         Abrir(New ListadoIncidencias)
     End Sub
 
-    Private Sub ListadoDeEstadosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListadoDeEstadosToolStripMenuItem.Click
+    Private Sub TiposDeSolicitudSACToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TiposDeSolicitudSACToolStripMenuItem.Click
+        Abrir(New ListadoTiposSolicitud)
+    End Sub
+
+    Private Sub ResponsablesSACToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ResponsablesSACToolStripMenuItem.Click
+        Abrir(New ListadoResponsablesSAC)
+    End Sub
+
+    Private Sub CentrosSACToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CentrosSACToolStripMenuItem.Click
+        Abrir(New ListadoCentros)
+    End Sub
+
+    Private Sub EstadosDeINCToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EstadosDeINCToolStripMenuItem.Click
         Abrir(New ListadoEstadosINC)
     End Sub
 
-    Private Sub ListadoDeTiposToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListadoDeTiposToolStripMenuItem.Click
+    Private Sub TiposDeINCToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TiposDeINCToolStripMenuItem.Click
         Abrir(New ListadoTiposINC)
     End Sub
 End Class

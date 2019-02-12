@@ -40,16 +40,16 @@ Partial Class MenuPrincipal
         Me.Button1 = New System.Windows.Forms.Button()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.MaestrosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TiposDeSolicitudToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ResponsablesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CentrosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListadoDeIncidenciasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.IndiceGeneralToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ListadoDeEstadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ListadoDeTiposToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.IndiceGeneralDeAccionesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProcesosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CerrarSistemaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ConfiguraciónToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TiposDeSolicitudSACToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ResponsablesSACToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CentrosSACToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EstadosDeINCToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TiposDeINCToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutMenu.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -212,7 +212,7 @@ Partial Class MenuPrincipal
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MaestrosToolStripMenuItem, Me.ProcesosToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MaestrosToolStripMenuItem, Me.ConfiguraciónToolStripMenuItem, Me.ProcesosToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(1041, 24)
@@ -221,53 +221,16 @@ Partial Class MenuPrincipal
         '
         'MaestrosToolStripMenuItem
         '
-        Me.MaestrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TiposDeSolicitudToolStripMenuItem, Me.ResponsablesToolStripMenuItem, Me.CentrosToolStripMenuItem, Me.ListadoDeIncidenciasToolStripMenuItem, Me.IndiceGeneralDeAccionesToolStripMenuItem})
+        Me.MaestrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ListadoDeIncidenciasToolStripMenuItem, Me.IndiceGeneralDeAccionesToolStripMenuItem})
         Me.MaestrosToolStripMenuItem.Name = "MaestrosToolStripMenuItem"
         Me.MaestrosToolStripMenuItem.Size = New System.Drawing.Size(67, 20)
         Me.MaestrosToolStripMenuItem.Text = "Maestros"
         '
-        'TiposDeSolicitudToolStripMenuItem
-        '
-        Me.TiposDeSolicitudToolStripMenuItem.Name = "TiposDeSolicitudToolStripMenuItem"
-        Me.TiposDeSolicitudToolStripMenuItem.Size = New System.Drawing.Size(230, 22)
-        Me.TiposDeSolicitudToolStripMenuItem.Text = "Tipos de Solicitud"
-        '
-        'ResponsablesToolStripMenuItem
-        '
-        Me.ResponsablesToolStripMenuItem.Name = "ResponsablesToolStripMenuItem"
-        Me.ResponsablesToolStripMenuItem.Size = New System.Drawing.Size(230, 22)
-        Me.ResponsablesToolStripMenuItem.Text = "Responsables"
-        '
-        'CentrosToolStripMenuItem
-        '
-        Me.CentrosToolStripMenuItem.Name = "CentrosToolStripMenuItem"
-        Me.CentrosToolStripMenuItem.Size = New System.Drawing.Size(230, 22)
-        Me.CentrosToolStripMenuItem.Text = "Centros"
-        '
         'ListadoDeIncidenciasToolStripMenuItem
         '
-        Me.ListadoDeIncidenciasToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IndiceGeneralToolStripMenuItem, Me.ListadoDeEstadosToolStripMenuItem, Me.ListadoDeTiposToolStripMenuItem})
         Me.ListadoDeIncidenciasToolStripMenuItem.Name = "ListadoDeIncidenciasToolStripMenuItem"
         Me.ListadoDeIncidenciasToolStripMenuItem.Size = New System.Drawing.Size(230, 22)
         Me.ListadoDeIncidenciasToolStripMenuItem.Text = "Informes de No Conformidad"
-        '
-        'IndiceGeneralToolStripMenuItem
-        '
-        Me.IndiceGeneralToolStripMenuItem.Name = "IndiceGeneralToolStripMenuItem"
-        Me.IndiceGeneralToolStripMenuItem.Size = New System.Drawing.Size(210, 22)
-        Me.IndiceGeneralToolStripMenuItem.Text = "Indice General INC"
-        '
-        'ListadoDeEstadosToolStripMenuItem
-        '
-        Me.ListadoDeEstadosToolStripMenuItem.Name = "ListadoDeEstadosToolStripMenuItem"
-        Me.ListadoDeEstadosToolStripMenuItem.Size = New System.Drawing.Size(210, 22)
-        Me.ListadoDeEstadosToolStripMenuItem.Text = "Listado de Estados de INC"
-        '
-        'ListadoDeTiposToolStripMenuItem
-        '
-        Me.ListadoDeTiposToolStripMenuItem.Name = "ListadoDeTiposToolStripMenuItem"
-        Me.ListadoDeTiposToolStripMenuItem.Size = New System.Drawing.Size(210, 22)
-        Me.ListadoDeTiposToolStripMenuItem.Text = "Listado de Tipos de INC"
         '
         'IndiceGeneralDeAccionesToolStripMenuItem
         '
@@ -287,6 +250,43 @@ Partial Class MenuPrincipal
         Me.CerrarSistemaToolStripMenuItem.Name = "CerrarSistemaToolStripMenuItem"
         Me.CerrarSistemaToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
         Me.CerrarSistemaToolStripMenuItem.Text = "Cerrar Sistema"
+        '
+        'ConfiguraciónToolStripMenuItem
+        '
+        Me.ConfiguraciónToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TiposDeSolicitudSACToolStripMenuItem, Me.ResponsablesSACToolStripMenuItem, Me.CentrosSACToolStripMenuItem, Me.EstadosDeINCToolStripMenuItem, Me.TiposDeINCToolStripMenuItem})
+        Me.ConfiguraciónToolStripMenuItem.Name = "ConfiguraciónToolStripMenuItem"
+        Me.ConfiguraciónToolStripMenuItem.Size = New System.Drawing.Size(95, 20)
+        Me.ConfiguraciónToolStripMenuItem.Text = "Configuración"
+        '
+        'TiposDeSolicitudSACToolStripMenuItem
+        '
+        Me.TiposDeSolicitudSACToolStripMenuItem.Name = "TiposDeSolicitudSACToolStripMenuItem"
+        Me.TiposDeSolicitudSACToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
+        Me.TiposDeSolicitudSACToolStripMenuItem.Text = "Tipos de Solicitud (SAC)"
+        '
+        'ResponsablesSACToolStripMenuItem
+        '
+        Me.ResponsablesSACToolStripMenuItem.Name = "ResponsablesSACToolStripMenuItem"
+        Me.ResponsablesSACToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
+        Me.ResponsablesSACToolStripMenuItem.Text = "Responsables (SAC)"
+        '
+        'CentrosSACToolStripMenuItem
+        '
+        Me.CentrosSACToolStripMenuItem.Name = "CentrosSACToolStripMenuItem"
+        Me.CentrosSACToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
+        Me.CentrosSACToolStripMenuItem.Text = "Centros (SAC)"
+        '
+        'EstadosDeINCToolStripMenuItem
+        '
+        Me.EstadosDeINCToolStripMenuItem.Name = "EstadosDeINCToolStripMenuItem"
+        Me.EstadosDeINCToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
+        Me.EstadosDeINCToolStripMenuItem.Text = "Estados de INC"
+        '
+        'TiposDeINCToolStripMenuItem
+        '
+        Me.TiposDeINCToolStripMenuItem.Name = "TiposDeINCToolStripMenuItem"
+        Me.TiposDeINCToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
+        Me.TiposDeINCToolStripMenuItem.Text = "Tipos de INC"
         '
         'MenuPrincipal
         '
@@ -322,9 +322,6 @@ Partial Class MenuPrincipal
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
-    Friend WithEvents TiposDeSolicitudToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ResponsablesToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents CentrosToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents IndiceGeneralDeAccionesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Button2 As Button
     Friend WithEvents DataGridView1 As DataGridView
@@ -332,8 +329,11 @@ Partial Class MenuPrincipal
     Friend WithEvents ComboBox1 As ComboBox
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents ListadoDeIncidenciasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents IndiceGeneralToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ListadoDeEstadosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ListadoDeTiposToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ConfiguraciónToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents TiposDeSolicitudSACToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ResponsablesSACToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents CentrosSACToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents EstadosDeINCToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents TiposDeINCToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class
