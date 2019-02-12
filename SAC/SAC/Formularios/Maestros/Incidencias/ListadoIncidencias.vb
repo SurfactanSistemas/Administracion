@@ -214,7 +214,7 @@
         End With
     End Sub
 
-    Private Sub Button1_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(ByVal sender As Object, ByVal e As EventArgs)
         Dim frm As New ListadoEstadosINC
         frm.ShowDialog(Me)
         '
@@ -223,7 +223,7 @@
         _CargarEstados()
     End Sub
 
-    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Dim frm As New ListadoTiposINC
         frm.ShowDialog(Me)
         '

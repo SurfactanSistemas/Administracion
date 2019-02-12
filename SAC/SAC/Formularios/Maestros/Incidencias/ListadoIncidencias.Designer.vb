@@ -30,10 +30,8 @@ Partial Class ListadoIncidencias
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.btnFiltrar = New System.Windows.Forms.Button()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.Button2 = New System.Windows.Forms.Button()
         Me.clbTipos = New System.Windows.Forms.CheckedListBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.clbEstados = New System.Windows.Forms.CheckedListBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -146,23 +144,13 @@ Partial Class ListadoIncidencias
         '
         'GroupBox4
         '
-        Me.GroupBox4.Controls.Add(Me.Button2)
         Me.GroupBox4.Controls.Add(Me.clbTipos)
         Me.GroupBox4.Location = New System.Drawing.Point(433, 25)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(196, 141)
+        Me.GroupBox4.Size = New System.Drawing.Size(196, 122)
         Me.GroupBox4.TabIndex = 1
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Tipo de Informe de NC"
-        '
-        'Button2
-        '
-        Me.Button2.Location = New System.Drawing.Point(16, 115)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(164, 20)
-        Me.Button2.TabIndex = 5
-        Me.Button2.Text = "Editar Tipos de INC"
-        Me.Button2.UseVisualStyleBackColor = True
         '
         'clbTipos
         '
@@ -176,23 +164,13 @@ Partial Class ListadoIncidencias
         '
         'GroupBox3
         '
-        Me.GroupBox3.Controls.Add(Me.Button1)
         Me.GroupBox3.Controls.Add(Me.clbEstados)
         Me.GroupBox3.Location = New System.Drawing.Point(231, 25)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(196, 140)
+        Me.GroupBox3.Size = New System.Drawing.Size(196, 122)
         Me.GroupBox3.TabIndex = 1
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Estado de Informe de NC"
-        '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(19, 115)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(159, 20)
-        Me.Button1.TabIndex = 4
-        Me.Button1.Text = "Editar Estados"
-        Me.Button1.UseVisualStyleBackColor = True
         '
         'clbEstados
         '
@@ -446,6 +424,4 @@ Partial Class ListadoIncidencias
     Friend WithEvents ClaveSAC As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents clbTipos As System.Windows.Forms.CheckedListBox
     Friend WithEvents clbEstados As System.Windows.Forms.CheckedListBox
-    Friend WithEvents Button2 As System.Windows.Forms.Button
-    Friend WithEvents Button1 As System.Windows.Forms.Button
 End Class

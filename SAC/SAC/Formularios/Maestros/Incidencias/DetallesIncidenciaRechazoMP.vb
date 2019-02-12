@@ -171,7 +171,7 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
                         For Each rowView As datarowview In cmbEstado.items
                             If rowView.Item("Estado") = WTempEstado Then
                                 cmbEstado.SelectedItem = rowView
-                                Exit Sub
+                                Exit For
                             End If
                         Next
 

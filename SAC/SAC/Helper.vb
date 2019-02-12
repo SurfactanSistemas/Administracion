@@ -606,4 +606,34 @@ Module Helper
         Return xfecha
     End Function
 
+    Public Function _IdEmpresaSegunBase(ByVal base As String) As Integer
+
+        Select Case UCase(base)
+            Case "SURFACTANSA"
+                Return 1
+            Case "PELLITALSA"
+                Return 2
+            Case "SURFACTAN_II"
+                Return 3
+            Case "PELITALL_II"
+                Return 4
+            Case "SURFACTAN_III"
+                Return 5
+            Case "SURFACTAN_IV"
+                Return 6
+            Case "SURFACTAN_V"
+                Return 7
+            Case "PELLITAL_III"
+                Return 8
+            Case "PELLITAL_V"
+                Return 9
+            Case "SURFACTAN_VI"
+                Return 10
+            Case "SURFACTAN_VII"
+                Return 11
+        End Select
+
+        Return 0
+    End Function
+
 End Module

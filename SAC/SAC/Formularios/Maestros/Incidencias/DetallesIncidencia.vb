@@ -8,6 +8,7 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
     Const TextoBtnGenerarSac = "Generar/Asociar SAC"
     Const TextoBtnVerSac = "Ver SAC Asociado"
     Private WControlRetornoError As Control = Nothing
+    Private WEmpresaProd As Integer = 0
 
     Private Const EXTENSIONES_PERMITIDAS = "*.bmp|*.png|*.jpg|*.jpeg|*.pdf|*.doc|*.docx|*.xls|*.xlsx"
 
@@ -41,6 +42,8 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
         For Each c As Control In {txtDescProducto, txtFecha, txtIncidencia, txtLotePartida, txtPosiblesUsos, txtProducto, txtReferencia, txtTitulo, txtMotivos}
             c.Text = ""
         Next
+
+        WEmpresaProd = 0
 
         _CargarEstados()
 
@@ -134,7 +137,7 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
                         For Each rowView As DataRowView In cmbEstado.Items
                             If rowView.Item("Estado") = WTempEstado Then
                                 cmbEstado.SelectedItem = rowView
-                                Exit Sub
+                                Exit For
                             End If
                         Next
 
@@ -313,7 +316,10 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
                 WProd = GetSingle("SELECT Producto FROM Hoja WHERE Hoja = '" & txtLotePartida.Text & "' And Renglon IN ('1', '01')", emp)
             End If
 
-            If WProd IsNot Nothing Then Exit For
+            If WProd IsNot Nothing Then
+                WEmpresaProd = _IdEmpresaSegunBase(emp)
+                Exit For
+            End If
 
         Next
 
@@ -361,6 +367,8 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
 
     Private Sub btnGrabar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnGrabar.Click
         Try
+            WEmpresaProd = 0
+
             _ValidarDatosIngresados()
 
             Dim WSqls As New List(Of String)
@@ -390,10 +398,10 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
             WSqls.Add("DELETE CargaIncidencias WHERE Incidencia = '" & txtIncidencia.Text & "'")
 
             Dim ZSql = String.Format("INSERT INTO CargaIncidencias " _
-                       & "(Incidencia, Renglon, Tipo, Fecha, FechaOrd, Estado, Titulo, Referencia, Producto, Lote, ClaveSac, TipoProd, Posiblesusos, Motivos) " _
+                       & "(Incidencia, Renglon, Tipo, Fecha, FechaOrd, Estado, Titulo, Referencia, Producto, Lote, ClaveSac, TipoProd, Posiblesusos, Motivos, Empresa) " _
                        & "VALUES " _
-                       & " ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}') ", _
-                       txtIncidencia.Text, 1, WTipo, txtFecha.Text, ordenaFecha(txtFecha.Text), WEstado, txtTitulo.Text, txtReferencia.Text, txtProducto.Text, txtLotePartida.Text, WClaveSAC, IIf(rbMatPrima.Checked, "M", "T"), txtPosiblesUsos.Text, txtMotivos.Text)
+                       & " ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}') ", _
+                       txtIncidencia.Text, 1, WTipo, txtFecha.Text, ordenaFecha(txtFecha.Text), WEstado, txtTitulo.Text, txtReferencia.Text, txtProducto.Text, txtLotePartida.Text, WClaveSAC, IIf(rbMatPrima.Checked, "M", "T"), txtPosiblesUsos.Text, txtMotivos.Text, WEmpresaProd)
             WSqls.Add(ZSql)
 
             ExecuteNonQueries(WSqls.ToArray)
