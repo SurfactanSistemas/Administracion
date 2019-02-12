@@ -17,6 +17,8 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
     Private Const EXTENSIONES_PERMITIDAS = "*.bmp|*.png|*.jpg|*.jpeg|*.pdf|*.doc|*.docx|*.xls|*.xlsx|*.xlsm|*.txt"
 
+    Private WRefControlEnFoco As Control = Nothing
+
     Sub New()
 
         ' This call is required by the designer.
@@ -837,7 +839,12 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
                 With dgvAcciones
                     .Rows(WRow).Cells("Plazo").Value = txtFechaAux.Text
 
-                    .CurrentCell = IIf(WRow = .Rows.Count - 1, .Rows(WRow).Cells("Plazo"), .Rows(WRow + 1).Cells("Acciones"))
+                    If WRow = .Rows.Count - 1 Then
+                        .CurrentCell = .Rows(WRow).Cells("Plazo")
+                    Else
+                        .CurrentCell = .Rows(WRow + 1).Cells("Acciones")
+                    End If
+
                     .Focus()
 
                     txtFechaAux.Visible = False
@@ -853,22 +860,28 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
     End Sub
 
     Private Sub dgvAcciones_CellEnter(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles dgvAcciones.CellEnter
-        With dgvAcciones
-            If e.ColumnIndex = .Columns("Plazo").Index Then
-                .ClearSelection()
-                .CurrentCell.Style.SelectionBackColor = Color.White ' Evitamos que se vea la seleccion de la celda.
-                Dim _location As Point = .GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, False).Location
+        Try
+            With dgvAcciones
+                If e.ColumnIndex = .Columns("Plazo").Index Then
+                    .ClearSelection()
+                    .CurrentCell.Style.SelectionBackColor = Color.White ' Evitamos que se vea la seleccion de la celda.
+                    Dim _location As Point = .GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, False).Location
 
-                _location.Y += .Location.Y + (.CurrentCell.Size.Height / 4) - YMARGEN
-                _location.X += .Location.X + (.CurrentCell.Size.Width - txtFechaAux.Size.Width) - XMARGEN
-                txtFechaAux.Location = _location
-                txtFechaAux.Text = .Rows(e.RowIndex).Cells("Plazo").Value
-                WRow = e.RowIndex
-                Wcol = e.ColumnIndex
-                txtFechaAux.Visible = True
-                txtFechaAux.Focus()
-            End If
-        End With
+                    _location.Y += .Location.Y + (.CurrentCell.Size.Height / 4) - YMARGEN
+                    _location.X += .Location.X + (.CurrentCell.Size.Width - txtFechaAux.Size.Width) - XMARGEN
+                    txtFechaAux.Location = _location
+                    txtFechaAux.Text = .Rows(e.RowIndex).Cells("Plazo").Value
+                    WRow = e.RowIndex
+                    Wcol = e.ColumnIndex
+                    txtFechaAux.Visible = True
+                    txtFechaAux.Focus()
+                End If
+            End With
+        Catch ex As StackOverflowException
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 
     Private Sub dgvAcciones_RowHeaderMouseDoubleClick(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles dgvAcciones.RowHeaderMouseDoubleClick
@@ -1135,6 +1148,8 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
         TabControl1.TabPages.Remove(WListTabPages.Item(0))
 
+        WRefControlEnFoco = Nothing
+
         txtTipo.Focus()
     End Sub
 
@@ -1178,11 +1193,33 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
     End Sub
 
     Public Sub _ProcesarAyudaResponsableSac(ByVal WCodigo As String) Implements IAyudaReponsableSac._ProcesarAyudaResponsableSac
-        If Not IsNothing(WRefTipoResp) Then
-            WRefTipoResp.Text = WCodigo
-            txtEmisor_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
-            txtResponsable_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
-        End If
+
+        Select Case WRefControlEnFoco.Name.ToUpper
+            Case dgvAcciones.Name.ToUpper
+
+                dgvAcciones.CurrentRow.Cells("Responsable").Value = WCodigo
+                SendKeys.Send("{ENTER}")
+
+            Case dgvImplementaciones.Name.ToUpper
+
+                dgvImplementaciones.CurrentRow.Cells("ImpleResponsable").Value = WCodigo
+                SendKeys.Send("{ENTER}")
+
+            Case dgvVerificaciones.Name.ToUpper
+
+                dgvVerificaciones.CurrentCell.Value = WCodigo
+                SendKeys.Send("{ENTER}")
+
+            Case txtResponsable.Name.ToUpper, txtEmisor.Name.ToUpper
+                If Not IsNothing(WRefTipoResp) Then
+                    WRefTipoResp.Text = WCodigo
+                    txtEmisor_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+                    txtResponsable_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+                End If
+        End Select
+
+        WRefControlEnFoco = Nothing
+
     End Sub
 
     Public Sub _ProcesarAyudaTipoSac(ByVal WCodigo As String) Implements IAyudaTipoSac._ProcesarAyudaTipoSac
@@ -1963,10 +2000,6 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
         End Try
     End Sub
 
-    Private Sub txtNumero_TextChanged(ByVal sender As Object, ByVal e As EventArgs)
-
-    End Sub
-
     Private Sub txtTipo_MouseDoubleClick(ByVal sender As Object, ByVal e As MouseEventArgs) Handles txtTipo.MouseDoubleClick
         _ProcesarAyudaContenedor(0)
     End Sub
@@ -2190,7 +2223,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
         End Try
     End Sub
 
-    Private Sub dgvIncidencias_CellDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvIncidencias.CellDoubleClick
+    Private Sub dgvIncidencias_CellDoubleClick(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles dgvIncidencias.CellDoubleClick
         If e.RowIndex < 0 Then Exit Sub
 
         Dim WTipo = dgvIncidencias.CurrentRow.Cells("Tipo").Value
@@ -2218,4 +2251,45 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
     Public Sub _ProcesarNuevaIncidencia(ByVal WIncidencia As Object) Implements INuevaIncidencia._ProcesarNuevaIncidencia
         If dgvIncidencias.Rows.Count > 0 Then dgvIncidencias.CurrentCell = dgvIncidencias.Rows(0).Cells("Incidencia")
     End Sub
+
+    Private Sub dgvAcciones_CellMouseDoubleClick(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles dgvAcciones.CellMouseDoubleClick
+        If e.ColumnIndex = dgvAcciones.Columns("Responsable").Index Then
+            Dim frm As New AyudaResponsablesSac
+            WRefControlEnFoco = dgvAcciones
+            frm.ShowDialog(Me)
+        End If
+    End Sub
+
+    Private Sub dgvImplementaciones_CellMouseDoubleClick(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles dgvImplementaciones.CellMouseDoubleClick
+        If e.ColumnIndex = dgvImplementaciones.Columns("ImpleResponsable").Index Then
+            Dim frm As New AyudaResponsablesSac
+            WRefControlEnFoco = dgvImplementaciones
+            frm.ShowDialog(Me)
+        End If
+    End Sub
+
+    Private Sub dgvVerificaciones_CellMouseDoubleClick(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles dgvVerificaciones.CellMouseDoubleClick
+        If e.ColumnIndex = dgvVerificaciones.Columns("VerResponsableI").Index Or e.ColumnIndex = dgvVerificaciones.Columns("VerResponsableII").Index Then
+            Dim frm As New AyudaResponsablesSac
+            WRefControlEnFoco = dgvVerificaciones
+            frm.ShowDialog(Me)
+        End If
+    End Sub
+
+    Private Sub txtFechaAux_Leave(ByVal sender As Object, ByVal e As EventArgs) Handles txtFechaAux.Leave
+        dgvAcciones.CurrentRow.Cells("Plazo").Value = txtFechaAux.Text
+    End Sub
+
+    Private Sub txtFechaAux2_Leave(ByVal sender As Object, ByVal e As EventArgs) Handles txtFechaAux2.Leave
+        dgvImplementaciones.CurrentRow.Cells("ImpleFecha").Value = txtFechaAux2.Text
+    End Sub
+
+    Private Sub txtFechaAux3_Leave(ByVal sender As Object, ByVal e As EventArgs) Handles txtFechaAux3.Leave
+        dgvVerificaciones.CurrentRow.Cells("VerFechaI").Value = txtFechaAux3.Text
+    End Sub
+
+    Private Sub txtFechaAux4_Leave(ByVal sender As Object, ByVal e As EventArgs) Handles txtFechaAux4.Leave
+        dgvVerificaciones.CurrentRow.Cells("VerFechaII").Value = txtFechaAux4.Text
+    End Sub
+
 End Class
