@@ -6,7 +6,7 @@ Namespace Clases
     Public Class Conexion
 
         Public Shared EsPellital As Boolean = False
-        Private Shared _EmpresaTrabajo As String = ""
+        Public Shared _EmpresaTrabajo As String = ""
         Public Shared WAtributosOperador(10, 100) As String
 
         Public Shared Property EmpresaDeTrabajo As String
@@ -16,17 +16,17 @@ Namespace Clases
             End Get
             Set(ByVal value As String)
 
-                _EmpresaTrabajo = DeterminarBasePara(value)
-
-                If UCase(_EmpresaTrabajo).StartsWith("SURFACTAN") Then
+                If UCase(value).StartsWith("SURFACTAN") Then
 
                     EsPellital = False
 
-                ElseIf UCase(_EmpresaTrabajo).StartsWith("PELLITAL") Or UCase(_EmpresaTrabajo).StartsWith("PELITALL") Then
+                ElseIf UCase(value).StartsWith("PELLITAL") Or UCase(value).StartsWith("PELITALL") Then
 
                     EsPellital = True
 
                 End If
+
+                _EmpresaTrabajo = DeterminarBasePara(value)
 
             End Set
         End Property

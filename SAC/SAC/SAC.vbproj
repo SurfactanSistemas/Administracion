@@ -258,6 +258,12 @@
     <Compile Include="Formularios\Maestros\Incidencias\Tipos de INC\NuevoTipoINc.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formularios\Maestros\Incidencias\ExportarINC.Designer.vb">
+      <DependentUpon>ExportarINC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Maestros\Incidencias\ExportarINC.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\Maestros\Indice General SAC\ExportarIndice.Designer.vb">
       <DependentUpon>ExportarIndice.vb</DependentUpon>
     </Compile>
@@ -319,6 +325,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Helper.vb" />
+    <Compile Include="Interfaces\IExportarINC.vb" />
     <Compile Include="Interfaces\INuevoTipoINC.vb" />
     <Compile Include="Interfaces\IAuxiNuevaSACDesdeINC.vb" />
     <Compile Include="Interfaces\IAyudaListadoSACs.vb" />
@@ -364,6 +371,27 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Reportes\INCs\ReporteINCIndividual.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteINCIndividual.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\INCs\ReporteIndiceINCsAgrupado.vb">
+      <DependentUpon>ReporteIndiceINCsAgrupado.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reportes\INCs\ReporteIndiceINCs.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteIndiceINCs.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\IndiceGral\DetallesIndiceGral.vb">
+      <DependentUpon>DetallesIndiceGral.xsd</DependentUpon>
     </Compile>
     <Compile Include="Reportes\IndiceGral\ReporteIndiceGralAgrupados.vb">
       <DependentUpon>ReporteIndiceGralAgrupados.rpt</DependentUpon>
@@ -504,6 +532,9 @@
     <EmbeddedResource Include="Formularios\Maestros\Incidencias\Tipos de INC\NuevoTipoINc.resx">
       <DependentUpon>NuevoTipoINc.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Maestros\Incidencias\ExportarINC.resx">
+      <DependentUpon>ExportarINC.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Maestros\Indice General SAC\ExportarIndice.resx">
       <DependentUpon>ExportarIndice.vb</DependentUpon>
     </EmbeddedResource>
@@ -545,6 +576,18 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\INCs\ReporteINCIndividual.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteINCIndividual.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\INCs\ReporteIndiceINCsAgrupado.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteIndiceINCsAgrupado.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\INCs\ReporteIndiceINCs.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteIndiceINCs.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\IndiceGral\ReporteIndiceGralAgrupados.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

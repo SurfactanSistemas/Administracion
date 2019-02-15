@@ -35,7 +35,7 @@ Public Class ComparacionesMensualesValorUnico
 
         Try
 
-            cn.ConnectionString = _ConectarA
+            cn.ConnectionString = _ConectarA()
             cn.Open()
             cm.Connection = cn
 
@@ -73,7 +73,7 @@ Public Class ComparacionesMensualesValorUnico
 
         Try
 
-            cn.ConnectionString = _ConectarA
+            cn.ConnectionString = _ConectarA()
             cn.Open()
             cm.Connection = cn
 
@@ -569,7 +569,7 @@ Public Class ComparacionesMensualesValorUnico
 
         Try
 
-            cn.ConnectionString = _ConectarA
+            cn.ConnectionString = _ConectarA()
             cn.Open()
 
             ' Armamos la consulta de los campos a comparar para cada mes.
@@ -1328,7 +1328,7 @@ Public Class ComparacionesMensualesValorUnico
 
         Try
 
-            cn.ConnectionString = _ConectarA
+            cn.ConnectionString = _ConectarA()
             cn.Open()
             cm.Connection = cn
 
@@ -1371,7 +1371,7 @@ Public Class ComparacionesMensualesValorUnico
 
         Try
 
-            cn.ConnectionString = _ConectarA
+            cn.ConnectionString = _ConectarA()
             cn.Open()
 
             ' Armamos la consulta de los campos a comparar para cada mes.
@@ -1924,7 +1924,7 @@ Public Class ComparacionesMensualesValorUnico
 
     End Sub
 
-    Private Sub _ProcesarComparacionDiaria()
+    Public Sub _ProcesarComparacionDiaria(Optional ByVal WPorLineaComando As Boolean = False)
 
         Dim WMes, WDesde, WAnio, WTitulo, WLineas As String
         Dim WValores() As String
@@ -1936,6 +1936,8 @@ Public Class ComparacionesMensualesValorUnico
         Dim WTablaGrilla As DataTable = WDatos.Clone
 
         Try
+            If WPorLineaComando Then txtFechaDiaria.Text = Date.Now.ToString("dd/MM/yyyy")
+
             WMes = Mid$(txtFechaDiaria.Text, 4, 2) 'txtMesDesdeCompDiario.Text
             WAnio = Mid$(txtFechaDiaria.Text, 7, 4) 'txtAnioCompDiario.Text
             WDesde = Mid$(txtFechaDiaria.Text, 1, 2) 'txtDesdeDia.Text
@@ -2121,7 +2123,7 @@ Public Class ComparacionesMensualesValorUnico
 
             WBuscarTipos = Trim(WBuscarTipos).TrimEnd(",")
 
-            cn.ConnectionString = _ConectarA
+            cn.ConnectionString = _ConectarA()
             cn.Open()
             cm.Connection = cn
 
@@ -2178,7 +2180,7 @@ Public Class ComparacionesMensualesValorUnico
 
             WBuscarTipos = Trim(WBuscarTipos).Substring(0, Trim(WBuscarTipos).Length - 1)
 
-            cn.ConnectionString = _ConectarA
+            cn.ConnectionString = _ConectarA()
             cn.Open()
             cm.Connection = cn
 
@@ -2559,7 +2561,7 @@ Public Class ComparacionesMensualesValorUnico
 
     Private Sub ckConsolidado_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles ckConsolidado.CheckedChanged, ckConsolidadoPellital.CheckedChanged
 
-        If (_EsConsolidado) Then
+        If (_EsConsolidado()) Then
 
             If rbDiaria.Checked Then
 

@@ -166,7 +166,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
                         WDescRespII = _TraerDescripcionResponsable(WRespII)
                         WFechaI = OrDefault(.Item("Fecha" & i), "  /  /    ")
                         WFechaII = OrDefault(.Item("Fecha1" & i), "  /  /    ")
-                        WEstadoI = _TraerEstadoVerif(.Item("Estado" & i))
+                        WEstadoI = _TraerEstadoIVerif(.Item("Estado" & i))
                         WEstadoII = _TraerEstadoVerif(.Item("Estado1" & i))
                         WComentario = OrDefault(.Item("Comentario" & i & "1"), "").ToString.Trim & " " & OrDefault(.Item("Comentario" & i & "2"), "").ToString.Trim
 
@@ -178,7 +178,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
                         WDescRespII = _TraerDescripcionResponsable(WRespII)
                         WFechaI = OrDefault(.Item("Fecha" & i & "1"), "  /  /    ")
                         WFechaII = OrDefault(.Item("Fecha" & i & "2"), "  /  /    ")
-                        WEstadoI = _TraerEstadoVerif(.Item("Estado" & i & "1"))
+                        WEstadoI = _TraerEstadoIVerif(.Item("Estado" & i & "1"))
                         WEstadoII = _TraerEstadoVerif(.Item("Estado" & i & "1"))
                         WComentario = OrDefault(.Item("Comentario" & i & "1"), "").ToString.Trim & " " & OrDefault(.Item("Comentario" & i & "2"), "").ToString.Trim
 
@@ -227,6 +227,23 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
         End Try
     End Sub
+
+    Private Function _TraerEstadoIVerif(ByVal item As Object) As Object
+
+        Select Case OrDefault(item, 0)
+            Case 0
+                Return "No Imple."
+            Case 1
+                Return "Implem."
+            Case 2
+                Return "Nula"
+            Case 3
+                Return "Cerrada"
+            Case Else
+                Return ""
+        End Select
+
+    End Function
 
     Private Function _TraerEstadoVerif(ByVal item As Object) As Object
 
@@ -1240,6 +1257,23 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
     End Function
 
+    Private Function _TraerValorRefEstadoIVerif(ByVal valor As Object)
+
+        Select Case OrDefault(valor, "")
+            Case "No Imple."
+                Return 0
+            Case "Implem."
+                Return 1
+            Case "Nula"
+                Return 2
+            Case "Cerrada"
+                Return 3
+            Case Else
+                Return 0
+        End Select
+
+    End Function
+
     Private Function _TraerValorRefEstadoVerif(ByVal valor As Object)
 
         Select Case OrDefault(valor, "")
@@ -1250,7 +1284,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
             Case "Nula"
                 Return 2
             Case "Efectiva"
-                Return 2
+                Return 3
             Case Else
                 Return 0
         End Select
@@ -1461,7 +1495,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
                     Dim WRespII As String = OrDefault(.Cells("VerResponsableII").Value, "0")
                     Dim WVerFechaI As String = OrDefault(.Cells("VerFechaI").Value, "  /  /    ")
                     Dim WVerFechaII As String = OrDefault(.Cells("VerFechaII").Value, "  /  /    ")
-                    Dim WVerEstadoI As String = _TraerValorRefEstadoVerif(.Cells("VerEstadoI").Value)
+                    Dim WVerEstadoI As String = _TraerValorRefEstadoIVerif(.Cells("VerEstadoI").Value)
                     Dim WVerEstadoII As String = _TraerValorRefEstadoVerif(.Cells("VerEstadoII").Value)
                     Dim WComentario As String = OrDefault(.Cells("VerComentario").Value, "")
                     WComentario = WComentario.Replace("'", "").PadRight(100, " ")

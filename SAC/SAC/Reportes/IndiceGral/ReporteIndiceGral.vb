@@ -52,96 +52,96 @@ Public Class ReporteIndiceGral
         End Set
     End Property
     
-    <Browsable(False), _
-     DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)> _
-    Public ReadOnly Property Section1() As Section
+    <Browsable(false),  _
+     DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
+    Public ReadOnly Property Section1() As CrystalDecisions.CrystalReports.Engine.Section
         Get
             Return Me.ReportDefinition.Sections(0)
         End Get
     End Property
-
-    <Browsable(False), _
-     DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)> _
-    Public ReadOnly Property Section2() As Section
+    
+    <Browsable(false),  _
+     DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
+    Public ReadOnly Property Section2() As CrystalDecisions.CrystalReports.Engine.Section
         Get
             Return Me.ReportDefinition.Sections(1)
         End Get
     End Property
-
-    <Browsable(False), _
-     DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)> _
-    Public ReadOnly Property Section3() As Section
+    
+    <Browsable(false),  _
+     DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
+    Public ReadOnly Property Section3() As CrystalDecisions.CrystalReports.Engine.Section
         Get
             Return Me.ReportDefinition.Sections(2)
         End Get
     End Property
-
-    <Browsable(False), _
-     DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)> _
-    Public ReadOnly Property Section4() As Section
+    
+    <Browsable(false),  _
+     DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
+    Public ReadOnly Property Section4() As CrystalDecisions.CrystalReports.Engine.Section
         Get
             Return Me.ReportDefinition.Sections(3)
         End Get
     End Property
-
-    <Browsable(False), _
-     DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)> _
-    Public ReadOnly Property Section5() As Section
+    
+    <Browsable(false),  _
+     DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
+    Public ReadOnly Property Section5() As CrystalDecisions.CrystalReports.Engine.Section
         Get
             Return Me.ReportDefinition.Sections(4)
         End Get
     End Property
 End Class
 
-<ToolboxBitmap(GetType(ExportOptions), "report.bmp")> _
+<System.Drawing.ToolboxBitmapAttribute(GetType(CrystalDecisions.[Shared].ExportOptions), "report.bmp")>  _
 Public Class CachedReporteIndiceGral
     Inherits Component
     Implements ICachedReport
-
+    
     Public Sub New()
-        MyBase.New()
+        MyBase.New
     End Sub
-
-    <Browsable(False), _
-     DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)> _
-    Public Overridable Property IsCacheable() As Boolean Implements ICachedReport.IsCacheable
+    
+    <Browsable(false),  _
+     DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
+    Public Overridable Property IsCacheable() As Boolean Implements CrystalDecisions.ReportSource.ICachedReport.IsCacheable
         Get
-            Return True
+            Return true
         End Get
-        Set(ByVal value As Boolean)
+        Set
             '
         End Set
     End Property
-
-    <Browsable(False), _
-     DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)> _
-    Public Overridable Property ShareDBLogonInfo() As Boolean Implements ICachedReport.ShareDBLogonInfo
+    
+    <Browsable(false),  _
+     DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
+    Public Overridable Property ShareDBLogonInfo() As Boolean Implements CrystalDecisions.ReportSource.ICachedReport.ShareDBLogonInfo
         Get
-            Return False
+            Return false
         End Get
-        Set(ByVal value As Boolean)
+        Set
             '
         End Set
     End Property
-
-    <Browsable(False), _
-     DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)> _
-    Public Overridable Property CacheTimeOut() As TimeSpan Implements ICachedReport.CacheTimeOut
+    
+    <Browsable(false),  _
+     DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
+    Public Overridable Property CacheTimeOut() As System.TimeSpan Implements CrystalDecisions.ReportSource.ICachedReport.CacheTimeOut
         Get
             Return CachedReportConstants.DEFAULT_TIMEOUT
         End Get
-        Set(ByVal value As TimeSpan)
+        Set
             '
         End Set
     End Property
-
-    Public Overridable Function CreateReport() As ReportDocument Implements ICachedReport.CreateReport
+    
+    Public Overridable Function CreateReport() As CrystalDecisions.CrystalReports.Engine.ReportDocument Implements CrystalDecisions.ReportSource.ICachedReport.CreateReport
         Dim rpt As ReporteIndiceGral = New ReporteIndiceGral()
         rpt.Site = Me.Site
         Return rpt
     End Function
-
-    Public Overridable Function GetCustomizedCacheKey(ByVal request As RequestContext) As String Implements ICachedReport.GetCustomizedCacheKey
+    
+    Public Overridable Function GetCustomizedCacheKey(ByVal request As RequestContext) As String Implements CrystalDecisions.ReportSource.ICachedReport.GetCustomizedCacheKey
         Dim key As [String] = Nothing
         '// The following is the code used to generate the default
         '// cache key for caching report jobs in the ASP.NET Cache.

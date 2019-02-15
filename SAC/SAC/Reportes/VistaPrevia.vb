@@ -35,9 +35,9 @@ Public Class VistaPrevia
 
         ' MANDAMOS EL PARÁMETRO DE LA EMPRESA.
 
-        If Reporte.ParameterFields.Count > 0 Then
-            Reporte.SetParameterValue(0, Globals.NombreEmpresa)
-        End If
+        'If Reporte.ParameterFields.Count > 0 Then
+        '    Reporte.SetParameterValue(0, Globals.NombreEmpresa)
+        'End If
 
         ' CONECTAMOS CON LA BASE DE DATOS QUE CORRESPONDA.
         Dim cs = ""
@@ -92,7 +92,7 @@ Public Class VistaPrevia
 
             End If
 
-            .RefreshReport()
+            '.RefreshReport()
 
         End With
 
@@ -106,7 +106,7 @@ Public Class VistaPrevia
         _ReconectarBaseDatos()
 
         Me.Reporte.RecordSelectionFormula = IIf(IsNothing(Me.Formula), "", Me.Formula)
-        Me.Reporte.Refresh()
+        'Me.Reporte.Refresh()
         Me.Reporte.PrintToPrinter(cant, True, 0, 0)
     End Sub
 
@@ -120,7 +120,7 @@ Public Class VistaPrevia
         _ReconectarBaseDatos()
 
         Me.Reporte.RecordSelectionFormula = IIf(IsNothing(Me.Formula), "", Me.Formula)
-        Me.Reporte.Refresh()
+        'Me.Reporte.Refresh()
         Me.Reporte.ExportToDisk(ExportFormatType.PortableDocFormat, ruta & NombreArchivo)
     End Sub
 
@@ -153,7 +153,7 @@ Public Class VistaPrevia
         _ReconectarBaseDatos()
 
         Me.Reporte.RecordSelectionFormula = IIf(IsNothing(Me.Formula), "", Me.Formula)
-        Me.Reporte.Refresh()
+        'Me.Reporte.Refresh()
         Me.Reporte.ExportToDisk(Formato, ruta & NombreArchivo)
 
     End Sub

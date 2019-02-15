@@ -53,7 +53,7 @@ Public Class Login
 
         'Globals.empresa = cmbEntity.SelectedItem
 
-        Conexion.EmpresaDeTrabajo = cmbEntity.SelectedValue
+        Conexion.EmpresaDeTrabajo = CType(cmbEntity.SelectedItem, DataRowView).Item("Base")
 
         ' Validamos la contraseña.
 

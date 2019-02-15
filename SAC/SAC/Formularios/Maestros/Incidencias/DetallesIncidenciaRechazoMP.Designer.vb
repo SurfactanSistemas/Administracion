@@ -27,7 +27,9 @@ Partial Class DetallesIncidenciaRechazoMP
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnDesvincularSAC = New System.Windows.Forms.Button()
         Me.btnMPAsociadasOC = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
         Me.btnSac = New System.Windows.Forms.Button()
         Me.cmbEmpresa = New System.Windows.Forms.ComboBox()
         Me.cmbEstado = New System.Windows.Forms.ComboBox()
@@ -99,7 +101,7 @@ Partial Class DetallesIncidenciaRechazoMP
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(801, 50)
+        Me.Panel1.Size = New System.Drawing.Size(870, 50)
         Me.Panel1.TabIndex = 3
         '
         'Label2
@@ -122,7 +124,7 @@ Partial Class DetallesIncidenciaRechazoMP
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label1.Location = New System.Drawing.Point(681, 16)
+        Me.Label1.Location = New System.Drawing.Point(750, 16)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(108, 18)
         Me.Label1.TabIndex = 0
@@ -130,7 +132,9 @@ Partial Class DetallesIncidenciaRechazoMP
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.btnDesvincularSAC)
         Me.GroupBox1.Controls.Add(Me.btnMPAsociadasOC)
+        Me.GroupBox1.Controls.Add(Me.Button3)
         Me.GroupBox1.Controls.Add(Me.btnSac)
         Me.GroupBox1.Controls.Add(Me.cmbEmpresa)
         Me.GroupBox1.Controls.Add(Me.cmbEstado)
@@ -156,25 +160,43 @@ Partial Class DetallesIncidenciaRechazoMP
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Location = New System.Drawing.Point(13, 61)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(775, 150)
+        Me.GroupBox1.Size = New System.Drawing.Size(845, 150)
         Me.GroupBox1.TabIndex = 4
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "DATOS GENERALES"
+        '
+        'btnDesvincularSAC
+        '
+        Me.btnDesvincularSAC.Location = New System.Drawing.Point(733, 43)
+        Me.btnDesvincularSAC.Name = "btnDesvincularSAC"
+        Me.btnDesvincularSAC.Size = New System.Drawing.Size(106, 22)
+        Me.btnDesvincularSAC.TabIndex = 10
+        Me.btnDesvincularSAC.Text = "Desvincular SAC"
+        Me.btnDesvincularSAC.UseVisualStyleBackColor = True
         '
         'btnMPAsociadasOC
         '
         Me.btnMPAsociadasOC.Location = New System.Drawing.Point(607, 44)
         Me.btnMPAsociadasOC.Name = "btnMPAsociadasOC"
-        Me.btnMPAsociadasOC.Size = New System.Drawing.Size(157, 22)
+        Me.btnMPAsociadasOC.Size = New System.Drawing.Size(120, 22)
         Me.btnMPAsociadasOC.TabIndex = 10
-        Me.btnMPAsociadasOC.Text = "Seleccionar MP Asociadas"
+        Me.btnMPAsociadasOC.Text = "Seleccionar MP"
         Me.btnMPAsociadasOC.UseVisualStyleBackColor = True
+        '
+        'Button3
+        '
+        Me.Button3.Location = New System.Drawing.Point(733, 17)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(106, 22)
+        Me.Button3.TabIndex = 10
+        Me.Button3.Text = "Exportar INC"
+        Me.Button3.UseVisualStyleBackColor = True
         '
         'btnSac
         '
         Me.btnSac.Location = New System.Drawing.Point(607, 17)
         Me.btnSac.Name = "btnSac"
-        Me.btnSac.Size = New System.Drawing.Size(157, 22)
+        Me.btnSac.Size = New System.Drawing.Size(120, 22)
         Me.btnSac.TabIndex = 10
         Me.btnSac.Text = "Ver SAC Asociada"
         Me.btnSac.UseVisualStyleBackColor = True
@@ -214,7 +236,7 @@ Partial Class DetallesIncidenciaRechazoMP
         Me.txtReferencia.Location = New System.Drawing.Point(79, 121)
         Me.txtReferencia.MaxLength = 100
         Me.txtReferencia.Name = "txtReferencia"
-        Me.txtReferencia.Size = New System.Drawing.Size(681, 20)
+        Me.txtReferencia.Size = New System.Drawing.Size(760, 20)
         Me.txtReferencia.TabIndex = 7
         '
         'Label8
@@ -259,7 +281,7 @@ Partial Class DetallesIncidenciaRechazoMP
         '
         Me.txtCantidadMP.BackColor = System.Drawing.Color.Cyan
         Me.txtCantidadMP.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCantidadMP.Location = New System.Drawing.Point(607, 71)
+        Me.txtCantidadMP.Location = New System.Drawing.Point(682, 71)
         Me.txtCantidadMP.Name = "txtCantidadMP"
         Me.txtCantidadMP.ReadOnly = True
         Me.txtCantidadMP.Size = New System.Drawing.Size(77, 20)
@@ -273,7 +295,7 @@ Partial Class DetallesIncidenciaRechazoMP
         Me.txtDescMP.Location = New System.Drawing.Point(163, 71)
         Me.txtDescMP.Name = "txtDescMP"
         Me.txtDescMP.ReadOnly = True
-        Me.txtDescMP.Size = New System.Drawing.Size(379, 20)
+        Me.txtDescMP.Size = New System.Drawing.Size(455, 20)
         Me.txtDescMP.TabIndex = 1
         Me.txtDescMP.TabStop = False
         '
@@ -300,7 +322,7 @@ Partial Class DetallesIncidenciaRechazoMP
         Me.txtTitulo.Location = New System.Drawing.Point(79, 96)
         Me.txtTitulo.MaxLength = 100
         Me.txtTitulo.Name = "txtTitulo"
-        Me.txtTitulo.Size = New System.Drawing.Size(681, 20)
+        Me.txtTitulo.Size = New System.Drawing.Size(760, 20)
         Me.txtTitulo.TabIndex = 6
         '
         'Label12
@@ -315,7 +337,7 @@ Partial Class DetallesIncidenciaRechazoMP
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(549, 75)
+        Me.Label13.Location = New System.Drawing.Point(624, 75)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(52, 13)
         Me.Label13.TabIndex = 0
@@ -490,7 +512,7 @@ Partial Class DetallesIncidenciaRechazoMP
         '
         'btnCerrar
         '
-        Me.btnCerrar.Location = New System.Drawing.Point(403, 483)
+        Me.btnCerrar.Location = New System.Drawing.Point(446, 483)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(107, 41)
         Me.btnCerrar.TabIndex = 12
@@ -499,7 +521,7 @@ Partial Class DetallesIncidenciaRechazoMP
         '
         'btnGrabar
         '
-        Me.btnGrabar.Location = New System.Drawing.Point(274, 483)
+        Me.btnGrabar.Location = New System.Drawing.Point(317, 483)
         Me.btnGrabar.Name = "btnGrabar"
         Me.btnGrabar.Size = New System.Drawing.Size(107, 41)
         Me.btnGrabar.TabIndex = 11
@@ -513,10 +535,10 @@ Partial Class DetallesIncidenciaRechazoMP
         Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TabControl1.ItemSize = New System.Drawing.Size(250, 30)
-        Me.TabControl1.Location = New System.Drawing.Point(13, 216)
+        Me.TabControl1.Location = New System.Drawing.Point(16, 216)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(776, 259)
+        Me.TabControl1.Size = New System.Drawing.Size(839, 259)
         Me.TabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed
         Me.TabControl1.TabIndex = 7
         '
@@ -527,7 +549,7 @@ Partial Class DetallesIncidenciaRechazoMP
         Me.TabPage1.Location = New System.Drawing.Point(4, 34)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(768, 221)
+        Me.TabPage1.Size = New System.Drawing.Size(831, 221)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "MOTIVOS"
         '
@@ -539,7 +561,7 @@ Partial Class DetallesIncidenciaRechazoMP
         Me.TabPage2.Location = New System.Drawing.Point(4, 34)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(768, 221)
+        Me.TabPage2.Size = New System.Drawing.Size(831, 221)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "ACCIONES"
         '
@@ -573,7 +595,7 @@ Partial Class DetallesIncidenciaRechazoMP
         Me.TabPage3.Location = New System.Drawing.Point(4, 34)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(768, 221)
+        Me.TabPage3.Size = New System.Drawing.Size(831, 221)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "ARCHIVOS"
         '
@@ -610,7 +632,7 @@ Partial Class DetallesIncidenciaRechazoMP
         Me.dgvArchivos.RowHeadersWidth = 15
         Me.dgvArchivos.RowTemplate.Height = 30
         Me.dgvArchivos.ShowCellToolTips = False
-        Me.dgvArchivos.Size = New System.Drawing.Size(762, 184)
+        Me.dgvArchivos.Size = New System.Drawing.Size(825, 184)
         Me.dgvArchivos.TabIndex = 4
         '
         'FechaArchivo
@@ -666,7 +688,7 @@ Partial Class DetallesIncidenciaRechazoMP
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(801, 534)
+        Me.ClientSize = New System.Drawing.Size(870, 534)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.btnMovimientos)
         Me.Controls.Add(Me.txtLotePartida)
@@ -758,4 +780,6 @@ Partial Class DetallesIncidenciaRechazoMP
     Friend WithEvents ContextMenuStrip2 As System.Windows.Forms.ContextMenuStrip
     Friend WithEvents EliminarArchivoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
+    Friend WithEvents Button3 As System.Windows.Forms.Button
+    Friend WithEvents btnDesvincularSAC As System.Windows.Forms.Button
 End Class

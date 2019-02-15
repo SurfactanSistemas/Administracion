@@ -132,7 +132,7 @@ Public Class AuxiNuevaSACDesdeINC
                                      & " ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13}')",
                                      WClave, WTipo, WAnio, WNumero, WCentro, _Fecha, WFechaOrd, WOrigen, WEstado, _Motivo, WEmisor, WResponsable, _Titulo, _Referencia)
 
-            ExecuteNonQueries(ZSQL, "UPDATE CargaSacAdicional SET Dato1 = '" & WComentarios & "' WHERE Clave = '" & WClave & "'", "UPDATE CargaIncidencias SET ClaveSAC = '" & WClave & "' WHERE Incidencia = '" & WRefIncidencia & "'")
+            ExecuteNonQueries(ZSQL, "UPDATE CargaSacAdicional SET Dato1 = '" & WComentarios & "' WHERE Clave = '" & WClave & "'", "UPDATE CargaIncidencias SET ClaveSAC = '" & WClave & "', EsSACAsociada = '0' WHERE Incidencia = '" & WRefIncidencia & "'")
 
             Dim WOwner As IAuxiNuevaSACDesdeINC = CType(Owner, IAuxiNuevaSACDesdeINC)
 

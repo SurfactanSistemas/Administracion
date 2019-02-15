@@ -22,23 +22,42 @@ Partial Class ListadoIncidencias
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.cmbOrdenIII = New System.Windows.Forms.ComboBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.cmbOrdenII = New System.Windows.Forms.ComboBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.cmbOrdenI = New System.Windows.Forms.ComboBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.btnNuevaIncidencia = New System.Windows.Forms.Button()
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.btnFiltrar = New System.Windows.Forms.Button()
+        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.clbPlantas = New System.Windows.Forms.CheckedListBox()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.clbTipos = New System.Windows.Forms.CheckedListBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.clbEstados = New System.Windows.Forms.CheckedListBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.rbEntreFechas = New System.Windows.Forms.RadioButton()
+        Me.rbAñosCompletos = New System.Windows.Forms.RadioButton()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.txtHasta = New System.Windows.Forms.MaskedTextBox()
-        Me.txtDesde = New System.Windows.Forms.MaskedTextBox()
+        Me.txtHastaAño = New System.Windows.Forms.MaskedTextBox()
+        Me.txtDesdeAño = New System.Windows.Forms.MaskedTextBox()
+        Me.txtHastaFecha = New System.Windows.Forms.MaskedTextBox()
+        Me.txtDesdeFecha = New System.Windows.Forms.MaskedTextBox()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.dgvIncidencias = New System.Windows.Forms.DataGridView()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.CopiarConCabecerasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CopiarSóloDatosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Incidencia = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Renglon = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -52,13 +71,18 @@ Partial Class ListadoIncidencias
         Me.Producto = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Lote = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ClaveSAC = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Planta = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Empresa = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
+        Me.GroupBox5.SuspendLayout()
+        Me.GroupBox6.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         CType(Me.dgvIncidencias, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -69,7 +93,7 @@ Partial Class ListadoIncidencias
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(968, 50)
+        Me.Panel1.Size = New System.Drawing.Size(1141, 50)
         Me.Panel1.TabIndex = 2
         '
         'Label2
@@ -92,7 +116,7 @@ Partial Class ListadoIncidencias
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Calibri", 15.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label1.Location = New System.Drawing.Point(815, 13)
+        Me.Label1.Location = New System.Drawing.Point(988, 13)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(143, 24)
         Me.Label1.TabIndex = 0
@@ -100,9 +124,12 @@ Partial Class ListadoIncidencias
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.GroupBox5)
+        Me.GroupBox1.Controls.Add(Me.Button1)
         Me.GroupBox1.Controls.Add(Me.btnNuevaIncidencia)
         Me.GroupBox1.Controls.Add(Me.btnCerrar)
         Me.GroupBox1.Controls.Add(Me.btnFiltrar)
+        Me.GroupBox1.Controls.Add(Me.GroupBox6)
         Me.GroupBox1.Controls.Add(Me.GroupBox4)
         Me.GroupBox1.Controls.Add(Me.GroupBox3)
         Me.GroupBox1.Controls.Add(Me.GroupBox2)
@@ -110,42 +137,140 @@ Partial Class ListadoIncidencias
         Me.GroupBox1.Location = New System.Drawing.Point(10, 10)
         Me.GroupBox1.Margin = New System.Windows.Forms.Padding(10)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(948, 172)
+        Me.GroupBox1.Size = New System.Drawing.Size(1121, 215)
         Me.GroupBox1.TabIndex = 4
         Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "PARÁMETROS DE FILTRO"
+        Me.GroupBox1.Text = "Parámetros"
+        '
+        'GroupBox5
+        '
+        Me.GroupBox5.Controls.Add(Me.cmbOrdenIII)
+        Me.GroupBox5.Controls.Add(Me.Label5)
+        Me.GroupBox5.Controls.Add(Me.cmbOrdenII)
+        Me.GroupBox5.Controls.Add(Me.Label6)
+        Me.GroupBox5.Controls.Add(Me.cmbOrdenI)
+        Me.GroupBox5.Controls.Add(Me.Label7)
+        Me.GroupBox5.Location = New System.Drawing.Point(218, 25)
+        Me.GroupBox5.Name = "GroupBox5"
+        Me.GroupBox5.Size = New System.Drawing.Size(554, 59)
+        Me.GroupBox5.TabIndex = 4
+        Me.GroupBox5.TabStop = False
+        Me.GroupBox5.Text = "Orden"
+        '
+        'cmbOrdenIII
+        '
+        Me.cmbOrdenIII.FormattingEnabled = True
+        Me.cmbOrdenIII.Items.AddRange(New Object() {"Numero", "Tipo", "Estado", "Planta"})
+        Me.cmbOrdenIII.Location = New System.Drawing.Point(419, 23)
+        Me.cmbOrdenIII.Name = "cmbOrdenIII"
+        Me.cmbOrdenIII.Size = New System.Drawing.Size(92, 21)
+        Me.cmbOrdenIII.TabIndex = 5
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(369, 27)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(48, 13)
+        Me.Label5.TabIndex = 3
+        Me.Label5.Text = "Terciario"
+        '
+        'cmbOrdenII
+        '
+        Me.cmbOrdenII.FormattingEnabled = True
+        Me.cmbOrdenII.Items.AddRange(New Object() {"Numero", "Tipo", "Estado", "Planta"})
+        Me.cmbOrdenII.Location = New System.Drawing.Point(261, 23)
+        Me.cmbOrdenII.Name = "cmbOrdenII"
+        Me.cmbOrdenII.Size = New System.Drawing.Size(92, 21)
+        Me.cmbOrdenII.TabIndex = 7
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(198, 27)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(61, 13)
+        Me.Label6.TabIndex = 2
+        Me.Label6.Text = "Secundario"
+        '
+        'cmbOrdenI
+        '
+        Me.cmbOrdenI.FormattingEnabled = True
+        Me.cmbOrdenI.Items.AddRange(New Object() {"Numero", "Tipo", "Estado", "Planta"})
+        Me.cmbOrdenI.Location = New System.Drawing.Point(90, 23)
+        Me.cmbOrdenI.Name = "cmbOrdenI"
+        Me.cmbOrdenI.Size = New System.Drawing.Size(92, 21)
+        Me.cmbOrdenI.TabIndex = 6
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(43, 27)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(44, 13)
+        Me.Label7.TabIndex = 4
+        Me.Label7.Text = "Primario"
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(790, 54)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(181, 33)
+        Me.Button1.TabIndex = 3
+        Me.Button1.Text = "EXPORTAR INDICE"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'btnNuevaIncidencia
         '
-        Me.btnNuevaIncidencia.Location = New System.Drawing.Point(752, 31)
+        Me.btnNuevaIncidencia.Location = New System.Drawing.Point(926, 17)
         Me.btnNuevaIncidencia.Name = "btnNuevaIncidencia"
-        Me.btnNuevaIncidencia.Size = New System.Drawing.Size(113, 33)
+        Me.btnNuevaIncidencia.Size = New System.Drawing.Size(181, 33)
         Me.btnNuevaIncidencia.TabIndex = 3
         Me.btnNuevaIncidencia.Text = "NUEVO IINFORME"
         Me.btnNuevaIncidencia.UseVisualStyleBackColor = True
         '
         'btnCerrar
         '
-        Me.btnCerrar.Location = New System.Drawing.Point(809, 79)
+        Me.btnCerrar.Location = New System.Drawing.Point(975, 54)
         Me.btnCerrar.Name = "btnCerrar"
-        Me.btnCerrar.Size = New System.Drawing.Size(97, 43)
+        Me.btnCerrar.Size = New System.Drawing.Size(132, 33)
         Me.btnCerrar.TabIndex = 3
         Me.btnCerrar.Text = "CERRAR"
         Me.btnCerrar.UseVisualStyleBackColor = True
         '
         'btnFiltrar
         '
-        Me.btnFiltrar.Location = New System.Drawing.Point(638, 30)
+        Me.btnFiltrar.Location = New System.Drawing.Point(790, 17)
         Me.btnFiltrar.Name = "btnFiltrar"
-        Me.btnFiltrar.Size = New System.Drawing.Size(108, 31)
+        Me.btnFiltrar.Size = New System.Drawing.Size(132, 33)
         Me.btnFiltrar.TabIndex = 3
         Me.btnFiltrar.Text = "FILTRAR"
         Me.btnFiltrar.UseVisualStyleBackColor = True
         '
+        'GroupBox6
+        '
+        Me.GroupBox6.Controls.Add(Me.clbPlantas)
+        Me.GroupBox6.Location = New System.Drawing.Point(652, 86)
+        Me.GroupBox6.Name = "GroupBox6"
+        Me.GroupBox6.Size = New System.Drawing.Size(196, 122)
+        Me.GroupBox6.TabIndex = 1
+        Me.GroupBox6.TabStop = False
+        Me.GroupBox6.Text = "Planta"
+        '
+        'clbPlantas
+        '
+        Me.clbPlantas.CheckOnClick = True
+        Me.clbPlantas.FormattingEnabled = True
+        Me.clbPlantas.Items.AddRange(New Object() {"TODAS", "INCIDENCIA GENERAL MP/PT", "INCIDENCIA POR RECHAZO DE MP"})
+        Me.clbPlantas.Location = New System.Drawing.Point(16, 18)
+        Me.clbPlantas.Name = "clbPlantas"
+        Me.clbPlantas.Size = New System.Drawing.Size(164, 94)
+        Me.clbPlantas.TabIndex = 2
+        '
         'GroupBox4
         '
         Me.GroupBox4.Controls.Add(Me.clbTipos)
-        Me.GroupBox4.Location = New System.Drawing.Point(433, 25)
+        Me.GroupBox4.Location = New System.Drawing.Point(435, 86)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(196, 122)
         Me.GroupBox4.TabIndex = 1
@@ -165,7 +290,7 @@ Partial Class ListadoIncidencias
         'GroupBox3
         '
         Me.GroupBox3.Controls.Add(Me.clbEstados)
-        Me.GroupBox3.Location = New System.Drawing.Point(231, 25)
+        Me.GroupBox3.Location = New System.Drawing.Point(218, 86)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(196, 122)
         Me.GroupBox3.TabIndex = 1
@@ -183,47 +308,103 @@ Partial Class ListadoIncidencias
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.rbEntreFechas)
+        Me.GroupBox2.Controls.Add(Me.rbAñosCompletos)
+        Me.GroupBox2.Controls.Add(Me.Label4)
         Me.GroupBox2.Controls.Add(Me.Label3)
-        Me.GroupBox2.Controls.Add(Me.txtHasta)
-        Me.GroupBox2.Controls.Add(Me.txtDesde)
-        Me.GroupBox2.Location = New System.Drawing.Point(11, 24)
+        Me.GroupBox2.Controls.Add(Me.txtHastaAño)
+        Me.GroupBox2.Controls.Add(Me.txtDesdeAño)
+        Me.GroupBox2.Controls.Add(Me.txtHastaFecha)
+        Me.GroupBox2.Controls.Add(Me.txtDesdeFecha)
+        Me.GroupBox2.Location = New System.Drawing.Point(6, 24)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.GroupBox2.Size = New System.Drawing.Size(207, 50)
+        Me.GroupBox2.Size = New System.Drawing.Size(205, 184)
         Me.GroupBox2.TabIndex = 0
         Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Entre Fechas"
+        Me.GroupBox2.Text = "Período"
+        '
+        'rbEntreFechas
+        '
+        Me.rbEntreFechas.AutoSize = True
+        Me.rbEntreFechas.Location = New System.Drawing.Point(113, 46)
+        Me.rbEntreFechas.Name = "rbEntreFechas"
+        Me.rbEntreFechas.Size = New System.Drawing.Size(88, 17)
+        Me.rbEntreFechas.TabIndex = 2
+        Me.rbEntreFechas.Text = "Entre Fechas"
+        Me.rbEntreFechas.UseVisualStyleBackColor = True
+        '
+        'rbAñosCompletos
+        '
+        Me.rbAñosCompletos.AutoSize = True
+        Me.rbAñosCompletos.Checked = True
+        Me.rbAñosCompletos.Location = New System.Drawing.Point(7, 46)
+        Me.rbAñosCompletos.Name = "rbAñosCompletos"
+        Me.rbAñosCompletos.Size = New System.Drawing.Size(100, 17)
+        Me.rbAñosCompletos.TabIndex = 2
+        Me.rbAñosCompletos.TabStop = True
+        Me.rbAñosCompletos.Text = "Años completos"
+        Me.rbAñosCompletos.UseVisualStyleBackColor = True
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(94, 86)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(16, 13)
+        Me.Label4.TabIndex = 1
+        Me.Label4.Text = "Al"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(95, 24)
+        Me.Label3.Location = New System.Drawing.Point(94, 123)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(16, 13)
         Me.Label3.TabIndex = 1
         Me.Label3.Text = "Al"
         '
-        'txtHasta
+        'txtHastaAño
         '
-        Me.txtHasta.Location = New System.Drawing.Point(117, 20)
-        Me.txtHasta.Mask = "00/00/0000"
-        Me.txtHasta.Name = "txtHasta"
-        Me.txtHasta.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtHasta.Size = New System.Drawing.Size(67, 20)
-        Me.txtHasta.TabIndex = 0
-        Me.txtHasta.Text = "00000000"
-        Me.txtHasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtHastaAño.Location = New System.Drawing.Point(119, 82)
+        Me.txtHastaAño.Mask = "0000"
+        Me.txtHastaAño.Name = "txtHastaAño"
+        Me.txtHastaAño.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtHastaAño.Size = New System.Drawing.Size(67, 20)
+        Me.txtHastaAño.TabIndex = 0
+        Me.txtHastaAño.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'txtDesde
+        'txtDesdeAño
         '
-        Me.txtDesde.Location = New System.Drawing.Point(22, 20)
-        Me.txtDesde.Mask = "00/00/0000"
-        Me.txtDesde.Name = "txtDesde"
-        Me.txtDesde.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtDesde.Size = New System.Drawing.Size(67, 20)
-        Me.txtDesde.TabIndex = 0
-        Me.txtDesde.Text = "00000000"
-        Me.txtDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtDesdeAño.Location = New System.Drawing.Point(18, 82)
+        Me.txtDesdeAño.Mask = "0000"
+        Me.txtDesdeAño.Name = "txtDesdeAño"
+        Me.txtDesdeAño.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtDesdeAño.Size = New System.Drawing.Size(67, 20)
+        Me.txtDesdeAño.TabIndex = 0
+        Me.txtDesdeAño.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtHastaFecha
+        '
+        Me.txtHastaFecha.Location = New System.Drawing.Point(119, 119)
+        Me.txtHastaFecha.Mask = "00/00/0000"
+        Me.txtHastaFecha.Name = "txtHastaFecha"
+        Me.txtHastaFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtHastaFecha.Size = New System.Drawing.Size(67, 20)
+        Me.txtHastaFecha.TabIndex = 0
+        Me.txtHastaFecha.Text = "00000000"
+        Me.txtHastaFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtDesdeFecha
+        '
+        Me.txtDesdeFecha.Location = New System.Drawing.Point(18, 119)
+        Me.txtDesdeFecha.Mask = "00/00/0000"
+        Me.txtDesdeFecha.Name = "txtDesdeFecha"
+        Me.txtDesdeFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtDesdeFecha.Size = New System.Drawing.Size(67, 20)
+        Me.txtDesdeFecha.TabIndex = 0
+        Me.txtDesdeFecha.Text = "00000000"
+        Me.txtDesdeFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'TableLayoutPanel1
         '
@@ -235,9 +416,9 @@ Partial Class ListadoIncidencias
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 50)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 2
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 192.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 235.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(968, 447)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1141, 447)
         Me.TableLayoutPanel1.TabIndex = 5
         '
         'dgvIncidencias
@@ -245,17 +426,36 @@ Partial Class ListadoIncidencias
         Me.dgvIncidencias.AllowUserToAddRows = False
         Me.dgvIncidencias.AllowUserToDeleteRows = False
         Me.dgvIncidencias.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvIncidencias.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Incidencia, Me.Renglon, Me.Tipo, Me.DescTipo, Me.Fecha, Me.FechaOrd, Me.Estado, Me.DescEstado, Me.Titulo, Me.Referencia, Me.Producto, Me.Lote, Me.ClaveSAC})
+        Me.dgvIncidencias.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Incidencia, Me.Renglon, Me.Tipo, Me.DescTipo, Me.Fecha, Me.FechaOrd, Me.Estado, Me.DescEstado, Me.Titulo, Me.Referencia, Me.Producto, Me.Lote, Me.ClaveSAC, Me.Planta, Me.Empresa})
+        Me.dgvIncidencias.ContextMenuStrip = Me.ContextMenuStrip1
         Me.dgvIncidencias.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvIncidencias.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.dgvIncidencias.Location = New System.Drawing.Point(3, 195)
+        Me.dgvIncidencias.Location = New System.Drawing.Point(3, 238)
         Me.dgvIncidencias.Name = "dgvIncidencias"
         Me.dgvIncidencias.ReadOnly = True
         Me.dgvIncidencias.RowHeadersWidth = 15
         Me.dgvIncidencias.RowTemplate.Height = 20
         Me.dgvIncidencias.ShowCellToolTips = False
-        Me.dgvIncidencias.Size = New System.Drawing.Size(962, 249)
+        Me.dgvIncidencias.Size = New System.Drawing.Size(1135, 206)
         Me.dgvIncidencias.TabIndex = 3
+        '
+        'ContextMenuStrip1
+        '
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopiarConCabecerasToolStripMenuItem, Me.CopiarSóloDatosToolStripMenuItem})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(229, 48)
+        '
+        'CopiarConCabecerasToolStripMenuItem
+        '
+        Me.CopiarConCabecerasToolStripMenuItem.Name = "CopiarConCabecerasToolStripMenuItem"
+        Me.CopiarConCabecerasToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
+        Me.CopiarConCabecerasToolStripMenuItem.Text = "Copiar Incluyendo Cabeceras"
+        '
+        'CopiarSóloDatosToolStripMenuItem
+        '
+        Me.CopiarSóloDatosToolStripMenuItem.Name = "CopiarSóloDatosToolStripMenuItem"
+        Me.CopiarSóloDatosToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
+        Me.CopiarSóloDatosToolStripMenuItem.Text = "Copiar Sólo Datos"
         '
         'Incidencia
         '
@@ -282,6 +482,7 @@ Partial Class ListadoIncidencias
         Me.Tipo.Name = "Tipo"
         Me.Tipo.ReadOnly = True
         Me.Tipo.Visible = False
+        Me.Tipo.Width = 53
         '
         'DescTipo
         '
@@ -317,6 +518,7 @@ Partial Class ListadoIncidencias
         Me.Estado.Name = "Estado"
         Me.Estado.ReadOnly = True
         Me.Estado.Visible = False
+        Me.Estado.Width = 65
         '
         'DescEstado
         '
@@ -353,6 +555,7 @@ Partial Class ListadoIncidencias
         Me.Producto.Name = "Producto"
         Me.Producto.ReadOnly = True
         Me.Producto.Visible = False
+        Me.Producto.Width = 75
         '
         'Lote
         '
@@ -362,6 +565,7 @@ Partial Class ListadoIncidencias
         Me.Lote.Name = "Lote"
         Me.Lote.ReadOnly = True
         Me.Lote.Visible = False
+        Me.Lote.Width = 91
         '
         'ClaveSAC
         '
@@ -371,11 +575,28 @@ Partial Class ListadoIncidencias
         Me.ClaveSAC.ReadOnly = True
         Me.ClaveSAC.Visible = False
         '
+        'Planta
+        '
+        Me.Planta.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Planta.DataPropertyName = "Planta"
+        Me.Planta.HeaderText = "Planta"
+        Me.Planta.Name = "Planta"
+        Me.Planta.ReadOnly = True
+        Me.Planta.Width = 62
+        '
+        'Empresa
+        '
+        Me.Empresa.DataPropertyName = "Empresa"
+        Me.Empresa.HeaderText = "Empresa"
+        Me.Empresa.Name = "Empresa"
+        Me.Empresa.ReadOnly = True
+        Me.Empresa.Visible = False
+        '
         'ListadoIncidencias
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(968, 497)
+        Me.ClientSize = New System.Drawing.Size(1141, 497)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Controls.Add(Me.Panel1)
         Me.Name = "ListadoIncidencias"
@@ -385,12 +606,16 @@ Partial Class ListadoIncidencias
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox5.ResumeLayout(False)
+        Me.GroupBox5.PerformLayout()
+        Me.GroupBox6.ResumeLayout(False)
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.TableLayoutPanel1.ResumeLayout(False)
         CType(Me.dgvIncidencias, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ContextMenuStrip1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -401,14 +626,34 @@ Partial Class ListadoIncidencias
     Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents txtHasta As System.Windows.Forms.MaskedTextBox
-    Friend WithEvents txtDesde As System.Windows.Forms.MaskedTextBox
+    Friend WithEvents txtHastaFecha As System.Windows.Forms.MaskedTextBox
+    Friend WithEvents txtDesdeFecha As System.Windows.Forms.MaskedTextBox
     Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
     Friend WithEvents btnFiltrar As System.Windows.Forms.Button
     Friend WithEvents btnCerrar As System.Windows.Forms.Button
     Friend WithEvents dgvIncidencias As System.Windows.Forms.DataGridView
     Friend WithEvents btnNuevaIncidencia As System.Windows.Forms.Button
     Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
+    Friend WithEvents clbTipos As System.Windows.Forms.CheckedListBox
+    Friend WithEvents clbEstados As System.Windows.Forms.CheckedListBox
+    Friend WithEvents rbEntreFechas As System.Windows.Forms.RadioButton
+    Friend WithEvents rbAñosCompletos As System.Windows.Forms.RadioButton
+    Friend WithEvents Label4 As System.Windows.Forms.Label
+    Friend WithEvents txtHastaAño As System.Windows.Forms.MaskedTextBox
+    Friend WithEvents txtDesdeAño As System.Windows.Forms.MaskedTextBox
+    Friend WithEvents GroupBox5 As System.Windows.Forms.GroupBox
+    Friend WithEvents cmbOrdenIII As System.Windows.Forms.ComboBox
+    Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents cmbOrdenII As System.Windows.Forms.ComboBox
+    Friend WithEvents Label6 As System.Windows.Forms.Label
+    Friend WithEvents cmbOrdenI As System.Windows.Forms.ComboBox
+    Friend WithEvents Label7 As System.Windows.Forms.Label
+    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents GroupBox6 As System.Windows.Forms.GroupBox
+    Friend WithEvents clbPlantas As System.Windows.Forms.CheckedListBox
+    Friend WithEvents ContextMenuStrip1 As System.Windows.Forms.ContextMenuStrip
+    Friend WithEvents CopiarConCabecerasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents CopiarSóloDatosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents Incidencia As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Renglon As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Tipo As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -422,6 +667,6 @@ Partial Class ListadoIncidencias
     Friend WithEvents Producto As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Lote As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ClaveSAC As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents clbTipos As System.Windows.Forms.CheckedListBox
-    Friend WithEvents clbEstados As System.Windows.Forms.CheckedListBox
+    Friend WithEvents Planta As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Empresa As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

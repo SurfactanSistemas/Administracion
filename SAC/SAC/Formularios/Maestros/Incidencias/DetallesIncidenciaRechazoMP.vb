@@ -1,11 +1,12 @@
 ﻿Imports System.Configuration
 Imports System.IO
 Imports System.Text.RegularExpressions
+Imports CrystalDecisions.Shared
 Imports Microsoft.VisualBasic.FileIO
 
-Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAyudaListadoSACs, IAyudaMPAsociadasOC
+Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAyudaListadoSACs, IAyudaMPAsociadasOC, IExportarINC
 
-    Const TextoBtnGenerarSac = "Generar/Asociar SAC"
+    Const TextoBtnGenerarSac = "Asociar SAC"
     Const TextoBtnVerSac = "Ver SAC Asociado"
     Private WControlRetornoError As Control = Nothing
 
@@ -117,6 +118,9 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
 
         btnSac.Enabled = MostrarBotonVerSac
         txtIncidencia.Enabled = MostrarBotonVerSac
+
+        btnDesvincularSAC.Enabled = btnSac.Text = TextoBtnVerSac
+
         WPrimeraCarga = True
 
     End Sub
@@ -168,7 +172,7 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
                         txtFecha.Text = OrDefault(.Item("Fecha"), "")
                         Dim WTempEstado = OrDefault(.Item("Estado"), 0)
 
-                        For Each rowView As datarowview In cmbEstado.items
+                        For Each rowView As DataRowView In cmbEstado.Items
                             If rowView.Item("Estado") = WTempEstado Then
                                 cmbEstado.SelectedItem = rowView
                                 Exit For
@@ -202,6 +206,7 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
                         End If
 
                         btnSac.Text = IIf(Val(OrDefault(.Item("ClaveSac"), "")) = 0, TextoBtnGenerarSac, TextoBtnVerSac)
+                        btnDesvincularSAC.Enabled = Val(OrDefault(.Item("EsSacAsociada"), "0")) = 1
                     End With
 
                     _CargarArchivosRelacionados()
@@ -466,10 +471,10 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
             WSqls.Add("DELETE CargaIncidencias WHERE Incidencia = '" & txtIncidencia.Text & "'")
 
             Dim ZSql = String.Format("INSERT INTO CargaIncidencias " _
-                       & "(Incidencia, Renglon, Tipo, Fecha, FechaOrd, Estado, Titulo, Referencia, Producto, Lote, ClaveSac, TipoProd, Motivos, Empresa, Orden, Acciones) " _
+                       & "(Incidencia, Renglon, Tipo, Fecha, FechaOrd, Estado, Titulo, Referencia, Producto, Lote, ClaveSac, TipoProd, Motivos, Empresa, Orden, Acciones, Proveedor, DescProveedor, ImpreDescProd) " _
                        & "VALUES " _
-                       & " ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}','{15}') ", _
-                       txtIncidencia.Text, 1, WTipo, txtFecha.Text, ordenaFecha(txtFecha.Text), WEstado, txtTitulo.Text, txtReferencia.Text, txtProducto.Text, txtLotePartida.Text, WClaveSAC, IIf(rbMatPrima.Checked, "M", "T"), txtMotivos.Text, WEmpresa, WOrden, txtAcciones.Text)
+                       & " ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}','{18}') ", _
+                       txtIncidencia.Text, 1, WTipo, txtFecha.Text, ordenaFecha(txtFecha.Text), WEstado, txtTitulo.Text, txtReferencia.Text, txtProducto.Text, txtLotePartida.Text, WClaveSAC, IIf(rbMatPrima.Checked, "M", "T"), txtMotivos.Text, WEmpresa, WOrden, txtAcciones.Text, txtProveedor.Text, txtDescProv.Text.SliceLeft(100), txtDescProducto.Text.SliceLeft(100))
             WSqls.Add(ZSql)
 
             ExecuteNonQueries(WSqls.ToArray)
@@ -638,6 +643,7 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
             Dim WClaveSAC As String = Trim(OrDefault(WNC.Item("ClaveSac"), ""))
 
             If WClaveSAC = "" Then
+                btnDesvincularSAC.Enabled = False
                 '
                 ' Consultamos si quieren abrir nueva Sac o asignar una ya abierta.
                 '
@@ -728,9 +734,6 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
             _AbrirSACPorClave(WClaveSAC)
             Exit Sub
         End If
-
-        Close()
-
     End Sub
 
     Private Sub _CopiarArchivosINCASAC(ByVal WClaveSAC As String)
@@ -765,14 +768,14 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
 
         _CopiarArchivosINCASAC(WClaveSac)
 
+        btnDesvincularSAC.Enabled = True
+
         MsgBox(String.Format("Se ha Asociado la siguiente SAC {0} {2} / {1} al Informe de No Conformidad Actual.", "", WAnio, WNum), MsgBoxStyle.Information)
 
         If MsgBox("¿Desea Abrir la SAC asociada?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
             _AbrirSACPorClave(WClaveSac)
             Exit Sub
         End If
-
-        Close()
     End Sub
 
     Private Sub txtOrden_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtOrden.KeyUp
@@ -1007,5 +1010,69 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
 
 #End Region
 
+    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
+        Try
+            ExecuteNonQueries("UPDATE CargaIncidencias SET ImpreDescProd = CASE inc.TipoProd WHEN 'T' THEN LEFT(t.Descripcion, 100) WHEN 'M' THEN LEFT(a.Descripcion, 100) ELSE '' END FROM CargaIncidencias inc LEFT OUTER JOIN Terminado t ON t.Codigo = inc.Producto LEFT OUTER JOIN Articulo a ON a.Codigo = inc.Producto")
 
+            Dim frm As New ExportarINC
+            frm.Show(Me)
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Public Sub _ProcesarExportarINC(ByVal TipoFormato As Integer) Implements IExportarINC._ProcesarExportarINC
+        With New VistaPrevia
+            .Reporte = New ReporteINCIndividual
+            .Formula = "{CargaIncidencias.Incidencia} = " & txtIncidencia.Text
+            .Reporte.SetParameterValue("MostrarPosiblesUsos", 0)
+            .Reporte.SetParameterValue("MostrarAcciones", 1)
+
+            Dim WNombreArchivo = String.Format("INC {0} - {1}", txtIncidencia.Text.PadLeft(4, "0"), Date.Now.ToString("dd-MM-yyyy"))
+
+            Select Case TipoFormato
+
+                Case 0 ' PDF
+                    WNombreArchivo &= ".pdf"
+                    .Exportar(WNombreArchivo, ExportFormatType.PortableDocFormat)
+                Case 1 ' Excel
+                    .Exportar(WNombreArchivo, ExportFormatType.Excel)
+                Case 2 ' Word
+                    .Exportar(WNombreArchivo, ExportFormatType.WordForWindows)
+                Case 3
+                    Dim WRuta = "C:/tempIndice/"
+                    WNombreArchivo &= ".pdf"
+
+                    If Directory.Exists(WRuta) Then Directory.Delete(WRuta, True)
+
+                    Directory.CreateDirectory(WRuta)
+
+                    .Exportar(WNombreArchivo, ExportFormatType.PortableDocFormat, WRuta)
+
+                    .EnviarPorEmail(WRuta & WNombreArchivo)
+
+            End Select
+
+        End With
+    End Sub
+
+    Private Sub btnDesvincularSAC_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDesvincularSAC.Click
+
+        Try
+
+            If MsgBox("¿Está seguro de querer desvincular la SAC asociada a este Informe de No Conformidad?", vbYesNo) <> MsgBoxResult.Yes Then Exit Sub
+
+            ExecuteNonQueries("UPDATE CargaIncidencias SET ClaveSAC = '', EsSacAsociada = '0' WHERE Incidencia = '" & txtIncidencia.Text & "'")
+
+            MsgBox("SAC desvinculada de manera exitosa", MsgBoxStyle.Information)
+
+            btnSac.Text = TextoBtnGenerarSac
+            btnDesvincularSAC.Enabled = False
+
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+        End Try
+
+    End Sub
 End Class
