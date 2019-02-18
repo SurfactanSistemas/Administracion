@@ -40,6 +40,10 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
 
     Private Sub _Limpiar()
 
+        For Each c As Control In {btnControles, btnHojaProduccion, btnMovimientos}
+            c.Enabled = True
+        Next
+
         For Each c As Control In {txtDescProducto, txtFecha, txtIncidencia, txtLotePartida, txtPosiblesUsos, txtProducto, txtReferencia, txtTitulo, txtMotivos}
             c.Text = ""
         Next
@@ -89,7 +93,7 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
 
     End Sub
 
-    Private Sub rbProdTerminado_Click(ByVal sender As Object, ByVal e As EventArgs) Handles rbProdTerminado.Click, rbMatPrima.Click
+    Private Sub rbProdTerminado_Click(ByVal sender As Object, ByVal e As EventArgs) Handles rbProdTerminado.Click, rbMatPrima.Click, rbVario.Click
         With txtProducto
             Dim WProducto = .Text
             .Mask = IIf(rbMatPrima.Checked, ">LL-000-000", ">LL-00000-000")
@@ -102,6 +106,11 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
             btnHojaProduccion.Enabled = rbProdTerminado.Checked
 
         End With
+
+        For Each c As Control In {txtDescProducto, txtProducto, txtLotePartida, btnControles, btnHojaProduccion, btnMovimientos}
+            c.Enabled = Not rbVario.Checked
+        Next
+
     End Sub
 
     Private Sub txtIncidencia_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtIncidencia.KeyDown
@@ -145,7 +154,12 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
                         Next
 
                         txtLotePartida.Text = OrDefault(.Item("Lote"), "")
-                        rbProdTerminado.Checked = OrDefault(.Item("TipoProd"), "M") = "T"
+                        Dim WTipoProd As String = OrDefault(.Item("TipoProd"), "V")
+
+                        rbProdTerminado.Checked = WTipoProd ="T"
+                        rbMatPrima.Checked = WTipoProd = "M"
+                        rbVario.Checked = WTipoProd = "V"
+
                         rbProdTerminado_Click(Nothing, Nothing)
                         txtProducto.Text = OrDefault(.Item("Producto"), "")
                         txtProducto_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
@@ -155,6 +169,11 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
                         txtMotivos.Text = OrDefault(.Item("Motivos"), "")
                         btnSac.Text = IIf(Val(OrDefault(.Item("ClaveSac"), "")) = 0, TextoBtnGenerarSac, TextoBtnVerSac)
                         btnDesvincularSAC.Enabled = Val(OrDefault(.Item("EsSACAsociada"), "0")) = 1
+
+                        For Each c As Control In {btnControles, btnHojaProduccion, btnMovimientos}
+                            c.Enabled = Not rbVario.Checked
+                        Next
+
                     End With
 
                     _CargarArchivosRelacionados()
@@ -398,6 +417,15 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
             End If
 
             Dim WEstado As Integer = CType(cmbEstado.SelectedItem, DataRowView).Item("Estado")
+            Dim WTipoProd As String = "M"
+            If rbProdTerminado.Checked then WTipoProd="T"
+            If rbVario.Checked Then WTipoProd = "V"
+
+            If rbVario.Checked Then
+                txtProducto.Text = ""
+                txtDescProducto.Text = ""
+                txtLotePartida.Text = ""
+            End If
 
             WSqls.Add("DELETE CargaIncidencias WHERE Incidencia = '" & txtIncidencia.Text & "'")
 
@@ -405,7 +433,7 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
                        & "(Incidencia, Renglon, Tipo, Fecha, FechaOrd, Estado, Titulo, Referencia, Producto, Lote, ClaveSac, TipoProd, Posiblesusos, Motivos, Empresa, Proveedor, Orden, DescProveedor) " _
                        & "VALUES " _
                        & " ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}') ", _
-                       txtIncidencia.Text, 1, WTipo, txtFecha.Text, ordenaFecha(txtFecha.Text), WEstado, txtTitulo.Text, txtReferencia.Text, txtProducto.Text, txtLotePartida.Text, WClaveSAC, IIf(rbMatPrima.Checked, "M", "T"), txtPosiblesUsos.Text, txtMotivos.Text, WEmpresaProd, "", "", "")
+                       txtIncidencia.Text, 1, WTipo, txtFecha.Text, ordenaFecha(txtFecha.Text), WEstado, txtTitulo.Text, txtReferencia.Text, txtProducto.Text, txtLotePartida.Text, WClaveSAC, WTipoProd, txtPosiblesUsos.Text, txtMotivos.Text, WEmpresaProd, "", "", "")
             WSqls.Add(ZSql)
 
             ExecuteNonQueries(WSqls.ToArray)
@@ -438,7 +466,7 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
             Throw New Exception("Debe indicarse un estado válido para este Informe de No Conformidad.")
         End If
 
-        If txtProducto.Text.Replace(" ", "").Length > 2 Then
+        If txtProducto.Text.Replace(" ", "").Length > 2 And Not rbVario.Checked Then
 
             If rbMatPrima.Checked And txtProducto.Text.Replace(" ", "").Length < 10 Then Throw New Exception("Debe cargar una Materia Prima válida")
             If rbProdTerminado.Checked And txtProducto.Text.Replace(" ", "").Length < 12 Then Throw New Exception("Debe cargar un Producto Terminado válido")
@@ -472,7 +500,7 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
             End If
         Else
 
-            If Val(txtLotePartida.Text) <> 0 Then
+            If Val(txtLotePartida.Text) <> 0 And Not rbVario.Checked Then
                 Dim WProd As DataRow = _ObtenerProductoAsociado()
 
                 If WProd IsNot Nothing Then txtProducto.Text = OrDefault(WProd.Item("Producto"), "")
@@ -963,4 +991,5 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
         End Try
 
     End Sub
+
 End Class

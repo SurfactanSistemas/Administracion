@@ -70,6 +70,7 @@ Partial Class DetallesIncidencia
         Me.ContextMenuStrip2 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.EliminarArchivoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+        Me.rbVario = New System.Windows.Forms.RadioButton()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -128,6 +129,7 @@ Partial Class DetallesIncidencia
         Me.GroupBox1.Controls.Add(Me.cmbEstado)
         Me.GroupBox1.Controls.Add(Me.txtFecha)
         Me.GroupBox1.Controls.Add(Me.txtProducto)
+        Me.GroupBox1.Controls.Add(Me.rbVario)
         Me.GroupBox1.Controls.Add(Me.rbProdTerminado)
         Me.GroupBox1.Controls.Add(Me.rbMatPrima)
         Me.GroupBox1.Controls.Add(Me.txtReferencia)
@@ -150,7 +152,7 @@ Partial Class DetallesIncidencia
         '
         'txtLotePartida
         '
-        Me.txtLotePartida.Location = New System.Drawing.Point(468, 48)
+        Me.txtLotePartida.Location = New System.Drawing.Point(499, 48)
         Me.txtLotePartida.MaxLength = 6
         Me.txtLotePartida.Name = "txtLotePartida"
         Me.txtLotePartida.Size = New System.Drawing.Size(53, 20)
@@ -206,7 +208,7 @@ Partial Class DetallesIncidencia
         '
         'txtProducto
         '
-        Me.txtProducto.Location = New System.Drawing.Point(313, 48)
+        Me.txtProducto.Location = New System.Drawing.Point(344, 48)
         Me.txtProducto.Mask = ">LL-00000-000"
         Me.txtProducto.Name = "txtProducto"
         Me.txtProducto.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -218,7 +220,7 @@ Partial Class DetallesIncidencia
         'rbProdTerminado
         '
         Me.rbProdTerminado.AutoSize = True
-        Me.rbProdTerminado.Location = New System.Drawing.Point(150, 50)
+        Me.rbProdTerminado.Location = New System.Drawing.Point(125, 50)
         Me.rbProdTerminado.Name = "rbProdTerminado"
         Me.rbProdTerminado.Size = New System.Drawing.Size(103, 17)
         Me.rbProdTerminado.TabIndex = 5
@@ -229,7 +231,7 @@ Partial Class DetallesIncidencia
         '
         Me.rbMatPrima.AutoSize = True
         Me.rbMatPrima.Checked = True
-        Me.rbMatPrima.Location = New System.Drawing.Point(72, 50)
+        Me.rbMatPrima.Location = New System.Drawing.Point(46, 50)
         Me.rbMatPrima.Name = "rbMatPrima"
         Me.rbMatPrima.Size = New System.Drawing.Size(75, 17)
         Me.rbMatPrima.TabIndex = 4
@@ -265,7 +267,7 @@ Partial Class DetallesIncidencia
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(400, 52)
+        Me.Label7.Location = New System.Drawing.Point(431, 52)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(69, 13)
         Me.Label7.TabIndex = 0
@@ -274,10 +276,10 @@ Partial Class DetallesIncidencia
         'txtDescProducto
         '
         Me.txtDescProducto.BackColor = System.Drawing.Color.Cyan
-        Me.txtDescProducto.Location = New System.Drawing.Point(533, 48)
+        Me.txtDescProducto.Location = New System.Drawing.Point(564, 48)
         Me.txtDescProducto.Name = "txtDescProducto"
         Me.txtDescProducto.ReadOnly = True
-        Me.txtDescProducto.Size = New System.Drawing.Size(279, 20)
+        Me.txtDescProducto.Size = New System.Drawing.Size(242, 20)
         Me.txtDescProducto.TabIndex = 1
         Me.txtDescProducto.TabStop = False
         '
@@ -301,7 +303,7 @@ Partial Class DetallesIncidencia
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(259, 52)
+        Me.Label6.Location = New System.Drawing.Point(290, 52)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(53, 13)
         Me.Label6.TabIndex = 0
@@ -554,6 +556,16 @@ Partial Class DetallesIncidencia
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
+        'rbVario
+        '
+        Me.rbVario.AutoSize = True
+        Me.rbVario.Location = New System.Drawing.Point(232, 50)
+        Me.rbVario.Name = "rbVario"
+        Me.rbVario.Size = New System.Drawing.Size(49, 17)
+        Me.rbVario.TabIndex = 5
+        Me.rbVario.Text = "Vario"
+        Me.rbVario.UseVisualStyleBackColor = True
+        '
         'DetallesIncidencia
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -635,4 +647,5 @@ Partial Class DetallesIncidencia
     Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
     Friend WithEvents Button3 As System.Windows.Forms.Button
     Friend WithEvents btnDesvincularSAC As System.Windows.Forms.Button
+    Friend WithEvents rbVario As System.Windows.Forms.RadioButton
 End Class
