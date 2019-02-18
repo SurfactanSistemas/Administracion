@@ -1,6 +1,7 @@
 ﻿Imports System.Configuration
 Imports System.IO
 Imports System.Text.RegularExpressions
+Imports ConsultasVarias
 Imports CrystalDecisions.Shared
 Imports Microsoft.VisualBasic.FileIO
 
@@ -557,6 +558,7 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
     Private Sub _MostrarEnsayosMP()
         If Val(txtLotePartida.Text) = 0 Then Exit Sub
 
+        'With New DetallesEnsayosMP(txtLotePartida.Text)
         With New DetallesEnsayosMP(txtLotePartida.Text)
             .Show(Me)
         End With
@@ -606,8 +608,8 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
                 '
                 Dim WPregunta = New ContinuarSalirMsgBox("¿Como desea asignarle una SAC a este Informe de No Conformidad?",
                                               "Abrir Nueva SAC", "Asignar SAC ya Abierta")
-                WPregunta._DrBtn1 = Windows.Forms.DialogResult.Yes
-                WPregunta._DrBtn2 = Windows.Forms.DialogResult.No
+                WPregunta._DrBtn1 = DialogResult.Yes
+                WPregunta._DrBtn2 = DialogResult.No
 
                 Dim Resp As DialogResult = WPregunta.ShowDialog(Me)
 
@@ -926,7 +928,7 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
 
 #End Region
 
-    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
+    Private Sub Button3_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button3.Click
         Try
             ExecuteNonQueries("UPDATE CargaIncidencias SET ImpreDescProd = CASE inc.TipoProd WHEN 'T' THEN LEFT(t.Descripcion, 100) WHEN 'M' THEN LEFT(a.Descripcion, 100) ELSE '' END FROM CargaIncidencias inc LEFT OUTER JOIN Terminado t ON t.Codigo = inc.Producto LEFT OUTER JOIN Articulo a ON a.Codigo = inc.Producto")
 
@@ -944,7 +946,7 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
             .Formula = "{CargaIncidencias.Incidencia} = " & txtIncidencia.Text
             .Reporte.SetParameterValue("MostrarPosiblesUsos", 1)
             .Reporte.SetParameterValue("MostrarAcciones", 0)
-            
+
             Dim WNombreArchivo = String.Format("INC {0} - {1}", txtIncidencia.Text.PadLeft(4, "0"), Date.Now.ToString("dd-MM-yyyy"))
 
             Select Case TipoFormato
@@ -973,7 +975,7 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
         End With
     End Sub
 
-    Private Sub btnDesvincularSAC_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDesvincularSAC.Click
+    Private Sub btnDesvincularSAC_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnDesvincularSAC.Click
 
         Try
 

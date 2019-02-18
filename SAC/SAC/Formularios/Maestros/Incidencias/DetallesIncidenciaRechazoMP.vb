@@ -1,6 +1,7 @@
 ﻿Imports System.Configuration
 Imports System.IO
 Imports System.Text.RegularExpressions
+Imports ConsultasVarias
 Imports CrystalDecisions.Shared
 Imports Microsoft.VisualBasic.FileIO
 

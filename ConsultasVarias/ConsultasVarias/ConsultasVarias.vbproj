@@ -82,28 +82,34 @@
     <Compile Include="Clases\Helper.vb" />
     <Compile Include="Clases\Operador.vb" />
     <Compile Include="Clases\Query.vb" />
-    <Compile Include="Consultas\DetalleMovimientosMP.designer.vb">
+    <Compile Include="Consultas\MPs\DetalleMovimientosMP.designer.vb">
       <DependentUpon>DetalleMovimientosMP.vb</DependentUpon>
     </Compile>
-    <Compile Include="Consultas\DetalleMovimientosMP.vb">
+    <Compile Include="Consultas\MPs\DetalleMovimientosMP.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Consultas\DetallesEnsayosMP.designer.vb">
+    <Compile Include="Consultas\PTs\DetalleMovimientosPT.designer.vb">
+      <DependentUpon>DetalleMovimientosPT.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Consultas\PTs\DetalleMovimientosPT.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Consultas\MPs\DetallesEnsayosMP.designer.vb">
       <DependentUpon>DetallesEnsayosMP.vb</DependentUpon>
     </Compile>
-    <Compile Include="Consultas\DetallesEnsayosMP.vb">
+    <Compile Include="Consultas\MPs\DetallesEnsayosMP.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Consultas\DetallesEnsayosPT.designer.vb">
+    <Compile Include="Consultas\PTs\DetallesEnsayosPT.designer.vb">
       <DependentUpon>DetallesEnsayosPT.vb</DependentUpon>
     </Compile>
-    <Compile Include="Consultas\DetallesEnsayosPT.vb">
+    <Compile Include="Consultas\PTs\DetallesEnsayosPT.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Consultas\DetallesHojaProduccion.designer.vb">
+    <Compile Include="Consultas\HojasProduccion\DetallesHojaProduccion.designer.vb">
       <DependentUpon>DetallesHojaProduccion.vb</DependentUpon>
     </Compile>
-    <Compile Include="Consultas\DetallesHojaProduccion.vb">
+    <Compile Include="Consultas\HojasProduccion\DetallesHojaProduccion.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.vb">
@@ -130,16 +136,19 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Consultas\DetalleMovimientosMP.resx">
+    <EmbeddedResource Include="Consultas\MPs\DetalleMovimientosMP.resx">
       <DependentUpon>DetalleMovimientosMP.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Consultas\DetallesEnsayosMP.resx">
+    <EmbeddedResource Include="Consultas\PTs\DetalleMovimientosPT.resx">
+      <DependentUpon>DetalleMovimientosPT.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Consultas\MPs\DetallesEnsayosMP.resx">
       <DependentUpon>DetallesEnsayosMP.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Consultas\DetallesEnsayosPT.resx">
+    <EmbeddedResource Include="Consultas\PTs\DetallesEnsayosPT.resx">
       <DependentUpon>DetallesEnsayosPT.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Consultas\DetallesHojaProduccion.resx">
+    <EmbeddedResource Include="Consultas\HojasProduccion\DetallesHojaProduccion.resx">
       <DependentUpon>DetallesHojaProduccion.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
