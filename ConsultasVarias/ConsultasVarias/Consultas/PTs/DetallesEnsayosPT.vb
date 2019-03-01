@@ -1,4 +1,8 @@
 ﻿Imports System.ComponentModel
+Imports ConsultasVarias.Clases
+Imports ConsultasVarias.Clases.Query
+Imports ConsultasVarias.Clases.Helper
+Imports ConsultasVarias.Clases.Globales
 
 Public Class DetallesEnsayosPT
     Private WLote As String = ""
@@ -51,8 +55,11 @@ Public Class DetallesEnsayosPT
             If emp.ToUpper = "SURFACTAN_III" Then
                 ' Verificamos si se trata o no de un producto de Farma (Planta III).
                 WDatosEnsayos = GetSingle(String.Format("SELECT TOP 1 Clave FROM PrueterFarma WHERE Partida = {0} And Renglon = 1 ", WLote), emp)
-                If WDatosEnsayos IsNot Nothing Then _MostrarEnsayosFarma()
-                Exit Sub
+                If WDatosEnsayos IsNot Nothing Then
+                    _MostrarEnsayosFarma()
+                    Exit Sub
+                End If
+
             Else
                 WDatosEnsayos = GetSingle(String.Format("SELECT TOP 1 * FROM Prueter WHERE Prueba IN ('1{0}', '2{0}')", WLote.PadLeft(6, "0")), emp)
             End If
@@ -96,7 +103,7 @@ Public Class DetallesEnsayosPT
                 Dim WRenglonEns = 0
 
                 For i = 1 To 10
-                    If WRenglonEns <= WEnsayos.Rows.Count Then
+                    If WRenglonEns < WEnsayos.Rows.Count Then
                         If Val(OrDefault(WEspecif.Item("Ensayo" & i), "")) <> 0 Then
                             WEnsayos.Rows(WRenglonEns).Item("Ensayo") = OrDefault(WEspecif.Item("Ensayo" & i), "")
                             WEnsayos.Rows(WRenglonEns).Item("ValorStd") = Trim(OrDefault(WEspecif.Item("Valor" & i), "")) & " " & Trim(OrDefault(WEspecif.Item("Valor" & i & "" & i), ""))
@@ -127,6 +134,7 @@ Public Class DetallesEnsayosPT
         If WEnsayos.Rows.Count = 0 Then
             MsgBox("No se encontraron resultados para poder mostrar.", MsgBoxStyle.Information)
             Button1_Click(Nothing, Nothing)
+            Exit Sub
         End If
 
         DataGridView1.Columns("Valor").Visible = False
@@ -219,6 +227,7 @@ Public Class DetallesEnsayosPT
         If WEnsayos.Rows.Count = 0 Then
             MsgBox("No se encontraron resultados para poder mostrar.", MsgBoxStyle.Information)
             Button1_Click(Nothing, Nothing)
+            Exit Sub
         End If
 
 

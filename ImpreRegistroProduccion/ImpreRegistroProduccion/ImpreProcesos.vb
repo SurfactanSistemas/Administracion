@@ -24,19 +24,38 @@ Public Class ImpreProcesos
                         Dim WTipoReporte As Integer = Environment.GetCommandLineArgs(2)
                         Dim WPartida As Integer = Environment.GetCommandLineArgs(3)
                         Dim WTipoSalida As Integer = Environment.GetCommandLineArgs(4)
-                        
+
                         _GenerarCertificadoAnalisisFarma(WTipoReporte, WPartida, WTipoSalida)
 
                     Case 3 ' Resultados de Calidad (PrueterFarma -> Registro de Producción)
 
+                        Dim WLim = Environment.GetCommandLineArgs.Length - 1
+
                         Dim WPartida As Integer = Environment.GetCommandLineArgs(2)
                         Dim WTipoSalida As Integer = 0
+                        Dim WFechaVto = " ", WImpreFechaVto = " ", WFechaElabora = " ", WImpreFechaElaboracion = " "
 
-                        If Environment.GetCommandLineArgs.Length > 2 Then
+                        If WLim > 2 Then
                             WTipoSalida = Environment.GetCommandLineArgs(3)
                         End If
 
-                        _GenerarReporteResultadosCalidad(WPartida, WTipoSalida)
+                        If WLim > 3 Then
+                            WFechaVto = Environment.GetCommandLineArgs(4)
+                        End If
+
+                        If WLim > 4 Then
+                            WImpreFechaVto = Environment.GetCommandLineArgs(5)
+                        End If
+
+                        If WLim > 5 Then
+                            WFechaElabora = Environment.GetCommandLineArgs(6)
+                        End If
+
+                        If WLim > 6 Then
+                            WImpreFechaElaboracion = Environment.GetCommandLineArgs(7)
+                        End If
+
+                        _GenerarReporteResultadosCalidad(WPartida, WTipoSalida, WFechaVto, WImpreFechaVto, WFechaElabora, WImpreFechaElaboracion)
 
                     Case Else
                         Close()
@@ -54,10 +73,10 @@ Public Class ImpreProcesos
 
             '_GenerarCertificadoAnalisisFarma(WTipoReporte2, WPartida2, WTipoSalida2)
 
-            'Dim WTerminado2 As String = "PT-25114-100"
-            'Dim WPartida2 As Integer = "309079"
+            Dim WTerminado2 As String = "PT-25012-100"
+            Dim WPartida2 As Integer = "0"
 
-            '_GenerarRegistroProduccion(WTerminado2, WPartida2)
+            _GenerarRegistroProduccion(WTerminado2, WPartida2)
 
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
@@ -68,11 +87,15 @@ Public Class ImpreProcesos
         End Try
 
     End Sub
-
-    Private Sub _GenerarReporteResultadosCalidad(ByVal wPartida As Integer, ByVal wTipoSalida As Integer)
+    
+    Private Sub _GenerarReporteResultadosCalidad(ByVal wPartida As Integer, ByVal wTipoSalida As Integer, ByVal wFechaVto As String, ByVal wImpreFechaVto As String, ByVal wFechaElabora As String, ByVal wImpreFechaElaboracion As String)
 
         With New VistaPrevia
             .Reporte = New imprecalidadresultado
+            .Reporte.SetParameterValue("FechaVto", wFechaVto)
+            .Reporte.SetParameterValue("ImpreFechaVto", wImpreFechaVto)
+            .Reporte.SetParameterValue("FechaElabora", wFechaElabora)
+            .Reporte.SetParameterValue("ImpreFechaElaboracion", wImpreFechaElaboracion)
             .Formula = "{Prueterfarma.Partida} = " & wPartida & " And {Hoja.Hoja} = {Prueterfarma.Partida} And {Hoja.Renglon} = 1"
 
             Select Case wTipoSalida

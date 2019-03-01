@@ -1,6 +1,11 @@
-﻿Public Class DetallesEnsayosMP
+﻿Imports ConsultasVarias.Clases
+Imports ConsultasVarias.Clases.Query
+Imports ConsultasVarias.Clases.Helper
+Imports ConsultasVarias.Clases.Globales
+
+Public Class DetallesEnsayosMP
     Private WLote As String = ""
-    
+
     Sub New(ByVal _Lote As Object)
 
         ' This call is required by the designer.
@@ -271,5 +276,12 @@
 
     Private Sub Button1_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button1.Click
         Close()
+    End Sub
+
+    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+        If Val(txtLote.Text) = 0 Then Exit Sub
+        With New DetalleMovimientosMP(txtLote.Text)
+            .Show(Me)
+        End With
     End Sub
 End Class

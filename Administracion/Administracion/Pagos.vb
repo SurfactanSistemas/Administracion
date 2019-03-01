@@ -384,6 +384,8 @@ Public Class Pagos
         ' Corroboramos que no exista una Orden de Pago con el mismo numero que el actual.
         If Val(txtOrdenPago.Text) <> 0 Then
             If _ExisteOrdenDePago(txtOrdenPago.Text) Then
+                MsgBox("Ya existe una Orden de Pago con esta numeración. Para grabar una nueva Orden de Pago debe dejar en 0 el campo 'Orden de Pago'", MsgBoxStyle.Exclamation)
+                txtOrdenPago.Focus()
                 Return False
             End If
         End If
@@ -2776,18 +2778,46 @@ Public Class Pagos
         ' Reconectamos a la base original.
         cn.ConnectionString = _CS()
 
-        ' Actualizamos los numero de Certificados de Retenciones.
-        ZSql = ""
-        ZSql &= "UPDATE Pagos SET "
-        ZSql &= " CertificadoGan = " & "" & Val(WCertificadoGan) & ","
-        ZSql &= " CertificadoIb = " & "" & Val(WCertificadoIb) & ","
-        ZSql &= " CertificadoIbCiudad = " & "" & Val(WCertificadoIbCiudad) & ","
-        ZSql &= " CertificadoIva = " & "" & Val(WCertificadoIVA) & ""
-        ZSql &= " Where Orden = " & "'" & txtOrdenPago.Text & "'"
-
         Try
 
             cn.Open()
+            cm.CommandText = "SELECT * FROM Proveedor WHERE Proveedor = '" & txtProveedor.Text & "'"
+            Dim _TipoProv, _TipoIva, _TipoIb, _TipoIbCaba, _PorceIb, _PorceIbCaba As String
+
+            Using dr As SqlDataReader = cm.ExecuteReader
+
+                With dr
+                    If .HasRows Then
+                        .Read()
+                        _TipoProv = OrDefault(.Item("Tipo"), "")
+                        _TipoIva = OrDefault(.Item("Iva"), "")
+                        _TipoIb = OrDefault(.Item("CodIb"), "")
+                        _TipoIbCaba = OrDefault(.Item("CodIbCaba"), "")
+                        _PorceIb = OrDefault(.Item("PorceIb"), "0")
+                        _PorceIbCaba = OrDefault(.Item("PorceIbCaba"), "0")
+                    End If
+                End With
+
+            End Using
+
+
+            ' Actualizamos los numero de Certificados de Retenciones y datos historicos.
+            ZSql = ""
+            ZSql &= "UPDATE Pagos SET "
+            ZSql &= " CertificadoGan = " & "" & Val(WCertificadoGan) & ","
+            ZSql &= " CertificadoIb = " & "" & Val(WCertificadoIb) & ","
+            ZSql &= " CertificadoIbCiudad = " & "" & Val(WCertificadoIbCiudad) & ","
+            ZSql &= " CertificadoIva = " & "" & Val(WCertificadoIVA) & ","
+            ZSql &= " TipoProv = " & "'" & _TipoProv & "',"
+            ZSql &= " TipoIva = " & "'" & _TipoIva & "',"
+            ZSql &= " TipoIB = " & "'" & _TipoIb & "',"
+            ZSql &= " TipoIBCaba = " & "'" & _TipoIbCaba & "',"
+            ZSql &= " PorceIB = " & "" & formatonumerico(_PorceIb) & ","
+            ZSql &= " PorceIBCaba = " & "" & formatonumerico(_PorceIbCaba) & ","
+            ZSql &= " RetencionesRegistradas = '1'"
+            ZSql &= " Where Orden = " & "'" & txtOrdenPago.Text & "'"
+
+
             cm.CommandText = ZSql
             cm.ExecuteNonQuery()
 
@@ -5108,6 +5138,23 @@ Public Class Pagos
 
         End Try
 
+        Dim _ProvHist As DataRow = _TraerDatosProveHistorico()
+
+        If Not IsNothing(_ProvHist) Then
+            With _ProvHist
+                If Val(.Item("RetencionesRegistradas")) = 1 Then
+                    WTipoIb = .Item("TipoIb")
+                    WTipoIbCaba = .Item("TipoIbCaba")
+                    WTipoiva = Val(.Item("TipoIva"))
+                    WTipoprv = Val(.Item("TipoProv")) + 1
+                    WPorceIb = formatonumerico(.Item("PorceIb"))
+                    WPorceIbCaba = formatonumerico(.Item("PorceIbCaba"))
+                    WPorceIb = WPorceIb.Replace(".", ",")
+                    WPorceIbCaba = WPorceIb.Replace(".", ",")
+                End If
+            End With
+        End If
+
         ImpreCopia(1) = "Original"
         ImpreCopia(2) = "Duplicado"
 
@@ -5430,6 +5477,23 @@ Public Class Pagos
 
         End Try
 
+        Dim _ProvHist As DataRow = _TraerDatosProveHistorico()
+
+        If Not IsNothing(_ProvHist) Then
+            With _ProvHist
+                If Val(.Item("RetencionesRegistradas")) = 1 Then
+                    WTipoIb = .Item("TipoIb")
+                    WTipoIbCaba = .Item("TipoIbCaba")
+                    WTipoiva = Val(.Item("TipoIva"))
+                    WTipoprv = Val(.Item("TipoProv")) + 1
+                    WPorceIb = formatonumerico(.Item("PorceIb"))
+                    WPorceIbCaba = formatonumerico(.Item("PorceIbCaba"))
+                    WPorceIb = WPorceIb.Replace(".", ",")
+                    WPorceIbCaba = WPorceIb.Replace(".", ",")
+                End If
+            End With
+        End If
+
         ImpreCopia(1) = "Original"
         ImpreCopia(2) = "Duplicado"
 
@@ -5705,6 +5769,47 @@ Public Class Pagos
         End With
     End Sub
 
+    Private Function _TraerDatosProveHistorico() As DataRow
+
+        Dim tabla As New DataTable
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT ISNULL(TipoProv, 0) TipoProv, " &
+                                              "ISNULL(TipoIva, 0) TipoIva, " &
+                                              "ISNULL(TipoIb, 0) TipoIb, " &
+                                              "ISNULL(TipoIbCaba, 0) TipoIbCaba, " &
+                                              "ISNULL(PorceIb, 0) PorceIb, " &
+                                              "ISNULL(PorceIbCaba, 0) PorceIbCaba, " &
+                                              "ISNULL(RetencionesRegistradas, 0) RetencionesRegistradas " &
+                                              "FROM Pagos WHERE Orden = '" & txtOrdenPago.Text & "' And Renglon IN ('1', '01')")
+        Dim dr As SqlDataReader
+
+        Try
+
+            cn.ConnectionString = Proceso._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            tabla.Load(dr)
+
+            If tabla.Rows.Count > 0 Then Return tabla.Rows(0)
+
+            Return Nothing
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar los datos historicos de la Orden de Pago desde la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+    End Function
+
     Private Sub _ImprimirComprobanteRetencionIB()
         Dim Tabla As New DataTable("Detalles")
         Dim row As DataRow
@@ -5766,6 +5871,23 @@ Public Class Pagos
             cn.Close()
 
         End Try
+
+        Dim _ProvHist As DataRow = _TraerDatosProveHistorico()
+
+        If Not IsNothing(_ProvHist) Then
+            With _ProvHist
+                If Val(.Item("RetencionesRegistradas")) = 1 Then
+                    WTipoIb = .Item("TipoIb")
+                    WTipoIbCaba = .Item("TipoIbCaba")
+                    WTipoiva = Val(.Item("TipoIva"))
+                    WTipoprv = Val(.Item("TipoProv")) + 1
+                    WPorceIb = formatonumerico(.Item("PorceIb"))
+                    WPorceIbCaba = formatonumerico(.Item("PorceIbCaba"))
+                    WPorceIb = WPorceIb.Replace(".", ",")
+                    WPorceIbCaba = WPorceIb.Replace(".", ",")
+                End If
+            End With
+        End If
 
         ImpreCopia(1) = "Original"
         ImpreCopia(2) = "Duplicado"
@@ -7791,4 +7913,5 @@ Public Class Pagos
 
         End If
     End Sub
+
 End Class

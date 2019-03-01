@@ -57,12 +57,12 @@
     Private Sub btnGrabar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnGrabar.Click
         Try
             If {txtDescripcion, txtCodigo}.Any(Function(txt) txt.Text.Trim = "") Then
-                Throw New Exception("Los campos 'Descripcion' y 'Estado' son obligatorios y no pueden estar vacíos.")
+                Throw New Exception("Los campos 'Descripcion' y 'Codigo' son obligatorios y no pueden estar vacíos.")
             End If
 
             txtDescripcion.Text = Microsoft.VisualBasic.Left(txtDescripcion.Text, 50)
 
-            ExecuteNonQueries("DELETE FROM TiposINC WHERE Tipo = '" & txtCodigo.Text & "'", "INSERT INTO TiposINC (Tipo, Descripcion) VALUES (" & txtCodigo.Text & ", '" & txtDescripcion.Text.Trim.SliceLeft(30) & "')")
+            ExecuteNonQueries("DELETE FROM TiposINC WHERE Tipo = '" & txtCodigo.Text & "'", "INSERT INTO TiposINC (Tipo, Descripcion) VALUES (" & txtCodigo.Text & ", '" & txtDescripcion.Text & "')")
 
             Dim WOwner = TryCast(Owner, INuevoTipoINC)
 

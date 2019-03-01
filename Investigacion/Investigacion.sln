@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Investigacion", "Investigacion\Investigacion.vbproj", "{4E562337-9DE3-477A-931A-08CC06658A41}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ConsultasVarias", "..\ConsultasVarias\ConsultasVarias\ConsultasVarias.vbproj", "{CC5D60FD-9755-4C61-B96C-F56173586BB9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4E562337-9DE3-477A-931A-08CC06658A41}.Debug|x86.ActiveCfg = Debug|x86
+		{4E562337-9DE3-477A-931A-08CC06658A41}.Debug|x86.Build.0 = Debug|x86
+		{4E562337-9DE3-477A-931A-08CC06658A41}.Release|x86.ActiveCfg = Release|x86
+		{4E562337-9DE3-477A-931A-08CC06658A41}.Release|x86.Build.0 = Release|x86
+		{CC5D60FD-9755-4C61-B96C-F56173586BB9}.Debug|x86.ActiveCfg = Debug|x86
+		{CC5D60FD-9755-4C61-B96C-F56173586BB9}.Debug|x86.Build.0 = Debug|x86
+		{CC5D60FD-9755-4C61-B96C-F56173586BB9}.Release|x86.ActiveCfg = Release|x86
+		{CC5D60FD-9755-4C61-B96C-F56173586BB9}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

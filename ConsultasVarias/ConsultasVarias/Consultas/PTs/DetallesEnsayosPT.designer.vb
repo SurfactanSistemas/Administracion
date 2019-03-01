@@ -167,7 +167,6 @@ Partial Class DetallesEnsayosPT
         Me.txtCodigo.ReadOnly = True
         Me.txtCodigo.Size = New System.Drawing.Size(80, 20)
         Me.txtCodigo.TabIndex = 7
-        Me.txtCodigo.Text = "PT25000999"
         '
         'Label4
         '
@@ -224,7 +223,6 @@ Partial Class DetallesEnsayosPT
         Me.txtFecha.ReadOnly = True
         Me.txtFecha.Size = New System.Drawing.Size(67, 20)
         Me.txtFecha.TabIndex = 7
-        Me.txtFecha.Text = "99999999"
         Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label7

@@ -27,6 +27,11 @@ Module Proceso
 
         End Get
     End Property
+    Public Function OrDefault(ByVal valor As Object, ByVal def As Object) As Object
+        If IsDBNull(valor) Or valor Is Nothing Then Return def
+
+        Return valor
+    End Function
 
     Public Function getNombrePC() As String
         Return My.Computer.Name

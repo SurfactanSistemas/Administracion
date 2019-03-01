@@ -54,6 +54,7 @@ Partial Class DetalleMovimientosPT
         Me.FechaOrd = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Entrada = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Salida = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Marca = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -136,7 +137,6 @@ Partial Class DetalleMovimientosPT
         '
         Me.txtLotePartida.Location = New System.Drawing.Point(101, 48)
         Me.txtLotePartida.Name = "txtLotePartida"
-        Me.txtLotePartida.ReadOnly = True
         Me.txtLotePartida.Size = New System.Drawing.Size(101, 20)
         Me.txtLotePartida.TabIndex = 2
         Me.txtLotePartida.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -178,7 +178,6 @@ Partial Class DetalleMovimientosPT
         Me.txtFecha.ReadOnly = True
         Me.txtFecha.Size = New System.Drawing.Size(69, 20)
         Me.txtFecha.TabIndex = 1
-        Me.txtFecha.Text = "99999999"
         Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtFechaCierre
@@ -190,7 +189,6 @@ Partial Class DetalleMovimientosPT
         Me.txtFechaCierre.ReadOnly = True
         Me.txtFechaCierre.Size = New System.Drawing.Size(69, 20)
         Me.txtFechaCierre.TabIndex = 1
-        Me.txtFechaCierre.Text = "99999999"
         Me.txtFechaCierre.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtCodigo
@@ -202,7 +200,6 @@ Partial Class DetalleMovimientosPT
         Me.txtCodigo.ReadOnly = True
         Me.txtCodigo.Size = New System.Drawing.Size(78, 20)
         Me.txtCodigo.TabIndex = 1
-        Me.txtCodigo.Text = "AA99999900"
         Me.txtCodigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label8
@@ -265,7 +262,7 @@ Partial Class DetalleMovimientosPT
         Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.AllowUserToDeleteRows = False
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Tipo, Me.TipoMov, Me.Observaciones, Me.LotePartida, Me.Fecha, Me.FechaOrd, Me.Entrada, Me.Salida})
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Tipo, Me.TipoMov, Me.Observaciones, Me.LotePartida, Me.Fecha, Me.FechaOrd, Me.Entrada, Me.Salida, Me.Marca})
         Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.DataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.DataGridView1.Location = New System.Drawing.Point(0, 146)
@@ -355,6 +352,14 @@ Partial Class DetalleMovimientosPT
         Me.Salida.ReadOnly = True
         Me.Salida.Width = 61
         '
+        'Marca
+        '
+        Me.Marca.DataPropertyName = "Marca"
+        Me.Marca.HeaderText = "Marca"
+        Me.Marca.Name = "Marca"
+        Me.Marca.ReadOnly = True
+        Me.Marca.Visible = False
+        '
         'DetalleMovimientosPT
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -404,4 +409,5 @@ Partial Class DetalleMovimientosPT
     Friend WithEvents FechaOrd As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Entrada As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Salida As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Marca As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

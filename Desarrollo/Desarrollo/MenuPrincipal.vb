@@ -13,7 +13,6 @@ Public Class MenuPrincipal
     End Sub
 
     Private Sub CerrarSistemaToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CerrarSistemaToolStripMenuItem.Click
-        Login.Dispose()
         Close()
     End Sub
 

@@ -842,6 +842,9 @@ Public Class IngresoPruebasEnsayo
             cm.CommandText = ZSql
             cm.ExecuteNonQuery()
 
+            btnRecalculaCosto_Click(Nothing, Nothing)
+
+
             ' Guardamos datos de la Fórmula.
             Dim ZTipo = "", ZArticulo = "", ZTerminado = "", ZDescripcion = "", ZCantidad = "", ZLote = "", ZStock = "", ZCosto = "", ZPartiOri = "", WRenglon = ""
             For Each _row As DataGridViewRow In dgvFormula.Rows
@@ -2651,7 +2654,7 @@ Public Class IngresoPruebasEnsayo
                         WCosto = _CalcularCostoMP(WMateriaPrima)
 
                     Case Else
-                        Continue For
+                        'Continue For
                 End Select
 
                 WindiceCosto = dgvCosto.Rows.Add

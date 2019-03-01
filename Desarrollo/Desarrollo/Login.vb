@@ -40,13 +40,15 @@ Public Class Login
 
         End If
 
-        Me.Visible = False
+        MenuPrincipal.Show()
 
-        _MenuPrincipal.Close()
+        '_MenuPrincipal.Close()
 
-        _MenuPrincipal = New MenuPrincipal
+        '_MenuPrincipal = New MenuPrincipal
 
-        _MenuPrincipal.Show()
+        '_MenuPrincipal.Show()
+
+        Close()
 
     End Sub
 

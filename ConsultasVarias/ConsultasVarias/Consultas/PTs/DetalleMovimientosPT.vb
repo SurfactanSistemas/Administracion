@@ -1,17 +1,26 @@
 ﻿Imports System.ComponentModel
+Imports ConsultasVarias.Clases
+Imports ConsultasVarias.Clases.Query
+Imports ConsultasVarias.Clases.Helper
+Imports ConsultasVarias.Clases.Globales
 
 Public Class DetalleMovimientosPT
 
     Dim WLote As Object = 0
-    Dim WMovimientos As New DataTable
 
-    Sub New(ByVal _Lote As Object)
+    Dim WIncluirHistorico As Boolean = False
+
+    Sub New(Optional ByVal _Lote As Object = 0, Optional ByVal IncluirHistorico As Boolean = False)
 
         ' This call is required by the designer.
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
         WLote = _Lote
+        WIncluirHistorico = IncluirHistorico
+
+        txtLotePartida.ReadOnly = WLote <> 0
+
     End Sub
 
     Private Sub DetalleMovimientosMP_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
@@ -36,18 +45,7 @@ Public Class DetalleMovimientosPT
 
         txtSaldo.BackColor = Globales.WBackColorTerciario
 
-        With WMovimientos.Columns
-            .Add("Tipo")
-            .Add("Fecha")
-            .Add("FechaOrd", GetType(Integer))
-            .Add("Numero", GetType(Double))
-            .Add("Entrada")
-            .Add("Salida")
-            .Add("Observaciones")
-            .Add("TipoMov")
-        End With
-
-        BackgroundWorker1.RunWorkerAsync()
+        If WLote <> 0 Then BackgroundWorker1.RunWorkerAsync()
     End Sub
 
     Private Sub BackgroundWorker1_DoWork(ByVal sender As Object, ByVal e As DoWorkEventArgs) Handles BackgroundWorker1.DoWork
@@ -60,10 +58,29 @@ Public Class DetalleMovimientosPT
         Dim WTipoPT As String = ""
         Dim WPartiOrig As String = ""
         Dim Auxi = ""
+        Dim WMarca = ""
+
+        Dim WMovimientos As New DataTable
+
+        With WMovimientos.Columns
+            .Add("Tipo")
+            .Add("Fecha")
+            .Add("FechaOrd", GetType(Integer))
+            .Add("Numero", GetType(Double))
+            .Add("Entrada")
+            .Add("Salida")
+            .Add("Observaciones")
+            .Add("TipoMov")
+            .Add("Marca")
+        End With
+
+        Dim WFiltroMarca As String = " And ISNULL(Marca, '') <> 'X' "
+
+        If WIncluirHistorico Then WFiltroMarca = ""
 
         For Each empresa As String In Empresas
-
-            Dim WHoja1 As DataRow = GetSingle("SELECT Producto, Fecha FROM Hoja WHERE Hoja = '" & WLote & "' And Renglon IN ('1', '01')", empresa)
+            WMarca = ""
+            Dim WHoja1 As DataRow = GetSingle("SELECT Producto, Fecha FROM Hoja WHERE Hoja = '" & WLote & "' And Renglon IN ('1', '01') ", empresa)
 
             If WHoja1 Is Nothing Then Continue For
 
@@ -94,10 +111,10 @@ Public Class DetalleMovimientosPT
             ' Busco la o las Hojas que correspondan con el Lote o PartiOrig segun sea o no Reventa.
             '
             
-            Dim WHojas2 As DataRow = GetSingle("SELECT * FROM Hoja WHERE Producto = '" & WCodPT & "' And Hoja = '" & Auxi & "' And Renglon IN ('1', '01')", empresa)
+            Dim WHojas2 As DataRow = GetSingle("SELECT * FROM Hoja WHERE Producto = '" & WCodPT & "' And Hoja = '" & Auxi & "' And Renglon IN ('1', '01')" & WFiltroMarca, empresa)
 
             Dim WDescr, WNumero, WFecha, WFechaOrd, WObservaciones, WLiberada As String
-
+            WMarca = ""
             If WHojas2 IsNot Nothing Then
 
                 With WHojas2
@@ -110,8 +127,13 @@ Public Class DetalleMovimientosPT
                         WLiberada = OrDefault(.Item("RealAnt"), 0)
                     End If
 
+                    If WLiberada = 0 Then
+                        WLiberada = OrDefault(.Item("Teorico"), 0)
+                    End If
+
                     WLiberada = formatonumerico(WLiberada)
                     WFecha = OrDefault(.Item("Fecha"), "")
+                    WMarca = OrDefault(.Item("Marca"), "")
 
                     If OrDefault(.Item("FechaFinal"), "").ToString.Replace("/", "").Trim <> "" Then
                         WFecha = OrDefault(.Item("FechaFinal"), "")
@@ -132,6 +154,7 @@ Public Class DetalleMovimientosPT
                         .Item("Salida") = ""
                         .Item("Observaciones") = WObservaciones
                         .Item("TipoMov") = WDescr
+                        .Item("Marca") = WMarca
                     End With
                     WMovimientos.Rows.Add(r)
                 End If
@@ -142,9 +165,10 @@ Public Class DetalleMovimientosPT
             ' Busco uso en Hojas de Producción posteriores a la Fecha de Cierre
             '
 
-            Dim WHojas As DataTable = GetAll("SELECT * FROM Hoja WHERE Tipo = 'T' And ISNULL(Marca, '') <> 'X' And (Lote1 = '" & WLote & "' Or Lote2 = '" & WLote & "' Or Lote3 = '" & WLote & "')", empresa)
+            Dim WHojas As DataTable = GetAll("SELECT * FROM Hoja WHERE Tipo = 'T' " & WFiltroMarca & " And (Lote1 = '" & WLote & "' Or Lote2 = '" & WLote & "' Or Lote3 = '" & WLote & "')", empresa)
 
             For Each row As DataRow In WHojas.Rows
+                WMarca = ""
                 With row
                     For i = 1 To 3
                         Auxi = OrDefault(.Item("Lote" & i), 0)
@@ -154,6 +178,7 @@ Public Class DetalleMovimientosPT
                             WLiberada = formatonumerico(WLiberada)
                             WNumero = OrDefault(.Item("Hoja"), 0)
                             WFecha = OrDefault(.Item("Fecha"), "")
+                            WMarca = OrDefault(.Item("Marca"), "")
 
                             If OrDefault(.Item("FechaFinal"), "").ToString.Replace("/", "").Trim <> "" Then
                                 WFecha = OrDefault(.Item("FechaFinal"), "")
@@ -173,6 +198,7 @@ Public Class DetalleMovimientosPT
                                 .Item("Entrada") = ""
                                 .Item("Observaciones") = WObservaciones
                                 .Item("TipoMov") = WDescr
+                                .Item("Marca") = WMarca
                             End With
                             WMovimientos.Rows.Add(r)
 
@@ -186,8 +212,9 @@ Public Class DetalleMovimientosPT
             ' Busco uso en Movimientos Varios.
             '
 
-            Dim WMovVars As DataTable = GetAll("SELECT * FROM MovVar WHERE Tipo = 'T' And ISNULL(Marca, '') <> 'X' And Lote = '" & WLote & "'", empresa)
+            Dim WMovVars As DataTable = GetAll("SELECT * FROM MovVar WHERE Tipo = 'T' " & WFiltroMarca & " And Lote = '" & WLote & "'", empresa)
 
+            WMarca = ""
             For Each row As DataRow In WMovVars.Rows
                 With row
 
@@ -198,6 +225,7 @@ Public Class DetalleMovimientosPT
                     WFecha = OrDefault(.Item("Fecha"), "")
                     WFechaOrd = ordenaFecha(WFecha)
                     WObservaciones = OrDefault(.Item("Observaciones"), "")
+                    WMarca = OrDefault(.Item("Marca"), "")
                     WDescr = "Mov. Var"
 
                     Dim r = WMovimientos.NewRow
@@ -217,6 +245,7 @@ Public Class DetalleMovimientosPT
                         If {1, 2}.Contains(Val(Auxi)) Then WDescr = "Mov. Var"
 
                         .Item("TipoMov") = WDescr
+                        .Item("Marca") = WMarca
                     End With
                     WMovimientos.Rows.Add(r)
 
@@ -227,8 +256,8 @@ Public Class DetalleMovimientosPT
             ' Busco uso en Movimientos Varios.
             '
 
-            Dim WGuiasInt As DataTable = GetAll("SELECT * FROM Guia WHERE Tipo = 'T' And ISNULL(Marca, '') <> 'X' And (Lote = '" & WLote & "' Or Partida = '" & WLote & "')", empresa)
-
+            Dim WGuiasInt As DataTable = GetAll("SELECT * FROM Guia WHERE Tipo = 'T' " & WFiltroMarca & " And (Lote = '" & WLote & "' Or Partida = '" & WLote & "')", empresa)
+            WMarca = ""
             For Each row As DataRow In WGuiasInt.Rows
                 With row
 
@@ -241,6 +270,7 @@ Public Class DetalleMovimientosPT
                     WLiberada = formatonumerico(WLiberada)
                     WNumero = OrDefault(.Item("Codigo"), 0)
                     WFecha = OrDefault(.Item("Fecha"), "")
+                    WMarca = OrDefault(.Item("Marca"), "")
                     WFechaOrd = ordenaFecha(WFecha)
                     WObservaciones = ""
                     WDescr = "Guía Int."
@@ -321,6 +351,7 @@ Public Class DetalleMovimientosPT
                         .Item("Entrada") = IIf(WMovi = "S", "", formatonumerico(WLiberada))
                         .Item("Observaciones") = WObservaciones
                         .Item("TipoMov") = WDescr
+                        .Item("Marca") = WMarca
                     End With
                     WMovimientos.Rows.Add(r)
 
@@ -331,8 +362,8 @@ Public Class DetalleMovimientosPT
             ' Busco uso en Movimientos de Laboratorio.
             '
 
-            Dim WMovLab As DataTable = GetAll("SELECT * FROM MovLab WHERE Tipo = 'T' And ISNULL(Marca, '') <> 'X' And Lote = '" & WLote & "'", empresa)
-
+            Dim WMovLab As DataTable = GetAll("SELECT * FROM MovLab WHERE Tipo = 'T' " & WFiltroMarca & " And Lote = '" & WLote & "'", empresa)
+            WMarca = ""
             For Each row As DataRow In WMovLab.Rows
                 With row
 
@@ -341,6 +372,7 @@ Public Class DetalleMovimientosPT
                     Auxi = OrDefault(.Item("Movi"), "")
                     WNumero = OrDefault(.Item("Codigo"), 0)
                     WFecha = OrDefault(.Item("Fecha"), "")
+                    WMarca = OrDefault(.Item("Marca"), "")
                     WFechaOrd = ordenaFecha(WFecha)
                     WObservaciones = OrDefault(.Item("Observaciones"), "")
                     WDescr = "Mov. Lab."
@@ -362,9 +394,11 @@ Public Class DetalleMovimientosPT
             Next
 
             Auxi = WCodPT
-            
-            Dim WEstadisticas As DataTable = GetAll("SELECT Cliente = c.Cliente + '  ' + RTRIM(c.Razon), e.Tipo, e.TipoPro, e.Fecha, e.Numero, e.Cliente, e.LoteAdicional, e.Lote1, e.Lote2, e.Lote3, e.Lote4, e.Lote5, e.Canti1, e.Canti2, e.Canti3, e.Canti4, e.Canti5 FROM Estadistica e LEFT OUTER JOIN Cliente c ON c.Cliente = e.Cliente WHERE e.Marca <> 'X' And e.Articulo = '" & Auxi & "'", empresa)
 
+            If WFiltroMarca <> "" Then WFiltroMarca = " And ISNULL(e.Marca, '') <> 'X'"
+
+            Dim WEstadisticas As DataTable = GetAll("SELECT Cliente = c.Cliente + '  ' + RTRIM(c.Razon), e.Marca, e.Tipo, e.TipoPro, e.Fecha, e.Numero, e.Cliente, e.LoteAdicional, e.Lote1, e.Lote2, e.Lote3, e.Lote4, e.Lote5, e.Canti1, e.Canti2, e.Canti3, e.Canti4, e.Canti5 FROM Estadistica e LEFT OUTER JOIN Cliente c ON c.Cliente = e.Cliente WHERE e.Articulo = '" & Auxi & "' " & WFiltroMarca & "", empresa)
+            WMarca = ""
             For Each row As DataRow In WEstadisticas.Rows
 
                 Dim XLotes(12, 2) As String
@@ -376,6 +410,7 @@ Public Class DetalleMovimientosPT
                     WFecha = OrDefault(.Item("Fecha"), "")
                     WFechaOrd = ordenaFecha(WFecha)
                     WNumero = OrDefault(.Item("Numero"), "")
+                    WMarca = OrDefault(.Item("Marca"), "")
                     WObservaciones = OrDefault(.Item("Cliente"), "")
 
                     WDescr = "Devol."
@@ -431,6 +466,7 @@ Public Class DetalleMovimientosPT
                             End If
 
                             .Item("Observaciones") = WObservaciones
+                            .Item("Marca") = WMarca
 
                         End With
                         WMovimientos.Rows.Add(r)
@@ -441,14 +477,17 @@ Public Class DetalleMovimientosPT
 
             Next
 
-            Dim WConsignaciones As DataTable = GetAll("SELECT * FROM Consig WHERE Terminado = '" & WCodPT & "' And ISNULL(Marca, '') <> 'X' and ISNULL(Cantidad, 0) <> 0 And Lote = '" & WLote & "'", empresa)
+            If WFiltroMarca <> "" Then WFiltroMarca = " And ISNULL(Marca, '') <> 'X' "
 
+            Dim WConsignaciones As DataTable = GetAll("SELECT * FROM Consig WHERE Terminado = '" & WCodPT & "' and ISNULL(Cantidad, 0) <> 0 And Lote = '" & WLote & "'" & WFiltroMarca, empresa)
+            WMarca = ""
             For Each row As datarow In WConsignaciones.Rows
                 With row
                     WLiberada = OrDefault(.Item("Cantidad"), 0) - OrDefault(.Item("Facturado"), 0)
                     WLiberada = formatonumerico(WLiberada)
                     WNumero = OrDefault(.Item("Codigo"), 0)
                     WFecha = OrDefault(.Item("Fecha"), "")
+                    WMarca = OrDefault(.Item("Marca"), "")
                     WFechaOrd = ordenaFecha(WFecha)
                     WObservaciones = Trim(OrDefault(.Item("Cliente"), "") & " " & OrDefault(.Item("Observaciones"), ""))
                     WDescr = "Rem. Con."
@@ -463,6 +502,7 @@ Public Class DetalleMovimientosPT
                         .Item("Entrada") = ""
                         .Item("Observaciones") = WObservaciones
                         .Item("TipoMov") = WDescr
+                        .Item("Marca") = WMarca
                     End With
                     WMovimientos.Rows.Add(r)
                 End With
@@ -476,8 +516,10 @@ Public Class DetalleMovimientosPT
         Dim WSaldo As Double = 0
 
         For Each m As DataRow In WMovimientos.Rows
-            WSaldo += Val(m.Item("Entrada"))
-            WSaldo -= Val(m.Item("Salida"))
+            If m.Item("Marca") <> "X" Then
+                WSaldo += Val(m.Item("Entrada"))
+                WSaldo -= Val(m.Item("Salida"))
+            End If
         Next
 
         txtSaldo.Text = formatonumerico(WSaldo)
@@ -497,7 +539,10 @@ Public Class DetalleMovimientosPT
     End Sub
 
     Private Sub BackgroundWorker1_ProgressChanged(ByVal sender As System.Object, ByVal e As System.ComponentModel.ProgressChangedEventArgs) Handles BackgroundWorker1.ProgressChanged
-        DataGridView1.DataSource = CType(e.UserState, DataTable)
+        DataGridView1.DataSource = TryCast(e.UserState, DataTable)
+
+        txtLotePartida.Focus()
+
     End Sub
 
     Private Sub DataGridView1_CellDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView1.CellDoubleClick
@@ -512,5 +557,24 @@ Public Class DetalleMovimientosPT
             End With
         End If
 
+    End Sub
+
+    Private Sub txtLotePartida_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtLotePartida.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtLotePartida.Text) = "" Then : Exit Sub : End If
+
+            WLote = txtLotePartida.Text
+
+            BackgroundWorker1.RunWorkerAsync()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtLotePartida.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub DetalleMovimientosPT_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+        txtLotePartida.Focus()
     End Sub
 End Class

@@ -272,4 +272,12 @@ Public Class Form1
             Timer2.Stop()
         End If
     End Sub
+
+    Private Sub Button1_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+        WEstado = True
+        Array.Clear(WData, 0, 8)
+
+        WTCP.SendData("00", "193.168.0.85", "6722", WEstado, WData)
+        Stop
+    End Sub
 End Class

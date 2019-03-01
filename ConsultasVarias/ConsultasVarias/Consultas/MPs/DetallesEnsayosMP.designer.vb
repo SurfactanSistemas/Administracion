@@ -50,6 +50,7 @@ Partial Class DetallesEnsayosMP
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.txtSaldo = New System.Windows.Forms.TextBox()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -186,7 +187,7 @@ Partial Class DetallesEnsayosMP
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(538, 85)
+        Me.Label5.Location = New System.Drawing.Point(410, 85)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(56, 13)
         Me.Label5.TabIndex = 8
@@ -194,7 +195,7 @@ Partial Class DetallesEnsayosMP
         '
         'txtLoteProv
         '
-        Me.txtLoteProv.Location = New System.Drawing.Point(600, 81)
+        Me.txtLoteProv.Location = New System.Drawing.Point(472, 81)
         Me.txtLoteProv.Name = "txtLoteProv"
         Me.txtLoteProv.ReadOnly = True
         Me.txtLoteProv.Size = New System.Drawing.Size(113, 20)
@@ -260,7 +261,7 @@ Partial Class DetallesEnsayosMP
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(13, 87)
+        Me.Label9.Location = New System.Drawing.Point(13, 85)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(32, 13)
         Me.Label9.TabIndex = 8
@@ -271,10 +272,10 @@ Partial Class DetallesEnsayosMP
         Me.txtProveedor.BackColor = System.Drawing.Color.FromArgb(CType(CType(14, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(200, Byte), Integer))
         Me.txtProveedor.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtProveedor.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtProveedor.Location = New System.Drawing.Point(60, 83)
+        Me.txtProveedor.Location = New System.Drawing.Point(60, 81)
         Me.txtProveedor.Name = "txtProveedor"
         Me.txtProveedor.ReadOnly = True
-        Me.txtProveedor.Size = New System.Drawing.Size(472, 20)
+        Me.txtProveedor.Size = New System.Drawing.Size(345, 20)
         Me.txtProveedor.TabIndex = 9
         '
         'Label10
@@ -333,11 +334,21 @@ Partial Class DetallesEnsayosMP
         Me.txtSaldo.TabIndex = 9
         Me.txtSaldo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(591, 78)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(123, 26)
+        Me.Button2.TabIndex = 11
+        Me.Button2.Text = "VER MOVIMIENTOS"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
         'DetallesEnsayosMP
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(726, 415)
+        Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.txtDescMP)
         Me.Controls.Add(Me.txtProveedor)
@@ -400,4 +411,5 @@ Partial Class DetallesEnsayosMP
     Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents Label11 As System.Windows.Forms.Label
     Friend WithEvents txtSaldo As System.Windows.Forms.TextBox
+    Friend WithEvents Button2 As System.Windows.Forms.Button
 End Class

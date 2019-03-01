@@ -1,4 +1,10 @@
-﻿Public Class DetallesHojaProduccion
+﻿Imports ConsultasVarias.Clases
+Imports ConsultasVarias.Clases.Query
+Imports ConsultasVarias.Clases.Helper
+Imports ConsultasVarias.Clases.Globales
+
+
+Public Class DetallesHojaProduccion
 
     Private WLote As Object = 0
 
@@ -20,7 +26,7 @@
             c.TabStop = False
         Next
 
-        For Each column As datagridviewcolumn In Datagridview1.Columns
+        For Each column As DataGridViewColumn In DataGridView1.Columns
             column.SortMode = DataGridViewColumnSortMode.NotSortable
             column.DefaultCellStyle.BackColor = Globales.WBackColorSecundario
             column.DefaultCellStyle.SelectionBackColor = Globales.WBackColorTerciario

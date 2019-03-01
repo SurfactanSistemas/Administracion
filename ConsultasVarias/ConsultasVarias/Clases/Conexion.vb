@@ -1,5 +1,6 @@
 ﻿Imports System.Configuration
-Imports System.Data.SqlClient
+Imports ConsultasVarias.Clases.Query
+Imports ConsultasVarias.Clases.Helper
 
 Namespace Clases
 
@@ -175,32 +176,12 @@ Namespace Clases
         ''' <remarks>True en caso de existir. Se almacena en la Propiedad Operador de la Clase Conexion, el número correspondiente para esa Clave.</remarks>
         Public Shared Function _Login(ByVal Clave As String, ByVal WProceso As Integer) As Boolean
 
-            Dim cn = New SqlConnection()
-            Dim cm = New SqlCommand("SELECT Codigo FROM ResponsableSac WHERE UPPER(ClaveSeguridad) = '" & UCase(Clave) & "'")
-            Dim dr As SqlDataReader
-
             Try
+                Dim WOp As DataRow = GetSingle("SELECT Operador FROM Operador WHERE UPPER(Clave) = '" & UCase(Clave) & "'")
 
-                cn.ConnectionString = Helper._ConectarA
-                cn.Open()
-                cm.Connection = cn
-
-                dr = cm.ExecuteReader()
-
-                If dr.HasRows Then
-                    With dr
-                        .Read()
-                        Operador.Clave = Clave
-                        Operador.Codigo = OrDefault(.Item("Codigo"), "0")
-
-                        Select Case Operador.Codigo
-                            Case 1, 5, 6, 23, 3, 21, 27
-                                Operador.CodigoResponsableSac = 1
-                            Case Else
-                                Operador.CodigoResponsableSac = 0
-                        End Select
-
-                    End With
+                If WOp IsNot Nothing Then
+                    Operador.Clave = Clave
+                    Operador.Codigo = OrDefault(WOp.Item("Operador"), "0")
 
                     Return True
                 End If
@@ -208,13 +189,6 @@ Namespace Clases
                 Return False
             Catch ex As Exception
                 Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
-            Finally
-
-                dr = Nothing
-                cn.Close()
-                cn = Nothing
-                cm = Nothing
-
             End Try
 
         End Function
