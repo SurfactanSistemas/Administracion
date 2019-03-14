@@ -5,11 +5,13 @@ Imports ConsultasVarias
 Imports CrystalDecisions.Shared
 Imports Microsoft.VisualBasic.FileIO
 
-Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAyudaListadoSACs, IAyudaMPAsociadasOC, IExportarINC
+Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAyudaListadoSACs, IAyudaMPAsociadasOC, IExportarINC, IModifNumeracionINC, IIngresoClaveSeguridad
 
     Const TextoBtnGenerarSac = "Asociar SAC"
     Const TextoBtnVerSac = "Ver SAC Asociado"
     Private WControlRetornoError As Control = Nothing
+
+    Private WAutorizadoEliminar As Boolean = False
 
     Private Const EXTENSIONES_PERMITIDAS = "*.bmp|*.png|*.jpg|*.jpeg|*.pdf|*.doc|*.docx|*.xls|*.xlsx"
 
@@ -31,6 +33,9 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
 
     Private Sub DetallesIncidencia_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         txtDescProducto.BackColor = WBackColorTerciario
+
+        btnEliminar.Enabled = Val(Operador.CodigoResponsableSac) = 1
+        btnModifNumINC.Enabled = Val(Operador.CodigoResponsableSac) = 1
 
         cmbEmpresa.Items.Clear()
 
@@ -98,6 +103,8 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
         rbProdTerminado_Click(Nothing, Nothing)
 
         _CargarEstados()
+
+        WAutorizadoEliminar = False
 
         cmbEstado.SelectedIndex = 0
 
@@ -1075,5 +1082,52 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
         End Try
 
+    End Sub
+
+    Private Sub btnEliminar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEliminar.Click
+
+        If Not WAutorizadoEliminar Then
+
+            If MsgBox("¿Está seguro de querer eliminar este Informe de no Conformidad?", MsgBoxStyle.YesNo) <> MsgBoxResult.Yes Then Exit Sub
+
+            With New IngresoClaveSeguridad
+                .Show(Me)
+            End With
+
+            Exit Sub
+        End If
+
+        ExecuteNonQueries("DELETE FROM CargaIncidencias WHERE Incidencia = '" & txtIncidencia.Text & "'")
+
+        btnCerrar.PerformClick()
+
+    End Sub
+
+    Private Sub btnModifNumINC_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnModifNumINC.Click
+
+        Dim WActual As DataRow = GetSingle("SELECT Incidencia FROM CargaIncidencias WHERE Incidencia = '" & txtIncidencia.Text & "'")
+
+        If WActual Is Nothing Then Exit Sub
+
+        With New ModifNumeracionINC(txtIncidencia.Text)
+            .Show(Me)
+        End With
+
+    End Sub
+
+    Public Sub _ProcesarModifNumeracionINC(ByVal NuevaNumeracion As String) Implements IModifNumeracionINC._ProcesarModifNumeracionINC
+        txtIncidencia.Text = NuevaNumeracion
+        txtIncidencia_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+    End Sub
+
+    Public Sub _ProcesarIngresoClaveSeguridad(ByVal WClave As Object) Implements IIngresoClaveSeguridad._ProcesarIngresoClaveSeguridad
+        WAutorizadoEliminar = UCase(Trim(WClave)) = UCase(Trim(Operador.Clave))
+
+        If Not WAutorizadoEliminar Then
+            MsgBox("Clave erronea", MsgBoxStyle.Exclamation)
+            Exit Sub
+        End If
+
+        btnEliminar.PerformClick()
     End Sub
 End Class

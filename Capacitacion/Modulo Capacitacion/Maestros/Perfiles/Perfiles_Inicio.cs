@@ -173,6 +173,16 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
             TBFiltro.Focus();
             TBFiltro_KeyUp(null, null);
         }
+
+        private void DGV_Perfiles_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void Perfiles_Inicio_Load(object sender, EventArgs e)
+        {
+
+        }
         
     }
 }

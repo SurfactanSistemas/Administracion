@@ -81,6 +81,8 @@ Partial Class DetallesIncidenciaRechazoMP
         Me.ContextMenuStrip2 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.EliminarArchivoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+        Me.btnEliminar = New System.Windows.Forms.Button()
+        Me.btnModifNumINC = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -482,7 +484,7 @@ Partial Class DetallesIncidenciaRechazoMP
         '
         'btnMovimientos
         '
-        Me.btnMovimientos.Location = New System.Drawing.Point(598, 483)
+        Me.btnMovimientos.Location = New System.Drawing.Point(670, 483)
         Me.btnMovimientos.Name = "btnMovimientos"
         Me.btnMovimientos.Size = New System.Drawing.Size(120, 41)
         Me.btnMovimientos.TabIndex = 1
@@ -492,7 +494,7 @@ Partial Class DetallesIncidenciaRechazoMP
         '
         'btnHojaProduccion
         '
-        Me.btnHojaProduccion.Location = New System.Drawing.Point(601, 483)
+        Me.btnHojaProduccion.Location = New System.Drawing.Point(673, 483)
         Me.btnHojaProduccion.Name = "btnHojaProduccion"
         Me.btnHojaProduccion.Size = New System.Drawing.Size(115, 41)
         Me.btnHojaProduccion.TabIndex = 1
@@ -502,7 +504,7 @@ Partial Class DetallesIncidenciaRechazoMP
         '
         'btnControles
         '
-        Me.btnControles.Location = New System.Drawing.Point(601, 483)
+        Me.btnControles.Location = New System.Drawing.Point(673, 483)
         Me.btnControles.Name = "btnControles"
         Me.btnControles.Size = New System.Drawing.Size(115, 41)
         Me.btnControles.TabIndex = 1
@@ -512,7 +514,7 @@ Partial Class DetallesIncidenciaRechazoMP
         '
         'btnCerrar
         '
-        Me.btnCerrar.Location = New System.Drawing.Point(446, 483)
+        Me.btnCerrar.Location = New System.Drawing.Point(566, 481)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(107, 41)
         Me.btnCerrar.TabIndex = 12
@@ -521,7 +523,7 @@ Partial Class DetallesIncidenciaRechazoMP
         '
         'btnGrabar
         '
-        Me.btnGrabar.Location = New System.Drawing.Point(317, 483)
+        Me.btnGrabar.Location = New System.Drawing.Point(197, 481)
         Me.btnGrabar.Name = "btnGrabar"
         Me.btnGrabar.Size = New System.Drawing.Size(107, 41)
         Me.btnGrabar.TabIndex = 11
@@ -684,11 +686,32 @@ Partial Class DetallesIncidenciaRechazoMP
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
+        'btnEliminar
+        '
+        Me.btnEliminar.Location = New System.Drawing.Point(320, 481)
+        Me.btnEliminar.Name = "btnEliminar"
+        Me.btnEliminar.Size = New System.Drawing.Size(107, 41)
+        Me.btnEliminar.TabIndex = 15
+        Me.btnEliminar.Text = "ELIMINAR"
+        Me.btnEliminar.UseVisualStyleBackColor = True
+        '
+        'btnModifNumINC
+        '
+        Me.btnModifNumINC.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnModifNumINC.Location = New System.Drawing.Point(443, 481)
+        Me.btnModifNumINC.Name = "btnModifNumINC"
+        Me.btnModifNumINC.Size = New System.Drawing.Size(107, 41)
+        Me.btnModifNumINC.TabIndex = 15
+        Me.btnModifNumINC.Text = "MODIF. NUMERACIÓN INC"
+        Me.btnModifNumINC.UseVisualStyleBackColor = True
+        '
         'DetallesIncidenciaRechazoMP
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(870, 534)
+        Me.Controls.Add(Me.btnModifNumINC)
+        Me.Controls.Add(Me.btnEliminar)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.btnMovimientos)
         Me.Controls.Add(Me.txtLotePartida)
@@ -782,4 +805,6 @@ Partial Class DetallesIncidenciaRechazoMP
     Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
     Friend WithEvents Button3 As System.Windows.Forms.Button
     Friend WithEvents btnDesvincularSAC As System.Windows.Forms.Button
+    Friend WithEvents btnEliminar As System.Windows.Forms.Button
+    Friend WithEvents btnModifNumINC As System.Windows.Forms.Button
 End Class

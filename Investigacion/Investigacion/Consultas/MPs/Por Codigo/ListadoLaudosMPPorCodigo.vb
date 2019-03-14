@@ -45,7 +45,7 @@ Public Class ListadoLaudosMPPorCodigo : Implements IAyudaMPs, IExportar
             .Rows.Add(3, "SURFACTAN III", "Surfactan_III")
             .Rows.Add(4, "SURFACTAN IV", "Surfactan_IV")
             .Rows.Add(5, "SURFACTAN V", "Surfactan_V")
-            .Rows.Add(6, "SURFACTAN VI", "Surfactan_IV")
+            .Rows.Add(6, "SURFACTAN VI", "Surfactan_VI")
             .Rows.Add(7, "SURFACTAN VII", "Surfactan_VII")
         End With
 

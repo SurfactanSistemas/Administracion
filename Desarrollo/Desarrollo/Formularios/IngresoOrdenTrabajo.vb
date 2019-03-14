@@ -114,7 +114,7 @@ Public Class IngresoOrdenTrabajo
                         WAux = Trim(WAux)
 
                         If WAux <> "" Then
-                            txtDescTrabajo.Text &= Trim(WAux) & " "
+                            txtDescTrabajo.Text &= Trim(WAux) '& " "
                         End If
                     Next
 
@@ -128,7 +128,7 @@ Public Class IngresoOrdenTrabajo
                         WAux = Trim(WAux)
 
                         If WAux <> "" Then
-                            txtObservacionesII.Text &= Trim(WAux) & " "
+                            txtObservacionesII.Text &= Trim(WAux) '& " "
                         End If
 
                     Next
@@ -143,7 +143,7 @@ Public Class IngresoOrdenTrabajo
                         WAux = Trim(WAux)
 
                         If WAux <> "" Then
-                            txtRequisitosFuncionales.Text &= Trim(WAux) & " "
+                            txtRequisitosFuncionales.Text &= Trim(WAux) '& " "
                         End If
                     Next
 
@@ -157,7 +157,7 @@ Public Class IngresoOrdenTrabajo
                         WAux = Trim(WAux)
 
                         If WAux <> "" Then
-                            txtOtrosRequisitos.Text &= Trim(WAux) & " "
+                            txtOtrosRequisitos.Text &= Trim(WAux) '& " "
                         End If
                     Next
 
@@ -171,7 +171,7 @@ Public Class IngresoOrdenTrabajo
                         WAux = Trim(WAux)
 
                         If WAux <> "" Then
-                            txtRequisitosNormasRegulaciones.Text &= Trim(WAux) & " "
+                            txtRequisitosNormasRegulaciones.Text &= Trim(WAux) '& " "
                         End If
                     Next
 
@@ -185,7 +185,7 @@ Public Class IngresoOrdenTrabajo
                         WAux = Trim(WAux)
 
                         If WAux <> "" Then
-                            txtReferencias.Text &= Trim(WAux) & " "
+                            txtReferencias.Text &= Trim(WAux) '& " "
                         End If
                     Next
 
@@ -951,7 +951,7 @@ Public Class IngresoOrdenTrabajo
 
             WReferencias(i) = Mid(txtReferencias.Text, ZIndice, 50)
 
-            ZIndice = WCorte
+            ZIndice = WCorte + 1
 
             WCorte += 50
 
@@ -971,7 +971,7 @@ Public Class IngresoOrdenTrabajo
 
             WRequisitos(i) = Mid(txtRequisitosFuncionales.Text, ZIndice, 50)
 
-            ZIndice = WCorte
+            ZIndice = WCorte + 1
 
             WCorte += 50
 
@@ -985,7 +985,7 @@ Public Class IngresoOrdenTrabajo
 
             WRequisitos(i) = Mid(txtOtrosRequisitos.Text, ZIndice, 50)
 
-            ZIndice = WCorte
+            ZIndice = WCorte + 1
 
             WCorte += 50
 
@@ -999,7 +999,7 @@ Public Class IngresoOrdenTrabajo
 
             WRequisitos(i) = Mid(txtRequisitosNormasRegulaciones.Text, ZIndice, 50)
 
-            ZIndice = WCorte
+            ZIndice = WCorte + 1
 
             WCorte += 50
 
@@ -1018,7 +1018,7 @@ Public Class IngresoOrdenTrabajo
 
             WObservaciones(i) = Mid(txtObservacionesII.Text, ZIndice, 100)
 
-            ZIndice = WCorte
+            ZIndice = WCorte + 1
 
             WCorte += 100
 
@@ -1036,7 +1036,7 @@ Public Class IngresoOrdenTrabajo
 
             WDescripciones(i) = Mid(txtDescTrabajo.Text, ZIndice, 100)
 
-            ZIndice = WCorte
+            ZIndice = WCorte + 1
 
             WCorte += 100
 
@@ -1124,5 +1124,4 @@ Public Class IngresoOrdenTrabajo
         End Try
 
     End Sub
-
 End Class

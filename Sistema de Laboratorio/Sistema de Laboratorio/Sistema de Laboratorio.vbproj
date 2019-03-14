@@ -61,6 +61,7 @@
     <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="DataGridViewCustomColumn, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="info.lundin.math, Version=1.2.5.0, Culture=neutral, PublicKeyToken=2f7fe9ec5efab85f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>libs\info.lundin.math.dll</HintPath>
@@ -92,20 +93,19 @@
   <ItemGroup>
     <Compile Include="Auxiliares\Extensiones\AuxiExtensiones.vb" />
     <Compile Include="Auxiliares\Interfaces\IDefinicionFormulaEspecificacion.vb" />
-    <Compile Include="Auxiliares\Interfaces\IIngresoClaveSeguridad.vb" />
     <Compile Include="Auxiliares\Interfaces\IIngresoMotivoDesvio.vb" />
     <Compile Include="Auxiliares\Interfaces\IIngresoParametrosEspecificaciones.vb" />
     <Compile Include="Auxiliares\Interfaces\INotasEnsayosProductosTerminados.vb" />
-    <Compile Include="Auxiliares\VentanasIntermedias\IngresoClaveSeguridad.Designer.vb">
-      <DependentUpon>IngresoClaveSeguridad.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Auxiliares\VentanasIntermedias\IngresoClaveSeguridad.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Auxiliares\VentanasIntermedias\IngresoEnsayosPT\IngresoMotivoDesvio.Designer.vb">
       <DependentUpon>IngresoMotivoDesvio.vb</DependentUpon>
     </Compile>
     <Compile Include="Auxiliares\VentanasIntermedias\IngresoEnsayosPT\IngresoMotivoDesvio.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Auxiliares\VentanasIntermedias\IngresoEnsayosPT\IngresoVariablesFormula.Designer.vb">
+      <DependentUpon>IngresoVariablesFormula.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Auxiliares\VentanasIntermedias\IngresoEnsayosPT\IngresoVariablesFormula.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Auxiliares\VentanasIntermedias\IngresoEnsayosPT\NotasEnsayosProductosTerminados.Designer.vb">
@@ -119,6 +119,12 @@
     <Compile Include="Clases\Helper.vb" />
     <Compile Include="Clases\Operador.vb" />
     <Compile Include="Clases\Query.vb" />
+    <Compile Include="Consultas\NotasCertificadosAnalisis\NotasCertificadosAnalisis.Designer.vb">
+      <DependentUpon>NotasCertificadosAnalisis.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Consultas\NotasCertificadosAnalisis\NotasCertificadosAnalisis.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Login.Designer.vb">
       <DependentUpon>Login.vb</DependentUpon>
     </Compile>
@@ -184,14 +190,17 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Auxiliares\VentanasIntermedias\IngresoClaveSeguridad.resx">
-      <DependentUpon>IngresoClaveSeguridad.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Auxiliares\VentanasIntermedias\IngresoEnsayosPT\IngresoMotivoDesvio.resx">
       <DependentUpon>IngresoMotivoDesvio.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Auxiliares\VentanasIntermedias\IngresoEnsayosPT\IngresoVariablesFormula.resx">
+      <DependentUpon>IngresoVariablesFormula.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Auxiliares\VentanasIntermedias\IngresoEnsayosPT\NotasEnsayosProductosTerminados.resx">
       <DependentUpon>NotasEnsayosProductosTerminados.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Consultas\NotasCertificadosAnalisis\NotasCertificadosAnalisis.resx">
+      <DependentUpon>NotasCertificadosAnalisis.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.vb</DependentUpon>
@@ -248,6 +257,12 @@
     <Content Include="libs\info.lundin.math.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\ConsultasVarias\ConsultasVarias\ConsultasVarias.vbproj">
+      <Project>{CC5D60FD-9755-4C61-B96C-F56173586BB9}</Project>
+      <Name>ConsultasVarias</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -22,10 +22,10 @@ Partial Class DetalleMovimientosPT
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -55,6 +55,8 @@ Partial Class DetalleMovimientosPT
         Me.Entrada = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Salida = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Marca = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -103,6 +105,7 @@ Partial Class DetalleMovimientosPT
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.ComboBox1)
         Me.GroupBox1.Controls.Add(Me.Button1)
         Me.GroupBox1.Controls.Add(Me.txtLotePartida)
         Me.GroupBox1.Controls.Add(Me.txtPartiOriginal)
@@ -112,6 +115,7 @@ Partial Class DetalleMovimientosPT
         Me.GroupBox1.Controls.Add(Me.txtFechaCierre)
         Me.GroupBox1.Controls.Add(Me.txtCodigo)
         Me.GroupBox1.Controls.Add(Me.Label8)
+        Me.GroupBox1.Controls.Add(Me.Label9)
         Me.GroupBox1.Controls.Add(Me.Label4)
         Me.GroupBox1.Controls.Add(Me.Label7)
         Me.GroupBox1.Controls.Add(Me.Label6)
@@ -135,9 +139,9 @@ Partial Class DetalleMovimientosPT
         '
         'txtLotePartida
         '
-        Me.txtLotePartida.Location = New System.Drawing.Point(101, 48)
+        Me.txtLotePartida.Location = New System.Drawing.Point(101, 50)
         Me.txtLotePartida.Name = "txtLotePartida"
-        Me.txtLotePartida.Size = New System.Drawing.Size(101, 20)
+        Me.txtLotePartida.Size = New System.Drawing.Size(82, 20)
         Me.txtLotePartida.TabIndex = 2
         Me.txtLotePartida.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -154,7 +158,7 @@ Partial Class DetalleMovimientosPT
         'txtSaldo
         '
         Me.txtSaldo.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtSaldo.Location = New System.Drawing.Point(260, 48)
+        Me.txtSaldo.Location = New System.Drawing.Point(232, 50)
         Me.txtSaldo.Name = "txtSaldo"
         Me.txtSaldo.ReadOnly = True
         Me.txtSaldo.Size = New System.Drawing.Size(101, 20)
@@ -182,7 +186,7 @@ Partial Class DetalleMovimientosPT
         '
         'txtFechaCierre
         '
-        Me.txtFechaCierre.Location = New System.Drawing.Point(443, 48)
+        Me.txtFechaCierre.Location = New System.Drawing.Point(415, 50)
         Me.txtFechaCierre.Mask = "00/00/0000"
         Me.txtFechaCierre.Name = "txtFechaCierre"
         Me.txtFechaCierre.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -214,7 +218,7 @@ Partial Class DetalleMovimientosPT
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(367, 52)
+        Me.Label4.Location = New System.Drawing.Point(339, 54)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(70, 13)
         Me.Label4.TabIndex = 0
@@ -223,7 +227,7 @@ Partial Class DetalleMovimientosPT
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(14, 52)
+        Me.Label7.Location = New System.Drawing.Point(14, 54)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(80, 13)
         Me.Label7.TabIndex = 0
@@ -232,7 +236,7 @@ Partial Class DetalleMovimientosPT
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(15, 68)
+        Me.Label6.Location = New System.Drawing.Point(15, 54)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(65, 13)
         Me.Label6.TabIndex = 0
@@ -242,7 +246,7 @@ Partial Class DetalleMovimientosPT
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(217, 52)
+        Me.Label5.Location = New System.Drawing.Point(189, 54)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(37, 13)
         Me.Label5.TabIndex = 0
@@ -306,8 +310,8 @@ Partial Class DetalleMovimientosPT
         '
         Me.LotePartida.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.LotePartida.DataPropertyName = "Numero"
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.LotePartida.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.LotePartida.DefaultCellStyle = DataGridViewCellStyle9
         Me.LotePartida.HeaderText = "Número"
         Me.LotePartida.Name = "LotePartida"
         Me.LotePartida.ReadOnly = True
@@ -316,8 +320,8 @@ Partial Class DetalleMovimientosPT
         'Fecha
         '
         Me.Fecha.DataPropertyName = "Fecha"
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle10
         Me.Fecha.HeaderText = "Fecha"
         Me.Fecha.Name = "Fecha"
         Me.Fecha.ReadOnly = True
@@ -334,8 +338,8 @@ Partial Class DetalleMovimientosPT
         '
         Me.Entrada.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Entrada.DataPropertyName = "Entrada"
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Entrada.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Entrada.DefaultCellStyle = DataGridViewCellStyle11
         Me.Entrada.HeaderText = "Entrada"
         Me.Entrada.Name = "Entrada"
         Me.Entrada.ReadOnly = True
@@ -345,8 +349,8 @@ Partial Class DetalleMovimientosPT
         '
         Me.Salida.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Salida.DataPropertyName = "Salida"
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Salida.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Salida.DefaultCellStyle = DataGridViewCellStyle12
         Me.Salida.HeaderText = "Salida"
         Me.Salida.Name = "Salida"
         Me.Salida.ReadOnly = True
@@ -359,6 +363,23 @@ Partial Class DetalleMovimientosPT
         Me.Marca.Name = "Marca"
         Me.Marca.ReadOnly = True
         Me.Marca.Visible = False
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(490, 54)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(84, 13)
+        Me.Label9.TabIndex = 0
+        Me.Label9.Text = "Movimientos en:"
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Location = New System.Drawing.Point(573, 50)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(120, 21)
+        Me.ComboBox1.TabIndex = 4
         '
         'DetalleMovimientosPT
         '
@@ -410,4 +431,6 @@ Partial Class DetalleMovimientosPT
     Friend WithEvents Entrada As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Salida As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Marca As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Label9 As System.Windows.Forms.Label
+    Friend WithEvents ComboBox1 As System.Windows.Forms.ComboBox
 End Class

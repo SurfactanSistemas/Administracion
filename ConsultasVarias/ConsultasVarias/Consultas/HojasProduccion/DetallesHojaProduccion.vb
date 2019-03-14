@@ -52,6 +52,16 @@ Public Class DetallesHojaProduccion
 
             If WHoja.Rows.Count = 0 Then Continue For
 
+            Dim WPorSeparado(2, 3) As String
+
+            WPorSeparado(1, 1) = "AA-100-100"
+            WPorSeparado(1, 2) = "0"
+            WPorSeparado(1, 3) = "AGUA POTABLE Tratada"
+
+            WPorSeparado(2, 1) = "AR-000-100"
+            WPorSeparado(2, 2) = "0"
+            WPorSeparado(2, 3) = "AGUA POTABLE DE RED"
+
             For Each row As DataRow In WHoja.Rows
                 Dim WTipo, WTerminado, WArticulo, WCantidad, WDescripcion As String
 
@@ -81,11 +91,30 @@ Public Class DetallesHojaProduccion
                     If WTer IsNot Nothing Then WDescripcion = Trim(WTer.Item("Descripcion"))
                 End If
 
+                Dim WEntraAComparar As String = "S"
+
                 For i = 1 To 3
 
                     WCantidad = OrDefault(row.Item("Canti" & i), "0")
                     WCantidad = formatonumerico(WCantidad)
                     Dim _Lote = OrDefault(row.Item("Lote" & i), "0")
+
+                    '
+                    ' Buscamos aquellos que no se informan lotes.
+                    '
+                    Dim WSalir As String = "N"
+                    For x = 1 To 2
+                        If WArticulo = WPorSeparado(x, 1) Then
+                            If Val(_Lote) = 0 And Val(WCantidad) = 0 And WEntraAComparar = "S" Then
+                                WSalir = "S"
+                                WPorSeparado(x, 2) += 1
+                            Else
+                                WEntraAComparar = "N"
+                            End If
+                        End If
+                    Next
+
+                    If WSalir = "S" Then Continue For
 
                     If Val(WCantidad) <> 0 And Val(_Lote) <> 0 Then
 
@@ -104,6 +133,21 @@ Public Class DetallesHojaProduccion
 
                 Next
 
+            Next
+
+            For i = 1 To 2
+                If Val(WPorSeparado(i, 2)) > 0 Then
+                    Dim r = DataGridView1.Rows.Add
+
+                    With DataGridView1.Rows(r)
+                        .Cells("Tipo").Value = "M"
+                        .Cells("Terminado").Value = ""
+                        .Cells("MateriaPrima").Value = WPorSeparado(i, 1)
+                        .Cells("Descripcion").Value = WPorSeparado(i, 3)
+                        .Cells("LotePartida").Value = "0"
+                        .Cells("Cantidad").Value = "0.00"
+                    End With
+                End If
             Next
 
             Dim WEnsayos As DataRow = Nothing

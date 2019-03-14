@@ -125,6 +125,7 @@ Partial Class DefinicionFormulaEspecificacion
         'txtVar8
         '
         Me.txtVar8.Location = New System.Drawing.Point(222, 94)
+        Me.txtVar8.MaxLength = 20
         Me.txtVar8.Name = "txtVar8"
         Me.txtVar8.Size = New System.Drawing.Size(120, 20)
         Me.txtVar8.TabIndex = 1
@@ -133,6 +134,7 @@ Partial Class DefinicionFormulaEspecificacion
         'txtVar4
         '
         Me.txtVar4.Location = New System.Drawing.Point(50, 94)
+        Me.txtVar4.MaxLength = 20
         Me.txtVar4.Name = "txtVar4"
         Me.txtVar4.Size = New System.Drawing.Size(120, 20)
         Me.txtVar4.TabIndex = 1
@@ -161,6 +163,7 @@ Partial Class DefinicionFormulaEspecificacion
         'txtVar7
         '
         Me.txtVar7.Location = New System.Drawing.Point(222, 70)
+        Me.txtVar7.MaxLength = 20
         Me.txtVar7.Name = "txtVar7"
         Me.txtVar7.Size = New System.Drawing.Size(120, 20)
         Me.txtVar7.TabIndex = 1
@@ -169,6 +172,7 @@ Partial Class DefinicionFormulaEspecificacion
         'txtVar3
         '
         Me.txtVar3.Location = New System.Drawing.Point(50, 70)
+        Me.txtVar3.MaxLength = 20
         Me.txtVar3.Name = "txtVar3"
         Me.txtVar3.Size = New System.Drawing.Size(120, 20)
         Me.txtVar3.TabIndex = 1
@@ -197,6 +201,7 @@ Partial Class DefinicionFormulaEspecificacion
         'txtVar10
         '
         Me.txtVar10.Location = New System.Drawing.Point(401, 47)
+        Me.txtVar10.MaxLength = 20
         Me.txtVar10.Name = "txtVar10"
         Me.txtVar10.Size = New System.Drawing.Size(120, 20)
         Me.txtVar10.TabIndex = 1
@@ -205,6 +210,7 @@ Partial Class DefinicionFormulaEspecificacion
         'txtVar6
         '
         Me.txtVar6.Location = New System.Drawing.Point(222, 47)
+        Me.txtVar6.MaxLength = 20
         Me.txtVar6.Name = "txtVar6"
         Me.txtVar6.Size = New System.Drawing.Size(120, 20)
         Me.txtVar6.TabIndex = 1
@@ -213,6 +219,7 @@ Partial Class DefinicionFormulaEspecificacion
         'txtVar2
         '
         Me.txtVar2.Location = New System.Drawing.Point(50, 47)
+        Me.txtVar2.MaxLength = 20
         Me.txtVar2.Name = "txtVar2"
         Me.txtVar2.Size = New System.Drawing.Size(120, 20)
         Me.txtVar2.TabIndex = 1
@@ -251,6 +258,7 @@ Partial Class DefinicionFormulaEspecificacion
         'txtVar9
         '
         Me.txtVar9.Location = New System.Drawing.Point(401, 23)
+        Me.txtVar9.MaxLength = 20
         Me.txtVar9.Name = "txtVar9"
         Me.txtVar9.Size = New System.Drawing.Size(120, 20)
         Me.txtVar9.TabIndex = 1
@@ -259,6 +267,7 @@ Partial Class DefinicionFormulaEspecificacion
         'txtVar5
         '
         Me.txtVar5.Location = New System.Drawing.Point(222, 23)
+        Me.txtVar5.MaxLength = 20
         Me.txtVar5.Name = "txtVar5"
         Me.txtVar5.Size = New System.Drawing.Size(120, 20)
         Me.txtVar5.TabIndex = 1
@@ -277,6 +286,7 @@ Partial Class DefinicionFormulaEspecificacion
         'txtVar1
         '
         Me.txtVar1.Location = New System.Drawing.Point(50, 23)
+        Me.txtVar1.MaxLength = 20
         Me.txtVar1.Name = "txtVar1"
         Me.txtVar1.Size = New System.Drawing.Size(120, 20)
         Me.txtVar1.TabIndex = 1
@@ -317,6 +327,7 @@ Partial Class DefinicionFormulaEspecificacion
         '
         Me.txtFormula.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtFormula.Location = New System.Drawing.Point(87, 22)
+        Me.txtFormula.MaxLength = 100
         Me.txtFormula.Name = "txtFormula"
         Me.txtFormula.Size = New System.Drawing.Size(436, 20)
         Me.txtFormula.TabIndex = 1

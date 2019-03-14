@@ -32,14 +32,14 @@
             this.LBLegajo = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.TB_ObservExt5 = new System.Windows.Forms.TextBox();
+            this.TB_ObservExt4 = new System.Windows.Forms.TextBox();
+            this.TB_ObservExt3 = new System.Windows.Forms.TextBox();
+            this.TB_ObservExt2 = new System.Windows.Forms.TextBox();
             this.TB_ObservExt1 = new System.Windows.Forms.TextBox();
             this.BT_Salir = new System.Windows.Forms.Button();
             this.BT_LimpiarPant = new System.Windows.Forms.Button();
             this.BT_Guardar = new System.Windows.Forms.Button();
-            this.TB_ObservExt2 = new System.Windows.Forms.TextBox();
-            this.TB_ObservExt4 = new System.Windows.Forms.TextBox();
-            this.TB_ObservExt3 = new System.Windows.Forms.TextBox();
-            this.TB_ObservExt5 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -90,10 +90,47 @@
             this.panel3.Size = new System.Drawing.Size(600, 227);
             this.panel3.TabIndex = 0;
             // 
+            // TB_ObservExt5
+            // 
+            this.TB_ObservExt5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TB_ObservExt5.Location = new System.Drawing.Point(24, 141);
+            this.TB_ObservExt5.MaxLength = 100;
+            this.TB_ObservExt5.Name = "TB_ObservExt5";
+            this.TB_ObservExt5.Size = new System.Drawing.Size(552, 20);
+            this.TB_ObservExt5.TabIndex = 35;
+            // 
+            // TB_ObservExt4
+            // 
+            this.TB_ObservExt4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TB_ObservExt4.Location = new System.Drawing.Point(24, 110);
+            this.TB_ObservExt4.MaxLength = 100;
+            this.TB_ObservExt4.Name = "TB_ObservExt4";
+            this.TB_ObservExt4.Size = new System.Drawing.Size(552, 20);
+            this.TB_ObservExt4.TabIndex = 34;
+            // 
+            // TB_ObservExt3
+            // 
+            this.TB_ObservExt3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TB_ObservExt3.Location = new System.Drawing.Point(24, 80);
+            this.TB_ObservExt3.MaxLength = 100;
+            this.TB_ObservExt3.Name = "TB_ObservExt3";
+            this.TB_ObservExt3.Size = new System.Drawing.Size(552, 20);
+            this.TB_ObservExt3.TabIndex = 33;
+            // 
+            // TB_ObservExt2
+            // 
+            this.TB_ObservExt2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TB_ObservExt2.Location = new System.Drawing.Point(25, 48);
+            this.TB_ObservExt2.MaxLength = 100;
+            this.TB_ObservExt2.Name = "TB_ObservExt2";
+            this.TB_ObservExt2.Size = new System.Drawing.Size(552, 20);
+            this.TB_ObservExt2.TabIndex = 32;
+            // 
             // TB_ObservExt1
             // 
             this.TB_ObservExt1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_ObservExt1.Location = new System.Drawing.Point(25, 18);
+            this.TB_ObservExt1.MaxLength = 100;
             this.TB_ObservExt1.Name = "TB_ObservExt1";
             this.TB_ObservExt1.Size = new System.Drawing.Size(552, 20);
             this.TB_ObservExt1.TabIndex = 31;
@@ -139,38 +176,6 @@
             this.BT_Guardar.UseVisualStyleBackColor = true;
             this.BT_Guardar.Click += new System.EventHandler(this.BT_Guardar_Click);
             // 
-            // TB_ObservExt2
-            // 
-            this.TB_ObservExt2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TB_ObservExt2.Location = new System.Drawing.Point(25, 48);
-            this.TB_ObservExt2.Name = "TB_ObservExt2";
-            this.TB_ObservExt2.Size = new System.Drawing.Size(552, 20);
-            this.TB_ObservExt2.TabIndex = 32;
-            // 
-            // TB_ObservExt4
-            // 
-            this.TB_ObservExt4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TB_ObservExt4.Location = new System.Drawing.Point(24, 110);
-            this.TB_ObservExt4.Name = "TB_ObservExt4";
-            this.TB_ObservExt4.Size = new System.Drawing.Size(552, 20);
-            this.TB_ObservExt4.TabIndex = 34;
-            // 
-            // TB_ObservExt3
-            // 
-            this.TB_ObservExt3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TB_ObservExt3.Location = new System.Drawing.Point(24, 80);
-            this.TB_ObservExt3.Name = "TB_ObservExt3";
-            this.TB_ObservExt3.Size = new System.Drawing.Size(552, 20);
-            this.TB_ObservExt3.TabIndex = 33;
-            // 
-            // TB_ObservExt5
-            // 
-            this.TB_ObservExt5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TB_ObservExt5.Location = new System.Drawing.Point(24, 141);
-            this.TB_ObservExt5.Name = "TB_ObservExt5";
-            this.TB_ObservExt5.Size = new System.Drawing.Size(552, 20);
-            this.TB_ObservExt5.TabIndex = 35;
-            // 
             // Observaciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -180,6 +185,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "Observaciones";
             this.Load += new System.EventHandler(this.Observaciones_Load);
+            this.Shown += new System.EventHandler(this.Observaciones_Shown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);

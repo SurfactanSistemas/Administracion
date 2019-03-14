@@ -29,12 +29,14 @@ Partial Class ListadoHojasPTPorCodigo
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnExportarListadoEnsayosPorPartida = New System.Windows.Forms.Button()
+        Me.ckIncluirSEs = New System.Windows.Forms.CheckBox()
         Me.ckIncluirHistoricos = New System.Windows.Forms.CheckBox()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.cmbOrdenIII = New System.Windows.Forms.ComboBox()
@@ -61,7 +63,7 @@ Partial Class ListadoHojasPTPorCodigo
         Me.ToolStripMenuItem6 = New System.Windows.Forms.ToolStripMenuItem()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.dgvLaudos = New ConsultasVarias.DBDataGridView()
-        Me.ckIncluirSEs = New System.Windows.Forms.CheckBox()
+        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -111,6 +113,8 @@ Partial Class ListadoHojasPTPorCodigo
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.ProgressBar1)
+        Me.GroupBox1.Controls.Add(Me.btnExportarListadoEnsayosPorPartida)
         Me.GroupBox1.Controls.Add(Me.ckIncluirSEs)
         Me.GroupBox1.Controls.Add(Me.ckIncluirHistoricos)
         Me.GroupBox1.Controls.Add(Me.GroupBox4)
@@ -131,6 +135,26 @@ Partial Class ListadoHojasPTPorCodigo
         Me.GroupBox1.TabIndex = 11
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "PARÁMETROS DE BÚSQUEDA"
+        '
+        'btnExportarListadoEnsayosPorPartida
+        '
+        Me.btnExportarListadoEnsayosPorPartida.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnExportarListadoEnsayosPorPartida.Location = New System.Drawing.Point(714, 116)
+        Me.btnExportarListadoEnsayosPorPartida.Name = "btnExportarListadoEnsayosPorPartida"
+        Me.btnExportarListadoEnsayosPorPartida.Size = New System.Drawing.Size(273, 24)
+        Me.btnExportarListadoEnsayosPorPartida.TabIndex = 10
+        Me.btnExportarListadoEnsayosPorPartida.Text = "EXPORTAR LISTADO DE ENSAYOS POR PARTIDA"
+        Me.btnExportarListadoEnsayosPorPartida.UseVisualStyleBackColor = True
+        '
+        'ckIncluirSEs
+        '
+        Me.ckIncluirSEs.AutoSize = True
+        Me.ckIncluirSEs.Location = New System.Drawing.Point(606, 102)
+        Me.ckIncluirSEs.Name = "ckIncluirSEs"
+        Me.ckIncluirSEs.Size = New System.Drawing.Size(78, 17)
+        Me.ckIncluirSEs.TabIndex = 9
+        Me.ckIncluirSEs.Text = "Incluir SE's"
+        Me.ckIncluirSEs.UseVisualStyleBackColor = True
         '
         'ckIncluirHistoricos
         '
@@ -363,24 +387,24 @@ Partial Class ListadoHojasPTPorCodigo
         '
         Me.dgvLaudos.AllowUserToAddRows = False
         Me.dgvLaudos.AllowUserToDeleteRows = False
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvLaudos.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvLaudos.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle3
         Me.dgvLaudos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvLaudos.ContextMenuStrip = Me.ContextMenuStrip1
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvLaudos.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvLaudos.DefaultCellStyle = DataGridViewCellStyle4
         Me.dgvLaudos.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvLaudos.DoubleBuffered = True
         Me.dgvLaudos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
@@ -393,15 +417,12 @@ Partial Class ListadoHojasPTPorCodigo
         Me.dgvLaudos.TabIndex = 12
         Me.dgvLaudos.TabStop = False
         '
-        'ckIncluirSEs
+        'ProgressBar1
         '
-        Me.ckIncluirSEs.AutoSize = True
-        Me.ckIncluirSEs.Location = New System.Drawing.Point(606, 102)
-        Me.ckIncluirSEs.Name = "ckIncluirSEs"
-        Me.ckIncluirSEs.Size = New System.Drawing.Size(78, 17)
-        Me.ckIncluirSEs.TabIndex = 9
-        Me.ckIncluirSEs.Text = "Incluir SE's"
-        Me.ckIncluirSEs.UseVisualStyleBackColor = True
+        Me.ProgressBar1.Location = New System.Drawing.Point(714, 144)
+        Me.ProgressBar1.Name = "ProgressBar1"
+        Me.ProgressBar1.Size = New System.Drawing.Size(273, 9)
+        Me.ProgressBar1.TabIndex = 11
         '
         'ListadoHojasPTPorCodigo
         '
@@ -457,4 +478,6 @@ Partial Class ListadoHojasPTPorCodigo
     Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents ckIncluirHistoricos As System.Windows.Forms.CheckBox
     Friend WithEvents ckIncluirSEs As System.Windows.Forms.CheckBox
+    Friend WithEvents btnExportarListadoEnsayosPorPartida As System.Windows.Forms.Button
+    Friend WithEvents ProgressBar1 As System.Windows.Forms.ProgressBar
 End Class

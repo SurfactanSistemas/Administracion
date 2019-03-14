@@ -35,6 +35,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.P_Verde = new System.Windows.Forms.Panel();
             this.P_Filtrado = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.txtCodigo = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.TBFiltro = new System.Windows.Forms.TextBox();
@@ -49,24 +50,23 @@
             this.codigoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sectorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.temasBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.perfilBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.DGV_Perfiles = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnImprimir = new System.Windows.Forms.Button();
+            this.perfilBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.perfilBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.P_Verde.SuspendLayout();
             this.P_Filtrado.SuspendLayout();
             this.CMS_Perfil.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.temasBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.perfilBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Perfiles)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.perfilBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.perfilBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -131,6 +131,18 @@
             this.P_Filtrado.Name = "P_Filtrado";
             this.P_Filtrado.Size = new System.Drawing.Size(899, 55);
             this.P_Filtrado.TabIndex = 1;
+            // 
+            // button1
+            // 
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.ForeColor = System.Drawing.SystemColors.Control;
+            this.button1.Location = new System.Drawing.Point(661, 16);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(105, 23);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Limpiar Filtro";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // txtCodigo
             // 
@@ -265,10 +277,6 @@
             this.temasBindingSource.DataMember = "Temas";
             this.temasBindingSource.DataSource = this.perfilBindingSource;
             // 
-            // perfilBindingSource
-            // 
-            this.perfilBindingSource.DataSource = typeof(Negocio.Perfil);
-            // 
             // DGV_Perfiles
             // 
             this.DGV_Perfiles.AllowUserToAddRows = false;
@@ -290,6 +298,7 @@
             this.DGV_Perfiles.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.DGV_Perfiles.Size = new System.Drawing.Size(827, 441);
             this.DGV_Perfiles.TabIndex = 19;
+            this.DGV_Perfiles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Perfiles_CellContentClick);
             this.DGV_Perfiles.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGV_Perfiles_RowHeaderMouseDoubleClick);
             // 
             // tableLayoutPanel1
@@ -354,21 +363,13 @@
             this.btnImprimir.UseVisualStyleBackColor = true;
             this.btnImprimir.Click += new System.EventHandler(this.btnImprimir_Click);
             // 
+            // perfilBindingSource
+            // 
+            this.perfilBindingSource.DataSource = typeof(Negocio.Perfil);
+            // 
             // perfilBindingSource1
             // 
             this.perfilBindingSource1.DataSource = typeof(Negocio.Perfil);
-            // 
-            // button1
-            // 
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.ForeColor = System.Drawing.SystemColors.Control;
-            this.button1.Location = new System.Drawing.Point(661, 16);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(105, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Limpiar Filtro";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Perfiles_Inicio
             // 
@@ -379,6 +380,7 @@
             this.MinimumSize = new System.Drawing.Size(754, 498);
             this.Name = "Perfiles_Inicio";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.Perfiles_Inicio_Load);
             this.Shown += new System.EventHandler(this.Periles_Inicio_Shown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -387,11 +389,11 @@
             this.P_Filtrado.PerformLayout();
             this.CMS_Perfil.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.temasBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.perfilBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Perfiles)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.perfilBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.perfilBindingSource1)).EndInit();
             this.ResumeLayout(false);
 

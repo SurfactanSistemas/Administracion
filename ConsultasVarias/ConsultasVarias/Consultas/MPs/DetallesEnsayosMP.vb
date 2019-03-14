@@ -56,8 +56,8 @@ Public Class DetallesEnsayosMP
 
                     r.Item("Ensayo") = ""
                     r.Item("ValorStd") = ""
-                    r.Item("ValorReg") = OrDefault(.Item("Valor" & i), "")
-                    r.Item("Valor") = OrDefault(.Item("ValorNumero" & i), "")
+                    r.Item("ValorReg") = Trim(OrDefault(.Item("Valor" & i), ""))
+                    r.Item("Valor") = Trim(OrDefault(.Item("ValorNumero" & i), ""))
 
                     If Trim(r.Item("ValorReg")) <> "" Then WEnsayos.Rows.Add(r)
                     'WEnsayos.Rows.Add(r)
@@ -86,11 +86,11 @@ Public Class DetallesEnsayosMP
                 For i = 1 To 20
                     If i <= WEnsayos.Rows.Count Then
                         If i > 10 And Not WSinVersion Then
-                            WEnsayos.Rows(i - 1).Item("Ensayo") = OrDefault(WEspecif.Item("Ensayo" & i), "")
-                            WEnsayos.Rows(i - 1).Item("ValorStd") = OrDefault(WEspecif.Item("ZValor" & (i - 10)), "")
+                            WEnsayos.Rows(i - 1).Item("Ensayo") = Trim(OrDefault(WEspecif.Item("Ensayo" & i), ""))
+                            WEnsayos.Rows(i - 1).Item("ValorStd") = Trim(OrDefault(WEspecif.Item("ZValor" & (i - 10)), ""))
                         Else
-                            WEnsayos.Rows(i - 1).Item("Ensayo") = OrDefault(WEspecif.Item("Ensayo" & i), "")
-                            WEnsayos.Rows(i - 1).Item("ValorStd") = OrDefault(WEspecif.Item("Valor" & i), "")
+                            WEnsayos.Rows(i - 1).Item("Ensayo") = Trim(OrDefault(WEspecif.Item("Ensayo" & i), ""))
+                            WEnsayos.Rows(i - 1).Item("ValorStd") = Trim(OrDefault(WEspecif.Item("Valor" & i), ""))
                         End If
                     End If
                 Next
@@ -110,8 +110,8 @@ Public Class DetallesEnsayosMP
                     If WEspecif IsNot Nothing Then
                         For i = 21 To 30
                             If i <= (WEnsayos.Rows.Count) Then
-                                WEnsayos.Rows(i - 1).Item("Ensayo") = OrDefault(WEspecif.Item("Ensayo" & i), "")
-                                WEnsayos.Rows(i - 1).Item("ValorStd") = OrDefault(WEspecif.Item("Valor" & i), "")
+                                WEnsayos.Rows(i - 1).Item("Ensayo") = Trim(OrDefault(WEspecif.Item("Ensayo" & i), ""))
+                                WEnsayos.Rows(i - 1).Item("ValorStd") = Trim(OrDefault(WEspecif.Item("Valor" & i), ""))
                             End If
                         Next
                     End If
@@ -131,16 +131,16 @@ Public Class DetallesEnsayosMP
                 End With
             Next
 
-            Dim WLaudo As DataRow = GetSingle("select l.Articulo, l.Fecha, l.Informe, l.Orden, DescMP = a.Descripcion, l.Saldo, Cantidad = (l.Liberada + l.Devuelta), Proveedor = p.Nombre, LoteProv = i.PartidaProveedor from laudo l LEFT OUTER JOIN Informe i ON i.Informe = l.Informe And i.Articulo = l.Articulo LEFT OUTER JOIN Orden o ON o.Orden = i.Orden And o.Articulo = l.Articulo LEFT OUTER JOIN Proveedor p ON p.Proveedor = o.Proveedor LEFT OUTER JOIN Articulo a ON a.Codigo = l.Articulo where l.laudo = '" & WLote & "' And l.Renglon IN ('1', '01')", emp)
+            Dim WLaudo As DataRow = GetSingle("select l.Articulo, l.Fecha, l.Informe, l.Orden, DescMP = a.Descripcion, l.Saldo, Cantidad = (l.Liberada + l.Devuelta), Proveedor = p.Nombre, LoteProv = l.PartiOri from laudo l LEFT OUTER JOIN Informe i ON i.Informe = l.Informe And i.Articulo = l.Articulo LEFT OUTER JOIN Orden o ON o.Orden = i.Orden And o.Articulo = l.Articulo LEFT OUTER JOIN Proveedor p ON p.Proveedor = o.Proveedor LEFT OUTER JOIN Articulo a ON a.Codigo = l.Articulo where l.laudo = '" & WLote & "' And l.Renglon IN ('1', '01')", emp)
 
             If WLaudo IsNot Nothing Then
                 With WLaudo
                     txtCodigo.Text = OrDefault(.Item("Articulo"), "")
                     txtFecha.Text = OrDefault(.Item("Fecha"), "")
                     txtLote.Text = WLote
-                    txtDescMP.Text = OrDefault(.Item("DescMP"), "")
-                    txtProveedor.Text = OrDefault(.Item("Proveedor"), "")
-                    txtLoteProv.Text = OrDefault(.Item("LoteProv"), "")
+                    txtDescMP.Text = Trim(OrDefault(.Item("DescMP"), ""))
+                    txtProveedor.Text = Trim(OrDefault(.Item("Proveedor"), ""))
+                    txtLoteProv.Text = Trim(OrDefault(.Item("LoteProv"), ""))
                     txtInforme.Text = OrDefault(.Item("Informe"), "")
                     txtOrden.Text = OrDefault(.Item("Orden"), "")
                     txtCantidad.Text = OrDefault(.Item("Cantidad"), "")

@@ -5150,7 +5150,7 @@ Public Class Pagos
                     WPorceIb = formatonumerico(.Item("PorceIb"))
                     WPorceIbCaba = formatonumerico(.Item("PorceIbCaba"))
                     WPorceIb = WPorceIb.Replace(".", ",")
-                    WPorceIbCaba = WPorceIb.Replace(".", ",")
+                    WPorceIbCaba = WPorceIbCaba.Replace(".", ",")
                 End If
             End With
         End If
@@ -5489,7 +5489,7 @@ Public Class Pagos
                     WPorceIb = formatonumerico(.Item("PorceIb"))
                     WPorceIbCaba = formatonumerico(.Item("PorceIbCaba"))
                     WPorceIb = WPorceIb.Replace(".", ",")
-                    WPorceIbCaba = WPorceIb.Replace(".", ",")
+                    WPorceIbCaba = WPorceIbCaba.Replace(".", ",")
                 End If
             End With
         End If
@@ -5884,7 +5884,7 @@ Public Class Pagos
                     WPorceIb = formatonumerico(.Item("PorceIb"))
                     WPorceIbCaba = formatonumerico(.Item("PorceIbCaba"))
                     WPorceIb = WPorceIb.Replace(".", ",")
-                    WPorceIbCaba = WPorceIb.Replace(".", ",")
+                    WPorceIbCaba = WPorceIbCaba.Replace(".", ",")
                 End If
             End With
         End If

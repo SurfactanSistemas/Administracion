@@ -393,7 +393,7 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
 
                 if (AModificar)
                 {
-                    DialogResult Result = MessageBox.Show("Desea modificar la versión?", "Modificar Versión", MessageBoxButtons.YesNo);
+                    DialogResult Result = MessageBox.Show("¿Desea modificar la versión?", "Modificar Versión", MessageBoxButtons.YesNo);
 
                     if (Result == DialogResult.Yes)
                     {

@@ -73,10 +73,10 @@ Public Class ImpreProcesos
 
             '_GenerarCertificadoAnalisisFarma(WTipoReporte2, WPartida2, WTipoSalida2)
 
-            Dim WTerminado2 As String = "PT-25012-100"
-            Dim WPartida2 As Integer = "0"
+            'Dim WTerminado2 As String = "PT-25061-204"
+            'Dim WPartida2 As Integer = "309206"
 
-            _GenerarRegistroProduccion(WTerminado2, WPartida2)
+            '_GenerarRegistroProduccion(WTerminado2, WPartida2)
 
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
@@ -162,7 +162,7 @@ Public Class ImpreProcesos
         frm.SetParameterValue("MostrarLogo", 0)
         frm.SetParameterValue("MostrarPie", 0)
 
-        If wTipoSalida = 3 Or wTipoSalida = 4 Then
+        If wTipoSalida = 3 Or wTipoSalida = 4 Or wTipoSalida = 6 Then
             frm.SetParameterValue("MostrarLogo", 1)
             frm.SetParameterValue("MostrarPie", 1)
         End If
@@ -181,7 +181,7 @@ Public Class ImpreProcesos
             End Select
 
             Select Case wTipoSalida
-                Case 1
+                Case 1, 6
                     .Imprimir()
                 Case 2
                     .Mostrar()

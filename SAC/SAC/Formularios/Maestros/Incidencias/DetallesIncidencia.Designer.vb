@@ -34,6 +34,7 @@ Partial Class DetallesIncidencia
         Me.cmbEstado = New System.Windows.Forms.ComboBox()
         Me.txtFecha = New System.Windows.Forms.MaskedTextBox()
         Me.txtProducto = New System.Windows.Forms.MaskedTextBox()
+        Me.rbVario = New System.Windows.Forms.RadioButton()
         Me.rbProdTerminado = New System.Windows.Forms.RadioButton()
         Me.rbMatPrima = New System.Windows.Forms.RadioButton()
         Me.txtReferencia = New System.Windows.Forms.TextBox()
@@ -70,7 +71,8 @@ Partial Class DetallesIncidencia
         Me.ContextMenuStrip2 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.EliminarArchivoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
-        Me.rbVario = New System.Windows.Forms.RadioButton()
+        Me.btnEliminar = New System.Windows.Forms.Button()
+        Me.btnModificarNumeracion = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -217,6 +219,16 @@ Partial Class DetallesIncidencia
         Me.txtProducto.Text = "PT00000000"
         Me.txtProducto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
+        'rbVario
+        '
+        Me.rbVario.AutoSize = True
+        Me.rbVario.Location = New System.Drawing.Point(232, 50)
+        Me.rbVario.Name = "rbVario"
+        Me.rbVario.Size = New System.Drawing.Size(49, 17)
+        Me.rbVario.TabIndex = 5
+        Me.rbVario.Text = "Vario"
+        Me.rbVario.UseVisualStyleBackColor = True
+        '
         'rbProdTerminado
         '
         Me.rbProdTerminado.AutoSize = True
@@ -338,16 +350,17 @@ Partial Class DetallesIncidencia
         '
         'btnMovimientos
         '
-        Me.btnMovimientos.Location = New System.Drawing.Point(621, 509)
+        Me.btnMovimientos.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMovimientos.Location = New System.Drawing.Point(585, 509)
         Me.btnMovimientos.Name = "btnMovimientos"
         Me.btnMovimientos.Size = New System.Drawing.Size(120, 41)
         Me.btnMovimientos.TabIndex = 17
-        Me.btnMovimientos.Text = "SEGUIMIENTO DE MOVIMIENTOS"
+        Me.btnMovimientos.Text = "VER MOVIMIENTOS"
         Me.btnMovimientos.UseVisualStyleBackColor = True
         '
         'btnHojaProduccion
         '
-        Me.btnHojaProduccion.Location = New System.Drawing.Point(484, 509)
+        Me.btnHojaProduccion.Location = New System.Drawing.Point(466, 509)
         Me.btnHojaProduccion.Name = "btnHojaProduccion"
         Me.btnHojaProduccion.Size = New System.Drawing.Size(115, 41)
         Me.btnHojaProduccion.TabIndex = 16
@@ -365,7 +378,7 @@ Partial Class DetallesIncidencia
         '
         'btnCerrar
         '
-        Me.btnCerrar.Location = New System.Drawing.Point(218, 509)
+        Me.btnCerrar.Location = New System.Drawing.Point(709, 509)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(107, 41)
         Me.btnCerrar.TabIndex = 14
@@ -374,7 +387,7 @@ Partial Class DetallesIncidencia
         '
         'btnGrabar
         '
-        Me.btnGrabar.Location = New System.Drawing.Point(89, 509)
+        Me.btnGrabar.Location = New System.Drawing.Point(14, 509)
         Me.btnGrabar.Name = "btnGrabar"
         Me.btnGrabar.Size = New System.Drawing.Size(107, 41)
         Me.btnGrabar.TabIndex = 13
@@ -556,15 +569,24 @@ Partial Class DetallesIncidencia
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
-        'rbVario
+        'btnEliminar
         '
-        Me.rbVario.AutoSize = True
-        Me.rbVario.Location = New System.Drawing.Point(232, 50)
-        Me.rbVario.Name = "rbVario"
-        Me.rbVario.Size = New System.Drawing.Size(49, 17)
-        Me.rbVario.TabIndex = 5
-        Me.rbVario.Text = "Vario"
-        Me.rbVario.UseVisualStyleBackColor = True
+        Me.btnEliminar.Location = New System.Drawing.Point(125, 509)
+        Me.btnEliminar.Name = "btnEliminar"
+        Me.btnEliminar.Size = New System.Drawing.Size(107, 41)
+        Me.btnEliminar.TabIndex = 14
+        Me.btnEliminar.Text = "ELIMINAR"
+        Me.btnEliminar.UseVisualStyleBackColor = True
+        '
+        'btnModificarNumeracion
+        '
+        Me.btnModificarNumeracion.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnModificarNumeracion.Location = New System.Drawing.Point(236, 509)
+        Me.btnModificarNumeracion.Name = "btnModificarNumeracion"
+        Me.btnModificarNumeracion.Size = New System.Drawing.Size(107, 41)
+        Me.btnModificarNumeracion.TabIndex = 14
+        Me.btnModificarNumeracion.Text = "MODIF. NUMERACIÓN INC"
+        Me.btnModificarNumeracion.UseVisualStyleBackColor = True
         '
         'DetallesIncidencia
         '
@@ -576,6 +598,8 @@ Partial Class DetallesIncidencia
         Me.Controls.Add(Me.btnHojaProduccion)
         Me.Controls.Add(Me.btnControles)
         Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.btnModificarNumeracion)
+        Me.Controls.Add(Me.btnEliminar)
         Me.Controls.Add(Me.btnCerrar)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.btnGrabar)
@@ -648,4 +672,6 @@ Partial Class DetallesIncidencia
     Friend WithEvents Button3 As System.Windows.Forms.Button
     Friend WithEvents btnDesvincularSAC As System.Windows.Forms.Button
     Friend WithEvents rbVario As System.Windows.Forms.RadioButton
+    Friend WithEvents btnEliminar As System.Windows.Forms.Button
+    Friend WithEvents btnModificarNumeracion As System.Windows.Forms.Button
 End Class

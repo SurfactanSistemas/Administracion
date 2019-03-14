@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.LBPerfil = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -100,8 +100,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel11 = new System.Windows.Forms.Panel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label14 = new System.Windows.Forms.Label();
             this.CB_Necesario = new System.Windows.Forms.CheckBox();
             this.panel10 = new System.Windows.Forms.Panel();
@@ -368,6 +368,7 @@
             // 
             this.TB_Equiv2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Equiv2.Location = new System.Drawing.Point(122, 425);
+            this.TB_Equiv2.MaxLength = 100;
             this.TB_Equiv2.Name = "TB_Equiv2";
             this.TB_Equiv2.Size = new System.Drawing.Size(638, 20);
             this.TB_Equiv2.TabIndex = 95;
@@ -377,6 +378,7 @@
             // 
             this.TB_Equiv1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Equiv1.Location = new System.Drawing.Point(122, 397);
+            this.TB_Equiv1.MaxLength = 100;
             this.TB_Equiv1.Name = "TB_Equiv1";
             this.TB_Equiv1.Size = new System.Drawing.Size(638, 20);
             this.TB_Equiv1.TabIndex = 94;
@@ -416,6 +418,7 @@
             // 
             this.TB_Otros2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Otros2.Location = new System.Drawing.Point(122, 367);
+            this.TB_Otros2.MaxLength = 100;
             this.TB_Otros2.Name = "TB_Otros2";
             this.TB_Otros2.Size = new System.Drawing.Size(445, 20);
             this.TB_Otros2.TabIndex = 89;
@@ -445,6 +448,7 @@
             // 
             this.TB_Otros1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Otros1.Location = new System.Drawing.Point(122, 339);
+            this.TB_Otros1.MaxLength = 100;
             this.TB_Otros1.Name = "TB_Otros1";
             this.TB_Otros1.Size = new System.Drawing.Size(445, 20);
             this.TB_Otros1.TabIndex = 84;
@@ -484,6 +488,7 @@
             // 
             this.TB_ObservCondFisica.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_ObservCondFisica.Location = new System.Drawing.Point(353, 312);
+            this.TB_ObservCondFisica.MaxLength = 50;
             this.TB_ObservCondFisica.Name = "TB_ObservCondFisica";
             this.TB_ObservCondFisica.Size = new System.Drawing.Size(214, 20);
             this.TB_ObservCondFisica.TabIndex = 80;
@@ -493,6 +498,7 @@
             // 
             this.TB_CondFisica.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_CondFisica.Location = new System.Drawing.Point(122, 312);
+            this.TB_CondFisica.MaxLength = 50;
             this.TB_CondFisica.Name = "TB_CondFisica";
             this.TB_CondFisica.Size = new System.Drawing.Size(214, 20);
             this.TB_CondFisica.TabIndex = 79;
@@ -532,6 +538,7 @@
             // 
             this.TB_ObservExp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_ObservExp.Location = new System.Drawing.Point(353, 284);
+            this.TB_ObservExp.MaxLength = 50;
             this.TB_ObservExp.Name = "TB_ObservExp";
             this.TB_ObservExp.Size = new System.Drawing.Size(214, 20);
             this.TB_ObservExp.TabIndex = 75;
@@ -541,6 +548,7 @@
             // 
             this.TB_Exp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Exp.Location = new System.Drawing.Point(122, 284);
+            this.TB_Exp.MaxLength = 50;
             this.TB_Exp.Name = "TB_Exp";
             this.TB_Exp.Size = new System.Drawing.Size(214, 20);
             this.TB_Exp.TabIndex = 74;
@@ -580,6 +588,7 @@
             // 
             this.TB_ObservIdioma.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_ObservIdioma.Location = new System.Drawing.Point(353, 256);
+            this.TB_ObservIdioma.MaxLength = 50;
             this.TB_ObservIdioma.Name = "TB_ObservIdioma";
             this.TB_ObservIdioma.Size = new System.Drawing.Size(214, 20);
             this.TB_ObservIdioma.TabIndex = 70;
@@ -589,6 +598,7 @@
             // 
             this.TB_Idioma.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Idioma.Location = new System.Drawing.Point(122, 256);
+            this.TB_Idioma.MaxLength = 50;
             this.TB_Idioma.Name = "TB_Idioma";
             this.TB_Idioma.Size = new System.Drawing.Size(214, 20);
             this.TB_Idioma.TabIndex = 69;
@@ -628,6 +638,7 @@
             // 
             this.TB_ObservTerciaria.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_ObservTerciaria.Location = new System.Drawing.Point(353, 228);
+            this.TB_ObservTerciaria.MaxLength = 50;
             this.TB_ObservTerciaria.Name = "TB_ObservTerciaria";
             this.TB_ObservTerciaria.Size = new System.Drawing.Size(214, 20);
             this.TB_ObservTerciaria.TabIndex = 65;
@@ -637,6 +648,7 @@
             // 
             this.TB_Terciaria.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Terciaria.Location = new System.Drawing.Point(122, 228);
+            this.TB_Terciaria.MaxLength = 50;
             this.TB_Terciaria.Name = "TB_Terciaria";
             this.TB_Terciaria.Size = new System.Drawing.Size(214, 20);
             this.TB_Terciaria.TabIndex = 64;
@@ -676,6 +688,7 @@
             // 
             this.TB_ObservSecundaria.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_ObservSecundaria.Location = new System.Drawing.Point(353, 201);
+            this.TB_ObservSecundaria.MaxLength = 50;
             this.TB_ObservSecundaria.Name = "TB_ObservSecundaria";
             this.TB_ObservSecundaria.Size = new System.Drawing.Size(214, 20);
             this.TB_ObservSecundaria.TabIndex = 60;
@@ -685,6 +698,7 @@
             // 
             this.TB_Secundaria.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Secundaria.Location = new System.Drawing.Point(122, 201);
+            this.TB_Secundaria.MaxLength = 50;
             this.TB_Secundaria.Name = "TB_Secundaria";
             this.TB_Secundaria.Size = new System.Drawing.Size(214, 20);
             this.TB_Secundaria.TabIndex = 59;
@@ -724,6 +738,7 @@
             // 
             this.TB_ObservPrimaria.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_ObservPrimaria.Location = new System.Drawing.Point(353, 173);
+            this.TB_ObservPrimaria.MaxLength = 50;
             this.TB_ObservPrimaria.Name = "TB_ObservPrimaria";
             this.TB_ObservPrimaria.Size = new System.Drawing.Size(214, 20);
             this.TB_ObservPrimaria.TabIndex = 55;
@@ -763,6 +778,7 @@
             // 
             this.TB_Primaria.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Primaria.Location = new System.Drawing.Point(122, 173);
+            this.TB_Primaria.MaxLength = 50;
             this.TB_Primaria.Name = "TB_Primaria";
             this.TB_Primaria.Size = new System.Drawing.Size(214, 20);
             this.TB_Primaria.TabIndex = 50;
@@ -801,6 +817,7 @@
             // TB_Tareas3
             // 
             this.TB_Tareas3.Location = new System.Drawing.Point(73, 98);
+            this.TB_Tareas3.MaxLength = 100;
             this.TB_Tareas3.Name = "TB_Tareas3";
             this.TB_Tareas3.Size = new System.Drawing.Size(687, 20);
             this.TB_Tareas3.TabIndex = 46;
@@ -809,6 +826,7 @@
             // TB_Tareas2
             // 
             this.TB_Tareas2.Location = new System.Drawing.Point(73, 72);
+            this.TB_Tareas2.MaxLength = 100;
             this.TB_Tareas2.Name = "TB_Tareas2";
             this.TB_Tareas2.Size = new System.Drawing.Size(687, 20);
             this.TB_Tareas2.TabIndex = 45;
@@ -817,6 +835,7 @@
             // TB_Tareas1
             // 
             this.TB_Tareas1.Location = new System.Drawing.Point(73, 46);
+            this.TB_Tareas1.MaxLength = 100;
             this.TB_Tareas1.Name = "TB_Tareas1";
             this.TB_Tareas1.Size = new System.Drawing.Size(687, 20);
             this.TB_Tareas1.TabIndex = 44;
@@ -868,6 +887,13 @@
             this.tabPage4.TabIndex = 1;
             this.tabPage4.Text = "CONOCIMIENTOS PARA EL PUESTO";
             // 
+            // panel11
+            // 
+            this.panel11.Location = new System.Drawing.Point(128, 369);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(19, 29);
+            this.panel11.TabIndex = 101;
+            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.label14);
@@ -881,13 +907,6 @@
             this.groupBox1.Size = new System.Drawing.Size(726, 51);
             this.groupBox1.TabIndex = 105;
             this.groupBox1.TabStop = false;
-            // 
-            // panel11
-            // 
-            this.panel11.Location = new System.Drawing.Point(128, 369);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(19, 29);
-            this.panel11.TabIndex = 101;
             // 
             // label14
             // 
@@ -1001,17 +1020,17 @@
             this.DGV_Temas.Location = new System.Drawing.Point(16, 20);
             this.DGV_Temas.Margin = new System.Windows.Forms.Padding(0);
             this.DGV_Temas.Name = "DGV_Temas";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGV_Temas.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.DGV_Temas.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV_Temas.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.DGV_Temas.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.DGV_Temas.Size = new System.Drawing.Size(748, 285);
             this.DGV_Temas.TabIndex = 7;
             this.DGV_Temas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Temas_CellClick);
@@ -1065,6 +1084,7 @@
             // 
             this.TB_DecPerfil.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_DecPerfil.Location = new System.Drawing.Point(175, 22);
+            this.TB_DecPerfil.MaxLength = 50;
             this.TB_DecPerfil.Name = "TB_DecPerfil";
             this.TB_DecPerfil.Size = new System.Drawing.Size(256, 20);
             this.TB_DecPerfil.TabIndex = 34;
@@ -1146,7 +1166,6 @@
             this.TB_Codigo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Codigo.Location = new System.Drawing.Point(82, 22);
             this.TB_Codigo.Name = "TB_Codigo";
-            this.TB_Codigo.ReadOnly = true;
             this.TB_Codigo.Size = new System.Drawing.Size(84, 20);
             this.TB_Codigo.TabIndex = 5;
             this.TB_Codigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;

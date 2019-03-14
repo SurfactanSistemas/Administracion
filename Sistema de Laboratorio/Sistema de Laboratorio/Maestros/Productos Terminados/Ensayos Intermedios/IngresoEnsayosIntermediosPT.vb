@@ -1,4 +1,5 @@
 ﻿Imports System.Text.RegularExpressions
+Imports ConsultasVarias
 
 Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerminados, IIngresoClaveSeguridad, IIngresoMotivoDesvio
 
@@ -113,6 +114,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                         Dim WUnidadEspecif = OrDefault(.Item("UnidadEspecif"), "")
                         Dim WMenorIgualEspecif = OrDefault(.Item("MenorIgualEspecif"), "")
                         Dim WInformaEspecif = OrDefault(.Item("InformaEspecif"), "")
+                        Dim WFormulaEspecif = OrDefault(.Item("FormulaEspecif"), "")
                         Dim WImpreResultado = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif)
 
                         WFecha = OrDefault(.Item("Fecha"), "")
@@ -123,6 +125,13 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                         WNroDesvio = OrDefault(.Item("NroDesvio"), "")
                         WArchivo = OrDefault(.Item("Archiva"), "")
                         WMotivoDesvio = OrDefault(.Item("MotivoDesvio"), "")
+
+                        Dim WFormulas(10, 2) As String
+
+                        For i = 1 To 10
+                            WFormulas(i, 1) = Trim(OrDefault(.Item("Variable" & i), ""))
+                            WFormulas(i, 2) = formatonumerico(OrDefault(.Item("VariableValor" & i), "0"), 10)
+                        Next
 
                         If Val(WTipoEspecif) = 0 And WImpreResultado <> "" Then WImpreResultado &= " (c)"
 
@@ -146,6 +155,13 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                             .Cells("MenorIgualEspecif").Value = WMenorIgualEspecif
                             .Cells("InformaEspecif").Value = WInformaEspecif
                             .Cells("Parametro").Value = Trim(WImpreResultado)
+                            .Cells("FormulaEspecif").Value = Trim(WFormulaEspecif)
+
+                            For i = 1 To 10
+                                .Cells("Variable" & i).Value = Trim(WFormulas(i, 1))
+                                .Cells("VariableValor" & i).Value = WFormulas(i, 2)
+                            Next
+
                         End With
 
                     End With
@@ -197,7 +213,14 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                         Dim WUnidadEspecif = OrDefault(.Item("UnidadEspecif"), "")
                         Dim WMenorIgualEspecif = OrDefault(.Item("MenorIgualEspecif"), "")
                         Dim WInformaEspecif = OrDefault(.Item("InformaEspecif"), "")
+                        Dim WFormula = Trim(OrDefault(.Item("FormulaEspecif"), ""))
                         Dim WImpreParametro = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif)
+
+                        Dim WFormulas(10) As String
+
+                        For i = 1 To 10
+                            WFormulas(i) = Trim(OrDefault(.Item("Variable" & i), ""))
+                        Next
 
                         If Val(WTipoEspecif) = 0 And WImpreParametro <> "" Then WImpreParametro &= " (c)"
 
@@ -217,6 +240,13 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                             .Cells("MenorIgualEspecif").Value = WMenorIgualEspecif
                             .Cells("InformaEspecif").Value = WInformaEspecif
                             .Cells("Parametro").Value = Trim(WImpreParametro)
+                            .Cells("FormulaEspecif").Value = Trim(WFormula)
+
+                            For i = 1 To 10
+                                .Cells("Variable" & i).Value = Trim(WFormulas(i))
+                                .Cells("VariableValor" & i).Value = "0"
+                            Next
+
                         End With
 
                     End With
@@ -423,10 +453,25 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                         Dim WUnidad As String = ""
 
                         With dgvEnsayos.Rows(.RowIndex)
+
                             WTipo = OrDefault(.Cells("TipoEspecif").Value, "")
                             WDesde = OrDefault(.Cells("DesdeEspecif").Value, "")
                             WHasta = OrDefault(.Cells("HastaEspecif").Value, "")
                             WUnidad = OrDefault(.Cells("UnidadEspecif").Value, "")
+                            Dim WFormula = OrDefault(.Cells("FormulaEspecif").Value, "")
+                            Dim WVariables(10, 2) As String
+
+                            For i = 1 To 10
+                                WVariables(i, 1) = Trim(OrDefault(.Cells("Variable" & i).Value, ""))
+                                WVariables(i, 2) = OrDefault(.Cells("VariableValor" & i).Value, "")
+                            Next
+
+                            With New IngresoVariablesFormula(WFormula, WVariables, WValor)
+                                Dim WDialogResult = .ShowDialog(Me)
+                                If WDialogResult = Windows.Forms.DialogResult.OK Then
+                                    WValor = WValor.Replace(",", ".")
+                                End If
+                            End With
 
                             Dim WResultado As String = _GenerarImpreResultado(WTipo, WDesde, WHasta, WUnidad, WValor)
 
@@ -462,7 +507,6 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
     Private Sub btnGrabar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnGrabar.Click
 
         Try
-
             _ValidarDatos()
 
             If WActualizacionBloqueada Then
@@ -570,6 +614,15 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                     Dim WMenorIgualEspecif As String = OrDefault(.Cells("MenorIgualEspecif").Value, 0)
                     Dim WInformaEspecif As String = OrDefault(.Cells("InformaEspecif").Value, 0)
                     Dim WObservaciones As String = OrDefault(.Cells("Observaciones").Value, "")
+                    Dim WFormulaEspecif As String = OrDefault(.Cells("FormulaEspecif").Value, "")
+
+                    Dim WFormulas(10, 2) As String
+
+                    For i = 1 To 10
+                        WFormulas(i, 1) = Trim(OrDefault(.Cells("Variable" & i).Value, ""))
+                        WFormulas(i, 2) = formatonumerico(OrDefault(.Cells("Variable" & i).Value, ""), 10)
+                    Next
+
                     WResultado = _GenerarImpreResultado(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WValor)
                     'Dim WImpreResultado = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif)
 
@@ -608,6 +661,13 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                     ZSql = ZSql & "Paginas ,"
                     ZSql = ZSql & "Estado ,"
                     ZSql = ZSql & "Confecciono ,"
+                    ZSql = ZSql & "FormulaEspecif ,"
+
+                    For i = 1 To 10
+                        ZSql = ZSql & "Variable" & i & " ,"
+                        ZSql = ZSql & "VariableValor" & i & " ,"
+                    Next
+
                     ZSql = ZSql & "Liberada )"
                     ZSql = ZSql & "Values ("
                     ZSql = ZSql & "'" & WClave & "',"
@@ -639,6 +699,13 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                     ZSql = ZSql & "'" & WPaginas.left(20) & "',"
                     ZSql = ZSql & "'" & "1" & "',"
                     ZSql = ZSql & "'" & WConfecciono.left(50) & "',"
+                    ZSql = ZSql & "'" & WFormulaEspecif & "',"
+
+                    For i = 1 To 10
+                        ZSql = ZSql & "'" & WFormulas(i, 1) & "',"
+                        ZSql = ZSql & "'" & WFormulas(i, 2) & "',"
+                    Next
+
                     ZSql = ZSql & "'" & WLiberada & "')"
 
                     WSqls.Add(ZSql)

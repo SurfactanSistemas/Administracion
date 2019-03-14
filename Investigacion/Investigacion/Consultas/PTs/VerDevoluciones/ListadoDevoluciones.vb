@@ -356,7 +356,7 @@ Public Class ListadoDevoluciones:Implements IExportar
                     Dim WCliente As DataRow = GetSingle("SELECT Razon FROM Cliente WHERE Cliente = '" & _r.Item("Cliente") & "'")
                     If WCliente IsNot Nothing Then _r.Item("DescCliente") = Trim(OrDefault(WCliente.Item("Razon"), ""))
                     _r.Item("PartiOri") = Trim(OrDefault(.Item("PartiOri"), ""))
-                    _r.Item("Estado") = Trim(OrDefault(.Item("Estado"), "SIN DEFINIR"))
+                    _r.Item("Estado") = _TraerEstadoProducto(_r.Item("Partida"), _r.Item("Codigo"), _r.Item("Cantidad"), emp, OrDefault(.Item("Estado"), "SIN DEFINIR"))
                     _r.Item("Empresa") = emp
 
                     WDevols.Rows.Add(_r)
@@ -379,6 +379,22 @@ Public Class ListadoDevoluciones:Implements IExportar
         End If
 
     End Sub
+
+    Private Function _TraerEstadoProducto(ByVal _Hoja As String, ByVal _Terminado As String, ByVal _Cantidad As String, ByVal _Empresa As String, ByVal Defecto As String) As String
+
+        For Each emp As String In Empresas
+
+            Dim WHoja As DataRow = GetSingle("SELECT Producto FROM Hoja WHERE Tipo = 'T' And Terminado = '" & _Terminado & "' And Lote1 = '" & _Hoja & "' And Cantidad = '" & _Cantidad & "'", emp)
+
+            If WHoja IsNot Nothing Then
+                Return Helper.Left(WHoja.Item("Producto"), 2).ToUpper
+            End If
+
+        Next
+
+        Return Defecto
+
+    End Function
 
     Private Function _GenerarStringOrdenamiento(ByVal selectedIndex As Integer) As String
 
@@ -626,7 +642,7 @@ Public Class ListadoDevoluciones:Implements IExportar
 
         tabla = New DSAuxi.DevolClientesDataTable
 
-        For Each row As datagridviewrow In dgvDevoluciones.Rows
+        For Each row As DataGridViewRow In dgvDevoluciones.Rows
             With row
                 Dim r As DataRow = tabla.NewRow
 

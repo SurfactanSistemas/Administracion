@@ -56,6 +56,9 @@
     <Reference Include="DataGridViewCustomColumn">
       <HintPath>..\..\ConsultasVarias\ConsultasVarias\CustomControls\DataGridViewCustomColumn.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=11.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
@@ -136,6 +139,12 @@
       <DependentUpon>ReporteDevolucionesClientes.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\Consultas\ReporteEnsayosProductosPorPartida.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteEnsayosProductosPorPartida.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\Consultas\ReporteExportarListadoHojasPTPorCodigo.vb">
       <DependentUpon>ReporteExportarListadoHojasPTPorCodigo.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -179,6 +188,10 @@
     <EmbeddedResource Include="Reportes\Consultas\ReporteDevolucionesClientes.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteDevolucionesClientes.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Consultas\ReporteEnsayosProductosPorPartida.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteEnsayosProductosPorPartida.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Consultas\ReporteExportarListadoHojasPTPorCodigo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

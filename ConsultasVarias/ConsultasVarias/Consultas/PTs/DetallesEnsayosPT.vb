@@ -33,7 +33,9 @@ Public Class DetallesEnsayosPT
 
         '        _ImprimeEnsayos()
         Cursor = Cursors.WaitCursor
-        BackgroundWorker1.RunWorkerAsync()
+        With BackgroundWorker1
+            If Not .IsBusy Then .RunWorkerAsync()
+        End With
 
     End Sub
 

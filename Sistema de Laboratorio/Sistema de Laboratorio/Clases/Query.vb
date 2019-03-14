@@ -109,6 +109,10 @@ Module Query
         End Try
     End Sub
 
+    Public Sub ExecuteNonQueries(ByVal q As String)
+        ExecuteNonQueries({q})
+    End Sub
+
     Public Sub ExecuteNonQueries(ByVal empresa As String, ByVal ParamArray q As String())
 
         Dim trans As SqlTransaction = Nothing

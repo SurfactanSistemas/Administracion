@@ -42,11 +42,11 @@ namespace Modulo_Capacitacion.Maestros.Legajos
 
         private void Observaciones_Load(object sender, EventArgs e)
         {
-            TB_ObservExt1.Text = p;
-            TB_ObservExt2.Text = p_2;
-            TB_ObservExt3.Text = p_3;
-            TB_ObservExt4.Text = p_4;
-            TB_ObservExt5.Text = p_5;
+            TB_ObservExt1.Text = p.Trim();
+            TB_ObservExt2.Text = p_2.Trim();
+            TB_ObservExt3.Text = p_3.Trim();
+            TB_ObservExt4.Text = p_4.Trim();
+            TB_ObservExt5.Text = p_5.Trim();
         }
 
         private void BT_Guardar_Click(object sender, EventArgs e)
@@ -74,6 +74,11 @@ namespace Modulo_Capacitacion.Maestros.Legajos
         private void BT_Salir_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void Observaciones_Shown(object sender, EventArgs e)
+        {
+            TB_ObservExt1.Focus();
         }
     }
 }

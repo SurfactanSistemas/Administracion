@@ -79,7 +79,7 @@ namespace Negocio
         public int ObtenerUltimoId()
         {
             Conexion repo = new Conexion();
-            string consulta = "select (max(codigo) +1) from tarea";
+            string consulta = "select (max(codigo) +1) from tarea Where Codigo < 1000";
             string valor = repo.TraerUltimoId(consulta);
             return int.Parse(valor);
             
@@ -98,7 +98,7 @@ namespace Negocio
                 + " Descripcion = '" + Descripcion + "', Vigencia = '" + Vigencia + "', Sector = '" + sector.Codigo + "',"
                 + " TareasI = '" + TareasI + "', TareasII = '" + TareasII + "', TareasIII = '" + TareasIII + "',"
                 + " DescriI = '" + DescriI + "', DescriII = '" + DescriII + "', DescriIII = '" + DescriIII + "',"
-                + " DescriIV = '" + DescriIV + "', DescriV = '" + DescriIV + "', ObservaI = '" + ObservaI + "',"
+                + " DescriIV = '" + DescriIV + "', DescriV = '" + DescriV + "', ObservaI = '" + ObservaI + "',"
                 + " ObservaII = '" + ObservaII + "', ObservaIII = '" + ObservaIII + "', ObservaIV = '" + ObservaIV + "',"
                 + " ObservaV = '" + ObservaV + "', NecesariaI = " + NecesariaI + ", NecesariaII = " + NecesariaII + ","
                 + " NecesariaIII = " + NecesariaIII + ", NecesariaIV = " + NecesariaIV + ", NecesariaV = " + NecesariaV + ","
@@ -457,7 +457,7 @@ namespace Negocio
             Conexion repo = new Conexion();
             string consulta = "SELECT T.Codigo, T.Descripcion as Perfil,T.Vigencia,T.Version, " +
             "S.Descripcion as Sector, T.TareasI as Descripcion " +
-            "FROM Tarea T inner join Sector S on S.Codigo = T.Sector " +
+            "FROM Tarea T LEFT OUTER JOIN Sector S on S.Codigo = T.Sector " +
             "where T.Renglon = 1   order by T.Codigo asc";
             
             return repo.Listar(consulta);

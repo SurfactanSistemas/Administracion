@@ -83,7 +83,6 @@ Partial Class IngresoClaveSeguridad
         Me.MinimizeBox = False
         Me.Name = "IngresoClaveSeguridad"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "IngresoClaveSeguridad"
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)

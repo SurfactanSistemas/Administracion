@@ -1203,10 +1203,10 @@ Public Class Proforma
         WDescripcionMonto = UCase(_Left(txtDescripcionTotal.Text, 100))
         WPais = _Left(txtPais.Text, 15)
 
-        WCondPagoII = Trim(txtCondicionPagoII.Text)
-        WObservacionesII = Trim(txtObservacionesII.Text)
-        WObservacionesIII = Trim(txtObservacionesIII.Text)
-        WDescripcionMontoII = Trim(txtDescripcionTotalII.Text)
+        WCondPagoII = _Left(Trim(txtCondicionPagoII.Text), 50)
+        WObservacionesII = _Left(Trim(txtObservacionesII.Text), 100)
+        WObservacionesIII = _Left(Trim(txtObservacionesIII.Text), 100)
+        WDescripcionMontoII = _Left(Trim(txtDescripcionTotalII.Text), 100)
 
         WEstado = Trim(Str$(cmbEstado.SelectedIndex))
         WIdioma = Trim(Str$(cmbIdioma.SelectedIndex))
@@ -1268,107 +1268,107 @@ Public Class Proforma
 
         'WViaDesc = UCase(Trim(cmbVia.SelectedText))
 
-        Try
-            cn.ConnectionString = _CS() ' TRUE: Para testing en local.
+        'Try
+        cn.ConnectionString = _CS() ' TRUE: Para testing en local.
 
-            cn.Open()
-            trans = cn.BeginTransaction
+        cn.Open()
+        trans = cn.BeginTransaction
 
-            cm.Connection = cn
+        cm.Connection = cn
 
-            WSql = "SELECT ISNULL(Entregado, '') as Entregado, ISNULL(FechaEntregado, '') as EntregadoFecha, ISNULL(FechaEntregadoOrd, '') as EntregadoFechaOrd FROM ProformaExportacion WHERE Proforma = '" & XNroProforma & "'"
+        WSql = "SELECT ISNULL(Entregado, '') as Entregado, ISNULL(FechaEntregado, '') as EntregadoFecha, ISNULL(FechaEntregadoOrd, '') as EntregadoFechaOrd FROM ProformaExportacion WHERE Proforma = '" & XNroProforma & "'"
 
-            cm.Transaction = trans
-            cm.CommandText = WSql
+        cm.Transaction = trans
+        cm.CommandText = WSql
 
-            dr = cm.ExecuteReader()
+        dr = cm.ExecuteReader()
 
-            If dr.HasRows then
-                dr.Read
-                WEntregado = dr.Item("Entregado")
-                WEntregadoFecha = dr.Item("EntregadoFecha")
-                WEntregadoFechaOrd = dr.Item("EntregadoFechaOrd")
-            End If
+        If dr.HasRows Then
+            dr.Read()
+            WEntregado = dr.Item("Entregado")
+            WEntregadoFecha = dr.Item("EntregadoFecha")
+            WEntregadoFechaOrd = dr.Item("EntregadoFechaOrd")
+        End If
 
-            If not dr.IsClosed then dr.Close
+        If Not dr.IsClosed Then dr.Close()
 
-            WSql = "DELETE ProformaExportacion WHERE Proforma = '" & XNroProforma & "'"
+        WSql = "DELETE ProformaExportacion WHERE Proforma = '" & XNroProforma & "'"
 
-            cm.CommandText = WSql
+        cm.CommandText = WSql
 
-            cm.ExecuteNonQuery()
+        cm.ExecuteNonQuery()
 
-            For Each row As DataGridViewRow In dgvProductos.Rows
-                With row
-                    WProd = Trim(.Cells(0).Value)
-                    WDesc = Trim(.Cells(1).Value)
-                    WDesc = _Left(WDesc, 100)
-                    WCant = Val(.Cells(2).Value)
-                    WPrecio = Val(.Cells(3).Value)
+        For Each row As DataGridViewRow In dgvProductos.Rows
+            With row
+                WProd = Trim(.Cells(0).Value)
+                WDesc = Trim(.Cells(1).Value)
+                WDesc = _Left(WDesc, 100)
+                WCant = Val(.Cells(2).Value)
+                WPrecio = Val(.Cells(3).Value)
 
-                    If WProd.Replace("-", "") <> "" Then
+                If WProd.Replace("-", "") <> "" Then
 
-                        If WCant > 0 And WPrecio > 0 Then
-                            WRenglon += 1
+                    If WCant > 0 And WPrecio > 0 Then
+                        WRenglon += 1
 
-                            XRenglon = Helper.ceros(WRenglon, 2)
+                        XRenglon = Helper.ceros(WRenglon, 2)
 
-                            WClave = XNroProforma & XRenglon
+                        WClave = XNroProforma & XRenglon
 
-                            WSql = "INSERT INTO ProformaExportacion (Clave, Proforma, Renglon, Fecha, FechaOrd, Estado, Cliente, Direccion, Localidad, CondPago, CondPagoII, OCCliente, Condicion, Via, ViaDesc, Observaciones, ObservacionesII, ObservacionesIII, Producto, DescriProducto, Cantidad, Precio, SubTotal, Flete, Seguro, Total, DescriTotal, DescriTotalII, Pais, Cerrada, PackingList, EnviarDocumentacion, Idioma, FechaLimite, FechaLimiteOrd)" _
-                                 & " VALUES " _
-                                 & " ('" & WClave & "', '" & XNroProforma & "', '" & XRenglon & "', '" & WFecha & "', '" & WFechaOrd & "', '" & WEstado & "', '" & WCliente & "', '" & WDireccion & "', '" & WLocalidad & "', '" & WCondPago & "', '" & WCondPagoII & "', '" & WOCCliente & "', '" & WCondicion & "', '" & WVia & "', '" & WViaDesc & "', " _
-                                 & "'" & WObservaciones & "', '" & WObservacionesII & "', '" & WObservacionesIII & "', '" & WProd & "', '" & WDesc & "', " & Helper.formatonumerico(WCant) & ", " & Helper.formatonumerico(WPrecio) & ", " & Helper.formatonumerico(WSubTotal) & ", " & Helper.formatonumerico(WFlete) & ", " & Helper.formatonumerico(WSeguro) & ", " _
-                                 & Helper.formatonumerico(WTotal) & ", '" & WDescripcionMonto & "', '" & WDescripcionMontoII & "', '" & WPais & "', '" & WProformaCerrada & "', '" & WPackingList & "', '" & WEnviarDoc & "', '" & WIdioma & "', '" & WFechaLimite & "', '" & WFechaLimiteOrd & "')"
+                        WSql = "INSERT INTO ProformaExportacion (Clave, Proforma, Renglon, Fecha, FechaOrd, Estado, Cliente, Direccion, Localidad, CondPago, CondPagoII, OCCliente, Condicion, Via, ViaDesc, Observaciones, ObservacionesII, ObservacionesIII, Producto, DescriProducto, Cantidad, Precio, SubTotal, Flete, Seguro, Total, DescriTotal, DescriTotalII, Pais, Cerrada, PackingList, EnviarDocumentacion, Idioma, FechaLimite, FechaLimiteOrd)" _
+                             & " VALUES " _
+                             & " ('" & WClave & "', '" & XNroProforma & "', '" & XRenglon & "', '" & WFecha & "', '" & WFechaOrd & "', '" & WEstado & "', '" & WCliente & "', '" & WDireccion & "', '" & WLocalidad & "', '" & WCondPago & "', '" & WCondPagoII & "', '" & WOCCliente & "', '" & WCondicion & "', '" & WVia & "', '" & WViaDesc & "', " _
+                             & "'" & WObservaciones & "', '" & WObservacionesII & "', '" & WObservacionesIII & "', '" & WProd & "', '" & WDesc & "', " & Helper.formatonumerico(WCant) & ", " & Helper.formatonumerico(WPrecio) & ", " & Helper.formatonumerico(WSubTotal) & ", " & Helper.formatonumerico(WFlete) & ", " & Helper.formatonumerico(WSeguro) & ", " _
+                             & Helper.formatonumerico(WTotal) & ", '" & WDescripcionMonto & "', '" & WDescripcionMontoII & "', '" & WPais & "', '" & WProformaCerrada & "', '" & WPackingList & "', '" & WEnviarDoc & "', '" & WIdioma & "', '" & WFechaLimite & "', '" & WFechaLimiteOrd & "')"
 
-                            cm.CommandText = WSql
+                        cm.CommandText = WSql
 
-                            cm.ExecuteNonQuery()
+                        cm.ExecuteNonQuery()
 
-                            cm.CommandText = "UPDATE ProformaExportacion SET Entregado = '" & WEntregado & "', FechaEntregado = '" & WEntregadoFecha & "', FechaEntregadoOrd = '" & WEntregadoFechaOrd & "' WHERE Proforma = '" & XNroProforma & "'"
-                            cm.ExecuteNonQuery()
+                        cm.CommandText = "UPDATE ProformaExportacion SET Entregado = '" & WEntregado & "', FechaEntregado = '" & WEntregadoFecha & "', FechaEntregadoOrd = '" & WEntregadoFechaOrd & "' WHERE Proforma = '" & XNroProforma & "'"
+                        cm.ExecuteNonQuery()
 
-                            If Not _TieneFDS(WProd, WDesc) Then
-                                WSinFDS &= WProd & " (" & WDesc & ") " & vbCrLf
-                            End If
-
+                        If Not _TieneFDS(WProd, WDesc) Then
+                            WSinFDS &= WProd & " (" & WDesc & ") " & vbCrLf
                         End If
 
                     End If
 
-                End With
-            Next
-
-            ' Si no hubo nigun error durante la carga de datos, confirmo los cambios.
-            trans.Commit()
-
-            If Trim(WSinFDS) <> "" Then
-                MsgBox("Los siguientes Productos, no poseen FDS: " & vbCrLf & WSinFDS, MsgBoxStyle.Information)
-            End If
-
-            txtNroProforma.Text = WNroProforma
-            MOSTRAR_MSG_IDIOMAS = False
-            txtNroProforma_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
-
-            txtNroProforma.Focus()
-
-        Catch ex As Exception
-            If Not IsNothing(trans) Then
-                ' En caso de una Excepcion, vuelvo para atras los cambios.
-                If Not IsNothing(dr) then
-                    If not dr.IsClosed then
-                        dr.Close
-                    End If
                 End If
-                trans.Rollback()
-                trans = Nothing
-            End If
-            cn.Close()
-            cn = Nothing
-            cm = Nothing
-            MsgBox(ex.Message, MsgBoxStyle.Exclamation)
-            Exit Sub
-        End Try
+
+            End With
+        Next
+
+        ' Si no hubo nigun error durante la carga de datos, confirmo los cambios.
+        trans.Commit()
+
+        If Trim(WSinFDS) <> "" Then
+            MsgBox("Los siguientes Productos, no poseen FDS: " & vbCrLf & WSinFDS, MsgBoxStyle.Information)
+        End If
+
+        txtNroProforma.Text = WNroProforma
+        MOSTRAR_MSG_IDIOMAS = False
+        txtNroProforma_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+
+        txtNroProforma.Focus()
+
+        'Catch ex As Exception
+        '    If Not IsNothing(trans) Then
+        '        ' En caso de una Excepcion, vuelvo para atras los cambios.
+        '        If Not IsNothing(dr) Then
+        '            If Not dr.IsClosed Then
+        '                dr.Close()
+        '            End If
+        '        End If
+        '        trans.Rollback()
+        '        trans = Nothing
+        '    End If
+        '    cn.Close()
+        '    cn = Nothing
+        '    cm = Nothing
+        '    MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+        '    Exit Sub
+        'End Try
 
         MsgBox("La Proforma " & XNroProforma & ", ha sido grabada con exito.", MsgBoxStyle.Information)
 

@@ -1406,7 +1406,7 @@ Public Class IngresoPruebasEnsayo
 
                 ' Limitamos los caracteres permitidos para cada una de las columnas.
                 Select Case iCol
-                    Case 5
+                    Case -1
                         If Not _EsNumeroOControl(keyData) Then
                             Return True
                         End If

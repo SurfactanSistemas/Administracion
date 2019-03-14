@@ -208,6 +208,12 @@
     <Compile Include="Formularios\Maestros\Incidencias\Estados de INC\NuevoEstadoINc.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formularios\Maestros\Incidencias\ModifNumeracionINC.Designer.vb">
+      <DependentUpon>ModifNumeracionINC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Maestros\Incidencias\ModifNumeracionINC.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\Maestros\Incidencias\SeleccionTipoIncidencia.Designer.vb">
       <DependentUpon>SeleccionTipoIncidencia.vb</DependentUpon>
     </Compile>
@@ -294,6 +300,7 @@
     </Compile>
     <Compile Include="Helper.vb" />
     <Compile Include="Interfaces\IExportarINC.vb" />
+    <Compile Include="Interfaces\IModifNumeracionINC.vb" />
     <Compile Include="Interfaces\INuevoTipoINC.vb" />
     <Compile Include="Interfaces\IAuxiNuevaSACDesdeINC.vb" />
     <Compile Include="Interfaces\IAyudaListadoSACs.vb" />
@@ -475,6 +482,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Maestros\Incidencias\Estados de INC\NuevoEstadoINc.resx">
       <DependentUpon>NuevoEstadoINc.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Maestros\Incidencias\ModifNumeracionINC.resx">
+      <DependentUpon>ModifNumeracionINC.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Maestros\Incidencias\SeleccionTipoIncidencia.resx">
       <DependentUpon>SeleccionTipoIncidencia.vb</DependentUpon>

@@ -1,8 +1,11 @@
-﻿Imports ConsultasVarias
+﻿Imports System.IO
+Imports ConsultasVarias
 Imports ConsultasVarias.Interfaces
 Imports ConsultasVarias.Clases
 Imports ConsultasVarias.Clases.Helper
 Imports ConsultasVarias.Clases.Query
+Imports Microsoft.Office.Interop
+Imports Microsoft.Office.Interop.Excel
 
 Public Class ListadoHojasPTPorCodigo : Implements IAyudaMPs, IExportar
 
@@ -15,7 +18,7 @@ Public Class ListadoHojasPTPorCodigo : Implements IAyudaMPs, IExportar
 
     Private Sub ListadoLaudosMPPorCodigo_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
 
-        Dim WEstados As New DataTable
+        Dim WEstados As New Data.DataTable
 
         txtDescMP.BackColor = Globales.WBackColorTerciario
 
@@ -29,13 +32,13 @@ Public Class ListadoHojasPTPorCodigo : Implements IAyudaMPs, IExportar
             .Rows.Add(EstadosLaudos.SinActualizar, "SIN ANALIZAR")
         End With
 
-        With CType(clbEstados, ListBox)
+        With CType(clbEstados, System.Windows.Forms.ListBox)
             .DataSource = WEstados
             .DisplayMember = "Descripcion"
             .ValueMember = "Estado"
         End With
 
-        Dim WPlantas As New DataTable
+        Dim WPlantas As New Data.DataTable
 
         With WPlantas
             .Columns.Add("Planta", GetType(Integer))
@@ -47,11 +50,11 @@ Public Class ListadoHojasPTPorCodigo : Implements IAyudaMPs, IExportar
             .Rows.Add(3, "SURFACTAN III", "Surfactan_III")
             .Rows.Add(4, "SURFACTAN IV", "Surfactan_IV")
             .Rows.Add(5, "SURFACTAN V", "Surfactan_V")
-            .Rows.Add(6, "SURFACTAN VI", "Surfactan_IV")
+            .Rows.Add(6, "SURFACTAN VI", "Surfactan_VI")
             .Rows.Add(7, "SURFACTAN VII", "Surfactan_VII")
         End With
 
-        With CType(clbPlantas, ListBox)
+        With CType(clbPlantas, System.Windows.Forms.ListBox)
             .DataSource = WPlantas
             .DisplayMember = "Descripcion"
             .ValueMember = "Planta"
@@ -173,7 +176,7 @@ Public Class ListadoHojasPTPorCodigo : Implements IAyudaMPs, IExportar
 
         dgvLaudos.DataSource = Nothing
 
-        Dim WDatos As New DataTable
+        Dim WDatos As New Data.DataTable
 
         With WDatos
             .Columns.Add("Fecha")
@@ -206,10 +209,11 @@ Public Class ListadoHojasPTPorCodigo : Implements IAyudaMPs, IExportar
             WFiltroFecha = " h.FechaOrd BETWEEN '" & WFechaDesdeOrd & "' And '" & WFechaHastaOrd & "' And "
         End If
 
+        Dim WTipoProdConsulta As String = ""
 
         For Each p As Object In clbPlantas.CheckedItems
 
-            Dim _Datos As DataTable
+            Dim _Datos As Data.DataTable
             Dim WDescEmpresa As String = ""
             Dim WidEmpresa As Integer = 0
 
@@ -222,12 +226,14 @@ Public Class ListadoHojasPTPorCodigo : Implements IAyudaMPs, IExportar
                 WidEmpresa = .Item("Planta")
 
                 Dim WProd As String = txtCodigo.Text.PadRight(12, " ").Substring(2, 10)
+                WTipoProdConsulta = Helper.Left(txtCodigo.Text, 2)
 
                 _Datos = GetAll("SELECT h.Fecha, h.Hoja, h.MarcaLabora, h.Producto, DescTerminado = t.Descripcion, h.Marca, h.Teorico, Cantidad = CASE ISNULL(h.Marca, '') WHEN 'X' THEN h.Realant ELSE h.Real END, Real = CASE ISNULL(h.Marca, '') WHEN 'X' THEN h.Realant ELSE h.Real END FROM Hoja h INNER JOIN Terminado t ON t.Codigo = h.Producto where " & WFiltroInventariadas & WFiltroFecha & " h.Producto LIKE '%" & WProd & "' And h.Renglon = 1 order by h.FechaOrd", emp)
             End With
 
             For Each row As DataRow In _Datos.Rows
                 With row
+
                     Dim _r As DataRow = WDatos.NewRow
 
                     Dim WTipoProd As String = Microsoft.VisualBasic.Left(.Item("Producto"), 2)
@@ -237,22 +243,27 @@ Public Class ListadoHojasPTPorCodigo : Implements IAyudaMPs, IExportar
                     _r.Item("Estado") = _DeterminarDescEstado(_r.Item("idEstado"))
 
                     _r.Item("Codigo") = UCase(.Item("Producto"))
-                    _r.Item("Descripcion") = Trim(OrDefault(.Item("DescTerminado"), ""))
 
                     If Not WEstados.ToList.Contains(_r.Item("idEstado")) Then Continue For
-                    If Microsoft.VisualBasic.Left(_r.Item("Codigo"), 2).ToUpper = "SE" And Not ckIncluirSEs.Checked Then Continue For
 
-                    _r.Item("Fecha") = OrDefault(.Item("Fecha"), "  /  /    ")
-                    _r.Item("FechaOrd") = ordenaFecha(_r.Item("Fecha"))
-                    _r.Item("Hoja") = OrDefault(.Item("Hoja"), 0)
-                    _r.Item("Cantidad") = formatonumerico(OrDefault(.Item("Cantidad"), "0"))
+                    If Helper.Left(_r.Item("Codigo"), 2) = WTipoProdConsulta Or (Helper.Left(_r.Item("Codigo"), 2) = "SE" And ckIncluirSEs.Checked) Then
 
-                    If Val(_r.Item("Cantidad")) = 0 Then _r.Item("Cantidad") = formatonumerico(OrDefault(.Item("Teorico"), "0"))
+                        _r.Item("Descripcion") = Trim(OrDefault(.Item("DescTerminado"), ""))
 
-                    _r.Item("idPlanta") = WidEmpresa
-                    _r.Item("Planta") = WDescEmpresa
+                        _r.Item("Fecha") = OrDefault(.Item("Fecha"), "  /  /    ")
+                        _r.Item("FechaOrd") = ordenaFecha(_r.Item("Fecha"))
+                        _r.Item("Hoja") = OrDefault(.Item("Hoja"), 0)
+                        _r.Item("Cantidad") = formatonumerico(OrDefault(.Item("Cantidad"), "0"))
 
-                    WDatos.Rows.Add(_r)
+                        If Val(_r.Item("Cantidad")) = 0 Then _r.Item("Cantidad") = formatonumerico(OrDefault(.Item("Teorico"), "0"))
+
+                        _r.Item("idPlanta") = WidEmpresa
+                        _r.Item("Planta") = WDescEmpresa
+
+                        WDatos.Rows.Add(_r)
+
+                    End If
+
                 End With
             Next
 
@@ -348,7 +359,7 @@ Public Class ListadoHojasPTPorCodigo : Implements IAyudaMPs, IExportar
     End Sub
 
     Private Sub txtCodigo_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles txtCodigo.DoubleClick
-        With New AyudaMPs
+        With New AyudaPTs
             .Show(Me)
         End With
     End Sub
@@ -392,7 +403,7 @@ Public Class ListadoHojasPTPorCodigo : Implements IAyudaMPs, IExportar
     Public Sub _ProcesarExportar(ByVal TipoSalida As [Enum]) Implements IExportar._ProcesarExportar
         Dim frm As New VistaPrevia
         Dim rpt As New ReporteExportarListadoHojasPTPorCodigo
-        Dim data As DataTable = (New DSAuxi).Tables("DetalleListadoLaudosMPPorCodigo").Clone
+        Dim data As Data.DataTable = (New DSAuxi).Tables("DetalleListadoLaudosMPPorCodigo").Clone
 
         For Each row As DataGridViewRow In dgvLaudos.Rows
             Dim _r As DataRow = data.NewRow
@@ -435,4 +446,362 @@ Public Class ListadoHojasPTPorCodigo : Implements IAyudaMPs, IExportar
     Private Sub cmbOrdenI_DropDownClosed(ByVal sender As Object, ByVal e As EventArgs) Handles cmbOrdenIII.DropDownClosed, cmbOrdenII.DropDownClosed, cmbOrdenI.DropDownClosed
         btnListar_Click(Nothing, Nothing)
     End Sub
+
+    Private Sub btnExportarListadoEnsayosPorPartida_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExportarListadoEnsayosPorPartida.Click
+
+        '
+        ' Creamos el Objeto Excel para comenzar a Trabajar.
+        '
+        Dim oApp As New Excel.Application()
+        Dim oBook As Excel.Workbook = oApp.Workbooks.Add
+        Dim oSheet As Excel.Worksheet = oApp.ActiveSheet
+
+        oApp.Visible = False
+
+        Dim celda As Excel.Range = oSheet.Cells(2, 1)
+
+        Dim WColumna As Integer = 2
+        Dim WFila As Integer = 2
+
+        ProgressBar1.Value = 0
+        ProgressBar1.Maximum = dgvLaudos.Rows.Count
+
+        Dim WUltimaColumna As Integer = dgvLaudos.Rows.Count
+
+        For i = 0 To WUltimaColumna - 1
+            Dim row As DataGridViewRow = dgvLaudos.Rows(i)
+
+            With row
+
+                If OrDefault(.Cells("idEstado").Value, 4) <> EstadosLaudos.SinActualizar Then
+
+                    WColumna += 1
+                    celda = oSheet.Cells(2, WColumna)
+                    celda.Value = OrDefault(.Cells("Hoja").Value, "")
+                    celda.EntireColumn.AutoFit()
+                    celda.BorderAround(LineStyle:=XlLineStyle.xlContinuous, Weight:=XlBorderWeight.xlMedium)
+
+                    WFila = 1
+
+                    Dim WEnsayos As Data.DataTable = _TraerDatosEnsayosHoja(.Cells("Hoja").Value)
+
+                    For Each ens As DataRow In WEnsayos.Rows
+                        With ens
+
+                            WFila += 1
+
+                            oSheet.Cells(WFila, 1) = _TraerDescripcionEnsayo(Trim(ens.Item("Ensayo")))
+                            oSheet.Cells(WFila, 2) = Trim(ens.Item("ValorStd"))
+
+                            If Trim(ens.Item("Valor")) = "" Then
+                                oSheet.Cells(WFila, WColumna) = Trim(ens.Item("ValorReg"))
+                            Else
+                                oSheet.Cells(WFila, WColumna) = Trim(ens.Item("Valor"))
+                                oSheet.Cells(WFila, 2) = Trim(ens.Item("ValorReg"))
+                            End If
+
+                        End With
+
+                        celda = oSheet.Cells(WFila, WColumna)
+                        celda.EntireColumn.AutoFit()
+                        celda.EntireColumn.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter
+                        celda.ColumnWidth = celda.ColumnWidth + 2
+                        celda.BorderAround(LineStyle:=XlLineStyle.xlContinuous, Weight:=XlBorderWeight.xlThin)
+
+                    Next
+
+                End If
+
+            End With
+
+            ProgressBar1.Increment(1)
+
+        Next
+
+        celda = oSheet.Cells(2, 1)
+        celda.Value = "Determinación Analítica"
+        celda.EntireColumn.AutoFit()
+        celda.BorderAround(LineStyle:=XlLineStyle.xlContinuous, Weight:=XlBorderWeight.xlMedium)
+
+        celda = oSheet.Cells(2, 2)
+        celda.Value = "Especificación"
+        celda.EntireColumn.AutoFit()
+        celda.EntireColumn.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter
+        celda.BorderAround(LineStyle:=XlLineStyle.xlContinuous, Weight:=XlBorderWeight.xlMedium)
+
+        oApp.Visible = True
+        oApp.UserControl = True
+
+        ProgressBar1.Value = 0
+
+        '
+        'Cerramos la interfaz.
+        '
+        oSheet = Nothing
+        'oBook.Close(False)
+        'oBook.SaveAs()
+        oBook = Nothing
+        oApp.Quit()
+        oApp = Nothing
+
+    End Sub
+
+    Private Function _TraerDescripcionEnsayo(ByVal Ensayo As String) As String
+        Dim WEnsayo As DataRow = GetSingle("SELECT Descripcion FROM Ensayos WHERE Codigo = '" & Ensayo & "'", "Surfactan_II")
+
+        If Not IsNothing(WEnsayo) Then
+            Return Ensayo.PadLeft(4, "0") & "  " & Trim(OrDefault(WEnsayo.Item("Descripcion"), ""))
+        End If
+
+        Return ""
+
+    End Function
+
+    Private Function _TraerDatosEnsayosHoja(ByVal Hoja As String) As Data.DataTable
+
+        Dim WEnsayos As New Data.DataTable
+        Dim WFecha, WProducto As String
+
+        With WEnsayos.Columns
+            .Add("Ensayo")
+            .Add("ValorStd")
+            .Add("ValorReg")
+            .Add("Valor")
+        End With
+
+        Dim WDatosEnsayos As DataRow = Nothing
+
+        For Each emp As String In Globales.Empresas
+
+            If emp.ToUpper = "SURFACTAN_III" Then
+                ' Verificamos si se trata o no de un producto de Farma (Planta III).
+                WDatosEnsayos = GetSingle(String.Format("SELECT TOP 1 Clave FROM PrueterFarma WHERE Partida = {0} And Renglon = 1 ", Hoja), emp)
+                If WDatosEnsayos IsNot Nothing Then
+                    Return _MostrarEnsayosFarma(Hoja)
+                End If
+
+            Else
+                WDatosEnsayos = GetSingle(String.Format("SELECT TOP 1 * FROM Prueter WHERE Prueba IN ('1{0}', '2{0}')", Hoja.PadLeft(6, "0")), emp)
+            End If
+
+            If WDatosEnsayos Is Nothing Then Continue For
+
+            With WDatosEnsayos
+                WFecha = OrDefault(.Item("Fecha"), "")
+                WProducto = OrDefault(.Item("Producto"), "")
+
+                For i = 1 To 10
+
+                    Dim r As DataRow = WEnsayos.NewRow
+
+                    r.Item("Ensayo") = ""
+                    r.Item("ValorStd") = ""
+                    r.Item("ValorReg") = OrDefault(.Item("Valor" & i), "")
+                    r.Item("Valor") = "" 'OrDefault(.Item("ValorNumero" & i), "")
+
+                    If Trim(r.Item("ValorReg")) <> "" Then WEnsayos.Rows.Add(r)
+                    'WEnsayos.Rows.Add(r)
+
+                Next
+
+            End With
+
+            Dim WBaseEspecif = IIf(_EsPellital, "Pelitall_II", "Surfactan_II")
+
+            Dim WEspecif As DataRow = GetSingle(String.Format("SELECT * FROM EspecifUnificaVersion WHERE Producto = '{0}' And right(FechaInicio, 4) + SUBSTRING(FechaInicio, 4, 2) + LEFT(FechaInicio, 2) <= '{1}' And right(FechaFinal, 4) + SUBSTRING(FechaFinal, 4, 2) + LEFT(FechaFinal, 2) >= '{1}' Order by Producto, Version", WProducto, ordenaFecha(WFecha)), WBaseEspecif)
+
+            If WEspecif Is Nothing Then
+                WEspecif = GetSingle(String.Format("SELECT * FROM EspecifUnificaVersion WHERE Producto = '{0}' And right(FechaInicio, 4) + SUBSTRING(FechaInicio, 4, 2) + LEFT(FechaInicio, 2) > '{1}' Order by Producto, Version", WProducto, ordenaFecha(WFecha)), WBaseEspecif)
+            End If
+
+            If WEspecif Is Nothing Then
+                WEspecif = GetSingle(String.Format("SELECT * FROM EspecifUnifica WHERE Producto = '{0}'", WProducto), WBaseEspecif)
+            End If
+
+            If WEspecif IsNot Nothing Then
+
+                Dim WRenglonEns = 0
+
+                For i = 1 To 10
+                    If WRenglonEns < WEnsayos.Rows.Count Then
+                        If Val(OrDefault(WEspecif.Item("Ensayo" & i), "")) <> 0 Then
+                            WEnsayos.Rows(WRenglonEns).Item("Ensayo") = OrDefault(WEspecif.Item("Ensayo" & i), "")
+                            WEnsayos.Rows(WRenglonEns).Item("ValorStd") = Trim(OrDefault(WEspecif.Item("Valor" & i), "")) & " " & Trim(OrDefault(WEspecif.Item("Valor" & i & "" & i), ""))
+                            WRenglonEns += 1
+                        End If
+                    End If
+                Next
+
+            End If
+
+            For Each _e As DataRow In WEnsayos.Rows
+                With _e
+                    Dim WEns As DataRow = GetSingle("SELECT ISNULL(Descripcion, '') Descripcion FROM Ensayos WHERE Codigo = '" & _e.Item("Ensayo") & "'", WBaseEspecif)
+
+                    If WEns Is Nothing Then Continue For
+
+                    _e.Item("Ensayo") = _e.Item("Ensayo").ToString.PadLeft(4, "0") & "  " & Trim(WEns.Item("Descripcion"))
+
+                End With
+            Next
+
+            Exit For
+
+        Next
+
+        Return WEnsayos
+
+    End Function
+
+    Private Function _MostrarEnsayosFarma(ByVal Hoja As String) As Data.DataTable
+        Dim WEnsayos As New Data.DataTable
+        Dim WDatosEnsayos As Data.DataTable = Nothing
+
+        With WEnsayos.Columns
+            .Add("Ensayo")
+            .Add("ValorStd")
+            .Add("ValorReg")
+            .Add("Valor")
+        End With
+
+        WDatosEnsayos = GetAll("SELECT TOP 50 ptf.Codigo, ptf.Estado, ptf.Resultado, ptf.Valor, ptf.ValorReal, ptf.TipoEspecif, ptf.DesdeEspecif, ptf.HastaEspecif, ptf.UnidadEspecif, ptf.MenorIgualEspecif, ptf.Confecciono FROM PrueterFarma ptf INNER JOIN Hoja h ON h.Hoja = ptf.Partida And h.Producto = ptf.Producto And h.Renglon = 1 WHERE ptf.Partida = " & Hoja & " Order By ptf.Clave", "Surfactan_III")
+
+        If WDatosEnsayos.Rows.Count = 0 Then Exit Function
+
+        Dim WEns = 0
+        Dim WEspecificacion = ""
+        Dim WValor = ""
+        Dim WTipoEspecif = ""
+        Dim WDesdeEspecif = ""
+        Dim WHastaEspecif = ""
+        Dim WUnidadEspecif = ""
+        Dim WMenorIgualEspecif = ""
+        Dim WImpreParametro = ""
+        Dim WImpreResultado = ""
+
+        If OrDefault(WDatosEnsayos.Rows(0).Item("Estado"), 0) = 1 Then
+            For Each row As DataRow In WDatosEnsayos.Rows
+                With row
+                    WEns = OrDefault(.Item("Codigo"), 0)
+                    WEspecificacion = OrDefault(.Item("Valor"), "")
+                    WValor = OrDefault(.Item("ValorReal"), "")
+                    WTipoEspecif = OrDefault(.Item("TipoEspecif"), "")
+                    WDesdeEspecif = OrDefault(.Item("DesdeEspecif"), "")
+                    WHastaEspecif = OrDefault(.Item("HastaEspecif"), "")
+                    WUnidadEspecif = OrDefault(.Item("UnidadEspecif"), "")
+                    WMenorIgualEspecif = OrDefault(.Item("MenorIgualEspecif"), "")
+                    WImpreParametro = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif)
+                    WImpreResultado = _GenerarImpreResultado(WValor, WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif)
+
+                    Dim r = WEnsayos.NewRow
+
+                    With r
+                        .Item("Ensayo") = WEns
+                        .Item("ValorStd") = WEspecificacion
+                        .Item("ValorReg") = WImpreParametro
+                        .Item("Valor") = WImpreResultado
+                    End With
+
+                    WEnsayos.Rows.Add(r)
+
+                End With
+
+            Next
+
+        Else
+            For Each row As DataRow In WDatosEnsayos.Rows
+                With row
+                    WEns = OrDefault(.Item("Codigo"), 0)
+                    WEspecificacion = OrDefault(.Item("Valor"), "")
+                    WValor = OrDefault(.Item("Resultado"), "")
+
+                    Dim r = WEnsayos.NewRow
+
+                    With r
+                        .Item("Ensayo") = WEns
+                        .Item("ValorStd") = WEspecificacion
+                        .Item("ValorReg") = WValor
+                        .Item("Valor") = ""
+                    End With
+
+                    WEnsayos.Rows.Add(r)
+
+                End With
+            Next
+
+        End If
+
+        Return WEnsayos
+
+    End Function
+
+    Private Function _GenerarImpreResultado(ByVal wValor As Object, ByVal wTipoEspecif As Object, ByVal wDesdeEspecif As Object, ByVal wHastaEspecif As Object, ByVal wUnidadEspecif As Object, ByVal wMenorIgualEspecif As Object)
+        wTipoEspecif = Trim(wTipoEspecif)
+        wDesdeEspecif = Trim(wDesdeEspecif)
+        wHastaEspecif = Trim(wHastaEspecif)
+        wUnidadEspecif = Trim(wUnidadEspecif)
+        wMenorIgualEspecif = Trim(wMenorIgualEspecif)
+
+        If Val(wTipoEspecif) = 0 Then
+
+            Select Case UCase(Trim(wValor))
+                Case "S"
+                    Return "Cumple"
+                Case "N"
+                    Return "No Cumple"
+            End Select
+
+        Else
+
+            Return String.Format("{0} {1}", Trim(wValor), Trim(wUnidadEspecif))
+
+        End If
+
+        Return ""
+    End Function
+
+    Private Function _GenerarImpreParametro(ByVal wTipoEspecif As Object, ByVal wDesdeEspecif As Object, ByVal wHastaEspecif As Object, ByVal wUnidadEspecif As Object, ByVal wMenorIgualEspecif As Object) As String
+        ' If Trim(wDesdeEspecif) = "" And Trim(wHastaEspecif) = "" Then Return ""
+
+        wTipoEspecif = Trim(wTipoEspecif)
+        wDesdeEspecif = Trim(wDesdeEspecif)
+        wHastaEspecif = Trim(wHastaEspecif)
+        wUnidadEspecif = Trim(wUnidadEspecif)
+        wMenorIgualEspecif = Trim(wMenorIgualEspecif)
+
+        If Val(wTipoEspecif) = 0 Then
+            Return "Cumple Ensayo"
+        Else
+
+            If Val(wDesdeEspecif) = 0 And {99, 999, 9999}.Contains(Math.Truncate(Val(wHastaEspecif))) Then Return "Registrar e Informar."
+
+            If Val(wDesdeEspecif) <> 0 Or Val(wHastaEspecif) <> 9999 Then
+
+                If Val(wDesdeEspecif) <> 0 And Val(wHastaEspecif) <> 0 Then
+                    Return String.Format("{0} - {1} {2}", wDesdeEspecif, wHastaEspecif, wUnidadEspecif)
+                End If
+
+                If Val(wDesdeEspecif) = 0 And Val(wHastaEspecif) <> 0 Then
+
+                    If Val(wMenorIgualEspecif) = 1 Then Return String.Format("Máximo {0} {1}", wHastaEspecif, wUnidadEspecif)
+
+                    Return String.Format("Menor a {0} {1}", wHastaEspecif, wUnidadEspecif)
+
+                End If
+
+                If Val(wDesdeEspecif) <> 0 And Val(wHastaEspecif) = 9999 Then
+
+                    If Val(wMenorIgualEspecif) = 1 Then Return String.Format("Mínimo {0} {1}", wHastaEspecif, wUnidadEspecif)
+
+                    Return String.Format("Mayor a {0} {1}", wHastaEspecif, wUnidadEspecif)
+
+                End If
+
+            End If
+        End If
+
+        Return ""
+    End Function
+
+
 End Class
