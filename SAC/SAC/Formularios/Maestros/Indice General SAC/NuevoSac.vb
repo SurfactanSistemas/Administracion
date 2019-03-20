@@ -2,6 +2,7 @@
 Imports System.Data.SqlClient
 Imports System.IO
 Imports CrystalDecisions.Shared
+Imports Microsoft.Office.Interop.Outlook
 Imports Microsoft.VisualBasic.FileIO
 
 Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroSac, IAyudaReponsableSac, IAyudaTipoSac, IExportarSac, INuevaIncidencia
@@ -223,7 +224,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
                 Next
             End If
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
         End Try
     End Sub
@@ -334,7 +335,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
             txtFecha.Focus()
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
         End Try
     End Sub
@@ -896,7 +897,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
             End With
         Catch ex As StackOverflowException
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox(ex.Message)
         End Try
     End Sub
@@ -914,7 +915,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
                 .Cells("Plazo").Value = "  /  /    "
             End With
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
         End Try
 
@@ -982,7 +983,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
                 .Cells("Comentarios").Value = ""
             End With
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
         End Try
 
@@ -1201,7 +1202,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
     Private Sub _Centrar(ByRef frm As Form)
         frm.StartPosition = FormStartPosition.Manual
-        frm.Location = New Point(Me.Location.X + frm.Width * 0.5, Me.Location.Y + frm.Height * 0.5)
+        frm.Location = New Point(Location.X + frm.Width * 0.5, Location.Y + frm.Height * 0.5)
     End Sub
 
     Public Sub _ProcesarAyudaCentroSac(ByVal WCodigo As String) Implements IAyudaCentroSac._ProcesarAyudaCentroSac
@@ -1333,6 +1334,8 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
             Dim WSql = ""
 
+            Dim WEnviarMail As Boolean = False
+
             '
             ' Grabamos los datos generales. Verificando primero si existe anteriormente el SAC.
             '
@@ -1348,6 +1351,8 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
                                          " WHERE Clave = '{11}'",
                                          WTipo, WNumero, WAnio, WFechaSac, WOrigen, WEstado, WTitulo, WReferencia, WCentro, WEmisor, WResponsable, WClave, WOrdFechaSac, WNoConformidad, WCausa)
                 Else
+
+                    WEnviarMail = True
 
                     WSql = String.Format("INSERT INTO CargaSAC (Clave, Tipo, Numero, Ano, Fecha, OrdFecha, Origen, Estado, Titulo, Referencia, Centro, ResponsableEmisor, ResponsableDestino, IngresoNoCon, IngresoCausa) " &
                                          " VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13}', '{14}')",
@@ -1558,6 +1563,53 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
             trans.Commit()
 
+            If WEnviarMail Then
+
+                '
+                ' Enviamos emails.
+                '
+                Dim WCent As DataRow = GetSingle("SELECT Responsable FROM CentroSac WHERE Codigo = '" & txtCentro.Text & "'")
+
+                If WCent IsNot Nothing Then
+
+                    Dim WResp As DataRow = GetSingle("SELECT Email FROM ResponsableSAC WHERE Codigo = '" & OrDefault(WCent.Item("Responsable"), 0) & "'")
+
+                    If WResp IsNot Nothing AndAlso Trim(OrDefault(WResp.Item("Email"), "")) <> "" Then
+
+                        If MsgBox("¿Desea enviar el aviso al Responsable del Área?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+
+                            _EnviarEmail(WResp.Item("Email"), "Carga de " & lblDescTipo.Text, "Se inicio una " & lblDescTipo.Text.Trim & " : " & txtAnio.Text & "/" & txtNumero.Text & " para determinar CAUSAS y Acciones Correctivas correspondientes. Referencia : " & txtReferencia.Text.Trim & " Título : " & txtTitulo.Text.Trim)
+
+                        End If
+
+                    End If
+
+                End If
+
+                If Val(txtResponsable.Text) <> 0 Then
+
+                    Dim WResp As DataRow = GetSingle("SELECT Email FROM ResponsableSAC WHERE Codigo = '" & OrDefault(WCent.Item("Responsable"), 0) & "'")
+
+                    If WResp IsNot Nothing AndAlso Trim(OrDefault(WResp.Item("Email"), "")) <> "" Then
+
+                        If MsgBox("¿Desea enviar el aviso al Responsable de Investigación?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+
+                            _EnviarEmail(WResp.Item("Email"), "Carga de " & lblDescTipo.Text & +" Nro.:" + txtNumero.Text + " - " + Microsoft.VisualBasic.Left(txtReferencia.Text, 50), "Se inició una " & lblDescTipo.Text.Trim & " : " & txtAnio.Text & "/" & txtNumero.Text & " para determinar CAUSAS y Acciones Correctivas correspondientes. Referencia : " & txtReferencia.Text.Trim & " Título : " & txtTitulo.Text.Trim)
+
+                        End If
+
+                    End If
+
+                End If
+
+                If MsgBox("¿Desea enviar el aviso al Responsable de Calidad?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+
+                    _EnviarEmail("ebiglieri@surfactan.com.ar; calidad@surfactan.com.ar; wbarosio@surfactan.com.ar", "Carga de " & lblDescTipo.Text & +" Nro.:" + txtNumero.Text + " - " + Microsoft.VisualBasic.Left(txtReferencia.Text, 50), "Se inició una " & lblDescTipo.Text.Trim & " : " & txtAnio.Text & "/" & txtNumero.Text & " para determinar CAUSAS y Acciones Correctivas correspondientes. Referencia : " & txtReferencia.Text.Trim & " Título : " & txtTitulo.Text.Trim)
+
+                End If
+
+            End If
+
             If WAbiertoPorCmd Then
                 Close()
                 Exit Sub
@@ -1579,7 +1631,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
             btnLimpiar.PerformClick()
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             If Not IsNothing(trans) AndAlso Not IsNothing(trans.Connection) Then trans.Rollback()
 
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
@@ -1588,30 +1640,55 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
     End Sub
 
+    Private Sub _EnviarEmail(ByVal Direccion As String, ByVal Subject As String, ByVal Body As String, Optional ByVal EnvioAutomatico As Boolean = False)
+        Dim oApp As _Application
+        Dim oMsg As _MailItem
+
+        Try
+            oApp = New Application()
+
+            oMsg = oApp.CreateItem(OlItemType.olMailItem)
+            oMsg.Subject = Subject
+            oMsg.Body = Body
+
+            ' Modificar por los E-Mails que correspondan.
+            oMsg.To = Direccion
+
+            If EnvioAutomatico Then
+                oMsg.Send()
+            Else
+                oMsg.Display()
+            End If
+
+        Catch ex As System.Exception
+            Throw New System.Exception("No se pudo crear el E-Mail solicitado." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        End Try
+    End Sub
+
     Private Sub _DatosValidos()
 
         If txtTipo.Text.Trim = "" OrElse Not _ExisteTipoSac() Then
-            Throw New Exception("Se debe indicar un Tipo de Solicitud de SAC válido.")
+            Throw New System.Exception("Se debe indicar un Tipo de Solicitud de SAC válido.")
         End If
 
         If txtAnio.Text.Trim.Length < 4 Then
-            Throw New Exception("Se debe indicar un Año válido.")
+            Throw New System.Exception("Se debe indicar un Año válido.")
         End If
 
         If Val(txtNumero.Text.Trim) = 0 Then
-            Throw New Exception("Se debe indicar un Número de SAC válido.")
+            Throw New System.Exception("Se debe indicar un Número de SAC válido.")
         End If
 
         If cmbEstado.SelectedIndex <= 0 Then
-            Throw New Exception("Se debe indicar un Estado de SAC válido.")
+            Throw New System.Exception("Se debe indicar un Estado de SAC válido.")
         End If
 
         If cmbOrigen.SelectedIndex <= 0 Then
-            Throw New Exception("Se debe indicar un Origen de SAC válido.")
+            Throw New System.Exception("Se debe indicar un Origen de SAC válido.")
         End If
 
         If txtFecha.Text.Replace(" ", "").Length < 10 OrElse Not _ValidarFecha(txtFecha.Text) Then
-            Throw New Exception("Se debe indicar una Fecha de Emisión válida.")
+            Throw New System.Exception("Se debe indicar una Fecha de Emisión válida.")
         End If
 
         '
@@ -1620,21 +1697,21 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
         If Val(txtCentro.Text) > 0 Then
             Dim WCentro As DataRow = GetSingle("SELECT Codigo FROM CentroSac WHERE Codigo = '" & txtCentro.Text & "'")
             If IsNothing(WCentro) Then
-                Throw New Exception("Se debe indicar un Centro válido.")
+                Throw New System.Exception("Se debe indicar un Centro válido.")
             End If
         End If
 
         If Val(txtEmisor.Text) > 0 Then
             Dim WResp As DataRow = GetSingle("SELECT Codigo FROM ResponsableSac WHERE Codigo = '" & txtEmisor.Text & "'")
             If IsNothing(WResp) Then
-                Throw New Exception("Se debe indicar un Emisor válido.")
+                Throw New System.Exception("Se debe indicar un Emisor válido.")
             End If
         End If
 
         If Val(txtResponsable.Text) > 0 Then
             Dim WResp As DataRow = GetSingle("SELECT Codigo FROM ResponsableSac WHERE Codigo = '" & txtResponsable.Text & "'")
             If IsNothing(WResp) Then
-                Throw New Exception("Se debe indicar un Responsable válido.")
+                Throw New System.Exception("Se debe indicar un Responsable válido.")
             End If
         End If
 
@@ -1766,7 +1843,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
             frm.Imprimir()
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
         End Try
 
@@ -1777,7 +1854,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
         '
         ' Cargamos las Acciones y filtramos para el SAC indicado.
         '
-        Dim WNroAccion, WDescAccion, WFechaAccion, WRespAccion, WRespImple, WImpleEstado, WImpleFecha, WImpleComentarios, WDescImpleEstado, WVerRespImple, WVerFechaImple, WVerEstadoImple, WDescEstadoImple, WVerRespEfect, WVerFechaEfect, WVerEstadoEfect, WDescEstadoEfect, WVerComentarios As String
+        Dim WNroAccion, WDescAccion, WFechaAccion, WRespAccion, WRespImple, WImpleFecha, WImpleComentarios, WVerRespImple, WVerFechaImple, WVerEstadoImple, WDescEstadoImple, WVerRespEfect, WVerFechaEfect, WVerEstadoEfect, WDescEstadoEfect, WVerComentarios As String
 
         Dim WSQls As New List(Of String)
 
@@ -1800,7 +1877,6 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
             With dgvImplementaciones.Rows(i - 1)
 
                 WRespImple = OrDefault(.Cells("ImpleResponsable").Value, 0)
-                WDescImpleEstado = OrDefault(.Cells("Estado").Value, 0)
                 WImpleFecha = OrDefault(.Cells("ImpleFecha").Value, "  /  /    ")
                 WImpleComentarios = OrDefault(.Cells("Comentarios").Value, "")
                 'WDescImpleEstado = _TraerEstado(WImpleEstado)
@@ -1926,7 +2002,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
             End If
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
         End Try
 
@@ -1986,7 +2062,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
                 txtNumero_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
             End If
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
         End Try
     End Sub
@@ -2001,7 +2077,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
                 txtNumero_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
             End If
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
         End Try
     End Sub
@@ -2015,7 +2091,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
                 txtNumero_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
             End If
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
         End Try
     End Sub
@@ -2029,7 +2105,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
                 txtNumero_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
             End If
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
         End Try
     End Sub
@@ -2060,7 +2136,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
                 Try
                     Process.Start(.Cells("PathArchivo").Value, "f")
-                Catch ex As Exception
+                Catch ex As System.Exception
                     MsgBox(ex.Message)
                 End Try
 
@@ -2096,7 +2172,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
         If Not Directory.Exists(WRutaArchivosRelacionados) Then
             Try
                 Directory.CreateDirectory(WRutaArchivosRelacionados)
-            Catch ex As Exception
+            Catch ex As System.Exception
                 MsgBox(ex.Message, MsgBoxStyle.Exclamation)
                 Return
             End Try
@@ -2121,7 +2197,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
                             End If
                         End If
 
-                    Catch ex As Exception
+                    Catch ex As System.Exception
                         MsgBox(ex.Message, MsgBoxStyle.Critical)
                         Return
                     End Try
@@ -2152,7 +2228,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
         Dim WNombreCarpetaArchivos As String = "SAC_" & txtTipo.Text.PadLeft(4, "0") & txtAnio.Text.PadLeft(4, "0") & txtNumero.Text.PadLeft(6, "0")
 
         If Not Directory.Exists(_RutaCarpetaArchivos) Then
-            Throw New Exception("No se ha logrado tener acceso a la Carpeta Compartida de Archivos Relacionados.")
+            Throw New System.Exception("No se ha logrado tener acceso a la Carpeta Compartida de Archivos Relacionados.")
         End If
 
         WRutaArchivosRelacionados = _RutaCarpetaArchivos() & "\" & WNombreCarpetaArchivos
@@ -2161,8 +2237,8 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
         If Not Directory.Exists(WRutaArchivosRelacionados) Then
             Try
                 Directory.CreateDirectory(WRutaArchivosRelacionados)
-            Catch ex As Exception
-                Throw New Exception(ex.Message)
+            Catch ex As System.Exception
+                Throw New System.Exception(ex.Message)
             End Try
         End If
 
@@ -2242,7 +2318,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
                 End If
             End With
             dgvAcciones.Focus()
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
         End Try
     End Sub
@@ -2252,7 +2328,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
             If dgvArchivos.SelectedRows.Count > 0 Then
                 EliminarArchivoToolStripMenuItem_Click(Nothing, Nothing)
             End If
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
         End Try
     End Sub
