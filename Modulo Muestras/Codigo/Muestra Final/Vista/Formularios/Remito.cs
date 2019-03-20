@@ -318,7 +318,9 @@ namespace Vista
             string _Clave, _Codigo, _Renglon, _Fecha, _CLiente, _Articulo, _Terminado, _Cantidad, _Fechaord, _Movi, _Tipo, _Tipomov, _Observaciones, _WDate, _Marca, _Lote;
 
             // Verificamos que el numero de remito no haya sido cargado con anterioridad.
-            
+
+            TBNumRemito.Text = _TraerProximoNumeroRemitoPorEstacionDeTrabajo().ToString();
+
             if (Cs.RemitoExistente(TBNumRemito.Text.Trim())) {
                 MessageBox.Show("El Número de remito ya fue utilizado con anterioridad y no puede volver a utilizarse. Por favor, avise a Sistemas para que actualice la numeración de los Remitos.", "",MessageBoxButtons.OK, MessageBoxIcon.Information);
                 TBNumRemito.Focus();
