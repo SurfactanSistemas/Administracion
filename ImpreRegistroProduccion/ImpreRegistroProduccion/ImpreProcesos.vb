@@ -64,8 +64,8 @@ Public Class ImpreProcesos
             End If
 
             'Dim WTipoReporte2 As Integer = 2
-            'Dim WPartida2 As Integer = 309053
-            'Dim WTipoSalida2 As Integer = 4
+            'Dim WPartida2 As Integer = 308927
+            'Dim WTipoSalida2 As Integer = 2
 
             '_GenerarCertificadoAnalisisFarma(WTipoReporte2, WPartida2, WTipoSalida2)
 
