@@ -641,26 +641,26 @@ Namespace Clases
             Return 0
         End Function
 
-        Public Shared Sub _ExportarReporte(ByVal frm2 As VistaPrevia, ByVal WFormato As EnumEnterpriseObjectType, Optional ByVal NombreArchivo As String = "")
+        Public Shared Sub _ExportarReporte(ByVal frm2 As VistaPrevia, ByVal WFormato As EnumEnterpriseObjectType, Optional ByVal NombreArchivo As String = "", Optional ByVal WRuta As String = "")
 
             With frm2
 
                 Dim WNombreArchivo = NombreArchivo
 
                 Select Case WFormato
-                    Case FormatoExportacion.Impresion ' Imprimir
+                    Case Enumeraciones.FormatoExportacion.Impresion ' Imprimir
                         .Imprimir()
-                    Case FormatoExportacion.PorPantalla ' Mostrar por Pantalla
+                    Case Enumeraciones.FormatoExportacion.PorPantalla ' Mostrar por Pantalla
                         .Mostrar()
-                    Case FormatoExportacion.PDF ' PDF
+                    Case Enumeraciones.FormatoExportacion.PDF ' PDF
                         .Exportar(WNombreArchivo, ExportFormatType.PortableDocFormat)
-                    Case FormatoExportacion.Excel ' Excel
+                    Case Enumeraciones.FormatoExportacion.Excel ' Excel
                         .Exportar(WNombreArchivo, ExportFormatType.Excel)
-                    Case FormatoExportacion.Word ' Word
+                    Case Enumeraciones.FormatoExportacion.Word ' Word
                         .Exportar(WNombreArchivo, ExportFormatType.WordForWindows)
-                    Case FormatoExportacion.PorMailComoAdjunto
+                    Case Enumeraciones.FormatoExportacion.PorMailComoAdjunto
 
-                        Dim WRuta = "C:/tempIndice/"
+                        If WRuta = "" Then WRuta = "C:/tempIndice/"
 
                         If Directory.Exists(WRuta) Then Directory.Delete(WRuta, True)
 

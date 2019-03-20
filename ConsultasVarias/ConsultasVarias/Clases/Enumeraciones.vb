@@ -1,5 +1,5 @@
 ﻿Namespace Clases
-    Module Enumeraciones
+    Public Class Enumeraciones
 
         Enum FormatoExportacion
             Impresion
@@ -10,5 +10,5 @@
             PorMailComoAdjunto
         End Enum
 
-    End Module
+    End Class
 End Namespace

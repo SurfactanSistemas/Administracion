@@ -10,17 +10,17 @@ Public Class Exportar
 
             Select Case ComboBox1.SelectedIndex
                 Case 0
-                    TipoSalida = FormatoExportacion.Impresion
+                    TipoSalida = Enumeraciones.FormatoExportacion.Impresion
                 Case 1
-                    TipoSalida = FormatoExportacion.PorPantalla
+                    TipoSalida = Enumeraciones.FormatoExportacion.PorPantalla
                 Case 2
-                    TipoSalida = FormatoExportacion.PDF
+                    TipoSalida = Enumeraciones.FormatoExportacion.PDF
                 Case 3
-                    TipoSalida = FormatoExportacion.Excel
+                    TipoSalida = Enumeraciones.FormatoExportacion.Excel
                 Case 4
-                    TipoSalida = FormatoExportacion.Word
+                    TipoSalida = Enumeraciones.FormatoExportacion.Word
                 Case 5
-                    TipoSalida = FormatoExportacion.PorMailComoAdjunto
+                    TipoSalida = Enumeraciones.FormatoExportacion.PorMailComoAdjunto
             End Select
 
             Dim WOwner = CType(Owner, IExportar)
