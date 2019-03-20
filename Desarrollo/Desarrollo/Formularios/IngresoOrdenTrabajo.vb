@@ -1,18 +1,19 @@
-﻿Imports System.Data.SqlClient
+﻿Imports System.Configuration
+Imports System.Data.SqlClient
 Imports System.IO
 Imports Desarrollo.Clases
 
 Public Class IngresoOrdenTrabajo
 
-    Private Sub IngresoOrdenTrabajo_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+    Private Sub IngresoOrdenTrabajo_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
         btnLimpiar.PerformClick()
     End Sub
 
-    Private Sub btnCerrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrar.Click
+    Private Sub btnCerrar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCerrar.Click
         Close()
     End Sub
 
-    Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
+    Private Sub btnLimpiar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLimpiar.Click
         ' Limpiamos los campos.
         _LimpiarCampos()
 
@@ -46,7 +47,7 @@ Public Class IngresoOrdenTrabajo
         Return {txtDescCliente, txtObservaciones, txtMuestra, txtUso, txtObservacionesII, txtEncargado, txtRequisitosFuncionales, txtOtrosRequisitos, txtRequisitosNormasRegulaciones, txtReferencias, txtDescTrabajo, txtAyuda}
     End Function
 
-    Private Sub txtOrden_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtOrden.KeyDown
+    Private Sub txtOrden_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtOrden.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtOrden.Text.Replace("-", "")) = "" Then : Exit Sub : End If
@@ -79,7 +80,7 @@ Public Class IngresoOrdenTrabajo
         Try
             btnLimpiar.PerformClick()
             txtOrden.Text = WOrden
-            cn.ConnectionString = Helper._ConectarA
+            cn.ConnectionString = _ConectarA
             cn.Open()
             cm.Connection = cn
             cm.CommandText = "SELECT * FROM OrdenTrabajo WHERE Orden = '" & txtOrden.Text & "'"
@@ -98,7 +99,7 @@ Public Class IngresoOrdenTrabajo
                     txtDescCliente.Text = _TraerNombreCliente(txtCliente.Text)
 
                     txtObservaciones.Text = IIf(IsDBNull(.Item("Observaciones")), "", .Item("Observaciones"))
-                    
+
                     txtMuestra.Text = IIf(IsDBNull(.Item("Muestra")), "", .Item("Muestra"))
                     txtUso.Text = IIf(IsDBNull(.Item("Uso")), "", .Item("Uso"))
 
@@ -210,17 +211,17 @@ Public Class IngresoOrdenTrabajo
 
     End Sub
 
-    Private Sub IngresoOrdenTrabajo_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+    Private Sub IngresoOrdenTrabajo_Shown(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Shown
         txtOrden.Focus()
     End Sub
 
-    Private Sub txtFecha_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFecha.KeyDown
+    Private Sub txtFecha_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtFecha.KeyDown
 
         If e.KeyData = Keys.Enter Then
 
             If txtFecha.Text.estaVacia Then : Exit Sub : End If
 
-            If Helper._ValidarFecha(txtFecha.Text) Then
+            If _ValidarFecha(txtFecha.Text) Then
                 txtFechaComprometida.Focus()
             End If
 
@@ -230,12 +231,12 @@ Public Class IngresoOrdenTrabajo
 
     End Sub
 
-    Private Sub txtFechaComprometida_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFechaComprometida.KeyDown
+    Private Sub txtFechaComprometida_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtFechaComprometida.KeyDown
         If e.KeyData = Keys.Enter Then
 
             If txtFechaComprometida.Text.estaVacia Then : Exit Sub : End If
 
-            If Helper._ValidarFecha(txtFechaComprometida.Text) Then
+            If _ValidarFecha(txtFechaComprometida.Text) Then
 
                 Dim WFecha = txtFecha.Text, WFechaComprometida = txtFechaComprometida.Text
 
@@ -252,7 +253,7 @@ Public Class IngresoOrdenTrabajo
         End If
     End Sub
 
-    Private Sub txtCliente_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCliente.KeyDown
+    Private Sub txtCliente_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtCliente.KeyDown
 
         If e.KeyData = Keys.Enter Then
 
@@ -262,7 +263,7 @@ Public Class IngresoOrdenTrabajo
                 If Trim(txtCliente.Text) = "" Then
 
                     txtDescCliente.Text = ""
-                    
+
                 ElseIf Trim(txtCliente.Text).Length < 6 Then
 
                     txtDescCliente.Text = ""
@@ -298,7 +299,7 @@ Public Class IngresoOrdenTrabajo
 
         Try
 
-            cn.ConnectionString = Helper._ConectarA
+            cn.ConnectionString = _ConectarA
             cn.Open()
             cm.Connection = cn
 
@@ -332,7 +333,7 @@ Public Class IngresoOrdenTrabajo
         Return WDescCliente
     End Function
 
-    Private Sub txtObservaciones_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtObservaciones.KeyDown
+    Private Sub txtObservaciones_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtObservaciones.KeyDown
 
         If e.KeyData = Keys.Enter Then
             'If Trim(txtObservaciones.Text) = "" Then : Exit Sub : End If
@@ -345,8 +346,8 @@ Public Class IngresoOrdenTrabajo
         End If
 
     End Sub
-    
-    Private Sub txtMuestra_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtMuestra.KeyDown
+
+    Private Sub txtMuestra_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtMuestra.KeyDown
 
         If e.KeyData = Keys.Enter Then
             '    If Trim(txtMuestra.Text) = "" Then : Exit Sub : End If
@@ -358,7 +359,7 @@ Public Class IngresoOrdenTrabajo
 
     End Sub
 
-    Private Sub txtUso_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtUso.KeyDown
+    Private Sub txtUso_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtUso.KeyDown
 
         If e.KeyData = Keys.Enter Then
             '    If Trim(txtUso.Text) = "" Then : Exit Sub : End If
@@ -371,7 +372,7 @@ Public Class IngresoOrdenTrabajo
 
     End Sub
 
-    Private Sub txtDescTrabajo_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDescTrabajo.KeyDown
+    Private Sub txtDescTrabajo_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtDescTrabajo.KeyDown
 
         If e.KeyData = Keys.Enter Then
 
@@ -384,7 +385,7 @@ Public Class IngresoOrdenTrabajo
 
     End Sub
 
-    Private Sub txtObservacionesII_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtObservacionesII.KeyDown
+    Private Sub txtObservacionesII_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtObservacionesII.KeyDown
 
         If e.KeyData = Keys.Enter Then
 
@@ -397,7 +398,7 @@ Public Class IngresoOrdenTrabajo
 
     End Sub
 
-    Private Sub txtEncargado_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtEncargado.KeyDown
+    Private Sub txtEncargado_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtEncargado.KeyDown
 
         If e.KeyData = Keys.Enter Then
             '    If Trim(txtEncargado.Text) = "" Then : Exit Sub : End If
@@ -412,7 +413,7 @@ Public Class IngresoOrdenTrabajo
 
     End Sub
 
-    Private Sub txtRequisitosFuncionales_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRequisitosFuncionales.KeyDown
+    Private Sub txtRequisitosFuncionales_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtRequisitosFuncionales.KeyDown
         If e.KeyData = Keys.Enter Then
 
             '' Se habilita que para crear una nueva linea, se debe presionar Shit + Enter, sino se pasa al siguiente control.
@@ -423,7 +424,7 @@ Public Class IngresoOrdenTrabajo
         End If
     End Sub
 
-    Private Sub txtOtrosRequisitos_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtOtrosRequisitos.KeyDown
+    Private Sub txtOtrosRequisitos_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtOtrosRequisitos.KeyDown
         If e.KeyData = Keys.Enter Then
 
             '' Se habilita que para crear una nueva linea, se debe presionar Shit + Enter, sino se pasa al siguiente control.
@@ -434,7 +435,7 @@ Public Class IngresoOrdenTrabajo
         End If
     End Sub
 
-    Private Sub txtRequisitosNormasRegulaciones_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRequisitosNormasRegulaciones.KeyDown
+    Private Sub txtRequisitosNormasRegulaciones_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtRequisitosNormasRegulaciones.KeyDown
         If e.KeyData = Keys.Enter Then
 
             '' Se habilita que para crear una nueva linea, se debe presionar Shit + Enter, sino se pasa al siguiente control.
@@ -445,24 +446,24 @@ Public Class IngresoOrdenTrabajo
         End If
     End Sub
 
-    Private Sub txtReferencias_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtReferencias.KeyDown
+    Private Sub txtReferencias_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtReferencias.KeyDown
         If e.KeyData = Keys.Enter Then
 
             '' Se habilita que para crear una nueva linea, se debe presionar Shit + Enter, sino se pasa al siguiente control.
             'If Not e.Modifiers = Keys.Shift Then
 
             '    cmbAplicacion.Focus()
-                
+
             'End If
 
         End If
     End Sub
-    
-    Private Sub cmbAplicacion_DropDownClosed(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbAplicacion.DropDownClosed
+
+    Private Sub cmbAplicacion_DropDownClosed(ByVal sender As Object, ByVal e As EventArgs) Handles cmbAplicacion.DropDownClosed
         cmbEstabilidad.Focus()
     End Sub
 
-    Private Sub cmbAplicacion_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbAplicacion.KeyDown
+    Private Sub cmbAplicacion_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles cmbAplicacion.KeyDown
 
 
         If e.KeyData = Keys.Enter Then
@@ -476,8 +477,8 @@ Public Class IngresoOrdenTrabajo
 
     End Sub
 
-    Private Sub btnConsultas_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsultas.Click
-        
+    Private Sub btnConsultas_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnConsultas.Click
+
         Try
             _CargarClientes()
 
@@ -506,7 +507,7 @@ Public Class IngresoOrdenTrabajo
             lstConsulta.Items.Clear()
             lstFiltrada.Items.Clear()
 
-            cn.ConnectionString = Helper._ConectarA("SurfactanSA")
+            cn.ConnectionString = _ConectarA("SurfactanSA")
             cn.Open()
             cm.Connection = cn
 
@@ -538,7 +539,7 @@ Public Class IngresoOrdenTrabajo
                 Do While dr.Read()
 
                     With dr
-                        
+
                         WRazones(WAux) = .Item("Razon")
                         WClaves(WAux) = .Item("Cliente")
 
@@ -598,7 +599,7 @@ Public Class IngresoOrdenTrabajo
         End If
     End Sub
 
-    Private Sub lstFiltrada_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lstFiltrada.MouseClick
+    Private Sub lstFiltrada_MouseClick(ByVal sender As Object, ByVal e As MouseEventArgs) Handles lstFiltrada.MouseClick
         Dim origen As ListBox = lstConsulta
         Dim filtrado As ListBox = lstFiltrada
         Dim texto As TextBox = txtAyuda
@@ -617,11 +618,11 @@ Public Class IngresoOrdenTrabajo
         texto.Text = ""
     End Sub
 
-    Private Sub txtAyuda_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAyuda.TextChanged
+    Private Sub txtAyuda_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles txtAyuda.TextChanged
         _FiltrarDinamicamente()
     End Sub
 
-    Private Sub lstConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lstConsulta.Click
+    Private Sub lstConsulta_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lstConsulta.Click
 
         Try
             Dim WValor = lstConsulta.SelectedItem
@@ -642,19 +643,19 @@ Public Class IngresoOrdenTrabajo
         End Try
     End Sub
 
-    Private Sub txtCliente_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtCliente.MouseDoubleClick
+    Private Sub txtCliente_MouseDoubleClick(ByVal sender As Object, ByVal e As MouseEventArgs) Handles txtCliente.MouseDoubleClick
         btnConsultas.PerformClick()
     End Sub
 
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrarConsulta.Click
+    Private Sub Button1_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCerrarConsulta.Click
         pnlConsulta.Visible = False
         txtObservaciones.Focus()
     End Sub
 
-    Private Sub btnNotasAplicacion_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNotasAplicacion.Click
+    Private Sub btnNotasAplicacion_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnNotasAplicacion.Click
 
-        Dim WArchivo1 = Configuration.ConfigurationManager.AppSettings("BUSCAR_NOTAS_1") & "A" & txtOrden.Text.Trim & ".rtf"
-        Dim WArchivo2 = Configuration.ConfigurationManager.AppSettings("BUSCAR_NOTAS_2") & "A" & txtOrden.Text.Trim & ".rtf"
+        Dim WArchivo1 = ConfigurationManager.AppSettings("BUSCAR_NOTAS_1") & "A" & txtOrden.Text.Trim & ".rtf"
+        Dim WArchivo2 = ConfigurationManager.AppSettings("BUSCAR_NOTAS_2") & "A" & txtOrden.Text.Trim & ".rtf"
 
         ' Varificamos los dos destinos, ya que dependiendo donde se haya grabado puede existir en alguno de estos dos lugares.
         If File.Exists(WArchivo1) Then
@@ -666,7 +667,7 @@ Public Class IngresoOrdenTrabajo
             txtNota.LoadFile(WArchivo2)
         Else
 
-            txtNota.LoadFile(Configuration.ConfigurationManager.AppSettings("BUSCAR_NOTAS_1") & "Blanco.rtf")
+            txtNota.LoadFile(ConfigurationManager.AppSettings("BUSCAR_NOTAS_1") & "Blanco.rtf")
 
         End If
 
@@ -675,11 +676,11 @@ Public Class IngresoOrdenTrabajo
 
     End Sub
 
-    Private Sub btnNotasEstabilidad_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNotasEstabilidad.Click
+    Private Sub btnNotasEstabilidad_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnNotasEstabilidad.Click
 
         Try
-            Dim WArchivo1 = Configuration.ConfigurationManager.AppSettings("BUSCAR_NOTAS_1") & "E" & txtOrden.Text.Trim & ".rtf"
-            Dim WArchivo2 = Configuration.ConfigurationManager.AppSettings("BUSCAR_NOTAS_2") & "E" & txtOrden.Text.Trim & ".rtf"
+            Dim WArchivo1 = ConfigurationManager.AppSettings("BUSCAR_NOTAS_1") & "E" & txtOrden.Text.Trim & ".rtf"
+            Dim WArchivo2 = ConfigurationManager.AppSettings("BUSCAR_NOTAS_2") & "E" & txtOrden.Text.Trim & ".rtf"
 
             ' Varificamos los dos destinos, ya que dependiendo donde se haya grabado puede existir en alguno de estos dos lugares.
             If File.Exists(WArchivo1) Then
@@ -692,7 +693,7 @@ Public Class IngresoOrdenTrabajo
 
             Else
 
-                txtNota.LoadFile(Configuration.ConfigurationManager.AppSettings("BUSCAR_NOTAS_1") & "Blanco.rtf")
+                txtNota.LoadFile(ConfigurationManager.AppSettings("BUSCAR_NOTAS_1") & "Blanco.rtf")
 
             End If
 
@@ -705,12 +706,12 @@ Public Class IngresoOrdenTrabajo
 
     End Sub
 
-    Private Sub btnCerrarNota_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrarNota.Click
+    Private Sub btnCerrarNota_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCerrarNota.Click
 
         Try
             ' Para mantener compatibilidad con sistema Viejo.
-            Dim WArchivo = Configuration.ConfigurationManager.AppSettings("BUSCAR_NOTAS_1")
-            Dim WArchivo2 = Configuration.ConfigurationManager.AppSettings("BUSCAR_NOTAS_2")
+            Dim WArchivo = ConfigurationManager.AppSettings("BUSCAR_NOTAS_1")
+            Dim WArchivo2 = ConfigurationManager.AppSettings("BUSCAR_NOTAS_2")
 
             If rbAplicacion.Checked Then
 
@@ -739,7 +740,7 @@ Public Class IngresoOrdenTrabajo
         pnlNotas.Visible = False
     End Sub
 
-    Private Sub btnAceptar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAceptar.Click
+    Private Sub btnAceptar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAceptar.Click
 
         Try
             If Trim(txtOrden.Text).Replace("-", "") = "" OrElse Trim(txtOrden.Text).Length < 8 Then Exit Sub
@@ -778,7 +779,7 @@ Public Class IngresoOrdenTrabajo
 
         Try
 
-            cn.ConnectionString = Helper._ConectarA
+            cn.ConnectionString = _ConectarA
             cn.Open()
             cm.Connection = cn
 
@@ -825,9 +826,9 @@ Public Class IngresoOrdenTrabajo
             ZSQL = ZSQL & "Values ("
             ZSQL = ZSQL & "'" & txtOrden.Text & "',"
             ZSQL = ZSQL & "'" & txtFecha.Text & "',"
-            ZSQL = ZSQL & "'" & Helper.ordenaFecha(txtFecha.Text) & "',"
+            ZSQL = ZSQL & "'" & ordenaFecha(txtFecha.Text) & "',"
             ZSQL = ZSQL & "'" & txtFechaComprometida.Text & "',"
-            ZSQL = ZSQL & "'" & Helper.ordenaFecha(txtFechaComprometida.Text) & "',"
+            ZSQL = ZSQL & "'" & ordenaFecha(txtFechaComprometida.Text) & "',"
             ZSQL = ZSQL & "'" & txtCliente.Text & "',"
             ZSQL = ZSQL & "'" & txtObservaciones.Text & "',"
             ZSQL = ZSQL & "'" & "" & "',"
@@ -882,7 +883,7 @@ Public Class IngresoOrdenTrabajo
 
         Try
 
-            cn.ConnectionString = Helper._ConectarA
+            cn.ConnectionString = _ConectarA
             cn.Open()
             cm.Connection = cn
 
@@ -894,9 +895,9 @@ Public Class IngresoOrdenTrabajo
             ZSQL = ""
             ZSQL = ZSQL & "UPDATE OrdenTrabajo SET "
             ZSQL = ZSQL & " Fecha = " & "'" & txtFecha.Text & "',"
-            ZSQL = ZSQL & " OrdFecha = " & "'" & Helper.ordenaFecha(txtFecha.Text) & "',"
+            ZSQL = ZSQL & " OrdFecha = " & "'" & ordenaFecha(txtFecha.Text) & "',"
             ZSQL = ZSQL & " FechaEntrega = " & "'" & txtFechaComprometida.Text & "',"
-            ZSQL = ZSQL & " OrdFechaEntrega = " & "'" & Helper.ordenaFecha(txtFechaComprometida.Text) & "',"
+            ZSQL = ZSQL & " OrdFechaEntrega = " & "'" & ordenaFecha(txtFechaComprometida.Text) & "',"
             ZSQL = ZSQL & " Cliente = " & "'" & txtCliente.Text & "',"
             ZSQL = ZSQL & " Observaciones = " & "'" & txtObservaciones.Text & "',"
             ZSQL = ZSQL & " Material = " & "'" & "" & "',"
@@ -944,16 +945,16 @@ Public Class IngresoOrdenTrabajo
 
     Private Function _PrepararReferencias() As String()
         Dim WReferencias(2) As String
-        Dim WCorte = 50
+        Dim WCorte = 100
         Dim ZIndice = 1
 
         For i = 1 To 2
 
-            WReferencias(i) = Mid(txtReferencias.Text, ZIndice, 50)
+            WReferencias(i) = Mid(txtReferencias.Text, ZIndice, 100)
 
             ZIndice = WCorte + 1
 
-            WCorte += 50
+            WCorte += 100
 
         Next
 
@@ -962,46 +963,49 @@ Public Class IngresoOrdenTrabajo
 
     Private Function _PrepararRequisitos() As String()
         Dim WRequisitos(6) As String
-        Dim WCorte = 50
+        Dim WCorte = 100
         Dim ZIndice = 1
         Dim WAux = 1
 
         ' Guardamos los Requisitos Funcionales.
         For i = WAux To 2
 
-            WRequisitos(i) = Mid(txtRequisitosFuncionales.Text, ZIndice, 50)
+            WRequisitos(i) = Mid(txtRequisitosFuncionales.Text, ZIndice, 100)
 
             ZIndice = WCorte + 1
 
-            WCorte += 50
+            WCorte += 100
 
             WAux += 1
+
         Next
 
         ZIndice = 1
+        WCorte = 100
 
         ' Los Otros Requisitos.
         For i = WAux To 4
 
-            WRequisitos(i) = Mid(txtOtrosRequisitos.Text, ZIndice, 50)
+            WRequisitos(i) = Mid(txtOtrosRequisitos.Text, ZIndice, 100)
 
             ZIndice = WCorte + 1
 
-            WCorte += 50
+            WCorte += 100
 
             WAux += 1
         Next
 
         ZIndice = 1
+        WCorte = 100
 
         ' Por ultimo, los Requisitos Legales, Normas y/o Regulaciones.
         For i = WAux To 6
 
-            WRequisitos(i) = Mid(txtRequisitosNormasRegulaciones.Text, ZIndice, 50)
+            WRequisitos(i) = Mid(txtRequisitosNormasRegulaciones.Text, ZIndice, 100)
 
             ZIndice = WCorte + 1
 
-            WCorte += 50
+            WCorte += 100
 
             WAux += 1
         Next
@@ -1053,7 +1057,7 @@ Public Class IngresoOrdenTrabajo
 
         Try
 
-            cn.ConnectionString = Helper._ConectarA
+            cn.ConnectionString = _ConectarA
             cn.Open()
             cm.Connection = cn
 
@@ -1074,7 +1078,7 @@ Public Class IngresoOrdenTrabajo
 
     End Function
 
-    Private Sub btnEliminar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEliminar.Click
+    Private Sub btnEliminar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnEliminar.Click
 
         If Trim(txtOrden.Text).Replace("-", "") = "" Then Exit Sub
 
@@ -1102,10 +1106,10 @@ Public Class IngresoOrdenTrabajo
 
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("")
-        
+
         Try
 
-            cn.ConnectionString = Helper._ConectarA
+            cn.ConnectionString = _ConectarA
             cn.Open()
             cm.Connection = cn
 

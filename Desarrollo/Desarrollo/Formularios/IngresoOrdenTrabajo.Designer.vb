@@ -238,7 +238,7 @@ Partial Class IngresoOrdenTrabajo
         Me.pnlNotas.Controls.Add(Me.txtNota)
         Me.pnlNotas.Location = New System.Drawing.Point(171, 49)
         Me.pnlNotas.Name = "pnlNotas"
-        Me.pnlNotas.Size = New System.Drawing.Size(496, 389)
+        Me.pnlNotas.Size = New System.Drawing.Size(497, 393)
         Me.pnlNotas.TabIndex = 3
         Me.pnlNotas.Visible = False
         '
@@ -290,7 +290,7 @@ Partial Class IngresoOrdenTrabajo
         Me.pnlConsulta.Controls.Add(Me.GroupBox1)
         Me.pnlConsulta.Location = New System.Drawing.Point(214, 61)
         Me.pnlConsulta.Name = "pnlConsulta"
-        Me.pnlConsulta.Size = New System.Drawing.Size(410, 364)
+        Me.pnlConsulta.Size = New System.Drawing.Size(403, 367)
         Me.pnlConsulta.TabIndex = 2
         '
         'GroupBox1
@@ -529,7 +529,7 @@ Partial Class IngresoOrdenTrabajo
         'txtReferencias
         '
         Me.txtReferencias.Location = New System.Drawing.Point(215, 221)
-        Me.txtReferencias.MaxLength = 100
+        Me.txtReferencias.MaxLength = 200
         Me.txtReferencias.Multiline = True
         Me.txtReferencias.Name = "txtReferencias"
         Me.txtReferencias.Size = New System.Drawing.Size(565, 62)
@@ -538,7 +538,7 @@ Partial Class IngresoOrdenTrabajo
         'txtRequisitosNormasRegulaciones
         '
         Me.txtRequisitosNormasRegulaciones.Location = New System.Drawing.Point(215, 153)
-        Me.txtRequisitosNormasRegulaciones.MaxLength = 100
+        Me.txtRequisitosNormasRegulaciones.MaxLength = 200
         Me.txtRequisitosNormasRegulaciones.Multiline = True
         Me.txtRequisitosNormasRegulaciones.Name = "txtRequisitosNormasRegulaciones"
         Me.txtRequisitosNormasRegulaciones.Size = New System.Drawing.Size(565, 62)
@@ -576,7 +576,7 @@ Partial Class IngresoOrdenTrabajo
         'txtOtrosRequisitos
         '
         Me.txtOtrosRequisitos.Location = New System.Drawing.Point(215, 85)
-        Me.txtOtrosRequisitos.MaxLength = 100
+        Me.txtOtrosRequisitos.MaxLength = 200
         Me.txtOtrosRequisitos.Multiline = True
         Me.txtOtrosRequisitos.Name = "txtOtrosRequisitos"
         Me.txtOtrosRequisitos.Size = New System.Drawing.Size(565, 62)
@@ -596,7 +596,7 @@ Partial Class IngresoOrdenTrabajo
         'txtRequisitosFuncionales
         '
         Me.txtRequisitosFuncionales.Location = New System.Drawing.Point(215, 17)
-        Me.txtRequisitosFuncionales.MaxLength = 100
+        Me.txtRequisitosFuncionales.MaxLength = 200
         Me.txtRequisitosFuncionales.Multiline = True
         Me.txtRequisitosFuncionales.Name = "txtRequisitosFuncionales"
         Me.txtRequisitosFuncionales.Size = New System.Drawing.Size(565, 62)
