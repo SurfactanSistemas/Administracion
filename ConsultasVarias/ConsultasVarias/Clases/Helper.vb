@@ -653,7 +653,7 @@ Namespace Clases
                     Case Enumeraciones.FormatoExportacion.PorPantalla ' Mostrar por Pantalla
                         .Mostrar()
                     Case Enumeraciones.FormatoExportacion.PDF ' PDF
-                        .Exportar(WNombreArchivo, ExportFormatType.PortableDocFormat)
+                        .Exportar(WNombreArchivo, ExportFormatType.PortableDocFormat, WRuta)
                     Case Enumeraciones.FormatoExportacion.Excel ' Excel
                         .Exportar(WNombreArchivo, ExportFormatType.Excel)
                     Case Enumeraciones.FormatoExportacion.Word ' Word

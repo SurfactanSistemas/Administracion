@@ -148,6 +148,10 @@ Public Class VistaPrevia
             End With
         End If
 
+        If Not ruta.EndsWith("/") Then ruta &= "/"
+
+        Directory.CreateDirectory(ruta)
+
         _ReconectarBaseDatos()
 
         Me.Reporte.RecordSelectionFormula = IIf(IsNothing(Me.Formula), "", Me.Formula)

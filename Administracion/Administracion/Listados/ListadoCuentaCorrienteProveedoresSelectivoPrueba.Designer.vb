@@ -49,6 +49,8 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Me.btnConsulta = New Administracion.CustomButton()
         Me.btnCancela = New Administracion.CustomButton()
         Me.lstAyuda_Filtrada = New Administracion.CustomListBox()
+        Me.btnAvisoMailOp = New Administracion.CustomButton()
+        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         CType(Me.GRilla, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -74,7 +76,7 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Me.GRilla.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.GRilla.Location = New System.Drawing.Point(16, 64)
         Me.GRilla.Name = "GRilla"
-        Me.GRilla.Size = New System.Drawing.Size(557, 284)
+        Me.GRilla.Size = New System.Drawing.Size(557, 271)
         Me.GRilla.StandardTab = True
         Me.GRilla.TabIndex = 52
         '
@@ -125,6 +127,7 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.ProgressBar1)
         Me.Panel2.Controls.Add(Me.GrupoConsultas)
         Me.Panel2.Controls.Add(Me.txtRazon)
         Me.Panel2.Controls.Add(Me.CustomLabel3)
@@ -283,9 +286,9 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Me.btnImprimir.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnImprimir.LabelAssociationKey = -1
-        Me.btnImprimir.Location = New System.Drawing.Point(485, 417)
+        Me.btnImprimir.Location = New System.Drawing.Point(422, 417)
         Me.btnImprimir.Name = "btnImprimir"
-        Me.btnImprimir.Size = New System.Drawing.Size(67, 40)
+        Me.btnImprimir.Size = New System.Drawing.Size(48, 40)
         Me.btnImprimir.TabIndex = 61
         Me.ToolTip1.SetToolTip(Me.btnImprimir, "Imprimir Reporte")
         Me.btnImprimir.UseVisualStyleBackColor = True
@@ -303,9 +306,9 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Me.btnPantalla.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnPantalla.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnPantalla.LabelAssociationKey = -1
-        Me.btnPantalla.Location = New System.Drawing.Point(397, 417)
+        Me.btnPantalla.Location = New System.Drawing.Point(349, 417)
         Me.btnPantalla.Name = "btnPantalla"
-        Me.btnPantalla.Size = New System.Drawing.Size(67, 40)
+        Me.btnPantalla.Size = New System.Drawing.Size(48, 40)
         Me.btnPantalla.TabIndex = 61
         Me.ToolTip1.SetToolTip(Me.btnPantalla, "Mostrar Reporte por Pantalla")
         Me.btnPantalla.UseVisualStyleBackColor = True
@@ -323,9 +326,9 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Me.btnLimpiarTodo.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnLimpiarTodo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnLimpiarTodo.LabelAssociationKey = -1
-        Me.btnLimpiarTodo.Location = New System.Drawing.Point(309, 417)
+        Me.btnLimpiarTodo.Location = New System.Drawing.Point(276, 417)
         Me.btnLimpiarTodo.Name = "btnLimpiarTodo"
-        Me.btnLimpiarTodo.Size = New System.Drawing.Size(67, 40)
+        Me.btnLimpiarTodo.Size = New System.Drawing.Size(48, 40)
         Me.btnLimpiarTodo.TabIndex = 61
         Me.ToolTip1.SetToolTip(Me.btnLimpiarTodo, "Limpiar Seleccionados / Todos")
         Me.btnLimpiarTodo.UseVisualStyleBackColor = True
@@ -343,9 +346,9 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Me.CustomButton1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.CustomButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CustomButton1.LabelAssociationKey = -1
-        Me.CustomButton1.Location = New System.Drawing.Point(222, 417)
+        Me.CustomButton1.Location = New System.Drawing.Point(201, 417)
         Me.CustomButton1.Name = "CustomButton1"
-        Me.CustomButton1.Size = New System.Drawing.Size(69, 40)
+        Me.CustomButton1.Size = New System.Drawing.Size(50, 40)
         Me.CustomButton1.TabIndex = 58
         Me.ToolTip1.SetToolTip(Me.CustomButton1, "Cargar Listado Parcial de Proveedores Selectivo")
         Me.CustomButton1.UseVisualStyleBackColor = True
@@ -363,9 +366,9 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnConsulta.LabelAssociationKey = -1
-        Me.btnConsulta.Location = New System.Drawing.Point(131, 417)
+        Me.btnConsulta.Location = New System.Drawing.Point(126, 417)
         Me.btnConsulta.Name = "btnConsulta"
-        Me.btnConsulta.Size = New System.Drawing.Size(69, 40)
+        Me.btnConsulta.Size = New System.Drawing.Size(50, 40)
         Me.btnConsulta.TabIndex = 58
         Me.ToolTip1.SetToolTip(Me.btnConsulta, "Consultar Proveedores")
         Me.btnConsulta.UseVisualStyleBackColor = True
@@ -383,9 +386,9 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Me.btnCancela.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCancela.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCancela.LabelAssociationKey = -1
-        Me.btnCancela.Location = New System.Drawing.Point(36, 417)
+        Me.btnCancela.Location = New System.Drawing.Point(46, 417)
         Me.btnCancela.Name = "btnCancela"
-        Me.btnCancela.Size = New System.Drawing.Size(74, 40)
+        Me.btnCancela.Size = New System.Drawing.Size(55, 40)
         Me.btnCancela.TabIndex = 57
         Me.ToolTip1.SetToolTip(Me.btnCancela, "Cerrar Ventana")
         Me.btnCancela.UseVisualStyleBackColor = True
@@ -402,11 +405,39 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Me.lstAyuda_Filtrada.TabIndex = 62
         Me.lstAyuda_Filtrada.Visible = False
         '
+        'btnAvisoMailOp
+        '
+        Me.btnAvisoMailOp.BackgroundImage = Global.Administracion.My.Resources.Resources.Attachment
+        Me.btnAvisoMailOp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnAvisoMailOp.Cleanable = False
+        Me.btnAvisoMailOp.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnAvisoMailOp.EnterIndex = -1
+        Me.btnAvisoMailOp.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnAvisoMailOp.FlatAppearance.BorderSize = 0
+        Me.btnAvisoMailOp.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnAvisoMailOp.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnAvisoMailOp.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAvisoMailOp.LabelAssociationKey = -1
+        Me.btnAvisoMailOp.Location = New System.Drawing.Point(495, 417)
+        Me.btnAvisoMailOp.Name = "btnAvisoMailOp"
+        Me.btnAvisoMailOp.Size = New System.Drawing.Size(48, 40)
+        Me.btnAvisoMailOp.TabIndex = 61
+        Me.ToolTip1.SetToolTip(Me.btnAvisoMailOp, "Enviar Email con Avisos de OP Disponibles.")
+        Me.btnAvisoMailOp.UseVisualStyleBackColor = True
+        '
+        'ProgressBar1
+        '
+        Me.ProgressBar1.Location = New System.Drawing.Point(16, 337)
+        Me.ProgressBar1.Name = "ProgressBar1"
+        Me.ProgressBar1.Size = New System.Drawing.Size(557, 18)
+        Me.ProgressBar1.TabIndex = 54
+        '
         'ListadoCuentaCorrienteProveedoresSelectivoPrueba
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(589, 469)
+        Me.Controls.Add(Me.btnAvisoMailOp)
         Me.Controls.Add(Me.btnImprimir)
         Me.Controls.Add(Me.btnPantalla)
         Me.Controls.Add(Me.btnLimpiarTodo)
@@ -455,4 +486,6 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
     Friend WithEvents GrupoConsultas As System.Windows.Forms.Panel
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents btnCerrarConsulta As Administracion.CustomButton
+    Friend WithEvents btnAvisoMailOp As Administracion.CustomButton
+    Friend WithEvents ProgressBar1 As System.Windows.Forms.ProgressBar
 End Class

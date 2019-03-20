@@ -2,6 +2,11 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Administracion", "Administracion\Administracion.vbproj", "{D0AB16CA-EAF0-49C9-8319-EA4B24006A9F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CC5D60FD-9755-4C61-B96C-F56173586BB9} = {CC5D60FD-9755-4C61-B96C-F56173586BB9}
+	EndProjectSection
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ConsultasVarias", "..\ConsultasVarias\ConsultasVarias\ConsultasVarias.vbproj", "{CC5D60FD-9755-4C61-B96C-F56173586BB9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,6 +24,12 @@ Global
 		{D0AB16CA-EAF0-49C9-8319-EA4B24006A9F}.Release|x64.Build.0 = Release|x64
 		{D0AB16CA-EAF0-49C9-8319-EA4B24006A9F}.Release|x86.ActiveCfg = Release|x86
 		{D0AB16CA-EAF0-49C9-8319-EA4B24006A9F}.Release|x86.Build.0 = Release|x86
+		{CC5D60FD-9755-4C61-B96C-F56173586BB9}.Debug|x64.ActiveCfg = Debug|x86
+		{CC5D60FD-9755-4C61-B96C-F56173586BB9}.Debug|x86.ActiveCfg = Debug|x86
+		{CC5D60FD-9755-4C61-B96C-F56173586BB9}.Debug|x86.Build.0 = Debug|x86
+		{CC5D60FD-9755-4C61-B96C-F56173586BB9}.Release|x64.ActiveCfg = Release|x86
+		{CC5D60FD-9755-4C61-B96C-F56173586BB9}.Release|x86.ActiveCfg = Release|x86
+		{CC5D60FD-9755-4C61-B96C-F56173586BB9}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

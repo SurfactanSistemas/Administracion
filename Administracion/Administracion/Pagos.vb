@@ -1,7 +1,6 @@
 ﻿Imports ClasesCompartidas
 Imports System.Data.SqlClient
 Imports CrystalDecisions.CrystalReports.Engine
-Imports Microsoft.Office.Interop
 
 Public Class Pagos
 
@@ -18,6 +17,8 @@ Public Class Pagos
     Dim WCuenta(100, 2) As String
     Dim _TipoConsulta As Integer = Nothing
     Private WCertificadoGan, WCertificadoIb, WCertificadoIbCiudad, WCertificadoIVA As String
+
+    Public Property GenerarPDF As Boolean
 
     Private WGrillaReferencia As DataGridView
 
@@ -430,7 +431,7 @@ Public Class Pagos
         End If
         btnLimpiar.PerformClick()
 
-        If Me.SoloLectura Then
+        If SoloLectura Then
             _LimpiarGrillas()
         End If
 
@@ -1858,7 +1859,7 @@ Public Class Pagos
                         End If
 
                     Else
-                        MsgBox("No hay Paridad cargada para la fecha " & fecha, MsgBoxStyle.Critical)
+                        If Not GenerarPDF Then MsgBox("No hay Paridad cargada para la fecha " & fecha, MsgBoxStyle.Critical)
                     End If
                 End With
             End If
@@ -2801,6 +2802,10 @@ Public Class Pagos
 
             End Using
 
+            Dim WTipoAvisoMailOp As String = "1"
+
+            If optTransferencias.Checked Then WTipoAvisoMailOp = "2"
+
 
             ' Actualizamos los numero de Certificados de Retenciones y datos historicos.
             ZSql = ""
@@ -2815,6 +2820,7 @@ Public Class Pagos
             ZSql &= " TipoIBCaba = " & "'" & _TipoIbCaba & "',"
             ZSql &= " PorceIB = " & "" & formatonumerico(_PorceIb) & ","
             ZSql &= " PorceIBCaba = " & "" & formatonumerico(_PorceIbCaba) & ","
+            ZSql &= " AvisoMailOp = " & "'" & WTipoAvisoMailOp & "',"
             ZSql &= " RetencionesRegistradas = '1'"
             ZSql &= " Where Orden = " & "'" & txtOrdenPago.Text & "'"
 
@@ -2838,90 +2844,8 @@ Public Class Pagos
         ' Imprimimos los comprobantes pertinentes.
         btnImprimir.PerformClick()
 
-        '
-        ' Corroboramos que si en caso de tener cargado proveedor, éste tiene indicado un email donde enviar el aviso de OP disponible.
-        '
-
-        _EnviarAvisoOPDisponible()
-
         ' Limpiamos pantalla.
         btnLimpiar.PerformClick()
-
-    End Sub
-
-    Private Sub _EnviarAvisoOPDisponible()
-
-        If txtProveedor.Text.Trim = "" Then Exit Sub
-
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT ISNULL(MailOP, '') MailOP FROM Proveedor WHERE Proveedor = '" & txtProveedor.Text & "'")
-        Dim dr As SqlDataReader
-
-        Try
-
-            cn.ConnectionString = Proceso._ConectarA
-            cn.Open()
-            cm.Connection = cn
-
-            dr = cm.ExecuteReader()
-
-            If dr.HasRows Then
-
-                dr.Read()
-
-                Dim WMailOp As String = dr.Item("MailOp")
-
-                If WMailOp.Trim = "" Then Exit Sub
-
-                If MsgBox("¿Desea Enviar un aviso de Orden de Pago Disponible a '" & WMailOp & "'?", MsgBoxStyle.YesNoCancel) = MsgBoxResult.Yes Then
-
-                    Dim WBody = ""
-
-                    _EnviarEmail(WMailOp, "", "Orden de Pago Disponible - SURFACTTAN S.A - ", WBody, "")
-
-                End If
-                
-            End If
-
-        Catch ex As Exception
-            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
-        Finally
-
-            dr = Nothing
-            cn.Close()
-            cn = Nothing
-            cm = Nothing
-
-        End Try
-
-    End Sub
-
-    Private Sub _EnviarEmail(ByVal _to As String, ByVal _bcc As String, ByVal _subject As String, ByVal _body As String, ByVal _adjunto As String)
-        Dim _Outlook As New Outlook.Application
-
-        Try
-            Dim _Mail As Outlook.MailItem = _Outlook.CreateItem(Outlook.OlItemType.olMailItem)
-
-            With _Mail
-
-                .To = _to
-                .BCC = _bcc
-                .Subject = _subject
-                .Body = _body
-
-                If Trim(_adjunto) <> "" Then
-                    .Attachments.Add(_adjunto)
-                End If
-                .Send()
-            End With
-            
-            _Mail = Nothing
-            
-        Catch ex As Exception
-            Throw New Exception("Ocurrió un problema al querer enviar Aviso de Orden de Pago disponible.")
-        Finally
-            _Outlook = Nothing
-        End Try
 
     End Sub
 
@@ -3191,7 +3115,6 @@ Public Class Pagos
                     End If
 
                     Throw New Exception("Hubo un problema al intentar grabar la Imputacion en la Base de Datos.")
-                    Exit Sub
                 Finally
 
                     cn.Close()
@@ -4778,6 +4701,7 @@ Public Class Pagos
     Enum Reporte
         Imprimir
         Pantalla
+        Exportar
     End Enum
 
     Private Sub btnImprimir_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnImprimir.Click
@@ -5108,12 +5032,24 @@ Public Class Pagos
         '
         ' COMENTADO EN ESPERA DE LA EVOLUCION DEL PROBLEMA EN MAQUINA DE MARIA LAURA.
         '
-        With VistaPrevia
-            .Reporte = crdoc
-            '.Mostrar()
-            .Imprimir()
-            .Reporte.Dispose()
-        End With
+        Dim frm As New VistaPrevia
+        frm.Reporte = crdoc
+
+        If GenerarPDF Then
+
+            Dim frm2 As New ConsultasVarias.VistaPrevia
+            frm2.Reporte = crdoc
+
+            ConsultasVarias.Clases.Conexion.EmpresaDeTrabajo = "SurfactanSa"
+
+            If _EsPellital() Then ConsultasVarias.Clases.Conexion.EmpresaDeTrabajo = "PellitalSa"
+
+            ConsultasVarias.Clases.Helper._ExportarReporte(frm2, ConsultasVarias.Clases.Enumeraciones.FormatoExportacion.PDF, txtOrdenPago.Text & "OrdenPago.pdf", "C:/ImpreOrdenPagoTemp/")
+
+        Else
+            frm.Imprimir()
+        End If
+
 
         'Dim viewer As New ReportViewer("Orden de Pago", Globals.reportPathWithName("wInformeOrdenPago.rpt"), "")
 

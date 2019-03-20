@@ -1,5 +1,10 @@
-﻿Imports ClasesCompartidas
+﻿Imports System.ComponentModel
+Imports ClasesCompartidas
 Imports System.Data.SqlClient
+Imports System.IO
+Imports Microsoft.Office.Interop.Outlook
+Imports CrystalDecisions.CrystalReports.Engine
+
 
 Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
 
@@ -7,7 +12,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
     Dim varTotal, varSaldo, varTotalUs, varSaldoUs, varSaldoOriginal, varDife, varParidad, varParidadTotal As Double
     Dim _Claves As New List(Of Object)
 
-    Private Sub ListadoCuentaCorrienteProveedoresSelectivo_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub ListadoCuentaCorrienteProveedoresSelectivo_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         Label2.Text = Globals.NombreEmpresa()
         txtDesdeProveedor.Text = ""
         txtFechaEmision.Clear()
@@ -15,7 +20,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         '_CargarProveedoresPreCargados()
         _Claves.Clear()
 
-        Proceso._PurgarSaldosCtaCtePrvs()
+        _PurgarSaldosCtaCtePrvs()
     End Sub
 
     Private Sub _CargarProveedoresPreCargados()
@@ -44,7 +49,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
                 'MsgBox("No hay proveedores que listar.", MsgBoxStyle.Information)
             End If
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar los Proveedores Selectivos precargados en la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
@@ -59,7 +64,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
             _CargarProveedor(DAOProveedor.buscarProveedorPorCodigo(_Proveedor(0)))
         Next
 
-        GRilla.Sort(GRilla.Columns(1), System.ComponentModel.ListSortDirection.Ascending)
+        GRilla.Sort(GRilla.Columns(1), ListSortDirection.Ascending)
 
     End Sub
 
@@ -126,7 +131,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
     End Function
 
     Private Sub txtfechaemision_KeyPress(ByVal sender As Object, _
-               ByVal e As System.Windows.Forms.KeyPressEventArgs) _
+               ByVal e As KeyPressEventArgs) _
                Handles txtFechaEmision.KeyPress
         If e.KeyChar = Convert.ToChar(Keys.Return) Then
             e.Handled = True
@@ -147,16 +152,16 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
             e.Handled = True
             txtFechaEmision.Text = "  /  /    "
-            Me.txtFechaEmision.SelectionStart = 0
+            txtFechaEmision.SelectionStart = 0
         End If
     End Sub
 
-    Private Sub btnCancela_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancela.Click
-        Me.Close()
+    Private Sub btnCancela_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCancela.Click
+        Close()
         MenuPrincipal.Show()
     End Sub
 
-    Private Sub btnConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsulta.Click
+    Private Sub btnConsulta_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnConsulta.Click
 
         _DeshabilitarConsulta()
 
@@ -201,7 +206,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
 
     End Sub
 
-    Private Sub lstAyuda_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstAyuda.Click
+    Private Sub lstAyuda_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lstAyuda.Click
 
         If Trim(lstAyuda.SelectedItem) <> "" Then
             _AgregarProveedorAListadoGeneral(lstAyuda.SelectedItem)
@@ -239,8 +244,8 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Try
             cm.ExecuteNonQuery()
 
-        Catch ex As Exception
-            Throw New Exception("Hubo un problema al querer limpiar la tabla ImpCtaCtePrvNet en la Base de Datos.")
+        Catch ex As System.Exception
+            Throw New System.Exception("Hubo un problema al querer limpiar la tabla ImpCtaCtePrvNet en la Base de Datos.")
         Finally
 
             cn.Close()
@@ -276,8 +281,8 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
                 Throw New SinParidadException("Paridad Inexistente")
             End If
 
-        Catch ex As Exception
-            Throw New Exception(ex.Message)
+        Catch ex As System.Exception
+            Throw New System.Exception(ex.Message)
         Finally
 
             dr = Nothing
@@ -297,13 +302,13 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Dim dr As New SqlDataAdapter(cm, cn)
 
         Try
-            cn.ConnectionString = Proceso._ConectarA
+            cn.ConnectionString = _ConectarA()
             cn.Open()
 
             dr.Fill(tabla)
 
-        Catch ex As Exception
-            Throw New Exception("Hubo un problema al querer consultar la Cuenta Corriente del Proveedor en la Base de Datos.")
+        Catch ex As System.Exception
+            Throw New System.Exception("Hubo un problema al querer consultar la Cuenta Corriente del Proveedor en la Base de Datos.")
         Finally
 
             dr = Nothing
@@ -314,7 +319,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         End Try
 
         If tabla.Rows.Count > 0 Then
-            Return Proceso._NormalizarFilas(tabla)
+            Return _NormalizarFilas(tabla)
         Else
             Return Nothing
         End If
@@ -327,13 +332,13 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Dim dr As New SqlDataAdapter(cm, cn)
 
         Try
-            cn.ConnectionString = Proceso._ConectarA
+            cn.ConnectionString = _ConectarA()
             cn.Open()
 
             dr.Fill(proveedor)
 
-        Catch ex As Exception
-            Throw New Exception("Hubo un problema al querer consultar los datos del Proveedor en la Base de Datos.")
+        Catch ex As System.Exception
+            Throw New System.Exception("Hubo un problema al querer consultar los datos del Proveedor en la Base de Datos.")
         Finally
 
             dr = Nothing
@@ -344,7 +349,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         End Try
 
         If proveedor.Rows.Count > 0 Then
-            Return Proceso._NormalizarFila(proveedor.Rows(0))
+            Return _NormalizarFila(proveedor.Rows(0))
         Else
             Return Nothing
         End If
@@ -358,13 +363,13 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Dim dr As New SqlDataAdapter(cm, cn)
 
         Try
-            cn.ConnectionString = Proceso._ConectarA
+            cn.ConnectionString = _ConectarA()
             cn.Open()
 
             dr.Fill(compra)
 
-        Catch ex As Exception
-            Throw New Exception("Hubo un problema al querer consultar la Factura en la Base de Datos.")
+        Catch ex As System.Exception
+            Throw New System.Exception("Hubo un problema al querer consultar la Factura en la Base de Datos.")
         Finally
 
             dr = Nothing
@@ -375,7 +380,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         End Try
 
         If compra.Rows.Count > 0 Then
-            Return Proceso._NormalizarFila(compra.Rows(0))
+            Return _NormalizarFila(compra.Rows(0))
         Else
             Return Nothing
         End If
@@ -388,13 +393,13 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Dim dr As New SqlDataAdapter(cm, cn)
 
         Try
-            cn.ConnectionString = Proceso._ConectarA
+            cn.ConnectionString = _ConectarA()
             cn.Open()
 
             dr.Fill(acumulado)
 
-        Catch ex As Exception
-            Throw New Exception("Hubo un problema al querer consultar los valores acumulados correspondientes al Proveedor: " & proveedor & " en la Base de Datos.")
+        Catch ex As System.Exception
+            Throw New System.Exception("Hubo un problema al querer consultar los valores acumulados correspondientes al Proveedor: " & proveedor & " en la Base de Datos.")
         Finally
 
             dr = Nothing
@@ -405,7 +410,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         End Try
 
         If acumulado.Rows.Count > 0 Then
-            Return Proceso._NormalizarFila(acumulado.Rows(0))
+            Return _NormalizarFila(acumulado.Rows(0))
         Else
             Return Nothing
         End If
@@ -444,7 +449,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
 
             _LimpiarImpCtaCtePrvNet()
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox(ex.Message)
             Exit Sub
         End Try
@@ -452,7 +457,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         txtEmpresa = "Surfactan S.A."
         varEmpresa = 1
 
-        If Proceso._EsPellital() Then
+        If _EsPellital() Then
             txtEmpresa = "Pellital S.A"
             varEmpresa = 8
         End If
@@ -466,7 +471,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Catch ex As SinParidadException
             MsgBox(ex.Message, MsgBoxStyle.Information)
             Exit Sub
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical)
             txtFechaEmision.Focus()
             Exit Sub
@@ -508,7 +513,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
 
                     tabla = _BuscarCtaCtePrvSelectivo(varProveedor)
 
-                Catch ex As Exception
+                Catch ex As System.Exception
                     MsgBox(ex.Message)
                     Exit Sub
                 End Try
@@ -579,7 +584,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
 
                         Try
                             CampoProveedor = _BuscarProveedor(varProveedor)
-                        Catch ex As Exception
+                        Catch ex As System.Exception
                             MsgBox(ex.Message, MsgBoxStyle.Critical)
                             Exit Sub
                         End Try
@@ -598,7 +603,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
                         Dim compra As DataRow = Nothing
                         Try
                             compra = _BuscarCompra(CCPrv.nroInterno)
-                        Catch ex As Exception
+                        Catch ex As System.Exception
                             MsgBox(ex.Message, MsgBoxStyle.Critical)
                             Exit Sub
                         End Try
@@ -677,7 +682,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
                         Try
                             CampoAcumulado = _BuscarAcumulado(varProveedor, varOrdFecha)
 
-                        Catch ex As Exception
+                        Catch ex As System.Exception
                             MsgBox(ex.Message, MsgBoxStyle.Critical)
                             Exit Sub
                         End Try
@@ -766,7 +771,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
                                 Dim WRetGananciasDC As Double
 
                                 If compra Is Nothing OrElse compra.Item("Rechazado") <> 1 Then
-                                    
+
                                     WRetGananciasDC = CaculoRetencionGanancia(varTipoPrv, varAcumPesosNetoParaGanancias, varAcuNetoOrig, varAcuRetenido, varAcuAnticipo, varAcuBruto, varAcuIva)
 
                                 End If
@@ -793,7 +798,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
 
                         Try
                             SQLConnector.executeProcedure("alta_impCtaCtePrvNetII", CCPrv.Clave, CCPrv.Proveedor, CCPrv.Tipo, CCPrv.letra, CCPrv.punto, CCPrv.numero, varTotal, varSaldo, CCPrv.fecha, CCPrv.vencimiento, CCPrv.VencimientoII, CCPrv.Impre, CCPrv.nroInterno, txtEmpresa, varAcumulado, WOrden, txtFechaEmision.Text, "", "", "", varParidadTotal, varSaldoOriginal, varDife, 0, 0, "", varRetIb, varRetGan, varAcuNeto, varParidad, varTotalUs, varSaldoUs, varAcumulaUs, varPago, IIf(varParidad = 0, 0, varPesosOrig), varDifCambio, AcumDifCambio, AcumPesosOrig)
-                        Catch ex As Exception
+                        Catch ex As System.Exception
                             MsgBox(ex.Message, MsgBoxStyle.Critical)
                             Exit Sub
                         End Try
@@ -825,7 +830,147 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
 
     End Sub
 
-    Private Sub txtDesdeProveedor_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDesdeProveedor.KeyDown
+    Private Sub _EnviarAvisoOPDisponible(ByVal Proveedor As String, Optional ByVal OrdenPago As String = "", Optional ByVal EsPorTransferencia As Boolean = False)
+
+        If Proveedor.Trim = "" Then Exit Sub
+        If EsPorTransferencia And Trim(OrdenPago) = "" Then Exit Sub
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT ISNULL(MailOP, '') MailOP FROM Proveedor WHERE Proveedor = '" & Proveedor & "'")
+        Dim dr As SqlDataReader
+
+        Try
+
+            cn.ConnectionString = _ConectarA()
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                dr.Read()
+
+                Dim WMailOp As String = dr.Item("MailOp")
+
+                If WMailOp.Trim = "" Then Exit Sub
+
+                Dim WBody = ""
+
+                Dim WAdjuntos As New List(Of String)
+
+                If EsPorTransferencia Then
+                    WAdjuntos = _PrepararAdjuntos(OrdenPago)
+                End If
+
+                For Each wAdjunto As String In WAdjuntos
+                    If Not File.Exists(wAdjunto) Then
+                        Throw New System.Exception("No existe el archivo " & wAdjunto)
+                    End If
+                Next
+
+                _EnviarEmail(WMailOp, "", "Orden de Pago Disponible - SURFACTTAN S.A - ", WBody, WAdjuntos.ToArray)
+
+            End If
+
+        Catch ex As System.Exception
+            Throw New System.Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+    End Sub
+
+    Private Function _PrepararAdjuntos(ByVal ordenPago As String) As List(Of String)
+        Dim WAdjuntos As New List(Of String)
+
+        If Val(ordenPago) <> 0 Then
+
+            Dim cn As SqlConnection = New SqlConnection()
+            Dim cm As SqlCommand = New SqlCommand("SELECT Orden FROM Pagos WHERE Orden = '" & ordenPago & "' And Renglon IN ('01', '1')")
+            Dim dr As SqlDataReader
+
+            Try
+
+                cn.ConnectionString = Proceso._ConectarA
+                cn.Open()
+                cm.Connection = cn
+
+                dr = cm.ExecuteReader()
+
+                If dr.HasRows Then
+                    dr.Read()
+
+                    With New Pagos
+                        .WindowState = FormWindowState.Minimized
+                        .GenerarPDF = True
+                        .Show(Me)
+                        .txtOrdenPago.Text = ordenPago
+                        .txtOrdenPago_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+                        .btnImprimir.PerformClick()
+                        .Close()
+                    End With
+
+                    WAdjuntos.Add("C:/ImpreOrdenPagoTemp/" & ordenPago & "OrdenPago.pdf")
+
+                End If
+
+            Catch ex As System.Exception
+                Throw New System.Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+            Finally
+
+                dr = Nothing
+                cn.Close()
+                cn = Nothing
+                cm = Nothing
+
+            End Try
+
+        End If
+
+        Return WAdjuntos
+    End Function
+
+    Private Sub _EnviarEmail(ByVal _to As String, ByVal _bcc As String, ByVal _subject As String, ByVal _body As String, ByVal _adjuntos() As String)
+        Dim _Outlook As New Microsoft.Office.Interop.Outlook.Application
+
+        Try
+            Dim _Mail As MailItem = _Outlook.CreateItem(OlItemType.olMailItem)
+
+            With _Mail
+
+                .To = _to
+                .BCC = _bcc
+                .Subject = _subject
+                .Body = _body
+
+                For Each adjunto As String In _adjuntos
+                    If Trim(adjunto) <> "" Then
+                        .Attachments.Add(adjunto)
+                    End If
+                Next
+
+                '.Send()
+                .Display()
+
+            End With
+
+            _Mail = Nothing
+
+        Catch ex As System.Exception
+            Throw New System.Exception("Ocurrió un problema al querer enviar Aviso de Orden de Pago disponible.")
+        Finally
+            _Outlook = Nothing
+        End Try
+
+    End Sub
+
+    Private Sub txtDesdeProveedor_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtDesdeProveedor.KeyDown
         If e.KeyData = Keys.Enter Then
 
             If Trim(txtDesdeProveedor.Text) = "" Then
@@ -848,7 +993,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         End If
     End Sub
 
-    Private Sub btnLimpiarTodo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiarTodo.Click
+    Private Sub btnLimpiarTodo_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLimpiarTodo.Click
         _DeshabilitarConsulta()
 
         Dim WFecha = txtFechaEmision.Text
@@ -870,13 +1015,13 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
 
     End Sub
 
-    Private Sub lstAyuda_Filtrada_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lstAyuda_Filtrada.Click
+    Private Sub lstAyuda_Filtrada_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lstAyuda_Filtrada.Click
         If Trim(lstFiltrada.SelectedItem) <> "" Then
             _AgregarProveedorAListadoGeneral(lstFiltrada.SelectedItem)
         End If
     End Sub
 
-    Private Sub txtDesdeProveedor_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtDesdeProveedor.MouseDoubleClick
+    Private Sub txtDesdeProveedor_MouseDoubleClick(ByVal sender As Object, ByVal e As MouseEventArgs) Handles txtDesdeProveedor.MouseDoubleClick
         btnConsulta.PerformClick()
     End Sub
 
@@ -909,7 +1054,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         End If
     End Sub
 
-    Private Sub lstFiltrada_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lstFiltrada.MouseClick
+    Private Sub lstFiltrada_MouseClick(ByVal sender As Object, ByVal e As MouseEventArgs) Handles lstFiltrada.MouseClick
         Dim origen As ListBox = lstAyuda
         Dim filtrado As ListBox = lstFiltrada
         Dim texto As TextBox = txtAyuda
@@ -928,28 +1073,28 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         texto.Text = ""
     End Sub
 
-    Private Sub txtAyuda_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAyuda.TextChanged
+    Private Sub txtAyuda_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles txtAyuda.TextChanged
         _FiltrarDinamicamente()
     End Sub
 
-    Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtDesdeProveedor.KeyPress
+    Private Sub SoloNumero(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txtDesdeProveedor.KeyPress
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
             e.Handled = True
         End If
     End Sub
 
-    Private Sub btnPantalla_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPantalla.Click
+    Private Sub btnPantalla_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnPantalla.Click
         _Imprimir(Reporte.Pantalla)
     End Sub
 
-    Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
+    Private Sub btnImprimir_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnImprimir.Click
 
         _Imprimir(Reporte.Imprimir)
         MsgBox("El reporte se ha impreso correctamente.", MsgBoxStyle.Information)
 
     End Sub
 
-    Private Sub CustomButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CustomButton1.Click
+    Private Sub CustomButton1_Click(ByVal sender As Object, ByVal e As EventArgs) Handles CustomButton1.Click
 
         If txtFechaEmision.Text.Replace(" ", "").Length = 10 Then
             _CargarProveedoresPreCargados()
@@ -963,7 +1108,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
 
     End Sub
 
-    Private Sub GRilla_CellMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles GRilla.CellMouseDoubleClick
+    Private Sub GRilla_CellMouseDoubleClick(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles GRilla.CellMouseDoubleClick
         If e.RowIndex < 0 Then : Exit Sub : End If
         Dim fila = GRilla.Rows(e.RowIndex)
         If Not IsNothing(fila) Then
@@ -979,7 +1124,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         End If
     End Sub
 
-    Private Sub ListadoCuentaCorrienteProveedoresSelectivo_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+    Private Sub ListadoCuentaCorrienteProveedoresSelectivo_Shown(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Shown
         txtFechaEmision.Focus()
     End Sub
 
@@ -1012,7 +1157,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Return valido
     End Function
 
-    Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message, ByVal keyData As System.Windows.Forms.Keys) As Boolean
+    Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message, ByVal keyData As Keys) As Boolean
 
         If GRilla.Focused Or GRilla.IsCurrentCellInEditMode Then ' Detectamos los ENTER tanto si solo estan en foco o si estan en edición una celda.
             GRilla.CommitEdit(DataGridViewDataErrorContexts.Commit) ' Guardamos todos los datos que no hayan sido confirmados.
@@ -1091,7 +1236,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Return MyBase.ProcessCmdKey(msg, keyData)
     End Function
 
-    Private Sub txtFechaEmision_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFechaEmision.KeyDown
+    Private Sub txtFechaEmision_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtFechaEmision.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtFechaEmision.Text).Replace("/", "") = "" Then : Exit Sub : End If
@@ -1122,7 +1267,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
 
         Try
 
-            cn.ConnectionString = Proceso._ConectarA
+            cn.ConnectionString = _ConectarA()
             cn.Open()
             cm.Connection = cn
 
@@ -1130,8 +1275,8 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
 
             WExistenProveedoresCargados = dr.HasRows
 
-        Catch ex As Exception
-            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Catch ex As System.Exception
+            Throw New System.Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
         Finally
 
             dr = Nothing
@@ -1143,7 +1288,105 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Return WExistenProveedoresCargados
     End Function
 
-    Private Sub btnCerrarConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrarConsulta.Click
+    Private Sub btnCerrarConsulta_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCerrarConsulta.Click
         _DeshabilitarConsulta()
     End Sub
+
+    Private Sub btnAvisoMailOp_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAvisoMailOp.Click
+
+        Try
+            ProgressBar1.Value = 0
+
+            If MsgBox("", MsgBoxStyle.YesNo) <> MsgBoxResult.Yes Then Exit Sub
+
+            '
+            ' Buscamos los proveedores con OP que no sean transferencia.
+            '
+            Dim WProveedoresNoTransferencia As DataTable = _TraerProveedoresNoTransferencia()
+
+            For Each row As DataRow In WProveedoresNoTransferencia.Rows
+                With row
+                    _EnviarAvisoOPDisponible(OrDefault(.Item("Proveedor"), ""))
+                End With
+            Next
+
+            Dim WProveedoresTransferencia As DataTable = _TraerProveedoresTransferencia()
+
+            For Each row As DataRow In WProveedoresTransferencia.Rows
+                With row
+                    _EnviarAvisoOPDisponible(OrDefault(.Item("Proveedor"), ""), OrDefault(.Item("Orden"), "0"), True)
+                End With
+            Next
+
+        Catch ex As System.Exception
+
+        End Try
+
+    End Sub
+
+    Private Function _TraerProveedoresTransferencia() As DataTable
+        Dim WTabla As New DataTable
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT DISTINCT Proveedor, Orden FROM Pagos WHERE Proveedor <> '' And ISNULL(AvisoMailOp, '') = '2'")
+        Dim dr As SqlDataReader
+
+        Try
+
+            cn.ConnectionString = _ConectarA()
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+                WTabla.Load(dr)
+            End If
+
+        Catch ex As System.Exception
+            Throw New System.Exception("Hubo un problema al querer consultar los Proveedores con OP que no sean Transferencia." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Return WTabla
+    End Function
+
+    Private Function _TraerProveedoresNoTransferencia() As DataTable
+        Dim WTabla As New DataTable
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT DISTINCT Proveedor FROM Pagos WHERE Proveedor <> '' And ISNULL(AvisoMailOp, '') = '1'")
+        Dim dr As SqlDataReader
+
+        Try
+
+            cn.ConnectionString = _ConectarA()
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+                WTabla.Load(dr)
+            End If
+
+        Catch ex As System.Exception
+            Throw New System.Exception("Hubo un problema al querer consultar los Proveedores con OP que no sean Transferencia." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Return WTabla
+    End Function
 End Class
