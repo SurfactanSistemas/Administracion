@@ -5003,36 +5003,38 @@ Public Class Pagos
 
             Tabla.Rows.Add(row)
 
-            row = Tabla.NewRow()
+            If Not GenerarPDF Then
+                row = Tabla.NewRow()
 
-            With row
-                .Item("Clave") = "2" + ceros(txtOrdenPago.Text, 6) + ceros(WRenglon, 2)
-                .Item("Tipo") = 2
-                .Item("Orden") = Val(txtOrdenPago.Text)
-                .Item("Renglon") = WRenglon
-                .Item("Fecha") = txtFecha.Text
-                .Item("Proveedor") = Trim(txtProveedor.Text)
-                .Item("Nombre") = txtRazonSocial.Text
-                .Item("Fecha1") = WFecha1
-                .Item("Numero1") = WNumero1
-                .Item("Comprobante1") = WComprobante1
-                .Item("Descripcion1") = WDescripcion1
-                .Item("Importe1") = Val(formatonumerico(WImporte1))
-                .Item("Numero2") = WNumero2
-                .Item("Banco2") = WBanco2
-                .Item("Importe2") = Val(formatonumerico(WImporte2))
-                .Item("Fecha2") = WFecha2
-                .Item("Neto") = Val(formatonumerico(XTotal))
-                .Item("Rete1") = Val(formatonumerico(txtGanancias.Text))
-                .Item("Rete2") = Val(formatonumerico(txtIngresosBrutos.Text)) + Val(formatonumerico(txtIBCiudad.Text))
-                .Item("Total") = Val(formatonumerico(txtIVA.Text))
-                .Item("Observaciones") = txtObservaciones.Text
-                .Item("Empresa") = WEmpresa '"Surfactan S.A."
-                .Item("Cuit") = XEmpCuit
-                .Item("Paridad") = Val(formatonumerico(XParidadTotal))
-            End With
+                With row
+                    .Item("Clave") = "2" + ceros(txtOrdenPago.Text, 6) + ceros(WRenglon, 2)
+                    .Item("Tipo") = 2
+                    .Item("Orden") = Val(txtOrdenPago.Text)
+                    .Item("Renglon") = WRenglon
+                    .Item("Fecha") = txtFecha.Text
+                    .Item("Proveedor") = Trim(txtProveedor.Text)
+                    .Item("Nombre") = txtRazonSocial.Text
+                    .Item("Fecha1") = WFecha1
+                    .Item("Numero1") = WNumero1
+                    .Item("Comprobante1") = WComprobante1
+                    .Item("Descripcion1") = WDescripcion1
+                    .Item("Importe1") = Val(formatonumerico(WImporte1))
+                    .Item("Numero2") = WNumero2
+                    .Item("Banco2") = WBanco2
+                    .Item("Importe2") = Val(formatonumerico(WImporte2))
+                    .Item("Fecha2") = WFecha2
+                    .Item("Neto") = Val(formatonumerico(XTotal))
+                    .Item("Rete1") = Val(formatonumerico(txtGanancias.Text))
+                    .Item("Rete2") = Val(formatonumerico(txtIngresosBrutos.Text)) + Val(formatonumerico(txtIBCiudad.Text))
+                    .Item("Total") = Val(formatonumerico(txtIVA.Text))
+                    .Item("Observaciones") = txtObservaciones.Text
+                    .Item("Empresa") = WEmpresa '"Surfactan S.A."
+                    .Item("Cuit") = XEmpCuit
+                    .Item("Paridad") = Val(formatonumerico(XParidadTotal))
+                End With
 
-            Tabla.Rows.Add(row)
+                Tabla.Rows.Add(row)
+            End If
 
         Next
 
@@ -5335,34 +5337,38 @@ Public Class Pagos
 
                 Tabla.Rows.Add(row)
 
-                row = Tabla.NewRow
+                If Not GenerarPDF Then
 
-                row.Item("Clave") = "2" + ceros(txtOrdenPago.Text, 6) + ceros(WRenglon, 2)
-                row.Item("Tipo") = 2
-                row.Item("Orden") = Val(txtOrdenPago.Text)
-                row.Item("Renglon") = WRenglon
-                row.Item("Empresa") = WEmpNombre
-                row.Item("Direccion") = WEmpDireccion
-                row.Item("Titulo") = "Nro.Certificado  : " & WCertificadoIVA
-                row.Item("Localidad") = WEmpLocalidad
-                row.Item("Fecha") = txtFecha.Text
-                row.Item("Cuit") = WEmpCuit
-                row.Item("Copia") = ImpreCopia(1)
-                row.Item("NroIb") = WNroIb
-                row.Item("NroAgente") = "" 'WNroAgente
-                row.Item("NombrePrv") = txtRazonSocial.Text
-                row.Item("DireccionPrv") = WPrvDireccion
-                row.Item("CuitPrv") = WPrvCuit
-                row.Item("NroIbPrv") = WPrvIb
-                row.Item("Tipo1") = XImpre1
-                row.Item("Numero1") = XImpre2
-                row.Item("Fecha1") = XImpre3
-                row.Item("Categoria1") = WCategoria
-                row.Item("Importe1") = Val(WNeto)
-                row.Item("Porce1") = Val(WReteIva)
-                row.Item("Retencion1") = Val(WReteIva)
+                    row = Tabla.NewRow
 
-                Tabla.Rows.Add(row)
+                    row.Item("Clave") = "2" + ceros(txtOrdenPago.Text, 6) + ceros(WRenglon, 2)
+                    row.Item("Tipo") = 2
+                    row.Item("Orden") = Val(txtOrdenPago.Text)
+                    row.Item("Renglon") = WRenglon
+                    row.Item("Empresa") = WEmpNombre
+                    row.Item("Direccion") = WEmpDireccion
+                    row.Item("Titulo") = "Nro.Certificado  : " & WCertificadoIVA
+                    row.Item("Localidad") = WEmpLocalidad
+                    row.Item("Fecha") = txtFecha.Text
+                    row.Item("Cuit") = WEmpCuit
+                    row.Item("Copia") = ImpreCopia(1)
+                    row.Item("NroIb") = WNroIb
+                    row.Item("NroAgente") = "" 'WNroAgente
+                    row.Item("NombrePrv") = txtRazonSocial.Text
+                    row.Item("DireccionPrv") = WPrvDireccion
+                    row.Item("CuitPrv") = WPrvCuit
+                    row.Item("NroIbPrv") = WPrvIb
+                    row.Item("Tipo1") = XImpre1
+                    row.Item("Numero1") = XImpre2
+                    row.Item("Fecha1") = XImpre3
+                    row.Item("Categoria1") = WCategoria
+                    row.Item("Importe1") = Val(WNeto)
+                    row.Item("Porce1") = Val(WReteIva)
+                    row.Item("Retencion1") = Val(WReteIva)
+
+                    Tabla.Rows.Add(row)
+
+                End If
 
             End With
 
@@ -5402,34 +5408,39 @@ Public Class Pagos
 
             Tabla.Rows.Add(row)
 
-            row = Tabla.NewRow
+            If Not GenerarPDF Then
 
-            row.Item("Clave") = "2" + ceros(txtOrdenPago.Text, 6) + ceros(WRenglon, 2)
-            row.Item("Tipo") = 2
-            row.Item("Orden") = Val(txtOrdenPago.Text)
-            row.Item("Renglon") = WRenglon
-            row.Item("Empresa") = WEmpNombre
-            row.Item("Direccion") = WEmpDireccion
-            row.Item("Titulo") = "Nro.Certificado  : " & WCertificadoIVA
-            row.Item("Localidad") = WEmpLocalidad
-            row.Item("Fecha") = txtFecha.Text
-            row.Item("Cuit") = WEmpCuit
-            row.Item("Copia") = ImpreCopia(1)
-            row.Item("NroIb") = WNroIb
-            row.Item("NroAgente") = "" 'WNroAgente
-            row.Item("NombrePrv") = txtRazonSocial.Text
-            row.Item("DireccionPrv") = WPrvDireccion
-            row.Item("CuitPrv") = WPrvCuit
-            row.Item("NroIbPrv") = WPrvIb
-            row.Item("Tipo1") = ""
-            row.Item("Numero1") = ""
-            row.Item("Fecha1") = ""
-            row.Item("Categoria1") = ""
-            row.Item("Importe1") = 0
-            row.Item("Porce1") = 0
-            row.Item("Retencion1") = 0
+                row = Tabla.NewRow
 
-            Tabla.Rows.Add(row)
+                row.Item("Clave") = "2" + ceros(txtOrdenPago.Text, 6) + ceros(WRenglon, 2)
+                row.Item("Tipo") = 2
+                row.Item("Orden") = Val(txtOrdenPago.Text)
+                row.Item("Renglon") = WRenglon
+                row.Item("Empresa") = WEmpNombre
+                row.Item("Direccion") = WEmpDireccion
+                row.Item("Titulo") = "Nro.Certificado  : " & WCertificadoIVA
+                row.Item("Localidad") = WEmpLocalidad
+                row.Item("Fecha") = txtFecha.Text
+                row.Item("Cuit") = WEmpCuit
+                row.Item("Copia") = ImpreCopia(1)
+                row.Item("NroIb") = WNroIb
+                row.Item("NroAgente") = "" 'WNroAgente
+                row.Item("NombrePrv") = txtRazonSocial.Text
+                row.Item("DireccionPrv") = WPrvDireccion
+                row.Item("CuitPrv") = WPrvCuit
+                row.Item("NroIbPrv") = WPrvIb
+                row.Item("Tipo1") = ""
+                row.Item("Numero1") = ""
+                row.Item("Fecha1") = ""
+                row.Item("Categoria1") = ""
+                row.Item("Importe1") = 0
+                row.Item("Porce1") = 0
+                row.Item("Retencion1") = 0
+
+                Tabla.Rows.Add(row)
+
+            End If
+
         Next
 
 
@@ -5702,34 +5713,38 @@ Public Class Pagos
 
                 Tabla.Rows.Add(row)
 
-                row = Tabla.NewRow
+                If Not GenerarPDF Then
 
-                row.Item("Clave") = "2" + ceros(txtOrdenPago.Text, 6) + ceros(WRenglon, 2)
-                row.Item("Tipo") = 2
-                row.Item("Orden") = Val(txtOrdenPago.Text)
-                row.Item("Renglon") = WRenglon
-                row.Item("Empresa") = WEmpNombre
-                row.Item("Direccion") = WEmpDireccion
-                row.Item("Titulo") = "Nro.Certificado  : " & WCertificadoIbCiudad
-                row.Item("Localidad") = WEmpLocalidad
-                row.Item("Fecha") = txtFecha.Text
-                row.Item("Cuit") = WEmpCuit
-                row.Item("Copia") = ImpreCopia(1)
-                row.Item("NroIb") = WNroIb
-                row.Item("NroAgente") = "" 'WNroAgente
-                row.Item("NombrePrv") = txtRazonSocial.Text
-                row.Item("DireccionPrv") = WPrvDireccion
-                row.Item("CuitPrv") = WPrvCuit
-                row.Item("NroIbPrv") = WPrvIb
-                row.Item("Tipo1") = XImpre1
-                row.Item("Numero1") = XImpre2
-                row.Item("Fecha1") = XImpre3
-                row.Item("Categoria1") = WCategoria
-                row.Item("Importe1") = CDbl(XImpre4)
-                row.Item("Porce1") = CDbl(WPorce1)
-                row.Item("Retencion1") = WRete
+                    row = Tabla.NewRow
 
-                Tabla.Rows.Add(row)
+                    row.Item("Clave") = "2" + ceros(txtOrdenPago.Text, 6) + ceros(WRenglon, 2)
+                    row.Item("Tipo") = 2
+                    row.Item("Orden") = Val(txtOrdenPago.Text)
+                    row.Item("Renglon") = WRenglon
+                    row.Item("Empresa") = WEmpNombre
+                    row.Item("Direccion") = WEmpDireccion
+                    row.Item("Titulo") = "Nro.Certificado  : " & WCertificadoIbCiudad
+                    row.Item("Localidad") = WEmpLocalidad
+                    row.Item("Fecha") = txtFecha.Text
+                    row.Item("Cuit") = WEmpCuit
+                    row.Item("Copia") = ImpreCopia(1)
+                    row.Item("NroIb") = WNroIb
+                    row.Item("NroAgente") = "" 'WNroAgente
+                    row.Item("NombrePrv") = txtRazonSocial.Text
+                    row.Item("DireccionPrv") = WPrvDireccion
+                    row.Item("CuitPrv") = WPrvCuit
+                    row.Item("NroIbPrv") = WPrvIb
+                    row.Item("Tipo1") = XImpre1
+                    row.Item("Numero1") = XImpre2
+                    row.Item("Fecha1") = XImpre3
+                    row.Item("Categoria1") = WCategoria
+                    row.Item("Importe1") = CDbl(XImpre4)
+                    row.Item("Porce1") = CDbl(WPorce1)
+                    row.Item("Retencion1") = WRete
+
+                    Tabla.Rows.Add(row)
+
+                End If
 
             End With
 
@@ -5769,34 +5784,39 @@ Public Class Pagos
 
             Tabla.Rows.Add(row)
 
-            row = Tabla.NewRow
+            If Not GenerarPDF Then
 
-            row.Item("Clave") = "2" + ceros(txtOrdenPago.Text, 6) + ceros(WRenglon, 2)
-            row.Item("Tipo") = 2
-            row.Item("Orden") = Val(txtOrdenPago.Text)
-            row.Item("Renglon") = WRenglon
-            row.Item("Empresa") = WEmpNombre
-            row.Item("Direccion") = WEmpDireccion
-            row.Item("Titulo") = "Nro.Certificado  : " & WCertificadoIb
-            row.Item("Localidad") = WEmpLocalidad
-            row.Item("Fecha") = txtFecha.Text
-            row.Item("Cuit") = WEmpCuit
-            row.Item("Copia") = ImpreCopia(1)
-            row.Item("NroIb") = WNroIb
-            row.Item("NroAgente") = "" 'WNroAgente
-            row.Item("NombrePrv") = txtRazonSocial.Text
-            row.Item("DireccionPrv") = WPrvDireccion
-            row.Item("CuitPrv") = WPrvCuit
-            row.Item("NroIbPrv") = WPrvIb
-            row.Item("Tipo1") = ""
-            row.Item("Numero1") = ""
-            row.Item("Fecha1") = ""
-            row.Item("Categoria1") = ""
-            row.Item("Importe1") = 0
-            row.Item("Porce1") = 0
-            row.Item("Retencion1") = 0
+                row = Tabla.NewRow
 
-            Tabla.Rows.Add(row)
+                row.Item("Clave") = "2" + ceros(txtOrdenPago.Text, 6) + ceros(WRenglon, 2)
+                row.Item("Tipo") = 2
+                row.Item("Orden") = Val(txtOrdenPago.Text)
+                row.Item("Renglon") = WRenglon
+                row.Item("Empresa") = WEmpNombre
+                row.Item("Direccion") = WEmpDireccion
+                row.Item("Titulo") = "Nro.Certificado  : " & WCertificadoIb
+                row.Item("Localidad") = WEmpLocalidad
+                row.Item("Fecha") = txtFecha.Text
+                row.Item("Cuit") = WEmpCuit
+                row.Item("Copia") = ImpreCopia(1)
+                row.Item("NroIb") = WNroIb
+                row.Item("NroAgente") = "" 'WNroAgente
+                row.Item("NombrePrv") = txtRazonSocial.Text
+                row.Item("DireccionPrv") = WPrvDireccion
+                row.Item("CuitPrv") = WPrvCuit
+                row.Item("NroIbPrv") = WPrvIb
+                row.Item("Tipo1") = ""
+                row.Item("Numero1") = ""
+                row.Item("Fecha1") = ""
+                row.Item("Categoria1") = ""
+                row.Item("Importe1") = 0
+                row.Item("Porce1") = 0
+                row.Item("Retencion1") = 0
+
+                Tabla.Rows.Add(row)
+
+            End If
+
         Next
 
 
@@ -6099,34 +6119,36 @@ Public Class Pagos
 
                                 Tabla.Rows.Add(row)
 
-                                row = Tabla.NewRow
+                                If Not GenerarPDF Then
+                                    row = Tabla.NewRow
 
-                                row.Item("Clave") = "2" + ceros(txtOrdenPago.Text, 6) + ceros(WRenglon, 2)
-                                row.Item("Tipo") = 2
-                                row.Item("Orden") = Val(txtOrdenPago.Text)
-                                row.Item("Renglon") = WRenglon
-                                row.Item("Empresa") = WEmpNombre
-                                row.Item("Direccion") = WEmpDireccion
-                                row.Item("Titulo") = "Nro.Certificado  : " & WCertificadoIb
-                                row.Item("Localidad") = WEmpLocalidad
-                                row.Item("Fecha") = txtFecha.Text
-                                row.Item("Cuit") = WEmpCuit
-                                row.Item("Copia") = ImpreCopia(1)
-                                row.Item("NroIb") = WNroIb
-                                row.Item("NroAgente") = "" 'WNroAgente
-                                row.Item("NombrePrv") = txtRazonSocial.Text
-                                row.Item("DireccionPrv") = WPrvDireccion
-                                row.Item("CuitPrv") = WPrvCuit
-                                row.Item("NroIbPrv") = WPrvIb
-                                row.Item("Tipo1") = XImpre1
-                                row.Item("Numero1") = XImpre2
-                                row.Item("Fecha1") = XImpre3
-                                row.Item("Categoria1") = IIf(Val(XImpre4) <> 0, "SUJETO A RETENCION " & CDbl(WPorceIb) & " %", "")
-                                row.Item("Importe1") = CDbl(XImpre4)
-                                row.Item("Porce1") = IIf(Val(XImpre4) <> 0, CDbl(WPorceIb), 0)
-                                row.Item("Retencion1") = WRete
+                                    row.Item("Clave") = "2" + ceros(txtOrdenPago.Text, 6) + ceros(WRenglon, 2)
+                                    row.Item("Tipo") = 2
+                                    row.Item("Orden") = Val(txtOrdenPago.Text)
+                                    row.Item("Renglon") = WRenglon
+                                    row.Item("Empresa") = WEmpNombre
+                                    row.Item("Direccion") = WEmpDireccion
+                                    row.Item("Titulo") = "Nro.Certificado  : " & WCertificadoIb
+                                    row.Item("Localidad") = WEmpLocalidad
+                                    row.Item("Fecha") = txtFecha.Text
+                                    row.Item("Cuit") = WEmpCuit
+                                    row.Item("Copia") = ImpreCopia(1)
+                                    row.Item("NroIb") = WNroIb
+                                    row.Item("NroAgente") = "" 'WNroAgente
+                                    row.Item("NombrePrv") = txtRazonSocial.Text
+                                    row.Item("DireccionPrv") = WPrvDireccion
+                                    row.Item("CuitPrv") = WPrvCuit
+                                    row.Item("NroIbPrv") = WPrvIb
+                                    row.Item("Tipo1") = XImpre1
+                                    row.Item("Numero1") = XImpre2
+                                    row.Item("Fecha1") = XImpre3
+                                    row.Item("Categoria1") = IIf(Val(XImpre4) <> 0, "SUJETO A RETENCION " & CDbl(WPorceIb) & " %", "")
+                                    row.Item("Importe1") = CDbl(XImpre4)
+                                    row.Item("Porce1") = IIf(Val(XImpre4) <> 0, CDbl(WPorceIb), 0)
+                                    row.Item("Retencion1") = WRete
 
-                                Tabla.Rows.Add(row)
+                                    Tabla.Rows.Add(row)
+                                End If
 
                             Case Else
                         End Select
@@ -6169,34 +6191,36 @@ Public Class Pagos
 
                                 Tabla.Rows.Add(row)
 
-                                row = Tabla.NewRow
+                                If Not GenerarPDF Then
+                                    row = Tabla.NewRow
 
-                                row.Item("Clave") = "2" + ceros(txtOrdenPago.Text, 6) + ceros(WRenglon, 2)
-                                row.Item("Tipo") = 2
-                                row.Item("Orden") = Val(txtOrdenPago.Text)
-                                row.Item("Renglon") = WRenglon
-                                row.Item("Empresa") = WEmpNombre
-                                row.Item("Direccion") = WEmpDireccion
-                                row.Item("Titulo") = "Nro.Certificado  : " & WCertificadoIb
-                                row.Item("Localidad") = WEmpLocalidad
-                                row.Item("Fecha") = txtFecha.Text
-                                row.Item("Cuit") = WEmpCuit
-                                row.Item("Copia") = ImpreCopia(1)
-                                row.Item("NroIb") = WNroIb
-                                row.Item("NroAgente") = "" 'WNroAgente
-                                row.Item("NombrePrv") = txtRazonSocial.Text
-                                row.Item("DireccionPrv") = WPrvDireccion
-                                row.Item("CuitPrv") = WPrvCuit
-                                row.Item("NroIbPrv") = WPrvIb
-                                row.Item("Tipo1") = XImpre1
-                                row.Item("Numero1") = XImpre2
-                                row.Item("Fecha1") = XImpre3
-                                row.Item("Categoria1") = "SUJETO A RETENCION " & CDbl(WPorceIb) & " %"
-                                row.Item("Importe1") = CDbl(XImpre4)
-                                row.Item("Porce1") = CDbl(WPorceIb)
-                                row.Item("Retencion1") = WRete
+                                    row.Item("Clave") = "2" + ceros(txtOrdenPago.Text, 6) + ceros(WRenglon, 2)
+                                    row.Item("Tipo") = 2
+                                    row.Item("Orden") = Val(txtOrdenPago.Text)
+                                    row.Item("Renglon") = WRenglon
+                                    row.Item("Empresa") = WEmpNombre
+                                    row.Item("Direccion") = WEmpDireccion
+                                    row.Item("Titulo") = "Nro.Certificado  : " & WCertificadoIb
+                                    row.Item("Localidad") = WEmpLocalidad
+                                    row.Item("Fecha") = txtFecha.Text
+                                    row.Item("Cuit") = WEmpCuit
+                                    row.Item("Copia") = ImpreCopia(1)
+                                    row.Item("NroIb") = WNroIb
+                                    row.Item("NroAgente") = "" 'WNroAgente
+                                    row.Item("NombrePrv") = txtRazonSocial.Text
+                                    row.Item("DireccionPrv") = WPrvDireccion
+                                    row.Item("CuitPrv") = WPrvCuit
+                                    row.Item("NroIbPrv") = WPrvIb
+                                    row.Item("Tipo1") = XImpre1
+                                    row.Item("Numero1") = XImpre2
+                                    row.Item("Fecha1") = XImpre3
+                                    row.Item("Categoria1") = "SUJETO A RETENCION " & CDbl(WPorceIb) & " %"
+                                    row.Item("Importe1") = CDbl(XImpre4)
+                                    row.Item("Porce1") = CDbl(WPorceIb)
+                                    row.Item("Retencion1") = WRete
 
-                                Tabla.Rows.Add(row)
+                                    Tabla.Rows.Add(row)
+                                End If
 
                             Case Else
                                 WPorceIb = "1,75"
@@ -6235,34 +6259,36 @@ Public Class Pagos
 
                                 Tabla.Rows.Add(row)
 
-                                row = Tabla.NewRow
+                                If Not GenerarPDF Then
+                                    row = Tabla.NewRow
 
-                                row.Item("Clave") = "2" + ceros(txtOrdenPago.Text, 6) + ceros(WRenglon, 2)
-                                row.Item("Tipo") = 2
-                                row.Item("Orden") = Val(txtOrdenPago.Text)
-                                row.Item("Renglon") = WRenglon
-                                row.Item("Empresa") = WEmpNombre
-                                row.Item("Direccion") = WEmpDireccion
-                                row.Item("Titulo") = "Nro.Certificado  : " & WCertificadoIb
-                                row.Item("Localidad") = WEmpLocalidad
-                                row.Item("Fecha") = txtFecha.Text
-                                row.Item("Cuit") = WEmpCuit
-                                row.Item("Copia") = ImpreCopia(1)
-                                row.Item("NroIb") = WNroIb
-                                row.Item("NroAgente") = "" 'WNroAgente
-                                row.Item("NombrePrv") = txtRazonSocial.Text
-                                row.Item("DireccionPrv") = WPrvDireccion
-                                row.Item("CuitPrv") = WPrvCuit
-                                row.Item("NroIbPrv") = WPrvIb
-                                row.Item("Tipo1") = XImpre1
-                                row.Item("Numero1") = XImpre2
-                                row.Item("Fecha1") = XImpre3
-                                row.Item("Categoria1") = "SUJETO A RETENCION " & CDbl(WPorceIb) & " %"
-                                row.Item("Importe1") = CDbl(XImpre4)
-                                row.Item("Porce1") = CDbl(WPorceIb)
-                                row.Item("Retencion1") = WRete
+                                    row.Item("Clave") = "2" + ceros(txtOrdenPago.Text, 6) + ceros(WRenglon, 2)
+                                    row.Item("Tipo") = 2
+                                    row.Item("Orden") = Val(txtOrdenPago.Text)
+                                    row.Item("Renglon") = WRenglon
+                                    row.Item("Empresa") = WEmpNombre
+                                    row.Item("Direccion") = WEmpDireccion
+                                    row.Item("Titulo") = "Nro.Certificado  : " & WCertificadoIb
+                                    row.Item("Localidad") = WEmpLocalidad
+                                    row.Item("Fecha") = txtFecha.Text
+                                    row.Item("Cuit") = WEmpCuit
+                                    row.Item("Copia") = ImpreCopia(1)
+                                    row.Item("NroIb") = WNroIb
+                                    row.Item("NroAgente") = "" 'WNroAgente
+                                    row.Item("NombrePrv") = txtRazonSocial.Text
+                                    row.Item("DireccionPrv") = WPrvDireccion
+                                    row.Item("CuitPrv") = WPrvCuit
+                                    row.Item("NroIbPrv") = WPrvIb
+                                    row.Item("Tipo1") = XImpre1
+                                    row.Item("Numero1") = XImpre2
+                                    row.Item("Fecha1") = XImpre3
+                                    row.Item("Categoria1") = "SUJETO A RETENCION " & CDbl(WPorceIb) & " %"
+                                    row.Item("Importe1") = CDbl(XImpre4)
+                                    row.Item("Porce1") = CDbl(WPorceIb)
+                                    row.Item("Retencion1") = WRete
 
-                                Tabla.Rows.Add(row)
+                                    Tabla.Rows.Add(row)
+                                End If
 
                         End Select
                     End If
@@ -6307,34 +6333,37 @@ Public Class Pagos
 
             Tabla.Rows.Add(row)
 
-            row = Tabla.NewRow
+            If Not GenerarPDF Then
+                row = Tabla.NewRow
 
-            row.Item("Clave") = "2" + ceros(txtOrdenPago.Text, 6) + ceros(WRenglon, 2)
-            row.Item("Tipo") = 2
-            row.Item("Orden") = Val(txtOrdenPago.Text)
-            row.Item("Renglon") = WRenglon
-            row.Item("Empresa") = WEmpNombre
-            row.Item("Direccion") = WEmpDireccion
-            row.Item("Titulo") = "Nro.Certificado  : " & WCertificadoIb
-            row.Item("Localidad") = WEmpLocalidad
-            row.Item("Fecha") = txtFecha.Text
-            row.Item("Cuit") = WEmpCuit
-            row.Item("Copia") = ImpreCopia(1)
-            row.Item("NroIb") = WNroIb
-            row.Item("NroAgente") = "" 'WNroAgente
-            row.Item("NombrePrv") = txtRazonSocial.Text
-            row.Item("DireccionPrv") = WPrvDireccion
-            row.Item("CuitPrv") = WPrvCuit
-            row.Item("NroIbPrv") = WPrvIb
-            row.Item("Tipo1") = ""
-            row.Item("Numero1") = ""
-            row.Item("Fecha1") = ""
-            row.Item("Categoria1") = ""
-            row.Item("Importe1") = 0
-            row.Item("Porce1") = 0
-            row.Item("Retencion1") = 0
+                row.Item("Clave") = "2" + ceros(txtOrdenPago.Text, 6) + ceros(WRenglon, 2)
+                row.Item("Tipo") = 2
+                row.Item("Orden") = Val(txtOrdenPago.Text)
+                row.Item("Renglon") = WRenglon
+                row.Item("Empresa") = WEmpNombre
+                row.Item("Direccion") = WEmpDireccion
+                row.Item("Titulo") = "Nro.Certificado  : " & WCertificadoIb
+                row.Item("Localidad") = WEmpLocalidad
+                row.Item("Fecha") = txtFecha.Text
+                row.Item("Cuit") = WEmpCuit
+                row.Item("Copia") = ImpreCopia(1)
+                row.Item("NroIb") = WNroIb
+                row.Item("NroAgente") = "" 'WNroAgente
+                row.Item("NombrePrv") = txtRazonSocial.Text
+                row.Item("DireccionPrv") = WPrvDireccion
+                row.Item("CuitPrv") = WPrvCuit
+                row.Item("NroIbPrv") = WPrvIb
+                row.Item("Tipo1") = ""
+                row.Item("Numero1") = ""
+                row.Item("Fecha1") = ""
+                row.Item("Categoria1") = ""
+                row.Item("Importe1") = 0
+                row.Item("Porce1") = 0
+                row.Item("Retencion1") = 0
 
-            Tabla.Rows.Add(row)
+                Tabla.Rows.Add(row)
+            End If
+            
         Next
 
 
@@ -6445,29 +6474,31 @@ Public Class Pagos
 
         Tabla.Rows.Add(row)
 
-        row = Tabla.NewRow
+        If Not GenerarPDF Then
+            row = Tabla.NewRow
 
-        With row
-            .Item("Clave") = "2" + ceros(txtOrdenPago.Text, 6) + "00"
-            .Item("Tipo") = 2
-            .Item("Orden") = Val(txtOrdenPago.Text)
-            .Item("Renglon") = 0
-            .Item("NroCertificado") = _DatosProv(0)
-            .Item("Empresa") = WEmpNombre
-            .Item("Direccion") = WEmpDireccion
-            .Item("Localidad") = WEmpLocalidad
-            .Item("Fecha") = txtFecha.Text
-            .Item("Cuit") = WEmpCuit
-            .Item("NombrePrv") = _DatosProv(5)
-            .Item("DireccionPrv") = _DatosProv(4)
-            .Item("CuitPrv") = _DatosProv(6)
-            .Item("Concepto") = WLeyenda(Val(_DatosProv(7)))
-            .Item("Pagado") = Val(formatonumerico(Total)) - Val(formatonumerico(Retencion))
-            .Item("Pagado") = Val(formatonumerico(Total))
-            .Item("Retenido") = Val(formatonumerico(Retencion))
-        End With
+            With row
+                .Item("Clave") = "2" + ceros(txtOrdenPago.Text, 6) + "00"
+                .Item("Tipo") = 2
+                .Item("Orden") = Val(txtOrdenPago.Text)
+                .Item("Renglon") = 0
+                .Item("NroCertificado") = _DatosProv(0)
+                .Item("Empresa") = WEmpNombre
+                .Item("Direccion") = WEmpDireccion
+                .Item("Localidad") = WEmpLocalidad
+                .Item("Fecha") = txtFecha.Text
+                .Item("Cuit") = WEmpCuit
+                .Item("NombrePrv") = _DatosProv(5)
+                .Item("DireccionPrv") = _DatosProv(4)
+                .Item("CuitPrv") = _DatosProv(6)
+                .Item("Concepto") = WLeyenda(Val(_DatosProv(7)))
+                .Item("Pagado") = Val(formatonumerico(Total)) - Val(formatonumerico(Retencion))
+                .Item("Pagado") = Val(formatonumerico(Total))
+                .Item("Retenido") = Val(formatonumerico(Retencion))
+            End With
 
-        Tabla.Rows.Add(row)
+            Tabla.Rows.Add(row)
+        End If
 
         crdoc.SetDataSource(Tabla)
 
@@ -6587,24 +6618,28 @@ Public Class Pagos
 
                         Tabla.Rows.Add(row)
 
-                        row = Tabla.NewRow()
+                        If Not GenerarPDF Then
 
-                        With row
-                            .Item("Corte") = "2"
-                            .Item("Orden") = ZZOrden
-                            .Item("Renglon") = ZZRenglon
-                            .Item("Proveedor") = ZZProveedor
-                            .Item("Fecha") = ZZFecha
-                            .Item("Cuit") = ZZCuit
-                            .Item("Importe") = Val(ZZImporteCheque)
-                            .Item("Numero") = ZZNumeroCheque
-                            .Item("Fecha1") = ZZFechaCheque
-                            .Item("Banco") = ZZBancoCheque
-                            .Item("Razon") = XRazon
-                            .Item("CuitProveedor") = XCuitProveedor
-                        End With
+                            row = Tabla.NewRow()
 
-                        Tabla.Rows.Add(row)
+                            With row
+                                .Item("Corte") = "2"
+                                .Item("Orden") = ZZOrden
+                                .Item("Renglon") = ZZRenglon
+                                .Item("Proveedor") = ZZProveedor
+                                .Item("Fecha") = ZZFecha
+                                .Item("Cuit") = ZZCuit
+                                .Item("Importe") = Val(ZZImporteCheque)
+                                .Item("Numero") = ZZNumeroCheque
+                                .Item("Fecha1") = ZZFechaCheque
+                                .Item("Banco") = ZZBancoCheque
+                                .Item("Razon") = XRazon
+                                .Item("CuitProveedor") = XCuitProveedor
+                            End With
+
+                            Tabla.Rows.Add(row)
+
+                        End If
 
                         LugarResumen = LugarResumen + 1
 
@@ -6648,24 +6683,26 @@ Public Class Pagos
 
             Tabla.Rows.Add(row)
 
-            row = Tabla.NewRow()
+            If Not GenerarPDF Then
+                row = Tabla.NewRow()
 
-            With row
-                .Item("Corte") = "2"
-                .Item("Orden") = ZZOrden
-                .Item("Renglon") = ZZRenglon
-                .Item("Proveedor") = ZZProveedor
-                .Item("Fecha") = ZZFecha
-                .Item("Cuit") = ZZCuit
-                .Item("Importe") = 0
-                .Item("Numero") = ZZNumeroCheque
-                .Item("Fecha1") = ZZFechaCheque
-                .Item("Banco") = ZZBancoCheque
-                .Item("Razon") = XRazon
-                .Item("CuitProveedor") = XCuitProveedor
-            End With
+                With row
+                    .Item("Corte") = "2"
+                    .Item("Orden") = ZZOrden
+                    .Item("Renglon") = ZZRenglon
+                    .Item("Proveedor") = ZZProveedor
+                    .Item("Fecha") = ZZFecha
+                    .Item("Cuit") = ZZCuit
+                    .Item("Importe") = 0
+                    .Item("Numero") = ZZNumeroCheque
+                    .Item("Fecha1") = ZZFechaCheque
+                    .Item("Banco") = ZZBancoCheque
+                    .Item("Razon") = XRazon
+                    .Item("CuitProveedor") = XCuitProveedor
+                End With
 
-            Tabla.Rows.Add(row)
+                Tabla.Rows.Add(row)
+            End If
 
             LugarResumen = LugarResumen + 1
 
