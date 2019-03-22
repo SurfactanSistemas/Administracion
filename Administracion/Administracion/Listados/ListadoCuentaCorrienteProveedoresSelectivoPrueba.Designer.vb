@@ -31,6 +31,7 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.GrupoConsultas = New System.Windows.Forms.Panel()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.btnCerrarConsulta = New Administracion.CustomButton()
@@ -48,9 +49,8 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Me.CustomButton1 = New Administracion.CustomButton()
         Me.btnConsulta = New Administracion.CustomButton()
         Me.btnCancela = New Administracion.CustomButton()
-        Me.lstAyuda_Filtrada = New Administracion.CustomListBox()
         Me.btnAvisoMailOp = New Administracion.CustomButton()
-        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
+        Me.lstAyuda_Filtrada = New Administracion.CustomListBox()
         CType(Me.GRilla, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -139,6 +139,13 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(589, 359)
         Me.Panel2.TabIndex = 60
+        '
+        'ProgressBar1
+        '
+        Me.ProgressBar1.Location = New System.Drawing.Point(16, 337)
+        Me.ProgressBar1.Name = "ProgressBar1"
+        Me.ProgressBar1.Size = New System.Drawing.Size(557, 18)
+        Me.ProgressBar1.TabIndex = 54
         '
         'GrupoConsultas
         '
@@ -393,18 +400,6 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Me.ToolTip1.SetToolTip(Me.btnCancela, "Cerrar Ventana")
         Me.btnCancela.UseVisualStyleBackColor = True
         '
-        'lstAyuda_Filtrada
-        '
-        Me.lstAyuda_Filtrada.Cleanable = False
-        Me.lstAyuda_Filtrada.EnterIndex = -1
-        Me.lstAyuda_Filtrada.FormattingEnabled = True
-        Me.lstAyuda_Filtrada.LabelAssociationKey = -1
-        Me.lstAyuda_Filtrada.Location = New System.Drawing.Point(36, 498)
-        Me.lstAyuda_Filtrada.Name = "lstAyuda_Filtrada"
-        Me.lstAyuda_Filtrada.Size = New System.Drawing.Size(545, 147)
-        Me.lstAyuda_Filtrada.TabIndex = 62
-        Me.lstAyuda_Filtrada.Visible = False
-        '
         'btnAvisoMailOp
         '
         Me.btnAvisoMailOp.BackgroundImage = Global.Administracion.My.Resources.Resources.Attachment
@@ -424,13 +419,19 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Me.btnAvisoMailOp.TabIndex = 61
         Me.ToolTip1.SetToolTip(Me.btnAvisoMailOp, "Enviar Email con Avisos de OP Disponibles.")
         Me.btnAvisoMailOp.UseVisualStyleBackColor = True
+        Me.btnAvisoMailOp.Visible = False
         '
-        'ProgressBar1
+        'lstAyuda_Filtrada
         '
-        Me.ProgressBar1.Location = New System.Drawing.Point(16, 337)
-        Me.ProgressBar1.Name = "ProgressBar1"
-        Me.ProgressBar1.Size = New System.Drawing.Size(557, 18)
-        Me.ProgressBar1.TabIndex = 54
+        Me.lstAyuda_Filtrada.Cleanable = False
+        Me.lstAyuda_Filtrada.EnterIndex = -1
+        Me.lstAyuda_Filtrada.FormattingEnabled = True
+        Me.lstAyuda_Filtrada.LabelAssociationKey = -1
+        Me.lstAyuda_Filtrada.Location = New System.Drawing.Point(36, 498)
+        Me.lstAyuda_Filtrada.Name = "lstAyuda_Filtrada"
+        Me.lstAyuda_Filtrada.Size = New System.Drawing.Size(545, 147)
+        Me.lstAyuda_Filtrada.TabIndex = 62
+        Me.lstAyuda_Filtrada.Visible = False
         '
         'ListadoCuentaCorrienteProveedoresSelectivoPrueba
         '

@@ -1,6 +1,8 @@
 ﻿Imports ClasesCompartidas
 Imports System.Data.SqlClient
+Imports System.IO
 Imports CrystalDecisions.CrystalReports.Engine
+Imports Microsoft.Office.Interop.Outlook
 
 Public Class Pagos
 
@@ -43,6 +45,8 @@ Public Class Pagos
             XParidad, XProvincia, XVendedor, XRubro, XComprobante, XAceptada, XCosto, XImporte3, XImporte4, _
             XImporte5, XImporte6, XImporte7, XDate, XParam, XSql, XClaveCheque, XBancoCheque, XSucursalCheque, _
             XChequeCheque, XCuentaCheque, XCuit, XClaveCuit, XNet, XProveedor, XRetIbCiudad, XTipoOrd As String
+
+    Private _orDefault As Object
 
     Public Property SoloLectura As Boolean
         Get
@@ -103,8 +107,8 @@ Public Class Pagos
                 WProv = Val(WProv)
             End If
 
-        Catch ex As Exception
-            Throw New Exception("Hubo un problema al querer consultar la Base de Datos. No se encontró proveedor.")
+        Catch ex As System.Exception
+            Throw New System.Exception("Hubo un problema al querer consultar la Base de Datos. No se encontró proveedor.")
         Finally
 
             dr = Nothing
@@ -131,8 +135,8 @@ Public Class Pagos
 
             Return dr.HasRows
 
-        Catch ex As Exception
-            Throw New Exception("Hubo un problema al querer consultar la Base de Datos.")
+        Catch ex As System.Exception
+            Throw New System.Exception("Hubo un problema al querer consultar la Base de Datos.")
         Finally
 
             dr = Nothing
@@ -235,8 +239,8 @@ Public Class Pagos
 
             End If
 
-        Catch ex As Exception
-            Throw New Exception("Hubo un problema al querer consultar la Base de Datos.")
+        Catch ex As System.Exception
+            Throw New System.Exception("Hubo un problema al querer consultar la Base de Datos.")
         Finally
 
             dr = Nothing
@@ -277,7 +281,7 @@ Public Class Pagos
                             If Not _ExisteFactura(XClave) Then
                                 Return False
                             End If
-                        Catch ex As Exception
+                        Catch ex As System.Exception
                             MsgBox(ex.Message, MsgBoxStyle.Critical)
                             Return False
                         End Try
@@ -353,7 +357,7 @@ Public Class Pagos
 
         Try
             datos_prov = _TraerDatosProveedorTipoProvinciaEmbargo()
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical)
             Return False
         End Try
@@ -427,7 +431,7 @@ Public Class Pagos
 
     Private Sub mostrarOrdenDePago(ByVal orden As OrdenPago)
         If IsNothing(orden) Then
-            Throw New Exception("Orden de Pago no existente")
+            Throw New System.Exception("Orden de Pago no existente")
         End If
         btnLimpiar.PerformClick()
 
@@ -530,8 +534,8 @@ Public Class Pagos
                 Return Nothing
             End If
 
-        Catch ex As Exception
-            Throw New Exception("Hubo un problema al querer consultar la informacion de la factura en la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Catch ex As System.Exception
+            Throw New System.Exception("Hubo un problema al querer consultar la informacion de la factura en la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
         Finally
 
             dr = Nothing
@@ -600,7 +604,7 @@ Public Class Pagos
                 WImpoNeto = importe / 1.21
             End If
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
@@ -754,7 +758,7 @@ Public Class Pagos
                 End If
             End With
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
@@ -853,7 +857,7 @@ Public Class Pagos
                 End If
             End With
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
@@ -873,7 +877,7 @@ Public Class Pagos
 
         Try
 
-            cn.ConnectionString = _ConectarA
+            cn.ConnectionString = _ConectarA()
             cn.Open()
             cm.Connection = cn
 
@@ -887,8 +891,8 @@ Public Class Pagos
                 Return Nothing
             End If
 
-        Catch ex As Exception
-            Throw New Exception("Hubo un problema al querer consultar la informacion de la factura en la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Catch ex As System.Exception
+            Throw New System.Exception("Hubo un problema al querer consultar la informacion de la factura en la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
         Finally
 
             dr = Nothing
@@ -959,7 +963,7 @@ Public Class Pagos
                 End If
             End With
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
@@ -1012,7 +1016,7 @@ Public Class Pagos
                 End If
             End With
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
@@ -1106,7 +1110,7 @@ Public Class Pagos
                 End If
             End With
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
@@ -1152,7 +1156,7 @@ Public Class Pagos
                 End If
             End With
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
@@ -1175,7 +1179,7 @@ Public Class Pagos
 
         Try
             clave = _Claves.FindLast(Function(i) i(0) = _Item)(1)
-        Catch ex As Exception
+        Catch ex As System.Exception
 
         End Try
 
@@ -1381,7 +1385,7 @@ Public Class Pagos
                 End If
             End With
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
@@ -1517,7 +1521,7 @@ Public Class Pagos
                 End If
             End With
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
@@ -1647,7 +1651,7 @@ Public Class Pagos
                 End If
             End With
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
@@ -1734,7 +1738,7 @@ Public Class Pagos
                 End If
             End With
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
@@ -1831,6 +1835,8 @@ Public Class Pagos
 
         ckNoCalcRetenciones.Checked = False
 
+        btnEnviarAviso.Enabled = False
+
     End Sub
 
     Private Function traerParidad() As String
@@ -1864,7 +1870,7 @@ Public Class Pagos
                 End With
             End If
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar la paridad en la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
@@ -1900,7 +1906,7 @@ Public Class Pagos
                 If Not IsNothing(trans) Then
                     trans.Rollback()
                 End If
-                Throw New Exception("No se pudo recuperar el Número de Certificado correspondiente al codigo: " & Codigo)
+                Throw New System.Exception("No se pudo recuperar el Número de Certificado correspondiente al codigo: " & Codigo)
             End If
 
             dr.Close()
@@ -1910,11 +1916,11 @@ Public Class Pagos
 
             trans.Commit()
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             If Not IsNothing(trans) Then
                 trans.Rollback()
             End If
-            Throw New Exception("Hubo un problema al querer consultar la Base de Datos.")
+            Throw New System.Exception("Hubo un problema al querer consultar la Base de Datos.")
         Finally
             dr = Nothing
             cn.Close()
@@ -1936,7 +1942,7 @@ Public Class Pagos
 
             Return dr.HasRows
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
@@ -1970,16 +1976,16 @@ Public Class Pagos
                 siguiente = IIf(IsDBNull(dr.Item("Orden")), 0, Val(dr.Item("Orden")))
 
                 If siguiente = 0 Then
-                    Throw New Exception("No se pudo consultar correctamente el siguiente numero de Orden de Pago disponible.")
+                    Throw New System.Exception("No se pudo consultar correctamente el siguiente numero de Orden de Pago disponible.")
                 Else
                     siguiente += 1
                 End If
             Else
-                Throw New Exception("No se pudo consultar correctamente el siguiente numero de Orden de Pago disponible.")
+                Throw New System.Exception("No se pudo consultar correctamente el siguiente numero de Orden de Pago disponible.")
             End If
 
-        Catch ex As Exception
-            Throw New Exception("No se pudo consultar correctamente el siguiente numero de Orden de Pago disponible.")
+        Catch ex As System.Exception
+            Throw New System.Exception("No se pudo consultar correctamente el siguiente numero de Orden de Pago disponible.")
         Finally
 
             dr = Nothing
@@ -2006,7 +2012,7 @@ Public Class Pagos
         Dim WOrdPago = 0
         Try
             WOrdPago = _SiguienteNumeroDeOrdenPago() 'DAOPagos.siguienteNumeroDeOrden()
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical)
             Exit Sub
         End Try
@@ -2038,14 +2044,14 @@ Public Class Pagos
                 WCertificadoIVA = _TraerNumeroCertificado("93")
             End If
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical)
             Exit Sub
         End Try
 
         Try
             crearNotasCreditoDebito()
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical)
             Exit Sub
         End Try
@@ -2203,7 +2209,7 @@ Public Class Pagos
                         cm.CommandText = ZSql
                         cm.ExecuteNonQuery()
 
-                    Catch ex As Exception
+                    Catch ex As System.Exception
                         MsgBox("Hubo un problema al querer grabar la Orden de Pago en la Base de Datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
                         Exit Sub
                     Finally
@@ -2220,7 +2226,7 @@ Public Class Pagos
                         cm.CommandText = ZSql
                         cm.ExecuteNonQuery()
 
-                    Catch ex As Exception
+                    Catch ex As System.Exception
                         MsgBox("Hubo un problema al querer actualizar la Cuenta Corriente en la Base de Datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
                         Exit Sub
                     Finally
@@ -2360,7 +2366,7 @@ Public Class Pagos
                         cm.CommandText = ZSql
                         cm.ExecuteNonQuery()
 
-                    Catch ex As Exception
+                    Catch ex As System.Exception
                         MsgBox("Hubo un problema al querer grabar la Forma de Pago en la Base de Datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
                         Exit Sub
                     Finally
@@ -2390,7 +2396,7 @@ Public Class Pagos
                         cm.CommandText = ZSql
                         cm.ExecuteNonQuery()
 
-                    Catch ex As Exception
+                    Catch ex As System.Exception
                         MsgBox("Hubo un problema al querer Actualizar los datos de Cheques en la Base de Datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
                         Exit Sub
                     Finally
@@ -2424,7 +2430,7 @@ Public Class Pagos
                             cm.CommandText = ZSql
                             cm.ExecuteNonQuery()
 
-                        Catch ex As Exception
+                        Catch ex As System.Exception
                             MsgBox("Hubo un problema al querer actualizar el estado del Cheque en la Base de Datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
                             Exit Sub
                         Finally
@@ -2455,7 +2461,7 @@ Public Class Pagos
                             cm.CommandText = ZSql
                             cm.ExecuteNonQuery()
 
-                        Catch ex As Exception
+                        Catch ex As System.Exception
                             MsgBox("Hubo un problema al querer actualizar la Cuenta corriente en la Base de Datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
                             Exit Sub
                         Finally
@@ -2548,7 +2554,7 @@ Public Class Pagos
                 cm.CommandText = ZSql
                 cm.ExecuteNonQuery()
 
-            Catch ex As Exception
+            Catch ex As System.Exception
                 MsgBox("Hubo un problema al querer grabar la informacion en la Cta Cte la Base de Datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
                 Exit Sub
             Finally
@@ -2638,7 +2644,7 @@ Public Class Pagos
                 cm.CommandText = ZSql
                 cm.ExecuteNonQuery()
 
-            Catch ex As Exception
+            Catch ex As System.Exception
                 MsgBox("Hubo un problema al querer grabar la informacion en la Cta Cte la Base de Datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
                 Exit Sub
             Finally
@@ -2661,7 +2667,7 @@ Public Class Pagos
             cm.CommandText = ZSql
             cm.ExecuteNonQuery()
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer Actualizar la información de Retención en la Base de Datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
             Exit Sub
         Finally
@@ -2697,7 +2703,7 @@ Public Class Pagos
             cm.CommandText = ZSql
             cm.ExecuteNonQuery()
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer Actualizar la informacion de la Orden de Pago en la Base de Datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
             Exit Sub
         Finally
@@ -2737,7 +2743,7 @@ Public Class Pagos
                                 WEntra = "S"
                             End If
 
-                        Catch ex As Exception
+                        Catch ex As System.Exception
                             MsgBox("Hubo un problema al querer la información de la Orden de Compra en la Base de Datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
                             Exit Sub
                         Finally
@@ -2757,7 +2763,7 @@ Public Class Pagos
                                     cm.CommandText = ZSql
                                     cm.ExecuteNonQuery()
 
-                                Catch ex As Exception
+                                Catch ex As System.Exception
                                     MsgBox("Hubo un problema al querer Actualizar la información de la Orden de Pago en la Base de Datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
                                     Exit Sub
                                 Finally
@@ -2828,7 +2834,7 @@ Public Class Pagos
             cm.CommandText = ZSql
             cm.ExecuteNonQuery()
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer Actualizar los datos de certificados de Retenciones de la Orden de Pagos en la Base de Datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
             Exit Sub
         Finally
@@ -2923,8 +2929,8 @@ Public Class Pagos
                 ' Buscamos el proximo numero interno.
                 Try
                     interno = DAOCompras.siguienteNumeroDeInterno()
-                Catch ex As Exception
-                    Throw New Exception("No se pudo obtener el próximo numero interno para la nota de Crédito/Débito")
+                Catch ex As System.Exception
+                    Throw New System.Exception("No se pudo obtener el próximo numero interno para la nota de Crédito/Débito")
                     Exit Sub
                 End Try
 
@@ -3024,13 +3030,13 @@ Public Class Pagos
 
                     trans.Commit()
 
-                Catch ex As Exception
+                Catch ex As System.Exception
 
                     If Not IsNothing(trans) Then
                         trans.Rollback()
                     End If
 
-                    Throw New Exception("Hubo un problema al intentar grabar la Factura en la Base de Datos.")
+                    Throw New System.Exception("Hubo un problema al intentar grabar la Factura en la Base de Datos.")
                     Exit Sub
                 Finally
 
@@ -3108,13 +3114,13 @@ Public Class Pagos
 
                     trans.Commit()
 
-                Catch ex As Exception
+                Catch ex As System.Exception
 
                     If Not IsNothing(trans) Then
                         trans.Rollback()
                     End If
 
-                    Throw New Exception("Hubo un problema al intentar grabar la Imputacion en la Base de Datos.")
+                    Throw New System.Exception("Hubo un problema al intentar grabar la Imputacion en la Base de Datos.")
                 Finally
 
                     cn.Close()
@@ -3181,13 +3187,13 @@ Public Class Pagos
 
                     trans.Commit()
 
-                Catch ex As Exception
+                Catch ex As System.Exception
 
                     If Not IsNothing(trans) Then
                         trans.Rollback()
                     End If
 
-                    Throw New Exception("Hubo un problema al intentar grabar la Imputacion en la Base de Datos.")
+                    Throw New System.Exception("Hubo un problema al intentar grabar la Imputacion en la Base de Datos.")
                     Exit Sub
                 Finally
 
@@ -3256,13 +3262,13 @@ Public Class Pagos
 
                     trans.Commit()
 
-                Catch ex As Exception
+                Catch ex As System.Exception
 
                     If Not IsNothing(trans) Then
                         trans.Rollback()
                     End If
 
-                    Throw New Exception("Hubo un problema al intentar grabar la Imputacion en la Base de Datos.")
+                    Throw New System.Exception("Hubo un problema al intentar grabar la Imputacion en la Base de Datos.")
                     Exit Sub
                 Finally
 
@@ -3337,13 +3343,13 @@ Public Class Pagos
 
                     trans.Commit()
 
-                Catch ex As Exception
+                Catch ex As System.Exception
 
                     If Not IsNothing(trans) Then
                         trans.Rollback()
                     End If
 
-                    Throw New Exception("Hubo un problema al intentar grabar la Cta Cte del Proveedor en la Base de Datos.")
+                    Throw New System.Exception("Hubo un problema al intentar grabar la Cta Cte del Proveedor en la Base de Datos.")
                     Exit Sub
                 Finally
 
@@ -3387,8 +3393,8 @@ Public Class Pagos
             'Next
 
             compra.agregarImputaciones(imputaciones)
-        Catch ex As Exception
-            Throw New Exception("Hubo un error al querer generar el alta de las imputaciones de la nota de Credito / Debito.")
+        Catch ex As System.Exception
+            Throw New System.Exception("Hubo un error al querer generar el alta de las imputaciones de la nota de Credito / Debito.")
             Exit Sub
         End Try
     End Sub
@@ -3683,7 +3689,10 @@ Public Class Pagos
 
                 Try
                     mostrarOrdenDePago(DAOPagos.buscarOrdenPorNumero(txtOrdenPago.Text))
-                Catch ex As Exception
+
+                    btnEnviarAviso.Enabled = True
+
+                Catch ex As System.Exception
 
                     Dim ord = txtOrdenPago.Text
 
@@ -3794,7 +3803,7 @@ Public Class Pagos
                                         gridFormaPagos.CurrentCell = gridFormaPagos.Rows(iRow + 1).Cells(0)
                                     End If
 
-                                Catch ex As Exception
+                                Catch ex As System.Exception
                                     If _EsChequePropio(valor) Then
                                         gridFormaPagos.CurrentCell = gridFormaPagos.Rows(iRow).Cells(2)
                                     Else
@@ -3889,7 +3898,7 @@ Public Class Pagos
 
                         Try
                             gridFormaPagos.CurrentCell = gridFormaPagos.Rows(iRow + 1).Cells(0)
-                        Catch ex As Exception
+                        Catch ex As System.Exception
                             gridFormaPagos.CurrentCell = gridFormaPagos.Rows(_ProximaFilaVaciaFormaPagos).Cells(0) 'gridFormaPagos.Rows(gridFormaPagos.Rows.Add).Cells(0)
                         End Try
                         'gridFormaPagos.CurrentCell = gridFormaPagos.Rows(gridFormaPagos.Rows.Add()).Cells(0)
@@ -3962,7 +3971,7 @@ Public Class Pagos
 
                                     Try
                                         _RecalcularNotaDeCreditoDebito(ZZClaveCtaCtePrv, WSaldo, iRow + 1)
-                                    Catch ex As Exception
+                                    Catch ex As System.Exception
                                         MsgBox(ex.Message)
                                     End Try
 
@@ -4001,7 +4010,7 @@ Public Class Pagos
 
                             Try
                                 .CurrentCell = .Rows(iRow + 1).Cells(0)
-                            Catch ex As Exception
+                            Catch ex As System.Exception
                                 .CurrentCell = .Rows(iRow).Cells(0)
                             End Try
 
@@ -4052,7 +4061,7 @@ Public Class Pagos
 
             End If
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
@@ -4101,7 +4110,7 @@ Public Class Pagos
 
             End If
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
@@ -4126,7 +4135,7 @@ Public Class Pagos
 
                 End If
 
-            Catch ex As Exception
+            Catch ex As System.Exception
                 MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
             Finally
 
@@ -4253,7 +4262,7 @@ Public Class Pagos
                 Return False
             End If
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar los datos del Cheque en la Base de Datos.", MsgBoxStyle.Critical)
             Return False
         Finally
@@ -4308,7 +4317,7 @@ Public Class Pagos
                 utilizado = True
             End If
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
@@ -4338,7 +4347,7 @@ Public Class Pagos
                 utilizado = True
             End If
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
@@ -4371,7 +4380,7 @@ Public Class Pagos
 
             End If
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
@@ -4464,7 +4473,7 @@ Public Class Pagos
 
             End If
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
@@ -4758,7 +4767,7 @@ Public Class Pagos
 
             End If
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
             Exit Sub
         Finally
@@ -4826,7 +4835,7 @@ Public Class Pagos
                         WImpresion(XCantidad, 1) = ""
                     End If
 
-                Catch ex As Exception
+                Catch ex As System.Exception
                     MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
                     Exit Sub
                 Finally
@@ -5149,7 +5158,7 @@ Public Class Pagos
                 End If
             End With
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
@@ -5282,7 +5291,7 @@ Public Class Pagos
                         WReteIva = 0
                     End If
 
-                Catch ex As Exception
+                Catch ex As System.Exception
                     MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
                 Finally
 
@@ -5426,12 +5435,25 @@ Public Class Pagos
 
         crdoc.SetDataSource(Tabla)
 
-        With VistaPrevia
-            .Reporte = crdoc
-            '.Mostrar()
-            .Imprimir()
-            .Dispose()
-        End With
+        If GenerarPDF Then
+
+            Dim frm2 As New ConsultasVarias.VistaPrevia
+            frm2.Reporte = crdoc
+
+            ConsultasVarias.Clases.Conexion.EmpresaDeTrabajo = "SurfactanSa"
+
+            If _EsPellital() Then ConsultasVarias.Clases.Conexion.EmpresaDeTrabajo = "PellitalSa"
+
+            ConsultasVarias.Clases.Helper._ExportarReporte(frm2, ConsultasVarias.Clases.Enumeraciones.FormatoExportacion.PDF, txtOrdenPago.Text & "OrdenPagoIVA.pdf", "C:/ImpreOrdenPagoTemp/")
+
+        Else
+            With VistaPrevia
+                .Reporte = crdoc
+                '.Mostrar()
+                .Imprimir()
+                .Dispose()
+            End With
+        End If
     End Sub
 
     Private Sub _ImprimirComprobanteRetencionIBCiudad()
@@ -5488,7 +5510,7 @@ Public Class Pagos
                 End If
             End With
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
@@ -5605,7 +5627,7 @@ Public Class Pagos
                         ZZSuma = Val(.Cells(4).Value) / 1.21
                     End If
 
-                Catch ex As Exception
+                Catch ex As System.Exception
                     MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
                 Finally
 
@@ -5780,12 +5802,27 @@ Public Class Pagos
 
         crdoc.SetDataSource(Tabla)
 
-        With VistaPrevia
-            .Reporte = crdoc
-            '.Mostrar()
-            .Imprimir()
-            .Reporte.Dispose()
-        End With
+        If GenerarPDF Then
+
+            Dim frm2 As New ConsultasVarias.VistaPrevia
+            frm2.Reporte = crdoc
+
+            ConsultasVarias.Clases.Conexion.EmpresaDeTrabajo = "SurfactanSa"
+
+            If _EsPellital() Then ConsultasVarias.Clases.Conexion.EmpresaDeTrabajo = "PellitalSa"
+
+            ConsultasVarias.Clases.Helper._ExportarReporte(frm2, ConsultasVarias.Clases.Enumeraciones.FormatoExportacion.PDF, txtOrdenPago.Text & "OrdenPagoIBCABA.pdf", "C:/ImpreOrdenPagoTemp/")
+
+        Else
+
+            With VistaPrevia
+                .Reporte = crdoc
+                '.Mostrar()
+                .Imprimir()
+                .Reporte.Dispose()
+            End With
+
+        End If
     End Sub
 
     Private Function _TraerDatosProveHistorico() As DataRow
@@ -5816,8 +5853,8 @@ Public Class Pagos
 
             Return Nothing
 
-        Catch ex As Exception
-            Throw New Exception("Hubo un problema al querer consultar los datos historicos de la Orden de Pago desde la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Catch ex As System.Exception
+            Throw New System.Exception("Hubo un problema al querer consultar los datos historicos de la Orden de Pago desde la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
         Finally
 
             dr = Nothing
@@ -5883,7 +5920,7 @@ Public Class Pagos
                 End If
             End With
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
@@ -6002,7 +6039,7 @@ Public Class Pagos
                             ZZSuma = Val(.Cells(4).Value) / 1.21
                         End If
 
-                    Catch ex As Exception
+                    Catch ex As System.Exception
                         MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
                     Finally
 
@@ -6302,14 +6339,25 @@ Public Class Pagos
 
 
         crdoc.SetDataSource(Tabla)
+        If GenerarPDF Then
 
-        With VistaPrevia
-            .Reporte = crdoc
-            '.Mostrar()
-            .Imprimir()
-            .Reporte.Dispose()
-        End With
+            Dim frm2 As New ConsultasVarias.VistaPrevia
+            frm2.Reporte = crdoc
 
+            ConsultasVarias.Clases.Conexion.EmpresaDeTrabajo = "SurfactanSa"
+
+            If _EsPellital() Then ConsultasVarias.Clases.Conexion.EmpresaDeTrabajo = "PellitalSa"
+
+            ConsultasVarias.Clases.Helper._ExportarReporte(frm2, ConsultasVarias.Clases.Enumeraciones.FormatoExportacion.PDF, txtOrdenPago.Text & "OrdenPagoIB.pdf", "C:/ImpreOrdenPagoTemp/")
+
+        Else
+            With VistaPrevia
+                .Reporte = crdoc
+                '.Mostrar()
+                .Imprimir()
+                .Reporte.Dispose()
+            End With
+        End If
     End Sub
 
     Private Sub _ImprimirComprobanteRetencionGanancias(ByVal Total As String, ByVal Retencion As String)
@@ -6423,13 +6471,27 @@ Public Class Pagos
 
         crdoc.SetDataSource(Tabla)
 
-        With VistaPrevia
-            .Reporte = crdoc
-            '.Mostrar()
-            .Imprimir()
-            .Dispose()
-        End With
+        If GenerarPDF Then
 
+            Dim frm2 As New ConsultasVarias.VistaPrevia
+            frm2.Reporte = crdoc
+
+            ConsultasVarias.Clases.Conexion.EmpresaDeTrabajo = "SurfactanSa"
+
+            If _EsPellital() Then ConsultasVarias.Clases.Conexion.EmpresaDeTrabajo = "PellitalSa"
+
+            ConsultasVarias.Clases.Helper._ExportarReporte(frm2, ConsultasVarias.Clases.Enumeraciones.FormatoExportacion.PDF, txtOrdenPago.Text & "OrdenPagoGanancias.pdf", "C:/ImpreOrdenPagoTemp/")
+
+        Else
+
+            With VistaPrevia
+                .Reporte = crdoc
+                '.Mostrar()
+                .Imprimir()
+                .Dispose()
+            End With
+
+        End If
     End Sub
 
     Private Function _TraerDatosProveedor(ByVal ordenpago As String) As String()
@@ -6463,7 +6525,7 @@ Public Class Pagos
             End With
 
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
@@ -6613,12 +6675,27 @@ Public Class Pagos
 
             crdoc.SetDataSource(Tabla)
 
-            With VistaPrevia
-                .Reporte = crdoc
-                '.Mostrar()
-                .Imprimir()
-                .Reporte.Dispose()
-            End With
+            If GenerarPDF Then
+
+                Dim frm2 As New ConsultasVarias.VistaPrevia
+                frm2.Reporte = crdoc
+
+                ConsultasVarias.Clases.Conexion.EmpresaDeTrabajo = "SurfactanSa"
+
+                If _EsPellital() Then ConsultasVarias.Clases.Conexion.EmpresaDeTrabajo = "PellitalSa"
+
+                ConsultasVarias.Clases.Helper._ExportarReporte(frm2, ConsultasVarias.Clases.Enumeraciones.FormatoExportacion.PDF, txtOrdenPago.Text & "OrdenPagoChTerceros.pdf", "C:/ImpreOrdenPagoTemp/")
+
+            Else
+
+                With VistaPrevia
+                    .Reporte = crdoc
+                    '.Mostrar()
+                    .Imprimir()
+                    .Reporte.Dispose()
+                End With
+
+            End If
 
         End If
     End Sub
@@ -6640,7 +6717,7 @@ Public Class Pagos
                 discriminar = False
             End If
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
@@ -6693,7 +6770,7 @@ Public Class Pagos
 
             End If
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
@@ -6776,7 +6853,7 @@ Public Class Pagos
             Dim indice As Integer = Nothing
             Try
                 indice = lstConsulta.FindStringExact(CLBFiltrado.SelectedItem.ToString)
-            Catch ex As Exception
+            Catch ex As System.Exception
 
             End Try
 
@@ -7217,7 +7294,7 @@ Public Class Pagos
 
             End If
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
@@ -7243,7 +7320,7 @@ Public Class Pagos
 
             dr.Fill(compra)
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
@@ -7469,7 +7546,7 @@ Public Class Pagos
 
             End If
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
@@ -7526,7 +7603,7 @@ Public Class Pagos
 
                 valida = dr.HasRows
 
-            Catch ex As Exception
+            Catch ex As System.Exception
                 MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
             Finally
 
@@ -7547,7 +7624,7 @@ Public Class Pagos
                     Case 1
                         Try
                             gridPagos.CurrentCell = gridPagos.Rows(WRowVarios + 1).Cells(0)
-                        Catch ex As Exception
+                        Catch ex As System.Exception
                             gridPagos.CurrentCell = gridPagos.Rows(WRowVarios).Cells(0)
                         End Try
 
@@ -7594,8 +7671,8 @@ Public Class Pagos
                 End With
             End If
 
-        Catch ex As Exception
-            Throw New Exception("Hubo un problema al querer consultar la Base de Datos.")
+        Catch ex As System.Exception
+            Throw New System.Exception("Hubo un problema al querer consultar la Base de Datos.")
         Finally
 
             dr = Nothing
@@ -7683,7 +7760,7 @@ Public Class Pagos
 
         Try
             ZCambioDivisa = _BuscarCambioDiviza(txtFecha.Text)
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical)
             Exit Sub
         End Try
@@ -7753,7 +7830,7 @@ Public Class Pagos
                                 Do
                                     Try
                                         ZCambioDivisa = _BuscarCambioDiviza(XFecha2)
-                                    Catch ex As Exception
+                                    Catch ex As System.Exception
                                         MsgBox(ex.Message, MsgBoxStyle.Critical)
                                         Exit Sub
                                     End Try
@@ -7804,7 +7881,7 @@ Public Class Pagos
                             cm.Transaction = trans
                             cm.ExecuteNonQuery()
                             trans.Commit()
-                        Catch ex As Exception
+                        Catch ex As System.Exception
 
                             If Not IsNothing(trans) Then
                                 trans.Rollback()
@@ -7931,6 +8008,240 @@ Public Class Pagos
             End With
 
         End If
+    End Sub
+
+    Private Sub btnEnviarAviso_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEnviarAviso.Click
+        Cursor = Cursors.WaitCursor
+        Try
+            Dim WOrdenPago As DataTable = _TraerDatosOrdenPago(txtOrdenPago.Text)
+            Dim EsPorTransferencia As Boolean = False
+            Dim WTipoOrd As Integer = 0
+            Dim WProveedor As String = ""
+
+            If WOrdenPago.Rows.Count > 0 Then
+
+                For Each row As DataRow In WOrdenPago.Rows
+                    With row
+
+                        Dim WTipo2 = OrDefault(.Item("Tipo2"), "00")
+
+                        Select Case WTipo2
+                            Case "02", "2"
+
+                                'If formatonumerico(OrDefault(.Item("Importe2"), 0)) = formatonumerico(OrDefault(.Item("Importe"), 0)) Then
+                                If WOrdenPago.Rows.Count = 1 Then
+                                    EsPorTransferencia = OrDefault(.Item("Numero2"), "") = "00000000"
+                                Else
+                                    EsPorTransferencia = False
+                                End If
+
+                            Case Else
+                                EsPorTransferencia = False
+                        End Select
+
+
+                    End With
+                Next
+
+                With WOrdenPago.Rows(0)
+
+                    WProveedor = OrDefault(.Item("Proveedor"), "")
+
+                    If Trim(WProveedor) <> "" Then
+
+                        _EnviarAvisoOPDisponible(WProveedor, txtOrdenPago.Text, EsPorTransferencia)
+
+                        MsgBox("¡Aviso enviado correctamente!", MsgBoxStyle.Information)
+
+                    End If
+
+                End With
+
+            End If
+
+        Catch ex As System.Exception
+            MsgBox(ex.Message)
+            txtOrdenPago.Focus()
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Function _TraerDatosOrdenPago(ByVal OrdenPago As String) As DataTable
+
+        Dim tabla As New DataTable
+
+        Using cn As New SqlConnection
+
+            cn.ConnectionString = _ConectarA()
+            cn.Open()
+
+            Using cm As New SqlCommand()
+                cm.Connection = cn
+                cm.CommandText = "SELECT Proveedor, Tipo2, Importe2, Numero2, Importe FROM Pagos WHERE Orden = '" & OrdenPago & "' and TipoReg IN ('02', '2')"
+
+                Using dr As SqlDataReader = cm.ExecuteReader
+
+                    If dr.HasRows Then
+                        tabla.Load(dr)
+                    End If
+
+                End Using
+            End Using
+        End Using
+
+        Return tabla
+
+    End Function
+
+    Private Sub _EnviarAvisoOPDisponible(ByVal Proveedor As String, Optional ByVal OrdenPago As String = "", Optional ByVal EsPorTransferencia As Boolean = False)
+
+        If Proveedor.Trim = "" Then Exit Sub
+        If EsPorTransferencia And Trim(OrdenPago) = "" Then Exit Sub
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT ISNULL(MailOP, '') MailOP FROM Proveedor WHERE Proveedor = '" & Proveedor & "'")
+        Dim dr As SqlDataReader
+
+        Try
+
+            cn.ConnectionString = _ConectarA()
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                dr.Read()
+
+                Dim WMailOp As String = dr.Item("MailOp")
+
+                If WMailOp.Trim = "" Then
+                    Throw New System.Exception("El Proveedor no posee un mail asociado para que se envíen avisos de OP.")
+                End If
+
+                Dim WBody = ""
+
+                If EsPorTransferencia Then
+                    WBody = "Acercamos a usted la Orden de Pago " & OrdenPago
+                Else
+                    WBody = "Se encuentra disponible una Orden de Pago para ser retirada por la recepción de nuestras oficinas."
+                End If
+
+                Dim WAdjuntos As New List(Of String)
+
+                If EsPorTransferencia Then
+                    WAdjuntos = _PrepararAdjuntos(OrdenPago)
+                End If
+
+                For Each wAdjunto As String In WAdjuntos
+                    If Not File.Exists(wAdjunto) Then
+                        Throw New System.Exception("No existe el archivo " & wAdjunto)
+                    End If
+                Next
+
+                _EnviarEmail(WMailOp, "", "Orden de Pago - SURFACTTAN S.A - ", WBody, WAdjuntos.ToArray)
+
+            End If
+
+        Catch ex As System.Exception
+            Throw New System.Exception("Hubo un problema al querer procesar el envío de mail por OP Disponible." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+    End Sub
+
+    Private Function _PrepararAdjuntos(ByVal ordenPago As String) As List(Of String)
+        Dim WAdjuntos As New List(Of String)
+
+        If Val(ordenPago) <> 0 Then
+
+            Dim cn As SqlConnection = New SqlConnection()
+            Dim cm As SqlCommand = New SqlCommand("SELECT Orden FROM Pagos WHERE Orden = '" & ordenPago & "' And Renglon IN ('01', '1')")
+            Dim dr As SqlDataReader
+
+            Try
+
+                cn.ConnectionString = Proceso._ConectarA
+                cn.Open()
+                cm.Connection = cn
+
+                dr = cm.ExecuteReader()
+
+                If dr.HasRows Then
+                    dr.Read()
+
+                    With New Pagos
+                        .WindowState = FormWindowState.Minimized
+                        .GenerarPDF = True
+                        .Show(Me)
+                        .txtOrdenPago.Text = ordenPago
+                        .txtOrdenPago_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+                        .btnImprimir.PerformClick()
+                        .Close()
+                    End With
+
+                    For Each o As String In Directory.GetFiles("C:/ImpreOrdenPagoTemp", ordenPago & "OrdenPago*")
+                        WAdjuntos.Add(o)
+                    Next
+                    'WAdjuntos.Add("C:/ImpreOrdenPagoTemp/" & ordenPago & "OrdenPago.pdf")
+
+                End If
+
+            Catch ex As System.Exception
+                Throw New System.Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+            Finally
+
+                dr = Nothing
+                cn.Close()
+                cn = Nothing
+                cm = Nothing
+
+            End Try
+
+        End If
+
+        Return WAdjuntos
+    End Function
+
+    Private Sub _EnviarEmail(ByVal _to As String, ByVal _bcc As String, ByVal _subject As String, ByVal _body As String, ByVal _adjuntos() As String)
+        Dim _Outlook As New Microsoft.Office.Interop.Outlook.Application
+
+        Try
+            Dim _Mail As MailItem = _Outlook.CreateItem(OlItemType.olMailItem)
+
+            With _Mail
+
+                .To = _to
+                .BCC = _bcc
+                .Subject = _subject
+                .Body = _body
+
+                For Each adjunto As String In _adjuntos
+                    If Trim(adjunto) <> "" Then
+                        .Attachments.Add(adjunto)
+                    End If
+                Next
+
+                .Send()
+                '.Display()
+
+            End With
+
+            _Mail = Nothing
+
+        Catch ex As System.Exception
+            Throw New System.Exception("Ocurrió un problema al querer enviar Aviso de Orden de Pago disponible." & vbCrLf & vbCrLf & " Motivo: " & ex.Message)
+        Finally
+            _Outlook = Nothing
+        End Try
+
     End Sub
 
 End Class
