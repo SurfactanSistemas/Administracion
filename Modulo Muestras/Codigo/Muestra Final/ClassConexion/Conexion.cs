@@ -74,17 +74,22 @@ namespace ClassConexion
 
             AbrirConexion();
 
-            string str = "select Clase, Intervencion, Naciones from Terminado where Codigo = '" + codigo + "'";
+            string str = "select Clase, Intervencion, Naciones, Embalaje, DescriOnu from Terminado where Codigo = '" + codigo + "'";
 
             adapter.SelectCommand = new SqlCommand(str, conexion);
 
             adapter.Fill(tabla);
 
-            filas.Add(tabla.Rows[0]);
+            if (tabla.Rows.Count > 0)
+            {
+                filas.Add(tabla.Rows[0]);
 
-            CerrarConexion();
+                CerrarConexion();
 
-            return filas[0];
+                return filas[0];
+            }
+
+            return null;
         }
 
         public void ActualizarMuestraLab(string str)
@@ -608,7 +613,7 @@ namespace ClassConexion
 
             AbrirConexion();
 
-            string str = "select DescriCliente, Cantidad, Peligroso, PeligrosoII, Articulo, Pedido from Muestra where Remito = '" + numero_remito.Trim() + "' and Cliente = '" + cliente.Trim() + "'";
+            string str = "select DescriCliente, Cantidad, Peligroso, PeligrosoII, Articulo, Pedido, ISNULL(Producto, '') Producto from Muestra where Remito = '" + numero_remito.Trim() + "' and Cliente = '" + cliente.Trim() + "'";
 
             adapter.SelectCommand = new SqlCommand(str, conexion);
 

@@ -403,7 +403,7 @@ namespace Vista
                         string codigo = codigoOri.Substring(0, 12);
                         DataRow datarow = Ter.ListarPeligroso(codigo);
 
-                        if (datarow[0].ToString() != "                              ")
+                        if (datarow[0].ToString().Trim() != "")
                         {
                             newRow["Clase"] = "Clase: " + datarow[0];
                         }
@@ -412,7 +412,7 @@ namespace Vista
                             newRow["Clase"] = "";
                         }
 
-                        if (datarow[1].ToString() != "          ")
+                        if (datarow[1].ToString().Trim() != "")
                         {
                             newRow["Intervencion"] = "Guia: " + datarow[1];
                         }
@@ -421,7 +421,7 @@ namespace Vista
                             newRow["Intervencion"] = "";
                         }
 
-                        if (datarow[2].ToString() != "          ")
+                        if (datarow[2].ToString().Trim() != "")
                         {
                             newRow["Naciones"] = "O.N.U: " + datarow[2];
                         }
@@ -553,6 +553,27 @@ namespace Vista
                 {
                     _dt = CS.BuscarListaRemito(numero_remito, _CodCliente);
 
+                    foreach (DataRow row in _dt.Rows)
+                    {
+                        if (row["Producto"].ToString().Replace("-", "").Trim() != "")
+                        {
+                            DataRow datarow = CS.TraerPeligroso(row["Producto"].ToString()); //CS.ListarPeligroso(_id);
+                            string WPeligrosoI = "", WPeligrosoII = "";
+
+                            if (datarow != null)
+                            {
+                                if (datarow["DescriOnu"].ToString().Trim() != "") WPeligrosoI = datarow["DescriOnu"].ToString().Trim();
+                                if (datarow["Clase"].ToString().Trim() != "") WPeligrosoII = "Clase: " + datarow["Clase"].ToString().Trim() + "  ";
+                                if (datarow["Naciones"].ToString().Trim() != "") WPeligrosoII += "N.ONU: " + datarow["Naciones"].ToString().Trim() + "  ";
+                                if (datarow["Embalaje"].ToString().Trim() != "") WPeligrosoII += "Grupo de Embalaje: " + datarow["Embalaje"].ToString().Trim() + "  ";
+                                if (datarow["Intervencion"].ToString().Trim() != "") WPeligrosoII += "N. Intervención: " + datarow["Intervencion"].ToString().Trim() + "  ";
+                            }
+
+                            row["Peligroso"] = WPeligrosoI.Trim();
+                            row["PeligrosoII"] = WPeligrosoII.Trim();
+                        }
+                    }
+
                     DataRow datacliente1 = CS.BuscarCliente(cliente);
 
                     string WPedido = DGV_Muestra.SelectedRows[0].Cells["Pedido"].Value.ToString();
@@ -638,13 +659,23 @@ namespace Vista
                             Lotes[i] = _lote1;
                         }
                     }
-                    
-                    
 
-                    DataRow datarow = CS.ListarPeligroso(_id);
 
-                    Peligroso[i, 0] = datarow[0].ToString();
-                    Peligroso[i, 1] = datarow[1].ToString();
+
+                    DataRow datarow = CS.TraerPeligroso(cod); //CS.ListarPeligroso(_id);
+                    string WPeligrosoI= "", WPeligrosoII = "";
+
+                    if (datarow != null)
+                    {
+                        if (datarow["DescriOnu"].ToString().Trim() != "") WPeligrosoI = datarow["DescriOnu"].ToString().Trim();
+                        if (datarow["Clase"].ToString().Trim() != "") WPeligrosoII = "Clase: " + datarow["Clase"].ToString().Trim() + "  ";
+                        if (datarow["Naciones"].ToString().Trim() != "") WPeligrosoII += "N.ONU: " + datarow["Naciones"].ToString().Trim() + " ";
+                        if (datarow["Embalaje"].ToString().Trim() != "") WPeligrosoII += "Grupo de Embalaje: " + datarow["Embalaje"].ToString().Trim() + " ";
+                        if (datarow["Intervencion"].ToString().Trim() != "") WPeligrosoII += "N. Intervención: " + datarow["Intervencion"].ToString().Trim() + " ";
+                    }
+
+                    Peligroso[i, 0] = WPeligrosoI.Trim(); //datarow[0].ToString();
+                    Peligroso[i, 1] = WPeligrosoII.Trim(); //datarow[1].ToString();
 
                 }
                 
