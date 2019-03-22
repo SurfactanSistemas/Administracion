@@ -287,4 +287,8 @@
     'Private Sub CuentaCorrienteDeProveedoresSelectivoPruebaToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CuentaCorrienteDeProveedoresSelectivoPruebaToolStripMenuItem.Click
     '    abrir(New ListadoCuentaCorrienteProveedoresSelectivoPrueba)
     'End Sub
+
+    Private Sub EnvíoDeAvisoDeOPAProveedoresPorEMailToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EnvíoDeAvisoDeOPAProveedoresPorEMailToolStripMenuItem.Click
+        abrir(New AvisoOPAProveedores)
+    End Sub
 End Class

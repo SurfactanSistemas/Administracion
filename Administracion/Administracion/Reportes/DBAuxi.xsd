@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DBAuxi" targetNamespace="http://tempuri.org/DBAuxi.xsd" xmlns:mstns="http://tempuri.org/DBAuxi.xsd" xmlns="http://tempuri.org/DBAuxi.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DBAuxi" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DBAuxi" msprop:Generator_UserDSName="DBAuxi">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="AvisosNoEnviados" msprop:Generator_TableClassName="AvisosNoEnviadosDataTable" msprop:Generator_TableVarName="tableAvisosNoEnviados" msprop:Generator_TablePropName="AvisosNoEnviados" msprop:Generator_RowDeletingName="AvisosNoEnviadosRowDeleting" msprop:Generator_RowChangingName="AvisosNoEnviadosRowChanging" msprop:Generator_RowEvHandlerName="AvisosNoEnviadosRowChangeEventHandler" msprop:Generator_RowDeletedName="AvisosNoEnviadosRowDeleted" msprop:Generator_UserTableName="AvisosNoEnviados" msprop:Generator_RowChangedName="AvisosNoEnviadosRowChanged" msprop:Generator_RowEvArgName="AvisosNoEnviadosRowChangeEvent" msprop:Generator_RowClassName="AvisosNoEnviadosRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Proveedor" msprop:Generator_ColumnVarNameInTable="columnProveedor" msprop:Generator_ColumnPropNameInRow="Proveedor" msprop:Generator_ColumnPropNameInTable="ProveedorColumn" msprop:Generator_UserColumnName="Proveedor" type="xs:string" minOccurs="0" />
+              <xs:element name="OrdenPago" msprop:Generator_ColumnVarNameInTable="columnOrdenPago" msprop:Generator_ColumnPropNameInRow="OrdenPago" msprop:Generator_ColumnPropNameInTable="OrdenPagoColumn" msprop:Generator_UserColumnName="OrdenPago" type="xs:int" minOccurs="0" />
+              <xs:element name="DescProveedor" msprop:Generator_ColumnVarNameInTable="columnDescProveedor" msprop:Generator_ColumnPropNameInRow="DescProveedor" msprop:Generator_ColumnPropNameInTable="DescProveedorColumn" msprop:Generator_UserColumnName="DescProveedor" type="xs:string" minOccurs="0" />
+              <xs:element name="ID" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" minOccurs="0" />
+              <xs:element name="Parámetro" msprop:Generator_ColumnVarNameInTable="columnParámetro" msprop:Generator_ColumnPropNameInRow="Parámetro" msprop:Generator_ColumnPropNameInTable="ParámetroColumn" msprop:Generator_UserColumnName="Parámetro" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
