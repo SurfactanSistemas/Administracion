@@ -3,6 +3,7 @@ Imports System.IO
 Imports System.Text.RegularExpressions
 Imports ConsultasVarias
 Imports CrystalDecisions.Shared
+Imports Microsoft.Office.Interop.Outlook
 Imports Microsoft.VisualBasic.FileIO
 
 Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAyudaListadoSACs, IAyudaMPAsociadasOC, IExportarINC, IModifNumeracionINC, IIngresoClaveSeguridad
@@ -330,7 +331,7 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
             Try
                 _CorroborarCorrespondenciaProductoLotePartida()
 
-            Catch ex As Exception
+            Catch ex As System.Exception
                 MsgBox(ex.Message, MsgBoxStyle.Exclamation)
                 txtLotePartida.Focus()
             End Try
@@ -345,7 +346,7 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
 
         Dim WProd As DataRow = _ObtenerProductoAsociado()
 
-        If IsNothing(WProd) Then Throw New Exception("No se encuentra Laudo/Hoja indicada.")
+        If IsNothing(WProd) Then Throw New System.Exception("No se encuentra Laudo/Hoja indicada.")
 
         Dim WProductoInfLength As String = txtProducto.Text.Replace(" ", "").Length
 
@@ -449,6 +450,8 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
         Try
             _ValidarDatosIngresados()
 
+            Dim WEnviarMail = False
+
             Dim WSqls As New List(Of String)
 
             Dim WIncid As DataRow = GetSingle("SELECT Incidencia, Tipo, ClaveSac FROM CargaIncidencias WHERE Incidencia = '" & txtIncidencia.Text & "'")
@@ -458,6 +461,7 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
 
             If IsNothing(WIncid) Then
                 txtIncidencia.Text = ""
+                WEnviarMail = True
             Else
                 WTipo = OrDefault(WIncid.Item("Tipo"), 2)
                 WClaveSAC = OrDefault(WIncid.Item("ClaveSac"), "")
@@ -487,6 +491,20 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
 
             ExecuteNonQueries(WSqls.ToArray)
 
+            If WEnviarMail Then
+
+                If MsgBox("¿Desea enviar el aviso al Responsable de Calidad?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes _
+                    Then
+
+                    _EnviarEmail("ebiglieri@surfactan.com.ar; calidad@surfactan.com.ar; wbarosio@surfactan.com.ar",
+                                 "Carga de Informe de No Conformidad - Nro.:" + txtIncidencia.Text.PadLeft(4, "0") +
+                                 " - " + Microsoft.VisualBasic.Left(txtReferencia.Text, 50),
+                                 "Se inició un Informe de No Conformidad : " & txtIncidencia.Text.PadLeft(4, "0") &
+                                 ". Referencia : " & txtReferencia.Text.Trim & " Título : " & txtTitulo.Text.Trim)
+
+                End If
+            End If
+
             If ContinuarSalirMsgBox.Show("Actualización se ha realizado con Éxito" & vbCrLf _
                                          & "Indique como quiere proseguir.", "Continuar editando Informe de NC", "Volver a Listado") = DialogResult.OK Then
                 txtTitulo.Focus()
@@ -495,9 +513,34 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
 
             btnCerrar.PerformClick()
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             If Trim(ex.Message) <> "" Then MsgBox(ex.Message, MsgBoxStyle.Exclamation)
             If WControlRetornoError IsNot Nothing Then WControlRetornoError.Focus()
+        End Try
+    End Sub
+
+    Private Sub _EnviarEmail(ByVal Direccion As String, ByVal Subject As String, ByVal Body As String, Optional ByVal EnvioAutomatico As Boolean = False)
+        Dim oApp As _Application
+        Dim oMsg As _MailItem
+
+        Try
+            oApp = New Application()
+
+            oMsg = oApp.CreateItem(OlItemType.olMailItem)
+            oMsg.Subject = Subject
+            oMsg.Body = Body
+
+            ' Modificar por los E-Mails que correspondan.
+            oMsg.To = Direccion
+
+            If EnvioAutomatico Then
+                oMsg.Send()
+            Else
+                oMsg.Display()
+            End If
+
+        Catch ex As System.Exception
+            Throw New System.Exception("No se pudo crear el E-Mail solicitado." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
         End Try
     End Sub
 
@@ -507,12 +550,12 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
 
         If txtFecha.Text.Replace(" ", "").Length < 10 OrElse Not _ValidarFecha(txtFecha.Text) Then
             WControlRetornoError = txtFecha
-            Throw New Exception("Debe indicarse una fecha válida.")
+            Throw New System.Exception("Debe indicarse una fecha válida.")
         End If
 
         If cmbEstado.SelectedIndex < 0 Then
             WControlRetornoError = cmbEstado
-            Throw New Exception("Debe indicarse un estado válido para este Informe de No Conformidad.")
+            Throw New System.Exception("Debe indicarse un estado válido para este Informe de No Conformidad.")
         End If
 
         If Val(txtOrden.Text) <> 0 Then
@@ -520,21 +563,21 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
 
             If WProd Is Nothing Then
                 WControlRetornoError = txtProducto
-                Throw New Exception("La Materia Prima indicada no corresponde a la Orden de Compra informada.")
+                Throw New System.Exception("La Materia Prima indicada no corresponde a la Orden de Compra informada.")
             End If
         End If
 
         If txtTitulo.Text.Trim = "" Then
             WControlRetornoError = txtTitulo
             If MsgBox("No ha agregado nigún Título para este Informe de No Conformidad ¿Quiere proseguir con la grabación del mismo?", MsgBoxStyle.YesNoCancel) <> MsgBoxResult.Yes Then
-                Throw New Exception("")
+                Throw New System.Exception("")
             End If
 
         End If
         If txtReferencia.Text.Trim = "" Then
             WControlRetornoError = txtReferencia
             If MsgBox("No ha agregado niguna Referencia para este Informe de No Conformidad ¿Quiere proseguir con la grabación del mismo?", MsgBoxStyle.YesNoCancel) <> MsgBoxResult.Yes Then
-                Throw New Exception("")
+                Throw New System.Exception("")
             End If
         End If
 
@@ -701,7 +744,7 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
                 _AbrirSACPorClave(WClaveSAC)
             End If
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
         End Try
 
@@ -824,7 +867,7 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
 
                 Try
                     Process.Start(.Cells("PathArchivo").Value, "f")
-                Catch ex As Exception
+                Catch ex As System.Exception
                     MsgBox(ex.Message)
                 End Try
 
@@ -860,7 +903,7 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
         If Not Directory.Exists(WRutaArchivosRelacionados) Then
             Try
                 Directory.CreateDirectory(WRutaArchivosRelacionados)
-            Catch ex As Exception
+            Catch ex As System.Exception
                 MsgBox(ex.Message, MsgBoxStyle.Exclamation)
                 Return
             End Try
@@ -885,7 +928,7 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
                             End If
                         End If
 
-                    Catch ex As Exception
+                    Catch ex As System.Exception
                         MsgBox(ex.Message, MsgBoxStyle.Critical)
                         Return
                     End Try
@@ -916,7 +959,7 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
         Dim WNombreCarpetaArchivos As String = "INC_" & Trim(Str$(txtIncidencia.Text))
 
         If Not Directory.Exists(_RutaCarpetaArchivos) Then
-            Throw New Exception("No se ha logrado tener acceso a la Carpeta Compartida de Archivos Relacionados.")
+            Throw New System.Exception("No se ha logrado tener acceso a la Carpeta Compartida de Archivos Relacionados.")
         End If
 
         WRutaArchivosRelacionados = _RutaCarpetaArchivos() & "\" & WNombreCarpetaArchivos
@@ -925,8 +968,8 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
         If Not Directory.Exists(WRutaArchivosRelacionados) Then
             Try
                 Directory.CreateDirectory(WRutaArchivosRelacionados)
-            Catch ex As Exception
-                Throw New Exception(ex.Message)
+            Catch ex As System.Exception
+                Throw New System.Exception(ex.Message)
             End Try
         End If
 
@@ -1001,7 +1044,7 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
 
                 End If
             End With
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
         End Try
     End Sub
@@ -1011,7 +1054,7 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
             If dgvArchivos.SelectedRows.Count > 0 Then
                 EliminarArchivoToolStripMenuItem_Click(Nothing, Nothing)
             End If
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
         End Try
     End Sub
@@ -1025,7 +1068,7 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
             Dim frm As New ExportarINC
             frm.Show(Me)
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox(ex.Message)
         End Try
     End Sub
@@ -1078,7 +1121,7 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
             btnSac.Text = TextoBtnGenerarSac
             btnDesvincularSAC.Enabled = False
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
         End Try
 

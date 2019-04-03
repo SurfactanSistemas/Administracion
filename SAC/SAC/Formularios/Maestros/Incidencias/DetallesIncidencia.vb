@@ -3,6 +3,7 @@ Imports System.IO
 Imports System.Text.RegularExpressions
 Imports ConsultasVarias
 Imports CrystalDecisions.Shared
+Imports Microsoft.Office.Interop.Outlook
 Imports Microsoft.VisualBasic.FileIO
 
 Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListadoSACs, IExportarINC, IModifNumeracionINC, IIngresoClaveSeguridad
@@ -276,7 +277,7 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
             Try
                 _CorroborarCorrespondenciaProductoLotePartida()
 
-            Catch ex As Exception
+            Catch ex As System.Exception
                 MsgBox(ex.Message, MsgBoxStyle.Exclamation)
                 txtLotePartida.Focus()
             End Try
@@ -291,7 +292,7 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
 
         Dim WProd As DataRow = _ObtenerProductoAsociado()
 
-        If IsNothing(WProd) Then Throw New Exception("No se encuentra Laudo/Hoja indicada.")
+        If IsNothing(WProd) Then Throw New System.Exception("No se encuentra Laudo/Hoja indicada.")
 
         Dim WProductoInfLength As String = txtProducto.Text.Replace(" ", "").Length
 
@@ -397,6 +398,7 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
     Private Sub btnGrabar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnGrabar.Click
         Try
             WEmpresaProd = 0
+            Dim WEnviarMail = False
 
             _ValidarDatosIngresados()
 
@@ -409,6 +411,7 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
 
             If IsNothing(WIncid) Then
                 txtIncidencia.Text = ""
+                WEnviarMail = True
             Else
                 WTipo = OrDefault(WIncid.Item("Tipo"), 1)
                 WClaveSAC = OrDefault(WIncid.Item("ClaveSac"), "")
@@ -444,6 +447,20 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
 
             ExecuteNonQueries(WSqls.ToArray)
 
+            If WEnviarMail Then
+
+                If MsgBox("¿Desea enviar el aviso al Responsable de Calidad?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes _
+                    Then
+
+                    _EnviarEmail("ebiglieri@surfactan.com.ar; calidad@surfactan.com.ar; wbarosio@surfactan.com.ar",
+                                 "Carga de Informe de No Conformidad - Nro.:" + txtIncidencia.Text.PadLeft(4, "0") +
+                                 " - " + Microsoft.VisualBasic.Left(txtReferencia.Text, 50),
+                                 "Se inició un Informe de No Conformidad : " & txtIncidencia.Text.PadLeft(4, "0") &
+                                 ". Referencia : " & txtReferencia.Text.Trim & " Título : " & txtTitulo.Text.Trim)
+
+                End If
+            End If
+
             If ContinuarSalirMsgBox.Show("Actualización se ha realizado con Éxito" & vbCrLf _
                                          & "Indique como quiere proseguir.", "Continuar editando Informe de No Conformidad", "Volver a Listado") = DialogResult.OK Then
                 txtTitulo.Focus()
@@ -452,9 +469,35 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
 
             btnCerrar.PerformClick()
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             If Trim(ex.Message) <> "" Then MsgBox(ex.Message, MsgBoxStyle.Exclamation)
             If WControlRetornoError IsNot Nothing Then WControlRetornoError.Focus()
+        End Try
+    End Sub
+
+
+    Private Sub _EnviarEmail(ByVal Direccion As String, ByVal Subject As String, ByVal Body As String, Optional ByVal EnvioAutomatico As Boolean = False)
+        Dim oApp As _Application
+        Dim oMsg As _MailItem
+
+        Try
+            oApp = New Application()
+
+            oMsg = oApp.CreateItem(OlItemType.olMailItem)
+            oMsg.Subject = Subject
+            oMsg.Body = Body
+
+            ' Modificar por los E-Mails que correspondan.
+            oMsg.To = Direccion
+
+            If EnvioAutomatico Then
+                oMsg.Send()
+            Else
+                oMsg.Display()
+            End If
+
+        Catch ex As System.Exception
+            Throw New System.Exception("No se pudo crear el E-Mail solicitado." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
         End Try
     End Sub
 
@@ -464,26 +507,26 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
 
         If txtFecha.Text.Replace(" ", "").Length < 10 OrElse Not _ValidarFecha(txtFecha.Text) Then
             WControlRetornoError = txtFecha
-            Throw New Exception("Debe indicarse una fecha válida.")
+            Throw New System.Exception("Debe indicarse una fecha válida.")
         End If
 
         If cmbEstado.SelectedIndex < 0 Then
             WControlRetornoError = cmbEstado
-            Throw New Exception("Debe indicarse un estado válido para este Informe de No Conformidad.")
+            Throw New System.Exception("Debe indicarse un estado válido para este Informe de No Conformidad.")
         End If
 
         If txtProducto.Text.Replace(" ", "").Length > 2 And Not rbVario.Checked Then
 
-            If rbMatPrima.Checked And txtProducto.Text.Replace(" ", "").Length < 10 Then Throw New Exception("Debe cargar una Materia Prima válida")
-            If rbProdTerminado.Checked And txtProducto.Text.Replace(" ", "").Length < 12 Then Throw New Exception("Debe cargar un Producto Terminado válido")
+            If rbMatPrima.Checked And txtProducto.Text.Replace(" ", "").Length < 10 Then Throw New System.Exception("Debe cargar una Materia Prima válida")
+            If rbProdTerminado.Checked And txtProducto.Text.Replace(" ", "").Length < 12 Then Throw New System.Exception("Debe cargar un Producto Terminado válido")
 
-            If Val(txtLotePartida.Text) = 0 Then Throw New Exception("Se debe indicar un Lote/Partida válida para el Producto indicado.")
+            If Val(txtLotePartida.Text) = 0 Then Throw New System.Exception("Se debe indicar un Lote/Partida válida para el Producto indicado.")
 
             Dim WProd As DataRow = _ObtenerProductoAsociado()
 
             If WProd Is Nothing Then
                 WControlRetornoError = txtProducto
-                Throw New Exception("No se ha podido validar la correspondencia entre el Producto y la Partida informados.")
+                Throw New System.Exception("No se ha podido validar la correspondencia entre el Producto y la Partida informados.")
             End If
 
             If txtProducto.Text.ToUpper <> OrDefault(WProd.Item("Producto"), "") Then
@@ -500,7 +543,7 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
                     txtProducto.Text = OrDefault(WProd.Item("Producto"), "")
                 Else
                     WControlRetornoError = txtProducto
-                    Throw New Exception("El Producto indicado no se corresponde con el informado en la Hoja/Laudo.")
+                    Throw New System.Exception("El Producto indicado no se corresponde con el informado en la Hoja/Laudo.")
                 End If
 
             End If
@@ -517,14 +560,14 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
         If txtTitulo.Text.Trim = "" Then
             WControlRetornoError = txtTitulo
             If MsgBox("No ha agregado nigún Título para este Informe de No Conformidad ¿Quiere proseguir con la grabación del mismo?", MsgBoxStyle.YesNoCancel) <> MsgBoxResult.Yes Then
-                Throw New Exception("")
+                Throw New System.Exception("")
             End If
 
         End If
         If txtReferencia.Text.Trim = "" Then
             WControlRetornoError = txtReferencia
             If MsgBox("No ha agregado niguna Referencia para este Informe de No Conformidad ¿Quiere proseguir con la grabación del mismo?", MsgBoxStyle.YesNoCancel) <> MsgBoxResult.Yes Then
-                Throw New Exception("")
+                Throw New System.Exception("")
             End If
         End If
 
@@ -640,7 +683,7 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
                 _AbrirSACPorClave(WClaveSAC)
             End If
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
         End Try
 
@@ -739,7 +782,7 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
 
                 Try
                     Process.Start(.Cells("PathArchivo").Value, "f")
-                Catch ex As Exception
+                Catch ex As System.Exception
                     MsgBox(ex.Message)
                 End Try
 
@@ -775,7 +818,7 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
         If Not Directory.Exists(WRutaArchivosRelacionados) Then
             Try
                 Directory.CreateDirectory(WRutaArchivosRelacionados)
-            Catch ex As Exception
+            Catch ex As System.Exception
                 MsgBox(ex.Message, MsgBoxStyle.Exclamation)
                 Return
             End Try
@@ -800,7 +843,7 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
                             End If
                         End If
 
-                    Catch ex As Exception
+                    Catch ex As System.Exception
                         MsgBox(ex.Message, MsgBoxStyle.Critical)
                         Return
                     End Try
@@ -831,7 +874,7 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
         Dim WNombreCarpetaArchivos As String = "INC_" & Trim(Str$(txtIncidencia.Text))
 
         If Not Directory.Exists(_RutaCarpetaArchivos) Then
-            Throw New Exception("No se ha logrado tener acceso a la Carpeta Compartida de Archivos Relacionados.")
+            Throw New System.Exception("No se ha logrado tener acceso a la Carpeta Compartida de Archivos Relacionados.")
         End If
 
         WRutaArchivosRelacionados = _RutaCarpetaArchivos() & "\" & WNombreCarpetaArchivos
@@ -840,8 +883,8 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
         If Not Directory.Exists(WRutaArchivosRelacionados) Then
             Try
                 Directory.CreateDirectory(WRutaArchivosRelacionados)
-            Catch ex As Exception
-                Throw New Exception(ex.Message)
+            Catch ex As System.Exception
+                Throw New System.Exception(ex.Message)
             End Try
         End If
 
@@ -916,7 +959,7 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
 
                 End If
             End With
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
         End Try
     End Sub
@@ -926,7 +969,7 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
             If dgvArchivos.SelectedRows.Count > 0 Then
                 EliminarArchivoToolStripMenuItem_Click(Nothing, Nothing)
             End If
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
         End Try
     End Sub
@@ -940,7 +983,7 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
             Dim frm As New ExportarINC
             frm.Show(Me)
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox(ex.Message)
         End Try
     End Sub
@@ -993,7 +1036,7 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
             btnSac.Text = TextoBtnGenerarSac
             btnDesvincularSAC.Enabled = False
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
         End Try
 

@@ -145,7 +145,7 @@ Partial Class DetallesIncidencia
         Me.GroupBox1.Controls.Add(Me.Label5)
         Me.GroupBox1.Controls.Add(Me.Label4)
         Me.GroupBox1.Controls.Add(Me.Label3)
-        Me.GroupBox1.Location = New System.Drawing.Point(13, 61)
+        Me.GroupBox1.Location = New System.Drawing.Point(6, 61)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(818, 137)
         Me.GroupBox1.TabIndex = 4
