@@ -61,6 +61,9 @@ Partial Class ListadoLaudosMPPorCodigo
         Me.ToolStripMenuItem6 = New System.Windows.Forms.ToolStripMenuItem()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.dgvLaudos = New ConsultasVarias.DBDataGridView()
+        Me.btnCalcularSaldos = New System.Windows.Forms.Button()
+        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
+        Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -110,6 +113,8 @@ Partial Class ListadoLaudosMPPorCodigo
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.ProgressBar1)
+        Me.GroupBox1.Controls.Add(Me.btnCalcularSaldos)
         Me.GroupBox1.Controls.Add(Me.ckIncluirHistoricos)
         Me.GroupBox1.Controls.Add(Me.GroupBox4)
         Me.GroupBox1.Controls.Add(Me.btnCerrar)
@@ -133,7 +138,7 @@ Partial Class ListadoLaudosMPPorCodigo
         'ckIncluirHistoricos
         '
         Me.ckIncluirHistoricos.AutoSize = True
-        Me.ckIncluirHistoricos.Location = New System.Drawing.Point(606, 89)
+        Me.ckIncluirHistoricos.Location = New System.Drawing.Point(606, 94)
         Me.ckIncluirHistoricos.Name = "ckIncluirHistoricos"
         Me.ckIncluirHistoricos.Size = New System.Drawing.Size(198, 17)
         Me.ckIncluirHistoricos.TabIndex = 9
@@ -391,6 +396,25 @@ Partial Class ListadoLaudosMPPorCodigo
         Me.dgvLaudos.TabIndex = 12
         Me.dgvLaudos.TabStop = False
         '
+        'btnCalcularSaldos
+        '
+        Me.btnCalcularSaldos.Location = New System.Drawing.Point(810, 85)
+        Me.btnCalcularSaldos.Name = "btnCalcularSaldos"
+        Me.btnCalcularSaldos.Size = New System.Drawing.Size(177, 34)
+        Me.btnCalcularSaldos.TabIndex = 10
+        Me.btnCalcularSaldos.Text = "Calcula SALDOS"
+        Me.btnCalcularSaldos.UseVisualStyleBackColor = True
+        '
+        'ProgressBar1
+        '
+        Me.ProgressBar1.Location = New System.Drawing.Point(604, 132)
+        Me.ProgressBar1.Name = "ProgressBar1"
+        Me.ProgressBar1.Size = New System.Drawing.Size(383, 10)
+        Me.ProgressBar1.TabIndex = 12
+        '
+        'BackgroundWorker1
+        '
+        '
         'ListadoLaudosMPPorCodigo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -444,4 +468,7 @@ Partial Class ListadoLaudosMPPorCodigo
     Friend WithEvents cmbOrdenI As System.Windows.Forms.ComboBox
     Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents ckIncluirHistoricos As System.Windows.Forms.CheckBox
+    Friend WithEvents btnCalcularSaldos As System.Windows.Forms.Button
+    Friend WithEvents ProgressBar1 As System.Windows.Forms.ProgressBar
+    Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
 End Class

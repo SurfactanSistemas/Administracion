@@ -35,6 +35,7 @@ Partial Class ListadoHojasPTPorCodigo
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.btnExportarListadoEnsayosPorPartida = New System.Windows.Forms.Button()
         Me.ckIncluirSEs = New System.Windows.Forms.CheckBox()
         Me.ckIncluirHistoricos = New System.Windows.Forms.CheckBox()
@@ -63,7 +64,8 @@ Partial Class ListadoHojasPTPorCodigo
         Me.ToolStripMenuItem6 = New System.Windows.Forms.ToolStripMenuItem()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.dgvLaudos = New ConsultasVarias.DBDataGridView()
-        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
+        Me.btnCalcularSaldos = New System.Windows.Forms.Button()
+        Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -82,7 +84,7 @@ Partial Class ListadoHojasPTPorCodigo
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1008, 50)
+        Me.Panel1.Size = New System.Drawing.Size(1059, 50)
         Me.Panel1.TabIndex = 10
         '
         'Label3
@@ -92,7 +94,7 @@ Partial Class ListadoHojasPTPorCodigo
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label3.Location = New System.Drawing.Point(907, 19)
+        Me.Label3.Location = New System.Drawing.Point(958, 19)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(89, 13)
         Me.Label3.TabIndex = 0
@@ -113,6 +115,7 @@ Partial Class ListadoHojasPTPorCodigo
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.btnCalcularSaldos)
         Me.GroupBox1.Controls.Add(Me.ProgressBar1)
         Me.GroupBox1.Controls.Add(Me.btnExportarListadoEnsayosPorPartida)
         Me.GroupBox1.Controls.Add(Me.ckIncluirSEs)
@@ -131,17 +134,24 @@ Partial Class ListadoHojasPTPorCodigo
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Location = New System.Drawing.Point(3, 3)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(994, 162)
+        Me.GroupBox1.Size = New System.Drawing.Size(1053, 162)
         Me.GroupBox1.TabIndex = 11
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "PARÁMETROS DE BÚSQUEDA"
+        '
+        'ProgressBar1
+        '
+        Me.ProgressBar1.Location = New System.Drawing.Point(714, 144)
+        Me.ProgressBar1.Name = "ProgressBar1"
+        Me.ProgressBar1.Size = New System.Drawing.Size(330, 9)
+        Me.ProgressBar1.TabIndex = 11
         '
         'btnExportarListadoEnsayosPorPartida
         '
         Me.btnExportarListadoEnsayosPorPartida.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnExportarListadoEnsayosPorPartida.Location = New System.Drawing.Point(714, 116)
         Me.btnExportarListadoEnsayosPorPartida.Name = "btnExportarListadoEnsayosPorPartida"
-        Me.btnExportarListadoEnsayosPorPartida.Size = New System.Drawing.Size(273, 24)
+        Me.btnExportarListadoEnsayosPorPartida.Size = New System.Drawing.Size(330, 24)
         Me.btnExportarListadoEnsayosPorPartida.TabIndex = 10
         Me.btnExportarListadoEnsayosPorPartida.Text = "EXPORTAR LISTADO DE ENSAYOS POR PARTIDA"
         Me.btnExportarListadoEnsayosPorPartida.UseVisualStyleBackColor = True
@@ -173,7 +183,7 @@ Partial Class ListadoHojasPTPorCodigo
         Me.GroupBox4.Controls.Add(Me.cmbOrdenI)
         Me.GroupBox4.Location = New System.Drawing.Point(595, 16)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(392, 52)
+        Me.GroupBox4.Size = New System.Drawing.Size(449, 52)
         Me.GroupBox4.TabIndex = 8
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Ordenado por"
@@ -182,7 +192,7 @@ Partial Class ListadoHojasPTPorCodigo
         '
         Me.cmbOrdenIII.FormattingEnabled = True
         Me.cmbOrdenIII.Items.AddRange(New Object() {"FECHA", "PLANTA", "ESTADO"})
-        Me.cmbOrdenIII.Location = New System.Drawing.Point(263, 18)
+        Me.cmbOrdenIII.Location = New System.Drawing.Point(291, 20)
         Me.cmbOrdenIII.Name = "cmbOrdenIII"
         Me.cmbOrdenIII.Size = New System.Drawing.Size(121, 21)
         Me.cmbOrdenIII.TabIndex = 0
@@ -191,7 +201,7 @@ Partial Class ListadoHojasPTPorCodigo
         '
         Me.cmbOrdenII.FormattingEnabled = True
         Me.cmbOrdenII.Items.AddRange(New Object() {"FECHA", "PLANTA", "ESTADO"})
-        Me.cmbOrdenII.Location = New System.Drawing.Point(136, 18)
+        Me.cmbOrdenII.Location = New System.Drawing.Point(164, 20)
         Me.cmbOrdenII.Name = "cmbOrdenII"
         Me.cmbOrdenII.Size = New System.Drawing.Size(121, 21)
         Me.cmbOrdenII.TabIndex = 0
@@ -200,7 +210,7 @@ Partial Class ListadoHojasPTPorCodigo
         '
         Me.cmbOrdenI.FormattingEnabled = True
         Me.cmbOrdenI.Items.AddRange(New Object() {"FECHA", "PLANTA", "ESTADO"})
-        Me.cmbOrdenI.Location = New System.Drawing.Point(9, 18)
+        Me.cmbOrdenI.Location = New System.Drawing.Point(37, 20)
         Me.cmbOrdenI.Name = "cmbOrdenI"
         Me.cmbOrdenI.Size = New System.Drawing.Size(121, 21)
         Me.cmbOrdenI.TabIndex = 0
@@ -380,7 +390,7 @@ Partial Class ListadoHojasPTPorCodigo
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 171.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1008, 453)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1059, 453)
         Me.TableLayoutPanel1.TabIndex = 13
         '
         'dgvLaudos
@@ -413,22 +423,29 @@ Partial Class ListadoHojasPTPorCodigo
         Me.dgvLaudos.ReadOnly = True
         Me.dgvLaudos.RowHeadersWidth = 15
         Me.dgvLaudos.ShowCellToolTips = False
-        Me.dgvLaudos.Size = New System.Drawing.Size(1002, 276)
+        Me.dgvLaudos.Size = New System.Drawing.Size(1053, 276)
         Me.dgvLaudos.TabIndex = 12
         Me.dgvLaudos.TabStop = False
         '
-        'ProgressBar1
+        'btnCalcularSaldos
         '
-        Me.ProgressBar1.Location = New System.Drawing.Point(714, 144)
-        Me.ProgressBar1.Name = "ProgressBar1"
-        Me.ProgressBar1.Size = New System.Drawing.Size(273, 9)
-        Me.ProgressBar1.TabIndex = 11
+        Me.btnCalcularSaldos.Enabled = False
+        Me.btnCalcularSaldos.Location = New System.Drawing.Point(859, 78)
+        Me.btnCalcularSaldos.Name = "btnCalcularSaldos"
+        Me.btnCalcularSaldos.Size = New System.Drawing.Size(185, 32)
+        Me.btnCalcularSaldos.TabIndex = 12
+        Me.btnCalcularSaldos.Text = "Calcula SALDOS"
+        Me.btnCalcularSaldos.UseVisualStyleBackColor = True
+        '
+        'BackgroundWorker1
+        '
+        Me.BackgroundWorker1.WorkerReportsProgress = True
         '
         'ListadoHojasPTPorCodigo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1008, 503)
+        Me.ClientSize = New System.Drawing.Size(1059, 503)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Controls.Add(Me.Panel1)
         Me.Name = "ListadoHojasPTPorCodigo"
@@ -480,4 +497,6 @@ Partial Class ListadoHojasPTPorCodigo
     Friend WithEvents ckIncluirSEs As System.Windows.Forms.CheckBox
     Friend WithEvents btnExportarListadoEnsayosPorPartida As System.Windows.Forms.Button
     Friend WithEvents ProgressBar1 As System.Windows.Forms.ProgressBar
+    Friend WithEvents btnCalcularSaldos As System.Windows.Forms.Button
+    Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
 End Class

@@ -167,7 +167,9 @@ Public Class DetalleMovimientosPT
                 WNumero = OrDefault(.Item("Hoja"), "0")
                 WLiberada = OrDefault(.Item("Real"), 0)
 
-                If OrDefault(.Item("RealAnt"), 0) <> 0 Then
+                WMarca = OrDefault(.Item("Marca"), "")
+
+                If OrDefault(.Item("RealAnt"), 0) <> 0 And UCase(Trim(WMarca)) = "X" Then
                     WLiberada = OrDefault(.Item("RealAnt"), 0)
                 End If
 
@@ -177,7 +179,7 @@ Public Class DetalleMovimientosPT
 
                 WLiberada = formatonumerico(WLiberada)
                 WFecha = OrDefault(.Item("Fecha"), "")
-                WMarca = OrDefault(.Item("Marca"), "")
+
 
                 If OrDefault(.Item("FechaFinal"), "").ToString.Replace("/", "").Trim <> "" Then
                     WFecha = OrDefault(.Item("FechaFinal"), "")
@@ -306,15 +308,16 @@ Public Class DetalleMovimientosPT
             With row
 
                 WLiberada = OrDefault(.Item("Cantidad"), 0)
+                WMarca = OrDefault(.Item("Marca"), "")
 
-                If OrDefault(.Item("CantidadAnt"), 0) <> 0 Then
+                If OrDefault(.Item("CantidadAnt"), 0) <> 0 And UCase(Trim(WMarca)) = "X" Then
                     WLiberada = OrDefault(.Item("CantidadAnt"), 0)
                 End If
 
                 WLiberada = formatonumerico(WLiberada)
                 WNumero = OrDefault(.Item("Codigo"), 0)
                 WFecha = OrDefault(.Item("Fecha"), "")
-                WMarca = OrDefault(.Item("Marca"), "")
+
                 WFechaOrd = ordenaFecha(WFecha)
                 WObservaciones = ""
                 WDescr = "Guía Int."
