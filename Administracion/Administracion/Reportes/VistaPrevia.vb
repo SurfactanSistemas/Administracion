@@ -27,9 +27,21 @@ Public Class VistaPrevia
 
         If Reporte.ParameterFields.Count > 0 Then
 
-            If Reporte.ParameterFields(0).ReportName.Length = 0 Then
-                Reporte.SetParameterValue(0, ClasesCompartidas.Globals.NombreEmpresa)
-            End If
+            Dim WParams As ParameterFields = Reporte.ParameterFields
+
+            For Each p As ParameterField In Reporte.ParameterFields
+                p.CurrentValues = WParams.Item(p.Name).CurrentValues
+            Next
+
+            For Each p As ParameterField In Reporte.ParameterFields
+                If p.Name = "Empresa" Then
+                    Reporte.SetParameterValue("Empresa", ClasesCompartidas.Globals.NombreEmpresa)
+                End If
+            Next
+
+            'If Reporte.ParameterFields(0).ReportName.Length = 0 Then
+            '    Reporte.SetParameterValue(0, ClasesCompartidas.Globals.NombreEmpresa)
+            'End If
 
         End If
 
@@ -89,7 +101,7 @@ Public Class VistaPrevia
         _ReconectarBaseDatos()
 
         Me.CrystalReportViewer1.SelectionFormula = IIf(IsNothing(Me.Formula), "", Me.Formula)
-        Me.CrystalReportViewer1.Refresh()
+        'Me.CrystalReportViewer1.Refresh()
         Me.Show()
         'Me.Dispose()
     End Sub
@@ -100,7 +112,7 @@ Public Class VistaPrevia
         _ReconectarBaseDatos()
 
         Me.Reporte.RecordSelectionFormula = IIf(IsNothing(Me.Formula), "", Me.Formula)
-        Me.Reporte.Refresh()
+        'Me.Reporte.Refresh()
         Me.Reporte.PrintToPrinter(cant, True, 0, 0)
     End Sub
 
@@ -114,7 +126,7 @@ Public Class VistaPrevia
         _ReconectarBaseDatos()
 
         Me.Reporte.RecordSelectionFormula = IIf(IsNothing(Me.Formula), "", Me.Formula)
-        Me.Reporte.Refresh()
+        'Me.Reporte.Refresh()
         Me.Reporte.ExportToDisk(ExportFormatType.PortableDocFormat, ruta & NombreArchivo)
     End Sub
 End Class

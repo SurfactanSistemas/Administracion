@@ -2,6 +2,7 @@
 Imports System.Data.SqlClient
 Imports System.IO
 Imports CrystalDecisions.CrystalReports.Engine
+Imports CrystalDecisions.Shared
 Imports Microsoft.Office.Interop.Outlook
 
 Public Class Pagos
@@ -5040,9 +5041,6 @@ Public Class Pagos
 
         crdoc.SetDataSource(Tabla)
 
-        '
-        ' COMENTADO EN ESPERA DE LA EVOLUCION DEL PROBLEMA EN MAQUINA DE MARIA LAURA.
-        '
         Dim frm As New VistaPrevia
         frm.Reporte = crdoc
 
@@ -5446,7 +5444,11 @@ Public Class Pagos
 
         crdoc.SetDataSource(Tabla)
 
+        crdoc.SetParameterValue("MostrarFirma", 0)
+
         If GenerarPDF Then
+
+            crdoc.SetParameterValue("MostrarFirma", 1)
 
             Dim frm2 As New ConsultasVarias.VistaPrevia
             frm2.Reporte = crdoc
@@ -5819,10 +5821,13 @@ Public Class Pagos
 
         Next
 
-
         crdoc.SetDataSource(Tabla)
 
+        crdoc.SetParameterValue("MostrarFirma", 0)
+
         If GenerarPDF Then
+
+            crdoc.SetParameterValue("MostrarFirma", 1)
 
             Dim frm2 As New ConsultasVarias.VistaPrevia
             frm2.Reporte = crdoc
@@ -6366,9 +6371,13 @@ Public Class Pagos
             
         Next
 
-
         crdoc.SetDataSource(Tabla)
+
+        crdoc.SetParameterValue("MostrarFirma", 0)
+
         If GenerarPDF Then
+
+            crdoc.SetParameterValue("MostrarFirma", 1)
 
             Dim frm2 As New ConsultasVarias.VistaPrevia
             frm2.Reporte = crdoc
@@ -6502,7 +6511,11 @@ Public Class Pagos
 
         crdoc.SetDataSource(Tabla)
 
+        crdoc.SetParameterValue("MostrarFirma", 0)
+
         If GenerarPDF Then
+
+            crdoc.SetParameterValue("MostrarFirma", 1)
 
             Dim frm2 As New ConsultasVarias.VistaPrevia
             frm2.Reporte = crdoc

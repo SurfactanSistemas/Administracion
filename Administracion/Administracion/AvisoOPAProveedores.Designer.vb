@@ -36,6 +36,7 @@ Partial Class AvisoOPAProveedores
         Me.btnEnviar = New System.Windows.Forms.Button()
         Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.btnCerrar = New System.Windows.Forms.Button()
+        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -80,12 +81,13 @@ Partial Class AvisoOPAProveedores
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.ProgressBar1)
         Me.GroupBox1.Controls.Add(Me.rbEntreRango)
         Me.GroupBox1.Controls.Add(Me.rbEntreFechas)
         Me.GroupBox1.Controls.Add(Me.GroupBox2)
         Me.GroupBox1.Location = New System.Drawing.Point(8, 55)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(489, 115)
+        Me.GroupBox1.Size = New System.Drawing.Size(489, 141)
         Me.GroupBox1.TabIndex = 61
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Parámetros"
@@ -168,7 +170,7 @@ Partial Class AvisoOPAProveedores
         'btnEnviar
         '
         Me.btnEnviar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnEnviar.Location = New System.Drawing.Point(51, 183)
+        Me.btnEnviar.Location = New System.Drawing.Point(51, 205)
         Me.btnEnviar.Name = "btnEnviar"
         Me.btnEnviar.Size = New System.Drawing.Size(118, 38)
         Me.btnEnviar.TabIndex = 62
@@ -177,7 +179,7 @@ Partial Class AvisoOPAProveedores
         '
         'btnLimpiar
         '
-        Me.btnLimpiar.Location = New System.Drawing.Point(193, 183)
+        Me.btnLimpiar.Location = New System.Drawing.Point(193, 205)
         Me.btnLimpiar.Name = "btnLimpiar"
         Me.btnLimpiar.Size = New System.Drawing.Size(118, 38)
         Me.btnLimpiar.TabIndex = 62
@@ -186,18 +188,25 @@ Partial Class AvisoOPAProveedores
         '
         'btnCerrar
         '
-        Me.btnCerrar.Location = New System.Drawing.Point(335, 183)
+        Me.btnCerrar.Location = New System.Drawing.Point(335, 205)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(118, 38)
         Me.btnCerrar.TabIndex = 62
         Me.btnCerrar.Text = "CERRAR"
         Me.btnCerrar.UseVisualStyleBackColor = True
         '
+        'ProgressBar1
+        '
+        Me.ProgressBar1.Location = New System.Drawing.Point(15, 118)
+        Me.ProgressBar1.Name = "ProgressBar1"
+        Me.ProgressBar1.Size = New System.Drawing.Size(458, 11)
+        Me.ProgressBar1.TabIndex = 2
+        '
         'AvisoOPAProveedores
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(505, 231)
+        Me.ClientSize = New System.Drawing.Size(505, 252)
         Me.Controls.Add(Me.btnCerrar)
         Me.Controls.Add(Me.btnLimpiar)
         Me.Controls.Add(Me.btnEnviar)
@@ -231,4 +240,5 @@ Partial Class AvisoOPAProveedores
     Friend WithEvents btnEnviar As System.Windows.Forms.Button
     Friend WithEvents btnLimpiar As System.Windows.Forms.Button
     Friend WithEvents btnCerrar As System.Windows.Forms.Button
+    Friend WithEvents ProgressBar1 As System.Windows.Forms.ProgressBar
 End Class

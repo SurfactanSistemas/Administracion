@@ -67,12 +67,16 @@ Public Class AvisoOPAProveedores
             WNoEnviados = New String(1000, 2) {}
             WIndiceNoEnviados = 0
 
+            ProgressBar1.Value = 0
+
             Dim WParametros As String = "Entre " & txtDesde.Text & " al " & txtHasta.Text
 
             '
             ' Buscamos los proveedores con OP.
             '
             Dim WOrdenesPago As DataTable = _TraerProveedoresConOP()
+
+            ProgressBar1.Maximum = WOrdenesPago.Rows.Count
 
             For Each row2 As DataRow In WOrdenesPago.Rows
                 With row2
@@ -118,10 +122,11 @@ Public Class AvisoOPAProveedores
                         With WOrdenPago.Rows(0)
 
                             WProveedor = OrDefault(.Item("Proveedor"), "")
+                            Dim WDescProveedor = OrDefault(.Item("Nombre"), "")
 
                             If Trim(WProveedor) <> "" Then
 
-                                _EnviarAvisoOPDisponible(WProveedor, WOrden, EsPorTransferencia)
+                                _EnviarAvisoOPDisponible(WProveedor, WDescProveedor, WOrden, EsPorTransferencia)
 
                             End If
 
@@ -130,7 +135,12 @@ Public Class AvisoOPAProveedores
                     End If
 
                 End With
+
+                ProgressBar1.Increment(1)
+
             Next
+
+            ProgressBar1.Value = 0
 
             If WIndiceNoEnviados > 0 Then
                 MsgBox("Hay Proveedores a los que no se pudieron enviar el Aviso debido a que no tienen informado una Casilla de Mail a dónde enviar el mismo.", MsgBoxStyle.Information)
@@ -163,8 +173,35 @@ Public Class AvisoOPAProveedores
 
             End If
 
+            MsgBox("¡Proceso finalizado correctamente!", MsgBoxStyle.Information)
+
         Catch ex As System.Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+        End Try
+
+    End Sub
+
+    Private Sub _MarcarOPComoEnviada(ByVal OrdenPago As Object)
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("UPDATE Pagos SET AvisoMailOp = '1' WHERE Orden = '" & OrdenPago & "'")
+        
+        Try
+
+            cn.ConnectionString = Proceso._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            cm.ExecuteNonQuery()
+
+        Catch ex As System.Exception
+            Throw New System.Exception("No se pudo marcar la Orden de Pago '" & OrdenPago & "' como 'ENVIADA'." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
         End Try
 
     End Sub
@@ -216,7 +253,7 @@ Public Class AvisoOPAProveedores
 
             Using cm As New SqlCommand()
                 cm.Connection = cn
-                cm.CommandText = "SELECT Proveedor, Tipo2, Importe2, Numero2, Importe FROM Pagos WHERE Orden = '" & OrdenPago & "' and TipoReg IN ('02', '2')"
+                cm.CommandText = "SELECT p.Proveedor, pr.Nombre, p.Tipo2, p.Importe2, p.Numero2, p.Importe FROM Pagos p LEFT OUTER JOIN Proveedor pr ON pr.Proveedor = p.Proveedor WHERE p.Orden = '" & OrdenPago & "' and p.TipoReg IN ('02', '2')"
 
                 Using dr As SqlDataReader = cm.ExecuteReader
 
@@ -240,16 +277,16 @@ Public Class AvisoOPAProveedores
             Dim WDesdeOrd As String = ordenaFecha(txtDesde.Text)
             Dim WHastaOrd As String = ordenaFecha(txtHasta.Text)
 
-            WFiltro = " FechaOrd BETWEEN '" & WDesdeOrd & "' And '" & WHastaOrd & "' "
+            WFiltro = " p.FechaOrd BETWEEN '" & WDesdeOrd & "' And '" & WHastaOrd & "' "
 
         Else
 
-            WFiltro = " Orden BETWEEN '" & txtDesde.Text & "' And '" & txtHasta.Text & "' "
+            WFiltro = " p.Orden BETWEEN '" & txtDesde.Text & "' And '" & txtHasta.Text & "' "
 
         End If
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT DISTINCT Proveedor, Orden FROM Pagos WHERE Proveedor <> '' And TipoOrd IN ('1', '4', '5') And " & WFiltro & " ")
+        Dim cm As SqlCommand = New SqlCommand("SELECT DISTINCT p.Proveedor, p.Orden FROM Pagos p WHERE p.Proveedor <> '' And p.TipoOrd IN ('1', '4', '5', '2') And ISNULL(AvisoMailOp, '0') = '0' And " & WFiltro & " ")
         Dim dr As SqlDataReader
 
         Try
@@ -357,7 +394,7 @@ Public Class AvisoOPAProveedores
         Return WTabla
     End Function
 
-    Private Sub _EnviarAvisoOPDisponible(ByVal Proveedor As String, Optional ByVal OrdenPago As String = "", Optional ByVal EsPorTransferencia As Boolean = False)
+    Private Sub _EnviarAvisoOPDisponible(ByVal Proveedor As String, ByVal wDescProveedor As String, Optional ByVal OrdenPago As String = "", Optional ByVal EsPorTransferencia As Boolean = False)
 
         If Proveedor.Trim = "" Then Exit Sub
         If EsPorTransferencia And Trim(OrdenPago) = "" Then Exit Sub
@@ -387,12 +424,21 @@ Public Class AvisoOPAProveedores
                     Exit Sub
                 End If
 
+                '
+                ' SACAR DESPUES. SOLO PRUEBA.
+                '
+                ' WMailOp = "sistemas@surfactan.com.ar"
+
                 Dim WBody = ""
 
                 If EsPorTransferencia Then
-                    WBody = "Acercamos a usted la Orden de Pago " & OrdenPago
+                    WBody = "Informamos que en el día de la fecha, SURFACTAN S.A. le ha realizado una transferencia. " & vbCrLf & vbCrLf & "Adjuntamos Orden de Pago y retenciones si correspondiesen."
                 Else
-                    WBody = "Se encuentra disponible una Orden de Pago para ser retirada por la recepción de nuestras oficinas."
+                    WBody = "Informamos que se encuentra a su disposición un pago que podrá ser retirado por nuestras oficinas (Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires) en el horario de 14:00 a 17:00 hs."
+                End If
+
+                If Trim(wDescProveedor) <> "" Then
+                    WBody = "Sres. " & wDescProveedor.Trim.ToUpper & vbCrLf & vbCrLf & WBody
                 End If
 
                 Dim WAdjuntos As New List(Of String)
@@ -408,6 +454,8 @@ Public Class AvisoOPAProveedores
                 Next
 
                 _EnviarEmail(WMailOp, "", "Orden de Pago - SURFACTTAN S.A - ", WBody, WAdjuntos.ToArray)
+
+                _MarcarOPComoEnviada(OrdenPago)
 
             End If
 
