@@ -146,11 +146,13 @@ Public Class VistaPrevia
                 End If
 
             End With
+        Else
+
+            If Not ruta.EndsWith("/") Then ruta &= "/"
+
+            Directory.CreateDirectory(ruta)
+
         End If
-
-        If Not ruta.EndsWith("/") Then ruta &= "/"
-
-        Directory.CreateDirectory(ruta)
 
         _ReconectarBaseDatos()
 

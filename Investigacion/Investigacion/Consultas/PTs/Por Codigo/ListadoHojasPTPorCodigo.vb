@@ -773,7 +773,7 @@ Public Class ListadoHojasPTPorCodigo : Implements IAyudaMPs, IExportar
                 .Item("Fecha") = OrDefault(row.Cells("Fecha").Value, "")
                 .Item("FechaOrd") = OrDefault(row.Cells("FechaOrd").Value, 0)
                 .Item("Planta") = OrDefault(row.Cells("Planta").Value, "")
-                .Item("Auxi1") = OrDefault(row.Cells("Producto").Value, "")
+                .Item("Auxi1") = OrDefault(row.Cells("Codigo").Value, "")
                 .Item("Auxi2") = OrDefault(row.Cells("Descripcion").Value, "")
                 .Item("Cantidad") = Val(OrDefault(row.Cells("Cantidad").Value, 0))
 
