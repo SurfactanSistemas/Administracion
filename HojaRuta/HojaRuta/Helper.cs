@@ -33,6 +33,11 @@ namespace HojaRuta
             return WFechaOrd;
         }
 
+        public static object OrDefault(object obj, object defaultvalue)
+        {
+            return obj ?? defaultvalue;
+        }
+
         public static string Left(string WTexto, int WLongitud)
         {
             if (WTexto.Length <= WLongitud) return WTexto;

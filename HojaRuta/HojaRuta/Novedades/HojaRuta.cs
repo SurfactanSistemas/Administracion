@@ -991,6 +991,15 @@ namespace HojaRuta.Novedades
                             throw new Exception("Chofer Inexistente");
                         }
 
+                        // Chequeamos validez RENPRE.
+                        string WCufeChofer = "";
+
+                        if (!_VerificarSedronarChoferHabilitado(ref WCufeChofer))
+                        {
+                            throw new Exception("Existen Productos regulados por SEDRONAR en alguno de los Pedidos y el Chofer indicado no cumple con la habilitación para su transporte.");
+                        }
+
+
                         // Verificamos la existencia de la numeración de la Hoja.
 
                         if (!dr.IsClosed) dr.Close();
@@ -999,7 +1008,7 @@ namespace HojaRuta.Novedades
 
                         dr = cmd.ExecuteReader();
 
-                        // Si no existe, se busca la maxima numeracion de hoja hasta el momento y se le asigna el siguiente. En caso contrario, se le asigna la primera numeracion.
+                        // Si no existe, se busca la máxima numeración de hoja hasta el momento y se le asigna el siguiente. En caso contrario, se le asigna la primera numeracion.
                         if (!dr.HasRows)
                         {
                             if (!dr.IsClosed) dr.Close();
@@ -1248,6 +1257,143 @@ namespace HojaRuta.Novedades
                 MessageBox.Show(ex.Message);
             }
 
+        }
+
+        private bool _VerificarSedronarChoferHabilitado(ref string WCufe)
+        {
+            bool valido = true;
+
+            using (SqlConnection cn = new SqlConnection())
+            {
+                cn.ConnectionString = ConfigurationManager.ConnectionStrings["SurfactanSa"].ConnectionString;
+                cn.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = cn;
+                    cmd.CommandText = "";
+
+                    foreach (DataGridViewRow row in dgvPedidos.Rows)
+                    {
+                        var WPedido = Helper.OrDefault(row.Cells["Pedido"].Value, "");
+
+                        if (WPedido.ToString().Trim() == "") continue;
+
+                        cmd.CommandText = "SELECT Terminado FROM Pedido WHERE Pedido = '" + WPedido + "'";
+
+                        List<string> WTerminados = new List<string>();
+
+                        // Guardamos los Productos que se encuentran en el Pedido.
+                        using (SqlDataReader dr = cmd.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                while (dr.Read())
+                                {
+                                    WTerminados.Add(Helper.OrDefault(dr["Terminado"], "").ToString());
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("No se encuentra el Pedido " + WPedido);
+
+                                return false;
+                            }
+                        }
+
+                        // Recorremos los Productos buscando si alguno lleva control por SEDRONAR.
+                        foreach (string wTerminado in WTerminados)
+                        {
+                            cmd.CommandText = "SELECT CodSedronar FROM Terminado WHERE Codigo = '" + wTerminado + "'";
+
+                            string WCodSedronar = "";
+
+                            using (SqlDataReader dr = cmd.ExecuteReader())
+                            {
+                                if (dr.HasRows)
+                                {
+                                    dr.Read();
+
+                                    WCodSedronar = Helper.OrDefault(dr["CodSedronar"], "").ToString().Trim();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("No se encuentra el Producto " + wTerminado + " asociado al Pedido " + WPedido + ", por lo que no se puede comprobar si se debe o no estar habilitado para transportarlo ");
+
+                                    return false;
+                                }
+                            }
+
+                            if (WCodSedronar != "")
+                            {
+                                valido = false;
+
+                                string WProvChofer = "";
+
+                                cmd.CommandText = "SELECT Proveedor FROM Chofer WHERE Codigo = '" + txtChofer.Text + "'";
+
+                                using (SqlDataReader dr = cmd.ExecuteReader())
+                                {
+                                    if (dr.HasRows)
+                                    {
+                                        dr.Read();
+
+                                        WProvChofer = Helper.OrDefault(dr["Proveedor"], "").ToString().Trim();
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("No se encuentra el Chofer indicado, por lo que no se puede comprobar si se encuentra o no habilitado para transportar el Producto " + wTerminado);
+
+                                        return false;
+                                    }
+
+                                }
+
+                                // Verificamos que el Proveedor Tenga por lo menos un CUFE cargado, sino avisamos.
+                                if (WProvChofer != "")
+                                {
+                                    string WCufeI = "", WCufeII ="", WCufeIII="";
+
+                                    cmd.CommandText = "SELECT Cufe, CufeII, CufeIII FROM Proveedor WHERE Proveedor = '" + WProvChofer + "'";
+
+                                    using (SqlDataReader dr = cmd.ExecuteReader())
+                                    {
+                                        if (dr.HasRows)
+                                        {
+                                            dr.Read();
+                                            WCufeI = Helper.OrDefault(dr["Cufe"], "").ToString().Trim();
+                                            WCufeII = Helper.OrDefault(dr["CufeII"], "").ToString().Trim();
+                                            WCufeIII = Helper.OrDefault(dr["CufeIII"], "").ToString().Trim();
+
+                                            if (WCufeI != "") WCufe = WCufeI;
+                                            if (WCufeII != "") WCufe = WCufeII;
+                                            if (WCufeIII != "") WCufe = WCufeIII;
+
+                                            if (WCufe != "") valido = true;
+                                        }
+                                        else
+                                        {
+                                            MessageBox.Show("No se encuentra el Proveedor asociado al Chofer, por lo que no se puede comprobar si se encuentra o no habilitado para transportar el Producto " + wTerminado);
+
+                                            return false;
+                                        }
+                                    }
+
+                                }
+                                else
+                                {
+                                    MessageBox.Show("El CHOFER no se encuentra asociado a ningún Proveedor, por lo que no se puede comprobar si se encuentra o no habilitado para transportar el Producto " + wTerminado);
+
+                                    return false;
+                                }
+                            }
+                        }
+                    }
+                }
+                
+            }
+
+            return valido;
         }
 
         private void _ImprimirHojaRuta()
@@ -2170,6 +2316,20 @@ namespace HojaRuta.Novedades
             {
                 timer1.Stop();
                 txtNroHoja_KeyDown(null, new KeyEventArgs(Keys.Enter));
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string WCufeProv = "";
+
+            if (_VerificarSedronarChoferHabilitado(ref WCufeProv))
+            {
+                MessageBox.Show("ok" + WCufeProv);
+            }
+            else
+            {
+                MessageBox.Show("NO ok" + WCufeProv);
             }
         }
     }

@@ -44,6 +44,18 @@ namespace HojaRuta.Novedades
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnCheckList = new System.Windows.Forms.Button();
             this.dgvPedidos = new System.Windows.Forms.DataGridView();
+            this.Pedido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Razon = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Remito = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Segur = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Kilos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Bultos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Envases = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Observacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.COT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Integridad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Archivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnCerrar = new System.Windows.Forms.Button();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnPedidos = new System.Windows.Forms.Button();
@@ -75,18 +87,6 @@ namespace HojaRuta.Novedades
             this.txtDesChofer = new System.Windows.Forms.TextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.Pedido = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Razon = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Remito = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Segur = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Kilos = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Bultos = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Envases = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Observacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.COT = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Integridad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Archivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -177,6 +177,98 @@ namespace HojaRuta.Novedades
             this.dgvPedidos.RowTemplate.Height = 18;
             this.dgvPedidos.Size = new System.Drawing.Size(872, 178);
             this.dgvPedidos.TabIndex = 41;
+            // 
+            // Pedido
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Pedido.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Pedido.HeaderText = "Pedido";
+            this.Pedido.MaxInputLength = 6;
+            this.Pedido.Name = "Pedido";
+            this.Pedido.Width = 50;
+            // 
+            // Cliente
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Cliente.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Cliente.HeaderText = "Cliente";
+            this.Cliente.MaxInputLength = 6;
+            this.Cliente.Name = "Cliente";
+            this.Cliente.ReadOnly = true;
+            this.Cliente.Width = 60;
+            // 
+            // Razon
+            // 
+            this.Razon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Razon.HeaderText = "Razon";
+            this.Razon.MinimumWidth = 100;
+            this.Razon.Name = "Razon";
+            this.Razon.ReadOnly = true;
+            // 
+            // Remito
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Remito.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Remito.HeaderText = "Remito";
+            this.Remito.Name = "Remito";
+            this.Remito.ReadOnly = true;
+            this.Remito.Width = 70;
+            // 
+            // Segur
+            // 
+            this.Segur.HeaderText = "Segur";
+            this.Segur.Name = "Segur";
+            this.Segur.ReadOnly = true;
+            // 
+            // Kilos
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Kilos.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Kilos.HeaderText = "Kilos";
+            this.Kilos.Name = "Kilos";
+            this.Kilos.ReadOnly = true;
+            this.Kilos.Width = 70;
+            // 
+            // Bultos
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Bultos.DefaultCellStyle = dataGridViewCellStyle5;
+            this.Bultos.HeaderText = "Bultos";
+            this.Bultos.Name = "Bultos";
+            this.Bultos.Width = 50;
+            // 
+            // Envases
+            // 
+            this.Envases.HeaderText = "Envases a";
+            this.Envases.MaxInputLength = 30;
+            this.Envases.Name = "Envases";
+            // 
+            // Observacion
+            // 
+            this.Observacion.HeaderText = "Observacion";
+            this.Observacion.MaxInputLength = 30;
+            this.Observacion.Name = "Observacion";
+            // 
+            // COT
+            // 
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.COT.DefaultCellStyle = dataGridViewCellStyle6;
+            this.COT.HeaderText = "COT";
+            this.COT.MaxInputLength = 10;
+            this.COT.Name = "COT";
+            this.COT.Width = 80;
+            // 
+            // Integridad
+            // 
+            this.Integridad.HeaderText = "Integridad";
+            this.Integridad.Name = "Integridad";
+            this.Integridad.Visible = false;
+            // 
+            // Archivo
+            // 
+            this.Archivo.HeaderText = "Archivo";
+            this.Archivo.Name = "Archivo";
+            this.Archivo.Visible = false;
             // 
             // btnCerrar
             // 
@@ -541,98 +633,6 @@ namespace HojaRuta.Novedades
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // Pedido
-            // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Pedido.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Pedido.HeaderText = "Pedido";
-            this.Pedido.MaxInputLength = 6;
-            this.Pedido.Name = "Pedido";
-            this.Pedido.Width = 50;
-            // 
-            // Cliente
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Cliente.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Cliente.HeaderText = "Cliente";
-            this.Cliente.MaxInputLength = 6;
-            this.Cliente.Name = "Cliente";
-            this.Cliente.ReadOnly = true;
-            this.Cliente.Width = 60;
-            // 
-            // Razon
-            // 
-            this.Razon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Razon.HeaderText = "Razon";
-            this.Razon.MinimumWidth = 100;
-            this.Razon.Name = "Razon";
-            this.Razon.ReadOnly = true;
-            // 
-            // Remito
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Remito.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Remito.HeaderText = "Remito";
-            this.Remito.Name = "Remito";
-            this.Remito.ReadOnly = true;
-            this.Remito.Width = 70;
-            // 
-            // Segur
-            // 
-            this.Segur.HeaderText = "Segur";
-            this.Segur.Name = "Segur";
-            this.Segur.ReadOnly = true;
-            // 
-            // Kilos
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Kilos.DefaultCellStyle = dataGridViewCellStyle4;
-            this.Kilos.HeaderText = "Kilos";
-            this.Kilos.Name = "Kilos";
-            this.Kilos.ReadOnly = true;
-            this.Kilos.Width = 70;
-            // 
-            // Bultos
-            // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Bultos.DefaultCellStyle = dataGridViewCellStyle5;
-            this.Bultos.HeaderText = "Bultos";
-            this.Bultos.Name = "Bultos";
-            this.Bultos.Width = 50;
-            // 
-            // Envases
-            // 
-            this.Envases.HeaderText = "Envases a";
-            this.Envases.MaxInputLength = 30;
-            this.Envases.Name = "Envases";
-            // 
-            // Observacion
-            // 
-            this.Observacion.HeaderText = "Observacion";
-            this.Observacion.MaxInputLength = 30;
-            this.Observacion.Name = "Observacion";
-            // 
-            // COT
-            // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.COT.DefaultCellStyle = dataGridViewCellStyle6;
-            this.COT.HeaderText = "COT";
-            this.COT.MaxInputLength = 10;
-            this.COT.Name = "COT";
-            this.COT.Width = 80;
-            // 
-            // Integridad
-            // 
-            this.Integridad.HeaderText = "Integridad";
-            this.Integridad.Name = "Integridad";
-            this.Integridad.Visible = false;
-            // 
-            // Archivo
-            // 
-            this.Archivo.HeaderText = "Archivo";
-            this.Archivo.Name = "Archivo";
-            this.Archivo.Visible = false;
             // 
             // HojaRuta
             // 
