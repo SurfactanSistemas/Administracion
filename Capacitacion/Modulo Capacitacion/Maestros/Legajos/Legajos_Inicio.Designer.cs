@@ -486,6 +486,7 @@
             this.MinimumSize = new System.Drawing.Size(723, 462);
             this.Name = "Legajos_Inicio";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.Legajos_Inicio_Load);
             this.Shown += new System.EventHandler(this.Legajos_Inicio_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Legajos)).EndInit();
             this.P_Verde.ResumeLayout(false);

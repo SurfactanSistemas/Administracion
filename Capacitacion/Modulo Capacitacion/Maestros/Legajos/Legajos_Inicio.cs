@@ -99,9 +99,8 @@ namespace Modulo_Capacitacion.Maestros.Legajos
                 if (WActual.Trim() == WAnterior.Trim())
                 {
                     _row["Mostrar"] = "N";
+                    WAnterior = WActual.Trim();
                 }
-
-                WAnterior = WActual.Trim();
 
             }
 
@@ -346,6 +345,11 @@ namespace Modulo_Capacitacion.Maestros.Legajos
         }
 
         private void DGV_Legajos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void Legajos_Inicio_Load(object sender, EventArgs e)
         {
 
         }
