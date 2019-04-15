@@ -63,9 +63,9 @@ Public Class ImpreProcesos
 
             End If
 
-            'Dim WTipoReporte2 As Integer = 2
-            'Dim WPartida2 As Integer = 308927
-            'Dim WTipoSalida2 As Integer = 2
+            Dim WTipoReporte2 As Integer = 1
+            Dim WPartida2 As Integer = 309308
+            Dim WTipoSalida2 As Integer = 2
 
             '_GenerarCertificadoAnalisisFarma(WTipoReporte2, WPartida2, WTipoSalida2)
 
@@ -77,6 +77,11 @@ Public Class ImpreProcesos
             'Dim WPartida2 As Integer = "309206"
 
             '_GenerarRegistroProduccion(WTerminado2, WPartida2)
+
+            'Dim WImpreFechaVto2 = "", WFechaElabora2 = "", WImpreFechaElaboracion2 = "", WFechaVto2 = ""
+
+            '_GenerarReporteResultadosCalidad(WPartida2, 1, WFechaVto2, WImpreFechaVto2, WFechaElabora2, WImpreFechaElaboracion2)
+            '_GenerarReporteResultadosCalidad(WPartida2, 4, WFechaVto2, WImpreFechaVto2, WFechaElabora2, WImpreFechaElaboracion2)
 
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
@@ -91,7 +96,14 @@ Public Class ImpreProcesos
     Private Sub _GenerarReporteResultadosCalidad(ByVal wPartida As Integer, ByVal wTipoSalida As Integer, ByVal wFechaVto As String, ByVal wImpreFechaVto As String, ByVal wFechaElabora As String, ByVal wImpreFechaElaboracion As String)
 
         With New VistaPrevia
-            .Reporte = New imprecalidadresultado
+
+            '.Reporte = New imprecalidadresultado
+            If {0, 1}.Contains(wTipoSalida) Then
+                .Reporte = New imprecalidadresultadoReduccionAl80
+            Else
+                .Reporte = New imprecalidadresultado
+            End If
+
             .Reporte.SetParameterValue("FechaVto", wFechaVto)
             .Reporte.SetParameterValue("ImpreFechaVto", wImpreFechaVto)
             .Reporte.SetParameterValue("FechaElabora", wFechaElabora)
@@ -99,7 +111,7 @@ Public Class ImpreProcesos
             .Formula = "{Prueterfarma.Partida} = " & wPartida & " And {Hoja.Hoja} = {Prueterfarma.Partida} And {Hoja.Renglon} = 1"
 
             Select Case wTipoSalida
-                Case 0, 1
+                Case 0, 1, 4
                     .Imprimir()
                 Case 2
                     .Mostrar()
