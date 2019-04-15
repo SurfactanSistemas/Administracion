@@ -30,7 +30,7 @@ Public Class VistaPrevia
             Dim WParams As ParameterFields = Reporte.ParameterFields
 
             For Each p As ParameterField In Reporte.ParameterFields
-                p.CurrentValues = WParams.Item(p.Name).CurrentValues
+                If Not p.Name.StartsWith("Pm-") Then p.CurrentValues = WParams.Item(p.Name).CurrentValues
             Next
 
             For Each p As ParameterField In Reporte.ParameterFields

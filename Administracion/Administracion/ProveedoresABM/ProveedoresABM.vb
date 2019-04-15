@@ -128,7 +128,7 @@ Public Class ProveedoresABM
                     & "Cuit =  '" & Mid(Trim(txtCUIT.Text), 1, 15) & "', " _
                     & "Telefono =  '" & Mid(Trim(txtTelefono.Text), 1, 100) & "', " _
                     & "Email =  '" & Mid(Trim(txtEmail.Text), 1, 400) & "', " _
-                    & "MailOp =  '" & Mid(Trim(txtMailOp.Text), 1, 60) & "', " _
+                    & "MailOp =  '" & Mid(Trim(txtMailOp.Text), 1, 250) & "', " _
                     & "Observaciones =  '" & Mid(Trim(txtObservaciones.Text), 1, 200) & "', " _
                     & "Tipo =  '" & NormalizarIndex(cmbTipoProveedor.SelectedIndex) & "', " _
                     & "Iva =  '" & NormalizarIndex(cmbIVA.SelectedIndex) & "', " _

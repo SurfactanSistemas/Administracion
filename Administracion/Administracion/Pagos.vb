@@ -2006,6 +2006,9 @@ Public Class Pagos
         Dim cn = New SqlConnection()
         Dim cm = New SqlCommand("")
 
+        Dim WEsAnticipo As Boolean = False
+        Dim WAvisoMailOp As String = "0"
+
         If Not validarDatos() Then
             Exit Sub
         End If
@@ -2132,6 +2135,9 @@ Public Class Pagos
                     End If
                     If optAnticipos.Checked Then
                         XTipoOrd = "2"
+
+                        WEsAnticipo = True
+
                     End If
                     If optVarios.Checked Then
                         XTipoOrd = "3"
@@ -2296,6 +2302,7 @@ Public Class Pagos
                     End If
                     If optAnticipos.Checked Then
                         XTipoOrd = "2"
+                        WEsAnticipo = True
                     End If
                     If optVarios.Checked Then
                         XTipoOrd = "3"
@@ -2342,6 +2349,7 @@ Public Class Pagos
                     If Val(XTipo2) = 6 Then
                         XCuenta = WCuenta(i, 2)
                     End If
+
                     If Val(XTipo2) = 2 Then
                         XTipo2 = ceros(XTipo2, 2)
                     End If
@@ -2809,10 +2817,25 @@ Public Class Pagos
 
             End Using
 
-            Dim WTipoAvisoMailOp As String = "1"
+            Dim WTipoAvisoMailOp As String = "0"
 
-            If optTransferencias.Checked Then WTipoAvisoMailOp = "2"
+            If WEsAnticipo Then
 
+                WTipoAvisoMailOp = "1"
+
+                Select Case txtProveedor.Text
+                    Case "10167878480", "10000000100", "10071081483", "10069345023", "10066352912"
+                        If MsgBox("Se detectó que está grabando un Anticipo. ¿Desea que se envíe la OP por Mail?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                            btnEnviarAviso_Click(Nothing, Nothing)
+                            WTipoAvisoMailOp = "1"
+                        Else
+                            If MsgBox("¿Desea que quede marcado para ser enviado luego?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                                WTipoAvisoMailOp = "0"
+                            End If
+                        End If
+                End Select
+
+            End If
 
             ' Actualizamos los numero de Certificados de Retenciones y datos historicos.
             ZSql = ""
@@ -8075,16 +8098,18 @@ Public Class Pagos
 
                         Dim WTipo2 = OrDefault(.Item("Tipo2"), "00")
 
-                        Select Case WTipo2
-                            Case "02", "2"
+                        Select Case Val(WTipo2)
+                            Case 2
 
                                 'If formatonumerico(OrDefault(.Item("Importe2"), 0)) = formatonumerico(OrDefault(.Item("Importe"), 0)) Then
-                                If WOrdenPago.Rows.Count = 1 Then
-                                    EsPorTransferencia = OrDefault(.Item("Numero2"), "") = "00000000"
-                                Else
-                                    EsPorTransferencia = False
-                                End If
-
+                                'If WOrdenPago.Rows.Count = 1 Then
+                                EsPorTransferencia = Val(OrDefault(.Item("Numero2"), "")) = 0
+                                ' Else
+                                ' EsPorTransferencia = False
+                                ' End If
+                            Case 6
+                                EsPorTransferencia = Val(OrDefault(.Item("Cuenta"), "00")) = 5
+                                If EsPorTransferencia Then Exit For
                             Case Else
                                 EsPorTransferencia = False
                         End Select
@@ -8096,10 +8121,11 @@ Public Class Pagos
                 With WOrdenPago.Rows(0)
 
                     WProveedor = OrDefault(.Item("Proveedor"), "")
+                    Dim WDescProveedor = OrDefault(.Item("Nombre"), "")
 
                     If Trim(WProveedor) <> "" Then
 
-                        _EnviarAvisoOPDisponible(WProveedor, txtOrdenPago.Text, EsPorTransferencia)
+                        _EnviarAvisoOPDisponible(WProveedor, WDescProveedor, txtOrdenPago.Text, EsPorTransferencia)
 
                         MsgBox("¡Aviso enviado correctamente!", MsgBoxStyle.Information)
 
@@ -8127,7 +8153,7 @@ Public Class Pagos
 
             Using cm As New SqlCommand()
                 cm.Connection = cn
-                cm.CommandText = "SELECT Proveedor, Tipo2, Importe2, Numero2, Importe FROM Pagos WHERE Orden = '" & OrdenPago & "' and TipoReg IN ('02', '2')"
+                cm.CommandText = "SELECT pr.Nombre, p.Proveedor, p.Tipo2, p.Importe2, p.Numero2, p.Importe, p.Cuenta FROM Pagos p INNER JOIN Proveedor pr ON pr.Proveedor = p.Proveedor WHERE p.Orden = '" & OrdenPago & "' and p.TipoReg IN ('02', '2')"
 
                 Using dr As SqlDataReader = cm.ExecuteReader
 
@@ -8143,7 +8169,7 @@ Public Class Pagos
 
     End Function
 
-    Private Sub _EnviarAvisoOPDisponible(ByVal Proveedor As String, Optional ByVal OrdenPago As String = "", Optional ByVal EsPorTransferencia As Boolean = False)
+    Private Sub _EnviarAvisoOPDisponible(ByVal Proveedor As String, ByVal DescProveedor As String, Optional ByVal OrdenPago As String = "", Optional ByVal EsPorTransferencia As Boolean = False)
 
         If Proveedor.Trim = "" Then Exit Sub
         If EsPorTransferencia And Trim(OrdenPago) = "" Then Exit Sub
@@ -8173,10 +8199,19 @@ Public Class Pagos
                 Dim WBody = ""
 
                 If EsPorTransferencia Then
-                    WBody = "Acercamos a usted la Orden de Pago " & OrdenPago
+                    WBody = "Informamos que en el día de la fecha, SURFACTAN S.A. le ha realizado una transferencia. " & vbCrLf & vbCrLf & "Adjuntamos Orden de Pago y retenciones si correspondiesen."
                 Else
-                    WBody = "Se encuentra disponible una Orden de Pago para ser retirada por la recepción de nuestras oficinas."
+                    WBody = "Informamos que se encuentra a su disposición un pago que podrá ser retirado por nuestras oficinas (Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires) en el horario de 14:00 a 17:00 hs."
                 End If
+
+                If Trim(DescProveedor) <> "" Then
+                    WBody = "Sres. " & DescProveedor.Trim.ToUpper & vbCrLf & vbCrLf & WBody
+                End If
+
+                Select Case Proveedor
+                    Case "10167878480", "10000000100", "10071081483", "10069345023", "10066352912"
+                        WBody = WBody & vbCrLf & vbCrLf & "En caso de cualquier consulta, por favor dirigirla a fgmonti@surfactan.com.ar"
+                End Select
 
                 Dim WAdjuntos As New List(Of String)
 
@@ -8190,7 +8225,9 @@ Public Class Pagos
                     End If
                 Next
 
-                _EnviarEmail(WMailOp, "", "Orden de Pago - SURFACTTAN S.A - ", WBody, WAdjuntos.ToArray)
+                _EnviarEmail(WMailOp, "", "Orden de Pago - SURFACTAN S.A. - ", WBody, WAdjuntos.ToArray)
+
+                _MarcarOPComoEnviada(OrdenPago)
 
             End If
 
@@ -8259,6 +8296,31 @@ Public Class Pagos
 
         Return WAdjuntos
     End Function
+
+    Private Sub _MarcarOPComoEnviada(ByVal OrdenPago As Object)
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("UPDATE Pagos SET AvisoMailOp = '1' WHERE Orden = '" & OrdenPago & "'")
+
+        Try
+
+            cn.ConnectionString = Proceso._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            cm.ExecuteNonQuery()
+
+        Catch ex As System.Exception
+            Throw New System.Exception("No se pudo marcar la Orden de Pago '" & OrdenPago & "' como 'ENVIADA'." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+    End Sub
 
     Private Sub _EnviarEmail(ByVal _to As String, ByVal _bcc As String, ByVal _subject As String, ByVal _body As String, ByVal _adjuntos() As String)
         Dim _Outlook As New Microsoft.Office.Interop.Outlook.Application

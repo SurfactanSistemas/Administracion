@@ -291,4 +291,5 @@
     Private Sub EnvíoDeAvisoDeOPAProveedoresPorEMailToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EnvíoDeAvisoDeOPAProveedoresPorEMailToolStripMenuItem.Click
         abrir(New AvisoOPAProveedores)
     End Sub
+
 End Class

@@ -23,10 +23,8 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GRilla = New System.Windows.Forms.DataGridView()
-        Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Razon = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Observaciones = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -36,6 +34,10 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         Me.txtHasta = New System.Windows.Forms.MaskedTextBox()
         Me.txtFechaPago = New System.Windows.Forms.MaskedTextBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Razon = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Observaciones = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.EnviarAviso = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.lstFiltrada = New Administracion.CustomListBox()
         Me.btnSalir = New Administracion.CustomButton()
         Me.btnImprimir = New Administracion.CustomButton()
@@ -58,33 +60,14 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         'GRilla
         '
         Me.GRilla.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.GRilla.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Codigo, Me.Razon, Me.Observaciones})
+        Me.GRilla.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Codigo, Me.Razon, Me.Observaciones, Me.EnviarAviso})
         Me.GRilla.Location = New System.Drawing.Point(12, 129)
         Me.GRilla.Name = "GRilla"
+        Me.GRilla.RowHeadersWidth = 15
+        Me.GRilla.RowTemplate.Height = 20
         Me.GRilla.Size = New System.Drawing.Size(649, 225)
         Me.GRilla.StandardTab = True
         Me.GRilla.TabIndex = 52
-        '
-        'Codigo
-        '
-        Me.Codigo.HeaderText = "Codigo"
-        Me.Codigo.Name = "Codigo"
-        '
-        'Razon
-        '
-        Me.Razon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.Razon.HeaderText = "Razon Social"
-        Me.Razon.Name = "Razon"
-        Me.Razon.ReadOnly = True
-        '
-        'Observaciones
-        '
-        Me.Observaciones.HeaderText = "Observaciones"
-        Me.Observaciones.MaxInputLength = 100
-        Me.Observaciones.Name = "Observaciones"
-        Me.Observaciones.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Observaciones.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Observaciones.Width = 150
         '
         'Panel1
         '
@@ -187,6 +170,40 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         Me.txtFechaPago.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.ToolTip1.SetToolTip(Me.txtFechaPago, "Fecha del Miércoles en el cual se realizará el control de Pagos a Proveedores Sel" & _
                 "ectivos")
+        '
+        'Codigo
+        '
+        Me.Codigo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Codigo.HeaderText = "Codigo"
+        Me.Codigo.Name = "Codigo"
+        Me.Codigo.Width = 65
+        '
+        'Razon
+        '
+        Me.Razon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Razon.HeaderText = "Razon Social"
+        Me.Razon.Name = "Razon"
+        Me.Razon.ReadOnly = True
+        '
+        'Observaciones
+        '
+        Me.Observaciones.HeaderText = "Observaciones"
+        Me.Observaciones.MaxInputLength = 100
+        Me.Observaciones.Name = "Observaciones"
+        Me.Observaciones.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Observaciones.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Observaciones.Width = 150
+        '
+        'EnviarAviso
+        '
+        Me.EnviarAviso.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.EnviarAviso.DefaultCellStyle = DataGridViewCellStyle1
+        Me.EnviarAviso.HeaderText = "Env. Aviso"
+        Me.EnviarAviso.Name = "EnviarAviso"
+        Me.EnviarAviso.ReadOnly = True
+        Me.EnviarAviso.Width = 83
         '
         'lstFiltrada
         '
@@ -442,10 +459,11 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
     Friend WithEvents txtDesde As System.Windows.Forms.MaskedTextBox
     Friend WithEvents CustomLabel3 As Administracion.CustomLabel
     Friend WithEvents CustomLabel2 As Administracion.CustomLabel
-    Friend WithEvents Codigo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Razon As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Observaciones As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents txtFechaPago As System.Windows.Forms.MaskedTextBox
     Friend WithEvents CustomLabel4 As Administracion.CustomLabel
+    Friend WithEvents Codigo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Razon As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Observaciones As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents EnviarAviso As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

@@ -19,7 +19,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
 
     Private Sub _CargarProveedoresPreCargados()
         Dim cn = New SqlConnection()
-        Dim cm = New SqlCommand("SELECT ps.Proveedor, ps.FechaOrd, p.Nombre, ps.Observaciones, ps.Desde, ps.Hasta FROM ProveedorSelectivo as ps, Proveedor as p WHERE ps.Fecha = '" & txtFechaPago.Text & "' AND ps.Proveedor = p.Proveedor")
+        Dim cm = New SqlCommand("SELECT ps.Proveedor, ps.FechaOrd, p.Nombre, ps.Observaciones, ps.Desde, ps.Hasta, ps.EnviarAvisoOp FROM ProveedorSelectivo as ps, Proveedor as p WHERE ps.Fecha = '" & txtFechaPago.Text & "' AND ps.Proveedor = p.Proveedor")
         Dim dr As SqlDataReader
         Dim WObservaciones = ""
 
@@ -36,6 +36,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
                     varRenglon = GRilla.Rows.Add()
                     GRilla.Item(0, varRenglon).Value = dr.Item("Proveedor")
                     GRilla.Item(1, varRenglon).Value = dr.Item("Nombre")
+                    GRilla.Rows(varRenglon).Cells("EnviarAviso").Value = OrDefault(dr.Item("EnviarAvisoOp"), "X")
 
                     WObservaciones = IIf(IsDBNull(dr.Item("Observaciones")), "", dr.Item("Observaciones"))
 
@@ -159,6 +160,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
                 varRenglon = GRilla.Rows.Add()
                 GRilla.Item(0, varRenglon).Value = _Proveedor(0)
                 GRilla.Item(1, varRenglon).Value = _Proveedor(1)
+                GRilla.Rows(varRenglon).Cells("EnviarAviso").Value = "X"
                 GRilla.CommitEdit(DataGridViewDataErrorContexts.Commit)
                 'varRenglon = varRenglon + 1
 
@@ -259,6 +261,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
                             WFecha = txtFechaPago.Text 'Date.Now.ToString("dd/MM/yyyy")
                             WFechaOrd = Proceso.ordenaFecha(WFecha)
                             WObservaciones = IIf(IsNothing(.Cells(2).Value), "", .Cells(2).Value)
+                            Dim WEnviarAviso = OrDefault(.Cells("EnviarAviso").Value, "X")
                             WDesde = txtDesde.Text
                             WHasta = txtHasta.Text
 
@@ -266,24 +269,33 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
 
                                 ZSql = ""
                                 ZSql &= "INSERT INTO ProveedorSelectivo "
-                                ZSql &= "(Proveedor, Fecha, FechaOrd, Observaciones, Desde, Hasta) "
-                                ZSql &= "VALUES ('" & WProveedor & "', '" & WFecha & "', '" & WFechaOrd & "', '" & WObservaciones & "', '" & WDesde & "', '" & WHasta & "') "
+                                ZSql &= "(Proveedor, Fecha, FechaOrd, Observaciones, Desde, Hasta, EnviarAvisoOp) "
+                                ZSql &= "VALUES ('" & WProveedor & "', '" & WFecha & "', '" & WFechaOrd & "', '" & WObservaciones & "', '" & WDesde & "', '" & WHasta & "', '" & WEnviarAviso & "') "
 
-                                Try
-                                    'cn.Open()
-                                    cm.CommandText = ZSql
-                                    cm.ExecuteNonQuery()
+                            Else
 
-                                Catch ex As Exception
-                                    If Not IsNothing(trans) Then
-                                        trans.Rollback()
-                                    End If
-                                    Throw New Exception(ex.Message)
-                                Finally
-                                    'cn.Close()
+                                ZSql = ""
+                                ZSql &= "UPDATE ProveedorSelectivo "
+                                ZSql &= "SET Observaciones = '" & WObservaciones & "', Desde = '" & WDesde & "', Hasta = '" & WHasta & "', EnviarAvisoOp = '" & WEnviarAviso & "' "
+                                ZSql &= " WHERE Proveedor = '" & WProveedor & "' And Fecha = '" & WFecha & "' "
 
-                                End Try
                             End If
+
+                            Try
+                                'cn.Open()
+                                cm.CommandText = ZSql
+                                cm.ExecuteNonQuery()
+
+                            Catch ex As Exception
+                                If Not IsNothing(trans) Then
+                                    trans.Rollback()
+                                End If
+                                Throw New Exception(ex.Message)
+                            Finally
+                                'cn.Close()
+
+                            End Try
+
 
                         End If
                     End With
@@ -652,6 +664,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
                             If Not _ProveedorYaAgregado(proveedor.id, iRow) Then
 
                                 GRilla.Rows(iRow).Cells(1).Value = Trim(proveedor.razonSocial)
+                                GRilla.Rows(iRow).Cells("EnviarAviso").Value = "X"
 
                                 GRilla.CurrentCell = GRilla.Rows(iRow).Cells(2)
 
@@ -765,5 +778,17 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         GRilla.Rows.Clear()
 
         txtFechaPago.Focus()
+    End Sub
+
+    Private Sub GRilla_CellMouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles GRilla.CellMouseClick
+
+        If GRilla.Columns("EnviarAviso").Index = e.ColumnIndex Then
+
+            Dim WMarca As String = OrDefault(GRilla.CurrentCell.Value, "X")
+
+            GRilla.CurrentCell.Value = IIf(WMarca.Trim = "", "X", "")
+
+        End If
+
     End Sub
 End Class

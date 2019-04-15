@@ -1112,7 +1112,7 @@ Partial Class ProveedoresABM
         Me.txtMailOp.EnterIndex = 10
         Me.txtMailOp.LabelAssociationKey = 10
         Me.txtMailOp.Location = New System.Drawing.Point(331, 96)
-        Me.txtMailOp.MaxLength = 60
+        Me.txtMailOp.MaxLength = 250
         Me.txtMailOp.Name = "txtMailOp"
         Me.txtMailOp.Size = New System.Drawing.Size(420, 20)
         Me.txtMailOp.TabIndex = 27

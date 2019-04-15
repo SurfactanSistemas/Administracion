@@ -28,7 +28,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         'Dim _CargadosHaceMasDeUnaSemana As Integer = 0
         'Dim _FechaLimite As String = _DeterminarFechaLimite()
         Dim cn = New SqlConnection()
-        Dim cm = New SqlCommand("SELECT Proveedor, FechaOrd FROM ProveedorSelectivo WHERE Fecha = '" & txtFechaEmision.Text & "'")
+        Dim cm = New SqlCommand("SELECT Proveedor, FechaOrd, EnviarAvisoOp FROM ProveedorSelectivo WHERE Fecha = '" & txtFechaEmision.Text & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -970,7 +970,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
     End Sub
 
     Private Sub GRilla_CellMouseDoubleClick(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles GRilla.CellMouseDoubleClick
-        If e.RowIndex < 0 Then : Exit Sub : End If
+        If e.RowIndex < 0 Or e.ColumnIndex = 2 Then : Exit Sub : End If
         Dim fila = GRilla.Rows(e.RowIndex)
         If Not IsNothing(fila) Then
 
@@ -1153,11 +1153,4 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         _DeshabilitarConsulta()
     End Sub
 
-    Private Sub btnAvisoMailOp_Click(ByVal sender As Object, ByVal e As EventArgs)
-
-
-
-    End Sub
-
-    
 End Class

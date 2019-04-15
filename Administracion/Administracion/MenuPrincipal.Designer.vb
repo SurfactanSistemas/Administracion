@@ -73,6 +73,7 @@ Partial Class MenuPrincipal
         Me.ListadoDeDeudaDePymeNacionToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListadoDeCuentasCorrientesDeProveedoresAnaliticosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListadoDeProyeccionDeCuentaCorrientesDeProveedoresAnaliticosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EnvíoDeAvisoDeOPAProveedoresPorEMailToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProcesosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem4 = New System.Windows.Forms.ToolStripMenuItem()
@@ -92,7 +93,6 @@ Partial Class MenuPrincipal
         Me.FinDelSistemaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.btnCambio = New System.Windows.Forms.Button()
-        Me.EnvíoDeAvisoDeOPAProveedoresPorEMailToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
@@ -415,6 +415,12 @@ Partial Class MenuPrincipal
         Me.ListadoDeProyeccionDeCuentaCorrientesDeProveedoresAnaliticosToolStripMenuItem.Size = New System.Drawing.Size(443, 22)
         Me.ListadoDeProyeccionDeCuentaCorrientesDeProveedoresAnaliticosToolStripMenuItem.Text = "Listado de Proyeccion de Cuenta Corrientes de Proveedores Analiticos"
         '
+        'EnvíoDeAvisoDeOPAProveedoresPorEMailToolStripMenuItem
+        '
+        Me.EnvíoDeAvisoDeOPAProveedoresPorEMailToolStripMenuItem.Name = "EnvíoDeAvisoDeOPAProveedoresPorEMailToolStripMenuItem"
+        Me.EnvíoDeAvisoDeOPAProveedoresPorEMailToolStripMenuItem.Size = New System.Drawing.Size(443, 22)
+        Me.EnvíoDeAvisoDeOPAProveedoresPorEMailToolStripMenuItem.Text = "Envío de Aviso de OP por E-Mail a Proveedores"
+        '
         'ProcesosToolStripMenuItem
         '
         Me.ProcesosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.ToolStripMenuItem4, Me.ToolStripSeparator1, Me.ToolStripMenuItem5, Me.ToolStripMenuItem3, Me.SifereToolStripMenuItem, Me.RetencionEsOpToolStripMenuItem, Me.RetencionesRecibvosaToolStripMenuItem, Me.ToolStripMenuItem2, Me.ToolStripMenuItem6, Me.ToolStripMenuItem7, Me.ToolStripMenuItem9, Me.ToolStripMenuItem10, Me.ToolStripMenuItem11, Me.ToolStripSeparator2, Me.FinDelSistemaToolStripMenuItem})
@@ -544,12 +550,6 @@ Partial Class MenuPrincipal
         Me.btnCambio.TabIndex = 1
         Me.btnCambio.Text = "Cambio de Empresa"
         Me.btnCambio.UseVisualStyleBackColor = True
-        '
-        'EnvíoDeAvisoDeOPAProveedoresPorEMailToolStripMenuItem
-        '
-        Me.EnvíoDeAvisoDeOPAProveedoresPorEMailToolStripMenuItem.Name = "EnvíoDeAvisoDeOPAProveedoresPorEMailToolStripMenuItem"
-        Me.EnvíoDeAvisoDeOPAProveedoresPorEMailToolStripMenuItem.Size = New System.Drawing.Size(443, 22)
-        Me.EnvíoDeAvisoDeOPAProveedoresPorEMailToolStripMenuItem.Text = "Envío de Aviso de OP por E-Mail a Proveedores"
         '
         'MenuPrincipal
         '
