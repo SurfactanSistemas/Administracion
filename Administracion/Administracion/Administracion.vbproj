@@ -242,6 +242,12 @@
     <Compile Include="EnvioEmailProveedores.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="GestionAvisosOPDisponiblesProveedores.Designer.vb">
+      <DependentUpon>GestionAvisosOPDisponiblesProveedores.vb</DependentUpon>
+    </Compile>
+    <Compile Include="GestionAvisosOPDisponiblesProveedores.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Listados\ConsultaDatosFactura.Designer.vb">
       <DependentUpon>ConsultaDatosFactura.vb</DependentUpon>
     </Compile>
@@ -921,6 +927,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EnvioEmailProveedores.resx">
       <DependentUpon>EnvioEmailProveedores.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GestionAvisosOPDisponiblesProveedores.resx">
+      <DependentUpon>GestionAvisosOPDisponiblesProveedores.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\ConsultaDatosFactura.resx">
       <DependentUpon>ConsultaDatosFactura.vb</DependentUpon>

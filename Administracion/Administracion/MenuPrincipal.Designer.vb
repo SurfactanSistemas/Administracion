@@ -93,6 +93,7 @@ Partial Class MenuPrincipal
         Me.FinDelSistemaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.btnCambio = New System.Windows.Forms.Button()
+        Me.GestiónDeAvisosDeOPDisponiblesAProveedoresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
@@ -151,7 +152,7 @@ Partial Class MenuPrincipal
         '
         'NovedadesToolStripMenuItem
         '
-        Me.NovedadesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IngresoDeNovedadesToolStripMenuItem, Me.ConsultaDeRemitosToolStripMenuItem, Me.AplicacionDeCorpobantesToolStripMenuItem, Me.IngresoDePagosToolStripMenuItem, Me.DepositosToolStripMenuItem, Me.RecibosToolStripMenuItem, Me.ConsultaDeChequesToolStripMenuItem, Me.InteresesToolStripMenuItem, Me.SeleccionDeRecibosAAplicarDifverenciaDeCambioToolStripMenuItem, Me.IngresoDeProveedorAPagoSemanalToolStripMenuItem})
+        Me.NovedadesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IngresoDeNovedadesToolStripMenuItem, Me.ConsultaDeRemitosToolStripMenuItem, Me.AplicacionDeCorpobantesToolStripMenuItem, Me.IngresoDePagosToolStripMenuItem, Me.DepositosToolStripMenuItem, Me.RecibosToolStripMenuItem, Me.ConsultaDeChequesToolStripMenuItem, Me.InteresesToolStripMenuItem, Me.SeleccionDeRecibosAAplicarDifverenciaDeCambioToolStripMenuItem, Me.IngresoDeProveedorAPagoSemanalToolStripMenuItem, Me.GestiónDeAvisosDeOPDisponiblesAProveedoresToolStripMenuItem})
         Me.NovedadesToolStripMenuItem.Name = "NovedadesToolStripMenuItem"
         Me.NovedadesToolStripMenuItem.Size = New System.Drawing.Size(78, 20)
         Me.NovedadesToolStripMenuItem.Text = "Novedades"
@@ -551,6 +552,12 @@ Partial Class MenuPrincipal
         Me.btnCambio.Text = "Cambio de Empresa"
         Me.btnCambio.UseVisualStyleBackColor = True
         '
+        'GestiónDeAvisosDeOPDisponiblesAProveedoresToolStripMenuItem
+        '
+        Me.GestiónDeAvisosDeOPDisponiblesAProveedoresToolStripMenuItem.Name = "GestiónDeAvisosDeOPDisponiblesAProveedoresToolStripMenuItem"
+        Me.GestiónDeAvisosDeOPDisponiblesAProveedoresToolStripMenuItem.Size = New System.Drawing.Size(350, 22)
+        Me.GestiónDeAvisosDeOPDisponiblesAProveedoresToolStripMenuItem.Text = "Gestión de Avisos de OP disponibles a Proveedores"
+        '
         'MenuPrincipal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -642,4 +649,5 @@ Partial Class MenuPrincipal
     Friend WithEvents ToolStripMenuItem11 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents EnvioEnEMailAClientesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents EnvíoDeAvisoDeOPAProveedoresPorEMailToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents GestiónDeAvisosDeOPDisponiblesAProveedoresToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class

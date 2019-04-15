@@ -2821,17 +2821,11 @@ Public Class Pagos
 
             If WEsAnticipo Then
 
-                WTipoAvisoMailOp = "1"
-
                 Select Case txtProveedor.Text
-                    Case "10167878480", "10000000100", "10071081483", "10069345023", "10066352912"
+                    Case "10167878480", "10000000100", "10071081483", "10069345023", "10066352912", "10023969933", "10014123562"
                         If MsgBox("Se detectó que está grabando un Anticipo. ¿Desea que se envíe la OP por Mail?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
                             btnEnviarAviso_Click(Nothing, Nothing)
                             WTipoAvisoMailOp = "1"
-                        Else
-                            If MsgBox("¿Desea que quede marcado para ser enviado luego?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
-                                WTipoAvisoMailOp = "0"
-                            End If
                         End If
                 End Select
 

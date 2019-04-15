@@ -94,9 +94,6 @@ Public Class AvisoOPAProveedores
 
                     If WOrdenPago.Rows.Count > 0 Then
 
-                        '
-                        ' Si el Tipo2 es 2, tiene una única fila y en Número no tiene cargado datos, asumimos que es por transferencia.
-                        '
                         For Each row As DataRow In WOrdenPago.Rows
                             With row
 
@@ -340,7 +337,7 @@ Public Class AvisoOPAProveedores
         End If
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT DISTINCT p.Proveedor, p.Orden, p.TipoOrd FROM Pagos p WHERE p.Proveedor <> '' And p.TipoOrd IN ('1', '3', '4', '5', '2') And ISNULL(AvisoMailOp, '0') = '0' And " & WFiltro & " ")
+        Dim cm As SqlCommand = New SqlCommand("SELECT DISTINCT p.Proveedor, p.Orden, p.TipoOrd FROM Pagos p WHERE p.Proveedor <> '' And p.TipoOrd IN ('1', '3', '4', '5') And ISNULL(AvisoMailOp, '0') = '0' And " & WFiltro & " ")
         Dim dr As SqlDataReader
 
         Try
