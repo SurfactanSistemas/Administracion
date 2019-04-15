@@ -533,6 +533,33 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
             ' Modificar por los E-Mails que correspondan.
             oMsg.To = Direccion
 
+            '
+            ' Generamos el PDf para poder adjuntarlo.
+            '
+            Dim frm As New ConsultasVarias.VistaPrevia
+
+            With frm
+
+                .Reporte = New ReporteINCIndividual
+                .Formula = "{CargaIncidencias.Incidencia} = " & txtIncidencia.Text
+
+                Dim WNombreArchivo = String.Format("INC {0} - {1}", txtIncidencia.Text.PadLeft(4, "0"), Date.Now.ToString("dd-MM-yyyy"))
+
+                Dim WRuta = "C:/tempIndice/"
+
+                WNombreArchivo &= ".pdf"
+
+                If Directory.Exists(WRuta) Then Directory.Delete(WRuta, True)
+
+                Directory.CreateDirectory(WRuta)
+
+                ConsultasVarias.Clases.Conexion.EmpresaDeTrabajo = "SurfactanSa"
+                ConsultasVarias.Clases.Helper._ExportarReporte(frm, ConsultasVarias.Clases.Enumeraciones.FormatoExportacion.PDF, WNombreArchivo, WRuta)
+
+                If File.Exists(WRuta & WNombreArchivo) Then oMsg.Attachments.Add(WRuta & WNombreArchivo)
+
+            End With
+
             If EnvioAutomatico Then
                 oMsg.Send()
             Else

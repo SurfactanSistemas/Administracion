@@ -11,29 +11,28 @@
 Option Strict On
 Option Explicit On
 
-Imports Microsoft.VisualBasic.ApplicationServices
 
 Namespace My
-
+    
     'NOTE: This file is auto-generated; do not modify it directly.  To make changes,
     ' or if you encounter build errors in this file, go to the Project Designer
     ' (go to Project Properties or double-click the My Project node in
     ' Solution Explorer), and make changes on the Application tab.
     '
     Partial Friend Class MyApplication
-
-        <DebuggerStepThrough()> _
+        
+        <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Public Sub New()
-            MyBase.New(AuthenticationMode.Windows)
-            Me.IsSingleInstance = True
-            Me.EnableVisualStyles = True
-            Me.SaveMySettingsOnExit = True
-            Me.ShutDownStyle = ShutdownMode.AfterAllFormsClose
+            MyBase.New(Global.Microsoft.VisualBasic.ApplicationServices.AuthenticationMode.Windows)
+            Me.IsSingleInstance = false
+            Me.EnableVisualStyles = true
+            Me.SaveMySettingsOnExit = true
+            Me.ShutDownStyle = Global.Microsoft.VisualBasic.ApplicationServices.ShutdownMode.AfterAllFormsClose
         End Sub
-
-        <DebuggerStepThrough()> _
+        
+        <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = SAC.Login
+            Me.MainForm = Global.SAC.Login
         End Sub
     End Class
 End Namespace

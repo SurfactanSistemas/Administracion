@@ -452,11 +452,11 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
                 If MsgBox("¿Desea enviar el aviso al Responsable de Calidad?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes _
                     Then
 
-                    _EnviarEmail("ebiglieri@surfactan.com.ar; calidad@surfactan.com.ar; wbarosio@surfactan.com.ar",
+                    _EnviarEmail("ebiglieri@surfactan.com.ar; calidad@surfactan.com.ar; wbarosio@surfactan.com.ar; calidad2@surfactan.com.ar; isocalidad@surfactan.com.ar;juanfs@surfactan.com.ar; lsantos@surfactan.com.ar; drodriguez@surfactan.com.ar",
                                  "Carga de Informe de No Conformidad - Nro.:" + txtIncidencia.Text.PadLeft(4, "0") +
                                  " - " + Microsoft.VisualBasic.Left(txtReferencia.Text, 50),
-                                 "Se inició un Informe de No Conformidad : " & txtIncidencia.Text.PadLeft(4, "0") &
-                                 ". Referencia : " & txtReferencia.Text.Trim & " Título : " & txtTitulo.Text.Trim)
+                                 "Se inició un Informe de No Conformidad : " & txtIncidencia.Text.PadLeft(4, "0") & vbCrLf &
+                                 ". Referencia : " & txtReferencia.Text.Trim & vbCrLf & " Título : " & txtTitulo.Text.Trim)
 
                 End If
             End If
@@ -475,7 +475,6 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
         End Try
     End Sub
 
-
     Private Sub _EnviarEmail(ByVal Direccion As String, ByVal Subject As String, ByVal Body As String, Optional ByVal EnvioAutomatico As Boolean = False)
         Dim oApp As _Application
         Dim oMsg As _MailItem
@@ -489,6 +488,33 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
 
             ' Modificar por los E-Mails que correspondan.
             oMsg.To = Direccion
+
+            '
+            ' Generamos el PDf para poder adjuntarlo.
+            '
+            Dim frm As New ConsultasVarias.VistaPrevia
+
+            With frm
+
+                .Reporte = New ReporteINCIndividual
+                .Formula = "{CargaIncidencias.Incidencia} = " & txtIncidencia.Text
+
+                Dim WNombreArchivo = String.Format("INC {0} - {1}", txtIncidencia.Text.PadLeft(4, "0"), Date.Now.ToString("dd-MM-yyyy"))
+
+                Dim WRuta = "C:/tempIndice/"
+
+                WNombreArchivo &= ".pdf"
+
+                If Directory.Exists(WRuta) Then Directory.Delete(WRuta, True)
+
+                Directory.CreateDirectory(WRuta)
+
+                ConsultasVarias.Clases.Conexion.EmpresaDeTrabajo = "SurfactanSa"
+                ConsultasVarias.Clases.Helper._ExportarReporte(frm, ConsultasVarias.Clases.Enumeraciones.FormatoExportacion.PDF, WNombreArchivo, WRuta)
+
+                If File.Exists(WRuta & WNombreArchivo) Then oMsg.Attachments.Add(WRuta & WNombreArchivo)
+
+            End With
 
             If EnvioAutomatico Then
                 oMsg.Send()

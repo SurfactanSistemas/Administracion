@@ -2,6 +2,7 @@
 Imports System.Globalization
 Imports CrystalDecisions.Shared
 Imports System.IO
+Imports Microsoft.Office.Interop.Outlook
 
 Namespace Clases
 
@@ -51,7 +52,7 @@ Namespace Clases
 
                 cm.ExecuteNonQuery()
 
-            Catch ex As Exception
+            Catch ex As System.Exception
                 'Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
             Finally
 
@@ -87,7 +88,7 @@ Namespace Clases
                 With row
                     Try
                         .Item(r) = IIf(IsDBNull(.Item(r)), "", .Item(r))
-                    Catch ex As Exception
+                    Catch ex As System.Exception
                         .Item(r) = IIf(IsDBNull(.Item(r)), "0", .Item(r))
                     End Try
                 End With
@@ -584,7 +585,7 @@ Namespace Clases
                 fecha = Date.ParseExact(fecha, "d/M/yyyy", DateTimeFormatInfo.InvariantInfo).ToString("dd/MM/yyyy")
 
                 Return True
-            Catch ex As Exception
+            Catch ex As System.Exception
                 Return False
             End Try
         End Function
@@ -603,7 +604,7 @@ Namespace Clases
 
                 ' En la primera (3/4/2001), se parsearia y devolveria: 03/04/2000. En el segundo caso lanzaria una excepcion ya que la fecha (12/12/201), no es un formato de fecha posible.
                 xfecha = Date.ParseExact(fecha, "d/M/yyyy", DateTimeFormatInfo.InvariantInfo).ToString("dd/MM/yyyy")
-            Catch ex As Exception
+            Catch ex As System.Exception
                 ' En caso de excepcion, se retorna el mismo valor que se introdujo sin cambios.
                 xfecha = _temp
             End Try
@@ -679,5 +680,37 @@ Namespace Clases
             End With
         End Sub
 
+        Public Shared Sub _EnviarEmail(ByVal Direccion As String, ByVal Subject As String, ByVal Body As String, Optional ByVal ArchivosAdjuntos() As String = Nothing, Optional ByVal EnvioAutomatico As Boolean = False)
+            Dim oApp As _Application
+            Dim oMsg As _MailItem
+
+            Try
+                oApp = New Application()
+
+                oMsg = oApp.CreateItem(OlItemType.olMailItem)
+                oMsg.Subject = Subject
+                oMsg.Body = Body
+
+                ' Modificar por los E-Mails que correspondan.
+                oMsg.To = Direccion
+
+                For Each archivosAdjunto As String In ArchivosAdjuntos
+
+                    oMsg.Attachments.Add(archivosAdjunto)
+
+                Next
+
+                If EnvioAutomatico Then
+                    oMsg.Send()
+                Else
+                    oMsg.Display()
+                End If
+
+            Catch ex As System.Exception
+                Throw New System.Exception("No se pudo crear el E-Mail solicitado." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+            End Try
+        End Sub
+
     End Class
+    
 End Namespace

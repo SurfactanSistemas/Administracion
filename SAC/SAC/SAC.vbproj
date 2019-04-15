@@ -433,6 +433,12 @@
       <DependentUpon>NuevoSACCaratula.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\ReclamosClientes\ReclamoClienteAvisoMail.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReclamoClienteAvisoMail.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\VistaPrevia.Designer.vb">
       <DependentUpon>VistaPrevia.vb</DependentUpon>
     </Compile>
@@ -591,6 +597,10 @@
     <EmbeddedResource Include="Reportes\NuevoSac\NuevoSACCaratula.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>NuevoSACCaratula.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ReclamosClientes\ReclamoClienteAvisoMail.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReclamoClienteAvisoMail.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\VistaPrevia.resx">
       <DependentUpon>VistaPrevia.vb</DependentUpon>
