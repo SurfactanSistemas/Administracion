@@ -26,6 +26,7 @@ Partial Class AvisoOPAProveedores
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.rbEntreRango = New System.Windows.Forms.RadioButton()
         Me.rbEntreFechas = New System.Windows.Forms.RadioButton()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
@@ -36,7 +37,8 @@ Partial Class AvisoOPAProveedores
         Me.btnEnviar = New System.Windows.Forms.Button()
         Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.btnCerrar = New System.Windows.Forms.Button()
-        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
+        Me.txtAPartirFecha = New System.Windows.Forms.MaskedTextBox()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -81,8 +83,10 @@ Partial Class AvisoOPAProveedores
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.txtAPartirFecha)
         Me.GroupBox1.Controls.Add(Me.ProgressBar1)
         Me.GroupBox1.Controls.Add(Me.rbEntreRango)
+        Me.GroupBox1.Controls.Add(Me.Label5)
         Me.GroupBox1.Controls.Add(Me.rbEntreFechas)
         Me.GroupBox1.Controls.Add(Me.GroupBox2)
         Me.GroupBox1.Location = New System.Drawing.Point(8, 55)
@@ -92,10 +96,17 @@ Partial Class AvisoOPAProveedores
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Parámetros"
         '
+        'ProgressBar1
+        '
+        Me.ProgressBar1.Location = New System.Drawing.Point(15, 118)
+        Me.ProgressBar1.Name = "ProgressBar1"
+        Me.ProgressBar1.Size = New System.Drawing.Size(458, 11)
+        Me.ProgressBar1.TabIndex = 2
+        '
         'rbEntreRango
         '
         Me.rbEntreRango.AutoSize = True
-        Me.rbEntreRango.Location = New System.Drawing.Point(31, 72)
+        Me.rbEntreRango.Location = New System.Drawing.Point(31, 49)
         Me.rbEntreRango.Name = "rbEntreRango"
         Me.rbEntreRango.Size = New System.Drawing.Size(118, 17)
         Me.rbEntreRango.TabIndex = 1
@@ -106,7 +117,7 @@ Partial Class AvisoOPAProveedores
         '
         Me.rbEntreFechas.AutoSize = True
         Me.rbEntreFechas.Checked = True
-        Me.rbEntreFechas.Location = New System.Drawing.Point(31, 32)
+        Me.rbEntreFechas.Location = New System.Drawing.Point(31, 23)
         Me.rbEntreFechas.Name = "rbEntreFechas"
         Me.rbEntreFechas.Size = New System.Drawing.Size(88, 17)
         Me.rbEntreFechas.TabIndex = 1
@@ -120,9 +131,9 @@ Partial Class AvisoOPAProveedores
         Me.GroupBox2.Controls.Add(Me.txtHasta)
         Me.GroupBox2.Controls.Add(Me.Label3)
         Me.GroupBox2.Controls.Add(Me.txtDesde)
-        Me.GroupBox2.Location = New System.Drawing.Point(175, 9)
+        Me.GroupBox2.Location = New System.Drawing.Point(200, 9)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(302, 98)
+        Me.GroupBox2.Size = New System.Drawing.Size(275, 98)
         Me.GroupBox2.TabIndex = 0
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Rango"
@@ -130,7 +141,7 @@ Partial Class AvisoOPAProveedores
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(159, 46)
+        Me.Label4.Location = New System.Drawing.Point(142, 46)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(43, 13)
         Me.Label4.TabIndex = 1
@@ -138,7 +149,7 @@ Partial Class AvisoOPAProveedores
         '
         'txtHasta
         '
-        Me.txtHasta.Location = New System.Drawing.Point(213, 42)
+        Me.txtHasta.Location = New System.Drawing.Point(196, 42)
         Me.txtHasta.Mask = "00/00/0000"
         Me.txtHasta.Name = "txtHasta"
         Me.txtHasta.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -150,7 +161,7 @@ Partial Class AvisoOPAProveedores
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(22, 46)
+        Me.Label3.Location = New System.Drawing.Point(12, 46)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(44, 13)
         Me.Label3.TabIndex = 1
@@ -158,7 +169,7 @@ Partial Class AvisoOPAProveedores
         '
         'txtDesde
         '
-        Me.txtDesde.Location = New System.Drawing.Point(77, 42)
+        Me.txtDesde.Location = New System.Drawing.Point(67, 42)
         Me.txtDesde.Mask = "00/00/0000"
         Me.txtDesde.Name = "txtDesde"
         Me.txtDesde.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -195,12 +206,25 @@ Partial Class AvisoOPAProveedores
         Me.btnCerrar.Text = "CERRAR"
         Me.btnCerrar.UseVisualStyleBackColor = True
         '
-        'ProgressBar1
+        'txtAPartirFecha
         '
-        Me.ProgressBar1.Location = New System.Drawing.Point(15, 118)
-        Me.ProgressBar1.Name = "ProgressBar1"
-        Me.ProgressBar1.Size = New System.Drawing.Size(458, 11)
-        Me.ProgressBar1.TabIndex = 2
+        Me.txtAPartirFecha.Location = New System.Drawing.Point(98, 84)
+        Me.txtAPartirFecha.Mask = "00/00/0000"
+        Me.txtAPartirFecha.Name = "txtAPartirFecha"
+        Me.txtAPartirFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtAPartirFecha.Size = New System.Drawing.Size(67, 20)
+        Me.txtAPartirFecha.TabIndex = 0
+        Me.txtAPartirFecha.Text = "99999999"
+        Me.txtAPartirFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label5
+        '
+        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(18, 81)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(87, 26)
+        Me.Label5.TabIndex = 1
+        Me.Label5.Text = "RETIRO A PARTIR DEL"
         '
         'AvisoOPAProveedores
         '
@@ -241,4 +265,6 @@ Partial Class AvisoOPAProveedores
     Friend WithEvents btnLimpiar As System.Windows.Forms.Button
     Friend WithEvents btnCerrar As System.Windows.Forms.Button
     Friend WithEvents ProgressBar1 As System.Windows.Forms.ProgressBar
+    Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents txtAPartirFecha As System.Windows.Forms.MaskedTextBox
 End Class

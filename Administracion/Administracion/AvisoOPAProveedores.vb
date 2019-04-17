@@ -44,6 +44,12 @@ Public Class AvisoOPAProveedores
 
         rbEntreFechas.Checked = True
 
+        Dim WFechaBase As Date = Date.Now
+
+        Dim WFechaFinal = WFechaBase.AddDays(-1 * (WFechaBase.DayOfWeek - DayOfWeek.Friday)).ToString("dd/MM/yyyy")
+
+        txtAPartirFecha.Text = WFechaFinal
+
         RadioButton1_Click(Nothing, Nothing)
 
     End Sub
@@ -70,6 +76,14 @@ Public Class AvisoOPAProveedores
             ProgressBar1.Value = 0
 
             Dim WParametros As String = "Entre " & txtDesde.Text & " al " & txtHasta.Text
+
+            If txtAPartirFecha.Text.Replace("/", "").Trim = "" Then
+                Dim WFechaBase As Date = Date.Now
+
+                Dim WFechaFinal = WFechaBase.AddDays(-1 * (WFechaBase.DayOfWeek - DayOfWeek.Friday)).ToString("dd/MM/yyyy")
+
+                txtAPartirFecha.Text = WFechaFinal
+            End If
 
             '
             ' Buscamos los proveedores con OP.
@@ -485,7 +499,7 @@ Public Class AvisoOPAProveedores
                 If EsPorTransferencia Then
                     WBody = "Informamos que en el día de la fecha, SURFACTAN S.A. le ha realizado una transferencia. " & vbCrLf & vbCrLf & "Adjuntamos Orden de Pago y retenciones si correspondiesen."
                 Else
-                    WBody = "Informamos que se encuentra a su disposición un pago que podrá ser retirado por nuestras oficinas (Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires) en el horario de 14:00 a 17:00 hs."
+                    WBody = "Informamos que se encuentra a su disposición un pago que podrá ser retirado por nuestras oficinas (Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires), a partir del día " & txtAPartirFecha.Text & " en el horario de 14:00 a 17:00 hs."
                 End If
 
                 If Trim(wDescProveedor) <> "" Then
@@ -617,7 +631,7 @@ Public Class AvisoOPAProveedores
     End Sub
 
 
-    Private Sub txtDesde_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDesde.KeyDown
+    Private Sub txtDesde_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDesde.KeyDown, txtAPartirFecha.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtDesde.Text.Replace("/", "")) = "" Or (rbEntreFechas.Checked And txtDesde.Text.Replace(" ", "").Length < 10) Then : Exit Sub : End If
