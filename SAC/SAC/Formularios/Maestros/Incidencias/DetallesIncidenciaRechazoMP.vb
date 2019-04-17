@@ -542,6 +542,8 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
 
                 .Reporte = New ReporteINCIndividual
                 .Formula = "{CargaIncidencias.Incidencia} = " & txtIncidencia.Text
+                .Reporte.SetParameterValue("MostrarPosiblesUsos", 1)
+                .Reporte.SetParameterValue("MostrarAcciones", 0)
 
                 Dim WNombreArchivo = String.Format("INC {0} - {1}", txtIncidencia.Text.PadLeft(4, "0"), Date.Now.ToString("dd-MM-yyyy"))
 
