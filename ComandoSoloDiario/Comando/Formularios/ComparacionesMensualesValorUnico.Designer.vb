@@ -735,6 +735,8 @@ Partial Class ComparacionesMensualesValorUnico
         '
         'ckSumarDiario
         '
+        Me.ckSumarDiario.Checked = True
+        Me.ckSumarDiario.CheckState = System.Windows.Forms.CheckState.Checked
         Me.ckSumarDiario.Location = New System.Drawing.Point(148, 10)
         Me.ckSumarDiario.Name = "ckSumarDiario"
         Me.ckSumarDiario.Size = New System.Drawing.Size(111, 43)
