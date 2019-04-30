@@ -154,6 +154,12 @@
     <Compile Include="AplicacionComprobantes.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Auxiliares\EncuestaFarma.Designer.vb">
+      <DependentUpon>EncuestaFarma.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Auxiliares\EncuestaFarma.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="AvisoOPAProveedores.Designer.vb">
       <DependentUpon>AvisoOPAProveedores.vb</DependentUpon>
     </Compile>
@@ -889,6 +895,9 @@
     <EmbeddedResource Include="AplicacionComprobantes.resx">
       <DependentUpon>AplicacionComprobantes.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Auxiliares\EncuestaFarma.resx">
+      <DependentUpon>EncuestaFarma.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AvisoOPAProveedores.resx">
       <DependentUpon>AvisoOPAProveedores.vb</DependentUpon>

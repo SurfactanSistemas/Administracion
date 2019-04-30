@@ -1707,4 +1707,14 @@ Public Class ProveedoresABM
     Private Sub btnCerrarConsultas_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrarConsultas.Click
         _ContraerFormulario()
     End Sub
+
+    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+
+        If Val(txtCodigo.Text) = 0 Then Exit Sub
+
+        With New EncuestaFarma(txtCodigo.Text)
+            .ShowDialog(Me)
+        End With
+
+    End Sub
 End Class

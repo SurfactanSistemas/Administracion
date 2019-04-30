@@ -25,6 +25,7 @@ Partial Class ProveedoresABM
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ProveedoresABM))
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.btnSiguienteRegistro = New System.Windows.Forms.Button()
         Me.btnPrimerRegistro = New System.Windows.Forms.Button()
         Me.btnUltimoRegistro = New System.Windows.Forms.Button()
@@ -132,8 +133,8 @@ Partial Class ProveedoresABM
         Me.btnEliminar = New System.Windows.Forms.Button()
         Me.btnAgregar = New System.Windows.Forms.Button()
         Me.txtCAIVto = New System.Windows.Forms.MaskedTextBox()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.txtCAI = New Administracion.CustomTextBox()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -146,17 +147,28 @@ Partial Class ProveedoresABM
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Button1)
         Me.GroupBox1.Controls.Add(Me.btnSiguienteRegistro)
         Me.GroupBox1.Controls.Add(Me.btnPrimerRegistro)
         Me.GroupBox1.Controls.Add(Me.btnUltimoRegistro)
         Me.GroupBox1.Controls.Add(Me.btnAnteriorRegistro)
         Me.GroupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.GroupBox1.Location = New System.Drawing.Point(545, 474)
+        Me.GroupBox1.Location = New System.Drawing.Point(551, 474)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(200, 50)
         Me.GroupBox1.TabIndex = 76
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Navegar por Proveedores"
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(-3, 21)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 97
+        Me.Button1.Text = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
+        Me.Button1.Visible = False
         '
         'btnSiguienteRegistro
         '
@@ -1579,7 +1591,7 @@ Partial Class ProveedoresABM
         Me.btnListado.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnListado.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnListado.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnListado.Location = New System.Drawing.Point(435, 481)
+        Me.btnListado.Location = New System.Drawing.Point(369, 482)
         Me.btnListado.Name = "btnListado"
         Me.btnListado.Size = New System.Drawing.Size(45, 37)
         Me.btnListado.TabIndex = 74
@@ -1598,7 +1610,7 @@ Partial Class ProveedoresABM
         Me.btnLimpiar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnLimpiar.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnLimpiar.Location = New System.Drawing.Point(155, 481)
+        Me.btnLimpiar.Location = New System.Drawing.Point(89, 482)
         Me.btnLimpiar.Name = "btnLimpiar"
         Me.btnLimpiar.Size = New System.Drawing.Size(45, 37)
         Me.btnLimpiar.TabIndex = 75
@@ -1617,7 +1629,7 @@ Partial Class ProveedoresABM
         Me.btnCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCerrar.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnCerrar.Location = New System.Drawing.Point(365, 481)
+        Me.btnCerrar.Location = New System.Drawing.Point(299, 482)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(45, 37)
         Me.btnCerrar.TabIndex = 73
@@ -1636,7 +1648,7 @@ Partial Class ProveedoresABM
         Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnConsulta.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnConsulta.Location = New System.Drawing.Point(225, 481)
+        Me.btnConsulta.Location = New System.Drawing.Point(159, 482)
         Me.btnConsulta.Name = "btnConsulta"
         Me.btnConsulta.Size = New System.Drawing.Size(45, 37)
         Me.btnConsulta.TabIndex = 71
@@ -1655,7 +1667,7 @@ Partial Class ProveedoresABM
         Me.btnEliminar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnEliminar.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnEliminar.Location = New System.Drawing.Point(295, 481)
+        Me.btnEliminar.Location = New System.Drawing.Point(229, 482)
         Me.btnEliminar.Name = "btnEliminar"
         Me.btnEliminar.Size = New System.Drawing.Size(45, 37)
         Me.btnEliminar.TabIndex = 72
@@ -1675,7 +1687,7 @@ Partial Class ProveedoresABM
         Me.btnAgregar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAgregar.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnAgregar.Location = New System.Drawing.Point(85, 481)
+        Me.btnAgregar.Location = New System.Drawing.Point(19, 482)
         Me.btnAgregar.Name = "btnAgregar"
         Me.btnAgregar.Size = New System.Drawing.Size(45, 37)
         Me.btnAgregar.TabIndex = 70
@@ -1694,16 +1706,6 @@ Partial Class ProveedoresABM
         Me.txtCAIVto.ValidatingType = GetType(Date)
         Me.txtCAIVto.Visible = False
         '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(485, 500)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 97
-        Me.Button1.Text = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
-        Me.Button1.Visible = False
-        '
         'txtCAI
         '
         Me.txtCAI.Cleanable = True
@@ -1719,12 +1721,21 @@ Partial Class ProveedoresABM
         Me.txtCAI.Validator = Administracion.ValidatorType.None
         Me.txtCAI.Visible = False
         '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(426, 484)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(114, 34)
+        Me.Button2.TabIndex = 97
+        Me.Button2.Text = "Enviar Encuesta FARMA"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
         'ProveedoresABM
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(761, 528)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.btnListado)
@@ -1868,4 +1879,5 @@ Partial Class ProveedoresABM
     Friend WithEvents cmbCertificados2 As Administracion.CustomComboBox
     Friend WithEvents txtMailOp As Administracion.CustomTextBox
     Friend WithEvents CustomLabel35 As Administracion.CustomLabel
+    Friend WithEvents Button2 As System.Windows.Forms.Button
 End Class
