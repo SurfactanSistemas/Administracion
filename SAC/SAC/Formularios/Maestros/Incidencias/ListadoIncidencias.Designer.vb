@@ -55,9 +55,6 @@ Partial Class ListadoIncidencias
         Me.txtDesdeFecha = New System.Windows.Forms.MaskedTextBox()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.dgvIncidencias = New System.Windows.Forms.DataGridView()
-        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.CopiarConCabecerasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CopiarSóloDatosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Incidencia = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Renglon = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -73,6 +70,9 @@ Partial Class ListadoIncidencias
         Me.ClaveSAC = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Planta = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Empresa = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.CopiarConCabecerasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CopiarSóloDatosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -93,7 +93,7 @@ Partial Class ListadoIncidencias
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1141, 50)
+        Me.Panel1.Size = New System.Drawing.Size(1106, 50)
         Me.Panel1.TabIndex = 2
         '
         'Label2
@@ -116,7 +116,7 @@ Partial Class ListadoIncidencias
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Calibri", 15.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label1.Location = New System.Drawing.Point(988, 13)
+        Me.Label1.Location = New System.Drawing.Point(953, 13)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(143, 24)
         Me.Label1.TabIndex = 0
@@ -137,7 +137,7 @@ Partial Class ListadoIncidencias
         Me.GroupBox1.Location = New System.Drawing.Point(10, 10)
         Me.GroupBox1.Margin = New System.Windows.Forms.Padding(10)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(1121, 215)
+        Me.GroupBox1.Size = New System.Drawing.Size(1086, 215)
         Me.GroupBox1.TabIndex = 4
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Parámetros"
@@ -213,25 +213,25 @@ Partial Class ListadoIncidencias
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(790, 54)
+        Me.Button1.Location = New System.Drawing.Point(790, 51)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(181, 33)
+        Me.Button1.Size = New System.Drawing.Size(142, 33)
         Me.Button1.TabIndex = 3
         Me.Button1.Text = "EXPORTAR INDICE"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'btnNuevaIncidencia
         '
-        Me.btnNuevaIncidencia.Location = New System.Drawing.Point(926, 17)
+        Me.btnNuevaIncidencia.Location = New System.Drawing.Point(926, 14)
         Me.btnNuevaIncidencia.Name = "btnNuevaIncidencia"
-        Me.btnNuevaIncidencia.Size = New System.Drawing.Size(181, 33)
+        Me.btnNuevaIncidencia.Size = New System.Drawing.Size(142, 33)
         Me.btnNuevaIncidencia.TabIndex = 3
         Me.btnNuevaIncidencia.Text = "NUEVO IINFORME"
         Me.btnNuevaIncidencia.UseVisualStyleBackColor = True
         '
         'btnCerrar
         '
-        Me.btnCerrar.Location = New System.Drawing.Point(975, 54)
+        Me.btnCerrar.Location = New System.Drawing.Point(936, 51)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(132, 33)
         Me.btnCerrar.TabIndex = 3
@@ -240,7 +240,7 @@ Partial Class ListadoIncidencias
         '
         'btnFiltrar
         '
-        Me.btnFiltrar.Location = New System.Drawing.Point(790, 17)
+        Me.btnFiltrar.Location = New System.Drawing.Point(790, 14)
         Me.btnFiltrar.Name = "btnFiltrar"
         Me.btnFiltrar.Size = New System.Drawing.Size(132, 33)
         Me.btnFiltrar.TabIndex = 3
@@ -250,7 +250,7 @@ Partial Class ListadoIncidencias
         'GroupBox6
         '
         Me.GroupBox6.Controls.Add(Me.clbPlantas)
-        Me.GroupBox6.Location = New System.Drawing.Point(652, 86)
+        Me.GroupBox6.Location = New System.Drawing.Point(654, 86)
         Me.GroupBox6.Name = "GroupBox6"
         Me.GroupBox6.Size = New System.Drawing.Size(196, 122)
         Me.GroupBox6.TabIndex = 1
@@ -270,7 +270,7 @@ Partial Class ListadoIncidencias
         'GroupBox4
         '
         Me.GroupBox4.Controls.Add(Me.clbTipos)
-        Me.GroupBox4.Location = New System.Drawing.Point(435, 86)
+        Me.GroupBox4.Location = New System.Drawing.Point(436, 86)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(196, 122)
         Me.GroupBox4.TabIndex = 1
@@ -281,7 +281,7 @@ Partial Class ListadoIncidencias
         '
         Me.clbTipos.CheckOnClick = True
         Me.clbTipos.FormattingEnabled = True
-        Me.clbTipos.Items.AddRange(New Object() {"TODAS", "INCIDENCIA GENERAL MP/PT", "INCIDENCIA POR RECHAZO DE MP"})
+        Me.clbTipos.Items.AddRange(New Object() {"TODAS", "INCIDENCIA GENERAL MP/PT", "INCIDENCIA POR RECHAZO EN RECEPCIÓN"})
         Me.clbTipos.Location = New System.Drawing.Point(16, 18)
         Me.clbTipos.Name = "clbTipos"
         Me.clbTipos.Size = New System.Drawing.Size(164, 94)
@@ -418,7 +418,7 @@ Partial Class ListadoIncidencias
         Me.TableLayoutPanel1.RowCount = 2
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 235.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1141, 447)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1106, 447)
         Me.TableLayoutPanel1.TabIndex = 5
         '
         'dgvIncidencias
@@ -436,26 +436,8 @@ Partial Class ListadoIncidencias
         Me.dgvIncidencias.RowHeadersWidth = 15
         Me.dgvIncidencias.RowTemplate.Height = 20
         Me.dgvIncidencias.ShowCellToolTips = False
-        Me.dgvIncidencias.Size = New System.Drawing.Size(1135, 206)
+        Me.dgvIncidencias.Size = New System.Drawing.Size(1100, 206)
         Me.dgvIncidencias.TabIndex = 3
-        '
-        'ContextMenuStrip1
-        '
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopiarConCabecerasToolStripMenuItem, Me.CopiarSóloDatosToolStripMenuItem})
-        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(229, 48)
-        '
-        'CopiarConCabecerasToolStripMenuItem
-        '
-        Me.CopiarConCabecerasToolStripMenuItem.Name = "CopiarConCabecerasToolStripMenuItem"
-        Me.CopiarConCabecerasToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
-        Me.CopiarConCabecerasToolStripMenuItem.Text = "Copiar Incluyendo Cabeceras"
-        '
-        'CopiarSóloDatosToolStripMenuItem
-        '
-        Me.CopiarSóloDatosToolStripMenuItem.Name = "CopiarSóloDatosToolStripMenuItem"
-        Me.CopiarSóloDatosToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
-        Me.CopiarSóloDatosToolStripMenuItem.Text = "Copiar Sólo Datos"
         '
         'Incidencia
         '
@@ -482,7 +464,6 @@ Partial Class ListadoIncidencias
         Me.Tipo.Name = "Tipo"
         Me.Tipo.ReadOnly = True
         Me.Tipo.Visible = False
-        Me.Tipo.Width = 53
         '
         'DescTipo
         '
@@ -518,7 +499,6 @@ Partial Class ListadoIncidencias
         Me.Estado.Name = "Estado"
         Me.Estado.ReadOnly = True
         Me.Estado.Visible = False
-        Me.Estado.Width = 65
         '
         'DescEstado
         '
@@ -555,7 +535,6 @@ Partial Class ListadoIncidencias
         Me.Producto.Name = "Producto"
         Me.Producto.ReadOnly = True
         Me.Producto.Visible = False
-        Me.Producto.Width = 75
         '
         'Lote
         '
@@ -565,7 +544,6 @@ Partial Class ListadoIncidencias
         Me.Lote.Name = "Lote"
         Me.Lote.ReadOnly = True
         Me.Lote.Visible = False
-        Me.Lote.Width = 91
         '
         'ClaveSAC
         '
@@ -592,11 +570,29 @@ Partial Class ListadoIncidencias
         Me.Empresa.ReadOnly = True
         Me.Empresa.Visible = False
         '
+        'ContextMenuStrip1
+        '
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopiarConCabecerasToolStripMenuItem, Me.CopiarSóloDatosToolStripMenuItem})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(229, 48)
+        '
+        'CopiarConCabecerasToolStripMenuItem
+        '
+        Me.CopiarConCabecerasToolStripMenuItem.Name = "CopiarConCabecerasToolStripMenuItem"
+        Me.CopiarConCabecerasToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
+        Me.CopiarConCabecerasToolStripMenuItem.Text = "Copiar Incluyendo Cabeceras"
+        '
+        'CopiarSóloDatosToolStripMenuItem
+        '
+        Me.CopiarSóloDatosToolStripMenuItem.Name = "CopiarSóloDatosToolStripMenuItem"
+        Me.CopiarSóloDatosToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
+        Me.CopiarSóloDatosToolStripMenuItem.Text = "Copiar Sólo Datos"
+        '
         'ListadoIncidencias
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1141, 497)
+        Me.ClientSize = New System.Drawing.Size(1106, 497)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Controls.Add(Me.Panel1)
         Me.Name = "ListadoIncidencias"

@@ -139,6 +139,8 @@ Public Class ListadoIncidencias : Implements INuevaIncidencia, ISeleccionNuevaIn
 
     Private Sub btnFiltrar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnFiltrar.Click
 
+        ExecuteNonQueries("UPDATE CargaIncidencias SET EmpresaIncidencia = Empresa WHERE EmpresaIncidencia IS NULL")
+
         Dim WDesdeFecha As String = ordenaFecha(txtDesdeFecha.Text)
         Dim WHastaFecha As String = ordenaFecha(txtHastaFecha.Text)
 
@@ -191,8 +193,8 @@ Public Class ListadoIncidencias : Implements INuevaIncidencia, ISeleccionNuevaIn
         End If
 
         Dim ZSql = ""
-        ZSql = "SELECT Incidencia, Fecha, Tipo, Estado, Titulo, Referencia, DescTipo = CASE ISNULL(Tipo, 0) WHEN 1 THEN 'General' WHEN 2 THEN 'Rechazo MP' ELSE '' END, " _
-            & " DescEstado = CASE ISNULL(Estado, 0) WHEN 1 THEN 'Genera SAC' WHEN 2 THEN 'No Genera SAC' ELSE 'Pend. Análisis' END, ISNULL(Empresa, 0) Empresa " _
+        ZSql = "SELECT Incidencia, Fecha, Tipo, Estado, Titulo, Referencia, DescTipo = CASE ISNULL(Tipo, 0) WHEN 1 THEN 'General' WHEN 2 THEN 'Rechazo Recepción' ELSE '' END, " _
+            & " DescEstado = CASE ISNULL(Estado, 0) WHEN 1 THEN 'Genera SAC' WHEN 2 THEN 'No Genera SAC' ELSE 'Pend. Análisis' END, ISNULL(EmpresaIncidencia, Empresa) Empresa " _
             & " FROM CargaIncidencias WHERE Renglon = 1 "
 
         If Val(WDesdeFecha) <> 0 And Val(WHastaFecha) <> 0 Then
@@ -201,7 +203,7 @@ Public Class ListadoIncidencias : Implements INuevaIncidencia, ISeleccionNuevaIn
 
         If WFiltroEstados.Trim <> "" Then ZSql &= " And Estado IN (" & WFiltroEstados & ") "
         If WFiltroTipos.Trim <> "" Then ZSql &= " And Tipo IN (" & WFiltroTipos & ") "
-        If WFiltroPlantas.Trim <> "" Then ZSql &= " And Empresa IN (" & WFiltroPlantas & ") "
+        If WFiltroPlantas.Trim <> "" Then ZSql &= " And EmpresaIncidencia IN (" & WFiltroPlantas & ") "
 
         ZSql &= " Order by "
         ZSql &= _GenerarStringOrdenamiento(cmbOrdenI)

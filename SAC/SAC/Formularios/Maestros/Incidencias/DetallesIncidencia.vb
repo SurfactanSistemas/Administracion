@@ -70,6 +70,8 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
         cmbEstado.SelectedIndex = 0
         btnSac.Text = TextoBtnGenerarSac '"Generar/Asociar SAC"
 
+        cmbEmpresaIncidencia.SelectedIndex = 0
+
         Dim WIncidencia As Integer = 0
 
         Dim WIncid As DataRow = GetSingle("SELECT Max(Incidencia) Ultimo FROM CargaIncidencias")
@@ -167,6 +169,8 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
                         rbMatPrima.Checked = WTipoProd = "M"
                         rbVario.Checked = WTipoProd = "V"
 
+                        cmbEmpresaIncidencia.SelectedIndex = OrDefault(.Item("EmpresaIncidencia"), 0)
+
                         rbProdTerminado_Click(Nothing, Nothing)
                         txtProducto.Text = OrDefault(.Item("Producto"), "")
                         txtProducto_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
@@ -221,7 +225,7 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
 
     End Sub
 
-    Private Sub cmbEstado_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles cmbEstado.KeyDown
+    Private Sub cmbEstado_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles cmbEstado.KeyDown, cmbEmpresaIncidencia.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Trim(cmbEstado.Text) = "" Then : Exit Sub : End If
@@ -234,7 +238,7 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
 
     End Sub
 
-    Private Sub cmbEstado_DropDownClosed(ByVal sender As Object, ByVal e As EventArgs) Handles cmbEstado.DropDownClosed
+    Private Sub cmbEstado_DropDownClosed(ByVal sender As Object, ByVal e As EventArgs) Handles cmbEstado.DropDownClosed, cmbEmpresaIncidencia.DropDownClosed
         cmbEstado_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
     End Sub
 
@@ -348,6 +352,7 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
 
             If WProd IsNot Nothing Then
                 WEmpresaProd = _IdEmpresaSegunBase(emp)
+                If cmbEmpresaIncidencia.SelectedIndex < 1 Then cmbEmpresaIncidencia.SelectedIndex = WEmpresaProd
                 Exit For
             End If
 
@@ -439,10 +444,10 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
             WSqls.Add("DELETE CargaIncidencias WHERE Incidencia = '" & txtIncidencia.Text & "'")
 
             Dim ZSql = String.Format("INSERT INTO CargaIncidencias " _
-                       & "(Incidencia, Renglon, Tipo, Fecha, FechaOrd, Estado, Titulo, Referencia, Producto, Lote, ClaveSac, TipoProd, Posiblesusos, Motivos, Empresa, Proveedor, Orden, DescProveedor) " _
+                       & "(Incidencia, Renglon, Tipo, Fecha, FechaOrd, Estado, Titulo, Referencia, Producto, Lote, ClaveSac, TipoProd, Posiblesusos, Motivos, Empresa, Proveedor, Orden, DescProveedor, EmpresaIncidencia) " _
                        & "VALUES " _
-                       & " ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}') ", _
-                       txtIncidencia.Text, 1, WTipo, txtFecha.Text, ordenaFecha(txtFecha.Text), WEstado, txtTitulo.Text, txtReferencia.Text, txtProducto.Text, txtLotePartida.Text, WClaveSAC, WTipoProd, txtPosiblesUsos.Text, txtMotivos.Text, WEmpresaProd, "", "", "")
+                       & " ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}', '{18}') ", _
+                       txtIncidencia.Text, 1, WTipo, txtFecha.Text, ordenaFecha(txtFecha.Text), WEstado, txtTitulo.Text, txtReferencia.Text, txtProducto.Text, txtLotePartida.Text, WClaveSAC, WTipoProd, txtPosiblesUsos.Text, txtMotivos.Text, WEmpresaProd, "", "", "", cmbEmpresaIncidencia.SelectedIndex)
             WSqls.Add(ZSql)
 
             ExecuteNonQueries(WSqls.ToArray)

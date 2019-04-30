@@ -321,10 +321,20 @@ namespace Vista
 
             TBNumRemito.Text = _TraerProximoNumeroRemitoPorEstacionDeTrabajo().ToString();
 
-            if (Cs.RemitoExistente(TBNumRemito.Text.Trim())) {
-                MessageBox.Show("El Número de remito ya fue utilizado con anterioridad y no puede volver a utilizarse. Por favor, avise a Sistemas para que actualice la numeración de los Remitos.", "",MessageBoxButtons.OK, MessageBoxIcon.Information);
-                TBNumRemito.Focus();
-                return;
+            int WIntentos = 0;
+
+            while (Cs.RemitoExistente(TBNumRemito.Text.Trim()) && WIntentos <= 10)
+            {
+                WIntentos++;
+                TBNumRemito.Text = _TraerProximoNumeroRemitoPorEstacionDeTrabajo().ToString();
+            }
+
+            if (Cs.RemitoExistente(TBNumRemito.Text.Trim()))
+            {
+                TBNumRemito.Text = _TraerProximoNumeroRemitoPorEstacionDeTrabajo().ToString();
+                //MessageBox.Show("El Número de remito ya fue utilizado con anterioridad y no puede volver a utilizarse. Por favor, avise a Sistemas para que actualice la numeración de los Remitos.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //TBNumRemito.Focus();
+                //return;
             }
 
             try

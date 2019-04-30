@@ -69,20 +69,20 @@ Partial Class SeleccionTipoIncidencia
         '
         'btnInformeGral
         '
-        Me.btnInformeGral.Location = New System.Drawing.Point(58, 74)
+        Me.btnInformeGral.Location = New System.Drawing.Point(31, 74)
         Me.btnInformeGral.Name = "btnInformeGral"
-        Me.btnInformeGral.Size = New System.Drawing.Size(156, 54)
+        Me.btnInformeGral.Size = New System.Drawing.Size(194, 54)
         Me.btnInformeGral.TabIndex = 1
         Me.btnInformeGral.Text = "INFORME GENERAL"
         Me.btnInformeGral.UseVisualStyleBackColor = True
         '
         'btnInformeRechazo
         '
-        Me.btnInformeRechazo.Location = New System.Drawing.Point(245, 74)
+        Me.btnInformeRechazo.Location = New System.Drawing.Point(233, 74)
         Me.btnInformeRechazo.Name = "btnInformeRechazo"
-        Me.btnInformeRechazo.Size = New System.Drawing.Size(156, 54)
+        Me.btnInformeRechazo.Size = New System.Drawing.Size(194, 54)
         Me.btnInformeRechazo.TabIndex = 2
-        Me.btnInformeRechazo.Text = "INFORME POR RECHAZO DE MATERIA PRIMA"
+        Me.btnInformeRechazo.Text = "INFORME POR RECHAZO EN RECEPCIÓN"
         Me.btnInformeRechazo.UseVisualStyleBackColor = True
         '
         'SeleccionTipoIncidencia

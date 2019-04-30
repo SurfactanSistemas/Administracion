@@ -211,6 +211,7 @@
             // 
             this.TB_Responsable.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Responsable.Location = new System.Drawing.Point(128, 177);
+            this.TB_Responsable.MaxLength = 20;
             this.TB_Responsable.Name = "TB_Responsable";
             this.TB_Responsable.Size = new System.Drawing.Size(99, 20);
             this.TB_Responsable.TabIndex = 34;
@@ -229,6 +230,7 @@
             // 
             this.TB_Detalle_3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Detalle_3.Location = new System.Drawing.Point(128, 143);
+            this.TB_Detalle_3.MaxLength = 50;
             this.TB_Detalle_3.Name = "TB_Detalle_3";
             this.TB_Detalle_3.Size = new System.Drawing.Size(357, 20);
             this.TB_Detalle_3.TabIndex = 32;
@@ -238,6 +240,7 @@
             // 
             this.TB_Detalle_2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Detalle_2.Location = new System.Drawing.Point(128, 117);
+            this.TB_Detalle_2.MaxLength = 50;
             this.TB_Detalle_2.Name = "TB_Detalle_2";
             this.TB_Detalle_2.Size = new System.Drawing.Size(357, 20);
             this.TB_Detalle_2.TabIndex = 31;
@@ -247,6 +250,7 @@
             // 
             this.TB_Detalle_1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Detalle_1.Location = new System.Drawing.Point(128, 91);
+            this.TB_Detalle_1.MaxLength = 50;
             this.TB_Detalle_1.Name = "TB_Detalle_1";
             this.TB_Detalle_1.Size = new System.Drawing.Size(357, 20);
             this.TB_Detalle_1.TabIndex = 29;
@@ -307,6 +311,7 @@
             // 
             this.TB_Descripcion.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Descripcion.Location = new System.Drawing.Point(128, 56);
+            this.TB_Descripcion.MaxLength = 90;
             this.TB_Descripcion.Name = "TB_Descripcion";
             this.TB_Descripcion.Size = new System.Drawing.Size(357, 20);
             this.TB_Descripcion.TabIndex = 7;

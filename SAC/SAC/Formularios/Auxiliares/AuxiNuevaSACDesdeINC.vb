@@ -1,4 +1,6 @@
 ﻿Imports System.ComponentModel
+Imports System.IO
+Imports Microsoft.Office.Interop.Outlook
 
 Public Class AuxiNuevaSACDesdeINC
 
@@ -7,6 +9,7 @@ Public Class AuxiNuevaSACDesdeINC
     Private WResponsables As New DataTable
     Private WEmisores As New DataTable
     Private WCentros As New DataTable
+    Private WNumero As Integer = 0
 
     Sub New(ByVal _Incidencia, ByVal _Fecha, ByVal _Titulo, ByVal _Referencia, ByVal _Motivo, Optional ByVal _Comentarios = "")
 
@@ -31,6 +34,8 @@ Public Class AuxiNuevaSACDesdeINC
         txtTitulo.Text = WTitulo
         txtReferencia.Text = WReferencia
         txtMotivo.Text = WMotivo
+
+        WNumero = 0
 
         BackgroundWorker1.RunWorkerAsync()
 
@@ -105,8 +110,9 @@ Public Class AuxiNuevaSACDesdeINC
         Try
 
             Dim WTipo As String = OrDefault(CType(cmbTipo.SelectedItem, DataRowView).Item("Codigo"), 0)
+            Dim WDescTipo As String = OrDefault(CType(cmbTipo.SelectedItem, DataRowView).Item("Descripcion"), "")
             Dim WAnio As String = Microsoft.VisualBasic.Right(txtFecha.Text, 4)
-            Dim WNumero = 0
+            WNumero = 0
 
             Dim WUltimo As DataRow = GetSingle("SELECT Max(Numero) Ultimo FROM CargaSAC WHERE Tipo = '" & WTipo & "' And Ano = '" & WAnio & "'")
 
@@ -134,14 +140,102 @@ Public Class AuxiNuevaSACDesdeINC
 
             ExecuteNonQueries(ZSQL, "UPDATE CargaSacAdicional SET Dato1 = '" & WComentarios & "' WHERE Clave = '" & WClave & "'", "UPDATE CargaIncidencias SET ClaveSAC = '" & WClave & "', EsSACAsociada = '0' WHERE Incidencia = '" & WRefIncidencia & "'")
 
+            '
+            ' Enviamos emails.
+            '
+            Dim WCent As DataRow = GetSingle("SELECT Responsable FROM CentroSac WHERE Codigo = '" & WCentro & "'")
+
+            If WCent IsNot Nothing Then
+
+                Dim WResp As DataRow = GetSingle("SELECT Email FROM ResponsableSAC WHERE Codigo = '" & OrDefault(WCent.Item("Responsable"), 0) & "'")
+
+                If WResp IsNot Nothing AndAlso Trim(OrDefault(WResp.Item("Email"), "")) <> "" Then
+
+                    If MsgBox("¿Desea enviar el aviso al Responsable del Área?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+
+                        _EnviarEmail(WResp.Item("Email"), "Carga de " & Trim(WDescTipo), "Se inicio una " & Trim(WDescTipo) & " : " & WAnio & "/" & WNumero & " para determinar CAUSAS y Acciones Correctivas correspondientes. Referencia : " & txtReferencia.Text.Trim & " Título : " & txtTitulo.Text.Trim)
+
+                    End If
+
+                End If
+
+            End If
+
+            If Val(WResponsable) <> 0 Then
+
+                Dim WResp As DataRow = GetSingle("SELECT Email FROM ResponsableSAC WHERE Codigo = '" & WResponsable & "'")
+
+                If WResp IsNot Nothing AndAlso Trim(OrDefault(WResp.Item("Email"), "")) <> "" Then
+
+                    If MsgBox("¿Desea enviar el aviso al Responsable de Investigación?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+
+                        _EnviarEmail(WResp.Item("Email"), "Carga de " & Trim(WDescTipo), "Se inicio una " & Trim(WDescTipo) & " : " & WAnio & "/" & WNumero & " para determinar CAUSAS y Acciones Correctivas correspondientes. Referencia : " & txtReferencia.Text.Trim & " Título : " & txtTitulo.Text.Trim)
+
+                    End If
+
+                End If
+
+            End If
+
+            If MsgBox("¿Desea enviar el aviso al Responsable de Calidad?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+
+                _EnviarEmail("ebiglieri@surfactan.com.ar; calidad@surfactan.com.ar; wbarosio@surfactan.com.ar; calidad2@surfactan.com.ar; isocalidad@surfactan.com.ar;juanfs@surfactan.com.ar; lsantos@surfactan.com.ar; drodriguez@surfactan.com.ar", "Carga de " & Trim(WDescTipo), "Se inicio una " & Trim(WDescTipo) & " : " & WAnio & "/" & WNumero & " para determinar CAUSAS y Acciones Correctivas correspondientes. Referencia : " & txtReferencia.Text.Trim & " Título : " & txtTitulo.Text.Trim)
+
+            End If
+
             Dim WOwner As IAuxiNuevaSACDesdeINC = CType(Owner, IAuxiNuevaSACDesdeINC)
 
             If WOwner IsNot Nothing Then WOwner._ProcesarNuevaSACDesdeINC(WClave)
 
             Close()
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+        End Try
+    End Sub
+
+    Private Sub _EnviarEmail(ByVal Direccion As String, ByVal Subject As String, ByVal Body As String, Optional ByVal EnvioAutomatico As Boolean = False)
+        Dim oApp As _Application
+        Dim oMsg As _MailItem
+
+        Try
+            oApp = New Application()
+
+            oMsg = oApp.CreateItem(OlItemType.olMailItem)
+            oMsg.Subject = Subject
+            oMsg.Body = Body
+
+            ' Modificar por los E-Mails que correspondan.
+            oMsg.To = Direccion
+
+            Dim WTipo As String = cmbTipo.SelectedIndex
+            Dim WAnio As String = Mid(txtFecha.Text, 7, 4) 'txtAnio.Text
+
+            Dim frm As New ConsultasVarias.VistaPrevia
+
+            With frm
+
+                .Reporte = New NuevoSACAmbos
+
+                .Formula = "{CargaSac.Tipo} = " & WTipo & " And {CargaSac.Numero} = " & WNumero & " And {CargaSac.Ano} = " & WAnio & ""
+
+            End With
+
+            ConsultasVarias.Clases.Conexion.EmpresaDeTrabajo = "SurfactanSa"
+            ConsultasVarias.Clases.Helper._ExportarReporte(frm, ConsultasVarias.Clases.Enumeraciones.FormatoExportacion.PDF, WTipo & WNumero & WAnio & ".pdf", "C:\TempReclamos\")
+
+            If File.Exists("C:\TempReclamos\" & WTipo & WNumero & WAnio & ".pdf") Then
+                oMsg.Attachments.Add("C:\TempReclamos\" & WTipo & WNumero & WAnio & ".pdf")
+            End If
+
+            If EnvioAutomatico Then
+                oMsg.Send()
+            Else
+                oMsg.Display()
+            End If
+
+        Catch ex As System.Exception
+            Throw New System.Exception("No se pudo crear el E-Mail solicitado." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
         End Try
     End Sub
 

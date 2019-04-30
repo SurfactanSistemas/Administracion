@@ -1604,7 +1604,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
                 If MsgBox("¿Desea enviar el aviso al Responsable de Calidad?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
 
-                    _EnviarEmail("ebiglieri@surfactan.com.ar; calidad@surfactan.com.ar; wbarosio@surfactan.com.ar", "Carga de " & lblDescTipo.Text & +" Nro.:" + txtNumero.Text + " - " + Microsoft.VisualBasic.Left(txtReferencia.Text, 50), "Se inició una " & lblDescTipo.Text.Trim & " : " & txtAnio.Text & "/" & txtNumero.Text & " para determinar CAUSAS y Acciones Correctivas correspondientes. Referencia : " & txtReferencia.Text.Trim & " Título : " & txtTitulo.Text.Trim)
+                    _EnviarEmail("ebiglieri@surfactan.com.ar; calidad@surfactan.com.ar; wbarosio@surfactan.com.ar; calidad2@surfactan.com.ar; isocalidad@surfactan.com.ar;juanfs@surfactan.com.ar; lsantos@surfactan.com.ar; drodriguez@surfactan.com.ar", "Carga de " & lblDescTipo.Text & +" Nro.:" + txtNumero.Text + " - " + Microsoft.VisualBasic.Left(txtReferencia.Text, 50), "Se inició una " & lblDescTipo.Text.Trim & " : " & txtAnio.Text & "/" & txtNumero.Text & " para determinar CAUSAS y Acciones Correctivas correspondientes. Referencia : " & txtReferencia.Text.Trim & " Título : " & txtTitulo.Text.Trim)
 
                 End If
 
@@ -1653,6 +1653,27 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
             ' Modificar por los E-Mails que correspondan.
             oMsg.To = Direccion
+
+            Dim WTipo As String = txtTipo.Text
+            Dim WNumero As String = txtNumero.Text
+            Dim WAnio As String = txtAnio.Text
+            
+            Dim frm As New ConsultasVarias.VistaPrevia
+
+            With frm
+
+                .Reporte = New NuevoSACAmbos
+
+                .Formula = "{CargaSac.Tipo} = " & WTipo & " And {CargaSac.Numero} = " & WNumero & " And {CargaSac.Ano} = " & WAnio & ""
+
+            End With
+
+            ConsultasVarias.Clases.Conexion.EmpresaDeTrabajo = "SurfactanSa"
+            ConsultasVarias.Clases.Helper._ExportarReporte(frm, ConsultasVarias.Clases.Enumeraciones.FormatoExportacion.PDF, WTipo & WNumero & WAnio & ".pdf", "C:\TempReclamos\")
+
+            If File.Exists("C:\TempReclamos\" & WTipo & WNumero & WAnio & ".pdf") Then
+                oMsg.Attachments.Add("C:\TempReclamos\" & WTipo & WNumero & WAnio & ".pdf")
+            End If
 
             If EnvioAutomatico Then
                 oMsg.Send()

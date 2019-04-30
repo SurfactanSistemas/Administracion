@@ -31,6 +31,7 @@ Partial Class DetallesIncidenciaRechazoMP
         Me.btnMPAsociadasOC = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.btnSac = New System.Windows.Forms.Button()
+        Me.cmbEmpresaIncidencia = New System.Windows.Forms.ComboBox()
         Me.cmbEmpresa = New System.Windows.Forms.ComboBox()
         Me.cmbEstado = New System.Windows.Forms.ComboBox()
         Me.txtFecha = New System.Windows.Forms.MaskedTextBox()
@@ -43,6 +44,7 @@ Partial Class DetallesIncidenciaRechazoMP
         Me.txtDescMP = New System.Windows.Forms.TextBox()
         Me.txtDescProv = New System.Windows.Forms.TextBox()
         Me.txtIncidencia = New System.Windows.Forms.TextBox()
+        Me.Label14 = New System.Windows.Forms.Label()
         Me.txtTitulo = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
@@ -115,9 +117,9 @@ Partial Class DetallesIncidenciaRechazoMP
         Me.Label2.ForeColor = System.Drawing.SystemColors.Control
         Me.Label2.Location = New System.Drawing.Point(25, 16)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(422, 18)
+        Me.Label2.Size = New System.Drawing.Size(392, 18)
         Me.Label2.TabIndex = 0
-        Me.Label2.Text = "INFORME DE NO CONFORMIDAD POR RECHAZO DE MATERIA PRIMA"
+        Me.Label2.Text = "INFORME DE NO CONFORMIDAD POR RECHAZO EN RECEPCIÓN"
         '
         'Label1
         '
@@ -138,6 +140,7 @@ Partial Class DetallesIncidenciaRechazoMP
         Me.GroupBox1.Controls.Add(Me.btnMPAsociadasOC)
         Me.GroupBox1.Controls.Add(Me.Button3)
         Me.GroupBox1.Controls.Add(Me.btnSac)
+        Me.GroupBox1.Controls.Add(Me.cmbEmpresaIncidencia)
         Me.GroupBox1.Controls.Add(Me.cmbEmpresa)
         Me.GroupBox1.Controls.Add(Me.cmbEstado)
         Me.GroupBox1.Controls.Add(Me.txtFecha)
@@ -150,6 +153,7 @@ Partial Class DetallesIncidenciaRechazoMP
         Me.GroupBox1.Controls.Add(Me.txtDescMP)
         Me.GroupBox1.Controls.Add(Me.txtDescProv)
         Me.GroupBox1.Controls.Add(Me.txtIncidencia)
+        Me.GroupBox1.Controls.Add(Me.Label14)
         Me.GroupBox1.Controls.Add(Me.txtTitulo)
         Me.GroupBox1.Controls.Add(Me.Label12)
         Me.GroupBox1.Controls.Add(Me.Label13)
@@ -203,13 +207,23 @@ Partial Class DetallesIncidenciaRechazoMP
         Me.btnSac.Text = "Ver SAC Asociada"
         Me.btnSac.UseVisualStyleBackColor = True
         '
+        'cmbEmpresaIncidencia
+        '
+        Me.cmbEmpresaIncidencia.DropDownWidth = 200
+        Me.cmbEmpresaIncidencia.FormattingEnabled = True
+        Me.cmbEmpresaIncidencia.Items.AddRange(New Object() {"", "S I", "P I", "S II", "P II", "S III", "S IV", "S V", "P III", "P V", "S VI", "S VII"})
+        Me.cmbEmpresaIncidencia.Location = New System.Drawing.Point(79, 69)
+        Me.cmbEmpresaIncidencia.Name = "cmbEmpresaIncidencia"
+        Me.cmbEmpresaIncidencia.Size = New System.Drawing.Size(63, 21)
+        Me.cmbEmpresaIncidencia.TabIndex = 4
+        '
         'cmbEmpresa
         '
         Me.cmbEmpresa.DropDownWidth = 200
         Me.cmbEmpresa.FormattingEnabled = True
-        Me.cmbEmpresa.Location = New System.Drawing.Point(490, 18)
+        Me.cmbEmpresa.Location = New System.Drawing.Point(507, 18)
         Me.cmbEmpresa.Name = "cmbEmpresa"
-        Me.cmbEmpresa.Size = New System.Drawing.Size(107, 21)
+        Me.cmbEmpresa.Size = New System.Drawing.Size(95, 21)
         Me.cmbEmpresa.TabIndex = 4
         '
         'cmbEstado
@@ -270,7 +284,7 @@ Partial Class DetallesIncidenciaRechazoMP
         '
         'txtProducto
         '
-        Me.txtProducto.Location = New System.Drawing.Point(79, 71)
+        Me.txtProducto.Location = New System.Drawing.Point(207, 70)
         Me.txtProducto.Mask = ">LL-00000-000"
         Me.txtProducto.Name = "txtProducto"
         Me.txtProducto.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -283,9 +297,8 @@ Partial Class DetallesIncidenciaRechazoMP
         '
         Me.txtCantidadMP.BackColor = System.Drawing.Color.Cyan
         Me.txtCantidadMP.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCantidadMP.Location = New System.Drawing.Point(682, 71)
+        Me.txtCantidadMP.Location = New System.Drawing.Point(761, 69)
         Me.txtCantidadMP.Name = "txtCantidadMP"
-        Me.txtCantidadMP.ReadOnly = True
         Me.txtCantidadMP.Size = New System.Drawing.Size(77, 20)
         Me.txtCantidadMP.TabIndex = 1
         Me.txtCantidadMP.TabStop = False
@@ -294,10 +307,10 @@ Partial Class DetallesIncidenciaRechazoMP
         'txtDescMP
         '
         Me.txtDescMP.BackColor = System.Drawing.Color.Cyan
-        Me.txtDescMP.Location = New System.Drawing.Point(163, 71)
+        Me.txtDescMP.Location = New System.Drawing.Point(291, 70)
         Me.txtDescMP.Name = "txtDescMP"
         Me.txtDescMP.ReadOnly = True
-        Me.txtDescMP.Size = New System.Drawing.Size(455, 20)
+        Me.txtDescMP.Size = New System.Drawing.Size(401, 20)
         Me.txtDescMP.TabIndex = 1
         Me.txtDescMP.TabStop = False
         '
@@ -319,6 +332,15 @@ Partial Class DetallesIncidenciaRechazoMP
         Me.txtIncidencia.TabIndex = 1
         Me.txtIncidencia.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(11, 73)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(62, 13)
+        Me.Label14.TabIndex = 0
+        Me.Label14.Text = "Origen INC:"
+        '
         'txtTitulo
         '
         Me.txtTitulo.Location = New System.Drawing.Point(79, 96)
@@ -332,14 +354,14 @@ Partial Class DetallesIncidenciaRechazoMP
         Me.Label12.AutoSize = True
         Me.Label12.Location = New System.Drawing.Point(438, 22)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(51, 13)
+        Me.Label12.Size = New System.Drawing.Size(69, 13)
         Me.Label12.TabIndex = 0
-        Me.Label12.Text = "Empresa:"
+        Me.Label12.Text = "Empresa OC:"
         '
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(624, 75)
+        Me.Label13.Location = New System.Drawing.Point(703, 73)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(52, 13)
         Me.Label13.TabIndex = 0
@@ -348,7 +370,7 @@ Partial Class DetallesIncidenciaRechazoMP
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(20, 75)
+        Me.Label6.Location = New System.Drawing.Point(148, 74)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(53, 13)
         Me.Label6.TabIndex = 0
@@ -807,4 +829,6 @@ Partial Class DetallesIncidenciaRechazoMP
     Friend WithEvents btnDesvincularSAC As System.Windows.Forms.Button
     Friend WithEvents btnEliminar As System.Windows.Forms.Button
     Friend WithEvents btnModifNumINC As System.Windows.Forms.Button
+    Friend WithEvents cmbEmpresaIncidencia As System.Windows.Forms.ComboBox
+    Friend WithEvents Label14 As System.Windows.Forms.Label
 End Class

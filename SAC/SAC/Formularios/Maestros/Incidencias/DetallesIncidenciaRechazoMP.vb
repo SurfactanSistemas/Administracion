@@ -128,6 +128,8 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
         btnSac.Enabled = MostrarBotonVerSac
         txtIncidencia.Enabled = MostrarBotonVerSac
 
+        cmbEmpresaIncidencia.SelectedIndex = 0
+
         btnDesvincularSAC.Enabled = btnSac.Text = TextoBtnVerSac
 
         WPrimeraCarga = True
@@ -191,8 +193,10 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
                         'rbProdTerminado.Checked = OrDefault(.Item("TipoProd"), "M") = "T"
                         'rbProdTerminado_Click(Nothing, Nothing)
                         txtProducto.Text = OrDefault(.Item("Producto"), "")
+                        txtCantidadMP.Text = formatonumerico(OrDefault(.Item("CantOrden"), "0"))
                         'txtLotePartida.Text = OrDefault(.Item("Lote"), "")
                         'txtProducto_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+                        cmbEmpresaIncidencia.SelectedIndex = OrDefault(.Item("EmpresaIncidencia"), 0)
                         txtTitulo.Text = OrDefault(.Item("Titulo"), "")
                         txtReferencia.Text = OrDefault(.Item("Referencia"), "")
                         txtMotivos.Text = OrDefault(.Item("Motivos"), "")
@@ -281,6 +285,8 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
 
             txtOrden.Focus()
 
+            If cmbEmpresaIncidencia.SelectedIndex < 1 Then cmbEmpresaIncidencia.SelectedIndex = cmbEmpresa.SelectedIndex
+
         ElseIf e.KeyData = Keys.Escape Then
             cmbEmpresa.SelectedIndex = 0
         End If
@@ -310,7 +316,7 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
             If IsNothing(WProd) Then Exit Sub
 
             txtDescMP.Text = OrDefault(WProd.Item("Descripcion"), "").ToString.Trim
-            txtCantidadMP.Text = formatonumerico(OrDefault(WProd.Item("Cantidad"), 0))
+            If Val(txtCantidadMP.Text) = 0 Then txtCantidadMP.Text = formatonumerico(OrDefault(WProd.Item("Cantidad"), 0))
 
             btnControles.Enabled = Val(txtLotePartida.Text) <> 0
             btnHojaProduccion.Enabled = rbProdTerminado.Checked
@@ -483,10 +489,10 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
             WSqls.Add("DELETE CargaIncidencias WHERE Incidencia = '" & txtIncidencia.Text & "'")
 
             Dim ZSql = String.Format("INSERT INTO CargaIncidencias " _
-                       & "(Incidencia, Renglon, Tipo, Fecha, FechaOrd, Estado, Titulo, Referencia, Producto, Lote, ClaveSac, TipoProd, Motivos, Empresa, Orden, Acciones, Proveedor, DescProveedor, ImpreDescProd) " _
+                       & "(Incidencia, Renglon, Tipo, Fecha, FechaOrd, Estado, Titulo, Referencia, Producto, Lote, ClaveSac, TipoProd, Motivos, Empresa, Orden, Acciones, Proveedor, DescProveedor, ImpreDescProd, CantOrden, EmpresaIncidencia) " _
                        & "VALUES " _
-                       & " ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}','{18}') ", _
-                       txtIncidencia.Text, 1, WTipo, txtFecha.Text, ordenaFecha(txtFecha.Text), WEstado, txtTitulo.Text, txtReferencia.Text, txtProducto.Text, txtLotePartida.Text, WClaveSAC, IIf(rbMatPrima.Checked, "M", "T"), txtMotivos.Text, WEmpresa, WOrden, txtAcciones.Text, txtProveedor.Text, txtDescProv.Text.SliceLeft(100), txtDescProducto.Text.SliceLeft(100))
+                       & " ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}','{18}', '{19}', '{20}') ", _
+                       txtIncidencia.Text, 1, WTipo, txtFecha.Text, ordenaFecha(txtFecha.Text), WEstado, txtTitulo.Text, txtReferencia.Text, txtProducto.Text, txtLotePartida.Text, WClaveSAC, IIf(rbMatPrima.Checked, "M", "T"), txtMotivos.Text, WEmpresa, WOrden, txtAcciones.Text, txtProveedor.Text, txtDescProv.Text.SliceLeft(100), txtDescProducto.Text.SliceLeft(100), formatonumerico(txtCantidadMP.Text), cmbEmpresaIncidencia.SelectedIndex)
             WSqls.Add(ZSql)
 
             ExecuteNonQueries(WSqls.ToArray)
@@ -496,7 +502,7 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
                 If MsgBox("¿Desea enviar el aviso al Responsable de Calidad?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes _
                     Then
 
-                    _EnviarEmail("ebiglieri@surfactan.com.ar; calidad@surfactan.com.ar; wbarosio@surfactan.com.ar",
+                    _EnviarEmail("ebiglieri@surfactan.com.ar; calidad@surfactan.com.ar; wbarosio@surfactan.com.ar; calidad2@surfactan.com.ar; isocalidad@surfactan.com.ar;juanfs@surfactan.com.ar; lsantos@surfactan.com.ar; drodriguez@surfactan.com.ar",
                                  "Carga de Informe de No Conformidad - Nro.:" + txtIncidencia.Text.PadLeft(4, "0") +
                                  " - " + Microsoft.VisualBasic.Left(txtReferencia.Text, 50),
                                  "Se inició un Informe de No Conformidad : " & txtIncidencia.Text.PadLeft(4, "0") &
@@ -1202,4 +1208,20 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
 
         btnEliminar.PerformClick()
     End Sub
+
+    Private Sub txtCantidadMP_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCantidadMP.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            'If Trim(txtCantidadMP.Text) = "" Then : Exit Sub : End If
+
+            txtCantidadMP.Text = formatonumerico(txtCantidadMP.Text)
+
+            txtTitulo.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtCantidadMP.Text = ""
+        End If
+
+    End Sub
+
 End Class
