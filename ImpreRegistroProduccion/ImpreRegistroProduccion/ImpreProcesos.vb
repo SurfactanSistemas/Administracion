@@ -125,7 +125,7 @@ Public Class ImpreProcesos
 
     Private Sub _GenerarCertificadoAnalisisFarma(ByVal WTipoReporte As Integer, ByVal wPartida As Integer, ByVal wTipoSalida As Integer)
 
-        Dim frm As ReportDocument
+        Dim frm As New ReportDocument
         Dim WFormulas() As String
         Dim WNombreArchivoFormulas As String = "C:\ImpreCertificados\" & wPartida
         '
