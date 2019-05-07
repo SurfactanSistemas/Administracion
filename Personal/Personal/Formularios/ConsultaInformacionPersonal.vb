@@ -62,6 +62,7 @@ Public Class ConsultaInformacionPersonal
 
         txtFechaAux.Visible=False
         pnlConsulta.Visible = False
+        pnlResumen.Visible = False
     End Sub
 
     Private Function _CamposDeTexto() As TextBox()
@@ -433,55 +434,38 @@ Public Class ConsultaInformacionPersonal
                             ' Grabamos Primaria.
                             WEstado = IIf(IsDBNull(.Item("EstaI")), "", .Item("EstaI"))
 
-                            Select Case Val(WEstado)
-                                Case 1, 2, 8
+                            WFilaFormacion = dgvEducacion.Rows.Add
 
-                                    WFilaFormacion = dgvEducacion.Rows.Add
+                            dgvEducacion.Rows(WFilaFormacion).Cells("TipoFormacion").Value = "Primaria"
+                            dgvEducacion.Rows(WFilaFormacion).Cells("TituloFormacion").Value = ""
+                            dgvEducacion.Rows(WFilaFormacion).Cells("IdFormacion").Value = "1"
 
-                                    dgvEducacion.Rows(WFilaFormacion).Cells("TipoFormacion").Value = "Primaria"
-                                    dgvEducacion.Rows(WFilaFormacion).Cells("TituloFormacion").Value = "" _
-                                    'IIf(IsDBNull(.Item("EstadoI")), "", .Item("EstadoI"))
-                                    dgvEducacion.Rows(WFilaFormacion).Cells("IdFormacion").Value = "1" _
-                                    'IIf(IsDBNull(.Item("EstadoI")), "", .Item("EstadoI"))
-
-                                Case Else
-                                    WEstado = ""
-                            End Select
+                            WEstado = ""
 
                             ' Grabamos Secundaria
                             WEstado = IIf(IsDBNull(.Item("EstaII")), "", .Item("EstaII"))
 
-                            Select Case Val(WEstado)
-                                Case 1, 2, 8
+                            WFilaFormacion = dgvEducacion.Rows.Add
 
-                                    WFilaFormacion = dgvEducacion.Rows.Add
+                            dgvEducacion.Rows(WFilaFormacion).Cells("TipoFormacion").Value = "Secundaria"
+                            dgvEducacion.Rows(WFilaFormacion).Cells("TituloFormacion").Value =
+                                Trim(IIf(IsDBNull(.Item("EstadoII")), "", .Item("EstadoII")))
+                            dgvEducacion.Rows(WFilaFormacion).Cells("IdFormacion").Value = "2"
 
-                                    dgvEducacion.Rows(WFilaFormacion).Cells("TipoFormacion").Value = "Secundaria"
-                                    dgvEducacion.Rows(WFilaFormacion).Cells("TituloFormacion").Value =
-                                        IIf(IsDBNull(.Item("EstadoII")), "", .Item("EstadoII"))
-                                    dgvEducacion.Rows(WFilaFormacion).Cells("IdFormacion").Value = "2"
-
-                                Case Else
-                                    WEstado = ""
-                            End Select
+                            WEstado = ""
 
                             ' Grabamos Terciaria/Universitaria
                             WEstado = IIf(IsDBNull(.Item("EstaIII")), "", .Item("EstaIII"))
 
-                            Select Case Val(WEstado)
-                                Case 1, 2, 8
+                            WFilaFormacion = dgvEducacion.Rows.Add
 
-                                    WFilaFormacion = dgvEducacion.Rows.Add
+                            dgvEducacion.Rows(WFilaFormacion).Cells("TipoFormacion").Value =
+                                "Terciaria/Universitaria"
+                            dgvEducacion.Rows(WFilaFormacion).Cells("TituloFormacion").Value =
+                                Trim(IIf(IsDBNull(.Item("EstadoIII")), "", .Item("EstadoIII")))
+                            dgvEducacion.Rows(WFilaFormacion).Cells("IdFormacion").Value = "3"
 
-                                    dgvEducacion.Rows(WFilaFormacion).Cells("TipoFormacion").Value =
-                                        "Terciaria/Universitaria"
-                                    dgvEducacion.Rows(WFilaFormacion).Cells("TituloFormacion").Value =
-                                        IIf(IsDBNull(.Item("EstadoIII")), "", .Item("EstadoIII"))
-                                    dgvEducacion.Rows(WFilaFormacion).Cells("IdFormacion").Value = "3"
-
-                                Case Else
-                                    WEstado = ""
-                            End Select
+                            WEstado = ""
 
                         End If
 
@@ -568,55 +552,36 @@ Public Class ConsultaInformacionPersonal
                             WDni = IIf(IsDBNull(.Item("Dni")), "", .Item("Dni"))
                             WCuil = IIf(IsDBNull(.Item("Cuil")), "", .Item("Cuil"))
 
-                            Select Case Val(WEstado)
-                                Case 1, 2, 8
+                            WFilaFormacion = dgvEducacion.Rows.Add
 
-                                    WFilaFormacion = dgvEducacion.Rows.Add
-
-                                    dgvEducacion.Rows(WFilaFormacion).Cells("TipoFormacion").Value = "Primaria"
-                                    dgvEducacion.Rows(WFilaFormacion).Cells("TituloFormacion").Value = "" _
-                                    'IIf(IsDBNull(.Item("EstadoI")), "", .Item("EstadoI"))
-                                    dgvEducacion.Rows(WFilaFormacion).Cells("IdFormacion").Value = "1" _
-                                    'IIf(IsDBNull(.Item("EstadoI")), "", .Item("EstadoI"))
-
-                                Case Else
-                                    WEstado = ""
-                            End Select
+                            dgvEducacion.Rows(WFilaFormacion).Cells("TipoFormacion").Value = "Primaria"
+                            dgvEducacion.Rows(WFilaFormacion).Cells("TituloFormacion").Value = ""
+                            dgvEducacion.Rows(WFilaFormacion).Cells("IdFormacion").Value = "1"
 
                             ' Grabamos Secundaria
                             WEstado = IIf(IsDBNull(.Item("EstaII")), "", .Item("EstaII"))
 
-                            Select Case Val(WEstado)
-                                Case 1, 2, 8
+                            WFilaFormacion = dgvEducacion.Rows.Add
 
-                                    WFilaFormacion = dgvEducacion.Rows.Add
+                            dgvEducacion.Rows(WFilaFormacion).Cells("TipoFormacion").Value = "Secundaria"
+                            dgvEducacion.Rows(WFilaFormacion).Cells("TituloFormacion").Value =
+                                Trim(IIf(IsDBNull(.Item("EstadoII")), "", .Item("EstadoII")))
+                            dgvEducacion.Rows(WFilaFormacion).Cells("IdFormacion").Value = "2"
 
-                                    dgvEducacion.Rows(WFilaFormacion).Cells("TipoFormacion").Value = "Secundaria"
-                                    dgvEducacion.Rows(WFilaFormacion).Cells("TituloFormacion").Value =
-                                        IIf(IsDBNull(.Item("EstadoII")), "", .Item("EstadoII"))
-                                    dgvEducacion.Rows(WFilaFormacion).Cells("IdFormacion").Value = "2"
-
-                                Case Else
-                                    WEstado = ""
-                            End Select
+                            WEstado = ""
 
                             ' Grabamos Terciaria/Universitaria
                             WEstado = IIf(IsDBNull(.Item("EstaIII")), "", .Item("EstaIII"))
 
-                            Select Case Val(WEstado)
-                                Case 1, 2, 8
+                            WFilaFormacion = dgvEducacion.Rows.Add
 
-                                    WFilaFormacion = dgvEducacion.Rows.Add
+                            dgvEducacion.Rows(WFilaFormacion).Cells("TipoFormacion").Value =
+                                "Terciaria/Universitaria"
+                            dgvEducacion.Rows(WFilaFormacion).Cells("TituloFormacion").Value =
+                                Trim(IIf(IsDBNull(.Item("EstadoIII")), "", .Item("EstadoIII")))
+                            dgvEducacion.Rows(WFilaFormacion).Cells("IdFormacion").Value = "3"
 
-                                    dgvEducacion.Rows(WFilaFormacion).Cells("TipoFormacion").Value =
-                                        "Terciaria/Universitaria"
-                                    dgvEducacion.Rows(WFilaFormacion).Cells("TituloFormacion").Value =
-                                        IIf(IsDBNull(.Item("EstadoIII")), "", .Item("EstadoIII"))
-                                    dgvEducacion.Rows(WFilaFormacion).Cells("IdFormacion").Value = "3"
-
-                                Case Else
-                                    WEstado = ""
-                            End Select
+                            WEstado = ""
 
                         End If
 
@@ -1170,7 +1135,12 @@ Public Class ConsultaInformacionPersonal
             cm.CommandText = "UPDATE Legajo SET Dni = '" & txtDni.Text.Trim() & "' WHERE Descripcion = '" & txtNombreCompleto.Text.Trim() & "'"
             cm.ExecuteNonQuery()
 
-            cm.CommandText = "UPDATE Legajo SET Cuil = '" & txtCuil.Text.Replace("-", "") & "' WHERE Dni = '" & txtDni.Text & "'"
+            Dim WEstadoII, WEstadoIII As String
+
+            If dgvEducacion.Rows.Count > 1 Then WEstadoII = dgvEducacion.Rows(1).Cells("TituloFormacion").Value
+            If dgvEducacion.Rows.Count > 2 Then WEstadoIII = dgvEducacion.Rows(2).Cells("TituloFormacion").Value
+
+            cm.CommandText = "UPDATE Legajo SET Cuil = '" & txtCuil.Text.Replace("-", "") & "', EstadoII = '" & WEstadoII & "', EstadoIII = '" & WEstadoIII & "' WHERE Dni = '" & txtDni.Text & "'"
             cm.ExecuteNonQuery()
 
             cm.CommandText = "UPDATE Personal SET Banco = '" & cmbBanco.SelectedIndex & "', Sucursal = '" & txtSucursal.Text & "', Cuenta = '" & txtCuenta.Text & "', Cbu = '" & txtCbu.Text & "' WHERE Dni = '" & txtDni.Text & "'"
@@ -1381,6 +1351,48 @@ Public Class ConsultaInformacionPersonal
                             Catch ex As Exception
                                 .Rows.Add()
                                 .CurrentCell = .Rows(iRow + 1).Cells(0)
+                            End Try
+
+                        Case Else
+                            .CurrentCell = .Rows(iRow).Cells(iCol + 1)
+                    End Select
+
+                    Return True
+
+                ElseIf msg.WParam.ToInt32() = Keys.Escape Then
+                    .Rows(iRow).Cells(iCol).Value = ""
+
+                    If iCol = NUM_COLS - 1 Then
+                        .CurrentCell = .Rows(iRow).Cells(iCol - 1)
+                    Else
+                        .CurrentCell = .Rows(iRow).Cells(iCol + 1)
+                    End If
+
+                    .CurrentCell = .Rows(iRow).Cells(iCol)
+                End If
+            End If
+
+        End With
+
+        With dgvEducacion
+            If .Focused Or .IsCurrentCellInEditMode Then ' Detectamos los ENTER tanto si solo estan en foco o si estan en edición una celda.
+                .CommitEdit(DataGridViewDataErrorContexts.Commit) ' Guardamos todos los datos que no hayan sido confirmados.
+
+                Dim iCol = .CurrentCell.ColumnIndex
+                Dim iRow = .CurrentCell.RowIndex
+                Dim valor = IIf(IsNothing(.CurrentCell.Value), "", .CurrentCell.Value)
+                Dim NUM_COLS = 3
+
+                If msg.WParam.ToInt32() = Keys.Enter Then
+
+                    Select Case iCol
+                        Case NUM_COLS - 1
+
+                            Try
+                                .CurrentCell = .Rows(iRow + 1).Cells(0)
+                            Catch ex As Exception
+                                '.Rows.Add()
+                                .CurrentCell = .Rows(iRow).Cells(0)
                             End Try
 
                         Case Else
@@ -1870,7 +1882,7 @@ Public Class ConsultaInformacionPersonal
         Return icono
     End Function
 
-    Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtDni.KeyPress, txtNumero.KeyPress, txtDniConyugue.KeyPress, txtSucursal.KeyPress
+    Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtDni.KeyPress, txtNumero.KeyPress, txtDniConyugue.KeyPress, txtSucursal.KeyPress, txtHastaLegajo.KeyPress, txtDesdeLegajo.KeyPress
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
             e.Handled = True
         End If
@@ -2151,6 +2163,54 @@ Public Class ConsultaInformacionPersonal
         ElseIf e.KeyData = Keys.Escape Then
             txtCuil.Text = ""
         End If
+
+    End Sub
+
+    Private Sub btnResumen_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnResumen.Click
+        pnlResumen.Visible = True
+        txtDesdeLegajo.Text = "1"
+        txtHastaLegajo.Text = "99999"
+        txtDesdeLegajo.Focus()
+    End Sub
+
+    Private Sub txtDesdeLegajo_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDesdeLegajo.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Val(txtDesdeLegajo.Text) = 0 Then txtDesdeLegajo.Text = "1"
+
+            txtHastaLegajo.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtDesdeLegajo.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtHastaLegajo_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtHastaLegajo.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Val(txtHastaLegajo.Text) = 0 Then txtHastaLegajo.Text = "99999"
+
+            btnResumen_Click(Nothing, Nothing)
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtHastaLegajo.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub btnCancelarResumen_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancelarResumen.Click
+        pnlResumen.Visible = False
+        txtDni.Focus()
+    End Sub
+
+    Private Sub btnEmitirResumen_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEmitirResumen.Click
+
+        With New VistaPrevia
+            .Reporte = New ReporteResumenFormacionAcademica
+            .Formula = "{Legajo.Renglon} = 1 And {Legajo.Dni} = {Personal.Dni} And ({Legajo.FEgreso} = '  /  /    ' Or {Legajo.FEgreso} = '00/00/0000') And {Legajo.Codigo} >= " & txtDesdeLegajo.Text & " And {Legajo.Codigo} <= " & txtHastaLegajo.Text & ""
+            .Mostrar()
+        End With
 
     End Sub
 End Class

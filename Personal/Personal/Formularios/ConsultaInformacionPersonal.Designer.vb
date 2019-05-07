@@ -22,13 +22,13 @@ Partial Class ConsultaInformacionPersonal
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle25 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle28 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle26 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle27 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LayoutPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.LayoutMenu = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel4 = New System.Windows.Forms.Panel()
@@ -135,9 +135,18 @@ Partial Class ConsultaInformacionPersonal
         Me.Button1 = New System.Windows.Forms.Button()
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.btnConsultas = New System.Windows.Forms.Button()
+        Me.btnResumen = New System.Windows.Forms.Button()
         Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.btnEliminar = New System.Windows.Forms.Button()
         Me.btnAceptar = New System.Windows.Forms.Button()
+        Me.pnlResumen = New System.Windows.Forms.Panel()
+        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.btnCancelarResumen = New System.Windows.Forms.Button()
+        Me.Label31 = New System.Windows.Forms.Label()
+        Me.btnEmitirResumen = New System.Windows.Forms.Button()
+        Me.Label30 = New System.Windows.Forms.Label()
+        Me.txtHastaLegajo = New System.Windows.Forms.TextBox()
+        Me.txtDesdeLegajo = New System.Windows.Forms.TextBox()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutMenu.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -162,6 +171,8 @@ Partial Class ConsultaInformacionPersonal
         Me.TabPage5.SuspendLayout()
         CType(Me.dgvArchivos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel5.SuspendLayout()
+        Me.pnlResumen.SuspendLayout()
+        Me.GroupBox6.SuspendLayout()
         Me.SuspendLayout()
         '
         'LayoutPrincipal
@@ -282,7 +293,7 @@ Partial Class ConsultaInformacionPersonal
         '
         Me.pnlConsulta.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.pnlConsulta.Controls.Add(Me.GroupBox1)
-        Me.pnlConsulta.Location = New System.Drawing.Point(306, 22)
+        Me.pnlConsulta.Location = New System.Drawing.Point(306, 46)
         Me.pnlConsulta.Name = "pnlConsulta"
         Me.pnlConsulta.Size = New System.Drawing.Size(399, 353)
         Me.pnlConsulta.TabIndex = 2
@@ -841,16 +852,16 @@ Partial Class ConsultaInformacionPersonal
         '
         'DniHijo
         '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DniHijo.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DniHijo.DefaultCellStyle = DataGridViewCellStyle22
         Me.DniHijo.HeaderText = "DNI"
         Me.DniHijo.MaxInputLength = 8
         Me.DniHijo.Name = "DniHijo"
         '
         'EdadHijo
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.EdadHijo.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.EdadHijo.DefaultCellStyle = DataGridViewCellStyle23
         Me.EdadHijo.HeaderText = "Edad"
         Me.EdadHijo.MaxInputLength = 2
         Me.EdadHijo.Name = "EdadHijo"
@@ -858,8 +869,8 @@ Partial Class ConsultaInformacionPersonal
         '
         'FechaNacimientoHijo
         '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.FechaNacimientoHijo.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.FechaNacimientoHijo.DefaultCellStyle = DataGridViewCellStyle24
         Me.FechaNacimientoHijo.HeaderText = "Fecha Nac."
         Me.FechaNacimientoHijo.MaxInputLength = 10
         Me.FechaNacimientoHijo.Name = "FechaNacimientoHijo"
@@ -1030,8 +1041,8 @@ Partial Class ConsultaInformacionPersonal
         '
         'Talle
         '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Talle.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Talle.DefaultCellStyle = DataGridViewCellStyle25
         Me.Talle.HeaderText = "Talle"
         Me.Talle.MaxInputLength = 2
         Me.Talle.Name = "Talle"
@@ -1184,18 +1195,20 @@ Partial Class ConsultaInformacionPersonal
         '
         'TipoFormacion
         '
+        Me.TipoFormacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.TipoFormacion.HeaderText = "Tipo"
+        Me.TipoFormacion.MinimumWidth = 100
         Me.TipoFormacion.Name = "TipoFormacion"
         Me.TipoFormacion.ReadOnly = True
         Me.TipoFormacion.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.TipoFormacion.Width = 120
         '
         'TituloFormacion
         '
+        Me.TituloFormacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.TituloFormacion.HeaderText = "Titulo"
+        Me.TituloFormacion.MinimumWidth = 180
         Me.TituloFormacion.Name = "TituloFormacion"
-        Me.TituloFormacion.ReadOnly = True
-        Me.TituloFormacion.Width = 200
+        Me.TituloFormacion.Width = 180
         '
         'ObservacionesFormacion
         '
@@ -1230,14 +1243,14 @@ Partial Class ConsultaInformacionPersonal
         Me.dgvArchivos.AllowUserToResizeRows = False
         Me.dgvArchivos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvArchivos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Fecha, Me.Observacion, Me.Icono, Me.RutaArchivo})
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvArchivos.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle28.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle28.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle28.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle28.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle28.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle28.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvArchivos.DefaultCellStyle = DataGridViewCellStyle28
         Me.dgvArchivos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
         Me.dgvArchivos.Location = New System.Drawing.Point(8, 11)
         Me.dgvArchivos.MultiSelect = False
@@ -1248,8 +1261,8 @@ Partial Class ConsultaInformacionPersonal
         '
         'Fecha
         '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle26
         Me.Fecha.HeaderText = "Fecha"
         Me.Fecha.MaxInputLength = 12
         Me.Fecha.MinimumWidth = 100
@@ -1260,8 +1273,8 @@ Partial Class ConsultaInformacionPersonal
         'Observacion
         '
         Me.Observacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.Observacion.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.Observacion.DefaultCellStyle = DataGridViewCellStyle27
         Me.Observacion.HeaderText = "Observación"
         Me.Observacion.Name = "Observacion"
         Me.Observacion.ReadOnly = True
@@ -1288,6 +1301,7 @@ Partial Class ConsultaInformacionPersonal
         Me.Panel5.Controls.Add(Me.Button1)
         Me.Panel5.Controls.Add(Me.btnCerrar)
         Me.Panel5.Controls.Add(Me.btnConsultas)
+        Me.Panel5.Controls.Add(Me.btnResumen)
         Me.Panel5.Controls.Add(Me.btnLimpiar)
         Me.Panel5.Controls.Add(Me.btnEliminar)
         Me.Panel5.Controls.Add(Me.btnAceptar)
@@ -1310,7 +1324,7 @@ Partial Class ConsultaInformacionPersonal
         '
         'btnCerrar
         '
-        Me.btnCerrar.Location = New System.Drawing.Point(593, 11)
+        Me.btnCerrar.Location = New System.Drawing.Point(637, 11)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(75, 49)
         Me.btnCerrar.TabIndex = 0
@@ -1319,16 +1333,25 @@ Partial Class ConsultaInformacionPersonal
         '
         'btnConsultas
         '
-        Me.btnConsultas.Location = New System.Drawing.Point(480, 11)
+        Me.btnConsultas.Location = New System.Drawing.Point(540, 11)
         Me.btnConsultas.Name = "btnConsultas"
         Me.btnConsultas.Size = New System.Drawing.Size(75, 49)
         Me.btnConsultas.TabIndex = 0
         Me.btnConsultas.Text = "Consultas"
         Me.btnConsultas.UseVisualStyleBackColor = True
         '
+        'btnResumen
+        '
+        Me.btnResumen.Location = New System.Drawing.Point(291, 11)
+        Me.btnResumen.Name = "btnResumen"
+        Me.btnResumen.Size = New System.Drawing.Size(130, 49)
+        Me.btnResumen.TabIndex = 0
+        Me.btnResumen.Text = "Resumen de Formación Académica"
+        Me.btnResumen.UseVisualStyleBackColor = True
+        '
         'btnLimpiar
         '
-        Me.btnLimpiar.Location = New System.Drawing.Point(367, 11)
+        Me.btnLimpiar.Location = New System.Drawing.Point(443, 11)
         Me.btnLimpiar.Name = "btnLimpiar"
         Me.btnLimpiar.Size = New System.Drawing.Size(75, 49)
         Me.btnLimpiar.TabIndex = 0
@@ -1337,7 +1360,7 @@ Partial Class ConsultaInformacionPersonal
         '
         'btnEliminar
         '
-        Me.btnEliminar.Location = New System.Drawing.Point(254, 11)
+        Me.btnEliminar.Location = New System.Drawing.Point(194, 11)
         Me.btnEliminar.Name = "btnEliminar"
         Me.btnEliminar.Size = New System.Drawing.Size(75, 49)
         Me.btnEliminar.TabIndex = 0
@@ -1346,18 +1369,102 @@ Partial Class ConsultaInformacionPersonal
         '
         'btnAceptar
         '
-        Me.btnAceptar.Location = New System.Drawing.Point(141, 11)
+        Me.btnAceptar.Location = New System.Drawing.Point(97, 11)
         Me.btnAceptar.Name = "btnAceptar"
         Me.btnAceptar.Size = New System.Drawing.Size(75, 49)
         Me.btnAceptar.TabIndex = 0
         Me.btnAceptar.Text = "Aceptar"
         Me.btnAceptar.UseVisualStyleBackColor = True
         '
+        'pnlResumen
+        '
+        Me.pnlResumen.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.pnlResumen.Controls.Add(Me.GroupBox6)
+        Me.pnlResumen.Location = New System.Drawing.Point(253, 192)
+        Me.pnlResumen.Name = "pnlResumen"
+        Me.pnlResumen.Size = New System.Drawing.Size(303, 134)
+        Me.pnlResumen.TabIndex = 2
+        '
+        'GroupBox6
+        '
+        Me.GroupBox6.Controls.Add(Me.btnCancelarResumen)
+        Me.GroupBox6.Controls.Add(Me.Label31)
+        Me.GroupBox6.Controls.Add(Me.btnEmitirResumen)
+        Me.GroupBox6.Controls.Add(Me.Label30)
+        Me.GroupBox6.Controls.Add(Me.txtHastaLegajo)
+        Me.GroupBox6.Controls.Add(Me.txtDesdeLegajo)
+        Me.GroupBox6.Location = New System.Drawing.Point(8, 1)
+        Me.GroupBox6.Name = "GroupBox6"
+        Me.GroupBox6.Size = New System.Drawing.Size(287, 126)
+        Me.GroupBox6.TabIndex = 0
+        Me.GroupBox6.TabStop = False
+        '
+        'btnCancelarResumen
+        '
+        Me.btnCancelarResumen.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCancelarResumen.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCancelarResumen.ForeColor = System.Drawing.SystemColors.Control
+        Me.btnCancelarResumen.Location = New System.Drawing.Point(146, 83)
+        Me.btnCancelarResumen.Name = "btnCancelarResumen"
+        Me.btnCancelarResumen.Size = New System.Drawing.Size(103, 36)
+        Me.btnCancelarResumen.TabIndex = 1
+        Me.btnCancelarResumen.Text = "CANCELAR"
+        Me.btnCancelarResumen.UseVisualStyleBackColor = True
+        '
+        'Label31
+        '
+        Me.Label31.AutoSize = True
+        Me.Label31.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.Label31.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label31.Location = New System.Drawing.Point(40, 53)
+        Me.Label31.Name = "Label31"
+        Me.Label31.Size = New System.Drawing.Size(99, 13)
+        Me.Label31.TabIndex = 1
+        Me.Label31.Text = "HASTA LEGAJO"
+        '
+        'btnEmitirResumen
+        '
+        Me.btnEmitirResumen.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnEmitirResumen.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnEmitirResumen.ForeColor = System.Drawing.SystemColors.Control
+        Me.btnEmitirResumen.Location = New System.Drawing.Point(37, 83)
+        Me.btnEmitirResumen.Name = "btnEmitirResumen"
+        Me.btnEmitirResumen.Size = New System.Drawing.Size(103, 36)
+        Me.btnEmitirResumen.TabIndex = 1
+        Me.btnEmitirResumen.Text = "ACEPTAR"
+        Me.btnEmitirResumen.UseVisualStyleBackColor = True
+        '
+        'Label30
+        '
+        Me.Label30.AutoSize = True
+        Me.Label30.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.Label30.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label30.Location = New System.Drawing.Point(40, 27)
+        Me.Label30.Name = "Label30"
+        Me.Label30.Size = New System.Drawing.Size(100, 13)
+        Me.Label30.TabIndex = 1
+        Me.Label30.Text = "DESDE LEGAJO"
+        '
+        'txtHastaLegajo
+        '
+        Me.txtHastaLegajo.Location = New System.Drawing.Point(146, 49)
+        Me.txtHastaLegajo.Name = "txtHastaLegajo"
+        Me.txtHastaLegajo.Size = New System.Drawing.Size(100, 20)
+        Me.txtHastaLegajo.TabIndex = 0
+        '
+        'txtDesdeLegajo
+        '
+        Me.txtDesdeLegajo.Location = New System.Drawing.Point(146, 23)
+        Me.txtDesdeLegajo.Name = "txtDesdeLegajo"
+        Me.txtDesdeLegajo.Size = New System.Drawing.Size(100, 20)
+        Me.txtDesdeLegajo.TabIndex = 0
+        '
         'ConsultaInformacionPersonal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(808, 518)
+        Me.Controls.Add(Me.pnlResumen)
         Me.Controls.Add(Me.LayoutPrincipal)
         Me.Location = New System.Drawing.Point(10, 10)
         Me.Name = "ConsultaInformacionPersonal"
@@ -1395,6 +1502,9 @@ Partial Class ConsultaInformacionPersonal
         Me.TabPage5.ResumeLayout(False)
         CType(Me.dgvArchivos, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel5.ResumeLayout(False)
+        Me.pnlResumen.ResumeLayout(False)
+        Me.GroupBox6.ResumeLayout(False)
+        Me.GroupBox6.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1477,10 +1587,6 @@ Partial Class ConsultaInformacionPersonal
     Friend WithEvents Talle As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ObservacionesIndumentaria As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents TipoInd As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents TipoFormacion As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents TituloFormacion As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ObservacionesFormacion As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents IdFormacion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents txtFechaAux As System.Windows.Forms.MaskedTextBox
     Friend WithEvents NombreHijo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ApellidoHijo As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -1507,4 +1613,17 @@ Partial Class ConsultaInformacionPersonal
     Friend WithEvents txtCbu As System.Windows.Forms.MaskedTextBox
     Friend WithEvents txtCuil As System.Windows.Forms.MaskedTextBox
     Friend WithEvents Label29 As System.Windows.Forms.Label
+    Friend WithEvents TipoFormacion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents TituloFormacion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ObservacionesFormacion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents IdFormacion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents btnResumen As System.Windows.Forms.Button
+    Friend WithEvents pnlResumen As System.Windows.Forms.Panel
+    Friend WithEvents GroupBox6 As System.Windows.Forms.GroupBox
+    Friend WithEvents btnCancelarResumen As System.Windows.Forms.Button
+    Friend WithEvents btnEmitirResumen As System.Windows.Forms.Button
+    Friend WithEvents Label31 As System.Windows.Forms.Label
+    Friend WithEvents Label30 As System.Windows.Forms.Label
+    Friend WithEvents txtHastaLegajo As System.Windows.Forms.TextBox
+    Friend WithEvents txtDesdeLegajo As System.Windows.Forms.TextBox
 End Class
