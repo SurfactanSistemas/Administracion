@@ -22,7 +22,7 @@ Partial Class EncuestaFarma
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -39,6 +39,8 @@ Partial Class EncuestaFarma
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.btnEnviar = New System.Windows.Forms.Button()
         Me.btnCancelar = New System.Windows.Forms.Button()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.txtDestinatarios = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         CType(Me.dgvProductos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -87,22 +89,22 @@ Partial Class EncuestaFarma
         Me.dgvProductos.AllowUserToDeleteRows = False
         Me.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvProductos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Producto, Me.Descripcion, Me.Enviar})
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvProductos.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvProductos.DefaultCellStyle = DataGridViewCellStyle3
         Me.dgvProductos.DoubleBuffered = True
         Me.dgvProductos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.dgvProductos.Location = New System.Drawing.Point(13, 125)
+        Me.dgvProductos.Location = New System.Drawing.Point(13, 157)
         Me.dgvProductos.Name = "dgvProductos"
         Me.dgvProductos.RowHeadersWidth = 15
         Me.dgvProductos.RowTemplate.Height = 20
         Me.dgvProductos.ShowCellToolTips = False
-        Me.dgvProductos.Size = New System.Drawing.Size(561, 236)
+        Me.dgvProductos.Size = New System.Drawing.Size(561, 204)
         Me.dgvProductos.TabIndex = 83
         '
         'Producto
@@ -132,28 +134,30 @@ Partial Class EncuestaFarma
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.txtDestinatarios)
         Me.GroupBox1.Controls.Add(Me.txtFiltrar)
         Me.GroupBox1.Controls.Add(Me.rbIng)
         Me.GroupBox1.Controls.Add(Me.rbEsp)
+        Me.GroupBox1.Controls.Add(Me.Label5)
         Me.GroupBox1.Controls.Add(Me.Label4)
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Location = New System.Drawing.Point(15, 50)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(556, 69)
+        Me.GroupBox1.Size = New System.Drawing.Size(556, 101)
         Me.GroupBox1.TabIndex = 84
         Me.GroupBox1.TabStop = False
         '
         'txtFiltrar
         '
-        Me.txtFiltrar.Location = New System.Drawing.Point(98, 45)
+        Me.txtFiltrar.Location = New System.Drawing.Point(111, 75)
         Me.txtFiltrar.Name = "txtFiltrar"
-        Me.txtFiltrar.Size = New System.Drawing.Size(420, 20)
+        Me.txtFiltrar.Size = New System.Drawing.Size(434, 20)
         Me.txtFiltrar.TabIndex = 2
         '
         'rbIng
         '
         Me.rbIng.AutoSize = True
-        Me.rbIng.Location = New System.Drawing.Point(389, 16)
+        Me.rbIng.Location = New System.Drawing.Point(389, 11)
         Me.rbIng.Name = "rbIng"
         Me.rbIng.Size = New System.Drawing.Size(64, 17)
         Me.rbIng.TabIndex = 1
@@ -164,7 +168,7 @@ Partial Class EncuestaFarma
         '
         Me.rbEsp.AutoSize = True
         Me.rbEsp.Checked = True
-        Me.rbEsp.Location = New System.Drawing.Point(291, 16)
+        Me.rbEsp.Location = New System.Drawing.Point(291, 11)
         Me.rbEsp.Name = "rbEsp"
         Me.rbEsp.Size = New System.Drawing.Size(75, 17)
         Me.rbEsp.TabIndex = 1
@@ -176,7 +180,7 @@ Partial Class EncuestaFarma
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(39, 48)
+        Me.Label4.Location = New System.Drawing.Point(54, 78)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(55, 13)
         Me.Label4.TabIndex = 0
@@ -186,7 +190,7 @@ Partial Class EncuestaFarma
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(103, 18)
+        Me.Label3.Location = New System.Drawing.Point(103, 13)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(165, 13)
         Me.Label3.TabIndex = 0
@@ -217,6 +221,25 @@ Partial Class EncuestaFarma
         Me.btnCancelar.TabIndex = 86
         Me.btnCancelar.Text = "CANCELAR"
         Me.btnCancelar.UseVisualStyleBackColor = True
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(12, 40)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(97, 13)
+        Me.Label5.TabIndex = 0
+        Me.Label5.Text = "DESTINATARIOS:"
+        '
+        'txtDestinatarios
+        '
+        Me.txtDestinatarios.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtDestinatarios.Location = New System.Drawing.Point(111, 33)
+        Me.txtDestinatarios.Multiline = True
+        Me.txtDestinatarios.Name = "txtDestinatarios"
+        Me.txtDestinatarios.Size = New System.Drawing.Size(434, 36)
+        Me.txtDestinatarios.TabIndex = 3
         '
         'EncuestaFarma
         '
@@ -256,4 +279,6 @@ Partial Class EncuestaFarma
     Friend WithEvents Producto As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Enviar As System.Windows.Forms.DataGridViewCheckBoxColumn
+    Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents txtDestinatarios As System.Windows.Forms.TextBox
 End Class

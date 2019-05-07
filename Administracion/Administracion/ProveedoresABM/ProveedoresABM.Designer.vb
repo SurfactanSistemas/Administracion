@@ -1727,7 +1727,7 @@ Partial Class ProveedoresABM
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(114, 34)
         Me.Button2.TabIndex = 97
-        Me.Button2.Text = "Enviar Encuesta FARMA"
+        Me.Button2.Text = "Enviar Encuesta CALIDAD"
         Me.Button2.UseVisualStyleBackColor = True
         '
         'ProveedoresABM

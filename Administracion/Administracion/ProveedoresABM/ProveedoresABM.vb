@@ -1712,7 +1712,7 @@ Public Class ProveedoresABM
 
         If Val(txtCodigo.Text) = 0 Then Exit Sub
 
-        With New EncuestaFarma(txtCodigo.Text)
+        With New EncuestaFarma(txtCodigo.Text, txtEmail.Text)
             .ShowDialog(Me)
         End With
 

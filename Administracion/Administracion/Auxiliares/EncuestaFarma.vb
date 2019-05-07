@@ -7,7 +7,7 @@ Public Class EncuestaFarma
 
     Private WProveedor As String
 
-    Sub New(ByVal Proveedor As String)
+    Sub New(ByVal Proveedor As String, ByVal Email As String)
 
         ' This call is required by the designer.
         InitializeComponent()
@@ -15,6 +15,7 @@ Public Class EncuestaFarma
         ' Add any initialization after the InitializeComponent() call.
 
         WProveedor = Proveedor.PadLeft(11, "0")
+        txtDestinatarios.Text = Email.Trim
 
     End Sub
 
@@ -75,6 +76,11 @@ Public Class EncuestaFarma
     Private Sub btnEnviar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnEnviar.Click
 
         '
+        ' Validamos que el Proveedor Tenga Cargado por lo menos un mail.
+        '
+        If txtDestinatarios.Text.Trim = "" Then Exit Sub
+
+        '
         ' Validamos que al menos un articulo haya sido seleccionado.
         '
         Dim Pasa As Boolean = False
@@ -103,17 +109,29 @@ Public Class EncuestaFarma
         Dim WNombreArchivoOrigenEspañol As String = "Encuesta.pdf"
         Dim WNombreArchivoOrigenIngles As String = "EncuestaIngles.pdf"
         Dim WNombreArchivoOrigen As String = ""
-        Dim WMail As String = ""
+        Dim WMail As String = txtDestinatarios.Text.Trim
         Dim WSubject As String = "Evaluación de Proveedores - Cuestionario Inicial - SURFACTAN S.A. "
 
+        Dim WBody As String = "Estimados:  <br/>" & _
+                                "Agradeceríamos completaran el formulario adjunto, a la brevedad posible,  el mismo es de suma importancia para nosotros y está confeccionado por nuestro departamento de calidad. Las compras de los insumos de referencia están condicionados a la presentación de este formulario junto con todas las certificaciones que puedan aportar.  <br/>" & _
+                                "Asimismo solicitamos que  lo confeccione una persona autorizada donde figure su firma, aclaración y el cargo que ocupa. <br/>"
+
+
         If rbIng.Checked Then
+
             WNombreArchivoOrigen = WNombreArchivoOrigenIngles
             WSubject = "SUPPLIER EVALUATION - INITIAL QUESTIONNAIRE - SURFACTAN S.A. "
+
+            WBody = "Dear <br/>" & _
+                    "We would appreciate your completing the attached form, as soon as possible.  <br/>" & _
+                    "It is of the utmost importance to us and it has been made by our quality department as per the guidelines available to be performed by any new supplier being added to our preferred/valuable supplying points.  <br/>" & _
+                    "Mainly, referred to supplies/raw materials to be used in our Pharmaceutical’s production site .  <br/>" & _
+                    "As from now onwards, the purchases of the reference supplies are conditioned to the presentation of this form along with, all the certifications that you can provide.  <br/>" & _
+                    "We also request, that you are having all the sent/given documents, duly signed by an authorized person at your Production or Quality Control room and adding their name and responsibility level there. <br/>"
+
         End If
 
         If rbEsp.Checked Then WNombreArchivoOrigen = WNombreArchivoOrigenEspañol
-
-        'Dim WBody As String = File.ReadAllLines(WRutaArchivoCuerpo).Aggregate(Function(current, s) current & s)
 
         If Not File.Exists(PATH_ENCUESTAS_FARMA & WNombreArchivoOrigen) Then
             MsgBox("No existe el PDF con la Encuesta para ser enviada al Proveedor.")
@@ -124,6 +142,9 @@ Public Class EncuestaFarma
         ' Generamos el directorio en caso de que no exista.
         '
         Directory.CreateDirectory(WPathTemp)
+
+        ProgressBar1.Value = 0
+        ProgressBar1.Maximum = dgvProductos.Rows.Count + 1
 
         For Each row As DataGridViewRow In dgvProductos.Rows
             With row
@@ -147,15 +168,20 @@ Public Class EncuestaFarma
                     '
                     ' Envío el Correo, adjuntando el archivo renombrado.
                     '
-                    _EnviarEmail(WMail, "", WSubject & WDescripcion, "", {WRutaCompletaAdjunto})
+                    _EnviarEmail(WMail, "", WSubject & WDescripcion, WBody, {WRutaCompletaAdjunto})
 
                 End If
 
             End With
+            ProgressBar1.Increment(1)
         Next
+
+        ProgressBar1.Value = 0
 
         Directory.Delete(WPathTemp, True)
 
+        MsgBox("El Proceso finalizó correctamente.", MsgBoxStyle.Information)
+        
     End Sub
 
     Private Sub _EnviarEmail(ByVal _to As String, ByVal _bcc As String, ByVal _subject As String, ByVal _body As String, ByVal _adjuntos() As String)
@@ -187,8 +213,11 @@ Public Class EncuestaFarma
                     End If
                 Next
 
-                '.Send()
-                .Display()
+                If Val(OrDefault(ConfigurationManager.AppSettings("TESTING"), "0")) = 1 Then
+                    .Display()
+                Else
+                    .Send()
+                End If
 
             End With
 
