@@ -635,7 +635,7 @@ namespace Modulo_Capacitacion.Novedades
                     using (SqlCommand cmd = new SqlCommand())
                     {
                         cmd.Connection = conn;
-                        cmd.CommandText = "select l.Codigo, RTRIM(LTRIM(l.Descripcion)) as Descripcion FROM Legajo l INNER JOIN (SELECT Descripcion, MIN(Codigo) as actual FROM Legajo GROUP BY Descripcion) l2 ON l.Descripcion = l2.Descripcion WHERE l.Codigo = l2.actual and l.renglon = 1 and l.Fegreso in ('  /  /    ', '00/00/0000') ORDER BY l.Descripcion";
+                        cmd.CommandText = "select l.Codigo, RTRIM(LTRIM(l.Descripcion)) as Descripcion FROM Legajo l INNER JOIN (SELECT Descripcion, MIN(Codigo) as actual FROM Legajo where ISNULL(Fegreso, '  /  /    ') in ('  /  /    ', '00/00/0000') GROUP BY Descripcion) l2 ON l.Descripcion = l2.Descripcion WHERE l.Codigo = l2.actual and l.renglon = 1 and ISNULL(l.Fegreso, '  /  /    ') in ('  /  /    ', '00/00/0000') ORDER BY l.Descripcion";
 
                         gbLegajos.Visible = false;
 
@@ -644,7 +644,7 @@ namespace Modulo_Capacitacion.Novedades
                             if (WTipoConsulta == 4 && cmbTipoProgramacion.SelectedIndex == 0)
                             {
                                 if (txtTema.Text.Trim() != "" && cmbTipoLegajos.SelectedIndex == 0)
-                                    cmd.CommandText = "SELECT DISTINCT cr.Legajo AS Codigo, RTRIM(LTRIM(l.Descripcion)) Descripcion FROM Cronograma cr INNER JOIN Legajo l ON cr.Legajo = l.Codigo AND l.Renglon = 1 AND l.FEgreso IN ('  /  /     ', '00/00/0000') INNER JOIN (SELECT Descripcion, MIN(Codigo) as actual FROM Legajo GROUP BY Descripcion) l2 ON l.Descripcion = l2.Descripcion WHERE cr.Curso = '" + txtTema.Text + "' AND l.Codigo = l2.actual ORDER BY Descripcion, cr.Legajo";
+                                    cmd.CommandText = "SELECT DISTINCT cr.Legajo AS Codigo, RTRIM(LTRIM(l.Descripcion)) Descripcion FROM Cronograma cr INNER JOIN Legajo l ON cr.Legajo = l.Codigo AND l.Renglon = 1 AND l.FEgreso IN ('  /  /     ', '00/00/0000') INNER JOIN (SELECT Descripcion, MIN(Codigo) as actual FROM Legajo where ISNULL(Fegreso, '  /  /    ') in ('  /  /    ', '00/00/0000') GROUP BY Descripcion) l2 ON l.Descripcion = l2.Descripcion WHERE cr.Curso = '" + txtTema.Text + "' AND l.Codigo = l2.actual ORDER BY Descripcion, cr.Legajo";
                             }
 
                             gbLegajos.Visible = cmbTipoProgramacion.SelectedIndex == 0;

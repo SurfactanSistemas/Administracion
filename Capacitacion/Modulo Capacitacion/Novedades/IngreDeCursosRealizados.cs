@@ -36,6 +36,7 @@ namespace Modulo_Capacitacion.Novedades
             TB_Año.Text = "";
             cmbMes.SelectedIndex = 0;
             pnlAviso.Visible = false;
+            pnlTipoListado.Visible = false;
             //DGV_Cronograma.DataSource = null;
 
             //DGV_Cronograma.Rows.Clear();
@@ -196,7 +197,7 @@ namespace Modulo_Capacitacion.Novedades
         //    _ImprimirReporteCronograma(e.RowIndex);
         //}
 
-        private void _ImprimirReporteCronograma(int indexRow)
+        private void _ImprimirReporteCronograma(int indexRow, int TipoConsulta)
         {
             int curso = 0;
             if (indexRow >= 0)
@@ -207,15 +208,25 @@ namespace Modulo_Capacitacion.Novedades
 
             }
 
+            string WFormula = "{Cronograma.Curso}=" + curso + " AND {Cronograma.Ano}=" + TB_Año.Text + " AND {Legajo.Renglon} = 1";
+
+            if (TipoConsulta > 0)
+            {
+                WFormula += " And {Tema.Horas} <> {Cronograma.Realizado}";
+            }
+
             VistaPrevia frm = new VistaPrevia();
-            frm.CargarReporte(new wlistacursoplani(), "{Cronograma.Curso}=" + curso + " AND {Cronograma.Ano}=" + TB_Año.Text + " AND {Legajo.Renglon} = 1");
+            frm.CargarReporte(new wlistacursoplani(), WFormula);
 
             frm.Show();
+
+            pnlTipoListado.Visible = false;
         }
         
         private void DGV_Cronograma_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            _ImprimirReporteCronograma(e.RowIndex);
+            lblIdRow.Text = e.RowIndex.ToString();
+            pnlTipoListado.Visible = true;
         }
 
         private void btnImprimirAviso_Click(object sender, EventArgs e)
@@ -413,6 +424,22 @@ namespace Modulo_Capacitacion.Novedades
         private void cmbMes_SelectedIndexChanged(object sender, EventArgs e)
         {
             txtAnoConsulta.Focus();
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+            pnlTipoListado.Visible = false;
+            TB_Año.Focus();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            _ImprimirReporteCronograma(int.Parse(lblIdRow.Text), 0);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            _ImprimirReporteCronograma(int.Parse(lblIdRow.Text), 1);
         }
     }
 }
