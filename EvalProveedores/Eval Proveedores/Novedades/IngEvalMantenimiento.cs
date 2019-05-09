@@ -797,7 +797,7 @@ namespace Eval_Proveedores.Novedades
             SacarPromedio3();
 
             CalificarProve();
-            EVAR.Clave = TB_CodProveedor.Text + TB_Mes.Text + TB_Año.Text;
+            EVAR.Clave = TB_CodProveedor.Text + TB_Mes.Text.PadLeft(2, '0') + TB_Año.Text;
             EVAR.Proveedor = TB_CodProveedor.Text;
             EVAR.Mes = int.Parse(TB_Mes.Text);
             EVAR.Año = int.Parse(TB_Año.Text);
@@ -808,7 +808,7 @@ namespace Eval_Proveedores.Novedades
             EVAR.Promedio22 = double.Parse(TB_Promedio2.Text);
             EVAR.Promedio33 = double.Parse(TB_Promedio3.Text);
             EVAR.Observ = TB_ObservEva.Text;
-            EVAR.Periodo = TB_Año.Text + TB_Mes.Text;
+            EVAR.Periodo = TB_Año.Text + TB_Mes.Text.PadLeft(2, '0');
             EVAR.Tipo = Tipo;
             EVAR.Param1 = LB_Param1.Text;
             EVAR.Param2 = LB_Param2.Text;

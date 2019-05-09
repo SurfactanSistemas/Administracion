@@ -47,6 +47,7 @@
             this.TB_Desde = new System.Windows.Forms.MaskedTextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -109,9 +110,10 @@
             this.CB_Tipo.Items.AddRange(new object[] {
             "",
             "Completo",
-            "Calibraciones",
-            "Ensayos",
-            "Mantenimiento"});
+            "Calibración",
+            "Ensayo",
+            "Mantenimiento",
+            "Otro"});
             this.CB_Tipo.Location = new System.Drawing.Point(193, 146);
             this.CB_Tipo.Name = "CB_Tipo";
             this.CB_Tipo.Size = new System.Drawing.Size(100, 21);
@@ -136,6 +138,8 @@
             // 
             // TB_DescProve
             // 
+            this.TB_DescProve.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.TB_DescProve.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.TB_DescProve.FormattingEnabled = true;
             this.TB_DescProve.Location = new System.Drawing.Point(319, 23);
             this.TB_DescProve.Name = "TB_DescProve";
@@ -151,9 +155,12 @@
             // 
             // TB_Prove
             // 
+            this.TB_Prove.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.TB_Prove.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.TB_Prove.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.TB_Prove.FormattingEnabled = true;
             this.TB_Prove.Location = new System.Drawing.Point(193, 23);
+            this.TB_Prove.MaxLength = 11;
             this.TB_Prove.Name = "TB_Prove";
             this.TB_Prove.Size = new System.Drawing.Size(100, 21);
             this.TB_Prove.TabIndex = 1;
@@ -249,6 +256,12 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Desde Fecha:";
             // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.WorkerReportsProgress = true;
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
+            // 
             // Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -261,6 +274,7 @@
             this.MaximumSize = new System.Drawing.Size(566, 276);
             this.MinimumSize = new System.Drawing.Size(566, 276);
             this.Name = "Inicio";
+            this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
             this.Load += new System.EventHandler(this.Inicio_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -291,5 +305,6 @@
         private System.Windows.Forms.MaskedTextBox TB_Desde;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

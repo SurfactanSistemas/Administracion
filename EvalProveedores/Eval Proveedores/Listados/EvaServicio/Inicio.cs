@@ -32,17 +32,20 @@ namespace Eval_Proveedores.Listados.EvaServicio
 
         private void Inicio_Load(object sender, EventArgs e)
         {
-            CargarProveedores();
+            CheckForIllegalCrossThreadCalls = false;
+            CB_Tipo.SelectedIndex = 1;
+            backgroundWorker1.RunWorkerAsync();
         }
 
-        private void CargarProveedores()
+        private DataTable CargarProveedores()
         {
             dtProveedores = PBOL.Lista();
             dtProveedores.Rows.InsertAt(dtProveedores.NewRow(), 0);
-            CargarCodProveedor();
-            CargarDescProveedor();
 
+            return dtProveedores;
 
+            //CargarCodProveedor();
+            //CargarDescProveedor();
         }
 
         private void CargarDescProveedor()
@@ -372,7 +375,7 @@ namespace Eval_Proveedores.Listados.EvaServicio
             {
                 case 1:
                     Tipo1 = 2;
-                    Tipo2 = 4;
+                    Tipo2 = 5;
                     break;
 
                 case 2:
@@ -389,6 +392,10 @@ namespace Eval_Proveedores.Listados.EvaServicio
                     Tipo1 = 4;
                     Tipo2 = 4;
                     break;
+                case 5:
+                    Tipo1 = 5;
+                    Tipo2 = 5;
+                    break;
             }
         }
         
@@ -398,6 +405,54 @@ namespace Eval_Proveedores.Listados.EvaServicio
             Close();
         }
 
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            DataTable cargarProveedores = PBOL.Lista();
 
+            cargarProveedores.Rows.InsertAt(cargarProveedores.NewRow(), 0);
+
+            backgroundWorker1.ReportProgress(0, cargarProveedores);
+            backgroundWorker1.ReportProgress(1, cargarProveedores);
+            backgroundWorker1.ReportProgress(2);
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            DataTable tabla = (DataTable) e.UserState;
+
+            switch (e.ProgressPercentage)
+            {
+                case 0:
+                    TB_DescProve.DataSource = tabla;
+                    TB_DescProve.DisplayMember = "Nombre";
+                    TB_DescProve.ValueMember = "Proveedor";
+
+                    AutoCompleteStringCollection stringDescProve = new AutoCompleteStringCollection();
+                    foreach (DataRow row in tabla.Rows)
+                    {
+                        stringDescProve.Add(Convert.ToString(row["Nombre"]));
+
+                    }
+
+                    TB_DescProve.AutoCompleteCustomSource = stringDescProve;
+                    break;
+                case 1:
+                    TB_Prove.DataSource = tabla;
+                    TB_Prove.DisplayMember = "Proveedor";
+                    TB_Prove.ValueMember = "Proveedor";
+
+                    AutoCompleteStringCollection stringCodProve = new AutoCompleteStringCollection();
+                    foreach (DataRow row in tabla.Rows)
+                    {
+                        stringCodProve.Add(Convert.ToString(row["Proveedor"]));
+                    }
+
+                    TB_Prove.AutoCompleteCustomSource = stringCodProve;
+                    break;
+                case 2:
+                    WindowState = FormWindowState.Normal;
+                    break;
+            }
+        }
     }
 }
