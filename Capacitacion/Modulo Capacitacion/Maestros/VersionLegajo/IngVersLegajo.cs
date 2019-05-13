@@ -35,7 +35,6 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
             var fila = dtLegajos.NewRow();
             dtLegajos.Rows.InsertAt(fila, 0);
 
-
             CargarDescLegajos();
             CargarCodigosLegajos();
             CargarFechaIngreso();
@@ -52,7 +51,6 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
             foreach (DataRow row in dtLegajos.Rows)
             {
                 stringCodArti.Add(Convert.ToString(row["FIngreso"]));
-
             }
 
             TB_FechaIngAyuda.AutoCompleteCustomSource = stringCodArti;
@@ -71,7 +69,6 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
             foreach (DataRow row in dtLegajos.Rows)
             {
                 stringCodArti.Add(Convert.ToString(row["Descripcion"]));
-
             }
 
             TB_DescLegajo.AutoCompleteCustomSource = stringCodArti;
@@ -90,7 +87,6 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
             foreach (DataRow row in dtLegajos.Rows)
             {
                 stringCodArti.Add(Convert.ToString(row["Codigo"]));
-
             }
 
             TB_Codigo.AutoCompleteCustomSource = stringCodArti;
@@ -178,7 +174,7 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
 
             int ZVersion = 0;
 
-            Perfil _Perfil = Per.BuscarUno(Perfil);
+            Perfil _Perfil = Per.BuscarUno(TB_CodPer.Text);
 
             if (_Perfil.Version > 0)
             {
@@ -360,7 +356,6 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
         {
             try
             {
-                
                 //Buscardatosdelegajo
                 if (TB_Codigo.Text == "" || TB_VersionLegajo.Text == "" || TB_FechaIng.Text == "") return;
 
@@ -432,6 +427,7 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
                 }
                 
                 CompletarFechaIng();
+                //TB_Codigo.Text = TB_DescLegajo.Text;
                 TB_VersionLegajo.Focus();
             }
             
@@ -515,6 +511,7 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
             {
                 if (fila[3].ToString() == TB_DescLegajo.Text)
                 {
+                    TB_Codigo.Text = fila[1].ToString();
                     TB_FechaIng.Text = fila[4].ToString();
                     Perfil = fila[5].ToString();
                 }
@@ -522,12 +519,8 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
 
             TB_CantidadVersiones.Text = LV.MaxVersiones(TB_Codigo.Text);
             TB_CantidadVersiones.ReadOnly = true;
-        }
 
-        private void TB_DescLegajo_KeyDown(object sender, KeyEventArgs e)
-        {
-            
-            
+            this.TB_Codigo_KeyDown(null, new KeyEventArgs(Keys.Enter));
         }
 
         private void TB_VersionLegajo_KeyDown(object sender, KeyEventArgs e)
@@ -535,11 +528,11 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
             
             if (e.KeyCode == Keys.Enter)
             {
-                
                 if (TB_VersionLegajo.Text != "")
                 {
                     Cargado = false;
                     BuscarVersiones();
+                    //this.TB_DescLegajo_SelectedIndexChanged(null, null);
                     Cargado = true;
                 }
             }
@@ -549,11 +542,6 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
         private void IngVersLegajo_Shown(object sender, EventArgs e)
         {
             TB_Codigo.Focus();
-        }
-
-        private void BT_LimpiarPant_Click(object sender, EventArgs e)
-        {
-            
         }
 
         private void button1_Click(object sender, EventArgs e)

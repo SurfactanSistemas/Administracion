@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.pnlConsulta = new System.Windows.Forms.Panel();
@@ -336,7 +336,6 @@
             this.TB_DescLegajo.Size = new System.Drawing.Size(358, 21);
             this.TB_DescLegajo.TabIndex = 125;
             this.TB_DescLegajo.SelectedIndexChanged += new System.EventHandler(this.TB_DescLegajo_SelectedIndexChanged);
-            this.TB_DescLegajo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_DescLegajo_KeyDown);
             // 
             // panel4
             // 
@@ -535,7 +534,7 @@
             // TB_Equiv2Leg
             // 
             this.TB_Equiv2Leg.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TB_Equiv2Leg.Location = new System.Drawing.Point(729, 425);
+            this.TB_Equiv2Leg.Location = new System.Drawing.Point(729, 423);
             this.TB_Equiv2Leg.Name = "TB_Equiv2Leg";
             this.TB_Equiv2Leg.ReadOnly = true;
             this.TB_Equiv2Leg.Size = new System.Drawing.Size(214, 20);
@@ -544,7 +543,7 @@
             // TB_Equiv1Leg
             // 
             this.TB_Equiv1Leg.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TB_Equiv1Leg.Location = new System.Drawing.Point(729, 397);
+            this.TB_Equiv1Leg.Location = new System.Drawing.Point(729, 371);
             this.TB_Equiv1Leg.Name = "TB_Equiv1Leg";
             this.TB_Equiv1Leg.ReadOnly = true;
             this.TB_Equiv1Leg.Size = new System.Drawing.Size(214, 20);
@@ -553,7 +552,7 @@
             // TB_Otros2Leg
             // 
             this.TB_Otros2Leg.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TB_Otros2Leg.Location = new System.Drawing.Point(729, 369);
+            this.TB_Otros2Leg.Location = new System.Drawing.Point(729, 343);
             this.TB_Otros2Leg.Name = "TB_Otros2Leg";
             this.TB_Otros2Leg.ReadOnly = true;
             this.TB_Otros2Leg.Size = new System.Drawing.Size(214, 20);
@@ -562,7 +561,7 @@
             // TB_Otros1Leg
             // 
             this.TB_Otros1Leg.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TB_Otros1Leg.Location = new System.Drawing.Point(729, 341);
+            this.TB_Otros1Leg.Location = new System.Drawing.Point(729, 315);
             this.TB_Otros1Leg.Name = "TB_Otros1Leg";
             this.TB_Otros1Leg.ReadOnly = true;
             this.TB_Otros1Leg.Size = new System.Drawing.Size(214, 20);
@@ -597,7 +596,7 @@
             // TB_ObservCondFisicaLeg
             // 
             this.TB_ObservCondFisicaLeg.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TB_ObservCondFisicaLeg.Location = new System.Drawing.Point(729, 315);
+            this.TB_ObservCondFisicaLeg.Location = new System.Drawing.Point(729, 396);
             this.TB_ObservCondFisicaLeg.Name = "TB_ObservCondFisicaLeg";
             this.TB_ObservCondFisicaLeg.ReadOnly = true;
             this.TB_ObservCondFisicaLeg.Size = new System.Drawing.Size(214, 20);
@@ -1322,7 +1321,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(958, 441);
+            this.tabPage2.Size = new System.Drawing.Size(958, 456);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "     CONOCIMIENTOS PARA EL PUESTO     ";
             // 
@@ -1344,18 +1343,18 @@
             this.DGV_Temas.Location = new System.Drawing.Point(10, 24);
             this.DGV_Temas.Margin = new System.Windows.Forms.Padding(0);
             this.DGV_Temas.Name = "DGV_Temas";
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle11.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGV_Temas.RowHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV_Temas.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.DGV_Temas.RowHeadersWidth = 15;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.DGV_Temas.RowsDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.DGV_Temas.RowsDefaultCellStyle = dataGridViewCellStyle10;
             this.DGV_Temas.Size = new System.Drawing.Size(932, 401);
             this.DGV_Temas.TabIndex = 67;
             // 
@@ -1544,7 +1543,6 @@
             this.BT_LimpiarPant.TabIndex = 26;
             this.BT_LimpiarPant.UseVisualStyleBackColor = true;
             this.BT_LimpiarPant.Visible = false;
-            this.BT_LimpiarPant.Click += new System.EventHandler(this.BT_LimpiarPant_Click);
             // 
             // BT_Guardar
             // 
