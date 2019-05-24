@@ -42,8 +42,10 @@ Partial Class ListadoCuentaCorrienteProveedores
         Me.btnPorPantalla = New Administracion.CustomButton()
         Me.btnImprimir = New Administracion.CustomButton()
         Me.lstFiltrada = New Administracion.CustomListBox()
+        Me.ckSoloAnticipos = New System.Windows.Forms.CheckBox()
         Me.Grupo1.SuspendLayout()
         Me.Panel1.SuspendLayout()
+        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'Grupo1
@@ -53,7 +55,7 @@ Partial Class ListadoCuentaCorrienteProveedores
         Me.Grupo1.Controls.Add(Me.opcPendiente)
         Me.Grupo1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Grupo1.ForeColor = System.Drawing.SystemColors.Control
-        Me.Grupo1.Location = New System.Drawing.Point(90, 133)
+        Me.Grupo1.Location = New System.Drawing.Point(90, 92)
         Me.Grupo1.Name = "Grupo1"
         Me.Grupo1.Size = New System.Drawing.Size(410, 50)
         Me.Grupo1.TabIndex = 20
@@ -157,7 +159,7 @@ Partial Class ListadoCuentaCorrienteProveedores
         Me.txtHastaProveedor.Empty = True
         Me.txtHastaProveedor.EnterIndex = -1
         Me.txtHastaProveedor.LabelAssociationKey = -1
-        Me.txtHastaProveedor.Location = New System.Drawing.Point(286, 100)
+        Me.txtHastaProveedor.Location = New System.Drawing.Point(226, 53)
         Me.txtHastaProveedor.MaxLength = 11
         Me.txtHastaProveedor.Name = "txtHastaProveedor"
         Me.txtHastaProveedor.Size = New System.Drawing.Size(100, 20)
@@ -171,7 +173,7 @@ Partial Class ListadoCuentaCorrienteProveedores
         Me.txtDesdeProveedor.Empty = True
         Me.txtDesdeProveedor.EnterIndex = -1
         Me.txtDesdeProveedor.LabelAssociationKey = -1
-        Me.txtDesdeProveedor.Location = New System.Drawing.Point(286, 62)
+        Me.txtDesdeProveedor.Location = New System.Drawing.Point(226, 15)
         Me.txtDesdeProveedor.MaxLength = 11
         Me.txtDesdeProveedor.Name = "txtDesdeProveedor"
         Me.txtDesdeProveedor.Size = New System.Drawing.Size(100, 20)
@@ -186,7 +188,7 @@ Partial Class ListadoCuentaCorrienteProveedores
         Me.CustomLabel2.ControlAssociationKey = -1
         Me.CustomLabel2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel2.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel2.Location = New System.Drawing.Point(149, 103)
+        Me.CustomLabel2.Location = New System.Drawing.Point(89, 56)
         Me.CustomLabel2.Name = "CustomLabel2"
         Me.CustomLabel2.Size = New System.Drawing.Size(110, 18)
         Me.CustomLabel2.TabIndex = 17
@@ -199,7 +201,7 @@ Partial Class ListadoCuentaCorrienteProveedores
         Me.CustomLabel1.ControlAssociationKey = -1
         Me.CustomLabel1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel1.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel1.Location = New System.Drawing.Point(149, 65)
+        Me.CustomLabel1.Location = New System.Drawing.Point(89, 18)
         Me.CustomLabel1.Name = "CustomLabel1"
         Me.CustomLabel1.Size = New System.Drawing.Size(115, 18)
         Me.CustomLabel1.TabIndex = 16
@@ -240,6 +242,12 @@ Partial Class ListadoCuentaCorrienteProveedores
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.ckSoloAnticipos)
+        Me.Panel2.Controls.Add(Me.txtDesdeProveedor)
+        Me.Panel2.Controls.Add(Me.CustomLabel1)
+        Me.Panel2.Controls.Add(Me.CustomLabel2)
+        Me.Panel2.Controls.Add(Me.txtHastaProveedor)
+        Me.Panel2.Controls.Add(Me.Grupo1)
         Me.Panel2.Location = New System.Drawing.Point(0, 50)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(590, 155)
@@ -297,6 +305,18 @@ Partial Class ListadoCuentaCorrienteProveedores
         Me.lstFiltrada.TabIndex = 30
         Me.lstFiltrada.Visible = False
         '
+        'ckSoloAnticipos
+        '
+        Me.ckSoloAnticipos.AutoSize = True
+        Me.ckSoloAnticipos.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ckSoloAnticipos.ForeColor = System.Drawing.SystemColors.Control
+        Me.ckSoloAnticipos.Location = New System.Drawing.Point(354, 18)
+        Me.ckSoloAnticipos.Name = "ckSoloAnticipos"
+        Me.ckSoloAnticipos.Size = New System.Drawing.Size(136, 17)
+        Me.ckSoloAnticipos.TabIndex = 21
+        Me.ckSoloAnticipos.Text = "Sólo Anticipos (AN)"
+        Me.ckSoloAnticipos.UseVisualStyleBackColor = True
+        '
         'ListadoCuentaCorrienteProveedores
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -310,17 +330,14 @@ Partial Class ListadoCuentaCorrienteProveedores
         Me.Controls.Add(Me.btnImprimir)
         Me.Controls.Add(Me.btnPorPantalla)
         Me.Controls.Add(Me.btnCancela)
-        Me.Controls.Add(Me.Grupo1)
-        Me.Controls.Add(Me.txtHastaProveedor)
-        Me.Controls.Add(Me.txtDesdeProveedor)
-        Me.Controls.Add(Me.CustomLabel2)
-        Me.Controls.Add(Me.CustomLabel1)
         Me.Controls.Add(Me.Panel2)
         Me.Name = "ListadoCuentaCorrienteProveedores"
         Me.Grupo1.ResumeLayout(False)
         Me.Grupo1.PerformLayout()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -344,4 +361,5 @@ Partial Class ListadoCuentaCorrienteProveedores
     Friend WithEvents lstFiltrada As Administracion.CustomListBox
     Friend WithEvents btnPorPantalla As Administracion.CustomButton
     Friend WithEvents btnImprimir As Administracion.CustomButton
+    Friend WithEvents ckSoloAnticipos As System.Windows.Forms.CheckBox
 End Class

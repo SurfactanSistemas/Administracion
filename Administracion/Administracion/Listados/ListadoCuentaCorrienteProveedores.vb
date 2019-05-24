@@ -95,6 +95,8 @@ Public Class ListadoCuentaCorrienteProveedores
 
             Dim CCPrv As New CtaCteProveedoresDeudaDesdeHasta(row.Item(0).ToString, row.Item(1).ToString, row.Item(2).ToString, row.Item(3).ToString, row.Item(4), row.Item(5), row.Item(6).ToString, row.Item(7).ToString, row.Item(8).ToString, row.Item(9).ToString, row.Item(10), row.Item(11).ToString, row.Item(12).ToString)
 
+            If ckSoloAnticipos.Checked And UCase(CCPrv.Impre) <> "AN" Then Continue For
+
             If txtLLave = 0 Then
                 txtLLave = 1
                 txtCorte = CCPrv.Proveedor
