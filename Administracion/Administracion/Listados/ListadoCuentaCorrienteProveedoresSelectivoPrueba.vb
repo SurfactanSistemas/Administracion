@@ -1,10 +1,6 @@
 ﻿Imports System.ComponentModel
 Imports ClasesCompartidas
 Imports System.Data.SqlClient
-Imports System.IO
-Imports Microsoft.Office.Interop.Outlook
-Imports CrystalDecisions.CrystalReports.Engine
-
 
 Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
 
@@ -49,7 +45,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
                 'MsgBox("No hay proveedores que listar.", MsgBoxStyle.Information)
             End If
 
-        Catch ex As System.Exception
+        Catch ex As Exception
             MsgBox("Hubo un problema al querer consultar los Proveedores Selectivos precargados en la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
@@ -244,8 +240,8 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Try
             cm.ExecuteNonQuery()
 
-        Catch ex As System.Exception
-            Throw New System.Exception("Hubo un problema al querer limpiar la tabla ImpCtaCtePrvNet en la Base de Datos.")
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer limpiar la tabla ImpCtaCtePrvNet en la Base de Datos.")
         Finally
 
             cn.Close()
@@ -281,8 +277,8 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
                 Throw New SinParidadException("Paridad Inexistente")
             End If
 
-        Catch ex As System.Exception
-            Throw New System.Exception(ex.Message)
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
         Finally
 
             dr = Nothing
@@ -307,8 +303,8 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
 
             dr.Fill(tabla)
 
-        Catch ex As System.Exception
-            Throw New System.Exception("Hubo un problema al querer consultar la Cuenta Corriente del Proveedor en la Base de Datos.")
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Cuenta Corriente del Proveedor en la Base de Datos.")
         Finally
 
             dr = Nothing
@@ -337,8 +333,8 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
 
             dr.Fill(proveedor)
 
-        Catch ex As System.Exception
-            Throw New System.Exception("Hubo un problema al querer consultar los datos del Proveedor en la Base de Datos.")
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar los datos del Proveedor en la Base de Datos.")
         Finally
 
             dr = Nothing
@@ -368,8 +364,8 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
 
             dr.Fill(compra)
 
-        Catch ex As System.Exception
-            Throw New System.Exception("Hubo un problema al querer consultar la Factura en la Base de Datos.")
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Factura en la Base de Datos.")
         Finally
 
             dr = Nothing
@@ -398,8 +394,8 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
 
             dr.Fill(acumulado)
 
-        Catch ex As System.Exception
-            Throw New System.Exception("Hubo un problema al querer consultar los valores acumulados correspondientes al Proveedor: " & proveedor & " en la Base de Datos.")
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar los valores acumulados correspondientes al Proveedor: " & proveedor & " en la Base de Datos.")
         Finally
 
             dr = Nothing
@@ -449,7 +445,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
 
             _LimpiarImpCtaCtePrvNet()
 
-        Catch ex As System.Exception
+        Catch ex As Exception
             MsgBox(ex.Message)
             Exit Sub
         End Try
@@ -471,7 +467,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Catch ex As SinParidadException
             MsgBox(ex.Message, MsgBoxStyle.Information)
             Exit Sub
-        Catch ex As System.Exception
+        Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical)
             txtFechaEmision.Focus()
             Exit Sub
@@ -513,7 +509,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
 
                     tabla = _BuscarCtaCtePrvSelectivo(varProveedor)
 
-                Catch ex As System.Exception
+                Catch ex As Exception
                     MsgBox(ex.Message)
                     Exit Sub
                 End Try
@@ -584,7 +580,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
 
                         Try
                             CampoProveedor = _BuscarProveedor(varProveedor)
-                        Catch ex As System.Exception
+                        Catch ex As Exception
                             MsgBox(ex.Message, MsgBoxStyle.Critical)
                             Exit Sub
                         End Try
@@ -603,7 +599,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
                         Dim compra As DataRow = Nothing
                         Try
                             compra = _BuscarCompra(CCPrv.nroInterno)
-                        Catch ex As System.Exception
+                        Catch ex As Exception
                             MsgBox(ex.Message, MsgBoxStyle.Critical)
                             Exit Sub
                         End Try
@@ -682,7 +678,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
                         Try
                             CampoAcumulado = _BuscarAcumulado(varProveedor, varOrdFecha)
 
-                        Catch ex As System.Exception
+                        Catch ex As Exception
                             MsgBox(ex.Message, MsgBoxStyle.Critical)
                             Exit Sub
                         End Try
@@ -798,7 +794,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
 
                         Try
                             SQLConnector.executeProcedure("alta_impCtaCtePrvNetII", CCPrv.Clave, CCPrv.Proveedor, CCPrv.Tipo, CCPrv.letra, CCPrv.punto, CCPrv.numero, varTotal, varSaldo, CCPrv.fecha, CCPrv.vencimiento, CCPrv.VencimientoII, CCPrv.Impre, CCPrv.nroInterno, txtEmpresa, varAcumulado, WOrden, txtFechaEmision.Text, "", "", "", varParidadTotal, varSaldoOriginal, varDife, 0, 0, "", varRetIb, varRetGan, varAcuNeto, varParidad, varTotalUs, varSaldoUs, varAcumulaUs, varPago, IIf(varParidad = 0, 0, varPesosOrig), varDifCambio, AcumDifCambio, AcumPesosOrig)
-                        Catch ex As System.Exception
+                        Catch ex As Exception
                             MsgBox(ex.Message, MsgBoxStyle.Critical)
                             Exit Sub
                         End Try
@@ -810,6 +806,8 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
             End If
 
         Next
+
+        _ActualizarMarcaCuitCliente()
 
         txtUno = "{impCtaCtePrvNet.Proveedor} in " + x + "" + x + " to " + x + "ZZZZZZZZZZZ" + x
         txtDos = " and {impCtaCtePrvNet.Saldo} <> 0.00"
@@ -830,7 +828,35 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
 
     End Sub
 
-    
+    Private Sub _ActualizarMarcaCuitCliente()
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("")
+
+        Try
+
+            cn.ConnectionString = _ConectarA()
+            cn.Open()
+            cm.Connection = cn
+
+            cm.CommandText = "UPDATE Proveedor SET ImpreCuitCliente = ''"
+            cm.ExecuteNonQuery()
+
+            cm.CommandText = "UPDATE Proveedor SET ImpreCuitCliente = '1' FROM Proveedor INNER JOIN Cliente ON Proveedor.Cuit = Cliente.Cuit"
+            cm.ExecuteNonQuery()
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer actualizar la marca de Proveedor con mismo cuit que Cliente consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+    End Sub
+
     Private Sub txtDesdeProveedor_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtDesdeProveedor.KeyDown
         If e.KeyData = Keys.Enter Then
 
@@ -859,11 +885,11 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
 
         Dim WFecha = txtFechaEmision.Text
 
-        For Each _C As TextBox In Me.Panel2.Controls.OfType(Of TextBox)()
+        For Each _C As TextBox In Panel2.Controls.OfType(Of TextBox)()
             _C.Text = ""
         Next
 
-        For Each _C As MaskedTextBox In Me.Panel2.Controls.OfType(Of MaskedTextBox)()
+        For Each _C As MaskedTextBox In Panel2.Controls.OfType(Of MaskedTextBox)()
             _C.Clear()
         Next
 
@@ -1018,7 +1044,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Return valido
     End Function
 
-    Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message, ByVal keyData As Keys) As Boolean
+    Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData As Keys) As Boolean
 
         If GRilla.Focused Or GRilla.IsCurrentCellInEditMode Then ' Detectamos los ENTER tanto si solo estan en foco o si estan en edición una celda.
             GRilla.CommitEdit(DataGridViewDataErrorContexts.Commit) ' Guardamos todos los datos que no hayan sido confirmados.
@@ -1136,8 +1162,8 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
 
             WExistenProveedoresCargados = dr.HasRows
 
-        Catch ex As System.Exception
-            Throw New System.Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
         Finally
 
             dr = Nothing

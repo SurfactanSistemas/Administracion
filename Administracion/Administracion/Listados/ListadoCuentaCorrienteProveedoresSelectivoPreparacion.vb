@@ -520,6 +520,12 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
             '_VistaPrevia(crdoc)
             Try
                 _GuardarProveedores()
+
+                '
+                ' Actualizamos la marca para los Proveedores con mismo cuit que Cliente.
+                '
+                _ActualizarMarcaCuitCliente()
+
             Catch ex As Exception
                 MsgBox(ex.Message, MsgBoxStyle.Information)
                 Exit Sub
@@ -532,6 +538,37 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
             End With
 
         End If
+
+    End Sub
+
+    Private Sub _ActualizarMarcaCuitCliente()
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("")
+        Dim dr As SqlDataReader
+
+        Try
+
+            cn.ConnectionString = Proceso._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            cm.CommandText = "UPDATE Proveedor SET ImpreCuitCliente = ''"
+            cm.ExecuteNonQuery()
+
+            cm.CommandText = "UPDATE Proveedor SET ImpreCuitCliente = '1' FROM Proveedor INNER JOIN Cliente ON Proveedor.Cuit = Cliente.Cuit"
+            cm.ExecuteNonQuery()
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer actualizar la marca de Proveedor con mismo cuit que Cliente consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
 
     End Sub
 
