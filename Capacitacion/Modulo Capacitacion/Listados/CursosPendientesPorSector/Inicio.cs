@@ -51,6 +51,9 @@ namespace Modulo_Capacitacion.Listados.CursosPendientesPorSector
 
         private VistaPrevia _PrepararVistaPrevia()
         {
+            Helper.ActualizarCantidadPersonasHoras(txtAno.Text);
+            Helper.ActualizarTipoCursada();
+
             CursosPendientesPorSector reporte = _PrepararReporte();
 
             VistaPrevia frm = new VistaPrevia();

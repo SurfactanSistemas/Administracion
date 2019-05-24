@@ -183,7 +183,7 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
 
             if (ZVersion == 0 || ZVersion == int.Parse(TB_VerPer.Text))
             {
-                Per = Per.BuscarUno(Perfil);
+                Per = Per.BuscarUno(TB_CodPer.Text);
 
                 TB_DescPer.Text = Per.Descripcion;
                 TB_CodSec.Text = Per.sector.Codigo.ToString();
@@ -233,9 +233,9 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
             }
             else
             {
-                PerVer = PerVer.BuscarUno(Perfil, TB_VerPer.Text);
+                PerVer = PerVer.BuscarUno(TB_CodPer.Text, TB_VerPer.Text);
 
-                if (PerVer.Version > 0)
+                if (PerVer.Version > -1)
                 {
                     TB_DescPer.Text = PerVer.Descripcion;
                     TB_CodSec.Text = PerVer.sector.Codigo.ToString();

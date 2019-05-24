@@ -19,7 +19,7 @@ Public Class VistaPrevia
 
         With Me.CrystalReportViewer1
             .ReportSource = Me.Reporte
-            .Refresh()
+            '.Refresh()
         End With
 
     End Sub
@@ -27,7 +27,7 @@ Public Class VistaPrevia
     Public Sub EstablecerConexion(ByVal Servidor As String, ByVal BaseDatos As String)
         With Me.Reporte
             .DataSourceConnections.Item(0).SetConnection(Trim(Servidor), Trim(BaseDatos), False)
-            .Refresh()
+            '.Refresh()
         End With
     End Sub
 

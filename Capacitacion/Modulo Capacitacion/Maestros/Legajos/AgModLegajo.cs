@@ -82,6 +82,8 @@ namespace Modulo_Capacitacion.Maestros.Legajos
 
             ComprobarModifPerfil();
 
+            //TB_FechaIng.Enabled = false;
+
             if (TB_FechaEgreso.BackColor == Color.Red)
             {
                 InhabilitarModifiaciones();
@@ -489,6 +491,7 @@ namespace Modulo_Capacitacion.Maestros.Legajos
 
         private void BT_LimpiarPant_Click(object sender, EventArgs e)
         {
+            TB_FechaIng.Enabled = true;
             if (!AModificar)
             {
                 TB_DescPerfil.Text = "";

@@ -74,6 +74,8 @@ Public Class Login
 
                         If IO.File.Exists("C:\TempReclamos\" & WTipo & WNumero & WAnio & ".pdf") Then
                             ConsultasVarias.Clases.Helper._EnviarEmail(WDirecciones, WAsunto, WCuerpoMsj, {"C:\TempReclamos\" & WTipo & WNumero & WAnio & ".pdf"}, False)
+                        Else
+                            MsgBox("No se encontró el archivo " & "C:\TempReclamos\" & WTipo & WNumero & WAnio & ".pdf")
                         End If
 
                     Case 3
@@ -82,6 +84,8 @@ Public Class Login
                         Dim WDirecciones As String = Environment.GetCommandLineArgs(3)
                         Dim WAsunto As String = Environment.GetCommandLineArgs(4)
                         Dim WCuerpoMsj As String = Environment.GetCommandLineArgs(5)
+
+                        ConsultasVarias.Clases.Conexion.EmpresaDeTrabajo = "SurfactanSa"
 
                         Dim frm As New ConsultasVarias.VistaPrevia
 
@@ -93,11 +97,17 @@ Public Class Login
 
                         End With
 
-                        ConsultasVarias.Clases.Conexion.EmpresaDeTrabajo = "SurfactanSa"
+                        '
+                        ' De aca, van a venir los mails de los responsables. Agregamos las que faltan.
+                        '
+                        WDirecciones = _DefinirMailsExtras(WNumero, WDirecciones)
+
                         ConsultasVarias.Clases.Helper._ExportarReporte(frm, ConsultasVarias.Clases.Enumeraciones.FormatoExportacion.PDF, WNumero & "Reclamo.pdf", "C:\TempReclamos\")
 
                         If IO.File.Exists("C:\TempReclamos\" & WNumero & "Reclamo.pdf") Then
-                            ConsultasVarias.Clases.Helper._EnviarEmail(WDirecciones, WAsunto, WCuerpoMsj, {"C:\TempReclamos\" & WNumero & "Reclamo.pdf"}, False)
+                            ConsultasVarias.Clases.Helper._EnviarEmail(WDirecciones, WAsunto, WCuerpoMsj, {"C:\TempReclamos\" & WNumero & "Reclamo.pdf"}, True)
+                        Else
+                            MsgBox("No se encontró el archivo " & "C:\TempReclamos\" & WNumero & "Reclamo.pdf")
                         End If
                     Case 4
 
@@ -130,6 +140,8 @@ Public Class Login
 
                             If File.Exists(WRuta & WNombreArchivo) Then
                                 ConsultasVarias.Clases.Helper._EnviarEmail(WDirecciones, WAsunto, WCuerpoMsj, {WRuta & WNombreArchivo}, False)
+                            Else
+                                MsgBox("No se encontró el archivo " & WRuta & WNombreArchivo)
                             End If
 
                         End With
@@ -146,6 +158,132 @@ Public Class Login
         End Try
 
     End Sub
+
+    Private Function _DefinirMailsExtras(ByVal WNumero As String, ByVal WDirecciones As String) As String
+
+        '
+        ' Completamos los datos de las direcciones cuando lleguen.
+        '
+        WDirecciones = ""
+        '
+        ' Definimos los mails obligatorios, según tipo Producto Terminado indicado en Reclamo.
+        '
+        Dim WReclamo As DataRow = GetSingle("SELECT * FROM CentroReclamos WHERE Numero = '" & WNumero & "'")
+
+        If WReclamo Is Nothing Then
+            Return WDirecciones
+        End If
+
+        Dim WTerminado As String = OrDefault(WReclamo.Item("Producto"), "")
+
+        Dim WTipoProd As String = _DeterminarTipoProd(WTerminado)
+
+        Select Case WTipoProd
+            Case "PG"
+                For Each d As String In {"drodriguez@surfactan.com.ar", "ctomaszek@surfactan.com.ar"}
+                    If Not WDirecciones.Contains(d) Then WDirecciones &= d & ";"
+                Next
+            Case "CO"
+                For Each d As String In {"hfondevielle@surfactan.com.ar", "textil@surfactan.com.ar", "hsuarez@surfactan.com.ar"}
+                    If Not WDirecciones.Contains(d) Then WDirecciones &= d & ";"
+                Next
+            Case "FA"
+                For Each d As String In {"drodriguez@surfactan.com.ar", "dsuarez@surfactan.com.ar", "msosa@surfactan.com.ar", "scoppiello@surfactan.com.ar", "svarela@surfactan.com.ar", "supcc@surfactan.com.ar"}
+                    If Not WDirecciones.Contains(d) Then WDirecciones &= d & ";"
+                Next
+            Case Else ' El resto de los Productos los tomamos como Químicos.
+                For Each d As String In {"drodriguez@surfactan.com.ar", "dsuarez@surfactan.com.ar", "mescames@surfactan.com.ar", "hmuller@surfactan.com.ar", "svarela@surfactan.com.ar", "supcc@surfactan.com.ar"}
+                    If Not WDirecciones.Contains(d) Then WDirecciones &= d & ";"
+                Next
+        End Select
+
+        For Each d As String In ("ebiglieri@surfactan.com.ar; isocalidad@surfactan.com.ar; calidad@surfactan.com.ar; calidad2@surfactan.com.ar; wbarosio@surfactan.com.ar; wbarosio@gmail.com; lsantos@surfactan.com.ar; juanfs@surfactan.com.ar").Split(";")
+            If Not WDirecciones.Contains(Trim(d)) Then WDirecciones &= Trim(d) & ";"
+        Next
+
+        '
+        ' Busco el vendedor definido para el Cliente.
+        '
+        Dim WCliente As DataRow = GetSingle("SELECT * FROM Cliente WHERE Cliente = '" & OrDefault(WReclamo.Item("Cliente"), "") & "'")
+
+        If WCliente IsNot Nothing Then
+            Dim WVendedor As DataRow = GetSingle("SELECT * FROM Vendedor WHERE Vendedor  = '" & OrDefault(WCliente.Item("Vendedor"), 99) & "'")
+
+            If WVendedor IsNot Nothing Then
+                If WTipoProd = "FA" Then
+                    WDirecciones &= "hsein@surfactan.com.ar; grodriguez@surfactan.com.ar"
+                Else
+
+                    If Trim(OrDefault(WVendedor.Item("Email1"), "")) <> "" Then
+                        If Not WDirecciones.Contains(OrDefault(WVendedor.Item("Email1"), "")) Then WDirecciones &= OrDefault(WVendedor.Item("Email1"), "")
+                    End If
+
+                    If Trim(OrDefault(WVendedor.Item("Email2"), "")) <> "" Then
+                        If Not WDirecciones.Contains(OrDefault(WVendedor.Item("Email2"), "")) Then WDirecciones &= OrDefault(WVendedor.Item("Email2"), "")
+                    End If
+
+                End If
+            End If
+
+        End If
+
+        Return WDirecciones
+
+    End Function
+
+    Private Function _DeterminarTipoProd(ByVal WTerminado As String) As String
+
+        WTerminado = UCase(WTerminado)
+
+        Dim XTipoPro As String = "PT"
+
+        Dim XCodigo As Integer = Val(Mid(WTerminado, 4, 5))
+
+        If Microsoft.VisualBasic.Left(WTerminado, 2) <> "PT" Then
+            Select Case Microsoft.VisualBasic.Left(WTerminado, 2)
+                Case "DY", "DS"
+                    XTipoPro = "CO"
+                Case "QC", "YF"
+                    XTipoPro = "FA"
+                Case "YQ", "YH", "YP"
+                    XTipoPro = "PT"
+                Case Else
+                    XTipoPro = "PT"
+            End Select
+        Else
+            If XCodigo >= 0 And XCodigo <= 999 Then
+                XTipoPro = "CO"
+            Else
+                If XCodigo >= 11000 And XCodigo <= 12999 Then
+                    XTipoPro = "CO"
+                Else
+                    If XCodigo >= 25000 And XCodigo <= 25999 Then
+                        XTipoPro = "FA"
+                    Else
+                        If XCodigo >= 2300 And XCodigo <= 2399 Then
+                            XTipoPro = "BI"
+                        Else
+                            XTipoPro = "PT"
+                        End If
+                    End If
+                End If
+            End If
+        End If
+
+        Dim ZLinea As Integer = 0
+        Dim WTerm As DataRow = GetSingle("SELECT Linea FROM Terminado WHERE Codigo = '" & WTerminado & "'")
+
+        If WTerm IsNot Nothing Then ZLinea = OrDefault(WTerm.Item("Linea"), 0)
+
+        Select Case ZLinea
+            Case 8
+                XTipoPro = "PG"
+            Case 10, 20, 22, 24, 25, 26, 27, 28, 29, 30
+                XTipoPro = "FA"
+        End Select
+
+        Return XTipoPro
+    End Function
 
     Private Sub btnAccept_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAccept.Click
 

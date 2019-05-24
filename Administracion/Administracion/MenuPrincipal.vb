@@ -292,7 +292,7 @@
         abrir(New AvisoOPAProveedores)
     End Sub
 
-    Private Sub GestiónDeAvisosDeOPDisponiblesAProveedoresToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GestiónDeAvisosDeOPDisponiblesAProveedoresToolStripMenuItem.Click
+    Private Sub EnvíoDeEmailPorAnticipoToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EnvíoDeEmailPorAnticipoToolStripMenuItem.Click
         With New GestionAvisosOPDisponiblesProveedores
             .Show(Me)
         End With

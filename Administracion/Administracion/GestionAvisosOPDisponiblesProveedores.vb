@@ -120,7 +120,7 @@ Public Class GestionAvisosOPDisponiblesProveedores
 
             Using cm As New SqlCommand()
                 cm.Connection = cn
-                cm.CommandText = "SELECT p.Proveedor, p.Fecha, pr.Nombre, p.Tipo2, p.Importe2, p.Numero2, p.Importe, p.Cuenta FROM Pagos p LEFT OUTER JOIN Proveedor pr ON pr.Proveedor = p.Proveedor WHERE p.Orden = '" & OrdenPago & "' and p.TipoReg IN ('02', '2')"
+                cm.CommandText = "SELECT p.Proveedor, p.Fecha, pr.Nombre, p.Fecha2, p.Tipo2, p.Importe2, p.Numero2, p.Importe, p.Cuenta FROM Pagos p LEFT OUTER JOIN Proveedor pr ON pr.Proveedor = p.Proveedor WHERE p.Orden = '" & OrdenPago & "' and p.TipoReg IN ('02', '2')"
 
                 Using dr As SqlDataReader = cm.ExecuteReader
 
@@ -136,7 +136,7 @@ Public Class GestionAvisosOPDisponiblesProveedores
 
     End Function
 
-    Private Sub _EnviarAvisoOPDisponible(ByVal ZProveedor As String, ByVal wDescProveedor As String, Optional ByVal OrdenPago As String = "", Optional ByVal EsPorTransferencia As Boolean = False)
+    Private Sub _EnviarAvisoOPDisponible(ByVal ZProveedor As String, ByVal wDescProveedor As String, Optional ByVal OrdenPago As String = "", Optional ByVal EsPorTransferencia As Boolean = False, Optional ByVal wFechasTransferencias As String = "")
 
         If ZProveedor.Trim = "" Then Exit Sub
         If EsPorTransferencia And Trim(OrdenPago) = "" Then Exit Sub
@@ -169,7 +169,13 @@ Public Class GestionAvisosOPDisponiblesProveedores
                 Dim WBody = ""
 
                 If EsPorTransferencia Then
-                    WBody = "Informamos que en el día de la fecha, SURFACTAN S.A. le ha realizado una transferencia. " & vbCrLf & vbCrLf & "Adjuntamos Orden de Pago y retenciones si correspondiesen."
+
+                    WBody = "Informamos que en el día de la fecha, SURFACTAN S.A. le ha realizado una transferencia"
+
+                    If wFechasTransferencias.Trim <> "" Then WBody &= " a las siguientes fechas: " & wFechasTransferencias
+
+                    WBody &= "." & vbCrLf & vbCrLf & "Adjuntamos Orden de Pago y retenciones si correspondiesen."
+
                 Else
                     WBody = "Informamos que se encuentra a su disposición un pago que podrá ser retirado por nuestras oficinas (Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires) en el horario de 14:00 a 17:00 hs."
                 End If
@@ -333,6 +339,7 @@ Public Class GestionAvisosOPDisponiblesProveedores
         ProgressBar1.Maximum = dgvPagos.Rows.Count + 1
 
         For Each row2 As DataGridViewRow In dgvPagos.Rows
+            Dim WFechasTransferencias As String = ""
             With row2
                 Dim WOrden As String = OrDefault(.Cells("Orden").Value, "")
                 Dim WEnviar As Boolean = OrDefault(.Cells("Enviar").Value, False)
@@ -356,6 +363,7 @@ Public Class GestionAvisosOPDisponiblesProveedores
                 If WOrdenPago.Rows.Count > 0 Then
 
                     For Each row As DataRow In WOrdenPago.Rows
+
                         With row
 
                             Dim WTipo2 = OrDefault(.Item("Tipo2"), "00")
@@ -363,14 +371,19 @@ Public Class GestionAvisosOPDisponiblesProveedores
                             Select Case Val(WTipo2)
                                 Case 2
 
-                                    'If WOrdenPago.Rows.Count = 1 Then
                                     EsPorTransferencia = Val(OrDefault(.Item("Numero2"), "")) = 0
-                                    ' Else
-                                    'EsPorTransferencia = False
-                                    'End If
+
+                                    If EsPorTransferencia And Not WFechasTransferencias.Contains(OrDefault(.Item("Fecha2"), "")) Then
+                                        WFechasTransferencias &= OrDefault(.Item("Fecha2"), "") & ","
+                                    End If
 
                                 Case 6 ' Compensación entre Cuentas Corrientes.
                                     EsPorTransferencia = Val(OrDefault(.Item("Cuenta"), "00")) = 5
+
+                                    If EsPorTransferencia And Not WFechasTransferencias.Contains(OrDefault(.Item("Fecha2"), "")) Then
+                                        WFechasTransferencias &= OrDefault(.Item("Fecha2"), "") & ","
+                                    End If
+
                                     If EsPorTransferencia Then Exit For
                                 Case Else
                                     EsPorTransferencia = False
@@ -387,7 +400,9 @@ Public Class GestionAvisosOPDisponiblesProveedores
 
                         If Trim(WProveedor) <> "" Then
 
-                            _EnviarAvisoOPDisponible(WProveedor, WDescProveedor, WOrden, EsPorTransferencia)
+                            WFechasTransferencias = WFechasTransferencias.TrimEnd(",")
+
+                            _EnviarAvisoOPDisponible(WProveedor, WDescProveedor, WOrden, EsPorTransferencia, WFechasTransferencias)
 
                         End If
 

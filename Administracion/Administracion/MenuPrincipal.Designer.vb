@@ -93,7 +93,7 @@ Partial Class MenuPrincipal
         Me.FinDelSistemaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.btnCambio = New System.Windows.Forms.Button()
-        Me.GestiónDeAvisosDeOPDisponiblesAProveedoresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EnvíoDeEmailPorAnticipoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
@@ -152,7 +152,7 @@ Partial Class MenuPrincipal
         '
         'NovedadesToolStripMenuItem
         '
-        Me.NovedadesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IngresoDeNovedadesToolStripMenuItem, Me.ConsultaDeRemitosToolStripMenuItem, Me.AplicacionDeCorpobantesToolStripMenuItem, Me.IngresoDePagosToolStripMenuItem, Me.DepositosToolStripMenuItem, Me.RecibosToolStripMenuItem, Me.ConsultaDeChequesToolStripMenuItem, Me.InteresesToolStripMenuItem, Me.SeleccionDeRecibosAAplicarDifverenciaDeCambioToolStripMenuItem, Me.IngresoDeProveedorAPagoSemanalToolStripMenuItem, Me.GestiónDeAvisosDeOPDisponiblesAProveedoresToolStripMenuItem})
+        Me.NovedadesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IngresoDeNovedadesToolStripMenuItem, Me.ConsultaDeRemitosToolStripMenuItem, Me.AplicacionDeCorpobantesToolStripMenuItem, Me.IngresoDePagosToolStripMenuItem, Me.DepositosToolStripMenuItem, Me.RecibosToolStripMenuItem, Me.ConsultaDeChequesToolStripMenuItem, Me.InteresesToolStripMenuItem, Me.SeleccionDeRecibosAAplicarDifverenciaDeCambioToolStripMenuItem, Me.IngresoDeProveedorAPagoSemanalToolStripMenuItem})
         Me.NovedadesToolStripMenuItem.Name = "NovedadesToolStripMenuItem"
         Me.NovedadesToolStripMenuItem.Size = New System.Drawing.Size(78, 20)
         Me.NovedadesToolStripMenuItem.Text = "Novedades"
@@ -245,7 +245,7 @@ Partial Class MenuPrincipal
         '
         'ListadosToolStripMenuItem
         '
-        Me.ListadosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ConsultaDeCuentaCorrientePorPantallaToolStripMenuItem, Me.CuentaCorrienteDeProveedoresToolStripMenuItem, Me.SaldoDeCuentaCorrienteDeProveedoresToolStripMenuItem, Me.CuantaCorrienteDeProveedoresSelectivoToolStripMenuItem, Me.ListadoDeCuentaCorrienteDeProveedoresAFechaToolStripMenuItem, Me.ToolStripMenuItem8, Me.ListadosContablesToolStripMenuItem, Me.ListadoDeDepositosToolStripMenuItem, Me.ListadoDePagosPosdatadosToolStripMenuItem, Me.MovmietosDeBancosToolStripMenuItem, Me.ListadoDeValoresEnCarteraToolStripMenuItem, Me.ListadoDeChequesEmitidosToolStripMenuItem, Me.ListadoDeRetencionesDeIngresosBrutosToolStripMenuItem, Me.ControlDeRecibosProvisoriosToolStripMenuItem1, Me.ListadoDeDeudaDePymeNacionToolStripMenuItem1, Me.ListadoDeCuentasCorrientesDeProveedoresAnaliticosToolStripMenuItem, Me.ListadoDeProyeccionDeCuentaCorrientesDeProveedoresAnaliticosToolStripMenuItem, Me.EnvíoDeAvisoDeOPAProveedoresPorEMailToolStripMenuItem})
+        Me.ListadosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ConsultaDeCuentaCorrientePorPantallaToolStripMenuItem, Me.CuentaCorrienteDeProveedoresToolStripMenuItem, Me.SaldoDeCuentaCorrienteDeProveedoresToolStripMenuItem, Me.CuantaCorrienteDeProveedoresSelectivoToolStripMenuItem, Me.ListadoDeCuentaCorrienteDeProveedoresAFechaToolStripMenuItem, Me.ToolStripMenuItem8, Me.ListadosContablesToolStripMenuItem, Me.ListadoDeDepositosToolStripMenuItem, Me.ListadoDePagosPosdatadosToolStripMenuItem, Me.MovmietosDeBancosToolStripMenuItem, Me.ListadoDeValoresEnCarteraToolStripMenuItem, Me.ListadoDeChequesEmitidosToolStripMenuItem, Me.ListadoDeRetencionesDeIngresosBrutosToolStripMenuItem, Me.ControlDeRecibosProvisoriosToolStripMenuItem1, Me.ListadoDeDeudaDePymeNacionToolStripMenuItem1, Me.ListadoDeCuentasCorrientesDeProveedoresAnaliticosToolStripMenuItem, Me.ListadoDeProyeccionDeCuentaCorrientesDeProveedoresAnaliticosToolStripMenuItem, Me.EnvíoDeEmailPorAnticipoToolStripMenuItem, Me.EnvíoDeAvisoDeOPAProveedoresPorEMailToolStripMenuItem})
         Me.ListadosToolStripMenuItem.Name = "ListadosToolStripMenuItem"
         Me.ListadosToolStripMenuItem.Size = New System.Drawing.Size(62, 20)
         Me.ListadosToolStripMenuItem.Text = "Listados"
@@ -552,11 +552,11 @@ Partial Class MenuPrincipal
         Me.btnCambio.Text = "Cambio de Empresa"
         Me.btnCambio.UseVisualStyleBackColor = True
         '
-        'GestiónDeAvisosDeOPDisponiblesAProveedoresToolStripMenuItem
+        'EnvíoDeEmailPorAnticipoToolStripMenuItem
         '
-        Me.GestiónDeAvisosDeOPDisponiblesAProveedoresToolStripMenuItem.Name = "GestiónDeAvisosDeOPDisponiblesAProveedoresToolStripMenuItem"
-        Me.GestiónDeAvisosDeOPDisponiblesAProveedoresToolStripMenuItem.Size = New System.Drawing.Size(350, 22)
-        Me.GestiónDeAvisosDeOPDisponiblesAProveedoresToolStripMenuItem.Text = "Gestión de Avisos de OP disponibles a Proveedores"
+        Me.EnvíoDeEmailPorAnticipoToolStripMenuItem.Name = "EnvíoDeEmailPorAnticipoToolStripMenuItem"
+        Me.EnvíoDeEmailPorAnticipoToolStripMenuItem.Size = New System.Drawing.Size(443, 22)
+        Me.EnvíoDeEmailPorAnticipoToolStripMenuItem.Text = "Envío de Aviso por Email de Anticipos"
         '
         'MenuPrincipal
         '
@@ -649,5 +649,5 @@ Partial Class MenuPrincipal
     Friend WithEvents ToolStripMenuItem11 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents EnvioEnEMailAClientesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents EnvíoDeAvisoDeOPAProveedoresPorEMailToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents GestiónDeAvisosDeOPDisponiblesAProveedoresToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents EnvíoDeEmailPorAnticipoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class

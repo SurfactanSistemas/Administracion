@@ -5060,11 +5060,14 @@ Public Class Pagos
 
         Dim frm As New VistaPrevia
         frm.Reporte = crdoc
+        frm.Reporte.SetParameterValue("EsTransferencia", 0)
 
         If GenerarPDF Then
 
             Dim frm2 As New ConsultasVarias.VistaPrevia
             frm2.Reporte = crdoc
+
+            frm2.Reporte.SetParameterValue("EsTransferencia", 1)
 
             ConsultasVarias.Clases.Conexion.EmpresaDeTrabajo = "SurfactanSa"
 
@@ -8086,8 +8089,10 @@ Public Class Pagos
             Dim WProveedor As String = ""
 
             If WOrdenPago.Rows.Count > 0 Then
+                Dim WFechasTransferencias As String = ""
 
                 For Each row As DataRow In WOrdenPago.Rows
+
                     With row
 
                         Dim WTipo2 = OrDefault(.Item("Tipo2"), "00")
@@ -8095,14 +8100,19 @@ Public Class Pagos
                         Select Case Val(WTipo2)
                             Case 2
 
-                                'If formatonumerico(OrDefault(.Item("Importe2"), 0)) = formatonumerico(OrDefault(.Item("Importe"), 0)) Then
-                                'If WOrdenPago.Rows.Count = 1 Then
                                 EsPorTransferencia = Val(OrDefault(.Item("Numero2"), "")) = 0
-                                ' Else
-                                ' EsPorTransferencia = False
-                                ' End If
+                                
+                                If EsPorTransferencia And Not WFechasTransferencias.Contains(OrDefault(.Item("Fecha2"), "")) Then
+                                    WFechasTransferencias &= OrDefault(.Item("Fecha2"), "") & ","
+                                End If
+
                             Case 6
                                 EsPorTransferencia = Val(OrDefault(.Item("Cuenta"), "00")) = 5
+
+                                If EsPorTransferencia And Not WFechasTransferencias.Contains(OrDefault(.Item("Fecha2"), "")) Then
+                                    WFechasTransferencias &= OrDefault(.Item("Fecha2"), "") & ","
+                                End If
+
                                 If EsPorTransferencia Then Exit For
                             Case Else
                                 EsPorTransferencia = False
@@ -8119,7 +8129,9 @@ Public Class Pagos
 
                     If Trim(WProveedor) <> "" Then
 
-                        _EnviarAvisoOPDisponible(WProveedor, WDescProveedor, txtOrdenPago.Text, EsPorTransferencia)
+                        WFechasTransferencias = WFechasTransferencias.TrimEnd(",")
+
+                        _EnviarAvisoOPDisponible(WProveedor, WDescProveedor, txtOrdenPago.Text, EsPorTransferencia, WFechasTransferencias)
 
                         MsgBox("¡Aviso enviado correctamente!", MsgBoxStyle.Information)
 
@@ -8147,7 +8159,7 @@ Public Class Pagos
 
             Using cm As New SqlCommand()
                 cm.Connection = cn
-                cm.CommandText = "SELECT pr.Nombre, p.Proveedor, p.Tipo2, p.Importe2, p.Numero2, p.Importe, p.Cuenta FROM Pagos p INNER JOIN Proveedor pr ON pr.Proveedor = p.Proveedor WHERE p.Orden = '" & OrdenPago & "' and p.TipoReg IN ('02', '2')"
+                cm.CommandText = "SELECT pr.Nombre, p.Proveedor, p.Fecha2, p.Tipo2, p.Importe2, p.Numero2, p.Importe, p.Cuenta FROM Pagos p INNER JOIN Proveedor pr ON pr.Proveedor = p.Proveedor WHERE p.Orden = '" & OrdenPago & "' and p.TipoReg IN ('02', '2')"
 
                 Using dr As SqlDataReader = cm.ExecuteReader
 
@@ -8163,7 +8175,7 @@ Public Class Pagos
 
     End Function
 
-    Private Sub _EnviarAvisoOPDisponible(ByVal Proveedor As String, ByVal DescProveedor As String, Optional ByVal OrdenPago As String = "", Optional ByVal EsPorTransferencia As Boolean = False)
+    Private Sub _EnviarAvisoOPDisponible(ByVal Proveedor As String, ByVal DescProveedor As String, Optional ByVal OrdenPago As String = "", Optional ByVal EsPorTransferencia As Boolean = False, Optional ByVal wFechasTransferencias As String = "")
 
         If Proveedor.Trim = "" Then Exit Sub
         If EsPorTransferencia And Trim(OrdenPago) = "" Then Exit Sub
@@ -8193,7 +8205,13 @@ Public Class Pagos
                 Dim WBody = ""
 
                 If EsPorTransferencia Then
-                    WBody = "Informamos que en el día de la fecha, SURFACTAN S.A. le ha realizado una transferencia. " & vbCrLf & vbCrLf & "Adjuntamos Orden de Pago y retenciones si correspondiesen."
+
+                    WBody = "Informamos que en el día de la fecha, SURFACTAN S.A. le ha realizado una transferencia"
+
+                    If wFechasTransferencias.Trim <> "" Then WBody &= " a las siguientes fechas: " & wFechasTransferencias
+
+                    WBody &= "." & vbCrLf & vbCrLf & "Adjuntamos Orden de Pago y retenciones si correspondiesen."
+
                 Else
                     WBody = "Informamos que se encuentra a su disposición un pago que podrá ser retirado por nuestras oficinas (Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires) en el horario de 14:00 a 17:00 hs."
                 End If

@@ -131,7 +131,7 @@ namespace Negocio
         {
             Conexion repo = new Conexion();
 
-            string consulta = "select * from legajoversion where codigo = " + cod + " and version = " + ver;
+            string consulta = "select lv.*, l.FIngreso as FechaIngreso from legajoversion lv INNER JOIN Legajo l ON l.Codigo = lv.Codigo And l.Renglon = 1 where lv.codigo = " + cod + " and lv.version = " + ver;
             //" and convert(datetime,FIngreso,103) >= convert(datetime,'" + fecha + "',103)";
 
             System.Data.DataTable DT = repo.BuscarUno(consulta);
@@ -146,7 +146,7 @@ namespace Negocio
                 obj.FechaVersionII = DT.Rows[0]["FechaVersionII"].ToString();
                 obj.Descripcion = DT.Rows[0]["Descripcion"].ToString();
                 obj.Version = DT.Rows[0]["Version"].ToString();
-                obj.FIngreso = DT.Rows[0]["FIngreso"].ToString();
+                obj.FIngreso = DT.Rows[0]["FechaIngreso"].ToString();
                 obj.FEgreso = DT.Rows[0]["Fegreso"].ToString();
 
                 //DateTime FEgresoParse;

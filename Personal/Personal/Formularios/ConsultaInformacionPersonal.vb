@@ -55,6 +55,12 @@ Public Class ConsultaInformacionPersonal
             .Add
         End With
 
+        With dgvEducacion
+            .Rows.Add("Primaria", "", "", "1")
+            .Rows.Add("Secundaria", "", "", "2")
+            .Rows.Add("Terciaria/Universitaria", "", "", "3")
+        End With
+
         txtCuenta.Text = ""
         txtCbu.Text = ""
         txtCuil.Text = ""
@@ -1624,8 +1630,8 @@ Public Class ConsultaInformacionPersonal
                     _c.SelectedIndex = 0
                 Next
 
-                For Each dgv As DataGridView In {dgvHijos, dgvEducacion, dgvIndumentaria, dgvArchivos}
-                    dgv.Rows.clear()
+                For Each dgv As DataGridView In {dgvHijos, dgvIndumentaria, dgvArchivos}
+                    dgv.Rows.Clear()
                 Next
 
                 dgvHijos.Rows.Add()

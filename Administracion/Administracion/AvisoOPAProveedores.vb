@@ -93,6 +93,9 @@ Public Class AvisoOPAProveedores
             ProgressBar1.Maximum = WOrdenesPago.Rows.Count
 
             For Each row2 As DataRow In WOrdenesPago.Rows
+
+                Dim WFechasTransferencias As String = ""
+
                 With row2
                     Dim WOrden As String = OrDefault(.Item("Orden"), "")
 
@@ -116,14 +119,19 @@ Public Class AvisoOPAProveedores
                                 Select Case Val(WTipo2)
                                     Case 2
 
-                                        'If WOrdenPago.Rows.Count = 1 Then
                                         EsPorTransferencia = Val(OrDefault(.Item("Numero2"), "")) = 0
-                                        ' Else
-                                        'EsPorTransferencia = False
-                                        'End If
+                                        
+                                        If EsPorTransferencia And Not WFechasTransferencias.Contains(OrDefault(.Item("Fecha2"), "")) Then
+                                            WFechasTransferencias &= OrDefault(.Item("Fecha2"), "") & ","
+                                        End If
 
                                     Case 6 ' Compensación entre Cuentas Corrientes.
                                         EsPorTransferencia = Val(OrDefault(.Item("Cuenta"), "00")) = 5
+
+                                        If EsPorTransferencia And Not WFechasTransferencias.Contains(OrDefault(.Item("Fecha2"), "")) Then
+                                            WFechasTransferencias &= OrDefault(.Item("Fecha2"), "") & ","
+                                        End If
+
                                         If EsPorTransferencia Then Exit For
                                     Case Else
                                         EsPorTransferencia = False
@@ -143,7 +151,9 @@ Public Class AvisoOPAProveedores
 
                                 If Not _EnviarAvisoSegunSelectivoSemanal(WProveedor, WFechaOP) Then Continue For
 
-                                _EnviarAvisoOPDisponible(WProveedor, WDescProveedor, WOrden, EsPorTransferencia)
+                                WFechasTransferencias = WFechasTransferencias.TrimEnd(",")
+
+                                _EnviarAvisoOPDisponible(WProveedor, WDescProveedor, WOrden, EsPorTransferencia, WFechasTransferencias)
 
                             End If
 
@@ -318,7 +328,7 @@ Public Class AvisoOPAProveedores
 
             Using cm As New SqlCommand()
                 cm.Connection = cn
-                cm.CommandText = "SELECT p.Proveedor, p.Fecha, pr.Nombre, p.Tipo2, p.Importe2, p.Numero2, p.Importe, p.Cuenta FROM Pagos p LEFT OUTER JOIN Proveedor pr ON pr.Proveedor = p.Proveedor WHERE p.Orden = '" & OrdenPago & "' and p.TipoReg IN ('02', '2')"
+                cm.CommandText = "SELECT p.Proveedor, p.Fecha, pr.Nombre, p.Tipo2, p.Importe2, p.Numero2, p.Importe, p.Cuenta, p.Fecha2 FROM Pagos p LEFT OUTER JOIN Proveedor pr ON pr.Proveedor = p.Proveedor WHERE p.Orden = '" & OrdenPago & "' and p.TipoReg IN ('02', '2')"
 
                 Using dr As SqlDataReader = cm.ExecuteReader
 
@@ -380,86 +390,7 @@ Public Class AvisoOPAProveedores
         Return WTabla
     End Function
 
-    Private Function _TraerProveedoresTransferencia() As DataTable
-        Dim WTabla As New DataTable
-        Dim WFiltro As String = ""
-
-        If rbEntreFechas.Checked Then
-            Dim WDesdeOrd As String = ordenaFecha(txtDesde.Text)
-            Dim WHastaOrd As String = ordenaFecha(txtHasta.Text)
-
-            WFiltro = " FechaOrd BETWEEN '" & WDesdeOrd & "' And '" & WHastaOrd & "' "
-
-        Else
-
-            WFiltro = " Orden BETWEEN '" & txtDesde.Text & "' And '" & txtHasta.Text & "' "
-
-        End If
-
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT DISTINCT Proveedor, Orden FROM Pagos WHERE Proveedor <> '' And TipoOrd IN ('1', '4', '5') And " & WFiltro & " ")
-        Dim dr As SqlDataReader
-
-        Try
-
-            cn.ConnectionString = _ConectarA()
-            cn.Open()
-            cm.Connection = cn
-
-            dr = cm.ExecuteReader()
-
-            If dr.HasRows Then
-                WTabla.Load(dr)
-            End If
-
-        Catch ex As System.Exception
-            Throw New System.Exception("Hubo un problema al querer consultar los Proveedores con OP." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
-        Finally
-
-            dr = Nothing
-            cn.Close()
-            cn = Nothing
-            cm = Nothing
-
-        End Try
-
-        Return WTabla
-    End Function
-
-    Private Function _TraerProveedoresNoTransferencia() As DataTable
-        Dim WTabla As New DataTable
-
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT DISTINCT Proveedor FROM Pagos WHERE Proveedor <> '' And ISNULL(AvisoMailOp, '') = '1'")
-        Dim dr As SqlDataReader
-
-        Try
-
-            cn.ConnectionString = _ConectarA()
-            cn.Open()
-            cm.Connection = cn
-
-            dr = cm.ExecuteReader()
-
-            If dr.HasRows Then
-                WTabla.Load(dr)
-            End If
-
-        Catch ex As System.Exception
-            Throw New System.Exception("Hubo un problema al querer consultar los Proveedores con OP que no sean Transferencia." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
-        Finally
-
-            dr = Nothing
-            cn.Close()
-            cn = Nothing
-            cm = Nothing
-
-        End Try
-
-        Return WTabla
-    End Function
-
-    Private Sub _EnviarAvisoOPDisponible(ByVal Proveedor As String, ByVal wDescProveedor As String, Optional ByVal OrdenPago As String = "", Optional ByVal EsPorTransferencia As Boolean = False)
+    Private Sub _EnviarAvisoOPDisponible(ByVal Proveedor As String, ByVal wDescProveedor As String, Optional ByVal OrdenPago As String = "", Optional ByVal EsPorTransferencia As Boolean = False, Optional ByVal wFechasTransferencias As String = "")
 
         If Proveedor.Trim = "" Then Exit Sub
         If EsPorTransferencia And Trim(OrdenPago) = "" Then Exit Sub
@@ -497,7 +428,11 @@ Public Class AvisoOPAProveedores
                 Dim WBody = ""
 
                 If EsPorTransferencia Then
-                    WBody = "Informamos que en el día de la fecha, SURFACTAN S.A. le ha realizado una transferencia. " & vbCrLf & vbCrLf & "Adjuntamos Orden de Pago y retenciones si correspondiesen."
+                    WBody = "Informamos que en el día de la fecha, SURFACTAN S.A. le ha realizado una transferencia"
+
+                    If wFechasTransferencias.Trim <> "" Then WBody &= " a las siguientes fechas: " & wFechasTransferencias
+
+                    WBody &= "." & vbCrLf & vbCrLf & "Adjuntamos Orden de Pago y retenciones si correspondiesen."
                 Else
                     WBody = "Informamos que se encuentra a su disposición un pago que podrá ser retirado por nuestras oficinas (Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires), a partir del día " & txtAPartirFecha.Text & " en el horario de 14:00 a 17:00 hs."
                 End If
