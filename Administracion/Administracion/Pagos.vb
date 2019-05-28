@@ -5062,6 +5062,15 @@ Public Class Pagos
         frm.Reporte = crdoc
         frm.Reporte.SetParameterValue("EsTransferencia", 0)
 
+        Dim WFechasTransferencias As String = ""
+        Dim WOrdenPago As DataTable = _TraerDatosOrdenPago(txtOrdenPago.Text)
+
+        Dim EsPorTransferencia As Boolean = GetEsPorTransferencia(WOrdenPago, WFechasTransferencias)
+
+        If EsPorTransferencia Then
+            frm.Reporte.SetParameterValue("EsTransferencia", 1)
+        End If
+
         If GenerarPDF Then
 
             Dim frm2 As New ConsultasVarias.VistaPrevia
@@ -8091,36 +8100,7 @@ Public Class Pagos
             If WOrdenPago.Rows.Count > 0 Then
                 Dim WFechasTransferencias As String = ""
 
-                For Each row As DataRow In WOrdenPago.Rows
-
-                    With row
-
-                        Dim WTipo2 = OrDefault(.Item("Tipo2"), "00")
-
-                        Select Case Val(WTipo2)
-                            Case 2
-
-                                EsPorTransferencia = Val(OrDefault(.Item("Numero2"), "")) = 0
-                                
-                                If EsPorTransferencia And Not WFechasTransferencias.Contains(OrDefault(.Item("Fecha2"), "")) Then
-                                    WFechasTransferencias &= OrDefault(.Item("Fecha2"), "") & ","
-                                End If
-
-                            Case 6
-                                EsPorTransferencia = Val(OrDefault(.Item("Cuenta"), "00")) = 5
-
-                                If EsPorTransferencia And Not WFechasTransferencias.Contains(OrDefault(.Item("Fecha2"), "")) Then
-                                    WFechasTransferencias &= OrDefault(.Item("Fecha2"), "") & ","
-                                End If
-
-                                If EsPorTransferencia Then Exit For
-                            Case Else
-                                EsPorTransferencia = False
-                        End Select
-
-
-                    End With
-                Next
+                EsPorTransferencia = GetEsPorTransferencia(WOrdenPago, WFechasTransferencias)
 
                 With WOrdenPago.Rows(0)
 
@@ -8147,6 +8127,42 @@ Public Class Pagos
         End Try
         Cursor = Cursors.Default
     End Sub
+
+    Private Function GetEsPorTransferencia(ByVal WOrdenPago As DataTable, ByRef WFechasTransferencias As String) As Boolean
+        Dim EsPorTransferencia As Boolean = False
+
+        For Each row As DataRow In WOrdenPago.Rows
+
+            With row
+
+                Dim WTipo2 = OrDefault(.Item("Tipo2"), "00")
+
+                Select Case Val(WTipo2)
+                    Case 2
+
+                        EsPorTransferencia = Val(OrDefault(.Item("Numero2"), "")) = 0
+
+                        If EsPorTransferencia And Not WFechasTransferencias.Contains(OrDefault(.Item("Fecha2"), "")) Then
+                            WFechasTransferencias &= OrDefault(.Item("Fecha2"), "") & ","
+                        End If
+
+                    Case 6
+                        EsPorTransferencia = Val(OrDefault(.Item("Cuenta"), "00")) = 5
+
+                        If EsPorTransferencia And Not WFechasTransferencias.Contains(OrDefault(.Item("Fecha2"), "")) Then
+                            WFechasTransferencias &= OrDefault(.Item("Fecha2"), "") & ","
+                        End If
+
+                        If EsPorTransferencia Then Exit For
+                    Case Else
+                        EsPorTransferencia = False
+                End Select
+
+
+            End With
+        Next
+        Return EsPorTransferencia
+    End Function
 
     Private Function _TraerDatosOrdenPago(ByVal OrdenPago As String) As DataTable
 
