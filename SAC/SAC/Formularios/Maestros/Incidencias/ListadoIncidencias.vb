@@ -1,4 +1,5 @@
 ﻿Imports System.IO
+Imports System.Reflection
 Imports CrystalDecisions.CrystalReports.Engine
 Imports CrystalDecisions.Shared
 
@@ -9,6 +10,13 @@ Public Class ListadoIncidencias : Implements INuevaIncidencia, ISeleccionNuevaIn
     End Sub
 
     Private Sub ListadoIncidencias_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
+
+        EnableDoubleBuffered(dgvIncidencias)
+
+        For Each c As datagridviewcolumn In dgvIncidencias.Columns
+            c.SortMode = DataGridViewColumnSortMode.NotSortable
+        Next
+
         txtDesdeFecha.Text = ""
         txtHastaFecha.Text = ""
         txtDesdeAño.Text = Date.Now.ToString("yyyy")
@@ -21,8 +29,8 @@ Public Class ListadoIncidencias : Implements INuevaIncidencia, ISeleccionNuevaIn
         _CargarTipos()
         _CargarPlantas()
 
-        cmbOrdenI.SelectedIndex = 0
-        cmbOrdenII.SelectedIndex = 1
+        cmbOrdenI.SelectedIndex = 1
+        cmbOrdenII.SelectedIndex = 0
         cmbOrdenIII.SelectedIndex = 2
 
         For Each o As CheckedListBox In {clbEstados, clbTipos, clbPlantas}
@@ -124,9 +132,9 @@ Public Class ListadoIncidencias : Implements INuevaIncidencia, ISeleccionNuevaIn
 
         Select Case cmbOrd.SelectedIndex
             Case 0
-                Return "Incidencia"
+                Return "Numero"
             Case 1
-                Return "Tipo"
+                Return "TipoINC"
             Case 2
                 Return "Estado"
             Case 3
@@ -193,7 +201,7 @@ Public Class ListadoIncidencias : Implements INuevaIncidencia, ISeleccionNuevaIn
         End If
 
         Dim ZSql = ""
-        ZSql = "SELECT Incidencia, Fecha, Tipo, Estado, Titulo, Referencia, DescTipo = CASE ISNULL(Tipo, 0) WHEN 1 THEN 'General' WHEN 2 THEN 'Rechazo Recepción' ELSE '' END, " _
+        ZSql = "SELECT Incidencia, Ano As Anio, TipoInc As Tipo, Numero, Fecha, Estado, Titulo, Referencia, " _
             & " DescEstado = CASE ISNULL(Estado, 0) WHEN 1 THEN 'Genera SAC' WHEN 2 THEN 'No Genera SAC' ELSE 'Pend. Análisis' END, ISNULL(EmpresaIncidencia, Empresa) Empresa " _
             & " FROM CargaIncidencias WHERE Renglon = 1 "
 
@@ -205,7 +213,7 @@ Public Class ListadoIncidencias : Implements INuevaIncidencia, ISeleccionNuevaIn
         If WFiltroTipos.Trim <> "" Then ZSql &= " And Tipo IN (" & WFiltroTipos & ") "
         If WFiltroPlantas.Trim <> "" Then ZSql &= " And EmpresaIncidencia IN (" & WFiltroPlantas & ") "
 
-        ZSql &= " Order by "
+        ZSql &= " Order by Ano, "
         ZSql &= _GenerarStringOrdenamiento(cmbOrdenI)
         If cmbOrdenII.SelectedIndex <> cmbOrdenI.SelectedIndex Then ZSql &= ", " & _GenerarStringOrdenamiento(cmbOrdenII)
         If Not {cmbOrdenI.SelectedIndex, cmbOrdenII.SelectedIndex}.Contains(cmbOrdenII.SelectedIndex) Then ZSql &= ", " & _GenerarStringOrdenamiento(cmbOrdenIII)
@@ -213,10 +221,18 @@ Public Class ListadoIncidencias : Implements INuevaIncidencia, ISeleccionNuevaIn
         Dim WIncidencias As DataTable = GetAll(ZSql)
 
         WIncidencias.Columns.Add("Planta")
+        WIncidencias.Columns.Add("DescTipo")
 
         For Each row As DataRow In WIncidencias.Rows
             With row
                 .Item("Planta") = _GenerarDescEmpresa(.Item("Empresa"))
+
+                Dim WTipo As DataRow = GetSingle("SELECT Descripcion FROM TiposInc WHERE Tipo = '" & OrDefault(.Item("Tipo"), "") & "'")
+
+                .Item("DescTipo") = ""
+
+                If WTipo IsNot Nothing Then .Item("DescTipo") = Microsoft.VisualBasic.Left(OrDefault(WTipo.Item("Descripcion"), ""), 20)
+
             End With
         Next
 
@@ -446,7 +462,7 @@ Public Class ListadoIncidencias : Implements INuevaIncidencia, ISeleccionNuevaIn
 
                 With r
                     .Item("Tipo") = If(row.Cells("DescTipo").Value, "")
-                    .Item("Nro") = If(row.Cells("Incidencia").Value, 0)
+                    .Item("Nro") = If(row.Cells("Numero").Value, 0)
                     .Item("Fecha") = If(row.Cells("Fecha").Value, "")
                     .Item("Estado") = If(row.Cells("DescEstado").Value, "")
                     .Item("Titulo") = If(row.Cells("Titulo").Value, "")
@@ -510,6 +526,17 @@ Public Class ListadoIncidencias : Implements INuevaIncidencia, ISeleccionNuevaIn
             End Select
 
         End With
+    End Sub
+
+    Public Sub EnableDoubleBuffered(ByRef dgv As DataGridView)
+
+        Dim dgvType As Type = dgv.[GetType]()
+
+        Dim pi As PropertyInfo = dgvType.GetProperty("DoubleBuffered", _
+                                                     BindingFlags.Instance Or BindingFlags.NonPublic)
+
+        pi.SetValue(dgv, True, Nothing)
+
     End Sub
 
 End Class
