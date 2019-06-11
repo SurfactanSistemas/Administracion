@@ -131,6 +131,8 @@ Public Class Login
 
                             WNombreArchivo &= ".pdf"
 
+                            WDirecciones = "ebiglieri@surfactan.com.ar; calidad@surfactan.com.ar; wbarosio@surfactan.com.ar; calidad2@surfactan.com.ar; isocalidad@surfactan.com.ar;juanfs@surfactan.com.ar; lsantos@surfactan.com.ar; drodriguez@surfactan.com.ar; iburgos@surfactan.com.ar; ctomaszek@surfactan.com.ar; mlaura@surfactan.com.ar; mescames@surfactan.com.ar; supcc@surfactan.com.ar; svarela@surfactan.com.ar;"
+
                             If Directory.Exists(WRuta) Then Directory.Delete(WRuta, True)
 
                             Directory.CreateDirectory(WRuta)
