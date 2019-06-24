@@ -93,125 +93,6 @@ namespace Modulo_Capacitacion
             
         }
 
-        private void listadoDeLegajosPorPerfilToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Inicio Ini = new Inicio {StartPosition = FormStartPosition.CenterScreen};
-
-            Ini.ShowDialog();
-        }
-
-        private void listadoDeTemasToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Listados.Cursos.Inicio Ini = new Listados.Cursos.Inicio();
-            Ini.ShowDialog();
-        }
-
-        private void listadosDeTemasRealizadosPorLegajosConsolidadoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Listados.TemasPorLegajoConsolidado.Inicio Ini = new Listados.TemasPorLegajoConsolidado.Inicio();
-            Ini.ShowDialog();
-        }
-
-        private void listadoDeTemasRealizadosPorLegajoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Listados.TemasPorLegajo.Inicio Ini = new Listados.TemasPorLegajo.Inicio();
-            Ini.ShowDialog();
-        }
-
-        private void perfilDelPuestoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Listados.LegajosporPerfil.Inicio Ini = new Listados.LegajosporPerfil.Inicio();
-            Ini.ShowDialog();
-            
-            
-        }
-
-        private void listadoDeCursosRealizadosPorTemaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Listados.CursosRealizadosporTemas.Inicio Ini = new Listados.CursosRealizadosporTemas.Inicio();
-            Ini.ShowDialog();
-        }
-
-        private void listadoTemasRealizadosPorSectorToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Listados.TemasRealizadosPorSector.Inicio Ini = new Listados.TemasRealizadosPorSector.Inicio();
-            Ini.ShowDialog();
-        }
-
-        private void listadoDeLegajosConNecesidadesPendientesPorICYNCVigenteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Listados.LegajosConNecesidadesPendientes.Inicio Ini = new Listados.LegajosConNecesidadesPendientes.Inicio();
-            Ini.ShowDialog();
-        }
-
-        private void listadoDeCursosPendientesPorSectorToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Listados.CursosPendientesPorSector.Inicio frm = new Listados.CursosPendientesPorSector.Inicio();
-            frm.Show();
-        }
-
-        private void listadoDeCursosPorResponsableToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Listados.CursosPorResponsable.Inicio frm = new Listados.CursosPorResponsable.Inicio();
-            frm.Show();
-        }
-
-        private void listadoDeTemasRealizadosYNoRealizadosToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Listados.TemasRealizadosyNoRealizados.Inicio frm = new Listados.TemasRealizadosyNoRealizados.Inicio();
-            frm.Show();
-        }
-
-        private void listadoDeCronogramaPorSectorYTemaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Listados.CronogramaPorTemaySector.Inicio frm = new Listados.CronogramaPorTemaySector.Inicio();
-            frm.Show();
-        }
-
-        private void informeDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Listados.InformedeCompetencias.Inicio frm = new Listados.InformedeCompetencias.Inicio();
-            frm.Show();
-        }
-
-        private void planDeCapacitaciónAnualToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Listados.PlanCapacitacionAnual.Inicio frm = new Listados.PlanCapacitacionAnual.Inicio();
-            frm.Show();
-        }
-
-        private void planillasDeTemasNoProgramadosToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Listados.PlanilladeTemasnoProgramados.Inicio frm =
-                new Listados.PlanilladeTemasnoProgramados.Inicio();
-            frm.Show();
-        }
-
-        private void listadoDeEvaluaciónDeTemasProgramadosToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Listados.EvoluciondeTemasProgramados.Inicio frm = new Listados.EvoluciondeTemasProgramados.Inicio();
-            frm.Show();
-        }
-
-        private void listadoDeHorasCursadasPorLegajoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Listados.HorasCursadasPorLegajo.Inicio frm = new Listados.HorasCursadasPorLegajo.Inicio();
-            frm.Show();
-        }
-
-        private void listadoDePromedioDeCapacitaciónToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Listados.PromediodeCalificacion.Inicio frm = new Listados.PromediodeCalificacion.Inicio();
-            frm.Show();
-        }
-
-        private void toolStripMenuNecesidadesCompetenciasPorSector_Click(object sender, EventArgs e)
-        {
-            Listados.InformedeCompetenciasNecesidadesPorSector.Inicio frm =
-                new Listados.InformedeCompetenciasNecesidadesPorSector.Inicio();
-            frm.Show();
-        }
-
         private void actualizacionDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ActualizacionDeCompetenciasYNecesidadesDeCapacitacion frm =
@@ -231,22 +112,94 @@ namespace Modulo_Capacitacion
             frm.Show();
         }
 
-        private void planDeCapacitaciónTentativoToolStripMenuItem_Click(object sender, EventArgs e)
+        private void listadoDePerfilesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Listados.PlanCapacitacionAnualTentativo.Inicio frm = new Listados.PlanCapacitacionAnualTentativo.Inicio();
-            frm.Show();
+            _Abrir(new Listados.Perfiles.Inicio());
         }
 
-        private void listadoDeCronogramaPorSectorYTemaToolStripMenuItem1_Click(object sender, EventArgs e)
+        protected void _Abrir(Form Ini)
         {
-            Listados.CronogramaPorSectorYTema.Inicio frm = new Listados.CronogramaPorSectorYTema.Inicio();
-            frm.Show();
+            Ini.Show();
         }
 
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        private void listadoDeTemasToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            var frm = new Listados.CursosnoRealizadosporTemas.Inicio();
-            frm.Show();
+            _Abrir(new Listados.Cursos.Inicio());
+        }
+
+        private void listadoDeLegajosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _Abrir(new Inicio());
+        }
+
+        private void listadoPorLegajosPendientesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _Abrir(new Listados.LegajosConNecesidadesPendientes.Inicio());
+        }
+
+        private void resúmenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _Abrir(new Listados.TemasPorLegajoConsolidado.Inicio());
+        }
+
+        private void cursosPorLegajoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _Abrir(new Listados.TemasPorLegajo.Inicio());
+        }
+
+        private void cursosPorLegajoConsolidadosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _Abrir(new Listados.HorasCursadasPorLegajo.Inicio());
+        }
+
+        private void cursosPorTemaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _Abrir(new Listados.CursosRealizadosporTemas.Inicio());
+        }
+
+        private void cursosPorSectorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _Abrir(new Listados.TemasRealizadosPorSector.Inicio());
+        }
+
+        private void cursosNORealizadosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _Abrir(new Listados.CursosPendientesPorSector.Inicio());
+        }
+
+        private void cursosNOProgramadosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _Abrir(new Listados.PlanilladeTemasnoProgramados.Inicio());
+        }
+
+        private void resumenDeCursosRealizadosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _Abrir(new Listados.InformeHorasRealizadasYProgramadas.Inicio());
+        }
+
+        private void planillaDeCapacitaciónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _Abrir(new Listados.PlanCapacitacionAnual.Inicio());
+        }
+
+        private void cronogramaPorSectorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _Abrir(new Listados.CronogramaPorSectorYTema.Inicio());
+        }
+
+        private void cronogramaPorTemaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _Abrir(new Listados.CronogramaPorTemaySector.Inicio());
+        }
+
+        private void planDeCapacitaciónAnualTentativoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _Abrir(new Listados.PlanCapacitacionAnualTentativo.Inicio());
+        }
+
+        private void informeDeCompetenciaYNecesidadDeCapacitaciónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _Abrir(new Listados.InformedeCompetencias.Inicio());
         }
     }
 }

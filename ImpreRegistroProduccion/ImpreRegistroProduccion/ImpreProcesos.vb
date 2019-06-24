@@ -63,9 +63,10 @@ Public Class ImpreProcesos
 
             End If
 
-            Dim WTipoReporte2 As Integer = 1
-            Dim WPartida2 As Integer = 309308
-            Dim WTipoSalida2 As Integer = 2
+            'Dim WTipoReporte2 As Integer = 1
+            'Dim WPartida2 As Integer = 309551
+            'Dim WTerminado2 As String = "PT-25047-101"
+            'Dim WTipoSalida2 As Integer = 2
 
             '_GenerarCertificadoAnalisisFarma(WTipoReporte2, WPartida2, WTipoSalida2)
 
@@ -537,8 +538,8 @@ Public Class ImpreProcesos
 
             Dim XMes = Str$(WMes)
             Dim XAno = Str$(WAnio)
-            XMes = XMes.PadLeft(2, "0")
-            XAno = XAno.PadLeft(4, "0")
+            XMes = XMes.Trim().PadLeft(2, "0")
+            XAno = XAno.Trim().PadLeft(4, "0")
             WImpreVto = XMes + "/" + XAno
 
         End If
@@ -552,7 +553,7 @@ Public Class ImpreProcesos
         For Each row As DataRow In WHoja.Rows
             With row
 
-                If wTerminado <> OrDefault(.Item("Terminado"), "") Then
+                If Microsoft.VisualBasic.Left(wTerminado, 8) <> Microsoft.VisualBasic.Left(OrDefault(.Item("Terminado"), ""), 8) Then
                     ZZMezcla = "N"
                 Else
 
@@ -601,8 +602,8 @@ Public Class ImpreProcesos
                         End If
                     Next Ciclo
 
-                    Dim XMes = Str$(WMes)
-                    Dim XAno = Str$(WAnio)
+                    Dim XMes = Trim(Str$(WMes))
+                    Dim XAno = Trim(Str$(WAnio))
                     XMes = XMes.PadLeft(2, "0")
                     XAno = XAno.PadLeft(4, "0")
                     WImpreVto = XMes + "/" + XAno
@@ -661,8 +662,8 @@ Public Class ImpreProcesos
 
                         Dim WFecha As Date = Date.ParseExact(WFechaVto, "dd/MM/yyyy", Nothing)
 
-                        Dim XMes = WFecha.Month.ToString
-                        Dim XAno = WFecha.Year.ToString
+                        Dim XMes = WFecha.Month.ToString.Trim
+                        Dim XAno = WFecha.Year.ToString.Trim
                         XMes = XMes.PadLeft(2, "0")
                         XAno = XAno.PadLeft(4, "0")
                         WImpreVto = XMes + "/" + XAno

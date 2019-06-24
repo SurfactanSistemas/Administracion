@@ -2,6 +2,18 @@
 
 Public Class DBDataGridView : Inherits DataGridView
 
+    Private _SinClickDerecho As Boolean
+
+    Public Property SinClickDerecho() As Boolean
+        Get
+            Return _SinClickDerecho
+        End Get
+        Set(ByVal value As Boolean)
+            _SinClickDerecho = value
+            If _SinClickDerecho Then RemoveHandler MyBase.MouseDown, AddressOf MyBase_MouseDown
+        End Set
+    End Property
+
     Public Overloads Property DoubleBuffered() As Boolean
         Get
             Return MyBase.DoubleBuffered
@@ -22,7 +34,7 @@ Public Class DBDataGridView : Inherits DataGridView
         EditMode = DataGridViewEditMode.EditOnEnter
         ShowCellToolTips = False
 
-        AddHandler MyBase.MouseDown, AddressOf MyBase_MouseDown
+        If Not SinClickDerecho Then AddHandler MyBase.MouseDown, AddressOf MyBase_MouseDown
     End Sub
 
     Public Sub InhabilitarOrdenamientoColumnas()
@@ -41,22 +53,24 @@ Public Class DBDataGridView : Inherits DataGridView
         If WData IsNot Nothing Then Clipboard.SetDataObject(WData)
 
         RowHeadersVisible = True
-
     End Sub
 
     Public Overridable Sub MyBase_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs)
-        With CType(sender, DataGridView)
-            If e.Button = MouseButtons.Right Then
-                If .SelectedRows.Count > 1 Then Exit Sub
+        Try
+            With CType(sender, DataGridView)
+                If e.Button = MouseButtons.Right Then
+                    If .SelectedRows.Count > 1 Then Exit Sub
 
-                Dim WHit As HitTestInfo = .HitTest(e.X, e.Y)
+                    Dim WHit As HitTestInfo = .HitTest(e.X, e.Y)
 
-                If WHit.Type = DataGridViewHitTestType.Cell Then
-                    .CurrentCell = .Rows(WHit.RowIndex).Cells(WHit.ColumnIndex)
+                    If WHit.Type = DataGridViewHitTestType.Cell Then
+                        .CurrentCell = .Rows(WHit.RowIndex).Cells(WHit.ColumnIndex)
+                    End If
+
                 End If
+            End With
+        Catch ex As Exception
 
-            End If
-        End With
+        End Try
     End Sub
-
 End Class

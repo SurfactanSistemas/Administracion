@@ -61,9 +61,9 @@
             this.LBChofer.ForeColor = System.Drawing.Color.White;
             this.LBChofer.Location = new System.Drawing.Point(10, 10);
             this.LBChofer.Name = "LBChofer";
-            this.LBChofer.Size = new System.Drawing.Size(146, 19);
+            this.LBChofer.Size = new System.Drawing.Size(140, 19);
             this.LBChofer.TabIndex = 0;
-            this.LBChofer.Text = "LISTADO DE CURSOS";
+            this.LBChofer.Text = "LISTADO DE TEMAS";
             // 
             // panel2
             // 
@@ -91,7 +91,7 @@
             // 
             // TB_Hasta
             // 
-            this.TB_Hasta.Location = new System.Drawing.Point(310, 45);
+            this.TB_Hasta.Location = new System.Drawing.Point(277, 45);
             this.TB_Hasta.MaxLength = 4;
             this.TB_Hasta.Name = "TB_Hasta";
             this.TB_Hasta.Size = new System.Drawing.Size(72, 20);
@@ -101,7 +101,7 @@
             // 
             // TB_Desde
             // 
-            this.TB_Desde.Location = new System.Drawing.Point(124, 45);
+            this.TB_Desde.Location = new System.Drawing.Point(120, 45);
             this.TB_Desde.MaxLength = 4;
             this.TB_Desde.Name = "TB_Desde";
             this.TB_Desde.Size = new System.Drawing.Size(72, 20);
@@ -113,11 +113,11 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(222, 46);
+            this.label2.Location = new System.Drawing.Point(225, 46);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(84, 18);
+            this.label2.Size = new System.Drawing.Size(46, 18);
             this.label2.TabIndex = 83;
-            this.label2.Text = "Hasta Curso:";
+            this.label2.Text = "Hasta:";
             // 
             // BT_Pantalla
             // 
@@ -162,11 +162,11 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(31, 46);
+            this.label1.Location = new System.Drawing.Point(63, 46);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(89, 18);
+            this.label1.Size = new System.Drawing.Size(51, 18);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Desde Curso:";
+            this.label1.Text = "Desde:";
             // 
             // Inicio
             // 

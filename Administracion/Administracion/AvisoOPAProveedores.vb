@@ -7,11 +7,11 @@ Public Class AvisoOPAProveedores
     Private WNoEnviados(,) As String = New String(1000, 2) {}
     Dim WIndiceNoEnviados As Integer = 0
 
-    Private Sub btnCerrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrar.Click
+    Private Sub btnCerrar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCerrar.Click
         Close()
     End Sub
 
-    Private Sub RadioButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbEntreRango.Click, rbEntreFechas.Click
+    Private Sub RadioButton1_Click(ByVal sender As Object, ByVal e As EventArgs) Handles rbEntreRango.Click, rbEntreFechas.Click
 
         txtDesde.Mask = "000000"
         txtHasta.Mask = "000000"
@@ -34,7 +34,7 @@ Public Class AvisoOPAProveedores
 
     End Sub
 
-    Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
+    Private Sub btnLimpiar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLimpiar.Click
 
         txtDesde.Text = ""
         txtHasta.Text = ""
@@ -54,7 +54,7 @@ Public Class AvisoOPAProveedores
 
     End Sub
 
-    Private Sub AvisoOPAProveedores_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+    Private Sub AvisoOPAProveedores_Shown(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Shown
         With txtDesde
             .Focus()
             .SelectionStart = 0
@@ -62,11 +62,11 @@ Public Class AvisoOPAProveedores
         End With
     End Sub
 
-    Private Sub AvisoOPAProveedores_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub AvisoOPAProveedores_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         btnLimpiar.PerformClick()
     End Sub
 
-    Private Sub btnEnviar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEnviar.Click
+    Private Sub btnEnviar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnEnviar.Click
 
         Try
 
@@ -106,7 +106,7 @@ Public Class AvisoOPAProveedores
                     '
                     Dim WOrdenPago As DataTable = _TraerDatosOrdenPago(WOrden)
                     Dim EsPorTransferencia As Boolean = False
-                    Dim WTipoOrd As Integer = OrDefault(.Item("TipoOrd"), 0)
+                    Dim PorTransferenciaYCheques As Boolean = False
                     Dim WProveedor As String = ""
 
                     If WOrdenPago.Rows.Count > 0 Then
@@ -120,7 +120,7 @@ Public Class AvisoOPAProveedores
                                     Case 2
 
                                         EsPorTransferencia = Val(OrDefault(.Item("Numero2"), "")) = 0
-                                        
+
                                         If EsPorTransferencia And Not WFechasTransferencias.Contains(OrDefault(.Item("Fecha2"), "")) Then
                                             WFechasTransferencias &= OrDefault(.Item("Fecha2"), "") & ","
                                         End If
@@ -133,6 +133,8 @@ Public Class AvisoOPAProveedores
                                         End If
 
                                         If EsPorTransferencia Then Exit For
+                                    Case 3
+                                        If EsPorTransferencia Then PorTransferenciaYCheques = True
                                     Case Else
                                         EsPorTransferencia = False
                                 End Select
@@ -153,7 +155,7 @@ Public Class AvisoOPAProveedores
 
                                 WFechasTransferencias = WFechasTransferencias.TrimEnd(",")
 
-                                _EnviarAvisoOPDisponible(WProveedor, WDescProveedor, WOrden, EsPorTransferencia, WFechasTransferencias)
+                                _EnviarAvisoOPDisponible(WProveedor, WDescProveedor, WOrden, EsPorTransferencia, WFechasTransferencias, PorTransferenciaYCheques)
 
                             End If
 
@@ -226,7 +228,7 @@ Public Class AvisoOPAProveedores
             WFechaInicial = WFechaBase.AddDays(-1 * (WFechaBase.DayOfWeek - DayOfWeek.Monday)).ToString("yyyyMMdd")
             WFechaFinal = WFechaBase.AddDays(-1 * (WFechaBase.DayOfWeek - DayOfWeek.Friday)).ToString("yyyyMMdd")
 
-            cn.ConnectionString = Proceso._ConectarA
+            cn.ConnectionString = _ConectarA()
             cn.Open()
             cm.Connection = cn
             cm.CommandText = "SELECT Proveedor, EnviarAvisoOp FROM ProveedorSelectivo WHERE Proveedor = '" & wProveedor & "' and FechaOrd >= '" & WFechaInicial & "' And FechaOrd <= '" & WFechaFinal & "'"
@@ -260,10 +262,10 @@ Public Class AvisoOPAProveedores
 
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("UPDATE Pagos SET AvisoMailOp = '1' WHERE Orden = '" & OrdenPago & "'")
-        
+
         Try
 
-            cn.ConnectionString = Proceso._ConectarA
+            cn.ConnectionString = _ConectarA()
             cn.Open()
             cm.Connection = cn
 
@@ -289,7 +291,7 @@ Public Class AvisoOPAProveedores
 
         Try
 
-            cn.ConnectionString = Proceso._ConectarA
+            cn.ConnectionString = _ConectarA()
             cn.Open()
             cm.Connection = cn
 
@@ -328,7 +330,7 @@ Public Class AvisoOPAProveedores
 
             Using cm As New SqlCommand()
                 cm.Connection = cn
-                cm.CommandText = "SELECT p.Proveedor, p.Fecha, pr.Nombre, p.Tipo2, p.Importe2, p.Numero2, p.Importe, p.Cuenta, p.Fecha2 FROM Pagos p LEFT OUTER JOIN Proveedor pr ON pr.Proveedor = p.Proveedor WHERE p.Orden = '" & OrdenPago & "' and p.TipoReg IN ('02', '2')"
+                cm.CommandText = "SELECT p.Proveedor, p.Fecha, pr.Nombre, p.Tipo2, p.Importe2, p.Numero2, p.Importe, p.Cuenta, p.Fecha2 FROM Pagos p LEFT OUTER JOIN Proveedor pr ON pr.Proveedor = p.Proveedor WHERE p.Orden = '" & OrdenPago & "' and p.TipoReg IN ('02', '2') Order by p.Tipo2"
 
                 Using dr As SqlDataReader = cm.ExecuteReader
 
@@ -390,7 +392,7 @@ Public Class AvisoOPAProveedores
         Return WTabla
     End Function
 
-    Private Sub _EnviarAvisoOPDisponible(ByVal Proveedor As String, ByVal wDescProveedor As String, Optional ByVal OrdenPago As String = "", Optional ByVal EsPorTransferencia As Boolean = False, Optional ByVal wFechasTransferencias As String = "")
+    Private Sub _EnviarAvisoOPDisponible(ByVal Proveedor As String, ByVal wDescProveedor As String, Optional ByVal OrdenPago As String = "", Optional ByVal EsPorTransferencia As Boolean = False, Optional ByVal wFechasTransferencias As String = "", Optional ByVal PorTransferenciaYCheques As Boolean = False)
 
         If Proveedor.Trim = "" Then Exit Sub
         If EsPorTransferencia And Trim(OrdenPago) = "" Then Exit Sub
@@ -428,27 +430,45 @@ Public Class AvisoOPAProveedores
                 Dim WBody = ""
 
                 If EsPorTransferencia Then
+
                     WBody = "Informamos que en el día de la fecha, SURFACTAN S.A. le ha realizado una transferencia"
 
-                    If wFechasTransferencias.Trim <> "" Then WBody &= " a las siguientes fechas: " & wFechasTransferencias
+                    If wFechasTransferencias.Trim <> "" Then
 
-                    WBody &= "." & vbCrLf & vbCrLf & "Adjuntamos Orden de Pago y retenciones si correspondiesen."
+                        If wFechasTransferencias.Split(",").Count > 1 Then
+                            WBody &= " a las siguientes fechas: "
+                        Else
+                            WBody &= " a la siguiente fecha: "
+                        End If
+
+                        WBody &= "<strong>" & wFechasTransferencias & "</strong>"
+
+                    End If
+
+                    If PorTransferenciaYCheques Then
+                        WBody &= "." & "<br/>" & "<br/>" & "Así mismo, tiene Cheque(s) para retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir del día <strong>" & txtAPartirFecha.Text & "</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
+                    Else
+                        WBody &= "." & "<br/>" & "<br/>" & "Adjuntamos Orden de Pago y retenciones si correspondiesen."
+                    End If
+
                 Else
-                    WBody = "Informamos que se encuentra a su disposición un pago que podrá ser retirado por nuestras oficinas (Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires), a partir del día " & txtAPartirFecha.Text & " en el horario de 14:00 a 17:00 hs."
+
+                    WBody = "Informamos que se encuentra a su disposición un pago que podrá ser retirado por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir del día <strong>" & txtAPartirFecha.Text & "</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
+
                 End If
 
                 If Trim(wDescProveedor) <> "" Then
-                    WBody = "Sres. " & wDescProveedor.Trim.ToUpper & vbCrLf & vbCrLf & WBody
+                    WBody = "Sres. <strong>" & wDescProveedor.Trim.ToUpper & "</strong> <br/>" & "<br/>" & WBody
                 End If
 
                 Select Case Proveedor
                     Case "10167878480", "10000000100", "10071081483", "10069345023", "10066352912"
-                        WBody = WBody & vbCrLf & vbCrLf & "En caso de cualquier consulta, por favor dirigirla a fgmonti@surfactan.com.ar"
+                        WBody = WBody & "<br/>" & "<br/>" & "En caso de cualquier consulta, por favor dirigirla a <strong><em>fgmonti@surfactan.com.ar</em></strong>"
                 End Select
 
                 Dim WAdjuntos As New List(Of String)
 
-                If EsPorTransferencia Then
+                If EsPorTransferencia And Not PorTransferenciaYCheques Then
                     WAdjuntos = _PrepararAdjuntos(OrdenPago)
                 End If
 
@@ -488,7 +508,7 @@ Public Class AvisoOPAProveedores
 
             Try
 
-                cn.ConnectionString = Proceso._ConectarA
+                cn.ConnectionString = _ConectarA()
                 cn.Open()
                 cm.Connection = cn
 
@@ -531,18 +551,24 @@ Public Class AvisoOPAProveedores
     End Function
 
     Private Sub _EnviarEmail(ByVal _to As String, ByVal _bcc As String, ByVal _subject As String, ByVal _body As String, ByVal _adjuntos() As String)
-        Dim _Outlook As New Microsoft.Office.Interop.Outlook.Application
+        Dim _Outlook As New Application
 
         Try
             Dim _Mail As MailItem = _Outlook.CreateItem(OlItemType.olMailItem)
 
             With _Mail
 
+                '
+                ' (NO BORRAR) Obtenemos la Instancia de Inspector para que nos agrege la firma que se encuentra definida por defecto.
+                '
+                ' ReSharper disable once UnusedVariable
+                Dim WInspector = .GetInspector
+
                 .To = _to
                 .BCC = _bcc
                 .Subject = _subject
-                .Body = _body
-                '.HTMLBody = _body & vbCrLf & vbCrLf & .HTMLBody
+                '.Body = _body
+                .HTMLBody = "<p>" & _body & "</p>" & .HTMLBody
 
                 For Each adjunto As String In _adjuntos
                     If Trim(adjunto) <> "" Then
@@ -550,8 +576,8 @@ Public Class AvisoOPAProveedores
                     End If
                 Next
 
-                .Send()
-                '.Display()
+                '.Send()
+                .Display()
 
             End With
 
@@ -566,7 +592,7 @@ Public Class AvisoOPAProveedores
     End Sub
 
 
-    Private Sub txtDesde_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDesde.KeyDown, txtAPartirFecha.KeyDown
+    Private Sub txtDesde_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtDesde.KeyDown, txtAPartirFecha.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtDesde.Text.Replace("/", "")) = "" Or (rbEntreFechas.Checked And txtDesde.Text.Replace(" ", "").Length < 10) Then : Exit Sub : End If
@@ -579,7 +605,7 @@ Public Class AvisoOPAProveedores
 
     End Sub
 
-    Private Sub txtHasta_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtHasta.KeyDown
+    Private Sub txtHasta_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtHasta.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtHasta.Text.Replace("/", "")) = "" Or (rbEntreFechas.Checked And txtHasta.Text.Replace(" ", "").Length < 10) Then : Exit Sub : End If

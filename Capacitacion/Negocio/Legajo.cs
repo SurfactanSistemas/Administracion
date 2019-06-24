@@ -88,7 +88,7 @@ namespace Negocio
         public DataTable ListarTodosParaGrilla()
         {
             Conexion repo = new Conexion();
-            string consulta = "SELECT Clave, Codigo, Descripcion, FechaVersion, Perfil, Sector, Dni, FEgreso, Actualizado, VigenciaOrd FROM Legajo WHERE Renglon = 1 ORDER BY Descripcion, Codigo, VigenciaOrd";
+            string consulta = "SELECT Clave, Codigo, Descripcion, FechaVersion, Perfil = Perfil * 1, Sector = Sector * 1, Dni, FEgreso, Actualizado, VigenciaOrd = VigenciaOrd * 1 FROM Legajo WHERE Renglon = 1 ORDER BY Descripcion, Codigo, VigenciaOrd";
             DataTable Dt = repo.Listar(consulta);
             return Dt;
         }
@@ -97,6 +97,14 @@ namespace Negocio
         {
             Conexion repo = new Conexion();
             string consulta = "select * from Legajo where Renglon = 1 order by Descripcion, Codigo, VigenciaOrd";
+            DataTable Dt = repo.Listar(consulta);
+            return Dt;
+        }
+
+        public DataTable _BuscarLegajo(object Legajo, string Columnas = "*")
+        {
+            Conexion repo = new Conexion();
+            string consulta = "select " + Columnas + " FROM Legajo WHERE Codigo = '" + Legajo + "' ORDER BY Renglon";
             DataTable Dt = repo.Listar(consulta);
             return Dt;
         }

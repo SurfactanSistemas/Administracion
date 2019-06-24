@@ -78,12 +78,36 @@ namespace Negocio
             return DT;
         }
 
+        public System.Data.DataTable ListarCursadaCons3(string Desde, string Hasta, int Curso)
+        {
+            Conexion repo = new Conexion();
+            //string consulta = "SELECT  C.curso, C.Legajo, C.Clave, C.Ano FROM Cursadas C where C.Ano>= " + Desde + " and C.Ano <= " + Hasta + " order by Clave";
+            string consulta = "SELECT  C.curso, C.Legajo, C.Clave, Ano = RIGHT(C.Fecha, 4), C.Fecha FROM Cursadas C where C.OrdFecha >= '" + Desde + "' and C.OrdFecha <= '" + Hasta + "' And Curso = '" + Curso + "' order by Clave";
+            return repo.Listar(consulta);
+        }
+
+        public System.Data.DataTable ListarCursadaCons3(int Desde, int Hasta, int Curso)
+        {
+            Conexion repo = new Conexion();
+            //string consulta = "SELECT  C.curso, C.Legajo, C.Clave, C.Ano FROM Cursadas C where C.Ano>= " + Desde + " and C.Ano <= " + Hasta + " order by Clave";
+            string consulta = "SELECT  C.curso, C.Legajo, C.Clave, Ano = RIGHT(C.Fecha, 4), C.Fecha FROM Cursadas C where C.OrdFecha >= '" + Desde + "' and C.OrdFecha <= '" + Hasta + "' And Curso = '" + Curso + "' order by Clave";
+            return repo.Listar(consulta);
+        }
+
+
+        public System.Data.DataTable ListarCursadaCons2(string Desde, string Hasta)
+        {
+            Conexion repo = new Conexion();
+            //string consulta = "SELECT  C.curso, C.Legajo, C.Clave, C.Ano FROM Cursadas C where C.Ano>= " + Desde + " and C.Ano <= " + Hasta + " order by Clave";
+            string consulta = "SELECT  C.curso, C.Legajo, C.Clave, Ano = RIGHT(C.Fecha, 4), C.Fecha FROM Cursadas C where C.OrdFecha >= '" + Desde + "' and C.OrdFecha <= '" + Hasta + "' order by Clave";
+            return repo.Listar(consulta);
+        }
+
         public System.Data.DataTable ListarCursadaCons2(int Desde, int Hasta)
         {
-
-
             Conexion repo = new Conexion();
-            string consulta = "SELECT  C.curso, C.Legajo, C.Clave, C.Ano FROM Cursadas C where C.Ano>= " + Desde + " and C.Ano <= " + Hasta + " order by Clave";
+            //string consulta = "SELECT  C.curso, C.Legajo, C.Clave, C.Ano FROM Cursadas C where C.Ano>= " + Desde + " and C.Ano <= " + Hasta + " order by Clave";
+            string consulta = "SELECT  C.curso, C.Legajo, C.Clave, Ano = RIGHT(C.Fecha, 4), C.Fecha FROM Cursadas C where C.OrdFecha >= '" + Desde + "' and C.OrdFecha <= '" + Hasta + "' order by Clave";
             return repo.Listar(consulta);
         }
 
@@ -96,12 +120,12 @@ namespace Negocio
             return repo.Listar(consulta);
         }
 
-        public System.Data.DataTable ListarInformeCons(string DesdeFecha, string HastaFecha, int DesdeTipo, int HastaTipo)
+        public System.Data.DataTable ListarInformeCons(string DesdeFecha, string HastaFecha, int DesdeTipo, int HastaTipo, string CondicionesExtras = "")
         {
             Conexion repo = new Conexion();
-            string consulta = "SELECT C.Codigo, C.Curso, C.Fecha, C.OrdFecha, C.Horas, C.Legajo, C.DesLegajo, C.Observaciones, C.TipoCursada, C.Tema, C.DesTema, Cur.Descripcion from Cursadas C, Curso Cur where C.Curso = Cur.Codigo and C.OrdFecha >= '" 
+            string consulta = "SELECT C.Codigo, C.Curso, C.Fecha, C.OrdFecha, C.Horas, C.Legajo, RTRIM(L.Descripcion) As DesLegajo, C.Observaciones, C.TipoCursada, C.Tema, C.DesTema, Cur.Descripcion from Cursadas C INNER JOIN Curso Cur ON Cur.Codigo = C.Curso LEFT OUTER JOIN Legajo L ON L.Codigo = C.Legajo AND L.Renglon = 1 where C.OrdFecha >= '" 
                 + DesdeFecha + "' and C.OrdFecha <= '" + HastaFecha + "' and C.Legajo >= 0 and C.Legajo <= 999999 and C.TipoCursada >= " + 
-                DesdeTipo + " and C.TipoCursada <= " + HastaTipo;
+                DesdeTipo + " and C.TipoCursada <= " + HastaTipo + CondicionesExtras;
 
             return repo.Listar(consulta);
         }
@@ -118,8 +142,6 @@ namespace Negocio
 
         public System.Data.DataTable ListarCursoporTema(int TemaDesd, int TemajoHast, int FechaDesde, int FechaHasta)
         {
-
-
             Conexion repo = new Conexion();
             string consulta = "select C.Curso, Cu.Descripcion, C.Tema, T.Descripcion, C.Legajo, l.Descripcion, C.Horas, C.Codigo, C.Fecha, C.Observaciones,  CASE WHEN C.TipoCursada = 0 THEN 'Si' ELSE 'No' END as Planificada from Cursadas C LEFT OUTER JOIN Legajo l ON l.Codigo = C.Legajo AND l.Renglon = 1 LEFT OUTER JOIN Tema Cu ON Cu.Curso = c.Curso AND Cu.Tema = C.Tema LEFT OUTER JOIN Curso T ON T.Codigo = C.Curso where C.Curso >= " + TemaDesd + " and C.Curso <= " + TemajoHast + " and C.OrdFecha > = " + FechaDesde + " and C.OrdFecha < = " + FechaHasta;
 
@@ -129,8 +151,6 @@ namespace Negocio
 
         public System.Data.DataTable ListarCursoNoRealizadosporTema(int TemaDesd, int TemajoHast, int FechaDesde, int FechaHasta, bool WExcluir99)
         {
-
-
             Conexion repo = new Conexion();
             //string consulta = "select Cr.Curso, Cu.Descripcion, Cr.Tema, T.Descripcion, Cr.Legajo, l.Descripcion, Cr.Horas, Codigo = 0, Fecha = '  /  /    ', Cr.Observaciones,  Planificada = '' from Cronograma Cr LEFT JOIN Cursadas C ON C.Legajo = Cr.Legajo AND C.Curso = Cr.Curso AND C.Tema = Cr.Tema LEFT JOIN Legajo l ON l.Codigo = Cr.Legajo AND l.Renglon = 1 LEFT OUTER JOIN Tema Cu ON Cu.Curso = cr.Curso AND Cu.Tema = Cr.Tema LEFT OUTER JOIN Curso T ON T.Codigo = Cr.Curso where (C.Curso IS NULL OR C.Tema IS NULL) And  Cr.Curso >= " + TemaDesd + " and Cr.Curso <= " + TemajoHast + " and C.OrdFecha > = " + FechaDesde + " and C.OrdFecha < = " + FechaHasta;
             string consulta = "select distinct Cr.Curso, Cu.Descripcion, Cr.Tema, T.Descripcion, Cr.Legajo, l.Descripcion, Cr.Horas, Codigo = 0, Fecha = '  /  /    ', Cr.Observaciones,  Planificada = '' from Cronograma Cr LEFT JOIN Legajo l ON l.Codigo = Cr.Legajo AND l.Renglon = 1 LEFT OUTER JOIN Tema Cu ON Cu.Curso = cr.Curso AND Cu.Tema = Cr.Tema LEFT OUTER JOIN Curso T ON T.Codigo = Cr.Curso  LEFT JOIN Cursadas C ON C.Legajo = Cr.Legajo AND C.Curso = Cr.Curso And c.Tema = cr.Tema And C.OrdFecha >= '" + FechaDesde + "' and C.OrdFecha <= '" + FechaHasta + "'  where (c.Curso IS NULL Or c.Tema IS NULL or c.Legajo IS NULL) And Cr.Curso >= '" + TemaDesd + "' and Cr.Curso <= '" + TemajoHast + "' and cr.tema > 0 And cr.Ano BETWEEN '" + FechaDesde.ToString().Substring(0, 4) + "' And '" + FechaHasta.ToString().Substring(0, 4) + "' order by cr.legajo , cr.curso, cr.tema";

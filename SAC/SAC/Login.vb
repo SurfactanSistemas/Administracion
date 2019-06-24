@@ -125,7 +125,15 @@ Public Class Login
                             .Reporte.SetParameterValue("MostrarPosiblesUsos", 1)
                             .Reporte.SetParameterValue("MostrarAcciones", 0)
 
-                            Dim WNombreArchivo = String.Format("INC {0} - {1}", WNumero.PadLeft(4, "0"), Date.Now.ToString("dd-MM-yyyy"))
+                            Dim WINC As DataRow = GetSingle("SELECT Numero FROM CargaIncidencias WHERE Incidencia  = '" & WNumero & "'")
+
+                            Dim WNumeroINC As String = ""
+
+                            If WINC IsNot Nothing Then
+                                WNumeroINC = OrDefault(WINC.Item("Numero"), "")
+                            End If
+
+                            Dim WNombreArchivo = String.Format("INC {0} - {1}", WNumeroINC.PadLeft(4, "0"), Date.Now.ToString("dd-MM-yyyy"))
 
                             Dim WRuta = "C:/tempIndice/"
 
@@ -170,7 +178,7 @@ Public Class Login
         '
         ' Definimos los mails obligatorios, según tipo Producto Terminado indicado en Reclamo.
         '
-        Dim WReclamo As DataRow = GetSingle("SELECT * FROM CentroReclamos WHERE Numero = '" & WNumero & "'")
+        Dim WReclamo As DataRow = GetSingle("SELECT Producto, Cliente FROM CentroReclamos WHERE Numero = '" & WNumero & "'")
 
         If WReclamo Is Nothing Then
             Return WDirecciones
@@ -206,10 +214,10 @@ Public Class Login
         '
         ' Busco el vendedor definido para el Cliente.
         '
-        Dim WCliente As DataRow = GetSingle("SELECT * FROM Cliente WHERE Cliente = '" & OrDefault(WReclamo.Item("Cliente"), "") & "'")
+        Dim WCliente As DataRow = GetSingle("SELECT Vendedor FROM Cliente WHERE Cliente = '" & OrDefault(WReclamo.Item("Cliente"), "") & "'")
 
         If WCliente IsNot Nothing Then
-            Dim WVendedor As DataRow = GetSingle("SELECT * FROM Vendedor WHERE Vendedor  = '" & OrDefault(WCliente.Item("Vendedor"), 99) & "'")
+            Dim WVendedor As DataRow = GetSingle("SELECT Email1, Email2 FROM Vendedor WHERE Vendedor  = '" & OrDefault(WCliente.Item("Vendedor"), 99) & "'")
 
             If WVendedor IsNot Nothing Then
                 If WTipoProd = "FA" Then

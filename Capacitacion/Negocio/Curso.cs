@@ -76,7 +76,6 @@ namespace Negocio
             var clave1 = t.Tema.ToString().PadLeft(4, '0');
             var horas = t.Horas.ToString().Replace(",",".");
 
-
             string consulta = "update tema set Descripcion = '" + t.Descripcion + "', Horas = " + horas + "where clave = '" + clave1+clave2 + "'";
             repo.Modificar(consulta);
         }
@@ -90,7 +89,18 @@ namespace Negocio
 
         public float Realizado { get; set; }
 
+        public DataRow _BuscarCurso(object Codigo, string Columnas = "*")
+        {
+            Conexion repo = new Conexion();
 
+            string consulta = "SELECT " + Columnas + " FROM Curso WHERE Codigo = '" + Codigo + "' Order by Codigo";
+
+            DataTable datos = repo.Listar(consulta);
+
+            if (datos.Rows.Count > 0) return datos.Rows[0];
+
+            return null;
+        }
 
         public Curso BuscarUnoPorTema(string p1, string p2)
         {

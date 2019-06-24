@@ -231,6 +231,104 @@ namespace Modulo_Capacitacion
 
         }
 
+        public static void ActualizarHorasRealizadas(string WAnioCalendario)
+        {
+            string WDesde = OrdenarFecha("01/06/" + WAnioCalendario);
+            string WHasta = OrdenarFecha("31/05/" + (int.Parse(WAnioCalendario) + 1));
+
+            DataTable WPersonas = new DataTable();
+
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["Surfactan"].ConnectionString;
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandText = "UPDATE Cronograma SET Realizado = 0 WHERE Ano = '" + WAnioCalendario +"'";
+
+                    cmd.ExecuteNonQuery();
+
+                    cmd.CommandText = "SELECT Clave, Legajo, Curso, Tema, Tema2, Realizado FROM Cronograma WHERE Ano = '" + WAnioCalendario + "' Order by Legajo, Curso";
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.HasRows)
+                        {
+                            WPersonas.Load(dr);
+                        }
+                    }
+
+                    foreach (DataRow WPersona in WPersonas.Rows)
+                    {
+                        double WRealizado = 0;
+                        int WTema = (int) OrDefault(WPersona["Tema"], 0);
+                        int WTemaII = (int) OrDefault(WPersona["Tema2"], 0);
+                        int WCurso = (int) OrDefault(WPersona["Curso"], 0);
+
+                        /*
+                         * En caso de que se encuentre cargado solo un tema generico, buscamos todas las horas cursadas para el curso en general.
+                         */
+
+                        if ((WTema == 99 && WTemaII == 0) || (WTemaII == 99 && WTema == 0))
+                        {
+                            cmd.CommandText = "SELECT SUM(Horas) Realizadas FROM Cursadas WHERE Curso = '" + WCurso + "' And Legajo = '" +
+                                              OrDefault(WPersona["Legajo"], "") + "' And OrdFecha BETWEEN '" + WDesde +
+                                              "' And '" + WHasta + "'";
+                            using (SqlDataReader dr = cmd.ExecuteReader())
+                            {
+                                if (dr.HasRows)
+                                {
+                                    dr.Read();
+                                    WRealizado = double.Parse(OrDefault(dr["Realizadas"], 0).ToString());
+                                }
+                            }
+                        }
+                        else
+                        {
+                            /*
+                             * En caso de que se hayan cargado algun valor para los temas busco el acumulado de cada una y lo sumarizo bajo la misma variable.
+                             */
+                            if (WTema != 0)
+                            {
+                                cmd.CommandText = "SELECT SUM(Horas) Realizadas FROM Cursadas WHERE Curso = '" + WCurso + "' And Legajo = '" +
+                                              OrDefault(WPersona["Legajo"], "") + "' And OrdFecha BETWEEN '" + WDesde +
+                                              "' And '" + WHasta + "' And Tema = '" + WTema + "'";
+                                using (SqlDataReader dr = cmd.ExecuteReader())
+                                {
+                                    if (dr.HasRows)
+                                    {
+                                        dr.Read();
+                                        WRealizado += double.Parse(OrDefault(dr["Realizadas"], 0).ToString());
+                                    }
+                                }
+                            }
+
+                            if (WTemaII != 0)
+                            {
+                                cmd.CommandText = "SELECT SUM(Horas) Realizadas FROM Cursadas WHERE Curso = '" + WCurso + "' And  Legajo = '" +
+                                              OrDefault(WPersona["Legajo"], "") + "' And OrdFecha BETWEEN '" + WDesde +
+                                              "' And '" + WHasta + "' And Tema = '" + WTemaII + "'";
+                                using (SqlDataReader dr = cmd.ExecuteReader())
+                                {
+                                    if (dr.HasRows)
+                                    {
+                                        dr.Read();
+                                        WRealizado += double.Parse(OrDefault(dr["Realizadas"], 0).ToString());
+                                    }
+                                }
+                            }
+                        }
+
+                        cmd.CommandText = "UPDATE Cronograma SET Realizado = " + WRealizado.ToString().Replace(',', '.') + " WHERE Clave = '" + WPersona["Clave"] + "'";
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+            }
+        }
+
         public static void ActualizarCantidadPersonasHoras(string WDesdeFecha, string WHastaFecha)
         {
             string WAnioI = ""; //;
@@ -276,6 +374,28 @@ namespace Modulo_Capacitacion
             }
         }
 
+        public static void ActualizaMarcaImpreListado1(string Año)
+        {
+            DataTable WCronogramaII = new DataTable();
+
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["Surfactan"].ConnectionString;
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandText = "UPDATE Cronograma SET ImpreListado1 = '0'";
+
+                    cmd.ExecuteNonQuery();
+
+                    cmd.CommandText = "SELECT cr.Curso, cr.Ano, cr2.* FROM Cronograma cr INNER JOIN CronogramaII cr2 ON cr2.Ano = cr.Ano WHERE cr.Ano = '" + int.Parse(Año) + "' OR cr.Ano = '" + (int.Parse(Año) + 1) + "'";
+                }
+
+            }
+        }
+
         public static void ActualizarCantidadPersonasHoras(string txtAno)
         {
             DataTable WPersonas = new DataTable();
@@ -313,6 +433,13 @@ namespace Modulo_Capacitacion
                 }
 
             }
+        }
+
+        public static object OrDefault(object valor, object _default)
+        {
+            if (valor == null || string.IsNullOrEmpty(valor.ToString())) return _default;
+            
+            return valor;
         }
 
         public static string OrdenarFecha(string WFecha)

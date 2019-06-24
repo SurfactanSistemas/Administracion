@@ -4,27 +4,83 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 using CrystalDecisions.CrystalReports.Engine;
-using Negocio;
 
 namespace Modulo_Capacitacion.Listados.InformedeCompetencias
 {
     public partial class Inicio : Form
     {
-        Legajo L = new Legajo();
-        DataTable dtInforme;
-        string Tipo;
-        bool Observ = false;
-
         public Inicio()
         {
             InitializeComponent();
+
+            cmbSectores.DataSource = _TraerSectores();
+            cmbSectores.DisplayMember = "Descripcion";
+            cmbSectores.ValueMember = "Codigo";
+            cmbSectores.SelectedIndex = 0;
+
+            rbPorLegajo.Checked = true;
+            cmbSectores.Enabled = false;
+        }
+
+        private DataTable _TraerSectores()
+        {
+            DataTable tabla = new DataTable();
+
+            tabla.Columns.Add("Codigo", typeof(int));
+            tabla.Columns.Add("Descripcion", typeof(string));
+
+            tabla.Rows.Add(0, "Todos");
+
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["Surfactan"].ConnectionString;
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT Codigo, Descripcion FROM Sector";
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.HasRows)
+                        {
+                            tabla.Load(dr);
+                        }
+                    }
+                }
+
+            }
+
+            return tabla;
+        }
+
+        private VistaPrevia _PrepararReporteII()
+        {
+
+            ReportDocument reporte = new imprelegajo();
+
+            if (rbSi.Checked)
+            {
+                reporte = new imprelegajoii();
+            }
+
+            string WFiltroSectores = "{Legajo.Sector} = " + cmbSectores.SelectedValue;
+
+            if (cmbSectores.SelectedIndex == 0)
+                WFiltroSectores = "{Legajo.Sector} in 0 to 9999";
+
+            VistaPrevia frm = new VistaPrevia();
+            frm.CargarReporte(reporte,
+                "{Legajo.Codigo} in 0 to 9999 AND {Legajo.FEgreso} in '' to '00/00/0000' AND " + WFiltroSectores);
+            return frm;
         }
 
         private void BT_Pantalla_Click(object sender, EventArgs e)
         {
             try
             {
-                var frm = _PrepararReporte();
+                var frm = (rbPorLegajo.Checked) ? _PrepararReporte() : _PrepararReporteII();
 
                 frm.Show();
             }
@@ -37,9 +93,8 @@ namespace Modulo_Capacitacion.Listados.InformedeCompetencias
 
         private VistaPrevia _PrepararReporte()
         {
-            if (TB_Desde.Text == "") throw new Exception("Se debe ingresar el perfil desde el que desea comenzar la busqueda");
-
-            if (TB_Hasta.Text == "") TB_Hasta.Text = TB_Desde.Text;
+            if (TB_Desde.Text == "") TB_Desde.Text = "1";
+            if (TB_Hasta.Text == "") TB_Hasta.Text = "9999";
 
             int Desd;
             int.TryParse(TB_Desde.Text, out Desd);
@@ -48,7 +103,7 @@ namespace Modulo_Capacitacion.Listados.InformedeCompetencias
 
             ReportDocument reporte = new imprelegajo();
 
-            if (CB_Observ.SelectedIndex == 1)
+            if (rbSi.Checked)
             {
                 reporte = new imprelegajoii();
             }
@@ -61,7 +116,7 @@ namespace Modulo_Capacitacion.Listados.InformedeCompetencias
 
         private void Inicio_Load(object sender, EventArgs e)
         {
-            CB_Observ.SelectedIndex = 0;
+            rbSi.Checked = true;
         }
 
         private void BT_Imprimir_Click(object sender, EventArgs e)
@@ -143,5 +198,24 @@ namespace Modulo_Capacitacion.Listados.InformedeCompetencias
             }
 
         }
+
+        private void rbPorLegajo_Click(object sender, EventArgs e)
+        {
+            TB_Desde.Enabled = rbPorLegajo.Checked && !rbPorSector.Checked;
+            TB_Hasta.Enabled = TB_Desde.Enabled;
+
+            cmbSectores.Enabled = rbPorSector.Enabled && !rbPorLegajo.Checked;
+
+            if (rbPorLegajo.Checked)
+            {
+                TB_Desde.Focus();
+            }
+            else
+            {
+                cmbSectores.Focus();
+                cmbSectores.DroppedDown = true;
+            }
+        }
+
     }
 }

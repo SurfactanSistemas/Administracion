@@ -192,11 +192,6 @@ namespace Modulo_Capacitacion.Novedades
             TB_Año.Focus();
         }
 
-        //private void DGV_Cronograma_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        //{
-        //    _ImprimirReporteCronograma(e.RowIndex);
-        //}
-
         private void _ImprimirReporteCronograma(int indexRow, int TipoConsulta)
         {
             int curso = 0;
@@ -234,7 +229,7 @@ namespace Modulo_Capacitacion.Novedades
             pnlAviso.Visible = true;
             checkBox1.Checked = true;
             cmbMes.SelectedIndex = DateTime.Now.Month;
-            txtAnoConsulta.Text = TB_Año.Text.Trim().Length < 4 ? DateTime.Now.ToString("dd/MM/yyyy") : TB_Año.Text;
+            txtAnoConsulta.Text = TB_Año.Text.Trim().Length < 4 ? DateTime.Now.ToString("yyyy") : TB_Año.Text;
             cmbMes.Focus();
         }
 

@@ -251,7 +251,6 @@ Partial Class CuentaCorrientePantalla
         'btnCerrarConsulta
         '
         Me.btnCerrarConsulta.BackColor = System.Drawing.SystemColors.Control
-        Me.btnCerrarConsulta.BackgroundImage = Global.Administracion.My.Resources.Resources.Salir2
         Me.btnCerrarConsulta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.btnCerrarConsulta.Cleanable = False
         Me.btnCerrarConsulta.Cursor = System.Windows.Forms.Cursors.Hand
@@ -348,7 +347,6 @@ Partial Class CuentaCorrientePantalla
         'btnGrabarSelectivo
         '
         Me.btnGrabarSelectivo.BackColor = System.Drawing.SystemColors.Control
-        Me.btnGrabarSelectivo.BackgroundImage = Global.Administracion.My.Resources.Resources.Aceptar_N2
         Me.btnGrabarSelectivo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.btnGrabarSelectivo.Cleanable = False
         Me.btnGrabarSelectivo.Cursor = System.Windows.Forms.Cursors.Hand
@@ -369,7 +367,6 @@ Partial Class CuentaCorrientePantalla
         'btnCerrarFechaSelectivo
         '
         Me.btnCerrarFechaSelectivo.BackColor = System.Drawing.SystemColors.Control
-        Me.btnCerrarFechaSelectivo.BackgroundImage = Global.Administracion.My.Resources.Resources.Salir2
         Me.btnCerrarFechaSelectivo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.btnCerrarFechaSelectivo.Cleanable = False
         Me.btnCerrarFechaSelectivo.Cursor = System.Windows.Forms.Cursors.Hand

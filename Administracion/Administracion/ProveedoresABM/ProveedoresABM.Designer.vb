@@ -38,24 +38,42 @@ Partial Class ProveedoresABM
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.GrupoConsultas = New System.Windows.Forms.Panel()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.btnCerrarConsultas = New Administracion.CustomButton()
+        Me.btnEvaluacion = New System.Windows.Forms.Button()
+        Me.GrupoConsultas = New System.Windows.Forms.Panel()
         Me.CKBProveedorInactivo = New System.Windows.Forms.CheckBox()
         Me.txtClienteAsociadoDescripcion = New System.Windows.Forms.TextBox()
         Me.txtClienteAsociado = New System.Windows.Forms.TextBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.txtPaginaWeb = New System.Windows.Forms.TextBox()
+        Me.txtCUIT = New System.Windows.Forms.MaskedTextBox()
+        Me.txtCategoria = New System.Windows.Forms.MaskedTextBox()
+        Me.txtCalificacion = New System.Windows.Forms.MaskedTextBox()
+        Me.txtNroSEDRONAR2 = New System.Windows.Forms.MaskedTextBox()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.txtCertificados3 = New System.Windows.Forms.MaskedTextBox()
+        Me.txtCertificados2 = New System.Windows.Forms.MaskedTextBox()
+        Me.txtCertificados = New System.Windows.Forms.MaskedTextBox()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.btnListado = New System.Windows.Forms.Button()
+        Me.btnLimpiar = New System.Windows.Forms.Button()
+        Me.btnCerrar = New System.Windows.Forms.Button()
+        Me.btnConsulta = New System.Windows.Forms.Button()
+        Me.btnEliminar = New System.Windows.Forms.Button()
+        Me.btnAgregar = New System.Windows.Forms.Button()
+        Me.txtCAIVto = New System.Windows.Forms.MaskedTextBox()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.btnCerrarConsultas = New Administracion.CustomButton()
         Me.CustomLabel26 = New Administracion.CustomLabel()
         Me.CustomLabel25 = New Administracion.CustomLabel()
         Me.txtCheque = New Administracion.CustomTextBox()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.cmbCondicionIB1 = New Administracion.CustomComboBox()
         Me.CustomLabel31 = New Administracion.CustomLabel()
         Me.CustomLabel18 = New Administracion.CustomLabel()
         Me.txtNroIB = New Administracion.CustomTextBox()
         Me.txtPorcelProv = New Administracion.CustomTextBox()
         Me.CustomLabel19 = New Administracion.CustomLabel()
-        Me.txtPaginaWeb = New System.Windows.Forms.TextBox()
-        Me.txtCUIT = New System.Windows.Forms.MaskedTextBox()
         Me.cmbCalificacion = New Administracion.CustomComboBox()
         Me.cmbEstado = New Administracion.CustomComboBox()
         Me.btnCUFE = New Administracion.CustomButton()
@@ -83,9 +101,6 @@ Partial Class ProveedoresABM
         Me.CustomLabel3 = New Administracion.CustomLabel()
         Me.CustomLabel2 = New Administracion.CustomLabel()
         Me.CustomLabel1 = New Administracion.CustomLabel()
-        Me.txtCategoria = New System.Windows.Forms.MaskedTextBox()
-        Me.txtCalificacion = New System.Windows.Forms.MaskedTextBox()
-        Me.txtNroSEDRONAR2 = New System.Windows.Forms.MaskedTextBox()
         Me.cmbRegion = New Administracion.CustomComboBox()
         Me.CustomLabel8 = New Administracion.CustomLabel()
         Me.CustomLabel7 = New Administracion.CustomLabel()
@@ -108,38 +123,24 @@ Partial Class ProveedoresABM
         Me.CustomLabel13 = New Administracion.CustomLabel()
         Me.CustomLabel14 = New Administracion.CustomLabel()
         Me.txtCuentaDescripcion = New Administracion.CustomTextBox()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.cmbInscripcionIB = New Administracion.CustomComboBox()
         Me.cmbCondicionIB2 = New Administracion.CustomComboBox()
         Me.CustomLabel20 = New Administracion.CustomLabel()
         Me.CustomLabel32 = New Administracion.CustomLabel()
         Me.txtPorcelCABA = New Administracion.CustomTextBox()
         Me.CustomLabel24 = New Administracion.CustomLabel()
-        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.CustomLabel34 = New Administracion.CustomLabel()
         Me.CustomLabel33 = New Administracion.CustomLabel()
         Me.CustomLabel27 = New Administracion.CustomLabel()
-        Me.txtCertificados3 = New System.Windows.Forms.MaskedTextBox()
-        Me.txtCertificados2 = New System.Windows.Forms.MaskedTextBox()
-        Me.txtCertificados = New System.Windows.Forms.MaskedTextBox()
         Me.cmbCertificados3 = New Administracion.CustomComboBox()
         Me.cmbCertificados2 = New Administracion.CustomComboBox()
         Me.cmbCertificados = New Administracion.CustomComboBox()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.btnListado = New System.Windows.Forms.Button()
-        Me.btnLimpiar = New System.Windows.Forms.Button()
-        Me.btnCerrar = New System.Windows.Forms.Button()
-        Me.btnConsulta = New System.Windows.Forms.Button()
-        Me.btnEliminar = New System.Windows.Forms.Button()
-        Me.btnAgregar = New System.Windows.Forms.Button()
-        Me.txtCAIVto = New System.Windows.Forms.MaskedTextBox()
         Me.txtCAI = New Administracion.CustomTextBox()
-        Me.Button2 = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
-        Me.GrupoConsultas.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
+        Me.GrupoConsultas.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -250,14 +251,14 @@ Partial Class ProveedoresABM
         '
         Me.LBConsulta_Opciones.FormattingEnabled = True
         Me.LBConsulta_Opciones.Items.AddRange(New Object() {"Proveedores", "Cuentas Contables", "Clientes", "Proveedores por Rubro"})
-        Me.LBConsulta_Opciones.Location = New System.Drawing.Point(22, 44)
+        Me.LBConsulta_Opciones.Location = New System.Drawing.Point(18, 44)
         Me.LBConsulta_Opciones.Name = "LBConsulta_Opciones"
         Me.LBConsulta_Opciones.Size = New System.Drawing.Size(454, 121)
         Me.LBConsulta_Opciones.TabIndex = 80
         '
         'txtFiltrar
         '
-        Me.txtFiltrar.Location = New System.Drawing.Point(22, 20)
+        Me.txtFiltrar.Location = New System.Drawing.Point(18, 20)
         Me.txtFiltrar.Name = "txtFiltrar"
         Me.txtFiltrar.Size = New System.Drawing.Size(454, 20)
         Me.txtFiltrar.TabIndex = 79
@@ -265,7 +266,7 @@ Partial Class ProveedoresABM
         'LBConsulta_Filtrada
         '
         Me.LBConsulta_Filtrada.FormattingEnabled = True
-        Me.LBConsulta_Filtrada.Location = New System.Drawing.Point(22, 44)
+        Me.LBConsulta_Filtrada.Location = New System.Drawing.Point(18, 44)
         Me.LBConsulta_Filtrada.Name = "LBConsulta_Filtrada"
         Me.LBConsulta_Filtrada.Size = New System.Drawing.Size(454, 121)
         Me.LBConsulta_Filtrada.TabIndex = 78
@@ -274,7 +275,7 @@ Partial Class ProveedoresABM
         'LBConsulta
         '
         Me.LBConsulta.FormattingEnabled = True
-        Me.LBConsulta.Location = New System.Drawing.Point(22, 44)
+        Me.LBConsulta.Location = New System.Drawing.Point(18, 44)
         Me.LBConsulta.Name = "LBConsulta"
         Me.LBConsulta.Size = New System.Drawing.Size(454, 121)
         Me.LBConsulta.TabIndex = 77
@@ -315,6 +316,7 @@ Partial Class ProveedoresABM
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.btnEvaluacion)
         Me.Panel2.Controls.Add(Me.GrupoConsultas)
         Me.Panel2.Controls.Add(Me.CKBProveedorInactivo)
         Me.Panel2.Controls.Add(Me.txtClienteAsociadoDescripcion)
@@ -384,15 +386,6 @@ Partial Class ProveedoresABM
         Me.Panel2.Size = New System.Drawing.Size(763, 437)
         Me.Panel2.TabIndex = 84
         '
-        'GrupoConsultas
-        '
-        Me.GrupoConsultas.Controls.Add(Me.GroupBox4)
-        Me.GrupoConsultas.Location = New System.Drawing.Point(130, 108)
-        Me.GrupoConsultas.Name = "GrupoConsultas"
-        Me.GrupoConsultas.Size = New System.Drawing.Size(502, 220)
-        Me.GrupoConsultas.TabIndex = 98
-        Me.GrupoConsultas.Visible = False
-        '
         'GroupBox4
         '
         Me.GroupBox4.Controls.Add(Me.LBConsulta_Opciones)
@@ -402,29 +395,35 @@ Partial Class ProveedoresABM
         Me.GroupBox4.Controls.Add(Me.btnCerrarConsultas)
         Me.GroupBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.GroupBox4.ForeColor = System.Drawing.SystemColors.Control
-        Me.GroupBox4.Location = New System.Drawing.Point(8, 2)
+        Me.GroupBox4.Location = New System.Drawing.Point(5, 3)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(499, 212)
+        Me.GroupBox4.Size = New System.Drawing.Size(491, 213)
         Me.GroupBox4.TabIndex = 81
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Consultas"
         '
-        'btnCerrarConsultas
+        'btnEvaluacion
         '
-        Me.btnCerrarConsultas.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.btnCerrarConsultas.Cleanable = False
-        Me.btnCerrarConsultas.EnterIndex = -1
-        Me.btnCerrarConsultas.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCerrarConsultas.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.btnCerrarConsultas.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnCerrarConsultas.LabelAssociationKey = -1
-        Me.btnCerrarConsultas.Location = New System.Drawing.Point(191, 171)
-        Me.btnCerrarConsultas.Name = "btnCerrarConsultas"
-        Me.btnCerrarConsultas.Size = New System.Drawing.Size(116, 31)
-        Me.btnCerrarConsultas.TabIndex = 94
-        Me.btnCerrarConsultas.Text = "Cerrar"
-        Me.ToolTip1.SetToolTip(Me.btnCerrarConsultas, "Cerrar Ventana de Consultas")
-        Me.btnCerrarConsultas.UseVisualStyleBackColor = False
+        Me.btnEvaluacion.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.btnEvaluacion.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnEvaluacion.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.btnEvaluacion.ForeColor = System.Drawing.SystemColors.Control
+        Me.btnEvaluacion.Location = New System.Drawing.Point(640, 393)
+        Me.btnEvaluacion.Name = "btnEvaluacion"
+        Me.btnEvaluacion.Size = New System.Drawing.Size(102, 27)
+        Me.btnEvaluacion.TabIndex = 113
+        Me.btnEvaluacion.Text = "EVALUACIÓN"
+        Me.ToolTip1.SetToolTip(Me.btnEvaluacion, "Evaluación de Proveedor por MP")
+        Me.btnEvaluacion.UseVisualStyleBackColor = False
+        '
+        'GrupoConsultas
+        '
+        Me.GrupoConsultas.Controls.Add(Me.GroupBox4)
+        Me.GrupoConsultas.Location = New System.Drawing.Point(130, 108)
+        Me.GrupoConsultas.Name = "GrupoConsultas"
+        Me.GrupoConsultas.Size = New System.Drawing.Size(502, 220)
+        Me.GrupoConsultas.TabIndex = 98
+        Me.GrupoConsultas.Visible = False
         '
         'CKBProveedorInactivo
         '
@@ -456,6 +455,308 @@ Partial Class ProveedoresABM
         Me.txtClienteAsociado.Size = New System.Drawing.Size(59, 20)
         Me.txtClienteAsociado.TabIndex = 110
         Me.ToolTip1.SetToolTip(Me.txtClienteAsociado, "Doble Click: Abrir en Navegador Web.")
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.cmbCondicionIB1)
+        Me.GroupBox2.Controls.Add(Me.CustomLabel31)
+        Me.GroupBox2.Controls.Add(Me.CustomLabel18)
+        Me.GroupBox2.Controls.Add(Me.txtNroIB)
+        Me.GroupBox2.Controls.Add(Me.txtPorcelProv)
+        Me.GroupBox2.Controls.Add(Me.CustomLabel19)
+        Me.GroupBox2.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.GroupBox2.ForeColor = System.Drawing.SystemColors.Control
+        Me.GroupBox2.Location = New System.Drawing.Point(112, 213)
+        Me.GroupBox2.Margin = New System.Windows.Forms.Padding(0)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Padding = New System.Windows.Forms.Padding(0)
+        Me.GroupBox2.Size = New System.Drawing.Size(296, 75)
+        Me.GroupBox2.TabIndex = 105
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "PROVINCIA"
+        '
+        'txtPaginaWeb
+        '
+        Me.txtPaginaWeb.Location = New System.Drawing.Point(124, 388)
+        Me.txtPaginaWeb.MaxLength = 50
+        Me.txtPaginaWeb.Name = "txtPaginaWeb"
+        Me.txtPaginaWeb.Size = New System.Drawing.Size(237, 20)
+        Me.txtPaginaWeb.TabIndex = 104
+        Me.txtPaginaWeb.Text = "http://"
+        Me.ToolTip1.SetToolTip(Me.txtPaginaWeb, "Doble Click: Abrir en Navegador Web.")
+        '
+        'txtCUIT
+        '
+        Me.txtCUIT.Location = New System.Drawing.Point(262, 118)
+        Me.txtCUIT.Mask = "00-00000000-0"
+        Me.txtCUIT.Name = "txtCUIT"
+        Me.txtCUIT.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtCUIT.Size = New System.Drawing.Size(92, 20)
+        Me.txtCUIT.TabIndex = 102
+        Me.txtCUIT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtCUIT.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals
+        '
+        'txtCategoria
+        '
+        Me.txtCategoria.Enabled = False
+        Me.txtCategoria.Location = New System.Drawing.Point(667, 363)
+        Me.txtCategoria.Mask = "00/00/0000"
+        Me.txtCategoria.Name = "txtCategoria"
+        Me.txtCategoria.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtCategoria.Size = New System.Drawing.Size(74, 20)
+        Me.txtCategoria.TabIndex = 47
+        Me.txtCategoria.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtCategoria.ValidatingType = GetType(Date)
+        '
+        'txtCalificacion
+        '
+        Me.txtCalificacion.Location = New System.Drawing.Point(669, 312)
+        Me.txtCalificacion.Mask = "00/00/0000"
+        Me.txtCalificacion.Name = "txtCalificacion"
+        Me.txtCalificacion.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtCalificacion.Size = New System.Drawing.Size(72, 20)
+        Me.txtCalificacion.TabIndex = 47
+        Me.txtCalificacion.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtCalificacion.ValidatingType = GetType(Date)
+        '
+        'txtNroSEDRONAR2
+        '
+        Me.txtNroSEDRONAR2.Location = New System.Drawing.Point(668, 290)
+        Me.txtNroSEDRONAR2.Mask = "00/00/0000"
+        Me.txtNroSEDRONAR2.Name = "txtNroSEDRONAR2"
+        Me.txtNroSEDRONAR2.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtNroSEDRONAR2.Size = New System.Drawing.Size(74, 20)
+        Me.txtNroSEDRONAR2.TabIndex = 47
+        Me.txtNroSEDRONAR2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtNroSEDRONAR2.ValidatingType = GetType(Date)
+        '
+        'GroupBox3
+        '
+        Me.GroupBox3.Controls.Add(Me.cmbInscripcionIB)
+        Me.GroupBox3.Controls.Add(Me.cmbCondicionIB2)
+        Me.GroupBox3.Controls.Add(Me.CustomLabel20)
+        Me.GroupBox3.Controls.Add(Me.CustomLabel32)
+        Me.GroupBox3.Controls.Add(Me.txtPorcelCABA)
+        Me.GroupBox3.Controls.Add(Me.CustomLabel24)
+        Me.GroupBox3.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox3.ForeColor = System.Drawing.SystemColors.Control
+        Me.GroupBox3.Location = New System.Drawing.Point(438, 213)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(313, 75)
+        Me.GroupBox3.TabIndex = 106
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "CABA"
+        '
+        'GroupBox5
+        '
+        Me.GroupBox5.Controls.Add(Me.CustomLabel34)
+        Me.GroupBox5.Controls.Add(Me.CustomLabel33)
+        Me.GroupBox5.Controls.Add(Me.CustomLabel27)
+        Me.GroupBox5.Controls.Add(Me.txtCertificados3)
+        Me.GroupBox5.Controls.Add(Me.txtCertificados2)
+        Me.GroupBox5.Controls.Add(Me.txtCertificados)
+        Me.GroupBox5.Controls.Add(Me.cmbCertificados3)
+        Me.GroupBox5.Controls.Add(Me.cmbCertificados2)
+        Me.GroupBox5.Controls.Add(Me.cmbCertificados)
+        Me.GroupBox5.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.GroupBox5.ForeColor = System.Drawing.SystemColors.Control
+        Me.GroupBox5.Location = New System.Drawing.Point(112, 292)
+        Me.GroupBox5.Margin = New System.Windows.Forms.Padding(0)
+        Me.GroupBox5.Name = "GroupBox5"
+        Me.GroupBox5.Padding = New System.Windows.Forms.Padding(0)
+        Me.GroupBox5.Size = New System.Drawing.Size(296, 91)
+        Me.GroupBox5.TabIndex = 105
+        Me.GroupBox5.TabStop = False
+        Me.GroupBox5.Text = "CERTIFICADOS"
+        '
+        'txtCertificados3
+        '
+        Me.txtCertificados3.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.txtCertificados3.Location = New System.Drawing.Point(209, 64)
+        Me.txtCertificados3.Mask = "00/00/0000"
+        Me.txtCertificados3.Name = "txtCertificados3"
+        Me.txtCertificados3.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtCertificados3.Size = New System.Drawing.Size(74, 21)
+        Me.txtCertificados3.TabIndex = 47
+        Me.txtCertificados3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtCertificados3.ValidatingType = GetType(Date)
+        '
+        'txtCertificados2
+        '
+        Me.txtCertificados2.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.txtCertificados2.Location = New System.Drawing.Point(209, 39)
+        Me.txtCertificados2.Mask = "00/00/0000"
+        Me.txtCertificados2.Name = "txtCertificados2"
+        Me.txtCertificados2.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtCertificados2.Size = New System.Drawing.Size(74, 21)
+        Me.txtCertificados2.TabIndex = 47
+        Me.txtCertificados2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtCertificados2.ValidatingType = GetType(Date)
+        '
+        'txtCertificados
+        '
+        Me.txtCertificados.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.txtCertificados.Location = New System.Drawing.Point(209, 14)
+        Me.txtCertificados.Mask = "00/00/0000"
+        Me.txtCertificados.Name = "txtCertificados"
+        Me.txtCertificados.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtCertificados.Size = New System.Drawing.Size(74, 21)
+        Me.txtCertificados.TabIndex = 47
+        Me.txtCertificados.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtCertificados.ValidatingType = GetType(Date)
+        '
+        'btnListado
+        '
+        Me.btnListado.BackgroundImage = CType(resources.GetObject("btnListado.BackgroundImage"), System.Drawing.Image)
+        Me.btnListado.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnListado.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnListado.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnListado.FlatAppearance.BorderSize = 0
+        Me.btnListado.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnListado.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnListado.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnListado.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnListado.ForeColor = System.Drawing.SystemColors.Control
+        Me.btnListado.Location = New System.Drawing.Point(369, 482)
+        Me.btnListado.Name = "btnListado"
+        Me.btnListado.Size = New System.Drawing.Size(45, 37)
+        Me.btnListado.TabIndex = 74
+        Me.ToolTip1.SetToolTip(Me.btnListado, "Listado")
+        Me.btnListado.UseVisualStyleBackColor = True
+        '
+        'btnLimpiar
+        '
+        Me.btnLimpiar.BackgroundImage = CType(resources.GetObject("btnLimpiar.BackgroundImage"), System.Drawing.Image)
+        Me.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnLimpiar.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnLimpiar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnLimpiar.FlatAppearance.BorderSize = 0
+        Me.btnLimpiar.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnLimpiar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnLimpiar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnLimpiar.ForeColor = System.Drawing.SystemColors.Control
+        Me.btnLimpiar.Location = New System.Drawing.Point(89, 482)
+        Me.btnLimpiar.Name = "btnLimpiar"
+        Me.btnLimpiar.Size = New System.Drawing.Size(45, 37)
+        Me.btnLimpiar.TabIndex = 75
+        Me.ToolTip1.SetToolTip(Me.btnLimpiar, "Limpiar formulario")
+        Me.btnLimpiar.UseVisualStyleBackColor = True
+        '
+        'btnCerrar
+        '
+        Me.btnCerrar.BackgroundImage = CType(resources.GetObject("btnCerrar.BackgroundImage"), System.Drawing.Image)
+        Me.btnCerrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnCerrar.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnCerrar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnCerrar.FlatAppearance.BorderSize = 0
+        Me.btnCerrar.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnCerrar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCerrar.ForeColor = System.Drawing.SystemColors.Control
+        Me.btnCerrar.Location = New System.Drawing.Point(299, 482)
+        Me.btnCerrar.Name = "btnCerrar"
+        Me.btnCerrar.Size = New System.Drawing.Size(45, 37)
+        Me.btnCerrar.TabIndex = 73
+        Me.ToolTip1.SetToolTip(Me.btnCerrar, "Salir del Formulario")
+        Me.btnCerrar.UseVisualStyleBackColor = True
+        '
+        'btnConsulta
+        '
+        Me.btnConsulta.BackgroundImage = CType(resources.GetObject("btnConsulta.BackgroundImage"), System.Drawing.Image)
+        Me.btnConsulta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnConsulta.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnConsulta.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnConsulta.FlatAppearance.BorderSize = 0
+        Me.btnConsulta.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnConsulta.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnConsulta.ForeColor = System.Drawing.SystemColors.Control
+        Me.btnConsulta.Location = New System.Drawing.Point(159, 482)
+        Me.btnConsulta.Name = "btnConsulta"
+        Me.btnConsulta.Size = New System.Drawing.Size(45, 37)
+        Me.btnConsulta.TabIndex = 71
+        Me.ToolTip1.SetToolTip(Me.btnConsulta, "Consulta de Proveedores/Cuentas Contables")
+        Me.btnConsulta.UseVisualStyleBackColor = True
+        '
+        'btnEliminar
+        '
+        Me.btnEliminar.BackgroundImage = CType(resources.GetObject("btnEliminar.BackgroundImage"), System.Drawing.Image)
+        Me.btnEliminar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnEliminar.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnEliminar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnEliminar.FlatAppearance.BorderSize = 0
+        Me.btnEliminar.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnEliminar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnEliminar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnEliminar.ForeColor = System.Drawing.SystemColors.Control
+        Me.btnEliminar.Location = New System.Drawing.Point(229, 482)
+        Me.btnEliminar.Name = "btnEliminar"
+        Me.btnEliminar.Size = New System.Drawing.Size(45, 37)
+        Me.btnEliminar.TabIndex = 72
+        Me.ToolTip1.SetToolTip(Me.btnEliminar, "Eliminar")
+        Me.btnEliminar.UseVisualStyleBackColor = True
+        '
+        'btnAgregar
+        '
+        Me.btnAgregar.BackColor = System.Drawing.SystemColors.Control
+        Me.btnAgregar.BackgroundImage = CType(resources.GetObject("btnAgregar.BackgroundImage"), System.Drawing.Image)
+        Me.btnAgregar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnAgregar.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnAgregar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnAgregar.FlatAppearance.BorderSize = 0
+        Me.btnAgregar.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnAgregar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnAgregar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAgregar.ForeColor = System.Drawing.SystemColors.Control
+        Me.btnAgregar.Location = New System.Drawing.Point(19, 482)
+        Me.btnAgregar.Name = "btnAgregar"
+        Me.btnAgregar.Size = New System.Drawing.Size(45, 37)
+        Me.btnAgregar.TabIndex = 70
+        Me.ToolTip1.SetToolTip(Me.btnAgregar, "Aceptar")
+        Me.btnAgregar.UseVisualStyleBackColor = True
+        '
+        'txtCAIVto
+        '
+        Me.txtCAIVto.Location = New System.Drawing.Point(663, 479)
+        Me.txtCAIVto.Mask = "00/00/0000"
+        Me.txtCAIVto.Name = "txtCAIVto"
+        Me.txtCAIVto.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtCAIVto.Size = New System.Drawing.Size(10, 20)
+        Me.txtCAIVto.TabIndex = 47
+        Me.txtCAIVto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtCAIVto.ValidatingType = GetType(Date)
+        Me.txtCAIVto.Visible = False
+        '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(426, 484)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(114, 34)
+        Me.Button2.TabIndex = 97
+        Me.Button2.Text = "Enviar Encuesta CALIDAD"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'btnCerrarConsultas
+        '
+        Me.btnCerrarConsultas.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.btnCerrarConsultas.Cleanable = False
+        Me.btnCerrarConsultas.EnterIndex = -1
+        Me.btnCerrarConsultas.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCerrarConsultas.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.btnCerrarConsultas.ForeColor = System.Drawing.SystemColors.Control
+        Me.btnCerrarConsultas.LabelAssociationKey = -1
+        Me.btnCerrarConsultas.Location = New System.Drawing.Point(187, 171)
+        Me.btnCerrarConsultas.Name = "btnCerrarConsultas"
+        Me.btnCerrarConsultas.Size = New System.Drawing.Size(116, 31)
+        Me.btnCerrarConsultas.TabIndex = 94
+        Me.btnCerrarConsultas.Text = "Cerrar"
+        Me.ToolTip1.SetToolTip(Me.btnCerrarConsultas, "Cerrar Ventana de Consultas")
+        Me.btnCerrarConsultas.UseVisualStyleBackColor = False
         '
         'CustomLabel26
         '
@@ -495,25 +796,6 @@ Partial Class ProveedoresABM
         Me.txtCheque.Size = New System.Drawing.Size(366, 20)
         Me.txtCheque.TabIndex = 46
         Me.txtCheque.Validator = Administracion.ValidatorType.None
-        '
-        'GroupBox2
-        '
-        Me.GroupBox2.Controls.Add(Me.cmbCondicionIB1)
-        Me.GroupBox2.Controls.Add(Me.CustomLabel31)
-        Me.GroupBox2.Controls.Add(Me.CustomLabel18)
-        Me.GroupBox2.Controls.Add(Me.txtNroIB)
-        Me.GroupBox2.Controls.Add(Me.txtPorcelProv)
-        Me.GroupBox2.Controls.Add(Me.CustomLabel19)
-        Me.GroupBox2.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.GroupBox2.ForeColor = System.Drawing.SystemColors.Control
-        Me.GroupBox2.Location = New System.Drawing.Point(112, 213)
-        Me.GroupBox2.Margin = New System.Windows.Forms.Padding(0)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Padding = New System.Windows.Forms.Padding(0)
-        Me.GroupBox2.Size = New System.Drawing.Size(296, 75)
-        Me.GroupBox2.TabIndex = 105
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "PROVINCIA"
         '
         'cmbCondicionIB1
         '
@@ -599,27 +881,6 @@ Partial Class ProveedoresABM
         Me.CustomLabel19.TabIndex = 70
         Me.CustomLabel19.Text = "Porcel I.B."
         '
-        'txtPaginaWeb
-        '
-        Me.txtPaginaWeb.Location = New System.Drawing.Point(124, 388)
-        Me.txtPaginaWeb.MaxLength = 50
-        Me.txtPaginaWeb.Name = "txtPaginaWeb"
-        Me.txtPaginaWeb.Size = New System.Drawing.Size(237, 20)
-        Me.txtPaginaWeb.TabIndex = 104
-        Me.txtPaginaWeb.Text = "http://"
-        Me.ToolTip1.SetToolTip(Me.txtPaginaWeb, "Doble Click: Abrir en Navegador Web.")
-        '
-        'txtCUIT
-        '
-        Me.txtCUIT.Location = New System.Drawing.Point(262, 118)
-        Me.txtCUIT.Mask = "00-00000000-0"
-        Me.txtCUIT.Name = "txtCUIT"
-        Me.txtCUIT.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtCUIT.Size = New System.Drawing.Size(92, 20)
-        Me.txtCUIT.TabIndex = 102
-        Me.txtCUIT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txtCUIT.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals
-        '
         'cmbCalificacion
         '
         Me.cmbCalificacion.Cleanable = True
@@ -655,12 +916,12 @@ Partial Class ProveedoresABM
         Me.btnCUFE.Cleanable = False
         Me.btnCUFE.EnterIndex = -1
         Me.btnCUFE.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCUFE.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.btnCUFE.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnCUFE.ForeColor = System.Drawing.SystemColors.Control
         Me.btnCUFE.LabelAssociationKey = -1
-        Me.btnCUFE.Location = New System.Drawing.Point(635, 393)
+        Me.btnCUFE.Location = New System.Drawing.Point(557, 393)
         Me.btnCUFE.Name = "btnCUFE"
-        Me.btnCUFE.Size = New System.Drawing.Size(116, 31)
+        Me.btnCUFE.Size = New System.Drawing.Size(77, 27)
         Me.btnCUFE.TabIndex = 95
         Me.btnCUFE.Text = "CUFE"
         Me.ToolTip1.SetToolTip(Me.btnCUFE, "Datos CUFE")
@@ -672,12 +933,12 @@ Partial Class ProveedoresABM
         Me.btnContactos.Cleanable = False
         Me.btnContactos.EnterIndex = -1
         Me.btnContactos.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnContactos.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.btnContactos.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnContactos.ForeColor = System.Drawing.SystemColors.Control
         Me.btnContactos.LabelAssociationKey = -1
-        Me.btnContactos.Location = New System.Drawing.Point(392, 393)
+        Me.btnContactos.Location = New System.Drawing.Point(367, 393)
         Me.btnContactos.Name = "btnContactos"
-        Me.btnContactos.Size = New System.Drawing.Size(116, 31)
+        Me.btnContactos.Size = New System.Drawing.Size(83, 27)
         Me.btnContactos.TabIndex = 94
         Me.btnContactos.Text = "Contactos"
         Me.ToolTip1.SetToolTip(Me.btnContactos, "Contactos adicionales")
@@ -689,12 +950,12 @@ Partial Class ProveedoresABM
         Me.btnObservaciones.Cleanable = False
         Me.btnObservaciones.EnterIndex = -1
         Me.btnObservaciones.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnObservaciones.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.btnObservaciones.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnObservaciones.ForeColor = System.Drawing.SystemColors.Control
         Me.btnObservaciones.LabelAssociationKey = -1
-        Me.btnObservaciones.Location = New System.Drawing.Point(516, 393)
+        Me.btnObservaciones.Location = New System.Drawing.Point(455, 393)
         Me.btnObservaciones.Name = "btnObservaciones"
-        Me.btnObservaciones.Size = New System.Drawing.Size(116, 31)
+        Me.btnObservaciones.Size = New System.Drawing.Size(97, 27)
         Me.btnObservaciones.TabIndex = 94
         Me.btnObservaciones.Text = "Observaciones"
         Me.ToolTip1.SetToolTip(Me.btnObservaciones, "Observaciones adicionales sobre el Proveedor")
@@ -1002,40 +1263,6 @@ Partial Class ProveedoresABM
         Me.CustomLabel1.TabIndex = 48
         Me.CustomLabel1.Text = "Código"
         '
-        'txtCategoria
-        '
-        Me.txtCategoria.Enabled = False
-        Me.txtCategoria.Location = New System.Drawing.Point(667, 363)
-        Me.txtCategoria.Mask = "00/00/0000"
-        Me.txtCategoria.Name = "txtCategoria"
-        Me.txtCategoria.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtCategoria.Size = New System.Drawing.Size(74, 20)
-        Me.txtCategoria.TabIndex = 47
-        Me.txtCategoria.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txtCategoria.ValidatingType = GetType(Date)
-        '
-        'txtCalificacion
-        '
-        Me.txtCalificacion.Location = New System.Drawing.Point(669, 312)
-        Me.txtCalificacion.Mask = "00/00/0000"
-        Me.txtCalificacion.Name = "txtCalificacion"
-        Me.txtCalificacion.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtCalificacion.Size = New System.Drawing.Size(72, 20)
-        Me.txtCalificacion.TabIndex = 47
-        Me.txtCalificacion.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txtCalificacion.ValidatingType = GetType(Date)
-        '
-        'txtNroSEDRONAR2
-        '
-        Me.txtNroSEDRONAR2.Location = New System.Drawing.Point(668, 290)
-        Me.txtNroSEDRONAR2.Mask = "00/00/0000"
-        Me.txtNroSEDRONAR2.Name = "txtNroSEDRONAR2"
-        Me.txtNroSEDRONAR2.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtNroSEDRONAR2.Size = New System.Drawing.Size(74, 20)
-        Me.txtNroSEDRONAR2.TabIndex = 47
-        Me.txtNroSEDRONAR2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txtNroSEDRONAR2.ValidatingType = GetType(Date)
-        '
         'cmbRegion
         '
         Me.cmbRegion.Cleanable = True
@@ -1332,23 +1559,6 @@ Partial Class ProveedoresABM
         Me.txtCuentaDescripcion.TabIndex = 45
         Me.txtCuentaDescripcion.Validator = Administracion.ValidatorType.None
         '
-        'GroupBox3
-        '
-        Me.GroupBox3.Controls.Add(Me.cmbInscripcionIB)
-        Me.GroupBox3.Controls.Add(Me.cmbCondicionIB2)
-        Me.GroupBox3.Controls.Add(Me.CustomLabel20)
-        Me.GroupBox3.Controls.Add(Me.CustomLabel32)
-        Me.GroupBox3.Controls.Add(Me.txtPorcelCABA)
-        Me.GroupBox3.Controls.Add(Me.CustomLabel24)
-        Me.GroupBox3.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox3.ForeColor = System.Drawing.SystemColors.Control
-        Me.GroupBox3.Location = New System.Drawing.Point(438, 213)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(313, 75)
-        Me.GroupBox3.TabIndex = 106
-        Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "CABA"
-        '
         'cmbInscripcionIB
         '
         Me.cmbInscripcionIB.Cleanable = True
@@ -1434,28 +1644,6 @@ Partial Class ProveedoresABM
         Me.CustomLabel24.TabIndex = 76
         Me.CustomLabel24.Text = "Porcel I.B."
         '
-        'GroupBox5
-        '
-        Me.GroupBox5.Controls.Add(Me.CustomLabel34)
-        Me.GroupBox5.Controls.Add(Me.CustomLabel33)
-        Me.GroupBox5.Controls.Add(Me.CustomLabel27)
-        Me.GroupBox5.Controls.Add(Me.txtCertificados3)
-        Me.GroupBox5.Controls.Add(Me.txtCertificados2)
-        Me.GroupBox5.Controls.Add(Me.txtCertificados)
-        Me.GroupBox5.Controls.Add(Me.cmbCertificados3)
-        Me.GroupBox5.Controls.Add(Me.cmbCertificados2)
-        Me.GroupBox5.Controls.Add(Me.cmbCertificados)
-        Me.GroupBox5.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.GroupBox5.ForeColor = System.Drawing.SystemColors.Control
-        Me.GroupBox5.Location = New System.Drawing.Point(112, 292)
-        Me.GroupBox5.Margin = New System.Windows.Forms.Padding(0)
-        Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Padding = New System.Windows.Forms.Padding(0)
-        Me.GroupBox5.Size = New System.Drawing.Size(296, 91)
-        Me.GroupBox5.TabIndex = 105
-        Me.GroupBox5.TabStop = False
-        Me.GroupBox5.Text = "CERTIFICADOS"
-        '
         'CustomLabel34
         '
         Me.CustomLabel34.AutoSize = True
@@ -1494,42 +1682,6 @@ Partial Class ProveedoresABM
         Me.CustomLabel27.Size = New System.Drawing.Size(17, 14)
         Me.CustomLabel27.TabIndex = 100
         Me.CustomLabel27.Text = "1)"
-        '
-        'txtCertificados3
-        '
-        Me.txtCertificados3.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Bold)
-        Me.txtCertificados3.Location = New System.Drawing.Point(209, 64)
-        Me.txtCertificados3.Mask = "00/00/0000"
-        Me.txtCertificados3.Name = "txtCertificados3"
-        Me.txtCertificados3.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtCertificados3.Size = New System.Drawing.Size(74, 21)
-        Me.txtCertificados3.TabIndex = 47
-        Me.txtCertificados3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txtCertificados3.ValidatingType = GetType(Date)
-        '
-        'txtCertificados2
-        '
-        Me.txtCertificados2.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Bold)
-        Me.txtCertificados2.Location = New System.Drawing.Point(209, 39)
-        Me.txtCertificados2.Mask = "00/00/0000"
-        Me.txtCertificados2.Name = "txtCertificados2"
-        Me.txtCertificados2.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtCertificados2.Size = New System.Drawing.Size(74, 21)
-        Me.txtCertificados2.TabIndex = 47
-        Me.txtCertificados2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txtCertificados2.ValidatingType = GetType(Date)
-        '
-        'txtCertificados
-        '
-        Me.txtCertificados.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Bold)
-        Me.txtCertificados.Location = New System.Drawing.Point(209, 14)
-        Me.txtCertificados.Mask = "00/00/0000"
-        Me.txtCertificados.Name = "txtCertificados"
-        Me.txtCertificados.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtCertificados.Size = New System.Drawing.Size(74, 21)
-        Me.txtCertificados.TabIndex = 47
-        Me.txtCertificados.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txtCertificados.ValidatingType = GetType(Date)
         '
         'cmbCertificados3
         '
@@ -1579,133 +1731,6 @@ Partial Class ProveedoresABM
         Me.cmbCertificados.TabIndex = 99
         Me.cmbCertificados.Validator = Administracion.ValidatorType.None
         '
-        'btnListado
-        '
-        Me.btnListado.BackgroundImage = CType(resources.GetObject("btnListado.BackgroundImage"), System.Drawing.Image)
-        Me.btnListado.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnListado.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnListado.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnListado.FlatAppearance.BorderSize = 0
-        Me.btnListado.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnListado.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnListado.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnListado.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnListado.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnListado.Location = New System.Drawing.Point(369, 482)
-        Me.btnListado.Name = "btnListado"
-        Me.btnListado.Size = New System.Drawing.Size(45, 37)
-        Me.btnListado.TabIndex = 74
-        Me.ToolTip1.SetToolTip(Me.btnListado, "Listado")
-        Me.btnListado.UseVisualStyleBackColor = True
-        '
-        'btnLimpiar
-        '
-        Me.btnLimpiar.BackgroundImage = CType(resources.GetObject("btnLimpiar.BackgroundImage"), System.Drawing.Image)
-        Me.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnLimpiar.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnLimpiar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnLimpiar.FlatAppearance.BorderSize = 0
-        Me.btnLimpiar.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnLimpiar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnLimpiar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnLimpiar.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnLimpiar.Location = New System.Drawing.Point(89, 482)
-        Me.btnLimpiar.Name = "btnLimpiar"
-        Me.btnLimpiar.Size = New System.Drawing.Size(45, 37)
-        Me.btnLimpiar.TabIndex = 75
-        Me.ToolTip1.SetToolTip(Me.btnLimpiar, "Limpiar formulario")
-        Me.btnLimpiar.UseVisualStyleBackColor = True
-        '
-        'btnCerrar
-        '
-        Me.btnCerrar.BackgroundImage = CType(resources.GetObject("btnCerrar.BackgroundImage"), System.Drawing.Image)
-        Me.btnCerrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnCerrar.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnCerrar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnCerrar.FlatAppearance.BorderSize = 0
-        Me.btnCerrar.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnCerrar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCerrar.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnCerrar.Location = New System.Drawing.Point(299, 482)
-        Me.btnCerrar.Name = "btnCerrar"
-        Me.btnCerrar.Size = New System.Drawing.Size(45, 37)
-        Me.btnCerrar.TabIndex = 73
-        Me.ToolTip1.SetToolTip(Me.btnCerrar, "Salir del Formulario")
-        Me.btnCerrar.UseVisualStyleBackColor = True
-        '
-        'btnConsulta
-        '
-        Me.btnConsulta.BackgroundImage = CType(resources.GetObject("btnConsulta.BackgroundImage"), System.Drawing.Image)
-        Me.btnConsulta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnConsulta.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnConsulta.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnConsulta.FlatAppearance.BorderSize = 0
-        Me.btnConsulta.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnConsulta.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnConsulta.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnConsulta.Location = New System.Drawing.Point(159, 482)
-        Me.btnConsulta.Name = "btnConsulta"
-        Me.btnConsulta.Size = New System.Drawing.Size(45, 37)
-        Me.btnConsulta.TabIndex = 71
-        Me.ToolTip1.SetToolTip(Me.btnConsulta, "Consulta de Proveedores/Cuentas Contables")
-        Me.btnConsulta.UseVisualStyleBackColor = True
-        '
-        'btnEliminar
-        '
-        Me.btnEliminar.BackgroundImage = CType(resources.GetObject("btnEliminar.BackgroundImage"), System.Drawing.Image)
-        Me.btnEliminar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnEliminar.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnEliminar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnEliminar.FlatAppearance.BorderSize = 0
-        Me.btnEliminar.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnEliminar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnEliminar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnEliminar.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnEliminar.Location = New System.Drawing.Point(229, 482)
-        Me.btnEliminar.Name = "btnEliminar"
-        Me.btnEliminar.Size = New System.Drawing.Size(45, 37)
-        Me.btnEliminar.TabIndex = 72
-        Me.ToolTip1.SetToolTip(Me.btnEliminar, "Eliminar")
-        Me.btnEliminar.UseVisualStyleBackColor = True
-        '
-        'btnAgregar
-        '
-        Me.btnAgregar.BackColor = System.Drawing.SystemColors.Control
-        Me.btnAgregar.BackgroundImage = CType(resources.GetObject("btnAgregar.BackgroundImage"), System.Drawing.Image)
-        Me.btnAgregar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnAgregar.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnAgregar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnAgregar.FlatAppearance.BorderSize = 0
-        Me.btnAgregar.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnAgregar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnAgregar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAgregar.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnAgregar.Location = New System.Drawing.Point(19, 482)
-        Me.btnAgregar.Name = "btnAgregar"
-        Me.btnAgregar.Size = New System.Drawing.Size(45, 37)
-        Me.btnAgregar.TabIndex = 70
-        Me.ToolTip1.SetToolTip(Me.btnAgregar, "Aceptar")
-        Me.btnAgregar.UseVisualStyleBackColor = True
-        '
-        'txtCAIVto
-        '
-        Me.txtCAIVto.Location = New System.Drawing.Point(663, 479)
-        Me.txtCAIVto.Mask = "00/00/0000"
-        Me.txtCAIVto.Name = "txtCAIVto"
-        Me.txtCAIVto.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtCAIVto.Size = New System.Drawing.Size(10, 20)
-        Me.txtCAIVto.TabIndex = 47
-        Me.txtCAIVto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txtCAIVto.ValidatingType = GetType(Date)
-        Me.txtCAIVto.Visible = False
-        '
         'txtCAI
         '
         Me.txtCAI.Cleanable = True
@@ -1720,15 +1745,6 @@ Partial Class ProveedoresABM
         Me.txtCAI.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtCAI.Validator = Administracion.ValidatorType.None
         Me.txtCAI.Visible = False
-        '
-        'Button2
-        '
-        Me.Button2.Location = New System.Drawing.Point(426, 484)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(114, 34)
-        Me.Button2.TabIndex = 97
-        Me.Button2.Text = "Enviar Encuesta CALIDAD"
-        Me.Button2.UseVisualStyleBackColor = True
         '
         'ProveedoresABM
         '
@@ -1756,9 +1772,9 @@ Partial Class ProveedoresABM
         Me.Panel1.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
-        Me.GrupoConsultas.ResumeLayout(False)
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox4.PerformLayout()
+        Me.GrupoConsultas.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
@@ -1880,4 +1896,5 @@ Partial Class ProveedoresABM
     Friend WithEvents txtMailOp As Administracion.CustomTextBox
     Friend WithEvents CustomLabel35 As Administracion.CustomLabel
     Friend WithEvents Button2 As System.Windows.Forms.Button
+    Friend WithEvents btnEvaluacion As Button
 End Class

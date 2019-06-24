@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Negocio;
 
@@ -28,9 +24,12 @@ namespace Modulo_Capacitacion.Listados.LegajosConNecesidadesPendientes
         {
             try
             {
-                if (TB_Desde.Text == "") throw new Exception("Se debe ingresar el tema desde el que desea comenzar la busqueda");
+                TB_Desde.Text = Regex.Replace(TB_Desde.Text, "[^0-9]", "");
+                TB_Hasta.Text = Regex.Replace(TB_Hasta.Text, "[^0-9]", "");
 
-                if (TB_Hasta.Text == "") TB_Hasta.Text = TB_Desde.Text;
+                if (TB_Desde.Text == "") TB_Desde.Text = "1";
+
+                if (TB_Hasta.Text == "") TB_Hasta.Text = "9999";
 
                 int Desd;
                 int.TryParse(TB_Desde.Text, out Desd);
@@ -114,5 +113,9 @@ namespace Modulo_Capacitacion.Listados.LegajosConNecesidadesPendientes
             }
         }
 
+        private void TB_Desde_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !Regex.IsMatch(e.KeyChar.ToString(), "[0-9]") && !char.IsControl(e.KeyChar) && char.IsPunctuation(e.KeyChar);
+        }
     }
 }

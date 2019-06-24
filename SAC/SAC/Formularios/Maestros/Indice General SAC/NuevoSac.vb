@@ -1,6 +1,7 @@
 ﻿Imports System.Configuration
 Imports System.Data.SqlClient
 Imports System.IO
+Imports System.Reflection
 Imports CrystalDecisions.Shared
 Imports Microsoft.Office.Interop.Outlook
 Imports Microsoft.VisualBasic.FileIO
@@ -48,6 +49,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtTipo.Text) = "" Then
+                WRefControlEnFoco = sender
                 _ProcesarAyudaContenedor(0)
                 Exit Sub
             End If
@@ -120,9 +122,9 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
         Dim WClave = txtTipo.Text.PadLeft(4, "0") & txtAnio.Text.PadLeft(4, "0") & txtNumero.Text.PadLeft(6, "0")
 
         Dim ZSql = ""
-        ZSql = "SELECT Incidencia, Fecha, Tipo, Estado, Titulo, Referencia, DescTipo = CASE ISNULL(Tipo, 0) WHEN 1 THEN 'General' WHEN 2 THEN 'Rechazo MP' ELSE '' END, " _
-            & " DescEstado = CASE ISNULL(Estado, 0) WHEN 1 THEN 'Genera SAC' WHEN 2 THEN 'No Genera SAC' ELSE 'Pend. Análisis' END " _
-            & " FROM CargaIncidencias WHERE ClaveSac = '" & WClave & "'"
+        ZSql = "SELECT ci.Incidencia, ci.Numero, ci.TipoINC As Tipo, ci.Ano, ci.Fecha, ci.Estado, ci.Titulo, ci.Referencia, DescTipo = RTRIM(t.Descripcion), " _
+            & " DescEstado = CASE ISNULL(ci.Estado, 0) WHEN 1 THEN 'Genera SAC' WHEN 2 THEN 'No Genera SAC' ELSE 'Pend. Análisis' END " _
+            & " FROM CargaIncidencias ci LEFT OUTER JOIN TiposINC t ON t.Tipo = ci.TipoINC WHERE ci.ClaveSac = '" & WClave & "'"
 
         Dim WINC As DataTable = GetAll(ZSql)
 
@@ -431,6 +433,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtCentro.Text) = "" Then
+                WRefControlEnFoco = sender
                 _ProcesarAyudaContenedor(1)
                 Exit Sub
             End If
@@ -457,6 +460,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtEmisor.Text) = "" Then
+                WRefControlEnFoco = sender
                 _ProcesarAyudaContenedor(2)
                 Exit Sub
             End If
@@ -483,6 +487,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtResponsable.Text) = "" Then
+                WRefControlEnFoco = sender
                 _ProcesarAyudaContenedor(3)
                 Exit Sub
             End If
@@ -1172,7 +1177,6 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
     End Sub
 
     Public Sub _ProcesarAyudaContenedor(ByVal WIndice As Integer) Implements IAyudaContenedor._ProcesarAyudaContenedor
-
         Select Case WIndice
             Case 0
                 Dim frm As New AyudaTipoSac()
@@ -1186,6 +1190,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
             Case 2, 3
                 WRefTipoResp = IIf(WIndice = 2, txtEmisor, txtResponsable)
+                WRefControlEnFoco = WRefTipoResp
                 Dim frm As New AyudaResponsablesSac()
                 _Centrar(frm)
                 frm.Show(Me)
@@ -1228,11 +1233,15 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
                 dgvVerificaciones.CurrentCell.Value = WCodigo
                 SendKeys.Send("{ENTER}")
 
-            Case txtResponsable.Name.ToUpper, txtEmisor.Name.ToUpper
+            Case txtResponsable.Name.ToUpper
+                If Not IsNothing(WRefTipoResp) Then
+                    WRefTipoResp.Text = WCodigo
+                    txtResponsable_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+                End If
+            Case txtEmisor.Name.ToUpper
                 If Not IsNothing(WRefTipoResp) Then
                     WRefTipoResp.Text = WCodigo
                     txtEmisor_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
-                    txtResponsable_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
                 End If
         End Select
 
@@ -2132,18 +2141,22 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
     End Sub
 
     Private Sub txtTipo_MouseDoubleClick(ByVal sender As Object, ByVal e As MouseEventArgs) Handles txtTipo.MouseDoubleClick
+        WRefControlEnFoco = sender
         _ProcesarAyudaContenedor(0)
     End Sub
 
     Private Sub txtCentro_MouseDoubleClick(ByVal sender As Object, ByVal e As MouseEventArgs) Handles txtCentro.MouseDoubleClick
+        WRefControlEnFoco = sender
         _ProcesarAyudaContenedor(1)
     End Sub
 
     Private Sub txtEmisor_MouseDoubleClick(ByVal sender As Object, ByVal e As MouseEventArgs) Handles txtEmisor.MouseDoubleClick
+        WRefControlEnFoco = sender
         _ProcesarAyudaContenedor(2)
     End Sub
 
     Private Sub txtResponsable_MouseDoubleClick(ByVal sender As Object, ByVal e As MouseEventArgs) Handles txtResponsable.MouseDoubleClick
+        WRefControlEnFoco = sender
         _ProcesarAyudaContenedor(3)
     End Sub
 

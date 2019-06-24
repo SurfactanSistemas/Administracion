@@ -615,13 +615,13 @@ Partial Class DetallesIncidencia
         Me.dgvArchivos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.FechaArchivo, Me.DescArchivo, Me.Icono, Me.PathArchivo})
         Me.dgvArchivos.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.dgvArchivos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.dgvArchivos.Location = New System.Drawing.Point(3, 5)
+        Me.dgvArchivos.Location = New System.Drawing.Point(3, 35)
         Me.dgvArchivos.Name = "dgvArchivos"
         Me.dgvArchivos.ReadOnly = True
         Me.dgvArchivos.RowHeadersWidth = 15
         Me.dgvArchivos.RowTemplate.Height = 30
         Me.dgvArchivos.ShowCellToolTips = False
-        Me.dgvArchivos.Size = New System.Drawing.Size(790, 226)
+        Me.dgvArchivos.Size = New System.Drawing.Size(790, 196)
         Me.dgvArchivos.TabIndex = 1
         '
         'FechaArchivo

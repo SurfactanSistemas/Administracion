@@ -44,34 +44,34 @@
             this.actualizacionDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.asignaciónDeCursosPorPerfilOSectorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.asignacionDeTemasPorPerfilSectorPlantaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.listadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.perfilDelPuestoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.informeDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuNecesidadesCompetenciasPorSector = new System.Windows.Forms.ToolStripMenuItem();
-            this.listadoDeTemasRealizadosPorLegajoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.listadoDeCursosRealizadosPorTemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.listadoDeEvaluaciónDeTemasProgramadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.listadoDeLegajosConNecesidadesPendientesPorICYNCVigenteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.listadoTemasRealizadosPorSectorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.planDeCapacitaciónAnualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.planDeCapacitaciónTentativoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.listadoDeLegajosPorPerfilToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.planillasDeTemasNoProgramadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.listadoDeTemasRealizadosYNoRealizadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.listadoDeTemasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.listadosDeTemasRealizadosPorLegajosConsolidadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.listadoDeHorasCursadasPorLegajoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.listadoDePromedioDeCapacitaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.listadoDeCursosPorResponsableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.listadoDeCursosPendientesPorSectorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.planDeCapacitaciónAnualTentativoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listados2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.maestrosToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.listadoDePerfilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listadoDeTemasToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.listadoDeLegajosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.competenciasYNecesidadesDeCapacitaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.informeDeCompetenciaYNecesidadDeCapacitaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listadoPorLegajosPendientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cursosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resúmenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cursosPorLegajoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cursosPorLegajoConsolidadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cursosPorTemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cursosPorSectorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.análisisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cursosNORealizadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cursosNOProgramadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resumenDeCursosRealizadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cronogramaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.planillaDeCapacitaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cronogramaPorSectorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cronogramaPorTemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.procesosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -82,7 +82,7 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.maestrosToolStripMenuItem,
             this.novedadesToolStripMenuItem,
-            this.listadosToolStripMenuItem,
+            this.listados2ToolStripMenuItem,
             this.procesosToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -161,7 +161,8 @@
             this.ingresoDeCursosRealizadosToolStripMenuItem,
             this.actualizacionDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem,
             this.asignaciónDeCursosPorPerfilOSectorToolStripMenuItem,
-            this.asignacionDeTemasPorPerfilSectorPlantaToolStripMenuItem});
+            this.asignacionDeTemasPorPerfilSectorPlantaToolStripMenuItem,
+            this.planDeCapacitaciónAnualTentativoToolStripMenuItem});
             this.novedadesToolStripMenuItem.Name = "novedadesToolStripMenuItem";
             this.novedadesToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
             this.novedadesToolStripMenuItem.Text = "Novedades";
@@ -208,181 +209,187 @@
             this.asignacionDeTemasPorPerfilSectorPlantaToolStripMenuItem.Text = "Asignacion de Temas por Perfil, Sector y Planta";
             this.asignacionDeTemasPorPerfilSectorPlantaToolStripMenuItem.Click += new System.EventHandler(this.asignacionDeTemasPorPerfilSectorPlantaToolStripMenuItem_Click);
             // 
-            // listadosToolStripMenuItem
+            // planDeCapacitaciónAnualTentativoToolStripMenuItem
             // 
-            this.listadosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.perfilDelPuestoToolStripMenuItem,
-            this.informeDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem,
-            this.toolStripMenuNecesidadesCompetenciasPorSector,
-            this.listadoDeTemasRealizadosPorLegajoToolStripMenuItem,
-            this.listadoDeCursosRealizadosPorTemaToolStripMenuItem,
-            this.toolStripMenuItem1,
-            this.listadoDeEvaluaciónDeTemasProgramadosToolStripMenuItem,
-            this.listadoDeLegajosConNecesidadesPendientesPorICYNCVigenteToolStripMenuItem,
-            this.listadoTemasRealizadosPorSectorToolStripMenuItem,
-            this.planDeCapacitaciónAnualToolStripMenuItem,
-            this.planDeCapacitaciónTentativoToolStripMenuItem,
-            this.listadoDeLegajosPorPerfilToolStripMenuItem,
-            this.planillasDeTemasNoProgramadosToolStripMenuItem,
-            this.listadoDeTemasRealizadosYNoRealizadosToolStripMenuItem,
-            this.listadoDeTemasToolStripMenuItem,
-            this.listadosDeTemasRealizadosPorLegajosConsolidadoToolStripMenuItem,
-            this.listadoDeHorasCursadasPorLegajoToolStripMenuItem,
-            this.listadoDePromedioDeCapacitaciónToolStripMenuItem,
-            this.listadoDeCursosPorResponsableToolStripMenuItem,
-            this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem1,
-            this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem,
-            this.listadoDeCursosPendientesPorSectorToolStripMenuItem});
-            this.listadosToolStripMenuItem.Name = "listadosToolStripMenuItem";
-            this.listadosToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
-            this.listadosToolStripMenuItem.Text = "Listados";
+            this.planDeCapacitaciónAnualTentativoToolStripMenuItem.Name = "planDeCapacitaciónAnualTentativoToolStripMenuItem";
+            this.planDeCapacitaciónAnualTentativoToolStripMenuItem.Size = new System.Drawing.Size(406, 22);
+            this.planDeCapacitaciónAnualTentativoToolStripMenuItem.Text = "Plan de Capacitación Anual (Tentativo)";
+            this.planDeCapacitaciónAnualTentativoToolStripMenuItem.Click += new System.EventHandler(this.planDeCapacitaciónAnualTentativoToolStripMenuItem_Click);
             // 
-            // perfilDelPuestoToolStripMenuItem
+            // listados2ToolStripMenuItem
             // 
-            this.perfilDelPuestoToolStripMenuItem.Name = "perfilDelPuestoToolStripMenuItem";
-            this.perfilDelPuestoToolStripMenuItem.Size = new System.Drawing.Size(430, 22);
-            this.perfilDelPuestoToolStripMenuItem.Text = "Perfil del Puesto";
-            this.perfilDelPuestoToolStripMenuItem.Click += new System.EventHandler(this.perfilDelPuestoToolStripMenuItem_Click);
+            this.listados2ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.maestrosToolStripMenuItem1,
+            this.competenciasYNecesidadesDeCapacitaciónToolStripMenuItem,
+            this.cursosToolStripMenuItem,
+            this.análisisToolStripMenuItem,
+            this.cronogramaToolStripMenuItem});
+            this.listados2ToolStripMenuItem.Name = "listados2ToolStripMenuItem";
+            this.listados2ToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
+            this.listados2ToolStripMenuItem.Text = "Listados";
             // 
-            // informeDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem
+            // maestrosToolStripMenuItem1
             // 
-            this.informeDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem.Name = "informeDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem";
-            this.informeDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem.Size = new System.Drawing.Size(430, 22);
-            this.informeDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem.Text = "Informe de Competencias y Necesidades de Capacitación";
-            this.informeDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem.Click += new System.EventHandler(this.informeDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem_Click);
+            this.maestrosToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.listadoDePerfilesToolStripMenuItem,
+            this.listadoDeTemasToolStripMenuItem1,
+            this.listadoDeLegajosToolStripMenuItem});
+            this.maestrosToolStripMenuItem1.Name = "maestrosToolStripMenuItem1";
+            this.maestrosToolStripMenuItem1.Size = new System.Drawing.Size(316, 22);
+            this.maestrosToolStripMenuItem1.Text = "Maestros";
             // 
-            // toolStripMenuNecesidadesCompetenciasPorSector
+            // listadoDePerfilesToolStripMenuItem
             // 
-            this.toolStripMenuNecesidadesCompetenciasPorSector.Name = "toolStripMenuNecesidadesCompetenciasPorSector";
-            this.toolStripMenuNecesidadesCompetenciasPorSector.Size = new System.Drawing.Size(430, 22);
-            this.toolStripMenuNecesidadesCompetenciasPorSector.Text = "Listado de Competencias y Necesidades Pendientes por Sector";
-            this.toolStripMenuNecesidadesCompetenciasPorSector.Click += new System.EventHandler(this.toolStripMenuNecesidadesCompetenciasPorSector_Click);
+            this.listadoDePerfilesToolStripMenuItem.Name = "listadoDePerfilesToolStripMenuItem";
+            this.listadoDePerfilesToolStripMenuItem.Size = new System.Drawing.Size(222, 22);
+            this.listadoDePerfilesToolStripMenuItem.Text = "Listado de Perfiles";
+            this.listadoDePerfilesToolStripMenuItem.Click += new System.EventHandler(this.listadoDePerfilesToolStripMenuItem_Click);
             // 
-            // listadoDeTemasRealizadosPorLegajoToolStripMenuItem
+            // listadoDeTemasToolStripMenuItem1
             // 
-            this.listadoDeTemasRealizadosPorLegajoToolStripMenuItem.Name = "listadoDeTemasRealizadosPorLegajoToolStripMenuItem";
-            this.listadoDeTemasRealizadosPorLegajoToolStripMenuItem.Size = new System.Drawing.Size(430, 22);
-            this.listadoDeTemasRealizadosPorLegajoToolStripMenuItem.Text = "Listado de Temas Realizados por Legajo";
-            this.listadoDeTemasRealizadosPorLegajoToolStripMenuItem.Click += new System.EventHandler(this.listadoDeTemasRealizadosPorLegajoToolStripMenuItem_Click);
+            this.listadoDeTemasToolStripMenuItem1.Name = "listadoDeTemasToolStripMenuItem1";
+            this.listadoDeTemasToolStripMenuItem1.Size = new System.Drawing.Size(222, 22);
+            this.listadoDeTemasToolStripMenuItem1.Text = "Listado de Temas";
+            this.listadoDeTemasToolStripMenuItem1.Click += new System.EventHandler(this.listadoDeTemasToolStripMenuItem1_Click);
             // 
-            // listadoDeCursosRealizadosPorTemaToolStripMenuItem
+            // listadoDeLegajosToolStripMenuItem
             // 
-            this.listadoDeCursosRealizadosPorTemaToolStripMenuItem.Name = "listadoDeCursosRealizadosPorTemaToolStripMenuItem";
-            this.listadoDeCursosRealizadosPorTemaToolStripMenuItem.Size = new System.Drawing.Size(430, 22);
-            this.listadoDeCursosRealizadosPorTemaToolStripMenuItem.Text = "Listado de Cursos Realizados por Tema";
-            this.listadoDeCursosRealizadosPorTemaToolStripMenuItem.Click += new System.EventHandler(this.listadoDeCursosRealizadosPorTemaToolStripMenuItem_Click);
+            this.listadoDeLegajosToolStripMenuItem.Name = "listadoDeLegajosToolStripMenuItem";
+            this.listadoDeLegajosToolStripMenuItem.Size = new System.Drawing.Size(222, 22);
+            this.listadoDeLegajosToolStripMenuItem.Text = "Listado de Legajos por Perfil";
+            this.listadoDeLegajosToolStripMenuItem.Click += new System.EventHandler(this.listadoDeLegajosToolStripMenuItem_Click);
             // 
-            // listadoDeEvaluaciónDeTemasProgramadosToolStripMenuItem
+            // competenciasYNecesidadesDeCapacitaciónToolStripMenuItem
             // 
-            this.listadoDeEvaluaciónDeTemasProgramadosToolStripMenuItem.Name = "listadoDeEvaluaciónDeTemasProgramadosToolStripMenuItem";
-            this.listadoDeEvaluaciónDeTemasProgramadosToolStripMenuItem.Size = new System.Drawing.Size(430, 22);
-            this.listadoDeEvaluaciónDeTemasProgramadosToolStripMenuItem.Text = "Listado de Evaluación de Temas Programados";
-            this.listadoDeEvaluaciónDeTemasProgramadosToolStripMenuItem.Click += new System.EventHandler(this.listadoDeEvaluaciónDeTemasProgramadosToolStripMenuItem_Click);
+            this.competenciasYNecesidadesDeCapacitaciónToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.informeDeCompetenciaYNecesidadDeCapacitaciónToolStripMenuItem,
+            this.listadoPorLegajosPendientesToolStripMenuItem});
+            this.competenciasYNecesidadesDeCapacitaciónToolStripMenuItem.Name = "competenciasYNecesidadesDeCapacitaciónToolStripMenuItem";
+            this.competenciasYNecesidadesDeCapacitaciónToolStripMenuItem.Size = new System.Drawing.Size(316, 22);
+            this.competenciasYNecesidadesDeCapacitaciónToolStripMenuItem.Text = "Competencias y Necesidades de Capacitación";
             // 
-            // listadoDeLegajosConNecesidadesPendientesPorICYNCVigenteToolStripMenuItem
+            // informeDeCompetenciaYNecesidadDeCapacitaciónToolStripMenuItem
             // 
-            this.listadoDeLegajosConNecesidadesPendientesPorICYNCVigenteToolStripMenuItem.Name = "listadoDeLegajosConNecesidadesPendientesPorICYNCVigenteToolStripMenuItem";
-            this.listadoDeLegajosConNecesidadesPendientesPorICYNCVigenteToolStripMenuItem.Size = new System.Drawing.Size(430, 22);
-            this.listadoDeLegajosConNecesidadesPendientesPorICYNCVigenteToolStripMenuItem.Text = "Listado de Legajos con Necesidades Pendientes por IC y NC vigente";
-            this.listadoDeLegajosConNecesidadesPendientesPorICYNCVigenteToolStripMenuItem.Click += new System.EventHandler(this.listadoDeLegajosConNecesidadesPendientesPorICYNCVigenteToolStripMenuItem_Click);
+            this.informeDeCompetenciaYNecesidadDeCapacitaciónToolStripMenuItem.Name = "informeDeCompetenciaYNecesidadDeCapacitaciónToolStripMenuItem";
+            this.informeDeCompetenciaYNecesidadDeCapacitaciónToolStripMenuItem.Size = new System.Drawing.Size(361, 22);
+            this.informeDeCompetenciaYNecesidadDeCapacitaciónToolStripMenuItem.Text = "Informe de Competencia y Necesidad de Capacitación";
+            this.informeDeCompetenciaYNecesidadDeCapacitaciónToolStripMenuItem.Click += new System.EventHandler(this.informeDeCompetenciaYNecesidadDeCapacitaciónToolStripMenuItem_Click);
             // 
-            // listadoTemasRealizadosPorSectorToolStripMenuItem
+            // listadoPorLegajosPendientesToolStripMenuItem
             // 
-            this.listadoTemasRealizadosPorSectorToolStripMenuItem.Name = "listadoTemasRealizadosPorSectorToolStripMenuItem";
-            this.listadoTemasRealizadosPorSectorToolStripMenuItem.Size = new System.Drawing.Size(430, 22);
-            this.listadoTemasRealizadosPorSectorToolStripMenuItem.Text = "Listado Temas Realizados por Sector";
-            this.listadoTemasRealizadosPorSectorToolStripMenuItem.Click += new System.EventHandler(this.listadoTemasRealizadosPorSectorToolStripMenuItem_Click);
+            this.listadoPorLegajosPendientesToolStripMenuItem.Name = "listadoPorLegajosPendientesToolStripMenuItem";
+            this.listadoPorLegajosPendientesToolStripMenuItem.Size = new System.Drawing.Size(361, 22);
+            this.listadoPorLegajosPendientesToolStripMenuItem.Text = "Listado Legajos con Necesidades Pendientes";
+            this.listadoPorLegajosPendientesToolStripMenuItem.Click += new System.EventHandler(this.listadoPorLegajosPendientesToolStripMenuItem_Click);
             // 
-            // planDeCapacitaciónAnualToolStripMenuItem
+            // cursosToolStripMenuItem
             // 
-            this.planDeCapacitaciónAnualToolStripMenuItem.Name = "planDeCapacitaciónAnualToolStripMenuItem";
-            this.planDeCapacitaciónAnualToolStripMenuItem.Size = new System.Drawing.Size(430, 22);
-            this.planDeCapacitaciónAnualToolStripMenuItem.Text = "Plan de Capacitación Anual";
-            this.planDeCapacitaciónAnualToolStripMenuItem.Click += new System.EventHandler(this.planDeCapacitaciónAnualToolStripMenuItem_Click);
+            this.cursosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.resúmenToolStripMenuItem,
+            this.cursosPorLegajoToolStripMenuItem,
+            this.cursosPorLegajoConsolidadosToolStripMenuItem,
+            this.cursosPorTemaToolStripMenuItem,
+            this.cursosPorSectorToolStripMenuItem});
+            this.cursosToolStripMenuItem.Name = "cursosToolStripMenuItem";
+            this.cursosToolStripMenuItem.Size = new System.Drawing.Size(316, 22);
+            this.cursosToolStripMenuItem.Text = "Cursos";
             // 
-            // planDeCapacitaciónTentativoToolStripMenuItem
+            // resúmenToolStripMenuItem
             // 
-            this.planDeCapacitaciónTentativoToolStripMenuItem.Name = "planDeCapacitaciónTentativoToolStripMenuItem";
-            this.planDeCapacitaciónTentativoToolStripMenuItem.Size = new System.Drawing.Size(430, 22);
-            this.planDeCapacitaciónTentativoToolStripMenuItem.Text = "Plan de Capacitación Anual (Tentativo)";
-            this.planDeCapacitaciónTentativoToolStripMenuItem.Click += new System.EventHandler(this.planDeCapacitaciónTentativoToolStripMenuItem_Click);
+            this.resúmenToolStripMenuItem.Name = "resúmenToolStripMenuItem";
+            this.resúmenToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.resúmenToolStripMenuItem.Text = "Resumen de Cursos Realizados";
+            this.resúmenToolStripMenuItem.Click += new System.EventHandler(this.resúmenToolStripMenuItem_Click);
             // 
-            // listadoDeLegajosPorPerfilToolStripMenuItem
+            // cursosPorLegajoToolStripMenuItem
             // 
-            this.listadoDeLegajosPorPerfilToolStripMenuItem.Name = "listadoDeLegajosPorPerfilToolStripMenuItem";
-            this.listadoDeLegajosPorPerfilToolStripMenuItem.Size = new System.Drawing.Size(430, 22);
-            this.listadoDeLegajosPorPerfilToolStripMenuItem.Text = "Listado de Legajos por Perfil";
-            this.listadoDeLegajosPorPerfilToolStripMenuItem.Click += new System.EventHandler(this.listadoDeLegajosPorPerfilToolStripMenuItem_Click);
+            this.cursosPorLegajoToolStripMenuItem.Name = "cursosPorLegajoToolStripMenuItem";
+            this.cursosPorLegajoToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.cursosPorLegajoToolStripMenuItem.Text = "Cursos por Legajo";
+            this.cursosPorLegajoToolStripMenuItem.Click += new System.EventHandler(this.cursosPorLegajoToolStripMenuItem_Click);
             // 
-            // planillasDeTemasNoProgramadosToolStripMenuItem
+            // cursosPorLegajoConsolidadosToolStripMenuItem
             // 
-            this.planillasDeTemasNoProgramadosToolStripMenuItem.Name = "planillasDeTemasNoProgramadosToolStripMenuItem";
-            this.planillasDeTemasNoProgramadosToolStripMenuItem.Size = new System.Drawing.Size(430, 22);
-            this.planillasDeTemasNoProgramadosToolStripMenuItem.Text = "Planillas de Temas no Programados";
-            this.planillasDeTemasNoProgramadosToolStripMenuItem.Click += new System.EventHandler(this.planillasDeTemasNoProgramadosToolStripMenuItem_Click);
+            this.cursosPorLegajoConsolidadosToolStripMenuItem.Name = "cursosPorLegajoConsolidadosToolStripMenuItem";
+            this.cursosPorLegajoConsolidadosToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.cursosPorLegajoConsolidadosToolStripMenuItem.Text = "Cursos por Legajo Consolidado";
+            this.cursosPorLegajoConsolidadosToolStripMenuItem.Click += new System.EventHandler(this.cursosPorLegajoConsolidadosToolStripMenuItem_Click);
             // 
-            // listadoDeTemasRealizadosYNoRealizadosToolStripMenuItem
+            // cursosPorTemaToolStripMenuItem
             // 
-            this.listadoDeTemasRealizadosYNoRealizadosToolStripMenuItem.Name = "listadoDeTemasRealizadosYNoRealizadosToolStripMenuItem";
-            this.listadoDeTemasRealizadosYNoRealizadosToolStripMenuItem.Size = new System.Drawing.Size(430, 22);
-            this.listadoDeTemasRealizadosYNoRealizadosToolStripMenuItem.Text = "Listado de Temas Realizados y No Realizados";
-            this.listadoDeTemasRealizadosYNoRealizadosToolStripMenuItem.Click += new System.EventHandler(this.listadoDeTemasRealizadosYNoRealizadosToolStripMenuItem_Click);
+            this.cursosPorTemaToolStripMenuItem.Name = "cursosPorTemaToolStripMenuItem";
+            this.cursosPorTemaToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.cursosPorTemaToolStripMenuItem.Text = "Cursos por Tema";
+            this.cursosPorTemaToolStripMenuItem.Click += new System.EventHandler(this.cursosPorTemaToolStripMenuItem_Click);
             // 
-            // listadoDeTemasToolStripMenuItem
+            // cursosPorSectorToolStripMenuItem
             // 
-            this.listadoDeTemasToolStripMenuItem.Name = "listadoDeTemasToolStripMenuItem";
-            this.listadoDeTemasToolStripMenuItem.Size = new System.Drawing.Size(430, 22);
-            this.listadoDeTemasToolStripMenuItem.Text = "Listado de Cursos";
-            this.listadoDeTemasToolStripMenuItem.Click += new System.EventHandler(this.listadoDeTemasToolStripMenuItem_Click);
+            this.cursosPorSectorToolStripMenuItem.Name = "cursosPorSectorToolStripMenuItem";
+            this.cursosPorSectorToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.cursosPorSectorToolStripMenuItem.Text = "Cursos por Sector";
+            this.cursosPorSectorToolStripMenuItem.Click += new System.EventHandler(this.cursosPorSectorToolStripMenuItem_Click);
             // 
-            // listadosDeTemasRealizadosPorLegajosConsolidadoToolStripMenuItem
+            // análisisToolStripMenuItem
             // 
-            this.listadosDeTemasRealizadosPorLegajosConsolidadoToolStripMenuItem.Name = "listadosDeTemasRealizadosPorLegajosConsolidadoToolStripMenuItem";
-            this.listadosDeTemasRealizadosPorLegajosConsolidadoToolStripMenuItem.Size = new System.Drawing.Size(430, 22);
-            this.listadosDeTemasRealizadosPorLegajosConsolidadoToolStripMenuItem.Text = "Listados de Temas Realizados por Legajos (Consolidado)";
-            this.listadosDeTemasRealizadosPorLegajosConsolidadoToolStripMenuItem.Click += new System.EventHandler(this.listadosDeTemasRealizadosPorLegajosConsolidadoToolStripMenuItem_Click);
+            this.análisisToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cursosNORealizadosToolStripMenuItem,
+            this.cursosNOProgramadosToolStripMenuItem,
+            this.resumenDeCursosRealizadosToolStripMenuItem});
+            this.análisisToolStripMenuItem.Name = "análisisToolStripMenuItem";
+            this.análisisToolStripMenuItem.Size = new System.Drawing.Size(316, 22);
+            this.análisisToolStripMenuItem.Text = "Análisis";
             // 
-            // listadoDeHorasCursadasPorLegajoToolStripMenuItem
+            // cursosNORealizadosToolStripMenuItem
             // 
-            this.listadoDeHorasCursadasPorLegajoToolStripMenuItem.Name = "listadoDeHorasCursadasPorLegajoToolStripMenuItem";
-            this.listadoDeHorasCursadasPorLegajoToolStripMenuItem.Size = new System.Drawing.Size(430, 22);
-            this.listadoDeHorasCursadasPorLegajoToolStripMenuItem.Text = "Listado de Horas Cursadas por Legajo";
-            this.listadoDeHorasCursadasPorLegajoToolStripMenuItem.Click += new System.EventHandler(this.listadoDeHorasCursadasPorLegajoToolStripMenuItem_Click);
+            this.cursosNORealizadosToolStripMenuItem.Name = "cursosNORealizadosToolStripMenuItem";
+            this.cursosNORealizadosToolStripMenuItem.Size = new System.Drawing.Size(236, 22);
+            this.cursosNORealizadosToolStripMenuItem.Text = "Cursos NO Realizados";
+            this.cursosNORealizadosToolStripMenuItem.Click += new System.EventHandler(this.cursosNORealizadosToolStripMenuItem_Click);
             // 
-            // listadoDePromedioDeCapacitaciónToolStripMenuItem
+            // cursosNOProgramadosToolStripMenuItem
             // 
-            this.listadoDePromedioDeCapacitaciónToolStripMenuItem.Name = "listadoDePromedioDeCapacitaciónToolStripMenuItem";
-            this.listadoDePromedioDeCapacitaciónToolStripMenuItem.Size = new System.Drawing.Size(430, 22);
-            this.listadoDePromedioDeCapacitaciónToolStripMenuItem.Text = "Listado de Promedio de Capacitación";
-            this.listadoDePromedioDeCapacitaciónToolStripMenuItem.Click += new System.EventHandler(this.listadoDePromedioDeCapacitaciónToolStripMenuItem_Click);
+            this.cursosNOProgramadosToolStripMenuItem.Name = "cursosNOProgramadosToolStripMenuItem";
+            this.cursosNOProgramadosToolStripMenuItem.Size = new System.Drawing.Size(236, 22);
+            this.cursosNOProgramadosToolStripMenuItem.Text = "Cursos NO Programados";
+            this.cursosNOProgramadosToolStripMenuItem.Click += new System.EventHandler(this.cursosNOProgramadosToolStripMenuItem_Click);
             // 
-            // listadoDeCursosPorResponsableToolStripMenuItem
+            // resumenDeCursosRealizadosToolStripMenuItem
             // 
-            this.listadoDeCursosPorResponsableToolStripMenuItem.Name = "listadoDeCursosPorResponsableToolStripMenuItem";
-            this.listadoDeCursosPorResponsableToolStripMenuItem.Size = new System.Drawing.Size(430, 22);
-            this.listadoDeCursosPorResponsableToolStripMenuItem.Text = "Listado de Cursos por Responsable";
-            this.listadoDeCursosPorResponsableToolStripMenuItem.Click += new System.EventHandler(this.listadoDeCursosPorResponsableToolStripMenuItem_Click);
+            this.resumenDeCursosRealizadosToolStripMenuItem.Name = "resumenDeCursosRealizadosToolStripMenuItem";
+            this.resumenDeCursosRealizadosToolStripMenuItem.Size = new System.Drawing.Size(236, 22);
+            this.resumenDeCursosRealizadosToolStripMenuItem.Text = "Resumen de Cursos Realizados";
+            this.resumenDeCursosRealizadosToolStripMenuItem.Click += new System.EventHandler(this.resumenDeCursosRealizadosToolStripMenuItem_Click);
             // 
-            // listadoDeCronogramaPorSectorYTemaToolStripMenuItem1
+            // cronogramaToolStripMenuItem
             // 
-            this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem1.Name = "listadoDeCronogramaPorSectorYTemaToolStripMenuItem1";
-            this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem1.Size = new System.Drawing.Size(430, 22);
-            this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem1.Text = "Listado de Cronograma por Sector y Tema";
-            this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem1.Click += new System.EventHandler(this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem1_Click);
+            this.cronogramaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.planillaDeCapacitaciónToolStripMenuItem,
+            this.cronogramaPorSectorToolStripMenuItem,
+            this.cronogramaPorTemaToolStripMenuItem});
+            this.cronogramaToolStripMenuItem.Name = "cronogramaToolStripMenuItem";
+            this.cronogramaToolStripMenuItem.Size = new System.Drawing.Size(316, 22);
+            this.cronogramaToolStripMenuItem.Text = "Cronograma";
             // 
-            // listadoDeCronogramaPorSectorYTemaToolStripMenuItem
+            // planillaDeCapacitaciónToolStripMenuItem
             // 
-            this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem.Name = "listadoDeCronogramaPorSectorYTemaToolStripMenuItem";
-            this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem.Size = new System.Drawing.Size(430, 22);
-            this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem.Text = "Listado de Cronograma por Tema  y Sector";
-            this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem.Click += new System.EventHandler(this.listadoDeCronogramaPorSectorYTemaToolStripMenuItem_Click);
+            this.planillaDeCapacitaciónToolStripMenuItem.Name = "planillaDeCapacitaciónToolStripMenuItem";
+            this.planillaDeCapacitaciónToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.planillaDeCapacitaciónToolStripMenuItem.Text = "Planilla de Capacitación";
+            this.planillaDeCapacitaciónToolStripMenuItem.Click += new System.EventHandler(this.planillaDeCapacitaciónToolStripMenuItem_Click);
             // 
-            // listadoDeCursosPendientesPorSectorToolStripMenuItem
+            // cronogramaPorSectorToolStripMenuItem
             // 
-            this.listadoDeCursosPendientesPorSectorToolStripMenuItem.Name = "listadoDeCursosPendientesPorSectorToolStripMenuItem";
-            this.listadoDeCursosPendientesPorSectorToolStripMenuItem.Size = new System.Drawing.Size(430, 22);
-            this.listadoDeCursosPendientesPorSectorToolStripMenuItem.Text = "Listado de Cursos Pendientes Por Sector";
-            this.listadoDeCursosPendientesPorSectorToolStripMenuItem.Click += new System.EventHandler(this.listadoDeCursosPendientesPorSectorToolStripMenuItem_Click);
+            this.cronogramaPorSectorToolStripMenuItem.Name = "cronogramaPorSectorToolStripMenuItem";
+            this.cronogramaPorSectorToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.cronogramaPorSectorToolStripMenuItem.Text = "Cronograma por Sector";
+            this.cronogramaPorSectorToolStripMenuItem.Click += new System.EventHandler(this.cronogramaPorSectorToolStripMenuItem_Click);
+            // 
+            // cronogramaPorTemaToolStripMenuItem
+            // 
+            this.cronogramaPorTemaToolStripMenuItem.Name = "cronogramaPorTemaToolStripMenuItem";
+            this.cronogramaPorTemaToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.cronogramaPorTemaToolStripMenuItem.Text = "Cronograma por Tema";
+            this.cronogramaPorTemaToolStripMenuItem.Click += new System.EventHandler(this.cronogramaPorTemaToolStripMenuItem_Click);
             // 
             // procesosToolStripMenuItem
             // 
@@ -435,13 +442,6 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(784, 538);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(430, 22);
-            this.toolStripMenuItem1.Text = "Listado de Cursos No Realizados por Tema";
-            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -477,37 +477,37 @@
         private System.Windows.Forms.ToolStripMenuItem ingresoDePlanificacionAnualDeCapacitacionPorLegajoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ingresoDeCornogramaDeCapacitaciónToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ingresoDeCursosRealizadosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem listadosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem perfilDelPuestoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem informeDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem listadoDeTemasRealizadosPorLegajoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem listadoDeCursosRealizadosPorTemaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem listadoDeEvaluaciónDeTemasProgramadosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem listadoDeLegajosConNecesidadesPendientesPorICYNCVigenteToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem listadoTemasRealizadosPorSectorToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem planDeCapacitaciónAnualToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem listadoDeLegajosPorPerfilToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem planillasDeTemasNoProgramadosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem listadoDeTemasRealizadosYNoRealizadosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem listadoDeTemasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem listadosDeTemasRealizadosPorLegajosConsolidadoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem listadoDeHorasCursadasPorLegajoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem listadoDePromedioDeCapacitaciónToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem listadoDeCursosPorResponsableToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem listadoDeCronogramaPorSectorYTemaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem procesosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.ToolStripMenuItem listadoDeCursosPendientesPorSectorToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuNecesidadesCompetenciasPorSector;
         private System.Windows.Forms.ToolStripMenuItem actualizacionDeCompetenciasYNecesidadesDeCapacitaciónToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem asignaciónDeCursosPorPerfilOSectorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem asignacionDeTemasPorPerfilSectorPlantaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem planDeCapacitaciónTentativoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem listadoDeCronogramaPorSectorYTemaToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem listados2ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem maestrosToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem listadoDePerfilesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem listadoDeTemasToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem listadoDeLegajosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem competenciasYNecesidadesDeCapacitaciónToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem listadoPorLegajosPendientesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cursosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem análisisToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cronogramaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem resúmenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cursosPorLegajoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cursosPorLegajoConsolidadosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cursosPorTemaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cursosPorSectorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cursosNORealizadosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cursosNOProgramadosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem resumenDeCursosRealizadosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem planillaDeCapacitaciónToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cronogramaPorSectorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cronogramaPorTemaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem planDeCapacitaciónAnualTentativoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem informeDeCompetenciaYNecesidadDeCapacitaciónToolStripMenuItem;
     }
 }
 

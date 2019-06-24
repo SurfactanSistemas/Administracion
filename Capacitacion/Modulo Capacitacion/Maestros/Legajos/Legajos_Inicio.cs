@@ -9,9 +9,12 @@ namespace Modulo_Capacitacion.Maestros.Legajos
 {
     public partial class Legajos_Inicio : Form
     {
+
         Legajo L = new Legajo();
         DataTable dtLegajos;
         DataTable dtMuestraInicio = new DataTable();
+        private Boolean sortAsc = false;
+
         public Legajos_Inicio()
         {
             InitializeComponent();
@@ -25,12 +28,12 @@ namespace Modulo_Capacitacion.Maestros.Legajos
             dtMuestraInicio.Columns.Add("Codigo", typeof(int));
             dtMuestraInicio.Columns.Add("Descripcion", typeof(string));
             dtMuestraInicio.Columns.Add("Vigencia", typeof(string));
-            dtMuestraInicio.Columns.Add("Sector", typeof(string));
-            dtMuestraInicio.Columns.Add("Perfil", typeof(string));
+            dtMuestraInicio.Columns.Add("Sector", typeof(int));
+            dtMuestraInicio.Columns.Add("Perfil", typeof(int));
             dtMuestraInicio.Columns.Add("Dni", typeof(string));
             dtMuestraInicio.Columns.Add("Egreso", typeof(string));
             dtMuestraInicio.Columns.Add("Actualizado", typeof(string));
-            dtMuestraInicio.Columns.Add("VigenciaOrd", typeof(string));
+            dtMuestraInicio.Columns.Add("VigenciaOrd", typeof(int));
             dtMuestraInicio.Columns.Add("Mostrar", typeof(string));
         }
 
@@ -352,6 +355,81 @@ namespace Modulo_Capacitacion.Maestros.Legajos
         private void Legajos_Inicio_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void DGV_Legajos_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
+        {
+            DGV_Legajos.ClearSelection();
+
+            Double num1, num2;
+
+            switch (e.Column.Index)
+            {
+                case 0:
+                {
+                    num1 = double.Parse(e.CellValue1.ToString());
+                    num2 = double.Parse(e.CellValue2.ToString());
+                    break;
+                }
+                case 3:
+                {
+                    num1 = double.Parse(Helper.OrdenarFecha(e.CellValue1.ToString()));
+                    num2 = double.Parse(Helper.OrdenarFecha(e.CellValue2.ToString()));
+                    break;
+                }
+                default:
+                {
+                    return;
+                }
+            }
+
+            if (num1 < num2)
+            {
+                e.SortResult = -1;
+            }else if (num1 == num2)
+            {
+                e.SortResult = 0;
+            }
+            else
+            {
+                e.SortResult = 1;
+            }
+
+            e.Handled = true;
+        }
+
+        private void DGV_Legajos_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataTable tabla = (DataTable) DGV_Legajos.DataSource;
+            string ordenamiento = "";
+
+            switch (e.ColumnIndex)
+            {
+                case 3:
+                {
+                    ordenamiento = "VigenciaOrd " + ((this.sortAsc) ? "DESC" : "ASC");
+                    break;
+                }
+                case 2:
+                {
+                    ordenamiento = "Descripcion " + ((this.sortAsc) ? "DESC" : "ASC");
+                    break;
+                }
+                case 1:
+                case 4:
+                case 5:
+                {
+                    string columna = DGV_Legajos.Columns[e.ColumnIndex].Name;
+
+                    ordenamiento = columna + " " + ((this.sortAsc) ? "DESC" : "ASC");
+
+                    break;
+                }
+            }
+
+            if (tabla !=null) tabla.DefaultView.Sort = ordenamiento;
+
+            this.sortAsc = !this.sortAsc;
         }
     }
 }

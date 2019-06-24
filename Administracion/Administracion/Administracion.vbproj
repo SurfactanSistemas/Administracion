@@ -42,10 +42,12 @@
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
     <DocumentationFile>Administracion.xml</DocumentationFile>
-    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</NoWarn>
     <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
     <WarningLevel>1</WarningLevel>
     <UseVSHostingProcess>false</UseVSHostingProcess>
+    <WarningsAsErrors>
+    </WarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -55,9 +57,11 @@
     <Optimize>false</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DocumentationFile>Administracion.xml</DocumentationFile>
-    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</NoWarn>
     <WarningLevel>1</WarningLevel>
     <UseVSHostingProcess>false</UseVSHostingProcess>
+    <WarningsAsErrors>
+    </WarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup>
     <OptionExplicit>On</OptionExplicit>
@@ -84,7 +88,7 @@
     <OutputPath>bin\x64\Debug\</OutputPath>
     <DocumentationFile>Administracion.xml</DocumentationFile>
     <WarningLevel>1</WarningLevel>
-    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</NoWarn>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
     <CodeAnalysisLogFile>bin\Debug\Administracion.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
@@ -96,6 +100,8 @@
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
     <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+    <WarningsAsErrors>
+    </WarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <DefineTrace>true</DefineTrace>
@@ -103,7 +109,7 @@
     <DocumentationFile>Administracion.xml</DocumentationFile>
     <Optimize>true</Optimize>
     <WarningLevel>1</WarningLevel>
-    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</NoWarn>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x64</PlatformTarget>
     <CodeAnalysisLogFile>bin\Release\Administracion.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
@@ -114,6 +120,8 @@
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
     <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+    <WarningsAsErrors>
+    </WarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ClasesCompartidas">
@@ -123,6 +131,9 @@
     <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="DataGridViewCustomColumn">
+      <HintPath>..\..\ConsultasVarias\ConsultasVarias\CustomControls\DataGridViewCustomColumn.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
@@ -192,6 +203,7 @@
     <Compile Include="CargaIntereses.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Clases\Query.vb" />
     <Compile Include="Clases\QueryController.vb" />
     <Compile Include="Clases\SinParidadException.vb" />
     <Compile Include="ComprasNovedades\AperturaCompras.Designer.vb">
@@ -247,6 +259,12 @@
     </Compile>
     <Compile Include="EnvioEmailProveedores.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EvaluacionPorMpUserControl.Designer.vb">
+      <DependentUpon>EvaluacionPorMpUserControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EvaluacionPorMpUserControl.vb">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="GestionAvisosOPDisponiblesProveedores.Designer.vb">
       <DependentUpon>GestionAvisosOPDisponiblesProveedores.vb</DependentUpon>
@@ -502,6 +520,12 @@
     <Compile Include="Procesos\ProcesoPercepcionesIvaCompras.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ProveedoresABM\AgregarArchivosEvalProvMP.Designer.vb">
+      <DependentUpon>AgregarArchivosEvalProvMP.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ProveedoresABM\AgregarArchivosEvalProvMP.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ProveedoresABM\Contactos.Designer.vb">
       <DependentUpon>Contactos.vb</DependentUpon>
     </Compile>
@@ -560,6 +584,12 @@
       <DependentUpon>ProcesoPercepciones.vb</DependentUpon>
     </Compile>
     <Compile Include="Procesos\ProcesoPercepciones.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProveedoresABM\EvaluacionProveedorMateriaPrima.Designer.vb">
+      <DependentUpon>EvaluacionProveedorMateriaPrima.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ProveedoresABM\EvaluacionProveedorMateriaPrima.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ProveedoresABM\ObservacionesProveedor.Designer.vb">
@@ -937,6 +967,9 @@
     <EmbeddedResource Include="EnvioEmailProveedores.resx">
       <DependentUpon>EnvioEmailProveedores.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="EvaluacionPorMpUserControl.resx">
+      <DependentUpon>EvaluacionPorMpUserControl.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GestionAvisosOPDisponiblesProveedores.resx">
       <DependentUpon>GestionAvisosOPDisponiblesProveedores.vb</DependentUpon>
     </EmbeddedResource>
@@ -1060,6 +1093,9 @@
     <EmbeddedResource Include="Procesos\ProcesoPercepcionesIvaCompras.resx">
       <DependentUpon>ProcesoPercepcionesIvaCompras.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ProveedoresABM\AgregarArchivosEvalProvMP.resx">
+      <DependentUpon>AgregarArchivosEvalProvMP.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ProveedoresABM\Contactos.resx">
       <DependentUpon>Contactos.vb</DependentUpon>
     </EmbeddedResource>
@@ -1086,6 +1122,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\ListadoValoresEnCartera.resx">
       <DependentUpon>ListadoValoresEnCartera.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProveedoresABM\EvaluacionProveedorMateriaPrima.resx">
+      <DependentUpon>EvaluacionProveedorMateriaPrima.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProveedoresABM\ObservacionesProveedor.resx">
       <DependentUpon>ObservacionesProveedor.vb</DependentUpon>
@@ -1240,9 +1279,9 @@
       <DependentUpon>MenuPrincipal.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
-      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
@@ -1701,9 +1740,6 @@
     <None Include="Resources\Calculator.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Folder.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\Calculator.png" />
   </ItemGroup>
   <ItemGroup>
@@ -1750,6 +1786,20 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Firma.JPG" />
+    <None Include="Resources\Excel_icon.ico" />
+    <None Include="Resources\Word_icon.png" />
+    <None Include="Resources\imagen_icono.png" />
+    <None Include="Resources\txt_icono.png" />
+    <None Include="Resources\Sin título-2.png" />
+    <None Include="Resources\pdf_icono.png" />
+    <None Include="Resources\Folder.png" />
+    <None Include="Resources\archivo_default.png" />
+    <None Include="Resources\Word_icon1.png" />
+    <None Include="Resources\txt_icono1.png" />
+    <None Include="Resources\pdf_icono1.png" />
+    <None Include="Resources\pdf_icon1.png" />
+    <None Include="Resources\imagen_icono1.png" />
+    <None Include="Resources\archivo_default1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>

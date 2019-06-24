@@ -1,5 +1,7 @@
-﻿Imports ClasesCompartidas
+﻿Imports System.Configuration
+Imports ClasesCompartidas
 Imports System.Data.SqlClient
+Imports System.Text.RegularExpressions
 
 Public Class ProveedoresABM
 
@@ -23,7 +25,7 @@ Public Class ProveedoresABM
     Private WBColorAntEstado As Color
     Private WColorAntEstado As Color
 
-    Private Sub ProveedoresABM_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub ProveedoresABM_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         'Dim provincias = DAOProveedor.listarProvincias
         'cmbProvincia.DisplayMember = "ToString"
         'cmbProvincia.ValueMember = "valueMember"
@@ -48,20 +50,22 @@ Public Class ProveedoresABM
         cmbEstado.BackColor = WBColorAntEstado
         cmbEstado.ForeColor = WColorAntEstado 'Color.White
 
+        _ContraerFormulario()
+
         setDefaults()
     End Sub
 
     Private Sub setDefaults()
 
-        For Each Control As TextBox In Me.Panel2.Controls.OfType(Of TextBox)()
+        For Each Control As TextBox In Panel2.Controls.OfType(Of TextBox)()
             Control.Text = ""
         Next
 
-        For Each Control As MaskedTextBox In Me.Panel2.Controls.OfType(Of MaskedTextBox)()
+        For Each Control As MaskedTextBox In Panel2.Controls.OfType(Of MaskedTextBox)()
             Control.Clear()
         Next
 
-        For Each cmb As ComboBox In Me.Panel2.Controls.OfType(Of ComboBox)()
+        For Each cmb As ComboBox In Panel2.Controls.OfType(Of ComboBox)()
 
             If cmb.Items.Count > 0 Then
                 cmb.SelectedIndex = 0
@@ -69,11 +73,11 @@ Public Class ProveedoresABM
 
         Next
 
-        For Each cmb As ComboBox In Me.GroupBox5.Controls.OfType(Of ComboBox)()
+        For Each cmb As ComboBox In GroupBox5.Controls.OfType(Of ComboBox)()
             cmb.SelectedIndex = 0
         Next
 
-        For Each msk As MaskedTextBox In Me.GroupBox5.Controls.OfType(Of MaskedTextBox)()
+        For Each msk As MaskedTextBox In GroupBox5.Controls.OfType(Of MaskedTextBox)()
             msk.Clear()
         Next
 
@@ -102,7 +106,7 @@ Public Class ProveedoresABM
 
         txtCodigo.Focus()
 
-        Me.Height = MAIN_HEIGHT
+        Height = MAIN_HEIGHT
     End Sub
 
     Private Function _FechaComoOrd(ByVal fecha As String) As String
@@ -148,7 +152,7 @@ Public Class ProveedoresABM
                     & "Iso =  '" & NormalizarIndex(cmbCertificados.SelectedIndex) & "', " _
                     & "VtoIso =  '" & txtCertificados.Text & "', " _
                     & "Region =  '" & NormalizarIndex(cmbRegion.SelectedIndex) & "', " _
-                    & "PorceIb =  " & Proceso.formatonumerico(txtPorcelProv.Text) & ", " _
+                    & "PorceIb =  " & formatonumerico(txtPorcelProv.Text) & ", " _
                     & "Estado =  '" & NormalizarIndex(cmbEstado.SelectedIndex) & "', " _
                     & "IbCiudadII =  '" & NormalizarIndex(cmbInscripcionIB.SelectedIndex) & "', " _
                     & "Califica =  '" & NormalizarIndex(cmbCalificacion.SelectedIndex) & "', " _
@@ -159,7 +163,7 @@ Public Class ProveedoresABM
                     & "OrdFechaCategoria =  '" & Mid(_FechaComoOrd(txtCategoria.Text), 1, 10) & "', " _
                     & "FechaNroInsc =  '" & Mid(Trim(txtNroSEDRONAR2.Text), 1, 10) & "', " _
                     & "OrdFechaNroInsc =  '" & Mid(_FechaComoOrd(txtNroSEDRONAR2.Text), 1, 10) & "', " _
-                    & "PorceIbCaba =  " & Proceso.formatonumerico(txtPorcelCABA.Text) & ", " _
+                    & "PorceIbCaba =  " & formatonumerico(txtPorcelCABA.Text) & ", " _
                     & "Cufe =  '" & Mid(Trim(cufe1.Item1), 1, 20) & "', " _
                     & "CufeII =  '" & Mid(Trim(cufe2.Item1), 1, 20) & "', " _
                     & "CufeIII =  '" & Mid(Trim(cufe3.Item1), 1, 20) & "', " _
@@ -197,33 +201,30 @@ Public Class ProveedoresABM
         Catch ex As Exception
             Throw New Exception("Ocurrió un problema al querer actualizar al proveedor.")
         Finally
-            cm = Nothing
             cn.Close()
-            cn = Nothing
         End Try
 
-        ' Actualizo proveedor con la ConnectionString en la que se encontró el proveedor.
     End Sub
 
     Private Sub _ActualizarProveedor()
         'Dim ZSql As String = ""
         Dim _Empresas As List(Of String)
 
-        Dim Xcs As String = Configuration.ConfigurationManager.ConnectionStrings(ClasesCompartidas.Globals.empresa).ToString '"Data Source=193.168.0.7;Initial Catalog=#EMPRESA#;User ID=usuarioadmin; Password=usuarioadmin"
+        Dim Xcs As String = ConfigurationManager.ConnectionStrings(Globals.empresa).ToString '"Data Source=193.168.0.7;Initial Catalog=#EMPRESA#;User ID=usuarioadmin; Password=usuarioadmin"
 
         Dim cn = New SqlConnection()
         Dim cm = New SqlCommand()
         Dim dr As SqlDataReader
 
         ' DETERMINO LAS EMPRESAS CON LAS QUE TRABAJAR.
-        _Empresas = Proceso.Empresas
+        _Empresas = Empresas
 
         ' Recorrer todos las plantas y actualizar en cada ocurrencia.
 
         For Each _Empresa In _Empresas
             Dim Wrem = "SurfactanSA"
 
-            If Proceso._EsPellital Then
+            If _EsPellital Then
                 Wrem = "Pellital_III"
             End If
 
@@ -267,7 +268,7 @@ Public Class ProveedoresABM
     End Sub
 
     Private Sub agregar()
-        Dim _Autorizado = False
+        Dim _Autorizado As Boolean
 
         If Trim(txtCodigo.Text) = "" Then
             Exit Sub
@@ -356,8 +357,8 @@ Public Class ProveedoresABM
         proveedor = DAOProveedor.buscarProveedorPorCodigo(txtCodigo.Text)
 
         ' Normalizamos los numeros para que no rompa nada.
-        Dim WPorcelProv = Proceso.formatonumerico(txtPorcelProv.Text)
-        Dim WPorcelCABA = Proceso.formatonumerico(txtPorcelCABA.Text)
+        Dim WPorcelProv = formatonumerico(txtPorcelProv.Text)
+        Dim WPorcelCABA = formatonumerico(txtPorcelCABA.Text)
 
         ' Comprobamos si se trata de una actualización o de un proveedor nuevo.
         If Not IsNothing(proveedor) Then
@@ -439,11 +440,10 @@ Public Class ProveedoresABM
 
         Dim cn = New SqlConnection()
         Dim cm = New SqlCommand()
-        Dim dr As SqlDataReader
 
         Try
 
-            cn.ConnectionString = Proceso._ConectarA
+            cn.ConnectionString = _ConectarA
             cn.Open()
             cm.Connection = cn
 
@@ -455,10 +455,7 @@ Public Class ProveedoresABM
             Throw New Exception("Hubo un problema al querer actualizar los certificados del Proveeodr en la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
         Finally
 
-            dr = Nothing
             cn.Close()
-            cn = Nothing
-            cm = Nothing
 
         End Try
 
@@ -468,11 +465,10 @@ Public Class ProveedoresABM
 
         Dim cn = New SqlConnection()
         Dim cm = New SqlCommand()
-        Dim dr As SqlDataReader
 
         Try
 
-            cn.ConnectionString = Proceso._ConectarA
+            cn.ConnectionString = _ConectarA
             cn.Open()
             cm.Connection = cn
 
@@ -484,10 +480,7 @@ Public Class ProveedoresABM
             Throw New Exception("Hubo un problema al querer actualizar los certificados del Proveeodr en la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
         Finally
 
-            dr = Nothing
             cn.Close()
-            cn = Nothing
-            cm = Nothing
 
         End Try
 
@@ -501,7 +494,7 @@ Public Class ProveedoresABM
 
         Try
 
-            cn.ConnectionString = Proceso._ConectarA
+            cn.ConnectionString = _ConectarA
             cn.Open()
             cm.Connection = cn
 
@@ -513,10 +506,7 @@ Public Class ProveedoresABM
             Throw New Exception("Hubo un problema al querer consultar la existencia del Proveedor en la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
         Finally
 
-            dr = Nothing
             cn.Close()
-            cn = Nothing
-            cm = Nothing
 
         End Try
 
@@ -644,10 +634,7 @@ Public Class ProveedoresABM
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
-            dr = Nothing
             cn.Close()
-            cn = Nothing
-            cm = Nothing
 
         End Try
 
@@ -676,10 +663,7 @@ Public Class ProveedoresABM
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
-            dr = Nothing
             cn.Close()
-            cn = Nothing
-            cm = Nothing
 
         End Try
 
@@ -702,13 +686,13 @@ Public Class ProveedoresABM
     '    End Sub
 
     '    Private Sub listado()
-    '        'DirectCast(Me.Controls("controlButtonsGroupBox").Controls("btnLastReg"), CustomButton).PerformClick()
+    '        'DirectCast(Controls("controlButtonsGroupBox").Controls("btnLastReg"), CustomButton).PerformClick()
     '        'Do While txtCodigo.Text <> "00000000001"
-    '        '    DirectCast(Me.Controls("controlButtonsGroupBox").Controls("btnPreviousReg"), CustomButton).PerformClick()
+    '        '    DirectCast(Controls("controlButtonsGroupBox").Controls("btnPreviousReg"), CustomButton).PerformClick()
     '        'Loop
     '    End Sub
 
-    Private Sub btnObservaciones_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnObservaciones.Click
+    Private Sub btnObservaciones_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnObservaciones.Click
         Dim formularioObservaciones As New ObservacionesProveedor()
 
         formularioObservaciones.CustomTextBox1.Text = observaciones
@@ -717,7 +701,7 @@ Public Class ProveedoresABM
         End If
     End Sub
 
-    Private Sub btnCUFE_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCUFE.Click
+    Private Sub btnCUFE_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCUFE.Click
 
         With CUFEProveedor
 
@@ -738,19 +722,19 @@ Public Class ProveedoresABM
 
     End Sub
 
-    Private Sub btnPrimerRegistro_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPrimerRegistro.Click
+    Private Sub btnPrimerRegistro_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnPrimerRegistro.Click
         _NavegarHaciaEl("primero")
     End Sub
 
-    Private Sub btnUltimoRegistro_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUltimoRegistro.Click
+    Private Sub btnUltimoRegistro_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnUltimoRegistro.Click
         _NavegarHaciaEl("ultimo")
     End Sub
 
-    Private Sub btnSiguienteRegistro_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSiguienteRegistro.Click
+    Private Sub btnSiguienteRegistro_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSiguienteRegistro.Click
         _NavegarHaciaEl("siguiente", txtCodigo.Text)
     End Sub
 
-    Private Sub btnAnteriorRegistro_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAnteriorRegistro.Click
+    Private Sub btnAnteriorRegistro_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAnteriorRegistro.Click
         _NavegarHaciaEl("anterior", txtCodigo.Text)
     End Sub
 
@@ -758,7 +742,7 @@ Public Class ProveedoresABM
 
         Dim proveedores As DataTable
 
-        proveedores = ClasesCompartidas.SQLConnector.retrieveDataTable("get_proveedor", direccion, registroActual)
+        proveedores = SQLConnector.retrieveDataTable("get_proveedor", direccion, registroActual)
 
         If proveedores.Rows.Count > 0 Then
             Dim proveedor As Proveedor
@@ -778,26 +762,26 @@ Public Class ProveedoresABM
 
     End Sub
 
-    Private Sub btnAgregar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregar.Click
+    Private Sub btnAgregar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAgregar.Click
         agregar()
     End Sub
 
-    Private Sub btnEliminar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEliminar.Click
+    Private Sub btnEliminar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnEliminar.Click
         borrar()
     End Sub
 
-    Private Sub btnListado_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnListado.Click
+    Private Sub btnListado_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnListado.Click
         With VistaPrevia
             .Reporte = New ListadoResumidoProveedores
             .Mostrar()
         End With
     End Sub
 
-    Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
+    Private Sub btnLimpiar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLimpiar.Click
         limpiar()
     End Sub
 
-    Private Sub btnConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsulta.Click
+    Private Sub btnConsulta_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnConsulta.Click
         _AbrirConsulta()
     End Sub
 
@@ -825,19 +809,19 @@ Public Class ProveedoresABM
 
     Private Sub _ContraerFormulario()
 
-        'Me.Height = MAIN_HEIGHT
+        'Height = MAIN_HEIGHT
         GrupoConsultas.Visible = False
 
     End Sub
 
     Private Sub _ExpandirFormulario()
 
-        'Me.Height = EXPANDED_HEIGHT
+        'Height = EXPANDED_HEIGHT
         GrupoConsultas.Visible = True
 
     End Sub
 
-    Private Sub txtFiltrar_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtFiltrar.TextChanged
+    Private Sub txtFiltrar_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles txtFiltrar.TextChanged
 
         LBConsulta_Filtrada.Items.Clear()
 
@@ -863,7 +847,7 @@ Public Class ProveedoresABM
 
     End Sub
 
-    Private Sub LBConsulta_Opciones_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LBConsulta_Opciones.SelectedIndexChanged
+    Private Sub LBConsulta_Opciones_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles LBConsulta_Opciones.SelectedIndexChanged
 
         If LBConsulta_Opciones.SelectedItem = "" Then
             Exit Sub
@@ -885,7 +869,7 @@ Public Class ProveedoresABM
 
     End Sub
 
-    Private Sub LBConsulta_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LBConsulta.SelectedIndexChanged
+    Private Sub LBConsulta_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles LBConsulta.SelectedIndexChanged
 
         If LBConsulta.SelectedItem = "" Then
             Exit Sub
@@ -901,6 +885,8 @@ Public Class ProveedoresABM
             Case "TipoProv"
                 _TraerRubros(LBConsulta.SelectedItem)
         End Select
+
+        _ContraerFormulario()
 
     End Sub
 
@@ -937,7 +923,7 @@ Public Class ProveedoresABM
 
     End Sub
 
-    Private Sub LBConsulta_Filtrada_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LBConsulta_Filtrada.SelectedIndexChanged
+    Private Sub LBConsulta_Filtrada_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles LBConsulta_Filtrada.SelectedIndexChanged
 
         If LBConsulta_Filtrada.SelectedItem = "" Then
             Exit Sub
@@ -953,6 +939,8 @@ Public Class ProveedoresABM
             Case "TipoProv"
                 _TraerRubros(LBConsulta.SelectedItem)
         End Select
+
+        _ContraerFormulario()
 
     End Sub
 
@@ -1029,9 +1017,7 @@ Public Class ProveedoresABM
             MsgBox("Hubo un problema al querer listar los registros solicitados", MsgBoxStyle.Critical)
         Finally
 
-            dr = Nothing
             cn.Close()
-            cn = Nothing
 
         End Try
     End Sub
@@ -1050,16 +1036,16 @@ Public Class ProveedoresABM
         End If
     End Sub
 
-    Private Sub btnCerrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrar.Click
-        Me.Close()
+    Private Sub btnCerrar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCerrar.Click
+        Close()
     End Sub
 
-    Private Sub ProveedoresABM_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
-        'Me.DesktopLocation = New Point(200, 0)
+    Private Sub ProveedoresABM_Shown(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Shown
+        'DesktopLocation = New Point(200, 0)
         txtCodigo.Focus()
     End Sub
 
-    Private Sub txtCodigo_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCodigo.KeyDown
+    Private Sub txtCodigo_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtCodigo.KeyDown
 
         If e.KeyData = Keys.Enter Then
 
@@ -1105,7 +1091,7 @@ Public Class ProveedoresABM
 
         Try
 
-            cn.ConnectionString = Proceso._ConectarA
+            cn.ConnectionString = _ConectarA
             cn.Open()
             cm.Connection = cn
 
@@ -1141,7 +1127,7 @@ Public Class ProveedoresABM
         control.Focus()
     End Sub
 
-    Private Sub txtRazonSocial_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRazonSocial.KeyDown
+    Private Sub txtRazonSocial_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtRazonSocial.KeyDown
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtDireccion)
         ElseIf e.KeyData = Keys.Escape Then
@@ -1149,7 +1135,7 @@ Public Class ProveedoresABM
         End If
     End Sub
 
-    Private Sub txtDireccion_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDireccion.KeyDown
+    Private Sub txtDireccion_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtDireccion.KeyDown
         If e.KeyData = Keys.Enter Then
             _SaltarA(cmbProvincia)
         ElseIf e.KeyData = Keys.Escape Then
@@ -1157,7 +1143,7 @@ Public Class ProveedoresABM
         End If
     End Sub
 
-    Private Sub txtLocalidad_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtLocalidad.KeyDown
+    Private Sub txtLocalidad_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtLocalidad.KeyDown
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtCodigoPostal)
         ElseIf e.KeyData = Keys.Escape Then
@@ -1165,7 +1151,7 @@ Public Class ProveedoresABM
         End If
     End Sub
 
-    Private Sub txtCodigoPostal_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCodigoPostal.KeyDown
+    Private Sub txtCodigoPostal_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtCodigoPostal.KeyDown
         If e.KeyData = Keys.Enter Then
             _SaltarA(cmbRegion)
         ElseIf e.KeyData = Keys.Escape Then
@@ -1173,7 +1159,7 @@ Public Class ProveedoresABM
         End If
     End Sub
 
-    Private Sub txtTelefono_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtTelefono.KeyDown
+    Private Sub txtTelefono_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtTelefono.KeyDown
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtEmail)
         ElseIf e.KeyData = Keys.Escape Then
@@ -1181,7 +1167,7 @@ Public Class ProveedoresABM
         End If
     End Sub
 
-    Private Sub txtEmail_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtEmail.KeyDown
+    Private Sub txtEmail_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtEmail.KeyDown
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtMailOp)
         ElseIf e.KeyData = Keys.Escape Then
@@ -1189,7 +1175,7 @@ Public Class ProveedoresABM
         End If
     End Sub
 
-    Private Sub txtEmailOp_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtMailOp.KeyDown
+    Private Sub txtEmailOp_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtMailOp.KeyDown
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtDiasPlazo)
         ElseIf e.KeyData = Keys.Escape Then
@@ -1197,7 +1183,7 @@ Public Class ProveedoresABM
         End If
     End Sub
 
-    Private Sub txtDiasPlazo_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDiasPlazo.KeyDown
+    Private Sub txtDiasPlazo_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtDiasPlazo.KeyDown
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtCUIT)
         ElseIf e.KeyData = Keys.Escape Then
@@ -1222,7 +1208,7 @@ Public Class ProveedoresABM
         Return valido
     End Function
 
-    Private Sub txtCUIT_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCUIT.KeyDown
+    Private Sub txtCUIT_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtCUIT.KeyDown
         If e.KeyData = Keys.Enter Then
             If _CuitValido(txtCUIT.Text) Or Trim(txtCUIT.Text.Replace("-", "")) = "" Then
                 _SaltarA(cmbTipoProveedor)
@@ -1235,7 +1221,7 @@ Public Class ProveedoresABM
         End If
     End Sub
 
-    Private Sub txtObservaciones_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtObservaciones.KeyDown
+    Private Sub txtObservaciones_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtObservaciones.KeyDown
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtCuenta)
         ElseIf e.KeyData = Keys.Escape Then
@@ -1243,7 +1229,7 @@ Public Class ProveedoresABM
         End If
     End Sub
 
-    Private Sub txtCuenta_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCuenta.KeyDown
+    Private Sub txtCuenta_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtCuenta.KeyDown
         If e.KeyData = Keys.Enter Then
 
 
@@ -1266,13 +1252,13 @@ Public Class ProveedoresABM
         End If
     End Sub
 
-    Private Sub txtCuentaDescripcion_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCuentaDescripcion.KeyDown
+    Private Sub txtCuentaDescripcion_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtCuentaDescripcion.KeyDown
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtCheque)
         End If
     End Sub
 
-    Private Sub txtCheque_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCheque.KeyDown
+    Private Sub txtCheque_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtCheque.KeyDown
         If e.KeyData = Keys.Enter Then
             _SaltarA(cmbCondicionIB1)
         ElseIf e.KeyData = Keys.Escape Then
@@ -1280,7 +1266,7 @@ Public Class ProveedoresABM
         End If
     End Sub
 
-    Private Sub txtNroIB_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtNroIB.KeyDown
+    Private Sub txtNroIB_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtNroIB.KeyDown
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtPorcelProv)
         ElseIf e.KeyData = Keys.Escape Then
@@ -1288,7 +1274,7 @@ Public Class ProveedoresABM
         End If
     End Sub
 
-    Private Sub txtPorcelProv_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtPorcelProv.KeyDown
+    Private Sub txtPorcelProv_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtPorcelProv.KeyDown
         If e.KeyData = Keys.Enter Then
             _SaltarA(cmbCondicionIB2)
         ElseIf e.KeyData = Keys.Escape Then
@@ -1296,7 +1282,7 @@ Public Class ProveedoresABM
         End If
     End Sub
 
-    Private Sub txtPorcelCABA_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtPorcelCABA.KeyDown
+    Private Sub txtPorcelCABA_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtPorcelCABA.KeyDown
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtNroSEDRONAR1)
         ElseIf e.KeyData = Keys.Escape Then
@@ -1304,7 +1290,7 @@ Public Class ProveedoresABM
         End If
     End Sub
 
-    Private Sub txtNroSEDRONAR1_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtNroSEDRONAR1.KeyDown
+    Private Sub txtNroSEDRONAR1_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtNroSEDRONAR1.KeyDown
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtNroSEDRONAR2)
         ElseIf e.KeyData = Keys.Escape Then
@@ -1312,7 +1298,7 @@ Public Class ProveedoresABM
         End If
     End Sub
 
-    Private Sub txtNroSEDRONAR2_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtNroSEDRONAR2.KeyDown
+    Private Sub txtNroSEDRONAR2_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtNroSEDRONAR2.KeyDown
         If e.KeyData = Keys.Enter Then
             If _ValidarFecha(txtNroSEDRONAR2.Text) Then : Exit Sub : End If
 
@@ -1322,7 +1308,7 @@ Public Class ProveedoresABM
         End If
     End Sub
 
-    Private Sub txtCategoria_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCategoria.KeyDown
+    Private Sub txtCategoria_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtCategoria.KeyDown
         If e.KeyData = Keys.Enter Then
             _SaltarA(cmbInscripcionIB)
         ElseIf e.KeyData = Keys.Escape Then
@@ -1330,7 +1316,7 @@ Public Class ProveedoresABM
         End If
     End Sub
 
-    Private Sub txtCertificados_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCertificados.KeyDown, txtCertificados3.KeyDown, txtCertificados2.KeyDown
+    Private Sub txtCertificados_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtCertificados.KeyDown, txtCertificados3.KeyDown, txtCertificados2.KeyDown
         If e.KeyData = Keys.Enter Then
             If _ValidarFecha(txtCertificados.Text) Then : Exit Sub : End If
             _SaltarA(cmbCalificacion)
@@ -1339,7 +1325,7 @@ Public Class ProveedoresABM
         End If
     End Sub
 
-    Private Sub cmbRegion_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbRegion.KeyDown
+    Private Sub cmbRegion_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles cmbRegion.KeyDown
 
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtTelefono)
@@ -1349,15 +1335,15 @@ Public Class ProveedoresABM
 
     End Sub
 
-    Private Sub cmbRegion_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbRegion.TextChanged
+    Private Sub cmbRegion_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbRegion.TextChanged
         _SaltarA(txtTelefono)
     End Sub
 
-    Private Sub cmbTipoProveedor_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbTipoProveedor.TextChanged
+    Private Sub cmbTipoProveedor_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbTipoProveedor.TextChanged
         _SaltarA(cmbIVA)
     End Sub
 
-    Private Sub cmbTipoProveedor_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbTipoProveedor.KeyDown
+    Private Sub cmbTipoProveedor_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles cmbTipoProveedor.KeyDown
 
         If e.KeyData = Keys.Enter Then
             _SaltarA(cmbIVA)
@@ -1367,7 +1353,7 @@ Public Class ProveedoresABM
 
     End Sub
 
-    Private Sub cmbIVA_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbIVA.KeyDown
+    Private Sub cmbIVA_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles cmbIVA.KeyDown
 
         If e.KeyData = Keys.Enter Then
 
@@ -1382,14 +1368,14 @@ Public Class ProveedoresABM
 
     End Sub
 
-    Private Sub cmbIVA_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbIVA.TextChanged
+    Private Sub cmbIVA_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbIVA.TextChanged
         If cmbIVA.SelectedIndex = 5 Then ' Monotributo
             cmbTipoProveedor.SelectedIndex = 3 ' Exento
         End If
         _SaltarA(txtObservaciones)
     End Sub
 
-    Private Sub cmbCondicionIB1_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbCondicionIB1.KeyDown
+    Private Sub cmbCondicionIB1_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles cmbCondicionIB1.KeyDown
 
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtNroIB)
@@ -1399,11 +1385,11 @@ Public Class ProveedoresABM
 
     End Sub
 
-    Private Sub cmbCondicionIB1_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbCondicionIB1.TextChanged
+    Private Sub cmbCondicionIB1_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbCondicionIB1.TextChanged
         _SaltarA(txtNroIB)
     End Sub
 
-    Private Sub cmbCondicionIB2_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbCondicionIB2.KeyDown
+    Private Sub cmbCondicionIB2_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles cmbCondicionIB2.KeyDown
 
         If e.KeyData = Keys.Enter Then
             _SaltarA(cmbInscripcionIB)
@@ -1413,15 +1399,15 @@ Public Class ProveedoresABM
 
     End Sub
 
-    Private Sub cmbCondicionIB2_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbCondicionIB2.TextChanged
+    Private Sub cmbCondicionIB2_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbCondicionIB2.TextChanged
         _SaltarA(cmbInscripcionIB)
     End Sub
 
-    Private Sub cmbRubro_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbRubro.TextChanged
+    Private Sub cmbRubro_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbRubro.TextChanged
         _SaltarA(txtNroSEDRONAR1)
     End Sub
 
-    Private Sub cmbRubro_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbRubro.KeyDown
+    Private Sub cmbRubro_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles cmbRubro.KeyDown
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtNroSEDRONAR1)
         ElseIf e.KeyData = Keys.Escape Then
@@ -1429,7 +1415,7 @@ Public Class ProveedoresABM
         End If
     End Sub
 
-    Private Sub cmbCategoria1_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbCategoria1.KeyDown
+    Private Sub cmbCategoria1_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles cmbCategoria1.KeyDown
         If e.KeyData = Keys.Enter Then
             _SaltarA(cmbCategoria2)
         ElseIf e.KeyData = Keys.Escape Then
@@ -1437,11 +1423,11 @@ Public Class ProveedoresABM
         End If
     End Sub
 
-    Private Sub cmbCategoria1_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbCategoria1.TextChanged
+    Private Sub cmbCategoria1_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbCategoria1.TextChanged
         _SaltarA(cmbCategoria2)
     End Sub
 
-    Private Sub cmbCategoria2_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbCategoria2.KeyDown
+    Private Sub cmbCategoria2_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles cmbCategoria2.KeyDown
 
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtCategoria)
@@ -1451,11 +1437,11 @@ Public Class ProveedoresABM
 
     End Sub
 
-    Private Sub cmbCategoria2_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbCategoria2.TextChanged
+    Private Sub cmbCategoria2_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbCategoria2.TextChanged
         _SaltarA(txtCategoria)
     End Sub
 
-    Private Sub cmbInscripcionIB_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbInscripcionIB.KeyDown
+    Private Sub cmbInscripcionIB_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles cmbInscripcionIB.KeyDown
 
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtPorcelCABA)
@@ -1465,11 +1451,11 @@ Public Class ProveedoresABM
 
     End Sub
 
-    Private Sub cmbInscripcionIB_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbInscripcionIB.TextChanged
+    Private Sub cmbInscripcionIB_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbInscripcionIB.TextChanged
         _SaltarA(txtPorcelCABA)
     End Sub
 
-    Private Sub cmbEstado_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbEstado.KeyDown
+    Private Sub cmbEstado_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles cmbEstado.KeyDown
 
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtPaginaWeb)
@@ -1479,11 +1465,11 @@ Public Class ProveedoresABM
 
     End Sub
 
-    Private Sub cmbEstado_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbEstado.TextChanged
+    Private Sub cmbEstado_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbEstado.TextChanged
         _SaltarA(txtPaginaWeb)
     End Sub
 
-    Private Sub cmbCertificados_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbCertificados.KeyDown, cmbCertificados3.KeyDown, cmbCertificados2.KeyDown
+    Private Sub cmbCertificados_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles cmbCertificados.KeyDown, cmbCertificados3.KeyDown, cmbCertificados2.KeyDown
 
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtCertificados)
@@ -1493,11 +1479,11 @@ Public Class ProveedoresABM
 
     End Sub
 
-    Private Sub cmbCertificados_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbCertificados.TextChanged, cmbCertificados3.TextChanged, cmbCertificados2.TextChanged
+    Private Sub cmbCertificados_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbCertificados.TextChanged, cmbCertificados3.TextChanged, cmbCertificados2.TextChanged
         _SaltarA(txtCertificados)
     End Sub
 
-    Private Sub cmbCalificacion_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbCalificacion.KeyDown
+    Private Sub cmbCalificacion_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles cmbCalificacion.KeyDown
 
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtCalificacion)
@@ -1507,11 +1493,11 @@ Public Class ProveedoresABM
 
     End Sub
 
-    Private Sub cmbCalificacion_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbCalificacion.TextChanged
+    Private Sub cmbCalificacion_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbCalificacion.TextChanged
         _SaltarA(txtCalificacion)
     End Sub
 
-    Private Sub btnContactos_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnContactos.Click
+    Private Sub btnContactos_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnContactos.Click
         ' Abrir ventana de Ingreso de contactos.
         With Contactos
             .txtNombre1.Text = _Contacto1.Item1
@@ -1538,13 +1524,13 @@ Public Class ProveedoresABM
         End With
     End Sub
 
-    Private Sub txtPaginaWeb_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtPaginaWeb.MouseDoubleClick
+    Private Sub txtPaginaWeb_MouseDoubleClick(ByVal sender As Object, ByVal e As MouseEventArgs) Handles txtPaginaWeb.MouseDoubleClick
         _VisitarPaginaWeb()
     End Sub
 
     Private Sub _VisitarPaginaWeb()
         Dim _Direccion As String = LCase(Trim(txtPaginaWeb.Text))
-        Dim regex As New System.Text.RegularExpressions.Regex("^(http\:\/\/)")
+        Dim regex As New Regex("^(http\:\/\/)")
 
         ' Corroboramos que haya contenido.
         If Trim(_Direccion) = "" Then
@@ -1556,13 +1542,13 @@ Public Class ProveedoresABM
             _Direccion = "http://" & _Direccion
         End If
 
-        regex = New System.Text.RegularExpressions.Regex("\.[a-z]+(\/)?$")
+        regex = New Regex("\.[a-z]+(\/)?$")
 
         ' Corroboramos que tenga una extension.
         If Not regex.IsMatch(_Direccion) Then
 
             ' Corroboramos que pueda ser un formato de dirección valido.
-            regex = New System.Text.RegularExpressions.Regex("^(http:\/\/)\w+(\.[a-z]+(\/)?)$")
+            regex = New Regex("^(http:\/\/)\w+(\.[a-z]+(\/)?)$")
 
             If Not regex.IsMatch(_Direccion & ".com") Then
                 Exit Sub
@@ -1592,21 +1578,21 @@ Public Class ProveedoresABM
         End Try
     End Sub
 
-    Private Sub txtCodigo_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtCodigo.MouseDoubleClick
+    Private Sub txtCodigo_MouseDoubleClick(ByVal sender As Object, ByVal e As MouseEventArgs) Handles txtCodigo.MouseDoubleClick
 
         _AbrirConsulta("Proveedor")
         txtFiltrar.Focus()
 
     End Sub
 
-    Private Sub txtCuenta_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtCuenta.MouseDoubleClick
+    Private Sub txtCuenta_MouseDoubleClick(ByVal sender As Object, ByVal e As MouseEventArgs) Handles txtCuenta.MouseDoubleClick
 
         _AbrirConsulta("Cuenta")
         txtFiltrar.Focus()
 
     End Sub
 
-    Private Sub txtCalificacion_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCalificacion.KeyDown
+    Private Sub txtCalificacion_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtCalificacion.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If _ValidarFecha(txtCalificacion.Text) Then : Exit Sub : End If
@@ -1645,7 +1631,7 @@ Public Class ProveedoresABM
     '    End If
     'End Sub
 
-    Private Sub cmbProvincia_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbProvincia.KeyDown
+    Private Sub cmbProvincia_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles cmbProvincia.KeyDown
 
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtLocalidad)
@@ -1653,18 +1639,18 @@ Public Class ProveedoresABM
 
     End Sub
 
-    Private Sub cmbProvincia_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbProvincia.TextChanged
+    Private Sub cmbProvincia_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbProvincia.TextChanged
         _SaltarA(txtLocalidad)
     End Sub
 
-    Private Sub txtClienteAsociado_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtClienteAsociado.MouseDoubleClick
+    Private Sub txtClienteAsociado_MouseDoubleClick(ByVal sender As Object, ByVal e As MouseEventArgs) Handles txtClienteAsociado.MouseDoubleClick
         LBConsulta_Opciones.SelectedIndex = 2
         LBConsulta_Opciones_SelectedIndexChanged(Nothing, Nothing)
         _ExpandirFormulario()
         txtFiltrar.Focus()
     End Sub
 
-    Private Sub txtClienteAsociado_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtClienteAsociado.KeyDown
+    Private Sub txtClienteAsociado_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtClienteAsociado.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtClienteAsociado.Text) <> "" Then
@@ -1676,7 +1662,7 @@ Public Class ProveedoresABM
 
     End Sub
 
-    Private Sub CKBProveedorInactivo_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CKBProveedorInactivo.CheckedChanged
+    Private Sub CKBProveedorInactivo_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles CKBProveedorInactivo.CheckedChanged
 
         If CKBProveedorInactivo.Checked Then
             _Inhabilitado = "1"
@@ -1686,13 +1672,13 @@ Public Class ProveedoresABM
 
     End Sub
 
-    Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtCodigo.KeyPress, txtCodigoPostal.KeyPress, txtCuenta.KeyPress
+    Private Sub SoloNumero(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txtCodigo.KeyPress, txtCodigoPostal.KeyPress, txtCuenta.KeyPress
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
             e.Handled = True
         End If
     End Sub
 
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button1.Click
         'Dim _provedores As New List(Of String) From {"01000000012", "01000000001", "00000000008", "10008321238", "1000466464 ", "00000000010", "00000000009", "10067727539", "10999888782", "10014871417", "10053801902"}
 
         'For Each _Proveedor As String In _provedores
@@ -1704,17 +1690,30 @@ Public Class ProveedoresABM
 
     End Sub
 
-    Private Sub btnCerrarConsultas_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrarConsultas.Click
+    Private Sub btnCerrarConsultas_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCerrarConsultas.Click
         _ContraerFormulario()
     End Sub
 
-    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+    Private Sub Button2_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button2.Click
 
         If Val(txtCodigo.Text) = 0 Then Exit Sub
 
         With New EncuestaFarma(txtCodigo.Text, txtEmail.Text)
             .ShowDialog(Me)
         End With
+
+    End Sub
+
+    Private Sub btnEvaluacion_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnEvaluacion.Click
+
+        '
+        ' Se llama a la ventana de Evaluación de Proveedor por Materia Prima.
+        '
+        Dim frm As New EvaluacionProveedorMateriaPrima(txtCodigo.Text)
+
+        frm.ShowDialog(Me)
+
+        GC.Collect()
 
     End Sub
 End Class

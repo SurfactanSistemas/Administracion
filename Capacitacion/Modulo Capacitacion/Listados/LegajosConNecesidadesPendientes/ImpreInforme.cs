@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Modulo_Capacitacion.Listados.LegajosConNecesidadesPendientes
@@ -37,21 +32,7 @@ namespace Modulo_Capacitacion.Listados.LegajosConNecesidadesPendientes
             {
                 DataRow dr = dtInforme.Rows[i];
                 Ds.Tables[0].Rows.Add
-                (new object[]
-                {
-                    dr[0].ToString(),
-                    dr[1].ToString(),
-                    dr[2].ToString(),
-                    dr[3].ToString(),
-                    dr[4].ToString(),
-                    
-                    
-                    
-                    
-
-                }
-
-                );
+                (dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString());
             }
 
             if (Tipo == "Pantalla")

@@ -34,9 +34,9 @@
     <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>true</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -167,6 +167,18 @@
     </Compile>
     <Compile Include="Listados\InformedeCompetencias\imprelegajoii.cs">
       <DependentUpon>imprelegajoii.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Listados\InformeHorasRealizadasYProgramadas\Inicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\InformeHorasRealizadasYProgramadas\Inicio.Designer.cs">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\InformeHorasRealizadasYProgramadas\ReporteInformeHorasRealizadasyProgramadas.cs">
+      <DependentUpon>ReporteInformeHorasRealizadasyProgramadas.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
@@ -786,6 +798,13 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>imprelegajoii.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Listados\InformeHorasRealizadasYProgramadas\Inicio.resx">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\InformeHorasRealizadasYProgramadas\ReporteInformeHorasRealizadasyProgramadas.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteInformeHorasRealizadasyProgramadas.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Listados\PlanCapacitacionAnualTentativo\AsignarCursos.resx">
       <DependentUpon>AsignarCursos.cs</DependentUpon>
     </EmbeddedResource>
@@ -1076,7 +1095,6 @@
     </None>
     <None Include="bin\Debug\Modulo Capacitacion.exe.config" />
     <None Include="bin\Debug\Modulo Capacitacion.vshost.exe.config" />
-    <None Include="bin\Debug\Modulo Capacitacion.vshost.exe.manifest" />
     <None Include="Listados\CursosnoRealizadosporTemas\DSInforme.xsc">
       <DependentUpon>DSInforme.xsd</DependentUpon>
     </None>

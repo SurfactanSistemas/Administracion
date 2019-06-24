@@ -120,7 +120,7 @@ Public Class GestionAvisosOPDisponiblesProveedores
 
             Using cm As New SqlCommand()
                 cm.Connection = cn
-                cm.CommandText = "SELECT p.Proveedor, p.Fecha, pr.Nombre, p.Fecha2, p.Tipo2, p.Importe2, p.Numero2, p.Importe, p.Cuenta FROM Pagos p LEFT OUTER JOIN Proveedor pr ON pr.Proveedor = p.Proveedor WHERE p.Orden = '" & OrdenPago & "' and p.TipoReg IN ('02', '2')"
+                cm.CommandText = "SELECT p.Proveedor, p.Fecha, pr.Nombre, p.Fecha2, p.Tipo2, p.Importe2, p.Numero2, p.Importe, p.Cuenta FROM Pagos p LEFT OUTER JOIN Proveedor pr ON pr.Proveedor = p.Proveedor WHERE p.Orden = '" & OrdenPago & "' and p.TipoReg IN ('02', '2') Order by p.Tipo2"
 
                 Using dr As SqlDataReader = cm.ExecuteReader
 
@@ -136,7 +136,7 @@ Public Class GestionAvisosOPDisponiblesProveedores
 
     End Function
 
-    Private Sub _EnviarAvisoOPDisponible(ByVal ZProveedor As String, ByVal wDescProveedor As String, Optional ByVal OrdenPago As String = "", Optional ByVal EsPorTransferencia As Boolean = False, Optional ByVal wFechasTransferencias As String = "")
+    Private Sub _EnviarAvisoOPDisponible(ByVal ZProveedor As String, ByVal wDescProveedor As String, Optional ByVal OrdenPago As String = "", Optional ByVal EsPorTransferencia As Boolean = False, Optional ByVal wFechasTransferencias As String = "", Optional ByVal PorTransferenciaYCheques As Boolean = False)
 
         If ZProveedor.Trim = "" Then Exit Sub
         If EsPorTransferencia And Trim(OrdenPago) = "" Then Exit Sub
@@ -172,26 +172,42 @@ Public Class GestionAvisosOPDisponiblesProveedores
 
                     WBody = "Informamos que en el día de la fecha, SURFACTAN S.A. le ha realizado una transferencia"
 
-                    If wFechasTransferencias.Trim <> "" Then WBody &= " a las siguientes fechas: " & wFechasTransferencias
+                    If wFechasTransferencias.Trim <> "" Then
 
-                    WBody &= "." & vbCrLf & vbCrLf & "Adjuntamos Orden de Pago y retenciones si correspondiesen."
+                        If wFechasTransferencias.Split(",").Count > 1 Then
+                            WBody &= " a las siguientes fechas: "
+                        Else
+                            WBody &= " a la siguiente fecha: "
+                        End If
+
+                        WBody &= "<strong>" & wFechasTransferencias & "</strong>"
+
+                    End If
+
+                    If PorTransferenciaYCheques Then
+                        WBody &= "." & "<br/>" & "<br/>" & "Además tiene Cheque(s) para retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, en el horario de <strong>14:00 a 17:00 hs.</strong>"
+                    Else
+                        WBody &= "." & "<br/>" & "<br/>" & "Adjuntamos Orden de Pago y retenciones si correspondiesen."
+                    End If
 
                 Else
-                    WBody = "Informamos que se encuentra a su disposición un pago que podrá ser retirado por nuestras oficinas (Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires) en el horario de 14:00 a 17:00 hs."
+
+                    WBody = "Informamos que se encuentra a su disposición un pago que podrá ser retirado por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, en el horario de <strong>14:00 a 17:00 hs.</strong>"
+
                 End If
 
                 If Trim(wDescProveedor) <> "" Then
-                    WBody = "Sres. " & wDescProveedor.Trim.ToUpper & vbCrLf & vbCrLf & WBody
+                    WBody = "Sres. <strong>" & wDescProveedor.Trim.ToUpper & "</strong> <br/>" & "<br/>" & WBody
                 End If
 
                 Select Case ZProveedor
-                    Case "10167878480", "10000000100", "10071081483", "10069345023", "10066352912", "10023969933", "10014123562"
-                        WBody = WBody & vbCrLf & vbCrLf & "En caso de cualquier consulta, por favor dirigirla a fgmonti@surfactan.com.ar"
+                    Case "10167878480", "10000000100", "10071081483", "10069345023", "10066352912"
+                        WBody = WBody & "<br/>" & "<br/>" & "En caso de cualquier consulta, por favor dirigirla a <strong><em>fgmonti@surfactan.com.ar</em></strong>"
                 End Select
 
                 Dim WAdjuntos As New List(Of String)
 
-                If EsPorTransferencia Then
+                If EsPorTransferencia And Not PorTransferenciaYCheques Then
                     WAdjuntos = _PrepararAdjuntos(OrdenPago)
                 End If
 
@@ -306,11 +322,17 @@ Public Class GestionAvisosOPDisponiblesProveedores
 
             With _Mail
 
+                '
+                ' (NO BORRAR) Obtenemos la Instancia de Inspector para que nos agrege la firma que se encuentra definida por defecto.
+                '
+                ' ReSharper disable once UnusedVariable
+                Dim WInspector = .GetInspector
+
                 .To = _to
                 .BCC = _bcc
                 .Subject = _subject
-                .Body = _body
-                '.HTMLBody = _body & vbCrLf & vbCrLf & .HTMLBody
+                '.Body = _body
+                .HTMLBody = "<p>" & _body & "</p>" & .HTMLBody
 
                 For Each adjunto As String In _adjuntos
                     If Trim(adjunto) <> "" Then
@@ -358,6 +380,7 @@ Public Class GestionAvisosOPDisponiblesProveedores
                 '
                 Dim WOrdenPago As DataTable = _TraerDatosOrdenPago(WOrden)
                 Dim EsPorTransferencia As Boolean = False
+                Dim PorTransferenciaYCheques As Boolean = False
                 Dim WProveedor As String = ""
 
                 If WOrdenPago.Rows.Count > 0 Then
@@ -385,6 +408,8 @@ Public Class GestionAvisosOPDisponiblesProveedores
                                     End If
 
                                     If EsPorTransferencia Then Exit For
+                                Case 3
+                                    If EsPorTransferencia Then PorTransferenciaYCheques = True
                                 Case Else
                                     EsPorTransferencia = False
                             End Select
@@ -402,7 +427,7 @@ Public Class GestionAvisosOPDisponiblesProveedores
 
                             WFechasTransferencias = WFechasTransferencias.TrimEnd(",")
 
-                            _EnviarAvisoOPDisponible(WProveedor, WDescProveedor, WOrden, EsPorTransferencia, WFechasTransferencias)
+                            _EnviarAvisoOPDisponible(WProveedor, WDescProveedor, WOrden, EsPorTransferencia, WFechasTransferencias, PorTransferenciaYCheques)
 
                         End If
 
@@ -420,7 +445,7 @@ Public Class GestionAvisosOPDisponiblesProveedores
 
     End Sub
 
-    Private Sub txtFecha_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFecha.KeyDown
+    Private Sub txtFecha_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtFecha.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If txtFecha.Text.Replace(" ", "").Length < 10 Then : Exit Sub : End If
@@ -433,7 +458,7 @@ Public Class GestionAvisosOPDisponiblesProveedores
 
     End Sub
 
-    Private Sub rbAnticipos_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbTodos.Click, rbCtaCtes.Click, rbAnticipos.Click
+    Private Sub rbAnticipos_Click(ByVal sender As Object, ByVal e As EventArgs) Handles rbTodos.Click, rbCtaCtes.Click, rbAnticipos.Click
         btnTraerPagos_Click(Nothing, Nothing)
     End Sub
 End Class
