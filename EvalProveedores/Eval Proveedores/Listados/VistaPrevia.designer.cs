@@ -41,7 +41,6 @@
             this.CRVInforme.Name = "CRVInforme";
             this.CRVInforme.ShowCloseButton = false;
             this.CRVInforme.ShowGotoPageButton = false;
-            this.CRVInforme.ShowGroupTreeButton = false;
             this.CRVInforme.ShowLogo = false;
             this.CRVInforme.ShowParameterPanelButton = false;
             this.CRVInforme.ShowRefreshButton = false;
@@ -56,6 +55,7 @@
             this.ClientSize = new System.Drawing.Size(784, 562);
             this.Controls.Add(this.CRVInforme);
             this.Name = "VistaPrevia";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.ResumeLayout(false);
 

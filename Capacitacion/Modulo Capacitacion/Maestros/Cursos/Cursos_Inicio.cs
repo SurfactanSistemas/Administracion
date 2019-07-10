@@ -2,7 +2,9 @@
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Windows.Forms;
+using Modulo_Capacitacion.Listados.Cursos;
 using Negocio;
 
 namespace Modulo_Capacitacion.Maestros.Cursos
@@ -143,7 +145,7 @@ namespace Modulo_Capacitacion.Maestros.Cursos
                 if (column != null) column.Visible = false;
             }
 
-            pnlCursos.Location = new System.Drawing.Point((Width/2) - pnlCursos.Width / 2 , pnlCursos.Location.Y);
+            pnlCursos.Location = new Point((Width/2) - pnlCursos.Width / 2 , pnlCursos.Location.Y);
             pnlCursos.Visible = true;
         }
 
@@ -190,7 +192,7 @@ namespace Modulo_Capacitacion.Maestros.Cursos
 
         private void btnImprimir_Click(object sender, EventArgs e)
         {
-            Listados.Cursos.Inicio frm = new Listados.Cursos.Inicio();
+            Inicio frm = new Inicio();
             frm.ShowDialog();
         }
 

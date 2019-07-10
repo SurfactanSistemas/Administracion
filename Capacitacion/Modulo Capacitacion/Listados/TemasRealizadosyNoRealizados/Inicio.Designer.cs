@@ -1,11 +1,14 @@
-﻿namespace Modulo_Capacitacion.Listados.TemasRealizadosyNoRealizados
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Modulo_Capacitacion.Listados.TemasRealizadosyNoRealizados
 {
     partial class Inicio
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -230,19 +233,19 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label LBChofer;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.TextBox TB_TemaHasta;
-        private System.Windows.Forms.TextBox TB_TemaDesde;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button BT_Pantalla;
-        private System.Windows.Forms.Button BT_Imprimir;
-        private System.Windows.Forms.Button BT_Salir;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.MaskedTextBox txtAnioDesde;
-        private System.Windows.Forms.MaskedTextBox txtAnioHasta;
+        private Panel panel1;
+        private Label LBChofer;
+        private Panel panel2;
+        private Panel panel3;
+        private TextBox TB_TemaHasta;
+        private TextBox TB_TemaDesde;
+        private Label label2;
+        private Button BT_Pantalla;
+        private Button BT_Imprimir;
+        private Button BT_Salir;
+        private Label label1;
+        private Label label3;
+        private MaskedTextBox txtAnioDesde;
+        private MaskedTextBox txtAnioHasta;
     }
 }

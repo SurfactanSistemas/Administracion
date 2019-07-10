@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using Negocio;
 
@@ -127,10 +122,10 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajo
                 int.TryParse(TB_Hasta.Text, out LegHast);
                 int AñoDesd;
                 int.TryParse(TB_AñoDesde.Text, out AñoDesd);
-                AñoDesd = int.Parse(AñoDesd.ToString() + "0101");
+                AñoDesd = int.Parse(AñoDesd + "0101");
                 int AñoHast;
                 int.TryParse(TB_AñoHasta.Text, out AñoHast);
-                AñoHast = int.Parse(AñoHast.ToString() + "1231");
+                AñoHast = int.Parse(AñoHast + "1231");
 
                 dtCursadas = Cu.ListarPorLegajo(LegDesd, LegHast);
 

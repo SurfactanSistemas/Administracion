@@ -1,11 +1,14 @@
-﻿namespace Modulo_Capacitacion.Novedades
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Modulo_Capacitacion.Novedades
 {
     partial class IngreDeCursosRealizados
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -670,53 +673,53 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label LBPerfil;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Button BT_Salir;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox TB_Año;
-        private System.Windows.Forms.DataGridView DGV_Cronograma;
-        private System.Windows.Forms.Button BT_Limpiar;
-        private System.Windows.Forms.Button BT_Guardar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Curso;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Personas;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Horas;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Cursada;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Resta;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Mes1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Mes2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Mes3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Mes4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Mes5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Mes6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Mes7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Mes8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Mes9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Mes10;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Mes11;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Mes12;
-        private System.Windows.Forms.Button btnImprimirAviso;
-        private System.Windows.Forms.Panel pnlAviso;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Button btnImprimirAvisoCursos;
-        private System.Windows.Forms.Button btnEnviarEmailAviso;
-        private System.Windows.Forms.Button btnMostrarAviso;
-        private System.Windows.Forms.Button btnCerrarAviso;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox cmbMes;
-        private System.Windows.Forms.TextBox txtAnoConsulta;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.Panel pnlTipoListado;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label lblIdRow;
+        private Panel panel1;
+        private Label LBPerfil;
+        private Panel panel2;
+        private Panel panel3;
+        private Button BT_Salir;
+        private Label label1;
+        private TextBox TB_Año;
+        private DataGridView DGV_Cronograma;
+        private Button BT_Limpiar;
+        private Button BT_Guardar;
+        private DataGridViewTextBoxColumn Curso;
+        private DataGridViewTextBoxColumn Descripcion;
+        private DataGridViewTextBoxColumn Personas;
+        private DataGridViewTextBoxColumn Horas;
+        private DataGridViewTextBoxColumn Cursada;
+        private DataGridViewTextBoxColumn Resta;
+        private DataGridViewTextBoxColumn Mes1;
+        private DataGridViewTextBoxColumn Mes2;
+        private DataGridViewTextBoxColumn Mes3;
+        private DataGridViewTextBoxColumn Mes4;
+        private DataGridViewTextBoxColumn Mes5;
+        private DataGridViewTextBoxColumn Mes6;
+        private DataGridViewTextBoxColumn Mes7;
+        private DataGridViewTextBoxColumn Mes8;
+        private DataGridViewTextBoxColumn Mes9;
+        private DataGridViewTextBoxColumn Mes10;
+        private DataGridViewTextBoxColumn Mes11;
+        private DataGridViewTextBoxColumn Mes12;
+        private Button btnImprimirAviso;
+        private Panel pnlAviso;
+        private Panel panel5;
+        private Button btnImprimirAvisoCursos;
+        private Button btnEnviarEmailAviso;
+        private Button btnMostrarAviso;
+        private Button btnCerrarAviso;
+        private GroupBox groupBox1;
+        private Label label2;
+        private ComboBox cmbMes;
+        private TextBox txtAnoConsulta;
+        private Label label3;
+        private CheckBox checkBox1;
+        private Panel pnlTipoListado;
+        private GroupBox groupBox2;
+        private Label label4;
+        private Button button2;
+        private Button button1;
+        private Label label5;
+        private Label lblIdRow;
     }
 }

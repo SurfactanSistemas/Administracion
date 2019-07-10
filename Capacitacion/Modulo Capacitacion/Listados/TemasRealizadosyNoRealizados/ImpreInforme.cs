@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Modulo_Capacitacion.Listados.TemasRealizadosyNoRealizados
@@ -37,24 +32,7 @@ namespace Modulo_Capacitacion.Listados.TemasRealizadosyNoRealizados
             {
                 DataRow dr = dtInforme.Rows[i];
                 Ds.Tables[0].Rows.Add
-                (new object[]
-                {
-                    dr[0].ToString(),
-                    dr[1].ToString(),
-                    dr[2].ToString(),
-                    dr[3].ToString(),
-                    dr[4].ToString(),
-                    dr[5].ToString(),
-                    dr[6].ToString(),
-                    dr[7],
-                    dr[8],
-                    
-                    
-                    
-
-                }
-
-                );
+                (dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5].ToString(), dr[6].ToString(), dr[7], dr[8]);
             }
 
             if (Tipo == "Pantalla")

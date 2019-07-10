@@ -1,11 +1,14 @@
-﻿namespace Modulo_Capacitacion.Maestros.Sectores
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Modulo_Capacitacion.Maestros.Sectores
 {
     partial class Sectores_Inicio
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -367,28 +370,28 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView DGV_Sectores;
-        private System.Windows.Forms.Button BTAgregarSector;
-        private System.Windows.Forms.Button BTModifSector;
-        private System.Windows.Forms.Button BT_Eliminar;
-        private System.Windows.Forms.Button Bt_Fin;
-        private System.Windows.Forms.Panel P_Filtrado;
-        private System.Windows.Forms.TextBox TBFiltro;
-        private System.Windows.Forms.Panel P_Verde;
-        private System.Windows.Forms.ContextMenuStrip CMS_Sectores;
-        private System.Windows.Forms.ToolStripMenuItem codigoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem descripcionToolStripMenuItem;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Codigo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button btnImprimir;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtCodigo;
+        private Panel panel1;
+        private Label label2;
+        private Label label1;
+        private DataGridView DGV_Sectores;
+        private Button BTAgregarSector;
+        private Button BTModifSector;
+        private Button BT_Eliminar;
+        private Button Bt_Fin;
+        private Panel P_Filtrado;
+        private TextBox TBFiltro;
+        private Panel P_Verde;
+        private ContextMenuStrip CMS_Sectores;
+        private ToolStripMenuItem codigoToolStripMenuItem;
+        private ToolStripMenuItem descripcionToolStripMenuItem;
+        private DataGridViewTextBoxColumn Codigo;
+        private DataGridViewTextBoxColumn Descripcion;
+        private TableLayoutPanel tableLayoutPanel1;
+        private TableLayoutPanel tableLayoutPanel2;
+        private Panel panel2;
+        private Label label3;
+        private Button btnImprimir;
+        private Label label4;
+        private TextBox txtCodigo;
     }
 }

@@ -1,11 +1,14 @@
-﻿namespace Modulo_Capacitacion.Listados.Cursos
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Modulo_Capacitacion.Listados.Cursos
 {
     partial class Inicio
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -61,9 +64,9 @@
             this.LBChofer.ForeColor = System.Drawing.Color.White;
             this.LBChofer.Location = new System.Drawing.Point(10, 10);
             this.LBChofer.Name = "LBChofer";
-            this.LBChofer.Size = new System.Drawing.Size(140, 19);
+            this.LBChofer.Size = new System.Drawing.Size(146, 19);
             this.LBChofer.TabIndex = 0;
-            this.LBChofer.Text = "LISTADO DE TEMAS";
+            this.LBChofer.Text = "LISTADO DE CURSOS";
             // 
             // panel2
             // 
@@ -91,7 +94,7 @@
             // 
             // TB_Hasta
             // 
-            this.TB_Hasta.Location = new System.Drawing.Point(277, 45);
+            this.TB_Hasta.Location = new System.Drawing.Point(307, 45);
             this.TB_Hasta.MaxLength = 4;
             this.TB_Hasta.Name = "TB_Hasta";
             this.TB_Hasta.Size = new System.Drawing.Size(72, 20);
@@ -101,7 +104,7 @@
             // 
             // TB_Desde
             // 
-            this.TB_Desde.Location = new System.Drawing.Point(120, 45);
+            this.TB_Desde.Location = new System.Drawing.Point(131, 45);
             this.TB_Desde.MaxLength = 4;
             this.TB_Desde.Name = "TB_Desde";
             this.TB_Desde.Size = new System.Drawing.Size(72, 20);
@@ -113,11 +116,11 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(225, 46);
+            this.label2.Location = new System.Drawing.Point(214, 46);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(46, 18);
+            this.label2.Size = new System.Drawing.Size(82, 18);
             this.label2.TabIndex = 83;
-            this.label2.Text = "Hasta:";
+            this.label2.Text = "Hasta Tema:";
             // 
             // BT_Pantalla
             // 
@@ -162,11 +165,11 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(63, 46);
+            this.label1.Location = new System.Drawing.Point(33, 45);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(51, 18);
+            this.label1.Size = new System.Drawing.Size(87, 18);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Desde:";
+            this.label1.Text = "Desde Tema:";
             // 
             // Inicio
             // 
@@ -191,16 +194,16 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label LBChofer;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.TextBox TB_Hasta;
-        private System.Windows.Forms.TextBox TB_Desde;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button BT_Pantalla;
-        private System.Windows.Forms.Button BT_Imprimir;
-        private System.Windows.Forms.Button BT_Salir;
-        private System.Windows.Forms.Label label1;
+        private Panel panel1;
+        private Label LBChofer;
+        private Panel panel2;
+        private Panel panel3;
+        private TextBox TB_Hasta;
+        private TextBox TB_Desde;
+        private Label label2;
+        private Button BT_Pantalla;
+        private Button BT_Imprimir;
+        private Button BT_Salir;
+        private Label label1;
     }
 }

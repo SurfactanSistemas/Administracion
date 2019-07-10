@@ -1,11 +1,14 @@
-﻿namespace Modulo_Capacitacion.Maestros.Cursos
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Modulo_Capacitacion.Maestros.Cursos
 {
     partial class Cursos_Inicio
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -578,44 +581,44 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel P_Verde;
-        private System.Windows.Forms.TextBox TBFiltro;
-        private System.Windows.Forms.DataGridView dgvTemas;
-        private System.Windows.Forms.Button Bt_Fin;
-        private System.Windows.Forms.Button BT_Eliminar;
-        private System.Windows.Forms.Button BTModifCurso;
-        private System.Windows.Forms.Button BTAgregarCurso;
-        private System.Windows.Forms.ContextMenuStrip CMS_Curso;
-        private System.Windows.Forms.ToolStripMenuItem claveToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem temaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem descripcionToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem cursoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem horaToolStripMenuItem;
-        private System.Windows.Forms.Panel P_Filtrado;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button btnImprimir;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Clave;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Tema;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Curs;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DescCurso;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Horas;
-        private System.Windows.Forms.Panel pnlCursos;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DataGridView dgvCursos;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Button btnCerrarCursos;
-        private System.Windows.Forms.Button btnMostrarCursos;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtCodigo;
-        private System.Windows.Forms.Label lblTema;
-        private System.Windows.Forms.Button button1;
+        private Panel panel1;
+        private Label label2;
+        private Label label1;
+        private Panel P_Verde;
+        private TextBox TBFiltro;
+        private DataGridView dgvTemas;
+        private Button Bt_Fin;
+        private Button BT_Eliminar;
+        private Button BTModifCurso;
+        private Button BTAgregarCurso;
+        private ContextMenuStrip CMS_Curso;
+        private ToolStripMenuItem claveToolStripMenuItem;
+        private ToolStripMenuItem temaToolStripMenuItem;
+        private ToolStripMenuItem descripcionToolStripMenuItem;
+        private ToolStripMenuItem cursoToolStripMenuItem;
+        private ToolStripMenuItem horaToolStripMenuItem;
+        private Panel P_Filtrado;
+        private Label label3;
+        private TableLayoutPanel tableLayoutPanel1;
+        private TableLayoutPanel tableLayoutPanel2;
+        private Panel panel2;
+        private Button btnImprimir;
+        private DataGridViewTextBoxColumn Clave;
+        private DataGridViewTextBoxColumn Tema;
+        private DataGridViewTextBoxColumn Descripcion;
+        private DataGridViewTextBoxColumn Curs;
+        private DataGridViewTextBoxColumn DescCurso;
+        private DataGridViewTextBoxColumn Horas;
+        private Panel pnlCursos;
+        private GroupBox groupBox1;
+        private DataGridView dgvCursos;
+        private Label label4;
+        private Panel panel3;
+        private Button btnCerrarCursos;
+        private Button btnMostrarCursos;
+        private Label label5;
+        private TextBox txtCodigo;
+        private Label lblTema;
+        private Button button1;
     }
 }

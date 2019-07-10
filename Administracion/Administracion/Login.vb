@@ -1,6 +1,7 @@
 ﻿Imports System.Configuration
 Imports System.Net
 Imports ClasesCompartidas
+Imports EvaluacionProvMPFarma
 
 Public Class Login
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
@@ -15,6 +16,19 @@ Public Class Login
 
     Private Sub Login_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         cmbEntity.DataSource = Globals.connectionStringNames()
+
+        If Environment.GetCommandLineArgs().Length > 1 Then
+
+            Globals.empresa = "SURFACTAN"
+
+            With New EvaluacionProveedorMateriaPrima("", True)
+                .Show()
+            End With
+
+            Close()
+
+        End If
+
     End Sub
 
     Private Function validarCampos()

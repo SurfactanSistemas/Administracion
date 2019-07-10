@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using Modulo_Capacitacion.Listados.Perfil;
+using Modulo_Capacitacion.Listados.Perfiles;
 using Modulo_Capacitacion.Maestros.Cursos;
 using Modulo_Capacitacion.Maestros.Legajos;
 using Modulo_Capacitacion.Maestros.Perfiles;
@@ -50,31 +50,31 @@ namespace Modulo_Capacitacion
         private void ingresoDeCursosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Cursos_Inicio cursosForm = new Cursos_Inicio {StartPosition = FormStartPosition.CenterScreen};
-            cursosForm.ShowDialog();
+            cursosForm.Show();
         }
 
         private void ingresoDePerfilesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Perfiles_Inicio perfilesform = new Perfiles_Inicio {StartPosition = FormStartPosition.CenterScreen};
-            perfilesform.ShowDialog();
+            perfilesform.Show();
         }
 
         private void ingresoDeLegajosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Legajos_Inicio form = new Legajos_Inicio {StartPosition = FormStartPosition.CenterScreen};
-            form.ShowDialog();
+            form.Show();
         }
 
         private void consultaDeVersionDeLegajosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             IngVersLegajo form = new IngVersLegajo {StartPosition = FormStartPosition.CenterScreen};
-            form.ShowDialog();
+            form.Show();
         }
 
         private void consultaDeVersionDePerfilesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             IngVersPerfil form = new IngVersPerfil {StartPosition = FormStartPosition.CenterScreen};
-            form.ShowDialog();
+            form.Show();
         }
 
         private void ingresoDeCornogramaDeCapacitaciónToolStripMenuItem_Click(object sender, EventArgs e)
@@ -89,7 +89,7 @@ namespace Modulo_Capacitacion
             {
                 StartPosition = FormStartPosition.CenterScreen
             };
-            form.ShowDialog();
+            form.Show();
             
         }
 
@@ -112,11 +112,6 @@ namespace Modulo_Capacitacion
             frm.Show();
         }
 
-        private void listadoDePerfilesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _Abrir(new Listados.Perfiles.Inicio());
-        }
-
         protected void _Abrir(Form Ini)
         {
             Ini.Show();
@@ -129,7 +124,7 @@ namespace Modulo_Capacitacion
 
         private void listadoDeLegajosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _Abrir(new Inicio());
+            _Abrir(new Listados.Perfil.Inicio());
         }
 
         private void listadoPorLegajosPendientesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -137,41 +132,11 @@ namespace Modulo_Capacitacion
             _Abrir(new Listados.LegajosConNecesidadesPendientes.Inicio());
         }
 
-        private void resúmenToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _Abrir(new Listados.TemasPorLegajoConsolidado.Inicio());
-        }
-
-        private void cursosPorLegajoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _Abrir(new Listados.TemasPorLegajo.Inicio());
-        }
-
         private void cursosPorLegajoConsolidadosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _Abrir(new Listados.HorasCursadasPorLegajo.Inicio());
         }
-
-        private void cursosPorTemaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _Abrir(new Listados.CursosRealizadosporTemas.Inicio());
-        }
-
-        private void cursosPorSectorToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _Abrir(new Listados.TemasRealizadosPorSector.Inicio());
-        }
-
-        private void cursosNORealizadosToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _Abrir(new Listados.CursosPendientesPorSector.Inicio());
-        }
-
-        private void cursosNOProgramadosToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _Abrir(new Listados.PlanilladeTemasnoProgramados.Inicio());
-        }
-
+        
         private void resumenDeCursosRealizadosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _Abrir(new Listados.InformeHorasRealizadasYProgramadas.Inicio());
@@ -200,6 +165,41 @@ namespace Modulo_Capacitacion
         private void informeDeCompetenciaYNecesidadDeCapacitaciónToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _Abrir(new Listados.InformedeCompetencias.Inicio());
+        }
+
+        private void todosLosPerfilesExistenteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _Abrir(new Inicio());
+        }
+
+        private void perfilDelPuestoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _Abrir(new Listados.LegajosporPerfil.Inicio());
+        }
+
+        private void resumidoPorCursoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _Abrir(new Listados.TemasRealizadosPorSector.Inicio());
+        }
+
+        private void abiertoPorPlanillaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _Abrir(new Listados.TemasPorLegajoConsolidado.Inicio());
+        }
+
+        private void temasNoRçealizadosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _Abrir(new Listados.PlanilladeTemasnoProgramados.Inicio());
+        }
+
+        private void promedioDeCalificaciónDeCapacitaciónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _Abrir(new Listados.PromediodeCalificacion.Inicio());
+        }
+
+        private void listadoDeCronogramaTentativoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _Abrir(new Listados.PlanCapacitacionAnualTentativo.Listado());
         }
     }
 }

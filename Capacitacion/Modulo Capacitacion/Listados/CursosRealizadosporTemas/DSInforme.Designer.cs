@@ -301,6 +301,8 @@ namespace Modulo_Capacitacion.Listados.CursosRealizadosporTemas {
             
             private global::System.Data.DataColumn columnPlanificada;
             
+            private global::System.Data.DataColumn columnDni;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public DSInformeDataTable() {
@@ -424,6 +426,14 @@ namespace Modulo_Capacitacion.Listados.CursosRealizadosporTemas {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DniColumn {
+                get {
+                    return this.columnDni;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -459,7 +469,7 @@ namespace Modulo_Capacitacion.Listados.CursosRealizadosporTemas {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DSInformeRow AddDSInformeRow(string NºTema, string DescTema, string NºCurso, string DescCurso, int NºLegajo, string DescLegajo, double Horas, string Planilla, string Fecha, string Observaciones, string Planificada) {
+            public DSInformeRow AddDSInformeRow(string NºTema, string DescTema, string NºCurso, string DescCurso, int NºLegajo, string DescLegajo, double Horas, string Planilla, string Fecha, string Observaciones, string Planificada, string Dni) {
                 DSInformeRow rowDSInformeRow = ((DSInformeRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         NºTema,
@@ -472,7 +482,8 @@ namespace Modulo_Capacitacion.Listados.CursosRealizadosporTemas {
                         Planilla,
                         Fecha,
                         Observaciones,
-                        Planificada};
+                        Planificada,
+                        Dni};
                 rowDSInformeRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDSInformeRow);
                 return rowDSInformeRow;
@@ -506,6 +517,7 @@ namespace Modulo_Capacitacion.Listados.CursosRealizadosporTemas {
                 this.columnFecha = base.Columns["Fecha"];
                 this.columnObservaciones = base.Columns["Observaciones"];
                 this.columnPlanificada = base.Columns["Planificada"];
+                this.columnDni = base.Columns["Dni"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -533,6 +545,8 @@ namespace Modulo_Capacitacion.Listados.CursosRealizadosporTemas {
                 base.Columns.Add(this.columnObservaciones);
                 this.columnPlanificada = new global::System.Data.DataColumn("Planificada", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPlanificada);
+                this.columnDni = new global::System.Data.DataColumn("Dni", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDni);
                 this.ExtendedProperties.Add("Generator_TablePropName", "_DSInforme");
                 this.ExtendedProperties.Add("Generator_UserTableName", "DSInforme");
             }
@@ -853,6 +867,22 @@ namespace Modulo_Capacitacion.Listados.CursosRealizadosporTemas {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Dni {
+                get {
+                    try {
+                        return ((string)(this[this.tableDSInforme.DniColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Dni\' in table \'DSInforme\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDSInforme.DniColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsNºTemaNull() {
                 return this.IsNull(this.tableDSInforme.NºTemaColumn);
             }
@@ -981,6 +1011,18 @@ namespace Modulo_Capacitacion.Listados.CursosRealizadosporTemas {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetPlanificadaNull() {
                 this[this.tableDSInforme.PlanificadaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsDniNull() {
+                return this.IsNull(this.tableDSInforme.DniColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetDniNull() {
+                this[this.tableDSInforme.DniColumn] = global::System.Convert.DBNull;
             }
         }
         

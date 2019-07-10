@@ -1,11 +1,14 @@
-﻿namespace Modulo_Capacitacion.Maestros.Temas
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Modulo_Capacitacion.Maestros.Temas
 {
     partial class AgModTema
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -388,34 +391,34 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Button BT_Salir;
-        private System.Windows.Forms.Button BT_LimpiarPant;
-        private System.Windows.Forms.Button BT_Guardar;
-        private System.Windows.Forms.TextBox TB_Descripcion;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label LFechaAviso;
-        private System.Windows.Forms.TextBox TB_Codigo;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label LBCurso;
-        private System.Windows.Forms.ComboBox CB_Donde;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox TB_Responsable;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox TB_Detalle_3;
-        private System.Windows.Forms.TextBox TB_Detalle_2;
-        private System.Windows.Forms.TextBox TB_Detalle_1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.ComboBox TB_Responsable3;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.ComboBox TB_CodResponsable3;
-        private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.ComboBox TB_Responsable2;
-        private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.ComboBox TB_CodResponsable2;
+        private Panel panel2;
+        private Panel panel3;
+        private Button BT_Salir;
+        private Button BT_LimpiarPant;
+        private Button BT_Guardar;
+        private TextBox TB_Descripcion;
+        private Label label1;
+        private Label LFechaAviso;
+        private TextBox TB_Codigo;
+        private Panel panel1;
+        private Label LBCurso;
+        private ComboBox CB_Donde;
+        private Label label5;
+        private Label label6;
+        private Label label4;
+        private TextBox TB_Responsable;
+        private Label label3;
+        private TextBox TB_Detalle_3;
+        private TextBox TB_Detalle_2;
+        private TextBox TB_Detalle_1;
+        private Label label2;
+        private Panel panel4;
+        private ComboBox TB_Responsable3;
+        private Panel panel5;
+        private ComboBox TB_CodResponsable3;
+        private Panel panel7;
+        private ComboBox TB_Responsable2;
+        private Panel panel6;
+        private ComboBox TB_CodResponsable2;
     }
 }

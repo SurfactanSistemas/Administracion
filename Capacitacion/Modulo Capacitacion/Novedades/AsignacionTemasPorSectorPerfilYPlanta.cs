@@ -8,7 +8,7 @@ namespace Modulo_Capacitacion.Novedades
 {
     public partial class AsignacionTemasPorSectorPerfilYPlanta : Form
     {
-        private int WTipoConsulta = 0;
+        private int WTipoConsulta;
         private DataTable WDatosAsignados = new DataTable();
 
         //bool Modificar = true;

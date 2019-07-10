@@ -1,11 +1,14 @@
-﻿namespace Modulo_Capacitacion.Maestros.VersionPerfiles
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Modulo_Capacitacion.Maestros.VersionPerfiles
 {
     partial class IngVersPerfil
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -1068,90 +1071,90 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label LBPerfil;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.TabControl tabControl2;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.TextBox TB_Equiv2;
-        private System.Windows.Forms.TextBox TB_Equiv1;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.CheckBox CB_DesOtros2;
-        private System.Windows.Forms.CheckBox CB_NecOtros2;
-        private System.Windows.Forms.TextBox TB_Otros2;
-        private System.Windows.Forms.CheckBox CB_DesOtros1;
-        private System.Windows.Forms.CheckBox CB_NecOtros1;
-        private System.Windows.Forms.TextBox TB_Otros1;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.CheckBox CB_DesCondFisica;
-        private System.Windows.Forms.CheckBox CB_NecCondFisica;
-        private System.Windows.Forms.TextBox TB_ObservCondFisica;
-        private System.Windows.Forms.TextBox TB_CondFisica;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.CheckBox CB_DesExp;
-        private System.Windows.Forms.CheckBox CB_NecExp;
-        private System.Windows.Forms.TextBox TB_ObservExp;
-        private System.Windows.Forms.TextBox TB_Exp;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.CheckBox CB_DesIdioma;
-        private System.Windows.Forms.CheckBox CB_NecIdioma;
-        private System.Windows.Forms.TextBox TB_ObservIdioma;
-        private System.Windows.Forms.TextBox TB_Idioma;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.CheckBox CB_DesTerc;
-        private System.Windows.Forms.CheckBox CB_NecTerc;
-        private System.Windows.Forms.TextBox TB_ObservTerciaria;
-        private System.Windows.Forms.TextBox TB_Terciaria;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.CheckBox CB_DesSec;
-        private System.Windows.Forms.CheckBox CB_NecSec;
-        private System.Windows.Forms.TextBox TB_ObservSecundaria;
-        private System.Windows.Forms.TextBox TB_Secundaria;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.CheckBox CB_DesPrim;
-        private System.Windows.Forms.CheckBox CB_NecPrim;
-        private System.Windows.Forms.TextBox TB_ObservPrimaria;
-        private System.Windows.Forms.TextBox textBox14;
-        private System.Windows.Forms.TextBox textBox13;
-        private System.Windows.Forms.TextBox textBox11;
-        private System.Windows.Forms.TextBox TB_Primaria;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.TextBox TB_Tareas3;
-        private System.Windows.Forms.TextBox TB_Tareas2;
-        private System.Windows.Forms.TextBox TB_Tareas1;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox TB_DescSector;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox TB_CodSec;
-        private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.DataGridView DGV_Temas;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DateTimePicker TB_Fecha;
-        private System.Windows.Forms.Button BT_Salir;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label LFechaAviso;
-        private System.Windows.Forms.DateTimePicker DTP_FechaVigenciaII;
-        private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.ComboBox TB_Codigo;
-        private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.ComboBox TB_DecPerfil;
-        private System.Windows.Forms.ComboBox TB_Version;
-        private System.Windows.Forms.TextBox txtVersionActual;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Panel pnlAyuda;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox txtAyuda;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.DataGridView dgvAyuda;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Button btnCerrarAyuda;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Curso;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Necesaria;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Deseable;
+        private Panel panel1;
+        private Label LBPerfil;
+        private Panel panel2;
+        private Panel panel3;
+        private TabControl tabControl2;
+        private TabPage tabPage3;
+        private TextBox TB_Equiv2;
+        private TextBox TB_Equiv1;
+        private Label label10;
+        private CheckBox CB_DesOtros2;
+        private CheckBox CB_NecOtros2;
+        private TextBox TB_Otros2;
+        private CheckBox CB_DesOtros1;
+        private CheckBox CB_NecOtros1;
+        private TextBox TB_Otros1;
+        private Label label11;
+        private CheckBox CB_DesCondFisica;
+        private CheckBox CB_NecCondFisica;
+        private TextBox TB_ObservCondFisica;
+        private TextBox TB_CondFisica;
+        private Label label12;
+        private CheckBox CB_DesExp;
+        private CheckBox CB_NecExp;
+        private TextBox TB_ObservExp;
+        private TextBox TB_Exp;
+        private Label label13;
+        private CheckBox CB_DesIdioma;
+        private CheckBox CB_NecIdioma;
+        private TextBox TB_ObservIdioma;
+        private TextBox TB_Idioma;
+        private Label label8;
+        private CheckBox CB_DesTerc;
+        private CheckBox CB_NecTerc;
+        private TextBox TB_ObservTerciaria;
+        private TextBox TB_Terciaria;
+        private Label label9;
+        private CheckBox CB_DesSec;
+        private CheckBox CB_NecSec;
+        private TextBox TB_ObservSecundaria;
+        private TextBox TB_Secundaria;
+        private Label label7;
+        private CheckBox CB_DesPrim;
+        private CheckBox CB_NecPrim;
+        private TextBox TB_ObservPrimaria;
+        private TextBox textBox14;
+        private TextBox textBox13;
+        private TextBox textBox11;
+        private TextBox TB_Primaria;
+        private TextBox textBox9;
+        private Label label6;
+        private TextBox textBox8;
+        private TextBox TB_Tareas3;
+        private TextBox TB_Tareas2;
+        private TextBox TB_Tareas1;
+        private Label label5;
+        private TextBox TB_DescSector;
+        private Label label2;
+        private TextBox TB_CodSec;
+        private TabPage tabPage4;
+        private DataGridView DGV_Temas;
+        private Label label4;
+        private DateTimePicker TB_Fecha;
+        private Button BT_Salir;
+        private Label label1;
+        private Label LFechaAviso;
+        private DateTimePicker DTP_FechaVigenciaII;
+        private Panel panel6;
+        private ComboBox TB_Codigo;
+        private Panel panel7;
+        private ComboBox TB_DecPerfil;
+        private ComboBox TB_Version;
+        private TextBox txtVersionActual;
+        private Label label3;
+        private Button button1;
+        private Panel pnlAyuda;
+        private GroupBox groupBox1;
+        private TextBox txtAyuda;
+        private Label label14;
+        private DataGridView dgvAyuda;
+        private Panel panel4;
+        private Button btnCerrarAyuda;
+        private DataGridViewTextBoxColumn Curso;
+        private DataGridViewTextBoxColumn Descripcion;
+        private DataGridViewTextBoxColumn Necesaria;
+        private DataGridViewTextBoxColumn Deseable;
     }
 }

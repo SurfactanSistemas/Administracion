@@ -1,11 +1,14 @@
-﻿namespace Modulo_Capacitacion.Novedades
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Modulo_Capacitacion.Novedades
 {
     partial class IngresoDeCursosRealizados
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -29,6 +32,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.LBPerfil = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -37,6 +41,7 @@
             this.dgvGrilla = new System.Windows.Forms.DataGridView();
             this.Legajo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DNI = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Observaciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.asignarNuevoLegajoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,14 +49,8 @@
             this.copiarConCabecerasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eliminarFilaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
-            this.btnImprimir = new System.Windows.Forms.Button();
-            this.btnLimpiar = new System.Windows.Forms.Button();
-            this.btnGuardar = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.btnAyudaCursos = new System.Windows.Forms.Button();
             this.btnAyuda = new System.Windows.Forms.Button();
-            this.btnAyudaTema = new System.Windows.Forms.Button();
             this.txtFecha = new System.Windows.Forms.MaskedTextBox();
             this.LFechaAviso = new System.Windows.Forms.Label();
             this.txtDesTema = new System.Windows.Forms.TextBox();
@@ -76,13 +75,20 @@
             this.label5 = new System.Windows.Forms.Label();
             this.pnlAyuda = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
-            this.btnCerrarAyuda = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.gbLegajos = new System.Windows.Forms.GroupBox();
             this.cmbTipoLegajos = new System.Windows.Forms.ComboBox();
             this.dgvAyuda = new System.Windows.Forms.DataGridView();
             this.label9 = new System.Windows.Forms.Label();
             this.txtAyuda = new System.Windows.Forms.TextBox();
+            this.btnCerrarAyuda = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.btnImprimir = new System.Windows.Forms.Button();
+            this.btnLimpiar = new System.Windows.Forms.Button();
+            this.btnGuardar = new System.Windows.Forms.Button();
+            this.btnAyudaCursos = new System.Windows.Forms.Button();
+            this.btnAyudaTema = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -168,6 +174,7 @@
             this.dgvGrilla.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Legajo,
             this.Nombre,
+            this.DNI,
             this.Observaciones});
             this.dgvGrilla.ContextMenuStrip = this.contextMenuStrip1;
             this.dgvGrilla.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -193,6 +200,15 @@
             this.Nombre.DataPropertyName = "Descripcion";
             this.Nombre.HeaderText = "Nombre";
             this.Nombre.Name = "Nombre";
+            // 
+            // DNI
+            // 
+            this.DNI.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.DNI.DefaultCellStyle = dataGridViewCellStyle3;
+            this.DNI.HeaderText = "DNI";
+            this.DNI.MinimumWidth = 100;
+            this.DNI.Name = "DNI";
             // 
             // Observaciones
             // 
@@ -245,6 +261,7 @@
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.SystemColors.Control;
+            this.panel5.Controls.Add(this.button1);
             this.panel5.Controls.Add(this.button2);
             this.panel5.Controls.Add(this.btnImprimir);
             this.panel5.Controls.Add(this.btnLimpiar);
@@ -255,58 +272,6 @@
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(797, 68);
             this.panel5.TabIndex = 5;
-            // 
-            // button2
-            // 
-            this.button2.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.apagar1;
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(507, 10);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(65, 49);
-            this.button2.TabIndex = 0;
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // btnImprimir
-            // 
-            this.btnImprimir.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.imprimir;
-            this.btnImprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnImprimir.FlatAppearance.BorderSize = 0;
-            this.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnImprimir.Location = new System.Drawing.Point(413, 10);
-            this.btnImprimir.Name = "btnImprimir";
-            this.btnImprimir.Size = new System.Drawing.Size(65, 49);
-            this.btnImprimir.TabIndex = 0;
-            this.btnImprimir.UseVisualStyleBackColor = true;
-            this.btnImprimir.Click += new System.EventHandler(this.btnImprimir_Click);
-            // 
-            // btnLimpiar
-            // 
-            this.btnLimpiar.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.limpiar;
-            this.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnLimpiar.FlatAppearance.BorderSize = 0;
-            this.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLimpiar.Location = new System.Drawing.Point(319, 10);
-            this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(65, 49);
-            this.btnLimpiar.TabIndex = 0;
-            this.btnLimpiar.UseVisualStyleBackColor = true;
-            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
-            // 
-            // btnGuardar
-            // 
-            this.btnGuardar.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.Aceptar_N2;
-            this.btnGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnGuardar.FlatAppearance.BorderSize = 0;
-            this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGuardar.Location = new System.Drawing.Point(225, 10);
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(65, 49);
-            this.btnGuardar.TabIndex = 0;
-            this.btnGuardar.UseVisualStyleBackColor = true;
-            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // panel4
             // 
@@ -343,19 +308,6 @@
             this.panel4.Size = new System.Drawing.Size(797, 157);
             this.panel4.TabIndex = 4;
             // 
-            // btnAyudaCursos
-            // 
-            this.btnAyudaCursos.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.Consulta_Dat_N1;
-            this.btnAyudaCursos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnAyudaCursos.FlatAppearance.BorderSize = 0;
-            this.btnAyudaCursos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAyudaCursos.Location = new System.Drawing.Point(524, 4);
-            this.btnAyudaCursos.Name = "btnAyudaCursos";
-            this.btnAyudaCursos.Size = new System.Drawing.Size(26, 30);
-            this.btnAyudaCursos.TabIndex = 55;
-            this.btnAyudaCursos.UseVisualStyleBackColor = true;
-            this.btnAyudaCursos.Click += new System.EventHandler(this.btnAyudaCursos_Click);
-            // 
             // btnAyuda
             // 
             this.btnAyuda.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
@@ -367,19 +319,6 @@
             this.btnAyuda.Text = "Asignar Legajos";
             this.btnAyuda.UseVisualStyleBackColor = true;
             this.btnAyuda.Click += new System.EventHandler(this.btnAyuda_Click);
-            // 
-            // btnAyudaTema
-            // 
-            this.btnAyudaTema.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.Consulta_Dat_N1;
-            this.btnAyudaTema.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnAyudaTema.FlatAppearance.BorderSize = 0;
-            this.btnAyudaTema.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAyudaTema.Location = new System.Drawing.Point(200, 6);
-            this.btnAyudaTema.Name = "btnAyudaTema";
-            this.btnAyudaTema.Size = new System.Drawing.Size(26, 30);
-            this.btnAyudaTema.TabIndex = 54;
-            this.btnAyudaTema.UseVisualStyleBackColor = true;
-            this.btnAyudaTema.Click += new System.EventHandler(this.btnAyudaTema_Click);
             // 
             // txtFecha
             // 
@@ -620,7 +559,7 @@
             this.pnlAyuda.Controls.Add(this.groupBox1);
             this.pnlAyuda.Location = new System.Drawing.Point(124, 107);
             this.pnlAyuda.Name = "pnlAyuda";
-            this.pnlAyuda.Size = new System.Drawing.Size(555, 375);
+            this.pnlAyuda.Size = new System.Drawing.Size(556, 373);
             this.pnlAyuda.TabIndex = 9;
             this.pnlAyuda.Visible = false;
             // 
@@ -629,23 +568,10 @@
             this.panel7.BackColor = System.Drawing.SystemColors.Control;
             this.panel7.Controls.Add(this.btnCerrarAyuda);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel7.Location = new System.Drawing.Point(0, 326);
+            this.panel7.Location = new System.Drawing.Point(0, 324);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(555, 49);
+            this.panel7.Size = new System.Drawing.Size(556, 49);
             this.panel7.TabIndex = 1;
-            // 
-            // btnCerrarAyuda
-            // 
-            this.btnCerrarAyuda.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.apagar1;
-            this.btnCerrarAyuda.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnCerrarAyuda.FlatAppearance.BorderSize = 0;
-            this.btnCerrarAyuda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCerrarAyuda.Location = new System.Drawing.Point(253, 6);
-            this.btnCerrarAyuda.Name = "btnCerrarAyuda";
-            this.btnCerrarAyuda.Size = new System.Drawing.Size(50, 37);
-            this.btnCerrarAyuda.TabIndex = 1;
-            this.btnCerrarAyuda.UseVisualStyleBackColor = true;
-            this.btnCerrarAyuda.Click += new System.EventHandler(this.btnCerrarAyuda_Click);
             // 
             // groupBox1
             // 
@@ -720,6 +646,108 @@
             this.txtAyuda.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtAyuda_KeyDown);
             this.txtAyuda.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtAyuda_KeyUp);
             // 
+            // btnCerrarAyuda
+            // 
+            this.btnCerrarAyuda.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.apagar1;
+            this.btnCerrarAyuda.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnCerrarAyuda.FlatAppearance.BorderSize = 0;
+            this.btnCerrarAyuda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCerrarAyuda.Location = new System.Drawing.Point(253, 6);
+            this.btnCerrarAyuda.Name = "btnCerrarAyuda";
+            this.btnCerrarAyuda.Size = new System.Drawing.Size(50, 37);
+            this.btnCerrarAyuda.TabIndex = 1;
+            this.btnCerrarAyuda.UseVisualStyleBackColor = true;
+            this.btnCerrarAyuda.Click += new System.EventHandler(this.btnCerrarAyuda_Click);
+            // 
+            // button2
+            // 
+            this.button2.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.apagar1;
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Location = new System.Drawing.Point(444, 10);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(65, 49);
+            this.button2.TabIndex = 0;
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // btnImprimir
+            // 
+            this.btnImprimir.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.imprimir;
+            this.btnImprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnImprimir.FlatAppearance.BorderSize = 0;
+            this.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnImprimir.Location = new System.Drawing.Point(350, 10);
+            this.btnImprimir.Name = "btnImprimir";
+            this.btnImprimir.Size = new System.Drawing.Size(65, 49);
+            this.btnImprimir.TabIndex = 0;
+            this.btnImprimir.UseVisualStyleBackColor = true;
+            this.btnImprimir.Click += new System.EventHandler(this.btnImprimir_Click);
+            // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.limpiar;
+            this.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnLimpiar.FlatAppearance.BorderSize = 0;
+            this.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLimpiar.Location = new System.Drawing.Point(256, 10);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(65, 49);
+            this.btnLimpiar.TabIndex = 0;
+            this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            // 
+            // btnGuardar
+            // 
+            this.btnGuardar.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.Aceptar_N2;
+            this.btnGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnGuardar.FlatAppearance.BorderSize = 0;
+            this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGuardar.Location = new System.Drawing.Point(162, 10);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(65, 49);
+            this.btnGuardar.TabIndex = 0;
+            this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
+            // 
+            // btnAyudaCursos
+            // 
+            this.btnAyudaCursos.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.Consulta_Dat_N1;
+            this.btnAyudaCursos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnAyudaCursos.FlatAppearance.BorderSize = 0;
+            this.btnAyudaCursos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAyudaCursos.Location = new System.Drawing.Point(524, 4);
+            this.btnAyudaCursos.Name = "btnAyudaCursos";
+            this.btnAyudaCursos.Size = new System.Drawing.Size(26, 30);
+            this.btnAyudaCursos.TabIndex = 55;
+            this.btnAyudaCursos.UseVisualStyleBackColor = true;
+            this.btnAyudaCursos.Click += new System.EventHandler(this.btnAyudaCursos_Click);
+            // 
+            // btnAyudaTema
+            // 
+            this.btnAyudaTema.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.Consulta_Dat_N1;
+            this.btnAyudaTema.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnAyudaTema.FlatAppearance.BorderSize = 0;
+            this.btnAyudaTema.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAyudaTema.Location = new System.Drawing.Point(200, 6);
+            this.btnAyudaTema.Name = "btnAyudaTema";
+            this.btnAyudaTema.Size = new System.Drawing.Size(26, 30);
+            this.btnAyudaTema.TabIndex = 54;
+            this.btnAyudaTema.UseVisualStyleBackColor = true;
+            this.btnAyudaTema.Click += new System.EventHandler(this.btnAyudaTema_Click);
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(583, 16);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(174, 36);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "CARGAR ARCHIVOS RELACIONADOS";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // IngresoDeCursosRealizados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -753,59 +781,61 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label LBPerfil;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.TextBox txtTemas;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label LFechaAviso;
-        private System.Windows.Forms.TextBox txtCodigo;
-        private System.Windows.Forms.TextBox txtInstructor;
-        private System.Windows.Forms.DataGridView dgvGrilla;
-        private System.Windows.Forms.TextBox txtDesTema;
-        private System.Windows.Forms.TextBox txtCurso;
-        private System.Windows.Forms.ComboBox cmbTipoProgramacion;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ComboBox cmbTipo;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox txtHoras;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtDesCurso;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtTema;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtActividad;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.MaskedTextBox txtFecha;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button btnLimpiar;
-        private System.Windows.Forms.Button btnGuardar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Legajo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Observaciones;
-        private System.Windows.Forms.Panel pnlAyuda;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DataGridView dgvAyuda;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox txtAyuda;
-        private System.Windows.Forms.Button btnAyuda;
-        private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.Button btnCerrarAyuda;
-        private System.Windows.Forms.Button btnAyudaTema;
-        private System.Windows.Forms.Button btnAyudaCursos;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.GroupBox gbLegajos;
-        private System.Windows.Forms.ComboBox cmbTipoLegajos;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem copiarToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem copiarConCabecerasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem eliminarFilaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem asignarNuevoLegajoToolStripMenuItem;
-        private System.Windows.Forms.Button btnImprimir;
+        private Panel panel1;
+        private Label LBPerfil;
+        private Panel panel2;
+        private Panel panel3;
+        private TextBox txtTemas;
+        private Label label1;
+        private Label LFechaAviso;
+        private TextBox txtCodigo;
+        private TextBox txtInstructor;
+        private DataGridView dgvGrilla;
+        private TextBox txtDesTema;
+        private TextBox txtCurso;
+        private ComboBox cmbTipoProgramacion;
+        private Label label8;
+        private ComboBox cmbTipo;
+        private Label label7;
+        private TextBox txtHoras;
+        private Label label6;
+        private TextBox txtDesCurso;
+        private Label label5;
+        private TextBox txtTema;
+        private Label label4;
+        private TextBox txtActividad;
+        private Label label3;
+        private Label label2;
+        private MaskedTextBox txtFecha;
+        private TableLayoutPanel tableLayoutPanel1;
+        private Panel panel4;
+        private Panel panel5;
+        private Button button2;
+        private Button btnLimpiar;
+        private Button btnGuardar;
+        private Panel pnlAyuda;
+        private GroupBox groupBox1;
+        private DataGridView dgvAyuda;
+        private Label label9;
+        private TextBox txtAyuda;
+        private Button btnAyuda;
+        private Panel panel7;
+        private Button btnCerrarAyuda;
+        private Button btnAyudaTema;
+        private Button btnAyudaCursos;
+        private Label label10;
+        private GroupBox gbLegajos;
+        private ComboBox cmbTipoLegajos;
+        private ContextMenuStrip contextMenuStrip1;
+        private ToolStripMenuItem copiarToolStripMenuItem;
+        private ToolStripMenuItem copiarConCabecerasToolStripMenuItem;
+        private ToolStripMenuItem eliminarFilaToolStripMenuItem;
+        private ToolStripMenuItem asignarNuevoLegajoToolStripMenuItem;
+        private Button btnImprimir;
+        private DataGridViewTextBoxColumn Legajo;
+        private DataGridViewTextBoxColumn Nombre;
+        private DataGridViewTextBoxColumn DNI;
+        private DataGridViewTextBoxColumn Observaciones;
+        private Button button1;
     }
 }

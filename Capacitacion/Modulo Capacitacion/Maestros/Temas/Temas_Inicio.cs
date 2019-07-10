@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Windows.Forms;
+using Modulo_Capacitacion.Listados.Temas;
 using Negocio;
 
 namespace Modulo_Capacitacion.Maestros.Temas
@@ -98,7 +99,7 @@ namespace Modulo_Capacitacion.Maestros.Temas
 
         private void btnImprimir_Click(object sender, EventArgs e)
         {
-            Listados.Temas.Inicio frm = new Listados.Temas.Inicio();
+            Inicio frm = new Inicio();
             frm.ShowDialog();
         }
 

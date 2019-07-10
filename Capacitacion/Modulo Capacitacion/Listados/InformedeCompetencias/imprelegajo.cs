@@ -8,14 +8,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
+using System.ComponentModel;
+using System.Drawing;
+using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.ReportSource;
+using CrystalDecisions.Shared;
+
 namespace Modulo_Capacitacion.Listados.InformedeCompetencias {
-    using System;
-    using System.ComponentModel;
-    using CrystalDecisions.Shared;
-    using CrystalDecisions.ReportSource;
-    using CrystalDecisions.CrystalReports.Engine;
-    
-    
     public class imprelegajo : ReportClass {
         
         public imprelegajo() {
@@ -49,70 +49,70 @@ namespace Modulo_Capacitacion.Listados.InformedeCompetencias {
         }
         
         [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section ReportHeaderSection1 {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public Section ReportHeaderSection1 {
             get {
                 return this.ReportDefinition.Sections[0];
             }
         }
         
         [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section PageHeaderSection1 {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public Section PageHeaderSection1 {
             get {
                 return this.ReportDefinition.Sections[1];
             }
         }
         
         [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupHeaderSection1 {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public Section GroupHeaderSection1 {
             get {
                 return this.ReportDefinition.Sections[2];
             }
         }
         
         [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section DetailSection1 {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public Section DetailSection1 {
             get {
                 return this.ReportDefinition.Sections[3];
             }
         }
         
         [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupFooterSection1 {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public Section GroupFooterSection1 {
             get {
                 return this.ReportDefinition.Sections[4];
             }
         }
         
         [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section ReportFooterSection1 {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public Section ReportFooterSection1 {
             get {
                 return this.ReportDefinition.Sections[5];
             }
         }
         
         [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section PageFooterSection1 {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public Section PageFooterSection1 {
             get {
                 return this.ReportDefinition.Sections[6];
             }
         }
     }
     
-    [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
+    [ToolboxBitmap(typeof(ExportOptions), "report.bmp")]
     public class Cachedimprelegajo : Component, ICachedReport {
         
         public Cachedimprelegajo() {
         }
         
         [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public virtual bool IsCacheable {
             get {
                 return true;
@@ -123,7 +123,7 @@ namespace Modulo_Capacitacion.Listados.InformedeCompetencias {
         }
         
         [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public virtual bool ShareDBLogonInfo {
             get {
                 return false;
@@ -134,8 +134,8 @@ namespace Modulo_Capacitacion.Listados.InformedeCompetencias {
         }
         
         [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public virtual System.TimeSpan CacheTimeOut {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public virtual TimeSpan CacheTimeOut {
             get {
                 return CachedReportConstants.DEFAULT_TIMEOUT;
             }
@@ -144,7 +144,7 @@ namespace Modulo_Capacitacion.Listados.InformedeCompetencias {
             }
         }
         
-        public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
+        public virtual ReportDocument CreateReport() {
             imprelegajo rpt = new imprelegajo();
             rpt.Site = this.Site;
             return rpt;

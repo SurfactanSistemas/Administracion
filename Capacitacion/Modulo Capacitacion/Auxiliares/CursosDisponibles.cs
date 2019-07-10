@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
+using Modulo_Capacitacion.Novedades;
 
 namespace Modulo_Capacitacion.Auxiliares
 {
@@ -20,8 +16,8 @@ namespace Modulo_Capacitacion.Auxiliares
         {
             InitializeComponent();
 
-            this.WRowIndex = RowIndex;
-            this.ZTema = WTema;
+            WRowIndex = RowIndex;
+            ZTema = WTema;
             CargarCursos(WTema);
 
         }
@@ -73,7 +69,7 @@ namespace Modulo_Capacitacion.Auxiliares
 
         private void dgvCursos_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            Novedades.IngrePlanificacionAnual WOwner = (Novedades.IngrePlanificacionAnual) this.Owner;
+            IngrePlanificacionAnual WOwner = (IngrePlanificacionAnual) Owner;
 
             if (WOwner == null) return;
 
@@ -83,7 +79,7 @@ namespace Modulo_Capacitacion.Auxiliares
                 var WDesCurso = dgvCursos.CurrentRow.Cells["Descripcion"].Value ?? "0";
                 var WHoras = dgvCursos.CurrentRow.Cells["Horas"].Value ?? "0";
 
-                if (WOwner.AsignarCurso(this.ZTema, WCurso, WDesCurso, WHoras, WRowIndex))
+                if (WOwner.AsignarCurso(ZTema, WCurso, WDesCurso, WHoras, WRowIndex))
                 {
                     Close();
                 }

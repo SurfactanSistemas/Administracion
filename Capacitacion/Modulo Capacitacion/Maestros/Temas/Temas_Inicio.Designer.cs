@@ -1,11 +1,14 @@
-﻿namespace Modulo_Capacitacion.Maestros.Temas
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Modulo_Capacitacion.Maestros.Temas
 {
     partial class Temas_Inicio
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -446,35 +449,35 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel P_Verde;
-        private System.Windows.Forms.Panel P_Filtrado;
-        private System.Windows.Forms.TextBox TBFiltro;
-        private System.Windows.Forms.DataGridView DGV_Temas;
-        private System.Windows.Forms.Button BTAgregarTema;
-        private System.Windows.Forms.Button Bt_Fin;
-        private System.Windows.Forms.Button BT_Eliminar;
-        private System.Windows.Forms.Button BTModifTema;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Codigo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TemaI;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TemaII;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TemaIII;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Responsable;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Horas;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Tipo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ResponsableI;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ResponsableII;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ResponsableIV;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button btnImprimir;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtCodigo;
-        private System.Windows.Forms.Button button1;
+        private Panel panel1;
+        private Label label2;
+        private Label label1;
+        private Panel P_Verde;
+        private Panel P_Filtrado;
+        private TextBox TBFiltro;
+        private DataGridView DGV_Temas;
+        private Button BTAgregarTema;
+        private Button Bt_Fin;
+        private Button BT_Eliminar;
+        private Button BTModifTema;
+        private TableLayoutPanel tableLayoutPanel1;
+        private TableLayoutPanel tableLayoutPanel2;
+        private Panel panel2;
+        private DataGridViewTextBoxColumn Codigo;
+        private DataGridViewTextBoxColumn Descripcion;
+        private DataGridViewTextBoxColumn TemaI;
+        private DataGridViewTextBoxColumn TemaII;
+        private DataGridViewTextBoxColumn TemaIII;
+        private DataGridViewTextBoxColumn Responsable;
+        private DataGridViewTextBoxColumn Horas;
+        private DataGridViewTextBoxColumn Tipo;
+        private DataGridViewTextBoxColumn ResponsableI;
+        private DataGridViewTextBoxColumn ResponsableII;
+        private DataGridViewTextBoxColumn ResponsableIV;
+        private Label label3;
+        private Button btnImprimir;
+        private Label label4;
+        private TextBox txtCodigo;
+        private Button button1;
     }
 }

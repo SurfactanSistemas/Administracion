@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using Modulo_Capacitacion.Listados;
 using Modulo_Capacitacion.Listados.AvisoCronograma;
 using Modulo_Capacitacion.Listados.CronogramaCursos;
+using Modulo_Capacitacion.Listados.InformeHorasRealizadasYProgramadas;
 using Negocio;
 
 namespace Modulo_Capacitacion.Novedades
@@ -284,7 +285,7 @@ namespace Modulo_Capacitacion.Novedades
             // Extraigo de la grilla, aquellos cursos que tienen informado que se realizan.
 
             WDirecciones = "";
-            List<string> XDirecciones = new List<string>{};
+            List<string> XDirecciones = new List<string>();
 
             foreach (DataGridViewRow row in DGV_Cronograma.Rows)
             {
@@ -429,12 +430,14 @@ namespace Modulo_Capacitacion.Novedades
 
         private void button1_Click(object sender, EventArgs e)
         {
-            _ImprimirReporteCronograma(int.Parse(lblIdRow.Text), 0);
+            int Curso = int.Parse(DGV_Cronograma.Rows[int.Parse(lblIdRow.Text)].Cells["Curso"].Value.ToString());
+            Listados.InformeHorasRealizadasYProgramadas.Inicio frm = new Inicio(TB_Año.Text, Curso);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            _ImprimirReporteCronograma(int.Parse(lblIdRow.Text), 1);
+            int Curso = int.Parse(DGV_Cronograma.Rows[int.Parse(lblIdRow.Text)].Cells["Curso"].Value.ToString());
+            Listados.InformeHorasRealizadasYProgramadas.Inicio frm = new Inicio(TB_Año.Text, Curso, true);
         }
     }
 }

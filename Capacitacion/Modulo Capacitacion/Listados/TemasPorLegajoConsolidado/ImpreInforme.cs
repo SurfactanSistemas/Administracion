@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Windows.Forms;
+using CrystalDecisions.CrystalReports.Engine;
 
 namespace Modulo_Capacitacion.Listados.TemasPorLegajoConsolidado
 {
@@ -8,17 +9,20 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajoConsolidado
     {
         private DataTable dtInforme;
         private string Tipo;
+        private ReportDocument rpt;
 
         public ImpreInforme()
         {
             InitializeComponent();
         }
 
-        public ImpreInforme(DataTable dtInforme, string Tipo)
+        public ImpreInforme(DataTable dtInforme, string Tipo, ReportDocument rpt)
         {
             // TODO: Complete member initialization
             this.dtInforme = dtInforme;
             this.Tipo = Tipo;
+            this.rpt = rpt;
+
             InitializeComponent();
         }
 
@@ -43,7 +47,8 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajoConsolidado
                     dr[8].ToString(), 
                     dr[9].ToString(), 
                     dr[10].ToString(), 
-                    dr[11].ToString()
+                    dr[11].ToString(),
+                    dr[12].ToString()
                 );
             }
 
@@ -53,7 +58,7 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajoConsolidado
                 CRVInforme.Visible = true;
 
                 //Instancio el ReportImpre creado
-                Reporte RImpre = new Reporte();
+                ReportDocument RImpre = this.rpt;
                 //ReporteConsolidado RImpre = new ReporteConsolidado();
                 //RepoteCons RImpre = new RepoteCons();
 
@@ -66,7 +71,7 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajoConsolidado
             else
             {
                 //Instancio el ReportImpre creado
-                Reporte RImpre = new Reporte();
+                ReportDocument RImpre = this.rpt;
 
                 //Cargo el reportImpre con el dataset DS
                 RImpre.SetDataSource(Ds);

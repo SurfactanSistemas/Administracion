@@ -38,6 +38,7 @@ Partial Class IngresoRemitoVario
         Me.btnDireccionesEntrega = New System.Windows.Forms.Button()
         Me.txtCuit = New System.Windows.Forms.MaskedTextBox()
         Me.txtDireccion = New System.Windows.Forms.TextBox()
+        Me.txtCliente = New System.Windows.Forms.TextBox()
         Me.txtDesCliente = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
@@ -52,12 +53,13 @@ Partial Class IngresoRemitoVario
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.ckBloquear = New System.Windows.Forms.CheckBox()
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.btnConsultas = New System.Windows.Forms.Button()
         Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.btnAceptar = New System.Windows.Forms.Button()
-        Me.ckBloquear = New System.Windows.Forms.CheckBox()
-        Me.txtCliente = New System.Windows.Forms.TextBox()
+        Me.rbClienteSurfactan = New System.Windows.Forms.RadioButton()
+        Me.rbNoCliente = New System.Windows.Forms.RadioButton()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutMenu.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -173,6 +175,8 @@ Partial Class IngresoRemitoVario
         'Panel3
         '
         Me.Panel3.BackColor = System.Drawing.SystemColors.Control
+        Me.Panel3.Controls.Add(Me.rbNoCliente)
+        Me.Panel3.Controls.Add(Me.rbClienteSurfactan)
         Me.Panel3.Controls.Add(Me.Label12)
         Me.Panel3.Controls.Add(Me.GroupBox1)
         Me.Panel3.Controls.Add(Me.txtRemito)
@@ -222,6 +226,7 @@ Partial Class IngresoRemitoVario
         '
         'txtDireccionEntrega
         '
+        Me.txtDireccionEntrega.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtDireccionEntrega.Location = New System.Drawing.Point(267, 79)
         Me.txtDireccionEntrega.MaxLength = 50
         Me.txtDireccionEntrega.Name = "txtDireccionEntrega"
@@ -230,6 +235,7 @@ Partial Class IngresoRemitoVario
         '
         'txtLocalidad
         '
+        Me.txtLocalidad.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtLocalidad.Location = New System.Drawing.Point(374, 49)
         Me.txtLocalidad.MaxLength = 50
         Me.txtLocalidad.Name = "txtLocalidad"
@@ -262,14 +268,28 @@ Partial Class IngresoRemitoVario
         '
         'txtDireccion
         '
+        Me.txtDireccion.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtDireccion.Location = New System.Drawing.Point(64, 49)
         Me.txtDireccion.MaxLength = 50
         Me.txtDireccion.Name = "txtDireccion"
         Me.txtDireccion.Size = New System.Drawing.Size(245, 20)
         Me.txtDireccion.TabIndex = 1
         '
+        'txtCliente
+        '
+        Me.txtCliente.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtCliente.Location = New System.Drawing.Point(64, 19)
+        Me.txtCliente.MaxLength = 6
+        Me.txtCliente.Name = "txtCliente"
+        Me.txtCliente.Size = New System.Drawing.Size(56, 20)
+        Me.txtCliente.TabIndex = 1
+        '
         'txtDesCliente
         '
+        Me.txtDesCliente.BackColor = System.Drawing.Color.Cyan
+        Me.txtDesCliente.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtDesCliente.Enabled = False
+        Me.txtDesCliente.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtDesCliente.Location = New System.Drawing.Point(204, 19)
         Me.txtDesCliente.MaxLength = 50
         Me.txtDesCliente.Name = "txtDesCliente"
@@ -353,7 +373,7 @@ Partial Class IngresoRemitoVario
         '
         'txtFecha
         '
-        Me.txtFecha.Location = New System.Drawing.Point(93, 13)
+        Me.txtFecha.Location = New System.Drawing.Point(93, 15)
         Me.txtFecha.Mask = "00/00/0000"
         Me.txtFecha.Name = "txtFecha"
         Me.txtFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -363,6 +383,7 @@ Partial Class IngresoRemitoVario
         '
         'txtObservaciones
         '
+        Me.txtObservaciones.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtObservaciones.Location = New System.Drawing.Point(140, 171)
         Me.txtObservaciones.MaxLength = 250
         Me.txtObservaciones.Multiline = True
@@ -386,7 +407,7 @@ Partial Class IngresoRemitoVario
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.Label4.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label4.Location = New System.Drawing.Point(43, 14)
+        Me.Label4.Location = New System.Drawing.Point(43, 16)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(44, 18)
         Me.Label4.TabIndex = 0
@@ -417,6 +438,17 @@ Partial Class IngresoRemitoVario
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Size = New System.Drawing.Size(669, 70)
         Me.Panel5.TabIndex = 1
+        '
+        'ckBloquear
+        '
+        Me.ckBloquear.AutoSize = True
+        Me.ckBloquear.Location = New System.Drawing.Point(596, 28)
+        Me.ckBloquear.Name = "ckBloquear"
+        Me.ckBloquear.Size = New System.Drawing.Size(81, 17)
+        Me.ckBloquear.TabIndex = 1
+        Me.ckBloquear.Text = "CheckBox1"
+        Me.ckBloquear.UseVisualStyleBackColor = True
+        Me.ckBloquear.Visible = False
         '
         'btnCerrar
         '
@@ -454,24 +486,27 @@ Partial Class IngresoRemitoVario
         Me.btnAceptar.Text = "Aceptar"
         Me.btnAceptar.UseVisualStyleBackColor = True
         '
-        'ckBloquear
+        'rbClienteSurfactan
         '
-        Me.ckBloquear.AutoSize = True
-        Me.ckBloquear.Location = New System.Drawing.Point(596, 28)
-        Me.ckBloquear.Name = "ckBloquear"
-        Me.ckBloquear.Size = New System.Drawing.Size(81, 17)
-        Me.ckBloquear.TabIndex = 1
-        Me.ckBloquear.Text = "CheckBox1"
-        Me.ckBloquear.UseVisualStyleBackColor = True
-        Me.ckBloquear.Visible = False
+        Me.rbClienteSurfactan.AutoSize = True
+        Me.rbClienteSurfactan.Checked = True
+        Me.rbClienteSurfactan.Location = New System.Drawing.Point(199, 17)
+        Me.rbClienteSurfactan.Name = "rbClienteSurfactan"
+        Me.rbClienteSurfactan.Size = New System.Drawing.Size(138, 17)
+        Me.rbClienteSurfactan.TabIndex = 7
+        Me.rbClienteSurfactan.TabStop = True
+        Me.rbClienteSurfactan.Text = "CLIENTE SURFACTAN"
+        Me.rbClienteSurfactan.UseVisualStyleBackColor = True
         '
-        'txtCliente
+        'rbNoCliente
         '
-        Me.txtCliente.Location = New System.Drawing.Point(64, 19)
-        Me.txtCliente.MaxLength = 6
-        Me.txtCliente.Name = "txtCliente"
-        Me.txtCliente.Size = New System.Drawing.Size(56, 20)
-        Me.txtCliente.TabIndex = 1
+        Me.rbNoCliente.AutoSize = True
+        Me.rbNoCliente.Location = New System.Drawing.Point(360, 17)
+        Me.rbNoCliente.Name = "rbNoCliente"
+        Me.rbNoCliente.Size = New System.Drawing.Size(89, 17)
+        Me.rbNoCliente.TabIndex = 7
+        Me.rbNoCliente.Text = "NO CLIENTE"
+        Me.rbNoCliente.UseVisualStyleBackColor = True
         '
         'IngresoRemitoVario
         '
@@ -535,4 +570,6 @@ Partial Class IngresoRemitoVario
     Friend WithEvents btnConsultas As System.Windows.Forms.Button
     Friend WithEvents ckBloquear As System.Windows.Forms.CheckBox
     Friend WithEvents txtCliente As System.Windows.Forms.TextBox
+    Friend WithEvents rbNoCliente As System.Windows.Forms.RadioButton
+    Friend WithEvents rbClienteSurfactan As System.Windows.Forms.RadioButton
 End Class

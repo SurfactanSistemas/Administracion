@@ -2,9 +2,11 @@
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using EvaluacionProvMPFarma;
 using Eval_Proveedores.IngCamiones;
 using Eval_Proveedores.IngChoferes;
 using Eval_Proveedores.Listados.EvaSemActProve;
+using Eval_Proveedores.Listados.ListadoEvaluacionProvMPFarma;
 using Eval_Proveedores.Novedades;
 
 namespace Eval_Proveedores
@@ -114,6 +116,31 @@ namespace Eval_Proveedores
         private void salirDelSistemaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void evaluaciónDeProveedoresDeMateriaPrimaDeFarmaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EvaluacionProveedorMateriaPrima frm = new EvaluacionProveedorMateriaPrima("", true);
+
+            frm.Show(this);
+        }
+
+        private void actDeEvaluaciónSemestralDeProveedoresDeMateriaPrimaParaFarmaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ActualizacionSemestralProvMPFarma frm = new ActualizacionSemestralProvMPFarma();
+            frm.Show(this);
+        }
+
+        private void Inicio_Load(object sender, EventArgs e)
+        {
+            ConsultasVarias.Clases.Conexion.EmpresaDeTrabajo = "SurfactanSA";
+        }
+
+        private void listadoDeEvaluaciónDeProveedoresDeMateriaPrimaParaFarmaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ListadoEvaluacionesProveedoreMPFarma frm = new ListadoEvaluacionesProveedoreMPFarma();
+
+            frm.Show(this);
         }
     }
 }

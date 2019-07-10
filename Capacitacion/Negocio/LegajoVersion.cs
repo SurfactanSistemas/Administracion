@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Data;
 using ClassConexion;
 
 namespace Negocio
@@ -43,7 +42,7 @@ namespace Negocio
 
 
 
-        public System.Data.DataTable ListarTodos()
+        public DataTable ListarTodos()
         {
             throw new NotImplementedException();
         }
@@ -59,14 +58,14 @@ namespace Negocio
 
             int renglon = 1;
 
-            foreach (var t in this.Temas)
+            foreach (var t in Temas)
             {
-                var clave1 = this.Codigo.ToString().PadLeft(6, '0');
-                var clave2 = this.Version.ToString().PadLeft(4, '0');
+                var clave1 = Codigo.ToString().PadLeft(6, '0');
+                var clave2 = Version.PadLeft(4, '0');
                 var clave3 = renglon.ToString().PadLeft(2, '0');
 
                 var claper1 = Perfil.Codigo.ToString().PadLeft(6, '0');
-                var claper2 = "1".ToString().PadLeft(2, '0');
+                var claper2 = "1".PadLeft(2, '0');
 
                 string nece = t.Necesaria == 1 ? "X" : "";
                 string dese = t.Deseable == 1 ? "X" : "";
@@ -135,7 +134,7 @@ namespace Negocio
             string consulta = "select lv.*, l.FIngreso as FechaIngreso from legajoversion lv INNER JOIN Legajo l ON l.Codigo = lv.Codigo And l.Renglon = 1 where lv.codigo = " + cod + " and lv.version = " + ver;
             //" and convert(datetime,FIngreso,103) >= convert(datetime,'" + fecha + "',103)";
 
-            System.Data.DataTable DT = repo.BuscarUno(consulta);
+            DataTable DT = repo.BuscarUno(consulta);
 
             LegajoVersion obj = new LegajoVersion();
 
@@ -192,7 +191,7 @@ namespace Negocio
 
                 obj.Temas = new List<Tema>();
                 int renglon = 1;
-                foreach (System.Data.DataRow item in DT.Rows)
+                foreach (DataRow item in DT.Rows)
                 {
                     Tema T = new Tema();
                     T.Codigo = int.Parse(item["Curso"].ToString());

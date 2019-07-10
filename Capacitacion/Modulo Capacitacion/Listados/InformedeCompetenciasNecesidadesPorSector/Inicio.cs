@@ -32,7 +32,7 @@ namespace Modulo_Capacitacion.Listados.InformedeCompetenciasNecesidadesPorSector
             tabla.Columns.Add("Codigo", typeof(int));
             tabla.Columns.Add("Descripcion", typeof(string));
 
-            tabla.Rows.Add(new object[]{0, "Todos"});
+            tabla.Rows.Add(0, "Todos");
 
             using (SqlConnection conn = new SqlConnection())
             {

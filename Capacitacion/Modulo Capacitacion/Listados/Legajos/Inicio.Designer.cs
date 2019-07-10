@@ -1,11 +1,14 @@
-﻿namespace Modulo_Capacitacion.Listados.Legajos
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Modulo_Capacitacion.Listados.Legajos
 {
     partial class Inicio
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -40,6 +43,7 @@
             this.BT_Imprimir = new System.Windows.Forms.Button();
             this.BT_Salir = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -77,6 +81,7 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.Control;
+            this.panel3.Controls.Add(this.checkBox1);
             this.panel3.Controls.Add(this.TB_Hasta);
             this.panel3.Controls.Add(this.TB_Desde);
             this.panel3.Controls.Add(this.label2);
@@ -91,7 +96,7 @@
             // 
             // TB_Hasta
             // 
-            this.TB_Hasta.Location = new System.Drawing.Point(310, 45);
+            this.TB_Hasta.Location = new System.Drawing.Point(316, 35);
             this.TB_Hasta.MaxLength = 4;
             this.TB_Hasta.Name = "TB_Hasta";
             this.TB_Hasta.Size = new System.Drawing.Size(72, 20);
@@ -100,7 +105,7 @@
             // 
             // TB_Desde
             // 
-            this.TB_Desde.Location = new System.Drawing.Point(124, 45);
+            this.TB_Desde.Location = new System.Drawing.Point(130, 35);
             this.TB_Desde.MaxLength = 4;
             this.TB_Desde.Name = "TB_Desde";
             this.TB_Desde.Size = new System.Drawing.Size(72, 20);
@@ -111,7 +116,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(222, 46);
+            this.label2.Location = new System.Drawing.Point(228, 36);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(89, 18);
             this.label2.TabIndex = 83;
@@ -160,11 +165,23 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(31, 46);
+            this.label1.Location = new System.Drawing.Point(37, 36);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(94, 18);
             this.label1.TabIndex = 1;
             this.label1.Text = "Desde Legajo:";
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Checked = true;
+            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox1.Location = new System.Drawing.Point(278, 72);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(110, 17);
+            this.checkBox1.TabIndex = 86;
+            this.checkBox1.Text = "Excluir Egresados";
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // Inicio
             // 
@@ -186,16 +203,17 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label LBChofer;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.TextBox TB_Hasta;
-        private System.Windows.Forms.TextBox TB_Desde;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button BT_Pantalla;
-        private System.Windows.Forms.Button BT_Imprimir;
-        private System.Windows.Forms.Button BT_Salir;
-        private System.Windows.Forms.Label label1;
+        private Panel panel1;
+        private Label LBChofer;
+        private Panel panel2;
+        private Panel panel3;
+        private TextBox TB_Hasta;
+        private TextBox TB_Desde;
+        private Label label2;
+        private Button BT_Pantalla;
+        private Button BT_Imprimir;
+        private Button BT_Salir;
+        private Label label1;
+        private CheckBox checkBox1;
     }
 }

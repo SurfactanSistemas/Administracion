@@ -1,11 +1,14 @@
-﻿namespace Modulo_Capacitacion.Maestros.Sectores
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Modulo_Capacitacion.Maestros.Sectores
 {
     partial class AgModSector
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -188,16 +191,16 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label LBChofer;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Button BT_Salir;
-        private System.Windows.Forms.Button BT_LimpiarPant;
-        private System.Windows.Forms.Button BT_Guardar;
-        private System.Windows.Forms.TextBox TB_Nombre;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label LFechaAviso;
-        private System.Windows.Forms.TextBox TB_Codigo;
+        private Panel panel1;
+        private Label LBChofer;
+        private Panel panel2;
+        private Panel panel3;
+        private Button BT_Salir;
+        private Button BT_LimpiarPant;
+        private Button BT_Guardar;
+        private TextBox TB_Nombre;
+        private Label label1;
+        private Label LFechaAviso;
+        private TextBox TB_Codigo;
     }
 }

@@ -26,6 +26,15 @@ namespace Modulo_Capacitacion.Listados.HorasCursadasPorLegajo
 
         private VistaPrevia _PrepararReporte()
         {
+            string hastaFecha = "31/05/" + (int.Parse(TB_AñoDesde.Text) + 1);
+            string desdeFecha = "01/06/" + TB_AñoDesde.Text;
+
+            Helper.PurgarOrdFechaCursadas();
+            Helper._ReprocesoCursosProgramadosYNoProgramados(desdeFecha, hastaFecha, 1);
+
+            string WDesdeOrd = Helper.OrdenarFecha(desdeFecha);
+            string WHastaOrd = Helper.OrdenarFecha(hastaFecha);
+
             DataTable WCursadas = new DataTable();
 
             progressBar1.Value = 0;
@@ -39,12 +48,11 @@ namespace Modulo_Capacitacion.Listados.HorasCursadasPorLegajo
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = conn;
-                    cmd.CommandText = "UPDATE Legajo SET Horas = 0, HorasTotal = 0, Puntaje = 0";
+                    cmd.CommandText = "UPDATE Legajo SET Horas = 0, HorasTotal = 0, Puntaje = 9";
                     cmd.ExecuteNonQuery();
 
                     cmd.CommandText =
-                        "SELECT c.Curso, c.Legajo, c.Horas, c.Fecha, c.Clave, c.Tema, l.Descripcion, l.Puntaje, l.FEgreso, Activo = case l.Fegreso WHEN '00/00/0000' THEN 'S' WHEN '  /  /    ' THEN 'S' ELSE 'N' END FROM Cursadas c, Legajo l WHERE c.Legajo = l.Codigo AND l.Renglon = 1 AND SUBSTRING(c.Fecha, 7, 4) = '" +
-                        TB_AñoDesde.Text + "' ORDER BY c.Clave";
+                        "SELECT c.Curso, c.Legajo, c.Horas, c.Fecha, c.Clave, c.Tema, l.Descripcion, l.Puntaje, l.FEgreso, Activo = case l.Fegreso WHEN '00/00/0000' THEN 'S' WHEN '  /  /    ' THEN 'S' ELSE 'N' END FROM Cursadas c LEFT OUTER JOIN Legajo l ON L.Codigo = C.Legajo AND L.Renglon = 1 WHERE c.Ordfecha BETWEEN '" + WDesdeOrd + "' And '" + WHastaOrd + "' ORDER BY c.Clave";
 
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
@@ -58,12 +66,19 @@ namespace Modulo_Capacitacion.Listados.HorasCursadasPorLegajo
 
                     foreach (DataRow WLegajo in WCursadas.Rows)
                     {
+                        string WFEgreso = Helper.OrDefault(WLegajo["FEgreso"].ToString(), "00/00/0000").ToString();
+
+                        WLegajo["Puntaje"] = "0";
+
                         if (CB_Tipo.SelectedIndex == 1)
                         {
-                            WLegajo["Puntaje"] = "9";
+                            if (WFEgreso != "  /  /    " && WFEgreso != "00/00/0000")
+                            {
+                                WLegajo["Puntaje"] = "9";
+                            }
                         }
 
-                        cmd.CommandText = "UPDATE Legajo SET Horas = Horas +'" + WLegajo["Horas"].ToString().Replace(',', '.') +
+                        cmd.CommandText = "UPDATE Legajo SET Puntaje = '" + WLegajo["Puntaje"] + "', Horas = Horas +'" + WLegajo["Horas"].ToString().Replace(',', '.') +
                                           "' WHERE Codigo = '" + WLegajo["Legajo"] + "'";
                         cmd.ExecuteNonQuery();
 
@@ -75,21 +90,21 @@ namespace Modulo_Capacitacion.Listados.HorasCursadasPorLegajo
                         progressBar1.Increment(1);
                     }
 
-                    if (CB_Tipo.SelectedIndex == 0)
-                    {
-                        cmd.CommandText =
-                            "UPDATE Legajo SET Puntaje = '9' WHERE FEgreso > '00/00/0000' AND SUBSTRING(FEgreso, 7, 4) < '" +
-                            TB_AñoDesde.Text + "'";
-                        cmd.ExecuteNonQuery();
-                        progressBar1.Increment(9);
-                    }
+                    //if (CB_Tipo.SelectedIndex == 0)
+                    //{
+                    //    cmd.CommandText =
+                    //        "UPDATE Legajo SET Puntaje = '0' WHERE RIGHT(ISNULL(FEgreso, '00/00/0000'), 4)*1 = 0 Or RIGHT(FEgreso, 4)*1 < " +
+                    //       Helper.Right(TB_AñoDesde.Text, 4) + "";
+                    //    cmd.ExecuteNonQuery();
+                    //    progressBar1.Increment(9);
+                    //}
 
-                    if (CB_Tipo.SelectedIndex == 1)
-                    {
-                        cmd.CommandText = "UPDATE Legajo SET Puntaje = '9' WHERE FEgreso NOT IN ('00/00/0000', '  /  /    ')";
-                        cmd.ExecuteNonQuery();
-                        progressBar1.Increment(9);
-                    }
+                    //if (CB_Tipo.SelectedIndex == 1)
+                    //{
+                    //    cmd.CommandText = "UPDATE Legajo SET Puntaje = '9' WHERE ISNULL(FEgreso, '  /  /    ') NOT IN ('00/00/0000', '  /  /    ')";
+                    //    cmd.ExecuteNonQuery();
+                    //    progressBar1.Increment(9);
+                    //}
                 }
             }
 

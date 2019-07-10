@@ -153,6 +153,9 @@ namespace Modulo_Capacitacion.Novedades
                             cmd.CommandText = "DELETE LegajoMarcaModificacion WHERE Clave = '" + WClave + "'";
                             cmd.ExecuteNonQuery();
 
+                            cmd.CommandText = "UPDATE Legajo SET WDate = '" + DateTime.Now.ToString("yyyy-MM-dd") + "' WHERE Codigo = '" + WLegajo + "'";
+                            cmd.ExecuteNonQuery();
+
                             if (WMarca.ToString() == "X" || WMarcar.ToString() == "X")
                             {
                                 cmd.CommandText = "INSERT INTO LegajoMarcaModificacion (Clave, Legajo, Fecha, FechaOrd, Actualizado) VALUES ('" + WClave + "', '" + WLegajo + "', '" + DateTime.Now.ToString("dd/MM/yyyy") + "', '" + Helper.OrdenarFecha(DateTime.Now.ToString("dd/MM/yyyy")) + "', 'X')";

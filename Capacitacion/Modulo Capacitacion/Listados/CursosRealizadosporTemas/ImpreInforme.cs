@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Modulo_Capacitacion.Listados.CursosRealizadosporTemas
@@ -33,27 +28,11 @@ namespace Modulo_Capacitacion.Listados.CursosRealizadosporTemas
 
             int filas = dtInforme.Rows.Count;
 
-            for (int i = filas - 1; i > -1; i--)
+            for (int i = 0; i < filas - 1; i++)
             {
                 DataRow dr = dtInforme.Rows[i];
                 Ds.Tables[0].Rows.Add
-                (new object[]
-                {
-                    dr[0].ToString(),
-                    dr[1].ToString(),
-                    dr[2].ToString(),
-                    dr[3].ToString(),
-                    dr[4].ToString(),
-                    dr[5].ToString(),
-                    dr[6],
-                    dr[7].ToString(),
-                    dr[8].ToString(),
-                    dr[9].ToString(),
-                    dr[10].ToString(),
-                    
-                }
-
-                );
+                (dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5].ToString(), dr[6], dr[7].ToString(), dr[8].ToString(), dr[9].ToString(), dr[10].ToString(), dr["Dni"]);
             }
 
             if (Tipo == "Pantalla")

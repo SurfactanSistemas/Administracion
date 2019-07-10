@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using Negocio;
 
@@ -15,7 +9,7 @@ namespace Modulo_Capacitacion.Maestros.Sectores
         private int UltimoId;
         private Sector nuevoSector = new Sector();
         private AgModSector modificarSector;
-        private bool EsModificar = false;
+        private bool EsModificar;
         private Sector SectorAModificar;
 
         public AgModSector()
@@ -54,7 +48,7 @@ namespace Modulo_Capacitacion.Maestros.Sectores
 
         private void BT_Salir_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void BT_Guardar_Click(object sender, EventArgs e)
@@ -69,11 +63,11 @@ namespace Modulo_Capacitacion.Maestros.Sectores
                 }
                 else
                 {
-                    this.SectorAModificar.Descripcion = TB_Nombre.Text;
-                    nuevoSector.Modificar(this.SectorAModificar);
+                    SectorAModificar.Descripcion = TB_Nombre.Text;
+                    nuevoSector.Modificar(SectorAModificar);
                 }
 
-                this.Close();
+                Close();
             }
             catch (Exception err)
             {

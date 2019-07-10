@@ -127,10 +127,18 @@
     <Reference Include="ClasesCompartidas">
       <HintPath>..\..\ClasesCompartidas\ClasesCompartidas\bin\Debug\ClasesCompartidas.dll</HintPath>
     </Reference>
-    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
     <Reference Include="DataGridViewCustomColumn">
       <HintPath>..\..\ConsultasVarias\ConsultasVarias\CustomControls\DataGridViewCustomColumn.dll</HintPath>
     </Reference>
@@ -259,12 +267,6 @@
     </Compile>
     <Compile Include="EnvioEmailProveedores.vb">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="EvaluacionPorMpUserControl.Designer.vb">
-      <DependentUpon>EvaluacionPorMpUserControl.vb</DependentUpon>
-    </Compile>
-    <Compile Include="EvaluacionPorMpUserControl.vb">
-      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="GestionAvisosOPDisponiblesProveedores.Designer.vb">
       <DependentUpon>GestionAvisosOPDisponiblesProveedores.vb</DependentUpon>
@@ -520,12 +522,6 @@
     <Compile Include="Procesos\ProcesoPercepcionesIvaCompras.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ProveedoresABM\AgregarArchivosEvalProvMP.Designer.vb">
-      <DependentUpon>AgregarArchivosEvalProvMP.vb</DependentUpon>
-    </Compile>
-    <Compile Include="ProveedoresABM\AgregarArchivosEvalProvMP.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="ProveedoresABM\Contactos.Designer.vb">
       <DependentUpon>Contactos.vb</DependentUpon>
     </Compile>
@@ -584,12 +580,6 @@
       <DependentUpon>ProcesoPercepciones.vb</DependentUpon>
     </Compile>
     <Compile Include="Procesos\ProcesoPercepciones.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ProveedoresABM\EvaluacionProveedorMateriaPrima.Designer.vb">
-      <DependentUpon>EvaluacionProveedorMateriaPrima.vb</DependentUpon>
-    </Compile>
-    <Compile Include="ProveedoresABM\EvaluacionProveedorMateriaPrima.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ProveedoresABM\ObservacionesProveedor.Designer.vb">
@@ -967,9 +957,6 @@
     <EmbeddedResource Include="EnvioEmailProveedores.resx">
       <DependentUpon>EnvioEmailProveedores.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EvaluacionPorMpUserControl.resx">
-      <DependentUpon>EvaluacionPorMpUserControl.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="GestionAvisosOPDisponiblesProveedores.resx">
       <DependentUpon>GestionAvisosOPDisponiblesProveedores.vb</DependentUpon>
     </EmbeddedResource>
@@ -1093,9 +1080,6 @@
     <EmbeddedResource Include="Procesos\ProcesoPercepcionesIvaCompras.resx">
       <DependentUpon>ProcesoPercepcionesIvaCompras.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ProveedoresABM\AgregarArchivosEvalProvMP.resx">
-      <DependentUpon>AgregarArchivosEvalProvMP.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ProveedoresABM\Contactos.resx">
       <DependentUpon>Contactos.vb</DependentUpon>
     </EmbeddedResource>
@@ -1122,9 +1106,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\ListadoValoresEnCartera.resx">
       <DependentUpon>ListadoValoresEnCartera.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ProveedoresABM\EvaluacionProveedorMateriaPrima.resx">
-      <DependentUpon>EvaluacionProveedorMateriaPrima.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProveedoresABM\ObservacionesProveedor.resx">
       <DependentUpon>ObservacionesProveedor.vb</DependentUpon>
@@ -1782,6 +1763,10 @@
     <ProjectReference Include="..\..\ConsultasVarias\ConsultasVarias\ConsultasVarias.vbproj">
       <Project>{CC5D60FD-9755-4C61-B96C-F56173586BB9}</Project>
       <Name>ConsultasVarias</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EvaluacionProvMPFarma\EvaluacionProvMPFarma.vbproj">
+      <Project>{27070567-9E32-498F-83BF-641C853E8ACA}</Project>
+      <Name>EvaluacionProvMPFarma</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

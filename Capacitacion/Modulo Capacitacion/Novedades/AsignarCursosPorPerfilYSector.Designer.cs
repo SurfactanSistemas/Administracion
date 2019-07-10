@@ -1,11 +1,14 @@
-﻿namespace Modulo_Capacitacion.Novedades
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Modulo_Capacitacion.Novedades
 {
     partial class AsignarCursosPorPerfilYSector
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -879,69 +882,69 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label LBPerfil;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Button BT_Salir;
-        private System.Windows.Forms.Button BT_Limpiar;
-        private System.Windows.Forms.Button BT_Guardar;
-        private System.Windows.Forms.Button btnAyuda;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.DataGridView dgvGrilla;
-        private System.Windows.Forms.Panel pnlAyuda;
-        private System.Windows.Forms.GroupBox gbAyuda;
-        private System.Windows.Forms.DataGridView dgvAyuda;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtFiltrar;
-        private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.Button btnCerrarAyuda;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button btnBuscar;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.RadioButton rbSector;
-        private System.Windows.Forms.RadioButton rbPerfil;
-        private System.Windows.Forms.ComboBox cmbOrganizar;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtDescTema;
-        private System.Windows.Forms.TextBox txtTema;
-        private System.Windows.Forms.Panel pnlProgreso;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.ProgressBar progressBar1;
-        private System.Windows.Forms.ComboBox cmbAuxi;
-        private System.Windows.Forms.TextBox txtAno;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem copiarToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem copiarConCabecerasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem asignarModificarCursoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem quitarCursoAsignadoToolStripMenuItem;
-        private System.Windows.Forms.RadioButton rbTema;
-        private System.Windows.Forms.CheckBox ckSoloSugeridos;
-        private System.Windows.Forms.TextBox txtCodigo;
-        private System.Windows.Forms.ComboBox cmbAsignarComo;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Clave;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Tipo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Sector;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DesSector;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Perfil;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DescPerfil;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Legajo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Curso;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DescCurso;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Calificacion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Tema;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DescTema;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TemaII;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DescTemaII;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Realizar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Horas;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Realizado;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Observaciones;
-        private System.Windows.Forms.ToolStripMenuItem quitarSegundoCursoAsignadoToolStripMenuItem;
+        private Panel panel1;
+        private Label LBPerfil;
+        private Panel panel2;
+        private Panel panel3;
+        private Button BT_Salir;
+        private Button BT_Limpiar;
+        private Button BT_Guardar;
+        private Button btnAyuda;
+        private TableLayoutPanel tableLayoutPanel1;
+        private Panel panel4;
+        private Panel panel5;
+        private DataGridView dgvGrilla;
+        private Panel pnlAyuda;
+        private GroupBox gbAyuda;
+        private DataGridView dgvAyuda;
+        private Label label1;
+        private TextBox txtFiltrar;
+        private Panel panel6;
+        private Button btnCerrarAyuda;
+        private GroupBox groupBox1;
+        private Button btnBuscar;
+        private GroupBox groupBox2;
+        private RadioButton rbSector;
+        private RadioButton rbPerfil;
+        private ComboBox cmbOrganizar;
+        private Label label2;
+        private TextBox txtDescTema;
+        private TextBox txtTema;
+        private Panel pnlProgreso;
+        private GroupBox groupBox3;
+        private ProgressBar progressBar1;
+        private ComboBox cmbAuxi;
+        private TextBox txtAno;
+        private Label label3;
+        private ContextMenuStrip contextMenuStrip1;
+        private ToolStripMenuItem copiarToolStripMenuItem;
+        private ToolStripMenuItem copiarConCabecerasToolStripMenuItem;
+        private ToolStripMenuItem asignarModificarCursoToolStripMenuItem;
+        private ToolStripMenuItem quitarCursoAsignadoToolStripMenuItem;
+        private RadioButton rbTema;
+        private CheckBox ckSoloSugeridos;
+        private TextBox txtCodigo;
+        private ComboBox cmbAsignarComo;
+        private Label label4;
+        private DataGridViewTextBoxColumn Clave;
+        private DataGridViewTextBoxColumn Tipo;
+        private DataGridViewTextBoxColumn Sector;
+        private DataGridViewTextBoxColumn DesSector;
+        private DataGridViewTextBoxColumn Perfil;
+        private DataGridViewTextBoxColumn DescPerfil;
+        private DataGridViewTextBoxColumn Legajo;
+        private DataGridViewTextBoxColumn Nombre;
+        private DataGridViewTextBoxColumn Curso;
+        private DataGridViewTextBoxColumn DescCurso;
+        private DataGridViewTextBoxColumn Calificacion;
+        private DataGridViewTextBoxColumn Tema;
+        private DataGridViewTextBoxColumn DescTema;
+        private DataGridViewTextBoxColumn TemaII;
+        private DataGridViewTextBoxColumn DescTemaII;
+        private DataGridViewTextBoxColumn Realizar;
+        private DataGridViewTextBoxColumn Horas;
+        private DataGridViewTextBoxColumn Realizado;
+        private DataGridViewTextBoxColumn Observaciones;
+        private ToolStripMenuItem quitarSegundoCursoAsignadoToolStripMenuItem;
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Data;
 using ClassConexion;
+
 //using Negocio;
 
 namespace Negocio
@@ -56,7 +56,7 @@ namespace Negocio
 
         public List<Tema> Temas { get; set; }
 
-        public System.Data.DataTable ListarTodos()
+        public DataTable ListarTodos()
         {
             throw new NotImplementedException();
         }
@@ -73,8 +73,8 @@ namespace Negocio
 
             foreach (var t in Temas)
             {
-                var clave1 = this.Codigo.ToString().PadLeft(6, '0');
-                var clave2 = this.Version.ToString().PadLeft(4, '0');
+                var clave1 = Codigo.ToString().PadLeft(6, '0');
+                var clave2 = Version.ToString().PadLeft(4, '0');
                 var clave3 = renglon.ToString().PadLeft(2, '0');
                 
 
@@ -107,7 +107,7 @@ namespace Negocio
         {
             Conexion repo = new Conexion();
             string consulta = "select * from TareaVersion where Codigo = " + IdAModificar + " and Version = " + ver;
-            System.Data.DataTable DT = repo.BuscarUno(consulta);
+            DataTable DT = repo.BuscarUno(consulta);
             PerfilVersion obj = new PerfilVersion();
 
             if (DT.Rows.Count > 0)
@@ -174,7 +174,7 @@ namespace Negocio
                 obj.Temas = new List<Tema>();
                 //FALTA TEMAS
                 int renglon = 1;
-                foreach (System.Data.DataRow item in DT.Rows)
+                foreach (DataRow item in DT.Rows)
                 {
                     Tema T = new Tema();
                     T.Codigo = int.Parse(item["Curso"].ToString());
@@ -213,7 +213,7 @@ namespace Negocio
             throw new NotImplementedException();
         }
 
-        public System.Data.DataTable ListarVersion(int Codigo)
+        public DataTable ListarVersion(int Codigo)
         {
             Conexion repo = new Conexion();
             string consulta = "select distinct T.Version from TareaVersion T where Codigo = "  + Codigo;

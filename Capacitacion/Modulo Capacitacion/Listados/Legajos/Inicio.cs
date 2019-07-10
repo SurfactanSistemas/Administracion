@@ -35,8 +35,12 @@ namespace Modulo_Capacitacion.Listados.Legajos
 
             ReportDocument reporte = new ListadoLegajos();
 
+            string WFiltro = " AND ({Legajo.FEgreso} = '  /  /    ' OR {Legajo.FEgreso} = '00/00/0000') ";
+
+            if (!checkBox1.Checked) WFiltro = "";
+
             VistaPrevia rp = new VistaPrevia();
-            rp.CargarReporte(reporte, "{Legajo.Codigo}>=" + TB_Desde.Text + " AND {Legajo.Codigo}<=" + TB_Hasta.Text + "AND {Legajo.Renglon}=1");
+            rp.CargarReporte(reporte, "{Legajo.Codigo}>=" + TB_Desde.Text + " AND {Legajo.Codigo}<=" + TB_Hasta.Text + " AND {Legajo.Renglon}=1" + WFiltro);
             return rp;
         }
 

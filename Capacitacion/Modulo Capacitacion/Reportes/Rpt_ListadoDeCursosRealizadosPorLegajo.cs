@@ -8,14 +8,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
+using System.ComponentModel;
+using System.Drawing;
+using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.ReportSource;
+using CrystalDecisions.Shared;
+
 namespace Modulo_Capacitacion.Reportes {
-    using System;
-    using System.ComponentModel;
-    using CrystalDecisions.Shared;
-    using CrystalDecisions.ReportSource;
-    using CrystalDecisions.CrystalReports.Engine;
-    
-    
     public class Rpt_ListadoDeCursosRealizadosPorLegajo : ReportClass {
         
         public Rpt_ListadoDeCursosRealizadosPorLegajo() {
@@ -49,78 +49,78 @@ namespace Modulo_Capacitacion.Reportes {
         }
         
         [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section1 {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public Section Section1 {
             get {
                 return this.ReportDefinition.Sections[0];
             }
         }
         
         [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section2 {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public Section Section2 {
             get {
                 return this.ReportDefinition.Sections[1];
             }
         }
         
         [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section3 {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public Section Section3 {
             get {
                 return this.ReportDefinition.Sections[2];
             }
         }
         
         [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public Section Section4 {
             get {
                 return this.ReportDefinition.Sections[3];
             }
         }
         
         [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section5 {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public Section Section5 {
             get {
                 return this.ReportDefinition.Sections[4];
             }
         }
         
         [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_Año {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public IParameterField Parameter_Año {
             get {
                 return this.DataDefinition.ParameterFields[0];
             }
         }
         
         [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_Curso {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public IParameterField Parameter_Curso {
             get {
                 return this.DataDefinition.ParameterFields[1];
             }
         }
         
         [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_Realizado {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public IParameterField Parameter_Realizado {
             get {
                 return this.DataDefinition.ParameterFields[2];
             }
         }
     }
     
-    [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
+    [ToolboxBitmap(typeof(ExportOptions), "report.bmp")]
     public class CachedRpt_ListadoDeCursosRealizadosPorLegajo : Component, ICachedReport {
         
         public CachedRpt_ListadoDeCursosRealizadosPorLegajo() {
         }
         
         [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public virtual bool IsCacheable {
             get {
                 return true;
@@ -131,7 +131,7 @@ namespace Modulo_Capacitacion.Reportes {
         }
         
         [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public virtual bool ShareDBLogonInfo {
             get {
                 return false;
@@ -142,8 +142,8 @@ namespace Modulo_Capacitacion.Reportes {
         }
         
         [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public virtual System.TimeSpan CacheTimeOut {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public virtual TimeSpan CacheTimeOut {
             get {
                 return CachedReportConstants.DEFAULT_TIMEOUT;
             }
@@ -152,7 +152,7 @@ namespace Modulo_Capacitacion.Reportes {
             }
         }
         
-        public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
+        public virtual ReportDocument CreateReport() {
             Rpt_ListadoDeCursosRealizadosPorLegajo rpt = new Rpt_ListadoDeCursosRealizadosPorLegajo();
             rpt.Site = this.Site;
             return rpt;

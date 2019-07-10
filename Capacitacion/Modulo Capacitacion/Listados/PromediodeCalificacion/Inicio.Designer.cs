@@ -1,11 +1,14 @@
-﻿namespace Modulo_Capacitacion.Listados.PromediodeCalificacion
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Modulo_Capacitacion.Listados.PromediodeCalificacion
 {
     partial class Inicio
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -62,9 +65,9 @@
             this.LBChofer.ForeColor = System.Drawing.Color.White;
             this.LBChofer.Location = new System.Drawing.Point(10, 10);
             this.LBChofer.Name = "LBChofer";
-            this.LBChofer.Size = new System.Drawing.Size(286, 19);
+            this.LBChofer.Size = new System.Drawing.Size(328, 19);
             this.LBChofer.TabIndex = 0;
-            this.LBChofer.Text = "LISTADO DE PROMEDIO DE CALIFICACIÓN";
+            this.LBChofer.Text = "PROMEDIO DE CALIFICACIÓN DE CAPACITACIÓN";
             // 
             // panel2
             // 
@@ -197,17 +200,17 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label LBChofer;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.TextBox TB_HastaSector;
-        private System.Windows.Forms.TextBox TB_DesdeSector;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button BT_Pantalla;
-        private System.Windows.Forms.Button BT_Imprimir;
-        private System.Windows.Forms.Button BT_Salir;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ProgressBar progressBar1;
+        private Panel panel1;
+        private Label LBChofer;
+        private Panel panel2;
+        private Panel panel3;
+        private TextBox TB_HastaSector;
+        private TextBox TB_DesdeSector;
+        private Label label2;
+        private Button BT_Pantalla;
+        private Button BT_Imprimir;
+        private Button BT_Salir;
+        private Label label1;
+        private ProgressBar progressBar1;
     }
 }

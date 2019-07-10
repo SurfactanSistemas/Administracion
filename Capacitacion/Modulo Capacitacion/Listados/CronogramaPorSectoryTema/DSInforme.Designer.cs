@@ -8,6 +8,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
+using System.CodeDom.Compiler;
+using System.Collections;
+using System.ComponentModel;
+using System.ComponentModel.Design;
+using System.Data;
+using System.Diagnostics;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Serialization;
+
 #pragma warning disable 1591
 
 namespace Modulo_Capacitacion.Listados.CronogramaPorSectorYTema {
@@ -16,44 +29,44 @@ namespace Modulo_Capacitacion.Listados.CronogramaPorSectorYTema {
     /// <summary>
     ///Represents a strongly typed in-memory cache of data.
     ///</summary>
-    [global::System.Serializable()]
-    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
-    [global::System.ComponentModel.ToolboxItem(true)]
-    [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
-    [global::System.Xml.Serialization.XmlRootAttribute("DSInforme")]
-    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
-    public partial class DSInforme : global::System.Data.DataSet {
+    [Serializable()]
+    [DesignerCategory("code")]
+    [ToolboxItem(true)]
+    [XmlSchemaProvider("GetTypedDataSetSchema")]
+    [XmlRoot("DSInforme")]
+    [HelpKeyword("vs.data.DataSet")]
+    public partial class DSInforme : DataSet {
         
         private DSInformeDataTable tableDSInforme;
         
-        private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
+        private SchemaSerializationMode _schemaSerializationMode = SchemaSerializationMode.IncludeSchema;
         
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [DebuggerNonUserCode()]
+        [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public DSInforme() {
             this.BeginInit();
             this.InitClass();
-            global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
+            CollectionChangeEventHandler schemaChangedHandler = new CollectionChangeEventHandler(this.SchemaChanged);
             base.Tables.CollectionChanged += schemaChangedHandler;
             base.Relations.CollectionChanged += schemaChangedHandler;
             this.EndInit();
         }
         
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected DSInforme(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+        [DebuggerNonUserCode()]
+        [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected DSInforme(SerializationInfo info, StreamingContext context) : 
                 base(info, context, false) {
             if ((this.IsBinarySerialized(info, context) == true)) {
                 this.InitVars(false);
-                global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler1 = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
+                CollectionChangeEventHandler schemaChangedHandler1 = new CollectionChangeEventHandler(this.SchemaChanged);
                 this.Tables.CollectionChanged += schemaChangedHandler1;
                 this.Relations.CollectionChanged += schemaChangedHandler1;
                 return;
             }
             string strSchema = ((string)(info.GetValue("XmlSchema", typeof(string))));
-            if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
-                global::System.Data.DataSet ds = new global::System.Data.DataSet();
-                ds.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
+            if ((this.DetermineSchemaSerializationMode(info, context) == SchemaSerializationMode.IncludeSchema)) {
+                DataSet ds = new DataSet();
+                ds.ReadXmlSchema(new XmlTextReader(new StringReader(strSchema)));
                 if ((ds.Tables["DSInforme"] != null)) {
                     base.Tables.Add(new DSInformeDataTable(ds.Tables["DSInforme"]));
                 }
@@ -63,33 +76,33 @@ namespace Modulo_Capacitacion.Listados.CronogramaPorSectorYTema {
                 this.Locale = ds.Locale;
                 this.CaseSensitive = ds.CaseSensitive;
                 this.EnforceConstraints = ds.EnforceConstraints;
-                this.Merge(ds, false, global::System.Data.MissingSchemaAction.Add);
+                this.Merge(ds, false, MissingSchemaAction.Add);
                 this.InitVars();
             }
             else {
-                this.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
+                this.ReadXmlSchema(new XmlTextReader(new StringReader(strSchema)));
             }
             this.GetSerializationData(info, context);
-            global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
+            CollectionChangeEventHandler schemaChangedHandler = new CollectionChangeEventHandler(this.SchemaChanged);
             base.Tables.CollectionChanged += schemaChangedHandler;
             this.Relations.CollectionChanged += schemaChangedHandler;
         }
         
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Browsable(false)]
-        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        [DebuggerNonUserCode()]
+        [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public DSInformeDataTable _DSInforme {
             get {
                 return this.tableDSInforme;
             }
         }
         
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.BrowsableAttribute(true)]
-        [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
-        public override global::System.Data.SchemaSerializationMode SchemaSerializationMode {
+        [DebuggerNonUserCode()]
+        [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [Browsable(true)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public override SchemaSerializationMode SchemaSerializationMode {
             get {
                 return this._schemaSerializationMode;
             }
@@ -98,59 +111,59 @@ namespace Modulo_Capacitacion.Listados.CronogramaPorSectorYTema {
             }
         }
         
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public new global::System.Data.DataTableCollection Tables {
+        [DebuggerNonUserCode()]
+        [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new DataTableCollection Tables {
             get {
                 return base.Tables;
             }
         }
         
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public new global::System.Data.DataRelationCollection Relations {
+        [DebuggerNonUserCode()]
+        [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new DataRelationCollection Relations {
             get {
                 return base.Relations;
             }
         }
         
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [DebuggerNonUserCode()]
+        [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         protected override void InitializeDerivedDataSet() {
             this.BeginInit();
             this.InitClass();
             this.EndInit();
         }
         
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public override global::System.Data.DataSet Clone() {
+        [DebuggerNonUserCode()]
+        [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public override DataSet Clone() {
             DSInforme cln = ((DSInforme)(base.Clone()));
             cln.InitVars();
             cln.SchemaSerializationMode = this.SchemaSerializationMode;
             return cln;
         }
         
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [DebuggerNonUserCode()]
+        [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         protected override bool ShouldSerializeTables() {
             return false;
         }
         
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [DebuggerNonUserCode()]
+        [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         protected override bool ShouldSerializeRelations() {
             return false;
         }
         
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected override void ReadXmlSerializable(global::System.Xml.XmlReader reader) {
-            if ((this.DetermineSchemaSerializationMode(reader) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
+        [DebuggerNonUserCode()]
+        [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected override void ReadXmlSerializable(XmlReader reader) {
+            if ((this.DetermineSchemaSerializationMode(reader) == SchemaSerializationMode.IncludeSchema)) {
                 this.Reset();
-                global::System.Data.DataSet ds = new global::System.Data.DataSet();
+                DataSet ds = new DataSet();
                 ds.ReadXml(reader);
                 if ((ds.Tables["DSInforme"] != null)) {
                     base.Tables.Add(new DSInformeDataTable(ds.Tables["DSInforme"]));
@@ -161,7 +174,7 @@ namespace Modulo_Capacitacion.Listados.CronogramaPorSectorYTema {
                 this.Locale = ds.Locale;
                 this.CaseSensitive = ds.CaseSensitive;
                 this.EnforceConstraints = ds.EnforceConstraints;
-                this.Merge(ds, false, global::System.Data.MissingSchemaAction.Add);
+                this.Merge(ds, false, MissingSchemaAction.Add);
                 this.InitVars();
             }
             else {
@@ -170,23 +183,23 @@ namespace Modulo_Capacitacion.Listados.CronogramaPorSectorYTema {
             }
         }
         
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected override global::System.Xml.Schema.XmlSchema GetSchemaSerializable() {
-            global::System.IO.MemoryStream stream = new global::System.IO.MemoryStream();
-            this.WriteXmlSchema(new global::System.Xml.XmlTextWriter(stream, null));
+        [DebuggerNonUserCode()]
+        [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected override XmlSchema GetSchemaSerializable() {
+            MemoryStream stream = new MemoryStream();
+            this.WriteXmlSchema(new XmlTextWriter(stream, null));
             stream.Position = 0;
-            return global::System.Xml.Schema.XmlSchema.Read(new global::System.Xml.XmlTextReader(stream), null);
+            return XmlSchema.Read(new XmlTextReader(stream), null);
         }
         
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [DebuggerNonUserCode()]
+        [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         internal void InitVars() {
             this.InitVars(true);
         }
         
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [DebuggerNonUserCode()]
+        [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         internal void InitVars(bool initTable) {
             this.tableDSInforme = ((DSInformeDataTable)(base.Tables["DSInforme"]));
             if ((initTable == true)) {
@@ -196,51 +209,51 @@ namespace Modulo_Capacitacion.Listados.CronogramaPorSectorYTema {
             }
         }
         
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [DebuggerNonUserCode()]
+        [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitClass() {
             this.DataSetName = "DSInforme";
             this.Prefix = "";
             this.Namespace = "http://tempuri.org/DSInforme.xsd";
             this.EnforceConstraints = true;
-            this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
+            this.SchemaSerializationMode = SchemaSerializationMode.IncludeSchema;
             this.tableDSInforme = new DSInformeDataTable();
             base.Tables.Add(this.tableDSInforme);
         }
         
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [DebuggerNonUserCode()]
+        [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private bool ShouldSerialize_DSInforme() {
             return false;
         }
         
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private void SchemaChanged(object sender, global::System.ComponentModel.CollectionChangeEventArgs e) {
-            if ((e.Action == global::System.ComponentModel.CollectionChangeAction.Remove)) {
+        [DebuggerNonUserCode()]
+        [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void SchemaChanged(object sender, CollectionChangeEventArgs e) {
+            if ((e.Action == CollectionChangeAction.Remove)) {
                 this.InitVars();
             }
         }
         
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+        [DebuggerNonUserCode()]
+        [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public static XmlSchemaComplexType GetTypedDataSetSchema(XmlSchemaSet xs) {
             DSInforme ds = new DSInforme();
-            global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-            global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-            global::System.Xml.Schema.XmlSchemaAny any = new global::System.Xml.Schema.XmlSchemaAny();
+            XmlSchemaComplexType type = new XmlSchemaComplexType();
+            XmlSchemaSequence sequence = new XmlSchemaSequence();
+            XmlSchemaAny any = new XmlSchemaAny();
             any.Namespace = ds.Namespace;
             sequence.Items.Add(any);
             type.Particle = sequence;
-            global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+            XmlSchema dsSchema = ds.GetSchemaSerializable();
             if (xs.Contains(dsSchema.TargetNamespace)) {
-                global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                MemoryStream s1 = new MemoryStream();
+                MemoryStream s2 = new MemoryStream();
                 try {
-                    global::System.Xml.Schema.XmlSchema schema = null;
+                    XmlSchema schema = null;
                     dsSchema.Write(s1);
-                    for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                        schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                    for (IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                        schema = ((XmlSchema)(schemas.Current));
                         s2.SetLength(0);
                         schema.Write(s2);
                         if ((s1.Length == s2.Length)) {
@@ -269,34 +282,34 @@ namespace Modulo_Capacitacion.Listados.CronogramaPorSectorYTema {
             return type;
         }
         
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void DSInformeRowChangeEventHandler(object sender, DSInformeRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class DSInformeDataTable : global::System.Data.TypedTableBase<DSInformeRow> {
+        [Serializable()]
+        [XmlSchemaProvider("GetTypedTableSchema")]
+        public partial class DSInformeDataTable : TypedTableBase<DSInformeRow> {
             
-            private global::System.Data.DataColumn columnAño;
+            private DataColumn columnAño;
             
-            private global::System.Data.DataColumn columnCodSector;
+            private DataColumn columnCodSector;
             
-            private global::System.Data.DataColumn columnDescSector;
+            private DataColumn columnDescSector;
             
-            private global::System.Data.DataColumn columnCodCurso;
+            private DataColumn columnCodCurso;
             
-            private global::System.Data.DataColumn columnDescCurso;
+            private DataColumn columnDescCurso;
             
-            private global::System.Data.DataColumn columnCodLegajo;
+            private DataColumn columnCodLegajo;
             
-            private global::System.Data.DataColumn columnDescLegajo;
+            private DataColumn columnDescLegajo;
             
-            private global::System.Data.DataColumn columnHoras;
+            private DataColumn columnHoras;
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public DSInformeDataTable() {
                 this.TableName = "DSInforme";
                 this.BeginInit();
@@ -304,9 +317,9 @@ namespace Modulo_Capacitacion.Listados.CronogramaPorSectorYTema {
                 this.EndInit();
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal DSInformeDataTable(global::System.Data.DataTable table) {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal DSInformeDataTable(DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -321,114 +334,114 @@ namespace Modulo_Capacitacion.Listados.CronogramaPorSectorYTema {
                 this.MinimumCapacity = table.MinimumCapacity;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected DSInformeDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected DSInformeDataTable(SerializationInfo info, StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn AñoColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn AñoColumn {
                 get {
                     return this.columnAño;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn CodSectorColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn CodSectorColumn {
                 get {
                     return this.columnCodSector;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn DescSectorColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn DescSectorColumn {
                 get {
                     return this.columnDescSector;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn CodCursoColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn CodCursoColumn {
                 get {
                     return this.columnCodCurso;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn DescCursoColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn DescCursoColumn {
                 get {
                     return this.columnDescCurso;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn CodLegajoColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn CodLegajoColumn {
                 get {
                     return this.columnCodLegajo;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn DescLegajoColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn DescLegajoColumn {
                 get {
                     return this.columnDescLegajo;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn HorasColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn HorasColumn {
                 get {
                     return this.columnHoras;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            [global::System.ComponentModel.Browsable(false)]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [Browsable(false)]
             public int Count {
                 get {
                     return this.Rows.Count;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public DSInformeRow this[int index] {
                 get {
                     return ((DSInformeRow)(this.Rows[index]));
                 }
             }
             
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public event DSInformeRowChangeEventHandler DSInformeRowChanging;
             
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public event DSInformeRowChangeEventHandler DSInformeRowChanged;
             
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public event DSInformeRowChangeEventHandler DSInformeRowDeleting;
             
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public event DSInformeRowChangeEventHandler DSInformeRowDeleted;
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void AddDSInformeRow(DSInformeRow row) {
                 this.Rows.Add(row);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public DSInformeRow AddDSInformeRow(string Año, int CodSector, string DescSector, string CodCurso, string DescCurso, string CodLegajo, string DescLegajo, decimal Horas) {
                 DSInformeRow rowDSInformeRow = ((DSInformeRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
@@ -445,22 +458,22 @@ namespace Modulo_Capacitacion.Listados.CronogramaPorSectorYTema {
                 return rowDSInformeRow;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public override global::System.Data.DataTable Clone() {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override DataTable Clone() {
                 DSInformeDataTable cln = ((DSInformeDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataTable CreateInstance() {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override DataTable CreateInstance() {
                 return new DSInformeDataTable();
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal void InitVars() {
                 this.columnAño = base.Columns["Año"];
                 this.columnCodSector = base.Columns["CodSector"];
@@ -472,124 +485,124 @@ namespace Modulo_Capacitacion.Listados.CronogramaPorSectorYTema {
                 this.columnHoras = base.Columns["Horas"];
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             private void InitClass() {
-                this.columnAño = new global::System.Data.DataColumn("Año", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnAño = new DataColumn("Año", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnAño);
-                this.columnCodSector = new global::System.Data.DataColumn("CodSector", typeof(int), null, global::System.Data.MappingType.Element);
+                this.columnCodSector = new DataColumn("CodSector", typeof(int), null, MappingType.Element);
                 base.Columns.Add(this.columnCodSector);
-                this.columnDescSector = new global::System.Data.DataColumn("DescSector", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnDescSector = new DataColumn("DescSector", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnDescSector);
-                this.columnCodCurso = new global::System.Data.DataColumn("CodCurso", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnCodCurso = new DataColumn("CodCurso", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnCodCurso);
-                this.columnDescCurso = new global::System.Data.DataColumn("DescCurso", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnDescCurso = new DataColumn("DescCurso", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnDescCurso);
-                this.columnCodLegajo = new global::System.Data.DataColumn("CodLegajo", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnCodLegajo = new DataColumn("CodLegajo", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnCodLegajo);
-                this.columnDescLegajo = new global::System.Data.DataColumn("DescLegajo", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnDescLegajo = new DataColumn("DescLegajo", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnDescLegajo);
-                this.columnHoras = new global::System.Data.DataColumn("Horas", typeof(decimal), null, global::System.Data.MappingType.Element);
+                this.columnHoras = new DataColumn("Horas", typeof(decimal), null, MappingType.Element);
                 base.Columns.Add(this.columnHoras);
                 this.ExtendedProperties.Add("Generator_TablePropName", "_DSInforme");
                 this.ExtendedProperties.Add("Generator_UserTableName", "DSInforme");
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public DSInformeRow NewDSInformeRow() {
                 return ((DSInformeRow)(this.NewRow()));
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override DataRow NewRowFromBuilder(DataRowBuilder builder) {
                 return new DSInformeRow(builder);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Type GetRowType() {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override Type GetRowType() {
                 return typeof(DSInformeRow);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanged(DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
                 if ((this.DSInformeRowChanged != null)) {
                     this.DSInformeRowChanged(this, new DSInformeRowChangeEvent(((DSInformeRow)(e.Row)), e.Action));
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanging(DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
                 if ((this.DSInformeRowChanging != null)) {
                     this.DSInformeRowChanging(this, new DSInformeRowChangeEvent(((DSInformeRow)(e.Row)), e.Action));
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleted(DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
                 if ((this.DSInformeRowDeleted != null)) {
                     this.DSInformeRowDeleted(this, new DSInformeRowChangeEvent(((DSInformeRow)(e.Row)), e.Action));
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleting(DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
                 if ((this.DSInformeRowDeleting != null)) {
                     this.DSInformeRowDeleting(this, new DSInformeRowChangeEvent(((DSInformeRow)(e.Row)), e.Action));
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void RemoveDSInformeRow(DSInformeRow row) {
                 this.Rows.Remove(row);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public static XmlSchemaComplexType GetTypedTableSchema(XmlSchemaSet xs) {
+                XmlSchemaComplexType type = new XmlSchemaComplexType();
+                XmlSchemaSequence sequence = new XmlSchemaSequence();
                 DSInforme ds = new DSInforme();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                XmlSchemaAny any1 = new XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
                 any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                any1.ProcessContents = XmlSchemaContentProcessing.Lax;
                 sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                XmlSchemaAny any2 = new XmlSchemaAny();
                 any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
                 any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                any2.ProcessContents = XmlSchemaContentProcessing.Lax;
                 sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                XmlSchemaAttribute attribute1 = new XmlSchemaAttribute();
                 attribute1.Name = "namespace";
                 attribute1.FixedValue = ds.Namespace;
                 type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                XmlSchemaAttribute attribute2 = new XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "DSInformeDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                XmlSchema dsSchema = ds.GetSchemaSerializable();
                 if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    MemoryStream s1 = new MemoryStream();
+                    MemoryStream s2 = new MemoryStream();
                     try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
+                        XmlSchema schema = null;
                         dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                        for (IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((XmlSchema)(schemas.Current));
                             s2.SetLength(0);
                             schema.Write(s2);
                             if ((s1.Length == s2.Length)) {
@@ -622,26 +635,26 @@ namespace Modulo_Capacitacion.Listados.CronogramaPorSectorYTema {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class DSInformeRow : global::System.Data.DataRow {
+        public partial class DSInformeRow : DataRow {
             
             private DSInformeDataTable tableDSInforme;
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal DSInformeRow(global::System.Data.DataRowBuilder rb) : 
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal DSInformeRow(DataRowBuilder rb) : 
                     base(rb) {
                 this.tableDSInforme = ((DSInformeDataTable)(this.Table));
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string Año {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.AñoColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Año\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'Año\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -649,15 +662,15 @@ namespace Modulo_Capacitacion.Listados.CronogramaPorSectorYTema {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public int CodSector {
                 get {
                     try {
                         return ((int)(this[this.tableDSInforme.CodSectorColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CodSector\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'CodSector\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -665,15 +678,15 @@ namespace Modulo_Capacitacion.Listados.CronogramaPorSectorYTema {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string DescSector {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.DescSectorColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'DescSector\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'DescSector\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -681,15 +694,15 @@ namespace Modulo_Capacitacion.Listados.CronogramaPorSectorYTema {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string CodCurso {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.CodCursoColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CodCurso\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'CodCurso\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -697,15 +710,15 @@ namespace Modulo_Capacitacion.Listados.CronogramaPorSectorYTema {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string DescCurso {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.DescCursoColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'DescCurso\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'DescCurso\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -713,15 +726,15 @@ namespace Modulo_Capacitacion.Listados.CronogramaPorSectorYTema {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string CodLegajo {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.CodLegajoColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CodLegajo\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'CodLegajo\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -729,15 +742,15 @@ namespace Modulo_Capacitacion.Listados.CronogramaPorSectorYTema {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string DescLegajo {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.DescLegajoColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'DescLegajo\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'DescLegajo\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -745,15 +758,15 @@ namespace Modulo_Capacitacion.Listados.CronogramaPorSectorYTema {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public decimal Horas {
                 get {
                     try {
                         return ((decimal)(this[this.tableDSInforme.HorasColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Horas\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'Horas\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -761,131 +774,131 @@ namespace Modulo_Capacitacion.Listados.CronogramaPorSectorYTema {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsAñoNull() {
                 return this.IsNull(this.tableDSInforme.AñoColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetAñoNull() {
-                this[this.tableDSInforme.AñoColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.AñoColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsCodSectorNull() {
                 return this.IsNull(this.tableDSInforme.CodSectorColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetCodSectorNull() {
-                this[this.tableDSInforme.CodSectorColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.CodSectorColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsDescSectorNull() {
                 return this.IsNull(this.tableDSInforme.DescSectorColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetDescSectorNull() {
-                this[this.tableDSInforme.DescSectorColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.DescSectorColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsCodCursoNull() {
                 return this.IsNull(this.tableDSInforme.CodCursoColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetCodCursoNull() {
-                this[this.tableDSInforme.CodCursoColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.CodCursoColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsDescCursoNull() {
                 return this.IsNull(this.tableDSInforme.DescCursoColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetDescCursoNull() {
-                this[this.tableDSInforme.DescCursoColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.DescCursoColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsCodLegajoNull() {
                 return this.IsNull(this.tableDSInforme.CodLegajoColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetCodLegajoNull() {
-                this[this.tableDSInforme.CodLegajoColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.CodLegajoColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsDescLegajoNull() {
                 return this.IsNull(this.tableDSInforme.DescLegajoColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetDescLegajoNull() {
-                this[this.tableDSInforme.DescLegajoColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.DescLegajoColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsHorasNull() {
                 return this.IsNull(this.tableDSInforme.HorasColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetHorasNull() {
-                this[this.tableDSInforme.HorasColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.HorasColumn] = Convert.DBNull;
             }
         }
         
         /// <summary>
         ///Row event argument class
         ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public class DSInformeRowChangeEvent : global::System.EventArgs {
+        [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public class DSInformeRowChangeEvent : EventArgs {
             
             private DSInformeRow eventRow;
             
-            private global::System.Data.DataRowAction eventAction;
+            private DataRowAction eventAction;
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DSInformeRowChangeEvent(DSInformeRow row, global::System.Data.DataRowAction action) {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DSInformeRowChangeEvent(DSInformeRow row, DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public DSInformeRow Row {
                 get {
                     return this.eventRow;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataRowAction Action {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataRowAction Action {
                 get {
                     return this.eventAction;
                 }

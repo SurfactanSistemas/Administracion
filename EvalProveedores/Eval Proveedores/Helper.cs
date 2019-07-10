@@ -190,6 +190,237 @@ namespace Eval_Proveedores
             return WProveedores;
         }
 
+        public static DataTable _ProcesarEvaluacionProveedoresFarma(string WTipoProv, string WDesde, string WHasta, ref ProgressBar progressBar, string[] WEmpresasAConsultar = null)
+        {
+            DataTable WProveedores = new DataTable();
+
+            //DataTable WListaProveedoresFarma = _TraerProveedoresFarma();
+
+            progressBar.Value = 0;
+            progressBar.Visible = true;
+            WProveedores = _TraerProveedoresFarma(); //_TraerInformacionBasicaDeProveedores(WTipoProv);
+
+            //WProveedores.Columns.Add("Articulo", typeof(string));
+            WProveedores.Columns.Add("Movimientos", typeof(int));
+            WProveedores.Columns.Add("Aprobados", typeof(int));
+            WProveedores.Columns.Add("Desvios", typeof(int));
+            WProveedores.Columns.Add("Rechazados", typeof(int));
+            WProveedores.Columns.Add("CertificadosOk", typeof(int));
+            WProveedores.Columns.Add("EnvasesOk", typeof(int));
+            WProveedores.Columns.Add("Retrasos", typeof(int));
+            WProveedores.Columns.Add("Pasa", typeof(char));
+
+            DataTable WDatosFinales = WProveedores.Clone();
+
+            if (WProveedores.Rows.Count == 0) return WProveedores;
+
+            // Hago los calculos pertinentes recorriendo cada una de las empresas.
+            progressBar.Maximum = WProveedores.Rows.Count;
+
+            // Determinamos las empresas a consultar.
+            string[] XEmpresas = WEmpresasAConsultar ?? _Empresas;
+
+            foreach (DataRow WProveedor in WProveedores.Rows)
+            {
+                DataTable tabla = new DataTable();
+                tabla.Columns.Add("Articulo", typeof(string));
+                tabla.Columns.Add("Movimientos", typeof(int));
+                tabla.Columns.Add("Aprobados", typeof(int));
+                tabla.Columns.Add("Desvios", typeof(int));
+                tabla.Columns.Add("Rechazados", typeof(int));
+                tabla.Columns.Add("CertificadosOk", typeof(int));
+                tabla.Columns.Add("EnvasesOk", typeof(int));
+                tabla.Columns.Add("Retrasos", typeof(int));
+                tabla.Columns.Add("Pasa", typeof(char));
+
+                WProveedor["Pasa"] = " ";
+
+                foreach (string WEmpresa in XEmpresas)
+                {
+                    DataTable WInformes = _TraerInformesPorProveedorFarmaEmpresa(WProveedor["Proveedor"].ToString(), WProveedor["Articulo"].ToString(), WDesde, WHasta, WEmpresa);
+
+                    if (WInformes.Rows.Count > 0)
+                    {
+                        // Marco el Proveedor
+                        WProveedor["Pasa"] = "S";
+                    }
+                    else
+                    {
+                        DataRow fila = tabla.NewRow();
+
+                        fila["Articulo"] = WProveedor["Articulo"];
+                        //fila["Pasa"] = WProveedor["Pasa"];
+                        //fila["Proveedor"] = WProveedor["Proveedor"];
+                        //fila["Razon"] = WProveedor["Razon"];
+                        fila["Movimientos"] = 0;
+                        fila["CertificadosOk"] = 0;
+                        fila["EnvasesOk"] = 0;
+                        fila["Retrasos"] = 0;
+                        fila["Aprobados"] = 0;
+                        fila["Desvios"] = 0;
+                        fila["Rechazados"] = 0;
+
+                        tabla.Rows.Add(fila);
+                    }
+
+                    foreach (DataRow WInforme in WInformes.Rows)
+                    {
+                        int WMovimientos = 0, WCertificadosOk = 0, WEnvasesOk = 0, WDiasRetrasos = 0;
+                        int WAprobados = 0, WRechazados = 0, WDesvio = 0, WDevuelta = 0;
+
+                        DataRow fila = tabla.NewRow();
+
+                        int WDiferenciaDias = _CalcularDiferenciaDiasEntreInformeYOrden(WInforme["Articulo"].ToString(),
+                            WInforme["Orden"].ToString(),
+                            WInforme["Fecha"].ToString(),
+                            WEmpresa);
+
+                        int WCertificado = WInforme["Certificado1"] == null ? 0 : int.Parse(WInforme["Certificado1"].ToString());
+                        if (WCertificado == 1) WCertificadosOk++;
+
+                        int WEstado = WInforme["Estado1"] == null ? 0 : int.Parse(WInforme["Estado1"].ToString());
+                        if (WEstado == 1) WEnvasesOk++;
+
+                        WDiasRetrasos += WDiferenciaDias;
+
+                        DataTable WLaudos = _TraerArticulosPorInforme(WInforme["Informe"].ToString(), WInforme["Articulo"].ToString(), WEmpresa);
+
+                        string WNumLaudo = "";
+
+                        WMovimientos++;
+
+                        fila["Articulo"] = WInforme["Articulo"];
+
+                        foreach (DataRow WLaudo in WLaudos.Rows)
+                        {
+                            string WMarca = WLaudo["Marca"] == null ? "" : WLaudo["Marca"].ToString();
+                            int WDevueltaAnt = 0;
+
+                            WNumLaudo = WLaudo["Laudo"].ToString();
+
+                            if (WMarca.ToUpper() == "X")
+                            {
+                                WDevueltaAnt = WLaudo["DevueltaAnt"] == null
+                                    ? 0
+                                    : int.Parse(WLaudo["DevueltaAnt"].ToString());
+
+                                if (WDevueltaAnt != 0)
+                                {
+                                    WDevuelta++;
+                                }
+                            }
+                            else
+                            {
+                                WDevueltaAnt = WLaudo["Devuelta"] == null ? 0 : int.Parse(WLaudo["Devuelta"].ToString());
+
+                                if (WDevueltaAnt != 0)
+                                {
+                                    WDevuelta++;
+                                }
+                            }
+
+                            if (WDevueltaAnt != 0)
+                            {
+                                WRechazados++;
+                            }
+                            else
+                            {
+                                if (WNumLaudo == "") continue;
+
+                                int XLaudo = int.Parse(WNumLaudo);
+
+                                if (_EsDevio(XLaudo))
+                                {
+                                    WDesvio++;
+                                }
+                                else
+                                {
+                                    WAprobados++;
+                                }
+                            }
+                        }
+
+                        fila["Movimientos"] = WMovimientos;
+                        fila["CertificadosOk"] = WCertificadosOk;
+                        fila["EnvasesOk"] = WEnvasesOk;
+                        fila["Retrasos"] = WMovimientos != 0 ? Math.Truncate((double)WDiasRetrasos / WMovimientos) : WDiasRetrasos;
+                        fila["Aprobados"] = WMovimientos - WRechazados; //WAprobados;
+                        fila["Desvios"] = WDesvio;
+                        fila["Rechazados"] = WRechazados;
+
+                        tabla.Rows.Add(fila);
+                    }
+                }
+
+                DataTable codigos = (new DataView(tabla)).ToTable(true, "Articulo");
+
+                foreach (DataRow codigo in codigos.Rows)
+                {
+                    DataRow filaProv = WDatosFinales.NewRow();
+
+                    filaProv["Proveedor"] = WProveedor["Proveedor"];
+                    filaProv["Razon"] = WProveedor["Razon"];
+                    filaProv["Pasa"] = WProveedor["Pasa"];
+
+                    filaProv["Movimientos"] = 0;
+                    filaProv["CertificadosOk"] = 0;
+                    filaProv["EnvasesOk"] = 0;
+                    filaProv["Retrasos"] = 0;
+                    filaProv["Aprobados"] = 0;
+                    filaProv["Desvios"] = 0;
+                    filaProv["Rechazados"] = 0;
+
+                    DataRow[] datos = tabla.Select("Articulo = '" + codigo["Articulo"] + "'");
+
+                    foreach (DataRow fila in datos)
+                    {
+                        filaProv["Articulo"] = fila["Articulo"];
+                        filaProv["Movimientos"] = int.Parse(filaProv["Movimientos"].ToString()) + int.Parse(fila["Movimientos"].ToString()); //WMovimientos;
+                        filaProv["CertificadosOk"] = int.Parse(filaProv["CertificadosOk"].ToString()) + int.Parse(fila["CertificadosOk"].ToString()); //WCertificadosOk;
+                        filaProv["EnvasesOk"] = int.Parse(filaProv["EnvasesOk"].ToString()) + int.Parse(fila["EnvasesOk"].ToString()); //WEnvasesOk;
+                        filaProv["Retrasos"] = int.Parse(filaProv["Retrasos"].ToString()) + int.Parse(fila["Retrasos"].ToString()); ; //WMovimientos != 0 ? Math.Truncate((double)WDiasRetrasos / WMovimientos) : WDiasRetrasos;
+                        filaProv["Aprobados"] = int.Parse(filaProv["Aprobados"].ToString()) + int.Parse(fila["Aprobados"].ToString()); ; //WMovimientos - WRechazados; //WAprobados;
+                        filaProv["Desvios"] = int.Parse(filaProv["Desvios"].ToString()) + int.Parse(fila["Desvios"].ToString()); ; // WDesvio;
+                        filaProv["Rechazados"] = int.Parse(filaProv["Rechazados"].ToString()) + int.Parse(fila["Rechazados"].ToString()); ; // WRechazados;
+                    }
+
+                    WDatosFinales.Rows.Add(filaProv);
+
+                }
+
+                progressBar.Increment(1);
+            }
+
+            return WDatosFinales;
+        }
+
+        private static DataTable _TraerProveedoresFarma()
+        {
+            DataTable tabla = new DataTable();
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["SurfactanSA"].ConnectionString;
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT distinct p.Proveedor, p.Nombre Razon, ct.Articulo FROM Proveedor p INNER JOIN Cotiza ct ON ct.Proveedor = p.Proveedor INNER JOIN Articulo a ON a.Codigo = ct.Articulo AND a.ClasificacionFarma > 0 ORDER BY p.nombre, ct.Articulo";
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.HasRows)
+                        {
+                            tabla.Load(dr);
+                        }
+                    }
+                }
+
+            }
+
+            return tabla;
+        }
+
         public static string _DeterminarCalidad(string ZCategoriaI)
         {
             string Calidad = "";
@@ -384,7 +615,37 @@ namespace Eval_Proveedores
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = conn;
-                    cmd.CommandText = "SELECT Clave, Informe, Fecha, FechaOrd, Orden, Articulo, Cantidad, Certificado1, Estado1 FROM Informe WHERE Proveedor = '" + WProveedor + "' AND FechaOrd BETWEEN " + WDesde + " AND " + WHasta + " ORDER BY Informe, Renglon";
+                    cmd.CommandText = "SELECT i.Clave, i.Informe, i.Fecha, i.FechaOrd, i.Orden, i.Articulo, i.Cantidad, i.Certificado1, i.Estado1 FROM Informe i INNER JOIN Articulo a ON a.Codigo = i.Articulo WHERE ISNULL(a.ClasificacionFarma, 0) > 0 And i.Proveedor = '" + WProveedor + "' AND i.FechaOrd BETWEEN " + WDesde + " AND " + WHasta + " ORDER BY i.Informe, i.Renglon";
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.HasRows)
+                        {
+                            WInformes.Load(dr);
+                        }
+                    }
+                }
+
+            }
+
+            return WInformes;
+        }
+
+        public static DataTable _TraerInformesPorProveedorFarmaEmpresa(string WProveedor, string WArticulo, string WFechaDesde, string WFechaHasta, string wEmpresa)
+        {
+            DataTable WInformes = new DataTable();
+            string WDesde = OrdenarFecha(WFechaDesde);
+            string WHasta = OrdenarFecha(WFechaHasta);
+
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings[wEmpresa].ConnectionString;
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT i.Clave, i.Informe, i.Fecha, i.FechaOrd, i.Orden, i.Articulo, i.Cantidad, i.Certificado1, i.Estado1 FROM Informe i WHERE i.Articulo = '" + WArticulo + "' And i.Proveedor = '" + WProveedor + "' AND i.FechaOrd BETWEEN " + WDesde + " AND " + WHasta + " ORDER BY i.Informe, i.Renglon";
 
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
@@ -497,6 +758,13 @@ namespace Eval_Proveedores
             }
 
             return diferencia;
+        }
+
+        public static object OrDefault(object value, object DefaulValue)
+        {
+            if (value == null || value.GetType() == Type.GetType("System.DBNull")) return DefaulValue;
+
+            return value;
         }
     }
 }

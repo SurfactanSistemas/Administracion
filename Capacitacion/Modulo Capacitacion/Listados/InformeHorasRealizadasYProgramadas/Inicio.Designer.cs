@@ -46,11 +46,12 @@ namespace Modulo_Capacitacion.Listados.InformeHorasRealizadasYProgramadas
             this.txtDescLegajo = new System.Windows.Forms.TextBox();
             this.txtDescCurso = new System.Windows.Forms.TextBox();
             this.txtCurso = new System.Windows.Forms.TextBox();
-            this.ckExcluir99 = new System.Windows.Forms.CheckBox();
             this.cmbTipo = new System.Windows.Forms.ComboBox();
             this.txtAnio = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.rbPorCurso = new System.Windows.Forms.RadioButton();
+            this.rbPorLegajo = new System.Windows.Forms.RadioButton();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -112,8 +113,9 @@ namespace Modulo_Capacitacion.Listados.InformeHorasRealizadasYProgramadas
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.rbPorLegajo);
+            this.groupBox1.Controls.Add(this.rbPorCurso);
             this.groupBox1.Controls.Add(this.groupBox2);
-            this.groupBox1.Controls.Add(this.ckExcluir99);
             this.groupBox1.Controls.Add(this.cmbTipo);
             this.groupBox1.Controls.Add(this.txtAnio);
             this.groupBox1.Controls.Add(this.label3);
@@ -225,16 +227,6 @@ namespace Modulo_Capacitacion.Listados.InformeHorasRealizadasYProgramadas
             this.txtCurso.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCurso_KeyDown);
             this.txtCurso.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAnio_KeyPress);
             // 
-            // ckExcluir99
-            // 
-            this.ckExcluir99.AutoSize = true;
-            this.ckExcluir99.Location = new System.Drawing.Point(351, 25);
-            this.ckExcluir99.Name = "ckExcluir99";
-            this.ckExcluir99.Size = new System.Drawing.Size(129, 17);
-            this.ckExcluir99.TabIndex = 3;
-            this.ckExcluir99.Text = "EXCLUIR TEMA = 99";
-            this.ckExcluir99.UseVisualStyleBackColor = true;
-            // 
             // cmbTipo
             // 
             this.cmbTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -243,14 +235,14 @@ namespace Modulo_Capacitacion.Listados.InformeHorasRealizadasYProgramadas
             "COMPLETO",
             "SÓLO CUMPLIDOS",
             "SÓLO PENDIENTES"});
-            this.cmbTipo.Location = new System.Drawing.Point(193, 23);
+            this.cmbTipo.Location = new System.Drawing.Point(189, 23);
             this.cmbTipo.Name = "cmbTipo";
-            this.cmbTipo.Size = new System.Drawing.Size(152, 21);
+            this.cmbTipo.Size = new System.Drawing.Size(135, 21);
             this.cmbTipo.TabIndex = 2;
             // 
             // txtAnio
             // 
-            this.txtAnio.Location = new System.Drawing.Point(57, 23);
+            this.txtAnio.Location = new System.Drawing.Point(53, 23);
             this.txtAnio.MaxLength = 4;
             this.txtAnio.Name = "txtAnio";
             this.txtAnio.Size = new System.Drawing.Size(41, 20);
@@ -263,7 +255,7 @@ namespace Modulo_Capacitacion.Listados.InformeHorasRealizadasYProgramadas
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(104, 27);
+            this.label3.Location = new System.Drawing.Point(100, 27);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(84, 13);
             this.label3.TabIndex = 0;
@@ -272,11 +264,38 @@ namespace Modulo_Capacitacion.Listados.InformeHorasRealizadasYProgramadas
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(22, 27);
+            this.label2.Location = new System.Drawing.Point(18, 27);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(29, 13);
             this.label2.TabIndex = 0;
             this.label2.Text = "Año:";
+            // 
+            // rbPorCurso
+            // 
+            this.rbPorCurso.AutoSize = true;
+            this.rbPorCurso.Checked = true;
+            this.rbPorCurso.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbPorCurso.Location = new System.Drawing.Point(344, 16);
+            this.rbPorCurso.Name = "rbPorCurso";
+            this.rbPorCurso.Size = new System.Drawing.Size(136, 16);
+            this.rbPorCurso.TabIndex = 5;
+            this.rbPorCurso.TabStop = true;
+            this.rbPorCurso.Text = "AGRUPADO POR CURSO";
+            this.rbPorCurso.UseVisualStyleBackColor = true;
+            this.rbPorCurso.Click += new System.EventHandler(this.rbPorCurso_Click);
+            // 
+            // rbPorLegajo
+            // 
+            this.rbPorLegajo.AutoSize = true;
+            this.rbPorLegajo.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbPorLegajo.Location = new System.Drawing.Point(344, 39);
+            this.rbPorLegajo.Name = "rbPorLegajo";
+            this.rbPorLegajo.Size = new System.Drawing.Size(139, 16);
+            this.rbPorLegajo.TabIndex = 5;
+            this.rbPorLegajo.TabStop = true;
+            this.rbPorLegajo.Text = "AGRUPADO POR LEGAJO";
+            this.rbPorLegajo.UseVisualStyleBackColor = true;
+            this.rbPorLegajo.Click += new System.EventHandler(this.rbPorCurso_Click);
             // 
             // Inicio
             // 
@@ -315,7 +334,6 @@ namespace Modulo_Capacitacion.Listados.InformeHorasRealizadasYProgramadas
         private TextBox txtAnio;
         private Label label3;
         private ComboBox cmbTipo;
-        private CheckBox ckExcluir99;
         private GroupBox groupBox2;
         private Label label6;
         private Label label5;
@@ -325,5 +343,7 @@ namespace Modulo_Capacitacion.Listados.InformeHorasRealizadasYProgramadas
         private TextBox txtCurso;
         private TextBox txtDescLegajo;
         private TextBox txtDescCurso;
+        private RadioButton rbPorLegajo;
+        private RadioButton rbPorCurso;
     }
 }

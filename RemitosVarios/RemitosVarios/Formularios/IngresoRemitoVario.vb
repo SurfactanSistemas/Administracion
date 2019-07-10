@@ -34,6 +34,9 @@ Public Class IngresoRemitoVario
 
         ckBloquear.Checked = False
 
+        rbClienteSurfactan.Checked = True
+        rbClienteSurfactan_Click(rbClienteSurfactan, Nothing)
+
     End Sub
 
     Private Sub IngresoOrdenTrabajo_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
@@ -163,7 +166,7 @@ Public Class IngresoRemitoVario
                 Exit Sub
             End If
 
-            txtDesCliente.Focus()
+            txtDireccionEntrega.Focus()
 
         ElseIf e.KeyData = Keys.Escape Then
             txtCliente.Text = ""
@@ -341,18 +344,20 @@ Public Class IngresoRemitoVario
 
             trans.Commit()
 
-            MsgBox("Remito grabado con Nº " & WRemito, MsgBoxStyle.Information)
+            'MsgBox("Remito grabado con Nº " & WRemito, MsgBoxStyle.Information)
 
-            If MsgBox("¿Desea imprimir el remito?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+            Dim frm As VistaPrevia = New VistaPrevia()
 
-                Dim frm As VistaPrevia = New VistaPrevia()
+            frm.Reporte = New ImpRemito2()
+            frm.Formula = "{RemitosVarios.Remito}='" & WRemito & "'"
 
-                frm.Reporte = New ImpRemito2()
-                frm.Formula = "{RemitosVarios.Remito}='" & WRemito & "'"
+            'frm.Mostrar()
+            frm.Imprimir()
 
-                'frm.Mostrar()
-                frm.Imprimir()
-            End If
+            'If MsgBox("¿Desea imprimir el remito?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+
+
+            'End If
 
             btnLimpiar.PerformClick()
 
@@ -375,19 +380,84 @@ Public Class IngresoRemitoVario
 
     Private Function _DatosValidos() As Boolean
 
-        If Panel3.Controls.OfType(Of TextBox)().Any(Function(st) (st.Text.Trim() = "" And st.Name <> "txtRemito")) Then
+        'If Panel3.Controls.OfType(Of TextBox)().Any(Function(st) (st.Text.Trim() = "" And st.Name <> "txtRemito")) Then
+        '    Return False
+        'End If
+
+        'If Panel3.Controls.OfType(Of MaskedTextBox)().Any(Function(st) (st.Text.Trim().Replace("/", "") = "")) Then
+        '    Return False
+        'End If
+
+        'If GroupBox1.Controls.OfType(Of TextBox)().Any(Function(st) st.Text.Trim() = "") Then
+        '    Return False
+        'End If
+
+        'If GroupBox1.Controls.OfType(Of MaskedTextBox)().Any(Function(st) (st.Text.Trim().Replace("/", "") = "" And st.Name <> "txtCliente")) Then
+        '    Return False
+        'End If
+
+        If txtFecha.Text.Replace(" ", "").Length < 10 OrElse Not _ValidarFecha(txtFecha.Text) Then
+            MsgBox("Debe indicarse una fecha válida.", MsgBoxStyle.Exclamation)
+            txtFecha.Focus()
             Return False
         End If
 
-        If Panel3.Controls.OfType(Of MaskedTextBox)().Any(Function(st) (st.Text.Trim().Replace("/", "") = "")) Then
+        If rbClienteSurfactan.Checked Then
+
+            If txtCliente.Text.Trim() = "" Then
+                MsgBox("Debe indicarse un Cliente válido.", MsgBoxStyle.Exclamation)
+                txtCliente.Focus()
+                Return False
+            Else
+                Dim WCliente As DataRow = GetSingle("SELECT Cliente FROM Cliente WHERE Cliente = '" & txtCliente.Text & "'")
+
+                If WCliente Is Nothing Then
+                    MsgBox("Debe indicarse un Cliente válido.", MsgBoxStyle.Exclamation)
+                    txtCliente.Focus()
+                    Return False
+                End If
+            End If
+        Else
+            If txtDesCliente.Text.Trim() = "" Then
+                MsgBox("Debe indicarse un Nombre de Cliente válido.", MsgBoxStyle.Exclamation)
+                txtCliente.Focus()
+                Return False
+            End If
+        End If
+
+        If txtDireccion.Text.Trim() = "" Then
+            MsgBox("Debe indicarse un Dirección de Cliente válido.", MsgBoxStyle.Exclamation)
+            txtDireccion.Focus()
             Return False
         End If
 
-        If GroupBox1.Controls.OfType(Of TextBox)().Any(Function(st) st.Text.Trim() = "") Then
+        If txtLocalidad.Text.Trim() = "" Then
+            MsgBox("Debe indicarse una Localidad válida.", MsgBoxStyle.Exclamation)
+            txtLocalidad.Focus()
             Return False
         End If
 
-        If GroupBox1.Controls.OfType(Of MaskedTextBox)().Any(Function(st) (st.Text.Trim().Replace("/", "") = "" And st.Name <> "txtCliente")) Then
+        If txtCuit.Text.Replace(" ", "").Length = 13 Then
+
+            If Not Helper.CuitValido(txtCuit.Text.Replace("-", "")) Then
+
+                MsgBox("Debe indicarse un Cuit de Cliente válido.", MsgBoxStyle.Exclamation)
+                txtLocalidad.Focus()
+                Return False
+
+            End If
+
+        End If
+
+        If txtDireccionEntrega.Text.Trim() = "" Then
+            MsgBox("Debe indicarse una Dirección de Entrega válida.", MsgBoxStyle.Exclamation)
+            txtDireccionEntrega.Focus()
+            Return False
+        End If
+
+        If txtObservaciones.Text.Trim() = "" Then
+            MsgBox("Debe indicarse qué se remita.", MsgBoxStyle.Exclamation)
+            txtObservaciones.Focus()
             Return False
         End If
 
@@ -459,5 +529,33 @@ Public Class IngresoRemitoVario
         For Each c As Control In {txtCuit, txtDesCliente, txtDireccion, txtDireccionEntrega, txtLocalidad}
             c.Enabled = Not c.Enabled
         Next
+    End Sub
+
+    Private Sub rbClienteSurfactan_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbNoCliente.Click, rbClienteSurfactan.Click
+
+        Dim WControl As RadioButton = TryCast(sender, RadioButton)
+
+        If WControl Is Nothing Then Exit Sub
+
+        If WControl.Name = rbClienteSurfactan.Name Then
+
+            txtCliente.Enabled = True
+            txtDesCliente.Enabled = False
+            btnDireccionesEntrega.Enabled = True
+            btnConsultas.Enabled = True
+
+            txtCliente.Focus()
+
+        Else
+            txtCliente.Text = ""
+            txtCliente.Enabled = False
+            txtDesCliente.Enabled = True
+            btnDireccionesEntrega.Enabled = False
+            btnConsultas.Enabled = False
+
+            txtDesCliente.Focus()
+
+        End If
+
     End Sub
 End Class

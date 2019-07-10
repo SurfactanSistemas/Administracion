@@ -1,11 +1,14 @@
-﻿namespace Modulo_Capacitacion.Listados.PlanCapacitacionAnualTentativo
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Modulo_Capacitacion.Listados.PlanCapacitacionAnualTentativo
 {
     partial class AsignaTema
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -151,13 +154,13 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dgvLegajos;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label LBPerfil;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Tema;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DescTema;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Horas;
+        private DataGridView dgvLegajos;
+        private Panel panel1;
+        private Label LBPerfil;
+        private Button button2;
+        private Button button1;
+        private DataGridViewTextBoxColumn Tema;
+        private DataGridViewTextBoxColumn DescTema;
+        private DataGridViewTextBoxColumn Horas;
     }
 }

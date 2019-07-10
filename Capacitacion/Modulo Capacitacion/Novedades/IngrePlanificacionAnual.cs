@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using Modulo_Capacitacion.Auxiliares;
 using Modulo_Capacitacion.Interfaces;
 using Negocio;
 
@@ -525,8 +526,8 @@ namespace Modulo_Capacitacion.Novedades
 
             if (DGV_Crono.CurrentRow != null)
             {
-                Auxiliares.CursosDisponibles frm =
-                    new Auxiliares.CursosDisponibles(DGV_Crono.CurrentRow.Cells["Tema"].Value.ToString(),
+                CursosDisponibles frm =
+                    new CursosDisponibles(DGV_Crono.CurrentRow.Cells["Tema"].Value.ToString(),
                         DGV_Crono.CurrentRow.Index);
 
                 frm.Show(this);
@@ -568,7 +569,7 @@ namespace Modulo_Capacitacion.Novedades
 
         private void TB_DesLegajo_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            Auxiliares.AyudaLegajosActivos frm = new Auxiliares.AyudaLegajosActivos();
+            AyudaLegajosActivos frm = new AyudaLegajosActivos();
 
             frm.Show(this);
         }
@@ -581,7 +582,7 @@ namespace Modulo_Capacitacion.Novedades
 
         private void TB_CodLegajo_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            Auxiliares.AyudaLegajosActivos frm = new Auxiliares.AyudaLegajosActivos();
+            AyudaLegajosActivos frm = new AyudaLegajosActivos();
 
             frm.Show(this);
         }

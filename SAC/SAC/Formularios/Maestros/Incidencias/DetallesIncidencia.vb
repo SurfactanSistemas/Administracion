@@ -480,7 +480,7 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
                 If MsgBox("¿Desea enviar el aviso al Responsable de Calidad?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes _
                     Then
 
-                    _EnviarEmail("ebiglieri@surfactan.com.ar; calidad@surfactan.com.ar; wbarosio@surfactan.com.ar; calidad2@surfactan.com.ar; isocalidad@surfactan.com.ar;juanfs@surfactan.com.ar; lsantos@surfactan.com.ar; drodriguez@surfactan.com.ar; iburgos@surfactan.com.ar; ctomaszek@surfactan.com.ar; mlaura@surfactan.com.ar; mescames@surfactan.com.ar; supcc@surfactan.com.ar; svarela@surfactan.com.ar;",
+                    _EnviarEmail("ebiglieri@surfactan.com.ar; calidad@surfactan.com.ar; wbarosio@surfactan.com.ar; calidad2@surfactan.com.ar; isocalidad@surfactan.com.ar;juanfs@surfactan.com.ar; lsantos@surfactan.com.ar; drodriguez@surfactan.com.ar; iburgos@surfactan.com.ar; ctomaszek@surfactan.com.ar; mlaura@surfactan.com.ar; mescames@surfactan.com.ar; supcc@surfactan.com.ar; svarela@surfactan.com.ar; textil@surfactan.com.ar; hfondevielle@surfactan.com.ar; hsuarez@surfactan.com.ar;",
                                  "Carga de Informe de No Conformidad - Nro.:" + txtIncidencia.Text.PadLeft(4, "0") +
                                  " - " + Microsoft.VisualBasic.Left(txtReferencia.Text, 50),
                                  "Se inició un Informe de No Conformidad : " & txtIncidencia.Text.PadLeft(4, "0") & vbCrLf &

@@ -1,11 +1,14 @@
-﻿namespace Modulo_Capacitacion.Novedades
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Modulo_Capacitacion.Novedades
 {
     partial class IngrePlanificacionAnual
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -491,39 +494,39 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label LBPerfil;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Button BT_Salir;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label LFechaAviso;
-        private System.Windows.Forms.TextBox TB_Año;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.ComboBox TB_DesLegajob;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.ComboBox TB_CodLegajob;
-        private System.Windows.Forms.Button BT_LimpiarPant;
-        private System.Windows.Forms.Button BT_Guardar;
-        private System.Windows.Forms.Button TB_Buscar;
-        private System.Windows.Forms.Panel panel10;
-        private System.Windows.Forms.ComboBox TB_DescTemas;
-        private System.Windows.Forms.Panel panel11;
-        private System.Windows.Forms.ComboBox TB_CodTemas;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Button BT_AgregarCurso;
-        private System.Windows.Forms.ComboBox CB_Curso;
-        private System.Windows.Forms.Label LB_Curso;
-        private System.Windows.Forms.DataGridView DGV_Crono;
-        private System.Windows.Forms.Label lblAtencion;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Tema;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DesTema;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Curso;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DesCurso;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Horas;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Realizado;
-        private System.Windows.Forms.TextBox TB_DesLegajo;
-        private System.Windows.Forms.TextBox TB_CodLegajo;
+        private Panel panel1;
+        private Label LBPerfil;
+        private Panel panel2;
+        private Panel panel3;
+        private Button BT_Salir;
+        private Label label1;
+        private Label LFechaAviso;
+        private TextBox TB_Año;
+        private Panel panel5;
+        private ComboBox TB_DesLegajob;
+        private Panel panel4;
+        private ComboBox TB_CodLegajob;
+        private Button BT_LimpiarPant;
+        private Button BT_Guardar;
+        private Button TB_Buscar;
+        private Panel panel10;
+        private ComboBox TB_DescTemas;
+        private Panel panel11;
+        private ComboBox TB_CodTemas;
+        private Label label14;
+        private Button BT_AgregarCurso;
+        private ComboBox CB_Curso;
+        private Label LB_Curso;
+        private DataGridView DGV_Crono;
+        private Label lblAtencion;
+        private GroupBox groupBox1;
+        private DataGridViewTextBoxColumn Tema;
+        private DataGridViewTextBoxColumn DesTema;
+        private DataGridViewTextBoxColumn Curso;
+        private DataGridViewTextBoxColumn DesCurso;
+        private DataGridViewTextBoxColumn Horas;
+        private DataGridViewTextBoxColumn Realizado;
+        private TextBox TB_DesLegajo;
+        private TextBox TB_CodLegajo;
     }
 }

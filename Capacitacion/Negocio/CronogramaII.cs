@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using ClassConexion;
 using System.Data;
+using ClassConexion;
 
 namespace Negocio
 {
@@ -59,7 +57,7 @@ namespace Negocio
 
         public object BuscarUnoPorAño(string p)
         {
-            ClassConexion.Conexion repo = new ClassConexion.Conexion();
+            Conexion repo = new Conexion();
 
             //string consulta = "select curso,count(*) as Personas,sum(horas) as Horas ,sum(Realizado) as Cursadas,"
             //+ "(sum(horas) -sum(Realizado)) as Resta  from cronograma where  ano = " + p + " group by curso order by curso asc";
@@ -73,9 +71,9 @@ namespace Negocio
             return DT;
         }
 
-        public System.Data.DataTable ListarPorCurso(int Año, int Curso)
+        public DataTable ListarPorCurso(int Año, int Curso)
         {
-            ClassConexion.Conexion repo = new ClassConexion.Conexion();
+            Conexion repo = new Conexion();
 
             //string consulta = "select curso,count(*) as Personas,sum(horas) as Horas ,sum(Realizado) as Cursadas,"
             //+ "(sum(horas) -sum(Realizado)) as Resta  from cronograma where  ano = " + p + " group by curso order by curso asc";
@@ -101,12 +99,12 @@ namespace Negocio
         {
             Conexion repo = new Conexion();
 
-                var clave1 = this.Año.ToString().PadLeft(4, '0');
-                var clave2 = this.Curso.ToString().PadLeft(4, '0');
+                var clave1 = Año.PadLeft(4, '0');
+                var clave2 = Curso.ToString().PadLeft(4, '0');
 
-                var horas = this.Horas.ToString().Replace(",", ".");
-                var realizado = this.HorasRealizadas.ToString().Replace(",", ".");
-                float porce = (this.HorasRealizadas * 100) / this.Horas;
+                var horas = Horas.ToString().Replace(",", ".");
+                var realizado = HorasRealizadas.ToString().Replace(",", ".");
+                float porce = (HorasRealizadas * 100) / Horas;
 
                 var procentaje = !float.IsNaN(porce) ? porce.ToString().Replace(",", ".") : "0";                
 

@@ -18,8 +18,14 @@ namespace Modulo_Capacitacion.Listados.InformedeCompetencias
             cmbSectores.ValueMember = "Codigo";
             cmbSectores.SelectedIndex = 0;
 
+            cmbPerfiles.DataSource = _TraerPerfiles();
+            cmbPerfiles.DisplayMember = "Descripcion";
+            cmbPerfiles.ValueMember = "Codigo";
+            cmbPerfiles.SelectedIndex = 0;
+
             rbPorLegajo.Checked = true;
             cmbSectores.Enabled = false;
+            cmbPerfiles.Enabled = false;
         }
 
         private DataTable _TraerSectores()
@@ -40,6 +46,39 @@ namespace Modulo_Capacitacion.Listados.InformedeCompetencias
                 {
                     cmd.Connection = conn;
                     cmd.CommandText = "SELECT Codigo, Descripcion FROM Sector";
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.HasRows)
+                        {
+                            tabla.Load(dr);
+                        }
+                    }
+                }
+
+            }
+
+            return tabla;
+        }
+
+        private DataTable _TraerPerfiles()
+        {
+            DataTable tabla = new DataTable();
+
+            tabla.Columns.Add("Codigo", typeof(int));
+            tabla.Columns.Add("Descripcion", typeof(string));
+
+            tabla.Rows.Add(0, "Todos");
+
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["Surfactan"].ConnectionString;
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT Codigo, Descripcion FROM Tarea WHERE Renglon = 1 and Descripcion <> '' Order by Descripcion";
 
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
@@ -76,13 +115,47 @@ namespace Modulo_Capacitacion.Listados.InformedeCompetencias
             return frm;
         }
 
+        private VistaPrevia _PrepararReporteIII()
+        {
+
+            ReportDocument reporte = new imprelegajo();
+
+            if (rbSi.Checked)
+            {
+                reporte = new imprelegajoii();
+            }
+
+            string WFiltro = "{Legajo.Perfil} = " + cmbPerfiles.SelectedValue;
+
+            if (cmbPerfiles.SelectedIndex == 0)
+                WFiltro = "{Legajo.Perfil} in 0 to 9999";
+
+            VistaPrevia frm = new VistaPrevia();
+            frm.CargarReporte(reporte,
+                "{Legajo.Codigo} in 0 to 9999 AND {Legajo.FEgreso} in '' to '00/00/0000' AND " + WFiltro);
+            return frm;
+        }
+
         private void BT_Pantalla_Click(object sender, EventArgs e)
         {
             try
             {
-                var frm = (rbPorLegajo.Checked) ? _PrepararReporte() : _PrepararReporteII();
+                 VistaPrevia frmII;
 
-                frm.Show();
+                if (rbPorLegajo.Checked)
+                {
+                    frmII = _PrepararReporte();
+
+                }else if (rbPorSector.Checked)
+                {
+                    frmII = _PrepararReporteII();
+                }
+                else
+                {
+                    frmII = _PrepararReporteIII();
+                }
+
+                frmII.Show();
             }
             catch (Exception err)
             {
@@ -200,22 +273,27 @@ namespace Modulo_Capacitacion.Listados.InformedeCompetencias
         }
 
         private void rbPorLegajo_Click(object sender, EventArgs e)
-        {
-            TB_Desde.Enabled = rbPorLegajo.Checked && !rbPorSector.Checked;
+        { 
+            TB_Desde.Enabled = rbPorLegajo.Checked && !rbPorSector.Checked && !rbPorPerfil.Checked;
             TB_Hasta.Enabled = TB_Desde.Enabled;
 
-            cmbSectores.Enabled = rbPorSector.Enabled && !rbPorLegajo.Checked;
+            cmbSectores.Enabled = rbPorSector.Enabled;
+            cmbPerfiles.Enabled = rbPorPerfil.Enabled;
 
             if (rbPorLegajo.Checked)
             {
                 TB_Desde.Focus();
             }
-            else
+            else if (rbPorSector.Checked)
             {
                 cmbSectores.Focus();
                 cmbSectores.DroppedDown = true;
             }
+            else
+            {
+                cmbPerfiles.Focus();
+                cmbPerfiles.DroppedDown = true;
+            }
         }
-
     }
 }

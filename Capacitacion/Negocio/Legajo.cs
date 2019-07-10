@@ -309,31 +309,30 @@ namespace Negocio
         {
             Conexion repo = new Conexion();
 
-            
+            string consulta = "update Legajo set "
+            + " Descripcion = '" + L.Descripcion + "', FIngreso = '" + L.FIngreso + "', Perfil = '" + L.Perfil.Codigo + "',"
+            + " EstadoI = '" + L.EstadoI + "', EstadoII = '" + L.EstadoII + "', EstadoIII = '" + L.EstadoIII + "',"
+            + " EstadoIV = '" + L.EstadoIV + "', EstadoV = '" + L.EstadoV + "', EstadoVI = '" + L.EstadoVI + "',"
+            + " EstadoVII = '" + L.EstadoVII + "', EstadoVIII = '" + L.EstadoVIII + "', EstadoIX = '" + L.EstadoIX + "',"
+            + " EstadoX = '" + L.EstadoX + "', EstaI = '" + L.EstaI + "', EstaII = '" + L.EstaII + "',"
+            + " EstaIII = '" + L.EstaIII + "', EstaIV = '" + L.EstaIV + "', EstaV = '" + L.EstaV + "',"
+            + " EstaVI = '" + L.EstaVI + "', EstaVII = '" + L.EstaVII + "', EstaVIII = '" + L.EstaVIII + "',"
+            + " EstaIX = '" + L.EstaIX + "', EstaX = '" + L.EstaX + "',"
+            + " ObservaI1 = '" + L.EstadoI + "', ObservaI2 = '" + L.EstadoII + "', ObservaI3 = '" + L.EstadoIII + "',"
+            + " ObservaI4 = '" + L.EstadoIV + "', ObservaI5 = '" + L.EstadoV + "', ObservaII1 = '" + L.ObservExtI + "',"
+            + " ObservaII2 = '" + L.ObservExtII + "', ObservaII3 = '" + L.ObservExtIII + "', ObservaII4 = '" + L.ObservExtIV + "',"
+            + " ObservaII5 = '" + L.ObservExtIV + "', Actualizado = ' ', Sector = '" + L.Sector.Codigo + "', DesSector = '" + L.Sector.Descripcion + "', Dni = '" + L.DNI + "'  where Codigo = " + L.Codigo;
 
-            
-                string consulta = "update Legajo set "
-                + " Descripcion = '" + L.Descripcion + "', FIngreso = '" + L.FIngreso + "', Perfil = '" + L.Perfil.Codigo + "',"
-                + " EstadoI = '" + L.EstadoI + "', EstadoII = '" + L.EstadoII + "', EstadoIII = '" + L.EstadoIII + "',"
-                + " EstadoIV = '" + L.EstadoIV + "', EstadoV = '" + L.EstadoV + "', EstadoVI = '" + L.EstadoVI + "',"
-                + " EstadoVII = '" + L.EstadoVII + "', EstadoVIII = '" + L.EstadoVIII + "', EstadoIX = '" + L.EstadoIX + "',"
-                + " EstadoX = '" + L.EstadoX + "', EstaI = '" + L.EstaI + "', EstaII = '" + L.EstaII + "',"
-                + " EstaIII = '" + L.EstaIII + "', EstaIV = '" + L.EstaIV + "', EstaV = '" + L.EstaV + "',"
-                + " EstaVI = '" + L.EstaVI + "', EstaVII = '" + L.EstaVII + "', EstaVIII = '" + L.EstaVIII + "',"
-                + " EstaIX = '" + L.EstaIX + "', EstaX = '" + L.EstaX + "',"
-                + " ObservaI1 = '" + L.EstadoI + "', ObservaI2 = '" + L.EstadoII + "', ObservaI3 = '" + L.EstadoIII + "',"
-                + " ObservaI4 = '" + L.EstadoIV + "', ObservaI5 = '" + L.EstadoV + "', ObservaII1 = '" + L.ObservExtI + "',"
-                + " ObservaII2 = '" + L.ObservExtII + "', ObservaII3 = '" + L.ObservExtIII + "', ObservaII4 = '" + L.ObservExtIV + "',"
-                + " ObservaII5 = '" + L.ObservExtIV + "', Actualizado = ' ', Sector = '" + L.Sector.Codigo + "', DesSector = '" + L.Sector.Descripcion + "', Dni = '" + L.DNI + "'  where Codigo = " + L.Codigo;
+            repo.Modificar(consulta);
+
+            foreach (Tema tema in L.Temas)
+            {
+                consulta = "UPDATE Legajo SET EstaCurso = '" + tema.Estado + "' WHERE Codigo = '" + L.Codigo +
+                           "' And Curso = '" + tema.Codigo + "'";
 
                 repo.Modificar(consulta);
-
-                
             }
-            
-
-
-        
+        }
 
         public void Eliminar(string IdAEliminar)
         {
@@ -408,13 +407,13 @@ namespace Negocio
 
 
 
-        public System.Data.DataTable LegajoPerfilResponsable(int Legajo)
+        public DataTable LegajoPerfilResponsable(int Legajo)
         {
             Conexion repo = new Conexion();
             string consulta = "select distinct L.Perfil, T.Responsable, T.ResponsableII, L.Descripcion from Legajo L inner join Tarea T on T.Codigo = L.Perfil where L.Codigo = " + Legajo;
 
 
-            System.Data.DataTable DT = repo.BuscarUno(consulta);
+            DataTable DT = repo.BuscarUno(consulta);
             return DT;
         }
 

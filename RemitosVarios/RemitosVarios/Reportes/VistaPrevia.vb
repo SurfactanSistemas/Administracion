@@ -11,7 +11,7 @@ Public Class VistaPrevia
 
         With Me.CrystalReportViewer1
             .ReportSource = Me.Reporte
-            .Refresh()
+            '.Refresh()
         End With
 
     End Sub
@@ -19,7 +19,7 @@ Public Class VistaPrevia
     Public Sub EstablecerConexion(ByVal Servidor As String, ByVal BaseDatos As String)
         With Me.Reporte
             .DataSourceConnections.Item(0).SetConnection(Trim(Servidor), Trim(BaseDatos), False)
-            .Refresh()
+            '.Refresh()
         End With
     End Sub
 
@@ -53,7 +53,7 @@ Public Class VistaPrevia
         conexion.ServerName = cnsb.DataSource
         conexion.UserID = cnsb.UserID
         conexion.Password = cnsb.Password
-        conexion.IntegratedSecurity = True
+        'conexion.IntegratedSecurity = True
 
         Dim tli As New TableLogOnInfo()
         tli.ConnectionInfo = conexion
@@ -84,7 +84,7 @@ Public Class VistaPrevia
 
             End If
 
-            .RefreshReport()
+            '.RefreshReport()
 
         End With
 
@@ -95,10 +95,10 @@ Public Class VistaPrevia
     Public Sub Imprimir(Optional ByVal cant As Integer = 1)
         'Me.Reporte.DataSourceConnections.Item(0).SetConnection("EMPRESA01", "SurfactanSA", False)
 
-        '_ReconectarBaseDatos()
+        _ReconectarBaseDatos()
 
         Me.Reporte.RecordSelectionFormula = IIf(IsNothing(Me.Formula), "", Me.Formula)
-        Me.Reporte.Refresh()
+        'Me.Reporte.Refresh()
         Me.Reporte.PrintToPrinter(cant, True, 0, 0)
     End Sub
 
@@ -112,7 +112,7 @@ Public Class VistaPrevia
         _ReconectarBaseDatos()
 
         Me.Reporte.RecordSelectionFormula = IIf(IsNothing(Me.Formula), "", Me.Formula)
-        Me.Reporte.Refresh()
+        'Me.Reporte.Refresh()
         Me.Reporte.ExportToDisk(ExportFormatType.PortableDocFormat, ruta & NombreArchivo)
     End Sub
 

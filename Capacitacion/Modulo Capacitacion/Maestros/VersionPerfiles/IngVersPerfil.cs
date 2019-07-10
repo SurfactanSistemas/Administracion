@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using Negocio;
 
@@ -25,7 +20,7 @@ namespace Modulo_Capacitacion.Maestros.VersionPerfiles
         private Perfil PerfilAModificar;
         public bool AModificar = false;
         DataTable dtPerfil;
-        bool Cargado = false;
+        bool Cargado;
         DataTable dtVersiones;
         
         public IngVersPerfil()
@@ -114,8 +109,8 @@ namespace Modulo_Capacitacion.Maestros.VersionPerfiles
             TB_Fecha.Text = PerVer.DesdeVigencia; //?
             DTP_FechaVigenciaII.Text = PerVer.HastaVigencia;
 
-            TB_CodSec.Text = this.PerVer.sector.Codigo.ToString();
-            TB_DescSector.Text = this.PerVer.sector.Descripcion;
+            TB_CodSec.Text = PerVer.sector.Codigo.ToString();
+            TB_DescSector.Text = PerVer.sector.Descripcion;
 
             //TB_CodResp1.Text = this.PerVer.R.Codigo.ToString();
             //TB_DescResp1.Text = this.PerVer.R.Descripcion;
@@ -123,9 +118,9 @@ namespace Modulo_Capacitacion.Maestros.VersionPerfiles
             //TB_CodResp2.Text = this.PerVer.R2.Codigo.ToString();
             //TB_DescResp2.Text = this.PerVer.R2.Descripcion;
 
-            TB_Tareas1.Text = this.PerVer.TareasI;
-            TB_Tareas2.Text = this.PerVer.TareasII;
-            TB_Tareas3.Text = this.PerVer.TareasIII;
+            TB_Tareas1.Text = PerVer.TareasI;
+            TB_Tareas2.Text = PerVer.TareasII;
+            TB_Tareas3.Text = PerVer.TareasIII;
 
             TB_Primaria.Text = PerVer.DescriI;
             TB_ObservPrimaria.Text = PerVer.ObservaI;
@@ -172,7 +167,7 @@ namespace Modulo_Capacitacion.Maestros.VersionPerfiles
         {
             DGV_Temas.Rows.Clear();
 
-            foreach (var item in this.PerVer.Temas)
+            foreach (var item in PerVer.Temas)
             {
                 DataGridViewRow row = new DataGridViewRow();
                 row.CreateCells(DGV_Temas);
@@ -249,7 +244,7 @@ namespace Modulo_Capacitacion.Maestros.VersionPerfiles
 
         private void BT_Salir_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void IngVersPerfil_Load(object sender, EventArgs e)
@@ -267,7 +262,7 @@ namespace Modulo_Capacitacion.Maestros.VersionPerfiles
 
         private void TB_DecPerfil_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Cargado == true)
+            if (Cargado)
             {
                 LimpiarPantalla();
                 CargarCodigo();
@@ -374,7 +369,7 @@ namespace Modulo_Capacitacion.Maestros.VersionPerfiles
 
         private void TB_Version_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Cargado == true)
+            if (Cargado)
             {
                 LimpiarPantalla();
                 BuscarVersion();

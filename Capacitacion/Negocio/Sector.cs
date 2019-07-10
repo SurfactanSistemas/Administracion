@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data;
+﻿using System.Data;
 using ClassConexion;
-using System.Data;
 
 namespace Negocio
 {
@@ -17,14 +11,14 @@ namespace Negocio
         public string Descripcion;
 
 
-        public System.Data.DataTable ListarTodosCodigoDescripcion()
+        public DataTable ListarTodosCodigoDescripcion()
         {
             Conexion repo = new Conexion();
             string consulta = "select Codigo, Descripcion from Sector order by Codigo asc";
             return repo.Listar(consulta);
         }
 
-        public System.Data.DataTable ListarTodos()
+        public DataTable ListarTodos()
         {
             Conexion repo = new Conexion();
             string consulta = "select * from Sector order by Codigo asc";

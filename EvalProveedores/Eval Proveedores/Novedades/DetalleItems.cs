@@ -1,25 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.Data.SqlClient;
-using System.Configuration;
-using Eval_Proveedores.Listados;
+using ConsultasVarias;
 using Eval_Proveedores.Listados.DetalleItemsMP;
+using VistaPrevia = Eval_Proveedores.Listados.VistaPrevia;
 
 namespace Eval_Proveedores.Novedades
 {
     public partial class DetalleItems : Form
     {
-        private DataTable dtInformeDetalle;
-        DataTable dtItems = new DataTable();
-        private string WCodProv = "";
-        private string WPeriodo = "";
-        private string WPlantas = "";
+        private readonly DataTable dtInformeDetalle;
+        private readonly string WCodProv = "";
+        private readonly string WPeriodo = "";
+        private readonly string WPlantas = "";
+        private readonly string WCodMp = "";
 
         public DetalleItems()
         {
@@ -28,14 +22,13 @@ namespace Eval_Proveedores.Novedades
 
         public DetalleItems(DataTable dtInformeDetalle)
         {
-            // TODO: Complete member initialization
             this.dtInformeDetalle = dtInformeDetalle;
             InitializeComponent();
         }
 
-        public DetalleItems(DataTable dtInformeDetalle, string _CodProv, string WProveedor, string _Periodo, string _Plantas)
+        public DetalleItems(DataTable dtInformeDetalle, string _CodProv, string WProveedor, string _Periodo, string _Plantas, string CodMP = "")
         {
-            // TODO: Complete member initialization
+            WCodMp = CodMP;
             this.dtInformeDetalle = dtInformeDetalle;
             InitializeComponent();
             lblProveedor.Text = WProveedor;
@@ -46,65 +39,18 @@ namespace Eval_Proveedores.Novedades
 
         private void DetalleItems_Load(object sender, EventArgs e)
         {
-
-            //DGV_EvalSemProve.Columns.Clear();
             ArmarDt();
-            //DGV_EvalSemProve.DataSource = dtItems;
         }
 
-        private string _TraerDescArticulo(string _Articulo)
-        {
-            using (SqlConnection cnn = new SqlConnection())
-            {
-                cnn.ConnectionString = ConfigurationManager.ConnectionStrings["SurfactanSA"].ToString();
-
-                cnn.Open();
-
-                using (SqlCommand cmd = new SqlCommand())
-                {
-                    cmd.CommandText = "SELECT Descripcion FROM Articulo WHERE Codigo = '" + _Articulo +"'";
-                    cmd.Connection = cnn;
-
-                    using (SqlDataReader rd = cmd.ExecuteReader())
-                    {
-                        if (rd.HasRows)
-                        {
-                            rd.Read();
-
-                            return rd["Descripcion"].ToString();
-                        }
-                        else
-                        {
-                            return "";
-                        }
-                    }
-
-                }
-
-            }
-        }
-        
         private void ArmarDt()
         {
-            //dtItems.Columns.Add("Articulo", typeof(string));
-            //dtItems.Columns.Add("Orden", typeof(string));
-            //dtItems.Columns.Add("Clave", typeof(string));
-            //dtItems.Columns.Add("DescArticulo", typeof(string));
-            //dtItems.Columns.Add("Certifica", typeof(string));
-            //dtItems.Columns.Add("Envase", typeof(string));
-            //dtItems.Columns.Add("Informe", typeof(string));
-            //dtItems.Columns.Add("Cantidad", typeof(string));
-            //dtItems.Columns.Add("Fecha", typeof(string));
-            //dtItems.Columns.Add("Fecha2", typeof(string));
-            //dtItems.Columns.Add("Liberada", typeof(string));
-            //dtItems.Columns.Add("Laudo", typeof(string));
-            //dtItems.Columns.Add("Devuelta", typeof(string));
-            int _index = 0;
             DGV_EvalSemProve.Rows.Clear();
+
+            DataRow[] WDatos = WCodMp == "" ? dtInformeDetalle.Select() : dtInformeDetalle.Select("Articulo = '" + WCodMp + "'") ;
 
             foreach (DataRow fila in dtInformeDetalle.Rows)
             {
-                _index = DGV_EvalSemProve.Rows.Add();
+                var _index = DGV_EvalSemProve.Rows.Add();
 
                 DGV_EvalSemProve.Rows[_index].Cells["Articulo"].Value = fila["Articulo"].ToString();
                 DGV_EvalSemProve.Rows[_index].Cells["Orden"].Value = fila["Orden"].ToString();
@@ -130,7 +76,7 @@ namespace Eval_Proveedores.Novedades
                  //dtItems.Rows.Add(filaItems);
             }
 
-            foreach (string WColumna in new string[] { "Cantidad", "FechaPosibleEntrega" })
+            foreach (string WColumna in new [] { "Cantidad", "FechaPosibleEntrega" })
             {
                 DataGridViewColumn column = DGV_EvalSemProve.Columns[WColumna];
                 if (column != null) column.Visible = false;
@@ -179,11 +125,11 @@ namespace Eval_Proveedores.Novedades
         {
             int diferencia = 0;
 
-            _FechaOrd = _FechaOrd.ToString();
-            _FechaOrd2 = _FechaOrd2.ToString();
+            _FechaOrd = _FechaOrd.ToString() == "" ? "00000000" : _FechaOrd;
+            _FechaOrd2 = _FechaOrd2.ToString() == "" ? "00000000" : _FechaOrd2;
 
-            _FechaOrd = _FechaOrd == "" ? "00000000" : _FechaOrd;
-            _FechaOrd2 = _FechaOrd2 == "" ? "00000000" : _FechaOrd2;
+            _FechaOrd = _FechaOrd.ToString().PadLeft(8, '0');
+            _FechaOrd2 = _FechaOrd2.ToString().PadLeft(8, '0');
 
             int base1 = (int.Parse(_FechaOrd.ToString().Substring(0, 4)) * 365) + (int.Parse(_FechaOrd.ToString().Substring(4, 2)) * 30) + (int.Parse(_FechaOrd.ToString().Substring(6, 2)) * 1);
             int base2 = (int.Parse(_FechaOrd2.ToString().Substring(0, 4)) * 365) + (int.Parse(_FechaOrd2.ToString().Substring(4, 2)) * 30) + (int.Parse(_FechaOrd2.ToString().Substring(6, 2)) * 1);
@@ -227,7 +173,7 @@ namespace Eval_Proveedores.Novedades
                 _r["Aprobado"] = (_EsPorDesvio(row["Laudo"].ToString()) || _DeterminarRechazado(row["Devuelta"].ToString()) == "") ? 1 : 0;
                 _r["Desvio"] = _EsPorDesvio(row["Laudo"].ToString()) ? 1 : 0;
                 _r["Rechazado"] = _DeterminarRechazado(row["Devuelta"].ToString()) == "X" ? 1 : 0;
-                _r["Atraso"] = _CalcularAtraso(Helper.OrdenarFecha(row["Fecha"].ToString()), Helper.OrdenarFecha(row["Fecha2"].ToString())); ;
+                _r["Atraso"] = _CalcularAtraso(Helper.OrdenarFecha(row["Fecha"].ToString()), Helper.OrdenarFecha(row["Fecha2"].ToString()));
                 _r["Cantidad"] = double.Parse(row["Liberada"].ToString());
                 _r["Laudo"] = row["Laudo"];
                 _r["Devuelta"] = double.Parse(row["Devuelta"].ToString());
@@ -251,6 +197,15 @@ namespace Eval_Proveedores.Novedades
             frm.Show();
         }
 
+        private void DGV_EvalSemProve_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewColumn ColLaudo = DGV_EvalSemProve.Columns["Laudo"];
 
+            if (ColLaudo != null && e.ColumnIndex == ColLaudo.Index)
+            {
+                DetallesEnsayosMP frm = new DetallesEnsayosMP(DGV_EvalSemProve.CurrentCell.Value);
+                frm.Show(this);
+            }
+        }
     }
 }

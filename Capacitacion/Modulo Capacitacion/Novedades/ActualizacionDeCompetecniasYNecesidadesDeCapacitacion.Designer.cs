@@ -1,11 +1,14 @@
-﻿namespace Modulo_Capacitacion.Novedades
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Modulo_Capacitacion.Novedades
 {
     partial class ActualizacionDeCompetenciasYNecesidadesDeCapacitacion
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -688,55 +691,55 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label LBPerfil;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Button BT_Salir;
-        private System.Windows.Forms.Button BT_Limpiar;
-        private System.Windows.Forms.Button BT_Guardar;
-        private System.Windows.Forms.Button btnAyuda;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.DataGridView dgvGrilla;
-        private System.Windows.Forms.Panel pnlAyuda;
-        private System.Windows.Forms.GroupBox gbAyuda;
-        private System.Windows.Forms.DataGridView dgvAyuda;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtFiltrar;
-        private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.Button btnCerrarAyuda;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button btnBuscar;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.RadioButton rbSector;
-        private System.Windows.Forms.RadioButton rbPerfil;
-        private System.Windows.Forms.ComboBox cmbOrganizar;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtDescTema;
-        private System.Windows.Forms.TextBox txtTema;
-        private System.Windows.Forms.Panel pnlProgreso;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.ProgressBar progressBar1;
-        private System.Windows.Forms.ComboBox cmbAuxi;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Clave;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Perfil;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DescPerfil;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Legajo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Curso;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DescCurso;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Necesario;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Deseable;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idCalificacion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idCalificacionAnterior;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Calificacion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Observaciones;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MarcarActualizacion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Marca;
-        private System.Windows.Forms.TextBox txtCodigo;
+        private Panel panel1;
+        private Label LBPerfil;
+        private Panel panel2;
+        private Panel panel3;
+        private Button BT_Salir;
+        private Button BT_Limpiar;
+        private Button BT_Guardar;
+        private Button btnAyuda;
+        private TableLayoutPanel tableLayoutPanel1;
+        private Panel panel4;
+        private Panel panel5;
+        private DataGridView dgvGrilla;
+        private Panel pnlAyuda;
+        private GroupBox gbAyuda;
+        private DataGridView dgvAyuda;
+        private Label label1;
+        private TextBox txtFiltrar;
+        private Panel panel6;
+        private Button btnCerrarAyuda;
+        private GroupBox groupBox1;
+        private Button btnBuscar;
+        private GroupBox groupBox2;
+        private RadioButton rbSector;
+        private RadioButton rbPerfil;
+        private ComboBox cmbOrganizar;
+        private Label label2;
+        private TextBox txtDescTema;
+        private TextBox txtTema;
+        private Panel pnlProgreso;
+        private GroupBox groupBox3;
+        private ProgressBar progressBar1;
+        private ComboBox cmbAuxi;
+        private Button button1;
+        private ToolTip toolTip1;
+        private DataGridViewTextBoxColumn Clave;
+        private DataGridViewTextBoxColumn Perfil;
+        private DataGridViewTextBoxColumn DescPerfil;
+        private DataGridViewTextBoxColumn Legajo;
+        private DataGridViewTextBoxColumn Nombre;
+        private DataGridViewTextBoxColumn Curso;
+        private DataGridViewTextBoxColumn DescCurso;
+        private DataGridViewTextBoxColumn Necesario;
+        private DataGridViewTextBoxColumn Deseable;
+        private DataGridViewTextBoxColumn idCalificacion;
+        private DataGridViewTextBoxColumn idCalificacionAnterior;
+        private DataGridViewTextBoxColumn Calificacion;
+        private DataGridViewTextBoxColumn Observaciones;
+        private DataGridViewTextBoxColumn MarcarActualizacion;
+        private DataGridViewTextBoxColumn Marca;
+        private TextBox txtCodigo;
     }
 }

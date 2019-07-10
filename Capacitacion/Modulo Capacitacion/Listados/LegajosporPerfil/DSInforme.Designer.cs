@@ -8,6 +8,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
+using System.CodeDom.Compiler;
+using System.Collections;
+using System.ComponentModel;
+using System.ComponentModel.Design;
+using System.Data;
+using System.Diagnostics;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Serialization;
+
 #pragma warning disable 1591
 
 namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
@@ -16,44 +29,44 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
     /// <summary>
     ///Represents a strongly typed in-memory cache of data.
     ///</summary>
-    [global::System.Serializable()]
-    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
-    [global::System.ComponentModel.ToolboxItem(true)]
-    [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
-    [global::System.Xml.Serialization.XmlRootAttribute("DSInforme")]
-    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
-    public partial class DSInforme : global::System.Data.DataSet {
+    [Serializable()]
+    [DesignerCategory("code")]
+    [ToolboxItem(true)]
+    [XmlSchemaProvider("GetTypedDataSetSchema")]
+    [XmlRoot("DSInforme")]
+    [HelpKeyword("vs.data.DataSet")]
+    public partial class DSInforme : DataSet {
         
         private DSInformeDataTable tableDSInforme;
         
-        private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
+        private SchemaSerializationMode _schemaSerializationMode = SchemaSerializationMode.IncludeSchema;
         
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [DebuggerNonUserCode()]
+        [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public DSInforme() {
             this.BeginInit();
             this.InitClass();
-            global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
+            CollectionChangeEventHandler schemaChangedHandler = new CollectionChangeEventHandler(this.SchemaChanged);
             base.Tables.CollectionChanged += schemaChangedHandler;
             base.Relations.CollectionChanged += schemaChangedHandler;
             this.EndInit();
         }
         
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected DSInforme(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+        [DebuggerNonUserCode()]
+        [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected DSInforme(SerializationInfo info, StreamingContext context) : 
                 base(info, context, false) {
             if ((this.IsBinarySerialized(info, context) == true)) {
                 this.InitVars(false);
-                global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler1 = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
+                CollectionChangeEventHandler schemaChangedHandler1 = new CollectionChangeEventHandler(this.SchemaChanged);
                 this.Tables.CollectionChanged += schemaChangedHandler1;
                 this.Relations.CollectionChanged += schemaChangedHandler1;
                 return;
             }
             string strSchema = ((string)(info.GetValue("XmlSchema", typeof(string))));
-            if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
-                global::System.Data.DataSet ds = new global::System.Data.DataSet();
-                ds.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
+            if ((this.DetermineSchemaSerializationMode(info, context) == SchemaSerializationMode.IncludeSchema)) {
+                DataSet ds = new DataSet();
+                ds.ReadXmlSchema(new XmlTextReader(new StringReader(strSchema)));
                 if ((ds.Tables["DSInforme"] != null)) {
                     base.Tables.Add(new DSInformeDataTable(ds.Tables["DSInforme"]));
                 }
@@ -63,33 +76,33 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 this.Locale = ds.Locale;
                 this.CaseSensitive = ds.CaseSensitive;
                 this.EnforceConstraints = ds.EnforceConstraints;
-                this.Merge(ds, false, global::System.Data.MissingSchemaAction.Add);
+                this.Merge(ds, false, MissingSchemaAction.Add);
                 this.InitVars();
             }
             else {
-                this.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
+                this.ReadXmlSchema(new XmlTextReader(new StringReader(strSchema)));
             }
             this.GetSerializationData(info, context);
-            global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
+            CollectionChangeEventHandler schemaChangedHandler = new CollectionChangeEventHandler(this.SchemaChanged);
             base.Tables.CollectionChanged += schemaChangedHandler;
             this.Relations.CollectionChanged += schemaChangedHandler;
         }
         
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Browsable(false)]
-        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        [DebuggerNonUserCode()]
+        [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public DSInformeDataTable _DSInforme {
             get {
                 return this.tableDSInforme;
             }
         }
         
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.BrowsableAttribute(true)]
-        [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
-        public override global::System.Data.SchemaSerializationMode SchemaSerializationMode {
+        [DebuggerNonUserCode()]
+        [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [Browsable(true)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public override SchemaSerializationMode SchemaSerializationMode {
             get {
                 return this._schemaSerializationMode;
             }
@@ -98,59 +111,59 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
             }
         }
         
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public new global::System.Data.DataTableCollection Tables {
+        [DebuggerNonUserCode()]
+        [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new DataTableCollection Tables {
             get {
                 return base.Tables;
             }
         }
         
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public new global::System.Data.DataRelationCollection Relations {
+        [DebuggerNonUserCode()]
+        [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new DataRelationCollection Relations {
             get {
                 return base.Relations;
             }
         }
         
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [DebuggerNonUserCode()]
+        [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         protected override void InitializeDerivedDataSet() {
             this.BeginInit();
             this.InitClass();
             this.EndInit();
         }
         
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public override global::System.Data.DataSet Clone() {
+        [DebuggerNonUserCode()]
+        [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public override DataSet Clone() {
             DSInforme cln = ((DSInforme)(base.Clone()));
             cln.InitVars();
             cln.SchemaSerializationMode = this.SchemaSerializationMode;
             return cln;
         }
         
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [DebuggerNonUserCode()]
+        [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         protected override bool ShouldSerializeTables() {
             return false;
         }
         
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [DebuggerNonUserCode()]
+        [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         protected override bool ShouldSerializeRelations() {
             return false;
         }
         
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected override void ReadXmlSerializable(global::System.Xml.XmlReader reader) {
-            if ((this.DetermineSchemaSerializationMode(reader) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
+        [DebuggerNonUserCode()]
+        [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected override void ReadXmlSerializable(XmlReader reader) {
+            if ((this.DetermineSchemaSerializationMode(reader) == SchemaSerializationMode.IncludeSchema)) {
                 this.Reset();
-                global::System.Data.DataSet ds = new global::System.Data.DataSet();
+                DataSet ds = new DataSet();
                 ds.ReadXml(reader);
                 if ((ds.Tables["DSInforme"] != null)) {
                     base.Tables.Add(new DSInformeDataTable(ds.Tables["DSInforme"]));
@@ -161,7 +174,7 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 this.Locale = ds.Locale;
                 this.CaseSensitive = ds.CaseSensitive;
                 this.EnforceConstraints = ds.EnforceConstraints;
-                this.Merge(ds, false, global::System.Data.MissingSchemaAction.Add);
+                this.Merge(ds, false, MissingSchemaAction.Add);
                 this.InitVars();
             }
             else {
@@ -170,23 +183,23 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
             }
         }
         
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected override global::System.Xml.Schema.XmlSchema GetSchemaSerializable() {
-            global::System.IO.MemoryStream stream = new global::System.IO.MemoryStream();
-            this.WriteXmlSchema(new global::System.Xml.XmlTextWriter(stream, null));
+        [DebuggerNonUserCode()]
+        [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected override XmlSchema GetSchemaSerializable() {
+            MemoryStream stream = new MemoryStream();
+            this.WriteXmlSchema(new XmlTextWriter(stream, null));
             stream.Position = 0;
-            return global::System.Xml.Schema.XmlSchema.Read(new global::System.Xml.XmlTextReader(stream), null);
+            return XmlSchema.Read(new XmlTextReader(stream), null);
         }
         
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [DebuggerNonUserCode()]
+        [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         internal void InitVars() {
             this.InitVars(true);
         }
         
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [DebuggerNonUserCode()]
+        [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         internal void InitVars(bool initTable) {
             this.tableDSInforme = ((DSInformeDataTable)(base.Tables["DSInforme"]));
             if ((initTable == true)) {
@@ -196,51 +209,51 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
             }
         }
         
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [DebuggerNonUserCode()]
+        [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitClass() {
             this.DataSetName = "DSInforme";
             this.Prefix = "";
             this.Namespace = "http://tempuri.org/DSInforme.xsd";
             this.EnforceConstraints = true;
-            this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
+            this.SchemaSerializationMode = SchemaSerializationMode.IncludeSchema;
             this.tableDSInforme = new DSInformeDataTable();
             base.Tables.Add(this.tableDSInforme);
         }
         
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [DebuggerNonUserCode()]
+        [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private bool ShouldSerialize_DSInforme() {
             return false;
         }
         
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private void SchemaChanged(object sender, global::System.ComponentModel.CollectionChangeEventArgs e) {
-            if ((e.Action == global::System.ComponentModel.CollectionChangeAction.Remove)) {
+        [DebuggerNonUserCode()]
+        [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void SchemaChanged(object sender, CollectionChangeEventArgs e) {
+            if ((e.Action == CollectionChangeAction.Remove)) {
                 this.InitVars();
             }
         }
         
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+        [DebuggerNonUserCode()]
+        [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public static XmlSchemaComplexType GetTypedDataSetSchema(XmlSchemaSet xs) {
             DSInforme ds = new DSInforme();
-            global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-            global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-            global::System.Xml.Schema.XmlSchemaAny any = new global::System.Xml.Schema.XmlSchemaAny();
+            XmlSchemaComplexType type = new XmlSchemaComplexType();
+            XmlSchemaSequence sequence = new XmlSchemaSequence();
+            XmlSchemaAny any = new XmlSchemaAny();
             any.Namespace = ds.Namespace;
             sequence.Items.Add(any);
             type.Particle = sequence;
-            global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+            XmlSchema dsSchema = ds.GetSchemaSerializable();
             if (xs.Contains(dsSchema.TargetNamespace)) {
-                global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                MemoryStream s1 = new MemoryStream();
+                MemoryStream s2 = new MemoryStream();
                 try {
-                    global::System.Xml.Schema.XmlSchema schema = null;
+                    XmlSchema schema = null;
                     dsSchema.Write(s1);
-                    for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                        schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                    for (IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                        schema = ((XmlSchema)(schemas.Current));
                         s2.SetLength(0);
                         schema.Write(s2);
                         if ((s1.Length == s2.Length)) {
@@ -269,108 +282,108 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
             return type;
         }
         
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void DSInformeRowChangeEventHandler(object sender, DSInformeRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class DSInformeDataTable : global::System.Data.TypedTableBase<DSInformeRow> {
+        [Serializable()]
+        [XmlSchemaProvider("GetTypedTableSchema")]
+        public partial class DSInformeDataTable : TypedTableBase<DSInformeRow> {
             
-            private global::System.Data.DataColumn columnNºPerfil;
+            private DataColumn columnNºPerfil;
             
-            private global::System.Data.DataColumn columnDescPerfil;
+            private DataColumn columnDescPerfil;
             
-            private global::System.Data.DataColumn columnVigencia;
+            private DataColumn columnVigencia;
             
-            private global::System.Data.DataColumn columnNºSector;
+            private DataColumn columnNºSector;
             
-            private global::System.Data.DataColumn columnDescSector;
+            private DataColumn columnDescSector;
             
-            private global::System.Data.DataColumn columnVersion;
+            private DataColumn columnVersion;
             
-            private global::System.Data.DataColumn columnTareaI;
+            private DataColumn columnTareaI;
             
-            private global::System.Data.DataColumn columnTareaII;
+            private DataColumn columnTareaII;
             
-            private global::System.Data.DataColumn columnTareaIII;
+            private DataColumn columnTareaIII;
             
-            private global::System.Data.DataColumn columnEspPrimaria;
+            private DataColumn columnEspPrimaria;
             
-            private global::System.Data.DataColumn columnObservPrim;
+            private DataColumn columnObservPrim;
             
-            private global::System.Data.DataColumn columnNecPrim;
+            private DataColumn columnNecPrim;
             
-            private global::System.Data.DataColumn columnDesPrim;
+            private DataColumn columnDesPrim;
             
-            private global::System.Data.DataColumn columnEspsec;
+            private DataColumn columnEspsec;
             
-            private global::System.Data.DataColumn columnObservSec;
+            private DataColumn columnObservSec;
             
-            private global::System.Data.DataColumn columnNecSec;
+            private DataColumn columnNecSec;
             
-            private global::System.Data.DataColumn columnDesSec;
+            private DataColumn columnDesSec;
             
-            private global::System.Data.DataColumn columnEspTerc;
+            private DataColumn columnEspTerc;
             
-            private global::System.Data.DataColumn columnObservTerc;
+            private DataColumn columnObservTerc;
             
-            private global::System.Data.DataColumn columnNecTerc;
+            private DataColumn columnNecTerc;
             
-            private global::System.Data.DataColumn columnDesTerc;
+            private DataColumn columnDesTerc;
             
-            private global::System.Data.DataColumn columnEspIdiom;
+            private DataColumn columnEspIdiom;
             
-            private global::System.Data.DataColumn columnObservIdiom;
+            private DataColumn columnObservIdiom;
             
-            private global::System.Data.DataColumn columnnecIdioma;
+            private DataColumn columnnecIdioma;
             
-            private global::System.Data.DataColumn columnDesIdiom;
+            private DataColumn columnDesIdiom;
             
-            private global::System.Data.DataColumn columnEspExp;
+            private DataColumn columnEspExp;
             
-            private global::System.Data.DataColumn columnObservExp;
+            private DataColumn columnObservExp;
             
-            private global::System.Data.DataColumn columnNecExp;
+            private DataColumn columnNecExp;
             
-            private global::System.Data.DataColumn columnDesExp;
+            private DataColumn columnDesExp;
             
-            private global::System.Data.DataColumn columnEspFisica;
+            private DataColumn columnEspFisica;
             
-            private global::System.Data.DataColumn columnNecFisica;
+            private DataColumn columnNecFisica;
             
-            private global::System.Data.DataColumn columnDesFisica;
+            private DataColumn columnDesFisica;
             
-            private global::System.Data.DataColumn columnEspOtrosI;
+            private DataColumn columnEspOtrosI;
             
-            private global::System.Data.DataColumn columnNecOtrosI;
+            private DataColumn columnNecOtrosI;
             
-            private global::System.Data.DataColumn columndesOtrosI;
+            private DataColumn columndesOtrosI;
             
-            private global::System.Data.DataColumn columnEspOtrosII;
+            private DataColumn columnEspOtrosII;
             
-            private global::System.Data.DataColumn columnNecOtrosII;
+            private DataColumn columnNecOtrosII;
             
-            private global::System.Data.DataColumn columnDesOtrosII;
+            private DataColumn columnDesOtrosII;
             
-            private global::System.Data.DataColumn columnEquivI;
+            private DataColumn columnEquivI;
             
-            private global::System.Data.DataColumn columnEquivII;
+            private DataColumn columnEquivII;
             
-            private global::System.Data.DataColumn columnCurso;
+            private DataColumn columnCurso;
             
-            private global::System.Data.DataColumn columnDescCurso;
+            private DataColumn columnDescCurso;
             
-            private global::System.Data.DataColumn columnNecesariaCurso;
+            private DataColumn columnNecesariaCurso;
             
-            private global::System.Data.DataColumn columnDeseableCurso;
+            private DataColumn columnDeseableCurso;
             
-            private global::System.Data.DataColumn columnDataColumn1;
+            private DataColumn columnDataColumn1;
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public DSInformeDataTable() {
                 this.TableName = "DSInforme";
                 this.BeginInit();
@@ -378,9 +391,9 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 this.EndInit();
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal DSInformeDataTable(global::System.Data.DataTable table) {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal DSInformeDataTable(DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -395,410 +408,410 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 this.MinimumCapacity = table.MinimumCapacity;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected DSInformeDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected DSInformeDataTable(SerializationInfo info, StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn NºPerfilColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn NºPerfilColumn {
                 get {
                     return this.columnNºPerfil;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn DescPerfilColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn DescPerfilColumn {
                 get {
                     return this.columnDescPerfil;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn VigenciaColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn VigenciaColumn {
                 get {
                     return this.columnVigencia;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn NºSectorColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn NºSectorColumn {
                 get {
                     return this.columnNºSector;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn DescSectorColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn DescSectorColumn {
                 get {
                     return this.columnDescSector;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn VersionColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn VersionColumn {
                 get {
                     return this.columnVersion;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn TareaIColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn TareaIColumn {
                 get {
                     return this.columnTareaI;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn TareaIIColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn TareaIIColumn {
                 get {
                     return this.columnTareaII;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn TareaIIIColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn TareaIIIColumn {
                 get {
                     return this.columnTareaIII;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn EspPrimariaColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn EspPrimariaColumn {
                 get {
                     return this.columnEspPrimaria;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn ObservPrimColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn ObservPrimColumn {
                 get {
                     return this.columnObservPrim;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn NecPrimColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn NecPrimColumn {
                 get {
                     return this.columnNecPrim;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn DesPrimColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn DesPrimColumn {
                 get {
                     return this.columnDesPrim;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn EspsecColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn EspsecColumn {
                 get {
                     return this.columnEspsec;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn ObservSecColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn ObservSecColumn {
                 get {
                     return this.columnObservSec;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn NecSecColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn NecSecColumn {
                 get {
                     return this.columnNecSec;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn DesSecColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn DesSecColumn {
                 get {
                     return this.columnDesSec;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn EspTercColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn EspTercColumn {
                 get {
                     return this.columnEspTerc;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn ObservTercColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn ObservTercColumn {
                 get {
                     return this.columnObservTerc;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn NecTercColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn NecTercColumn {
                 get {
                     return this.columnNecTerc;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn DesTercColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn DesTercColumn {
                 get {
                     return this.columnDesTerc;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn EspIdiomColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn EspIdiomColumn {
                 get {
                     return this.columnEspIdiom;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn ObservIdiomColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn ObservIdiomColumn {
                 get {
                     return this.columnObservIdiom;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn necIdiomaColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn necIdiomaColumn {
                 get {
                     return this.columnnecIdioma;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn DesIdiomColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn DesIdiomColumn {
                 get {
                     return this.columnDesIdiom;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn EspExpColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn EspExpColumn {
                 get {
                     return this.columnEspExp;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn ObservExpColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn ObservExpColumn {
                 get {
                     return this.columnObservExp;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn NecExpColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn NecExpColumn {
                 get {
                     return this.columnNecExp;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn DesExpColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn DesExpColumn {
                 get {
                     return this.columnDesExp;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn EspFisicaColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn EspFisicaColumn {
                 get {
                     return this.columnEspFisica;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn NecFisicaColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn NecFisicaColumn {
                 get {
                     return this.columnNecFisica;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn DesFisicaColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn DesFisicaColumn {
                 get {
                     return this.columnDesFisica;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn EspOtrosIColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn EspOtrosIColumn {
                 get {
                     return this.columnEspOtrosI;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn NecOtrosIColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn NecOtrosIColumn {
                 get {
                     return this.columnNecOtrosI;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn desOtrosIColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn desOtrosIColumn {
                 get {
                     return this.columndesOtrosI;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn EspOtrosIIColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn EspOtrosIIColumn {
                 get {
                     return this.columnEspOtrosII;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn NecOtrosIIColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn NecOtrosIIColumn {
                 get {
                     return this.columnNecOtrosII;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn DesOtrosIIColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn DesOtrosIIColumn {
                 get {
                     return this.columnDesOtrosII;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn EquivIColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn EquivIColumn {
                 get {
                     return this.columnEquivI;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn EquivIIColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn EquivIIColumn {
                 get {
                     return this.columnEquivII;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn CursoColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn CursoColumn {
                 get {
                     return this.columnCurso;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn DescCursoColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn DescCursoColumn {
                 get {
                     return this.columnDescCurso;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn NecesariaCursoColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn NecesariaCursoColumn {
                 get {
                     return this.columnNecesariaCurso;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn DeseableCursoColumn {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn DeseableCursoColumn {
                 get {
                     return this.columnDeseableCurso;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn DataColumn1Column {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataColumn DataColumn1Column {
                 get {
                     return this.columnDataColumn1;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            [global::System.ComponentModel.Browsable(false)]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [Browsable(false)]
             public int Count {
                 get {
                     return this.Rows.Count;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public DSInformeRow this[int index] {
                 get {
                     return ((DSInformeRow)(this.Rows[index]));
                 }
             }
             
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public event DSInformeRowChangeEventHandler DSInformeRowChanging;
             
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public event DSInformeRowChangeEventHandler DSInformeRowChanged;
             
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public event DSInformeRowChangeEventHandler DSInformeRowDeleting;
             
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public event DSInformeRowChangeEventHandler DSInformeRowDeleted;
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void AddDSInformeRow(DSInformeRow row) {
                 this.Rows.Add(row);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public DSInformeRow AddDSInformeRow(
                         int NºPerfil, 
                         string DescPerfil, 
@@ -897,22 +910,22 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 return rowDSInformeRow;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public override global::System.Data.DataTable Clone() {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override DataTable Clone() {
                 DSInformeDataTable cln = ((DSInformeDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataTable CreateInstance() {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override DataTable CreateInstance() {
                 return new DSInformeDataTable();
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal void InitVars() {
                 this.columnNºPerfil = base.Columns["NºPerfil"];
                 this.columnDescPerfil = base.Columns["DescPerfil"];
@@ -961,198 +974,198 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 this.columnDataColumn1 = base.Columns["DataColumn1"];
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             private void InitClass() {
-                this.columnNºPerfil = new global::System.Data.DataColumn("NºPerfil", typeof(int), null, global::System.Data.MappingType.Element);
+                this.columnNºPerfil = new DataColumn("NºPerfil", typeof(int), null, MappingType.Element);
                 base.Columns.Add(this.columnNºPerfil);
-                this.columnDescPerfil = new global::System.Data.DataColumn("DescPerfil", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnDescPerfil = new DataColumn("DescPerfil", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnDescPerfil);
-                this.columnVigencia = new global::System.Data.DataColumn("Vigencia", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnVigencia = new DataColumn("Vigencia", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnVigencia);
-                this.columnNºSector = new global::System.Data.DataColumn("NºSector", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnNºSector = new DataColumn("NºSector", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnNºSector);
-                this.columnDescSector = new global::System.Data.DataColumn("DescSector", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnDescSector = new DataColumn("DescSector", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnDescSector);
-                this.columnVersion = new global::System.Data.DataColumn("Version", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnVersion = new DataColumn("Version", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnVersion);
-                this.columnTareaI = new global::System.Data.DataColumn("TareaI", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnTareaI = new DataColumn("TareaI", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnTareaI);
-                this.columnTareaII = new global::System.Data.DataColumn("TareaII", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnTareaII = new DataColumn("TareaII", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnTareaII);
-                this.columnTareaIII = new global::System.Data.DataColumn("TareaIII", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnTareaIII = new DataColumn("TareaIII", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnTareaIII);
-                this.columnEspPrimaria = new global::System.Data.DataColumn("EspPrimaria", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnEspPrimaria = new DataColumn("EspPrimaria", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnEspPrimaria);
-                this.columnObservPrim = new global::System.Data.DataColumn("ObservPrim", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnObservPrim = new DataColumn("ObservPrim", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnObservPrim);
-                this.columnNecPrim = new global::System.Data.DataColumn("NecPrim", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnNecPrim = new DataColumn("NecPrim", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnNecPrim);
-                this.columnDesPrim = new global::System.Data.DataColumn("DesPrim", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnDesPrim = new DataColumn("DesPrim", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnDesPrim);
-                this.columnEspsec = new global::System.Data.DataColumn("Espsec", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnEspsec = new DataColumn("Espsec", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnEspsec);
-                this.columnObservSec = new global::System.Data.DataColumn("ObservSec", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnObservSec = new DataColumn("ObservSec", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnObservSec);
-                this.columnNecSec = new global::System.Data.DataColumn("NecSec", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnNecSec = new DataColumn("NecSec", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnNecSec);
-                this.columnDesSec = new global::System.Data.DataColumn("DesSec", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnDesSec = new DataColumn("DesSec", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnDesSec);
-                this.columnEspTerc = new global::System.Data.DataColumn("EspTerc", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnEspTerc = new DataColumn("EspTerc", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnEspTerc);
-                this.columnObservTerc = new global::System.Data.DataColumn("ObservTerc", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnObservTerc = new DataColumn("ObservTerc", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnObservTerc);
-                this.columnNecTerc = new global::System.Data.DataColumn("NecTerc", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnNecTerc = new DataColumn("NecTerc", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnNecTerc);
-                this.columnDesTerc = new global::System.Data.DataColumn("DesTerc", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnDesTerc = new DataColumn("DesTerc", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnDesTerc);
-                this.columnEspIdiom = new global::System.Data.DataColumn("EspIdiom", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnEspIdiom = new DataColumn("EspIdiom", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnEspIdiom);
-                this.columnObservIdiom = new global::System.Data.DataColumn("ObservIdiom", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnObservIdiom = new DataColumn("ObservIdiom", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnObservIdiom);
-                this.columnnecIdioma = new global::System.Data.DataColumn("necIdioma", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnnecIdioma = new DataColumn("necIdioma", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnnecIdioma);
-                this.columnDesIdiom = new global::System.Data.DataColumn("DesIdiom", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnDesIdiom = new DataColumn("DesIdiom", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnDesIdiom);
-                this.columnEspExp = new global::System.Data.DataColumn("EspExp", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnEspExp = new DataColumn("EspExp", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnEspExp);
-                this.columnObservExp = new global::System.Data.DataColumn("ObservExp", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnObservExp = new DataColumn("ObservExp", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnObservExp);
-                this.columnNecExp = new global::System.Data.DataColumn("NecExp", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnNecExp = new DataColumn("NecExp", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnNecExp);
-                this.columnDesExp = new global::System.Data.DataColumn("DesExp", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnDesExp = new DataColumn("DesExp", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnDesExp);
-                this.columnEspFisica = new global::System.Data.DataColumn("EspFisica", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnEspFisica = new DataColumn("EspFisica", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnEspFisica);
-                this.columnNecFisica = new global::System.Data.DataColumn("NecFisica", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnNecFisica = new DataColumn("NecFisica", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnNecFisica);
-                this.columnDesFisica = new global::System.Data.DataColumn("DesFisica", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnDesFisica = new DataColumn("DesFisica", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnDesFisica);
-                this.columnEspOtrosI = new global::System.Data.DataColumn("EspOtrosI", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnEspOtrosI = new DataColumn("EspOtrosI", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnEspOtrosI);
-                this.columnNecOtrosI = new global::System.Data.DataColumn("NecOtrosI", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnNecOtrosI = new DataColumn("NecOtrosI", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnNecOtrosI);
-                this.columndesOtrosI = new global::System.Data.DataColumn("desOtrosI", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columndesOtrosI = new DataColumn("desOtrosI", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columndesOtrosI);
-                this.columnEspOtrosII = new global::System.Data.DataColumn("EspOtrosII", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnEspOtrosII = new DataColumn("EspOtrosII", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnEspOtrosII);
-                this.columnNecOtrosII = new global::System.Data.DataColumn("NecOtrosII", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnNecOtrosII = new DataColumn("NecOtrosII", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnNecOtrosII);
-                this.columnDesOtrosII = new global::System.Data.DataColumn("DesOtrosII", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnDesOtrosII = new DataColumn("DesOtrosII", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnDesOtrosII);
-                this.columnEquivI = new global::System.Data.DataColumn("EquivI", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnEquivI = new DataColumn("EquivI", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnEquivI);
-                this.columnEquivII = new global::System.Data.DataColumn("EquivII", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnEquivII = new DataColumn("EquivII", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnEquivII);
-                this.columnCurso = new global::System.Data.DataColumn("Curso", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnCurso = new DataColumn("Curso", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnCurso);
-                this.columnDescCurso = new global::System.Data.DataColumn("DescCurso", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnDescCurso = new DataColumn("DescCurso", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnDescCurso);
-                this.columnNecesariaCurso = new global::System.Data.DataColumn("NecesariaCurso", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnNecesariaCurso = new DataColumn("NecesariaCurso", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnNecesariaCurso);
-                this.columnDeseableCurso = new global::System.Data.DataColumn("DeseableCurso", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnDeseableCurso = new DataColumn("DeseableCurso", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnDeseableCurso);
-                this.columnDataColumn1 = new global::System.Data.DataColumn("DataColumn1", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnDataColumn1 = new DataColumn("DataColumn1", typeof(string), null, MappingType.Element);
                 base.Columns.Add(this.columnDataColumn1);
                 this.ExtendedProperties.Add("Generator_TablePropName", "_DSInforme");
                 this.ExtendedProperties.Add("Generator_UserTableName", "DSInforme");
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public DSInformeRow NewDSInformeRow() {
                 return ((DSInformeRow)(this.NewRow()));
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override DataRow NewRowFromBuilder(DataRowBuilder builder) {
                 return new DSInformeRow(builder);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Type GetRowType() {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override Type GetRowType() {
                 return typeof(DSInformeRow);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanged(DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
                 if ((this.DSInformeRowChanged != null)) {
                     this.DSInformeRowChanged(this, new DSInformeRowChangeEvent(((DSInformeRow)(e.Row)), e.Action));
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanging(DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
                 if ((this.DSInformeRowChanging != null)) {
                     this.DSInformeRowChanging(this, new DSInformeRowChangeEvent(((DSInformeRow)(e.Row)), e.Action));
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleted(DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
                 if ((this.DSInformeRowDeleted != null)) {
                     this.DSInformeRowDeleted(this, new DSInformeRowChangeEvent(((DSInformeRow)(e.Row)), e.Action));
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleting(DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
                 if ((this.DSInformeRowDeleting != null)) {
                     this.DSInformeRowDeleting(this, new DSInformeRowChangeEvent(((DSInformeRow)(e.Row)), e.Action));
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void RemoveDSInformeRow(DSInformeRow row) {
                 this.Rows.Remove(row);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public static XmlSchemaComplexType GetTypedTableSchema(XmlSchemaSet xs) {
+                XmlSchemaComplexType type = new XmlSchemaComplexType();
+                XmlSchemaSequence sequence = new XmlSchemaSequence();
                 DSInforme ds = new DSInforme();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                XmlSchemaAny any1 = new XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
                 any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                any1.ProcessContents = XmlSchemaContentProcessing.Lax;
                 sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                XmlSchemaAny any2 = new XmlSchemaAny();
                 any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
                 any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                any2.ProcessContents = XmlSchemaContentProcessing.Lax;
                 sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                XmlSchemaAttribute attribute1 = new XmlSchemaAttribute();
                 attribute1.Name = "namespace";
                 attribute1.FixedValue = ds.Namespace;
                 type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                XmlSchemaAttribute attribute2 = new XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "DSInformeDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                XmlSchema dsSchema = ds.GetSchemaSerializable();
                 if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    MemoryStream s1 = new MemoryStream();
+                    MemoryStream s2 = new MemoryStream();
                     try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
+                        XmlSchema schema = null;
                         dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                        for (IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((XmlSchema)(schemas.Current));
                             s2.SetLength(0);
                             schema.Write(s2);
                             if ((s1.Length == s2.Length)) {
@@ -1185,26 +1198,26 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class DSInformeRow : global::System.Data.DataRow {
+        public partial class DSInformeRow : DataRow {
             
             private DSInformeDataTable tableDSInforme;
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal DSInformeRow(global::System.Data.DataRowBuilder rb) : 
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal DSInformeRow(DataRowBuilder rb) : 
                     base(rb) {
                 this.tableDSInforme = ((DSInformeDataTable)(this.Table));
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public int NºPerfil {
                 get {
                     try {
                         return ((int)(this[this.tableDSInforme.NºPerfilColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'NºPerfil\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'NºPerfil\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1212,15 +1225,15 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string DescPerfil {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.DescPerfilColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'DescPerfil\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'DescPerfil\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1228,15 +1241,15 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string Vigencia {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.VigenciaColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Vigencia\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'Vigencia\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1244,15 +1257,15 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string NºSector {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.NºSectorColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'NºSector\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'NºSector\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1260,15 +1273,15 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string DescSector {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.DescSectorColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'DescSector\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'DescSector\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1276,15 +1289,15 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string Version {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.VersionColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Version\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'Version\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1292,15 +1305,15 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string TareaI {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.TareaIColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'TareaI\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'TareaI\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1308,15 +1321,15 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string TareaII {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.TareaIIColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'TareaII\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'TareaII\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1324,15 +1337,15 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string TareaIII {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.TareaIIIColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'TareaIII\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'TareaIII\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1340,15 +1353,15 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string EspPrimaria {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.EspPrimariaColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'EspPrimaria\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'EspPrimaria\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1356,15 +1369,15 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string ObservPrim {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.ObservPrimColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ObservPrim\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'ObservPrim\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1372,15 +1385,15 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string NecPrim {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.NecPrimColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'NecPrim\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'NecPrim\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1388,15 +1401,15 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string DesPrim {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.DesPrimColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'DesPrim\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'DesPrim\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1404,15 +1417,15 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string Espsec {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.EspsecColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Espsec\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'Espsec\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1420,15 +1433,15 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string ObservSec {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.ObservSecColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ObservSec\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'ObservSec\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1436,15 +1449,15 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string NecSec {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.NecSecColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'NecSec\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'NecSec\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1452,15 +1465,15 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string DesSec {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.DesSecColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'DesSec\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'DesSec\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1468,15 +1481,15 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string EspTerc {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.EspTercColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'EspTerc\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'EspTerc\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1484,15 +1497,15 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string ObservTerc {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.ObservTercColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ObservTerc\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'ObservTerc\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1500,15 +1513,15 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string NecTerc {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.NecTercColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'NecTerc\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'NecTerc\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1516,15 +1529,15 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string DesTerc {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.DesTercColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'DesTerc\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'DesTerc\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1532,15 +1545,15 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string EspIdiom {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.EspIdiomColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'EspIdiom\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'EspIdiom\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1548,15 +1561,15 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string ObservIdiom {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.ObservIdiomColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ObservIdiom\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'ObservIdiom\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1564,15 +1577,15 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string necIdioma {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.necIdiomaColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'necIdioma\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'necIdioma\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1580,15 +1593,15 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string DesIdiom {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.DesIdiomColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'DesIdiom\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'DesIdiom\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1596,15 +1609,15 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string EspExp {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.EspExpColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'EspExp\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'EspExp\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1612,15 +1625,15 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string ObservExp {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.ObservExpColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ObservExp\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'ObservExp\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1628,15 +1641,15 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string NecExp {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.NecExpColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'NecExp\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'NecExp\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1644,15 +1657,15 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string DesExp {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.DesExpColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'DesExp\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'DesExp\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1660,15 +1673,15 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string EspFisica {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.EspFisicaColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'EspFisica\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'EspFisica\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1676,15 +1689,15 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string NecFisica {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.NecFisicaColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'NecFisica\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'NecFisica\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1692,15 +1705,15 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string DesFisica {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.DesFisicaColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'DesFisica\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'DesFisica\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1708,15 +1721,15 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string EspOtrosI {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.EspOtrosIColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'EspOtrosI\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'EspOtrosI\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1724,15 +1737,15 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string NecOtrosI {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.NecOtrosIColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'NecOtrosI\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'NecOtrosI\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1740,15 +1753,15 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string desOtrosI {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.desOtrosIColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'desOtrosI\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'desOtrosI\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1756,15 +1769,15 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string EspOtrosII {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.EspOtrosIIColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'EspOtrosII\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'EspOtrosII\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1772,15 +1785,15 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string NecOtrosII {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.NecOtrosIIColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'NecOtrosII\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'NecOtrosII\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1788,15 +1801,15 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string DesOtrosII {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.DesOtrosIIColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'DesOtrosII\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'DesOtrosII\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1804,15 +1817,15 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string EquivI {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.EquivIColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'EquivI\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'EquivI\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1820,15 +1833,15 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string EquivII {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.EquivIIColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'EquivII\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'EquivII\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1836,15 +1849,15 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string Curso {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.CursoColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Curso\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'Curso\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1852,15 +1865,15 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string DescCurso {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.DescCursoColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'DescCurso\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'DescCurso\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1868,15 +1881,15 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string NecesariaCurso {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.NecesariaCursoColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'NecesariaCurso\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'NecesariaCurso\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1884,15 +1897,15 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string DeseableCurso {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.DeseableCursoColumn]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'DeseableCurso\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'DeseableCurso\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1900,15 +1913,15 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string DataColumn1 {
                 get {
                     try {
                         return ((string)(this[this.tableDSInforme.DataColumn1Column]));
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'DataColumn1\' in table \'DSInforme\' is DBNull.", e);
+                    catch (InvalidCastException e) {
+                        throw new StrongTypingException("The value for column \'DataColumn1\' in table \'DSInforme\' is DBNull.", e);
                     }
                 }
                 set {
@@ -1916,575 +1929,575 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil {
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsNºPerfilNull() {
                 return this.IsNull(this.tableDSInforme.NºPerfilColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetNºPerfilNull() {
-                this[this.tableDSInforme.NºPerfilColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.NºPerfilColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsDescPerfilNull() {
                 return this.IsNull(this.tableDSInforme.DescPerfilColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetDescPerfilNull() {
-                this[this.tableDSInforme.DescPerfilColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.DescPerfilColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsVigenciaNull() {
                 return this.IsNull(this.tableDSInforme.VigenciaColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetVigenciaNull() {
-                this[this.tableDSInforme.VigenciaColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.VigenciaColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsNºSectorNull() {
                 return this.IsNull(this.tableDSInforme.NºSectorColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetNºSectorNull() {
-                this[this.tableDSInforme.NºSectorColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.NºSectorColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsDescSectorNull() {
                 return this.IsNull(this.tableDSInforme.DescSectorColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetDescSectorNull() {
-                this[this.tableDSInforme.DescSectorColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.DescSectorColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsVersionNull() {
                 return this.IsNull(this.tableDSInforme.VersionColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetVersionNull() {
-                this[this.tableDSInforme.VersionColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.VersionColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsTareaINull() {
                 return this.IsNull(this.tableDSInforme.TareaIColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetTareaINull() {
-                this[this.tableDSInforme.TareaIColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.TareaIColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsTareaIINull() {
                 return this.IsNull(this.tableDSInforme.TareaIIColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetTareaIINull() {
-                this[this.tableDSInforme.TareaIIColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.TareaIIColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsTareaIIINull() {
                 return this.IsNull(this.tableDSInforme.TareaIIIColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetTareaIIINull() {
-                this[this.tableDSInforme.TareaIIIColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.TareaIIIColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsEspPrimariaNull() {
                 return this.IsNull(this.tableDSInforme.EspPrimariaColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetEspPrimariaNull() {
-                this[this.tableDSInforme.EspPrimariaColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.EspPrimariaColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsObservPrimNull() {
                 return this.IsNull(this.tableDSInforme.ObservPrimColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetObservPrimNull() {
-                this[this.tableDSInforme.ObservPrimColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.ObservPrimColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsNecPrimNull() {
                 return this.IsNull(this.tableDSInforme.NecPrimColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetNecPrimNull() {
-                this[this.tableDSInforme.NecPrimColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.NecPrimColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsDesPrimNull() {
                 return this.IsNull(this.tableDSInforme.DesPrimColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetDesPrimNull() {
-                this[this.tableDSInforme.DesPrimColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.DesPrimColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsEspsecNull() {
                 return this.IsNull(this.tableDSInforme.EspsecColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetEspsecNull() {
-                this[this.tableDSInforme.EspsecColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.EspsecColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsObservSecNull() {
                 return this.IsNull(this.tableDSInforme.ObservSecColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetObservSecNull() {
-                this[this.tableDSInforme.ObservSecColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.ObservSecColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsNecSecNull() {
                 return this.IsNull(this.tableDSInforme.NecSecColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetNecSecNull() {
-                this[this.tableDSInforme.NecSecColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.NecSecColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsDesSecNull() {
                 return this.IsNull(this.tableDSInforme.DesSecColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetDesSecNull() {
-                this[this.tableDSInforme.DesSecColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.DesSecColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsEspTercNull() {
                 return this.IsNull(this.tableDSInforme.EspTercColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetEspTercNull() {
-                this[this.tableDSInforme.EspTercColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.EspTercColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsObservTercNull() {
                 return this.IsNull(this.tableDSInforme.ObservTercColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetObservTercNull() {
-                this[this.tableDSInforme.ObservTercColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.ObservTercColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsNecTercNull() {
                 return this.IsNull(this.tableDSInforme.NecTercColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetNecTercNull() {
-                this[this.tableDSInforme.NecTercColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.NecTercColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsDesTercNull() {
                 return this.IsNull(this.tableDSInforme.DesTercColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetDesTercNull() {
-                this[this.tableDSInforme.DesTercColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.DesTercColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsEspIdiomNull() {
                 return this.IsNull(this.tableDSInforme.EspIdiomColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetEspIdiomNull() {
-                this[this.tableDSInforme.EspIdiomColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.EspIdiomColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsObservIdiomNull() {
                 return this.IsNull(this.tableDSInforme.ObservIdiomColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetObservIdiomNull() {
-                this[this.tableDSInforme.ObservIdiomColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.ObservIdiomColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsnecIdiomaNull() {
                 return this.IsNull(this.tableDSInforme.necIdiomaColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetnecIdiomaNull() {
-                this[this.tableDSInforme.necIdiomaColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.necIdiomaColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsDesIdiomNull() {
                 return this.IsNull(this.tableDSInforme.DesIdiomColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetDesIdiomNull() {
-                this[this.tableDSInforme.DesIdiomColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.DesIdiomColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsEspExpNull() {
                 return this.IsNull(this.tableDSInforme.EspExpColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetEspExpNull() {
-                this[this.tableDSInforme.EspExpColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.EspExpColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsObservExpNull() {
                 return this.IsNull(this.tableDSInforme.ObservExpColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetObservExpNull() {
-                this[this.tableDSInforme.ObservExpColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.ObservExpColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsNecExpNull() {
                 return this.IsNull(this.tableDSInforme.NecExpColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetNecExpNull() {
-                this[this.tableDSInforme.NecExpColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.NecExpColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsDesExpNull() {
                 return this.IsNull(this.tableDSInforme.DesExpColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetDesExpNull() {
-                this[this.tableDSInforme.DesExpColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.DesExpColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsEspFisicaNull() {
                 return this.IsNull(this.tableDSInforme.EspFisicaColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetEspFisicaNull() {
-                this[this.tableDSInforme.EspFisicaColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.EspFisicaColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsNecFisicaNull() {
                 return this.IsNull(this.tableDSInforme.NecFisicaColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetNecFisicaNull() {
-                this[this.tableDSInforme.NecFisicaColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.NecFisicaColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsDesFisicaNull() {
                 return this.IsNull(this.tableDSInforme.DesFisicaColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetDesFisicaNull() {
-                this[this.tableDSInforme.DesFisicaColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.DesFisicaColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsEspOtrosINull() {
                 return this.IsNull(this.tableDSInforme.EspOtrosIColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetEspOtrosINull() {
-                this[this.tableDSInforme.EspOtrosIColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.EspOtrosIColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsNecOtrosINull() {
                 return this.IsNull(this.tableDSInforme.NecOtrosIColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetNecOtrosINull() {
-                this[this.tableDSInforme.NecOtrosIColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.NecOtrosIColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsdesOtrosINull() {
                 return this.IsNull(this.tableDSInforme.desOtrosIColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetdesOtrosINull() {
-                this[this.tableDSInforme.desOtrosIColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.desOtrosIColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsEspOtrosIINull() {
                 return this.IsNull(this.tableDSInforme.EspOtrosIIColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetEspOtrosIINull() {
-                this[this.tableDSInforme.EspOtrosIIColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.EspOtrosIIColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsNecOtrosIINull() {
                 return this.IsNull(this.tableDSInforme.NecOtrosIIColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetNecOtrosIINull() {
-                this[this.tableDSInforme.NecOtrosIIColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.NecOtrosIIColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsDesOtrosIINull() {
                 return this.IsNull(this.tableDSInforme.DesOtrosIIColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetDesOtrosIINull() {
-                this[this.tableDSInforme.DesOtrosIIColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.DesOtrosIIColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsEquivINull() {
                 return this.IsNull(this.tableDSInforme.EquivIColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetEquivINull() {
-                this[this.tableDSInforme.EquivIColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.EquivIColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsEquivIINull() {
                 return this.IsNull(this.tableDSInforme.EquivIIColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetEquivIINull() {
-                this[this.tableDSInforme.EquivIIColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.EquivIIColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsCursoNull() {
                 return this.IsNull(this.tableDSInforme.CursoColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetCursoNull() {
-                this[this.tableDSInforme.CursoColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.CursoColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsDescCursoNull() {
                 return this.IsNull(this.tableDSInforme.DescCursoColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetDescCursoNull() {
-                this[this.tableDSInforme.DescCursoColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.DescCursoColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsNecesariaCursoNull() {
                 return this.IsNull(this.tableDSInforme.NecesariaCursoColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetNecesariaCursoNull() {
-                this[this.tableDSInforme.NecesariaCursoColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.NecesariaCursoColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsDeseableCursoNull() {
                 return this.IsNull(this.tableDSInforme.DeseableCursoColumn);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetDeseableCursoNull() {
-                this[this.tableDSInforme.DeseableCursoColumn] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.DeseableCursoColumn] = Convert.DBNull;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsDataColumn1Null() {
                 return this.IsNull(this.tableDSInforme.DataColumn1Column);
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetDataColumn1Null() {
-                this[this.tableDSInforme.DataColumn1Column] = global::System.Convert.DBNull;
+                this[this.tableDSInforme.DataColumn1Column] = Convert.DBNull;
             }
         }
         
         /// <summary>
         ///Row event argument class
         ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public class DSInformeRowChangeEvent : global::System.EventArgs {
+        [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public class DSInformeRowChangeEvent : EventArgs {
             
             private DSInformeRow eventRow;
             
-            private global::System.Data.DataRowAction eventAction;
+            private DataRowAction eventAction;
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DSInformeRowChangeEvent(DSInformeRow row, global::System.Data.DataRowAction action) {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DSInformeRowChangeEvent(DSInformeRow row, DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public DSInformeRow Row {
                 get {
                     return this.eventRow;
                 }
             }
             
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataRowAction Action {
+            [DebuggerNonUserCode()]
+            [GeneratedCode("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DataRowAction Action {
                 get {
                     return this.eventAction;
                 }

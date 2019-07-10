@@ -1,11 +1,14 @@
-﻿namespace Modulo_Capacitacion.Listados.InformedeCompetencias
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Modulo_Capacitacion.Listados.InformedeCompetencias
 {
     partial class Inicio
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -48,6 +51,8 @@
             this.BT_Pantalla = new System.Windows.Forms.Button();
             this.BT_Imprimir = new System.Windows.Forms.Button();
             this.BT_Salir = new System.Windows.Forms.Button();
+            this.rbPorPerfil = new System.Windows.Forms.RadioButton();
+            this.cmbPerfiles = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -59,9 +64,10 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(139)))), ((int)(((byte)(82)))));
             this.panel1.Controls.Add(this.LBChofer);
-            this.panel1.Location = new System.Drawing.Point(-1, 0);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(565, 39);
+            this.panel1.Size = new System.Drawing.Size(469, 39);
             this.panel1.TabIndex = 6;
             // 
             // LBChofer
@@ -79,9 +85,11 @@
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(74)))), ((int)(((byte)(95)))));
             this.panel2.Controls.Add(this.panel3);
-            this.panel2.Location = new System.Drawing.Point(-1, 38);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 39);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(471, 220);
+            this.panel2.Padding = new System.Windows.Forms.Padding(7);
+            this.panel2.Size = new System.Drawing.Size(469, 258);
             this.panel2.TabIndex = 9;
             // 
             // panel3
@@ -91,16 +99,19 @@
             this.panel3.Controls.Add(this.BT_Pantalla);
             this.panel3.Controls.Add(this.BT_Imprimir);
             this.panel3.Controls.Add(this.BT_Salir);
-            this.panel3.Location = new System.Drawing.Point(7, 8);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel3.Location = new System.Drawing.Point(7, 7);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(456, 204);
+            this.panel3.Size = new System.Drawing.Size(455, 244);
             this.panel3.TabIndex = 0;
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.cmbPerfiles);
             this.groupBox1.Controls.Add(this.cmbSectores);
+            this.groupBox1.Controls.Add(this.rbPorPerfil);
             this.groupBox1.Controls.Add(this.rbPorSector);
             this.groupBox1.Controls.Add(this.rbPorLegajo);
             this.groupBox1.Controls.Add(this.label1);
@@ -109,16 +120,17 @@
             this.groupBox1.Controls.Add(this.TB_Hasta);
             this.groupBox1.Location = new System.Drawing.Point(10, 14);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(436, 131);
+            this.groupBox1.Size = new System.Drawing.Size(436, 176);
             this.groupBox1.TabIndex = 88;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "PARÁMETROS";
             // 
             // groupBox2
             // 
+            this.groupBox2.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.groupBox2.Controls.Add(this.rbSi);
             this.groupBox2.Controls.Add(this.rbNo);
-            this.groupBox2.Location = new System.Drawing.Point(193, 78);
+            this.groupBox2.Location = new System.Drawing.Point(193, 119);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(120, 44);
             this.groupBox2.TabIndex = 91;
@@ -148,8 +160,9 @@
             // 
             // label4
             // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(33, 94);
+            this.label4.Location = new System.Drawing.Point(33, 135);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(128, 13);
             this.label4.TabIndex = 89;
@@ -234,11 +247,12 @@
             // 
             // BT_Pantalla
             // 
+            this.BT_Pantalla.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.BT_Pantalla.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BT_Pantalla.BackgroundImage")));
             this.BT_Pantalla.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Pantalla.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Pantalla.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Pantalla.Location = new System.Drawing.Point(113, 153);
+            this.BT_Pantalla.Location = new System.Drawing.Point(112, 196);
             this.BT_Pantalla.Name = "BT_Pantalla";
             this.BT_Pantalla.Size = new System.Drawing.Size(40, 40);
             this.BT_Pantalla.TabIndex = 81;
@@ -247,11 +261,12 @@
             // 
             // BT_Imprimir
             // 
+            this.BT_Imprimir.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.BT_Imprimir.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.imprimir;
             this.BT_Imprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Imprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Imprimir.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Imprimir.Location = new System.Drawing.Point(214, 153);
+            this.BT_Imprimir.Location = new System.Drawing.Point(207, 196);
             this.BT_Imprimir.Name = "BT_Imprimir";
             this.BT_Imprimir.Size = new System.Drawing.Size(40, 40);
             this.BT_Imprimir.TabIndex = 80;
@@ -260,22 +275,45 @@
             // 
             // BT_Salir
             // 
+            this.BT_Salir.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.BT_Salir.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.apagar;
             this.BT_Salir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Salir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Salir.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Salir.Location = new System.Drawing.Point(304, 153);
+            this.BT_Salir.Location = new System.Drawing.Point(302, 196);
             this.BT_Salir.Name = "BT_Salir";
             this.BT_Salir.Size = new System.Drawing.Size(40, 40);
             this.BT_Salir.TabIndex = 79;
             this.BT_Salir.UseVisualStyleBackColor = true;
             this.BT_Salir.Click += new System.EventHandler(this.BT_Salir_Click);
             // 
+            // rbPorPerfil
+            // 
+            this.rbPorPerfil.AutoSize = true;
+            this.rbPorPerfil.Location = new System.Drawing.Point(35, 92);
+            this.rbPorPerfil.Name = "rbPorPerfil";
+            this.rbPorPerfil.Size = new System.Drawing.Size(88, 17);
+            this.rbPorPerfil.TabIndex = 86;
+            this.rbPorPerfil.Text = "POR PERFIL";
+            this.rbPorPerfil.UseVisualStyleBackColor = true;
+            this.rbPorPerfil.Click += new System.EventHandler(this.rbPorLegajo_Click);
+            // 
+            // cmbPerfiles
+            // 
+            this.cmbPerfiles.FormattingEnabled = true;
+            this.cmbPerfiles.Items.AddRange(new object[] {
+            "Imprime Observaciones",
+            "No imprime Observaciones"});
+            this.cmbPerfiles.Location = new System.Drawing.Point(193, 91);
+            this.cmbPerfiles.Name = "cmbPerfiles";
+            this.cmbPerfiles.Size = new System.Drawing.Size(232, 21);
+            this.cmbPerfiles.TabIndex = 88;
+            // 
             // Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(469, 257);
+            this.ClientSize = new System.Drawing.Size(469, 297);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "Inicio";
@@ -296,24 +334,26 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label LBChofer;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.TextBox TB_Hasta;
-        private System.Windows.Forms.TextBox TB_Desde;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button BT_Pantalla;
-        private System.Windows.Forms.Button BT_Imprimir;
-        private System.Windows.Forms.Button BT_Salir;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton rbPorSector;
-        private System.Windows.Forms.RadioButton rbPorLegajo;
-        private System.Windows.Forms.ComboBox cmbSectores;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.RadioButton rbNo;
-        private System.Windows.Forms.RadioButton rbSi;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private Panel panel1;
+        private Label LBChofer;
+        private Panel panel2;
+        private Panel panel3;
+        private TextBox TB_Hasta;
+        private TextBox TB_Desde;
+        private Label label2;
+        private Button BT_Pantalla;
+        private Button BT_Imprimir;
+        private Button BT_Salir;
+        private Label label1;
+        private GroupBox groupBox1;
+        private RadioButton rbPorSector;
+        private RadioButton rbPorLegajo;
+        private ComboBox cmbSectores;
+        private Label label4;
+        private RadioButton rbNo;
+        private RadioButton rbSi;
+        private GroupBox groupBox2;
+        private ComboBox cmbPerfiles;
+        private RadioButton rbPorPerfil;
     }
 }

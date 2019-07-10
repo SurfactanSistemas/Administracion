@@ -1,11 +1,14 @@
-﻿namespace Modulo_Capacitacion.Maestros.Cursos
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Modulo_Capacitacion.Maestros.Cursos
 {
     partial class AgModCurso
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -270,23 +273,23 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label LBTema;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox TB_Horas;
-        private System.Windows.Forms.TextBox TB_DescCurso;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button BT_Salir;
-        private System.Windows.Forms.Button BT_LimpiarPant;
-        private System.Windows.Forms.Button BT_Guardar;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label LFechaAviso;
-        private System.Windows.Forms.TextBox TB_Codigo;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.ComboBox TB_DescTema;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.ComboBox TB_CodTema;
+        private Panel panel1;
+        private Label LBTema;
+        private Panel panel2;
+        private Panel panel3;
+        private Label label3;
+        private TextBox TB_Horas;
+        private TextBox TB_DescCurso;
+        private Label label2;
+        private Button BT_Salir;
+        private Button BT_LimpiarPant;
+        private Button BT_Guardar;
+        private Label label1;
+        private Label LFechaAviso;
+        private TextBox TB_Codigo;
+        private Panel panel5;
+        private ComboBox TB_DescTema;
+        private Panel panel4;
+        private ComboBox TB_CodTema;
     }
 }

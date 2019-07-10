@@ -2,6 +2,7 @@
 Imports ClasesCompartidas
 Imports System.Data.SqlClient
 Imports System.Text.RegularExpressions
+Imports EvaluacionProvMPFarma
 
 Public Class ProveedoresABM
 
@@ -1705,6 +1706,8 @@ Public Class ProveedoresABM
     End Sub
 
     Private Sub btnEvaluacion_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnEvaluacion.Click
+
+        If Val(txtCodigo.Text) = 0 Or Len(txtCodigo.Text.Trim()) < 11 Then Exit Sub
 
         '
         ' Se llama a la ventana de Evaluación de Proveedor por Materia Prima.

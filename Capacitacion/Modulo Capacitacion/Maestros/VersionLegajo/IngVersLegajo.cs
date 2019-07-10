@@ -238,8 +238,11 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
                 if (PerVer.Version > -1)
                 {
                     TB_DescPer.Text = PerVer.Descripcion;
-                    TB_CodSec.Text = PerVer.sector.Codigo.ToString();
-                    TB_DescSector.Text = PerVer.sector.Descripcion;
+                    if (PerVer.sector != null)
+                    {
+                        TB_CodSec.Text = PerVer.sector.Codigo.ToString();
+                        TB_DescSector.Text = PerVer.sector.Descripcion;   
+                    }
                     TB_Tareas1.Text = PerVer.TareasI;
                     TB_Tareas2.Text = PerVer.TareasII;
                     TB_Tareas3.Text = PerVer.TareasIII;
@@ -368,7 +371,7 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
                 CargarDatosPefil();
                 CargarTemas(LV.Temas);
                 BuscarCantVersiones();
-                
+
             }
             catch (Exception err)
             {
@@ -425,8 +428,9 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
                 {
                     LimpiarPantalla();
                 }
-                
+
                 CompletarFechaIng();
+
                 //TB_Codigo.Text = TB_DescLegajo.Text;
                 TB_VersionLegajo.Focus();
             }
@@ -511,7 +515,7 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
             {
                 if (fila[3].ToString() == TB_DescLegajo.Text)
                 {
-                    TB_Codigo.Text = fila[1].ToString();
+                    //TB_Codigo.Text = fila[1].ToString();
                     TB_FechaIng.Text = fila[4].ToString();
                     Perfil = fila[5].ToString();
                 }
@@ -520,7 +524,7 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
             TB_CantidadVersiones.Text = LV.MaxVersiones(TB_Codigo.Text);
             TB_CantidadVersiones.ReadOnly = true;
 
-            this.TB_Codigo_KeyDown(null, new KeyEventArgs(Keys.Enter));
+            TB_Codigo_KeyDown(null, new KeyEventArgs(Keys.Enter));
         }
 
         private void TB_VersionLegajo_KeyDown(object sender, KeyEventArgs e)
@@ -652,6 +656,11 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
 
                 txtVersionActual.Focus();
             }
+        }
+
+        private void IngVersLegajo_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

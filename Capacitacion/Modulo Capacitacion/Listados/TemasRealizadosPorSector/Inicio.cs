@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using Negocio;
 
@@ -21,7 +16,8 @@ namespace Modulo_Capacitacion.Listados.TemasRealizadosPorSector
         public Inicio()
         {
             InitializeComponent();
-            CB_Tipo.SelectedIndex = 0;
+            rbTodos.Checked = true;
+            rbSector.Checked = true;
         }
 
         private void BT_Pantalla_Click(object sender, EventArgs e)
@@ -30,7 +26,29 @@ namespace Modulo_Capacitacion.Listados.TemasRealizadosPorSector
             {
                 Tipo = "Pantalla";
 
-                _PresentarReporte();
+                if (TB_Desde.Text.Trim() == "") TB_Desde.Text = "1";
+                if (TB_Hasta.Text.Trim() == "") TB_Hasta.Text = "9999";
+
+                if (txtAnioDesde.Text.Replace("/", "").Trim() == "") txtAnioDesde.Text = "01/06" + DateTime.Now.Year;
+                if (txtAnioHasta.Text.Replace("/", "").Trim() == "") txtAnioHasta.Text = "31/05" + (DateTime.Now.Year + 1);
+
+                /*
+                 * Actualizamos los datos de Programados/No Programados.
+                 */
+                Helper._ReprocesoCursosProgramadosYNoProgramadosII(txtAnioDesde.Text, txtAnioHasta.Text, int.Parse(TB_Desde.Text), int.Parse(TB_Hasta.Text));
+
+                if (rbSector.Checked)
+                {
+                    _PresentarReporte(Tipo);
+
+                }else if (rbLegajo.Checked)
+                {
+                    _PresentarReportePorLegajo(Tipo);
+                }
+                else
+                {
+                    _PresentarReportePorTema(Tipo);
+                }
             }
             catch (Exception err)
             {
@@ -39,12 +57,110 @@ namespace Modulo_Capacitacion.Listados.TemasRealizadosPorSector
             }
         }
 
-        private void _PresentarReporte()
+        private void _PresentarReportePorTema(string _Tipo)
         {
-            if (TB_Desde.Text == "") throw new Exception("Se debe ingresar el sector desde el que desea comenzar la busqueda");
+            try
+            {
+                int Desd;
+                int.TryParse(TB_Desde.Text, out Desd);
+                int Hast;
+                int.TryParse(TB_Hasta.Text, out Hast);
+                
+                Helper.PurgarOrdFechaCursadas();
 
-            if (TB_Hasta.Text == "") TB_Hasta.Text = TB_Desde.Text;
+                int AñoDesde = int.Parse(Helper.OrdenarFecha(txtAnioDesde.Text));
+                int AñoHasta = int.Parse(Helper.OrdenarFecha(txtAnioHasta.Text));
 
+                Helper.ActualizarCantidadPersonasHoras(txtAnioDesde.Text.Substring(6, 4));
+
+                string WTipoCursada = "";
+
+                if (rbProgramados.Checked)
+                {
+                    WTipoCursada = "0";
+
+                }
+                else if (rbNoProgramados.Checked)
+                {
+                    WTipoCursada = "1";
+                }
+
+                dtInforme = C.ListarCursoporTema(Desd, Hast, AñoDesde, AñoHasta, WTipoCursada);
+
+                CursosRealizadosporTemas.ImpreInforme Impre = new CursosRealizadosporTemas.ImpreInforme(dtInforme, _Tipo);
+                Impre.WindowState = FormWindowState.Maximized;
+                Impre.Show();
+
+            }
+            catch (Exception err)
+            {
+
+                MessageBox.Show(err.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void _PresentarReportePorLegajo(string _Tipo)
+        {
+            try
+            {
+                int LegDesd;
+                int.TryParse(TB_Desde.Text, out LegDesd);
+                int LegHast;
+                int.TryParse(TB_Hasta.Text, out LegHast);
+
+                Helper.PurgarOrdFechaCursadas();
+
+                int AñoDesd = int.Parse(Helper.OrdenarFecha(txtAnioDesde.Text));
+                
+                int AñoHast = int.Parse(Helper.OrdenarFecha(txtAnioHasta.Text));
+
+                string WTipoCursada = "";
+
+                if (rbProgramados.Checked)
+                {
+                    WTipoCursada = "0";
+
+                }
+                else if (rbNoProgramados.Checked)
+                {
+                    WTipoCursada = "1";
+                }
+
+                DataTable dtCursadas = (new Cursada()).ListarPorLegajo(LegDesd, LegHast, AñoDesd, AñoHast, WTipoCursada);
+
+                dtCursadas.Columns.Add("NHoras", typeof(float));
+
+                dtInforme = dtCursadas.Copy();
+
+                dtInforme.Clear();
+
+                foreach (DataRow fila in dtCursadas.Rows)
+                {
+                    //CONSULTO POR SI LA ORDEN FECHA TIENE ALGO
+                    if (fila[8].ToString() != "  /  /    ")
+                    {
+                        int Fecha;
+                        int.TryParse(fila[11].ToString(), out Fecha);
+
+                        fila["NHoras"] = float.Parse(fila[6].ToString());
+                        dtInforme.ImportRow(fila);
+                    }
+                }
+
+                TemasPorLegajo.ImpreInforme Impre = new TemasPorLegajo.ImpreInforme(dtInforme, _Tipo);
+                Impre.WindowState = FormWindowState.Maximized;
+                Impre.Show();
+
+            }
+            catch (Exception err)
+            {
+
+                MessageBox.Show(err.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void _PresentarReporte(string _Tipo)
+        {
             int Desd;
             int.TryParse(TB_Desde.Text, out Desd);
             int Hast;
@@ -56,25 +172,26 @@ namespace Modulo_Capacitacion.Listados.TemasRealizadosPorSector
             progressBar1.Value = 0;
 
             Helper.PurgarOrdFechaCursadas();
-            Helper.ActualizarTipoCursada(ref progressBar1);
+            //Helper.ActualizarTipoCursada(ref progressBar1);
 
             string WTipoCursada = "";
 
-            if (CB_Tipo.SelectedIndex == 1)
+            if (rbProgramados.Checked)
             {
                 WTipoCursada = "0";
-            }
-            else if (CB_Tipo.SelectedIndex == 2)
+
+            }else if (rbNoProgramados.Checked)
             {
                 WTipoCursada = "1";
             }
-
+        
             dtInforme = C.ListarCursoporSector(Desd, Hast, AñoDesde, AñoHasta, WTipoCursada);
 
             progressBar1.Visible = false;
 
-            ImpreInforme Impre = new ImpreInforme(dtInforme, Tipo);
-            Impre.ShowDialog();
+            ImpreInforme Impre = new ImpreInforme(dtInforme, _Tipo);
+            Impre.WindowState = FormWindowState.Maximized;
+            Impre.Show();
         }
 
         private void BT_Salir_Click(object sender, EventArgs e)
@@ -104,7 +221,7 @@ namespace Modulo_Capacitacion.Listados.TemasRealizadosPorSector
             {
                 Tipo = "Impresion";
 
-                _PresentarReporte();
+                _PresentarReporte(Tipo);
 
             }
             catch (Exception err)
@@ -179,23 +296,6 @@ namespace Modulo_Capacitacion.Listados.TemasRealizadosPorSector
                 txtAnioDesde.Text = "";
             }
 	        
-        }
-
-        private void txtAnioHasta_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyData == Keys.Enter)
-            {
-                if (txtAnioHasta.Text.Replace(" ", "").Length < 10) return;
-                if (!Helper._FechaValida(txtAnioHasta.Text)) return;
-
-                CB_Tipo.DroppedDown = true;
-                CB_Tipo.Focus();
-
-            }
-            else if (e.KeyData == Keys.Escape)
-            {
-                txtAnioHasta.Text = "";
-            }
         }
     }
 }

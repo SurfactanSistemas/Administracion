@@ -143,6 +143,16 @@ namespace Modulo_Capacitacion.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap archivo_default {
+            get {
+                object obj = ResourceManager.GetObject("archivo_default", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap choferes_agregar {
             get {
                 object obj = ResourceManager.GetObject("choferes agregar", resourceCulture);
@@ -241,11 +251,31 @@ namespace Modulo_Capacitacion.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon Excel_icon {
+            get {
+                object obj = ResourceManager.GetObject("Excel_icon", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap grabar {
             get {
                 object obj = ResourceManager.GetObject("grabar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap imagen_icono {
+            get {
+                object obj = ResourceManager.GetObject("imagen_icono", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -293,6 +323,16 @@ namespace Modulo_Capacitacion.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap pdf_icon {
+            get {
+                object obj = ResourceManager.GetObject("pdf_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap remito_modificar {
             get {
                 object obj = ResourceManager.GetObject("remito modificar", resourceCulture);
@@ -306,6 +346,26 @@ namespace Modulo_Capacitacion.Properties {
         internal static System.Drawing.Bitmap Screen_preview {
             get {
                 object obj = ResourceManager.GetObject("Screen_preview", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap txt_icono {
+            get {
+                object obj = ResourceManager.GetObject("txt_icono", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Word_icon {
+            get {
+                object obj = ResourceManager.GetObject("Word_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

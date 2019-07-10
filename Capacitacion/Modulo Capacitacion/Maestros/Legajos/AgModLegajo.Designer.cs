@@ -1,11 +1,14 @@
-﻿namespace Modulo_Capacitacion.Maestros.Legajos
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Modulo_Capacitacion.Maestros.Legajos
 {
     partial class AgModLegajo
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -28,15 +31,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.BT_MasObserv = new System.Windows.Forms.Button();
@@ -143,12 +146,6 @@
             this.Observaciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.DGV_CursosRealiz = new System.Windows.Forms.DataGridView();
-            this.Curso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DesCurso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Horas = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Año = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cursos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label4 = new System.Windows.Forms.Label();
             this.TB_FechaIng = new System.Windows.Forms.DateTimePicker();
             this.TB_DescLegajo = new System.Windows.Forms.TextBox();
@@ -161,6 +158,12 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.LBLegajo = new System.Windows.Forms.Label();
+            this.Curso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DesCurso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Horas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Año = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cursos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -1298,13 +1301,13 @@
             this.DGV_Temas.Location = new System.Drawing.Point(13, 11);
             this.DGV_Temas.Margin = new System.Windows.Forms.Padding(0);
             this.DGV_Temas.Name = "DGV_Temas";
-            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DGV_Temas.RowHeadersDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DGV_Temas.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.DGV_Temas.RowHeadersWidth = 15;
             this.DGV_Temas.Size = new System.Drawing.Size(932, 444);
             this.DGV_Temas.TabIndex = 7;
@@ -1312,8 +1315,8 @@
             // Tema
             // 
             this.Tema.DataPropertyName = "Curso";
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Tema.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Tema.DefaultCellStyle = dataGridViewCellStyle1;
             this.Tema.HeaderText = "Tema";
             this.Tema.Name = "Tema";
             this.Tema.ReadOnly = true;
@@ -1330,8 +1333,8 @@
             // Necesaria
             // 
             this.Necesaria.DataPropertyName = "Necesaria";
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Necesaria.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Necesaria.DefaultCellStyle = dataGridViewCellStyle2;
             this.Necesaria.HeaderText = "Necesaria";
             this.Necesaria.Name = "Necesaria";
             this.Necesaria.ReadOnly = true;
@@ -1340,8 +1343,8 @@
             // Deseable
             // 
             this.Deseable.DataPropertyName = "Deseable";
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Deseable.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Deseable.DefaultCellStyle = dataGridViewCellStyle3;
             this.Deseable.HeaderText = "Deseable";
             this.Deseable.Name = "Deseable";
             this.Deseable.ReadOnly = true;
@@ -1400,67 +1403,17 @@
             this.DGV_CursosRealiz.Location = new System.Drawing.Point(16, 12);
             this.DGV_CursosRealiz.Margin = new System.Windows.Forms.Padding(0);
             this.DGV_CursosRealiz.Name = "DGV_CursosRealiz";
-            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DGV_CursosRealiz.RowHeadersDefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DGV_CursosRealiz.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.DGV_CursosRealiz.RowHeadersWidth = 15;
             this.DGV_CursosRealiz.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DGV_CursosRealiz.Size = new System.Drawing.Size(927, 442);
             this.DGV_CursosRealiz.TabIndex = 8;
-            // 
-            // Curso
-            // 
-            this.Curso.DataPropertyName = "Tema";
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Curso.DefaultCellStyle = dataGridViewCellStyle14;
-            this.Curso.HeaderText = "Tema";
-            this.Curso.Name = "Curso";
-            this.Curso.Width = 64;
-            // 
-            // DesCurso
-            // 
-            this.DesCurso.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.DesCurso.DataPropertyName = "DesCurso";
-            this.DesCurso.HeaderText = "Descripcion";
-            this.DesCurso.Name = "DesCurso";
-            // 
-            // Horas
-            // 
-            this.Horas.DataPropertyName = "Horas";
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Horas.DefaultCellStyle = dataGridViewCellStyle15;
-            this.Horas.HeaderText = "Horas";
-            this.Horas.Name = "Horas";
-            this.Horas.Width = 65;
-            // 
-            // Tipo
-            // 
-            this.Tipo.DataPropertyName = "TipoII";
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Tipo.DefaultCellStyle = dataGridViewCellStyle16;
-            this.Tipo.HeaderText = "Tipo";
-            this.Tipo.Name = "Tipo";
-            this.Tipo.Width = 56;
-            // 
-            // Año
-            // 
-            this.Año.DataPropertyName = "Ano";
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Año.DefaultCellStyle = dataGridViewCellStyle17;
-            this.Año.HeaderText = "Año";
-            this.Año.Name = "Año";
-            this.Año.Width = 53;
-            // 
-            // Cursos
-            // 
-            this.Cursos.DataPropertyName = "DesTema";
-            this.Cursos.HeaderText = "Curso";
-            this.Cursos.Name = "Cursos";
-            this.Cursos.Width = 64;
             // 
             // label4
             // 
@@ -1594,6 +1547,56 @@
             this.LBLegajo.TabIndex = 0;
             this.LBLegajo.Text = "INGRESO DE LEGAJO";
             // 
+            // Curso
+            // 
+            this.Curso.DataPropertyName = "TemaI";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Curso.DefaultCellStyle = dataGridViewCellStyle5;
+            this.Curso.HeaderText = "Tema";
+            this.Curso.Name = "Curso";
+            this.Curso.Width = 64;
+            // 
+            // DesCurso
+            // 
+            this.DesCurso.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.DesCurso.DataPropertyName = "DesCurso";
+            this.DesCurso.HeaderText = "Descripcion";
+            this.DesCurso.Name = "DesCurso";
+            // 
+            // Horas
+            // 
+            this.Horas.DataPropertyName = "Horas";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Horas.DefaultCellStyle = dataGridViewCellStyle6;
+            this.Horas.HeaderText = "Horas";
+            this.Horas.Name = "Horas";
+            this.Horas.Width = 65;
+            // 
+            // Tipo
+            // 
+            this.Tipo.DataPropertyName = "TipoII";
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Tipo.DefaultCellStyle = dataGridViewCellStyle7;
+            this.Tipo.HeaderText = "Tipo";
+            this.Tipo.Name = "Tipo";
+            this.Tipo.Width = 56;
+            // 
+            // Año
+            // 
+            this.Año.DataPropertyName = "Ano";
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Año.DefaultCellStyle = dataGridViewCellStyle8;
+            this.Año.HeaderText = "Año";
+            this.Año.Name = "Año";
+            this.Año.Width = 53;
+            // 
+            // Cursos
+            // 
+            this.Cursos.DataPropertyName = "DesTema";
+            this.Cursos.HeaderText = "Curso";
+            this.Cursos.Name = "Cursos";
+            this.Cursos.Width = 64;
+            // 
             // AgModLegajo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1623,130 +1626,130 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TextBox TB_Equiv2;
-        private System.Windows.Forms.TextBox TB_Equiv1;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.CheckBox CB_DesOtros2;
-        private System.Windows.Forms.CheckBox CB_NecOtros2;
-        private System.Windows.Forms.TextBox TB_Otros2;
-        private System.Windows.Forms.CheckBox CB_DesOtros1;
-        private System.Windows.Forms.CheckBox CB_NecOtros1;
-        private System.Windows.Forms.TextBox TB_Otros1;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.CheckBox CB_DesCondFisica;
-        private System.Windows.Forms.CheckBox CB_NecCondFisica;
-        private System.Windows.Forms.TextBox TB_ObservCondFisica;
-        private System.Windows.Forms.TextBox TB_CondFisica;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.CheckBox CB_DesExp;
-        private System.Windows.Forms.CheckBox CB_NecExp;
-        private System.Windows.Forms.TextBox TB_ObservExp;
-        private System.Windows.Forms.TextBox TB_Exp;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.CheckBox CB_DesIdioma;
-        private System.Windows.Forms.CheckBox CB_NecIdioma;
-        private System.Windows.Forms.TextBox TB_ObservIdioma;
-        private System.Windows.Forms.TextBox TB_Idioma;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.CheckBox CB_DesTerc;
-        private System.Windows.Forms.CheckBox CB_NecTerc;
-        private System.Windows.Forms.TextBox TB_ObservTerciaria;
-        private System.Windows.Forms.TextBox TB_Terciaria;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.CheckBox CB_DesSec;
-        private System.Windows.Forms.CheckBox CB_NecSec;
-        private System.Windows.Forms.TextBox TB_ObservSecundaria;
-        private System.Windows.Forms.TextBox TB_Secundaria;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.CheckBox CB_DesPrim;
-        private System.Windows.Forms.CheckBox CB_NecPrim;
-        private System.Windows.Forms.TextBox TB_ObservPrimaria;
-        private System.Windows.Forms.TextBox textBox14;
-        private System.Windows.Forms.TextBox textBox13;
-        private System.Windows.Forms.TextBox textBox11;
-        private System.Windows.Forms.TextBox TB_Primaria;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.TextBox TB_Tareas3;
-        private System.Windows.Forms.TextBox TB_Tareas2;
-        private System.Windows.Forms.TextBox TB_Tareas1;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.DataGridView DGV_Temas;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DateTimePicker TB_FechaIng;
-        private System.Windows.Forms.TextBox TB_DescLegajo;
-        private System.Windows.Forms.Button BT_Salir;
-        private System.Windows.Forms.Button BT_LimpiarPant;
-        private System.Windows.Forms.Button BT_Guardar;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label LFechaAviso;
-        private System.Windows.Forms.TextBox TB_Codigo;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label LBLegajo;
-        private System.Windows.Forms.TextBox TB_Version;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.ComboBox CB_EstOtros2;
-        private System.Windows.Forms.ComboBox CB_EstOtros1;
-        private System.Windows.Forms.ComboBox CB_EstCondFisic;
-        private System.Windows.Forms.ComboBox CB_EstExp;
-        private System.Windows.Forms.ComboBox CB_EstIdioma;
-        private System.Windows.Forms.ComboBox CB_EstTerc;
-        private System.Windows.Forms.ComboBox CB_EstSec;
-        private System.Windows.Forms.ComboBox CB_EstPrim;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox TB_Equiv2Leg;
-        private System.Windows.Forms.TextBox TB_Equiv1Leg;
-        private System.Windows.Forms.TextBox TB_Otros2Leg;
-        private System.Windows.Forms.TextBox TB_Otros1Leg;
-        private System.Windows.Forms.ComboBox CB_Estequiv2;
-        private System.Windows.Forms.ComboBox CB_EstEquiv1;
-        private System.Windows.Forms.TextBox TB_ObservCondFisicaLeg;
-        private System.Windows.Forms.TextBox TB_ObservExpLeg;
-        private System.Windows.Forms.TextBox TB_ObservIdiomaLeg;
-        private System.Windows.Forms.TextBox TB_ObservTerciariaLeg;
-        private System.Windows.Forms.TextBox TB_ObservSecundariaLeg;
-        private System.Windows.Forms.TextBox TB_ObservPrimariaLeg;
-        private System.Windows.Forms.TextBox textBox10;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.DataGridView DGV_CursosRealiz;
-        private System.Windows.Forms.TextBox TB_VersPer;
-        private System.Windows.Forms.DateTimePicker DTP_Fecha;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.ComboBox TB_CodSector;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.ComboBox TB_DescSec;
-        private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.ComboBox TB_DescPerfil;
-        private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.ComboBox TB_CodPerfil;
-        private System.Windows.Forms.MaskedTextBox TB_CUIL;
-        private System.Windows.Forms.MaskedTextBox TB_DNI;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.MaskedTextBox TB_FechaEgreso;
-        private System.Windows.Forms.TextBox TB_PerfilAct;
-        private System.Windows.Forms.Button BT_MasObserv;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Curso;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DesCurso;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Horas;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Tipo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Año;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Cursos;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Tema;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Necesaria;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Deseable;
-        private System.Windows.Forms.DataGridViewComboBoxColumn Estado;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Observaciones;
+        private Panel panel2;
+        private Panel panel3;
+        private TabControl tabControl1;
+        private TabPage tabPage1;
+        private TextBox TB_Equiv2;
+        private TextBox TB_Equiv1;
+        private Label label10;
+        private CheckBox CB_DesOtros2;
+        private CheckBox CB_NecOtros2;
+        private TextBox TB_Otros2;
+        private CheckBox CB_DesOtros1;
+        private CheckBox CB_NecOtros1;
+        private TextBox TB_Otros1;
+        private Label label11;
+        private CheckBox CB_DesCondFisica;
+        private CheckBox CB_NecCondFisica;
+        private TextBox TB_ObservCondFisica;
+        private TextBox TB_CondFisica;
+        private Label label12;
+        private CheckBox CB_DesExp;
+        private CheckBox CB_NecExp;
+        private TextBox TB_ObservExp;
+        private TextBox TB_Exp;
+        private Label label13;
+        private CheckBox CB_DesIdioma;
+        private CheckBox CB_NecIdioma;
+        private TextBox TB_ObservIdioma;
+        private TextBox TB_Idioma;
+        private Label label8;
+        private CheckBox CB_DesTerc;
+        private CheckBox CB_NecTerc;
+        private TextBox TB_ObservTerciaria;
+        private TextBox TB_Terciaria;
+        private Label label9;
+        private CheckBox CB_DesSec;
+        private CheckBox CB_NecSec;
+        private TextBox TB_ObservSecundaria;
+        private TextBox TB_Secundaria;
+        private Label label7;
+        private CheckBox CB_DesPrim;
+        private CheckBox CB_NecPrim;
+        private TextBox TB_ObservPrimaria;
+        private TextBox textBox14;
+        private TextBox textBox13;
+        private TextBox textBox11;
+        private TextBox TB_Primaria;
+        private TextBox textBox9;
+        private Label label6;
+        private TextBox textBox8;
+        private TextBox TB_Tareas3;
+        private TextBox TB_Tareas2;
+        private TextBox TB_Tareas1;
+        private Label label5;
+        private Label label3;
+        private Label label2;
+        private TabPage tabPage2;
+        private DataGridView DGV_Temas;
+        private Label label4;
+        private DateTimePicker TB_FechaIng;
+        private TextBox TB_DescLegajo;
+        private Button BT_Salir;
+        private Button BT_LimpiarPant;
+        private Button BT_Guardar;
+        private Label label1;
+        private Label LFechaAviso;
+        private TextBox TB_Codigo;
+        private Panel panel1;
+        private Label LBLegajo;
+        private TextBox TB_Version;
+        private Label label15;
+        private ComboBox CB_EstOtros2;
+        private ComboBox CB_EstOtros1;
+        private ComboBox CB_EstCondFisic;
+        private ComboBox CB_EstExp;
+        private ComboBox CB_EstIdioma;
+        private ComboBox CB_EstTerc;
+        private ComboBox CB_EstSec;
+        private ComboBox CB_EstPrim;
+        private TextBox textBox1;
+        private TextBox TB_Equiv2Leg;
+        private TextBox TB_Equiv1Leg;
+        private TextBox TB_Otros2Leg;
+        private TextBox TB_Otros1Leg;
+        private ComboBox CB_Estequiv2;
+        private ComboBox CB_EstEquiv1;
+        private TextBox TB_ObservCondFisicaLeg;
+        private TextBox TB_ObservExpLeg;
+        private TextBox TB_ObservIdiomaLeg;
+        private TextBox TB_ObservTerciariaLeg;
+        private TextBox TB_ObservSecundariaLeg;
+        private TextBox TB_ObservPrimariaLeg;
+        private TextBox textBox10;
+        private TabPage tabPage3;
+        private DataGridView DGV_CursosRealiz;
+        private TextBox TB_VersPer;
+        private DateTimePicker DTP_Fecha;
+        private Panel panel4;
+        private ComboBox TB_CodSector;
+        private Panel panel5;
+        private ComboBox TB_DescSec;
+        private Panel panel7;
+        private ComboBox TB_DescPerfil;
+        private Panel panel6;
+        private ComboBox TB_CodPerfil;
+        private MaskedTextBox TB_CUIL;
+        private MaskedTextBox TB_DNI;
+        private Label label16;
+        private Label label14;
+        private MaskedTextBox TB_FechaEgreso;
+        private TextBox TB_PerfilAct;
+        private Button BT_MasObserv;
+        private TextBox textBox2;
+        private DataGridViewTextBoxColumn Tema;
+        private DataGridViewTextBoxColumn Descripcion;
+        private DataGridViewTextBoxColumn Necesaria;
+        private DataGridViewTextBoxColumn Deseable;
+        private DataGridViewComboBoxColumn Estado;
+        private DataGridViewTextBoxColumn Observaciones;
+        private DataGridViewTextBoxColumn Curso;
+        private DataGridViewTextBoxColumn DesCurso;
+        private DataGridViewTextBoxColumn Horas;
+        private DataGridViewTextBoxColumn Tipo;
+        private DataGridViewTextBoxColumn Año;
+        private DataGridViewTextBoxColumn Cursos;
 
     }
 }

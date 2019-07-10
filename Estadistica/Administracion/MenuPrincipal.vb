@@ -105,7 +105,7 @@ Public Class MenuPrincipal
         If Vendedor.permisos = 0 Then : Me.Close() : End If
 
         ' Aca ir deshabilitando solo si el usuario no es 99.
-        If Val(Vendedor.permisos) <> 99 Then
+        If Val(Vendedor.permisos) <> 99 And Val(Vendedor.permisos) <> 18 Then
 
             ' Desactivamos por completo todos los items del menu.
             For Each _menu As ToolStripMenuItem In MenuStrip1.Items

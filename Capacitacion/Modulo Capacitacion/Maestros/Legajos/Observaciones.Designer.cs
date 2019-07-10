@@ -1,11 +1,14 @@
-﻿namespace Modulo_Capacitacion.Maestros.Legajos
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Modulo_Capacitacion.Maestros.Legajos
 {
     partial class Observaciones
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -197,18 +200,18 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label LBLegajo;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.TextBox TB_ObservExt5;
-        private System.Windows.Forms.TextBox TB_ObservExt4;
-        private System.Windows.Forms.TextBox TB_ObservExt3;
-        private System.Windows.Forms.TextBox TB_ObservExt2;
-        private System.Windows.Forms.TextBox TB_ObservExt1;
-        private System.Windows.Forms.Button BT_Salir;
-        private System.Windows.Forms.Button BT_LimpiarPant;
-        private System.Windows.Forms.Button BT_Guardar;
+        private Panel panel1;
+        private Label LBLegajo;
+        private Panel panel2;
+        private Panel panel3;
+        private TextBox TB_ObservExt5;
+        private TextBox TB_ObservExt4;
+        private TextBox TB_ObservExt3;
+        private TextBox TB_ObservExt2;
+        private TextBox TB_ObservExt1;
+        private Button BT_Salir;
+        private Button BT_LimpiarPant;
+        private Button BT_Guardar;
 
     }
 }

@@ -162,13 +162,13 @@ Public Class VistaPrevia
 
     End Sub
 
-    Public Sub EnviarPorEmail(ByVal NombreArchivo As String, Optional ByVal WEnvioAutomatico As Boolean = False)
+    Public Sub EnviarPorEmail(ByVal NombreArchivo As String, Optional ByVal WEnvioAutomatico As Boolean = False, Optional ByVal Subject As String = "", Optional ByVal Body As String = "")
 
         EnviarEmail(NombreArchivo, WEnvioAutomatico)
 
     End Sub
 
-    Private Sub EnviarEmail(ByVal Archivo As String, ByVal EnvioAutomatico As Boolean)
+    Private Sub EnviarEmail(ByVal Archivo As String, ByVal EnvioAutomatico As Boolean, Optional ByVal Subject As String = "", Optional ByVal Body As String = "")
         Dim oApp As _Application
         Dim oMsg As _MailItem
 
@@ -176,8 +176,11 @@ Public Class VistaPrevia
             oApp = New Application()
 
             oMsg = oApp.CreateItem(OlItemType.olMailItem)
-            oMsg.Subject = "SAC"
-            oMsg.Body = "Envio de SAC"
+
+            Dim el = oMsg.GetInspector
+
+            oMsg.Subject = Subject
+            oMsg.HTMLBody = "<p>" & Body.Replace(vbCrLf, "<br/>") & "<p>" & oMsg.HTMLBody
 
             oMsg.Attachments.Add(Archivo)
 

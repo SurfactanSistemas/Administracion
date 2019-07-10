@@ -8,14 +8,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
+using System.ComponentModel;
+using System.Drawing;
+using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.ReportSource;
+using CrystalDecisions.Shared;
+
 namespace Modulo_Capacitacion.Listados.AvisoCronograma {
-    using System;
-    using System.ComponentModel;
-    using CrystalDecisions.Shared;
-    using CrystalDecisions.ReportSource;
-    using CrystalDecisions.CrystalReports.Engine;
-    
-    
     public class AvisoCronograma : ReportClass {
         
         public AvisoCronograma() {
@@ -49,118 +49,118 @@ namespace Modulo_Capacitacion.Listados.AvisoCronograma {
         }
         
         [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section1 {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public Section Section1 {
             get {
                 return this.ReportDefinition.Sections[0];
             }
         }
         
         [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section2 {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public Section Section2 {
             get {
                 return this.ReportDefinition.Sections[1];
             }
         }
         
         [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupHeaderSection1 {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public Section GroupHeaderSection1 {
             get {
                 return this.ReportDefinition.Sections[2];
             }
         }
         
         [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupHeaderSection2 {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public Section GroupHeaderSection2 {
             get {
                 return this.ReportDefinition.Sections[3];
             }
         }
         
         [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupHeaderSection3 {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public Section GroupHeaderSection3 {
             get {
                 return this.ReportDefinition.Sections[4];
             }
         }
         
         [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section3 {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public Section Section3 {
             get {
                 return this.ReportDefinition.Sections[5];
             }
         }
         
         [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupFooterSection3 {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public Section GroupFooterSection3 {
             get {
                 return this.ReportDefinition.Sections[6];
             }
         }
         
         [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupFooterSection2 {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public Section GroupFooterSection2 {
             get {
                 return this.ReportDefinition.Sections[7];
             }
         }
         
         [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupFooterSection1 {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public Section GroupFooterSection1 {
             get {
                 return this.ReportDefinition.Sections[8];
             }
         }
         
         [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public Section Section4 {
             get {
                 return this.ReportDefinition.Sections[9];
             }
         }
         
         [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section5 {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public Section Section5 {
             get {
                 return this.ReportDefinition.Sections[10];
             }
         }
         
         [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_Mes {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public IParameterField Parameter_Mes {
             get {
                 return this.DataDefinition.ParameterFields[0];
             }
         }
         
         [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_ImpreAno {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public IParameterField Parameter_ImpreAno {
             get {
                 return this.DataDefinition.ParameterFields[1];
             }
         }
     }
     
-    [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
+    [ToolboxBitmap(typeof(ExportOptions), "report.bmp")]
     public class CachedAvisoCronograma : Component, ICachedReport {
         
         public CachedAvisoCronograma() {
         }
         
         [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public virtual bool IsCacheable {
             get {
                 return true;
@@ -171,7 +171,7 @@ namespace Modulo_Capacitacion.Listados.AvisoCronograma {
         }
         
         [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public virtual bool ShareDBLogonInfo {
             get {
                 return false;
@@ -182,8 +182,8 @@ namespace Modulo_Capacitacion.Listados.AvisoCronograma {
         }
         
         [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public virtual System.TimeSpan CacheTimeOut {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public virtual TimeSpan CacheTimeOut {
             get {
                 return CachedReportConstants.DEFAULT_TIMEOUT;
             }
@@ -192,7 +192,7 @@ namespace Modulo_Capacitacion.Listados.AvisoCronograma {
             }
         }
         
-        public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
+        public virtual ReportDocument CreateReport() {
             AvisoCronograma rpt = new AvisoCronograma();
             rpt.Site = this.Site;
             return rpt;

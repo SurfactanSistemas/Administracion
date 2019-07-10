@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using ClassConexion;
 using System.Data;
+using ClassConexion;
 
 namespace Negocio
 {
@@ -13,7 +10,7 @@ namespace Negocio
 
         public string Descripcion;
 
-        public System.Data.DataTable ListarTodos()
+        public DataTable ListarTodos()
         {
             Conexion repo = new Conexion();
             string consulta = "select * from ResponsableSac order by Codigo";

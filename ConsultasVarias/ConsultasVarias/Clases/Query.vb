@@ -1,5 +1,5 @@
-﻿Imports System.Data.SqlClient
-Imports ConsultasVarias.Clases
+﻿Imports System.Configuration
+Imports System.Data.SqlClient
 
 Namespace Clases
 
@@ -75,14 +75,14 @@ Namespace Clases
 
         End Function
 
-        Public Shared Sub ExecuteNonQueries(ByVal ParamArray q As String())
+        Public Shared Sub ExecuteNonQueries(ByVal q As String(), Optional ByVal WBase As String = "SurfactanSa")
 
             Dim trans As SqlTransaction = Nothing
             Try
                 If q.Length = 0 Then Throw New Exception("No se han pasado consultas para ejecutar.")
 
                 Using cn As New SqlConnection
-                    cn.ConnectionString = Helper._ConectarA(Conexion.EmpresaDeTrabajo) 'ConfigurationManager.ConnectionStrings("CS").ToString
+                    cn.ConnectionString = Helper._ConectarA(WBase) 'Helper._ConectarA(Conexion.EmpresaDeTrabajo) 'ConfigurationManager.ConnectionStrings("CS").ToString
                     cn.Open()
                     trans = cn.BeginTransaction
 

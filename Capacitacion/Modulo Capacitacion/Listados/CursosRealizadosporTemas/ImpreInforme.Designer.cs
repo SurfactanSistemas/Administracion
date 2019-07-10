@@ -1,11 +1,14 @@
-﻿namespace Modulo_Capacitacion.Listados.CursosRealizadosporTemas
+﻿using System.ComponentModel;
+using CrystalDecisions.Windows.Forms;
+
+namespace Modulo_Capacitacion.Listados.CursosRealizadosporTemas
 {
     partial class ImpreInforme
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -44,7 +47,6 @@
             this.CRVInforme.ShowGroupTreeButton = false;
             this.CRVInforme.ShowLogo = false;
             this.CRVInforme.ShowParameterPanelButton = false;
-            this.CRVInforme.ShowRefreshButton = false;
             this.CRVInforme.Size = new System.Drawing.Size(784, 562);
             this.CRVInforme.TabIndex = 4;
             this.CRVInforme.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
@@ -63,6 +65,6 @@
 
         #endregion
 
-        private CrystalDecisions.Windows.Forms.CrystalReportViewer CRVInforme;
+        private CrystalReportViewer CRVInforme;
     }
 }

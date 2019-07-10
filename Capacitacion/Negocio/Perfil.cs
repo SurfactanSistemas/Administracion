@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using ClassConexion;
 
 namespace Negocio
@@ -57,7 +55,7 @@ namespace Negocio
 
         public List<Tema> Temas { get; set; }
 
-        public System.Data.DataTable ListarTodos()
+        public DataTable ListarTodos()
         {
             Conexion repo = new Conexion();
             string consulta = "SELECT T.Codigo,T.Descripcion,T.Vigencia,T.Version,T.Sector" +
@@ -108,8 +106,8 @@ namespace Negocio
                 + " OtrosII = '" + OtrosII + "', Version = " + Version + ", NecesariaVI = " + NecesariaVI + ", NecesariaVII = " + NecesariaVII + ","
                 + " NecesariaVIII = " + NecesariaVIII + ", DeseableVI = " + DeseableVI + ", DeseableVII = " + DeseableVII + ", "
                 + " DeseableVIII = " + DeseableVIII + ", EquivalenciasII = '" + EquivalenciasII + "', Responsable = " + R.Codigo + ","
-                + " ResponsableII = " + R2.Codigo + ", Curso = " + int.Parse(fila[0].ToString()) + ", NecesariaCurso = '" + fila[2].ToString()
-                + "', DeseableCurso = '" + fila[3].ToString() + "'  where Codigo = " + Codigo + " and Renglon = " + renglon;
+                + " ResponsableII = " + R2.Codigo + ", Curso = " + int.Parse(fila[0].ToString()) + ", NecesariaCurso = '" + fila[2]
+                + "', DeseableCurso = '" + fila[3] + "'  where Codigo = " + Codigo + " and Renglon = " + renglon;
 
 
 
@@ -119,7 +117,7 @@ namespace Negocio
                 }
                 else if (fila[4].ToString() == "1")
                 {
-                    var clave1 = this.Codigo.ToString().PadLeft(6, '0');
+                    var clave1 = Codigo.ToString().PadLeft(6, '0');
                     var clave2 = renglon.ToString().PadLeft(2, '0');
 
                     string consulta = "insert into Tarea "
@@ -133,7 +131,7 @@ namespace Negocio
                     + "','" + DescriI + "','" + DescriII + "','" + DescriIII + "','" + DescriIV + "','" + DescriV + "','" + ObservaI + "','" + ObservaII + "','"
                     + ObservaIII + "','" + ObservaIV + "','" + ObservaV + "'," + NecesariaI + "," + NecesariaII + "," + NecesariaIII + "," + NecesariaIV
                     + "," + NecesariaV + "," + DeseableI + "," + DeseableII + "," + DeseableIII + "," + DeseableIV + "," + DeseableV + ",'" + EquivalenciasI + "','"
-                    + Fisica + "','" + OtrosI + "','" + OtrosII + "'," + int.Parse(fila[0].ToString()) + ", '" + fila[2].ToString() + "', '" + fila[3].ToString() + "'," + Version + "," + NecesariaVI
+                    + Fisica + "','" + OtrosI + "','" + OtrosII + "'," + int.Parse(fila[0].ToString()) + ", '" + fila[2] + "', '" + fila[3] + "'," + Version + "," + NecesariaVI
                     + "," + NecesariaVII + "," + NecesariaVIII + "," + DeseableVI + "," + DeseableVII + "," + DeseableVIII + ",'" + EquivalenciasII + "',"
                     + R.Codigo + "," + R2.Codigo + ")";
 
@@ -164,7 +162,7 @@ namespace Negocio
 
             foreach (var t in Temas)
             {
-                var clave1 = this.Codigo.ToString().PadLeft(6, '0');
+                var clave1 = Codigo.ToString().PadLeft(6, '0');
                 var clave2 = renglon.ToString().PadLeft(2, '0');
 
                 string consulta = "insert into Tarea "
@@ -194,7 +192,7 @@ namespace Negocio
         {
             Conexion repo = new Conexion();
             string consulta = "select * from Tarea where Codigo = '" + IdAModificar + "' Order by Renglon";
-            System.Data.DataTable DT = repo.BuscarUno(consulta);
+            DataTable DT = repo.BuscarUno(consulta);
             Perfil obj = new Perfil();
 
             if (DT.Rows.Count > 0)
@@ -257,7 +255,7 @@ namespace Negocio
                 obj.Temas = new List<Tema>();
                 //FALTA TEMAS
                 int renglon = 0;
-                foreach (System.Data.DataRow item in DT.Rows)
+                foreach (DataRow item in DT.Rows)
                 {
                     Tema T = new Tema();
                     T.Codigo = int.Parse(item["Curso"].ToString());
@@ -284,7 +282,7 @@ namespace Negocio
         {
             Conexion repo = new Conexion();
 
-            System.Collections.Generic.IEnumerable<int> codsAAgregar = ModificarTemas(per);
+            IEnumerable<int> codsAAgregar = ModificarTemas(per);
 
             //var clave1 = t.Curso_Id.ToString().PadLeft(4, '0');
             //var clave2 = t.Tema.ToString().PadLeft(4, '0');
@@ -312,7 +310,7 @@ namespace Negocio
             //repo.Modificar(consulta);
         }
 
-        private void GenerarTemas(Perfil per, System.Collections.Generic.IEnumerable<int>  codsAAgregar)
+        private void GenerarTemas(Perfil per, IEnumerable<int>  codsAAgregar)
         {
             foreach (var item in per.Temas)
             {
@@ -326,28 +324,24 @@ namespace Negocio
 
                         //Actualizo
                     }
-                    else
-                    {
-                        //Aca lo agrego
-                    }
                 }
                 
             }
         }
 
-        private System.Collections.Generic.IEnumerable<int> ModificarTemas(Perfil per)
+        private IEnumerable<int> ModificarTemas(Perfil per)
         {
             int[] codigosNv = new int[per.Temas.Count];
-            int[] codigosOld = new int[this.Temas.Count];
+            int[] codigosOld = new int[Temas.Count];
 
             for (int i = 0; i < per.Temas.Count; i++)
 			{
                 codigosNv[i] = per.Temas[i].Codigo;
 			}
 
-            for (int i = 0; i < this.Temas.Count; i++)
+            for (int i = 0; i < Temas.Count; i++)
             {
-                codigosOld[i] = this.Temas[i].Codigo;
+                codigosOld[i] = Temas[i].Codigo;
             }
             //Tengo el codigo del nuevo
             return  codigosNv.Except(codigosOld);
@@ -367,7 +361,7 @@ namespace Negocio
         {
             Conexion repo = new Conexion();
             string consulta = "select *, Vigencia = HastaVigencia, Responsable = 0, ResponsableII = 0 from TareaVersion where Codigo = " + IdAModificar + " and version = " + version;
-            System.Data.DataTable DT = repo.BuscarUno(consulta);
+            DataTable DT = repo.BuscarUno(consulta);
             Perfil obj = new Perfil();
 
             if (DT.Rows.Count > 0)
@@ -428,7 +422,7 @@ namespace Negocio
 
                 obj.Temas = new List<Tema>();
                 int renglon = 1;
-                foreach (System.Data.DataRow item in DT.Rows)
+                foreach (DataRow item in DT.Rows)
                 {
                     Tema T = new Tema();
                     T.Codigo = int.Parse(item["Curso"].ToString());
@@ -444,7 +438,7 @@ namespace Negocio
         }
 
 
-        public System.Data.DataTable ListarLegajosPorPerfil(int Desde, int Hasta)
+        public DataTable ListarLegajosPorPerfil(int Desde, int Hasta)
         {
             Conexion repo = new Conexion();
             string consulta = "SELECT distinct L.Perfil, L.ImprePerfil, L.Codigo, L.Descripcion, L.Version,  L.FechaVersion  FROM Legajo L where L.perfil between "+ Desde +" and "+ Hasta + " order by L.Perfil, L.Codigo desc";
@@ -452,7 +446,7 @@ namespace Negocio
             return repo.Listar(consulta);
         }
 
-        public System.Data.DataTable ListarTodosInicio()
+        public DataTable ListarTodosInicio()
         {
             Conexion repo = new Conexion();
             string consulta = "SELECT T.Codigo, T.Descripcion as Perfil,T.Vigencia,T.Version, " +
@@ -463,7 +457,7 @@ namespace Negocio
             return repo.Listar(consulta);
         }
 
-        public System.Data.DataTable ListarCursos(int Codigo)
+        public DataTable ListarCursos(int Codigo)
         {
             Conexion repo = new Conexion();
             string consulta = "select C.codigo, C.descripcion, T.NecesariaCurso, T.DeseableCurso from Tarea T inner join Curso C on C.codigo = T.Curso where T.Codigo = " + Codigo;
@@ -471,7 +465,7 @@ namespace Negocio
             return repo.Listar(consulta);
         }
 
-        public System.Data.DataTable ListarPerfilEsp(int Desde, int Hasta)
+        public DataTable ListarPerfilEsp(int Desde, int Hasta)
         {
             Conexion repo = new Conexion();
             string consulta = "select T.Codigo, T.Descripcion, T.Vigencia, T.Sector,  S.Descripcion,  T.Version,"

@@ -56,7 +56,7 @@
     <OptionExplicit>On</OptionExplicit>
   </PropertyGroup>
   <PropertyGroup>
-    <OptionCompare>Binary</OptionCompare>
+    <OptionCompare>Text</OptionCompare>
   </PropertyGroup>
   <PropertyGroup>
     <OptionStrict>Off</OptionStrict>
@@ -121,6 +121,7 @@
     <Compile Include="Clases\ExtensionesTipoSqlConnection.vb" />
     <Compile Include="Clases\ExtensionesTipoString.vb" />
     <Compile Include="Clases\ExtensionesTipoFecha.vb" />
+    <Compile Include="Clases\Query.vb" />
     <Compile Include="Formularios\IngresoRemitoVario.Designer.vb">
       <DependentUpon>IngresoRemitoVario.vb</DependentUpon>
     </Compile>

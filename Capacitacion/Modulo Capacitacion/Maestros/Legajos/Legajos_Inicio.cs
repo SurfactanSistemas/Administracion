@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
 using Modulo_Capacitacion.Listados.Legajos;
@@ -13,11 +15,12 @@ namespace Modulo_Capacitacion.Maestros.Legajos
         Legajo L = new Legajo();
         DataTable dtLegajos;
         DataTable dtMuestraInicio = new DataTable();
-        private Boolean sortAsc = false;
+        private Boolean sortAsc;
 
         public Legajos_Inicio()
         {
             InitializeComponent();
+            _ActualizarDefectoLegajos();
             CargarDt();
             ActualizarGrilla();
         }
@@ -45,9 +48,9 @@ namespace Modulo_Capacitacion.Maestros.Legajos
         private void BTAgregarLegajo_Click(object sender, EventArgs e)
         {
             AgModLegajo agrModLegajo = new AgModLegajo {StartPosition = FormStartPosition.CenterScreen};
-            agrModLegajo.ShowDialog();
+            agrModLegajo.Show();
 
-            ActualizarGrilla();
+            //ActualizarGrilla();
         }
 
         private void ActualizarGrilla()
@@ -149,7 +152,7 @@ namespace Modulo_Capacitacion.Maestros.Legajos
                 dr["Descripcion"] = fila["Descripcion"].ToString();
                 dr["Vigencia"] = fila["FechaVersion"].ToString();
                 dr["Perfil"] = fila["Perfil"].ToString();
-                dr["Sector"] = fila["Sector"].ToString();
+                dr["Sector"] = Helper.OrDefault(fila["Sector"], 0).ToString();
                 dr["Dni"] = fila["Dni"].ToString();
                 dr["Egreso"] = fila["FEgreso"].ToString();
                 dr["Actualizado"] = fila["Actualizado"].ToString();
@@ -198,7 +201,7 @@ namespace Modulo_Capacitacion.Maestros.Legajos
                 AgModLegajo AgMod = new AgModLegajo(LegajoAModificar) {StartPosition = FormStartPosition.CenterScreen};
                 AgMod.ShowDialog();
 
-                ActualizarGrilla();
+                //ActualizarGrilla();
             }
             catch (Exception err)
             {
@@ -323,7 +326,7 @@ namespace Modulo_Capacitacion.Maestros.Legajos
                 if (LegajoAModificar.Codigo == 0) return;
 
                 AgModLegajo AgMod = new AgModLegajo(LegajoAModificar) { StartPosition = FormStartPosition.CenterScreen };
-                AgMod.ShowDialog();
+                AgMod.Show();
 
                 txtCodigo.Text = "";
 
@@ -347,14 +350,19 @@ namespace Modulo_Capacitacion.Maestros.Legajos
             TBFiltro_KeyUp(null, null);
         }
 
-        private void DGV_Legajos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void _ActualizarDefectoLegajos()
         {
-
-        }
-
-        private void Legajos_Inicio_Load(object sender, EventArgs e)
-        {
-
+            using (SqlConnection cn = new SqlConnection())
+            {
+                cn.ConnectionString = ConfigurationManager.ConnectionStrings["Surfactan"].ConnectionString;
+                cn.Open();
+                using (SqlCommand cm = new SqlCommand())
+                {
+                    cm.Connection = cn;
+                    cm.CommandText = "UPDATE Legajo SET Legajo.Sector = Tarea.Sector FROM Legajo, Tarea WHERE Legajo.Perfil = Tarea.Codigo";
+                    cm.ExecuteNonQuery();
+                }
+            }
         }
 
         private void DGV_Legajos_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
@@ -407,12 +415,12 @@ namespace Modulo_Capacitacion.Maestros.Legajos
             {
                 case 3:
                 {
-                    ordenamiento = "VigenciaOrd " + ((this.sortAsc) ? "DESC" : "ASC");
+                    ordenamiento = "VigenciaOrd " + ((sortAsc) ? "DESC" : "ASC");
                     break;
                 }
                 case 2:
                 {
-                    ordenamiento = "Descripcion " + ((this.sortAsc) ? "DESC" : "ASC");
+                    ordenamiento = "Descripcion " + ((sortAsc) ? "DESC" : "ASC");
                     break;
                 }
                 case 1:
@@ -421,7 +429,7 @@ namespace Modulo_Capacitacion.Maestros.Legajos
                 {
                     string columna = DGV_Legajos.Columns[e.ColumnIndex].Name;
 
-                    ordenamiento = columna + " " + ((this.sortAsc) ? "DESC" : "ASC");
+                    ordenamiento = columna + " " + ((sortAsc) ? "DESC" : "ASC");
 
                     break;
                 }
@@ -429,7 +437,7 @@ namespace Modulo_Capacitacion.Maestros.Legajos
 
             if (tabla !=null) tabla.DefaultView.Sort = ordenamiento;
 
-            this.sortAsc = !this.sortAsc;
+            sortAsc = !sortAsc;
         }
     }
 }

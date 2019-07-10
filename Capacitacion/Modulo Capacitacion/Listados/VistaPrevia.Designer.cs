@@ -1,11 +1,14 @@
-﻿namespace Modulo_Capacitacion.Listados
+﻿using System.ComponentModel;
+using CrystalDecisions.Windows.Forms;
+
+namespace Modulo_Capacitacion.Listados
 {
     partial class VistaPrevia
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -63,6 +66,6 @@
 
         #endregion
 
-        private CrystalDecisions.Windows.Forms.CrystalReportViewer CRVInforme;
+        private CrystalReportViewer CRVInforme;
     }
 }

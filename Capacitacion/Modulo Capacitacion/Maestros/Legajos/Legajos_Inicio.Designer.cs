@@ -1,11 +1,14 @@
-﻿namespace Modulo_Capacitacion.Maestros.Legajos
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Modulo_Capacitacion.Maestros.Legajos
 {
     partial class Legajos_Inicio
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -32,6 +35,12 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.DGV_Legajos = new System.Windows.Forms.DataGridView();
+            this.Clave = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Vigencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Sector = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Perfil = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.P_Verde = new System.Windows.Forms.Panel();
             this.P_Filtrado = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
@@ -58,12 +67,6 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgvDiscriminarLegajos = new System.Windows.Forms.DataGridView();
             this.legajoBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.Clave = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Vigencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Sector = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Perfil = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Legajos)).BeginInit();
             this.P_Verde.SuspendLayout();
             this.P_Filtrado.SuspendLayout();
@@ -108,10 +111,60 @@
             this.DGV_Legajos.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.DGV_Legajos.Size = new System.Drawing.Size(863, 441);
             this.DGV_Legajos.TabIndex = 26;
-            this.DGV_Legajos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Legajos_CellContentClick);
             this.DGV_Legajos.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGV_Legajos_ColumnHeaderMouseClick);
             this.DGV_Legajos.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGV_Perfiles_RowHeaderMouseDoubleClick);
             this.DGV_Legajos.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.DGV_Legajos_SortCompare);
+            // 
+            // Clave
+            // 
+            this.Clave.DataPropertyName = "Clave";
+            this.Clave.HeaderText = "Clave";
+            this.Clave.Name = "Clave";
+            this.Clave.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Clave.Visible = false;
+            this.Clave.Width = 40;
+            // 
+            // Codigo
+            // 
+            this.Codigo.DataPropertyName = "Codigo";
+            this.Codigo.HeaderText = "Codigo";
+            this.Codigo.Name = "Codigo";
+            this.Codigo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Codigo.Width = 46;
+            // 
+            // Descripcion
+            // 
+            this.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Descripcion.DataPropertyName = "Descripcion";
+            this.Descripcion.HeaderText = "Nombre de Empleado";
+            this.Descripcion.Name = "Descripcion";
+            this.Descripcion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Vigencia
+            // 
+            this.Vigencia.DataPropertyName = "Vigencia";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Vigencia.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Vigencia.HeaderText = "Vigencia";
+            this.Vigencia.Name = "Vigencia";
+            this.Vigencia.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Vigencia.Width = 54;
+            // 
+            // Sector
+            // 
+            this.Sector.DataPropertyName = "Sector";
+            this.Sector.HeaderText = "Sector";
+            this.Sector.Name = "Sector";
+            this.Sector.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Sector.Width = 44;
+            // 
+            // Perfil
+            // 
+            this.Perfil.DataPropertyName = "Perfil";
+            this.Perfil.HeaderText = "Perfil";
+            this.Perfil.Name = "Perfil";
+            this.Perfil.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Perfil.Width = 36;
             // 
             // P_Verde
             // 
@@ -433,57 +486,6 @@
             // 
             this.legajoBindingSource.DataSource = typeof(Negocio.Legajo);
             // 
-            // Clave
-            // 
-            this.Clave.DataPropertyName = "Clave";
-            this.Clave.HeaderText = "Clave";
-            this.Clave.Name = "Clave";
-            this.Clave.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Clave.Visible = false;
-            this.Clave.Width = 40;
-            // 
-            // Codigo
-            // 
-            this.Codigo.DataPropertyName = "Codigo";
-            this.Codigo.HeaderText = "Codigo";
-            this.Codigo.Name = "Codigo";
-            this.Codigo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Codigo.Width = 46;
-            // 
-            // Descripcion
-            // 
-            this.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Descripcion.DataPropertyName = "Descripcion";
-            this.Descripcion.HeaderText = "Nombre de Empleado";
-            this.Descripcion.Name = "Descripcion";
-            this.Descripcion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Vigencia
-            // 
-            this.Vigencia.DataPropertyName = "Vigencia";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Vigencia.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Vigencia.HeaderText = "Vigencia";
-            this.Vigencia.Name = "Vigencia";
-            this.Vigencia.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Vigencia.Width = 54;
-            // 
-            // Sector
-            // 
-            this.Sector.DataPropertyName = "Sector";
-            this.Sector.HeaderText = "Sector";
-            this.Sector.Name = "Sector";
-            this.Sector.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Sector.Width = 44;
-            // 
-            // Perfil
-            // 
-            this.Perfil.DataPropertyName = "Perfil";
-            this.Perfil.HeaderText = "Perfil";
-            this.Perfil.Name = "Perfil";
-            this.Perfil.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Perfil.Width = 36;
-            // 
             // Legajos_Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -494,7 +496,6 @@
             this.MinimumSize = new System.Drawing.Size(723, 462);
             this.Name = "Legajos_Inicio";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.Legajos_Inicio_Load);
             this.Shown += new System.EventHandler(this.Legajos_Inicio_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Legajos)).EndInit();
             this.P_Verde.ResumeLayout(false);
@@ -516,38 +517,38 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView DGV_Legajos;
-        private System.Windows.Forms.Button Bt_Fin;
-        private System.Windows.Forms.Button BT_Eliminar;
-        private System.Windows.Forms.Button BTModifLegajo;
-        private System.Windows.Forms.Button BTAgregarLegajo;
-        private System.Windows.Forms.Panel P_Verde;
-        private System.Windows.Forms.Panel P_Filtrado;
-        private System.Windows.Forms.TextBox TBFiltro;
-        private System.Windows.Forms.Label LBFiltro;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.BindingSource legajoBindingSource;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button btnImprimir;
-        private System.Windows.Forms.CheckBox ckSoloActivos;
-        private System.Windows.Forms.CheckBox ckSoloNoActualizados;
-        private System.Windows.Forms.Panel pnlDiscriminarLegajos;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DataGridView dgvDiscriminarLegajos;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.TextBox txtCodigo;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Clave;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Codigo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Vigencia;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Sector;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Perfil;
+        private DataGridView DGV_Legajos;
+        private Button Bt_Fin;
+        private Button BT_Eliminar;
+        private Button BTModifLegajo;
+        private Button BTAgregarLegajo;
+        private Panel P_Verde;
+        private Panel P_Filtrado;
+        private TextBox TBFiltro;
+        private Label LBFiltro;
+        private Panel panel1;
+        private Label label2;
+        private Label label1;
+        private BindingSource legajoBindingSource;
+        private TableLayoutPanel tableLayoutPanel1;
+        private TableLayoutPanel tableLayoutPanel2;
+        private Panel panel2;
+        private Button btnImprimir;
+        private CheckBox ckSoloActivos;
+        private CheckBox ckSoloNoActualizados;
+        private Panel pnlDiscriminarLegajos;
+        private GroupBox groupBox1;
+        private DataGridView dgvDiscriminarLegajos;
+        private Button button1;
+        private Panel panel3;
+        private TextBox txtCodigo;
+        private Label label3;
+        private Button button2;
+        private DataGridViewTextBoxColumn Clave;
+        private DataGridViewTextBoxColumn Codigo;
+        private DataGridViewTextBoxColumn Descripcion;
+        private DataGridViewTextBoxColumn Vigencia;
+        private DataGridViewTextBoxColumn Sector;
+        private DataGridViewTextBoxColumn Perfil;
     }
 }

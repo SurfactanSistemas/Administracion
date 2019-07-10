@@ -1404,9 +1404,9 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
                 With row
                     Dim WAccion As String = OrDefault(.Cells("Acciones").Value, "")
-                    WAccion = WAccion.Replace("'", "").PadRight(120, " ")
-                    Dim WAccionI As String = WAccion.Substring(0, 60)
-                    Dim WAccionII As String = WAccion.Substring(60, 60)
+                    WAccion = WAccion.Replace("'", "").PadRight(150, " ")
+                    Dim WAccionI As String = WAccion.Substring(0, 75)
+                    Dim WAccionII As String = WAccion.Substring(75, 75)
                     Dim WResp As String = OrDefault(.Cells("Responsable").Value, "0")
                     Dim WPlazo As String = OrDefault(.Cells("Plazo").Value, "  /  /    ")
 
@@ -2422,18 +2422,22 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
     Private Sub txtFechaAux_Leave(ByVal sender As Object, ByVal e As EventArgs) Handles txtFechaAux.Leave
         dgvAcciones.CurrentRow.Cells("Plazo").Value = txtFechaAux.Text
+        txtFechaAux.Visible = False
     End Sub
 
     Private Sub txtFechaAux2_Leave(ByVal sender As Object, ByVal e As EventArgs) Handles txtFechaAux2.Leave
         dgvImplementaciones.CurrentRow.Cells("ImpleFecha").Value = txtFechaAux2.Text
+        txtFechaAux2.Visible = False
     End Sub
 
     Private Sub txtFechaAux3_Leave(ByVal sender As Object, ByVal e As EventArgs) Handles txtFechaAux3.Leave
         dgvVerificaciones.CurrentRow.Cells("VerFechaI").Value = txtFechaAux3.Text
+        txtFechaAux3.Visible = False
     End Sub
 
     Private Sub txtFechaAux4_Leave(ByVal sender As Object, ByVal e As EventArgs) Handles txtFechaAux4.Leave
         dgvVerificaciones.CurrentRow.Cells("VerFechaII").Value = txtFechaAux4.Text
+        txtFechaAux4.Visible = False
     End Sub
 
 End Class

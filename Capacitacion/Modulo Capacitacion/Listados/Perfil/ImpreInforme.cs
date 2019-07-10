@@ -32,22 +32,7 @@ namespace Modulo_Capacitacion.Listados.Perfil
             {
                 DataRow dr = dtInforme.Rows[i];
                 Ds.Tables[0].Rows.Add
-                (new object[]
-                {
-                    dr[0].ToString(),
-                    dr[1].ToString(),
-                    dr[2].ToString(),
-                    dr[3].ToString(),
-                    dr[4].ToString(),
-                    dr[5].ToString(),
-                    
-                    
-                    
-                    
-
-                }
-
-                );
+                (dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5].ToString());
             }
 
             if (Tipo == "Pantalla")

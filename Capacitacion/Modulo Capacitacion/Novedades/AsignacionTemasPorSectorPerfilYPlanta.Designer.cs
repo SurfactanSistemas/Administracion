@@ -1,11 +1,14 @@
-﻿namespace Modulo_Capacitacion.Novedades
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Modulo_Capacitacion.Novedades
 {
     partial class AsignacionTemasPorSectorPerfilYPlanta
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -723,55 +726,55 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label LBPerfil;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label LFechaAviso;
-        private System.Windows.Forms.TextBox txtCodigo;
-        private System.Windows.Forms.DataGridView dgvAsignados;
-        private System.Windows.Forms.TextBox txtDesTema;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtTema;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button btnLimpiar;
-        private System.Windows.Forms.Button btnGuardar;
-        private System.Windows.Forms.Panel pnlAyuda;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DataGridView dgvAyuda;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox txtAyuda;
-        private System.Windows.Forms.Button btnAyuda;
-        private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.Button btnCerrarAyuda;
-        private System.Windows.Forms.Button btnAyudaTema;
-        private System.Windows.Forms.GroupBox gbLegajos;
-        private System.Windows.Forms.ComboBox cmbTipoLegajos;
-        private System.Windows.Forms.Button btnImprimir;
-        private System.Windows.Forms.DataGridView dgvCandidatos;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Legajo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Observaciones;
-        private System.Windows.Forms.ComboBox cmbVerPorII;
-        private System.Windows.Forms.ComboBox cmbVerPorI;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtFiltrarI;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.TextBox txtAno;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label4;
+        private Panel panel1;
+        private Label LBPerfil;
+        private Panel panel2;
+        private Panel panel3;
+        private Label LFechaAviso;
+        private TextBox txtCodigo;
+        private DataGridView dgvAsignados;
+        private TextBox txtDesTema;
+        private Label label5;
+        private TextBox txtTema;
+        private TableLayoutPanel tableLayoutPanel1;
+        private Panel panel4;
+        private Panel panel5;
+        private Button button2;
+        private Button btnLimpiar;
+        private Button btnGuardar;
+        private Panel pnlAyuda;
+        private GroupBox groupBox1;
+        private DataGridView dgvAyuda;
+        private Label label9;
+        private TextBox txtAyuda;
+        private Button btnAyuda;
+        private Panel panel7;
+        private Button btnCerrarAyuda;
+        private Button btnAyudaTema;
+        private GroupBox gbLegajos;
+        private ComboBox cmbTipoLegajos;
+        private Button btnImprimir;
+        private DataGridView dgvCandidatos;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private DataGridViewTextBoxColumn Legajo;
+        private DataGridViewTextBoxColumn Nombre;
+        private DataGridViewTextBoxColumn Observaciones;
+        private ComboBox cmbVerPorII;
+        private ComboBox cmbVerPorI;
+        private Label label2;
+        private Label label1;
+        private TextBox txtFiltrarI;
+        private Button button3;
+        private ToolTip toolTip1;
+        private Button button1;
+        private Button button5;
+        private Button button4;
+        private TextBox txtAno;
+        private Label label3;
+        private Button button6;
+        private Label label6;
+        private Label label4;
     }
 }

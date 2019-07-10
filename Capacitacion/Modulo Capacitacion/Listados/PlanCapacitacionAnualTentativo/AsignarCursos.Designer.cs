@@ -1,11 +1,14 @@
-﻿namespace Modulo_Capacitacion.Listados.PlanCapacitacionAnualTentativo
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Modulo_Capacitacion.Listados.PlanCapacitacionAnualTentativo
 {
     partial class AsignarCursos
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -238,21 +241,21 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label LBPerfil;
-        private System.Windows.Forms.DataGridView dgvLegajos;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button btnGrabar;
-        private System.Windows.Forms.Label lblDescCurso;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Legajo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DescLegajo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Tema;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DescTema;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Horas;
+        private Panel panel1;
+        private Label LBPerfil;
+        private DataGridView dgvLegajos;
+        private Panel panel3;
+        private Button button2;
+        private Button btnGrabar;
+        private Label lblDescCurso;
+        private ContextMenuStrip contextMenuStrip1;
+        private ToolStripMenuItem toolStripMenuItem3;
+        private ToolStripMenuItem toolStripMenuItem1;
+        private ToolStripMenuItem toolStripMenuItem2;
+        private DataGridViewTextBoxColumn Legajo;
+        private DataGridViewTextBoxColumn DescLegajo;
+        private DataGridViewTextBoxColumn Tema;
+        private DataGridViewTextBoxColumn DescTema;
+        private DataGridViewTextBoxColumn Horas;
     }
 }

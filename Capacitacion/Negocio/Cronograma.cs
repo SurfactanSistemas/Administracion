@@ -139,6 +139,19 @@ namespace Negocio
             return DT.Rows.Count > 0;
         }
 
+
+        public Boolean ExisteEnCronograma(string Año, string Legajo, string Curso)
+        {
+            Conexion repo = new Conexion();
+
+            string consulta = "select Cr.Legajo From Cronograma Cr where Cr.Ano = " + Año + " and Cr.Legajo = " + Legajo + " and Curso = " + Curso;
+
+
+            DataTable DT = repo.BuscarUno(consulta);
+
+            return DT.Rows.Count > 0;
+        }
+
         public DataTable BuscarUnoCursada(int Año, int Legajo, int Curso)
         {
             Conexion repo = new Conexion();

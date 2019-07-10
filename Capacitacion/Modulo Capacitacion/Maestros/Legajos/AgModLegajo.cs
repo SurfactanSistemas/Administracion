@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
+using ClassConexion;
 using Negocio;
 
 namespace Modulo_Capacitacion.Maestros.Legajos
@@ -58,6 +59,11 @@ namespace Modulo_Capacitacion.Maestros.Legajos
 
         private void _CargarLegajo(Legajo LegajoAModificar)
         {
+            Conexion cn = new Conexion();
+            cn.Modificar("update Cursadas set anoII = SUBSTRING(ordFecha,0,5) where ISNULL(anoII, '') = ''");
+            cn.Modificar("update Cursadas set Cursadas.DesCurso = Curso.Descripcion FROM Cursadas, Curso where Curso.Codigo = Cursadas.Curso And ISNULL(Cursadas.DesCurso, '') = ''");
+            cn.Modificar("update Cursadas set Cursadas.DesTema = Tema.Descripcion FROM Cursadas, Tema where Tema.Curso = Cursadas.Curso And Tema.Tema = Cursadas.Tema And ISNULL(Cursadas.DesTema, '') = ''");
+
             L = LegajoAModificar;
             LegajoViejo = LegajoAModificar;
 
@@ -584,9 +590,8 @@ namespace Modulo_Capacitacion.Maestros.Legajos
                     else if (Result == DialogResult.No)
                     {
                         //COLOCO LA FECHA DEL DIA 
-                        DateTime Hoy = DateTime.Today;
-                        L.FechaVersion = Hoy.ToString("dd/MM/yyyy");
-                        
+                        //DateTime Hoy = DateTime.Today;
+                        //L.FechaVersion = Hoy.ToString("dd/MM/yyyy");
                         
                         L.ModificarN(L);
 
@@ -609,6 +614,8 @@ namespace Modulo_Capacitacion.Maestros.Legajos
                     MessageBox.Show("Se ha agregado el legajo", "Agregar Legajo",
                         MessageBoxButtons.OK, MessageBoxIcon.None);
                 }
+
+                (new Conexion()).Modificar("UPDATE Legajo Set WDate = '" + DateTime.Now.ToString("yyyy-MM-dd") + "' WHERE Codigo = '" + TB_Codigo.Text + "'");
 
 
                 Close();

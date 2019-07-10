@@ -60,6 +60,7 @@
     <Reference Include="Microsoft.Office.Interop.Outlook, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -153,6 +154,11 @@
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Listados\DBAuxi.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DBAuxi.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Listados\InformedeCompetenciasNecesidadesPorSector\imprelegajo.cs">
       <DependentUpon>imprelegajo.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -171,17 +177,23 @@
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Listados\InformeHorasRealizadasYProgramadas\ReporteInformeHorasRealizadasyProgramadasPorLegajo.cs">
+      <DependentUpon>ReporteInformeHorasRealizadasyProgramadasPorLegajo.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Listados\InformeHorasRealizadasYProgramadas\Inicio.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Listados\InformeHorasRealizadasYProgramadas\Inicio.Designer.cs">
       <DependentUpon>Inicio.cs</DependentUpon>
     </Compile>
-    <Compile Include="Listados\InformeHorasRealizadasYProgramadas\ReporteInformeHorasRealizadasyProgramadas.cs">
-      <DependentUpon>ReporteInformeHorasRealizadasyProgramadas.rpt</DependentUpon>
+    <Compile Include="Listados\InformeHorasRealizadasYProgramadas\ReporteInformeHorasRealizadasyProgramadasPorCurso.cs">
+      <DependentUpon>ReporteInformeHorasRealizadasyProgramadasPorCurso.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Listados\PlanCapacitacionAnualTentativo\AsignarCursos.cs">
       <SubType>Form</SubType>
@@ -194,6 +206,18 @@
     </Compile>
     <Compile Include="Listados\PlanCapacitacionAnualTentativo\AsignaTema.Designer.cs">
       <DependentUpon>AsignaTema.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\PlanCapacitacionAnualTentativo\Listado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\PlanCapacitacionAnualTentativo\Listado.Designer.cs">
+      <DependentUpon>Listado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\PlanCapacitacionAnualTentativo\ListadoPersonalCapacitacionAnualTentativo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ListadoPersonalCapacitacionAnualTentativo.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Listados\PlanCapacitacionAnualTentativo\TentativoListaCursos.cs">
       <SubType>Form</SubType>
@@ -369,6 +393,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>wPromedioCalificacion.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Listados\TemasPorLegajoConsolidado\ReportePorSector.cs">
+      <DependentUpon>ReportePorSector.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Listados\TemasPorLegajoConsolidado\ReportePorTema.cs">
+      <DependentUpon>ReportePorTema.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Listados\TemasRealizadosyNoRealizados\DSInforme.cs">
       <DependentUpon>DSInforme.xsd</DependentUpon>
@@ -694,6 +730,12 @@
     <Compile Include="Novedades\ActualizacionDeCompetecniasYNecesidadesDeCapacitacion.Designer.cs">
       <DependentUpon>ActualizacionDeCompetecniasYNecesidadesDeCapacitacion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Novedades\AgregarArchivosPlanillaCapacitacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Novedades\AgregarArchivosPlanillaCapacitacion.Designer.cs">
+      <DependentUpon>AgregarArchivosPlanillaCapacitacion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Novedades\AsignarCursosPorPerfilYSector.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -798,18 +840,29 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>imprelegajoii.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Listados\InformeHorasRealizadasYProgramadas\ReporteInformeHorasRealizadasyProgramadasPorLegajo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteInformeHorasRealizadasyProgramadasPorLegajo.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Listados\InformeHorasRealizadasYProgramadas\Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Listados\InformeHorasRealizadasYProgramadas\ReporteInformeHorasRealizadasyProgramadas.rpt">
+    <EmbeddedResource Include="Listados\InformeHorasRealizadasYProgramadas\ReporteInformeHorasRealizadasyProgramadasPorCurso.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>ReporteInformeHorasRealizadasyProgramadas.cs</LastGenOutput>
+      <LastGenOutput>ReporteInformeHorasRealizadasyProgramadasPorCurso.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\PlanCapacitacionAnualTentativo\AsignarCursos.resx">
       <DependentUpon>AsignarCursos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\PlanCapacitacionAnualTentativo\AsignaTema.resx">
       <DependentUpon>AsignaTema.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\PlanCapacitacionAnualTentativo\Listado.resx">
+      <DependentUpon>Listado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\PlanCapacitacionAnualTentativo\ListadoPersonalCapacitacionAnualTentativo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ListadoPersonalCapacitacionAnualTentativo.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\PlanCapacitacionAnualTentativo\TentativoListaCursos.resx">
       <DependentUpon>TentativoListaCursos.cs</DependentUpon>
@@ -901,6 +954,14 @@
     <EmbeddedResource Include="Listados\PromediodeCalificacion\wPromedioCalificacion.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>wPromedioCalificacion.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\TemasPorLegajoConsolidado\ReportePorSector.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportePorSector.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\TemasPorLegajoConsolidado\ReportePorTema.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportePorTema.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\TemasRealizadosyNoRealizados\ImpreInforme.resx">
       <DependentUpon>ImpreInforme.cs</DependentUpon>
@@ -1050,6 +1111,9 @@
     <EmbeddedResource Include="Novedades\ActualizacionDeCompetecniasYNecesidadesDeCapacitacion.resx">
       <DependentUpon>ActualizacionDeCompetecniasYNecesidadesDeCapacitacion.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Novedades\AgregarArchivosPlanillaCapacitacion.resx">
+      <DependentUpon>AgregarArchivosPlanillaCapacitacion.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Novedades\AsignarCursosPorPerfilYSector.resx">
       <DependentUpon>AsignarCursosPorPerfilYSector.cs</DependentUpon>
     </EmbeddedResource>
@@ -1160,6 +1224,17 @@
     </None>
     <None Include="Listados\CursosRealizadosporTemas\DSInforme.xss">
       <DependentUpon>DSInforme.xsd</DependentUpon>
+    </None>
+    <None Include="Listados\DBAuxi.xsc">
+      <DependentUpon>DBAuxi.xsd</DependentUpon>
+    </None>
+    <None Include="Listados\DBAuxi.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DBAuxi.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Listados\DBAuxi.xss">
+      <DependentUpon>DBAuxi.xsd</DependentUpon>
     </None>
     <None Include="Listados\LegajosConNecesidadesPendientes\DSInforme.xsc">
       <DependentUpon>DSInforme.xsd</DependentUpon>
@@ -1316,6 +1391,12 @@
     <Content Include="bin\Debug\Modulo Capacitacion.exe" />
     <Content Include="bin\Debug\Modulo Capacitacion.pdb" />
     <Content Include="bin\Debug\Modulo Capacitacion.vshost.exe" />
+    <None Include="Resources\Word_icon.png" />
+    <None Include="Resources\txt_icono.png" />
+    <None Include="Resources\pdf_icon.png" />
+    <None Include="Resources\imagen_icono.png" />
+    <None Include="Resources\Excel_icon.ico" />
+    <None Include="Resources\archivo_default.png" />
     <None Include="Resources\Consulta Dat N1.png" />
     <None Include="Resources\Aceptar N2.png" />
     <None Include="Resources\Screen_preview.png" />

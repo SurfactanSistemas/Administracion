@@ -39,7 +39,7 @@ namespace Modulo_Capacitacion.Listados.PlanCapacitacionAnualTentativo
                         cmd.CommandText = "SELECT l2.Actual Legajo, l.Descripcion DescLegajo, l.Curso, c.Descripcion DescCurso, cr.Tema, t.Descripcion DescTema, t.Horas FROM Legajo l " +
                                             "INNER JOIN (SELECT MIN(Codigo) Actual, Descripcion FROM Legajo GROUP BY Descripcion) l2 ON l.Descripcion = l2.Descripcion AND l.Codigo = l2.Actual "+
                                             "LEFT OUTER JOIN Curso c on c.Codigo = l.Curso LEFT OUTER JOIN Cronograma cr ON cr.Ano = '" + txtAnio.Text + "' and cr.Curso = l.Curso AND cr.Legajo = l2.Actual "+
-                                            "LEFT OUTER JOIN Tema t ON t.Curso = cr.Curso AND t.Tema = cr.Tema WHERE EstaCurso NOT IN (1, 2, 6, 7, 8) AND l.Fegreso IN ('  /  /    ', '00/00/0000') Order by Legajo, l.Renglon";
+                                            "LEFT OUTER JOIN Tema t ON t.Curso = cr.Curso AND t.Tema = cr.Tema WHERE EstaCurso NOT IN (1, 2, 6, 7) AND l.Fegreso IN ('  /  /    ', '00/00/0000') Order by Legajo, l.Renglon";
 
                         using (SqlDataReader dr = cmd.ExecuteReader())
                         {
@@ -52,7 +52,7 @@ namespace Modulo_Capacitacion.Listados.PlanCapacitacionAnualTentativo
                         cmd.CommandText = "SELECT l2.Actual Legajo, l.Descripcion DescLegajo, l.Curso, c.Descripcion DescCurso, cr.Tema2 As Tema, t.Descripcion DescTema, t.Horas FROM Legajo l " +
                                             "INNER JOIN (SELECT MIN(Codigo) Actual, Descripcion FROM Legajo GROUP BY Descripcion) l2 ON l.Descripcion = l2.Descripcion AND l.Codigo = l2.Actual " +
                                             "LEFT OUTER JOIN Curso c on c.Codigo = l.Curso LEFT OUTER JOIN Cronograma cr ON cr.Ano = '" + txtAnio.Text + "' and cr.Curso = l.Curso AND cr.Legajo = l2.Actual " +
-                                            "LEFT OUTER JOIN Tema t ON t.Curso = cr.Curso AND t.Tema = cr.Tema2 WHERE EstaCurso NOT IN (1, 2, 6, 7, 8) AND l.Fegreso IN ('  /  /    ', '00/00/0000') And ISNULL(cr.Tema2, 0) <> 0 Order by Legajo, l.Renglon";
+                                            "LEFT OUTER JOIN Tema t ON t.Curso = cr.Curso AND t.Tema = cr.Tema2 WHERE EstaCurso NOT IN (1, 2, 6, 7) AND l.Fegreso IN ('  /  /    ', '00/00/0000') And ISNULL(cr.Tema2, 0) <> 0 Order by Legajo, l.Renglon";
 
                         using (SqlDataReader dr = cmd.ExecuteReader())
                         {

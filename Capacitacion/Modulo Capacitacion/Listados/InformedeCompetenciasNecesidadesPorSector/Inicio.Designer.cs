@@ -1,11 +1,14 @@
-﻿namespace Modulo_Capacitacion.Listados.InformedeCompetenciasNecesidadesPorSector
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Modulo_Capacitacion.Listados.InformedeCompetenciasNecesidadesPorSector
 {
     partial class Inicio
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -193,16 +196,16 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label LBChofer;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Button BT_Pantalla;
-        private System.Windows.Forms.Button BT_Imprimir;
-        private System.Windows.Forms.Button BT_Salir;
-        private System.Windows.Forms.ComboBox cmbSectores;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox CB_Observ;
-        private System.Windows.Forms.Label label3;
+        private Panel panel1;
+        private Label LBChofer;
+        private Panel panel2;
+        private Panel panel3;
+        private Button BT_Pantalla;
+        private Button BT_Imprimir;
+        private Button BT_Salir;
+        private ComboBox cmbSectores;
+        private Label label1;
+        private ComboBox CB_Observ;
+        private Label label3;
     }
 }

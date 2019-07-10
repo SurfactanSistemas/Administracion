@@ -2,8 +2,11 @@
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using CrystalDecisions.CrystalReports.Engine;
+using Modulo_Capacitacion.Listados.Sectores;
 using Negocio;
 
 namespace Modulo_Capacitacion.Listados.TemasPorLegajoConsolidado
@@ -53,7 +56,7 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajoConsolidado
             try
             {
                 ImpreInforme Impre = _GenerarReporte("Pantalla");
-                Impre.Show(this);
+                if (Impre != null) Impre.Show(this);
             }
             catch (Exception err)
             {
@@ -66,46 +69,26 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajoConsolidado
             progressBar1.Visible = false;
             progressBar1.Value = 0;
 
-            if (TB_AñoDesde.Text == "") throw new Exception("Debe ingresar el año inicial");
+            DateTime hoy = DateTime.Now;
 
-            if (TB_AñoHasta.Text == "") TB_AñoHasta.Text = TB_AñoDesde.Text;
-
-            //if (CB_Tipo.Text == "") throw new Exception("Debe elegir el tipo de listado");
-
-            int Desde = int.Parse(TB_AñoDesde.Text.Substring(6, 4));
-            int Hasta = int.Parse(TB_AñoHasta.Text.Substring(6, 4));
-
-            string WDesde = Helper.OrdenarFecha(TB_AñoDesde.Text);
-            string WHasta = Helper.OrdenarFecha(TB_AñoHasta.Text);
-
-            dtCursadas = txtCurso.Text != "" ? Cur.ListarCursadaCons3(WDesde, WHasta, int.Parse(txtCurso.Text)) : Cur.ListarCursadaCons2(WDesde, WHasta);
-
-            progressBar1.Maximum = dtCursadas.Rows.Count;
-
-            progressBar1.Visible = true;
-            progressBar1.Step = 1;
-
-            int Año = Desde;
-
-            if (Año > Hasta) Año = Hasta;
-
-            foreach (DataRow fila in dtCursadas.Rows)
+            if (TB_AñoDesde.Text.Replace("/", "").Trim() == "")
             {
-                int Legajo = int.Parse(fila["Legajo"].ToString());
-                int Curso = int.Parse(fila["Curso"].ToString());
-                string Clave = fila["Clave"].ToString();
-
-                //dtCronograma = Cr.BuscarUnoCursada(Año, Legajo, Curso);
-
-                int Valor = 0;
-
-                //if (dtCronograma.Rows.Count > 0 )
-                if (!Cr.ExisteEnCronograma(Año, Legajo, Curso)) Valor = 1;
-
-                Cur.ModificarCursadaConsol(Valor, Clave);
-
-                progressBar1.Increment(1);
+                TB_AñoDesde.Text = "01/06/" + ((hoy.Month < 6) ? (hoy.Year - 1).ToString() : hoy.ToString("yyyy"));
             }
+            else
+            {
+                hoy = DateTime.ParseExact(TB_AñoDesde.Text, "dd/MM/yyyy", new DateTimeFormatInfo());
+            }
+
+            if (TB_AñoHasta.Text.Replace("/", "").Trim() == "")
+            {
+                TB_AñoHasta.Text = "31/05/" + ((hoy.Month >= 6) ? (hoy.Year + 1).ToString() : hoy.ToString("yyyy"));
+            }
+
+            if (TB_AñoDesde.Text.Replace(" ", "").Length < 10 || TB_AñoHasta.Text.Replace(" ", "").Length < 10) return null;
+
+            Helper.PurgarOrdFechaCursadas();
+            Helper._ReprocesoCursosProgramadosYNoProgramados(TB_AñoDesde.Text, TB_AñoHasta.Text, "1", "9999");
 
             string FechaDesde = Helper.OrdenarFecha(TB_AñoDesde.Text); // + "0101";
             string FechaHasta = Helper.OrdenarFecha(TB_AñoHasta.Text); // + "1231";
@@ -148,7 +131,13 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajoConsolidado
 
             progressBar1.Visible = false;
 
-            ImpreInforme Impre = new ImpreInforme(dtInforme, _TipoImpre);
+            ReportDocument rpt = null;
+
+            if (rbPorLegajo.Checked) rpt = new Reporte();
+            if (rbPorSector.Checked) rpt = new ReportePorSector();
+            if (rbPorTema.Checked) rpt = new ReportePorTema();
+
+            ImpreInforme Impre = new ImpreInforme(dtInforme, _TipoImpre, rpt);
             return Impre;
         }
 
@@ -157,7 +146,7 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajoConsolidado
             try
             {
                 ImpreInforme Impre = _GenerarReporte("Imprimir");
-                Impre.Show(this);
+                if (Impre != null) Impre.Show(this);
             }
             catch (Exception err)
             {

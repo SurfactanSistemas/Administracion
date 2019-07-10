@@ -1,11 +1,14 @@
-﻿namespace Modulo_Capacitacion.Maestros.Perfiles
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace Modulo_Capacitacion.Maestros.Perfiles
 {
     partial class Perfiles_Inicio
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -401,32 +404,32 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel P_Verde;
-        private System.Windows.Forms.Panel P_Filtrado;
-        private System.Windows.Forms.TextBox TBFiltro;
-        private System.Windows.Forms.Label LBFiltro;
-        private System.Windows.Forms.Button Bt_Fin;
-        private System.Windows.Forms.Button BT_Eliminar;
-        private System.Windows.Forms.Button BTModifSector;
-        private System.Windows.Forms.Button BTAgregarPerfil;
-        private System.Windows.Forms.ContextMenuStrip CMS_Perfil;
-        private System.Windows.Forms.ToolStripMenuItem descripcionToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem versionToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem codigoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem sectorToolStripMenuItem;
-        private System.Windows.Forms.BindingSource perfilBindingSource;
-        private System.Windows.Forms.BindingSource perfilBindingSource1;
-        private System.Windows.Forms.BindingSource temasBindingSource;
-        private System.Windows.Forms.DataGridView DGV_Perfiles;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button btnImprimir;
-        private System.Windows.Forms.TextBox txtCodigo;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button1;
+        private Panel panel1;
+        private Label label2;
+        private Label label1;
+        private Panel P_Verde;
+        private Panel P_Filtrado;
+        private TextBox TBFiltro;
+        private Label LBFiltro;
+        private Button Bt_Fin;
+        private Button BT_Eliminar;
+        private Button BTModifSector;
+        private Button BTAgregarPerfil;
+        private ContextMenuStrip CMS_Perfil;
+        private ToolStripMenuItem descripcionToolStripMenuItem;
+        private ToolStripMenuItem versionToolStripMenuItem;
+        private ToolStripMenuItem codigoToolStripMenuItem;
+        private ToolStripMenuItem sectorToolStripMenuItem;
+        private BindingSource perfilBindingSource;
+        private BindingSource perfilBindingSource1;
+        private BindingSource temasBindingSource;
+        private DataGridView DGV_Perfiles;
+        private TableLayoutPanel tableLayoutPanel1;
+        private TableLayoutPanel tableLayoutPanel2;
+        private Panel panel2;
+        private Button btnImprimir;
+        private TextBox txtCodigo;
+        private Label label3;
+        private Button button1;
     }
 }

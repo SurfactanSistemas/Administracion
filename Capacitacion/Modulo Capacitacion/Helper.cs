@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
+using Negocio;
 
 namespace Modulo_Capacitacion
 {
@@ -54,6 +55,84 @@ namespace Modulo_Capacitacion
             }
         }
 
+        public static void _ReprocesoCursosProgramadosYNoProgramados(string DesdeFecha, string HastaFecha,
+            string DesdeCurso = "1", string HastaCurso = "9999")
+        {
+            _ReprocesoCursosProgramadosYNoProgramados(DesdeFecha, HastaFecha, int.Parse(DesdeCurso), int.Parse(HastaCurso));
+        }
+
+        public static void _ReprocesoCursosProgramadosYNoProgramadosII(string DesdeFecha, string HastaFecha, int DesdeCurso = 1, int HastaCurso = 9999)
+        {
+            string WDesde = OrdenarFecha(DesdeFecha);
+            string WHasta = OrdenarFecha(HastaFecha);
+
+            Cursada Cur = new Cursada();
+
+            DataTable dtCursadas = Cur.ListarCursadaCons3(WDesde, WHasta, DesdeCurso, HastaCurso);
+
+            int Desde = int.Parse(WDesde.Substring(0, 4));
+            int Hasta = int.Parse(WHasta.Substring(0, 4));
+
+            int Año = Desde;
+
+            if (Año > Hasta) Año = Hasta;
+
+            DataTable WLegajos = (new DataView(dtCursadas)).ToTable(true, "Legajo");
+            DataTable WCursos = (new DataView(dtCursadas)).ToTable(true, "Curso");
+
+            Cronograma Cr = new Cronograma();
+
+            foreach (DataRow WLegajo in WLegajos.Rows)
+            {
+                foreach (DataRow WCurso in WCursos.Rows)
+                {
+                    DataRow[] WCursosPorLegajo = dtCursadas.Select("Legajo = '" + WLegajo["Legajo"] + "' And Curso = '" + WCurso["Curso"] + "'");
+
+                    foreach (DataRow WCursoLegajo in WCursosPorLegajo)
+                    {
+                        int Valor = 0;
+
+                        if (!Cr.ExisteEnCronograma(Año.ToString(), WLegajo["Legajo"].ToString(), WCurso["Curso"].ToString())) Valor = 1;
+
+                        Cur.ModificarCursadaConsolII(Valor, WCursoLegajo["Curso"].ToString(), WLegajo["Legajo"].ToString(), Año);
+                    }
+                }
+
+            }
+        }
+
+        public static void _ReprocesoCursosProgramadosYNoProgramados(string DesdeFecha, string HastaFecha, int DesdeCurso = 1, int HastaCurso = 9999)
+        {
+            string WDesde = OrdenarFecha(DesdeFecha);
+            string WHasta = OrdenarFecha(HastaFecha);
+
+            Cursada Cur = new Cursada();
+
+            DataTable dtCursadas = Cur.ListarCursadaCons3(WDesde, WHasta, DesdeCurso, HastaCurso);
+
+            int Desde = int.Parse(WDesde.Substring(0, 4));
+            int Hasta = int.Parse(WHasta.Substring(0, 4));
+
+            int Año = Desde;
+
+            if (Año > Hasta) Año = Hasta;
+
+            Cronograma Cr = new Cronograma();
+
+            foreach (DataRow fila in dtCursadas.Rows)
+            {
+                int Legajo = int.Parse(fila["Legajo"].ToString());
+                int Curso = int.Parse(fila["Curso"].ToString());
+                string Clave = fila["Clave"].ToString();
+
+                int Valor = 0;
+
+                if (!Cr.ExisteEnCronograma(Año, Legajo, Curso)) Valor = 1;
+
+                Cur.ModificarCursadaConsol(Valor, Clave);
+            }
+        }
+
         public static void PurgarOrdFechaCursadas()
         {
             using (SqlConnection conn = new SqlConnection())
@@ -64,10 +143,9 @@ namespace Modulo_Capacitacion
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = conn;
-                    cmd.CommandText = "UPDATE Cursadas SET Ordfecha = '0' WHERE Clave IN (select Clave from Cursadas group by Clave, OrdFecha having len(Replace(OrdFecha, ' ', '')) < 8)";
+                    cmd.CommandText = "UPDATE Cursadas SET Ordfecha = Right(Fecha, 4) + '' + SUBSTRING(Fecha, 4, 2) + '' + LEFT(Fecha, 2) WHERE Clave IN (select Clave from Cursadas group by Clave, OrdFecha, Fecha having (len(Replace(OrdFecha, ' ', '')) < 8 Or ISNULL(OrdFecha, '') = '') and len(Replace(Fecha, ' ', '')) = 10)";
                     cmd.ExecuteNonQuery();
                 }
-
             }
         }
 
@@ -238,6 +316,8 @@ namespace Modulo_Capacitacion
 
             DataTable WPersonas = new DataTable();
 
+            _ReprocesoCursosProgramadosYNoProgramadosII("01/06/" + WAnioCalendario, "31/05/" + (int.Parse(WAnioCalendario) + 1));
+
             using (SqlConnection conn = new SqlConnection())
             {
                 conn.ConnectionString = ConfigurationManager.ConnectionStrings["Surfactan"].ConnectionString;
@@ -376,8 +456,6 @@ namespace Modulo_Capacitacion
 
         public static void ActualizaMarcaImpreListado1(string Año)
         {
-            DataTable WCronogramaII = new DataTable();
-
             using (SqlConnection conn = new SqlConnection())
             {
                 conn.ConnectionString = ConfigurationManager.ConnectionStrings["Surfactan"].ConnectionString;

@@ -12,7 +12,7 @@
   <xs:element name="DSInforme" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DSInforme" msprop:Generator_UserDSName="DSInforme">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="DSInforme" msprop:Generator_TableClassName="DSInformeDataTable" msprop:Generator_TableVarName="tableDSInforme" msprop:Generator_RowChangedName="DSInformeRowChanged" msprop:Generator_TablePropName="_DSInforme" msprop:Generator_RowDeletingName="DSInformeRowDeleting" msprop:Generator_RowChangingName="DSInformeRowChanging" msprop:Generator_RowEvHandlerName="DSInformeRowChangeEventHandler" msprop:Generator_RowDeletedName="DSInformeRowDeleted" msprop:Generator_RowClassName="DSInformeRow" msprop:Generator_UserTableName="DSInforme" msprop:Generator_RowEvArgName="DSInformeRowChangeEvent">
+        <xs:element name="DSInforme" msprop:Generator_TableClassName="DSInformeDataTable" msprop:Generator_TableVarName="tableDSInforme" msprop:Generator_TablePropName="_DSInforme" msprop:Generator_RowDeletingName="DSInformeRowDeleting" msprop:Generator_RowChangingName="DSInformeRowChanging" msprop:Generator_RowEvHandlerName="DSInformeRowChangeEventHandler" msprop:Generator_RowDeletedName="DSInformeRowDeleted" msprop:Generator_UserTableName="DSInforme" msprop:Generator_RowChangedName="DSInformeRowChanged" msprop:Generator_RowEvArgName="DSInformeRowChangeEvent" msprop:Generator_RowClassName="DSInformeRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="N_x00BA_Tema" msprop:Generator_ColumnVarNameInTable="columnNºTema" msprop:Generator_ColumnPropNameInRow="NºTema" msprop:Generator_ColumnPropNameInTable="NºTemaColumn" msprop:Generator_UserColumnName="NºTema" type="xs:string" minOccurs="0" />
@@ -26,6 +26,7 @@
               <xs:element name="Fecha" msprop:Generator_ColumnVarNameInTable="columnFecha" msprop:Generator_ColumnPropNameInRow="Fecha" msprop:Generator_ColumnPropNameInTable="FechaColumn" msprop:Generator_UserColumnName="Fecha" type="xs:string" minOccurs="0" />
               <xs:element name="Observaciones" msprop:Generator_ColumnVarNameInTable="columnObservaciones" msprop:Generator_ColumnPropNameInRow="Observaciones" msprop:Generator_ColumnPropNameInTable="ObservacionesColumn" msprop:Generator_UserColumnName="Observaciones" type="xs:string" minOccurs="0" />
               <xs:element name="Planificada" msprop:Generator_ColumnVarNameInTable="columnPlanificada" msprop:Generator_ColumnPropNameInRow="Planificada" msprop:Generator_ColumnPropNameInTable="PlanificadaColumn" msprop:Generator_UserColumnName="Planificada" type="xs:string" minOccurs="0" />
+              <xs:element name="Dni" msprop:Generator_ColumnVarNameInTable="columnDni" msprop:Generator_ColumnPropNameInRow="Dni" msprop:Generator_ColumnPropNameInTable="DniColumn" msprop:Generator_UserColumnName="Dni" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

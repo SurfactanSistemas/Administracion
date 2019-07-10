@@ -1,9 +1,12 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Modulo_Capacitacion.Listados;
+using Modulo_Capacitacion.Reportes.Cursada;
 using Negocio;
 
 namespace Modulo_Capacitacion.Novedades
@@ -14,7 +17,7 @@ namespace Modulo_Capacitacion.Novedades
 
         Tema T = new Tema();
 
-        private int WTipoConsulta = 0;
+        private int WTipoConsulta;
 
         //bool Modificar = true;
         public IngresoDeCursosRealizados()
@@ -61,14 +64,10 @@ namespace Modulo_Capacitacion.Novedades
         {
             try
             {
-                Tema tema = new Tema();
-
                 if (e.KeyCode == Keys.Enter)
                 {
                     BuscarDescripcionTema();
-
-                    //TB_Codigo.Text = tema.ObtenerUltimo(TB_CodTema.Text).ToString();
-                };
+                }
             }
             catch (Exception err)
             {
@@ -85,9 +84,7 @@ namespace Modulo_Capacitacion.Novedades
                 if (e.KeyCode == Keys.Enter)
                 {
                     BuscarDescripcionCurso();
-
-                    //TB_Codigo.Text = tema.ObtenerUltimo(TB_CodTema.Text).ToString();
-                };
+                }
             }
             catch (Exception err)
             {
@@ -172,7 +169,6 @@ namespace Modulo_Capacitacion.Novedades
             {
                 DataTable WDatos = new DataTable();
                 dgvGrilla.Rows.Clear();
-                int WRenglon = 0;
 
                 using (SqlConnection conn = new SqlConnection())
                 {
@@ -183,7 +179,7 @@ namespace Modulo_Capacitacion.Novedades
                     {
                         cmd.Connection = conn;
 
-                        cmd.CommandText = "select cu.Codigo, cu.Curso, c.Descripcion as DesCurso, cu.Tema, t.Descripcion as DesTema, cu.Fecha, cu.Horas, cu.TipoI, cu.TipoII, cu.Instructor, cu.Actividad, cu.Temas, cu.Legajo, l.Descripcion as DesLegajo, cu.Observaciones from Cursadas cu LEFT OUTER JOIN Legajo l ON cu.Legajo = l.Codigo and l.Renglon = 1 LEFT OUTER JOIN Curso c ON cu.Curso = c.Codigo LEFT OUTER JOIN Tema t ON cu.Tema = t.Tema AND c.Codigo = t.Curso where cu.Codigo = '" + WCodigo + "' order by cu.Renglon";
+                        cmd.CommandText = "select cu.Codigo, cu.Curso, c.Descripcion as DesCurso, cu.Tema, t.Descripcion as DesTema, cu.Fecha, cu.Horas, cu.TipoI, cu.TipoII, cu.Instructor, cu.Actividad, cu.Temas, cu.Legajo, l.Descripcion as DesLegajo, cu.Observaciones, ISNULL(l.Dni, '') Dni from Cursadas cu LEFT OUTER JOIN Legajo l ON cu.Legajo = l.Codigo and l.Renglon = 1 LEFT OUTER JOIN Curso c ON cu.Curso = c.Codigo LEFT OUTER JOIN Tema t ON cu.Tema = t.Tema AND c.Codigo = t.Curso where cu.Codigo = '" + WCodigo + "' order by cu.Renglon";
 
                         using (SqlDataReader dr = cmd.ExecuteReader())
                         {
@@ -208,9 +204,10 @@ namespace Modulo_Capacitacion.Novedades
                             txtActividad.Text = row["Actividad"].ToString().Trim();
                             txtTemas.Text = row["Temas"].ToString().Trim();
 
-                            WRenglon = dgvGrilla.Rows.Add();
+                            var WRenglon = dgvGrilla.Rows.Add();
                             dgvGrilla.Rows[WRenglon].Cells["Legajo"].Value = row["Legajo"].ToString().Trim();
                             dgvGrilla.Rows[WRenglon].Cells["Nombre"].Value = row["DesLegajo"].ToString().Trim();
+                            dgvGrilla.Rows[WRenglon].Cells["Dni"].Value = row["Dni"].ToString().Trim();
                             dgvGrilla.Rows[WRenglon].Cells["Observaciones"].Value = row["Observaciones"].ToString().Trim();
 
                         }
@@ -302,12 +299,11 @@ namespace Modulo_Capacitacion.Novedades
             
             // Obtenemos los datos de la Cursada en caso de actualizar.
             DataTable WDatosAnteriores = new DataTable();
-            SqlTransaction trans = null;
             using (SqlConnection conn = new SqlConnection())
             {
                 conn.ConnectionString = ConfigurationManager.ConnectionStrings["Surfactan"].ConnectionString;
                 conn.Open();
-                trans = conn.BeginTransaction();
+                var trans = conn.BeginTransaction();
 
                 using (SqlCommand cmd = new SqlCommand())
                 {
@@ -359,6 +355,7 @@ namespace Modulo_Capacitacion.Novedades
                         string WClave = Helper.Ceros(WCodigo, 6) + Helper.Ceros(WRenglon, 2);
                         var WLegajo = row.Cells["Legajo"].Value ?? "";
                         var WObservaciones = row.Cells["Observaciones"].Value ?? "";
+                        var WDni = row.Cells["Dni"].Value ?? "";
 
                         if (WLegajo.ToString() == "") continue;
 
@@ -391,6 +388,8 @@ namespace Modulo_Capacitacion.Novedades
                                         + " " + WLegajo + ", '" + WDescLegajo + "', '" + WDescSector + "', '', '', '" + WObservaciones + "', '" + WPerfil + "', '" + WSector + "' )";
                         cmd.ExecuteNonQuery();
 
+                        cmd.CommandText = "UPDATE Legajo SET Dni = '" + WDni + "' WHERE Codigo = '" + WLegajo + "'";
+                        cmd.ExecuteNonQuery();
                     }
 
                     foreach (var sql in new[]{"update cursadas set cursadas.DesLegajo = Legajo.Descripcion from Cursadas, Legajo WHERE cursadas.legajo = legajo.Codigo",
@@ -412,7 +411,7 @@ namespace Modulo_Capacitacion.Novedades
                     {
                         // Imprimimos la planilla con las personas indicadas.
                         VistaPrevia frm = new VistaPrevia();
-                        frm.CargarReporte(new Reportes.Cursada.planillacursada(), "{Cursadas.Curso} = {Curso.Codigo} AND {Cursadas.Legajo} = {Legajo.Codigo} AND {Legajo.Renglon} = 1 AND {Cursadas.Codigo} = " + WCodigo);
+                        frm.CargarReporte(new planillacursada(), "{Cursadas.Curso} = {Curso.Codigo} AND {Cursadas.Legajo} = {Legajo.Codigo} AND {Legajo.Renglon} = 1 AND {Cursadas.Codigo} = " + WCodigo);
                         frm.Imprimir();
                     }
 
@@ -467,6 +466,15 @@ namespace Modulo_Capacitacion.Novedades
                     MessageBox.Show("El Legajo " + row.Cells["Legajo"].Value + " se encuentra dado de baja.");
                     return false;
                 }
+
+                string WDni = Helper.OrDefault(row.Cells["Dni"].Value, "").ToString();
+                row.Cells["Dni"].Value = Regex.Replace(row.Cells["Dni"].Value.ToString(), "[^0-9]", "");
+
+                if (WDni.Trim().Length < 7)
+                {
+                    MessageBox.Show("Hay legajos que no tienen un Dni válido cargado.");
+                    return false;
+                }
             }
 
             return true;
@@ -507,10 +515,9 @@ namespace Modulo_Capacitacion.Novedades
 
         private bool _TemaValido(string WTema)
         {
-            bool WValido;
-
             try
             {
+                bool WValido;
                 using (SqlConnection conn = new SqlConnection())
                 {
                     conn.ConnectionString = ConfigurationManager.ConnectionStrings["Surfactan"].ConnectionString;
@@ -588,7 +595,6 @@ namespace Modulo_Capacitacion.Novedades
 
             if (dgvGrilla.Rows.Count > 0)
             {
-                bool WEncontrado;
                 // Eliminamos los legajos que ya se encuentren en la grilla.
                 foreach (DataRow row in tabla.Rows)
                 {
@@ -596,7 +602,7 @@ namespace Modulo_Capacitacion.Novedades
 
                     if (WLegajo.ToString() == "") continue;
 
-                    WEncontrado = false;
+                    var WEncontrado = false;
                     foreach (DataGridViewRow row2 in dgvGrilla.Rows)
                     {
                         if (WLegajo.ToString() == row2.Cells["Legajo"].Value.ToString())
@@ -815,13 +821,21 @@ namespace Modulo_Capacitacion.Novedades
         private void _CargarLegajo(object wCodigo)
         {
             int WRenglon = dgvGrilla.Rows.Add();
+
+            DataRow leg = _TraerDatosLegajo(wCodigo);
+
             dgvGrilla.Rows[WRenglon].Cells["Legajo"].Value = wCodigo;
-            dgvGrilla.Rows[WRenglon].Cells["Nombre"].Value = _TraerDescripcionLegajo(wCodigo.ToString());
+
+            if (leg != null)
+            {
+                dgvGrilla.Rows[WRenglon].Cells["Nombre"].Value = leg["Descripcion"];
+                dgvGrilla.Rows[WRenglon].Cells["Dni"].Value = leg["Dni"];   
+            }
         }
 
-        private string _TraerDescripcionLegajo(string wCodigo)
+        private DataRow _TraerDatosLegajo(object wCodigo)
         {
-            string Wdesc = "";
+            DataTable datos = new DataTable();
 
             try
             {
@@ -833,28 +847,26 @@ namespace Modulo_Capacitacion.Novedades
                     using (SqlCommand cmd = new SqlCommand())
                     {
                         cmd.Connection = conn;
-                        cmd.CommandText = "SELECT RTRIM(LTRIM(Descripcion)) Descripcion FROM Legajo WHERE Codigo = '" + wCodigo + "' AND Renglon = 1"; 
+                        cmd.CommandText = "SELECT RTRIM(LTRIM(Descripcion)) Descripcion, ISNULL(Dni, '') Dni FROM Legajo WHERE Codigo = '" + wCodigo + "' AND Renglon = 1";
 
                         using (SqlDataReader dr = cmd.ExecuteReader())
                         {
                             if (dr.HasRows)
                             {
-                                dr.Read();
-
-                                Wdesc = dr["Descripcion"].ToString();
+                                datos.Load(dr);
                             }
                         }
                     }
 
                 }
 
-                return Wdesc;
+                return datos.Rows.Count > 0 ? datos.Rows[0] : null;
             }
             catch (Exception ex)
             {
                 throw new Exception("Error al procesar la consulta a la Base de Datos. Motivo: " + ex.Message);
             }
-        
+
         }
 
         private DataTable _TraerTemas()
@@ -1204,14 +1216,9 @@ namespace Modulo_Capacitacion.Novedades
             btnAyuda.PerformClick();
         }
 
-        private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
             eliminarFilaToolStripMenuItem.Enabled = dgvGrilla.SelectedCells.Count > 0;
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            btnAyuda.PerformClick();
         }
 
         private void btnImprimir_Click(object sender, EventArgs e)
@@ -1223,14 +1230,11 @@ namespace Modulo_Capacitacion.Novedades
                 return;
             }
 
-            if (
-                        MessageBox.Show(
-                            "¿Desea Imprimir la Planilla?", "",
-                            MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("¿Desea Imprimir la Planilla?", "",MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 // Imprimimos la planilla con las personas indicadas.
                 VistaPrevia frm = new VistaPrevia();
-                frm.CargarReporte(new Reportes.Cursada.planillacursada(), "{Cursadas.Curso} = {Curso.Codigo} AND {Cursadas.Legajo} = {Legajo.Codigo} AND {Legajo.Renglon} = 1 AND {Cursadas.Codigo} = " + txtCodigo.Text);
+                frm.CargarReporte(new planillacursada(), "{Cursadas.Curso} = {Curso.Codigo} AND {Cursadas.Legajo} = {Legajo.Codigo} AND {Legajo.Renglon} = 1 AND {Cursadas.Codigo} = " + txtCodigo.Text);
                 frm.Imprimir();
             }
 
@@ -1243,6 +1247,13 @@ namespace Modulo_Capacitacion.Novedades
             {
                 txtAyuda.Text = "";
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            AgregarArchivosPlanillaCapacitacion frm = new AgregarArchivosPlanillaCapacitacion(txtCodigo.Text);
+
+            frm.Show(this);
         }
     }
 }
