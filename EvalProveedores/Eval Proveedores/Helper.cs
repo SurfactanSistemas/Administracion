@@ -615,7 +615,7 @@ namespace Eval_Proveedores
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = conn;
-                    cmd.CommandText = "SELECT i.Clave, i.Informe, i.Fecha, i.FechaOrd, i.Orden, i.Articulo, i.Cantidad, i.Certificado1, i.Estado1 FROM Informe i INNER JOIN Articulo a ON a.Codigo = i.Articulo WHERE ISNULL(a.ClasificacionFarma, 0) > 0 And i.Proveedor = '" + WProveedor + "' AND i.FechaOrd BETWEEN " + WDesde + " AND " + WHasta + " ORDER BY i.Informe, i.Renglon";
+                    cmd.CommandText = "SELECT i.Clave, i.Informe, i.Fecha, i.FechaOrd, i.Orden, i.Articulo, i.Cantidad, i.Certificado1, i.Estado1 FROM Informe i INNER JOIN Articulo a ON a.Codigo = i.Articulo WHERE i.Proveedor = '" + WProveedor + "' AND i.FechaOrd BETWEEN " + WDesde + " AND " + WHasta + " ORDER BY i.Informe, i.Renglon";
 
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {

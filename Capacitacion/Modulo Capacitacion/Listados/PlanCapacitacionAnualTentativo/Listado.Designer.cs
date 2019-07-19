@@ -41,6 +41,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.rbPorLegajo = new System.Windows.Forms.RadioButton();
             this.rbPlanilla = new System.Windows.Forms.RadioButton();
+            this.rbAperturaCursos = new System.Windows.Forms.RadioButton();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -72,28 +73,29 @@
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.Control;
             this.label2.Location = new System.Drawing.Point(8, 17);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(223, 15);
+            this.label2.Size = new System.Drawing.Size(254, 15);
             this.label2.TabIndex = 0;
             this.label2.Text = "LISTADO DE CALENDARIO TENTATIVO";
             // 
             // progressBar1
             // 
             this.progressBar1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.progressBar1.Location = new System.Drawing.Point(12, 181);
+            this.progressBar1.Location = new System.Drawing.Point(12, 211);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(491, 30);
             this.progressBar1.TabIndex = 85;
             // 
             // txtAno
             // 
-            this.txtAno.Location = new System.Drawing.Point(68, 30);
+            this.txtAno.Location = new System.Drawing.Point(57, 30);
             this.txtAno.Name = "txtAno";
-            this.txtAno.Size = new System.Drawing.Size(70, 20);
+            this.txtAno.Size = new System.Drawing.Size(45, 20);
             this.txtAno.TabIndex = 84;
+            this.txtAno.Text = "9999";
             this.txtAno.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtAno.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAno_KeyPress);
             // 
@@ -101,7 +103,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(25, 31);
+            this.label1.Location = new System.Drawing.Point(14, 31);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(37, 18);
             this.label1.TabIndex = 1;
@@ -114,7 +116,7 @@
             this.btnAceptar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnAceptar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAceptar.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnAceptar.Location = new System.Drawing.Point(177, 219);
+            this.btnAceptar.Location = new System.Drawing.Point(177, 249);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(51, 43);
             this.btnAceptar.TabIndex = 81;
@@ -128,7 +130,7 @@
             this.BT_Salir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Salir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Salir.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Salir.Location = new System.Drawing.Point(290, 219);
+            this.BT_Salir.Location = new System.Drawing.Point(290, 249);
             this.BT_Salir.Name = "BT_Salir";
             this.BT_Salir.Size = new System.Drawing.Size(48, 43);
             this.BT_Salir.TabIndex = 79;
@@ -139,30 +141,33 @@
             // 
             this.groupBox1.Controls.Add(this.cmbSectores);
             this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.rbAperturaCursos);
             this.groupBox1.Controls.Add(this.rbPorLegajo);
             this.groupBox1.Controls.Add(this.rbPlanilla);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.txtAno);
             this.groupBox1.Location = new System.Drawing.Point(12, 58);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(490, 117);
+            this.groupBox1.Size = new System.Drawing.Size(490, 140);
             this.groupBox1.TabIndex = 86;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "PARÁMETROS";
             // 
             // cmbSectores
             // 
+            this.cmbSectores.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.cmbSectores.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSectores.FormattingEnabled = true;
-            this.cmbSectores.Location = new System.Drawing.Point(165, 82);
+            this.cmbSectores.Location = new System.Drawing.Point(165, 109);
             this.cmbSectores.Name = "cmbSectores";
             this.cmbSectores.Size = new System.Drawing.Size(304, 21);
             this.cmbSectores.TabIndex = 87;
             // 
             // label4
             // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(54, 85);
+            this.label4.Location = new System.Drawing.Point(54, 112);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(84, 13);
             this.label4.TabIndex = 86;
@@ -171,19 +176,19 @@
             // rbPorLegajo
             // 
             this.rbPorLegajo.AutoSize = true;
-            this.rbPorLegajo.Location = new System.Drawing.Point(165, 55);
+            this.rbPorLegajo.Location = new System.Drawing.Point(118, 55);
             this.rbPorLegajo.Name = "rbPorLegajo";
-            this.rbPorLegajo.Size = new System.Drawing.Size(142, 17);
+            this.rbPorLegajo.Size = new System.Drawing.Size(269, 17);
             this.rbPorLegajo.TabIndex = 85;
             this.rbPorLegajo.TabStop = true;
-            this.rbPorLegajo.Text = "ABIERTO POR LEGAJO";
+            this.rbPorLegajo.Text = "PLAN ANUAL ABIERTO POR SECTOR Y LEGAJO";
             this.rbPorLegajo.UseVisualStyleBackColor = true;
             // 
             // rbPlanilla
             // 
             this.rbPlanilla.AutoSize = true;
             this.rbPlanilla.Checked = true;
-            this.rbPlanilla.Location = new System.Drawing.Point(165, 32);
+            this.rbPlanilla.Location = new System.Drawing.Point(118, 32);
             this.rbPlanilla.Name = "rbPlanilla";
             this.rbPlanilla.Size = new System.Drawing.Size(114, 17);
             this.rbPlanilla.TabIndex = 85;
@@ -191,11 +196,22 @@
             this.rbPlanilla.Text = "PLANILLA ANUAL";
             this.rbPlanilla.UseVisualStyleBackColor = true;
             // 
+            // rbAperturaCursos
+            // 
+            this.rbAperturaCursos.AutoSize = true;
+            this.rbAperturaCursos.Location = new System.Drawing.Point(118, 78);
+            this.rbAperturaCursos.Name = "rbAperturaCursos";
+            this.rbAperturaCursos.Size = new System.Drawing.Size(365, 17);
+            this.rbAperturaCursos.TabIndex = 85;
+            this.rbAperturaCursos.TabStop = true;
+            this.rbAperturaCursos.Text = "APERTURA DE CURSOS POR TEMAS INCLUIDOS EN PLAN ANUAL";
+            this.rbAperturaCursos.UseVisualStyleBackColor = true;
+            // 
             // Listado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(514, 272);
+            this.ClientSize = new System.Drawing.Size(514, 302);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.panel2);
@@ -230,5 +246,6 @@
         private System.Windows.Forms.RadioButton rbPlanilla;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cmbSectores;
+        private System.Windows.Forms.RadioButton rbAperturaCursos;
     }
 }

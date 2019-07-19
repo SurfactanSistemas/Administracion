@@ -28,6 +28,7 @@ namespace Modulo_Capacitacion.Listados.PlanCapacitacionAnualTentativo
             try
             {
                 WDatos.Rows.Clear();
+                dgvGrilla.Rows.Clear();
                 using (SqlConnection conn = new SqlConnection())
                 {
                     conn.ConnectionString = ConfigurationManager.ConnectionStrings["Surfactan"].ConnectionString;

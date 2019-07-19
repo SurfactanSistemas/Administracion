@@ -352,7 +352,7 @@ Public Class IngresoRemitoVario
             frm.Formula = "{RemitosVarios.Remito}='" & WRemito & "'"
 
             'frm.Mostrar()
-            frm.Imprimir()
+            frm.Imprimir(2)
 
             'If MsgBox("¿Desea imprimir el remito?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
 

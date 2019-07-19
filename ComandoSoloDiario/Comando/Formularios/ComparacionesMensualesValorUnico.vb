@@ -10,6 +10,14 @@ Public Class ComparacionesMensualesValorUnico
         gbLineasPellital.Visible = Globales.EmpresaActual = 1
 
         _Limpiar()
+
+        With Me
+            '.Height = Configuration.ConfigurationManager.AppSettings("H")
+            .Left = Configuration.ConfigurationManager.AppSettings("L")
+            .Top = Configuration.ConfigurationManager.AppSettings("T")
+            '.Width = Configuration.ConfigurationManager.AppSettings("W")
+        End With
+
     End Sub
 
     Private Sub _Limpiar()
@@ -1841,7 +1849,7 @@ Public Class ComparacionesMensualesValorUnico
 
         If rbDiaria.Checked Then
             _ProcesarComparacionDiaria()
-            Exit Sub
+            Close()
         End If
 
         '
@@ -1915,12 +1923,13 @@ Public Class ComparacionesMensualesValorUnico
                 .Tipo = 5
             End If
 
-            .WindowState = FormWindowState.Maximized
             .Show()
 
             ._ProcesarGrafico()
 
         End With
+
+        Close()
 
     End Sub
 

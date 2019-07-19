@@ -3,14 +3,21 @@ Imports System.Data.SqlClient
 
 Public Class AplicacionComprobantes
 
-    Dim proveedorActual As String 'Lo uso para insertar y actualizar
+    Sub New(Optional ByVal Proveedor As String = "")
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+
+        txtProveedor.Text = Proveedor
+
+    End Sub
 
     Private Sub mostrarProveedor(ByVal proveedor As Proveedor)
         If IsNothing(proveedor) Then : Exit Sub : End If
         txtProveedor.Text = proveedor.id
         txtRazon.Text = proveedor.razonSocial
-        ' Uso la variable global ya que sin querer pueden llegar a haber cambiado el texto y romperia todo
-        proveedorActual = txtProveedor.Text
         _Proceso()
         Me.Height = 501
     End Sub
@@ -73,6 +80,9 @@ Public Class AplicacionComprobantes
         gridFormasBuilder.addFloatColumn(7, "Aplica", True)
 
         Proceso._PurgarSaldosCtaCtePrvs()
+
+        If txtProveedor.Text.Trim() <> "" Then _Proceso()
+
     End Sub
 
     Private Sub _Proceso()

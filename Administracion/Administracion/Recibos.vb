@@ -3649,7 +3649,7 @@ Public Class Recibos
                                     Dolares = Dolares + Val(Vector(Ciclo, 9))
                                 Case 5
                                     Compe = Compe + Val(Vector(Ciclo, 9))
-                                Case 21, 22, 25
+                                Case 21, 22, 25, 26
                                     Transfe = Transfe + Val(Vector(Ciclo, 9))
                                 Case 91
                                     Ajuste = Ajuste + Val(Vector(Ciclo, 9))
@@ -4792,7 +4792,7 @@ Public Class Recibos
                                     Dolares = Dolares + Val(Vector(Ciclo, 9))
                                 Case 5
                                     Compe = Compe + Val(Vector(Ciclo, 9))
-                                Case 21, 22, 25
+                                Case 21, 22, 25, 26
                                     Transfe = Transfe + Val(Vector(Ciclo, 9))
                                 Case 91
                                     Ajuste = Ajuste + Val(Vector(Ciclo, 9))

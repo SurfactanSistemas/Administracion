@@ -23,33 +23,19 @@ Partial Class AplicacionComprobantes
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.dtgCuentas = New System.Windows.Forms.DataGridView()
-        Me.CustomLabel3 = New Administracion.CustomLabel()
-        Me.txtProveedor = New Administracion.CustomTextBox()
-        Me.txtSaldo = New Administracion.CustomTextBox()
-        Me.txtRazon = New Administracion.CustomTextBox()
-        Me.CustomLabel2 = New Administracion.CustomLabel()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.btnCancela = New Administracion.CustomButton()
-        Me.btnGraba = New Administracion.CustomButton()
-        Me.btnConsulta = New Administracion.CustomButton()
-        Me.btnProceso = New Administracion.CustomButton()
-        Me.btnLimpiar = New Administracion.CustomButton()
-        Me.txtAyuda = New Administracion.CustomTextBox()
-        Me.lstAyuda = New Administracion.CustomListBox()
-        Me.lstFiltrada = New Administracion.CustomListBox()
         Me.Tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Letra = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Punto = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -59,6 +45,20 @@ Partial Class AplicacionComprobantes
         Me.Saldo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Aplica = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.WTipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.lstFiltrada = New Administracion.CustomListBox()
+        Me.txtAyuda = New Administracion.CustomTextBox()
+        Me.CustomLabel3 = New Administracion.CustomLabel()
+        Me.txtProveedor = New Administracion.CustomTextBox()
+        Me.txtSaldo = New Administracion.CustomTextBox()
+        Me.txtRazon = New Administracion.CustomTextBox()
+        Me.CustomLabel2 = New Administracion.CustomLabel()
+        Me.lstAyuda = New Administracion.CustomListBox()
+        Me.btnCancela = New Administracion.CustomButton()
+        Me.btnLimpiar = New Administracion.CustomButton()
+        Me.btnGraba = New Administracion.CustomButton()
+        Me.btnProceso = New Administracion.CustomButton()
+        Me.btnConsulta = New Administracion.CustomButton()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.dtgCuentas, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -114,14 +114,119 @@ Partial Class AplicacionComprobantes
         '
         Me.dtgCuentas.AllowUserToAddRows = False
         Me.dtgCuentas.AllowUserToDeleteRows = False
+        Me.dtgCuentas.AllowUserToOrderColumns = True
+        Me.dtgCuentas.AllowUserToResizeColumns = False
+        Me.dtgCuentas.AllowUserToResizeRows = False
         Me.dtgCuentas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dtgCuentas.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Tipo, Me.Letra, Me.Punto, Me.Numero, Me.Fecha, Me.Importe, Me.Saldo, Me.Aplica, Me.WTipo})
         Me.dtgCuentas.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.dtgCuentas.Location = New System.Drawing.Point(16, 51)
         Me.dtgCuentas.Name = "dtgCuentas"
+        Me.dtgCuentas.RowHeadersWidth = 15
+        Me.dtgCuentas.RowTemplate.Height = 18
+        Me.dtgCuentas.ShowCellToolTips = False
         Me.dtgCuentas.Size = New System.Drawing.Size(704, 272)
         Me.dtgCuentas.StandardTab = True
         Me.dtgCuentas.TabIndex = 36
+        '
+        'Tipo
+        '
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Tipo.DefaultCellStyle = DataGridViewCellStyle9
+        Me.Tipo.HeaderText = "Tipo"
+        Me.Tipo.Name = "Tipo"
+        Me.Tipo.ReadOnly = True
+        Me.Tipo.Width = 50
+        '
+        'Letra
+        '
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        Me.Letra.DefaultCellStyle = DataGridViewCellStyle10
+        Me.Letra.HeaderText = "Letra"
+        Me.Letra.Name = "Letra"
+        Me.Letra.ReadOnly = True
+        Me.Letra.Width = 50
+        '
+        'Punto
+        '
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        Me.Punto.DefaultCellStyle = DataGridViewCellStyle11
+        Me.Punto.HeaderText = "Punto"
+        Me.Punto.Name = "Punto"
+        Me.Punto.ReadOnly = True
+        Me.Punto.Width = 50
+        '
+        'Numero
+        '
+        Me.Numero.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        Me.Numero.DefaultCellStyle = DataGridViewCellStyle12
+        Me.Numero.HeaderText = "Numero"
+        Me.Numero.Name = "Numero"
+        Me.Numero.ReadOnly = True
+        '
+        'Fecha
+        '
+        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle13
+        Me.Fecha.HeaderText = "Fecha"
+        Me.Fecha.Name = "Fecha"
+        Me.Fecha.ReadOnly = True
+        '
+        'Importe
+        '
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        Me.Importe.DefaultCellStyle = DataGridViewCellStyle14
+        Me.Importe.HeaderText = "Importe"
+        Me.Importe.Name = "Importe"
+        Me.Importe.ReadOnly = True
+        '
+        'Saldo
+        '
+        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        Me.Saldo.DefaultCellStyle = DataGridViewCellStyle15
+        Me.Saldo.HeaderText = "Saldo"
+        Me.Saldo.Name = "Saldo"
+        Me.Saldo.ReadOnly = True
+        '
+        'Aplica
+        '
+        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        Me.Aplica.DefaultCellStyle = DataGridViewCellStyle16
+        Me.Aplica.HeaderText = "Aplica"
+        Me.Aplica.Name = "Aplica"
+        '
+        'WTipo
+        '
+        Me.WTipo.HeaderText = "WTipo"
+        Me.WTipo.Name = "WTipo"
+        Me.WTipo.ReadOnly = True
+        Me.WTipo.Visible = False
+        '
+        'lstFiltrada
+        '
+        Me.lstFiltrada.Cleanable = False
+        Me.lstFiltrada.EnterIndex = -1
+        Me.lstFiltrada.FormattingEnabled = True
+        Me.lstFiltrada.LabelAssociationKey = -1
+        Me.lstFiltrada.Location = New System.Drawing.Point(18, 503)
+        Me.lstFiltrada.Name = "lstFiltrada"
+        Me.lstFiltrada.Size = New System.Drawing.Size(694, 82)
+        Me.lstFiltrada.TabIndex = 40
+        Me.lstFiltrada.Visible = False
+        '
+        'txtAyuda
+        '
+        Me.txtAyuda.Cleanable = False
+        Me.txtAyuda.Empty = True
+        Me.txtAyuda.EnterIndex = -1
+        Me.txtAyuda.LabelAssociationKey = -1
+        Me.txtAyuda.Location = New System.Drawing.Point(18, 476)
+        Me.txtAyuda.Name = "txtAyuda"
+        Me.txtAyuda.Size = New System.Drawing.Size(694, 20)
+        Me.txtAyuda.TabIndex = 36
+        Me.txtAyuda.Validator = Administracion.ValidatorType.None
+        Me.txtAyuda.Visible = False
         '
         'CustomLabel3
         '
@@ -189,6 +294,18 @@ Partial Class AplicacionComprobantes
         Me.CustomLabel2.TabIndex = 35
         Me.CustomLabel2.Text = "Saldo"
         '
+        'lstAyuda
+        '
+        Me.lstAyuda.Cleanable = False
+        Me.lstAyuda.EnterIndex = -1
+        Me.lstAyuda.FormattingEnabled = True
+        Me.lstAyuda.LabelAssociationKey = -1
+        Me.lstAyuda.Location = New System.Drawing.Point(18, 503)
+        Me.lstAyuda.Name = "lstAyuda"
+        Me.lstAyuda.Size = New System.Drawing.Size(694, 82)
+        Me.lstAyuda.TabIndex = 37
+        Me.lstAyuda.Visible = False
+        '
         'btnCancela
         '
         Me.btnCancela.BackgroundImage = Global.Administracion.My.Resources.Resources.Salir2
@@ -209,69 +326,6 @@ Partial Class AplicacionComprobantes
         Me.btnCancela.TabIndex = 3
         Me.ToolTip1.SetToolTip(Me.btnCancela, "Cancelar y Salir")
         Me.btnCancela.UseVisualStyleBackColor = True
-        '
-        'btnGraba
-        '
-        Me.btnGraba.BackgroundImage = Global.Administracion.My.Resources.Resources.Aceptar_N2
-        Me.btnGraba.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnGraba.Cleanable = False
-        Me.btnGraba.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnGraba.EnterIndex = -1
-        Me.btnGraba.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnGraba.FlatAppearance.BorderSize = 0
-        Me.btnGraba.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnGraba.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnGraba.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnGraba.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnGraba.LabelAssociationKey = -1
-        Me.btnGraba.Location = New System.Drawing.Point(124, 399)
-        Me.btnGraba.Name = "btnGraba"
-        Me.btnGraba.Size = New System.Drawing.Size(103, 54)
-        Me.btnGraba.TabIndex = 2
-        Me.ToolTip1.SetToolTip(Me.btnGraba, "Grabar")
-        Me.btnGraba.UseVisualStyleBackColor = True
-        '
-        'btnConsulta
-        '
-        Me.btnConsulta.BackgroundImage = Global.Administracion.My.Resources.Resources.Consulta_Dat_N1
-        Me.btnConsulta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnConsulta.Cleanable = False
-        Me.btnConsulta.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnConsulta.EnterIndex = -1
-        Me.btnConsulta.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnConsulta.FlatAppearance.BorderSize = 0
-        Me.btnConsulta.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnConsulta.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnConsulta.LabelAssociationKey = -1
-        Me.btnConsulta.Location = New System.Drawing.Point(378, 399)
-        Me.btnConsulta.Name = "btnConsulta"
-        Me.btnConsulta.Size = New System.Drawing.Size(103, 54)
-        Me.btnConsulta.TabIndex = 0
-        Me.ToolTip1.SetToolTip(Me.btnConsulta, "Consulta")
-        Me.btnConsulta.UseVisualStyleBackColor = True
-        '
-        'btnProceso
-        '
-        Me.btnProceso.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnProceso.Cleanable = False
-        Me.btnProceso.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnProceso.EnterIndex = -1
-        Me.btnProceso.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnProceso.FlatAppearance.BorderSize = 0
-        Me.btnProceso.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnProceso.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnProceso.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnProceso.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnProceso.LabelAssociationKey = -1
-        Me.btnProceso.Location = New System.Drawing.Point(704, 433)
-        Me.btnProceso.Name = "btnProceso"
-        Me.btnProceso.Size = New System.Drawing.Size(30, 31)
-        Me.btnProceso.TabIndex = 1
-        Me.ToolTip1.SetToolTip(Me.btnProceso, "Proceso")
-        Me.btnProceso.UseVisualStyleBackColor = True
-        Me.btnProceso.Visible = False
         '
         'btnLimpiar
         '
@@ -294,116 +348,68 @@ Partial Class AplicacionComprobantes
         Me.ToolTip1.SetToolTip(Me.btnLimpiar, "Limpiar Pantalla de Formulario")
         Me.btnLimpiar.UseVisualStyleBackColor = True
         '
-        'txtAyuda
+        'btnGraba
         '
-        Me.txtAyuda.Cleanable = False
-        Me.txtAyuda.Empty = True
-        Me.txtAyuda.EnterIndex = -1
-        Me.txtAyuda.LabelAssociationKey = -1
-        Me.txtAyuda.Location = New System.Drawing.Point(18, 476)
-        Me.txtAyuda.Name = "txtAyuda"
-        Me.txtAyuda.Size = New System.Drawing.Size(694, 20)
-        Me.txtAyuda.TabIndex = 36
-        Me.txtAyuda.Validator = Administracion.ValidatorType.None
-        Me.txtAyuda.Visible = False
+        Me.btnGraba.BackgroundImage = Global.Administracion.My.Resources.Resources.Aceptar_N2
+        Me.btnGraba.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnGraba.Cleanable = False
+        Me.btnGraba.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnGraba.EnterIndex = -1
+        Me.btnGraba.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnGraba.FlatAppearance.BorderSize = 0
+        Me.btnGraba.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnGraba.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnGraba.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnGraba.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnGraba.LabelAssociationKey = -1
+        Me.btnGraba.Location = New System.Drawing.Point(124, 399)
+        Me.btnGraba.Name = "btnGraba"
+        Me.btnGraba.Size = New System.Drawing.Size(103, 54)
+        Me.btnGraba.TabIndex = 2
+        Me.ToolTip1.SetToolTip(Me.btnGraba, "Grabar")
+        Me.btnGraba.UseVisualStyleBackColor = True
         '
-        'lstAyuda
+        'btnProceso
         '
-        Me.lstAyuda.Cleanable = False
-        Me.lstAyuda.EnterIndex = -1
-        Me.lstAyuda.FormattingEnabled = True
-        Me.lstAyuda.LabelAssociationKey = -1
-        Me.lstAyuda.Location = New System.Drawing.Point(18, 503)
-        Me.lstAyuda.Name = "lstAyuda"
-        Me.lstAyuda.Size = New System.Drawing.Size(694, 82)
-        Me.lstAyuda.TabIndex = 37
-        Me.lstAyuda.Visible = False
+        Me.btnProceso.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnProceso.Cleanable = False
+        Me.btnProceso.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnProceso.EnterIndex = -1
+        Me.btnProceso.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnProceso.FlatAppearance.BorderSize = 0
+        Me.btnProceso.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnProceso.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnProceso.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnProceso.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnProceso.LabelAssociationKey = -1
+        Me.btnProceso.Location = New System.Drawing.Point(704, 433)
+        Me.btnProceso.Name = "btnProceso"
+        Me.btnProceso.Size = New System.Drawing.Size(30, 31)
+        Me.btnProceso.TabIndex = 1
+        Me.ToolTip1.SetToolTip(Me.btnProceso, "Proceso")
+        Me.btnProceso.UseVisualStyleBackColor = True
+        Me.btnProceso.Visible = False
         '
-        'lstFiltrada
+        'btnConsulta
         '
-        Me.lstFiltrada.Cleanable = False
-        Me.lstFiltrada.EnterIndex = -1
-        Me.lstFiltrada.FormattingEnabled = True
-        Me.lstFiltrada.LabelAssociationKey = -1
-        Me.lstFiltrada.Location = New System.Drawing.Point(18, 503)
-        Me.lstFiltrada.Name = "lstFiltrada"
-        Me.lstFiltrada.Size = New System.Drawing.Size(694, 82)
-        Me.lstFiltrada.TabIndex = 40
-        Me.lstFiltrada.Visible = False
-        '
-        'Tipo
-        '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Tipo.DefaultCellStyle = DataGridViewCellStyle1
-        Me.Tipo.HeaderText = "Tipo"
-        Me.Tipo.Name = "Tipo"
-        Me.Tipo.ReadOnly = True
-        Me.Tipo.Width = 50
-        '
-        'Letra
-        '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        Me.Letra.DefaultCellStyle = DataGridViewCellStyle2
-        Me.Letra.HeaderText = "Letra"
-        Me.Letra.Name = "Letra"
-        Me.Letra.ReadOnly = True
-        Me.Letra.Width = 50
-        '
-        'Punto
-        '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        Me.Punto.DefaultCellStyle = DataGridViewCellStyle3
-        Me.Punto.HeaderText = "Punto"
-        Me.Punto.Name = "Punto"
-        Me.Punto.ReadOnly = True
-        Me.Punto.Width = 50
-        '
-        'Numero
-        '
-        Me.Numero.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        Me.Numero.DefaultCellStyle = DataGridViewCellStyle4
-        Me.Numero.HeaderText = "Numero"
-        Me.Numero.Name = "Numero"
-        Me.Numero.ReadOnly = True
-        '
-        'Fecha
-        '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle5
-        Me.Fecha.HeaderText = "Fecha"
-        Me.Fecha.Name = "Fecha"
-        Me.Fecha.ReadOnly = True
-        '
-        'Importe
-        '
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        Me.Importe.DefaultCellStyle = DataGridViewCellStyle6
-        Me.Importe.HeaderText = "Importe"
-        Me.Importe.Name = "Importe"
-        Me.Importe.ReadOnly = True
-        '
-        'Saldo
-        '
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        Me.Saldo.DefaultCellStyle = DataGridViewCellStyle7
-        Me.Saldo.HeaderText = "Saldo"
-        Me.Saldo.Name = "Saldo"
-        Me.Saldo.ReadOnly = True
-        '
-        'Aplica
-        '
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        Me.Aplica.DefaultCellStyle = DataGridViewCellStyle8
-        Me.Aplica.HeaderText = "Aplica"
-        Me.Aplica.Name = "Aplica"
-        '
-        'WTipo
-        '
-        Me.WTipo.HeaderText = "WTipo"
-        Me.WTipo.Name = "WTipo"
-        Me.WTipo.ReadOnly = True
-        Me.WTipo.Visible = False
+        Me.btnConsulta.BackgroundImage = Global.Administracion.My.Resources.Resources.Consulta_Dat_N1
+        Me.btnConsulta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnConsulta.Cleanable = False
+        Me.btnConsulta.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnConsulta.EnterIndex = -1
+        Me.btnConsulta.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnConsulta.FlatAppearance.BorderSize = 0
+        Me.btnConsulta.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnConsulta.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnConsulta.LabelAssociationKey = -1
+        Me.btnConsulta.Location = New System.Drawing.Point(378, 399)
+        Me.btnConsulta.Name = "btnConsulta"
+        Me.btnConsulta.Size = New System.Drawing.Size(103, 54)
+        Me.btnConsulta.TabIndex = 0
+        Me.ToolTip1.SetToolTip(Me.btnConsulta, "Consulta")
+        Me.btnConsulta.UseVisualStyleBackColor = True
         '
         'AplicacionComprobantes
         '

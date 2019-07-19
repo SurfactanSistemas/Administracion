@@ -201,5 +201,10 @@ namespace Modulo_Capacitacion
         {
             _Abrir(new Listados.PlanCapacitacionAnualTentativo.Listado());
         }
+
+        private void listadoDeLegajosSinActualizarAFechaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _Abrir(new Listados.ListadoLegajosAActualizarAFecha.ListadoLegajosActualizarAFecha());
+        }
     }
 }

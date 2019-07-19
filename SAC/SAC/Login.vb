@@ -1,6 +1,7 @@
 ﻿Imports System.Configuration
 Imports System.IO
 Imports ConsultasVarias.Clases
+Imports CrystalDecisions.Shared
 Imports Conexion = ConsultasVarias.Clases.Conexion
 
 Public Class Login
@@ -84,6 +85,11 @@ Public Class Login
                         Dim WDirecciones As String = Environment.GetCommandLineArgs(3)
                         Dim WAsunto As String = Environment.GetCommandLineArgs(4)
                         Dim WCuerpoMsj As String = Environment.GetCommandLineArgs(5)
+                        Dim WEnviarAutomatico As Boolean = True
+
+                        If Environment.GetCommandLineArgs().Count() > 6 Then
+                            WEnviarAutomatico = Val(Environment.GetCommandLineArgs(6)) <> 1
+                        End If
 
                         Conexion.EmpresaDeTrabajo = "SurfactanSa"
 
@@ -105,7 +111,7 @@ Public Class Login
                         ConsultasVarias.Clases.Helper._ExportarReporte(frm, Enumeraciones.FormatoExportacion.PDF, WNumero & "Reclamo.pdf", "C:\TempReclamos\")
 
                         If File.Exists("C:\TempReclamos\" & WNumero & "Reclamo.pdf") Then
-                            ConsultasVarias.Clases.Helper._EnviarEmail(WDirecciones, WAsunto, WCuerpoMsj, {"C:\TempReclamos\" & WNumero & "Reclamo.pdf"}, True)
+                            ConsultasVarias.Clases.Helper._EnviarEmail(WDirecciones, WAsunto, WCuerpoMsj, {"C:\TempReclamos\" & WNumero & "Reclamo.pdf"}, WEnviarAutomatico)
                         Else
                             MsgBox("No se encontró el archivo " & "C:\TempReclamos\" & WNumero & "Reclamo.pdf")
                         End If
@@ -192,7 +198,7 @@ Public Class Login
 
                             WNombreArchivo &= ".pdf"
 
-                            WDirecciones = "ebiglieri@surfactan.com.ar; calidad@surfactan.com.ar; wbarosio@surfactan.com.ar; calidad2@surfactan.com.ar; isocalidad@surfactan.com.ar;juanfs@surfactan.com.ar; lsantos@surfactan.com.ar; drodriguez@surfactan.com.ar; iburgos@surfactan.com.ar; ctomaszek@surfactan.com.ar; mlaura@surfactan.com.ar; mescames@surfactan.com.ar; supcc@surfactan.com.ar; svarela@surfactan.com.ar; textil@surfactan.com.ar; hfondevielle@surfactan.com.ar; hsuarez@surfactan.com.ar;"
+                            WDirecciones = "ebiglieri@surfactan.com.ar; calidad@surfactan.com.ar; wbarosio@surfactan.com.ar; calidad2@surfactan.com.ar; isocalidad@surfactan.com.ar;juanfs@surfactan.com.ar; lsantos@surfactan.com.ar; drodriguez@surfactan.com.ar; iburgos@surfactan.com.ar; ctomaszek@surfactan.com.ar; mlaura@surfactan.com.ar; mescames@surfactan.com.ar; supcc@surfactan.com.ar; svarela@surfactan.com.ar; textil@surfactan.com.ar; hfondeville@surfactan.com.ar; hsuarez@surfactan.com.ar;"
 
                             If Directory.Exists(WRuta) Then Directory.Delete(WRuta, True)
 
@@ -243,6 +249,43 @@ Public Class Login
 
                         End If
 
+                    Case 5
+
+                        Dim WNumero As String = Environment.GetCommandLineArgs(2)
+                        Dim WNumeroTipo As String = ""
+                        Dim WAnio As String = ""
+
+                        Conexion.EmpresaDeTrabajo = "SurfactanSa"
+
+                        Dim WRecl As DataRow = GetSingle("SELECT NumeroTipo, Ano = RIGHT(ISNULL(Fecha, '00/00/0000'), 4) FROM CentroReclamos WHERE numero = '" & WNumero & "'")
+
+                        If WRecl IsNot Nothing Then
+                            WNumeroTipo = OrDefault(WRecl.Item("NumeroTipo"), "")
+                            WAnio = OrDefault(WRecl.Item("Ano"), "")
+                        End If
+
+                        Dim frm As New ConsultasVarias.VistaPrevia
+
+                        With frm
+
+                            .Reporte = New ReclamoClienteAvisoMail
+
+                            .Formula = "{CentroReclamos.Numero} = " & WNumero & ""
+
+                            .Exportar(String.Format("Reclamo de Cliente Nro: {0}-{1} - {2}.pdf", WNumeroTipo, WAnio, Date.Now.ToString("dd-MM-yyyy")), ExportFormatType.PortableDocFormat, "")
+
+                        End With
+
+                        '
+                        ' De aca, van a venir los mails de los responsables. Agregamos las que faltan.
+                        '
+                        'ConsultasVarias.Clases.Helper._ExportarReporte(frm, Enumeraciones.FormatoExportacion.PDF, WNumero & "Reclamo.pdf", "C:\TempReclamos\")
+
+                        'If File.Exists("C:\TempReclamos\" & WNumero & "Reclamo.pdf") Then
+                        ' ConsultasVarias.Clases.Helper._EnviarEmail(WDirecciones, WAsunto, WCuerpoMsj, {"C:\TempReclamos\" & WNumero & "Reclamo.pdf"}, True)
+                        ' Else
+                        ' MsgBox("No se encontró el archivo " & "C:\TempReclamos\" & WNumero & "Reclamo.pdf")
+                        ' End If
                 End Select
 
                 btnCancel_Click(Nothing, Nothing)
@@ -281,7 +324,7 @@ Public Class Login
                     If Not WDirecciones.Contains(d) Then WDirecciones &= d & ";"
                 Next
             Case "CO"
-                For Each d As String In {"hfondevielle@surfactan.com.ar", "textil@surfactan.com.ar", "hsuarez@surfactan.com.ar"}
+                For Each d As String In {"hfondeville@surfactan.com.ar", "textil@surfactan.com.ar", "hsuarez@surfactan.com.ar"}
                     If Not WDirecciones.Contains(d) Then WDirecciones &= d & ";"
                 Next
             Case "FA"

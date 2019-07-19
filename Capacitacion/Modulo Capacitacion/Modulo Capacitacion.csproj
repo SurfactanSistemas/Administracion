@@ -195,6 +195,18 @@
       <DesignTime>True</DesignTime>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Listados\ListadoLegajosAActualizarAFecha\ListadoLegajosActualizarAFecha.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\ListadoLegajosAActualizarAFecha\ListadoLegajosActualizarAFecha.Designer.cs">
+      <DependentUpon>ListadoLegajosActualizarAFecha.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\ListadoLegajosAActualizarAFecha\ReporteListadoLegajosAActualizarAFecha.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteListadoLegajosAActualizarAFecha.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Listados\PlanCapacitacionAnualTentativo\AsignarCursos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -212,6 +224,12 @@
     </Compile>
     <Compile Include="Listados\PlanCapacitacionAnualTentativo\Listado.Designer.cs">
       <DependentUpon>Listado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\PlanCapacitacionAnualTentativo\ListadoCursosIncluidos.cs">
+      <DependentUpon>ListadoCursosIncluidos.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Listados\PlanCapacitacionAnualTentativo\ListadoPersonalCapacitacionAnualTentativo.cs">
       <AutoGen>True</AutoGen>
@@ -851,6 +869,13 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteInformeHorasRealizadasyProgramadasPorCurso.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Listados\ListadoLegajosAActualizarAFecha\ListadoLegajosActualizarAFecha.resx">
+      <DependentUpon>ListadoLegajosActualizarAFecha.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\ListadoLegajosAActualizarAFecha\ReporteListadoLegajosAActualizarAFecha.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteListadoLegajosAActualizarAFecha.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Listados\PlanCapacitacionAnualTentativo\AsignarCursos.resx">
       <DependentUpon>AsignarCursos.cs</DependentUpon>
     </EmbeddedResource>
@@ -859,6 +884,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\PlanCapacitacionAnualTentativo\Listado.resx">
       <DependentUpon>Listado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\PlanCapacitacionAnualTentativo\ListadoCursosIncluidos.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ListadoCursosIncluidos.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\PlanCapacitacionAnualTentativo\ListadoPersonalCapacitacionAnualTentativo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

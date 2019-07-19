@@ -73,12 +73,13 @@ namespace Modulo_Capacitacion
             this.planillaDeCapacitaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cronogramaPorSectorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cronogramaPorTemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listadoDeCronogramaTentativoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.procesosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.listadoDeCronogramaTentativoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listadoDeLegajosSinActualizarAFechaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -349,7 +350,8 @@ namespace Modulo_Capacitacion
             this.análisisToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.temasNoRçealizadosToolStripMenuItem,
             this.resumenDeCursosRealizadosToolStripMenuItem,
-            this.promedioDeCalificaciónDeCapacitaciónToolStripMenuItem});
+            this.promedioDeCalificaciónDeCapacitaciónToolStripMenuItem,
+            this.listadoDeLegajosSinActualizarAFechaToolStripMenuItem});
             this.análisisToolStripMenuItem.Name = "análisisToolStripMenuItem";
             this.análisisToolStripMenuItem.Size = new System.Drawing.Size(316, 22);
             this.análisisToolStripMenuItem.Text = "Análisis";
@@ -407,6 +409,13 @@ namespace Modulo_Capacitacion
             this.cronogramaPorTemaToolStripMenuItem.Text = "Cronograma por Tema";
             this.cronogramaPorTemaToolStripMenuItem.Click += new System.EventHandler(this.cronogramaPorTemaToolStripMenuItem_Click);
             // 
+            // listadoDeCronogramaTentativoToolStripMenuItem
+            // 
+            this.listadoDeCronogramaTentativoToolStripMenuItem.Name = "listadoDeCronogramaTentativoToolStripMenuItem";
+            this.listadoDeCronogramaTentativoToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
+            this.listadoDeCronogramaTentativoToolStripMenuItem.Text = "Listado de Cronograma Tentativo";
+            this.listadoDeCronogramaTentativoToolStripMenuItem.Click += new System.EventHandler(this.listadoDeCronogramaTentativoToolStripMenuItem_Click);
+            // 
             // procesosToolStripMenuItem
             // 
             this.procesosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -458,12 +467,12 @@ namespace Modulo_Capacitacion
             this.tableLayoutPanel1.Size = new System.Drawing.Size(784, 538);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
-            // listadoDeCronogramaTentativoToolStripMenuItem
+            // listadoDeLegajosSinActualizarAFechaToolStripMenuItem
             // 
-            this.listadoDeCronogramaTentativoToolStripMenuItem.Name = "listadoDeCronogramaTentativoToolStripMenuItem";
-            this.listadoDeCronogramaTentativoToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
-            this.listadoDeCronogramaTentativoToolStripMenuItem.Text = "Listado de Cronograma Tentativo";
-            this.listadoDeCronogramaTentativoToolStripMenuItem.Click += new System.EventHandler(this.listadoDeCronogramaTentativoToolStripMenuItem_Click);
+            this.listadoDeLegajosSinActualizarAFechaToolStripMenuItem.Name = "listadoDeLegajosSinActualizarAFechaToolStripMenuItem";
+            this.listadoDeLegajosSinActualizarAFechaToolStripMenuItem.Size = new System.Drawing.Size(312, 22);
+            this.listadoDeLegajosSinActualizarAFechaToolStripMenuItem.Text = "Listado de Legajos sin Actualizar a Fecha";
+            this.listadoDeLegajosSinActualizarAFechaToolStripMenuItem.Click += new System.EventHandler(this.listadoDeLegajosSinActualizarAFechaToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -531,6 +540,7 @@ namespace Modulo_Capacitacion
         private ToolStripMenuItem temasNoRçealizadosToolStripMenuItem;
         private ToolStripMenuItem promedioDeCalificaciónDeCapacitaciónToolStripMenuItem;
         private ToolStripMenuItem listadoDeCronogramaTentativoToolStripMenuItem;
+        private ToolStripMenuItem listadoDeLegajosSinActualizarAFechaToolStripMenuItem;
     }
 }
 

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using CrystalDecisions.CrystalReports.Engine;
+using Modulo_Capacitacion.Listados.Cursos;
 
 namespace Modulo_Capacitacion.Listados.PlanCapacitacionAnualTentativo
 {
@@ -149,8 +150,11 @@ namespace Modulo_Capacitacion.Listados.PlanCapacitacionAnualTentativo
             DataTable WDatos = _CargarDatosPorAnio(txtAno.Text);
 
             ReportDocument rpt = null;
+            string WFormula = "";
 
             progressBar1.Value = 0;
+
+            if (WDatos.Rows.Count == 0) return;
 
             if (rbPlanilla.Checked)
             {
@@ -160,36 +164,32 @@ namespace Modulo_Capacitacion.Listados.PlanCapacitacionAnualTentativo
                 WDatosII.Columns.Add("DescCurso");
                 WDatosII.Columns.Add("Personas", typeof(int));
 
-                if (WDatos.Rows.Count > 0)
+                progressBar1.Maximum = WDatos.Rows.Count;
+
+                var WCursos = WDatos.DefaultView.ToTable(true, "Curso", "DescCurso");
+
+                foreach (DataRow WCurso in WCursos.Select("", "Curso ASC"))
                 {
-                    progressBar1.Maximum = WDatos.Rows.Count;
-
-                    var WCursos = WDatos.DefaultView.ToTable(true, "Curso", "DescCurso");
-
-                    foreach (DataRow WCurso in WCursos.Select("", "Curso ASC"))
+                    if (int.Parse(WCurso["Curso"].ToString()) > 0)
                     {
-                        if (int.Parse(WCurso["Curso"].ToString()) > 0)
-                        {
-                            DataRow r = WDatosII.NewRow();
+                        DataRow r = WDatosII.NewRow();
 
-                            var WPersonas = WDatos.Select("Curso = '" + WCurso["Curso"] + "'").ToArray().Count();
+                        var WPersonas = WDatos.Select("Curso = '" + WCurso["Curso"] + "'").ToArray().Count();
 
-                            r["Curso"] = WCurso["Curso"];
-                            r["DescCurso"] = WCurso["DescCurso"];
-                            r["Personas"] = WPersonas;
+                        r["Curso"] = WCurso["Curso"];
+                        r["DescCurso"] = WCurso["DescCurso"];
+                        r["Personas"] = WPersonas;
 
-                            WDatosII.Rows.Add(r);
-                        }
-
-                        progressBar1.Increment(1);
+                        WDatosII.Rows.Add(r);
                     }
 
+                    progressBar1.Increment(1);
                 }
 
                 rpt = new PlanCapacitacionAnualTentativo();
                 rpt.SetDataSource(WDatosII);
             }
-            else
+            else if (rbPorLegajo.Checked)
             {
                 DataTable WDatosII = new DBAuxi.ListadoTentativoDataTable();
                 int i = 0;
@@ -221,16 +221,40 @@ namespace Modulo_Capacitacion.Listados.PlanCapacitacionAnualTentativo
                 rpt = new ListadoPersonalCapacitacionAnualTentativo();
                 rpt.SetDataSource(WDatosII);
             }
+            else
+            {
+                progressBar1.Maximum = WDatos.Rows.Count;
+
+                string WFiltroCursos = "";
+
+                var WCursos = WDatos.DefaultView.ToTable(true, "Curso");
+
+                foreach (DataRow WCurso in WCursos.Select("", "Curso ASC"))
+                {
+                    if (int.Parse(WCurso["Curso"].ToString()) > 0)
+                    {
+                        WFiltroCursos += WCurso["Curso"] + ",";
+                    }
+
+                    progressBar1.Increment(1);
+                }
+
+                rpt = new ListadoCursosIncluidos();
+
+                if (WFiltroCursos.Trim() != "")
+                {
+                    WFiltroCursos = WFiltroCursos.Trim(',');
+
+                    WFormula = "{Tema.Curso} IN [" + WFiltroCursos + "] And {Tema.Curso} > 0";
+                }
+            }
 
             progressBar1.Value = 0;
 
-            if (rpt != null)
-            {
-                VistaPrevia frm = new VistaPrevia();
-                frm.CargarReporte(rpt);
+            VistaPrevia frm = new VistaPrevia();
+            frm.CargarReporte(rpt, WFormula);
 
-                frm.Show(this);
-            }
+            frm.Show(this);
         }
 
         private void Listado_Shown(object sender, EventArgs e)

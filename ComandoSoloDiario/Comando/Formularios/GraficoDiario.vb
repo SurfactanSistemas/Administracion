@@ -404,7 +404,7 @@ Public Class GraficoDiario
         ComparacionesMensualesValorUnico._RegraficarConsolidado(DataGridView1.Rows(rowIndex).Cells("DescTipo").Value, True)
     End Sub
 
-    Private Sub Button4_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button4.Click
+    Private Sub Button4_Click(ByVal sender As Object, ByVal e As EventArgs)
 
         For Each serie As Series In Chart1.Series
 
@@ -481,7 +481,7 @@ Public Class GraficoDiario
 
     End Sub
 
-    Private Sub Button3_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button3.Click
+    Private Sub Button3_Click(ByVal sender As Object, ByVal e As EventArgs)
 
         For Each serie As Series In Chart1.Series
 
@@ -501,7 +501,7 @@ Public Class GraficoDiario
 
     End Sub
 
-    Private Sub Button2_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button2.Click
+    Private Sub Button2_Click(ByVal sender As Object, ByVal e As EventArgs)
 
         For Each serie As Series In Chart1.Series
 
@@ -601,4 +601,11 @@ Public Class GraficoDiario
 
     End Sub
 
+    Private Sub Button2_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+        With New ComparacionesMensualesValorUnico
+            .Show()
+            .rbDiaria.Checked = True
+        End With
+        Close()
+    End Sub
 End Class

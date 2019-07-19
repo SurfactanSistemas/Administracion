@@ -34,6 +34,13 @@ Public Class Grafico
             WColorBasico = DataGridView1.Rows(0).DefaultCellStyle.BackColor
         End If
 
+        With Me
+            .Height = Configuration.ConfigurationManager.AppSettings("H")
+            .Left = Configuration.ConfigurationManager.AppSettings("L")
+            .Top = Configuration.ConfigurationManager.AppSettings("T")
+            .Width = Configuration.ConfigurationManager.AppSettings("W")
+        End With
+
     End Sub
 
     Public Sub _ProcesarGrafico()
@@ -769,11 +776,14 @@ Public Class Grafico
 
     Private Sub Button1_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button1.Click
 
-        With ComparacionesMensualesValorUnico
-            .WindowState = FormWindowState.Normal
-            .Focus()
-            .txtMesDesde.Focus()
+        ComparacionesMensualesValorUnico.Dispose()
+
+        With New ComparacionesMensualesValorUnico
+            .Show()
+            .rbMensualComparativo.Checked = True
         End With
+
+        Close()
 
     End Sub
 
@@ -1043,7 +1053,7 @@ Public Class Grafico
         End If
     End Sub
 
-    Private Sub Button4_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button4.Click
+    Private Sub Button4_Click(ByVal sender As Object, ByVal e As EventArgs)
 
         For Each serie As Series In Chart1.Series
 
@@ -1115,7 +1125,7 @@ Public Class Grafico
 
     End Sub
 
-    Private Sub Button3_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button3.Click
+    Private Sub Button3_Click(ByVal sender As Object, ByVal e As EventArgs)
 
         For Each serie As Series In Chart1.Series
 
@@ -1135,7 +1145,7 @@ Public Class Grafico
 
     End Sub
 
-    Private Sub Button2_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button2.Click
+    Private Sub Button2_Click(ByVal sender As Object, ByVal e As EventArgs)
 
         For Each serie As Series In Chart1.Series
 
@@ -1286,5 +1296,9 @@ Public Class Grafico
 
         _RedibujarDatos(e.RowIndex)
 
+    End Sub
+
+    Private Sub Button2_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+        Close()
     End Sub
 End Class

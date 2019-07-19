@@ -1,10 +1,10 @@
 ﻿Public Class MenuPrincipal
-    Dim forms As New List(Of Form)
+    ReadOnly forms As New List(Of Form)
     Dim loginOpen As Boolean = False
 
     Private Sub abrir(ByVal form As Form)
         Try
-            Proceso._PurgarSaldosCtaCtePrvs()
+            _PurgarSaldosCtaCtePrvs()
         Catch ex As Exception
             '""
         End Try
@@ -19,7 +19,7 @@
         End If
     End Sub
 
-    Private Sub btnCambio_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCambio.Click
+    Private Sub btnCambio_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCambio.Click
         Dim msgResult = vbYes
         If forms.Any(Function(form) form.Visible) Then
             msgResult = MsgBox("¿Se cerrarán todos los formularios abiertos, está seguro que desea cambiar de empresa?", vbYesNo, "Cambiar de Empresa")
@@ -32,267 +32,242 @@
         End If
     End Sub
 
-    Private Sub IngresosDeCuentasContablesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles IngresosDeCuentasContablesToolStripMenuItem.Click
+    Private Sub IngresosDeCuentasContablesToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles IngresosDeCuentasContablesToolStripMenuItem.Click
         abrir(New CuentaContableABM)
     End Sub
 
-    Private Sub IngresoDeBancosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles IngresoDeBancosToolStripMenuItem.Click
+    Private Sub IngresoDeBancosToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles IngresoDeBancosToolStripMenuItem.Click
         abrir(New BancosABM)
     End Sub
 
-    Private Sub IngresoDeProveedoresToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles IngresoDeProveedoresToolStripMenuItem.Click
+    Private Sub IngresoDeProveedoresToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles IngresoDeProveedoresToolStripMenuItem.Click
         abrir(New ProveedoresABM)
     End Sub
 
-    Private Sub IngresoDeRubrosDeProveedoresToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles IngresoDeRubrosDeProveedoresToolStripMenuItem.Click
+    Private Sub IngresoDeRubrosDeProveedoresToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles IngresoDeRubrosDeProveedoresToolStripMenuItem.Click
         abrir(New RubrosProveedorABM)
     End Sub
 
-    Private Sub PruebaToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DepositosToolStripMenuItem.Click
+    Private Sub PruebaToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles DepositosToolStripMenuItem.Click
         abrir(New Depositos)
     End Sub
 
-    Private Sub SifereToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SifereToolStripMenuItem.Click
+    Private Sub SifereToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles SifereToolStripMenuItem.Click
         abrir(New ProcesoSifere)
     End Sub
 
-    Private Sub RetencionEsOpToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RetencionEsOpToolStripMenuItem.Click
+    Private Sub RetencionEsOpToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles RetencionEsOpToolStripMenuItem.Click
         abrir(New ProcesoRetencionesPagos)
     End Sub
 
-    Private Sub RetencionesRecibvosaToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RetencionesRecibvosaToolStripMenuItem.Click
+    Private Sub RetencionesRecibvosaToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles RetencionesRecibvosaToolStripMenuItem.Click
         abrir(New ProcesoReteRecibos)
     End Sub
 
-    Private Sub FinDelSistemaToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles FinDelSistemaToolStripMenuItem.Click
+    Private Sub FinDelSistemaToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles FinDelSistemaToolStripMenuItem.Click
         Close()
         End
     End Sub
 
-    Private Sub ToolStripMenuItem2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem2.Click
+    Private Sub ToolStripMenuItem2_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ToolStripMenuItem2.Click
         abrir(New ProcesoPercepciones)
     End Sub
 
-    Private Sub ToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem1.Click
+    Private Sub ToolStripMenuItem1_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ToolStripMenuItem1.Click
         abrir(New CierreMes)
     End Sub
 
-    Private Sub ToolStripMenuItem4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem4.Click
+    Private Sub ToolStripMenuItem4_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ToolStripMenuItem4.Click
         abrir(New DepuraCtaCte)
     End Sub
 
-    Private Sub ConsultaDeCuentaCorrientePorPantallaToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ConsultaDeCuentaCorrientePorPantallaToolStripMenuItem.Click
+    Private Sub ConsultaDeCuentaCorrientePorPantallaToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ConsultaDeCuentaCorrientePorPantallaToolStripMenuItem.Click
         abrir(New CuentaCorrientePantalla)
     End Sub
 
-    Private Sub SaldoDeCuentaCorrienteDeProveedoresToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SaldoDeCuentaCorrienteDeProveedoresToolStripMenuItem.Click
+    Private Sub SaldoDeCuentaCorrienteDeProveedoresToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles SaldoDeCuentaCorrienteDeProveedoresToolStripMenuItem.Click
         abrir(New ListadoSaldosCuentaCorrienteProveedores)
     End Sub
 
-    Private Sub ToolStripMenuItem8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem8.Click
+    Private Sub ToolStripMenuItem8_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ToolStripMenuItem8.Click
         abrir(New ListadoProyeccionCobros)
     End Sub
 
-    Private Sub IngresoDeNovedadesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles IngresoDeNovedadesToolStripMenuItem.Click
+    Private Sub IngresoDeNovedadesToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles IngresoDeNovedadesToolStripMenuItem.Click
         abrir(New Compras)
     End Sub
 
-    Private Sub MenuPrincipal_FormClosing(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
+    Private Sub MenuPrincipal_FormClosing(ByVal sender As Object, ByVal e As FormClosingEventArgs) Handles MyBase.FormClosing
         If Not loginOpen Then
             'End
         End If
     End Sub
 
-    Private Sub CuentaCorrienteDeProveedoresToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CuentaCorrienteDeProveedoresToolStripMenuItem.Click
+    Private Sub CuentaCorrienteDeProveedoresToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles CuentaCorrienteDeProveedoresToolStripMenuItem.Click
         abrir(New ListadoCuentaCorrienteProveedores)
     End Sub
 
-    Private Sub IngresoDePagosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles IngresoDePagosToolStripMenuItem.Click
+    Private Sub IngresoDePagosToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles IngresoDePagosToolStripMenuItem.Click
         abrir(New Pagos)
     End Sub
 
-    Private Sub ListadoDeValoresEnCarteraToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListadoDeValoresEnCarteraToolStripMenuItem.Click
+    Private Sub ListadoDeValoresEnCarteraToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ListadoDeValoresEnCarteraToolStripMenuItem.Click
 
     End Sub
 
-    Private Sub CargaDeInteresesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CargaDeInteresesToolStripMenuItem.Click
+    Private Sub CargaDeInteresesToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles CargaDeInteresesToolStripMenuItem.Click
         abrir(New CargaIntereses)
     End Sub
 
-    Private Sub ModificaciuonDeNterfesesYaCargadosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ModificaciuonDeNterfesesYaCargadosToolStripMenuItem.Click
+    Private Sub ModificaciuonDeNterfesesYaCargadosToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ModificaciuonDeNterfesesYaCargadosToolStripMenuItem.Click
         abrir(New ModificaIntereses)
     End Sub
 
-    Private Sub ListadoDeValoresEnCarteraToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListadoDeValoresEnCarteraToolStripMenuItem1.Click
+    Private Sub ListadoDeValoresEnCarteraToolStripMenuItem1_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ListadoDeValoresEnCarteraToolStripMenuItem1.Click
         abrir(New ListadoValoresEnCartera)
     End Sub
 
-    Private Sub ListadoDeValoresEnCarteraPorCuitToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListadoDeValoresEnCarteraPorCuitToolStripMenuItem.Click
+    Private Sub ListadoDeValoresEnCarteraPorCuitToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ListadoDeValoresEnCarteraPorCuitToolStripMenuItem.Click
         abrir(New ListadoValoresEnCarteraCuit)
     End Sub
 
-    Private Sub SdfsdToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SdfsdToolStripMenuItem.Click
+    Private Sub SdfsdToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles SdfsdToolStripMenuItem.Click
         abrir(New ListadoAsientoResumen)
     End Sub
 
 
-    Private Sub SubdiarioDeIvaComprasToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SubdiarioDeIvaComprasToolStripMenuItem.Click
+    Private Sub SubdiarioDeIvaComprasToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles SubdiarioDeIvaComprasToolStripMenuItem.Click
         abrir(New ListadoIvaCompras)
     End Sub
 
-    Private Sub ListadoDeImputacionesDeCajaYBancoToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListadoDeImputacionesDeCajaYBancoToolStripMenuItem.Click
+    Private Sub ListadoDeImputacionesDeCajaYBancoToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ListadoDeImputacionesDeCajaYBancoToolStripMenuItem.Click
         abrir(New ListadoImputacionesContable)
     End Sub
 
-    Private Sub LisyaToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LisyaToolStripMenuItem.Click
+    Private Sub LisyaToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles LisyaToolStripMenuItem.Click
         abrir(New ListadoDepositos)
     End Sub
 
 
-    Private Sub ListadoDeRecibosToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListadoDeRecibosToolStripMenuItem1.Click
+    Private Sub ListadoDeRecibosToolStripMenuItem1_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ListadoDeRecibosToolStripMenuItem1.Click
         abrir(New ListadoRecibos)
     End Sub
 
-    Private Sub ListadoDeOrdenesDePagoToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListadoDeOrdenesDePagoToolStripMenuItem1.Click
+    Private Sub ListadoDeOrdenesDePagoToolStripMenuItem1_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ListadoDeOrdenesDePagoToolStripMenuItem1.Click
         abrir(New ListadoPagos)
     End Sub
 
-    Private Sub ListadoDePagosPosdatadosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListadoDePagosPosdatadosToolStripMenuItem.Click
+    Private Sub ListadoDePagosPosdatadosToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ListadoDePagosPosdatadosToolStripMenuItem.Click
         abrir(New ListadoPagosPosdatados)
     End Sub
 
-    Private Sub MovmietosDeBancosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MovmietosDeBancosToolStripMenuItem.Click
+    Private Sub MovmietosDeBancosToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles MovmietosDeBancosToolStripMenuItem.Click
         abrir(New ListadoMovimientosBancos)
     End Sub
 
-    Private Sub ListadoDeChequesEmitidosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListadoDeChequesEmitidosToolStripMenuItem.Click
+    Private Sub ListadoDeChequesEmitidosToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ListadoDeChequesEmitidosToolStripMenuItem.Click
         abrir(New ListadoChequesEmitidos)
     End Sub
 
-    Private Sub ListadoDeCuentaCorrienteDeProveedoresAFechaToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListadoDeCuentaCorrienteDeProveedoresAFechaToolStripMenuItem.Click
+    Private Sub ListadoDeCuentaCorrienteDeProveedoresAFechaToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ListadoDeCuentaCorrienteDeProveedoresAFechaToolStripMenuItem.Click
         abrir(New ListadoCuentaCorrienteProveedoresFecha)
     End Sub
 
-    '    Private Sub ListadoDeDiferenciaDeCambioCobranzaToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-    '        abrir(New ListadoDiferenciaCambioCobranza)
-    '    End Sub
-
-    '    Private Sub ListadoDeDiferenciaDeCambioAcreditacionToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-    '        abrir(New ListadoDiferenciaCambioAcreditacion)
-    '    End Sub
-
-    '    Private Sub ListadoDeDiferencaiDeCambioDeFacturasDeExportacionToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-    '        abrir(New ListadoDiferenciaCambioExterior)
-    '    End Sub
-
-    Private Sub ListadoDeRetencionesDeIngresosBrutosPcToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListadoDeRetencionesDeIngresosBrutosPcToolStripMenuItem.Click
+    Private Sub ListadoDeRetencionesDeIngresosBrutosPcToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ListadoDeRetencionesDeIngresosBrutosPcToolStripMenuItem.Click
         abrir(New ListadoRetencionIB)
     End Sub
 
-    Private Sub ListadoDeRetencionesDeIngresosBrutosCiudadDeBuenosAiresToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListadoDeRetencionesDeIngresosBrutosCiudadDeBuenosAiresToolStripMenuItem1.Click
+    Private Sub ListadoDeRetencionesDeIngresosBrutosCiudadDeBuenosAiresToolStripMenuItem1_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ListadoDeRetencionesDeIngresosBrutosCiudadDeBuenosAiresToolStripMenuItem1.Click
         abrir(New ListadoRetencionIBCiudad)
     End Sub
 
-    Private Sub ListadoDeCuentasCorrientesDeProveedoresAnaliticosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListadoDeCuentasCorrientesDeProveedoresAnaliticosToolStripMenuItem.Click
+    Private Sub ListadoDeCuentasCorrientesDeProveedoresAnaliticosToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ListadoDeCuentasCorrientesDeProveedoresAnaliticosToolStripMenuItem.Click
         abrir(New ListadoCuentaCorrienteProveedoresAnalisitico)
     End Sub
 
-    Private Sub ListadoDeProyeccionDeCuentaCorrientesDeProveedoresAnaliticosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListadoDeProyeccionDeCuentaCorrientesDeProveedoresAnaliticosToolStripMenuItem.Click
+    Private Sub ListadoDeProyeccionDeCuentaCorrientesDeProveedoresAnaliticosToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ListadoDeProyeccionDeCuentaCorrientesDeProveedoresAnaliticosToolStripMenuItem.Click
         abrir(New ListadoProyeccionCobrosAnalitico)
     End Sub
 
-    '    Private Sub ListadoDeAgendaDeVencimientosDeLertasYDespachosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-    '        abrir(New ListadoAgenda)
-    '    End Sub
-
-    Private Sub ControlDeRecibosProvisoriosToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ControlDeRecibosProvisoriosToolStripMenuItem1.Click
+    Private Sub ControlDeRecibosProvisoriosToolStripMenuItem1_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ControlDeRecibosProvisoriosToolStripMenuItem1.Click
         abrir(New ListadoRecibosProvisorios)
     End Sub
 
-    Private Sub ListadoDeDeudaDePymeNacionToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListadoDeDeudaDePymeNacionToolStripMenuItem1.Click
+    Private Sub ListadoDeDeudaDePymeNacionToolStripMenuItem1_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ListadoDeDeudaDePymeNacionToolStripMenuItem1.Click
         abrir(New ListadoDeudaPyme)
     End Sub
 
-    '    Private Sub ListadoDeProyeccionDePagosDeImportacionesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-    '        abrir(New ListadoPagosImportaciones)
-    '    End Sub
-
-    Private Sub ConsultaDeChequesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ConsultaDeChequesToolStripMenuItem.Click
+    Private Sub ConsultaDeChequesToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ConsultaDeChequesToolStripMenuItem.Click
         abrir(New ConsultaCheque)
     End Sub
 
-    Private Sub CuantaCorrienteDeProveedoresSelectivoToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CuantaCorrienteDeProveedoresSelectivoToolStripMenuItem.Click
-        'abrir(New ListadoCuentaCorrienteProveedoresSelectivo)
+    Private Sub CuantaCorrienteDeProveedoresSelectivoToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles CuantaCorrienteDeProveedoresSelectivoToolStripMenuItem.Click
         abrir(New ListadoCuentaCorrienteProveedoresSelectivoPrueba)
     End Sub
 
-    Private Sub AplicacionDeCorpobantesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AplicacionDeCorpobantesToolStripMenuItem.Click
+    Private Sub AplicacionDeCorpobantesToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles AplicacionDeCorpobantesToolStripMenuItem.Click
         abrir(New AplicacionComprobantes)
     End Sub
 
-    Private Sub IngresoDeRecibosProvisoriosToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles IngresoDeRecibosProvisoriosToolStripMenuItem1.Click
+    Private Sub IngresoDeRecibosProvisoriosToolStripMenuItem1_Click(ByVal sender As Object, ByVal e As EventArgs) Handles IngresoDeRecibosProvisoriosToolStripMenuItem1.Click
         abrir(New RecibosProvisorios)
     End Sub
 
-    Private Sub IngresoDeRecibosToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles IngresoDeRecibosToolStripMenuItem1.Click
+    Private Sub IngresoDeRecibosToolStripMenuItem1_Click(ByVal sender As Object, ByVal e As EventArgs) Handles IngresoDeRecibosToolStripMenuItem1.Click
         abrir(New Recibos)
     End Sub
 
-    Private Sub ConsultaDeRemitosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ConsultaDeRemitosToolStripMenuItem.Click
+    Private Sub ConsultaDeRemitosToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ConsultaDeRemitosToolStripMenuItem.Click
         abrir(New ConsultaRemitos)
     End Sub
 
-    Private Sub EnvioEnEMailAProveedoresToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EnvioEnEMailAProveedoresToolStripMenuItem.Click
+    Private Sub EnvioEnEMailAProveedoresToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles EnvioEnEMailAProveedoresToolStripMenuItem.Click
         abrir(New EnvioEmailProveedores)
     End Sub
 
-    Private Sub IngresoDeProveedorAPagoSemanalToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles IngresoDeProveedorAPagoSemanalToolStripMenuItem.Click
+    Private Sub IngresoDeProveedorAPagoSemanalToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles IngresoDeProveedorAPagoSemanalToolStripMenuItem.Click
         abrir(New ListadoCuentaCorrienteProveedoresSelectivoPreparacion)
     End Sub
 
-    Private Sub ToolStripMenuItem6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem6.Click
+    Private Sub ToolStripMenuItem6_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ToolStripMenuItem6.Click
         abrir(New ProcesoPercepcionesIvaCompras)
     End Sub
 
-    Private Sub ToolStripMenuItem7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem7.Click
+    Private Sub ToolStripMenuItem7_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ToolStripMenuItem7.Click
         abrir(New ProcesoPercepcionesYRetencionesCiudadNuevo)
     End Sub
 
-    Private Sub ToolStripMenuItem9_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem9.Click
+    Private Sub ToolStripMenuItem9_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ToolStripMenuItem9.Click
         abrir(New ProcesoPercepcionesGananciasAduana)
     End Sub
 
-    Private Sub ToolStripMenuItem10_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem10.Click
+    Private Sub ToolStripMenuItem10_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ToolStripMenuItem10.Click
         abrir(New ProcesoPercepcionesAduanerasSIAPRE)
     End Sub
 
-    Private Sub ToolStripMenuItem11_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem11.Click
+    Private Sub ToolStripMenuItem11_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ToolStripMenuItem11.Click
         abrir(New ProcesoRecuperoIva)
     End Sub
 
-    Private Sub ToolStripMenuItem5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem5.Click
+    Private Sub ToolStripMenuItem5_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ToolStripMenuItem5.Click
         abrir(New ProcesoCiti)
     End Sub
 
-    Private Sub EnvioEnEMailAClientesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EnvioEnEMailAClientesToolStripMenuItem.Click
+    Private Sub EnvioEnEMailAClientesToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles EnvioEnEMailAClientesToolStripMenuItem.Click
 
-        If Not Proceso._EsPellital() Then Process.Start("\\193.168.0.2\g$\vb\Net\EmailsClientes\Ejecutable\EmailClientes.exe")
+        If Not _EsPellital() Then Process.Start("\\193.168.0.2\g$\vb\Net\EmailsClientes\Ejecutable\EmailClientes.exe")
 
     End Sub
 
-    Private Sub MenuPrincipal_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        Proceso._PurgarSaldosCtaCtePrvs()
+    Private Sub MenuPrincipal_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
+        _PurgarSaldosCtaCtePrvs()
     End Sub
 
-    'Private Sub CuentaCorrienteDeProveedoresSelectivoPruebaToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CuentaCorrienteDeProveedoresSelectivoPruebaToolStripMenuItem.Click
-    '    abrir(New ListadoCuentaCorrienteProveedoresSelectivoPrueba)
-    'End Sub
-
-    Private Sub EnvíoDeAvisoDeOPAProveedoresPorEMailToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EnvíoDeAvisoDeOPAProveedoresPorEMailToolStripMenuItem.Click
+    Private Sub EnvíoDeAvisoDeOPAProveedoresPorEMailToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles EnvíoDeAvisoDeOPAProveedoresPorEMailToolStripMenuItem.Click
         abrir(New AvisoOPAProveedores)
     End Sub
 
-    Private Sub EnvíoDeEmailPorAnticipoToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EnvíoDeEmailPorAnticipoToolStripMenuItem.Click
+    Private Sub EnvíoDeEmailPorAnticipoToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles EnvíoDeEmailPorAnticipoToolStripMenuItem.Click
         With New GestionAvisosOPDisponiblesProveedores
             .Show(Me)
         End With

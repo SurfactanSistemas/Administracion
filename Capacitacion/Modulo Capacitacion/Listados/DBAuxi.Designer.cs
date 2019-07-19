@@ -494,7 +494,7 @@ namespace Modulo_Capacitacion.Listados {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ListadoTentativoRow AddListadoTentativoRow(int ID, int Legajo, string DescLegajo, int Curso, string DescCurso, int Tema, string DescTema, double Horas, string Sector, string DescSector, int Año) {
+            public ListadoTentativoRow AddListadoTentativoRow(int ID, int Legajo, string DescLegajo, int Curso, string DescCurso, int Tema, string DescTema, double Horas, int Sector, string DescSector, int Año) {
                 ListadoTentativoRow rowListadoTentativoRow = ((ListadoTentativoRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         ID,
@@ -562,7 +562,7 @@ namespace Modulo_Capacitacion.Listados {
                 base.Columns.Add(this.columnDescTema);
                 this.columnHoras = new global::System.Data.DataColumn("Horas", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnHoras);
-                this.columnSector = new global::System.Data.DataColumn("Sector", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnSector = new global::System.Data.DataColumn("Sector", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSector);
                 this.columnDescSector = new global::System.Data.DataColumn("DescSector", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDescSector);
@@ -1127,10 +1127,10 @@ namespace Modulo_Capacitacion.Listados {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string Sector {
+            public int Sector {
                 get {
                     try {
-                        return ((string)(this[this.tableListadoTentativo.SectorColumn]));
+                        return ((int)(this[this.tableListadoTentativo.SectorColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'Sector\' in table \'ListadoTentativo\' is DBNull.", e);
