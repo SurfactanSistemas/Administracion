@@ -244,9 +244,9 @@ Partial Class DatosIB
         Me.Label20.ForeColor = System.Drawing.SystemColors.Control
         Me.Label20.Location = New System.Drawing.Point(65, 118)
         Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(67, 18)
+        Me.Label20.Size = New System.Drawing.Size(73, 18)
         Me.Label20.TabIndex = 15
-        Me.Label20.Text = "Corriente"
+        Me.Label20.Text = "Corrientes"
         '
         'txtRetIB12
         '

@@ -105,6 +105,8 @@ Public Class ProveedoresABM
 
         observaciones = ""
 
+        cmbFormaPago.SelectedIndex = 0
+
         txtCodigo.Focus()
 
         Height = MAIN_HEIGHT
@@ -256,6 +258,10 @@ Public Class ProveedoresABM
 
             End Try
 
+        Next
+
+        For Each empresa As String In Proceso.Empresas
+            ExecuteNonQueries(empresa, {"UPDATE Proveedor SET FormaPago = '" & cmbFormaPago.SelectedIndex & "' WHERE Proveedor = '" & txtCodigo.Text & "'"})
         Next
 
         If (_ProveedorExistente(txtCodigo.Text)) Then
@@ -429,6 +435,10 @@ Public Class ProveedoresABM
                 _ActualizarCertificadosProveedor(txtCodigo.Text)
                 _ActualizarMailOpProveedor(txtCodigo.Text)
             End If
+
+            For Each empresa As String In Proceso.Empresas
+                ExecuteNonQueries(empresa, {"UPDATE Proveedor SET FormaPago = '" & cmbFormaPago.SelectedIndex & "' WHERE Proveedor = '" & txtCodigo.Text & "'"})
+            Next
 
             MsgBox("Proveedor guardado correctamente.", MsgBoxStyle.Information)
             btnLimpiar.PerformClick()
@@ -606,6 +616,14 @@ Public Class ProveedoresABM
         If Val(proveedor.estado) = 2 Then
             cmbEstado.BackColor = Color.Red
             cmbEstado.ForeColor = Color.White
+        End If
+
+        Dim WProv As DataRow = GetSingle("SELECT FormaPago FROM Proveedor WHERE Proveedor = '" & proveedor.id & "'")
+
+        cmbFormaPago.SelectedIndex = 0
+
+        If WProv IsNot Nothing Then
+            cmbFormaPago.SelectedIndex = Val(OrDefault(WProv.Item("FormaPago"), "0"))
         End If
 
     End Sub
@@ -1261,7 +1279,7 @@ Public Class ProveedoresABM
 
     Private Sub txtCheque_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtCheque.KeyDown
         If e.KeyData = Keys.Enter Then
-            _SaltarA(cmbCondicionIB1)
+            _SaltarA(txtCheque)
         ElseIf e.KeyData = Keys.Escape Then
             txtCheque.Text = ""
         End If
@@ -1404,11 +1422,11 @@ Public Class ProveedoresABM
         _SaltarA(cmbInscripcionIB)
     End Sub
 
-    Private Sub cmbRubro_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbRubro.TextChanged
+    Private Sub cmbRubro_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbRubro.TextChanged, cmbFormaPago.TextChanged
         _SaltarA(txtNroSEDRONAR1)
     End Sub
 
-    Private Sub cmbRubro_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles cmbRubro.KeyDown
+    Private Sub cmbRubro_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles cmbRubro.KeyDown, cmbFormaPago.KeyDown
         If e.KeyData = Keys.Enter Then
             _SaltarA(txtNroSEDRONAR1)
         ElseIf e.KeyData = Keys.Escape Then

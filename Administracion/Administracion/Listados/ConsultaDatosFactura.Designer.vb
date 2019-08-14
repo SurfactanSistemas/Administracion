@@ -22,22 +22,21 @@ Partial Class ConsultaDatosFactura
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle25 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle26 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle27 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle28 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle29 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle30 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.DGVArticulos = New System.Windows.Forms.DataGridView()
-        Me.Orden = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Producto = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Cantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Precio = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.txtFechaFactura = New System.Windows.Forms.MaskedTextBox()
         Me.txtFechaInformeRecepcion = New System.Windows.Forms.MaskedTextBox()
@@ -75,6 +74,16 @@ Partial Class ConsultaDatosFactura
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
+        Me.Informe = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FechaInforme = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Remito = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Orden = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FechaOrden = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Carpeta = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Producto = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Cantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Precio = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         CType(Me.DGVArticulos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -119,11 +128,12 @@ Partial Class ConsultaDatosFactura
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(389, 524)
+        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.Location = New System.Drawing.Point(389, 518)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(102, 25)
+        Me.Button1.Size = New System.Drawing.Size(102, 39)
         Me.Button1.TabIndex = 34
-        Me.Button1.Text = "Cerrar"
+        Me.Button1.Text = "CERRAR"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'DGVArticulos
@@ -131,65 +141,22 @@ Partial Class ConsultaDatosFactura
         Me.DGVArticulos.AllowUserToAddRows = False
         Me.DGVArticulos.AllowUserToDeleteRows = False
         Me.DGVArticulos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGVArticulos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Orden, Me.Producto, Me.Descripcion, Me.Cantidad, Me.Precio})
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGVArticulos.DefaultCellStyle = DataGridViewCellStyle6
-        Me.DGVArticulos.Location = New System.Drawing.Point(26, 233)
+        Me.DGVArticulos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Informe, Me.FechaInforme, Me.Remito, Me.Orden, Me.FechaOrden, Me.Carpeta, Me.Producto, Me.Descripcion, Me.Cantidad, Me.Precio})
+        Me.DGVArticulos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
+        Me.DGVArticulos.Location = New System.Drawing.Point(6, 54)
         Me.DGVArticulos.Name = "DGVArticulos"
         Me.DGVArticulos.ReadOnly = True
-        Me.DGVArticulos.Size = New System.Drawing.Size(713, 172)
+        Me.DGVArticulos.RowHeadersWidth = 15
+        Me.DGVArticulos.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.DGVArticulos.RowTemplate.Height = 18
+        Me.DGVArticulos.ShowCellToolTips = False
+        Me.DGVArticulos.Size = New System.Drawing.Size(837, 349)
         Me.DGVArticulos.TabIndex = 33
-        '
-        'Orden
-        '
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Orden.DefaultCellStyle = DataGridViewCellStyle1
-        Me.Orden.HeaderText = "Orden"
-        Me.Orden.Name = "Orden"
-        Me.Orden.ReadOnly = True
-        '
-        'Producto
-        '
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Producto.DefaultCellStyle = DataGridViewCellStyle2
-        Me.Producto.HeaderText = "Producto"
-        Me.Producto.Name = "Producto"
-        Me.Producto.ReadOnly = True
-        '
-        'Descripcion
-        '
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Descripcion.DefaultCellStyle = DataGridViewCellStyle3
-        Me.Descripcion.HeaderText = "Descripcion"
-        Me.Descripcion.Name = "Descripcion"
-        Me.Descripcion.ReadOnly = True
-        Me.Descripcion.Width = 270
-        '
-        'Cantidad
-        '
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Cantidad.DefaultCellStyle = DataGridViewCellStyle4
-        Me.Cantidad.HeaderText = "Cantidad"
-        Me.Cantidad.Name = "Cantidad"
-        Me.Cantidad.ReadOnly = True
-        '
-        'Precio
-        '
-        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Precio.DefaultCellStyle = DataGridViewCellStyle5
-        Me.Precio.HeaderText = "Precio"
-        Me.Precio.Name = "Precio"
-        Me.Precio.ReadOnly = True
         '
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.txtFechaFactura)
+        Me.GroupBox1.Controls.Add(Me.DGVArticulos)
         Me.GroupBox1.Controls.Add(Me.txtFechaInformeRecepcion)
         Me.GroupBox1.Controls.Add(Me.txtFechaOrdenCompra)
         Me.GroupBox1.Controls.Add(Me.txtNombreProveedor)
@@ -204,11 +171,11 @@ Partial Class ConsultaDatosFactura
         Me.GroupBox1.Controls.Add(Me.Label5)
         Me.GroupBox1.Controls.Add(Me.Label4)
         Me.GroupBox1.Controls.Add(Me.Label3)
-        Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.Control
-        Me.GroupBox1.Location = New System.Drawing.Point(56, 6)
+        Me.GroupBox1.Location = New System.Drawing.Point(3, 3)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(652, 220)
+        Me.GroupBox1.Size = New System.Drawing.Size(849, 409)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Historial"
@@ -216,7 +183,7 @@ Partial Class ConsultaDatosFactura
         'txtFechaFactura
         '
         Me.txtFechaFactura.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.txtFechaFactura.Location = New System.Drawing.Point(402, 122)
+        Me.txtFechaFactura.Location = New System.Drawing.Point(473, 28)
         Me.txtFechaFactura.Mask = "00/00/0000"
         Me.txtFechaFactura.Name = "txtFechaFactura"
         Me.txtFechaFactura.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -228,7 +195,7 @@ Partial Class ConsultaDatosFactura
         'txtFechaInformeRecepcion
         '
         Me.txtFechaInformeRecepcion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.txtFechaInformeRecepcion.Location = New System.Drawing.Point(402, 52)
+        Me.txtFechaInformeRecepcion.Location = New System.Drawing.Point(685, 27)
         Me.txtFechaInformeRecepcion.Mask = "00/00/0000"
         Me.txtFechaInformeRecepcion.Name = "txtFechaInformeRecepcion"
         Me.txtFechaInformeRecepcion.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -236,11 +203,12 @@ Partial Class ConsultaDatosFactura
         Me.txtFechaInformeRecepcion.Size = New System.Drawing.Size(93, 20)
         Me.txtFechaInformeRecepcion.TabIndex = 2
         Me.txtFechaInformeRecepcion.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtFechaInformeRecepcion.Visible = False
         '
         'txtFechaOrdenCompra
         '
         Me.txtFechaOrdenCompra.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.txtFechaOrdenCompra.Location = New System.Drawing.Point(402, 26)
+        Me.txtFechaOrdenCompra.Location = New System.Drawing.Point(685, 27)
         Me.txtFechaOrdenCompra.Mask = "00/00/0000"
         Me.txtFechaOrdenCompra.Name = "txtFechaOrdenCompra"
         Me.txtFechaOrdenCompra.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -248,31 +216,34 @@ Partial Class ConsultaDatosFactura
         Me.txtFechaOrdenCompra.Size = New System.Drawing.Size(93, 20)
         Me.txtFechaOrdenCompra.TabIndex = 2
         Me.txtFechaOrdenCompra.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtFechaOrdenCompra.Visible = False
         '
         'txtNombreProveedor
         '
         Me.txtNombreProveedor.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.txtNombreProveedor.Location = New System.Drawing.Point(272, 188)
+        Me.txtNombreProveedor.Location = New System.Drawing.Point(620, 27)
         Me.txtNombreProveedor.MaxLength = 50
         Me.txtNombreProveedor.Name = "txtNombreProveedor"
         Me.txtNombreProveedor.ReadOnly = True
         Me.txtNombreProveedor.Size = New System.Drawing.Size(223, 20)
         Me.txtNombreProveedor.TabIndex = 1
+        Me.txtNombreProveedor.Visible = False
         '
         'txtCarpeta
         '
         Me.txtCarpeta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.txtCarpeta.Location = New System.Drawing.Point(274, 154)
+        Me.txtCarpeta.Location = New System.Drawing.Point(673, 27)
         Me.txtCarpeta.Name = "txtCarpeta"
         Me.txtCarpeta.ReadOnly = True
         Me.txtCarpeta.Size = New System.Drawing.Size(116, 20)
         Me.txtCarpeta.TabIndex = 1
         Me.txtCarpeta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtCarpeta.Visible = False
         '
         'txtFactura
         '
         Me.txtFactura.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.txtFactura.Location = New System.Drawing.Point(274, 122)
+        Me.txtFactura.Location = New System.Drawing.Point(345, 28)
         Me.txtFactura.Name = "txtFactura"
         Me.txtFactura.ReadOnly = True
         Me.txtFactura.Size = New System.Drawing.Size(116, 20)
@@ -282,58 +253,63 @@ Partial Class ConsultaDatosFactura
         'txtRemito
         '
         Me.txtRemito.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.txtRemito.Location = New System.Drawing.Point(274, 90)
+        Me.txtRemito.Location = New System.Drawing.Point(673, 27)
         Me.txtRemito.Name = "txtRemito"
         Me.txtRemito.ReadOnly = True
         Me.txtRemito.Size = New System.Drawing.Size(116, 20)
         Me.txtRemito.TabIndex = 1
         Me.txtRemito.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtRemito.Visible = False
         '
         'txtInformeRecepcion
         '
         Me.txtInformeRecepcion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.txtInformeRecepcion.Location = New System.Drawing.Point(274, 58)
+        Me.txtInformeRecepcion.Location = New System.Drawing.Point(673, 27)
         Me.txtInformeRecepcion.Name = "txtInformeRecepcion"
         Me.txtInformeRecepcion.ReadOnly = True
         Me.txtInformeRecepcion.Size = New System.Drawing.Size(116, 20)
         Me.txtInformeRecepcion.TabIndex = 1
         Me.txtInformeRecepcion.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtInformeRecepcion.Visible = False
         '
         'txtOrdenCompra
         '
         Me.txtOrdenCompra.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.txtOrdenCompra.Location = New System.Drawing.Point(274, 26)
+        Me.txtOrdenCompra.Location = New System.Drawing.Point(673, 27)
         Me.txtOrdenCompra.Name = "txtOrdenCompra"
         Me.txtOrdenCompra.ReadOnly = True
         Me.txtOrdenCompra.Size = New System.Drawing.Size(116, 20)
         Me.txtOrdenCompra.TabIndex = 1
         Me.txtOrdenCompra.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtOrdenCompra.Visible = False
         '
         'Label8
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.Label8.Location = New System.Drawing.Point(125, 188)
+        Me.Label8.Location = New System.Drawing.Point(693, 28)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(77, 18)
         Me.Label8.TabIndex = 0
         Me.Label8.Text = "Proveedor:"
+        Me.Label8.Visible = False
         '
         'Label7
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.Label7.Location = New System.Drawing.Point(125, 156)
+        Me.Label7.Location = New System.Drawing.Point(701, 28)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(60, 18)
         Me.Label7.TabIndex = 0
         Me.Label7.Text = "Carpeta:"
+        Me.Label7.Visible = False
         '
         'Label6
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.Label6.Location = New System.Drawing.Point(125, 124)
+        Me.Label6.Location = New System.Drawing.Point(282, 29)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(57, 18)
         Me.Label6.TabIndex = 0
@@ -343,31 +319,34 @@ Partial Class ConsultaDatosFactura
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.Label5.Location = New System.Drawing.Point(125, 92)
+        Me.Label5.Location = New System.Drawing.Point(703, 28)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(57, 18)
         Me.Label5.TabIndex = 0
         Me.Label5.Text = "Remito:"
+        Me.Label5.Visible = False
         '
         'Label4
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.Label4.Location = New System.Drawing.Point(125, 60)
+        Me.Label4.Location = New System.Drawing.Point(659, 28)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(144, 18)
         Me.Label4.TabIndex = 0
         Me.Label4.Text = "Informe de Recepción"
+        Me.Label4.Visible = False
         '
         'Label3
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.Label3.Location = New System.Drawing.Point(125, 28)
+        Me.Label3.Location = New System.Drawing.Point(671, 28)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(121, 18)
         Me.Label3.TabIndex = 0
         Me.Label3.Text = "Orden de Compra:"
+        Me.Label3.Visible = False
         '
         'Panel2
         '
@@ -382,24 +361,23 @@ Partial Class ConsultaDatosFactura
         '
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
-        Me.TabControl1.Location = New System.Drawing.Point(53, 6)
+        Me.TabControl1.Location = New System.Drawing.Point(7, 6)
         Me.TabControl1.Margin = New System.Windows.Forms.Padding(0)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.Padding = New System.Drawing.Point(10, 10)
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(773, 455)
+        Me.TabControl1.Size = New System.Drawing.Size(863, 455)
         Me.TabControl1.TabIndex = 2
         '
         'TabPage1
         '
         Me.TabPage1.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.TabPage1.Controls.Add(Me.GroupBox1)
-        Me.TabPage1.Controls.Add(Me.DGVArticulos)
         Me.TabPage1.ForeColor = System.Drawing.SystemColors.Control
         Me.TabPage1.Location = New System.Drawing.Point(4, 36)
         Me.TabPage1.Margin = New System.Windows.Forms.Padding(0)
         Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Size = New System.Drawing.Size(765, 415)
+        Me.TabPage1.Size = New System.Drawing.Size(855, 415)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Datos de Factura"
         '
@@ -412,7 +390,7 @@ Partial Class ConsultaDatosFactura
         Me.TabPage2.Location = New System.Drawing.Point(4, 36)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(765, 415)
+        Me.TabPage2.Size = New System.Drawing.Size(855, 415)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Detalles de Factura"
         '
@@ -611,6 +589,120 @@ Partial Class ConsultaDatosFactura
         Me.Label14.TabIndex = 0
         Me.Label14.Text = "Nro de Interno:"
         '
+        'Informe
+        '
+        Me.Informe.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Informe.DataPropertyName = "Informe"
+        DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Informe.DefaultCellStyle = DataGridViewCellStyle21
+        Me.Informe.HeaderText = "Inf"
+        Me.Informe.Name = "Informe"
+        Me.Informe.ReadOnly = True
+        Me.Informe.Width = 44
+        '
+        'FechaInforme
+        '
+        Me.FechaInforme.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.FechaInforme.DataPropertyName = "FechaInforme"
+        DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.FechaInforme.DefaultCellStyle = DataGridViewCellStyle22
+        Me.FechaInforme.HeaderText = "Fecha Inf"
+        Me.FechaInforme.Name = "FechaInforme"
+        Me.FechaInforme.ReadOnly = True
+        Me.FechaInforme.Width = 77
+        '
+        'Remito
+        '
+        Me.Remito.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Remito.DataPropertyName = "Remito"
+        DataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Remito.DefaultCellStyle = DataGridViewCellStyle23
+        Me.Remito.HeaderText = "Remito"
+        Me.Remito.Name = "Remito"
+        Me.Remito.ReadOnly = True
+        Me.Remito.Width = 65
+        '
+        'Orden
+        '
+        Me.Orden.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Orden.DataPropertyName = "Orden"
+        DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle24.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Orden.DefaultCellStyle = DataGridViewCellStyle24
+        Me.Orden.HeaderText = "Orden"
+        Me.Orden.Name = "Orden"
+        Me.Orden.ReadOnly = True
+        Me.Orden.Width = 61
+        '
+        'FechaOrden
+        '
+        Me.FechaOrden.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.FechaOrden.DataPropertyName = "FechaOrden"
+        DataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.FechaOrden.DefaultCellStyle = DataGridViewCellStyle25
+        Me.FechaOrden.HeaderText = "Fecha"
+        Me.FechaOrden.Name = "FechaOrden"
+        Me.FechaOrden.ReadOnly = True
+        Me.FechaOrden.Width = 62
+        '
+        'Carpeta
+        '
+        Me.Carpeta.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Carpeta.DataPropertyName = "Carpeta"
+        DataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Carpeta.DefaultCellStyle = DataGridViewCellStyle26
+        Me.Carpeta.HeaderText = "Carpeta"
+        Me.Carpeta.Name = "Carpeta"
+        Me.Carpeta.ReadOnly = True
+        Me.Carpeta.Width = 69
+        '
+        'Producto
+        '
+        Me.Producto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Producto.DataPropertyName = "Producto"
+        DataGridViewCellStyle27.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Producto.DefaultCellStyle = DataGridViewCellStyle27
+        Me.Producto.HeaderText = "Producto"
+        Me.Producto.Name = "Producto"
+        Me.Producto.ReadOnly = True
+        Me.Producto.Width = 75
+        '
+        'Descripcion
+        '
+        Me.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Descripcion.DataPropertyName = "Descripcion"
+        DataGridViewCellStyle28.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Descripcion.DefaultCellStyle = DataGridViewCellStyle28
+        Me.Descripcion.HeaderText = "Descripcion"
+        Me.Descripcion.Name = "Descripcion"
+        Me.Descripcion.ReadOnly = True
+        '
+        'Cantidad
+        '
+        Me.Cantidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Cantidad.DataPropertyName = "Cantidad"
+        DataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle29.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle29.NullValue = "0"
+        Me.Cantidad.DefaultCellStyle = DataGridViewCellStyle29
+        Me.Cantidad.HeaderText = "Cantidad"
+        Me.Cantidad.Name = "Cantidad"
+        Me.Cantidad.ReadOnly = True
+        Me.Cantidad.Width = 74
+        '
+        'Precio
+        '
+        Me.Precio.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Precio.DataPropertyName = "Precio"
+        DataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle30.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle30.NullValue = "0"
+        Me.Precio.DefaultCellStyle = DataGridViewCellStyle30
+        Me.Precio.HeaderText = "Precio"
+        Me.Precio.Name = "Precio"
+        Me.Precio.ReadOnly = True
+        Me.Precio.Width = 62
+        '
         'ConsultaDatosFactura
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -677,7 +769,12 @@ Partial Class ConsultaDatosFactura
     Friend WithEvents Label14 As System.Windows.Forms.Label
     Friend WithEvents txtFechaVto2 As System.Windows.Forms.MaskedTextBox
     Friend WithEvents Label16 As System.Windows.Forms.Label
+    Friend WithEvents Informe As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents FechaInforme As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Remito As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Orden As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents FechaOrden As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Carpeta As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Producto As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Cantidad As System.Windows.Forms.DataGridViewTextBoxColumn

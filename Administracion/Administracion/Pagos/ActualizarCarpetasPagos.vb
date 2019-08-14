@@ -1,8 +1,23 @@
 ﻿Imports System.Data.SqlClient
 
-Public Class CarpetasPagos
+Public Class ActualizarCarpetasPagos
 
     Private _Carpetas(10) As String
+    Private WOrden As String
+
+    Sub New(ByVal Orden As String)
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        WOrden = Orden
+
+        For i = 1 To 10
+            AddHandler Panel2.Controls("txtCarpeta" & i).KeyPress, AddressOf SoloNumero
+        Next
+
+    End Sub
 
     Public Function Carpetas() As String()
         Return _Carpetas
@@ -245,7 +260,26 @@ Public Class CarpetasPagos
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
         _AsignarCarpetas()
+
+        Dim WSql As String = ""
+
+        For i = 1 To 9
+            WSql &= String.Format("Carpeta{0}={1},", i, formatonumerico(_Carpetas(i)))
+        Next
+
+        Dim ZSql As String = String.Format("UPDATE Pagos SET {0} WHERE Orden = '{1}'", WSql.TrimEnd(","), WOrden)
+
+        'MsgBox(ZSql)
+
+        ExecuteNonQueries({ZSql})
+
         Me.Close()
+    End Sub
+
+    Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs)
+        If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
+            e.Handled = True
+        End If
     End Sub
 
     Private Sub CarpetasPagos_FormClosing(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
@@ -268,14 +302,6 @@ Public Class CarpetasPagos
     Private Sub CarpetasPagos_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         For i = 1 To 10
             Panel2.Controls("txtCarpeta" & i).Text = Trim(_Carpetas(i))
-            AddHandler Panel2.Controls("txtCarpeta" & i).KeyPress, AddressOf SoloNumero
         Next
     End Sub
-
-    Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs)
-        If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
-            e.Handled = True
-        End If
-    End Sub
-
 End Class

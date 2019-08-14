@@ -181,13 +181,48 @@ Public Class ConsultaDatosFactura
             Exit Sub
         End If
 
+        '' Extraemos los detalles de los articulos y los listamos.
+        'Try
+
+        '    cn.ConnectionString = XCs
+        '    cn.Open()
+        '    cm.Connection = cn
+        '    cm.CommandText = "SELECT i.Orden, i.Articulo, a.Descripcion, i.Cantidad, o.Precio FROM Informe as i, Orden as o, Articulo as a WHERE i.Informe = '" & Trim(txtInformeRecepcion.Text) & "' AND i.Orden = o.Orden  AND i.Articulo = a.Codigo AND i.Articulo = o.Articulo"
+
+        '    dr = cm.ExecuteReader()
+
+        '    If dr.HasRows Then
+        '        Dim i = 0
+        '        Do While dr.Read()
+        '            i = DGVArticulos.Rows.Add
+        '            With DGVArticulos.Rows(i)
+        '                .Cells(0).Value = Trim(dr.Item("Orden"))
+        '                .Cells(1).Value = Trim(dr.Item("Articulo"))
+        '                .Cells(2).Value = Trim(dr.Item("Descripcion"))
+        '                .Cells(3).Value = formatonumerico(dr.Item("Cantidad"), "######0.#0", ".")
+        '                .Cells(4).Value = formatonumerico(dr.Item("Precio"), "######0.#0", ".")
+
+        '            End With
+
+        '        Loop
+
+        '    End If
+
+        'Catch ex As Exception
+        '    MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+        '    XCs = ""
+        'Finally
+        '    cn.Close()
+        'End Try
+
         ' Extraemos los detalles de los articulos y los listamos.
         Try
 
             cn.ConnectionString = XCs
             cn.Open()
             cm.Connection = cn
-            cm.CommandText = "SELECT i.Orden, i.Articulo, a.Descripcion, i.Cantidad, o.Precio FROM Informe as i, Orden as o, Articulo as a WHERE i.Informe = '" & Trim(txtInformeRecepcion.Text) & "' AND i.Orden = o.Orden  AND i.Articulo = a.Codigo AND i.Articulo = o.Articulo"
+            'cm.CommandText = "SELECT i.Orden, i.Articulo, a.Descripcion, i.Cantidad, o.Precio FROM Informe as i, Orden as o, Articulo as a WHERE i.Informe = '" & Trim(txtInformeRecepcion.Text) & "' AND i.Orden = o.Orden  AND i.Articulo = a.Codigo AND i.Articulo = o.Articulo"
+            cm.CommandText = "select i.Informe, i.Remito, i.Proveedor, i.fecha As FechaInforme, i.orden, p.nombre, o.fecha As FechaOrden, o.Carpeta, i.Articulo, a.Descripcion, i.Cantidad, o.Precio from informe i inner join Proveedor p on p.Proveedor = i.Proveedor inner join orden o on o.Orden = i.Orden inner join Articulo a on a.Codigo = i.Articulo where remito = '" & txtRemito.Text & "' and i.Proveedor = '" & XProveedor & "'"
 
             dr = cm.ExecuteReader()
 
@@ -196,12 +231,16 @@ Public Class ConsultaDatosFactura
                 Do While dr.Read()
                     i = DGVArticulos.Rows.Add
                     With DGVArticulos.Rows(i)
-                        .Cells(0).Value = Trim(dr.Item("Orden"))
-                        .Cells(1).Value = Trim(dr.Item("Articulo"))
-                        .Cells(2).Value = Trim(dr.Item("Descripcion"))
-                        .Cells(3).Value = formatonumerico(dr.Item("Cantidad"), "######0.#0", ".")
-                        .Cells(4).Value = formatonumerico(dr.Item("Precio"), "######0.#0", ".")
-
+                        .Cells("Informe").Value = Trim(OrDefault(dr.Item("Informe"), ""))
+                        .Cells("FechaInforme").Value = Trim(OrDefault(dr.Item("FechaInforme"), ""))
+                        .Cells("Remito").Value = Trim(OrDefault(dr.Item("Remito"), ""))
+                        .Cells("Orden").Value = Trim(OrDefault(dr.Item("Orden"), ""))
+                        .Cells("FechaOrden").Value = Trim(OrDefault(dr.Item("FechaOrden"), ""))
+                        .Cells("Carpeta").Value = Trim(OrDefault(dr.Item("Carpeta"), ""))
+                        .Cells("Producto").Value = Trim(OrDefault(dr.Item("Articulo"), ""))
+                        .Cells("Descripcion").Value = Trim(OrDefault(dr.Item("Descripcion"), ""))
+                        .Cells("Cantidad").Value = formatonumerico(OrDefault(dr.Item("Cantidad"), ""))
+                        .Cells("Precio").Value = formatonumerico(OrDefault(dr.Item("Precio"), ""))
                     End With
 
                 Loop

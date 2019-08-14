@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class CarpetasPagos
+Partial Class ActualizarCarpetasPagos
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -60,7 +60,7 @@ Partial Class CarpetasPagos
         Me.LBLTipoInformacion.Name = "LBLTipoInformacion"
         Me.LBLTipoInformacion.Size = New System.Drawing.Size(258, 19)
         Me.LBLTipoInformacion.TabIndex = 0
-        Me.LBLTipoInformacion.Text = "Ingreso de Importes para Carpetas"
+        Me.LBLTipoInformacion.Text = "Actualización de Carpetas"
         Me.LBLTipoInformacion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Panel2
@@ -129,9 +129,9 @@ Partial Class CarpetasPagos
         Me.Label4.ForeColor = System.Drawing.SystemColors.Control
         Me.Label4.Location = New System.Drawing.Point(127, 13)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(56, 18)
+        Me.Label4.Size = New System.Drawing.Size(62, 18)
         Me.Label4.TabIndex = 1
-        Me.Label4.Text = "Carpeta"
+        Me.Label4.Text = "Carpetas"
         '
         'txtCarpeta4
         '
@@ -190,7 +190,7 @@ Partial Class CarpetasPagos
         Me.ToolTip1.SetToolTip(Me.Button1, "Confirmar Datos")
         Me.Button1.UseVisualStyleBackColor = True
         '
-        'CarpetasPagos
+        'ActualizarCarpetasPagos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -199,7 +199,7 @@ Partial Class CarpetasPagos
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Panel2)
         Me.KeyPreview = True
-        Me.Name = "CarpetasPagos"
+        Me.Name = "ActualizarCarpetasPagos"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Panel1.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)

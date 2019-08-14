@@ -82,7 +82,7 @@ Partial Class EvaluacionPorMpUserControl
         Me.cmbCalificacion.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.cmbCalificacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbCalificacion.FormattingEnabled = True
-        Me.cmbCalificacion.Items.AddRange(New Object() {"NO DEFINIDO", "APROBADO", "NO APROBADO", "APROBADO POR ÚNICA VEZ"})
+        Me.cmbCalificacion.Items.AddRange(New Object() {"PENDIENTE", "APROBADO FARMA", "RECHAZADO FARMA", "EVENTUAL FARMA"})
         Me.cmbCalificacion.Location = New System.Drawing.Point(169, 53)
         Me.cmbCalificacion.Name = "cmbCalificacion"
         Me.cmbCalificacion.Size = New System.Drawing.Size(443, 21)

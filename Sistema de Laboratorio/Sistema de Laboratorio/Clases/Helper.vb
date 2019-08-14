@@ -6,11 +6,11 @@ Module Helper
 
     Private Const VALIDA_CUIT = "54327654321"
 
-    Public Function Right(ByVal txt As String, ByVal lng As Integer) As String
+    Public Function _Right(ByVal txt As String, ByVal lng As Integer) As String
         Return Microsoft.VisualBasic.Right(txt, lng)
     End Function
 
-    Public Function Left(ByVal txt As String, ByVal lng As Integer) As String
+    Public Function _Left(ByVal txt As String, ByVal lng As Integer) As String
         Return Microsoft.VisualBasic.Left(txt, lng)
     End Function
 

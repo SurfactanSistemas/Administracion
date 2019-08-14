@@ -23,19 +23,19 @@ Partial Class Pagos
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle26 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle25 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.optTransferencias = New System.Windows.Forms.RadioButton()
         Me.optAnticipos = New System.Windows.Forms.RadioButton()
@@ -73,12 +73,22 @@ Partial Class Pagos
         Me.pnlPedirCuenta = New System.Windows.Forms.Panel()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.WProceso = New System.Windows.Forms.Label()
-        Me.txtCuenta = New Administracion.CustomTextBox()
         Me.txtFechaAux = New System.Windows.Forms.MaskedTextBox()
-        Me.lstSeleccion = New Administracion.CustomListBox()
-        Me.CLBFiltrado = New Administracion.CustomListBox()
         Me.txtFechaParidad = New System.Windows.Forms.MaskedTextBox()
         Me.txtFecha = New System.Windows.Forms.MaskedTextBox()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.btnCarpetas = New Administracion.CustomButton()
+        Me.btnImprimir = New Administracion.CustomButton()
+        Me.btnCalcular = New Administracion.CustomButton()
+        Me.btnConsulta = New Administracion.CustomButton()
+        Me.btnCtaCte = New Administracion.CustomButton()
+        Me.btnChequesTerceros = New Administracion.CustomButton()
+        Me.btnCerrar = New Administracion.CustomButton()
+        Me.btnLimpiar = New Administracion.CustomButton()
+        Me.btnAgregar = New Administracion.CustomButton()
+        Me.txtCuenta = New Administracion.CustomTextBox()
+        Me.lstSeleccion = New Administracion.CustomListBox()
+        Me.CLBFiltrado = New Administracion.CustomListBox()
         Me.CustomLabel12 = New Administracion.CustomLabel()
         Me.CustomLabel13 = New Administracion.CustomLabel()
         Me.CustomLabel1 = New Administracion.CustomLabel()
@@ -114,16 +124,7 @@ Partial Class Pagos
         Me.CustomLabel10 = New Administracion.CustomLabel()
         Me.CustomLabel9 = New Administracion.CustomLabel()
         Me.txtIBCiudad = New Administracion.CustomTextBox()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.btnCarpetas = New Administracion.CustomButton()
-        Me.btnImprimir = New Administracion.CustomButton()
-        Me.btnCalcular = New Administracion.CustomButton()
-        Me.btnConsulta = New Administracion.CustomButton()
-        Me.btnCtaCte = New Administracion.CustomButton()
-        Me.btnChequesTerceros = New Administracion.CustomButton()
-        Me.btnCerrar = New Administracion.CustomButton()
-        Me.btnLimpiar = New Administracion.CustomButton()
-        Me.btnAgregar = New Administracion.CustomButton()
+        Me.btnActualizarCarpetas = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         CType(Me.gridPagos, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gridFormaPagos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -209,24 +210,24 @@ Partial Class Pagos
         '
         Me.gridPagos.AllowUserToAddRows = False
         Me.gridPagos.AllowUserToDeleteRows = False
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.gridPagos.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.gridPagos.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle14
         Me.gridPagos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.gridPagos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Tipo, Me.Letra, Me.Punto, Me.Numero, Me.Importe, Me.Descripcion, Me.ImpoNeto, Me.CuentaContable, Me.MarcaDifCambio, Me.MarcaCHR})
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.gridPagos.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle19.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.gridPagos.DefaultCellStyle = DataGridViewCellStyle19
         Me.gridPagos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.gridPagos.Location = New System.Drawing.Point(4, 236)
         Me.gridPagos.Name = "gridPagos"
@@ -236,8 +237,8 @@ Partial Class Pagos
         '
         'Tipo
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Tipo.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Tipo.DefaultCellStyle = DataGridViewCellStyle15
         Me.Tipo.HeaderText = "Tipo"
         Me.Tipo.MaxInputLength = 2
         Me.Tipo.Name = "Tipo"
@@ -254,8 +255,8 @@ Partial Class Pagos
         '
         'Punto
         '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Punto.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Punto.DefaultCellStyle = DataGridViewCellStyle16
         Me.Punto.HeaderText = "Punto"
         Me.Punto.MaxInputLength = 6
         Me.Punto.Name = "Punto"
@@ -264,8 +265,8 @@ Partial Class Pagos
         '
         'Numero
         '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Numero.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Numero.DefaultCellStyle = DataGridViewCellStyle17
         Me.Numero.HeaderText = "Número"
         Me.Numero.MaxInputLength = 8
         Me.Numero.Name = "Numero"
@@ -274,8 +275,8 @@ Partial Class Pagos
         '
         'Importe
         '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Importe.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Importe.DefaultCellStyle = DataGridViewCellStyle18
         Me.Importe.HeaderText = "Importe"
         Me.Importe.Name = "Importe"
         Me.Importe.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
@@ -318,24 +319,24 @@ Partial Class Pagos
         '
         Me.gridFormaPagos.AllowUserToAddRows = False
         Me.gridFormaPagos.AllowUserToDeleteRows = False
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.gridFormaPagos.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle20.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.gridFormaPagos.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle20
         Me.gridFormaPagos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.gridFormaPagos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Tipo2, Me.Numero2, Me.Fecha2, Me.Banco2, Me.Nombre, Me.Importe2, Me.XClave, Me.XCuil, Me.Cuenta, Me.UltTipo})
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.gridFormaPagos.DefaultCellStyle = DataGridViewCellStyle13
+        DataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle26.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle26.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle26.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle26.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle26.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.gridFormaPagos.DefaultCellStyle = DataGridViewCellStyle26
         Me.gridFormaPagos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.gridFormaPagos.Location = New System.Drawing.Point(379, 236)
         Me.gridFormaPagos.Name = "gridFormaPagos"
@@ -345,10 +346,10 @@ Partial Class Pagos
         '
         'Tipo2
         '
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle8.Format = "N2"
-        DataGridViewCellStyle8.NullValue = Nothing
-        Me.Tipo2.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle21.Format = "N2"
+        DataGridViewCellStyle21.NullValue = Nothing
+        Me.Tipo2.DefaultCellStyle = DataGridViewCellStyle21
         Me.Tipo2.HeaderText = "Tipo"
         Me.Tipo2.MaxInputLength = 31
         Me.Tipo2.Name = "Tipo2"
@@ -357,8 +358,8 @@ Partial Class Pagos
         '
         'Numero2
         '
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Numero2.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Numero2.DefaultCellStyle = DataGridViewCellStyle22
         Me.Numero2.HeaderText = "Número"
         Me.Numero2.MaxInputLength = 8
         Me.Numero2.Name = "Numero2"
@@ -367,8 +368,8 @@ Partial Class Pagos
         '
         'Fecha2
         '
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Fecha2.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Fecha2.DefaultCellStyle = DataGridViewCellStyle23
         Me.Fecha2.HeaderText = "Fecha"
         Me.Fecha2.MaxInputLength = 10
         Me.Fecha2.Name = "Fecha2"
@@ -377,8 +378,8 @@ Partial Class Pagos
         '
         'Banco2
         '
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Banco2.DefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Banco2.DefaultCellStyle = DataGridViewCellStyle24
         Me.Banco2.HeaderText = "Banco"
         Me.Banco2.MaxInputLength = 3
         Me.Banco2.Name = "Banco2"
@@ -394,8 +395,8 @@ Partial Class Pagos
         '
         'Importe2
         '
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Importe2.DefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Importe2.DefaultCellStyle = DataGridViewCellStyle25
         Me.Importe2.HeaderText = "Importe"
         Me.Importe2.Name = "Importe2"
         Me.Importe2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
@@ -431,6 +432,7 @@ Partial Class Pagos
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.btnActualizarCarpetas)
         Me.Panel2.Controls.Add(Me.btnEnviarAviso)
         Me.Panel2.Controls.Add(Me.btnEliminarFila)
         Me.Panel2.Controls.Add(Me.ckNoCalcRetenciones)
@@ -515,11 +517,11 @@ Partial Class Pagos
         'ckNoCalcRetenciones
         '
         Me.ckNoCalcRetenciones.AutoSize = True
-        Me.ckNoCalcRetenciones.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ckNoCalcRetenciones.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ckNoCalcRetenciones.ForeColor = System.Drawing.SystemColors.Control
-        Me.ckNoCalcRetenciones.Location = New System.Drawing.Point(264, 209)
+        Me.ckNoCalcRetenciones.Location = New System.Drawing.Point(257, 209)
         Me.ckNoCalcRetenciones.Name = "ckNoCalcRetenciones"
-        Me.ckNoCalcRetenciones.Size = New System.Drawing.Size(163, 17)
+        Me.ckNoCalcRetenciones.Size = New System.Drawing.Size(159, 17)
         Me.ckNoCalcRetenciones.TabIndex = 127
         Me.ckNoCalcRetenciones.Text = "No Calcula Retenciones"
         Me.ckNoCalcRetenciones.UseVisualStyleBackColor = True
@@ -583,21 +585,6 @@ Partial Class Pagos
         Me.WProceso.TabIndex = 7
         Me.WProceso.Visible = False
         '
-        'txtCuenta
-        '
-        Me.txtCuenta.Cleanable = True
-        Me.txtCuenta.Empty = True
-        Me.txtCuenta.EnterIndex = 1
-        Me.txtCuenta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.txtCuenta.LabelAssociationKey = 1
-        Me.txtCuenta.Location = New System.Drawing.Point(46, 27)
-        Me.txtCuenta.MaxLength = 6
-        Me.txtCuenta.Name = "txtCuenta"
-        Me.txtCuenta.Size = New System.Drawing.Size(94, 20)
-        Me.txtCuenta.TabIndex = 6
-        Me.txtCuenta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.txtCuenta.Validator = Administracion.ValidatorType.Numeric
-        '
         'txtFechaAux
         '
         Me.txtFechaAux.BorderStyle = System.Windows.Forms.BorderStyle.None
@@ -613,6 +600,230 @@ Partial Class Pagos
         Me.txtFechaAux.TabIndex = 124
         Me.txtFechaAux.ValidatingType = GetType(Date)
         Me.txtFechaAux.Visible = False
+        '
+        'txtFechaParidad
+        '
+        Me.txtFechaParidad.Location = New System.Drawing.Point(372, 126)
+        Me.txtFechaParidad.Mask = "00/00/0000"
+        Me.txtFechaParidad.Name = "txtFechaParidad"
+        Me.txtFechaParidad.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtFechaParidad.Size = New System.Drawing.Size(79, 20)
+        Me.txtFechaParidad.TabIndex = 72
+        Me.txtFechaParidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtFecha
+        '
+        Me.txtFecha.Location = New System.Drawing.Point(243, 20)
+        Me.txtFecha.Mask = "00/00/0000"
+        Me.txtFecha.Name = "txtFecha"
+        Me.txtFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtFecha.Size = New System.Drawing.Size(70, 20)
+        Me.txtFecha.TabIndex = 72
+        Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'btnCarpetas
+        '
+        Me.btnCarpetas.BackgroundImage = Global.Administracion.My.Resources.Resources.Folder
+        Me.btnCarpetas.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnCarpetas.Cleanable = False
+        Me.btnCarpetas.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnCarpetas.EnterIndex = -1
+        Me.btnCarpetas.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnCarpetas.FlatAppearance.BorderSize = 0
+        Me.btnCarpetas.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnCarpetas.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnCarpetas.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnCarpetas.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCarpetas.LabelAssociationKey = -1
+        Me.btnCarpetas.Location = New System.Drawing.Point(353, 452)
+        Me.btnCarpetas.Name = "btnCarpetas"
+        Me.btnCarpetas.Size = New System.Drawing.Size(50, 54)
+        Me.btnCarpetas.TabIndex = 80
+        Me.ToolTip1.SetToolTip(Me.btnCarpetas, "Carpetas")
+        Me.btnCarpetas.UseVisualStyleBackColor = True
+        '
+        'btnImprimir
+        '
+        Me.btnImprimir.BackgroundImage = Global.Administracion.My.Resources.Resources.imprimir
+        Me.btnImprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnImprimir.Cleanable = False
+        Me.btnImprimir.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnImprimir.EnterIndex = -1
+        Me.btnImprimir.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnImprimir.FlatAppearance.BorderSize = 0
+        Me.btnImprimir.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnImprimir.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnImprimir.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnImprimir.LabelAssociationKey = -1
+        Me.btnImprimir.Location = New System.Drawing.Point(268, 452)
+        Me.btnImprimir.Name = "btnImprimir"
+        Me.btnImprimir.Size = New System.Drawing.Size(50, 54)
+        Me.btnImprimir.TabIndex = 79
+        Me.ToolTip1.SetToolTip(Me.btnImprimir, "Imprimir Orden de Pago")
+        Me.btnImprimir.UseVisualStyleBackColor = True
+        '
+        'btnCalcular
+        '
+        Me.btnCalcular.BackgroundImage = Global.Administracion.My.Resources.Resources.calculadora
+        Me.btnCalcular.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnCalcular.Cleanable = False
+        Me.btnCalcular.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnCalcular.EnterIndex = -1
+        Me.btnCalcular.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnCalcular.FlatAppearance.BorderSize = 0
+        Me.btnCalcular.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnCalcular.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnCalcular.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnCalcular.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCalcular.LabelAssociationKey = -1
+        Me.btnCalcular.Location = New System.Drawing.Point(438, 452)
+        Me.btnCalcular.Name = "btnCalcular"
+        Me.btnCalcular.Size = New System.Drawing.Size(50, 54)
+        Me.btnCalcular.TabIndex = 78
+        Me.ToolTip1.SetToolTip(Me.btnCalcular, "Calcular")
+        Me.btnCalcular.UseVisualStyleBackColor = True
+        '
+        'btnConsulta
+        '
+        Me.btnConsulta.BackgroundImage = Global.Administracion.My.Resources.Resources.Consulta_Dat_N1
+        Me.btnConsulta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnConsulta.Cleanable = False
+        Me.btnConsulta.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnConsulta.EnterIndex = -1
+        Me.btnConsulta.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnConsulta.FlatAppearance.BorderSize = 0
+        Me.btnConsulta.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnConsulta.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnConsulta.LabelAssociationKey = -1
+        Me.btnConsulta.Location = New System.Drawing.Point(124, 452)
+        Me.btnConsulta.Name = "btnConsulta"
+        Me.btnConsulta.Size = New System.Drawing.Size(50, 54)
+        Me.btnConsulta.TabIndex = 77
+        Me.ToolTip1.SetToolTip(Me.btnConsulta, "Abrir Consultas")
+        Me.btnConsulta.UseVisualStyleBackColor = True
+        '
+        'btnCtaCte
+        '
+        Me.btnCtaCte.BackgroundImage = Global.Administracion.My.Resources.Resources.bank
+        Me.btnCtaCte.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnCtaCte.Cleanable = False
+        Me.btnCtaCte.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnCtaCte.EnterIndex = -1
+        Me.btnCtaCte.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnCtaCte.FlatAppearance.BorderSize = 0
+        Me.btnCtaCte.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnCtaCte.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnCtaCte.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnCtaCte.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCtaCte.LabelAssociationKey = -1
+        Me.btnCtaCte.Location = New System.Drawing.Point(522, 452)
+        Me.btnCtaCte.Name = "btnCtaCte"
+        Me.btnCtaCte.Size = New System.Drawing.Size(58, 54)
+        Me.btnCtaCte.TabIndex = 76
+        Me.ToolTip1.SetToolTip(Me.btnCtaCte, "Consultar Cuentas Corrientes")
+        Me.btnCtaCte.UseVisualStyleBackColor = True
+        '
+        'btnChequesTerceros
+        '
+        Me.btnChequesTerceros.BackgroundImage = Global.Administracion.My.Resources.Resources.check_icon
+        Me.btnChequesTerceros.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnChequesTerceros.Cleanable = False
+        Me.btnChequesTerceros.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnChequesTerceros.EnterIndex = -1
+        Me.btnChequesTerceros.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnChequesTerceros.FlatAppearance.BorderSize = 0
+        Me.btnChequesTerceros.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnChequesTerceros.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnChequesTerceros.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnChequesTerceros.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnChequesTerceros.LabelAssociationKey = -1
+        Me.btnChequesTerceros.Location = New System.Drawing.Point(592, 452)
+        Me.btnChequesTerceros.Name = "btnChequesTerceros"
+        Me.btnChequesTerceros.Size = New System.Drawing.Size(89, 54)
+        Me.btnChequesTerceros.TabIndex = 76
+        Me.ToolTip1.SetToolTip(Me.btnChequesTerceros, "Consulta de Cheques de Terceros")
+        Me.btnChequesTerceros.UseVisualStyleBackColor = True
+        '
+        'btnCerrar
+        '
+        Me.btnCerrar.BackgroundImage = Global.Administracion.My.Resources.Resources.Salir2
+        Me.btnCerrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnCerrar.Cleanable = False
+        Me.btnCerrar.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnCerrar.EnterIndex = -1
+        Me.btnCerrar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnCerrar.FlatAppearance.BorderSize = 0
+        Me.btnCerrar.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnCerrar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCerrar.LabelAssociationKey = -1
+        Me.btnCerrar.Location = New System.Drawing.Point(687, 452)
+        Me.btnCerrar.Name = "btnCerrar"
+        Me.btnCerrar.Size = New System.Drawing.Size(50, 54)
+        Me.btnCerrar.TabIndex = 76
+        Me.ToolTip1.SetToolTip(Me.btnCerrar, "Cerrar Formulario")
+        Me.btnCerrar.UseVisualStyleBackColor = True
+        '
+        'btnLimpiar
+        '
+        Me.btnLimpiar.BackgroundImage = Global.Administracion.My.Resources.Resources.Limpiar
+        Me.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnLimpiar.Cleanable = False
+        Me.btnLimpiar.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnLimpiar.EnterIndex = -1
+        Me.btnLimpiar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnLimpiar.FlatAppearance.BorderSize = 0
+        Me.btnLimpiar.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnLimpiar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnLimpiar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnLimpiar.LabelAssociationKey = -1
+        Me.btnLimpiar.Location = New System.Drawing.Point(195, 452)
+        Me.btnLimpiar.Name = "btnLimpiar"
+        Me.btnLimpiar.Size = New System.Drawing.Size(50, 54)
+        Me.btnLimpiar.TabIndex = 75
+        Me.ToolTip1.SetToolTip(Me.btnLimpiar, "Limpiar Formulario")
+        Me.btnLimpiar.UseVisualStyleBackColor = True
+        '
+        'btnAgregar
+        '
+        Me.btnAgregar.BackgroundImage = Global.Administracion.My.Resources.Resources.Aceptar_N2
+        Me.btnAgregar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnAgregar.Cleanable = False
+        Me.btnAgregar.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnAgregar.EnterIndex = -1
+        Me.btnAgregar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnAgregar.FlatAppearance.BorderSize = 0
+        Me.btnAgregar.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnAgregar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnAgregar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAgregar.LabelAssociationKey = -1
+        Me.btnAgregar.Location = New System.Drawing.Point(39, 452)
+        Me.btnAgregar.Name = "btnAgregar"
+        Me.btnAgregar.Size = New System.Drawing.Size(50, 54)
+        Me.btnAgregar.TabIndex = 74
+        Me.ToolTip1.SetToolTip(Me.btnAgregar, "Ingresar Orden de Pago")
+        Me.btnAgregar.UseVisualStyleBackColor = True
+        '
+        'txtCuenta
+        '
+        Me.txtCuenta.Cleanable = True
+        Me.txtCuenta.Empty = True
+        Me.txtCuenta.EnterIndex = 1
+        Me.txtCuenta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.txtCuenta.LabelAssociationKey = 1
+        Me.txtCuenta.Location = New System.Drawing.Point(46, 27)
+        Me.txtCuenta.MaxLength = 6
+        Me.txtCuenta.Name = "txtCuenta"
+        Me.txtCuenta.Size = New System.Drawing.Size(94, 20)
+        Me.txtCuenta.TabIndex = 6
+        Me.txtCuenta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtCuenta.Validator = Administracion.ValidatorType.Numeric
         '
         'lstSeleccion
         '
@@ -638,26 +849,6 @@ Partial Class Pagos
         Me.CLBFiltrado.Size = New System.Drawing.Size(302, 108)
         Me.CLBFiltrado.TabIndex = 73
         Me.CLBFiltrado.Visible = False
-        '
-        'txtFechaParidad
-        '
-        Me.txtFechaParidad.Location = New System.Drawing.Point(372, 126)
-        Me.txtFechaParidad.Mask = "00/00/0000"
-        Me.txtFechaParidad.Name = "txtFechaParidad"
-        Me.txtFechaParidad.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtFechaParidad.Size = New System.Drawing.Size(79, 20)
-        Me.txtFechaParidad.TabIndex = 72
-        Me.txtFechaParidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'txtFecha
-        '
-        Me.txtFecha.Location = New System.Drawing.Point(243, 20)
-        Me.txtFecha.Mask = "00/00/0000"
-        Me.txtFecha.Name = "txtFecha"
-        Me.txtFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtFecha.Size = New System.Drawing.Size(70, 20)
-        Me.txtFecha.TabIndex = 72
-        Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'CustomLabel12
         '
@@ -999,11 +1190,11 @@ Partial Class Pagos
         '
         Me.CustomLabel11.AutoSize = True
         Me.CustomLabel11.ControlAssociationKey = 12
-        Me.CustomLabel11.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.CustomLabel11.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel11.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel11.Location = New System.Drawing.Point(550, 211)
+        Me.CustomLabel11.Location = New System.Drawing.Point(577, 212)
         Me.CustomLabel11.Name = "CustomLabel11"
-        Me.CustomLabel11.Size = New System.Drawing.Size(118, 18)
+        Me.CustomLabel11.Size = New System.Drawing.Size(94, 14)
         Me.CustomLabel11.TabIndex = 52
         Me.CustomLabel11.Text = "Total Retenciones"
         '
@@ -1115,194 +1306,18 @@ Partial Class Pagos
         Me.txtIBCiudad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtIBCiudad.Validator = Administracion.ValidatorType.Float
         '
-        'btnCarpetas
+        'btnActualizarCarpetas
         '
-        Me.btnCarpetas.BackgroundImage = Global.Administracion.My.Resources.Resources.Folder
-        Me.btnCarpetas.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnCarpetas.Cleanable = False
-        Me.btnCarpetas.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnCarpetas.EnterIndex = -1
-        Me.btnCarpetas.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnCarpetas.FlatAppearance.BorderSize = 0
-        Me.btnCarpetas.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnCarpetas.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnCarpetas.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnCarpetas.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCarpetas.LabelAssociationKey = -1
-        Me.btnCarpetas.Location = New System.Drawing.Point(353, 452)
-        Me.btnCarpetas.Name = "btnCarpetas"
-        Me.btnCarpetas.Size = New System.Drawing.Size(50, 54)
-        Me.btnCarpetas.TabIndex = 80
-        Me.ToolTip1.SetToolTip(Me.btnCarpetas, "Carpetas")
-        Me.btnCarpetas.UseVisualStyleBackColor = True
-        '
-        'btnImprimir
-        '
-        Me.btnImprimir.BackgroundImage = Global.Administracion.My.Resources.Resources.imprimir
-        Me.btnImprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnImprimir.Cleanable = False
-        Me.btnImprimir.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnImprimir.EnterIndex = -1
-        Me.btnImprimir.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnImprimir.FlatAppearance.BorderSize = 0
-        Me.btnImprimir.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnImprimir.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnImprimir.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnImprimir.LabelAssociationKey = -1
-        Me.btnImprimir.Location = New System.Drawing.Point(268, 452)
-        Me.btnImprimir.Name = "btnImprimir"
-        Me.btnImprimir.Size = New System.Drawing.Size(50, 54)
-        Me.btnImprimir.TabIndex = 79
-        Me.ToolTip1.SetToolTip(Me.btnImprimir, "Imprimir Orden de Pago")
-        Me.btnImprimir.UseVisualStyleBackColor = True
-        '
-        'btnCalcular
-        '
-        Me.btnCalcular.BackgroundImage = Global.Administracion.My.Resources.Resources.calculadora
-        Me.btnCalcular.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnCalcular.Cleanable = False
-        Me.btnCalcular.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnCalcular.EnterIndex = -1
-        Me.btnCalcular.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnCalcular.FlatAppearance.BorderSize = 0
-        Me.btnCalcular.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnCalcular.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnCalcular.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnCalcular.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCalcular.LabelAssociationKey = -1
-        Me.btnCalcular.Location = New System.Drawing.Point(438, 452)
-        Me.btnCalcular.Name = "btnCalcular"
-        Me.btnCalcular.Size = New System.Drawing.Size(50, 54)
-        Me.btnCalcular.TabIndex = 78
-        Me.ToolTip1.SetToolTip(Me.btnCalcular, "Calcular")
-        Me.btnCalcular.UseVisualStyleBackColor = True
-        '
-        'btnConsulta
-        '
-        Me.btnConsulta.BackgroundImage = Global.Administracion.My.Resources.Resources.Consulta_Dat_N1
-        Me.btnConsulta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnConsulta.Cleanable = False
-        Me.btnConsulta.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnConsulta.EnterIndex = -1
-        Me.btnConsulta.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnConsulta.FlatAppearance.BorderSize = 0
-        Me.btnConsulta.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnConsulta.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnConsulta.LabelAssociationKey = -1
-        Me.btnConsulta.Location = New System.Drawing.Point(124, 452)
-        Me.btnConsulta.Name = "btnConsulta"
-        Me.btnConsulta.Size = New System.Drawing.Size(50, 54)
-        Me.btnConsulta.TabIndex = 77
-        Me.ToolTip1.SetToolTip(Me.btnConsulta, "Abrir Consultas")
-        Me.btnConsulta.UseVisualStyleBackColor = True
-        '
-        'btnCtaCte
-        '
-        Me.btnCtaCte.BackgroundImage = Global.Administracion.My.Resources.Resources.bank
-        Me.btnCtaCte.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnCtaCte.Cleanable = False
-        Me.btnCtaCte.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnCtaCte.EnterIndex = -1
-        Me.btnCtaCte.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnCtaCte.FlatAppearance.BorderSize = 0
-        Me.btnCtaCte.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnCtaCte.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnCtaCte.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnCtaCte.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCtaCte.LabelAssociationKey = -1
-        Me.btnCtaCte.Location = New System.Drawing.Point(522, 452)
-        Me.btnCtaCte.Name = "btnCtaCte"
-        Me.btnCtaCte.Size = New System.Drawing.Size(58, 54)
-        Me.btnCtaCte.TabIndex = 76
-        Me.ToolTip1.SetToolTip(Me.btnCtaCte, "Consultar Cuentas Corrientes")
-        Me.btnCtaCte.UseVisualStyleBackColor = True
-        '
-        'btnChequesTerceros
-        '
-        Me.btnChequesTerceros.BackgroundImage = Global.Administracion.My.Resources.Resources.check_icon
-        Me.btnChequesTerceros.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnChequesTerceros.Cleanable = False
-        Me.btnChequesTerceros.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnChequesTerceros.EnterIndex = -1
-        Me.btnChequesTerceros.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnChequesTerceros.FlatAppearance.BorderSize = 0
-        Me.btnChequesTerceros.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnChequesTerceros.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnChequesTerceros.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnChequesTerceros.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnChequesTerceros.LabelAssociationKey = -1
-        Me.btnChequesTerceros.Location = New System.Drawing.Point(592, 452)
-        Me.btnChequesTerceros.Name = "btnChequesTerceros"
-        Me.btnChequesTerceros.Size = New System.Drawing.Size(89, 54)
-        Me.btnChequesTerceros.TabIndex = 76
-        Me.ToolTip1.SetToolTip(Me.btnChequesTerceros, "Consulta de Cheques de Terceros")
-        Me.btnChequesTerceros.UseVisualStyleBackColor = True
-        '
-        'btnCerrar
-        '
-        Me.btnCerrar.BackgroundImage = Global.Administracion.My.Resources.Resources.Salir2
-        Me.btnCerrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnCerrar.Cleanable = False
-        Me.btnCerrar.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnCerrar.EnterIndex = -1
-        Me.btnCerrar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnCerrar.FlatAppearance.BorderSize = 0
-        Me.btnCerrar.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnCerrar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCerrar.LabelAssociationKey = -1
-        Me.btnCerrar.Location = New System.Drawing.Point(687, 452)
-        Me.btnCerrar.Name = "btnCerrar"
-        Me.btnCerrar.Size = New System.Drawing.Size(50, 54)
-        Me.btnCerrar.TabIndex = 76
-        Me.ToolTip1.SetToolTip(Me.btnCerrar, "Cerrar Formulario")
-        Me.btnCerrar.UseVisualStyleBackColor = True
-        '
-        'btnLimpiar
-        '
-        Me.btnLimpiar.BackgroundImage = Global.Administracion.My.Resources.Resources.Limpiar
-        Me.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnLimpiar.Cleanable = False
-        Me.btnLimpiar.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnLimpiar.EnterIndex = -1
-        Me.btnLimpiar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnLimpiar.FlatAppearance.BorderSize = 0
-        Me.btnLimpiar.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnLimpiar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnLimpiar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnLimpiar.LabelAssociationKey = -1
-        Me.btnLimpiar.Location = New System.Drawing.Point(195, 452)
-        Me.btnLimpiar.Name = "btnLimpiar"
-        Me.btnLimpiar.Size = New System.Drawing.Size(50, 54)
-        Me.btnLimpiar.TabIndex = 75
-        Me.ToolTip1.SetToolTip(Me.btnLimpiar, "Limpiar Formulario")
-        Me.btnLimpiar.UseVisualStyleBackColor = True
-        '
-        'btnAgregar
-        '
-        Me.btnAgregar.BackgroundImage = Global.Administracion.My.Resources.Resources.Aceptar_N2
-        Me.btnAgregar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnAgregar.Cleanable = False
-        Me.btnAgregar.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnAgregar.EnterIndex = -1
-        Me.btnAgregar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnAgregar.FlatAppearance.BorderSize = 0
-        Me.btnAgregar.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnAgregar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnAgregar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAgregar.LabelAssociationKey = -1
-        Me.btnAgregar.Location = New System.Drawing.Point(39, 452)
-        Me.btnAgregar.Name = "btnAgregar"
-        Me.btnAgregar.Size = New System.Drawing.Size(50, 54)
-        Me.btnAgregar.TabIndex = 74
-        Me.ToolTip1.SetToolTip(Me.btnAgregar, "Ingresar Orden de Pago")
-        Me.btnAgregar.UseVisualStyleBackColor = True
+        Me.btnActualizarCarpetas.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnActualizarCarpetas.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnActualizarCarpetas.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnActualizarCarpetas.ForeColor = System.Drawing.SystemColors.Control
+        Me.btnActualizarCarpetas.Location = New System.Drawing.Point(465, 122)
+        Me.btnActualizarCarpetas.Name = "btnActualizarCarpetas"
+        Me.btnActualizarCarpetas.Size = New System.Drawing.Size(149, 23)
+        Me.btnActualizarCarpetas.TabIndex = 128
+        Me.btnActualizarCarpetas.Text = "ACTUALIZAR CARPETAS"
+        Me.btnActualizarCarpetas.UseVisualStyleBackColor = True
         '
         'Pagos
         '
@@ -1427,4 +1442,5 @@ Partial Class Pagos
     Friend WithEvents MarcaDifCambio As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents MarcaCHR As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents btnEnviarAviso As System.Windows.Forms.Button
+    Friend WithEvents btnActualizarCarpetas As System.Windows.Forms.Button
 End Class

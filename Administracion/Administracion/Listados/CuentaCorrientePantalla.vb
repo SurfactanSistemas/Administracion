@@ -656,6 +656,8 @@ Public Class CuentaCorrientePantalla
                     txtProveedor.Text = WProveedor.Rows(0).Item("Proveedor")
                     txtRazon.Text = WProveedor.Rows(0).Item("Nombre")
 
+                    mostrarProveedor(WProveedor(0))
+
                 End If
 
             Catch ex As Exception
@@ -688,7 +690,7 @@ Public Class CuentaCorrientePantalla
     Private Function _TraerDatosProveedor(ByVal WProveedor As String) As datatable
         Dim tabla As New DataTable
         Dim cn = New SqlConnection()
-        Dim cm = New SqlCommand("SELECT Proveedor, RTRIM(LTRIM(Nombre)) Nombre FROM Proveedor WHERE Proveedor = '" & WProveedor & "' ")
+        Dim cm = New SqlCommand("SELECT * FROM Proveedor WHERE Proveedor = '" & WProveedor & "' ")
         Dim dr As SqlDataReader
 
         Try

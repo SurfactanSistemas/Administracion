@@ -558,14 +558,14 @@ Public Class ListadoImputacionesContable
         ZRetIb(5, 2) = "192"
         ZRetIb(6, 2) = "193"
         ZRetIb(7, 2) = "194"
-        ZRetIb(8, 2) = "195"
+        ZRetIb(8, 2) = "188" '"195"
 
-        ZRetIb(9, 2) = "176"
-        ZRetIb(10, 2) = "170"
-        ZRetIb(11, 2) = "171"
-        ZRetIb(12, 2) = "167"
-        ZRetIb(13, 2) = "172"
-        ZRetIb(14, 2) = "179"
+        ZRetIb(9, 2) = "197" '"176"
+        ZRetIb(10, 2) = "195" ' "170"
+        ZRetIb(11, 2) = "187" '"171"
+        ZRetIb(12, 2) = "196" '"167"
+        ZRetIb(13, 2) = "185" '"172"
+        ZRetIb(14, 2) = "186" '"179"
 
         Dim ZExcluir(1000) As String
         Dim Zex = 0

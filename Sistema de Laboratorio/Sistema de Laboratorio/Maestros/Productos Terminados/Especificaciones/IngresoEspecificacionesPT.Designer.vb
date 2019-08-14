@@ -59,7 +59,6 @@ Partial Class IngresoEspecificacionesPT
         Me.Cantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.dgvEspecif = New ConsultasVarias.DBDataGridView()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Ensayo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Especificacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DescEnsayo = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -82,6 +81,7 @@ Partial Class IngresoEspecificacionesPT
         Me.Variable8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Variable9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Variable10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -474,7 +474,6 @@ Partial Class IngresoEspecificacionesPT
         Me.Farmacopea.Name = "Farmacopea"
         Me.Farmacopea.ReadOnly = True
         Me.Farmacopea.Visible = False
-        Me.Farmacopea.Width = 91
         '
         'TipoEspecif
         '
@@ -491,7 +490,6 @@ Partial Class IngresoEspecificacionesPT
         Me.DesdeEspecif.Name = "DesdeEspecif"
         Me.DesdeEspecif.ReadOnly = True
         Me.DesdeEspecif.Visible = False
-        Me.DesdeEspecif.Width = 98
         '
         'HastaEspecif
         '
@@ -500,7 +498,6 @@ Partial Class IngresoEspecificacionesPT
         Me.HastaEspecif.Name = "HastaEspecif"
         Me.HastaEspecif.ReadOnly = True
         Me.HastaEspecif.Visible = False
-        Me.HastaEspecif.Width = 95
         '
         'UnidadEspecif
         '
@@ -509,7 +506,6 @@ Partial Class IngresoEspecificacionesPT
         Me.UnidadEspecif.Name = "UnidadEspecif"
         Me.UnidadEspecif.ReadOnly = True
         Me.UnidadEspecif.Visible = False
-        Me.UnidadEspecif.Width = 101
         '
         'MenorIgualEspecif
         '
@@ -518,7 +514,6 @@ Partial Class IngresoEspecificacionesPT
         Me.MenorIgualEspecif.Name = "MenorIgualEspecif"
         Me.MenorIgualEspecif.ReadOnly = True
         Me.MenorIgualEspecif.Visible = False
-        Me.MenorIgualEspecif.Width = 120
         '
         'InformaEspecif
         '
@@ -527,7 +522,6 @@ Partial Class IngresoEspecificacionesPT
         Me.InformaEspecif.Name = "InformaEspecif"
         Me.InformaEspecif.ReadOnly = True
         Me.InformaEspecif.Visible = False
-        Me.InformaEspecif.Width = 102
         '
         'Parametro
         '
@@ -536,7 +530,6 @@ Partial Class IngresoEspecificacionesPT
         Me.Parametro.Name = "Parametro"
         Me.Parametro.ReadOnly = True
         Me.Parametro.Visible = False
-        Me.Parametro.Width = 80
         '
         'FormulaEspecif
         '

@@ -120,12 +120,5 @@ namespace Modulo_Capacitacion.Listados.PlanCapacitacionAnualTentativo
                 MessageBox.Show(ex.Message);
             }
         }
-
-        private void TentativoListaCursos_Load(object sender, EventArgs e)
-        {
-
-        }
-
-
     }
 }

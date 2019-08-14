@@ -35,6 +35,7 @@ Partial Class Login
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtPsw = New System.Windows.Forms.TextBox()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -144,6 +145,22 @@ Partial Class Login
         Me.txtPsw.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.txtPsw.UseSystemPasswordChar = True
         '
+        'Button1
+        '
+        Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Button1.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.Button1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.Button1.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.Button1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.Button1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.Button1.Location = New System.Drawing.Point(321, 137)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(35, 40)
+        Me.Button1.TabIndex = 4
+        Me.Button1.Text = "SALIR"
+        Me.Button1.UseVisualStyleBackColor = True
+        Me.Button1.Visible = False
+        '
         'Login
         '
         Me.ClientSize = New System.Drawing.Size(383, 234)
@@ -151,6 +168,7 @@ Partial Class Login
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.cmbEntity)
         Me.Controls.Add(Me.btnAccept)
@@ -173,4 +191,5 @@ Partial Class Login
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents txtPsw As System.Windows.Forms.TextBox
+    Friend WithEvents Button1 As System.Windows.Forms.Button
 End Class

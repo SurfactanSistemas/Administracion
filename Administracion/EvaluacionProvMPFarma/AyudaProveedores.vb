@@ -14,9 +14,9 @@ Public Class AyudaProveedores
         Dim WProveedores As DataTable = Nothing
 
         If ckSoloFarma.Checked Then
-            WProveedores = GetAll("SELECT DISTINCT ct.Proveedor As Codigo, UPPER(RTRIM(p.Nombre)) Nombre FROM Cotiza ct INNER JOIN Proveedor p ON p.Proveedor = ct.Proveedor INNER JOIN Articulo a ON a.Codigo = ct.Articulo  And a.ClasificacionFarma > 0 Order by p.Nombre")
+            WProveedores = GetAll("SELECT DISTINCT ct.Proveedor As Codigo, UPPER(RTRIM(p.Nombre)) Nombre FROM Cotiza ct INNER JOIN Proveedor p ON p.Proveedor = ct.Proveedor INNER JOIN Articulo a ON a.Codigo = ct.Articulo  And a.ClasificacionFarma > 0")
         Else
-            WProveedores = GetAll("SELECT Proveedor AS Codigo, UPPER(RTRIM(Nombre)) Nombre FROM Proveedor Order by Nombre")
+            WProveedores = GetAll("SELECT Proveedor AS Codigo, UPPER(RTRIM(Nombre)) Nombre FROM Proveedor Order by Nombre, Proveedor")
         End If
 
         BackgroundWorker1.ReportProgress(1, WProveedores)

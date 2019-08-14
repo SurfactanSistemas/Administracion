@@ -659,9 +659,6 @@ Public Class Pagos
         WPorceIb = proveedor.porceIBProvincia
         WPorceIbCaba = proveedor.porceIBCABA
 
-
-        btnCtaCte.PerformClick()
-
     End Sub
 
     Private Sub mostrarBanco(ByVal banco As Banco)
@@ -681,7 +678,7 @@ Public Class Pagos
 
                 If Not IsNothing(proveedor) Then
                     mostrarProveedor(proveedor)
-
+                    btnCtaCte.PerformClick()
                 Else
                     txtRazonSocial.Text = ""
                     MessageBox.Show("El proveedor ingresado es inexistente")
@@ -1837,6 +1834,7 @@ Public Class Pagos
         ckNoCalcRetenciones.Checked = False
 
         btnEnviarAviso.Enabled = False
+        btnActualizarCarpetas.Visible = False
 
     End Sub
 
@@ -3702,13 +3700,28 @@ Public Class Pagos
     Public Sub txtOrdenPago_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtOrdenPago.KeyDown
 
         If e.KeyData = Keys.Enter Then
+
+            btnEnviarAviso.Enabled = True
+            btnActualizarCarpetas.Enabled = True
+
             If Trim(txtOrdenPago.Text) <> "" Then
                 txtOrdenPago.Text = ceros(txtOrdenPago.Text, 6)
 
                 Try
                     mostrarOrdenDePago(DAOPagos.buscarOrdenPorNumero(txtOrdenPago.Text))
 
+                    Dim WOrd As DataRow = GetSingle("SELECT * FROM Pagos WHERE Orden = '" & txtOrdenPago.Text & "' And Renglon = '01'")
+
+                    If WOrd IsNot Nothing Then
+
+                        For i As Integer = 1 To 9
+                            _Carpetas(i) = Trim(OrDefault(WOrd.Item("Carpeta" & i), ""))
+                        Next
+
+                    End If
+
                     btnEnviarAviso.Enabled = True
+                    btnActualizarCarpetas.Visible = True
 
                 Catch ex As System.Exception
 
@@ -4513,6 +4526,7 @@ Public Class Pagos
     End Sub
 
     Private Sub btnCarpetas_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCarpetas.Click
+
         With CarpetasPagos
 
             .Carpetas(_Carpetas) ' Asignamos las carpetas en caso de que la orden de pago tenga.
@@ -4524,7 +4538,7 @@ Public Class Pagos
             .Dispose()
 
         End With
-
+        
     End Sub
 
     'Private Sub lblDiferencia_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblDiferencia.TextChanged
@@ -6968,6 +6982,7 @@ Public Class Pagos
             Select Case _TipoConsulta
                 Case 0
                     mostrarProveedor(lstConsulta.SelectedItem.ToString)
+                    btnCtaCte.PerformClick()
                 Case 1
                     ' Ctas Ctes
                     If Trim(lstConsulta.SelectedItem) = "" Or Not optCtaCte.Checked Then
@@ -8230,9 +8245,9 @@ Public Class Pagos
                     If wFechasTransferencias.Trim <> "" Then
 
                         If wFechasTransferencias.Split(",").Count > 1 Then
-                            WBody &= " a las siguientes fechas: "
+                            WBody &= " con las siguientes fechas: "
                         Else
-                            WBody &= " a la siguiente fecha: "
+                            WBody &= " con fecha: "
                         End If
 
                         WBody &= "<strong>" & wFechasTransferencias & "</strong>"
@@ -8240,14 +8255,14 @@ Public Class Pagos
                     End If
 
                     If PorTransferenciaYCheques Then
-                        WBody &= "." & "<br/>" & "<br/>" & "Además tiene Cheque(s) para retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, en el horario de <strong>14:00 a 17:00 hs.</strong>"
+                        WBody &= "." & "<br/>" & "<br/>" & "Además tiene Cheque(s) para retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, de <strong>Lunes a Viernes</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
                     Else
                         WBody &= "." & "<br/>" & "<br/>" & "Adjuntamos Orden de Pago y retenciones si correspondiesen."
                     End If
 
                 Else
 
-                    WBody = "Informamos que se encuentra a su disposición un pago que podrá ser retirado por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, en el horario de <strong>14:00 a 17:00 hs.</strong>"
+                    WBody = "Informamos que se encuentra a su disposición un pago que podrá ser retirado por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, de <strong>Lunes a Viernes</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
 
                 End If
 
@@ -8380,13 +8395,13 @@ Public Class Pagos
                 '
                 ' (NO BORRAR) Obtenemos la Instancia de Inspector para que nos agrege la firma que se encuentra definida por defecto.
                 '
-                Dim WInspector = .GetInspector
+                'Dim WInspector = .GetInspector
 
                 .To = _to
                 .BCC = _bcc
                 .Subject = _subject
                 '.Body = _body
-                .HTMLBody = "<p>" & _body & "</p>" & .HTMLBody
+                .HTMLBody = "<p>" & _body & "</p>" & "<br/><br/><p><strong>Atentamente</strong><br/>SURFACTAN S.A</p>" & .HTMLBody
 
                 For Each adjunto As String In _adjuntos
                     If Trim(adjunto) <> "" Then
@@ -8409,4 +8424,19 @@ Public Class Pagos
 
     End Sub
 
+    Private Sub btnActualizarCarpetas_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnActualizarCarpetas.Click
+
+        With New ActualizarCarpetasPagos(txtOrdenPago.Text)
+
+            .Carpetas(_Carpetas) ' Asignamos las carpetas en caso de que la orden de pago tenga.
+
+            .ShowDialog()
+
+            _Carpetas = .Carpetas ' Traemos las carpetas que se hayan asignado.
+
+            .Dispose()
+
+        End With
+
+    End Sub
 End Class

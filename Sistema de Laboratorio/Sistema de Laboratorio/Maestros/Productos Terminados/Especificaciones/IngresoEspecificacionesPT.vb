@@ -159,13 +159,14 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
     End Sub
 
     Private Function _GenerarImpreParametro(ByVal wTipoEspecif As Object, ByVal wDesdeEspecif As Object, ByVal wHastaEspecif As Object, ByVal wUnidadEspecif As Object, ByVal wMenorIgualEspecif As Object) As String
-        If Trim(wDesdeEspecif) = "" And Trim(wHastaEspecif) = "" Then Return ""
 
-        wTipoEspecif = Trim(wTipoEspecif)
-        wDesdeEspecif = Trim(wDesdeEspecif)
-        wHastaEspecif = Trim(wHastaEspecif)
-        wUnidadEspecif = Trim(wUnidadEspecif)
-        wMenorIgualEspecif = Trim(wMenorIgualEspecif)
+        wTipoEspecif = OrDefault(Trim(wTipoEspecif), "")
+        wDesdeEspecif = OrDefault(Trim(wDesdeEspecif), "")
+        wHastaEspecif = OrDefault(Trim(wHastaEspecif), "")
+        wUnidadEspecif = OrDefault(Trim(wUnidadEspecif), "")
+        wMenorIgualEspecif = OrDefault(Trim(wMenorIgualEspecif), "")
+
+        If Trim(wDesdeEspecif) = "" And Trim(wHastaEspecif) = "" Then Return "Cumple Ensayo7"
 
         If Val(wDesdeEspecif) <> 0 Or Val(wHastaEspecif) <> 9999 Then
 
@@ -461,6 +462,11 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
         '
 
         _ActualizarRegistroProduccion()
+
+        '
+        ' Mostramos por Pantalla la impresión de Especificaciones (también las de inglés).
+        '
+        btnImpresion_Click(Nothing, Nothing)
 
         btnLimpiar.PerformClick()
 
@@ -1021,14 +1027,14 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
         ZSql = ZSql & "'" & WArticulo & "',"
         ZSql = ZSql & "'" & WPTerminado & "',"
         ZSql = ZSql & "'" & WLetra & "',"
-        ZSql = ZSql & "'" & Helper.left(XDescripcion, 70) & "',"
+        ZSql = ZSql & "'" & _Left(XDescripcion, 70) & "',"
         ZSql = ZSql & "'" & WCantidad & "',"
         ZSql = ZSql & "'" & WEquipo & "',"
         ZSql = ZSql & "'" & WPeso & "',"
         ZSql = ZSql & "'" & WTipo & "',"
         ZSql = ZSql & "'" & WItem & "',"
         ZSql = ZSql & "'" & WEpp & "',"
-        ZSql = ZSql & "'" & Helper.left(WDesEpp, 50) & "',"
+        ZSql = ZSql & "'" & _Left(WDesEpp, 50) & "',"
         ZSql = ZSql & "'" & Str$(WItem) & "',"
         ZSql = ZSql & "'" & WImprePeso & "',"
         ZSql = ZSql & "'" & WLibera & "',"
@@ -1556,7 +1562,47 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
         Return MyBase.ProcessCmdKey(msg, keyData)
     End Function
 
+    Private Sub btnImpresion_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImpresion.Click
+        Dim WTerminado As DataRow = GetSingle("SELECT Vida FROM Terminado WHERE Codigo = '" & txtTerminado.Text & "'")
 
+        If WTerminado Is Nothing Then Exit Sub
 
+        Dim WVida As String = OrDefault(WTerminado.Item("Vida"), "0")
 
+        Dim WCargaV As DataTable = GetAll("SELECT Valor, Clave, MenorIgualEspecif, InformaEspecif, TipoEspecif, UnidadEspecif, DesdeEspecif, HastaEspecif, Farmacopea, Ensayo FROM CargaV WHERE Terminado = '" & txtTerminado.Text & "' And Paso = '" & txtEtapa.Text & "' Order by Clave")
+
+        If WCargaV.Rows.Count = 0 Then Exit Sub
+
+        Dim WSqls As New List(Of String)
+
+        WSqls.Add(String.Format("UPDATE CargaV SET Partida = '0', ImprePaso = Paso, CantidadPartida = '' WHERE Terminado = '{0}' And Paso = '{1}'", txtTerminado.Text, txtEtapa.Text))
+
+        For Each row As Datarow In WCargaV.rows
+            Dim WObservacion1 As String = ""
+
+            With row
+
+                WObservacion1 = _GenerarImpreParametro(.Item("TipoEspecif"), .Item("DesdeEspecif"), .Item("HastaEspecif"), .Item("UnidadEspecif"), .Item("MenorIgualEspecif"))
+
+                WSqls.Add(String.Format("UPDATE CargaV SET Observacion1 = '{1}' WHERE Clave = '{0}'", .Item("Clave"), _Left(WObservacion1.Trim, 100)))
+
+            End With
+
+        Next
+
+        ExecuteNonQueries(WSqls.ToArray)
+
+        With New VistaPrevia
+            .Reporte = New ImpreEspecificacionesPT
+            .Formula = "{CargaV.Terminado}='" & txtTerminado.Text & "' And {CargaV.Paso}=" & txtEtapa.Text & ""
+            .Mostrar()
+        End With
+
+        With New VistaPrevia
+            .Reporte = New ImpreEspecificacionesPTIngles
+            .Formula = "{CargaV.Terminado}='" & txtTerminado.Text & "' And {CargaV.Paso}=" & txtEtapa.Text & ""
+            .Mostrar()
+        End With
+
+    End Sub
 End Class

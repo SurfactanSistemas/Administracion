@@ -431,15 +431,15 @@ Module Proceso
 
             Select Case varTipoprv
                 Case 1
-                    varMinimo = 142400 '100000
+                    varMinimo = 224000 '142400 '100000
                 Case 2
                     varMinimo = 10700 '7500
-                Case 3
-                    varMinimo = 7120 '5000
+                Case 3 ' alq
+                    varMinimo = 11200 '7120 '5000
                 Case 6
-                    varMinimo = 42700 '30000
+                    varMinimo = 67170 '42700 '30000
                 Case 7
-                    varMinimo = 42700 '30000
+                    varMinimo = 67170 '42700 '30000
             End Select
 
             varAcumuladPago = varAcumulaNeto + varBase

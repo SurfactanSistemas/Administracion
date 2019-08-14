@@ -447,6 +447,12 @@
     <Compile Include="Pagos\CarpetasPagos.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Pagos\ActualizarCarpetasPagos.Designer.vb">
+      <DependentUpon>ActualizarCarpetasPagos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Pagos\ActualizarCarpetasPagos.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Procesos\CierreMes.Designer.vb">
       <DependentUpon>CierreMes.vb</DependentUpon>
     </Compile>
@@ -1049,6 +1055,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pagos\CarpetasPagos.resx">
       <DependentUpon>CarpetasPagos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pagos\ActualizarCarpetasPagos.resx">
+      <DependentUpon>ActualizarCarpetasPagos.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Procesos\CierreMes.resx">
       <DependentUpon>CierreMes.vb</DependentUpon>

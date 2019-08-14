@@ -175,9 +175,9 @@ Public Class GestionAvisosOPDisponiblesProveedores
                     If wFechasTransferencias.Trim <> "" Then
 
                         If wFechasTransferencias.Split(",").Count > 1 Then
-                            WBody &= " a las siguientes fechas: "
+                            WBody &= " con las siguientes fechas: "
                         Else
-                            WBody &= " a la siguiente fecha: "
+                            WBody &= " con fecha: "
                         End If
 
                         WBody &= "<strong>" & wFechasTransferencias & "</strong>"
@@ -185,14 +185,14 @@ Public Class GestionAvisosOPDisponiblesProveedores
                     End If
 
                     If PorTransferenciaYCheques Then
-                        WBody &= "." & "<br/>" & "<br/>" & "Además tiene Cheque(s) para retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, en el horario de <strong>14:00 a 17:00 hs.</strong>"
+                        WBody &= "." & "<br/>" & "<br/>" & "Además tiene Cheque(s) para retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, de <strong>Lunes a Viernes</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
                     Else
                         WBody &= "." & "<br/>" & "<br/>" & "Adjuntamos Orden de Pago y retenciones si correspondiesen."
                     End If
 
                 Else
 
-                    WBody = "Informamos que se encuentra a su disposición un pago que podrá ser retirado por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, en el horario de <strong>14:00 a 17:00 hs.</strong>"
+                    WBody = "Informamos que se encuentra a su disposición un pago que podrá ser retirado por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, de <strong>Lunes a Viernes</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
 
                 End If
 
@@ -332,7 +332,8 @@ Public Class GestionAvisosOPDisponiblesProveedores
                 .BCC = _bcc
                 .Subject = _subject
                 '.Body = _body
-                .HTMLBody = "<p>" & _body & "</p>" & .HTMLBody
+                '.HTMLBody = "<p>" & _body & "</p>" & .HTMLBody
+                .HTMLBody = "<p>" & _body & "</p>" & "<br/><br/><p><strong>Atentamente</strong><br/>SURFACTAN S.A</p>" & .HTMLBody
 
                 For Each adjunto As String In _adjuntos
                     If Trim(adjunto) <> "" Then

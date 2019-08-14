@@ -31,21 +31,26 @@ Public Class Login
 
         txtPsw.Text = ""
 
+        _ProcesarLlamadaPorComando(Environment.GetCommandLineArgs)
+
+    End Sub
+
+    Public Sub _ProcesarLlamadaPorComando(ByVal Datos As String())
+
         Try
             '
             ' Chequeamos que se haya abierto por linea de comandos.
             '
-            If Environment.GetCommandLineArgs.Length > 1 Then
+            If Datos.Length > 1 Then
 
-                Dim WTipoLlamada As Integer = Environment.GetCommandLineArgs(1)
-
+                Dim WTipoLlamada As Integer = Datos(1)
 
                 Select Case WTipoLlamada
                     Case 1
 
-                        Dim WTipo As String = Environment.GetCommandLineArgs(2)
-                        Dim WNumero As String = Environment.GetCommandLineArgs(3)
-                        Dim WAnio As String = Environment.GetCommandLineArgs(4)
+                        Dim WTipo As String = Datos(2)
+                        Dim WNumero As String = Datos(3)
+                        Dim WAnio As String = Datos(4)
 
                         With New NuevoSac(WTipo, WNumero, WAnio, True)
                             .Show()
@@ -53,12 +58,12 @@ Public Class Login
 
                     Case 2 ' Envío de SAC por Mail
 
-                        Dim WTipo As String = Environment.GetCommandLineArgs(2)
-                        Dim WNumero As String = Environment.GetCommandLineArgs(3)
-                        Dim WAnio As String = Environment.GetCommandLineArgs(4)
-                        Dim WDirecciones As String = Environment.GetCommandLineArgs(5)
-                        Dim WAsunto As String = Environment.GetCommandLineArgs(6)
-                        Dim WCuerpoMsj As String = Environment.GetCommandLineArgs(7)
+                        Dim WTipo As String = Datos(2)
+                        Dim WNumero As String = Datos(3)
+                        Dim WAnio As String = Datos(4)
+                        Dim WDirecciones As String = Datos(5)
+                        Dim WAsunto As String = Datos(6)
+                        Dim WCuerpoMsj As String = Datos(7)
 
                         Dim frm As New ConsultasVarias.VistaPrevia
 
@@ -81,17 +86,27 @@ Public Class Login
 
                     Case 3
 
-                        Dim WNumero As String = Environment.GetCommandLineArgs(2)
-                        Dim WDirecciones As String = Environment.GetCommandLineArgs(3)
-                        Dim WAsunto As String = Environment.GetCommandLineArgs(4)
-                        Dim WCuerpoMsj As String = Environment.GetCommandLineArgs(5)
+                        Dim WNumero As String = Datos(2)
+                        Dim WDirecciones As String = Datos(3)
+                        Dim WAsunto As String = Datos(4)
+                        Dim WCuerpoMsj As String = Datos(5)
                         Dim WEnviarAutomatico As Boolean = True
 
-                        If Environment.GetCommandLineArgs().Count() > 6 Then
-                            WEnviarAutomatico = Val(Environment.GetCommandLineArgs(6)) <> 1
+                        If Datos.Length > 6 Then
+                            WEnviarAutomatico = Val(Datos(6)) <> 1
                         End If
 
+                        Dim WNumeroTipo = ""
+                        Dim WAnio = ""
+
                         Conexion.EmpresaDeTrabajo = "SurfactanSa"
+
+                        Dim WRecl As DataRow = GetSingle("SELECT NumeroTipo, Ano = RIGHT(ISNULL(Fecha, '00/00/0000'), 4) FROM CentroReclamos WHERE numero = '" & WNumero & "'")
+
+                        If WRecl IsNot Nothing Then
+                            WNumeroTipo = OrDefault(WRecl.Item("NumeroTipo"), "")
+                            WAnio = OrDefault(WRecl.Item("Ano"), "")
+                        End If
 
                         Dim frm As New ConsultasVarias.VistaPrevia
 
@@ -108,28 +123,28 @@ Public Class Login
                         '
                         WDirecciones = _DefinirMailsExtras(WNumero, WDirecciones)
 
-                        ConsultasVarias.Clases.Helper._ExportarReporte(frm, Enumeraciones.FormatoExportacion.PDF, WNumero & "Reclamo.pdf", "C:\TempReclamos\")
+                        ConsultasVarias.Clases.Helper._ExportarReporte(frm, Enumeraciones.FormatoExportacion.PDF, WNumeroTipo & " - " & WAnio & " Reclamo.pdf", "C:\TempReclamos\")
 
-                        If File.Exists("C:\TempReclamos\" & WNumero & "Reclamo.pdf") Then
-                            ConsultasVarias.Clases.Helper._EnviarEmail(WDirecciones, WAsunto, WCuerpoMsj, {"C:\TempReclamos\" & WNumero & "Reclamo.pdf"}, WEnviarAutomatico)
+                        If File.Exists("C:\TempReclamos\" & WNumeroTipo & " - " & WAnio & " Reclamo.pdf") Then
+                            ConsultasVarias.Clases.Helper._EnviarEmail(WDirecciones, WAsunto, WCuerpoMsj, {"C:\TempReclamos\" & WNumeroTipo & " - " & WAnio & " Reclamo.pdf"}, WEnviarAutomatico)
                         Else
                             MsgBox("No se encontró el archivo " & "C:\TempReclamos\" & WNumero & "Reclamo.pdf")
                         End If
                     Case 4
 
-                        Dim WNumero As String = Environment.GetCommandLineArgs(2)
-                        Dim WDirecciones As String = Environment.GetCommandLineArgs(3)
-                        Dim WAsunto As String = Environment.GetCommandLineArgs(4)
-                        Dim WCuerpoMsj As String = Environment.GetCommandLineArgs(5)
+                        Dim WNumero As String = Datos(2)
+                        Dim WDirecciones As String = "" 'Datos(3)
+                        Dim WAsunto As String = "" 'Datos(4)
+                        Dim WCuerpoMsj As String = "" ' Datos(5)
 
                         Dim frm As New ConsultasVarias.VistaPrevia
 
-                        Dim WTipoProd, WNumeroINC, WArticulo, WNombreComercial, WProveedor, WLoteProv, WLaudo, WEmpresa, WOrden As String
+                        Dim WTipoProd, WNumeroINC, WArticulo, WNombreComercial, WProveedor, WLoteProv, WLaudo, WEmpresa, WOrden, WReferencia, WTitulo As String
                         WNumeroINC = ""
 
                         Clases.Conexion.EmpresaDeTrabajo = "SurfactanSa"
 
-                        Dim WINC As DataRow = GetSingle("SELECT Numero, Orden, TipoProd, Producto, Proveedor, Lote, Empresa FROM CargaIncidencias WHERE Incidencia  = '" & WNumero & "'")
+                        Dim WINC As DataRow = GetSingle("SELECT Numero, Orden, TipoProd, Producto, Referencia, Titulo, Proveedor, Lote, Empresa FROM CargaIncidencias WHERE Incidencia  = '" & WNumero & "'")
 
                         If WINC IsNot Nothing Then
                             WNumeroINC = OrDefault(WINC.Item("Numero"), "")
@@ -139,6 +154,8 @@ Public Class Login
                             WArticulo = UCase(OrDefault(WINC.Item("Producto"), ""))
                             WEmpresa = UCase(OrDefault(WINC.Item("Empresa"), ""))
                             WOrden = UCase(OrDefault(WINC.Item("Orden"), ""))
+                            WReferencia = Trim(OrDefault(WINC.Item("Referencia"), ""))
+                            WTitulo = Trim(OrDefault(WINC.Item("Titulo"), ""))
 
                             WLoteProv = ""
                             WNombreComercial = ""
@@ -185,6 +202,12 @@ Public Class Login
 
                         End If
 
+                        WAsunto = "Carga de Informe de No Conformidad - Nro. " & WNumeroINC
+                        WCuerpoMsj = "Se inició un Informe de No Conformidad :" & _
+                                " : " & WNumeroINC & "" & _
+                                " Referencia : " & WReferencia & _
+                                " Titulo : " & WTitulo
+
                         With frm
                             .Reporte = New ReporteINCIndividual
                             .Formula = "{CargaIncidencias.Incidencia} = " & WNumero
@@ -198,17 +221,17 @@ Public Class Login
 
                             WNombreArchivo &= ".pdf"
 
-                            WDirecciones = "ebiglieri@surfactan.com.ar; calidad@surfactan.com.ar; wbarosio@surfactan.com.ar; calidad2@surfactan.com.ar; isocalidad@surfactan.com.ar;juanfs@surfactan.com.ar; lsantos@surfactan.com.ar; drodriguez@surfactan.com.ar; iburgos@surfactan.com.ar; ctomaszek@surfactan.com.ar; mlaura@surfactan.com.ar; mescames@surfactan.com.ar; supcc@surfactan.com.ar; svarela@surfactan.com.ar; textil@surfactan.com.ar; hfondeville@surfactan.com.ar; hsuarez@surfactan.com.ar;"
+                            WDirecciones = "ebiglieri@surfactan.com.ar; calidad@surfactan.com.ar; wbarosio@surfactan.com.ar; calidad2@surfactan.com.ar; isocalidad@surfactan.com.ar;juanfs@surfactan.com.ar; lsantos@surfactan.com.ar; drodriguez@surfactan.com.ar; iburgos@surfactan.com.ar; ctomaszek@surfactan.com.ar; mlarias@surfactan.com.ar; mescames@surfactan.com.ar; supcc@surfactan.com.ar; svarela@surfactan.com.ar; textil@surfactan.com.ar; hfondeville@surfactan.com.ar; hsuarez@surfactan.com.ar;gferreyra@surfactan.com.ar;"
 
-                            If Directory.Exists(WRuta) Then Directory.Delete(WRuta, True)
+                            If Not Directory.Exists(WRuta) Then Directory.CreateDirectory(WRuta) 'Directory.Delete(WRuta, True)
 
-                            Directory.CreateDirectory(WRuta)
+                            If File.Exists(WRuta & WNombreArchivo) Then File.Delete(WRuta & WNombreArchivo)
 
                             Conexion.EmpresaDeTrabajo = "SurfactanSa"
                             ConsultasVarias.Clases.Helper._ExportarReporte(frm, Enumeraciones.FormatoExportacion.PDF, WNombreArchivo, WRuta)
 
                             If File.Exists(WRuta & WNombreArchivo) Then
-                                ConsultasVarias.Clases.Helper._EnviarEmail(WDirecciones, WAsunto, WCuerpoMsj, {WRuta & WNombreArchivo}, False)
+                                ConsultasVarias.Clases.Helper._EnviarEmail(WDirecciones, WAsunto, WCuerpoMsj, {WRuta & WNombreArchivo}, True)
                             Else
                                 MsgBox("No se encontró el archivo " & WRuta & WNombreArchivo)
                             End If
@@ -230,11 +253,11 @@ Public Class Login
 
                                 WNombreArchivo &= ".pdf"
 
-                                WDirecciones = "mlaura@surfactan.com.ar;"
+                                WDirecciones = "mlarias@surfactan.com.ar;gferreyra@surfactan.com.ar;"
 
-                                If Directory.Exists(WRuta) Then Directory.Delete(WRuta, True)
+                                If Not Directory.Exists(WRuta) Then Directory.CreateDirectory(WRuta) 'Directory.Delete(WRuta, True)
 
-                                Directory.CreateDirectory(WRuta)
+                                If File.Exists(WRuta & WNombreArchivo) Then File.Delete(WRuta & WNombreArchivo)
 
                                 Conexion.EmpresaDeTrabajo = "SurfactanSa"
                                 ConsultasVarias.Clases.Helper._ExportarReporte(frm, Enumeraciones.FormatoExportacion.PDF, WNombreArchivo, WRuta)
@@ -251,7 +274,7 @@ Public Class Login
 
                     Case 5
 
-                        Dim WNumero As String = Environment.GetCommandLineArgs(2)
+                        Dim WNumero As String = Datos(2)
                         Dim WNumeroTipo As String = ""
                         Dim WAnio As String = ""
 
@@ -268,11 +291,11 @@ Public Class Login
 
                         With frm
 
-                            .Reporte = New ReclamoClienteAvisoMail
+                            .Reporte = New ReclamoClienteAvisoMailII
 
                             .Formula = "{CentroReclamos.Numero} = " & WNumero & ""
 
-                            .Exportar(String.Format("Reclamo de Cliente Nro: {0}-{1} - {2}.pdf", WNumeroTipo, WAnio, Date.Now.ToString("dd-MM-yyyy")), ExportFormatType.PortableDocFormat, "")
+                            .Exportar(String.Format("Reclamo de Cliente Nro. {0}-{1} - {2}.pdf", WNumeroTipo, WAnio, Date.Now.ToString("dd-MM-yyyy")), ExportFormatType.PortableDocFormat, "")
 
                         End With
 
@@ -286,6 +309,47 @@ Public Class Login
                         ' Else
                         ' MsgBox("No se encontró el archivo " & "C:\TempReclamos\" & WNumero & "Reclamo.pdf")
                         ' End If
+                    Case 6
+
+                        Dim WNumero As String = Datos(2)
+                        Dim WDirecciones As String = Datos(3)
+                        Dim WAsunto As String = Datos(4)
+                        Dim WCuerpoMsj As String = Datos(5)
+                        Dim WEnviarAutomatico As Boolean = False
+                        Dim WNumeroTipo = ""
+                        Dim WAnio = ""
+
+                        Conexion.EmpresaDeTrabajo = "SurfactanSa"
+
+                        Dim WRecl As DataRow = GetSingle("SELECT NumeroTipo, Ano = RIGHT(ISNULL(Fecha, '00/00/0000'), 4) FROM CentroReclamos WHERE numero = '" & WNumero & "'")
+
+                        If WRecl IsNot Nothing Then
+                            WNumeroTipo = OrDefault(WRecl.Item("NumeroTipo"), "")
+                            WAnio = OrDefault(WRecl.Item("Ano"), "")
+                        End If
+
+                        Dim frm As New ConsultasVarias.VistaPrevia
+
+                        With frm
+
+                            .Reporte = New ReclamoClienteAvisoMailII
+
+                            .Formula = "{CentroReclamos.Numero} = " & WNumero & ""
+
+                        End With
+
+                        '
+                        ' De aca, van a venir los mails de los responsables. Agregamos las que faltan.
+                        '
+                        WDirecciones = "" '_DefinirMailsExtras(WNumero, WDirecciones)
+
+                        ConsultasVarias.Clases.Helper._ExportarReporte(frm, Enumeraciones.FormatoExportacion.PDF, WNumeroTipo & " - " & WAnio & " Reclamo.pdf", "C:\TempReclamos\")
+
+                        If File.Exists("C:\TempReclamos\" & WNumeroTipo & " - " & WAnio & " Reclamo.pdf") Then
+                            ConsultasVarias.Clases.Helper._EnviarEmail(WDirecciones, WAsunto, WCuerpoMsj, {"C:\TempReclamos\" & WNumeroTipo & " - " & WAnio & " Reclamo.pdf"}, WEnviarAutomatico)
+                        Else
+                            MsgBox("No se encontró el archivo " & "C:\TempReclamos\" & WNumero & "Reclamo.pdf")
+                        End If
                 End Select
 
                 btnCancel_Click(Nothing, Nothing)
@@ -296,7 +360,6 @@ Public Class Login
             MsgBox(ex.Message)
             btnCancel_Click(Nothing, Nothing)
         End Try
-
     End Sub
 
     Private Function _DefinirMailsExtras(ByVal WNumero As String, ByVal WDirecciones As String) As String
@@ -486,4 +549,7 @@ Public Class Login
 
     End Sub
 
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+        _ProcesarLlamadaPorComando({"", "5", "24"})
+    End Sub
 End Class
