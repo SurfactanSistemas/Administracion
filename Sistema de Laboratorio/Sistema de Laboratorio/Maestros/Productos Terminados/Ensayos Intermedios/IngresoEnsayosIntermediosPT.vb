@@ -1,5 +1,6 @@
 ﻿Imports System.Text.RegularExpressions
 Imports ConsultasVarias
+Imports info.lundin.math
 
 Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerminados, IIngresoClaveSeguridad, IIngresoMotivoDesvio
 
@@ -90,9 +91,9 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
                 Dim WPrueterFarma As DataTable = GetAll("SELECT * FROM PrueterFarmaIntermedio WHERE Partida = '" & txtPartida.Text & "' And Producto = '" & txtCodigo.Text & "' And Paso = '" & txtEtapa.Text & "' Order By Clave")
 
-                If WPrueterFarma.Rows.Count = 0 Then Exit Sub
-
                 dgvEnsayos.Rows.Clear()
+
+                If WPrueterFarma.Rows.Count = 0 Then Exit Sub
 
                 Dim WFecha = ""
                 Dim WConfecciono = ""
@@ -106,7 +107,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                     With row
                         Dim WEns = OrDefault(.Item("Codigo"), "")
                         Dim WEspecificacion = OrDefault(.Item("Valor"), "")
-                        Dim WValor = OrDefault(.Item("ValorReal"), "")
+                        Dim WValor = Trim(OrDefault(.Item("ValorReal"), ""))
                         Dim WResultado = OrDefault(.Item("Resultado"), "")
                         Dim WFarmacopea = OrDefault(.Item("Farmacopea"), "")
                         Dim WTipoEspecif = OrDefault(.Item("TipoEspecif"), "")
@@ -131,7 +132,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
                         For i = 1 To 10
                             WFormulas(i, 1) = Trim(OrDefault(.Item("Variable" & i), ""))
-                            WFormulas(i, 2) = formatonumerico(OrDefault(.Item("VariableValor" & i), "0"), 10)
+                            WFormulas(i, 2) = Trim(OrDefault(.Item("VariableValor" & i), "0"))
                         Next
 
                         If Val(WTipoEspecif) = 0 And WImpreResultado <> "" Then WImpreResultado &= " (c)"
@@ -144,7 +145,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
                         With dgvEnsayos.Rows(r)
                             .Cells("Ensayo").Value = WEns
-                            .Cells("Valor").Value = Trim(WValor)
+                            .Cells("Valor").Value = Trim(UCase(WValor))
                             .Cells("Resultado").Value = Trim(WResultado)
                             .Cells("Especificacion").Value = Trim(WEspecificacion)
                             .Cells("Descripcion").Value = Trim(WDescripcion)
@@ -162,6 +163,23 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                                 .Cells("Variable" & i).Value = Trim(WFormulas(i, 1))
                                 .Cells("VariableValor" & i).Value = WFormulas(i, 2)
                             Next
+
+                            .Cells("Decimales").Value = ""
+
+                            If Val(WTipoEspecif) = 2 Then
+
+                                .Cells("Decimales").Value = "2"
+
+                                .Cells("Decimales").Value = IIf(WValor.Trim = "", "2", "0")
+
+                                Dim aux As Integer = WValor.ToString.IndexOfAny({",", "."})
+
+                                If aux > 0 Then
+                                    Dim t As String = _Right(WValor, WValor.Replace(".", "").Replace(",", "").Length - aux)
+                                    .Cells("Decimales").Value = t.Length
+                                End If
+
+                            End If
 
                         End With
 
@@ -249,6 +267,39 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                             Next
 
                         End With
+
+                    End With
+
+                Next
+
+                Dim WRenglon = 0
+
+                '
+                ' Cargamos las especificaciones en Inglés.
+                '
+                Dim WCargaVIngles As DataTable = GetAll("SELECT Valor, UnidadEspecif FROM CargaVIngles WHERE Terminado = '" & txtCodigo.Text & "' And Paso = '" & txtEtapa.Text & "' Order By Clave")
+
+                For Each row As DataRow In WCargaVIngles.Rows
+
+                    With row
+
+                        Dim WUnidadEspecif = Trim(OrDefault(.Item("UnidadEspecif"), ""))
+                        Dim WEspecificacion = Trim(OrDefault(.Item("Valor"), ""))
+
+                        If WRenglon > dgvEnsayos.Rows.Count - 1 Then WRenglon = dgvEnsayos.Rows.Add
+
+                        With dgvEnsayos.Rows(WRenglon)
+
+                            If WUnidadEspecif = "" Then
+                                .Cells("EspecificacionIngles").Value = WEspecificacion
+                            Else
+                                .Cells("EspecificacionIngles").Value = String.Format("{0} ({1})", WEspecificacion, WUnidadEspecif)
+                            End If
+
+                            .Cells("UnidadEspecif").Value = WUnidadEspecif
+                        End With
+
+                        WRenglon += 1
 
                     End With
 
@@ -376,7 +427,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
                 Dim iCol = .CurrentCell.ColumnIndex
                 Dim iRow = .CurrentCell.RowIndex
-                Dim WValor = OrDefault(.CurrentCell.Value, "")
+                Dim WValor As String = UCase(OrDefault(.CurrentCell.Value, ""))
 
                 ' Limitamos los caracteres permitidos para cada una de las columnas.
                 'Select Case iCol
@@ -396,15 +447,13 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
                     If Not _ProcesarValorGrilla(.CurrentCell) Then Return True
 
-                    .CurrentCell.Value = UCase(WValor)
-
                     Select Case iCol
                         Case 2
                             If iRow = .Rows.Count - 1 Then
                                 '.CurrentCell = .Rows(iRow).Cells(iCol)
                                 .CurrentCell = .Rows(iRow).Cells(iCol + 1)
                             Else
-                                .CurrentCell = .Rows(iRow + 1).Cells("Ensayo")
+                                .CurrentCell = .Rows(iRow + 1).Cells("Valor")
                             End If
 
                         Case Else
@@ -412,7 +461,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                                 .CurrentCell = .Rows(iRow).Cells(iCol + 1)
                             Else
                                 If iRow < .Rows.Count - 1 Then
-                                    .CurrentCell = .Rows(iRow + 1).Cells("Ensayo")
+                                    .CurrentCell = .Rows(iRow + 1).Cells("Valor")
                                 End If
                             End If
                     End Select
@@ -444,44 +493,68 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
             With WCelda
                 Select Case dgvEnsayos.Columns(.ColumnIndex).Name.ToUpper
                     Case "VALOR"
-                        Dim WValor As String = OrDefault(.Value, "")
+                        Dim WValor As String = Trim(UCase(OrDefault(.Value, "")))
 
-                        If WValor.Trim = "" Then Return False
+                        If WValor = "P" And Val(OrDefault(dgvEnsayos.Rows(.RowIndex).Cells("TipoEspecif").Value, "")) <> 2 Then
+                            dgvEnsayos.Rows(.RowIndex).Cells("Valor").Value = WValor
+                            dgvEnsayos.Rows(.RowIndex).Cells("Resultado").Value = "PENDIENTE"
+                        Else
 
-                        Dim WTipo As String = ""
-                        Dim WDesde As String = ""
-                        Dim WHasta As String = ""
-                        Dim WUnidad As String = ""
+                            If WValor.StartsWith(".") Then WValor = "0" & WValor
 
-                        With dgvEnsayos.Rows(.RowIndex)
-
-                            WTipo = OrDefault(.Cells("TipoEspecif").Value, "")
-                            WDesde = OrDefault(.Cells("DesdeEspecif").Value, "")
-                            WHasta = OrDefault(.Cells("HastaEspecif").Value, "")
-                            WUnidad = OrDefault(.Cells("UnidadEspecif").Value, "")
-                            Dim WFormula = OrDefault(.Cells("FormulaEspecif").Value, "")
+                            Dim WTipo As String = ""
+                            Dim WDesde As String = ""
+                            Dim WHasta As String = ""
+                            Dim WUnidad As String = ""
+                            Dim WFormula As String = ""
+                            Dim WDecimales As String = ""
                             Dim WVariables(10, 2) As String
 
-                            For i = 1 To 10
-                                WVariables(i, 1) = Trim(OrDefault(.Cells("Variable" & i).Value, ""))
-                                WVariables(i, 2) = OrDefault(.Cells("VariableValor" & i).Value, "")
-                            Next
+                            With dgvEnsayos.Rows(.RowIndex)
 
-                            With New IngresoVariablesFormula(WFormula, WVariables, WValor)
-                                Dim WDialogResult = .ShowDialog(Me)
-                                If WDialogResult = Windows.Forms.DialogResult.OK Then
-                                    WValor = WValor.Replace(",", ".")
+                                WTipo = OrDefault(.Cells("TipoEspecif").Value, "")
+                                WDesde = OrDefault(.Cells("DesdeEspecif").Value, "")
+                                WHasta = OrDefault(.Cells("HastaEspecif").Value, "")
+                                WUnidad = OrDefault(.Cells("UnidadEspecif").Value, "")
+                                WFormula = Trim(OrDefault(.Cells("FormulaEspecif").Value, ""))
+                                WDecimales = Trim(OrDefault(.Cells("Decimales").Value, "2"))
+
+                                For i = 1 To 10
+                                    WVariables(i, 1) = Trim(OrDefault(.Cells("Variable" & i).Value, ""))
+                                    WVariables(i, 2) = Trim(OrDefault(.Cells("VariableValor" & i).Value, ""))
+                                Next
+
+                                If WFormula <> "" Then
+
+                                    With New IngresoVariablesFormula(WFormula, WVariables, WValor, dgvEnsayos, WDecimales)
+                                        Dim WDialogResult = .ShowDialog(Me)
+                                        If WDialogResult = Windows.Forms.DialogResult.OK Then
+                                            WValor = .Valor
+                                            WVariables = .Variables
+                                            WDecimales = .Decimales
+                                        Else
+                                            Return False
+                                        End If
+                                    End With
+
                                 End If
+
+                                Dim WResultado As String = _GenerarImpreResultado(WTipo, WDesde, WHasta, WUnidad, WValor)
+
+                                .Cells("Resultado").Value = WResultado
+                                .Cells("Valor").Value = WValor
+                                .Cells("Decimales").Value = WDecimales
+
+                                For i = 1 To 10
+                                    .Cells("VariableValor" & i).Value = Trim(OrDefault(WVariables(i, 2), ""))
+                                Next
+
                             End With
 
-                            Dim WResultado As String = _GenerarImpreResultado(WTipo, WDesde, WHasta, WUnidad, WValor)
+                            If Not _ValidarDato(dgvEnsayos.Rows(.RowIndex)) Then
+                                MsgBox("Resultado fuera de especificación", MsgBoxStyle.Information)
+                            End If
 
-                            .Cells("Resultado").Value = WResultado
-
-                        End With
-
-                        If Not _ValidarDato(dgvEnsayos.Rows(.RowIndex)) Then
-                            MsgBox("Resultado fuera de especificación", MsgBoxStyle.Information)
                         End If
 
                 End Select
@@ -509,6 +582,11 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
         Try
             _ValidarDatos()
+
+            '
+            ' Recalculamos los valores de las celdas que se calculen por Formula.
+            '
+            _RecalcularFormulas()
 
             If WActualizacionBloqueada Then
 
@@ -621,7 +699,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
                     For i = 1 To 10
                         WFormulas(i, 1) = Trim(OrDefault(.Cells("Variable" & i).Value, ""))
-                        WFormulas(i, 2) = formatonumerico(OrDefault(.Cells("Variable" & i).Value, ""), 10)
+                        WFormulas(i, 2) = Trim(OrDefault(.Cells("VariableValor" & i).Value, "")).Replace(",", ".")
                     Next
 
                     WResultado = _GenerarImpreResultado(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WValor)
@@ -745,6 +823,55 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
     End Sub
 
+    Private Sub _RecalcularFormulas()
+
+        Dim WTipo As String = ""
+
+        For Each row As Datagridviewrow In dgvEnsayos.Rows
+            With row
+                WTipo = OrDefault(.Cells("TipoEspecif").Value, "")
+
+                If Val(WTipo) = 2 Then
+
+                    Dim WFormula As String = OrDefault(.Cells("FormulaEspecif").Value, "")
+
+                    Dim parser As New ExpressionParser()
+
+                    For i = 1 To 10
+
+                        Dim WValor As String = OrDefault(.Cells("VariableValor" & i).Value, "0").Replace(",", ".")
+
+                        If WValor.StartsWith(".") Then WValor = "0" & WValor
+
+                        parser.Values.Add("v" & i, WValor)
+
+                    Next
+
+                    Dim regex As New Regex("R[1-9]{1,2}")
+
+                    For Each m As Match In regex.Matches(WFormula)
+
+                        Dim renglon As Integer = Val(m.Value.ToString.Replace("R", ""))
+
+                        If renglon <= dgvEnsayos.Rows.Count Then
+                            parser.Values.Add(LCase(m.Value), OrDefault(dgvEnsayos.Rows(renglon - 1).Cells("Valor").Value, "0").ToString.Replace(",", ""))
+                        End If
+
+                    Next
+
+                    .Cells("Valor").Value = formatonumerico(OrDefault(parser.Parse(WFormula), "").ToString.Replace(",", "."), OrDefault(.Cells("Decimales").Value, 2))
+
+                    If OrDefault(.Cells("Decimales").Value, 2) = 0 Then
+                        .Cells("Valor").Value = CInt(.Cells("Valor").Value.ToString.Replace(".", ","))
+                    End If
+
+                End If
+
+            End With
+        Next
+
+    End Sub
+
     Private Function _ValidarValoresIngresados() As Boolean
         '
         ' Validamos los valores ingresados.
@@ -773,11 +900,11 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
             If WEns.Trim <> "" And WValor.Trim <> "" And WTipo.Trim <> "" Then
 
-                If Val(WTipo) = 1 Then
+                If Val(WTipo) = 1 Or Val(WTipo) = 2 Then
 
                     If WValor.ToUpper <> "P" Then
 
-                        If Not Regex.IsMatch(WValor, "(^\d+[\.\,]?(\d+)?$)") Then Throw New FormatoNoNumericoException("Hay un error de Formato en el valor proporcionado. " & vbCrLf & vbCrLf & "Se esperaba un valor numérico.")
+                        If Not Regex.IsMatch(WValor, "(^[\-]?\d+[\.\,]?(\d+)?$)") Then Throw New FormatoNoNumericoException("Hay un error de Formato en el valor proporcionado. " & vbCrLf & vbCrLf & "Se esperaba un valor numérico.")
 
                         Dim WValorNum As Double = Val(formatonumerico(WValor, 10))
 
@@ -805,7 +932,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
         If UCase(Trim(wValor)) = "P" Then Return "PENDIENTE"
 
-        If Val(wTipoEspecif) = 1 Then
+        If Val(wTipoEspecif) = 1 Or Val(wTipoEspecif) = 2 Then
 
             If Val(wDesdeEspecif) = 0 And Val(wHastaEspecif) = 9999 Then Return "CUMPLE"
 

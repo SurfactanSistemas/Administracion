@@ -93,6 +93,7 @@
   <ItemGroup>
     <Compile Include="Auxiliares\Extensiones\AuxiExtensiones.vb" />
     <Compile Include="Auxiliares\Interfaces\IDefinicionFormulaEspecificacion.vb" />
+    <Compile Include="Auxiliares\Interfaces\IDefinicionValoresFormula.vb" />
     <Compile Include="Auxiliares\Interfaces\IIngresoMotivoDesvio.vb" />
     <Compile Include="Auxiliares\Interfaces\IIngresoParametrosEspecificaciones.vb" />
     <Compile Include="Auxiliares\Interfaces\INotasEnsayosProductosTerminados.vb" />

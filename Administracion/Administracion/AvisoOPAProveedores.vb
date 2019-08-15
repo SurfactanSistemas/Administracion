@@ -568,8 +568,8 @@ Public Class AvisoOPAProveedores
                 .BCC = _bcc
                 .Subject = _subject
                 '.Body = _body
-                .HTMLBody = "<p>" & _body & "</p>" & "<br/><br/><p><strong>Atentamente</strong><br/>SURFACTAN S.A</p>" & .HTMLBody
-                '.HTMLBody = "<p>" & _body & "</p>" & .HTMLBody
+                '.HTMLBody = "<p>" & _body & "</p>" & "<br/><br/><p><strong>Atentamente</strong><br/>SURFACTAN S.A</p>" & .HTMLBody
+                .HTMLBody = "<p>" & _body & "</p>" & "<br/><br/><p><strong>Se informa que el próximo 19 de Agosto, la Empresa permanecerá cerrada.</strong></p>" & "<br/><br/><p><strong>Atentamente</strong><br/>SURFACTAN S.A</p>" & .HTMLBody
 
                 For Each adjunto As String In _adjuntos
                     If Trim(adjunto) <> "" Then

@@ -110,6 +110,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                     Dim WUnidadEspecif = OrDefault(.Item("UnidadEspecif"), "")
                     Dim WMenorIgualEspecif = OrDefault(.Item("MenorIgualEspecif"), "0")
                     Dim WInformaEspecif = OrDefault(.Item("InformaEspecif"), "0")
+                    Dim WFormulaEspecif = OrDefault(.Item("FormulaEspecif"), "")
                     Dim WImpreParametro = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif)
 
                     If Val(WTipoEspecif) = 0 And WImpreParametro <> "" Then WImpreParametro &= " (c)"
@@ -130,6 +131,12 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                         .Cells("MenorIgualEspecif").Value = WMenorIgualEspecif
                         .Cells("InformaEspecif").Value = WInformaEspecif
                         .Cells("Parametro").Value = Trim(WImpreParametro)
+                        .Cells("FormulaEspecif").Value = WFormulaEspecif
+
+                        For i = 1 To 10
+                            .Cells("Variable" & i).Value = Trim(OrDefault(row.Item("Variable" & i), ""))
+                        Next
+
                     End With
 
                 End With
@@ -245,7 +252,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
             .Cells("MenorIgualEspecif").Value = MenorIgual
             .Cells("UnidadEspecif").Value = Unidad
             .Cells("Farmacopea").Value = WFarmacopea
-            .Cells("FormulaEspecif").Value = WFarmacopea
+            .Cells("FormulaEspecif").Value = Formula
 
             For i = 1 To ParametrosFormula.Count - 1
                 .Cells("Variable" & i).Value = Trim(ParametrosFormula(i))
@@ -460,7 +467,6 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
         '
         ' Una vez actualizadas las Etapas y sus Versiones, en el caso de que corresponda, es necesario actualizar el Registro de Producción.
         '
-
         _ActualizarRegistroProduccion()
 
         '

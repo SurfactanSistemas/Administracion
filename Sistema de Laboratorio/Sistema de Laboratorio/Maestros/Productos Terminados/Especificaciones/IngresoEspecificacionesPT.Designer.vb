@@ -59,6 +59,7 @@ Partial Class IngresoEspecificacionesPT
         Me.Cantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.dgvEspecif = New ConsultasVarias.DBDataGridView()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Ensayo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Especificacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DescEnsayo = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -81,7 +82,6 @@ Partial Class IngresoEspecificacionesPT
         Me.Variable8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Variable9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Variable10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -356,6 +356,7 @@ Partial Class IngresoEspecificacionesPT
         Me.dgvProcedimientos.RowHeadersWidth = 10
         Me.dgvProcedimientos.RowTemplate.Height = 20
         Me.dgvProcedimientos.ShowCellToolTips = False
+        Me.dgvProcedimientos.SinClickDerecho = False
         Me.dgvProcedimientos.Size = New System.Drawing.Size(905, 294)
         Me.dgvProcedimientos.TabIndex = 0
         '
@@ -441,6 +442,7 @@ Partial Class IngresoEspecificacionesPT
         Me.dgvEspecif.RowHeadersWidth = 10
         Me.dgvEspecif.RowTemplate.Height = 20
         Me.dgvEspecif.ShowCellToolTips = False
+        Me.dgvEspecif.SinClickDerecho = False
         Me.dgvEspecif.Size = New System.Drawing.Size(905, 294)
         Me.dgvEspecif.TabIndex = 0
         '
@@ -454,10 +456,10 @@ Partial Class IngresoEspecificacionesPT
         '
         Me.Especificacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Especificacion.HeaderText = "Descripción Ensayo"
-        Me.Especificacion.MinimumWidth = 150
+        Me.Especificacion.MinimumWidth = 250
         Me.Especificacion.Name = "Especificacion"
         Me.Especificacion.ReadOnly = True
-        Me.Especificacion.Width = 150
+        Me.Especificacion.Width = 250
         '
         'DescEnsayo
         '
@@ -474,6 +476,7 @@ Partial Class IngresoEspecificacionesPT
         Me.Farmacopea.Name = "Farmacopea"
         Me.Farmacopea.ReadOnly = True
         Me.Farmacopea.Visible = False
+        Me.Farmacopea.Width = 91
         '
         'TipoEspecif
         '
@@ -481,6 +484,7 @@ Partial Class IngresoEspecificacionesPT
         Me.TipoEspecif.HeaderText = "TipoEspecif"
         Me.TipoEspecif.Name = "TipoEspecif"
         Me.TipoEspecif.ReadOnly = True
+        Me.TipoEspecif.Visible = False
         Me.TipoEspecif.Width = 88
         '
         'DesdeEspecif
@@ -490,6 +494,7 @@ Partial Class IngresoEspecificacionesPT
         Me.DesdeEspecif.Name = "DesdeEspecif"
         Me.DesdeEspecif.ReadOnly = True
         Me.DesdeEspecif.Visible = False
+        Me.DesdeEspecif.Width = 98
         '
         'HastaEspecif
         '
@@ -498,6 +503,7 @@ Partial Class IngresoEspecificacionesPT
         Me.HastaEspecif.Name = "HastaEspecif"
         Me.HastaEspecif.ReadOnly = True
         Me.HastaEspecif.Visible = False
+        Me.HastaEspecif.Width = 95
         '
         'UnidadEspecif
         '
@@ -506,6 +512,7 @@ Partial Class IngresoEspecificacionesPT
         Me.UnidadEspecif.Name = "UnidadEspecif"
         Me.UnidadEspecif.ReadOnly = True
         Me.UnidadEspecif.Visible = False
+        Me.UnidadEspecif.Width = 101
         '
         'MenorIgualEspecif
         '
@@ -514,6 +521,7 @@ Partial Class IngresoEspecificacionesPT
         Me.MenorIgualEspecif.Name = "MenorIgualEspecif"
         Me.MenorIgualEspecif.ReadOnly = True
         Me.MenorIgualEspecif.Visible = False
+        Me.MenorIgualEspecif.Width = 120
         '
         'InformaEspecif
         '
@@ -522,14 +530,16 @@ Partial Class IngresoEspecificacionesPT
         Me.InformaEspecif.Name = "InformaEspecif"
         Me.InformaEspecif.ReadOnly = True
         Me.InformaEspecif.Visible = False
+        Me.InformaEspecif.Width = 102
         '
         'Parametro
         '
         Me.Parametro.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Parametro.HeaderText = "Parametro"
+        Me.Parametro.MinimumWidth = 150
         Me.Parametro.Name = "Parametro"
         Me.Parametro.ReadOnly = True
-        Me.Parametro.Visible = False
+        Me.Parametro.Width = 150
         '
         'FormulaEspecif
         '
@@ -537,6 +547,7 @@ Partial Class IngresoEspecificacionesPT
         Me.FormulaEspecif.HeaderText = "FormulaEspecif"
         Me.FormulaEspecif.Name = "FormulaEspecif"
         Me.FormulaEspecif.ReadOnly = True
+        Me.FormulaEspecif.Visible = False
         Me.FormulaEspecif.Width = 104
         '
         'Variable1
@@ -544,60 +555,70 @@ Partial Class IngresoEspecificacionesPT
         Me.Variable1.HeaderText = "Variable1"
         Me.Variable1.Name = "Variable1"
         Me.Variable1.ReadOnly = True
+        Me.Variable1.Visible = False
         '
         'Variable2
         '
         Me.Variable2.HeaderText = "Variable2"
         Me.Variable2.Name = "Variable2"
         Me.Variable2.ReadOnly = True
+        Me.Variable2.Visible = False
         '
         'Variable3
         '
         Me.Variable3.HeaderText = "Variable3"
         Me.Variable3.Name = "Variable3"
         Me.Variable3.ReadOnly = True
+        Me.Variable3.Visible = False
         '
         'Variable4
         '
         Me.Variable4.HeaderText = "Variable4"
         Me.Variable4.Name = "Variable4"
         Me.Variable4.ReadOnly = True
+        Me.Variable4.Visible = False
         '
         'Variable5
         '
         Me.Variable5.HeaderText = "Variable5"
         Me.Variable5.Name = "Variable5"
         Me.Variable5.ReadOnly = True
+        Me.Variable5.Visible = False
         '
         'Variable6
         '
         Me.Variable6.HeaderText = "Variable6"
         Me.Variable6.Name = "Variable6"
         Me.Variable6.ReadOnly = True
+        Me.Variable6.Visible = False
         '
         'Variable7
         '
         Me.Variable7.HeaderText = "Variable7"
         Me.Variable7.Name = "Variable7"
         Me.Variable7.ReadOnly = True
+        Me.Variable7.Visible = False
         '
         'Variable8
         '
         Me.Variable8.HeaderText = "Variable8"
         Me.Variable8.Name = "Variable8"
         Me.Variable8.ReadOnly = True
+        Me.Variable8.Visible = False
         '
         'Variable9
         '
         Me.Variable9.HeaderText = "Variable9"
         Me.Variable9.Name = "Variable9"
         Me.Variable9.ReadOnly = True
+        Me.Variable9.Visible = False
         '
         'Variable10
         '
         Me.Variable10.HeaderText = "Variable10"
         Me.Variable10.Name = "Variable10"
         Me.Variable10.ReadOnly = True
+        Me.Variable10.Visible = False
         '
         'IngresoEspecificacionesPT
         '
