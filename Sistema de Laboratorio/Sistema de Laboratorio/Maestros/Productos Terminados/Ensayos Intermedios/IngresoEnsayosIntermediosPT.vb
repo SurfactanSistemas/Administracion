@@ -795,6 +795,8 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
             With WNotas
                 WSqls.Add("UPDATE Prueterfarmaintermedio SET " &
+                          "WDate = '" & Date.Now.ToString("dd-MM-yyyy") & "'," &
+                          "Operador = '" & Operador.Codigo & "'," &
                           "Nota1 = '" & .Item(0) & "'," &
                           "Nota2 = '" & .Item(1) & "'," &
                           "Nota3 = '" & .Item(2) & "'," &
