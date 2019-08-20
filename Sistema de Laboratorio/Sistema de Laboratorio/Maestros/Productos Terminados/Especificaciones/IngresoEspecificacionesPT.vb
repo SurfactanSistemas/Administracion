@@ -18,6 +18,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
         dgvProcedimientos.Rows.Clear()
         dgvEspecif.Rows.Clear()
+        dgvEspecifIngles.Rows.Clear()
 
         TabControl1.SelectTab(1)
 
@@ -143,6 +144,39 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
             Next
 
+            dgvEspecifIngles.Rows.Clear()
+
+            If Val(txtEtapa.Text) = 99 Then
+
+                '
+                ' Para cargar unicamente cuando se este consultando las especificaciones de etapa 99.
+                '
+                Dim WCargaVIngles As DataTable = GetAll("SELECT Valor, Farmacopea, UnidadEspecif FROM CargaVIngles WHERE Terminado = '" & txtTerminado.Text & "' And Paso = '99' Order By Clave")
+
+                If WCargaVIngles.Rows.Count = 0 Then Exit Sub
+
+                For Each row As DataRow In WCargaVIngles.Rows
+                    With row
+                        Dim WEspecificacion = Trim(OrDefault(.Item("Valor"), ""))
+                        Dim WFarmacopea = Trim(OrDefault(.Item("Farmacopea"), ""))
+                        Dim WUnidadEspecif = Trim(OrDefault(.Item("UnidadEspecif"), ""))
+
+                        Dim r = dgvEspecifIngles.Rows.Add
+
+                        With dgvEspecifIngles.Rows(r)
+                            .Cells("EnsayoIngles").Value = dgvEspecif.Rows(r).Cells("Ensayo").Value
+                            .Cells("EspecificacionIngles").Value = ""
+                            .Cells("DescEnsayoIngles").Value = Trim(WEspecificacion)
+                            .Cells("FarmacopeaIngles").Value = Trim(WFarmacopea)
+                            .Cells("UnidadEspecifIngles").Value = WUnidadEspecif
+                        End With
+
+                    End With
+
+                Next
+
+            End If
+
             Dim WBaseII = "Surfactan_II"
 
             If _EsPellital() Then WBaseII = "Pelitall_II"
@@ -152,7 +186,12 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                     Dim WEns As String = OrDefault(.Cells("Ensayo").Value, "0")
                     Dim WEnsayo As DataRow = GetSingle("SELECT Descripcion FROM Ensayos WHERE Codigo = '" & WEns & "'", WBaseII)
 
-                    If WEnsayo IsNot Nothing Then .Cells("Especificacion").Value = Trim(OrDefault(WEnsayo.Item("Descripcion"), ""))
+                    If WEnsayo IsNot Nothing Then
+                        .Cells("Especificacion").Value = Trim(OrDefault(WEnsayo.Item("Descripcion"), ""))
+
+                        If Val(txtEtapa.Text) = 99 Then dgvEspecifIngles.Rows(.Index).Cells("EspecificacionIngles").Value = Trim(OrDefault(WEnsayo.Item("Descripcion"), ""))
+
+                    End If
 
                 End With
             Next
@@ -173,7 +212,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
         wUnidadEspecif = OrDefault(Trim(wUnidadEspecif), "")
         wMenorIgualEspecif = OrDefault(Trim(wMenorIgualEspecif), "")
 
-        If Trim(wDesdeEspecif) = "" And Trim(wHastaEspecif) = "" Then Return "Cumple Ensayo7"
+        If Trim(wDesdeEspecif) = "" And Trim(wHastaEspecif) = "" Then Return "Cumple Ensayo"
 
         If Val(wDesdeEspecif) <> 0 Or Val(wHastaEspecif) <> 9999 Then
 
@@ -441,6 +480,63 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
             End With
         Next
+
+        '
+        ' En caso de ser Etapa 99, se actualizan las especificaciones en ingles.
+        '
+        If Val(txtEtapa.Text) = 99 Then
+
+            WRenglon = 0
+
+            WConsultas.Add("DELETE FROM CargaVIngles WHERE Terminado = '" & txtTerminado.Text & "' And Paso = '99'")
+
+            '
+            ' Grabamos los datos de cada renglon.
+            '
+            For Each row As DataGridViewRow In dgvEspecifIngles.Rows
+
+                Dim WValor, WFarmacopea, WUnidadEspecif As String
+
+                With row
+
+                    WValor = OrDefault(.Cells("DescEnsayoIngles").Value, "")
+                    WFarmacopea = OrDefault(.Cells("FarmacopeaIngles").Value, "")
+                    WUnidadEspecif = OrDefault(.Cells("UnidadEspecifIngles").Value, "")
+
+                    Dim ZSql, XPaso, Auxi As String
+
+                    WRenglon += 1
+
+                    XPaso = txtEtapa.Text.PadLeft(4, "0")
+                    Auxi = WRenglon.ToString.PadLeft(2, "0")
+
+                    Dim WClave = txtTerminado.Text + XPaso + Auxi
+
+                    ZSql = ""
+                    ZSql = ZSql & "INSERT INTO CargaVIngles ("
+                    ZSql = ZSql & "Clave ,"
+                    ZSql = ZSql & "Terminado ,"
+                    ZSql = ZSql & "Paso ,"
+                    ZSql = ZSql & "Renglon ,"
+                    ZSql = ZSql & "Valor ,"
+                    ZSql = ZSql & "Farmacopea ,"
+                    ZSql = ZSql & "UnidadEspecif "
+                    ZSql = ZSql & ")"
+                    ZSql = ZSql & "Values ("
+                    ZSql = ZSql & "'" & WClave & "',"
+                    ZSql = ZSql & "'" & txtTerminado.Text & "',"
+                    ZSql = ZSql & "'" & txtEtapa.Text & "',"
+                    ZSql = ZSql & "'" & Trim(Str$(WRenglon)) & "',"
+                    ZSql = ZSql & "'" & WValor & "',"
+                    ZSql = ZSql & "'" & WFarmacopea & "',"
+                    ZSql = ZSql & "'" & WUnidadEspecif & "'"
+                    ZSql = ZSql & ")"
+
+                    WConsultas.Add(ZSql)
+
+                End With
+            Next
+        End If
 
         Dim WObservacion(10) As String
 
