@@ -694,6 +694,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                     Dim WInformaEspecif As String = OrDefault(.Cells("InformaEspecif").Value, 0)
                     Dim WObservaciones As String = OrDefault(.Cells("Observaciones").Value, "")
                     Dim WFormulaEspecif As String = OrDefault(.Cells("FormulaEspecif").Value, "")
+                    Dim WParametro As String = Trim(OrDefault(.Cells("Parametro").Value, ""))
 
                     Dim WFormulas(10, 2) As String
 
@@ -740,6 +741,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                     ZSql = ZSql & "Paginas ,"
                     ZSql = ZSql & "Estado ,"
                     ZSql = ZSql & "Confecciono ,"
+                    ZSql = ZSql & "Impre1 ,"
                     ZSql = ZSql & "FormulaEspecif ,"
 
                     For i = 1 To 10
@@ -778,6 +780,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                     ZSql = ZSql & "'" & WPaginas.left(20) & "',"
                     ZSql = ZSql & "'" & "1" & "',"
                     ZSql = ZSql & "'" & WConfecciono.left(50) & "',"
+                    ZSql = ZSql & "'" & WParametro.left(100) & "',"
                     ZSql = ZSql & "'" & WFormulaEspecif & "',"
 
                     For i = 1 To 10

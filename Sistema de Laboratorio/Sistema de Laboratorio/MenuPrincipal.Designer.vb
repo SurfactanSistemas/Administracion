@@ -26,18 +26,20 @@ Partial Class MenuPrincipal
         Me.MaestrosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.IngresoDeEnsayosProductosTerminadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ControlesIntermedisToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EspecificacionesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnCambioEmpresa = New System.Windows.Forms.Button()
-        Me.EspecificacionesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ProcesosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.FinDeSistemaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MaestrosToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MaestrosToolStripMenuItem, Me.ProcesosToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 49)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(835, 24)
@@ -55,7 +57,7 @@ Partial Class MenuPrincipal
         '
         Me.IngresoDeEnsayosProductosTerminadosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ControlesIntermedisToolStripMenuItem, Me.EspecificacionesToolStripMenuItem})
         Me.IngresoDeEnsayosProductosTerminadosToolStripMenuItem.Name = "IngresoDeEnsayosProductosTerminadosToolStripMenuItem"
-        Me.IngresoDeEnsayosProductosTerminadosToolStripMenuItem.Size = New System.Drawing.Size(193, 22)
+        Me.IngresoDeEnsayosProductosTerminadosToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
         Me.IngresoDeEnsayosProductosTerminadosToolStripMenuItem.Text = "Productos Terminados"
         '
         'ControlesIntermedisToolStripMenuItem
@@ -63,6 +65,12 @@ Partial Class MenuPrincipal
         Me.ControlesIntermedisToolStripMenuItem.Name = "ControlesIntermedisToolStripMenuItem"
         Me.ControlesIntermedisToolStripMenuItem.Size = New System.Drawing.Size(191, 22)
         Me.ControlesIntermedisToolStripMenuItem.Text = "Controles Intermedios"
+        '
+        'EspecificacionesToolStripMenuItem
+        '
+        Me.EspecificacionesToolStripMenuItem.Name = "EspecificacionesToolStripMenuItem"
+        Me.EspecificacionesToolStripMenuItem.Size = New System.Drawing.Size(191, 22)
+        Me.EspecificacionesToolStripMenuItem.Text = "Especificaciones"
         '
         'Panel1
         '
@@ -110,11 +118,18 @@ Partial Class MenuPrincipal
         Me.btnCambioEmpresa.Text = "CAMBIAR EMPRESA"
         Me.btnCambioEmpresa.UseVisualStyleBackColor = True
         '
-        'EspecificacionesToolStripMenuItem
+        'ProcesosToolStripMenuItem
         '
-        Me.EspecificacionesToolStripMenuItem.Name = "EspecificacionesToolStripMenuItem"
-        Me.EspecificacionesToolStripMenuItem.Size = New System.Drawing.Size(191, 22)
-        Me.EspecificacionesToolStripMenuItem.Text = "Especificaciones"
+        Me.ProcesosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FinDeSistemaToolStripMenuItem})
+        Me.ProcesosToolStripMenuItem.Name = "ProcesosToolStripMenuItem"
+        Me.ProcesosToolStripMenuItem.Size = New System.Drawing.Size(66, 20)
+        Me.ProcesosToolStripMenuItem.Text = "Procesos"
+        '
+        'FinDeSistemaToolStripMenuItem
+        '
+        Me.FinDeSistemaToolStripMenuItem.Name = "FinDeSistemaToolStripMenuItem"
+        Me.FinDeSistemaToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.FinDeSistemaToolStripMenuItem.Text = "Fin de Sistema"
         '
         'MenuPrincipal
         '
@@ -145,4 +160,6 @@ Partial Class MenuPrincipal
     Friend WithEvents ControlesIntermedisToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents btnCambioEmpresa As System.Windows.Forms.Button
     Friend WithEvents EspecificacionesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ProcesosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents FinDeSistemaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class
