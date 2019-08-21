@@ -18,4 +18,18 @@
     Private Sub EspecificacionesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EspecificacionesToolStripMenuItem.Click
         Abrir(New IngresoEspecificacionesPT)
     End Sub
+
+    Private Sub MenuPrincipal_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        FarmaIngresoDeEnsayosProductosTerminadosToolStripMenuItem.Visible = Operador.Base = "Surfactan_III"
+        ProductosTerminadosToolStripMenuItem.Visible = Operador.Base <> "Surfactan_III"
+    End Sub
+
+    Private Sub ProductosTerminadosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ProductosTerminadosToolStripMenuItem.Click
+        MsgBox("No desarrollado. Loguearse en Surfactan III", MsgBoxStyle.Information)
+        btnCambioEmpresa_Click(Nothing, Nothing)
+    End Sub
+
+    Private Sub FinDeSistemaToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles FinDeSistemaToolStripMenuItem.Click
+        Close()
+    End Sub
 End Class

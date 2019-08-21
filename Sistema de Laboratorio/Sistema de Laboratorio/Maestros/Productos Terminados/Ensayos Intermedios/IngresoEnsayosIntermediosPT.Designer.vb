@@ -780,6 +780,7 @@ Partial Class IngresoEnsayosIntermediosPT
         Me.Decimales.HeaderText = "Decimales"
         Me.Decimales.Name = "Decimales"
         Me.Decimales.ReadOnly = True
+        Me.Decimales.Visible = False
         '
         'IngresoEnsayosIntermediosPT
         '

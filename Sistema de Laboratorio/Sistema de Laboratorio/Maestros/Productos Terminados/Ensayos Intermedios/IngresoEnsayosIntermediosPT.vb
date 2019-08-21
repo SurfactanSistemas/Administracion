@@ -677,6 +677,8 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
             Dim WRenglon = 0
 
+            Dim WTipoProceso As String = Trim(lblTipoProceso.Text)
+
             WSqls.Add("DELETE FROM PrueterfarmaIntermedio WHERE Partida = '" & WPartida & "' And Producto = '" & WCodigo & "' And Paso = '" & WEtapa & "'")
 
             For Each row As DataGridViewRow In dgvEnsayos.Rows
@@ -742,6 +744,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                     ZSql = ZSql & "Estado ,"
                     ZSql = ZSql & "Confecciono ,"
                     ZSql = ZSql & "Impre1 ,"
+                    ZSql = ZSql & "Impre2 ,"
                     ZSql = ZSql & "FormulaEspecif ,"
 
                     For i = 1 To 10
@@ -781,6 +784,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                     ZSql = ZSql & "'" & "1" & "',"
                     ZSql = ZSql & "'" & WConfecciono.left(50) & "',"
                     ZSql = ZSql & "'" & WParametro.left(100) & "',"
+                    ZSql = ZSql & "'" & WTipoProceso.left(100) & "',"
                     ZSql = ZSql & "'" & WFormulaEspecif & "',"
 
                     For i = 1 To 10

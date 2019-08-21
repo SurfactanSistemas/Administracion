@@ -71,6 +71,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -177,10 +178,16 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Reportes\Productos Terminados\Ensayos Intermedios\ResultadosIntermediosPT.vb">
+    <Compile Include="Reportes\Productos Terminados\Ensayos Intermedios\NOResultadosIntermediosPT.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ResultadosIntermediosPT.rpt</DependentUpon>
+      <DependentUpon>NOResultadosIntermediosPT.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Productos Terminados\Ensayos Intermedios\ValoresEnsayosIntermediosPTFarma.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ValoresEnsayosIntermediosPTFarma.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\Productos Terminados\Especificaciones\ImpreEspecificacionesPT.vb">
@@ -239,9 +246,13 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Productos Terminados\Ensayos Intermedios\ResultadosIntermediosPT.rpt">
+    <EmbeddedResource Include="Reportes\Productos Terminados\Ensayos Intermedios\NOResultadosIntermediosPT.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>ResultadosIntermediosPT.vb</LastGenOutput>
+      <LastGenOutput>NOResultadosIntermediosPT.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Productos Terminados\Ensayos Intermedios\ValoresEnsayosIntermediosPTFarma.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ValoresEnsayosIntermediosPTFarma.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Productos Terminados\Especificaciones\ImpreEspecificacionesPT.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

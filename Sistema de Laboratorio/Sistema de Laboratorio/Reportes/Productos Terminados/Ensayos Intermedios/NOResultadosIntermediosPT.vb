@@ -18,7 +18,7 @@ Imports System
 Imports System.ComponentModel
 
 
-Public Class ResultadosIntermediosPT
+Public Class NOResultadosIntermediosPT
     Inherits ReportClass
     
     Public Sub New()
@@ -27,7 +27,7 @@ Public Class ResultadosIntermediosPT
     
     Public Overrides Property ResourceName() As String
         Get
-            Return "ResultadosIntermediosPT.rpt"
+            Return "NOResultadosIntermediosPT.rpt"
         End Get
         Set
             'Do nothing
@@ -45,7 +45,7 @@ Public Class ResultadosIntermediosPT
     
     Public Overrides Property FullResourceName() As String
         Get
-            Return "Laboratorio.ResultadosIntermediosPT.rpt"
+            Return "Laboratorio.NOResultadosIntermediosPT.rpt"
         End Get
         Set
             'Do nothing
@@ -118,7 +118,7 @@ Public Class ResultadosIntermediosPT
 End Class
 
 <System.Drawing.ToolboxBitmapAttribute(GetType(CrystalDecisions.[Shared].ExportOptions), "report.bmp")>  _
-Public Class CachedResultadosIntermediosPT
+Public Class CachedNOResultadosIntermediosPT
     Inherits Component
     Implements ICachedReport
     
@@ -160,7 +160,7 @@ Public Class CachedResultadosIntermediosPT
     End Property
     
     Public Overridable Function CreateReport() As CrystalDecisions.CrystalReports.Engine.ReportDocument Implements CrystalDecisions.ReportSource.ICachedReport.CreateReport
-        Dim rpt As ResultadosIntermediosPT = New ResultadosIntermediosPT()
+        Dim rpt As NOResultadosIntermediosPT = New NOResultadosIntermediosPT()
         rpt.Site = Me.Site
         Return rpt
     End Function
