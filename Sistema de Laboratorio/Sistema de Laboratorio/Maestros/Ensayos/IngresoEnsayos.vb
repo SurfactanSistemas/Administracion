@@ -1,6 +1,10 @@
-﻿Public Class IngresoEnsayos
+﻿Imports ConsultasVarias
+
+Public Class IngresoEnsayos : Implements IIngresoClaveSeguridad
 
     Private ReadOnly WBase As String = ""
+    Private WAutorizado As Boolean = False
+    Private WProceso As Byte = 0
 
     Sub New(Optional ByVal Codigo As Object = 0)
 
@@ -77,6 +81,16 @@
             Exit Sub
         End If
 
+        If Not WAutorizado Then
+            WProceso = 1
+            With New IngresoClaveSeguridad
+                .Show(Me)
+            End With
+            Exit Sub
+        End If
+
+        WAutorizado = False
+
         Dim WCodigo, WUnidad, WDescripcion, WDescripcionII, WDate, WSql As String
 
         WCodigo = txtCodigo.Text.Trim
@@ -101,22 +115,54 @@
         Dim WEnsayo As DataRow = GetSingle("SELECT Codigo FROM Ensayos WHERE Codigo = '" & txtCodigo.Text & "'", WBase)
 
         If WEnsayo IsNot Nothing Then
-            If MsgBox("¿Desea eliminar el Ensayo " & txtCodigo.Text & "?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
 
-                ExecuteNonQueries(WBase, {"DELETE FROM Ensayos WHERE Codigo = '" & txtCodigo.Text & "'"})
+            If Not WAutorizado Then
 
-                Dim WOwner As IActualizarPorNuevoIngreso = TryCast(Owner, IActualizarPorNuevoIngreso)
+                If MsgBox("¿Desea eliminar el Ensayo " & txtCodigo.Text & "?", MsgBoxStyle.YesNo) = MsgBoxResult.No Then Exit Sub
 
-                If WOwner IsNot Nothing Then WOwner._ProcesarActualizarPorNuevoIngreso()
+                WProceso = 2
 
-                Close()
+                With New IngresoClaveSeguridad
+                    .Show(Me)
+                End With
 
+                Exit Sub
             End If
+
+            WAutorizado = False
+
+            ExecuteNonQueries(WBase, {"DELETE FROM Ensayos WHERE Codigo = '" & txtCodigo.Text & "'"})
+
+            Dim WOwner As IActualizarPorNuevoIngreso = TryCast(Owner, IActualizarPorNuevoIngreso)
+
+            If WOwner IsNot Nothing Then WOwner._ProcesarActualizarPorNuevoIngreso()
+
+            Close()
+
         End If
 
     End Sub
 
     Private Sub btnSalir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSalir.Click
         Close()
+    End Sub
+
+    Public Sub _ProcesarIngresoClaveSeguridad(ByVal WClave As Object) Implements IIngresoClaveSeguridad._ProcesarIngresoClaveSeguridad
+
+        Dim WOper As DataRow = GetSingle("SELECT GrabaII FROM Operador WHERE upper(Clave) = '" & UCase(WClave) & "'")
+
+        If WOper IsNot Nothing Then
+            WAutorizado = UCase(OrDefault(WOper.Item("GrabaII"), "N")) = "S"
+        End If
+
+        Select Case WProceso
+            Case 1
+                btnGrabar_Click(Nothing, Nothing)
+            Case 2
+                btnEliminar_Click(Nothing, Nothing)
+            Case Else
+                Exit Sub
+        End Select
+
     End Sub
 End Class
