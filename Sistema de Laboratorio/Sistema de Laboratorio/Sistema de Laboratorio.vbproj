@@ -93,6 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Auxiliares\Extensiones\AuxiExtensiones.vb" />
+    <Compile Include="Auxiliares\Interfaces\IActualizarPorNuevoIngreso.vb" />
     <Compile Include="Auxiliares\Interfaces\IDefinicionFormulaEspecificacion.vb" />
     <Compile Include="Auxiliares\Interfaces\IDefinicionValoresFormula.vb" />
     <Compile Include="Auxiliares\Interfaces\IIngresoMotivoDesvio.vb" />
@@ -131,6 +132,18 @@
       <DependentUpon>Login.vb</DependentUpon>
     </Compile>
     <Compile Include="Login.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestros\Ensayos\IngresoEnsayos.Designer.vb">
+      <DependentUpon>IngresoEnsayos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\Ensayos\IngresoEnsayos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestros\Ensayos\ListaEnsayos.Designer.vb">
+      <DependentUpon>ListaEnsayos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\Ensayos\ListaEnsayos.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Maestros\Productos Terminados\Ensayos Intermedios\IngresoEnsayosIntermediosPT.Designer.vb">
@@ -224,6 +237,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\Ensayos\IngresoEnsayos.resx">
+      <DependentUpon>IngresoEnsayos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\Ensayos\ListaEnsayos.resx">
+      <DependentUpon>ListaEnsayos.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Maestros\Productos Terminados\Ensayos Intermedios\IngresoEnsayosIntermediosPT.resx">
       <DependentUpon>IngresoEnsayosIntermediosPT.vb</DependentUpon>

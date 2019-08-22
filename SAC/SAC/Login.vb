@@ -492,6 +492,8 @@ Public Class Login
 
         'Globals.empresa = cmbEntity.SelectedItem
 
+        If txtPsw.Text.Trim = "" Then Exit Sub
+
         Clases.Conexion.EmpresaDeTrabajo = CType(cmbEntity.SelectedItem, DataRowView).Item("Base")
 
         ' Validamos la contraseña.

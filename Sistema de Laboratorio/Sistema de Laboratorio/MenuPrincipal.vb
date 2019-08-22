@@ -32,4 +32,10 @@
     Private Sub FinDeSistemaToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles FinDeSistemaToolStripMenuItem.Click
         Close()
     End Sub
+
+    Private Sub EnsayosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EnsayosToolStripMenuItem.Click
+        With New ListaEnsayos
+            .Show(Me)
+        End With
+    End Sub
 End Class
