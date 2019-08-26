@@ -1,4 +1,6 @@
-﻿Public Class ListaEnsayos :Implements IActualizarPorNuevoIngreso
+﻿Imports ConsultasVarias
+
+Public Class ListaEnsayos : Implements IActualizarPorNuevoIngreso, IListarReporteDesdeHastaBasico
 
     Dim WBase As String = "Surfactan_II"
 
@@ -73,5 +75,36 @@
             txtCodigo.Text = ""
         End If
 
+    End Sub
+
+    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+        With New ListarReporteDesdeHastaBasico("Listar Ensayos")
+            AddHandler .WOnKeyDown, AddressOf _OnKeyDownEnsayos
+            .Show(Me)
+        End With
+    End Sub
+
+    Private Sub _OnKeyDownEnsayos(ByVal sender As Object, ByVal e As ListadoReporteEventArgs)
+
+        Dim WControl As TextBox = TryCast(sender, TextBox)
+        Dim WEns As DataRow = GetSingle("SELECT Descripcion FROM Ensayos WHERE Codigo = '" & WControl.Text.Trim & "'", WBase)
+
+        If WEns IsNot Nothing Then e.Control.Text = Trim(OrDefault(WEns.Item("Descripcion"), ""))
+
+    End Sub
+
+    Public Sub _ProcesarListarReporteDesdeHastaBasico(ByVal Desde As String, ByVal Hasta As String, ByVal TipoVisualizacion As ConsultasVarias.Clases.Enumeraciones.TipoVisualizacionReporte) Implements IListarReporteDesdeHastaBasico._ProcesarListarReporteDesdeHastaBasico
+        With New VistaPrevia
+            .Reporte = New ReporteListadoEnsayos
+            .Formula = "{Ensayos.Codigo} IN " & Desde & " TO " & Hasta & ""
+            .Base = IIf(_EsPellital, "Pelitall_II", "Surfactan_II")
+
+            If TipoVisualizacion = ConsultasVarias.Clases.Enumeraciones.TipoVisualizacionReporte.Pantalla Then
+                .Mostrar()
+            Else
+                .Imprimir()
+            End If
+
+        End With
     End Sub
 End Class

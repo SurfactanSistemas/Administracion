@@ -10,12 +10,14 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using ClassConexion;
 using Negocio;
+using Vista.Formularios;
+using Vista.Interfaces;
 
 namespace Vista
 {
     
 
-    public partial class Muestra : Form
+    public partial class Muestra : Form, ICLave
     {
         Conexion CS = new Conexion();
         Terminado Ter = new Terminado();
@@ -23,6 +25,8 @@ namespace Vista
         DataTable dt;
         string columna = "";
         bool OrdFecha;
+        private bool WAutorizado = false;
+        private byte WProceso = 0;
 
 
         public Muestra()
@@ -493,7 +497,15 @@ namespace Vista
 
         private void BtRemito_Click(object sender, EventArgs e)
         {
-            
+            if (!WAutorizado)
+            {
+                WProceso = 1;
+                Clave frm = new Clave();
+                frm.Show(this);
+                return;
+            }
+
+            WAutorizado = false;
 
             try
             {
@@ -1079,8 +1091,59 @@ namespace Vista
 
         private void btnRemitosVarios_Click(object sender, EventArgs e)
         {
+            if (!WAutorizado)
+            {
+                WProceso = 2;
+                Clave frm = new Clave();
+                frm.Show(this);
+                return;
+            }
+
+            WAutorizado = false;
+
             Process.Start(@"\\193.168.0.2\g$\vb\Net\RemitosVarios\Ejecutable\RemitosVarios.exe", "1");
         }
 
+        public void _ProcesarClaveSeguridad(string clave)
+        {
+            WAutorizado = false;
+            
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["SurfactanSa"].ConnectionString;
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT GrabaRemito FROM Operador WHERE UPPER(Clave) = '" + clave.ToUpper() + "'";
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.HasRows)
+                        {
+                            dr.Read();
+
+                            WAutorizado = dr["GrabaRemito"] != null && dr["GrabaRemito"].ToString().ToUpper() == "S";
+                        }
+                    }
+                }
+
+            }
+        
+            switch (WProceso)
+            {
+                case 1:
+                {
+                    BtRemito_Click(null, null);
+                    break;
+                }
+                case 2:
+                {
+                    btnRemitosVarios_Click(null, null);
+                    break;
+                }
+            }
+        }
     }
 }

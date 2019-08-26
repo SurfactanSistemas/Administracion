@@ -35,7 +35,6 @@ Partial Class IngresoEnsayos
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.btnGrabar = New System.Windows.Forms.Button()
-        Me.btnListar = New System.Windows.Forms.Button()
         Me.btnEliminar = New System.Windows.Forms.Button()
         Me.btnSalir = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
@@ -167,25 +166,16 @@ Partial Class IngresoEnsayos
         '
         'btnGrabar
         '
-        Me.btnGrabar.Location = New System.Drawing.Point(56, 162)
+        Me.btnGrabar.Location = New System.Drawing.Point(96, 162)
         Me.btnGrabar.Name = "btnGrabar"
         Me.btnGrabar.Size = New System.Drawing.Size(90, 31)
         Me.btnGrabar.TabIndex = 5
         Me.btnGrabar.Text = "GRABAR"
         Me.btnGrabar.UseVisualStyleBackColor = True
         '
-        'btnListar
-        '
-        Me.btnListar.Location = New System.Drawing.Point(152, 162)
-        Me.btnListar.Name = "btnListar"
-        Me.btnListar.Size = New System.Drawing.Size(90, 31)
-        Me.btnListar.TabIndex = 5
-        Me.btnListar.Text = "LISTAR"
-        Me.btnListar.UseVisualStyleBackColor = True
-        '
         'btnEliminar
         '
-        Me.btnEliminar.Location = New System.Drawing.Point(248, 162)
+        Me.btnEliminar.Location = New System.Drawing.Point(200, 162)
         Me.btnEliminar.Name = "btnEliminar"
         Me.btnEliminar.Size = New System.Drawing.Size(90, 31)
         Me.btnEliminar.TabIndex = 5
@@ -194,7 +184,7 @@ Partial Class IngresoEnsayos
         '
         'btnSalir
         '
-        Me.btnSalir.Location = New System.Drawing.Point(344, 162)
+        Me.btnSalir.Location = New System.Drawing.Point(304, 162)
         Me.btnSalir.Name = "btnSalir"
         Me.btnSalir.Size = New System.Drawing.Size(90, 31)
         Me.btnSalir.TabIndex = 5
@@ -208,7 +198,6 @@ Partial Class IngresoEnsayos
         Me.ClientSize = New System.Drawing.Size(491, 200)
         Me.Controls.Add(Me.btnSalir)
         Me.Controls.Add(Me.btnEliminar)
-        Me.Controls.Add(Me.btnListar)
         Me.Controls.Add(Me.btnGrabar)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.Panel1)
@@ -237,7 +226,6 @@ Partial Class IngresoEnsayos
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents btnGrabar As System.Windows.Forms.Button
-    Friend WithEvents btnListar As System.Windows.Forms.Button
     Friend WithEvents btnEliminar As System.Windows.Forms.Button
     Friend WithEvents btnSalir As System.Windows.Forms.Button
 End Class

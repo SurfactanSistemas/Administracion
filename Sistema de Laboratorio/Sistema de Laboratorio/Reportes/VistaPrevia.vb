@@ -6,6 +6,7 @@ Public Class VistaPrevia
     Public Property Reporte As ReportDocument
 
     Public Property Formula As String
+    Public Property Base As String = "Surfactan_III"
 
     Private Sub Reporte_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
@@ -49,7 +50,7 @@ Public Class VistaPrevia
 
         Try
             ' Buscamos el string de conexion.
-            cs = Helper._ConectarA("Surfactan_III") 'ClasesCompartidas.Globals.getConnectionString()
+            cs = Helper._ConectarA(Base) 'ClasesCompartidas.Globals.getConnectionString()
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical)
             Return
@@ -113,6 +114,8 @@ Public Class VistaPrevia
             'Next
 
             .ReportSource = Me.Reporte
+
+            Threading.Thread.Sleep(200)
 
             If Not String.IsNullOrEmpty(Me.Formula) Then
 

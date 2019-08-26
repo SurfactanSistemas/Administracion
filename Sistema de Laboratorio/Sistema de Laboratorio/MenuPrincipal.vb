@@ -1,4 +1,8 @@
-﻿Public Class MenuPrincipal
+﻿Imports ConsultasVarias
+
+Public Class MenuPrincipal
+    Private WProceso As Byte = 0
+
     Private Sub Abrir(ByVal frm As Form)
         frm.Show(Me)
     End Sub
@@ -37,5 +41,12 @@
         With New ListaEnsayos
             .Show(Me)
         End With
+    End Sub
+
+    Private Sub ListadoDeEnsayosEnMPToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListadoDeEnsayosEnMPToolStripMenuItem.Click
+
+        Dim frm = New ProcesarListadoEnsayosEnMateriaPrima()
+        frm.Show()
+
     End Sub
 End Class

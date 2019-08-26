@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DBAuxi" targetNamespace="http://tempuri.org/DBAuxi.xsd" xmlns:mstns="http://tempuri.org/DBAuxi.xsd" xmlns="http://tempuri.org/DBAuxi.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DBAuxi" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DBAuxi" msprop:Generator_UserDSName="DBAuxi">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="VerificaEnsayos" msprop:Generator_TableClassName="VerificaEnsayosDataTable" msprop:Generator_TableVarName="tableVerificaEnsayos" msprop:Generator_TablePropName="VerificaEnsayos" msprop:Generator_RowDeletingName="VerificaEnsayosRowDeleting" msprop:Generator_RowChangingName="VerificaEnsayosRowChanging" msprop:Generator_RowEvHandlerName="VerificaEnsayosRowChangeEventHandler" msprop:Generator_RowDeletedName="VerificaEnsayosRowDeleted" msprop:Generator_UserTableName="VerificaEnsayos" msprop:Generator_RowChangedName="VerificaEnsayosRowChanged" msprop:Generator_RowEvArgName="VerificaEnsayosRowChangeEvent" msprop:Generator_RowClassName="VerificaEnsayosRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ID" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:short" minOccurs="0" />
+              <xs:element name="Ensayo" msprop:Generator_ColumnVarNameInTable="columnEnsayo" msprop:Generator_ColumnPropNameInRow="Ensayo" msprop:Generator_ColumnPropNameInTable="EnsayoColumn" msprop:Generator_UserColumnName="Ensayo" type="xs:short" minOccurs="0" />
+              <xs:element name="Producto" msprop:Generator_ColumnVarNameInTable="columnProducto" msprop:Generator_ColumnPropNameInRow="Producto" msprop:Generator_ColumnPropNameInTable="ProductoColumn" msprop:Generator_UserColumnName="Producto" type="xs:string" minOccurs="0" />
+              <xs:element name="Descripcion" msprop:Generator_ColumnVarNameInTable="columnDescripcion" msprop:Generator_ColumnPropNameInRow="Descripcion" msprop:Generator_ColumnPropNameInTable="DescripcionColumn" msprop:Generator_UserColumnName="Descripcion" type="xs:string" minOccurs="0" />
+              <xs:element name="Resultado" msprop:Generator_ColumnVarNameInTable="columnResultado" msprop:Generator_ColumnPropNameInRow="Resultado" msprop:Generator_ColumnPropNameInTable="ResultadoColumn" msprop:Generator_UserColumnName="Resultado" type="xs:string" minOccurs="0" />
+              <xs:element name="DescEnsayo" msprop:Generator_ColumnVarNameInTable="columnDescEnsayo" msprop:Generator_ColumnPropNameInRow="DescEnsayo" msprop:Generator_ColumnPropNameInTable="DescEnsayoColumn" msprop:Generator_UserColumnName="DescEnsayo" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

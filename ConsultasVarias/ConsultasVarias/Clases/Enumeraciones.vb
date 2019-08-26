@@ -10,5 +10,10 @@
             PorMailComoAdjunto
         End Enum
 
+        Enum TipoVisualizacionReporte
+            Impresora
+            Pantalla
+        End Enum
+
     End Class
 End Namespace

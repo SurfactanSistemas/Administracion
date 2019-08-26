@@ -146,6 +146,12 @@
     <Compile Include="Maestros\Ensayos\ListaEnsayos.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Maestros\Materias Primas\ProcesarListadoEnsayosEnMateriaPrima.Designer.vb">
+      <DependentUpon>ProcesarListadoEnsayosEnMateriaPrima.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\Materias Primas\ProcesarListadoEnsayosEnMateriaPrima.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Maestros\Productos Terminados\Ensayos Intermedios\IngresoEnsayosIntermediosPT.Designer.vb">
       <DependentUpon>IngresoEnsayosIntermediosPT.vb</DependentUpon>
     </Compile>
@@ -190,6 +196,29 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Reportes\DBAuxi.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DBAuxi.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Ensayos\ReporteListadoEnsayos.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteListadoEnsayos.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Ensayos\ReporteListadoEnsayosII.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteListadoEnsayosII.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Materias Primas\ReporteListadoEnsayosEnMP.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteListadoEnsayosEnMP.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\Productos Terminados\Ensayos Intermedios\NOResultadosIntermediosPT.vb">
       <AutoGen>True</AutoGen>
@@ -244,6 +273,9 @@
     <EmbeddedResource Include="Maestros\Ensayos\ListaEnsayos.resx">
       <DependentUpon>ListaEnsayos.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\Materias Primas\ProcesarListadoEnsayosEnMateriaPrima.resx">
+      <DependentUpon>ProcesarListadoEnsayosEnMateriaPrima.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Maestros\Productos Terminados\Ensayos Intermedios\IngresoEnsayosIntermediosPT.resx">
       <DependentUpon>IngresoEnsayosIntermediosPT.vb</DependentUpon>
     </EmbeddedResource>
@@ -264,6 +296,18 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Ensayos\ReporteListadoEnsayos.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteListadoEnsayos.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Ensayos\ReporteListadoEnsayosII.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteListadoEnsayosII.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Materias Primas\ReporteListadoEnsayosEnMP.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteListadoEnsayosEnMP.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Productos Terminados\Ensayos Intermedios\NOResultadosIntermediosPT.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -296,6 +340,17 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Reportes\DBAuxi.xsc">
+      <DependentUpon>DBAuxi.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\DBAuxi.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DBAuxi.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Reportes\DBAuxi.xss">
+      <DependentUpon>DBAuxi.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>

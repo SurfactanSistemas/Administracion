@@ -145,4 +145,42 @@ Module Query
         End Try
     End Sub
 
+    Public Function CallProcedureWithReturns(ByVal proc As String, ByVal params As Dictionary(Of String, Object), Optional ByVal Base As String = "") As DataTable
+        If Base.Trim = "" Then Base = Operador.Base
+        Dim tabla As New DataTable
+        Try
+
+            Using cn As New SqlConnection
+                cn.ConnectionString = _ConectarA(Base) 'ConfigurationManager.ConnectionStrings("CS").ToString
+                cn.Open()
+
+                Using cm As New SqlCommand()
+
+                    cm.CommandType = CommandType.StoredProcedure
+                    cm.CommandText = proc
+                    cm.Connection = cn
+
+                    For Each v As KeyValuePair(Of String, Object) In params
+                        Dim p As New SqlParameter
+                        p.DbType = SqlDbType.VarChar
+                        p.Value = v.Value
+                        p.ParameterName = v.Key
+                        cm.Parameters.Add(p)
+                    Next
+
+                    Using dr As SqlDataReader = cm.ExecuteReader()
+                        tabla.Load(dr)
+                    End Using
+
+                End Using
+            End Using
+
+            Return tabla
+
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+
+    End Function
+
 End Module

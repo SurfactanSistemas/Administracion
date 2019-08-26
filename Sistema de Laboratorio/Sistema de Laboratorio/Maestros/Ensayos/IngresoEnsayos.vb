@@ -90,8 +90,9 @@ Public Class IngresoEnsayos : Implements IIngresoClaveSeguridad
         End If
 
         WAutorizado = False
+        WProceso = 0
 
-        Dim WCodigo, WUnidad, WDescripcion, WDescripcionII, WDate, WSql As String
+        Dim WCodigo, WUnidad, WDescripcion, WDescripcionII, WSql As String
 
         WCodigo = txtCodigo.Text.Trim
         WUnidad = txtUnidad.Text.Trim
@@ -130,6 +131,7 @@ Public Class IngresoEnsayos : Implements IIngresoClaveSeguridad
             End If
 
             WAutorizado = False
+            WProceso = 0
 
             ExecuteNonQueries(WBase, {"DELETE FROM Ensayos WHERE Codigo = '" & txtCodigo.Text & "'"})
 
@@ -165,4 +167,5 @@ Public Class IngresoEnsayos : Implements IIngresoClaveSeguridad
         End Select
 
     End Sub
+
 End Class
