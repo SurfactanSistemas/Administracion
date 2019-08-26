@@ -1669,6 +1669,8 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
             
             Dim frm As New ConsultasVarias.VistaPrevia
 
+            _PrepararImpreSacII()
+
             With frm
 
                 .Reporte = New NuevoSACAmbos
@@ -1841,7 +1843,6 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
             '
             ' Cargamos la carátula y filtramos para el SAC indicado.
             '
-
             _PrepararImpreSacII()
 
             Dim WIncluirComentarios = False

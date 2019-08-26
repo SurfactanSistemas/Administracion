@@ -4842,4 +4842,8 @@ Public Class IngresoPruebasEnsayo
 
         End With
     End Sub
+
+    Private Sub Button5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button5.Click
+        If Val(txtHojaProduccion.Text) > 0 Then _ImprimirHojaPiloto()
+    End Sub
 End Class

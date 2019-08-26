@@ -53,7 +53,7 @@ Public Class VistaPrevia
         conexion.ServerName = cnsb.DataSource
         conexion.UserID = cnsb.UserID
         conexion.Password = cnsb.Password
-        conexion.IntegratedSecurity = True
+        'conexion.IntegratedSecurity = True
 
         Dim tli As New TableLogOnInfo()
         tli.ConnectionInfo = conexion
