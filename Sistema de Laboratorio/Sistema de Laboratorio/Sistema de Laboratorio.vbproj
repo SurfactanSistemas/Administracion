@@ -146,10 +146,16 @@
     <Compile Include="Maestros\Ensayos\ListaEnsayos.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Maestros\Materias Primas\ProcesarListadoEnsayosEnMateriaPrima.Designer.vb">
+    <Compile Include="Maestros\Materias Primas\Ensayos\ProcesarListadoEnsayosEnMateriaPrima.Designer.vb">
       <DependentUpon>ProcesarListadoEnsayosEnMateriaPrima.vb</DependentUpon>
     </Compile>
-    <Compile Include="Maestros\Materias Primas\ProcesarListadoEnsayosEnMateriaPrima.vb">
+    <Compile Include="Maestros\Materias Primas\Ensayos\ProcesarListadoEnsayosEnMateriaPrima.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestros\Materias Primas\Especificaciones\ListadoEspecificacionesMPAFecha.Designer.vb">
+      <DependentUpon>ListadoEspecificacionesMPAFecha.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\Materias Primas\Especificaciones\ListadoEspecificacionesMPAFecha.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Maestros\Productos Terminados\Ensayos Intermedios\IngresoEnsayosIntermediosPT.Designer.vb">
@@ -214,10 +220,16 @@
       <DependentUpon>ReporteListadoEnsayosII.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\Materias Primas\ReporteListadoEnsayosEnMP.vb">
+    <Compile Include="Reportes\Materias Primas\Ensayos\ReporteListadoEnsayosEnMP.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReporteListadoEnsayosEnMP.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Materias Primas\Especificaciones\ReporteListadoEspecificacionesMPAFecha.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteListadoEspecificacionesMPAFecha.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\Productos Terminados\Ensayos Intermedios\NOResultadosIntermediosPT.vb">
@@ -273,8 +285,11 @@
     <EmbeddedResource Include="Maestros\Ensayos\ListaEnsayos.resx">
       <DependentUpon>ListaEnsayos.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Maestros\Materias Primas\ProcesarListadoEnsayosEnMateriaPrima.resx">
+    <EmbeddedResource Include="Maestros\Materias Primas\Ensayos\ProcesarListadoEnsayosEnMateriaPrima.resx">
       <DependentUpon>ProcesarListadoEnsayosEnMateriaPrima.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\Materias Primas\Especificaciones\ListadoEspecificacionesMPAFecha.resx">
+      <DependentUpon>ListadoEspecificacionesMPAFecha.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Maestros\Productos Terminados\Ensayos Intermedios\IngresoEnsayosIntermediosPT.resx">
       <DependentUpon>IngresoEnsayosIntermediosPT.vb</DependentUpon>
@@ -305,9 +320,13 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteListadoEnsayosII.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Materias Primas\ReporteListadoEnsayosEnMP.rpt">
+    <EmbeddedResource Include="Reportes\Materias Primas\Ensayos\ReporteListadoEnsayosEnMP.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteListadoEnsayosEnMP.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Materias Primas\Especificaciones\ReporteListadoEspecificacionesMPAFecha.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteListadoEspecificacionesMPAFecha.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Productos Terminados\Ensayos Intermedios\NOResultadosIntermediosPT.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

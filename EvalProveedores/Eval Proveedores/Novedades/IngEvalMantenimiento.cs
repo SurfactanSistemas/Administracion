@@ -9,13 +9,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using Eval_Proveedores.Clases;
+using Eval_Proveedores.Formularios;
+using Eval_Proveedores.Interfaces;
 using Logica_Negocio;
 using Negocio;
 
 namespace Eval_Proveedores.Novedades
 {
-    public partial class IngEvalMantenimiento : Form
+    public partial class IngEvalMantenimiento : Form, ICLave
     {
         ProveedorBOL PBOL = new ProveedorBOL();
         DataTable dtProveedores = new DataTable();
@@ -33,7 +35,7 @@ namespace Eval_Proveedores.Novedades
         int Promedio1 = 0;
         int Promedio2 = 0;
         int Promedio3 = 0;
-
+        private bool WAutorizado = false;
 
         private int Tipo;
         private EvaluaVarios Eva;
@@ -68,7 +70,7 @@ namespace Eval_Proveedores.Novedades
 
         private void IngEvalTransportista_Load(object sender, EventArgs e)
         {
-            
+            WAutorizado = false;
             CargarCBprimeraFila();
             CargarCBSegFila();
             CargarCBRestoFila();
@@ -714,8 +716,14 @@ namespace Eval_Proveedores.Novedades
             //GB_Prove.Visible = false;
             try
             {
+                if (!WAutorizado)
+                {
+                    Clave frm = new Clave();
+                    frm.Show(this);
+                    return;
+                }
 
-                if (ValidarClave() != 1) return;
+                WAutorizado = false;
 
                 if (TB_CodProveedor.Text == "") throw new Exception("Se debe ingresar el proveedor que desea evaluar");
 
@@ -1489,6 +1497,29 @@ namespace Eval_Proveedores.Novedades
                     return "";
                 }
             }
+        }
+
+        public void _ProcesarClaveSeguridad(string clave)
+        {
+            Secciones seccion = Secciones.EvalOtrosServicios;
+
+            switch (this.Tipo)
+            {
+                case 2:
+                {
+                    seccion = Secciones.EvalCalibracion;
+                    break;
+                }
+                case 4:
+                {
+                    seccion = Secciones.EvalMantenimiento;
+                    break;
+                }
+            }
+
+            WAutorizado = Habilitame.Evaluar(seccion, clave);
+
+            BT_Guardar_Click(null, null);
         }
     }
 }

@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using Eval_Proveedores.Clases;
+using Eval_Proveedores.Formularios;
 using Logica_Negocio;
 using Negocio;
+using Eval_Proveedores.Interfaces;
 
 namespace Eval_Proveedores.Novedades
 {
-    public partial class IngEvalTransp : Form
+    public partial class IngEvalTransp : Form, ICLave
     {
         ProveedorBOL PBOL = new ProveedorBOL();
         DataTable dtProveedores = new DataTable();
@@ -42,6 +45,8 @@ namespace Eval_Proveedores.Novedades
         int IdCamion1;
         int IdCamion2;
         int IdCamion3;
+
+        private bool WAutorizado;
 
 
 
@@ -83,6 +88,7 @@ namespace Eval_Proveedores.Novedades
 
         private void IngEvalTransp_Load(object sender, EventArgs e)
         {
+            WAutorizado = false;
             CargarCombos();
             OcultarTextCalif();
             if (Modificar)
@@ -322,23 +328,29 @@ namespace Eval_Proveedores.Novedades
             CB_Punt35.DataSource = Lista1.ToArray();
         }
 
-        private int ValidarClave()
-        {
-            int WResp = 0;
+        //private int ValidarClave()
+        //{
 
-            LoginAdmin Log = new LoginAdmin(WResp);
-            Log.ShowDialog();
-            WResp = Log.ValidClave;
+        //    //int WResp = 0;
 
-            return WResp;
-        }
+        //    //LoginAdmin Log = new LoginAdmin(WResp);
+        //    //Log.ShowDialog();
+        //    //WResp = Log.ValidClave;
+
+        //    //return WResp;
+        //}
 
         private void BT_Guardar_Click(object sender, EventArgs e)
         {
-            if (ValidarClave() == 1)
+            if (!WAutorizado)
             {
-                GuardarEva();
+                Clave frm = new Clave();
+                frm.Show(this);
+                return;
             }
+
+            WAutorizado = false;
+            GuardarEva();
         }
 
         private void CargarEva()
@@ -1964,6 +1976,13 @@ namespace Eval_Proveedores.Novedades
         private void IngEvalTransp_Shown(object sender, EventArgs e)
         {
             if (TB_Mes.Text.Trim() != "") TB_Mes.Focus();
+        }
+
+        public void _ProcesarClaveSeguridad(string clave)
+        {
+            WAutorizado = Habilitame.Evaluar(Secciones.EvalTransporte, clave);
+
+            BT_Guardar_Click(null, null);
         }
     }
 

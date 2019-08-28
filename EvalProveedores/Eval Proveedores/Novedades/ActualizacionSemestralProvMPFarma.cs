@@ -125,15 +125,15 @@ namespace Eval_Proveedores.Novedades
             {
                 case 1:
                 {
-                    return "APROBADO";
+                    return "APROBADO FARMA";
                 }
                 case 2:
                 {
-                    return "NO APROBADO";
+                    return "RECHAZADO FARMA";
                 }
                 case 3:
                 {
-                    return "APROBADO POR ÚNICA VEZ";
+                    return "EVENTUAL FARMA";
                 }
                 default:
                 {
@@ -282,15 +282,15 @@ namespace Eval_Proveedores.Novedades
         {
             switch (valor.ToString())
             {
-                case "APROBADO":
+                case "APROBADO FARMA":
                     {
                         return 1;
                     }
-                case "NO APROBADO":
+                case "RECHAZADO FARMA":
                     {
                         return 2;
                     }
-                case "APROBADO POR ÚNICA VEZ":
+                case "EVENTUAL FARMA":
                     {
                         return 3;
                     }

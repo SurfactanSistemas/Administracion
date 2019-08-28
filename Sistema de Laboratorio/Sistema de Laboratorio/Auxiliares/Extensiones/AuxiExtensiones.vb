@@ -8,6 +8,11 @@ Module AuxiExtensiones
     End Function
 
     <Extension()>
+    Public Function Ceros(ByVal txt As MaskedTextBox, ByVal longitud As Object) As String
+        Return txt.Text.PadLeft(longitud, "0")
+    End Function
+
+    <Extension()>
     Public Function Ceros(ByVal obj As Object, ByVal longitud As Object) As String
         Return obj.ToString.PadLeft(longitud, "0")
     End Function

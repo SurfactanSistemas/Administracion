@@ -30,6 +30,10 @@ Partial Class NuevoSac
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -49,10 +53,6 @@ Partial Class NuevoSac
         Dim DataGridViewCellStyle25 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle26 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle27 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.btnProximoNumeroLibre = New System.Windows.Forms.Button()
         Me.cmbEstado = New System.Windows.Forms.ComboBox()
@@ -91,6 +91,11 @@ Partial Class NuevoSac
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.txtFechaAux = New System.Windows.Forms.MaskedTextBox()
         Me.dgvAcciones = New System.Windows.Forms.DataGridView()
+        Me.idAccion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Acciones = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Responsable = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DescResponsable = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Plazo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.txtFechaAux2 = New System.Windows.Forms.MaskedTextBox()
         Me.dgvImplementaciones = New System.Windows.Forms.DataGridView()
@@ -172,11 +177,6 @@ Partial Class NuevoSac
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
-        Me.idAccion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Acciones = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Responsable = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DescResponsable = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Plazo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -633,8 +633,61 @@ Partial Class NuevoSac
         DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgvAcciones.RowsDefaultCellStyle = DataGridViewCellStyle8
         Me.dgvAcciones.RowTemplate.Height = 20
+        Me.dgvAcciones.ShowCellToolTips = False
         Me.dgvAcciones.Size = New System.Drawing.Size(1013, 293)
         Me.dgvAcciones.TabIndex = 0
+        '
+        'idAccion
+        '
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.idAccion.DefaultCellStyle = DataGridViewCellStyle2
+        Me.idAccion.HeaderText = "Nº"
+        Me.idAccion.Name = "idAccion"
+        Me.idAccion.ReadOnly = True
+        Me.idAccion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.idAccion.Width = 35
+        '
+        'Acciones
+        '
+        Me.Acciones.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Acciones.DefaultCellStyle = DataGridViewCellStyle3
+        Me.Acciones.HeaderText = "Acciones Correctivas"
+        Me.Acciones.MaxInputLength = 150
+        Me.Acciones.Name = "Acciones"
+        Me.Acciones.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'Responsable
+        '
+        Me.Responsable.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Responsable.DefaultCellStyle = DataGridViewCellStyle4
+        Me.Responsable.HeaderText = "Resp."
+        Me.Responsable.Name = "Responsable"
+        Me.Responsable.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Responsable.Width = 41
+        '
+        'DescResponsable
+        '
+        Me.DescResponsable.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.DescResponsable.HeaderText = "Descripción"
+        Me.DescResponsable.MaxInputLength = 150
+        Me.DescResponsable.Name = "DescResponsable"
+        Me.DescResponsable.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.DescResponsable.Width = 69
+        '
+        'Plazo
+        '
+        Me.Plazo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Plazo.DefaultCellStyle = DataGridViewCellStyle5
+        Me.Plazo.HeaderText = "Plazo"
+        Me.Plazo.MaxInputLength = 10
+        Me.Plazo.MinimumWidth = 70
+        Me.Plazo.Name = "Plazo"
+        Me.Plazo.ReadOnly = True
+        Me.Plazo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Plazo.Width = 70
         '
         'TabPage3
         '
@@ -1492,57 +1545,6 @@ Partial Class NuevoSac
         'OpenFileDialog1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
-        '
-        'idAccion
-        '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.idAccion.DefaultCellStyle = DataGridViewCellStyle2
-        Me.idAccion.HeaderText = "Nº"
-        Me.idAccion.Name = "idAccion"
-        Me.idAccion.ReadOnly = True
-        Me.idAccion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.idAccion.Width = 35
-        '
-        'Acciones
-        '
-        Me.Acciones.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Acciones.DefaultCellStyle = DataGridViewCellStyle3
-        Me.Acciones.HeaderText = "Acciones Correctivas"
-        Me.Acciones.MaxInputLength = 150
-        Me.Acciones.Name = "Acciones"
-        Me.Acciones.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'Responsable
-        '
-        Me.Responsable.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Responsable.DefaultCellStyle = DataGridViewCellStyle4
-        Me.Responsable.HeaderText = "Resp."
-        Me.Responsable.Name = "Responsable"
-        Me.Responsable.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Responsable.Width = 41
-        '
-        'DescResponsable
-        '
-        Me.DescResponsable.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.DescResponsable.HeaderText = "Descripción"
-        Me.DescResponsable.MaxInputLength = 150
-        Me.DescResponsable.Name = "DescResponsable"
-        Me.DescResponsable.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.DescResponsable.Width = 69
-        '
-        'Plazo
-        '
-        Me.Plazo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Plazo.DefaultCellStyle = DataGridViewCellStyle5
-        Me.Plazo.HeaderText = "Plazo"
-        Me.Plazo.MaxInputLength = 10
-        Me.Plazo.MinimumWidth = 70
-        Me.Plazo.Name = "Plazo"
-        Me.Plazo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Plazo.Width = 70
         '
         'NuevoSac
         '

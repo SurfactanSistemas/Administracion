@@ -24,6 +24,9 @@ Partial Class MenuPrincipal
     Private Sub InitializeComponent()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.MaestrosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EnsayosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MateriasPrimasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ListadoDeEnsayosEnMPToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FarmaIngresoDeEnsayosProductosTerminadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ControlesIntermedisToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EspecificacionesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -34,9 +37,7 @@ Partial Class MenuPrincipal
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnCambioEmpresa = New System.Windows.Forms.Button()
-        Me.EnsayosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MateriasPrimasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ListadoDeEnsayosEnMPToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ListadoDeEspecificacionesDeMPAFechaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -56,6 +57,25 @@ Partial Class MenuPrincipal
         Me.MaestrosToolStripMenuItem.Name = "MaestrosToolStripMenuItem"
         Me.MaestrosToolStripMenuItem.Size = New System.Drawing.Size(67, 20)
         Me.MaestrosToolStripMenuItem.Text = "Maestros"
+        '
+        'EnsayosToolStripMenuItem
+        '
+        Me.EnsayosToolStripMenuItem.Name = "EnsayosToolStripMenuItem"
+        Me.EnsayosToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
+        Me.EnsayosToolStripMenuItem.Text = "Ing de Ensayos"
+        '
+        'MateriasPrimasToolStripMenuItem
+        '
+        Me.MateriasPrimasToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ListadoDeEnsayosEnMPToolStripMenuItem, Me.ListadoDeEspecificacionesDeMPAFechaToolStripMenuItem})
+        Me.MateriasPrimasToolStripMenuItem.Name = "MateriasPrimasToolStripMenuItem"
+        Me.MateriasPrimasToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
+        Me.MateriasPrimasToolStripMenuItem.Text = "Materias Primas"
+        '
+        'ListadoDeEnsayosEnMPToolStripMenuItem
+        '
+        Me.ListadoDeEnsayosEnMPToolStripMenuItem.Name = "ListadoDeEnsayosEnMPToolStripMenuItem"
+        Me.ListadoDeEnsayosEnMPToolStripMenuItem.Size = New System.Drawing.Size(297, 22)
+        Me.ListadoDeEnsayosEnMPToolStripMenuItem.Text = "Listado de Ensayos en MP"
         '
         'FarmaIngresoDeEnsayosProductosTerminadosToolStripMenuItem
         '
@@ -141,24 +161,11 @@ Partial Class MenuPrincipal
         Me.btnCambioEmpresa.Text = "CAMBIAR EMPRESA"
         Me.btnCambioEmpresa.UseVisualStyleBackColor = True
         '
-        'EnsayosToolStripMenuItem
+        'ListadoDeEspecificacionesDeMPAFechaToolStripMenuItem
         '
-        Me.EnsayosToolStripMenuItem.Name = "EnsayosToolStripMenuItem"
-        Me.EnsayosToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
-        Me.EnsayosToolStripMenuItem.Text = "Ing de Ensayos"
-        '
-        'MateriasPrimasToolStripMenuItem
-        '
-        Me.MateriasPrimasToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ListadoDeEnsayosEnMPToolStripMenuItem})
-        Me.MateriasPrimasToolStripMenuItem.Name = "MateriasPrimasToolStripMenuItem"
-        Me.MateriasPrimasToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
-        Me.MateriasPrimasToolStripMenuItem.Text = "Materias Primas"
-        '
-        'ListadoDeEnsayosEnMPToolStripMenuItem
-        '
-        Me.ListadoDeEnsayosEnMPToolStripMenuItem.Name = "ListadoDeEnsayosEnMPToolStripMenuItem"
-        Me.ListadoDeEnsayosEnMPToolStripMenuItem.Size = New System.Drawing.Size(210, 22)
-        Me.ListadoDeEnsayosEnMPToolStripMenuItem.Text = "Listado de Ensayos en MP"
+        Me.ListadoDeEspecificacionesDeMPAFechaToolStripMenuItem.Name = "ListadoDeEspecificacionesDeMPAFechaToolStripMenuItem"
+        Me.ListadoDeEspecificacionesDeMPAFechaToolStripMenuItem.Size = New System.Drawing.Size(297, 22)
+        Me.ListadoDeEspecificacionesDeMPAFechaToolStripMenuItem.Text = "Listado de Especificaciones de MP a Fecha"
         '
         'MenuPrincipal
         '
@@ -195,4 +202,5 @@ Partial Class MenuPrincipal
     Friend WithEvents EnsayosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MateriasPrimasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ListadoDeEnsayosEnMPToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ListadoDeEspecificacionesDeMPAFechaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class

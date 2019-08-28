@@ -82,7 +82,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Clases\Habilitame.cs" />
+    <Compile Include="Clave.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Clave.designer.cs">
+      <DependentUpon>Clave.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helper.cs" />
+    <Compile Include="Interfaces\ICLave.cs" />
     <Compile Include="Listados\CalcTeoricoSemProve\Inicio.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -533,6 +541,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Clave.resx">
+      <DependentUpon>Clave.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Listados\CalcTeoricoSemProve\Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
     </EmbeddedResource>

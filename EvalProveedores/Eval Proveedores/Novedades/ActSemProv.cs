@@ -10,10 +10,13 @@ using Eval_Proveedores.Listados;
 using Eval_Proveedores.Listados.EvaSemActProve;
 using Eval_Proveedores.Listados.InformePerformanceProveedores;
 using Logica_Negocio;
+using Eval_Proveedores.Interfaces;
+using Eval_Proveedores.Clases;
+using Eval_Proveedores.Formularios;
 
 namespace Eval_Proveedores.Novedades
 {
-    public partial class ActSemProv : Form
+    public partial class ActSemProv : Form, ICLave
     {
         EvalSemestralBOL ESBOL = new EvalSemestralBOL();
         DataTable dtEvaluacion = new DataTable();
@@ -24,6 +27,8 @@ namespace Eval_Proveedores.Novedades
         private int WTipoImpresion = 1;
         bool WImprimiendo;
         private string WEvaluador = "";
+
+        private bool WAutorizado;
 
         public ActSemProv()
         {
@@ -40,6 +45,15 @@ namespace Eval_Proveedores.Novedades
 
                 if (Desde == "0") return; //throw new Exception("Se debe ingresar la fecha Desde donde desea listar");
                 if (Hasta == "0") return; //throw new Exception("Se debe ingresar la fecha Hasta donde desea listar");
+
+                if (!WAutorizado)
+                {
+                    Clave _frm = new Clave();
+                    _frm.Show(this);
+                    return;
+                }
+
+                WAutorizado = false;
 
                 dtEvaluacion.Clear();
                 dtInformeMuestra.Clear();
@@ -200,6 +214,7 @@ namespace Eval_Proveedores.Novedades
 
         private void ActSemProv_Load(object sender, EventArgs e)
         {
+            WAutorizado = false;
             pnlClave.Visible = false;
 
             ckTodos.Checked = true;
@@ -511,9 +526,10 @@ namespace Eval_Proveedores.Novedades
 
         private void button2_Click(object sender, EventArgs e)
         {
-            pnlClave.Visible = true;
-            txtClave.Text = "";
-            txtClave.Focus();
+
+            //pnlClave.Visible = true;
+            //txtClave.Text = "";
+            //txtClave.Focus();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -1417,5 +1433,15 @@ namespace Eval_Proveedores.Novedades
             }
         }
 
+        public void _ProcesarClaveSeguridad(string clave)
+        {
+            Secciones seccion = Secciones.EvalMPCalidad;
+
+            if (cmbTipoEvaluacion.SelectedIndex == 1) seccion = Secciones.EvalMPEntrega;
+
+            WAutorizado = Habilitame.Evaluar(seccion, clave);
+
+            button1_Click(null, null);
+        }
     }
 }

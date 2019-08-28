@@ -699,9 +699,9 @@ namespace Eval_Proveedores.Novedades
             this.EvaCal.HeaderText = "Calidad";
             this.EvaCal.Items.AddRange(new object[] {
             "",
-            "APROBADO",
-            "NO APROBADO",
-            "APROBADO POR ÚNICA VEZ"});
+            "APROBADO FARMA",
+            "RECHAZADO FARMA",
+            "EVENTUAL FARMA"});
             this.EvaCal.MinimumWidth = 100;
             this.EvaCal.Name = "EvaCal";
             // 

@@ -9,10 +9,13 @@ using System.Windows.Forms;
 using Eval_Proveedores.Listados;
 using Eval_Proveedores.Listados.InformePerformanceProveedores;
 using Logica_Negocio;
+using Eval_Proveedores.Clases;
+using Eval_Proveedores.Formularios;
+using Eval_Proveedores.Interfaces;
 
 namespace Eval_Proveedores.Novedades
 {
-    public partial class ActSemProvEnv : Form
+    public partial class ActSemProvEnv : Form, ICLave
     {
         DataTable dtEvaluacion = new DataTable();
         DataTable dtInformeMuestra = new DataTable();
@@ -22,6 +25,7 @@ namespace Eval_Proveedores.Novedades
         private int WTipoImpresion = 1;
         bool WImprimiendo;
         private string WEvaluador = "";
+        private bool WAutorizado;
 
         public ActSemProvEnv()
         {
@@ -30,6 +34,7 @@ namespace Eval_Proveedores.Novedades
 
         private void ActSemProvEnv_Load(object sender, EventArgs e)
         {
+            WAutorizado = false;
             CargarDtEvaluacion();
             CargardtInformeMuestra();
 
@@ -204,10 +209,18 @@ namespace Eval_Proveedores.Novedades
 
         private void BT_Guardar_Click(object sender, EventArgs e)
         {
+            if (!WAutorizado)
+            {
+                Clave _frm = new Clave();
+                _frm.Show(this);
+                return;
+            }
 
-            pnlClave.Visible = true;
-            txtClave.Text = "";
-            txtClave.Focus();
+            BT_Guardar_Click_1(null, null);
+
+            //pnlClave.Visible = true;
+            //txtClave.Text = "";
+            //txtClave.Focus();
 
         }
 
@@ -496,6 +509,8 @@ namespace Eval_Proveedores.Novedades
 
             try
             {
+                WAutorizado = false;
+
                 string WProveedor = "", WFechaCategoria = "", WFechaCategoriaOrd = "", WCategoriaI = "", WCategoriaII = "", WTemp = "";
 
                 if (WEvaluador.Trim() == "") WEvaluador = "0";
@@ -1497,6 +1512,13 @@ namespace Eval_Proveedores.Novedades
 
                 DGV_EvalSemProve.CurrentCell.Value = WValor.ToString() == "" ? "X" : "";
             }
+        }
+
+        public void _ProcesarClaveSeguridad(string clave)
+        {
+            WAutorizado = Habilitame.Evaluar(Secciones.EvalEnvases, clave);
+
+            BT_Guardar_Click(null, null);
         }
     }
 }

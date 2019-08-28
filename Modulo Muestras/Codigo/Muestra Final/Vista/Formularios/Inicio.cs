@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Drawing;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using ClassConexion;
@@ -32,6 +33,10 @@ namespace Vista
         public Muestra()
         {
             InitializeComponent();
+            //Set Double buffering on the Grid using reflection and the bindingflags enum.
+            typeof(DataGridView).InvokeMember("DoubleBuffered", BindingFlags.NonPublic |
+            BindingFlags.Instance | BindingFlags.SetProperty, null,
+            DGV_Muestra, new object[] { true });
         }
 
         private void Form1_Load(object sender, EventArgs e)

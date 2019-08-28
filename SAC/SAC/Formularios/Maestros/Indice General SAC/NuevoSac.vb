@@ -893,7 +893,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
                     _location.Y += .Location.Y + (.CurrentCell.Size.Height / 4) - YMARGEN
                     _location.X += .Location.X + (.CurrentCell.Size.Width - txtFechaAux.Size.Width) - XMARGEN
                     txtFechaAux.Location = _location
-                    txtFechaAux.Text = .Rows(e.RowIndex).Cells("Plazo").Value
+                    txtFechaAux.Text = .CurrentCell.Value '.Rows(e.RowIndex).Cells("Plazo").Value
                     WRow = e.RowIndex
                     Wcol = e.ColumnIndex
                     txtFechaAux.Visible = True
@@ -1885,7 +1885,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
         '
         ' Cargamos las Acciones y filtramos para el SAC indicado.
         '
-        Dim WNroAccion, WDescAccion, WFechaAccion, WRespAccion, WRespImple, WImpleFecha, WImpleComentarios, WVerRespImple, WVerFechaImple, WVerEstadoImple, WDescEstadoImple, WVerRespEfect, WVerFechaEfect, WVerEstadoEfect, WDescEstadoEfect, WVerComentarios As String
+        Dim WNroAccion, WDescAccion, WFechaAccion, WRespAccion, WRespImple, WImpleFecha, WImpleComentarios, WDescEstadoImple, WVerRespImple, WVerFechaImple, WVerEstadoImple, WVerDescEstadoImple, WVerRespEfect, WVerFechaEfect, WVerEstadoEfect, WDescEstadoEfect, WVerComentarios As String
 
         Dim WSQls As New List(Of String)
 
@@ -1910,7 +1910,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
                 WRespImple = OrDefault(.Cells("ImpleResponsable").Value, 0)
                 WImpleFecha = OrDefault(.Cells("ImpleFecha").Value, "  /  /    ")
                 WImpleComentarios = OrDefault(.Cells("Comentarios").Value, "")
-                'WDescImpleEstado = _TraerEstado(WImpleEstado)
+                WDescEstadoImple = OrDefault(.Cells("Estado").Value, "")
 
             End With
 
@@ -1918,7 +1918,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
                 WVerRespImple = OrDefault(.Cells("VerResponsableI").Value, 0)
                 WVerFechaImple = OrDefault(.Cells("VerFechaI").Value, 0)
-                WDescEstadoImple = OrDefault(.Cells("VerEstadoI").Value, 0)
+                WVerDescEstadoImple = OrDefault(.Cells("VerEstadoI").Value, 0)
                 'WDescEstadoImple = _TraerEstado(WVerEstadoImple)
 
                 WVerRespEfect = OrDefault(.Cells("VerResponsableII").Value, 0)
@@ -1938,7 +1938,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
             WSql = String.Format("INSERT INTO ImpreSacII (Clave, Renglon, Tipo, Numero, Ano, FechaSac, Accion, DescAccion, RespAccion, FechaAccion, RespImple, FechaImple, DescImpleEstado, ImpleComentarios, VerImpleResp, VerImpleEstado, VerImpleFecha, VerEfecResp, VerEfecEstado, VerEfecFecha, VerComentario) " &
                                  " VALUES " &
                                  " ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{20}', '{9}', '{10}', '{11}', '{12}', '{13}', '{14}', '{15}', '{16}', '{17}', '{18}', '{19}')",
-                                 WClave, i, txtTipo.Text, txtNumero.Text, txtAnio.Text, txtFecha.Text, WNroAccion, WDescAccion, WRespAccion, WRespImple, WImpleFecha, WDescEstadoImple, WImpleComentarios, WVerRespImple, WDescEstadoImple, WVerFechaImple, WVerRespEfect, WDescEstadoEfect, WVerFechaEfect, WVerComentarios, WFechaAccion)
+                                 WClave, i, txtTipo.Text, txtNumero.Text, txtAnio.Text, txtFecha.Text, WNroAccion, WDescAccion, WRespAccion, WRespImple, WImpleFecha, WDescEstadoImple, WImpleComentarios, WVerRespImple, WVerDescEstadoImple, WVerFechaImple, WVerRespEfect, WDescEstadoEfect, WVerFechaEfect, WVerComentarios, WFechaAccion)
 
             WSQls.Add(WSql)
 
@@ -2421,24 +2421,33 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
         End If
     End Sub
 
-    Private Sub txtFechaAux_Leave(ByVal sender As Object, ByVal e As EventArgs) Handles txtFechaAux.Leave
-        dgvAcciones.CurrentRow.Cells("Plazo").Value = txtFechaAux.Text
-        txtFechaAux.Visible = False
-    End Sub
+    'Private Sub txtFechaAux_Leave(ByVal sender As Object, ByVal e As EventArgs) Handles txtFechaAux.Leave
+    '    'With dgvAcciones
+    '    '    If .CurrentRow.Index - 1 >= 0 Then
+    '    '        .Rows(.CurrentRow.Index - 1).Cells("Plazo").Value = txtFechaAux.Text
+    '    '        txtFechaAux.Visible = False
+    '    '    End If
+    '    'End With
+    'End Sub
 
-    Private Sub txtFechaAux2_Leave(ByVal sender As Object, ByVal e As EventArgs) Handles txtFechaAux2.Leave
-        dgvImplementaciones.CurrentRow.Cells("ImpleFecha").Value = txtFechaAux2.Text
-        txtFechaAux2.Visible = False
-    End Sub
+    'Private Sub txtFechaAux2_Leave(ByVal sender As Object, ByVal e As EventArgs) Handles txtFechaAux2.Leave
+    '    dgvImplementaciones.CurrentRow.Cells("ImpleFecha").Value = txtFechaAux2.Text
+    '    txtFechaAux2.Visible = False
+    'End Sub
 
-    Private Sub txtFechaAux3_Leave(ByVal sender As Object, ByVal e As EventArgs) Handles txtFechaAux3.Leave
-        dgvVerificaciones.CurrentRow.Cells("VerFechaI").Value = txtFechaAux3.Text
-        txtFechaAux3.Visible = False
-    End Sub
+    'Private Sub txtFechaAux3_Leave(ByVal sender As Object, ByVal e As EventArgs) Handles txtFechaAux3.Leave
+    '    dgvVerificaciones.CurrentRow.Cells("VerFechaI").Value = txtFechaAux3.Text
+    '    txtFechaAux3.Visible = False
+    'End Sub
 
-    Private Sub txtFechaAux4_Leave(ByVal sender As Object, ByVal e As EventArgs) Handles txtFechaAux4.Leave
-        dgvVerificaciones.CurrentRow.Cells("VerFechaII").Value = txtFechaAux4.Text
-        txtFechaAux4.Visible = False
-    End Sub
+    'Private Sub txtFechaAux4_Leave(ByVal sender As Object, ByVal e As EventArgs) Handles txtFechaAux4.Leave
+    '    dgvVerificaciones.CurrentRow.Cells("VerFechaII").Value = txtFechaAux4.Text
+    '    txtFechaAux4.Visible = False
+    'End Sub
 
+    'Private Sub dgvAcciones_CellBeginEdit(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellCancelEventArgs) Handles dgvAcciones.CellBeginEdit
+    '    If dgvAcciones.CurrentCell.ColumnIndex = 4 Then
+    '        MsgBox(dgvAcciones.CurrentCell.Value)
+    '    End If
+    'End Sub
 End Class

@@ -405,7 +405,7 @@ namespace Eval_Proveedores
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = conn;
-                    cmd.CommandText = "SELECT distinct p.Proveedor, p.Nombre Razon, ct.Articulo FROM Proveedor p INNER JOIN Cotiza ct ON ct.Proveedor = p.Proveedor INNER JOIN Articulo a ON a.Codigo = ct.Articulo AND a.ClasificacionFarma > 0 ORDER BY p.nombre, ct.Articulo";
+                    cmd.CommandText = "SELECT distinct p.Proveedor, p.Nombre Razon, ct.Articulo FROM Proveedor p INNER JOIN Cotiza ct ON ct.Proveedor = p.Proveedor INNER JOIN Articulo a ON a.Codigo = ct.Articulo AND (a.ClasificacionFarma > 0 or a.ReqEvalEspecial = '1') ORDER BY p.nombre, ct.Articulo";
 
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
