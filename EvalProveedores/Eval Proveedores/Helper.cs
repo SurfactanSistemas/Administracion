@@ -190,7 +190,7 @@ namespace Eval_Proveedores
             return WProveedores;
         }
 
-        public static DataTable _ProcesarEvaluacionProveedoresFarma(string WTipoProv, string WDesde, string WHasta, ref ProgressBar progressBar, string[] WEmpresasAConsultar = null)
+        public static DataTable _ProcesarEvaluacionProveedoresFarma(string WTipoMP, string WDesde, string WHasta, ref ProgressBar progressBar, string[] WEmpresasAConsultar = null)
         {
             DataTable WProveedores = new DataTable();
 
@@ -198,7 +198,7 @@ namespace Eval_Proveedores
 
             progressBar.Value = 0;
             progressBar.Visible = true;
-            WProveedores = _TraerProveedoresFarma(); //_TraerInformacionBasicaDeProveedores(WTipoProv);
+            WProveedores = _TraerProveedoresFarma(WTipoMP); //_TraerInformacionBasicaDeProveedores(WTipoMP);
 
             //WProveedores.Columns.Add("Articulo", typeof(string));
             WProveedores.Columns.Add("Movimientos", typeof(int));
@@ -394,8 +394,11 @@ namespace Eval_Proveedores
             return WDatosFinales;
         }
 
-        private static DataTable _TraerProveedoresFarma()
+        private static DataTable _TraerProveedoresFarma(string WTipoMP = "")
         {
+            // Armamos el filtro para tipo de MP.
+            string WFiltro = _GenerarFiltroPorTipo(WTipoMP);
+
             DataTable tabla = new DataTable();
             using (SqlConnection conn = new SqlConnection())
             {
@@ -405,7 +408,7 @@ namespace Eval_Proveedores
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = conn;
-                    cmd.CommandText = "SELECT distinct p.Proveedor, p.Nombre Razon, ct.Articulo FROM Proveedor p INNER JOIN Cotiza ct ON ct.Proveedor = p.Proveedor INNER JOIN Articulo a ON a.Codigo = ct.Articulo AND (a.ClasificacionFarma > 0 or a.ReqEvalEspecial = '1') ORDER BY p.nombre, ct.Articulo";
+                    cmd.CommandText = "SELECT distinct p.Proveedor, p.Nombre Razon, ct.Articulo FROM Proveedor p INNER JOIN Cotiza ct ON ct.Proveedor = p.Proveedor INNER JOIN Articulo a ON a.Codigo = ct.Articulo AND (" + WFiltro + ") ORDER BY p.nombre, ct.Articulo";
 
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
@@ -419,6 +422,30 @@ namespace Eval_Proveedores
             }
 
             return tabla;
+        }
+
+        private static string _GenerarFiltroPorTipo(string wTipoMp)
+        {
+            switch (wTipoMp)
+            {
+                case "0":
+                {
+                    return "ISNULL(a.ClasificacionFarma,0) = 1 Or (ISNULL(a.ClasificacionFarma,0) = 0 And a.ReqEvalEspecial = '1') Or (ISNULL(a.ClasificacionFarma,0) > 1 And a.ReqEvalEspecial = '1') ";
+                }
+                case "1":
+                {
+                    return "ISNULL(a.ClasificacionFarma,0) = 1";
+                }
+                case "2":
+                case "3":
+                {
+                    return string.Format("ISNULL(a.ClasificacionFarma,0) = ${0} And a.ReqEvalEspecial = '1'", wTipoMp);
+                }
+                default:
+                {
+                    return "ISNULL(a.ClasificacionFarma, 0) = 0 And a.ReqEvalEspecial = '1'";
+                }
+            }
         }
 
         public static string _DeterminarCalidad(string ZCategoriaI)

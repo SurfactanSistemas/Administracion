@@ -142,5 +142,11 @@ namespace Eval_Proveedores
 
             frm.Show(this);
         }
+
+        private void listadoDeEvaluaciónDeProveedorDeMateriaPrimaParaFarmaEntreFechaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Listados.ListadoProvMPFarma.Inicio frm = new Listados.ListadoProvMPFarma.Inicio();
+            frm.Show(this);
+        }
     }
 }

@@ -794,6 +794,18 @@ namespace Modulo_Capacitacion.Maestros.Legajos
                 throw new Exception("Se debe cargar la descripcion");
             if (TB_DescPerfil.Text == "" || TB_DescSec.Text == "")
                 throw new Exception("Se deben completar los datos de perfil, sector");
+
+            if (TB_FechaEgreso.Text.Replace(" ", "").Length != 2 && TB_FechaEgreso.Text != "00/00/0000")
+            {
+                if ((TB_FechaEgreso.Text.Replace(" ", "").Length < 10))
+                    throw new Exception("Debe cargarse una fecha válida para la Fecha de Egreso");
+
+                if (!Helper._FechaValida(TB_FechaEgreso.Text))
+                    throw new Exception("Debe cargarse una fecha válida para la Fecha de Egreso");
+
+                if (int.Parse(Helper.OrdenarFecha(TB_FechaEgreso.Text)) <= int.Parse(Helper.OrdenarFecha(TB_FechaIng.Text)))
+                    throw new Exception("Debe cargarse una fecha válida para la Fecha de Egreso");
+            }
             //if (DGV_Temas.Rows.Count == 0)
             //    throw new Exception("Se deben cargar temas");
         }

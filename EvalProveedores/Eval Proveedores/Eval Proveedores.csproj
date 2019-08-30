@@ -287,6 +287,12 @@
       <DependentUpon>ReporteArticulos.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Listados\ListadoEvaluacionProvMPFarma\ListadoResumidoEvaluacionProveedoresMPFarmaNuevo.cs">
+      <DependentUpon>ListadoResumidoEvaluacionProveedoresMPFarmaNuevo.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Listados\ListadoEvaluacionProvMPFarma\ListadoCompletoEvaluacionProveedoresMPFarma.cs">
       <DependentUpon>ListadoCompletoEvaluacionProveedoresMPFarma.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -310,6 +316,33 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ProveedoresFaltantesEvaluacion.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Listados\ListadoProvMPFarma\EvaProveMPFarma.cs">
+      <DependentUpon>EvaProveMPFarma.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Listados\ListadoProvMPFarma\EvaProveMPFarma.Designer.cs">
+      <DependentUpon>EvaProveMPFarma.xsd</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Listados\ListadoProvMPFarma\ImpreEvaProveMPFarma.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\ListadoProvMPFarma\ImpreEvaProveMPFarma.Designer.cs">
+      <DependentUpon>ImpreEvaProveMPFarma.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\ListadoProvMPFarma\Inicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\ListadoProvMPFarma\Inicio.Designer.cs">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\ListadoProvMPFarma\ReportEvaProveMPFarma.cs">
+      <DependentUpon>ReportEvaProveMPFarma.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Listados\ListaEvaTransp\DSEvaluaTransp.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -621,6 +654,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteArticulos.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Listados\ListadoEvaluacionProvMPFarma\ListadoResumidoEvaluacionProveedoresMPFarmaNuevo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ListadoResumidoEvaluacionProveedoresMPFarmaNuevo.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Listados\ListadoEvaluacionProvMPFarma\ListadoCompletoEvaluacionProveedoresMPFarma.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ListadoCompletoEvaluacionProveedoresMPFarma.cs</LastGenOutput>
@@ -635,6 +672,16 @@
     <EmbeddedResource Include="Listados\ListadoEvaluacionProvMPFarma\ProveedoresFaltantesEvaluacion.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ProveedoresFaltantesEvaluacion.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\ListadoProvMPFarma\ImpreEvaProveMPFarma.resx">
+      <DependentUpon>ImpreEvaProveMPFarma.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\ListadoProvMPFarma\Inicio.resx">
+      <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\ListadoProvMPFarma\ReportEvaProveMPFarma.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportEvaProveMPFarma.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\ListaEvaTransp\ImpreEvaTransp.resx">
       <DependentUpon>ImpreEvaTransp.cs</DependentUpon>
@@ -861,6 +908,17 @@
     </None>
     <None Include="Listados\InformePerformanceProveedores\Detalles.xss">
       <DependentUpon>Detalles.xsd</DependentUpon>
+    </None>
+    <None Include="Listados\ListadoProvMPFarma\EvaProveMPFarma.xsc">
+      <DependentUpon>EvaProveMPFarma.xsd</DependentUpon>
+    </None>
+    <None Include="Listados\ListadoProvMPFarma\EvaProveMPFarma.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>EvaProveMPFarma.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Listados\ListadoProvMPFarma\EvaProveMPFarma.xss">
+      <DependentUpon>EvaProveMPFarma.xsd</DependentUpon>
     </None>
     <None Include="Listados\ListaEvaTransp\DSEvaluaTransp.xsc">
       <DependentUpon>DSEvaluaTransp.xsd</DependentUpon>

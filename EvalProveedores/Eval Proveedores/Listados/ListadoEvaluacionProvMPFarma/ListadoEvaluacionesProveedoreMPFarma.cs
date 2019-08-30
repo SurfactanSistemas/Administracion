@@ -136,7 +136,7 @@ namespace Eval_Proveedores.Listados.ListadoEvaluacionProvMPFarma
                 WFiltroProv = "[" + WFiltroProv + "]";
 
                 rpt = rbResumido.Checked
-                    ? (ReportDocument)new ListadoResumidoEvaluacionProveedoresMPFarma()
+                    ? (ReportDocument)new ListadoResumidoEvaluacionProveedoresMPFarmaNuevo()
                     : new ListadoCompletoEvaluacionProveedoresMPFarma();
 
                 string WFiltroVencidos = rbEvalVencida.Checked ? " AND {EvaluacionProvMP.FechaEvaluaVtoOrd} < '" + DateTime.Now.ToString("yyyyMMdd") + "' And {EvaluacionProvMP.FechaEvaluaVtoOrd} > '0' " : "";

@@ -33,21 +33,21 @@ namespace Eval_Proveedores.Novedades
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.LB_TitEva = new System.Windows.Forms.Label();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -101,6 +101,8 @@ namespace Eval_Proveedores.Novedades
             this.EvaCal = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.FechaEvaluaProvMPFarmaII = new ConsultasVarias.MyMaskedTextBoxColumn();
             this.VerEvalua = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.label2 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.pnlClave.SuspendLayout();
@@ -495,14 +497,14 @@ namespace Eval_Proveedores.Novedades
             this.DGV_EvalSemProve.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGV_EvalSemProve.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV_EvalSemProve.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle16;
             this.DGV_EvalSemProve.ColumnHeadersHeight = 34;
             this.DGV_EvalSemProve.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Proveedor,
@@ -523,25 +525,25 @@ namespace Eval_Proveedores.Novedades
             this.FechaEvaluaProvMPFarmaII,
             this.VerEvalua});
             this.DGV_EvalSemProve.ContextMenuStrip = this.contextMenuStrip1;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DGV_EvalSemProve.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle29.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle29.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle29.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle29.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle29.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle29.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DGV_EvalSemProve.DefaultCellStyle = dataGridViewCellStyle29;
             this.DGV_EvalSemProve.DoubleBuffered = true;
             this.DGV_EvalSemProve.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.DGV_EvalSemProve.Location = new System.Drawing.Point(6, 183);
             this.DGV_EvalSemProve.Name = "DGV_EvalSemProve";
-            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGV_EvalSemProve.RowHeadersDefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle30.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle30.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle30.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle30.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle30.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle30.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV_EvalSemProve.RowHeadersDefaultCellStyle = dataGridViewCellStyle30;
             this.DGV_EvalSemProve.RowHeadersWidth = 15;
             this.DGV_EvalSemProve.RowTemplate.Height = 18;
             this.DGV_EvalSemProve.ShowCellToolTips = false;
@@ -591,8 +593,8 @@ namespace Eval_Proveedores.Novedades
             // Movimientos
             // 
             this.Movimientos.DataPropertyName = "Items";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Movimientos.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Movimientos.DefaultCellStyle = dataGridViewCellStyle17;
             this.Movimientos.HeaderText = "Items";
             this.Movimientos.Name = "Movimientos";
             this.Movimientos.ReadOnly = true;
@@ -602,8 +604,8 @@ namespace Eval_Proveedores.Novedades
             // Aprobados
             // 
             this.Aprobados.DataPropertyName = "Aprobado";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Aprobados.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Aprobados.DefaultCellStyle = dataGridViewCellStyle18;
             this.Aprobados.HeaderText = "Aprob.";
             this.Aprobados.Name = "Aprobados";
             this.Aprobados.ReadOnly = true;
@@ -612,8 +614,8 @@ namespace Eval_Proveedores.Novedades
             // Desvios
             // 
             this.Desvios.DataPropertyName = "Desviado";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Desvios.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Desvios.DefaultCellStyle = dataGridViewCellStyle19;
             this.Desvios.HeaderText = "Desv.";
             this.Desvios.Name = "Desvios";
             this.Desvios.ReadOnly = true;
@@ -622,8 +624,8 @@ namespace Eval_Proveedores.Novedades
             // Rechazados
             // 
             this.Rechazados.DataPropertyName = "Rechazado";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Rechazados.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Rechazados.DefaultCellStyle = dataGridViewCellStyle20;
             this.Rechazados.HeaderText = "Rech.";
             this.Rechazados.Name = "Rechazados";
             this.Rechazados.ReadOnly = true;
@@ -632,8 +634,8 @@ namespace Eval_Proveedores.Novedades
             // CertificadosOk
             // 
             this.CertificadosOk.DataPropertyName = "Certificado";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.CertificadosOk.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.CertificadosOk.DefaultCellStyle = dataGridViewCellStyle21;
             this.CertificadosOk.HeaderText = "Cert.";
             this.CertificadosOk.Name = "CertificadosOk";
             this.CertificadosOk.ReadOnly = true;
@@ -642,8 +644,8 @@ namespace Eval_Proveedores.Novedades
             // EnvasesOk
             // 
             this.EnvasesOk.DataPropertyName = "Enviado";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.EnvasesOk.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.EnvasesOk.DefaultCellStyle = dataGridViewCellStyle22;
             this.EnvasesOk.HeaderText = "Env.";
             this.EnvasesOk.Name = "EnvasesOk";
             this.EnvasesOk.ReadOnly = true;
@@ -652,8 +654,8 @@ namespace Eval_Proveedores.Novedades
             // PorCert
             // 
             this.PorCert.DataPropertyName = "PorcCert";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.PorCert.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.PorCert.DefaultCellStyle = dataGridViewCellStyle23;
             this.PorCert.HeaderText = "%Cert.";
             this.PorCert.Name = "PorCert";
             this.PorCert.ReadOnly = true;
@@ -662,8 +664,8 @@ namespace Eval_Proveedores.Novedades
             // PorEnv
             // 
             this.PorEnv.DataPropertyName = "PorcEnv";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.PorEnv.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.PorEnv.DefaultCellStyle = dataGridViewCellStyle24;
             this.PorEnv.HeaderText = "%Env.";
             this.PorEnv.Name = "PorEnv";
             this.PorEnv.ReadOnly = true;
@@ -672,8 +674,8 @@ namespace Eval_Proveedores.Novedades
             // PorcTotal
             // 
             this.PorcTotal.DataPropertyName = "PorcTotal";
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.PorcTotal.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.PorcTotal.DefaultCellStyle = dataGridViewCellStyle25;
             this.PorcTotal.HeaderText = "%";
             this.PorcTotal.Name = "PorcTotal";
             this.PorcTotal.ReadOnly = true;
@@ -682,8 +684,8 @@ namespace Eval_Proveedores.Novedades
             // Retrasos
             // 
             this.Retrasos.DataPropertyName = "Atraso";
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Retrasos.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Retrasos.DefaultCellStyle = dataGridViewCellStyle26;
             this.Retrasos.HeaderText = "Atraso";
             this.Retrasos.Name = "Retrasos";
             this.Retrasos.ReadOnly = true;
@@ -692,8 +694,8 @@ namespace Eval_Proveedores.Novedades
             // EvaCal
             // 
             this.EvaCal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.EvaCal.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.EvaCal.DefaultCellStyle = dataGridViewCellStyle27;
             this.EvaCal.DividerWidth = 1;
             this.EvaCal.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.EvaCal.HeaderText = "Calidad";
@@ -707,8 +709,8 @@ namespace Eval_Proveedores.Novedades
             // 
             // FechaEvaluaProvMPFarmaII
             // 
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.FechaEvaluaProvMPFarmaII.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.FechaEvaluaProvMPFarmaII.DefaultCellStyle = dataGridViewCellStyle28;
             this.FechaEvaluaProvMPFarmaII.HeaderText = "Fecha Evalua";
             this.FechaEvaluaProvMPFarmaII.IncludeLiterals = true;
             this.FechaEvaluaProvMPFarmaII.IncludePrompt = true;
@@ -733,12 +735,38 @@ namespace Eval_Proveedores.Novedades
             this.VerEvalua.UseColumnTextForLinkValue = true;
             this.VerEvalua.Width = 96;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(67, 106);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(195, 13);
+            this.label2.TabIndex = 85;
+            this.label2.Text = "FILTRAR POR TIPO PRODUCTO";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "TODOS",
+            "FARMA",
+            "FOOD",
+            "VETERINARIO",
+            "OTROS"});
+            this.comboBox1.Location = new System.Drawing.Point(271, 101);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 86;
+            // 
             // ActualizacionSemestralProvMPFarma
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(966, 562);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.ckFaltanteActualizacion);
@@ -832,5 +860,7 @@ namespace Eval_Proveedores.Novedades
         private System.Windows.Forms.DataGridViewComboBoxColumn EvaCal;
         private MyMaskedTextBoxColumn FechaEvaluaProvMPFarmaII;
         private System.Windows.Forms.DataGridViewLinkColumn VerEvalua;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

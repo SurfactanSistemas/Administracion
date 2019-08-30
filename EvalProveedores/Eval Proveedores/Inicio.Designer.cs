@@ -48,11 +48,12 @@
             this.listadoDeVencimientoDeChoferesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listadoDeCheckListDeHojaDeRutaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consultaDeEvalSemestralActualDeProveedoresDeEnvasesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listadoDeEvaluaciónDeProveedoresDeMateriaPrimaParaFarmaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.procesosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirDelSistemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.listadoDeEvaluaciónDeProveedoresDeMateriaPrimaParaFarmaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listadoDeEvaluaciónDeProveedorDeMateriaPrimaParaFarmaEntreFechaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -152,7 +153,8 @@
             this.listadoDeVencimientoDeChoferesToolStripMenuItem,
             this.listadoDeCheckListDeHojaDeRutaToolStripMenuItem,
             this.consultaDeEvalSemestralActualDeProveedoresDeEnvasesToolStripMenuItem,
-            this.listadoDeEvaluaciónDeProveedoresDeMateriaPrimaParaFarmaToolStripMenuItem});
+            this.listadoDeEvaluaciónDeProveedoresDeMateriaPrimaParaFarmaToolStripMenuItem,
+            this.listadoDeEvaluaciónDeProveedorDeMateriaPrimaParaFarmaEntreFechaToolStripMenuItem});
             this.listadosToolStripMenuItem.Name = "listadosToolStripMenuItem";
             this.listadosToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
             this.listadosToolStripMenuItem.Text = "Listados";
@@ -160,65 +162,72 @@
             // consultaDeEvaluaciónSemestralActualDeProveedoresToolStripMenuItem
             // 
             this.consultaDeEvaluaciónSemestralActualDeProveedoresToolStripMenuItem.Name = "consultaDeEvaluaciónSemestralActualDeProveedoresToolStripMenuItem";
-            this.consultaDeEvaluaciónSemestralActualDeProveedoresToolStripMenuItem.Size = new System.Drawing.Size(463, 22);
+            this.consultaDeEvaluaciónSemestralActualDeProveedoresToolStripMenuItem.Size = new System.Drawing.Size(497, 22);
             this.consultaDeEvaluaciónSemestralActualDeProveedoresToolStripMenuItem.Text = "Consulta de Evaluación Semestral actual de Proveedores de Materia Prima";
             this.consultaDeEvaluaciónSemestralActualDeProveedoresToolStripMenuItem.Click += new System.EventHandler(this.consultaDeEvaluaciónSemestralActualDeProveedoresToolStripMenuItem_Click);
             // 
             // listadoDeCheckListDeInformesDeRecepciónToolStripMenuItem
             // 
             this.listadoDeCheckListDeInformesDeRecepciónToolStripMenuItem.Name = "listadoDeCheckListDeInformesDeRecepciónToolStripMenuItem";
-            this.listadoDeCheckListDeInformesDeRecepciónToolStripMenuItem.Size = new System.Drawing.Size(463, 22);
+            this.listadoDeCheckListDeInformesDeRecepciónToolStripMenuItem.Size = new System.Drawing.Size(497, 22);
             this.listadoDeCheckListDeInformesDeRecepciónToolStripMenuItem.Text = "Listado de CheckList de Informes de Recepción";
             this.listadoDeCheckListDeInformesDeRecepciónToolStripMenuItem.Click += new System.EventHandler(this.listadoDeCheckListDeInformesDeRecepciónToolStripMenuItem_Click);
             // 
             // listadoDeEvaluaciónDeTransportistaToolStripMenuItem
             // 
             this.listadoDeEvaluaciónDeTransportistaToolStripMenuItem.Name = "listadoDeEvaluaciónDeTransportistaToolStripMenuItem";
-            this.listadoDeEvaluaciónDeTransportistaToolStripMenuItem.Size = new System.Drawing.Size(463, 22);
+            this.listadoDeEvaluaciónDeTransportistaToolStripMenuItem.Size = new System.Drawing.Size(497, 22);
             this.listadoDeEvaluaciónDeTransportistaToolStripMenuItem.Text = "Listado de Evaluación de Transportista";
             this.listadoDeEvaluaciónDeTransportistaToolStripMenuItem.Click += new System.EventHandler(this.listadoDeEvaluaciónDeTransportistaToolStripMenuItem_Click);
             // 
             // listadoDeEvaluaciónDeServicioToolStripMenuItem
             // 
             this.listadoDeEvaluaciónDeServicioToolStripMenuItem.Name = "listadoDeEvaluaciónDeServicioToolStripMenuItem";
-            this.listadoDeEvaluaciónDeServicioToolStripMenuItem.Size = new System.Drawing.Size(463, 22);
+            this.listadoDeEvaluaciónDeServicioToolStripMenuItem.Size = new System.Drawing.Size(497, 22);
             this.listadoDeEvaluaciónDeServicioToolStripMenuItem.Text = "Listado de Evaluación de Servicio";
             this.listadoDeEvaluaciónDeServicioToolStripMenuItem.Click += new System.EventHandler(this.listadoDeEvaluaciónDeServicioToolStripMenuItem_Click);
             // 
             // listadoDeProveedoresPorRubroToolStripMenuItem
             // 
             this.listadoDeProveedoresPorRubroToolStripMenuItem.Name = "listadoDeProveedoresPorRubroToolStripMenuItem";
-            this.listadoDeProveedoresPorRubroToolStripMenuItem.Size = new System.Drawing.Size(463, 22);
+            this.listadoDeProveedoresPorRubroToolStripMenuItem.Size = new System.Drawing.Size(497, 22);
             this.listadoDeProveedoresPorRubroToolStripMenuItem.Text = "Listado de Proveedores por Rubro";
             this.listadoDeProveedoresPorRubroToolStripMenuItem.Click += new System.EventHandler(this.listadoDeProveedoresPorRubroToolStripMenuItem_Click);
             // 
             // listadoDeVencimientoDeCamionesToolStripMenuItem
             // 
             this.listadoDeVencimientoDeCamionesToolStripMenuItem.Name = "listadoDeVencimientoDeCamionesToolStripMenuItem";
-            this.listadoDeVencimientoDeCamionesToolStripMenuItem.Size = new System.Drawing.Size(463, 22);
+            this.listadoDeVencimientoDeCamionesToolStripMenuItem.Size = new System.Drawing.Size(497, 22);
             this.listadoDeVencimientoDeCamionesToolStripMenuItem.Text = "Listado de Vencimiento de Camiones";
             this.listadoDeVencimientoDeCamionesToolStripMenuItem.Click += new System.EventHandler(this.listadoDeVencimientoDeCamionesToolStripMenuItem_Click);
             // 
             // listadoDeVencimientoDeChoferesToolStripMenuItem
             // 
             this.listadoDeVencimientoDeChoferesToolStripMenuItem.Name = "listadoDeVencimientoDeChoferesToolStripMenuItem";
-            this.listadoDeVencimientoDeChoferesToolStripMenuItem.Size = new System.Drawing.Size(463, 22);
+            this.listadoDeVencimientoDeChoferesToolStripMenuItem.Size = new System.Drawing.Size(497, 22);
             this.listadoDeVencimientoDeChoferesToolStripMenuItem.Text = "Listado de Vencimiento de Choferes";
             this.listadoDeVencimientoDeChoferesToolStripMenuItem.Click += new System.EventHandler(this.listadoDeVencimientoDeChoferesToolStripMenuItem_Click);
             // 
             // listadoDeCheckListDeHojaDeRutaToolStripMenuItem
             // 
             this.listadoDeCheckListDeHojaDeRutaToolStripMenuItem.Name = "listadoDeCheckListDeHojaDeRutaToolStripMenuItem";
-            this.listadoDeCheckListDeHojaDeRutaToolStripMenuItem.Size = new System.Drawing.Size(463, 22);
+            this.listadoDeCheckListDeHojaDeRutaToolStripMenuItem.Size = new System.Drawing.Size(497, 22);
             this.listadoDeCheckListDeHojaDeRutaToolStripMenuItem.Text = "Listado de CheckList de Hoja de Ruta";
             this.listadoDeCheckListDeHojaDeRutaToolStripMenuItem.Click += new System.EventHandler(this.listadoDeCheckListDeHojaDeRutaToolStripMenuItem_Click);
             // 
             // consultaDeEvalSemestralActualDeProveedoresDeEnvasesToolStripMenuItem
             // 
             this.consultaDeEvalSemestralActualDeProveedoresDeEnvasesToolStripMenuItem.Name = "consultaDeEvalSemestralActualDeProveedoresDeEnvasesToolStripMenuItem";
-            this.consultaDeEvalSemestralActualDeProveedoresDeEnvasesToolStripMenuItem.Size = new System.Drawing.Size(463, 22);
+            this.consultaDeEvalSemestralActualDeProveedoresDeEnvasesToolStripMenuItem.Size = new System.Drawing.Size(497, 22);
             this.consultaDeEvalSemestralActualDeProveedoresDeEnvasesToolStripMenuItem.Text = "Consulta de Eval Semestral Actual de Proveedores de Envases";
             this.consultaDeEvalSemestralActualDeProveedoresDeEnvasesToolStripMenuItem.Click += new System.EventHandler(this.consultaDeEvalSemestralActualDeProveedoresDeEnvasesToolStripMenuItem_Click);
+            // 
+            // listadoDeEvaluaciónDeProveedoresDeMateriaPrimaParaFarmaToolStripMenuItem
+            // 
+            this.listadoDeEvaluaciónDeProveedoresDeMateriaPrimaParaFarmaToolStripMenuItem.Name = "listadoDeEvaluaciónDeProveedoresDeMateriaPrimaParaFarmaToolStripMenuItem";
+            this.listadoDeEvaluaciónDeProveedoresDeMateriaPrimaParaFarmaToolStripMenuItem.Size = new System.Drawing.Size(497, 22);
+            this.listadoDeEvaluaciónDeProveedoresDeMateriaPrimaParaFarmaToolStripMenuItem.Text = "Listado de Análisis de Evaluaciones de Proveedores de Materia Prima para Farma";
+            this.listadoDeEvaluaciónDeProveedoresDeMateriaPrimaParaFarmaToolStripMenuItem.Click += new System.EventHandler(this.listadoDeEvaluaciónDeProveedoresDeMateriaPrimaParaFarmaToolStripMenuItem_Click);
             // 
             // procesosToolStripMenuItem
             // 
@@ -257,12 +266,12 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "EVALUACION DE PROVEEDORES";
             // 
-            // listadoDeEvaluaciónDeProveedoresDeMateriaPrimaParaFarmaToolStripMenuItem
+            // listadoDeEvaluaciónDeProveedorDeMateriaPrimaParaFarmaEntreFechaToolStripMenuItem
             // 
-            this.listadoDeEvaluaciónDeProveedoresDeMateriaPrimaParaFarmaToolStripMenuItem.Name = "listadoDeEvaluaciónDeProveedoresDeMateriaPrimaParaFarmaToolStripMenuItem";
-            this.listadoDeEvaluaciónDeProveedoresDeMateriaPrimaParaFarmaToolStripMenuItem.Size = new System.Drawing.Size(463, 22);
-            this.listadoDeEvaluaciónDeProveedoresDeMateriaPrimaParaFarmaToolStripMenuItem.Text = "Listado de Evaluación de Proveedores de Materia Prima para Farma";
-            this.listadoDeEvaluaciónDeProveedoresDeMateriaPrimaParaFarmaToolStripMenuItem.Click += new System.EventHandler(this.listadoDeEvaluaciónDeProveedoresDeMateriaPrimaParaFarmaToolStripMenuItem_Click);
+            this.listadoDeEvaluaciónDeProveedorDeMateriaPrimaParaFarmaEntreFechaToolStripMenuItem.Name = "listadoDeEvaluaciónDeProveedorDeMateriaPrimaParaFarmaEntreFechaToolStripMenuItem";
+            this.listadoDeEvaluaciónDeProveedorDeMateriaPrimaParaFarmaEntreFechaToolStripMenuItem.Size = new System.Drawing.Size(497, 22);
+            this.listadoDeEvaluaciónDeProveedorDeMateriaPrimaParaFarmaEntreFechaToolStripMenuItem.Text = "Listado de Evaluación Actual de Proveedores de Farma";
+            this.listadoDeEvaluaciónDeProveedorDeMateriaPrimaParaFarmaEntreFechaToolStripMenuItem.Click += new System.EventHandler(this.listadoDeEvaluaciónDeProveedorDeMateriaPrimaParaFarmaEntreFechaToolStripMenuItem_Click);
             // 
             // Inicio
             // 
@@ -312,6 +321,7 @@
         private System.Windows.Forms.ToolStripMenuItem evaluaciónDeProveedoresDeMateriaPrimaDeFarmaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem actDeEvaluaciónSemestralDeProveedoresDeMateriaPrimaParaFarmaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem listadoDeEvaluaciónDeProveedoresDeMateriaPrimaParaFarmaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem listadoDeEvaluaciónDeProveedorDeMateriaPrimaParaFarmaEntreFechaToolStripMenuItem;
     }
 }
 

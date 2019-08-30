@@ -35,6 +35,10 @@
             this.Label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.dgvProveedores = new ConsultasVarias.DBDataGridView();
+            this.Listar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtFiltrar = new System.Windows.Forms.TextBox();
             this.rbEvalVencida = new System.Windows.Forms.RadioButton();
             this.rbSinEvaluar = new System.Windows.Forms.RadioButton();
@@ -47,15 +51,11 @@
             this.btnCerrar = new System.Windows.Forms.Button();
             this.btnExportar = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.dgvProveedores = new ConsultasVarias.DBDataGridView();
-            this.Listar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProveedores)).BeginInit();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // Panel1
@@ -120,6 +120,65 @@
             this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "TIPO DE LISTADO";
+            // 
+            // dgvProveedores
+            // 
+            this.dgvProveedores.AllowUserToAddRows = false;
+            this.dgvProveedores.AllowUserToDeleteRows = false;
+            this.dgvProveedores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvProveedores.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Listar,
+            this.Proveedor,
+            this.Nombre});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(217)))), ((int)(((byte)(232)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(170)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvProveedores.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvProveedores.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dgvProveedores.DoubleBuffered = true;
+            this.dgvProveedores.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.dgvProveedores.Location = new System.Drawing.Point(7, 95);
+            this.dgvProveedores.Name = "dgvProveedores";
+            this.dgvProveedores.ReadOnly = true;
+            this.dgvProveedores.RowHeadersWidth = 15;
+            this.dgvProveedores.RowTemplate.Height = 18;
+            this.dgvProveedores.ShowCellToolTips = false;
+            this.dgvProveedores.SinClickDerecho = false;
+            this.dgvProveedores.Size = new System.Drawing.Size(498, 144);
+            this.dgvProveedores.TabIndex = 3;
+            this.dgvProveedores.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvProveedores_CellMouseClick);
+            // 
+            // Listar
+            // 
+            this.Listar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Listar.DataPropertyName = "Listar";
+            this.Listar.HeaderText = "";
+            this.Listar.Name = "Listar";
+            this.Listar.ReadOnly = true;
+            this.Listar.Width = 5;
+            // 
+            // Proveedor
+            // 
+            this.Proveedor.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Proveedor.DataPropertyName = "Proveedor";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Proveedor.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Proveedor.HeaderText = "Proveedor";
+            this.Proveedor.Name = "Proveedor";
+            this.Proveedor.ReadOnly = true;
+            this.Proveedor.Width = 81;
+            // 
+            // Nombre
+            // 
+            this.Nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Nombre.DataPropertyName = "Nombre";
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
             // 
             // txtFiltrar
             // 
@@ -245,65 +304,6 @@
             this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
-            // dgvProveedores
-            // 
-            this.dgvProveedores.AllowUserToAddRows = false;
-            this.dgvProveedores.AllowUserToDeleteRows = false;
-            this.dgvProveedores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProveedores.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Listar,
-            this.Proveedor,
-            this.Nombre});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(217)))), ((int)(((byte)(232)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(170)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvProveedores.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvProveedores.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgvProveedores.DoubleBuffered = true;
-            this.dgvProveedores.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dgvProveedores.Location = new System.Drawing.Point(7, 95);
-            this.dgvProveedores.Name = "dgvProveedores";
-            this.dgvProveedores.ReadOnly = true;
-            this.dgvProveedores.RowHeadersWidth = 15;
-            this.dgvProveedores.RowTemplate.Height = 18;
-            this.dgvProveedores.ShowCellToolTips = false;
-            this.dgvProveedores.SinClickDerecho = false;
-            this.dgvProveedores.Size = new System.Drawing.Size(498, 144);
-            this.dgvProveedores.TabIndex = 3;
-            this.dgvProveedores.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvProveedores_CellMouseClick);
-            // 
-            // Listar
-            // 
-            this.Listar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Listar.DataPropertyName = "Listar";
-            this.Listar.HeaderText = "";
-            this.Listar.Name = "Listar";
-            this.Listar.ReadOnly = true;
-            this.Listar.Width = 5;
-            // 
-            // Proveedor
-            // 
-            this.Proveedor.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Proveedor.DataPropertyName = "Proveedor";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Proveedor.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Proveedor.HeaderText = "Proveedor";
-            this.Proveedor.Name = "Proveedor";
-            this.Proveedor.ReadOnly = true;
-            this.Proveedor.Width = 81;
-            // 
-            // Nombre
-            // 
-            this.Nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Nombre.DataPropertyName = "Nombre";
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            this.Nombre.ReadOnly = true;
-            // 
             // ListadoEvaluacionesProveedoreMPFarma
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -324,9 +324,9 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProveedores)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProveedores)).EndInit();
             this.ResumeLayout(false);
 
         }

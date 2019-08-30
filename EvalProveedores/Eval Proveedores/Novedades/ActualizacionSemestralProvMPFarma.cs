@@ -144,7 +144,7 @@ namespace Eval_Proveedores.Novedades
 
         private DataTable _ProcesarEvaluacionProveedoresFarma()
         {
-            return Helper._ProcesarEvaluacionProveedoresFarma("1", TB_Desde.Text, TB_Hasta.Text, ref progressBar1, EmpresasAConsultar());
+            return Helper._ProcesarEvaluacionProveedoresFarma(comboBox1.SelectedIndex.ToString(), TB_Desde.Text, TB_Hasta.Text, ref progressBar1, EmpresasAConsultar());
         }
 
         private string[] EmpresasAConsultar()

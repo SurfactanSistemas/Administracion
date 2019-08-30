@@ -55,7 +55,7 @@ Public Class EvaluacionProveedorMateriaPrima : Implements IAyudaProveedores, Con
 
         TabControl1.TabPages.Clear()
 
-        Dim WDatos As DataTable = GetAll("SELECT DISTINCT ct.Articulo MP, a.Descripcion FROM Cotiza ct INNER JOIN Articulo a ON a.Codigo = ct.Articulo  And (a.ClasificacionFarma > 0 OR a.ReqEvalEspecial = '1')  WHERE ct.Proveedor = '" & txtProveedor.Text & "' Order by ct.Articulo")
+        Dim WDatos As DataTable = GetAll("SELECT DISTINCT ct.Articulo MP, a.Descripcion FROM Cotiza ct INNER JOIN Articulo a ON a.Codigo = ct.Articulo  And (ISNULL(a.ClasificacionFarma,0) = 1 Or (ISNULL(a.ClasificacionFarma,0) = 0 And a.ReqEvalEspecial = '1') Or (ISNULL(a.ClasificacionFarma,0) > 1 And a.ReqEvalEspecial = '1'))  WHERE ct.Proveedor = '" & txtProveedor.Text & "' Order by ct.Articulo")
 
         For i = 0 To WDatos.Rows.Count - 1
 

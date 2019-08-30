@@ -25,18 +25,18 @@ Partial Class AyudaProveedores
     'Do not modify it using the code editor.
     <DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.ckSoloFarma = New System.Windows.Forms.CheckBox()
         Me.txtFiltrar = New System.Windows.Forms.TextBox()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Nombre = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ckSoloFarma = New System.Windows.Forms.CheckBox()
+        Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -90,6 +90,18 @@ Partial Class AyudaProveedores
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "FILTRAR"
         '
+        'ckSoloFarma
+        '
+        Me.ckSoloFarma.AutoSize = True
+        Me.ckSoloFarma.Checked = True
+        Me.ckSoloFarma.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.ckSoloFarma.Location = New System.Drawing.Point(28, 53)
+        Me.ckSoloFarma.Name = "ckSoloFarma"
+        Me.ckSoloFarma.Size = New System.Drawing.Size(377, 17)
+        Me.ckSoloFarma.TabIndex = 1
+        Me.ckSoloFarma.Text = "ÚNICAMENTE PROVEEDORES CON MP DE SEGUIMIENTO ESPECIAL"
+        Me.ckSoloFarma.UseVisualStyleBackColor = True
+        '
         'txtFiltrar
         '
         Me.txtFiltrar.Location = New System.Drawing.Point(27, 23)
@@ -114,17 +126,12 @@ Partial Class AyudaProveedores
         Me.DataGridView1.Size = New System.Drawing.Size(449, 227)
         Me.DataGridView1.TabIndex = 54
         '
-        'BackgroundWorker1
-        '
-        Me.BackgroundWorker1.WorkerReportsProgress = True
-        Me.BackgroundWorker1.WorkerSupportsCancellation = True
-        '
         'Codigo
         '
         Me.Codigo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Codigo.DataPropertyName = "Codigo"
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Codigo.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Codigo.DefaultCellStyle = DataGridViewCellStyle1
         Me.Codigo.HeaderText = "Codigo"
         Me.Codigo.Name = "Codigo"
         Me.Codigo.ReadOnly = True
@@ -134,23 +141,16 @@ Partial Class AyudaProveedores
         '
         Me.Nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.Nombre.DataPropertyName = "Nombre"
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.Nombre.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.Nombre.DefaultCellStyle = DataGridViewCellStyle2
         Me.Nombre.HeaderText = "Nombre Proveedor"
         Me.Nombre.Name = "Nombre"
         Me.Nombre.ReadOnly = True
         '
-        'ckSoloFarma
+        'BackgroundWorker1
         '
-        Me.ckSoloFarma.AutoSize = True
-        Me.ckSoloFarma.Checked = True
-        Me.ckSoloFarma.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.ckSoloFarma.Location = New System.Drawing.Point(183, 53)
-        Me.ckSoloFarma.Name = "ckSoloFarma"
-        Me.ckSoloFarma.Size = New System.Drawing.Size(222, 17)
-        Me.ckSoloFarma.TabIndex = 1
-        Me.ckSoloFarma.Text = "ÚNICAMENTE PROVEEDORES FARMA"
-        Me.ckSoloFarma.UseVisualStyleBackColor = True
+        Me.BackgroundWorker1.WorkerReportsProgress = True
+        Me.BackgroundWorker1.WorkerSupportsCancellation = True
         '
         'AyudaProveedores
         '

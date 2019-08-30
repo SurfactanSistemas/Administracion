@@ -146,6 +146,12 @@ namespace Modulo_Capacitacion.Maestros.Legajos
             this.Observaciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.DGV_CursosRealiz = new System.Windows.Forms.DataGridView();
+            this.Curso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DesCurso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Horas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Año = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cursos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label4 = new System.Windows.Forms.Label();
             this.TB_FechaIng = new System.Windows.Forms.DateTimePicker();
             this.TB_DescLegajo = new System.Windows.Forms.TextBox();
@@ -158,12 +164,6 @@ namespace Modulo_Capacitacion.Maestros.Legajos
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.LBLegajo = new System.Windows.Forms.Label();
-            this.Curso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DesCurso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Horas = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Año = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cursos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -244,6 +244,7 @@ namespace Modulo_Capacitacion.Maestros.Legajos
             this.TB_FechaEgreso.Location = new System.Drawing.Point(701, 21);
             this.TB_FechaEgreso.Mask = "00/00/0000";
             this.TB_FechaEgreso.Name = "TB_FechaEgreso";
+            this.TB_FechaEgreso.PromptChar = ' ';
             this.TB_FechaEgreso.Size = new System.Drawing.Size(85, 20);
             this.TB_FechaEgreso.TabIndex = 48;
             this.TB_FechaEgreso.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -1415,6 +1416,56 @@ namespace Modulo_Capacitacion.Maestros.Legajos
             this.DGV_CursosRealiz.Size = new System.Drawing.Size(927, 442);
             this.DGV_CursosRealiz.TabIndex = 8;
             // 
+            // Curso
+            // 
+            this.Curso.DataPropertyName = "TemaI";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Curso.DefaultCellStyle = dataGridViewCellStyle5;
+            this.Curso.HeaderText = "Tema";
+            this.Curso.Name = "Curso";
+            this.Curso.Width = 64;
+            // 
+            // DesCurso
+            // 
+            this.DesCurso.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.DesCurso.DataPropertyName = "DesCurso";
+            this.DesCurso.HeaderText = "Descripcion";
+            this.DesCurso.Name = "DesCurso";
+            // 
+            // Horas
+            // 
+            this.Horas.DataPropertyName = "Horas";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Horas.DefaultCellStyle = dataGridViewCellStyle6;
+            this.Horas.HeaderText = "Horas";
+            this.Horas.Name = "Horas";
+            this.Horas.Width = 65;
+            // 
+            // Tipo
+            // 
+            this.Tipo.DataPropertyName = "TipoII";
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Tipo.DefaultCellStyle = dataGridViewCellStyle7;
+            this.Tipo.HeaderText = "Tipo";
+            this.Tipo.Name = "Tipo";
+            this.Tipo.Width = 56;
+            // 
+            // Año
+            // 
+            this.Año.DataPropertyName = "Ano";
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Año.DefaultCellStyle = dataGridViewCellStyle8;
+            this.Año.HeaderText = "Año";
+            this.Año.Name = "Año";
+            this.Año.Width = 53;
+            // 
+            // Cursos
+            // 
+            this.Cursos.DataPropertyName = "DesTema";
+            this.Cursos.HeaderText = "Curso";
+            this.Cursos.Name = "Cursos";
+            this.Cursos.Width = 64;
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -1546,56 +1597,6 @@ namespace Modulo_Capacitacion.Maestros.Legajos
             this.LBLegajo.Size = new System.Drawing.Size(147, 19);
             this.LBLegajo.TabIndex = 0;
             this.LBLegajo.Text = "INGRESO DE LEGAJO";
-            // 
-            // Curso
-            // 
-            this.Curso.DataPropertyName = "TemaI";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Curso.DefaultCellStyle = dataGridViewCellStyle5;
-            this.Curso.HeaderText = "Tema";
-            this.Curso.Name = "Curso";
-            this.Curso.Width = 64;
-            // 
-            // DesCurso
-            // 
-            this.DesCurso.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.DesCurso.DataPropertyName = "DesCurso";
-            this.DesCurso.HeaderText = "Descripcion";
-            this.DesCurso.Name = "DesCurso";
-            // 
-            // Horas
-            // 
-            this.Horas.DataPropertyName = "Horas";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Horas.DefaultCellStyle = dataGridViewCellStyle6;
-            this.Horas.HeaderText = "Horas";
-            this.Horas.Name = "Horas";
-            this.Horas.Width = 65;
-            // 
-            // Tipo
-            // 
-            this.Tipo.DataPropertyName = "TipoII";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Tipo.DefaultCellStyle = dataGridViewCellStyle7;
-            this.Tipo.HeaderText = "Tipo";
-            this.Tipo.Name = "Tipo";
-            this.Tipo.Width = 56;
-            // 
-            // Año
-            // 
-            this.Año.DataPropertyName = "Ano";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Año.DefaultCellStyle = dataGridViewCellStyle8;
-            this.Año.HeaderText = "Año";
-            this.Año.Name = "Año";
-            this.Año.Width = 53;
-            // 
-            // Cursos
-            // 
-            this.Cursos.DataPropertyName = "DesTema";
-            this.Cursos.HeaderText = "Curso";
-            this.Cursos.Name = "Cursos";
-            this.Cursos.Width = 64;
             // 
             // AgModLegajo
             // 
