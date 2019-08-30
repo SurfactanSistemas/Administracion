@@ -218,6 +218,7 @@ namespace Eval_Proveedores.Novedades
         private void ActSemProv_Load(object sender, EventArgs e)
         {
             pnlClave.Visible = false;
+            comboBox1.SelectedIndex = 0;
 
             ckTodos.Checked = true;
             WTipoImpresion = 1;

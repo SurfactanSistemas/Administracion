@@ -12,8 +12,9 @@ Public Class EvaluacionProveedorMateriaPrima : Implements IAyudaProveedores, Con
     Private WAutorizadoGrabar As Boolean = False
     Private ZOperador As Integer = 0
     Private WCodMP As String = ""
+    Private WTipoMP As Integer = 0
 
-    Sub New(Optional ByVal Proveedor As String = "", Optional ByVal HabilitarGrabacion As Boolean = False, Optional ByVal CodMP As String = "")
+    Sub New(Optional ByVal Proveedor As String = "", Optional ByVal HabilitarGrabacion As Boolean = False, Optional ByVal CodMP As String = "", Optional ByVal TipoMP As Integer = 0)
 
         ' This call is required by the designer.
         InitializeComponent()
@@ -22,6 +23,7 @@ Public Class EvaluacionProveedorMateriaPrima : Implements IAyudaProveedores, Con
 
         WProveedor = Proveedor
         WCodMP = CodMP
+        WTipoMP = TipoMP
 
         btnGrabar.Enabled = HabilitarGrabacion
 
@@ -55,7 +57,8 @@ Public Class EvaluacionProveedorMateriaPrima : Implements IAyudaProveedores, Con
 
         TabControl1.TabPages.Clear()
 
-        Dim WDatos As DataTable = GetAll("SELECT DISTINCT ct.Articulo MP, a.Descripcion FROM Cotiza ct INNER JOIN Articulo a ON a.Codigo = ct.Articulo  And (ISNULL(a.ClasificacionFarma,0) = 1 Or (ISNULL(a.ClasificacionFarma,0) = 0 And a.ReqEvalEspecial = '1') Or (ISNULL(a.ClasificacionFarma,0) > 1 And a.ReqEvalEspecial = '1'))  WHERE ct.Proveedor = '" & txtProveedor.Text & "' Order by ct.Articulo")
+        Dim WFiltro As String = _GenerarFiltroPorTipo(Me.WTipoMP)
+        Dim WDatos As DataTable = GetAll("SELECT DISTINCT ct.Articulo MP, a.Descripcion FROM Cotiza ct INNER JOIN Articulo a ON a.Codigo = ct.Articulo  And (" & WFiltro & ")  WHERE ct.Proveedor = '" & txtProveedor.Text & "' Order by ct.Articulo")
 
         For i = 0 To WDatos.Rows.Count - 1
 
@@ -101,6 +104,21 @@ Public Class EvaluacionProveedorMateriaPrima : Implements IAyudaProveedores, Con
         txtProveedor.Focus()
 
     End Sub
+
+    Private Function _GenerarFiltroPorTipo(ByVal wTipoMp As Integer) As String
+        Select Case (wTipoMp)
+            Case 0
+                Return "ISNULL(a.ClasificacionFarma,0) = 1 Or (ISNULL(a.ClasificacionFarma,0) = 0 And a.ReqEvalEspecial = '1'" & _
+                ") Or (ISNULL(a.ClasificacionFarma,0) > 1 And a.ReqEvalEspecial = '1') "
+            Case 1
+                Return "ISNULL(a.ClasificacionFarma,0) = 1"
+            Case 2, 3
+                Return String.Format("ISNULL(a.ClasificacionFarma,0) = ${0} And a.ReqEvalEspecial = '1'", wTipoMp)
+            Case Else
+                Return "ISNULL(a.ClasificacionFarma, 0) = 0 And a.ReqEvalEspecial = '1'"
+        End Select
+
+    End Function
 
     Private Sub BackgroundWorker1_DoWork(ByVal sender As Object, ByVal e As DoWorkEventArgs) Handles BackgroundWorker1.DoWork
 
@@ -318,8 +336,9 @@ Public Class EvaluacionProveedorMateriaPrima : Implements IAyudaProveedores, Con
         End With
     End Sub
 
-    Public Sub _ProcesarAyudaProveedores(ByVal Codigo As String, ByVal Nombre As String) Implements IAyudaProveedores._ProcesarAyudaProveedores
+    Public Sub _ProcesarAyudaProveedores(ByVal Codigo As String, ByVal Nombre As String, Optional ByVal TipoMP As Integer = 0) Implements IAyudaProveedores._ProcesarAyudaProveedores
         txtProveedor.Text = Codigo
+        Me.WTipoMP = TipoMP
         txtProveedor_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
     End Sub
 

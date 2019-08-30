@@ -31,8 +31,10 @@ Partial Class AyudaProveedores
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.ckSoloFarma = New System.Windows.Forms.CheckBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.txtFiltrar = New System.Windows.Forms.TextBox()
+        Me.ckSoloFarma = New System.Windows.Forms.CheckBox()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Nombre = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -81,26 +83,34 @@ Partial Class AyudaProveedores
         '
         'GroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.ckSoloFarma)
+        Me.GroupBox1.Controls.Add(Me.Label3)
+        Me.GroupBox1.Controls.Add(Me.ComboBox1)
         Me.GroupBox1.Controls.Add(Me.txtFiltrar)
+        Me.GroupBox1.Controls.Add(Me.ckSoloFarma)
         Me.GroupBox1.Location = New System.Drawing.Point(8, 56)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(433, 85)
+        Me.GroupBox1.Size = New System.Drawing.Size(433, 80)
         Me.GroupBox1.TabIndex = 53
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "FILTRAR"
         '
-        'ckSoloFarma
+        'Label3
         '
-        Me.ckSoloFarma.AutoSize = True
-        Me.ckSoloFarma.Checked = True
-        Me.ckSoloFarma.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.ckSoloFarma.Location = New System.Drawing.Point(28, 53)
-        Me.ckSoloFarma.Name = "ckSoloFarma"
-        Me.ckSoloFarma.Size = New System.Drawing.Size(377, 17)
-        Me.ckSoloFarma.TabIndex = 1
-        Me.ckSoloFarma.Text = "ÚNICAMENTE PROVEEDORES CON MP DE SEGUIMIENTO ESPECIAL"
-        Me.ckSoloFarma.UseVisualStyleBackColor = True
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(95, 53)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(110, 13)
+        Me.Label3.TabIndex = 3
+        Me.Label3.Text = "SEGUN TIPO DE MP"
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Items.AddRange(New Object() {"TODOS", "FARMA", "FOOD", "VETERINARIA", "OTROS"})
+        Me.ComboBox1.Location = New System.Drawing.Point(216, 49)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(121, 21)
+        Me.ComboBox1.TabIndex = 2
         '
         'txtFiltrar
         '
@@ -108,6 +118,19 @@ Partial Class AyudaProveedores
         Me.txtFiltrar.Name = "txtFiltrar"
         Me.txtFiltrar.Size = New System.Drawing.Size(378, 20)
         Me.txtFiltrar.TabIndex = 0
+        '
+        'ckSoloFarma
+        '
+        Me.ckSoloFarma.AutoSize = True
+        Me.ckSoloFarma.Checked = True
+        Me.ckSoloFarma.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.ckSoloFarma.Location = New System.Drawing.Point(28, 26)
+        Me.ckSoloFarma.Name = "ckSoloFarma"
+        Me.ckSoloFarma.Size = New System.Drawing.Size(377, 17)
+        Me.ckSoloFarma.TabIndex = 1
+        Me.ckSoloFarma.Text = "ÚNICAMENTE PROVEEDORES CON MP DE SEGUIMIENTO ESPECIAL"
+        Me.ckSoloFarma.UseVisualStyleBackColor = True
+        Me.ckSoloFarma.Visible = False
         '
         'DataGridView1
         '
@@ -117,13 +140,13 @@ Partial Class AyudaProveedores
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Codigo, Me.Nombre})
         Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.DataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.DataGridView1.Location = New System.Drawing.Point(0, 147)
+        Me.DataGridView1.Location = New System.Drawing.Point(0, 142)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
         Me.DataGridView1.RowHeadersWidth = 15
         Me.DataGridView1.RowTemplate.Height = 18
         Me.DataGridView1.ShowCellToolTips = False
-        Me.DataGridView1.Size = New System.Drawing.Size(449, 227)
+        Me.DataGridView1.Size = New System.Drawing.Size(449, 232)
         Me.DataGridView1.TabIndex = 54
         '
         'Codigo
@@ -180,4 +203,6 @@ Partial Class AyudaProveedores
     Friend WithEvents Codigo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Nombre As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ckSoloFarma As System.Windows.Forms.CheckBox
+    Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents ComboBox1 As System.Windows.Forms.ComboBox
 End Class
