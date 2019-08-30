@@ -1384,7 +1384,7 @@ Public Class Pagos
 
                     If Val(XPago) = 2 Then
 
-                        If Val(XParidad) <> 0 And WMarcaDifCambio = 0 Then
+                        If Val(XParidad) <> 0 And WMarcaDifCambio = 0 And ckCalculaDifCambio.Checked Then
                             XParidadTotal = txtParidad.Text '_TraerCambioDivisa(txtFechaParidad.Text)
 
                             XSaldoUS = (Val(_NormalizarNumero(XSaldo)) / Val(XParidad.Replace(",", "."))) * Val(_NormalizarNumero(XParidadTotal, 4))
@@ -1601,7 +1601,7 @@ Public Class Pagos
         txtIVA.Text = "0.00"
         txtFecha.Text = Date.Today.ToString("dd/MM/yyyy")
         txtFechaParidad.Text = WFechaParidad 'txtFecha.Text
-
+        ckCalculaDifCambio.Checked = False
         _LimpiarGrillas()
 
         pagos.Clear()
