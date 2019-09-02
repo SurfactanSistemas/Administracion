@@ -213,6 +213,15 @@ Public Class ListadoIncidencias : Implements INuevaIncidencia, ISeleccionNuevaIn
         If WFiltroTipos.Trim <> "" Then ZSql &= " And Tipo IN (" & WFiltroTipos & ") "
         If WFiltroPlantas.Trim <> "" Then ZSql &= " And EmpresaIncidencia IN (" & WFiltroPlantas & ") "
 
+        '
+        ' Filtro por Tipo de Producto.
+        '
+        If rbTipoMP.Checked Then
+            ZSql &= " And ISNULL(TipoProd, '') = 'M' "
+        ElseIf rbTipoPT.Checked Then
+            ZSql &= " And ISNULL(TipoProd, '') = 'T' "
+        End If
+
         ZSql &= " Order by Ano, "
         ZSql &= _GenerarStringOrdenamiento(cmbOrdenI)
         If cmbOrdenII.SelectedIndex <> cmbOrdenI.SelectedIndex Then ZSql &= ", " & _GenerarStringOrdenamiento(cmbOrdenII)
@@ -539,4 +548,7 @@ Public Class ListadoIncidencias : Implements INuevaIncidencia, ISeleccionNuevaIn
 
     End Sub
 
+    Private Sub rbTipoTodos_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbTipoTodos.Click, rbTipoPT.Click, rbTipoMP.Click
+        btnFiltrar.PerformClick()
+    End Sub
 End Class

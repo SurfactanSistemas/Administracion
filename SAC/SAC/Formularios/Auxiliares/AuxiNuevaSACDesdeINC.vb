@@ -51,6 +51,7 @@ Public Class AuxiNuevaSACDesdeINC
 
         WTipos = GetAll("SELECT Codigo, LTRIM(RTRIM(Descripcion)) Descripcion FROM TipoSac ORDER BY Descripcion")
 
+        WTipos.Rows.Add(0, "")
         WTipos.DefaultView.Sort = "Codigo"
 
         BackgroundWorker1.ReportProgress(10, WTipos)
@@ -113,6 +114,12 @@ Public Class AuxiNuevaSACDesdeINC
             Dim WDescTipo As String = OrDefault(CType(cmbTipo.SelectedItem, DataRowView).Item("Descripcion"), "")
             Dim WAnio As String = Microsoft.VisualBasic.Right(txtFecha.Text, 4)
             WNumero = 0
+
+            If Val(WTipo) = 0 Then
+                MsgBox("Debe indicarse el Tipo de SAC.", MsgBoxStyle.Exclamation)
+                cmbTipo.Focus()
+                Exit Sub
+            End If
 
             Dim WUltimo As DataRow = GetSingle("SELECT Max(Numero) Ultimo FROM CargaSAC WHERE Tipo = '" & WTipo & "' And Ano = '" & WAnio & "'")
 

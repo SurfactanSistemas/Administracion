@@ -23,8 +23,8 @@ Partial Class ListadoIncidencias
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -57,9 +57,6 @@ Partial Class ListadoIncidencias
         Me.txtDesdeFecha = New System.Windows.Forms.MaskedTextBox()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.dgvIncidencias = New System.Windows.Forms.DataGridView()
-        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.CopiarConCabecerasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CopiarSóloDatosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Anio = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Numero = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Incidencia = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -77,6 +74,13 @@ Partial Class ListadoIncidencias
         Me.ClaveSAC = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Planta = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Empresa = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.CopiarConCabecerasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CopiarSóloDatosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.rbTipoTodos = New System.Windows.Forms.RadioButton()
+        Me.rbTipoMP = New System.Windows.Forms.RadioButton()
+        Me.rbTipoPT = New System.Windows.Forms.RadioButton()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -87,6 +91,7 @@ Partial Class ListadoIncidencias
         Me.TableLayoutPanel1.SuspendLayout()
         CType(Me.dgvIncidencias, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip1.SuspendLayout()
+        Me.GroupBox7.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -128,6 +133,7 @@ Partial Class ListadoIncidencias
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.GroupBox7)
         Me.GroupBox1.Controls.Add(Me.GroupBox5)
         Me.GroupBox1.Controls.Add(Me.Button1)
         Me.GroupBox1.Controls.Add(Me.btnNuevaIncidencia)
@@ -443,30 +449,12 @@ Partial Class ListadoIncidencias
         Me.dgvIncidencias.Size = New System.Drawing.Size(1100, 206)
         Me.dgvIncidencias.TabIndex = 3
         '
-        'ContextMenuStrip1
-        '
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopiarConCabecerasToolStripMenuItem, Me.CopiarSóloDatosToolStripMenuItem})
-        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(229, 48)
-        '
-        'CopiarConCabecerasToolStripMenuItem
-        '
-        Me.CopiarConCabecerasToolStripMenuItem.Name = "CopiarConCabecerasToolStripMenuItem"
-        Me.CopiarConCabecerasToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
-        Me.CopiarConCabecerasToolStripMenuItem.Text = "Copiar Incluyendo Cabeceras"
-        '
-        'CopiarSóloDatosToolStripMenuItem
-        '
-        Me.CopiarSóloDatosToolStripMenuItem.Name = "CopiarSóloDatosToolStripMenuItem"
-        Me.CopiarSóloDatosToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
-        Me.CopiarSóloDatosToolStripMenuItem.Text = "Copiar Sólo Datos"
-        '
         'Anio
         '
         Me.Anio.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Anio.DataPropertyName = "Anio"
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Anio.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Anio.DefaultCellStyle = DataGridViewCellStyle3
         Me.Anio.HeaderText = "Año"
         Me.Anio.MaxInputLength = 4
         Me.Anio.Name = "Anio"
@@ -477,8 +465,8 @@ Partial Class ListadoIncidencias
         '
         Me.Numero.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Numero.DataPropertyName = "Numero"
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Numero.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Numero.DefaultCellStyle = DataGridViewCellStyle4
         Me.Numero.HeaderText = "Numero"
         Me.Numero.Name = "Numero"
         Me.Numero.ReadOnly = True
@@ -492,7 +480,6 @@ Partial Class ListadoIncidencias
         Me.Incidencia.Name = "Incidencia"
         Me.Incidencia.ReadOnly = True
         Me.Incidencia.Visible = False
-        Me.Incidencia.Width = 49
         '
         'Tipo
         '
@@ -502,7 +489,6 @@ Partial Class ListadoIncidencias
         Me.Tipo.Name = "Tipo"
         Me.Tipo.ReadOnly = True
         Me.Tipo.Visible = False
-        Me.Tipo.Width = 53
         '
         'DescTipo
         '
@@ -546,7 +532,6 @@ Partial Class ListadoIncidencias
         Me.Estado.Name = "Estado"
         Me.Estado.ReadOnly = True
         Me.Estado.Visible = False
-        Me.Estado.Width = 65
         '
         'DescEstado
         '
@@ -583,7 +568,6 @@ Partial Class ListadoIncidencias
         Me.Producto.Name = "Producto"
         Me.Producto.ReadOnly = True
         Me.Producto.Visible = False
-        Me.Producto.Width = 75
         '
         'Lote
         '
@@ -593,7 +577,6 @@ Partial Class ListadoIncidencias
         Me.Lote.Name = "Lote"
         Me.Lote.ReadOnly = True
         Me.Lote.Visible = False
-        Me.Lote.Width = 91
         '
         'ClaveSAC
         '
@@ -620,6 +603,68 @@ Partial Class ListadoIncidencias
         Me.Empresa.ReadOnly = True
         Me.Empresa.Visible = False
         '
+        'ContextMenuStrip1
+        '
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopiarConCabecerasToolStripMenuItem, Me.CopiarSóloDatosToolStripMenuItem})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(229, 48)
+        '
+        'CopiarConCabecerasToolStripMenuItem
+        '
+        Me.CopiarConCabecerasToolStripMenuItem.Name = "CopiarConCabecerasToolStripMenuItem"
+        Me.CopiarConCabecerasToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
+        Me.CopiarConCabecerasToolStripMenuItem.Text = "Copiar Incluyendo Cabeceras"
+        '
+        'CopiarSóloDatosToolStripMenuItem
+        '
+        Me.CopiarSóloDatosToolStripMenuItem.Name = "CopiarSóloDatosToolStripMenuItem"
+        Me.CopiarSóloDatosToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
+        Me.CopiarSóloDatosToolStripMenuItem.Text = "Copiar Sólo Datos"
+        '
+        'GroupBox7
+        '
+        Me.GroupBox7.Controls.Add(Me.rbTipoPT)
+        Me.GroupBox7.Controls.Add(Me.rbTipoMP)
+        Me.GroupBox7.Controls.Add(Me.rbTipoTodos)
+        Me.GroupBox7.Location = New System.Drawing.Point(868, 86)
+        Me.GroupBox7.Name = "GroupBox7"
+        Me.GroupBox7.Size = New System.Drawing.Size(212, 122)
+        Me.GroupBox7.TabIndex = 5
+        Me.GroupBox7.TabStop = False
+        Me.GroupBox7.Text = "TIPO DE PRODUCTO"
+        '
+        'rbTipoTodos
+        '
+        Me.rbTipoTodos.AutoSize = True
+        Me.rbTipoTodos.Checked = True
+        Me.rbTipoTodos.Location = New System.Drawing.Point(24, 27)
+        Me.rbTipoTodos.Name = "rbTipoTodos"
+        Me.rbTipoTodos.Size = New System.Drawing.Size(63, 17)
+        Me.rbTipoTodos.TabIndex = 0
+        Me.rbTipoTodos.TabStop = True
+        Me.rbTipoTodos.Text = "TODOS"
+        Me.rbTipoTodos.UseVisualStyleBackColor = True
+        '
+        'rbTipoMP
+        '
+        Me.rbTipoMP.AutoSize = True
+        Me.rbTipoMP.Location = New System.Drawing.Point(24, 53)
+        Me.rbTipoMP.Name = "rbTipoMP"
+        Me.rbTipoMP.Size = New System.Drawing.Size(110, 17)
+        Me.rbTipoMP.TabIndex = 0
+        Me.rbTipoMP.Text = "MATERIA PRIMA"
+        Me.rbTipoMP.UseVisualStyleBackColor = True
+        '
+        'rbTipoPT
+        '
+        Me.rbTipoPT.AutoSize = True
+        Me.rbTipoPT.Location = New System.Drawing.Point(24, 79)
+        Me.rbTipoPT.Name = "rbTipoPT"
+        Me.rbTipoPT.Size = New System.Drawing.Size(168, 17)
+        Me.rbTipoPT.TabIndex = 0
+        Me.rbTipoPT.Text = "PRODUCTOS TERMINADOS"
+        Me.rbTipoPT.UseVisualStyleBackColor = True
+        '
         'ListadoIncidencias
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -644,6 +689,8 @@ Partial Class ListadoIncidencias
         Me.TableLayoutPanel1.ResumeLayout(False)
         CType(Me.dgvIncidencias, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ContextMenuStrip1.ResumeLayout(False)
+        Me.GroupBox7.ResumeLayout(False)
+        Me.GroupBox7.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -699,4 +746,8 @@ Partial Class ListadoIncidencias
     Friend WithEvents ClaveSAC As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Planta As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Empresa As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents GroupBox7 As System.Windows.Forms.GroupBox
+    Friend WithEvents rbTipoPT As System.Windows.Forms.RadioButton
+    Friend WithEvents rbTipoMP As System.Windows.Forms.RadioButton
+    Friend WithEvents rbTipoTodos As System.Windows.Forms.RadioButton
 End Class

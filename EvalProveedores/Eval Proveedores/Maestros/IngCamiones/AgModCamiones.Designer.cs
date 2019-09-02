@@ -89,6 +89,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btnBuscarProv = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -368,6 +370,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Controls.Add(this.TB_NombChofer);
             this.groupBox2.Controls.Add(this.TB_CodChofer);
             this.groupBox2.Controls.Add(this.label9);
@@ -383,7 +386,7 @@
             // TB_NombChofer
             // 
             this.TB_NombChofer.FormattingEnabled = true;
-            this.TB_NombChofer.Location = new System.Drawing.Point(337, 20);
+            this.TB_NombChofer.Location = new System.Drawing.Point(337, 23);
             this.TB_NombChofer.Name = "TB_NombChofer";
             this.TB_NombChofer.Size = new System.Drawing.Size(218, 26);
             this.TB_NombChofer.TabIndex = 5;
@@ -392,7 +395,7 @@
             // TB_CodChofer
             // 
             this.TB_CodChofer.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TB_CodChofer.Location = new System.Drawing.Point(147, 20);
+            this.TB_CodChofer.Location = new System.Drawing.Point(147, 23);
             this.TB_CodChofer.Name = "TB_CodChofer";
             this.TB_CodChofer.ReadOnly = true;
             this.TB_CodChofer.Size = new System.Drawing.Size(100, 26);
@@ -404,7 +407,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(266, 28);
+            this.label9.Location = new System.Drawing.Point(266, 27);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(63, 18);
             this.label9.TabIndex = 3;
@@ -414,7 +417,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(6, 28);
+            this.label10.Location = new System.Drawing.Point(6, 27);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(55, 18);
             this.label10.TabIndex = 2;
@@ -730,6 +733,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnBuscarProv);
             this.groupBox1.Controls.Add(this.panel5);
             this.groupBox1.Controls.Add(this.TB_CodProveedor);
             this.groupBox1.Controls.Add(this.panel4);
@@ -746,7 +750,7 @@
             // 
             // panel5
             // 
-            this.panel5.Location = new System.Drawing.Point(246, 19);
+            this.panel5.Location = new System.Drawing.Point(246, 20);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(23, 32);
             this.panel5.TabIndex = 52;
@@ -755,14 +759,14 @@
             // 
             this.TB_CodProveedor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.TB_CodProveedor.FormattingEnabled = true;
-            this.TB_CodProveedor.Location = new System.Drawing.Point(147, 22);
+            this.TB_CodProveedor.Location = new System.Drawing.Point(147, 23);
             this.TB_CodProveedor.Name = "TB_CodProveedor";
             this.TB_CodProveedor.Size = new System.Drawing.Size(102, 26);
             this.TB_CodProveedor.TabIndex = 3;
             // 
             // panel4
             // 
-            this.panel4.Location = new System.Drawing.Point(554, 19);
+            this.panel4.Location = new System.Drawing.Point(554, 20);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(23, 32);
             this.panel4.TabIndex = 51;
@@ -770,7 +774,7 @@
             // TB_NombProveedor
             // 
             this.TB_NombProveedor.FormattingEnabled = true;
-            this.TB_NombProveedor.Location = new System.Drawing.Point(339, 25);
+            this.TB_NombProveedor.Location = new System.Drawing.Point(339, 23);
             this.TB_NombProveedor.Name = "TB_NombProveedor";
             this.TB_NombProveedor.Size = new System.Drawing.Size(233, 26);
             this.TB_NombProveedor.TabIndex = 4;
@@ -781,7 +785,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(267, 28);
+            this.label4.Location = new System.Drawing.Point(267, 27);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(63, 18);
             this.label4.TabIndex = 3;
@@ -791,11 +795,41 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(6, 28);
+            this.label3.Location = new System.Drawing.Point(6, 27);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(55, 18);
             this.label3.TabIndex = 2;
             this.label3.Text = "Codigo:";
+            // 
+            // btnBuscarProv
+            // 
+            this.btnBuscarProv.BackgroundImage = global::Eval_Proveedores.Properties.Resources.buscar;
+            this.btnBuscarProv.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnBuscarProv.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBuscarProv.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnBuscarProv.Location = new System.Drawing.Point(112, 22);
+            this.btnBuscarProv.Margin = new System.Windows.Forms.Padding(0);
+            this.btnBuscarProv.Name = "btnBuscarProv";
+            this.btnBuscarProv.Size = new System.Drawing.Size(28, 27);
+            this.btnBuscarProv.TabIndex = 53;
+            this.toolTip1.SetToolTip(this.btnBuscarProv, "Limpiar Pantalla");
+            this.btnBuscarProv.UseVisualStyleBackColor = true;
+            this.btnBuscarProv.Click += new System.EventHandler(this.btnBuscarProv_Click);
+            // 
+            // button1
+            // 
+            this.button1.BackgroundImage = global::Eval_Proveedores.Properties.Resources.buscar;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.ForeColor = System.Drawing.SystemColors.Control;
+            this.button1.Location = new System.Drawing.Point(110, 23);
+            this.button1.Margin = new System.Windows.Forms.Padding(0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(28, 27);
+            this.button1.TabIndex = 54;
+            this.toolTip1.SetToolTip(this.button1, "Limpiar Pantalla");
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // AgModCamiones
             // 
@@ -885,5 +919,7 @@
         private System.Windows.Forms.MaskedTextBox txtVencimientoRENPRE;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnBuscarProv;
+        private System.Windows.Forms.Button button1;
     }
 }

@@ -9,13 +9,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using Eval_Proveedores.Interfaces;
 using Logica_Negocio;
 using Negocio;
 
 namespace Eval_Proveedores.IngCamiones
 {
-    public partial class AgModCamiones : Form
+    public partial class AgModCamiones : Form, IAyudaProveedores, IAyudaChoferes
     {
         Camion Ca = new Camion();
         Chofer C = new Chofer();
@@ -269,8 +269,8 @@ namespace Eval_Proveedores.IngCamiones
 
         private void BT_Guardar_Click(object sender, EventArgs e)
         {
-            try
-            {
+            //try
+            //{
                 if (TB_Descripcion.Text == "") throw new Exception("Se debe ingresar la descripcion del camión");
 
                 if (TB_Patente.Text == "") throw new Exception("Se debe ingresar la patente del camión");
@@ -324,41 +324,40 @@ namespace Eval_Proveedores.IngCamiones
                 Ca.Patente = TB_Patente.Text;
                 Ca.Proveedor = TB_CodProveedor.Text;
                 Ca.Chofer = int.Parse(TB_CodChofer.Text);
-
-
+            
                 Ca.FechaVto1 = TB_VencRuta.Text;
-                Ca.OrdFechaVto1 = TB_VencRuta.Text.Substring(6, 4) + TB_VencRuta.Text.Substring(3, 2) + TB_VencRuta.Text.Substring(0, 2);
+                Ca.OrdFechaVto1 = Helper.OrdenarFecha(TB_VencRuta.Text);//TB_VencRuta.Text.Substring(6, 4) + TB_VencRuta.Text.Substring(3, 2) + TB_VencRuta.Text.Substring(0, 2);
                 Ca.FechaEnt1 = TB_EntRuta.Text;
-                Ca.OrdFechaEnt1 = TB_EntRuta.Text.Substring(6, 4) + TB_EntRuta.Text.Substring(3, 2) + TB_EntRuta.Text.Substring(0, 2);
+                Ca.OrdFechaEnt1 = Helper.OrdenarFecha(TB_EntRuta.Text);//TB_EntRuta.Text.Substring(6, 4) + TB_EntRuta.Text.Substring(3, 2) + TB_EntRuta.Text.Substring(0, 2);
                 Ca.Comentario1 = TB_ObservacRuta.Text;
 
 
                 Ca.FechaVto2 = TB_VencRTO.Text;
-                Ca.OrdFechaVto2 = TB_VencRTO.Text.Substring(6, 4) + TB_VencRTO.Text.Substring(3, 2) + TB_VencRTO.Text.Substring(0, 2);
+                Ca.OrdFechaVto2 = Helper.OrdenarFecha(TB_VencRTO.Text);//TB_VencRTO.Text.Substring(6, 4) + TB_VencRTO.Text.Substring(3, 2) + TB_VencRTO.Text.Substring(0, 2);
                 Ca.FechaEnt2 = TB_EntRTO.Text;
-                Ca.OrdFechaEnt2 = TB_EntRTO.Text.Substring(6, 4) + TB_EntRTO.Text.Substring(3, 2) + TB_EntRTO.Text.Substring(0, 2);
+                Ca.OrdFechaEnt2 = Helper.OrdenarFecha(TB_EntRTO.Text);//TB_EntRTO.Text.Substring(6, 4) + TB_EntRTO.Text.Substring(3, 2) + TB_EntRTO.Text.Substring(0, 2);
                 Ca.Comentario2 = TB_ObservRTO.Text;
 
 
                 Ca.FechaVto3 = TB_VencHabDominio.Text;
-                Ca.OrdFechaVto3 = TB_VencHabDominio.Text.Substring(6, 4) + TB_VencHabDominio.Text.Substring(3, 2) + TB_VencHabDominio.Text.Substring(0, 2);
+                Ca.OrdFechaVto3 = Helper.OrdenarFecha(TB_VencHabDominio.Text);//TB_VencHabDominio.Text.Substring(6, 4) + TB_VencHabDominio.Text.Substring(3, 2) + TB_VencHabDominio.Text.Substring(0, 2);
                 Ca.FechaEnt3 = TB_EntHabDominio.Text;
-                Ca.OrdFechaEnt3 = TB_EntHabDominio.Text.Substring(6, 4) + TB_EntHabDominio.Text.Substring(3, 2) + TB_EntHabDominio.Text.Substring(0, 2);
+                Ca.OrdFechaEnt3 = Helper.OrdenarFecha(TB_EntHabDominio.Text);//TB_EntHabDominio.Text.Substring(6, 4) + TB_EntHabDominio.Text.Substring(3, 2) + TB_EntHabDominio.Text.Substring(0, 2);
                 Ca.Comentario3 = TB_ObservHabDominio.Text;
 
                 Ca.FechaVto4 = TB_VencSeguro.Text;
-                Ca.OrdFechaVto4 = TB_VencSeguro.Text.Substring(6, 4) + TB_VencSeguro.Text.Substring(3, 2) + TB_VencSeguro.Text.Substring(0, 2);
+                Ca.OrdFechaVto4 = Helper.OrdenarFecha(TB_VencSeguro.Text);//TB_VencSeguro.Text.Substring(6, 4) + TB_VencSeguro.Text.Substring(3, 2) + TB_VencSeguro.Text.Substring(0, 2);
                 Ca.FechaEnt4 = TB_EntSeguro.Text;
-                Ca.OrdFechaEnt4 = TB_EntSeguro.Text.Substring(6, 4) + TB_EntSeguro.Text.Substring(3, 2) + TB_EntSeguro.Text.Substring(0, 2);
+                Ca.OrdFechaEnt4 = Helper.OrdenarFecha(TB_EntSeguro.Text);//TB_EntSeguro.Text.Substring(6, 4) + TB_EntSeguro.Text.Substring(3, 2) + TB_EntSeguro.Text.Substring(0, 2);
                 Ca.Comentario4 = TB_ObservSeguro.Text;
 
                 if (CB_CargasPeligrosas.Checked == true)
                 {
                     Ca.Aplica = 1;
                     Ca.FechaVto5 = TB_VencCargasPelig.Text;
-                    Ca.OrdFechaVto5 = TB_VencCargasPelig.Text.Substring(6, 4) + TB_VencCargasPelig.Text.Substring(3, 2) + TB_VencCargasPelig.Text.Substring(0, 2);
+                    Ca.OrdFechaVto5 = Helper.OrdenarFecha(TB_VencCargasPelig.Text);//TB_VencCargasPelig.Text.Substring(6, 4) + TB_VencCargasPelig.Text.Substring(3, 2) + TB_VencCargasPelig.Text.Substring(0, 2);
                     Ca.FechaEnt5 = TB_EntCargasPelig.Text;
-                    Ca.OrdFechaEnt5 = TB_EntCargasPelig.Text.Substring(6, 4) + TB_EntCargasPelig.Text.Substring(3, 2) + TB_EntCargasPelig.Text.Substring(0, 2);
+                    Ca.OrdFechaEnt5 = Helper.OrdenarFecha(TB_EntCargasPelig.Text);//TB_EntCargasPelig.Text.Substring(6, 4) + TB_EntCargasPelig.Text.Substring(3, 2) + TB_EntCargasPelig.Text.Substring(0, 2);
                     Ca.Comentario5 = TB_ObservCargasPelig.Text;
                 }
                 else
@@ -367,8 +366,9 @@ namespace Eval_Proveedores.IngCamiones
                     Ca.OrdFechaVto5 = "";
                     Ca.FechaEnt5 = TB_EntCargasPelig.Text;
                     Ca.OrdFechaEnt5 = "";
-                    Ca.Comentario5 = TB_ObservCargasPelig.Text; 
+                    Ca.Comentario5 = TB_ObservCargasPelig.Text;
                 }
+
 
                 Ca.Titulo = "";
 
@@ -392,12 +392,12 @@ namespace Eval_Proveedores.IngCamiones
 
                 Close();
                           
-               }
-            catch (Exception err)
-            {
+            //   }
+            //catch (Exception err)
+            //{
                 
-                MessageBox.Show(err.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            //    MessageBox.Show(err.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
         }
 
         private void _ActualizarDatosRENPRE()
@@ -1035,10 +1035,40 @@ namespace Eval_Proveedores.IngCamiones
 	        
         }
 
-       
+        private void btnBuscarProv_Click(object sender, EventArgs e)
+        {
+            Ayudas.AyudaProveedores frm = new Ayudas.AyudaProveedores();
+            frm.Show(this);
+        }
 
-        
+        public void ProcesarAyudaProveedores(string Proveedor, string Descripcion)
+        {
+            TB_CodProveedor.Text = Proveedor;
+            TB_NombProveedor.Text = Descripcion.Trim();
 
-       
+            TB_VencRuta.Focus();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (TB_CodProveedor.Text.Trim() != "")
+            {
+                Ayudas.AyudaChoferes frm = new Ayudas.AyudaChoferes(TB_CodProveedor.Text);
+                frm.Show(this);
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar primero un Proveedor");
+                btnBuscarProv_Click(null, null);
+            }
+        }
+
+        public void ProcesarAyudaChoferes(string Chofer, string Descripcion)
+        {
+            TB_CodChofer.Text = Chofer;
+            TB_NombChofer.Text = Descripcion.Trim();
+
+            TB_VencRuta.Focus();
+        }
     }
 }

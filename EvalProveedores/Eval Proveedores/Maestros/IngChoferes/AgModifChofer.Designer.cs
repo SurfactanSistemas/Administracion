@@ -33,9 +33,6 @@
             this.LBChofer = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.BT_Salir = new System.Windows.Forms.Button();
-            this.BT_LimpiarPant = new System.Windows.Forms.Button();
-            this.BT_Guardar = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.LFechaAviso = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -67,6 +64,10 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.BT_Salir = new System.Windows.Forms.Button();
+            this.BT_LimpiarPant = new System.Windows.Forms.Button();
+            this.BT_Guardar = new System.Windows.Forms.Button();
+            this.btnAyudaProveedores = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -134,49 +135,6 @@
             this.panel3.Size = new System.Drawing.Size(765, 363);
             this.panel3.TabIndex = 0;
             this.panel3.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panel3_MouseClick);
-            // 
-            // BT_Salir
-            // 
-            this.BT_Salir.BackgroundImage = global::Eval_Proveedores.Properties.Resources.Fin21;
-            this.BT_Salir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BT_Salir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BT_Salir.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Salir.Location = new System.Drawing.Point(442, 311);
-            this.BT_Salir.Name = "BT_Salir";
-            this.BT_Salir.Size = new System.Drawing.Size(40, 40);
-            this.BT_Salir.TabIndex = 40;
-            this.toolTip1.SetToolTip(this.BT_Salir, "Salir");
-            this.BT_Salir.UseVisualStyleBackColor = true;
-            this.BT_Salir.Click += new System.EventHandler(this.BT_Salir_Click_1);
-            // 
-            // BT_LimpiarPant
-            // 
-            this.BT_LimpiarPant.BackgroundImage = global::Eval_Proveedores.Properties.Resources.LimpiarPant1;
-            this.BT_LimpiarPant.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BT_LimpiarPant.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BT_LimpiarPant.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_LimpiarPant.Location = new System.Drawing.Point(371, 311);
-            this.BT_LimpiarPant.Margin = new System.Windows.Forms.Padding(0);
-            this.BT_LimpiarPant.Name = "BT_LimpiarPant";
-            this.BT_LimpiarPant.Size = new System.Drawing.Size(40, 40);
-            this.BT_LimpiarPant.TabIndex = 39;
-            this.toolTip1.SetToolTip(this.BT_LimpiarPant, "Limpiar Pantalla");
-            this.BT_LimpiarPant.UseVisualStyleBackColor = true;
-            // 
-            // BT_Guardar
-            // 
-            this.BT_Guardar.BackgroundImage = global::Eval_Proveedores.Properties.Resources.Grabar;
-            this.BT_Guardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BT_Guardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BT_Guardar.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Guardar.Location = new System.Drawing.Point(297, 311);
-            this.BT_Guardar.Margin = new System.Windows.Forms.Padding(0);
-            this.BT_Guardar.Name = "BT_Guardar";
-            this.BT_Guardar.Size = new System.Drawing.Size(40, 40);
-            this.BT_Guardar.TabIndex = 38;
-            this.toolTip1.SetToolTip(this.BT_Guardar, "Guardar");
-            this.BT_Guardar.UseVisualStyleBackColor = true;
-            this.BT_Guardar.Click += new System.EventHandler(this.BT_Guardar_Click_1);
             // 
             // groupBox2
             // 
@@ -430,6 +388,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnAyudaProveedores);
             this.groupBox1.Controls.Add(this.panel4);
             this.groupBox1.Controls.Add(this.TB_NombProveedor);
             this.groupBox1.Controls.Add(this.panel5);
@@ -475,7 +434,7 @@
             this.TB_CodProveedor.FormattingEnabled = true;
             this.TB_CodProveedor.Location = new System.Drawing.Point(89, 24);
             this.TB_CodProveedor.Name = "TB_CodProveedor";
-            this.TB_CodProveedor.Size = new System.Drawing.Size(92, 26);
+            this.TB_CodProveedor.Size = new System.Drawing.Size(95, 26);
             this.TB_CodProveedor.TabIndex = 53;
             this.TB_CodProveedor.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_CodProveedor_KeyDown);
             // 
@@ -498,6 +457,64 @@
             this.label3.Size = new System.Drawing.Size(55, 18);
             this.label3.TabIndex = 2;
             this.label3.Text = "Codigo:";
+            // 
+            // BT_Salir
+            // 
+            this.BT_Salir.BackgroundImage = global::Eval_Proveedores.Properties.Resources.Fin21;
+            this.BT_Salir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BT_Salir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BT_Salir.ForeColor = System.Drawing.SystemColors.Control;
+            this.BT_Salir.Location = new System.Drawing.Point(442, 311);
+            this.BT_Salir.Name = "BT_Salir";
+            this.BT_Salir.Size = new System.Drawing.Size(40, 40);
+            this.BT_Salir.TabIndex = 40;
+            this.toolTip1.SetToolTip(this.BT_Salir, "Salir");
+            this.BT_Salir.UseVisualStyleBackColor = true;
+            this.BT_Salir.Click += new System.EventHandler(this.BT_Salir_Click_1);
+            // 
+            // BT_LimpiarPant
+            // 
+            this.BT_LimpiarPant.BackgroundImage = global::Eval_Proveedores.Properties.Resources.LimpiarPant1;
+            this.BT_LimpiarPant.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BT_LimpiarPant.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BT_LimpiarPant.ForeColor = System.Drawing.SystemColors.Control;
+            this.BT_LimpiarPant.Location = new System.Drawing.Point(371, 311);
+            this.BT_LimpiarPant.Margin = new System.Windows.Forms.Padding(0);
+            this.BT_LimpiarPant.Name = "BT_LimpiarPant";
+            this.BT_LimpiarPant.Size = new System.Drawing.Size(40, 40);
+            this.BT_LimpiarPant.TabIndex = 39;
+            this.toolTip1.SetToolTip(this.BT_LimpiarPant, "Limpiar Pantalla");
+            this.BT_LimpiarPant.UseVisualStyleBackColor = true;
+            // 
+            // BT_Guardar
+            // 
+            this.BT_Guardar.BackgroundImage = global::Eval_Proveedores.Properties.Resources.Grabar;
+            this.BT_Guardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BT_Guardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BT_Guardar.ForeColor = System.Drawing.SystemColors.Control;
+            this.BT_Guardar.Location = new System.Drawing.Point(297, 311);
+            this.BT_Guardar.Margin = new System.Windows.Forms.Padding(0);
+            this.BT_Guardar.Name = "BT_Guardar";
+            this.BT_Guardar.Size = new System.Drawing.Size(40, 40);
+            this.BT_Guardar.TabIndex = 38;
+            this.toolTip1.SetToolTip(this.BT_Guardar, "Guardar");
+            this.BT_Guardar.UseVisualStyleBackColor = true;
+            this.BT_Guardar.Click += new System.EventHandler(this.BT_Guardar_Click_1);
+            // 
+            // btnAyudaProveedores
+            // 
+            this.btnAyudaProveedores.BackgroundImage = global::Eval_Proveedores.Properties.Resources.buscar;
+            this.btnAyudaProveedores.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnAyudaProveedores.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAyudaProveedores.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnAyudaProveedores.Location = new System.Drawing.Point(194, 23);
+            this.btnAyudaProveedores.Margin = new System.Windows.Forms.Padding(0);
+            this.btnAyudaProveedores.Name = "btnAyudaProveedores";
+            this.btnAyudaProveedores.Size = new System.Drawing.Size(28, 27);
+            this.btnAyudaProveedores.TabIndex = 57;
+            this.toolTip1.SetToolTip(this.btnAyudaProveedores, "Limpiar Pantalla");
+            this.btnAyudaProveedores.UseVisualStyleBackColor = true;
+            this.btnAyudaProveedores.Click += new System.EventHandler(this.btnAyudaProveedores_Click);
             // 
             // AgModifChofer
             // 
@@ -565,5 +582,6 @@
         private System.Windows.Forms.Button BT_Salir;
         private System.Windows.Forms.Button BT_LimpiarPant;
         private System.Windows.Forms.Button BT_Guardar;
+        private System.Windows.Forms.Button btnAyudaProveedores;
     }
 }

@@ -9,13 +9,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using Eval_Proveedores.Interfaces;
 using Logica_Negocio;
 using Negocio;
 
 namespace Eval_Proveedores.IngChoferes
 {
-    public partial class AgModifChofer : Form
+    public partial class AgModifChofer : Form, IAyudaProveedores
     {
         Chofer C = new Chofer();
         ChoferBOL CBOL = new ChoferBOL();
@@ -615,24 +615,24 @@ namespace Eval_Proveedores.IngChoferes
                 C.Descripcion = TB_Nombre.Text;
                 C.Proveedor = TB_CodProveedor.Text;
                 C.FechaVto1 = FecVencLic.Text;
-                C.OrdFechaVto1 = FecVencLic.Text.Substring(6, 4) + FecVencLic.Text.Substring(3, 2) + FecVencLic.Text.Substring(0, 2);
+                C.OrdFechaVto1 = Helper.OrdenarFecha(FecVencLic.Text); //FecVencLic.Text.Substring(6, 4) + FecVencLic.Text.Substring(3, 2) + FecVencLic.Text.Substring(0, 2);
                 C.FechaEnt1 = FecEntLic.Text;
-                C.OrdFechaEnt1 = FecEntLic.Text.Substring(6, 4) + FecEntLic.Text.Substring(3, 2) + FecEntLic.Text.Substring(0, 2);
+                C.OrdFechaEnt1 = Helper.OrdenarFecha(FecEntLic.Text); //FecEntLic.Text.Substring(6, 4) + FecEntLic.Text.Substring(3, 2) + FecEntLic.Text.Substring(0, 2);
                 C.Comentario1 = ObservLicCon.Text;
 
                 C.FechaVto2 = FecVencART.Text;
-                C.OrdFechaVto2 = FecVencART.Text.Substring(6, 4) + FecVencART.Text.Substring(3, 2) + FecVencART.Text.Substring(0, 2);
+                C.OrdFechaVto2 = Helper.OrdenarFecha(FecVencART.Text); //FecVencART.Text.Substring(6, 4) + FecVencART.Text.Substring(3, 2) + FecVencART.Text.Substring(0, 2);
                 C.FechaEnt2 = FecEntART.Text;
-                C.OrdFechaEnt2 = FecEntART.Text.Substring(6, 4) + FecEntART.Text.Substring(3, 2) + FecEntART.Text.Substring(0, 2);
+                C.OrdFechaEnt2 = Helper.OrdenarFecha(FecEntART.Text); //FecEntART.Text.Substring(6, 4) + FecEntART.Text.Substring(3, 2) + FecEntART.Text.Substring(0, 2);
                 C.Comentario2 = ObservART.Text;
 
                 if (CB_CertPel.Checked == true)
                 {
                     C.Aplica = 1;
                     C.FechaVto3 = FecVencCargPel.Text;
-                    C.OrdFechaVto3 = FecVencCargPel.Text.Substring(6, 4) + FecVencCargPel.Text.Substring(3, 2) + FecVencCargPel.Text.Substring(0, 2);
+                    C.OrdFechaVto3 = Helper.OrdenarFecha(FecVencCargPel.Text); //FecVencCargPel.Text.Substring(6, 4) + FecVencCargPel.Text.Substring(3, 2) + FecVencCargPel.Text.Substring(0, 2);
                     C.FechaEnt3 = FecEntCargPel.Text;
-                    C.OrdFechaEnt3 = FecEntCargPel.Text.Substring(6, 4) + FecEntCargPel.Text.Substring(3, 2) + FecEntCargPel.Text.Substring(0, 2);
+                    C.OrdFechaEnt3 = Helper.OrdenarFecha(FecEntCargPel.Text); //FecEntCargPel.Text.Substring(6, 4) + FecEntCargPel.Text.Substring(3, 2) + FecEntCargPel.Text.Substring(0, 2);
                     C.Comentario3 = ObservCargPel.Text;
                 }
                 else
@@ -681,7 +681,18 @@ namespace Eval_Proveedores.IngChoferes
             Close();
         }
 
-        
+        private void btnAyudaProveedores_Click(object sender, EventArgs e)
+        {
+            Ayudas.AyudaProveedores frm = new Ayudas.AyudaProveedores();
+            frm.Show(this);
+        }
 
+        public void ProcesarAyudaProveedores(string Proveedor, string Descripcion)
+        {
+            TB_CodProveedor.Text = Proveedor;
+            TB_NombProveedor.Text = Descripcion.Trim();
+
+            FecVencLic.Focus();
+        }
     }
 }

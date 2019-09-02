@@ -350,6 +350,39 @@ Public Class Login
                         Else
                             MsgBox("No se encontró el archivo " & "C:\TempReclamos\" & WNumero & "Reclamo.pdf")
                         End If
+
+                    Case 7
+
+                        Dim WClaveSAC As String = Datos(3)
+                        Dim WNumero As String = Datos(2)
+                        Dim WNumeroTipo As String = ""
+                        Dim WAnio As String = ""
+
+                        Conexion.EmpresaDeTrabajo = "SurfactanSa"
+
+                        Dim WRecl As DataRow = GetSingle("SELECT NumeroTipo, Ano = RIGHT(ISNULL(Fecha, '00/00/0000'), 4) FROM CentroReclamos WHERE numero = '" & WNumero & "'")
+
+                        If WRecl IsNot Nothing Then
+                            WNumeroTipo = OrDefault(WRecl.Item("NumeroTipo"), "")
+                            WAnio = OrDefault(WRecl.Item("Ano"), "")
+                        End If
+
+                        Dim frm As New ConsultasVarias.VistaPrevia
+                        Dim WRutaArchRelacSAC As String = ConfigurationManager.AppSettings("ARCHIVOS_RELACIONADOS") & "SAC_" & WClaveSAC
+
+                        If Not Directory.Exists(WRutaArchRelacSAC) Then
+                            Directory.CreateDirectory(WRutaArchRelacSAC)
+                        End If
+
+                        With frm
+
+                            .Reporte = New ReclamoClienteAvisoMailII
+
+                            .Formula = "{CentroReclamos.Numero} = " & WNumero & ""
+
+                            .Exportar(String.Format("Reclamo de Cliente Nro. {0}-{1} - {2}.pdf", WNumeroTipo, WAnio, Date.Now.ToString("dd-MM-yyyy")), ExportFormatType.PortableDocFormat, WRutaArchRelacSAC)
+
+                        End With
                 End Select
 
                 btnCancel_Click(Nothing, Nothing)
