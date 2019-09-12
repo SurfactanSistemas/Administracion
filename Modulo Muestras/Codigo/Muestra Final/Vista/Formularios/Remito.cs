@@ -227,11 +227,6 @@ namespace Vista
             }
         }
 
-        /*
-         * 1 -> Surfactan I
-         * 3 -> Surfactan VII
-         * 4 -> Surfactan V
-         */
         private int _TraerProximoNumeroRemitoPorEstacionDeTrabajo()
         {
             int WProximoNumero = -1;
@@ -459,8 +454,10 @@ namespace Vista
                     }
                 }
 
+                if (cmbTipoRemito.SelectedIndex == 0 && WEmpresaRemito != -1) _ActualizarUltimaNumeracionRemito();
+
                 ImpreRemito impre_1 = new ImpreRemito(dt, DirEntrega, CodClient, DirClient, LocalidadClient, Cuit, cliente, WDatosRemito);
-                impre_1.ShowDialog();
+                impre_1.ShowDialog(this);
 
                 // Verifico que se haya cargado algun articulo para comenzar a imprimir.
                 if (HojasDeSeguridad[0, 0].Trim() != "")
@@ -469,8 +466,6 @@ namespace Vista
                     ImprimirHojasDSeguridad(HojasDeSeguridad);
 
                 }
-
-                if (cmbTipoRemito.SelectedIndex == 0 && WEmpresaRemito != -1) _ActualizarUltimaNumeracionRemito();
 
                 Close();
             }

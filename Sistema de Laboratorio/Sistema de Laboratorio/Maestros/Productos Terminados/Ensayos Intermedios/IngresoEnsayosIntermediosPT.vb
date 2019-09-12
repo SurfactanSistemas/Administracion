@@ -17,7 +17,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
     End Sub
 
     Private Sub btnLimpiar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLimpiar.Click
-        For Each c As Control In {txtArchivo, txtCodigo, txtConfecciono, txtDesvio, txtEtapa, txtFecha, txtLibros, txtOOS, txtPaginas, txtPartida, lblTipoProceso}
+        For Each c As Control In {txtArchivo, txtCodigo, txtConfecciono, txtDesvio, txtEtapa, txtFecha, txtLibros, txtOOS, txtPaginas, txtPartida, lblTipoProceso, txtFechaVto}
             c.Text = ""
         Next
         dgvEnsayos.Rows.Clear()
@@ -309,6 +309,8 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
             End If
 
+            txtFechaVto.Text = Entidades.ProductoTerminado.CalcularFechaVto(txtCodigo.Text, txtPartida.Text)
+
             If dgvEnsayos.Rows.Count > 0 Then
                 dgvEnsayos.CurrentCell = dgvEnsayos.Item("Valor", 0)
                 dgvEnsayos.Focus()
@@ -322,7 +324,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
     End Sub
 
-    Private Function _GenerarImpreParametro(ByVal wTipoEspecif As Object, ByVal wDesdeEspecif As Object, ByVal wHastaEspecif As Object, ByVal wUnidadEspecif As Object, ByVal wMenorIgualEspecif As Object) As String
+    Private Function _GenerarImpreParametro(ByVal wTipoEspecif As String, ByVal wDesdeEspecif As String, ByVal wHastaEspecif As String, ByVal wUnidadEspecif As String, ByVal wMenorIgualEspecif As String) As String
         If Trim(wDesdeEspecif) = "" And Trim(wHastaEspecif) = "" Then Return ""
 
         wTipoEspecif = Trim(wTipoEspecif)
@@ -1247,6 +1249,8 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
         Next
 
+        WRenglon = 0
+
         Dim WCargaV As DataTable = GetAll("SELECT * FROM CargaV WHERE Terminado = '" & txtCodigo.Text & "' And Paso = '" & txtEtapa.Text & "' Order by Clave")
 
         For Each row As DataRow In WCargaV.Rows
@@ -1321,6 +1325,16 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
             End With
 
         Next
+
+    End Sub
+
+    Private Sub btnImprimirEnsayosIngresados_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimirEnsayosIngresados.Click
+
+        With New VistaPrevia
+            .Reporte = New ValoresEnsayosIntermediosPTFarma
+            .Formula = "{PrueterFarmaIntermedio.Producto} = '" & txtCodigo.Text & "' And {PrueterFarmaIntermedio.Paso} = " & txtEtapa.Text & " And {PrueterFarmaIntermedio.Partida} = " & txtPartida.Text & " And {PrueterFarmaIntermedio.Producto} = {Terminado.Codigo}"
+            .Mostrar()
+        End With
 
     End Sub
 End Class

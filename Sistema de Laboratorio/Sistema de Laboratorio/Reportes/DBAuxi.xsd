@@ -24,6 +24,21 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="EtiquetasSimples" msprop:Generator_TableClassName="EtiquetasSimplesDataTable" msprop:Generator_TableVarName="tableEtiquetasSimples" msprop:Generator_RowChangedName="EtiquetasSimplesRowChanged" msprop:Generator_TablePropName="EtiquetasSimples" msprop:Generator_RowDeletingName="EtiquetasSimplesRowDeleting" msprop:Generator_RowChangingName="EtiquetasSimplesRowChanging" msprop:Generator_RowEvHandlerName="EtiquetasSimplesRowChangeEventHandler" msprop:Generator_RowDeletedName="EtiquetasSimplesRowDeleted" msprop:Generator_RowClassName="EtiquetasSimplesRow" msprop:Generator_UserTableName="EtiquetasSimples" msprop:Generator_RowEvArgName="EtiquetasSimplesRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ID" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" minOccurs="0" />
+              <xs:element name="Articulo" msprop:Generator_ColumnVarNameInTable="columnArticulo" msprop:Generator_ColumnPropNameInRow="Articulo" msprop:Generator_ColumnPropNameInTable="ArticuloColumn" msprop:Generator_UserColumnName="Articulo" type="xs:string" minOccurs="0" />
+              <xs:element name="Descripcion" msprop:Generator_ColumnVarNameInTable="columnDescripcion" msprop:Generator_ColumnPropNameInRow="Descripcion" msprop:Generator_ColumnPropNameInTable="DescripcionColumn" msprop:Generator_UserColumnName="Descripcion" type="xs:string" minOccurs="0" />
+              <xs:element name="Informe" msprop:Generator_ColumnVarNameInTable="columnInforme" msprop:Generator_ColumnPropNameInRow="Informe" msprop:Generator_ColumnPropNameInTable="InformeColumn" msprop:Generator_UserColumnName="Informe" type="xs:int" minOccurs="0" />
+              <xs:element name="Impre1" msprop:Generator_ColumnVarNameInTable="columnImpre1" msprop:Generator_ColumnPropNameInRow="Impre1" msprop:Generator_ColumnPropNameInTable="Impre1Column" msprop:Generator_UserColumnName="Impre1" type="xs:string" minOccurs="0" />
+              <xs:element name="Impre2" msprop:Generator_ColumnVarNameInTable="columnImpre2" msprop:Generator_ColumnPropNameInRow="Impre2" msprop:Generator_ColumnPropNameInTable="Impre2Column" msprop:Generator_UserColumnName="Impre2" type="xs:string" minOccurs="0" />
+              <xs:element name="Impre3" msprop:Generator_ColumnVarNameInTable="columnImpre3" msprop:Generator_ColumnPropNameInRow="Impre3" msprop:Generator_ColumnPropNameInTable="Impre3Column" msprop:Generator_UserColumnName="Impre3" type="xs:string" minOccurs="0" />
+              <xs:element name="Analista" msprop:Generator_ColumnVarNameInTable="columnAnalista" msprop:Generator_ColumnPropNameInRow="Analista" msprop:Generator_ColumnPropNameInTable="AnalistaColumn" msprop:Generator_UserColumnName="Analista" type="xs:string" minOccurs="0" />
+              <xs:element name="LotePrv" msprop:Generator_ColumnVarNameInTable="columnLotePrv" msprop:Generator_ColumnPropNameInRow="LotePrv" msprop:Generator_ColumnPropNameInTable="LotePrvColumn" msprop:Generator_UserColumnName="LotePrv" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
   </xs:element>

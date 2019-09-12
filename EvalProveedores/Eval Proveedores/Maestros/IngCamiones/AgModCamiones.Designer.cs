@@ -51,6 +51,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.LFechaAviso = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.TB_NombChofer = new System.Windows.Forms.ComboBox();
             this.TB_CodChofer = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -82,6 +83,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnBuscarProv = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
             this.TB_CodProveedor = new System.Windows.Forms.ComboBox();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -89,8 +91,12 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnBuscarProv = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtResponsable = new System.Windows.Forms.TextBox();
+            this.txtDescResponsable = new System.Windows.Forms.TextBox();
+            this.txtUltimaActualizacion = new System.Windows.Forms.MaskedTextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -131,6 +137,8 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.Control;
+            this.panel3.Controls.Add(this.label12);
+            this.panel3.Controls.Add(this.txtUltimaActualizacion);
             this.panel3.Controls.Add(this.TB_ObservacRuta);
             this.panel3.Controls.Add(this.TB_ObservRTO);
             this.panel3.Controls.Add(this.TB_EntRuta);
@@ -271,17 +279,21 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.button2);
+            this.groupBox3.Controls.Add(this.txtDescResponsable);
+            this.groupBox3.Controls.Add(this.txtResponsable);
             this.groupBox3.Controls.Add(this.TB_Patente);
             this.groupBox3.Controls.Add(this.label13);
             this.groupBox3.Controls.Add(this.CB_Estado);
+            this.groupBox3.Controls.Add(this.label11);
             this.groupBox3.Controls.Add(this.label8);
             this.groupBox3.Controls.Add(this.TB_Descripcion);
             this.groupBox3.Controls.Add(this.TB_CodCamion);
             this.groupBox3.Controls.Add(this.label2);
             this.groupBox3.Controls.Add(this.LFechaAviso);
-            this.groupBox3.Location = new System.Drawing.Point(14, 7);
+            this.groupBox3.Location = new System.Drawing.Point(6, 7);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(824, 89);
+            this.groupBox3.Size = new System.Drawing.Size(850, 89);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "CAMIÓN";
@@ -289,7 +301,7 @@
             // TB_Patente
             // 
             this.TB_Patente.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TB_Patente.Location = new System.Drawing.Point(696, 47);
+            this.TB_Patente.Location = new System.Drawing.Point(595, 53);
             this.TB_Patente.Name = "TB_Patente";
             this.TB_Patente.Size = new System.Drawing.Size(102, 26);
             this.TB_Patente.TabIndex = 2;
@@ -300,7 +312,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(597, 54);
+            this.label13.Location = new System.Drawing.Point(529, 57);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(61, 18);
             this.label13.TabIndex = 44;
@@ -313,7 +325,7 @@
             this.CB_Estado.Items.AddRange(new object[] {
             "",
             "Inhabilitado"});
-            this.CB_Estado.Location = new System.Drawing.Point(339, 15);
+            this.CB_Estado.Location = new System.Drawing.Point(259, 15);
             this.CB_Estado.Name = "CB_Estado";
             this.CB_Estado.Size = new System.Drawing.Size(233, 26);
             this.CB_Estado.TabIndex = 100;
@@ -323,7 +335,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(268, 18);
+            this.label8.Location = new System.Drawing.Point(200, 18);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(53, 18);
             this.label8.TabIndex = 38;
@@ -332,7 +344,7 @@
             // TB_Descripcion
             // 
             this.TB_Descripcion.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TB_Descripcion.Location = new System.Drawing.Point(149, 51);
+            this.TB_Descripcion.Location = new System.Drawing.Point(94, 51);
             this.TB_Descripcion.Name = "TB_Descripcion";
             this.TB_Descripcion.Size = new System.Drawing.Size(423, 26);
             this.TB_Descripcion.TabIndex = 1;
@@ -341,7 +353,7 @@
             // 
             // TB_CodCamion
             // 
-            this.TB_CodCamion.Location = new System.Drawing.Point(149, 15);
+            this.TB_CodCamion.Location = new System.Drawing.Point(94, 15);
             this.TB_CodCamion.Name = "TB_CodCamion";
             this.TB_CodCamion.ReadOnly = true;
             this.TB_CodCamion.Size = new System.Drawing.Size(100, 26);
@@ -382,6 +394,21 @@
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "CHOFER";
+            // 
+            // button1
+            // 
+            this.button1.BackgroundImage = global::Eval_Proveedores.Properties.Resources.buscar;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.ForeColor = System.Drawing.SystemColors.Control;
+            this.button1.Location = new System.Drawing.Point(110, 23);
+            this.button1.Margin = new System.Windows.Forms.Padding(0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(28, 27);
+            this.button1.TabIndex = 54;
+            this.toolTip1.SetToolTip(this.button1, "Limpiar Pantalla");
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // TB_NombChofer
             // 
@@ -429,7 +456,7 @@
             this.BT_Salir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Salir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Salir.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Salir.Location = new System.Drawing.Point(783, 148);
+            this.BT_Salir.Location = new System.Drawing.Point(783, 188);
             this.BT_Salir.Name = "BT_Salir";
             this.BT_Salir.Size = new System.Drawing.Size(40, 40);
             this.BT_Salir.TabIndex = 24;
@@ -443,7 +470,7 @@
             this.BT_LimpiarPant.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_LimpiarPant.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_LimpiarPant.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_LimpiarPant.Location = new System.Drawing.Point(710, 148);
+            this.BT_LimpiarPant.Location = new System.Drawing.Point(710, 188);
             this.BT_LimpiarPant.Margin = new System.Windows.Forms.Padding(0);
             this.BT_LimpiarPant.Name = "BT_LimpiarPant";
             this.BT_LimpiarPant.Size = new System.Drawing.Size(40, 40);
@@ -459,7 +486,7 @@
             this.BT_Guardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Guardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Guardar.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Guardar.Location = new System.Drawing.Point(632, 148);
+            this.BT_Guardar.Location = new System.Drawing.Point(632, 188);
             this.BT_Guardar.Margin = new System.Windows.Forms.Padding(0);
             this.BT_Guardar.Name = "BT_Guardar";
             this.BT_Guardar.Size = new System.Drawing.Size(40, 40);
@@ -748,6 +775,21 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "PROVEEDOR";
             // 
+            // btnBuscarProv
+            // 
+            this.btnBuscarProv.BackgroundImage = global::Eval_Proveedores.Properties.Resources.buscar;
+            this.btnBuscarProv.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnBuscarProv.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBuscarProv.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnBuscarProv.Location = new System.Drawing.Point(112, 22);
+            this.btnBuscarProv.Margin = new System.Windows.Forms.Padding(0);
+            this.btnBuscarProv.Name = "btnBuscarProv";
+            this.btnBuscarProv.Size = new System.Drawing.Size(28, 27);
+            this.btnBuscarProv.TabIndex = 53;
+            this.toolTip1.SetToolTip(this.btnBuscarProv, "Limpiar Pantalla");
+            this.btnBuscarProv.UseVisualStyleBackColor = true;
+            this.btnBuscarProv.Click += new System.EventHandler(this.btnBuscarProv_Click);
+            // 
             // panel5
             // 
             this.panel5.Location = new System.Drawing.Point(246, 20);
@@ -801,35 +843,68 @@
             this.label3.TabIndex = 2;
             this.label3.Text = "Codigo:";
             // 
-            // btnBuscarProv
+            // label11
             // 
-            this.btnBuscarProv.BackgroundImage = global::Eval_Proveedores.Properties.Resources.buscar;
-            this.btnBuscarProv.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnBuscarProv.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBuscarProv.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnBuscarProv.Location = new System.Drawing.Point(112, 22);
-            this.btnBuscarProv.Margin = new System.Windows.Forms.Padding(0);
-            this.btnBuscarProv.Name = "btnBuscarProv";
-            this.btnBuscarProv.Size = new System.Drawing.Size(28, 27);
-            this.btnBuscarProv.TabIndex = 53;
-            this.toolTip1.SetToolTip(this.btnBuscarProv, "Limpiar Pantalla");
-            this.btnBuscarProv.UseVisualStyleBackColor = true;
-            this.btnBuscarProv.Click += new System.EventHandler(this.btnBuscarProv_Click);
+            this.label11.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(498, 15);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(87, 30);
+            this.label11.TabIndex = 38;
+            this.label11.Text = "Responsable Actualización:";
             // 
-            // button1
+            // txtResponsable
             // 
-            this.button1.BackgroundImage = global::Eval_Proveedores.Properties.Resources.buscar;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.ForeColor = System.Drawing.SystemColors.Control;
-            this.button1.Location = new System.Drawing.Point(110, 23);
-            this.button1.Margin = new System.Windows.Forms.Padding(0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(28, 27);
-            this.button1.TabIndex = 54;
-            this.toolTip1.SetToolTip(this.button1, "Limpiar Pantalla");
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.txtResponsable.Location = new System.Drawing.Point(598, 16);
+            this.txtResponsable.Name = "txtResponsable";
+            this.txtResponsable.Size = new System.Drawing.Size(41, 26);
+            this.txtResponsable.TabIndex = 102;
+            this.txtResponsable.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtResponsable_KeyDown);
+            // 
+            // txtDescResponsable
+            // 
+            this.txtDescResponsable.Location = new System.Drawing.Point(643, 16);
+            this.txtDescResponsable.Name = "txtDescResponsable";
+            this.txtDescResponsable.ReadOnly = true;
+            this.txtDescResponsable.Size = new System.Drawing.Size(200, 26);
+            this.txtDescResponsable.TabIndex = 103;
+            this.txtDescResponsable.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtUltimaActualizacion
+            // 
+            this.txtUltimaActualizacion.Enabled = false;
+            this.txtUltimaActualizacion.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtUltimaActualizacion.Location = new System.Drawing.Point(734, 126);
+            this.txtUltimaActualizacion.Mask = "00/00/0000";
+            this.txtUltimaActualizacion.Name = "txtUltimaActualizacion";
+            this.txtUltimaActualizacion.PromptChar = ' ';
+            this.txtUltimaActualizacion.Size = new System.Drawing.Size(100, 26);
+            this.txtUltimaActualizacion.TabIndex = 49;
+            this.txtUltimaActualizacion.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtUltimaActualizacion.ValidatingType = typeof(System.DateTime);
+            // 
+            // label12
+            // 
+            this.label12.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(598, 132);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(130, 15);
+            this.label12.TabIndex = 50;
+            this.label12.Text = "Última Actualización:";
+            // 
+            // button2
+            // 
+            this.button2.BackgroundImage = global::Eval_Proveedores.Properties.Resources.buscar;
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.ForeColor = System.Drawing.SystemColors.Control;
+            this.button2.Location = new System.Drawing.Point(568, 14);
+            this.button2.Margin = new System.Windows.Forms.Padding(0);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(28, 27);
+            this.button2.TabIndex = 104;
+            this.toolTip1.SetToolTip(this.button2, "Limpiar Pantalla");
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // AgModCamiones
             // 
@@ -921,5 +996,11 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnBuscarProv;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox txtDescResponsable;
+        private System.Windows.Forms.TextBox txtResponsable;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.MaskedTextBox txtUltimaActualizacion;
+        private System.Windows.Forms.Button button2;
     }
 }

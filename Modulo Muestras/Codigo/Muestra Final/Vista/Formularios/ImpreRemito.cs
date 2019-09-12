@@ -21,7 +21,7 @@ namespace Vista
         private string[,] HojasDeSeguridad;
         private const string ORIGEN_HOJA_SEGURIDAD = "W:\\impresion pdf\\fds\\fds#NOMBREPDF#.pdf";
         private const string DESTINO_HOJA_SEGURIDAD = "C:\\pdfprint\\fds#NOMBREPDF#.pdf";
-
+        private bool WImprimirDeUna = false;
 
 
         public ImpreRemito(DataTable DT, string DirEnt, string CodClient, string DirClient, string LocalidadClient, string Cuit, string cliente, string[,] FDSs, string[] wDatosRemito)
@@ -51,6 +51,7 @@ namespace Vista
             this.Cuit = Cuit;
             this.cliente = cliente;
             WDatosRemitos = wDatosRemito;
+            this.WImprimirDeUna = true;
         }
 
         private void ImpreRemito_Load(object sender, EventArgs e)
@@ -89,6 +90,11 @@ namespace Vista
             ImpRemito2 RImp = new ImpRemito2();
             RImp.SetDataSource(Ds);
             CRVRemito.ReportSource = RImp;
+            if (WImprimirDeUna)
+            {
+                CRVRemito.PrintReport();
+                Close();
+            }
             
             
         }

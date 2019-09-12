@@ -69,7 +69,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
         If e.KeyData = Keys.Enter Then
             If Val(txtEtapa.Text) = 0 Then : Exit Sub : End If
 
-            Dim WProcedimientos As DataTable = GetAll("SELECT Articulo, PTerminado, Letra, Descripcion, Cantidad FROM CargaIII WHERE Terminado = '" & txtTerminado.Text & "' AND Paso = '" & txtEtapa.Text & "' AND ISNULL(Tipo, '') <> 'N' Order By Terminado, Paso, Renglon")
+            Dim WProcedimientos As DataTable = GetAll("SELECT Articulo, PTerminado, Letra, Descripcion, Cantidad, TipoProceso FROM CargaIII WHERE Terminado = '" & txtTerminado.Text & "' AND Paso = '" & txtEtapa.Text & "' AND ISNULL(Tipo, '') <> 'N' Order By Terminado, Paso, Renglon")
 
             dgvProcedimientos.Rows.Clear()
 
@@ -80,8 +80,11 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                 Dim WLetra As String = OrDefault(r.Item("Letra"), "")
                 Dim WDescripcion As String = OrDefault(r.Item("Descripcion"), "")
                 Dim WCantidad As String = OrDefault(r.Item("Cantidad"), "0")
+                Dim WTipoProceso As String = Trim(OrDefault(r.Item("TipoProceso"), ""))
 
                 Dim _r = dgvProcedimientos.Rows.Add
+
+                txtTipoProceso.Text = WTipoProceso
 
                 With dgvProcedimientos.Rows(_r)
                     .Cells("Articulo").Value = WArticulo
@@ -106,8 +109,8 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                     Dim WControlCambio = OrDefault(.Item("ControlCambio"), "")
                     Dim WFarmacopea = OrDefault(.Item("Farmacopea"), "")
                     Dim WTipoEspecif = OrDefault(.Item("TipoEspecif"), "0")
-                    Dim WDesdeEspecif = OrDefault(.Item("DesdeEspecif"), "")
-                    Dim WHastaEspecif = OrDefault(.Item("HastaEspecif"), "")
+                    Dim WDesdeEspecif As String = OrDefault(.Item("DesdeEspecif"), "")
+                    Dim WHastaEspecif As String = OrDefault(.Item("HastaEspecif"), "")
                     Dim WUnidadEspecif = OrDefault(.Item("UnidadEspecif"), "")
                     Dim WMenorIgualEspecif = OrDefault(.Item("MenorIgualEspecif"), "0")
                     Dim WInformaEspecif = OrDefault(.Item("InformaEspecif"), "0")
@@ -204,7 +207,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
     End Sub
 
-    Private Function _GenerarImpreParametro(ByVal wTipoEspecif As Object, ByVal wDesdeEspecif As Object, ByVal wHastaEspecif As Object, ByVal wUnidadEspecif As Object, ByVal wMenorIgualEspecif As Object) As String
+    Private Function _GenerarImpreParametro(ByVal wTipoEspecif As String, ByVal wDesdeEspecif As String, ByVal wHastaEspecif As String, ByVal wUnidadEspecif As String, ByVal wMenorIgualEspecif As String) As String
 
         wTipoEspecif = OrDefault(Trim(wTipoEspecif), "")
         wDesdeEspecif = OrDefault(Trim(wDesdeEspecif), "")
@@ -253,8 +256,8 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
             Dim WTipo As Integer = Val(OrDefault(.Cells("TipoEspecif").Value, 0))
             Dim WInforma As Integer = Val(OrDefault(.Cells("InformaEspecif").Value, 0))
-            Dim WDesde As Double = Trim(OrDefault(.Cells("DesdeEspecif").Value, "0")).toDbl
-            Dim WHasta As Double = Trim(OrDefault(.Cells("HastaEspecif").Value, "0")).toDbl
+            Dim WDesde As String = Trim(OrDefault(.Cells("DesdeEspecif").Value, "0"))
+            Dim WHasta As String = Trim(OrDefault(.Cells("HastaEspecif").Value, "0"))
             Dim WMenorIgual As Integer = Val(OrDefault(.Cells("MenorIgualEspecif").Value, 0))
             Dim WUnidad As String = OrDefault(.Cells("UnidadEspecif").Value, "")
             Dim WFarmacopea As String = OrDefault(.Cells("Farmacopea").Value, "")
@@ -281,7 +284,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
     End Sub
 
-    Public Sub _ProcesarIngresoParametrosEspecificaciones(ByVal WParametro As String, ByVal Tipo As Integer, ByVal Informa As Integer, ByVal MenorIgual As Integer, ByVal Desde As Double, ByVal Hasta As Double, ByVal Unidad As String, ByVal WFarmacopea As String, ByVal Formula As String, ByVal ParametrosFormula() As String) Implements IIngresoParametrosEspecificaciones._ProcesarIngresoParametrosEspecificaciones
+    Public Sub _ProcesarIngresoParametrosEspecificaciones(ByVal WParametro As String, ByVal Tipo As Integer, ByVal Informa As Integer, ByVal MenorIgual As Integer, ByVal Desde As String, ByVal Hasta As String, ByVal Unidad As String, ByVal WFarmacopea As String, ByVal Formula As String, ByVal ParametrosFormula() As String) Implements IIngresoParametrosEspecificaciones._ProcesarIngresoParametrosEspecificaciones
         With dgvEspecif.CurrentRow
             .Cells("DescEnsayo").Value = WParametro
             .Cells("TipoEspecif").Value = Tipo
@@ -292,6 +295,13 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
             .Cells("UnidadEspecif").Value = Unidad
             .Cells("Farmacopea").Value = WFarmacopea
             .Cells("FormulaEspecif").Value = Formula
+
+            Dim WImpreParametro = _GenerarImpreParametro(Tipo, Desde, Hasta, Unidad, MenorIgual)
+
+
+            If Val(Tipo) = 0 And WImpreParametro <> "" Then WImpreParametro &= " (c)"
+
+            .Cells("Parametro").Value = WImpreParametro
 
             For i = 1 To ParametrosFormula.Count - 1
                 .Cells("Variable" & i).Value = Trim(ParametrosFormula(i))
@@ -576,12 +586,12 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
     Private Sub _ActualizarRegistroProduccion()
 
-        Dim WVersion, WFechaVersion, WControlCambio, WImprePlanilla, WImprePlanillaII, WImprePlanillaIII, WMetodo, WLibera, WLimpieza, WEpp, WHumedad, WPeso, WEquipo, WArticulo, WPTerminado, WLetra, WDescripcion, WCantidad, WDescEquipo, WPoe, WIdentificacion, WPoeLimpieza, WArea As String
+        Dim WVersion, WFechaVersion, WControlCambio, WImprePlanilla, WImprePlanillaII, WImprePlanillaIII, WMetodo, WLibera, WLimpieza, WEpp, WHumedad, WPeso, WEquipo, WArticulo, WPTerminado, WLetra, WDescripcion, WCantidad, WDescEquipo, WPoe, WIdentificacion, WPoeLimpieza, WArea, ZTipoProceso As String
 
         '
         ' Extraemos los datos de CargaIII.
         '
-        Dim WCargaIII As DataTable = GetAll("SELECT Version, FechaVersion, ControlCambio, ImprimePlanilla, ImprimePlanillaII, ImprimePlanillaIII, Metodo, Libera, Limpieza, Epp, Humedad, Peso, Equipo, Articulo, PTerminado, Letra, Descripcion, Cantidad FROM CargaIII WHERE Terminado = '" & txtTerminado.Text & "' And Paso = '" & txtEtapa.Text & "' and ISNULL(Tipo, '') <> 'N'  Order by Terminado, Paso, Renglon")
+        Dim WCargaIII As DataTable = GetAll("SELECT Version, FechaVersion, ControlCambio, ImprimePlanilla, ImprimePlanillaII, ImprimePlanillaIII, Metodo, Libera, Limpieza, Epp, Humedad, Peso, Equipo, Articulo, PTerminado, Letra, Descripcion, Cantidad, TipoProceso FROM CargaIII WHERE Terminado = '" & txtTerminado.Text & "' And Paso = '" & txtEtapa.Text & "' and ISNULL(Tipo, '') <> 'N'  Order by Terminado, Paso, Renglon")
 
         '
         ' Extraemos los datos de CargaV.
@@ -696,6 +706,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
         '
         WEquipo = Trim(OrDefault(WCargaIII.Rows(0).Item("Equipo"), ""))
         WLibera = Trim(OrDefault(WCargaIII.Rows(0).Item("Libera"), ""))
+        ZTipoProceso = Trim(OrDefault(WCargaIII.Rows(0).Item("TipoProceso"), ""))
 
         WDescEquipo = ""
         WPoe = ""
@@ -728,6 +739,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
         Dim WItem As Integer = 0
 
         If Val(WEquipo) <> 0 Then
+            WItem += 1
 
             WArticulo = ""
             WPTerminado = ""
@@ -747,7 +759,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
             WTipo = "N"
             ZZItem = Trim(Str$(Val(txtEtapa.Text))) + "." + Trim(Str$(WItem))
 
-            ZSql = _GenerarConsultaCargaIII(WRenglon, WEquipo, WEpp, WItem, WClave, WArticulo, WPTerminado, WLetra, XDescripcion, WCantidad, WPeso, WTipo, WDesEpp, WImprePeso, WLibera, WLimpieza, WMetodo, WHumedad, WImpreHumedad)
+            ZSql = _GenerarConsultaCargaIII(WRenglon, WEquipo, WEpp, ZZItem, WClave, WArticulo, WPTerminado, WLetra, XDescripcion, WCantidad, WPeso, WTipo, WDesEpp, WImprePeso, WLibera, WLimpieza, WMetodo, WHumedad, WImpreHumedad, WItem)
 
             WConsultas.Add(ZSql)
 
@@ -767,7 +779,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
             WTipo = "N"
             ZZItem = ""
 
-            ZSql = _GenerarConsultaCargaIII(WRenglon, WEquipo, WEpp, WItem, WClave, WArticulo, WPTerminado, WLetra, XDescripcion, WCantidad, WPeso, WTipo, WDesEpp, WImprePeso, WLibera, WLimpieza, WMetodo, WHumedad, WImpreHumedad)
+            ZSql = _GenerarConsultaCargaIII(WRenglon, WEquipo, WEpp, ZZItem, WClave, WArticulo, WPTerminado, WLetra, XDescripcion, WCantidad, WPeso, WTipo, WDesEpp, WImprePeso, WLibera, WLimpieza, WMetodo, WHumedad, WImpreHumedad, WItem)
 
             WConsultas.Add(ZSql)
 
@@ -784,7 +796,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
             WTipo = "N"
             ZZItem = ""
 
-            ZSql = _GenerarConsultaCargaIII(WRenglon, WEquipo, WEpp, WItem, WClave, WArticulo, WPTerminado, WLetra, XDescripcion, WCantidad, WPeso, WTipo, WDesEpp, WImprePeso, WLibera, WLimpieza, WMetodo, WHumedad, WImpreHumedad)
+            ZSql = _GenerarConsultaCargaIII(WRenglon, WEquipo, WEpp, ZZItem, WClave, WArticulo, WPTerminado, WLetra, XDescripcion, WCantidad, WPeso, WTipo, WDesEpp, WImprePeso, WLibera, WLimpieza, WMetodo, WHumedad, WImpreHumedad, WItem)
 
             WConsultas.Add(ZSql)
 
@@ -815,7 +827,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
             WTipo = "N"
             ZZItem = Trim(Str$(Val(txtEtapa.Text))) + "." + Trim(Str$(WItem))
 
-            ZSql = _GenerarConsultaCargaIII(WRenglon, WEquipo, WEpp, WItem, WClave, WArticulo, WPTerminado, WLetra, XDescripcion, WCantidad, WPeso, WTipo, WDesEpp, WImprePeso, WLibera, WLimpieza, WMetodo, WHumedad, WImpreHumedad)
+            ZSql = _GenerarConsultaCargaIII(WRenglon, WEquipo, WEpp, ZZItem, WClave, WArticulo, WPTerminado, WLetra, XDescripcion, WCantidad, WPeso, WTipo, WDesEpp, WImprePeso, WLibera, WLimpieza, WMetodo, WHumedad, WImpreHumedad, WItem)
 
             WConsultas.Add(ZSql)
 
@@ -832,7 +844,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
             WTipo = "N"
             ZZItem = ""
 
-            ZSql = _GenerarConsultaCargaIII(WRenglon, WEquipo, WEpp, WItem, WClave, WArticulo, WPTerminado, WLetra, XDescripcion, WCantidad, WPeso, WTipo, WDesEpp, WImprePeso, WLibera, WLimpieza, WMetodo, WHumedad, WImpreHumedad)
+            ZSql = _GenerarConsultaCargaIII(WRenglon, WEquipo, WEpp, ZZItem, WClave, WArticulo, WPTerminado, WLetra, XDescripcion, WCantidad, WPeso, WTipo, WDesEpp, WImprePeso, WLibera, WLimpieza, WMetodo, WHumedad, WImpreHumedad, WItem)
 
             WConsultas.Add(ZSql)
 
@@ -900,7 +912,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
                 WClave = txtTerminado.Text + XPaso + Auxi
 
-                ZSql = _GenerarConsultaCargaIII(WRenglon, WEquipo, WEpp, WItem, WClave, WArticulo, WPTerminado, WLetra, XDescripcion, WCantidad, WPeso, WTipo, WDesEpp, WImprePeso, WLibera, WLimpieza, WMetodo, WHumedad, WImpreHumedad)
+                ZSql = _GenerarConsultaCargaIII(WRenglon, WEquipo, WEpp, ZZItem, WClave, WArticulo, WPTerminado, WLetra, XDescripcion, WCantidad, WPeso, WTipo, WDesEpp, WImprePeso, WLibera, WLimpieza, WMetodo, WHumedad, WImpreHumedad, WItem)
 
                 WConsultas.Add(ZSql)
 
@@ -948,7 +960,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                             WTipo = "N"
                             ZZItem = ""
 
-                            ZSql = _GenerarConsultaCargaIII(WRenglon, WEquipo, WEpp, WItem, WClave, WArticulo, WPTerminado, WLetra, XDescripcion, WCantidad, WPeso, WTipo, WDesEpp, WImprePeso, WLibera, WLimpieza, WMetodo, WHumedad, WImpreHumedad)
+                            ZSql = _GenerarConsultaCargaIII(WRenglon, WEquipo, WEpp, ZZItem, WClave, WArticulo, WPTerminado, WLetra, XDescripcion, WCantidad, WPeso, WTipo, WDesEpp, WImprePeso, WLibera, WLimpieza, WMetodo, WHumedad, WImpreHumedad, WItem)
 
                             WConsultas.Add(ZSql)
 
@@ -978,7 +990,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
             WTipo = "N"
             ZZItem = Trim(txtEtapa.Text) & "." & WItem
 
-            ZSql = _GenerarConsultaCargaIII(WRenglon, WEquipo, WEpp, WItem, WClave, WArticulo, WPTerminado, WLetra, XDescripcion, WCantidad, WPeso, WTipo, WDesEpp, WImprePeso, WLibera, WLimpieza, WMetodo, WHumedad, WImpreHumedad)
+            ZSql = _GenerarConsultaCargaIII(WRenglon, WEquipo, WEpp, ZZItem, WClave, WArticulo, WPTerminado, WLetra, XDescripcion, WCantidad, WPeso, WTipo, WDesEpp, WImprePeso, WLibera, WLimpieza, WMetodo, WHumedad, WImpreHumedad, WItem)
 
             WConsultas.Add(ZSql)
 
@@ -992,7 +1004,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
             ZZItem = ""
 
-            ZSql = _GenerarConsultaCargaIII(WRenglon, WEquipo, WEpp, WItem, WClave, WArticulo, WPTerminado, WLetra, XDescripcion, WCantidad, WPeso, WTipo, WDesEpp, WImprePeso, WLibera, WLimpieza, WMetodo, WHumedad, WImpreHumedad)
+            ZSql = _GenerarConsultaCargaIII(WRenglon, WEquipo, WEpp, ZZItem, WClave, WArticulo, WPTerminado, WLetra, XDescripcion, WCantidad, WPeso, WTipo, WDesEpp, WImprePeso, WLibera, WLimpieza, WMetodo, WHumedad, WImpreHumedad, WItem)
 
             WConsultas.Add(ZSql)
 
@@ -1004,7 +1016,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
             WClave = txtTerminado.Text + XPaso + Auxi
 
-            ZSql = _GenerarConsultaCargaIII(WRenglon, WEquipo, WEpp, WItem, WClave, WArticulo, WPTerminado, WLetra, XDescripcion, WCantidad, WPeso, WTipo, WDesEpp, WImprePeso, WLibera, WLimpieza, WMetodo, WHumedad, WImpreHumedad)
+            ZSql = _GenerarConsultaCargaIII(WRenglon, WEquipo, WEpp, ZZItem, WClave, WArticulo, WPTerminado, WLetra, XDescripcion, WCantidad, WPeso, WTipo, WDesEpp, WImprePeso, WLibera, WLimpieza, WMetodo, WHumedad, WImpreHumedad, WItem)
 
             WConsultas.Add(ZSql)
 
@@ -1028,7 +1040,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
             WTipo = "N"
             ZZItem = Trim(txtEtapa.Text) & "." & WItem
 
-            ZSql = _GenerarConsultaCargaIII(WRenglon, WEquipo, WEpp, WItem, WClave, WArticulo, WPTerminado, WLetra, XDescripcion, WCantidad, WPeso, WTipo, WDesEpp, WImprePeso, WLibera, WLimpieza, WMetodo, WHumedad, WImpreHumedad)
+            ZSql = _GenerarConsultaCargaIII(WRenglon, WEquipo, WEpp, ZZItem, WClave, WArticulo, WPTerminado, WLetra, XDescripcion, WCantidad, WPeso, WTipo, WDesEpp, WImprePeso, WLibera, WLimpieza, WMetodo, WHumedad, WImpreHumedad, WItem)
 
             WConsultas.Add(ZSql)
 
@@ -1040,7 +1052,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
             WClave = txtTerminado.Text + XPaso + Auxi
 
-            ZSql = _GenerarConsultaCargaIII(WRenglon, WEquipo, WEpp, WItem, WClave, WArticulo, WPTerminado, WLetra, XDescripcion, WCantidad, WPeso, WTipo, WDesEpp, WImprePeso, WLibera, WLimpieza, WMetodo, WHumedad, WImpreHumedad)
+            ZSql = _GenerarConsultaCargaIII(WRenglon, WEquipo, WEpp, ZZItem, WClave, WArticulo, WPTerminado, WLetra, XDescripcion, WCantidad, WPeso, WTipo, WDesEpp, WImprePeso, WLibera, WLimpieza, WMetodo, WHumedad, WImpreHumedad, WItem)
 
             WConsultas.Add(ZSql)
 
@@ -1052,7 +1064,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
             WClave = txtTerminado.Text + XPaso + Auxi
 
-            ZSql = _GenerarConsultaCargaIII(WRenglon, WEquipo, WEpp, WItem, WClave, WArticulo, WPTerminado, WLetra, XDescripcion, WCantidad, WPeso, WTipo, WDesEpp, WImprePeso, WLibera, WLimpieza, WMetodo, WHumedad, WImpreHumedad)
+            ZSql = _GenerarConsultaCargaIII(WRenglon, WEquipo, WEpp, ZZItem, WClave, WArticulo, WPTerminado, WLetra, XDescripcion, WCantidad, WPeso, WTipo, WDesEpp, WImprePeso, WLibera, WLimpieza, WMetodo, WHumedad, WImpreHumedad, WItem)
 
             WConsultas.Add(ZSql)
 
@@ -1064,7 +1076,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
         ZSql = ZSql & " ImprimePLanillaII = " & "'" & Str$(WImprePlanillaII) & "',"
         ZSql = ZSql & " ImprimePLanillaIII = " & "'" & Str$(WImprePlanillaIII) & "',"
         ZSql = ZSql & " ControlCambio = " & "'" & WControlCambio & "',"
-        ZSql = ZSql & " TipoProceso = " & "'" & WTipoProceso & "'"
+        ZSql = ZSql & " TipoProceso = " & "'" & ZTipoProceso & "'"
         ZSql = ZSql & " Where Terminado = " & "'" & txtTerminado.Text & "'"
 
         WConsultas.Add(ZSql)
@@ -1094,7 +1106,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
     End Function
 
-    Private Function _GenerarConsultaCargaIII(ByVal WRenglon As Integer, ByVal WEquipo As String, ByVal WEpp As String, ByVal WItem As Integer, ByVal WClave As String, ByVal WArticulo As String, ByVal WPTerminado As String, ByVal WLetra As String, ByVal XDescripcion As String, ByVal WCantidad As String, ByVal WPeso As String, ByVal WTipo As String, ByVal WDesEpp As String, ByVal WImprePeso As String, ByVal WLibera As String, ByVal WLimpieza As String, ByVal WMetodo As String, ByVal WHumedad As String, ByVal WImpreHumedad As String) As String
+    Private Function _GenerarConsultaCargaIII(ByVal WRenglon As Integer, ByVal WEquipo As String, ByVal WEpp As String, ByVal WItem As String, ByVal WClave As String, ByVal WArticulo As String, ByVal WPTerminado As String, ByVal WLetra As String, ByVal XDescripcion As String, ByVal WCantidad As String, ByVal WPeso As String, ByVal WTipo As String, ByVal WDesEpp As String, ByVal WImprePeso As String, ByVal WLibera As String, ByVal WLimpieza As String, ByVal WMetodo As String, ByVal WHumedad As String, ByVal WImpreHumedad As String, ByVal Item As Integer) As String
         Dim ZSql As String
 
         ZSql = ""
@@ -1137,7 +1149,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
         ZSql = ZSql & "'" & WItem & "',"
         ZSql = ZSql & "'" & WEpp & "',"
         ZSql = ZSql & "'" & _Left(WDesEpp, 50) & "',"
-        ZSql = ZSql & "'" & Str$(WItem) & "',"
+        ZSql = ZSql & "'" & Trim(Str$(Item)) & "',"
         ZSql = ZSql & "'" & WImprePeso & "',"
         ZSql = ZSql & "'" & WLibera & "',"
         ZSql = ZSql & "'" & WLimpieza & "',"
@@ -1677,14 +1689,14 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
         Dim WSqls As New List(Of String)
 
-        WSqls.Add(String.Format("UPDATE CargaV SET Partida = '0', ImprePaso = Paso, CantidadPartida = '' WHERE Terminado = '{0}' And Paso = '{1}'", txtTerminado.Text, txtEtapa.Text))
+        WSqls.Add(String.Format("UPDATE CargaV SET Partida = '0', ImprePaso = Paso, CantidadPartida = '' WHERE Terminado = '{0}'", txtTerminado.Text))
 
         For Each row As Datarow In WCargaV.rows
             Dim WObservacion1 As String = ""
 
             With row
 
-                WObservacion1 = _GenerarImpreParametro(.Item("TipoEspecif"), .Item("DesdeEspecif"), .Item("HastaEspecif"), .Item("UnidadEspecif"), .Item("MenorIgualEspecif"))
+                WObservacion1 = _GenerarImpreParametro(OrDefault(.Item("TipoEspecif"), ""), OrDefault(.Item("DesdeEspecif"), ""), OrDefault(.Item("HastaEspecif"), ""), OrDefault(.Item("UnidadEspecif"), ""), OrDefault(.Item("MenorIgualEspecif"), ""))
 
                 WSqls.Add(String.Format("UPDATE CargaV SET Observacion1 = '{1}' WHERE Clave = '{0}'", .Item("Clave"), _Left(WObservacion1.Trim, 100)))
 
@@ -1696,13 +1708,18 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
         With New VistaPrevia
             .Reporte = New ImpreEspecificacionesPT
-            .Formula = "{CargaV.Terminado}='" & txtTerminado.Text & "' And {CargaV.Paso}=" & txtEtapa.Text & ""
+            .Formula = "{CargaV.Terminado}='" & txtTerminado.Text & "' And {CargaV.Paso} <> 99"
+            '.Formula = "{CargaV.Terminado}='" & txtTerminado.Text & "' And {CargaV.Paso}=" & txtEtapa.Text & ""
             .Mostrar()
         End With
 
+        Dim WEspecIngles As DataRow = GetSingle("SELECT Clave FROM CargaVIngles WHERE Terminado = '" & txtTerminado.Text & "' And Paso <> 99")
+
+        If WEspecIngles Is Nothing Then Exit Sub
+
         With New VistaPrevia
             .Reporte = New ImpreEspecificacionesPTIngles
-            .Formula = "{CargaV.Terminado}='" & txtTerminado.Text & "' And {CargaV.Paso}=" & txtEtapa.Text & ""
+            .Formula = "{CargaV.Terminado}='" & txtTerminado.Text & "' And {CargaV.Paso} <> 99"
             .Mostrar()
         End With
 

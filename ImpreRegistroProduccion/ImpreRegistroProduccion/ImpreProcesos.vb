@@ -4,6 +4,8 @@ Imports CrystalDecisions.CrystalReports.Engine
 
 Public Class ImpreProcesos
 
+    Dim WTipoVencimiento As Integer = 0
+
     Private Sub ImpreRegistroProduccion_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         Try
@@ -12,12 +14,12 @@ Public Class ImpreProcesos
                 Dim WProceso As Integer = Environment.GetCommandLineArgs(1)
 
                 Select Case WProceso
-                    Case 1 ' REGISTRO DE PRODUCCIÓN.
+                    Case 1, 4 ' REGISTRO DE PRODUCCIÓN.
 
                         Dim WTerminado As String = Environment.GetCommandLineArgs(2)
                         Dim WPartida As Integer = Environment.GetCommandLineArgs(3)
 
-                        _GenerarRegistroProduccion(WTerminado, WPartida)
+                        _GenerarRegistroProduccion(WTerminado, WPartida, WProceso = 4)
 
                     Case 2 ' CERTIFICADO DE CALIDAD.
 
@@ -63,9 +65,9 @@ Public Class ImpreProcesos
 
             End If
 
-            'Dim WTipoReporte2 As Integer = 1
-            'Dim WPartida2 As Integer = 309551
-            'Dim WTerminado2 As String = "PT-25047-101"
+            'Dim WTipoReporte2 As Integer = 4
+            'Dim WPartida2 As Integer = 0
+            'Dim WTerminado2 As String = "PT-25062-780"
             'Dim WTipoSalida2 As Integer = 2
 
             '_GenerarCertificadoAnalisisFarma(WTipoReporte2, WPartida2, WTipoSalida2)
@@ -77,7 +79,7 @@ Public Class ImpreProcesos
             'Dim WTerminado2 As String = "PT-25061-204"
             'Dim WPartida2 As Integer = "309206"
 
-            '_GenerarRegistroProduccion(WTerminado2, WPartida2)
+            '_GenerarRegistroProduccion(WTerminado2, WPartida2, True)
 
             'Dim WImpreFechaVto2 = "", WFechaElabora2 = "", WImpreFechaElaboracion2 = "", WFechaVto2 = ""
 
@@ -93,7 +95,7 @@ Public Class ImpreProcesos
         End Try
 
     End Sub
-    
+
     Private Sub _GenerarReporteResultadosCalidad(ByVal wPartida As Integer, ByVal wTipoSalida As Integer, ByVal wFechaVto As String, ByVal wImpreFechaVto As String, ByVal wFechaElabora As String, ByVal wImpreFechaElaboracion As String)
 
         With New VistaPrevia
@@ -133,7 +135,7 @@ Public Class ImpreProcesos
         ' Determinamos el Reporte a imprimir y los datos de las formulas a pasar como parámetro.
         '
 
-        Select Case wTipoReporte
+        Select Case WTipoReporte
             Case 1
 
                 frm = New certificadonuevofarma
@@ -211,9 +213,9 @@ Public Class ImpreProcesos
 
     End Sub
 
-    Private Sub _GenerarRegistroProduccion(ByVal WTerminado As String, ByVal WPartida As Integer)
+    Private Sub _GenerarRegistroProduccion(ByVal WTerminado As String, ByVal WPartida As Integer, Optional ByVal RegistroMaestro As Boolean = False)
 
-        _ProcesarInformacionParaRegistroProduccion(WTerminado, WPartida)
+        _ProcesarInformacionParaRegistroProduccion(WTerminado, WPartida, RegistroMaestro)
 
         Dim WEscrito = 0
 
@@ -242,7 +244,33 @@ Public Class ImpreProcesos
 
         If Not IsNothing(WHumedad) Then WMostrarHumedad = 1
 
-        Dim rpt As New ImpreFarmaII
+        Dim WBuscaMonoII As DataRow = GetSingle("SELECT Codigo, Tipo FROM CodigoMono WHERE Codigo = '" & WTerminado & "'")
+
+        Dim WPasaMono As Integer = 0
+
+        If Not IsNothing(WBuscaMonoII) Then WPasaMono = IIf(OrDefault(WBuscaMonoII.Item("Tipo"), 0) = 0, 1, 2)
+
+        Dim WImpreVto As String = "FECHA DE REANÁLISIS:"
+
+        If WPasaMono > 0 Or _EsFazon(WTerminado) Then
+
+            If Val(WTipoVencimiento) = 1 Then
+                WImpreVto = "FECHA DE REANÁLISIS:"
+            Else
+                WImpreVto = "FECHA DE VENCIMIENTO:"
+            End If
+
+        End If
+
+        Dim rpt As New ReportDocument
+
+        If RegistroMaestro Then
+            rpt = New ImpreFarmaIIRegMaestro
+        Else
+            rpt = New ImpreFarmaII
+        End If
+
+        rpt.SetParameterValue("ImpreVto", WImpreVto)
 
         rpt.SetParameterValue("MostrarHumedad", WMostrarHumedad)
         rpt.SetParameterValue("ImprimePlanillaII", WImprePlanillaII.ToString)
@@ -262,7 +290,13 @@ Public Class ImpreProcesos
         '
 
         If WImprePlanilla <> 0 Or WImprePlanillaIII <> 0 Then
-            Dim rptAnexos As New ImpreAnexos
+            Dim rptAnexos As ReportDocument
+
+            If RegistroMaestro Then
+                rptAnexos = New ImpreAnexosRegistroMaestro
+            Else
+                rptAnexos = New ImpreAnexos
+            End If
 
             rptAnexos.SetParameterValue("ImprePlanilla", WImprePlanilla)
             rptAnexos.SetParameterValue("ImprePlanillaIII", WImprePlanillaIII)
@@ -279,7 +313,7 @@ Public Class ImpreProcesos
         If Val(WTerminado.Substring(3, 5)) = 3000 Then
 
             With New VistaPrevia
-                .Reporte = New impremermadescartesterceros
+                .Reporte = IIf(RegistroMaestro, New impremermadescartestercerosRegistroMaestro, New impremermadescartesterceros)
                 .Formula = "{Hoja.Hoja} = " & WPartida & " And {Hoja.Producto} = {Terminado.Codigo} " '= '" & WTerminado & "'" ' And {CargaIII.Partida} = {Hoja.Hoja}"
                 '.Mostrar()
                 .Imprimir()
@@ -289,8 +323,18 @@ Public Class ImpreProcesos
 
     End Sub
 
-    Private Sub _ProcesarInformacionParaRegistroProduccion(ByVal wTerminado As String, ByVal wPartida As Integer)
+    Private Function _EsFazon(ByVal Terminado As String) As Boolean
 
+        Dim WTer As String
+
+        WTer = Mid(Terminado, 4, 5)
+
+        Return Val(WTer) > 2999 And Val(WTer) < 4000
+
+    End Function
+
+    Private Sub _ProcesarInformacionParaRegistroProduccion(ByVal wTerminado As String, ByVal wPartida As Integer, Optional ByVal RegistroMaestro As Boolean = False)
+        WTipoVencimiento = 0
         '
         ' Buscamos informacion del Terminado y Hoja.
         '
@@ -609,11 +653,11 @@ Public Class ImpreProcesos
                     WImpreVto = XMes + "/" + XAno
 
                 Else
-                    Throw New Exception("No se encontró Hoja '" & ZZMezclaPartida & "', informada como componente de mezcla.")
+                    If Not RegistroMaestro Then Throw New Exception("No se encontró Hoja '" & ZZMezclaPartida & "', informada como componente de mezcla.")
                 End If
 
             Else
-                Throw New Exception("Es una Hoja de producción de mezcla y no se informaron las partidas a utilizar, por lo que no se puede imprimir la fecha de reanálisis")
+                If Not RegistroMaestro Then Throw New Exception("Es una Hoja de producción de mezcla y no se informaron las partidas a utilizar, por lo que no se puede imprimir la fecha de reanálisis")
             End If
 
         End If
@@ -646,17 +690,18 @@ Public Class ImpreProcesos
                 End With
             Next
 
-            If WLoteMP = 0 Then Throw New Exception("Es una hoja de producción de monoproducto y no se informaron las partidas a utilizar, por lo que no se puede imprimir la fecha de reanálisis")
+            If WLoteMP = 0 And Not RegistroMaestro Then Throw New Exception("Es una hoja de producción de monoproducto y no se informaron las partidas a utilizar, por lo que no se puede imprimir la fecha de reanálisis")
 
             If WLoteMP <> 999999 Then
 
                 For Each emp As String In {"SurfactanSa", "Surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII"}
 
-                    Dim WLaudo As DataRow = GetSingle("SELECT FechaVencimiento FROM Laudo WHERE Laudo = '" & WLoteMP & "' And Articulo = '" & WArtMp & "'", emp)
+                    Dim WLaudo As DataRow = GetSingle("SELECT FechaVencimiento, TipoVencimiento FROM Laudo WHERE Laudo = '" & WLoteMP & "' And Articulo = '" & WArtMp & "'", emp)
 
                     If Not IsNothing(WLaudo) Then
 
                         Dim WFechaVto As String = OrDefault(WLaudo.Item("FechaVencimiento"), "")
+                        WTipoVencimiento = Val(OrDefault(WLaudo.Item("TipoVencimiento"), ""))
 
                         If WFechaVto = "" Then Continue For
 

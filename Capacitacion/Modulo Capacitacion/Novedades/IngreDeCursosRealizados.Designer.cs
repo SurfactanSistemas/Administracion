@@ -31,18 +31,20 @@ namespace Modulo_Capacitacion.Novedades
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.LBPerfil = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -56,12 +58,16 @@ namespace Modulo_Capacitacion.Novedades
             this.label4 = new System.Windows.Forms.Label();
             this.pnlAviso = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.btnImprimirAvisoCursos = new System.Windows.Forms.Button();
             this.btnEnviarEmailAviso = new System.Windows.Forms.Button();
             this.btnMostrarAviso = new System.Windows.Forms.Button();
             this.btnCerrarAviso = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Tema = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DescripcionTema = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Marcar = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtAnoConsulta = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.cmbMes = new System.Windows.Forms.ComboBox();
@@ -91,6 +97,7 @@ namespace Modulo_Capacitacion.Novedades
             this.btnImprimirAviso = new System.Windows.Forms.Button();
             this.BT_Salir = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -99,6 +106,7 @@ namespace Modulo_Capacitacion.Novedades
             this.pnlAviso.SuspendLayout();
             this.panel5.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Cronograma)).BeginInit();
             this.SuspendLayout();
             // 
@@ -151,7 +159,7 @@ namespace Modulo_Capacitacion.Novedades
             // pnlTipoListado
             // 
             this.pnlTipoListado.Controls.Add(this.groupBox2);
-            this.pnlTipoListado.Location = new System.Drawing.Point(62, 215);
+            this.pnlTipoListado.Location = new System.Drawing.Point(69, 215);
             this.pnlTipoListado.Name = "pnlTipoListado";
             this.pnlTipoListado.Size = new System.Drawing.Size(666, 111);
             this.pnlTipoListado.TabIndex = 38;
@@ -232,109 +240,176 @@ namespace Modulo_Capacitacion.Novedades
             this.pnlAviso.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(139)))), ((int)(((byte)(82)))));
             this.pnlAviso.Controls.Add(this.panel5);
             this.pnlAviso.Controls.Add(this.groupBox1);
-            this.pnlAviso.Location = new System.Drawing.Point(247, 192);
+            this.pnlAviso.Location = new System.Drawing.Point(163, 147);
             this.pnlAviso.Name = "pnlAviso";
-            this.pnlAviso.Size = new System.Drawing.Size(296, 157);
+            this.pnlAviso.Size = new System.Drawing.Size(464, 246);
             this.pnlAviso.TabIndex = 37;
             this.pnlAviso.Visible = false;
             // 
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.SystemColors.Control;
+            this.panel5.Controls.Add(this.checkBox1);
             this.panel5.Controls.Add(this.btnImprimirAvisoCursos);
             this.panel5.Controls.Add(this.btnEnviarEmailAviso);
             this.panel5.Controls.Add(this.btnMostrarAviso);
             this.panel5.Controls.Add(this.btnCerrarAviso);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel5.Location = new System.Drawing.Point(0, 98);
+            this.panel5.Location = new System.Drawing.Point(0, 205);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(296, 59);
+            this.panel5.Size = new System.Drawing.Size(464, 41);
             this.panel5.TabIndex = 1;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(343, 0);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(111, 17);
+            this.checkBox1.TabIndex = 38;
+            this.checkBox1.Text = "Excluir Tema = 99";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.Visible = false;
             // 
             // btnImprimirAvisoCursos
             // 
+            this.btnImprimirAvisoCursos.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnImprimirAvisoCursos.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.imprimir;
             this.btnImprimirAvisoCursos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnImprimirAvisoCursos.FlatAppearance.BorderSize = 0;
             this.btnImprimirAvisoCursos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnImprimirAvisoCursos.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnImprimirAvisoCursos.Location = new System.Drawing.Point(162, 9);
+            this.btnImprimirAvisoCursos.Location = new System.Drawing.Point(245, 5);
             this.btnImprimirAvisoCursos.Name = "btnImprimirAvisoCursos";
-            this.btnImprimirAvisoCursos.Size = new System.Drawing.Size(40, 40);
+            this.btnImprimirAvisoCursos.Size = new System.Drawing.Size(38, 29);
             this.btnImprimirAvisoCursos.TabIndex = 27;
             this.btnImprimirAvisoCursos.UseVisualStyleBackColor = true;
             this.btnImprimirAvisoCursos.Click += new System.EventHandler(this.btnImprimirAvisoCursos_Click);
             // 
             // btnEnviarEmailAviso
             // 
+            this.btnEnviarEmailAviso.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnEnviarEmailAviso.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.Enviar_Email;
             this.btnEnviarEmailAviso.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnEnviarEmailAviso.FlatAppearance.BorderSize = 0;
             this.btnEnviarEmailAviso.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEnviarEmailAviso.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnEnviarEmailAviso.Location = new System.Drawing.Point(26, 9);
+            this.btnEnviarEmailAviso.Location = new System.Drawing.Point(141, 5);
             this.btnEnviarEmailAviso.Name = "btnEnviarEmailAviso";
-            this.btnEnviarEmailAviso.Size = new System.Drawing.Size(40, 40);
+            this.btnEnviarEmailAviso.Size = new System.Drawing.Size(38, 29);
             this.btnEnviarEmailAviso.TabIndex = 27;
             this.btnEnviarEmailAviso.UseVisualStyleBackColor = true;
             this.btnEnviarEmailAviso.Click += new System.EventHandler(this.btnEnviarEmailAviso_Click);
             // 
             // btnMostrarAviso
             // 
+            this.btnMostrarAviso.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnMostrarAviso.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.Screen_preview;
             this.btnMostrarAviso.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnMostrarAviso.FlatAppearance.BorderSize = 0;
             this.btnMostrarAviso.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMostrarAviso.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnMostrarAviso.Location = new System.Drawing.Point(94, 9);
+            this.btnMostrarAviso.Location = new System.Drawing.Point(193, 5);
             this.btnMostrarAviso.Name = "btnMostrarAviso";
-            this.btnMostrarAviso.Size = new System.Drawing.Size(40, 40);
+            this.btnMostrarAviso.Size = new System.Drawing.Size(38, 29);
             this.btnMostrarAviso.TabIndex = 27;
             this.btnMostrarAviso.UseVisualStyleBackColor = true;
             this.btnMostrarAviso.Click += new System.EventHandler(this.btnMostrarAviso_Click);
             // 
             // btnCerrarAviso
             // 
+            this.btnCerrarAviso.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnCerrarAviso.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.apagar1;
             this.btnCerrarAviso.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnCerrarAviso.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCerrarAviso.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnCerrarAviso.Location = new System.Drawing.Point(230, 9);
+            this.btnCerrarAviso.Location = new System.Drawing.Point(297, 5);
             this.btnCerrarAviso.Name = "btnCerrarAviso";
-            this.btnCerrarAviso.Size = new System.Drawing.Size(40, 40);
+            this.btnCerrarAviso.Size = new System.Drawing.Size(38, 29);
             this.btnCerrarAviso.TabIndex = 27;
             this.btnCerrarAviso.UseVisualStyleBackColor = true;
             this.btnCerrarAviso.Click += new System.EventHandler(this.btnCerrarAviso_Click);
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.checkBox1);
+            this.groupBox1.Controls.Add(this.button3);
+            this.groupBox1.Controls.Add(this.dataGridView1);
             this.groupBox1.Controls.Add(this.txtAnoConsulta);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.cmbMes);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.ForeColor = System.Drawing.SystemColors.Control;
-            this.groupBox1.Location = new System.Drawing.Point(18, 10);
+            this.groupBox1.Location = new System.Drawing.Point(5, 1);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(260, 81);
+            this.groupBox1.Size = new System.Drawing.Size(455, 202);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Generar Aviso de Cursos por Sector y Mes.";
             // 
-            // checkBox1
+            // dataGridView1
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(75, 58);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(111, 17);
-            this.checkBox1.TabIndex = 38;
-            this.checkBox1.Text = "Excluir Tema = 99";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToOrderColumns = true;
+            this.dataGridView1.AllowUserToResizeColumns = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Tema,
+            this.DescripcionTema,
+            this.Marcar});
+            this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.dataGridView1.Location = new System.Drawing.Point(3, 41);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.RowHeadersWidth = 15;
+            this.dataGridView1.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.dataGridView1.RowTemplate.Height = 18;
+            this.dataGridView1.ShowCellErrors = false;
+            this.dataGridView1.ShowCellToolTips = false;
+            this.dataGridView1.ShowEditingIcon = false;
+            this.dataGridView1.ShowRowErrors = false;
+            this.dataGridView1.Size = new System.Drawing.Size(450, 157);
+            this.dataGridView1.TabIndex = 38;
+            this.dataGridView1.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseClick);
+            // 
+            // Tema
+            // 
+            this.Tema.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Tema.DataPropertyName = "Tema";
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Tema.DefaultCellStyle = dataGridViewCellStyle15;
+            this.Tema.HeaderText = "Tema";
+            this.Tema.Name = "Tema";
+            this.Tema.ReadOnly = true;
+            this.Tema.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Tema.Width = 40;
+            // 
+            // DescripcionTema
+            // 
+            this.DescripcionTema.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.DescripcionTema.DataPropertyName = "DescripcionTema";
+            this.DescripcionTema.HeaderText = "Descripción";
+            this.DescripcionTema.Name = "DescripcionTema";
+            this.DescripcionTema.ReadOnly = true;
+            this.DescripcionTema.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Marcar
+            // 
+            this.Marcar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Marcar.DataPropertyName = "Marcar";
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Marcar.DefaultCellStyle = dataGridViewCellStyle16;
+            this.Marcar.HeaderText = "Marcar";
+            this.Marcar.Name = "Marcar";
+            this.Marcar.ReadOnly = true;
+            this.Marcar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Marcar.Width = 46;
             // 
             // txtAnoConsulta
             // 
             this.txtAnoConsulta.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAnoConsulta.Location = new System.Drawing.Point(200, 22);
+            this.txtAnoConsulta.Location = new System.Drawing.Point(395, 14);
             this.txtAnoConsulta.Name = "txtAnoConsulta";
             this.txtAnoConsulta.Size = new System.Drawing.Size(54, 20);
             this.txtAnoConsulta.TabIndex = 37;
@@ -344,7 +419,7 @@ namespace Modulo_Capacitacion.Novedades
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(166, 23);
+            this.label3.Location = new System.Drawing.Point(348, 15);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(37, 18);
             this.label3.TabIndex = 36;
@@ -368,17 +443,18 @@ namespace Modulo_Capacitacion.Novedades
             "Octubre",
             "Noviembre",
             "Diciembre"});
-            this.cmbMes.Location = new System.Drawing.Point(49, 22);
+            this.cmbMes.Location = new System.Drawing.Point(227, 14);
             this.cmbMes.Name = "cmbMes";
             this.cmbMes.Size = new System.Drawing.Size(111, 21);
             this.cmbMes.TabIndex = 2;
             this.cmbMes.SelectedIndexChanged += new System.EventHandler(this.cmbMes_SelectedIndexChanged);
+            this.cmbMes.DropDownClosed += new System.EventHandler(this.cmbMes_DropDownClosed);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(6, 24);
+            this.label2.Location = new System.Drawing.Point(179, 16);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(38, 17);
             this.label2.TabIndex = 1;
@@ -467,8 +543,8 @@ namespace Modulo_Capacitacion.Novedades
             // Mes1
             // 
             this.Mes1.DataPropertyName = "Mes1";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Mes1.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Mes1.DefaultCellStyle = dataGridViewCellStyle17;
             this.Mes1.HeaderText = "Jun";
             this.Mes1.Name = "Mes1";
             this.Mes1.Width = 30;
@@ -476,8 +552,8 @@ namespace Modulo_Capacitacion.Novedades
             // Mes2
             // 
             this.Mes2.DataPropertyName = "Mes2";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Mes2.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Mes2.DefaultCellStyle = dataGridViewCellStyle18;
             this.Mes2.HeaderText = "Jul";
             this.Mes2.Name = "Mes2";
             this.Mes2.Width = 30;
@@ -485,8 +561,8 @@ namespace Modulo_Capacitacion.Novedades
             // Mes3
             // 
             this.Mes3.DataPropertyName = "Mes3";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Mes3.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Mes3.DefaultCellStyle = dataGridViewCellStyle19;
             this.Mes3.HeaderText = "Ago";
             this.Mes3.Name = "Mes3";
             this.Mes3.Width = 30;
@@ -494,8 +570,8 @@ namespace Modulo_Capacitacion.Novedades
             // Mes4
             // 
             this.Mes4.DataPropertyName = "Mes4";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Mes4.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Mes4.DefaultCellStyle = dataGridViewCellStyle20;
             this.Mes4.HeaderText = "Sep";
             this.Mes4.Name = "Mes4";
             this.Mes4.Width = 30;
@@ -503,8 +579,8 @@ namespace Modulo_Capacitacion.Novedades
             // Mes5
             // 
             this.Mes5.DataPropertyName = "Mes5";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Mes5.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Mes5.DefaultCellStyle = dataGridViewCellStyle21;
             this.Mes5.HeaderText = "Oct";
             this.Mes5.Name = "Mes5";
             this.Mes5.Width = 30;
@@ -512,8 +588,8 @@ namespace Modulo_Capacitacion.Novedades
             // Mes6
             // 
             this.Mes6.DataPropertyName = "Mes6";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Mes6.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Mes6.DefaultCellStyle = dataGridViewCellStyle22;
             this.Mes6.HeaderText = "Nov";
             this.Mes6.Name = "Mes6";
             this.Mes6.Width = 30;
@@ -521,8 +597,8 @@ namespace Modulo_Capacitacion.Novedades
             // Mes7
             // 
             this.Mes7.DataPropertyName = "Mes7";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Mes7.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Mes7.DefaultCellStyle = dataGridViewCellStyle23;
             this.Mes7.HeaderText = "Dic";
             this.Mes7.Name = "Mes7";
             this.Mes7.Width = 30;
@@ -530,8 +606,8 @@ namespace Modulo_Capacitacion.Novedades
             // Mes8
             // 
             this.Mes8.DataPropertyName = "Mes8";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Mes8.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Mes8.DefaultCellStyle = dataGridViewCellStyle24;
             this.Mes8.HeaderText = "Ene";
             this.Mes8.Name = "Mes8";
             this.Mes8.Width = 30;
@@ -539,8 +615,8 @@ namespace Modulo_Capacitacion.Novedades
             // Mes9
             // 
             this.Mes9.DataPropertyName = "Mes9";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Mes9.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Mes9.DefaultCellStyle = dataGridViewCellStyle25;
             this.Mes9.HeaderText = "Feb";
             this.Mes9.Name = "Mes9";
             this.Mes9.Width = 30;
@@ -548,8 +624,8 @@ namespace Modulo_Capacitacion.Novedades
             // Mes10
             // 
             this.Mes10.DataPropertyName = "Mes10";
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Mes10.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Mes10.DefaultCellStyle = dataGridViewCellStyle26;
             this.Mes10.HeaderText = "Mar";
             this.Mes10.Name = "Mes10";
             this.Mes10.Width = 30;
@@ -557,8 +633,8 @@ namespace Modulo_Capacitacion.Novedades
             // Mes11
             // 
             this.Mes11.DataPropertyName = "Mes11";
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Mes11.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Mes11.DefaultCellStyle = dataGridViewCellStyle27;
             this.Mes11.HeaderText = "Abr";
             this.Mes11.Name = "Mes11";
             this.Mes11.Width = 30;
@@ -566,8 +642,8 @@ namespace Modulo_Capacitacion.Novedades
             // Mes12
             // 
             this.Mes12.DataPropertyName = "Mes12";
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Mes12.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Mes12.DefaultCellStyle = dataGridViewCellStyle28;
             this.Mes12.HeaderText = "May";
             this.Mes12.Name = "Mes12";
             this.Mes12.Width = 30;
@@ -644,6 +720,17 @@ namespace Modulo_Capacitacion.Novedades
             this.label1.TabIndex = 6;
             this.label1.Text = "Año:";
             // 
+            // button3
+            // 
+            this.button3.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.button3.Location = new System.Drawing.Point(39, 17);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(108, 20);
+            this.button3.TabIndex = 39;
+            this.button3.Text = "MARCAR TODOS";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // IngreDeCursosRealizados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -664,8 +751,10 @@ namespace Modulo_Capacitacion.Novedades
             this.groupBox2.PerformLayout();
             this.pnlAviso.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Cronograma)).EndInit();
             this.ResumeLayout(false);
 
@@ -721,5 +810,10 @@ namespace Modulo_Capacitacion.Novedades
         private Button button1;
         private Label label5;
         private Label lblIdRow;
+        private DataGridView dataGridView1;
+        private DataGridViewTextBoxColumn Tema;
+        private DataGridViewTextBoxColumn DescripcionTema;
+        private DataGridViewTextBoxColumn Marcar;
+        private Button button3;
     }
 }

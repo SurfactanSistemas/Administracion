@@ -23,6 +23,19 @@ Public Class DBDataGridView : Inherits DataGridView
         End Set
     End Property
 
+    Private _ConOrdenamiento As Boolean = True
+
+    Public Property OrdenamientoColumnasHabilitado() As Boolean
+        Get
+            Return _ConOrdenamiento
+        End Get
+        Set(ByVal value As Boolean)
+            _ConOrdenamiento = value
+            InhabilitarOrdenamientoColumnas()
+        End Set
+    End Property
+
+
     Sub New()
         MyBase.DoubleBuffered = True
         MyBase.RowHeadersWidth = 15
@@ -39,7 +52,7 @@ Public Class DBDataGridView : Inherits DataGridView
 
     Public Sub InhabilitarOrdenamientoColumnas()
         For Each column As DataGridViewColumn In Columns
-            column.SortMode = DataGridViewColumnSortMode.NotSortable
+            column.SortMode = IIf(Not _ConOrdenamiento, DataGridViewColumnSortMode.NotSortable, DataGridViewColumnSortMode.Automatic)
         Next
     End Sub
 

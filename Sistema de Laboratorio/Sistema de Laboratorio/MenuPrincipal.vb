@@ -40,14 +40,25 @@
     End Sub
 
     Private Sub ListadoDeEnsayosEnMPToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ListadoDeEnsayosEnMPToolStripMenuItem.Click
-
         Dim frm = New ProcesarListadoEnsayosEnMateriaPrima()
-        frm.Show()
-
+        frm.Show(Me)
     End Sub
 
     Private Sub ListadoDeEspecificacionesDeMPAFechaToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ListadoDeEspecificacionesDeMPAFechaToolStripMenuItem.Click
         Dim frm = New ListadoEspecificacionesMPAFecha
         frm.Show(Me)
     End Sub
+
+    Private Sub EspecificacionesPorVersiónToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EspecificacionesPorVersiónToolStripMenuItem.Click
+        With New EspecificacionesMPPorVersion
+            .Show(Me)
+        End With
+    End Sub
+
+    Private Sub EmisiónDeEtiquetasSimplesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EmisiónDeEtiquetasSimplesToolStripMenuItem.Click
+        With New EmisionEtiquetasSimples
+            .Show(Me)
+        End With
+    End Sub
+
 End Class

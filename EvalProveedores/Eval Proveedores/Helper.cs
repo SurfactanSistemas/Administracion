@@ -438,6 +438,7 @@ namespace Eval_Proveedores
                 }
                 case "2":
                 case "3":
+                case "4":
                 {
                     return string.Format("ISNULL(a.ClasificacionFarma,0) = ${0} And a.ReqEvalEspecial = '1'", wTipoMp);
                 }

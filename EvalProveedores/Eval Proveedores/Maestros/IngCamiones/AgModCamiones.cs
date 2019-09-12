@@ -15,7 +15,7 @@ using Negocio;
 
 namespace Eval_Proveedores.IngCamiones
 {
-    public partial class AgModCamiones : Form, IAyudaProveedores, IAyudaChoferes
+    public partial class AgModCamiones : Form, IAyudaProveedores, IAyudaChoferes, IAyudaOperadores
     {
         Camion Ca = new Camion();
         Chofer C = new Chofer();
@@ -168,6 +168,8 @@ namespace Eval_Proveedores.IngCamiones
                             this.Coment4 = dr["ComentarioIV"] == null ? "" : dr["ComentarioIV"].ToString();
                             this.Coment5 = dr["ComentarioV"] == null ? "" : dr["ComentarioV"].ToString();
                             this.Titulo = dr["Titulo"] == null ? "" : dr["Titulo"].ToString();
+                            txtResponsable.Text = Helper.OrDefault(dr["ResponsableActualizacion"], "").ToString();
+                            txtUltimaActualizacion.Text = Helper.OrDefault(dr["FechaActualizacion"], "").ToString();
                         }
                     }
                 }
@@ -181,14 +183,14 @@ namespace Eval_Proveedores.IngCamiones
             {
                 LBCamion.Text = "MODIFICAR CAMION";
                 TB_CodCamion.Text = Codigo;
-                if (int.Parse(Estado) == 0)
-                {
-                    CB_Estado.Text = "";
-                }
-                else
+
+                CB_Estado.Text = "";
+
+                if (int.Parse(Estado) > 0)
                 {
                     CB_Estado.Text = "Inhabilitado";
                 }
+
                 TB_Descripcion.Text = Desc;
                 TB_Patente.Text = Patent;
                 TB_CodProveedor.Text = CodProveedor;
@@ -217,7 +219,7 @@ namespace Eval_Proveedores.IngCamiones
                 TB_EntCargasPelig.Text = FechaEnt5;
                 TB_ObservCargasPelig.Text = Coment5;
 
-                _CargarDatosRENPRE(Codigo);
+                _CargarDatosAdicionales(Codigo);
 
                 Modificar = true;
 
@@ -235,7 +237,7 @@ namespace Eval_Proveedores.IngCamiones
             
         }
 
-        private void _CargarDatosRENPRE(string  WCodigo)
+        private void _CargarDatosAdicionales(string  WCodigo)
         {
 
             using (SqlConnection conn = new SqlConnection())
@@ -259,6 +261,22 @@ namespace Eval_Proveedores.IngCamiones
                             txtObsRENPRE.Text = dr["ObsRENPRE"].ToString();
                         }
                     }
+
+                    cmd.CommandText = "SELECT Descripcion FROM Operador WHERE Operador = '" + txtResponsable.Text + "'";
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.HasRows)
+                        {
+                            dr.Read();
+
+                            txtDescResponsable.Text = Helper.OrDefault(dr["Descripcion"], "").ToString();
+                        }
+                        else
+                        {
+                            txtDescResponsable.Text = "";
+                        }
+                    }
                 }
 
             }
@@ -269,8 +287,8 @@ namespace Eval_Proveedores.IngCamiones
 
         private void BT_Guardar_Click(object sender, EventArgs e)
         {
-            //try
-            //{
+            try
+            {
                 if (TB_Descripcion.Text == "") throw new Exception("Se debe ingresar la descripcion del camión");
 
                 if (TB_Patente.Text == "") throw new Exception("Se debe ingresar la patente del camión");
@@ -296,7 +314,8 @@ namespace Eval_Proveedores.IngCamiones
 
                 if (TB_EntSeguro.Text == "") throw new Exception("Se debe ingresar la fecha de entrega del seguro");
 
-
+                if (txtResponsable.Text == "" || !_ResponsableValido()) throw new Exception("Se debe indicar un responsable");
+            
                 if (CB_CargasPeligrosas.Checked == true)
                 {
                     if (TB_VencCargasPelig.Text == "") throw new Exception("Se debe ingresar la fecha de vencimiento del certificado de transporte de cargas peligrosas");
@@ -388,27 +407,52 @@ namespace Eval_Proveedores.IngCamiones
                     MessageBoxButtons.OK, MessageBoxIcon.None);
                 }
 
-                _ActualizarDatosRENPRE();
+                _ActualizarDatosAdicionales();
 
                 Close();
                           
-            //   }
-            //catch (Exception err)
-            //{
+               }
+            catch (Exception err)
+            {
                 
-            //    MessageBox.Show(err.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
+                MessageBox.Show(err.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
-        private void _ActualizarDatosRENPRE()
+        private bool _ResponsableValido()
         {
-            string WCodigo = "", WVencimiento = "", WFechaEntrega = "", WVencimientoOrd = "", WFechaEntregaOrd = "", WObs = "";
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["SurfactanSa"].ConnectionString;
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandText = "SELECT Operador FROM Operador WHERE Operador = '" + txtResponsable.Text + "'";
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        return dr.HasRows;
+
+                    }
+                }
+
+            }
+        }
+
+        private void _ActualizarDatosAdicionales()
+        {
+            string WCodigo = "", WVencimiento = "", WFechaEntrega = "", WVencimientoOrd = "", WFechaEntregaOrd = "", WObs = "", WFechaActOrd = "";
+
+            txtUltimaActualizacion.Text = DateTime.Now.ToString("dd/MM/yyyy");
 
             WCodigo = TB_CodCamion.Text.Trim();
             WVencimiento = txtVencimientoRENPRE.Text;
             WVencimientoOrd = Helper.OrdenarFecha(WVencimiento);
             WFechaEntrega = txtFechaEntregaRENPRE.Text;
             WFechaEntregaOrd = Helper.OrdenarFecha(WFechaEntrega);
+            WFechaActOrd = Helper.OrdenarFecha(txtUltimaActualizacion.Text);
             WObs = Helper.Left(txtObsRENPRE.Text, 50);
 
             using (SqlConnection conn = new SqlConnection())
@@ -424,6 +468,9 @@ namespace Eval_Proveedores.IngCamiones
                                     + " VencimientoRENPRE = '" + WVencimiento + "', "
                                     + " VencimientoRENPREOrd = '" + WVencimientoOrd + "', "
                                     + " FechaEntregaRENPRE = '" + WFechaEntrega + "', "
+                                    + " ResponsableActualizacion = '" + txtResponsable.Text + "', "
+                                    + " FechaActualizacion = '" + txtUltimaActualizacion.Text + "', "
+                                    + " FechaActualizacionOrd = '" + WFechaActOrd + "', "
                                     + " FechaEntregaRENPREOrd = '" + WFechaEntregaOrd + "'"
                                     + " WHERE Codigo = '" + WCodigo + "'";
                     cmd.ExecuteNonQuery();
@@ -447,6 +494,9 @@ namespace Eval_Proveedores.IngCamiones
                 TB_NombProveedor.Text = "";
                 TB_CodChofer.Text = "";
                 TB_NombChofer.Text = "";
+                txtResponsable.Text = "";
+                txtDescResponsable.Text = "";
+                txtUltimaActualizacion.Text = "";
 
                 TB_VencRuta.Text = "";
                 TB_EntRuta.Text = "";
@@ -1069,6 +1119,56 @@ namespace Eval_Proveedores.IngCamiones
             TB_NombChofer.Text = Descripcion.Trim();
 
             TB_VencRuta.Focus();
+        }
+
+        private void txtResponsable_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                txtDescResponsable.Text = "";
+
+                using (SqlConnection conn = new SqlConnection())
+                {
+                    conn.ConnectionString = ConfigurationManager.ConnectionStrings["SurfactanSa"].ConnectionString;
+                    conn.Open();
+
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.Connection = conn;
+                        cmd.CommandText = "SELECT Descripcion FROM Operador WHERE Operador = '" + txtResponsable.Text + "'";
+
+                        using (SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.SingleResult))
+                        {
+                            if (dr.HasRows)
+                            {
+                                dr.Read();
+                                txtDescResponsable.Text = Helper.OrDefault(dr["Descripcion"], "").ToString();
+                            }
+                        }
+                    }
+
+                }
+        
+
+            }
+            else if (e.KeyData == Keys.Escape)
+            {
+                txtResponsable.Text = "";
+                txtDescResponsable.Text = "";
+            }
+	        
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Ayudas.AyudaOperadores frm = new Ayudas.AyudaOperadores();
+            frm.Show(this);
+        }
+
+        public void ProcesarAyudaOperadores(string Operador, string Descripcion)
+        {
+            txtResponsable.Text = Operador;
+            txtResponsable_KeyDown(null, new KeyEventArgs(Keys.Enter));
         }
     }
 }

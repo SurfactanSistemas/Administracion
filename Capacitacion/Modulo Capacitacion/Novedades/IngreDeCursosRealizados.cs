@@ -17,13 +17,12 @@ namespace Modulo_Capacitacion.Novedades
         Cronograma Cr = new Cronograma();
         CronogramaII Cr2 = new CronogramaII();
         bool Modificar = true;
-        List<CronogramaII> CronogramasII;
-        private string WDirecciones = "";
+        List<CronogramaII> CronogramasII = new List<CronogramaII>();
+        private string WDirecciones;
 
         public IngreDeCursosRealizados()
         {
             InitializeComponent();
-            CronogramasII = new List<CronogramaII>();
             WDirecciones = "";
         }
 
@@ -228,8 +227,9 @@ namespace Modulo_Capacitacion.Novedades
         private void btnImprimirAviso_Click(object sender, EventArgs e)
         {
             pnlAviso.Visible = true;
-            checkBox1.Checked = true;
+            checkBox1.Checked = false;
             cmbMes.SelectedIndex = DateTime.Now.Month;
+            ObtenerTemasPorMes();
             txtAnoConsulta.Text = TB_Año.Text.Trim().Length < 4 ? DateTime.Now.ToString("yyyy") : TB_Año.Text;
             cmbMes.Focus();
         }
@@ -272,29 +272,17 @@ namespace Modulo_Capacitacion.Novedades
                 WAno -= 1;
             }
 
-            string auxi = TB_Año.Text;
-
-            if (txtAnoConsulta.Text.Trim() != TB_Año.Text)
-            {
-                auxi = TB_Año.Text;
-
-                TB_Año.Text = WAno.ToString();
-                TB_Año_KeyDown(null, new KeyEventArgs(Keys.Enter));
-            }
-
-            // Extraigo de la grilla, aquellos cursos que tienen informado que se realizan.
-
             WDirecciones = "";
             List<string> XDirecciones = new List<string>();
 
-            foreach (DataGridViewRow row in DGV_Cronograma.Rows)
+            foreach (DataGridViewRow row in dataGridView1.Rows)
             {
-                if (row.Cells["Mes" + WColumna].Value.ToString().ToUpper() == "X")
+                if (row.Cells["Marcar"].Value.ToString().ToUpper() == "X")
                 {
-                    if (row.Cells["Curso"].Value.ToString() != "")
+                    if (row.Cells["Tema"].Value.ToString() != "")
                     {
                         WRenglon++;
-                        WCursos[WRenglon] = short.Parse(row.Cells["Curso"].Value.ToString());
+                        WCursos[WRenglon] = short.Parse(row.Cells["Tema"].Value.ToString());
                         string WDireccionEmail = _TraerMailResponsable(WCursos[WRenglon]);
 
                         WDireccionEmail = WDireccionEmail.Trim();
@@ -313,7 +301,6 @@ namespace Modulo_Capacitacion.Novedades
             }
 
             string WCursosAListar = "[";
-            //string WCursosAListar = "";
 
             for (int i = 1; i <= WRenglon; i++)
             {
@@ -323,18 +310,12 @@ namespace Modulo_Capacitacion.Novedades
             if (WCursosAListar.Length == 1)
             {
                 MessageBox.Show("No existen datos para mostrar.");
-                TB_Año.Text = auxi;
-                TB_Año_KeyDown(null, new KeyEventArgs(Keys.Enter));
                 return null;
             }
 
-            //WCursosAListar = WCursosAListar.Substring(0, WCursosAListar.Length - 2);
             WCursosAListar = WCursosAListar.TrimEnd(',');
 
             WCursosAListar += "]";
-
-            TB_Año.Text = auxi;
-            TB_Año_KeyDown(null, new KeyEventArgs(Keys.Enter));
 
             VistaPrevia frm = new VistaPrevia();
             AvisoCronograma reporte = new AvisoCronograma();
@@ -408,6 +389,8 @@ namespace Modulo_Capacitacion.Novedades
 
             VistaPrevia frm = _PrepararAviso();
 
+            WDirecciones = "";
+
             //string WDirecciones = ConfigurationManager.AppSettings["DETINATARIOS_AVISO_CRONOGRAMA"];
 
             if (frm != null) frm.EnviarPorEmail(WDirecciones, "AvisoCronograma");
@@ -438,6 +421,84 @@ namespace Modulo_Capacitacion.Novedades
         {
             int Curso = int.Parse(DGV_Cronograma.Rows[int.Parse(lblIdRow.Text)].Cells["Curso"].Value.ToString());
             Listados.InformeHorasRealizadasYProgramadas.Inicio frm = new Inicio(TB_Año.Text, Curso, true);
+        }
+
+        private void cmbMes_DropDownClosed(object sender, EventArgs e)
+        {
+            ObtenerTemasPorMes();
+        }
+
+        private void ObtenerTemasPorMes()
+        {
+            // Busco primero los Cursos.
+
+            short[] WColumnaMeses = {-1, 8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7};
+
+            int WMes = cmbMes.SelectedIndex;
+            short WColumna = -1;
+            short[] WCursos = new short[1000];
+            short WRenglon = 0;
+
+            // Determino la columna segun el mes indicado.
+            WColumna = WColumnaMeses[WMes];
+
+            // Controlamos que se haya elegido un mes valido.
+            if (WColumna < 1) return;
+
+            if (txtAnoConsulta.Text.Trim() == "") txtAnoConsulta.Text = TB_Año.Text;
+
+            if (txtAnoConsulta.Text.Trim() == "") return;
+
+            // Determinamos el año de cronograma a consultar
+            short WAno = short.Parse(txtAnoConsulta.Text);
+
+            if (WMes >= 1 && WMes <= 7)
+            {
+                WAno -= 1;
+            }
+
+            string auxi = TB_Año.Text;
+
+            if (txtAnoConsulta.Text.Trim() != TB_Año.Text)
+            {
+                auxi = TB_Año.Text;
+
+                TB_Año.Text = WAno.ToString();
+                TB_Año_KeyDown(null, new KeyEventArgs(Keys.Enter));
+            }
+
+            dataGridView1.Rows.Clear();
+
+            foreach (DataGridViewRow row in DGV_Cronograma.Rows)
+            {
+                if (row.Cells["Mes" + WColumna].Value.ToString().ToUpper() == "X")
+                {
+                    if (row.Cells["Curso"].Value.ToString() != "")
+                    {
+                        dataGridView1.Rows.Add(row.Cells["Curso"].Value, row.Cells["Descripcion"].Value,
+                            "");
+                    }
+                }
+            }
+        }
+
+        private void dataGridView1_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridViewColumn column = dataGridView1.Columns["Marcar"];
+            if (column != null && e.ColumnIndex == column.Index)
+            {
+                DataGridViewRow row = dataGridView1.CurrentRow;
+                if (row == null) return;
+                row.Cells["Marcar"].Value = Helper.OrDefault(row.Cells["Marcar"].Value, "").ToString() == "X" ? "" : "X";
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                row.Cells["Marcar"].Value = "X";
+            }
         }
     }
 }

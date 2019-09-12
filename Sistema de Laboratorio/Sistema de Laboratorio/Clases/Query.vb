@@ -18,7 +18,7 @@ Module Query
 
                 cm.Connection = cn
 
-                Using dr As SqlDataReader = cm.ExecuteReader
+                Using dr As SqlDataReader = cm.ExecuteReader(CommandBehavior.SingleResult)
                     tabla.Load(dr)
                 End Using
 

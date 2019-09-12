@@ -159,6 +159,24 @@
       <DependentUpon>certificadonuevofarmasegunda.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\Registro Produccion Farma\impremermadescartestercerosRegistroMaestro.vb">
+      <DependentUpon>impremermadescartestercerosRegistroMaestro.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reportes\Registro Produccion Farma\ImpreAnexosRegistroMaestro.vb">
+      <DependentUpon>ImpreAnexosRegistroMaestro.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reportes\Registro Produccion Farma\ImpreFarmaIIRegMaestro.vb">
+      <DependentUpon>ImpreFarmaIIRegMaestro.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Reportes\Registro Produccion Farma\ImpreAnexos.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -307,6 +325,18 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>certificadonuevofarmasegunda.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Registro Produccion Farma\impremermadescartestercerosRegistroMaestro.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>impremermadescartestercerosRegistroMaestro.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Registro Produccion Farma\ImpreAnexosRegistroMaestro.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ImpreAnexosRegistroMaestro.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Registro Produccion Farma\ImpreFarmaIIRegMaestro.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ImpreFarmaIIRegMaestro.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Registro Produccion Farma\ImpreAnexos.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ImpreAnexos.vb</LastGenOutput>
@@ -426,6 +456,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\LogoSurfactan.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Recurso 1-100.jpg" />
+    <Content Include="Resources\RegistroMaestro.JPG" />
+    <Content Include="Resources\REGMAESTRO.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

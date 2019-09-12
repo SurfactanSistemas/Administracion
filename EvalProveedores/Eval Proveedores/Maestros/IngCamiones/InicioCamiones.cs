@@ -71,19 +71,13 @@ namespace Eval_Proveedores.IngCamiones
                         }
                     }
                 }
+
+                filaCa["DescEstado"] = "Habilitado";
                 
-               
-                
-                if (int.Parse(filaCa[31].ToString()) == 0)
-                {
-                    filaCa["DescEstado"] = "Habilitado";
-                }
-                else
+                if (int.Parse(filaCa[31].ToString()) > 0)
                 {
                     filaCa["DescEstado"] = "Inhabilitado";
                 }
-                
-                
             }
 
             DGV_Camiones.DataSource = dtCamion;

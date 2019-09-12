@@ -150,6 +150,7 @@
             "FARMA",
             "FOOD",
             "VETERINARIA",
+            "ENVASES",
             "OTROS"});
             this.cmbTipo.Location = new System.Drawing.Point(235, 37);
             this.cmbTipo.Name = "cmbTipo";
@@ -277,22 +278,22 @@
             // rbTodos
             // 
             this.rbTodos.AutoSize = true;
+            this.rbTodos.Checked = true;
             this.rbTodos.Location = new System.Drawing.Point(287, 15);
             this.rbTodos.Name = "rbTodos";
             this.rbTodos.Size = new System.Drawing.Size(55, 17);
             this.rbTodos.TabIndex = 0;
+            this.rbTodos.TabStop = true;
             this.rbTodos.Text = "Todos";
             this.rbTodos.UseVisualStyleBackColor = true;
             // 
             // rbSoloConMovimientos
             // 
             this.rbSoloConMovimientos.AutoSize = true;
-            this.rbSoloConMovimientos.Checked = true;
             this.rbSoloConMovimientos.Location = new System.Drawing.Point(125, 15);
             this.rbSoloConMovimientos.Name = "rbSoloConMovimientos";
             this.rbSoloConMovimientos.Size = new System.Drawing.Size(129, 17);
             this.rbSoloConMovimientos.TabIndex = 0;
-            this.rbSoloConMovimientos.TabStop = true;
             this.rbSoloConMovimientos.Text = "Sólo con Movimientos";
             this.rbSoloConMovimientos.UseVisualStyleBackColor = true;
             // 

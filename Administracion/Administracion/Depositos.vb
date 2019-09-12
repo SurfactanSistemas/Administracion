@@ -1120,6 +1120,12 @@ Public Class Depositos
                     If Not IsNothing(valor) Then
 
                         If iCol = 0 And iRow > -1 Then
+
+                            ' Se formatea en caso de que se cargue con la Lectora Nueva de Cheques.
+                            If valor.StartsWith(";") Then
+                                valor = "C" & Microsoft.VisualBasic.Mid(valor, 2, 29) & "E"
+                            End If
+
                             If Trim(valor.ToString.Length) = 31 Then
                                 .Rows(iRow).Cells(5).Value = valor
                                 If _ProcesarCheque(iRow, valor) Then

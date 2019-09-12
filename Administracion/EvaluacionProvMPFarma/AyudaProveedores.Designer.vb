@@ -106,7 +106,7 @@ Partial Class AyudaProveedores
         'ComboBox1
         '
         Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"TODOS", "FARMA", "FOOD", "VETERINARIA", "OTROS"})
+        Me.ComboBox1.Items.AddRange(New Object() {"TODOS", "FARMA", "FOOD", "VETERINARIA", "ENVASES", "OTROS"})
         Me.ComboBox1.Location = New System.Drawing.Point(216, 49)
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(121, 21)

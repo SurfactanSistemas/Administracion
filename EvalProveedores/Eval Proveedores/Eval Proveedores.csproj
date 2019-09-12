@@ -94,6 +94,12 @@
     <Compile Include="Ayudas\AyudaChoferes.Designer.cs">
       <DependentUpon>AyudaChoferes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Ayudas\AyudaOperadores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ayudas\AyudaOperadores.Designer.cs">
+      <DependentUpon>AyudaOperadores.cs</DependentUpon>
+    </Compile>
     <Compile Include="Clases\Habilitame.cs" />
     <Compile Include="Clave.cs">
       <SubType>Form</SubType>
@@ -102,6 +108,7 @@
       <DependentUpon>Clave.cs</DependentUpon>
     </Compile>
     <Compile Include="Helper.cs" />
+    <Compile Include="Interfaces\IAyudaOperadores.cs" />
     <Compile Include="Interfaces\IAyudaChoferes.cs" />
     <Compile Include="Interfaces\IAyudaProveedores.cs" />
     <Compile Include="Interfaces\ICLave.cs" />
@@ -593,6 +600,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Ayudas\AyudaChoferes.resx">
       <DependentUpon>AyudaChoferes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ayudas\AyudaOperadores.resx">
+      <DependentUpon>AyudaOperadores.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Clave.resx">
       <DependentUpon>Clave.cs</DependentUpon>

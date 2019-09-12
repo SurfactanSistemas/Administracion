@@ -5,8 +5,8 @@
     Private WInformaEspecif As Integer
     Private WMenorIgualEspecif As Integer
     Private WUnidadEspecif As String
-    Private WDesdeEspecif As Double
-    Private WHastaEspecif As Double
+    Private WDesdeEspecif As String
+    Private WHastaEspecif As String
     Private WFarmacopea As String
     Private WFormula As String
     Private WParametrosFormula(10) As String
@@ -14,7 +14,7 @@
     Private WDescEnsayo As String
     Private WParametro As String
 
-    Sub New(ByVal Ensayo As String, ByVal DescEnsayo As String, ByVal Parametro As String, ByVal Tipo As Integer, ByVal Informa As Integer, ByVal MenorIgual As Integer, ByVal Desde As Double, ByVal Hasta As Double, ByVal Unidad As String, ByVal Farmacopea As String, ByVal Formula As String, ByVal ParametrosFormula() As String)
+    Sub New(ByVal Ensayo As String, ByVal DescEnsayo As String, ByVal Parametro As String, ByVal Tipo As Integer, ByVal Informa As Integer, ByVal MenorIgual As Integer, ByVal Desde As String, ByVal Hasta As String, ByVal Unidad As String, ByVal Farmacopea As String, ByVal Formula As String, ByVal ParametrosFormula() As String)
 
         ' This call is required by the designer.
         InitializeComponent()
@@ -165,8 +165,8 @@
         Dim WTipo As Integer = 0
         Dim WInforma As Integer = IIf(ckInforma.Checked, 1, 0)
         Dim WMenorIgual As Integer = IIf(ckMenorIgual.Checked, 1, 0)
-        Dim WDesde As Double = txtDesde.Text.toDbl
-        Dim WHasta As Double = txtHasta.Text.toDbl
+        Dim WDesde As String = txtDesde.Text
+        Dim WHasta As String = txtHasta.Text
         Dim WUnidad As String = txtUnidad.Text
 
         WFormula = txtFormula.Text.Trim

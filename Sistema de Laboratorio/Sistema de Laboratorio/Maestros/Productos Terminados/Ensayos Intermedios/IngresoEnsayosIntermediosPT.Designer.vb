@@ -44,7 +44,6 @@ Partial Class IngresoEnsayosIntermediosPT
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.dgvEnsayos = New ConsultasVarias.DBDataGridView()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.txtPaginas = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
@@ -66,6 +65,7 @@ Partial Class IngresoEnsayosIntermediosPT
         Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.dgvEnsayos = New ConsultasVarias.DBDataGridView()
         Me.Ensayo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Especificacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Valor = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -103,13 +103,14 @@ Partial Class IngresoEnsayosIntermediosPT
         Me.VariableValor10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.EspecificacionIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Decimales = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnImprimirEnsayosIngresados = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
-        CType(Me.dgvEnsayos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
+        CType(Me.dgvEnsayos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Panel1
@@ -287,32 +288,6 @@ Partial Class IngresoEnsayosIntermediosPT
         Me.Label3.TabIndex = 0
         Me.Label3.Text = "Código:"
         '
-        'dgvEnsayos
-        '
-        Me.dgvEnsayos.AllowUserToAddRows = False
-        Me.dgvEnsayos.AllowUserToDeleteRows = False
-        Me.dgvEnsayos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvEnsayos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Ensayo, Me.Especificacion, Me.Valor, Me.Resultado, Me.Parametro, Me.Descripcion, Me.TipoEspecif, Me.DesdeEspecif, Me.HastaEspecif, Me.UnidadEspecif, Me.Farmacopea, Me.MenorIgualEspecif, Me.InformaEspecif, Me.Observaciones, Me.FormulaEspecif, Me.Variable1, Me.Variable2, Me.Variable3, Me.Variable4, Me.Variable5, Me.Variable6, Me.Variable7, Me.Variable8, Me.Variable9, Me.Variable10, Me.VariableValor1, Me.VariableValor2, Me.VariableValor3, Me.VariableValor4, Me.VariableValor5, Me.VariableValor6, Me.VariableValor7, Me.VariableValor8, Me.VariableValor9, Me.VariableValor10, Me.EspecificacionIngles, Me.Decimales})
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvEnsayos.DefaultCellStyle = DataGridViewCellStyle4
-        Me.dgvEnsayos.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.dgvEnsayos.DoubleBuffered = True
-        Me.dgvEnsayos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.dgvEnsayos.Location = New System.Drawing.Point(3, 62)
-        Me.dgvEnsayos.Name = "dgvEnsayos"
-        Me.dgvEnsayos.RowHeadersWidth = 10
-        Me.dgvEnsayos.RowTemplate.Height = 20
-        Me.dgvEnsayos.ShowCellToolTips = False
-        Me.dgvEnsayos.SinClickDerecho = False
-        Me.dgvEnsayos.Size = New System.Drawing.Size(965, 312)
-        Me.dgvEnsayos.TabIndex = 4
-        '
         'GroupBox2
         '
         Me.GroupBox2.Controls.Add(Me.txtPaginas)
@@ -454,19 +429,20 @@ Partial Class IngresoEnsayosIntermediosPT
         'GroupBox3
         '
         Me.GroupBox3.Controls.Add(Me.btnGrabar)
+        Me.GroupBox3.Controls.Add(Me.btnImprimirEnsayosIngresados)
         Me.GroupBox3.Controls.Add(Me.btnActualizarEspecif)
         Me.GroupBox3.Controls.Add(Me.btnNotas)
         Me.GroupBox3.Controls.Add(Me.btnCerrar)
         Me.GroupBox3.Controls.Add(Me.btnLimpiar)
-        Me.GroupBox3.Location = New System.Drawing.Point(506, 9)
+        Me.GroupBox3.Location = New System.Drawing.Point(489, 9)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(411, 80)
+        Me.GroupBox3.Size = New System.Drawing.Size(467, 80)
         Me.GroupBox3.TabIndex = 6
         Me.GroupBox3.TabStop = False
         '
         'btnGrabar
         '
-        Me.btnGrabar.Location = New System.Drawing.Point(144, 12)
+        Me.btnGrabar.Location = New System.Drawing.Point(135, 12)
         Me.btnGrabar.Name = "btnGrabar"
         Me.btnGrabar.Size = New System.Drawing.Size(109, 30)
         Me.btnGrabar.TabIndex = 0
@@ -475,16 +451,16 @@ Partial Class IngresoEnsayosIntermediosPT
         '
         'btnActualizarEspecif
         '
-        Me.btnActualizarEspecif.Location = New System.Drawing.Point(259, 12)
+        Me.btnActualizarEspecif.Location = New System.Drawing.Point(250, 12)
         Me.btnActualizarEspecif.Name = "btnActualizarEspecif"
-        Me.btnActualizarEspecif.Size = New System.Drawing.Size(131, 61)
+        Me.btnActualizarEspecif.Size = New System.Drawing.Size(181, 30)
         Me.btnActualizarEspecif.TabIndex = 0
         Me.btnActualizarEspecif.Text = "ACTUALIZA ESPECIFICACIONES"
         Me.btnActualizarEspecif.UseVisualStyleBackColor = True
         '
         'btnNotas
         '
-        Me.btnNotas.Location = New System.Drawing.Point(144, 43)
+        Me.btnNotas.Location = New System.Drawing.Point(135, 45)
         Me.btnNotas.Name = "btnNotas"
         Me.btnNotas.Size = New System.Drawing.Size(109, 30)
         Me.btnNotas.TabIndex = 0
@@ -493,7 +469,7 @@ Partial Class IngresoEnsayosIntermediosPT
         '
         'btnCerrar
         '
-        Me.btnCerrar.Location = New System.Drawing.Point(20, 43)
+        Me.btnCerrar.Location = New System.Drawing.Point(20, 45)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(109, 30)
         Me.btnCerrar.TabIndex = 0
@@ -536,6 +512,33 @@ Partial Class IngresoEnsayosIntermediosPT
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(965, 96)
         Me.Panel2.TabIndex = 5
+        '
+        'dgvEnsayos
+        '
+        Me.dgvEnsayos.AllowUserToAddRows = False
+        Me.dgvEnsayos.AllowUserToDeleteRows = False
+        Me.dgvEnsayos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvEnsayos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Ensayo, Me.Especificacion, Me.Valor, Me.Resultado, Me.Parametro, Me.Descripcion, Me.TipoEspecif, Me.DesdeEspecif, Me.HastaEspecif, Me.UnidadEspecif, Me.Farmacopea, Me.MenorIgualEspecif, Me.InformaEspecif, Me.Observaciones, Me.FormulaEspecif, Me.Variable1, Me.Variable2, Me.Variable3, Me.Variable4, Me.Variable5, Me.Variable6, Me.Variable7, Me.Variable8, Me.Variable9, Me.Variable10, Me.VariableValor1, Me.VariableValor2, Me.VariableValor3, Me.VariableValor4, Me.VariableValor5, Me.VariableValor6, Me.VariableValor7, Me.VariableValor8, Me.VariableValor9, Me.VariableValor10, Me.EspecificacionIngles, Me.Decimales})
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvEnsayos.DefaultCellStyle = DataGridViewCellStyle4
+        Me.dgvEnsayos.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.dgvEnsayos.DoubleBuffered = True
+        Me.dgvEnsayos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
+        Me.dgvEnsayos.Location = New System.Drawing.Point(3, 62)
+        Me.dgvEnsayos.Name = "dgvEnsayos"
+        Me.dgvEnsayos.OrdenamientoColumnasHabilitado = True
+        Me.dgvEnsayos.RowHeadersWidth = 10
+        Me.dgvEnsayos.RowTemplate.Height = 20
+        Me.dgvEnsayos.ShowCellToolTips = False
+        Me.dgvEnsayos.SinClickDerecho = False
+        Me.dgvEnsayos.Size = New System.Drawing.Size(965, 312)
+        Me.dgvEnsayos.TabIndex = 4
         '
         'Ensayo
         '
@@ -782,6 +785,16 @@ Partial Class IngresoEnsayosIntermediosPT
         Me.Decimales.ReadOnly = True
         Me.Decimales.Visible = False
         '
+        'btnImprimirEnsayosIngresados
+        '
+        Me.btnImprimirEnsayosIngresados.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnImprimirEnsayosIngresados.Location = New System.Drawing.Point(250, 45)
+        Me.btnImprimirEnsayosIngresados.Name = "btnImprimirEnsayosIngresados"
+        Me.btnImprimirEnsayosIngresados.Size = New System.Drawing.Size(181, 30)
+        Me.btnImprimirEnsayosIngresados.TabIndex = 0
+        Me.btnImprimirEnsayosIngresados.Text = "VER PDF ENSAYOS INGRESADOS"
+        Me.btnImprimirEnsayosIngresados.UseVisualStyleBackColor = True
+        '
         'IngresoEnsayosIntermediosPT
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -795,12 +808,12 @@ Partial Class IngresoEnsayosIntermediosPT
         Me.Panel1.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
-        CType(Me.dgvEnsayos, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
+        CType(Me.dgvEnsayos, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -879,4 +892,5 @@ Partial Class IngresoEnsayosIntermediosPT
     Friend WithEvents VariableValor10 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents EspecificacionIngles As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Decimales As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents btnImprimirEnsayosIngresados As System.Windows.Forms.Button
 End Class

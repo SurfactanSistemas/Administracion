@@ -1247,4 +1247,5 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
         End If
 
     End Sub
+
 End Class

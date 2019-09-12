@@ -1,4 +1,6 @@
-﻿Public Class Login
+﻿Imports Laboratorio.Clases
+
+Public Class Login
 
     Private WEmpresasAcceso As DataTable
 
@@ -38,10 +40,50 @@
 
         txtClave.Text = ""
 
-        'With cmbEmpresas
-        '    .BackColor = Color.Red
-        '    .ForeColor = Color.White
-        'End With
+        Dim WArgs As String() = Environment.GetCommandLineArgs
+
+        If WArgs.Length > 1 Then
+            Dim WOpcion As Integer = Val(WArgs(1))
+
+            Dim WClaveAcceso As String = WArgs(2).Trim
+
+            txtClave.Text = WClaveAcceso
+
+            cmbEmpresas.SelectedIndex = 2
+
+            Dim WBaseDatos As String = CType(cmbEmpresas.SelectedItem, DataRowView).Item("BaseDatos")
+
+            Conexion.EmpresaDeTrabajo = WBaseDatos
+
+            Dim WOperador As DataRow = GetSingle("SELECT Operador, Descripcion FROM Operador WHERE UPPER(Clave) = '" & txtClave.Text & "'", WBaseDatos)
+
+            If IsNothing(WOperador) Then Throw New Exception("Clave Errónea")
+
+            With WOperador
+                Operador.Base = WBaseDatos
+                Operador.Codigo = OrDefault(.Item("Operador"), 0)
+                Operador.Clave = txtClave.Text.Trim
+                Operador.Descripcion = OrDefault(.Item("Descripcion"), "")
+            End With
+
+            Select Case WOpcion
+                Case 1 ' Especificaciones PT
+
+                    With New IngresoEspecificacionesPT
+                        .ShowDialog(Me)
+                    End With
+
+                Case 2 ' Ensayos intermedios
+
+                    With New IngresoEnsayosIntermediosPT
+                        .ShowDialog(Me)
+                    End With
+
+            End Select
+
+            Close()
+
+        End If
 
     End Sub
 
@@ -56,6 +98,8 @@
             If cmbEmpresas.SelectedIndex < 0 Then cmbEmpresas.SelectedIndex = 0
 
             Dim WBaseDatos As String = CType(cmbEmpresas.SelectedItem, DataRowView).Item("BaseDatos")
+
+            Conexion.EmpresaDeTrabajo = WBaseDatos
 
             Dim WOperador As DataRow = GetSingle("SELECT Operador, Descripcion FROM Operador WHERE UPPER(Clave) = '" & txtClave.Text & "'", WBaseDatos)
 

@@ -13,17 +13,17 @@
             End Get
             Set(ByVal value As String)
 
-                _EmpresaTrabajo = DeterminarBasePara(value)
-
-                If UCase(_EmpresaTrabajo).StartsWith("SURFACTAN") Then
+                If UCase(value).StartsWith("SURFACTAN") Then
 
                     EsPellital = False
 
-                ElseIf UCase(_EmpresaTrabajo).StartsWith("PELLITAL") Or UCase(_EmpresaTrabajo).StartsWith("PELITALL") Then
+                ElseIf UCase(value).StartsWith("PELLITAL") Or UCase(value).StartsWith("PELITALL") Then
 
                     EsPellital = True
 
                 End If
+
+                _EmpresaTrabajo = DeterminarBasePara(value)
 
             End Set
         End Property

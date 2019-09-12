@@ -1051,6 +1051,10 @@ Public Class RecibosProvisorios
 
                     If iCol = 0 And iRow > -1 Then
 
+                        ' Se formatea en caso de que se cargue con la Lectora Nueva de Cheques.
+                        If valor.StartsWith(";") Then
+                            valor = "C" & Microsoft.VisualBasic.Mid(valor, 2, 29) & "E"
+                        End If
 
                         If Trim(valor.ToString.Length) = 31 Then
                             If _ProcesarCheque(iRow, valor) Then
@@ -1103,7 +1107,7 @@ Public Class RecibosProvisorios
 
                                     Select Case Val(_mes)
                                         Case Is < 7
-                                            valor = Mid(valor, 1, 2) & "/" & _mes & "/" & "2019"
+                                            valor = Mid(valor, 1, 2) & "/" & _mes & "/" & "2020"
                                         Case Else
                                             valor = Mid(valor, 1, 2) & "/" & _mes & "/" & "2019"
                                     End Select
@@ -1581,7 +1585,7 @@ Public Class RecibosProvisorios
 
                 Select Case Val(_mes)
                     Case Is < 7
-                        txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & "2019"
+                        txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & "2020"
                     Case Else
                         txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & "2019"
                 End Select

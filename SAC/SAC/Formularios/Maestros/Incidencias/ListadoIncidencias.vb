@@ -202,7 +202,7 @@ Public Class ListadoIncidencias : Implements INuevaIncidencia, ISeleccionNuevaIn
 
         Dim ZSql = ""
         ZSql = "SELECT Incidencia, Ano As Anio, TipoInc As Tipo, Numero, Fecha, Estado, Titulo, Referencia, " _
-            & " DescEstado = CASE ISNULL(Estado, 0) WHEN 1 THEN 'Genera SAC' WHEN 2 THEN 'No Genera SAC' ELSE 'Pend. Análisis' END, ISNULL(EmpresaIncidencia, Empresa) Empresa " _
+            & " DescEstado = CASE ISNULL(Estado, 0) WHEN 1 THEN 'Genera SAC' WHEN 2 THEN 'No Genera SAC' WHEN 3 THEN 'Cerrado' ELSE 'Pend. Análisis' END, ISNULL(EmpresaIncidencia, Empresa) Empresa " _
             & " FROM CargaIncidencias WHERE Renglon = 1 "
 
         If Val(WDesdeFecha) <> 0 And Val(WHastaFecha) <> 0 Then
@@ -324,7 +324,7 @@ Public Class ListadoIncidencias : Implements INuevaIncidencia, ISeleccionNuevaIn
     End Sub
 
     Public Sub _ProcesarNuevaIncidencia(ByVal WIncidencia As Object) Implements INuevaIncidencia._ProcesarNuevaIncidencia
-        btnFiltrar.PerformClick()
+        btnFiltrar_Click(Nothing, Nothing)
     End Sub
 
     Private Sub btnNuevaIncidencia_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnNuevaIncidencia.Click

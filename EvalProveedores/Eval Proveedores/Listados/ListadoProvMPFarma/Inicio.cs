@@ -51,6 +51,11 @@ namespace Eval_Proveedores.Listados.ListadoProvMPFarma
 
                 DataRow[] WProveedoresFinales = WProveedores.Select("Pasa = 'S'");
 
+                if (rbTodos.Checked)
+                {
+                    WProveedoresFinales = WProveedores.Select();
+                }
+
                 foreach (DataRow WProveedor in WProveedoresFinales)
                 {
                     var ZMovimientos = double.Parse(WProveedor["Movimientos"].ToString());
