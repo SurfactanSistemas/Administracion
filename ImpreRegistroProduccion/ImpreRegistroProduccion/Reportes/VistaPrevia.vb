@@ -129,14 +129,14 @@ Public Class VistaPrevia
 
     End Sub
 
-    Public Sub Imprimir(Optional ByVal cant As Integer = 1)
+    Public Sub Imprimir(Optional ByVal cant As Integer = 1, Optional ByVal Inicio As Integer = 0, Optional ByVal Final As Integer = 0)
         'Me.Reporte.DataSourceConnections.Item(0).SetConnection("EMPRESA01", "SurfactanSA", False)
 
         _ReconectarBaseDatos()
 
         Me.Reporte.RecordSelectionFormula = IIf(IsNothing(Me.Formula), "", Me.Formula)
         ' Me.Reporte.Refresh()
-        Me.Reporte.PrintToPrinter(cant, True, 0, 0)
+        Me.Reporte.PrintToPrinter(cant, True, Inicio, Final)
     End Sub
 
     Public Sub GuardarPDF(ByVal NombreArchivo As String, Optional ByVal ruta As String = "")

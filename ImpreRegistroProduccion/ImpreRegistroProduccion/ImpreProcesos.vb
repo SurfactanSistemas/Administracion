@@ -18,8 +18,19 @@ Public Class ImpreProcesos
 
                         Dim WTerminado As String = Environment.GetCommandLineArgs(2)
                         Dim WPartida As Integer = Environment.GetCommandLineArgs(3)
+                        Dim WInicio, WFinal, WFraccionamiento, WEtiquetas, WMerma As Integer
 
-                        _GenerarRegistroProduccion(WTerminado, WPartida, WProceso = 4)
+                        WFraccionamiento = 1
+                        WEtiquetas = 1
+                        WMerma = 1
+
+                        If Environment.GetCommandLineArgs.Length > 4 Then WInicio = Environment.GetCommandLineArgs(4)
+                        If Environment.GetCommandLineArgs.Length > 5 Then WFinal = Environment.GetCommandLineArgs(5)
+                        If Environment.GetCommandLineArgs.Length > 6 Then WFraccionamiento = Environment.GetCommandLineArgs(6)
+                        If Environment.GetCommandLineArgs.Length > 7 Then WEtiquetas = Environment.GetCommandLineArgs(7)
+                        If Environment.GetCommandLineArgs.Length > 8 Then WMerma = Environment.GetCommandLineArgs(8)
+
+                        _GenerarRegistroProduccion(WTerminado, WPartida, WInicio, WFinal, WFraccionamiento, WEtiquetas, WMerma, WProceso = 4)
 
                     Case 2 ' CERTIFICADO DE CALIDAD.
 
@@ -213,7 +224,7 @@ Public Class ImpreProcesos
 
     End Sub
 
-    Private Sub _GenerarRegistroProduccion(ByVal WTerminado As String, ByVal WPartida As Integer, Optional ByVal RegistroMaestro As Boolean = False)
+    Private Sub _GenerarRegistroProduccion(ByVal WTerminado As String, ByVal WPartida As Integer, ByVal Inicio As Integer, ByVal Final As Integer, ByVal Fraccionamiento As Integer, ByVal Etiquetas As Integer, ByVal Merma As Integer, Optional ByVal RegistroMaestro As Boolean = False)
 
         _ProcesarInformacionParaRegistroProduccion(WTerminado, WPartida, RegistroMaestro)
 
@@ -276,26 +287,45 @@ Public Class ImpreProcesos
         rpt.SetParameterValue("ImprimePlanillaII", WImprePlanillaII.ToString)
         rpt.SetParameterValue("MarcaLabora", WMarcaLabora)
 
-        Dim frm As New VistaPrevia
+        If Inicio >= 0 And Final >= 0 Then
 
-        With frm
-            .Reporte = rpt
-            .Formula = "{Hoja.Hoja} = " & WPartida & " And {Hoja.Producto} = '" & WTerminado & "' And {Hoja.Renglon} = 1" ' And {CargaIII.Partida} = {Hoja.Hoja}"
-            '.Mostrar()
-            .Imprimir()
-        End With
+            Dim frm As New VistaPrevia
+
+            With frm
+                .Reporte = rpt
+                .Formula = "{Hoja.Hoja} = " & WPartida & " And {Hoja.Producto} = '" & WTerminado & "' And {Hoja.Renglon} = 1" ' And {CargaIII.Partida} = {Hoja.Hoja}"
+                '.Mostrar()
+                .Imprimir(1, Inicio, Final)
+            End With
+
+        End If
+
+        If Inicio > 0 Or Final > 0 Then Exit Sub
 
         '
         ' Anexos
         '
-
-        If WImprePlanilla <> 0 Or WImprePlanillaIII <> 0 Then
+        If (WImprePlanilla <> 0 Or WImprePlanillaIII <> 0) And (Fraccionamiento = 1 Or Etiquetas = 1) Then
             Dim rptAnexos As ReportDocument
 
             If RegistroMaestro Then
                 rptAnexos = New ImpreAnexosRegistroMaestro
             Else
                 rptAnexos = New ImpreAnexos
+            End If
+
+            ' Definimos el rango de impresión para que respete la numeración de hojas.
+            Inicio = 0
+            Final = 0
+
+            If WImprePlanilla <> 0 And WImprePlanillaIII <> 0 Then
+                If Fraccionamiento = 1 And Etiquetas = 0 Then
+                    Inicio = 1
+                    Final = 1
+                ElseIf Fraccionamiento = 0 And Etiquetas = 1 Then
+                    Inicio = 2
+                    Final = 2
+                End If
             End If
 
             rptAnexos.SetParameterValue("ImprePlanilla", WImprePlanilla)
@@ -305,12 +335,12 @@ Public Class ImpreProcesos
                 .Reporte = rptAnexos
                 .Formula = "{Hoja.Hoja} = " & WPartida & " And {Hoja.Producto} = '" & WTerminado & "' And {Hoja.Renglon} = 1" ' And {CargaIII.Partida} = {Hoja.Hoja}"
                 '.Mostrar()
-                .Imprimir()
+                .Imprimir(1, Inicio, Final)
             End With
 
         End If
 
-        If Val(WTerminado.Substring(3, 5)) = 3000 Then
+        If Val(WTerminado.Substring(3, 5)) = 3000 And Merma = 1 Then
 
             With New VistaPrevia
                 .Reporte = IIf(RegistroMaestro, New impremermadescartestercerosRegistroMaestro, New impremermadescartesterceros)

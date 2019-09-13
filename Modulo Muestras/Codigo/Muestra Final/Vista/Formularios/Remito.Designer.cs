@@ -33,11 +33,22 @@ namespace Vista
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.cmbTipoRemito = new System.Windows.Forms.ComboBox();
             this.DGV_Remito = new System.Windows.Forms.DataGridView();
+            this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Codigo_Original = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Muestra = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Pedido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Peligroso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PeligrosoII = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.TBCliente = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.TBFecha = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.TBNumRemito = new System.Windows.Forms.TextBox();
             this.LBNumRemito = new System.Windows.Forms.Label();
@@ -50,17 +61,6 @@ namespace Vista
             this.toolTipCancelar = new System.Windows.Forms.ToolTip(this.components);
             this.BTCancelar = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Codigo_Original = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Muestra = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pedido = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Peligroso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PeligrosoII = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label6 = new System.Windows.Forms.Label();
-            this.cmbTipoRemito = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Remito)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -86,6 +86,19 @@ namespace Vista
             this.panel1.Size = new System.Drawing.Size(599, 272);
             this.panel1.TabIndex = 0;
             // 
+            // cmbTipoRemito
+            // 
+            this.cmbTipoRemito.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTipoRemito.FormattingEnabled = true;
+            this.cmbTipoRemito.Items.AddRange(new object[] {
+            "Hoja Blanca",
+            "Formulario"});
+            this.cmbTipoRemito.Location = new System.Drawing.Point(459, 11);
+            this.cmbTipoRemito.Name = "cmbTipoRemito";
+            this.cmbTipoRemito.Size = new System.Drawing.Size(128, 21);
+            this.cmbTipoRemito.TabIndex = 22;
+            this.cmbTipoRemito.SelectedIndexChanged += new System.EventHandler(this.cmbTipoRemito_SelectedIndexChanged);
+            // 
             // DGV_Remito
             // 
             this.DGV_Remito.AllowUserToAddRows = false;
@@ -108,6 +121,83 @@ namespace Vista
             this.DGV_Remito.RowTemplate.Height = 18;
             this.DGV_Remito.Size = new System.Drawing.Size(575, 195);
             this.DGV_Remito.TabIndex = 21;
+            // 
+            // Codigo
+            // 
+            this.Codigo.DataPropertyName = "Codigo";
+            this.Codigo.HeaderText = "Codigo";
+            this.Codigo.Name = "Codigo";
+            this.Codigo.ReadOnly = true;
+            this.Codigo.Visible = false;
+            // 
+            // Codigo_Original
+            // 
+            this.Codigo_Original.DataPropertyName = "Codigo_Original";
+            this.Codigo_Original.HeaderText = "Codigo Original";
+            this.Codigo_Original.Name = "Codigo_Original";
+            this.Codigo_Original.ReadOnly = true;
+            this.Codigo_Original.Visible = false;
+            // 
+            // Descripcion
+            // 
+            this.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Descripcion.DataPropertyName = "Descripcion";
+            this.Descripcion.HeaderText = "Descripcion";
+            this.Descripcion.MinimumWidth = 200;
+            this.Descripcion.Name = "Descripcion";
+            this.Descripcion.ReadOnly = true;
+            // 
+            // Cantidad
+            // 
+            this.Cantidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Cantidad.DataPropertyName = "Cantidad";
+            this.Cantidad.HeaderText = "Cantidad";
+            this.Cantidad.Name = "Cantidad";
+            this.Cantidad.ReadOnly = true;
+            this.Cantidad.Width = 74;
+            // 
+            // Muestra
+            // 
+            this.Muestra.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Muestra.DataPropertyName = "Muestra";
+            this.Muestra.HeaderText = "Muestra";
+            this.Muestra.Name = "Muestra";
+            this.Muestra.ReadOnly = true;
+            this.Muestra.Width = 70;
+            // 
+            // Partida
+            // 
+            this.Partida.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Partida.DataPropertyName = "Partida";
+            this.Partida.HeaderText = "Partida";
+            this.Partida.Name = "Partida";
+            this.Partida.ReadOnly = true;
+            this.Partida.Width = 65;
+            // 
+            // Pedido
+            // 
+            this.Pedido.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Pedido.DataPropertyName = "Pedido";
+            this.Pedido.HeaderText = "Pedido";
+            this.Pedido.Name = "Pedido";
+            this.Pedido.ReadOnly = true;
+            this.Pedido.Width = 65;
+            // 
+            // Peligroso
+            // 
+            this.Peligroso.DataPropertyName = "Peligroso";
+            this.Peligroso.HeaderText = "Peligroso";
+            this.Peligroso.Name = "Peligroso";
+            this.Peligroso.ReadOnly = true;
+            this.Peligroso.Visible = false;
+            // 
+            // PeligrosoII
+            // 
+            this.PeligrosoII.DataPropertyName = "PeligrosoII";
+            this.PeligrosoII.HeaderText = "PeligrosoII";
+            this.PeligrosoII.Name = "PeligrosoII";
+            this.PeligrosoII.ReadOnly = true;
+            this.PeligrosoII.Visible = false;
             // 
             // dataGridView1
             // 
@@ -146,6 +236,17 @@ namespace Vista
             this.TBFecha.Size = new System.Drawing.Size(82, 25);
             this.TBFecha.TabIndex = 15;
             this.TBFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold);
+            this.label6.ForeColor = System.Drawing.SystemColors.Control;
+            this.label6.Location = new System.Drawing.Point(370, 13);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(83, 17);
+            this.label6.TabIndex = 14;
+            this.label6.Text = "Tipo Remito:";
             // 
             // label3
             // 
@@ -259,107 +360,6 @@ namespace Vista
             this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // Codigo
-            // 
-            this.Codigo.DataPropertyName = "Codigo";
-            this.Codigo.HeaderText = "Codigo";
-            this.Codigo.Name = "Codigo";
-            this.Codigo.ReadOnly = true;
-            this.Codigo.Visible = false;
-            // 
-            // Codigo_Original
-            // 
-            this.Codigo_Original.DataPropertyName = "Codigo_Original";
-            this.Codigo_Original.HeaderText = "Codigo Original";
-            this.Codigo_Original.Name = "Codigo_Original";
-            this.Codigo_Original.ReadOnly = true;
-            this.Codigo_Original.Visible = false;
-            // 
-            // Descripcion
-            // 
-            this.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Descripcion.DataPropertyName = "Descripcion";
-            this.Descripcion.HeaderText = "Descripcion";
-            this.Descripcion.MinimumWidth = 200;
-            this.Descripcion.Name = "Descripcion";
-            this.Descripcion.ReadOnly = true;
-            // 
-            // Cantidad
-            // 
-            this.Cantidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Cantidad.DataPropertyName = "Cantidad";
-            this.Cantidad.HeaderText = "Cantidad";
-            this.Cantidad.Name = "Cantidad";
-            this.Cantidad.ReadOnly = true;
-            this.Cantidad.Width = 74;
-            // 
-            // Muestra
-            // 
-            this.Muestra.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Muestra.DataPropertyName = "Muestra";
-            this.Muestra.HeaderText = "Muestra";
-            this.Muestra.Name = "Muestra";
-            this.Muestra.ReadOnly = true;
-            this.Muestra.Width = 70;
-            // 
-            // Partida
-            // 
-            this.Partida.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Partida.DataPropertyName = "Partida";
-            this.Partida.HeaderText = "Partida";
-            this.Partida.Name = "Partida";
-            this.Partida.ReadOnly = true;
-            this.Partida.Width = 65;
-            // 
-            // Pedido
-            // 
-            this.Pedido.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Pedido.DataPropertyName = "Pedido";
-            this.Pedido.HeaderText = "Pedido";
-            this.Pedido.Name = "Pedido";
-            this.Pedido.ReadOnly = true;
-            this.Pedido.Width = 65;
-            // 
-            // Peligroso
-            // 
-            this.Peligroso.DataPropertyName = "Peligroso";
-            this.Peligroso.HeaderText = "Peligroso";
-            this.Peligroso.Name = "Peligroso";
-            this.Peligroso.ReadOnly = true;
-            this.Peligroso.Visible = false;
-            // 
-            // PeligrosoII
-            // 
-            this.PeligrosoII.DataPropertyName = "PeligrosoII";
-            this.PeligrosoII.HeaderText = "PeligrosoII";
-            this.PeligrosoII.Name = "PeligrosoII";
-            this.PeligrosoII.ReadOnly = true;
-            this.PeligrosoII.Visible = false;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold);
-            this.label6.ForeColor = System.Drawing.SystemColors.Control;
-            this.label6.Location = new System.Drawing.Point(370, 13);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(83, 17);
-            this.label6.TabIndex = 14;
-            this.label6.Text = "Tipo Remito:";
-            // 
-            // cmbTipoRemito
-            // 
-            this.cmbTipoRemito.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbTipoRemito.FormattingEnabled = true;
-            this.cmbTipoRemito.Items.AddRange(new object[] {
-            "Hoja Blanca",
-            "Formulario"});
-            this.cmbTipoRemito.Location = new System.Drawing.Point(459, 11);
-            this.cmbTipoRemito.Name = "cmbTipoRemito";
-            this.cmbTipoRemito.Size = new System.Drawing.Size(128, 21);
-            this.cmbTipoRemito.TabIndex = 22;
-            this.cmbTipoRemito.SelectedIndexChanged += new System.EventHandler(this.cmbTipoRemito_SelectedIndexChanged);
-            // 
             // Remito
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -373,6 +373,7 @@ namespace Vista
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Remito";
+            this.Load += new System.EventHandler(this.Remito_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Remito)).EndInit();

@@ -794,17 +794,12 @@ namespace Vista
                                     case "1":
                                     case "5":
                                         {
-                                            WEmpresaRemito = 1;
-                                            break;
-                                        }
-                                    case "4":
-                                        {
-                                            WEmpresaRemito = 3;
+                                            WEmpresaRemito = 11;
                                             break;
                                         }
                                     default:
                                         {
-                                            WEmpresaRemito = 4;
+                                            WEmpresaRemito = 12;
                                             break;
                                         }
                                 }

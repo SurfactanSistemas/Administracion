@@ -629,5 +629,10 @@ namespace Vista
                 TBNumRemito.Text = _TraerProximoNumeroRemitoPorEstacionDeTrabajo().ToString();
             }
         }
+
+        private void Remito_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
