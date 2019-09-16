@@ -59,12 +59,12 @@ Partial Class IngresoEnsayosIntermediosPT
         Me.Label8 = New System.Windows.Forms.Label()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.btnGrabar = New System.Windows.Forms.Button()
+        Me.btnImprimirEnsayosIngresados = New System.Windows.Forms.Button()
         Me.btnActualizarEspecif = New System.Windows.Forms.Button()
         Me.btnNotas = New System.Windows.Forms.Button()
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.Panel2 = New System.Windows.Forms.Panel()
         Me.dgvEnsayos = New ConsultasVarias.DBDataGridView()
         Me.Ensayo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Especificacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -103,14 +103,16 @@ Partial Class IngresoEnsayosIntermediosPT
         Me.VariableValor10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.EspecificacionIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Decimales = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.btnImprimirEnsayosIngresados = New System.Windows.Forms.Button()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.lblDescEtapa = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
-        Me.Panel2.SuspendLayout()
         CType(Me.dgvEnsayos, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -159,8 +161,10 @@ Partial Class IngresoEnsayosIntermediosPT
         Me.GroupBox1.Controls.Add(Me.txtFecha)
         Me.GroupBox1.Controls.Add(Me.txtCodigo)
         Me.GroupBox1.Controls.Add(Me.Label4)
+        Me.GroupBox1.Controls.Add(Me.lblDescEtapa)
         Me.GroupBox1.Controls.Add(Me.lblTipoProceso)
         Me.GroupBox1.Controls.Add(Me.Label14)
+        Me.GroupBox1.Controls.Add(Me.Label15)
         Me.GroupBox1.Controls.Add(Me.Label7)
         Me.GroupBox1.Controls.Add(Me.Label6)
         Me.GroupBox1.Controls.Add(Me.Label3)
@@ -173,7 +177,7 @@ Partial Class IngresoEnsayosIntermediosPT
         '
         'txtEtapa
         '
-        Me.txtEtapa.Location = New System.Drawing.Point(300, 23)
+        Me.txtEtapa.Location = New System.Drawing.Point(284, 23)
         Me.txtEtapa.MaxLength = 2
         Me.txtEtapa.Name = "txtEtapa"
         Me.txtEtapa.Size = New System.Drawing.Size(24, 20)
@@ -183,7 +187,7 @@ Partial Class IngresoEnsayosIntermediosPT
         '
         'txtPartida
         '
-        Me.txtPartida.Location = New System.Drawing.Point(62, 23)
+        Me.txtPartida.Location = New System.Drawing.Point(57, 23)
         Me.txtPartida.MaxLength = 6
         Me.txtPartida.Name = "txtPartida"
         Me.txtPartida.Size = New System.Drawing.Size(52, 20)
@@ -194,7 +198,7 @@ Partial Class IngresoEnsayosIntermediosPT
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(257, 27)
+        Me.Label5.Location = New System.Drawing.Point(243, 27)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(38, 13)
         Me.Label5.TabIndex = 0
@@ -202,7 +206,7 @@ Partial Class IngresoEnsayosIntermediosPT
         '
         'txtFechaVto
         '
-        Me.txtFechaVto.Location = New System.Drawing.Point(499, 23)
+        Me.txtFechaVto.Location = New System.Drawing.Point(469, 23)
         Me.txtFechaVto.Mask = "00/00/0000"
         Me.txtFechaVto.Name = "txtFechaVto"
         Me.txtFechaVto.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -213,7 +217,7 @@ Partial Class IngresoEnsayosIntermediosPT
         '
         'txtFecha
         '
-        Me.txtFecha.Location = New System.Drawing.Point(382, 23)
+        Me.txtFecha.Location = New System.Drawing.Point(357, 23)
         Me.txtFecha.Mask = "00/00/0000"
         Me.txtFecha.Name = "txtFecha"
         Me.txtFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -224,7 +228,7 @@ Partial Class IngresoEnsayosIntermediosPT
         '
         'txtCodigo
         '
-        Me.txtCodigo.Location = New System.Drawing.Point(173, 23)
+        Me.txtCodigo.Location = New System.Drawing.Point(160, 23)
         Me.txtCodigo.Mask = "AA-00000-000"
         Me.txtCodigo.Name = "txtCodigo"
         Me.txtCodigo.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -245,7 +249,7 @@ Partial Class IngresoEnsayosIntermediosPT
         '
         Me.lblTipoProceso.BackColor = System.Drawing.Color.Cyan
         Me.lblTipoProceso.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.lblTipoProceso.Location = New System.Drawing.Point(647, 23)
+        Me.lblTipoProceso.Location = New System.Drawing.Point(624, 10)
         Me.lblTipoProceso.Name = "lblTipoProceso"
         Me.lblTipoProceso.Size = New System.Drawing.Size(309, 20)
         Me.lblTipoProceso.TabIndex = 0
@@ -255,7 +259,7 @@ Partial Class IngresoEnsayosIntermediosPT
         'Label14
         '
         Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(459, 27)
+        Me.Label14.Location = New System.Drawing.Point(429, 27)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(38, 13)
         Me.Label14.TabIndex = 0
@@ -264,16 +268,16 @@ Partial Class IngresoEnsayosIntermediosPT
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(571, 27)
+        Me.Label7.Location = New System.Drawing.Point(545, 36)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(73, 13)
+        Me.Label7.Size = New System.Drawing.Size(69, 13)
         Me.Label7.TabIndex = 0
-        Me.Label7.Text = "Tipo Proceso:"
+        Me.Label7.Text = "Desc. Etapa:"
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(335, 27)
+        Me.Label6.Location = New System.Drawing.Point(314, 27)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(40, 13)
         Me.Label6.TabIndex = 0
@@ -282,7 +286,7 @@ Partial Class IngresoEnsayosIntermediosPT
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(125, 27)
+        Me.Label3.Location = New System.Drawing.Point(116, 27)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(43, 13)
         Me.Label3.TabIndex = 0
@@ -449,6 +453,16 @@ Partial Class IngresoEnsayosIntermediosPT
         Me.btnGrabar.Text = "GRABAR"
         Me.btnGrabar.UseVisualStyleBackColor = True
         '
+        'btnImprimirEnsayosIngresados
+        '
+        Me.btnImprimirEnsayosIngresados.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnImprimirEnsayosIngresados.Location = New System.Drawing.Point(250, 45)
+        Me.btnImprimirEnsayosIngresados.Name = "btnImprimirEnsayosIngresados"
+        Me.btnImprimirEnsayosIngresados.Size = New System.Drawing.Size(181, 30)
+        Me.btnImprimirEnsayosIngresados.TabIndex = 0
+        Me.btnImprimirEnsayosIngresados.Text = "VER PDF ENSAYOS INGRESADOS"
+        Me.btnImprimirEnsayosIngresados.UseVisualStyleBackColor = True
+        '
         'btnActualizarEspecif
         '
         Me.btnActualizarEspecif.Location = New System.Drawing.Point(250, 12)
@@ -502,16 +516,6 @@ Partial Class IngresoEnsayosIntermediosPT
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(971, 479)
         Me.TableLayoutPanel1.TabIndex = 7
-        '
-        'Panel2
-        '
-        Me.Panel2.Controls.Add(Me.GroupBox2)
-        Me.Panel2.Controls.Add(Me.GroupBox3)
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(3, 380)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(965, 96)
-        Me.Panel2.TabIndex = 5
         '
         'dgvEnsayos
         '
@@ -785,15 +789,35 @@ Partial Class IngresoEnsayosIntermediosPT
         Me.Decimales.ReadOnly = True
         Me.Decimales.Visible = False
         '
-        'btnImprimirEnsayosIngresados
+        'Panel2
         '
-        Me.btnImprimirEnsayosIngresados.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnImprimirEnsayosIngresados.Location = New System.Drawing.Point(250, 45)
-        Me.btnImprimirEnsayosIngresados.Name = "btnImprimirEnsayosIngresados"
-        Me.btnImprimirEnsayosIngresados.Size = New System.Drawing.Size(181, 30)
-        Me.btnImprimirEnsayosIngresados.TabIndex = 0
-        Me.btnImprimirEnsayosIngresados.Text = "VER PDF ENSAYOS INGRESADOS"
-        Me.btnImprimirEnsayosIngresados.UseVisualStyleBackColor = True
+        Me.Panel2.Controls.Add(Me.GroupBox2)
+        Me.Panel2.Controls.Add(Me.GroupBox3)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel2.Location = New System.Drawing.Point(3, 380)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(965, 96)
+        Me.Panel2.TabIndex = 5
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(545, 14)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(73, 13)
+        Me.Label15.TabIndex = 0
+        Me.Label15.Text = "Tipo Proceso:"
+        '
+        'lblDescEtapa
+        '
+        Me.lblDescEtapa.BackColor = System.Drawing.Color.Cyan
+        Me.lblDescEtapa.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.lblDescEtapa.Location = New System.Drawing.Point(624, 32)
+        Me.lblDescEtapa.Name = "lblDescEtapa"
+        Me.lblDescEtapa.Size = New System.Drawing.Size(309, 20)
+        Me.lblDescEtapa.TabIndex = 0
+        Me.lblDescEtapa.Text = "MICRONIZADO"
+        Me.lblDescEtapa.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'IngresoEnsayosIntermediosPT
         '
@@ -812,8 +836,8 @@ Partial Class IngresoEnsayosIntermediosPT
         Me.GroupBox2.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
         Me.TableLayoutPanel1.ResumeLayout(False)
-        Me.Panel2.ResumeLayout(False)
         CType(Me.dgvEnsayos, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel2.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -893,4 +917,6 @@ Partial Class IngresoEnsayosIntermediosPT
     Friend WithEvents EspecificacionIngles As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Decimales As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents btnImprimirEnsayosIngresados As System.Windows.Forms.Button
+    Friend WithEvents lblDescEtapa As System.Windows.Forms.Label
+    Friend WithEvents Label15 As System.Windows.Forms.Label
 End Class

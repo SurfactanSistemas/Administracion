@@ -84,12 +84,14 @@ Partial Class IngresoEspecificacionesPT
         Me.Variable10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.dgvEspecifIngles = New ConsultasVarias.DBDataGridView()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.EnsayoIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.EspecificacionIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DescEnsayoIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FarmacopeaIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.UnidadEspecifIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.txtDescEtapa = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -147,10 +149,12 @@ Partial Class IngresoEspecificacionesPT
         Me.GroupBox1.Controls.Add(Me.btnRevalidar)
         Me.GroupBox1.Controls.Add(Me.btnLimpiar)
         Me.GroupBox1.Controls.Add(Me.btnGrabar)
+        Me.GroupBox1.Controls.Add(Me.txtDescEtapa)
         Me.GroupBox1.Controls.Add(Me.txtTipoProceso)
         Me.GroupBox1.Controls.Add(Me.txtControlCambios)
         Me.GroupBox1.Controls.Add(Me.txtDescTerminado)
         Me.GroupBox1.Controls.Add(Me.txtEtapa)
+        Me.GroupBox1.Controls.Add(Me.Label7)
         Me.GroupBox1.Controls.Add(Me.txtTerminado)
         Me.GroupBox1.Controls.Add(Me.Label6)
         Me.GroupBox1.Controls.Add(Me.Label4)
@@ -158,13 +162,13 @@ Partial Class IngresoEspecificacionesPT
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Location = New System.Drawing.Point(8, 51)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(899, 115)
+        Me.GroupBox1.Size = New System.Drawing.Size(899, 120)
         Me.GroupBox1.TabIndex = 3
         Me.GroupBox1.TabStop = False
         '
         'btnNotas
         '
-        Me.btnNotas.Location = New System.Drawing.Point(511, 80)
+        Me.btnNotas.Location = New System.Drawing.Point(511, 73)
         Me.btnNotas.Name = "btnNotas"
         Me.btnNotas.Size = New System.Drawing.Size(112, 22)
         Me.btnNotas.TabIndex = 4
@@ -229,7 +233,7 @@ Partial Class IngresoEspecificacionesPT
         'txtTipoProceso
         '
         Me.txtTipoProceso.BackColor = System.Drawing.Color.Cyan
-        Me.txtTipoProceso.Location = New System.Drawing.Point(122, 81)
+        Me.txtTipoProceso.Location = New System.Drawing.Point(122, 74)
         Me.txtTipoProceso.MaxLength = 100
         Me.txtTipoProceso.Name = "txtTipoProceso"
         Me.txtTipoProceso.ReadOnly = True
@@ -239,7 +243,7 @@ Partial Class IngresoEspecificacionesPT
         '
         'txtControlCambios
         '
-        Me.txtControlCambios.Location = New System.Drawing.Point(122, 42)
+        Me.txtControlCambios.Location = New System.Drawing.Point(122, 37)
         Me.txtControlCambios.MaxLength = 100
         Me.txtControlCambios.Multiline = True
         Me.txtControlCambios.Name = "txtControlCambios"
@@ -252,7 +256,7 @@ Partial Class IngresoEspecificacionesPT
         '
         Me.txtDescTerminado.BackColor = System.Drawing.Color.Cyan
         Me.txtDescTerminado.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.txtDescTerminado.Location = New System.Drawing.Point(160, 16)
+        Me.txtDescTerminado.Location = New System.Drawing.Point(160, 12)
         Me.txtDescTerminado.Name = "txtDescTerminado"
         Me.txtDescTerminado.ReadOnly = True
         Me.txtDescTerminado.Size = New System.Drawing.Size(404, 20)
@@ -262,7 +266,7 @@ Partial Class IngresoEspecificacionesPT
         '
         'txtEtapa
         '
-        Me.txtEtapa.Location = New System.Drawing.Point(610, 16)
+        Me.txtEtapa.Location = New System.Drawing.Point(610, 12)
         Me.txtEtapa.Mask = "00"
         Me.txtEtapa.Name = "txtEtapa"
         Me.txtEtapa.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -273,7 +277,7 @@ Partial Class IngresoEspecificacionesPT
         '
         'txtTerminado
         '
-        Me.txtTerminado.Location = New System.Drawing.Point(74, 16)
+        Me.txtTerminado.Location = New System.Drawing.Point(74, 12)
         Me.txtTerminado.Mask = ">LL-00000-000"
         Me.txtTerminado.Name = "txtTerminado"
         Me.txtTerminado.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -284,7 +288,7 @@ Partial Class IngresoEspecificacionesPT
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(16, 85)
+        Me.Label6.Location = New System.Drawing.Point(28, 78)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(88, 13)
         Me.Label6.TabIndex = 0
@@ -293,7 +297,7 @@ Partial Class IngresoEspecificacionesPT
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(570, 20)
+        Me.Label4.Location = New System.Drawing.Point(570, 16)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(34, 13)
         Me.Label4.TabIndex = 0
@@ -302,7 +306,7 @@ Partial Class IngresoEspecificacionesPT
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(15, 43)
+        Me.Label5.Location = New System.Drawing.Point(15, 37)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(101, 13)
         Me.Label5.TabIndex = 0
@@ -311,7 +315,7 @@ Partial Class IngresoEspecificacionesPT
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(15, 20)
+        Me.Label3.Location = New System.Drawing.Point(15, 16)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(53, 13)
         Me.Label3.TabIndex = 0
@@ -363,6 +367,7 @@ Partial Class IngresoEspecificacionesPT
         Me.dgvProcedimientos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.dgvProcedimientos.Location = New System.Drawing.Point(3, 3)
         Me.dgvProcedimientos.Name = "dgvProcedimientos"
+        Me.dgvProcedimientos.OrdenamientoColumnasHabilitado = True
         Me.dgvProcedimientos.ReadOnly = True
         Me.dgvProcedimientos.RowHeadersWidth = 10
         Me.dgvProcedimientos.RowTemplate.Height = 20
@@ -450,6 +455,7 @@ Partial Class IngresoEspecificacionesPT
         Me.dgvEspecif.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.dgvEspecif.Location = New System.Drawing.Point(3, 3)
         Me.dgvEspecif.Name = "dgvEspecif"
+        Me.dgvEspecif.OrdenamientoColumnasHabilitado = True
         Me.dgvEspecif.RowHeadersWidth = 10
         Me.dgvEspecif.RowTemplate.Height = 20
         Me.dgvEspecif.ShowCellToolTips = False
@@ -653,6 +659,7 @@ Partial Class IngresoEspecificacionesPT
         Me.dgvEspecifIngles.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.dgvEspecifIngles.Location = New System.Drawing.Point(0, 0)
         Me.dgvEspecifIngles.Name = "dgvEspecifIngles"
+        Me.dgvEspecifIngles.OrdenamientoColumnasHabilitado = True
         Me.dgvEspecifIngles.RowHeadersWidth = 10
         Me.dgvEspecifIngles.RowTemplate.Height = 20
         Me.dgvEspecifIngles.ShowCellToolTips = False
@@ -696,6 +703,26 @@ Partial Class IngresoEspecificacionesPT
         Me.UnidadEspecifIngles.MinimumWidth = 80
         Me.UnidadEspecifIngles.Name = "UnidadEspecifIngles"
         Me.UnidadEspecifIngles.Width = 80
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(47, 100)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(69, 13)
+        Me.Label7.TabIndex = 0
+        Me.Label7.Text = "Desc. Etapa:"
+        '
+        'txtDescEtapa
+        '
+        Me.txtDescEtapa.BackColor = System.Drawing.Color.Cyan
+        Me.txtDescEtapa.Location = New System.Drawing.Point(122, 96)
+        Me.txtDescEtapa.MaxLength = 100
+        Me.txtDescEtapa.Name = "txtDescEtapa"
+        Me.txtDescEtapa.ReadOnly = True
+        Me.txtDescEtapa.Size = New System.Drawing.Size(383, 20)
+        Me.txtDescEtapa.TabIndex = 3
+        Me.txtDescEtapa.TabStop = False
         '
         'IngresoEspecificacionesPT
         '
@@ -782,4 +809,6 @@ Partial Class IngresoEspecificacionesPT
     Friend WithEvents DescEnsayoIngles As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents FarmacopeaIngles As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents UnidadEspecifIngles As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents txtDescEtapa As System.Windows.Forms.TextBox
+    Friend WithEvents Label7 As System.Windows.Forms.Label
 End Class

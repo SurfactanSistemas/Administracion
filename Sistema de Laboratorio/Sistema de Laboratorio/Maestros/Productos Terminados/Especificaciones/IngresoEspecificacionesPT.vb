@@ -12,7 +12,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
     Private WTipoProceso As TipoProcesosIngEspecif = Nothing
 
     Private Sub btnLimpiar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLimpiar.Click
-        For Each control As Control In {txtControlCambios, txtDescTerminado, txtEtapa, txtTerminado, txtTipoProceso}
+        For Each control As Control In {txtControlCambios, txtDescTerminado, txtEtapa, txtTerminado, txtTipoProceso, txtDescEtapa}
             control.Text = ""
         Next
 
@@ -69,7 +69,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
         If e.KeyData = Keys.Enter Then
             If Val(txtEtapa.Text) = 0 Then : Exit Sub : End If
 
-            Dim WProcedimientos As DataTable = GetAll("SELECT Articulo, PTerminado, Letra, Descripcion, Cantidad, TipoProceso FROM CargaIII WHERE Terminado = '" & txtTerminado.Text & "' AND Paso = '" & txtEtapa.Text & "' AND ISNULL(Tipo, '') <> 'N' Order By Terminado, Paso, Renglon")
+            Dim WProcedimientos As DataTable = GetAll("SELECT Articulo, PTerminado, Letra, Descripcion, Cantidad, TipoProceso, DesEtapa FROM CargaIII WHERE Terminado = '" & txtTerminado.Text & "' AND Paso = '" & txtEtapa.Text & "' AND ISNULL(Tipo, '') <> 'N' Order By Terminado, Paso, Renglon")
 
             dgvProcedimientos.Rows.Clear()
 
@@ -81,10 +81,12 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                 Dim WDescripcion As String = OrDefault(r.Item("Descripcion"), "")
                 Dim WCantidad As String = OrDefault(r.Item("Cantidad"), "0")
                 Dim WTipoProceso As String = Trim(OrDefault(r.Item("TipoProceso"), ""))
+                Dim WDescEtapa As String = Trim(OrDefault(r.Item("DesEtapa"), ""))
 
                 Dim _r = dgvProcedimientos.Rows.Add
 
                 txtTipoProceso.Text = WTipoProceso
+                txtDescEtapa.Text = WDescEtapa
 
                 With dgvProcedimientos.Rows(_r)
                     .Cells("Articulo").Value = WArticulo

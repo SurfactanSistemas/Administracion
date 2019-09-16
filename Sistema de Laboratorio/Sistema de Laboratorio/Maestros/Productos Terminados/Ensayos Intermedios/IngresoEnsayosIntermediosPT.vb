@@ -21,7 +21,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
     End Sub
 
     Private Sub btnLimpiar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLimpiar.Click
-        For Each c As Control In {txtArchivo, txtCodigo, txtConfecciono, txtDesvio, txtEtapa, txtFecha, txtLibros, txtOOS, txtPaginas, txtPartida, lblTipoProceso, txtFechaVto}
+        For Each c As Control In {txtArchivo, txtCodigo, txtConfecciono, txtDesvio, txtEtapa, txtFecha, txtLibros, txtOOS, txtPaginas, txtPartida, lblTipoProceso, txtFechaVto, lblDescEtapa}
             c.Text = ""
         Next
         dgvEnsayos.Rows.Clear()
@@ -313,6 +313,12 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
                 txtFecha.Text = Date.Now.ToString("dd/MM/yyyy")
 
+            End If
+
+            Dim WCargaIII As DataRow = GetSingle("SELECT DesEtapa FROM CargaIII WHERE Terminado = '" & txtCodigo.Text & "' And Paso = " & txtEtapa.Text & " And Renglon = 1")
+
+            If WCargaIII IsNot Nothing Then
+                lblDescEtapa.Text = OrDefault(WCargaIII.Item("DesEtapa"), "").ToString.Trim.ToUpper
             End If
 
             txtFechaVto.Text = Entidades.ProductoTerminado.CalcularFechaVto(txtCodigo.Text, txtPartida.Text)
