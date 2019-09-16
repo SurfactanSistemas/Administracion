@@ -1,4 +1,5 @@
-﻿Imports System.Text.RegularExpressions
+﻿Imports System.IO
+Imports System.Text.RegularExpressions
 Imports ConsultasVarias
 Imports info.lundin.math
 
@@ -10,8 +11,8 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
     Private WMotivoClaveSeguridad As TiposSolicitudClaveSeguridad = TiposSolicitudClaveSeguridad.General
     Private WActualizacionBloqueada As Boolean = False
     Private WAutorizaActualizacionBloqueado As Boolean = False
-
-
+    Private ReadOnly PATH_ENSAYOS_INTERMEDIOS As String = Configuration.ConfigurationManager.AppSettings("PATH_ENSAYOS_INTERMEDIOS").ToString()
+    
     Private Sub btnCerrar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCerrar.Click
         Close()
     End Sub
@@ -84,6 +85,8 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
             WMotivoDesvio = ""
 
             btnGrabar.Text = "GRABAR"
+
+            _CrearCarpetaEtapaIntermedia()
 
             Dim WExiste As DataRow = GetSingle("SELECT Clave FROM PrueterfarmaIntermedio WHERE Producto = '" + txtCodigo.Text + "' And Paso = '" & txtEtapa.Text & "' And Renglon = '1'")
 
@@ -324,6 +327,10 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
     End Sub
 
+    Private Sub _CrearCarpetaEtapaIntermedia()
+        Directory.CreateDirectory(_CarpetaEtapaIntermedia)
+    End Sub
+
     Private Function _GenerarImpreParametro(ByVal wTipoEspecif As String, ByVal wDesdeEspecif As String, ByVal wHastaEspecif As String, ByVal wUnidadEspecif As String, ByVal wMenorIgualEspecif As String) As String
         If Trim(wDesdeEspecif) = "" And Trim(wHastaEspecif) = "" Then Return ""
 
@@ -358,6 +365,10 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
         End If
 
         Return ""
+    End Function
+
+    Private Function _CarpetaEtapaIntermedia() As String
+        Return String.Format("{0}{1}/{2}", PATH_ENSAYOS_INTERMEDIOS, txtPartida.Ceros(6), txtEtapa.Ceros(2))
     End Function
 
     Private Sub btnNotas_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnNotas.Click
@@ -646,6 +657,8 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
             End If
 
+            _CrearCarpetaEtapaIntermedia()
+
             Dim WSqls As New List(Of String)
 
             Dim WPartida = txtPartida.Text
@@ -823,6 +836,8 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
             'MsgBox("Actualizado")
 
+            _GuardarNuevaVersionPDFConEnsayosIntermedios()
+
             btnLimpiar.PerformClick()
 
             txtPartida.Focus()
@@ -831,6 +846,19 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
             txtPartida.Focus()
         End Try
+
+    End Sub
+
+    Private Sub _GuardarNuevaVersionPDFConEnsayosIntermedios()
+
+        Dim frm As ConsultasVarias.VistaPrevia = New ConsultasVarias.VistaPrevia
+
+        With frm
+            .Reporte = New ValoresEnsayosIntermediosPTFarma
+            .Formula = "{PrueterFarmaIntermedio.Partida} = " & txtPartida.Text & " AND {Prueterfarmaintermedio.Paso} = " & txtEtapa.Text & " AND {Prueterfarmaintermedio.Producto} = '" & txtCodigo.Text & "' AND {Prueterfarmaintermedio.Producto} = {Terminado.Codigo}"
+        End With
+
+        frm.Exportar(String.Format("{0}-{1}-{2}", txtCodigo.Text, txtPartida.Ceros(6), Date.Now.ToString("yyyyMMdd-HHmm")), CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, String.Format("{0}", _CarpetaEtapaIntermedia))
 
     End Sub
 

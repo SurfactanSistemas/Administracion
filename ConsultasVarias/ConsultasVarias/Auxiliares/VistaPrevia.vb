@@ -12,6 +12,7 @@ Public Class VistaPrevia
     Public Property Reporte As ReportDocument
 
     Public Property Formula As String
+    Public Property Base As String = ""
 
     Private Sub Reporte_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
 
@@ -42,7 +43,7 @@ Public Class VistaPrevia
 
         Try
             ' Buscamos el string de conexion.
-            cs = _ConectarA 'ClasesCompartidas.Globals.getConnectionString()
+            cs = _ConectarA(Base) 'ClasesCompartidas.Globals.getConnectionString()
         Catch ex As System.Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical)
             Return
@@ -153,6 +154,8 @@ Public Class VistaPrevia
             Directory.CreateDirectory(ruta)
 
         End If
+
+        If Formato = ExportFormatType.PortableDocFormat AndAlso Not NombreArchivo.EndsWith(".pdf") Then NombreArchivo &= ".pdf"
 
         _ReconectarBaseDatos()
 
