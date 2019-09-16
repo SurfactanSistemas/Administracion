@@ -12,7 +12,10 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
     Private WActualizacionBloqueada As Boolean = False
     Private WAutorizaActualizacionBloqueado As Boolean = False
     Private ReadOnly PATH_ENSAYOS_INTERMEDIOS As String = Configuration.ConfigurationManager.AppSettings("PATH_ENSAYOS_INTERMEDIOS").ToString()
-    
+    Private ReadOnly DESTINATARIOS_AVISO_ENSAYOS_INTERMEDIOS As String = Configuration.ConfigurationManager.AppSettings("DESTINATARIOS_AVISO_ENSAYOS_INTERMEDIOS").ToString()
+
+    Private Const RUTA_TEMP As String = "C:/tempEnsayosIntermedios/"
+
     Private Sub btnCerrar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCerrar.Click
         Close()
     End Sub
@@ -694,6 +697,12 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
             Dim WTipoProceso As String = Trim(lblTipoProceso.Text)
 
+            Dim WEsUnaActualizacion As Boolean = False
+
+            Dim WPrueterFarma As DataRow = GetSingle("SELECT TOP 1 Clave FROM PrueterFarmaIntermedio WHERE Partida = '" & WPartida & "' And Producto = '" & WCodigo & "' And Paso = '" & WEtapa & "'")
+
+            WEsUnaActualizacion = WPrueterFarma IsNot Nothing
+
             WSqls.Add("DELETE FROM PrueterfarmaIntermedio WHERE Partida = '" & WPartida & "' And Producto = '" & WCodigo & "' And Paso = '" & WEtapa & "'")
 
             For Each row As DataGridViewRow In dgvEnsayos.Rows
@@ -838,6 +847,8 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
             _GuardarNuevaVersionPDFConEnsayosIntermedios()
 
+            _EnviarAvisoEnsayosIntermedios(WEsUnaActualizacion)
+
             btnLimpiar.PerformClick()
 
             txtPartida.Focus()
@@ -847,6 +858,41 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
             txtPartida.Focus()
         End Try
 
+    End Sub
+
+    Private Sub _EnviarAvisoEnsayosIntermedios(Optional ByVal EsActualizacion As Boolean = False)
+
+        Directory.CreateDirectory(RUTA_TEMP)
+
+        Dim frm As New ConsultasVarias.VistaPrevia
+
+        With frm
+            .Reporte = New ValoresEnsayosIntermediosPTFarma
+            .Formula = ""
+
+            Dim nombreArchivo = String.Format("{0} {1} - Etapa {2}.pdf", txtCodigo.Text, txtPartida.Ceros(6), txtEtapa.Ceros(2))
+
+            File.Delete(RUTA_TEMP & nombreArchivo)
+
+            .Exportar(nombreArchivo, CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, RUTA_TEMP)
+
+            Dim WTitulo, WCuerpo As String
+
+            If EsActualizacion Then
+                WTitulo = "Actualizacion de Ensayos Intermedios Ingresados - " & txtCodigo.Text & " - Pda " & txtPartida.Ceros(6) & " - Etapa " & txtEtapa.Ceros(2) & ""
+                WCuerpo = "Se le informa sobre una actualización en el ingreso de Ensayos Intermedios para la Etapa <b>" & txtEtapa.Ceros(2) & "</b> correspondiente al Producto <b>" & txtCodigo.Text & "</b> Pda: <b>" & txtPartida.Ceros(6) & "</b> "
+            Else
+                WTitulo = "Ingreso de Ensayos Intermedios - " & txtCodigo.Text & " - Pda " & txtPartida.Ceros(6) & " - Etapa " & txtEtapa.Ceros(2) & ""
+                WCuerpo = "Se ha registrado un nuevo ingreso de Ensayos Intermedios para la Etapa " & txtEtapa.Ceros(2) & " correspondiente al Producto " & txtCodigo.Text & " Pda: " & txtPartida.Ceros(6) & " "
+            End If
+
+            If File.Exists(RUTA_TEMP & nombreArchivo) Then
+                .EnviarPorEmail(RUTA_TEMP & nombreArchivo, False, WTitulo, WCuerpo, DESTINATARIOS_AVISO_ENSAYOS_INTERMEDIOS)
+            Else
+                MsgBox("Ha ocurrido un inconveniente al querer generar el PDF con los ensayos intermedios.", MsgBoxStyle.Exclamation)
+            End If
+
+        End With
     End Sub
 
     Private Sub _GuardarNuevaVersionPDFConEnsayosIntermedios()

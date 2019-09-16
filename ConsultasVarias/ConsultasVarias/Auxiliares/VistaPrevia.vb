@@ -165,13 +165,13 @@ Public Class VistaPrevia
 
     End Sub
 
-    Public Sub EnviarPorEmail(ByVal NombreArchivo As String, Optional ByVal WEnvioAutomatico As Boolean = False, Optional ByVal Subject As String = "", Optional ByVal Body As String = "")
+    Public Sub EnviarPorEmail(ByVal NombreArchivo As String, Optional ByVal WEnvioAutomatico As Boolean = False, Optional ByVal Subject As String = "", Optional ByVal Body As String = "", Optional ByVal Direcciones As String = "")
 
-        EnviarEmail(NombreArchivo, WEnvioAutomatico)
+        EnviarEmail(NombreArchivo, WEnvioAutomatico, Subject, Body, Direcciones)
 
     End Sub
 
-    Private Sub EnviarEmail(ByVal Archivo As String, ByVal EnvioAutomatico As Boolean, Optional ByVal Subject As String = "", Optional ByVal Body As String = "")
+    Private Sub EnviarEmail(ByVal Archivo As String, ByVal EnvioAutomatico As Boolean, Optional ByVal Subject As String = "", Optional ByVal Body As String = "", Optional ByVal Direcciones As String = "")
         Dim oApp As _Application
         Dim oMsg As _MailItem
 
@@ -189,6 +189,7 @@ Public Class VistaPrevia
 
             ' Modificar por los E-Mails que correspondan.
             'oMsg.To = "gferreyra@surfactan.com.ar"
+            oMsg.To = Direcciones
 
             If EnvioAutomatico Then
                 oMsg.Send()
