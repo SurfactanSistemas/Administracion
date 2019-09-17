@@ -202,6 +202,8 @@ Public Class Login
 
                         End If
 
+                        ExecuteNonQueries("UPDATE CargaIncidencias SET ImpreDescProd = CASE inc.TipoProd WHEN 'T' THEN LEFT(t.Descripcion, 100) WHEN 'M' THEN LEFT(a.Descripcion, 100) ELSE '' END FROM CargaIncidencias inc LEFT OUTER JOIN Terminado t ON t.Codigo = inc.Producto LEFT OUTER JOIN Articulo a ON a.Codigo = inc.Producto")
+
                         WAsunto = "Carga de Informe de No Conformidad - Nro. " & WNumeroINC
                         WCuerpoMsj = "Se inició un Informe de No Conformidad :" & _
                                 " : " & WNumeroINC & "" & _
