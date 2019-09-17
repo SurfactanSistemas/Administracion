@@ -25,6 +25,8 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
         WAutorizado = False
         WTipoProceso = Nothing
 
+        btnHistorialCambios.Visible = False
+
         txtTerminado.Focus()
     End Sub
 
@@ -150,6 +152,8 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
             Next
 
             dgvEspecifIngles.Rows.Clear()
+
+            btnHistorialCambios.Visible = (Operador.Base = "Surfactan_III" And Val(txtEtapa.Text) = 99) Or Operador.Base <> "Surfactan_III"
 
             If Val(txtEtapa.Text) = 99 Then
 
@@ -1723,6 +1727,14 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
             .Reporte = New ImpreEspecificacionesPTIngles
             .Formula = "{CargaV.Terminado}='" & txtTerminado.Text & "' And {CargaV.Paso} <> 99"
             .Mostrar()
+        End With
+
+    End Sub
+
+    Private Sub btnHistorialCambios_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnHistorialCambios.Click
+
+        With New HistorialCambios("T", txtTerminado.Text)
+            .Show(Me)
         End With
 
     End Sub

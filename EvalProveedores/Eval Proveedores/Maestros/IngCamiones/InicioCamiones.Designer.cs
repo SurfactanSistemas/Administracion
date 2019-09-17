@@ -44,7 +44,6 @@
             this.BT_MenuFiltros = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.DGV_Camiones = new System.Windows.Forms.DataGridView();
-            this.camionBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.Bt_Fin = new System.Windows.Forms.Button();
             this.Bt_Imprimir = new System.Windows.Forms.Button();
@@ -57,6 +56,7 @@
             this.patenteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.camionBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descripcionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Patente = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -94,14 +94,17 @@
             this.OrdFechaEnt4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OrdFechaEnt5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Titulo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaRENPRE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.VtoRENPRE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ObsRENPRE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.P_Verde.SuspendLayout();
             this.P_Filtrado.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Camiones)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.camionBindingSource)).BeginInit();
             this.CMS_Filtros.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.camionBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -266,7 +269,10 @@
             this.OrdFechaEnt3,
             this.OrdFechaEnt4,
             this.OrdFechaEnt5,
-            this.Titulo});
+            this.Titulo,
+            this.FechaRENPRE,
+            this.VtoRENPRE,
+            this.ObsRENPRE});
             this.DGV_Camiones.DataSource = this.camionBindingSource;
             this.DGV_Camiones.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DGV_Camiones.Location = new System.Drawing.Point(87, 0);
@@ -285,10 +291,6 @@
             this.DGV_Camiones.Size = new System.Drawing.Size(757, 365);
             this.DGV_Camiones.TabIndex = 4;
             this.DGV_Camiones.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGV_Camiones_RowHeaderMouseDoubleClick);
-            // 
-            // camionBindingSource
-            // 
-            this.camionBindingSource.DataSource = typeof(Negocio.Camion);
             // 
             // Bt_Fin
             // 
@@ -419,6 +421,10 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(844, 365);
             this.tableLayoutPanel1.TabIndex = 14;
+            // 
+            // camionBindingSource
+            // 
+            this.camionBindingSource.DataSource = typeof(Negocio.Camion);
             // 
             // Codigo
             // 
@@ -665,6 +671,33 @@
             this.Titulo.Name = "Titulo";
             this.Titulo.Visible = false;
             // 
+            // FechaRENPRE
+            // 
+            this.FechaRENPRE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.FechaRENPRE.DataPropertyName = "FechaEntregaRENPRE";
+            this.FechaRENPRE.HeaderText = "F.Ent.RENPRE";
+            this.FechaRENPRE.Name = "FechaRENPRE";
+            this.FechaRENPRE.ReadOnly = true;
+            this.FechaRENPRE.Width = 105;
+            // 
+            // VtoRENPRE
+            // 
+            this.VtoRENPRE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.VtoRENPRE.DataPropertyName = "VencimientoRENPRE";
+            this.VtoRENPRE.HeaderText = "Vto RENPRE";
+            this.VtoRENPRE.Name = "VtoRENPRE";
+            this.VtoRENPRE.ReadOnly = true;
+            this.VtoRENPRE.Width = 96;
+            // 
+            // ObsRENPRE
+            // 
+            this.ObsRENPRE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.ObsRENPRE.DataPropertyName = "ObsRENPRE";
+            this.ObsRENPRE.HeaderText = "Obs. RENPRE";
+            this.ObsRENPRE.Name = "ObsRENPRE";
+            this.ObsRENPRE.ReadOnly = true;
+            this.ObsRENPRE.Width = 102;
+            // 
             // InicioCamiones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -684,10 +717,10 @@
             this.P_Filtrado.ResumeLayout(false);
             this.P_Filtrado.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Camiones)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.camionBindingSource)).EndInit();
             this.CMS_Filtros.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.camionBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -756,5 +789,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn OrdFechaEnt4;
         private System.Windows.Forms.DataGridViewTextBoxColumn OrdFechaEnt5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Titulo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaRENPRE;
+        private System.Windows.Forms.DataGridViewTextBoxColumn VtoRENPRE;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ObsRENPRE;
     }
 }
