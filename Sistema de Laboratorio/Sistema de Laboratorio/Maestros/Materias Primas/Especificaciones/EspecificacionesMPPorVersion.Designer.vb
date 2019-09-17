@@ -28,9 +28,15 @@ Partial Class EspecificacionesMPPorVersion
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.dgvEnsayos = New ConsultasVarias.DBDataGridView()
+        Me.Ensayo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Valor = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnSigVersion = New System.Windows.Forms.Button()
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.btnLimpiar = New System.Windows.Forms.Button()
+        Me.btnAntVersion = New System.Windows.Forms.Button()
         Me.btnImprimir = New System.Windows.Forms.Button()
         Me.btnConsulta = New System.Windows.Forms.Button()
         Me.txtFinal = New System.Windows.Forms.MaskedTextBox()
@@ -44,16 +50,12 @@ Partial Class EspecificacionesMPPorVersion
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.btnAntVersion = New System.Windows.Forms.Button()
-        Me.btnSigVersion = New System.Windows.Forms.Button()
-        Me.dgvEnsayos = New ConsultasVarias.DBDataGridView()
-        Me.Ensayo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Valor = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.lblClasificacion = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
         CType(Me.dgvEnsayos, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -108,6 +110,65 @@ Partial Class EspecificacionesMPPorVersion
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(873, 468)
         Me.TableLayoutPanel1.TabIndex = 3
         '
+        'dgvEnsayos
+        '
+        Me.dgvEnsayos.AllowUserToAddRows = False
+        Me.dgvEnsayos.AllowUserToDeleteRows = False
+        Me.dgvEnsayos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvEnsayos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Ensayo, Me.Descripcion, Me.Valor})
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvEnsayos.DefaultCellStyle = DataGridViewCellStyle2
+        Me.dgvEnsayos.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.dgvEnsayos.DoubleBuffered = True
+        Me.dgvEnsayos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
+        Me.dgvEnsayos.Location = New System.Drawing.Point(3, 110)
+        Me.dgvEnsayos.Name = "dgvEnsayos"
+        Me.dgvEnsayos.OrdenamientoColumnasHabilitado = False
+        Me.dgvEnsayos.ReadOnly = True
+        Me.dgvEnsayos.RowHeadersWidth = 15
+        Me.dgvEnsayos.RowTemplate.Height = 20
+        Me.dgvEnsayos.ShowCellToolTips = False
+        Me.dgvEnsayos.SinClickDerecho = True
+        Me.dgvEnsayos.Size = New System.Drawing.Size(867, 355)
+        Me.dgvEnsayos.TabIndex = 0
+        '
+        'Ensayo
+        '
+        Me.Ensayo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Ensayo.DefaultCellStyle = DataGridViewCellStyle1
+        Me.Ensayo.HeaderText = "Ensayo"
+        Me.Ensayo.MinimumWidth = 30
+        Me.Ensayo.Name = "Ensayo"
+        Me.Ensayo.ReadOnly = True
+        Me.Ensayo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Ensayo.Width = 48
+        '
+        'Descripcion
+        '
+        Me.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Descripcion.HeaderText = "Descripción"
+        Me.Descripcion.MinimumWidth = 200
+        Me.Descripcion.Name = "Descripcion"
+        Me.Descripcion.ReadOnly = True
+        Me.Descripcion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'Valor
+        '
+        Me.Valor.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Valor.HeaderText = "Valor Standard"
+        Me.Valor.MinimumWidth = 180
+        Me.Valor.Name = "Valor"
+        Me.Valor.ReadOnly = True
+        Me.Valor.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Valor.Width = 180
+        '
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.btnSigVersion)
@@ -120,12 +181,14 @@ Partial Class EspecificacionesMPPorVersion
         Me.GroupBox1.Controls.Add(Me.txtInicio)
         Me.GroupBox1.Controls.Add(Me.txtControlCambios)
         Me.GroupBox1.Controls.Add(Me.txtVersion)
+        Me.GroupBox1.Controls.Add(Me.lblClasificacion)
         Me.GroupBox1.Controls.Add(Me.lblDescMP)
         Me.GroupBox1.Controls.Add(Me.txtCodigo)
         Me.GroupBox1.Controls.Add(Me.Label7)
         Me.GroupBox1.Controls.Add(Me.Label6)
         Me.GroupBox1.Controls.Add(Me.Label8)
         Me.GroupBox1.Controls.Add(Me.Label5)
+        Me.GroupBox1.Controls.Add(Me.Label4)
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox1.Location = New System.Drawing.Point(10, 3)
@@ -134,6 +197,17 @@ Partial Class EspecificacionesMPPorVersion
         Me.GroupBox1.Size = New System.Drawing.Size(853, 99)
         Me.GroupBox1.TabIndex = 1
         Me.GroupBox1.TabStop = False
+        '
+        'btnSigVersion
+        '
+        Me.btnSigVersion.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.btnSigVersion.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSigVersion.Location = New System.Drawing.Point(743, 70)
+        Me.btnSigVersion.Name = "btnSigVersion"
+        Me.btnSigVersion.Size = New System.Drawing.Size(87, 26)
+        Me.btnSigVersion.TabIndex = 5
+        Me.btnSigVersion.Text = "SIG. VERSIÓN"
+        Me.btnSigVersion.UseVisualStyleBackColor = True
         '
         'btnCerrar
         '
@@ -154,6 +228,17 @@ Partial Class EspecificacionesMPPorVersion
         Me.btnLimpiar.TabIndex = 5
         Me.btnLimpiar.Text = "LIMPIAR"
         Me.btnLimpiar.UseVisualStyleBackColor = True
+        '
+        'btnAntVersion
+        '
+        Me.btnAntVersion.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.btnAntVersion.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAntVersion.Location = New System.Drawing.Point(650, 70)
+        Me.btnAntVersion.Name = "btnAntVersion"
+        Me.btnAntVersion.Size = New System.Drawing.Size(87, 26)
+        Me.btnAntVersion.TabIndex = 5
+        Me.btnAntVersion.Text = "ANT. VERSIÓN"
+        Me.btnAntVersion.UseVisualStyleBackColor = True
         '
         'btnImprimir
         '
@@ -292,86 +377,28 @@ Partial Class EspecificacionesMPPorVersion
         Me.Label3.TabIndex = 0
         Me.Label3.Text = "CODIGO:"
         '
-        'btnAntVersion
+        'Label4
         '
-        Me.btnAntVersion.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.btnAntVersion.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAntVersion.Location = New System.Drawing.Point(650, 70)
-        Me.btnAntVersion.Name = "btnAntVersion"
-        Me.btnAntVersion.Size = New System.Drawing.Size(87, 26)
-        Me.btnAntVersion.TabIndex = 5
-        Me.btnAntVersion.Text = "ANT. VERSIÓN"
-        Me.btnAntVersion.UseVisualStyleBackColor = True
+        Me.Label4.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(393, 47)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(89, 13)
+        Me.Label4.TabIndex = 0
+        Me.Label4.Text = "CLASIFICACIÓN:"
         '
-        'btnSigVersion
+        'lblClasificacion
         '
-        Me.btnSigVersion.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.btnSigVersion.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSigVersion.Location = New System.Drawing.Point(743, 70)
-        Me.btnSigVersion.Name = "btnSigVersion"
-        Me.btnSigVersion.Size = New System.Drawing.Size(87, 26)
-        Me.btnSigVersion.TabIndex = 5
-        Me.btnSigVersion.Text = "SIG. VERSIÓN"
-        Me.btnSigVersion.UseVisualStyleBackColor = True
-        '
-        'dgvEnsayos
-        '
-        Me.dgvEnsayos.AllowUserToAddRows = False
-        Me.dgvEnsayos.AllowUserToDeleteRows = False
-        Me.dgvEnsayos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvEnsayos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Ensayo, Me.Descripcion, Me.Valor})
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvEnsayos.DefaultCellStyle = DataGridViewCellStyle2
-        Me.dgvEnsayos.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.dgvEnsayos.DoubleBuffered = True
-        Me.dgvEnsayos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.dgvEnsayos.Location = New System.Drawing.Point(3, 110)
-        Me.dgvEnsayos.Name = "dgvEnsayos"
-        Me.dgvEnsayos.OrdenamientoColumnasHabilitado = False
-        Me.dgvEnsayos.ReadOnly = True
-        Me.dgvEnsayos.RowHeadersWidth = 15
-        Me.dgvEnsayos.RowTemplate.Height = 20
-        Me.dgvEnsayos.ShowCellToolTips = False
-        Me.dgvEnsayos.SinClickDerecho = True
-        Me.dgvEnsayos.Size = New System.Drawing.Size(867, 355)
-        Me.dgvEnsayos.TabIndex = 0
-        '
-        'Ensayo
-        '
-        Me.Ensayo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Ensayo.DefaultCellStyle = DataGridViewCellStyle1
-        Me.Ensayo.HeaderText = "Ensayo"
-        Me.Ensayo.MinimumWidth = 30
-        Me.Ensayo.Name = "Ensayo"
-        Me.Ensayo.ReadOnly = True
-        Me.Ensayo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Ensayo.Width = 48
-        '
-        'Descripcion
-        '
-        Me.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.Descripcion.HeaderText = "Descripción"
-        Me.Descripcion.MinimumWidth = 200
-        Me.Descripcion.Name = "Descripcion"
-        Me.Descripcion.ReadOnly = True
-        Me.Descripcion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'Valor
-        '
-        Me.Valor.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Valor.HeaderText = "Valor Standard"
-        Me.Valor.MinimumWidth = 180
-        Me.Valor.Name = "Valor"
-        Me.Valor.ReadOnly = True
-        Me.Valor.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Valor.Width = 180
+        Me.lblClasificacion.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.lblClasificacion.BackColor = System.Drawing.Color.Cyan
+        Me.lblClasificacion.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.lblClasificacion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblClasificacion.Location = New System.Drawing.Point(488, 42)
+        Me.lblClasificacion.Name = "lblClasificacion"
+        Me.lblClasificacion.Padding = New System.Windows.Forms.Padding(3)
+        Me.lblClasificacion.Size = New System.Drawing.Size(156, 21)
+        Me.lblClasificacion.TabIndex = 2
+        Me.lblClasificacion.Text = "Label4"
         '
         'EspecificacionesMPPorVersion
         '
@@ -385,9 +412,9 @@ Partial Class EspecificacionesMPPorVersion
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.TableLayoutPanel1.ResumeLayout(False)
+        CType(Me.dgvEnsayos, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
-        CType(Me.dgvEnsayos, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -417,4 +444,6 @@ Partial Class EspecificacionesMPPorVersion
     Friend WithEvents btnImprimir As System.Windows.Forms.Button
     Friend WithEvents btnSigVersion As System.Windows.Forms.Button
     Friend WithEvents btnAntVersion As System.Windows.Forms.Button
+    Friend WithEvents lblClasificacion As System.Windows.Forms.Label
+    Friend WithEvents Label4 As System.Windows.Forms.Label
 End Class

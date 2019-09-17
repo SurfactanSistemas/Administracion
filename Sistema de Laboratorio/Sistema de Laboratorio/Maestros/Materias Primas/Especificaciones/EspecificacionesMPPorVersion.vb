@@ -16,7 +16,7 @@ Public Class EspecificacionesMPPorVersion : Implements IAyudaMPs
 
     Private Sub btnLimpiar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLimpiar.Click
 
-        For Each c As Control In {txtCodigo, txtControlCambios, txtFinal, txtInicio, txtVersion, lblDescMP}
+        For Each c As Control In {txtCodigo, txtControlCambios, txtFinal, txtInicio, txtVersion, lblDescMP, lblClasificacion}
             c.Text = ""
         Next
 
@@ -47,7 +47,7 @@ Public Class EspecificacionesMPPorVersion : Implements IAyudaMPs
         If e.KeyData = Keys.Enter Then
             If txtCodigo.Text.Replace(" ", "").Length < 10 Then : Exit Sub : End If
 
-            Dim WArt As DataRow = MatPrima.Info(txtCodigo.Text, {"Codigo", "Descripcion"})
+            Dim WArt As DataRow = MatPrima.Info(txtCodigo.Text, {"Codigo", "Descripcion", "ClasificacionFarma"})
 
             btnLimpiar_Click(Nothing, Nothing)
 
@@ -57,9 +57,11 @@ Public Class EspecificacionesMPPorVersion : Implements IAyudaMPs
 
                 Dim WCodigo As String = UCase(Trim(OrDefault(.Item("Codigo"), "")))
                 Dim WDescripcion As String = UCase(Trim(OrDefault(.Item("Descripcion"), "")))
+                Dim WClasificacion As Char = Trim(OrDefault(.Item("ClasificacionFarma"), ""))
 
                 txtCodigo.Text = WCodigo
                 lblDescMP.Text = WDescripcion
+                lblClasificacion.Text = MatPrima.DescripcionClasificacion(WClasificacion)
 
             End With
 
