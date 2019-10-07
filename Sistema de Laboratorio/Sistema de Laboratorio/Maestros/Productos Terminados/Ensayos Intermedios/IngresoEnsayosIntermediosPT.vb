@@ -874,7 +874,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
         With frm
             .Reporte = New ValoresEnsayosIntermediosPTFarma
-            .Formula = ""
+            .Formula = "{PrueterFarmaIntermedio.Producto} = '" & txtCodigo.Text & "' And {PrueterFarmaIntermedio.Paso} = " & txtEtapa.Text & " And {PrueterFarmaIntermedio.Partida} = " & txtPartida.Text & " And {PrueterFarmaIntermedio.Producto} = {Terminado.Codigo}"
 
             Dim nombreArchivo = String.Format("{0} {1} - Etapa {2}.pdf", txtCodigo.Text, txtPartida.Ceros(6), txtEtapa.Ceros(2))
 
@@ -885,7 +885,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
             Dim WTitulo, WCuerpo As String
 
             If EsActualizacion Then
-                WTitulo = "Actualizacion de Ensayos Intermedios Ingresados - " & txtCodigo.Text & " - Pda " & txtPartida.Ceros(6) & " - Etapa " & txtEtapa.Ceros(2) & ""
+                WTitulo = "Actualización de Ensayos Intermedios Ingresados - " & txtCodigo.Text & " - Pda " & txtPartida.Ceros(6) & " - Etapa " & txtEtapa.Ceros(2) & ""
                 WCuerpo = "Se le informa sobre una actualización en el ingreso de Ensayos Intermedios para la Etapa <b>" & txtEtapa.Ceros(2) & "</b> correspondiente al Producto <b>" & txtCodigo.Text & "</b> Pda: <b>" & txtPartida.Ceros(6) & "</b> "
             Else
                 WTitulo = "Ingreso de Ensayos Intermedios - " & txtCodigo.Text & " - Pda " & txtPartida.Ceros(6) & " - Etapa " & txtEtapa.Ceros(2) & ""
@@ -893,7 +893,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
             End If
 
             If File.Exists(RUTA_TEMP & nombreArchivo) Then
-                .EnviarPorEmail(RUTA_TEMP & nombreArchivo, False, WTitulo, WCuerpo, DESTINATARIOS_AVISO_ENSAYOS_INTERMEDIOS)
+                .EnviarPorEmail(RUTA_TEMP & nombreArchivo, True, WTitulo, WCuerpo, DESTINATARIOS_AVISO_ENSAYOS_INTERMEDIOS)
             Else
                 MsgBox("Ha ocurrido un inconveniente al querer generar el PDF con los ensayos intermedios.", MsgBoxStyle.Exclamation)
             End If
@@ -1001,7 +1001,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
                         If Val(WMenorIgual) = 0 And (WValorNum < WMin Or WValorNum > WMax) Then Return False
 
-                        If Val(WMenorIgual) = 1 And (WValorNum <= WMin Or WValorNum >= WMax) Then Return False
+                        If Val(WMenorIgual) = 1 And (WValorNum < WMin Or WValorNum >= WMax) Then Return False
 
                     End If
 
@@ -1116,7 +1116,13 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                 If WClave.ToString.ToUpper = "SEGURO" Then
                     WEsPorDesvio = True
                     btnGrabar.PerformClick()
+                    Exit Sub
                 End If
+
+                MsgBox("Clave Incorrecta")
+                Dim frm As New IngresoClaveSeguridad
+                frm.ShowDialog(Me)
+
             Case TiposSolicitudClaveSeguridad.ActualizarEnsayoBloqueado
 
                 Dim WDatos As DataRow = GetSingle("SELECT GrabaV, FechaGrabaV FROM Operador WHERE Clave = '" & UCase(WClave) & "'")

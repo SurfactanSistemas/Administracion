@@ -67,7 +67,7 @@ Public Class ConsultaDatosFactura
 
                     XProveedor = .Item("Proveedor")
 
-                    txtParidad.Text = Proceso.formatonumerico(IIf(IsDBNull(.Item("Paridad")), "0", Trim(.Item("Paridad"))))
+                    txtParidad.Text = Proceso.formatonumerico(OrDefault(.Item("Paridad"), "0"))
 
                     If Not IsDBNull(.Item("Despacho")) Then
                         txtDespacho.Text = Trim(.Item("Despacho"))
@@ -81,7 +81,7 @@ Public Class ConsultaDatosFactura
                     txtFechaVto2.Text = IIf(IsDBNull(.Item("Vencimiento1")), "", Trim(.Item("Vencimiento1")))
                     txtFechaVtoIva.Text = IIf(IsDBNull(.Item("FechaIva")), "", Trim(.Item("FechaIva")))
 
-                    txtMoneda.Text = IIf(.Item("Moneda") = 1, "Pesos", "Cláusula Dólar")
+                    txtMoneda.Text = IIf(OrDefault(.Item("Moneda"), 1) = 1, "Pesos", "Cláusula Dólar")
 
                 End If
             End With

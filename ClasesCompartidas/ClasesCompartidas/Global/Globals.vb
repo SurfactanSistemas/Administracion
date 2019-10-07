@@ -10,20 +10,18 @@ Public Class Globals
     Public Shared Function reportPathWithName(ByVal reportName As String)
         Dim path As String
         Try
-            If UCase(Globals.empresa) = "LOCAL" Then
-                path = ConfigurationManager.AppSettings("LocalreportsLocation")
-            Else
-                path = ConfigurationManager.AppSettings("reportsLocation")
+            path = ConfigurationManager.AppSettings("reportsLocation")
+
+            If path = "" Then
+                Throw New ApplicationException("La variable de entorno 'reportsLocation' no está definida en el app.config")
             End If
+
+            Return path & reportName
 
         Catch ex As Exception
             Throw New ApplicationException("Problemas obteniendo la variable de entorno 'reportsLocation' del app.config")
         End Try
 
-        If path = "" Then
-            Throw New ApplicationException("La variable de entorno 'reportsLocation' no está definida en el app.config")
-        End If
-        Return path & reportName
     End Function
 
     Public Shared Function connectionWorksFor(ByVal connectionName As String)

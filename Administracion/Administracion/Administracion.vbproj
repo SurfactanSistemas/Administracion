@@ -280,6 +280,7 @@
     <Compile Include="GestionAvisosOPDisponiblesProveedores.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Interfaces\IAyudaProveedores.vb" />
     <Compile Include="Listados\ConsultaDatosFactura.Designer.vb">
       <DependentUpon>ConsultaDatosFactura.vb</DependentUpon>
     </Compile>
@@ -534,6 +535,12 @@
     <Compile Include="Procesos\ProcesoPercepcionesIvaCompras.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ProveedoresABM\AyudaProveedores.Designer.vb">
+      <DependentUpon>AyudaProveedores.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ProveedoresABM\AyudaProveedores.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ProveedoresABM\Contactos.Designer.vb">
       <DependentUpon>Contactos.vb</DependentUpon>
     </Compile>
@@ -652,6 +659,12 @@
       <DependentUpon>AltaAgenda.vb</DependentUpon>
     </Compile>
     <Compile Include="Recibos\AltaAgenda.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Recibos\IngresoDatosFCE.Designer.vb">
+      <DependentUpon>IngresoDatosFCE.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Recibos\IngresoDatosFCE.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Recibos\SolicitarInformacionCuit.Designer.vb">
@@ -1098,6 +1111,9 @@
     <EmbeddedResource Include="Procesos\ProcesoPercepcionesIvaCompras.resx">
       <DependentUpon>ProcesoPercepcionesIvaCompras.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ProveedoresABM\AyudaProveedores.resx">
+      <DependentUpon>AyudaProveedores.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ProveedoresABM\Contactos.resx">
       <DependentUpon>Contactos.vb</DependentUpon>
     </EmbeddedResource>
@@ -1157,6 +1173,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Recibos\AltaAgenda.resx">
       <DependentUpon>AltaAgenda.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Recibos\IngresoDatosFCE.resx">
+      <DependentUpon>IngresoDatosFCE.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Recibos\SolicitarInformacionCuit.resx">
       <DependentUpon>SolicitarInformacionCuit.vb</DependentUpon>

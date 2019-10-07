@@ -624,7 +624,7 @@ Public Class CuentaCorrientePantalla
                     .txtOrdenPago_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
                     .ShowDialog()
                 End With
-            Case "FC", "ND", "NC"
+            Case "FC", "ND", "NC", "OC"
                 With ConsultaDatosFactura
 
                     .NroInterno = _NroInterno

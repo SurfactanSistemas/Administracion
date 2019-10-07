@@ -272,4 +272,43 @@
             .Show(Me)
         End With
     End Sub
+
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+
+        ExecuteNonQueries({"UPDATE ConsultaChequesRecibosII SET Orden = '', Deposito = '', EnPagos = '', EnDepositos = '', Indefinido = ''"})
+
+        Dim WDatos As DataTable = GetAll("SELECT Numero2, Importe2, Clave FROM ConsultaChequesRecibosII")
+
+        For Each row As Datarow In WDatos.Rows
+            With row
+
+                If Microsoft.VisualBasic.Left(.Item("Numero2").ToString, 4) <> "0000" Then
+                    Dim WPago As DataRow = GetSingle("SELECT Orden, Importe2 FROM Pagos WHERE Numero2 = '" & OrDefault(.Item("Numero2"), "").ToString.PadLeft(8, "0") & "'")
+
+                    If WPago IsNot Nothing Then
+                        If Val(formatonumerico(.Item("Importe2"))) = Val(formatonumerico(WPago.Item("Importe2"))) Then
+                            ExecuteNonQueries({"UPDATE ConsultaChequesRecibosii SET EnPagos = '1', Orden = '" & WPago.Item("Orden") & "' WHERE Clave = '" & .Item("Clave") & "'"})
+                            Continue For
+                        End If
+
+                        Dim WDeposito As DataRow = GetSingle("SELECT Deposito, Importe2 FROM Depositos WHERE Numero2 = '" & OrDefault(.Item("Numero2"), "").ToString.PadLeft(8, "0") & "'")
+
+                        If WDeposito IsNot Nothing Then
+                            If Val(formatonumerico(.Item("Importe2"))) = Val(formatonumerico(WDeposito.Item("Importe2"))) Then
+                                ExecuteNonQueries({"UPDATE ConsultaChequesRecibosii SET EnDepositos = '1', Deposito = '" & WDeposito.Item("Deposito") & "' WHERE Clave = '" & .Item("Clave") & "'"})
+                                Continue For
+                            End If
+                        End If
+                    End If
+
+                End If
+
+                ExecuteNonQueries({"UPDATE ConsultaChequesRecibosii SET Indefinido = '1' WHERE Clave = '" & .Item("Clave") & "'"})
+
+            End With
+        Next
+
+        MsgBox("Listo")
+
+    End Sub
 End Class

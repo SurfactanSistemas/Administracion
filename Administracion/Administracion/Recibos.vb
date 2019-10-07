@@ -46,6 +46,8 @@ Public Class Recibos
     Dim cm As SqlCommand = New SqlCommand()
     Dim dr As SqlDataReader
 
+    Dim WDatosFCE As DataRow
+
     Dim WOffset As Integer = 1
 
     ' No tengo idea de para que son.
@@ -481,6 +483,7 @@ Public Class Recibos
         lblTotalCreditos.Text = "0.0"
         lblTotalDebitos.Text = "0.0"
         lblDiferencia.Text = "0.0"
+        txtCostoFCE.Text = "0.0"
 
         _DeterminarParidad()
         txtRecibo.Text = "0"
@@ -577,6 +580,7 @@ Public Class Recibos
 
         _ClavesCheques.Clear()
         _CuentasContables.Clear()
+        WDatosFCE = Nothing
 
         Try
 
@@ -643,6 +647,23 @@ Public Class Recibos
                     End If
 
                 Loop
+            End If
+
+            '
+            ' Buscamos los datos adicionales para las FCE.
+            '
+            If Not dr.IsClosed Then dr.Close()
+
+            cm.CommandText = "SELECT * FROM RecibosDatosFCE WHERE Recibo = '" & txtRecibo.Text & "'"
+            Dim tabla As New DataTable
+
+            dr = cm.ExecuteReader
+
+            If dr.HasRows Then
+                tabla.Load(dr)
+
+                If tabla.Rows.Count > 0 Then WDatosFCE = tabla.Rows(0)
+
             End If
 
         Catch ex As Exception
@@ -889,12 +910,24 @@ Public Class Recibos
     Private Function _SumarCreditos() As Boolean
         Dim _Error = False
 
+        If WDatosFCE IsNot Nothing Then
+            Dim suma As Double = 0
+
+            For Each c As String In {"Interes", "Aranceles", "Derechos", "IvaAranceles", "IvaDerechos"}
+                suma += Val(WDatosFCE.Item(c))
+            Next
+
+            txtCostoFCE.Text = formatonumerico(suma)
+
+        End If
+
         txtRetGanancias.Text = _NormalizarNumero(txtRetGanancias.Text)
         txtRetIva.Text = _NormalizarNumero(txtRetIva.Text)
         txtRetIB.Text = _NormalizarNumero(txtRetIB.Text)
         txtRetSuss.Text = _NormalizarNumero(txtRetSuss.Text)
+        txtCostoFCE.Text = formatonumerico(txtCostoFCE.Text)
 
-        lblTotalCreditos.Text = Val(txtRetGanancias.Text) + Val(txtRetIva.Text) + Val(txtRetIB.Text) + Val(txtRetSuss.Text)
+        lblTotalCreditos.Text = Val(txtRetGanancias.Text) + Val(txtRetIva.Text) + Val(txtRetIB.Text) + Val(txtRetSuss.Text) + Val(txtCostoFCE.Text)
 
         For Each row As DataGridViewRow In gridFormasPago2.Rows
 
@@ -1170,6 +1203,41 @@ Public Class Recibos
             ' En caso de que se haya generado desde un recibo provisorio se lo asocia al recibo creado.
             If Val(txtProvi.Text) > 0 Then
                 _AsignarReciboAProvisorio()
+            End If
+
+            If WDatosFCE IsNot Nothing Then
+
+                Dim ZSqls As New List(Of String)
+
+                Dim WSql As String = "INSERT INTO RecibosDatosFCE (Recibo, Boleto, Proveedor, Interes, Aranceles, IvaAranceles, Derechos, IvaDerechos)"
+
+                With WDatosFCE
+                    WSql &= String.Format(" VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}')", txtRecibo.Text, .Item("Boleto"), .Item("Proveedor"), .Item("Interes"), .Item("Aranceles"), .Item("IvaAranceles"), .Item("Derechos"), .Item("IvaDerechos"))
+                End With
+
+                ZSqls.Add("DELETE FROM RecibosDatosFCE WHERE Recibo = '" & txtRecibo.Text & "'")
+                ZSqls.Add(WSql)
+
+                Dim WIvaCmp, WNetoCmp As String
+
+                Dim WIvaComp As DataRow = GetSingle("SELECT Max(NroInterno) As Ultimo FROM IvaComp")
+
+                If WIvaComp IsNot Nothing Then
+                    Dim WProximo As Integer = 0
+
+                    WProximo = OrDefault(WIvaComp.Item("Ultimo"), 0) + 1
+
+                    WNetoCmp = formatonumerico(Val(WDatosFCE.Item("Aranceles")) + Val(WDatosFCE.Item("Derechos")))
+                    WIvaCmp = formatonumerico(Val(WDatosFCE.Item("IvaAranceles")) + Val(WDatosFCE.Item("IvaDerechos")))
+
+                    ZSqls.Add(String.Format("INSERT INTO IvaComp (NroInterno, Proveedor, Tipo, Letra, Punto, Numero, Fecha, Vencimiento, Vencimiento1, Periodo, Neto, Iva21, Contado, Paridad, Pago) VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{6}','{6}','{6}','{7}','{8}', '{9}', '{10}', '{11}')", WProximo, WDatosFCE.Item("Proveedor"), "99", "A", "0001", txtRecibo.Text.PadLeft(8, "0"), txtFecha.Text, WNetoCmp, WIvaCmp, "1", txtParidad.Text, "1"))
+
+                    ZSqls.Add(String.Format("INSERT INTO CtaCtePrv (Clave, Proveedor, Tipo, Letra, Punto, Numero, Fecha, Estado, Vencimiento, Vencimiento1, Total, Saldo, OrdFecha, OrdVencimiento, Impre, NroInterno, Paridad, Pago) VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{6}','{6}','{8}','{9}','{10}','{10}','{11}','{12}','{13}','{14}')", WDatosFCE.Item("Proveedor") & "A" & "99" & "0001" & txtRecibo.Text.PadLeft(8, "0"), WDatosFCE.Item("Proveedor"), "99", "A", "0001", txtRecibo.Text.PadLeft(8, "0"), txtFecha.Text, "1", formatonumerico(Val(WNetoCmp) + Val(WIvaCmp)), "0", ordenaFecha(txtFecha.Text), "OC", WProximo, txtParidad.Text, "1"))
+
+                End If
+
+                ExecuteNonQueries(ZSqls.ToArray)
+
             End If
 
             ' Consultamos en caso de que desee agendar una llamada al Cliente al que se le hace el recibo.
@@ -2507,6 +2575,7 @@ Public Class Recibos
             txtCuenta.Enabled = True
             txtCuenta.Empty = False
             txtNombreCuenta.Empty = False
+
         End If
     End Sub
 
@@ -4320,6 +4389,9 @@ Public Class Recibos
         WLeyendas(19) = "Ajuste:"
         WLeyendas(21) = "Transferencia:"
         WLeyendas(22) = "Ret. SUSS:"
+        WLeyendas(23) = "Intereses:"
+        WLeyendas(24) = "Aranceles:"
+        WLeyendas(25) = "Derechos:"
 
         ' Generamos la tabla.
         With detallado
@@ -5176,6 +5248,18 @@ Public Class Recibos
                     WEntra(XLugar, 9) = "Ret. Suss"
                     WEntra(XLugar, 10) = txtRetSuss.Text
                     WEntra(XLugar, 11) = ""
+                Case 18
+                    WEntra(XLugar, 9) = "Intereses"
+                    WEntra(XLugar, 10) = IIf(WDatosFCE IsNot Nothing, WDatosFCE.Item("Interes"), "0.00")
+                    WEntra(XLugar, 11) = "$"
+                Case 19
+                    WEntra(XLugar, 9) = "Aranceles"
+                    WEntra(XLugar, 10) = IIf(WDatosFCE IsNot Nothing, formatonumerico(Val(WDatosFCE.Item("Aranceles")) + WDatosFCE.Item("IvaAranceles")), "0.00")
+                    WEntra(XLugar, 11) = "$"
+                Case 20
+                    WEntra(XLugar, 9) = "Derechos"
+                    WEntra(XLugar, 10) = IIf(WDatosFCE IsNot Nothing, formatonumerico(Val(WDatosFCE.Item("Derechos")) + WDatosFCE.Item("IvaDerechos")), "0.00")
+                    WEntra(XLugar, 11) = "$"
                 Case Else
                     WEntra(XLugar, 9) = ""
                     WEntra(XLugar, 10) = ""
@@ -5559,4 +5643,29 @@ Public Class Recibos
         CustomLabel14.Text = _NormalizarNumero(Val(_NormalizarNumero(lblDolares.Text)) * Val(txtParidad.Text))
     End Sub
 
+    Private Sub optVarios_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles optVarios.Click, optCtaCte.Click, optAnticipos.Click
+
+        CustomLabel15.Visible = optCtaCte.Checked
+        txtCostoFCE.Visible = optCtaCte.Checked
+        btnCargarDatosFCE.Visible = optCtaCte.Checked
+
+    End Sub
+
+    Private Sub btnCargarDatosFCE_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCargarDatosFCE.Click
+        With New IngresoDatosFCE(WDatosFCE)
+
+            Dim result As DialogResult = .ShowDialog(Me)
+
+            If result = Windows.Forms.DialogResult.OK Then
+                WDatosFCE = .DatosFCE
+            End If
+
+            _SumarCreditos()
+
+        End With
+    End Sub
+
+    Private Sub txtCostoFCE_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtCostoFCE.MouseDoubleClick
+        If optCtaCte.Checked Then btnCargarDatosFCE_Click(Nothing, Nothing)
+    End Sub
 End Class

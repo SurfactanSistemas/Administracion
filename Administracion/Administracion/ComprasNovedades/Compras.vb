@@ -786,7 +786,14 @@ Public Class Compras
         esModificacion = True
         txtTipo.Text = compra.tipoDocumento
 
-        If compra.tipoDocumento >= 0 Then
+        If compra.tipoDocumento = 99 Then
+            For Each o As Object In cmbTipo.Items
+                If o = "OC" Then
+                    cmbTipo.SelectedItem = o
+                    Exit For
+                End If
+            Next
+        ElseIf compra.tipoDocumento >= 0 Then
             cmbTipo.SelectedIndex = compra.tipoDocumento
         Else
             cmbTipo.SelectedIndex = 0
@@ -1105,7 +1112,8 @@ Public Class Compras
             Dim _NumeroInterno = ""
 
             If Trim(txtCodigoProveedor.Text) <> "" And cmbTipo.SelectedIndex >= 0 And CBLetra.SelectedIndex >= 0 And Trim(txtPunto.Text) <> "" And Trim(txtNumero.Text) <> "" Then
-                _NumeroInterno = Trim(DAOCompras.buscarNumeroIntero(txtCodigoProveedor.Text, ceros(cmbTipo.SelectedIndex, 2), CBLetra.SelectedItem, ceros(txtPunto.Text, 4), ceros(txtNumero.Text, 8)))
+                Dim tipo As String = IIf(cmbTipo.SelectedItem = "OC", "99", ceros(cmbTipo.SelectedIndex, 2))
+                _NumeroInterno = Trim(DAOCompras.buscarNumeroIntero(txtCodigoProveedor.Text, tipo, CBLetra.SelectedItem, ceros(txtPunto.Text, 4), ceros(txtNumero.Text, 8)))
 
                 If Trim(_NumeroInterno) <> 0 Then
 

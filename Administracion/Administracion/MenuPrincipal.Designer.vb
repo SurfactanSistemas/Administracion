@@ -94,6 +94,7 @@ Partial Class MenuPrincipal
         Me.FinDelSistemaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.btnCambio = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.MenuStrip1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
@@ -536,6 +537,7 @@ Partial Class MenuPrincipal
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.btnCambio, 1, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.Button1, 0, 1)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 24)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
@@ -557,6 +559,15 @@ Partial Class MenuPrincipal
         Me.btnCambio.TabIndex = 1
         Me.btnCambio.Text = "Cambio de Empresa"
         Me.btnCambio.UseVisualStyleBackColor = True
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(3, 239)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(125, 46)
+        Me.Button1.TabIndex = 2
+        Me.Button1.Text = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'MenuPrincipal
         '
@@ -650,4 +661,5 @@ Partial Class MenuPrincipal
     Friend WithEvents EnvioEnEMailAClientesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents EnvíoDeAvisoDeOPAProveedoresPorEMailToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents EnvíoDeEmailPorAnticipoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents Button1 As System.Windows.Forms.Button
 End Class
