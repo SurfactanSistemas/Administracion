@@ -124,14 +124,15 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
 
             foreach (DataRow fila in dtTemasInicio.Rows)
             {
-                DataGridViewRow row = new DataGridViewRow();
-                row.CreateCells(DGV_Temas);
+                DataGridViewRow row = DGV_Temas.Rows[DGV_Temas.Rows.Add()];
+                //row.CreateCells(DGV_Temas);
                 row.Cells[0].Value = fila[0].ToString();
-                row.Cells[1].Value = fila[1].ToString();
+                row.Cells[1].Value = fila[1].ToString().Trim();
                 row.Cells[2].Value = fila[2].ToString();
                 row.Cells[3].Value = fila[3].ToString();
+                row.Cells["Agregado"].Value = "0";
 
-                DGV_Temas.Rows.Add(row);
+                //DGV_Temas.Rows.Add(row);
             }
             /*
 
@@ -209,6 +210,7 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
             DGV_Temas.Rows[index].Cells["Descripcion"].Value = TB_DescTemas.Text;
             DGV_Temas.Rows[index].Cells["Necesaria"].Value = CB_Necesario.Checked ? "X" : "";
             DGV_Temas.Rows[index].Cells["Deseable"].Value = CB_Deseable.Checked ? "X" : "";
+            DGV_Temas.Rows[index].Cells["Agregado"].Value = "1";
 
             LimpiarCamposTema();
         }
@@ -358,7 +360,7 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
         private void BT_Eliminar_Click(object sender, EventArgs e)
         {
             dtTemaEliminado.Clear();
-            dtTemaEliminado.Columns.Add("Curso", typeof(string));
+            if (dtTemaEliminado.Columns["Curso"] == null) dtTemaEliminado.Columns.Add("Curso", typeof(string));
             foreach (DataGridViewRow fila in DGV_Temas.Rows)
             {
                 if (fila.Cells[0].Value.ToString() == TB_CodTemas.Text)
@@ -442,28 +444,28 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
                             fila["DescCurso"] = Row.Cells[1].Value.ToString();
                             fila["Necesario"] = Row.Cells[2].Value.ToString();
                             fila["Deseable"] = Row.Cells[3].Value.ToString();
-                            fila["Agregar"] = 1;
+                            fila["Agregar"] = Row.Cells["Agregado"].Value;
 
                             dtTemasModif.Rows.Add(fila);
                         }
                         //int contador = 0;
-                        foreach (DataRow filaini in dtTemasInicio.Rows)
-                        {
+                        //foreach (DataRow filaini in dtTemasInicio.Rows)
+                        //{
                             
                             
 
-                            foreach (DataRow filamod in dtTemasModif.Rows)
-                            {
-                                if (filaini[1].ToString() == filamod[1].ToString())
-                                {
-                                    filamod["Agregar"] = 0;
-                                    break;
-                                } 
+                        //    foreach (DataRow filamod in dtTemasModif.Rows)
+                        //    {
+                        //        if (filaini[1].ToString() == filamod[1].ToString())
+                        //        {
+                        //            filamod["Agregar"] = 0;
+                        //            break;
+                        //        } 
                                 
                                 
-                            }
+                        //    }
                             
-                        }
+                        //}
 
                         P.ModificarN(dtTemasModif, dtTemaEliminado);
 
@@ -1471,14 +1473,19 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
             TB_DecPerfil.Focus();
         }
 
-        
+        private void DGV_Temas_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.ColumnIndex == 2 || e.ColumnIndex == 3)
+            {
+                DataGridViewCell celdaActual = DGV_Temas.CurrentCell;
+                DataGridViewCell celdaOtra = (e.ColumnIndex == 2) ? DGV_Temas.Rows[e.RowIndex].Cells[3] : DGV_Temas.Rows[e.RowIndex].Cells[2];
 
-        
-
-        
-
-       
-
-        
+                if (celdaActual.Value.ToString().Trim() == "")
+                {
+                    celdaActual.Value = "X";
+                    celdaOtra.Value = "";
+                }
+            }
+        }
     }
 }

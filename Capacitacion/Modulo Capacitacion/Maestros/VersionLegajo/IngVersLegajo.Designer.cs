@@ -31,8 +31,8 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.pnlConsulta = new System.Windows.Forms.Panel();
@@ -221,9 +221,9 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
             this.pnlConsulta.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(139)))), ((int)(((byte)(82)))));
             this.pnlConsulta.Controls.Add(this.panel8);
             this.pnlConsulta.Controls.Add(this.groupBox1);
-            this.pnlConsulta.Location = new System.Drawing.Point(198, 104);
+            this.pnlConsulta.Location = new System.Drawing.Point(692, 222);
             this.pnlConsulta.Name = "pnlConsulta";
-            this.pnlConsulta.Size = new System.Drawing.Size(577, 407);
+            this.pnlConsulta.Size = new System.Drawing.Size(83, 289);
             this.pnlConsulta.TabIndex = 129;
             this.pnlConsulta.Visible = false;
             // 
@@ -233,9 +233,9 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
             this.panel8.Controls.Add(this.ckMostrarEgresados);
             this.panel8.Controls.Add(this.button1);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel8.Location = new System.Drawing.Point(0, 357);
+            this.panel8.Location = new System.Drawing.Point(0, 239);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(577, 50);
+            this.panel8.Size = new System.Drawing.Size(83, 50);
             this.panel8.TabIndex = 1;
             // 
             // ckMostrarEgresados
@@ -575,9 +575,15 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
             this.CB_Estequiv2.Enabled = false;
             this.CB_Estequiv2.FormattingEnabled = true;
             this.CB_Estequiv2.Items.AddRange(new object[] {
+            "",
+            "Exced",
             "Cumple",
+            "Reforzar",
+            "En Entren",
             "No Cumple",
-            "No Aplica"});
+            "No Aplica",
+            "No Evalua",
+            "Cumple Act"});
             this.CB_Estequiv2.Location = new System.Drawing.Point(637, 423);
             this.CB_Estequiv2.Name = "CB_Estequiv2";
             this.CB_Estequiv2.Size = new System.Drawing.Size(86, 21);
@@ -588,9 +594,15 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
             this.CB_EstEquiv1.Enabled = false;
             this.CB_EstEquiv1.FormattingEnabled = true;
             this.CB_EstEquiv1.Items.AddRange(new object[] {
+            "",
+            "Exced",
             "Cumple",
+            "Reforzar",
+            "En Entren",
             "No Cumple",
-            "No Aplica"});
+            "No Aplica",
+            "No Evalua",
+            "Cumple Act"});
             this.CB_EstEquiv1.Location = new System.Drawing.Point(637, 396);
             this.CB_EstEquiv1.Name = "CB_EstEquiv1";
             this.CB_EstEquiv1.Size = new System.Drawing.Size(86, 21);
@@ -665,9 +677,15 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
             this.CB_EstOtros2.Enabled = false;
             this.CB_EstOtros2.FormattingEnabled = true;
             this.CB_EstOtros2.Items.AddRange(new object[] {
+            "",
+            "Exced",
             "Cumple",
+            "Reforzar",
+            "En Entren",
             "No Cumple",
-            "No Aplica"});
+            "No Aplica",
+            "No Evalua",
+            "Cumple Act"});
             this.CB_EstOtros2.Location = new System.Drawing.Point(637, 368);
             this.CB_EstOtros2.Name = "CB_EstOtros2";
             this.CB_EstOtros2.Size = new System.Drawing.Size(86, 21);
@@ -678,9 +696,15 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
             this.CB_EstOtros1.Enabled = false;
             this.CB_EstOtros1.FormattingEnabled = true;
             this.CB_EstOtros1.Items.AddRange(new object[] {
+            "",
+            "Exced",
             "Cumple",
+            "Reforzar",
+            "En Entren",
             "No Cumple",
-            "No Aplica"});
+            "No Aplica",
+            "No Evalua",
+            "Cumple Act"});
             this.CB_EstOtros1.Location = new System.Drawing.Point(637, 341);
             this.CB_EstOtros1.Name = "CB_EstOtros1";
             this.CB_EstOtros1.Size = new System.Drawing.Size(86, 21);
@@ -691,9 +715,15 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
             this.CB_EstCondFisic.Enabled = false;
             this.CB_EstCondFisic.FormattingEnabled = true;
             this.CB_EstCondFisic.Items.AddRange(new object[] {
+            "",
+            "Exced",
             "Cumple",
+            "Reforzar",
+            "En Entren",
             "No Cumple",
-            "No Aplica"});
+            "No Aplica",
+            "No Evalua",
+            "Cumple Act"});
             this.CB_EstCondFisic.Location = new System.Drawing.Point(637, 314);
             this.CB_EstCondFisic.Name = "CB_EstCondFisic";
             this.CB_EstCondFisic.Size = new System.Drawing.Size(86, 21);
@@ -704,9 +734,15 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
             this.CB_EstExp.Enabled = false;
             this.CB_EstExp.FormattingEnabled = true;
             this.CB_EstExp.Items.AddRange(new object[] {
+            "",
+            "Exced",
             "Cumple",
+            "Reforzar",
+            "En Entren",
             "No Cumple",
-            "No Aplica"});
+            "No Aplica",
+            "No Evalua",
+            "Cumple Act"});
             this.CB_EstExp.Location = new System.Drawing.Point(637, 286);
             this.CB_EstExp.Name = "CB_EstExp";
             this.CB_EstExp.Size = new System.Drawing.Size(86, 21);
@@ -717,9 +753,15 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
             this.CB_EstIdioma.Enabled = false;
             this.CB_EstIdioma.FormattingEnabled = true;
             this.CB_EstIdioma.Items.AddRange(new object[] {
+            "",
+            "Exced",
             "Cumple",
+            "Reforzar",
+            "En Entren",
             "No Cumple",
-            "No Aplica"});
+            "No Aplica",
+            "No Evalua",
+            "Cumple Act"});
             this.CB_EstIdioma.Location = new System.Drawing.Point(637, 258);
             this.CB_EstIdioma.Name = "CB_EstIdioma";
             this.CB_EstIdioma.Size = new System.Drawing.Size(86, 21);
@@ -730,9 +772,15 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
             this.CB_EstTerc.Enabled = false;
             this.CB_EstTerc.FormattingEnabled = true;
             this.CB_EstTerc.Items.AddRange(new object[] {
+            "",
+            "Exced",
             "Cumple",
+            "Reforzar",
+            "En Entren",
             "No Cumple",
-            "No Aplica"});
+            "No Aplica",
+            "No Evalua",
+            "Cumple Act"});
             this.CB_EstTerc.Location = new System.Drawing.Point(637, 230);
             this.CB_EstTerc.Name = "CB_EstTerc";
             this.CB_EstTerc.Size = new System.Drawing.Size(86, 21);
@@ -743,9 +791,15 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
             this.CB_EstSec.Enabled = false;
             this.CB_EstSec.FormattingEnabled = true;
             this.CB_EstSec.Items.AddRange(new object[] {
+            "",
+            "Exced",
             "Cumple",
+            "Reforzar",
+            "En Entren",
             "No Cumple",
-            "No Aplica"});
+            "No Aplica",
+            "No Evalua",
+            "Cumple Act"});
             this.CB_EstSec.Location = new System.Drawing.Point(637, 202);
             this.CB_EstSec.Name = "CB_EstSec";
             this.CB_EstSec.Size = new System.Drawing.Size(86, 21);
@@ -756,9 +810,15 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
             this.CB_EstPrim.Enabled = false;
             this.CB_EstPrim.FormattingEnabled = true;
             this.CB_EstPrim.Items.AddRange(new object[] {
+            "",
+            "Exced",
             "Cumple",
+            "Reforzar",
+            "En Entren",
             "No Cumple",
-            "No Aplica"});
+            "No Aplica",
+            "No Evalua",
+            "Cumple Act"});
             this.CB_EstPrim.Location = new System.Drawing.Point(637, 175);
             this.CB_EstPrim.Name = "CB_EstPrim";
             this.CB_EstPrim.Size = new System.Drawing.Size(86, 21);
@@ -1346,18 +1406,18 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
             this.DGV_Temas.Location = new System.Drawing.Point(10, 24);
             this.DGV_Temas.Margin = new System.Windows.Forms.Padding(0);
             this.DGV_Temas.Name = "DGV_Temas";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGV_Temas.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV_Temas.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.DGV_Temas.RowHeadersWidth = 15;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.DGV_Temas.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.DGV_Temas.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.DGV_Temas.Size = new System.Drawing.Size(932, 401);
             this.DGV_Temas.TabIndex = 67;
             // 

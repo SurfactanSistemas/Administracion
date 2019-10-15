@@ -700,6 +700,12 @@
     <Compile Include="Maestros\Perfiles\AgModPerfil.Designer.cs">
       <DependentUpon>AgModPerfil.cs</DependentUpon>
     </Compile>
+    <Compile Include="Maestros\Perfiles\AgregarTemaAPerfil.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestros\Perfiles\AgregarTemaAPerfil.Designer.cs">
+      <DependentUpon>AgregarTemaAPerfil.cs</DependentUpon>
+    </Compile>
     <Compile Include="Maestros\Perfiles\Perfiles_Inicio.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1115,6 +1121,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Maestros\Perfiles\AgModPerfil.resx">
       <DependentUpon>AgModPerfil.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\Perfiles\AgregarTemaAPerfil.resx">
+      <DependentUpon>AgregarTemaAPerfil.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Maestros\Perfiles\Perfiles_Inicio.resx">
       <DependentUpon>Perfiles_Inicio.cs</DependentUpon>

@@ -316,18 +316,27 @@ namespace Modulo_Capacitacion.Maestros.VersionLegajo
             TB_Equiv1Leg.Text = LV.EstadoIX;
             TB_Equiv2Leg.Text = LV.EstadoX;
 
+            CB_EstPrim.SelectedIndex = int.Parse(LV.EstaI);
+            CB_EstSec.SelectedIndex = int.Parse(LV.EstaII);
+            CB_EstTerc.SelectedIndex = int.Parse(LV.EstaIII);
+            CB_EstIdioma.SelectedIndex = int.Parse(LV.EstaIV);
+            CB_EstExp.SelectedIndex = int.Parse(LV.EstaV);
+            CB_EstCondFisic.SelectedIndex = int.Parse(LV.EstaVI);
+            CB_EstOtros1.SelectedIndex = int.Parse(LV.EstaVII);
+            CB_EstOtros2.SelectedIndex = int.Parse(LV.EstaVIII);
+            CB_EstEquiv1.SelectedIndex = int.Parse(LV.EstaIX);
+            CB_Estequiv2.SelectedIndex = int.Parse(LV.EstaX);
 
-
-            CB_EstPrim.SelectedItem = ObtenerValorCombo(LV.EstaI);
-            CB_EstSec.SelectedItem = ObtenerValorCombo(LV.EstaII);
-            CB_EstTerc.SelectedItem = ObtenerValorCombo(LV.EstaIII);
-            CB_EstIdioma.SelectedItem = ObtenerValorCombo(LV.EstaIV);
-            CB_EstExp.SelectedItem = ObtenerValorCombo(LV.EstaV);
-            CB_EstCondFisic.SelectedItem = ObtenerValorCombo(LV.EstaVI);
-            CB_EstOtros1.SelectedItem = ObtenerValorCombo(LV.EstaVII);
-            CB_EstOtros2.SelectedItem = ObtenerValorCombo(LV.EstaVIII);
-            CB_EstEquiv1.SelectedItem = ObtenerValorCombo(LV.EstaIX);
-            CB_Estequiv2.SelectedItem = ObtenerValorCombo(LV.EstaX);
+            //CB_EstPrim.SelectedItem = ObtenerValorCombo(LV.EstaI);
+            //CB_EstSec.SelectedItem = ObtenerValorCombo(LV.EstaII);
+            //CB_EstTerc.SelectedItem = ObtenerValorCombo(LV.EstaIII);
+            //CB_EstIdioma.SelectedItem = ObtenerValorCombo(LV.EstaIV);
+            //CB_EstExp.SelectedItem = ObtenerValorCombo(LV.EstaV);
+            //CB_EstCondFisic.SelectedItem = ObtenerValorCombo(LV.EstaVI);
+            //CB_EstOtros1.SelectedItem = ObtenerValorCombo(LV.EstaVII);
+            //CB_EstOtros2.SelectedItem = ObtenerValorCombo(LV.EstaVIII);
+            //CB_EstEquiv1.SelectedItem = ObtenerValorCombo(LV.EstaIX);
+            //CB_Estequiv2.SelectedItem = ObtenerValorCombo(LV.EstaX);
         }
 
         private object ObtenerValorCombo(string p)
