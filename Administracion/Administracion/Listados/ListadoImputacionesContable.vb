@@ -600,7 +600,7 @@ Public Class ListadoImputacionesContable
 
                 REM If Val(CampoRecibos.cuenta) = 162 Then : Stop : End If
 
-                REM If Val(CampoRecibos.recibo) = 88760 Then Stop
+                'If Val(CampoRecibos.recibo) = 104076 Then Stop
                 REM If Val(CampoRecibos.recibo) = 88564 Then Stop
 
 
@@ -703,12 +703,11 @@ Public Class ListadoImputacionesContable
 
                         txtVarios = "Desde el " + txtDesdeFecha.Text + " hasta el " + txthastafecha.Text
 
-                        txtClave = txtTipomovi + txtNroInterno + txtRenglon
-                        txtClaveOrd = txtTipomovi + txtNroInterno
+                        txtClave = txtTipomovi & txtNroInterno & txtRenglon
+                        txtClaveOrd = txtTipomovi & txtNroInterno
 
                         SQLConnector.executeProcedure("alta_impcyb", txtClave, txtTipomovi, txtNroInterno, txtProveedor, txtTipo, txtLetra, txtPunto, txtNumero,
                                                       txtRenglon, txtFecha, txtObservaciones, txtCuenta, txtCredito, txtDebito, txtFechaOrd, txtTitulo, txtEmpresa, txtTituloList, txtVarios, txtClaveOrd)
-
 
                     Case Else
                         Select Case Val(CampoRecibos.tipo2)
@@ -747,8 +746,8 @@ Public Class ListadoImputacionesContable
 
                         txtVarios = "Desde el " + txtDesdeFecha.Text + " hasta el " + txthastafecha.Text
 
-                        txtClave = txtTipomovi + txtNroInterno + txtRenglon
-                        txtClaveOrd = txtTipomovi + txtNroInterno
+                        txtClave = txtTipomovi & txtNroInterno & txtRenglon
+                        txtClaveOrd = txtTipomovi & txtNroInterno
 
                         SQLConnector.executeProcedure("alta_impcyb", txtClave, txtTipomovi, txtNroInterno, txtProveedor, txtTipo, txtLetra, txtPunto, txtNumero,
                                                       txtRenglon, txtFecha, txtObservaciones, txtCuenta, txtCredito, txtDebito, txtFechaOrd, txtTitulo, txtEmpresa, txtTituloList, txtVarios, txtClaveOrd)
@@ -783,8 +782,8 @@ Public Class ListadoImputacionesContable
 
                     txtVarios = "Desde el " + txtDesdeFecha.Text + " hasta el " + txthastafecha.Text
 
-                    txtClave = txtTipomovi + txtNroInterno + txtRenglon
-                    txtClaveOrd = txtTipomovi + txtNroInterno
+                    txtClave = txtTipomovi & txtNroInterno & txtRenglon
+                    txtClaveOrd = txtTipomovi & txtNroInterno
 
                     SQLConnector.executeProcedure("alta_impcyb", txtClave, txtTipomovi, txtNroInterno, txtProveedor, txtTipo, txtLetra, txtPunto, txtNumero,
                                                   txtRenglon, txtFecha, txtObservaciones, txtCuenta, txtCredito, txtDebito, txtFechaOrd, txtTitulo, txtEmpresa, txtTituloList, txtVarios, txtClaveOrd)
@@ -820,8 +819,8 @@ Public Class ListadoImputacionesContable
 
                     txtVarios = "Desde el " + txtDesdeFecha.Text + " hasta el " + txthastafecha.Text
 
-                    txtClave = txtTipomovi + txtNroInterno + txtRenglon
-                    txtClaveOrd = txtTipomovi + txtNroInterno
+                    txtClave = txtTipomovi & txtNroInterno & txtRenglon
+                    txtClaveOrd = txtTipomovi & txtNroInterno
 
                     SQLConnector.executeProcedure("alta_impcyb", txtClave, txtTipomovi, txtNroInterno, txtProveedor, txtTipo, txtLetra, txtPunto, txtNumero,
                                                   txtRenglon, txtFecha, txtObservaciones, txtCuenta, txtCredito, txtDebito, txtFechaOrd, txtTitulo, txtEmpresa, txtTituloList, txtVarios, txtClaveOrd)
@@ -856,14 +855,99 @@ Public Class ListadoImputacionesContable
 
                     txtVarios = "Desde el " + txtDesdeFecha.Text + " hasta el " + txthastafecha.Text
 
-                    txtClave = txtTipomovi + txtNroInterno + txtRenglon
-                    txtClaveOrd = txtTipomovi + txtNroInterno
+                    txtClave = txtTipomovi & txtNroInterno & txtRenglon
+                    txtClaveOrd = txtTipomovi & txtNroInterno
 
                     SQLConnector.executeProcedure("alta_impcyb", txtClave, txtTipomovi, txtNroInterno, txtProveedor, txtTipo, txtLetra, txtPunto, txtNumero,
                                                   txtRenglon, txtFecha, txtObservaciones, txtCuenta, txtCredito, txtDebito, txtFechaOrd, txtTitulo, txtEmpresa, txtTituloList, txtVarios, txtClaveOrd)
 
                 End If
 
+                If Val(CampoRecibos.renglon) = 1 Then
+                    '
+                    ' Comprobamos si tiene datos de FCE cargados.
+                    '
+                    Dim WDatosFCE As DataRow = GetSingle("SELECT * FROM RecibosDatosFCE WHERE Recibo = '" & CampoRecibos.recibo & "'")
+
+                    If WDatosFCE IsNot Nothing Then
+                        txtRenglonII = txtRenglonII + 1
+
+                        txtAuxiliar = 0
+
+                        For Each o As String In {"Aranceles", "IvaAranceles", "Derechos", "IvaDerechos"}
+                            txtAuxiliar += OrDefault(WDatosFCE.Item(o), 0)
+                        Next
+
+                        txtTipomovi = "3"
+                        txtNroInterno = CampoRecibos.recibo
+                        txtProveedor = ""
+                        txtTipo = ""
+                        txtLetra = ""
+                        txtPunto = ""
+                        txtNumero = ""
+                        txtRenglon = txtRenglonII
+                        txtFecha = CampoRecibos.fecha
+                        txtObservaciones = ""
+                        txtDebito = txtAuxiliar
+                        txtCredito = 0
+                        txtFechaOrd = CampoRecibos.fechaord
+                        txtTitulo = "Recibos"
+                        txtEmpresa = 1
+                        txtTituloList = "Surfactan S.A."
+                        txtCuenta = "100"
+
+                        If Proceso._EsPellital() Then
+                            txtTituloList = "Pellital S.A."
+                        End If
+
+                        txtVarios = "Desde el " + txtDesdeFecha.Text + " hasta el " + txthastafecha.Text
+
+                        txtClave = txtTipomovi & txtNroInterno & txtRenglon
+                        txtClaveOrd = txtTipomovi & txtNroInterno
+
+                        SQLConnector.executeProcedure("alta_impcyb", txtClave, txtTipomovi, txtNroInterno, txtProveedor, txtTipo, txtLetra, txtPunto, txtNumero,
+                                                      txtRenglon, txtFecha, txtObservaciones, txtCuenta, txtCredito, txtDebito, txtFechaOrd, txtTitulo, txtEmpresa, txtTituloList, txtVarios, txtClaveOrd)
+
+                        txtRenglonII = txtRenglonII + 1
+
+                        txtAuxiliar = 0
+
+                        txtAuxiliar += OrDefault(WDatosFCE.Item("Interes"), 0)
+
+                        txtTipomovi = "3"
+                        txtNroInterno = CampoRecibos.recibo
+                        txtProveedor = ""
+                        txtTipo = ""
+                        txtLetra = ""
+                        txtPunto = ""
+                        txtNumero = ""
+                        txtRenglon = txtRenglonII
+                        txtFecha = CampoRecibos.fecha
+                        txtObservaciones = ""
+                        txtDebito = txtAuxiliar
+                        txtCredito = 0
+                        txtFechaOrd = CampoRecibos.fechaord
+                        txtTitulo = "Recibos"
+                        txtEmpresa = 1
+                        txtTituloList = "Surfactan S.A."
+                        txtCuenta = "6113"
+
+                        If Proceso._EsPellital() Then
+                            txtTituloList = "Pellital S.A."
+                        End If
+
+                        txtVarios = "Desde el " + txtDesdeFecha.Text + " hasta el " + txthastafecha.Text
+
+                        txtClave = txtTipomovi & txtNroInterno & txtRenglon
+                        txtClaveOrd = txtTipomovi & txtNroInterno
+
+                        SQLConnector.executeProcedure("alta_impcyb", txtClave, txtTipomovi, txtNroInterno, txtProveedor, txtTipo, txtLetra, txtPunto, txtNumero,
+                                                      txtRenglon, txtFecha, txtObservaciones, txtCuenta, txtCredito, txtDebito, txtFechaOrd, txtTitulo, txtEmpresa, txtTituloList, txtVarios, txtClaveOrd)
+
+                    End If
+
+                End If
+                
             Next
 
             '
@@ -927,8 +1011,8 @@ Public Class ListadoImputacionesContable
 
                                 txtVarios = "Desde el " + txtDesdeFecha.Text + " hasta el " + txthastafecha.Text
 
-                                txtClave = txtTipomovi + txtNroInterno + txtRenglon
-                                txtClaveOrd = txtTipomovi + txtNroInterno
+                                txtClave = txtTipomovi & txtNroInterno & txtRenglon
+                                txtClaveOrd = txtTipomovi & txtNroInterno
 
                                 SQLConnector.executeProcedure("alta_impcyb", txtClave, txtTipomovi, txtNroInterno, txtProveedor, txtTipo, txtLetra, txtPunto, txtNumero,
                                                               txtRenglon, txtFecha, txtObservaciones, txtCuenta, txtCredito, txtDebito, txtFechaOrd, txtTitulo, txtEmpresa, txtTituloList, txtVarios, txtClaveOrd)

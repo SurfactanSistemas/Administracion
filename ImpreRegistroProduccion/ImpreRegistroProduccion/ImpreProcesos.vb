@@ -87,10 +87,10 @@ Public Class ImpreProcesos
 
             '_GenerarCertificadoAnalisisFarma(WTipoReporte2, WPartida2, WTipoSalida2)
 
-            'Dim WTerminado2 As String = "PT-25061-204"
-            'Dim WPartida2 As Integer = "309206"
+            Dim WTerminado2 As String = "SE-25012-994"
+            Dim WPartida2 As Integer = "0"
 
-            '_GenerarRegistroProduccion(WTerminado2, WPartida2, True)
+            _GenerarRegistroProduccion(WTerminado2, WPartida2, 0, 0, 0, 0, 0, True)
 
             'Dim WImpreFechaVto2 = "", WFechaElabora2 = "", WImpreFechaElaboracion2 = "", WFechaVto2 = ""
 
@@ -365,6 +365,7 @@ Public Class ImpreProcesos
 
     Private Sub _ProcesarInformacionParaRegistroProduccion(ByVal wTerminado As String, ByVal wPartida As Integer, Optional ByVal RegistroMaestro As Boolean = False)
         WTipoVencimiento = 0
+        Dim WTeorico As Double = 0
         '
         ' Buscamos informacion del Terminado y Hoja.
         '
@@ -372,7 +373,7 @@ Public Class ImpreProcesos
         Dim WHoja As DataTable = GetAll("SELECT * FROM Hoja WHERE Hoja = '" & wPartida & "' Order by Renglon", "Surfactan_III")
 
         If IsNothing(WTerm) Then Throw New Exception("No existe Producto Terminado con Código '" & wTerminado & "'")
-        If WHoja.Rows.Count = 0 Then Throw New Exception("No existe Hoja '" & wTerminado & "'")
+        If WHoja.Rows.Count = 0 And Not RegistroMaestro Then Throw New Exception("No existe Hoja '" & wTerminado & "'")
 
         Dim WSqls As New List(Of String)
 
@@ -382,6 +383,8 @@ Public Class ImpreProcesos
         Dim WCargaI As DataTable = GetAll("SELECT Codigo = 1, c1.Cantidad, c1.Metodo, c1.Equipo, e.Descripcion, e.DescripcionII, e.Poe, e.Identificacion, e.PoeLimpieza FROM CargaI c1 INNER JOIN Equipo e ON c1.Equipo = e.Codigo WHERE c1.Terminado = '" & wTerminado & "' Order by c1.Clave", "Surfactan_III")
         Dim WCargaII As DataTable = GetAll("SELECT Codigo = 2, ma.Descripcion FROM CargaII c2 INNER JOIN MaterialAuxiliar ma ON c2.MaterialAuxiliar = ma.Codigo WHERE c2.Terminado = '" & wTerminado & "' Order by c2.Clave", "Surfactan_III")
 
+        If WHoja.Rows.Count Then WTeorico = WHoja.Rows(0).Item("Teorico")
+
         For Each row As DataRow In WCargaI.Rows
             With row
                 Dim WTipo As Integer = OrDefault(.Item("Codigo"), 0)
@@ -390,13 +393,13 @@ Public Class ImpreProcesos
                 Dim WPoe As String = OrDefault(.Item("Poe"), "")
                 Dim WIdentificacion As String = OrDefault(.Item("Identificacion"), "")
                 Dim WPoeLimpieza As String = OrDefault(.Item("PoeLimpieza"), "")
-                Dim WTeorico As String = formatonumerico(OrDefault(WHoja.Rows(0).Item("Teorico"), 0))
+                Dim ZTeorico As String = formatonumerico(OrDefault(ZTeorico, 0))
                 Dim WDescTerminado As String = OrDefault(WTerm.Item("Descripcion"), "").ToString.Trim
 
                 If WIdentificacion.Trim <> "" Then WDescripcion = WIdentificacion.Trim & " - " & WDescripcion
 
                 WSqls.Add(String.Format("INSERT INTO ImpreCarga (Partida, Descripcion, Terminado, Cantidad, Tipo, DescripcionI, DescripcionII) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}')",
-                                        wPartida, WDescTerminado, wTerminado, WTeorico, WTipo, WDescripcion, WDescripcionII))
+                                        wPartida, WDescTerminado, wTerminado, ZTeorico, WTipo, WDescripcion, WDescripcionII))
 
             End With
         Next
@@ -409,13 +412,13 @@ Public Class ImpreProcesos
                 Dim WPoe As String = ""
                 Dim WIdentificacion As String = ""
                 Dim WPoeLimpieza As String = ""
-                Dim WTeorico As String = formatonumerico(OrDefault(WHoja.Rows(0).Item("Teorico"), 0))
+                Dim ZTeorico As String = formatonumerico(OrDefault(ZTeorico, 0))
                 Dim WDescTerminado As String = OrDefault(WTerm.Item("Descripcion"), "").ToString.Trim
 
                 If WIdentificacion.Trim <> "" Then WDescripcion = WIdentificacion.Trim & " - " & WDescripcion
 
                 WSqls.Add(String.Format("INSERT INTO ImpreCarga (Partida, Descripcion, Terminado, Cantidad, Tipo, DescripcionI, DescripcionII) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}')",
-                                        wPartida, WDescTerminado, wTerminado, WTeorico, WTipo, WDescripcion, WDescripcionII))
+                                        wPartida, WDescTerminado, wTerminado, ZTeorico, WTipo, WDescripcion, WDescripcionII))
 
             End With
         Next
@@ -454,7 +457,7 @@ Public Class ImpreProcesos
                 Dim WPoe As String = OrDefault(.Item("Poe"), "")
                 Dim WIdentificacion As String = OrDefault(.Item("Identificacion"), "")
                 Dim WPoeLimpieza As String = OrDefault(.Item("PoeLimpieza"), "")
-                Dim WTeorico As String = formatonumerico(OrDefault(WHoja.Rows(0).Item("Teorico"), 0))
+                Dim ZTeorico As String = formatonumerico(OrDefault(ZTeorico, 0))
                 Dim WDescTerminado As String = OrDefault(WTerm.Item("Descripcion"), "").ToString.Trim
 
                 Dim WMetodo As String = WPoeLimpieza & " - " & OrDefault(.Item("Metodo"), "").ToString.Trim
@@ -577,8 +580,8 @@ Public Class ImpreProcesos
             End With
         Next
 
-        WSqls.Add("UPDATE CargaIII SET Partida = '" & wPartida & "', CantidadPartida = '" & formatonumerico(OrDefault(WHoja.Rows(0).Item("Teorico"), 0)) & "' WHERE Terminado = '" & wTerminado & "'")
-        WSqls.Add("UPDATE CargaV SET Partida = '" & wPartida & "', CantidadPartida = '" & formatonumerico(OrDefault(WHoja.Rows(0).Item("Teorico"), 0)) & "', ImprePaso = Paso WHERE Terminado = '" & wTerminado & "'")
+        WSqls.Add("UPDATE CargaIII SET Partida = '" & wPartida & "', CantidadPartida = '" & formatonumerico(OrDefault(WTeorico, 0)) & "' WHERE Terminado = '" & wTerminado & "'")
+        WSqls.Add("UPDATE CargaV SET Partida = '" & wPartida & "', CantidadPartida = '" & formatonumerico(OrDefault(WTeorico, 0)) & "', ImprePaso = Paso WHERE Terminado = '" & wTerminado & "'")
 
         Dim WCargaIII As DataRow = GetSingle("SELECT TOP 1 * FROM CargaIII WHERE Terminado = '" & wTerminado & "' Order by Clave", "Surfactan_III")
 
@@ -599,8 +602,12 @@ Public Class ImpreProcesos
 
         If WVida <> 0 Then
 
-            Dim WMes As Integer = Date.ParseExact(WHoja.Rows(0).Item("Fecha").ToString, "dd/MM/yyyy", Nothing).Month 'Date.Now.Month
-            Dim WAnio As Integer = Date.ParseExact(WHoja.Rows(0).Item("Fecha").ToString, "dd/MM/yyyy", Nothing).Year
+            Dim WFechaHoja As String = "01/01/1901"
+
+            If WHoja.Rows.Count > 0 Then WFechaHoja = WHoja.Rows(0).Item("Fecha").ToString
+
+            Dim WMes As Integer = Date.ParseExact(WFechaHoja, "dd/MM/yyyy", Nothing).Month 'Date.Now.Month
+            Dim WAnio As Integer = Date.ParseExact(WFechaHoja, "dd/MM/yyyy", Nothing).Year
 
             For Ciclo = 1 To WVida
                 WMes = WMes + 1
@@ -618,138 +625,139 @@ Public Class ImpreProcesos
 
         End If
 
-        Dim WImpreFecha = WHoja.Rows(0).Item("Fecha")
+        If Not RegistroMaestro Then
 
-        Dim ZZMezcla = "S"
-        Dim ZZMezclaPartida = 999999
-        Dim ZZMezclaPartidaII = ""
-
-        For Each row As DataRow In WHoja.Rows
-            With row
-
-                If Microsoft.VisualBasic.Left(wTerminado, 8) <> Microsoft.VisualBasic.Left(OrDefault(.Item("Terminado"), ""), 8) Then
-                    ZZMezcla = "N"
-                Else
-
-                    Dim WLote1 As Integer = OrDefault(.Item("Lote1"), 0)
-                    Dim WLote2 As Integer = OrDefault(.Item("Lote2"), 0)
-                    Dim WLote3 As Integer = OrDefault(.Item("Lote3"), 0)
-
-                    If WLote1 < ZZMezclaPartida And WLote1 <> 0 Then
-                        ZZMezclaPartida = WLote1
-                        ZZMezclaPartidaII = OrDefault(.Item("Terminado"), "")
-                    End If
-
-                    If WLote2 < ZZMezclaPartida And WLote2 <> 0 Then
-                        ZZMezclaPartida = WLote2
-                        ZZMezclaPartidaII = OrDefault(.Item("Terminado"), "")
-                    End If
-
-                    If WLote3 < ZZMezclaPartida And WLote3 <> 0 Then
-                        ZZMezclaPartida = WLote3
-                        ZZMezclaPartidaII = OrDefault(.Item("Terminado"), "")
-                    End If
-
-                End If
-
-            End With
-        Next
-
-        If ZZMezcla = "S" Then
-
-            If ZZMezclaPartida <> 999999 Then
-
-                Dim WHoja2 As DataRow = GetSingle("SELECT Top 1 Fecha FROM Hoja WHERE Hoja = '" & ZZMezclaPartida & "' And Producto = '" & ZZMezclaPartidaII & "' Order by Clave", "Surfactan_III")
-
-                If Not IsNothing(WHoja2) Then
-
-                    Dim WFecha As Date = Date.ParseExact(WHoja2.Item("Fecha"), "dd/MM/yyyy", Nothing)
-
-                    Dim WMes As Integer = WFecha.Month
-                    Dim WAnio As Integer = WFecha.Year
-
-                    For Ciclo = 1 To WVida
-                        WMes = WMes + 1
-                        If WMes > 12 Then
-                            WAnio = WAnio + 1
-                            WMes = 1
-                        End If
-                    Next Ciclo
-
-                    Dim XMes = Trim(Str$(WMes))
-                    Dim XAno = Trim(Str$(WAnio))
-                    XMes = XMes.PadLeft(2, "0")
-                    XAno = XAno.PadLeft(4, "0")
-                    WImpreVto = XMes + "/" + XAno
-
-                Else
-                    If Not RegistroMaestro Then Throw New Exception("No se encontró Hoja '" & ZZMezclaPartida & "', informada como componente de mezcla.")
-                End If
-
-            Else
-                If Not RegistroMaestro Then Throw New Exception("Es una Hoja de producción de mezcla y no se informaron las partidas a utilizar, por lo que no se puede imprimir la fecha de reanálisis")
-            End If
-
-        End If
-
-        Dim ZZMono = "N"
-
-        Dim WMono As DataRow = GetSingle("SELECT Codigo FROM CodigoMono WHERE Codigo = '" & wTerminado & "'")
-
-        If Not IsNothing(WMono) Then
-            ZZMono = "S"
-        End If
-
-        Dim WLinea As Integer = OrDefault(WTerm.Item("Linea"), 0)
-
-        If ZZMono = "S" Or WLinea = 20 Or WLinea = 28 Then
-
-            Dim WLoteMP As Integer = 999999
-            Dim WArtMp As String = ""
+            Dim ZZMezcla = "S"
+            Dim ZZMezclaPartida = 999999
+            Dim ZZMezclaPartidaII = ""
 
             For Each row As DataRow In WHoja.Rows
                 With row
-                    If OrDefault(.Item("Tipo"), "").ToString.ToUpper = "M" Then
 
-                        WLoteMP = OrDefault(.Item("Lote1"), 999999)
-                        WArtMp = OrDefault(.Item("Articulo"), "")
-
+                    If Microsoft.VisualBasic.Left(wTerminado, 8) <> Microsoft.VisualBasic.Left(OrDefault(.Item("Terminado"), ""), 8) Then
+                        ZZMezcla = "N"
                     Else
-                        WLoteMP = 999999
+
+                        Dim WLote1 As Integer = OrDefault(.Item("Lote1"), 0)
+                        Dim WLote2 As Integer = OrDefault(.Item("Lote2"), 0)
+                        Dim WLote3 As Integer = OrDefault(.Item("Lote3"), 0)
+
+                        If WLote1 < ZZMezclaPartida And WLote1 <> 0 Then
+                            ZZMezclaPartida = WLote1
+                            ZZMezclaPartidaII = OrDefault(.Item("Terminado"), "")
+                        End If
+
+                        If WLote2 < ZZMezclaPartida And WLote2 <> 0 Then
+                            ZZMezclaPartida = WLote2
+                            ZZMezclaPartidaII = OrDefault(.Item("Terminado"), "")
+                        End If
+
+                        If WLote3 < ZZMezclaPartida And WLote3 <> 0 Then
+                            ZZMezclaPartida = WLote3
+                            ZZMezclaPartidaII = OrDefault(.Item("Terminado"), "")
+                        End If
+
                     End If
+
                 End With
             Next
 
-            If WLoteMP = 0 And Not RegistroMaestro Then Throw New Exception("Es una hoja de producción de monoproducto y no se informaron las partidas a utilizar, por lo que no se puede imprimir la fecha de reanálisis")
+            If ZZMezcla = "S" Then
 
-            If WLoteMP <> 999999 Then
+                If ZZMezclaPartida <> 999999 Then
 
-                For Each emp As String In {"SurfactanSa", "Surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII"}
+                    Dim WHoja2 As DataRow = GetSingle("SELECT Top 1 Fecha FROM Hoja WHERE Hoja = '" & ZZMezclaPartida & "' And Producto = '" & ZZMezclaPartidaII & "' Order by Clave", "Surfactan_III")
 
-                    Dim WLaudo As DataRow = GetSingle("SELECT FechaVencimiento, TipoVencimiento FROM Laudo WHERE Laudo = '" & WLoteMP & "' And Articulo = '" & WArtMp & "'", emp)
+                    If Not IsNothing(WHoja2) Then
 
-                    If Not IsNothing(WLaudo) Then
+                        Dim WFecha As Date = Date.ParseExact(WHoja2.Item("Fecha"), "dd/MM/yyyy", Nothing)
 
-                        Dim WFechaVto As String = OrDefault(WLaudo.Item("FechaVencimiento"), "")
-                        WTipoVencimiento = Val(OrDefault(WLaudo.Item("TipoVencimiento"), ""))
+                        Dim WMes As Integer = WFecha.Month
+                        Dim WAnio As Integer = WFecha.Year
 
-                        If WFechaVto = "" Then Continue For
+                        For Ciclo = 1 To WVida
+                            WMes = WMes + 1
+                            If WMes > 12 Then
+                                WAnio = WAnio + 1
+                                WMes = 1
+                            End If
+                        Next Ciclo
 
-                        Dim WFecha As Date = Date.ParseExact(WFechaVto, "dd/MM/yyyy", Nothing)
-
-                        Dim XMes = WFecha.Month.ToString.Trim
-                        Dim XAno = WFecha.Year.ToString.Trim
+                        Dim XMes = Trim(Str$(WMes))
+                        Dim XAno = Trim(Str$(WAnio))
                         XMes = XMes.PadLeft(2, "0")
                         XAno = XAno.PadLeft(4, "0")
                         WImpreVto = XMes + "/" + XAno
 
-                        Exit For
+                    Else
+                        If Not RegistroMaestro Then Throw New Exception("No se encontró Hoja '" & ZZMezclaPartida & "', informada como componente de mezcla.")
                     End If
 
-                Next
+                Else
+                    If Not RegistroMaestro Then Throw New Exception("Es una Hoja de producción de mezcla y no se informaron las partidas a utilizar, por lo que no se puede imprimir la fecha de reanálisis")
+                End If
 
             End If
 
+            Dim ZZMono = "N"
+
+            Dim WMono As DataRow = GetSingle("SELECT Codigo FROM CodigoMono WHERE Codigo = '" & wTerminado & "'")
+
+            If Not IsNothing(WMono) Then
+                ZZMono = "S"
+            End If
+
+            Dim WLinea As Integer = OrDefault(WTerm.Item("Linea"), 0)
+
+            If ZZMono = "S" Or WLinea = 20 Or WLinea = 28 Then
+
+                Dim WLoteMP As Integer = 999999
+                Dim WArtMp As String = ""
+
+                For Each row As DataRow In WHoja.Rows
+                    With row
+                        If OrDefault(.Item("Tipo"), "").ToString.ToUpper = "M" Then
+
+                            WLoteMP = OrDefault(.Item("Lote1"), 999999)
+                            WArtMp = OrDefault(.Item("Articulo"), "")
+
+                        Else
+                            WLoteMP = 999999
+                        End If
+                    End With
+                Next
+
+                If WLoteMP = 0 And Not RegistroMaestro Then Throw New Exception("Es una hoja de producción de monoproducto y no se informaron las partidas a utilizar, por lo que no se puede imprimir la fecha de reanálisis")
+
+                If WLoteMP <> 999999 Then
+
+                    For Each emp As String In {"SurfactanSa", "Surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII"}
+
+                        Dim WLaudo As DataRow = GetSingle("SELECT FechaVencimiento, TipoVencimiento FROM Laudo WHERE Laudo = '" & WLoteMP & "' And Articulo = '" & WArtMp & "'", emp)
+
+                        If Not IsNothing(WLaudo) Then
+
+                            Dim WFechaVto As String = OrDefault(WLaudo.Item("FechaVencimiento"), "")
+                            WTipoVencimiento = Val(OrDefault(WLaudo.Item("TipoVencimiento"), ""))
+
+                            If WFechaVto = "" Then Continue For
+
+                            Dim WFecha As Date = Date.ParseExact(WFechaVto, "dd/MM/yyyy", Nothing)
+
+                            Dim XMes = WFecha.Month.ToString.Trim
+                            Dim XAno = WFecha.Year.ToString.Trim
+                            XMes = XMes.PadLeft(2, "0")
+                            XAno = XAno.PadLeft(4, "0")
+                            WImpreVto = XMes + "/" + XAno
+
+                            Exit For
+                        End If
+
+                    Next
+
+                End If
+
+            End If
         End If
 
         WSqls.Add("UPDATE Terminado SET TipoProceso = '" & WTipoProceso & "' Where Codigo = '" & wTerminado & "'")

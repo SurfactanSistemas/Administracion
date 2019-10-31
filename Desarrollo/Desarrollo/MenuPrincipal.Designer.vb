@@ -159,19 +159,19 @@ Partial Class MenuPrincipal
         'IngresiDeOrdenesDeTrabajoToolStripMenuItem
         '
         Me.IngresiDeOrdenesDeTrabajoToolStripMenuItem.Name = "IngresiDeOrdenesDeTrabajoToolStripMenuItem"
-        Me.IngresiDeOrdenesDeTrabajoToolStripMenuItem.Size = New System.Drawing.Size(234, 22)
+        Me.IngresiDeOrdenesDeTrabajoToolStripMenuItem.Size = New System.Drawing.Size(233, 22)
         Me.IngresiDeOrdenesDeTrabajoToolStripMenuItem.Text = "Ingreso de Ordenes de Trabajo"
         '
         'IngresoDePruebasDeEnsayoToolStripMenuItem
         '
         Me.IngresoDePruebasDeEnsayoToolStripMenuItem.Name = "IngresoDePruebasDeEnsayoToolStripMenuItem"
-        Me.IngresoDePruebasDeEnsayoToolStripMenuItem.Size = New System.Drawing.Size(234, 22)
+        Me.IngresoDePruebasDeEnsayoToolStripMenuItem.Size = New System.Drawing.Size(233, 22)
         Me.IngresoDePruebasDeEnsayoToolStripMenuItem.Text = "Ingreso de Pruebas de Ensayo"
         '
         'AnálisisDeDesarrolloToolStripMenuItem
         '
         Me.AnálisisDeDesarrolloToolStripMenuItem.Name = "AnálisisDeDesarrolloToolStripMenuItem"
-        Me.AnálisisDeDesarrolloToolStripMenuItem.Size = New System.Drawing.Size(234, 22)
+        Me.AnálisisDeDesarrolloToolStripMenuItem.Size = New System.Drawing.Size(233, 22)
         Me.AnálisisDeDesarrolloToolStripMenuItem.Text = "Análisis de Desarrollo"
         '
         'ProcesosToolStripMenuItem

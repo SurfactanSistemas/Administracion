@@ -1275,12 +1275,14 @@ Public Class Recibos
 
             If WDatosFCE IsNot Nothing Then
 
+                WDatosFCE.Item("Boleto") = WDatosFCE.Item("Boleto").ToString.PadLeft(8, "0")
+
                 Dim ZSqls As New List(Of String)
 
                 Dim WSql As String = "INSERT INTO RecibosDatosFCE (Recibo, Boleto, Proveedor, Interes, Aranceles, IvaAranceles, Derechos, IvaDerechos)"
 
                 With WDatosFCE
-                    WSql &= String.Format(" VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}')", txtRecibo.Text, .Item("Boleto"), .Item("Proveedor"), .Item("Interes"), .Item("Aranceles"), .Item("IvaAranceles"), .Item("Derechos"), .Item("IvaDerechos"))
+                    WSql &= String.Format(" VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}')", txtRecibo.Text, .Item("Boleto"), .Item("Proveedor"), formatonumerico(.Item("Interes")), formatonumerico(.Item("Aranceles")), formatonumerico(.Item("IvaAranceles")), formatonumerico(.Item("Derechos")), formatonumerico(.Item("IvaDerechos")))
                 End With
 
                 ZSqls.Add("DELETE FROM RecibosDatosFCE WHERE Recibo = '" & txtRecibo.Text & "'")
@@ -1295,12 +1297,31 @@ Public Class Recibos
 
                     WProximo = OrDefault(WIvaComp.Item("Ultimo"), 0) + 1
 
-                    WNetoCmp = formatonumerico(Val(WDatosFCE.Item("Aranceles")) + Val(WDatosFCE.Item("Derechos")))
-                    WIvaCmp = formatonumerico(Val(WDatosFCE.Item("IvaAranceles")) + Val(WDatosFCE.Item("IvaDerechos")))
+                    WNetoCmp = formatonumerico(Val(formatonumerico(WDatosFCE.Item("Aranceles"))) + Val(formatonumerico(WDatosFCE.Item("Derechos"))))
+                    WIvaCmp = formatonumerico(Val(formatonumerico(WDatosFCE.Item("IvaAranceles"))) + Val(formatonumerico(WDatosFCE.Item("IvaDerechos"))))
 
                     ZSqls.Add(String.Format("INSERT INTO IvaComp (NroInterno, Proveedor, Tipo, Letra, Punto, Numero, Fecha, Vencimiento, Vencimiento1, Periodo, Neto, Iva21, Contado, Paridad, Pago) VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{6}','{6}','{6}','{7}','{8}', '{9}', '{10}', '{11}')", WProximo, WDatosFCE.Item("Proveedor"), "99", "A", "0000", WDatosFCE.Item("Boleto").ToString.PadLeft(8, "0"), txtFecha.Text, WNetoCmp, WIvaCmp, "1", txtParidad.Text, "1"))
 
-                    ZSqls.Add("UPDATE IvaComp SET Exento = 0, Iva = 27, Iva5 = 0, Iva105 = 0, Ib = 0, Impre = 'OC', OrdFecha = '" & ordenaFecha(txtFecha.Text) & "' WHERE NroInterno  = '" & WProximo & "'")
+                    '
+                    ' ALTA DE PUENTE
+                    '
+                    SQLConnector.executeProcedure("alta_imputacion", "2" & WProximo & "01", "2", WDatosFCE.Item("Proveedor"), "99",
+                                                "A", "0000", WDatosFCE.Item("Boleto"), "01",
+                                                txtFecha.Text, "", "100", 0, Val(formatonumerico(WNetoCmp)) + Val(formatonumerico(WIvaCmp)), WProximo, Proceso.ordenaFecha(txtFecha.Text))
+                    '
+                    ' ALTA DE GASTOS
+                    '
+                    SQLConnector.executeProcedure("alta_imputacion", "2" & WProximo & "02", "2", WDatosFCE.Item("Proveedor"), "99",
+                                                "A", "0000", WDatosFCE.Item("Boleto"), "02",
+                                                txtFecha.Text, "", "5654", Val(formatonumerico(WNetoCmp)), 0, WProximo, Proceso.ordenaFecha(txtFecha.Text))
+                    '
+                    ' ALTA DE IVA
+                    '
+                    SQLConnector.executeProcedure("alta_imputacion", "2" & WProximo & "03", "2", WDatosFCE.Item("Proveedor"), "99",
+                                                "A", "0000", WDatosFCE.Item("Boleto"), "03",
+                                                txtFecha.Text, "", "151", Val(formatonumerico(WIvaCmp)), 0, WProximo, Proceso.ordenaFecha(txtFecha.Text))
+
+                    ZSqls.Add("UPDATE IvaComp SET Exento = 0, Iva27 = 0, Iva5 = 0, Iva105 = 0, Ib = 0, Impre = 'OC', OrdFecha = '" & ordenaFecha(txtFecha.Text) & "' WHERE NroInterno  = '" & WProximo & "'")
 
                     ZSqls.Add(String.Format("INSERT INTO CtaCtePrv (Clave, Proveedor, Tipo, Letra, Punto, Numero, Fecha, Estado, Vencimiento, Vencimiento1, Total, Saldo, OrdFecha, OrdVencimiento, Impre, NroInterno, Paridad, Pago) VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{6}','{6}','{8}','{9}','{10}','{10}','{11}','{12}','{13}','{14}')", WDatosFCE.Item("Proveedor") & "A" & "99" & "0001" & WDatosFCE.Item("Boleto").ToString.PadLeft(8, "0"), WDatosFCE.Item("Proveedor"), "99", "A", "0000", WDatosFCE.Item("Boleto").ToString.PadLeft(8, "0"), txtFecha.Text, "1", formatonumerico(Val(WNetoCmp) + Val(WIvaCmp)), "0", ordenaFecha(txtFecha.Text), "OC", WProximo, txtParidad.Text, "1"))
 
@@ -5818,6 +5839,8 @@ Public Class Recibos
     Private Sub btnActualizarDatosFCE_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnActualizarDatosFCE.Click
         If WDatosFCE IsNot Nothing Then
 
+            WDatosFCE.Item("Boleto") = WDatosFCE.Item("Boleto").ToString.PadLeft(8, "0")
+
             Dim ZSqls As New List(Of String)
 
             Dim WSql As String = "INSERT INTO RecibosDatosFCE (Recibo, Boleto, Proveedor, Interes, Aranceles, IvaAranceles, Derechos, IvaDerechos)"
@@ -5848,19 +5871,19 @@ Public Class Recibos
                 '
                 SQLConnector.executeProcedure("alta_imputacion", "2" & WProximo & "01", "2", WDatosFCE.Item("Proveedor"), "99",
                                             "A", "0000", WDatosFCE.Item("Boleto"), "01",
-                                            ordenaFecha(txtFecha.Text), "", "100", 0, Val(formatonumerico(WNetoCmp)) + Val(formatonumerico(WIvaCmp)), WProximo, Proceso.ordenaFecha(txtFecha.Text))
+                                            txtFecha.Text, "", "100", 0, Val(formatonumerico(WNetoCmp)) + Val(formatonumerico(WIvaCmp)), WProximo, Proceso.ordenaFecha(txtFecha.Text))
                 '
                 ' ALTA DE GASTOS
                 '
                 SQLConnector.executeProcedure("alta_imputacion", "2" & WProximo & "02", "2", WDatosFCE.Item("Proveedor"), "99",
                                             "A", "0000", WDatosFCE.Item("Boleto"), "02",
-                                            ordenaFecha(txtFecha.Text), "", "5654", Val(formatonumerico(WNetoCmp)), 0, WProximo, Proceso.ordenaFecha(txtFecha.Text))
+                                            txtFecha.Text, "", "5654", Val(formatonumerico(WNetoCmp)), 0, WProximo, Proceso.ordenaFecha(txtFecha.Text))
                 '
                 ' ALTA DE IVA
                 '
                 SQLConnector.executeProcedure("alta_imputacion", "2" & WProximo & "03", "2", WDatosFCE.Item("Proveedor"), "99",
                                             "A", "0000", WDatosFCE.Item("Boleto"), "03",
-                                            ordenaFecha(txtFecha.Text), "", "151", Val(formatonumerico(WIvaCmp)), 0, WProximo, Proceso.ordenaFecha(txtFecha.Text))
+                                            txtFecha.Text, "", "151", Val(formatonumerico(WIvaCmp)), 0, WProximo, Proceso.ordenaFecha(txtFecha.Text))
 
                 ZSqls.Add("UPDATE IvaComp SET Exento = 0, Iva27 = 0, Iva5 = 0, Iva105 = 0, Ib = 0, Impre = 'OC', OrdFecha = '" & ordenaFecha(txtFecha.Text) & "' WHERE NroInterno  = '" & WProximo & "'")
 

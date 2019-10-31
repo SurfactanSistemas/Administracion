@@ -92,6 +92,7 @@ Public Class DetallesHojaProduccion
                 End If
 
                 Dim WEntraAComparar As String = "S"
+                Dim WGenerarRenglonEnCero As String = "S"
 
                 For i = 1 To 3
 
@@ -118,6 +119,8 @@ Public Class DetallesHojaProduccion
 
                     If Val(WCantidad) <> 0 And Val(_Lote) <> 0 Then
 
+                        WGenerarRenglonEnCero = "N"
+
                         Dim r = DataGridView1.Rows.Add
 
                         With DataGridView1.Rows(r)
@@ -132,6 +135,19 @@ Public Class DetallesHojaProduccion
                     End If
 
                 Next
+
+                If WGenerarRenglonEnCero = "S" Then
+                    Dim r = DataGridView1.Rows.Add
+
+                    With DataGridView1.Rows(r)
+                        .Cells("Tipo").Value = WTipo
+                        .Cells("Terminado").Value = IIf(UCase(WTipo) = "T", WTerminado, "")
+                        .Cells("MateriaPrima").Value = IIf(UCase(WTipo) = "M", WArticulo, "")
+                        .Cells("Descripcion").Value = WDescripcion.Trim()
+                        .Cells("LotePartida").Value = "0"
+                        .Cells("Cantidad").Value = "0.00"
+                    End With
+                End If
 
             Next
 

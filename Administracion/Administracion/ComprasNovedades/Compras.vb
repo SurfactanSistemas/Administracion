@@ -1101,7 +1101,7 @@ Public Class Compras
         If e.KeyData = Keys.Enter Then
 
             ' Comprobamos que se haya colocado un punto correcto. Es decir, mayor a Cero.
-            If Val(txtPunto.Text) > 0 Then
+            If Val(txtPunto.Text) > 0 Or cmbTipo.Text = "OC" Then
                 txtPunto.Text = ceros(txtPunto.Text, 4)
                 _SaltarA(txtNumero)
             Else
