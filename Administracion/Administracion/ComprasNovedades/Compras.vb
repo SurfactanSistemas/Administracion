@@ -529,7 +529,17 @@ Public Class Compras
         End If
         Dim interno As Integer = CustomConvert.toIntOrZero(txtNroInterno.Text)
         If interno = 0 Then : interno = DAOCompras.siguienteNumeroDeInterno() : End If
-        Dim compra As New Compra(interno, proveedor, ceros(cmbTipo.SelectedIndex, 2), ceros(cmbTipo.Text, 2), cmbFormaPago.SelectedIndex,
+        Dim TipoComprobante = IIf(cmbTipo.Text = "OC" Or cmbTipo.Text = "DI", -1, cmbTipo.SelectedIndex)
+
+        If TipoComprobante = -1 Then
+            If cmbTipo.Text = "OC" Then
+                TipoComprobante = 99
+            ElseIf cmbTipo.Text = "DI" Then
+                TipoComprobante = 66
+            End If
+        End If
+
+        Dim compra As New Compra(interno, proveedor, ceros(TipoComprobante, 2), ceros(cmbTipo.Text, 2), cmbFormaPago.SelectedIndex,
                                  tipoPago(), UCase(CBLetra.SelectedItem), ceros(txtPunto.Text, 4), ceros(txtNumero.Text, 8), txtFechaEmision.Text, txtFechaIVA.Text, txtFechaVto1.Text, txtFechaVto2.Text,
                                  asDouble(txtParidad.Text, 4), asDouble(txtNeto.Text) * multiplicadorPorNotaDeCredito, asDouble(txtIVA21.Text) * multiplicadorPorNotaDeCredito,
                                  asDouble(txtIVARG.Text) * multiplicadorPorNotaDeCredito, asDouble(txtIVA27.Text) * multiplicadorPorNotaDeCredito,
@@ -789,6 +799,13 @@ Public Class Compras
         If compra.tipoDocumento = 99 Then
             For Each o As Object In cmbTipo.Items
                 If o = "OC" Then
+                    cmbTipo.SelectedItem = o
+                    Exit For
+                End If
+            Next
+        ElseIf compra.tipoDocumento = 66 Then
+            For Each o As Object In cmbTipo.Items
+                If o = "DI" Then
                     cmbTipo.SelectedItem = o
                     Exit For
                 End If

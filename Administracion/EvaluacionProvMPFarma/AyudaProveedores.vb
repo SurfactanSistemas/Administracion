@@ -85,4 +85,6 @@ Public Class AyudaProveedores
     Private Sub ComboBox1_DropDownClosed(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ComboBox1.DropDownClosed
         If Not BackgroundWorker1.IsBusy Then BackgroundWorker1.RunWorkerAsync()
     End Sub
+
+ 
 End Class

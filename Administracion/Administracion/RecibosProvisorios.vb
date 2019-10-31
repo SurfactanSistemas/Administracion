@@ -11,7 +11,10 @@ Public Class RecibosProvisorios
     Private _ComprobanteRetSuss As String = ""
 
     Private _RetIB1, _CompIB1, _RetIB2, _CompIB2, _RetIB3, _CompIB3, _RetIB4, _CompIB4, _RetIB5, _CompIB5, _
-            _RetIB6, _CompIB6, _RetIB7, _CompIB7, _RetIB8, _CompIB8, _RetIB9, _CompIB9, _RetIB10, _CompIB10, _RetIB11, _CompIB11, _RetIB12, _CompIB12, _RetIB13, _CompIB13, _RetIB14, _CompIB14 As String
+            _RetIB6, _CompIB6, _RetIB7, _CompIB7, _RetIB8, _CompIB8, _RetIB9, _CompIB9, _RetIB10, _CompIB10,
+            _RetIB11, _CompIB11, _RetIB12, _CompIB12, _RetIB13, _CompIB13, _RetIB14, _CompIB14,
+            _RetIB15, _CompIB15, _RetIB16, _CompIB16, _RetIB17, _CompIB17, _RetIB18, _CompIB18,
+            _RetIB19, _CompIB19, _RetIB20, _CompIB20, _RetIB21, _CompIB21, _RetIB22, _CompIB22, _RetIB23, _CompIB23 As String
 
     Private _CuentasContables As New List(Of Object)
     Private _ClavesCheques As New List(Of Object)
@@ -158,6 +161,26 @@ Public Class RecibosProvisorios
         _CompIB13 = ""
         _RetIB14 = ""
         _CompIB14 = ""
+
+        _RetIB15 = ""
+        _CompIB15 = ""
+        _RetIB16 = ""
+        _CompIB16 = ""
+        _RetIB17 = ""
+        _CompIB17 = ""
+        _RetIB18 = ""
+        _CompIB18 = ""
+        _RetIB19 = ""
+        _CompIB19 = ""
+        _RetIB20 = ""
+        _CompIB20 = ""
+        _RetIB21 = ""
+        _CompIB21 = ""
+        _RetIB22 = ""
+        _CompIB22 = ""
+        _RetIB23 = ""
+        _CompIB23 = ""
+
 
         lblTotal.Text = "0.00"
         lblDiferencia.Text = "0.00"
@@ -329,6 +352,26 @@ Public Class RecibosProvisorios
                         _CompIB13 = IIf(IsDBNull(dr.Item("NroRetIb13")), "", dr.Item("NroRetIb13"))
                         _RetIB14 = IIf(IsDBNull(dr.Item("RetIb14")), "", dr.Item("RetIb14"))
                         _CompIB14 = IIf(IsDBNull(dr.Item("NroRetIb14")), "", dr.Item("NroRetIb14"))
+
+                        _RetIB15 = IIf(IsDBNull(dr.Item("RetIb15")), "", dr.Item("RetIb15"))
+                        _CompIB15 = IIf(IsDBNull(dr.Item("NroRetIb15")), "", dr.Item("NroRetIb15"))
+                        _RetIB16 = IIf(IsDBNull(dr.Item("RetIb16")), "", dr.Item("RetIb16"))
+                        _CompIB16 = IIf(IsDBNull(dr.Item("NroRetIb16")), "", dr.Item("NroRetIb16"))
+                        _RetIB17 = IIf(IsDBNull(dr.Item("RetIb17")), "", dr.Item("RetIb17"))
+                        _CompIB17 = IIf(IsDBNull(dr.Item("NroRetIb17")), "", dr.Item("NroRetIb17"))
+                        _RetIB18 = IIf(IsDBNull(dr.Item("RetIb18")), "", dr.Item("RetIb18"))
+                        _CompIB18 = IIf(IsDBNull(dr.Item("NroRetIb18")), "", dr.Item("NroRetIb18"))
+                        _RetIB19 = IIf(IsDBNull(dr.Item("RetIb19")), "", dr.Item("RetIb19"))
+                        _CompIB19 = IIf(IsDBNull(dr.Item("NroRetIb19")), "", dr.Item("NroRetIb19"))
+                        _RetIB20 = IIf(IsDBNull(dr.Item("RetIb20")), "", dr.Item("RetIb20"))
+                        _CompIB20 = IIf(IsDBNull(dr.Item("NroRetIb20")), "", dr.Item("NroRetIb20"))
+                        _RetIB21 = IIf(IsDBNull(dr.Item("RetIb21")), "", dr.Item("RetIb21"))
+                        _CompIB21 = IIf(IsDBNull(dr.Item("NroRetIb21")), "", dr.Item("NroRetIb21"))
+                        _RetIB22 = IIf(IsDBNull(dr.Item("RetIb22")), "", dr.Item("RetIb22"))
+                        _CompIB22 = IIf(IsDBNull(dr.Item("NroRetIb22")), "", dr.Item("NroRetIb22"))
+                        _RetIB23 = IIf(IsDBNull(dr.Item("RetIb23")), "", dr.Item("RetIb23"))
+                        _CompIB23 = IIf(IsDBNull(dr.Item("NroRetIb23")), "", dr.Item("NroRetIb23"))
+
 
                         txtTotal.Text = _NormalizarNumero(IIf(IsDBNull(dr.Item("Importe")), "", dr.Item("Importe")))
                     End If
@@ -545,7 +588,8 @@ Public Class RecibosProvisorios
                     (_NormalizarNumero(_RetIB2)), (_NormalizarNumero(_CompIB2)), (_NormalizarNumero(_RetIB3)), _
                     (_NormalizarNumero(_CompIB3)), (_NormalizarNumero(_RetIB4)), (_NormalizarNumero(_CompIB4)), _
                     (_NormalizarNumero(_RetIB5)), (_NormalizarNumero(_CompIB5)), (_NormalizarNumero(_RetIB6)), _
-                    (_NormalizarNumero(_CompIB6)), (_NormalizarNumero(_RetIB7)), (_NormalizarNumero(_CompIB7)), (_NormalizarNumero(_RetIB8)), (_NormalizarNumero(_CompIB8)), _ClavesCheques, _CuentasContables)
+                    (_NormalizarNumero(_CompIB6)), (_NormalizarNumero(_RetIB7)), (_NormalizarNumero(_CompIB7)), (_NormalizarNumero(_RetIB8)),
+                    (_NormalizarNumero(_CompIB8)), _ClavesCheques, _CuentasContables)
                     _ActualizarComprobantesIbRestantes(txtrecibo.Text)
             Catch ex As Exception
                 MsgBox(ex.Message)
@@ -575,12 +619,30 @@ Public Class RecibosProvisorios
             XSql = XSql & " NroRetIb12 = " & _NormalizarNumero(_CompIB12) & ","
             XSql = XSql & " NroRetIb13 = " & _NormalizarNumero(_CompIB13) & ","
             XSql = XSql & " NroRetIb14 = " & _NormalizarNumero(_CompIB14) & ","
+            XSql = XSql & " NroRetIb15 = " & _NormalizarNumero(_CompIB15) & ","
+            XSql = XSql & " NroRetIb16 = " & _NormalizarNumero(_CompIB16) & ","
+            XSql = XSql & " NroRetIb17 = " & _NormalizarNumero(_CompIB17) & ","
+            XSql = XSql & " NroRetIb18 = " & _NormalizarNumero(_CompIB18) & ","
+            XSql = XSql & " NroRetIb19 = " & _NormalizarNumero(_CompIB19) & ","
+            XSql = XSql & " NroRetIb20 = " & _NormalizarNumero(_CompIB20) & ","
+            XSql = XSql & " NroRetIb21 = " & _NormalizarNumero(_CompIB21) & ","
+            XSql = XSql & " NroRetIb22 = " & _NormalizarNumero(_CompIB22) & ","
+            XSql = XSql & " NroRetIb23 = " & _NormalizarNumero(_CompIB23) & ","
             XSql = XSql & " RetIb9 = " & _NormalizarNumero(_RetIB9) & ","
             XSql = XSql & " RetIb10 = " & _NormalizarNumero(_RetIB10) & ","
             XSql = XSql & " RetIb11 = " & _NormalizarNumero(_RetIB11) & ","
             XSql = XSql & " RetIb12 = " & _NormalizarNumero(_RetIB12) & ","
             XSql = XSql & " RetIb13 = " & _NormalizarNumero(_RetIB13) & ","
-            XSql = XSql & " RetIb14 = " & _NormalizarNumero(_RetIB14) & ""
+            XSql = XSql & " RetIb14 = " & _NormalizarNumero(_RetIB14) & ","
+            XSql = XSql & " RetIb15 = " & _NormalizarNumero(_RetIB15) & ","
+            XSql = XSql & " RetIb16 = " & _NormalizarNumero(_RetIB16) & ","
+            XSql = XSql & " RetIb17 = " & _NormalizarNumero(_RetIB17) & ","
+            XSql = XSql & " RetIb18 = " & _NormalizarNumero(_RetIB18) & ","
+            XSql = XSql & " RetIb19 = " & _NormalizarNumero(_RetIB19) & ","
+            XSql = XSql & " RetIb20 = " & _NormalizarNumero(_RetIB20) & ","
+            XSql = XSql & " RetIb21 = " & _NormalizarNumero(_RetIB21) & ","
+            XSql = XSql & " RetIb22 = " & _NormalizarNumero(_RetIB22) & ","
+            XSql = XSql & " RetIb23 = " & _NormalizarNumero(_RetIB23) & ""
             XSql = XSql & " Where Recibo = " & "'" & txtRecibo.Text & "'"
 
             cm.CommandText = XSql
@@ -736,6 +798,25 @@ Public Class RecibosProvisorios
             _RetIB14 = ""
             _CompIB14 = ""
 
+            _RetIB15 = ""
+            _CompIB15 = ""
+            _RetIB16 = ""
+            _CompIB16 = ""
+            _RetIB17 = ""
+            _CompIB17 = ""
+            _RetIB18 = ""
+            _CompIB18 = ""
+            _RetIB19 = ""
+            _CompIB19 = ""
+            _RetIB20 = ""
+            _CompIB20 = ""
+            _RetIB21 = ""
+            _CompIB21 = ""
+            _RetIB22 = ""
+            _CompIB22 = ""
+            _RetIB23 = ""
+            _CompIB23 = ""
+
         End If
     End Sub
 
@@ -861,6 +942,24 @@ Public Class RecibosProvisorios
             .txtCompIB13.Text = _CompIB13
             .txtRetIB14.Text = _RetIB14
             .txtCompIB14.Text = _CompIB14
+            .txtRetIB15.Text = _RetIB15
+            .txtCompIB15.Text = _CompIB15
+            .txtRetIB16.Text = _RetIB16
+            .txtCompIB16.Text = _CompIB16
+            .txtRetIB17.Text = _RetIB17
+            .txtCompIB17.Text = _CompIB17
+            .txtRetIB18.Text = _RetIB18
+            .txtCompIB18.Text = _CompIB18
+            .txtRetIB19.Text = _RetIB19
+            .txtCompIB19.Text = _CompIB19
+            .txtRetIB20.Text = _RetIB20
+            .txtCompIB20.Text = _CompIB20
+            .txtRetIB21.Text = _RetIB21
+            .txtCompIB21.Text = _CompIB21
+            .txtRetIB22.Text = _RetIB22
+            .txtCompIB22.Text = _CompIB22
+            .txtRetIB23.Text = _RetIB23
+            .txtCompIB23.Text = _CompIB23
 
             .ShowDialog(Me)
 
@@ -892,6 +991,24 @@ Public Class RecibosProvisorios
             _CompIB13 = .txtCompIB13.Text
             _RetIB14 = .txtRetIB14.Text
             _CompIB14 = .txtCompIB14.Text
+            _RetIB15 = .txtRetIB15.Text
+            _CompIB15 = .txtCompIB15.Text
+            _RetIB16 = .txtRetIB16.Text
+            _CompIB16 = .txtCompIB16.Text
+            _RetIB17 = .txtRetIB17.Text
+            _CompIB17 = .txtCompIB17.Text
+            _RetIB18 = .txtRetIB18.Text
+            _CompIB18 = .txtCompIB18.Text
+            _RetIB19 = .txtRetIB19.Text
+            _CompIB19 = .txtCompIB19.Text
+            _RetIB20 = .txtRetIB20.Text
+            _CompIB20 = .txtCompIB20.Text
+            _RetIB21 = .txtRetIB21.Text
+            _CompIB21 = .txtCompIB21.Text
+            _RetIB22 = .txtRetIB22.Text
+            _CompIB22 = .txtCompIB22.Text
+            _RetIB23 = .txtRetIB23.Text
+            _CompIB23 = .txtCompIB23.Text
 
             .Dispose()
 
@@ -917,7 +1034,16 @@ Public Class RecibosProvisorios
         totalIB += (Val(_RetIB11))
         totalIB += (Val(_RetIB12))
         totalIB += (Val(_RetIB13))
-        totalIB += (Val(_RetIB14))
+        totalIB += (Val(_RetIB14))      
+        totalIB += (Val(_RetIB15))
+        totalIB += (Val(_RetIB16))
+        totalIB += (Val(_RetIB17))
+        totalIB += (Val(_RetIB18))
+        totalIB += (Val(_RetIB19))
+        totalIB += (Val(_RetIB20))
+        totalIB += (Val(_RetIB21))
+        totalIB += (Val(_RetIB22))
+        totalIB += (Val(_RetIB23))
 
         txtRetIB.Text = totalIB
 
@@ -1944,4 +2070,5 @@ Public Class RecibosProvisorios
 
         End If
     End Sub
+
 End Class

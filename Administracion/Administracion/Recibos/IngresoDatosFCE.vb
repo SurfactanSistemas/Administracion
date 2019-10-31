@@ -89,11 +89,14 @@
             c.Text = formatonumerico(c.Text)
         Next
 
+        DialogResult = Windows.Forms.DialogResult.None
+
         '
         ' Validamos los datos.
         '
         If Trim(txtBoleto.Text) = "" Then
             MsgBox("Debe indicarse el N° de Boleto", MsgBoxStyle.Exclamation)
+            txtBoleto.Focus()
             Exit Sub
         End If
 
@@ -101,17 +104,25 @@
 
         If txtProveedor.Text = "" OrElse WProv Is Nothing Then
             MsgBox("Debe indicarse un Proveedor válido", MsgBoxStyle.Exclamation)
+            txtProveedor.Focus()
             Exit Sub
         End If
 
         If Val(txtInteres.Text) = 0 Then
             MsgBox("Debe indicarse el Interés.", MsgBoxStyle.Exclamation)
+            txtInteres.Focus()
             Exit Sub
         End If
 
+        DialogResult = Windows.Forms.DialogResult.OK
+
         With DatosFCE
-            For Each c As Control In {txtAranceles, txtBoleto, txtDerechos, txtInteres, txtIvaAranceles, txtIvaDerechos, txtProveedor}
+            For Each c As Control In {txtBoleto, txtProveedor}
                 .Item(c.Name.Replace("txt", "")) = c.Text
+            Next
+
+            For Each c As Control In {txtAranceles, txtDerechos, txtInteres, txtIvaAranceles, txtIvaDerechos}
+                .Item(c.Name.Replace("txt", "")) = Val(formatonumerico(c.Text))
             Next
         End With
 

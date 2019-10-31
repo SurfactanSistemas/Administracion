@@ -550,7 +550,7 @@ Public Class ListadoImputacionesContable
 
 
         Dim tablaCtaCte As DataTable
-        Dim ZRetIb(14, 2) As String
+        Dim ZRetIb(23, 2) As String
         ZRetIb(1, 2) = "162"
         ZRetIb(2, 2) = "161"
         ZRetIb(3, 2) = "190"
@@ -566,6 +566,17 @@ Public Class ListadoImputacionesContable
         ZRetIb(12, 2) = "196" '"167"
         ZRetIb(13, 2) = "185" '"172"
         ZRetIb(14, 2) = "186" '"179"
+
+        ZRetIb(15, 2) = "198"
+        ZRetIb(16, 2) = "198"
+        ZRetIb(17, 2) = "198"
+        ZRetIb(18, 2) = "198"
+        ZRetIb(19, 2) = "198"
+        ZRetIb(20, 2) = "198"
+        ZRetIb(21, 2) = "198"
+        ZRetIb(22, 2) = "198"
+        ZRetIb(23, 2) = "198"
+
 
         Dim ZExcluir(1000) As String
         Dim Zex = 0
@@ -865,12 +876,14 @@ Public Class ListadoImputacionesContable
                 If Not IsNothing(WRetIBs) Then
                     For Each ret As DataRow In WRetIBs.Rows
 
+
+
                         With ret
 
                             WRecibo = IIf(IsDBNull(.Item("Recibo")), "0", Trim(.Item("Recibo")))
                             WFecha = IIf(IsDBNull(.Item("Fecha")), "0", Trim(.Item("Fecha")))
 
-                            For i = 1 To 14
+                            For i = 1 To 23
                                 If IsDBNull(.Item("RetIb" & i)) Then
                                     ZRetIb(i, 1) = "0"
                                 Else
@@ -880,7 +893,9 @@ Public Class ListadoImputacionesContable
 
                         End With
 
-                        For i = 1 To 14
+                        'If WRecibo = 104532 Then Stop
+
+                        For i = 1 To 23
 
                             If Val(ZRetIb(i, 1)) <> 0 AndAlso Val(WRecibo) <> 0 Then
 
@@ -1059,7 +1074,7 @@ Public Class ListadoImputacionesContable
     Private Function _BuscarRetencionesIBRecibos(ByVal WDesde As String, ByVal WHasta As String) As DataTable
 
         Dim cn = New SqlConnection()
-        Dim cm = New SqlCommand("SELECT Recibo, Fecha, RetIb1, RetIb2, RetIb3, RetIb4, RetIb5, RetIb6, RetIb7, RetIb8, RetIb9, RetIb10, RetIb11, RetIb12, RetIb13, RetIb14 FROM Recibos WHERE (Renglon = '01' OR Renglon = '1') AND FechaOrd BETWEEN '" & WDesde & "' AND '" & WHasta & "'")
+        Dim cm = New SqlCommand("SELECT Recibo, Fecha, RetIb1, RetIb2, RetIb3, RetIb4, RetIb5, RetIb6, RetIb7, RetIb8, RetIb9, RetIb10, RetIb11, RetIb12, RetIb13, RetIb14, RetIb15, RetIb16, RetIb17, RetIb18, RetIb19, RetIb20, RetIb21, RetIb22, RetIb23 FROM Recibos WHERE (Renglon = '01' OR Renglon = '1') AND FechaOrd BETWEEN '" & WDesde & "' AND '" & WHasta & "'")
         Dim dr As SqlDataReader
         Dim tabla As New DataTable
 

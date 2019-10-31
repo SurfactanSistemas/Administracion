@@ -33,6 +33,25 @@ namespace Vista
         {
             int NumEtiquetaActual = 0;
             int HojaActual = 0;
+            Double[] TamFuente;
+            TamFuente = new double[10];
+            bool[] ModificarFont;
+            ModificarFont = new bool[10];
+            for (int i = 0; i < 10; i++)
+            {
+                ModificarFont[i] = false;
+            }
+            TamFuente[1]= 1.7;
+            TamFuente[2] = 1.7;
+            TamFuente[3] = 1.7;
+            TamFuente[4] = 1.7;
+            TamFuente[5] = 1.7;
+            TamFuente[6] = 1.7;
+            TamFuente[7] = 1.7;
+            TamFuente[8] = 1.7;
+            TamFuente[9] = 1.7;
+
+
 
             DSEtiq1[] Dss = new DSEtiq1[CalcularCantidadDeHojas()];
 
@@ -102,6 +121,14 @@ namespace Vista
                         );
 
                         NumEtiquetaActual++;
+                        if (dr[1].ToString().Length < 25)
+                        {
+                            int EtiquetaACambiar;
+                            EtiquetaACambiar = AqueEtiquetaCambioFont(NumEtiquetaActual);
+                            ModificarFont[EtiquetaACambiar] = true;
+
+
+                        }
                     } 
                     else{
 
@@ -121,8 +148,21 @@ namespace Vista
                         );
 
                         NumEtiquetaActual++;
+                        if(dr[1].ToString().Length <25)
+                        {
+                            int EtiquetaAcambiar;
+                            EtiquetaAcambiar = AqueEtiquetaCambioFontFrascos(NumEtiquetaActual);
+                            ModificarFont[EtiquetaAcambiar] = true;
+                        }
                     }
-
+//                    if (dr[1].ToString().Length <25)
+//                    {
+//                        int EtiquetaACambiar;
+//                        EtiquetaACambiar = AqueEtiquetaCambioFont(NumEtiquetaActual);
+//                        ModificarFont[EtiquetaACambiar] = true;
+//
+//
+//                    }
                     if (EsFinalDeHoja(NumEtiquetaActual))
                     {
                         NumEtiquetaActual = 0;
@@ -144,10 +184,24 @@ namespace Vista
                 ReportClass ECImp = ObtenerRptSegunTipo();
 
                 ECImp.SetDataSource(_ds);
+               // ECImp.SetParameterValue();
+                
+                for (int i = 1; i < 10; i++)
+                {
+                    if(ModificarFont[i]== true)
+                    {
+                    ECImp.SetParameterValue("" + i + "", TamFuente[i]);
+                    }
+                    else
+                    {
+                        ECImp.SetParameterValue("" + i + "", 1 );
+                
+                    }
+                }
 
                 if (_EnProduccion)
                 {
-
+                     
                     //CRVEtiquetas.Visible = true;
                     //CRVEtiquetas.ReportSource = ECImp;
                     ECImp.PrintToPrinter(1, true, 0, 0);
@@ -495,7 +549,9 @@ namespace Vista
                             (CantidadDeEtiquetasTotales() + corrimiento) / CantidadDeEtiquetasPorHojaSegunTipo() // Sumo la posición por un tema de corrimiento.
                         )
                    );
+
         }
+
 
         private double CantidadDeEtiquetasTotales()
         {
@@ -508,6 +564,83 @@ namespace Vista
 
             return total;
         }
+
+        private int AqueEtiquetaCambioFont(int NumEtiquetaActual)
+        {
+                
+                if (NumEtiquetaActual ==2)
+                {
+                 return 1;
+                }
+                if (NumEtiquetaActual==4)
+                {
+                    return 2;
+                }
+                if (NumEtiquetaActual == 6)
+                {
+                    return 3;
+
+                }
+                if (NumEtiquetaActual == 8)
+                {
+                    return 4;
+
+                }
+
+                return 1;
+               
+       }
+
+        private int AqueEtiquetaCambioFontFrascos(int NumEtiquetaActual)
+        {
+
+            if (NumEtiquetaActual == 1)
+            {
+                return 1;
+            }
+            if (NumEtiquetaActual == 2)
+            {
+                return 2;
+            }
+            if (NumEtiquetaActual == 3)
+            {
+                return 3;
+
+            }
+            if (NumEtiquetaActual == 4)
+            {
+                return 4;
+
+            }
+            if (NumEtiquetaActual == 5)
+            {
+                return 5;
+
+            }
+            if (NumEtiquetaActual == 6)
+            {
+                return 6;
+
+            }
+            if (NumEtiquetaActual == 7)
+            {
+                return 7;
+
+            }
+            if (NumEtiquetaActual == 8)
+            {
+                return 8;
+
+            }
+            return 9;
+        }
+                
+            
+            
+                
+            
+                
+       
 
         public int CantidadDeEtiquetasPorHojaSegunTipo()
         {

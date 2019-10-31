@@ -6,6 +6,9 @@ Imports System.Threading
 Imports EvaluacionProvMPFarma.Helper
 Imports ConsultasVarias.Clases.Query
 
+
+
+
 Public Class EvaluacionProveedorMateriaPrima : Implements IAyudaProveedores, ConsultasVarias.IIngresoClaveSeguridad
 
     Private WProveedor As String
@@ -26,6 +29,7 @@ Public Class EvaluacionProveedorMateriaPrima : Implements IAyudaProveedores, Con
         WTipoMP = TipoMP
 
         btnGrabar.Enabled = HabilitarGrabacion
+        BtnCopiar.Enabled = HabilitarGrabacion
 
     End Sub
 
@@ -69,7 +73,6 @@ Public Class EvaluacionProveedorMateriaPrima : Implements IAyudaProveedores, Con
 
         If TabControl1.TabPages.Count = 0 Then
             MsgBox("El Proveedor no comercializa ningún Producto Farma.", MsgBoxStyle.Information)
-            TabControl1.TabPages.Clear()
             txtProveedor_MouseDoubleClick(Nothing, Nothing)
             ' Close()
         Else
@@ -150,7 +153,7 @@ Public Class EvaluacionProveedorMateriaPrima : Implements IAyudaProveedores, Con
             WTab = New TabPage(WDato.Item("MP"))
 
             TabControl1.TabPages.Add(WTab)
-
+            ComboBox1.Items.Add(WDato.Item("MP"))
             WTab = Nothing
 
             GC.Collect()
@@ -367,5 +370,115 @@ Public Class EvaluacionProveedorMateriaPrima : Implements IAyudaProveedores, Con
 
         btnGrabar_Click(Nothing, Nothing)
 
+
     End Sub
+
+    
+    Private Sub BtnCopiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnCopiar.Click
+
+        If TabControl1.TabPages.Count <= 1 Then
+            MsgBox("El Proveedor no comercializa la cantidad necesaria de Productos como para ser copiados.", MsgBoxStyle.Information)
+        Else
+            PanelCopiarGrilla.Visible = True
+            CheckBox1.Checked = True
+            Label6.Text = TabControl1.SelectedTab.Text
+        End If
+
+    End Sub
+
+
+
+    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+
+        If ComboBox1.SelectedItem = TabControl1.SelectedTab.Text Then
+            MsgBox("Accion innecesaria. Quiere copiar en la misma materia prima .")
+        Else
+            Dim WControl = New EvaluacionPorMpUserControl(txtProveedor.Text, ComboBox1.SelectedItem)
+
+            WControl.Dock = DockStyle.Fill
+
+            WControl.HabilitarControles(btnGrabar.Enabled)
+
+            TabControl1.SelectedTab.Controls.Clear()
+            TabControl1.SelectedTab.Controls.Add(WControl)
+            PanelCopiarGrilla.Visible = False
+            If CheckBox1.Checked = True Then
+                Dim WPath As String = ConfigurationManager.AppSettings("PATH_DOCS_EVAL_PROV_MP")
+                Dim archivos As String()
+                Dim destino As String
+                For i = 1 To 35
+                    If i < 10 Then
+                        archivos = Directory.GetFiles(WPath & "" & WProveedor & "\" & ComboBox1.SelectedItem & "\" & "0" & i)
+                        destino = WPath & "" & WProveedor & "\" & TabControl1.SelectedTab.Text & "\" & "0" & i
+                   
+                    Else
+                        archivos = Directory.GetFiles(WPath & "" & WProveedor & "\" & ComboBox1.SelectedItem & "\" & i)
+                        destino = WPath & "" & WProveedor & "\" & TabControl1.SelectedTab.Text & "\" & i
+                    End If
+                    For Each Archivo In archivos
+                        Dim NombreArchivo = destino & "\" & Path.GetFileName(Archivo)
+                        If True = File.Exists(NombreArchivo) Then
+                            If True = YesNOMSGBOX(Path.GetFileName(Archivo)) Then
+                                File.Copy(Archivo, NombreArchivo,True)
+                            End If
+                            Continue For
+                        End If
+                        File.Copy(Archivo, NombreArchivo)
+                    Next
+                Next
+            End If
+        End If
+    End Sub
+    Private Function YesNOMSGBOX(ByVal nombreAr As String) As Boolean
+        Dim Msg, Style, Title, Help, Ctxt, Response
+        Msg = "¿Desea sobre escribir el Archivo " & nombreAr & "?"    ' Define message.
+        Style = vbYesNo + vbCritical + vbDefaultButton2    ' Define buttons.
+        Title = "Alerta"    ' Define title. 
+        ' Display message.
+        Response = MsgBox(Msg, Style, Title)
+        If Response = vbYes Then 'User chose Yes.
+            Return True ' Perform some action.
+        Else    ' User chose No.
+            Return False    ' Perform some action.
+        End If
+    End Function
+
+    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
+        PanelCopiarGrilla.Visible = False
+    End Sub
+
+   
+    Private Sub BntLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BntLimpiar.Click
+        If (btnGrabar.Enabled = True) Then
+            If (OKCancelMsgBox() = True) Then
+                txtProveedor.Text = ""
+                TabControl1.TabPages.Clear()
+                With New AyudaProveedores
+                    .ShowDialog(Me)
+                End With
+            End If
+        Else
+            txtProveedor.Text = ""
+            TabControl1.TabPages.Clear()
+            With New AyudaProveedores
+                .ShowDialog(Me)
+            End With
+        End If
+     
+    End Sub
+
+    Private Function OKCancelMsgBox() As Boolean
+        Dim msg, style, title, respuesta
+        msg = "Se perderan los cambios que no se allan guardado"
+        style = vbOKCancel + vbCritical + vbDefaultButton2
+        title = "Alerta"
+        respuesta = MsgBox(msg, style, title)
+        If (respuesta = vbOK) Then
+            Return True
+        End If
+        Return False
+    End Function
+
+    
+ 
 End Class

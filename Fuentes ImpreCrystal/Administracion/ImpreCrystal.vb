@@ -72,7 +72,7 @@ Public Class ImpreCrystal
                         txtNombrePdf = "Orden " + txtOrden + " Orden de Importacion"
                         txtNombreBusqueda = "c:\orden\" + "Orden " + txtOrden + " Orden de Importacion.pdf"
                         If File.Exists(txtNombreBusqueda) Then
-                            Kill(txtNombreBusqueda)
+                            File.Delete(txtNombreBusqueda)
                         End If
 
                         Select Case txtPlanta
@@ -127,7 +127,7 @@ Public Class ImpreCrystal
                         txtNombrePdf = "Orden " + txtOrden + " Especificaciones"
                         txtNombreBusqueda = "c:\orden\" + "Orden " + txtOrden + " Especificaciones.pdf"
                         If File.Exists(txtNombreBusqueda) Then
-                            Kill(txtNombreBusqueda)
+                            File.Delete(txtNombreBusqueda)
                         End If
 
                         Dim viewer As New ReportViewer("Especificaciones de Ordenes de Compra de Importaciones", "n:\net\crystal\recuired specs po nro net.rpt", txtFormula, txtNombrePdf, "")
@@ -154,7 +154,7 @@ Public Class ImpreCrystal
                         txtNombrePdf = txtOrden + " Orden de Compra"
                         txtNombreBusqueda = "c:\orden\" + txtOrden + " Orden de Compra.pdf"
                         If File.Exists(txtNombreBusqueda) Then
-                            Kill(txtNombreBusqueda)
+                            File.Delete(txtNombreBusqueda)
                         End If
 
                         Select Case txtPlanta
@@ -212,7 +212,7 @@ Public Class ImpreCrystal
                         txtNombrePdf = txtOrden + " Especificaciones"
                         txtNombreBusqueda = "c:\orden\" + txtOrden + " Especificaciones.pdf"
                         If File.Exists(txtNombreBusqueda) Then
-                            Kill(txtNombreBusqueda)
+                            File.Delete(txtNombreBusqueda)
                         End If
 
                         Dim viewer As New ReportViewer("Especificaciones de Ordenes de Compra", "n:\net\crystal\ListaEspePdfNet.rpt", txtFormula, txtNombrePdf, "")
@@ -270,7 +270,7 @@ Public Class ImpreCrystal
                         txtNombrePdf = txtTipoCompro + " 0009-" + ceros(txtOrden, 8)
                         txtNombreBusqueda = "c:\orden\" + txtTipoCompro + " 0009-" + ceros(txtOrden, 8) + ".pdf"
                         If File.Exists(txtNombreBusqueda) Then
-                            Kill(txtNombreBusqueda)
+                            File.Delete(txtNombreBusqueda)
                         End If
 
                         Dim viewer As New ReportViewer("Facturas", txtNombreReporte, txtFormula, txtNombrePdf, "")
@@ -298,7 +298,7 @@ Public Class ImpreCrystal
                         txtNombrePdf = LTrim(RTrim(txtNombre))
                         txtNombreBusqueda = "c:\PdfPrintII\" + txtNombre + ".pdf"
                         If File.Exists(txtNombreBusqueda) Then
-                            Kill(txtNombreBusqueda)
+                            File.Delete(txtNombreBusqueda)
                         End If
                         Dim viewer As New ReportViewer("Certificados de Analisis", "n:\net\crystal\CertificadoPdfNet.rpt", txtFormula, txtNombrePdf, "")
                         viewer.descargarComoPDF()
@@ -356,7 +356,7 @@ Public Class ImpreCrystal
                 txtFormula = txtUno + txtDos
 
                 If File.Exists(txtNombreBusqueda) Then
-                    Kill(txtNombreBusqueda)
+                    File.Delete(txtNombreBusqueda)
                 End If
 
                 Dim viewer As New ReportViewer("Especificaciones de Ordenes de Compra", "n:\net\crystal\ListaEspePdfNet.rpt", txtFormula, txtNombrePdf, "")
@@ -385,7 +385,7 @@ Public Class ImpreCrystal
                         MsgBox("Generacion del PDF :" + txtNombrePdf)
                         txtNombreBusqueda = "\Hector-TXT\Documents\DYSTAR\PEDIDOS\" + txtNombre + ".pdf"
                         If File.Exists(txtNombreBusqueda) Then
-                            Kill(txtNombreBusqueda)
+                            File.Delete(txtNombreBusqueda)
                         End If
 
                         Dim viewer As New ReportViewer("Ordenes de Compra de Importacion ", "n:\net\crystal\ImpreOrdenDyNet.rpt", txtFormula, txtNombrePdf, "")
@@ -411,7 +411,7 @@ Public Class ImpreCrystal
                 txtFormula = txtUno + txtDos
 
                 If File.Exists(txtNombreBusqueda) Then
-                    Kill(txtNombreBusqueda)
+                    File.Delete(txtNombreBusqueda)
                 End If
 
                 Dim viewer As New ReportViewer("Especificaciones de Ordenes de Compra (INGLES)", "n:\net\crystal\ListaEspePdfInglesNet.rpt", txtFormula, txtNombrePdf, "")

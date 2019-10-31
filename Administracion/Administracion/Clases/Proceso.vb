@@ -103,7 +103,7 @@ Module Proceso
 
     Public Function _ConectarA(Optional ByVal empresa As String = "SurfactanSA") As String
 
-        If _EsPellital() AndAlso empresa = "SurfactanSA" Then
+        If _EsPellital() And UCase(empresa) = "SURFACTANSA" Then
             empresa = "Pellital_III"
         End If
 
