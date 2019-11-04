@@ -42,6 +42,8 @@ Partial Class IngresoDatosFCE
         Me.btnAceptar = New System.Windows.Forms.Button()
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.btnAyudaProveedores = New System.Windows.Forms.Button()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -240,11 +242,28 @@ Partial Class IngresoDatosFCE
         Me.btnAyudaProveedores.TabIndex = 129
         Me.btnAyudaProveedores.UseVisualStyleBackColor = True
         '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(20, 122)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(0, 13)
+        Me.Label2.TabIndex = 130
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(77, 115)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(86, 20)
+        Me.TextBox1.TabIndex = 131
+        '
         'IngresoDatosFCE
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(573, 207)
+        Me.Controls.Add(Me.TextBox1)
+        Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.btnAyudaProveedores)
         Me.Controls.Add(Me.btnCerrar)
         Me.Controls.Add(Me.btnAceptar)
@@ -297,4 +316,6 @@ Partial Class IngresoDatosFCE
     Friend WithEvents btnAceptar As System.Windows.Forms.Button
     Friend WithEvents btnCerrar As System.Windows.Forms.Button
     Friend WithEvents btnAyudaProveedores As System.Windows.Forms.Button
+    Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
 End Class

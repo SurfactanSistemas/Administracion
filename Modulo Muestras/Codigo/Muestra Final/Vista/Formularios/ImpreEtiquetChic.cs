@@ -34,22 +34,21 @@ namespace Vista
             int NumEtiquetaActual = 0;
             int HojaActual = 0;
             Double[] TamFuente;
-            TamFuente = new double[10];
+            TamFuente = new double[8];
             bool[] ModificarFont;
-            ModificarFont = new bool[10];
-            for (int i = 0; i < 10; i++)
+            ModificarFont = new bool[8];
+            for (int i = 0; i < 8; i++)
             {
                 ModificarFont[i] = false;
             }
-            TamFuente[1]= 1.7;
-            TamFuente[2] = 1.7;
-            TamFuente[3] = 1.7;
-            TamFuente[4] = 1.7;
-            TamFuente[5] = 1.7;
-            TamFuente[6] = 1.7;
-            TamFuente[7] = 1.7;
-            TamFuente[8] = 1.7;
-            TamFuente[9] = 1.7;
+            TamFuente[1]= 1.5;
+            TamFuente[2] = 1.5;
+            TamFuente[3] = 1.5;
+            TamFuente[4] = 1.5;
+            TamFuente[5] = 1.5;
+            TamFuente[6] = 1.5;
+            TamFuente[7] = 1.5;
+            
 
 
 
@@ -185,8 +184,15 @@ namespace Vista
 
                 ECImp.SetDataSource(_ds);
                // ECImp.SetParameterValue();
-                
-                for (int i = 1; i < 10; i++)
+                if (tipo == "Chica")
+                {
+                    for (int i = 1; i < 8; i++)
+                    {
+                        TamFuente[i] = 1.7;
+                    }
+
+                    }
+                for (int i = 1; i < 8; i++)
                 {
                     if(ModificarFont[i]== true)
                     {
@@ -216,6 +222,8 @@ namespace Vista
 
             }
         }
+        
+
 
         private string _DeterminarTabla(string codigo)
         {
@@ -274,7 +282,7 @@ namespace Vista
 
                     SqlCommand cmd = new SqlCommand("Select * From " + Tabla + " WHERE " + Columna + " = '" + _Codigo.Trim() + "'", cn);
                     SqlDataReader dr = cmd.ExecuteReader();
-
+                  
                     if (dr.HasRows)
                     {
                         dr.Read();
