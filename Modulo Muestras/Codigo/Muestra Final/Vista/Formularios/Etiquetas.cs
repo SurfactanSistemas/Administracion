@@ -1,12 +1,16 @@
 ﻿using System;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 using ClassConexion;
 
 namespace Vista
 {
+    
     public partial class Etiquetas : Form
     {
+        
         DataTable DT = new DataTable();
 
         DataTable DTOriginal = new DataTable();
@@ -32,6 +36,7 @@ namespace Vista
             CBTamañoEtiquetas.SelectedIndex = 0;
         }
 
+      
         private void PoblarGrilla()
         {
             DataTable tabla = DT;
@@ -272,5 +277,113 @@ namespace Vista
             
             PoblarGrilla(tabla);
         }
+
+     
+
+        private void DGV_Etiquetas_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (DGV_Etiquetas.SelectedCells.Count > 0)
+            {
+                if (DGV_Etiquetas.CurrentCell.ColumnIndex == 1)
+                {
+                    
+                    txtDescripcionCambiar.Text = DGV_Etiquetas.Rows[DGV_Etiquetas.CurrentCell.RowIndex].Cells[1].Value.ToString().Trim();
+                    panel4.Visible = true;
+                    txtDescripcionCambiar.Focus();
+                }
+            }
+        }
+
+        private void Etiquetas_Load(object sender, EventArgs e)
+        {
+            panel4.Visible = false;
+            
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            panel4.Visible = false;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            
+
+            String Codigo = DGV_Etiquetas.Rows[DGV_Etiquetas.CurrentCell.RowIndex].Cells[0].Value.ToString().Trim();
+            
+            if (DGV_Etiquetas.Rows[DGV_Etiquetas.CurrentCell.RowIndex].Cells[1].Value.ToString().Trim() ==
+                txtDescripcionCambiar.Text.Trim())
+            {
+                MessageBox.Show("El nombre es el mismo");
+                
+            }
+                else
+                    {
+                       try
+                      {
+                          using (SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["SurfactanSA"].ToString()))
+                          {
+                          cn.Open();
+
+                          string Columna = _DeterminarColumna(Codigo);
+                          
+                          string consulta = " UPDATE Muestra SET DescriCliente = '" + txtDescripcionCambiar.Text.Trim() +
+                                               "' WHERE " + Columna + " = '" + Codigo + "'";
+                          SqlCommand cmd = new SqlCommand(consulta, cn);
+                          int dr = cmd.ExecuteNonQuery();
+                          DGV_Etiquetas.Rows[DGV_Etiquetas.CurrentCell.RowIndex].Cells[1].Value = txtDescripcionCambiar.Text;
+                          panel4.Visible = false;
+                          ((Vista.Muestra)Owner).PresionarBotonBuscar(new KeyEventArgs(Keys.Enter));
+                              foreach (DataRow fila in DT.Rows)
+                              {
+                                  if(fila["Codigo"].ToString().Trim() == Codigo.Trim())
+                                  {
+                                      fila["DescriCliente"] = txtDescripcionCambiar.Text;
+                                  
+                                  }
+                              }
+                          }
+                    }
+                     catch (Exception ex)
+                    {
+                        throw new Exception("Ocurrio un error al querer modificar la descripcion del siguiente producto: " + Codigo);
+          
+                    }
+                }
     }
+        
+        
+        private string _DeterminarColumna(string codigo)
+        {
+            switch (codigo.Substring(0, 2))
+            {
+                case "PT":
+                case "YQ":
+                case "YF":
+                case "YP":
+                    return "Producto";
+                    break;
+                default:
+                    return "Articulo";
+                    break;
+            }
+        }
+
+        private void txtDescripcionCambiar_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyData)
+            {
+                case Keys.Enter:
+                {
+                    button2_Click(null,null);
+                }
+                    break;  
+                case Keys.Escape:
+                {
+                    txtDescripcionCambiar.Text = "";
+                }
+            break;
+            }
+        }
+}
 }

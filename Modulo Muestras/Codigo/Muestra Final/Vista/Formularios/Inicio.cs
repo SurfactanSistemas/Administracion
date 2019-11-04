@@ -287,7 +287,7 @@ namespace Vista
             
         }
 
-        private void TB_Hasta_KeyDown(object sender, KeyEventArgs e)
+       private void TB_Hasta_KeyDown(object sender, KeyEventArgs e)
         {
             PresionarBotonBuscar(e);
             if (e.KeyCode == Keys.Enter)
@@ -305,7 +305,7 @@ namespace Vista
             }
         }
 
-        private void PresionarBotonBuscar( KeyEventArgs e)
+        public void PresionarBotonBuscar( KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -454,7 +454,7 @@ namespace Vista
                 }
 
                 Etiquetas etiquetas = new Etiquetas(_dt);
-                etiquetas.ShowDialog();
+                etiquetas.ShowDialog(this);
             }
             catch (Exception err)
             {
