@@ -87,10 +87,10 @@ Public Class ImpreProcesos
 
             '_GenerarCertificadoAnalisisFarma(WTipoReporte2, WPartida2, WTipoSalida2)
 
-            Dim WTerminado2 As String = "SE-25012-994"
-            Dim WPartida2 As Integer = "0"
+            'Dim WTerminado2 As String = "SE-25012-994"
+            'Dim WPartida2 As Integer = "0"
 
-            _GenerarRegistroProduccion(WTerminado2, WPartida2, 0, 0, 0, 0, 0, True)
+            '_GenerarRegistroProduccion(WTerminado2, WPartida2, 0, 0, 0, 0, 0, True)
 
             'Dim WImpreFechaVto2 = "", WFechaElabora2 = "", WImpreFechaElaboracion2 = "", WFechaVto2 = ""
 
@@ -272,6 +272,8 @@ Public Class ImpreProcesos
             End If
 
         End If
+
+        If RegistroMaestro Then WImpreVto = "TIEMPO DE VIDA ÚTIL"
 
         Dim rpt As New ReportDocument
 

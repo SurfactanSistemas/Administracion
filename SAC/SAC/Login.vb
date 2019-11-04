@@ -589,4 +589,12 @@ Public Class Login
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
         _ProcesarLlamadaPorComando({"", "5", "24"})
     End Sub
+
+    'Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    '    Dim frm As New VistaPrevia
+    '    For i As Integer = 0 To 60
+    '        'VistaPrevia.EnviarPorEmail("C:\tempIndice\INC 0076 - 26-08-2019.pdf", true)
+    '        ConsultasVarias.Clases.Helper._EnviarEmail("dsuarez@surfactan.com.ar", ".", "Prueba", {"C:\tempIndice\INC 0076 - 26-08-2019.pdf"}, True)
+    '    Next
+    'End Sub
 End Class

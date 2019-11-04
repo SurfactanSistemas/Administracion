@@ -46,15 +46,6 @@ namespace Eval_Proveedores.Novedades
                 if (Desde == "0") return; //throw new Exception("Se debe ingresar la fecha Desde donde desea listar");
                 if (Hasta == "0") return; //throw new Exception("Se debe ingresar la fecha Hasta donde desea listar");
 
-                if (!WAutorizado)
-                {
-                    Clave _frm = new Clave();
-                    _frm.Show(this);
-                    return;
-                }
-
-                WAutorizado = false;
-
                 dtEvaluacion.Clear();
                 dtInformeMuestra.Clear();
                 DGV_EvalSemProve.Rows.Clear();
@@ -526,10 +517,16 @@ namespace Eval_Proveedores.Novedades
 
         private void button2_Click(object sender, EventArgs e)
         {
+            if (!WAutorizado)
+            {
+                Clave _frm = new Clave();
+                _frm.Show(this);
+                return;
+            }
 
-            //pnlClave.Visible = true;
-            //txtClave.Text = "";
-            //txtClave.Focus();
+            WAutorizado = false;
+
+            BT_Guardar_Click(null, null);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -1441,7 +1438,7 @@ namespace Eval_Proveedores.Novedades
 
             WAutorizado = Habilitame.Evaluar(seccion, clave);
 
-            button1_Click(null, null);
+            button2_Click(null, null);
         }
     }
 }
