@@ -1,4 +1,5 @@
-﻿Imports ClasesCompartidas
+﻿
+Imports ClasesCompartidas
 
 Public Class DAOTrabajo
 
