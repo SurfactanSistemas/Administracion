@@ -26,10 +26,9 @@ Public Class ImpreCrystal
         Dim txtClave As Integer = 1
         Dim x As Char = Chr(34)
 
-        Dim trabajo = DAOTrabajo.buscarTrabajoPorCodigo(txtClave)
+        Dim trabajo = TryCast(DAOTrabajo.buscarTrabajoPorCodigo(txtClave), Trabajo)
 
-
-
+        '    trabajo = New Trabajo(1, 2, 2, 5, 11608, "DIRECCION DE PRUEBA")
 
         txtOrden = ""
         txtNombre = ""
@@ -153,9 +152,9 @@ Public Class ImpreCrystal
                     Case Else
                         txtNombrePdf = txtOrden + " Orden de Compra"
                         txtNombreBusqueda = "c:\orden\" + txtOrden + " Orden de Compra.pdf"
-                        If File.Exists(txtNombreBusqueda) Then
-                            File.Delete(txtNombreBusqueda)
-                        End If
+                        'If File.Exists(txtNombreBusqueda) Then
+                        File.Delete(txtNombreBusqueda)
+                        'End If
 
                         Select Case txtPlanta
                             Case 1
