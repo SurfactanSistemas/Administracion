@@ -20,13 +20,14 @@
                 .Add("IvaAranceles")
                 .Add("Derechos")
                 .Add("IvaDerechos")
+                .Add("IVAPercepcion")
             End With
 
             Me.DatosFCE = tabla.NewRow
 
         End If
 
-        For Each c As Control In {txtAranceles, txtDerechos, txtInteres, txtIvaAranceles, txtIvaDerechos}
+        For Each c As Control In {txtAranceles, txtDerechos, txtInteres, txtIvaAranceles, txtIvaDerechos, txtIVAPercepcion}
             AddHandler c.KeyPress, AddressOf NumerosConComas
         Next
 
@@ -67,6 +68,7 @@
                 txtIvaAranceles.Text = formatonumerico(OrDefault(.Item("IvaAranceles"), "0"))
                 txtDerechos.Text = formatonumerico(OrDefault(.Item("Derechos"), "0"))
                 txtIvaDerechos.Text = formatonumerico(OrDefault(.Item("IvaDerechos"), "0"))
+                txtIVAPercepcion.Text = formatonumerico(OrDefault(.Item("IVAPercepcion"), "0"))
             End With
 
         End If
@@ -85,7 +87,7 @@
 
     Private Sub btnAceptar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAceptar.Click
 
-        For Each c As Control In {txtAranceles, txtDerechos, txtInteres, txtIvaAranceles, txtIvaDerechos}
+        For Each c As Control In {txtAranceles, txtDerechos, txtInteres, txtIvaAranceles, txtIvaDerechos, txtIVAPercepcion}
             c.Text = formatonumerico(c.Text)
         Next
 
@@ -121,14 +123,14 @@
                 .Item(c.Name.Replace("txt", "")) = c.Text
             Next
 
-            For Each c As Control In {txtAranceles, txtDerechos, txtInteres, txtIvaAranceles, txtIvaDerechos}
+            For Each c As Control In {txtAranceles, txtDerechos, txtInteres, txtIvaAranceles, txtIvaDerechos, txtIVAPercepcion}
                 .Item(c.Name.Replace("txt", "")) = Val(formatonumerico(c.Text))
             Next
         End With
 
     End Sub
 
-    Private Sub txtInteres_Leave(ByVal sender As Object, ByVal e As EventArgs) Handles txtIvaDerechos.Leave, txtIvaAranceles.Leave, txtInteres.Leave, txtDerechos.Leave, txtAranceles.Leave
+    Private Sub txtInteres_Leave(ByVal sender As Object, ByVal e As EventArgs) Handles txtIvaDerechos.Leave, txtIvaAranceles.Leave, txtInteres.Leave, txtDerechos.Leave, txtAranceles.Leave, txtIVAPercepcion.Leave
         With CType(sender, TextBox)
             .Text = formatonumerico(.Text)
 
@@ -139,7 +141,7 @@
 
     End Sub
 
-    Private Sub txtInteres_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtProveedor.KeyDown, txtIvaDerechos.KeyDown, txtIvaAranceles.KeyDown, txtInteres.KeyDown, txtDerechos.KeyDown, txtBoleto.KeyDown, txtAranceles.KeyDown
+    Private Sub txtInteres_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtProveedor.KeyDown, txtIvaDerechos.KeyDown, txtIvaAranceles.KeyDown, txtInteres.KeyDown, txtDerechos.KeyDown, txtBoleto.KeyDown, txtAranceles.KeyDown, txtIVAPercepcion.KeyDown
 
         Dim WControl As Control = CType(sender, TextBox)
 
@@ -161,6 +163,8 @@
                 Case "Aranceles"
                     WDestino = txtDerechos
                 Case "Derechos"
+                    WDestino = txtIVAPercepcion
+                Case "IVAPercepcion"
                     WDestino = txtBoleto
             End Select
 

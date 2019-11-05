@@ -981,7 +981,7 @@ Public Class Recibos
         If WDatosFCE IsNot Nothing Then
             Dim suma As Double = 0
 
-            For Each c As String In {"Interes", "Aranceles", "Derechos", "IvaAranceles", "IvaDerechos"}
+            For Each c As String In {"Interes", "Aranceles", "Derechos", "IvaAranceles", "IvaDerechos", "IVAPercepcion"}
                 suma += Val(formatonumerico(OrDefault(WDatosFCE.Item(c), "")))
             Next
 
@@ -1279,16 +1279,16 @@ Public Class Recibos
 
                 Dim ZSqls As New List(Of String)
 
-                Dim WSql As String = "INSERT INTO RecibosDatosFCE (Recibo, Boleto, Proveedor, Interes, Aranceles, IvaAranceles, Derechos, IvaDerechos)"
+                Dim WSql As String = "INSERT INTO RecibosDatosFCE (Recibo, Boleto, Proveedor, Interes, Aranceles, IvaAranceles, Derechos, IvaDerechos, IVAPercepcion)"
 
                 With WDatosFCE
-                    WSql &= String.Format(" VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}')", txtRecibo.Text, .Item("Boleto"), .Item("Proveedor"), formatonumerico(.Item("Interes")), formatonumerico(.Item("Aranceles")), formatonumerico(.Item("IvaAranceles")), formatonumerico(.Item("Derechos")), formatonumerico(.Item("IvaDerechos")))
+                    WSql &= String.Format(" VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}')", txtRecibo.Text, .Item("Boleto"), .Item("Proveedor"), formatonumerico(.Item("Interes")), formatonumerico(.Item("Aranceles")), formatonumerico(.Item("IvaAranceles")), formatonumerico(.Item("Derechos")), formatonumerico(.Item("IvaDerechos")), formatonumerico(.Item("IVAPercepcion")))
                 End With
 
                 ZSqls.Add("DELETE FROM RecibosDatosFCE WHERE Recibo = '" & txtRecibo.Text & "'")
                 ZSqls.Add(WSql)
 
-                Dim WIvaCmp, WNetoCmp As String
+                Dim WIvaCmp, WNetoCmp, WIvaPercepcion As String
 
                 Dim WIvaComp As DataRow = GetSingle("SELECT Max(NroInterno) As Ultimo FROM IvaComp")
 
@@ -1299,15 +1299,15 @@ Public Class Recibos
 
                     WNetoCmp = formatonumerico(Val(formatonumerico(WDatosFCE.Item("Aranceles"))) + Val(formatonumerico(WDatosFCE.Item("Derechos"))))
                     WIvaCmp = formatonumerico(Val(formatonumerico(WDatosFCE.Item("IvaAranceles"))) + Val(formatonumerico(WDatosFCE.Item("IvaDerechos"))))
-
-                    ZSqls.Add(String.Format("INSERT INTO IvaComp (NroInterno, Proveedor, Tipo, Letra, Punto, Numero, Fecha, Vencimiento, Vencimiento1, Periodo, Neto, Iva21, Contado, Paridad, Pago) VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{6}','{6}','{6}','{7}','{8}', '{9}', '{10}', '{11}')", WProximo, WDatosFCE.Item("Proveedor"), "99", "A", "0000", WDatosFCE.Item("Boleto").ToString.PadLeft(8, "0"), txtFecha.Text, WNetoCmp, WIvaCmp, "1", txtParidad.Text, "1"))
+                    WIvaPercepcion = formatonumerico(Val(formatonumerico(WDatosFCE.Item("IVAPercepcion"))))
+                    ZSqls.Add(String.Format("INSERT INTO IvaComp (NroInterno, Proveedor, Tipo, Letra, Punto, Numero, Fecha, Vencimiento, Vencimiento1, Periodo, Neto, Iva21, Contado, Paridad, Pago, Iva5) VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{6}','{6}','{6}','{7}','{8}', '{9}', '{10}', '{11}','{12}')", WProximo, WDatosFCE.Item("Proveedor"), "99", "A", "0000", WDatosFCE.Item("Boleto").ToString.PadLeft(8, "0"), txtFecha.Text, WNetoCmp, WIvaCmp, "1", txtParidad.Text, "1", WIvaPercepcion))
 
                     '
                     ' ALTA DE PUENTE
                     '
                     SQLConnector.executeProcedure("alta_imputacion", "2" & WProximo & "01", "2", WDatosFCE.Item("Proveedor"), "99",
                                                 "A", "0000", WDatosFCE.Item("Boleto"), "01",
-                                                txtFecha.Text, "", "100", 0, Val(formatonumerico(WNetoCmp)) + Val(formatonumerico(WIvaCmp)), WProximo, Proceso.ordenaFecha(txtFecha.Text))
+                                                txtFecha.Text, "", "100", 0, formatonumerico(Val(formatonumerico(WNetoCmp)) + Val(formatonumerico(WIvaCmp)) + Val(formatonumerico(WIvaPercepcion))), WProximo, Proceso.ordenaFecha(txtFecha.Text))
                     '
                     ' ALTA DE GASTOS
                     '
@@ -1320,10 +1320,16 @@ Public Class Recibos
                     SQLConnector.executeProcedure("alta_imputacion", "2" & WProximo & "03", "2", WDatosFCE.Item("Proveedor"), "99",
                                                 "A", "0000", WDatosFCE.Item("Boleto"), "03",
                                                 txtFecha.Text, "", "151", Val(formatonumerico(WIvaCmp)), 0, WProximo, Proceso.ordenaFecha(txtFecha.Text))
+                    '
+                    'ALTA DE IVA PERCEPCION
+                    '
+                    SQLConnector.executeProcedure("alta_imputacion", "2" & WProximo & "03", "2", WDatosFCE.Item("Proveedor"), "99",
+                                               "A", "0000", WDatosFCE.Item("Boleto"), "03",
+                                               txtFecha.Text, "", "152", Val(formatonumerico(WIvaPercepcion)), 0, WProximo, Proceso.ordenaFecha(txtFecha.Text))
 
-                    ZSqls.Add("UPDATE IvaComp SET Exento = 0, Iva27 = 0, Iva5 = 0, Iva105 = 0, Ib = 0, Impre = 'OC', OrdFecha = '" & ordenaFecha(txtFecha.Text) & "' WHERE NroInterno  = '" & WProximo & "'")
+                    ZSqls.Add("UPDATE IvaComp SET Exento = 0, Iva27 = 0, Iva105 = 0, Ib = 0, Impre = 'OC', OrdFecha = '" & ordenaFecha(txtFecha.Text) & "' WHERE NroInterno  = '" & WProximo & "'")
 
-                    ZSqls.Add(String.Format("INSERT INTO CtaCtePrv (Clave, Proveedor, Tipo, Letra, Punto, Numero, Fecha, Estado, Vencimiento, Vencimiento1, Total, Saldo, OrdFecha, OrdVencimiento, Impre, NroInterno, Paridad, Pago) VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{6}','{6}','{8}','{9}','{10}','{10}','{11}','{12}','{13}','{14}')", WDatosFCE.Item("Proveedor") & "A" & "99" & "0001" & WDatosFCE.Item("Boleto").ToString.PadLeft(8, "0"), WDatosFCE.Item("Proveedor"), "99", "A", "0000", WDatosFCE.Item("Boleto").ToString.PadLeft(8, "0"), txtFecha.Text, "1", formatonumerico(Val(WNetoCmp) + Val(WIvaCmp)), "0", ordenaFecha(txtFecha.Text), "OC", WProximo, txtParidad.Text, "1"))
+                    ZSqls.Add(String.Format("INSERT INTO CtaCtePrv (Clave, Proveedor, Tipo, Letra, Punto, Numero, Fecha, Estado, Vencimiento, Vencimiento1, Total, Saldo, OrdFecha, OrdVencimiento, Impre, NroInterno, Paridad, Pago) VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{6}','{6}','{8}','{9}','{10}','{10}','{11}','{12}','{13}','{14}')", WDatosFCE.Item("Proveedor") & "A" & "99" & "0001" & WDatosFCE.Item("Boleto").ToString.PadLeft(8, "0"), WDatosFCE.Item("Proveedor"), "99", "A", "0000", WDatosFCE.Item("Boleto").ToString.PadLeft(8, "0"), txtFecha.Text, "1", formatonumerico(Val(WNetoCmp) + Val(WIvaCmp) + Val(WIvaPercepcion)), "0", ordenaFecha(txtFecha.Text), "OC", WProximo, txtParidad.Text, "1"))
 
                 End If
 
