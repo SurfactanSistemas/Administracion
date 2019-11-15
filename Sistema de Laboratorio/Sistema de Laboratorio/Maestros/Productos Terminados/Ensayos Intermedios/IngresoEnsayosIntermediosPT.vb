@@ -22,7 +22,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
     End Sub
 
     Private Sub btnLimpiar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLimpiar.Click
-        For Each c As Control In {txtArchivo, txtCodigo, txtConfecciono, txtEnvases, txtComponente, txtLotePartida, txtCantidadEtiquetas, txtDesvio, txtEtapa, txtFecha, txtLibros, txtOOS, txtPaginas, txtPartida, lblTipoProceso, txtFechaVto, lblDescEtapa, txtEspecifActual, txtEspecifOrig, txtRevalida, txtKilos}
+        For Each c As Control In {txtFechaRevalida, txtArchivo, txtCodigo, txtConfecciono, txtEnvases, txtComponente, txtLotePartida, txtCantidadEtiquetas, txtDesvio, txtEtapa, txtFecha, txtLibros, txtOOS, txtPaginas, txtPartida, lblTipoProceso, txtFechaVto, lblDescEtapa, txtEspecifActual, txtEspecifOrig, txtRevalida, txtKilos}
             c.Text = ""
         Next
         dgvEnsayos.Rows.Clear()
@@ -43,6 +43,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
         txtLotePartida.Enabled = False
         btnNotasCertAnalisis.Enabled = False
         btnReimprimir.Visible = False
+        gbDatosAdicionales.Visible = False
 
         txtPartida.Focus()
     End Sub
@@ -353,6 +354,20 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                 lblDescEtapa.Text = OrDefault(WCargaIII.Item("DesEtapa"), "").ToString.Trim.ToUpper
             End If
 
+            If Val(txtEtapa.Text) = 99 Then
+                Dim WDatosAdicionales As DataRow = GetSingle("select h.Revalida, h.VersionIII VersionI, h.MesesRevalida, h.FechaRevalida, h.Real, t.VersionII from hoja h inner join Terminado t on t.Codigo = h.Producto where h.hoja = '" & txtPartida.Text & "'")
+                If WDatosAdicionales IsNot Nothing Then
+                    With WDatosAdicionales
+                        txtRevalida.Text = OrDefault(.Item("Revalida"), "")
+                        txtEspecifOrig.Text = OrDefault(.Item("VersionI"), "")
+                        txtMeses.Text = OrDefault(.Item("MesesRevalida"), "")
+                        txtFechaRevalida.Text = OrDefault(.Item("FechaRevalida"), Space(8))
+                        txtEspecifActual.Text = OrDefault(.Item("VersionII"), "")
+                        txtKilos.Text = formatonumerico(OrDefault(.Item("Real"), ""))
+                    End With
+                End If
+            End If
+
             txtFechaVto.Text = Entidades.ProductoTerminado.CalcularFechaElabVto(txtCodigo.Text, txtPartida.Text, True)(1)
 
             '
@@ -368,6 +383,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                 btnRevalida.Enabled = True
                 txtComponente.Enabled = True
                 txtLotePartida.Enabled = True
+                gbDatosAdicionales.Visible = True
             End If
             
             If dgvEnsayos.Rows.Count > 0 Then
@@ -644,7 +660,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
     End Function
 
-    Private Sub SoloNumero(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txtPartida.KeyPress, txtEtapa.KeyPress, txtRevalida.KeyPress, txtEspecifActual.KeyPress, txtEspecifOrig.KeyPress, txtCantidadEtiquetas.KeyPress
+    Private Sub SoloNumero(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txtPartida.KeyPress, txtEtapa.KeyPress, txtRevalida.KeyPress, txtEspecifActual.KeyPress, txtEspecifOrig.KeyPress, txtCantidadEtiquetas.KeyPress, txtMeses.KeyPress
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
             e.Handled = True
         End If
