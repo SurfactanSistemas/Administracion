@@ -42,12 +42,16 @@ Namespace Entidades
             Return WTipoPro
         End Function
 
-        Public Shared Function CalcularFechaVto(ByVal Producto As String, ByVal Partida As String) As String
+        ''' <summary>
+        ''' Devuelve la Fecha de Elaboracion y Vencimiento de un producto según Componentes y Linea.
+        ''' </summary>
+        Public Shared Function CalcularFechaElabVto(ByVal Producto As String, ByVal Partida As String, Optional ByVal SoloConsulta As Boolean = False) As String()
             Dim WFechaVto As String = ""
+            Dim WElaboracion As String = ""
 
             Dim WTerm As DataRow = Info(Producto, {"Vida", "Linea"})
 
-            If WTerm Is Nothing Then Return WFechaVto
+            If WTerm Is Nothing Then Return {"", WFechaVto}
 
             Dim WMeses As Integer = OrDefault(WTerm.Item("Vida"), 0)
             Dim WLinea As Integer = OrDefault(WTerm.Item("Linea"), 0)
@@ -62,12 +66,14 @@ Namespace Entidades
                                                              WEmpresaHoja)
 
             WVencimiento = ""
+            WElaboracion = ""
 
             With WHoja
                 WRevalida = OrDefault(.Item("Revalida"), "")
                 WMesesRevalida = OrDefault(.Item("MesesRevalida"), "0")
                 WFechaRevalida = OrDefault(.Item("FechaRevalida"), "00/00/0000")
                 WFechaHoja = OrDefault(.Item("Fecha"), "")
+                WElaboracion = WFechaHoja
             End With
 
             '
@@ -138,14 +144,18 @@ Namespace Entidades
                 End With
             Next
 
+            '
+            ' Calculamos la Fecha de Vencimiento en los casos de que se trate de un Mono Componente o una Mezcla.
+            '
+            Dim WFechaActual = Date.Now.ToString("dd/MM/yyyy")
+            Dim WFechaActualOrd = ordenaFecha(WFechaActual)
 
             If WTipoPro = "FA" Then
-
                 If WMezcla = "S" And WEmpresaHoja = "Surfactan_III" Then
 
                     If Val(WMezclaPartida) = 999999 Then
                         MsgBox("Es una Hoja de produccion de mezcla y no se informaron las partidas a utilizar")
-                        Return ""
+                        Return {"", ""}
                     End If
 
                     '
@@ -158,6 +168,7 @@ Namespace Entidades
                         With WHojaMezcla
 
                             Dim WFechaAuxi As String = OrDefault(.Item("Fecha"), "00/00/0000")
+                            WElaboracion = WFechaAuxi
 
                             Dim WMesMezcla As Integer = Val(Mid(WFechaAuxi, 4, 2))
                             Dim WAnioMezcla As Integer = Val(_Left(WFechaAuxi, 4))
@@ -186,71 +197,97 @@ Namespace Entidades
                         End With
                     End If
 
-                End If
+                    '
+                    ' Verificamos si se trata de un Mono Producto.
+                    '
+                    Dim WBuscaMono As DataRow = GetSingle("SELECT Codigo FROM CodigoMono WHERE Codigo = '" & Producto & "'", "SurfactanSa")
 
-            End If
+                    If WBuscaMono IsNot Nothing Or WLinea = 20 Or WLinea = 28 Then
 
-            '
-            ' Calculamos las Fechas de Elaboración y Vencimiento del Mono Componente.
-            '
-            Dim WFechaActual = Date.Now.ToString("dd/MM/yyyy")
-            Dim WFechaActualOrd = ordenaFecha(WFechaActual)
-            
-            Dim WDatosMono() As String = _CalculaMonoOtro(Partida, WEmpresaHoja)
+                        Dim WDatosMono() As String = _CalculaMonoOtro(Partida, WEmpresaHoja)
 
-            If WDatosMono(0) = "-1" And WDatosMono(1) = "-1" Then Exit Function
+                        If WDatosMono(0) = "-1" And WDatosMono(1) = "-1" Then Exit Function
 
-            If WTipoPro = "FA" Then
+                        If Trim(WDatosMono(1)) <> "" Then
+                            WVencimiento = WDatosMono(1)
+                        End If
 
-                '
-                ' Verificamos si se trata de un Mono Producto.
-                '
-                Dim WBuscaMono As DataRow = GetSingle("SELECT Codigo FROM CodigoMono WHERE Codigo = '" & Producto & "'", "SurfactanSa")
+                        If Trim(WDatosMono(0)) <> "" Then
+                            WElaboracion = WDatosMono(0)
+                        End If
 
-                If WBuscaMono IsNot Nothing Or WLinea = 20 Or WLinea = 28 Then
+                        If WVencimiento <> "" Then
+                            If Val(ordenaFecha(WVencimiento)) < Val(WFechaActualOrd) Then
+                                If Not SoloConsulta Then
+                                    MsgBox("La Partida se encuentra vencida " + Chr(13) + _
+                        "Por favor comuniquese con el laboratorio para su revalida", MsgBoxStyle.Exclamation)
+                                    Exit Function
+                                End If
+                            End If
+                        End If
+
+                    End If
+                Else
+                    Dim WDatosMono() As String = _CalculaMonoOtro(Partida, WEmpresaHoja)
+
+                    If WDatosMono(0) = "-1" And WDatosMono(1) = "-1" Then Exit Function
 
                     If Trim(WDatosMono(1)) <> "" Then
                         WVencimiento = WDatosMono(1)
                     End If
 
-                    If WVencimiento <> "" Then
-                        If Val(ordenaFecha(WVencimiento)) < Val(WFechaActualOrd) Then
-                            MsgBox("La Partida se encuentra vencida " + Chr(13) + _
-                 "Por favor comuniquese con el laboratorio para su revalida", MsgBoxStyle.Exclamation)
-                            Exit Function
-                        End If
+                    If Trim(WDatosMono(0)) <> "" Then
+                        WElaboracion = WDatosMono(0)
                     End If
 
+                    If WVencimiento <> "" Then
+                        If Val(ordenaFecha(WVencimiento)) < Val(WFechaActualOrd) Then
+                            If Not SoloConsulta Then
+                                MsgBox("La Partida se encuentra vencida " + Chr(13) + _
+                    "Por favor comuniquese con el laboratorio para su revalida", MsgBoxStyle.Exclamation)
+                                Exit Function
+                            End If
+                        End If
+                    End If
                 End If
-
             Else
+
+                Dim WDatosMono() As String = _CalculaMonoOtro(Partida, WEmpresaHoja)
+
+                If WDatosMono(0) = "-1" And WDatosMono(1) = "-1" Then Exit Function
+
+                If Trim(WDatosMono(0)) <> "" Then
+                    WElaboracion = WDatosMono(0)
+                End If
 
                 If Trim(WDatosMono(1)) <> "" Then
                     WVencimiento = WDatosMono(1)
 
                     If WVencimiento <> "" Then
                         If Val(ordenaFecha(WVencimiento)) < Val(WFechaActualOrd) Then
-                            MsgBox("La Partida se encuentra vencida " + Chr(13) + _
-                 "Por favor comuniquese con el laboratorio para su revalida", MsgBoxStyle.Exclamation)
-                            Exit Function
+                            If Not SoloConsulta Then
+                                MsgBox("La Partida se encuentra vencida " + Chr(13) + _
+                                       "Por favor comuniquese con el laboratorio para su revalida", MsgBoxStyle.Exclamation)
+                                Exit Function
+                            End If
                         End If
                     End If
 
                 End If
-
             End If
-
-            Return WVencimiento
+            
+            Return {WElaboracion, WVencimiento}
         End Function
 
         ''' <summary>
-        ''' Devuelve las Fechas de Elaboración y Vencimiento de un mono componente, en un Array de dos items. (0 - Elaboración   1 - Vencimiento)
+        ''' Devuelve las Fechas de Elaboración y Vencimiento de un mono componente, en un Array de dos items. (0 - Elaboración   1 - Vencimiento  2 - Tipo Vencimiento)
         ''' Si hubo un problema, se devuelven en ambos items '-1'.
         ''' </summary>
         Public Shared Function _CalculaMonoOtro(ByVal Hoja As String, ByVal EmpresaHoja As String) As String()
-            Dim WDatos(1) As String
+            Dim WDatos(2) As String
             WDatos(0) = "-1"
             WDatos(1) = "-1"
+            WDatos(2) = "0"
 
             Dim WRenglon = 0
             Dim WLote, WLote1, WLote2, WLote3, WTipo, WArticulo, WProducto As String
@@ -289,6 +326,7 @@ Namespace Entidades
 
             WDatos(0) = "-1"
             WDatos(1) = "-1"
+            WDatos(2) = "0"
 
             Dim WLinea As Integer = OrDefault(WTer.Item("Linea"), 0)
 
@@ -347,7 +385,7 @@ Namespace Entidades
                     End If
                 End If
 
-                WLote = Hoja
+                'WLote = Hoja
 
             End If
 
@@ -358,12 +396,13 @@ Namespace Entidades
             WFechaElaboracion = ""
 
             For Each emp As String In Conexion.Empresas
-                WLaudo = GetSingle("SELECT FechaVencimiento, TipoVencimiento, FechaElaboracion, PartiOri FROM Laudo WHERE Laudo = '" & WLote & "'and Articulo = '" & WArticulo & "'", emp)
+                WLaudo = GetSingle("SELECT TipoVencimiento, FechaVencimiento, TipoVencimiento, FechaElaboracion, PartiOri FROM Laudo WHERE Laudo = '" & WLote & "'and Articulo = '" & WArticulo & "'", emp)
 
                 If WLaudo IsNot Nothing Then
                     With WLaudo
 
                         WFechaVencimiento = OrDefault(.Item("FechaVencimiento"), "")
+                        WDatos(2) = OrDefault(.Item("TipoVencimiento"), "0")
 
                         If WLinea <> 20 And WLinea <> 28 Then WFechaElaboracion = OrDefault(.Item("FechaElaboracion"), "")
 
@@ -403,5 +442,13 @@ Namespace Entidades
 
             Return WDatos
         End Function
+
+        ''' <summary>
+        ''' Devuelve si el Producto es o no monocomponente.
+        ''' </summary>
+        Public Shared Function EsMono(ByVal Codigo As String) As Boolean
+            Return GetSingle("SELECT Codigo FROM codigomono WHERE Codigo = '" & Codigo & "'", "SurfactanSa") IsNot Nothing
+        End Function
+
     End Class
 End Namespace
