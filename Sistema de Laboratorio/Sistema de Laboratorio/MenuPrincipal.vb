@@ -61,4 +61,35 @@
         End With
     End Sub
 
+    Private Sub HToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles HToolStripMenuItem.Click
+        With New FrasesHP("H")
+            .Show(Me)
+        End With
+    End Sub
+
+    Private Sub PToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PToolStripMenuItem.Click
+        With New FrasesHP("P")
+            .Show(Me)
+        End With
+    End Sub
+
+    Private Sub MateriasPrimasToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MateriasPrimasToolStripMenuItem1.Click
+        With New IngresoDatosAdicMP("MP")
+            .Show(Me)
+            .pnlConsultarDatos.Visible = False
+            .masktxtCodigo.Focus()
+            .txtConsultaDatos.Visible = False
+        End With
+
+
+    End Sub
+
+    Private Sub ProductosTerminadosToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ProductosTerminadosToolStripMenuItem1.Click
+        With New IngresoDatosAdicMP("PT")
+            .Show(Me)
+            .pnlConsultarDatos.Visible = False
+            .masktxtCodigo.Focus()
+            .txtConsultaDatos.Visible = False
+        End With
+    End Sub
 End Class

@@ -140,6 +140,24 @@
     <Compile Include="Consultas\NotasCertificadosAnalisis\NotasCertificadosAnalisis.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FrasesHP.Designer.vb">
+      <DependentUpon>FrasesHP.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrasesHP.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HojaIngresoFrases.Designer.vb">
+      <DependentUpon>HojaIngresoFrases.vb</DependentUpon>
+    </Compile>
+    <Compile Include="HojaIngresoFrases.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IngresoDatosAdicMP.Designer.vb">
+      <DependentUpon>IngresoDatosAdicMP.vb</DependentUpon>
+    </Compile>
+    <Compile Include="IngresoDatosAdicMP.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Login.Designer.vb">
       <DependentUpon>Login.vb</DependentUpon>
     </Compile>
@@ -268,6 +286,24 @@
       <DependentUpon>ReporteListadoEnsayosII.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\Ingreso Datos Adicionales MP\ReporteDatosAdiciolesMP.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteDatosAdiciolesMP.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\IngresoFrasesHP\ReporteListadosP.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteListadosP.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\IngresoFrasesHP\ReporteListadoFrasesH.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteListadoFrasesH.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\Materias Primas\Ensayos\ReporteListadoEnsayosEnMP.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -351,6 +387,15 @@
     <EmbeddedResource Include="Consultas\NotasCertificadosAnalisis\NotasCertificadosAnalisis.resx">
       <DependentUpon>NotasCertificadosAnalisis.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrasesHP.resx">
+      <DependentUpon>FrasesHP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HojaIngresoFrases.resx">
+      <DependentUpon>HojaIngresoFrases.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IngresoDatosAdicMP.resx">
+      <DependentUpon>IngresoDatosAdicMP.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.vb</DependentUpon>
     </EmbeddedResource>
@@ -413,6 +458,18 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteListadoEnsayosII.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Ingreso Datos Adicionales MP\ReporteDatosAdiciolesMP.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteDatosAdiciolesMP.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\IngresoFrasesHP\ReporteListadosP.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteListadosP.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\IngresoFrasesHP\ReporteListadoFrasesH.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteListadoFrasesH.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Materias Primas\Ensayos\ReporteListadoEnsayosEnMP.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteListadoEnsayosEnMP.vb</LastGenOutput>
@@ -458,7 +515,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
@@ -491,6 +550,15 @@
     <Content Include="libs\info.lundin.math.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="SGA\SGA9.PNG" />
+    <None Include="SGA\SGA8.PNG" />
+    <None Include="SGA\SGA7.PNG" />
+    <None Include="SGA\SGA6.PNG" />
+    <None Include="SGA\SGA5.PNG" />
+    <None Include="SGA\SGA4.PNG" />
+    <None Include="SGA\SGA3.PNG" />
+    <None Include="SGA\SGA2.PNG" />
+    <None Include="SGA\SGA1.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ConsultasVarias\ConsultasVarias\ConsultasVarias.vbproj">

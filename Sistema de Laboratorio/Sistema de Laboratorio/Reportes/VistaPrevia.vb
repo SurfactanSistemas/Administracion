@@ -189,65 +189,9 @@ Public Class VistaPrevia
 
     End Sub
 
-    'Public Sub EnviarPorEmail(ByVal NombreArchivo As String, Optional ByVal WEnvioAutomatico As Boolean = False)
-
-    '    EnviarEmail(NombreArchivo, WEnvioAutomatico)
-
-    'End Sub
-
-    'Private Sub EnviarEmail(ByVal Archivo As String, ByVal EnvioAutomatico As Boolean)
-    '    Dim oApp As Outlook._Application
-    '    Dim oMsg As Outlook._MailItem
-
-    '    Try
-    '        oApp = New Outlook.Application()
-
-    '        oMsg = oApp.CreateItem(Outlook.OlItemType.olMailItem)
-    '        oMsg.Subject = "SAC"
-    '        oMsg.Body = "Envio de SAC"
-
-    '        oMsg.Attachments.Add(Archivo)
-
-    '        ' Modificar por los E-Mails que correspondan.
-    '        'oMsg.To = "gferreyra@surfactan.com.ar"
-
-    '        If EnvioAutomatico Then
-    '            oMsg.Send()
-    '        Else
-    '            oMsg.Display()
-    '        End If
-
-    '    Catch ex As Exception
-    '        Throw New Exception("No se pudo crear el E-Mail solicitado." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
-    '    End Try
-
-    'End Sub
-
-    'Public Sub MergePDFs(ByVal WRuta As String, ByVal WNombreArchivo As String)
-
-    '    Dim Archivos As String() = System.IO.Directory.GetFiles(WRuta, "*.pdf")
-    '    Dim outPdf As PdfDocument = New PdfDocument()
-
-    '    For Each file As String In Archivos
-    '        Using one As PdfDocument = PdfReader.Open(file, PdfDocumentOpenMode.Import)
-
-    '            CopyPages(one, outPdf)
-
-    '        End Using
-    '    Next
-
-    '    outPdf.Save(WRuta & WNombreArchivo)
-
-    'End Sub
-
-    'Private Sub CopyPages(ByVal _from As PdfDocument, ByRef _to As PdfDocument)
-    '    For i = 0 To _from.PageCount - 1
-    '        _to.AddPage(_from.Pages(i))
-    '    Next
-
-    'End Sub
     Public Sub DesdeArchivo(ByVal s As String)
         Reporte = New ReportDocument
         Reporte.Load(s)
     End Sub
+
 End Class
