@@ -181,6 +181,12 @@ Public Class VistaPrevia
             End With
         End If
 
+        If Formato = ExportFormatType.PortableDocFormat Then
+            NombreArchivo = NombreArchivo.TrimEnd(".pdf", ".PDF") & ".pdf"
+        End If
+
+        ruta = ruta.TrimEnd("\", "/") & "/"
+
         _ReconectarBaseDatos()
 
         Me.Reporte.RecordSelectionFormula = IIf(IsNothing(Me.Formula), "", Me.Formula)

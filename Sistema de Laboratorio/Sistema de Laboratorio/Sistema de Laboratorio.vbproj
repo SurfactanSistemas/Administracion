@@ -136,6 +136,12 @@
     <Compile Include="Auxiliares\VentanasIntermedias\Productos Terminados Farma\NotasAnterioresFarmaPT.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Auxiliares\VentanasIntermedias\Productos Terminados Farma\PDFVersionesPTFarma.Designer.vb">
+      <DependentUpon>PDFVersionesPTFarma.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Auxiliares\VentanasIntermedias\Productos Terminados Farma\PDFVersionesPTFarma.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Clases\Conexion.vb" />
     <Compile Include="Clases\Entidades\Ensayo.vb" />
     <Compile Include="Clases\Entidades\EspecificacionesMP.vb" />
@@ -377,6 +383,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Auxiliares\VentanasIntermedias\Productos Terminados Farma\NotasAnterioresFarmaPT.resx">
       <DependentUpon>NotasAnterioresFarmaPT.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Auxiliares\VentanasIntermedias\Productos Terminados Farma\PDFVersionesPTFarma.resx">
+      <DependentUpon>PDFVersionesPTFarma.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Consultas\NotasCertificadosAnalisis\NotasCertificadosAnalisis.resx">
       <DependentUpon>NotasCertificadosAnalisis.vb</DependentUpon>
