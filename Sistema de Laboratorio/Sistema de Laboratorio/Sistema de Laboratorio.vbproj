@@ -124,6 +124,24 @@
     <Compile Include="Auxiliares\VentanasIntermedias\IngresoEnsayosPT\NotasEnsayosProductosTerminados.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Auxiliares\VentanasIntermedias\Productos Terminados Farma\NotasCertificadosAnalisisFarmaPT.Designer.vb">
+      <DependentUpon>NotasCertificadosAnalisisFarmaPT.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Auxiliares\VentanasIntermedias\Productos Terminados Farma\NotasCertificadosAnalisisFarmaPT.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Auxiliares\VentanasIntermedias\Productos Terminados Farma\NotasAnterioresFarmaPT.Designer.vb">
+      <DependentUpon>NotasAnterioresFarmaPT.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Auxiliares\VentanasIntermedias\Productos Terminados Farma\NotasAnterioresFarmaPT.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Auxiliares\VentanasIntermedias\Productos Terminados Farma\PDFVersionesPTFarma.Designer.vb">
+      <DependentUpon>PDFVersionesPTFarma.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Auxiliares\VentanasIntermedias\Productos Terminados Farma\PDFVersionesPTFarma.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Clases\Conexion.vb" />
     <Compile Include="Clases\Entidades\Ensayo.vb" />
     <Compile Include="Clases\Entidades\EspecificacionesMP.vb" />
@@ -340,6 +358,18 @@
       <DependentUpon>ReporteEtiContraII.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\Productos Terminados\Ensayos Intermedios\imprecalidadresultado.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>imprecalidadresultado.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Productos Terminados\Ensayos Intermedios\imprecalidadresultadoReduccionAl80.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>imprecalidadresultadoReduccionAl80.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\Productos Terminados\Ensayos Intermedios\NOResultadosIntermediosPT.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -383,6 +413,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Auxiliares\VentanasIntermedias\IngresoEnsayosPT\NotasEnsayosProductosTerminados.resx">
       <DependentUpon>NotasEnsayosProductosTerminados.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Auxiliares\VentanasIntermedias\Productos Terminados Farma\NotasCertificadosAnalisisFarmaPT.resx">
+      <DependentUpon>NotasCertificadosAnalisisFarmaPT.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Auxiliares\VentanasIntermedias\Productos Terminados Farma\NotasAnterioresFarmaPT.resx">
+      <DependentUpon>NotasAnterioresFarmaPT.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Auxiliares\VentanasIntermedias\Productos Terminados Farma\PDFVersionesPTFarma.resx">
+      <DependentUpon>PDFVersionesPTFarma.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Consultas\NotasCertificadosAnalisis\NotasCertificadosAnalisis.resx">
       <DependentUpon>NotasCertificadosAnalisis.vb</DependentUpon>
@@ -493,6 +532,14 @@
     <EmbeddedResource Include="Reportes\Materias Primas\Etiquetas\ReporteEtiContraII.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteEtiContraII.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Productos Terminados\Ensayos Intermedios\imprecalidadresultado.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>imprecalidadresultado.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Productos Terminados\Ensayos Intermedios\imprecalidadresultadoReduccionAl80.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>imprecalidadresultadoReduccionAl80.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Productos Terminados\Ensayos Intermedios\NOResultadosIntermediosPT.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

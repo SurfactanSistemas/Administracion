@@ -20,6 +20,7 @@
         For i = 1 To WParametrosFormula.Count - 1
 
             CType(gbVariables.Controls("txtVar" & i), TextBox).Text = Trim(WParametrosFormula(i))
+            AddHandler CType(gbVariables.Controls("txtVar" & i), TextBox).KeyDown, AddressOf txtVar1_KeyDown
 
         Next
 
@@ -59,6 +60,32 @@
         Next
 
         e.Handled = True
+
+    End Sub
+
+    Private Sub DefinicionFormulaEspecificacion_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+        txtVar1.Focus()
+    End Sub
+
+    Private Sub txtVar1_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtVar1.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            
+            Dim WControl As TextBox = TryCast(sender, TextBox)
+
+            If WControl Is Nothing Then Exit Sub
+
+            Dim wID As Short = Val(WControl.Name.Replace("txtVar", ""))
+
+            If wID < 10 Then
+                gbVariables.Controls.Item("txtVar" & (wID + 1)).Focus()
+            Else
+                txtFormula.Focus()
+            End If
+
+        ElseIf e.KeyData = Keys.Escape Then
+            TryCast(sender, TextBox).Text = ""
+        End If
 
     End Sub
 End Class
