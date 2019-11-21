@@ -19,7 +19,7 @@ Module AuxiExtensiones
 
     <Extension()>
     Public Function left(ByVal obj As Object, ByVal longitud As Object) As String
-        Return Microsoft.VisualBasic.Left$(obj.ToString, longitud)
+        Return Microsoft.VisualBasic.Left$(OrDefault(obj, "").ToString.PadRight(longitud), longitud)
     End Function
 
     <Extension()>

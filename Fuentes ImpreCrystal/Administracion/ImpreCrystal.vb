@@ -416,6 +416,32 @@ Public Class ImpreCrystal
                 Dim viewer As New ReportViewer("Especificaciones de Ordenes de Compra (INGLES)", "n:\net\crystal\ListaEspePdfInglesNet.rpt", txtFormula, txtNombrePdf, "")
                 viewer.descargarComoPDF()
 
+            Case 13
+                REM genera las certificados de analisis
+                txtUno = "{Certificado.Partida} in 0 to 999999"
+                txtDos = ""
+                txtFormula = txtUno + txtDos
+
+                Select Case txtDestino
+                    Case 0
+                        Dim viewer As New ReportViewer("Certificados de Analisis", "N:\net\crystal\CertificadoTanatexPdfNet.rpt", txtFormula, "", "")
+                        viewer.Show()
+
+                    Case 1
+                        Dim viewer As New ReportViewer("Certificados de Analisis", "N:\net\crystal\CertificadoTanatexPdfNet.rpt", txtFormula, "", "")
+                        viewer.imprimirReporte()
+
+                    Case Else
+                        pasanombre.Text = "c:\PdfPrintII\"
+                        txtNombrePdf = LTrim(RTrim(txtNombre))
+                        txtNombreBusqueda = "c:\PdfPrintII\" + txtNombre + ".pdf"
+                        If File.Exists(txtNombreBusqueda) Then
+                            File.Delete(txtNombreBusqueda)
+                        End If
+                        Dim viewer As New ReportViewer("Certificados de Analisis", "n:\net\crystal\CertificadoTanatexPdfNet.rpt", txtFormula, txtNombrePdf, "")
+                        viewer.descargarComoPDF()
+                End Select
+
             Case Else
 
         End Select
