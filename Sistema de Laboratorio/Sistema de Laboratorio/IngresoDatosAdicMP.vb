@@ -2311,10 +2311,22 @@ Public Class IngresoDatosAdicMP
     End Sub
 
     Private Sub btnImprimirReporte_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimirReporte.Click
-        With New VistaPrevia
-            .Reporte = New ReporteDatosAdiciolesMP()
-            .Mostrar()
-        End With
+
+        If (TipoProducto = "PT") Then
+
+            With New VistaPrevia
+                .Reporte = New ReporteDatosAdicionalesPT()
+                .Mostrar()
+            End With
+
+        Else
+
+            With New VistaPrevia
+                .Reporte = New ReporteDatosAdiciolesMP()
+                .Mostrar()
+            End With
+        End If
+        
     End Sub
 
     Private Sub masktxtCodigo_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles masktxtCodigo.MouseDoubleClick

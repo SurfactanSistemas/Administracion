@@ -194,4 +194,39 @@ Public Class ConsultaCheque
         End If
     End Sub
 
+    Private Sub gridCheque_SortCompare(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewSortCompareEventArgs) Handles gridCheque.SortCompare
+        gridCheque.ClearSelection()
+
+        Dim num1, num2
+
+        Select Case e.Column.Index
+            Case 0, 1, 5, 6
+
+                num1 = e.CellValue1
+                num2 = e.CellValue2
+
+            Case 2
+
+                num1 = CDbl(e.CellValue1)
+                num2 = CDbl(e.CellValue2)
+
+            Case 3, 4
+
+                num1 = Proceso.ordenaFecha(e.CellValue1)
+                num2 = Proceso.ordenaFecha(e.CellValue2)
+
+            Case Else
+                Exit Sub
+        End Select
+
+        If num1 < num2 Then
+            e.SortResult = -1
+        ElseIf num1 = num2 Then
+            e.SortResult = 0
+        Else
+            e.SortResult = 1
+        End If
+
+        e.Handled = True
+    End Sub
 End Class

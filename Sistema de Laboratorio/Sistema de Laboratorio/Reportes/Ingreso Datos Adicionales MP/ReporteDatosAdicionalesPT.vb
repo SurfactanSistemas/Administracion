@@ -18,7 +18,7 @@ Imports System
 Imports System.ComponentModel
 
 
-Public Class AnalisisDiferenciaCambioOP
+Public Class ReporteDatosAdicionalesPT
     Inherits ReportClass
     
     Public Sub New()
@@ -27,7 +27,7 @@ Public Class AnalisisDiferenciaCambioOP
     
     Public Overrides Property ResourceName() As String
         Get
-            Return "AnalisisDiferenciaCambioOP.rpt"
+            Return "ReporteDatosAdicionalesPT.rpt"
         End Get
         Set
             'Do nothing
@@ -45,7 +45,7 @@ Public Class AnalisisDiferenciaCambioOP
     
     Public Overrides Property FullResourceName() As String
         Get
-            Return "Administracion.AnalisisDiferenciaCambioOP.rpt"
+            Return "Laboratorio.ReporteDatosAdicionalesPT.rpt"
         End Get
         Set
             'Do nothing
@@ -107,18 +107,10 @@ Public Class AnalisisDiferenciaCambioOP
             Return Me.ReportDefinition.Sections(6)
         End Get
     End Property
-    
-    <Browsable(false),  _
-     DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Parameter_ImprimeParidad() As CrystalDecisions.[Shared].IParameterField
-        Get
-            Return Me.DataDefinition.ParameterFields(0)
-        End Get
-    End Property
 End Class
 
 <System.Drawing.ToolboxBitmapAttribute(GetType(CrystalDecisions.[Shared].ExportOptions), "report.bmp")>  _
-Public Class CachedAnalisisDiferenciaCambioOP
+Public Class CachedReporteDatosAdicionalesPT
     Inherits Component
     Implements ICachedReport
     
@@ -160,7 +152,7 @@ Public Class CachedAnalisisDiferenciaCambioOP
     End Property
     
     Public Overridable Function CreateReport() As CrystalDecisions.CrystalReports.Engine.ReportDocument Implements CrystalDecisions.ReportSource.ICachedReport.CreateReport
-        Dim rpt As AnalisisDiferenciaCambioOP = New AnalisisDiferenciaCambioOP()
+        Dim rpt As ReporteDatosAdicionalesPT = New ReporteDatosAdicionalesPT()
         rpt.Site = Me.Site
         Return rpt
     End Function

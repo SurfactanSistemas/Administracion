@@ -179,13 +179,13 @@ Public Class VistaPrevia
                 End If
 
             End With
+        Else
+            ruta = ruta.TrimEnd("\", "/") & "/"
         End If
 
         If Formato = ExportFormatType.PortableDocFormat Then
             NombreArchivo = NombreArchivo.TrimEnd(".pdf", ".PDF") & ".pdf"
         End If
-
-        ruta = ruta.TrimEnd("\", "/") & "/"
 
         _ReconectarBaseDatos()
 

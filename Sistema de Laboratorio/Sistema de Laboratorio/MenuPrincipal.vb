@@ -92,4 +92,28 @@
             .txtConsultaDatos.Visible = False
         End With
     End Sub
+
+    Private Sub ListadoDeEnsayosDePTToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListadoDeEnsayosDePTToolStripMenuItem.Click
+        With New ListadoDeEnsayoDePT
+            .Show(Me)
+        End With
+    End Sub
+
+    Private Sub ListaDeEspecificacionesDePTAFechaToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListaDeEspecificacionesDePTAFechaToolStripMenuItem.Click
+        With New ListadoEspecifPTFecha
+            .Show(Me)
+        End With
+    End Sub
+
+    Private Sub ListaDePTVencidosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListaDePTVencidosToolStripMenuItem.Click
+        With New ListadoPTVencidos
+            .Show(Me)
+        End With
+    End Sub
+
+    Private Sub ConsultaDeEspecificacionesPorVersionToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ConsultaDeEspecificacionesPorVersionToolStripMenuItem.Click
+        With New ConsDeEspefXVersion
+            .Show(Me)
+        End With
+    End Sub
 End Class
