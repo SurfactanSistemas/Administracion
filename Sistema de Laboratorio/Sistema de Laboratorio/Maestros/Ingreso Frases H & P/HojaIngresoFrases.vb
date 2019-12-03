@@ -1,41 +1,30 @@
 ﻿Imports System.Configuration
-Imports System.Data.Common
 Imports System.Data.SqlClient
 
 Public Class HojaIngresoFrases
     Protected L As Char ' Variable que define de que opcion del menu entro
 
-
-
-
-    Private Sub txtCodigo_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCodigo.KeyDown
+    Private Sub txtCodigo_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtCodigo.KeyDown
         If e.KeyData = Keys.Enter Then
             If (txtCodigo.Text <> "") Then
                 Try
-                    Dim cn As New SqlConnection(ConfigurationManager.ConnectionStrings("LOCAL").ToString())
-                    cn.Open()
                     Dim SqlConsulta As String
                     If (L = "H") Then
 
                         SqlConsulta = "SELECT * FROM FraseH WHERE Codigo = '" + txtCodigo.Text.ToString().Trim() + "' "
                     Else
-
-
                         SqlConsulta = "SELECT * FROM FraseP WHERE Codigo = '" + txtCodigo.Text.ToString().Trim() + "' "
                     End If
 
-                    Dim cmd As New SqlCommand(SqlConsulta, cn)
-                    Dim dr As SqlDataReader = cmd.ExecuteReader()
                     Dim tabla As New DataTable
-                    tabla.Load(dr)
+                    tabla.Load(GetAll(SqlConsulta))
                     If (tabla.Rows.Count > 0) Then
                         txtDescripcion.Text = Trim(tabla.Rows(0).Item("Descripcion").ToString() & tabla.Rows(0).Item("DescripcionII") & tabla.Rows(0).Item("DescripcionIII"))
                         txtObservacion.Text = Trim(tabla.Rows(0).Item("Observa"))
-                        cn.Close()
                     End If
 
                 Catch ex As Exception
-                    MsgBox("no conecto")
+                    MsgBox(ex.Message)
                 End Try
             End If
 
@@ -45,7 +34,7 @@ Public Class HojaIngresoFrases
         End If
     End Sub
 
-    Private Sub txtDescripcion_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDescripcion.KeyDown
+    Private Sub txtDescripcion_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtDescripcion.KeyDown
         If e.KeyData = Keys.Enter Then
             txtObservacion.Focus()
         End If
@@ -54,7 +43,7 @@ Public Class HojaIngresoFrases
         End If
     End Sub
 
-    Private Sub txtObservacion_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtObservacion.KeyDown
+    Private Sub txtObservacion_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtObservacion.KeyDown
         If e.KeyData = Keys.Enter Then
             txtCodigo.Focus()
         End If
@@ -63,21 +52,19 @@ Public Class HojaIngresoFrases
         End If
     End Sub
 
-    Private Sub btnVolver_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVolver.Click
-        Me.Close()
+    Private Sub btnVolver_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnVolver.Click
+        Close()
     End Sub
 
-    Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
+    Private Sub btnLimpiar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLimpiar.Click
         txtCodigo.Text = ""
         txtDescripcion.Text = ""
         txtObservacion.Text = ""
     End Sub
 
-    Private Sub btnGrabar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGrabar.Click
+    Private Sub btnGrabar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnGrabar.Click
         If (txtCodigo.Text <> "") Then
             Try
-                Dim cn As New SqlConnection(ConfigurationManager.ConnectionStrings("LOCAL").ToString())
-                cn.Open()
                 Dim SqlConsulta As String
                 Dim CantidadDeFilas As Integer = ContieneAlgoLaBase()
                 If (CantidadDeFilas = 0) Then
@@ -86,8 +73,6 @@ Public Class HojaIngresoFrases
 
                         SqlConsulta = "INSERT INTO FraseH (Codigo , Descripcion, DescripcionII, DescripcionIII, Observa) values ('" + txtCodigo.Text.Trim() + " ', '" + txtDescripcion.Text.Substring(0, 249).Trim() + "', '" + txtDescripcion.Text.Substring(250, 100).Trim() + "', '" + txtDescripcion.Text.Substring(350, 100).Trim() + "', '" + txtObservacion.Text.Trim() + "')"
                     Else
-
-
                         SqlConsulta = "INSERT INTO FraseP (Codigo ,  Descripcion, DescripcionII, DescripcionIII, Observa) values ('" + txtCodigo.Text.Trim() + " ', '" + txtDescripcion.Text.Substring(0, 249).Trim() + "', '" + txtDescripcion.Text.Substring(250, 100).Trim() + "', '" + txtDescripcion.Text.Substring(350, 100).Trim() + "', '" + txtObservacion.Text.Trim() + "' "
                     End If
                 Else
@@ -102,20 +87,17 @@ Public Class HojaIngresoFrases
                     End If
 
                 End If
-
-                Dim cmd As New SqlCommand(SqlConsulta, cn)
-                cmd.ExecuteNonQuery()
-                cn.Close()
+                ExecuteNonQueries(SqlConsulta)
                 btnLimpiar_Click(Nothing, Nothing) ' Uso el boton limpiar
                 txtCodigo.Focus()
             Catch ex As Exception
-
+                MsgBox(ex.Message)
             End Try
         End If
 
     End Sub
 
-    Private Sub btnEliminar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEliminar.Click
+    Private Sub btnEliminar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnEliminar.Click
         Try
             Dim TieneElRegistro As Integer = ContieneAlgoLaBase()
             If (txtCodigo.Text <> "") Then
@@ -128,15 +110,13 @@ Public Class HojaIngresoFrases
                     Else
                         SqlConsulta = "DELETE  FROM Frasep WHERE Codigo = '" + txtCodigo.Text.ToString().Trim() + "' "
                     End If
-                    Dim cmd As New SqlCommand(SqlConsulta, cn)
-                    cmd.ExecuteNonQuery()
-                    cn.Close()
+                    ExecuteNonQueries(SqlConsulta)
                 End If
                 btnLimpiar_Click(Nothing, Nothing) ' Uso el boton limpiar
                 txtCodigo.Focus()
             End If
         Catch ex As Exception
-
+            MsgBox(ex.Message)
         End Try
 
     End Sub
@@ -146,47 +126,35 @@ Public Class HojaIngresoFrases
         cn.Open()
         Dim SqlConsulta As String
         If (L = "H") Then
-
-            SqlConsulta = "SELECT * FROM FraseH WHERE Codigo = '" + txtCodigo.Text.ToString().Trim() + "' "
+            SqlConsulta = "SELECT Codigo FROM FraseH WHERE Codigo = '" + txtCodigo.Text.ToString().Trim() + "' "
         Else
-
-
-            SqlConsulta = "SELECT * FROM FraseP WHERE Codigo = '" + txtCodigo.Text.ToString().Trim() + "' "
+            SqlConsulta = "SELECT Codigo FROM FraseP WHERE Codigo = '" + txtCodigo.Text.ToString().Trim() + "' "
         End If
-        Dim cmd As New SqlCommand(SqlConsulta, cn)
-        Dim dr As SqlDataReader = cmd.ExecuteReader()
-        Dim tabla As New DataTable
-
-        tabla.Load(dr)
-        Return tabla.Rows.Count()
+        Return GetAll(SqlConsulta).Rows.Count
     End Function
 
-    Private Sub btnListar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnListar.Click
+    Private Sub btnListar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnListar.Click
         pnlListar.Visible = True
-        Dim cn As New SqlConnection(ConfigurationManager.ConnectionStrings("LOCAL").ToString())
-        cn.Open()
-        Dim SqlConsulta As String
-        If (L = "H") Then
 
+        Dim SqlConsulta As String
+
+        If (L = "H") Then
             SqlConsulta = "SELECT Codigo, Descripcion = TRIM(Descripcion) + ' ' + TRIM(DescripcionII) + ' ' + TRIM(DescripcionIII), Observa FROM FraseH"
         Else
-
-
             SqlConsulta = "SELECT Codigo, Descripcion = TRIM(Descripcion) + ' ' + TRIM(DescripcionII) + ' ' + TRIM(DescripcionIII), Observa FROM FraseP"
         End If
-        Dim cmd As New SqlCommand(SqlConsulta, cn)
-        Dim dr As SqlDataReader = cmd.ExecuteReader()
-        Dim tabla As New DataTable
-        tabla.Load(dr)
+
+        Dim tabla As DataTable = GetAll(SqlConsulta)
+
         DGV_ListadoI.DataSource = tabla
 
     End Sub
 
-    Private Sub btnVolPnlListar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVolPnlListar.Click
+    Private Sub btnVolPnlListar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnVolPnlListar.Click
         pnlListar.Visible = False
     End Sub
 
-    Private Sub txtBuscadorListar_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtBuscadorListar.KeyUp
+    Private Sub txtBuscadorListar_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtBuscadorListar.KeyUp
         Try
 
             Dim tabla As DataTable = TryCast(DGV_ListadoI.DataSource, DataTable)
@@ -198,7 +166,7 @@ Public Class HojaIngresoFrases
         End Try
     End Sub
 
-    Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
+    Private Sub btnImprimir_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnImprimir.Click
         With New VistaPrevia
             If (L = "H") Then
                 .Reporte = New ReporteListadoFrasesH()

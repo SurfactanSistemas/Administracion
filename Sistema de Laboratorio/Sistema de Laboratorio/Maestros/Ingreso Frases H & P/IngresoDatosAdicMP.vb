@@ -1,11 +1,10 @@
 ﻿Imports System.Configuration
-Imports System.Data.OleDb
 Imports System.Data.SqlClient
 
 Public Class IngresoDatosAdicMP
     Dim consultaIndice As Integer = -1
     Dim PagLstbox As Integer = 1
-    Dim TipoProducto As String
+    ReadOnly TipoProducto As String
     Dim ComprobarEnter As String = ""
 
     Sub New(ByVal TipoProductoLLamadaMenu)
@@ -15,8 +14,8 @@ Public Class IngresoDatosAdicMP
         InitializeComponent()
 
         If (TipoProducto = "MP") Then
-            Me.TabControl1.TabPages.Remove(TabPage6)
-            Me.TabControl1.TabPages.Remove(TabPage7)
+            TabControl1.TabPages.Remove(TabPage6)
+            TabControl1.TabPages.Remove(TabPage7)
         End If
 
         If (TipoProducto = "PT") Then
@@ -38,7 +37,7 @@ Public Class IngresoDatosAdicMP
 
     End Sub
 
-    Private Sub masktxtCodigo_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles masktxtCodigo.KeyDown
+    Private Sub masktxtCodigo_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles masktxtCodigo.KeyDown
 
         If (e.KeyData = Keys.Enter) Then
             If (Trim(masktxtCodigo.Text.Replace(" ", "").Replace("-", "")) <> "") Then
@@ -83,7 +82,7 @@ Public Class IngresoDatosAdicMP
                     End If
 
                 Catch ex As Exception
-
+                    MsgBox(ex.Message)
                 End Try
 
             End If
@@ -142,7 +141,7 @@ Public Class IngresoDatosAdicMP
                         If (tablaH.Rows.Count > 0) Then
                             DGV_FrasesH.DataSource = tablaH
                         End If
-                        
+
 
 
                     Case "2"
@@ -179,7 +178,7 @@ Public Class IngresoDatosAdicMP
 
                 End Select
             Next
-           
+
 
 
         Catch ex As Exception
@@ -225,16 +224,16 @@ Public Class IngresoDatosAdicMP
                     Next
                 End If
             Catch ex2 As Exception
-                
+
             End Try
-            
+
         End Try
 
     End Sub
 
 
 
-    Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
+    Private Sub btnLimpiar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLimpiar.Click
 
         masktxtCodigo.Text = ""
 
@@ -284,7 +283,7 @@ Public Class IngresoDatosAdicMP
 
 
 
-    Private Sub btnConsultarDatos_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsultarDatos.Click
+    Private Sub btnConsultarDatos_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnConsultarDatos.Click
 
         If (TipoProducto = "MP") Then
             LstboxConsultaDatos.Items.Clear()
@@ -299,13 +298,13 @@ Public Class IngresoDatosAdicMP
             LstboxConsultaDatos.Items.Add("Frases P")
 
         End If
-                pnlConsultarDatos.Visible = True
+        pnlConsultarDatos.Visible = True
         DGV_Consulta.SendToBack()
         LstboxConsultaDatos.BringToFront()
 
     End Sub
 
-    Private Sub btnVolverConsultarDatos_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVolverConsultarDatos.Click
+    Private Sub btnVolverConsultarDatos_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnVolverConsultarDatos.Click
         pnlConsultarDatos.Visible = False
         txtConsultaDatos.Visible = False
         PagLstbox = 1
@@ -314,7 +313,7 @@ Public Class IngresoDatosAdicMP
 
     End Sub
 
-    Private Sub LstboxConsultaDatos_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LstboxConsultaDatos.Click
+    Private Sub LstboxConsultaDatos_Click(ByVal sender As Object, ByVal e As EventArgs) Handles LstboxConsultaDatos.Click
 
 
 
@@ -348,7 +347,7 @@ Public Class IngresoDatosAdicMP
                         '                      
 
                     Catch ex As Exception
-
+                        MsgBox(ex.Message)
                     End Try
                 Case "1"
                     Try
@@ -369,7 +368,7 @@ Public Class IngresoDatosAdicMP
                         End If
                         '                      
                     Catch ex As Exception
-
+                        MsgBox(ex.Message)
                     End Try
                 Case "2"
                     Try
@@ -390,7 +389,7 @@ Public Class IngresoDatosAdicMP
                         End If
                         '                       
                     Catch ex As Exception
-
+                        MsgBox(ex.Message)
                     End Try
             End Select
             PagLstbox = 2
@@ -405,7 +404,7 @@ Public Class IngresoDatosAdicMP
         End If
     End Sub
 
-    Private Sub txtConsultaDatos_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtConsultaDatos.KeyUp
+    Private Sub txtConsultaDatos_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtConsultaDatos.KeyUp
         Dim cn As New SqlConnection(ConfigurationManager.ConnectionStrings("LOCAL").ToString())
         cn.Open()
         Dim sqlconsulta As String
@@ -434,7 +433,7 @@ Public Class IngresoDatosAdicMP
                     End If
                     '                 
                 Catch ex As Exception
-
+                    MsgBox(ex.Message)
                 End Try
 
 
@@ -454,7 +453,7 @@ Public Class IngresoDatosAdicMP
                     End If
                     '                  
                 Catch ex As Exception
-
+                    MsgBox(ex.Message)
                 End Try
 
 
@@ -473,14 +472,14 @@ Public Class IngresoDatosAdicMP
 
                     End If
                 Catch ex As Exception
-
+                    MsgBox(ex.Message)
                 End Try
 
         End Select
 
     End Sub
 
-    Private Sub btnAnteriorPag_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAnteriorPag.Click
+    Private Sub btnAnteriorPag_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAnteriorPag.Click
         txtConsultaDatos.Visible = False
         If (TipoProducto = "MP") Then
             LstboxConsultaDatos.Items.Clear()
@@ -501,7 +500,7 @@ Public Class IngresoDatosAdicMP
         LstboxConsultaDatos.BringToFront()
     End Sub
 
-    Private Sub DGV_Consulta_CellDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DGV_Consulta.CellDoubleClick
+    Private Sub DGV_Consulta_CellDoubleClick(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles DGV_Consulta.CellDoubleClick
 
         Try
             Select Case consultaIndice
@@ -560,7 +559,7 @@ Public Class IngresoDatosAdicMP
             End Select
 
         Catch ex As Exception
-
+            MsgBox(ex.Message)
         End Try
 
     End Sub
@@ -622,12 +621,12 @@ Public Class IngresoDatosAdicMP
             End Select
 
         Catch ex As Exception
-
+            MsgBox(ex.Message)
         End Try
-        
+
     End Sub
 
-    Private Sub btnGrabar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGrabar.Click
+    Private Sub btnGrabar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnGrabar.Click
         Dim ControlPictogramas As Boolean = ValidarCbxPictogramas()
         If ControlPictogramas Then
             Dim sqlconsulta As String
@@ -777,7 +776,7 @@ Public Class IngresoDatosAdicMP
                                 sqlconsulta = sqlconsulta & "'" & "" & "',"
                                 sqlconsulta = sqlconsulta & "'" & DGV_FrasesPIngles.Rows.Item(i - 1).Cells("CodigoFrasesPIngles").Value.ToString() + "', '" & Trim(DGV_FrasesPIngles.Rows.Item(i - 1).Cells("DescripcionFrasesPIngles").Value.ToString().PadRight(450).Substring(0, 250)) & "',"
                                 sqlconsulta = sqlconsulta & "'" & Trim(DGV_FrasesPIngles.Rows.Item(i - 1).Cells("DescripcionFrasesPIngles").Value.ToString().PadRight(450).Substring(250, 100)) & "', '" & Trim(DGV_FrasesPIngles.Rows.Item(i - 1).Cells("DescripcionFrasesPIngles").Value.ToString().PadRight(450).Substring(350, 100)) & "')"
-                                
+
 
                                 cmd = New SqlCommand(sqlconsulta, cn)
                                 cmd.ExecuteNonQuery()
@@ -786,7 +785,7 @@ Public Class IngresoDatosAdicMP
 
                             End If
                         End If
-                        
+
 
                     Else
                         If (DGV_FrasesH.Rows.Count > -1) Then
@@ -890,16 +889,16 @@ Public Class IngresoDatosAdicMP
                 Dim dr As SqlDataReader
                 dr = cmd.ExecuteReader()
 
-                Dim VarNaciones As String
-                Dim VarClase As String
-                Dim VarIntervencion As String
-                Dim VarEmbalaje As String
-                Dim VarCaracteristicas As String
-                Dim VarSecundario As String
-                Dim VarRiesgo As String
-                Dim VarTipoProducto As Integer
-                Dim VarEstadoProducto As Integer
-                Dim VarTipoEtiqueta As String
+                Dim VarNaciones As String = ""
+                Dim VarClase As String = ""
+                Dim VarIntervencion As String = ""
+                Dim VarEmbalaje As String = ""
+                Dim VarCaracteristicas As String = ""
+                Dim VarSecundario As String = ""
+                Dim VarRiesgo As String = ""
+                Dim VarTipoProducto As Integer = 0
+                Dim VarEstadoProducto As Integer = 0
+                Dim VarTipoEtiqueta As String = ""
 
                 If (dr.Read() <> Nothing) Then
 
@@ -1017,7 +1016,6 @@ Public Class IngresoDatosAdicMP
 
 
                 Dim Palabra As Integer
-                Dim LugarImpresion As Integer = 0
                 Dim LugarImpresionI As Integer = 0
                 Dim LugarImpresionII As Integer = 0
                 Dim LugarImpresionIII As Integer = 0
@@ -1029,8 +1027,6 @@ Public Class IngresoDatosAdicMP
                 Dim EntraVarios As Char = "N"
                 Dim Corte As Integer = 80
                 Dim hasta, HastaII, HastaIII As Integer
-                Dim AA1 As String
-
 
                 For i As Integer = 1 To 999
                     Dim clave As String = masktxtCodigo.Text + i.ToString().PadLeft(3, "0")
@@ -1158,7 +1154,6 @@ Public Class IngresoDatosAdicMP
                             ImpreFrase(LugarFrase) = "INDICACIONES DE PELIGRO : "
                         End If
                         EntraH = "S"
-                        AA1 = Trim(imprecionI(Ciclo))
                         ImpreFrase(LugarFrase) = ImpreFrase(LugarFrase) + Trim(imprecionI(Ciclo)) + " "
 
                         Do
@@ -1222,7 +1217,6 @@ Public Class IngresoDatosAdicMP
                             ImpreFrase(LugarFrase) = "DECLARACIONES DE PRUDENCIA : "
                         End If
                         EntraP = "S"
-                        AA1 = Trim(imprecionII(Ciclo))
                         ImpreFrase(LugarFrase) = ImpreFrase(LugarFrase) + Trim(imprecionII(Ciclo)) + " "
 
                         Do
@@ -1274,13 +1268,13 @@ Public Class IngresoDatosAdicMP
                 For Ciclo = 1 To 10
 
                     If Trim(ImpreFrase(Ciclo)) <> "" Then
-                        For CicloII = 1 To Hasta
+                        For CicloII = 1 To hasta
 
                             If Mid$(ImpreFrase(Ciclo), CicloII, 1) = Space$(1) Then
                                 ImpreFrase(Ciclo) = Mid$(ImpreFrase(Ciclo), 1, CicloII) + " " + Mid$(ImpreFrase(Ciclo), CicloII + 1, Corte)
-                                Hasta = Len(Trim(ImpreFrase(Ciclo)))
+                                hasta = Len(Trim(ImpreFrase(Ciclo)))
                                 CicloII = CicloII + 1
-                                If CicloII = Corte Or Hasta = Corte Then
+                                If CicloII = Corte Or hasta = Corte Then
                                     Exit For
                                 End If
                             End If
@@ -1324,7 +1318,7 @@ Public Class IngresoDatosAdicMP
                     sqlconsulta = sqlconsulta + " Where Articulo = '" + masktxtCodigo.Text + "'"
                 End If
 
-                
+
                 cmd = New SqlCommand(sqlconsulta, cn)
                 cmd.ExecuteNonQuery()
 
@@ -1332,17 +1326,16 @@ Public Class IngresoDatosAdicMP
 
                     ' genera etiquetas para colorantes 14 renglones
                     ' a 100 caracteres
-                    LugarImpresion = 0
                     LugarImpresionI = 0
                     LugarImpresionII = 0
                     LugarImpresionIII = 0
-                    
+
 
                     sqlconsulta = "SELECT * FROM DatosEtiqueta WHERE Terminado = '" & masktxtCodigo.Text.Trim() & "' ORDER BY Clave"
-               
-                cmd = New SqlCommand(sqlconsulta, cn)
 
-                dr = cmd.ExecuteReader()
+                    cmd = New SqlCommand(sqlconsulta, cn)
+
+                    dr = cmd.ExecuteReader()
 
                     If (dr.Read()) Then
 
@@ -1475,7 +1468,6 @@ Public Class IngresoDatosAdicMP
                                 ImpreFrase(LugarFrase) = "INDICACIONES DE PELIGRO : "
                             End If
                             EntraH = "S"
-                            AA1 = Trim(imprecionI(Ciclo))
                             ImpreFrase(LugarFrase) = ImpreFrase(LugarFrase) + Trim(imprecionI(Ciclo)) + " "
 
                             Do
@@ -1539,7 +1531,6 @@ Public Class IngresoDatosAdicMP
                                 ImpreFrase(LugarFrase) = "DECLARACIONES DE PRUDENCIA : "
                             End If
                             EntraP = "S"
-                            AA1 = Trim(imprecionII(Ciclo))
                             ImpreFrase(LugarFrase) = ImpreFrase(LugarFrase) + Trim(imprecionII(Ciclo)) + " "
 
                             Do
@@ -1668,7 +1659,6 @@ Public Class IngresoDatosAdicMP
                     '
                     dr.Close()
 
-                    LugarImpresion = 0
                     LugarImpresionI = 0
                     LugarImpresionII = 0
                     LugarImpresionIII = 0
@@ -1732,7 +1722,7 @@ Public Class IngresoDatosAdicMP
                                     LugarImpresionII = LugarImpresionII + 1
                                     imprecionII(LugarImpresionII) = dr.Item("Descripcion3PIngles")
                                 End If
-                             
+
 
                         End Select
                     End If
@@ -1815,7 +1805,6 @@ Public Class IngresoDatosAdicMP
                                 ImpreFrase(LugarFrase) = "HAZARD STATEMENTS : "
                             End If
                             EntraH = "S"
-                            AA1 = Trim(imprecionI(Ciclo))
                             ImpreFrase(LugarFrase) = ImpreFrase(LugarFrase) + Trim(imprecionI(Ciclo)) + " "
 
                             Do
@@ -1879,7 +1868,6 @@ Public Class IngresoDatosAdicMP
                                 ImpreFrase(LugarFrase) = "PRECAUTIONARY STATEMENTS : "
                             End If
                             EntraP = "S"
-                            AA1 = Trim(imprecionII(Ciclo))
                             ImpreFrase(LugarFrase) = ImpreFrase(LugarFrase) + Trim(imprecionII(Ciclo)) + " "
 
                             Do
@@ -1981,7 +1969,6 @@ Public Class IngresoDatosAdicMP
                     ' a 100 caracteres
                     '
 
-                    LugarImpresion = 0
                     LugarImpresionI = 0
                     LugarImpresionII = 0
                     LugarImpresionIII = 0
@@ -2126,7 +2113,6 @@ Public Class IngresoDatosAdicMP
                                 ImpreFrase(LugarFrase) = "HAZARD STATEMENTS : "
                             End If
                             EntraH = "S"
-                            AA1 = Trim(imprecionI(Ciclo))
                             ImpreFrase(LugarFrase) = ImpreFrase(LugarFrase) + Trim(imprecionI(Ciclo)) + " "
 
                             Do
@@ -2190,7 +2176,6 @@ Public Class IngresoDatosAdicMP
                                 ImpreFrase(LugarFrase) = "PRECAUTIONARY STATEMENTS : "
                             End If
                             EntraP = "S"
-                            AA1 = Trim(imprecionII(Ciclo))
                             ImpreFrase(LugarFrase) = ImpreFrase(LugarFrase) + Trim(imprecionII(Ciclo)) + " "
 
                             Do
@@ -2306,7 +2291,7 @@ Public Class IngresoDatosAdicMP
 
             End Try
         End If
-        
+
 
     End Sub
 
@@ -2329,7 +2314,7 @@ Public Class IngresoDatosAdicMP
         
     End Sub
 
-    Private Sub masktxtCodigo_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles masktxtCodigo.MouseDoubleClick
+    Private Sub masktxtCodigo_MouseDoubleClick(ByVal sender As Object, ByVal e As MouseEventArgs) Handles masktxtCodigo.MouseDoubleClick
         pnlConsultarDatos.Visible = True
         txtConsultaDatos.Visible = True
         DGV_Consulta.BringToFront()
@@ -2359,20 +2344,20 @@ Public Class IngresoDatosAdicMP
 
 
         Catch ex As Exception
-
+            MsgBox(ex.Message)
         End Try
 
     End Sub
 
-    Private Sub btnVolver_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVolver.Click
-        Me.Close()
+    Private Sub btnVolver_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnVolver.Click
+        Close()
     End Sub
 
 
 
- 
 
-    Private Sub DGV_FrasesH_CellDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DGV_FrasesH.CellDoubleClick
+
+    Private Sub DGV_FrasesH_CellDoubleClick(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles DGV_FrasesH.CellDoubleClick
 
         Dim tabla As DataTable = TryCast(DGV_FrasesH.DataSource, DataTable)
         Dim codigoH As String
@@ -2392,16 +2377,16 @@ Public Class IngresoDatosAdicMP
                 tabla2.Rows.Remove(RowABorrar)
             End If
         Catch ex As Exception
-
+            MsgBox(ex.Message)
         End Try
 
-        
+
     End Sub
 
- 
 
 
-    Private Sub DGV_FrasesP_CellDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DGV_FrasesP.CellDoubleClick
+
+    Private Sub DGV_FrasesP_CellDoubleClick(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles DGV_FrasesP.CellDoubleClick
         Dim tabla As DataTable = TryCast(DGV_FrasesP.DataSource, DataTable)
         Dim codigo As String
         codigo = DGV_FrasesP.CurrentRow.Cells("CodigoFraseP").Value.ToString().Trim()
@@ -2420,19 +2405,19 @@ Public Class IngresoDatosAdicMP
                 tabla2.Rows.Remove(RowABorrar)
             End If
         Catch ex As Exception
-
+            MsgBox(ex.Message)
         End Try
     End Sub
 
 
-    Private Sub masktxtCodigo_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles masktxtCodigo.Leave
+    Private Sub masktxtCodigo_Leave(ByVal sender As Object, ByVal e As EventArgs) Handles masktxtCodigo.Leave
         If (ComprobarEnter = "" Or ComprobarEnter <> masktxtCodigo.Text) Then
             masktxtCodigo_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
         End If
     End Sub
 
-    
-    Private Sub cbxExplosivo1_DropDownClosed(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxExplosivo1.DropDownClosed, cbxToxico6.DropDownClosed, cbxPeligroPLASalud8.DropDownClosed, cbxPeligro7.DropDownClosed, cbxMedioAmbiente9.DropDownClosed, cbxInflamable2.DropDownClosed, cbxCorrosivo5.DropDownClosed, cbxCarburante3.DropDownClosed, cbxGasesBajo4.DropDownClosed
+
+    Private Sub cbxExplosivo1_DropDownClosed(ByVal sender As Object, ByVal e As EventArgs) Handles cbxExplosivo1.DropDownClosed, cbxToxico6.DropDownClosed, cbxPeligroPLASalud8.DropDownClosed, cbxPeligro7.DropDownClosed, cbxMedioAmbiente9.DropDownClosed, cbxInflamable2.DropDownClosed, cbxCorrosivo5.DropDownClosed, cbxCarburante3.DropDownClosed, cbxGasesBajo4.DropDownClosed
         Dim i As Integer = 0
         Dim x As Integer() = {0, 0, 0, 0, 0, 0}
         For Each o As ComboBox In TabPage1.Controls.OfType(Of ComboBox)()
@@ -2454,7 +2439,7 @@ Public Class IngresoDatosAdicMP
         Next
     End Sub
 
-    Private Sub IngresoDatosAdicMP_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub IngresoDatosAdicMP_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         btnLimpiar_Click(Nothing, Nothing)
     End Sub
 
@@ -2483,6 +2468,7 @@ Public Class IngresoDatosAdicMP
     Private Function VerRepetidosenDGV(ByVal Tipo As Integer, ByVal Codigo As String) As Boolean
         Select Case Tipo
             Case "1"
+                ' ReSharper disable once LoopCanBeConvertedToQuery
                 For Each row As DataGridViewRow In DGV_FrasesH.Rows
                     If (row.Cells(0).Value.ToString().Trim() = Codigo.Trim()) Then
                         MsgBox("Esa frase H ya se encuentra en la lista")
@@ -2490,6 +2476,7 @@ Public Class IngresoDatosAdicMP
                     End If
                 Next
             Case "2"
+                ' ReSharper disable once LoopCanBeConvertedToQuery
                 For Each row As DataGridViewRow In DGV_FrasesP.Rows
                     If (row.Cells(0).Value = Codigo) Then
                         MsgBox("Esa frase P ya se encuentra en la lista")
@@ -2500,5 +2487,5 @@ Public Class IngresoDatosAdicMP
         Return True
     End Function
 
-   
+
 End Class

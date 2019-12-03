@@ -201,9 +201,9 @@ Partial Class HojaIngresoFrases
         Me.pnlListar.Controls.Add(Me.btnVolPnlListar)
         Me.pnlListar.Controls.Add(Me.txtBuscadorListar)
         Me.pnlListar.Controls.Add(Me.Label5)
-        Me.pnlListar.Location = New System.Drawing.Point(15, 62)
+        Me.pnlListar.Location = New System.Drawing.Point(15, 81)
         Me.pnlListar.Name = "pnlListar"
-        Me.pnlListar.Size = New System.Drawing.Size(534, 163)
+        Me.pnlListar.Size = New System.Drawing.Size(534, 144)
         Me.pnlListar.TabIndex = 25
         '
         'DGV_ListadoI

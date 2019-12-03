@@ -1,8 +1,11 @@
-﻿Imports System.IO
+﻿Imports System.Configuration
+Imports System.IO
 Imports System.Text.RegularExpressions
 Imports ConsultasVarias
 Imports ConsultasVarias.Clases
+Imports CrystalDecisions.Shared
 Imports info.lundin.math
+Imports Laboratorio.Entidades
 
 Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerminados, IIngresoClaveSeguridad, IIngresoMotivoDesvio
 
@@ -12,8 +15,8 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
     Private WMotivoClaveSeguridad As TiposSolicitudClaveSeguridad = TiposSolicitudClaveSeguridad.General
     Private WActualizacionBloqueada As Boolean = False
     Private WAutorizaActualizacionBloqueado As Boolean = False
-    Private ReadOnly PATH_ENSAYOS_INTERMEDIOS As String = Configuration.ConfigurationManager.AppSettings("PATH_ENSAYOS_INTERMEDIOS").ToString()
-    Private ReadOnly DESTINATARIOS_AVISO_ENSAYOS_INTERMEDIOS As String = Configuration.ConfigurationManager.AppSettings("DESTINATARIOS_AVISO_ENSAYOS_INTERMEDIOS").ToString()
+    Private ReadOnly PATH_ENSAYOS_INTERMEDIOS As String = ConfigurationManager.AppSettings("PATH_ENSAYOS_INTERMEDIOS").ToString()
+    Private ReadOnly DESTINATARIOS_AVISO_ENSAYOS_INTERMEDIOS As String = ConfigurationManager.AppSettings("DESTINATARIOS_AVISO_ENSAYOS_INTERMEDIOS").ToString()
 
     Private Const RUTA_TEMP As String = "C:/tempEnsayosIntermedios/"
 
@@ -43,6 +46,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
         txtLotePartida.Enabled = False
         btnNotasCertAnalisis.Enabled = False
         btnReimprimir.Visible = False
+        btnPoolEnsayos.Enabled = False
         gbDatosAdicionales.Visible = False
 
         txtPartida.Focus()
@@ -97,6 +101,18 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
             btnGrabar.Text = "GRABAR"
 
             _CrearCarpetaEtapaIntermedia()
+
+            Dim WEtapa, WPartida, WCodigo As String
+
+            WEtapa = txtEtapa.Text
+            WPartida = txtPartida.Text
+            WCodigo = txtCodigo.Text
+
+            btnLimpiar_Click(Nothing, Nothing)
+
+            txtEtapa.Text = WEtapa
+            txtCodigo.Text = WCodigo
+            txtPartida.Text = WPartida
 
             Dim WExiste As DataRow = Nothing
 
@@ -369,12 +385,12 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                 End If
             End If
 
-            txtFechaVto.Text = Entidades.ProductoTerminado.CalcularFechaElabVto(txtCodigo.Text, txtPartida.Text, True)(1)
+            txtFechaVto.Text = ProductoTerminado.CalcularFechaElabVto(txtCodigo.Text, txtPartida.Text, True)(1)
 
             '
             ' Cargamos en caso de que no tenga, el componente si es monoproducto.
             '
-            If Entidades.ProductoTerminado.EsMono(txtCodigo.Text) Then
+            If ProductoTerminado.EsMono(txtCodigo.Text) Then
                 Dim WComp As DataRow = GetSingle("SELECT Articulo = CASE WHEN Tipo = 'M' THEN Articulo1 ELSE Articulo2 END FROM Composicion WHERE Terminado = '" & txtCodigo.Text & "' Order by Renglon")
                 If WComp IsNot Nothing Then txtComponente.Text = Trim(OrDefault(WComp.Item("Articulo"), ""))
             End If
@@ -386,8 +402,9 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                 txtLotePartida.Enabled = True
                 gbDatosAdicionales.Visible = True
             End If
-            
+
             If dgvEnsayos.Rows.Count > 0 Then
+                btnPoolEnsayos.Enabled = True
                 dgvEnsayos.CurrentCell = dgvEnsayos.Item("Valor", 0)
                 dgvEnsayos.Focus()
             Else
@@ -463,51 +480,6 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
         WNotas = _Notas
     End Sub
 
-    'Private Function _EsNumero(ByVal keycode As Integer) As Boolean
-    '    Return (keycode >= 48 And keycode <= 57) Or (keycode >= 96 And keycode <= 105)
-    'End Function
-
-    'Private Function _EsControl(ByVal keycode) As Boolean
-    '    Dim valido As Boolean = False
-
-    '    Select Case keycode
-    '        Case Keys.Enter, Keys.Escape, Keys.Right, Keys.Left, Keys.Back
-    '            valido = True
-    '        Case Else
-    '            valido = False
-    '    End Select
-
-    '    Return valido
-    'End Function
-
-    'Private Function _EsDecimal(ByVal keycode As Integer) As Boolean
-    '    Return (keycode >= 48 And keycode <= 57) Or (keycode >= 96 And keycode <= 105) Or (keycode = 110 Or keycode = 190)
-    'End Function
-
-    'Private Function _EsNumeroOControl(ByVal keycode) As Boolean
-    '    Dim valido As Boolean = False
-
-    '    If _EsNumero(CInt(keycode)) Or _EsControl(keycode) Then
-    '        valido = True
-    '    Else
-    '        valido = False
-    '    End If
-
-    '    Return valido
-    'End Function
-
-    'Private Function _EsDecimalOControl(ByVal keycode) As Boolean
-    '    Dim valido As Boolean = False
-
-    '    If _EsDecimal(CInt(keycode)) Or _EsControl(keycode) Then
-    '        valido = True
-    '    Else
-    '        valido = False
-    '    End If
-
-    '    Return valido
-    'End Function
-
     Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData As Keys) As Boolean
 
         With dgvEnsayos
@@ -516,21 +488,6 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
                 Dim iCol = .CurrentCell.ColumnIndex
                 Dim iRow = .CurrentCell.RowIndex
-                Dim WValor As String = UCase(OrDefault(.CurrentCell.Value, ""))
-
-                ' Limitamos los caracteres permitidos para cada una de las columnas.
-                'Select Case iCol
-                '    Case 1
-                '        If Not _EsNumeroOControl(keyData) Then
-                '            Return True
-                '        End If
-                '    Case 4
-                '        If Not _EsDecimalOControl(keyData) Then
-                '            Return True
-                '        End If
-                '    Case Else
-
-                'End Select
 
                 If msg.WParam.ToInt32() = Keys.Enter Then
 
@@ -617,7 +574,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
                                     With New IngresoVariablesFormula(WFormula, WVariables, WValor, dgvEnsayos, WDecimales)
                                         Dim WDialogResult = .ShowDialog(Me)
-                                        If WDialogResult = Windows.Forms.DialogResult.OK Then
+                                        If WDialogResult = DialogResult.OK Then
                                             WValor = .Valor
                                             WVariables = .Variables
                                             WDecimales = .Decimales
@@ -926,7 +883,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
             With WNotas
                 WSqls.Add("UPDATE " & WTabla & " SET " &
                           "WDate = '" & Date.Now.ToString("dd-MM-yyyy") & "'," &
-                          "Operador = '" & Operador.Codigo & "'," &
+                          "Operador = '" & Codigo & "'," &
                           "Nota1 = '" & .Item(0) & "'," &
                           "Nota2 = '" & .Item(1) & "'," &
                           "Nota3 = '" & .Item(2) & "'," &
@@ -999,7 +956,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
             File.Delete(RUTA_TEMP & nombreArchivo)
 
-            .Exportar(nombreArchivo, CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, RUTA_TEMP)
+            .Exportar(nombreArchivo, ExportFormatType.PortableDocFormat, RUTA_TEMP)
 
             Dim WTitulo, WCuerpo As String
 
@@ -1029,7 +986,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
             .Formula = "{PrueterFarmaIntermedio.Partida} = " & txtPartida.Text & " AND {Prueterfarmaintermedio.Paso} = " & txtEtapa.Text & " AND {Prueterfarmaintermedio.Producto} = '" & txtCodigo.Text & "' AND {Prueterfarmaintermedio.Producto} = {Terminado.Codigo}"
         End With
 
-        frm.Exportar(String.Format("{0}-{1}-{2}", txtCodigo.Text, txtPartida.Ceros(6), Date.Now.ToString("yyyyMMdd-HHmm")), CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, String.Format("{0}", _CarpetaEtapaIntermedia))
+        frm.Exportar(String.Format("{0}-{1}-{2}", txtCodigo.Text, txtPartida.Ceros(6), Date.Now.ToString("yyyyMMdd-HHmm")), ExportFormatType.PortableDocFormat, String.Format("{0}", _CarpetaEtapaIntermedia))
 
     End Sub
 
@@ -1037,7 +994,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
         Dim WTipo As String = ""
 
-        For Each row As Datagridviewrow In dgvEnsayos.Rows
+        For Each row As DataGridViewRow In dgvEnsayos.Rows
             With row
                 WTipo = OrDefault(.Cells("TipoEspecif").Value, "")
 
@@ -1088,19 +1045,22 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
     End Sub
 
+    '
+    ' Validamos los valores ingresados.
+    '
+    ' Se validan los datos para aquellos Prductos para los que se han definido
+    ' las especificaciones por Sistema. En los casos de aquellos productos que no,
+    ' se deja sin validación como hasta el dia de hoy.
+    '
     Private Function _ValidarValoresIngresados() As Boolean
-        '
-        ' Validamos los valores ingresados.
-        '
-        ' Se validan los datos para aquellos Prductos para los que se han definido
-        ' las especificaciones por Sistema. En los casos de aquellos productos que no,
-        ' se deja sin validación como hasta el dia de hoy.
-        '
+
+        ' ReSharper disable once LoopCanBeConvertedToQuery
         For Each row As DataGridViewRow In dgvEnsayos.Rows
             If Not _ValidarDato(row) Then Return False
         Next
 
         Return True
+
     End Function
 
     Private Function _ValidarDato(ByVal row As DataGridViewRow, Optional ByVal ModoSilencioso As Boolean = False) As Boolean
@@ -1333,142 +1293,6 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
         WMotivoDesvio = Trim(_Motivo)
     End Sub
 
-    'Private Sub btnRegistroProd_Click(ByVal sender As Object, ByVal e As EventArgs)
-
-    '    Try
-    '        Dim WPrueterfarma As DataTable = GetAll("SELECT * FROM PrueterFarmaIntermedio WHERE Partida = '" & txtPartida.Text & "' And Producto = '" & txtCodigo.Text & "' And Paso = '" & txtEtapa.Text & "' Order By Clave")
-
-    '        If WPrueterfarma.Rows.Count = 0 Then
-    '            txtPartida.Focus()
-    '            Exit Sub
-    '        End If
-
-    '        Dim WSqls As New List(Of String)
-
-    '        Dim WPartida As String = txtPartida.Text
-    '        Dim WCodigo As String = txtCodigo.Text
-    '        Dim WEtapa As String = txtEtapa.Text
-
-    '        btnLimpiar.PerformClick()
-
-    '        txtPartida.Text = WPartida
-    '        txtPartida_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
-
-    '        txtEtapa.Text = WEtapa
-    '        txtEtapa_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
-
-    '        _ActualizarTablaEnsayos()
-
-    '        '
-    '        ' Obtenemos el Producto Original en caso de que se haya ingresado como RE/NK.
-    '        '
-    '        If txtCodigo.Text.ToUpper.StartsWith("RE") Or txtCodigo.Text.ToUpper.StartsWith("NK") Then
-    '            Dim _Hoja As DataRow = GetSingle("SELECT ISNULL(TipoOri, '') TipoOri FROM Hoja WHERE Hoja = '" & WPartida & "' And Renglon IN ('1', '01')")
-
-    '            If Not IsNothing(_Hoja) Then
-
-    '                If {"PT", "RE"}.Contains(_Hoja.Item("TipoOri")) Then
-    '                    WCodigo = WCodigo.Replace("RE", _Hoja.Item("TipoOri"))
-    '                    WCodigo = WCodigo.Replace("NK", _Hoja.Item("TipoOri"))
-    '                End If
-
-    '            End If
-
-    '        End If
-
-    '        Dim WConfecciono As String = txtConfecciono.Text.left(50)
-
-    '        WSqls.Add("UPDATE CargaV SET ObservaIV = '" & WConfecciono & "' WHERE Terminado = '" & WCodigo & "' And Paso = '" & txtEtapa.Text & "'")
-
-    '        For Each row As DataRow In WPrueterfarma.Rows
-    '            With row
-    '                '
-    '                ' Actualizamos los resultados y la confeccion en CargaV.
-    '                '
-    '                Dim WResultado As String = OrDefault(row.Item("Resultado"), "")
-
-    '                WResultado = WResultado.left(50)
-
-    '                WSqls.Add("UPDATE CargaV SET Resultado = '" & WResultado & "' WHERE Terminado = '" & WCodigo & "' And Paso = '" & txtEtapa.Text & "'")
-
-    '                Dim WTipo = OrDefault(row.Item("TipoEspecif"), "")
-    '                Dim WMenorIgual = OrDefault(row.Item("MenorIgualEspecif"), "")
-    '                Dim WDesde = OrDefault(row.Item("DesdeEspecif"), "")
-    '                Dim WHasta = OrDefault(row.Item("HastaEspecif"), "")
-    '                Dim WUnidad = OrDefault(row.Item("UnidadEspecif"), "")
-    '                Dim WClave = OrDefault(row.Item("Clave"), "")
-    '                Dim WValor = OrDefault(row.Item("Valor"), "")
-
-    '                Dim WImpreParametro As String = _GenerarImpreParametro(WTipo, WDesde, WHasta, WUnidad, WMenorIgual)
-
-    '                WSqls.Add("UPDATE PrueterFarmaIntermedio SET Impre1 = '" & WImpreParametro & "', Impre2 = '" & WValor & "' WHERE Clave = '" & WClave & "'")
-
-    '            End With
-    '        Next
-
-    '        Dim WHoja As DataRow = GetSingle("SELECT Teorico, Cantidad FROM Hoja WHERE Hoja = '" & txtPartida.Text & "'")
-    '        Dim WTeorico As Double = 0
-
-    '        If WHoja IsNot Nothing Then
-    '            WTeorico = OrDefault(WHoja.Item("Teorico"), 0)
-    '        End If
-
-    '        WSqls.Add("UPDATE CargaV SET ImpreTerminado = '" & txtCodigo.Text & "', Partida = '" & txtPartida.Text & "', FechaIng = '" & txtFecha.Text & "', CantidadPartida = '" & formatonumerico(WTeorico) & "', ImprePaso = '" & txtEtapa.Text & "' WHERE Terminado = '" & txtCodigo.Text & "'")
-
-    '        ExecuteNonQueries(WSqls.ToArray)
-
-    '        Dim frm As New VistaPrevia
-
-    '        With frm
-    '            .Reporte = New ResultadosIntermediosPT
-    '            .Formula = "{PrueterFarma.Producto} = {Terminado.Codigo} And {PrueterFarma.Paso} = " & txtEtapa.Text & " And {PrueterFarma.Codigo} = {Ensayos.Codigo} And {PrueterFarma.Partida}  = " & txtPartida.Text & ""
-    '            .Mostrar()
-    '        End With
-
-    '    Catch ex As Exception
-    '        MsgBox(ex.Message, MsgBoxStyle.Exclamation)
-    '    End Try
-
-    'End Sub
-
-    'Private Sub _ActualizarTablaEnsayos()
-
-    '    '
-    '    ' Obtenemos los valores de los ensayos de las bases correspondientes, segun la empresa que se representa.
-    '    '
-    '    Dim WBaseEnsayos = "Surfactan_III"
-
-    '    If Base.ToUpper.StartsWith("PELLITAL") Or Base.ToUpper.StartsWith("PELITALL") Then WBaseEnsayos = "Pelitall_II"
-
-    '    Dim WEnsayosBase As DataTable = GetAll("SELECT Codigo, Descripcion, DescripcionII, Unidad FROM Ensayos Order By Codigo", WBaseEnsayos)
-
-    '    Dim WSqls As New List(Of String)
-
-    '    For Each row As DataRow In WEnsayosBase.Rows
-    '        With row
-    '            Dim WCodigo = OrDefault(.Item("Codigo"), "")
-    '            Dim WDescripcion = OrDefault(.Item("Descripcion"), "")
-    '            Dim WDescripcionII = OrDefault(.Item("DescripcionII"), "")
-    '            Dim WUnidad = OrDefault(.Item("Unidad"), "")
-    '            Dim ZSql = ""
-
-    '            Dim WEnsayo As DataRow = GetSingle("SELECT Codigo FROM Ensayos WHERE Codigo = '" & WCodigo & "'")
-
-    '            If WEnsayo Is Nothing Then
-    '                ZSql = String.Format("INSERT INTO Ensayos (Codigo, Descripcion, DescripcionII, Unidad) VALUES ('{0}', '{1}', '{2}', '{3}')", WCodigo, WDescripcion, WDescripcionII, WUnidad)
-    '            Else
-    '                ZSql = String.Format("UPDATE Ensayos SET Descripcion = '{1}', DescripcionII = '{2}', Unidad = '{3}' WHERE Codigo = '{0}'", WCodigo, WDescripcion, WDescripcionII, WUnidad)
-    '            End If
-
-    '            WSqls.Add(ZSql)
-
-    '        End With
-    '    Next
-
-    '    ExecuteNonQueries(WSqls.ToArray)
-
-    'End Sub
-
     Private Sub btnActualizarEspecif_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnActualizarEspecif.Click
 
         Dim WPrueterFarmaI As DataTable = Nothing
@@ -1655,7 +1479,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
     End Function
 
-    Private Sub btnImprimirEnsayosIngresados_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRevalida.Click, btnReimprimir.Click
+    Private Sub btnImprimirEnsayosIngresados_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnRevalida.Click, btnReimprimir.Click
 
         If Val(txtEtapa.Text) = 99 Then
 
@@ -1719,7 +1543,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
         '
         Dim WPasaMono As Short = 0
         Dim WEsFazon As Boolean = False
-        Dim WVencimiento, WImpre1, WImpre2, WImpre3, WImpre4 As String
+        Dim WImpre1, WImpre2, WImpre3, WImpre4 As String
 
         Dim WMono As DataRow = GetSingle("SELECT Tipo FROM CodigoMono WHERE Codigo = '" & txtCodigo.Text & "'", "SurfactanSa")
         If WMono IsNot Nothing Then WPasaMono = OrDefault(WMono.Item("Tipo"), 0)
@@ -1729,12 +1553,12 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
         WImpre1 = "F.Reanálisis:"
 
         If WPasaMono > 0 And WEsFazon Then
-            Dim WDatos As String() = Entidades.ProductoTerminado._CalculaMonoOtro(txtPartida.Text, "Surfactan_III")
+            Dim WDatos As String() = ProductoTerminado._CalculaMonoOtro(txtPartida.Text, "Surfactan_III")
             Dim WTipoVencimiento As Short = Val(WDatos(2))
             WImpre1 = IIf(WTipoVencimiento = 1, "F.Reanálisis:", "F.Vencimiento:")
         End If
 
-        Dim WDatosII As String() = Entidades.ProductoTerminado.CalcularFechaElabVto(txtCodigo.Text, txtPartida.Text)
+        Dim WDatosII As String() = ProductoTerminado.CalcularFechaElabVto(txtCodigo.Text, txtPartida.Text)
 
         WImpre2 = WDatosII(1)
         WImpre3 = ""
@@ -1773,7 +1597,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                 Case 2
                     .Mostrar()
                 Case 3
-                    .Exportar(String.Format("{0}-{1}-{2}", txtCodigo.Text, txtPartida.Ceros(6), Date.Now.ToString("yyyyMMdd-HHmm")), CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, String.Format("{0}", _CarpetaEtapaIntermedia))
+                    .Exportar(String.Format("{0}-{1}-{2}", txtCodigo.Text, txtPartida.Ceros(6), Date.Now.ToString("yyyyMMdd-HHmm")), ExportFormatType.PortableDocFormat, String.Format("{0}", _CarpetaEtapaIntermedia))
                     '.Exportar("Resultados de Calidad " & wPartida & " " & Date.Now.ToString("dd-MM-yyyy"), CrystalDecisions.Shared.ExportFormatType.WordForWindows)
             End Select
 
@@ -1781,19 +1605,19 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
     End Sub
 
-    Private Sub NumerosConComas(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtKilos.KeyPress
+    Private Sub NumerosConComas(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txtKilos.KeyPress
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) And Not (CChar(".")) = e.KeyChar Then
             e.Handled = True
         End If
     End Sub
 
-    Private Sub btnNotasAnteriores_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNotasAnteriores.Click
+    Private Sub btnNotasAnteriores_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnNotasAnteriores.Click
         With New NotasAnterioresFarmaPT(txtPartida.Text, txtEtapa.Text)
             .ShowDialog(Me)
         End With
     End Sub
 
-    Private Sub txtComponente_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtComponente.KeyDown
+    Private Sub txtComponente_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtComponente.KeyDown
 
         If e.KeyData = Keys.Enter Then
             Dim longitud As Integer = txtComponente.Text.Replace(" ", "").Length
@@ -1825,7 +1649,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
     End Sub
 
-    Private Sub txtLotePartida_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtLotePartida.KeyDown
+    Private Sub txtLotePartida_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtLotePartida.KeyDown
 
         If e.KeyData = Keys.Enter Then
             Dim longitud As Integer = txtComponente.Text.Replace(" ", "").Length
@@ -1863,14 +1687,20 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
     End Sub
 
-    Private Sub btnNotasCertAnalisis_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNotasCertAnalisis.Click
+    Private Sub btnNotasCertAnalisis_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnNotasCertAnalisis.Click
         With New NotasCertificadosAnalisisFarmaPT(txtPartida.Text)
             .ShowDialog(Me)
         End With
     End Sub
 
-    Private Sub btnImprimirEnsayosIngresados_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimirEnsayosIngresados.Click
+    Private Sub btnImprimirEnsayosIngresados_Click_1(ByVal sender As Object, ByVal e As EventArgs) Handles btnImprimirEnsayosIngresados.Click
         With New PDFVersionesPTFarma(txtPartida.Text)
+            .ShowDialog(Me)
+        End With
+    End Sub
+
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPoolEnsayos.Click
+        With New ListaPoolEnsayos(txtCodigo.Text, txtPartida.Text, txtEtapa.Text, dgvEnsayos.Rows)
             .ShowDialog(Me)
         End With
     End Sub
