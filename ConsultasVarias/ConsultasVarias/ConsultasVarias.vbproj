@@ -94,6 +94,12 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Auxiliares\AyudaGeneral.Designer.vb">
+      <DependentUpon>AyudaGeneral.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Auxiliares\AyudaGeneral.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Auxiliares\DerivadoListarReporteDesdeHastaBasico.Designer.vb">
       <DependentUpon>DerivadoListarReporteDesdeHastaBasico.vb</DependentUpon>
     </Compile>
@@ -196,6 +202,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Interfaces\IAyudaEnsayos.vb" />
+    <Compile Include="Interfaces\IAyudaGeneral.vb" />
     <Compile Include="Interfaces\IAyudaPTs.vb" />
     <Compile Include="Interfaces\IAyudaMPs.vb" />
     <Compile Include="Interfaces\IExportar.vb" />
@@ -219,6 +226,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Auxiliares\AyudaGeneral.resx">
+      <DependentUpon>AyudaGeneral.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Auxiliares\Exportar.resx">
       <DependentUpon>Exportar.vb</DependentUpon>
     </EmbeddedResource>

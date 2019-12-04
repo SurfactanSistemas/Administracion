@@ -432,9 +432,9 @@ Public Class ImpreCrystal
                         viewer.imprimirReporte()
 
                     Case Else
-                        pasanombre.Text = "c:\PdfPrintII\"
+                        pasanombre.Text = "N:\Net\ProcesoImpresionPDF\CertificadosTanatex\"
                         txtNombrePdf = LTrim(RTrim(txtNombre))
-                        txtNombreBusqueda = "c:\PdfPrintII\" + txtNombre + ".pdf"
+                        txtNombreBusqueda = "N:\Net\ProcesoImpresionPDF\CertificadosTanatex\" + txtNombre + ".pdf"
                         If File.Exists(txtNombreBusqueda) Then
                             File.Delete(txtNombreBusqueda)
                         End If

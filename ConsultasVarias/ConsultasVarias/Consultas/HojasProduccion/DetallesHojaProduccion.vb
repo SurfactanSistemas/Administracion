@@ -330,4 +330,10 @@ Public Class DetallesHojaProduccion
             .Show(Me)
         End With
     End Sub
+
+    Private Sub btnMovimientos_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnMovimientos.Click
+        With New DetalleMovimientosPT(txtPartida.Text)
+            .ShowDialog(Me)
+        End With
+    End Sub
 End Class

@@ -395,7 +395,7 @@ Public Class ImpreProcesos
                 Dim WPoe As String = OrDefault(.Item("Poe"), "")
                 Dim WIdentificacion As String = OrDefault(.Item("Identificacion"), "")
                 Dim WPoeLimpieza As String = OrDefault(.Item("PoeLimpieza"), "")
-                Dim ZTeorico As String = formatonumerico(OrDefault(ZTeorico, 0))
+                Dim ZTeorico As String = formatonumerico(OrDefault(WTeorico, 0))
                 Dim WDescTerminado As String = OrDefault(WTerm.Item("Descripcion"), "").ToString.Trim
 
                 If WIdentificacion.Trim <> "" Then WDescripcion = WIdentificacion.Trim & " - " & WDescripcion
@@ -414,7 +414,7 @@ Public Class ImpreProcesos
                 Dim WPoe As String = ""
                 Dim WIdentificacion As String = ""
                 Dim WPoeLimpieza As String = ""
-                Dim ZTeorico As String = formatonumerico(OrDefault(ZTeorico, 0))
+                Dim ZTeorico As String = formatonumerico(OrDefault(WTeorico, 0))
                 Dim WDescTerminado As String = OrDefault(WTerm.Item("Descripcion"), "").ToString.Trim
 
                 If WIdentificacion.Trim <> "" Then WDescripcion = WIdentificacion.Trim & " - " & WDescripcion
@@ -459,7 +459,7 @@ Public Class ImpreProcesos
                 Dim WPoe As String = OrDefault(.Item("Poe"), "")
                 Dim WIdentificacion As String = OrDefault(.Item("Identificacion"), "")
                 Dim WPoeLimpieza As String = OrDefault(.Item("PoeLimpieza"), "")
-                Dim ZTeorico As String = formatonumerico(OrDefault(ZTeorico, 0))
+                Dim ZTeorico As String = formatonumerico(OrDefault(WTeorico, 0))
                 Dim WDescTerminado As String = OrDefault(WTerm.Item("Descripcion"), "").ToString.Trim
 
                 Dim WMetodo As String = WPoeLimpieza & " - " & OrDefault(.Item("Metodo"), "").ToString.Trim
