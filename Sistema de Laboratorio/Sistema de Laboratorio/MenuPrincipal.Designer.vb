@@ -33,6 +33,9 @@ Partial Class MenuPrincipal
         Me.FarmaIngresoDeEnsayosProductosTerminadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ControlesIntermedisToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EspecificacionesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AutorizaciónDePedidosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DatosAImprimirEnCertificadosDeAnálisisToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EmisiónDeCertificadoDeAnálisisToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProductosTerminadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FHToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -105,7 +108,7 @@ Partial Class MenuPrincipal
         '
         'FarmaIngresoDeEnsayosProductosTerminadosToolStripMenuItem
         '
-        Me.FarmaIngresoDeEnsayosProductosTerminadosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ControlesIntermedisToolStripMenuItem, Me.EspecificacionesToolStripMenuItem})
+        Me.FarmaIngresoDeEnsayosProductosTerminadosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ControlesIntermedisToolStripMenuItem, Me.EspecificacionesToolStripMenuItem, Me.AutorizaciónDePedidosToolStripMenuItem, Me.DatosAImprimirEnCertificadosDeAnálisisToolStripMenuItem, Me.EmisiónDeCertificadoDeAnálisisToolStripMenuItem})
         Me.FarmaIngresoDeEnsayosProductosTerminadosToolStripMenuItem.Name = "FarmaIngresoDeEnsayosProductosTerminadosToolStripMenuItem"
         Me.FarmaIngresoDeEnsayosProductosTerminadosToolStripMenuItem.Size = New System.Drawing.Size(235, 22)
         Me.FarmaIngresoDeEnsayosProductosTerminadosToolStripMenuItem.Text = "Productos Terminados"
@@ -113,14 +116,32 @@ Partial Class MenuPrincipal
         'ControlesIntermedisToolStripMenuItem
         '
         Me.ControlesIntermedisToolStripMenuItem.Name = "ControlesIntermedisToolStripMenuItem"
-        Me.ControlesIntermedisToolStripMenuItem.Size = New System.Drawing.Size(191, 22)
+        Me.ControlesIntermedisToolStripMenuItem.Size = New System.Drawing.Size(298, 22)
         Me.ControlesIntermedisToolStripMenuItem.Text = "Controles Intermedios"
         '
         'EspecificacionesToolStripMenuItem
         '
         Me.EspecificacionesToolStripMenuItem.Name = "EspecificacionesToolStripMenuItem"
-        Me.EspecificacionesToolStripMenuItem.Size = New System.Drawing.Size(191, 22)
+        Me.EspecificacionesToolStripMenuItem.Size = New System.Drawing.Size(298, 22)
         Me.EspecificacionesToolStripMenuItem.Text = "Especificaciones"
+        '
+        'AutorizaciónDePedidosToolStripMenuItem
+        '
+        Me.AutorizaciónDePedidosToolStripMenuItem.Name = "AutorizaciónDePedidosToolStripMenuItem"
+        Me.AutorizaciónDePedidosToolStripMenuItem.Size = New System.Drawing.Size(298, 22)
+        Me.AutorizaciónDePedidosToolStripMenuItem.Text = "Autorización de Pedidos"
+        '
+        'DatosAImprimirEnCertificadosDeAnálisisToolStripMenuItem
+        '
+        Me.DatosAImprimirEnCertificadosDeAnálisisToolStripMenuItem.Name = "DatosAImprimirEnCertificadosDeAnálisisToolStripMenuItem"
+        Me.DatosAImprimirEnCertificadosDeAnálisisToolStripMenuItem.Size = New System.Drawing.Size(298, 22)
+        Me.DatosAImprimirEnCertificadosDeAnálisisToolStripMenuItem.Text = "Datos a Mostrar en Certificados de Análisis"
+        '
+        'EmisiónDeCertificadoDeAnálisisToolStripMenuItem
+        '
+        Me.EmisiónDeCertificadoDeAnálisisToolStripMenuItem.Name = "EmisiónDeCertificadoDeAnálisisToolStripMenuItem"
+        Me.EmisiónDeCertificadoDeAnálisisToolStripMenuItem.Size = New System.Drawing.Size(298, 22)
+        Me.EmisiónDeCertificadoDeAnálisisToolStripMenuItem.Text = "Emisión de Certificado de Análisis"
         '
         'ProductosTerminadosToolStripMenuItem
         '
@@ -269,4 +290,7 @@ Partial Class MenuPrincipal
     Friend WithEvents DatosAdicionalesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MateriasPrimasToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ProductosTerminadosToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents AutorizaciónDePedidosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents DatosAImprimirEnCertificadosDeAnálisisToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents EmisiónDeCertificadoDeAnálisisToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class

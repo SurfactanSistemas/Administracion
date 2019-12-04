@@ -22,7 +22,7 @@ Public Class ComparacionesMensualesValorUnico
         cmbPeriodo.SelectedIndex = 0
         txtAnioDesde.Text = _BuscarAnoPorDefecto()
         txtAnioHasta.Text = txtAnioDesde.Text
-        txtFechaDiaria.Text = Date.Now.AddDays(-1).ToString("dd/MM/yyyy")
+        txtFechaDiaria.Text = Date.Now.ToString("dd/MM/yyyy")
         txtMesComparativo.Text = Date.Now.ToString("MM/yyyy")
 
     End Sub

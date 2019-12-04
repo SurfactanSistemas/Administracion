@@ -1,4 +1,6 @@
-﻿Public Class MenuPrincipal
+﻿Imports System.IO.Ports
+
+Public Class MenuPrincipal
     Private Sub Abrir(ByVal frm As Form)
         frm.Show(Me)
     End Sub
@@ -90,6 +92,24 @@
             .pnlConsultarDatos.Visible = False
             .masktxtCodigo.Focus()
             .txtConsultaDatos.Visible = False
+        End With
+    End Sub
+
+    Private Sub AutorizaciónDePedidosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AutorizaciónDePedidosToolStripMenuItem.Click
+        With New ListadoAutorizacionPedidos
+            .Show(Me)
+        End With
+    End Sub
+
+    Private Sub DatosAImprimirEnCertificadosDeAnálisisToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DatosAImprimirEnCertificadosDeAnálisisToolStripMenuItem.Click
+        With New IngresoDatosMostrarEnCertificadosAnalisis
+            .Show(Me)
+        End With
+    End Sub
+
+    Private Sub EmisiónDeCertificadoDeAnálisisToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EmisiónDeCertificadoDeAnálisisToolStripMenuItem.Click
+        With New EmisionCertificadoAnalisis
+            .Show(Me)
         End With
     End Sub
 End Class
