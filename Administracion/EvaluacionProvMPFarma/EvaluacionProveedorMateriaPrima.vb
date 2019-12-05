@@ -348,11 +348,14 @@ Public Class EvaluacionProveedorMateriaPrima : Implements IAyudaProveedores, Con
     Private Sub txtProveedor_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtProveedor.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            If Trim(txtProveedor.Text) = "" Then : Exit Sub : End If
 
+            If Trim(txtProveedor.Text) = "" Then : Exit Sub : End If
+            ComboBox1.Items.Clear()
             WProveedor = txtProveedor.Text
 
             _TraerInformacionProveedorMP()
+
+
 
         ElseIf e.KeyData = Keys.Escape Then
             txtProveedor.Text = ""
@@ -379,6 +382,7 @@ Public Class EvaluacionProveedorMateriaPrima : Implements IAyudaProveedores, Con
         If TabControl1.TabPages.Count <= 1 Then
             MsgBox("El Proveedor no comercializa la cantidad necesaria de Productos como para ser copiados.", MsgBoxStyle.Information)
         Else
+            ComboBox1.SelectedIndex = 0
             PanelCopiarGrilla.Visible = True
             CheckBox1.Checked = True
             Label6.Text = TabControl1.SelectedTab.Text
@@ -389,18 +393,31 @@ Public Class EvaluacionProveedorMateriaPrima : Implements IAyudaProveedores, Con
 
 
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
-
+        Dim Codigo, Descripcion, DescComercial As String
         If ComboBox1.SelectedItem = TabControl1.SelectedTab.Text Then
             MsgBox("Accion innecesaria. Quiere copiar en la misma materia prima .")
         Else
-            Dim WControl = New EvaluacionPorMpUserControl(txtProveedor.Text, ComboBox1.SelectedItem)
+            Codigo = TabControl1.SelectedTab.Text
+            Descripcion = TabControl1.SelectedTab.Controls(0).Controls("TableLayoutPanel1").Controls("GroupBox1").Controls("lblDescripcion").Text
+            DescComercial = TabControl1.SelectedTab.Controls(0).Controls("TableLayoutPanel1").Controls("GroupBox1").Controls("lblDescComercial").Text
 
+            Dim WControl = New EvaluacionPorMpUserControl(txtProveedor.Text, ComboBox1.SelectedItem, True, Codigo, Descripcion, DescComercial)
+
+           
             WControl.Dock = DockStyle.Fill
 
             WControl.HabilitarControles(btnGrabar.Enabled)
 
             TabControl1.SelectedTab.Controls.Clear()
+
+'            WControl.lblCodigo.Text = Codigo
+'            WControl.lblDescripcion.Text = Descripcion
+'            WControl.lblDescComercial.Text = DescComercial
+'            TabControl1.SelectedTab.Controls(0).Controls("TableLayoutPanel1").Controls("GroupBox1").Controls("lblCodigo").Text = Codigo
+'            TabControl1.SelectedTab.Controls(0).Controls("TableLayoutPanel1").Controls("GroupBox1").Controls("lblDescripcion").Text = Descripcion
+'            TabControl1.SelectedTab.Controls(0).Controls("TableLayoutPanel1").Controls("GroupBox1").Controls("lblDescComercial").Text = DescComercial
             TabControl1.SelectedTab.Controls.Add(WControl)
+           
             PanelCopiarGrilla.Visible = False
             If CheckBox1.Checked = True Then
                 Dim WPath As String = ConfigurationManager.AppSettings("PATH_DOCS_EVAL_PROV_MP")
@@ -428,6 +445,7 @@ Public Class EvaluacionProveedorMateriaPrima : Implements IAyudaProveedores, Con
                 Next
             End If
         End If
+       
     End Sub
     Private Function YesNOMSGBOX(ByVal nombreAr As String) As Boolean
         Dim Msg, Style, Title, Help, Ctxt, Response

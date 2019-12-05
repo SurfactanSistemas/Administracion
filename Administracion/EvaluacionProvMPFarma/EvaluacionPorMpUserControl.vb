@@ -9,6 +9,11 @@ Public Class EvaluacionPorMpUserControl
     Private ReadOnly WProveedor As String
     Private ReadOnly WMP As String
 
+    Private ReadOnly sologrilla As Boolean
+    Private ReadOnly Codigo As String
+    Private ReadOnly Descripcion As String
+    Private ReadOnly DescripComercial As String
+
     Private Const YMARGEN = 2
     Private Const XMARGEN = 5
     Private WRow, Wcol As Integer
@@ -28,7 +33,7 @@ Public Class EvaluacionPorMpUserControl
 
     End Sub
 
-    Sub New(ByVal Proveedor As String, ByVal MP As String)
+    Sub New(ByVal Proveedor As String, ByVal MP As String, Optional ByVal sologrilla As Boolean = False, Optional ByVal Codigo As String = "", Optional ByVal Descripcion As String = "", Optional ByVal DescripComercial As String = "")
 
         ' This call is required by the designer.
         InitializeComponent()
@@ -37,6 +42,10 @@ Public Class EvaluacionPorMpUserControl
         WProveedor = Proveedor
         WMP = MP
 
+        Me.sologrilla = sologrilla
+        Me.Codigo = Codigo
+        Me.Descripcion = Descripcion
+        Me.DescripComercial = DescripComercial
         txtFechaVtoEvalua.Text = ""
 
         dgvItemsEvaluados.SinClickDerecho = True
@@ -87,12 +96,17 @@ Public Class EvaluacionPorMpUserControl
         If e.ProgressPercentage = 1 Then
             Dim WDatosArticulo As DataRow = TryCast(e.UserState, DataRow)
 
-            If WDatosArticulo IsNot Nothing Then
+            If WDatosArticulo IsNot Nothing And Not sologrilla Then
                 With WDatosArticulo
                     lblCodigo.Text = OrDefault(.Item("Codigo"), "")
                     lblDescripcion.Text = Trim(OrDefault(.Item("Descripcion"), "")).ToUpper()
                     lblDescComercial.Text = Trim(OrDefault(.Item("Comercial"), "")).ToUpper()
                 End With
+            Else
+                lblCodigo.Text = Codigo
+                lblDescripcion.Text = Descripcion
+                lblDescComercial.Text = DescripComercial
+
             End If
 
             Exit Sub
