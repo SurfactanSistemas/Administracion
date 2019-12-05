@@ -115,6 +115,12 @@ Public Class MenuPrincipal
         End With
     End Sub
 
+    Private Sub DatosAImprimirEnCertificadosDeAnálisisToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DatosAImprimirEnCertificadosDeAnálisisToolStripMenuItem.Click
+        With New IngresoDatosMostrarEnCertificadosAnalisis
+            .Show(Me)
+        End With
+    End Sub
+
     Private Sub ListaDePTVencidosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListaDePTVencidosToolStripMenuItem.Click
         With New ListadoPTVencidos
             .Show(Me)

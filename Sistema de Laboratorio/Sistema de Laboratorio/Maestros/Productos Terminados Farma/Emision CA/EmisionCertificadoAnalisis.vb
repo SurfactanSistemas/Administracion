@@ -2,6 +2,8 @@
 
 Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
 
+    Private ReadOnly WDescParametrosIngles As New Dictionary(Of String, String) From {{"Menor a", "Less than"}, {"Mayor a", "Greater than"}, {"Máximo", "Maximum"}, {"Mínimo", "Minimum"}, {"Informativo", "Informative"}, {"Cumple Ensayo", "Conform to test"}, {"Cumple", "Complies"}}
+
     Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
         For Each c As Control In {txtCliente, txtPartida, lblCantidad, lblDescCliente, lblDescProducto, lblDescProductocliente, lblTerminado}
             c.Text = ""
@@ -59,6 +61,12 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
         End If
 
         '
+        ' Agrego la fila para mostrar el Valor.
+        '
+        WPrueterFarma.Columns.Add("Valor")
+        WPrueterFarma.Columns.Add("Std")
+
+        '
         ' Modificamos el idioma del Certificado en caso de que el Cliente tenga idioma inglés cargado en su Ficha. Sino, dejamos el que hayan indicado.
         '
         If OrDefault(WCliente.Item("Idioma"), 0) = 1 Then cmbIdioma.SelectedIndex = 1
@@ -91,17 +99,91 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
         ' En caso de que sea Inglés el Idioma definido, se reemplaza los valores y unidades.
         '
         If cmbIdioma.SelectedIndex = 1 Then
-            Dim WCargaVIngles As DataTable = GetAll("SELECT * FROM CargaVIngles WHERE Terminado  = '" & lblTerminado.Text & "' And Paso = '99' Order by Renglon")
-            For Each row As DataRow In WCargaVIngles.Rows
-                Dim fila() As DataRow = WCargaV.Select("Renglon = '" & row.Item("Renglon") & "'")
-
-                If fila.Count > 0 Then
-                    fila(0).Item("Valor") = row.Item("Valor")
-                    fila(0).Item("UnidadesEspecif") = row.Item("UnidadesEspecif")
-                End If
-            Next
-
+            _ReemplazarConInfoEnIngles(WCargaV)
         End If
+
+        '
+        ' Determino qué valor y cómo se va a mostrar.
+        '
+        For Each row As Datarow In WPrueterFarma.rows
+            With row
+                If Val(OrDefault(.Item("Estado"), "")) = 199 Then
+                    .Item("Valor") = Trim(OrDefault(.Item("Resultado"), ""))
+                    .Item("Std") = ""
+                Else
+                    .Item("Std") = Trim(OrDefault(.Item("Valor"), ""))
+
+                    If cmbIdioma.SelectedIndex = 1 And Val(OrDefault(.Item("TipoEspecif"), "")) = 1 Then
+                        .Item("Valor") = String.Format("{0} {1}", Trim(OrDefault(.Item("ValorReal"), "")), Trim(OrDefault(.Item("UnidadEspecif"), "")))
+                    Else
+                        .Item("Valor") = Trim(OrDefault(.Item("Resultado"), ""))
+                    End If
+
+                    .Item("Valor") = Trim(.Item("Valor"))
+
+                End If
+            End With
+        Next
+
+        '
+        ' Calculamos la Fecha de Elaboración y Vencimiento.
+        '
+        Dim WFechaElaboracion, WFechaVencimiento As String
+        Dim WDatos As String() = Entidades.ProductoTerminado.CalcularFechaElabVto(lblTerminado.Text, txtPartida.Text, True)
+        WFechaElaboracion = WDatos(0)
+        WFechaVencimiento = WDatos(1)
+
+        Dim WSqls As New List(Of String)
+
+        WSqls.Add("DELETE FROM Certificado")
+
+        '
+        ' Para ajustar descripción de Parámetros.
+        '
+
+        For Each row As Datarow In WPrueterFarma.Rows
+            With row
+
+                .Item("Std") = Entidades.ProductoTerminado._GenerarImpreParametro(.Item("TipoEspecif"), .Item("DesdeEspecif"), .Item("HastaEspecif"), .Item("UnidadEspecif"), .Item("MenorIgualEspecif"))
+
+                '
+                ' Ajustamos en caso de que sea el certificado en inglés.
+                '
+                If cmbIdioma.SelectedIndex = 1 Then
+                    .Item("Std") = _ReemplazarDescripcionParametroPorIngles(.Item("Std"))
+                End If
+
+            End With
+        Next
+
+
+
+    End Sub
+
+    Private Function _ReemplazarDescripcionParametroPorIngles(ByVal Parametro As String) As String
+
+        For Each pair As KeyValuePair(Of String, String) In WDescParametrosIngles
+            If Parametro.Contains(pair.Key) Then
+                Return Parametro.Replace(pair.Key, pair.Value)
+            End If
+        Next
+
+        Return Parametro
+
+    End Function
+
+    Private Sub _ReemplazarConInfoEnIngles(ByRef WCargaV As DataTable)
+
+        Dim WCargaVIngles As DataTable = GetAll("SELECT * FROM CargaVIngles WHERE Terminado  = '" & lblTerminado.Text & "' And Paso = '99' Order by Renglon")
+
+        For Each row As DataRow In WCargaVIngles.Rows
+            Dim fila() As DataRow = WCargaV.Select("Renglon = '" & row.Item("Renglon") & "'")
+
+            If fila.Count > 0 Then
+                fila(0).Item("Valor") = row.Item("Valor")
+                fila(0).Item("UnidadesEspecif") = row.Item("UnidadesEspecif")
+            End If
+        Next
 
     End Sub
 

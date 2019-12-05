@@ -6369,7 +6369,7 @@ Public Class Pagos
                 'sumarImportes()
             End If
         End If
-        sumarImportes()
+        'sumarImportes()
     End Sub
 
     Private Sub _RecalcularIBCABA()
