@@ -206,7 +206,7 @@ Namespace Entidades
 
                         Dim WDatosMono() As String = _CalculaMonoOtro(Partida, WEmpresaHoja)
 
-                        If WDatosMono(0) = "-1" And WDatosMono(1) = "-1" Then Exit Function
+                        If WDatosMono(0) = "-1" And WDatosMono(1) = "-1" Then Return {"", ""}
 
                         If Trim(WDatosMono(1)) <> "" Then
                             WVencimiento = WDatosMono(1)
@@ -221,7 +221,7 @@ Namespace Entidades
                                 If Not SoloConsulta Then
                                     MsgBox("La Partida se encuentra vencida " + Chr(13) + _
                         "Por favor comuniquese con el laboratorio para su revalida", MsgBoxStyle.Exclamation)
-                                    Exit Function
+                                    Return {"", ""}
                                 End If
                             End If
                         End If
@@ -230,7 +230,7 @@ Namespace Entidades
                 Else
                     Dim WDatosMono() As String = _CalculaMonoOtro(Partida, WEmpresaHoja)
 
-                    If WDatosMono(0) = "-1" And WDatosMono(1) = "-1" Then Exit Function
+                    If WDatosMono(0) = "-1" And WDatosMono(1) = "-1" Then Return {"", ""}
 
                     If Trim(WDatosMono(1)) <> "" Then
                         WVencimiento = WDatosMono(1)
@@ -245,7 +245,7 @@ Namespace Entidades
                             If Not SoloConsulta Then
                                 MsgBox("La Partida se encuentra vencida " + Chr(13) + _
                     "Por favor comuniquese con el laboratorio para su revalida", MsgBoxStyle.Exclamation)
-                                Exit Function
+                                Return {"", ""}
                             End If
                         End If
                     End If
@@ -254,7 +254,7 @@ Namespace Entidades
 
                 Dim WDatosMono() As String = _CalculaMonoOtro(Partida, WEmpresaHoja)
 
-                If WDatosMono(0) = "-1" And WDatosMono(1) = "-1" Then Exit Function
+                If WDatosMono(0) = "-1" And WDatosMono(1) = "-1" Then Return {"", ""}
 
                 If Trim(WDatosMono(0)) <> "" Then
                     WElaboracion = WDatosMono(0)
@@ -268,7 +268,7 @@ Namespace Entidades
                             If Not SoloConsulta Then
                                 MsgBox("La Partida se encuentra vencida " + Chr(13) + _
                                        "Por favor comuniquese con el laboratorio para su revalida", MsgBoxStyle.Exclamation)
-                                Exit Function
+                                Return {"", ""}
                             End If
                         End If
                     End If
@@ -297,6 +297,12 @@ Namespace Entidades
             WFechaVtoI = "99/99/9999"
             WFechaVtoII = "99/99/9999"
             WFechaVtoIII = "99/99/9999"
+            WProducto = ""
+            WLote1 = ""
+            WLote2 = ""
+            WLote3 = ""
+            WArticulo = ""
+            WTipo = ""
 
             Dim WHoja As DataTable = GetAll("SELECT Lote1, Lote2, Lote3, Tipo, Articulo, Producto FROM Hoja WHERE Hoja = '" & Hoja & "'", EmpresaHoja)
 
@@ -448,6 +454,53 @@ Namespace Entidades
         ''' </summary>
         Public Shared Function EsMono(ByVal Codigo As String) As Boolean
             Return GetSingle("SELECT Codigo FROM codigomono WHERE Codigo = '" & Codigo & "'", "SurfactanSa") IsNot Nothing
+        End Function
+
+        ''' <summary>
+        ''' Devuelve la descripción del Parámetro de un ensayo.
+        ''' </summary>
+        Public Shared Function _GenerarImpreParametro(ByVal wTipoEspecif As String, ByVal wDesdeEspecif As String, ByVal wHastaEspecif As String, ByVal wUnidadEspecif As String, ByVal wMenorIgualEspecif As String, Optional ByVal WInformaEspecif As String = "1") As String
+            If Val(wTipoEspecif) = 0 Then Return "Cumple Ensayo"
+            If Trim(wDesdeEspecif) = "" And Trim(wHastaEspecif) = "" Then Return ""
+
+            wTipoEspecif = Trim(wTipoEspecif)
+            wDesdeEspecif = Trim(wDesdeEspecif)
+            wHastaEspecif = Trim(wHastaEspecif)
+            wUnidadEspecif = Trim(wUnidadEspecif)
+            wMenorIgualEspecif = Trim(wMenorIgualEspecif)
+            WInformaEspecif = Trim(WInformaEspecif)
+
+            If {99, 999, 9999, 99999}.Contains(Val(wHastaEspecif)) Then wHastaEspecif = "9999"
+
+            If Val(wDesdeEspecif) <> 0 Or Val(wHastaEspecif) <> 9999 Then
+
+                If Val(wDesdeEspecif) <> 0 And Val(wHastaEspecif) <> 0 Then
+                    Return String.Format("{0} - {1} {2}", wDesdeEspecif, wHastaEspecif, wUnidadEspecif)
+                End If
+
+                If Val(wDesdeEspecif) = 0 And Val(wHastaEspecif) <> 0 Then
+
+                    If Val(wMenorIgualEspecif) = 1 Then Return String.Format("Máximo {0} {1}", wHastaEspecif, wUnidadEspecif)
+
+                    Return String.Format("Menor a {0} {1}", wHastaEspecif, wUnidadEspecif)
+
+                End If
+
+                If Val(wDesdeEspecif) <> 0 And Val(wHastaEspecif) = 9999 Then
+
+                    If Val(wMenorIgualEspecif) = 1 Then Return String.Format("Mínimo {0} {1}", wHastaEspecif, wUnidadEspecif)
+
+                    Return String.Format("Mayor a {0} {1}", wHastaEspecif, wUnidadEspecif)
+
+                End If
+
+            End If
+
+            If Val(WInformaEspecif) = 0 Then
+                Return "Informativo"
+            End If
+
+            Return ""
         End Function
 
     End Class

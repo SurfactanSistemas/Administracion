@@ -592,8 +592,30 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
 
     Private Sub _ActualizarRegistroProduccion()
 
-        Dim WVersion, WFechaVersion, WControlCambio, WImprePlanilla, WImprePlanillaII, WImprePlanillaIII, WMetodo, WLibera, WLimpieza, WEpp, WHumedad, WPeso, WEquipo, WArticulo, WPTerminado, WLetra, WDescripcion, WCantidad, WDescEquipo, WPoe, WIdentificacion, WPoeLimpieza, WArea, ZTipoProceso As String
-
+        Dim WVersion, WFechaVersion, WControlCambio, WImprePlanilla, WImprePlanillaII, WImprePlanillaIII, WMetodo, WLibera, WLimpieza, WEpp, WHumedad, WPeso, WEquipo, WArticulo, WPTerminado, WLetra, WCantidad, WDescEquipo, WPoe, WIdentificacion, WPoeLimpieza, WArea, ZTipoProceso As String
+        WVersion = ""
+        WFechaVersion = ""
+        WControlCambio = ""
+        WImprePlanilla = ""
+        WImprePlanillaII = ""
+        WImprePlanillaIII = ""
+        WMetodo = ""
+        WLibera = ""
+        WLimpieza = ""
+        WEpp = ""
+        WHumedad = ""
+        WPeso = ""
+        WEquipo = ""
+        WArticulo = ""
+        WPTerminado = ""
+        WLetra = ""
+        WCantidad = ""
+        WDescEquipo = ""
+        WPoe = ""
+        WIdentificacion = ""
+        WPoeLimpieza = ""
+        WArea = ""
+        ZTipoProceso = ""
         '
         ' Extraemos los datos de CargaIII.
         '
@@ -611,6 +633,18 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
         For Each row As DataRow In WCargaV.Rows
 
             Dim WEnsayo, WValor, WFarmacopea, WUnidadEspecif, WDesdeEspecif, WHastaEspecif, WTipoEspecif, WInformaEspecif, WMenorIgualEspecif, WImpreResultado, WMaximo As String
+
+            WEnsayo = ""
+            WValor = ""
+            WFarmacopea = ""
+            WUnidadEspecif = ""
+            WDesdeEspecif = ""
+            WHastaEspecif = ""
+            WTipoEspecif = ""
+            WInformaEspecif = ""
+            WMenorIgualEspecif = ""
+            WImpreResultado = ""
+            WMaximo = ""
 
             With row
 
@@ -734,6 +768,10 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
 
         Dim ZZItem, WClave, XDescripcion As String
         Dim WImprePeso, WImpreHumedad, WDesEpp, WTipo As String
+        WImprePeso = ""
+        WImpreHumedad = ""
+        WDesEpp = ""
+        WTipo = ""
 
         Dim WMatAuxi As DataRow = GetSingle("SELECT Descripcion FROM MaterialAuxiliar WHERE Codigo = '" & WEpp & "'")
 
@@ -742,6 +780,10 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
         End If
 
         Dim ZSql, Auxi, XPaso As String
+        ZSql = ""
+        Auxi = ""
+        XPaso = ""
+
         Dim WItem As Integer = 0
 
         If Val(WEquipo) <> 0 Then
@@ -1185,6 +1227,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
             Dim ZValor1, ZValor2, ZValor3, ZValor4, ZValor5, ZValor6, ZValor7, ZValor8, ZValor9, ZValor10 As String
             Dim ZValor11, ZValor22, ZValor33, ZValor44, ZValor55, ZValor66, ZValor77, ZValor88, ZValor99, ZValor1010 As String
             Dim ZFechaInicio, ZFechaFinal, ZObservaciones As String
+            ZObservaciones = ""
 
             With row
                 ZEnsayo1 = OrDefault(.Item("Ensayo1"), "")

@@ -1,6 +1,4 @@
-﻿Imports System.IO.Ports
-
-Public Class MenuPrincipal
+﻿Public Class MenuPrincipal
     Private Sub Abrir(ByVal frm As Form)
         frm.Show(Me)
     End Sub
@@ -51,31 +49,31 @@ Public Class MenuPrincipal
         frm.Show(Me)
     End Sub
 
-    Private Sub EspecificacionesPorVersiónToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EspecificacionesPorVersiónToolStripMenuItem.Click
+    Private Sub EspecificacionesPorVersiónToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles EspecificacionesPorVersiónToolStripMenuItem.Click
         With New EspecificacionesMPPorVersion
             .Show(Me)
         End With
     End Sub
 
-    Private Sub EmisiónDeEtiquetasSimplesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EmisiónDeEtiquetasSimplesToolStripMenuItem.Click
+    Private Sub EmisiónDeEtiquetasSimplesToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles EmisiónDeEtiquetasSimplesToolStripMenuItem.Click
         With New EmisionEtiquetasSimples
             .Show(Me)
         End With
     End Sub
 
-    Private Sub HToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles HToolStripMenuItem.Click
+    Private Sub HToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles HToolStripMenuItem.Click
         With New FrasesHP("H")
             .Show(Me)
         End With
     End Sub
 
-    Private Sub PToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PToolStripMenuItem.Click
+    Private Sub PToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles PToolStripMenuItem.Click
         With New FrasesHP("P")
             .Show(Me)
         End With
     End Sub
 
-    Private Sub MateriasPrimasToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MateriasPrimasToolStripMenuItem1.Click
+    Private Sub MateriasPrimasToolStripMenuItem1_Click(ByVal sender As Object, ByVal e As EventArgs) Handles MateriasPrimasToolStripMenuItem1.Click
         With New IngresoDatosAdicMP("MP")
             .Show(Me)
             .pnlConsultarDatos.Visible = False
@@ -86,7 +84,7 @@ Public Class MenuPrincipal
 
     End Sub
 
-    Private Sub ProductosTerminadosToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ProductosTerminadosToolStripMenuItem1.Click
+    Private Sub ProductosTerminadosToolStripMenuItem1_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ProductosTerminadosToolStripMenuItem1.Click
         With New IngresoDatosAdicMP("PT")
             .Show(Me)
             .pnlConsultarDatos.Visible = False
@@ -95,44 +93,46 @@ Public Class MenuPrincipal
         End With
     End Sub
 
-    Private Sub AutorizaciónDePedidosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AutorizaciónDePedidosToolStripMenuItem.Click
-        With New ListadoAutorizacionPedidos
-        .Show(me)
-        end with
-    End Sub
-
-    Private Sub ListadoDeEnsayosDePTToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListadoDeEnsayosDePTToolStripMenuItem.Click
+    Private Sub ListadoDeEnsayosDePTToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ListadoDeEnsayosDePTToolStripMenuItem.Click
         With New ListadoDeEnsayoDePT
             .Show(Me)
         End With
     End Sub
 
-    Private Sub DatosAImprimirEnCertificadosDeAnálisisToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DatosAImprimirEnCertificadosDeAnálisisToolStripMenuItem.Click
-        With New IngresoDatosMostrarEnCertificadosAnalisis
-        .Show(me)
-        end with
+    Private Sub AutorizaciónDePedidosToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles AutorizaciónDePedidosToolStripMenuItem.Click
+        With New ListadoAutorizacionPedidos
+            .Show(Me)
+        End With
     End Sub
 
-    Private Sub ListaDeEspecificacionesDePTAFechaToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListaDeEspecificacionesDePTAFechaToolStripMenuItem.Click
+    Private Sub DatosAImprimirEnCertificadosDeAnálisisToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles DatosAImprimirEnCertificadosDeAnálisisToolStripMenuItem.Click
+        With New IngresoDatosMostrarEnCertificadosAnalisis
+            .Show(Me)
+        End With
+    End Sub
+
+    Private Sub ListaDeEspecificacionesDePTAFechaToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ListaDeEspecificacionesDePTAFechaToolStripMenuItem.Click
         With New ListadoEspecifPTFecha
             .Show(Me)
         End With
     End Sub
 
-    Private Sub EmisiónDeCertificadoDeAnálisisToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EmisiónDeCertificadoDeAnálisisToolStripMenuItem.Click
+    Private Sub EmisiónDeCertificadoDeAnálisisToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles EmisiónDeCertificadoDeAnálisisToolStripMenuItem.Click
         With New EmisionCertificadoAnalisis
-        .Show(me)
-        end with
+            .Show(Me)
+        End With
     End Sub
-    Private Sub ListaDePTVencidosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListaDePTVencidosToolStripMenuItem.Click
+
+    Private Sub ListaDePTVencidosToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ListaDePTVencidosToolStripMenuItem.Click
         With New ListadoPTVencidos
             .Show(Me)
         End With
     End Sub
 
-    Private Sub ConsultaDeEspecificacionesPorVersionToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ConsultaDeEspecificacionesPorVersionToolStripMenuItem.Click
+    Private Sub ConsultaDeEspecificacionesPorVersionToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ConsultaDeEspecificacionesPorVersionToolStripMenuItem.Click
         With New ConsDeEspefXVersion
             .Show(Me)
         End With
     End Sub
+
 End Class

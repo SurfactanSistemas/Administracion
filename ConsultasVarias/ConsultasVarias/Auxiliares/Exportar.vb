@@ -6,7 +6,7 @@ Public Class Exportar
 
         Try
 
-            Dim TipoSalida As [Enum]
+            Dim TipoSalida As [Enum] = Enumeraciones.FormatoExportacion.PorPantalla
 
             Select Case ComboBox1.SelectedIndex
                 Case 0

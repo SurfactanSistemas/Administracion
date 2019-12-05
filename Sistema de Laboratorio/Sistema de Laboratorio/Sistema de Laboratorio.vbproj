@@ -182,24 +182,6 @@
     <Compile Include="Consultas\NotasCertificadosAnalisis\NotasCertificadosAnalisis.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Maestros\Ingreso Frases H &amp; P\FrasesHP.Designer.vb">
-      <DependentUpon>FrasesHP.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Maestros\Ingreso Frases H &amp; P\FrasesHP.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Maestros\Ingreso Frases H &amp; P\HojaIngresoFrases.Designer.vb">
-      <DependentUpon>HojaIngresoFrases.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Maestros\Ingreso Frases H &amp; P\HojaIngresoFrases.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Maestros\Ingreso Frases H &amp; P\IngresoDatosAdicMP.Designer.vb">
-      <DependentUpon>IngresoDatosAdicMP.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Maestros\Ingreso Frases H &amp; P\IngresoDatosAdicMP.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="ListadoDeEnsayoDePT.Designer.vb">
       <DependentUpon>ListadoDeEnsayoDePT.vb</DependentUpon>
     </Compile>
@@ -216,6 +198,24 @@
       <DependentUpon>ListadoPTVencidos.vb</DependentUpon>
     </Compile>
     <Compile Include="ListadoPTVencidos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestros\Ingreso Frases H &amp; P\FrasesHP.Designer.vb">
+      <DependentUpon>FrasesHP.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\Ingreso Frases H &amp; P\FrasesHP.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestros\Ingreso Frases H &amp; P\HojaIngresoFrases.Designer.vb">
+      <DependentUpon>HojaIngresoFrases.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\Ingreso Frases H &amp; P\HojaIngresoFrases.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestros\Ingreso Frases H &amp; P\IngresoDatosAdicMP.Designer.vb">
+      <DependentUpon>IngresoDatosAdicMP.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\Ingreso Frases H &amp; P\IngresoDatosAdicMP.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Login.Designer.vb">
@@ -358,9 +358,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DBAuxi.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Reportes\DBAuxi.vb">
-      <DependentUpon>DBAuxi.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Reportes\Ensayos\ReporteListadoEnsayos.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -379,7 +376,7 @@
       <DependentUpon>ReporteDatosAdiciolesMP.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\Ingreso Datos Adicionales MP\ReporteDatosAdicionalesPT.vb">
+    <Compile Include="Reportes\Ingreso Datos Adicionales PT\ReporteDatosAdicionalesPT.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReporteDatosAdicionalesPT.rpt</DependentUpon>
@@ -469,25 +466,19 @@
       <DependentUpon>ImpreEspecificacionesPTIngles.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\Listado Ensayos PT\ReporteListadoEnsayosPT.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ReporteListadoEnsayosPT.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reportes\ReporteEspecifXVersion.vb">
+    <Compile Include="Reportes\Productos Terminados\Especificaciones\ReporteEspecifXVersion.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReporteEspecifXVersion.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\ReporteListadoEspecifPTaFecha.vb">
+    <Compile Include="Reportes\Productos Terminados\Especificaciones\ReporteListadoEspecifPTaFecha.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReporteListadoEspecifPTaFecha.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\ReporteListaPTVencidos.vb">
+    <Compile Include="Reportes\Productos Terminados\Especificaciones\ReporteListaPTVencidos.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReporteListaPTVencidos.rpt</DependentUpon>
@@ -522,7 +513,6 @@
     <EmbeddedResource Include="Auxiliares\VentanasIntermedias\Productos Terminados Farma\PDFVersionesPTFarma.resx">
       <DependentUpon>PDFVersionesPTFarma.vb</DependentUpon>
     </EmbeddedResource>
-
     <EmbeddedResource Include="Auxiliares\VentanasIntermedias\Productos Terminados Farma\Pool de Ensayos\IngresoNuevoPoolEnsayos.resx">
       <DependentUpon>IngresoNuevoPoolEnsayos.vb</DependentUpon>
     </EmbeddedResource>
@@ -543,15 +533,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Maestros\Ingreso Frases H &amp; P\IngresoDatosAdicMP.resx">
       <DependentUpon>IngresoDatosAdicMP.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ListadoDeEnsayoDePT.resx">
-      <DependentUpon>ListadoDeEnsayoDePT.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ListadoEspecifPTFecha.resx">
-      <DependentUpon>ListadoEspecifPTFecha.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ListadoPTVencidos.resx">
-      <DependentUpon>ListadoPTVencidos.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.vb</DependentUpon>
@@ -631,7 +612,7 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteDatosAdiciolesMP.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Ingreso Datos Adicionales MP\ReporteDatosAdicionalesPT.rpt">
+    <EmbeddedResource Include="Reportes\Ingreso Datos Adicionales PT\ReporteDatosAdicionalesPT.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteDatosAdicionalesPT.vb</LastGenOutput>
     </EmbeddedResource>
@@ -691,19 +672,15 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ImpreEspecificacionesPTIngles.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Listado Ensayos PT\ReporteListadoEnsayosPT.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>ReporteListadoEnsayosPT.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\ReporteEspecifXVersion.rpt">
+    <EmbeddedResource Include="Reportes\Productos Terminados\Especificaciones\ReporteEspecifXVersion.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteEspecifXVersion.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\ReporteListadoEspecifPTaFecha.rpt">
+    <EmbeddedResource Include="Reportes\Productos Terminados\Especificaciones\ReporteListadoEspecifPTaFecha.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteListadoEspecifPTaFecha.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\ReporteListaPTVencidos.rpt">
+    <EmbeddedResource Include="Reportes\Productos Terminados\Especificaciones\ReporteListaPTVencidos.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteListaPTVencidos.vb</LastGenOutput>
     </EmbeddedResource>
@@ -739,6 +716,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Auxiliares\Ayudas\" />
+    <Folder Include="Maestros\Productos Terminados No Farma\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
@@ -747,7 +725,6 @@
     <Content Include="libs\info.lundin.math.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Resources\LogoSurfactan.jpg" />
     <None Include="SGA\SGA9.PNG" />
     <None Include="SGA\SGA8.PNG" />
     <None Include="SGA\SGA7.PNG" />

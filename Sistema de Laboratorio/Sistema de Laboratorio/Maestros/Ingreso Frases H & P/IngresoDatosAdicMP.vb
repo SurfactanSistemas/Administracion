@@ -2366,7 +2366,7 @@ Public Class IngresoDatosAdicMP
         Try
             If (TipoProducto = "PT") Then
                 Dim tabla2 As DataTable = TryCast(DGV_FrasesHIngles.DataSource, DataTable)
-                Dim RowABorrar As DataRow
+                Dim RowABorrar As DataRow = Nothing
                 For Each row As DataRow In tabla2.Rows
                     If ((row.Item("Codigo").ToString()).Trim() = codigoH) Then
 
@@ -2374,7 +2374,7 @@ Public Class IngresoDatosAdicMP
                         'tabla2.Rows.Remove(row)
                     End If
                 Next
-                tabla2.Rows.Remove(RowABorrar)
+                If RowABorrar IsNot Nothing Then tabla2.Rows.Remove(RowABorrar)
             End If
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -2394,7 +2394,7 @@ Public Class IngresoDatosAdicMP
         Try
             If (TipoProducto = "PT") Then
                 Dim tabla2 As DataTable = TryCast(DGV_FrasesPIngles.DataSource, DataTable)
-                Dim RowABorrar As DataRow
+                Dim RowABorrar As DataRow = Nothing
                 For Each row As DataRow In tabla2.Rows
                     If ((row.Item("Codigo").ToString()).Trim() = codigo) Then
 
@@ -2402,7 +2402,7 @@ Public Class IngresoDatosAdicMP
                         'tabla2.Rows.Remove(row)
                     End If
                 Next
-                tabla2.Rows.Remove(RowABorrar)
+                If RowABorrar IsNot Nothing Then tabla2.Rows.Remove(RowABorrar)
             End If
         Catch ex As Exception
             MsgBox(ex.Message)
