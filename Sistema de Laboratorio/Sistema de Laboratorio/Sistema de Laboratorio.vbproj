@@ -170,6 +170,12 @@
     <Compile Include="Clases\Helper.vb" />
     <Compile Include="Clases\Operador.vb" />
     <Compile Include="Clases\Query.vb" />
+    <Compile Include="ConsDeEspefXVersion.Designer.vb">
+      <DependentUpon>ConsDeEspefXVersion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ConsDeEspefXVersion.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Consultas\NotasCertificadosAnalisis\NotasCertificadosAnalisis.Designer.vb">
       <DependentUpon>NotasCertificadosAnalisis.vb</DependentUpon>
     </Compile>
@@ -192,6 +198,24 @@
       <DependentUpon>IngresoDatosAdicMP.vb</DependentUpon>
     </Compile>
     <Compile Include="Maestros\Ingreso Frases H &amp; P\IngresoDatosAdicMP.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListadoDeEnsayoDePT.Designer.vb">
+      <DependentUpon>ListadoDeEnsayoDePT.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ListadoDeEnsayoDePT.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListadoEspecifPTFecha.Designer.vb">
+      <DependentUpon>ListadoEspecifPTFecha.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ListadoEspecifPTFecha.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListadoPTVencidos.Designer.vb">
+      <DependentUpon>ListadoPTVencidos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ListadoPTVencidos.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Login.Designer.vb">
@@ -334,6 +358,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DBAuxi.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\DBAuxi.vb">
+      <DependentUpon>DBAuxi.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Ensayos\ReporteListadoEnsayos.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -350,6 +377,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReporteDatosAdiciolesMP.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Ingreso Datos Adicionales MP\ReporteDatosAdicionalesPT.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteDatosAdicionalesPT.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\IngresoFrasesHP\ReporteListadosP.vb">
@@ -436,6 +469,30 @@
       <DependentUpon>ImpreEspecificacionesPTIngles.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\Listado Ensayos PT\ReporteListadoEnsayosPT.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteListadoEnsayosPT.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ReporteEspecifXVersion.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteEspecifXVersion.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ReporteListadoEspecifPTaFecha.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteListadoEspecifPTaFecha.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ReporteListaPTVencidos.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteListaPTVencidos.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\VistaPrevia.designer.vb">
       <DependentUpon>VistaPrevia.vb</DependentUpon>
     </Compile>
@@ -465,6 +522,7 @@
     <EmbeddedResource Include="Auxiliares\VentanasIntermedias\Productos Terminados Farma\PDFVersionesPTFarma.resx">
       <DependentUpon>PDFVersionesPTFarma.vb</DependentUpon>
     </EmbeddedResource>
+
     <EmbeddedResource Include="Auxiliares\VentanasIntermedias\Productos Terminados Farma\Pool de Ensayos\IngresoNuevoPoolEnsayos.resx">
       <DependentUpon>IngresoNuevoPoolEnsayos.vb</DependentUpon>
     </EmbeddedResource>
@@ -485,6 +543,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Maestros\Ingreso Frases H &amp; P\IngresoDatosAdicMP.resx">
       <DependentUpon>IngresoDatosAdicMP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListadoDeEnsayoDePT.resx">
+      <DependentUpon>ListadoDeEnsayoDePT.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListadoEspecifPTFecha.resx">
+      <DependentUpon>ListadoEspecifPTFecha.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListadoPTVencidos.resx">
+      <DependentUpon>ListadoPTVencidos.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.vb</DependentUpon>
@@ -564,6 +631,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteDatosAdiciolesMP.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Ingreso Datos Adicionales MP\ReporteDatosAdicionalesPT.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteDatosAdicionalesPT.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\IngresoFrasesHP\ReporteListadosP.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteListadosP.vb</LastGenOutput>
@@ -620,6 +691,22 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ImpreEspecificacionesPTIngles.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Listado Ensayos PT\ReporteListadoEnsayosPT.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteListadoEnsayosPT.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ReporteEspecifXVersion.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteEspecifXVersion.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ReporteListadoEspecifPTaFecha.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteListadoEspecifPTaFecha.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ReporteListaPTVencidos.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteListaPTVencidos.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\VistaPrevia.resx">
       <DependentUpon>VistaPrevia.vb</DependentUpon>
     </EmbeddedResource>
@@ -660,6 +747,7 @@
     <Content Include="libs\info.lundin.math.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\LogoSurfactan.jpg" />
     <None Include="SGA\SGA9.PNG" />
     <None Include="SGA\SGA8.PNG" />
     <None Include="SGA\SGA7.PNG" />

@@ -1,8 +1,11 @@
-﻿Imports ClasesCompartidas
+﻿Imports System.Configuration
+Imports ClasesCompartidas
 Imports System.Data.SqlClient
+Imports System.Globalization
 Imports System.IO
 Imports ConsultasVarias.Clases
 Imports CrystalDecisions.CrystalReports.Engine
+Imports Microsoft.Office.Core
 Imports Microsoft.Office.Interop.Outlook
 
 Public Class Pagos
@@ -43,6 +46,10 @@ Public Class Pagos
     End Property
 
     Private Sub Pagos_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
+
+        pnlDifCamXFactura.Visible = False
+
+
 
         Text = "Ingreso de Pagos a Proveedores                                                                                                                        " & Globals.NombreEmpresa()
 
@@ -6362,6 +6369,7 @@ Public Class Pagos
                 'sumarImportes()
             End If
         End If
+        sumarImportes()
     End Sub
 
     Private Sub _RecalcularIBCABA()
@@ -6715,7 +6723,9 @@ Public Class Pagos
             cn.ConnectionString = _CS()
             cn.Open()
             cm.Connection = cn
-            cm.CommandText = "SELECT Cambio, CambioDivisa FROM Cambios WHERE Fecha = '" & Fecha & "'"
+            cm.CommandText = "SELECT Cambio, CambioDivisa FROM Cambios WHERE Fecha = '" & Fecha.Substring(0, 10) & "'"
+
+            'Dim fechaAver As String = Fecha.Substring(0, 10)
 
             dr = cm.ExecuteReader()
 
@@ -6927,13 +6937,49 @@ Public Class Pagos
 
         Next
 
+        Dim ImprimeParidad As Boolean = _ConsultaImprecionDeParidad()
+
         With VistaPrevia
             .Reporte = New AnalisisDiferenciaCambioOP
+            .Reporte.SetParameterValue(0, ImprimeParidad)
             .Formula = "{Pagos.Orden} IN '" & txtOrdenPago.Text & "' TO '" & txtOrdenPago.Text & "' AND {Pagos.Impolist} <> 0 AND {Pagos.TipoReg} IN '2' TO '2'"
             .Mostrar()
             '.Imprimir()
         End With
     End Sub
+
+    Private Function _ConsultaImprecionDeParidad() As Boolean
+        Dim ParidadInicial, ParidadAComparar As Double
+        Dim Fecha As String
+        Dim Numero As String
+        Dim Tipo As String
+        Dim Punto As String
+        Dim Letra As String
+        Dim proveedor As String
+
+
+
+        For i As Integer = 0 To 14
+            Numero = gridPagos.Rows(i).Cells("Numero").Value
+            Tipo = gridPagos.Rows(i).Cells("Tipo").Value
+            Punto = gridPagos.Rows(i).Cells("Punto").Value
+            proveedor = txtProveedor.Text
+            Letra = gridPagos.Rows(i).Cells("Letra").Value
+            If (i = 0) Then
+                Fecha = _BuscarFechaFacturaPorProv(Tipo, Punto, Letra, proveedor, Numero)
+                ParidadInicial = _BuscarCambioDiviza(Fecha)
+            Else
+                Fecha = _BuscarFechaFacturaPorProv(Tipo, Punto, Letra, proveedor, Numero)
+                ParidadAComparar = _BuscarCambioDiviza(Fecha)
+                If (ParidadAComparar <> ParidadInicial) Then
+                    Return True
+                End If
+            End If
+        Next
+
+    End Function
+
+
 
     Private Sub txtFechaAux_Leave(ByVal sender As Object, ByVal e As EventArgs) Handles txtFechaAux.Leave
         If WRow >= 0 And Wcol >= 0 Then
@@ -7006,7 +7052,7 @@ Public Class Pagos
         Next
     End Sub
 
-    Private Sub ckNoCalcRetenciones_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles ckNoCalcRetenciones.CheckedChanged
+    Private Sub ckNoCalcRetenciones_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles ckNoCalcRetenciones.CheckedChanged, ckNoCalcRetenciones.CheckStateChanged
         _RecalcularRetenciones()
     End Sub
 
@@ -7101,7 +7147,7 @@ Public Class Pagos
                         If EsPorTransferencia Then Exit For
                     Case 3
                     Case Else
-                            EsPorTransferencia = False
+                        EsPorTransferencia = False
                 End Select
 
 
@@ -7362,4 +7408,393 @@ Public Class Pagos
 
         End With
     End Sub
+
+    Private Sub btnDifCambioXFactura_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDifCambioXFactura.Click
+
+        Dim TipoPago As Integer
+        TipoPago = _BuscarTipoDePago(gridPagos.Rows(0).Cells("Tipo").Value, gridPagos.Rows(0).Cells("Punto").Value, gridPagos.Rows(0).Cells("Letra").Value, txtProveedor.Text, gridPagos.Rows(0).Cells("Numero").Value)
+        If (TipoPago = 2) Then
+            For Each Factura As DataGridViewRow In GridPagosXFacturas.Rows
+                Factura.Cells("Check").Value = False
+            Next
+            pnlDifCamXFactura.Visible = True
+            _CargarGridPagosXFactura()
+        Else
+            MsgBox("Factura en pesos, no hay calculo de diferencia")
+        End If
+       
+    End Sub
+
+    Private Sub btnVolver_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVolver.Click
+        pnlDifCamXFactura.Visible = False
+    End Sub
+
+    Private Sub _CargarGridPagosXFactura()
+
+        For i As Integer = 0 To 14
+            GridPagosXFacturas.Rows.Add()
+            GridPagosXFacturas.Rows(i).Cells("NumeroXFactura").Value = ""
+            GridPagosXFacturas.Rows(i).Cells("Fecha").Value = ""
+            GridPagosXFacturas.Rows(i).Cells("ImportePesos").Value = ""
+            GridPagosXFacturas.Rows(i).Cells("Paridad").Value = ""
+            GridPagosXFacturas.Rows(i).Cells("ImporteDolares").Value = ""
+            GridPagosXFacturas.Rows(i).Cells("Tipo3").Value = ""
+            GridPagosXFacturas.Rows(i).Cells("Letra3").Value = ""
+            GridPagosXFacturas.Rows(i).Cells("Punto3").Value = ""
+        Next
+
+        Dim Numero As String
+        Dim Tipo As String
+        Dim Punto As String
+        Dim Letra As String
+        Dim CodProveedor As String = txtProveedor.Text
+
+
+        Dim filasNuevas As Integer = 0
+        For i As Integer = 0 To 14
+
+            If (gridPagos.Rows(i).Cells("Importe").Value <> "") Then
+                GridPagosXFacturas.Rows(filasNuevas).Cells("NumeroXFactura").Value = gridPagos.Rows(i).Cells("Numero").Value
+                GridPagosXFacturas.Rows(filasNuevas).Cells("Tipo3").Value = gridPagos.Rows(i).Cells("Tipo").Value
+                GridPagosXFacturas.Rows(filasNuevas).Cells("Punto3").Value = gridPagos.Rows(i).Cells("Punto").Value
+                GridPagosXFacturas.Rows(filasNuevas).Cells("Letra3").Value = gridPagos.Rows(i).Cells("Letra").Value
+
+                Numero = GridPagosXFacturas.Rows(filasNuevas).Cells("NumeroXFactura").Value
+                Tipo = GridPagosXFacturas.Rows(filasNuevas).Cells("Tipo3").Value
+                Punto = GridPagosXFacturas.Rows(filasNuevas).Cells("Punto3").Value
+                Letra = GridPagosXFacturas.Rows(filasNuevas).Cells("Letra3").Value
+
+                GridPagosXFacturas.Rows(filasNuevas).Cells("Fecha").Value = _BuscarFechaFacturaPorProv(Tipo, Punto, Letra, CodProveedor, Numero)
+                Dim Fecha As DateTime = Convert.ToDateTime(GridPagosXFacturas.Rows(filasNuevas).Cells("Fecha").Value)
+                If (Fecha.DayOfWeek = 0) Then
+                    Fecha.AddDays(1)
+                Else
+                    If (Fecha.DayOfWeek = 6) Then
+                        Fecha.AddDays(2)
+                    End If
+                End If
+                Dim ImportePesos, Div As String
+                Dim Paridad As Double
+                GridPagosXFacturas.Rows(filasNuevas).Cells("ImportePesos").Value = gridPagos.Rows(i).Cells("Importe").Value
+                ImportePesos = GridPagosXFacturas.Rows(filasNuevas).Cells("ImportePesos").Value
+                GridPagosXFacturas.Rows(filasNuevas).Cells("Paridad").Value = redondeo(_BuscarCambioDiviza(Fecha))
+                Paridad = GridPagosXFacturas.Rows(filasNuevas).Cells("Paridad").Value()
+                Div = Val(ImportePesos) / Paridad
+                GridPagosXFacturas.Rows(filasNuevas).Cells("ImporteDolares").Value = redondeo(Div)
+                filasNuevas = filasNuevas + 1
+            End If
+
+        Next
+
+    End Sub
+
+    Private Function _BuscarFechaFacturaPorProv(ByVal Tipo As String, ByVal Punto As String, ByVal Letra As String, ByVal Proveedor As String, ByVal Numero As String) As String
+        'Dim cn As New SqlConnection(ConfigurationManager.ConnectionStrings("LOCAL").ToString())
+        Dim cn As New SqlConnection(Proceso._ConectarA())
+        cn.Open()
+        Dim SQLconsul As String
+        SQLconsul = "SELECT Fecha From CtaCtePrv WHERE Proveedor = '" & Proveedor & "' AND Numero = '" & Numero & "' AND Letra = '" & Letra & "' AND Tipo = '" & Tipo & "' AND Punto = '" & Punto & "'"
+        Dim cmd As New SqlCommand(SQLconsul, cn)
+        Dim dr As SqlDataReader
+        dr = cmd.ExecuteReader()
+        If (dr.HasRows) Then
+            If (dr.Read()) Then
+                Dim Devolver As String = dr.Item("Fecha")
+                Return Devolver
+            End If
+        End If
+        Return "NoSeEncontro"
+    End Function
+
+
+
+    Private Sub btnAceptar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAceptar.Click
+
+
+        Dim tablaChequesAdolar As New DBAuxi.TablaChequesDifCambioXFacturaDataTable
+        'With tablaChequesAdolar.Columns
+        '    .Add("Tipo")
+        '    .Add("Numero")
+        '    .Add("Fecha")
+        '    .Add("Importe")
+        '    .Add("Paridad")
+        '    .Add("ImporteDolares", GetType(Double))
+        '    .Add("SaldoCheque")
+        '    .Add("UsadoParaListar")
+        '    .Add("FechaOrdenada")
+        '    .Add("SaldoAMostrar")
+        'End With
+
+            Dim Fechaord As String = ordenaFecha(txtFechaParidad.Text)
+            Dim importeDolar As Double = redondeo(Val(txtTotal.Text) / Val(txtParidad.Text.Replace(",", ".")))
+        tablaChequesAdolar.Rows.Add("00", "Retenciones", "", txtTotal.Text, txtParidad.Text, importeDolar, txtTotal.Text, False, Fechaord, txtTotal.Text)
+            For i As Integer = 1 To 15
+                If (gridFormaPagos.Rows(i - 1).Cells("Importe2").Value <> "") Then
+                    tablaChequesAdolar.Rows.Add()
+                    tablaChequesAdolar.Rows(i).Item("Tipo") = gridFormaPagos.Rows(i - 1).Cells("Tipo2").Value
+                    tablaChequesAdolar.Rows(i).Item("Numero") = gridFormaPagos.Rows(i - 1).Cells("Numero2").Value
+                    tablaChequesAdolar.Rows(i).Item("Fecha") = gridFormaPagos.Rows(i - 1).Cells("Fecha2").Value
+                    tablaChequesAdolar.Rows(i).Item("Importe") = gridFormaPagos.Rows(i - 1).Cells("Importe2").Value
+                    Dim fecha As String = tablaChequesAdolar.Rows(i).Item("Fecha")
+                    Dim FechaAVerificar As DateTime
+                    FechaAVerificar = DateTime.ParseExact(fecha, "dd/MM/yyyy", New CultureInfo("en-US"))
+                    If (FechaAVerificar.DayOfWeek = 6) Then
+                        FechaAVerificar = FechaAVerificar.AddDays(2)
+                    Else
+                        If (FechaAVerificar.DayOfWeek = 0) Then
+                            FechaAVerificar = FechaAVerificar.AddDays(1)
+                        End If
+                    End If
+
+                    tablaChequesAdolar.Rows(i).Item("Paridad") = _BuscarCambioDiviza(FechaAVerificar.ToString())
+
+                If (tablaChequesAdolar.Rows(i).Item("Paridad") = 0) Then
+                    For j As Integer = 0 To 29
+                        FechaAVerificar = FechaAVerificar.AddDays(1)
+                        If (FechaAVerificar.DayOfWeek = 6) Then
+                            FechaAVerificar = FechaAVerificar.AddDays(2)
+
+                        Else
+                            If (FechaAVerificar.DayOfWeek = 0) Then
+                                FechaAVerificar = FechaAVerificar.AddDays(1)
+                            End If
+                        End If
+                        tablaChequesAdolar.Rows(i).Item("Paridad") = _BuscarCambioDiviza(FechaAVerificar.ToString())
+                        If (tablaChequesAdolar.Rows(i).Item("Paridad") <> 0) Then
+                            Exit For
+                        End If
+                    Next
+                End If
+
+                If (tablaChequesAdolar.Rows(i).Item("Paridad") = 0) Then
+                    MsgBox("Hay cheques no se acreditaron, por tanto, no se puede calcular")
+                    Exit Sub
+                End If
+
+
+
+                Dim CalculoImpDolares As Double = Val(gridFormaPagos.Rows(i - 1).Cells("Importe2").Value) / Val(tablaChequesAdolar.Rows(i).Item("Paridad").ToString().Replace(",", "."))
+                tablaChequesAdolar.Rows(i).Item("ImporteDolares") = redondeo(CalculoImpDolares)
+                tablaChequesAdolar.Rows(i).Item("SaldoCheque") = gridFormaPagos.Rows(i - 1).Cells("Importe2").Value
+                tablaChequesAdolar.Rows(i).Item("UsadoParaListar") = False
+                tablaChequesAdolar.Rows(i).Item("FechaOrdenada") = ordenaFecha(gridFormaPagos.Rows(i - 1).Cells("Fecha2").Value)
+                tablaChequesAdolar.Rows(i).Item("SaldoAMostrar") = gridFormaPagos.Rows(i - 1).Cells("Importe2").Value
+            End If
+
+            Next
+
+
+            Dim TotalDebitosDolares As Double = 0
+        Dim TablaSeleccionados As New DBAuxi.TablaSeleccionadosDataTable
+
+        'With TablaSeleccionados.Columns
+        '    .Add("Numero")
+        '    .Add("Fecha")
+        '    .Add("Importe")
+        '    .Add("Paridad")
+        '    .Add("ImporteDolares", GetType(Double))
+        'End With
+
+        Dim lista As List(Of DataGridViewRow) = (From row As DataGridViewRow In GridPagosXFacturas.Rows Where (row.Cells("Check").Value = True)).ToList()
+
+        For i As Integer = 0 To lista.Count - 1
+            TablaSeleccionados.Rows.Add(lista.Item(i).Cells("NumeroXFactura").Value, lista.Item(i).Cells("Fecha").Value, lista.Item(i).Cells("ImportePesos").Value, lista.Item(i).Cells("Paridad").Value, lista.Item(i).Cells("ImporteDolares").Value)
+        Next
+
+        Dim ArrayNumerosSeleccionados(TablaSeleccionados.Rows.Count) As String
+            Dim ArrayMontosEnPesosAmostrar(tablaChequesAdolar.Rows.Count) As String
+
+            If (TablaSeleccionados.Rows.Count > 0) Then
+
+
+            For i As Integer = 0 To TablaSeleccionados.Rows.Count - 1
+
+                ArrayNumerosSeleccionados(i) = TablaSeleccionados.Rows(i).Item("Numero")
+                'TotalDebitosDolares = TotalDebitosDolares + IIf(IsDBNull(TablaSeleccionados.Rows(i).Item("ImporteDolares")), "0", TablaSeleccionados.Rows(i).Item("ImporteDolares"))
+            Next
+        End If
+
+        Dim tablachesquesAQueFactura As New DBAuxi.TablaChequesAQueFacturaDataTable
+        'With tablachesquesAQueFactura.Columns
+        '    .Add("NumeroFactura")
+        '    .Add("NumeroCheque")
+        '    .Add("ImporteOriginalCheque")
+        '    .add("ValorEnDolares")
+        '    .Add("ImporteUsado")
+        'End With
+
+
+
+
+        Dim totalSaldocheques As Double
+
+        For Each Factura As DataGridViewRow In GridPagosXFacturas.Rows
+            If (Factura.Cells("ImportePesos").Value <> Nothing) Then
+                TotalDebitosDolares = Val(Factura.Cells("ImportePesos").Value)
+                totalSaldocheques = 0
+                If (tablaChequesAdolar.Rows.Count > 0) Then
+                    Dim contadorCheques = -1
+
+                    For Each row As DataRow In (tablaChequesAdolar.Select("", "FechaOrdenada"))
+
+                        contadorCheques = contadorCheques + 1
+
+                        If (row.Item("SaldoCheque") <> "0") Then
+
+
+                            If (row.Item("Importe") = row.Item("SaldoAMostrar")) Then
+                                totalSaldocheques = totalSaldocheques + Val(row.Item("Importe"))
+
+                                If (TotalDebitosDolares > totalSaldocheques) Then
+                                    row.Item("SaldoCheque") = "0"
+
+
+                                    For j As Integer = 0 To TablaSeleccionados.Rows.Count
+
+                                        If (IIf(IsDBNull(ArrayNumerosSeleccionados(j)), "XXXXX", ArrayNumerosSeleccionados(j)) = Factura.Cells("NumeroXFactura").Value) Then
+                                            row.Item("UsadoParaListar") = True
+                                            ArrayMontosEnPesosAmostrar(contadorCheques) = row.Item("SaldoAMostrar")
+                                            tablachesquesAQueFactura.Rows.Add(Factura.Cells("NumeroXFactura").Value, row.Item("Numero"), row.Item("Importe"), row.Item("ImporteDolares"), ArrayMontosEnPesosAmostrar(contadorCheques))
+                                        End If
+                                    Next
+
+                                Else
+                                    Dim Diferencia As Double
+                                    Dim SaldoRestante As Double = redondeo(totalSaldocheques - TotalDebitosDolares)
+                                    row.Item("SaldoCheque") = Val(SaldoRestante)
+                                    Diferencia = Val(row.Item("Importe")) - Val(SaldoRestante)
+                                    row.Item("SaldoAMostrar") = formatonumerico(Diferencia)
+                                    row.Item("SaldoAMostrar") = row.Item("SaldoAMostrar").replace(",", ".")
+                                    For j As Integer = 0 To TablaSeleccionados.Rows.Count
+                                        If (IIf(IsDBNull(ArrayNumerosSeleccionados(j)), "XXXXX", ArrayNumerosSeleccionados(j)) = Factura.Cells("NumeroXFactura").Value) Then
+                                            row.Item("UsadoParaListar") = True
+                                            ArrayMontosEnPesosAmostrar(contadorCheques) = row.Item("SaldoAMostrar")
+                                            Dim ValorAdolar As String = Val(row.Item("SaldoAMostrar").ToString().Replace(",", ".")) / Val(row.Item("Paridad").ToString().Replace(",", "."))
+                                            ValorAdolar = redondeo(ValorAdolar).ToString().Replace(",", ".")
+                                            tablachesquesAQueFactura.Rows.Add(Factura.Cells("NumeroXFactura").Value, row.Item("Numero"), row.Item("Importe"), ValorAdolar, ArrayMontosEnPesosAmostrar(contadorCheques))
+                                            Exit For
+                                        End If
+                                    Next
+
+                                    Exit For
+
+                                End If
+                            Else
+                                totalSaldocheques = totalSaldocheques + Val(row.Item("SaldoCheque").ToString().Replace(",", "."))
+                                If (TotalDebitosDolares > totalSaldocheques) Then
+
+                                    For j As Integer = 0 To TablaSeleccionados.Rows.Count
+                                        If (IIf(IsDBNull(ArrayNumerosSeleccionados(j)), "XXXXX", ArrayNumerosSeleccionados(j)) = Factura.Cells("NumeroXFactura").Value) Then
+                                            If (row.Item("UsadoParaListar") = False) Then
+                                                row.Item("UsadoParaListar") = True
+                                                Dim ImporteRestante As String = formatonumerico(Val(row.Item("Saldocheque").ToString().Replace(",", ".")) - Val(ArrayMontosEnPesosAmostrar(contadorCheques)))
+                                                ArrayMontosEnPesosAmostrar(contadorCheques) = row.Item("SaldoCheque").ToString().Replace(",", ".")
+                                                Dim ValorAdolar As String = Val(row.Item("SaldoCheque").ToString().Replace(",", ".")) / Val(row.Item("Paridad").ToString().Replace(",", "."))
+                                                ValorAdolar = redondeo(ValorAdolar).ToString().Replace(",", ".")
+                                                tablachesquesAQueFactura.Rows.Add(Factura.Cells("NumeroXFactura").Value, row.Item("Numero"), row.Item("Importe"), ValorAdolar, ImporteRestante.Replace(",", "."))
+                                            Else
+                                                Dim ImporteRestante As String = formatonumerico(Val(row.Item("Importe").ToString().Replace(",", ".")) - Val(ArrayMontosEnPesosAmostrar(contadorCheques)))
+                                                ArrayMontosEnPesosAmostrar(contadorCheques) = row.Item("Importe").ToString().Replace(",", ".")
+                                                Dim ValorAdolar As String = Val(ImporteRestante.Replace(",", ".")) / Val(row.Item("Paridad").ToString().Replace(",", "."))
+                                                ValorAdolar = redondeo(ValorAdolar).ToString().Replace(",", ".")
+                                                tablachesquesAQueFactura.Rows.Add(Factura.Cells("NumeroXFactura").Value, row.Item("Numero"), row.Item("Importe"), ValorAdolar, ImporteRestante.Replace(",", "."))
+                                            End If
+
+                                        End If
+                                        row.Item("SaldoCheque") = "0"
+                                    Next
+                                Else
+                                    Dim Diferencia As Double
+                                    Dim SaldoRestante As Double = redondeo(totalSaldocheques - TotalDebitosDolares)
+                                    row.Item("SaldoCheque") = Val(SaldoRestante)
+                                    'Diferencia = Val(row.Item("Importe")) - Val(SaldoRestante)
+                                    Diferencia = totalSaldocheques - Val(SaldoRestante)
+                                    row.Item("SaldoAMostrar") = formatonumerico(Diferencia)
+                                    row.Item("SaldoAMostrar") = row.Item("SaldoAMostrar").replace(",", ".")
+                                    For j As Integer = 0 To TablaSeleccionados.Rows.Count
+                                        If (IIf(IsDBNull(ArrayNumerosSeleccionados(j)), "XXXXX", ArrayNumerosSeleccionados(j)) = Factura.Cells("NumeroXFactura").Value) Then
+                                            row.Item("UsadoParaListar") = True
+                                            ArrayMontosEnPesosAmostrar(contadorCheques) = row.Item("SaldoAMostrar")
+                                            Dim ValorAdolar As String = Val(row.Item("SaldoAMostrar").ToString().Replace(",", ".")) / Val(row.Item("Paridad").ToString().Replace(",", "."))
+                                            ValorAdolar = redondeo(ValorAdolar).ToString().Replace(",", ".")
+                                            tablachesquesAQueFactura.Rows.Add(Factura.Cells("NumeroXFactura").Value, row.Item("Numero"), row.Item("Importe"), ValorAdolar, ArrayMontosEnPesosAmostrar(contadorCheques))
+                                            Exit For
+                                        End If
+                                    Next
+
+                                    Exit For
+
+
+                                End If
+                            End If
+                        End If
+                    Next
+                End If
+            End If
+
+        Next
+
+'            Dim DolaresCalculados As String = "0"
+'            Dim tablaOrdenada() As DataRow
+'            tablaOrdenada = tablaChequesAdolar.Select("", "FechaOrdenada").Clone()
+'            For i = 0 To tablaChequesAdolar.Rows.Count - 1
+'                Dim sumaArray As String
+'                sumaArray = Val(IIf(IsDBNull(sumaArray), "0", sumaArray)) + Val(IIf(IsDBNull(ArrayMontosEnPesosAmostrar(i)), "0", ArrayMontosEnPesosAmostrar(i)))
+'                sumaArray = sumaArray.Replace(",", ".")
+'                DolaresCalculados = Val(DolaresCalculados) + (Val(IIf(IsDBNull(ArrayMontosEnPesosAmostrar(i)), "0", ArrayMontosEnPesosAmostrar(i))) / Val(tablaOrdenada(i).Item("Paridad").ToString().Replace(",", ".")))
+'                DolaresCalculados = redondeo(DolaresCalculados).ToString().Replace(",", ".")
+'        Next
+
+        For Each Factura As DataRow In TablaSeleccionados.Rows
+            Dim TotalFacturaPesos As Double = 0
+            Dim TotalFacturaDolares As Double = 0
+            For Each cheque As DataRow In tablachesquesAQueFactura.Rows
+                If (Factura.Item("Numero") = cheque("NumeroFactura")) Then
+                    TotalFacturaPesos = TotalFacturaPesos + Val(cheque("ImporteUsado"))
+                    TotalFacturaDolares = TotalFacturaDolares + cheque("ValorEnDolares").replace(".", ",")
+                    TotalFacturaDolares = redondeo(TotalFacturaDolares)
+                End If
+            Next
+            Factura.Item("TotalChequesPesos") = TotalFacturaPesos
+            Factura.Item("TotalChequesDolares") = TotalFacturaDolares
+            Factura.Item("Diferencia") = Factura.Item("ImporteDolares") - Factura.Item("TotalChequesDolares")
+        Next
+        Dim ParidadDelDia As String = _BuscarCambioDiviza(Date.Today)
+
+        ' GridPagosXFacturas.DataSource = tablachesquesAQueFactura
+        With VistaPrevia
+            .Reporte = New AnalisisDiferenciaCambioXFacturas()
+            Dim ds As New DataSet
+            ds.Tables.AddRange({tablaChequesAdolar, tablachesquesAQueFactura, TablaSeleccionados})
+            .Reporte.SetDataSource(ds)
+            .Reporte.SetParameterValue(0, txtOrdenPago.Text)
+            .Reporte.SetParameterValue(1, txtProveedor.Text)
+            .Reporte.SetParameterValue(2, txtFecha.Text)
+            .Reporte.SetParameterValue(3, txtRazonSocial.Text)
+            .Reporte.SetParameterValue(4, ParidadDelDia)
+            .Reporte.SetParameterValue(5, txtParidad.Text)
+            .Mostrar()
+        End With
+
+    End Sub
+
+    Private Function _BuscarTipoDePago(ByVal Tipo As String, ByVal Punto As String, ByVal Letra As String, ByVal Proveedor As String, ByVal Numero As String) As Integer
+        'Dim cn As New SqlConnection(ConfigurationManager.ConnectionStrings("LOCAL").ToString())
+        Dim cn As New SqlConnection(Proceso._ConectarA())
+        cn.Open()
+        Dim SQLconsul As String
+        SQLconsul = "SELECT Pago From IvaComp WHERE Proveedor = '" & Proveedor & "' AND Numero = '" & Numero & "' AND Letra = '" & Letra & "' AND Tipo = '" & Tipo & "' AND Punto = '" & Punto & "'"
+        Dim cmd As New SqlCommand(SQLconsul, cn)
+        Dim dr As SqlDataReader
+        dr = cmd.ExecuteReader()
+        If (dr.HasRows) Then
+            If (dr.Read()) Then
+                Dim Devolver As Integer = Val(dr.Item("Pago"))
+                Return Devolver
+            End If
+        End If
+        Return 1
+    End Function
+
+
 End Class

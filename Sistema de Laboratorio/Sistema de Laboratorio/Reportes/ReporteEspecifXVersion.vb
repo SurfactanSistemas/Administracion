@@ -18,7 +18,7 @@ Imports System
 Imports System.ComponentModel
 
 
-Public Class AnalisisDiferenciaCambioOP
+Public Class ReporteEspecifXVersion
     Inherits ReportClass
     
     Public Sub New()
@@ -27,7 +27,7 @@ Public Class AnalisisDiferenciaCambioOP
     
     Public Overrides Property ResourceName() As String
         Get
-            Return "AnalisisDiferenciaCambioOP.rpt"
+            Return "ReporteEspecifXVersion.rpt"
         End Get
         Set
             'Do nothing
@@ -45,7 +45,7 @@ Public Class AnalisisDiferenciaCambioOP
     
     Public Overrides Property FullResourceName() As String
         Get
-            Return "Administracion.AnalisisDiferenciaCambioOP.rpt"
+            Return "Laboratorio.ReporteEspecifXVersion.rpt"
         End Get
         Set
             'Do nothing
@@ -70,7 +70,7 @@ Public Class AnalisisDiferenciaCambioOP
     
     <Browsable(false),  _
      DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property GroupHeaderSection1() As CrystalDecisions.CrystalReports.Engine.Section
+    Public ReadOnly Property Section3() As CrystalDecisions.CrystalReports.Engine.Section
         Get
             Return Me.ReportDefinition.Sections(2)
         End Get
@@ -78,7 +78,7 @@ Public Class AnalisisDiferenciaCambioOP
     
     <Browsable(false),  _
      DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Section3() As CrystalDecisions.CrystalReports.Engine.Section
+    Public ReadOnly Property Section4() As CrystalDecisions.CrystalReports.Engine.Section
         Get
             Return Me.ReportDefinition.Sections(3)
         End Get
@@ -86,39 +86,15 @@ Public Class AnalisisDiferenciaCambioOP
     
     <Browsable(false),  _
      DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property GroupFooterSection1() As CrystalDecisions.CrystalReports.Engine.Section
-        Get
-            Return Me.ReportDefinition.Sections(4)
-        End Get
-    End Property
-    
-    <Browsable(false),  _
-     DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Section4() As CrystalDecisions.CrystalReports.Engine.Section
-        Get
-            Return Me.ReportDefinition.Sections(5)
-        End Get
-    End Property
-    
-    <Browsable(false),  _
-     DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
     Public ReadOnly Property Section5() As CrystalDecisions.CrystalReports.Engine.Section
         Get
-            Return Me.ReportDefinition.Sections(6)
-        End Get
-    End Property
-    
-    <Browsable(false),  _
-     DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Parameter_ImprimeParidad() As CrystalDecisions.[Shared].IParameterField
-        Get
-            Return Me.DataDefinition.ParameterFields(0)
+            Return Me.ReportDefinition.Sections(4)
         End Get
     End Property
 End Class
 
 <System.Drawing.ToolboxBitmapAttribute(GetType(CrystalDecisions.[Shared].ExportOptions), "report.bmp")>  _
-Public Class CachedAnalisisDiferenciaCambioOP
+Public Class CachedReporteEspecifXVersion
     Inherits Component
     Implements ICachedReport
     
@@ -160,7 +136,7 @@ Public Class CachedAnalisisDiferenciaCambioOP
     End Property
     
     Public Overridable Function CreateReport() As CrystalDecisions.CrystalReports.Engine.ReportDocument Implements CrystalDecisions.ReportSource.ICachedReport.CreateReport
-        Dim rpt As AnalisisDiferenciaCambioOP = New AnalisisDiferenciaCambioOP()
+        Dim rpt As ReporteEspecifXVersion = New ReporteEspecifXVersion()
         rpt.Site = Me.Site
         Return rpt
     End Function

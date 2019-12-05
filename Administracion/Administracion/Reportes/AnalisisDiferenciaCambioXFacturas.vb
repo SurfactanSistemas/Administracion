@@ -18,7 +18,7 @@ Imports System
 Imports System.ComponentModel
 
 
-Public Class AnalisisDiferenciaCambioOP
+Public Class AnalisisDiferenciaCambioXFacturas
     Inherits ReportClass
     
     Public Sub New()
@@ -27,7 +27,7 @@ Public Class AnalisisDiferenciaCambioOP
     
     Public Overrides Property ResourceName() As String
         Get
-            Return "AnalisisDiferenciaCambioOP.rpt"
+            Return "AnalisisDiferenciaCambioXFacturas.rpt"
         End Get
         Set
             'Do nothing
@@ -45,7 +45,7 @@ Public Class AnalisisDiferenciaCambioOP
     
     Public Overrides Property FullResourceName() As String
         Get
-            Return "Administracion.AnalisisDiferenciaCambioOP.rpt"
+            Return "Administracion.AnalisisDiferenciaCambioXFacturas.rpt"
         End Get
         Set
             'Do nothing
@@ -110,15 +110,55 @@ Public Class AnalisisDiferenciaCambioOP
     
     <Browsable(false),  _
      DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Parameter_ImprimeParidad() As CrystalDecisions.[Shared].IParameterField
+    Public ReadOnly Property Parameter_NumeroOrden() As CrystalDecisions.[Shared].IParameterField
         Get
             Return Me.DataDefinition.ParameterFields(0)
+        End Get
+    End Property
+    
+    <Browsable(false),  _
+     DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
+    Public ReadOnly Property Parameter_NumeroProveedor() As CrystalDecisions.[Shared].IParameterField
+        Get
+            Return Me.DataDefinition.ParameterFields(1)
+        End Get
+    End Property
+    
+    <Browsable(false),  _
+     DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
+    Public ReadOnly Property Parameter_FechaOrdenDePago() As CrystalDecisions.[Shared].IParameterField
+        Get
+            Return Me.DataDefinition.ParameterFields(2)
+        End Get
+    End Property
+    
+    <Browsable(false),  _
+     DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
+    Public ReadOnly Property Parameter_NombreProveedor() As CrystalDecisions.[Shared].IParameterField
+        Get
+            Return Me.DataDefinition.ParameterFields(3)
+        End Get
+    End Property
+    
+    <Browsable(false),  _
+     DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
+    Public ReadOnly Property Parameter_ParidadDelDia() As CrystalDecisions.[Shared].IParameterField
+        Get
+            Return Me.DataDefinition.ParameterFields(4)
+        End Get
+    End Property
+    
+    <Browsable(false),  _
+     DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
+    Public ReadOnly Property Parameter_ParidadOrdenDePago() As CrystalDecisions.[Shared].IParameterField
+        Get
+            Return Me.DataDefinition.ParameterFields(5)
         End Get
     End Property
 End Class
 
 <System.Drawing.ToolboxBitmapAttribute(GetType(CrystalDecisions.[Shared].ExportOptions), "report.bmp")>  _
-Public Class CachedAnalisisDiferenciaCambioOP
+Public Class CachedAnalisisDiferenciaCambioXFacturas
     Inherits Component
     Implements ICachedReport
     
@@ -160,7 +200,7 @@ Public Class CachedAnalisisDiferenciaCambioOP
     End Property
     
     Public Overridable Function CreateReport() As CrystalDecisions.CrystalReports.Engine.ReportDocument Implements CrystalDecisions.ReportSource.ICachedReport.CreateReport
-        Dim rpt As AnalisisDiferenciaCambioOP = New AnalisisDiferenciaCambioOP()
+        Dim rpt As AnalisisDiferenciaCambioXFacturas = New AnalisisDiferenciaCambioXFacturas()
         rpt.Site = Me.Site
         Return rpt
     End Function
