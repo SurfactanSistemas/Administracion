@@ -46,7 +46,7 @@ Public Class ListadoEspecifPTFecha
         If (Trim(mastxtDePT.Text.Replace("-", "")) <> "") Then
             Select Case e.KeyData
                 Case Keys.Enter
-                        mastxtAPT.Focus()
+                    mastxtAPT.Focus()
 
                 Case Keys.Escape
                     mastxtDePT.Text = ""
@@ -127,11 +127,11 @@ Public Class ListadoEspecifPTFecha
                 Catch ex As Exception
 
                 End Try
+            Else
+                MsgBox("Ingrese un valor al campo -Hasta-")
+            End If
         Else
-        MsgBox("Ingrese un valor al campo -Hasta-")
-        End If
-        Else
-        MsgBox("Ingrese un valor al campo -Desde-")
+            MsgBox("Ingrese un valor al campo -Desde-")
         End If
 
 
@@ -146,6 +146,6 @@ Public Class ListadoEspecifPTFecha
         End Select
     End Sub
 
-    
+
 
 End Class

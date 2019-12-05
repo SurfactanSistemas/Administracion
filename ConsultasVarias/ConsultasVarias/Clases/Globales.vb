@@ -6,6 +6,7 @@ Namespace Clases
 
         Public Shared ReadOnly WBackColorSecundario = Color.FromArgb(12, 217, 232)
         Public Shared ReadOnly WBackColorTerciario = Color.FromArgb(0, 170, 255)
+        Public Shared ReadOnly WBackColorCuaternario = Color.FromArgb(0, 230, 232)
         Private Shared _Empresas As List(Of String)
 
         Public Shared ReadOnly Property Empresas() As List(Of String)

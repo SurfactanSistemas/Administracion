@@ -1434,7 +1434,7 @@ Public Class Recibos
                 XNumero1 = ""
                 XImporte1 = ""
                 XTipo2 = gridFormasPago2.Rows(iRow).Cells(0).Value
-                XNumero2 = gridFormasPago2.Rows(iRow).Cells(1).Value
+                XNumero2 = OrDefault(gridFormasPago2.Rows(iRow).Cells(1).Value, "").ToString.PadLeft(8, "0")
                 XFecha2 = gridFormasPago2.Rows(iRow).Cells(2).Value
                 XFechaOrd2 = String.Join("", XFecha2.Split("/").Reverse())
                 XBanco2 = gridFormasPago2.Rows(iRow).Cells(3).Value

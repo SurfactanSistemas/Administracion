@@ -65,7 +65,7 @@ Public Class HojaIngresoFrases
     Private Sub btnGrabar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnGrabar.Click
         If (txtCodigo.Text <> "") Then
             Try
-                Dim SqlConsulta As String
+                Dim SqlConsulta As String = ""
                 Dim CantidadDeFilas As Integer = ContieneAlgoLaBase()
                 If (CantidadDeFilas = 0) Then
                     txtDescripcion.Text = txtDescripcion.Text.Trim().PadRight(450, " ") 'Rellenamos los espacios vacio con " " para poder hacer el substring
