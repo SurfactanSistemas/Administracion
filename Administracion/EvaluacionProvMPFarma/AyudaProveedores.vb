@@ -32,10 +32,10 @@ Public Class AyudaProveedores
                 ") Or (ISNULL(a.ClasificacionFarma,0) > 1 And a.ReqEvalEspecial = '1') "
             Case 1
                 Return "ISNULL(a.ClasificacionFarma,0) = 1"
-            Case 2, 3, 4
+            Case Is > 1
                 Return String.Format("ISNULL(a.ClasificacionFarma,0) = ${0} And a.ReqEvalEspecial = '1'", wTipoMp)
-            Case Else
-                Return "ISNULL(a.ClasificacionFarma, 0) = 0 And a.ReqEvalEspecial = '1'"
+                '            Case Else
+                '                Return "ISNULL(a.ClasificacionFarma, 0) = 0 And a.ReqEvalEspecial = '1'"
         End Select
 
     End Function

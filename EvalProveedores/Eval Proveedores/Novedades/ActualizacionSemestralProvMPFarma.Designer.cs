@@ -571,6 +571,7 @@ namespace Eval_Proveedores.Novedades
             this.MarcaPerformance.FalseValue = "0";
             this.MarcaPerformance.HeaderText = "";
             this.MarcaPerformance.Name = "MarcaPerformance";
+            this.MarcaPerformance.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.MarcaPerformance.TrueValue = "1";
             this.MarcaPerformance.Visible = false;
             this.MarcaPerformance.Width = 20;
@@ -709,6 +710,7 @@ namespace Eval_Proveedores.Novedades
             "EVENTUAL FARMA"});
             this.EvaCal.MinimumWidth = 100;
             this.EvaCal.Name = "EvaCal";
+            this.EvaCal.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // FechaEvaluaProvMPFarmaII
             // 
@@ -722,6 +724,7 @@ namespace Eval_Proveedores.Novedades
             this.FechaEvaluaProvMPFarmaII.Name = "FechaEvaluaProvMPFarmaII";
             this.FechaEvaluaProvMPFarmaII.PromptChar = ' ';
             this.FechaEvaluaProvMPFarmaII.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.FechaEvaluaProvMPFarmaII.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.FechaEvaluaProvMPFarmaII.ValidatingType = null;
             this.FechaEvaluaProvMPFarmaII.Width = 70;
             // 
@@ -757,6 +760,7 @@ namespace Eval_Proveedores.Novedades
             "FOOD",
             "VETERINARIO",
             "ENVASES",
+            "EXC. FARMA",
             "OTROS"});
             this.comboBox1.Location = new System.Drawing.Point(271, 101);
             this.comboBox1.Name = "comboBox1";

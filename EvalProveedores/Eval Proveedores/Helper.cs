@@ -436,15 +436,10 @@ namespace Eval_Proveedores
                 {
                     return "ISNULL(a.ClasificacionFarma,0) = 1";
                 }
-                case "2":
-                case "3":
-                case "4":
-                {
-                    return string.Format("ISNULL(a.ClasificacionFarma,0) = ${0} And a.ReqEvalEspecial = '1'", wTipoMp);
-                }
                 default:
                 {
-                    return "ISNULL(a.ClasificacionFarma, 0) = 0 And a.ReqEvalEspecial = '1'";
+                    return string.Format("ISNULL(a.ClasificacionFarma,0) = ${0} And a.ReqEvalEspecial = '1'", wTipoMp);
+//                    return "ISNULL(a.ClasificacionFarma, 0) = 0 And a.ReqEvalEspecial = '1'";
                 }
             }
         }

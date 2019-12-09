@@ -116,4 +116,16 @@
             .Show(Me)
         End With
     End Sub
+
+    Private Sub EmisionDeEtiquetasToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EmisionDeEtiquetasToolStripMenuItem.Click
+        With New ImpresionEtiquetasMuestras
+            .Show(Me)
+        End With
+    End Sub
+
+    Private Sub LotesVencidosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LotesVencidosToolStripMenuItem.Click
+        With New VerificacionLoteVencidoMP
+            .Show(Me)
+        End With
+    End Sub
 End Class

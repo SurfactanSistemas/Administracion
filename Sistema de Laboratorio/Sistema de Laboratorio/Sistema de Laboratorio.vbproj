@@ -182,6 +182,12 @@
     <Compile Include="Consultas\NotasCertificadosAnalisis\NotasCertificadosAnalisis.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ImpresionEtiquetasMuestras.Designer.vb">
+      <DependentUpon>ImpresionEtiquetasMuestras.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ImpresionEtiquetasMuestras.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Maestros\Ingreso Frases H &amp; P\FrasesHP.Designer.vb">
       <DependentUpon>FrasesHP.vb</DependentUpon>
     </Compile>
@@ -457,6 +463,12 @@
       <DependentUpon>ReporteEspecifXVersion.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\ReporteImpresionEtiquetasMuestras.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteImpresionEtiquetasMuestras.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\ReporteListadoEspecifPTaFecha.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -473,6 +485,12 @@
       <DependentUpon>VistaPrevia.vb</DependentUpon>
     </Compile>
     <Compile Include="Reportes\VistaPrevia.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VerificacionLoteVencidoMP.Designer.vb">
+      <DependentUpon>VerificacionLoteVencidoMP.vb</DependentUpon>
+    </Compile>
+    <Compile Include="VerificacionLoteVencidoMP.vb">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
@@ -498,7 +516,6 @@
     <EmbeddedResource Include="Auxiliares\VentanasIntermedias\Productos Terminados Farma\PDFVersionesPTFarma.resx">
       <DependentUpon>PDFVersionesPTFarma.vb</DependentUpon>
     </EmbeddedResource>
-
     <EmbeddedResource Include="Auxiliares\VentanasIntermedias\Productos Terminados Farma\Pool de Ensayos\IngresoNuevoPoolEnsayos.resx">
       <DependentUpon>IngresoNuevoPoolEnsayos.vb</DependentUpon>
     </EmbeddedResource>
@@ -508,8 +525,14 @@
     <EmbeddedResource Include="Auxiliares\VentanasIntermedias\Productos Terminados Farma\Pool de Ensayos\SeleccionEnsayoReferidoPoolEnsayos.resx">
       <DependentUpon>SeleccionEnsayoReferidoPoolEnsayos.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ConsDeEspefXVersion.resx">
+      <DependentUpon>ConsDeEspefXVersion.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Consultas\NotasCertificadosAnalisis\NotasCertificadosAnalisis.resx">
       <DependentUpon>NotasCertificadosAnalisis.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImpresionEtiquetasMuestras.resx">
+      <DependentUpon>ImpresionEtiquetasMuestras.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Maestros\Ingreso Frases H &amp; P\FrasesHP.resx">
       <DependentUpon>FrasesHP.vb</DependentUpon>
@@ -663,6 +686,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteEspecifXVersion.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ReporteImpresionEtiquetasMuestras.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteImpresionEtiquetasMuestras.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\ReporteListadoEspecifPTaFecha.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteListadoEspecifPTaFecha.vb</LastGenOutput>
@@ -673,6 +700,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\VistaPrevia.resx">
       <DependentUpon>VistaPrevia.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VerificacionLoteVencidoMP.resx">
+      <DependentUpon>VerificacionLoteVencidoMP.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
