@@ -38,14 +38,14 @@ Partial Class ConsDeEspefXVersion
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtControlDeCambios = New System.Windows.Forms.TextBox()
         Me.DGV_ConsultaVersiones = New ConsultasVarias.DBDataGridView()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
         Me.Ensayo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ValorEstandar = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Desde = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Hasta = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
         CType(Me.DGV_ConsultaVersiones, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -200,6 +200,41 @@ Partial Class ConsDeEspefXVersion
         Me.DGV_ConsultaVersiones.Size = New System.Drawing.Size(812, 299)
         Me.DGV_ConsultaVersiones.TabIndex = 14
         '
+        'Ensayo
+        '
+        Me.Ensayo.DataPropertyName = "Ensayo"
+        Me.Ensayo.HeaderText = "Ensayo"
+        Me.Ensayo.Name = "Ensayo"
+        '
+        'Descripcion
+        '
+        Me.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Descripcion.DataPropertyName = "Descripcion"
+        Me.Descripcion.HeaderText = "Descripcion"
+        Me.Descripcion.Name = "Descripcion"
+        Me.Descripcion.Width = 88
+        '
+        'ValorEstandar
+        '
+        Me.ValorEstandar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.ValorEstandar.DataPropertyName = "ValorEstandar"
+        Me.ValorEstandar.HeaderText = "Valor Estandar"
+        Me.ValorEstandar.Name = "ValorEstandar"
+        Me.ValorEstandar.Width = 101
+        '
+        'Desde
+        '
+        Me.Desde.DataPropertyName = "Desde"
+        Me.Desde.HeaderText = "Desde"
+        Me.Desde.Name = "Desde"
+        '
+        'Hasta
+        '
+        Me.Hasta.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Hasta.DataPropertyName = "Hasta"
+        Me.Hasta.HeaderText = "Hasta"
+        Me.Hasta.Name = "Hasta"
+        '
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(32, Byte), Integer), CType(CType(74, Byte), Integer), CType(CType(95, Byte), Integer))
@@ -235,41 +270,6 @@ Partial Class ConsDeEspefXVersion
         Me.Label5.Size = New System.Drawing.Size(179, 24)
         Me.Label5.TabIndex = 1
         Me.Label5.Text = "SURFACTAN S.A."
-        '
-        'Ensayo
-        '
-        Me.Ensayo.DataPropertyName = "Ensayo"
-        Me.Ensayo.HeaderText = "Ensayo"
-        Me.Ensayo.Name = "Ensayo"
-        '
-        'Descripcion
-        '
-        Me.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Descripcion.DataPropertyName = "Descripcion"
-        Me.Descripcion.HeaderText = "Descripcion"
-        Me.Descripcion.Name = "Descripcion"
-        Me.Descripcion.Width = 88
-        '
-        'ValorEstandar
-        '
-        Me.ValorEstandar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.ValorEstandar.DataPropertyName = "ValorEstandar"
-        Me.ValorEstandar.HeaderText = "Valor Estandar"
-        Me.ValorEstandar.Name = "ValorEstandar"
-        Me.ValorEstandar.Width = 101
-        '
-        'Desde
-        '
-        Me.Desde.DataPropertyName = "Desde"
-        Me.Desde.HeaderText = "Desde"
-        Me.Desde.Name = "Desde"
-        '
-        'Hasta
-        '
-        Me.Hasta.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.Hasta.DataPropertyName = "Hasta"
-        Me.Hasta.HeaderText = "Hasta"
-        Me.Hasta.Name = "Hasta"
         '
         'ConsDeEspefXVersion
         '
