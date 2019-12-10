@@ -587,4 +587,13 @@ Public Class VerificacionLoteVencidoMP
     Private Sub BackgroundWorker1_RunWorkerCompleted(ByVal sender As System.Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BackgroundWorker1.RunWorkerCompleted
         Timer1.Stop()
     End Sub
+
+    Private Sub DGV_Verificacion_CellMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles DGV_Verificacion.CellMouseDoubleClick
+        If DGV_Verificacion.CurrentCell.ColumnIndex = 5 Then
+            With New DetallesEnsayosMP(DGV_Verificacion.CurrentCell.Value)
+                .Show(Me)
+            End With
+
+        End If
+    End Sub
 End Class
