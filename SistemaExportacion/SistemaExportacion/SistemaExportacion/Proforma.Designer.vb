@@ -597,7 +597,7 @@ Partial Class Proforma
         '
         Me.cmbCondicion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbCondicion.FormattingEnabled = True
-        Me.cmbCondicion.Items.AddRange(New Object() {"", "FOB", "CIF", "CFR", "CPT", "EXW", "FCA", "FAS", "CIP", "DAF", "DES", "DEQ", "DDA", "DDP", "DAP"})
+        Me.cmbCondicion.Items.AddRange(New Object() {"", "FOB", "CIF", "CFR", "CPT", "EXW", "FCA", "FAS", "CIP", "DAF", "DES", "DEQ", "DDA", "DDP", "DAP", "DDU", "DAT"})
         Me.cmbCondicion.Location = New System.Drawing.Point(98, 103)
         Me.cmbCondicion.Name = "cmbCondicion"
         Me.cmbCondicion.Size = New System.Drawing.Size(65, 21)
