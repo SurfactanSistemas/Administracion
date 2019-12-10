@@ -390,6 +390,7 @@ Partial Class VerificacionLoteVencidoMP
         '
         Me.DiferenciaEnDIas.HeaderText = "DiferenciaEnDIas"
         Me.DiferenciaEnDIas.Name = "DiferenciaEnDIas"
+        Me.DiferenciaEnDIas.Visible = False
         '
         'VerificacionLoteVencidoMP
         '
