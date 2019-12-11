@@ -8,6 +8,7 @@ Imports ConsultasVarias.Clases.Helper
 Public Class ListadoDevoluciones:Implements IExportar
 
     Private WCargadoPorCmd As Boolean = False
+    Private WSaltear As Boolean = False
 
     Sub New(Optional ByVal WHoja As Object = Nothing)
 
@@ -232,6 +233,12 @@ Public Class ListadoDevoluciones:Implements IExportar
         WFechaDesdeOrd = ordenaFecha(txtFechaDesde.Text)
         WFechaHastaOrd = ordenaFecha(txtFechaHasta.Text)
 
+        If Not WSaltear Then
+            WSaltear = True
+            txtBuscar_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+            Exit Sub
+        End If
+
         WFiltroFecha = ""
 
         If Val(WFechaDesdeOrd) <> 0 And Val(WFechaHastaOrd) <> 0 Then WFiltroFecha = " FechaOrd BETWEEN '" & WFechaDesdeOrd & "' AND '" & WFechaHastaOrd & "'"
@@ -377,6 +384,8 @@ Public Class ListadoDevoluciones:Implements IExportar
         If (txtBuscar.Text.Replace(" ", "").Length < 12 And rbPorCodigo.Checked) Or rbPorPartida.Checked Then
             VerDevolucionesParaEsteCódigoToolStripMenuItem.Enabled = True
         End If
+
+        WSaltear = False
 
     End Sub
 
@@ -618,6 +627,10 @@ Public Class ListadoDevoluciones:Implements IExportar
         cmbOrdenII.SelectedIndex = 1
         cmbOrdenIII.SelectedIndex = 2
 
+        Dim WDevols As DataTable = TryCast(dgvDevoluciones.DataSource, DataTable)
+
+        If WDevols IsNot Nothing Then WDevols.Rows.Clear()
+
         For i = 0 To clbClientes.Items.Count - 1
             clbClientes.SetItemChecked(i, True)
         Next
@@ -625,6 +638,8 @@ Public Class ListadoDevoluciones:Implements IExportar
         For i = 0 To clbEstados.Items.Count - 1
             clbEstados.SetItemChecked(i, True)
         Next
+
+        txtBuscar.Focus()
 
     End Sub
 

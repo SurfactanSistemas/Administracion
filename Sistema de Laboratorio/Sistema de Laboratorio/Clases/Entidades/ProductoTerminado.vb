@@ -43,6 +43,17 @@ Namespace Entidades
         End Function
 
         ''' <summary>
+        ''' Devuelve si el Producto es Fazon o no según su código.
+        ''' </summary>
+        Public Shared Function EsFazon(ByVal Terminado As String) As Boolean
+
+            Dim WTer As String = Mid(Terminado, 4, 5)
+
+            Return Val(WTer) > 2999 And Val(WTer) < 4000
+
+        End Function
+
+        ''' <summary>
         ''' Devuelve la Fecha de Elaboracion y Vencimiento de un producto según Componentes y Linea.
         ''' </summary>
         Public Shared Function CalcularFechaElabVto(ByVal Producto As String, ByVal Partida As String, Optional ByVal SoloConsulta As Boolean = False) As String()
@@ -280,14 +291,15 @@ Namespace Entidades
         End Function
 
         ''' <summary>
-        ''' Devuelve las Fechas de Elaboración y Vencimiento de un mono componente, en un Array de dos items. (0 - Elaboración   1 - Vencimiento  2 - Tipo Vencimiento)
+        ''' Devuelve las Fechas de Elaboración y Vencimiento de un mono componente, en un Array de dos items. (0 - Elaboración   1 - Vencimiento  2 - Tipo Vencimiento 3 - Lote Original)
         ''' Si hubo un problema, se devuelven en ambos items '-1'.
         ''' </summary>
         Public Shared Function _CalculaMonoOtro(ByVal Hoja As String, ByVal EmpresaHoja As String) As String()
-            Dim WDatos(2) As String
+            Dim WDatos(3) As String
             WDatos(0) = "-1"
             WDatos(1) = "-1"
             WDatos(2) = "0"
+            WDatos(3) = ""
 
             Dim WRenglon = 0
             Dim WLote, WLote1, WLote2, WLote3, WTipo, WArticulo, WProducto As String
@@ -412,7 +424,7 @@ Namespace Entidades
 
                         If WLinea <> 20 And WLinea <> 28 Then WFechaElaboracion = OrDefault(.Item("FechaElaboracion"), "")
 
-                        Dim WPartiOri = OrDefault(.Item("PartiOri"), "")
+                        Dim WPartiOri As String = OrDefault(.Item("PartiOri"), "")
 
                         If Trim(WPartiOri) = "" Then
                             If MsgBox("El Lote Original del Laudo no se encuentra cargado. ¿Desea continuar con la impresión?", MsgBoxStyle.YesNo) <> MsgBoxResult.Yes Then
@@ -420,6 +432,8 @@ Namespace Entidades
                                 WDatos(1) = "-1"
                                 Return WDatos
                             End If
+                        Else
+                            WDatos(3) = WPartiOri.trim
                         End If
 
                         Exit For
@@ -457,11 +471,18 @@ Namespace Entidades
         End Function
 
         ''' <summary>
+        ''' Devuelve si el Producto es o no monocomponente.
+        ''' </summary>
+        Public Shared Function EsMonoInfo(ByVal Codigo As String) As DataRow
+            Return GetSingle("SELECT Codigo, ISNULL(Tipo, 0) Tipo FROM codigomono WHERE Codigo = '" & Codigo & "'", "SurfactanSa")
+        End Function
+
+        ''' <summary>
         ''' Devuelve la descripción del Parámetro de un ensayo.
         ''' </summary>
         Public Shared Function _GenerarImpreParametro(ByVal wTipoEspecif As String, ByVal wDesdeEspecif As String, ByVal wHastaEspecif As String, ByVal wUnidadEspecif As String, ByVal wMenorIgualEspecif As String, Optional ByVal WInformaEspecif As String = "1") As String
-            If Val(wTipoEspecif) = 0 Then Return "Cumple Ensayo"
-            If Trim(wDesdeEspecif) = "" And Trim(wHastaEspecif) = "" Then Return ""
+
+            Dim WParam As String = ""
 
             wTipoEspecif = Trim(wTipoEspecif)
             wDesdeEspecif = Trim(wDesdeEspecif)
@@ -470,37 +491,45 @@ Namespace Entidades
             wMenorIgualEspecif = Trim(wMenorIgualEspecif)
             WInformaEspecif = Trim(WInformaEspecif)
 
+            If Trim(wDesdeEspecif) = "" And Trim(wHastaEspecif) = "" Then WParam = ""
+            If Val(wTipoEspecif) = 0 Then WParam = "Cumple Ensayo"
+
             If {99, 999, 9999, 99999}.Contains(Val(wHastaEspecif)) Then wHastaEspecif = "9999"
 
             If Val(wDesdeEspecif) <> 0 Or Val(wHastaEspecif) <> 9999 Then
 
                 If Val(wDesdeEspecif) <> 0 And Val(wHastaEspecif) <> 0 Then
-                    Return String.Format("{0} - {1} {2}", wDesdeEspecif, wHastaEspecif, wUnidadEspecif)
+                    WParam = String.Format("{0} - {1} {2}", wDesdeEspecif, wHastaEspecif, wUnidadEspecif)
                 End If
 
                 If Val(wDesdeEspecif) = 0 And Val(wHastaEspecif) <> 0 Then
 
-                    If Val(wMenorIgualEspecif) = 1 Then Return String.Format("Máximo {0} {1}", wHastaEspecif, wUnidadEspecif)
+                    If Val(wMenorIgualEspecif) = 1 Then
+                        WParam = String.Format("Máximo {0} {1}", wHastaEspecif, wUnidadEspecif)
+                    Else
+                        WParam = String.Format("Menor a {0} {1}", wHastaEspecif, wUnidadEspecif)
+                    End If
 
-                    Return String.Format("Menor a {0} {1}", wHastaEspecif, wUnidadEspecif)
 
                 End If
 
                 If Val(wDesdeEspecif) <> 0 And Val(wHastaEspecif) = 9999 Then
 
-                    If Val(wMenorIgualEspecif) = 1 Then Return String.Format("Mínimo {0} {1}", wHastaEspecif, wUnidadEspecif)
-
-                    Return String.Format("Mayor a {0} {1}", wHastaEspecif, wUnidadEspecif)
+                    If Val(wMenorIgualEspecif) = 1 Then
+                        WParam = String.Format("Mínimo {0} {1}", wHastaEspecif, wUnidadEspecif)
+                    Else
+                        WParam = String.Format("Mayor a {0} {1}", wHastaEspecif, wUnidadEspecif)
+                    End If
 
                 End If
 
             End If
 
             If Val(WInformaEspecif) = 0 Then
-                Return "Informativo"
+                WParam = "Informativo"
             End If
 
-            Return ""
+            Return WParam
         End Function
 
     End Class

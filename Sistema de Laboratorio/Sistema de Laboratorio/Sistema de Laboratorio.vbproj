@@ -430,55 +430,73 @@
       <DependentUpon>ReporteEtiContraII.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\Productos Terminados\Ensayos Intermedios\imprecalidadresultado.vb">
+    <Compile Include="Reportes\Productos Terminados Farma\Certificados de Analisis\certificadonuevofarmasegunda.vb">
+      <DependentUpon>certificadonuevofarmasegunda.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reportes\Productos Terminados Farma\Certificados de Analisis\certificadonuevofarmaprimero.vb">
+      <DependentUpon>certificadonuevofarmaprimero.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reportes\Productos Terminados Farma\Certificados de Analisis\certificadonuevofarma.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>certificadonuevofarma.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Productos Terminados Farma\Ensayos Intermedios\imprecalidadresultado.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>imprecalidadresultado.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\Productos Terminados\Ensayos Intermedios\imprecalidadresultadoReduccionAl80.vb">
+    <Compile Include="Reportes\Productos Terminados Farma\Ensayos Intermedios\imprecalidadresultadoReduccionAl80.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>imprecalidadresultadoReduccionAl80.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\Productos Terminados\Ensayos Intermedios\NOResultadosIntermediosPT.vb">
+    <Compile Include="Reportes\Productos Terminados Farma\Ensayos Intermedios\NOResultadosIntermediosPT.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>NOResultadosIntermediosPT.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\Productos Terminados\Ensayos Intermedios\ValoresEnsayosIntermediosPTFarma.vb">
+    <Compile Include="Reportes\Productos Terminados Farma\Ensayos Intermedios\ValoresEnsayosIntermediosPTFarma.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ValoresEnsayosIntermediosPTFarma.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\Productos Terminados\Especificaciones\ImpreEspecificacionesPT.vb">
+    <Compile Include="Reportes\Productos Terminados Farma\Especificaciones\ImpreEspecificacionesPT.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ImpreEspecificacionesPT.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\Productos Terminados\Especificaciones\ImpreEspecificacionesPTIngles.vb">
+    <Compile Include="Reportes\Productos Terminados Farma\Especificaciones\ImpreEspecificacionesPTIngles.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ImpreEspecificacionesPTIngles.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\Productos Terminados\Especificaciones\ReporteEspecifXVersion.vb">
+    <Compile Include="Reportes\Productos Terminados Farma\Especificaciones\ReporteEspecifXVersion.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReporteEspecifXVersion.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\Productos Terminados\Especificaciones\ReporteListadoEspecifPTaFecha.vb">
+    <Compile Include="Reportes\Productos Terminados Farma\Especificaciones\ReporteListadoEspecifPTaFecha.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReporteListadoEspecifPTaFecha.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\Productos Terminados\Especificaciones\ReporteListaPTVencidos.vb">
+    <Compile Include="Reportes\Productos Terminados Farma\Especificaciones\ReporteListaPTVencidos.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReporteListaPTVencidos.rpt</DependentUpon>
@@ -488,6 +506,12 @@
       <DependentUpon>VistaPrevia.vb</DependentUpon>
     </Compile>
     <Compile Include="Reportes\VistaPrevia.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reportes\VistaPreviaDBAuxi.Designer.vb">
+      <DependentUpon>VistaPreviaDBAuxi.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\VistaPreviaDBAuxi.vb">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
@@ -648,44 +672,59 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteEtiContraII.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Productos Terminados\Ensayos Intermedios\imprecalidadresultado.rpt">
+    <EmbeddedResource Include="Reportes\Productos Terminados Farma\Certificados de Analisis\certificadonuevofarmasegunda.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>certificadonuevofarmasegunda.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Productos Terminados Farma\Certificados de Analisis\certificadonuevofarmaprimero.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>certificadonuevofarmaprimero.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Productos Terminados Farma\Certificados de Analisis\certificadonuevofarma.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>certificadonuevofarma.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Productos Terminados Farma\Ensayos Intermedios\imprecalidadresultado.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>imprecalidadresultado.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Productos Terminados\Ensayos Intermedios\imprecalidadresultadoReduccionAl80.rpt">
+    <EmbeddedResource Include="Reportes\Productos Terminados Farma\Ensayos Intermedios\imprecalidadresultadoReduccionAl80.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>imprecalidadresultadoReduccionAl80.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Productos Terminados\Ensayos Intermedios\NOResultadosIntermediosPT.rpt">
+    <EmbeddedResource Include="Reportes\Productos Terminados Farma\Ensayos Intermedios\NOResultadosIntermediosPT.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>NOResultadosIntermediosPT.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Productos Terminados\Ensayos Intermedios\ValoresEnsayosIntermediosPTFarma.rpt">
+    <EmbeddedResource Include="Reportes\Productos Terminados Farma\Ensayos Intermedios\ValoresEnsayosIntermediosPTFarma.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ValoresEnsayosIntermediosPTFarma.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Productos Terminados\Especificaciones\ImpreEspecificacionesPT.rpt">
+    <EmbeddedResource Include="Reportes\Productos Terminados Farma\Especificaciones\ImpreEspecificacionesPT.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ImpreEspecificacionesPT.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Productos Terminados\Especificaciones\ImpreEspecificacionesPTIngles.rpt">
+    <EmbeddedResource Include="Reportes\Productos Terminados Farma\Especificaciones\ImpreEspecificacionesPTIngles.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ImpreEspecificacionesPTIngles.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Productos Terminados\Especificaciones\ReporteEspecifXVersion.rpt">
+    <EmbeddedResource Include="Reportes\Productos Terminados Farma\Especificaciones\ReporteEspecifXVersion.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteEspecifXVersion.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Productos Terminados\Especificaciones\ReporteListadoEspecifPTaFecha.rpt">
+    <EmbeddedResource Include="Reportes\Productos Terminados Farma\Especificaciones\ReporteListadoEspecifPTaFecha.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteListadoEspecifPTaFecha.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Productos Terminados\Especificaciones\ReporteListaPTVencidos.rpt">
+    <EmbeddedResource Include="Reportes\Productos Terminados Farma\Especificaciones\ReporteListaPTVencidos.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteListaPTVencidos.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\VistaPrevia.resx">
       <DependentUpon>VistaPrevia.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\VistaPreviaDBAuxi.resx">
+      <DependentUpon>VistaPreviaDBAuxi.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

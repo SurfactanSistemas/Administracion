@@ -94,9 +94,9 @@ Module Helper
 
     End Function
 
-    Public Function _ConectarA(Optional ByVal empresa As String = "SurfactanSa") As String
+    Public Function _ConectarA(Optional ByVal empresa As String = "SurfactanSa", Optional ByVal TmbPellital As Boolean = False) As String
 
-        Return Conexion._ConectarA(empresa)
+        Return Conexion._ConectarA(empresa, TmbPellital)
 
     End Function
 
