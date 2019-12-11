@@ -30,6 +30,7 @@ Partial Class MenuPrincipal
         Me.ListadoDeEspecificacionesDeMPAFechaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EspecificacionesPorVersiónToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EmisiónDeEtiquetasSimplesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LotesVencidosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FarmaIngresoDeEnsayosProductosTerminadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ControlesIntermedisToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EspecificacionesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -51,7 +52,7 @@ Partial Class MenuPrincipal
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnCambioEmpresa = New System.Windows.Forms.Button()
-        Me.LotesVencidosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.VerificacionDeVencimientosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -80,7 +81,7 @@ Partial Class MenuPrincipal
         '
         'MateriasPrimasToolStripMenuItem
         '
-        Me.MateriasPrimasToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ListadoDeEnsayosEnMPToolStripMenuItem, Me.ListadoDeEspecificacionesDeMPAFechaToolStripMenuItem, Me.EspecificacionesPorVersiónToolStripMenuItem, Me.EmisiónDeEtiquetasSimplesToolStripMenuItem, Me.LotesVencidosToolStripMenuItem})
+        Me.MateriasPrimasToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ListadoDeEnsayosEnMPToolStripMenuItem, Me.ListadoDeEspecificacionesDeMPAFechaToolStripMenuItem, Me.EspecificacionesPorVersiónToolStripMenuItem, Me.VerificacionDeVencimientosToolStripMenuItem, Me.EmisiónDeEtiquetasSimplesToolStripMenuItem, Me.LotesVencidosToolStripMenuItem})
         Me.MateriasPrimasToolStripMenuItem.Name = "MateriasPrimasToolStripMenuItem"
         Me.MateriasPrimasToolStripMenuItem.Size = New System.Drawing.Size(250, 22)
         Me.MateriasPrimasToolStripMenuItem.Text = "Materias Primas"
@@ -108,6 +109,12 @@ Partial Class MenuPrincipal
         Me.EmisiónDeEtiquetasSimplesToolStripMenuItem.Name = "EmisiónDeEtiquetasSimplesToolStripMenuItem"
         Me.EmisiónDeEtiquetasSimplesToolStripMenuItem.Size = New System.Drawing.Size(297, 22)
         Me.EmisiónDeEtiquetasSimplesToolStripMenuItem.Text = "Emisión de Etiquetas Simples"
+        '
+        'LotesVencidosToolStripMenuItem
+        '
+        Me.LotesVencidosToolStripMenuItem.Name = "LotesVencidosToolStripMenuItem"
+        Me.LotesVencidosToolStripMenuItem.Size = New System.Drawing.Size(297, 22)
+        Me.LotesVencidosToolStripMenuItem.Text = "Lotes Vencidos"
         '
         'FarmaIngresoDeEnsayosProductosTerminadosToolStripMenuItem
         '
@@ -262,11 +269,11 @@ Partial Class MenuPrincipal
         Me.btnCambioEmpresa.Text = "CAMBIAR EMPRESA"
         Me.btnCambioEmpresa.UseVisualStyleBackColor = True
         '
-        'LotesVencidosToolStripMenuItem
+        'VerificacionDeVencimientosToolStripMenuItem
         '
-        Me.LotesVencidosToolStripMenuItem.Name = "LotesVencidosToolStripMenuItem"
-        Me.LotesVencidosToolStripMenuItem.Size = New System.Drawing.Size(297, 22)
-        Me.LotesVencidosToolStripMenuItem.Text = "Lotes Vencidos"
+        Me.VerificacionDeVencimientosToolStripMenuItem.Name = "VerificacionDeVencimientosToolStripMenuItem"
+        Me.VerificacionDeVencimientosToolStripMenuItem.Size = New System.Drawing.Size(297, 22)
+        Me.VerificacionDeVencimientosToolStripMenuItem.Text = "Verificacion de Vencimientos"
         '
         'MenuPrincipal
         '
@@ -318,4 +325,5 @@ Partial Class MenuPrincipal
     Friend WithEvents ConsultaDeEspecificacionesPorVersionToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents EmisionDeEtiquetasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents LotesVencidosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents VerificacionDeVencimientosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class

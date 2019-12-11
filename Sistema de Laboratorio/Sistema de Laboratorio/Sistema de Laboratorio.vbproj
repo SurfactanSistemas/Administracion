@@ -481,10 +481,22 @@
       <DependentUpon>ReporteListaPTVencidos.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\ReporteVerificacionDeVencimientosMP.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteVerificacionDeVencimientosMP.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\VistaPrevia.designer.vb">
       <DependentUpon>VistaPrevia.vb</DependentUpon>
     </Compile>
     <Compile Include="Reportes\VistaPrevia.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VerificacionDeVencimientosMP.Designer.vb">
+      <DependentUpon>VerificacionDeVencimientosMP.vb</DependentUpon>
+    </Compile>
+    <Compile Include="VerificacionDeVencimientosMP.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="VerificacionLoteVencidoMP.Designer.vb">
@@ -698,8 +710,15 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteListaPTVencidos.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ReporteVerificacionDeVencimientosMP.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteVerificacionDeVencimientosMP.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\VistaPrevia.resx">
       <DependentUpon>VistaPrevia.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VerificacionDeVencimientosMP.resx">
+      <DependentUpon>VerificacionDeVencimientosMP.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VerificacionLoteVencidoMP.resx">
       <DependentUpon>VerificacionLoteVencidoMP.vb</DependentUpon>

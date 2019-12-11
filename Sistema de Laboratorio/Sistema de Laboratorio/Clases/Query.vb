@@ -3,7 +3,7 @@ Imports Laboratorio.Clases
 
 Module Query
 
-    Public Function GetSingle(ByVal q As String, Optional ByVal WBase As String = "") As DataRow
+    Public Function GetSingle(ByVal q As String, Optional ByVal WBase As String = "", Optional ByVal TmbPellital As Boolean = False) As DataRow
 
         If WBase.Trim = "" Then WBase = Operador.Base
 
@@ -11,7 +11,7 @@ Module Query
 
         Using cn As New SqlConnection
 
-            cn.ConnectionString = _ConectarA(WBase) 'ConfigurationManager.ConnectionStrings("CS").ToString
+            cn.ConnectionString = _ConectarA(WBase, TmbPellital) 'ConfigurationManager.ConnectionStrings("CS").ToString
             cn.Open()
 
             Using cm As New SqlCommand(q)
@@ -32,7 +32,7 @@ Module Query
 
     End Function
 
-    Public Function GetAll(ByVal q As String, Optional ByVal WBase As String = "") As DataTable
+    Public Function GetAll(ByVal q As String, Optional ByVal WBase As String = "", Optional ByVal TmbPellital As Boolean = False) As DataTable
 
         If WBase.Trim = "" Then WBase = Operador.Base
 
@@ -40,7 +40,7 @@ Module Query
 
         Using cn As New SqlConnection
 
-            cn.ConnectionString = _ConectarA(WBase) 'ConfigurationManager.ConnectionStrings("CS").ToString
+            cn.ConnectionString = _ConectarA(WBase, TmbPellital) 'ConfigurationManager.ConnectionStrings("CS").ToString
             cn.Open()
 
             Using cm As New SqlCommand(q)

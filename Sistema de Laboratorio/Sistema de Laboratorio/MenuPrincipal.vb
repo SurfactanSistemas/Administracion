@@ -128,4 +128,10 @@
             .Show(Me)
         End With
     End Sub
+
+    Private Sub VerificacionDeVencimientosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles VerificacionDeVencimientosToolStripMenuItem.Click
+        With New VerificacionDeVencimientosMP
+            .Show(Me)
+        End With
+    End Sub
 End Class

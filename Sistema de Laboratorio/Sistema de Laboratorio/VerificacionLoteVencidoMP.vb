@@ -593,7 +593,6 @@ Public Class VerificacionLoteVencidoMP
             With New DetallesEnsayosMP(DGV_Verificacion.CurrentCell.Value)
                 .Show(Me)
             End With
-
         End If
     End Sub
 End Class
