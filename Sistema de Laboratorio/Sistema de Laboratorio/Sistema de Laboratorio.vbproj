@@ -491,6 +491,11 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\Productos Terminados Farma\Especificaciones\ReporteListadoEspecifPTaFecha.vb">
+    	<AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteListadoEspecifPTaFecha.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\ReporteImpresionEtiquetasMuestras.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -519,6 +524,8 @@
       <DependentUpon>VistaPreviaDBAuxi.vb</DependentUpon>
     </Compile>
     <Compile Include="Reportes\VistaPreviaDBAuxi.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="VerificacionLoteVencidoMP.Designer.vb">
       <DependentUpon>VerificacionLoteVencidoMP.vb</DependentUpon>
     </Compile>
@@ -729,19 +736,15 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteEspecifXVersion.vb</LastGenOutput>
     </EmbeddedResource>
-<<<<<<< HEAD
     <EmbeddedResource Include="Reportes\Productos Terminados Farma\Especificaciones\ReporteListadoEspecifPTaFecha.rpt">
-=======
+    	<Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteListadoEspecifPTaFecha.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\ReporteImpresionEtiquetasMuestras.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteImpresionEtiquetasMuestras.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\ReporteListadoEspecifPTaFecha.rpt">
-<<<<<<< HEAD
->>>>>>> Andres: Listado lotes vencidos MP
-=======
->>>>>>> b1377ec6496ad314bf2cc71053703f7281da049d
->>>>>>> e88557b781becde5e673460e8c2dfba36942c096
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteListadoEspecifPTaFecha.vb</LastGenOutput>
     </EmbeddedResource>
@@ -754,6 +757,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\VistaPreviaDBAuxi.resx">
       <DependentUpon>VistaPreviaDBAuxi.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="VerificacionLoteVencidoMP.resx">
       <DependentUpon>VerificacionLoteVencidoMP.vb</DependentUpon>
     </EmbeddedResource>
