@@ -45,7 +45,7 @@ Public Class ConsDeEspefXVersion
             e.Handled = True
         End If
     End Sub
-    
+
     Private Sub NumerosConComas(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs)
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) And Not (CChar(".")) = e.KeyChar Then
             e.Handled = True
@@ -157,7 +157,7 @@ Public Class ConsDeEspefXVersion
             txtVersion.Text = txtVersion.Text + 1
             txtVersion_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
         End If
-        
+
     End Sub
 
     Private Sub btnAnteriorVersion_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAnteriorVersion.Click
@@ -167,7 +167,7 @@ Public Class ConsDeEspefXVersion
                 txtVersion_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
             End If
         End If
-        
+
     End Sub
 
     Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
@@ -191,7 +191,7 @@ Public Class ConsDeEspefXVersion
     End Sub
 
     Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
-        Dim tablaReporte as New DataTable
+        Dim tablaReporte As New DataTable
         With tablaReporte.Columns
             .Add("Codigo")
             .Add("DescripcionPT")

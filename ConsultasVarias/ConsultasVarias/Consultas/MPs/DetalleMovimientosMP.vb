@@ -485,6 +485,11 @@ Public Class DetalleMovimientosMP
                 WTipo = OrDefault(.Item("Tipo"), 0)
                 Auxi = OrDefault(.Item("TipoPro"), 0)
 
+                WFecha = ""
+                WFechaOrd = ""
+                WNumero = ""
+                WObservaciones = ""
+
                 Select Case UCase(WTipoMat)
                     Case "DK", "NS", "NK"
                         If WTipo = 2 Then

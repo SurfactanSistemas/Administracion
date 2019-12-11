@@ -1,5 +1,6 @@
 ﻿Imports System.IO
 Imports System.Text
+Imports System.Text.RegularExpressions
 Imports CrystalDecisions.CrystalReports.Engine
 
 Public Class ImpreProcesos
@@ -37,8 +38,10 @@ Public Class ImpreProcesos
                         Dim WTipoReporte As Integer = Environment.GetCommandLineArgs(2)
                         Dim WPartida As Integer = Environment.GetCommandLineArgs(3)
                         Dim WTipoSalida As Integer = Environment.GetCommandLineArgs(4)
+                        Dim WNombrePDF As String = ""
+                        If Environment.GetCommandLineArgs.Length > 5 Then WNombrePDF = Environment.GetCommandLineArgs(5)
 
-                        _GenerarCertificadoAnalisisFarma(WTipoReporte, WPartida, WTipoSalida)
+                        _GenerarCertificadoAnalisisFarma(WTipoReporte, WPartida, WTipoSalida, WNombrePDF)
 
                     Case 3 ' Resultados de Calidad (PrueterFarma -> Registro de Producción)
 
@@ -81,11 +84,11 @@ Public Class ImpreProcesos
             'Dim WTerminado2 As String = "PT-25062-780"
             'Dim WTipoSalida2 As Integer = 2
 
-            '_GenerarCertificadoAnalisisFarma(WTipoReporte2, WPartida2, WTipoSalida2)
+            ''_GenerarCertificadoAnalisisFarma(WTipoReporte2, WPartida2, WTipoSalida2)
 
             'WTipoReporte2 = 3
 
-            '_GenerarCertificadoAnalisisFarma(WTipoReporte2, WPartida2, WTipoSalida2)
+            '_GenerarCertificadoAnalisisFarma(WTipoReporte2, WPartida2, WTipoSalida2, "C:\blablabla\prueba.pdf")
 
             'Dim WTerminado2 As String = "SE-25012-994"
             'Dim WPartida2 As Integer = "0"
@@ -137,15 +140,15 @@ Public Class ImpreProcesos
 
     End Sub
 
-    Private Sub _GenerarCertificadoAnalisisFarma(ByVal WTipoReporte As Integer, ByVal wPartida As Integer, ByVal wTipoSalida As Integer)
+    Private Sub _GenerarCertificadoAnalisisFarma(ByVal WTipoReporte As Integer, ByVal wPartida As Integer, ByVal wTipoSalida As Integer, Optional ByVal WNombrePDF As String = "")
 
         Dim frm As New ReportDocument
         Dim WFormulas() As String
         Dim WNombreArchivoFormulas As String = "C:\ImpreCertificados\" & wPartida
+
         '
         ' Determinamos el Reporte a imprimir y los datos de las formulas a pasar como parámetro.
         '
-
         Select Case WTipoReporte
             Case 1
 
@@ -197,14 +200,34 @@ Public Class ImpreProcesos
             .Reporte = frm
             .Formula = "{Certificado.Partida} = " & wPartida & ""
 
-            Dim WNombre = "Certificado " & wPartida
+            Dim WNombre As String = WNombrePDF
+            Dim WRuta As String = ""
 
-            Select Case WTipoReporte
-                Case 2
-                    WNombre &= " - Primera"
-                Case 3
-                    WNombre &= " - Segunda"
-            End Select
+            If wTipoSalida = 4 Then WRuta = "C:\ImpreCertificados\"
+
+            If WNombre.Trim = "" Then
+
+                WNombre = "Certificado " & wPartida
+                Select Case WTipoReporte
+                    Case 2
+                        WNombre &= " - Primera"
+                    Case 3
+                        WNombre &= " - Segunda"
+                End Select
+
+            Else
+
+                Dim match = Regex.Split(WNombrePDF, "[\w+\.pdf]+$")
+
+                If match.Count > 0 AndAlso match(0).Trim <> "" Then
+                    wTipoSalida = 4
+                    WRuta = match(0)
+                    WNombre = WNombrePDF.Replace(WRuta, "")
+                End If
+
+            End If
+
+            If Not UCase(WNombre).EndsWith("PDF") And WNombre.Trim <> "" Then WNombre &= ".pdf"
 
             Select Case wTipoSalida
                 Case 1, 6
@@ -214,7 +237,7 @@ Public Class ImpreProcesos
                 Case 3
                     .Exportar(WNombre, CrystalDecisions.Shared.ExportFormatType.PortableDocFormat)
                 Case 4
-                    .Exportar(WNombre & ".pdf", CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, "C:\ImpreCertificados\")
+                    .Exportar(WNombre, CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, WRuta)
                 Case 5
                     .Exportar(WNombre, CrystalDecisions.Shared.ExportFormatType.WordForWindows)
             End Select
@@ -395,7 +418,7 @@ Public Class ImpreProcesos
                 Dim WPoe As String = OrDefault(.Item("Poe"), "")
                 Dim WIdentificacion As String = OrDefault(.Item("Identificacion"), "")
                 Dim WPoeLimpieza As String = OrDefault(.Item("PoeLimpieza"), "")
-                Dim ZTeorico As String = formatonumerico(OrDefault(ZTeorico, 0))
+                Dim ZTeorico As String = formatonumerico(OrDefault(WTeorico, 0))
                 Dim WDescTerminado As String = OrDefault(WTerm.Item("Descripcion"), "").ToString.Trim
 
                 If WIdentificacion.Trim <> "" Then WDescripcion = WIdentificacion.Trim & " - " & WDescripcion
@@ -414,7 +437,7 @@ Public Class ImpreProcesos
                 Dim WPoe As String = ""
                 Dim WIdentificacion As String = ""
                 Dim WPoeLimpieza As String = ""
-                Dim ZTeorico As String = formatonumerico(OrDefault(ZTeorico, 0))
+                Dim ZTeorico As String = formatonumerico(OrDefault(WTeorico, 0))
                 Dim WDescTerminado As String = OrDefault(WTerm.Item("Descripcion"), "").ToString.Trim
 
                 If WIdentificacion.Trim <> "" Then WDescripcion = WIdentificacion.Trim & " - " & WDescripcion
@@ -459,7 +482,7 @@ Public Class ImpreProcesos
                 Dim WPoe As String = OrDefault(.Item("Poe"), "")
                 Dim WIdentificacion As String = OrDefault(.Item("Identificacion"), "")
                 Dim WPoeLimpieza As String = OrDefault(.Item("PoeLimpieza"), "")
-                Dim ZTeorico As String = formatonumerico(OrDefault(ZTeorico, 0))
+                Dim ZTeorico As String = formatonumerico(OrDefault(WTeorico, 0))
                 Dim WDescTerminado As String = OrDefault(WTerm.Item("Descripcion"), "").ToString.Trim
 
                 Dim WMetodo As String = WPoeLimpieza & " - " & OrDefault(.Item("Metodo"), "").ToString.Trim

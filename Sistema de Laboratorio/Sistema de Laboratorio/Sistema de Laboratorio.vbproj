@@ -182,10 +182,22 @@
     <Compile Include="Consultas\NotasCertificadosAnalisis\NotasCertificadosAnalisis.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ImpresionEtiquetasMuestras.Designer.vb">
-      <DependentUpon>ImpresionEtiquetasMuestras.vb</DependentUpon>
+    <Compile Include="ListadoDeEnsayoDePT.Designer.vb">
+      <DependentUpon>ListadoDeEnsayoDePT.vb</DependentUpon>
     </Compile>
-    <Compile Include="ImpresionEtiquetasMuestras.vb">
+    <Compile Include="ListadoDeEnsayoDePT.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListadoEspecifPTFecha.Designer.vb">
+      <DependentUpon>ListadoEspecifPTFecha.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ListadoEspecifPTFecha.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListadoPTVencidos.Designer.vb">
+      <DependentUpon>ListadoPTVencidos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ListadoPTVencidos.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Maestros\Ingreso Frases H &amp; P\FrasesHP.Designer.vb">
@@ -204,24 +216,6 @@
       <DependentUpon>IngresoDatosAdicMP.vb</DependentUpon>
     </Compile>
     <Compile Include="Maestros\Ingreso Frases H &amp; P\IngresoDatosAdicMP.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ListadoDeEnsayoDePT.Designer.vb">
-      <DependentUpon>ListadoDeEnsayoDePT.vb</DependentUpon>
-    </Compile>
-    <Compile Include="ListadoDeEnsayoDePT.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ListadoEspecifPTFecha.Designer.vb">
-      <DependentUpon>ListadoEspecifPTFecha.vb</DependentUpon>
-    </Compile>
-    <Compile Include="ListadoEspecifPTFecha.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ListadoPTVencidos.Designer.vb">
-      <DependentUpon>ListadoPTVencidos.vb</DependentUpon>
-    </Compile>
-    <Compile Include="ListadoPTVencidos.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Login.Designer.vb">
@@ -290,28 +284,52 @@
     <Compile Include="Maestros\Materias Primas\Etiquetas\MuestrasSimples\EmisionEtiquetasSimples.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Maestros\Productos Terminados\Ensayos Intermedios\IngresoEnsayosIntermediosPT.Designer.vb">
+    <Compile Include="Maestros\Productos Terminados Farma\Autorizacion de Pedidos\AutorizarPedido.Designer.vb">
+      <DependentUpon>AutorizarPedido.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\Productos Terminados Farma\Autorizacion de Pedidos\AutorizarPedido.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestros\Productos Terminados Farma\Autorizacion de Pedidos\ListadoAutorizacionPedidos.Designer.vb">
+      <DependentUpon>ListadoAutorizacionPedidos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\Productos Terminados Farma\Autorizacion de Pedidos\ListadoAutorizacionPedidos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestros\Productos Terminados Farma\Datos A Mostrar en CA\IngresoDatosMostrarEnCertificadosAnalisis.Designer.vb">
+      <DependentUpon>IngresoDatosMostrarEnCertificadosAnalisis.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\Productos Terminados Farma\Datos A Mostrar en CA\IngresoDatosMostrarEnCertificadosAnalisis.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestros\Productos Terminados Farma\Emision CA\EmisionCertificadoAnalisis.Designer.vb">
+      <DependentUpon>EmisionCertificadoAnalisis.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\Productos Terminados Farma\Emision CA\EmisionCertificadoAnalisis.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestros\Productos Terminados Farma\Ensayos Intermedios\IngresoEnsayosIntermediosPT.Designer.vb">
       <DependentUpon>IngresoEnsayosIntermediosPT.vb</DependentUpon>
     </Compile>
-    <Compile Include="Maestros\Productos Terminados\Ensayos Intermedios\IngresoEnsayosIntermediosPT.vb">
+    <Compile Include="Maestros\Productos Terminados Farma\Ensayos Intermedios\IngresoEnsayosIntermediosPT.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Maestros\Productos Terminados\Especificaciones\DefinicionFormulaEspecificacion.Designer.vb">
+    <Compile Include="Maestros\Productos Terminados Farma\Especificaciones\DefinicionFormulaEspecificacion.Designer.vb">
       <DependentUpon>DefinicionFormulaEspecificacion.vb</DependentUpon>
     </Compile>
-    <Compile Include="Maestros\Productos Terminados\Especificaciones\DefinicionFormulaEspecificacion.vb">
+    <Compile Include="Maestros\Productos Terminados Farma\Especificaciones\DefinicionFormulaEspecificacion.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Maestros\Productos Terminados\Especificaciones\IngresoEspecificacionesPT.Designer.vb">
+    <Compile Include="Maestros\Productos Terminados Farma\Especificaciones\IngresoEspecificacionesPT.Designer.vb">
       <DependentUpon>IngresoEspecificacionesPT.vb</DependentUpon>
     </Compile>
-    <Compile Include="Maestros\Productos Terminados\Especificaciones\IngresoEspecificacionesPT.vb">
+    <Compile Include="Maestros\Productos Terminados Farma\Especificaciones\IngresoEspecificacionesPT.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Maestros\Productos Terminados\Especificaciones\IngresoParametrosEspecificaciones.Designer.vb">
+    <Compile Include="Maestros\Productos Terminados Farma\Especificaciones\IngresoParametrosEspecificaciones.Designer.vb">
       <DependentUpon>IngresoParametrosEspecificaciones.vb</DependentUpon>
     </Compile>
-    <Compile Include="Maestros\Productos Terminados\Especificaciones\IngresoParametrosEspecificaciones.vb">
+    <Compile Include="Maestros\Productos Terminados Farma\Especificaciones\IngresoParametrosEspecificaciones.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MenuPrincipal.Designer.vb">
@@ -340,9 +358,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DBAuxi.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Reportes\DBAuxi.vb">
-      <DependentUpon>DBAuxi.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Reportes\Ensayos\ReporteListadoEnsayos.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -361,7 +376,7 @@
       <DependentUpon>ReporteDatosAdiciolesMP.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\Ingreso Datos Adicionales MP\ReporteDatosAdicionalesPT.vb">
+    <Compile Include="Reportes\Ingreso Datos Adicionales PT\ReporteDatosAdicionalesPT.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReporteDatosAdicionalesPT.rpt</DependentUpon>
@@ -415,52 +430,70 @@
       <DependentUpon>ReporteEtiContraII.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\Productos Terminados\Ensayos Intermedios\imprecalidadresultado.vb">
+    <Compile Include="Reportes\Productos Terminados Farma\Certificados de Analisis\certificadonuevofarmasegunda.vb">
+      <DependentUpon>certificadonuevofarmasegunda.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reportes\Productos Terminados Farma\Certificados de Analisis\certificadonuevofarmaprimero.vb">
+      <DependentUpon>certificadonuevofarmaprimero.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reportes\Productos Terminados Farma\Certificados de Analisis\certificadonuevofarma.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>certificadonuevofarma.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Productos Terminados Farma\Ensayos Intermedios\imprecalidadresultado.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>imprecalidadresultado.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\Productos Terminados\Ensayos Intermedios\imprecalidadresultadoReduccionAl80.vb">
+    <Compile Include="Reportes\Productos Terminados Farma\Ensayos Intermedios\imprecalidadresultadoReduccionAl80.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>imprecalidadresultadoReduccionAl80.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\Productos Terminados\Ensayos Intermedios\NOResultadosIntermediosPT.vb">
+    <Compile Include="Reportes\Productos Terminados Farma\Ensayos Intermedios\NOResultadosIntermediosPT.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>NOResultadosIntermediosPT.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\Productos Terminados\Ensayos Intermedios\ValoresEnsayosIntermediosPTFarma.vb">
+    <Compile Include="Reportes\Productos Terminados Farma\Ensayos Intermedios\ValoresEnsayosIntermediosPTFarma.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ValoresEnsayosIntermediosPTFarma.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\Productos Terminados\Especificaciones\ImpreEspecificacionesPT.vb">
+    <Compile Include="Reportes\Productos Terminados Farma\Especificaciones\ImpreEspecificacionesPT.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ImpreEspecificacionesPT.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\Productos Terminados\Especificaciones\ImpreEspecificacionesPTIngles.vb">
+    <Compile Include="Reportes\Productos Terminados Farma\Especificaciones\ImpreEspecificacionesPTIngles.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ImpreEspecificacionesPTIngles.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\Listado Ensayos PT\ReporteListadoEnsayosPT.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ReporteListadoEnsayosPT.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reportes\ReporteEspecifXVersion.vb">
+    <Compile Include="Reportes\Productos Terminados Farma\Especificaciones\ReporteEspecifXVersion.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReporteEspecifXVersion.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Productos Terminados Farma\Especificaciones\ReporteListadoEspecifPTaFecha.vb">
+    	<AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteListadoEspecifPTaFecha.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\ReporteImpresionEtiquetasMuestras.vb">
@@ -475,7 +508,7 @@
       <DependentUpon>ReporteListadoEspecifPTaFecha.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\ReporteListaPTVencidos.vb">
+    <Compile Include="Reportes\Productos Terminados Farma\Especificaciones\ReporteListaPTVencidos.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReporteListaPTVencidos.rpt</DependentUpon>
@@ -497,6 +530,10 @@
       <DependentUpon>VerificacionDeVencimientosMP.vb</DependentUpon>
     </Compile>
     <Compile Include="VerificacionDeVencimientosMP.vb">
+    <Compile Include="Reportes\VistaPreviaDBAuxi.Designer.vb">
+      <DependentUpon>VistaPreviaDBAuxi.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\VistaPreviaDBAuxi.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="VerificacionLoteVencidoMP.Designer.vb">
@@ -555,15 +592,6 @@
     <EmbeddedResource Include="Maestros\Ingreso Frases H &amp; P\IngresoDatosAdicMP.resx">
       <DependentUpon>IngresoDatosAdicMP.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ListadoDeEnsayoDePT.resx">
-      <DependentUpon>ListadoDeEnsayoDePT.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ListadoEspecifPTFecha.resx">
-      <DependentUpon>ListadoEspecifPTFecha.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ListadoPTVencidos.resx">
-      <DependentUpon>ListadoPTVencidos.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.vb</DependentUpon>
     </EmbeddedResource>
@@ -597,16 +625,28 @@
     <EmbeddedResource Include="Maestros\Materias Primas\Etiquetas\MuestrasSimples\EmisionEtiquetasSimples.resx">
       <DependentUpon>EmisionEtiquetasSimples.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Maestros\Productos Terminados\Ensayos Intermedios\IngresoEnsayosIntermediosPT.resx">
+    <EmbeddedResource Include="Maestros\Productos Terminados Farma\Autorizacion de Pedidos\AutorizarPedido.resx">
+      <DependentUpon>AutorizarPedido.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\Productos Terminados Farma\Autorizacion de Pedidos\ListadoAutorizacionPedidos.resx">
+      <DependentUpon>ListadoAutorizacionPedidos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\Productos Terminados Farma\Datos A Mostrar en CA\IngresoDatosMostrarEnCertificadosAnalisis.resx">
+      <DependentUpon>IngresoDatosMostrarEnCertificadosAnalisis.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\Productos Terminados Farma\Emision CA\EmisionCertificadoAnalisis.resx">
+      <DependentUpon>EmisionCertificadoAnalisis.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\Productos Terminados Farma\Ensayos Intermedios\IngresoEnsayosIntermediosPT.resx">
       <DependentUpon>IngresoEnsayosIntermediosPT.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Maestros\Productos Terminados\Especificaciones\DefinicionFormulaEspecificacion.resx">
+    <EmbeddedResource Include="Maestros\Productos Terminados Farma\Especificaciones\DefinicionFormulaEspecificacion.resx">
       <DependentUpon>DefinicionFormulaEspecificacion.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Maestros\Productos Terminados\Especificaciones\IngresoEspecificacionesPT.resx">
+    <EmbeddedResource Include="Maestros\Productos Terminados Farma\Especificaciones\IngresoEspecificacionesPT.resx">
       <DependentUpon>IngresoEspecificacionesPT.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Maestros\Productos Terminados\Especificaciones\IngresoParametrosEspecificaciones.resx">
+    <EmbeddedResource Include="Maestros\Productos Terminados Farma\Especificaciones\IngresoParametrosEspecificaciones.resx">
       <DependentUpon>IngresoParametrosEspecificaciones.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MenuPrincipal.resx">
@@ -630,7 +670,7 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteDatosAdiciolesMP.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Ingreso Datos Adicionales MP\ReporteDatosAdicionalesPT.rpt">
+    <EmbeddedResource Include="Reportes\Ingreso Datos Adicionales PT\ReporteDatosAdicionalesPT.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteDatosAdicionalesPT.vb</LastGenOutput>
     </EmbeddedResource>
@@ -666,37 +706,49 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteEtiContraII.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Productos Terminados\Ensayos Intermedios\imprecalidadresultado.rpt">
+    <EmbeddedResource Include="Reportes\Productos Terminados Farma\Certificados de Analisis\certificadonuevofarmasegunda.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>certificadonuevofarmasegunda.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Productos Terminados Farma\Certificados de Analisis\certificadonuevofarmaprimero.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>certificadonuevofarmaprimero.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Productos Terminados Farma\Certificados de Analisis\certificadonuevofarma.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>certificadonuevofarma.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Productos Terminados Farma\Ensayos Intermedios\imprecalidadresultado.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>imprecalidadresultado.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Productos Terminados\Ensayos Intermedios\imprecalidadresultadoReduccionAl80.rpt">
+    <EmbeddedResource Include="Reportes\Productos Terminados Farma\Ensayos Intermedios\imprecalidadresultadoReduccionAl80.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>imprecalidadresultadoReduccionAl80.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Productos Terminados\Ensayos Intermedios\NOResultadosIntermediosPT.rpt">
+    <EmbeddedResource Include="Reportes\Productos Terminados Farma\Ensayos Intermedios\NOResultadosIntermediosPT.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>NOResultadosIntermediosPT.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Productos Terminados\Ensayos Intermedios\ValoresEnsayosIntermediosPTFarma.rpt">
+    <EmbeddedResource Include="Reportes\Productos Terminados Farma\Ensayos Intermedios\ValoresEnsayosIntermediosPTFarma.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ValoresEnsayosIntermediosPTFarma.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Productos Terminados\Especificaciones\ImpreEspecificacionesPT.rpt">
+    <EmbeddedResource Include="Reportes\Productos Terminados Farma\Especificaciones\ImpreEspecificacionesPT.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ImpreEspecificacionesPT.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Productos Terminados\Especificaciones\ImpreEspecificacionesPTIngles.rpt">
+    <EmbeddedResource Include="Reportes\Productos Terminados Farma\Especificaciones\ImpreEspecificacionesPTIngles.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ImpreEspecificacionesPTIngles.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Listado Ensayos PT\ReporteListadoEnsayosPT.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>ReporteListadoEnsayosPT.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\ReporteEspecifXVersion.rpt">
+    <EmbeddedResource Include="Reportes\Productos Terminados Farma\Especificaciones\ReporteEspecifXVersion.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteEspecifXVersion.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Productos Terminados Farma\Especificaciones\ReporteListadoEspecifPTaFecha.rpt">
+    	<Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteListadoEspecifPTaFecha.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\ReporteImpresionEtiquetasMuestras.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -706,7 +758,7 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteListadoEspecifPTaFecha.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\ReporteListaPTVencidos.rpt">
+    <EmbeddedResource Include="Reportes\Productos Terminados Farma\Especificaciones\ReporteListaPTVencidos.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteListaPTVencidos.vb</LastGenOutput>
     </EmbeddedResource>
@@ -719,6 +771,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="VerificacionDeVencimientosMP.resx">
       <DependentUpon>VerificacionDeVencimientosMP.vb</DependentUpon>
+    <EmbeddedResource Include="Reportes\VistaPreviaDBAuxi.resx">
+      <DependentUpon>VistaPreviaDBAuxi.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VerificacionLoteVencidoMP.resx">
       <DependentUpon>VerificacionLoteVencidoMP.vb</DependentUpon>
@@ -752,6 +806,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Auxiliares\Ayudas\" />
+    <Folder Include="Maestros\Productos Terminados No Farma\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
@@ -760,7 +815,6 @@
     <Content Include="libs\info.lundin.math.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Resources\LogoSurfactan.jpg" />
     <None Include="SGA\SGA9.PNG" />
     <None Include="SGA\SGA8.PNG" />
     <None Include="SGA\SGA7.PNG" />

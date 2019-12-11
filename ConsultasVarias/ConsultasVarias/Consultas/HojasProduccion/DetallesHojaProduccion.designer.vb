@@ -22,8 +22,8 @@ Partial Class DetallesHojaProduccion
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -60,6 +60,7 @@ Partial Class DetallesHojaProduccion
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LotePartida = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Cantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnMovimientos = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -106,6 +107,7 @@ Partial Class DetallesHojaProduccion
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.btnMovimientos)
         Me.GroupBox1.Controls.Add(Me.btnVerEnsayos)
         Me.GroupBox1.Controls.Add(Me.Button1)
         Me.GroupBox1.Controls.Add(Me.txtSaldo)
@@ -128,20 +130,20 @@ Partial Class DetallesHojaProduccion
         '
         'btnVerEnsayos
         '
-        Me.btnVerEnsayos.Location = New System.Drawing.Point(450, 11)
+        Me.btnVerEnsayos.Location = New System.Drawing.Point(421, 11)
         Me.btnVerEnsayos.Name = "btnVerEnsayos"
-        Me.btnVerEnsayos.Size = New System.Drawing.Size(120, 29)
+        Me.btnVerEnsayos.Size = New System.Drawing.Size(92, 29)
         Me.btnVerEnsayos.TabIndex = 4
         Me.btnVerEnsayos.Text = "Ver Ensayos"
         Me.btnVerEnsayos.UseVisualStyleBackColor = True
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(576, 11)
+        Me.Button1.Location = New System.Drawing.Point(626, 11)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(120, 29)
+        Me.Button1.Size = New System.Drawing.Size(82, 29)
         Me.Button1.TabIndex = 4
-        Me.Button1.Text = "Cerrar Ventana"
+        Me.Button1.Text = "Cerrar"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'txtSaldo
@@ -303,7 +305,7 @@ Partial Class DetallesHojaProduccion
         '
         'txtFechaIngreso
         '
-        Me.txtFechaIngreso.Location = New System.Drawing.Point(362, 15)
+        Me.txtFechaIngreso.Location = New System.Drawing.Point(347, 15)
         Me.txtFechaIngreso.Mask = "00/00/0000"
         Me.txtFechaIngreso.Name = "txtFechaIngreso"
         Me.txtFechaIngreso.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -316,7 +318,7 @@ Partial Class DetallesHojaProduccion
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(278, 19)
+        Me.Label5.Location = New System.Drawing.Point(266, 19)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(78, 13)
         Me.Label5.TabIndex = 0
@@ -324,7 +326,7 @@ Partial Class DetallesHojaProduccion
         '
         'txtFecha
         '
-        Me.txtFecha.Location = New System.Drawing.Point(206, 15)
+        Me.txtFecha.Location = New System.Drawing.Point(196, 15)
         Me.txtFecha.Mask = "00/00/0000"
         Me.txtFecha.Name = "txtFecha"
         Me.txtFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -337,7 +339,7 @@ Partial Class DetallesHojaProduccion
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(165, 19)
+        Me.Label4.Location = New System.Drawing.Point(155, 19)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(40, 13)
         Me.Label4.TabIndex = 0
@@ -357,7 +359,7 @@ Partial Class DetallesHojaProduccion
         '
         'txtPartida
         '
-        Me.txtPartida.Location = New System.Drawing.Point(105, 15)
+        Me.txtPartida.Location = New System.Drawing.Point(102, 15)
         Me.txtPartida.Mask = "000000"
         Me.txtPartida.Name = "txtPartida"
         Me.txtPartida.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -435,8 +437,8 @@ Partial Class DetallesHojaProduccion
         'LotePartida
         '
         Me.LotePartida.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.LotePartida.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.LotePartida.DefaultCellStyle = DataGridViewCellStyle5
         Me.LotePartida.HeaderText = "Lote/Partida"
         Me.LotePartida.Name = "LotePartida"
         Me.LotePartida.ReadOnly = True
@@ -445,12 +447,22 @@ Partial Class DetallesHojaProduccion
         'Cantidad
         '
         Me.Cantidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Cantidad.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Cantidad.DefaultCellStyle = DataGridViewCellStyle6
         Me.Cantidad.HeaderText = "Cantidad"
         Me.Cantidad.Name = "Cantidad"
         Me.Cantidad.ReadOnly = True
         Me.Cantidad.Width = 74
+        '
+        'btnMovimientos
+        '
+        Me.btnMovimientos.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMovimientos.Location = New System.Drawing.Point(518, 11)
+        Me.btnMovimientos.Name = "btnMovimientos"
+        Me.btnMovimientos.Size = New System.Drawing.Size(103, 29)
+        Me.btnMovimientos.TabIndex = 4
+        Me.btnMovimientos.Text = "Ver Movimientos"
+        Me.btnMovimientos.UseVisualStyleBackColor = True
         '
         'DetallesHojaProduccion
         '
@@ -513,4 +525,5 @@ Partial Class DetallesHojaProduccion
     Friend WithEvents LotePartida As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Cantidad As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents btnVerEnsayos As System.Windows.Forms.Button
+    Friend WithEvents btnMovimientos As System.Windows.Forms.Button
 End Class

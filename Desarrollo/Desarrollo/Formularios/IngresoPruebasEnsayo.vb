@@ -23,7 +23,7 @@ Public Class IngresoPruebasEnsayo
     End Sub
 
     Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
-        
+
         With cmbPlanta.Items
 
             .Clear()
@@ -58,7 +58,7 @@ Public Class IngresoPruebasEnsayo
         For Each _txt As TextBox In _CamposDeTexto()
             _txt.Text = ""
         Next
-        
+
         For Each _m As MaskedTextBox In {txtOrden, txtFecha}
             _m.Clear()
         Next
@@ -212,9 +212,9 @@ Public Class IngresoPruebasEnsayo
             lstOpciones.Visible = True
             lstConsulta.Visible = True
             lstFiltrada.Visible = False
-            Label16.Visible=False
-            txtBuscarEnTodosLosCampos.Visible=False
-            txtBuscarEnTodosLosCampos.Text=""
+            Label16.Visible = False
+            txtBuscarEnTodosLosCampos.Visible = False
+            txtBuscarEnTodosLosCampos.Text = ""
             txtAyuda.Text = ""
             txtAyuda.Focus()
 
@@ -355,7 +355,7 @@ Public Class IngresoPruebasEnsayo
     End Sub
 
     Private Sub txtAyuda_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAyuda.TextChanged
-        
+
         '
         ' Filtramos de manera normal sólo por contenido mostrado en pantalla.
         '
@@ -372,7 +372,7 @@ Public Class IngresoPruebasEnsayo
         '
         ' Buscamos todos las Ordenes con sus versiones mas recientes.
         '
-        Dim WEnsayos(1,2) As String
+        Dim WEnsayos(1, 2) As String
         Dim XIndice As Integer = 0
         Dim WBuscarEn As String()
 
@@ -563,7 +563,7 @@ Public Class IngresoPruebasEnsayo
 
         Enabled = True
         Opacity = 100
-        
+
     End Sub
 
     Private Sub lstConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lstConsulta.Click
@@ -827,6 +827,7 @@ Public Class IngresoPruebasEnsayo
             ZSql = ZSql & "Cantidad ,"
             ZSql = ZSql & "Realizado ,"
             ZSql = ZSql & "RealizadoII ,"
+            ZSql = ZSql & "Hoja ,"
             ZSql = ZSql & "Visto )"
             ZSql = ZSql & "Values ("
             ZSql = ZSql & "'" & WClave & "',"
@@ -837,6 +838,7 @@ Public Class IngresoPruebasEnsayo
             ZSql = ZSql & "'" & txtCantidad.Text & "',"
             ZSql = ZSql & "'" & txtRealizado.Text & "',"
             ZSql = ZSql & "'" & txtRealizadoII.Text & "',"
+            ZSql = ZSql & "'" & txtHojaProduccion.Text & "',"
             ZSql = ZSql & "'" & txtVisto.Text & "')"
 
             cm.CommandText = ZSql
@@ -2032,7 +2034,7 @@ Public Class IngresoPruebasEnsayo
                 ' Cargamos los Archivos RFT.
                 _CargarRFTs()
                 ' Cargamos los Archivos Relacionados.
-                _CargarArchivosRelacionados
+                _CargarArchivosRelacionados()
 
                 txtFecha.Focus()
             Catch ex As Exception
@@ -2458,7 +2460,7 @@ Public Class IngresoPruebasEnsayo
     Private Sub _TraerDatosOrdenPorVersion()
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Fecha, Cantidad, Realizado, RealizadoII, Visto FROM CargaEnsayo WHERE Orden = '" & txtOrden.Text & "' AND Version = '" & txtVersion.Text & "'")
+        Dim cm As SqlCommand = New SqlCommand("SELECT Fecha, Cantidad, Realizado, RealizadoII, Visto, Hoja FROM CargaEnsayo WHERE Orden = '" & txtOrden.Text & "' AND Version = '" & txtVersion.Text & "'")
         Dim dr As SqlDataReader
 
         Try
@@ -2479,12 +2481,14 @@ Public Class IngresoPruebasEnsayo
                     txtRealizado.Text = IIf(IsDBNull(.Item("Realizado")), "", .Item("Realizado"))
                     txtRealizadoII.Text = IIf(IsDBNull(.Item("RealizadoII")), "", .Item("RealizadoII"))
                     txtVisto.Text = IIf(IsDBNull(.Item("Visto")), "", .Item("Visto"))
+                    txtHojaProduccion.Text = IIf(IsDBNull(.Item("Hoja")), "", .Item("Hoja"))
 
                     txtCantidad.Text = Helper.formatonumerico(txtCantidad.Text, 3)
 
                     txtRealizado.Text = Trim(txtRealizado.Text)
                     txtRealizadoII.Text = Trim(txtRealizadoII.Text)
                     txtVisto.Text = Trim(txtVisto.Text)
+                    txtHojaProduccion.Text = Trim(txtHojaProduccion.Text)
 
                 End With
 
@@ -2551,7 +2555,7 @@ Public Class IngresoPruebasEnsayo
 
                     End With
 
-                    txtHojaProduccion.Text = WHoja
+                    'txtHojaProduccion.Text = WHoja
 
                     XIndice = dgvFormula.Rows.Add
 
@@ -3134,7 +3138,7 @@ Public Class IngresoPruebasEnsayo
         If Val(txtVersion.Text) > 1 Then
 
             _TraerDatosProceso(Val(txtVersion.Text) - 1)
-            
+
         End If
 
     End Sub
@@ -3181,7 +3185,7 @@ Public Class IngresoPruebasEnsayo
 
                 _CargarConsultaEnsayos()
 
-                Label16.Visible = true
+                Label16.Visible = True
                 With txtBuscarEnTodosLosCampos
                     .Text = ""
                     .Visible = True
@@ -4008,7 +4012,7 @@ Public Class IngresoPruebasEnsayo
                         Case "M"
 
                             ZSql = ""
-                            ZSql = "UPDATE Articulo SET Salidas = Salidas + " & Helper.formatonumerico(txtCantidad.Text, 4) & ", WDate = '" & WDate & "' WHERE Codigo = '" & WArticulo & "'"
+                            ZSql = "UPDATE Articulo SET Salidas = Salidas + " & Helper.formatonumerico(WCantidad, 4) & ", WDate = '" & WDate & "' WHERE Codigo = '" & WArticulo & "'"
 
                             cm.CommandText = ZSql
                             cm.ExecuteNonQuery()
@@ -4036,9 +4040,16 @@ Public Class IngresoPruebasEnsayo
                 cm.CommandText = ZSql
                 cm.ExecuteNonQuery()
 
+                ZSql = "UPDATE CargaEnsayo SET Hoja = '" & WHoja & "' WHERE Orden = '" & txtOrden.Text & "' AND Version = '" & txtVersion.Text & "'"
+
+                cm.CommandText = ZSql
+                cm.ExecuteNonQuery()
+
                 trans.Commit()
 
                 prgbHojaPiloto.Value = 100
+
+                txtHojaProduccion.Text = WHoja
 
                 ' ACA LLAMAR A LA IMPRESION
 
@@ -4224,7 +4235,8 @@ Public Class IngresoPruebasEnsayo
             With VistaPrevia
                 .DesdeArchivo(Configuration.ConfigurationManager.AppSettings("reportslocation") & "imprehojadesarrollo.rpt")
                 .Formula = "{ImpreHoja.Hoja}=" & WHoja
-                .Mostrar()
+                '.Mostrar()
+                .Imprimir()
             End With
 
         Catch ex As Exception
@@ -4505,7 +4517,7 @@ Public Class IngresoPruebasEnsayo
                 dr.Read()
 
                 Whoja = dr.Item("UltimaHoja")
-            
+
             End If
 
         Catch ex As Exception
@@ -4622,20 +4634,20 @@ Public Class IngresoPruebasEnsayo
         pnlHojaPiloto.Visible = False
     End Sub
 
-    Private Sub IngresoPruebasEnsayo_FormClosing( ByVal sender As System.Object,  ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
+    Private Sub IngresoPruebasEnsayo_FormClosing(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
 
         If Trim(txtOrden.Text.Replace("-", "")) = "" Then Exit Sub
 
-        If MsgBox("¿Esta seguro de querer salir? Los dato que no se hayan guardado se perderán", MsgBoxStyle.YesNo) = MsgBoxResult.Yes then exit sub
+        If MsgBox("¿Esta seguro de querer salir? Los dato que no se hayan guardado se perderán", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then Exit Sub
 
         e.Cancel = True
 
-        txtOrden.Focus
+        txtOrden.Focus()
 
     End Sub
 
     Private Sub dgvArchivos_CellMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgvArchivos.CellMouseDoubleClick
-        If e.RowIndex < 0 then Exit Sub
+        If e.RowIndex < 0 Then Exit Sub
         With dgvArchivos.Rows(e.RowIndex)
             If Not IsNothing(.Cells("RutaArchivo").Value) Then
 
@@ -4649,7 +4661,7 @@ Public Class IngresoPruebasEnsayo
         End With
     End Sub
 
-    
+
     Private Sub dgvArchivos_DragEnter(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles dgvArchivos.DragEnter
         _PermitirDrag(e)
     End Sub
@@ -4669,12 +4681,12 @@ Public Class IngresoPruebasEnsayo
 
         If archivos.Length = 0 Then : Exit Sub : End If
 
-        If not Directory.Exists(WRutaArchivosRelacionados) then
+        If Not Directory.Exists(WRutaArchivosRelacionados) Then
             Try
                 Directory.CreateDirectory(WRutaArchivosRelacionados)
             Catch ex As Exception
                 MsgBox(ex.Message, MsgBoxStyle.Exclamation)
-                Exit sub
+                Exit Sub
             End Try
         End If
 
@@ -4726,7 +4738,7 @@ Public Class IngresoPruebasEnsayo
 
     Private Sub _CargarArchivosRelacionados()
         Dim WRutaArchivosRelacionados As String = ""
-        
+
         If Not Directory.Exists(_RutaCarpetaArchivos) Then
             Throw New Exception("No se ha logrado tener acceso a la Carpeta Compartida de Archivos Relacionados.")
         End If
@@ -4785,17 +4797,17 @@ Public Class IngresoPruebasEnsayo
         Return Wicono
     End Function
 
-    Private Sub txtBuscarEnTodosLosCampos_KeyDown( ByVal sender As System.Object,  ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtBuscarEnTodosLosCampos.KeyDown
-        
+    Private Sub txtBuscarEnTodosLosCampos_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtBuscarEnTodosLosCampos.KeyDown
+
         If e.KeyData = Keys.Enter Then
-	        If Trim(txtBuscarEnTodosLosCampos.Text) = "" Then : Exit Sub : End If
+            If Trim(txtBuscarEnTodosLosCampos.Text) = "" Then : Exit Sub : End If
 
             _FiltrarPorTodosLosCampos(txtbuscarentodosloscampos.Text)
 
         ElseIf e.KeyData = Keys.Escape Then
             txtBuscarEnTodosLosCampos.Text = ""
         End If
-        
+
     End Sub
 
     Private Sub dgvRevisiones_RowHeaderMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgvRevisiones.RowHeaderMouseDoubleClick

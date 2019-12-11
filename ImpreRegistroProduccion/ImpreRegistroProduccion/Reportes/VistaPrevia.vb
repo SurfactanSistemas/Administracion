@@ -1,4 +1,5 @@
 ﻿
+Imports System.IO
 Imports CrystalDecisions.CrystalReports.Engine
 Imports CrystalDecisions.Shared
 Imports System.Text.RegularExpressions
@@ -177,6 +178,10 @@ Public Class VistaPrevia
                 End If
 
             End With
+        Else
+            If Not Directory.Exists(ruta) Then
+                Directory.CreateDirectory(ruta)
+            End If
         End If
 
         _ReconectarBaseDatos()

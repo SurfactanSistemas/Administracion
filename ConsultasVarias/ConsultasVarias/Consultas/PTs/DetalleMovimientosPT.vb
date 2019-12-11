@@ -126,7 +126,7 @@ Public Class DetalleMovimientosPT
 
         WMarca = ""
 
-        Dim WHoja1 As DataRow = GetSingle("SELECT Producto, Fecha FROM Hoja WHERE Hoja = '" & WLote & "' And Renglon IN ('1', '01') ", WEmpresaOrig.Item("Base"))
+        Dim WHoja1 As DataRow = GetSingle("SELECT TOP 1 Producto, Fecha FROM Hoja WHERE Hoja = '" & WLote & "' And ISNULL(Lote1, 0) <> 0 ", WEmpresaOrig.Item("Base"))
 
         txtFecha.Text = OrDefault(WHoja1.Item("Fecha"), "")
 
@@ -155,7 +155,7 @@ Public Class DetalleMovimientosPT
         ' Busco la o las Hojas que correspondan con el Lote o PartiOrig segun sea o no Reventa.
         '
 
-        Dim WHojas2 As DataRow = GetSingle("SELECT * FROM Hoja WHERE Producto = '" & WCodPT & "' And Hoja = '" & Auxi & "' And Renglon IN ('1', '01')" & WFiltroMarca, empresa)
+        Dim WHojas2 As DataRow = GetSingle("SELECT TOP 1 * FROM Hoja WHERE Producto = '" & WCodPT & "' And Hoja = '" & Auxi & "' And ISNULL(Lote1, 0) <> 0" & WFiltroMarca, empresa)
 
         Dim WDescr, WNumero, WFecha, WFechaOrd, WObservaciones, WLiberada As String
         WMarca = ""
