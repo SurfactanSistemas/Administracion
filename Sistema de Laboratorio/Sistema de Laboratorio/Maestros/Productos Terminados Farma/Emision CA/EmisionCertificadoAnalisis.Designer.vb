@@ -26,6 +26,7 @@ Partial Class EmisionCertificadoAnalisis
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.txtCantidad = New System.Windows.Forms.TextBox()
         Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.btnAceptar = New System.Windows.Forms.Button()
@@ -37,14 +38,13 @@ Partial Class EmisionCertificadoAnalisis
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.lblDescCliente = New System.Windows.Forms.Label()
-        Me.lblCantidad = New System.Windows.Forms.Label()
+        Me.lblTerminado = New System.Windows.Forms.Label()
         Me.lblDescProducto = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.cmbIdioma = New System.Windows.Forms.ComboBox()
         Me.cmbTipoSalida = New System.Windows.Forms.ComboBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.lblTerminado = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -89,6 +89,7 @@ Partial Class EmisionCertificadoAnalisis
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.txtCantidad)
         Me.GroupBox1.Controls.Add(Me.btnLimpiar)
         Me.GroupBox1.Controls.Add(Me.btnCerrar)
         Me.GroupBox1.Controls.Add(Me.btnAceptar)
@@ -100,7 +101,6 @@ Partial Class EmisionCertificadoAnalisis
         Me.GroupBox1.Controls.Add(Me.Label10)
         Me.GroupBox1.Controls.Add(Me.Label5)
         Me.GroupBox1.Controls.Add(Me.lblDescCliente)
-        Me.GroupBox1.Controls.Add(Me.lblCantidad)
         Me.GroupBox1.Controls.Add(Me.lblTerminado)
         Me.GroupBox1.Controls.Add(Me.lblDescProducto)
         Me.GroupBox1.Location = New System.Drawing.Point(5, 54)
@@ -109,6 +109,15 @@ Partial Class EmisionCertificadoAnalisis
         Me.GroupBox1.TabIndex = 3
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "DATOS PRODUCTO TERMINADO"
+        '
+        'txtCantidad
+        '
+        Me.txtCantidad.Location = New System.Drawing.Point(83, 125)
+        Me.txtCantidad.MaxLength = 4
+        Me.txtCantidad.Name = "txtCantidad"
+        Me.txtCantidad.Size = New System.Drawing.Size(100, 20)
+        Me.txtCantidad.TabIndex = 1
+        Me.txtCantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'btnLimpiar
         '
@@ -140,6 +149,7 @@ Partial Class EmisionCertificadoAnalisis
         '
         'txtCliente
         '
+        Me.txtCliente.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtCliente.Location = New System.Drawing.Point(206, 29)
         Me.txtCliente.MaxLength = 6
         Me.txtCliente.Name = "txtCliente"
@@ -220,18 +230,18 @@ Partial Class EmisionCertificadoAnalisis
         Me.lblDescCliente.Text = "PRODUCTO"
         Me.lblDescCliente.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'lblCantidad
+        'lblTerminado
         '
-        Me.lblCantidad.BackColor = System.Drawing.Color.Cyan
-        Me.lblCantidad.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.lblCantidad.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCantidad.Location = New System.Drawing.Point(83, 123)
-        Me.lblCantidad.Name = "lblCantidad"
-        Me.lblCantidad.Padding = New System.Windows.Forms.Padding(3, 0, 0, 0)
-        Me.lblCantidad.Size = New System.Drawing.Size(115, 23)
-        Me.lblCantidad.TabIndex = 0
-        Me.lblCantidad.Text = "PRODUCTO"
-        Me.lblCantidad.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblTerminado.BackColor = System.Drawing.Color.Cyan
+        Me.lblTerminado.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.lblTerminado.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTerminado.Location = New System.Drawing.Point(83, 67)
+        Me.lblTerminado.Name = "lblTerminado"
+        Me.lblTerminado.Padding = New System.Windows.Forms.Padding(3, 0, 0, 0)
+        Me.lblTerminado.Size = New System.Drawing.Size(100, 23)
+        Me.lblTerminado.TabIndex = 0
+        Me.lblTerminado.Text = "PT-99999-999"
+        Me.lblTerminado.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'lblDescProducto
         '
@@ -296,19 +306,6 @@ Partial Class EmisionCertificadoAnalisis
         Me.Label11.TabIndex = 0
         Me.Label11.Text = "TIPO DE SALIDA"
         '
-        'lblTerminado
-        '
-        Me.lblTerminado.BackColor = System.Drawing.Color.Cyan
-        Me.lblTerminado.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.lblTerminado.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTerminado.Location = New System.Drawing.Point(83, 67)
-        Me.lblTerminado.Name = "lblTerminado"
-        Me.lblTerminado.Padding = New System.Windows.Forms.Padding(3, 0, 0, 0)
-        Me.lblTerminado.Size = New System.Drawing.Size(100, 23)
-        Me.lblTerminado.TabIndex = 0
-        Me.lblTerminado.Text = "PT-99999-999"
-        Me.lblTerminado.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
         'EmisionCertificadoAnalisis
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -345,7 +342,6 @@ Partial Class EmisionCertificadoAnalisis
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents lblDescCliente As System.Windows.Forms.Label
     Friend WithEvents Label10 As System.Windows.Forms.Label
-    Friend WithEvents lblCantidad As System.Windows.Forms.Label
     Friend WithEvents cmbTipoSalida As System.Windows.Forms.ComboBox
     Friend WithEvents Label11 As System.Windows.Forms.Label
     Friend WithEvents cmbIdioma As System.Windows.Forms.ComboBox
@@ -354,4 +350,5 @@ Partial Class EmisionCertificadoAnalisis
     Friend WithEvents btnCerrar As System.Windows.Forms.Button
     Friend WithEvents btnAceptar As System.Windows.Forms.Button
     Friend WithEvents lblTerminado As System.Windows.Forms.Label
+    Friend WithEvents txtCantidad As System.Windows.Forms.TextBox
 End Class

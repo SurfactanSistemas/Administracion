@@ -14,7 +14,7 @@ Module AuxiExtensiones
 
     <Extension()>
     Public Function Ceros(ByVal obj As Object, ByVal longitud As Object) As String
-        Return obj.ToString.PadLeft(longitud, "0")
+        Return OrDefault(obj, "").ToString.PadLeft(longitud, "0")
     End Function
 
     <Extension()>
