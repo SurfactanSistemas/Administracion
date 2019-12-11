@@ -319,6 +319,9 @@ Partial Class MenuPrincipal
     Friend WithEvents DatosAdicionalesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MateriasPrimasToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ProductosTerminadosToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents AutorizaciónDePedidosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents DatosAImprimirEnCertificadosDeAnálisisToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents EmisiónDeCertificadoDeAnálisisToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ListadoDeEnsayosDePTToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ListaDeEspecificacionesDePTAFechaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ListaDePTVencidosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem

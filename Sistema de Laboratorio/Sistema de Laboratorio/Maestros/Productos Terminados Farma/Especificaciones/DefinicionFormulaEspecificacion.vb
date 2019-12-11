@@ -32,7 +32,6 @@
 
     Private Sub btnCancelar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCancelar.Click
         If MsgBox("¿Seguro de querar salir? " & vbCrLf & vbCrLf & "Se perderá cualquier información no grabada.", vbYesNo) <> MsgBoxResult.Yes Then Exit Sub
-
         Close()
     End Sub
 
@@ -50,8 +49,8 @@
 
     End Sub
 
-    Private Sub txtFormula_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtFormula.KeyPress
-        
+    Private Sub txtFormula_KeyPress(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txtFormula.KeyPress
+
         For Each s As String In {"/", "[", "]", "(", ")", ".", "*", "+", "-", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ChrW(Keys.Back), ChrW(Keys.Enter), ChrW(Keys.Delete), "R", "V", "r", "v"}
             If CChar(s) = e.KeyChar Then
                 e.Handled = False
@@ -63,14 +62,14 @@
 
     End Sub
 
-    Private Sub DefinicionFormulaEspecificacion_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+    Private Sub DefinicionFormulaEspecificacion_Shown(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Shown
         txtVar1.Focus()
     End Sub
 
-    Private Sub txtVar1_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtVar1.KeyDown
+    Private Sub txtVar1_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtVar1.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            
+
             Dim WControl As TextBox = TryCast(sender, TextBox)
 
             If WControl Is Nothing Then Exit Sub
