@@ -153,6 +153,18 @@ Public Class MenuPrincipal
 
     Private Sub EmisiónDeCertificadoDeAnálisisToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EmisiónDeCertificadoDeAnálisisToolStripMenuItem.Click
         With New EmisionCertificadoAnalisis
+         .Show(Me)
+        End With
+    End Sub
+
+    Private Sub EmisionDeEtiquetasToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EmisionDeEtiquetasToolStripMenuItem.Click
+        With New ImpresionEtiquetasMuestras
+            .Show(Me)
+        End With
+    End Sub
+
+    Private Sub LotesVencidosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LotesVencidosToolStripMenuItem.Click
+        With New VerificacionLoteVencidoMP
             .Show(Me)
         End With
     End Sub
