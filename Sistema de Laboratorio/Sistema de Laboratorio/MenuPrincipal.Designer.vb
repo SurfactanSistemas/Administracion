@@ -29,6 +29,7 @@ Partial Class MenuPrincipal
         Me.ListadoDeEnsayosEnMPToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListadoDeEspecificacionesDeMPAFechaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EspecificacionesPorVersiónToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.VerificacionDeVencimientosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EmisiónDeEtiquetasSimplesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LotesVencidosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FarmaIngresoDeEnsayosProductosTerminadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -55,7 +56,7 @@ Partial Class MenuPrincipal
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnCambioEmpresa = New System.Windows.Forms.Button()
-        Me.VerificacionDeVencimientosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.IngresoDeEspecificacionesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -106,6 +107,12 @@ Partial Class MenuPrincipal
         Me.EspecificacionesPorVersiónToolStripMenuItem.Name = "EspecificacionesPorVersiónToolStripMenuItem"
         Me.EspecificacionesPorVersiónToolStripMenuItem.Size = New System.Drawing.Size(297, 22)
         Me.EspecificacionesPorVersiónToolStripMenuItem.Text = "Especificaciones por Versión"
+        '
+        'VerificacionDeVencimientosToolStripMenuItem
+        '
+        Me.VerificacionDeVencimientosToolStripMenuItem.Name = "VerificacionDeVencimientosToolStripMenuItem"
+        Me.VerificacionDeVencimientosToolStripMenuItem.Size = New System.Drawing.Size(297, 22)
+        Me.VerificacionDeVencimientosToolStripMenuItem.Text = "Verificacion de Vencimientos"
         '
         'EmisiónDeEtiquetasSimplesToolStripMenuItem
         '
@@ -158,7 +165,7 @@ Partial Class MenuPrincipal
         '
         'ProductosTerminadosToolStripMenuItem
         '
-        Me.ProductosTerminadosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ConsultaDeEspecificacionesPorVersionToolStripMenuItem, Me.ListaDeEspecificacionesDePTAFechaToolStripMenuItem, Me.ListadoDeEnsayosDePTToolStripMenuItem, Me.ListaDePTVencidosToolStripMenuItem})
+        Me.ProductosTerminadosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ConsultaDeEspecificacionesPorVersionToolStripMenuItem, Me.ListaDeEspecificacionesDePTAFechaToolStripMenuItem, Me.ListadoDeEnsayosDePTToolStripMenuItem, Me.ListaDePTVencidosToolStripMenuItem, Me.IngresoDeEspecificacionesToolStripMenuItem})
         Me.ProductosTerminadosToolStripMenuItem.Name = "ProductosTerminadosToolStripMenuItem"
         Me.ProductosTerminadosToolStripMenuItem.Size = New System.Drawing.Size(250, 22)
         Me.ProductosTerminadosToolStripMenuItem.Text = "Productos Terminados"
@@ -258,7 +265,7 @@ Partial Class MenuPrincipal
         'Label2
         '
         Me.Label2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.Control
@@ -271,7 +278,7 @@ Partial Class MenuPrincipal
         'Label1
         '
         Me.Label1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.Control
@@ -290,11 +297,11 @@ Partial Class MenuPrincipal
         Me.btnCambioEmpresa.Text = "CAMBIAR EMPRESA"
         Me.btnCambioEmpresa.UseVisualStyleBackColor = True
         '
-        'VerificacionDeVencimientosToolStripMenuItem
+        'IngresoDeEspecificacionesToolStripMenuItem
         '
-        Me.VerificacionDeVencimientosToolStripMenuItem.Name = "VerificacionDeVencimientosToolStripMenuItem"
-        Me.VerificacionDeVencimientosToolStripMenuItem.Size = New System.Drawing.Size(297, 22)
-        Me.VerificacionDeVencimientosToolStripMenuItem.Text = "Verificacion de Vencimientos"
+        Me.IngresoDeEspecificacionesToolStripMenuItem.Name = "IngresoDeEspecificacionesToolStripMenuItem"
+        Me.IngresoDeEspecificacionesToolStripMenuItem.Size = New System.Drawing.Size(288, 22)
+        Me.IngresoDeEspecificacionesToolStripMenuItem.Text = "Especificaciones"
         '
         'MenuPrincipal
         '
@@ -340,9 +347,6 @@ Partial Class MenuPrincipal
     Friend WithEvents DatosAdicionalesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MateriasPrimasToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ProductosTerminadosToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents AutorizaciónDePedidosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents DatosAImprimirEnCertificadosDeAnálisisToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents EmisiónDeCertificadoDeAnálisisToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ListadoDeEnsayosDePTToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ListaDeEspecificacionesDePTAFechaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ListaDePTVencidosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -353,4 +357,5 @@ Partial Class MenuPrincipal
     Friend WithEvents EmisionDeEtiquetasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents LotesVencidosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents VerificacionDeVencimientosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents IngresoDeEspecificacionesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class

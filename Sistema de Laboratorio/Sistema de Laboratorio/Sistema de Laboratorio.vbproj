@@ -182,6 +182,12 @@
     <Compile Include="Consultas\NotasCertificadosAnalisis\NotasCertificadosAnalisis.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ImpresionEtiquetasMuestras.Designer.vb">
+      <DependentUpon>ImpresionEtiquetasMuestras.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ImpresionEtiquetasMuestras.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ListadoDeEnsayoDePT.Designer.vb">
       <DependentUpon>ListadoDeEnsayoDePT.vb</DependentUpon>
     </Compile>
@@ -358,6 +364,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DBAuxi.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\DBAuxi.vb">
+      <DependentUpon>DBAuxi.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Ensayos\ReporteListadoEnsayos.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -508,12 +517,6 @@
       <DependentUpon>ReporteImpresionEtiquetasMuestras.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\ReporteListadoEspecifPTaFecha.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ReporteListadoEspecifPTaFecha.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Reportes\Productos Terminados Farma\Especificaciones\ReporteListaPTVencidos.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -536,6 +539,8 @@
       <DependentUpon>VerificacionDeVencimientosMP.vb</DependentUpon>
     </Compile>
     <Compile Include="VerificacionDeVencimientosMP.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Reportes\VistaPreviaDBAuxi.Designer.vb">
       <DependentUpon>VistaPreviaDBAuxi.vb</DependentUpon>
     </Compile>
@@ -764,10 +769,6 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteImpresionEtiquetasMuestras.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\ReporteListadoEspecifPTaFecha.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>ReporteListadoEspecifPTaFecha.vb</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Productos Terminados Farma\Especificaciones\ReporteListaPTVencidos.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteListaPTVencidos.vb</LastGenOutput>
@@ -781,6 +782,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="VerificacionDeVencimientosMP.resx">
       <DependentUpon>VerificacionDeVencimientosMP.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\VistaPreviaDBAuxi.resx">
       <DependentUpon>VistaPreviaDBAuxi.vb</DependentUpon>
     </EmbeddedResource>

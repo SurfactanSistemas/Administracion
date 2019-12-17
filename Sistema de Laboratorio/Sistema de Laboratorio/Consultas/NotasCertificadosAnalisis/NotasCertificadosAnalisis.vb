@@ -1,6 +1,8 @@
 ﻿Public Class NotasCertificadosAnalisis
 
-    Private WTerminado As String
+    Private WTerminado As String = ""
+    Dim Base As String = Operador.Base
+    Dim Tabla As String = "CargaVNotas"
 
     Sub New(ByVal Terminado As String)
 
@@ -13,6 +15,11 @@
 
     Private Sub NotasCertificadosAnalisis_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        If Base <> "Surfactan_III" Then
+            Base = "Surfactan_II"
+            Tabla = "CargaVNoFarmaNotas"
+        End If
+
         _CargarNotas()
         'dgvNotas.CurrentCell = dgvNotas.Rows(0).Cells("ID")
         'dgvNotas.Focus()
@@ -23,7 +30,9 @@
 
         dgvNotas.Rows.Clear()
 
-        Dim WNotas As DataTable = GetAll("SELECT * FROM CargaVNotas WHERE Terminado = '" & WTerminado & "' ORDER BY Terminado, Nota, Renglon")
+        
+
+        Dim WNotas As DataTable = GetAll("SELECT * FROM " & Tabla & " WHERE Terminado = '" & WTerminado & "' ORDER BY Terminado, Nota, Renglon", Base)
         Dim Auxi As String = ""
         Dim Auxi2 As String = ""
         Dim WID As String = ""
@@ -92,7 +101,7 @@
 
             Dim WId As String = OrDefault(.CurrentRow.Cells("ID").Value, "")
 
-            Dim WNota As DataTable = GetAll("SELECT Observacion FROM CargaVNotas WHERE Terminado = '" & WTerminado & "' And Nota = '" & WId & "' ORDER BY Renglon")
+            Dim WNota As DataTable = GetAll("SELECT Observacion FROM " & Tabla & " WHERE Terminado = '" & WTerminado & "' And Nota = '" & WId & "' ORDER BY Renglon", Base)
 
             txtObservacion.Text = ""
 
@@ -126,7 +135,7 @@
         '
         If WIdNota = 0 Then
 
-            Dim WUlt As DataRow = GetSingle("SELECT Max(Nota) Ultimo FROM CargaVNotas WHERE Terminado = '" & WTerminado & "'")
+            Dim WUlt As DataRow = GetSingle("SELECT Max(Nota) Ultimo FROM " & Tabla & " WHERE Terminado = '" & WTerminado & "'", Base)
 
             If WUlt IsNot Nothing Then WIdNota = OrDefault(WUlt.Item("Ultimo"), 0)
 
@@ -136,7 +145,7 @@
 
         Dim WConsulta As New List(Of String)
 
-        WConsulta.Add("DELETE FROM CargaVNotas WHERE Terminado = '" & WTerminado & "' and Nota = '" & WIdNota & "'")
+        WConsulta.Add("DELETE FROM " & Tabla & " WHERE Terminado = '" & WTerminado & "' and Nota = '" & WIdNota & "'")
 
         Dim WRenglon = 0
 
@@ -150,13 +159,13 @@
 
                 Dim WClave As String = WTerminado & WIdNota.ToString.PadLeft(2, "0") & WRenglon.ToString.PadLeft(2, "0")
 
-                WConsulta.Add(String.Format("INSERT INTO CargaVNotas (Clave, Terminado, Nota, Renglon, Observacion) VALUES ('{0}','{1}','{2}','{3}','{4}')", WClave, WTerminado, WIdNota, WRenglon, Trim(WObservacion)))
+                WConsulta.Add(String.Format("INSERT INTO " & Tabla & " (Clave, Terminado, Nota, Renglon, Observacion) VALUES ('{0}','{1}','{2}','{3}','{4}')", WClave, WTerminado, WIdNota, WRenglon, Trim(WObservacion)))
 
             End If
 
         Next
 
-        ExecuteNonQueries(WConsulta.ToArray)
+        ExecuteNonQueries(Base, WConsulta.ToArray)
 
         btnLimpiar.PerformClick()
 
@@ -175,7 +184,7 @@
             Exit Sub
         End If
 
-        ExecuteNonQueries("DELETE FROM CargaVNotas WHERE Terminado = '" & WTerminado & "' And Nota = '" & lblIdNota.Text & "'")
+        ExecuteNonQueries(Base, {"DELETE FROM " & Tabla & " WHERE Terminado = '" & WTerminado & "' And Nota = '" & lblIdNota.Text & "'"})
 
         btnLimpiar.PerformClick()
 

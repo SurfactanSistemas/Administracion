@@ -1,4 +1,5 @@
-﻿Imports ConsultasVarias
+﻿Imports System.IO
+Imports ConsultasVarias
 Imports ConsultasVarias.Interfaces
 
 Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecificaciones, IListaConsultas, IAyudaPTs, IAyudaEnsayos, IIngresoClaveSeguridad
@@ -40,25 +41,15 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
             txtDescTerminado.Text = ""
 
-            Dim WCodigo = txtTerminado.Text
+            If txtTerminado.Text.Replace(" ", "").Length < 12 Then Exit Sub
 
-            btnLimpiar_Click(Nothing, Nothing)
+            If Operador.Base <> "Surfactan_III" Then
 
-            txtTerminado.Text = WCodigo
+                _CargarDatosPTNoFarma()
 
-            If txtTerminado.Text.Replace(" ", "").Length < 12 Then : Exit Sub : End If
-
-            Dim WTerminado As DataRow = GetSingle("SELECT Descripcion FROM Terminado WHERE Codigo = '" & txtTerminado.Text & "'")
-
-            If WTerminado Is Nothing Then Exit Sub
-
-            txtDescTerminado.Text = WTerminado.Item("Descripcion")
-
-            With txtEtapa
-                .Focus()
-                .SelectionStart = 0
-                .SelectionLength = .Text.Length
-            End With
+            Else
+                _CargarDatosPTFarma()
+            End If
 
         ElseIf e.KeyData = Keys.Escape Then
             txtTerminado.Text = ""
@@ -66,124 +57,52 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
     End Sub
 
+    Private Sub _CargarDatosPTNoFarma()
+
+        Dim WTerminado As DataRow = GetSingle("SELECT Descripcion FROM Terminado Where Codigo = '" & txtTerminado.Text & "'")
+
+        If WTerminado IsNot Nothing Then
+            txtEtapa.Text = "99"
+            txtDescTerminado.Text = Trim(OrDefault(WTerminado.Item("Descripcion"), "")).ToUpper
+            txtEtapa_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+        End If
+
+    End Sub
+
+    Private Sub _CargarDatosPTFarma()
+
+        Dim WCodigo = txtTerminado.Text
+
+        btnLimpiar_Click(Nothing, Nothing)
+
+        txtTerminado.Text = WCodigo
+
+        If txtTerminado.Text.Replace(" ", "").Length < 12 Then : Return : End If
+
+        Dim WTerminado As DataRow = GetSingle("SELECT Descripcion FROM Terminado WHERE Codigo = '" & txtTerminado.Text & "'")
+
+        If WTerminado Is Nothing Then Return
+
+        txtDescTerminado.Text = WTerminado.Item("Descripcion")
+
+        With txtEtapa
+            .Focus()
+            .SelectionStart = 0
+            .SelectionLength = .Text.Length
+        End With
+
+    End Sub
+
     Private Sub txtEtapa_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtEtapa.KeyDown
 
         If e.KeyData = Keys.Enter Then
+
             If Val(txtEtapa.Text) = 0 Then : Exit Sub : End If
 
-            Dim WProcedimientos As DataTable = GetAll("SELECT Articulo, PTerminado, Letra, Descripcion, Cantidad, TipoProceso, DesEtapa FROM CargaIII WHERE Terminado = '" & txtTerminado.Text & "' AND Paso = '" & txtEtapa.Text & "' AND ISNULL(Tipo, '') <> 'N' Order By Terminado, Paso, Renglon")
-
-            dgvProcedimientos.Rows.Clear()
-
-            For Each r As DataRow In WProcedimientos.Rows
-
-                Dim WArticulo As String = OrDefault(r.Item("Articulo"), "")
-                Dim WTerminado As String = OrDefault(r.Item("PTerminado"), "")
-                Dim WLetra As String = OrDefault(r.Item("Letra"), "")
-                Dim WDescripcion As String = OrDefault(r.Item("Descripcion"), "")
-                Dim WCantidad As String = OrDefault(r.Item("Cantidad"), "0")
-                Dim WTipoProceso As String = Trim(OrDefault(r.Item("TipoProceso"), ""))
-                Dim WDescEtapa As String = Trim(OrDefault(r.Item("DesEtapa"), ""))
-
-                Dim _r = dgvProcedimientos.Rows.Add
-
-                txtTipoProceso.Text = WTipoProceso
-                txtDescEtapa.Text = WDescEtapa
-
-                With dgvProcedimientos.Rows(_r)
-                    .Cells("Articulo").Value = WArticulo
-                    .Cells("Terminado").Value = WTerminado
-                    .Cells("Letra").Value = WLetra
-                    .Cells("Descripcion").Value = WDescripcion
-                    .Cells("Cantidad").Value = formatonumerico(WCantidad, 4)
-                End With
-
-            Next
-
-            Dim WCargaV As DataTable = GetAll("SELECT * FROM CargaV WHERE Terminado = '" & txtTerminado.Text & "' And Paso = '" & txtEtapa.Text & "' Order By Clave")
-
-            dgvEspecif.Rows.Clear()
-
-            If WCargaV.Rows.Count = 0 Then Exit Sub
-
-            For Each row As DataRow In WCargaV.Rows
-                With row
-                    Dim WEns = OrDefault(.Item("Ensayo"), 0)
-                    Dim WEspecificacion = OrDefault(.Item("Valor"), "")
-                    Dim WControlCambio = OrDefault(.Item("ControlCambio"), "")
-                    Dim WFarmacopea = OrDefault(.Item("Farmacopea"), "")
-                    Dim WTipoEspecif = OrDefault(.Item("TipoEspecif"), "0")
-                    Dim WDesdeEspecif As String = OrDefault(.Item("DesdeEspecif"), "")
-                    Dim WHastaEspecif As String = OrDefault(.Item("HastaEspecif"), "")
-                    Dim WUnidadEspecif = OrDefault(.Item("UnidadEspecif"), "")
-                    Dim WMenorIgualEspecif = OrDefault(.Item("MenorIgualEspecif"), "0")
-                    Dim WInformaEspecif = OrDefault(.Item("InformaEspecif"), "0")
-                    Dim WFormulaEspecif = OrDefault(.Item("FormulaEspecif"), "")
-                    Dim WImpreParametro = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif)
-
-                    If Val(WTipoEspecif) = 0 And WImpreParametro <> "" Then WImpreParametro &= " (c)"
-
-                    Dim r = dgvEspecif.Rows.Add
-
-                    txtControlCambios.Text = Trim(WControlCambio)
-
-                    With dgvEspecif.Rows(r)
-                        .Cells("Ensayo").Value = WEns
-                        .Cells("Especificacion").Value = ""
-                        .Cells("DescEnsayo").Value = Trim(WEspecificacion)
-                        .Cells("Farmacopea").Value = Trim(WFarmacopea)
-                        .Cells("TipoEspecif").Value = WTipoEspecif
-                        .Cells("DesdeEspecif").Value = WDesdeEspecif
-                        .Cells("HastaEspecif").Value = WHastaEspecif
-                        .Cells("UnidadEspecif").Value = WUnidadEspecif
-                        .Cells("MenorIgualEspecif").Value = WMenorIgualEspecif
-                        .Cells("InformaEspecif").Value = WInformaEspecif
-                        .Cells("Parametro").Value = Trim(WImpreParametro)
-                        .Cells("FormulaEspecif").Value = WFormulaEspecif
-
-                        For i = 1 To 10
-                            .Cells("Variable" & i).Value = Trim(OrDefault(row.Item("Variable" & i), ""))
-                        Next
-
-                    End With
-
-                End With
-
-            Next
-
-            dgvEspecifIngles.Rows.Clear()
-
-            btnHistorialCambios.Visible = (Operador.Base = "Surfactan_III" And Val(txtEtapa.Text) = 99) Or Operador.Base <> "Surfactan_III"
-
-            If Val(txtEtapa.Text) = 99 Then
-
-                '
-                ' Para cargar unicamente cuando se este consultando las especificaciones de etapa 99.
-                '
-                Dim WCargaVIngles As DataTable = GetAll("SELECT Valor, Farmacopea, UnidadEspecif FROM CargaVIngles WHERE Terminado = '" & txtTerminado.Text & "' And Paso = '99' Order By Clave")
-
-                If WCargaVIngles.Rows.Count = 0 Then Exit Sub
-
-                For Each row As DataRow In WCargaVIngles.Rows
-                    With row
-                        Dim WEspecificacion = Trim(OrDefault(.Item("Valor"), ""))
-                        Dim WFarmacopea = Trim(OrDefault(.Item("Farmacopea"), ""))
-                        Dim WUnidadEspecif = Trim(OrDefault(.Item("UnidadEspecif"), ""))
-
-                        Dim r = dgvEspecifIngles.Rows.Add
-
-                        With dgvEspecifIngles.Rows(r)
-                            .Cells("EnsayoIngles").Value = dgvEspecif.Rows(r).Cells("Ensayo").Value
-                            .Cells("EspecificacionIngles").Value = ""
-                            .Cells("DescEnsayoIngles").Value = Trim(WEspecificacion)
-                            .Cells("FarmacopeaIngles").Value = Trim(WFarmacopea)
-                            .Cells("UnidadEspecifIngles").Value = WUnidadEspecif
-                        End With
-
-                    End With
-
-                Next
-
+            If Operador.Base = "Surfactan_III" Then
+                _CargarDatosEspecifFarma()
+            Else
+                _CargarDatosEspecifNoFarma()
             End If
 
             Dim WBaseII = "Surfactan_II"
@@ -198,19 +117,229 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                     If WEnsayo IsNot Nothing Then
                         .Cells("Especificacion").Value = Trim(OrDefault(WEnsayo.Item("Descripcion"), ""))
 
-                        If Val(txtEtapa.Text) = 99 Then dgvEspecifIngles.Rows(.Index).Cells("EspecificacionIngles").Value = Trim(OrDefault(WEnsayo.Item("Descripcion"), ""))
+                        If Val(txtEtapa.Text) = 99 And Operador.Base = "Surfactan_III" Then dgvEspecifIngles.Rows(.Index).Cells("EspecificacionIngles").Value = Trim(OrDefault(WEnsayo.Item("Descripcion"), ""))
 
                     End If
 
                 End With
             Next
 
-            TabControl1.SelectTab(1)
-
         ElseIf e.KeyData = Keys.Escape Then
             txtEtapa.Text = ""
         End If
 
+    End Sub
+
+    Private Sub _CargarDatosEspecifNoFarma()
+        
+        Dim WCargaVNoFarma As DataTable = GetAll("SELECT * FROM CargaVNoFarma WHERE Terminado = '" & txtTerminado.Text & "' And Paso = '" & txtEtapa.Text & "' Order By Clave", "Surfactan_II")
+
+        dgvEspecif.Rows.Clear()
+
+        If WCargaVNoFarma.Rows.Count = 0 Then Return
+
+        For Each row As DataRow In WCargaVNoFarma.Rows
+            With row
+                Dim WEns = OrDefault(.Item("Ensayo"), 0)
+                Dim WEspecificacion = OrDefault(.Item("Valor"), "")
+                Dim WControlCambio = OrDefault(.Item("ControlCambio"), "")
+                Dim WFarmacopea = OrDefault(.Item("Farmacopea"), "")
+                Dim WTipoEspecif = OrDefault(.Item("TipoEspecif"), "0")
+                Dim WDesdeEspecif As String = OrDefault(.Item("DesdeEspecif"), "")
+                Dim WHastaEspecif As String = OrDefault(.Item("HastaEspecif"), "")
+                Dim WUnidadEspecif = OrDefault(.Item("UnidadEspecif"), "")
+                Dim WMenorIgualEspecif = OrDefault(.Item("MenorIgualEspecif"), "0")
+                Dim WInformaEspecif = OrDefault(.Item("InformaEspecif"), "0")
+                Dim WFormulaEspecif = OrDefault(.Item("FormulaEspecif"), "")
+                Dim WImpreParametro = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif)
+
+                If Val(WTipoEspecif) = 0 And WImpreParametro <> "" Then WImpreParametro &= " (c)"
+
+                Dim r = dgvEspecif.Rows.Add
+
+                txtControlCambios.Text = Trim(WControlCambio)
+
+                With dgvEspecif.Rows(r)
+                    .Cells("Ensayo").Value = WEns
+                    .Cells("Especificacion").Value = ""
+                    .Cells("DescEnsayo").Value = Trim(WEspecificacion)
+                    .Cells("Farmacopea").Value = Trim(WFarmacopea)
+                    .Cells("TipoEspecif").Value = WTipoEspecif
+                    .Cells("DesdeEspecif").Value = WDesdeEspecif
+                    .Cells("HastaEspecif").Value = WHastaEspecif
+                    .Cells("UnidadEspecif").Value = WUnidadEspecif
+                    .Cells("MenorIgualEspecif").Value = WMenorIgualEspecif
+                    .Cells("InformaEspecif").Value = WInformaEspecif
+                    .Cells("Parametro").Value = Trim(WImpreParametro)
+                    .Cells("FormulaEspecif").Value = WFormulaEspecif
+
+                    For i = 1 To 10
+                        .Cells("Variable" & i).Value = Trim(OrDefault(row.Item("Variable" & i), ""))
+                    Next
+
+                End With
+
+            End With
+
+        Next
+
+        dgvEspecifIngles.Rows.Clear()
+
+        btnHistorialCambios.Visible = (Operador.Base = "Surfactan_III" And Val(txtEtapa.Text) = 99) Or Operador.Base <> "Surfactan_III"
+
+        If Val(txtEtapa.Text) = 99 Then
+
+            '
+            ' Para cargar unicamente cuando se este consultando las especificaciones de etapa 99.
+            '
+            Dim WCargaVIngles As DataTable = GetAll("SELECT Valor, Farmacopea, UnidadEspecif FROM CargaVNoFarmaIngles WHERE Terminado = '" & txtTerminado.Text & "' And Paso = '99' Order By Clave", "Surfactan_II")
+
+            If WCargaVIngles.Rows.Count = 0 Then Return
+
+            For Each row As DataRow In WCargaVIngles.Rows
+                With row
+                    Dim WEspecificacion = Trim(OrDefault(.Item("Valor"), ""))
+                    Dim WFarmacopea = Trim(OrDefault(.Item("Farmacopea"), ""))
+                    Dim WUnidadEspecif = Trim(OrDefault(.Item("UnidadEspecif"), ""))
+
+                    Dim r = dgvEspecifIngles.Rows.Add
+
+                    With dgvEspecifIngles.Rows(r)
+                        .Cells("EnsayoIngles").Value = dgvEspecif.Rows(r).Cells("Ensayo").Value
+                        .Cells("EspecificacionIngles").Value = ""
+                        .Cells("DescEnsayoIngles").Value = Trim(WEspecificacion)
+                        .Cells("FarmacopeaIngles").Value = Trim(WFarmacopea)
+                        .Cells("UnidadEspecifIngles").Value = WUnidadEspecif
+                    End With
+
+                End With
+
+            Next
+
+        End If
+
+        TabControl1.SelectTab(1)
+
+    End Sub
+
+    Private Sub _CargarDatosEspecifFarma()
+
+        Dim WProcedimientos As DataTable = GetAll("SELECT Articulo, PTerminado, Letra, Descripcion, Cantidad, TipoProceso, DesEtapa FROM CargaIII WHERE Terminado = '" & txtTerminado.Text & "' AND Paso = '" & txtEtapa.Text & "' AND ISNULL(Tipo, '') <> 'N' Order By Terminado, Paso, Renglon")
+
+        dgvProcedimientos.Rows.Clear()
+
+        For Each r As DataRow In WProcedimientos.Rows
+
+            Dim WArticulo As String = OrDefault(r.Item("Articulo"), "")
+            Dim WTerminado As String = OrDefault(r.Item("PTerminado"), "")
+            Dim WLetra As String = OrDefault(r.Item("Letra"), "")
+            Dim WDescripcion As String = OrDefault(r.Item("Descripcion"), "")
+            Dim WCantidad As String = OrDefault(r.Item("Cantidad"), "0")
+            Dim WTipoProceso As String = Trim(OrDefault(r.Item("TipoProceso"), ""))
+            Dim WDescEtapa As String = Trim(OrDefault(r.Item("DesEtapa"), ""))
+
+            Dim _r = dgvProcedimientos.Rows.Add
+
+            txtTipoProceso.Text = WTipoProceso
+            txtDescEtapa.Text = WDescEtapa
+
+            With dgvProcedimientos.Rows(_r)
+                .Cells("Articulo").Value = WArticulo
+                .Cells("Terminado").Value = WTerminado
+                .Cells("Letra").Value = WLetra
+                .Cells("Descripcion").Value = WDescripcion
+                .Cells("Cantidad").Value = formatonumerico(WCantidad, 4)
+            End With
+
+        Next
+
+        Dim WCargaV As DataTable = GetAll("SELECT * FROM CargaV WHERE Terminado = '" & txtTerminado.Text & "' And Paso = '" & txtEtapa.Text & "' Order By Clave")
+
+        dgvEspecif.Rows.Clear()
+
+        If WCargaV.Rows.Count = 0 Then Return
+
+        For Each row As DataRow In WCargaV.Rows
+            With row
+                Dim WEns = OrDefault(.Item("Ensayo"), 0)
+                Dim WEspecificacion = OrDefault(.Item("Valor"), "")
+                Dim WControlCambio = OrDefault(.Item("ControlCambio"), "")
+                Dim WFarmacopea = OrDefault(.Item("Farmacopea"), "")
+                Dim WTipoEspecif = OrDefault(.Item("TipoEspecif"), "0")
+                Dim WDesdeEspecif As String = OrDefault(.Item("DesdeEspecif"), "")
+                Dim WHastaEspecif As String = OrDefault(.Item("HastaEspecif"), "")
+                Dim WUnidadEspecif = OrDefault(.Item("UnidadEspecif"), "")
+                Dim WMenorIgualEspecif = OrDefault(.Item("MenorIgualEspecif"), "0")
+                Dim WInformaEspecif = OrDefault(.Item("InformaEspecif"), "0")
+                Dim WFormulaEspecif = OrDefault(.Item("FormulaEspecif"), "")
+                Dim WImpreParametro = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif)
+
+                If Val(WTipoEspecif) = 0 And WImpreParametro <> "" Then WImpreParametro &= " (c)"
+
+                Dim r = dgvEspecif.Rows.Add
+
+                txtControlCambios.Text = Trim(WControlCambio)
+
+                With dgvEspecif.Rows(r)
+                    .Cells("Ensayo").Value = WEns
+                    .Cells("Especificacion").Value = ""
+                    .Cells("DescEnsayo").Value = Trim(WEspecificacion)
+                    .Cells("Farmacopea").Value = Trim(WFarmacopea)
+                    .Cells("TipoEspecif").Value = WTipoEspecif
+                    .Cells("DesdeEspecif").Value = WDesdeEspecif
+                    .Cells("HastaEspecif").Value = WHastaEspecif
+                    .Cells("UnidadEspecif").Value = WUnidadEspecif
+                    .Cells("MenorIgualEspecif").Value = WMenorIgualEspecif
+                    .Cells("InformaEspecif").Value = WInformaEspecif
+                    .Cells("Parametro").Value = Trim(WImpreParametro)
+                    .Cells("FormulaEspecif").Value = WFormulaEspecif
+
+                    For i = 1 To 10
+                        .Cells("Variable" & i).Value = Trim(OrDefault(row.Item("Variable" & i), ""))
+                    Next
+
+                End With
+
+            End With
+
+        Next
+
+        dgvEspecifIngles.Rows.Clear()
+
+        btnHistorialCambios.Visible = (Operador.Base = "Surfactan_III" And Val(txtEtapa.Text) = 99) Or Operador.Base <> "Surfactan_III"
+
+        If Val(txtEtapa.Text) = 99 Then
+
+            '
+            ' Para cargar unicamente cuando se este consultando las especificaciones de etapa 99.
+            '
+            Dim WCargaVIngles As DataTable = GetAll("SELECT Valor, Farmacopea, UnidadEspecif FROM CargaVIngles WHERE Terminado = '" & txtTerminado.Text & "' And Paso = '99' Order By Clave")
+
+            If WCargaVIngles.Rows.Count = 0 Then Return
+
+            For Each row As DataRow In WCargaVIngles.Rows
+                With row
+                    Dim WEspecificacion = Trim(OrDefault(.Item("Valor"), ""))
+                    Dim WFarmacopea = Trim(OrDefault(.Item("Farmacopea"), ""))
+                    Dim WUnidadEspecif = Trim(OrDefault(.Item("UnidadEspecif"), ""))
+
+                    Dim r = dgvEspecifIngles.Rows.Add
+
+                    With dgvEspecifIngles.Rows(r)
+                        .Cells("EnsayoIngles").Value = dgvEspecif.Rows(r).Cells("Ensayo").Value
+                        .Cells("EspecificacionIngles").Value = ""
+                        .Cells("DescEnsayoIngles").Value = Trim(WEspecificacion)
+                        .Cells("FarmacopeaIngles").Value = Trim(WFarmacopea)
+                        .Cells("UnidadEspecifIngles").Value = WUnidadEspecif
+                    End With
+
+                End With
+
+            Next
+
+        End If
+
+        TabControl1.SelectTab(1)
     End Sub
 
     Private Function _GenerarImpreParametro(ByVal wTipoEspecif As String, ByVal wDesdeEspecif As String, ByVal wHastaEspecif As String, ByVal wUnidadEspecif As String, ByVal wMenorIgualEspecif As String) As String
@@ -332,6 +461,508 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
             Exit Sub
 
         End If
+
+        If Operador.Base = "Surfactan_III" Then
+            _GrabarVersionEspecificacionPTFarma()
+        Else
+            _GrabarEspecificacionPTNoFarma()
+        End If
+
+        btnLimpiar.PerformClick()
+
+    End Sub
+
+#Region "PT NO FARMA"
+    Private Sub _GrabarVersionEspecificacionPTNOFarma()
+
+
+        Dim WConsultas As New List(Of String)
+
+        '
+        ' Recuperamos las notas viejas, para mantenerlas cuando se actualicen los datos luego.
+        '
+        Dim WNotas As DataRow = GetSingle("SELECT Observacion1, Observacion2, Observacion3, Observacion4, Observacion5, Observacion6, Observacion7, Observacion8, Observacion9, Observacion10 FROM CargaVNoFarma WHERE Terminado = '" & txtTerminado.Text & "' And Paso = '" & txtEtapa.Text & "' And Renglon = 1", "Surfactan_II")
+
+        '
+        ' Borramos el registro anterior si lo hubiese.
+        '
+        WConsultas.Add("DELETE FROM CargaVNoFarma WHERE Terminado = '" & txtTerminado.Text & "' And Paso = '" & txtEtapa.Text & "'")
+
+        Dim WDescPaso, WCorte As String
+
+        WDescPaso = "CONTROL PARCIAL PASO: " + Trim(txtEtapa.Text)
+        WCorte = "0"
+
+        If Val(txtEtapa.Text) = 99 Then
+            WDescPaso = "CONTROL FINAL"
+            WCorte = "1"
+        End If
+
+        Dim ZLugar, ZLugarII, WRenglon As Integer
+        Dim ZGrabaEspe(1000, 3) As String
+
+        For i = 0 To 1000
+            For x = 0 To 3
+                ZGrabaEspe(i, x) = ""
+            Next
+        Next
+        ZLugar = 0
+        ZLugarII = 0
+        WRenglon = 0
+
+        '
+        ' Grabamos los datos de cada renglon.
+        '
+        For Each row As DataGridViewRow In dgvEspecif.Rows
+
+            Dim WEnsayo, WDescEnsayo, WValor, WFarmacopea, WUnidadEspecif, WDesdeEspecif, WHastaEspecif, WTipoEspecif, WInformaEspecif, WMenorIgualEspecif As String
+            Dim WFormulaEspecif, WVariable1, WVariable2, WVariable3, WVariable4, WVariable5, WVariable6, WVariable7, WVariable8, WVariable9, WVariable10 As String
+
+            With row
+                WEnsayo = OrDefault(.Cells("Ensayo").Value, "")
+
+                If Trim(WEnsayo) = "" Then Continue For
+
+                WDescEnsayo = OrDefault(.Cells("Especificacion").Value, "")
+                WValor = OrDefault(.Cells("DescEnsayo").Value, "")
+                WFarmacopea = OrDefault(.Cells("Farmacopea").Value, "")
+                WUnidadEspecif = OrDefault(.Cells("UnidadEspecif").Value, "")
+                WDesdeEspecif = OrDefault(.Cells("DesdeEspecif").Value, "")
+                WHastaEspecif = OrDefault(.Cells("HastaEspecif").Value, "")
+                WTipoEspecif = OrDefault(.Cells("TipoEspecif").Value, "0")
+                WInformaEspecif = OrDefault(.Cells("InformaEspecif").Value, "0")
+                WMenorIgualEspecif = OrDefault(.Cells("MenorIgualEspecif").Value, "0")
+                WFormulaEspecif = OrDefault(.Cells("FormulaEspecif").Value, "")
+                WVariable1 = OrDefault(.Cells("Variable1").Value, "")
+                WVariable2 = OrDefault(.Cells("Variable2").Value, "")
+                WVariable3 = OrDefault(.Cells("Variable3").Value, "")
+                WVariable4 = OrDefault(.Cells("Variable4").Value, "")
+                WVariable5 = OrDefault(.Cells("Variable5").Value, "")
+                WVariable6 = OrDefault(.Cells("Variable6").Value, "")
+                WVariable7 = OrDefault(.Cells("Variable7").Value, "")
+                WVariable8 = OrDefault(.Cells("Variable8").Value, "")
+                WVariable9 = OrDefault(.Cells("Variable9").Value, "")
+                WVariable10 = OrDefault(.Cells("Variable10").Value, "")
+
+                Dim ZSql, XPaso, Auxi As String
+
+                WRenglon += 1
+
+                XPaso = txtEtapa.Text.PadLeft(4, "0")
+                Auxi = WRenglon.ToString.PadLeft(2, "0")
+
+                Dim WClave = txtTerminado.Text + XPaso + Auxi
+
+                ZSql = ""
+                ZSql = ZSql & "INSERT INTO CargaVNoFarma ("
+                ZSql = ZSql & "Clave ,"
+                ZSql = ZSql & "Terminado ,"
+                ZSql = ZSql & "Paso ,"
+                ZSql = ZSql & "DesPaso ,"
+                ZSql = ZSql & "ControlCambio ,"
+                ZSql = ZSql & "Renglon ,"
+                ZSql = ZSql & "Ensayo ,"
+                ZSql = ZSql & "DesEnsayo ,"
+                ZSql = ZSql & "Valor ,"
+                ZSql = ZSql & "TipoEspecif ,"
+                ZSql = ZSql & "InformaEspecif ,"
+                ZSql = ZSql & "MenorIgualEspecif ,"
+                ZSql = ZSql & "Farmacopea ,"
+                ZSql = ZSql & "UnidadEspecif ,"
+                ZSql = ZSql & "DesdeEspecif ,"
+                ZSql = ZSql & "HastaEspecif ,"
+                ZSql = ZSql & "FormulaEspecif ,"
+                ZSql = ZSql & "Variable1 ,"
+                ZSql = ZSql & "Variable2 ,"
+                ZSql = ZSql & "Variable3 ,"
+                ZSql = ZSql & "Variable4 ,"
+                ZSql = ZSql & "Variable5 ,"
+                ZSql = ZSql & "Variable6 ,"
+                ZSql = ZSql & "Variable7 ,"
+                ZSql = ZSql & "Variable8 ,"
+                ZSql = ZSql & "Variable9 ,"
+                ZSql = ZSql & "Variable10 ,"
+                ZSql = ZSql & "Corte )"
+                ZSql = ZSql & "Values ("
+                ZSql = ZSql & "'" & WClave & "',"
+                ZSql = ZSql & "'" & txtTerminado.Text & "',"
+                ZSql = ZSql & "'" & txtEtapa.Text & "',"
+                ZSql = ZSql & "'" & WDescPaso & "',"
+                ZSql = ZSql & "'" & txtControlCambios.Text & "',"
+                ZSql = ZSql & "'" & Trim(Str$(WRenglon)) & "',"
+                ZSql = ZSql & "'" & WEnsayo & "',"
+                ZSql = ZSql & "'" & WDescEnsayo & "',"
+                ZSql = ZSql & "'" & WValor & "',"
+                ZSql = ZSql & "'" & WTipoEspecif & "',"
+                ZSql = ZSql & "'" & WInformaEspecif & "',"
+                ZSql = ZSql & "'" & WMenorIgualEspecif & "',"
+                ZSql = ZSql & "'" & WFarmacopea & "',"
+                ZSql = ZSql & "'" & WUnidadEspecif & "',"
+                ZSql = ZSql & "'" & WDesdeEspecif & "',"
+                ZSql = ZSql & "'" & WHastaEspecif & "',"
+                ZSql = ZSql & "'" & WFormulaEspecif & "',"
+                ZSql = ZSql & "'" & WVariable1 & "',"
+                ZSql = ZSql & "'" & WVariable2 & "',"
+                ZSql = ZSql & "'" & WVariable3 & "',"
+                ZSql = ZSql & "'" & WVariable4 & "',"
+                ZSql = ZSql & "'" & WVariable5 & "',"
+                ZSql = ZSql & "'" & WVariable6 & "',"
+                ZSql = ZSql & "'" & WVariable7 & "',"
+                ZSql = ZSql & "'" & WVariable8 & "',"
+                ZSql = ZSql & "'" & WVariable9 & "',"
+                ZSql = ZSql & "'" & WVariable10 & "',"
+                ZSql = ZSql & "'" & WCorte & "')"
+
+                WConsultas.Add(ZSql)
+
+                '
+                ' Guardamos las especificaciones para actualizarlas luego.
+                '
+                ZLugarII = ZLugarII + 1
+                If ZLugarII = 1 Then
+                    ZLugar = ZLugar + 1
+                    ZGrabaEspe(ZLugar, 1) = WEnsayo
+                    ZGrabaEspe(ZLugar, 2) = WValor
+                    ZGrabaEspe(ZLugar, 3) = ""
+                Else
+                    If ZGrabaEspe(ZLugar, 1) = WEnsayo Then
+                        ZGrabaEspe(ZLugar, 3) = WValor
+                        ZLugarII = 0
+                    Else
+                        ZLugarII = 1
+                        ZLugar = ZLugar + 1
+                        ZGrabaEspe(ZLugar, 1) = WEnsayo
+                        ZGrabaEspe(ZLugar, 2) = WValor
+                        ZGrabaEspe(ZLugar, 3) = ""
+                    End If
+                End If
+
+            End With
+        Next
+
+        '
+        ' En caso de ser Etapa 99, se actualizan las especificaciones en ingles.
+        '
+        If Val(txtEtapa.Text) = 99 Then
+
+            WRenglon = 0
+
+            WConsultas.Add("DELETE FROM CargaVNoFarmaIngles WHERE Terminado = '" & txtTerminado.Text & "' And Paso = '99'")
+
+            '
+            ' Grabamos los datos de cada renglon.
+            '
+            For Each row As DataGridViewRow In dgvEspecifIngles.Rows
+
+                Dim WValor, WFarmacopea, WUnidadEspecif As String
+
+                With row
+
+                    WValor = OrDefault(.Cells("DescEnsayoIngles").Value, "")
+                    WFarmacopea = OrDefault(.Cells("FarmacopeaIngles").Value, "")
+                    WUnidadEspecif = OrDefault(.Cells("UnidadEspecifIngles").Value, "")
+
+                    Dim ZSql, XPaso, Auxi As String
+
+                    WRenglon += 1
+
+                    XPaso = txtEtapa.Text.PadLeft(4, "0")
+                    Auxi = WRenglon.ToString.PadLeft(2, "0")
+
+                    Dim WClave = txtTerminado.Text + XPaso + Auxi
+
+                    ZSql = ""
+                    ZSql = ZSql & "INSERT INTO CargaVNoFarmaIngles ("
+                    ZSql = ZSql & "Clave ,"
+                    ZSql = ZSql & "Terminado ,"
+                    ZSql = ZSql & "Paso ,"
+                    ZSql = ZSql & "Renglon ,"
+                    ZSql = ZSql & "Valor ,"
+                    ZSql = ZSql & "Farmacopea ,"
+                    ZSql = ZSql & "UnidadEspecif "
+                    ZSql = ZSql & ")"
+                    ZSql = ZSql & "Values ("
+                    ZSql = ZSql & "'" & WClave & "',"
+                    ZSql = ZSql & "'" & txtTerminado.Text & "',"
+                    ZSql = ZSql & "'" & txtEtapa.Text & "',"
+                    ZSql = ZSql & "'" & Trim(Str$(WRenglon)) & "',"
+                    ZSql = ZSql & "'" & WValor & "',"
+                    ZSql = ZSql & "'" & WFarmacopea & "',"
+                    ZSql = ZSql & "'" & WUnidadEspecif & "'"
+                    ZSql = ZSql & ")"
+
+                    WConsultas.Add(ZSql)
+
+                End With
+            Next
+        End If
+
+        Dim WObservacion(10) As String
+
+        If WNotas IsNot Nothing Then
+            For i = 1 To 10
+                WObservacion(i) = OrDefault(WNotas.Item("Observacion" & i), "")
+            Next
+        End If
+
+        '
+        ' Actualizamos las Notas para mantener Histórico.
+        '
+        WConsultas.Add("UPDATE CargaVNoFarma SET Observacion1 = '" & Trim(WObservacion(1)) & "', Observacion2 = '" & Trim(WObservacion(2)) & "', Observacion3 = '" & Trim(WObservacion(3)) & "', Observacion4 = '" & Trim(WObservacion(4)) & "', Observacion5 = '" & Trim(WObservacion(5)) & "', Observacion6 = '" & Trim(WObservacion(6)) & "', Observacion7 = '" & Trim(WObservacion(7)) & "', Observacion8 = '" & Trim(WObservacion(8)) & "', Observacion9 = '" & Trim(WObservacion(9)) & "', Observacion10 = '" & Trim(WObservacion(10)) & "' WHERE Terminado = '" & txtTerminado.Text & "' And Paso = '" & txtEtapa.Text & "'")
+
+        ExecuteNonQueries("Surfactan_II", WConsultas.ToArray)
+
+    End Sub
+
+    Private Sub _GrabarEspecificacionPTNoFarma()
+
+        Dim WSQLs As New List(Of String)
+        Dim sql As String = ""
+        Dim WActualiza As Boolean = False
+
+        Dim WEspecif As DataRow = GetSingle("SELECT Version FROM EspecifUnifica WHERE Producto = '" & txtTerminado.Text & "'", "Surfactan_II")
+
+        If WEspecif IsNot Nothing Then
+
+            If MsgBox("¿Desea actualizar la Versión de la Especificación?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+
+                sql = _PreparaGuardarVersionPTNoFarma(txtTerminado.Text)
+
+                WSQLs.Add(sql)
+
+                sql = _PreparaActualizarVersionPTNoFarma(txtTerminado.Text)
+
+                WSQLs.Add(sql)
+
+                WActualiza = True
+            Else
+                sql = _PreparaActualizarPTNoFarma(txtTerminado.Text)
+                WSQLs.Add(sql)
+            End If
+        Else
+            sql = _PrepararAltaEspecificacionPTNoFarma(txtTerminado.Text)
+            WSQLs.Add(sql)
+        End If
+
+        sql = _ActualizarFamiliaProducto("NK", txtTerminado.Text.right(10))
+        WSQLs.Add(sql)
+        sql = _ActualizarFamiliaProducto("RE", txtTerminado.Text.right(10))
+        WSQLs.Add(sql)
+
+        WSQLs.Add("UPDATE EspecifUnifica SET Operador = '" & Operador.Codigo & "' WHERE Producto = '" & txtTerminado.Text & "' OR Producto = '" & "NK" & txtTerminado.Text.right(10) & "' Or Producto = '" & "RE" & txtTerminado.Text.right(10) & "'")
+
+        Dim WExisteHojaTecnica As Boolean = False
+        '
+        ' Verificamos si existe la Hoja Técnica.
+        '
+        WExisteHojaTecnica = File.Exists("\\193.168.0.2\W\Impresion pdf\DOC" + Mid(txtTerminado.Text, 4, 5) + txtTerminado.Text.right(3) + "*.pdf")
+
+        '
+        ' Si Actualizó versión, actualizo información en las demás plantas.
+        '
+        If WActualiza Then
+            For Each Emp As String In {"SurfactanSa", "Surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII"}
+                sql = _PreparaGuardarVersionPTNoFarmaEnPlantas(txtTerminado.Text, Emp)
+                WSQLs.Add(sql)
+                sql = _PreparaGuardarVersionPTNoFarmaEnPlantas("NK" & txtTerminado.Text.right(10), Emp)
+                WSQLs.Add(sql)
+                sql = _PreparaGuardarVersionPTNoFarmaEnPlantas("RE" & txtTerminado.Text.right(10), Emp)
+                WSQLs.Add(sql)
+
+                If Not WExisteHojaTecnica Then
+                    sql = String.Format("UPDATE {0}.dbo.Terminado SET EstadoHoja = 'N' WHERE Codigo = '{1}'", Emp, txtTerminado.Text)
+                    WSQLs.Add(sql)
+                End If
+            Next
+        End If
+
+        ExecuteNonQueries("Surfactan_II", WSQLs.ToArray)
+
+        _GrabarVersionEspecificacionPTNOFarma()
+
+        With New IngresoDatosMostrarEnCertificadosAnalisis(txtTerminado.Text, "S00102", True)
+            .ShowDialog(Me)
+        End With
+
+        btnLimpiar_Click(Nothing, Nothing)
+
+    End Sub
+
+    Private Function _PreparaGuardarVersionPTNoFarmaEnPlantas(ByVal Terminado As String, ByVal Empresa As String) As String
+        Return String.Format("UPDATE T SET T.VersionII = E.Version, T.FechaVersionII = E.Fecha, T.EstadoII = E.Estado, T.ObservaII = E.Observaciones FROM {1}.dbo.Terminado T INNER JOIN Surfactan_II.dbo.EspecifUnifica E ON T.Codigo COLLATE DATABASE_DEFAULT = E.Producto COLLATE DATABASE_DEFAULT WHERE T.Codigo COLLATE DATABASE_DEFAULT = '{0}'", Terminado, Empresa)
+    End Function
+
+    Private Function _ActualizarFamiliaProducto(ByVal Prefijo As String, ByVal Terminado As String) As String
+
+        Dim WProducto As String = Prefijo & Terminado
+        Dim WEspecif As DataRow = GetSingle("SELECT Version FROM EspecifUnifica WHERE Producto = '" & WProducto & "'", "Surfactan_II")
+
+        If WEspecif IsNot Nothing Then
+            Return _PreparaGuardarVersionPTNoFarma(WProducto)
+        Else
+            Return _PrepararAltaEspecificacionPTNoFarma(WProducto)
+        End If
+
+    End Function
+
+    Private Function _PrepararAltaEspecificacionPTNoFarma(ByVal Terminado As String) As String
+
+        Dim sql As String = "INSERT INTO EspecifUnifica ("
+
+        Dim columnas As String = ""
+        Dim valores As String = ""
+
+        For i = 1 To 10
+
+            columnas &= "Ensayo" & i & ","
+            columnas &= "Valor" & i & ", Valor" & i & i & ","
+            columnas &= "Desde" & i & ","
+            columnas &= "Hasta" & i & ","
+
+        Next
+
+        For i = 1 To dgvEspecif.Rows.Count
+
+            With dgvEspecif.Rows(i)
+                valores &= "'" & Trim(OrDefault(.Cells("Ensayo").Value, "")) & "',"
+
+                Dim WValor As String = OrDefault(.Cells("DescEnsayo").Value, "").ToString.Trim.PadRight(100, " ")
+
+                valores &= "'" & WValor.left(50) & "', '" & WValor.right(50) & "' ,"
+                valores &= "'" & Trim(OrDefault(.Cells("DesdeEspecif").Value, "")) & "',"
+                valores &= "'" & Trim(OrDefault(.Cells("HastaEspecif").Value, "")) & "',"
+
+            End With
+
+        Next
+
+        For i = dgvEspecif.Rows.Count + 1 To 10
+
+            valores &= "''," ' Ensayo
+            valores &= "'',''," ' Valores
+            valores &= "''," ' Desde
+            valores &= "''," ' Hasta
+
+        Next
+
+        sql &= columnas
+        sql &= "Producto, WDate, Fecha, Version, Observaciones, ControlCambio, Estado"
+        sql &= ") VALUES ("
+        sql &= valores
+        sql &= "'" & txtTerminado.Text & "', '" & Date.Now.ToString("MM-dd-yyyy") & "', '" & Date.Now.ToString("dd/MM/yyyy") & "', '1', '', '" & txtControlCambios.Text.left(100) & "', 'S'"
+        sql &= ")"
+
+        Return sql
+
+    End Function
+
+    Private Function _PreparaGuardarVersionPTNoFarma(ByVal Terminado As String) As String
+
+        Dim sql As String = "INSERT INTO EspecifUnificaVersion ("
+
+        Dim columnas As String = ""
+
+        For i = 1 To 10
+
+            columnas &= "Ensayo" & i & ","
+            columnas &= "Valor" & i & ", Valor" & i & i & ","
+            columnas &= "Desde" & i & ","
+            columnas &= "Hasta" & i & ","
+
+        Next
+
+        sql &= columnas
+        sql &= "Clave, [Version], Producto, WDate, FechaInicio, FechaFinal, Observaciones, ControlCambio"
+        sql &= ") SELECT "
+        sql &= columnas
+        sql &= "FORMAT([Version], '0000') + '' + Producto, [Version], Producto, '" & Date.Now.ToString("MM-dd-yyyy") & "', Fecha, '" & Date.Now.ToString("dd/MM/yyyy") & "', Observaciones, ControlCambio"
+        sql &= " FROM EspecifUnifica WHERE Producto = '" & Terminado & "'"
+
+        Return sql
+    End Function
+
+    Private Function _PreparaActualizarVersionPTNoFarma(ByVal Terminado As String) As String
+
+        Dim sql As String = "UPDATE EspecifUnifica SET "
+
+        Dim columnas As String = ""
+
+        For i = 1 To dgvEspecif.Rows.Count
+
+            With dgvEspecif.Rows(i - 1)
+
+                columnas &= "Ensayo" & i & " = '" & OrDefault(.Cells("Ensayo").Value, "") & "',"
+
+                Dim WValor As String = OrDefault(.Cells("DescEnsayo").Value, "").ToString.Trim.PadRight(100, " ")
+
+                columnas &= "Valor" & i & " = '" & WValor.left(50) & "', Valor" & i & i & " = '" & WValor.right(50) & "',"
+                columnas &= "Desde" & i & " = '" & Trim(OrDefault(.Cells("DesdeEspecif").Value, "")) & "',"
+                columnas &= "Hasta" & i & " = '" & Trim(OrDefault(.Cells("HastaEspecif").Value, "")) & "',"
+
+            End With
+
+        Next
+
+        For i = dgvEspecif.Rows.Count + 1 To 10
+
+            columnas &= "Ensayo" & i & " = '',"
+            columnas &= "Valor" & i & " = '', Valor" & i & i & " = '',"
+            columnas &= "Desde" & i & " = '',"
+            columnas &= "Hasta" & i & " = '',"
+
+        Next
+
+        sql &= columnas
+        sql &= "WDate = '" & Date.Now.ToString("MM-dd-yyyy") & "', Fecha = '" & Date.Now.ToString("dd/MM/yyyy") & "', Observaciones = '', ControlCambio = '" & txtControlCambios.Text.left(100) & "', Version = Version + 1, Estado = 'S' "
+        sql &= " WHERE Producto = '" & Terminado & "'"
+
+        Return sql
+
+    End Function
+
+    Private Function _PreparaActualizarPTNoFarma(ByVal Terminado As String) As String
+
+        Dim sql As String = "UPDATE EspecifUnifica SET "
+
+        Dim columnas As String = ""
+
+        For i = 1 To dgvEspecif.Rows.Count
+
+            With dgvEspecif.Rows(i - 1)
+
+                columnas &= "Ensayo" & i & " = '" & OrDefault(.Cells("Ensayo").Value, "") & "',"
+
+                Dim WValor As String = OrDefault(.Cells("DescEnsayo").Value, "").ToString.Trim.PadRight(100, " ")
+
+                columnas &= "Valor" & i & " = '" & WValor.left(50) & "', Valor" & i & i & " = '" & WValor.right(50) & "',"
+                columnas &= "Desde" & i & " = '" & Trim(OrDefault(.Cells("DesdeEspecif").Value, "")) & "',"
+                columnas &= "Hasta" & i & " = '" & Trim(OrDefault(.Cells("HastaEspecif").Value, "")) & "',"
+
+            End With
+
+        Next
+
+        For i = dgvEspecif.Rows.Count + 1 To 10
+
+            columnas &= "Ensayo" & i & " = '',"
+            columnas &= "Valor" & i & " = '', Valor" & i & i & " = '',"
+            columnas &= "Desde" & i & " = '',"
+            columnas &= "Hasta" & i & " = '',"
+
+        Next
+
+        sql &= columnas
+        sql &= "WDate = '" & Date.Now.ToString("MM-dd-yyyy") & "', Fecha = '" & Date.Now.ToString("dd/MM/yyyy") & "', Observaciones = '', ControlCambio = '" & txtControlCambios.Text.left(100) & "', Estado = 'S' "
+        sql &= " WHERE Producto = '" & Terminado & "'"
+
+        Return sql
+
+    End Function
+
+#End Region
+
+    Private Sub _GrabarVersionEspecificacionPTFarma()
+
 
         Dim WConsultas As New List(Of String)
 
@@ -585,9 +1216,6 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
         ' Mostramos por Pantalla la impresión de Especificaciones (también las de inglés).
         '
         btnImpresion_Click(Nothing, Nothing)
-
-        btnLimpiar.PerformClick()
-
     End Sub
 
     Private Sub _ActualizarRegistroProduccion()
@@ -1482,7 +2110,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
         If _r = -1 Then _r = dgvEspecif.Rows.Add
 
         dgvEspecif.Rows(_r).Cells("Ensayo").Value = Codigo
-        dgvEspecif.Rows(_r).Cells("Especificacion").Value = Descripcion
+        dgvEspecif.Rows(_r).Cells("Especificacion").Value = WDescripcion
         dgvEspecif.CurrentCell = dgvEspecif.Rows(_r).Cells("Ensayo")
 
         dgvEspecif.Focus()
@@ -1727,7 +2355,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
         WSqls.Add(String.Format("UPDATE CargaV SET Partida = '0', ImprePaso = Paso, CantidadPartida = '' WHERE Terminado = '{0}'", txtTerminado.Text))
 
-        For Each row As Datarow In WCargaV.rows
+        For Each row As DataRow In WCargaV.Rows
             Dim WObservacion1 As String = ""
 
             With row

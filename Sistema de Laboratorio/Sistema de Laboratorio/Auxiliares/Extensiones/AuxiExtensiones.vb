@@ -23,6 +23,11 @@ Module AuxiExtensiones
     End Function
 
     <Extension()>
+    Public Function right(ByVal obj As Object, ByVal longitud As Object) As String
+        Return Microsoft.VisualBasic.Right(OrDefault(obj, "").ToString.PadRight(longitud), longitud)
+    End Function
+
+    <Extension()>
     Public Function toDbl(ByVal obj As Object) As Double
         Return CDbl(OrDefault(obj, 0).ToString.Replace(".", ","))
     End Function
