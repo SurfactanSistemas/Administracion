@@ -19,6 +19,10 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
     Private ReadOnly DESTINATARIOS_AVISO_ENSAYOS_INTERMEDIOS As String = ConfigurationManager.AppSettings("DESTINATARIOS_AVISO_ENSAYOS_INTERMEDIOS").ToString()
 
     Private Const RUTA_TEMP As String = "C:/tempEnsayosIntermedios/"
+    Private BaseEspecif As String = Operador.Base
+    Private TablaPrueTer As String = "PrurTerFarma"
+    Private TablaCargaV As String = "CargaV"
+    Private TablaCargaVIng As String = "CargaVIngles"
 
     Private Sub btnCerrar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCerrar.Click
         Close()
@@ -49,10 +53,18 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
         btnPoolEnsayos.Enabled = False
         gbDatosAdicionales.Visible = False
 
+        txtEtapa.ReadOnly = Not Operador.EsFarma
+
         txtPartida.Focus()
     End Sub
 
     Private Sub IngresoEnsayosIntermediosPT_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
+        If Not Operador.EsFarma Then
+            TablaPrueTer = "PrueTerNoFarma"
+            TablaCargaV = "CargaVNoFarma"
+            TablaCargaVIng = "CargaVNoFarmaIngles"
+            BaseEspecif = "Surfactan_II"
+        End If
         dgvEnsayos.InhabilitarOrdenamientoColumnas()
         btnLimpiar_Click(Nothing, Nothing)
     End Sub
@@ -76,13 +88,18 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
             lblTipoProceso.Text = ""
 
-            Dim WCargaIII As DataRow = GetSingle("SELECT TipoProceso FROM CargaIII WHERE Terminado = '" & txtCodigo.Text & "' And Paso in ('1', '01')")
+            If Operador.EsFarma Then
+                Dim WCargaIII As DataRow = GetSingle("SELECT TipoProceso FROM CargaIII WHERE Terminado = '" & txtCodigo.Text & "' And Paso in ('1', '01')")
 
-            If WCargaIII IsNot Nothing Then
-                lblTipoProceso.Text = OrDefault(WCargaIII.Item("TipoProceso"), "").ToString.Trim.ToUpper
+                If WCargaIII IsNot Nothing Then
+                    lblTipoProceso.Text = OrDefault(WCargaIII.Item("TipoProceso"), "").ToString.Trim.ToUpper
+                End If
+
+                txtEtapa.Focus()
+            Else
+                txtEtapa.Text = "99"
+                txtEtapa_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
             End If
-
-            txtEtapa.Focus()
 
         ElseIf e.KeyData = Keys.Escape Then
             txtPartida.Text = ""
@@ -117,8 +134,11 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
             Dim WExiste As DataRow = Nothing
 
             If Val(txtEtapa.Text) = 99 Then
-                WExiste = GetSingle("SELECT Clave FROM Prueterfarma WHERE Partida = '" + txtPartida.Text + "' And Renglon = '1'")
+                WExiste = GetSingle("SELECT Clave FROM " & TablaPrueTer & " WHERE Partida = '" + txtPartida.Text + "' And Renglon = '1'")
             Else
+                '
+                ' En ésta parte únicamente entrarían los productos de Planta III.
+                '
                 WExiste = GetSingle("SELECT Clave FROM PrueterfarmaIntermedio WHERE Producto = '" + txtCodigo.Text + "' And Paso = '" & txtEtapa.Text & "' And Renglon = '1'")
             End If
 
@@ -129,8 +149,11 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                 Dim WPrueterFarma As DataTable = Nothing
 
                 If Val(txtEtapa.Text) = 99 Then
-                    WPrueterFarma = GetAll("SELECT * FROM PrueterFarma WHERE Partida = '" & txtPartida.Text & "' And Producto = '" & txtCodigo.Text & "' Order By Clave")
+                    WPrueterFarma = GetAll("SELECT * FROM " & TablaPrueTer & " WHERE Partida = '" & txtPartida.Text & "' And Producto = '" & txtCodigo.Text & "' Order By Clave")
                 Else
+                    '
+                    ' En ésta parte únicamente entrarían los productos de Planta III.
+                    '
                     WPrueterFarma = GetAll("SELECT * FROM PrueterFarmaIntermedio WHERE Partida = '" & txtPartida.Text & "' And Producto = '" & txtCodigo.Text & "' And Paso = '" & txtEtapa.Text & "' Order By Clave")
                 End If
 
@@ -251,27 +274,30 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                 txtLotePartida.Text = Trim(WLotePartida)
                 If WCantEtiq > 0 Then txtCantidadEtiquetas.Text = Trim(WCantEtiq)
 
-                Dim _Notas As DataRow = GetSingle("SELECT Nota1, Nota2, Nota3, Nota4, Nota5, Nota6, Nota7, Nota8, Nota9 FROM PrueterFarmaIntermedio WHERE Partida = '" & txtPartida.Text & "' And Producto = '" & txtCodigo.Text & "' And Paso = '" & txtEtapa.Text & "'")
+                If Operador.EsFarma Then
+                    Dim _Notas As DataRow = GetSingle("SELECT Nota1, Nota2, Nota3, Nota4, Nota5, Nota6, Nota7, Nota8, Nota9 FROM PrueterFarmaIntermedio WHERE Partida = '" & txtPartida.Text & "' And Producto = '" & txtCodigo.Text & "' And Paso = '" & txtEtapa.Text & "'")
 
-                WNotas.Clear()
+                    WNotas.Clear()
 
-                If _Notas IsNot Nothing Then
+                    If _Notas IsNot Nothing Then
 
-                    For i = 0 To 8
+                        For i = 0 To 8
 
-                        Dim WContenido As String = OrDefault(_Notas.Item("Nota" & i + 1), "")
+                            Dim WContenido As String = OrDefault(_Notas.Item("Nota" & i + 1), "")
 
-                        WNotas.Add(Trim(WContenido))
+                            WNotas.Add(Trim(WContenido))
 
-                    Next
+                        Next
+
+                    End If
 
                 End If
-
+                
                 btnGrabar.Text = "ACTUALIZAR"
 
             Else
 
-                Dim WCargaV As DataTable = GetAll("SELECT * FROM CargaV WHERE Terminado = '" & txtCodigo.Text & "' And Paso = '" & txtEtapa.Text & "' Order By Clave")
+                Dim WCargaV As DataTable = GetAll("SELECT * FROM " & TablaCargaV & " WHERE Terminado = '" & txtCodigo.Text & "' And Paso = '" & txtEtapa.Text & "' Order By Clave", BaseEspecif)
 
                 If WCargaV.Rows.Count = 0 Then Exit Sub
 
@@ -333,7 +359,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                 '
                 ' Cargamos las especificaciones en Inglés.
                 '
-                Dim WCargaVIngles As DataTable = GetAll("SELECT Valor, UnidadEspecif FROM CargaVIngles WHERE Terminado = '" & txtCodigo.Text & "' And Paso = '" & txtEtapa.Text & "' Order By Clave")
+                Dim WCargaVIngles As DataTable = GetAll("SELECT Valor, UnidadEspecif FROM " & TablaCargaVIng & " WHERE Terminado = '" & txtCodigo.Text & "' And Paso = '" & txtEtapa.Text & "' Order By Clave", BaseEspecif)
 
                 For Each row As DataRow In WCargaVIngles.Rows
 
@@ -365,42 +391,45 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
             End If
 
-            Dim WCargaIII As DataRow = GetSingle("SELECT DesEtapa FROM CargaIII WHERE Terminado = '" & txtCodigo.Text & "' And Paso = " & txtEtapa.Text & " And Renglon = 1")
+            If Operador.EsFarma Then
 
-            If WCargaIII IsNot Nothing Then
-                lblDescEtapa.Text = OrDefault(WCargaIII.Item("DesEtapa"), "").ToString.Trim.ToUpper
-            End If
+                Dim WCargaIII As DataRow = GetSingle("SELECT DesEtapa FROM CargaIII WHERE Terminado = '" & txtCodigo.Text & "' And Paso = " & txtEtapa.Text & " And Renglon = 1")
 
-            If Val(txtEtapa.Text) = 99 Then
-                Dim WDatosAdicionales As DataRow = GetSingle("select h.Revalida, h.VersionIII VersionI, h.MesesRevalida, h.FechaRevalida, h.Real, t.VersionII from hoja h inner join Terminado t on t.Codigo = h.Producto where h.hoja = '" & txtPartida.Text & "'")
-                If WDatosAdicionales IsNot Nothing Then
-                    With WDatosAdicionales
-                        txtRevalida.Text = OrDefault(.Item("Revalida"), "")
-                        txtEspecifOrig.Text = OrDefault(.Item("VersionI"), "")
-                        txtMeses.Text = OrDefault(.Item("MesesRevalida"), "")
-                        txtFechaRevalida.Text = OrDefault(.Item("FechaRevalida"), Space(8))
-                        txtEspecifActual.Text = OrDefault(.Item("VersionII"), "")
-                        txtKilos.Text = formatonumerico(OrDefault(.Item("Real"), ""))
-                    End With
+                If WCargaIII IsNot Nothing Then
+                    lblDescEtapa.Text = OrDefault(WCargaIII.Item("DesEtapa"), "").ToString.Trim.ToUpper
                 End If
-            End If
 
-            txtFechaVto.Text = ProductoTerminado.CalcularFechaElabVto(txtCodigo.Text, txtPartida.Text, True)(1)
+                If Val(txtEtapa.Text) = 99 Then
+                    Dim WDatosAdicionales As DataRow = GetSingle("select h.Revalida, h.VersionIII VersionI, h.MesesRevalida, h.FechaRevalida, h.Real, t.VersionII from hoja h inner join Terminado t on t.Codigo = h.Producto where h.hoja = '" & txtPartida.Text & "'")
+                    If WDatosAdicionales IsNot Nothing Then
+                        With WDatosAdicionales
+                            txtRevalida.Text = OrDefault(.Item("Revalida"), "")
+                            txtEspecifOrig.Text = OrDefault(.Item("VersionI"), "")
+                            txtMeses.Text = OrDefault(.Item("MesesRevalida"), "")
+                            txtFechaRevalida.Text = OrDefault(.Item("FechaRevalida"), Space(8))
+                            txtEspecifActual.Text = OrDefault(.Item("VersionII"), "")
+                            txtKilos.Text = formatonumerico(OrDefault(.Item("Real"), ""))
+                        End With
+                    End If
+                End If
 
-            '
-            ' Cargamos en caso de que no tenga, el componente si es monoproducto.
-            '
-            If ProductoTerminado.EsMono(txtCodigo.Text) Then
-                Dim WComp As DataRow = GetSingle("SELECT Articulo = CASE WHEN Tipo = 'M' THEN Articulo1 ELSE Articulo2 END FROM Composicion WHERE Terminado = '" & txtCodigo.Text & "' Order by Renglon")
-                If WComp IsNot Nothing Then txtComponente.Text = Trim(OrDefault(WComp.Item("Articulo"), ""))
-            End If
+                txtFechaVto.Text = ProductoTerminado.CalcularFechaElabVto(txtCodigo.Text, txtPartida.Text, True)(1)
 
-            If Val(txtEtapa.Text) = 99 Then
-                btnNotasCertAnalisis.Enabled = True
-                btnRevalida.Enabled = True
-                txtComponente.Enabled = True
-                txtLotePartida.Enabled = True
-                gbDatosAdicionales.Visible = True
+                '
+                ' Cargamos en caso de que no tenga, el componente si es monoproducto.
+                '
+                If ProductoTerminado.EsMono(txtCodigo.Text) Then
+                    Dim WComp As DataRow = GetSingle("SELECT Articulo = CASE WHEN Tipo = 'M' THEN Articulo1 ELSE Articulo2 END FROM Composicion WHERE Terminado = '" & txtCodigo.Text & "' Order by Renglon")
+                    If WComp IsNot Nothing Then txtComponente.Text = Trim(OrDefault(WComp.Item("Articulo"), ""))
+                End If
+
+                If Val(txtEtapa.Text) = 99 Then
+                    btnNotasCertAnalisis.Enabled = True
+                    btnRevalida.Enabled = True
+                    txtComponente.Enabled = True
+                    txtLotePartida.Enabled = True
+                    gbDatosAdicionales.Visible = True
+                End If
             End If
 
             If dgvEnsayos.Rows.Count > 0 Then
@@ -742,13 +771,17 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
             Dim WTabla As String = IIf(Val(txtEtapa.Text) = 99, "Prueterfarma", "PrueterfarmaIntermedio")
 
+            If Val(txtEtapa.Text) = 99 Then
+                WTabla = TablaPrueTer
+            End If
+
             Dim WPrueterFarma As DataRow = Nothing
 
             If Val(WEtapa) = 99 Then
 
-                WPrueterFarma = GetSingle("SELECT TOP 1 Clave FROM PrueterFarmaIntermedio WHERE Partida = '" & WPartida & "' And Producto = '" & WCodigo & "'")
+                If Operador.EsFarma Then WPrueterFarma = GetSingle("SELECT TOP 1 Clave FROM PrueterFarmaIntermedio WHERE Partida = '" & WPartida & "' And Producto = '" & WCodigo & "'")
 
-                WSqls.Add("DELETE FROM Prueterfarma WHERE Partida = '" & WPartida & "' And Producto = '" & WCodigo & "'")
+                WSqls.Add("DELETE FROM " & TablaPrueTer & " WHERE Partida = '" & WPartida & "' And Producto = '" & WCodigo & "'")
 
             Else
 
@@ -918,7 +951,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                 '
                 ' REALIZAMOS IMPRESION CON REDUCCION AL 80%
                 '
-                _GenerarReporteResultadosCalidad(txtPartida.Text, 1, WImpre(0), WImpre(1), WImpre(2), WImpre(3))
+                If Operador.EsFarma Then _GenerarReporteResultadosCalidad(txtPartida.Text, 1, WImpre(0), WImpre(1), WImpre(2), WImpre(3))
                 '
                 ' REALIZAMOS IMPRESION CON REDUCCION AL 100%
                 '
@@ -1170,19 +1203,59 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
         If WHoja.Item("Producto").ToString.ToUpper <> txtCodigo.Text.ToUpper Then Throw New Exception("El Código de Producto Terminado indicado no se corresponde con el indicado en la Hoja de Producción.")
 
-        '
-        ' Verificamos si se ha grabado anteriormente por Desvio, en este caso se considera Bloqueado e imposible de ser actualizado por este medio.
-        '
-        Dim WDesvio As DataRow = GetSingle("SELECT TOP 1 PorDesvio, NroDesvio FROM PrueterFarmaIntermedio WHERE Producto = '" & txtCodigo.Text & "' AND Partida = '" & txtPartida.Text & "' AND Paso = '" & txtEtapa.Text & "' And Renglon = 1")
+        If Operador.EsFarma Then
+            '
+            ' Verificamos si se ha grabado anteriormente por Desvio, en este caso se considera Bloqueado e imposible de ser actualizado por este medio.
+            '
+            Dim WDesvio As DataRow = GetSingle("SELECT TOP 1 PorDesvio, NroDesvio FROM PrueterFarmaIntermedio WHERE Producto = '" & txtCodigo.Text & "' AND Partida = '" & txtPartida.Text & "' AND Paso = '" & txtEtapa.Text & "' And Renglon = 1")
 
-        If WDesvio IsNot Nothing Then
-            With WDesvio
-                Dim WPorDesvio As Integer = OrDefault(.Item("PorDesvio"), 0)
-                Dim WNroDesvio As String = OrDefault(.Item("NroDesvio"), "")
+            If WDesvio IsNot Nothing Then
+                With WDesvio
+                    Dim WPorDesvio As Integer = OrDefault(.Item("PorDesvio"), 0)
+                    Dim WNroDesvio As String = OrDefault(.Item("NroDesvio"), "")
 
-                If WPorDesvio = 1 And WNroDesvio.Trim <> "" Then Throw New Exception("Los resultados informados para esta Etapa, se encuentran Bloqueados debido a que fueron ingresados por Desvío.")
+                    If WPorDesvio = 1 And WNroDesvio.Trim <> "" Then Throw New Exception("Los resultados informados para esta Etapa, se encuentran Bloqueados debido a que fueron ingresados por Desvío.")
 
-            End With
+                End With
+            End If
+
+
+            '
+            ' Validamos en caso de tener informado un componente si tiene o no un lote/partida valido/a.
+            '
+            If txtComponente.Text.Trim <> "" Then
+
+                Dim WLongitud As Short = txtComponente.Text.Replace(" ", "").Length
+
+                If WLongitud = 10 Or WLongitud = 12 Then
+                    Dim WComp As DataRow = Nothing
+
+                    If WLongitud = 10 Then
+                        WComp = GetSingle("SELECT Codigo FROM Articulo WHERE Codigo = '" & txtComponente.Text & "'")
+                    Else
+                        WComp = GetSingle("SELECT Codigo FROM Terminado WHERE Codigo = '" & txtComponente.Text & "'")
+                    End If
+
+                    If WComp Is Nothing Then Throw New Exception("El código del Componente, no es un codigo válido.")
+
+                    Dim WLotePartida As DataRow = Nothing
+
+                    For Each empresa As String In Conexion.Empresas
+                        If WLongitud = 10 Then
+                            WLotePartida = GetSingle("SELECT Laudo FROM Laudo WHERE Articulo = '" & txtComponente.Text & "' And Laudo = '" & txtLotePartida.Text & "' And Renglon = '1'", empresa)
+                        Else
+                            WLotePartida = GetSingle("SELECT Hoja FROM Hoja WHERE Producto = '" & txtComponente.Text & "' And Hoja = '" & txtLotePartida.Text & "' And Renglon = '1'", empresa)
+                        End If
+                        If WLotePartida IsNot Nothing Then Exit For
+                    Next
+
+                    If WLotePartida Is Nothing Then Throw New Exception("El Lote/Partida indicado para el Componente, no es válido.")
+
+                Else
+                    Throw New Exception("El código del Componente, no es un codigo válido.")
+                End If
+
+            End If
         End If
 
         '
@@ -1191,7 +1264,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
         Dim WDatos As DataTable = Nothing
 
         If Val(txtEtapa.Text) = 99 Then
-            WDatos = GetAll("SELECT ValorReal FROM PrueterFarma WHERE Producto = '" & txtCodigo.Text & "' AND Partida = '" & txtPartida.Text & "' ORDER BY Clave")
+            WDatos = GetAll("SELECT ValorReal FROM " & TablaPrueTer & " WHERE Producto = '" & txtCodigo.Text & "' AND Partida = '" & txtPartida.Text & "' ORDER BY Clave")
         Else
             WDatos = GetAll("SELECT ValorReal FROM PrueterFarmaIntermedio WHERE Producto = '" & txtCodigo.Text & "' AND Partida = '" & txtPartida.Text & "' AND Paso = '" & txtEtapa.Text & "' ORDER BY Clave")
         End If
@@ -1207,43 +1280,6 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
             Next
 
             WActualizacionBloqueada = WBloqueado And Not WAutorizaActualizacionBloqueado
-
-        End If
-
-        '
-        ' Validamos en caso de tener informado un componente si tiene o no un lote/partida valido/a.
-        '
-        If txtComponente.Text.Trim <> "" Then
-
-            Dim WLongitud As Short = txtComponente.Text.Replace(" ", "").Length
-
-            If WLongitud = 10 Or WLongitud = 12 Then
-                Dim WComp As DataRow = Nothing
-
-                If WLongitud = 10 Then
-                    WComp = GetSingle("SELECT Codigo FROM Articulo WHERE Codigo = '" & txtComponente.Text & "'")
-                Else
-                    WComp = GetSingle("SELECT Codigo FROM Terminado WHERE Codigo = '" & txtComponente.Text & "'")
-                End If
-
-                If WComp Is Nothing Then Throw New Exception("El código del Componente, no es un codigo válido.")
-
-                Dim WLotePartida As DataRow = Nothing
-
-                For Each empresa As String In Conexion.Empresas
-                    If WLongitud = 10 Then
-                        WLotePartida = GetSingle("SELECT Laudo FROM Laudo WHERE Articulo = '" & txtComponente.Text & "' And Laudo = '" & txtLotePartida.Text & "' And Renglon = '1'", empresa)
-                    Else
-                        WLotePartida = GetSingle("SELECT Hoja FROM Hoja WHERE Producto = '" & txtComponente.Text & "' And Hoja = '" & txtLotePartida.Text & "' And Renglon = '1'", empresa)
-                    End If
-                    If WLotePartida IsNot Nothing Then Exit For
-                Next
-
-                If WLotePartida Is Nothing Then Throw New Exception("El Lote/Partida indicado para el Componente, no es válido.")
-
-            Else
-                Throw New Exception("El código del Componente, no es un codigo válido.")
-            End If
 
         End If
 
@@ -1504,7 +1540,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
         '
         ' Reprocesamos y Actualizamos las descripciones de los parámetros para que estén al dia con las posibles modificaciones.
         '
-        Dim WPrueterFarmaI As DataTable = GetAll("SELECT Clave, TipoEspecif, DesdeEspecif, HastaEspecif, UnidadEspecif, MenorIgualEspecif, Valor FROM PrueTerFarma WHERE Partida = '" & txtPartida.Text & "' ORDER By Clave")
+        Dim WPrueterFarmaI As DataTable = GetAll("SELECT Clave, TipoEspecif, DesdeEspecif, HastaEspecif, UnidadEspecif, MenorIgualEspecif, Valor FROM " & TablaPrueTer & " WHERE Partida = '" & txtPartida.Text & "' ORDER By Clave")
 
         Dim WClave, WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif, WImpreParametro As String
 
@@ -1520,7 +1556,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                 WImpreParametro = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif)
 
                 If WClave.Trim <> "" Then
-                    ExecuteNonQueries({"UPDATE Prueterfarma SET  Impre1 = '" & WImpreParametro & "', Impre2 = '" & WValor & "' WHERE Clave = '" & WClave & "'"})
+                    ExecuteNonQueries({"UPDATE " & TablaPrueTer & " SET  Impre1 = '" & WImpreParametro & "', Impre2 = '" & WValor & "' WHERE Clave = '" & WClave & "'"})
                 End If
 
             End With
@@ -1536,7 +1572,9 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
             WTeorico = OrDefault(WHoja.Item("Teorico"), "0")
         End If
 
-        ExecuteNonQueries(String.Format("UPDATE CargaV SET ImpreTerminado = '{0}', Partida = '{1}', FechaIng = '{2}', CantidadPartida = '{3}', ImprePaso = '99' WHERE Terminado = '{0}'", txtCodigo.Text, txtPartida.Text, txtFecha.Text, WTeorico))
+        WTeorico = formatonumerico(WTeorico)
+
+        ExecuteNonQueries(String.Format("UPDATE " & TablaCargaV & " SET ImpreTerminado = '{0}', Partida = '{1}', FechaIng = '{2}', CantidadPartida = '{3}', ImprePaso = '99' WHERE Terminado = '{0}'", txtCodigo.Text, txtPartida.Text, txtFecha.Text, WTeorico))
 
         '
         ' Calculamos las Fechas de Elaboracion y Vencimiento.
@@ -1553,7 +1591,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
         WImpre1 = "F.Reanálisis:"
 
         If WPasaMono > 0 And WEsFazon Then
-            Dim WDatos As String() = ProductoTerminado._CalculaMonoOtro(txtPartida.Text, "Surfactan_III")
+            Dim WDatos As String() = ProductoTerminado._CalculaMonoOtro(txtPartida.Text, Operador.Base)
             Dim WTipoVencimiento As Short = Val(WDatos(2))
             WImpre1 = IIf(WTipoVencimiento = 1, "F.Reanálisis:", "F.Vencimiento:")
         End If
@@ -1573,7 +1611,6 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
     End Function
 
-
     Private Sub _GenerarReporteResultadosCalidad(ByVal wPartida As Integer, ByVal wTipoSalida As Integer, ByVal wFechaVto As String, ByVal wImpreFechaVto As String, ByVal wFechaElabora As String, ByVal wImpreFechaElaboracion As String)
 
         With New VistaPrevia
@@ -1581,15 +1618,24 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
             '.Reporte = New imprecalidadresultado
             If {0, 1}.Contains(wTipoSalida) Then
                 .Reporte = New imprecalidadresultadoReduccionAl80
-            Else
+            ElseIf Operador.EsFarma Then
                 .Reporte = New imprecalidadresultado
+            Else
+                .Reporte = New imprecalidadresultadoNoFarma
             End If
 
             .Reporte.SetParameterValue("FechaVto", wFechaVto)
             .Reporte.SetParameterValue("ImpreFechaVto", wImpreFechaVto)
             .Reporte.SetParameterValue("FechaElabora", wFechaElabora)
             .Reporte.SetParameterValue("ImpreFechaElaboracion", wImpreFechaElaboracion)
-            .Formula = "{Prueterfarma.Partida} = " & wPartida & " And {Hoja.Hoja} = {Prueterfarma.Partida} And {Hoja.Renglon} = 1"
+
+            .Base = Operador.Base
+
+            If Operador.EsFarma Then
+                .Formula = "{Prueterfarma.Partida} = " & wPartida & " And {Hoja.Hoja} = {Prueterfarma.Partida} And {Hoja.Renglon} = 1"
+            Else
+                .Formula = "{PrueterNofarma.Partida} = " & wPartida & " And {Hoja.Hoja} = {PrueterNofarma.Partida} And {Hoja.Renglon} = 1"
+            End If
 
             Select Case wTipoSalida
                 Case 0, 1, 4

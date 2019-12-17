@@ -153,4 +153,10 @@ Public Class MenuPrincipal
             .Show(Me)
         End With
     End Sub
+
+    Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem1.Click
+        With New IngresoEnsayosIntermediosPT
+            .Show(Me)
+        End With
+    End Sub
 End Class

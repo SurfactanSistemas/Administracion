@@ -43,6 +43,7 @@ Partial Class MenuPrincipal
         Me.ListaDeEspecificacionesDePTAFechaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListadoDeEnsayosDePTToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListaDePTVencidosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.IngresoDeEspecificacionesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FHToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -56,7 +57,7 @@ Partial Class MenuPrincipal
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnCambioEmpresa = New System.Windows.Forms.Button()
-        Me.IngresoDeEspecificacionesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -165,7 +166,7 @@ Partial Class MenuPrincipal
         '
         'ProductosTerminadosToolStripMenuItem
         '
-        Me.ProductosTerminadosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ConsultaDeEspecificacionesPorVersionToolStripMenuItem, Me.ListaDeEspecificacionesDePTAFechaToolStripMenuItem, Me.ListadoDeEnsayosDePTToolStripMenuItem, Me.ListaDePTVencidosToolStripMenuItem, Me.IngresoDeEspecificacionesToolStripMenuItem})
+        Me.ProductosTerminadosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ConsultaDeEspecificacionesPorVersionToolStripMenuItem, Me.ListaDeEspecificacionesDePTAFechaToolStripMenuItem, Me.ListadoDeEnsayosDePTToolStripMenuItem, Me.ListaDePTVencidosToolStripMenuItem, Me.ToolStripMenuItem1, Me.IngresoDeEspecificacionesToolStripMenuItem})
         Me.ProductosTerminadosToolStripMenuItem.Name = "ProductosTerminadosToolStripMenuItem"
         Me.ProductosTerminadosToolStripMenuItem.Size = New System.Drawing.Size(250, 22)
         Me.ProductosTerminadosToolStripMenuItem.Text = "Productos Terminados"
@@ -193,6 +194,12 @@ Partial Class MenuPrincipal
         Me.ListaDePTVencidosToolStripMenuItem.Name = "ListaDePTVencidosToolStripMenuItem"
         Me.ListaDePTVencidosToolStripMenuItem.Size = New System.Drawing.Size(288, 22)
         Me.ListaDePTVencidosToolStripMenuItem.Text = "Lista de PT Vencidos"
+        '
+        'IngresoDeEspecificacionesToolStripMenuItem
+        '
+        Me.IngresoDeEspecificacionesToolStripMenuItem.Name = "IngresoDeEspecificacionesToolStripMenuItem"
+        Me.IngresoDeEspecificacionesToolStripMenuItem.Size = New System.Drawing.Size(288, 22)
+        Me.IngresoDeEspecificacionesToolStripMenuItem.Text = "Especificaciones"
         '
         'FHToolStripMenuItem
         '
@@ -297,11 +304,11 @@ Partial Class MenuPrincipal
         Me.btnCambioEmpresa.Text = "CAMBIAR EMPRESA"
         Me.btnCambioEmpresa.UseVisualStyleBackColor = True
         '
-        'IngresoDeEspecificacionesToolStripMenuItem
+        'ToolStripMenuItem1
         '
-        Me.IngresoDeEspecificacionesToolStripMenuItem.Name = "IngresoDeEspecificacionesToolStripMenuItem"
-        Me.IngresoDeEspecificacionesToolStripMenuItem.Size = New System.Drawing.Size(288, 22)
-        Me.IngresoDeEspecificacionesToolStripMenuItem.Text = "Especificaciones"
+        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(288, 22)
+        Me.ToolStripMenuItem1.Text = "Controles Intermedios"
         '
         'MenuPrincipal
         '
@@ -358,4 +365,5 @@ Partial Class MenuPrincipal
     Friend WithEvents LotesVencidosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents VerificacionDeVencimientosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents IngresoDeEspecificacionesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
 End Class

@@ -463,6 +463,12 @@
       <DependentUpon>certificadonuevofarma.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\Productos Terminados Farma\Ensayos Intermedios\imprecalidadresultadoNoFarma.vb">
+      <DependentUpon>imprecalidadresultadoNoFarma.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Reportes\Productos Terminados Farma\Ensayos Intermedios\imprecalidadresultado.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -732,6 +738,10 @@
     <EmbeddedResource Include="Reportes\Productos Terminados Farma\Certificados de Analisis\certificadonuevofarma.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>certificadonuevofarma.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Productos Terminados Farma\Ensayos Intermedios\imprecalidadresultadoNoFarma.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>imprecalidadresultadoNoFarma.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Productos Terminados Farma\Ensayos Intermedios\imprecalidadresultado.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
