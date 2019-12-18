@@ -159,4 +159,16 @@ Public Class MenuPrincipal
             .Show(Me)
         End With
     End Sub
+
+    Private Sub ToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem2.Click
+        With New IngresoDatosMostrarEnCertificadosAnalisis
+            .Show(Me)
+        End With
+    End Sub
+
+    Private Sub ToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem3.Click
+        With New EmisionCertificadoAnalisis
+            .Show(Me)
+        End With
+    End Sub
 End Class

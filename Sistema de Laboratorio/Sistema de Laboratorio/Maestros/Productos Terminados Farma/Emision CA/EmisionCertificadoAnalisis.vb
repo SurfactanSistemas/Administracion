@@ -44,6 +44,7 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
     Private Sub btnAceptar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAceptar.Click
 
         If Val(txtCantidad.Text) = 0 Then txtCantidad.Text = "1"
+        If txtCliente.Text.Trim = "" Then txtCliente.Text = "S00102"
 
         '
         ' Buscamos la Información del Cliente.
@@ -55,10 +56,22 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
             Exit Sub
         End If
 
+        Dim WBase As String = "Surfactan_III"
+        Dim WTablaAltaCert As String = "AltaCertificadoFarma"
+        Dim WTablaPrueter As String = "PrueterFarma"
+        Dim WTablaCargaV As String = "CargaV"
+
+        If Not Operador.EsFarma Then
+            WBase = "Surfactan_II"
+            WTablaAltaCert = "AltaCertificadoNoFarma"
+            WTablaPrueter = "PrueterNoFarma"
+            WTablaCargaV = "CargaVNoFarma"
+        End If
+
         '
         ' Buscamos la Información de la Prueba.
         '
-        Dim WPrueterFarma As DataTable = GetAll("SELECT * FROM PrueterFarma WHERE Partida = '" & txtPartida.Text & "' ORDER BY Renglon")
+        Dim WPrueterFarma As DataTable = GetAll("SELECT * FROM " & WTablaPrueter & " WHERE Partida = '" & txtPartida.Text & "' ORDER BY Renglon", Operador.Base)
 
         If WPrueterFarma.Rows.Count = 0 Then
             MsgBox("No se ha encontrado pruebas ingresadas para el Lote Indicado.", MsgBoxStyle.Exclamation)
@@ -85,8 +98,8 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
         '
         ' Buscamos los datos del Alta de Certificado. En caso de no tener definido, buscamos los de Surfactan.
         '
-        Dim WAltaCertificado As DataTable = GetAll("SELECT Renglon, Marca FROM AltaCertificadoFarma WHERE Terminado = '" & lblTerminado.Text & "' And Cliente = '" & txtCliente.Text & "' ORDER BY Renglon")
-        If WAltaCertificado.Rows.Count = 0 Then WAltaCertificado = GetAll("SELECT Renglon, Marca FROM AltaCertificadoFarma WHERE Terminado = '" & lblTerminado.Text & "' And Cliente = 'S00102' ORDER BY Renglon")
+        Dim WAltaCertificado As DataTable = GetAll("SELECT Renglon, Marca FROM " & WTablaAltaCert & " WHERE Terminado = '" & lblTerminado.Text & "' And Cliente = '" & txtCliente.Text & "' ORDER BY Renglon", WBase)
+        If WAltaCertificado.Rows.Count = 0 Then WAltaCertificado = GetAll("SELECT Renglon, Marca FROM " & WTablaAltaCert & " WHERE Terminado = '" & lblTerminado.Text & "' And Cliente = 'S00102' ORDER BY Renglon", WBase)
 
         '
         ' Controlamos que por lo menos hayan cargado los genéricos.
@@ -106,7 +119,7 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
         '
         ' Cargo los datos de CargaV.
         '
-        Dim WCargaV As DataTable = GetAll("SELECT *, StdII = Valor FROM CargaV WHERE Terminado = '" & lblTerminado.Text & "' And Paso = '99' ORDER BY Renglon")
+        Dim WCargaV As DataTable = GetAll("SELECT cv.*, StdII = cv.Valor, DescEnsayo = e.Descripcion FROM " & WTablaCargaV & " cv LEFT OUTER JOIN Ensayos e ON e.Codigo = cv.Ensayo WHERE cv.Terminado = '" & lblTerminado.Text & "' And cv.Paso = '99' ORDER BY cv.Renglon", WBase)
 
         '
         ' En caso de que sea Inglés el Idioma definido, se reemplaza los valores y unidades.
@@ -118,7 +131,7 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
         '
         ' Determino qué valor y cómo se va a mostrar.
         '
-        For Each row As Datarow In WPrueterFarma.rows
+        For Each row As DataRow In WPrueterFarma.Rows
             With row
                 If Val(OrDefault(.Item("Estado"), "")) = 199 Then
                     .Item("Valor") = Trim(OrDefault(.Item("Resultado"), ""))
@@ -149,7 +162,7 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
         '
         ' Para ajustar descripción de Parámetros.
         '
-        For Each row As Datarow In WPrueterFarma.Rows
+        For Each row As DataRow In WPrueterFarma.Rows
             With row
 
                 .Item("Std") = Entidades.ProductoTerminado._GenerarImpreParametro(
@@ -200,7 +213,12 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
                 Dim WStdII As String = ""
 
                 Dim res() As DataRow = WCargaV.Select("Renglon = '" & .Item("Renglon") & "'")
-                If res.Count > 0 Then WStdII = Trim(OrDefault(res(0).Item("Valor"), ""))
+                If res.Count > 0 Then
+                    WStdII = Trim(OrDefault(res(0).Item("Valor"), ""))
+                    If Not Operador.EsFarma Then
+                        WStdII = Trim(OrDefault(res(0).Item("DescEnsayo"), "")) & IIf(WStdII <> "", " ( " & WStdII & " )", "")
+                    End If
+                End If
 
                 r.Item("Clave") = txtPartida.Text & index.ToString.PadLeft(2, "0")
                 r.Item("Partida") = txtPartida.Text
@@ -276,7 +294,7 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
 
         If WMetodos.Rows.Count > 0 Then
             WImpreMetodos &= "Metodología Interna: "
-            For Each row As Datarow In WMetodos.Rows
+            For Each row As DataRow In WMetodos.Rows
                 If row.Item("Metodo") <> 0 Then WImpreMetodos &= row.Item("Metodo") & ", "
             Next
             WImpreMetodos = Trim(WImpreMetodos).TrimEnd(",")
@@ -285,23 +303,15 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
         With WNotasExternas
             If .Rows.Count > 0 Then
                 For Each row As DataRow In .Rows
-                    If Trim(row.Item("NotaExterna1")) <> "" Then WImpreNotasExternas &= Trim(row.Item("NotaExterna1")) & " "
-                    If Trim(row.Item("NotaExterna2")) <> "" Then WImpreNotasExternas &= Trim(row.Item("NotaExterna2")) & " "
-                    If Trim(row.Item("NotaExterna3")) <> "" Then WImpreNotasExternas &= Trim(row.Item("NotaExterna3")) & " "
+                    WImpreNotasExternas &= Trim(OrDefault(row.Item("NotaExterna1"), "")) & " "
+                    WImpreNotasExternas &= Trim(OrDefault(row.Item("NotaExterna2"), "")) & " "
+                    WImpreNotasExternas &= Trim(OrDefault(row.Item("NotaExterna3"), "")) & " "
                 Next
                 WImpreNotasExternas = Trim(WImpreNotasExternas)
             End If
         End With
-        
+
         Dim WImpreCargaVNotas As String = _ObtenerNotasExtrasDePT()
-
-        ' MsgBox(WImpreMetodos)
-        ' MsgBox(WImpreCargaVNotas)
-        ' MsgBox(WImpreNotasExternas)
-
-        ' With New VistaPreviaDBAuxi(dt)
-        '     .Show(Me)
-        ' End With
 
         Dim WLoteOriginal As String = ""
         Dim WImpreVto As String = IIf(cmbIdioma.SelectedIndex = 1, "Retest Date:", "F.Reanálisis:")
@@ -322,7 +332,7 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
 
         Dim WTerminado As DataRow = GetSingle("SELECT CodRnpa FROM Terminado WHERE Codigo = '" & lblTerminado.Text & "'")
         Dim WCodRNPA As String = ""
-        If WTerminado IsNot Nothing Then WCodRNPA = Trim(WTerminado.Item("CodRnpa"))
+        If WTerminado IsNot Nothing Then WCodRNPA = Trim(OrDefault(WTerminado.Item("CodRnpa"), ""))
 
         If WDatosMono IsNot Nothing AndAlso WDatosMono(3) <> "" Then WLoteOriginal = "Ref: " & Trim(WDatosMono(3))
 
@@ -336,7 +346,6 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
 
             rpt = New certificadonuevofarma
             With rpt
-
                 .SetDataSource(dt)
                 .SetParameterValue("MetodoInterno", WImpreMetodos & Space(10) & WLoteOriginal)
 
@@ -413,8 +422,6 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
 
         End If
 
-
-
     End Sub
 
     Private Sub _GenerarCertificadoAnalisisFarma(ByVal rpt As ReportDocument, ByVal WTipoReporte As Integer, ByVal wPartida As Integer, ByVal wTipoSalida As Integer, Optional ByVal WNombrePDF As String = "")
@@ -427,7 +434,7 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
 
         With New VistaPrevia
             .Reporte = rpt
-        
+            .Base = Operador.Base
             Dim WNombre As String = WNombrePDF
 
             If WNombre.Trim = "" Then
@@ -461,11 +468,20 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
         Dim WImpreCargaVNotas As String = ""
         Dim WCargaVNotas As DataTable
 
+        Dim WTablaCargaVNotas As String = "CargaVNotas"
+        Dim WTablaCargaVNotasIng As String = "CargaVNotasIngles"
+        Dim WBase As String = "Surfactan_II"
+
+        If Not Operador.EsFarma Then
+            WTablaCargaVNotas = "CargaVNoFarmaNotas"
+            WTablaCargaVNotasIng = "CargaVNoFarmaNotasIngles"
+            WBase = "Surfactan_II"
+        End If
 
         If cmbIdioma.SelectedIndex = 1 Then
-            WCargaVNotas = GetAll("SELECT Nota, Renglon, Observacion FROM CargaVNotasIngles WHERE Terminado = '" & lblTerminado.Text & "' ORDER BY Nota, Renglon")
+            WCargaVNotas = GetAll("SELECT Nota, Renglon, Observacion FROM " & WTablaCargaVNotasIng & " WHERE Terminado = '" & lblTerminado.Text & "' ORDER BY Nota, Renglon", WBase)
         Else
-            WCargaVNotas = GetAll("SELECT Nota, Renglon, Observacion FROM CargaVNotas WHERE Terminado = '" & lblTerminado.Text & "' ORDER BY Nota, Renglon")
+            WCargaVNotas = GetAll("SELECT Nota, Renglon, Observacion FROM " & WTablaCargaVNotas & " WHERE Terminado = '" & lblTerminado.Text & "' ORDER BY Nota, Renglon", WBase)
         End If
 
         If WCargaVNotas.Rows.Count > 0 Then
@@ -514,7 +530,15 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
 
     Private Sub _ReemplazarConInfoEnIngles(ByRef WCargaV As DataTable)
 
-        Dim WCargaVIngles As DataTable = GetAll("SELECT * FROM CargaVIngles WHERE Terminado  = '" & lblTerminado.Text & "' And Paso = '99' Order by Renglon")
+        Dim WTablaCargaVIng As String = "CargaVIngles"
+        Dim WBase As String = "Surfactan_III"
+
+        If Not Operador.EsFarma Then
+            WTablaCargaVIng = "CargaVNoFarmaIngles"
+            WBase = "Surfactan_II"
+        End If
+
+        Dim WCargaVIngles As DataTable = GetAll("SELECT Renglon, Valor, UnidadEspecif FROM " & WTablaCargaVIng & " WHERE Terminado  = '" & lblTerminado.Text & "' And Paso = '99' Order by Renglon", WBase)
 
         For Each row As DataRow In WCargaVIngles.Rows
             Dim fila() As DataRow = WCargaV.Select("Renglon = '" & row.Item("Renglon") & "'")
