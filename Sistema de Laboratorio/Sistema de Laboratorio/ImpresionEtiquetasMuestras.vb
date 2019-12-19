@@ -52,7 +52,7 @@
             Case Keys.Escape
                 txtAnalista.Text = ""
         End Select
-        
+
     End Sub
 
 
@@ -69,7 +69,7 @@
             Case Keys.Escape
                 TxtCantEtiq.Text = ""
         End Select
-        
+
     End Sub
 
     Private Sub _BuscarInforme(ByVal NumInforme As String)
@@ -117,14 +117,14 @@
 
     End Sub
 
-   
+
 
     Private Sub ImpresionEtiquetasMuestras_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         LtbMP.Visible = False
         LtbLotes.Visible = False
-'        With tablaInforme.Columns
-'            .Add("")
-'        End With
+        '        With tablaInforme.Columns
+        '            .Add("")
+        '        End With
     End Sub
 
 
@@ -154,7 +154,7 @@
         End If
     End Sub
 
-    
+
     Private Sub LtbLotes_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles LtbLotes.MouseClick
         txtLote.Text = LtbLotes.SelectedItem
         LtbLotes.Visible = False
@@ -213,7 +213,7 @@
                     End If
                     .Imprimir()
                 Next
-                
+
             End With
         End If
     End Sub

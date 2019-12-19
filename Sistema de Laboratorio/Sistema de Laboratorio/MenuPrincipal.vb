@@ -98,20 +98,9 @@ Public Class MenuPrincipal
             .Show(Me)
         End With
     End Sub
-    Private Sub AutorizaciónDePedidosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AutorizaciónDePedidosToolStripMenuItem.Click
-        With New ListadoAutorizacionPedidos
-            .Show(Me)
-        End With
-    End Sub
 
     Private Sub AutorizaciónDePedidosToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles AutorizaciónDePedidosToolStripMenuItem.Click
         With New ListadoAutorizacionPedidos
-            .Show(Me)
-        End With
-    End Sub
-
-    Private Sub DatosAImprimirEnCertificadosDeAnálisisToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles DatosAImprimirEnCertificadosDeAnálisisToolStripMenuItem.Click
-        With New IngresoDatosMostrarEnCertificadosAnalisis
             .Show(Me)
         End With
     End Sub
@@ -123,18 +112,6 @@ Public Class MenuPrincipal
     End Sub
     Private Sub DatosAImprimirEnCertificadosDeAnálisisToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DatosAImprimirEnCertificadosDeAnálisisToolStripMenuItem.Click
         With New IngresoDatosMostrarEnCertificadosAnalisis
-            .Show(Me)
-        End With
-    End Sub
-
-    Private Sub DatosAImprimirEnCertificadosDeAnálisisToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DatosAImprimirEnCertificadosDeAnálisisToolStripMenuItem.Click
-        With New IngresoDatosMostrarEnCertificadosAnalisis
-            .Show(Me)
-        End With
-    End Sub
-
-    Private Sub EmisiónDeCertificadoDeAnálisisToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles EmisiónDeCertificadoDeAnálisisToolStripMenuItem.Click
-        With New EmisionCertificadoAnalisis
             .Show(Me)
         End With
     End Sub
@@ -169,20 +146,20 @@ Public Class MenuPrincipal
         End With
     End Sub
 
-    Private Sub EmisionDeEtiquetasToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EmisionDeEtiquetasToolStripMenuItem.Click
-        With New ImpresionEtiquetasMuestras
-            .Show(Me)
-        End With
-    End Sub
-
-    Private Sub LotesVencidosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LotesVencidosToolStripMenuItem.Click
-        With New VerificacionLoteVencidoMP
-            .Show(Me)
-        End With
-    End Sub
-
     Private Sub VerificacionDeVencimientosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles VerificacionDeVencimientosToolStripMenuItem.Click
         With New VerificacionDeVencimientosMP
+            .Show(Me)
+        End With
+    End Sub
+
+    Private Sub MovimientosVariosDeLaboratorioToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MovimientosVariosDeLaboratorioToolStripMenuItem.Click
+        With New MovimientosVariosDeLaboratorio
+            .Show(Me)
+        End With
+    End Sub
+
+    Private Sub InformeDeRecepcionDeDrogaDeLaboratorioToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles InformeDeRecepcionDeDrogaDeLaboratorioToolStripMenuItem.Click
+        With New InformeRecepcionDrogaLAB
             .Show(Me)
         End With
     End Sub

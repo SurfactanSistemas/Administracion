@@ -29,6 +29,7 @@ Partial Class MenuPrincipal
         Me.ListadoDeEnsayosEnMPToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListadoDeEspecificacionesDeMPAFechaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EspecificacionesPorVersiónToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.VerificacionDeVencimientosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EmisiónDeEtiquetasSimplesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LotesVencidosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FarmaIngresoDeEnsayosProductosTerminadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -49,13 +50,14 @@ Partial Class MenuPrincipal
         Me.MateriasPrimasToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProductosTerminadosToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.EmisionDeEtiquetasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MovimientosVariosDeLaboratorioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProcesosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FinDeSistemaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnCambioEmpresa = New System.Windows.Forms.Button()
-        Me.VerificacionDeVencimientosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.InformeDeRecepcionDeDrogaDeLaboratorioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -71,7 +73,7 @@ Partial Class MenuPrincipal
         '
         'MaestrosToolStripMenuItem
         '
-        Me.MaestrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EnsayosToolStripMenuItem, Me.MateriasPrimasToolStripMenuItem, Me.FarmaIngresoDeEnsayosProductosTerminadosToolStripMenuItem, Me.ProductosTerminadosToolStripMenuItem, Me.FHToolStripMenuItem, Me.DatosAdicionalesToolStripMenuItem, Me.EmisionDeEtiquetasToolStripMenuItem})
+        Me.MaestrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EnsayosToolStripMenuItem, Me.MateriasPrimasToolStripMenuItem, Me.FarmaIngresoDeEnsayosProductosTerminadosToolStripMenuItem, Me.ProductosTerminadosToolStripMenuItem, Me.FHToolStripMenuItem, Me.DatosAdicionalesToolStripMenuItem, Me.EmisionDeEtiquetasToolStripMenuItem, Me.MovimientosVariosDeLaboratorioToolStripMenuItem, Me.InformeDeRecepcionDeDrogaDeLaboratorioToolStripMenuItem})
         Me.MaestrosToolStripMenuItem.Name = "MaestrosToolStripMenuItem"
         Me.MaestrosToolStripMenuItem.Size = New System.Drawing.Size(67, 20)
         Me.MaestrosToolStripMenuItem.Text = "Maestros"
@@ -79,14 +81,14 @@ Partial Class MenuPrincipal
         'EnsayosToolStripMenuItem
         '
         Me.EnsayosToolStripMenuItem.Name = "EnsayosToolStripMenuItem"
-        Me.EnsayosToolStripMenuItem.Size = New System.Drawing.Size(250, 22)
+        Me.EnsayosToolStripMenuItem.Size = New System.Drawing.Size(321, 22)
         Me.EnsayosToolStripMenuItem.Text = "Ing de Ensayos"
         '
         'MateriasPrimasToolStripMenuItem
         '
         Me.MateriasPrimasToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ListadoDeEnsayosEnMPToolStripMenuItem, Me.ListadoDeEspecificacionesDeMPAFechaToolStripMenuItem, Me.EspecificacionesPorVersiónToolStripMenuItem, Me.VerificacionDeVencimientosToolStripMenuItem, Me.EmisiónDeEtiquetasSimplesToolStripMenuItem, Me.LotesVencidosToolStripMenuItem})
         Me.MateriasPrimasToolStripMenuItem.Name = "MateriasPrimasToolStripMenuItem"
-        Me.MateriasPrimasToolStripMenuItem.Size = New System.Drawing.Size(250, 22)
+        Me.MateriasPrimasToolStripMenuItem.Size = New System.Drawing.Size(321, 22)
         Me.MateriasPrimasToolStripMenuItem.Text = "Materias Primas"
         '
         'ListadoDeEnsayosEnMPToolStripMenuItem
@@ -107,6 +109,12 @@ Partial Class MenuPrincipal
         Me.EspecificacionesPorVersiónToolStripMenuItem.Size = New System.Drawing.Size(297, 22)
         Me.EspecificacionesPorVersiónToolStripMenuItem.Text = "Especificaciones por Versión"
         '
+        'VerificacionDeVencimientosToolStripMenuItem
+        '
+        Me.VerificacionDeVencimientosToolStripMenuItem.Name = "VerificacionDeVencimientosToolStripMenuItem"
+        Me.VerificacionDeVencimientosToolStripMenuItem.Size = New System.Drawing.Size(297, 22)
+        Me.VerificacionDeVencimientosToolStripMenuItem.Text = "Verificacion de Vencimientos"
+        '
         'EmisiónDeEtiquetasSimplesToolStripMenuItem
         '
         Me.EmisiónDeEtiquetasSimplesToolStripMenuItem.Name = "EmisiónDeEtiquetasSimplesToolStripMenuItem"
@@ -123,7 +131,7 @@ Partial Class MenuPrincipal
         '
         Me.FarmaIngresoDeEnsayosProductosTerminadosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ControlesIntermedisToolStripMenuItem, Me.EspecificacionesToolStripMenuItem, Me.AutorizaciónDePedidosToolStripMenuItem, Me.DatosAImprimirEnCertificadosDeAnálisisToolStripMenuItem, Me.EmisiónDeCertificadoDeAnálisisToolStripMenuItem})
         Me.FarmaIngresoDeEnsayosProductosTerminadosToolStripMenuItem.Name = "FarmaIngresoDeEnsayosProductosTerminadosToolStripMenuItem"
-        Me.FarmaIngresoDeEnsayosProductosTerminadosToolStripMenuItem.Size = New System.Drawing.Size(250, 22)
+        Me.FarmaIngresoDeEnsayosProductosTerminadosToolStripMenuItem.Size = New System.Drawing.Size(321, 22)
         Me.FarmaIngresoDeEnsayosProductosTerminadosToolStripMenuItem.Text = "Productos Terminados"
         '
         'ControlesIntermedisToolStripMenuItem
@@ -160,7 +168,7 @@ Partial Class MenuPrincipal
         '
         Me.ProductosTerminadosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ConsultaDeEspecificacionesPorVersionToolStripMenuItem, Me.ListaDeEspecificacionesDePTAFechaToolStripMenuItem, Me.ListadoDeEnsayosDePTToolStripMenuItem, Me.ListaDePTVencidosToolStripMenuItem})
         Me.ProductosTerminadosToolStripMenuItem.Name = "ProductosTerminadosToolStripMenuItem"
-        Me.ProductosTerminadosToolStripMenuItem.Size = New System.Drawing.Size(250, 22)
+        Me.ProductosTerminadosToolStripMenuItem.Size = New System.Drawing.Size(321, 22)
         Me.ProductosTerminadosToolStripMenuItem.Text = "Productos Terminados"
         '
         'ConsultaDeEspecificacionesPorVersionToolStripMenuItem
@@ -191,7 +199,7 @@ Partial Class MenuPrincipal
         '
         Me.FHToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HToolStripMenuItem, Me.PToolStripMenuItem})
         Me.FHToolStripMenuItem.Name = "FHToolStripMenuItem"
-        Me.FHToolStripMenuItem.Size = New System.Drawing.Size(250, 22)
+        Me.FHToolStripMenuItem.Size = New System.Drawing.Size(321, 22)
         Me.FHToolStripMenuItem.Text = "Ingreso de Frases"
         '
         'HToolStripMenuItem
@@ -210,7 +218,7 @@ Partial Class MenuPrincipal
         '
         Me.DatosAdicionalesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MateriasPrimasToolStripMenuItem1, Me.ProductosTerminadosToolStripMenuItem1})
         Me.DatosAdicionalesToolStripMenuItem.Name = "DatosAdicionalesToolStripMenuItem"
-        Me.DatosAdicionalesToolStripMenuItem.Size = New System.Drawing.Size(250, 22)
+        Me.DatosAdicionalesToolStripMenuItem.Size = New System.Drawing.Size(321, 22)
         Me.DatosAdicionalesToolStripMenuItem.Text = "Datos Adicionales de Etiquetas"
         '
         'MateriasPrimasToolStripMenuItem1
@@ -228,8 +236,14 @@ Partial Class MenuPrincipal
         'EmisionDeEtiquetasToolStripMenuItem
         '
         Me.EmisionDeEtiquetasToolStripMenuItem.Name = "EmisionDeEtiquetasToolStripMenuItem"
-        Me.EmisionDeEtiquetasToolStripMenuItem.Size = New System.Drawing.Size(250, 22)
+        Me.EmisionDeEtiquetasToolStripMenuItem.Size = New System.Drawing.Size(321, 22)
         Me.EmisionDeEtiquetasToolStripMenuItem.Text = "Emision de Etiquetas de Muestras"
+        '
+        'MovimientosVariosDeLaboratorioToolStripMenuItem
+        '
+        Me.MovimientosVariosDeLaboratorioToolStripMenuItem.Name = "MovimientosVariosDeLaboratorioToolStripMenuItem"
+        Me.MovimientosVariosDeLaboratorioToolStripMenuItem.Size = New System.Drawing.Size(321, 22)
+        Me.MovimientosVariosDeLaboratorioToolStripMenuItem.Text = "Movimientos Varios de Laboratorio"
         '
         'ProcesosToolStripMenuItem
         '
@@ -290,11 +304,11 @@ Partial Class MenuPrincipal
         Me.btnCambioEmpresa.Text = "CAMBIAR EMPRESA"
         Me.btnCambioEmpresa.UseVisualStyleBackColor = True
         '
-        'VerificacionDeVencimientosToolStripMenuItem
+        'InformeDeRecepcionDeDrogaDeLaboratorioToolStripMenuItem
         '
-        Me.VerificacionDeVencimientosToolStripMenuItem.Name = "VerificacionDeVencimientosToolStripMenuItem"
-        Me.VerificacionDeVencimientosToolStripMenuItem.Size = New System.Drawing.Size(297, 22)
-        Me.VerificacionDeVencimientosToolStripMenuItem.Text = "Verificacion de Vencimientos"
+        Me.InformeDeRecepcionDeDrogaDeLaboratorioToolStripMenuItem.Name = "InformeDeRecepcionDeDrogaDeLaboratorioToolStripMenuItem"
+        Me.InformeDeRecepcionDeDrogaDeLaboratorioToolStripMenuItem.Size = New System.Drawing.Size(321, 22)
+        Me.InformeDeRecepcionDeDrogaDeLaboratorioToolStripMenuItem.Text = "Informe de Recepcion de Droga de Laboratorio"
         '
         'MenuPrincipal
         '
@@ -340,9 +354,6 @@ Partial Class MenuPrincipal
     Friend WithEvents DatosAdicionalesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MateriasPrimasToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ProductosTerminadosToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents AutorizaciónDePedidosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents DatosAImprimirEnCertificadosDeAnálisisToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents EmisiónDeCertificadoDeAnálisisToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ListadoDeEnsayosDePTToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ListaDeEspecificacionesDePTAFechaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ListaDePTVencidosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -353,4 +364,6 @@ Partial Class MenuPrincipal
     Friend WithEvents EmisionDeEtiquetasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents LotesVencidosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents VerificacionDeVencimientosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MovimientosVariosDeLaboratorioToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents InformeDeRecepcionDeDrogaDeLaboratorioToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class

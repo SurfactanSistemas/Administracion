@@ -104,6 +104,9 @@
               <xs:element name="Empresa" msprop:Generator_ColumnVarNameInTable="columnEmpresa" msprop:Generator_ColumnPropNameInRow="Empresa" msprop:Generator_ColumnPropNameInTable="EmpresaColumn" msprop:Generator_UserColumnName="Empresa" type="xs:string" minOccurs="0" />
               <xs:element name="DescripArticulo" msprop:Generator_ColumnVarNameInTable="columnDescripArticulo" msprop:Generator_ColumnPropNameInRow="DescripArticulo" msprop:Generator_ColumnPropNameInTable="DescripArticuloColumn" msprop:Generator_UserColumnName="DescripArticulo" type="xs:string" minOccurs="0" />
               <xs:element name="Dias" msprop:Generator_ColumnVarNameInTable="columnDias" msprop:Generator_ColumnPropNameInRow="Dias" msprop:Generator_ColumnPropNameInTable="DiasColumn" msprop:Generator_UserColumnName="Dias" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+          </xs:element>
         <xs:element name="Certificado" msprop:Generator_TableClassName="CertificadoDataTable" msprop:Generator_TableVarName="tableCertificado" msprop:Generator_TablePropName="Certificado" msprop:Generator_RowDeletingName="CertificadoRowDeleting" msprop:Generator_RowChangingName="CertificadoRowChanging" msprop:Generator_RowEvHandlerName="CertificadoRowChangeEventHandler" msprop:Generator_RowDeletedName="CertificadoRowDeleted" msprop:Generator_UserTableName="Certificado" msprop:Generator_RowChangedName="CertificadoRowChanged" msprop:Generator_RowEvArgName="CertificadoRowChangeEvent" msprop:Generator_RowClassName="CertificadoRow">
           <xs:complexType>
             <xs:sequence>
