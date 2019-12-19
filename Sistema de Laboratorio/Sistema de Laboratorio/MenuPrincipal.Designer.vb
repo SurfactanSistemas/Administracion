@@ -52,6 +52,7 @@ Partial Class MenuPrincipal
         Me.ProductosTerminadosToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.EmisionDeEtiquetasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MovimientosVariosDeLaboratorioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.InformeDeRecepcionDeDrogaDeLaboratorioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProcesosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FinDeSistemaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Panel1 = New System.Windows.Forms.Panel()
@@ -256,6 +257,12 @@ Partial Class MenuPrincipal
         Me.MovimientosVariosDeLaboratorioToolStripMenuItem.Name = "MovimientosVariosDeLaboratorioToolStripMenuItem"
         Me.MovimientosVariosDeLaboratorioToolStripMenuItem.Size = New System.Drawing.Size(321, 22)
         Me.MovimientosVariosDeLaboratorioToolStripMenuItem.Text = "Movimientos Varios de Laboratorio"
+        '
+        'InformeDeRecepcionDeDrogaDeLaboratorioToolStripMenuItem
+        '
+        Me.InformeDeRecepcionDeDrogaDeLaboratorioToolStripMenuItem.Name = "InformeDeRecepcionDeDrogaDeLaboratorioToolStripMenuItem"
+        Me.InformeDeRecepcionDeDrogaDeLaboratorioToolStripMenuItem.Size = New System.Drawing.Size(321, 22)
+        Me.InformeDeRecepcionDeDrogaDeLaboratorioToolStripMenuItem.Text = "Informe de Recepcion de Droga de Laboratorio"
         '
         'ProcesosToolStripMenuItem
         '
