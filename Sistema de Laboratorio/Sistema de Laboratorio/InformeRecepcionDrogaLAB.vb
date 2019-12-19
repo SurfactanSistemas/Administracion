@@ -838,6 +838,11 @@
                 Continue For
             End If
 
+            If DGV_InformeRecepcion.Rows(i).Cells("SaldoOC").Value Is Nothing Then
+                MsgBox("No puede grabar un Informe ya existente")
+                Exit Sub
+            End If
+
 
             With DGV_InformeRecepcion.Rows(i)
 
