@@ -200,6 +200,12 @@
     <Compile Include="ImpresionEtiquetasMuestras.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="InformeRecepcionDrogaLAB.Designer.vb">
+      <DependentUpon>InformeRecepcionDrogaLAB.vb</DependentUpon>
+    </Compile>
+    <Compile Include="InformeRecepcionDrogaLAB.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ListadoDeEnsayoDePT.Designer.vb">
       <DependentUpon>ListadoDeEnsayoDePT.vb</DependentUpon>
     </Compile>
@@ -348,6 +354,12 @@
       <DependentUpon>MenuPrincipal.vb</DependentUpon>
     </Compile>
     <Compile Include="MenuPrincipal.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MovimientosVariosDeLaboratorio.Designer.vb">
+      <DependentUpon>MovimientosVariosDeLaboratorio.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MovimientosVariosDeLaboratorio.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -612,6 +624,9 @@
     <EmbeddedResource Include="ImpresionEtiquetasMuestras.resx">
       <DependentUpon>ImpresionEtiquetasMuestras.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="InformeRecepcionDrogaLAB.resx">
+      <DependentUpon>InformeRecepcionDrogaLAB.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Maestros\Ingreso Frases H &amp; P\FrasesHP.resx">
       <DependentUpon>FrasesHP.vb</DependentUpon>
     </EmbeddedResource>
@@ -674,6 +689,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MenuPrincipal.resx">
       <DependentUpon>MenuPrincipal.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MovimientosVariosDeLaboratorio.resx">
+      <DependentUpon>MovimientosVariosDeLaboratorio.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -843,6 +861,7 @@
     <Content Include="libs\info.lundin.math.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\Consulta Dat N1.png" />
     <None Include="SGA\SGA9.PNG" />
     <None Include="SGA\SGA8.PNG" />
     <None Include="SGA\SGA7.PNG" />

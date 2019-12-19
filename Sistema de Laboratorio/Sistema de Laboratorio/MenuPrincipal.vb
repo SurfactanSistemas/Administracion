@@ -150,6 +150,12 @@ Public Class MenuPrincipal
 
     Private Sub IngresoDeEspecificacionesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles IngresoDeEspecificacionesToolStripMenuItem.Click
         With New IngresoEspecificacionesMP
+        .Show(Me)
+        End With
+    End Sub
+    
+    Private Sub MovimientosVariosDeLaboratorioToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MovimientosVariosDeLaboratorioToolStripMenuItem.Click
+        With New MovimientosVariosDeLaboratorio
             .Show(Me)
         End With
     End Sub
@@ -180,6 +186,11 @@ Public Class MenuPrincipal
 
     Private Sub IngresoDeEnsayosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles IngresoDeEnsayosToolStripMenuItem.Click
         With New IngresoEnsayosLaboratorioMP
+        .Show(Me)
+        End With
+    End Sub
+    Private Sub InformeDeRecepcionDeDrogaDeLaboratorioToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles InformeDeRecepcionDeDrogaDeLaboratorioToolStripMenuItem.Click
+        With New InformeRecepcionDrogaLAB
             .Show(Me)
         End With
     End Sub
