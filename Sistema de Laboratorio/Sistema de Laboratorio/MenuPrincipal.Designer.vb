@@ -51,13 +51,13 @@ Partial Class MenuPrincipal
         Me.ProductosTerminadosToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.EmisionDeEtiquetasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MovimientosVariosDeLaboratorioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.InformeDeRecepcionDeDrogaDeLaboratorioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProcesosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FinDeSistemaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnCambioEmpresa = New System.Windows.Forms.Button()
-        Me.InformeDeRecepcionDeDrogaDeLaboratorioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -245,6 +245,12 @@ Partial Class MenuPrincipal
         Me.MovimientosVariosDeLaboratorioToolStripMenuItem.Size = New System.Drawing.Size(321, 22)
         Me.MovimientosVariosDeLaboratorioToolStripMenuItem.Text = "Movimientos Varios de Laboratorio"
         '
+        'InformeDeRecepcionDeDrogaDeLaboratorioToolStripMenuItem
+        '
+        Me.InformeDeRecepcionDeDrogaDeLaboratorioToolStripMenuItem.Name = "InformeDeRecepcionDeDrogaDeLaboratorioToolStripMenuItem"
+        Me.InformeDeRecepcionDeDrogaDeLaboratorioToolStripMenuItem.Size = New System.Drawing.Size(321, 22)
+        Me.InformeDeRecepcionDeDrogaDeLaboratorioToolStripMenuItem.Text = "Informe de Recepcion de Droga de Laboratorio"
+        '
         'ProcesosToolStripMenuItem
         '
         Me.ProcesosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FinDeSistemaToolStripMenuItem})
@@ -303,12 +309,6 @@ Partial Class MenuPrincipal
         Me.btnCambioEmpresa.TabIndex = 2
         Me.btnCambioEmpresa.Text = "CAMBIAR EMPRESA"
         Me.btnCambioEmpresa.UseVisualStyleBackColor = True
-        '
-        'InformeDeRecepcionDeDrogaDeLaboratorioToolStripMenuItem
-        '
-        Me.InformeDeRecepcionDeDrogaDeLaboratorioToolStripMenuItem.Name = "InformeDeRecepcionDeDrogaDeLaboratorioToolStripMenuItem"
-        Me.InformeDeRecepcionDeDrogaDeLaboratorioToolStripMenuItem.Size = New System.Drawing.Size(321, 22)
-        Me.InformeDeRecepcionDeDrogaDeLaboratorioToolStripMenuItem.Text = "Informe de Recepcion de Droga de Laboratorio"
         '
         'MenuPrincipal
         '

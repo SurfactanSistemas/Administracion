@@ -1041,9 +1041,14 @@
 
         Next
 
-        ExecuteNonQueries(listaSQLCnslt.ToArray())
+        If listaSQLCnslt.Count > 0 Then
+            ExecuteNonQueries(listaSQLCnslt.ToArray())
 
-        _LimpiarForm()
+            _LimpiarForm()
+        Else
+            MsgBox("No informo ningun ingreso")
+        End If
+        
 
     End Sub
 
