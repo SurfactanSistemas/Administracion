@@ -248,12 +248,6 @@
     <Compile Include="Maestros\Materias Primas\Ensayos\ProcesarListadoEnsayosEnMateriaPrima.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Maestros\Materias Primas\Especificaciones\DefinicionFormulaEspecificacionMP.Designer.vb">
-      <DependentUpon>DefinicionFormulaEspecificacionMP.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Maestros\Materias Primas\Especificaciones\DefinicionFormulaEspecificacionMP.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Maestros\Materias Primas\Especificaciones\EspecificacionesMPPorVersion.Designer.vb">
       <DependentUpon>EspecificacionesMPPorVersion.vb</DependentUpon>
     </Compile>
@@ -264,12 +258,6 @@
       <DependentUpon>IngresoEspecificacionesMP.vb</DependentUpon>
     </Compile>
     <Compile Include="Maestros\Materias Primas\Especificaciones\IngresoEspecificacionesMP.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Maestros\Materias Primas\Especificaciones\IngresoParametrosEspecificacionesMP.Designer.vb">
-      <DependentUpon>IngresoParametrosEspecificacionesMP.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Maestros\Materias Primas\Especificaciones\IngresoParametrosEspecificacionesMP.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Maestros\Materias Primas\Especificaciones\ListadoEspecificacionesMPAFecha.Designer.vb">
@@ -621,17 +609,8 @@
     <EmbeddedResource Include="Maestros\Materias Primas\Ensayos\ProcesarListadoEnsayosEnMateriaPrima.resx">
       <DependentUpon>ProcesarListadoEnsayosEnMateriaPrima.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Maestros\Materias Primas\Especificaciones\DefinicionFormulaEspecificacionMP.resx">
-      <DependentUpon>DefinicionFormulaEspecificacionMP.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Maestros\Materias Primas\Especificaciones\EspecificacionesMPPorVersion.resx">
-      <DependentUpon>EspecificacionesMPPorVersion.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Maestros\Materias Primas\Especificaciones\IngresoEspecificacionesMP.resx">
       <DependentUpon>IngresoEspecificacionesMP.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Maestros\Materias Primas\Especificaciones\IngresoParametrosEspecificacionesMP.resx">
-      <DependentUpon>IngresoParametrosEspecificacionesMP.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Maestros\Materias Primas\Especificaciones\ListadoEspecificacionesMPAFecha.resx">
       <DependentUpon>ListadoEspecificacionesMPAFecha.vb</DependentUpon>

@@ -70,7 +70,7 @@ Public Class Login
             Select Case WOpcion
                 Case 1 ' Especificaciones PT
 
-                    With New IngresoEspecificacionesPT
+                    With New IngresoEspecificacionesMP
                         .ShowDialog(Me)
                     End With
 

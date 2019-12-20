@@ -18,7 +18,7 @@ Public Class MenuPrincipal
     End Sub
 
     Private Sub EspecificacionesToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles EspecificacionesToolStripMenuItem.Click
-        Abrir(New IngresoEspecificacionesPT)
+        Abrir(New IngresoEspecificacionesMP)
     End Sub
 
     Private Sub MenuPrincipal_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
@@ -126,10 +126,10 @@ Public Class MenuPrincipal
 
     Private Sub EmisiónDeCertificadoDeAnálisisToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EmisiónDeCertificadoDeAnálisisToolStripMenuItem.Click
         With New EmisionCertificadoAnalisis
-         .Show(Me)
+            .Show(Me)
         End With
     End Sub
-    
+
     Private Sub EmisionDeEtiquetasToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EmisionDeEtiquetasToolStripMenuItem.Click
         With New ImpresionEtiquetasMuestras
             .Show(Me)
@@ -149,7 +149,7 @@ Public Class MenuPrincipal
     End Sub
 
     Private Sub IngresoDeEspecificacionesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles IngresoDeEspecificacionesToolStripMenuItem.Click
-        With New IngresoEspecificacionesPT
+        With New IngresoEspecificacionesMP
             .Show(Me)
         End With
     End Sub
@@ -168,6 +168,12 @@ Public Class MenuPrincipal
 
     Private Sub ToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem3.Click
         With New EmisionCertificadoAnalisis
+            .Show(Me)
+        End With
+    End Sub
+
+    Private Sub EspecificacionesToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles EspecificacionesToolStripMenuItem1.Click
+        With New IngresoEspecificacionesMP
             .Show(Me)
         End With
     End Sub

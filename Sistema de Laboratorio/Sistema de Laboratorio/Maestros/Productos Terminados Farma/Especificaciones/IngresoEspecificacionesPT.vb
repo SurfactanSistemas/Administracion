@@ -131,7 +131,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
     End Sub
 
     Private Sub _CargarDatosEspecifNoFarma()
-        
+
         Dim WCargaVNoFarma As DataTable = GetAll("SELECT * FROM CargaVNoFarma WHERE Terminado = '" & txtTerminado.Text & "' And Paso = '" & txtEtapa.Text & "' Order By Clave", "Surfactan_II")
 
         dgvEspecif.Rows.Clear()

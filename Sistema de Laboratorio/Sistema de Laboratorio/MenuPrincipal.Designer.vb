@@ -60,6 +60,7 @@ Partial Class MenuPrincipal
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EspecificacionesToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -88,7 +89,7 @@ Partial Class MenuPrincipal
         '
         'MateriasPrimasToolStripMenuItem
         '
-        Me.MateriasPrimasToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ListadoDeEnsayosEnMPToolStripMenuItem, Me.ListadoDeEspecificacionesDeMPAFechaToolStripMenuItem, Me.EspecificacionesPorVersiónToolStripMenuItem, Me.VerificacionDeVencimientosToolStripMenuItem, Me.EmisiónDeEtiquetasSimplesToolStripMenuItem, Me.LotesVencidosToolStripMenuItem})
+        Me.MateriasPrimasToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ListadoDeEnsayosEnMPToolStripMenuItem, Me.ListadoDeEspecificacionesDeMPAFechaToolStripMenuItem, Me.EspecificacionesPorVersiónToolStripMenuItem, Me.VerificacionDeVencimientosToolStripMenuItem, Me.EmisiónDeEtiquetasSimplesToolStripMenuItem, Me.LotesVencidosToolStripMenuItem, Me.EspecificacionesToolStripMenuItem1})
         Me.MateriasPrimasToolStripMenuItem.Name = "MateriasPrimasToolStripMenuItem"
         Me.MateriasPrimasToolStripMenuItem.Size = New System.Drawing.Size(250, 22)
         Me.MateriasPrimasToolStripMenuItem.Text = "Materias Primas"
@@ -324,6 +325,12 @@ Partial Class MenuPrincipal
         Me.ToolStripMenuItem3.Size = New System.Drawing.Size(298, 22)
         Me.ToolStripMenuItem3.Text = "Emisión de Certificado de Análisis"
         '
+        'EspecificacionesToolStripMenuItem1
+        '
+        Me.EspecificacionesToolStripMenuItem1.Name = "EspecificacionesToolStripMenuItem1"
+        Me.EspecificacionesToolStripMenuItem1.Size = New System.Drawing.Size(297, 22)
+        Me.EspecificacionesToolStripMenuItem1.Text = "Especificaciones"
+        '
         'MenuPrincipal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -382,4 +389,5 @@ Partial Class MenuPrincipal
     Friend WithEvents ToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem2 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem3 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents EspecificacionesToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
 End Class
