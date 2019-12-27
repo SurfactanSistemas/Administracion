@@ -194,6 +194,12 @@
     <Compile Include="InformeRecepcionDrogaLAB.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="IngresoActualizacionHojaProduccionFarma.Designer.vb">
+      <DependentUpon>IngresoActualizacionHojaProduccionFarma.vb</DependentUpon>
+    </Compile>
+    <Compile Include="IngresoActualizacionHojaProduccionFarma.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ListadoDeEnsayoDePT.Designer.vb">
       <DependentUpon>ListadoDeEnsayoDePT.vb</DependentUpon>
     </Compile>
@@ -608,6 +614,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InformeRecepcionDrogaLAB.resx">
       <DependentUpon>InformeRecepcionDrogaLAB.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IngresoActualizacionHojaProduccionFarma.resx">
+      <DependentUpon>IngresoActualizacionHojaProduccionFarma.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Maestros\Ingreso Frases H &amp; P\FrasesHP.resx">
       <DependentUpon>FrasesHP.vb</DependentUpon>
