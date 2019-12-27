@@ -194,4 +194,10 @@ Public Class MenuPrincipal
             .Show(Me)
         End With
     End Sub
+
+    Private Sub IngresoYActualizacionDeHojaDeProduccionToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles IngresoYActualizacionDeHojaDeProduccionToolStripMenuItem.Click
+        With New IngresoActualizacionHojaProduccionFarma
+            .Show(Me)
+        End With
+    End Sub
 End Class
