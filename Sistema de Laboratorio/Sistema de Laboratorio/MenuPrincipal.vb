@@ -177,4 +177,10 @@ Public Class MenuPrincipal
             .Show(Me)
         End With
     End Sub
+
+    Private Sub IngresoDeEnsayosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles IngresoDeEnsayosToolStripMenuItem.Click
+        With New IngresoEnsayosLaboratorioMP
+            .Show(Me)
+        End With
+    End Sub
 End Class

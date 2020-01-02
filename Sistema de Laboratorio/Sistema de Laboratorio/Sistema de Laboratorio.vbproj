@@ -106,6 +106,18 @@
     <Compile Include="Auxiliares\VentanasIntermedias\HistorialCambios.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Auxiliares\VentanasIntermedias\Ingreso de Materias Primas\ActualizacionDetallesCertAnalisisYEstadoEnvases.Designer.vb">
+      <DependentUpon>ActualizacionDetallesCertAnalisisYEstadoEnvases.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Auxiliares\VentanasIntermedias\Ingreso de Materias Primas\ActualizacionDetallesCertAnalisisYEstadoEnvases.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Auxiliares\VentanasIntermedias\Ingreso de Materias Primas\ConfirmarTipoCantidadLaudo.Designer.vb">
+      <DependentUpon>ConfirmarTipoCantidadLaudo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Auxiliares\VentanasIntermedias\Ingreso de Materias Primas\ConfirmarTipoCantidadLaudo.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Auxiliares\VentanasIntermedias\IngresoEnsayosPT\IngresoMotivoDesvio.Designer.vb">
       <DependentUpon>IngresoMotivoDesvio.vb</DependentUpon>
     </Compile>
@@ -276,6 +288,12 @@
       <DependentUpon>EmisionEtiquetasSimples.vb</DependentUpon>
     </Compile>
     <Compile Include="Maestros\Materias Primas\Etiquetas\MuestrasSimples\EmisionEtiquetasSimples.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestros\Materias Primas\Ingreso de Ensayos de Laboratorio\IngresoEnsayosLaboratorioMP.Designer.vb">
+      <DependentUpon>IngresoEnsayosLaboratorioMP.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\Materias Primas\Ingreso de Ensayos de Laboratorio\IngresoEnsayosLaboratorioMP.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Maestros\Productos Terminados Farma\Autorizacion de Pedidos\AutorizarPedido.Designer.vb">
@@ -552,6 +570,12 @@
     <EmbeddedResource Include="Auxiliares\VentanasIntermedias\HistorialCambios.resx">
       <DependentUpon>HistorialCambios.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Auxiliares\VentanasIntermedias\Ingreso de Materias Primas\ActualizacionDetallesCertAnalisisYEstadoEnvases.resx">
+      <DependentUpon>ActualizacionDetallesCertAnalisisYEstadoEnvases.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Auxiliares\VentanasIntermedias\Ingreso de Materias Primas\ConfirmarTipoCantidadLaudo.resx">
+      <DependentUpon>ConfirmarTipoCantidadLaudo.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Auxiliares\VentanasIntermedias\IngresoEnsayosPT\IngresoMotivoDesvio.resx">
       <DependentUpon>IngresoMotivoDesvio.vb</DependentUpon>
     </EmbeddedResource>
@@ -620,6 +644,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Maestros\Materias Primas\Etiquetas\MuestrasSimples\EmisionEtiquetasSimples.resx">
       <DependentUpon>EmisionEtiquetasSimples.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\Materias Primas\Ingreso de Ensayos de Laboratorio\IngresoEnsayosLaboratorioMP.resx">
+      <DependentUpon>IngresoEnsayosLaboratorioMP.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Maestros\Productos Terminados Farma\Autorizacion de Pedidos\AutorizarPedido.resx">
       <DependentUpon>AutorizarPedido.vb</DependentUpon>

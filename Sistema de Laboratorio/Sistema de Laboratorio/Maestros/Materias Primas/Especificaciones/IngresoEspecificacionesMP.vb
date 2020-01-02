@@ -115,7 +115,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
             '
             ' Cargamos los valores en Inglés.
             '
-            Dim WCargaVIngles As DataTable = GetAll("SELECT Valor, Farmacopea, UnidadEspecif FROM CargaVMPIngles WHERE Articulo = '" & txtCodigo.Text & "' And Paso = '99' Order By Clave")
+            Dim WCargaVIngles As DataTable = GetAll("SELECT Valor, Farmacopea, UnidadEspecif FROM CargaVMPIngles WHERE Articulo = '" & txtCodigo.Text & "' And Paso = '99' Order By Clave", "Surfactan_II")
 
             If WCargaVIngles.Rows.Count = 0 Then Return
 
@@ -228,13 +228,13 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
 
                 Next
 
-                _PoblarEspecificaciones(WCargaVFormatoViejo)
-
                 With WEspecificacionesUnificaIII
                     txtCondicionMuestreo.Text = Trim(OrDefault(.Item("Muestreo"), "")) & " " & Trim(OrDefault(.Item("MuestreoII"), "")) & " " & Trim(OrDefault(.Item("MuestreoIII"), ""))
                 End With
 
             End If
+
+            _PoblarEspecificaciones(WCargaVFormatoViejo)
 
             txtVersion.Text = Trim(OrDefault(WEspecificacionesUnifica.Item("Version"), ""))
             txtFecha.Text = Trim(OrDefault(WEspecificacionesUnifica.Item("Fecha"), "  /  /    "))
@@ -568,6 +568,8 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
         ZLugarII = 0
         WRenglon = 0
 
+        If txtFecha.Text = "" Then txtFecha.Text = Date.Now.ToString("dd/MM/yyyy")
+
         '
         ' Grabamos los datos de cada renglon.
         '
@@ -640,7 +642,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
                 ZSql = ZSql & "Variable8 ,"
                 ZSql = ZSql & "Variable9 ,"
                 ZSql = ZSql & "Variable10 ,"
-                ZSql = ZSql & "Fecha ,"
+                ZSql = ZSql & "FechaGrabacion ,"
                 ZSql = ZSql & "Version ,"
                 ZSql = ZSql & "Corte )"
                 ZSql = ZSql & "Values ("
@@ -724,6 +726,8 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
                 WFarmacopea = OrDefault(.Cells("FarmacopeaIngles").Value, "")
                 WUnidadEspecif = OrDefault(.Cells("UnidadEspecifIngles").Value, "")
 
+                If WValor.Trim = "" Then Continue For
+
                 Dim ZSql, XPaso, Auxi As String
 
                 WRenglon += 1
@@ -789,11 +793,11 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
 
         Dim sql As String = ""
 
-        For i = 30 To dgvEspecif.Rows.Count - 1 Step -1
+        For i = dgvEspecif.Rows.Count + 1 To 30
             dgvEspecif.Rows.Add()
         Next
 
-        For i = 30 To dgvEspecifIngles.Rows.Count - 1 Step -1
+        For i = dgvEspecifIngles.Rows.Count + 1 To dgvEspecif.Rows.Count
             dgvEspecifIngles.Rows.Add()
         Next
 
