@@ -22,12 +22,12 @@ Partial Class IngresoDatosAdicMP
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle77 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle78 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle79 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle80 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle81 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle82 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtNombreArticulo = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -531,14 +531,14 @@ Partial Class IngresoDatosAdicMP
         Me.DGV_FrasesH.AllowUserToOrderColumns = True
         Me.DGV_FrasesH.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_FrasesH.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Codigo, Me.DescripcionH, Me.ObservacionesH})
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGV_FrasesH.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle77.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle77.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle77.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle77.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle77.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle77.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle77.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGV_FrasesH.DefaultCellStyle = DataGridViewCellStyle77
         Me.DGV_FrasesH.DoubleBuffered = True
         Me.DGV_FrasesH.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.DGV_FrasesH.Location = New System.Drawing.Point(-1, 0)
@@ -599,14 +599,14 @@ Partial Class IngresoDatosAdicMP
         Me.DGV_FrasesP.AllowUserToAddRows = False
         Me.DGV_FrasesP.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_FrasesP.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CodigoFraseP, Me.DescripcionFraseP, Me.Observaciones})
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGV_FrasesP.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle78.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle78.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle78.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle78.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle78.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle78.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle78.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGV_FrasesP.DefaultCellStyle = DataGridViewCellStyle78
         Me.DGV_FrasesP.DoubleBuffered = True
         Me.DGV_FrasesP.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.DGV_FrasesP.Location = New System.Drawing.Point(0, 2)
@@ -688,7 +688,7 @@ Partial Class IngresoDatosAdicMP
         Me.txtTipoEtiqueta.MaxLength = 20
         Me.txtTipoEtiqueta.Name = "txtTipoEtiqueta"
         Me.txtTipoEtiqueta.Size = New System.Drawing.Size(157, 20)
-        Me.txtTipoEtiqueta.TabIndex = 19
+        Me.txtTipoEtiqueta.TabIndex = 4
         Me.txtTipoEtiqueta.Visible = False
         '
         'lblTipoEtiqueta
@@ -819,7 +819,7 @@ Partial Class IngresoDatosAdicMP
         Me.Label16.Location = New System.Drawing.Point(16, 96)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(78, 13)
-        Me.Label16.TabIndex = 4
+        Me.Label16.TabIndex = 19
         Me.Label16.Text = "F. Intervencion"
         '
         'Label15
@@ -875,14 +875,14 @@ Partial Class IngresoDatosAdicMP
         Me.DGV_DemoCompPeligrosos.AllowUserToAddRows = False
         Me.DGV_DemoCompPeligrosos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_DemoCompPeligrosos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Denominacion})
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGV_DemoCompPeligrosos.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle79.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle79.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle79.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle79.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle79.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle79.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle79.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGV_DemoCompPeligrosos.DefaultCellStyle = DataGridViewCellStyle79
         Me.DGV_DemoCompPeligrosos.DoubleBuffered = True
         Me.DGV_DemoCompPeligrosos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.DGV_DemoCompPeligrosos.Location = New System.Drawing.Point(-1, 0)
@@ -919,14 +919,14 @@ Partial Class IngresoDatosAdicMP
         Me.DGV_FrasesHIngles.AllowUserToOrderColumns = True
         Me.DGV_FrasesHIngles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_FrasesHIngles.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CodigoFraseHINgles, Me.DescripcionFraseHINgles})
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGV_FrasesHIngles.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle80.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle80.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle80.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle80.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle80.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle80.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle80.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGV_FrasesHIngles.DefaultCellStyle = DataGridViewCellStyle80
         Me.DGV_FrasesHIngles.DoubleBuffered = True
         Me.DGV_FrasesHIngles.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.DGV_FrasesHIngles.Location = New System.Drawing.Point(0, 2)
@@ -976,14 +976,14 @@ Partial Class IngresoDatosAdicMP
         Me.DGV_FrasesPIngles.AllowUserToOrderColumns = True
         Me.DGV_FrasesPIngles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_FrasesPIngles.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CodigoFrasesPIngles, Me.DescripcionFrasesPIngles})
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGV_FrasesPIngles.DefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle81.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle81.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle81.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle81.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle81.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle81.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle81.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGV_FrasesPIngles.DefaultCellStyle = DataGridViewCellStyle81
         Me.DGV_FrasesPIngles.DoubleBuffered = True
         Me.DGV_FrasesPIngles.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.DGV_FrasesPIngles.Location = New System.Drawing.Point(0, 2)
@@ -1025,7 +1025,7 @@ Partial Class IngresoDatosAdicMP
         Me.pnlConsultarDatos.Controls.Add(Me.Panel1)
         Me.pnlConsultarDatos.Controls.Add(Me.DGV_Consulta)
         Me.pnlConsultarDatos.Controls.Add(Me.LstboxConsultaDatos)
-        Me.pnlConsultarDatos.Location = New System.Drawing.Point(140, 110)
+        Me.pnlConsultarDatos.Location = New System.Drawing.Point(158, 88)
         Me.pnlConsultarDatos.Name = "pnlConsultarDatos"
         Me.pnlConsultarDatos.Size = New System.Drawing.Size(495, 268)
         Me.pnlConsultarDatos.TabIndex = 1
@@ -1069,14 +1069,14 @@ Partial Class IngresoDatosAdicMP
         '
         Me.DGV_Consulta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_Consulta.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Codigo1, Me.Descripcion, Me.ObservacionesConsulta})
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGV_Consulta.DefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle82.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle82.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle82.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle82.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle82.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle82.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle82.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGV_Consulta.DefaultCellStyle = DataGridViewCellStyle82
         Me.DGV_Consulta.DoubleBuffered = True
         Me.DGV_Consulta.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.DGV_Consulta.Location = New System.Drawing.Point(8, 39)
@@ -1190,7 +1190,7 @@ Partial Class IngresoDatosAdicMP
         'Label21
         '
         Me.Label21.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label21.AutoSize = True
         Me.Label21.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label21.ForeColor = System.Drawing.SystemColors.Control

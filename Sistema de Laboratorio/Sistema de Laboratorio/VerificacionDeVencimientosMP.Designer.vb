@@ -22,7 +22,7 @@ Partial Class VerificacionDeVencimientosMP
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.mastxtFecha = New System.Windows.Forms.MaskedTextBox()
         Me.mastxtDesdeArt = New System.Windows.Forms.MaskedTextBox()
         Me.mastxtHastaArt = New System.Windows.Forms.MaskedTextBox()
@@ -88,6 +88,7 @@ Partial Class VerificacionDeVencimientosMP
         'txtDias
         '
         Me.txtDias.Location = New System.Drawing.Point(119, 199)
+        Me.txtDias.MaxLength = 3
         Me.txtDias.Name = "txtDias"
         Me.txtDias.Size = New System.Drawing.Size(100, 20)
         Me.txtDias.TabIndex = 3
@@ -161,7 +162,7 @@ Partial Class VerificacionDeVencimientosMP
         'Label6
         '
         Me.Label6.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label6.ForeColor = System.Drawing.SystemColors.Control
@@ -174,7 +175,7 @@ Partial Class VerificacionDeVencimientosMP
         'Label5
         '
         Me.Label5.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.SystemColors.Control
@@ -217,6 +218,8 @@ Partial Class VerificacionDeVencimientosMP
         '
         'btnBuscarDesde
         '
+        Me.btnBuscarDesde.BackgroundImage = Global.Laboratorio.My.Resources.Resources.Consulta_Dat_N1
+        Me.btnBuscarDesde.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.btnBuscarDesde.Location = New System.Drawing.Point(226, 117)
         Me.btnBuscarDesde.Name = "btnBuscarDesde"
         Me.btnBuscarDesde.Size = New System.Drawing.Size(20, 20)
@@ -225,6 +228,8 @@ Partial Class VerificacionDeVencimientosMP
         '
         'btnBuscarHasta
         '
+        Me.btnBuscarHasta.BackgroundImage = Global.Laboratorio.My.Resources.Resources.Consulta_Dat_N1
+        Me.btnBuscarHasta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.btnBuscarHasta.Location = New System.Drawing.Point(226, 156)
         Me.btnBuscarHasta.Name = "btnBuscarHasta"
         Me.btnBuscarHasta.Size = New System.Drawing.Size(20, 20)
@@ -247,6 +252,7 @@ Partial Class VerificacionDeVencimientosMP
         'txtAyuda
         '
         Me.txtAyuda.Location = New System.Drawing.Point(10, 34)
+        Me.txtAyuda.MaxLength = 50
         Me.txtAyuda.Name = "txtAyuda"
         Me.txtAyuda.Size = New System.Drawing.Size(399, 20)
         Me.txtAyuda.TabIndex = 3
@@ -273,7 +279,7 @@ Partial Class VerificacionDeVencimientosMP
         'Label7
         '
         Me.Label7.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label7.ForeColor = System.Drawing.SystemColors.Control
@@ -288,14 +294,14 @@ Partial Class VerificacionDeVencimientosMP
         Me.DGV_Ayuda.AllowUserToAddRows = False
         Me.DGV_Ayuda.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_Ayuda.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Codigo, Me.Descripcion})
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGV_Ayuda.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGV_Ayuda.DefaultCellStyle = DataGridViewCellStyle5
         Me.DGV_Ayuda.DoubleBuffered = True
         Me.DGV_Ayuda.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.DGV_Ayuda.Location = New System.Drawing.Point(10, 58)

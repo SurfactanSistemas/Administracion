@@ -22,8 +22,8 @@ Partial Class MovimientosVariosDeLaboratorio
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.txtNroMovimiento = New System.Windows.Forms.TextBox()
         Me.cbxTipoMovimiento = New System.Windows.Forms.ComboBox()
         Me.txtObservaciones = New System.Windows.Forms.TextBox()
@@ -60,6 +60,8 @@ Partial Class MovimientosVariosDeLaboratorio
         Me.btnpnlAyudaVolver = New System.Windows.Forms.Button()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.DGV_Ayuda = New ConsultasVarias.DBDataGridView()
+        Me.CodigoAyuda = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DescripcionAyuda = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.cbxAyuda = New System.Windows.Forms.ComboBox()
         Me.txtAyuda = New System.Windows.Forms.TextBox()
         Me.Panel4 = New System.Windows.Forms.Panel()
@@ -72,8 +74,6 @@ Partial Class MovimientosVariosDeLaboratorio
         Me.Cantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Movimiento = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Lote = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CodigoAyuda = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DescripcionAyuda = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         Me.pnlContra.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -124,6 +124,7 @@ Partial Class MovimientosVariosDeLaboratorio
         Me.mastxtCodigo.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.mastxtCodigo.Location = New System.Drawing.Point(58, 388)
         Me.mastxtCodigo.Name = "mastxtCodigo"
+        Me.mastxtCodigo.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.mastxtCodigo.Size = New System.Drawing.Size(86, 20)
         Me.mastxtCodigo.TabIndex = 6
         '
@@ -139,6 +140,7 @@ Partial Class MovimientosVariosDeLaboratorio
         'txtCantidad
         '
         Me.txtCantidad.Location = New System.Drawing.Point(630, 388)
+        Me.txtCantidad.MaxLength = 8
         Me.txtCantidad.Name = "txtCantidad"
         Me.txtCantidad.Size = New System.Drawing.Size(96, 20)
         Me.txtCantidad.TabIndex = 8
@@ -312,7 +314,7 @@ Partial Class MovimientosVariosDeLaboratorio
         'Label12
         '
         Me.Label12.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label12.ForeColor = System.Drawing.SystemColors.Control
@@ -325,7 +327,7 @@ Partial Class MovimientosVariosDeLaboratorio
         'Label11
         '
         Me.Label11.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label11.ForeColor = System.Drawing.SystemColors.Control
@@ -375,7 +377,7 @@ Partial Class MovimientosVariosDeLaboratorio
         'Label13
         '
         Me.Label13.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label13.ForeColor = System.Drawing.SystemColors.Control
@@ -421,14 +423,14 @@ Partial Class MovimientosVariosDeLaboratorio
         Me.DGV_Ayuda.AllowUserToAddRows = False
         Me.DGV_Ayuda.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_Ayuda.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CodigoAyuda, Me.DescripcionAyuda})
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGV_Ayuda.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGV_Ayuda.DefaultCellStyle = DataGridViewCellStyle1
         Me.DGV_Ayuda.DoubleBuffered = True
         Me.DGV_Ayuda.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.DGV_Ayuda.Location = New System.Drawing.Point(10, 99)
@@ -440,6 +442,21 @@ Partial Class MovimientosVariosDeLaboratorio
         Me.DGV_Ayuda.SinClickDerecho = False
         Me.DGV_Ayuda.Size = New System.Drawing.Size(381, 130)
         Me.DGV_Ayuda.TabIndex = 3
+        '
+        'CodigoAyuda
+        '
+        Me.CodigoAyuda.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.CodigoAyuda.DataPropertyName = "CodigoAyuda"
+        Me.CodigoAyuda.HeaderText = "Codigo"
+        Me.CodigoAyuda.Name = "CodigoAyuda"
+        Me.CodigoAyuda.Width = 65
+        '
+        'DescripcionAyuda
+        '
+        Me.DescripcionAyuda.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.DescripcionAyuda.DataPropertyName = "DescripcionAyuda"
+        Me.DescripcionAyuda.HeaderText = "Descripcion"
+        Me.DescripcionAyuda.Name = "DescripcionAyuda"
         '
         'cbxAyuda
         '
@@ -454,6 +471,7 @@ Partial Class MovimientosVariosDeLaboratorio
         'txtAyuda
         '
         Me.txtAyuda.Location = New System.Drawing.Point(10, 73)
+        Me.txtAyuda.MaxLength = 100
         Me.txtAyuda.Name = "txtAyuda"
         Me.txtAyuda.Size = New System.Drawing.Size(381, 20)
         Me.txtAyuda.TabIndex = 1
@@ -471,7 +489,7 @@ Partial Class MovimientosVariosDeLaboratorio
         'Label14
         '
         Me.Label14.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label14.ForeColor = System.Drawing.SystemColors.Control
@@ -486,14 +504,14 @@ Partial Class MovimientosVariosDeLaboratorio
         Me.DGV_Movimientos.AllowUserToAddRows = False
         Me.DGV_Movimientos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_Movimientos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Tipo, Me.ProdTerminado, Me.MateriaPrima, Me.Descripcion, Me.Cantidad, Me.Movimiento, Me.Lote})
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGV_Movimientos.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGV_Movimientos.DefaultCellStyle = DataGridViewCellStyle2
         Me.DGV_Movimientos.DoubleBuffered = True
         Me.DGV_Movimientos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.DGV_Movimientos.Location = New System.Drawing.Point(12, 119)
@@ -552,21 +570,6 @@ Partial Class MovimientosVariosDeLaboratorio
         Me.Lote.HeaderText = "Lote"
         Me.Lote.Name = "Lote"
         Me.Lote.Width = 53
-        '
-        'CodigoAyuda
-        '
-        Me.CodigoAyuda.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.CodigoAyuda.DataPropertyName = "CodigoAyuda"
-        Me.CodigoAyuda.HeaderText = "Codigo"
-        Me.CodigoAyuda.Name = "CodigoAyuda"
-        Me.CodigoAyuda.Width = 65
-        '
-        'DescripcionAyuda
-        '
-        Me.DescripcionAyuda.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.DescripcionAyuda.DataPropertyName = "DescripcionAyuda"
-        Me.DescripcionAyuda.HeaderText = "Descripcion"
-        Me.DescripcionAyuda.Name = "DescripcionAyuda"
         '
         'MovimientosVariosDeLaboratorio
         '

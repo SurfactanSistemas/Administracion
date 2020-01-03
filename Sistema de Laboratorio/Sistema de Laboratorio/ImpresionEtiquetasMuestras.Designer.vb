@@ -74,6 +74,7 @@ Partial Class ImpresionEtiquetasMuestras
         'txtAnalista
         '
         Me.txtAnalista.Location = New System.Drawing.Point(144, 259)
+        Me.txtAnalista.MaxLength = 50
         Me.txtAnalista.Name = "txtAnalista"
         Me.txtAnalista.Size = New System.Drawing.Size(100, 20)
         Me.txtAnalista.TabIndex = 5
@@ -81,6 +82,7 @@ Partial Class ImpresionEtiquetasMuestras
         'TxtCantEtiq
         '
         Me.TxtCantEtiq.Location = New System.Drawing.Point(144, 304)
+        Me.TxtCantEtiq.MaxLength = 2
         Me.TxtCantEtiq.Name = "TxtCantEtiq"
         Me.TxtCantEtiq.Size = New System.Drawing.Size(100, 20)
         Me.TxtCantEtiq.TabIndex = 6
@@ -153,7 +155,7 @@ Partial Class ImpresionEtiquetasMuestras
         'Label8
         '
         Me.Label8.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label8.ForeColor = System.Drawing.SystemColors.Control
@@ -166,7 +168,7 @@ Partial Class ImpresionEtiquetasMuestras
         'Label7
         '
         Me.Label7.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label7.ForeColor = System.Drawing.SystemColors.Control

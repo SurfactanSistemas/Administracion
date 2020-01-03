@@ -66,6 +66,7 @@ Partial Class ListadoDeEnsayoDePT
         'txtDesde
         '
         Me.txtDesde.Location = New System.Drawing.Point(146, 89)
+        Me.txtDesde.MaxLength = 4
         Me.txtDesde.Name = "txtDesde"
         Me.txtDesde.Size = New System.Drawing.Size(100, 20)
         Me.txtDesde.TabIndex = 0
@@ -73,6 +74,7 @@ Partial Class ListadoDeEnsayoDePT
         'txtHasta
         '
         Me.txtHasta.Location = New System.Drawing.Point(146, 137)
+        Me.txtHasta.MaxLength = 4
         Me.txtHasta.Name = "txtHasta"
         Me.txtHasta.Size = New System.Drawing.Size(100, 20)
         Me.txtHasta.TabIndex = 4
@@ -99,7 +101,7 @@ Partial Class ListadoDeEnsayoDePT
         'Label4
         '
         Me.Label4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.ForeColor = System.Drawing.SystemColors.Control
@@ -112,7 +114,7 @@ Partial Class ListadoDeEnsayoDePT
         'Label3
         '
         Me.Label3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.ForeColor = System.Drawing.SystemColors.Control
