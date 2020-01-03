@@ -655,6 +655,9 @@
     <EmbeddedResource Include="IngresoActualizacionHojaProduccionFarma.resx">
       <DependentUpon>IngresoActualizacionHojaProduccionFarma.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ListadoDeEnsayoDePT.resx">
+      <DependentUpon>ListadoDeEnsayoDePT.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Maestros\Ingreso Frases H &amp; P\FrasesHP.resx">
       <DependentUpon>FrasesHP.vb</DependentUpon>
     </EmbeddedResource>

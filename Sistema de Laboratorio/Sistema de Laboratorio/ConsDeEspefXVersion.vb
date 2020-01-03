@@ -4,6 +4,8 @@ Imports System.Data.SqlClient
 Public Class ConsDeEspefXVersion
 
     Dim tablaParaDGV As New DataTable
+    Dim VersionMax As Integer
+
 
     Private Sub ConsDeEspefXVersion_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         With tablaParaDGV.Columns
@@ -59,6 +61,13 @@ Public Class ConsDeEspefXVersion
             Case Keys.Enter
                 Try
                     If (mastxtCodigo.Text.Replace("-", "").Trim() <> "") Then
+                        _LimpiarGrilla()
+                        _BuscarVersionMax()
+                        If txtVersion.Text > VersionMax Then
+                            txtVersion.Text = VersionMax
+                        End If
+
+
 
                         If (DebeMOstrar(txtVersion.Text) = True) Then
                             Dim cn As New SqlConnection(ConfigurationManager.ConnectionStrings("LOCAL").ToString())
@@ -175,6 +184,17 @@ Public Class ConsDeEspefXVersion
         mastxtCodigo.Text = ""
         txtVersion.Text = ""
 
+        _LimpiarGrilla()
+       
+        txtFechaDesde.Text = ""
+        txtFechaHasta.Text = ""
+        txtControlDeCambios.Text = ""
+
+        mastxtCodigo.Focus()
+
+    End Sub
+
+    Private Sub _LimpiarGrilla()
         For i As Integer = 1 To 10
             DGV_ConsultaVersiones.Rows.Item(i - 1).Cells("Ensayo").Value = ""
             DGV_ConsultaVersiones.Rows.Item(i - 1).Cells("Descripcion").Value = ""
@@ -182,12 +202,6 @@ Public Class ConsDeEspefXVersion
             DGV_ConsultaVersiones.Rows.Item(i - 1).Cells("Desde").Value = ""
             DGV_ConsultaVersiones.Rows.Item(i - 1).Cells("Hasta").Value = ""
         Next
-        txtFechaDesde.Text = ""
-        txtFechaHasta.Text = ""
-        txtControlDeCambios.Text = ""
-
-        mastxtCodigo.Focus()
-
     End Sub
 
     Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
@@ -243,4 +257,16 @@ Public Class ConsDeEspefXVersion
 
     End Sub
 
+    Private Sub _BuscarVersionMax()
+        Dim SQLCnslt As String
+
+        SQLCnslt = "SELECT VersionMax = MAX(Version) FROM EspecifUnificaVersion WHERE Producto = '" & mastxtCodigo.Text.Trim() & "'"
+
+        Dim row As DataRow = GetSingle(SQLCnslt, "Surfactan_II")
+
+        If row IsNot Nothing Then
+            VersionMax = row.Item("VersionMax")
+        End If
+
+    End Sub
 End Class

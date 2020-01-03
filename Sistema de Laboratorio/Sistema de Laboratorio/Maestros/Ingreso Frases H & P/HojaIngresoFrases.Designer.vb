@@ -22,7 +22,7 @@ Partial Class HojaIngresoFrases
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.btnVolver = New System.Windows.Forms.Button()
         Me.btnImprimir = New System.Windows.Forms.Button()
         Me.btnListar = New System.Windows.Forms.Button()
@@ -39,15 +39,17 @@ Partial Class HojaIngresoFrases
         Me.Label4 = New System.Windows.Forms.Label()
         Me.LblTitulo = New System.Windows.Forms.Label()
         Me.pnlListar = New System.Windows.Forms.Panel()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.DGV_ListadoI = New ConsultasVarias.DBDataGridView()
         Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Observa = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnVolPnlListar = New System.Windows.Forms.Button()
         Me.txtBuscadorListar = New System.Windows.Forms.TextBox()
-        Me.Label5 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.pnlListar.SuspendLayout()
+        Me.Panel2.SuspendLayout()
         CType(Me.DGV_ListadoI, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -166,6 +168,7 @@ Partial Class HojaIngresoFrases
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(32, Byte), Integer), CType(CType(74, Byte), Integer), CType(CType(95, Byte), Integer))
+        Me.Panel1.Controls.Add(Me.pnlListar)
         Me.Panel1.Controls.Add(Me.Label4)
         Me.Panel1.Controls.Add(Me.LblTitulo)
         Me.Panel1.Location = New System.Drawing.Point(-7, -8)
@@ -197,30 +200,52 @@ Partial Class HojaIngresoFrases
         '
         'pnlListar
         '
+        Me.pnlListar.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.pnlListar.Controls.Add(Me.Panel2)
         Me.pnlListar.Controls.Add(Me.DGV_ListadoI)
         Me.pnlListar.Controls.Add(Me.btnVolPnlListar)
         Me.pnlListar.Controls.Add(Me.txtBuscadorListar)
-        Me.pnlListar.Controls.Add(Me.Label5)
-        Me.pnlListar.Location = New System.Drawing.Point(15, 81)
+        Me.pnlListar.Location = New System.Drawing.Point(27, 20)
         Me.pnlListar.Name = "pnlListar"
-        Me.pnlListar.Size = New System.Drawing.Size(534, 144)
+        Me.pnlListar.Size = New System.Drawing.Size(531, 265)
         Me.pnlListar.TabIndex = 25
+        '
+        'Panel2
+        '
+        Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(32, Byte), Integer), CType(CType(74, Byte), Integer), CType(CType(95, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.Label5)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel2.Location = New System.Drawing.Point(0, 0)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(527, 30)
+        Me.Panel2.TabIndex = 6
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label5.Location = New System.Drawing.Point(24, 5)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(85, 20)
+        Me.Label5.TabIndex = 1
+        Me.Label5.Text = "Buscador"
         '
         'DGV_ListadoI
         '
         Me.DGV_ListadoI.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_ListadoI.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Codigo, Me.Descripcion, Me.Observa})
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGV_ListadoI.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGV_ListadoI.DefaultCellStyle = DataGridViewCellStyle3
         Me.DGV_ListadoI.DoubleBuffered = True
         Me.DGV_ListadoI.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.DGV_ListadoI.Location = New System.Drawing.Point(26, 54)
+        Me.DGV_ListadoI.Location = New System.Drawing.Point(26, 65)
         Me.DGV_ListadoI.Name = "DGV_ListadoI"
         Me.DGV_ListadoI.OrdenamientoColumnasHabilitado = True
         Me.DGV_ListadoI.ReadOnly = True
@@ -260,7 +285,7 @@ Partial Class HojaIngresoFrases
         '
         'btnVolPnlListar
         '
-        Me.btnVolPnlListar.Location = New System.Drawing.Point(201, 219)
+        Me.btnVolPnlListar.Location = New System.Drawing.Point(201, 221)
         Me.btnVolPnlListar.Name = "btnVolPnlListar"
         Me.btnVolPnlListar.Size = New System.Drawing.Size(121, 26)
         Me.btnVolPnlListar.TabIndex = 3
@@ -269,26 +294,16 @@ Partial Class HojaIngresoFrases
         '
         'txtBuscadorListar
         '
-        Me.txtBuscadorListar.Location = New System.Drawing.Point(26, 28)
+        Me.txtBuscadorListar.Location = New System.Drawing.Point(26, 36)
         Me.txtBuscadorListar.Name = "txtBuscadorListar"
         Me.txtBuscadorListar.Size = New System.Drawing.Size(485, 20)
         Me.txtBuscadorListar.TabIndex = 1
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(28, 8)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(52, 13)
-        Me.Label5.TabIndex = 0
-        Me.Label5.Text = "Buscador"
         '
         'HojaIngresoFrases
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(568, 324)
-        Me.Controls.Add(Me.pnlListar)
         Me.Controls.Add(Me.btnVolver)
         Me.Controls.Add(Me.btnImprimir)
         Me.Controls.Add(Me.btnListar)
@@ -309,6 +324,8 @@ Partial Class HojaIngresoFrases
         Me.Panel1.PerformLayout()
         Me.pnlListar.ResumeLayout(False)
         Me.pnlListar.PerformLayout()
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
         CType(Me.DGV_ListadoI, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -331,10 +348,11 @@ Partial Class HojaIngresoFrases
     Friend WithEvents LblTitulo As System.Windows.Forms.Label
     Friend WithEvents pnlListar As System.Windows.Forms.Panel
     Friend WithEvents txtBuscadorListar As System.Windows.Forms.TextBox
-    Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents btnVolPnlListar As System.Windows.Forms.Button
     Friend WithEvents DGV_ListadoI As ConsultasVarias.DBDataGridView
     Friend WithEvents Codigo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Observa As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Panel2 As System.Windows.Forms.Panel
+    Friend WithEvents Label5 As System.Windows.Forms.Label
 End Class

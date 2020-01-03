@@ -100,6 +100,8 @@
 
     Private Sub EmisionDeEtiquetasToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles EmisionDeEtiquetasToolStripMenuItem.Click
         With New ImpresionEtiquetasMuestras
+    Private Sub ListaDeEspecificacionesDePTAFechaToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ListaDeEspecificacionesDePTAFechaToolStripMenuItem.Click
+        With New ListadoEspecifPTFecha
             .Show(Me)
         End With
     End Sub
@@ -124,6 +126,8 @@
 
     Private Sub MovimientosVariosDeLaboratorioToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles MovimientosVariosDeLaboratorioToolStripMenuItem.Click
         With New MovimientosVariosDeLaboratorio
+    Private Sub ListaDePTVencidosToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ListaDePTVencidosToolStripMenuItem.Click
+        With New ListadoPTVencidos
             .Show(Me)
         End With
     End Sub
@@ -159,18 +163,38 @@
     End Sub
     Private Sub InformeDeRecepcionDeDrogaDeLaboratorioToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles InformeDeRecepcionDeDrogaDeLaboratorioToolStripMenuItem.Click
         With New InformeRecepcionDrogaLAB
+    Private Sub VerificacionDeVencimientosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles VerificacionDeVencimientosToolStripMenuItem.Click
+        With New VerificacionDeVencimientosMP
             .Show(Me)
         End With
     End Sub
 
     Private Sub IngresoYActualizacionDeHojaDeProduccionToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles IngresoYActualizacionDeHojaDeProduccionToolStripMenuItem.Click
         With New IngresoActualizacionHojaProduccionFarma
+        .Show(Me)
+        End With
+    End Sub
+    
+    Private Sub MovimientosVariosDeLaboratorioToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MovimientosVariosDeLaboratorioToolStripMenuItem.Click
+        With New MovimientosVariosDeLaboratorio
             .Show(Me)
         End With
     End Sub
 
     Private Sub AutorizaciónDePedidosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AutorizaciónDePedidosToolStripMenuItem.Click
         With New ListadoAutorizacionPedidos
+        .Show(Me)
+        End With
+    End Sub
+    
+    Private Sub InformeDeRecepcionDeDrogaDeLaboratorioToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles InformeDeRecepcionDeDrogaDeLaboratorioToolStripMenuItem.Click
+        With New InformeRecepcionDrogaLAB
+            .Show(Me)
+        End With
+    End Sub
+
+    Private Sub IngresoYActualizacionDeHojaDeProduccionToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles IngresoYActualizacionDeHojaDeProduccionToolStripMenuItem.Click
+        With New IngresoActualizacionHojaProduccionFarma
             .Show(Me)
         End With
     End Sub

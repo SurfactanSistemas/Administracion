@@ -547,7 +547,8 @@ Public Class VerificacionLoteVencidoMP
             DGV_Verificacion.Rows(contador).Cells("MPrima").Value = row.Item("Articulo")
             DGV_Verificacion.Rows(contador).Cells("Descripcion").Value = _BuscarDescripcion(row.Item("Articulo"))
             DGV_Verificacion.Rows(contador).Cells("PlantaOrigen").Value = row.Item("EmpresaPartida")
-            DGV_Verificacion.Rows(contador).Cells("Lote").Value = row.Item("Partida")
+            DGV_Verificacion.Rows(contador).Cells("Lote").Value = row.Item("Partida").ToString.Trim
+
             If (UCase(row.Item("Tipo")) = "PED.") Then
                 DGV_Verificacion.Rows(contador).Cells("PlantaHoja").Value = "PED"
             Else
@@ -595,4 +596,6 @@ Public Class VerificacionLoteVencidoMP
             End With
         End If
     End Sub
+
+
 End Class

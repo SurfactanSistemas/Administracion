@@ -53,7 +53,7 @@ Public Class ListadoDeEnsayoDePT
 
         With New VistaPrevia
             .Base = "SURFACTAN_II"
-            .Reporte = New ReporteListadoEspecifPTaFecha()
+            .Reporte = New ReporteListadoEnsayosPT()
             .Reporte.SetDataSource(tablaReporte)
 
             If (rabPantalla.Checked = True) Then
@@ -86,4 +86,15 @@ Public Class ListadoDeEnsayoDePT
 
         End Select
     End Sub
+
+
+
+    Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtDesde.KeyPress, txtHasta.KeyPress
+        If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
+            e.Handled = True
+        End If
+    End Sub
+
+
+
 End Class

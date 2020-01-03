@@ -7,6 +7,11 @@ Public Class HojaIngresoFrases
     Private Sub txtCodigo_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtCodigo.KeyDown
         If e.KeyData = Keys.Enter Then
             If (txtCodigo.Text <> "") Then
+
+                Dim variable As String = txtCodigo.Text
+                btnLimpiar_Click(Nothing, Nothing)
+                txtCodigo.Text = variable
+
                 Try
                     Dim SqlConsulta As String
                     If (L = "H") Then
@@ -16,13 +21,13 @@ Public Class HojaIngresoFrases
                         SqlConsulta = "SELECT * FROM FraseP WHERE Codigo = '" + txtCodigo.Text.ToString().Trim() + "' "
                     End If
 
-                    Dim tabla As New DataTable
-                    tabla.Load(GetAll(SqlConsulta))
-                    If (tabla.Rows.Count > 0) Then
-                        txtDescripcion.Text = Trim(tabla.Rows(0).Item("Descripcion").ToString() & tabla.Rows(0).Item("DescripcionII") & tabla.Rows(0).Item("DescripcionIII"))
-                        txtObservacion.Text = Trim(tabla.Rows(0).Item("Observa"))
-                    End If
+                    Dim row As DataRow = GetSingle(SqlConsulta)
 
+                    If row IsNot Nothing Then
+                        txtDescripcion.Text = Trim(row.Item("Descripcion").ToString() & row.Item("DescripcionII") & row.Item("DescripcionIII"))
+                        txtObservacion.Text = Trim(row.Item("Observa"))
+                    End If
+                    txtDescripcion.Focus()
                 Catch ex As Exception
                     MsgBox(ex.Message)
                 End Try
@@ -36,7 +41,9 @@ Public Class HojaIngresoFrases
 
     Private Sub txtDescripcion_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtDescripcion.KeyDown
         If e.KeyData = Keys.Enter Then
-            txtObservacion.Focus()
+            If txtDescripcion.Text <> "" Then
+                txtObservacion.Focus()
+            End If
         End If
         If e.KeyData = Keys.Escape Then
             txtDescripcion.Text = ""
@@ -60,6 +67,8 @@ Public Class HojaIngresoFrases
         txtCodigo.Text = ""
         txtDescripcion.Text = ""
         txtObservacion.Text = ""
+        txtCodigo.Focus()
+
     End Sub
 
     Private Sub btnGrabar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnGrabar.Click
@@ -67,8 +76,11 @@ Public Class HojaIngresoFrases
             Try
                 Dim SqlConsulta As String = ""
                 Dim CantidadDeFilas As Integer = ContieneAlgoLaBase()
+
+                txtDescripcion.Text = txtDescripcion.Text.Trim().PadRight(450, " ") 'Rellenamos los espacios vacio con " " para poder hacer el substring
+
+
                 If (CantidadDeFilas = 0) Then
-                    txtDescripcion.Text = txtDescripcion.Text.Trim().PadRight(450, " ") 'Rellenamos los espacios vacio con " " para poder hacer el substring
                     If (L = "H") Then
 
                         SqlConsulta = "INSERT INTO FraseH (Codigo , Descripcion, DescripcionII, DescripcionIII, Observa) values ('" + txtCodigo.Text.Trim() + " ', '" + txtDescripcion.Text.Substring(0, 249).Trim() + "', '" + txtDescripcion.Text.Substring(250, 100).Trim() + "', '" + txtDescripcion.Text.Substring(350, 100).Trim() + "', '" + txtObservacion.Text.Trim() + "')"
@@ -151,6 +163,7 @@ Public Class HojaIngresoFrases
     End Sub
 
     Private Sub btnVolPnlListar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnVolPnlListar.Click
+        txtBuscadorListar.Text = ""
         pnlListar.Visible = False
     End Sub
 
@@ -175,5 +188,35 @@ Public Class HojaIngresoFrases
             End If
             .Mostrar()
         End With
+    End Sub
+
+    Private Sub DGV_ListadoI_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGV_ListadoI.CellDoubleClick
+        Try
+
+            txtCodigo.Text = DGV_ListadoI.CurrentRow.Cells("Codigo").Value
+            txtObservacion.Text = DGV_ListadoI.CurrentRow.Cells("Observa").Value
+
+            Dim SQLCnslt As String
+
+            If (L = "H") Then
+
+                SQLCnslt = "SELECT  Descripcion = TRIM(Descripcion) + ' ' + TRIM(DescripcionII) + ' ' + TRIM(DescripcionIII) FROM FraseH WHERE Codigo = '" & txtCodigo.Text & "'"
+
+            Else
+                SQLCnslt = "SELECT  Descripcion = TRIM(Descripcion) + ' ' + TRIM(DescripcionII) + ' ' + TRIM(DescripcionIII) FROM FraseP WHERE Codigo = '" & txtCodigo.Text & "'"
+            End If
+
+            Dim row As DataRow = GetSingle(SQLCnslt)
+            If row IsNot Nothing Then
+                txtDescripcion.Text = row.Item("Descripcion")
+            End If
+
+            btnVolPnlListar_Click(Nothing, Nothing)
+
+        Catch ex As Exception
+
+        End Try
+        
+
     End Sub
 End Class
