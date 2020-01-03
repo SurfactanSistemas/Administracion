@@ -755,7 +755,7 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad
             '
             WSqls.AddRange(_PrepararGrabacionFormatoViejo)
 
-            Stop
+            'Stop
 
             _CrearCarpetaEtapaIntermedia()
 
@@ -946,6 +946,20 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad
             End With
 
             ExecuteNonQueries(WSqls.ToArray)
+
+            If WEsPorDesvio Or WEsPorRechazo Then
+                With New AltaMotivoINCMP()
+                    .TipoResponsableBloqueados = True
+                    .Orden = txtOrden.Text
+                    .Lote = txtPartida.Text
+                    .LotePrv = txtLoteProveedor.Text
+                    .Codigo = txtCodigo.Text
+                    .Empresa = Operador.IDBase
+                    .Fecha = txtFecha.Text
+                    .NumeroINC = "0"
+                    .ShowDialog(Me)
+                End With
+            End If
 
             ''MsgBox("Actualizado")
 

@@ -24,13 +24,13 @@ Partial Class IngresoEnsayosLaboratorioMP
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -41,9 +41,11 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.Label27 = New System.Windows.Forms.Label()
         Me.txtEtapa = New System.Windows.Forms.TextBox()
         Me.Label26 = New System.Windows.Forms.Label()
+        Me.txtLoteProveedor = New System.Windows.Forms.TextBox()
         Me.txtPartida = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txtFecha = New System.Windows.Forms.MaskedTextBox()
+        Me.Label28 = New System.Windows.Forms.Label()
         Me.txtCodigo = New System.Windows.Forms.MaskedTextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtDescMP = New System.Windows.Forms.Label()
@@ -75,20 +77,20 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.txtArchivo = New System.Windows.Forms.TextBox()
         Me.txtConfecciono = New System.Windows.Forms.TextBox()
         Me.Label13 = New System.Windows.Forms.Label()
-        Me.txtLotePartida = New System.Windows.Forms.TextBox()
-        Me.txtComponente = New System.Windows.Forms.TextBox()
         Me.txtEnvases = New System.Windows.Forms.TextBox()
         Me.txtPaginas = New System.Windows.Forms.TextBox()
         Me.txtLibros = New System.Windows.Forms.TextBox()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label21 = New System.Windows.Forms.Label()
-        Me.Label20 = New System.Windows.Forms.Label()
         Me.txtOOS = New System.Windows.Forms.TextBox()
-        Me.Label19 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
+        Me.txtLotePartida = New System.Windows.Forms.TextBox()
+        Me.txtComponente = New System.Windows.Forms.TextBox()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.Label19 = New System.Windows.Forms.Label()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.btnGrabar = New System.Windows.Forms.Button()
         Me.btnNotasCertAnalisis = New System.Windows.Forms.Button()
@@ -101,6 +103,7 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Panel2 = New System.Windows.Forms.Panel()
         Me.dgvEnsayos = New ConsultasVarias.DBDataGridView()
         Me.Ensayo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Especificacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -139,17 +142,14 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.VariableValor10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.EspecificacionIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Decimales = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.Label28 = New System.Windows.Forms.Label()
-        Me.txtLoteProveedor = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.gbDatosAdicionales.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
-        CType(Me.dgvEnsayos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
+        CType(Me.dgvEnsayos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Panel1
@@ -275,6 +275,15 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.Label26.TabIndex = 0
         Me.Label26.Text = "OC:"
         '
+        'txtLoteProveedor
+        '
+        Me.txtLoteProveedor.Location = New System.Drawing.Point(868, 20)
+        Me.txtLoteProveedor.MaxLength = 6
+        Me.txtLoteProveedor.Name = "txtLoteProveedor"
+        Me.txtLoteProveedor.Size = New System.Drawing.Size(115, 20)
+        Me.txtLoteProveedor.TabIndex = 2
+        Me.txtLoteProveedor.Text = "300000"
+        '
         'txtPartida
         '
         Me.txtPartida.Location = New System.Drawing.Point(764, 20)
@@ -305,6 +314,15 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.txtFecha.TabIndex = 1
         Me.txtFecha.Text = "12021990"
         Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label28
+        '
+        Me.Label28.AutoSize = True
+        Me.Label28.Location = New System.Drawing.Point(822, 24)
+        Me.Label28.Name = "Label28"
+        Me.Label28.Size = New System.Drawing.Size(41, 13)
+        Me.Label28.TabIndex = 0
+        Me.Label28.Text = "L Prov:"
         '
         'txtCodigo
         '
@@ -650,30 +668,6 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.Label13.TabIndex = 0
         Me.Label13.Text = "Archivo:"
         '
-        'txtLotePartida
-        '
-        Me.txtLotePartida.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.txtLotePartida.Location = New System.Drawing.Point(52, 125)
-        Me.txtLotePartida.MaxLength = 6
-        Me.txtLotePartida.Name = "txtLotePartida"
-        Me.txtLotePartida.Size = New System.Drawing.Size(70, 20)
-        Me.txtLotePartida.TabIndex = 2
-        Me.txtLotePartida.Text = "300000"
-        Me.txtLotePartida.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txtLotePartida.Visible = False
-        '
-        'txtComponente
-        '
-        Me.txtComponente.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.txtComponente.Location = New System.Drawing.Point(52, 125)
-        Me.txtComponente.MaxLength = 12
-        Me.txtComponente.Name = "txtComponente"
-        Me.txtComponente.Size = New System.Drawing.Size(70, 20)
-        Me.txtComponente.TabIndex = 2
-        Me.txtComponente.Text = "300000"
-        Me.txtComponente.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txtComponente.Visible = False
-        '
         'txtEnvases
         '
         Me.txtEnvases.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
@@ -735,16 +729,6 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.Label21.TabIndex = 0
         Me.Label21.Text = "Cant. Etiq:"
         '
-        'Label20
-        '
-        Me.Label20.AutoSize = True
-        Me.Label20.Location = New System.Drawing.Point(53, 129)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(69, 13)
-        Me.Label20.TabIndex = 0
-        Me.Label20.Text = "Lote/Partida:"
-        Me.Label20.Visible = False
-        '
         'txtOOS
         '
         Me.txtOOS.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
@@ -755,16 +739,6 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.txtOOS.TabIndex = 2
         Me.txtOOS.Text = "300000"
         Me.txtOOS.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'Label19
-        '
-        Me.Label19.AutoSize = True
-        Me.Label19.Location = New System.Drawing.Point(52, 129)
-        Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(70, 13)
-        Me.Label19.TabIndex = 0
-        Me.Label19.Text = "Componente:"
-        Me.Label19.Visible = False
         '
         'Label16
         '
@@ -792,6 +766,50 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.Label10.Size = New System.Drawing.Size(48, 13)
         Me.Label10.TabIndex = 0
         Me.Label10.Text = "OOS Nº:"
+        '
+        'txtLotePartida
+        '
+        Me.txtLotePartida.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtLotePartida.Location = New System.Drawing.Point(52, 125)
+        Me.txtLotePartida.MaxLength = 6
+        Me.txtLotePartida.Name = "txtLotePartida"
+        Me.txtLotePartida.Size = New System.Drawing.Size(70, 20)
+        Me.txtLotePartida.TabIndex = 2
+        Me.txtLotePartida.Text = "300000"
+        Me.txtLotePartida.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtLotePartida.Visible = False
+        '
+        'txtComponente
+        '
+        Me.txtComponente.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtComponente.Location = New System.Drawing.Point(52, 125)
+        Me.txtComponente.MaxLength = 12
+        Me.txtComponente.Name = "txtComponente"
+        Me.txtComponente.Size = New System.Drawing.Size(70, 20)
+        Me.txtComponente.TabIndex = 2
+        Me.txtComponente.Text = "300000"
+        Me.txtComponente.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtComponente.Visible = False
+        '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.Location = New System.Drawing.Point(53, 129)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(69, 13)
+        Me.Label20.TabIndex = 0
+        Me.Label20.Text = "Lote/Partida:"
+        Me.Label20.Visible = False
+        '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Location = New System.Drawing.Point(52, 129)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(70, 13)
+        Me.Label19.TabIndex = 0
+        Me.Label19.Text = "Componente:"
+        Me.Label19.Visible = False
         '
         'GroupBox3
         '
@@ -884,6 +902,7 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.btnImprimirEnsayosIngresados.TabIndex = 0
         Me.btnImprimirEnsayosIngresados.Text = "VER PDF ENSAYOS INGRESADOS"
         Me.btnImprimirEnsayosIngresados.UseVisualStyleBackColor = True
+        Me.btnImprimirEnsayosIngresados.Visible = False
         '
         'btnActualizarEspecif
         '
@@ -942,42 +961,52 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(998, 454)
         Me.TableLayoutPanel1.TabIndex = 7
         '
+        'Panel2
+        '
+        Me.Panel2.Controls.Add(Me.GroupBox2)
+        Me.Panel2.Controls.Add(Me.GroupBox3)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel2.Location = New System.Drawing.Point(3, 349)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(992, 102)
+        Me.Panel2.TabIndex = 5
+        '
         'dgvEnsayos
         '
         Me.dgvEnsayos.AllowUserToAddRows = False
         Me.dgvEnsayos.AllowUserToDeleteRows = False
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvEnsayos.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvEnsayos.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.dgvEnsayos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvEnsayos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Ensayo, Me.Especificacion, Me.Valor, Me.Resultado, Me.Parametro, Me.Descripcion, Me.TipoEspecif, Me.DesdeEspecif, Me.HastaEspecif, Me.UnidadEspecif, Me.Farmacopea, Me.MenorIgualEspecif, Me.InformaEspecif, Me.Observaciones, Me.FormulaEspecif, Me.Variable1, Me.Variable2, Me.Variable3, Me.Variable4, Me.Variable5, Me.Variable6, Me.Variable7, Me.Variable8, Me.Variable9, Me.Variable10, Me.VariableValor1, Me.VariableValor2, Me.VariableValor3, Me.VariableValor4, Me.VariableValor5, Me.VariableValor6, Me.VariableValor7, Me.VariableValor8, Me.VariableValor9, Me.VariableValor10, Me.EspecificacionIngles, Me.Decimales})
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle13.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle13.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvEnsayos.DefaultCellStyle = DataGridViewCellStyle13
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvEnsayos.DefaultCellStyle = DataGridViewCellStyle6
         Me.dgvEnsayos.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvEnsayos.DoubleBuffered = True
         Me.dgvEnsayos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.dgvEnsayos.Location = New System.Drawing.Point(3, 58)
         Me.dgvEnsayos.Name = "dgvEnsayos"
         Me.dgvEnsayos.OrdenamientoColumnasHabilitado = False
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvEnsayos.RowHeadersDefaultCellStyle = DataGridViewCellStyle14
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvEnsayos.RowHeadersDefaultCellStyle = DataGridViewCellStyle7
         Me.dgvEnsayos.RowHeadersWidth = 10
         Me.dgvEnsayos.RowTemplate.Height = 20
         Me.dgvEnsayos.ShowCellToolTips = False
@@ -988,8 +1017,8 @@ Partial Class IngresoEnsayosLaboratorioMP
         'Ensayo
         '
         Me.Ensayo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Ensayo.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Ensayo.DefaultCellStyle = DataGridViewCellStyle2
         Me.Ensayo.HeaderText = "Ens"
         Me.Ensayo.MaxInputLength = 10
         Me.Ensayo.Name = "Ensayo"
@@ -1008,8 +1037,8 @@ Partial Class IngresoEnsayosLaboratorioMP
         '
         'Valor
         '
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Valor.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Valor.DefaultCellStyle = DataGridViewCellStyle3
         Me.Valor.HeaderText = "Valor"
         Me.Valor.MinimumWidth = 50
         Me.Valor.Name = "Valor"
@@ -1018,9 +1047,9 @@ Partial Class IngresoEnsayosLaboratorioMP
         '
         'Resultado
         '
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle11.Padding = New System.Windows.Forms.Padding(5, 0, 0, 0)
-        Me.Resultado.DefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.Padding = New System.Windows.Forms.Padding(5, 0, 0, 0)
+        Me.Resultado.DefaultCellStyle = DataGridViewCellStyle4
         Me.Resultado.HeaderText = "Resultado"
         Me.Resultado.MinimumWidth = 100
         Me.Resultado.Name = "Resultado"
@@ -1030,8 +1059,8 @@ Partial Class IngresoEnsayosLaboratorioMP
         'Parametro
         '
         Me.Parametro.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle12.Padding = New System.Windows.Forms.Padding(5, 0, 0, 0)
-        Me.Parametro.DefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle5.Padding = New System.Windows.Forms.Padding(5, 0, 0, 0)
+        Me.Parametro.DefaultCellStyle = DataGridViewCellStyle5
         Me.Parametro.HeaderText = "Parámetro"
         Me.Parametro.MinimumWidth = 150
         Me.Parametro.Name = "Parametro"
@@ -1269,34 +1298,6 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.Decimales.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.Decimales.Visible = False
         '
-        'Panel2
-        '
-        Me.Panel2.Controls.Add(Me.GroupBox2)
-        Me.Panel2.Controls.Add(Me.GroupBox3)
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(3, 349)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(992, 102)
-        Me.Panel2.TabIndex = 5
-        '
-        'Label28
-        '
-        Me.Label28.AutoSize = True
-        Me.Label28.Location = New System.Drawing.Point(822, 24)
-        Me.Label28.Name = "Label28"
-        Me.Label28.Size = New System.Drawing.Size(41, 13)
-        Me.Label28.TabIndex = 0
-        Me.Label28.Text = "L Prov:"
-        '
-        'txtLoteProveedor
-        '
-        Me.txtLoteProveedor.Location = New System.Drawing.Point(868, 20)
-        Me.txtLoteProveedor.MaxLength = 6
-        Me.txtLoteProveedor.Name = "txtLoteProveedor"
-        Me.txtLoteProveedor.Size = New System.Drawing.Size(115, 20)
-        Me.txtLoteProveedor.TabIndex = 2
-        Me.txtLoteProveedor.Text = "300000"
-        '
         'IngresoEnsayosLaboratorioMP
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1317,8 +1318,8 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
         Me.TableLayoutPanel1.ResumeLayout(False)
-        CType(Me.dgvEnsayos, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel2.ResumeLayout(False)
+        CType(Me.dgvEnsayos, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

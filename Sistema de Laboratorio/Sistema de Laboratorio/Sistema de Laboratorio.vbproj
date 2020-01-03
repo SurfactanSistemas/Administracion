@@ -95,6 +95,7 @@
     <Compile Include="Auxiliares\Extensiones\AuxiExtensiones.vb" />
     <Compile Include="Auxiliares\Interfaces\IActualizarPorNuevoIngreso.vb" />
     <Compile Include="Auxiliares\Interfaces\IAyudaMPDentroDeInforme.vb" />
+    <Compile Include="Auxiliares\Interfaces\IAyudaPruebasAnteriores.vb" />
     <Compile Include="Auxiliares\Interfaces\IDefinicionFormulaEspecificacion.vb" />
     <Compile Include="Auxiliares\Interfaces\IDefinicionValoresFormula.vb" />
     <Compile Include="Auxiliares\Interfaces\IIngresoMotivoDesvio.vb" />
@@ -110,6 +111,12 @@
       <DependentUpon>ActualizacionDetallesCertAnalisisYEstadoEnvases.vb</DependentUpon>
     </Compile>
     <Compile Include="Auxiliares\VentanasIntermedias\Ingreso de Materias Primas\ActualizacionDetallesCertAnalisisYEstadoEnvases.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Auxiliares\VentanasIntermedias\Ingreso de Materias Primas\AltaMotivoINCMP.Designer.vb">
+      <DependentUpon>AltaMotivoINCMP.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Auxiliares\VentanasIntermedias\Ingreso de Materias Primas\AltaMotivoINCMP.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Auxiliares\VentanasIntermedias\Ingreso de Materias Primas\ConfirmarTipoCantidadLaudo.Designer.vb">
@@ -186,6 +193,12 @@
       <DependentUpon>ConsDeEspefXVersion.vb</DependentUpon>
     </Compile>
     <Compile Include="ConsDeEspefXVersion.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Consultas\AyudaPruebasAnteriores.Designer.vb">
+      <DependentUpon>AyudaPruebasAnteriores.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Consultas\AyudaPruebasAnteriores.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Consultas\NotasCertificadosAnalisis\NotasCertificadosAnalisis.Designer.vb">
@@ -591,6 +604,9 @@
     <EmbeddedResource Include="Auxiliares\VentanasIntermedias\Ingreso de Materias Primas\ActualizacionDetallesCertAnalisisYEstadoEnvases.resx">
       <DependentUpon>ActualizacionDetallesCertAnalisisYEstadoEnvases.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Auxiliares\VentanasIntermedias\Ingreso de Materias Primas\AltaMotivoINCMP.resx">
+      <DependentUpon>AltaMotivoINCMP.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Auxiliares\VentanasIntermedias\Ingreso de Materias Primas\ConfirmarTipoCantidadLaudo.resx">
       <DependentUpon>ConfirmarTipoCantidadLaudo.vb</DependentUpon>
     </EmbeddedResource>
@@ -623,6 +639,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ConsDeEspefXVersion.resx">
       <DependentUpon>ConsDeEspefXVersion.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Consultas\AyudaPruebasAnteriores.resx">
+      <DependentUpon>AyudaPruebasAnteriores.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Consultas\NotasCertificadosAnalisis\NotasCertificadosAnalisis.resx">
       <DependentUpon>NotasCertificadosAnalisis.vb</DependentUpon>

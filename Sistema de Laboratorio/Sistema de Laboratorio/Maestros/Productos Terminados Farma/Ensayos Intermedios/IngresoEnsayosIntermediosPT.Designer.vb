@@ -92,11 +92,11 @@ Partial Class IngresoEnsayosIntermediosPT
         Me.btnReimprimir = New System.Windows.Forms.Button()
         Me.btnImprimirEnsayosIngresados = New System.Windows.Forms.Button()
         Me.btnActualizarEspecif = New System.Windows.Forms.Button()
+        Me.btnConsulta = New System.Windows.Forms.Button()
         Me.btnNotas = New System.Windows.Forms.Button()
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.Panel2 = New System.Windows.Forms.Panel()
         Me.dgvEnsayos = New ConsultasVarias.DBDataGridView()
         Me.Ensayo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Especificacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -135,14 +135,15 @@ Partial Class IngresoEnsayosIntermediosPT
         Me.VariableValor10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.EspecificacionIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Decimales = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.gbDatosAdicionales.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
-        Me.Panel2.SuspendLayout()
         CType(Me.dgvEnsayos, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -159,7 +160,7 @@ Partial Class IngresoEnsayosIntermediosPT
         'Label2
         '
         Me.Label2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.Control
@@ -172,7 +173,7 @@ Partial Class IngresoEnsayosIntermediosPT
         'Label1
         '
         Me.Label1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.Control
@@ -735,6 +736,7 @@ Partial Class IngresoEnsayosIntermediosPT
         Me.GroupBox3.Controls.Add(Me.btnReimprimir)
         Me.GroupBox3.Controls.Add(Me.btnImprimirEnsayosIngresados)
         Me.GroupBox3.Controls.Add(Me.btnActualizarEspecif)
+        Me.GroupBox3.Controls.Add(Me.btnConsulta)
         Me.GroupBox3.Controls.Add(Me.btnNotas)
         Me.GroupBox3.Controls.Add(Me.btnCerrar)
         Me.GroupBox3.Controls.Add(Me.btnLimpiar)
@@ -769,10 +771,11 @@ Partial Class IngresoEnsayosIntermediosPT
         Me.btnRevalida.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnRevalida.Location = New System.Drawing.Point(10, 114)
         Me.btnRevalida.Name = "btnRevalida"
-        Me.btnRevalida.Size = New System.Drawing.Size(181, 30)
+        Me.btnRevalida.Size = New System.Drawing.Size(15, 30)
         Me.btnRevalida.TabIndex = 0
         Me.btnRevalida.Text = "REVALIDAR PROD. TERMINADO"
         Me.btnRevalida.UseVisualStyleBackColor = True
+        Me.btnRevalida.Visible = False
         '
         'btnNotasAnteriores
         '
@@ -813,6 +816,15 @@ Partial Class IngresoEnsayosIntermediosPT
         Me.btnActualizarEspecif.TabIndex = 0
         Me.btnActualizarEspecif.Text = "ACTUALIZAR ESPECIFICACIONES"
         Me.btnActualizarEspecif.UseVisualStyleBackColor = True
+        '
+        'btnConsulta
+        '
+        Me.btnConsulta.Location = New System.Drawing.Point(10, 115)
+        Me.btnConsulta.Name = "btnConsulta"
+        Me.btnConsulta.Size = New System.Drawing.Size(181, 30)
+        Me.btnConsulta.TabIndex = 0
+        Me.btnConsulta.Text = "CONSULTA"
+        Me.btnConsulta.UseVisualStyleBackColor = True
         '
         'btnNotas
         '
@@ -858,16 +870,6 @@ Partial Class IngresoEnsayosIntermediosPT
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(971, 523)
         Me.TableLayoutPanel1.TabIndex = 7
-        '
-        'Panel2
-        '
-        Me.Panel2.Controls.Add(Me.GroupBox2)
-        Me.Panel2.Controls.Add(Me.GroupBox3)
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(3, 369)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(965, 151)
-        Me.Panel2.TabIndex = 5
         '
         'dgvEnsayos
         '
@@ -1196,6 +1198,16 @@ Partial Class IngresoEnsayosIntermediosPT
         Me.Decimales.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.Decimales.Visible = False
         '
+        'Panel2
+        '
+        Me.Panel2.Controls.Add(Me.GroupBox2)
+        Me.Panel2.Controls.Add(Me.GroupBox3)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel2.Location = New System.Drawing.Point(3, 369)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(965, 151)
+        Me.Panel2.TabIndex = 5
+        '
         'IngresoEnsayosIntermediosPT
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1215,8 +1227,8 @@ Partial Class IngresoEnsayosIntermediosPT
         Me.GroupBox2.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
         Me.TableLayoutPanel1.ResumeLayout(False)
-        Me.Panel2.ResumeLayout(False)
         CType(Me.dgvEnsayos, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel2.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -1324,4 +1336,5 @@ Partial Class IngresoEnsayosIntermediosPT
     Friend WithEvents Label25 As System.Windows.Forms.Label
     Friend WithEvents gbDatosAdicionales As System.Windows.Forms.GroupBox
     Friend WithEvents btnPoolEnsayos As System.Windows.Forms.Button
+    Friend WithEvents btnConsulta As System.Windows.Forms.Button
 End Class

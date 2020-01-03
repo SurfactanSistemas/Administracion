@@ -7,7 +7,7 @@ Imports CrystalDecisions.Shared
 Imports info.lundin.math
 Imports Laboratorio.Entidades
 
-Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerminados, IIngresoClaveSeguridad, IIngresoMotivoDesvio
+Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerminados, IIngresoClaveSeguridad, IIngresoMotivoDesvio, IAyudaPruebasAnteriores
 
     Private WNotas As New List(Of String)
     Private WEsPorDesvio As Boolean = False
@@ -20,7 +20,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
     Private Const RUTA_TEMP As String = "C:/tempEnsayosIntermedios/"
     Private BaseEspecif As String = Operador.Base
-    Private TablaPrueTer As String = "PrurTerFarma"
+    Private TablaPrueTer As String = "PrueTerFarma"
     Private TablaCargaV As String = "CargaV"
     Private TablaCargaVIng As String = "CargaVIngles"
 
@@ -134,12 +134,12 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
             Dim WExiste As DataRow = Nothing
 
             If Val(txtEtapa.Text) = 99 Then
-                WExiste = GetSingle("SELECT Clave FROM " & TablaPrueTer & " WHERE Partida = '" + txtPartida.Text + "' And Renglon = '1'")
+                WExiste = GetSingle("SELECT TOP 1 Clave FROM " & TablaPrueTer & " WHERE Partida = '" + txtPartida.Text + "'")
             Else
                 '
                 ' En ésta parte únicamente entrarían los productos de Planta III.
                 '
-                WExiste = GetSingle("SELECT Clave FROM PrueterfarmaIntermedio WHERE Producto = '" + txtCodigo.Text + "' And Paso = '" & txtEtapa.Text & "' And Renglon = '1'")
+                WExiste = GetSingle("SELECT TOP 1 Clave FROM PrueterfarmaIntermedio WHERE Producto = '" + txtCodigo.Text + "' And Paso = '" & txtEtapa.Text & "'")
             End If
 
             If WExiste IsNot Nothing Then
@@ -1749,6 +1749,24 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
         With New ListaPoolEnsayos(txtCodigo.Text, txtPartida.Text, txtEtapa.Text, dgvEnsayos.Rows)
             .ShowDialog(Me)
         End With
+    End Sub
+
+    Public Sub _ProcesarAyudaPruebasAnteriores(LotePartida As String) Implements IAyudaPruebasAnteriores._ProcesarAyudaPruebasAnteriores
+        txtPartida.Text = LotePartida
+        txtPartida_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+        txtEtapa.Text = "99"
+        txtEtapa_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+    End Sub
+
+    Private Sub btnConsulta_Click(sender As Object, e As EventArgs) Handles btnConsulta.Click
+        Dim WDatos As DataTable = GetAll("SELECT ptf.Fecha, ptf.Partida as LotePartida, ptf.Producto As Codigo, t.Descripcion FROM " & TablaPrueTer & " ptf INNER JOIN Terminado t ON t.Codigo = ptf.Producto AND ptf.Renglon = 1 ORDER BY ptf.FechaOrd DESC, ptf.Partida DESC")
+        With New AyudaPruebasAnteriores(WDatos)
+            .ShowDialog(Me)
+        End With
+    End Sub
+
+    Private Sub txtPartida_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles txtPartida.MouseDoubleClick
+        btnConsulta_Click(Nothing, Nothing)
     End Sub
 End Class
 
