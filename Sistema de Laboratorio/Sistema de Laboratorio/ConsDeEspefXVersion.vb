@@ -8,6 +8,7 @@ Public Class ConsDeEspefXVersion
 
 
     Private Sub ConsDeEspefXVersion_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Me.Text = ""
         With tablaParaDGV.Columns
             .Add("Ensayo")
             .Add("Descripcion")

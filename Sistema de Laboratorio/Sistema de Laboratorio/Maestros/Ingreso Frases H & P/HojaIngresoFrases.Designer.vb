@@ -22,7 +22,7 @@ Partial Class HojaIngresoFrases
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.btnVolver = New System.Windows.Forms.Button()
         Me.btnImprimir = New System.Windows.Forms.Button()
         Me.btnListar = New System.Windows.Forms.Button()
@@ -36,8 +36,6 @@ Partial Class HojaIngresoFrases
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.LblTitulo = New System.Windows.Forms.Label()
         Me.pnlListar = New System.Windows.Forms.Panel()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -47,6 +45,8 @@ Partial Class HojaIngresoFrases
         Me.Observa = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnVolPnlListar = New System.Windows.Forms.Button()
         Me.txtBuscadorListar = New System.Windows.Forms.TextBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.LblTitulo = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.pnlListar.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -176,28 +176,6 @@ Partial Class HojaIngresoFrases
         Me.Panel1.Size = New System.Drawing.Size(581, 64)
         Me.Panel1.TabIndex = 24
         '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label4.Location = New System.Drawing.Point(385, 29)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(168, 22)
-        Me.Label4.TabIndex = 1
-        Me.Label4.Text = "SURFACTAN S.A"
-        '
-        'LblTitulo
-        '
-        Me.LblTitulo.AutoSize = True
-        Me.LblTitulo.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblTitulo.ForeColor = System.Drawing.SystemColors.Control
-        Me.LblTitulo.Location = New System.Drawing.Point(23, 31)
-        Me.LblTitulo.Name = "LblTitulo"
-        Me.LblTitulo.Size = New System.Drawing.Size(63, 20)
-        Me.LblTitulo.TabIndex = 0
-        Me.LblTitulo.Text = "Label4"
-        '
         'pnlListar
         '
         Me.pnlListar.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
@@ -235,14 +213,14 @@ Partial Class HojaIngresoFrases
         '
         Me.DGV_ListadoI.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_ListadoI.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Codigo, Me.Descripcion, Me.Observa})
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGV_ListadoI.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGV_ListadoI.DefaultCellStyle = DataGridViewCellStyle1
         Me.DGV_ListadoI.DoubleBuffered = True
         Me.DGV_ListadoI.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.DGV_ListadoI.Location = New System.Drawing.Point(26, 65)
@@ -298,6 +276,28 @@ Partial Class HojaIngresoFrases
         Me.txtBuscadorListar.Name = "txtBuscadorListar"
         Me.txtBuscadorListar.Size = New System.Drawing.Size(485, 20)
         Me.txtBuscadorListar.TabIndex = 1
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label4.Location = New System.Drawing.Point(385, 29)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(168, 22)
+        Me.Label4.TabIndex = 1
+        Me.Label4.Text = "SURFACTAN S.A"
+        '
+        'LblTitulo
+        '
+        Me.LblTitulo.AutoSize = True
+        Me.LblTitulo.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblTitulo.ForeColor = System.Drawing.SystemColors.Control
+        Me.LblTitulo.Location = New System.Drawing.Point(23, 31)
+        Me.LblTitulo.Name = "LblTitulo"
+        Me.LblTitulo.Size = New System.Drawing.Size(63, 20)
+        Me.LblTitulo.TabIndex = 0
+        Me.LblTitulo.Text = "Label4"
         '
         'HojaIngresoFrases
         '

@@ -621,6 +621,12 @@
     <EmbeddedResource Include="ListadoDeEnsayoDePT.resx">
       <DependentUpon>ListadoDeEnsayoDePT.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ListadoEspecifPTFecha.resx">
+      <DependentUpon>ListadoEspecifPTFecha.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListadoPTVencidos.resx">
+      <DependentUpon>ListadoPTVencidos.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Maestros\Ingreso Frases H &amp; P\FrasesHP.resx">
       <DependentUpon>FrasesHP.vb</DependentUpon>
     </EmbeddedResource>

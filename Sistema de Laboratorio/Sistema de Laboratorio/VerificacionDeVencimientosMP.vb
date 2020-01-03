@@ -538,6 +538,7 @@ Public Class VerificacionDeVencimientosMP
     End Sub
 
     Private Sub VerificacionDeVencimientosMP_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Me.Text = ""
         mastxtFecha.Text = Date.Today
 
     End Sub

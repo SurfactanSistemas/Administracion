@@ -160,4 +160,8 @@ Public Class ListadoPTVencidos
                 mastxtHasta.Text = ""
         End Select
     End Sub
+
+    Private Sub ListadoPTVencidos_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.Text = ""
+    End Sub
 End Class

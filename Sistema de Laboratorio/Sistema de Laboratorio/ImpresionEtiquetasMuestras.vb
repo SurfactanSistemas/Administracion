@@ -120,6 +120,7 @@
 
 
     Private Sub ImpresionEtiquetasMuestras_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Me.Text = ""
         LtbMP.Visible = False
         LtbLotes.Visible = False
         '        With tablaInforme.Columns

@@ -45,6 +45,7 @@ Public Class MovimientosVariosDeLaboratorio
     End Sub
 
     Private Sub MovimientosVariosDeLaboratorio_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Me.Text = ""
         pnlContra.Visible = False
         pnlAyuda.Visible = False
         txtNroMovimiento.Text = 0

@@ -74,6 +74,7 @@ Public Class ListadoDeEnsayoDePT
     End Sub
 
     Private Sub ListadoDeEnsayoDePT_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Me.Text = ""
         txtDesde.Focus()
     End Sub
 

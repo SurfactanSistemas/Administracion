@@ -148,4 +148,7 @@ Public Class ListadoEspecifPTFecha
 
 
 
+    Private Sub ListadoEspecifPTFecha_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.Text = ""
+    End Sub
 End Class
