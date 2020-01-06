@@ -913,7 +913,6 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
     End Function
 
     Private Function _PrepararSinActualizacionVersionFormatoViejo() As String
-        Dim sql As String
 
         Dim columnas As String = ""
 

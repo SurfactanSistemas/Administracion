@@ -297,7 +297,6 @@ Public Class VerificacionDeVencimientosMP
         Dim WMes As String
         Dim Dia As Integer
         Dim WDia As String
-        Dim Di As Integer
         Dim aa As Integer
         Dim Ds(20) As Integer
 
@@ -433,7 +432,7 @@ Public Class VerificacionDeVencimientosMP
                 Return "Pellital_V"
             End If
         End If
-
+        Return ""
     End Function
 
 

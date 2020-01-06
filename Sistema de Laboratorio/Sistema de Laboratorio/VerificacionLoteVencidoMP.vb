@@ -77,6 +77,8 @@ Public Class VerificacionLoteVencidoMP
 
         Dim Fecha, FechaVto, FechaOrd, Vencimiento As String
 
+        Vencimiento = ""
+
         Fecha = row.Item("Fecha")
         FechaVto = IIf(IsDBNull(row.Item("FechaVencimiento")), "", row.Item("FechaVencimiento"))
 
@@ -161,6 +163,7 @@ Public Class VerificacionLoteVencidoMP
 
             Return Dias
         End If
+        Return 0
     End Function
 
     Private Function _Calcula_vencimiento(ByVal WFecha As String, ByVal Plazo As Integer) As String
@@ -174,7 +177,6 @@ Public Class VerificacionLoteVencidoMP
         Dim WMes As String
         Dim Dia As Integer
         Dim WDia As String
-        Dim Di As Integer
         Dim aa As Integer
         Dim Ds(20) As Integer
 

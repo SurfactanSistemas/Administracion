@@ -428,7 +428,6 @@
             DGV_InformeRecepcion.Rows.Clear()
 
             Dim Renglon As Integer = -1
-            Dim Auxiliar As String
             Dim SQLCnslt As String
 
             SQLCnslt = "SELECT Cantidad, Recibida, Articulo, Proveedor FROM Orden WHERE Orden = '" & txtOrdenCompra.Text & "' ORDER BY Renglon"
@@ -764,8 +763,8 @@
         Dim Vencimiento As String
         Dim OrdVencimiento As String
 
-        Dim Certificado1 As String
-        Dim Estado1 As String
+        Dim Certificado1 As String = ""
+        Dim Estado1 As String = ""
 
         Dim EstadoEnv1 As Integer
         Dim EstadoEnv2 As Integer

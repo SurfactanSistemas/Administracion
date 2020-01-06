@@ -79,7 +79,7 @@ Partial Class MenuPrincipal
         'MaestrosToolStripMenuItem
         '
         Me.MaestrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EnsayosToolStripMenuItem, Me.MateriasPrimasToolStripMenuItem, Me.ProductosTerminadosToolStripMenuItem, Me.FHToolStripMenuItem, Me.DatosAdicionalesToolStripMenuItem, Me.EmisionDeEtiquetasToolStripMenuItem, Me.MovimientosVariosDeLaboratorioToolStripMenuItem, Me.InformeDeRecepcionDeDrogaDeLaboratorioToolStripMenuItem, Me.IngresoYActualizacionDeHojaDeProduccionToolStripMenuItem})
-        Me.MaestrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EnsayosToolStripMenuItem, Me.MateriasPrimasToolStripMenuItem, Me.FarmaIngresoDeEnsayosProductosTerminadosToolStripMenuItem, Me.ProductosTerminadosToolStripMenuItem, Me.FHToolStripMenuItem, Me.DatosAdicionalesToolStripMenuItem, Me.EmisionDeEtiquetasToolStripMenuItem, Me.MovimientosVariosDeLaboratorioToolStripMenuItem, Me.InformeDeRecepcionDeDrogaDeLaboratorioToolStripMenuItem, Me.IngresoYActualizacionDeHojaDeProduccionToolStripMenuItem})
+        Me.MaestrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EnsayosToolStripMenuItem, Me.MateriasPrimasToolStripMenuItem, Me.ProductosTerminadosToolStripMenuItem, Me.FHToolStripMenuItem, Me.DatosAdicionalesToolStripMenuItem, Me.EmisionDeEtiquetasToolStripMenuItem, Me.MovimientosVariosDeLaboratorioToolStripMenuItem, Me.InformeDeRecepcionDeDrogaDeLaboratorioToolStripMenuItem, Me.IngresoYActualizacionDeHojaDeProduccionToolStripMenuItem})
         Me.MaestrosToolStripMenuItem.Name = "MaestrosToolStripMenuItem"
         Me.MaestrosToolStripMenuItem.Size = New System.Drawing.Size(67, 20)
         Me.MaestrosToolStripMenuItem.Text = "Maestros"
@@ -139,26 +139,6 @@ Partial Class MenuPrincipal
         Me.LotesVencidosToolStripMenuItem.Name = "LotesVencidosToolStripMenuItem"
         Me.LotesVencidosToolStripMenuItem.Size = New System.Drawing.Size(297, 22)
         Me.LotesVencidosToolStripMenuItem.Text = "Lotes Vencidos"
-        '
-        'VerificacionDeVencimientosToolStripMenuItem
-        'FarmaIngresoDeEnsayosProductosTerminadosToolStripMenuItem
-        '
-        Me.FarmaIngresoDeEnsayosProductosTerminadosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ControlesIntermedisToolStripMenuItem, Me.EspecificacionesToolStripMenuItem, Me.AutorizaciónDePedidosToolStripMenuItem, Me.DatosAImprimirEnCertificadosDeAnálisisToolStripMenuItem, Me.EmisiónDeCertificadoDeAnálisisToolStripMenuItem})
-        Me.FarmaIngresoDeEnsayosProductosTerminadosToolStripMenuItem.Name = "FarmaIngresoDeEnsayosProductosTerminadosToolStripMenuItem"
-        Me.FarmaIngresoDeEnsayosProductosTerminadosToolStripMenuItem.Size = New System.Drawing.Size(321, 22)
-        Me.FarmaIngresoDeEnsayosProductosTerminadosToolStripMenuItem.Text = "Productos Terminados"
-        '
-        'ControlesIntermedisToolStripMenuItem
-        '
-        Me.ControlesIntermedisToolStripMenuItem.Name = "ControlesIntermedisToolStripMenuItem"
-        Me.ControlesIntermedisToolStripMenuItem.Size = New System.Drawing.Size(298, 22)
-        Me.ControlesIntermedisToolStripMenuItem.Text = "Controles Intermedios"
-        '
-        'EspecificacionesToolStripMenuItem
-        '
-        Me.EspecificacionesToolStripMenuItem.Name = "EspecificacionesToolStripMenuItem"
-        Me.EspecificacionesToolStripMenuItem.Size = New System.Drawing.Size(298, 22)
-        Me.EspecificacionesToolStripMenuItem.Text = "Especificaciones"
         '
         'AutorizaciónDePedidosToolStripMenuItem
         '
@@ -424,7 +404,4 @@ Partial Class MenuPrincipal
     Friend WithEvents InformeDeRecepcionDeDrogaDeLaboratorioToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents IngresoYActualizacionDeHojaDeProduccionToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AutorizaciónDePedidosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MovimientosVariosDeLaboratorioToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents InformeDeRecepcionDeDrogaDeLaboratorioToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents IngresoYActualizacionDeHojaDeProduccionToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class

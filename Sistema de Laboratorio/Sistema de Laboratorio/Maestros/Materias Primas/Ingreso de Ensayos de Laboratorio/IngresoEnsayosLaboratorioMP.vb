@@ -1168,7 +1168,7 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad
         Dim WSqls As New List(Of String)
 
         Dim WClave, WSaldo, WOrigen, WInforme, WActualiza, WPrueba, WProducto, WFecha, WOrden, WLiberada, WDevuelta, WLote, WRechazo, WFechaOrd, WDate, WLaudoOriginal, WPartiOri As String
-
+        WOrigen = ""
         WPrueba = txtPartida.Text.Ceros(6)
 
         WProducto = txtCodigo.Text
