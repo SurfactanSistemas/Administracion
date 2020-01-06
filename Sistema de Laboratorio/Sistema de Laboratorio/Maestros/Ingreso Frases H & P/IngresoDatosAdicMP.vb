@@ -2414,6 +2414,7 @@ Public Class IngresoDatosAdicMP
     End Sub
 
     Private Sub IngresoDatosAdicMP_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
+        Me.Text = ""
         btnLimpiar_Click(Nothing, Nothing)
     End Sub
 

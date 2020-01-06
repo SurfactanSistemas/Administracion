@@ -4,6 +4,7 @@ Imports ConsultasVarias
 Public Class VerificacionLoteVencidoMP
 
     Private Sub VerificacionLoteVencidoMP_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Me.Text = ""
         pnlContrasena.Visible = False
         CheckForIllegalCrossThreadCalls = False
         ProgressBar1.Value = 0

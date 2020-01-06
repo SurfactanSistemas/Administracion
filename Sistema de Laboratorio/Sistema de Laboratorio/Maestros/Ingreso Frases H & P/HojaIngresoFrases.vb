@@ -219,4 +219,12 @@ Public Class HojaIngresoFrases
         
 
     End Sub
+
+    Private Sub HojaIngresoFrases_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.Text = ""
+    End Sub
+
+    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
+
+    End Sub
 End Class

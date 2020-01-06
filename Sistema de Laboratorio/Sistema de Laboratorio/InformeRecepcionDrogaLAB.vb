@@ -6,6 +6,7 @@
 
 
     Private Sub InformeRecepcionDrogaLAB_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Me.Text = ""
         PnlEstadoEnvases.Visible = False
         pnlCertifAnaliyEstadoEtiquet.Visible = False
         pnlAviso.Visible = False

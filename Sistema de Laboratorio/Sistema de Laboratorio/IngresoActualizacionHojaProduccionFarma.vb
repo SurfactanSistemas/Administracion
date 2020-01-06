@@ -18,6 +18,7 @@ Public Class IngresoActualizacionHojaProduccionFarma
     End Sub
 
     Private Sub IngresoActualizacionHojaProduccionFarma_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Me.Text = ""
         cbxTipo.SelectedIndex = 0
         pnlLotes.Visible = False
         mastxtFecha.Text = Date.Today
