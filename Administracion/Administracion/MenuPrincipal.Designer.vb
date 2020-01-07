@@ -95,6 +95,7 @@ Partial Class MenuPrincipal
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.btnCambio = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.ArqueoDeChequesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
@@ -431,7 +432,7 @@ Partial Class MenuPrincipal
         '
         'ProcesosToolStripMenuItem
         '
-        Me.ProcesosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.ToolStripMenuItem4, Me.ToolStripSeparator1, Me.ToolStripMenuItem5, Me.ToolStripMenuItem3, Me.SifereToolStripMenuItem, Me.RetencionEsOpToolStripMenuItem, Me.RetencionesRecibvosaToolStripMenuItem, Me.ToolStripMenuItem2, Me.ToolStripMenuItem6, Me.ToolStripMenuItem7, Me.ToolStripMenuItem9, Me.ToolStripMenuItem10, Me.ToolStripMenuItem11, Me.ToolStripSeparator2, Me.FinDelSistemaToolStripMenuItem})
+        Me.ProcesosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.ToolStripMenuItem4, Me.ToolStripSeparator1, Me.ToolStripMenuItem5, Me.ToolStripMenuItem3, Me.SifereToolStripMenuItem, Me.RetencionEsOpToolStripMenuItem, Me.RetencionesRecibvosaToolStripMenuItem, Me.ToolStripMenuItem2, Me.ToolStripMenuItem6, Me.ToolStripMenuItem7, Me.ToolStripMenuItem9, Me.ToolStripMenuItem10, Me.ToolStripMenuItem11, Me.ArqueoDeChequesToolStripMenuItem, Me.ToolStripSeparator2, Me.FinDelSistemaToolStripMenuItem})
         Me.ProcesosToolStripMenuItem.Name = "ProcesosToolStripMenuItem"
         Me.ProcesosToolStripMenuItem.Size = New System.Drawing.Size(66, 20)
         Me.ProcesosToolStripMenuItem.Text = "Procesos"
@@ -551,8 +552,8 @@ Partial Class MenuPrincipal
         'btnCambio
         '
         Me.btnCambio.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnCambio.Location = New System.Drawing.Point(329, 239)
         Me.btnCambio.Name = "btnCambio"
         Me.btnCambio.Size = New System.Drawing.Size(157, 46)
@@ -569,6 +570,12 @@ Partial Class MenuPrincipal
         Me.Button1.Text = "Button1"
         Me.Button1.UseVisualStyleBackColor = True
         Me.Button1.Visible = False
+        '
+        'ArqueoDeChequesToolStripMenuItem
+        '
+        Me.ArqueoDeChequesToolStripMenuItem.Name = "ArqueoDeChequesToolStripMenuItem"
+        Me.ArqueoDeChequesToolStripMenuItem.Size = New System.Drawing.Size(375, 22)
+        Me.ArqueoDeChequesToolStripMenuItem.Text = "Arqueo de cheques"
         '
         'MenuPrincipal
         '
@@ -663,4 +670,5 @@ Partial Class MenuPrincipal
     Friend WithEvents EnvíoDeAvisoDeOPAProveedoresPorEMailToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents EnvíoDeEmailPorAnticipoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents ArqueoDeChequesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class
