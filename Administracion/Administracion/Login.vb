@@ -55,6 +55,8 @@ Public Class Login
 
             End If
 
+            ConsultasVarias.Operador.Base = IIf(_EsPellital, "pellitalSa", "SurfactanSa")
+
             MenuPrincipal.Show()
             Close()
         End If

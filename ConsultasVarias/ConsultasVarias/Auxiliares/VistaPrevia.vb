@@ -40,7 +40,10 @@ Public Class VistaPrevia
 
         ' CONECTAMOS CON LA BASE DE DATOS QUE CORRESPONDA.
         Dim cs = ""
+        If Base = "" Then
+            Base = ConsultasVarias.Operador.Base
 
+        End If
         Try
             ' Buscamos el string de conexion.
             cs = _ConectarA(Base) 'ClasesCompartidas.Globals.getConnectionString()

@@ -956,7 +956,7 @@ Public Class ProveedoresABM
             Case "Cliente"
                 _TraerCliente(LBConsulta_Filtrada.SelectedItem)
             Case "TipoProv"
-                _TraerRubros(LBConsulta.SelectedItem)
+                _TraerRubros(LBConsulta_Filtrada.SelectedItem)
         End Select
 
         _ContraerFormulario()

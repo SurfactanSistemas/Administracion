@@ -311,4 +311,10 @@
         MsgBox("Listo")
 
     End Sub
+
+    Private Sub ArqueoDeChequesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ArqueoDeChequesToolStripMenuItem.Click
+        With New ArqueoDeCheques
+            .Show(Me)
+        End With
+    End Sub
 End Class
