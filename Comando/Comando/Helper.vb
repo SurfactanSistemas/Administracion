@@ -622,6 +622,8 @@ Module Helper
                     Return "Fazón Químicos"
                 Case 9
                     Return "Varios"
+                Case 10
+                    Return "Blanqueadores Opticos"
                 Case Else
                     Return ""
             End Select

@@ -101,6 +101,7 @@ Partial Class ComparacionesMensualesValorUnico
         Me.ckRecurtientes = New System.Windows.Forms.CheckBox()
         Me.ckAceitesNaturales = New System.Windows.Forms.CheckBox()
         Me.ckConsolidadoPellital = New System.Windows.Forms.CheckBox()
+        Me.ckBlanqueadores = New System.Windows.Forms.CheckBox()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -141,6 +142,7 @@ Partial Class ComparacionesMensualesValorUnico
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.ckBlanqueadores)
         Me.GroupBox2.Controls.Add(Me.ckPapel)
         Me.GroupBox2.Controls.Add(Me.ckVarios)
         Me.GroupBox2.Controls.Add(Me.ckFazonQuimicos)
@@ -154,7 +156,7 @@ Partial Class ComparacionesMensualesValorUnico
         Me.GroupBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
         Me.GroupBox2.Location = New System.Drawing.Point(418, 233)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(270, 148)
+        Me.GroupBox2.Size = New System.Drawing.Size(270, 165)
         Me.GroupBox2.TabIndex = 4
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Lineas a Comparar"
@@ -639,7 +641,7 @@ Partial Class ComparacionesMensualesValorUnico
         'PanelSeleccionAnios
         '
         Me.PanelSeleccionAnios.Controls.Add(Me.GroupBox1)
-        Me.PanelSeleccionAnios.Location = New System.Drawing.Point(210, 178)
+        Me.PanelSeleccionAnios.Location = New System.Drawing.Point(158, 69)
         Me.PanelSeleccionAnios.Name = "PanelSeleccionAnios"
         Me.PanelSeleccionAnios.Size = New System.Drawing.Size(294, 213)
         Me.PanelSeleccionAnios.TabIndex = 11
@@ -811,7 +813,7 @@ Partial Class ComparacionesMensualesValorUnico
         'Label7
         '
         Me.Label7.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label7.ForeColor = System.Drawing.SystemColors.Control
@@ -824,7 +826,7 @@ Partial Class ComparacionesMensualesValorUnico
         'Label2
         '
         Me.Label2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.Control
@@ -859,7 +861,7 @@ Partial Class ComparacionesMensualesValorUnico
         Me.gbLineasPellital.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
         Me.gbLineasPellital.Location = New System.Drawing.Point(418, 233)
         Me.gbLineasPellital.Name = "gbLineasPellital"
-        Me.gbLineasPellital.Size = New System.Drawing.Size(270, 148)
+        Me.gbLineasPellital.Size = New System.Drawing.Size(270, 165)
         Me.gbLineasPellital.TabIndex = 4
         Me.gbLineasPellital.TabStop = False
         Me.gbLineasPellital.Text = "Lineas a Comparar"
@@ -964,6 +966,16 @@ Partial Class ComparacionesMensualesValorUnico
         Me.ckConsolidadoPellital.Text = "Consolidado"
         Me.ckConsolidadoPellital.UseVisualStyleBackColor = True
         '
+        'ckBlanqueadores
+        '
+        Me.ckBlanqueadores.AutoSize = True
+        Me.ckBlanqueadores.Location = New System.Drawing.Point(129, 137)
+        Me.ckBlanqueadores.Name = "ckBlanqueadores"
+        Me.ckBlanqueadores.Size = New System.Drawing.Size(126, 22)
+        Me.ckBlanqueadores.TabIndex = 1
+        Me.ckBlanqueadores.Text = "Blanqueadores"
+        Me.ckBlanqueadores.UseVisualStyleBackColor = True
+        '
         'ComparacionesMensualesValorUnico
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -979,13 +991,13 @@ Partial Class ComparacionesMensualesValorUnico
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GroupBox3)
-        Me.Controls.Add(Me.gbLineasPellital)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.cmbTipoGrafico)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.btnGenerar)
         Me.Controls.Add(Me.pnlAnios)
         Me.Controls.Add(Me.DataGridView1)
+        Me.Controls.Add(Me.gbLineasPellital)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Location = New System.Drawing.Point(10, 10)
         Me.MaximizeBox = False
@@ -1097,4 +1109,5 @@ Partial Class ComparacionesMensualesValorUnico
     Friend WithEvents ckRecurtientes As System.Windows.Forms.CheckBox
     Friend WithEvents ckAceitesNaturales As System.Windows.Forms.CheckBox
     Friend WithEvents ckConsolidadoPellital As System.Windows.Forms.CheckBox
+    Friend WithEvents ckBlanqueadores As System.Windows.Forms.CheckBox
 End Class
