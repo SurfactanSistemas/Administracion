@@ -117,14 +117,14 @@ Public Class ComparacionesMensualesValorUnico
 
     Private Function _ArmarBuscarFamilias() As String
         Dim chks As New List(Of CheckBox) From {ckQuimicos, ckColorantes, ckFarma, ckBiocidas, ckPapel, ckFazonPellital, _
-                                  ckFazonFarma, ckFazonQuimicos, ckVarios}
+                                  ckFazonFarma, ckFazonQuimicos, ckVarios, ckBlanqueadores}
 
         If Globales.EmpresaActual = 1 Then
             chks = New List(Of CheckBox) From {ckAceitesNaturales, ckRecurtientes, ckDepilantes, ckPurgasEnzimaticas, ckComplejantes, ckDesencalantes, ckBactericidas, ckColorantesPellital, ckVariosPellital}
         End If
 
         If (cmbPeriodo.SelectedIndex = 2 Or (rbDiaria.Checked And cmbPeriodo.SelectedIndex = 1)) And _EsConsolidado() Then
-            If Globales.EmpresaActual = 1 Then Return "Linea IN('1', '2', '3', '4', '5', '6', '7', '8', '9')"
+            If Globales.EmpresaActual = 1 Then Return "Linea IN('1', '2', '3', '4', '5', '6', '7', '8', '9', '10')"
             Return "Linea IN('1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11')"
         End If
 
@@ -866,7 +866,7 @@ Public Class ComparacionesMensualesValorUnico
 
         End If
 
-        For i = 1 To 9
+        For i = 1 To 10
 
             _rows = datos.Select("Tipo = '" & i & "'")
 
@@ -1835,7 +1835,7 @@ Public Class ComparacionesMensualesValorUnico
 
         If Globales.EmpresaActual = 1 Then Return {ckAceitesNaturales, ckRecurtientes, ckDepilantes, ckPurgasEnzimaticas, ckComplejantes, ckDesencalantes, ckBactericidas, ckColorantesPellital, ckVariosPellital}
 
-        Return {ckColorantes, ckFarma, ckFazonFarma, ckFazonPellital, ckFazonQuimicos, ckQuimicos, ckVarios, ckBiocidas, ckPapel}
+        Return {ckColorantes, ckFarma, ckFazonFarma, ckFazonPellital, ckFazonQuimicos, ckQuimicos, ckVarios, ckBiocidas, ckPapel, ckBlanqueadores}
 
     End Function
 
