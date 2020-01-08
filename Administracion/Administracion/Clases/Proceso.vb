@@ -405,13 +405,13 @@ Module Proceso
         Dim varTasa1(100) As Double
 
         varParametro(0) = 0
-        varParametro(1) = 5000 '2000
-        varParametro(2) = 10000 '4000
-        varParametro(3) = 15000 '8000
-        varParametro(4) = 20000 '14000
-        varParametro(5) = 30000 '24000
-        varParametro(6) = 40000 '1000000
-        varParametro(7) = 60000 '1000000
+        varParametro(1) = 8000 '5000 
+        varParametro(2) = 16000 '10000 
+        varParametro(3) = 24000 '15000 
+        varParametro(4) = 32000 '20000 
+        varParametro(5) = 48000 '30000 
+        varParametro(6) = 64000 '40000 
+        varParametro(7) = 96000 '60000 
         varParametro(8) = 1000000
 
         varTasa1(1) = 0.05 '0.1
@@ -433,7 +433,7 @@ Module Proceso
                 Case 1
                     varMinimo = 224000 '142400 '100000
                 Case 2
-                    varMinimo = 10700 '7500
+                    varMinimo = 16830 '10700 
                 Case 3 ' alq
                     varMinimo = 11200 '7120 '5000
                 Case 6
