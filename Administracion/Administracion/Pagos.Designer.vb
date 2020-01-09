@@ -68,6 +68,7 @@ Partial Class Pagos
         Me.Cuenta = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.UltTipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.CustomLabel17 = New Administracion.CustomLabel()
         Me.pnlDifCamXFactura = New System.Windows.Forms.Panel()
         Me.btnVolver = New System.Windows.Forms.Button()
         Me.btnAceptar = New System.Windows.Forms.Button()
@@ -143,7 +144,6 @@ Partial Class Pagos
         Me.btnCerrar = New Administracion.CustomButton()
         Me.btnLimpiar = New Administracion.CustomButton()
         Me.btnAgregar = New Administracion.CustomButton()
-        Me.CustomLabel17 = New Administracion.CustomLabel()
         Me.GroupBox1.SuspendLayout()
         CType(Me.gridPagos, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gridFormaPagos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -511,6 +511,18 @@ Partial Class Pagos
         Me.Panel2.Size = New System.Drawing.Size(778, 447)
         Me.Panel2.TabIndex = 73
         '
+        'CustomLabel17
+        '
+        Me.CustomLabel17.AutoSize = True
+        Me.CustomLabel17.ControlAssociationKey = 3
+        Me.CustomLabel17.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.CustomLabel17.ForeColor = System.Drawing.SystemColors.Control
+        Me.CustomLabel17.Location = New System.Drawing.Point(12, 20)
+        Me.CustomLabel17.Name = "CustomLabel17"
+        Me.CustomLabel17.Size = New System.Drawing.Size(99, 18)
+        Me.CustomLabel17.TabIndex = 132
+        Me.CustomLabel17.Text = "Orden de Pago"
+        '
         'pnlDifCamXFactura
         '
         Me.pnlDifCamXFactura.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
@@ -518,7 +530,7 @@ Partial Class Pagos
         Me.pnlDifCamXFactura.Controls.Add(Me.btnAceptar)
         Me.pnlDifCamXFactura.Controls.Add(Me.GridPagosXFacturas)
         Me.pnlDifCamXFactura.Controls.Add(Me.CustomLabel1)
-        Me.pnlDifCamXFactura.Location = New System.Drawing.Point(162, 76)
+        Me.pnlDifCamXFactura.Location = New System.Drawing.Point(164, 86)
         Me.pnlDifCamXFactura.Name = "pnlDifCamXFactura"
         Me.pnlDifCamXFactura.Size = New System.Drawing.Size(467, 300)
         Me.pnlDifCamXFactura.TabIndex = 131
@@ -1507,18 +1519,6 @@ Partial Class Pagos
         Me.ToolTip1.SetToolTip(Me.btnAgregar, "Ingresar Orden de Pago")
         Me.btnAgregar.UseVisualStyleBackColor = True
         '
-        'CustomLabel17
-        '
-        Me.CustomLabel17.AutoSize = True
-        Me.CustomLabel17.ControlAssociationKey = 3
-        Me.CustomLabel17.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.CustomLabel17.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel17.Location = New System.Drawing.Point(12, 20)
-        Me.CustomLabel17.Name = "CustomLabel17"
-        Me.CustomLabel17.Size = New System.Drawing.Size(99, 18)
-        Me.CustomLabel17.TabIndex = 132
-        Me.CustomLabel17.Text = "Orden de Pago"
-        '
         'Pagos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1540,8 +1540,8 @@ Partial Class Pagos
         Me.Name = "Pagos"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Text = "Ingreso de Pagos a Proveedores                                                   " & _
-            "                                                                     SURFACTAN S" & _
-            ".A."
+    "                                                                     SURFACTAN S" & _
+    ".A."
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         CType(Me.gridPagos, System.ComponentModel.ISupportInitialize).EndInit()
