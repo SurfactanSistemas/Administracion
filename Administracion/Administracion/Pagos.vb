@@ -1361,10 +1361,10 @@ Public Class Pagos
 
                     End If
 
-                    If WMarcaDifCambio = 1 Then
-                        ckNoCalcRetenciones.Checked = True
-                        ckNoCalcRetenciones_CheckedChanged(Nothing, Nothing)
-                    End If
+                    '    If WMarcaDifCambio = 1 Then
+                    '        ckNoCalcRetenciones.Checked = True
+                    '        ckNoCalcRetenciones_CheckedChanged(Nothing, Nothing)
+                    '    End If
 
                     With gridPagos.Rows(XRow)
                         .Cells(0).Value = XTipo
