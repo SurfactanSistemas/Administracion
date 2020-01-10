@@ -23,9 +23,12 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.txtFechaEmision = New System.Windows.Forms.MaskedTextBox()
         Me.GRilla = New System.Windows.Forms.DataGridView()
+        Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Razon = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.EnviarAviso = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -33,13 +36,6 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.GrupoConsultas = New System.Windows.Forms.Panel()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.btnImprimir = New Administracion.CustomButton()
-        Me.btnPantalla = New Administracion.CustomButton()
-        Me.btnLimpiarTodo = New Administracion.CustomButton()
-        Me.CustomButton1 = New Administracion.CustomButton()
-        Me.btnConsulta = New Administracion.CustomButton()
-        Me.btnCancela = New Administracion.CustomButton()
         Me.btnCerrarConsulta = New Administracion.CustomButton()
         Me.lstFiltrada = New Administracion.CustomListBox()
         Me.txtAyuda = New Administracion.CustomTextBox()
@@ -48,10 +44,14 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Me.CustomLabel3 = New Administracion.CustomLabel()
         Me.CustomLabel1 = New Administracion.CustomLabel()
         Me.txtDesdeProveedor = New Administracion.CustomTextBox()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.btnImprimir = New Administracion.CustomButton()
+        Me.btnPantalla = New Administracion.CustomButton()
+        Me.btnLimpiarTodo = New Administracion.CustomButton()
+        Me.CustomButton1 = New Administracion.CustomButton()
+        Me.btnConsulta = New Administracion.CustomButton()
+        Me.btnCancela = New Administracion.CustomButton()
         Me.lstAyuda_Filtrada = New Administracion.CustomListBox()
-        Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Razon = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.EnviarAviso = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.GRilla, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -82,6 +82,31 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Me.GRilla.Size = New System.Drawing.Size(557, 271)
         Me.GRilla.StandardTab = True
         Me.GRilla.TabIndex = 52
+        '
+        'Codigo
+        '
+        Me.Codigo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Codigo.HeaderText = "Codigo"
+        Me.Codigo.MaxInputLength = 11
+        Me.Codigo.Name = "Codigo"
+        Me.Codigo.Width = 65
+        '
+        'Razon
+        '
+        Me.Razon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Razon.HeaderText = "Razon Social"
+        Me.Razon.Name = "Razon"
+        '
+        'EnviarAviso
+        '
+        Me.EnviarAviso.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.EnviarAviso.DefaultCellStyle = DataGridViewCellStyle1
+        Me.EnviarAviso.HeaderText = "Env. Aviso"
+        Me.EnviarAviso.Name = "EnviarAviso"
+        Me.EnviarAviso.ReadOnly = True
+        Me.EnviarAviso.Width = 83
         '
         'Panel1
         '
@@ -160,6 +185,116 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Consulta"
+        '
+        'btnCerrarConsulta
+        '
+        Me.btnCerrarConsulta.BackColor = System.Drawing.SystemColors.Control
+        Me.btnCerrarConsulta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnCerrarConsulta.Cleanable = False
+        Me.btnCerrarConsulta.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnCerrarConsulta.EnterIndex = -1
+        Me.btnCerrarConsulta.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnCerrarConsulta.FlatAppearance.BorderSize = 0
+        Me.btnCerrarConsulta.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnCerrarConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnCerrarConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCerrarConsulta.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.btnCerrarConsulta.LabelAssociationKey = -1
+        Me.btnCerrarConsulta.Location = New System.Drawing.Point(155, 196)
+        Me.btnCerrarConsulta.Name = "btnCerrarConsulta"
+        Me.btnCerrarConsulta.Size = New System.Drawing.Size(78, 23)
+        Me.btnCerrarConsulta.TabIndex = 63
+        Me.btnCerrarConsulta.Text = "Cerrar Consulta"
+        Me.ToolTip1.SetToolTip(Me.btnCerrarConsulta, "Cerrar Ventana")
+        Me.btnCerrarConsulta.UseVisualStyleBackColor = False
+        '
+        'lstFiltrada
+        '
+        Me.lstFiltrada.Cleanable = False
+        Me.lstFiltrada.EnterIndex = -1
+        Me.lstFiltrada.FormattingEnabled = True
+        Me.lstFiltrada.LabelAssociationKey = -1
+        Me.lstFiltrada.Location = New System.Drawing.Point(10, 43)
+        Me.lstFiltrada.Name = "lstFiltrada"
+        Me.lstFiltrada.Size = New System.Drawing.Size(368, 147)
+        Me.lstFiltrada.TabIndex = 62
+        Me.lstFiltrada.Visible = False
+        '
+        'txtAyuda
+        '
+        Me.txtAyuda.Cleanable = False
+        Me.txtAyuda.Empty = True
+        Me.txtAyuda.EnterIndex = -1
+        Me.txtAyuda.LabelAssociationKey = -1
+        Me.txtAyuda.Location = New System.Drawing.Point(10, 17)
+        Me.txtAyuda.Name = "txtAyuda"
+        Me.txtAyuda.Size = New System.Drawing.Size(368, 20)
+        Me.txtAyuda.TabIndex = 53
+        Me.txtAyuda.Validator = Administracion.ValidatorType.None
+        '
+        'lstAyuda
+        '
+        Me.lstAyuda.Cleanable = False
+        Me.lstAyuda.EnterIndex = -1
+        Me.lstAyuda.FormattingEnabled = True
+        Me.lstAyuda.LabelAssociationKey = -1
+        Me.lstAyuda.Location = New System.Drawing.Point(10, 43)
+        Me.lstAyuda.Name = "lstAyuda"
+        Me.lstAyuda.Size = New System.Drawing.Size(368, 147)
+        Me.lstAyuda.TabIndex = 54
+        '
+        'txtRazon
+        '
+        Me.txtRazon.BackColor = System.Drawing.Color.Silver
+        Me.txtRazon.Cleanable = False
+        Me.txtRazon.Empty = True
+        Me.txtRazon.EnterIndex = -1
+        Me.txtRazon.LabelAssociationKey = -1
+        Me.txtRazon.Location = New System.Drawing.Point(248, 38)
+        Me.txtRazon.Name = "txtRazon"
+        Me.txtRazon.Size = New System.Drawing.Size(296, 20)
+        Me.txtRazon.TabIndex = 51
+        Me.txtRazon.Validator = Administracion.ValidatorType.None
+        '
+        'CustomLabel3
+        '
+        Me.CustomLabel3.AutoSize = True
+        Me.CustomLabel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.CustomLabel3.ControlAssociationKey = -1
+        Me.CustomLabel3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.CustomLabel3.ForeColor = System.Drawing.SystemColors.Control
+        Me.CustomLabel3.Location = New System.Drawing.Point(29, 14)
+        Me.CustomLabel3.Name = "CustomLabel3"
+        Me.CustomLabel3.Size = New System.Drawing.Size(96, 18)
+        Me.CustomLabel3.TabIndex = 47
+        Me.CustomLabel3.Text = "Fecha de Pago"
+        '
+        'CustomLabel1
+        '
+        Me.CustomLabel1.AutoSize = True
+        Me.CustomLabel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.CustomLabel1.ControlAssociationKey = -1
+        Me.CustomLabel1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.CustomLabel1.ForeColor = System.Drawing.SystemColors.Control
+        Me.CustomLabel1.Location = New System.Drawing.Point(49, 40)
+        Me.CustomLabel1.Name = "CustomLabel1"
+        Me.CustomLabel1.Size = New System.Drawing.Size(73, 18)
+        Me.CustomLabel1.TabIndex = 50
+        Me.CustomLabel1.Text = "Proveedor"
+        '
+        'txtDesdeProveedor
+        '
+        Me.txtDesdeProveedor.Cleanable = False
+        Me.txtDesdeProveedor.Empty = True
+        Me.txtDesdeProveedor.EnterIndex = -1
+        Me.txtDesdeProveedor.LabelAssociationKey = -1
+        Me.txtDesdeProveedor.Location = New System.Drawing.Point(130, 38)
+        Me.txtDesdeProveedor.MaxLength = 11
+        Me.txtDesdeProveedor.Name = "txtDesdeProveedor"
+        Me.txtDesdeProveedor.Size = New System.Drawing.Size(100, 20)
+        Me.txtDesdeProveedor.TabIndex = 49
+        Me.ToolTip1.SetToolTip(Me.txtDesdeProveedor, "Doble Click: Abrir Consulta de Proveedores")
+        Me.txtDesdeProveedor.Validator = Administracion.ValidatorType.None
         '
         'btnImprimir
         '
@@ -281,116 +416,6 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Me.ToolTip1.SetToolTip(Me.btnCancela, "Cerrar Ventana")
         Me.btnCancela.UseVisualStyleBackColor = True
         '
-        'btnCerrarConsulta
-        '
-        Me.btnCerrarConsulta.BackColor = System.Drawing.SystemColors.Control
-        Me.btnCerrarConsulta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnCerrarConsulta.Cleanable = False
-        Me.btnCerrarConsulta.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnCerrarConsulta.EnterIndex = -1
-        Me.btnCerrarConsulta.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnCerrarConsulta.FlatAppearance.BorderSize = 0
-        Me.btnCerrarConsulta.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnCerrarConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnCerrarConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCerrarConsulta.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.btnCerrarConsulta.LabelAssociationKey = -1
-        Me.btnCerrarConsulta.Location = New System.Drawing.Point(155, 196)
-        Me.btnCerrarConsulta.Name = "btnCerrarConsulta"
-        Me.btnCerrarConsulta.Size = New System.Drawing.Size(78, 23)
-        Me.btnCerrarConsulta.TabIndex = 63
-        Me.btnCerrarConsulta.Text = "Cerrar Consulta"
-        Me.ToolTip1.SetToolTip(Me.btnCerrarConsulta, "Cerrar Ventana")
-        Me.btnCerrarConsulta.UseVisualStyleBackColor = False
-        '
-        'lstFiltrada
-        '
-        Me.lstFiltrada.Cleanable = False
-        Me.lstFiltrada.EnterIndex = -1
-        Me.lstFiltrada.FormattingEnabled = True
-        Me.lstFiltrada.LabelAssociationKey = -1
-        Me.lstFiltrada.Location = New System.Drawing.Point(10, 43)
-        Me.lstFiltrada.Name = "lstFiltrada"
-        Me.lstFiltrada.Size = New System.Drawing.Size(368, 147)
-        Me.lstFiltrada.TabIndex = 62
-        Me.lstFiltrada.Visible = False
-        '
-        'txtAyuda
-        '
-        Me.txtAyuda.Cleanable = False
-        Me.txtAyuda.Empty = True
-        Me.txtAyuda.EnterIndex = -1
-        Me.txtAyuda.LabelAssociationKey = -1
-        Me.txtAyuda.Location = New System.Drawing.Point(10, 17)
-        Me.txtAyuda.Name = "txtAyuda"
-        Me.txtAyuda.Size = New System.Drawing.Size(368, 20)
-        Me.txtAyuda.TabIndex = 53
-        Me.txtAyuda.Validator = Administracion.ValidatorType.None
-        '
-        'lstAyuda
-        '
-        Me.lstAyuda.Cleanable = False
-        Me.lstAyuda.EnterIndex = -1
-        Me.lstAyuda.FormattingEnabled = True
-        Me.lstAyuda.LabelAssociationKey = -1
-        Me.lstAyuda.Location = New System.Drawing.Point(10, 43)
-        Me.lstAyuda.Name = "lstAyuda"
-        Me.lstAyuda.Size = New System.Drawing.Size(368, 147)
-        Me.lstAyuda.TabIndex = 54
-        '
-        'txtRazon
-        '
-        Me.txtRazon.BackColor = System.Drawing.Color.Silver
-        Me.txtRazon.Cleanable = False
-        Me.txtRazon.Empty = True
-        Me.txtRazon.EnterIndex = -1
-        Me.txtRazon.LabelAssociationKey = -1
-        Me.txtRazon.Location = New System.Drawing.Point(248, 38)
-        Me.txtRazon.Name = "txtRazon"
-        Me.txtRazon.Size = New System.Drawing.Size(296, 20)
-        Me.txtRazon.TabIndex = 51
-        Me.txtRazon.Validator = Administracion.ValidatorType.None
-        '
-        'CustomLabel3
-        '
-        Me.CustomLabel3.AutoSize = True
-        Me.CustomLabel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.CustomLabel3.ControlAssociationKey = -1
-        Me.CustomLabel3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.CustomLabel3.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel3.Location = New System.Drawing.Point(29, 14)
-        Me.CustomLabel3.Name = "CustomLabel3"
-        Me.CustomLabel3.Size = New System.Drawing.Size(96, 18)
-        Me.CustomLabel3.TabIndex = 47
-        Me.CustomLabel3.Text = "Fecha de Pago"
-        '
-        'CustomLabel1
-        '
-        Me.CustomLabel1.AutoSize = True
-        Me.CustomLabel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.CustomLabel1.ControlAssociationKey = -1
-        Me.CustomLabel1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.CustomLabel1.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel1.Location = New System.Drawing.Point(49, 40)
-        Me.CustomLabel1.Name = "CustomLabel1"
-        Me.CustomLabel1.Size = New System.Drawing.Size(73, 18)
-        Me.CustomLabel1.TabIndex = 50
-        Me.CustomLabel1.Text = "Proveedor"
-        '
-        'txtDesdeProveedor
-        '
-        Me.txtDesdeProveedor.Cleanable = False
-        Me.txtDesdeProveedor.Empty = True
-        Me.txtDesdeProveedor.EnterIndex = -1
-        Me.txtDesdeProveedor.LabelAssociationKey = -1
-        Me.txtDesdeProveedor.Location = New System.Drawing.Point(130, 38)
-        Me.txtDesdeProveedor.MaxLength = 11
-        Me.txtDesdeProveedor.Name = "txtDesdeProveedor"
-        Me.txtDesdeProveedor.Size = New System.Drawing.Size(100, 20)
-        Me.txtDesdeProveedor.TabIndex = 49
-        Me.ToolTip1.SetToolTip(Me.txtDesdeProveedor, "Doble Click: Abrir Consulta de Proveedores")
-        Me.txtDesdeProveedor.Validator = Administracion.ValidatorType.None
-        '
         'lstAyuda_Filtrada
         '
         Me.lstAyuda_Filtrada.Cleanable = False
@@ -402,31 +427,6 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Me.lstAyuda_Filtrada.Size = New System.Drawing.Size(545, 147)
         Me.lstAyuda_Filtrada.TabIndex = 62
         Me.lstAyuda_Filtrada.Visible = False
-        '
-        'Codigo
-        '
-        Me.Codigo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Codigo.HeaderText = "Codigo"
-        Me.Codigo.MaxInputLength = 11
-        Me.Codigo.Name = "Codigo"
-        Me.Codigo.Width = 65
-        '
-        'Razon
-        '
-        Me.Razon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.Razon.HeaderText = "Razon Social"
-        Me.Razon.Name = "Razon"
-        '
-        'EnviarAviso
-        '
-        Me.EnviarAviso.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.EnviarAviso.DefaultCellStyle = DataGridViewCellStyle2
-        Me.EnviarAviso.HeaderText = "Env. Aviso"
-        Me.EnviarAviso.Name = "EnviarAviso"
-        Me.EnviarAviso.ReadOnly = True
-        Me.EnviarAviso.Width = 83
         '
         'ListadoCuentaCorrienteProveedoresSelectivoPrueba
         '
