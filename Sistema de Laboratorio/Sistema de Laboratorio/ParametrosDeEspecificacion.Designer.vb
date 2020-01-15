@@ -1,8 +1,8 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class DefinicionFormulaEspecificacion
+Partial Class ParametrosDeEspecificacion
     Inherits System.Windows.Forms.Form
 
-    'Form overrides dispose to clean up the component list.
+    'Form reemplaza a Dispose para limpiar la lista de componentes.
     <System.Diagnostics.DebuggerNonUserCode()> _
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
@@ -14,17 +14,21 @@ Partial Class DefinicionFormulaEspecificacion
         End Try
     End Sub
 
-    'Required by the Windows Form Designer
+    'Requerido por el Diseñador de Windows Forms
     Private components As System.ComponentModel.IContainer
 
-    'NOTE: The following procedure is required by the Windows Form Designer
-    'It can be modified using the Windows Form Designer.  
-    'Do not modify it using the code editor.
+    'NOTA: el Diseñador de Windows Forms necesita el siguiente procedimiento
+    'Se puede modificar usando el Diseñador de Windows Forms.  
+    'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.btnCancelar = New System.Windows.Forms.Button()
+        Me.btnAceptar = New System.Windows.Forms.Button()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.txtDescripcion = New System.Windows.Forms.TextBox()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.txtFormula = New System.Windows.Forms.TextBox()
+        Me.Label13 = New System.Windows.Forms.Label()
         Me.gbVariables = New System.Windows.Forms.GroupBox()
         Me.txtVar8 = New System.Windows.Forms.TextBox()
         Me.txtVar4 = New System.Windows.Forms.TextBox()
@@ -46,53 +50,82 @@ Partial Class DefinicionFormulaEspecificacion
         Me.txtVar1 = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.txtFormula = New System.Windows.Forms.TextBox()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.btnAceptar = New System.Windows.Forms.Button()
-        Me.btnCancelar = New System.Windows.Forms.Button()
-        Me.btnAyudaFormula = New System.Windows.Forms.Button()
-        Me.Panel1.SuspendLayout()
-        Me.gbVariables.SuspendLayout()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox2.SuspendLayout()
+        Me.gbVariables.SuspendLayout()
+        Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
-        'Panel1
+        'btnCancelar
         '
-        Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(32, Byte), Integer), CType(CType(74, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.Panel1.Controls.Add(Me.Label2)
-        Me.Panel1.Controls.Add(Me.Label1)
-        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel1.Location = New System.Drawing.Point(0, 0)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(577, 49)
-        Me.Panel1.TabIndex = 4
+        Me.btnCancelar.Location = New System.Drawing.Point(286, 292)
+        Me.btnCancelar.Name = "btnCancelar"
+        Me.btnCancelar.Size = New System.Drawing.Size(201, 36)
+        Me.btnCancelar.TabIndex = 11
+        Me.btnCancelar.Text = "CANCELAR"
+        Me.btnCancelar.UseVisualStyleBackColor = True
         '
-        'Label2
+        'btnAceptar
         '
-        Me.Label2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label2.Location = New System.Drawing.Point(422, 15)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(143, 18)
-        Me.Label2.TabIndex = 0
-        Me.Label2.Text = "SURFACTAN S.A."
+        Me.btnAceptar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAceptar.Location = New System.Drawing.Point(71, 292)
+        Me.btnAceptar.Name = "btnAceptar"
+        Me.btnAceptar.Size = New System.Drawing.Size(201, 36)
+        Me.btnAceptar.TabIndex = 12
+        Me.btnAceptar.Text = "ACEPTAR"
+        Me.btnAceptar.UseVisualStyleBackColor = True
         '
-        'Label1
+        'GroupBox2
         '
-        Me.Label1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label1.Location = New System.Drawing.Point(12, 18)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(218, 13)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "PARÁMETROS DE ESPECIFICACIÓN"
+        Me.GroupBox2.Controls.Add(Me.txtDescripcion)
+        Me.GroupBox2.Controls.Add(Me.Label14)
+        Me.GroupBox2.Controls.Add(Me.txtFormula)
+        Me.GroupBox2.Controls.Add(Me.Label13)
+        Me.GroupBox2.Location = New System.Drawing.Point(6, 189)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(546, 97)
+        Me.GroupBox2.TabIndex = 10
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Fórmula"
+        '
+        'txtDescripcion
+        '
+        Me.txtDescripcion.Location = New System.Drawing.Point(87, 48)
+        Me.txtDescripcion.MaxLength = 200
+        Me.txtDescripcion.Multiline = True
+        Me.txtDescripcion.Name = "txtDescripcion"
+        Me.txtDescripcion.Size = New System.Drawing.Size(436, 43)
+        Me.txtDescripcion.TabIndex = 3
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(15, 51)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(66, 13)
+        Me.Label14.TabIndex = 2
+        Me.Label14.Text = "Descripcion:"
+        '
+        'txtFormula
+        '
+        Me.txtFormula.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtFormula.Location = New System.Drawing.Point(87, 22)
+        Me.txtFormula.MaxLength = 100
+        Me.txtFormula.Name = "txtFormula"
+        Me.txtFormula.Size = New System.Drawing.Size(436, 20)
+        Me.txtFormula.TabIndex = 1
+        Me.txtFormula.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(24, 25)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(57, 13)
+        Me.Label13.TabIndex = 0
+        Me.Label13.Text = "Definición:"
         '
         'gbVariables
         '
@@ -116,10 +149,10 @@ Partial Class DefinicionFormulaEspecificacion
         Me.gbVariables.Controls.Add(Me.txtVar1)
         Me.gbVariables.Controls.Add(Me.Label7)
         Me.gbVariables.Controls.Add(Me.Label3)
-        Me.gbVariables.Location = New System.Drawing.Point(5, 51)
+        Me.gbVariables.Location = New System.Drawing.Point(5, 59)
         Me.gbVariables.Name = "gbVariables"
-        Me.gbVariables.Size = New System.Drawing.Size(560, 129)
-        Me.gbVariables.TabIndex = 5
+        Me.gbVariables.Size = New System.Drawing.Size(548, 129)
+        Me.gbVariables.TabIndex = 9
         Me.gbVariables.TabStop = False
         Me.gbVariables.Text = "Configuración de Variables"
         '
@@ -313,90 +346,71 @@ Partial Class DefinicionFormulaEspecificacion
         Me.Label3.TabIndex = 0
         Me.Label3.Text = "1)"
         '
-        'GroupBox2
+        'Panel1
         '
-        Me.GroupBox2.Controls.Add(Me.btnAyudaFormula)
-        Me.GroupBox2.Controls.Add(Me.txtFormula)
-        Me.GroupBox2.Controls.Add(Me.Label13)
-        Me.GroupBox2.Location = New System.Drawing.Point(6, 181)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(559, 58)
-        Me.GroupBox2.TabIndex = 6
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Fórmula"
+        Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(32, Byte), Integer), CType(CType(74, Byte), Integer), CType(CType(95, Byte), Integer))
+        Me.Panel1.Controls.Add(Me.Label2)
+        Me.Panel1.Controls.Add(Me.Label1)
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel1.Location = New System.Drawing.Point(0, 0)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(562, 49)
+        Me.Panel1.TabIndex = 8
         '
-        'txtFormula
+        'Label2
         '
-        Me.txtFormula.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.txtFormula.Location = New System.Drawing.Point(87, 22)
-        Me.txtFormula.MaxLength = 100
-        Me.txtFormula.Name = "txtFormula"
-        Me.txtFormula.Size = New System.Drawing.Size(436, 20)
-        Me.txtFormula.TabIndex = 1
-        Me.txtFormula.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.Label2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label2.Location = New System.Drawing.Point(407, 15)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(143, 18)
+        Me.Label2.TabIndex = 0
+        Me.Label2.Text = "SURFACTAN S.A."
         '
-        'Label13
+        'Label1
         '
-        Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(24, 25)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(57, 13)
-        Me.Label13.TabIndex = 0
-        Me.Label13.Text = "Definición:"
+        Me.Label1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label1.Location = New System.Drawing.Point(12, 18)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(218, 13)
+        Me.Label1.TabIndex = 0
+        Me.Label1.Text = "PARÁMETROS DE ESPECIFICACIÓN"
         '
-        'btnAceptar
-        '
-        Me.btnAceptar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAceptar.Location = New System.Drawing.Point(71, 248)
-        Me.btnAceptar.Name = "btnAceptar"
-        Me.btnAceptar.Size = New System.Drawing.Size(201, 36)
-        Me.btnAceptar.TabIndex = 7
-        Me.btnAceptar.Text = "ACEPTAR"
-        Me.btnAceptar.UseVisualStyleBackColor = True
-        '
-        'btnCancelar
-        '
-        Me.btnCancelar.Location = New System.Drawing.Point(286, 248)
-        Me.btnCancelar.Name = "btnCancelar"
-        Me.btnCancelar.Size = New System.Drawing.Size(201, 36)
-        Me.btnCancelar.TabIndex = 7
-        Me.btnCancelar.Text = "CANCELAR"
-        Me.btnCancelar.UseVisualStyleBackColor = True
-        '
-        'btnAyudaFormula
-        '
-        Me.btnAyudaFormula.BackgroundImage = Global.Laboratorio.My.Resources.Resources.Consulta_Dat_N1
-        Me.btnAyudaFormula.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnAyudaFormula.Location = New System.Drawing.Point(530, 18)
-        Me.btnAyudaFormula.Name = "btnAyudaFormula"
-        Me.btnAyudaFormula.Size = New System.Drawing.Size(23, 23)
-        Me.btnAyudaFormula.TabIndex = 2
-        Me.btnAyudaFormula.UseVisualStyleBackColor = True
-        '
-        'DefinicionFormulaEspecificacion
+        'ParametrosDeEspecificacion
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(577, 295)
+        Me.ClientSize = New System.Drawing.Size(562, 336)
         Me.Controls.Add(Me.btnCancelar)
         Me.Controls.Add(Me.btnAceptar)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.gbVariables)
         Me.Controls.Add(Me.Panel1)
-        Me.Name = "DefinicionFormulaEspecificacion"
-        Me.ShowIcon = False
-        Me.Panel1.ResumeLayout(False)
-        Me.Panel1.PerformLayout()
-        Me.gbVariables.ResumeLayout(False)
-        Me.gbVariables.PerformLayout()
+        Me.Name = "ParametrosDeEspecificacion"
+        Me.Text = "IParametrosDeEspecificacion"
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
+        Me.gbVariables.ResumeLayout(False)
+        Me.gbVariables.PerformLayout()
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents Panel1 As System.Windows.Forms.Panel
-    Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents btnCancelar As System.Windows.Forms.Button
+    Friend WithEvents btnAceptar As System.Windows.Forms.Button
+    Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
+    Friend WithEvents txtDescripcion As System.Windows.Forms.TextBox
+    Friend WithEvents Label14 As System.Windows.Forms.Label
+    Friend WithEvents txtFormula As System.Windows.Forms.TextBox
+    Friend WithEvents Label13 As System.Windows.Forms.Label
     Friend WithEvents gbVariables As System.Windows.Forms.GroupBox
     Friend WithEvents txtVar8 As System.Windows.Forms.TextBox
     Friend WithEvents txtVar4 As System.Windows.Forms.TextBox
@@ -418,10 +432,7 @@ Partial Class DefinicionFormulaEspecificacion
     Friend WithEvents txtVar1 As System.Windows.Forms.TextBox
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
-    Friend WithEvents txtFormula As System.Windows.Forms.TextBox
-    Friend WithEvents Label13 As System.Windows.Forms.Label
-    Friend WithEvents btnAceptar As System.Windows.Forms.Button
-    Friend WithEvents btnCancelar As System.Windows.Forms.Button
-    Friend WithEvents btnAyudaFormula As System.Windows.Forms.Button
+    Friend WithEvents Panel1 As System.Windows.Forms.Panel
+    Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents Label1 As System.Windows.Forms.Label
 End Class

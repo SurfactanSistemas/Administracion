@@ -10,7 +10,7 @@
         Dim WDatos As New DataTable
 
         If UCase(Tipo) = "M" Then
-
+            WDatos = _TraerHistorialCambiosMP(Codigo)
         Else
             WDatos = _TraerHistorialCambiosPT(Codigo)
         End If
@@ -26,6 +26,14 @@
         Dim WBase As String = IIf(_EsPellital, "Pelitall_II", "Surfactan_II")
 
         Return GetAll("SELECT Version, FechaInicio, FechaFinal, RTRIM(ControlCambio) As ControlCambio FROM EspecifUnificaVersion WHERE Producto = '" & codigo & "' Order by Version", WBase)
+
+    End Function
+
+    Private Function _TraerHistorialCambiosMP(ByVal codigo As String) As DataTable
+
+        Dim WBase As String = IIf(_EsPellital, "Pelitall_II", "Surfactan_II")
+
+        Return GetAll("SELECT Version, FechaInicio, FechaFinal, RTRIM(ControlCambio) As ControlCambio FROM EspecificacionesUnificaVersion WHERE Producto = '" & codigo & "' Order by Version", WBase)
 
     End Function
 

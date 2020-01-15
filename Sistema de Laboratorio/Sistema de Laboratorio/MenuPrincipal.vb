@@ -175,4 +175,10 @@
             .Show(Me)
         End With
     End Sub
+
+    Private Sub IngresoFormulasDeEnsayosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles IngresoFormulasDeEnsayosToolStripMenuItem.Click
+        With New IngresoFormulasEnsayo
+            .Show(Me)
+        End With
+    End Sub
 End Class

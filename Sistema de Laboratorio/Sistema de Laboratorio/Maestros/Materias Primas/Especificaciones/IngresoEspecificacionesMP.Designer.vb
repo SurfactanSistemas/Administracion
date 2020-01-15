@@ -25,24 +25,38 @@ Partial Class IngresoEspecificacionesMP
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnNotas = New System.Windows.Forms.Button()
+        Me.btnAgregarRenglon = New System.Windows.Forms.Button()
+        Me.txtCas = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.txtFecha = New System.Windows.Forms.TextBox()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.txtVersion = New System.Windows.Forms.TextBox()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.txtOperador = New System.Windows.Forms.TextBox()
+        Me.Label7 = New System.Windows.Forms.Label()
         Me.btnHistorialCambios = New System.Windows.Forms.Button()
         Me.btnImpresion = New System.Windows.Forms.Button()
         Me.btnConsultas = New System.Windows.Forms.Button()
         Me.btnSalir = New System.Windows.Forms.Button()
         Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.btnGrabar = New System.Windows.Forms.Button()
+        Me.txtCondicionMuestreo = New System.Windows.Forms.TextBox()
         Me.txtControlCambios = New System.Windows.Forms.TextBox()
+        Me.txtDescIngles = New System.Windows.Forms.TextBox()
         Me.txtDescTerminado = New System.Windows.Forms.TextBox()
         Me.txtCodigo = New System.Windows.Forms.MaskedTextBox()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
@@ -77,18 +91,6 @@ Partial Class IngresoEspecificacionesMP
         Me.FarmacopeaIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.UnidadEspecifIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.txtCondicionMuestreo = New System.Windows.Forms.TextBox()
-        Me.txtDescIngles = New System.Windows.Forms.TextBox()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.txtOperador = New System.Windows.Forms.TextBox()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.txtVersion = New System.Windows.Forms.TextBox()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.txtFecha = New System.Windows.Forms.TextBox()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.txtCas = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -137,6 +139,8 @@ Partial Class IngresoEspecificacionesMP
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.btnNotas)
+        Me.GroupBox1.Controls.Add(Me.btnAgregarRenglon)
         Me.GroupBox1.Controls.Add(Me.txtCas)
         Me.GroupBox1.Controls.Add(Me.Label10)
         Me.GroupBox1.Controls.Add(Me.txtFecha)
@@ -160,25 +164,134 @@ Partial Class IngresoEspecificacionesMP
         Me.GroupBox1.Controls.Add(Me.Label5)
         Me.GroupBox1.Controls.Add(Me.Label6)
         Me.GroupBox1.Controls.Add(Me.Label3)
-        Me.GroupBox1.Location = New System.Drawing.Point(8, 51)
+        Me.GroupBox1.Location = New System.Drawing.Point(8, 55)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(899, 133)
+        Me.GroupBox1.Size = New System.Drawing.Size(899, 159)
         Me.GroupBox1.TabIndex = 3
         Me.GroupBox1.TabStop = False
         '
+        'btnNotas
+        '
+        Me.btnNotas.Location = New System.Drawing.Point(652, 90)
+        Me.btnNotas.Name = "btnNotas"
+        Me.btnNotas.Size = New System.Drawing.Size(112, 30)
+        Me.btnNotas.TabIndex = 9
+        Me.btnNotas.Text = "NOTAS"
+        Me.btnNotas.UseVisualStyleBackColor = True
+        '
+        'btnAgregarRenglon
+        '
+        Me.btnAgregarRenglon.Location = New System.Drawing.Point(652, 60)
+        Me.btnAgregarRenglon.Name = "btnAgregarRenglon"
+        Me.btnAgregarRenglon.Size = New System.Drawing.Size(112, 28)
+        Me.btnAgregarRenglon.TabIndex = 8
+        Me.btnAgregarRenglon.Text = "Agregar Renglon"
+        Me.btnAgregarRenglon.UseVisualStyleBackColor = True
+        '
+        'txtCas
+        '
+        Me.txtCas.BackColor = System.Drawing.Color.Cyan
+        Me.txtCas.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtCas.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCas.Location = New System.Drawing.Point(818, 140)
+        Me.txtCas.Name = "txtCas"
+        Me.txtCas.ReadOnly = True
+        Me.txtCas.Size = New System.Drawing.Size(64, 18)
+        Me.txtCas.TabIndex = 7
+        Me.txtCas.TabStop = False
+        Me.txtCas.Text = "NOMBRE DE PRODUCTO TEMINADO"
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.Location = New System.Drawing.Point(789, 143)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(31, 13)
+        Me.Label10.TabIndex = 6
+        Me.Label10.Text = "CAS:"
+        '
+        'txtFecha
+        '
+        Me.txtFecha.BackColor = System.Drawing.Color.Cyan
+        Me.txtFecha.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFecha.Location = New System.Drawing.Point(736, 140)
+        Me.txtFecha.Name = "txtFecha"
+        Me.txtFecha.ReadOnly = True
+        Me.txtFecha.Size = New System.Drawing.Size(53, 18)
+        Me.txtFecha.TabIndex = 7
+        Me.txtFecha.TabStop = False
+        Me.txtFecha.Text = "NOMBRE DE PRODUCTO TEMINADO"
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.Location = New System.Drawing.Point(708, 143)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(27, 13)
+        Me.Label9.TabIndex = 6
+        Me.Label9.Text = "Fec:"
+        '
+        'txtVersion
+        '
+        Me.txtVersion.BackColor = System.Drawing.Color.Cyan
+        Me.txtVersion.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtVersion.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtVersion.Location = New System.Drawing.Point(680, 140)
+        Me.txtVersion.Name = "txtVersion"
+        Me.txtVersion.ReadOnly = True
+        Me.txtVersion.Size = New System.Drawing.Size(25, 18)
+        Me.txtVersion.TabIndex = 7
+        Me.txtVersion.TabStop = False
+        Me.txtVersion.Text = "NOMBRE DE PRODUCTO TEMINADO"
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(653, 143)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(26, 13)
+        Me.Label8.TabIndex = 6
+        Me.Label8.Text = "Ver:"
+        '
+        'txtOperador
+        '
+        Me.txtOperador.BackColor = System.Drawing.Color.Cyan
+        Me.txtOperador.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtOperador.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtOperador.Location = New System.Drawing.Point(680, 120)
+        Me.txtOperador.Name = "txtOperador"
+        Me.txtOperador.ReadOnly = True
+        Me.txtOperador.Size = New System.Drawing.Size(202, 18)
+        Me.txtOperador.TabIndex = 7
+        Me.txtOperador.TabStop = False
+        Me.txtOperador.Text = "NOMBRE DE PRODUCTO TEMINADO"
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(653, 123)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(24, 13)
+        Me.Label7.TabIndex = 6
+        Me.Label7.Text = "Op:"
+        '
         'btnHistorialCambios
         '
-        Me.btnHistorialCambios.Location = New System.Drawing.Point(652, 62)
+        Me.btnHistorialCambios.Location = New System.Drawing.Point(770, 90)
         Me.btnHistorialCambios.Name = "btnHistorialCambios"
         Me.btnHistorialCambios.Size = New System.Drawing.Size(112, 30)
         Me.btnHistorialCambios.TabIndex = 5
         Me.btnHistorialCambios.Text = "Historial de Cambios"
         Me.btnHistorialCambios.UseVisualStyleBackColor = True
-        Me.btnHistorialCambios.Visible = False
         '
         'btnImpresion
         '
-        Me.btnImpresion.Location = New System.Drawing.Point(770, 63)
+        Me.btnImpresion.Location = New System.Drawing.Point(770, 60)
         Me.btnImpresion.Name = "btnImpresion"
         Me.btnImpresion.Size = New System.Drawing.Size(112, 28)
         Me.btnImpresion.TabIndex = 4
@@ -187,7 +300,7 @@ Partial Class IngresoEspecificacionesMP
         '
         'btnConsultas
         '
-        Me.btnConsultas.Location = New System.Drawing.Point(652, 34)
+        Me.btnConsultas.Location = New System.Drawing.Point(652, 31)
         Me.btnConsultas.Name = "btnConsultas"
         Me.btnConsultas.Size = New System.Drawing.Size(112, 28)
         Me.btnConsultas.TabIndex = 4
@@ -196,7 +309,7 @@ Partial Class IngresoEspecificacionesMP
         '
         'btnSalir
         '
-        Me.btnSalir.Location = New System.Drawing.Point(770, 34)
+        Me.btnSalir.Location = New System.Drawing.Point(770, 31)
         Me.btnSalir.Name = "btnSalir"
         Me.btnSalir.Size = New System.Drawing.Size(112, 28)
         Me.btnSalir.TabIndex = 4
@@ -205,7 +318,7 @@ Partial Class IngresoEspecificacionesMP
         '
         'btnLimpiar
         '
-        Me.btnLimpiar.Location = New System.Drawing.Point(770, 9)
+        Me.btnLimpiar.Location = New System.Drawing.Point(770, 6)
         Me.btnLimpiar.Name = "btnLimpiar"
         Me.btnLimpiar.Size = New System.Drawing.Size(112, 24)
         Me.btnLimpiar.TabIndex = 4
@@ -215,12 +328,23 @@ Partial Class IngresoEspecificacionesMP
         'btnGrabar
         '
         Me.btnGrabar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnGrabar.Location = New System.Drawing.Point(652, 9)
+        Me.btnGrabar.Location = New System.Drawing.Point(652, 6)
         Me.btnGrabar.Name = "btnGrabar"
         Me.btnGrabar.Size = New System.Drawing.Size(112, 24)
         Me.btnGrabar.TabIndex = 4
         Me.btnGrabar.Text = "GRABAR"
         Me.btnGrabar.UseVisualStyleBackColor = True
+        '
+        'txtCondicionMuestreo
+        '
+        Me.txtCondicionMuestreo.Location = New System.Drawing.Point(142, 96)
+        Me.txtCondicionMuestreo.MaxLength = 150
+        Me.txtCondicionMuestreo.Multiline = True
+        Me.txtCondicionMuestreo.Name = "txtCondicionMuestreo"
+        Me.txtCondicionMuestreo.Size = New System.Drawing.Size(492, 33)
+        Me.txtCondicionMuestreo.TabIndex = 3
+        Me.txtCondicionMuestreo.Text = "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO" & _
+    "OOOOOOOOOOOOOOOOOOO"
         '
         'txtControlCambios
         '
@@ -232,6 +356,17 @@ Partial Class IngresoEspecificacionesMP
         Me.txtControlCambios.TabIndex = 3
         Me.txtControlCambios.Text = "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO" & _
     "OOOOOOOOOOOOOOOOOOO"
+        '
+        'txtDescIngles
+        '
+        Me.txtDescIngles.BackColor = System.Drawing.SystemColors.Window
+        Me.txtDescIngles.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtDescIngles.Location = New System.Drawing.Point(142, 35)
+        Me.txtDescIngles.Name = "txtDescIngles"
+        Me.txtDescIngles.Size = New System.Drawing.Size(492, 20)
+        Me.txtDescIngles.TabIndex = 2
+        Me.txtDescIngles.TabStop = False
+        Me.txtDescIngles.Text = "NOMBRE DE PRODUCTO TEMINADO"
         '
         'txtDescTerminado
         '
@@ -255,6 +390,15 @@ Partial Class IngresoEspecificacionesMP
         Me.txtCodigo.TabIndex = 1
         Me.txtCodigo.Text = "AA000000"
         '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(15, 99)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(119, 13)
+        Me.Label4.TabIndex = 0
+        Me.Label4.Text = "Condición de Muestreo:"
+        '
         'Label5
         '
         Me.Label5.AutoSize = True
@@ -263,6 +407,15 @@ Partial Class IngresoEspecificacionesMP
         Me.Label5.Size = New System.Drawing.Size(101, 13)
         Me.Label5.TabIndex = 0
         Me.Label5.Text = "Control de Cambios:"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(15, 38)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(97, 13)
+        Me.Label6.TabIndex = 0
+        Me.Label6.Text = "Descripción Inglés:"
         '
         'Label3
         '
@@ -280,10 +433,10 @@ Partial Class IngresoEspecificacionesMP
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.TabControl1.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TabControl1.ItemSize = New System.Drawing.Size(250, 30)
-        Me.TabControl1.Location = New System.Drawing.Point(0, 186)
+        Me.TabControl1.Location = New System.Drawing.Point(0, 215)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(919, 324)
+        Me.TabControl1.Size = New System.Drawing.Size(919, 295)
         Me.TabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed
         Me.TabControl1.TabIndex = 4
         Me.ToolTip1.SetToolTip(Me.TabControl1, "Hacer <Doble-Click> sobre la fila para definir" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "los parémetros del Ensayo.")
@@ -296,7 +449,7 @@ Partial Class IngresoEspecificacionesMP
         Me.TabPage2.Location = New System.Drawing.Point(4, 34)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(911, 286)
+        Me.TabPage2.Size = New System.Drawing.Size(911, 257)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "ESPECIFICACIONES"
         '
@@ -306,14 +459,14 @@ Partial Class IngresoEspecificacionesMP
         Me.dgvEspecif.AllowUserToDeleteRows = False
         Me.dgvEspecif.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvEspecif.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Ensayo, Me.Especificacion, Me.DescEnsayo, Me.Farmacopea, Me.TipoEspecif, Me.DesdeEspecif, Me.HastaEspecif, Me.UnidadEspecif, Me.MenorIgualEspecif, Me.InformaEspecif, Me.Parametro, Me.FormulaEspecif, Me.Variable1, Me.Variable2, Me.Variable3, Me.Variable4, Me.Variable5, Me.Variable6, Me.Variable7, Me.Variable8, Me.Variable9, Me.Variable10})
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle14.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle14.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvEspecif.DefaultCellStyle = DataGridViewCellStyle14
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvEspecif.DefaultCellStyle = DataGridViewCellStyle6
         Me.dgvEspecif.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvEspecif.DoubleBuffered = True
         Me.dgvEspecif.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
@@ -324,13 +477,13 @@ Partial Class IngresoEspecificacionesMP
         Me.dgvEspecif.RowTemplate.Height = 20
         Me.dgvEspecif.ShowCellToolTips = False
         Me.dgvEspecif.SinClickDerecho = False
-        Me.dgvEspecif.Size = New System.Drawing.Size(905, 280)
+        Me.dgvEspecif.Size = New System.Drawing.Size(905, 251)
         Me.dgvEspecif.TabIndex = 0
         '
         'Ensayo
         '
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Ensayo.DefaultCellStyle = DataGridViewCellStyle13
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Ensayo.DefaultCellStyle = DataGridViewCellStyle5
         Me.Ensayo.HeaderText = "Ens."
         Me.Ensayo.Name = "Ensayo"
         Me.Ensayo.Width = 40
@@ -503,7 +656,7 @@ Partial Class IngresoEspecificacionesMP
         Me.TabPage3.Location = New System.Drawing.Point(4, 34)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(911, 286)
+        Me.TabPage3.Size = New System.Drawing.Size(911, 257)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "ESPECIFICACIONES INGLÉS"
         '
@@ -513,14 +666,14 @@ Partial Class IngresoEspecificacionesMP
         Me.dgvEspecifIngles.AllowUserToDeleteRows = False
         Me.dgvEspecifIngles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvEspecifIngles.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.EnsayoIngles, Me.EspecificacionIngles, Me.DescEnsayoIngles, Me.FarmacopeaIngles, Me.UnidadEspecifIngles})
-        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle16.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle16.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle16.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvEspecifIngles.DefaultCellStyle = DataGridViewCellStyle16
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvEspecifIngles.DefaultCellStyle = DataGridViewCellStyle8
         Me.dgvEspecifIngles.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvEspecifIngles.DoubleBuffered = True
         Me.dgvEspecifIngles.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
@@ -531,13 +684,13 @@ Partial Class IngresoEspecificacionesMP
         Me.dgvEspecifIngles.RowTemplate.Height = 20
         Me.dgvEspecifIngles.ShowCellToolTips = False
         Me.dgvEspecifIngles.SinClickDerecho = False
-        Me.dgvEspecifIngles.Size = New System.Drawing.Size(905, 280)
+        Me.dgvEspecifIngles.Size = New System.Drawing.Size(905, 251)
         Me.dgvEspecifIngles.TabIndex = 1
         '
         'EnsayoIngles
         '
-        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.EnsayoIngles.DefaultCellStyle = DataGridViewCellStyle15
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.EnsayoIngles.DefaultCellStyle = DataGridViewCellStyle7
         Me.EnsayoIngles.HeaderText = "Ens."
         Me.EnsayoIngles.Name = "EnsayoIngles"
         Me.EnsayoIngles.Width = 40
@@ -572,138 +725,6 @@ Partial Class IngresoEspecificacionesMP
         Me.UnidadEspecifIngles.MinimumWidth = 80
         Me.UnidadEspecifIngles.Name = "UnidadEspecifIngles"
         Me.UnidadEspecifIngles.Width = 80
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(15, 99)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(119, 13)
-        Me.Label4.TabIndex = 0
-        Me.Label4.Text = "Condición de Muestreo:"
-        '
-        'txtCondicionMuestreo
-        '
-        Me.txtCondicionMuestreo.Location = New System.Drawing.Point(142, 96)
-        Me.txtCondicionMuestreo.MaxLength = 150
-        Me.txtCondicionMuestreo.Multiline = True
-        Me.txtCondicionMuestreo.Name = "txtCondicionMuestreo"
-        Me.txtCondicionMuestreo.Size = New System.Drawing.Size(492, 33)
-        Me.txtCondicionMuestreo.TabIndex = 3
-        Me.txtCondicionMuestreo.Text = "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO" & _
-    "OOOOOOOOOOOOOOOOOOO"
-        '
-        'txtDescIngles
-        '
-        Me.txtDescIngles.BackColor = System.Drawing.SystemColors.Window
-        Me.txtDescIngles.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.txtDescIngles.Location = New System.Drawing.Point(142, 35)
-        Me.txtDescIngles.Name = "txtDescIngles"
-        Me.txtDescIngles.Size = New System.Drawing.Size(492, 20)
-        Me.txtDescIngles.TabIndex = 2
-        Me.txtDescIngles.TabStop = False
-        Me.txtDescIngles.Text = "NOMBRE DE PRODUCTO TEMINADO"
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(15, 38)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(97, 13)
-        Me.Label6.TabIndex = 0
-        Me.Label6.Text = "Descripción Inglés:"
-        '
-        'txtOperador
-        '
-        Me.txtOperador.BackColor = System.Drawing.Color.Cyan
-        Me.txtOperador.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.txtOperador.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtOperador.Location = New System.Drawing.Point(680, 92)
-        Me.txtOperador.Name = "txtOperador"
-        Me.txtOperador.ReadOnly = True
-        Me.txtOperador.Size = New System.Drawing.Size(202, 18)
-        Me.txtOperador.TabIndex = 7
-        Me.txtOperador.TabStop = False
-        Me.txtOperador.Text = "NOMBRE DE PRODUCTO TEMINADO"
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(653, 95)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(24, 13)
-        Me.Label7.TabIndex = 6
-        Me.Label7.Text = "Op:"
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(653, 115)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(26, 13)
-        Me.Label8.TabIndex = 6
-        Me.Label8.Text = "Ver:"
-        '
-        'txtVersion
-        '
-        Me.txtVersion.BackColor = System.Drawing.Color.Cyan
-        Me.txtVersion.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.txtVersion.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtVersion.Location = New System.Drawing.Point(680, 112)
-        Me.txtVersion.Name = "txtVersion"
-        Me.txtVersion.ReadOnly = True
-        Me.txtVersion.Size = New System.Drawing.Size(25, 18)
-        Me.txtVersion.TabIndex = 7
-        Me.txtVersion.TabStop = False
-        Me.txtVersion.Text = "NOMBRE DE PRODUCTO TEMINADO"
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(708, 115)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(27, 13)
-        Me.Label9.TabIndex = 6
-        Me.Label9.Text = "Fec:"
-        '
-        'txtFecha
-        '
-        Me.txtFecha.BackColor = System.Drawing.Color.Cyan
-        Me.txtFecha.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.txtFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFecha.Location = New System.Drawing.Point(736, 112)
-        Me.txtFecha.Name = "txtFecha"
-        Me.txtFecha.ReadOnly = True
-        Me.txtFecha.Size = New System.Drawing.Size(53, 18)
-        Me.txtFecha.TabIndex = 7
-        Me.txtFecha.TabStop = False
-        Me.txtFecha.Text = "NOMBRE DE PRODUCTO TEMINADO"
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(789, 115)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(31, 13)
-        Me.Label10.TabIndex = 6
-        Me.Label10.Text = "CAS:"
-        '
-        'txtCas
-        '
-        Me.txtCas.BackColor = System.Drawing.Color.Cyan
-        Me.txtCas.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.txtCas.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCas.Location = New System.Drawing.Point(818, 112)
-        Me.txtCas.Name = "txtCas"
-        Me.txtCas.ReadOnly = True
-        Me.txtCas.Size = New System.Drawing.Size(64, 18)
-        Me.txtCas.TabIndex = 7
-        Me.txtCas.TabStop = False
-        Me.txtCas.Text = "NOMBRE DE PRODUCTO TEMINADO"
         '
         'IngresoEspecificacionesMP
         '
@@ -788,4 +809,6 @@ Partial Class IngresoEspecificacionesMP
     Friend WithEvents Label9 As System.Windows.Forms.Label
     Friend WithEvents txtVersion As System.Windows.Forms.TextBox
     Friend WithEvents Label8 As System.Windows.Forms.Label
+    Friend WithEvents btnAgregarRenglon As System.Windows.Forms.Button
+    Friend WithEvents btnNotas As System.Windows.Forms.Button
 End Class

@@ -77,7 +77,7 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad
         txtCodigo.Focus()
     End Sub
 
-    Private Sub txtPartida_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtPartida.KeyDown, txtLoteProveedor.KeyDown
+    Private Sub txtPartida_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtPartida.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtPartida.Text) = "" Then : Exit Sub : End If
@@ -100,6 +100,9 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad
                 End If
 
                 txtEtapa.Focus()
+
+
+
             Else
                 txtEtapa.Text = "99"
                 txtEtapa_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
@@ -516,10 +519,12 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad
                     Select Case iCol
                         Case 2
                             If iRow = .Rows.Count - 1 Then
-                                '.CurrentCell = .Rows(iRow).Cells(iCol)
-                                .CurrentCell = .Rows(iRow).Cells(iCol + 1)
+
+                                'CurrentCell = .Rows(iRow).Cells(iCol + 1)
+                                txtLibros.Focus()
                             Else
                                 .CurrentCell = .Rows(iRow + 1).Cells("Valor")
+
                             End If
 
                         Case Else
@@ -1934,6 +1939,96 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad
 
                 End With
 
+                txtLoteProveedor.Focus()
+            End If
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtInforme.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtLibros_KeyDown(sender As Object, e As KeyEventArgs) Handles txtLibros.KeyDown
+        Select Case e.KeyData
+            Case Keys.Enter
+                If txtLibros.Text <> "" Then
+                    txtPaginas.Focus()
+                End If
+
+            Case Keys.Escape
+                    txtLibros.Text = ""
+        End Select
+    End Sub
+
+    Private Sub txtPaginas_KeyDown(sender As Object, e As KeyEventArgs) Handles txtPaginas.KeyDown
+        Select Case e.KeyData
+            Case Keys.Enter
+                If txtPaginas.Text <> "" Then
+
+                    txtEnvases.Focus()
+
+                End If
+            Case Keys.Escape
+                txtPaginas.Text = ""
+        End Select
+    End Sub
+
+    Private Sub txtEnvases_KeyDown(sender As Object, e As KeyEventArgs) Handles txtEnvases.KeyDown
+        Select Case e.KeyData
+            Case Keys.Enter
+                txtOOS.Focus()
+            Case Keys.Escape
+                txtEnvases.Text = ""
+        End Select
+    End Sub
+
+    Private Sub txtOOS_KeyDown(sender As Object, e As KeyEventArgs) Handles txtOOS.KeyDown
+        Select Case e.KeyData
+            Case Keys.Enter
+                txtDesvio.Focus()
+            Case Keys.Escape
+                txtOOS.Text = ""
+        End Select
+    End Sub
+
+    Private Sub txtDesvio_KeyDown(sender As Object, e As KeyEventArgs) Handles txtDesvio.KeyDown
+        Select Case e.KeyData
+            Case Keys.Enter
+                txtCantidadEtiquetas.Focus()
+            Case Keys.Escape
+                txtDesvio.Text = ""
+        End Select
+    End Sub
+
+   
+
+    Private Sub txtCantidadEtiquetas_KeyDown(sender As Object, e As KeyEventArgs) Handles txtCantidadEtiquetas.KeyDown
+        Select Case e.KeyData
+            Case Keys.Enter
+                txtArchivo.Focus()
+            Case Keys.Escape
+                txtCantidadEtiquetas.Text = ""
+        End Select
+    End Sub
+    Private Sub txtArchivo_KeyDown(sender As Object, e As KeyEventArgs) Handles txtArchivo.KeyDown
+        Select Case e.KeyData
+            Case Keys.Enter
+                txtConfecciono.Focus()
+            Case Keys.Escape
+                txtArchivo.Text = ""
+        End Select
+    End Sub
+
+    Private Sub txtConfecciono_KeyDown(sender As Object, e As KeyEventArgs) Handles txtConfecciono.KeyDown
+        Select Case e.KeyData
+            Case Keys.Escape
+                txtConfecciono.Text = ""
+        End Select
+    End Sub
+
+    Private Sub txtLoteProveedor_KeyDown(sender As Object, e As KeyEventArgs) Handles txtLoteProveedor.KeyDown
+        Select Case e.KeyData
+            Case Keys.Enter
                 '
                 ' Saltar a la grilla
                 '
@@ -1943,11 +2038,8 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad
                         .Focus()
                     End If
                 End With
-            End If
-
-        ElseIf e.KeyData = Keys.Escape Then
-            txtInforme.Text = ""
-        End If
-
+            Case Keys.Escape
+                txtLoteProveedor.Text = ""
+        End Select
     End Sub
 End Class

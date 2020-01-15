@@ -1,10 +1,12 @@
-﻿Imports System.Configuration
+﻿
+Imports System.Configuration
 Imports System.IO
 Imports System.Text.RegularExpressions
 Imports ConsultasVarias
-Imports ConsultasVarias.Clases
+
 Imports CrystalDecisions.Shared
 Imports info.lundin.math
+Imports Laboratorio.Clases
 Imports Laboratorio.Entidades
 
 Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerminados, IIngresoClaveSeguridad, IIngresoMotivoDesvio, IAyudaPruebasAnteriores
@@ -14,6 +16,8 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
     Private WMotivoDesvio As String = ""
     Private WMotivoClaveSeguridad As TiposSolicitudClaveSeguridad = TiposSolicitudClaveSeguridad.General
     Private WActualizacionBloqueada As Boolean = False
+    Private WIDOperadorAnalista As String = ""
+    Private WNoGrabaIniciales As Boolean = False
     Private WAutorizaActualizacionBloqueado As Boolean = False
     Private ReadOnly PATH_ENSAYOS_INTERMEDIOS As String = ConfigurationManager.AppSettings("PATH_ENSAYOS_INTERMEDIOS").ToString()
     Private ReadOnly DESTINATARIOS_AVISO_ENSAYOS_INTERMEDIOS As String = ConfigurationManager.AppSettings("DESTINATARIOS_AVISO_ENSAYOS_INTERMEDIOS").ToString()
@@ -177,7 +181,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                     With row
                         Dim WEns = OrDefault(.Item("Codigo"), "")
                         Dim WEspecificacion = OrDefault(.Item("Valor"), "")
-                        Dim WValor = Trim(OrDefault(.Item("ValorReal"), ""))
+
                         Dim WResultado = OrDefault(.Item("Resultado"), "")
                         Dim WFarmacopea = OrDefault(.Item("Farmacopea"), "")
                         Dim WTipoEspecif = OrDefault(.Item("TipoEspecif"), "")
@@ -188,6 +192,11 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                         Dim WInformaEspecif = OrDefault(.Item("InformaEspecif"), "")
                         Dim WFormulaEspecif = OrDefault(.Item("FormulaEspecif"), "")
                         Dim WImpreResultado = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif)
+
+
+                        Dim WOperador = OrDefault(.Item("OperadorLabora"), "")
+                        Dim WValor = Trim(OrDefault(.Item("ValorReal"), ""))
+
 
                         WFecha = OrDefault(.Item("Fecha"), "")
                         WConfecciono = OrDefault(.Item("Confecciono"), "")
@@ -220,6 +229,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                         With dgvEnsayos.Rows(r)
                             .Cells("Ensayo").Value = WEns
                             .Cells("Valor").Value = Trim(UCase(WValor))
+                            .Cells("ValorBandera").Value = Trim(UCase(WValor))
                             .Cells("Resultado").Value = Trim(WResultado)
                             .Cells("Especificacion").Value = Trim(WEspecificacion)
                             .Cells("Descripcion").Value = Trim(WDescripcion)
@@ -232,6 +242,18 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                             .Cells("InformaEspecif").Value = WInformaEspecif
                             .Cells("Parametro").Value = Trim(WImpreResultado)
                             .Cells("FormulaEspecif").Value = Trim(WFormulaEspecif)
+
+                            .Cells("OperadorLabora").Value = Trim(WOperador)
+
+                            Dim rowOP As DataRow = GetSingle("SELECT Iniciales FROM Operador WHERE Operador = '" & WOperador & "'", "SurfactanSa")
+                            If rowOP IsNot Nothing Then
+                                .Cells("OperadorIniciales").Value = OrDefault(rowOP.Item("Iniciales"), "")
+                            Else
+                                .Cells("OperadorIniciales").Value = ""
+                            End If
+
+
+
 
                             For i = 1 To 10
                                 .Cells("Variable" & i).Value = Trim(WFormulas(i, 1))
@@ -292,7 +314,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                     End If
 
                 End If
-                
+
                 btnGrabar.Text = "ACTUALIZAR"
 
             Else
@@ -444,6 +466,9 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
             txtEtapa.Text = ""
         End If
 
+        'PONGO EN BLANCO LAS INICIALES PARA CONSTATAR EN LA GRABACION DESPUES
+        WIDOperadorAnalista = ""
+
     End Sub
 
     Private Sub _CrearCarpetaEtapaIntermedia()
@@ -525,8 +550,10 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                     Select Case iCol
                         Case 2
                             If iRow = .Rows.Count - 1 Then
-                                '.CurrentCell = .Rows(iRow).Cells(iCol)
-                                .CurrentCell = .Rows(iRow).Cells(iCol + 1)
+
+                                ' .CurrentCell = .Rows(iRow).Cells(iCol + 1)
+                                txtLibros.Focus()
+
                             Else
                                 .CurrentCell = .Rows(iRow + 1).Cells("Valor")
                             End If
@@ -685,6 +712,24 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
                 Exit Sub
 
+            Else
+
+                If WIDOperadorAnalista = "" Then
+
+                    WMotivoClaveSeguridad = TiposSolicitudClaveSeguridad.ActualizarEnsayoNoBloqueado
+
+                    Dim frm As New IngresoClaveSeguridad()
+                    frm.ShowDialog(Me)
+
+                    txtPartida.Focus()
+
+                    Exit Sub
+
+                End If
+
+
+
+
             End If
 
             If Not _ValidarValoresIngresados() And Not WEsPorDesvio Then
@@ -701,14 +746,16 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
                 If mot.ShowDialog(Me) <> DialogResult.OK Then Exit Sub
 
-                WMotivoClaveSeguridad = TiposSolicitudClaveSeguridad.IngresoEnsayoIntermedioPorDesvio
+                '                WMotivoClaveSeguridad = TiposSolicitudClaveSeguridad.IngresoEnsayoIntermedioPorDesvio
+                '
+                '                Dim frm As New IngresoClaveSeguridad
+                '                frm.ShowDialog(Me)
+                '
+                '                txtPartida.Focus()
+                '
+                '                Exit Sub
 
-                Dim frm As New IngresoClaveSeguridad
-                frm.ShowDialog(Me)
-
-                txtPartida.Focus()
-
-                Exit Sub
+                WEsPorDesvio = True
 
             End If
 
@@ -798,6 +845,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                     Dim WEns As String = OrDefault(.Cells("Ensayo").Value, 0)
                     Dim WEspecificacion As String = OrDefault(.Cells("Especificacion").Value, "")
                     Dim WValor As String = OrDefault(.Cells("Valor").Value, "")
+                    Dim WValorBandera As String = OrDefault(.Cells("ValorBandera").Value, "")
                     Dim WResultado As String = OrDefault(.Cells("Resultado").Value, "")
                     Dim WFarmacopea As String = OrDefault(.Cells("Farmacopea").Value, "")
                     Dim WTipoEspecif As String = OrDefault(.Cells("TipoEspecif").Value, 0)
@@ -809,6 +857,10 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                     Dim WObservaciones As String = OrDefault(.Cells("Observaciones").Value, "")
                     Dim WFormulaEspecif As String = OrDefault(.Cells("FormulaEspecif").Value, "")
                     Dim WParametro As String = Trim(OrDefault(.Cells("Parametro").Value, ""))
+
+
+
+                    Dim WOperadorLabora As String = WIDOperadorAnalista 'Trim(OrDefault(.Cells("OperadorLabora").Value, ""))
 
                     Dim WFormulas(10, 2) As String
 
@@ -865,7 +917,8 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                         ZSql = ZSql & "VariableValor" & i & " ,"
                     Next
 
-                    ZSql = ZSql & "Liberada )"
+                    ZSql = ZSql & "Liberada ,"
+                    ZSql = ZSql & "OperadorLabora)"
                     ZSql = ZSql & "Values ("
                     ZSql = ZSql & "'" & WClave & "',"
                     If Val(txtEtapa.Text) <> 99 Then ZSql = ZSql & "'" & Trim(txtEtapa.Text) & "',"
@@ -905,7 +958,19 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                         ZSql = ZSql & "'" & WFormulas(i, 2) & "',"
                     Next
 
-                    ZSql = ZSql & "'" & WLiberada & "')"
+                    If WNoGrabaIniciales = False Then
+                        If WValorBandera <> WValor Then
+                            ZSql = ZSql & "'" & WLiberada & "',"
+                            ZSql = ZSql & "'" & WOperadorLabora & "')"
+                        Else
+                            ZSql = ZSql & "'" & WLiberada & "',"
+                            ZSql = ZSql & "'" & Trim(.Cells("OperadorLabora").Value) & "')"
+                        End If
+                    Else
+                        ZSql = ZSql & "'" & WLiberada & "',"
+                        ZSql = ZSql & "'" & Trim(.Cells("OperadorLabora").Value) & "')"
+                    End If
+
 
                     WSqls.Add(ZSql)
 
@@ -1302,12 +1367,13 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
             Case TiposSolicitudClaveSeguridad.ActualizarEnsayoBloqueado
 
-                Dim WDatos As DataRow = GetSingle("SELECT GrabaV, FechaGrabaV FROM Operador WHERE Clave = '" & UCase(WClave) & "'")
+                Dim WDatos As DataRow = GetSingle("SELECT GrabaV, FechaGrabaV FROM Operador WHERE Clave = '" & UCase(WClave) & "'", "SurfactanSa")
 
                 If WDatos IsNot Nothing Then
                     Dim WGrabaV As String = OrDefault(WDatos.Item("GrabaV"), "")
                     If WGrabaV.ToUpper = "S" Then
                         WAutorizaActualizacionBloqueado = True
+                        WNoGrabaIniciales = True
                         btnGrabar.PerformClick()
                         Exit Sub
                     End If
@@ -1316,6 +1382,24 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                 MsgBox("Clave Incorrecta")
                 Dim frm As New IngresoClaveSeguridad
                 frm.ShowDialog(Me)
+
+            Case TiposSolicitudClaveSeguridad.ActualizarEnsayoNoBloqueado
+
+                Dim WDatos As DataRow = GetSingle("SELECT Operador, AnalistaLab FROM Operador WHERE Clave = '" & UCase(WClave) & "'", "SurfactanSa")
+
+                If WDatos IsNot Nothing Then
+                    Dim AnalistasLabPermiso As String = OrDefault(WDatos.Item("AnalistaLab"), "")
+                    If AnalistasLabPermiso.ToUpper = "S" Then
+                        WIDOperadorAnalista = WDatos.Item("Operador")
+                        btnGrabar.PerformClick()
+                        Exit Sub
+                    End If
+                End If
+
+                MsgBox("Clave Incorrecta")
+                Dim frm As New IngresoClaveSeguridad
+                frm.ShowDialog(Me)
+
 
             Case Else
                 MsgBox("Clave Incorrecta")
@@ -1768,8 +1852,89 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
     Private Sub txtPartida_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles txtPartida.MouseDoubleClick
         btnConsulta_Click(Nothing, Nothing)
     End Sub
-End Class
 
+    Private Sub txtLibros_KeyDown(sender As Object, e As KeyEventArgs) Handles txtLibros.KeyDown
+        Select Case e.KeyData
+            Case Keys.Enter
+                If txtLibros.Text <> "" Then
+                    txtPaginas.Focus()
+                End If
+
+
+            Case Keys.Escape
+
+                txtLibros.Text = ""
+        End Select
+    End Sub
+
+    Private Sub txtPaginas_KeyDown(sender As Object, e As KeyEventArgs) Handles txtPaginas.KeyDown
+        Select Case e.KeyData
+            Case Keys.Enter
+                If txtPaginas.Text <> "" Then
+
+                    txtEnvases.Focus()
+
+                End If
+
+
+
+            Case Keys.Escape
+
+                txtPaginas.Text = ""
+        End Select
+    End Sub
+
+    Private Sub txtEnvases_KeyDown(sender As Object, e As KeyEventArgs) Handles txtEnvases.KeyDown
+        Select Case e.KeyData
+            Case Keys.Enter
+
+                txtComponente.Focus()
+
+            Case Keys.Escape
+
+                txtEnvases.Text = ""
+        End Select
+    End Sub
+
+    Private Sub txtCantidadEtiquetas_KeyDown(sender As Object, e As KeyEventArgs) Handles txtCantidadEtiquetas.KeyDown
+        Select Case e.KeyData
+            Case Keys.Enter
+                txtOOS.Focus()
+            Case Keys.Escape
+                txtCantidadEtiquetas.Text = ""
+
+        End Select
+    End Sub
+
+    Private Sub txtOOS_KeyDown(sender As Object, e As KeyEventArgs) Handles txtOOS.KeyDown
+        Select Case e.KeyData
+            Case Keys.Enter
+                txtDesvio.Focus()
+            Case Keys.Escape
+                txtOOS.Text = ""
+        End Select
+    End Sub
+
+    Private Sub txtDesvio_KeyDown(sender As Object, e As KeyEventArgs) Handles txtDesvio.KeyDown
+        Select Case e.KeyData
+            Case Keys.Enter
+                txtArchivo.Focus()
+            Case Keys.Escape
+                txtDesvio.Text = ""
+        End Select
+    End Sub
+
+    Private Sub txtArchivo_KeyDown(sender As Object, e As KeyEventArgs) Handles txtArchivo.KeyDown
+        Select Case e.KeyData
+            Case Keys.Enter
+                txtConfecciono.Focus()
+            Case Keys.Escape
+                txtArchivo.Text = ""
+        End Select
+    End Sub
+
+
+End Class
 Friend Class FormatoNoNumericoException
     Inherits Exception
 

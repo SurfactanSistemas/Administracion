@@ -1,4 +1,4 @@
-﻿Public Class DefinicionFormulaEspecificacion
+﻿Public Class DefinicionFormulaEspecificacion : Implements IGrabadoDeFormula
 
     Private WParametrosFormula(10) As String
     Private WFormula As String
@@ -86,5 +86,27 @@
             TryCast(sender, TextBox).Text = ""
         End If
 
+    End Sub
+
+    Private Sub btnAyudaFormula_Click(sender As Object, e As EventArgs) Handles btnAyudaFormula.Click
+        With New IngresoFormulasEnsayo
+            .Show(Me)
+        End With
+    End Sub
+
+
+    Public Sub _GrabarFormula(Formula As String, ParametrosFormula As String(), Descripcion As String, Optional Renglon As Integer = 0) Implements IGrabadoDeFormula._GrabarFormula
+        txtVar1.Text = Trim(ParametrosFormula(1))
+        txtVar2.Text = Trim(ParametrosFormula(2))
+        txtVar3.Text = Trim(ParametrosFormula(3))
+        txtVar4.Text = Trim(ParametrosFormula(4))
+        txtVar5.Text = Trim(ParametrosFormula(5))
+        txtVar6.Text = Trim(ParametrosFormula(6))
+        txtVar7.Text = Trim(ParametrosFormula(7))
+        txtVar8.Text = Trim(ParametrosFormula(8))
+        txtVar9.Text = Trim(ParametrosFormula(9))
+        txtVar10.Text = Trim(ParametrosFormula(10))
+
+        txtFormula.Text = Trim(Formula)
     End Sub
 End Class

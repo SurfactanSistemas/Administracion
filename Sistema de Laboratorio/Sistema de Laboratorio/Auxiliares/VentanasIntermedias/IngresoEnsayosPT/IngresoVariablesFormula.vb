@@ -10,6 +10,73 @@ Public Class IngresoVariablesFormula
 
     Private DGV As DataGridView
 
+
+
+    Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData As Keys) As Boolean
+
+        With dgvVariables
+            If .Focused Or .IsCurrentCellInEditMode Then ' Detectamos los ENTER tanto si solo estan en foco o si estan en edición una celda.
+                .CommitEdit(DataGridViewDataErrorContexts.Commit) ' Guardamos todos los datos que no hayan sido confirmados.
+
+                Dim iCol = .CurrentCell.ColumnIndex
+                Dim iRow = .CurrentCell.RowIndex
+
+                If msg.WParam.ToInt32() = Keys.Enter Then
+
+                    Select Case iCol
+                        Case 2
+                            If iRow = .Rows.Count - 1 Then
+
+                                ' .CurrentCell = .Rows(iRow).Cells(iCol + 1)
+                                btnAceptar_Click(Nothing, Nothing)
+
+                            Else
+                                If Trim(.Rows(iRow + 1).Cells("Variable").Value) <> "" Then
+                                    .CurrentCell = .Rows(iRow + 1).Cells("WValor")
+                                Else
+                                    btnAceptar_Click(Nothing, Nothing)
+                                End If
+
+                            End If
+
+                        
+                    End Select
+
+                    Return True
+
+                ElseIf msg.WParam.ToInt32() = Keys.Escape Then
+                    .CurrentCell = .Rows(iRow).Cells("WValor")
+                    .CurrentCell.Value = ""
+
+                    'Muevo de linea para que tome el cambio
+                    If iRow = .Rows.Count - 1 Then
+                        iRow -= 1
+                        .CurrentCell = .Rows(iRow).Cells("WValor")
+                        iRow += 1
+                        .CurrentCell = .Rows(iRow).Cells("WValor")
+                    Else
+                        iRow += 1
+                        .CurrentCell = .Rows(iRow).Cells("WValor")
+                        iRow -= 1
+                        .CurrentCell = .Rows(iRow).Cells("WValor")
+                    End If
+
+                End If
+            End If
+
+        End With
+
+        Return MyBase.ProcessCmdKey(msg, keyData)
+    End Function
+
+
+
+
+
+
+
+
+
     Sub New(ByVal Formula As String, ByVal Variables(,) As String, ByVal Valor As String, ByVal Grilla As DataGridView, Optional ByVal Decimales As Object = Nothing)
 
         ' This call is required by the designer.

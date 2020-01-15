@@ -1,15 +1,23 @@
 ﻿Public Class NotasCertificadosAnalisis
 
+    Private WArticulo As String = ""
+    Private WEsArticulo As Boolean = False
     Private WTerminado As String = ""
     Dim Base As String = Operador.Base
     Dim Tabla As String = "CargaVNotas"
 
-    Sub New(ByVal Terminado As String)
+    Sub New(ByVal Terminado As String, Optional ByVal EsArticulo As Boolean = False)
 
         ' This call is required by the designer.
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
+        If EsArticulo = True Then
+            WArticulo = Terminado
+            WEsArticulo = EsArticulo
+            Tabla = "CargaVNotasMP"
+        End If
+
         WTerminado = Terminado
     End Sub
 
@@ -17,7 +25,12 @@
 
         If Base <> "Surfactan_III" Then
             Base = "Surfactan_II"
-            Tabla = "CargaVNoFarmaNotas"
+            If WEsArticulo = True Then
+                Tabla = "CargaVNoFarmaNotasMP"
+            Else
+                Tabla = "CargaVNoFarmaNotas"
+            End If
+
         End If
 
         _CargarNotas()
@@ -32,7 +45,13 @@
 
         
 
-        Dim WNotas As DataTable = GetAll("SELECT * FROM " & Tabla & " WHERE Terminado = '" & WTerminado & "' ORDER BY Terminado, Nota, Renglon", Base)
+        Dim WNotas As New DataTable
+        If WEsArticulo = True Then
+            WNotas = GetAll("SELECT * FROM " & Tabla & " WHERE Articulo = '" & WArticulo & "' ORDER BY Articulo, Nota, Renglon", Base)
+        Else
+            WNotas = GetAll("SELECT * FROM " & Tabla & " WHERE Terminado = '" & WTerminado & "' ORDER BY Terminado, Nota, Renglon", Base)
+        End If
+
         Dim Auxi As String = ""
         Dim Auxi2 As String = ""
         Dim WID As String = ""
@@ -101,7 +120,13 @@
 
             Dim WId As String = OrDefault(.CurrentRow.Cells("ID").Value, "")
 
-            Dim WNota As DataTable = GetAll("SELECT Observacion FROM " & Tabla & " WHERE Terminado = '" & WTerminado & "' And Nota = '" & WId & "' ORDER BY Renglon", Base)
+            Dim WNota As New DataTable
+            If WEsArticulo = True Then
+                WNota = GetAll("SELECT Observacion FROM " & Tabla & " WHERE Articulo = '" & WArticulo & "' And Nota = '" & WId & "' ORDER BY Renglon", Base)
+            Else
+                WNota = GetAll("SELECT Observacion FROM " & Tabla & " WHERE Terminado = '" & WTerminado & "' And Nota = '" & WId & "' ORDER BY Renglon", Base)
+            End If
+
 
             txtObservacion.Text = ""
 
@@ -135,7 +160,14 @@
         '
         If WIdNota = 0 Then
 
-            Dim WUlt As DataRow = GetSingle("SELECT Max(Nota) Ultimo FROM " & Tabla & " WHERE Terminado = '" & WTerminado & "'", Base)
+            Dim WUlt As DataRow
+            If WEsArticulo = True Then
+                WUlt = GetSingle("SELECT Max(Nota) Ultimo FROM " & Tabla & " WHERE Articulo = '" & WArticulo & "'", Base)
+
+            Else
+                WUlt = GetSingle("SELECT Max(Nota) Ultimo FROM " & Tabla & " WHERE Terminado = '" & WTerminado & "'", Base)
+
+            End If
 
             If WUlt IsNot Nothing Then WIdNota = OrDefault(WUlt.Item("Ultimo"), 0)
 
@@ -145,7 +177,11 @@
 
         Dim WConsulta As New List(Of String)
 
-        WConsulta.Add("DELETE FROM " & Tabla & " WHERE Terminado = '" & WTerminado & "' and Nota = '" & WIdNota & "'")
+        If WEsArticulo = True Then
+            WConsulta.Add("DELETE FROM " & Tabla & " WHERE Articulo = '" & WArticulo & "' and Nota = '" & WIdNota & "'")
+        Else
+            WConsulta.Add("DELETE FROM " & Tabla & " WHERE Terminado = '" & WTerminado & "' and Nota = '" & WIdNota & "'")
+        End If
 
         Dim WRenglon = 0
 
@@ -157,9 +193,17 @@
 
                 WRenglon += 1
 
-                Dim WClave As String = WTerminado & WIdNota.ToString.PadLeft(2, "0") & WRenglon.ToString.PadLeft(2, "0")
+                If WEsArticulo Then
+                    Dim WClave As String = WArticulo & WIdNota.ToString.PadLeft(2, "0") & WRenglon.ToString.PadLeft(2, "0")
 
-                WConsulta.Add(String.Format("INSERT INTO " & Tabla & " (Clave, Terminado, Nota, Renglon, Observacion) VALUES ('{0}','{1}','{2}','{3}','{4}')", WClave, WTerminado, WIdNota, WRenglon, Trim(WObservacion)))
+                    WConsulta.Add(String.Format("INSERT INTO " & Tabla & " (Clave, Articulo, Nota, Renglon, Observacion) VALUES ('{0}','{1}','{2}','{3}','{4}')", WClave, WArticulo, WIdNota, WRenglon, Trim(WObservacion)))
+
+                Else
+                    Dim WClave As String = WTerminado & WIdNota.ToString.PadLeft(2, "0") & WRenglon.ToString.PadLeft(2, "0")
+
+                    WConsulta.Add(String.Format("INSERT INTO " & Tabla & " (Clave, Terminado, Nota, Renglon, Observacion) VALUES ('{0}','{1}','{2}','{3}','{4}')", WClave, WTerminado, WIdNota, WRenglon, Trim(WObservacion)))
+                End If
+                
 
             End If
 
@@ -184,7 +228,13 @@
             Exit Sub
         End If
 
-        ExecuteNonQueries(Base, {"DELETE FROM " & Tabla & " WHERE Terminado = '" & WTerminado & "' And Nota = '" & lblIdNota.Text & "'"})
+        If WEsArticulo = True Then
+            ExecuteNonQueries(Base, {"DELETE FROM " & Tabla & " WHERE Articulo = '" & WArticulo & "' And Nota = '" & lblIdNota.Text & "'"})
+
+        Else
+            ExecuteNonQueries(Base, {"DELETE FROM " & Tabla & " WHERE Terminado = '" & WTerminado & "' And Nota = '" & lblIdNota.Text & "'"})
+
+        End If
 
         btnLimpiar.PerformClick()
 

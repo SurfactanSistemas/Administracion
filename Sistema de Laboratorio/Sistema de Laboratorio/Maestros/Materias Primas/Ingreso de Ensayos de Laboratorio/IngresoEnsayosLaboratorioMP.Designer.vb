@@ -103,10 +103,11 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.Panel2 = New System.Windows.Forms.Panel()
         Me.dgvEnsayos = New ConsultasVarias.DBDataGridView()
+        Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Ensayo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Especificacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Farmacopea = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Valor = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Resultado = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Parametro = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -115,7 +116,6 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.DesdeEspecif = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.HastaEspecif = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.UnidadEspecif = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Farmacopea = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.MenorIgualEspecif = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.InformaEspecif = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Observaciones = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -148,8 +148,8 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
-        Me.Panel2.SuspendLayout()
         CType(Me.dgvEnsayos, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -185,9 +185,9 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.Label1.ForeColor = System.Drawing.SystemColors.Control
         Me.Label1.Location = New System.Drawing.Point(17, 18)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(446, 15)
+        Me.Label1.Size = New System.Drawing.Size(292, 15)
         Me.Label1.TabIndex = 0
-        Me.Label1.Text = "INGRESO DE ENSAYOS INTERMEDIOS DE PRODUCTO TERMINADO"
+        Me.Label1.Text = "INGRESO DE ENSAYOS DE MATERIA PRIMA"
         '
         'GroupBox1
         '
@@ -961,16 +961,6 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(998, 454)
         Me.TableLayoutPanel1.TabIndex = 7
         '
-        'Panel2
-        '
-        Me.Panel2.Controls.Add(Me.GroupBox2)
-        Me.Panel2.Controls.Add(Me.GroupBox3)
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(3, 349)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(992, 102)
-        Me.Panel2.TabIndex = 5
-        '
         'dgvEnsayos
         '
         Me.dgvEnsayos.AllowUserToAddRows = False
@@ -984,7 +974,7 @@ Partial Class IngresoEnsayosLaboratorioMP
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgvEnsayos.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.dgvEnsayos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvEnsayos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Ensayo, Me.Especificacion, Me.Valor, Me.Resultado, Me.Parametro, Me.Descripcion, Me.TipoEspecif, Me.DesdeEspecif, Me.HastaEspecif, Me.UnidadEspecif, Me.Farmacopea, Me.MenorIgualEspecif, Me.InformaEspecif, Me.Observaciones, Me.FormulaEspecif, Me.Variable1, Me.Variable2, Me.Variable3, Me.Variable4, Me.Variable5, Me.Variable6, Me.Variable7, Me.Variable8, Me.Variable9, Me.Variable10, Me.VariableValor1, Me.VariableValor2, Me.VariableValor3, Me.VariableValor4, Me.VariableValor5, Me.VariableValor6, Me.VariableValor7, Me.VariableValor8, Me.VariableValor9, Me.VariableValor10, Me.EspecificacionIngles, Me.Decimales})
+        Me.dgvEnsayos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Ensayo, Me.Especificacion, Me.Farmacopea, Me.Valor, Me.Resultado, Me.Parametro, Me.Descripcion, Me.TipoEspecif, Me.DesdeEspecif, Me.HastaEspecif, Me.UnidadEspecif, Me.MenorIgualEspecif, Me.InformaEspecif, Me.Observaciones, Me.FormulaEspecif, Me.Variable1, Me.Variable2, Me.Variable3, Me.Variable4, Me.Variable5, Me.Variable6, Me.Variable7, Me.Variable8, Me.Variable9, Me.Variable10, Me.VariableValor1, Me.VariableValor2, Me.VariableValor3, Me.VariableValor4, Me.VariableValor5, Me.VariableValor6, Me.VariableValor7, Me.VariableValor8, Me.VariableValor9, Me.VariableValor10, Me.EspecificacionIngles, Me.Decimales})
         DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
         DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1014,6 +1004,16 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.dgvEnsayos.Size = New System.Drawing.Size(992, 285)
         Me.dgvEnsayos.TabIndex = 4
         '
+        'Panel2
+        '
+        Me.Panel2.Controls.Add(Me.GroupBox2)
+        Me.Panel2.Controls.Add(Me.GroupBox3)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel2.Location = New System.Drawing.Point(3, 349)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(992, 102)
+        Me.Panel2.TabIndex = 5
+        '
         'Ensayo
         '
         Me.Ensayo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
@@ -1034,6 +1034,14 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.Especificacion.Name = "Especificacion"
         Me.Especificacion.ReadOnly = True
         Me.Especificacion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'Farmacopea
+        '
+        Me.Farmacopea.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
+        Me.Farmacopea.HeaderText = "Farmac"
+        Me.Farmacopea.Name = "Farmacopea"
+        Me.Farmacopea.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Farmacopea.Width = 48
         '
         'Valor
         '
@@ -1102,13 +1110,6 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.UnidadEspecif.Name = "UnidadEspecif"
         Me.UnidadEspecif.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.UnidadEspecif.Visible = False
-        '
-        'Farmacopea
-        '
-        Me.Farmacopea.HeaderText = "Farmacopea"
-        Me.Farmacopea.Name = "Farmacopea"
-        Me.Farmacopea.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Farmacopea.Visible = False
         '
         'MenorIgualEspecif
         '
@@ -1318,8 +1319,8 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
         Me.TableLayoutPanel1.ResumeLayout(False)
-        Me.Panel2.ResumeLayout(False)
         CType(Me.dgvEnsayos, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel2.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -1360,43 +1361,6 @@ Partial Class IngresoEnsayosLaboratorioMP
     Friend WithEvents btnImprimirEnsayosIngresados As System.Windows.Forms.Button
     Friend WithEvents lblDescEtapa As System.Windows.Forms.Label
     Friend WithEvents Label15 As System.Windows.Forms.Label
-    Friend WithEvents Ensayo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Especificacion As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Valor As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Resultado As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Parametro As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents TipoEspecif As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DesdeEspecif As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents HastaEspecif As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents UnidadEspecif As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Farmacopea As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents MenorIgualEspecif As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents InformaEspecif As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Observaciones As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents FormulaEspecif As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Variable1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Variable2 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Variable3 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Variable4 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Variable5 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Variable6 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Variable7 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Variable8 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Variable9 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Variable10 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents VariableValor1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents VariableValor2 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents VariableValor3 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents VariableValor4 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents VariableValor5 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents VariableValor6 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents VariableValor7 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents VariableValor8 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents VariableValor9 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents VariableValor10 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents EspecificacionIngles As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Decimales As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents txtEnvases As System.Windows.Forms.TextBox
     Friend WithEvents txtPaginas As System.Windows.Forms.TextBox
     Friend WithEvents txtLibros As System.Windows.Forms.TextBox
@@ -1434,4 +1398,41 @@ Partial Class IngresoEnsayosLaboratorioMP
     Friend WithEvents Label26 As System.Windows.Forms.Label
     Friend WithEvents txtLoteProveedor As System.Windows.Forms.TextBox
     Friend WithEvents Label28 As System.Windows.Forms.Label
+    Friend WithEvents Ensayo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Especificacion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Farmacopea As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Valor As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Resultado As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Parametro As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents TipoEspecif As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DesdeEspecif As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents HastaEspecif As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents UnidadEspecif As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents MenorIgualEspecif As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents InformaEspecif As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Observaciones As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents FormulaEspecif As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Variable1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Variable2 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Variable3 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Variable4 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Variable5 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Variable6 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Variable7 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Variable8 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Variable9 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Variable10 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents VariableValor1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents VariableValor2 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents VariableValor3 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents VariableValor4 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents VariableValor5 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents VariableValor6 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents VariableValor7 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents VariableValor8 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents VariableValor9 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents VariableValor10 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents EspecificacionIngles As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Decimales As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

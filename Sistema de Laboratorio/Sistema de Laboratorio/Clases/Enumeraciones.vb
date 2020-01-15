@@ -4,6 +4,7 @@
         General
         IngresoEnsayoIntermedioPorDesvio
         ActualizarEnsayoBloqueado
+        ActualizarEnsayoNoBloqueado
     End Enum
 
     Enum TiposEstadoLaudoMP

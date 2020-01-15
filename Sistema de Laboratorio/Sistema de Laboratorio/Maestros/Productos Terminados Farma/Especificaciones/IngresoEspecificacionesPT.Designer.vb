@@ -35,6 +35,7 @@ Partial Class IngresoEspecificacionesPT
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.AgregarRenglon = New System.Windows.Forms.Button()
         Me.btnHistorialCambios = New System.Windows.Forms.Button()
         Me.btnNotas = New System.Windows.Forms.Button()
         Me.btnImpresion = New System.Windows.Forms.Button()
@@ -144,6 +145,7 @@ Partial Class IngresoEspecificacionesPT
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.AgregarRenglon)
         Me.GroupBox1.Controls.Add(Me.btnHistorialCambios)
         Me.GroupBox1.Controls.Add(Me.btnNotas)
         Me.GroupBox1.Controls.Add(Me.btnImpresion)
@@ -165,9 +167,18 @@ Partial Class IngresoEspecificacionesPT
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Location = New System.Drawing.Point(8, 51)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(899, 120)
+        Me.GroupBox1.Size = New System.Drawing.Size(899, 147)
         Me.GroupBox1.TabIndex = 3
         Me.GroupBox1.TabStop = False
+        '
+        'AgregarRenglon
+        '
+        Me.AgregarRenglon.Location = New System.Drawing.Point(652, 113)
+        Me.AgregarRenglon.Name = "AgregarRenglon"
+        Me.AgregarRenglon.Size = New System.Drawing.Size(112, 32)
+        Me.AgregarRenglon.TabIndex = 6
+        Me.AgregarRenglon.Text = "AGRE. RENGLON"
+        Me.AgregarRenglon.UseVisualStyleBackColor = True
         '
         'btnHistorialCambios
         '
@@ -362,10 +373,10 @@ Partial Class IngresoEspecificacionesPT
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.TabControl1.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TabControl1.ItemSize = New System.Drawing.Size(250, 30)
-        Me.TabControl1.Location = New System.Drawing.Point(0, 172)
+        Me.TabControl1.Location = New System.Drawing.Point(0, 202)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(919, 338)
+        Me.TabControl1.Size = New System.Drawing.Size(919, 308)
         Me.TabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed
         Me.TabControl1.TabIndex = 4
         Me.ToolTip1.SetToolTip(Me.TabControl1, "Hacer <Doble-Click> sobre la fila para definir" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "los parémetros del Ensayo.")
@@ -378,7 +389,7 @@ Partial Class IngresoEspecificacionesPT
         Me.TabPage1.Location = New System.Drawing.Point(4, 34)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(911, 300)
+        Me.TabPage1.Size = New System.Drawing.Size(911, 270)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "PROCEDIMIENTOS"
         '
@@ -406,7 +417,7 @@ Partial Class IngresoEspecificacionesPT
         Me.dgvProcedimientos.RowTemplate.Height = 20
         Me.dgvProcedimientos.ShowCellToolTips = False
         Me.dgvProcedimientos.SinClickDerecho = False
-        Me.dgvProcedimientos.Size = New System.Drawing.Size(905, 294)
+        Me.dgvProcedimientos.Size = New System.Drawing.Size(905, 264)
         Me.dgvProcedimientos.TabIndex = 0
         '
         'Articulo
@@ -460,7 +471,7 @@ Partial Class IngresoEspecificacionesPT
         Me.TabPage2.Location = New System.Drawing.Point(4, 34)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(911, 300)
+        Me.TabPage2.Size = New System.Drawing.Size(911, 270)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "ESPECIFICACIONES"
         '
@@ -488,7 +499,7 @@ Partial Class IngresoEspecificacionesPT
         Me.dgvEspecif.RowTemplate.Height = 20
         Me.dgvEspecif.ShowCellToolTips = False
         Me.dgvEspecif.SinClickDerecho = False
-        Me.dgvEspecif.Size = New System.Drawing.Size(905, 294)
+        Me.dgvEspecif.Size = New System.Drawing.Size(905, 264)
         Me.dgvEspecif.TabIndex = 0
         '
         'TabPage3
@@ -498,7 +509,7 @@ Partial Class IngresoEspecificacionesPT
         Me.TabPage3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TabPage3.Location = New System.Drawing.Point(4, 34)
         Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Size = New System.Drawing.Size(911, 300)
+        Me.TabPage3.Size = New System.Drawing.Size(911, 270)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "ESPECIFICACIONES INGLÉS"
         '
@@ -526,7 +537,7 @@ Partial Class IngresoEspecificacionesPT
         Me.dgvEspecifIngles.RowTemplate.Height = 20
         Me.dgvEspecifIngles.ShowCellToolTips = False
         Me.dgvEspecifIngles.SinClickDerecho = False
-        Me.dgvEspecifIngles.Size = New System.Drawing.Size(911, 300)
+        Me.dgvEspecifIngles.Size = New System.Drawing.Size(911, 270)
         Me.dgvEspecifIngles.TabIndex = 1
         '
         'EnsayoIngles
@@ -808,6 +819,7 @@ Partial Class IngresoEspecificacionesPT
     Friend WithEvents txtDescEtapa As System.Windows.Forms.TextBox
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents btnHistorialCambios As System.Windows.Forms.Button
+    Friend WithEvents AgregarRenglon As System.Windows.Forms.Button
     Friend WithEvents Ensayo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Especificacion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DescEnsayo As System.Windows.Forms.DataGridViewTextBoxColumn

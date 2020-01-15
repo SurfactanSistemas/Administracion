@@ -71,9 +71,7 @@ Public Class ConsDeEspefXVersion
 
 
                         If (DebeMOstrar(txtVersion.Text) = True) Then
-                            Dim cn As New SqlConnection(ConfigurationManager.ConnectionStrings("LOCAL").ToString())
-                            cn.Open()
-
+                           
                             Dim SQLConsulta As String
 
                             SQLConsulta = "SELECT * FROM EspecifUnificaVersion WHERE Producto = '" & mastxtCodigo.Text.Trim() & "'"
@@ -143,9 +141,7 @@ Public Class ConsDeEspefXVersion
     End Sub
 
     Private Function DebeMOstrar(ByVal Version As Integer) As Boolean
-        Dim cn As New SqlConnection(ConfigurationManager.ConnectionStrings("LOCAL").ToString())
-        cn.Open()
-
+      
         Dim SQLConsulta As String
 
         Version = Version + 1
@@ -229,9 +225,7 @@ Public Class ConsDeEspefXVersion
             tablaReporte.Rows(i).Item("Valor") = DGV_ConsultaVersiones.Rows.Item(i).Cells("ValorEstandar").Value
         Next
         Try
-            Dim cn As New SqlConnection(ConfigurationManager.ConnectionStrings("LOCAL").ToString())
-            cn.Open()
-
+          
             Dim SQLConsulta As String
 
             SQLConsulta = "SELECT Descripcion FROM Terminado WHERE Codigo = '" & mastxtCodigo.Text.Trim() & "'"
