@@ -207,6 +207,7 @@
     <Compile Include="Consultas\NotasCertificadosAnalisis\NotasCertificadosAnalisis.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Auxiliares\Interfaces\IGrabadoDeFormula.vb" />
     <Compile Include="ImpresionEtiquetasMuestras.Designer.vb">
       <DependentUpon>ImpresionEtiquetasMuestras.vb</DependentUpon>
     </Compile>
@@ -223,6 +224,18 @@
       <DependentUpon>IngresoActualizacionHojaProduccionFarma.vb</DependentUpon>
     </Compile>
     <Compile Include="IngresoActualizacionHojaProduccionFarma.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IngresoFormulasEnsayo.Designer.vb">
+      <DependentUpon>IngresoFormulasEnsayo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="IngresoFormulasEnsayo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ParametrosDeEspecificacion.Designer.vb">
+      <DependentUpon>ParametrosDeEspecificacion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ParametrosDeEspecificacion.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ListadoDeEnsayoDePT.Designer.vb">
@@ -654,6 +667,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="IngresoActualizacionHojaProduccionFarma.resx">
       <DependentUpon>IngresoActualizacionHojaProduccionFarma.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IngresoFormulasEnsayo.resx">
+      <DependentUpon>IngresoFormulasEnsayo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ParametrosDeEspecificacion.resx">
+      <DependentUpon>ParametrosDeEspecificacion.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ListadoDeEnsayoDePT.resx">
       <DependentUpon>ListadoDeEnsayoDePT.vb</DependentUpon>

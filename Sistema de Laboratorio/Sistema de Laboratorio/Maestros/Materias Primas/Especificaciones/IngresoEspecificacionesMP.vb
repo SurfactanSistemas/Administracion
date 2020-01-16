@@ -26,7 +26,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
         WAutorizado = False
         WTipoProceso = Nothing
 
-        btnHistorialCambios.Visible = False
+        'btnHistorialCambios.Visible = false
 
         txtCodigo.Focus()
     End Sub
@@ -84,6 +84,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
 
                     Dim WEnsayo As DataRow = GetSingle("SELECT Descripcion FROM Ensayos WHERE Codigo = '" & WEns & "'", WBaseII)
 
+                    'dgvEspecifIngles.Rows.Add()
                     If WEnsayo IsNot Nothing Then
 
                         .Cells("Especificacion").Value = Trim(OrDefault(WEnsayo.Item("Descripcion"), ""))
@@ -488,6 +489,16 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
                 .Cells("Variable" & i).Value = Trim(ParametrosFormula(i))
             Next
 
+            'si no tiene esa fila se la agregamos
+            Dim index As Integer = dgvEspecif.CurrentRow.Index
+            If index > dgvEspecifIngles.Rows.Count - 1 Then
+                dgvEspecifIngles.Rows.Add()
+            End If
+            dgvEspecifIngles.Rows(index).Cells("EnsayoIngles").Value = .Cells("Ensayo").Value
+            dgvEspecifIngles.Rows(index).Cells("EspecificacionIngles").Value = .Cells("Especificacion").Value
+            dgvEspecifIngles.Rows(index).Cells("FarmacopeaIngles").Value = .Cells("Farmacopea").Value
+            dgvEspecifIngles.Rows(index).Cells("UnidadEspecifIngles").Value = .Cells("UnidadEspecif").Value
+
         End With
 
     End Sub
@@ -516,7 +527,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
         WSqls.AddRange(_PrepararGrabarEnFormatoViejo())
 
         If WActualizaVersion Then
-            WSqls.Add("INSERT INTO CargaVMPVersion (Clave,Articulo,Paso,Renglon,Fecha,Ensayo,Valor,DesEnsayo,Partida,CantidadPartida,DesPaso,Corte,ImprePaso,ControlCambio,[Version],Resultado,ObservaI,ObservaII,ObservaIII,ObservaIV,ImpreTerminado,fechaing,UnidadEspecif,TipoEspecif,DesdeEspecif,HastaEspecif,DesEnsayoII,Farmacopea,observacion1,observacion2,observacion3,observacion4,observacion5,observacion6,observacion7,observacion8,observacion9,observacion10,InformaEspecif,MenorIgualEspecif,FormulaEspecif,Variable1,Variable2,Variable3,Variable4,Variable5,Variable6,Variable7,Variable8,Variable9,Variable10,FechaGrabacion,MetAnaliticoTrazas,FechaInicio,FechaFinal) SELECT *, Fecha, '" & Date.Now.ToString("dd/MM/yyyy") & "' FROM CargaVMP WHERE Articulo = '" & txtCodigo.Text & "'")
+            WSqls.Add("INSERT INTO CargaVMPVersion (Clave,Articulo,Paso,Renglon,Fecha,Ensayo,Valor,DesEnsayo,Partida,CantidadPartida,DesPaso,Corte,ImprePaso,ControlCambio,[Version],Resultado,ObservaI,ObservaII,ObservaIII,ObservaIV,ImpreTerminado,fechaing,UnidadEspecif,TipoEspecif,DesdeEspecif,HastaEspecif,DesEnsayoII,Farmacopea,observacion1,observacion2,observacion3,observacion4,observacion5,observacion6,observacion7,observacion8,observacion9,observacion10,InformaEspecif,MenorIgualEspecif,FormulaEspecif,Variable1,Variable2,Variable3,Variable4,Variable5,Variable6,Variable7,Variable8,Variable9,Variable10,FechaGrabacion,MetAnaliticoTrazas,FechaInicio,FechaFinal) SELECT Clave,Articulo,Paso,Renglon,FechaGrabacion,Ensayo,Valor,DesEnsayo,Partida,CantidadPartida,DesPaso,Corte,ImprePaso,ControlCambio,[Version],Resultado,ObservaI,ObservaII,ObservaIII,ObservaIV,ImpreTerminado,fechaing,UnidadEspecif,TipoEspecif,DesdeEspecif,HastaEspecif,DesEnsayoII,Farmacopea,observacion1,observacion2,observacion3,observacion4,observacion5,observacion6,observacion7,observacion8,observacion9,observacion10,InformaEspecif,MenorIgualEspecif,FormulaEspecif,Variable1,Variable2,Variable3,Variable4,Variable5,Variable6,Variable7,Variable8,Variable9,Variable10,FechaGrabacion,MetAnaliticoTrazas, FechaGrabacion, '" & Date.Now.ToString("dd/MM/yyyy") & "' FROM CargaVMP WHERE Articulo = '" & txtCodigo.Text & "'")
         End If
 
         '
@@ -525,7 +536,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
         WSqls.AddRange(_PrepararGrabarEnFormatoNuevo())
 
         If WActualizaVersion Then
-            WSqls.Add("UPDATE CargaVMP Version = Version + 1 WHERE Articulo = '" & txtCodigo.Text & "'")
+            WSqls.Add("UPDATE CargaVMP SET Version = [Version] + 1 WHERE Articulo = '" & txtCodigo.Text & "'")
         End If
 
         '
@@ -643,7 +654,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
                 ZSql = ZSql & "Variable9 ,"
                 ZSql = ZSql & "Variable10 ,"
                 ZSql = ZSql & "FechaGrabacion ,"
-                ZSql = ZSql & "Version ,"
+                ZSql = ZSql & "[Version] ,"
                 ZSql = ZSql & "Corte )"
                 ZSql = ZSql & "Values ("
                 ZSql = ZSql & "'" & WClave & "',"
@@ -2918,9 +2929,139 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
 
     Private Sub btnHistorialCambios_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnHistorialCambios.Click
 
-        With New HistorialCambios("T", txtCodigo.Text)
+        With New HistorialCambios("M", txtCodigo.Text)
             .Show(Me)
         End With
 
     End Sub
+
+    Private Sub btnAgregarRenglon_Click(sender As Object, e As EventArgs) Handles btnAgregarRenglon.Click
+        With dgvEspecif
+            If .SelectedRows.Count = 1 Then
+                Dim DesdeRenglon As Integer = .CurrentRow.Index
+                _MoverDatosGrillaUnRenglon(DesdeRenglon)
+                _MoverDatosGrillaINGLESUnRenglon(DesdeRenglon)
+                .CurrentCell = .Rows(DesdeRenglon + 1).Cells(0)
+                .Focus()
+            End If
+        End With
+    End Sub
+
+    Private Sub _MoverDatosGrillaUnRenglon(ByVal DesdeRenglon As Integer)
+        Dim indexAnterior = dgvEspecif.Rows.Count - 1
+        dgvEspecif.Rows.Add()
+        Dim IndexDondeCopio As Integer = dgvEspecif.Rows.Count - 1
+        Do
+            If DesdeRenglon = indexAnterior Then
+
+                dgvEspecif.Rows(IndexDondeCopio).Cells("Ensayo").Value = ""
+                dgvEspecif.Rows(IndexDondeCopio).Cells("Especificacion").Value = ""
+                dgvEspecif.Rows(IndexDondeCopio).Cells("DescEnsayo").Value = ""
+                dgvEspecif.Rows(IndexDondeCopio).Cells("Farmacopea").Value = ""
+                dgvEspecif.Rows(IndexDondeCopio).Cells("TipoEspecif").Value = ""
+                dgvEspecif.Rows(IndexDondeCopio).Cells("DesdeEspecif").Value = ""
+                dgvEspecif.Rows(IndexDondeCopio).Cells("HastaEspecif").Value = ""
+                dgvEspecif.Rows(IndexDondeCopio).Cells("UnidadEspecif").Value = ""
+                dgvEspecif.Rows(IndexDondeCopio).Cells("MenorIgualEspecif").Value = ""
+                dgvEspecif.Rows(IndexDondeCopio).Cells("InformaEspecif").Value = ""
+                dgvEspecif.Rows(IndexDondeCopio).Cells("Parametro").Value = ""
+                dgvEspecif.Rows(IndexDondeCopio).Cells("FormulaEspecif").Value = ""
+                dgvEspecif.Rows(IndexDondeCopio).Cells("Variable1").Value = ""
+                dgvEspecif.Rows(IndexDondeCopio).Cells("Variable2").Value = ""
+                dgvEspecif.Rows(IndexDondeCopio).Cells("Variable3").Value = ""
+                dgvEspecif.Rows(IndexDondeCopio).Cells("Variable4").Value = ""
+                dgvEspecif.Rows(IndexDondeCopio).Cells("Variable5").Value = ""
+                dgvEspecif.Rows(IndexDondeCopio).Cells("Variable6").Value = ""
+                dgvEspecif.Rows(IndexDondeCopio).Cells("Variable7").Value = ""
+                dgvEspecif.Rows(IndexDondeCopio).Cells("Variable8").Value = ""
+                dgvEspecif.Rows(IndexDondeCopio).Cells("Variable9").Value = ""
+                dgvEspecif.Rows(IndexDondeCopio).Cells("Variable10").Value = ""
+
+                Exit Do
+
+            Else
+
+                dgvEspecif.Rows(IndexDondeCopio).Cells("Ensayo").Value = dgvEspecif.Rows(indexAnterior).Cells("Ensayo").Value
+                dgvEspecif.Rows(IndexDondeCopio).Cells("Especificacion").Value = dgvEspecif.Rows(indexAnterior).Cells("Especificacion").Value
+                dgvEspecif.Rows(IndexDondeCopio).Cells("DescEnsayo").Value = dgvEspecif.Rows(indexAnterior).Cells("DescEnsayo").Value
+                dgvEspecif.Rows(IndexDondeCopio).Cells("Farmacopea").Value = dgvEspecif.Rows(indexAnterior).Cells("Farmacopea").Value
+                dgvEspecif.Rows(IndexDondeCopio).Cells("TipoEspecif").Value = dgvEspecif.Rows(indexAnterior).Cells("TipoEspecif").Value
+                dgvEspecif.Rows(IndexDondeCopio).Cells("DesdeEspecif").Value = dgvEspecif.Rows(indexAnterior).Cells("DesdeEspecif").Value
+                dgvEspecif.Rows(IndexDondeCopio).Cells("HastaEspecif").Value = dgvEspecif.Rows(indexAnterior).Cells("HastaEspecif").Value
+                dgvEspecif.Rows(IndexDondeCopio).Cells("UnidadEspecif").Value = dgvEspecif.Rows(indexAnterior).Cells("UnidadEspecif").Value()
+                dgvEspecif.Rows(IndexDondeCopio).Cells("MenorIgualEspecif").Value = dgvEspecif.Rows(indexAnterior).Cells("MenorIgualEspecif").Value
+                dgvEspecif.Rows(IndexDondeCopio).Cells("InformaEspecif").Value = dgvEspecif.Rows(indexAnterior).Cells("InformaEspecif").Value
+                dgvEspecif.Rows(IndexDondeCopio).Cells("Parametro").Value = dgvEspecif.Rows(indexAnterior).Cells("Parametro").Value
+                dgvEspecif.Rows(IndexDondeCopio).Cells("FormulaEspecif").Value = dgvEspecif.Rows(indexAnterior).Cells("FormulaEspecif").Value
+                dgvEspecif.Rows(IndexDondeCopio).Cells("Variable1").Value = dgvEspecif.Rows(indexAnterior).Cells("Variable1").Value
+                dgvEspecif.Rows(IndexDondeCopio).Cells("Variable2").Value = dgvEspecif.Rows(indexAnterior).Cells("Variable2").Value
+                dgvEspecif.Rows(IndexDondeCopio).Cells("Variable3").Value = dgvEspecif.Rows(indexAnterior).Cells("Variable3").Value
+                dgvEspecif.Rows(IndexDondeCopio).Cells("Variable4").Value = dgvEspecif.Rows(indexAnterior).Cells("Variable4").Value
+                dgvEspecif.Rows(IndexDondeCopio).Cells("Variable5").Value = dgvEspecif.Rows(indexAnterior).Cells("Variable5").Value
+                dgvEspecif.Rows(IndexDondeCopio).Cells("Variable6").Value = dgvEspecif.Rows(indexAnterior).Cells("Variable6").Value
+                dgvEspecif.Rows(IndexDondeCopio).Cells("Variable7").Value = dgvEspecif.Rows(indexAnterior).Cells("Variable7").Value
+                dgvEspecif.Rows(IndexDondeCopio).Cells("Variable8").Value = dgvEspecif.Rows(indexAnterior).Cells("Variable8").Value
+                dgvEspecif.Rows(IndexDondeCopio).Cells("Variable9").Value = dgvEspecif.Rows(indexAnterior).Cells("Variable9").Value
+                dgvEspecif.Rows(IndexDondeCopio).Cells("Variable10").Value = dgvEspecif.Rows(indexAnterior).Cells("Variable10").Value
+
+                indexAnterior -= 1
+                IndexDondeCopio -= 1
+
+            End If
+
+        Loop
+
+
+
+
+    End Sub
+
+    Private Sub _MoverDatosGrillaINGLESUnRenglon(ByVal DesdeRenglon As Integer)
+        Dim indexAnterior = dgvEspecifIngles.Rows.Count - 1
+        dgvEspecifIngles.Rows.Add()
+        Dim IndexDondeCopio As Integer = dgvEspecifIngles.Rows.Count - 1
+        Do
+            If DesdeRenglon = indexAnterior Then
+
+                dgvEspecifIngles.Rows(IndexDondeCopio).Cells("EnsayoIngles").Value = ""
+                dgvEspecifIngles.Rows(IndexDondeCopio).Cells("EspecificacionIngles").Value = ""
+                dgvEspecifIngles.Rows(IndexDondeCopio).Cells("DescEnsayoIngles").Value = ""
+                dgvEspecifIngles.Rows(IndexDondeCopio).Cells("FarmacopeaIngles").Value = ""
+                dgvEspecifIngles.Rows(IndexDondeCopio).Cells("UnidadEspecifIngles").Value = ""
+
+
+                Exit Do
+
+            Else
+
+                dgvEspecifIngles.Rows(IndexDondeCopio).Cells("EnsayoIngles").Value = dgvEspecifIngles.Rows(indexAnterior).Cells("EnsayoIngles").Value
+                dgvEspecifIngles.Rows(IndexDondeCopio).Cells("EspecificacionIngles").Value = dgvEspecifIngles.Rows(indexAnterior).Cells("EspecificacionIngles").Value
+                dgvEspecifIngles.Rows(IndexDondeCopio).Cells("DescEnsayoIngles").Value = dgvEspecifIngles.Rows(indexAnterior).Cells("DescEnsayoIngles").Value
+                dgvEspecifIngles.Rows(IndexDondeCopio).Cells("FarmacopeaIngles").Value = dgvEspecifIngles.Rows(indexAnterior).Cells("FarmacopeaIngles").Value
+                dgvEspecifIngles.Rows(IndexDondeCopio).Cells("UnidadEspecifIngles").Value = dgvEspecifIngles.Rows(indexAnterior).Cells("UnidadEspecifIngles").Value()
+
+
+                indexAnterior -= 1
+                IndexDondeCopio -= 1
+
+            End If
+
+        Loop
+
+
+
+
+
+
+    End Sub
+
+
+
+    Private Sub btnNotas_Click(sender As Object, e As EventArgs) Handles btnNotas.Click
+        With New NotasCertificadosAnalisis(txtCodigo.Text, True)
+            .Show(Me)
+        End With
+    End Sub
+
+
 End Class

@@ -93,42 +93,42 @@ Public Class Login
     End Sub
 
     Private Sub btnIniciar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnIniciar.Click
-        'Try
+        Try
 
-        If txtClave.Text.Trim = "" Then Throw New Exception("Debe indicar una Clave de Acceso al Sistema.")
-        If cmbEmpresas.SelectedIndex < 0 Then cmbEmpresas.SelectedIndex = 0
+            If txtClave.Text.Trim = "" Then Throw New Exception("Debe indicar una Clave de Acceso al Sistema.")
+            If cmbEmpresas.SelectedIndex < 0 Then cmbEmpresas.SelectedIndex = 0
 
-        Dim WBaseDatos As String = CType(cmbEmpresas.SelectedItem, DataRowView).Item("BaseDatos")
+            Dim WBaseDatos As String = CType(cmbEmpresas.SelectedItem, DataRowView).Item("BaseDatos")
 
-        Conexion.EmpresaDeTrabajo = WBaseDatos
-        ConsultasVarias.Clases.Conexion.EmpresaDeTrabajo = WBaseDatos
+            Conexion.EmpresaDeTrabajo = WBaseDatos
+            ConsultasVarias.Clases.Conexion.EmpresaDeTrabajo = WBaseDatos
 
-        Dim WOperador As DataRow = GetSingle("SELECT Operador, Descripcion FROM Operador WHERE UPPER(Clave) = '" & txtClave.Text & "'", WBaseDatos)
+            Dim WOperador As DataRow = GetSingle("SELECT Operador, Descripcion FROM Operador WHERE UPPER(Clave) = '" & txtClave.Text & "'", WBaseDatos)
 
-        If IsNothing(WOperador) Then Throw New Exception("Clave Errónea")
+            If IsNothing(WOperador) Then Throw New Exception("Clave Errónea")
 
-        With WOperador
-            Operador.Base = WBaseDatos
-            Operador.Codigo = OrDefault(.Item("Operador"), 0)
-            Operador.Clave = txtClave.Text.Trim
-            Operador.Descripcion = OrDefault(.Item("Descripcion"), "")
-        End With
+            With WOperador
+                Operador.Base = WBaseDatos
+                Operador.Codigo = OrDefault(.Item("Operador"), 0)
+                Operador.Clave = txtClave.Text.Trim
+                Operador.Descripcion = OrDefault(.Item("Descripcion"), "")
+            End With
 
-        Dim frm As New MenuPrincipal()
+            Dim frm As New MenuPrincipal()
 
-        frm.Show()
+            frm.Show()
 
-        Close()
+            Close()
 
-        'Catch ex As Exception
-        '    MsgBox(ex.Message, MsgBoxStyle.Exclamation)
-        '    With txtClave
-        '        .Focus()
-        '        .SelectionStart = 0
-        '        .SelectionLength = .Text.Length
-        '    End With
-        '
-        'End Try
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+            With txtClave
+                .Focus()
+                .SelectionStart = 0
+                .SelectionLength = .Text.Length
+            End With
+
+        End Try
     End Sub
 
     Private Sub ComboBox1_DrawItem(ByVal sender As Object, ByVal e As DrawItemEventArgs) Handles cmbEmpresas.DrawItem
