@@ -104,6 +104,7 @@ Module Query
 
                         cm.CommandText = _q
                         cm.ExecuteNonQuery()
+
                     Next
 
                     trans.Commit()
