@@ -92,6 +92,7 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.Label20 = New System.Windows.Forms.Label()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.btnConsulta = New System.Windows.Forms.Button()
         Me.btnGrabar = New System.Windows.Forms.Button()
         Me.btnNotasCertAnalisis = New System.Windows.Forms.Button()
         Me.btnRevalida = New System.Windows.Forms.Button()
@@ -104,11 +105,11 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.dgvEnsayos = New ConsultasVarias.DBDataGridView()
-        Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Ensayo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Especificacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Farmacopea = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Valor = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ValorBandera = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Resultado = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Parametro = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -142,6 +143,9 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.VariableValor10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.EspecificacionIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Decimales = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.OperadorIniciales = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.OperadorID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.gbDatosAdicionales.SuspendLayout()
@@ -813,6 +817,7 @@ Partial Class IngresoEnsayosLaboratorioMP
         '
         'GroupBox3
         '
+        Me.GroupBox3.Controls.Add(Me.btnConsulta)
         Me.GroupBox3.Controls.Add(Me.btnGrabar)
         Me.GroupBox3.Controls.Add(Me.btnNotasCertAnalisis)
         Me.GroupBox3.Controls.Add(Me.btnRevalida)
@@ -838,6 +843,15 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.GroupBox3.Size = New System.Drawing.Size(360, 94)
         Me.GroupBox3.TabIndex = 6
         Me.GroupBox3.TabStop = False
+        '
+        'btnConsulta
+        '
+        Me.btnConsulta.Location = New System.Drawing.Point(10, 46)
+        Me.btnConsulta.Name = "btnConsulta"
+        Me.btnConsulta.Size = New System.Drawing.Size(109, 30)
+        Me.btnConsulta.TabIndex = 3
+        Me.btnConsulta.Text = "CONSULTA"
+        Me.btnConsulta.UseVisualStyleBackColor = True
         '
         'btnGrabar
         '
@@ -896,9 +910,9 @@ Partial Class IngresoEnsayosLaboratorioMP
         'btnImprimirEnsayosIngresados
         '
         Me.btnImprimirEnsayosIngresados.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnImprimirEnsayosIngresados.Location = New System.Drawing.Point(10, 47)
+        Me.btnImprimirEnsayosIngresados.Location = New System.Drawing.Point(125, 46)
         Me.btnImprimirEnsayosIngresados.Name = "btnImprimirEnsayosIngresados"
-        Me.btnImprimirEnsayosIngresados.Size = New System.Drawing.Size(339, 30)
+        Me.btnImprimirEnsayosIngresados.Size = New System.Drawing.Size(224, 30)
         Me.btnImprimirEnsayosIngresados.TabIndex = 0
         Me.btnImprimirEnsayosIngresados.Text = "VER PDF ENSAYOS INGRESADOS"
         Me.btnImprimirEnsayosIngresados.UseVisualStyleBackColor = True
@@ -974,7 +988,7 @@ Partial Class IngresoEnsayosLaboratorioMP
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgvEnsayos.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.dgvEnsayos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvEnsayos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Ensayo, Me.Especificacion, Me.Farmacopea, Me.Valor, Me.Resultado, Me.Parametro, Me.Descripcion, Me.TipoEspecif, Me.DesdeEspecif, Me.HastaEspecif, Me.UnidadEspecif, Me.MenorIgualEspecif, Me.InformaEspecif, Me.Observaciones, Me.FormulaEspecif, Me.Variable1, Me.Variable2, Me.Variable3, Me.Variable4, Me.Variable5, Me.Variable6, Me.Variable7, Me.Variable8, Me.Variable9, Me.Variable10, Me.VariableValor1, Me.VariableValor2, Me.VariableValor3, Me.VariableValor4, Me.VariableValor5, Me.VariableValor6, Me.VariableValor7, Me.VariableValor8, Me.VariableValor9, Me.VariableValor10, Me.EspecificacionIngles, Me.Decimales})
+        Me.dgvEnsayos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Ensayo, Me.Especificacion, Me.Farmacopea, Me.Valor, Me.ValorBandera, Me.Resultado, Me.Parametro, Me.Descripcion, Me.TipoEspecif, Me.DesdeEspecif, Me.HastaEspecif, Me.UnidadEspecif, Me.MenorIgualEspecif, Me.InformaEspecif, Me.Observaciones, Me.FormulaEspecif, Me.Variable1, Me.Variable2, Me.Variable3, Me.Variable4, Me.Variable5, Me.Variable6, Me.Variable7, Me.Variable8, Me.Variable9, Me.Variable10, Me.VariableValor1, Me.VariableValor2, Me.VariableValor3, Me.VariableValor4, Me.VariableValor5, Me.VariableValor6, Me.VariableValor7, Me.VariableValor8, Me.VariableValor9, Me.VariableValor10, Me.EspecificacionIngles, Me.Decimales, Me.OperadorIniciales, Me.OperadorID})
         DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
         DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1004,16 +1018,6 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.dgvEnsayos.Size = New System.Drawing.Size(992, 285)
         Me.dgvEnsayos.TabIndex = 4
         '
-        'Panel2
-        '
-        Me.Panel2.Controls.Add(Me.GroupBox2)
-        Me.Panel2.Controls.Add(Me.GroupBox3)
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(3, 349)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(992, 102)
-        Me.Panel2.TabIndex = 5
-        '
         'Ensayo
         '
         Me.Ensayo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
@@ -1040,6 +1044,7 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.Farmacopea.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
         Me.Farmacopea.HeaderText = "Farmac"
         Me.Farmacopea.Name = "Farmacopea"
+        Me.Farmacopea.ReadOnly = True
         Me.Farmacopea.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.Farmacopea.Width = 48
         '
@@ -1052,6 +1057,13 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.Valor.Name = "Valor"
         Me.Valor.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.Valor.Width = 50
+        '
+        'ValorBandera
+        '
+        Me.ValorBandera.HeaderText = "ValorBandera"
+        Me.ValorBandera.Name = "ValorBandera"
+        Me.ValorBandera.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.ValorBandera.Visible = False
         '
         'Resultado
         '
@@ -1072,6 +1084,7 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.Parametro.HeaderText = "Parámetro"
         Me.Parametro.MinimumWidth = 150
         Me.Parametro.Name = "Parametro"
+        Me.Parametro.ReadOnly = True
         Me.Parametro.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.Parametro.Width = 150
         '
@@ -1299,6 +1312,30 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.Decimales.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.Decimales.Visible = False
         '
+        'OperadorIniciales
+        '
+        Me.OperadorIniciales.HeaderText = "Opera."
+        Me.OperadorIniciales.Name = "OperadorIniciales"
+        Me.OperadorIniciales.ReadOnly = True
+        Me.OperadorIniciales.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'OperadorID
+        '
+        Me.OperadorID.HeaderText = "OperadorID"
+        Me.OperadorID.Name = "OperadorID"
+        Me.OperadorID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.OperadorID.Visible = False
+        '
+        'Panel2
+        '
+        Me.Panel2.Controls.Add(Me.GroupBox2)
+        Me.Panel2.Controls.Add(Me.GroupBox3)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel2.Location = New System.Drawing.Point(3, 349)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(992, 102)
+        Me.Panel2.TabIndex = 5
+        '
         'IngresoEnsayosLaboratorioMP
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1398,10 +1435,12 @@ Partial Class IngresoEnsayosLaboratorioMP
     Friend WithEvents Label26 As System.Windows.Forms.Label
     Friend WithEvents txtLoteProveedor As System.Windows.Forms.TextBox
     Friend WithEvents Label28 As System.Windows.Forms.Label
+    Friend WithEvents btnConsulta As System.Windows.Forms.Button
     Friend WithEvents Ensayo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Especificacion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Farmacopea As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Valor As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ValorBandera As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Resultado As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Parametro As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -1435,4 +1474,6 @@ Partial Class IngresoEnsayosLaboratorioMP
     Friend WithEvents VariableValor10 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents EspecificacionIngles As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Decimales As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents OperadorIniciales As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents OperadorID As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

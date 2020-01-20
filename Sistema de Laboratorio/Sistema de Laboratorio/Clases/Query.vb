@@ -1,4 +1,5 @@
 ﻿Imports System.Data.SqlClient
+Imports System.IO
 Imports Laboratorio.Clases
 
 Module Query
@@ -95,8 +96,11 @@ Module Query
 
                     For Each _q As String In q
                         Debug.Print(_q)
+
+
                         cm.CommandText = _q
                         cm.ExecuteNonQuery()
+
                     Next
 
                     trans.Commit()
