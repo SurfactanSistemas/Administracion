@@ -135,7 +135,6 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
             For i = 0 To dgvEspecif.Rows.Count - 1
                 dgvEspecifIngles.Rows(i).Cells("ensayoIngles").Value = dgvEspecif.Rows(i).Cells("Ensayo").Value
                 dgvEspecifIngles.Rows(i).Cells("EspecificacionIngles").Value = dgvEspecif.Rows(i).Cells("Especificacion").Value
-
             Next
 
 
@@ -236,11 +235,6 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
 
         Else
-
-
-
-
-
 
             '
             ' Traemos los datos en el formato viejo y lo ajustamos para presentarlo como el nuevo.
@@ -431,23 +425,13 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                 '                txtCas.Text = Trim(OrDefault(WEspecificacionesUnificaII.Item("Cas"), ""))
 
             End If
-
-
-
-
-
+            
         End If
 
         TabControl1.SelectTab(1)
 
     End Sub
-
-
-
-
-
-
-
+    
     Private Sub _PoblarEspecificacionesIngles(WCargaVIngles As DataTable)
 
         dgvEspecifIngles.Rows.Clear()
@@ -538,13 +522,6 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
         End If
     End Sub
-
-
-
-
-
-
-
 
     Private Sub _CargarDatosEspecifFarma()
 

@@ -62,7 +62,6 @@ namespace Eval_Proveedores.Listados.VencCamiones
             }
             catch (Exception err)
             {
-
                 MessageBox.Show(err.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -77,9 +76,14 @@ namespace Eval_Proveedores.Listados.VencCamiones
             dtInforme.Columns.Add("Vto4", typeof(string));
             dtInforme.Columns.Add("Vto5", typeof(string));
             dtInforme.Columns.Add("NomProve", typeof(string));
-            
+
             foreach (DataRow fila in dtInforme.Rows)
             {
+                foreach (string col in new string[] { "OrdFechaVtoI", "OrdFechaVtoII", "OrdFechaVtoIII", "OrdFechaVtoIV", "OrdFechaVtoV" })
+                {
+                    if (fila[col].ToString().Trim() == "") fila[col] = "0";
+                }
+
                 if ((fila[3].ToString() != "  /  /    ") && (int.Parse(fila[8].ToString()) >= Desde) && (int.Parse(fila[8].ToString()) <= Hasta))
                 {
                     fila["Vto1"] = fila[3].ToString();
@@ -100,8 +104,7 @@ namespace Eval_Proveedores.Listados.VencCamiones
                     fila["Vto4"] = fila[6].ToString();
                 }
 
-                if ((fila[7].ToString() != "  /  /    ") && (int.Parse(fila[12].ToString()) >= Desde) && (int.Parse(fila[12].ToString()) <= Hasta))
-                {
+                if (fila[7].ToString() != "  /  /    " && int.Parse(fila[12].ToString()) >= Desde && int.Parse(fila[12].ToString()) <= Hasta){
                     fila["Vto5"] = fila[7].ToString();
                 }
 
@@ -111,8 +114,6 @@ namespace Eval_Proveedores.Listados.VencCamiones
                     P = PBOL.Find(fila[13].ToString());
                     fila["NomProve"] = P.Descripcion;
                 }
-
-                
             }
         }
 

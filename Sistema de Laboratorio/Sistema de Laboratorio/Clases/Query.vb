@@ -1,4 +1,5 @@
 ﻿Imports System.Data.SqlClient
+Imports System.IO
 Imports Laboratorio.Clases
 
 Module Query
@@ -95,6 +96,12 @@ Module Query
 
                     For Each _q As String In q
                         Debug.Print(_q)
+
+                        'Using sw As New StreamWriter("C:\sql.txt")
+                        Using sw As New StreamWriter(Environment.SpecialFolder.Desktop & "sql.txt")
+                            sw.WriteLine(_q)
+                        End Using
+
                         cm.CommandText = _q
                         cm.ExecuteNonQuery()
                     Next

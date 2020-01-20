@@ -181,4 +181,16 @@
             .Show(Me)
         End With
     End Sub
+
+    Private Sub ImpresiónPlanillaDeEnsayosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImpresiónPlanillaDeEnsayosToolStripMenuItem.Click
+        With New ImpresionPlanillaEnsayosPT()
+            .Show(Me)
+        End With
+    End Sub
+
+    Private Sub ImpresiónPlanillaDeEnsayosToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ImpresiónPlanillaDeEnsayosToolStripMenuItem1.Click
+        With New ImpresionPlanillaEnsayosMP()
+            .Show(Me)
+        End With
+    End Sub
 End Class

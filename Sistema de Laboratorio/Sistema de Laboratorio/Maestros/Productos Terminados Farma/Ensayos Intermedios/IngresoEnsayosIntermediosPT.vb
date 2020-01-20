@@ -697,7 +697,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
             _ValidarDatos()
 
             '
-            ' Recalculamos los valores de las celdas que se calculen por Formula.
+            ' Recalculamos los valores de las celdas que se calculen por Fórmula.
             '
             _RecalcularFormulas()
 
@@ -712,24 +712,16 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
                 Exit Sub
 
-            Else
+            ElseIf WIDOperadorAnalista = "" Then
 
-                If WIDOperadorAnalista = "" Then
+                WMotivoClaveSeguridad = TiposSolicitudClaveSeguridad.ActualizarEnsayoNoBloqueado
 
-                    WMotivoClaveSeguridad = TiposSolicitudClaveSeguridad.ActualizarEnsayoNoBloqueado
+                Dim frm As New IngresoClaveSeguridad()
+                frm.ShowDialog(Me)
 
-                    Dim frm As New IngresoClaveSeguridad()
-                    frm.ShowDialog(Me)
+                txtPartida.Focus()
 
-                    txtPartida.Focus()
-
-                    Exit Sub
-
-                End If
-
-
-
-
+                Exit Sub
             End If
 
             If Not _ValidarValoresIngresados() And Not WEsPorDesvio Then
@@ -745,6 +737,13 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                 Dim mot As New IngresoMotivoDesvio(WMotivoDesvio)
 
                 If mot.ShowDialog(Me) <> DialogResult.OK Then Exit Sub
+
+                '
+                ' TODO Consultar sobre implementación o no.
+                '
+                ' La solicitud de contraseña para los ensayos ingresados por Desvío, viene de la funcionalidad vieja.
+                ' Ahora se pide contraseña para grabar, ya sea para la grabación por parte de los analistas como por el jefe/supervisor.
+                '
 
                 '                WMotivoClaveSeguridad = TiposSolicitudClaveSeguridad.IngresoEnsayoIntermedioPorDesvio
                 '
@@ -770,10 +769,17 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
                 If mot.ShowDialog(Me) <> DialogResult.OK Then Exit Sub
 
-                WMotivoClaveSeguridad = TiposSolicitudClaveSeguridad.IngresoEnsayoIntermedioPorDesvio
+                '
+                ' TODO Consultar sobre implementación o no.
+                '
+                ' La solicitud de contraseña para los ensayos ingresados por Desvío, viene de la funcionalidad vieja.
+                ' Ahora se pide contraseña para grabar, ya sea para la grabación por parte de los analistas como por el jefe/supervisor.
+                '
 
-                Dim frm As New IngresoClaveSeguridad
-                frm.ShowDialog(Me)
+                'WMotivoClaveSeguridad = TiposSolicitudClaveSeguridad.IngresoEnsayoIntermedioPorDesvio
+                '
+                'Dim frm As New IngresoClaveSeguridad
+                'frm.ShowDialog(Me)
 
             End If
 
@@ -860,7 +866,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
 
 
-                    Dim WOperadorLabora As String = WIDOperadorAnalista 'Trim(OrDefault(.Cells("OperadorLabora").Value, ""))
+                    Dim WOperadorLabora As String = WIDOperadorAnalista ' Se lo obtiene cuando se valida la contraseña.
 
                     Dim WFormulas(10, 2) As String
 
@@ -1385,13 +1391,15 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
             Case TiposSolicitudClaveSeguridad.ActualizarEnsayoNoBloqueado
 
+                WIDOperadorAnalista = ""
+
                 Dim WDatos As DataRow = GetSingle("SELECT Operador, AnalistaLab FROM Operador WHERE Clave = '" & UCase(WClave) & "'", "SurfactanSa")
 
                 If WDatos IsNot Nothing Then
                     Dim AnalistasLabPermiso As String = OrDefault(WDatos.Item("AnalistaLab"), "")
                     If AnalistasLabPermiso.ToUpper = "S" Then
                         WIDOperadorAnalista = WDatos.Item("Operador")
-                        btnGrabar.PerformClick()
+                        btnGrabar_Click(Nothing, Nothing)
                         Exit Sub
                     End If
                 End If

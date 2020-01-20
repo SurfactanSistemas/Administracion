@@ -104,7 +104,6 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.dgvEnsayos = New ConsultasVarias.DBDataGridView()
-        Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Ensayo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Especificacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Farmacopea = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -142,6 +141,7 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.VariableValor10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.EspecificacionIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Decimales = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.gbDatosAdicionales.SuspendLayout()
@@ -898,7 +898,7 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.btnImprimirEnsayosIngresados.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnImprimirEnsayosIngresados.Location = New System.Drawing.Point(10, 47)
         Me.btnImprimirEnsayosIngresados.Name = "btnImprimirEnsayosIngresados"
-        Me.btnImprimirEnsayosIngresados.Size = New System.Drawing.Size(339, 30)
+        Me.btnImprimirEnsayosIngresados.Size = New System.Drawing.Size(224, 30)
         Me.btnImprimirEnsayosIngresados.TabIndex = 0
         Me.btnImprimirEnsayosIngresados.Text = "VER PDF ENSAYOS INGRESADOS"
         Me.btnImprimirEnsayosIngresados.UseVisualStyleBackColor = True
@@ -1003,16 +1003,6 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.dgvEnsayos.SinClickDerecho = False
         Me.dgvEnsayos.Size = New System.Drawing.Size(992, 285)
         Me.dgvEnsayos.TabIndex = 4
-        '
-        'Panel2
-        '
-        Me.Panel2.Controls.Add(Me.GroupBox2)
-        Me.Panel2.Controls.Add(Me.GroupBox3)
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(3, 349)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(992, 102)
-        Me.Panel2.TabIndex = 5
         '
         'Ensayo
         '
@@ -1298,6 +1288,16 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.Decimales.ReadOnly = True
         Me.Decimales.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.Decimales.Visible = False
+        '
+        'Panel2
+        '
+        Me.Panel2.Controls.Add(Me.GroupBox2)
+        Me.Panel2.Controls.Add(Me.GroupBox3)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel2.Location = New System.Drawing.Point(3, 349)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(992, 102)
+        Me.Panel2.TabIndex = 5
         '
         'IngresoEnsayosLaboratorioMP
         '
