@@ -476,7 +476,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
     End Sub
 
     Private Function _GenerarImpreParametro(ByVal wTipoEspecif As String, ByVal wDesdeEspecif As String, ByVal wHastaEspecif As String, ByVal wUnidadEspecif As String, ByVal wMenorIgualEspecif As String) As String
-        If Val(wTipoEspecif) = 0 Then Return "Cumple Ensayo"
+        If Val(wDesdeEspecif) = 0 And Val(wHastaEspecif) = 0 Then Return "Cumple Ensayo"
         If Trim(wDesdeEspecif) = "" And Trim(wHastaEspecif) = "" Then Return ""
 
         wTipoEspecif = Trim(wTipoEspecif)
@@ -539,6 +539,8 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
         With dgvEnsayos
             If .Focused Or .IsCurrentCellInEditMode Then ' Detectamos los ENTER tanto si solo estan en foco o si estan en edición una celda.
                 .CommitEdit(DataGridViewDataErrorContexts.Commit) ' Guardamos todos los datos que no hayan sido confirmados.
+
+                If .CurrentCell Is Nothing Then Return False
 
                 Dim iCol = .CurrentCell.ColumnIndex
                 Dim iRow = .CurrentCell.RowIndex
@@ -643,10 +645,10 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
                                 Dim WResultado As String = _GenerarImpreResultado(WTipo, WDesde, WHasta, WUnidad, WValor)
 
-                                If WDecimales.Trim = "" Then
-                                    WDecimales = _CalcularCantidadDecimales(WDesde)
-                                    If Val(WDecimales) < _CalcularCantidadDecimales(WHasta) Then WDecimales = _CalcularCantidadDecimales(WHasta)
-                                End If
+                                'If WDecimales.Trim = "" Then
+                                WDecimales = _CalcularCantidadDecimales(WDesde)
+                                If Val(WDecimales) < _CalcularCantidadDecimales(WHasta) Then WDecimales = _CalcularCantidadDecimales(WHasta)
+                                'End If
 
                                 .Cells("Resultado").Value = WResultado
                                 .Cells("Valor").Value = WValor
@@ -671,6 +673,9 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                         End If
 
                 End Select
+
+                If .RowIndex + 1 = dgvEnsayos.Rows.Count Then txtLibros.Focus()
+
             End With
 
             Return True

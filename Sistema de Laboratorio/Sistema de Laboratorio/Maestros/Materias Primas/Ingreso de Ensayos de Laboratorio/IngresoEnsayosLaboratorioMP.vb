@@ -592,7 +592,8 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad, IA
     End Sub
 
     Private Function _GenerarImpreParametro(ByVal wTipoEspecif As String, ByVal wDesdeEspecif As String, ByVal wHastaEspecif As String, ByVal wUnidadEspecif As String, ByVal wMenorIgualEspecif As String) As String
-        If Val(wTipoEspecif) = 0 Then Return "Cumple Ensayo"
+
+        If Val(wDesdeEspecif) = 0 And Val(wHastaEspecif) = 0 Then Return "Cumple Ensayo"
         If Trim(wDesdeEspecif) = "" And Trim(wHastaEspecif) = "" Then Return ""
 
         wTipoEspecif = Trim(wTipoEspecif)
@@ -639,6 +640,8 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad, IA
         With dgvEnsayos
             If .Focused Or .IsCurrentCellInEditMode Then ' Detectamos los ENTER tanto si solo estan en foco o si estan en edición una celda.
                 .CommitEdit(DataGridViewDataErrorContexts.Commit) ' Guardamos todos los datos que no hayan sido confirmados.
+
+                If .CurrentCell Is Nothing Then Return False
 
                 Dim iCol = .CurrentCell.ColumnIndex
                 Dim iRow = .CurrentCell.RowIndex
@@ -743,10 +746,10 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad, IA
 
                                 Dim WResultado As String = _GenerarImpreResultado(WTipo, WDesde, WHasta, WUnidad, WValor)
 
-                                If WDecimales.Trim = "" Then
-                                    WDecimales = _CalcularCantidadDecimales(WDesde)
-                                    If Val(WDecimales) < _CalcularCantidadDecimales(WHasta) Then WDecimales = _CalcularCantidadDecimales(WHasta)
-                                End If
+                                'If WDecimales.Trim = "" Then
+                                WDecimales = _CalcularCantidadDecimales(WDesde)
+                                If Val(WDecimales) < _CalcularCantidadDecimales(WHasta) Then WDecimales = _CalcularCantidadDecimales(WHasta)
+                                'End If
 
                                 .Cells("Resultado").Value = WResultado
                                 .Cells("Valor").Value = WValor
@@ -771,6 +774,11 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad, IA
                         End If
 
                 End Select
+
+                If .RowIndex + 1 = dgvEnsayos.Rows.Count Then
+                    txtLibros.Focus()
+                End If
+
             End With
 
             Return True
@@ -878,61 +886,58 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad, IA
 
             Dim Est As TiposEstadoLaudoMP = TiposEstadoLaudoMP.Aprobado
 
-                        If WEsPorDesvio Then Est = TiposEstadoLaudoMP.AprobadoPorDesvio
-                        If WEsPorRechazo Then Est = TiposEstadoLaudoMP.Rechazado
-
+            If WEsPorDesvio Then Est = TiposEstadoLaudoMP.AprobadoPorDesvio
+            If WEsPorRechazo Then Est = TiposEstadoLaudoMP.Rechazado
 
             If WActualiza = False Then
                 txtPartida.Text = MatPrima._TraerProximaNumeracion(Est)
             End If
 
+            WEnvase = ""
+            WCert1 = ""
+            WCert2 = ""
+            WEstado1 = ""
+            WEstado2 = ""
+            WVenc = ""
+            WFechaElab = ""
+            WTipoVenc = ""
 
-                        WEnvase = ""
-                        WCert1 = ""
-                        WCert2 = ""
-                        WEstado1 = ""
-                        WEstado2 = ""
-                        WVenc = ""
-                        WFechaElab = ""
-                        WTipoVenc = ""
+            WCantidadLaudo = _CalcularSaldoOCInforme()
 
+            '
+            ' Obtenemos los datos del Informe de Recepción.
+            '
+            With New ConfirmarTipoCantidadLaudo(Est)
+                .txtLaudo.Text = txtPartida.Text
+                .txtCantidad.Text = WCantidadLaudo
 
-                        WCantidadLaudo = _CalcularSaldoOCInforme()
+                Dim result As DialogResult = .ShowDialog(Me)
 
-                        '
-                        ' Obtenemos los datos del Informe de Recepción.
-                        '
-                        With New ConfirmarTipoCantidadLaudo(Est)
-                            .txtLaudo.Text = txtPartida.Text
-                            .txtCantidad.Text = WCantidadLaudo
+                If result = Windows.Forms.DialogResult.OK Then
 
-                            Dim result As DialogResult = .ShowDialog(Me)
+                    If Val(formatonumerico(.txtCantidad.Text)) > Val(formatonumerico(WCantidadLaudo)) Then
+                        MsgBox("La cantidad a Laudar SUPERA al saldo que se encuentra disponible en el Informe de Recepción indicado." & vbCrLf & vbCrLf & "Saldo disponible (Inf. Recepción): " & formatonumerico(WCantidadLaudo), MsgBoxStyle.Exclamation)
+                        txtPartida.Text = ""
+                        Exit Sub
+                    ElseIf Val(formatonumerico(.txtCantidad.Text)) < Val(formatonumerico(WCantidadLaudo)) Then
+                        If MsgBox("La cantidad a Laudar es MENOR al saldo que se encuentra disponible en el Informe de Recepción indicado." & vbCrLf & vbCrLf & "Saldo disponible (Inf. Recepción): " & formatonumerico(WCantidadLaudo) & vbCrLf & vbCrLf & "¿Desea seguir con la grabación?", MsgBoxStyle.YesNoCancel) <> MsgBoxResult.Yes Then
+                            txtPartida.Text = ""
+                            Exit Sub
+                        End If
+                    End If
 
-                            If result = Windows.Forms.DialogResult.OK Then
+                    txtPartida.Text = .txtLaudo.Text
+                    WCantidadLaudo = formatonumerico(.txtCantidad.Text)
+                    WEsPorDesvio = .rbPorDesvio.Checked
+                    WEsPorRechazo = .rbRechazado.Checked
+                    If WEsPorDesvio Then Est = TiposEstadoLaudoMP.AprobadoPorDesvio
+                    If WEsPorRechazo Then Est = TiposEstadoLaudoMP.Rechazado
+                Else
+                    txtPartida.Text = ""
+                    Exit Sub
+                End If
 
-                                If Val(formatonumerico(.txtCantidad.Text)) > Val(formatonumerico(WCantidadLaudo)) Then
-                                    MsgBox("La cantidad a Laudar SUPERA al saldo que se encuentra disponible en el Informe de Recepción indicado." & vbCrLf & vbCrLf & "Saldo disponible (Inf. Recepción): " & formatonumerico(WCantidadLaudo), MsgBoxStyle.Exclamation)
-                                    txtPartida.Text = ""
-                                    Exit Sub
-                                ElseIf Val(formatonumerico(.txtCantidad.Text)) < Val(formatonumerico(WCantidadLaudo)) Then
-                                    If MsgBox("La cantidad a Laudar es MENOR al saldo que se encuentra disponible en el Informe de Recepción indicado." & vbCrLf & vbCrLf & "Saldo disponible (Inf. Recepción): " & formatonumerico(WCantidadLaudo) & vbCrLf & vbCrLf & "¿Desea seguir con la grabación?", MsgBoxStyle.YesNoCancel) <> MsgBoxResult.Yes Then
-                                        txtPartida.Text = ""
-                                        Exit Sub
-                                    End If
-                                End If
-
-                                txtPartida.Text = .txtLaudo.Text
-                                WCantidadLaudo = formatonumerico(.txtCantidad.Text)
-                                WEsPorDesvio = .rbPorDesvio.Checked
-                                WEsPorRechazo = .rbRechazado.Checked
-                                If WEsPorDesvio Then Est = TiposEstadoLaudoMP.AprobadoPorDesvio
-                                If WEsPorRechazo Then Est = TiposEstadoLaudoMP.Rechazado
-                            Else
-                                txtPartida.Text = ""
-                                Exit Sub
-                            End If
-
-                        End With
+            End With
 
 '                    End If
 '                End If
@@ -1355,7 +1360,7 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad, IA
         Dim WInf As DataRow = GetSingle("SELECT Total = SUM(Cantidad) FROM Informe WHERE Orden = '" & txtOrden.Text & "' And Articulo = '" & txtCodigo.Text & "' GROUP BY Orden, Articulo")
         If WInf IsNot Nothing Then WInformado = OrDefault(WInf.Item("Total"), 0)
 
-        Dim WOrden As DataRow = GetSingle("SELECT Total = (Liberada + Devuelta) FROM Laudo WHERE Orden = '" & txtOrden.Text & "' And Articulo = '" & txtCodigo.Text & "'")
+        Dim WOrden As DataRow = GetSingle("SELECT Total = SUM(Liberada + Devuelta) FROM Laudo WHERE Orden = '" & txtOrden.Text & "' And Articulo = '" & txtCodigo.Text & "'")
         If WOrden IsNot Nothing Then WLaudado = OrDefault(WOrden.Item("Total"), 0)
 
         Return formatonumerico(WInformado - WLaudado)

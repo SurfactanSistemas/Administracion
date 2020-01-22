@@ -491,7 +491,7 @@ Namespace Entidades
             wMenorIgualEspecif = Trim(wMenorIgualEspecif)
             WInformaEspecif = Trim(WInformaEspecif)
 
-            If Trim(wDesdeEspecif) = "" And Trim(wHastaEspecif) = "" Then WParam = ""
+            If Val(wDesdeEspecif) = 0 And Val(wHastaEspecif) = 0 Then Return "Cumple Ensayo"
             If Val(wTipoEspecif) = 0 Then WParam = "Cumple Ensayo"
 
             If {99, 999, 9999, 99999}.Contains(Val(wHastaEspecif)) Then wHastaEspecif = "9999"

@@ -124,7 +124,7 @@ Public Class ImpresionPlanillaEnsayosMP : Implements ConsultasVarias.Interfaces.
         wUnidadEspecif = OrDefault(Trim(wUnidadEspecif), "")
         wMenorIgualEspecif = OrDefault(Trim(wMenorIgualEspecif), "")
 
-        If Trim(wDesdeEspecif) = "" And Trim(wHastaEspecif) = "" Then Return "Cumple Ensayo"
+        If Val(wDesdeEspecif) = 0 And Val(wHastaEspecif) = 0 Then Return "Cumple Ensayo"
 
         If Val(wDesdeEspecif) <> 0 Or Val(wHastaEspecif) <> 9999 Then
 

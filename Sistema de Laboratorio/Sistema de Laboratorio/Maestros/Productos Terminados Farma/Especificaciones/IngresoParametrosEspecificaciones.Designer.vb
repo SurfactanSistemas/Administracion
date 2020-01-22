@@ -57,6 +57,7 @@ Partial Class IngresoParametrosEspecificaciones
         Me.txtFormula = New System.Windows.Forms.TextBox()
         Me.btnDefinirFormula = New System.Windows.Forms.Button()
         Me.Label8 = New System.Windows.Forms.Label()
+        Me.ckHabDesdeHasta = New System.Windows.Forms.CheckBox()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -80,7 +81,7 @@ Partial Class IngresoParametrosEspecificaciones
         'Label2
         '
         Me.Label2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.Control
@@ -93,7 +94,7 @@ Partial Class IngresoParametrosEspecificaciones
         'Label1
         '
         Me.Label1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.Control
@@ -231,6 +232,7 @@ Partial Class IngresoParametrosEspecificaciones
         '
         'GroupBox3
         '
+        Me.GroupBox3.Controls.Add(Me.ckHabDesdeHasta)
         Me.GroupBox3.Controls.Add(Me.txtHasta)
         Me.GroupBox3.Controls.Add(Me.Label6)
         Me.GroupBox3.Controls.Add(Me.txtDesde)
@@ -244,7 +246,7 @@ Partial Class IngresoParametrosEspecificaciones
         '
         'txtHasta
         '
-        Me.txtHasta.Location = New System.Drawing.Point(192, 20)
+        Me.txtHasta.Location = New System.Drawing.Point(192, 21)
         Me.txtHasta.Name = "txtHasta"
         Me.txtHasta.Size = New System.Drawing.Size(63, 20)
         Me.txtHasta.TabIndex = 5
@@ -253,7 +255,7 @@ Partial Class IngresoParametrosEspecificaciones
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(154, 24)
+        Me.Label6.Location = New System.Drawing.Point(154, 25)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(38, 13)
         Me.Label6.TabIndex = 0
@@ -261,7 +263,7 @@ Partial Class IngresoParametrosEspecificaciones
         '
         'txtDesde
         '
-        Me.txtDesde.Location = New System.Drawing.Point(68, 20)
+        Me.txtDesde.Location = New System.Drawing.Point(83, 21)
         Me.txtDesde.Name = "txtDesde"
         Me.txtDesde.Size = New System.Drawing.Size(63, 20)
         Me.txtDesde.TabIndex = 5
@@ -270,7 +272,7 @@ Partial Class IngresoParametrosEspecificaciones
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(26, 24)
+        Me.Label5.Location = New System.Drawing.Point(41, 25)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(41, 13)
         Me.Label5.TabIndex = 0
@@ -324,8 +326,8 @@ Partial Class IngresoParametrosEspecificaciones
         Me.ckInforma.TabIndex = 7
         Me.ckInforma.Text = "Informa Valor en Cert. de Análisis"
         Me.ToolTip1.SetToolTip(Me.ckInforma, "Por defecto, para los tipos de valores numéricos," & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "se imprimirán el rango para el" & _
-                " cual se encuentra definido " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "como válido el parámetro." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Desmarcando ésta opci" & _
-                "ón, se imprimirá el texto 'Informativo'")
+        " cual se encuentra definido " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "como válido el parámetro." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Desmarcando ésta opci" & _
+        "ón, se imprimirá el texto 'Informativo'")
         Me.ckInforma.UseVisualStyleBackColor = True
         '
         'btnAceptar
@@ -388,6 +390,15 @@ Partial Class IngresoParametrosEspecificaciones
         Me.Label8.Size = New System.Drawing.Size(47, 13)
         Me.Label8.TabIndex = 0
         Me.Label8.Text = "Fórmula:"
+        '
+        'ckHabDesdeHasta
+        '
+        Me.ckHabDesdeHasta.AutoSize = True
+        Me.ckHabDesdeHasta.Location = New System.Drawing.Point(20, 24)
+        Me.ckHabDesdeHasta.Name = "ckHabDesdeHasta"
+        Me.ckHabDesdeHasta.Size = New System.Drawing.Size(15, 14)
+        Me.ckHabDesdeHasta.TabIndex = 8
+        Me.ckHabDesdeHasta.UseVisualStyleBackColor = True
         '
         'IngresoParametrosEspecificaciones
         '
@@ -460,4 +471,5 @@ Partial Class IngresoParametrosEspecificaciones
     Friend WithEvents txtFormula As System.Windows.Forms.TextBox
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents btnDefinirFormula As System.Windows.Forms.Button
+    Friend WithEvents ckHabDesdeHasta As System.Windows.Forms.CheckBox
 End Class
