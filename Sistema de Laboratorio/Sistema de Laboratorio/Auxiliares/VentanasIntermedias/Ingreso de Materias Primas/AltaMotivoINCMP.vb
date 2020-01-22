@@ -289,7 +289,7 @@ Public Class AltaMotivoINCMP
     End Function
 
     Private Function _GenerarImpreParametro(ByVal wTipoEspecif As String, ByVal wDesdeEspecif As String, ByVal wHastaEspecif As String, ByVal wUnidadEspecif As String, ByVal wMenorIgualEspecif As String) As String
-        If Val(wTipoEspecif) = 0 Then Return "Cumple Ensayo"
+        If Val(wDesdeEspecif) = 0 And Val(wHastaEspecif) = 0 Then Return "Cumple Ensayo"
         If Trim(wDesdeEspecif) = "" And Trim(wHastaEspecif) = "" Then Return ""
 
         wTipoEspecif = Trim(wTipoEspecif)

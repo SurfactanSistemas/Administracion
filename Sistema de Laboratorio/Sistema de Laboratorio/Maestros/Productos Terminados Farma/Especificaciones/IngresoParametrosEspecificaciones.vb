@@ -131,17 +131,26 @@
         ckInforma.Enabled = True
         ckMenorIgual.Enabled = True
         txtFormula.Enabled = True
+
+        ckHabDesdeHasta.Visible = rbCumpleNoCumple.Checked
+
         btnDefinirFormula.Enabled = True
 
         For Each control As Control In {txtDesde, txtHasta, txtUnidad, ckInforma, ckMenorIgual, txtFormula, btnDefinirFormula}
             control.Enabled = Not rbCumpleNoCumple.Checked
         Next
 
+        ckHabDesdeHasta.Checked = (Val(WDesdeEspecif) <> 0 Or Val(WHastaEspecif) <> 0) And WTipoEspecif = 0
+        ckHabDesdeHasta_Click(Nothing, Nothing)
+
         If rbNumerico.Checked Then
             txtFormula.Enabled = False
             btnDefinirFormula.Enabled = False
             txtDesde.Focus()
         ElseIf rbCumpleNoCumple.Checked Then
+            txtDesde.Enabled = ckHabDesdeHasta.Checked
+            txtHasta.Enabled = ckHabDesdeHasta.Checked
+            txtUnidad.Enabled = ckHabDesdeHasta.Checked
             txtParametro.Focus()
         Else
             txtFormula.Focus()
@@ -160,6 +169,9 @@
             Exit Sub
         End If
 
+        If txtHasta.Text.StartsWith(".") Then txtHasta.Text = "0" & txtHasta.Text
+        If txtDesde.Text.StartsWith(".") Then txtDesde.Text = "0" & txtDesde.Text
+
         WParametro = txtParametro.Text.Trim
         WFarmacopea = txtFarmacopea.Text.Trim
         Dim WTipo As Integer = 0
@@ -175,11 +187,11 @@
         If rbFormula.Checked Then WTipo = 2
 
         If rbCumpleNoCumple.Checked Then
-            WDesde = 0
-            WHasta = 0
-            WUnidad = ""
+            WDesde = IIf(ckHabDesdeHasta.Checked, txtDesde.Text, "")
+            WHasta = IIf(ckHabDesdeHasta.Checked, txtHasta.Text, "")
+            WUnidad = IIf(ckHabDesdeHasta.Checked, txtUnidad.Text, "")
             WInforma = 0
-            WMenorIgual = 0
+            WMenorIgual = IIf(ckMenorIgual.Checked, 1, 0)
         End If
 
         Dim WOwner As IIngresoParametrosEspecificaciones = TryCast(Owner, IIngresoParametrosEspecificaciones)
@@ -198,5 +210,15 @@
     Private Sub btnDefinirFormula_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDefinirFormula.Click
         Dim frm As New DefinicionFormulaEspecificacion(txtFormula.Text, WParametrosFormula)
         frm.ShowDialog(Me)
+    End Sub
+
+    Private Sub ckHabDesdeHasta_Click(sender As Object, e As EventArgs) Handles ckHabDesdeHasta.Click
+        txtDesde.Enabled = ckHabDesdeHasta.Checked
+        txtHasta.Enabled = ckHabDesdeHasta.Checked
+        txtUnidad.Enabled = ckHabDesdeHasta.Checked
+        ckMenorIgual.Enabled = ckHabDesdeHasta.Checked
+
+        If txtDesde.Enabled Then txtDesde.Focus()
+
     End Sub
 End Class

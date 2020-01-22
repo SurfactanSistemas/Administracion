@@ -476,7 +476,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
     End Sub
 
     Private Function _GenerarImpreParametro(ByVal wTipoEspecif As String, ByVal wDesdeEspecif As String, ByVal wHastaEspecif As String, ByVal wUnidadEspecif As String, ByVal wMenorIgualEspecif As String) As String
-        If Val(wTipoEspecif) = 0 Then Return "Cumple Ensayo"
+        If Val(wDesdeEspecif) = 0 And Val(wHastaEspecif) = 0 Then Return "Cumple Ensayo"
         If Trim(wDesdeEspecif) = "" And Trim(wHastaEspecif) = "" Then Return ""
 
         wTipoEspecif = Trim(wTipoEspecif)
@@ -539,6 +539,8 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
         With dgvEnsayos
             If .Focused Or .IsCurrentCellInEditMode Then ' Detectamos los ENTER tanto si solo estan en foco o si estan en edición una celda.
                 .CommitEdit(DataGridViewDataErrorContexts.Commit) ' Guardamos todos los datos que no hayan sido confirmados.
+
+                If .CurrentCell Is Nothing Then Return False
 
                 Dim iCol = .CurrentCell.ColumnIndex
                 Dim iRow = .CurrentCell.RowIndex
@@ -643,10 +645,10 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
                                 Dim WResultado As String = _GenerarImpreResultado(WTipo, WDesde, WHasta, WUnidad, WValor)
 
-                                If WDecimales.Trim = "" Then
-                                    WDecimales = _CalcularCantidadDecimales(WDesde)
-                                    If Val(WDecimales) < _CalcularCantidadDecimales(WHasta) Then WDecimales = _CalcularCantidadDecimales(WHasta)
-                                End If
+                                'If WDecimales.Trim = "" Then
+                                WDecimales = _CalcularCantidadDecimales(WDesde)
+                                If Val(WDecimales) < _CalcularCantidadDecimales(WHasta) Then WDecimales = _CalcularCantidadDecimales(WHasta)
+                                'End If
 
                                 .Cells("Resultado").Value = WResultado
                                 .Cells("Valor").Value = WValor
@@ -671,6 +673,9 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                         End If
 
                 End Select
+
+                If .RowIndex + 1 = dgvEnsayos.Rows.Count Then txtLibros.Focus()
+
             End With
 
             Return True
@@ -697,7 +702,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
             _ValidarDatos()
 
             '
-            ' Recalculamos los valores de las celdas que se calculen por Formula.
+            ' Recalculamos los valores de las celdas que se calculen por Fórmula.
             '
             _RecalcularFormulas()
 
@@ -712,24 +717,16 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
                 Exit Sub
 
-            Else
+            ElseIf WIDOperadorAnalista = "" Then
 
-                If WIDOperadorAnalista = "" Then
+                WMotivoClaveSeguridad = TiposSolicitudClaveSeguridad.ActualizarEnsayoNoBloqueado
 
-                    WMotivoClaveSeguridad = TiposSolicitudClaveSeguridad.ActualizarEnsayoNoBloqueado
+                Dim frm As New IngresoClaveSeguridad()
+                frm.ShowDialog(Me)
 
-                    Dim frm As New IngresoClaveSeguridad()
-                    frm.ShowDialog(Me)
+                txtPartida.Focus()
 
-                    txtPartida.Focus()
-
-                    Exit Sub
-
-                End If
-
-
-
-
+                Exit Sub
             End If
 
             If Not _ValidarValoresIngresados() And Not WEsPorDesvio Then
@@ -745,6 +742,13 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                 Dim mot As New IngresoMotivoDesvio(WMotivoDesvio)
 
                 If mot.ShowDialog(Me) <> DialogResult.OK Then Exit Sub
+
+                '
+                ' TODO Consultar sobre implementación o no.
+                '
+                ' La solicitud de contraseña para los ensayos ingresados por Desvío, viene de la funcionalidad vieja.
+                ' Ahora se pide contraseña para grabar, ya sea para la grabación por parte de los analistas como por el jefe/supervisor.
+                '
 
                 '                WMotivoClaveSeguridad = TiposSolicitudClaveSeguridad.IngresoEnsayoIntermedioPorDesvio
                 '
@@ -770,10 +774,17 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
                 If mot.ShowDialog(Me) <> DialogResult.OK Then Exit Sub
 
-                WMotivoClaveSeguridad = TiposSolicitudClaveSeguridad.IngresoEnsayoIntermedioPorDesvio
+                '
+                ' TODO Consultar sobre implementación o no.
+                '
+                ' La solicitud de contraseña para los ensayos ingresados por Desvío, viene de la funcionalidad vieja.
+                ' Ahora se pide contraseña para grabar, ya sea para la grabación por parte de los analistas como por el jefe/supervisor.
+                '
 
-                Dim frm As New IngresoClaveSeguridad
-                frm.ShowDialog(Me)
+                'WMotivoClaveSeguridad = TiposSolicitudClaveSeguridad.IngresoEnsayoIntermedioPorDesvio
+                '
+                'Dim frm As New IngresoClaveSeguridad
+                'frm.ShowDialog(Me)
 
             End If
 
@@ -860,7 +871,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
 
 
-                    Dim WOperadorLabora As String = WIDOperadorAnalista 'Trim(OrDefault(.Cells("OperadorLabora").Value, ""))
+                    Dim WOperadorLabora As String = WIDOperadorAnalista ' Se lo obtiene cuando se valida la contraseña.
 
                     Dim WFormulas(10, 2) As String
 
@@ -1385,13 +1396,15 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
             Case TiposSolicitudClaveSeguridad.ActualizarEnsayoNoBloqueado
 
+                WIDOperadorAnalista = ""
+
                 Dim WDatos As DataRow = GetSingle("SELECT Operador, AnalistaLab FROM Operador WHERE Clave = '" & UCase(WClave) & "'", "SurfactanSa")
 
                 If WDatos IsNot Nothing Then
                     Dim AnalistasLabPermiso As String = OrDefault(WDatos.Item("AnalistaLab"), "")
                     If AnalistasLabPermiso.ToUpper = "S" Then
                         WIDOperadorAnalista = WDatos.Item("Operador")
-                        btnGrabar.PerformClick()
+                        btnGrabar_Click(Nothing, Nothing)
                         Exit Sub
                     End If
                 End If

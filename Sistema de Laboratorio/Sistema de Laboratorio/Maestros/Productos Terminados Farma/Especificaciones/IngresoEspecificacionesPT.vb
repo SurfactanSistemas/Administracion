@@ -238,11 +238,6 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
         Else
 
-
-
-
-
-
             '
             ' Traemos los datos en el formato viejo y lo ajustamos para presentarlo como el nuevo.
             '
@@ -432,23 +427,13 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                 '                txtCas.Text = Trim(OrDefault(WEspecificacionesUnificaII.Item("Cas"), ""))
 
             End If
-
-
-
-
-
+            
         End If
 
         TabControl1.SelectTab(1)
 
     End Sub
-
-
-
-
-
-
-
+    
     Private Sub _PoblarEspecificacionesIngles(WCargaVIngles As DataTable)
 
         dgvEspecifIngles.Rows.Clear()
@@ -539,13 +524,6 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
         End If
     End Sub
-
-
-
-
-
-
-
 
     Private Sub _CargarDatosEspecifFarma()
 
@@ -680,7 +658,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
         wUnidadEspecif = OrDefault(Trim(wUnidadEspecif), "")
         wMenorIgualEspecif = OrDefault(Trim(wMenorIgualEspecif), "")
 
-        If Trim(wDesdeEspecif) = "" And Trim(wHastaEspecif) = "" Then Return "Cumple Ensayo"
+        If Val(wDesdeEspecif) = 0 And Val(wHastaEspecif) = 0 Then Return "Cumple Ensayo"
 
         If Val(wDesdeEspecif) <> 0 Or Val(wHastaEspecif) <> 9999 Then
 

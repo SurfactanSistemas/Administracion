@@ -232,6 +232,18 @@
     <Compile Include="IngresoFormulasEnsayo.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Maestros\Materias Primas\Planillas de Ensayos MP\ImpresionPlanillaEnsayosMP.Designer.vb">
+      <DependentUpon>ImpresionPlanillaEnsayosMP.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\Materias Primas\Planillas de Ensayos MP\ImpresionPlanillaEnsayosMP.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestros\Productos Terminados Farma\Planillas de Ensayos PT\ImpresionPlanillaEnsayosPT.Designer.vb">
+      <DependentUpon>ImpresionPlanillaEnsayosPT.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\Productos Terminados Farma\Planillas de Ensayos PT\ImpresionPlanillaEnsayosPT.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ParametrosDeEspecificacion.Designer.vb">
       <DependentUpon>ParametrosDeEspecificacion.vb</DependentUpon>
     </Compile>
@@ -567,6 +579,12 @@
       <DependentUpon>ReporteListadoEspecifPTaFecha.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\Planilla de Ensayos\PlanillaEnsayos.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PlanillaEnsayos.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\ReporteImpresionEtiquetasMuestras.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -670,6 +688,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="IngresoFormulasEnsayo.resx">
       <DependentUpon>IngresoFormulasEnsayo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\Materias Primas\Planillas de Ensayos MP\ImpresionPlanillaEnsayosMP.resx">
+      <DependentUpon>ImpresionPlanillaEnsayosMP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\Productos Terminados Farma\Planillas de Ensayos PT\ImpresionPlanillaEnsayosPT.resx">
+      <DependentUpon>ImpresionPlanillaEnsayosPT.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ParametrosDeEspecificacion.resx">
       <DependentUpon>ParametrosDeEspecificacion.vb</DependentUpon>
@@ -854,6 +878,10 @@
     <EmbeddedResource Include="Reportes\Productos Terminados Farma\Especificaciones\ReporteListadoEspecifPTaFecha.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteListadoEspecifPTaFecha.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Planilla de Ensayos\PlanillaEnsayos.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PlanillaEnsayos.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\ReporteImpresionEtiquetasMuestras.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

@@ -356,7 +356,8 @@ namespace Eval_Proveedores.Novedades
         private void CargarEva()
         {
             SacarPromedioTot();
-            EVATRA.Clave = TB_CodProveedor.Text + TB_Mes.Text + TB_Año.Text;
+
+            EVATRA.Clave = TB_CodProveedor.Text + TB_Mes.Text.PadLeft(2, '0') + TB_Año.Text;
             EVATRA.Proveedor = TB_CodProveedor.Text;
             EVATRA.Mes = int.Parse(TB_Mes.Text);
             EVATRA.Año = int.Parse(TB_Año.Text);
@@ -370,18 +371,7 @@ namespace Eval_Proveedores.Novedades
 
                 foreach (DataRow Des in dtCamion.Rows)
                 {
-
-                    if (Des[2].ToString() == TB_Dom1.Text)
-                    {
-                       
-                        IdCamion1 = int.Parse(Des[0].ToString());
-
-                        
-
-
-                    }
-
-
+                    if (Des[2].ToString() == TB_Dom1.Text) IdCamion1 = int.Parse(Des[0].ToString());
                 }
             }
             EVATRA.Camion1 = IdCamion1;
