@@ -40,7 +40,7 @@ Public Class ArqueoDeCheques
         If tablaRecibos.Rows.Count > 0 Then
             For Each row In tablaRecibos.Rows
 
-                DGV_Cheques.Rows.Add(row.Item("Fecha2"), row.Item("Numero2"), formatonumerico(row.Item("Importe2")), row.Item("Banco2"), row.Item("ClaveCheque"), "R", ordenaFecha(row.Item("Fecha2")))
+                DGV_Cheques.Rows.Add(row.Item("Fecha2"), row.Item("Numero2"), formatonumerico(row.Item("Importe2")), row.Item("Banco2"), UCase(row.Item("ClaveCheque")), "R", ordenaFecha(row.Item("Fecha2")))
 
             Next
         End If
@@ -54,7 +54,7 @@ Public Class ArqueoDeCheques
         If tablaRecibosProvisorios.Rows.Count > 0 Then
             For Each row In tablaRecibosProvisorios.Rows
 
-                DGV_Cheques.Rows.Add(row.Item("Fecha2"), row.Item("Numero2"), formatonumerico(row.Item("Importe2")), row.Item("Banco2"), row.Item("ClaveCheque"), "RP", ordenaFecha(row.Item("Fecha2")))
+                DGV_Cheques.Rows.Add(row.Item("Fecha2"), row.Item("Numero2"), formatonumerico(row.Item("Importe2")), row.Item("Banco2"), UCase(row.Item("ClaveCheque")), "RP", ordenaFecha(row.Item("Fecha2")))
 
             Next
         End If
@@ -67,9 +67,10 @@ Public Class ArqueoDeCheques
         Select Case e.KeyData
             Case Keys.Enter
                 If txtCodigoCheque.Text <> "" Then
+                    txtCodigoCheque.Text = txtCodigoCheque.Text.Replace(";", "C").Replace(":", "E")
                     If txtCodigoCheque.Text.Length = 31 Then
                         For Each row As DataGridViewRow In DGV_Cheques.Rows
-                            If Trim(row.Cells("ClaveCheque").Value) = txtCodigoCheque.Text Then
+                            If Trim(row.Cells("ClaveCheque").Value).ToUpper = txtCodigoCheque.Text.ToUpper Then
                                 mastxtFecha.Text = row.Cells("Fecha").Value
                                 txtNumeroCheque.Text = row.Cells("Numero").Value
                                 txtImporte.Text = row.Cells("Importe").Value
@@ -114,7 +115,7 @@ Public Class ArqueoDeCheques
     Private Function _BuscarEnEliminados() As String
         For i = 0 To tablaChequesEliminados.Rows.Count - 1
 
-            If txtCodigoCheque.Text = tablaChequesEliminados.Rows(i).Item("ClaveCheque") Then
+            If txtCodigoCheque.Text.ToUpper.Trim = Trim(tablaChequesEliminados.Rows(i).Item("ClaveCheque")).ToUpper Then
                 Return "Esta"
             End If
 
