@@ -86,8 +86,8 @@ namespace Eval_Proveedores.Novedades
                     DGV_EvalSemProve.Rows[WRenglon].Cells["PorcTotal"].Value = Helper._DeterminarPorcentajeTotal(ZMovimientos, ZCertificadosOk, ZEnvasesOk);
 
                     DataRow WDatoEvalua =
-                        Query.GetSingle("SELECT EstadoMP, FechaEvaluaVto FROM EvaluacionProvMP WHERE Proveedor = '" +
-                                        WProveedor["Proveedor"] + "' And Articulo = '" + WProveedor["Articulo"] + "'");
+                        Query.GetSingle("SELECT EstadoMP, FechaEvaluaVto, FechaEntrego FROM EvaluacionProvMP WHERE Proveedor = '" +
+                                        WProveedor["Proveedor"] + "' And Articulo = '" + WProveedor["Articulo"] + "' And Renglon = 1");
 
                     DGV_EvalSemProve.Rows[WRenglon].Cells["EvaCal"].Value = _TraerDescEvaluacion(0);
 
@@ -99,6 +99,9 @@ namespace Eval_Proveedores.Novedades
                             _TraerDescEvaluacion(WDatoEvalua["EstadoMP"]);
 
                         DGV_EvalSemProve.Rows[WRenglon].Cells["FechaEvaluaProvMPFarmaII"].Value =
+                            Helper.OrDefault(WDatoEvalua["FechaEntrego"], "");
+
+                        DGV_EvalSemProve.Rows[WRenglon].Cells["VencEvaluacion"].Value =
                             Helper.OrDefault(WDatoEvalua["FechaEvaluaVto"], "");
                     }
                 }
