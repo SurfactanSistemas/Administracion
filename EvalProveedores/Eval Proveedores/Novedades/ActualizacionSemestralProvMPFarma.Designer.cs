@@ -34,8 +34,8 @@ namespace Eval_Proveedores.Novedades
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -48,6 +48,7 @@ namespace Eval_Proveedores.Novedades
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.LB_TitEva = new System.Windows.Forms.Label();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -84,6 +85,8 @@ namespace Eval_Proveedores.Novedades
             this.ckTodos = new System.Windows.Forms.CheckBox();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.DGV_EvalSemProve = new ConsultasVarias.DBDataGridView();
+            this.label2 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.Proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MarcaPerformance = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Razon = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -100,9 +103,8 @@ namespace Eval_Proveedores.Novedades
             this.Retrasos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EvaCal = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.FechaEvaluaProvMPFarmaII = new ConsultasVarias.MyMaskedTextBoxColumn();
+            this.VencEvaluacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.VerEvalua = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.pnlClave.SuspendLayout();
@@ -131,7 +133,7 @@ namespace Eval_Proveedores.Novedades
             this.LB_TitEva.Size = new System.Drawing.Size(678, 19);
             this.LB_TitEva.TabIndex = 0;
             this.LB_TitEva.Text = "ACTUALIZACION SEMESTRAL DE CALIFICACIÓN DE PROVEEDORES DE MATERIA PRIMA PARA FARM" +
-                "A";
+    "A";
             // 
             // contextMenuStrip1
             // 
@@ -176,7 +178,7 @@ namespace Eval_Proveedores.Novedades
             this.BT_Salir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Salir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Salir.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Salir.Location = new System.Drawing.Point(513, 510);
+            this.BT_Salir.Location = new System.Drawing.Point(463, 510);
             this.BT_Salir.Name = "BT_Salir";
             this.BT_Salir.Size = new System.Drawing.Size(40, 40);
             this.BT_Salir.TabIndex = 79;
@@ -197,6 +199,7 @@ namespace Eval_Proveedores.Novedades
             this.button2.TabIndex = 79;
             this.toolTip1.SetToolTip(this.button2, "Grabar");
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Visible = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // btnImprimir
@@ -299,9 +302,9 @@ namespace Eval_Proveedores.Novedades
             // 
             // pnlClave
             // 
-            this.pnlClave.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlClave.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlClave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(139)))), ((int)(((byte)(82)))));
             this.pnlClave.Controls.Add(this.groupBox1);
             this.pnlClave.Controls.Add(this.button3);
@@ -496,9 +499,9 @@ namespace Eval_Proveedores.Novedades
             this.DGV_EvalSemProve.AllowUserToAddRows = false;
             this.DGV_EvalSemProve.AllowUserToDeleteRows = false;
             this.DGV_EvalSemProve.AllowUserToResizeRows = false;
-            this.DGV_EvalSemProve.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.DGV_EvalSemProve.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -525,28 +528,29 @@ namespace Eval_Proveedores.Novedades
             this.Retrasos,
             this.EvaCal,
             this.FechaEvaluaProvMPFarmaII,
+            this.VencEvaluacion,
             this.VerEvalua});
             this.DGV_EvalSemProve.ContextMenuStrip = this.contextMenuStrip1;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DGV_EvalSemProve.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DGV_EvalSemProve.DefaultCellStyle = dataGridViewCellStyle15;
             this.DGV_EvalSemProve.DoubleBuffered = true;
             this.DGV_EvalSemProve.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.DGV_EvalSemProve.Location = new System.Drawing.Point(6, 183);
             this.DGV_EvalSemProve.Name = "DGV_EvalSemProve";
             this.DGV_EvalSemProve.OrdenamientoColumnasHabilitado = true;
-            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGV_EvalSemProve.RowHeadersDefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV_EvalSemProve.RowHeadersDefaultCellStyle = dataGridViewCellStyle16;
             this.DGV_EvalSemProve.RowHeadersWidth = 15;
             this.DGV_EvalSemProve.RowTemplate.Height = 18;
             this.DGV_EvalSemProve.ShowCellToolTips = false;
@@ -556,6 +560,32 @@ namespace Eval_Proveedores.Novedades
             this.DGV_EvalSemProve.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_EvalSemProve_CellClick);
             this.DGV_EvalSemProve.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_EvalSemProve_CellDoubleClick);
             this.DGV_EvalSemProve.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_EvalSemProve_CellEnter);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(67, 106);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(195, 13);
+            this.label2.TabIndex = 85;
+            this.label2.Text = "FILTRAR POR TIPO PRODUCTO";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "TODOS",
+            "FARMA",
+            "FOOD",
+            "VETERINARIO",
+            "ENVASES",
+            "EXC. FARMA",
+            "OTROS"});
+            this.comboBox1.Location = new System.Drawing.Point(271, 101);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 86;
             // 
             // Proveedor
             // 
@@ -728,6 +758,17 @@ namespace Eval_Proveedores.Novedades
             this.FechaEvaluaProvMPFarmaII.ValidatingType = null;
             this.FechaEvaluaProvMPFarmaII.Width = 70;
             // 
+            // VencEvaluacion
+            // 
+            this.VencEvaluacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.VencEvaluacion.DefaultCellStyle = dataGridViewCellStyle14;
+            this.VencEvaluacion.HeaderText = "Venc. Evalua.";
+            this.VencEvaluacion.Name = "VencEvaluacion";
+            this.VencEvaluacion.ReadOnly = true;
+            this.VencEvaluacion.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.VencEvaluacion.Width = 91;
+            // 
             // VerEvalua
             // 
             this.VerEvalua.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
@@ -740,32 +781,6 @@ namespace Eval_Proveedores.Novedades
             this.VerEvalua.Text = "Ver Evaluación";
             this.VerEvalua.UseColumnTextForLinkValue = true;
             this.VerEvalua.Width = 96;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(67, 106);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(195, 13);
-            this.label2.TabIndex = 85;
-            this.label2.Text = "FILTRAR POR TIPO PRODUCTO";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "TODOS",
-            "FARMA",
-            "FOOD",
-            "VETERINARIO",
-            "ENVASES",
-            "EXC. FARMA",
-            "OTROS"});
-            this.comboBox1.Location = new System.Drawing.Point(271, 101);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 86;
             // 
             // ActualizacionSemestralProvMPFarma
             // 
@@ -851,6 +866,8 @@ namespace Eval_Proveedores.Novedades
         private System.Windows.Forms.CheckBox ckPlantaI;
         private System.Windows.Forms.CheckBox ckTodos;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Proveedor;
         private System.Windows.Forms.DataGridViewCheckBoxColumn MarcaPerformance;
         private System.Windows.Forms.DataGridViewTextBoxColumn Razon;
@@ -867,8 +884,7 @@ namespace Eval_Proveedores.Novedades
         private System.Windows.Forms.DataGridViewTextBoxColumn Retrasos;
         private System.Windows.Forms.DataGridViewComboBoxColumn EvaCal;
         private MyMaskedTextBoxColumn FechaEvaluaProvMPFarmaII;
+        private System.Windows.Forms.DataGridViewTextBoxColumn VencEvaluacion;
         private System.Windows.Forms.DataGridViewLinkColumn VerEvalua;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
