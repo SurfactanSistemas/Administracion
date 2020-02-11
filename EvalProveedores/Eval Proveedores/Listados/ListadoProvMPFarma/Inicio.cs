@@ -83,8 +83,8 @@ namespace Eval_Proveedores.Listados.ListadoProvMPFarma
                     row["PorcTotal"] = Helper._DeterminarPorcentajeTotal(ZMovimientos, ZCertificadosOk, ZEnvasesOk);
 
                     DataRow WDatoEvalua =
-                        Query.GetSingle("SELECT EstadoMP, FechaEvaluaVto FROM EvaluacionProvMP WHERE Proveedor = '" +
-                                        WProveedor["Proveedor"] + "' And Articulo = '" + WProveedor["Articulo"] + "'");
+                        Query.GetSingle("SELECT EstadoMP, FechaEvaluaVto, FechaEntrego FROM EvaluacionProvMP WHERE Proveedor = '" +
+                                        WProveedor["Proveedor"] + "' And Articulo = '" + WProveedor["Articulo"] + "' And Renglon = 1");
 
                     row["EvalCal"] = _TraerDescEvaluacion(0);
 
@@ -96,6 +96,9 @@ namespace Eval_Proveedores.Listados.ListadoProvMPFarma
                             _TraerDescEvaluacion(WDatoEvalua["EstadoMP"]);
 
                         row["FechaEvaluaProvMPFarmaII"] =
+                            Helper.OrDefault(WDatoEvalua["FechaEntrego"], "");
+
+                        row["FechaEvaluaVto"] =
                             Helper.OrDefault(WDatoEvalua["FechaEvaluaVto"], "");
                     }
 
@@ -165,6 +168,7 @@ namespace Eval_Proveedores.Listados.ListadoProvMPFarma
             t.Columns.Add("FechaEvaluaProvMPFarmaII");
             t.Columns.Add("EstadoMP");
             t.Columns.Add("FechaEvaluaVto");
+            t.Columns.Add("VencEvaluacion");
 
             return t;
         }
