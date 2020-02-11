@@ -141,7 +141,7 @@ namespace Eval_Proveedores.Listados.ListadoEvaluacionProvMPFarma
 
                 string WFiltroVencidos = rbEvalVencida.Checked ? " AND {EvaluacionProvMP.FechaEvaluaVtoOrd} < '" + DateTime.Now.ToString("yyyyMMdd") + "' And {EvaluacionProvMP.FechaEvaluaVtoOrd} > '0' " : "";
 
-                frm.Formula = "{EvaluacionProvMP.Proveedor} IN " + WFiltroProv + " " + WFiltroVencidos;
+                frm.Formula = "{EvaluacionProvMP.Renglon} = 1 And {EvaluacionProvMP.Proveedor} IN " + WFiltroProv + " " + WFiltroVencidos;
                 frm.Reporte = rpt;
             }
             else if (rbSinEvaluar.Checked)
