@@ -3,7 +3,7 @@ Imports System.Reflection
 Imports CrystalDecisions.CrystalReports.Engine
 Imports CrystalDecisions.Shared
 
-Public Class IndiceGralSac : Implements INuevoSAC, IExportarIndice
+Public Class IndiceGralSac : Implements INuevoSAC, IExportarIndice, IExportarSac
 
     Private WDatosSac As DataTable
 
@@ -143,10 +143,10 @@ Public Class IndiceGralSac : Implements INuevoSAC, IExportarIndice
         '
         ' Armamos la cadena de Ordenamiento.
         '
-        Dim WOrderBy = "ORDER BY cs.Ano, "
+        Dim WOrderBy = "ORDER BY cs.Ano desc, "
 
-        If WOrdenI.Trim <> "" Then WOrderBy &= WOrdenI & ","
-        If WOrdenII.Trim <> "" Then WOrderBy &= WOrdenII & ","
+        If WOrdenI.Trim <> "" Then WOrderBy &= WOrdenI & " ,"
+        If WOrdenII.Trim <> "" Then WOrderBy &= WOrdenII & " Desc,"
         If WOrdenIII.Trim <> "" Then WOrderBy &= WOrdenIII & ","
 
         WOrderBy = WOrderBy.Remove(WOrderBy.Length - 1, 1)
@@ -349,7 +349,7 @@ Public Class IndiceGralSac : Implements INuevoSAC, IExportarIndice
             If dgvListado.Rows.Count = 0 Then Exit Sub
 
             Dim frm As New VistaPrevia
-            Dim rpt As reportdocument
+            Dim rpt As ReportDocument
 
             If WAgrupar Then
                 rpt = New ReporteIndiceGralAgrupados
@@ -426,4 +426,330 @@ Public Class IndiceGralSac : Implements INuevoSAC, IExportarIndice
         End If
 
     End Sub
+
+
+    Private Sub txtBuscador_KeyUp(sender As Object, e As KeyEventArgs) Handles txtBuscador.KeyUp
+        '
+        ' Chequeamos que tenga un año indicado, sino indicamos por defecto el año actual.
+        '
+        If txtAnio.Text.Length < 4 Or txtAnio.Text.Trim = "" Then txtAnio.Text = Date.Now.ToString("yyyy")
+        If txtHastaAnio.Text.Length < 4 Or txtHastaAnio.Text.Trim = "" Then txtHastaAnio.Text = txtAnio.Text
+
+
+        '
+        ' Armamos los campos de consulta.
+        '
+        Dim WCentros As String = _GenerarStringConsulta(clbCentros)
+        Dim WTiposSolicitud As String = _GenerarStringConsulta(clbTiposSolicitud)
+        Dim WEmisores As String = _GenerarStringConsulta(clbEmisores)
+        Dim WResponsables As String = _GenerarStringConsulta(clbResponsables)
+        Dim WEstados As String = _GenerarStringConsultaII(clbEstados)
+        Dim WOrigenes As String = _GenerarStringConsultaII(clbOrigenes)
+
+        '
+        ' Armamos los campos de Ordenamiento.
+        '
+        Dim WOrdenI As String = _GenerarStringOrdenamiento(cmbOrdenI)
+        Dim WOrdenII As String = _GenerarStringOrdenamiento(cmbOrdenII)
+        Dim WOrdenIII As String = _GenerarStringOrdenamiento(cmbOrdenIII)
+
+        Dim WWhere As String = String.Format("WHERE cs.Centro IN ({0}) And cs.Tipo IN ({1}) And cs.ResponsableEmisor IN ({2}) " &
+                                             " And cs.ResponsableDestino IN ({3}) And cs.Estado IN ({4}) And cs.Origen IN ({5}) And cs.Ano BETWEEN '{6}' And '{7}' AND (Referencia LIKE '%" & txtBuscador.Text & "%' or Titulo LIKE '%" & txtBuscador.Text & "%') ",
+                                             WCentros, WTiposSolicitud, WEmisores, WResponsables, WEstados, WOrigenes, txtAnio.Text, txtHastaAnio.Text)
+
+        '
+        ' Eliminamos las posibilidades de colapso entre los ordenamientos.
+        '
+        If WOrdenI.Contains(WOrdenII) Then WOrdenII = ""
+        If WOrdenI.Contains(WOrdenIII) Then WOrdenIII = ""
+
+        If WOrdenII.Contains(WOrdenIII) Then WOrdenIII = ""
+
+        '
+        ' Armamos la cadena de Ordenamiento.
+        '
+        Dim WOrderBy = "ORDER BY cs.Ano desc, "
+
+        If WOrdenI.Trim <> "" Then WOrderBy &= WOrdenI & " ,"
+        If WOrdenII.Trim <> "" Then WOrderBy &= WOrdenII & " Desc,"
+        If WOrdenIII.Trim <> "" Then WOrderBy &= WOrdenIII & ","
+
+        WOrderBy = WOrderBy.Remove(WOrderBy.Length - 1, 1)
+
+        WDatosSac = GetAll("SELECT cs.Tipo As idTipo, Tipo = CASE WHEN ISNULL(t.Abreviatura, '') = '' THEN LTRIM(RTRIM(t.Descripcion)) ELSE LTRIM(RTRIM(t.Abreviatura)) END, cs.Ano As Anio, cs.Fecha, cs.Numero, LTRIM(RTRIM(cs.Referencia)) Referencia, " &
+                                 " Estado = CASE cs.Estado WHEN 1 THEN 'Iniciada' WHEN 2 THEN 'Investig.' WHEN 3 THEN 'Implement.' WHEN 4 THEN 'Implem. A Ver.' WHEN 5 THEN 'Implem. Verif.' ELSE 'Cerrada' END, " &
+                                 " Origen = CASE cs.Origen WHEN 1 THEN 'Auditoría' WHEN 2 THEN 'Reclamo' WHEN 3 THEN 'I. No Conf.' WHEN 4 THEN 'Proc./Sist.' WHEN 5 THEN 'Otro' END, " &
+                                 " LTRIM(RTRIM(cs.Titulo)) Titulo, LTRIM(RTRIM(ce.Descripcion)) Centro, LTRIM(RTRIM(rs.Descripcion)) Emisor, LTRIM(RTRIM(rs2.Descripcion)) Responsable " &
+                                 " FROM CargaSac As cs INNER JOIN TipoSac t ON t.Codigo = cs.Tipo " &
+                                 " LEFT OUTER JOIN CentroSac ce ON ce.Codigo = cs.Centro " &
+                                 " LEFT OUTER JOIN ResponsableSac rs ON rs.Codigo = cs.ResponsableEmisor " &
+                                 " LEFT OUTER JOIN ResponsableSac rs2 ON rs2.Codigo = cs.ResponsableDestino " &
+                                 " " & WWhere & " " & WOrderBy)
+
+        'dgvListado.DataSource = WDatosSac
+
+        dgvListado.Rows.Clear()
+
+        For Each row As DataRow In WDatosSac.Rows
+            Dim i = dgvListado.Rows.Add
+
+            With dgvListado.Rows(i)
+                For Each c As DataGridViewColumn In dgvListado.Columns()
+                    .Cells(c.Name).Value = OrDefault(row.Item(c.Name), "")
+                Next
+            End With
+
+        Next
+
+        dgvListado.GetType.InvokeMember("DoubleBuffered", BindingFlags.NonPublic Or BindingFlags.Instance Or BindingFlags.SetProperty, Nothing, dgvListado, New Object() {True})
+
+    End Sub
+
+    Private Sub dgvListado_MouseUp(sender As Object, e As MouseEventArgs) Handles dgvListado.MouseUp
+
+        For Each cell As DataGridViewCell In dgvListado.SelectedCells
+            dgvListado.Rows(cell.RowIndex).Selected = True
+
+        Next
+
+
+
+        If dgvListado.SelectedRows.Count > 1 Then
+            btnExportarVarios.Visible = True
+        Else
+            btnExportarVarios.Visible = False
+        End If
+    End Sub
+
+    Private Sub btnExportarVarios_Click(sender As Object, e As EventArgs) Handles btnExportarVarios.Click
+        Dim frm As New ExportarSAC
+        frm.Show(Me)
+    End Sub
+
+
+
+    Public Sub _ProcesarExportarSac(ByVal WOpcion1 As Boolean, ByVal WOpcion2 As Boolean, ByVal WFormato As Object, ByVal WOpcion3 As Boolean) Implements IExportarSac._ProcesarExportarSac
+
+        Try
+
+            For Each row As DataGridViewRow In dgvListado.SelectedRows
+
+                Dim tipo As Integer
+
+                tipo = ObtenerTipo(row.Cells("Tipo").Value)
+
+                '
+                ' Verificamos que exista la SAC.
+                '
+                Dim WSAC As DataRow = GetSingle("SELECT Clave FROM CargaSAC WHERE Tipo = '" & tipo & "' And Ano = '" & row.Cells("Anio").Value & "' And Numero = '" & row.Cells("Numero").Value & "'")
+
+                If IsNothing(WSAC) Then Continue For
+
+
+                '
+                ' Cargamos la carátula y filtramos para el SAC indicado.
+                '
+
+                Dim frm As New VistaPrevia
+                With frm
+                    .Reporte = New NuevoSACCaratula
+                    .Formula = "{CargaSac.Tipo} = " & tipo & " And {CargaSac.Numero} = " & row.Cells("Numero").Value & " And {CargaSac.Ano} = " & row.Cells("Anio").Value & ""
+                End With
+
+                '  _PrepararImpreSacII()
+
+                Dim frm2 As New VistaPrevia
+                With frm2
+                    .Reporte = IIf(WOpcion3, New NuevoSACAcciones, New NuevoSACAccionesSinComentarios)
+                    .Formula = "{ImpreSacII.Tipo} = " & tipo & " And {ImpreSacII.Numero} = " & row.Cells("Numero").Value & " And {ImpreSacII.Ano} = " & row.Cells("Anio").Value & ""
+                End With
+
+                Dim frm3 As New VistaPrevia
+                With frm3
+                    .Reporte = New NuevoSACSoloComentarios
+                    .Formula = "{CargaSacAdicional.Tipo} = " & tipo & " And {CargaSacAdicional.Numero} = " & row.Cells("Numero").Value & " And {CargaSacAdicional.Ano} = " & row.Cells("Anio").Value & ""
+                End With
+
+                If WFormato = 3 Then
+                    '
+                    ' Exportamos ambos archivos en el caso que corresponda en un archivo temporal.
+                    '
+                    Dim WRuta = "C:/tSac/"
+
+                    If Directory.Exists(WRuta) Then Directory.Delete(WRuta, True)
+
+                    Directory.CreateDirectory(WRuta)
+
+                    If WOpcion2 Then frm2.Exportar("2.pdf", ExportFormatType.PortableDocFormat, WRuta)
+                    If WOpcion1 Then frm.Exportar("1.pdf", ExportFormatType.PortableDocFormat, WRuta)
+
+                    Dim WPrefijoArchivo As String = GenerarPrefijoArchivo(tipo)
+
+                    Dim WNombreArchivo = String.Format("{4} {0} {1} {2} - {3}.pdf", tipo, row.Cells("Numero").Value, row.Cells("Anio").Value, Date.Now.ToString("dd-MM-yyyy"), WPrefijoArchivo)
+
+                    With VistaPrevia
+                        .MergePDFs(WRuta, WNombreArchivo)
+                        .EnviarPorEmail(WRuta & WNombreArchivo)
+                    End With
+
+                ElseIf WOpcion1 And WOpcion2 Then
+
+                    With frm
+
+                        If WOpcion3 Then
+                            .Reporte = New NuevoSACAmbos
+                        Else
+                            .Reporte = New NuevoSACAmbosSinComentarios
+                        End If
+
+                        .Formula = "{CargaSac.Tipo} = " & tipo & " And {CargaSac.Numero} = " & row.Cells("Numero").Value & " And {CargaSac.Ano} = " & row.Cells("Anio").Value & ""
+
+                    End With
+
+                    _ExportarReporte(frm, WFormato)
+
+                Else
+
+                    If WOpcion3 And Not WOpcion2 Then _ExportarReporte(frm3, WFormato)
+                    If WOpcion2 Then _ExportarReporte(frm2, WFormato)
+                    If WOpcion1 Then _ExportarReporte(frm, WFormato)
+
+                End If
+
+            Next
+
+        Catch ex As System.Exception
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+        End Try
+
+    End Sub
+
+
+    Private Function ObtenerTipo(ByVal TipoString As String) As Integer
+
+        Dim SQLCnslt As String = ""
+        SQLCnslt = "SELECT Codigo FROM TipoSAC WHERE (Descripcion = '" & TipoString & "' Or Abreviatura = '" & TipoString & "')"
+
+        Dim row As DataRow = GetSingle(SQLCnslt)
+        Return row.Item("Codigo")
+    End Function
+    Private Function GenerarPrefijoArchivo(ByVal Tipo As String) As String
+
+        Dim WPrefijoArchivo = ""
+
+        Dim WTipo As DataRow = GetSingle("SELECT Descripcion, Abreviatura FROM TipoSac WHERE Codigo = '" & Tipo & "'")
+
+        WPrefijoArchivo = OrDefault(WTipo.Item("Descripcion"), "")
+
+        If OrDefault(WTipo.Item("Abreviatura"), "") <> "" Then
+            WPrefijoArchivo = OrDefault(WTipo.Item("Abreviatura"), "")
+        End If
+
+        WPrefijoArchivo = Trim(WPrefijoArchivo)
+        Return WPrefijoArchivo
+    End Function
+
+
+    Private Sub btnEstadistica_Click(sender As Object, e As EventArgs) Handles btnEstadistica.Click
+
+        Dim TablaEstadistica As DataTable = _PrepararDatosEstadistica()
+        Dim Titulo As String = "Desde año  " & txtAnio.Text & "  al  " & txtHastaAnio.Text
+        Dim Tinciales As Integer = 0
+        Dim TInvestig As Integer = 0
+        Dim TImplemet As Integer = 0
+        Dim TImpleAVer As Integer = 0
+        Dim TImpleVerif As Integer = 0
+        Dim TCerrados As Integer = 0
+
+        For i = 0 To TablaEstadistica.Rows.Count - 1
+            With TablaEstadistica.Rows(i)
+                Tinciales += .Item("Iniciada")
+                TInvestig += .Item("Investig.")
+                TImplemet += .Item("Implement.")
+                TImpleAVer += .Item("Imple.Aver.")
+                TImpleVerif += .Item("Imple.Verif.")
+                TCerrados += .Item("Cerrada")
+            End With
+
+        Next
+
+        With New VistaPrevia
+
+            .Reporte = New ReporteEstadistica()
+            .Reporte.SetDataSource(TablaEstadistica)
+            .Reporte.SetParameterValue(0, Titulo)
+            .Reporte.SetParameterValue(1, Tinciales)
+            .Reporte.SetParameterValue(2, TInvestig)
+            .Reporte.SetParameterValue(3, TImplemet)
+            .Reporte.SetParameterValue(4, TImpleAVer)
+            .Reporte.SetParameterValue(5, TImpleVerif)
+            .Reporte.SetParameterValue(6, TCerrados)
+
+            .Imprimir()
+            '.Mostrar()
+        End With
+
+    End Sub
+
+    Private Function _PrepararDatosEstadistica() As DataTable
+        Dim TablaEstadistica As New DataTable
+        With TablaEstadistica.Columns
+            .Add("Tipo")
+            .Add("Iniciada")
+            .Add("Investig.")
+            .Add("Implement.")
+            .Add("Imple.Aver.")
+            .Add("Imple.Verif.")
+            .Add("Cerrada")
+            .Add("Total")
+        End With
+
+        TablaEstadistica.Rows.Add("SAC", 0, 0, 0, 0, 0, 0)
+
+        Dim Existe As String = "N"
+
+        For Each row As DataGridViewRow In dgvListado.Rows
+            Dim TipoABuscar As String = row.Cells("Tipo").Value
+            For i = 0 To TablaEstadistica.Rows.Count - 1
+                If TablaEstadistica.Rows(i).Item("Tipo") = row.Cells("Tipo").Value Then
+                    Existe = "S"
+                End If
+            Next
+
+            If Existe = "N" Then
+                TablaEstadistica.Rows.Add(row.Cells("Tipo").Value, 0, 0, 0, 0, 0, 0)
+            End If
+
+            For i = 0 To TablaEstadistica.Rows.Count - 1
+                If TablaEstadistica.Rows(i).Item("Tipo") = row.Cells("Tipo").Value Then
+                    If (row.Cells("Estado").Value) = "Iniciada" Then
+                        TablaEstadistica.Rows(i).Item("Iniciada") += 1
+                    End If
+                    If (row.Cells("Estado").Value) = "Investig." Then
+                        TablaEstadistica.Rows(i).Item("Investig.") += 1
+                    End If
+                    If (row.Cells("Estado").Value) = "Implement." Then
+                        TablaEstadistica.Rows(i).Item("Implement.") += 1
+                    End If
+                    If (row.Cells("Estado").Value) = "Implem. A Ver." Then
+                        TablaEstadistica.Rows(i).Item("Imple.Aver.") += 1
+                    End If
+                    If (row.Cells("Estado").Value) = "Implem. Verif." Then
+                        TablaEstadistica.Rows(i).Item("Imple.Verif.") += 1
+                    End If
+                    If (row.Cells("Estado").Value) = "Cerrada" Then
+                        TablaEstadistica.Rows(i).Item("Cerrada") += 1
+                    End If
+                    Existe = "N"
+                End If
+            Next
+        Next
+        For i = 0 To TablaEstadistica.Rows.Count - 1
+            With TablaEstadistica.Rows(i)
+                .Item("Total") = Val(.Item("Iniciada")) + Val(.Item("Investig.")) + Val(.Item("Implement.")) + Val(.Item("Imple.Aver.")) + Val(.Item("Imple.Verif.")) + Val(.Item("Cerrada"))
+            End With
+
+        Next
+        Return TablaEstadistica
+    End Function
 End Class

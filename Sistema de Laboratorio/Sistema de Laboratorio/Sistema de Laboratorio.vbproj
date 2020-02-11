@@ -101,6 +101,7 @@
     <Compile Include="Auxiliares\Interfaces\IIngresoMotivoDesvio.vb" />
     <Compile Include="Auxiliares\Interfaces\IIngresoParametrosEspecificaciones.vb" />
     <Compile Include="Auxiliares\Interfaces\INotasEnsayosProductosTerminados.vb" />
+    <Compile Include="Auxiliares\Interfaces\IVerificacionFormula.vb" />
     <Compile Include="Auxiliares\VentanasIntermedias\HistorialCambios.Designer.vb">
       <DependentUpon>HistorialCambios.vb</DependentUpon>
     </Compile>

@@ -109,4 +109,9 @@
 
         txtFormula.Text = Trim(Formula)
     End Sub
+
+    Private Sub _GrabarFormulaMod(ByVal Formula As String, ByVal ParametrosFormula() As String, ByVal Descripcion As String, Optional ByVal Renglon As Integer = 0, Optional _
+                         ByVal Modificado As Boolean = False) Implements IGrabadoDeFormula._GrabarFormulaMod
+
+    End Sub
 End Class

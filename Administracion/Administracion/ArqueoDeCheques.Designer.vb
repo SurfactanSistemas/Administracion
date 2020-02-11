@@ -41,6 +41,27 @@ Partial Class ArqueoDeCheques
         Me.btnImprimir = New System.Windows.Forms.Button()
         Me.txtSumaImportes = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.gbDiscriminado = New System.Windows.Forms.GroupBox()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.txtmesesRestantes = New System.Windows.Forms.TextBox()
+        Me.txtmes4Q2 = New System.Windows.Forms.TextBox()
+        Me.txtmes4Q1 = New System.Windows.Forms.TextBox()
+        Me.txtmes3Q2 = New System.Windows.Forms.TextBox()
+        Me.txtmes3Q1 = New System.Windows.Forms.TextBox()
+        Me.txtmes2Q2 = New System.Windows.Forms.TextBox()
+        Me.txtmes2Q1 = New System.Windows.Forms.TextBox()
+        Me.txtmesInicial = New System.Windows.Forms.TextBox()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.txtMontoTotal = New System.Windows.Forms.TextBox()
+        Me.Label18 = New System.Windows.Forms.Label()
         Me.DGV_Cheques = New ConsultasVarias.DBDataGridView()
         Me.Fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Numero = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -49,8 +70,9 @@ Partial Class ArqueoDeCheques
         Me.ClaveCheque = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Origen = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FechaOrd = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
+        Me.gbDiscriminado.SuspendLayout()
         CType(Me.DGV_Cheques, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -85,20 +107,20 @@ Partial Class ArqueoDeCheques
         'txtNumeroCheque
         '
         Me.txtNumeroCheque.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.txtNumeroCheque.Enabled = False
         Me.txtNumeroCheque.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtNumeroCheque.Location = New System.Drawing.Point(13, 128)
         Me.txtNumeroCheque.Name = "txtNumeroCheque"
+        Me.txtNumeroCheque.ReadOnly = True
         Me.txtNumeroCheque.Size = New System.Drawing.Size(111, 24)
         Me.txtNumeroCheque.TabIndex = 4
         '
         'txtImporte
         '
         Me.txtImporte.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.txtImporte.Enabled = False
         Me.txtImporte.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtImporte.Location = New System.Drawing.Point(13, 217)
         Me.txtImporte.Name = "txtImporte"
+        Me.txtImporte.ReadOnly = True
         Me.txtImporte.Size = New System.Drawing.Size(111, 24)
         Me.txtImporte.TabIndex = 5
         Me.txtImporte.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -106,10 +128,10 @@ Partial Class ArqueoDeCheques
         'txtBanco
         '
         Me.txtBanco.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.txtBanco.Enabled = False
         Me.txtBanco.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtBanco.Location = New System.Drawing.Point(13, 267)
         Me.txtBanco.Name = "txtBanco"
+        Me.txtBanco.ReadOnly = True
         Me.txtBanco.Size = New System.Drawing.Size(271, 24)
         Me.txtBanco.TabIndex = 6
         '
@@ -157,7 +179,7 @@ Partial Class ArqueoDeCheques
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(696, 44)
+        Me.Panel1.Size = New System.Drawing.Size(873, 44)
         Me.Panel1.TabIndex = 11
         '
         'Label7
@@ -176,7 +198,7 @@ Partial Class ArqueoDeCheques
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Calibri", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label6.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label6.Location = New System.Drawing.Point(528, 9)
+        Me.Label6.Location = New System.Drawing.Point(702, 9)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(156, 26)
         Me.Label6.TabIndex = 2
@@ -194,10 +216,10 @@ Partial Class ArqueoDeCheques
         'txtSumaImportes
         '
         Me.txtSumaImportes.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.txtSumaImportes.Enabled = False
         Me.txtSumaImportes.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtSumaImportes.Location = New System.Drawing.Point(173, 438)
         Me.txtSumaImportes.Name = "txtSumaImportes"
+        Me.txtSumaImportes.ReadOnly = True
         Me.txtSumaImportes.Size = New System.Drawing.Size(111, 24)
         Me.txtSumaImportes.TabIndex = 13
         Me.txtSumaImportes.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -212,6 +234,230 @@ Partial Class ArqueoDeCheques
         Me.Label8.TabIndex = 14
         Me.Label8.Text = "Suma de Importes"
         Me.Label8.Visible = False
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(147, 339)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 38)
+        Me.Button1.TabIndex = 15
+        Me.Button1.Text = "Exportar a Exel"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'gbDiscriminado
+        '
+        Me.gbDiscriminado.Controls.Add(Me.Button2)
+        Me.gbDiscriminado.Controls.Add(Me.Label16)
+        Me.gbDiscriminado.Controls.Add(Me.Label15)
+        Me.gbDiscriminado.Controls.Add(Me.Label14)
+        Me.gbDiscriminado.Controls.Add(Me.Label13)
+        Me.gbDiscriminado.Controls.Add(Me.Label12)
+        Me.gbDiscriminado.Controls.Add(Me.Label11)
+        Me.gbDiscriminado.Controls.Add(Me.Label10)
+        Me.gbDiscriminado.Controls.Add(Me.Label9)
+        Me.gbDiscriminado.Controls.Add(Me.txtmesesRestantes)
+        Me.gbDiscriminado.Controls.Add(Me.txtmes4Q2)
+        Me.gbDiscriminado.Controls.Add(Me.txtmes4Q1)
+        Me.gbDiscriminado.Controls.Add(Me.txtmes3Q2)
+        Me.gbDiscriminado.Controls.Add(Me.txtmes3Q1)
+        Me.gbDiscriminado.Controls.Add(Me.txtmes2Q2)
+        Me.gbDiscriminado.Controls.Add(Me.txtmes2Q1)
+        Me.gbDiscriminado.Controls.Add(Me.txtmesInicial)
+        Me.gbDiscriminado.Location = New System.Drawing.Point(690, 50)
+        Me.gbDiscriminado.Name = "gbDiscriminado"
+        Me.gbDiscriminado.Size = New System.Drawing.Size(174, 439)
+        Me.gbDiscriminado.TabIndex = 16
+        Me.gbDiscriminado.TabStop = False
+        Me.gbDiscriminado.Text = "Discriminado Mensual"
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Location = New System.Drawing.Point(14, 351)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(45, 13)
+        Me.Label16.TabIndex = 23
+        Me.Label16.Text = "Label16"
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(14, 305)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(45, 13)
+        Me.Label15.TabIndex = 22
+        Me.Label15.Text = "Label15"
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(14, 259)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(45, 13)
+        Me.Label14.TabIndex = 21
+        Me.Label14.Text = "Label14"
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(14, 209)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(45, 13)
+        Me.Label13.TabIndex = 20
+        Me.Label13.Text = "Label13"
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(14, 164)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(45, 13)
+        Me.Label12.TabIndex = 19
+        Me.Label12.Text = "Label12"
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(14, 118)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(45, 13)
+        Me.Label11.TabIndex = 17
+        Me.Label11.Text = "Label11"
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(14, 72)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(45, 13)
+        Me.Label10.TabIndex = 15
+        Me.Label10.Text = "Label10"
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(14, 22)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(39, 13)
+        Me.Label9.TabIndex = 13
+        Me.Label9.Text = "Label9"
+        '
+        'txtmesesRestantes
+        '
+        Me.txtmesesRestantes.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.txtmesesRestantes.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtmesesRestantes.Location = New System.Drawing.Point(17, 367)
+        Me.txtmesesRestantes.Name = "txtmesesRestantes"
+        Me.txtmesesRestantes.ReadOnly = True
+        Me.txtmesesRestantes.Size = New System.Drawing.Size(134, 24)
+        Me.txtmesesRestantes.TabIndex = 12
+        Me.txtmesesRestantes.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtmes4Q2
+        '
+        Me.txtmes4Q2.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.txtmes4Q2.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtmes4Q2.Location = New System.Drawing.Point(17, 321)
+        Me.txtmes4Q2.Name = "txtmes4Q2"
+        Me.txtmes4Q2.ReadOnly = True
+        Me.txtmes4Q2.Size = New System.Drawing.Size(134, 24)
+        Me.txtmes4Q2.TabIndex = 11
+        Me.txtmes4Q2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtmes4Q1
+        '
+        Me.txtmes4Q1.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.txtmes4Q1.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtmes4Q1.Location = New System.Drawing.Point(17, 275)
+        Me.txtmes4Q1.Name = "txtmes4Q1"
+        Me.txtmes4Q1.ReadOnly = True
+        Me.txtmes4Q1.Size = New System.Drawing.Size(134, 24)
+        Me.txtmes4Q1.TabIndex = 10
+        Me.txtmes4Q1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtmes3Q2
+        '
+        Me.txtmes3Q2.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.txtmes3Q2.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtmes3Q2.Location = New System.Drawing.Point(17, 225)
+        Me.txtmes3Q2.Name = "txtmes3Q2"
+        Me.txtmes3Q2.ReadOnly = True
+        Me.txtmes3Q2.Size = New System.Drawing.Size(134, 24)
+        Me.txtmes3Q2.TabIndex = 9
+        Me.txtmes3Q2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtmes3Q1
+        '
+        Me.txtmes3Q1.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.txtmes3Q1.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtmes3Q1.Location = New System.Drawing.Point(17, 180)
+        Me.txtmes3Q1.Name = "txtmes3Q1"
+        Me.txtmes3Q1.ReadOnly = True
+        Me.txtmes3Q1.Size = New System.Drawing.Size(134, 24)
+        Me.txtmes3Q1.TabIndex = 8
+        Me.txtmes3Q1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtmes2Q2
+        '
+        Me.txtmes2Q2.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.txtmes2Q2.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtmes2Q2.Location = New System.Drawing.Point(17, 134)
+        Me.txtmes2Q2.Name = "txtmes2Q2"
+        Me.txtmes2Q2.ReadOnly = True
+        Me.txtmes2Q2.Size = New System.Drawing.Size(134, 24)
+        Me.txtmes2Q2.TabIndex = 7
+        Me.txtmes2Q2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtmes2Q1
+        '
+        Me.txtmes2Q1.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.txtmes2Q1.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtmes2Q1.Location = New System.Drawing.Point(17, 88)
+        Me.txtmes2Q1.Name = "txtmes2Q1"
+        Me.txtmes2Q1.ReadOnly = True
+        Me.txtmes2Q1.Size = New System.Drawing.Size(134, 24)
+        Me.txtmes2Q1.TabIndex = 6
+        Me.txtmes2Q1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtmesInicial
+        '
+        Me.txtmesInicial.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.txtmesInicial.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtmesInicial.Location = New System.Drawing.Point(17, 38)
+        Me.txtmesInicial.Name = "txtmesInicial"
+        Me.txtmesInicial.ReadOnly = True
+        Me.txtmesInicial.Size = New System.Drawing.Size(134, 24)
+        Me.txtmesInicial.TabIndex = 5
+        Me.txtmesInicial.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Location = New System.Drawing.Point(588, 469)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(45, 13)
+        Me.Label17.TabIndex = 17
+        Me.Label17.Text = "Label17"
+        '
+        'txtMontoTotal
+        '
+        Me.txtMontoTotal.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.txtMontoTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtMontoTotal.Location = New System.Drawing.Point(419, 465)
+        Me.txtMontoTotal.Name = "txtMontoTotal"
+        Me.txtMontoTotal.ReadOnly = True
+        Me.txtMontoTotal.Size = New System.Drawing.Size(163, 24)
+        Me.txtMontoTotal.TabIndex = 18
+        Me.txtMontoTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Location = New System.Drawing.Point(349, 469)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(64, 13)
+        Me.Label18.TabIndex = 19
+        Me.Label18.Text = "Monto Total"
         '
         'DGV_Cheques
         '
@@ -286,21 +532,25 @@ Partial Class ArqueoDeCheques
         Me.FechaOrd.Name = "FechaOrd"
         Me.FechaOrd.Visible = False
         '
-        'Button1
+        'Button2
         '
-        Me.Button1.Location = New System.Drawing.Point(147, 339)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 38)
-        Me.Button1.TabIndex = 15
-        Me.Button1.Text = "Exportar a Exel"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.Button2.Location = New System.Drawing.Point(47, 397)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(75, 38)
+        Me.Button2.TabIndex = 24
+        Me.Button2.Text = "Imprimir Acumulado"
+        Me.Button2.UseVisualStyleBackColor = True
         '
         'ArqueoDeCheques
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(696, 474)
+        Me.ClientSize = New System.Drawing.Size(873, 491)
+        Me.Controls.Add(Me.Label18)
+        Me.Controls.Add(Me.txtMontoTotal)
+        Me.Controls.Add(Me.Label17)
+        Me.Controls.Add(Me.gbDiscriminado)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.txtSumaImportes)
@@ -323,6 +573,8 @@ Partial Class ArqueoDeCheques
         Me.Text = "ArqueoDeCheques"
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        Me.gbDiscriminado.ResumeLayout(False)
+        Me.gbDiscriminado.PerformLayout()
         CType(Me.DGV_Cheques, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -353,4 +605,25 @@ Partial Class ArqueoDeCheques
     Friend WithEvents txtSumaImportes As System.Windows.Forms.TextBox
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents gbDiscriminado As System.Windows.Forms.GroupBox
+    Friend WithEvents Label16 As System.Windows.Forms.Label
+    Friend WithEvents Label15 As System.Windows.Forms.Label
+    Friend WithEvents Label14 As System.Windows.Forms.Label
+    Friend WithEvents Label13 As System.Windows.Forms.Label
+    Friend WithEvents Label12 As System.Windows.Forms.Label
+    Friend WithEvents Label11 As System.Windows.Forms.Label
+    Friend WithEvents Label10 As System.Windows.Forms.Label
+    Friend WithEvents Label9 As System.Windows.Forms.Label
+    Friend WithEvents txtmesesRestantes As System.Windows.Forms.TextBox
+    Friend WithEvents txtmes4Q2 As System.Windows.Forms.TextBox
+    Friend WithEvents txtmes4Q1 As System.Windows.Forms.TextBox
+    Friend WithEvents txtmes3Q2 As System.Windows.Forms.TextBox
+    Friend WithEvents txtmes3Q1 As System.Windows.Forms.TextBox
+    Friend WithEvents txtmes2Q2 As System.Windows.Forms.TextBox
+    Friend WithEvents txtmes2Q1 As System.Windows.Forms.TextBox
+    Friend WithEvents txtmesInicial As System.Windows.Forms.TextBox
+    Friend WithEvents Label17 As System.Windows.Forms.Label
+    Friend WithEvents txtMontoTotal As System.Windows.Forms.TextBox
+    Friend WithEvents Label18 As System.Windows.Forms.Label
+    Friend WithEvents Button2 As System.Windows.Forms.Button
 End Class

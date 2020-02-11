@@ -1,11 +1,12 @@
-﻿Imports System.IO
+﻿
 Imports ConsultasVarias
 Imports ConsultasVarias.Interfaces
 Imports ConsultasVarias.Clases
 Imports ConsultasVarias.Clases.Helper
 Imports ConsultasVarias.Clases.Query
-Imports Microsoft.Office.Interop
 Imports Microsoft.Office.Interop.Excel
+Imports Microsoft.Office.Interop
+
 
 Public Class ListadoHojasPTPorCodigo : Implements IAyudaMPs, IExportar
 
@@ -294,7 +295,7 @@ Public Class ListadoHojasPTPorCodigo : Implements IAyudaMPs, IExportar
                         '
 
                         _r.Item("Saldo") = 0 '_CalcularSaldoDeHoja(WProducto, _r.Item("Hoja"), Conexion.DeterminarSegunIDIDBasePara(WidEmpresa))
-                        
+
                         WDatos.Rows.Add(_r)
 
                     End If
@@ -416,7 +417,7 @@ Public Class ListadoHojasPTPorCodigo : Implements IAyudaMPs, IExportar
         If WHojas2 IsNot Nothing Then
 
             With WHojas2
-                
+
                 WLiberada = OrDefault(.Item("Real"), 0)
                 WMarca = OrDefault(.Item("Marca"), "")
 
@@ -574,7 +575,7 @@ Public Class ListadoHojasPTPorCodigo : Implements IAyudaMPs, IExportar
             With row
                 Auxi = OrDefault(.Item("TipoPro"), 0)
                 WMarca = OrDefault(.Item("Marca"), "")
-                
+
                 For i = 1 To 5
                     XLotes(i, 1) = OrDefault(.Item("Lote" & i), "")
                     XLotes(i, 2) = OrDefault(.Item("Canti" & i), "")
@@ -610,7 +611,7 @@ Public Class ListadoHojasPTPorCodigo : Implements IAyudaMPs, IExportar
 
                     Dim r = WMovimientos.NewRow
                     With r
-                        
+
                         If Val(WTipo) = 1 Then
                             .Item("Salida") = formatonumerico(WLiberada)
                             .Item("Entrada") = ""
@@ -627,8 +628,8 @@ Public Class ListadoHojasPTPorCodigo : Implements IAyudaMPs, IExportar
                 End If
 
             Next
-
         Next
+
 
         If WFiltroMarca <> "" Then WFiltroMarca = " And ISNULL(Marca, '') <> 'X' "
 
@@ -811,11 +812,12 @@ Public Class ListadoHojasPTPorCodigo : Implements IAyudaMPs, IExportar
         '
         ' Creamos el Objeto Excel para comenzar a Trabajar.
         '
-        Dim oApp As New Excel.Application()
-        Dim oBook As Excel.Workbook = oApp.Workbooks.Add
-        Dim oSheet As Excel.Worksheet = oApp.ActiveSheet
+        'Dim oApp As New Excel.Application()
+        Dim OApp As New Excel.Application()
+        Dim oBook As Excel.Workbook = OApp.Workbooks.Add
+        Dim oSheet As Excel.Worksheet = OApp.ActiveSheet
 
-        oApp.Visible = False
+        OApp.Visible = False
 
         Dim celda As Excel.Range = oSheet.Cells(2, 1)
 
@@ -842,9 +844,9 @@ Public Class ListadoHojasPTPorCodigo : Implements IAyudaMPs, IExportar
                     If WUltimaVersion < .Item("Version") Then
 
                         If WUltimaVersion = 0 Then
-                            oSheet = oApp.ActiveSheet
+                            oSheet = OApp.ActiveSheet
                         Else
-                            oSheet = oApp.Sheets.Add
+                            oSheet = OApp.Sheets.Add
                             oSheet.Activate()
                             WColumna = 2
                         End If
@@ -873,7 +875,8 @@ Public Class ListadoHojasPTPorCodigo : Implements IAyudaMPs, IExportar
 
                             WFila += 1
 
-                            oSheet.Cells(WFila, 1) = _TraerDescripcionEnsayo(Trim(ens.Item("Ensayo")))
+                            'oSheet.Cells(WFila, 1) = _TraerDescripcionEnsayo(Trim(ens.Item("Ensayo")))
+                            oSheet.Cells(WFila, 1) = Trim(ens.Item("Ensayo"))
                             oSheet.Cells(WFila, 2) = Trim(ens.Item("ValorStd"))
                             oSheet.Cells(2, WColumna) = ens.Item("Fecha")
 
@@ -908,7 +911,7 @@ Public Class ListadoHojasPTPorCodigo : Implements IAyudaMPs, IExportar
 
         Next
 
-        For Each sheet As Worksheet In oApp.Sheets
+        For Each sheet As Worksheet In OApp.Sheets
 
             oSheet = sheet
             oSheet.Activate()
@@ -931,8 +934,8 @@ Public Class ListadoHojasPTPorCodigo : Implements IAyudaMPs, IExportar
 
         Next
 
-        oApp.Visible = True
-        oApp.UserControl = True
+        OApp.Visible = True
+        OApp.UserControl = True
 
         ProgressBar1.Value = 0
 
@@ -943,8 +946,8 @@ Public Class ListadoHojasPTPorCodigo : Implements IAyudaMPs, IExportar
         'oBook.Close(False)
         'oBook.SaveAs()
         oBook = Nothing
-        oApp.Quit()
-        oApp = Nothing
+        OApp.Quit()
+        OApp = Nothing
 
     End Sub
 
@@ -1227,7 +1230,7 @@ Public Class ListadoHojasPTPorCodigo : Implements IAyudaMPs, IExportar
 
         btnCalcularSaldos.Text = "Calculando saldos..."
 
-        For Each row As datagridviewrow In dgvLaudos.Rows
+        For Each row As DataGridViewRow In dgvLaudos.Rows
             With row
                 .Cells("Saldo").Value = _CalcularSaldoDeHoja(txtCodigo.Text, .Cells("Hoja").Value, Conexion.DeterminarSegunIDIDBasePara(.Cells("idPlanta").Value))
             End With

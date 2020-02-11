@@ -430,7 +430,7 @@ Partial Class IngresoPruebasEnsayo
         '
         Me.pnlConsulta.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.pnlConsulta.Controls.Add(Me.GroupBox1)
-        Me.pnlConsulta.Location = New System.Drawing.Point(136, 55)
+        Me.pnlConsulta.Location = New System.Drawing.Point(136, 40)
         Me.pnlConsulta.Name = "pnlConsulta"
         Me.pnlConsulta.Size = New System.Drawing.Size(740, 334)
         Me.pnlConsulta.TabIndex = 2

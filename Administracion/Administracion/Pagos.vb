@@ -1543,6 +1543,14 @@ Public Class Pagos
                         .Cells(6).Value = XClave
                         .Cells(7).Value = XCuit
 
+                        .Cells(0).ReadOnly = True
+                        .Cells(1).ReadOnly = True
+                        .Cells(2).ReadOnly = True
+                        .Cells(3).ReadOnly = True
+                        .Cells(4).ReadOnly = True
+                        .Cells(5).ReadOnly = True
+                        .Cells(6).ReadOnly = True
+                        .Cells(7).ReadOnly = True
                     End With
 
 
@@ -1652,6 +1660,9 @@ Public Class Pagos
 
         btnEnviarAviso.Enabled = False
         btnActualizarCarpetas.Visible = False
+
+        txtOrdenPago.Enabled = True
+
     End Sub
 
     Private Function traerParidad() As String
@@ -3206,11 +3217,15 @@ Public Class Pagos
                         For i = 1 To 9
                             _Carpetas(i) = Trim(OrDefault(WOrd.Item("Carpeta" & i), ""))
                         Next
+                        'BLOQUEAMOS PARA Q NO HAGAN CAGADA, SE  VUELVE A HABILITAR CUANDO LIMPIAN EL FORM
+                        txtOrdenPago.Enabled = False
 
                     End If
 
                     btnEnviarAviso.Enabled = True
                     btnActualizarCarpetas.Visible = True
+
+
 
                 Catch ex As System.Exception
 
@@ -3282,7 +3297,7 @@ Public Class Pagos
         Return valido
     End Function
 
-    Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData As Keys) As Boolean
+Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData As Keys) As Boolean
 
         If gridFormaPagos.Focused Or gridFormaPagos.IsCurrentCellInEditMode Then ' Detectamos los ENTER tanto si solo estan en foco o si estan en edición una celda.
             gridFormaPagos.CommitEdit(DataGridViewDataErrorContexts.Commit) ' Guardamos todos los datos que no hayan sido confirmados.
@@ -6173,7 +6188,10 @@ Public Class Pagos
             If _ValidarFecha(Trim(txtFechaAux.Text)) And WRow >= 0 And Wcol >= 0 Then
 
                 With gridFormaPagos
+
                     .Rows(WRow).Cells(2).Value = txtFechaAux.Text
+
+
 
                     If Trim(.Rows(WRow).Cells(3).Value) <> "" Then
                         .CurrentCell = .Rows(WRow).Cells(5)
@@ -6200,31 +6218,37 @@ Public Class Pagos
 
                 gridRecibos_CellEnter(sender, e)
 
+
+
             End If
         End With
     End Sub
 
     Private Sub gridRecibos_CellEnter(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles gridFormaPagos.CellEnter
         With gridFormaPagos
-            If e.ColumnIndex = 2 Then
+            Dim fila As Integer = e.RowIndex
+            If .Rows(fila).Cells(0).Value <> "3" Then
+                If e.ColumnIndex = 2 Then
 
-                Dim iRow, iCol As Integer
-                iRow = e.RowIndex
-                iCol = e.ColumnIndex
+                    Dim iRow, iCol As Integer
+                    iRow = e.RowIndex
+                    iCol = e.ColumnIndex
 
-                Dim _location As Point = .GetCellDisplayRectangle(2, iRow, False).Location
+                    Dim _location As Point = .GetCellDisplayRectangle(2, iRow, False).Location
 
-                .ClearSelection()
-                _location.Y += .Location.Y + (.CurrentCell.Size.Height / 4) - 1.5
-                _location.X += .Location.X + (.CurrentCell.Size.Width - txtFechaAux.Size.Width) - 3
-                txtFechaAux.Location = _location
-                txtFechaAux.Text = .Rows(iRow).Cells(2).Value
-                WRow = iRow
-                Wcol = iCol
-                txtFechaAux.Visible = True
-                txtFechaAux.Focus()
+                    .ClearSelection()
+                    _location.Y += .Location.Y + (.CurrentCell.Size.Height / 4) - 1.5
+                    _location.X += .Location.X + (.CurrentCell.Size.Width - txtFechaAux.Size.Width) - 3
+                    txtFechaAux.Location = _location
+                    txtFechaAux.Text = .Rows(iRow).Cells(2).Value
+                    WRow = iRow
+                    Wcol = iCol
+                    txtFechaAux.Visible = True
+                    txtFechaAux.Focus()
 
+                End If
             End If
+         
         End With
     End Sub
 
@@ -6986,6 +7010,7 @@ Public Class Pagos
             If Trim(txtFechaAux.Text.Replace("/", "")) <> "" And Trim(txtFechaAux.Text).Length = 10 Then
 
                 With gridFormaPagos
+
                     .Rows(WRow).Cells(2).Value = txtFechaAux.Text
 
 
@@ -7483,7 +7508,7 @@ Public Class Pagos
                 Dim Paridad As Double
                 GridPagosXFacturas.Rows(filasNuevas).Cells("ImportePesos").Value = gridPagos.Rows(i).Cells("Importe").Value
                 ImportePesos = GridPagosXFacturas.Rows(filasNuevas).Cells("ImportePesos").Value
-                GridPagosXFacturas.Rows(filasNuevas).Cells("Paridad").Value = redondeo(_BuscarCambioDiviza(Fecha))
+                GridPagosXFacturas.Rows(filasNuevas).Cells("Paridad").Value = _BuscarParidadFacturaPorProv(Tipo, Punto, Letra, CodProveedor, Numero)  'redondeo(_BuscarCambioDiviza(Fecha))
                 Paridad = GridPagosXFacturas.Rows(filasNuevas).Cells("Paridad").Value()
                 Div = Val(ImportePesos) / Paridad
                 GridPagosXFacturas.Rows(filasNuevas).Cells("ImporteDolares").Value = redondeo(Div)
@@ -7513,6 +7538,25 @@ Public Class Pagos
     End Function
 
 
+    Private Function _BuscarParidadFacturaPorProv(ByVal Tipo As String, ByVal Punto As String, ByVal Letra As String, ByVal Proveedor As String, ByVal Numero As String) As Double
+        'Dim cn As New SqlConnection(ConfigurationManager.ConnectionStrings("LOCAL").ToString())
+        Dim cn As New SqlConnection(Proceso._ConectarA())
+        cn.Open()
+        Dim SQLconsul As String
+        SQLconsul = "SELECT Paridad From CtaCtePrv WHERE Proveedor = '" & Proveedor & "' AND Numero = '" & Numero & "' AND Letra = '" & Letra & "' AND Tipo = '" & Tipo & "' AND Punto = '" & Punto & "'"
+        Dim cmd As New SqlCommand(SQLconsul, cn)
+        Dim dr As SqlDataReader
+        dr = cmd.ExecuteReader()
+        If (dr.HasRows) Then
+            If (dr.Read()) Then
+                Dim Devolver As String = dr.Item("Paridad")
+                Return Devolver
+            End If
+        End If
+        Return "NoSeEncontro"
+    End Function
+
+
 
     Private Sub btnAceptar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAceptar.Click
 
@@ -7531,28 +7575,28 @@ Public Class Pagos
         '    .Add("SaldoAMostrar")
         'End With
 
-            Dim Fechaord As String = ordenaFecha(txtFechaParidad.Text)
-            Dim importeDolar As Double = redondeo(Val(txtTotal.Text) / Val(txtParidad.Text.Replace(",", ".")))
+        Dim Fechaord As String = ordenaFecha(txtFechaParidad.Text)
+        Dim importeDolar As Double = redondeo(Val(txtTotal.Text) / Val(txtParidad.Text.Replace(",", ".")))
         tablaChequesAdolar.Rows.Add("00", "Retenciones", "", txtTotal.Text, txtParidad.Text, importeDolar, txtTotal.Text, False, Fechaord, txtTotal.Text)
-            For i As Integer = 1 To 15
-                If (gridFormaPagos.Rows(i - 1).Cells("Importe2").Value <> "") Then
-                    tablaChequesAdolar.Rows.Add()
-                    tablaChequesAdolar.Rows(i).Item("Tipo") = gridFormaPagos.Rows(i - 1).Cells("Tipo2").Value
-                    tablaChequesAdolar.Rows(i).Item("Numero") = gridFormaPagos.Rows(i - 1).Cells("Numero2").Value
-                    tablaChequesAdolar.Rows(i).Item("Fecha") = gridFormaPagos.Rows(i - 1).Cells("Fecha2").Value
-                    tablaChequesAdolar.Rows(i).Item("Importe") = gridFormaPagos.Rows(i - 1).Cells("Importe2").Value
-                    Dim fecha As String = tablaChequesAdolar.Rows(i).Item("Fecha")
-                    Dim FechaAVerificar As DateTime
-                    FechaAVerificar = DateTime.ParseExact(fecha, "dd/MM/yyyy", New CultureInfo("en-US"))
-                    If (FechaAVerificar.DayOfWeek = 6) Then
-                        FechaAVerificar = FechaAVerificar.AddDays(2)
-                    Else
-                        If (FechaAVerificar.DayOfWeek = 0) Then
-                            FechaAVerificar = FechaAVerificar.AddDays(1)
-                        End If
+        For i As Integer = 1 To 15
+            If (gridFormaPagos.Rows(i - 1).Cells("Importe2").Value <> "") Then
+                tablaChequesAdolar.Rows.Add()
+                tablaChequesAdolar.Rows(i).Item("Tipo") = gridFormaPagos.Rows(i - 1).Cells("Tipo2").Value
+                tablaChequesAdolar.Rows(i).Item("Numero") = gridFormaPagos.Rows(i - 1).Cells("Numero2").Value
+                tablaChequesAdolar.Rows(i).Item("Fecha") = gridFormaPagos.Rows(i - 1).Cells("Fecha2").Value
+                tablaChequesAdolar.Rows(i).Item("Importe") = gridFormaPagos.Rows(i - 1).Cells("Importe2").Value
+                Dim fecha As String = tablaChequesAdolar.Rows(i).Item("Fecha")
+                Dim FechaAVerificar As DateTime
+                FechaAVerificar = DateTime.ParseExact(fecha, "dd/MM/yyyy", New CultureInfo("en-US"))
+                If (FechaAVerificar.DayOfWeek = 6) Then
+                    FechaAVerificar = FechaAVerificar.AddDays(2)
+                Else
+                    If (FechaAVerificar.DayOfWeek = 0) Then
+                        FechaAVerificar = FechaAVerificar.AddDays(1)
                     End If
+                End If
 
-                    tablaChequesAdolar.Rows(i).Item("Paridad") = _BuscarCambioDiviza(FechaAVerificar.ToString())
+                tablaChequesAdolar.Rows(i).Item("Paridad") = _BuscarCambioDiviza(FechaAVerificar.ToString())
 
                 If (tablaChequesAdolar.Rows(i).Item("Paridad") = 0) Then
                     For j As Integer = 0 To 29
@@ -7587,10 +7631,10 @@ Public Class Pagos
                 tablaChequesAdolar.Rows(i).Item("SaldoAMostrar") = gridFormaPagos.Rows(i - 1).Cells("Importe2").Value
             End If
 
-            Next
+        Next
 
 
-            Dim TotalDebitosDolares As Double = 0
+        Dim TotalDebitosDolares As Double = 0
         Dim TablaSeleccionados As New DBAuxi.TablaSeleccionadosDataTable
 
         'With TablaSeleccionados.Columns
@@ -7608,9 +7652,9 @@ Public Class Pagos
         Next
 
         Dim ArrayNumerosSeleccionados(TablaSeleccionados.Rows.Count) As String
-            Dim ArrayMontosEnPesosAmostrar(tablaChequesAdolar.Rows.Count) As String
+        Dim ArrayMontosEnPesosAmostrar(tablaChequesAdolar.Rows.Count) As String
 
-            If (TablaSeleccionados.Rows.Count > 0) Then
+        If (TablaSeleccionados.Rows.Count > 0) Then
 
 
             For i As Integer = 0 To TablaSeleccionados.Rows.Count - 1
@@ -7740,16 +7784,16 @@ Public Class Pagos
 
         Next
 
-'            Dim DolaresCalculados As String = "0"
-'            Dim tablaOrdenada() As DataRow
-'            tablaOrdenada = tablaChequesAdolar.Select("", "FechaOrdenada").Clone()
-'            For i = 0 To tablaChequesAdolar.Rows.Count - 1
-'                Dim sumaArray As String
-'                sumaArray = Val(IIf(IsDBNull(sumaArray), "0", sumaArray)) + Val(IIf(IsDBNull(ArrayMontosEnPesosAmostrar(i)), "0", ArrayMontosEnPesosAmostrar(i)))
-'                sumaArray = sumaArray.Replace(",", ".")
-'                DolaresCalculados = Val(DolaresCalculados) + (Val(IIf(IsDBNull(ArrayMontosEnPesosAmostrar(i)), "0", ArrayMontosEnPesosAmostrar(i))) / Val(tablaOrdenada(i).Item("Paridad").ToString().Replace(",", ".")))
-'                DolaresCalculados = redondeo(DolaresCalculados).ToString().Replace(",", ".")
-'        Next
+        '            Dim DolaresCalculados As String = "0"
+        '            Dim tablaOrdenada() As DataRow
+        '            tablaOrdenada = tablaChequesAdolar.Select("", "FechaOrdenada").Clone()
+        '            For i = 0 To tablaChequesAdolar.Rows.Count - 1
+        '                Dim sumaArray As String
+        '                sumaArray = Val(IIf(IsDBNull(sumaArray), "0", sumaArray)) + Val(IIf(IsDBNull(ArrayMontosEnPesosAmostrar(i)), "0", ArrayMontosEnPesosAmostrar(i)))
+        '                sumaArray = sumaArray.Replace(",", ".")
+        '                DolaresCalculados = Val(DolaresCalculados) + (Val(IIf(IsDBNull(ArrayMontosEnPesosAmostrar(i)), "0", ArrayMontosEnPesosAmostrar(i))) / Val(tablaOrdenada(i).Item("Paridad").ToString().Replace(",", ".")))
+        '                DolaresCalculados = redondeo(DolaresCalculados).ToString().Replace(",", ".")
+        '        Next
 
         For Each Factura As DataRow In TablaSeleccionados.Rows
             Dim TotalFacturaPesos As Double = 0

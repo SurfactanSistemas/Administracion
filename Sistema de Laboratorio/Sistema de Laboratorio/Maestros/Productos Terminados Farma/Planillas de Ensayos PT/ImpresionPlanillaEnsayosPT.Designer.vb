@@ -22,8 +22,8 @@ Partial Class ImpresionPlanillaEnsayosPT
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -40,6 +40,17 @@ Partial Class ImpresionPlanillaEnsayosPT
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DescParametros = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Parametro = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TipoEspecif = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Var1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Var2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Var3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Var4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Var5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Var6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Var7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Var8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Var9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Var10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         CType(Me.dgvEspecif, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -181,16 +192,16 @@ Partial Class ImpresionPlanillaEnsayosPT
         Me.dgvEspecif.AllowUserToResizeRows = False
         Me.dgvEspecif.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvEspecif.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvEspecif.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Ensayo, Me.Descripcion, Me.DescParametros, Me.Parametro})
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle8.Padding = New System.Windows.Forms.Padding(3, 0, 0, 0)
-        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvEspecif.DefaultCellStyle = DataGridViewCellStyle8
+        Me.dgvEspecif.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Ensayo, Me.Descripcion, Me.DescParametros, Me.Parametro, Me.TipoEspecif, Me.Var1, Me.Var2, Me.Var3, Me.Var4, Me.Var5, Me.Var6, Me.Var7, Me.Var8, Me.Var9, Me.Var10})
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.Padding = New System.Windows.Forms.Padding(3, 0, 0, 0)
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvEspecif.DefaultCellStyle = DataGridViewCellStyle2
         Me.dgvEspecif.DoubleBuffered = True
         Me.dgvEspecif.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.dgvEspecif.Location = New System.Drawing.Point(9, 86)
@@ -207,10 +218,10 @@ Partial Class ImpresionPlanillaEnsayosPT
         '
         Me.Ensayo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Ensayo.DataPropertyName = "Ensayo"
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle7.Format = "#00"
-        DataGridViewCellStyle7.NullValue = Nothing
-        Me.Ensayo.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle1.Format = "#00"
+        DataGridViewCellStyle1.NullValue = Nothing
+        Me.Ensayo.DefaultCellStyle = DataGridViewCellStyle1
         Me.Ensayo.HeaderText = "Ens"
         Me.Ensayo.Name = "Ensayo"
         Me.Ensayo.ReadOnly = True
@@ -245,6 +256,72 @@ Partial Class ImpresionPlanillaEnsayosPT
         Me.Parametro.ReadOnly = True
         Me.Parametro.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.Parametro.Width = 64
+        '
+        'TipoEspecif
+        '
+        Me.TipoEspecif.HeaderText = "TipoEspecif"
+        Me.TipoEspecif.Name = "TipoEspecif"
+        Me.TipoEspecif.Visible = False
+        '
+        'Var1
+        '
+        Me.Var1.HeaderText = "Var1"
+        Me.Var1.Name = "Var1"
+        Me.Var1.Visible = False
+        '
+        'Var2
+        '
+        Me.Var2.HeaderText = "Var2"
+        Me.Var2.Name = "Var2"
+        Me.Var2.Visible = False
+        '
+        'Var3
+        '
+        Me.Var3.HeaderText = "Var3"
+        Me.Var3.Name = "Var3"
+        Me.Var3.Visible = False
+        '
+        'Var4
+        '
+        Me.Var4.HeaderText = "Var4"
+        Me.Var4.Name = "Var4"
+        Me.Var4.Visible = False
+        '
+        'Var5
+        '
+        Me.Var5.HeaderText = "Var5"
+        Me.Var5.Name = "Var5"
+        Me.Var5.Visible = False
+        '
+        'Var6
+        '
+        Me.Var6.HeaderText = "Var6"
+        Me.Var6.Name = "Var6"
+        Me.Var6.Visible = False
+        '
+        'Var7
+        '
+        Me.Var7.HeaderText = "Var7"
+        Me.Var7.Name = "Var7"
+        Me.Var7.Visible = False
+        '
+        'Var8
+        '
+        Me.Var8.HeaderText = "Var8"
+        Me.Var8.Name = "Var8"
+        Me.Var8.Visible = False
+        '
+        'Var9
+        '
+        Me.Var9.HeaderText = "Var9"
+        Me.Var9.Name = "Var9"
+        Me.Var9.Visible = False
+        '
+        'Var10
+        '
+        Me.Var10.HeaderText = "Var10"
+        Me.Var10.Name = "Var10"
+        Me.Var10.Visible = False
         '
         'ImpresionPlanillaEnsayosPT
         '
@@ -289,4 +366,15 @@ Partial Class ImpresionPlanillaEnsayosPT
     Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DescParametros As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Parametro As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents TipoEspecif As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Var1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Var2 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Var3 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Var4 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Var5 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Var6 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Var7 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Var8 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Var9 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Var10 As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

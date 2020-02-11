@@ -1,6 +1,8 @@
-﻿Public Class ParametrosDeEspecificacion
+﻿Imports ConsultasVarias
 
+Public Class ParametrosDeEspecificacion
     Dim Renglon As Integer
+
 
     Dim WparametrosFormula(11) As String
 
@@ -14,7 +16,7 @@
 
         Renglon = Fila
 
-        If renglon > 0 Then _PoblarGrilla(renglon)
+        If Renglon > 0 Then _PoblarGrilla(Renglon)
 
 
     End Sub
@@ -51,14 +53,57 @@
 
     Private Sub btnAceptar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAceptar.Click
 
+        Dim Mofidicado As Boolean = False
+
         For i = 1 To 10
-            WParametrosFormula(i) = gbVariables.Controls("txtVar" & i).Text.Trim
+            WparametrosFormula(i) = gbVariables.Controls("txtVar" & i).Text.Trim
         Next
+
+        Dim SQLCnslt As String
+
+        SQLCnslt = "SELECT Descripcion, Formula, Var1, Var2, Var3, Var4, Var5, Var6, Var7, Var8, Var9, Var10, AnalistaLab, EstadoVerificado FROM FormulasDeEnsayos WHERE Renglon = '" & Renglon & "'"
+
+        Dim row As DataRow = GetSingle(SQLCnslt, "Surfactan_II")
+
+        If row IsNot Nothing Then
+            If row.Item("EstadoVerificado") = True Then
+                For i = 1 To 10
+
+                    If WparametrosFormula(i) <> Trim(OrDefault(row.Item("Var" & i), "")) Then
+                        Mofidicado = True
+                    End If
+                Next
+                If txtFormula.Text <> Trim(OrDefault(row.Item("Formula"), "")) Then
+                    Mofidicado = True
+                End If
+                If txtDescripcion.Text <> Trim(OrDefault(row.Item("Descripcion"), "")) Then
+                    Mofidicado = True
+                End If
+            End If
+        End If
+
+
+        If Mofidicado = True Then
+            If MsgBox("Se modificaron campos, y esta formula se encuentra verificada." & vbCrLf & "Si procede debera verificar los nuevamente.", vbYesNo) = vbNo Then
+
+                Exit Sub
+            Else
+
+                Dim WOwner As IGrabadoDeFormula = TryCast(Owner, IGrabadoDeFormula)
+
+                If WOwner IsNot Nothing Then
+                    WOwner._GrabarFormulaMod(txtFormula.Text, WparametrosFormula, txtDescripcion.Text, Renglon, Mofidicado)
+                    Close()
+                End If
+
+            End If
+        End If
+
 
         Dim WOwner2 As IGrabadoDeFormula = TryCast(Owner, IGrabadoDeFormula)
 
         If WOwner2 IsNot Nothing Then
-            WOwner2._GrabarFormula(txtFormula.Text, WparametrosFormula, txtDescripcion.Text, Renglon)
+            WOwner2._GrabarFormulaMod(txtFormula.Text, WparametrosFormula, txtDescripcion.Text, Renglon, False)
             Close()
         End If
 
@@ -226,4 +271,40 @@
     Private Sub ParametrosDeEspecificacion_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         txtVar1.Focus()
     End Sub
+
+
+    Private Sub btnVerificar_Click(sender As Object, e As EventArgs) Handles btnVerificar.Click
+
+        Dim SQLCnslt As String
+
+        If Renglon = 0 Then
+            MsgBox("Para poder Verificar la formula primero debe guardarla")
+            Exit Sub
+        End If
+
+        SQLCnslt = "SELECT * FROM FormulasDeEnsayos WHERE Renglon = '" & Renglon & "'"
+
+        Dim row As DataRow = GetSingle(SQLCnslt, "Surfactan_II")
+
+        If row IsNot Nothing Then
+
+            Dim Wvariables(11, 2) As String
+            Dim WFormula As String = Trim(txtFormula.Text)
+            Dim Wvalor As String = ""
+
+            For i = 1 To 10
+                Wvariables(i, 1) = Trim(OrDefault(gbVariables.Controls.Item("txtVar" & i).Text, ""))
+            Next
+
+            With New IngresoVariablesFormula(WFormula, Wvariables, Wvalor, Nothing, Nothing, Renglon)
+                .Show(Me)
+            End With
+        End If
+
+    End Sub
+
+
+
+
+
 End Class

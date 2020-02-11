@@ -53,6 +53,7 @@ Partial Class ParametrosDeEspecificacion
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.btnVerificar = New System.Windows.Forms.Button()
         Me.GroupBox2.SuspendLayout()
         Me.gbVariables.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -60,9 +61,9 @@ Partial Class ParametrosDeEspecificacion
         '
         'btnCancelar
         '
-        Me.btnCancelar.Location = New System.Drawing.Point(286, 292)
+        Me.btnCancelar.Location = New System.Drawing.Point(372, 292)
         Me.btnCancelar.Name = "btnCancelar"
-        Me.btnCancelar.Size = New System.Drawing.Size(201, 36)
+        Me.btnCancelar.Size = New System.Drawing.Size(155, 36)
         Me.btnCancelar.TabIndex = 11
         Me.btnCancelar.Text = "CANCELAR"
         Me.btnCancelar.UseVisualStyleBackColor = True
@@ -70,9 +71,9 @@ Partial Class ParametrosDeEspecificacion
         'btnAceptar
         '
         Me.btnAceptar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAceptar.Location = New System.Drawing.Point(71, 292)
+        Me.btnAceptar.Location = New System.Drawing.Point(43, 292)
         Me.btnAceptar.Name = "btnAceptar"
-        Me.btnAceptar.Size = New System.Drawing.Size(201, 36)
+        Me.btnAceptar.Size = New System.Drawing.Size(163, 36)
         Me.btnAceptar.TabIndex = 12
         Me.btnAceptar.Text = "ACEPTAR"
         Me.btnAceptar.UseVisualStyleBackColor = True
@@ -383,11 +384,21 @@ Partial Class ParametrosDeEspecificacion
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "PARÁMETROS DE ESPECIFICACIÓN"
         '
+        'btnVerificar
+        '
+        Me.btnVerificar.Location = New System.Drawing.Point(211, 292)
+        Me.btnVerificar.Name = "btnVerificar"
+        Me.btnVerificar.Size = New System.Drawing.Size(155, 36)
+        Me.btnVerificar.TabIndex = 13
+        Me.btnVerificar.Text = "VERIFICAR"
+        Me.btnVerificar.UseVisualStyleBackColor = True
+        '
         'ParametrosDeEspecificacion
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(562, 336)
+        Me.Controls.Add(Me.btnVerificar)
         Me.Controls.Add(Me.btnCancelar)
         Me.Controls.Add(Me.btnAceptar)
         Me.Controls.Add(Me.GroupBox2)
@@ -435,4 +446,5 @@ Partial Class ParametrosDeEspecificacion
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents btnVerificar As System.Windows.Forms.Button
 End Class

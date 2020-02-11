@@ -634,6 +634,12 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
                                 dgvVerificaciones.Columns("VerAcciones").AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells
                             End If
 
+                            If cmbEstado.SelectedIndex < 2 Then
+                                MsgBox("Se detecto un ingreso de accion, se cambiara el estado a Investigacion")
+                                cmbEstado.SelectedIndex = 2
+                            End If
+                            
+
                         Case 2
 
                             If Val(valor) <> 0 Then
@@ -716,12 +722,16 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
                     '
                     Select Case iCol
 
+            
                         Case 2
 
                             If Val(valor) <> 0 Then
                                 .Rows(iRow).Cells("ImpleDescResponsable").Value = _TraerDescripcionResponsable(valor)
                             End If
-
+                            If cmbEstado.SelectedIndex < 3 Then
+                                MsgBox("Se detecto un ingreso de una accion, se cambiara el estado a Implementacion")
+                                cmbEstado.SelectedIndex = 3
+                            End If
                         Case 4
 
                             If valor.Replace(" ", "").Length = 10 Then
@@ -853,6 +863,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
         If e.KeyData = Keys.Enter Then
             If txtFechaAux.Text.Replace(" ", "").Length = 10 Then
                 If Not _ValidarFecha(Trim(txtFechaAux.Text)) Then
+                    MsgBox("La fecha ingresada no es valida")
                     Exit Sub
                 End If
             End If
@@ -931,6 +942,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
         If e.KeyData = Keys.Enter Then
             If txtFechaAux2.Text.Replace(" ", "").Length = 10 Then
                 If Not _ValidarFecha(Trim(txtFechaAux2.Text)) Then
+                    MsgBox("La fecha ingresada no es valida")
                     Exit Sub
                 End If
             End If
@@ -1041,6 +1053,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
         If e.KeyData = Keys.Enter Then
             If txtFechaAux3.Text.Replace(" ", "").Length = 10 Then
                 If Not _ValidarFecha(Trim(txtFechaAux3.Text)) Then
+                    MsgBox("La fecha ingresada no es valida")
                     Exit Sub
                 End If
             End If
@@ -1058,6 +1071,12 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
                 End With
 
             End If
+
+            If cmbEstado.SelectedIndex < 4 Then
+                MsgBox("Se detecto un ingreso de fecha a verificar, se cambiara el estado a Implementacion A Verificar")
+                cmbEstado.SelectedIndex = 4
+            End If
+
 
         ElseIf e.KeyData = Keys.Escape Then
             txtFechaAux3.Text = ""
@@ -1091,6 +1110,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
         If e.KeyData = Keys.Enter Then
             If txtFechaAux4.Text.Replace(" ", "").Length = 10 Then
                 If Not _ValidarFecha(Trim(txtFechaAux4.Text)) Then
+                    MsgBox("La fecha ingresada no es valida")
                     Exit Sub
                 End If
             End If
@@ -1108,6 +1128,12 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
                 End With
 
             End If
+
+            If cmbEstado.SelectedIndex < 5 Then
+                MsgBox("Se ingreso una fecha de Verificado, se cambiara el estado a Implementacion  Verificada")
+                cmbEstado.SelectedIndex = 5
+            End If
+
 
         ElseIf e.KeyData = Keys.Escape Then
             txtFechaAux4.Text = ""
@@ -2450,4 +2476,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
     '        MsgBox(dgvAcciones.CurrentCell.Value)
     '    End If
     'End Sub
+
+    
+   
 End Class

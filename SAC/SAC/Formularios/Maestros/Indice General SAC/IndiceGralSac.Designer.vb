@@ -50,6 +50,9 @@ Partial Class IndiceGralSac
         Me.CopiarSóloDatosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.btnExportarVarios = New System.Windows.Forms.Button()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.txtBuscador = New System.Windows.Forms.TextBox()
         Me.GroupBox9 = New System.Windows.Forms.GroupBox()
         Me.txtAnio = New System.Windows.Forms.TextBox()
         Me.txtHastaAnio = New System.Windows.Forms.TextBox()
@@ -79,6 +82,7 @@ Partial Class IndiceGralSac
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.clbEstados = New System.Windows.Forms.CheckedListBox()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.btnEstadistica = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         CType(Me.dgvListado, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip1.SuspendLayout()
@@ -109,7 +113,7 @@ Partial Class IndiceGralSac
         'Label2
         '
         Me.Label2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.Control
@@ -122,7 +126,7 @@ Partial Class IndiceGralSac
         'Label1
         '
         Me.Label1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.Control
@@ -298,8 +302,8 @@ Partial Class IndiceGralSac
         'GroupBox1
         '
         Me.GroupBox1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox1.Controls.Add(Me.Panel2)
         Me.GroupBox1.Location = New System.Drawing.Point(10, 10)
         Me.GroupBox1.Margin = New System.Windows.Forms.Padding(10)
@@ -312,9 +316,14 @@ Partial Class IndiceGralSac
         'Panel2
         '
         Me.Panel2.AutoScroll = True
+        Me.Panel2.Controls.Add(Me.btnEstadistica)
+        Me.Panel2.Controls.Add(Me.btnExportarVarios)
+        Me.Panel2.Controls.Add(Me.Label8)
+        Me.Panel2.Controls.Add(Me.txtBuscador)
         Me.Panel2.Controls.Add(Me.GroupBox9)
         Me.Panel2.Controls.Add(Me.Button1)
         Me.Panel2.Controls.Add(Me.btnNuevaSolicitud)
+        Me.Panel2.Controls.Add(Me.GroupBox5)
         Me.Panel2.Controls.Add(Me.btnCancelar)
         Me.Panel2.Controls.Add(Me.btnAceptar)
         Me.Panel2.Controls.Add(Me.GroupBox8)
@@ -322,7 +331,6 @@ Partial Class IndiceGralSac
         Me.Panel2.Controls.Add(Me.GroupBox7)
         Me.Panel2.Controls.Add(Me.GroupBox6)
         Me.Panel2.Controls.Add(Me.GroupBox3)
-        Me.Panel2.Controls.Add(Me.GroupBox5)
         Me.Panel2.Controls.Add(Me.GroupBox4)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(3, 16)
@@ -330,13 +338,39 @@ Partial Class IndiceGralSac
         Me.Panel2.Size = New System.Drawing.Size(1119, 197)
         Me.Panel2.TabIndex = 5
         '
+        'btnExportarVarios
+        '
+        Me.btnExportarVarios.Location = New System.Drawing.Point(632, 156)
+        Me.btnExportarVarios.Name = "btnExportarVarios"
+        Me.btnExportarVarios.Size = New System.Drawing.Size(90, 33)
+        Me.btnExportarVarios.TabIndex = 11
+        Me.btnExportarVarios.Text = "Exportar Varios"
+        Me.btnExportarVarios.UseVisualStyleBackColor = True
+        Me.btnExportarVarios.Visible = False
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(19, 152)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(52, 13)
+        Me.Label8.TabIndex = 10
+        Me.Label8.Text = "Buscador"
+        '
+        'txtBuscador
+        '
+        Me.txtBuscador.Location = New System.Drawing.Point(19, 170)
+        Me.txtBuscador.Name = "txtBuscador"
+        Me.txtBuscador.Size = New System.Drawing.Size(394, 20)
+        Me.txtBuscador.TabIndex = 9
+        '
         'GroupBox9
         '
         Me.GroupBox9.Controls.Add(Me.txtAnio)
         Me.GroupBox9.Controls.Add(Me.txtHastaAnio)
         Me.GroupBox9.Controls.Add(Me.Label6)
         Me.GroupBox9.Controls.Add(Me.Label7)
-        Me.GroupBox9.Location = New System.Drawing.Point(19, 12)
+        Me.GroupBox9.Location = New System.Drawing.Point(19, 6)
         Me.GroupBox9.Name = "GroupBox9"
         Me.GroupBox9.Size = New System.Drawing.Size(240, 47)
         Me.GroupBox9.TabIndex = 8
@@ -382,9 +416,9 @@ Partial Class IndiceGralSac
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(785, 43)
+        Me.Button1.Location = New System.Drawing.Point(892, 43)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(181, 33)
+        Me.Button1.Size = New System.Drawing.Size(98, 33)
         Me.Button1.TabIndex = 7
         Me.Button1.Text = "Exportar Indice"
         Me.Button1.UseVisualStyleBackColor = True
@@ -400,18 +434,18 @@ Partial Class IndiceGralSac
         '
         'btnCancelar
         '
-        Me.btnCancelar.Location = New System.Drawing.Point(973, 43)
+        Me.btnCancelar.Location = New System.Drawing.Point(996, 43)
         Me.btnCancelar.Name = "btnCancelar"
-        Me.btnCancelar.Size = New System.Drawing.Size(132, 33)
+        Me.btnCancelar.Size = New System.Drawing.Size(109, 33)
         Me.btnCancelar.TabIndex = 5
         Me.btnCancelar.Text = "Cancelar"
         Me.btnCancelar.UseVisualStyleBackColor = True
         '
         'btnAceptar
         '
-        Me.btnAceptar.Location = New System.Drawing.Point(785, 6)
+        Me.btnAceptar.Location = New System.Drawing.Point(771, 6)
         Me.btnAceptar.Name = "btnAceptar"
-        Me.btnAceptar.Size = New System.Drawing.Size(132, 33)
+        Me.btnAceptar.Size = New System.Drawing.Size(147, 33)
         Me.btnAceptar.TabIndex = 5
         Me.btnAceptar.Text = "FILTRAR"
         Me.btnAceptar.UseVisualStyleBackColor = True
@@ -443,7 +477,7 @@ Partial Class IndiceGralSac
         Me.GroupBox2.Controls.Add(Me.Label4)
         Me.GroupBox2.Controls.Add(Me.cmbOrdenI)
         Me.GroupBox2.Controls.Add(Me.Label3)
-        Me.GroupBox2.Location = New System.Drawing.Point(265, 12)
+        Me.GroupBox2.Location = New System.Drawing.Point(265, 6)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(500, 47)
         Me.GroupBox2.TabIndex = 0
@@ -524,9 +558,9 @@ Partial Class IndiceGralSac
         'GroupBox6
         '
         Me.GroupBox6.Controls.Add(Me.clbEmisores)
-        Me.GroupBox6.Location = New System.Drawing.Point(598, 77)
+        Me.GroupBox6.Location = New System.Drawing.Point(598, 52)
         Me.GroupBox6.Name = "GroupBox6"
-        Me.GroupBox6.Size = New System.Drawing.Size(167, 107)
+        Me.GroupBox6.Size = New System.Drawing.Size(167, 98)
         Me.GroupBox6.TabIndex = 3
         Me.GroupBox6.TabStop = False
         Me.GroupBox6.Text = "Emisor"
@@ -535,7 +569,7 @@ Partial Class IndiceGralSac
         '
         Me.clbEmisores.CheckOnClick = True
         Me.clbEmisores.FormattingEnabled = True
-        Me.clbEmisores.Location = New System.Drawing.Point(10, 18)
+        Me.clbEmisores.Location = New System.Drawing.Point(14, 15)
         Me.clbEmisores.Name = "clbEmisores"
         Me.clbEmisores.Size = New System.Drawing.Size(147, 79)
         Me.clbEmisores.TabIndex = 2
@@ -543,9 +577,9 @@ Partial Class IndiceGralSac
         'GroupBox3
         '
         Me.GroupBox3.Controls.Add(Me.clbTiposSolicitud)
-        Me.GroupBox3.Location = New System.Drawing.Point(9, 76)
+        Me.GroupBox3.Location = New System.Drawing.Point(9, 52)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(202, 107)
+        Me.GroupBox3.Size = New System.Drawing.Size(202, 98)
         Me.GroupBox3.TabIndex = 3
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Tipos de Solicitud"
@@ -554,7 +588,7 @@ Partial Class IndiceGralSac
         '
         Me.clbTiposSolicitud.CheckOnClick = True
         Me.clbTiposSolicitud.FormattingEnabled = True
-        Me.clbTiposSolicitud.Location = New System.Drawing.Point(10, 18)
+        Me.clbTiposSolicitud.Location = New System.Drawing.Point(10, 13)
         Me.clbTiposSolicitud.Name = "clbTiposSolicitud"
         Me.clbTiposSolicitud.Size = New System.Drawing.Size(180, 79)
         Me.clbTiposSolicitud.TabIndex = 2
@@ -562,9 +596,9 @@ Partial Class IndiceGralSac
         'GroupBox5
         '
         Me.GroupBox5.Controls.Add(Me.clbOrigenes)
-        Me.GroupBox5.Location = New System.Drawing.Point(425, 77)
+        Me.GroupBox5.Location = New System.Drawing.Point(425, 52)
         Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(167, 107)
+        Me.GroupBox5.Size = New System.Drawing.Size(167, 120)
         Me.GroupBox5.TabIndex = 3
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "Origen"
@@ -574,17 +608,17 @@ Partial Class IndiceGralSac
         Me.clbOrigenes.CheckOnClick = True
         Me.clbOrigenes.FormattingEnabled = True
         Me.clbOrigenes.Items.AddRange(New Object() {"Total", "Auditoría", "Reclamo", "I. de No Conformidad", "Proceso / Sist", "Otro"})
-        Me.clbOrigenes.Location = New System.Drawing.Point(10, 18)
+        Me.clbOrigenes.Location = New System.Drawing.Point(14, 17)
         Me.clbOrigenes.Name = "clbOrigenes"
-        Me.clbOrigenes.Size = New System.Drawing.Size(147, 79)
+        Me.clbOrigenes.Size = New System.Drawing.Size(147, 94)
         Me.clbOrigenes.TabIndex = 2
         '
         'GroupBox4
         '
         Me.GroupBox4.Controls.Add(Me.clbEstados)
-        Me.GroupBox4.Location = New System.Drawing.Point(217, 76)
+        Me.GroupBox4.Location = New System.Drawing.Point(217, 52)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(202, 107)
+        Me.GroupBox4.Size = New System.Drawing.Size(202, 98)
         Me.GroupBox4.TabIndex = 3
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Estado"
@@ -594,7 +628,7 @@ Partial Class IndiceGralSac
         Me.clbEstados.CheckOnClick = True
         Me.clbEstados.FormattingEnabled = True
         Me.clbEstados.Items.AddRange(New Object() {"Total", "Iniciada", "Investigación", "Implementación", "Implementación a Verificar", "Implementación Verificada", "Cerrada"})
-        Me.clbEstados.Location = New System.Drawing.Point(10, 18)
+        Me.clbEstados.Location = New System.Drawing.Point(16, 13)
         Me.clbEstados.Name = "clbEstados"
         Me.clbEstados.Size = New System.Drawing.Size(180, 79)
         Me.clbEstados.TabIndex = 2
@@ -614,6 +648,15 @@ Partial Class IndiceGralSac
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(1145, 495)
         Me.TableLayoutPanel1.TabIndex = 4
         '
+        'btnEstadistica
+        '
+        Me.btnEstadistica.Location = New System.Drawing.Point(771, 43)
+        Me.btnEstadistica.Name = "btnEstadistica"
+        Me.btnEstadistica.Size = New System.Drawing.Size(115, 33)
+        Me.btnEstadistica.TabIndex = 12
+        Me.btnEstadistica.Text = "Estadistica"
+        Me.btnEstadistica.UseVisualStyleBackColor = True
+        '
         'IndiceGralSac
         '
         Me.ClientSize = New System.Drawing.Size(1145, 545)
@@ -629,6 +672,7 @@ Partial Class IndiceGralSac
         Me.ContextMenuStrip1.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
         Me.GroupBox9.ResumeLayout(False)
         Me.GroupBox9.PerformLayout()
         Me.GroupBox8.ResumeLayout(False)
@@ -693,4 +737,8 @@ Partial Class IndiceGralSac
     Friend WithEvents Label7 As Label
     Friend WithEvents txtHastaAnio As TextBox
     Friend WithEvents GroupBox9 As GroupBox
+    Friend WithEvents Label8 As System.Windows.Forms.Label
+    Friend WithEvents txtBuscador As System.Windows.Forms.TextBox
+    Friend WithEvents btnExportarVarios As System.Windows.Forms.Button
+    Friend WithEvents btnEstadistica As System.Windows.Forms.Button
 End Class

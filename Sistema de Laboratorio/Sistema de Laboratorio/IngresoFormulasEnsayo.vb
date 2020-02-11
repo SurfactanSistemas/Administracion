@@ -1,6 +1,13 @@
 ﻿Public Class IngresoFormulasEnsayo : Implements IGrabadoDeFormula
 
-    Sub _GrabarFormula(ByVal Formula As String, ByVal ParametrosFormula() As String, ByVal Descripcion As String, Optional ByVal Renglon As Integer = 0) Implements IGrabadoDeFormula._GrabarFormula
+    Sub _GrabarFormula(Formula As String, ParametrosFormula As String(), Descripcion As String, Optional Renglon As Integer = 0) Implements IGrabadoDeFormula._GrabarFormula
+
+    End Sub
+
+
+    Sub _GrabarFormulaMod(ByVal Formula As String, ByVal ParametrosFormula() As String, ByVal Descripcion As String, Optional ByVal Renglon As Integer = 0, Optional ByVal Moficado As Boolean = False) Implements IGrabadoDeFormula._GrabarFormulaMod
+
+        Dim listSQLCnslt As New List(Of String)
 
         Dim SQLCnslt As String
 
@@ -10,23 +17,41 @@
             SQLCnslt = SQLCnslt & "'" & ParametrosFormula(5) & "', '" & ParametrosFormula(6) & "', '" & ParametrosFormula(7) & "', '" & ParametrosFormula(8) & "'"
             SQLCnslt = SQLCnslt & ", '" & ParametrosFormula(9) & "', '" & ParametrosFormula(10) & "')"
 
+            listSQLCnslt.Add(SQLCnslt)
         Else
-            SQLCnslt = "UPDATE FormulasDeEnsayos SET Descripcion = '" & Descripcion & "', Formula = '" & Formula & "', Var1 = '" & ParametrosFormula(1) & "',"
-            SQLCnslt = SQLCnslt & "Var2 = '" & ParametrosFormula(2) & "',Var3 = '" & ParametrosFormula(3) & "',Var4 = '" & ParametrosFormula(4) & "',Var5 = '" & ParametrosFormula(5) & "',"
-            SQLCnslt = SQLCnslt & "Var6 = '" & ParametrosFormula(6) & "',Var7 = '" & ParametrosFormula(7) & "',Var8 = '" & ParametrosFormula(8) & "',Var9 = '" & ParametrosFormula(9) & "'"
-            SQLCnslt = SQLCnslt & ",Var10 = '" & ParametrosFormula(10) & "' WHERE Renglon = '" & Renglon & "'"
+            If Moficado = False Then
+                SQLCnslt = "UPDATE FormulasDeEnsayos SET Descripcion = '" & Descripcion & "', Formula = '" & Formula & "', Var1 = '" & ParametrosFormula(1) & "',"
+                SQLCnslt = SQLCnslt & "Var2 = '" & ParametrosFormula(2) & "',Var3 = '" & ParametrosFormula(3) & "',Var4 = '" & ParametrosFormula(4) & "',Var5 = '" & ParametrosFormula(5) & "',"
+                SQLCnslt = SQLCnslt & "Var6 = '" & ParametrosFormula(6) & "',Var7 = '" & ParametrosFormula(7) & "',Var8 = '" & ParametrosFormula(8) & "',Var9 = '" & ParametrosFormula(9) & "'"
+                SQLCnslt = SQLCnslt & ",Var10 = '" & ParametrosFormula(10) & "' WHERE Renglon = '" & Renglon & "'"
+                listSQLCnslt.Add(SQLCnslt)
+            Else
+                SQLCnslt = "UPDATE FormulasDeEnsayos SET Descripcion = '" & Descripcion & "', Formula = '" & Formula & "', Var1 = '" & ParametrosFormula(1) & "',"
+                SQLCnslt = SQLCnslt & "Var2 = '" & ParametrosFormula(2) & "',Var3 = '" & ParametrosFormula(3) & "',Var4 = '" & ParametrosFormula(4) & "',Var5 = '" & ParametrosFormula(5) & "',"
+                SQLCnslt = SQLCnslt & "Var6 = '" & ParametrosFormula(6) & "',Var7 = '" & ParametrosFormula(7) & "',Var8 = '" & ParametrosFormula(8) & "',Var9 = '" & ParametrosFormula(9) & "'"
+                SQLCnslt = SQLCnslt & ",Var10 = '" & ParametrosFormula(10) & "', EstadoVerificado = 0 , AnalistaLab = null WHERE Renglon = '" & Renglon & "'"
+
+                listSQLCnslt.Add(SQLCnslt)
+
+                SQLCnslt = "DELETE FROM FormulasVerificadasValores WHERE IDRenglon = '" & Renglon & "'"
+
+                listSQLCnslt.Add(SQLCnslt)
+            End If
+
         End If
 
 
-        ExecuteNonQueries("Surfactan_II", SQLCnslt)
-        
+        ExecuteNonQueries("Surfactan_II", listSQLCnslt.ToArray())
 
 
 
-        SQLCnslt = "SELECT Renglon, Descripcion, Formula FROM FormulasDeEnsayos"
+
+        'SQLCnslt = "SELECT Renglon, Descripcion, Formula FROM FormulasDeEnsayos"
+        SQLCnslt = "SELECT Renglon, Descripcion, Formula , AnalistaLab, CheckVerificado = EstadoVerificado  FROM FormulasDeEnsayos"
 
         DGV_Formulas.DataSource = GetAll(SQLCnslt, "Surfactan_II")
 
+        _CambiarAnalistaLabXIniciales()
 
         SQLCnslt = "SELECT Renglon FROM FormulasDeEnsayos WHERE Descripcion = '" & Descripcion & "' AND Formula = '" & Formula & "'"
 
@@ -46,14 +71,20 @@
     End Sub
 
 
+   
+
+
+
     Private Sub IngresoFormulasEnsayo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        Dim SQLCnslt As String = "SELECT Renglon, Descripcion, Formula FROM FormulasDeEnsayos"
+        'Dim SQLCnslt As String = "SELECT Renglon = f.Renglon, Descripcion = f.Descripcion, Formula = f.Formula, AnalistaLab = o.Iniciales, CheckVerificado = EstadoVerificado  FROM FormulasDeEnsayos f JOIN SurfactanSa.dbo.Operador o ON f.AnalistaLab = o.Operador"
+        Dim SQLCnslt As String = "SELECT Renglon, Descripcion, Formula , AnalistaLab, CheckVerificado = EstadoVerificado  FROM FormulasDeEnsayos"
 
         Dim tabla As DataTable = GetAll(SQLCnslt, "Surfactan_II")
 
-        DGV_Formulas.DataSource = tabla
 
+        DGV_Formulas.DataSource = tabla
+        _CambiarAnalistaLabXIniciales()
 
     End Sub
 
@@ -62,6 +93,23 @@
         Me.Close()
 
     End Sub
+
+    Private Sub _CambiarAnalistaLabXIniciales()
+
+        For Each row As DataGridViewRow In DGV_Formulas.Rows
+            Dim SQLCnslt As String
+
+            SQLCnslt = "SELECT Iniciales FROM Operador WHERE Operador = '" & row.Cells("AnalistaLab").Value & "'"
+
+            Dim RowOperador As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+            If RowOperador IsNot Nothing Then
+                row.Cells("Analista").Value = RowOperador.Item("Iniciales")
+            End If
+
+
+        Next
+    End Sub
+
 
     Private Sub btnAgregar_Click(sender As Object, e As EventArgs) Handles btnAgregar.Click
      
@@ -119,9 +167,17 @@
 
             ExecuteNonQueries("Surfactan_II", SQLCnslt)
 
-            SQLCnslt = "SELECT Renglon, Descripcion, Formula FROM FormulasDeEnsayos"
+            SQLCnslt = "DELETE FROM FormulasVerificadasValores WHERE IDRenglon = '" & DGV_Formulas.CurrentRow.Cells("Renglon").Value & "'"
+
+            ExecuteNonQueries("Surfactan_II", SQLCnslt)
+
+
+            SQLCnslt = "SELECT Renglon, Descripcion, Formula , AnalistaLab, CheckVerificado = EstadoVerificado  FROM FormulasDeEnsayos"
+            'SQLCnslt = "SELECT Renglon, Descripcion, Formula FROM FormulasDeEnsayos"
 
             DGV_Formulas.DataSource = GetAll(SQLCnslt, "Surfactan_II")
+
+            _CambiarAnalistaLabXIniciales()
         End If
     End Sub
 End Class

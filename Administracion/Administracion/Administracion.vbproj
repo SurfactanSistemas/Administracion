@@ -766,6 +766,12 @@
       <DependentUpon>ReporteArqueoCheques.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\ReporteArqueoMensualChequesAcumulado.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteArqueoMensualChequesAcumulado.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\WListadoRecibos.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1254,6 +1260,10 @@
     <EmbeddedResource Include="Reportes\ReporteArqueoCheques.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteArqueoCheques.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ReporteArqueoMensualChequesAcumulado.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteArqueoMensualChequesAcumulado.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\WListadoRecibos.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

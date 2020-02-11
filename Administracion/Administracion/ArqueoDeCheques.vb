@@ -1,12 +1,21 @@
-﻿Imports CrystalDecisions.Shared
+﻿Imports System.Net.Configuration
+Imports CrystalDecisions.Shared
 
 Public Class ArqueoDeCheques
 
     Dim RowIndex As Integer = 0
     Dim tablaChequesEliminados As New DataTable
     Dim ultimaFechaLeida As String = "  /  /    "
+    Dim UltimoImporte As Double
     Dim AqueBase As String = ""
     Dim CodigoUltimoCheque As String = ""
+    Dim MontoTotal As Double = 0
+    Dim CantidadTotalChques As Integer
+    Dim SumaPorFecha(9) As Double
+    Dim fechaInicial As Date = Today
+    Dim RangoFechas(9, 2) As String
+
+
 
 
 
@@ -24,7 +33,77 @@ Public Class ArqueoDeCheques
         Me.Text = ""
         txtCodigoCheque.Focus()
         CargarCheques()
+        For i = 0 To DGV_Cheques.Rows.Count - 1
+            MontoTotal += Val(DGV_Cheques.Rows(i).Cells("Importe").Value)
+        Next
+        CantidadTotalChques = DGV_Cheques.Rows.Count
+        Label17.Text = "en " & CantidadTotalChques & " cheques"
+        txtMontoTotal.Text = formatonumerico(MontoTotal, 2)
+
+        'DEFINO LOS RANGOS HORARIOS DE CADA LUGAR EN LA GRILLA MENSUAL
+        Label9.Text = "1 al " & DateTime.DaysInMonth(Year(fechaInicial), Month(fechaInicial)) & " de " & MonthName(Month(fechaInicial))
+        RangoFechas(1, 1) = ordenaFecha("01/" & (Month(fechaInicial)).ToString().PadLeft(2, "0") & "/" & Year(fechaInicial))
+        RangoFechas(1, 2) = ordenaFecha(DateTime.DaysInMonth(Year(fechaInicial), Month(fechaInicial)) & "/" & (Month(fechaInicial)).ToString().PadLeft(2, "0") & "/" & Year(fechaInicial))
+
+
+        Dim FechaRango2y3 As Date = fechaInicial.AddMonths(1)
+        'PRIMER QUINCENA DEL MES SIGUIENTE
+        Label10.Text = "1 al " & "15 de " & MonthName(Month(FechaRango2y3))
+        RangoFechas(2, 1) = ordenaFecha("01/" & (Month(FechaRango2y3)).ToString().PadLeft(2, "0") & "/" & Year(FechaRango2y3))
+        RangoFechas(2, 2) = ordenaFecha("15/" & (Month(FechaRango2y3)).ToString().PadLeft(2, "0") & "/" & Year(FechaRango2y3))
+        'SEGUNDA QUINCENA DE MES SIGUIENTE
+        Label11.Text = "16 al " & DateTime.DaysInMonth(Year(FechaRango2y3), Month(FechaRango2y3)) & " de " & MonthName(Month(FechaRango2y3))
+        RangoFechas(3, 1) = ordenaFecha("16/" & (Month(FechaRango2y3)).ToString().PadLeft(2, "0") & "/" & Year(FechaRango2y3))
+        RangoFechas(3, 2) = ordenaFecha(DateTime.DaysInMonth(Year(FechaRango2y3), Month(FechaRango2y3)) & "/" & (Month(FechaRango2y3)).ToString().PadLeft(2, "0") & "/" & Year(FechaRango2y3))
+
+
+
+        Dim FechaRango4y5 As Date = fechaInicial.AddMonths(2)
+        'PRIMER QUINCENA DEL 2 MES SIGUIENTE
+        Label12.Text = "1 al " & "15 de " & MonthName(Month(FechaRango4y5))
+        RangoFechas(4, 1) = ordenaFecha("01/" & (Month(FechaRango4y5)).ToString().PadLeft(2, "0") & "/" & Year(FechaRango4y5))
+        RangoFechas(4, 2) = ordenaFecha("15/" & (Month(FechaRango4y5)).ToString().PadLeft(2, "0") & "/" & Year(FechaRango4y5))
+        'SEGUNDA QUINCENA DE 2 MES SIGUIENTE
+        Label13.Text = "16 al " & DateTime.DaysInMonth(Year(FechaRango4y5), Month(FechaRango4y5)) & " de " & MonthName(Month(FechaRango4y5))
+        RangoFechas(5, 1) = ordenaFecha("16/" & (Month(FechaRango4y5)).ToString().PadLeft(2, "0") & "/" & Year(FechaRango4y5))
+        RangoFechas(5, 2) = ordenaFecha(DateTime.DaysInMonth(Year(FechaRango4y5), Month(FechaRango4y5)) & "/" & (Month(FechaRango4y5)).ToString().PadLeft(2, "0") & "/" & Year(FechaRango4y5))
+
+
+        Dim FechaRango6y7 As Date = fechaInicial.AddMonths(3)
+        'PRIMER QUINCENA DEL 3 MES SIGUIENTE
+        Label14.Text = "1 al " & "15 de " & MonthName(Month(FechaRango6y7))
+        RangoFechas(6, 1) = ordenaFecha("01/" & (Month(FechaRango6y7)).ToString().PadLeft(2, "0") & "/" & Year(FechaRango6y7))
+        RangoFechas(6, 2) = ordenaFecha("15/" & (Month(FechaRango6y7)).ToString().PadLeft(2, "0") & "/" & Year(FechaRango6y7))
+        'SEGUNDA QUINCENA DE 3 MES SIGUIENTE
+        Label15.Text = "16 al " & DateTime.DaysInMonth(Year(FechaRango6y7), Month(FechaRango6y7)) & " de " & MonthName(Month(FechaRango6y7))
+        RangoFechas(7, 1) = ordenaFecha("16/" & (Month(FechaRango6y7)).ToString().PadLeft(2, "0") & "/" & Year(FechaRango6y7))
+        RangoFechas(7, 2) = ordenaFecha(DateTime.DaysInMonth(Year(FechaRango6y7), Month(FechaRango6y7)) & "/" & (Month(FechaRango6y7)).ToString().PadLeft(2, "0") & "/" & Year(FechaRango6y7))
+
+        'EL ULTIMO RANGO ES MAYOR A LA ULTIMA FECHA POR ESO GUARDAMOS EL MISMO VALOR
+        Label16.Text = "De " & MonthName(Month(FechaRango6y7.AddMonths(1))) & " en adelante"
+        RangoFechas(8, 1) = RangoFechas(7, 2)
+
+        For i = 1 To 8
+            SumaPorFecha(i) = 0
+        Next
+
+        _RefrescartxtboxSumas()
+
+
+
     End Sub
+
+    Private Sub _RefrescartxtboxSumas()
+        txtmesInicial.Text = SumaPorFecha(1)
+        txtmes2Q1.Text = SumaPorFecha(2)
+        txtmes2Q2.Text = SumaPorFecha(3)
+        txtmes3Q1.Text = SumaPorFecha(4)
+        txtmes3Q2.Text = SumaPorFecha(5)
+        txtmes4Q1.Text = SumaPorFecha(6)
+        txtmes4Q2.Text = SumaPorFecha(7)
+        txtmesesRestantes.Text = SumaPorFecha(8)
+    End Sub
+
 
 
     Private Sub CargarCheques()
@@ -67,7 +146,7 @@ Public Class ArqueoDeCheques
         Select Case e.KeyData
             Case Keys.Enter
                 If txtCodigoCheque.Text <> "" Then
-                    txtCodigoCheque.Text = txtCodigoCheque.Text.Replace(";", "C").Replace(":", "E")
+                    txtCodigoCheque.Text = txtCodigoCheque.Text.ToUpper().Replace(";", "C").Replace(":", "E")
                     If txtCodigoCheque.Text.Length = 31 Then
                         For Each row As DataGridViewRow In DGV_Cheques.Rows
                             If Trim(row.Cells("ClaveCheque").Value).ToUpper = txtCodigoCheque.Text.ToUpper Then
@@ -76,12 +155,28 @@ Public Class ArqueoDeCheques
                                 txtImporte.Text = row.Cells("Importe").Value
                                 txtBanco.Text = row.Cells("Banco").Value
 
+                                'DESCUENTO DEL TOTAL DE CHEQUES EL IMPORTE DEL CHEQUE
+                                MontoTotal -= Val(row.Cells("Importe").Value)
+
                                 'GUARDO LA FECHA PARA PODER VERIFICARLA DESPUES SI HACE UNA MODIFICACION
                                 ultimaFechaLeida = row.Cells("Fecha").Value
+                                'GUARDO EL ULTIMO IMPORTE PARA PODER MODIFICARLO DESPUES
+                                UltimoImporte = Val(row.Cells("Importe").Value)
                                 'Y A QUE BASE TENGO Q MODIFICAR
                                 AqueBase = row.Cells("Origen").Value
                                 'Y EL CODIGO DEL CHEQUE
                                 CodigoUltimoCheque = row.Cells("ClaveCheque").Value
+
+                                'RESTO DE LA CANTIDAD DE CHEQUES
+                                CantidadTotalChques -= 1
+                                Label17.Text = "en " & CantidadTotalChques & " cheques"
+
+                                'MUESTRO EL VALOR NUEVO
+                                'txtMontoTotal.Text = MontoTotal
+                                txtMontoTotal.Text = formatonumerico(MontoTotal, 2)
+
+
+                                _SumarDondeDebe(Val(row.Cells("Importe").Value), ordenaFecha(row.Cells("Fecha").Value))
 
                                 RowIndex = row.Index
 
@@ -102,12 +197,88 @@ Public Class ArqueoDeCheques
                 If _BuscarEnEliminados() = "Esta" Then
                     MsgBox("Ya desconto ese cheque de la lista")
                     txtCodigoCheque.Text = ""
+                Else
+                    MsgBox("Cheque no encontrado")
+                    txtCodigoCheque.Text = ""
                 End If
 
                 txtCodigoCheque.SelectAll()
             Case Keys.Escape
                 txtCodigoCheque.Text = ""
         End Select
+
+    End Sub
+
+
+    Private Sub _SumarDondeDebe(ByVal Importe As Double, ByVal FechaOrd As String, Optional ByVal Restas As Boolean = False)
+        'SI RECIBO TRUE, ES PORQUE SE DESCUENTA
+        'SINO SE SUMA
+        If FechaOrd >= RangoFechas(1, 1) And FechaOrd <= RangoFechas(1, 2) Then
+            If Restas = False Then
+                SumaPorFecha(1) += Importe
+            Else
+                SumaPorFecha(1) -= Importe
+            End If
+
+        End If
+
+        If FechaOrd >= RangoFechas(2, 1) And FechaOrd <= RangoFechas(2, 2) Then
+            If Restas = False Then
+                SumaPorFecha(2) += Importe
+            Else
+                SumaPorFecha(2) -= Importe
+            End If
+        End If
+
+        If FechaOrd >= RangoFechas(3, 1) And FechaOrd <= RangoFechas(3, 2) Then
+            If Restas = False Then
+                SumaPorFecha(3) += Importe
+            Else
+                SumaPorFecha(3) -= Importe
+            End If
+        End If
+
+        If FechaOrd >= RangoFechas(4, 1) And FechaOrd <= RangoFechas(4, 2) Then
+            If Restas = False Then
+                SumaPorFecha(4) += Importe
+            Else
+                SumaPorFecha(4) -= Importe
+            End If
+        End If
+
+        If FechaOrd >= RangoFechas(5, 1) And FechaOrd <= RangoFechas(5, 2) Then
+            If Restas = False Then
+                SumaPorFecha(5) += Importe
+            Else
+                SumaPorFecha(5) -= Importe
+            End If
+        End If
+
+        If FechaOrd >= RangoFechas(6, 1) And FechaOrd <= RangoFechas(6, 2) Then
+            If Restas = False Then
+                SumaPorFecha(6) += Importe
+            Else
+                SumaPorFecha(6) -= Importe
+            End If
+        End If
+
+        If FechaOrd >= RangoFechas(7, 1) And FechaOrd <= RangoFechas(7, 2) Then
+            If Restas = False Then
+                SumaPorFecha(7) += Importe
+            Else
+                SumaPorFecha(7) -= Importe
+            End If
+        End If
+
+        If FechaOrd > RangoFechas(8, 1) Then
+            If Restas = False Then
+                SumaPorFecha(8) += Importe
+            Else
+                SumaPorFecha(8) -= Importe
+            End If
+        End If
+
+        _RefrescartxtboxSumas()
 
     End Sub
 
@@ -133,6 +304,7 @@ Public Class ArqueoDeCheques
                         Dim fechaOrd As String = ordenaFecha(mastxtFecha.Text)
                         Dim SQLCnslt As String = ""
 
+                        _RestarYsumarDondeCorresponda(ordenaFecha(ultimaFechaLeida), ordenaFecha(mastxtFecha.Text), UltimoImporte)
                         'CON ORIGEN BUSCAMOS A QUE BASE TENEMOS QUE MODIFICAR
                         If AqueBase = "R" Then
 
@@ -166,6 +338,14 @@ Public Class ArqueoDeCheques
             Case Keys.Escape
                 mastxtFecha.Text = ""
         End Select
+    End Sub
+
+    Private Sub _RestarYsumarDondeCorresponda(ByVal FechaAntigua As String, ByVal FechaNueva As String, ByVal ImporteModificar As Double)
+
+        _SumarDondeDebe(ImporteModificar, FechaAntigua, True)
+        _SumarDondeDebe(ImporteModificar, FechaNueva)
+
+
     End Sub
 
     Private Function _buscarPosicionActual() As Integer
@@ -307,13 +487,35 @@ Public Class ArqueoDeCheques
             mastxtFecha.Text = .Cells("Fecha").Value
             txtImporte.Text = .Cells("Importe").Value
             txtBanco.Text = .Cells("Banco").Value
+
+            'GUARDO LA FECHA PARA PODER VERIFICARLA DESPUES SI HACE UNA MODIFICACION
+            ultimaFechaLeida = .Cells("Fecha").Value
+            'GUARDO EL ULTIMO IMPORTE PARA PODER MODIFICARLO DESPUES
+            UltimoImporte = Val(.Cells("Importe").Value)
             'AGREGO A LA TABLA REGISTRO DE LOS CHEQUES QUE SACO DEL GRID
             tablaChequesEliminados.Rows.Add(.Cells("Fecha").Value, .Cells("Numero").Value, .Cells("Importe").Value, .Cells("Banco").Value, .Cells("ClaveCheque").Value)
+
+            'SUMAMOS EN EL TEXTBOX QUE CORRESPONDE
+            _SumarDondeDebe(Val(.Cells("Importe").Value), ordenaFecha(.Cells("Fecha").Value))
+
+
+            'DESCUENTO DEL TOTAL DE CHEQUES EL IMPORTE DEL CHEQUE
+            MontoTotal -= Val(.Cells("Importe").Value)
+
+
+            'RESTO DE LA CANTIDAD DE CHEQUES
+            CantidadTotalChques -= 1
+            Label17.Text = "en " & CantidadTotalChques & " cheques"
+
+            'MUESTRO EL VALOR NUEVO
+            txtMontoTotal.Text = formatonumerico(MontoTotal, 2)
+            'txtMontoTotal.Text = MontoTotal
 
             Dim index As Integer = DGV_Cheques.CurrentRow.Index
 
             DGV_Cheques.Rows.RemoveAt(index)
 
+            txtCodigoCheque.Focus()
         End With
 
 
@@ -354,4 +556,52 @@ Public Class ArqueoDeCheques
         End With
 
     End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+
+        Dim Total As Double = 0
+
+        Total = _SumarTexts()
+
+        With New ConsultasVarias.VistaPrevia
+            .Reporte = New ReporteArqueoMensualChequesAcumulado()
+            .Reporte.SetParameterValue(0, Label9.Text)
+            .Reporte.SetParameterValue(1, Label10.Text)
+            .Reporte.SetParameterValue(2, Label11.Text)
+            .Reporte.SetParameterValue(3, Label12.Text)
+            .Reporte.SetParameterValue(4, Label13.Text)
+            .Reporte.SetParameterValue(5, Label14.Text)
+            .Reporte.SetParameterValue(6, Label15.Text)
+            .Reporte.SetParameterValue(7, Label16.Text)
+            .Reporte.SetParameterValue(8, Val(formatonumerico(txtmesInicial.Text)))
+            .Reporte.SetParameterValue(9, Val(formatonumerico(txtmes2Q1.Text)))
+            .Reporte.SetParameterValue(10, Val(formatonumerico(txtmes2Q2.Text)))
+            .Reporte.SetParameterValue(11, Val(formatonumerico(txtmes3Q1.Text)))
+            .Reporte.SetParameterValue(12, Val(formatonumerico(txtmes3Q2.Text)))
+            .Reporte.SetParameterValue(13, Val(formatonumerico(txtmes4Q1.Text)))
+            .Reporte.SetParameterValue(14, Val(formatonumerico(txtmes4Q2.Text)))
+            .Reporte.SetParameterValue(15, Val(formatonumerico(txtmesesRestantes.Text)))
+            .Reporte.SetParameterValue(16, Total)
+
+            .Imprimir()
+            '.Exportar("", ExportFormatType.Excel, "")
+        End With
+    End Sub
+
+    Private Function _Sumartexts() As Double
+        Dim Total As Double = 0
+
+        Total += Val(formatonumerico(txtmesInicial.Text))
+        Total += Val(formatonumerico(txtmes2Q1.Text))
+        Total += Val(formatonumerico(txtmes2Q2.Text))
+        Total += Val(formatonumerico(txtmes3Q1.Text))
+        Total += Val(formatonumerico(txtmes3Q2.Text))
+        Total += Val(formatonumerico(txtmes4Q1.Text))
+        Total += Val(formatonumerico(txtmes4Q2.Text))
+        Total += Val(formatonumerico(txtmesesRestantes.Text))
+
+        Return Total
+    End Function
+
+
 End Class

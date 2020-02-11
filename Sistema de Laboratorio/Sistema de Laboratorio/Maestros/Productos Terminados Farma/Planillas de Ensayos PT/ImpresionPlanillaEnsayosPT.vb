@@ -141,6 +141,17 @@ Public Class ImpresionPlanillaEnsayosPT : Implements ConsultasVarias.Interfaces.
                         .Cells("Descripcion").Value = ""
                         .Cells("DescParametros").Value = Trim(WEspecificacion)
                         .Cells("Parametro").Value = Trim(WImpreParametro)
+                        .Cells("TipoEspecif").Value = OrDefault(row.Item("TipoEspecif"), 0)
+                        .Cells("Var1").Value = OrDefault(row.Item("Variable1"), "")
+                        .Cells("Var2").Value = OrDefault(row.Item("Variable2"), "")
+                        .Cells("Var3").Value = OrDefault(row.Item("Variable3"), "")
+                        .Cells("Var4").Value = OrDefault(row.Item("Variable4"), "")
+                        .Cells("Var5").Value = OrDefault(row.Item("Variable5"), "")
+                        .Cells("Var6").Value = OrDefault(row.Item("Variable6"), "")
+                        .Cells("Var7").Value = OrDefault(row.Item("Variable7"), "")
+                        .Cells("Var8").Value = OrDefault(row.Item("Variable8"), "")
+                        .Cells("Var9").Value = OrDefault(row.Item("Variable9"), "")
+                        .Cells("Var10").Value = OrDefault(row.Item("Variable10"), "")
                     End With
 
                 End With
@@ -284,6 +295,17 @@ Public Class ImpresionPlanillaEnsayosPT : Implements ConsultasVarias.Interfaces.
                         .Cells("Descripcion").Value = ""
                         .Cells("DescParametros").Value = Trim(WEspecificacion)
                         .Cells("Parametro").Value = Trim(WImpreParametro)
+                        .Cells("TipoEspecif").Value = OrDefault(row.Item("TipoEspecif"), 0)
+                        .Cells("Var1").Value = OrDefault(row.Item("Variable1"), "")
+                        .Cells("Var2").Value = OrDefault(row.Item("Variable2"), "")
+                        .Cells("Var3").Value = OrDefault(row.Item("Variable3"), "")
+                        .Cells("Var4").Value = OrDefault(row.Item("Variable4"), "")
+                        .Cells("Var5").Value = OrDefault(row.Item("Variable5"), "")
+                        .Cells("Var6").Value = OrDefault(row.Item("Variable6"), "")
+                        .Cells("Var7").Value = OrDefault(row.Item("Variable7"), "")
+                        .Cells("Var8").Value = OrDefault(row.Item("Variable8"), "")
+                        .Cells("Var9").Value = OrDefault(row.Item("Variable9"), "")
+                        .Cells("Var10").Value = OrDefault(row.Item("Variable10"), "")
                     End With
 
                 End With
@@ -323,6 +345,17 @@ Public Class ImpresionPlanillaEnsayosPT : Implements ConsultasVarias.Interfaces.
                     .Cells("Descripcion").Value = ""
                     .Cells("DescParametros").Value = Trim(WEspecificacion)
                     .Cells("Parametro").Value = Trim(WImpreParametro)
+                    .Cells("TipoEspecif").Value = OrDefault(row.Item("TipoEspecif"), 0)
+                    .Cells("Var1").Value = OrDefault(row.Item("Variable1"), "")
+                    .Cells("Var2").Value = OrDefault(row.Item("Variable2"), "")
+                    .Cells("Var3").Value = OrDefault(row.Item("Variable3"), "")
+                    .Cells("Var4").Value = OrDefault(row.Item("Variable4"), "")
+                    .Cells("Var5").Value = OrDefault(row.Item("Variable5"), "")
+                    .Cells("Var6").Value = OrDefault(row.Item("Variable6"), "")
+                    .Cells("Var7").Value = OrDefault(row.Item("Variable7"), "")
+                    .Cells("Var8").Value = OrDefault(row.Item("Variable8"), "")
+                    .Cells("Var9").Value = OrDefault(row.Item("Variable9"), "")
+                    .Cells("Var10").Value = OrDefault(row.Item("Variable10"), "")
                 End With
 
             End With
@@ -370,10 +403,12 @@ Public Class ImpresionPlanillaEnsayosPT : Implements ConsultasVarias.Interfaces.
     Private Sub btnImprimir_Click(sender As Object, e As EventArgs) Handles btnImprimir.Click
         If dgvEspecif.Rows.Count = 0 Then Exit Sub
 
+        Dim Renglon As Integer = 1
         Dim WTabla As DataTable = New DBAuxi.PlanilllaEnsayosDataTable
 
         For Each row As DataGridViewRow In dgvEspecif.Rows
             Dim r As DataRow = WTabla.NewRow
+
             With r
                 .Item("Ensayo") = row.Cells("Ensayo").Value
                 .Item("DescEnsayo") = row.Cells("Descripcion").Value
@@ -383,8 +418,33 @@ Public Class ImpresionPlanillaEnsayosPT : Implements ConsultasVarias.Interfaces.
                 .Item("Codigo") = txtCodigo.Text
                 .Item("Descripcion") = lblDescTerminado.Text
                 .Item("Etapa") = txtEtapa.Ceros(2)
+                .Item("Renglon") = Renglon
+                .Item("Variables") = ""
             End With
             WTabla.Rows.Add(r)
+
+            If row.Cells("TipoEspecif").Value = 2 Then
+                For i = 1 To 10
+                    If Trim(row.Cells("Var" & i).Value) <> "" Then
+                        Dim d As DataRow = WTabla.NewRow
+                        With d
+                            '.Item("Ensayo") = "" 'row.Cells("Ensayo").Value
+                            .Item("Variables") = row.Cells("Var" & i).Value
+                            .Item("DescParametro") = "" 'row.Cells("DescParametros").Value
+                            .Item("Parametro") = "" 'row.Cells("Parametro").Value
+                            .Item("Titulo") = "Producto Terminado"
+                            .Item("Codigo") = txtCodigo.Text
+                            .Item("Descripcion") = lblDescTerminado.Text
+                            .Item("Etapa") = txtEtapa.Ceros(2)
+                            .Item("Renglon") = Renglon
+                        End With
+                        WTabla.Rows.Add(d)
+                    End If
+                Next
+            End If
+
+
+            Renglon += 1
         Next
 
         With New ConsultasVarias.VistaPrevia

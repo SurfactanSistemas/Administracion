@@ -24,15 +24,18 @@ Partial Class IngresoFormulasEnsayo
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.DGV_Formulas = New ConsultasVarias.DBDataGridView()
-        Me.Renglon = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Formula = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.txtBuscador = New System.Windows.Forms.TextBox()
         Me.btnAgregar = New System.Windows.Forms.Button()
         Me.btnVolver = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.Renglon = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Formula = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.AnalistaLab = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Analista = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CheckVerificado = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         CType(Me.DGV_Formulas, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -42,7 +45,7 @@ Partial Class IngresoFormulasEnsayo
         Me.DGV_Formulas.AllowUserToAddRows = False
         Me.DGV_Formulas.AllowUserToDeleteRows = False
         Me.DGV_Formulas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGV_Formulas.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Renglon, Me.Descripcion, Me.Formula})
+        Me.DGV_Formulas.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Renglon, Me.Descripcion, Me.Formula, Me.AnalistaLab, Me.Analista, Me.CheckVerificado})
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
         DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -60,34 +63,14 @@ Partial Class IngresoFormulasEnsayo
         Me.DGV_Formulas.RowTemplate.Height = 20
         Me.DGV_Formulas.ShowCellToolTips = False
         Me.DGV_Formulas.SinClickDerecho = False
-        Me.DGV_Formulas.Size = New System.Drawing.Size(421, 202)
+        Me.DGV_Formulas.Size = New System.Drawing.Size(583, 202)
         Me.DGV_Formulas.TabIndex = 0
-        '
-        'Renglon
-        '
-        Me.Renglon.DataPropertyName = "Renglon"
-        Me.Renglon.HeaderText = "Renglon"
-        Me.Renglon.Name = "Renglon"
-        Me.Renglon.Visible = False
-        '
-        'Descripcion
-        '
-        Me.Descripcion.DataPropertyName = "Descripcion"
-        Me.Descripcion.HeaderText = "Descripcion"
-        Me.Descripcion.Name = "Descripcion"
-        Me.Descripcion.Width = 300
-        '
-        'Formula
-        '
-        Me.Formula.DataPropertyName = "Formula"
-        Me.Formula.HeaderText = "Formula"
-        Me.Formula.Name = "Formula"
         '
         'txtBuscador
         '
         Me.txtBuscador.Location = New System.Drawing.Point(4, 121)
         Me.txtBuscador.Name = "txtBuscador"
-        Me.txtBuscador.Size = New System.Drawing.Size(420, 20)
+        Me.txtBuscador.Size = New System.Drawing.Size(582, 20)
         Me.txtBuscador.TabIndex = 1
         '
         'btnAgregar
@@ -101,7 +84,7 @@ Partial Class IngresoFormulasEnsayo
         '
         'btnVolver
         '
-        Me.btnVolver.Location = New System.Drawing.Point(349, 78)
+        Me.btnVolver.Location = New System.Drawing.Point(511, 78)
         Me.btnVolver.Name = "btnVolver"
         Me.btnVolver.Size = New System.Drawing.Size(75, 37)
         Me.btnVolver.TabIndex = 3
@@ -116,7 +99,7 @@ Partial Class IngresoFormulasEnsayo
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(436, 71)
+        Me.Panel1.Size = New System.Drawing.Size(598, 71)
         Me.Panel1.TabIndex = 4
         '
         'Label1
@@ -139,17 +122,64 @@ Partial Class IngresoFormulasEnsayo
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label2.Location = New System.Drawing.Point(245, 34)
+        Me.Label2.Location = New System.Drawing.Point(407, 34)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(179, 24)
         Me.Label2.TabIndex = 1
         Me.Label2.Text = "SURFACTAN S.A."
         '
+        'Renglon
+        '
+        Me.Renglon.DataPropertyName = "Renglon"
+        Me.Renglon.HeaderText = "Renglon"
+        Me.Renglon.Name = "Renglon"
+        Me.Renglon.ReadOnly = True
+        Me.Renglon.Visible = False
+        '
+        'Descripcion
+        '
+        Me.Descripcion.DataPropertyName = "Descripcion"
+        Me.Descripcion.HeaderText = "Descripcion"
+        Me.Descripcion.Name = "Descripcion"
+        Me.Descripcion.ReadOnly = True
+        Me.Descripcion.Width = 300
+        '
+        'Formula
+        '
+        Me.Formula.DataPropertyName = "Formula"
+        Me.Formula.HeaderText = "Formula"
+        Me.Formula.Name = "Formula"
+        Me.Formula.ReadOnly = True
+        '
+        'AnalistaLab
+        '
+        Me.AnalistaLab.DataPropertyName = "AnalistaLab"
+        Me.AnalistaLab.HeaderText = "AnalistaLab"
+        Me.AnalistaLab.Name = "AnalistaLab"
+        Me.AnalistaLab.ReadOnly = True
+        Me.AnalistaLab.Visible = False
+        '
+        'Analista
+        '
+        Me.Analista.DataPropertyName = "Analista"
+        Me.Analista.HeaderText = "Analista"
+        Me.Analista.Name = "Analista"
+        Me.Analista.ReadOnly = True
+        '
+        'CheckVerificado
+        '
+        Me.CheckVerificado.DataPropertyName = "CheckVerificado"
+        Me.CheckVerificado.HeaderText = "Check Verificado"
+        Me.CheckVerificado.Name = "CheckVerificado"
+        Me.CheckVerificado.ReadOnly = True
+        Me.CheckVerificado.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.CheckVerificado.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        '
         'IngresoFormulasEnsayo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(436, 361)
+        Me.ClientSize = New System.Drawing.Size(598, 354)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.btnVolver)
         Me.Controls.Add(Me.btnAgregar)
@@ -173,4 +203,7 @@ Partial Class IngresoFormulasEnsayo
     Friend WithEvents Renglon As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Formula As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents AnalistaLab As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Analista As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents CheckVerificado As System.Windows.Forms.DataGridViewCheckBoxColumn
 End Class

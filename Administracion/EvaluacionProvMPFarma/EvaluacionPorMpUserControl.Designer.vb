@@ -26,12 +26,12 @@ Partial Class EvaluacionPorMpUserControl
     'Do not modify it using the code editor.
     <DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cmbCalificacion = New System.Windows.Forms.ComboBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
@@ -245,14 +245,14 @@ Partial Class EvaluacionPorMpUserControl
         Me.dgvItemsEvaluados.AllowUserToDeleteRows = False
         Me.dgvItemsEvaluados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvItemsEvaluados.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Req, Me.Requisitos, Me.Solicitado, Me.FechaSolicitado, Me.Entrego, Me.FechaEntrego, Me.Aprobo, Me.FechaAprobo, Me.Vto, Me.Aclaraciones, Me.Doc, Me.DocPath})
-        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle18.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle18.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle18.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle18.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvItemsEvaluados.DefaultCellStyle = DataGridViewCellStyle18
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvItemsEvaluados.DefaultCellStyle = DataGridViewCellStyle6
         Me.dgvItemsEvaluados.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvItemsEvaluados.DoubleBuffered = True
         Me.dgvItemsEvaluados.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
@@ -269,8 +269,8 @@ Partial Class EvaluacionPorMpUserControl
         'Req
         '
         Me.Req.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Req.DefaultCellStyle = DataGridViewCellStyle13
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Req.DefaultCellStyle = DataGridViewCellStyle1
         Me.Req.HeaderText = "Nro"
         Me.Req.Name = "Req"
         Me.Req.ReadOnly = True
@@ -298,10 +298,10 @@ Partial Class EvaluacionPorMpUserControl
         'FechaSolicitado
         '
         Me.FechaSolicitado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle14.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.ControlText
-        Me.FechaSolicitado.DefaultCellStyle = DataGridViewCellStyle14
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText
+        Me.FechaSolicitado.DefaultCellStyle = DataGridViewCellStyle2
         Me.FechaSolicitado.HeaderText = "Fecha"
         Me.FechaSolicitado.MinimumWidth = 75
         Me.FechaSolicitado.Name = "FechaSolicitado"
@@ -321,8 +321,8 @@ Partial Class EvaluacionPorMpUserControl
         'FechaEntrego
         '
         Me.FechaEntrego.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.FechaEntrego.DefaultCellStyle = DataGridViewCellStyle15
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.FechaEntrego.DefaultCellStyle = DataGridViewCellStyle3
         Me.FechaEntrego.HeaderText = "Fecha"
         Me.FechaEntrego.MinimumWidth = 75
         Me.FechaEntrego.Name = "FechaEntrego"
@@ -342,27 +342,27 @@ Partial Class EvaluacionPorMpUserControl
         'FechaAprobo
         '
         Me.FechaAprobo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.FechaAprobo.DefaultCellStyle = DataGridViewCellStyle16
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.FechaAprobo.DefaultCellStyle = DataGridViewCellStyle4
         Me.FechaAprobo.HeaderText = "Fecha"
         Me.FechaAprobo.MinimumWidth = 75
         Me.FechaAprobo.Name = "FechaAprobo"
         Me.FechaAprobo.ReadOnly = True
         Me.FechaAprobo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.FechaAprobo.Visible = False
         Me.FechaAprobo.Width = 75
         '
         'Vto
         '
         Me.Vto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Vto.DataPropertyName = "Vto"
-        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Vto.DefaultCellStyle = DataGridViewCellStyle17
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Vto.DefaultCellStyle = DataGridViewCellStyle5
         Me.Vto.HeaderText = "Vto"
         Me.Vto.MinimumWidth = 75
         Me.Vto.Name = "Vto"
         Me.Vto.ReadOnly = True
         Me.Vto.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Vto.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.Vto.Width = 75
         '
         'Aclaraciones
@@ -373,7 +373,6 @@ Partial Class EvaluacionPorMpUserControl
         Me.Aclaraciones.MinimumWidth = 200
         Me.Aclaraciones.Name = "Aclaraciones"
         Me.Aclaraciones.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Aclaraciones.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
         'Doc
         '

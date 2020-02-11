@@ -29,6 +29,10 @@ Partial Class ListadoIncidencias
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.rbTipoPT = New System.Windows.Forms.RadioButton()
+        Me.rbTipoMP = New System.Windows.Forms.RadioButton()
+        Me.rbTipoTodos = New System.Windows.Forms.RadioButton()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.cmbOrdenIII = New System.Windows.Forms.ComboBox()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -77,12 +81,11 @@ Partial Class ListadoIncidencias
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.CopiarConCabecerasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CopiarSóloDatosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
-        Me.rbTipoTodos = New System.Windows.Forms.RadioButton()
-        Me.rbTipoMP = New System.Windows.Forms.RadioButton()
-        Me.rbTipoPT = New System.Windows.Forms.RadioButton()
+        Me.TxtBuscador = New System.Windows.Forms.TextBox()
+        Me.Label8 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
+        Me.GroupBox7.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -91,7 +94,6 @@ Partial Class ListadoIncidencias
         Me.TableLayoutPanel1.SuspendLayout()
         CType(Me.dgvIncidencias, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip1.SuspendLayout()
-        Me.GroupBox7.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -108,7 +110,7 @@ Partial Class ListadoIncidencias
         'Label2
         '
         Me.Label2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.Control
@@ -121,7 +123,7 @@ Partial Class ListadoIncidencias
         'Label1
         '
         Me.Label1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Calibri", 15.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.Control
@@ -133,6 +135,8 @@ Partial Class ListadoIncidencias
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Label8)
+        Me.GroupBox1.Controls.Add(Me.TxtBuscador)
         Me.GroupBox1.Controls.Add(Me.GroupBox7)
         Me.GroupBox1.Controls.Add(Me.GroupBox5)
         Me.GroupBox1.Controls.Add(Me.Button1)
@@ -147,10 +151,54 @@ Partial Class ListadoIncidencias
         Me.GroupBox1.Location = New System.Drawing.Point(10, 10)
         Me.GroupBox1.Margin = New System.Windows.Forms.Padding(10)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(1086, 215)
+        Me.GroupBox1.Size = New System.Drawing.Size(1086, 245)
         Me.GroupBox1.TabIndex = 4
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Parámetros"
+        '
+        'GroupBox7
+        '
+        Me.GroupBox7.Controls.Add(Me.rbTipoPT)
+        Me.GroupBox7.Controls.Add(Me.rbTipoMP)
+        Me.GroupBox7.Controls.Add(Me.rbTipoTodos)
+        Me.GroupBox7.Location = New System.Drawing.Point(868, 86)
+        Me.GroupBox7.Name = "GroupBox7"
+        Me.GroupBox7.Size = New System.Drawing.Size(212, 122)
+        Me.GroupBox7.TabIndex = 5
+        Me.GroupBox7.TabStop = False
+        Me.GroupBox7.Text = "TIPO DE PRODUCTO"
+        '
+        'rbTipoPT
+        '
+        Me.rbTipoPT.AutoSize = True
+        Me.rbTipoPT.Location = New System.Drawing.Point(24, 79)
+        Me.rbTipoPT.Name = "rbTipoPT"
+        Me.rbTipoPT.Size = New System.Drawing.Size(168, 17)
+        Me.rbTipoPT.TabIndex = 0
+        Me.rbTipoPT.Text = "PRODUCTOS TERMINADOS"
+        Me.rbTipoPT.UseVisualStyleBackColor = True
+        '
+        'rbTipoMP
+        '
+        Me.rbTipoMP.AutoSize = True
+        Me.rbTipoMP.Location = New System.Drawing.Point(24, 53)
+        Me.rbTipoMP.Name = "rbTipoMP"
+        Me.rbTipoMP.Size = New System.Drawing.Size(110, 17)
+        Me.rbTipoMP.TabIndex = 0
+        Me.rbTipoMP.Text = "MATERIA PRIMA"
+        Me.rbTipoMP.UseVisualStyleBackColor = True
+        '
+        'rbTipoTodos
+        '
+        Me.rbTipoTodos.AutoSize = True
+        Me.rbTipoTodos.Checked = True
+        Me.rbTipoTodos.Location = New System.Drawing.Point(24, 27)
+        Me.rbTipoTodos.Name = "rbTipoTodos"
+        Me.rbTipoTodos.Size = New System.Drawing.Size(63, 17)
+        Me.rbTipoTodos.TabIndex = 0
+        Me.rbTipoTodos.TabStop = True
+        Me.rbTipoTodos.Text = "TODOS"
+        Me.rbTipoTodos.UseVisualStyleBackColor = True
         '
         'GroupBox5
         '
@@ -160,7 +208,7 @@ Partial Class ListadoIncidencias
         Me.GroupBox5.Controls.Add(Me.Label6)
         Me.GroupBox5.Controls.Add(Me.cmbOrdenI)
         Me.GroupBox5.Controls.Add(Me.Label7)
-        Me.GroupBox5.Location = New System.Drawing.Point(218, 25)
+        Me.GroupBox5.Location = New System.Drawing.Point(218, 20)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.Size = New System.Drawing.Size(554, 59)
         Me.GroupBox5.TabIndex = 4
@@ -326,10 +374,10 @@ Partial Class ListadoIncidencias
         Me.GroupBox2.Controls.Add(Me.txtDesdeAño)
         Me.GroupBox2.Controls.Add(Me.txtHastaFecha)
         Me.GroupBox2.Controls.Add(Me.txtDesdeFecha)
-        Me.GroupBox2.Location = New System.Drawing.Point(6, 24)
+        Me.GroupBox2.Location = New System.Drawing.Point(6, 19)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.GroupBox2.Size = New System.Drawing.Size(205, 184)
+        Me.GroupBox2.Size = New System.Drawing.Size(205, 177)
         Me.GroupBox2.TabIndex = 0
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Período"
@@ -426,7 +474,7 @@ Partial Class ListadoIncidencias
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 50)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 2
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 235.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 265.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(1106, 447)
         Me.TableLayoutPanel1.TabIndex = 5
@@ -440,13 +488,13 @@ Partial Class ListadoIncidencias
         Me.dgvIncidencias.ContextMenuStrip = Me.ContextMenuStrip1
         Me.dgvIncidencias.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvIncidencias.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.dgvIncidencias.Location = New System.Drawing.Point(3, 238)
+        Me.dgvIncidencias.Location = New System.Drawing.Point(3, 268)
         Me.dgvIncidencias.Name = "dgvIncidencias"
         Me.dgvIncidencias.ReadOnly = True
         Me.dgvIncidencias.RowHeadersWidth = 15
         Me.dgvIncidencias.RowTemplate.Height = 20
         Me.dgvIncidencias.ShowCellToolTips = False
-        Me.dgvIncidencias.Size = New System.Drawing.Size(1100, 206)
+        Me.dgvIncidencias.Size = New System.Drawing.Size(1100, 176)
         Me.dgvIncidencias.TabIndex = 3
         '
         'Anio
@@ -621,49 +669,21 @@ Partial Class ListadoIncidencias
         Me.CopiarSóloDatosToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
         Me.CopiarSóloDatosToolStripMenuItem.Text = "Copiar Sólo Datos"
         '
-        'GroupBox7
+        'TxtBuscador
         '
-        Me.GroupBox7.Controls.Add(Me.rbTipoPT)
-        Me.GroupBox7.Controls.Add(Me.rbTipoMP)
-        Me.GroupBox7.Controls.Add(Me.rbTipoTodos)
-        Me.GroupBox7.Location = New System.Drawing.Point(868, 86)
-        Me.GroupBox7.Name = "GroupBox7"
-        Me.GroupBox7.Size = New System.Drawing.Size(212, 122)
-        Me.GroupBox7.TabIndex = 5
-        Me.GroupBox7.TabStop = False
-        Me.GroupBox7.Text = "TIPO DE PRODUCTO"
+        Me.TxtBuscador.Location = New System.Drawing.Point(7, 222)
+        Me.TxtBuscador.Name = "TxtBuscador"
+        Me.TxtBuscador.Size = New System.Drawing.Size(485, 20)
+        Me.TxtBuscador.TabIndex = 6
         '
-        'rbTipoTodos
+        'Label8
         '
-        Me.rbTipoTodos.AutoSize = True
-        Me.rbTipoTodos.Checked = True
-        Me.rbTipoTodos.Location = New System.Drawing.Point(24, 27)
-        Me.rbTipoTodos.Name = "rbTipoTodos"
-        Me.rbTipoTodos.Size = New System.Drawing.Size(63, 17)
-        Me.rbTipoTodos.TabIndex = 0
-        Me.rbTipoTodos.TabStop = True
-        Me.rbTipoTodos.Text = "TODOS"
-        Me.rbTipoTodos.UseVisualStyleBackColor = True
-        '
-        'rbTipoMP
-        '
-        Me.rbTipoMP.AutoSize = True
-        Me.rbTipoMP.Location = New System.Drawing.Point(24, 53)
-        Me.rbTipoMP.Name = "rbTipoMP"
-        Me.rbTipoMP.Size = New System.Drawing.Size(110, 17)
-        Me.rbTipoMP.TabIndex = 0
-        Me.rbTipoMP.Text = "MATERIA PRIMA"
-        Me.rbTipoMP.UseVisualStyleBackColor = True
-        '
-        'rbTipoPT
-        '
-        Me.rbTipoPT.AutoSize = True
-        Me.rbTipoPT.Location = New System.Drawing.Point(24, 79)
-        Me.rbTipoPT.Name = "rbTipoPT"
-        Me.rbTipoPT.Size = New System.Drawing.Size(168, 17)
-        Me.rbTipoPT.TabIndex = 0
-        Me.rbTipoPT.Text = "PRODUCTOS TERMINADOS"
-        Me.rbTipoPT.UseVisualStyleBackColor = True
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(6, 206)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(52, 13)
+        Me.Label8.TabIndex = 7
+        Me.Label8.Text = "Buscador"
         '
         'ListadoIncidencias
         '
@@ -679,6 +699,9 @@ Partial Class ListadoIncidencias
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
+        Me.GroupBox7.ResumeLayout(False)
+        Me.GroupBox7.PerformLayout()
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.GroupBox6.ResumeLayout(False)
@@ -689,8 +712,6 @@ Partial Class ListadoIncidencias
         Me.TableLayoutPanel1.ResumeLayout(False)
         CType(Me.dgvIncidencias, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ContextMenuStrip1.ResumeLayout(False)
-        Me.GroupBox7.ResumeLayout(False)
-        Me.GroupBox7.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -750,4 +771,6 @@ Partial Class ListadoIncidencias
     Friend WithEvents rbTipoPT As System.Windows.Forms.RadioButton
     Friend WithEvents rbTipoMP As System.Windows.Forms.RadioButton
     Friend WithEvents rbTipoTodos As System.Windows.Forms.RadioButton
+    Friend WithEvents Label8 As System.Windows.Forms.Label
+    Friend WithEvents TxtBuscador As System.Windows.Forms.TextBox
 End Class

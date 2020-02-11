@@ -1415,6 +1415,14 @@ Public Class Depositos
                 .Cells(3).Value = WBanco
                 .Cells(4).Value = WImporte
                 .Cells(5).Value = WClave
+
+                .Cells(0).ReadOnly = True
+                .Cells(1).ReadOnly = True
+                .Cells(2).ReadOnly = True
+                .Cells(3).ReadOnly = True
+                .Cells(4).ReadOnly = True
+                .Cells(5).ReadOnly = True
+                
             End With
         Else
             MsgBox("Hubo un problema al querer cargar el cheque correspondiente.", MsgBoxStyle.Exclamation)

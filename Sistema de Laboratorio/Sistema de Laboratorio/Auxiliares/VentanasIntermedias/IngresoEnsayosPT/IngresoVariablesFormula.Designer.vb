@@ -22,21 +22,24 @@ Partial Class IngresoVariablesFormula
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.dgvVariables = New ConsultasVarias.DBDataGridView()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.txtDecimales = New System.Windows.Forms.TextBox()
         Me.txtFormula = New System.Windows.Forms.TextBox()
         Me.btnAceptar = New System.Windows.Forms.Button()
         Me.btnCancelar = New System.Windows.Forms.Button()
+        Me.txtValorEstandar = New System.Windows.Forms.TextBox()
+        Me.lblValorEstandar = New System.Windows.Forms.Label()
         Me.IdVariable = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Variable = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.WValor = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.txtDecimales = New System.Windows.Forms.TextBox()
+        Me.ReferenciaARenglon = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         CType(Me.dgvVariables, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -57,7 +60,7 @@ Partial Class IngresoVariablesFormula
         'Label2
         '
         Me.Label2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.Control
@@ -70,7 +73,7 @@ Partial Class IngresoVariablesFormula
         'Label1
         '
         Me.Label1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.Control
@@ -85,19 +88,20 @@ Partial Class IngresoVariablesFormula
         Me.dgvVariables.AllowUserToAddRows = False
         Me.dgvVariables.AllowUserToDeleteRows = False
         Me.dgvVariables.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvVariables.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdVariable, Me.Variable, Me.WValor})
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvVariables.DefaultCellStyle = DataGridViewCellStyle6
+        Me.dgvVariables.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdVariable, Me.Variable, Me.WValor, Me.ReferenciaARenglon})
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvVariables.DefaultCellStyle = DataGridViewCellStyle2
         Me.dgvVariables.DoubleBuffered = True
         Me.dgvVariables.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.dgvVariables.Location = New System.Drawing.Point(10, 108)
         Me.dgvVariables.Name = "dgvVariables"
+        Me.dgvVariables.OrdenamientoColumnasHabilitado = True
         Me.dgvVariables.RowHeadersWidth = 15
         Me.dgvVariables.RowTemplate.Height = 20
         Me.dgvVariables.ShowCellToolTips = False
@@ -115,60 +119,6 @@ Partial Class IngresoVariablesFormula
         Me.GroupBox1.TabIndex = 6
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "FÓRMULA"
-        '
-        'txtFormula
-        '
-        Me.txtFormula.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.txtFormula.Location = New System.Drawing.Point(11, 21)
-        Me.txtFormula.Name = "txtFormula"
-        Me.txtFormula.ReadOnly = True
-        Me.txtFormula.Size = New System.Drawing.Size(324, 20)
-        Me.txtFormula.TabIndex = 0
-        Me.txtFormula.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'btnAceptar
-        '
-        Me.btnAceptar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAceptar.Location = New System.Drawing.Point(87, 282)
-        Me.btnAceptar.Name = "btnAceptar"
-        Me.btnAceptar.Size = New System.Drawing.Size(119, 33)
-        Me.btnAceptar.TabIndex = 7
-        Me.btnAceptar.Text = "ACEPTAR"
-        Me.btnAceptar.UseVisualStyleBackColor = True
-        '
-        'btnCancelar
-        '
-        Me.btnCancelar.Location = New System.Drawing.Point(222, 282)
-        Me.btnCancelar.Name = "btnCancelar"
-        Me.btnCancelar.Size = New System.Drawing.Size(119, 33)
-        Me.btnCancelar.TabIndex = 7
-        Me.btnCancelar.Text = "CANCELAR"
-        Me.btnCancelar.UseVisualStyleBackColor = True
-        '
-        'IdVariable
-        '
-        Me.IdVariable.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.IdVariable.HeaderText = "ID"
-        Me.IdVariable.MinimumWidth = 100
-        Me.IdVariable.Name = "IdVariable"
-        Me.IdVariable.ReadOnly = True
-        '
-        'Variable
-        '
-        Me.Variable.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Variable.HeaderText = "Variable"
-        Me.Variable.MinimumWidth = 100
-        Me.Variable.Name = "Variable"
-        Me.Variable.ReadOnly = True
-        '
-        'WValor
-        '
-        Me.WValor.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.WValor.DefaultCellStyle = DataGridViewCellStyle5
-        Me.WValor.HeaderText = "Valor"
-        Me.WValor.Name = "WValor"
-        Me.WValor.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         '
         'GroupBox2
         '
@@ -192,11 +142,91 @@ Partial Class IngresoVariablesFormula
         Me.txtDecimales.Text = "2"
         Me.txtDecimales.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
+        'txtFormula
+        '
+        Me.txtFormula.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtFormula.Location = New System.Drawing.Point(11, 21)
+        Me.txtFormula.Name = "txtFormula"
+        Me.txtFormula.ReadOnly = True
+        Me.txtFormula.Size = New System.Drawing.Size(324, 20)
+        Me.txtFormula.TabIndex = 0
+        Me.txtFormula.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'btnAceptar
+        '
+        Me.btnAceptar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAceptar.Location = New System.Drawing.Point(87, 308)
+        Me.btnAceptar.Name = "btnAceptar"
+        Me.btnAceptar.Size = New System.Drawing.Size(119, 33)
+        Me.btnAceptar.TabIndex = 7
+        Me.btnAceptar.Text = "ACEPTAR"
+        Me.btnAceptar.UseVisualStyleBackColor = True
+        '
+        'btnCancelar
+        '
+        Me.btnCancelar.Location = New System.Drawing.Point(222, 308)
+        Me.btnCancelar.Name = "btnCancelar"
+        Me.btnCancelar.Size = New System.Drawing.Size(119, 33)
+        Me.btnCancelar.TabIndex = 7
+        Me.btnCancelar.Text = "CANCELAR"
+        Me.btnCancelar.UseVisualStyleBackColor = True
+        '
+        'txtValorEstandar
+        '
+        Me.txtValorEstandar.Location = New System.Drawing.Point(201, 282)
+        Me.txtValorEstandar.Name = "txtValorEstandar"
+        Me.txtValorEstandar.Size = New System.Drawing.Size(100, 20)
+        Me.txtValorEstandar.TabIndex = 8
+        Me.txtValorEstandar.Visible = False
+        '
+        'lblValorEstandar
+        '
+        Me.lblValorEstandar.AutoSize = True
+        Me.lblValorEstandar.Location = New System.Drawing.Point(119, 285)
+        Me.lblValorEstandar.Name = "lblValorEstandar"
+        Me.lblValorEstandar.Size = New System.Drawing.Size(76, 13)
+        Me.lblValorEstandar.TabIndex = 9
+        Me.lblValorEstandar.Text = "Valor Estandar"
+        Me.lblValorEstandar.Visible = False
+        '
+        'IdVariable
+        '
+        Me.IdVariable.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.IdVariable.HeaderText = "ID"
+        Me.IdVariable.MinimumWidth = 100
+        Me.IdVariable.Name = "IdVariable"
+        Me.IdVariable.ReadOnly = True
+        '
+        'Variable
+        '
+        Me.Variable.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Variable.HeaderText = "Variable"
+        Me.Variable.MinimumWidth = 100
+        Me.Variable.Name = "Variable"
+        Me.Variable.ReadOnly = True
+        '
+        'WValor
+        '
+        Me.WValor.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.WValor.DefaultCellStyle = DataGridViewCellStyle1
+        Me.WValor.HeaderText = "Valor"
+        Me.WValor.Name = "WValor"
+        Me.WValor.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        '
+        'ReferenciaARenglon
+        '
+        Me.ReferenciaARenglon.HeaderText = "ReferenciaARenglon"
+        Me.ReferenciaARenglon.Name = "ReferenciaARenglon"
+        Me.ReferenciaARenglon.Visible = False
+        '
         'IngresoVariablesFormula
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(428, 320)
+        Me.ClientSize = New System.Drawing.Size(428, 350)
+        Me.Controls.Add(Me.lblValorEstandar)
+        Me.Controls.Add(Me.txtValorEstandar)
         Me.Controls.Add(Me.btnCancelar)
         Me.Controls.Add(Me.btnAceptar)
         Me.Controls.Add(Me.GroupBox1)
@@ -215,6 +245,7 @@ Partial Class IngresoVariablesFormula
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
@@ -225,9 +256,12 @@ Partial Class IngresoVariablesFormula
     Friend WithEvents btnAceptar As System.Windows.Forms.Button
     Friend WithEvents btnCancelar As System.Windows.Forms.Button
     Friend WithEvents txtFormula As System.Windows.Forms.TextBox
+    Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
+    Friend WithEvents txtDecimales As System.Windows.Forms.TextBox
+    Friend WithEvents txtValorEstandar As System.Windows.Forms.TextBox
+    Friend WithEvents lblValorEstandar As System.Windows.Forms.Label
     Friend WithEvents IdVariable As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Variable As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents WValor As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
-    Friend WithEvents txtDecimales As System.Windows.Forms.TextBox
+    Friend WithEvents ReferenciaARenglon As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

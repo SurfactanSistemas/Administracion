@@ -1,7 +1,8 @@
 ﻿Imports System.Text.RegularExpressions
+Imports ConsultasVarias
 Imports info.lundin.math
 
-Public Class IngresoVariablesFormula
+Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
 
     Public Property Formula As String
     Public Property Variables As String(,)
@@ -9,6 +10,8 @@ Public Class IngresoVariablesFormula
     Public Property Decimales As String
 
     Private DGV As DataGridView
+
+    Private RenglonID As Integer
 
 
 
@@ -28,18 +31,27 @@ Public Class IngresoVariablesFormula
                             If iRow = .Rows.Count - 1 Then
 
                                 ' .CurrentCell = .Rows(iRow).Cells(iCol + 1)
-                                btnAceptar_Click(Nothing, Nothing)
+                                If txtValorEstandar.Visible = True Then
+                                    txtValorEstandar.Focus()
+                                Else
+                                    btnAceptar_Click(Nothing, Nothing)
+                                End If
+
 
                             Else
                                 If Trim(.Rows(iRow + 1).Cells("Variable").Value) <> "" Then
                                     .CurrentCell = .Rows(iRow + 1).Cells("WValor")
                                 Else
-                                    btnAceptar_Click(Nothing, Nothing)
+                                    If txtValorEstandar.Visible = True Then
+                                        txtValorEstandar.Focus()
+                                    Else
+                                        btnAceptar_Click(Nothing, Nothing)
+                                    End If
                                 End If
 
                             End If
 
-                        
+
                     End Select
 
                     Return True
@@ -71,13 +83,16 @@ Public Class IngresoVariablesFormula
 
 
 
+    Private Sub NumerosConComas(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtValorEstandar.KeyPress
+        If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) And Not (CChar(".")) = e.KeyChar Then
+            e.Handled = True
+        End If
+    End Sub
 
 
 
 
-
-
-    Sub New(ByVal Formula As String, ByVal Variables(,) As String, ByVal Valor As String, ByVal Grilla As DataGridView, Optional ByVal Decimales As Object = Nothing)
+    Sub New(ByVal Formula As String, ByVal Variables(,) As String, ByVal Valor As String, Optional ByVal Grilla As DataGridView = Nothing, Optional ByVal Decimales As Object = Nothing, Optional ByVal Renglon As Integer = -1)
 
         ' This call is required by the designer.
         InitializeComponent()
@@ -95,6 +110,8 @@ Public Class IngresoVariablesFormula
 
         Dim aux As Integer = Valor.IndexOfAny({",", "."})
 
+        RenglonID = Renglon
+
         If aux > 0 Then
             Dim t As String = _Right(Valor, Valor.Replace(".", "").Replace(",", "").Length - aux)
             txtDecimales.Text = t.Length
@@ -107,33 +124,77 @@ Public Class IngresoVariablesFormula
         dgvVariables.Rows.Clear()
         Dim wultima As Short = 1
 
-        For i = 1 To 10
-            If Variables(i, 1) <> "" Then
-                dgvVariables.Rows.Add(i, Variables(i, 1), Variables(i, 2).Replace(",", "."))
-                wultima += 1
+        Dim Wowner = TryCast(Owner, ParametrosDeEspecificacion)
+
+
+        If Wowner IsNot Nothing Then
+
+            txtValorEstandar.Visible = True
+            lblValorEstandar.Visible = True
+
+            Dim SQLCnslt As String
+            SQLCnslt = "SELECT * FROM FormulasVerificadasValores WHERE IDRenglon = '" & RenglonID & "' ORDER BY Fila ASC"
+            Dim Dtabla As DataTable = GetAll(SQLCnslt, "Surfactan_II")
+
+            If Dtabla.Rows.Count > 0 Then
+                For Each row As DataRow In Dtabla.Rows
+                    With row
+                        dgvVariables.Rows.Add(.Item("fila"), .Item("Variable"), .Item("Valor"), .Item("IDRenglon"))
+
+                        txtValorEstandar.Text = .Item("ResultadoVerificado")
+
+                    End With
+                Next
+
+
+
+            Else
+                For i = 1 To 10
+                    If Variables(i, 2) Is Nothing Then
+                        Variables(i, 2) = ""
+                    End If
+                Next
+
+                For i = 1 To 10
+                    If Variables(i, 1) <> "" Then
+                        dgvVariables.Rows.Add(i, Variables(i, 1), Variables(i, 2).Replace(",", "."))
+                        wultima += 1
+                    End If
+                Next
+
+                '
+                ' Definimos las Referencias.
+                '
+                Dim regex As New Regex("R[0-9]{1,2}")
+
+                For Each m As Match In regex.Matches(Formula)
+
+                    Dim renglon As Integer = Val(m.Value.ToString.Replace("R", ""))
+
+
+                    If Wowner IsNot Nothing Then
+                        Dim x = dgvVariables.Rows.Add(wultima, m.Value, 0)
+
+                    Else
+                        If renglon <= DGV.Rows.Count And wultima <= 10 Then
+                            Dim x = dgvVariables.Rows.Add(wultima, m.Value, OrDefault(DGV.Rows(renglon - 1).Cells("Valor").Value, "0").ToString.Replace(",", "."))
+                            dgvVariables.Rows(x).Cells("WValor").ReadOnly = True
+                            wultima += 1
+                        End If
+                    End If
+
+
+                Next
+
+                '        For i = wultima To 10
+                '            dgvVariables.Rows.Add(i, "", "")
+                '        Next
+
+
+
+
             End If
-        Next
-
-        '
-        ' Definimos las Referencias.
-        '
-        Dim regex As New Regex("R[0-9]{1,2}")
-
-        For Each m As Match In regex.Matches(Formula)
-
-            Dim renglon As Integer = Val(m.Value.ToString.Replace("R", ""))
-
-            If renglon <= DGV.Rows.Count And wultima <= 10 Then
-                Dim x = dgvVariables.Rows.Add(wultima, m.Value, OrDefault(DGV.Rows(renglon - 1).Cells("Valor").Value, "0").ToString.Replace(",", "."))
-                dgvVariables.Rows(x).Cells("WValor").ReadOnly = True
-                wultima += 1
-            End If
-
-        Next
-
-        For i = wultima To 10
-            dgvVariables.Rows.Add(i, "", "")
-        Next
+        End If
 
         txtFormula.Text = Formula
 
@@ -158,13 +219,21 @@ Public Class IngresoVariablesFormula
         '
         ' Reasignamos los valores de las variables.
         '
+
+
+        Dim regex As New Regex("R[0-9]{1,2}")
+
         With dgvVariables
-            For i = 1 To 10
+            For i = 1 To dgvVariables.Rows.Count
 
                 If .Rows(i - 1).Cells("WValor").Value.ToString.StartsWith(".") Then .Rows(i - 1).Cells("WValor").Value = "0" & .Rows(i - 1).Cells("WValor").Value
+                If regex.IsMatch(OrDefault(.Rows(i - 1).Cells("Variable").Value, "")) Then
 
-                Variables(i, 1) = OrDefault(.Rows(i - 1).Cells("Variable").Value, "")
-                Variables(i, 2) = OrDefault(.Rows(i - 1).Cells("WValor").Value, "0").ToString.Replace(",", ".")
+                Else
+                    Variables(i, 1) = OrDefault(.Rows(i - 1).Cells("Variable").Value, "")
+                    Variables(i, 2) = OrDefault(.Rows(i - 1).Cells("WValor").Value, "0").ToString.Replace(",", ".")
+                End If
+                
 
             Next
         End With
@@ -182,7 +251,7 @@ Public Class IngresoVariablesFormula
             Next
         End With
 
-        Dim regex As New Regex("R[0-9]{1,2}")
+        'Dim regex As New Regex("R[0-9]{1,2}")
 
         For Each row As DataGridViewRow In dgvVariables.Rows
             If regex.IsMatch(OrDefault(row.Cells("Variable").Value, "")) Then parser.Values.Add(LCase(row.Cells("Variable").Value.ToString), OrDefault(row.Cells("WValor").Value, "0").ToString.Replace(",", "."))
@@ -194,9 +263,43 @@ Public Class IngresoVariablesFormula
 
         Decimales = Val(txtDecimales.Text)
 
+
+        'SI NOS LLAMO LA VENTANA DE CREAR FORMULAS 
+        Dim Wowner = TryCast(Owner, ParametrosDeEspecificacion)
+
+        'SE VERIFICA QUE CONCUERDEN LOS VALORES INGRESADOS
+        If Wowner IsNot Nothing Then
+            If Val(Valor) <> Val(txtValorEstandar.Text) Then
+                MsgBox("El valor calculado por la formula: " & Valor & " no corresponde con" & vbCrLf &
+                       "el valor ingresado en Valor Estandar : " & txtValorEstandar.Text & "" & vbCrLf &
+                       "Verifique los valores ingresados o la formula")
+            Else
+
+
+                Dim frm As New IngresoClaveSeguridad()
+                frm.ShowDialog(Me)
+
+                Me.Close()
+                Exit Sub
+
+
+
+
+                '
+                '
+                '
+                '
+                '
+                '
+                '
+
+
+            End If
+        End If
+
         'MsgBox(Valor)
 
-        Close()
+        ' Close()
 
     End Sub
 
@@ -211,5 +314,52 @@ Public Class IngresoVariablesFormula
             e.Handled = True
         End If
     End Sub
+
+    Private Sub _ProcesarIngresoClaveSeguridad(ByVal WClave As Object) Implements IIngresoClaveSeguridad._ProcesarIngresoClaveSeguridad
+
+        Dim WDatos As DataRow = GetSingle("SELECT GrabaV, FechaGrabaV, Operador FROM Operador WHERE Clave = '" & UCase(WClave) & "'", "SurfactanSa")
+
+        If WDatos IsNot Nothing Then
+            Dim WGrabaV As String = OrDefault(WDatos.Item("GrabaV"), "")
+            If WGrabaV.ToUpper = "S" Then
+
+                Dim SQLCnslt As String = ""
+
+                Dim ListaSQLCnslt As New List(Of String)
+
+                Dim Fila As Integer = 1
+
+                SQLCnslt = "DELETE  FROM FormulasVerificadasValores WHERE IDRenglon = '" & RenglonID & "'"
+
+                ListaSQLCnslt.Add(SQLCnslt)
+
+                For Each RowDGV As DataGridViewRow In dgvVariables.Rows
+
+                    SQLCnslt = "INSERT INTO FormulasVerificadasValores (IDRenglon, Formula, Variable , Valor ,AnalistaLab, ResultadoVerificado, Fila)" &
+                    "VALUES('" & RenglonID & "', '" & txtFormula.Text & "', '" & RowDGV.Cells("Variable").Value &
+                        "' , '" & RowDGV.Cells("WValor").Value & "' , '" & WDatos.Item("Operador") & "', ' " & txtValorEstandar.Text & "','" & Fila & "')"
+
+                    Fila += 1
+
+                    ListaSQLCnslt.Add(SQLCnslt)
+                Next
+
+                SQLCnslt = "UPDATE FormulasDeEnsayos SET EstadoVerificado = 1, Analistalab = '" & WDatos.Item("Operador") & "' WHERE Renglon = '" & RenglonID & "'"
+                ListaSQLCnslt.Add(SQLCnslt)
+
+                ExecuteNonQueries("Surfactan_II", ListaSQLCnslt.ToArray())
+                Exit Sub
+            End If
+        End If
+
+        MsgBox("Clave Incorrecta")
+        Dim frm As New IngresoClaveSeguridad
+        frm.ShowDialog(Me)
+
+
+
+    End Sub
+
+
 
 End Class

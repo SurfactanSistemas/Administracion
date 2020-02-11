@@ -381,6 +381,12 @@
     <Compile Include="Reportes\IndiceGral\DetallesIndiceGral.vb">
       <DependentUpon>DetallesIndiceGral.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\IndiceGral\ReporteEstadistica.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteEstadistica.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\IndiceGral\ReporteIndiceGralAgrupados.vb">
       <DependentUpon>ReporteIndiceGralAgrupados.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -583,6 +589,10 @@
     <EmbeddedResource Include="Reportes\INCs\ReporteIndiceINCs.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteIndiceINCs.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\IndiceGral\ReporteEstadistica.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteEstadistica.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\IndiceGral\ReporteIndiceGralAgrupados.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

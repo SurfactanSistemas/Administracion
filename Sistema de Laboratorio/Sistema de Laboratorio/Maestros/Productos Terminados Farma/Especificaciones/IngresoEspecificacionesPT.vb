@@ -980,7 +980,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
             '
             For Each row As DataGridViewRow In dgvEspecifIngles.Rows
 
-                If row.Cells(1).Value <> "" Then
+                If row.Cells(2).Value <> "" Then
 
                     Dim WValor, WFarmacopea, WUnidadEspecif As String
 
@@ -2564,22 +2564,71 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
     End Sub
 
+
+    Private Sub _OrdenarNroRenglon()
+        Dim WNroRenglon As Integer = 1
+
+        For Each Row As DataGridViewRow In dgvEspecif.Rows
+            Row.Cells("NroRenglon").Value = WNroRenglon
+            WNroRenglon += 1
+        Next
+
+        'Nos movemos para que el cambio se vea
+        Dim _rRenglon As Integer
+        If dgvEspecif.CurrentRow IsNot Nothing Then
+            _rRenglon = dgvEspecif.CurrentRow.Index
+        End If
+        If dgvEspecif.Rows.Count <> 0 Then
+            dgvEspecif.CurrentCell = dgvEspecif.Rows(_rRenglon).Cells(2)
+            dgvEspecif.CurrentCell = dgvEspecif.Rows(_rRenglon).Cells(1)
+        End If
+
+
+    End Sub
+
+
+    Private Sub _OrdenarNroRenglonIngles()
+        Dim WNroRenglon As Integer = 1
+
+        For Each Row As DataGridViewRow In dgvEspecifIngles.Rows
+            Row.Cells("NroRenglonIngles").Value = WNroRenglon
+            WNroRenglon += 1
+        Next
+
+        'Nos movemos para que el cambio se vea
+        Dim _rRenglon As Integer
+        If dgvEspecifIngles.CurrentRow IsNot Nothing Then
+            _rRenglon = dgvEspecifIngles.CurrentRow.Index
+        End If
+        If dgvEspecifIngles.Rows.Count <> 0 Then
+            dgvEspecifIngles.CurrentCell = dgvEspecifIngles.Rows(_rRenglon).Cells(2)
+            dgvEspecifIngles.CurrentCell = dgvEspecifIngles.Rows(_rRenglon).Cells(1)
+        End If
+
+    End Sub
+
     Private Sub dgvEspecif_RowHeaderMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgvEspecif.RowHeaderMouseDoubleClick
         If e.RowIndex < 0 Then Exit Sub
 
         If MsgBox("¿Seguro de querer eliminar este Ensayo?", MsgBoxStyle.YesNo) <> MsgBoxResult.Yes Then Exit Sub
 
+        Dim rIndex As Integer
+
         With dgvEspecif
+            rIndex = .CurrentRow.Index
+            dgvEspecifIngles.Rows.RemoveAt(rIndex)
             .Rows.Remove(.CurrentRow)
-
-            If .Rows.Count = 0 Then .Rows.Add()
-
-            If e.RowIndex - 1 >= .Rows.Count - 1 Then
-                .Rows.Add()
-            End If
-
-            .CurrentCell = .Rows(0).Cells("Ensayo")
-            .Focus()
+            _OrdenarNroRenglon()
+            _OrdenarNroRenglonIngles()
+            If .Rows.Count = 0 Then .Rows.Add("1")
+            If dgvEspecifIngles.Rows.Count = 0 Then dgvEspecifIngles.Rows.Add("1")
+'
+'            If e.RowIndex - 1 >= .Rows.Count - 1 Then
+'                .Rows.Add()
+'            End If
+'
+'            .CurrentCell = .Rows(0).Cells("Ensayo")
+'            .Focus()
         End With
 
     End Sub
@@ -2889,11 +2938,5 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
             End If
 
         Loop
-
-
-
-
-
-
     End Sub
 End Class

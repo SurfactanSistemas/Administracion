@@ -79,17 +79,29 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
 
                     If Val(WEns) = 0 Then
                         If .Index <= dgvEspecifIngles.Rows.Count - 1 Then dgvEspecifIngles.Rows(.Index).Cells("DescEnsayoIngles").Value = ""
+
                         Continue For
                     End If
 
                     Dim WEnsayo As DataRow = GetSingle("SELECT Descripcion FROM Ensayos WHERE Codigo = '" & WEns & "'", WBaseII)
 
-                    'dgvEspecifIngles.Rows.Add()
+                    'SI LA CANTIDAD DE FILAS DE DATOS EN INGLES ES MENOR A LAS FILAS EN ENSAYOS
+                    'ES PORQUE NO TENIA DATOS GUARDADOS ENTONCES LE AGREGAMOS LAS FILAS SINO NO SE AGREGA NADA
+
+                    If dgvEspecifIngles.Rows.Count < dgvEspecif.Rows.Count Then dgvEspecifIngles.Rows.Add()
+
+
+
+
                     If WEnsayo IsNot Nothing Then
 
                         .Cells("Especificacion").Value = Trim(OrDefault(WEnsayo.Item("Descripcion"), ""))
 
-                        If .Index <= dgvEspecifIngles.Rows.Count - 1 Then dgvEspecifIngles.Rows(.Index).Cells("EspecificacionIngles").Value = Trim(OrDefault(WEnsayo.Item("Descripcion"), ""))
+                        If .Index <= dgvEspecifIngles.Rows.Count - 1 Then
+                            dgvEspecifIngles.Rows(.Index).Cells("NroRenglonIngles").Value = dgvEspecif.Rows(.Index).Cells("NroRenglon").Value
+                            dgvEspecifIngles.Rows(.Index).Cells("EnsayoIngles").Value = dgvEspecif.Rows(.Index).Cells("Ensayo").Value
+                            dgvEspecifIngles.Rows(.Index).Cells("EspecificacionIngles").Value = Trim(OrDefault(WEnsayo.Item("Descripcion"), ""))
+                        End If
 
                     End If
 
@@ -301,6 +313,9 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
 
     Private Sub _PoblarEspecificacionesIngles(WCargaVIngles As DataTable)
 
+        Dim WNroRenglon As Integer = 1
+
+
         dgvEspecifIngles.Rows.Clear()
 
         For Each row As DataRow In WCargaVIngles.Rows
@@ -312,6 +327,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
                 Dim r = dgvEspecifIngles.Rows.Add
 
                 With dgvEspecifIngles.Rows(r)
+                    .Cells("NroRenglonIngles").Value = WNroRenglon
                     .Cells("EnsayoIngles").Value = "" ' dgvEspecif.Rows(r).Cells("Ensayo").Value
                     If dgvEspecif.Rows.Count > r Then .Cells("EnsayoIngles").Value = dgvEspecif.Rows(r).Cells("Ensayo").Value
                     .Cells("EspecificacionIngles").Value = ""
@@ -321,7 +337,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
                 End With
 
             End With
-
+            WNroRenglon += 1
         Next
 
         For i = dgvEspecifIngles.Rows.Count To dgvEspecif.Rows.Count - 1
@@ -332,6 +348,8 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
 
     Private Sub _PoblarEspecificaciones(WCargaV As DataTable)
 
+        Dim WNroRenglon As Integer = 1
+
         dgvEspecif.Rows.Clear()
 
         '
@@ -339,7 +357,10 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
         '
         If WCargaV.Rows.Count > 0 Then
 
+
+
             For Each row As DataRow In WCargaV.Rows
+                'dgvEspecif.Rows.Add()
                 With row
                     Dim WEns = OrDefault(.Item("Ensayo"), 0)
                     Dim WEspecificacion = OrDefault(.Item("Valor"), "")
@@ -361,6 +382,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
                     txtControlCambios.Text = Trim(WControlCambio)
 
                     With dgvEspecif.Rows(r)
+                        .Cells("NroRenglon").Value = WNroRenglon
                         .Cells("Ensayo").Value = WEns
                         .Cells("Especificacion").Value = ""
                         .Cells("DescEnsayo").Value = Trim(WEspecificacion)
@@ -381,10 +403,10 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
                     End With
 
                 End With
-
+                WNroRenglon += 1
             Next
 
-            dgvEspecif.Rows.Add()
+
 
         End If
     End Sub
@@ -456,9 +478,9 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
             Dim frm As New IngresoParametrosEspecificaciones(WEnsayo, WDescEnsayo, WParametro, WTipo, WInforma, WMenorIgual, WDesde, WHasta, WUnidad, WFarmacopea, WFormula, WParametrosFormula)
             frm.ShowDialog(Me)
 
-            If .Index >= dgvEspecif.Rows.Count - 1 Then dgvEspecif.Rows.Add()
+            ' If .Index >= dgvEspecif.Rows.Count - 1 Then dgvEspecif.Rows.Add()
 
-            dgvEspecif.CurrentCell = dgvEspecif.Rows(.Index + 1).Cells("Ensayo")
+            dgvEspecif.CurrentCell = dgvEspecif.Rows(.Index).Cells("Ensayo")
 
             dgvEspecif.Focus()
 
@@ -729,15 +751,16 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
         '
         For Each row As DataGridViewRow In dgvEspecifIngles.Rows
 
-            Dim WValor, WFarmacopea, WUnidadEspecif As String
+            Dim WDescripcionEnsayo, WValor, WFarmacopea, WUnidadEspecif As String
 
             With row
 
+                WDescripcionEnsayo = OrDefault(.Cells("EspecificacionIngles").Value, "")
                 WValor = OrDefault(.Cells("DescEnsayoIngles").Value, "")
                 WFarmacopea = OrDefault(.Cells("FarmacopeaIngles").Value, "")
                 WUnidadEspecif = OrDefault(.Cells("UnidadEspecifIngles").Value, "")
 
-                If WValor.Trim = "" Then Continue For
+                If WDescripcionEnsayo.Trim = "" Then Continue For
 
                 Dim ZSql, XPaso, Auxi As String
 
@@ -2730,23 +2753,67 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
 
         If MsgBox("¿Seguro de querer eliminar este Ensayo?", MsgBoxStyle.YesNo) <> MsgBoxResult.Yes Then Exit Sub
 
+        Dim rIndex As Integer
+
         With dgvEspecif
+            rIndex = .CurrentRow.Index
+            dgvEspecifIngles.Rows.RemoveAt(rIndex)
             .Rows.Remove(.CurrentRow)
+            _OrdenarNroRenglon()
+            _OrdenarNroRenglonIngles()
+            If .Rows.Count = 0 Then .Rows.Add("1")
+            If dgvEspecifIngles.Rows.Count = 0 Then dgvEspecifIngles.Rows.Add("1")
+            'If e.RowIndex - 1 >= .Rows.Count - 1 Then
+            '.Rows.Add()
+            ' End If
 
-            If .Rows.Count = 0 Then .Rows.Add()
-
-            If e.RowIndex - 1 >= .Rows.Count - 1 Then
-                .Rows.Add()
-            End If
-
-            .CurrentCell = .Rows(0).Cells("Ensayo")
-            .Focus()
+            '.CurrentCell = .Rows(0).Cells("Ensayo")
+            '.Focus()
         End With
 
     End Sub
 
+    Private Sub _OrdenarNroRenglon()
+        Dim WNroRenglon As Integer = 1
+
+        For Each Row As DataGridViewRow In dgvEspecif.Rows
+            Row.Cells("NroRenglon").Value = WNroRenglon
+            WNroRenglon += 1
+        Next
+
+        'Nos movemos para que el cambio se vea
+        Dim _rRenglon As Integer
+        If dgvEspecif.CurrentRow IsNot Nothing Then
+            _rRenglon = dgvEspecif.CurrentRow.Index
+        End If
+        If dgvEspecif.Rows.Count <> 0 Then
+            dgvEspecif.CurrentCell = dgvEspecif.Rows(_rRenglon).Cells(2)
+            dgvEspecif.CurrentCell = dgvEspecif.Rows(_rRenglon).Cells(1)
+        End If
+        
+
+    End Sub
 
 
+    Private Sub _OrdenarNroRenglonIngles()
+        Dim WNroRenglon As Integer = 1
+
+        For Each Row As DataGridViewRow In dgvEspecifIngles.Rows
+            Row.Cells("NroRenglonIngles").Value = WNroRenglon
+            WNroRenglon += 1
+        Next
+
+        'Nos movemos para que el cambio se vea
+        Dim _rRenglon As Integer
+        If dgvEspecifIngles.CurrentRow IsNot Nothing Then
+            _rRenglon = dgvEspecifIngles.CurrentRow.Index
+        End If
+        If dgvEspecifIngles.Rows.Count <> 0 Then
+            dgvEspecifIngles.CurrentCell = dgvEspecifIngles.Rows(_rRenglon).Cells(2)
+            dgvEspecifIngles.CurrentCell = dgvEspecifIngles.Rows(_rRenglon).Cells(1)
+        End If
+
+    End Sub
 
     Private Function _EsNumero(ByVal keycode As Integer) As Boolean
         Return (keycode >= 48 And keycode <= 57) Or (keycode >= 96 And keycode <= 105)
@@ -2805,7 +2872,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
 
                 ' Limitamos los caracteres permitidos para cada una de las columnas.
                 Select Case iCol
-                    Case 0
+                    Case 1
                         If Not _EsNumeroOControl(keyData) Then
                             Return True
                         End If
@@ -2821,7 +2888,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
 
 
                     Select Case iCol
-                        Case 0
+                        Case 1
 
                             If Val(valor) = 0 Then Return True
 
@@ -2835,7 +2902,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
 
 
                     Select Case iCol
-                        Case 2
+                        Case 3
 
                             If iRow >= .Rows.Count - 1 Then
                                 .Rows.Add()
@@ -2856,11 +2923,11 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
 
                 ElseIf msg.WParam.ToInt32() = Keys.Escape Then
 
-                    If iCol = 0 Then
+                    If iCol = 1 Then
 
                         .Rows(iRow).Cells(iCol).Value = ""
 
-                        If iCol = 2 Then
+                        If iCol = 3 Then
                             .CurrentCell = .Rows(iRow).Cells(iCol - 1)
                         Else
                             .CurrentCell = .Rows(iRow).Cells(iCol + 1)
@@ -2953,7 +3020,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
         Dim IndexDondeCopio As Integer = dgvEspecif.Rows.Count - 1
         Do
             If DesdeRenglon = indexAnterior Then
-
+                dgvEspecif.Rows(IndexDondeCopio).Cells("NroRenglon").Value = DesdeRenglon + 2
                 dgvEspecif.Rows(IndexDondeCopio).Cells("Ensayo").Value = ""
                 dgvEspecif.Rows(IndexDondeCopio).Cells("Especificacion").Value = ""
                 dgvEspecif.Rows(IndexDondeCopio).Cells("DescEnsayo").Value = ""
@@ -2980,7 +3047,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
                 Exit Do
 
             Else
-
+                dgvEspecif.Rows(IndexDondeCopio).Cells("NroRenglon").Value = dgvEspecif.Rows(indexAnterior).Cells("NroRenglon").Value + 1
                 dgvEspecif.Rows(IndexDondeCopio).Cells("Ensayo").Value = dgvEspecif.Rows(indexAnterior).Cells("Ensayo").Value
                 dgvEspecif.Rows(IndexDondeCopio).Cells("Especificacion").Value = dgvEspecif.Rows(indexAnterior).Cells("Especificacion").Value
                 dgvEspecif.Rows(IndexDondeCopio).Cells("DescEnsayo").Value = dgvEspecif.Rows(indexAnterior).Cells("DescEnsayo").Value
@@ -3023,6 +3090,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
         Do
             If DesdeRenglon = indexAnterior Then
 
+                dgvEspecifIngles.Rows(IndexDondeCopio).Cells("NroRenglonIngles").Value = DesdeRenglon + 2
                 dgvEspecifIngles.Rows(IndexDondeCopio).Cells("EnsayoIngles").Value = ""
                 dgvEspecifIngles.Rows(IndexDondeCopio).Cells("EspecificacionIngles").Value = ""
                 dgvEspecifIngles.Rows(IndexDondeCopio).Cells("DescEnsayoIngles").Value = ""
@@ -3034,6 +3102,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
 
             Else
 
+                dgvEspecifIngles.Rows(IndexDondeCopio).Cells("NroRenglonIngles").Value = dgvEspecifIngles.Rows(indexAnterior).Cells("NroRenglonIngles").Value + 1
                 dgvEspecifIngles.Rows(IndexDondeCopio).Cells("EnsayoIngles").Value = dgvEspecifIngles.Rows(indexAnterior).Cells("EnsayoIngles").Value
                 dgvEspecifIngles.Rows(IndexDondeCopio).Cells("EspecificacionIngles").Value = dgvEspecifIngles.Rows(indexAnterior).Cells("EspecificacionIngles").Value
                 dgvEspecifIngles.Rows(IndexDondeCopio).Cells("DescEnsayoIngles").Value = dgvEspecifIngles.Rows(indexAnterior).Cells("DescEnsayoIngles").Value
@@ -3047,12 +3116,6 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
             End If
 
         Loop
-
-
-
-
-
-
     End Sub
 
 

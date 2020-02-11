@@ -132,7 +132,7 @@ Public Class ListadoIncidencias : Implements INuevaIncidencia, ISeleccionNuevaIn
 
         Select Case cmbOrd.SelectedIndex
             Case 0
-                Return "Numero"
+                Return "Numero desc"
             Case 1
                 Return "TipoINC"
             Case 2
@@ -222,10 +222,10 @@ Public Class ListadoIncidencias : Implements INuevaIncidencia, ISeleccionNuevaIn
             ZSql &= " And ISNULL(TipoProd, '') = 'T' "
         End If
 
-        ZSql &= " Order by Ano, "
+        ZSql &= " Order by Ano desc, "
         ZSql &= _GenerarStringOrdenamiento(cmbOrdenI)
         If cmbOrdenII.SelectedIndex <> cmbOrdenI.SelectedIndex Then ZSql &= ", " & _GenerarStringOrdenamiento(cmbOrdenII)
-        If Not {cmbOrdenI.SelectedIndex, cmbOrdenII.SelectedIndex}.Contains(cmbOrdenII.SelectedIndex) Then ZSql &= ", " & _GenerarStringOrdenamiento(cmbOrdenIII)
+        If Not {cmbOrdenI.SelectedIndex, cmbOrdenII.SelectedIndex}.Contains(cmbOrdenII.SelectedIndex) Then ZSql &= " , " & _GenerarStringOrdenamiento(cmbOrdenIII)
 
         Dim WIncidencias As DataTable = GetAll(ZSql)
 
@@ -550,5 +550,112 @@ Public Class ListadoIncidencias : Implements INuevaIncidencia, ISeleccionNuevaIn
 
     Private Sub rbTipoTodos_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbTipoTodos.Click, rbTipoPT.Click, rbTipoMP.Click
         btnFiltrar.PerformClick()
+    End Sub
+
+
+
+    Private Sub TxtBuscador_KeyUp(sender As Object, e As KeyEventArgs) Handles TxtBuscador.KeyUp
+
+        ExecuteNonQueries("UPDATE CargaIncidencias SET EmpresaIncidencia = Empresa WHERE EmpresaIncidencia IS NULL")
+
+        Dim WDesdeFecha As String = ordenaFecha(txtDesdeFecha.Text)
+        Dim WHastaFecha As String = ordenaFecha(txtHastaFecha.Text)
+
+        If rbAñosCompletos.Checked Then
+
+            If Val(txtDesdeAño.Text) <> 0 And Val(txtHastaAño.Text) <> 0 Then
+                WDesdeFecha = ordenaFecha("01/01/" & txtDesdeAño.Text)
+                WHastaFecha = ordenaFecha("31/12/" & txtHastaAño.Text)
+            Else
+                WDesdeFecha = 0
+                WHastaFecha = 0
+            End If
+
+        End If
+
+        '
+        ' Armamos el filtro de los Estados en caso que corresponda.
+        '
+        Dim WFiltroEstados As String = ""
+
+        If clbEstados.GetItemCheckState(0) <> CheckState.Checked Then
+            For Each o As Object In clbEstados.CheckedItems
+                WFiltroEstados &= CType(o, DataRowView).Item("Codigo") & ","
+            Next
+            WFiltroEstados = WFiltroEstados.TrimEnd(",")
+        End If
+
+        '
+        ' Armamos el filtro de las Plantas en caso que corresponda.
+        '
+        Dim WFiltroPlantas As String = ""
+
+        If clbPlantas.GetItemCheckState(0) <> CheckState.Checked Then
+            For Each o As Object In clbPlantas.CheckedItems
+                WFiltroPlantas &= CType(o, DataRowView).Item("Codigo") & ","
+            Next
+            WFiltroPlantas = WFiltroPlantas.TrimEnd(",")
+        End If
+
+        '
+        ' Armamos el filtro de los Tipos en caso que corresponda.
+        '
+        Dim WFiltroTipos As String = ""
+
+        If clbTipos.GetItemCheckState(0) <> CheckState.Checked Then
+            For Each o As Object In clbTipos.CheckedItems
+                WFiltroTipos &= CType(o, DataRowView).Item("Codigo") & ","
+            Next
+            WFiltroTipos = WFiltroTipos.TrimEnd(",")
+        End If
+
+        Dim ZSql = ""
+        ZSql = "SELECT Incidencia, Ano As Anio, TipoInc As Tipo, Numero, Fecha, Estado, Titulo, Referencia, " _
+            & " DescEstado = CASE ISNULL(Estado, 0) WHEN 1 THEN 'Genera SAC' WHEN 2 THEN 'No Genera SAC' WHEN 3 THEN 'Cerrado' ELSE 'Pend. Análisis' END, ISNULL(EmpresaIncidencia, Empresa) Empresa " _
+            & " FROM CargaIncidencias WHERE Renglon = 1 AND (Referencia Like '%" & TxtBuscador.Text & "%' or Titulo like '%" & TxtBuscador.Text & "%') "
+
+        If Val(WDesdeFecha) <> 0 And Val(WHastaFecha) <> 0 Then
+            ZSql &= " And FechaOrd BETWEEN '" & WDesdeFecha & "' And '" & WHastaFecha & "' "
+        End If
+
+        If WFiltroEstados.Trim <> "" Then ZSql &= " And Estado IN (" & WFiltroEstados & ") "
+        If WFiltroTipos.Trim <> "" Then ZSql &= " And Tipo IN (" & WFiltroTipos & ") "
+        If WFiltroPlantas.Trim <> "" Then ZSql &= " And EmpresaIncidencia IN (" & WFiltroPlantas & ") "
+
+        '
+        ' Filtro por Tipo de Producto.
+        '
+        If rbTipoMP.Checked Then
+            ZSql &= " And ISNULL(TipoProd, '') = 'M' "
+        ElseIf rbTipoPT.Checked Then
+            ZSql &= " And ISNULL(TipoProd, '') = 'T' "
+        End If
+
+        ZSql &= " Order by Ano desc, "
+        ZSql &= _GenerarStringOrdenamiento(cmbOrdenI)
+        If cmbOrdenII.SelectedIndex <> cmbOrdenI.SelectedIndex Then ZSql &= ", " & _GenerarStringOrdenamiento(cmbOrdenII)
+        If Not {cmbOrdenI.SelectedIndex, cmbOrdenII.SelectedIndex}.Contains(cmbOrdenII.SelectedIndex) Then ZSql &= " , " & _GenerarStringOrdenamiento(cmbOrdenIII)
+
+        Dim WIncidencias As DataTable = GetAll(ZSql)
+
+        WIncidencias.Columns.Add("Planta")
+        WIncidencias.Columns.Add("DescTipo")
+
+        For Each row As DataRow In WIncidencias.Rows
+            With row
+                .Item("Planta") = _GenerarDescEmpresa(.Item("Empresa"))
+
+                Dim WTipo As DataRow = GetSingle("SELECT Descripcion FROM TiposInc WHERE Tipo = '" & OrDefault(.Item("Tipo"), "") & "'")
+
+                .Item("DescTipo") = ""
+
+                If WTipo IsNot Nothing Then .Item("DescTipo") = Microsoft.VisualBasic.Left(OrDefault(WTipo.Item("Descripcion"), ""), 20)
+
+            End With
+        Next
+
+        dgvIncidencias.DataSource = WIncidencias
+
+
     End Sub
 End Class
