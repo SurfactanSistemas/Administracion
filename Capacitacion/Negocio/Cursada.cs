@@ -171,7 +171,7 @@ namespace Negocio
             if (WTipoCursada.Trim() != "") WTipoCursada = " AND C.TipoCursada = '" + WTipoCursada + "'";
 
             Conexion repo = new Conexion();
-            string consulta = "select C.Curso, Cu.Descripcion, C.Tema, T.Descripcion, C.Legajo, l.Descripcion, C.Horas, C.Codigo, C.Fecha, C.Observaciones,  CASE WHEN C.TipoCursada = 0 THEN 'Si' ELSE 'No' END as Planificada, L.Dni from Cursadas C LEFT OUTER JOIN Legajo l ON l.Codigo = C.Legajo AND l.Renglon = 1 LEFT OUTER JOIN Tema Cu ON Cu.Curso = c.Tema AND Cu.Tema = C.Curso LEFT OUTER JOIN Curso T ON T.Codigo = C.Curso where C.Curso >= " + TemaDesd + " and C.Curso <= " + TemajoHast + " and C.OrdFecha > = " + FechaDesde + " and C.OrdFecha < = " + FechaHasta + WTipoCursada;
+            string consulta = "select C.Curso, Cu.Descripcion, C.Tema, T.Descripcion, C.Legajo, l.Descripcion, C.Horas, C.Codigo, C.Fecha, C.Observaciones,  CASE WHEN C.TipoCursada = 0 THEN 'Si' ELSE 'No' END as Planificada, L.Dni from Cursadas C LEFT OUTER JOIN Legajo l ON l.Codigo = C.Legajo AND l.Renglon = 1 LEFT OUTER JOIN Tema Cu ON Cu.Tema = c.Tema AND Cu.Curso = C.Curso LEFT OUTER JOIN Curso T ON T.Codigo = C.Curso where C.Curso >= " + TemaDesd + " and C.Curso <= " + TemajoHast + " and C.OrdFecha > = " + FechaDesde + " and C.OrdFecha < = " + FechaHasta + WTipoCursada;
 
             return repo.Listar(consulta);
         }
