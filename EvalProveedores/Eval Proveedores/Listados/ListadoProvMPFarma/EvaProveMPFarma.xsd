@@ -12,7 +12,7 @@
   <xs:element name="EvaProveEnv" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="EvaProveEnv" msprop:Generator_UserDSName="EvaProveEnv">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="Detalles" msprop:Generator_TableClassName="DetallesDataTable" msprop:Generator_TableVarName="tableDetalles" msprop:Generator_RowChangedName="DetallesRowChanged" msprop:Generator_TablePropName="Detalles" msprop:Generator_RowDeletingName="DetallesRowDeleting" msprop:Generator_RowChangingName="DetallesRowChanging" msprop:Generator_RowEvHandlerName="DetallesRowChangeEventHandler" msprop:Generator_RowDeletedName="DetallesRowDeleted" msprop:Generator_RowClassName="DetallesRow" msprop:Generator_UserTableName="Detalles" msprop:Generator_RowEvArgName="DetallesRowChangeEvent">
+        <xs:element name="Detalles" msprop:Generator_TableClassName="DetallesDataTable" msprop:Generator_TableVarName="tableDetalles" msprop:Generator_TablePropName="Detalles" msprop:Generator_RowDeletingName="DetallesRowDeleting" msprop:Generator_RowChangingName="DetallesRowChanging" msprop:Generator_RowEvHandlerName="DetallesRowChangeEventHandler" msprop:Generator_RowDeletedName="DetallesRowDeleted" msprop:Generator_UserTableName="Detalles" msprop:Generator_RowChangedName="DetallesRowChanged" msprop:Generator_RowEvArgName="DetallesRowChangeEvent" msprop:Generator_RowClassName="DetallesRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Proveedor" msprop:Generator_ColumnVarNameInTable="columnProveedor" msprop:Generator_ColumnPropNameInRow="Proveedor" msprop:Generator_ColumnPropNameInTable="ProveedorColumn" msprop:Generator_UserColumnName="Proveedor" type="xs:string" minOccurs="0" />
@@ -32,6 +32,7 @@
               <xs:element name="FechaEvaluaProvMPFarmaII" msprop:Generator_ColumnVarNameInTable="columnFechaEvaluaProvMPFarmaII" msprop:Generator_ColumnPropNameInRow="FechaEvaluaProvMPFarmaII" msprop:Generator_ColumnPropNameInTable="FechaEvaluaProvMPFarmaIIColumn" msprop:Generator_UserColumnName="FechaEvaluaProvMPFarmaII" type="xs:string" minOccurs="0" />
               <xs:element name="EstadoMP" msprop:Generator_ColumnVarNameInTable="columnEstadoMP" msprop:Generator_ColumnPropNameInRow="EstadoMP" msprop:Generator_ColumnPropNameInTable="EstadoMPColumn" msprop:Generator_UserColumnName="EstadoMP" type="xs:string" minOccurs="0" />
               <xs:element name="FechaEvaluaVto" msprop:Generator_ColumnVarNameInTable="columnFechaEvaluaVto" msprop:Generator_ColumnPropNameInRow="FechaEvaluaVto" msprop:Generator_ColumnPropNameInTable="FechaEvaluaVtoColumn" msprop:Generator_UserColumnName="FechaEvaluaVto" type="xs:string" minOccurs="0" />
+              <xs:element name="VencEvaluacion" msprop:Generator_ColumnVarNameInTable="columnVencEvaluacion" msprop:Generator_ColumnPropNameInRow="VencEvaluacion" msprop:Generator_ColumnPropNameInTable="VencEvaluacionColumn" msprop:Generator_UserColumnName="VencEvaluacion" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
