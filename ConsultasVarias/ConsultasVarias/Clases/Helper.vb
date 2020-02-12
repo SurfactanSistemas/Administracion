@@ -7,7 +7,6 @@ Imports Microsoft.Office.Interop.Outlook
 Namespace Clases
 
     Public Class Helper
-
         Public Shared Function Right(ByVal txt As String, ByVal lng As Integer) As String
             Return Microsoft.VisualBasic.Right(txt, lng)
         End Function

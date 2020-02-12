@@ -38,6 +38,7 @@
             this.ctiDeEvaluaciónSemestralDeProveedoresDeEnvasesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.evaluaciónDeProveedoresDeMateriaPrimaDeFarmaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.actDeEvaluaciónSemestralDeProveedoresDeMateriaPrimaParaFarmaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.evaluaciónDeProveedoresDeEnsayosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consultaDeEvaluaciónSemestralActualDeProveedoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listadoDeCheckListDeInformesDeRecepciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,11 +50,11 @@
             this.listadoDeCheckListDeHojaDeRutaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consultaDeEvalSemestralActualDeProveedoresDeEnvasesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listadoDeEvaluaciónDeProveedoresDeMateriaPrimaParaFarmaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listadoDeEvaluaciónDeProveedorDeMateriaPrimaParaFarmaEntreFechaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.procesosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirDelSistemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.listadoDeEvaluaciónDeProveedorDeMateriaPrimaParaFarmaEntreFechaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -65,7 +66,7 @@
             this.novedadesToolStripMenuItem,
             this.listadosToolStripMenuItem,
             this.procesosToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Location = new System.Drawing.Point(0, 40);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(784, 24);
             this.menuStrip1.TabIndex = 1;
@@ -101,7 +102,8 @@
             this.actDeEvaluacionSemetralDeProveedoresToolStripMenuItem,
             this.ctiDeEvaluaciónSemestralDeProveedoresDeEnvasesToolStripMenuItem,
             this.evaluaciónDeProveedoresDeMateriaPrimaDeFarmaToolStripMenuItem,
-            this.actDeEvaluaciónSemestralDeProveedoresDeMateriaPrimaParaFarmaToolStripMenuItem});
+            this.actDeEvaluaciónSemestralDeProveedoresDeMateriaPrimaParaFarmaToolStripMenuItem,
+            this.evaluaciónDeProveedoresDeEnsayosToolStripMenuItem});
             this.novedadesToolStripMenuItem.Name = "novedadesToolStripMenuItem";
             this.novedadesToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
             this.novedadesToolStripMenuItem.Text = "Novedades";
@@ -140,6 +142,13 @@
             this.actDeEvaluaciónSemestralDeProveedoresDeMateriaPrimaParaFarmaToolStripMenuItem.Size = new System.Drawing.Size(464, 22);
             this.actDeEvaluaciónSemestralDeProveedoresDeMateriaPrimaParaFarmaToolStripMenuItem.Text = "Act. de Evaluación Semestral de Proveedores de Materia Prima para Farma";
             this.actDeEvaluaciónSemestralDeProveedoresDeMateriaPrimaParaFarmaToolStripMenuItem.Click += new System.EventHandler(this.actDeEvaluaciónSemestralDeProveedoresDeMateriaPrimaParaFarmaToolStripMenuItem_Click);
+            // 
+            // evaluaciónDeProveedoresDeEnsayosToolStripMenuItem
+            // 
+            this.evaluaciónDeProveedoresDeEnsayosToolStripMenuItem.Name = "evaluaciónDeProveedoresDeEnsayosToolStripMenuItem";
+            this.evaluaciónDeProveedoresDeEnsayosToolStripMenuItem.Size = new System.Drawing.Size(464, 22);
+            this.evaluaciónDeProveedoresDeEnsayosToolStripMenuItem.Text = "Evaluación de Proveedores de Ensayos";
+            this.evaluaciónDeProveedoresDeEnsayosToolStripMenuItem.Click += new System.EventHandler(this.evaluaciónDeProveedoresDeEnsayosToolStripMenuItem_Click);
             // 
             // listadosToolStripMenuItem
             // 
@@ -229,6 +238,13 @@
             this.listadoDeEvaluaciónDeProveedoresDeMateriaPrimaParaFarmaToolStripMenuItem.Text = "Listado de Análisis de Evaluaciones de Proveedores de Materia Prima para Farma";
             this.listadoDeEvaluaciónDeProveedoresDeMateriaPrimaParaFarmaToolStripMenuItem.Click += new System.EventHandler(this.listadoDeEvaluaciónDeProveedoresDeMateriaPrimaParaFarmaToolStripMenuItem_Click);
             // 
+            // listadoDeEvaluaciónDeProveedorDeMateriaPrimaParaFarmaEntreFechaToolStripMenuItem
+            // 
+            this.listadoDeEvaluaciónDeProveedorDeMateriaPrimaParaFarmaEntreFechaToolStripMenuItem.Name = "listadoDeEvaluaciónDeProveedorDeMateriaPrimaParaFarmaEntreFechaToolStripMenuItem";
+            this.listadoDeEvaluaciónDeProveedorDeMateriaPrimaParaFarmaEntreFechaToolStripMenuItem.Size = new System.Drawing.Size(497, 22);
+            this.listadoDeEvaluaciónDeProveedorDeMateriaPrimaParaFarmaEntreFechaToolStripMenuItem.Text = "Listado de Evaluación Actual de Proveedores de Farma";
+            this.listadoDeEvaluaciónDeProveedorDeMateriaPrimaParaFarmaEntreFechaToolStripMenuItem.Click += new System.EventHandler(this.listadoDeEvaluaciónDeProveedorDeMateriaPrimaParaFarmaEntreFechaToolStripMenuItem_Click);
+            // 
             // procesosToolStripMenuItem
             // 
             this.procesosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -250,7 +266,7 @@
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(74)))), ((int)(((byte)(95)))));
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 24);
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(784, 40);
             this.panel1.TabIndex = 2;
@@ -266,21 +282,14 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "EVALUACION DE PROVEEDORES";
             // 
-            // listadoDeEvaluaciónDeProveedorDeMateriaPrimaParaFarmaEntreFechaToolStripMenuItem
-            // 
-            this.listadoDeEvaluaciónDeProveedorDeMateriaPrimaParaFarmaEntreFechaToolStripMenuItem.Name = "listadoDeEvaluaciónDeProveedorDeMateriaPrimaParaFarmaEntreFechaToolStripMenuItem";
-            this.listadoDeEvaluaciónDeProveedorDeMateriaPrimaParaFarmaEntreFechaToolStripMenuItem.Size = new System.Drawing.Size(497, 22);
-            this.listadoDeEvaluaciónDeProveedorDeMateriaPrimaParaFarmaEntreFechaToolStripMenuItem.Text = "Listado de Evaluación Actual de Proveedores de Farma";
-            this.listadoDeEvaluaciónDeProveedorDeMateriaPrimaParaFarmaEntreFechaToolStripMenuItem.Click += new System.EventHandler(this.listadoDeEvaluaciónDeProveedorDeMateriaPrimaParaFarmaEntreFechaToolStripMenuItem_Click);
-            // 
             // Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(784, 562);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.panel1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Inicio";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -322,6 +331,7 @@
         private System.Windows.Forms.ToolStripMenuItem actDeEvaluaciónSemestralDeProveedoresDeMateriaPrimaParaFarmaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem listadoDeEvaluaciónDeProveedoresDeMateriaPrimaParaFarmaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem listadoDeEvaluaciónDeProveedorDeMateriaPrimaParaFarmaEntreFechaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem evaluaciónDeProveedoresDeEnsayosToolStripMenuItem;
     }
 }
 

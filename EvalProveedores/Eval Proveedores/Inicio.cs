@@ -148,5 +148,11 @@ namespace Eval_Proveedores
             Listados.ListadoProvMPFarma.Inicio frm = new Listados.ListadoProvMPFarma.Inicio();
             frm.Show(this);
         }
+
+        private void evaluaciónDeProveedoresDeEnsayosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EvaluacionesProveedoresEnsayos frm = new EvaluacionesProveedoresEnsayos();
+            frm.Show(this);
+        }
     }
 }
