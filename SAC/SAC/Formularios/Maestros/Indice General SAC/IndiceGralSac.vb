@@ -161,20 +161,7 @@ Public Class IndiceGralSac : Implements INuevoSAC, IExportarIndice, IExportarSac
                                  " LEFT OUTER JOIN ResponsableSac rs2 ON rs2.Codigo = cs.ResponsableDestino " &
                                  " " & WWhere & " " & WOrderBy)
 
-        'dgvListado.DataSource = WDatosSac
-
-        dgvListado.Rows.Clear()
-
-        For Each row As DataRow In WDatosSac.Rows
-            Dim i = dgvListado.Rows.Add
-
-            With dgvListado.Rows(i)
-                For Each c As DataGridViewColumn In dgvListado.Columns()
-                    .Cells(c.Name).Value = OrDefault(row.Item(c.Name), "")
-                Next
-            End With
-
-        Next
+        dgvListado.DataSource = WDatosSac
 
         dgvListado.GetType.InvokeMember("DoubleBuffered", BindingFlags.NonPublic Or BindingFlags.Instance Or BindingFlags.SetProperty, Nothing, dgvListado, New Object() {True})
 
@@ -429,79 +416,10 @@ Public Class IndiceGralSac : Implements INuevoSAC, IExportarIndice, IExportarSac
 
 
     Private Sub txtBuscador_KeyUp(sender As Object, e As KeyEventArgs) Handles txtBuscador.KeyUp
-        '
-        ' Chequeamos que tenga un año indicado, sino indicamos por defecto el año actual.
-        '
-        If txtAnio.Text.Length < 4 Or txtAnio.Text.Trim = "" Then txtAnio.Text = Date.Now.ToString("yyyy")
-        If txtHastaAnio.Text.Length < 4 Or txtHastaAnio.Text.Trim = "" Then txtHastaAnio.Text = txtAnio.Text
+        
+        Dim tabla As DataTable = TryCast(dgvListado.DataSource, DataTable)
 
-
-        '
-        ' Armamos los campos de consulta.
-        '
-        Dim WCentros As String = _GenerarStringConsulta(clbCentros)
-        Dim WTiposSolicitud As String = _GenerarStringConsulta(clbTiposSolicitud)
-        Dim WEmisores As String = _GenerarStringConsulta(clbEmisores)
-        Dim WResponsables As String = _GenerarStringConsulta(clbResponsables)
-        Dim WEstados As String = _GenerarStringConsultaII(clbEstados)
-        Dim WOrigenes As String = _GenerarStringConsultaII(clbOrigenes)
-
-        '
-        ' Armamos los campos de Ordenamiento.
-        '
-        Dim WOrdenI As String = _GenerarStringOrdenamiento(cmbOrdenI)
-        Dim WOrdenII As String = _GenerarStringOrdenamiento(cmbOrdenII)
-        Dim WOrdenIII As String = _GenerarStringOrdenamiento(cmbOrdenIII)
-
-        Dim WWhere As String = String.Format("WHERE cs.Centro IN ({0}) And cs.Tipo IN ({1}) And cs.ResponsableEmisor IN ({2}) " &
-                                             " And cs.ResponsableDestino IN ({3}) And cs.Estado IN ({4}) And cs.Origen IN ({5}) And cs.Ano BETWEEN '{6}' And '{7}' AND (Referencia LIKE '%" & txtBuscador.Text & "%' or Titulo LIKE '%" & txtBuscador.Text & "%') ",
-                                             WCentros, WTiposSolicitud, WEmisores, WResponsables, WEstados, WOrigenes, txtAnio.Text, txtHastaAnio.Text)
-
-        '
-        ' Eliminamos las posibilidades de colapso entre los ordenamientos.
-        '
-        If WOrdenI.Contains(WOrdenII) Then WOrdenII = ""
-        If WOrdenI.Contains(WOrdenIII) Then WOrdenIII = ""
-
-        If WOrdenII.Contains(WOrdenIII) Then WOrdenIII = ""
-
-        '
-        ' Armamos la cadena de Ordenamiento.
-        '
-        Dim WOrderBy = "ORDER BY cs.Ano desc, "
-
-        If WOrdenI.Trim <> "" Then WOrderBy &= WOrdenI & " ,"
-        If WOrdenII.Trim <> "" Then WOrderBy &= WOrdenII & " Desc,"
-        If WOrdenIII.Trim <> "" Then WOrderBy &= WOrdenIII & ","
-
-        WOrderBy = WOrderBy.Remove(WOrderBy.Length - 1, 1)
-
-        WDatosSac = GetAll("SELECT cs.Tipo As idTipo, Tipo = CASE WHEN ISNULL(t.Abreviatura, '') = '' THEN LTRIM(RTRIM(t.Descripcion)) ELSE LTRIM(RTRIM(t.Abreviatura)) END, cs.Ano As Anio, cs.Fecha, cs.Numero, LTRIM(RTRIM(cs.Referencia)) Referencia, " &
-                                 " Estado = CASE cs.Estado WHEN 1 THEN 'Iniciada' WHEN 2 THEN 'Investig.' WHEN 3 THEN 'Implement.' WHEN 4 THEN 'Implem. A Ver.' WHEN 5 THEN 'Implem. Verif.' ELSE 'Cerrada' END, " &
-                                 " Origen = CASE cs.Origen WHEN 1 THEN 'Auditoría' WHEN 2 THEN 'Reclamo' WHEN 3 THEN 'I. No Conf.' WHEN 4 THEN 'Proc./Sist.' WHEN 5 THEN 'Otro' END, " &
-                                 " LTRIM(RTRIM(cs.Titulo)) Titulo, LTRIM(RTRIM(ce.Descripcion)) Centro, LTRIM(RTRIM(rs.Descripcion)) Emisor, LTRIM(RTRIM(rs2.Descripcion)) Responsable " &
-                                 " FROM CargaSac As cs INNER JOIN TipoSac t ON t.Codigo = cs.Tipo " &
-                                 " LEFT OUTER JOIN CentroSac ce ON ce.Codigo = cs.Centro " &
-                                 " LEFT OUTER JOIN ResponsableSac rs ON rs.Codigo = cs.ResponsableEmisor " &
-                                 " LEFT OUTER JOIN ResponsableSac rs2 ON rs2.Codigo = cs.ResponsableDestino " &
-                                 " " & WWhere & " " & WOrderBy)
-
-        'dgvListado.DataSource = WDatosSac
-
-        dgvListado.Rows.Clear()
-
-        For Each row As DataRow In WDatosSac.Rows
-            Dim i = dgvListado.Rows.Add
-
-            With dgvListado.Rows(i)
-                For Each c As DataGridViewColumn In dgvListado.Columns()
-                    .Cells(c.Name).Value = OrDefault(row.Item(c.Name), "")
-                Next
-            End With
-
-        Next
-
-        dgvListado.GetType.InvokeMember("DoubleBuffered", BindingFlags.NonPublic Or BindingFlags.Instance Or BindingFlags.SetProperty, Nothing, dgvListado, New Object() {True})
+        If tabla IsNot Nothing Then tabla.DefaultView.RowFilter = String.Format("Referencia LIKE '%{0}%' OR Titulo LIKE '%{0}%'", txtBuscador.Text)
 
     End Sub
 
@@ -704,52 +622,37 @@ Public Class IndiceGralSac : Implements INuevoSAC, IExportarIndice, IExportarSac
             .Add("Total")
         End With
 
-        TablaEstadistica.Rows.Add("SAC", 0, 0, 0, 0, 0, 0)
+        Dim WTipos As DataTable = New DataView(TryCast(dgvListado.DataSource, DataTable)).ToTable(True, "Tipo")
 
-        Dim Existe As String = "N"
+        For Each row As Datarow In WTipos.Rows
+            TablaEstadistica.Rows.Add(row.Item("Tipo"), 0, 0, 0, 0, 0, 0)
+        Next
 
         For Each row As DataGridViewRow In dgvListado.Rows
-            Dim TipoABuscar As String = row.Cells("Tipo").Value
-            For i = 0 To TablaEstadistica.Rows.Count - 1
-                If TablaEstadistica.Rows(i).Item("Tipo") = row.Cells("Tipo").Value Then
-                    Existe = "S"
-                End If
+
+            For Each r As DataRow In TablaEstadistica.Rows
+                With r
+
+                    Dim WEstado As String = OrDefault(row.Cells("Estado").Value, "")
+
+                    If .Item("Tipo") = row.Cells("Tipo").Value Then
+
+                        Dim WNombreColumna = WEstado.Replace("Implem.", "Imple.").Replace(" ", "")
+
+                        If TablaEstadistica.Columns(WNombreColumna) IsNot Nothing Then .Item(WNombreColumna) += 1
+
+                    End If
+                End With
             Next
 
-            If Existe = "N" Then
-                TablaEstadistica.Rows.Add(row.Cells("Tipo").Value, 0, 0, 0, 0, 0, 0)
-            End If
-
-            For i = 0 To TablaEstadistica.Rows.Count - 1
-                If TablaEstadistica.Rows(i).Item("Tipo") = row.Cells("Tipo").Value Then
-                    If (row.Cells("Estado").Value) = "Iniciada" Then
-                        TablaEstadistica.Rows(i).Item("Iniciada") += 1
-                    End If
-                    If (row.Cells("Estado").Value) = "Investig." Then
-                        TablaEstadistica.Rows(i).Item("Investig.") += 1
-                    End If
-                    If (row.Cells("Estado").Value) = "Implement." Then
-                        TablaEstadistica.Rows(i).Item("Implement.") += 1
-                    End If
-                    If (row.Cells("Estado").Value) = "Implem. A Ver." Then
-                        TablaEstadistica.Rows(i).Item("Imple.Aver.") += 1
-                    End If
-                    If (row.Cells("Estado").Value) = "Implem. Verif." Then
-                        TablaEstadistica.Rows(i).Item("Imple.Verif.") += 1
-                    End If
-                    If (row.Cells("Estado").Value) = "Cerrada" Then
-                        TablaEstadistica.Rows(i).Item("Cerrada") += 1
-                    End If
-                    Existe = "N"
-                End If
-            Next
         Next
-        For i = 0 To TablaEstadistica.Rows.Count - 1
-            With TablaEstadistica.Rows(i)
+
+        For Each row As Datarow In TablaEstadistica.Rows
+            With row
                 .Item("Total") = Val(.Item("Iniciada")) + Val(.Item("Investig.")) + Val(.Item("Implement.")) + Val(.Item("Imple.Aver.")) + Val(.Item("Imple.Verif.")) + Val(.Item("Cerrada"))
             End With
-
         Next
+
         Return TablaEstadistica
     End Function
 End Class

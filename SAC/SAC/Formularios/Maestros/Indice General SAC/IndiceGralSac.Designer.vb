@@ -26,9 +26,9 @@ Partial Class IndiceGralSac
     <DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -50,6 +50,7 @@ Partial Class IndiceGralSac
         Me.CopiarSóloDatosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.btnEstadistica = New System.Windows.Forms.Button()
         Me.btnExportarVarios = New System.Windows.Forms.Button()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.txtBuscador = New System.Windows.Forms.TextBox()
@@ -60,6 +61,8 @@ Partial Class IndiceGralSac
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.btnNuevaSolicitud = New System.Windows.Forms.Button()
+        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.clbOrigenes = New System.Windows.Forms.CheckedListBox()
         Me.btnCancelar = New System.Windows.Forms.Button()
         Me.btnAceptar = New System.Windows.Forms.Button()
         Me.GroupBox8 = New System.Windows.Forms.GroupBox()
@@ -77,24 +80,21 @@ Partial Class IndiceGralSac
         Me.clbEmisores = New System.Windows.Forms.CheckedListBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.clbTiposSolicitud = New System.Windows.Forms.CheckedListBox()
-        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
-        Me.clbOrigenes = New System.Windows.Forms.CheckedListBox()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.clbEstados = New System.Windows.Forms.CheckedListBox()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.btnEstadistica = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         CType(Me.dgvListado, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.GroupBox9.SuspendLayout()
+        Me.GroupBox5.SuspendLayout()
         Me.GroupBox8.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox7.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
-        Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
@@ -141,25 +141,25 @@ Partial Class IndiceGralSac
         Me.dgvListado.AllowUserToAddRows = False
         Me.dgvListado.AllowUserToDeleteRows = False
         Me.dgvListado.AllowUserToResizeRows = False
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvListado.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvListado.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
         Me.dgvListado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvListado.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Tipo, Me.idTipo, Me.Anio, Me.Numero, Me.Fecha, Me.Estado, Me.Titulo, Me.Referencia, Me.Centro, Me.Origen, Me.Emisor, Me.Responsable})
         Me.dgvListado.ContextMenuStrip = Me.ContextMenuStrip1
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvListado.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvListado.DefaultCellStyle = DataGridViewCellStyle6
         Me.dgvListado.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvListado.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.dgvListado.Location = New System.Drawing.Point(3, 239)
@@ -210,9 +210,9 @@ Partial Class IndiceGralSac
         '
         Me.Fecha.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Fecha.DataPropertyName = "Fecha"
-        DataGridViewCellStyle3.Format = "d"
-        DataGridViewCellStyle3.NullValue = Nothing
-        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle5.Format = "d"
+        DataGridViewCellStyle5.NullValue = Nothing
+        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle5
         Me.Fecha.HeaderText = "Fecha"
         Me.Fecha.Name = "Fecha"
         Me.Fecha.ReadOnly = True
@@ -338,11 +338,20 @@ Partial Class IndiceGralSac
         Me.Panel2.Size = New System.Drawing.Size(1119, 197)
         Me.Panel2.TabIndex = 5
         '
+        'btnEstadistica
+        '
+        Me.btnEstadistica.Location = New System.Drawing.Point(771, 43)
+        Me.btnEstadistica.Name = "btnEstadistica"
+        Me.btnEstadistica.Size = New System.Drawing.Size(115, 33)
+        Me.btnEstadistica.TabIndex = 12
+        Me.btnEstadistica.Text = "Estadistica"
+        Me.btnEstadistica.UseVisualStyleBackColor = True
+        '
         'btnExportarVarios
         '
-        Me.btnExportarVarios.Location = New System.Drawing.Point(632, 156)
+        Me.btnExportarVarios.Location = New System.Drawing.Point(612, 156)
         Me.btnExportarVarios.Name = "btnExportarVarios"
-        Me.btnExportarVarios.Size = New System.Drawing.Size(90, 33)
+        Me.btnExportarVarios.Size = New System.Drawing.Size(147, 33)
         Me.btnExportarVarios.TabIndex = 11
         Me.btnExportarVarios.Text = "Exportar Varios"
         Me.btnExportarVarios.UseVisualStyleBackColor = True
@@ -431,6 +440,26 @@ Partial Class IndiceGralSac
         Me.btnNuevaSolicitud.TabIndex = 6
         Me.btnNuevaSolicitud.Text = "CONSULTA / NUEVA SOLICITUD"
         Me.btnNuevaSolicitud.UseVisualStyleBackColor = True
+        '
+        'GroupBox5
+        '
+        Me.GroupBox5.Controls.Add(Me.clbOrigenes)
+        Me.GroupBox5.Location = New System.Drawing.Point(425, 52)
+        Me.GroupBox5.Name = "GroupBox5"
+        Me.GroupBox5.Size = New System.Drawing.Size(167, 120)
+        Me.GroupBox5.TabIndex = 3
+        Me.GroupBox5.TabStop = False
+        Me.GroupBox5.Text = "Origen"
+        '
+        'clbOrigenes
+        '
+        Me.clbOrigenes.CheckOnClick = True
+        Me.clbOrigenes.FormattingEnabled = True
+        Me.clbOrigenes.Items.AddRange(New Object() {"Total", "Auditoría", "Reclamo", "I. de No Conformidad", "Proceso / Sist", "Otro"})
+        Me.clbOrigenes.Location = New System.Drawing.Point(14, 17)
+        Me.clbOrigenes.Name = "clbOrigenes"
+        Me.clbOrigenes.Size = New System.Drawing.Size(147, 94)
+        Me.clbOrigenes.TabIndex = 2
         '
         'btnCancelar
         '
@@ -593,26 +622,6 @@ Partial Class IndiceGralSac
         Me.clbTiposSolicitud.Size = New System.Drawing.Size(180, 79)
         Me.clbTiposSolicitud.TabIndex = 2
         '
-        'GroupBox5
-        '
-        Me.GroupBox5.Controls.Add(Me.clbOrigenes)
-        Me.GroupBox5.Location = New System.Drawing.Point(425, 52)
-        Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(167, 120)
-        Me.GroupBox5.TabIndex = 3
-        Me.GroupBox5.TabStop = False
-        Me.GroupBox5.Text = "Origen"
-        '
-        'clbOrigenes
-        '
-        Me.clbOrigenes.CheckOnClick = True
-        Me.clbOrigenes.FormattingEnabled = True
-        Me.clbOrigenes.Items.AddRange(New Object() {"Total", "Auditoría", "Reclamo", "I. de No Conformidad", "Proceso / Sist", "Otro"})
-        Me.clbOrigenes.Location = New System.Drawing.Point(14, 17)
-        Me.clbOrigenes.Name = "clbOrigenes"
-        Me.clbOrigenes.Size = New System.Drawing.Size(147, 94)
-        Me.clbOrigenes.TabIndex = 2
-        '
         'GroupBox4
         '
         Me.GroupBox4.Controls.Add(Me.clbEstados)
@@ -648,15 +657,6 @@ Partial Class IndiceGralSac
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(1145, 495)
         Me.TableLayoutPanel1.TabIndex = 4
         '
-        'btnEstadistica
-        '
-        Me.btnEstadistica.Location = New System.Drawing.Point(771, 43)
-        Me.btnEstadistica.Name = "btnEstadistica"
-        Me.btnEstadistica.Size = New System.Drawing.Size(115, 33)
-        Me.btnEstadistica.TabIndex = 12
-        Me.btnEstadistica.Text = "Estadistica"
-        Me.btnEstadistica.UseVisualStyleBackColor = True
-        '
         'IndiceGralSac
         '
         Me.ClientSize = New System.Drawing.Size(1145, 545)
@@ -675,13 +675,13 @@ Partial Class IndiceGralSac
         Me.Panel2.PerformLayout()
         Me.GroupBox9.ResumeLayout(False)
         Me.GroupBox9.PerformLayout()
+        Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox8.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.GroupBox7.ResumeLayout(False)
         Me.GroupBox6.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox4.ResumeLayout(False)
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.ResumeLayout(False)
