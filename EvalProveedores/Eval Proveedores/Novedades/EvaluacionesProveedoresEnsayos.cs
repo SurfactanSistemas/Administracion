@@ -18,7 +18,14 @@ namespace Eval_Proveedores.Novedades
 
         private void EvaluacionesProveedoresEnsayos_Load(object sender, EventArgs e)
         {
-            DataTable datos = ConsultasVarias.Clases.Query.GetAll("SELECT e.Proveedor, p.Nombre, Periodo = (dbo.LPAD(e.Mes, 2) + '/' + cast(e.Ano as varchar(4))), e.Mes, e.Ano, CASE WHEN ISNULL(e.Evaluador, '') = '' THEN 'NO INFORMADO' ELSE e.Evaluador END , e.Promedio FROM EvaluaI e INNER JOIN Proveedor p ON p.Proveedor= e.Proveedor order by p.Nombre, e.Ano DESC, e.Mes DESC");
+            _CargarDatos();
+        }
+
+        private void _CargarDatos()
+        {
+            DataTable datos =
+                ConsultasVarias.Clases.Query.GetAll(
+                    "SELECT ee.Proveedor, p.Nombre, ee.Periodo, ee.Mes, ee.Ano, ee.Fecha, ee.Vencimiento, ee.Evaluador, ee.Calificacion FROM EvaluaEnsayos ee INNER JOIN Proveedor p ON p.Proveedor= ee.Proveedor order by p.Nombre, ee.Ano DESC, ee.Mes DESC");
 
             dgvEvaluaciones.DataSource = datos;
         }
@@ -45,6 +52,25 @@ namespace Eval_Proveedores.Novedades
             EvaluacionProveedorEnsayos frm = new EvaluacionProveedorEnsayos();
 
             frm.Show(this);
+        }
+
+        private void dgvEvaluaciones_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+
+            if (dgvEvaluaciones.CurrentRow != null)
+            {
+                string Proveedor = dgvEvaluaciones.CurrentRow.Cells["Proveedor"].Value.ToString();
+                string Mes = dgvEvaluaciones.CurrentRow.Cells["Mes"].Value.ToString();
+                string Ano = dgvEvaluaciones.CurrentRow.Cells["Ano"].Value.ToString();
+
+                EvaluacionProveedorEnsayos frm = new EvaluacionProveedorEnsayos(Proveedor, Mes, Ano);
+
+                frm.ShowDialog(this);
+
+                _CargarDatos();
+            }
+
         }
 
     }

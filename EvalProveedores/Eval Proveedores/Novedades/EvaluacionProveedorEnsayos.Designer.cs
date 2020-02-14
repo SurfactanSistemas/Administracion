@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -50,13 +50,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.dgvDatos = new ConsultasVarias.DBDataGridView();
-            this.Parametros = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Criterio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Calificacion1 = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.Calificacion2 = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.Calificacion3 = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.gbSectores = new System.Windows.Forms.GroupBox();
             this.cmbSector3 = new System.Windows.Forms.ComboBox();
             this.cmbSector2 = new System.Windows.Forms.ComboBox();
             this.cmbSector1 = new System.Windows.Forms.ComboBox();
@@ -74,13 +68,23 @@
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnImprimir = new System.Windows.Forms.Button();
             this.btnCerrar = new System.Windows.Forms.Button();
+            this.lblCalificacion1 = new System.Windows.Forms.Label();
+            this.lblCalificacion2 = new System.Windows.Forms.Label();
+            this.lblCalificacion3 = new System.Windows.Forms.Label();
+            this.dgvDatos = new ConsultasVarias.DBDataGridView();
+            this.Parametros = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Criterio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Calificacion1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Calificacion2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Calificacion3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmbAux = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
-            this.groupBox2.SuspendLayout();
+            this.gbSectores.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -170,11 +174,10 @@
             // txtEvaluador
             // 
             this.txtEvaluador.Location = new System.Drawing.Point(523, 41);
-            this.txtEvaluador.MaxLength = 11;
+            this.txtEvaluador.MaxLength = 30;
             this.txtEvaluador.Name = "txtEvaluador";
             this.txtEvaluador.Size = new System.Drawing.Size(409, 20);
             this.txtEvaluador.TabIndex = 6;
-            this.txtEvaluador.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // txtProveedor
             // 
@@ -257,110 +260,17 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "PROVEEDOR";
             // 
-            // dgvDatos
+            // gbSectores
             // 
-            this.dgvDatos.AllowUserToAddRows = false;
-            this.dgvDatos.AllowUserToDeleteRows = false;
-            this.dgvDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDatos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Parametros,
-            this.Criterio,
-            this.Calificacion1,
-            this.Calificacion2,
-            this.Calificacion3});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(217)))), ((int)(((byte)(232)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(170)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDatos.DefaultCellStyle = dataGridViewCellStyle6;
-            this.dgvDatos.DoubleBuffered = true;
-            this.dgvDatos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dgvDatos.Location = new System.Drawing.Point(5, 157);
-            this.dgvDatos.Name = "dgvDatos";
-            this.dgvDatos.OrdenamientoColumnasHabilitado = true;
-            this.dgvDatos.RowHeadersWidth = 15;
-            this.dgvDatos.RowTemplate.Height = 20;
-            this.dgvDatos.ShowCellToolTips = false;
-            this.dgvDatos.SinClickDerecho = false;
-            this.dgvDatos.Size = new System.Drawing.Size(946, 123);
-            this.dgvDatos.TabIndex = 6;
-            this.dgvDatos.TabStop = false;
-            // 
-            // Parametros
-            // 
-            this.Parametros.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Parametros.DataPropertyName = "Parametros";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F);
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Parametros.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Parametros.HeaderText = "Parámetros";
-            this.Parametros.Name = "Parametros";
-            this.Parametros.ReadOnly = true;
-            this.Parametros.Width = 85;
-            // 
-            // Criterio
-            // 
-            this.Criterio.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Criterio.DataPropertyName = "Criterio";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Criterio.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Criterio.HeaderText = "Criterios";
-            this.Criterio.Name = "Criterio";
-            this.Criterio.ReadOnly = true;
-            // 
-            // Calificacion1
-            // 
-            this.Calificacion1.DataPropertyName = "Calificacion1";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.Calificacion1.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Calificacion1.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
-            this.Calificacion1.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.Calificacion1.HeaderText = "Calificacion";
-            this.Calificacion1.Name = "Calificacion1";
-            this.Calificacion1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Calificacion1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // Calificacion2
-            // 
-            this.Calificacion2.DataPropertyName = "Calificacion2";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.Calificacion2.DefaultCellStyle = dataGridViewCellStyle4;
-            this.Calificacion2.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
-            this.Calificacion2.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.Calificacion2.HeaderText = "Calificación";
-            this.Calificacion2.Name = "Calificacion2";
-            this.Calificacion2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Calificacion2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // Calificacion3
-            // 
-            this.Calificacion3.DataPropertyName = "Calificacion3";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.Calificacion3.DefaultCellStyle = dataGridViewCellStyle5;
-            this.Calificacion3.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
-            this.Calificacion3.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.Calificacion3.HeaderText = "Calificación";
-            this.Calificacion3.Name = "Calificacion3";
-            this.Calificacion3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Calificacion3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.cmbSector3);
-            this.groupBox2.Controls.Add(this.cmbSector2);
-            this.groupBox2.Controls.Add(this.cmbSector1);
-            this.groupBox2.Controls.Add(this.label8);
-            this.groupBox2.Location = new System.Drawing.Point(523, 118);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(428, 36);
-            this.groupBox2.TabIndex = 7;
-            this.groupBox2.TabStop = false;
+            this.gbSectores.Controls.Add(this.cmbSector3);
+            this.gbSectores.Controls.Add(this.cmbSector2);
+            this.gbSectores.Controls.Add(this.cmbSector1);
+            this.gbSectores.Controls.Add(this.label8);
+            this.gbSectores.Location = new System.Drawing.Point(523, 118);
+            this.gbSectores.Name = "gbSectores";
+            this.gbSectores.Size = new System.Drawing.Size(428, 36);
+            this.gbSectores.TabIndex = 7;
+            this.gbSectores.TabStop = false;
             // 
             // cmbSector3
             // 
@@ -429,7 +339,7 @@
             // 
             this.groupBox3.Controls.Add(this.lblCalificacion);
             this.groupBox3.Controls.Add(this.label9);
-            this.groupBox3.Location = new System.Drawing.Point(630, 282);
+            this.groupBox3.Location = new System.Drawing.Point(630, 300);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(314, 36);
             this.groupBox3.TabIndex = 7;
@@ -460,9 +370,9 @@
             // 
             this.groupBox4.Controls.Add(this.txtObsProveedor);
             this.groupBox4.Controls.Add(this.label11);
-            this.groupBox4.Location = new System.Drawing.Point(8, 315);
+            this.groupBox4.Location = new System.Drawing.Point(8, 338);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(464, 181);
+            this.groupBox4.Size = new System.Drawing.Size(464, 158);
             this.groupBox4.TabIndex = 8;
             this.groupBox4.TabStop = false;
             // 
@@ -470,10 +380,11 @@
             // 
             this.txtObsProveedor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtObsProveedor.Location = new System.Drawing.Point(6, 36);
+            this.txtObsProveedor.Location = new System.Drawing.Point(6, 40);
             this.txtObsProveedor.Multiline = true;
             this.txtObsProveedor.Name = "txtObsProveedor";
-            this.txtObsProveedor.Size = new System.Drawing.Size(452, 138);
+            this.txtObsProveedor.ReadOnly = true;
+            this.txtObsProveedor.Size = new System.Drawing.Size(452, 111);
             this.txtObsProveedor.TabIndex = 11;
             // 
             // label11
@@ -482,7 +393,7 @@
             this.label11.BackColor = System.Drawing.Color.Cyan;
             this.label11.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(6, 10);
+            this.label11.Location = new System.Drawing.Point(6, 14);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(452, 23);
             this.label11.TabIndex = 1;
@@ -493,9 +404,9 @@
             // 
             this.groupBox5.Controls.Add(this.txtObsEvaluacion);
             this.groupBox5.Controls.Add(this.label12);
-            this.groupBox5.Location = new System.Drawing.Point(482, 315);
+            this.groupBox5.Location = new System.Drawing.Point(482, 338);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(464, 181);
+            this.groupBox5.Size = new System.Drawing.Size(464, 158);
             this.groupBox5.TabIndex = 8;
             this.groupBox5.TabStop = false;
             // 
@@ -503,10 +414,10 @@
             // 
             this.txtObsEvaluacion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtObsEvaluacion.Location = new System.Drawing.Point(6, 36);
+            this.txtObsEvaluacion.Location = new System.Drawing.Point(6, 40);
             this.txtObsEvaluacion.Multiline = true;
             this.txtObsEvaluacion.Name = "txtObsEvaluacion";
-            this.txtObsEvaluacion.Size = new System.Drawing.Size(452, 138);
+            this.txtObsEvaluacion.Size = new System.Drawing.Size(452, 111);
             this.txtObsEvaluacion.TabIndex = 12;
             // 
             // label12
@@ -515,7 +426,7 @@
             this.label12.BackColor = System.Drawing.Color.Cyan;
             this.label12.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(6, 10);
+            this.label12.Location = new System.Drawing.Point(6, 14);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(452, 23);
             this.label12.TabIndex = 1;
@@ -525,17 +436,18 @@
             // btnGrabar
             // 
             this.btnGrabar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGrabar.Location = new System.Drawing.Point(7, 284);
+            this.btnGrabar.Location = new System.Drawing.Point(7, 305);
             this.btnGrabar.Name = "btnGrabar";
             this.btnGrabar.Size = new System.Drawing.Size(142, 31);
             this.btnGrabar.TabIndex = 7;
             this.btnGrabar.Text = "GRABAR";
             this.btnGrabar.UseVisualStyleBackColor = true;
+            this.btnGrabar.Click += new System.EventHandler(this.btnGrabar_Click);
             // 
             // btnLimpiar
             // 
             this.btnLimpiar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLimpiar.Location = new System.Drawing.Point(155, 284);
+            this.btnLimpiar.Location = new System.Drawing.Point(155, 305);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(142, 31);
             this.btnLimpiar.TabIndex = 8;
@@ -546,7 +458,7 @@
             // btnImprimir
             // 
             this.btnImprimir.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnImprimir.Location = new System.Drawing.Point(303, 284);
+            this.btnImprimir.Location = new System.Drawing.Point(303, 305);
             this.btnImprimir.Name = "btnImprimir";
             this.btnImprimir.Size = new System.Drawing.Size(142, 31);
             this.btnImprimir.TabIndex = 9;
@@ -556,7 +468,7 @@
             // btnCerrar
             // 
             this.btnCerrar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCerrar.Location = new System.Drawing.Point(451, 284);
+            this.btnCerrar.Location = new System.Drawing.Point(451, 305);
             this.btnCerrar.Name = "btnCerrar";
             this.btnCerrar.Size = new System.Drawing.Size(142, 31);
             this.btnCerrar.TabIndex = 10;
@@ -564,11 +476,159 @@
             this.btnCerrar.UseVisualStyleBackColor = true;
             this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
             // 
+            // lblCalificacion1
+            // 
+            this.lblCalificacion1.BackColor = System.Drawing.Color.Cyan;
+            this.lblCalificacion1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblCalificacion1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCalificacion1.Location = new System.Drawing.Point(654, 282);
+            this.lblCalificacion1.Name = "lblCalificacion1";
+            this.lblCalificacion1.Size = new System.Drawing.Size(97, 17);
+            this.lblCalificacion1.TabIndex = 0;
+            this.lblCalificacion1.Text = "0";
+            this.lblCalificacion1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // lblCalificacion2
+            // 
+            this.lblCalificacion2.BackColor = System.Drawing.Color.Cyan;
+            this.lblCalificacion2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblCalificacion2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCalificacion2.Location = new System.Drawing.Point(754, 282);
+            this.lblCalificacion2.Name = "lblCalificacion2";
+            this.lblCalificacion2.Size = new System.Drawing.Size(97, 17);
+            this.lblCalificacion2.TabIndex = 0;
+            this.lblCalificacion2.Text = "0";
+            this.lblCalificacion2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // lblCalificacion3
+            // 
+            this.lblCalificacion3.BackColor = System.Drawing.Color.Cyan;
+            this.lblCalificacion3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblCalificacion3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCalificacion3.Location = new System.Drawing.Point(854, 282);
+            this.lblCalificacion3.Name = "lblCalificacion3";
+            this.lblCalificacion3.Size = new System.Drawing.Size(97, 17);
+            this.lblCalificacion3.TabIndex = 0;
+            this.lblCalificacion3.Text = "0";
+            this.lblCalificacion3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // dgvDatos
+            // 
+            this.dgvDatos.AllowUserToAddRows = false;
+            this.dgvDatos.AllowUserToDeleteRows = false;
+            this.dgvDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDatos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Parametros,
+            this.Criterio,
+            this.Calificacion1,
+            this.Calificacion2,
+            this.Calificacion3});
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle24.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(217)))), ((int)(((byte)(232)))));
+            dataGridViewCellStyle24.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle24.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle24.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(170)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle24.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDatos.DefaultCellStyle = dataGridViewCellStyle24;
+            this.dgvDatos.DoubleBuffered = true;
+            this.dgvDatos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.dgvDatos.Location = new System.Drawing.Point(5, 157);
+            this.dgvDatos.Name = "dgvDatos";
+            this.dgvDatos.OrdenamientoColumnasHabilitado = true;
+            this.dgvDatos.ReadOnly = true;
+            this.dgvDatos.RowHeadersWidth = 15;
+            this.dgvDatos.RowTemplate.Height = 20;
+            this.dgvDatos.ShowCellToolTips = false;
+            this.dgvDatos.SinClickDerecho = false;
+            this.dgvDatos.Size = new System.Drawing.Size(946, 123);
+            this.dgvDatos.TabIndex = 6;
+            this.dgvDatos.TabStop = false;
+            this.dgvDatos.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDatos_CellEnter);
+            // 
+            // Parametros
+            // 
+            this.Parametros.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Parametros.DataPropertyName = "Parametros";
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle19.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F);
+            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Parametros.DefaultCellStyle = dataGridViewCellStyle19;
+            this.Parametros.HeaderText = "Parámetros";
+            this.Parametros.Name = "Parametros";
+            this.Parametros.ReadOnly = true;
+            this.Parametros.Width = 85;
+            // 
+            // Criterio
+            // 
+            this.Criterio.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Criterio.DataPropertyName = "Criterio";
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Criterio.DefaultCellStyle = dataGridViewCellStyle20;
+            this.Criterio.HeaderText = "Criterios";
+            this.Criterio.Name = "Criterio";
+            this.Criterio.ReadOnly = true;
+            // 
+            // Calificacion1
+            // 
+            this.Calificacion1.DataPropertyName = "Calificacion1";
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.Calificacion1.DefaultCellStyle = dataGridViewCellStyle21;
+            this.Calificacion1.HeaderText = "Calificacion";
+            this.Calificacion1.Name = "Calificacion1";
+            this.Calificacion1.ReadOnly = true;
+            this.Calificacion1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // Calificacion2
+            // 
+            this.Calificacion2.DataPropertyName = "Calificacion2";
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.Calificacion2.DefaultCellStyle = dataGridViewCellStyle22;
+            this.Calificacion2.HeaderText = "Calificación";
+            this.Calificacion2.Name = "Calificacion2";
+            this.Calificacion2.ReadOnly = true;
+            this.Calificacion2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // Calificacion3
+            // 
+            this.Calificacion3.DataPropertyName = "Calificacion3";
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.Calificacion3.DefaultCellStyle = dataGridViewCellStyle23;
+            this.Calificacion3.HeaderText = "Calificación";
+            this.Calificacion3.Name = "Calificacion3";
+            this.Calificacion3.ReadOnly = true;
+            this.Calificacion3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // cmbAux
+            // 
+            this.cmbAux.BackColor = System.Drawing.SystemColors.Highlight;
+            this.cmbAux.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbAux.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbAux.FormattingEnabled = true;
+            this.cmbAux.Items.AddRange(new object[] {
+            "",
+            "CUMPLE",
+            "PARCIAL",
+            "NO CUMPLE",
+            "NO APLICA"});
+            this.cmbAux.Location = new System.Drawing.Point(421, 240);
+            this.cmbAux.Name = "cmbAux";
+            this.cmbAux.Size = new System.Drawing.Size(101, 21);
+            this.cmbAux.TabIndex = 11;
+            this.cmbAux.TabStop = false;
+            this.cmbAux.DropDownClosed += new System.EventHandler(this.cmbAux_DropDownClosed);
+            // 
             // EvaluacionProveedorEnsayos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(955, 501);
+            this.Controls.Add(this.cmbAux);
+            this.Controls.Add(this.lblCalificacion3);
+            this.Controls.Add(this.lblCalificacion2);
+            this.Controls.Add(this.lblCalificacion1);
             this.Controls.Add(this.btnCerrar);
             this.Controls.Add(this.btnImprimir);
             this.Controls.Add(this.btnLimpiar);
@@ -576,7 +636,7 @@
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.gbSectores);
             this.Controls.Add(this.dgvDatos);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel1);
@@ -589,15 +649,15 @@
             this.panel1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.gbSectores.ResumeLayout(false);
+            this.gbSectores.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -621,16 +681,11 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lblAviso;
         private ConsultasVarias.DBDataGridView dgvDatos;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox gbSectores;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox cmbSector1;
         private System.Windows.Forms.ComboBox cmbSector3;
         private System.Windows.Forms.ComboBox cmbSector2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Parametros;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Criterio;
-        private System.Windows.Forms.DataGridViewComboBoxColumn Calificacion1;
-        private System.Windows.Forms.DataGridViewComboBoxColumn Calificacion2;
-        private System.Windows.Forms.DataGridViewComboBoxColumn Calificacion3;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label lblCalificacion;
@@ -644,5 +699,14 @@
         private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.Button btnImprimir;
         private System.Windows.Forms.Button btnCerrar;
+        private System.Windows.Forms.Label lblCalificacion1;
+        private System.Windows.Forms.Label lblCalificacion2;
+        private System.Windows.Forms.Label lblCalificacion3;
+        private System.Windows.Forms.ComboBox cmbAux;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Parametros;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Criterio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Calificacion1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Calificacion2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Calificacion3;
     }
 }
