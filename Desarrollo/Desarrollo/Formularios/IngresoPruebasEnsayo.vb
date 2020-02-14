@@ -4647,7 +4647,7 @@ Public Class IngresoPruebasEnsayo
     End Sub
 
     Private Sub dgvArchivos_CellMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgvArchivos.CellMouseDoubleClick
-        If e.RowIndex < 0 Then Exit Sub
+        If e.ColumnIndex < 0 Then Exit Sub
         With dgvArchivos.Rows(e.RowIndex)
             If Not IsNothing(.Cells("RutaArchivo").Value) Then
 
@@ -4857,5 +4857,23 @@ Public Class IngresoPruebasEnsayo
 
     Private Sub Button5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button5.Click
         If Val(txtHojaProduccion.Text) > 0 Then _ImprimirHojaPiloto()
+    End Sub
+
+    Private Sub dgvArchivos_RowHeaderMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgvArchivos.RowHeaderMouseClick
+
+        If MsgBox("¿Seguro de querer eliminar el Archivo indicado?", MsgBoxStyle.YesNo) = MsgBoxResult.No Then Exit Sub
+
+        With dgvArchivos.Rows(e.RowIndex)
+            If Not IsNothing(.Cells("RutaArchivo").Value) Then
+
+                Try
+                    File.Delete(.Cells("RutaArchivo").Value)
+                    _CargarArchivosRelacionados()
+                Catch ex As Exception
+                    MsgBox(ex.Message)
+                End Try
+
+            End If
+        End With
     End Sub
 End Class
