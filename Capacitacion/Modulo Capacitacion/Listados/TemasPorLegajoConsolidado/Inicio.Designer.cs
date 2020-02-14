@@ -37,6 +37,7 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajoConsolidado
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.raPrSectorExcel = new System.Windows.Forms.RadioButton();
             this.rbPorSector = new System.Windows.Forms.RadioButton();
             this.rbPorTema = new System.Windows.Forms.RadioButton();
             this.rbPorLegajo = new System.Windows.Forms.RadioButton();
@@ -72,7 +73,7 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajoConsolidado
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(596, 39);
+            this.panel1.Size = new System.Drawing.Size(604, 39);
             this.panel1.TabIndex = 9;
             // 
             // LBChofer
@@ -94,7 +95,7 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajoConsolidado
             this.panel2.Location = new System.Drawing.Point(0, 39);
             this.panel2.Name = "panel2";
             this.panel2.Padding = new System.Windows.Forms.Padding(7);
-            this.panel2.Size = new System.Drawing.Size(596, 318);
+            this.panel2.Size = new System.Drawing.Size(604, 318);
             this.panel2.TabIndex = 12;
             // 
             // panel3
@@ -114,11 +115,12 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajoConsolidado
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(7, 7);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(582, 304);
+            this.panel3.Size = new System.Drawing.Size(590, 304);
             this.panel3.TabIndex = 0;
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.raPrSectorExcel);
             this.groupBox1.Controls.Add(this.rbPorSector);
             this.groupBox1.Controls.Add(this.rbPorTema);
             this.groupBox1.Controls.Add(this.rbPorLegajo);
@@ -129,10 +131,21 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajoConsolidado
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "AGRUPADO POR";
             // 
+            // raPrSectorExcel
+            // 
+            this.raPrSectorExcel.AutoSize = true;
+            this.raPrSectorExcel.Location = new System.Drawing.Point(398, 24);
+            this.raPrSectorExcel.Name = "raPrSectorExcel";
+            this.raPrSectorExcel.Size = new System.Drawing.Size(95, 17);
+            this.raPrSectorExcel.TabIndex = 1;
+            this.raPrSectorExcel.TabStop = true;
+            this.raPrSectorExcel.Text = "SECTORExcel";
+            this.raPrSectorExcel.UseVisualStyleBackColor = true;
+            // 
             // rbPorSector
             // 
             this.rbPorSector.AutoSize = true;
-            this.rbPorSector.Location = new System.Drawing.Point(423, 24);
+            this.rbPorSector.Location = new System.Drawing.Point(298, 24);
             this.rbPorSector.Name = "rbPorSector";
             this.rbPorSector.Size = new System.Drawing.Size(69, 17);
             this.rbPorSector.TabIndex = 0;
@@ -143,7 +156,7 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajoConsolidado
             // rbPorTema
             // 
             this.rbPorTema.AutoSize = true;
-            this.rbPorTema.Location = new System.Drawing.Point(255, 24);
+            this.rbPorTema.Location = new System.Drawing.Point(204, 24);
             this.rbPorTema.Name = "rbPorTema";
             this.rbPorTema.Size = new System.Drawing.Size(55, 17);
             this.rbPorTema.TabIndex = 0;
@@ -333,7 +346,7 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajoConsolidado
             this.BT_Pantalla.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Pantalla.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Pantalla.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Pantalla.Location = new System.Drawing.Point(161, 253);
+            this.BT_Pantalla.Location = new System.Drawing.Point(165, 253);
             this.BT_Pantalla.Name = "BT_Pantalla";
             this.BT_Pantalla.Size = new System.Drawing.Size(70, 40);
             this.BT_Pantalla.TabIndex = 81;
@@ -347,7 +360,7 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajoConsolidado
             this.BT_Imprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Imprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Imprimir.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Imprimir.Location = new System.Drawing.Point(256, 253);
+            this.BT_Imprimir.Location = new System.Drawing.Point(260, 253);
             this.BT_Imprimir.Name = "BT_Imprimir";
             this.BT_Imprimir.Size = new System.Drawing.Size(70, 40);
             this.BT_Imprimir.TabIndex = 80;
@@ -361,7 +374,7 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajoConsolidado
             this.BT_Salir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Salir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BT_Salir.ForeColor = System.Drawing.SystemColors.Control;
-            this.BT_Salir.Location = new System.Drawing.Point(351, 253);
+            this.BT_Salir.Location = new System.Drawing.Point(355, 253);
             this.BT_Salir.Name = "BT_Salir";
             this.BT_Salir.Size = new System.Drawing.Size(70, 40);
             this.BT_Salir.TabIndex = 79;
@@ -372,7 +385,7 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajoConsolidado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(596, 357);
+            this.ClientSize = new System.Drawing.Size(604, 357);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.MaximizeBox = false;
@@ -422,5 +435,6 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajoConsolidado
         private RadioButton rbPorSector;
         private RadioButton rbPorTema;
         private RadioButton rbPorLegajo;
+        private RadioButton raPrSectorExcel;
     }
 }

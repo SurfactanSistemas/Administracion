@@ -603,8 +603,8 @@ Public Class IndiceGralSac : Implements INuevoSAC, IExportarIndice, IExportarSac
             .Reporte.SetParameterValue(5, TImpleVerif)
             .Reporte.SetParameterValue(6, TCerrados)
 
-            .Imprimir()
-            '.Mostrar()
+            '.Imprimir()
+            .Mostrar()
         End With
 
     End Sub

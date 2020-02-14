@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
@@ -136,8 +137,9 @@ namespace Modulo_Capacitacion.Listados.TemasPorLegajoConsolidado
             if (rbPorLegajo.Checked) rpt = new Reporte();
             if (rbPorSector.Checked) rpt = new ReportePorSector();
             if (rbPorTema.Checked) rpt = new ReportePorTema();
+            if (raPrSectorExcel.Checked) rpt = new ReporteParaExel();
 
-            ImpreInforme Impre = new ImpreInforme(dtInforme, _TipoImpre, rpt);
+             ImpreInforme Impre = new ImpreInforme(dtInforme, _TipoImpre, rpt);
             return Impre;
         }
 

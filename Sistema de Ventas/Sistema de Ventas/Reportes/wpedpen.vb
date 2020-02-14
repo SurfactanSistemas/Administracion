@@ -18,7 +18,7 @@ Imports System
 Imports System.ComponentModel
 
 
-Public Class etinuevanormachica
+Public Class wpedpen
     Inherits ReportClass
     
     Public Sub New()
@@ -27,7 +27,7 @@ Public Class etinuevanormachica
     
     Public Overrides Property ResourceName() As String
         Get
-            Return "etinuevanormachica.rpt"
+            Return "wpedpen.rpt"
         End Get
         Set
             'Do nothing
@@ -45,7 +45,7 @@ Public Class etinuevanormachica
     
     Public Overrides Property FullResourceName() As String
         Get
-            Return "CentroImpresion.etinuevanormachica.rpt"
+            Return "Sistema_de_Ventas.wpedpen.rpt"
         End Get
         Set
             'Do nothing
@@ -70,7 +70,7 @@ Public Class etinuevanormachica
     
     <Browsable(false),  _
      DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property GroupHeaderSection1() As CrystalDecisions.CrystalReports.Engine.Section
+    Public ReadOnly Property GroupHeaderSection2() As CrystalDecisions.CrystalReports.Engine.Section
         Get
             Return Me.ReportDefinition.Sections(2)
         End Get
@@ -86,7 +86,7 @@ Public Class etinuevanormachica
     
     <Browsable(false),  _
      DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property GroupFooterSection1() As CrystalDecisions.CrystalReports.Engine.Section
+    Public ReadOnly Property GroupFooterSection2() As CrystalDecisions.CrystalReports.Engine.Section
         Get
             Return Me.ReportDefinition.Sections(4)
         End Get
@@ -107,10 +107,26 @@ Public Class etinuevanormachica
             Return Me.ReportDefinition.Sections(6)
         End Get
     End Property
+    
+    <Browsable(false),  _
+     DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
+    Public ReadOnly Property Parameter_Empresa() As CrystalDecisions.[Shared].IParameterField
+        Get
+            Return Me.DataDefinition.ParameterFields(0)
+        End Get
+    End Property
+    
+    <Browsable(false),  _
+     DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
+    Public ReadOnly Property Parameter_Titulo() As CrystalDecisions.[Shared].IParameterField
+        Get
+            Return Me.DataDefinition.ParameterFields(1)
+        End Get
+    End Property
 End Class
 
 <System.Drawing.ToolboxBitmapAttribute(GetType(CrystalDecisions.[Shared].ExportOptions), "report.bmp")>  _
-Public Class Cachedetinuevanormachica
+Public Class Cachedwpedpen
     Inherits Component
     Implements ICachedReport
     
@@ -152,7 +168,7 @@ Public Class Cachedetinuevanormachica
     End Property
     
     Public Overridable Function CreateReport() As CrystalDecisions.CrystalReports.Engine.ReportDocument Implements CrystalDecisions.ReportSource.ICachedReport.CreateReport
-        Dim rpt As etinuevanormachica = New etinuevanormachica()
+        Dim rpt As wpedpen = New wpedpen()
         rpt.Site = Me.Site
         Return rpt
     End Function
