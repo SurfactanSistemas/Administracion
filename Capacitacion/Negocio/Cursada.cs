@@ -139,7 +139,7 @@ namespace Negocio
         public DataTable ListarInformeCons(string DesdeFecha, string HastaFecha, int DesdeTipo, int HastaTipo, string CondicionesExtras = "")
         {
             Conexion repo = new Conexion();
-            string consulta = "SELECT C.Codigo, C.Curso, C.Fecha, C.OrdFecha, C.Horas, C.Legajo, RTRIM(L.Descripcion) As DesLegajo, C.Observaciones, C.TipoCursada, C.Tema, T.Descripcion, Cur.Descripcion, L.Dni from Cursadas C LEFT OUTER JOIN Tema Cur ON Cur.Curso = c.Curso AND Cur.Tema = C.Tema LEFT OUTER JOIN Curso T ON T.Codigo = C.Curso LEFT OUTER JOIN Legajo L ON L.Codigo = C.Legajo AND L.Renglon = 1 where C.OrdFecha >= '" 
+            string consulta = "SELECT C.Codigo, C.Curso, C.Fecha, C.OrdFecha, C.Horas, C.Legajo, RTRIM(L.Descripcion) As DesLegajo, C.Observaciones, C.TipoCursada, C.Tema, T.Descripcion, Cur.Descripcion as DescripcionII, L.Dni from Cursadas C LEFT OUTER JOIN Tema Cur ON Cur.Curso = c.Curso AND Cur.Tema = C.Tema LEFT OUTER JOIN Curso T ON T.Codigo = C.Curso LEFT OUTER JOIN Legajo L ON L.Codigo = C.Legajo AND L.Renglon = 1 where C.OrdFecha >= '" 
                 + DesdeFecha + "' and C.OrdFecha <= '" + HastaFecha + "' and C.Legajo >= 0 and C.Legajo <= 999999 and C.TipoCursada >= " + 
                 DesdeTipo + " and C.TipoCursada <= " + HastaTipo + CondicionesExtras;
 

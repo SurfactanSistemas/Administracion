@@ -31,6 +31,7 @@ Partial Class MenuPrincipal
         Me.ListadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProcesosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FinDeSistemasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PedidosPendientesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.panel1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -93,6 +94,7 @@ Partial Class MenuPrincipal
         '
         'ListadosToolStripMenuItem
         '
+        Me.ListadosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PedidosPendientesToolStripMenuItem})
         Me.ListadosToolStripMenuItem.Name = "ListadosToolStripMenuItem"
         Me.ListadosToolStripMenuItem.Size = New System.Drawing.Size(62, 20)
         Me.ListadosToolStripMenuItem.Text = "Listados"
@@ -107,8 +109,14 @@ Partial Class MenuPrincipal
         'FinDeSistemasToolStripMenuItem
         '
         Me.FinDeSistemasToolStripMenuItem.Name = "FinDeSistemasToolStripMenuItem"
-        Me.FinDeSistemasToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.FinDeSistemasToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
         Me.FinDeSistemasToolStripMenuItem.Text = "Fin de Sistema"
+        '
+        'PedidosPendientesToolStripMenuItem
+        '
+        Me.PedidosPendientesToolStripMenuItem.Name = "PedidosPendientesToolStripMenuItem"
+        Me.PedidosPendientesToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
+        Me.PedidosPendientesToolStripMenuItem.Text = "Pedidos Pendientes"
         '
         'MenuPrincipal
         '
@@ -138,5 +146,6 @@ Partial Class MenuPrincipal
     Friend WithEvents ListadosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ProcesosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents FinDeSistemasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents PedidosPendientesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

@@ -1545,6 +1545,10 @@ Public Class EmisionEtiquetas
 
         Dim ds As New DataSet
 
+
+        Dim ImpreRNPQ As String = "NO"
+
+
         If WTipoPro = "CO" Then
             rpt = New etinuevacolorante
         ElseIf WTipoPro = "FA" Then
@@ -1591,6 +1595,10 @@ Public Class EmisionEtiquetas
             If Trim(txtCliente.Text) = "" Then
                 rpt = New etinuevanormachicaprueba
             Else
+
+                ImpreRNPQ = "SI"
+
+
                 rpt = New etinuevanormachica
             End If
         End If
@@ -1606,6 +1614,7 @@ Public Class EmisionEtiquetas
         ds.Tables.Add(WPictograma3)
         ds.Tables.Add(WPictograma4)
 
+
         rpt.SetDataSource(ds)
 
         For Each _p As ParameterField In p
@@ -1614,6 +1623,18 @@ Public Class EmisionEtiquetas
 
         With New VistaPrevia
             .Reporte = rpt
+
+            Dim Sedronar As String = ""
+            If ImpreRNPQ = "SI" Then
+                Dim SQLCnslt As String = "SELECT Sedronar FROM Terminado WHERE Codigo = '" & txtTerminado.Text & "'"
+                Dim row As DataRow = GetSingle(SQLCnslt)
+                If row IsNot Nothing Then
+                    If OrDefault(Val(row.Item("Sedronar")), 0) = 1 Then
+                        Sedronar = "RNPQ: 1160/97"
+                    End If
+                End If
+                .Reporte.SetParameterValue(0, Sedronar)
+            End If
             '.Mostrar()
             .Imprimir()
         End With

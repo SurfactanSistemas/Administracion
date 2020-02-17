@@ -412,6 +412,12 @@
       <DependentUpon>wPromedioCalificacion.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Listados\TemasPorLegajoConsolidado\ReporteParaExel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteParaExel.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Listados\TemasPorLegajoConsolidado\ReportePorSector.cs">
       <DependentUpon>ReportePorSector.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -989,6 +995,10 @@
     <EmbeddedResource Include="Listados\PromediodeCalificacion\wPromedioCalificacion.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>wPromedioCalificacion.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\TemasPorLegajoConsolidado\ReporteParaExel.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteParaExel.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\TemasPorLegajoConsolidado\ReportePorSector.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
