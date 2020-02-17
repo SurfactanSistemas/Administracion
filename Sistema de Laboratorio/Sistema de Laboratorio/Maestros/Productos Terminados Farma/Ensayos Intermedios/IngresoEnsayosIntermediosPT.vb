@@ -161,6 +161,17 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
             End If
 
+            lblTipoProceso.Text = ""
+
+            If Operador.EsFarma Then
+                Dim WCargaIII As DataRow = GetSingle("SELECT TipoProceso FROM CargaIII WHERE Terminado = '" & txtCodigo.Text & "' And Paso in ('1', '01')")
+
+                If WCargaIII IsNot Nothing Then
+                    lblTipoProceso.Text = OrDefault(WCargaIII.Item("TipoProceso"), "").ToString.Trim.ToUpper
+                End If
+
+            End If
+
             If WExiste IsNot Nothing Then
 
                 btnReimprimir.Visible = True
@@ -1913,8 +1924,6 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
                 End If
 
-
-
             Case Keys.Escape
 
                 txtPaginas.Text = ""
@@ -1925,8 +1934,12 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
         Select Case e.KeyData
             Case Keys.Enter
 
-                txtComponente.Focus()
-
+                If txtComponente.Enabled Then
+                    txtComponente.Focus()
+                Else
+                    txtCantidadEtiquetas.Focus()
+                End If
+                
             Case Keys.Escape
 
                 txtEnvases.Text = ""
