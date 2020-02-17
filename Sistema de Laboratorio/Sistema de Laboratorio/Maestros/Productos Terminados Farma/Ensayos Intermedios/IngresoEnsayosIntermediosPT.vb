@@ -33,7 +33,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
     End Sub
 
     Private Sub btnLimpiar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLimpiar.Click
-        For Each c As Control In {txtFechaRevalida, txtArchivo, txtCodigo, txtConfecciono, txtEnvases, txtComponente, txtLotePartida, txtCantidadEtiquetas, txtDesvio, txtEtapa, txtFecha, txtLibros, txtOOS, txtPaginas, txtPartida, lblTipoProceso, txtFechaVto, lblDescEtapa, txtEspecifActual, txtEspecifOrig, txtRevalida, txtKilos}
+        For Each c As Control In {txtFechaRevalida, txtArchivo, txtCodigo, txtSubEtapa, txtConfecciono, txtEnvases, txtComponente, txtLotePartida, txtCantidadEtiquetas, txtDesvio, txtEtapa, txtFecha, txtLibros, txtOOS, txtPaginas, txtPartida, lblTipoProceso, txtFechaVto, lblDescEtapa, txtEspecifActual, txtEspecifOrig, txtRevalida, txtKilos}
             c.Text = ""
         Next
         dgvEnsayos.Rows.Clear()
@@ -45,6 +45,8 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
         WEsPorDesvio = False
         WMotivoDesvio = ""
+
+        txtSubEtapa.Visible = False
 
         WMotivoClaveSeguridad = TiposSolicitudClaveSeguridad.General
         WActualizacionBloqueada = False
@@ -111,7 +113,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
     End Sub
 
-    Private Sub txtEtapa_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtEtapa.KeyDown, txtRevalida.KeyDown, txtKilos.KeyDown, txtEspecifOrig.KeyDown, txtEspecifActual.KeyDown
+    Private Sub txtEtapa_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtEtapa.KeyDown, txtRevalida.KeyDown, txtKilos.KeyDown, txtEspecifOrig.KeyDown, txtEspecifActual.KeyDown, txtSubEtapa.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Val(txtEtapa.Text) = 0 Then : Exit Sub : End If
@@ -123,27 +125,40 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
             _CrearCarpetaEtapaIntermedia()
 
-            Dim WEtapa, WPartida, WCodigo As String
+            Dim WEtapa, WPartida, WCodigo, WSubEtapa As String
 
             WEtapa = txtEtapa.Text
             WPartida = txtPartida.Text
             WCodigo = txtCodigo.Text
+            WSubEtapa = txtSubEtapa.Text
 
             btnLimpiar_Click(Nothing, Nothing)
 
             txtEtapa.Text = WEtapa
             txtCodigo.Text = WCodigo
             txtPartida.Text = WPartida
+            txtSubEtapa.Text = WSubEtapa
+
 
             Dim WExiste As DataRow = Nothing
 
+            Dim WCargaVSubEtapas As DataRow = GetSingle("SELECT SubEtapas FROM " & TablaCargaV & " WHERE Terminado = '" & txtCodigo.Text & "' And Paso = '" & txtEtapa.Text & "' Order By Clave", BaseEspecif)
+
+            Dim WSubEtapas As Boolean = False
+
+            If WCargaVSubEtapas IsNot Nothing Then WSubEtapas = Val(OrDefault(WCargaVSubEtapas.Item("SubEtapas"), "")) = 1
+
+            txtSubEtapa.Visible = WSubEtapas
+
             If Val(txtEtapa.Text) = 99 Then
+                txtSubEtapa.Visible = False
                 WExiste = GetSingle("SELECT TOP 1 Clave FROM " & TablaPrueTer & " WHERE Partida = '" + txtPartida.Text + "'")
             Else
                 '
                 ' En ésta parte únicamente entrarían los productos de Planta III.
                 '
-                WExiste = GetSingle("SELECT TOP 1 Clave FROM PrueterfarmaIntermedio WHERE Producto = '" + txtCodigo.Text + "' And Paso = '" & txtEtapa.Text & "'")
+                WExiste = GetSingle("SELECT TOP 1 Clave FROM PrueterfarmaIntermedio WHERE Producto = '" + txtCodigo.Text + "' And Paso = '" & txtEtapa.Text & "' And SubEtapa = '" & Val(txtSubEtapa.Text) & "'")
+
             End If
 
             If WExiste IsNot Nothing Then
@@ -158,7 +173,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                     '
                     ' En ésta parte únicamente entrarían los productos de Planta III.
                     '
-                    WPrueterFarma = GetAll("SELECT * FROM PrueterFarmaIntermedio WHERE Partida = '" & txtPartida.Text & "' And Producto = '" & txtCodigo.Text & "' And Paso = '" & txtEtapa.Text & "' Order By Clave")
+                    WPrueterFarma = GetAll("SELECT * FROM PrueterFarmaIntermedio WHERE Partida = '" & txtPartida.Text & "' And Producto = '" & txtCodigo.Text & "' And Paso = '" & txtEtapa.Text & "' And SubEtapa = '" & Val(txtSubEtapa.Text) & "' Order By Clave")
                 End If
 
                 dgvEnsayos.Rows.Clear()
@@ -457,8 +472,13 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
             If dgvEnsayos.Rows.Count > 0 Then
                 btnPoolEnsayos.Enabled = True
                 dgvEnsayos.CurrentCell = dgvEnsayos.Item("Valor", 0)
-                dgvEnsayos.Focus()
+                If txtSubEtapa.Visible And Val(txtSubEtapa.Text) = 0 Then
+                    txtSubEtapa.Focus()
+                Else
+                    dgvEnsayos.Focus()
+                End If
             Else
+                txtSubEtapa.Visible = False
                 txtEtapa.Focus()
             End If
 
@@ -835,17 +855,17 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
             Dim WPrueterFarma As DataRow = Nothing
 
+            WPrueterFarma = GetSingle("SELECT TOP 1 Clave FROM PrueterFarmaIntermedio WHERE Partida = '" & WPartida & "' And Producto = '" & WCodigo & "' And Paso = '" & WEtapa & "' And subEtapa = '" & Val(txtSubEtapa.Text) & "'")
+
             If Val(WEtapa) = 99 Then
 
-                If Operador.EsFarma Then WPrueterFarma = GetSingle("SELECT TOP 1 Clave FROM PrueterFarmaIntermedio WHERE Partida = '" & WPartida & "' And Producto = '" & WCodigo & "'")
+                'If Operador.EsFarma Then WPrueterFarma = GetSingle("SELECT TOP 1 Clave FROM PrueterFarmaIntermedio WHERE Partida = '" & WPartida & "' And Producto = '" & WCodigo & "' And SubEtapa = ''")
 
-                WSqls.Add("DELETE FROM " & TablaPrueTer & " WHERE Partida = '" & WPartida & "' And Producto = '" & WCodigo & "'")
+                WSqls.Add("DELETE FROM " & TablaPrueTer & " WHERE Partida = '" & WPartida & "' And Producto = '" & WCodigo & "' And Paso = '" & WEtapa & "' And SubEtapa = '" & Val(txtEtapa.Text) & "'")
 
             Else
 
-                WPrueterFarma = GetSingle("SELECT TOP 1 Clave FROM PrueterFarmaIntermedio WHERE Partida = '" & WPartida & "' And Producto = '" & WCodigo & "' And Paso = '" & WEtapa & "'")
-
-                WSqls.Add("DELETE FROM PrueterfarmaIntermedio WHERE Partida = '" & WPartida & "' And Producto = '" & WCodigo & "' And Paso = '" & WEtapa & "'")
+                WSqls.Add("DELETE FROM PrueterfarmaIntermedio WHERE Partida = '" & WPartida & "' And Producto = '" & WCodigo & "' And Paso = '" & WEtapa & "' And subEtapa = '" & Val(txtSubEtapa.Text) & "'")
 
             End If
 
@@ -887,11 +907,14 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
                     'Dim WClave = "1" & WCodigo & txtPartida.Text.PadLeft(6, "0") & txtEtapa.Text.PadLeft(2, "0") & WRenglon.ToString.PadLeft(2, "0")
                     Dim WClave = "1" & WCodigo & txtPartida.Ceros(6) & IIf(Val(txtEtapa.Text) = 99, "", txtEtapa.Ceros(2)) & WRenglon.Ceros(2)
+
+                    If Val(txtEtapa.Text) <> 99 Then WClave = "1" & WCodigo & txtPartida.Ceros(6) & txtEtapa.Ceros(2) & txtSubEtapa.Ceros(2) & WRenglon.Ceros(2)
+
                     Dim ZSql = ""
 
                     ZSql = ZSql & "INSERT INTO " & WTabla & " ("
                     ZSql = ZSql & "Clave ,"
-                    If Val(txtEtapa.Text) <> 99 Then ZSql = ZSql & "Paso ,"
+                    If Val(txtEtapa.Text) <> 99 Then ZSql = ZSql & "Paso , SubEtapa ,"
                     ZSql = ZSql & "Tipo ,"
                     ZSql = ZSql & "Partida ,"
                     ZSql = ZSql & "Renglon ,"
@@ -932,7 +955,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                     ZSql = ZSql & "OperadorLabora)"
                     ZSql = ZSql & "Values ("
                     ZSql = ZSql & "'" & WClave & "',"
-                    If Val(txtEtapa.Text) <> 99 Then ZSql = ZSql & "'" & Trim(txtEtapa.Text) & "',"
+                    If Val(txtEtapa.Text) <> 99 Then ZSql = ZSql & "'" & Trim(txtEtapa.Text) & "', '" & Val(txtSubEtapa.Text) & "',"
                     ZSql = ZSql & "'" & "1" & "',"
                     ZSql = ZSql & "'" & WPartida.left(6) & "',"
                     ZSql = ZSql & "'" & WRenglon.left(2) & "',"
@@ -1342,7 +1365,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
         If Val(txtEtapa.Text) = 99 Then
             WDatos = GetAll("SELECT ValorReal FROM " & TablaPrueTer & " WHERE Producto = '" & txtCodigo.Text & "' AND Partida = '" & txtPartida.Text & "' ORDER BY Clave")
         Else
-            WDatos = GetAll("SELECT ValorReal FROM PrueterFarmaIntermedio WHERE Producto = '" & txtCodigo.Text & "' AND Partida = '" & txtPartida.Text & "' AND Paso = '" & txtEtapa.Text & "' ORDER BY Clave")
+            WDatos = GetAll("SELECT ValorReal FROM PrueterFarmaIntermedio WHERE Producto = '" & txtCodigo.Text & "' AND Partida = '" & txtPartida.Text & "' AND Paso = '" & txtEtapa.Text & "' And SubEtapa = '" & Val(txtSubEtapa.Text) & "' ORDER BY Clave")
         End If
 
         If WDatos.Rows.Count > 0 Then
@@ -1363,6 +1386,8 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
     Public Sub _ProcesarIngresoClaveSeguridad(ByVal WClave As Object) Implements IIngresoClaveSeguridad._ProcesarIngresoClaveSeguridad
 
+        WNoGrabaIniciales = False
+        WIDOperadorAnalista = ""
 
         Select Case WMotivoClaveSeguridad
             Case TiposSolicitudClaveSeguridad.IngresoEnsayoIntermedioPorDesvio
@@ -1378,12 +1403,13 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
             Case TiposSolicitudClaveSeguridad.ActualizarEnsayoBloqueado
 
-                Dim WDatos As DataRow = GetSingle("SELECT GrabaV, FechaGrabaV FROM Operador WHERE Clave = '" & UCase(WClave) & "'", "SurfactanSa")
+                Dim WDatos As DataRow = GetSingle("SELECT Operador, GrabaV, FechaGrabaV FROM Operador WHERE Clave = '" & UCase(WClave) & "'", "SurfactanSa")
 
                 If WDatos IsNot Nothing Then
                     Dim WGrabaV As String = OrDefault(WDatos.Item("GrabaV"), "")
                     If WGrabaV.ToUpper = "S" Then
                         WAutorizaActualizacionBloqueado = True
+                        WIDOperadorAnalista = OrDefault(WDatos.Item("Operador"), "")
                         WNoGrabaIniciales = True
                         btnGrabar.PerformClick()
                         Exit Sub
@@ -1396,14 +1422,12 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
             Case TiposSolicitudClaveSeguridad.ActualizarEnsayoNoBloqueado
 
-                WIDOperadorAnalista = ""
-
                 Dim WDatos As DataRow = GetSingle("SELECT Operador, AnalistaLab FROM Operador WHERE Clave = '" & UCase(WClave) & "'", "SurfactanSa")
 
                 If WDatos IsNot Nothing Then
                     Dim AnalistasLabPermiso As String = OrDefault(WDatos.Item("AnalistaLab"), "")
                     If AnalistasLabPermiso.ToUpper = "S" Then
-                        WIDOperadorAnalista = WDatos.Item("Operador")
+                        WIDOperadorAnalista = OrDefault(WDatos.Item("Operador"), "")
                         btnGrabar_Click(Nothing, Nothing)
                         Exit Sub
                     End If

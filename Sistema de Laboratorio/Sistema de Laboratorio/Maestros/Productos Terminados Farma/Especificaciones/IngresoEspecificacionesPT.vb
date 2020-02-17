@@ -17,6 +17,8 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
             control.Text = ""
         Next
 
+        ckSubEtapas.Checked = False
+
         dgvProcedimientos.Rows.Clear()
         dgvEspecif.Rows.Clear()
         dgvEspecifIngles.Rows.Clear()
@@ -167,11 +169,14 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                     Dim WMenorIgualEspecif = OrDefault(.Item("MenorIgualEspecif"), "0")
                     Dim WInformaEspecif = OrDefault(.Item("InformaEspecif"), "0")
                     Dim WFormulaEspecif = OrDefault(.Item("FormulaEspecif"), "")
+                    Dim WSubEtapas = Val(OrDefault(.Item("SubEtapas"), "")) = 1
                     Dim WImpreParametro = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif)
 
                     If Val(WTipoEspecif) = 0 And WImpreParametro <> "" Then WImpreParametro &= " (c)"
 
                     Dim r = dgvEspecif.Rows.Add
+
+                    ckSubEtapas.Checked = WSubEtapas
 
                     txtControlCambios.Text = Trim(WControlCambio)
 
@@ -577,11 +582,14 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                 Dim WMenorIgualEspecif = OrDefault(.Item("MenorIgualEspecif"), "0")
                 Dim WInformaEspecif = OrDefault(.Item("InformaEspecif"), "0")
                 Dim WFormulaEspecif = OrDefault(.Item("FormulaEspecif"), "")
+                Dim WSubEtapas = Val(OrDefault(.Item("SubEtapas"), "")) = 1
                 Dim WImpreParametro = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif)
 
                 If Val(WTipoEspecif) = 0 And WImpreParametro <> "" Then WImpreParametro &= " (c)"
 
                 Dim r = dgvEspecif.Rows.Add
+
+                ckSubEtapas.Checked = WSubEtapas
 
                 txtControlCambios.Text = Trim(WControlCambio)
 
@@ -1038,7 +1046,8 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
         '
         ' Actualizamos las Notas para mantener Histórico.
         '
-        WConsultas.Add("UPDATE CargaVNoFarma SET Observacion1 = '" & Trim(WObservacion(1)) & "', Observacion2 = '" & Trim(WObservacion(2)) & "', Observacion3 = '" & Trim(WObservacion(3)) & "', Observacion4 = '" & Trim(WObservacion(4)) & "', Observacion5 = '" & Trim(WObservacion(5)) & "', Observacion6 = '" & Trim(WObservacion(6)) & "', Observacion7 = '" & Trim(WObservacion(7)) & "', Observacion8 = '" & Trim(WObservacion(8)) & "', Observacion9 = '" & Trim(WObservacion(9)) & "', Observacion10 = '" & Trim(WObservacion(10)) & "' WHERE Terminado = '" & txtTerminado.Text & "' And Paso = '" & txtEtapa.Text & "'")
+        Dim WSubEtapas As Integer = IIf(ckSubEtapas.Checked, 1, 0)
+        WConsultas.Add("UPDATE CargaVNoFarma SET SubEtapas = '" & WSubEtapas & "', Observacion1 = '" & Trim(WObservacion(1)) & "', Observacion2 = '" & Trim(WObservacion(2)) & "', Observacion3 = '" & Trim(WObservacion(3)) & "', Observacion4 = '" & Trim(WObservacion(4)) & "', Observacion5 = '" & Trim(WObservacion(5)) & "', Observacion6 = '" & Trim(WObservacion(6)) & "', Observacion7 = '" & Trim(WObservacion(7)) & "', Observacion8 = '" & Trim(WObservacion(8)) & "', Observacion9 = '" & Trim(WObservacion(9)) & "', Observacion10 = '" & Trim(WObservacion(10)) & "' WHERE Terminado = '" & txtTerminado.Text & "' And Paso = '" & txtEtapa.Text & "'")
 
         ExecuteNonQueries("Surfactan_II", WConsultas.ToArray)
 
@@ -1573,7 +1582,8 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
         '
         ' Actualizamos las Notas para mantener Histórico.
         '
-        WConsultas.Add("UPDATE CargaV SET Observacion1 = '" & Trim(WObservacion(1)) & "', Observacion2 = '" & Trim(WObservacion(2)) & "', Observacion3 = '" & Trim(WObservacion(3)) & "', Observacion4 = '" & Trim(WObservacion(4)) & "', Observacion5 = '" & Trim(WObservacion(5)) & "', Observacion6 = '" & Trim(WObservacion(6)) & "', Observacion7 = '" & Trim(WObservacion(7)) & "', Observacion8 = '" & Trim(WObservacion(8)) & "', Observacion9 = '" & Trim(WObservacion(9)) & "', Observacion10 = '" & Trim(WObservacion(10)) & "' WHERE Terminado = '" & txtTerminado.Text & "' And Paso = '" & txtEtapa.Text & "'")
+        Dim WSubEtapas As Integer = IIf(ckSubEtapas.Checked, 1, 0)
+        WConsultas.Add("UPDATE CargaV SET SubEtapas = '" & WSubEtapas & "', Observacion1 = '" & Trim(WObservacion(1)) & "', Observacion2 = '" & Trim(WObservacion(2)) & "', Observacion3 = '" & Trim(WObservacion(3)) & "', Observacion4 = '" & Trim(WObservacion(4)) & "', Observacion5 = '" & Trim(WObservacion(5)) & "', Observacion6 = '" & Trim(WObservacion(6)) & "', Observacion7 = '" & Trim(WObservacion(7)) & "', Observacion8 = '" & Trim(WObservacion(8)) & "', Observacion9 = '" & Trim(WObservacion(9)) & "', Observacion10 = '" & Trim(WObservacion(10)) & "' WHERE Terminado = '" & txtTerminado.Text & "' And Paso = '" & txtEtapa.Text & "'")
 
         ExecuteNonQueries(WConsultas.ToArray)
 
