@@ -2,6 +2,7 @@
 Imports System.Text
 Imports System.Text.RegularExpressions
 Imports CrystalDecisions.CrystalReports.Engine
+Imports Microsoft.Office.Interop.Outlook
 
 Public Class ImpreProcesos
 
@@ -72,6 +73,27 @@ Public Class ImpreProcesos
                         End If
 
                         _GenerarReporteResultadosCalidad(WPartida, WTipoSalida, WFechaVto, WImpreFechaVto, WFechaElabora, WImpreFechaElaboracion)
+                    Case 4
+
+                        Dim WLim = Environment.GetCommandLineArgs.Length - 1
+
+                        Dim WDestinatarios As String = Environment.GetCommandLineArgs(2)
+                        Dim WAsunto As String = ""
+                        Dim WCuerpo = "", WAdjuntos = ""
+
+                        If WLim > 3 Then
+                            WCuerpo = Environment.GetCommandLineArgs(3)
+                        End If
+
+                        If WLim > 4 Then
+                            WAdjuntos = Environment.GetCommandLineArgs(4)
+                        End If
+
+                        If WLim > 2 Then
+                            WAsunto = Environment.GetCommandLineArgs(3)
+                        End If
+
+                        _EnviarMail(WDestinatarios, WAsunto, WCuerpo, WAdjuntos)
 
                     Case Else
                         Close()
@@ -100,7 +122,7 @@ Public Class ImpreProcesos
             '_GenerarReporteResultadosCalidad(WPartida2, 1, WFechaVto2, WImpreFechaVto2, WFechaElabora2, WImpreFechaElaboracion2)
             '_GenerarReporteResultadosCalidad(WPartida2, 4, WFechaVto2, WImpreFechaVto2, WFechaElabora2, WImpreFechaElaboracion2)
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
         Finally
 
@@ -108,6 +130,33 @@ Public Class ImpreProcesos
 
         End Try
 
+    End Sub
+
+    Private Sub _EnviarMail(wDestinatarios As String, wAsunto As String, wCuerpo As String, wAdjuntos As String)
+        Dim oApp As _Application
+        Dim oMsg As _MailItem
+
+        Try
+            oApp = New Application()
+
+            oMsg = oApp.CreateItem(OlItemType.olMailItem)
+            oMsg.Subject = wAsunto
+            oMsg.Body = wCuerpo
+
+            ' Modificar por los E-Mails que correspondan.
+            oMsg.To = wDestinatarios
+
+            For Each archivosAdjunto As String In wAdjuntos.Split(";")
+
+                oMsg.Attachments.Add(archivosAdjunto)
+
+            Next
+
+            oMsg.Send()
+
+        Catch ex As System.Exception
+            Throw New System.Exception("No se pudo crear el E-Mail solicitado." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        End Try
     End Sub
 
     Private Sub _GenerarReporteResultadosCalidad(ByVal wPartida As Integer, ByVal wTipoSalida As Integer, ByVal wFechaVto As String, ByVal wImpreFechaVto As String, ByVal wFechaElabora As String, ByVal wImpreFechaElaboracion As String)
@@ -397,8 +446,8 @@ Public Class ImpreProcesos
         Dim WTerm As DataRow = GetSingle("SELECT Descripcion, Linea, Vida FROM Terminado WHERE Codigo = '" & wTerminado & "'")
         Dim WHoja As DataTable = GetAll("SELECT * FROM Hoja WHERE Hoja = '" & wPartida & "' Order by Renglon", "Surfactan_III")
 
-        If IsNothing(WTerm) Then Throw New Exception("No existe Producto Terminado con Código '" & wTerminado & "'")
-        If WHoja.Rows.Count = 0 And Not RegistroMaestro Then Throw New Exception("No existe Hoja '" & wTerminado & "'")
+        If IsNothing(WTerm) Then Throw New System.Exception("No existe Producto Terminado con Código '" & wTerminado & "'")
+        If WHoja.Rows.Count = 0 And Not RegistroMaestro Then Throw New System.Exception("No existe Hoja '" & wTerminado & "'")
 
         Dim WSqls As New List(Of String)
 
@@ -715,11 +764,11 @@ Public Class ImpreProcesos
                         WImpreVto = XMes + "/" + XAno
 
                     Else
-                        If Not RegistroMaestro Then Throw New Exception("No se encontró Hoja '" & ZZMezclaPartida & "', informada como componente de mezcla.")
+                        If Not RegistroMaestro Then Throw New System.Exception("No se encontró Hoja '" & ZZMezclaPartida & "', informada como componente de mezcla.")
                     End If
 
                 Else
-                    If Not RegistroMaestro Then Throw New Exception("Es una Hoja de producción de mezcla y no se informaron las partidas a utilizar, por lo que no se puede imprimir la fecha de reanálisis")
+                    If Not RegistroMaestro Then Throw New System.Exception("Es una Hoja de producción de mezcla y no se informaron las partidas a utilizar, por lo que no se puede imprimir la fecha de reanálisis")
                 End If
 
             End If
@@ -752,7 +801,7 @@ Public Class ImpreProcesos
                     End With
                 Next
 
-                If WLoteMP = 0 And Not RegistroMaestro Then Throw New Exception("Es una hoja de producción de monoproducto y no se informaron las partidas a utilizar, por lo que no se puede imprimir la fecha de reanálisis")
+                If WLoteMP = 0 And Not RegistroMaestro Then Throw New System.Exception("Es una hoja de producción de monoproducto y no se informaron las partidas a utilizar, por lo que no se puede imprimir la fecha de reanálisis")
 
                 If WLoteMP <> 999999 Then
 

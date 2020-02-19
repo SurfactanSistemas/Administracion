@@ -742,31 +742,32 @@ Public Class EmisionEtiquetas
 
         If WTipoPro = "FA" Then
 
-            If WDatosMono(0) = "-1" And WDatosMono(1) = "-1" Then Exit Sub
+            If WDatosMono(0) <> "-1" Or WDatosMono(1) <> "-1" Then
 
-            '
-            ' Verificamos si se trata de un Mono Producto.
-            '
-            Dim WBuscaMono As DataRow = GetSingle("SELECT Codigo FROM CodigoMono WHERE Codigo = '" & txtTerminado.Text & "'")
+                '
+                ' Verificamos si se trata de un Mono Producto.
+                '
+                Dim WBuscaMono As DataRow = GetSingle("SELECT Codigo FROM CodigoMono WHERE Codigo = '" & txtTerminado.Text & "'")
 
-            If WBuscaMono IsNot Nothing Or WLinea = 20 Or WLinea = 28 Then
+                If WBuscaMono IsNot Nothing Or WLinea = 20 Or WLinea = 28 Then
 
-                If Trim(WDatosMono(0)) <> "" Then
-                    WElaboracion = WDatosMono(0)
-                End If
-
-                If Trim(WDatosMono(1)) <> "" Then
-                    WVencimiento = WDatosMono(1)
-                End If
-
-                If WVencimiento <> "" Then
-                    If Val(ordenaFecha(WVencimiento)) < Val(WFechaActualOrd) Then
-                        MsgBox("La Partida se encuentra vencida " + Chr(13) + _
-             "Por favor comuniquese con el laboratorio para su revalida", MsgBoxStyle.Exclamation)
-                        Exit Sub
+                    If Trim(WDatosMono(0)) <> "" Then
+                        WElaboracion = WDatosMono(0)
                     End If
-                End If
 
+                    If Trim(WDatosMono(1)) <> "" Then
+                        WVencimiento = WDatosMono(1)
+                    End If
+
+                    If WVencimiento <> "" Then
+                        If Val(ordenaFecha(WVencimiento)) < Val(WFechaActualOrd) Then
+                            MsgBox("La Partida se encuentra vencida " + Chr(13) + _
+                 "Por favor comuniquese con el laboratorio para su revalida", MsgBoxStyle.Exclamation)
+                            Exit Sub
+                        End If
+                    End If
+
+                End If
             End If
 
         Else
@@ -1592,13 +1593,14 @@ Public Class EmisionEtiquetas
             End If
 
         Else
+
+            ImpreRNPQ = "SI"
+
             If Trim(txtCliente.Text) = "" Then
-                rpt = New etinuevanormachicaprueba
+                rpt = New etinuevanormachica25000
+                rpt.SetParameterValue("ImpreVto", "F.Vencimiento:")
+                'rpt = New etinuevanormachicaprueba
             Else
-
-                ImpreRNPQ = "SI"
-
-
                 rpt = New etinuevanormachica
             End If
         End If
@@ -1633,7 +1635,7 @@ Public Class EmisionEtiquetas
                         Sedronar = "RNPQ: 1160/97"
                     End If
                 End If
-                .Reporte.SetParameterValue(0, Sedronar)
+                .Reporte.SetParameterValue("ImpreSedronar", Sedronar)
             End If
             '.Mostrar()
             .Imprimir()
