@@ -403,7 +403,6 @@ Public Class EvaluacionProveedorMateriaPrima : Implements IAyudaProveedores, Con
 
             Dim WControl = New EvaluacionPorMpUserControl(txtProveedor.Text, ComboBox1.SelectedItem, True, Codigo, Descripcion, DescComercial)
 
-           
             WControl.Dock = DockStyle.Fill
 
             WControl.HabilitarControles(btnGrabar.Enabled)

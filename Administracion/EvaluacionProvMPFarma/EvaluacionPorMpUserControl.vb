@@ -7,7 +7,7 @@ Imports EvaluacionProvMPFarma.Helper
 Public Class EvaluacionPorMpUserControl
 
     Private ReadOnly WProveedor As String
-    Private ReadOnly WMP As String
+    Private WMP As String
 
     Private ReadOnly sologrilla As Boolean
     Private ReadOnly Codigo As String
@@ -41,7 +41,7 @@ Public Class EvaluacionPorMpUserControl
         ' Add any initialization after the InitializeComponent() call.
         WProveedor = Proveedor
         WMP = MP
-
+        
         Me.sologrilla = sologrilla
         Me.Codigo = Codigo
         Me.Descripcion = Descripcion
@@ -103,6 +103,7 @@ Public Class EvaluacionPorMpUserControl
                     lblDescComercial.Text = Trim(OrDefault(.Item("Comercial"), "")).ToUpper()
                 End With
             Else
+
                 lblCodigo.Text = Codigo
                 lblDescripcion.Text = Descripcion
                 lblDescComercial.Text = DescripComercial
@@ -140,6 +141,8 @@ Public Class EvaluacionPorMpUserControl
                 End If
 
             Next
+
+            If Codigo.Trim <> "" Then WMP = Codigo
 
         End If
 
