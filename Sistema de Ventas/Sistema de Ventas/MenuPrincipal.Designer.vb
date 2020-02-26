@@ -27,11 +27,16 @@ Partial Class MenuPrincipal
         Me.label1 = New System.Windows.Forms.Label()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.MaestrosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.IngresoRubroToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.IngresoVendedoresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CondicionDePagoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.IngresoDeLineasDeVentasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NovedadesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PedidosPendientesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProcesosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FinDeSistemasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PedidosPendientesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.IngresoDeFamiliasDeMateriasPrimasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.panel1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -82,9 +87,34 @@ Partial Class MenuPrincipal
         '
         'MaestrosToolStripMenuItem
         '
+        Me.MaestrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IngresoRubroToolStripMenuItem, Me.IngresoVendedoresToolStripMenuItem, Me.CondicionDePagoToolStripMenuItem, Me.IngresoDeLineasDeVentasToolStripMenuItem, Me.IngresoDeFamiliasDeMateriasPrimasToolStripMenuItem})
         Me.MaestrosToolStripMenuItem.Name = "MaestrosToolStripMenuItem"
         Me.MaestrosToolStripMenuItem.Size = New System.Drawing.Size(67, 20)
         Me.MaestrosToolStripMenuItem.Text = "Maestros"
+        '
+        'IngresoRubroToolStripMenuItem
+        '
+        Me.IngresoRubroToolStripMenuItem.Name = "IngresoRubroToolStripMenuItem"
+        Me.IngresoRubroToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
+        Me.IngresoRubroToolStripMenuItem.Text = "Ingreso Rubro"
+        '
+        'IngresoVendedoresToolStripMenuItem
+        '
+        Me.IngresoVendedoresToolStripMenuItem.Name = "IngresoVendedoresToolStripMenuItem"
+        Me.IngresoVendedoresToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
+        Me.IngresoVendedoresToolStripMenuItem.Text = "Ingreso Vendedores"
+        '
+        'CondicionDePagoToolStripMenuItem
+        '
+        Me.CondicionDePagoToolStripMenuItem.Name = "CondicionDePagoToolStripMenuItem"
+        Me.CondicionDePagoToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
+        Me.CondicionDePagoToolStripMenuItem.Text = "Ingreso de  Condiciones de Pago"
+        '
+        'IngresoDeLineasDeVentasToolStripMenuItem
+        '
+        Me.IngresoDeLineasDeVentasToolStripMenuItem.Name = "IngresoDeLineasDeVentasToolStripMenuItem"
+        Me.IngresoDeLineasDeVentasToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
+        Me.IngresoDeLineasDeVentasToolStripMenuItem.Text = "Ingreso de Lineas de Ventas"
         '
         'NovedadesToolStripMenuItem
         '
@@ -99,6 +129,12 @@ Partial Class MenuPrincipal
         Me.ListadosToolStripMenuItem.Size = New System.Drawing.Size(62, 20)
         Me.ListadosToolStripMenuItem.Text = "Listados"
         '
+        'PedidosPendientesToolStripMenuItem
+        '
+        Me.PedidosPendientesToolStripMenuItem.Name = "PedidosPendientesToolStripMenuItem"
+        Me.PedidosPendientesToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
+        Me.PedidosPendientesToolStripMenuItem.Text = "Pedidos Pendientes"
+        '
         'ProcesosToolStripMenuItem
         '
         Me.ProcesosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FinDeSistemasToolStripMenuItem})
@@ -112,11 +148,11 @@ Partial Class MenuPrincipal
         Me.FinDeSistemasToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
         Me.FinDeSistemasToolStripMenuItem.Text = "Fin de Sistema"
         '
-        'PedidosPendientesToolStripMenuItem
+        'IngresoDeFamiliasDeMateriasPrimasToolStripMenuItem
         '
-        Me.PedidosPendientesToolStripMenuItem.Name = "PedidosPendientesToolStripMenuItem"
-        Me.PedidosPendientesToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
-        Me.PedidosPendientesToolStripMenuItem.Text = "Pedidos Pendientes"
+        Me.IngresoDeFamiliasDeMateriasPrimasToolStripMenuItem.Name = "IngresoDeFamiliasDeMateriasPrimasToolStripMenuItem"
+        Me.IngresoDeFamiliasDeMateriasPrimasToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
+        Me.IngresoDeFamiliasDeMateriasPrimasToolStripMenuItem.Text = "Ingreso de Familias de Materias Primas"
         '
         'MenuPrincipal
         '
@@ -147,5 +183,10 @@ Partial Class MenuPrincipal
     Friend WithEvents ProcesosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents FinDeSistemasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents PedidosPendientesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents IngresoRubroToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents IngresoVendedoresToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents CondicionDePagoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents IngresoDeLineasDeVentasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents IngresoDeFamiliasDeMateriasPrimasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

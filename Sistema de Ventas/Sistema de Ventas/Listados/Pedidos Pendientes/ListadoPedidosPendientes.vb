@@ -4,8 +4,9 @@ Imports ConsultasVarias.Clases.Helper
 Imports ConsultasVarias.Clases.Query
 Imports CrystalDecisions.Shared
 
-Public Class ListadoPedidosPendientes
+Public Class ListadoPedidosPendientes : Implements IBuscadorCliente, IBuscadorVendedor
 
+    Dim UltimoTxtBoxCLiente As Integer = 0
 
     Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As Windows.Forms.KeyPressEventArgs) Handles mastxtFechaDesde.KeyPress, mastxtFechaHasta.KeyPress, txtVendedor.KeyPress
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
@@ -58,7 +59,7 @@ Public Class ListadoPedidosPendientes
             mastxtProductoHasta.Mask = ">LL-00000-000"
         Else
             mastxtProductoDesde.Mask = ">LL-000-000"
-            mastxtProductoHasta.Mask = ">LL-00000-000"
+            mastxtProductoHasta.Mask = ">LL-000-000"
         End If
     End Sub
 
@@ -290,5 +291,37 @@ Public Class ListadoPedidosPendientes
         End With
     End Sub
 
+    Sub _ProcesarDatosCLiente(ByVal Codigo As String, ByVal Nombre As String) Implements IBuscadorCliente._ProcesarDatosCLiente
+        If UltimoTxtBoxCLiente = 1 Then
+            txtCliente1.Text = Codigo
+        End If
+        If UltimoTxtBoxCLiente = 2 Then
+            txtCliente2.Text = Codigo
+        End If
+    End Sub
 
+
+    Private Sub txtCliente1_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles txtCliente1.MouseDoubleClick
+        UltimoTxtBoxCLiente = 1
+        With New BuscadorCliente
+            .Show(Me)
+        End With
+    End Sub
+
+    Private Sub txtCliente2_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles txtCliente2.MouseDoubleClick
+        UltimoTxtBoxCLiente = 2
+        With New BuscadorCliente
+            .Show(Me)
+        End With
+    End Sub
+
+    Sub _procesarDatosVendedor(ByVal Codigo As String, ByVal Nombre As String) Implements IBuscadorVendedor._ProcesarDatosVendedor
+        txtVendedor.Text = Codigo
+    End Sub
+
+    Private Sub txtVendedor_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles txtVendedor.MouseDoubleClick
+        With New BuscadorVendedor
+            .Show(Me)
+        End With
+    End Sub
 End Class

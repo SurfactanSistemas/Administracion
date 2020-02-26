@@ -41,8 +41,9 @@ Partial Class ArqueoDeCheques
         Me.btnImprimir = New System.Windows.Forms.Button()
         Me.txtSumaImportes = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnExportarExcel = New System.Windows.Forms.Button()
         Me.gbDiscriminado = New System.Windows.Forms.GroupBox()
+        Me.btnImprimirAcumulado = New System.Windows.Forms.Button()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
@@ -70,7 +71,9 @@ Partial Class ArqueoDeCheques
         Me.ClaveCheque = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Origen = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FechaOrd = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Clave = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.txtTraerCambios = New System.Windows.Forms.Button()
+        Me.btnDiscriminadoXQuincena = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.gbDiscriminado.SuspendLayout()
         CType(Me.DGV_Cheques, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -235,18 +238,19 @@ Partial Class ArqueoDeCheques
         Me.Label8.Text = "Suma de Importes"
         Me.Label8.Visible = False
         '
-        'Button1
+        'btnExportarExcel
         '
-        Me.Button1.Location = New System.Drawing.Point(147, 339)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 38)
-        Me.Button1.TabIndex = 15
-        Me.Button1.Text = "Exportar a Exel"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnExportarExcel.Location = New System.Drawing.Point(147, 339)
+        Me.btnExportarExcel.Name = "btnExportarExcel"
+        Me.btnExportarExcel.Size = New System.Drawing.Size(75, 38)
+        Me.btnExportarExcel.TabIndex = 15
+        Me.btnExportarExcel.Text = "Exportar a Excel"
+        Me.btnExportarExcel.UseVisualStyleBackColor = True
         '
         'gbDiscriminado
         '
-        Me.gbDiscriminado.Controls.Add(Me.Button2)
+        Me.gbDiscriminado.Controls.Add(Me.btnDiscriminadoXQuincena)
+        Me.gbDiscriminado.Controls.Add(Me.btnImprimirAcumulado)
         Me.gbDiscriminado.Controls.Add(Me.Label16)
         Me.gbDiscriminado.Controls.Add(Me.Label15)
         Me.gbDiscriminado.Controls.Add(Me.Label14)
@@ -269,6 +273,15 @@ Partial Class ArqueoDeCheques
         Me.gbDiscriminado.TabIndex = 16
         Me.gbDiscriminado.TabStop = False
         Me.gbDiscriminado.Text = "Discriminado Mensual"
+        '
+        'btnImprimirAcumulado
+        '
+        Me.btnImprimirAcumulado.Location = New System.Drawing.Point(6, 397)
+        Me.btnImprimirAcumulado.Name = "btnImprimirAcumulado"
+        Me.btnImprimirAcumulado.Size = New System.Drawing.Size(75, 38)
+        Me.btnImprimirAcumulado.TabIndex = 24
+        Me.btnImprimirAcumulado.Text = "Imprimir Acumulado"
+        Me.btnImprimirAcumulado.UseVisualStyleBackColor = True
         '
         'Label16
         '
@@ -463,7 +476,7 @@ Partial Class ArqueoDeCheques
         '
         Me.DGV_Cheques.AllowUserToAddRows = False
         Me.DGV_Cheques.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGV_Cheques.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Fecha, Me.Numero, Me.Importe, Me.Banco, Me.ClaveCheque, Me.Origen, Me.FechaOrd})
+        Me.DGV_Cheques.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Fecha, Me.Numero, Me.Importe, Me.Banco, Me.ClaveCheque, Me.Origen, Me.FechaOrd, Me.Clave})
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
         DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -532,14 +545,29 @@ Partial Class ArqueoDeCheques
         Me.FechaOrd.Name = "FechaOrd"
         Me.FechaOrd.Visible = False
         '
-        'Button2
+        'Clave
         '
-        Me.Button2.Location = New System.Drawing.Point(47, 397)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 38)
-        Me.Button2.TabIndex = 24
-        Me.Button2.Text = "Imprimir Acumulado"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.Clave.HeaderText = "Clave"
+        Me.Clave.Name = "Clave"
+        Me.Clave.Visible = False
+        '
+        'txtTraerCambios
+        '
+        Me.txtTraerCambios.Location = New System.Drawing.Point(19, 438)
+        Me.txtTraerCambios.Name = "txtTraerCambios"
+        Me.txtTraerCambios.Size = New System.Drawing.Size(105, 41)
+        Me.txtTraerCambios.TabIndex = 20
+        Me.txtTraerCambios.Text = "Traer Datos de Secundarios"
+        Me.txtTraerCambios.UseVisualStyleBackColor = True
+        '
+        'btnDiscriminadoXQuincena
+        '
+        Me.btnDiscriminadoXQuincena.Location = New System.Drawing.Point(87, 397)
+        Me.btnDiscriminadoXQuincena.Name = "btnDiscriminadoXQuincena"
+        Me.btnDiscriminadoXQuincena.Size = New System.Drawing.Size(75, 38)
+        Me.btnDiscriminadoXQuincena.TabIndex = 25
+        Me.btnDiscriminadoXQuincena.Text = "Discriminado Quincena"
+        Me.btnDiscriminadoXQuincena.UseVisualStyleBackColor = True
         '
         'ArqueoDeCheques
         '
@@ -547,11 +575,12 @@ Partial Class ArqueoDeCheques
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(873, 491)
+        Me.Controls.Add(Me.txtTraerCambios)
         Me.Controls.Add(Me.Label18)
         Me.Controls.Add(Me.txtMontoTotal)
         Me.Controls.Add(Me.Label17)
         Me.Controls.Add(Me.gbDiscriminado)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.btnExportarExcel)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.txtSumaImportes)
         Me.Controls.Add(Me.btnImprimir)
@@ -595,16 +624,9 @@ Partial Class ArqueoDeCheques
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents btnImprimir As System.Windows.Forms.Button
-    Friend WithEvents Fecha As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Numero As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Importe As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Banco As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ClaveCheque As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Origen As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents FechaOrd As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents txtSumaImportes As System.Windows.Forms.TextBox
     Friend WithEvents Label8 As System.Windows.Forms.Label
-    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents btnExportarExcel As System.Windows.Forms.Button
     Friend WithEvents gbDiscriminado As System.Windows.Forms.GroupBox
     Friend WithEvents Label16 As System.Windows.Forms.Label
     Friend WithEvents Label15 As System.Windows.Forms.Label
@@ -625,5 +647,15 @@ Partial Class ArqueoDeCheques
     Friend WithEvents Label17 As System.Windows.Forms.Label
     Friend WithEvents txtMontoTotal As System.Windows.Forms.TextBox
     Friend WithEvents Label18 As System.Windows.Forms.Label
-    Friend WithEvents Button2 As System.Windows.Forms.Button
+    Friend WithEvents btnImprimirAcumulado As System.Windows.Forms.Button
+    Friend WithEvents Fecha As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Numero As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Importe As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Banco As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ClaveCheque As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Origen As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents FechaOrd As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Clave As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents txtTraerCambios As System.Windows.Forms.Button
+    Friend WithEvents btnDiscriminadoXQuincena As System.Windows.Forms.Button
 End Class

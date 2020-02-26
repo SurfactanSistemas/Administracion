@@ -313,7 +313,17 @@
     End Sub
 
     Private Sub ArqueoDeChequesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ArqueoDeChequesToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub PrincipalToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PrincipalToolStripMenuItem.Click
         With New ArqueoDeCheques
+            .Show(Me)
+        End With
+    End Sub
+
+    Private Sub SecundarioToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SecundarioToolStripMenuItem.Click
+        With New ArqueoDeChequesSecundario
             .Show(Me)
         End With
     End Sub

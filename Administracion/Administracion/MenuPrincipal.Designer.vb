@@ -90,12 +90,14 @@ Partial Class MenuPrincipal
         Me.ToolStripMenuItem9 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem10 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem11 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ArqueoDeChequesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.FinDelSistemaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.btnCambio = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.ArqueoDeChequesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PrincipalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SecundarioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
@@ -520,6 +522,13 @@ Partial Class MenuPrincipal
         Me.ToolStripMenuItem11.Size = New System.Drawing.Size(375, 22)
         Me.ToolStripMenuItem11.Text = "Proceso Recupero de Iva"
         '
+        'ArqueoDeChequesToolStripMenuItem
+        '
+        Me.ArqueoDeChequesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PrincipalToolStripMenuItem, Me.SecundarioToolStripMenuItem})
+        Me.ArqueoDeChequesToolStripMenuItem.Name = "ArqueoDeChequesToolStripMenuItem"
+        Me.ArqueoDeChequesToolStripMenuItem.Size = New System.Drawing.Size(375, 22)
+        Me.ArqueoDeChequesToolStripMenuItem.Text = "Arqueo de cheques"
+        '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
@@ -571,11 +580,17 @@ Partial Class MenuPrincipal
         Me.Button1.UseVisualStyleBackColor = True
         Me.Button1.Visible = False
         '
-        'ArqueoDeChequesToolStripMenuItem
+        'PrincipalToolStripMenuItem
         '
-        Me.ArqueoDeChequesToolStripMenuItem.Name = "ArqueoDeChequesToolStripMenuItem"
-        Me.ArqueoDeChequesToolStripMenuItem.Size = New System.Drawing.Size(375, 22)
-        Me.ArqueoDeChequesToolStripMenuItem.Text = "Arqueo de cheques"
+        Me.PrincipalToolStripMenuItem.Name = "PrincipalToolStripMenuItem"
+        Me.PrincipalToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.PrincipalToolStripMenuItem.Text = "Principal"
+        '
+        'SecundarioToolStripMenuItem
+        '
+        Me.SecundarioToolStripMenuItem.Name = "SecundarioToolStripMenuItem"
+        Me.SecundarioToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.SecundarioToolStripMenuItem.Text = "Secundario"
         '
         'MenuPrincipal
         '
@@ -671,4 +686,6 @@ Partial Class MenuPrincipal
     Friend WithEvents EnvíoDeEmailPorAnticipoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents ArqueoDeChequesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents PrincipalToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents SecundarioToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class
