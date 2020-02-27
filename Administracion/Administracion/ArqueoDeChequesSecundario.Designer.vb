@@ -22,7 +22,7 @@ Partial Class ArqueoDeChequesSecundario
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.components = New System.ComponentModel.Container()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -35,22 +35,18 @@ Partial Class ArqueoDeChequesSecundario
         Me.txtCodigoCheque = New System.Windows.Forms.TextBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Label7 = New System.Windows.Forms.Label()
+        Me.btnCerrar = New System.Windows.Forms.Button()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Panel2.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'Panel1
-        '
-        Me.Panel1.BackColor = System.Drawing.SystemColors.Control
-        Me.Panel1.Location = New System.Drawing.Point(6, 62)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(415, 254)
-        Me.Panel1.TabIndex = 0
         '
         'Label5
         '
         Me.Label5.AutoSize = True
         Me.Label5.BackColor = System.Drawing.SystemColors.Control
-        Me.Label5.Location = New System.Drawing.Point(74, 267)
+        Me.Label5.Location = New System.Drawing.Point(41, 230)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(38, 13)
         Me.Label5.TabIndex = 20
@@ -60,7 +56,7 @@ Partial Class ArqueoDeChequesSecundario
         '
         Me.Label4.AutoSize = True
         Me.Label4.BackColor = System.Drawing.SystemColors.Control
-        Me.Label4.Location = New System.Drawing.Point(74, 217)
+        Me.Label4.Location = New System.Drawing.Point(160, 171)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(42, 13)
         Me.Label4.TabIndex = 19
@@ -70,7 +66,7 @@ Partial Class ArqueoDeChequesSecundario
         '
         Me.Label3.AutoSize = True
         Me.Label3.BackColor = System.Drawing.SystemColors.Control
-        Me.Label3.Location = New System.Drawing.Point(74, 171)
+        Me.Label3.Location = New System.Drawing.Point(41, 171)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(37, 13)
         Me.Label3.TabIndex = 18
@@ -80,7 +76,7 @@ Partial Class ArqueoDeChequesSecundario
         '
         Me.Label2.AutoSize = True
         Me.Label2.BackColor = System.Drawing.SystemColors.Control
-        Me.Label2.Location = New System.Drawing.Point(74, 125)
+        Me.Label2.Location = New System.Drawing.Point(41, 125)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(84, 13)
         Me.Label2.TabIndex = 17
@@ -90,7 +86,7 @@ Partial Class ArqueoDeChequesSecundario
         '
         Me.txtBanco.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.txtBanco.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtBanco.Location = New System.Drawing.Point(71, 283)
+        Me.txtBanco.Location = New System.Drawing.Point(41, 246)
         Me.txtBanco.Name = "txtBanco"
         Me.txtBanco.ReadOnly = True
         Me.txtBanco.Size = New System.Drawing.Size(271, 24)
@@ -100,7 +96,7 @@ Partial Class ArqueoDeChequesSecundario
         '
         Me.txtImporte.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.txtImporte.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtImporte.Location = New System.Drawing.Point(71, 233)
+        Me.txtImporte.Location = New System.Drawing.Point(160, 187)
         Me.txtImporte.Name = "txtImporte"
         Me.txtImporte.ReadOnly = True
         Me.txtImporte.Size = New System.Drawing.Size(111, 24)
@@ -111,7 +107,7 @@ Partial Class ArqueoDeChequesSecundario
         '
         Me.txtNumeroCheque.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.txtNumeroCheque.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtNumeroCheque.Location = New System.Drawing.Point(71, 144)
+        Me.txtNumeroCheque.Location = New System.Drawing.Point(41, 144)
         Me.txtNumeroCheque.Name = "txtNumeroCheque"
         Me.txtNumeroCheque.ReadOnly = True
         Me.txtNumeroCheque.Size = New System.Drawing.Size(111, 24)
@@ -120,7 +116,7 @@ Partial Class ArqueoDeChequesSecundario
         'mastxtFecha
         '
         Me.mastxtFecha.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.mastxtFecha.Location = New System.Drawing.Point(71, 187)
+        Me.mastxtFecha.Location = New System.Drawing.Point(41, 187)
         Me.mastxtFecha.Mask = "00/00/0000"
         Me.mastxtFecha.Name = "mastxtFecha"
         Me.mastxtFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -131,7 +127,7 @@ Partial Class ArqueoDeChequesSecundario
         '
         Me.Label1.AutoSize = True
         Me.Label1.BackColor = System.Drawing.SystemColors.Control
-        Me.Label1.Location = New System.Drawing.Point(71, 73)
+        Me.Label1.Location = New System.Drawing.Point(41, 73)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(95, 13)
         Me.Label1.TabIndex = 12
@@ -140,7 +136,7 @@ Partial Class ArqueoDeChequesSecundario
         'txtCodigoCheque
         '
         Me.txtCodigoCheque.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCodigoCheque.Location = New System.Drawing.Point(71, 92)
+        Me.txtCodigoCheque.Location = New System.Drawing.Point(41, 92)
         Me.txtCodigoCheque.MaxLength = 31
         Me.txtCodigoCheque.Name = "txtCodigoCheque"
         Me.txtCodigoCheque.Size = New System.Drawing.Size(271, 22)
@@ -153,7 +149,7 @@ Partial Class ArqueoDeChequesSecundario
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel2.Location = New System.Drawing.Point(0, 0)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(428, 53)
+        Me.Panel2.Size = New System.Drawing.Size(471, 53)
         Me.Panel2.TabIndex = 21
         '
         'Label7
@@ -167,12 +163,37 @@ Partial Class ArqueoDeChequesSecundario
         Me.Label7.TabIndex = 4
         Me.Label7.Text = "Arqueo de Cheques Secundario"
         '
+        'btnCerrar
+        '
+        Me.btnCerrar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCerrar.Location = New System.Drawing.Point(181, 281)
+        Me.btnCerrar.Name = "btnCerrar"
+        Me.btnCerrar.Size = New System.Drawing.Size(104, 42)
+        Me.btnCerrar.TabIndex = 22
+        Me.btnCerrar.Text = "CERRAR"
+        Me.btnCerrar.UseVisualStyleBackColor = True
+        '
+        'Timer1
+        '
+        Me.Timer1.Interval = 1000
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Location = New System.Drawing.Point(288, 120)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(147, 120)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox1.TabIndex = 23
+        Me.PictureBox1.TabStop = False
+        '
         'ArqueoDeChequesSecundario
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.Lime
-        Me.ClientSize = New System.Drawing.Size(428, 322)
+        Me.BackColor = System.Drawing.SystemColors.Control
+        Me.ClientSize = New System.Drawing.Size(471, 335)
+        Me.Controls.Add(Me.PictureBox1)
+        Me.Controls.Add(Me.btnCerrar)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label4)
@@ -184,17 +205,16 @@ Partial Class ArqueoDeChequesSecundario
         Me.Controls.Add(Me.mastxtFecha)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.txtCodigoCheque)
-        Me.Controls.Add(Me.Panel1)
         Me.Location = New System.Drawing.Point(10, 10)
         Me.Name = "ArqueoDeChequesSecundario"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
@@ -207,4 +227,7 @@ Partial Class ArqueoDeChequesSecundario
     Friend WithEvents txtCodigoCheque As System.Windows.Forms.TextBox
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents Label7 As System.Windows.Forms.Label
+    Friend WithEvents btnCerrar As System.Windows.Forms.Button
+    Friend WithEvents Timer1 As System.Windows.Forms.Timer
+    Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
 End Class

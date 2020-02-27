@@ -77,13 +77,17 @@
 
                                 txtCodigoCheque.Text = ""
 
-                                Me.BackColor = Color.FromKnownColor(KnownColor.Lime)
+                                'Me.BackColor = Color.FromKnownColor(KnownColor.Lime)
+                                PictureBox1.Image = My.Resources.Exito
+                                Timer1.Start()
                                 Exit Sub
 
                             End If
                         Next
                     End If
                 End If
+
+                PictureBox1.Image = My.Resources._Error
 
                 If _BuscarEnEliminados() = "Esta" Then
                     MsgBox("Ya desconto ese cheque de la lista")
@@ -93,7 +97,9 @@
                     txtCodigoCheque.Text = ""
                 End If
 
-                Me.BackColor = Color.FromKnownColor(KnownColor.Red)
+                'Me.BackColor = Color.FromKnownColor(KnownColor.Red)
+                Timer1.Start()
+
                 txtCodigoCheque.SelectAll()
             Case Keys.Escape
                 txtCodigoCheque.Text = ""
@@ -162,4 +168,12 @@
 
 
 
+    Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles btnCerrar.Click
+        Close()
+    End Sub
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        PictureBox1.Image = Nothing
+        Timer1.Stop()
+    End Sub
 End Class

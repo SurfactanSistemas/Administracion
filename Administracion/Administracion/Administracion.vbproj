@@ -1870,6 +1870,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Firma.JPG" />
+    <None Include="Resources\Exito.png" />
+    <None Include="Resources\Error.png" />
     <None Include="Resources\internet.png" />
     <None Include="Resources\Excel_icon.ico" />
     <None Include="Resources\Word_icon.png" />
