@@ -75,10 +75,89 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ListadoPedidosPendientes.Designer.vb">
+    <Compile Include="Interfases\IAgregarEnvase.vb" />
+    <Compile Include="Maestro\Ingreso Envases\AgregarEnvases.Designer.vb">
+      <DependentUpon>AgregarEnvases.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestro\Ingreso Envases\AgregarEnvases.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestro\Ingreso Envases\IngresoEnvases.Designer.vb">
+      <DependentUpon>IngresoEnvases.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestro\Ingreso Envases\IngresoEnvases.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestro\Ingreso Familia MP\AgregarFliaMP.Designer.vb">
+      <DependentUpon>AgregarFliaMP.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestro\Ingreso Familia MP\AgregarFliaMP.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestro\Ingreso Familia MP\IngresoFliaMP.Designer.vb">
+      <DependentUpon>IngresoFliaMP.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestro\Ingreso Familia MP\IngresoFliaMP.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestro\Ingreso Linea Venta\AgregarLineaVentas.Designer.vb">
+      <DependentUpon>AgregarLineaVentas.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestro\Ingreso Linea Venta\AgregarLineaVentas.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interfases\IAgregarLineaVenta.vb" />
+    <Compile Include="Maestro\Ingreso Vendedores\AgregarVendedor.Designer.vb">
+      <DependentUpon>AgregarVendedor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestro\Ingreso Vendedores\AgregarVendedor.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interfases\IAgregarPago.vb" />
+    <Compile Include="Interfases\IAgregarVendedores.vb" />
+    <Compile Include="Maestro\Ingreso Condiciones  de Pago\AgregaPago.Designer.vb">
+      <DependentUpon>AgregaPago.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestro\Ingreso Condiciones  de Pago\AgregaPago.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestro\Ingreso Condiciones  de Pago\IngresoCondiPago.Designer.vb">
+      <DependentUpon>IngresoCondiPago.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestro\Ingreso Condiciones  de Pago\IngresoCondiPago.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestro\Ingreso Rubros\AgregarRubro.Designer.vb">
+      <DependentUpon>AgregarRubro.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestro\Ingreso Rubros\AgregarRubro.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BuscadorCliente.Designer.vb">
+      <DependentUpon>BuscadorCliente.vb</DependentUpon>
+    </Compile>
+    <Compile Include="BuscadorCliente.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BuscadorVendedor.Designer.vb">
+      <DependentUpon>BuscadorVendedor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="BuscadorVendedor.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interfases\IAgregarRubro.vb" />
+    <Compile Include="Interfases\IBuscadorVendedor.vb" />
+    <Compile Include="Maestro\Ingreso Rubros\IngresoRubros.Designer.vb">
+      <DependentUpon>IngresoRubros.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestro\Ingreso Rubros\IngresoRubros.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interfases\IBuscadorCliente.vb" />
+    <Compile Include="Listados\Pedidos Pendientes\ListadoPedidosPendientes.Designer.vb">
       <DependentUpon>ListadoPedidosPendientes.vb</DependentUpon>
     </Compile>
-    <Compile Include="ListadoPedidosPendientes.vb">
+    <Compile Include="Listados\Pedidos Pendientes\ListadoPedidosPendientes.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Login.designer.vb">
@@ -86,6 +165,49 @@
     </Compile>
     <Compile Include="Login.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestro\Ingreso Vendedores\IngresoVendedores.Designer.vb">
+      <DependentUpon>IngresoVendedores.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestro\Ingreso Vendedores\IngresoVendedores.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestro\Ingreso Linea Venta\IngresoLineasDeVentas.Designer.vb">
+      <DependentUpon>IngresoLineasDeVentas.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestro\Ingreso Linea Venta\IngresoLineasDeVentas.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interfases\IAgregarFliaMP.vb" />
+    <Compile Include="Reportes\ReporteCondicionesDePagos.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteCondicionesDePagos.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ReporteEnvases.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteEnvases.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ReporteFliaMP.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteFliaMP.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ReporteLineasDeVentas.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteLineasDeVentas.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ReporteRubros.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteRubros.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="MenuPrincipal.vb">
       <SubType>Form</SubType>
@@ -120,19 +242,81 @@
       <DependentUpon>ReportePedidosPendientes.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\wpedpen2.vb">
+    <Compile Include="Reportes\ReporteVendedores.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>wpedpen2.rpt</DependentUpon>
+      <DependentUpon>ReporteVendedores.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ListadoPedidosPendientes.resx">
+    <EmbeddedResource Include="Maestro\Ingreso Envases\AgregarEnvases.resx">
+      <DependentUpon>AgregarEnvases.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestro\Ingreso Envases\IngresoEnvases.resx">
+      <DependentUpon>IngresoEnvases.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestro\Ingreso Familia MP\AgregarFliaMP.resx">
+      <DependentUpon>AgregarFliaMP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestro\Ingreso Familia MP\IngresoFliaMP.resx">
+      <DependentUpon>IngresoFliaMP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestro\Ingreso Linea Venta\AgregarLineaVentas.resx">
+      <DependentUpon>AgregarLineaVentas.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestro\Ingreso Vendedores\AgregarVendedor.resx">
+      <DependentUpon>AgregarVendedor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestro\Ingreso Condiciones  de Pago\AgregaPago.resx">
+      <DependentUpon>AgregaPago.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestro\Ingreso Condiciones  de Pago\IngresoCondiPago.resx">
+      <DependentUpon>IngresoCondiPago.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestro\Ingreso Rubros\AgregarRubro.resx">
+      <DependentUpon>AgregarRubro.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BuscadorCliente.resx">
+      <DependentUpon>BuscadorCliente.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BuscadorVendedor.resx">
+      <DependentUpon>BuscadorVendedor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestro\Ingreso Rubros\IngresoRubros.resx">
+      <DependentUpon>IngresoRubros.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Pedidos Pendientes\ListadoPedidosPendientes.resx">
       <DependentUpon>ListadoPedidosPendientes.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestro\Ingreso Vendedores\IngresoVendedores.resx">
+      <DependentUpon>IngresoVendedores.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestro\Ingreso Linea Venta\IngresoLineasDeVentas.resx">
+      <DependentUpon>IngresoLineasDeVentas.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ReporteCondicionesDePagos.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteCondicionesDePagos.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ReporteEnvases.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteEnvases.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ReporteFliaMP.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteFliaMP.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ReporteLineasDeVentas.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteLineasDeVentas.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ReporteRubros.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteRubros.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="MenuPrincipal.resx">
       <DependentUpon>MenuPrincipal.vb</DependentUpon>
@@ -147,9 +331,9 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReportePedidosPendientes.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\wpedpen2.rpt">
+    <EmbeddedResource Include="Reportes\ReporteVendedores.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>wpedpen2.vb</LastGenOutput>
+      <LastGenOutput>ReporteVendedores.vb</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -184,6 +368,7 @@
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

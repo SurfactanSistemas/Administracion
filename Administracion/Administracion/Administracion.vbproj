@@ -180,6 +180,12 @@
     <Compile Include="ArqueoDeCheques.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ArqueoDeChequesSecundario.Designer.vb">
+      <DependentUpon>ArqueoDeChequesSecundario.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ArqueoDeChequesSecundario.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Auxiliares\CerrarProveedorSelectivoWeb.Designer.vb">
       <DependentUpon>CerrarProveedorSelectivoWeb.vb</DependentUpon>
     </Compile>
@@ -766,6 +772,12 @@
       <DependentUpon>ReporteArqueoCheques.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\ReporteArqueoChequesDiscriminado.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteArqueoChequesDiscriminado.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\ReporteArqueoMensualChequesAcumulado.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -971,6 +983,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ArqueoDeCheques.resx">
       <DependentUpon>ArqueoDeCheques.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ArqueoDeChequesSecundario.resx">
+      <DependentUpon>ArqueoDeChequesSecundario.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Auxiliares\CerrarProveedorSelectivoWeb.resx">
       <DependentUpon>CerrarProveedorSelectivoWeb.vb</DependentUpon>
@@ -1260,6 +1275,10 @@
     <EmbeddedResource Include="Reportes\ReporteArqueoCheques.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteArqueoCheques.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ReporteArqueoChequesDiscriminado.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteArqueoChequesDiscriminado.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\ReporteArqueoMensualChequesAcumulado.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

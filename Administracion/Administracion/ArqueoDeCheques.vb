@@ -1,5 +1,6 @@
 ﻿Imports System.Net.Configuration
 Imports CrystalDecisions.Shared
+Imports Microsoft.Office.Interop.Outlook
 
 Public Class ArqueoDeCheques
 
@@ -28,6 +29,10 @@ Public Class ArqueoDeCheques
             .Add("Importe")
             .Add("Banco")
             .Add("ClaveCheque")
+            .Add("Clave")
+            .Add("FechaOrd")
+            .Add("Grupo")
+            .Add("NroGrupo")
         End With
 
         Me.Text = ""
@@ -89,8 +94,118 @@ Public Class ArqueoDeCheques
 
         _RefrescartxtboxSumas()
 
+        'PREGUNTAMOS SI DESEA RECUPERAR LOS DATOS INGRESADOS, SINO LOS LIMPIAMOS
+        'PERO PRIMERO CHEQUEAMOS QUE TENGA ALGUNA FILA CARGADA 
+        'ASI NO PREGUNTAMOS AL PEDO
+        Dim SQLCnslt As String
+        SQLCnslt = "SELECT Numero FROM ArqueoChequesControl"
+        Dim row As DataRow = GetSingle(SQLCnslt, "surfactanSA")
+
+        If row IsNot Nothing Then
+            If (MsgBox("Desea recuperar el registro de cheques pasados por sistema?" & vbCrLf & " IMPORTANTE: Si pone NO se perderan los queres que sacara de la lista", vbYesNo) = vbYes) Then
+                RecuperarDatosRegistroCheques()
+            Else
+                LimpiarBaseRegistroCheques()
+            End If
+        End If
+        
 
 
+
+    End Sub
+
+
+    Private Function BuscarGrupo(ByVal fechaOrd As String) As String()
+        If fechaOrd >= RangoFechas(1, 1) And fechaOrd <= RangoFechas(1, 2) Then
+            Return {Label9.Text, 1}
+        End If
+
+        If fechaOrd >= RangoFechas(2, 1) And fechaOrd <= RangoFechas(2, 2) Then
+            Return {Label10.Text, 2}
+        End If
+
+        If fechaOrd >= RangoFechas(3, 1) And fechaOrd <= RangoFechas(3, 2) Then
+            Return {Label11.Text, 3}
+        End If
+
+        If fechaOrd >= RangoFechas(4, 1) And fechaOrd <= RangoFechas(4, 2) Then
+            Return {Label12.Text, 4}
+        End If
+
+        If fechaOrd >= RangoFechas(5, 1) And fechaOrd <= RangoFechas(5, 2) Then
+            Return {Label13.Text, 5}
+        End If
+
+        If fechaOrd >= RangoFechas(6, 1) And fechaOrd <= RangoFechas(6, 2) Then
+            Return {Label14.Text, 6}
+        End If
+
+        If fechaOrd >= RangoFechas(7, 1) And fechaOrd <= RangoFechas(7, 2) Then
+            Return {Label15.Text, 7}
+        End If
+
+        If fechaOrd > RangoFechas(8, 1) Then
+            Return {Label16.Text, 8}
+        End If
+    End Function
+    Private Sub RecuperarDatosRegistroCheques(Optional ByVal Traer As Boolean = False)
+        Dim SQLCnslt As String
+        If Traer = False Then
+            SQLCnslt = "SELECT * FROM ArqueoChequesControl"
+        Else
+            SQLCnslt = "SELECT * FROM ArqueoChequesControl WHERE MarcaOrigen <> 'X'"
+        End If
+
+        Dim tablaArqueo = GetAll(SQLCnslt, "surfactanSA")
+
+        If tablaArqueo.Rows.Count > 0 Then
+            For i = 0 To tablaArqueo.Rows.Count - 1
+                With tablaArqueo.Rows(i)
+
+
+                    For Each row As DataGridViewRow In DGV_Cheques.Rows
+                        If Trim(row.Cells("Clave").Value) = Trim(.Item("Clave")) Then
+                            mastxtFecha.Text = row.Cells("Fecha").Value
+
+                            'DESCUENTO DEL TOTAL DE CHEQUES EL IMPORTE DEL CHEQUE
+                            MontoTotal -= Val(row.Cells("Importe").Value)
+
+
+                            'RESTO DE LA CANTIDAD DE CHEQUES
+                            CantidadTotalChques -= 1
+                            Label17.Text = "en " & CantidadTotalChques & " cheques"
+
+                            'MUESTRO EL VALOR NUEVO
+                            'txtMontoTotal.Text = MontoTotal
+                            txtMontoTotal.Text = formatonumerico(MontoTotal, 2)
+
+
+                            _SumarDondeDebe(Val(row.Cells("Importe").Value), ordenaFecha(row.Cells("Fecha").Value))
+
+                            RowIndex = row.Index
+
+                            'BUSCO A DONDE LO VOY A AGRUPAR
+                            Dim grupo() As String = BuscarGrupo(ordenaFecha(row.Cells("Fecha").Value))
+                            'AGREGO A LA TABLA REGISTRO DE LOS CHEQUES QUE SACO DEL GRID EN MEMORIA
+                            tablaChequesEliminados.Rows.Add(row.Cells("Fecha").Value, row.Cells("Numero").Value, row.Cells("Importe").Value, row.Cells("Banco").Value, row.Cells("ClaveCheque").Value, row.Cells("Clave").Value, ordenaFecha(row.Cells("Fecha").Value), grupo(0), grupo(1))
+
+                            DGV_Cheques.Rows.RemoveAt(RowIndex)
+
+                            Exit For
+                        End If
+                    Next
+
+
+                End With
+            Next
+        End If
+
+    End Sub
+
+    Private Sub LimpiarBaseRegistroCheques()
+        Dim SQLCnslt As String
+        SQLCnslt = "DELETE FROM ArqueoChequesControl"
+        ExecuteNonQueries("SurfactanSa", {SQLCnslt})
     End Sub
 
     Private Sub _RefrescartxtboxSumas()
@@ -111,7 +226,7 @@ Public Class ArqueoDeCheques
         Dim SQLCnslt As String = ""
 
         'TRAIGO LOS CHEQUES EN RECIBOS
-        SQLCnslt = "SELECT Importe2, Numero2, Fecha2 , Banco2, ClaveCheque FROM Recibos WHERE TipoReg = '2' "
+        SQLCnslt = "SELECT Importe2, Numero2, Fecha2 , Banco2, ClaveCheque, Clave FROM Recibos WHERE TipoReg = '2' "
         SQLCnslt = SQLCnslt & "AND Estado2 <> 'X' AND Tipo2 = '02' ORDER BY FechaOrd2, Numero2"
 
         Dim tablaRecibos As DataTable = GetAll(SQLCnslt)
@@ -119,24 +234,24 @@ Public Class ArqueoDeCheques
         If tablaRecibos.Rows.Count > 0 Then
             For Each row In tablaRecibos.Rows
 
-                DGV_Cheques.Rows.Add(row.Item("Fecha2"), row.Item("Numero2"), formatonumerico(row.Item("Importe2")), row.Item("Banco2"), UCase(row.Item("ClaveCheque")), "R", ordenaFecha(row.Item("Fecha2")))
+                DGV_Cheques.Rows.Add(row.Item("Fecha2"), row.Item("Numero2"), formatonumerico(row.Item("Importe2")), row.Item("Banco2"), UCase(row.Item("ClaveCheque")), "R", ordenaFecha(row.Item("Fecha2")), row.item("Clave"))
 
             Next
         End If
 
         'TRAIGO LOS CHEQUES EN RECIBOS PROVISORIOS
-        SQLCnslt = "SELECT Importe2, Numero2, Fecha2 , Banco2, ClaveCheque FROM RecibosProvi WHERE TipoReg = '2' "
-        SQLCnslt = SQLCnslt & "AND Estado2 = 'P' AND ReciboDefinitivo = '0' AND FechaOrd2 > '20191231' ORDER BY FechaOrd2, Numero2"
-
-        Dim tablaRecibosProvisorios As DataTable = GetAll(SQLCnslt)
-
-        If tablaRecibosProvisorios.Rows.Count > 0 Then
-            For Each row In tablaRecibosProvisorios.Rows
-
-                DGV_Cheques.Rows.Add(row.Item("Fecha2"), row.Item("Numero2"), formatonumerico(row.Item("Importe2")), row.Item("Banco2"), UCase(row.Item("ClaveCheque")), "RP", ordenaFecha(row.Item("Fecha2")))
-
-            Next
-        End If
+'        SQLCnslt = "SELECT Importe2, Numero2, Fecha2 , Banco2, ClaveCheque, Clave FROM RecibosProvi WHERE TipoReg = '2' "
+'        SQLCnslt = SQLCnslt & "AND Estado2 = 'P' AND ReciboDefinitivo = '0' AND FechaOrd2 > '20191231' ORDER BY FechaOrd2, Numero2"
+'
+'        Dim tablaRecibosProvisorios As DataTable = GetAll(SQLCnslt)
+'
+'        If tablaRecibosProvisorios.Rows.Count > 0 Then
+'            For Each row In tablaRecibosProvisorios.Rows
+'
+'                DGV_Cheques.Rows.Add(row.Item("Fecha2"), row.Item("Numero2"), formatonumerico(row.Item("Importe2")), row.Item("Banco2"), UCase(row.Item("ClaveCheque")), "RP", ordenaFecha(row.Item("Fecha2")), row.item("Clave"))
+'
+'            Next
+'        End If
 
     End Sub
 
@@ -165,7 +280,7 @@ Public Class ArqueoDeCheques
                                 'Y A QUE BASE TENGO Q MODIFICAR
                                 AqueBase = row.Cells("Origen").Value
                                 'Y EL CODIGO DEL CHEQUE
-                                CodigoUltimoCheque = row.Cells("ClaveCheque").Value
+                                CodigoUltimoCheque = row.Cells("Clave").Value
 
                                 'RESTO DE LA CANTIDAD DE CHEQUES
                                 CantidadTotalChques -= 1
@@ -180,9 +295,13 @@ Public Class ArqueoDeCheques
 
                                 RowIndex = row.Index
 
-                                'AGREGO A LA TABLA REGISTRO DE LOS CHEQUES QUE SACO DEL GRID
-                                tablaChequesEliminados.Rows.Add(row.Cells("Fecha").Value, row.Cells("Numero").Value, row.Cells("Importe").Value, row.Cells("Banco").Value, row.Cells("ClaveCheque").Value)
-
+                                'BUSCO A DONDE LO VOY A AGRUPAR
+                                Dim grupo() As String = BuscarGrupo(ordenaFecha(row.Cells("Fecha").Value))
+                                'AGREGO A LA TABLA REGISTRO DE LOS CHEQUES QUE SACO DEL GRID EN MEMORIA
+                                tablaChequesEliminados.Rows.Add(row.Cells("Fecha").Value, row.Cells("Numero").Value, row.Cells("Importe").Value, row.Cells("Banco").Value, row.Cells("ClaveCheque").Value, row.Cells("Clave").Value, ordenaFecha(row.Cells("Fecha").Value), grupo(0), grupo(1))
+                                'AGREGO A LA TABLA REGISTRO DE LOS CHEQUES QUE SACO DEL GRID EN LA BASE DE DATOS 
+                                'PARA PODER RECUPERARLOS EN CASO DE QUE EL PROGRAMA SE CIERRE
+                                AgregarABaseRespaldo(row.Cells("Fecha").Value, row.Cells("Numero").Value, row.Cells("Importe").Value, row.Cells("Banco").Value, row.Cells("ClaveCheque").Value, row.Cells("Clave").Value)
 
                                 DGV_Cheques.Rows.RemoveAt(RowIndex)
 
@@ -209,6 +328,16 @@ Public Class ArqueoDeCheques
 
     End Sub
 
+
+
+    Private Sub AgregarABaseRespaldo(ByVal Fecha As String, ByVal Numero As String, ByVal Importe As Double, ByVal Banco As String, ByVal ClaveCheque As String, ByVal Clave As String)
+
+        Dim SQLCnslt As String
+        SQLCnslt = "INSERT INTO ArqueoChequesControl (Clave, Fecha, Numero, Importe, Banco, ClaveCheque, MarcaOrigen) VALUES('" & Clave & "','" & Fecha & "', '" & Numero & "', '" & Importe & "', '" & Banco & "', '" & ClaveCheque & "', '" & "X" & "')"
+
+        ExecuteNonQueries("surfactanSa", {SQLCnslt})
+
+    End Sub
 
     Private Sub _SumarDondeDebe(ByVal Importe As Double, ByVal FechaOrd As String, Optional ByVal Restas As Boolean = False)
         'SI RECIBO TRUE, ES PORQUE SE DESCUENTA
@@ -308,11 +437,11 @@ Public Class ArqueoDeCheques
                         'CON ORIGEN BUSCAMOS A QUE BASE TENEMOS QUE MODIFICAR
                         If AqueBase = "R" Then
 
-                            SQLCnslt = "UPDATE Recibos SET Fecha2 = '" & mastxtFecha.Text & "', FechaOrd2 = '" & fechaOrd & "' WHERE ClaveCheque = '" & CodigoUltimoCheque & "'"
+                            SQLCnslt = "UPDATE Recibos SET Fecha2 = '" & mastxtFecha.Text & "', FechaOrd2 = '" & fechaOrd & "' WHERE Clave = '" & CodigoUltimoCheque & "'"
 
                         Else
 
-                            SQLCnslt = "UPDATE RecibosProvi SET Fecha2 = '" & mastxtFecha.Text & "', FechaOrd2 = '" & fechaOrd & "' WHERE ClaveCheque = '" & CodigoUltimoCheque & "'"
+                            SQLCnslt = "UPDATE RecibosProvi SET Fecha2 = '" & mastxtFecha.Text & "', FechaOrd2 = '" & fechaOrd & "' WHERE Clave = '" & CodigoUltimoCheque & "'"
 
                         End If
 
@@ -488,12 +617,26 @@ Public Class ArqueoDeCheques
             txtImporte.Text = .Cells("Importe").Value
             txtBanco.Text = .Cells("Banco").Value
 
+
+            'Y A QUE BASE TENGO Q MODIFICAR
+            AqueBase = .Cells("Origen").Value
             'GUARDO LA FECHA PARA PODER VERIFICARLA DESPUES SI HACE UNA MODIFICACION
             ultimaFechaLeida = .Cells("Fecha").Value
             'GUARDO EL ULTIMO IMPORTE PARA PODER MODIFICARLO DESPUES
             UltimoImporte = Val(.Cells("Importe").Value)
+
+            'BUSCO A DONDE LO VOY A AGRUPAR
+            Dim grupo() As String = BuscarGrupo(ordenaFecha(.Cells("Fecha").Value))
             'AGREGO A LA TABLA REGISTRO DE LOS CHEQUES QUE SACO DEL GRID
-            tablaChequesEliminados.Rows.Add(.Cells("Fecha").Value, .Cells("Numero").Value, .Cells("Importe").Value, .Cells("Banco").Value, .Cells("ClaveCheque").Value)
+            tablaChequesEliminados.Rows.Add(.Cells("Fecha").Value, .Cells("Numero").Value, .Cells("Importe").Value, .Cells("Banco").Value, .Cells("ClaveCheque").Value, .Cells("Clave").Value, ordenaFecha(.Cells("Fecha").Value), grupo(0), grupo(1))
+
+            'AGREGO A LA TABLA REGISTRO DE LOS CHEQUES QUE SACO DEL GRID EN LA BASE DE DATOS 
+            'PARA PODER RECUPERARLOS EN CASO DE QUE EL PROGRAMA SE CIERRE
+            AgregarABaseRespaldo(.Cells("Fecha").Value, .Cells("Numero").Value, .Cells("Importe").Value, .Cells("Banco").Value, .Cells("ClaveCheque").Value, .Cells("Clave").Value)
+
+            'GUARDO LA CLAVE DE ULTIMO CHEQUE
+            CodigoUltimoCheque = .Cells("Clave").Value
+
 
             'SUMAMOS EN EL TEXTBOX QUE CORRESPONDE
             _SumarDondeDebe(Val(.Cells("Importe").Value), ordenaFecha(.Cells("Fecha").Value))
@@ -521,7 +664,7 @@ Public Class ArqueoDeCheques
 
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnExportarExcel.Click
 
         Dim TablaArqueoCheques As New DataTable
 
@@ -557,11 +700,11 @@ Public Class ArqueoDeCheques
 
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles btnImprimirAcumulado.Click
 
         Dim Total As Double = 0
 
-        Total = _SumarTexts()
+        Total = _Sumartexts()
 
         With New ConsultasVarias.VistaPrevia
             .Reporte = New ReporteArqueoMensualChequesAcumulado()
@@ -604,4 +747,23 @@ Public Class ArqueoDeCheques
     End Function
 
 
+    Private Sub txtTraerCambios_Click(sender As Object, e As EventArgs) Handles txtTraerCambios.Click
+        RecuperarDatosRegistroCheques(True)
+    End Sub
+
+    Private Sub btnDiscriminadoXQuincena_Click(sender As Object, e As EventArgs) Handles btnDiscriminadoXQuincena.Click
+        With VistaPrevia
+            .Reporte = New ReporteArqueoChequesDiscriminado()
+            .Reporte.SetDataSource(tablaChequesEliminados)
+            .Reporte.SetParameterValue(0, txtmesInicial.Text)
+            .Reporte.SetParameterValue(1, txtmes2Q1.Text)
+            .Reporte.SetParameterValue(2, txtmes2Q2.Text)
+            .Reporte.SetParameterValue(3, txtmes3Q1.Text)
+            .Reporte.SetParameterValue(4, txtmes3Q2.Text)
+            .Reporte.SetParameterValue(5, txtmes4Q1.Text)
+            .Reporte.SetParameterValue(6, txtmes4Q2.Text)
+            .Reporte.SetParameterValue(7, txtmesesRestantes.Text)
+            .Mostrar()
+        End With
+    End Sub
 End Class

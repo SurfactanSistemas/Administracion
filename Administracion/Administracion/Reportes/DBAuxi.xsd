@@ -76,6 +76,21 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="_x0020_tablaChequesEliminados" msprop:Generator_TableClassName="_tablaChequesEliminadosDataTable" msprop:Generator_TableVarName="table_tablaChequesEliminados" msprop:Generator_RowChangedName="_tablaChequesEliminadosRowChanged" msprop:Generator_TablePropName="_tablaChequesEliminados" msprop:Generator_RowDeletingName="_tablaChequesEliminadosRowDeleting" msprop:Generator_RowChangingName="_tablaChequesEliminadosRowChanging" msprop:Generator_RowEvHandlerName="_tablaChequesEliminadosRowChangeEventHandler" msprop:Generator_RowDeletedName="_tablaChequesEliminadosRowDeleted" msprop:Generator_RowClassName="_tablaChequesEliminadosRow" msprop:Generator_UserTableName=" tablaChequesEliminados" msprop:Generator_RowEvArgName="_tablaChequesEliminadosRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Fecha" msprop:Generator_ColumnVarNameInTable="columnFecha" msprop:Generator_ColumnPropNameInRow="Fecha" msprop:Generator_ColumnPropNameInTable="FechaColumn" msprop:Generator_UserColumnName="Fecha" type="xs:string" minOccurs="0" />
+              <xs:element name="Numero" msprop:Generator_ColumnVarNameInTable="columnNumero" msprop:Generator_ColumnPropNameInRow="Numero" msprop:Generator_ColumnPropNameInTable="NumeroColumn" msprop:Generator_UserColumnName="Numero" type="xs:string" minOccurs="0" />
+              <xs:element name="Importe" msprop:Generator_ColumnVarNameInTable="columnImporte" msprop:Generator_ColumnPropNameInRow="Importe" msprop:Generator_ColumnPropNameInTable="ImporteColumn" msprop:Generator_UserColumnName="Importe" type="xs:string" minOccurs="0" />
+              <xs:element name="Banco" msprop:Generator_ColumnVarNameInTable="columnBanco" msprop:Generator_ColumnPropNameInRow="Banco" msprop:Generator_ColumnPropNameInTable="BancoColumn" msprop:Generator_UserColumnName="Banco" type="xs:string" minOccurs="0" />
+              <xs:element name="ClaveCheque" msprop:Generator_ColumnVarNameInTable="columnClaveCheque" msprop:Generator_ColumnPropNameInRow="ClaveCheque" msprop:Generator_ColumnPropNameInTable="ClaveChequeColumn" msprop:Generator_UserColumnName="ClaveCheque" type="xs:string" minOccurs="0" />
+              <xs:element name="Clave" msprop:Generator_ColumnVarNameInTable="columnClave" msprop:Generator_ColumnPropNameInRow="Clave" msprop:Generator_ColumnPropNameInTable="ClaveColumn" msprop:Generator_UserColumnName="Clave" type="xs:string" minOccurs="0" />
+              <xs:element name="FechaOrd" msprop:Generator_ColumnVarNameInTable="columnFechaOrd" msprop:Generator_ColumnPropNameInRow="FechaOrd" msprop:Generator_ColumnPropNameInTable="FechaOrdColumn" msprop:Generator_UserColumnName="FechaOrd" type="xs:string" minOccurs="0" />
+              <xs:element name="Grupo" msprop:Generator_ColumnVarNameInTable="columnGrupo" msprop:Generator_ColumnPropNameInRow="Grupo" msprop:Generator_ColumnPropNameInTable="GrupoColumn" msprop:Generator_UserColumnName="Grupo" type="xs:string" minOccurs="0" />
+              <xs:element name="NroGrupo" msprop:Generator_ColumnVarNameInTable="columnNroGrupo" msprop:Generator_ColumnPropNameInRow="NroGrupo" msprop:Generator_ColumnPropNameInTable="NroGrupoColumn" msprop:Generator_UserColumnName="NroGrupo" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
   </xs:element>
