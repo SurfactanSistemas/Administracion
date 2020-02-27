@@ -44,9 +44,11 @@ Partial Class Depositos
         Me.rbVentaCheques = New System.Windows.Forms.RadioButton()
         Me.rbDepósito = New System.Windows.Forms.RadioButton()
         Me.btnEliminarFila = New System.Windows.Forms.Button()
-        Me.lstSeleccion = New Administracion.CustomListBox()
         Me.txtFechaAcreditacion = New System.Windows.Forms.MaskedTextBox()
         Me.txtFecha = New System.Windows.Forms.MaskedTextBox()
+        Me.txtAyuda = New System.Windows.Forms.TextBox()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.lstSeleccion = New Administracion.CustomListBox()
         Me.txtImporte = New Administracion.CustomTextBox()
         Me.CustomLabel3 = New Administracion.CustomLabel()
         Me.CustomLabel4 = New Administracion.CustomLabel()
@@ -60,8 +62,6 @@ Partial Class Depositos
         Me.CustomLabel6 = New Administracion.CustomLabel()
         Me.lstFiltrado = New Administracion.CustomListBox()
         Me.lstConsulta = New Administracion.CustomListBox()
-        Me.txtAyuda = New System.Windows.Forms.TextBox()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.btnCerrar = New Administracion.CustomButton()
         Me.btnConsulta = New Administracion.CustomButton()
         Me.btnChequeTerceros = New Administracion.CustomButton()
@@ -266,19 +266,6 @@ Partial Class Depositos
         Me.btnEliminarFila.Text = "Eliminar Fila"
         Me.btnEliminarFila.UseVisualStyleBackColor = True
         '
-        'lstSeleccion
-        '
-        Me.lstSeleccion.Cleanable = False
-        Me.lstSeleccion.EnterIndex = -1
-        Me.lstSeleccion.FormattingEnabled = True
-        Me.lstSeleccion.Items.AddRange(New Object() {"Bancos", "Cheques de Terceros"})
-        Me.lstSeleccion.LabelAssociationKey = -1
-        Me.lstSeleccion.Location = New System.Drawing.Point(459, 9)
-        Me.lstSeleccion.Name = "lstSeleccion"
-        Me.lstSeleccion.Size = New System.Drawing.Size(305, 355)
-        Me.lstSeleccion.TabIndex = 14
-        Me.lstSeleccion.Visible = False
-        '
         'txtFechaAcreditacion
         '
         Me.txtFechaAcreditacion.Location = New System.Drawing.Point(139, 65)
@@ -301,6 +288,27 @@ Partial Class Depositos
         Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtFecha.ValidatingType = GetType(Date)
         '
+        'txtAyuda
+        '
+        Me.txtAyuda.Location = New System.Drawing.Point(459, 9)
+        Me.txtAyuda.Name = "txtAyuda"
+        Me.txtAyuda.Size = New System.Drawing.Size(304, 20)
+        Me.txtAyuda.TabIndex = 19
+        Me.txtAyuda.Visible = False
+        '
+        'lstSeleccion
+        '
+        Me.lstSeleccion.Cleanable = False
+        Me.lstSeleccion.EnterIndex = -1
+        Me.lstSeleccion.FormattingEnabled = True
+        Me.lstSeleccion.Items.AddRange(New Object() {"Bancos", "Cheques de Terceros"})
+        Me.lstSeleccion.LabelAssociationKey = -1
+        Me.lstSeleccion.Location = New System.Drawing.Point(459, 9)
+        Me.lstSeleccion.Name = "lstSeleccion"
+        Me.lstSeleccion.Size = New System.Drawing.Size(305, 355)
+        Me.lstSeleccion.TabIndex = 14
+        Me.lstSeleccion.Visible = False
+        '
         'txtImporte
         '
         Me.txtImporte.Cleanable = True
@@ -308,7 +316,7 @@ Partial Class Depositos
         Me.txtImporte.EnterIndex = 5
         Me.txtImporte.LabelAssociationKey = 5
         Me.txtImporte.Location = New System.Drawing.Point(281, 65)
-        Me.txtImporte.MaxLength = 10
+        Me.txtImporte.MaxLength = 10000
         Me.txtImporte.Name = "txtImporte"
         Me.txtImporte.Size = New System.Drawing.Size(89, 20)
         Me.txtImporte.TabIndex = 16
@@ -465,14 +473,6 @@ Partial Class Depositos
         Me.lstConsulta.Size = New System.Drawing.Size(305, 329)
         Me.lstConsulta.TabIndex = 8
         Me.lstConsulta.Visible = False
-        '
-        'txtAyuda
-        '
-        Me.txtAyuda.Location = New System.Drawing.Point(459, 9)
-        Me.txtAyuda.Name = "txtAyuda"
-        Me.txtAyuda.Size = New System.Drawing.Size(304, 20)
-        Me.txtAyuda.TabIndex = 19
-        Me.txtAyuda.Visible = False
         '
         'btnCerrar
         '
