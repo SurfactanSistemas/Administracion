@@ -2,10 +2,11 @@
 Imports CrystalDecisions.Shared
 Imports Microsoft.Office.Interop.Outlook
 
-Public Class ArqueoDeCheques
+Public Class ArqueoDeCheques: implements IArqueoCheques
 
     Dim RowIndex As Integer = 0
     Dim tablaChequesEliminados As New DataTable
+    Dim tablaChequesDiscriminados As New DataTable
     Dim ultimaFechaLeida As String = "  /  /    "
     Dim UltimoImporte As Double
     Dim AqueBase As String = ""
@@ -15,6 +16,7 @@ Public Class ArqueoDeCheques
     Dim SumaPorFecha(9) As Double
     Dim fechaInicial As Date = Today
     Dim RangoFechas(9, 2) As String
+    Dim OrdenCheques As Integer = 0
 
 
 
@@ -33,7 +35,23 @@ Public Class ArqueoDeCheques
             .Add("FechaOrd")
             .Add("Grupo")
             .Add("NroGrupo")
+            .Add("OrdenCheques")
         End With
+
+        With tablaChequesDiscriminados.Columns
+            .Add("Fecha")
+            .Add("Numero")
+            .Add("Importe")
+            .Add("Banco")
+            .Add("ClaveCheque")
+            .Add("Clave")
+            .Add("FechaOrd")
+            .Add("Grupo")
+            .Add("NroGrupo")
+            .Add("OrdenCheques")
+        End With
+
+
 
         Me.Text = ""
         txtCodigoCheque.Focus()
@@ -187,7 +205,8 @@ Public Class ArqueoDeCheques
                             'BUSCO A DONDE LO VOY A AGRUPAR
                             Dim grupo() As String = BuscarGrupo(ordenaFecha(row.Cells("Fecha").Value))
                             'AGREGO A LA TABLA REGISTRO DE LOS CHEQUES QUE SACO DEL GRID EN MEMORIA
-                            tablaChequesEliminados.Rows.Add(row.Cells("Fecha").Value, row.Cells("Numero").Value, row.Cells("Importe").Value, row.Cells("Banco").Value, row.Cells("ClaveCheque").Value, row.Cells("Clave").Value, ordenaFecha(row.Cells("Fecha").Value), grupo(0), grupo(1))
+                            OrdenCheques += 1
+                            tablaChequesEliminados.Rows.Add(row.Cells("Fecha").Value, row.Cells("Numero").Value, row.Cells("Importe").Value, row.Cells("Banco").Value, row.Cells("ClaveCheque").Value, row.Cells("Clave").Value, ordenaFecha(row.Cells("Fecha").Value), grupo(0), grupo(1), OrdenCheques)
 
                             DGV_Cheques.Rows.RemoveAt(RowIndex)
 
@@ -298,7 +317,8 @@ Public Class ArqueoDeCheques
                                 'BUSCO A DONDE LO VOY A AGRUPAR
                                 Dim grupo() As String = BuscarGrupo(ordenaFecha(row.Cells("Fecha").Value))
                                 'AGREGO A LA TABLA REGISTRO DE LOS CHEQUES QUE SACO DEL GRID EN MEMORIA
-                                tablaChequesEliminados.Rows.Add(row.Cells("Fecha").Value, row.Cells("Numero").Value, row.Cells("Importe").Value, row.Cells("Banco").Value, row.Cells("ClaveCheque").Value, row.Cells("Clave").Value, ordenaFecha(row.Cells("Fecha").Value), grupo(0), grupo(1))
+                                OrdenCheques += 1
+                                tablaChequesEliminados.Rows.Add(row.Cells("Fecha").Value, row.Cells("Numero").Value, row.Cells("Importe").Value, row.Cells("Banco").Value, row.Cells("ClaveCheque").Value, row.Cells("Clave").Value, ordenaFecha(row.Cells("Fecha").Value), grupo(0), grupo(1), OrdenCheques)
                                 'AGREGO A LA TABLA REGISTRO DE LOS CHEQUES QUE SACO DEL GRID EN LA BASE DE DATOS 
                                 'PARA PODER RECUPERARLOS EN CASO DE QUE EL PROGRAMA SE CIERRE
                                 AgregarABaseRespaldo(row.Cells("Fecha").Value, row.Cells("Numero").Value, row.Cells("Importe").Value, row.Cells("Banco").Value, row.Cells("ClaveCheque").Value, row.Cells("Clave").Value)
@@ -628,7 +648,8 @@ Public Class ArqueoDeCheques
             'BUSCO A DONDE LO VOY A AGRUPAR
             Dim grupo() As String = BuscarGrupo(ordenaFecha(.Cells("Fecha").Value))
             'AGREGO A LA TABLA REGISTRO DE LOS CHEQUES QUE SACO DEL GRID
-            tablaChequesEliminados.Rows.Add(.Cells("Fecha").Value, .Cells("Numero").Value, .Cells("Importe").Value, .Cells("Banco").Value, .Cells("ClaveCheque").Value, .Cells("Clave").Value, ordenaFecha(.Cells("Fecha").Value), grupo(0), grupo(1))
+            OrdenCheques += 1
+            tablaChequesEliminados.Rows.Add(.Cells("Fecha").Value, .Cells("Numero").Value, .Cells("Importe").Value, .Cells("Banco").Value, .Cells("ClaveCheque").Value, .Cells("Clave").Value, ordenaFecha(.Cells("Fecha").Value), grupo(0), grupo(1), OrdenCheques)
 
             'AGREGO A LA TABLA REGISTRO DE LOS CHEQUES QUE SACO DEL GRID EN LA BASE DE DATOS 
             'PARA PODER RECUPERARLOS EN CASO DE QUE EL PROGRAMA SE CIERRE
@@ -752,18 +773,114 @@ Public Class ArqueoDeCheques
     End Sub
 
     Private Sub btnDiscriminadoXQuincena_Click(sender As Object, e As EventArgs) Handles btnDiscriminadoXQuincena.Click
-        With VistaPrevia
-            .Reporte = New ReporteArqueoChequesDiscriminado()
-            .Reporte.SetDataSource(tablaChequesEliminados)
-            .Reporte.SetParameterValue(0, txtmesInicial.Text)
-            .Reporte.SetParameterValue(1, txtmes2Q1.Text)
-            .Reporte.SetParameterValue(2, txtmes2Q2.Text)
-            .Reporte.SetParameterValue(3, txtmes3Q1.Text)
-            .Reporte.SetParameterValue(4, txtmes3Q2.Text)
-            .Reporte.SetParameterValue(5, txtmes4Q1.Text)
-            .Reporte.SetParameterValue(6, txtmes4Q2.Text)
-            .Reporte.SetParameterValue(7, txtmesesRestantes.Text)
-            .Mostrar()
+
+        With New ArqueoCheques_ConsultaListado(Label9.Text, Label10.Text, Label11.Text, Label12.Text, Label13.Text, Label14.Text, Label15.Text, Label16.Text)
+            .Show(Me)
         End With
+
+
+    End Sub
+
+    Public Sub _ProcesarDatosChecks(check1 As Boolean, check2 As Boolean, check3 As Boolean, check4 As Boolean, check5 As Boolean, check6 As Boolean, check7 As Boolean, check8 As Boolean) Implements IArqueoCheques._ProcesarDatosChecks
+
+
+        If (check1 = True And check2 = True And check3 = True And check4 = True And check5 = True And check6 = True And check7 = True And check8 = True) Then
+            With VistaPrevia
+                .Reporte = New ReporteArqueoChequesDiscriminado()
+                .Reporte.SetDataSource(tablaChequesEliminados)
+                .Reporte.SetParameterValue(0, txtmesInicial.Text)
+                .Reporte.SetParameterValue(1, txtmes2Q1.Text)
+                .Reporte.SetParameterValue(2, txtmes2Q2.Text)
+                .Reporte.SetParameterValue(3, txtmes3Q1.Text)
+                .Reporte.SetParameterValue(4, txtmes3Q2.Text)
+                .Reporte.SetParameterValue(5, txtmes4Q1.Text)
+                .Reporte.SetParameterValue(6, txtmes4Q2.Text)
+                .Reporte.SetParameterValue(7, txtmesesRestantes.Text)
+                .Mostrar()
+            End With
+        Else
+
+            tablaChequesDiscriminados.Rows.Clear()
+
+            FiltrarTabla(check1, check2, check3, check4, check5, check6, check7, check8)
+
+            With VistaPrevia
+                .Reporte = New ReporteArqueoChequesDiscriminado()
+                .Reporte.SetDataSource(tablaChequesDiscriminados)
+                .Reporte.SetParameterValue(0, txtmesInicial.Text)
+                .Reporte.SetParameterValue(1, txtmes2Q1.Text)
+                .Reporte.SetParameterValue(2, txtmes2Q2.Text)
+                .Reporte.SetParameterValue(3, txtmes3Q1.Text)
+                .Reporte.SetParameterValue(4, txtmes3Q2.Text)
+                .Reporte.SetParameterValue(5, txtmes4Q1.Text)
+                .Reporte.SetParameterValue(6, txtmes4Q2.Text)
+                .Reporte.SetParameterValue(7, txtmesesRestantes.Text)
+                .Mostrar()
+            End With
+
+
+
+        End If
+
+    End Sub
+
+    Sub FiltrarTabla(ByVal check1 As Boolean, ByVal check2 As Boolean, ByVal check3 As Boolean, ByVal check4 As Boolean, ByVal check5 As Boolean, ByVal check6 As Boolean, ByVal check7 As Boolean, ByVal check8 As Boolean)
+
+
+
+
+        For Each rowEliminado As Object In tablaChequesEliminados.Rows
+            If rowEliminado.item("FechaOrd") >= RangoFechas(1, 1) And rowEliminado.item("FechaOrd") <= RangoFechas(1, 2) Then
+                If check1 = False Then
+                    Continue For
+                End If
+
+            End If
+
+            If rowEliminado.item("FechaOrd") >= RangoFechas(2, 1) And rowEliminado.item("FechaOrd") <= RangoFechas(2, 2) Then
+                If check2 = False Then
+                    Continue For
+                End If
+            End If
+
+            If rowEliminado.item("FechaOrd") >= RangoFechas(3, 1) And rowEliminado.item("FechaOrd") <= RangoFechas(3, 2) Then
+                If check3 = False Then
+                    Continue For
+                End If
+            End If
+
+            If rowEliminado.item("FechaOrd") >= RangoFechas(4, 1) And rowEliminado.item("FechaOrd") <= RangoFechas(4, 2) Then
+                If check4 = False Then
+                    Continue For
+                End If
+            End If
+
+            If rowEliminado.item("FechaOrd") >= RangoFechas(5, 1) And rowEliminado.item("FechaOrd") <= RangoFechas(5, 2) Then
+                If check5 = False Then
+                    Continue For
+                End If
+            End If
+
+            If rowEliminado.item("FechaOrd") >= RangoFechas(6, 1) And rowEliminado.item("FechaOrd") <= RangoFechas(6, 2) Then
+                If check6 = False Then
+                    Continue For
+                End If
+            End If
+
+            If rowEliminado.item("FechaOrd") >= RangoFechas(7, 1) And rowEliminado.item("FechaOrd") <= RangoFechas(7, 2) Then
+                If check7 = False Then
+                    Continue For
+                End If
+            End If
+
+            If rowEliminado.item("FechaOrd") > RangoFechas(8, 1) Then
+                If check8 = False Then
+                    Continue For
+                End If
+            End If
+
+            tablaChequesDiscriminados.Rows.Add(rowEliminado.item("Fecha"), rowEliminado.item("Numero"), rowEliminado.item("Importe"), rowEliminado.item("Banco"), rowEliminado.item("ClaveCheque"), rowEliminado.item("Clave"), rowEliminado.item("FechaOrd"), rowEliminado.item("Grupo"), rowEliminado.item("NroGrupo"), rowEliminado.item("OrdenCheques"))
+
+        Next
     End Sub
 End Class

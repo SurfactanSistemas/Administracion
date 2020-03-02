@@ -2113,6 +2113,8 @@ Partial Public Class DBAuxi
 
         Private columnNroGrupo As Global.System.Data.DataColumn
 
+        Private columnOrdenCheques As Global.System.Data.DataColumn
+
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public Sub New()
@@ -2221,6 +2223,14 @@ Partial Public Class DBAuxi
         End Property
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public ReadOnly Property OrdenChequesColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnOrdenCheques
+            End Get
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
          Global.System.ComponentModel.Browsable(False)> _
         Public ReadOnly Property Count() As Integer
@@ -2257,9 +2267,9 @@ Partial Public Class DBAuxi
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-        Public Overloads Function Add_tablaChequesEliminadosRow(ByVal Fecha As String, ByVal Numero As String, ByVal Importe As String, ByVal Banco As String, ByVal ClaveCheque As String, ByVal Clave As String, ByVal FechaOrd As String, ByVal Grupo As String, ByVal NroGrupo As String) As _tablaChequesEliminadosRow
+        Public Overloads Function Add_tablaChequesEliminadosRow(ByVal Fecha As String, ByVal Numero As String, ByVal Importe As String, ByVal Banco As String, ByVal ClaveCheque As String, ByVal Clave As String, ByVal FechaOrd As String, ByVal Grupo As String, ByVal NroGrupo As String, ByVal OrdenCheques As String) As _tablaChequesEliminadosRow
             Dim row_tablaChequesEliminadosRow As _tablaChequesEliminadosRow = CType(Me.NewRow, _tablaChequesEliminadosRow)
-            Dim columnValuesArray() As Object = New Object() {Fecha, Numero, Importe, Banco, ClaveCheque, Clave, FechaOrd, Grupo, NroGrupo}
+            Dim columnValuesArray() As Object = New Object() {Fecha, Numero, Importe, Banco, ClaveCheque, Clave, FechaOrd, Grupo, NroGrupo, OrdenCheques}
             row_tablaChequesEliminadosRow.ItemArray = columnValuesArray
             Me.Rows.Add(row_tablaChequesEliminadosRow)
             Return row_tablaChequesEliminadosRow
@@ -2291,6 +2301,7 @@ Partial Public Class DBAuxi
             Me.columnFechaOrd = MyBase.Columns("FechaOrd")
             Me.columnGrupo = MyBase.Columns("Grupo")
             Me.columnNroGrupo = MyBase.Columns("NroGrupo")
+            Me.columnOrdenCheques = MyBase.Columns("OrdenCheques")
         End Sub
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
@@ -2314,6 +2325,8 @@ Partial Public Class DBAuxi
             MyBase.Columns.Add(Me.columnGrupo)
             Me.columnNroGrupo = New Global.System.Data.DataColumn("NroGrupo", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnNroGrupo)
+            Me.columnOrdenCheques = New Global.System.Data.DataColumn("OrdenCheques", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnOrdenCheques)
         End Sub
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
@@ -3615,6 +3628,22 @@ Partial Public Class DBAuxi
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Property OrdenCheques() As String
+            Get
+                Try
+                    Return CType(Me(Me.table_tablaChequesEliminados.OrdenChequesColumn), String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("El valor de la columna 'OrdenCheques' de la tabla ' tablaChequesEliminados' es DB" & _
+                            "Null.", e)
+                End Try
+            End Get
+            Set(value As String)
+                Me(Me.table_tablaChequesEliminados.OrdenChequesColumn) = value
+            End Set
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public Function IsFechaNull() As Boolean
             Return Me.IsNull(Me.table_tablaChequesEliminados.FechaColumn)
         End Function
@@ -3719,6 +3748,18 @@ Partial Public Class DBAuxi
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public Sub SetNroGrupoNull()
             Me(Me.table_tablaChequesEliminados.NroGrupoColumn) = Global.System.Convert.DBNull
+        End Sub
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Function IsOrdenChequesNull() As Boolean
+            Return Me.IsNull(Me.table_tablaChequesEliminados.OrdenChequesColumn)
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Sub SetOrdenChequesNull()
+            Me(Me.table_tablaChequesEliminados.OrdenChequesColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
