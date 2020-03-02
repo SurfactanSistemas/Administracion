@@ -617,16 +617,21 @@ Public Class ListadoImputacionesContable
                         If CampoRecibos.tiporec = "3" Then
                             txtCuenta = CampoRecibos.cuenta
                         Else
-                            If Val(CampoRecibos.tipo1) > 49 Then
-                                txtCuenta = "101"
-                            Else
+                            If Val(CampoRecibos.tipo1 = 60) Then
                                 txtCuenta = "91"
-                                If Val(WEmpresa) <> 1 Then
-                                    If Val(CampoRecibos.provincia) = 24 Then
-                                        txtCuenta = "92"
+                            Else
+                                If Val(CampoRecibos.tipo1) > 49 Then
+                                    txtCuenta = "101"
+                                Else
+                                    txtCuenta = "91"
+                                    If Val(WEmpresa) <> 1 Then
+                                        If Val(CampoRecibos.provincia) = 24 Then
+                                            txtCuenta = "92"
+                                        End If
                                     End If
                                 End If
                             End If
+                            
                         End If
 
                         txtAuxiliar = CampoRecibos.importe1
