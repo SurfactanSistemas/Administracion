@@ -18,12 +18,6 @@ Public Class ArqueoDeCheques: implements IArqueoCheques
     Dim RangoFechas(9, 2) As String
     Dim OrdenCheques As Integer = 0
 
-
-
-
-
-
-
     Private Sub ArqueoDeCheques_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         With tablaChequesEliminados.Columns
             .Add("Fecha")
@@ -791,14 +785,14 @@ Public Class ArqueoDeCheques: implements IArqueoCheques
             With VistaPrevia
                 .Reporte = New ReporteArqueoChequesDiscriminado()
                 .Reporte.SetDataSource(tablaChequesEliminados)
-                .Reporte.SetParameterValue(0, txtmesInicial.Text)
-                .Reporte.SetParameterValue(1, txtmes2Q1.Text)
-                .Reporte.SetParameterValue(2, txtmes2Q2.Text)
-                .Reporte.SetParameterValue(3, txtmes3Q1.Text)
-                .Reporte.SetParameterValue(4, txtmes3Q2.Text)
-                .Reporte.SetParameterValue(5, txtmes4Q1.Text)
-                .Reporte.SetParameterValue(6, txtmes4Q2.Text)
-                .Reporte.SetParameterValue(7, txtmesesRestantes.Text)
+                .Reporte.SetParameterValue(0, formatonumerico(txtmesInicial.Text, 2))
+                .Reporte.SetParameterValue(1, formatonumerico(txtmes2Q1.Text, 2))
+                .Reporte.SetParameterValue(2, formatonumerico(txtmes2Q2.Text, 2))
+                .Reporte.SetParameterValue(3, formatonumerico(txtmes3Q1.Text, 2))
+                .Reporte.SetParameterValue(4, formatonumerico(txtmes3Q2.Text, 2))
+                .Reporte.SetParameterValue(5, formatonumerico(txtmes4Q1.Text, 2))
+                .Reporte.SetParameterValue(6, formatonumerico(txtmes4Q2.Text, 2))
+                .Reporte.SetParameterValue(7, formatonumerico(txtmesesRestantes.Text, 2))
                 .Mostrar()
             End With
         Else
@@ -810,14 +804,14 @@ Public Class ArqueoDeCheques: implements IArqueoCheques
             With VistaPrevia
                 .Reporte = New ReporteArqueoChequesDiscriminado()
                 .Reporte.SetDataSource(tablaChequesDiscriminados)
-                .Reporte.SetParameterValue(0, txtmesInicial.Text)
-                .Reporte.SetParameterValue(1, txtmes2Q1.Text)
-                .Reporte.SetParameterValue(2, txtmes2Q2.Text)
-                .Reporte.SetParameterValue(3, txtmes3Q1.Text)
-                .Reporte.SetParameterValue(4, txtmes3Q2.Text)
-                .Reporte.SetParameterValue(5, txtmes4Q1.Text)
-                .Reporte.SetParameterValue(6, txtmes4Q2.Text)
-                .Reporte.SetParameterValue(7, txtmesesRestantes.Text)
+                .Reporte.SetParameterValue(0, formatonumerico(txtmesInicial.Text), 2)
+                .Reporte.SetParameterValue(1, formatonumerico(txtmes2Q1.Text, 2))
+                .Reporte.SetParameterValue(2, formatonumerico(txtmes2Q2.Text, 2))
+                .Reporte.SetParameterValue(3, formatonumerico(txtmes3Q1.Text, 2))
+                .Reporte.SetParameterValue(4, formatonumerico(txtmes3Q2.Text, 2))
+                .Reporte.SetParameterValue(5, formatonumerico(txtmes4Q1.Text, 2))
+                .Reporte.SetParameterValue(6, formatonumerico(txtmes4Q2.Text, 2))
+                .Reporte.SetParameterValue(7, formatonumerico(txtmesesRestantes.Text, 2))
                 .Mostrar()
             End With
 

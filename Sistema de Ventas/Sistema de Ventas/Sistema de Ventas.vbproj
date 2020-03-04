@@ -76,6 +76,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfases\IAgregarEnvase.vb" />
+    <Compile Include="Interfases\IAgregarGastosImpo.vb" />
+    <Compile Include="Maestro\Ingreso conceptos de gastos de importacion\AgregarConcepDGastosImpor.Designer.vb">
+      <DependentUpon>AgregarConcepDGastosImpor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestro\Ingreso conceptos de gastos de importacion\AgregarConcepDGastosImpor.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestro\Ingreso conceptos de gastos de importacion\IngresoConcepDGastosImportacion.Designer.vb">
+      <DependentUpon>IngresoConcepDGastosImportacion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestro\Ingreso conceptos de gastos de importacion\IngresoConcepDGastosImportacion.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Maestro\Ingreso Envases\AgregarEnvases.Designer.vb">
       <DependentUpon>AgregarEnvases.vb</DependentUpon>
     </Compile>
@@ -179,6 +192,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Interfases\IAgregarFliaMP.vb" />
+    <Compile Include="Reportes\ReporteConcepDGastosImportacion.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteConcepDGastosImportacion.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\ReporteCondicionesDePagos.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -250,6 +269,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Maestro\Ingreso conceptos de gastos de importacion\AgregarConcepDGastosImpor.resx">
+      <DependentUpon>AgregarConcepDGastosImpor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestro\Ingreso conceptos de gastos de importacion\IngresoConcepDGastosImportacion.resx">
+      <DependentUpon>IngresoConcepDGastosImportacion.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Maestro\Ingreso Envases\AgregarEnvases.resx">
       <DependentUpon>AgregarEnvases.vb</DependentUpon>
     </EmbeddedResource>
@@ -297,6 +322,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Maestro\Ingreso Linea Venta\IngresoLineasDeVentas.resx">
       <DependentUpon>IngresoLineasDeVentas.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ReporteConcepDGastosImportacion.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteConcepDGastosImportacion.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\ReporteCondicionesDePagos.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

@@ -22,6 +22,8 @@ Partial Class IngresoEnvases
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -33,15 +35,16 @@ Partial Class IngresoEnvases
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.label1 = New System.Windows.Forms.Label()
-        Me.DGV_FliaMP = New ConsultasVarias.DBDataGridView()
+        Me.DGV_Envases = New ConsultasVarias.DBDataGridView()
         Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Abreviatura = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Kilos = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TipoNombre = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Peso = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
-        CType(Me.DGV_FliaMP, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DGV_Envases, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label4
@@ -138,72 +141,94 @@ Partial Class IngresoEnvases
         Me.label1.TabIndex = 2
         Me.label1.Text = "Ingreso de Envases"
         '
-        'DGV_FliaMP
+        'DGV_Envases
         '
-        Me.DGV_FliaMP.AllowUserToAddRows = False
-        Me.DGV_FliaMP.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGV_FliaMP.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Codigo, Me.Descripcion, Me.Abreviatura, Me.Kilos, Me.Tipo, Me.Peso})
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGV_FliaMP.DefaultCellStyle = DataGridViewCellStyle2
-        Me.DGV_FliaMP.DoubleBuffered = True
-        Me.DGV_FliaMP.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.DGV_FliaMP.Location = New System.Drawing.Point(6, 112)
-        Me.DGV_FliaMP.Name = "DGV_FliaMP"
-        Me.DGV_FliaMP.OrdenamientoColumnasHabilitado = True
-        Me.DGV_FliaMP.RowHeadersWidth = 15
-        Me.DGV_FliaMP.RowTemplate.Height = 20
-        Me.DGV_FliaMP.ShowCellToolTips = False
-        Me.DGV_FliaMP.SinClickDerecho = False
-        Me.DGV_FliaMP.Size = New System.Drawing.Size(542, 253)
-        Me.DGV_FliaMP.TabIndex = 20
+        Me.DGV_Envases.AllowUserToAddRows = False
+        Me.DGV_Envases.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DGV_Envases.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Codigo, Me.Descripcion, Me.Abreviatura, Me.Kilos, Me.Tipo, Me.TipoNombre, Me.Peso})
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGV_Envases.DefaultCellStyle = DataGridViewCellStyle3
+        Me.DGV_Envases.DoubleBuffered = True
+        Me.DGV_Envases.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
+        Me.DGV_Envases.Location = New System.Drawing.Point(6, 112)
+        Me.DGV_Envases.Name = "DGV_Envases"
+        Me.DGV_Envases.OrdenamientoColumnasHabilitado = True
+        Me.DGV_Envases.RowHeadersWidth = 15
+        Me.DGV_Envases.RowTemplate.Height = 20
+        Me.DGV_Envases.ShowCellToolTips = False
+        Me.DGV_Envases.SinClickDerecho = False
+        Me.DGV_Envases.Size = New System.Drawing.Size(542, 253)
+        Me.DGV_Envases.TabIndex = 20
         '
         'Codigo
         '
-        Me.Codigo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Codigo.DataPropertyName = "Codigo"
         Me.Codigo.HeaderText = "Codigo"
         Me.Codigo.Name = "Codigo"
         Me.Codigo.ReadOnly = True
-        Me.Codigo.Width = 65
+        Me.Codigo.Width = 45
         '
         'Descripcion
         '
-        Me.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Descripcion.DataPropertyName = "Descripcion"
         Me.Descripcion.HeaderText = "Descripcion"
         Me.Descripcion.Name = "Descripcion"
         Me.Descripcion.ReadOnly = True
-        Me.Descripcion.Width = 88
+        Me.Descripcion.Width = 200
         '
         'Abreviatura
         '
         Me.Abreviatura.DataPropertyName = "Abreviatura"
         Me.Abreviatura.HeaderText = "Abreviatura"
         Me.Abreviatura.Name = "Abreviatura"
+        Me.Abreviatura.ReadOnly = True
+        Me.Abreviatura.Width = 95
         '
         'Kilos
         '
         Me.Kilos.DataPropertyName = "Kilos"
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle1.Format = "N2"
+        DataGridViewCellStyle1.NullValue = Nothing
+        Me.Kilos.DefaultCellStyle = DataGridViewCellStyle1
         Me.Kilos.HeaderText = "Kilos"
         Me.Kilos.Name = "Kilos"
+        Me.Kilos.ReadOnly = True
+        Me.Kilos.Width = 50
         '
         'Tipo
         '
         Me.Tipo.DataPropertyName = "Tipo"
         Me.Tipo.HeaderText = "Tipo"
         Me.Tipo.Name = "Tipo"
+        Me.Tipo.ReadOnly = True
+        Me.Tipo.Visible = False
+        Me.Tipo.Width = 50
+        '
+        'TipoNombre
+        '
+        Me.TipoNombre.DataPropertyName = "TipoNombre"
+        Me.TipoNombre.HeaderText = "Tipo"
+        Me.TipoNombre.Name = "TipoNombre"
+        Me.TipoNombre.Width = 70
         '
         'Peso
         '
         Me.Peso.DataPropertyName = "Peso"
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle2.Format = "N2"
+        DataGridViewCellStyle2.NullValue = Nothing
+        Me.Peso.DefaultCellStyle = DataGridViewCellStyle2
         Me.Peso.HeaderText = "Peso"
         Me.Peso.Name = "Peso"
+        Me.Peso.ReadOnly = True
+        Me.Peso.Width = 50
         '
         'IngresoEnvases
         '
@@ -218,11 +243,11 @@ Partial Class IngresoEnvases
         Me.Controls.Add(Me.txtBuscador)
         Me.Controls.Add(Me.txtAccesoRap)
         Me.Controls.Add(Me.Panel1)
-        Me.Controls.Add(Me.DGV_FliaMP)
+        Me.Controls.Add(Me.DGV_Envases)
         Me.Name = "IngresoEnvases"
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
-        CType(Me.DGV_FliaMP, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DGV_Envases, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -237,11 +262,12 @@ Partial Class IngresoEnvases
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Private WithEvents Label2 As System.Windows.Forms.Label
     Private WithEvents label1 As System.Windows.Forms.Label
-    Friend WithEvents DGV_FliaMP As ConsultasVarias.DBDataGridView
+    Friend WithEvents DGV_Envases As ConsultasVarias.DBDataGridView
     Friend WithEvents Codigo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Abreviatura As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Kilos As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Tipo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents TipoNombre As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Peso As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

@@ -31,12 +31,14 @@ Partial Class MenuPrincipal
         Me.IngresoVendedoresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CondicionDePagoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.IngresoDeLineasDeVentasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.IngresoDeFamiliasDeMateriasPrimasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.IngresoDeEnvasesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NovedadesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PedidosPendientesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProcesosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FinDeSistemasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.IngresoDeFamiliasDeMateriasPrimasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.IngresoDeGastosDeImportacionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.panel1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -87,7 +89,7 @@ Partial Class MenuPrincipal
         '
         'MaestrosToolStripMenuItem
         '
-        Me.MaestrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IngresoRubroToolStripMenuItem, Me.IngresoVendedoresToolStripMenuItem, Me.CondicionDePagoToolStripMenuItem, Me.IngresoDeLineasDeVentasToolStripMenuItem, Me.IngresoDeFamiliasDeMateriasPrimasToolStripMenuItem})
+        Me.MaestrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IngresoRubroToolStripMenuItem, Me.IngresoVendedoresToolStripMenuItem, Me.CondicionDePagoToolStripMenuItem, Me.IngresoDeLineasDeVentasToolStripMenuItem, Me.IngresoDeFamiliasDeMateriasPrimasToolStripMenuItem, Me.IngresoDeEnvasesToolStripMenuItem, Me.IngresoDeGastosDeImportacionToolStripMenuItem})
         Me.MaestrosToolStripMenuItem.Name = "MaestrosToolStripMenuItem"
         Me.MaestrosToolStripMenuItem.Size = New System.Drawing.Size(67, 20)
         Me.MaestrosToolStripMenuItem.Text = "Maestros"
@@ -115,6 +117,18 @@ Partial Class MenuPrincipal
         Me.IngresoDeLineasDeVentasToolStripMenuItem.Name = "IngresoDeLineasDeVentasToolStripMenuItem"
         Me.IngresoDeLineasDeVentasToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
         Me.IngresoDeLineasDeVentasToolStripMenuItem.Text = "Ingreso de Lineas de Ventas"
+        '
+        'IngresoDeFamiliasDeMateriasPrimasToolStripMenuItem
+        '
+        Me.IngresoDeFamiliasDeMateriasPrimasToolStripMenuItem.Name = "IngresoDeFamiliasDeMateriasPrimasToolStripMenuItem"
+        Me.IngresoDeFamiliasDeMateriasPrimasToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
+        Me.IngresoDeFamiliasDeMateriasPrimasToolStripMenuItem.Text = "Ingreso de Familias de Materias Primas"
+        '
+        'IngresoDeEnvasesToolStripMenuItem
+        '
+        Me.IngresoDeEnvasesToolStripMenuItem.Name = "IngresoDeEnvasesToolStripMenuItem"
+        Me.IngresoDeEnvasesToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
+        Me.IngresoDeEnvasesToolStripMenuItem.Text = "Ingreso de Envases"
         '
         'NovedadesToolStripMenuItem
         '
@@ -148,11 +162,11 @@ Partial Class MenuPrincipal
         Me.FinDeSistemasToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
         Me.FinDeSistemasToolStripMenuItem.Text = "Fin de Sistema"
         '
-        'IngresoDeFamiliasDeMateriasPrimasToolStripMenuItem
+        'IngresoDeGastosDeImportacionToolStripMenuItem
         '
-        Me.IngresoDeFamiliasDeMateriasPrimasToolStripMenuItem.Name = "IngresoDeFamiliasDeMateriasPrimasToolStripMenuItem"
-        Me.IngresoDeFamiliasDeMateriasPrimasToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
-        Me.IngresoDeFamiliasDeMateriasPrimasToolStripMenuItem.Text = "Ingreso de Familias de Materias Primas"
+        Me.IngresoDeGastosDeImportacionToolStripMenuItem.Name = "IngresoDeGastosDeImportacionToolStripMenuItem"
+        Me.IngresoDeGastosDeImportacionToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
+        Me.IngresoDeGastosDeImportacionToolStripMenuItem.Text = "Ingreso de Gastos de Importacion"
         '
         'MenuPrincipal
         '
@@ -188,5 +202,7 @@ Partial Class MenuPrincipal
     Friend WithEvents CondicionDePagoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents IngresoDeLineasDeVentasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents IngresoDeFamiliasDeMateriasPrimasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents IngresoDeEnvasesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents IngresoDeGastosDeImportacionToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class
