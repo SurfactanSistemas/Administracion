@@ -120,7 +120,7 @@ Public Class ArqueoDeCheques: implements IArqueoCheques
         Dim row As DataRow = GetSingle(SQLCnslt, "surfactanSA")
 
         If row IsNot Nothing Then
-            If (MsgBox("Desea recuperar el registro de cheques pasados por sistema?" & vbCrLf & " IMPORTANTE: Si pone NO se perderan los queres que sacara de la lista", vbYesNo) = vbYes) Then
+            If (MsgBox("¿Desea recuperar el registro de cheques pasados por sistema?" & vbCrLf & " IMPORTANTE: Si pone NO, se perderan los cheques que sacaron de la lista", vbYesNo) = vbYes) Then
                 RecuperarDatosRegistroCheques()
             Else
                 LimpiarBaseRegistroCheques()
@@ -788,14 +788,14 @@ Public Class ArqueoDeCheques: implements IArqueoCheques
             With VistaPrevia
                 .Reporte = New ReporteArqueoChequesDiscriminado()
                 .Reporte.SetDataSource(tablaChequesEliminados)
-                .Reporte.SetParameterValue(0, txtmesInicial.Text)
-                .Reporte.SetParameterValue(1, txtmes2Q1.Text)
-                .Reporte.SetParameterValue(2, txtmes2Q2.Text)
-                .Reporte.SetParameterValue(3, txtmes3Q1.Text)
-                .Reporte.SetParameterValue(4, txtmes3Q2.Text)
-                .Reporte.SetParameterValue(5, txtmes4Q1.Text)
-                .Reporte.SetParameterValue(6, txtmes4Q2.Text)
-                .Reporte.SetParameterValue(7, txtmesesRestantes.Text)
+                .Reporte.SetParameterValue(0, formatonumerico(txtmesInicial.Text, 2))
+                .Reporte.SetParameterValue(1, formatonumerico(txtmes2Q1.Text, 2))
+                .Reporte.SetParameterValue(2, formatonumerico(txtmes2Q2.Text, 2))
+                .Reporte.SetParameterValue(3, formatonumerico(txtmes3Q1.Text, 2))
+                .Reporte.SetParameterValue(4, formatonumerico(txtmes3Q2.Text, 2))
+                .Reporte.SetParameterValue(5, formatonumerico(txtmes4Q1.Text, 2))
+                .Reporte.SetParameterValue(6, formatonumerico(txtmes4Q2.Text, 2))
+                .Reporte.SetParameterValue(7, formatonumerico(txtmesesRestantes.Text, 2))
                 .Mostrar()
             End With
         Else
@@ -807,14 +807,14 @@ Public Class ArqueoDeCheques: implements IArqueoCheques
             With VistaPrevia
                 .Reporte = New ReporteArqueoChequesDiscriminado()
                 .Reporte.SetDataSource(tablaChequesDiscriminados)
-                .Reporte.SetParameterValue(0, txtmesInicial.Text)
-                .Reporte.SetParameterValue(1, txtmes2Q1.Text)
-                .Reporte.SetParameterValue(2, txtmes2Q2.Text)
-                .Reporte.SetParameterValue(3, txtmes3Q1.Text)
-                .Reporte.SetParameterValue(4, txtmes3Q2.Text)
-                .Reporte.SetParameterValue(5, txtmes4Q1.Text)
-                .Reporte.SetParameterValue(6, txtmes4Q2.Text)
-                .Reporte.SetParameterValue(7, txtmesesRestantes.Text)
+                .Reporte.SetParameterValue(0, formatonumerico(txtmesInicial.Text), 2)
+                .Reporte.SetParameterValue(1, formatonumerico(txtmes2Q1.Text, 2))
+                .Reporte.SetParameterValue(2, formatonumerico(txtmes2Q2.Text, 2))
+                .Reporte.SetParameterValue(3, formatonumerico(txtmes3Q1.Text, 2))
+                .Reporte.SetParameterValue(4, formatonumerico(txtmes3Q2.Text, 2))
+                .Reporte.SetParameterValue(5, formatonumerico(txtmes4Q1.Text, 2))
+                .Reporte.SetParameterValue(6, formatonumerico(txtmes4Q2.Text, 2))
+                .Reporte.SetParameterValue(7, formatonumerico(txtmesesRestantes.Text, 2))
                 .Mostrar()
             End With
 

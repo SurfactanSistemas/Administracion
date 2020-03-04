@@ -98,9 +98,33 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
             _EstructurarTabs()
 
+            _ControlEstados()
+
         ElseIf e.KeyData = Keys.Escape Then
             txtNumero.Text = ""
         End If
+
+    End Sub
+
+    Private Sub _ControlEstados()
+        If Trim(txtIngresoCausa.Text) <> "" Then
+            If cmbEstado.SelectedIndex < 2 Then
+
+                cmbEstado.SelectedIndex = 2
+
+                Dim SQLCnslt As String = "UPDATE CargaSAC SET Estado = '" & cmbEstado.SelectedIndex & "' WHERE Tipo = '" & txtTipo.Text & "'" _
+                                          & " AND Numero = '" & txtNumero.Text & "' AND Ano = '" & txtAnio.Text & "'"
+                ExecuteNonQueries(SQLCnslt)
+
+                Dim WOwner = CType(Owner, INuevoSAC)
+
+                If Not IsNothing(WOwner) Then
+                    WOwner._ProcesarNuevoSAC(txtTipo.Text, txtNumero.Text, txtAnio.Text)
+                End If
+            End If
+        End If
+
+
 
     End Sub
 
@@ -634,9 +658,9 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
                                 dgvVerificaciones.Columns("VerAcciones").AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells
                             End If
 
-                            If cmbEstado.SelectedIndex < 2 Then
-                                MsgBox("Se detecto un ingreso de accion, se cambiara el estado a Investigacion")
-                                cmbEstado.SelectedIndex = 2
+                            If cmbEstado.SelectedIndex < 3 Then
+                                MsgBox("Se detectó un ingreso de acción, se cambiara el estado a Implementada")
+                                cmbEstado.SelectedIndex = 3
                             End If
                             
 
@@ -728,9 +752,9 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
                             If Val(valor) <> 0 Then
                                 .Rows(iRow).Cells("ImpleDescResponsable").Value = _TraerDescripcionResponsable(valor)
                             End If
-                            If cmbEstado.SelectedIndex < 3 Then
-                                MsgBox("Se detecto un ingreso de una accion, se cambiara el estado a Implementacion")
-                                cmbEstado.SelectedIndex = 3
+                            If cmbEstado.SelectedIndex < 4 Then
+                                MsgBox("Se detectó un ingreso de una acción, se cambiara el estado a Implementación a Verificar")
+                                cmbEstado.SelectedIndex = 4
                             End If
                         Case 4
 
@@ -1072,9 +1096,9 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
             End If
 
-            If cmbEstado.SelectedIndex < 4 Then
-                MsgBox("Se detecto un ingreso de fecha a verificar, se cambiara el estado a Implementacion A Verificar")
-                cmbEstado.SelectedIndex = 4
+            If cmbEstado.SelectedIndex < 5 Then
+                MsgBox("Se detectó un ingreso de fecha de verificación, se cambiara el estado a Implementación Verificada")
+                cmbEstado.SelectedIndex = 5
             End If
 
 
@@ -1129,10 +1153,10 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
             End If
 
-            If cmbEstado.SelectedIndex < 5 Then
-                MsgBox("Se ingreso una fecha de Verificado, se cambiara el estado a Implementacion  Verificada")
-                cmbEstado.SelectedIndex = 5
-            End If
+'            If cmbEstado.SelectedIndex < 5 Then
+'                MsgBox("Se ingreso una fecha de Verificado, se cambiara el estado a Implementacion  Verificada")
+'                cmbEstado.SelectedIndex = 5
+'            End If
 
 
         ElseIf e.KeyData = Keys.Escape Then
@@ -2479,4 +2503,12 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
     
    
+    Private Sub txtIngresoCausa_Leave(sender As Object, e As EventArgs) Handles txtIngresoCausa.Leave
+        If Trim(txtIngresoCausa.Text) <> "" Then
+            If cmbEstado.SelectedIndex < 2 Then
+                MsgBox("Se detectó un ingreso de una causa, se cambiara el estado a Investigación")
+                cmbEstado.SelectedIndex = 2
+            End If
+        End If
+    End Sub
 End Class
