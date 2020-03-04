@@ -74,11 +74,22 @@ Partial Public Class Principal
         Me.txtPedido = New System.Windows.Forms.TextBox
         Me.Label15 = New System.Windows.Forms.Label
         Me.SerialPort1 = New System.IO.Ports.SerialPort(Me.components)
+        Me.pnlMenu = New System.Windows.Forms.Panel
+        Me.Button5 = New System.Windows.Forms.Button
+        Me.Button4 = New System.Windows.Forms.Button
+        Me.pnlConsEtiqFinal = New System.Windows.Forms.Panel
+        Me.txtCodEtiqFinal = New System.Windows.Forms.TextBox
+        Me.Label17 = New System.Windows.Forms.Label
+        Me.Label16 = New System.Windows.Forms.Label
+        Me.txtCodEtiqPreenvasado = New System.Windows.Forms.TextBox
+        Me.btnSalirConsEtiqFinal = New System.Windows.Forms.Button
         Me.pnlMsg.SuspendLayout()
         Me.pnlCantidades.SuspendLayout()
         Me.pnlPedido.SuspendLayout()
         Me.pnlConfirmarEtiq.SuspendLayout()
         Me.pnlValidarContenedor.SuspendLayout()
+        Me.pnlMenu.SuspendLayout()
+        Me.pnlConsEtiqFinal.SuspendLayout()
         Me.SuspendLayout()
         '
         'txtCodigoGral
@@ -271,7 +282,7 @@ Partial Public Class Principal
         Me.pnlCantidades.Controls.Add(Me.Button1)
         Me.pnlCantidades.Location = New System.Drawing.Point(4, 37)
         Me.pnlCantidades.Name = "pnlCantidades"
-        Me.pnlCantidades.Size = New System.Drawing.Size(231, 42)
+        Me.pnlCantidades.Size = New System.Drawing.Size(231, 172)
         '
         'Button2
         '
@@ -326,7 +337,7 @@ Partial Public Class Principal
         Me.pnlPedido.Controls.Add(Me.Label8)
         Me.pnlPedido.Location = New System.Drawing.Point(3, 8)
         Me.pnlPedido.Name = "pnlPedido"
-        Me.pnlPedido.Size = New System.Drawing.Size(231, 150)
+        Me.pnlPedido.Size = New System.Drawing.Size(231, 254)
         '
         'Button3
         '
@@ -361,9 +372,9 @@ Partial Public Class Principal
         Me.pnlConfirmarEtiq.Controls.Add(Me.lblCantEtiqValidadas)
         Me.pnlConfirmarEtiq.Controls.Add(Me.Label10)
         Me.pnlConfirmarEtiq.Controls.Add(Me.Label9)
-        Me.pnlConfirmarEtiq.Location = New System.Drawing.Point(3, 53)
+        Me.pnlConfirmarEtiq.Location = New System.Drawing.Point(3, 66)
         Me.pnlConfirmarEtiq.Name = "pnlConfirmarEtiq"
-        Me.pnlConfirmarEtiq.Size = New System.Drawing.Size(231, 205)
+        Me.pnlConfirmarEtiq.Size = New System.Drawing.Size(231, 192)
         Me.pnlConfirmarEtiq.Visible = False
         '
         'btnRevalidarContenedor
@@ -439,9 +450,9 @@ Partial Public Class Principal
         Me.pnlValidarContenedor.Controls.Add(Me.txtUltPartida)
         Me.pnlValidarContenedor.Controls.Add(Me.txtVerificarContenedor)
         Me.pnlValidarContenedor.Controls.Add(Me.Label11)
-        Me.pnlValidarContenedor.Location = New System.Drawing.Point(3, 124)
+        Me.pnlValidarContenedor.Location = New System.Drawing.Point(3, 121)
         Me.pnlValidarContenedor.Name = "pnlValidarContenedor"
-        Me.pnlValidarContenedor.Size = New System.Drawing.Size(232, 102)
+        Me.pnlValidarContenedor.Size = New System.Drawing.Size(232, 105)
         '
         'Label14
         '
@@ -532,7 +543,80 @@ Partial Public Class Principal
         '
         'SerialPort1
         '
-        Me.SerialPort1.WriteTimeout = 10
+        Me.SerialPort1.WriteTimeout = 600000
+        '
+        'pnlMenu
+        '
+        Me.pnlMenu.Controls.Add(Me.Button5)
+        Me.pnlMenu.Controls.Add(Me.Button4)
+        Me.pnlMenu.Location = New System.Drawing.Point(3, 8)
+        Me.pnlMenu.Name = "pnlMenu"
+        Me.pnlMenu.Size = New System.Drawing.Size(231, 253)
+        '
+        'Button5
+        '
+        Me.Button5.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Regular)
+        Me.Button5.Location = New System.Drawing.Point(7, 11)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(217, 114)
+        Me.Button5.TabIndex = 2
+        Me.Button5.Text = "FRACCIONAR PEDIDO"
+        '
+        'Button4
+        '
+        Me.Button4.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Regular)
+        Me.Button4.Location = New System.Drawing.Point(9, 129)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(215, 114)
+        Me.Button4.TabIndex = 2
+        Me.Button4.Text = "VALIDAR ETIQ FINALES"
+        '
+        'pnlConsEtiqFinal
+        '
+        Me.pnlConsEtiqFinal.Controls.Add(Me.txtCodEtiqFinal)
+        Me.pnlConsEtiqFinal.Controls.Add(Me.Label17)
+        Me.pnlConsEtiqFinal.Controls.Add(Me.Label16)
+        Me.pnlConsEtiqFinal.Controls.Add(Me.txtCodEtiqPreenvasado)
+        Me.pnlConsEtiqFinal.Controls.Add(Me.btnSalirConsEtiqFinal)
+        Me.pnlConsEtiqFinal.Location = New System.Drawing.Point(3, 8)
+        Me.pnlConsEtiqFinal.Name = "pnlConsEtiqFinal"
+        Me.pnlConsEtiqFinal.Size = New System.Drawing.Size(231, 254)
+        '
+        'txtCodEtiqFinal
+        '
+        Me.txtCodEtiqFinal.Location = New System.Drawing.Point(22, 130)
+        Me.txtCodEtiqFinal.Name = "txtCodEtiqFinal"
+        Me.txtCodEtiqFinal.Size = New System.Drawing.Size(193, 23)
+        Me.txtCodEtiqFinal.TabIndex = 5
+        '
+        'Label17
+        '
+        Me.Label17.Location = New System.Drawing.Point(68, 109)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(109, 20)
+        Me.Label17.Text = "ETIQUETA FINAL"
+        '
+        'Label16
+        '
+        Me.Label16.Location = New System.Drawing.Point(35, 44)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(167, 20)
+        Me.Label16.Text = "ETIQUETA PREENVASADO"
+        '
+        'txtCodEtiqPreenvasado
+        '
+        Me.txtCodEtiqPreenvasado.Location = New System.Drawing.Point(20, 68)
+        Me.txtCodEtiqPreenvasado.Name = "txtCodEtiqPreenvasado"
+        Me.txtCodEtiqPreenvasado.Size = New System.Drawing.Size(193, 23)
+        Me.txtCodEtiqPreenvasado.TabIndex = 1
+        '
+        'btnSalirConsEtiqFinal
+        '
+        Me.btnSalirConsEtiqFinal.Location = New System.Drawing.Point(42, 183)
+        Me.btnSalirConsEtiqFinal.Name = "btnSalirConsEtiqFinal"
+        Me.btnSalirConsEtiqFinal.Size = New System.Drawing.Size(145, 48)
+        Me.btnSalirConsEtiqFinal.TabIndex = 0
+        Me.btnSalirConsEtiqFinal.Text = "SALIR"
         '
         'Principal
         '
@@ -541,10 +625,12 @@ Partial Public Class Principal
         Me.AutoScroll = True
         Me.ClientSize = New System.Drawing.Size(238, 269)
         Me.Controls.Add(Me.pnlMsg)
-        Me.Controls.Add(Me.pnlConfirmarEtiq)
-        Me.Controls.Add(Me.pnlCantidades)
-        Me.Controls.Add(Me.pnlValidarContenedor)
+        Me.Controls.Add(Me.pnlMenu)
+        Me.Controls.Add(Me.pnlConsEtiqFinal)
         Me.Controls.Add(Me.pnlPedido)
+        Me.Controls.Add(Me.pnlConfirmarEtiq)
+        Me.Controls.Add(Me.pnlValidarContenedor)
+        Me.Controls.Add(Me.pnlCantidades)
         Me.Controls.Add(Me.btnSalir)
         Me.Controls.Add(Me.ComboBox1)
         Me.Controls.Add(Me.Label6)
@@ -570,6 +656,8 @@ Partial Public Class Principal
         Me.pnlPedido.ResumeLayout(False)
         Me.pnlConfirmarEtiq.ResumeLayout(False)
         Me.pnlValidarContenedor.ResumeLayout(False)
+        Me.pnlMenu.ResumeLayout(False)
+        Me.pnlConsEtiqFinal.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -626,5 +714,14 @@ Partial Public Class Principal
     Friend WithEvents lblCantEtiqValidadas As System.Windows.Forms.Label
     Friend WithEvents btnRevalidarContenedor As System.Windows.Forms.Button
     Friend WithEvents SerialPort1 As System.IO.Ports.SerialPort
+    Friend WithEvents pnlMenu As System.Windows.Forms.Panel
+    Friend WithEvents Button4 As System.Windows.Forms.Button
+    Friend WithEvents Button5 As System.Windows.Forms.Button
+    Friend WithEvents pnlConsEtiqFinal As System.Windows.Forms.Panel
+    Friend WithEvents btnSalirConsEtiqFinal As System.Windows.Forms.Button
+    Friend WithEvents txtCodEtiqFinal As System.Windows.Forms.TextBox
+    Friend WithEvents Label17 As System.Windows.Forms.Label
+    Friend WithEvents Label16 As System.Windows.Forms.Label
+    Friend WithEvents txtCodEtiqPreenvasado As System.Windows.Forms.TextBox
 
 End Class

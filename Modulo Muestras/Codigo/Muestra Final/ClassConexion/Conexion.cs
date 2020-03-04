@@ -490,7 +490,7 @@ namespace ClassConexion
 
             //if (value == "5" || value == "1") CS = ConfigurationManager.ConnectionStrings["SurfactanSA"].ConnectionString;
             if (value == "1") CS = ConfigurationManager.ConnectionStrings["SurfactanSA"].ConnectionString;
-            else if (value == "4") CS = ConfigurationManager.ConnectionStrings["Surfactan_VII"].ConnectionString;
+            else if (value == "4") CS = ConfigurationManager.ConnectionStrings["Surfactan_III"].ConnectionString;
             else CS = ConfigurationManager.ConnectionStrings["Surfactan_V"].ConnectionString;
 
             CerrarConexion();
