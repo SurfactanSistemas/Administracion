@@ -20,7 +20,7 @@ Public Class ImpreProcesos
 
                         Dim WTerminado As String = Environment.GetCommandLineArgs(2)
                         Dim WPartida As Integer = Environment.GetCommandLineArgs(3)
-                        Dim WInicio, WFinal, WFraccionamiento, WEtiquetas, WMerma As Integer
+                        Dim WInicio, WFinal, WFraccionamiento, WEtiquetas, WMerma, WConciliacion As Integer
 
                         WFraccionamiento = 1
                         WEtiquetas = 1
@@ -31,8 +31,9 @@ Public Class ImpreProcesos
                         If Environment.GetCommandLineArgs.Length > 6 Then WFraccionamiento = Environment.GetCommandLineArgs(6)
                         If Environment.GetCommandLineArgs.Length > 7 Then WEtiquetas = Environment.GetCommandLineArgs(7)
                         If Environment.GetCommandLineArgs.Length > 8 Then WMerma = Environment.GetCommandLineArgs(8)
+                        If Environment.GetCommandLineArgs.Length > 9 Then WConciliacion = Environment.GetCommandLineArgs(9)
 
-                        _GenerarRegistroProduccion(WTerminado, WPartida, WInicio, WFinal, WFraccionamiento, WEtiquetas, WMerma, WProceso = 4)
+                        _GenerarRegistroProduccion(WTerminado, WPartida, WInicio, WFinal, WFraccionamiento, WEtiquetas, WMerma, WProceso = 4, WConciliacion)
 
                     Case 2 ' CERTIFICADO DE CALIDAD.
 
@@ -73,7 +74,7 @@ Public Class ImpreProcesos
                         End If
 
                         _GenerarReporteResultadosCalidad(WPartida, WTipoSalida, WFechaVto, WImpreFechaVto, WFechaElabora, WImpreFechaElaboracion)
-                    Case 4
+                    Case 5
 
                         Dim WLim = Environment.GetCommandLineArgs.Length - 1
 
@@ -112,10 +113,11 @@ Public Class ImpreProcesos
 
             '_GenerarCertificadoAnalisisFarma(WTipoReporte2, WPartida2, WTipoSalida2, "C:\blablabla\prueba.pdf")
 
-            'Dim WTerminado2 As String = "SE-25012-994"
+            'Dim WTerminado2 As String = "PT-25071-100"
+            ''Dim WPartida2 As Integer = "310445"
             'Dim WPartida2 As Integer = "0"
 
-            '_GenerarRegistroProduccion(WTerminado2, WPartida2, 0, 0, 0, 0, 0, True)
+            '_GenerarRegistroProduccion(WTerminado2, WPartida2, 0, 0, 1, 0, 1, True, 1)
 
             'Dim WImpreFechaVto2 = "", WFechaElabora2 = "", WImpreFechaElaboracion2 = "", WFechaVto2 = ""
 
@@ -296,7 +298,7 @@ Public Class ImpreProcesos
 
     End Sub
 
-    Private Sub _GenerarRegistroProduccion(ByVal WTerminado As String, ByVal WPartida As Integer, ByVal Inicio As Integer, ByVal Final As Integer, ByVal Fraccionamiento As Integer, ByVal Etiquetas As Integer, ByVal Merma As Integer, Optional ByVal RegistroMaestro As Boolean = False)
+    Private Sub _GenerarRegistroProduccion(ByVal WTerminado As String, ByVal WPartida As Integer, ByVal Inicio As Integer, ByVal Final As Integer, ByVal Fraccionamiento As Integer, ByVal Etiquetas As Integer, ByVal Merma As Integer, Optional ByVal RegistroMaestro As Boolean = False, Optional ByVal Conciliacion As Integer = 0)
 
         _ProcesarInformacionParaRegistroProduccion(WTerminado, WPartida, RegistroMaestro)
 
@@ -312,14 +314,16 @@ Public Class ImpreProcesos
         Dim WImprePlanilla = 0
         Dim WImprePlanillaII = 0
         Dim WImprePlanillaIII = 0
+        Dim WImprePlanillaIV = 0
 
-        Dim WCargaIII As DataRow = GetSingle("SELECT ImprimePlanilla, ImprimePlanillaII, ImprimePlanillaIII FROM CargaIII WHERE Terminado = '" & WTerminado & "'", "Surfactan_III")
+        Dim WCargaIII As DataRow = GetSingle("SELECT ImprimePlanilla, ImprimePlanillaII, ImprimePlanillaIII, ImprimePlanillaIV FROM CargaIII WHERE Terminado = '" & WTerminado & "'", "Surfactan_III")
 
         If WCargaIII Is Nothing Then Close()
 
         WImprePlanilla = OrDefault(WCargaIII.Item("ImprimePlanilla"), 0)
         WImprePlanillaII = OrDefault(WCargaIII.Item("ImprimePlanillaII"), 0)
         WImprePlanillaIII = OrDefault(WCargaIII.Item("ImprimePlanillaIII"), 0)
+        WImprePlanillaIV = OrDefault(WCargaIII.Item("ImprimePlanillaIII"), 0)
 
         Dim WMostrarHumedad As Integer = 0
 
@@ -379,7 +383,7 @@ Public Class ImpreProcesos
         '
         ' Anexos
         '
-        If (WImprePlanilla <> 0 Or WImprePlanillaIII <> 0) And (Fraccionamiento = 1 Or Etiquetas = 1) Then
+        If ((WImprePlanilla <> 0 Or WImprePlanillaIII <> 0) And (Fraccionamiento = 1 Or Etiquetas = 1)) Or (Conciliacion <> 0 And WImprePlanillaIV = 1) Then
             Dim rptAnexos As ReportDocument
 
             If RegistroMaestro Then
@@ -404,6 +408,7 @@ Public Class ImpreProcesos
 
             rptAnexos.SetParameterValue("ImprePlanilla", WImprePlanilla)
             rptAnexos.SetParameterValue("ImprePlanillaIII", WImprePlanillaIII)
+            rptAnexos.SetParameterValue("ImpreConciliacion", WImprePlanillaIV)
 
             With New VistaPrevia
                 .Reporte = rptAnexos
