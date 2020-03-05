@@ -1442,7 +1442,26 @@ Public Class EmisionEtiquetas
                     End If
                 End If
 
-                .Item("CodBarra") = "*" & txtLote.Text.PadLeft(6, "0") + txtTerminado.Text & "*"
+                If txtCliente.Text.Trim <> "" Then
+
+                    '[UltEtiqBarraFinal]
+
+                    ExecuteNonQueries(WEmpresaHoja, {"UPDATE Hoja SET UltEtiqBarraFinal = ISNULL(UltEtiqBarraFinal, 0) + 1 WHERE Hoja = '" & txtLote.Text & "'"})
+
+                    Dim WUltEtiqBarraFinal As DataRow = GetSingle("SELECT UltEtiqBarraFinal FROM Hoja WHERE Hoja = '" & txtLote.Text & "' And Renglon = 1", WEmpresaHoja)
+                    Dim WUlt As Integer = 0
+
+                    If WUltEtiqBarraFinal IsNot Nothing Then
+                        WUlt = Val(OrDefault(WUltEtiqBarraFinal.Item("UltEtiqBarraFinal"), ""))
+                    End If
+
+                    .Item("CodBarra") = "*" & txtLote.Text.PadLeft(6, "0") & txtPedido.Text.PadLeft(6, "0") & formatonumerico(txtCantidad.Text).replace(".", "").PadLeft(6, "0") & WUlt.ToString.PadLeft(4, "0") & "*"
+
+                    ExecuteNonQueries("SurfactanSa", {("INSERT INTO ProcesoCentroImpresion (Lote, CantEtiq, CantPorEtiq, Impresora, Impresion, Pedido, Estado, CodBarra, EtiqFinal) VALUES ('" & txtLote.Text & "', '" & "1" & "', '" & formatonumerico(txtCantidad.Text) & "', '', '', '" & txtPedido.Text & "', '0', '" & .Item("CodBarra").ToString.Replace("*", "") & "', '1')").ToString})
+
+                Else
+                    .Item("CodBarra") = "*" & txtLote.Text.PadLeft(6, "0") & txtTerminado.Text & "*"
+                End If
 
             End With
 

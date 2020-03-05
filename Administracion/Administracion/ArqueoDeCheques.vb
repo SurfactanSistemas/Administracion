@@ -18,12 +18,6 @@ Public Class ArqueoDeCheques: implements IArqueoCheques
     Dim RangoFechas(9, 2) As String
     Dim OrdenCheques As Integer = 0
 
-
-
-
-
-
-
     Private Sub ArqueoDeCheques_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         With tablaChequesEliminados.Columns
             .Add("Fecha")
@@ -110,6 +104,11 @@ Public Class ArqueoDeCheques: implements IArqueoCheques
             SumaPorFecha(i) = 0
         Next
 
+        ' PASAMOS LOS TITULOS A MAYÚSCULAS.
+        For Each l As Label In gbDiscriminado.Controls.OfType(Of Label)()
+            l.Text = l.Text.ToUpper
+        Next
+
         _RefrescartxtboxSumas()
 
         'PREGUNTAMOS SI DESEA RECUPERAR LOS DATOS INGRESADOS, SINO LOS LIMPIAMOS
@@ -120,18 +119,17 @@ Public Class ArqueoDeCheques: implements IArqueoCheques
         Dim row As DataRow = GetSingle(SQLCnslt, "surfactanSA")
 
         If row IsNot Nothing Then
-            If (MsgBox("¿Desea recuperar el registro de cheques pasados por sistema?" & vbCrLf & " IMPORTANTE: Si pone NO, se perderan los cheques que sacaron de la lista", vbYesNo) = vbYes) Then
+            Dim msgBoxResult = MsgBox("Desea recuperar el registro de cheques pasados por sistema?" & vbCrLf & " IMPORTANTE: Si selecciona 'NO', se perderán.", vbYesNoCancel)
+            If (msgBoxResult = vbYes) Then
                 RecuperarDatosRegistroCheques()
-            Else
+            ElseIf msgBoxResult = Microsoft.VisualBasic.MsgBoxResult.No Then
                 LimpiarBaseRegistroCheques()
+            Else
+                Close()
             End If
         End If
         
-
-
-
     End Sub
-
 
     Private Function BuscarGrupo(ByVal fechaOrd As String) As String()
         If fechaOrd >= RangoFechas(1, 1) And fechaOrd <= RangoFechas(1, 2) Then
@@ -775,9 +773,8 @@ Public Class ArqueoDeCheques: implements IArqueoCheques
     Private Sub btnDiscriminadoXQuincena_Click(sender As Object, e As EventArgs) Handles btnDiscriminadoXQuincena.Click
 
         With New ArqueoCheques_ConsultaListado(Label9.Text, Label10.Text, Label11.Text, Label12.Text, Label13.Text, Label14.Text, Label15.Text, Label16.Text)
-            .Show(Me)
+            .ShowDialog(Me)
         End With
-
 
     End Sub
 

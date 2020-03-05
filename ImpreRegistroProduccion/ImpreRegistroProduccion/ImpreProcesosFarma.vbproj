@@ -162,6 +162,18 @@
       <DependentUpon>certificadonuevofarmasegunda.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\Registro Produccion Farma\conciliacionmuestreo.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>conciliacionmuestreo.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Registro Produccion Farma\conciliacionoperacion.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>conciliacionoperacion.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\Registro Produccion Farma\impremermadescartestercerosRegistroMaestro.vb">
       <DependentUpon>impremermadescartestercerosRegistroMaestro.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -327,6 +339,14 @@
     <EmbeddedResource Include="Reportes\CertificadosFarma\certificadonuevofarmasegunda.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>certificadonuevofarmasegunda.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Registro Produccion Farma\conciliacionmuestreo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>conciliacionmuestreo.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Registro Produccion Farma\conciliacionoperacion.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>conciliacionoperacion.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Registro Produccion Farma\impremermadescartestercerosRegistroMaestro.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

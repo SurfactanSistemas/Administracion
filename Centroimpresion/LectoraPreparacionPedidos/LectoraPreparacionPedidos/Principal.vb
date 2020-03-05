@@ -1,6 +1,7 @@
 ﻿Imports System.Data.SqlClient
 Imports System.Data
 Imports System.Media
+Imports System.IO
 
 Enum EstadoEtiq
     SinDefinir = 0
@@ -30,6 +31,7 @@ Public Class Principal
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         SerialPort1.PortName = "COM7"
         btnLimpiar_Click(Nothing, Nothing)
+
         pnlMsg.Location = New Point(10, 10)
         pnlMsg.Width = Me.Width - 25
         pnlMsg.Height = Me.Height - 45
@@ -67,6 +69,7 @@ Public Class Principal
         lblMensajeestado.Text = ""
         picError.Visible = False
         picExito.Visible = False
+        pnlConsEtiqFinal.Visible = False
 
         txtCantEtiq.Text = "1"
         'txtCantEtiq.Enabled = False
@@ -447,7 +450,7 @@ Public Class Principal
 
             If SerialPort1.IsOpen() Then Exit Sub
 
-            'SerialPort1.PortName = "COM7"
+            SerialPort1.PortName = "COM7"
             'SerialPort1.Open()
             'SerialPort1.Write("^MTd")
 
@@ -473,54 +476,103 @@ Public Class Principal
             '
             ' Mandar a Imprimir una etiqueta.
             '
-            If Not SerialPort1.IsOpen() Then
-                SerialPort1.Open()
-            End If
-
-            Threading.Thread.Sleep(1500)
-
+            
             'For i = 1 To Val(txtCantEtiq.Text)
 
+            '_ImprimirPort()
 
-            SerialPort1.Write("^XA")
-            'SerialPort1.Write("^JMA")
-            'SerialPort1.Write("^PW600")
-            'SerialPort1.Write("^LH0,0")
+            'SerialPort1.Write("^PQ" & txtCantEtiq.Text)
             'SerialPort1.Write("^XZ")
-            SerialPort1.Write("^FO100,50")
-            SerialPort1.Write("^ADN,30,20")
-            SerialPort1.Write("^FD" & txtCodProd.Text & "^FS")
-            'SerialPort1.Write("")
-            SerialPort1.Write("^FO100,100")
-            SerialPort1.Write("^ADN,30,20")
-            SerialPort1.Write("^FDLote:" & txtPartida.Text & "^FS")
-            'SerialPort1.Write("")
-            SerialPort1.Write("^FO50,150")
-            SerialPort1.Write("^ADN,30,20")
-            SerialPort1.Write("^FDcantidad:" & txtCantPorEtiq.Text & " kgs.^FS")
-            SerialPort1.Write("^PQ" & txtCantEtiq.Text)
-            SerialPort1.Write("^XZ")
-
-            SerialPort1.Close()
-            'Next
-
-            'If Val(txtCantEtiq.Text) = 0 Then Exit Sub
-
-            'If Val(txtCantPorEtiq.Text) > 50 Then
-            '    txtCantEtiq.Text = "1"
-            'End If
-
-            'Dim WPartida, WCantEtiq, WCantPorEtiq As String
-
-            'WPartida = Val(txtPartida.Text.Trim)
-            'WCantEtiq = Val(txtCantEtiq.Text)
-            'WCantPorEtiq = formatonumerico(txtCantPorEtiq.Text)
-
-            'For i = 1 To Val(WCantEtiq)
-
-            '    ExecuteNonQueries("INSERT INTO ProcesoCentroImpresion (Lote, CantEtiq, CantPorEtiq, Impresora, Impresion, Pedido, Estado) VALUES ('" & WPartida & "', '" & "1" & "', '" & WCantPorEtiq & "', '" & Trim(ComboBox1.Text.Replace("Pto de Trab.", "")) & "', '', '" & WCodPedido & "', '" & EstadoEtiq.SinDefinir & "')")
 
             'Next
+
+            If Val(txtCantEtiq.Text) = 0 Then Exit Sub
+
+            If Val(txtCantPorEtiq.Text) > 50 Then
+                txtCantEtiq.Text = "1"
+            End If
+
+            Dim WPartida, WCantEtiq, WCantPorEtiq As String
+
+            WPartida = Val(txtPartida.Text.Trim)
+            WCantEtiq = Val(txtCantEtiq.Text)
+            WCantPorEtiq = formatonumerico(txtCantPorEtiq.Text)
+
+            For i = 1 To Val(WCantEtiq)
+
+                If Not SerialPort1.IsOpen() Then
+                    SerialPort1.Open()
+                End If
+
+                Threading.Thread.Sleep(1500)
+
+                Dim WTemplate As String = My.Resources.template
+
+                'Stop
+
+                ' Determinamos la numeracion de la proxima etiqueta.
+                Dim WUltEtiBarra As DataRow = Nothing
+                Dim WUltEtiq As Integer = 0
+
+                Dim Empresas As String() = {"SurfactanSa", "Surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII"}
+
+                For Each empresa As String In Empresas
+
+                    WUltEtiBarra = GetSingle("SELECT ISNULL(UltimaEtiqBarra, 0) as Ultima FROM Hoja WHERE Hoja = '" & txtPartida.Text & "'", empresa)
+
+                    If WUltEtiBarra IsNot Nothing Then
+                        WUltEtiq = OrDefault(WUltEtiBarra.Item("Ultima"), 0)
+                        ExecuteNonQueries(empresa, "UPDATE Hoja SET UltimaEtiqBarra = (ISNULL(UltimaEtiqBarra, 0) + 1) WHERE Hoja = '" & txtPartida.Text & "'")
+                        Exit For
+                    End If
+
+                Next
+
+                WUltEtiq += 1
+
+                Dim WCodBarra As String = txtPartida.Text.PadLeft(6, "0") & txtCodProd.Text & WUltEtiq.ToString.PadLeft(4, "0")
+
+                Dim WCodSeg, WPalabra As String
+                Dim WPicto(9) As String
+
+                For x = 1 To 9
+                    WPicto(x) = "X"
+                Next
+
+                WCodSeg = ""
+                WPalabra = ""
+
+                Dim WDatosEtiquetas As DataRow = GetSingle("select Frase8, Pictograma1, Pictograma2, Pictograma3, Pictograma4, Pictograma5, Pictograma6, Pictograma7, Pictograma8, Pictograma9 from DatosEtiqueta where Terminado = '" & txtCodProd.Text & "' and renglon = 1")
+
+                If WDatosEtiquetas IsNot Nothing Then
+                    With WDatosEtiquetas
+                        WPalabra = Trim(OrDefault(.Item("Frase8"), ""))
+
+                        For y = 1 To 9
+                            WPicto(y) = IIf(Val(OrDefault(.Item("Pictograma" & y), 0)) <= 0, "X", "")
+                        Next
+                    End With
+                End If
+
+                WTemplate = WTemplate.Replace("#CODIGO#", txtCodProd.Text)
+                WTemplate = WTemplate.Replace("#PARTIDA#", txtPartida.Text)
+                WTemplate = WTemplate.Replace("#KILOS#", formatonumerico(txtCantPorEtiq.Text))
+                WTemplate = WTemplate.Replace("#CODSEG#", WCodSeg)
+                WTemplate = WTemplate.Replace("#PALABRA#", WPalabra)
+                WTemplate = WTemplate.Replace("#CODBARRAS#", WCodBarra)
+                WTemplate = WTemplate.Replace("#CANTETIQ#", "1")
+
+                For Z = 1 To 9
+                    WTemplate = WTemplate.Replace("#PICTO" & Z & "#", WPicto(Z))
+                Next
+
+                SerialPort1.Write(WTemplate)
+
+                SerialPort1.Close()
+
+                ExecuteNonQueries("INSERT INTO ProcesoCentroImpresion (Lote, CantEtiq, CantPorEtiq, Impresora, Impresion, Pedido, Estado, CodBarra) VALUES ('" & WPartida & "', '" & "1" & "', '" & WCantPorEtiq & "', '" & Trim(ComboBox1.Text.Replace("Pto de Trab.", "")) & "', '', '" & WCodPedido & "', '" & EstadoEtiq.SinDefinir & "', '" & WCodBarra & "')")
+
+            Next
 
             '_Limpiar()
 
@@ -530,12 +582,19 @@ Public Class Principal
             txtContenedor.Text = ""
             txtEtiqAConfirmar.Text = ""
 
-            btnConfirmarPedido_Click(Nothing, Nothing)
+            txtContenedor.Focus()
+
+            'btnConfirmarPedido_Click(Nothing, Nothing)
 
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
             _Limpiar()
         End Try
+
+    End Sub
+
+    Private Sub _ImprimirPort()
+     
 
     End Sub
 
@@ -611,7 +670,8 @@ Public Class Principal
     End Sub
 
     Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
-        Close()
+        pnlMenu.Visible = True
+        'Close()
     End Sub
 
     Private Sub txtCodPedido_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCodPedido.KeyDown
@@ -662,13 +722,14 @@ Public Class Principal
                 .Focus()
             End With
         End Try
-        
+
     End Sub
 
     Private Sub btnVolver_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVolver.Click
         ExecuteNonQueries("UPDATE ProcesoCentroImpresion SET Impresion = 'X', Estado = '" & EstadoEtiq.Inhabilitada & "' WHERE Estado = '" & EstadoEtiq.SinDefinir & "' And Pedido = '" & WCodPedido & "' And Lote = '" & txtPartida.Text & "'")
         pnlConfirmarEtiq.Visible = False
         pnlCantidades.Visible = False
+        txtCantEtiq.Text = "1"
         txtCodigoGral.Focus()
     End Sub
 
@@ -730,6 +791,7 @@ Public Class Principal
 
                         txtEtiqAConfirmar.Text = ""
                         txtEtiqAConfirmar.Focus()
+
                     End If
                 Case Keys.Escape
                     txtEtiqAConfirmar.Text = ""
@@ -796,9 +858,11 @@ Public Class Principal
     End Sub
 
     Private Sub btnConfirmarPedido_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConfirmarPedido.Click
+        ExecuteNonQueries("UPDATE ProcesoCentroImpresion SET Impresion = 'X', Estado = '" & EstadoEtiq.Inhabilitada & "' WHERE Estado = '" & EstadoEtiq.SinDefinir & "' And Pedido = '" & WCodPedido & "' And Lote = '" & txtPartida.Text & "'")
         pnlConfirmarEtiq.Visible = False
         pnlValidarContenedor.Visible = False
         pnlPedido.Visible = True
+        txtCantEtiq.Text = "1"
         WCodPedido = ""
         WConteoEtiquetas.Clear()
         txtCodPedido.Text = ""
@@ -816,6 +880,104 @@ Public Class Principal
     Private Sub txtVerificarContenedor_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtVerificarContenedor.KeyDown
         If e.KeyCode = Keys.Enter Then
             btnVerificarContenedor_Click(Nothing, Nothing)
+        End If
+    End Sub
+
+    Private Sub Button5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button5.Click
+        pnlMenu.Visible = False
+        pnlPedido.Visible = True
+        txtPedido.Text = ""
+        txtCodPedido.Text = ""
+        txtCodPedido.Focus()
+    End Sub
+
+
+    Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button4.Click
+        pnlConsEtiqFinal.Visible = True
+        txtCodEtiqFinal.Text = ""
+        txtCodEtiqPreenvasado.Text = ""
+        pnlMenu.Visible = False
+        txtCodEtiqPreenvasado.Focus()
+    End Sub
+
+    Private Sub btnSalirConsEtiqFinal_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSalirConsEtiqFinal.Click
+        pnlConsEtiqFinal.Visible = False
+        txtCodEtiqFinal.Text = ""
+        txtCodEtiqPreenvasado.Text = ""
+        pnlMenu.Visible = True
+    End Sub
+
+    Private Sub txtCodEtiqPreenvasado_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCodEtiqPreenvasado.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            txtCodEtiqFinal.Text = ""
+            Dim WEtiq As DataRow = GetSingle("SELECT ID FROM ProcesoCentroImpresion WHERE CodBarra = '" & txtCodEtiqPreenvasado.Text & "' And Estado = '" & EstadoEtiq.Habilitada & "' And EtiqFinal <> '1'")
+
+            If WEtiq Is Nothing Then
+                MostrarMsgError("Etiqueta inexistente o no validada", Tipo.Exito)
+                txtCodEtiqPreenvasado.Text = ""
+                Exit Sub
+            End If
+
+            txtCodEtiqFinal.Focus()
+
+        ElseIf e.KeyCode = Keys.Escape Then
+            txtCodEtiqPreenvasado.Text = ""
+            txtCodEtiqFinal.Text = ""
+        End If
+    End Sub
+
+    Private Sub txtCodEtiqFinal_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCodEtiqFinal.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            
+            Dim WEtiqFinal As DataRow = GetSingle("SELECT Pedido, Lote, Cantidad = CantPorEtiq FROM ProcesoCentroImpresion WHERE CodBarra = '" & txtCodEtiqFinal.Text & "' And Estado <> '" & EstadoEtiq.Habilitada & "' And EtiqFinal = '1'")
+
+            If WEtiqFinal Is Nothing Then
+                MostrarMsgError("Etiqueta inexistente o ya validada", Tipo.Falla)
+                txtCodEtiqPreenvasado.Text = ""
+                txtCodEtiqFinal.Text = ""
+                txtCodEtiqPreenvasado.Focus()
+                Exit Sub
+            Else
+
+                '
+                ' Realizamos la validacion de Pedido, Lote y Cantidad.
+                '
+                Dim WPedidoReet, WLoteReet, WCantidadReet As String
+                Dim WPedidoFinal, WLoteFinal, WCantidadFinal As String
+
+                WPedidoFinal = Trim(OrDefault(WEtiqFinal.Item("Pedido"), ""))
+                WLoteFinal = Trim(OrDefault(WEtiqFinal.Item("Lote"), ""))
+                WCantidadFinal = formatonumerico(OrDefault(WEtiqFinal.Item("Cantidad"), 0))
+
+                '
+                ' Buscamos la información de los datos de la etiqueta de reetiquetado.
+                '
+                Dim WEtiqReet As DataRow = GetSingle("SELECT Pedido, Lote, Cantidad = CantPorEtiq FROM ProcesoCentroImpresion WHERE CodBarra = '" & txtCodEtiqPreenvasado.Text & "' And Estado = '" & EstadoEtiq.Habilitada & "' And ISNULL(EtiqFinal, '0') = '0'")
+
+                WPedidoReet = Trim(OrDefault(WEtiqReet.Item("Pedido"), ""))
+                WLoteReet = Trim(OrDefault(WEtiqReet.Item("Lote"), ""))
+                WCantidadReet = formatonumerico(OrDefault(WEtiqReet.Item("Cantidad"), 0))
+
+                If Val(WPedidoFinal) <> Val(WPedidoReet) Or Val(WLoteFinal) <> Val(WLoteReet) Or Val(WCantidadFinal) <> Val(WCantidadReet) Then
+                    MostrarMsgError("La Etiqueta no se puede validar para este envase. Difiere en Pedido, Lote o Cantidad.", Tipo.Falla)
+                    txtCodEtiqPreenvasado.Text = ""
+                    txtCodEtiqFinal.Text = ""
+                    txtCodEtiqPreenvasado.Focus()
+                    Exit Sub
+                End If
+
+                ExecuteNonQueries("UPDATE ProcesoCentroImpresion SET Estado = '" & EstadoEtiq.Habilitada & "' WHERE CodBarra = '" & txtCodEtiqFinal.Text & "'")
+                MostrarMsgError("Etiqueta validada con Éxito!", Tipo.Exito)
+                txtCodEtiqPreenvasado.Text = ""
+                txtCodEtiqFinal.Text = ""
+                txtCodEtiqPreenvasado.Focus()
+
+            End If
+
+        ElseIf e.KeyCode = Keys.Escape Then
+            txtCodEtiqPreenvasado.Text = ""
+            txtCodEtiqFinal.Text = ""
+            txtCodEtiqFinal.Focus()
         End If
     End Sub
 End Class
