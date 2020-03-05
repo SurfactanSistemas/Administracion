@@ -1,12 +1,16 @@
-﻿Imports CrystalDecisions.CrystalReports.Engine
+﻿Imports System.IO
+Imports CrystalDecisions.CrystalReports.Engine
 Imports CrystalDecisions.Shared
 Imports System.Text.RegularExpressions
+Imports Microsoft.Office.Interop.Outlook
+Imports PdfSharp.Pdf
+Imports PdfSharp.Pdf.IO
 
 Public Class VistaPrevia
     Public Property Reporte As ReportDocument
 
     Public Property Formula As String
-    
+
     Private Sub Reporte_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         With Me.CrystalReportViewer1
@@ -51,7 +55,7 @@ Public Class VistaPrevia
         Try
             ' Buscamos el string de conexion.
             cs = ClasesCompartidas.Globals.getConnectionString()
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical)
             Return
         End Try
@@ -73,7 +77,7 @@ Public Class VistaPrevia
         tli.ConnectionInfo = conexion
 
         ' Volvemos a asignar los datos de conexion pero ahora a cada una de las tablas que tenga el reporte.
-        For Each tabla As Table In Reporte.Database.Tables
+        For Each tabla As CrystalDecisions.CrystalReports.Engine.Table In Reporte.Database.Tables
 
             Dim _logInfo As TableLogOnInfo = tabla.LogOnInfo
 
@@ -117,7 +121,7 @@ Public Class VistaPrevia
     End Sub
 
     Public Sub GuardarPDF(ByVal NombreArchivo As String, Optional ByVal ruta As String = "")
-        ruta = IIf(ruta = "", Application.StartupPath & "/", ruta)
+        ruta = IIf(ruta = "", System.Windows.Forms.Application.StartupPath & "/", ruta)
 
         NombreArchivo = IIf(Regex.IsMatch(NombreArchivo, "(\.pdf)$"), NombreArchivo, NombreArchivo & ".pdf")
 
@@ -128,5 +132,114 @@ Public Class VistaPrevia
         Me.Reporte.RecordSelectionFormula = IIf(IsNothing(Me.Formula), "", Me.Formula)
         'Me.Reporte.Refresh()
         Me.Reporte.ExportToDisk(ExportFormatType.PortableDocFormat, ruta & NombreArchivo)
+    End Sub
+
+
+    Public Sub Exportar(ByVal NombreArchivo As String, ByVal Formato As ExportFormatType, Optional ByVal ruta As String = "")
+
+        If ruta.Trim = "" Then
+            With SaveFileDialog1
+
+                .FileName = NombreArchivo
+
+                Select Case Formato
+                    Case ExportFormatType.PortableDocFormat
+                        .Filter = "PDF|*.pdf"
+                    Case ExportFormatType.Excel
+                        .Filter = "Excel|*.xls"
+                    Case ExportFormatType.WordForWindows
+                        .Filter = "Word|*.doc"
+                End Select
+
+                If .ShowDialog(Me) <> DialogResult.OK Then Exit Sub
+
+                If .FileName <> "" Then
+                    ruta = .FileName
+                    NombreArchivo = ""
+                End If
+
+            End With
+        Else
+
+            If Not ruta.EndsWith("/") Then ruta &= "/"
+
+            Directory.CreateDirectory(ruta)
+
+        End If
+
+        If Formato = ExportFormatType.PortableDocFormat AndAlso Not NombreArchivo.EndsWith(".pdf") Then NombreArchivo &= ".pdf"
+
+        _ReconectarBaseDatos()
+
+        Me.Reporte.RecordSelectionFormula = IIf(IsNothing(Me.Formula), "", Me.Formula)
+        'Me.Reporte.Refresh()
+        Me.Reporte.ExportToDisk(Formato, ruta & NombreArchivo)
+
+    End Sub
+
+    Public Sub EnviarPorEmail(ByVal NombreArchivo As String, Optional ByVal WEnvioAutomatico As Boolean = False, Optional ByVal Subject As String = "", Optional ByVal Body As String = "", Optional ByVal Direcciones As String = "")
+
+        EnviarEmail(NombreArchivo, WEnvioAutomatico, Subject, Body, Direcciones)
+
+    End Sub
+
+    Private Sub EnviarEmail(ByVal Archivo As String, ByVal EnvioAutomatico As Boolean, Optional ByVal Subject As String = "", Optional ByVal Body As String = "", Optional ByVal Direcciones As String = "")
+        Dim oApp As _Application
+        Dim oMsg As _MailItem
+
+        Try
+            oApp = New Application()
+
+            oMsg = oApp.CreateItem(OlItemType.olMailItem)
+
+            Dim el = oMsg.GetInspector
+
+            oMsg.Subject = Subject
+            oMsg.HTMLBody = "<p>" & Body.Replace(vbCrLf, "<br/>") & "<p>" & oMsg.HTMLBody
+
+            oMsg.Attachments.Add(Archivo)
+
+            ' Modificar por los E-Mails que correspondan.
+            'oMsg.To = "gferreyra@surfactan.com.ar"
+            oMsg.To = Direcciones
+
+            If EnvioAutomatico Then
+                oMsg.Send()
+            Else
+                oMsg.Display()
+            End If
+
+        Catch ex As System.Exception
+            Throw New System.Exception("No se pudo crear el E-Mail solicitado." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        End Try
+
+    End Sub
+
+    Public Sub MergePDFs(ByVal WRuta As String, ByVal WNombreArchivo As String)
+
+        Dim Archivos As String() = Directory.GetFiles(WRuta, "*.pdf")
+        Dim outPdf = New PdfDocument()
+
+        For Each file As String In Archivos
+            Using one As PdfDocument = PdfReader.Open(file, PdfDocumentOpenMode.Import)
+
+                CopyPages(one, outPdf)
+
+            End Using
+        Next
+
+        outPdf.Save(WRuta & WNombreArchivo)
+
+    End Sub
+
+    Private Sub CopyPages(ByVal _from As PdfDocument, ByRef _to As PdfDocument)
+        For i = 0 To _from.PageCount - 1
+            _to.AddPage(_from.Pages(i))
+        Next
+
+    End Sub
+    Public Sub DesdeArchivo(ByVal s As String)
+        Reporte = New ReportDocument
+        Reporte.Load(s)
     End Sub
 End Class

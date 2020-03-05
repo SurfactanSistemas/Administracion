@@ -1,4 +1,5 @@
 ﻿Imports ClasesCompartidas
+Imports CrystalDecisions.Shared
 
 Public Class ListadoAsientoResumen
 
@@ -14,6 +15,7 @@ Public Class ListadoAsientoResumen
         TipoListado.Items.Clear()
         TipoListado.Items.Add("Completo")
         TipoListado.Items.Add("Resumido")
+        TipoListado.Items.Add("Exportar Resumido a Excel")
         TipoListado.SelectedIndex = 0
 
     End Sub
@@ -147,8 +149,19 @@ Public Class ListadoAsientoResumen
             Case 0
                 viewer = New ReportViewer("Listado de Imputaciones Contables", Globals.reportPathWithName("WImputaNet.rpt"), txtFormula)
 
-            Case Else
+            Case 1
                 viewer = New ReportViewer("Listado de Imputaciones Contables", Globals.reportPathWithName("WImputa2Net.rpt"), txtFormula)
+            Case 2
+                With New VistaPrevia
+                    .Reporte = New ReporteImputa2netExportacionExcel
+                    .Reporte.RecordSelectionFormula = txtFormula
+                    .Reporte.SetParameterValue(0, txthastafecha.Text)
+                    .Reporte.SetParameterValue(1, "Asiento Resumen")
+                    '.Mostrar()
+                    .Exportar("", ExportFormatType.Excel, "")
+
+                    Exit Sub
+                End With
 
         End Select
 
