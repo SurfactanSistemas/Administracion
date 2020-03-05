@@ -228,7 +228,7 @@ Public Class ListadoImputacionesContable
 
                             Select Case CampoPagos.tipoOrd
                                 Case "4"
-                                    txtCuenta = txtVectorBanco(CampoPagos.banco2)
+                                    txtCuenta = OrDefault(txtVectorBanco(CampoPagos.banco2), 0)
 
                                 Case "5"
                                     txtCuenta = "111"
@@ -394,7 +394,7 @@ Public Class ListadoImputacionesContable
                                 'If Not IsNothing(Banco) Then
                                 '    txtCuenta = Banco.cuenta.id.ToString()
                                 'End If
-                                txtCuenta = txtVectorBanco(CampoPagos.banco2)
+                                txtCuenta = OrDefault(txtVectorBanco(CampoPagos.banco2), 0)
 
                             Case 3
                                 txtCuenta = "40"
@@ -1066,7 +1066,7 @@ Public Class ListadoImputacionesContable
                 txtRenglon = txtRenglonII
                 txtFecha = CampoDepositos.Fecha
                 txtObservaciones = ""
-                txtCuenta = txtVectorBanco(CampoDepositos.Banco)
+                txtCuenta = OrDefault(txtVectorBanco(CampoDepositos.Banco), 0)
                 txtDebito = CampoDepositos.importe2
                 txtCredito = 0
                 txtFechaOrd = CampoDepositos.fechaord

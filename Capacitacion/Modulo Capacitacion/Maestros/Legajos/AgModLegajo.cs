@@ -790,6 +790,8 @@ namespace Modulo_Capacitacion.Maestros.Legajos
 
         private void ValidarDatosCargados()
         {
+            if (TB_DNI.Text.Trim() == "")
+                throw new Exception("Se debe cargar el DNI de la Persona.");
             if (TB_DescLegajo.Text == "")
                 throw new Exception("Se debe cargar la descripcion");
             if (TB_DescPerfil.Text == "" || TB_DescSec.Text == "")
