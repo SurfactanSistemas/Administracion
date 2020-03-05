@@ -8,6 +8,7 @@ Imports PdfSharp.Pdf
 Imports PdfSharp.Pdf.IO
 Imports ConsultasVarias.Clases.Helper
 
+
 Public Class VistaPrevia
     Public Property Reporte As ReportDocument
 

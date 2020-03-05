@@ -1,5 +1,8 @@
 ﻿Imports System.Data.SqlClient
 Imports ClasesCompartidas
+Imports ConsultasVarias
+Imports CrystalDecisions.Shared
+Imports ConsultasVarias.VistaPrevia
 
 Public Class ListadoImputacionesContable
 
@@ -17,6 +20,7 @@ Public Class ListadoImputacionesContable
         TipoListado.Items.Clear()
         TipoListado.Items.Add("Completo")
         TipoListado.Items.Add("Resumido")
+        TipoListado.Items.Add("Exportar Resumido a Excel")
         TipoListado.SelectedIndex = 0
 
         chkDepositos.Checked = False
@@ -222,13 +226,16 @@ Public Class ListadoImputacionesContable
                     txtRenglonII = 0
                 End If
 
+
+
+
                 Select Case CampoPagos.tiporeg
                     Case 1
                         If CampoPagos.tipoOrd = "3" Or CampoPagos.tipoOrd = "4" Or CampoPagos.tipoOrd = "5" Then
 
                             Select Case CampoPagos.tipoOrd
                                 Case "4"
-                                    txtCuenta = txtVectorBanco(CampoPagos.banco2)
+                                    txtCuenta = OrDefault(txtVectorBanco(CampoPagos.banco2), 0)
 
                                 Case "5"
                                     txtCuenta = "111"
@@ -394,7 +401,7 @@ Public Class ListadoImputacionesContable
                                 'If Not IsNothing(Banco) Then
                                 '    txtCuenta = Banco.cuenta.id.ToString()
                                 'End If
-                                txtCuenta = txtVectorBanco(CampoPagos.banco2)
+                                txtCuenta = OrDefault(txtVectorBanco(CampoPagos.banco2), 0)
 
                             Case 3
                                 txtCuenta = "40"
@@ -617,7 +624,7 @@ Public Class ListadoImputacionesContable
                         If CampoRecibos.tiporec = "3" Then
                             txtCuenta = CampoRecibos.cuenta
                         Else
-                            If Val(CampoRecibos.tipo1 = 60) Then
+                            If Val(CampoRecibos.tipo1) = 60 Then
                                 txtCuenta = "91"
                             Else
                                 If Val(CampoRecibos.tipo1) > 49 Then
@@ -631,7 +638,7 @@ Public Class ListadoImputacionesContable
                                     End If
                                 End If
                             End If
-                            
+
                         End If
 
                         txtAuxiliar = CampoRecibos.importe1
@@ -952,7 +959,7 @@ Public Class ListadoImputacionesContable
                     End If
 
                 End If
-                
+
             Next
 
             '
@@ -1066,7 +1073,7 @@ Public Class ListadoImputacionesContable
                 txtRenglon = txtRenglonII
                 txtFecha = CampoDepositos.Fecha
                 txtObservaciones = ""
-                txtCuenta = txtVectorBanco(CampoDepositos.Banco)
+                txtCuenta = OrDefault(txtVectorBanco(CampoDepositos.Banco), 0)
                 txtDebito = CampoDepositos.importe2
                 txtCredito = 0
                 txtFechaOrd = CampoDepositos.fechaord
@@ -1144,9 +1151,20 @@ Public Class ListadoImputacionesContable
             Case 0
                 viewer = New ReportViewer("Imputaciones Contables", Globals.reportPathWithName("wImpCybnet.rpt"), txtFormula)
 
-            Case Else
+            Case 1
                 viewer = New ReportViewer("Imputaciones Contables", Globals.reportPathWithName("wImpCybResunet.rpt"), txtFormula)
+            Case 2
 
+                With New VistaPrevia
+                    .Reporte = New ReporteImpcybnetResumidoParaExcel
+                    .Reporte.RecordSelectionFormula = txtFormula
+                    .Reporte.SetParameterValue(0, txthastafecha.Text)
+                    .Reporte.SetParameterValue(1, "Imputaciones de Caja y Banco")
+                    '.Mostrar()
+                    .Exportar("", ExportFormatType.Excel, "")
+
+                    Exit Sub
+                End With
         End Select
 
         If IsNothing(viewer) Then : Exit Sub : End If
