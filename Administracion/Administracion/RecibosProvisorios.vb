@@ -206,7 +206,7 @@ Public Class RecibosProvisorios
                     .Cells(2).Value = ""
                     .Cells(3).Value = ""
                 End With
-            Case 2, 3
+            Case 2, 3, 7
                 column = 1
             Case Else
                 Exit Sub
@@ -545,7 +545,7 @@ Public Class RecibosProvisorios
                 Select Case Val(WTipo)
                     Case 1, 4
                         Continue For
-                    Case 2
+                    Case 2, 7
                         Dim WNumero As String = If(.Cells("Numero").Value, "")
                         Dim WFecha As String = If(.Cells("Fecha").Value, "")
                         Dim WBanco As String = If(.Cells("Banco").Value, "")
@@ -556,7 +556,7 @@ Public Class RecibosProvisorios
                         End If
 
                     Case Else
-                        MsgBox("Hay importes que no tienen definido su tipo de manera correcta." & vbCrLf & vbCrLf & "Recuerde que los tipos válidos son Efectivo, Cheque y Varios.", MsgBoxStyle.Information)
+                        MsgBox("Hay importes que no tienen definido su tipo de manera correcta." & vbCrLf & vbCrLf & "Recuerde que los tipos válidos son Efectivo, Cheque, Varios y Cheques Electronicos", MsgBoxStyle.Information)
                         Exit Sub
                 End Select
 
@@ -1207,7 +1207,7 @@ Public Class RecibosProvisorios
                             End If
                         Else
                             valor = valor.ToString().Substring(valor.ToString.Length - 1, 1)
-                            If valor = "1" Or valor = "2" Or valor = "4" Then ' No se Pueden cargar Documentos en un Recibo Provisorio.
+                            If valor = "1" Or valor = "2" Or valor = "4" Or valor = "7" Then ' No se Pueden cargar Documentos en un Recibo Provisorio.
                                 eventoSegunTipoEnFormaDePagoPara(CustomConvert.toIntOrZero(valor), iRow, iCol)
                             Else ' Sólo se aceptan los valores 1 (Efectivo) , 2 (Cheque), 3 (Doc) y 4 (Varios) ?
                                 Return True

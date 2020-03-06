@@ -879,7 +879,7 @@ Public Class Pagos
         Dim item = ""
 
         Dim cn = New SqlConnection()
-        Dim cm = New SqlCommand("SELECT Tiporeg, TipoReg, Estado2, Tipo2, Importe2, Numero2, " & "Fecha2, Banco2, Clave, FechaOrd2 FROM Recibos WHERE " & "TipoReg = '2' AND Estado2 <> 'X' AND Tipo2 = '02' " & "ORDER BY FechaOrd2, Numero2")
+        Dim cm = New SqlCommand("SELECT Tiporeg, TipoReg, Estado2, Tipo2, Importe2, Numero2, " & "Fecha2, Banco2, Clave, FechaOrd2 FROM Recibos WHERE " & "TipoReg = '2' AND Estado2 <> 'X' AND (Tipo2 = '02' OR Tipo2= '07')" & "ORDER BY FechaOrd2, Numero2")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -2983,7 +2983,7 @@ Public Class Pagos
             Case 1
                 nombre = "Efectivo"
                 column = 5
-            Case 2, 3
+            Case 2, 3, 7
                 column = 1
             Case 4
                 column = 1
@@ -3357,7 +3357,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
                             'valor = valor.ToString().Substring(valor.ToString.Length - 1, 1)
 
                             Select Case Val(valor)
-                                Case 1, 2, 3, 4, 5, 6
+                                Case 1, 2, 3, 4, 5, 6, 7
 
                                     eventoSegunTipoEnFormaDePagoPara(CustomConvert.toIntOrZero(valor), iRow, iCol)
 
