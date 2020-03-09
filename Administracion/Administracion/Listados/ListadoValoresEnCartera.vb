@@ -13,6 +13,7 @@ Public Class ListadoValoresEnCartera
         txtHastaFecha.Text = "  /  /    "
         txtCliente.Text = ""
         txtRazonSocial.Text = ""
+        cbTipoCheques.SelectedIndex = 0
     End Sub
 
     Private Sub txtfecha1_KeyPress(ByVal sender As Object, _
@@ -196,7 +197,31 @@ Public Class ListadoValoresEnCartera
         Dim tabla As DataTable
         Dim fechaord, recibo, tiporeg, tiporec, cuenta, cliente, tipo1, letra1, punto1, numero1, fecha, tipo2, numero2, importe1, paridad, importe2, retiva, retotra, retsuss, retganancias, renglon, Banco2, Fecha2, FechaOrd2, destino
 
-        tabla = SQLConnector.retrieveDataTable("buscar_cheques_valcar", varDesdefechaOrd, varHastafechaOrd, varDesdeCliente, varHastaCliente)
+'        If cbTipoCheques.SelectedIndex = 0 Then
+'            tabla = SQLConnector.retrieveDataTable("buscar_cheques_valcar", varDesdefechaOrd, varHastafechaOrd, varDesdeCliente, varHastaCliente)
+'        Else
+'            tabla = SQLConnector.retrieveDataTable("buscar_cheques_valcar_Electronicos", varDesdefechaOrd, varHastafechaOrd, varDesdeCliente, varHastaCliente)
+'        End If
+
+
+        Dim SQLCnslt As String = ""
+        Dim TipoCheques As String = "02"
+        If cbTipoCheques.SelectedIndex = 1 Then
+            TipoCheques = "07"
+        End If
+
+        SQLCnslt = "SELECT FechaOrd, Recibo, TipoReg,TipoRec, Cuenta, Cliente, Tipo1, Letra1, Punto1, Numero1, Fecha" _
+                & ",Tipo2, Numero2, Importe1, Paridad, Importe2, RetIva, Retotra, RetSuss, RetGanancias, Renglon, Banco2" _
+                & ",Fecha2, FechaOrd2, Destino " _
+                & "FROM Recibos " _
+                & "WHERE FechaOrd2 BETWEEN '" & varDesdefechaOrd & "' AND '" & varHastafechaOrd & "' " _
+                & "AND Cliente BETWEEN '" & varDesdeCliente & "' AND '" & varHastaCliente & "' " _
+                & "AND TipoReg = '2' AND Estado2 <> 'X' AND Tipo2 = '" & TipoCheques & "' " _
+                & "ORDER BY FechaOrd2, Numero2"
+
+        tabla = GetAll(SQLCnslt)
+
+
 
         For Each row As DataRow In tabla.Rows
 

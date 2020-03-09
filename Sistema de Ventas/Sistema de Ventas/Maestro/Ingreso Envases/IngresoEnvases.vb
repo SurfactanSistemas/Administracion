@@ -18,7 +18,7 @@ Public Class IngresoEnvases : Implements IAgregarEnvase
 
     Private Sub _CargarDGVEnvases()
         Dim SQLCnslt As String = ""
-        SQLCnslt = "SELECT Codigo = Envases, Descripcion = trim(Descripcion), Abreviatura, Kilos, Tipo, Peso FROM Envases WHERE Envases <> 0 ORDER BY Envases"
+        SQLCnslt = "SELECT Codigo = Envases, Descripcion = trim(Descripcion), Abreviatura, Kilos, Tipo, Peso, VerEquivArticulo = 'Equiv. Env.' FROM Envases WHERE Envases <> 0 ORDER BY Envases"
         Dim tablaEnvases As DataTable = GetAll(SQLCnslt)
         tablaEnvases.Columns.Add("TipoNombre")
         For Each rowEnvases As DataRow In tablaEnvases.Rows
@@ -104,4 +104,11 @@ Public Class IngresoEnvases : Implements IAgregarEnvase
         End With
     End Sub
 
+    Private Sub DGV_Envases_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGV_Envases.CellContentClick
+        If DGV_Envases.CurrentCell.ColumnIndex = 6 Then
+            With New EnvasesEquivEnArticulo(DGV_Envases.CurrentRow.Cells("Codigo").Value, DGV_Envases.CurrentRow.Cells("Descripcion").Value)
+                .Show()
+            End With
+        End If
+    End Sub
 End Class

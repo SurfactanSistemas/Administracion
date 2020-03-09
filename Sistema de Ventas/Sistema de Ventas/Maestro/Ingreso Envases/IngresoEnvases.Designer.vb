@@ -43,6 +43,7 @@ Partial Class IngresoEnvases
         Me.Tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TipoNombre = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Peso = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.VerEquivArticulo = New System.Windows.Forms.DataGridViewLinkColumn()
         Me.Panel1.SuspendLayout()
         CType(Me.DGV_Envases, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -145,7 +146,7 @@ Partial Class IngresoEnvases
         '
         Me.DGV_Envases.AllowUserToAddRows = False
         Me.DGV_Envases.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGV_Envases.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Codigo, Me.Descripcion, Me.Abreviatura, Me.Kilos, Me.Tipo, Me.TipoNombre, Me.Peso})
+        Me.DGV_Envases.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Codigo, Me.Descripcion, Me.Abreviatura, Me.Kilos, Me.Tipo, Me.TipoNombre, Me.Peso, Me.VerEquivArticulo})
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
         DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -230,6 +231,12 @@ Partial Class IngresoEnvases
         Me.Peso.ReadOnly = True
         Me.Peso.Width = 50
         '
+        'VerEquivArticulo
+        '
+        Me.VerEquivArticulo.DataPropertyName = "VerEquivArticulo"
+        Me.VerEquivArticulo.HeaderText = "Equiv. en Art."
+        Me.VerEquivArticulo.Name = "VerEquivArticulo"
+        '
         'IngresoEnvases
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -270,4 +277,5 @@ Partial Class IngresoEnvases
     Friend WithEvents Tipo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents TipoNombre As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Peso As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents VerEquivArticulo As System.Windows.Forms.DataGridViewLinkColumn
 End Class

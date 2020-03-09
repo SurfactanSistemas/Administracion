@@ -37,6 +37,7 @@ Partial Class ListadoValoresEnCarteraCuit
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.btnImprimir = New System.Windows.Forms.Button()
+        Me.cbTipoCheques = New System.Windows.Forms.ComboBox()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
@@ -174,6 +175,7 @@ Partial Class ListadoValoresEnCarteraCuit
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.cbTipoCheques)
         Me.Panel2.Controls.Add(Me.txtDesdeFecha)
         Me.Panel2.Controls.Add(Me.txtCuit)
         Me.Panel2.Controls.Add(Me.CustomLabel3)
@@ -202,6 +204,16 @@ Partial Class ListadoValoresEnCarteraCuit
         Me.btnImprimir.TabIndex = 44
         Me.ToolTip1.SetToolTip(Me.btnImprimir, "Imprimir Reporte")
         Me.btnImprimir.UseVisualStyleBackColor = True
+        '
+        'cbTipoCheques
+        '
+        Me.cbTipoCheques.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbTipoCheques.FormattingEnabled = True
+        Me.cbTipoCheques.Items.AddRange(New Object() {"Cheques Fisicos", "Cheques Electronicos"})
+        Me.cbTipoCheques.Location = New System.Drawing.Point(133, 133)
+        Me.cbTipoCheques.Name = "cbTipoCheques"
+        Me.cbTipoCheques.Size = New System.Drawing.Size(208, 21)
+        Me.cbTipoCheques.TabIndex = 48
         '
         'ListadoValoresEnCarteraCuit
         '
@@ -235,4 +247,5 @@ Partial Class ListadoValoresEnCarteraCuit
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents btnImprimir As System.Windows.Forms.Button
+    Friend WithEvents cbTipoCheques As System.Windows.Forms.ComboBox
 End Class

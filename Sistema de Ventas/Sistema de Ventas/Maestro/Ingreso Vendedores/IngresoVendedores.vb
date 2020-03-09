@@ -8,7 +8,7 @@ Public Class IngresoVendedores : Implements IAgregarVendedores
     End Sub
 
     Private Sub IngresoVendedores_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim SQLCnslt As String = "SELECT Codigo = Vendedor, Nombre = TRIM(Nombre), Email1 = TRIM(Email1), Email2 = TRIM(Email2) FROM Vendedor WHERE Vendedor <> 0 ORDER by Vendedor"
+        Dim SQLCnslt As String = "SELECT Codigo = Vendedor, Nombre = TRIM(Nombre), Email1 = TRIM(Email1), Email2 = TRIM(Email2), Vercliente = 'Ver Clientes' FROM Vendedor WHERE Vendedor <> 0 ORDER by Vendedor"
         Dim TablaVendedores As DataTable = getall(SQLCnslt)
         DGV_Vendedores.DataSource = TablaVendedores
     End Sub
@@ -37,7 +37,7 @@ Public Class IngresoVendedores : Implements IAgregarVendedores
         If MsgBox("¿Desea eliminar el Vendedor " & Trim(DGV_Vendedores.CurrentRow.Cells("Nombre").Value) & "?", vbYesNo) = vbYes Then
             Dim SQlCnslt As String = "DELETE FROM Vendedor WHERE Vendedor = '" & DGV_Vendedores.CurrentRow.Cells("Codigo").Value & "'"
             ExecuteNonQueries({SQlCnslt})
-            SQlCnslt = "SELECT Codigo = Vendedor,Nombre = TRIM(Nombre), Email1 = TRIM(Email1), Email2 = TRIM(Email2) FROM Vendedor WHERE Vendedor <>  0 ORDER by Vendedor"
+            SQlCnslt = "SELECT Codigo = Vendedor,Nombre = TRIM(Nombre), Email1 = TRIM(Email1), Email2 = TRIM(Email2), Vercliente = 'Ver Clientes' FROM Vendedor WHERE Vendedor <>  0 ORDER by Vendedor"
             Dim TablaVendedores As DataTable = GetAll(SQLCnslt)
             DGV_Vendedores.DataSource = TablaVendedores
         End If
@@ -70,7 +70,7 @@ Public Class IngresoVendedores : Implements IAgregarVendedores
     End Sub
 
     Public Sub _ProcesarDatosVendedores() Implements IAgregarVendedores._ProcesarDatosVendedores
-        Dim SQLCnslt As String = "SELECT Codigo = Vendedor, Nombre = TRIM(Nombre), Email1 = TRIM(Email1), Email2 = TRIM(Email2) FROM Vendedor WHERE Vendedor <> 0 ORDER by Vendedor"
+        Dim SQLCnslt As String = "SELECT Codigo = Vendedor, Nombre = TRIM(Nombre), Email1 = TRIM(Email1), Email2 = TRIM(Email2), Vercliente = 'Ver Clientes' FROM Vendedor WHERE Vendedor <> 0 ORDER by Vendedor"
         Dim TablaVendedores As DataTable = GetAll(SQLCnslt)
         DGV_Vendedores.DataSource = TablaVendedores
     End Sub
@@ -92,5 +92,13 @@ Public Class IngresoVendedores : Implements IAgregarVendedores
 
     Private Sub IngresoVendedores_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         txtBuscador.Focus()
+    End Sub
+
+    Private Sub DGV_Vendedores_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGV_Vendedores.CellContentClick
+        If DGV_Vendedores.CurrentCell.ColumnIndex = 4 Then
+            With New MostrarClientesXVendedor(DGV_Vendedores.CurrentRow.Cells("Codigo").Value, DGV_Vendedores.CurrentRow.Cells("Nombre").Value)
+                .Show()
+            End With
+        End If
     End Sub
 End Class

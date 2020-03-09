@@ -22,7 +22,7 @@ Partial Class IngresoVendedores
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.DGV_Vendedores = New ConsultasVarias.DBDataGridView()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -38,6 +38,7 @@ Partial Class IngresoVendedores
         Me.Nombre = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Email1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Email2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.VerCliente = New System.Windows.Forms.DataGridViewLinkColumn()
         CType(Me.DGV_Vendedores, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -46,15 +47,15 @@ Partial Class IngresoVendedores
         '
         Me.DGV_Vendedores.AllowUserToAddRows = False
         Me.DGV_Vendedores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGV_Vendedores.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Codigo, Me.Nombre, Me.Email1, Me.Email2})
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGV_Vendedores.DefaultCellStyle = DataGridViewCellStyle5
+        Me.DGV_Vendedores.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Codigo, Me.Nombre, Me.Email1, Me.Email2, Me.VerCliente})
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGV_Vendedores.DefaultCellStyle = DataGridViewCellStyle1
         Me.DGV_Vendedores.DoubleBuffered = True
         Me.DGV_Vendedores.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.DGV_Vendedores.Location = New System.Drawing.Point(9, 113)
@@ -196,6 +197,12 @@ Partial Class IngresoVendedores
         Me.Email2.Name = "Email2"
         Me.Email2.ReadOnly = True
         '
+        'VerCliente
+        '
+        Me.VerCliente.DataPropertyName = "VerCliente"
+        Me.VerCliente.HeaderText = "Clientes"
+        Me.VerCliente.Name = "VerCliente"
+        '
         'IngresoVendedores
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -235,4 +242,5 @@ Partial Class IngresoVendedores
     Friend WithEvents Nombre As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Email1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Email2 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents VerCliente As System.Windows.Forms.DataGridViewLinkColumn
 End Class

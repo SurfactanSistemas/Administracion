@@ -9,6 +9,7 @@ Public Class ListadoValoresEnCarteraCuit
         txtDesdeFecha.Text = "  /  /    "
         txthastafecha.Text = "  /  /    "
         txtCuit.Text = ""
+        cbTipoCheques.SelectedIndex = 0
 
     End Sub
 
@@ -76,8 +77,14 @@ Public Class ListadoValoresEnCarteraCuit
         varDesdefechaOrd = ordenaFecha(txtDesdeFecha.Text)
         varHastafechaOrd = ordenaFecha(txthastafecha.Text)
 
+        Dim TipoCheques As String = "02"
+
+        If cbTipoCheques.SelectedIndex = 1 Then
+            TipoCheques = "07"
+        End If
+
         Dim cn = New SqlConnection()
-        Dim cm = New SqlCommand("SELECT Clave, Destino, Estado2 FROM Recibos WHERE Cuit = '" & txtCuit.Text & "' AND FechaOrd2 BETWEEN " & varDesdefechaOrd & " AND " & varHastafechaOrd & " ORDER BY Clave")
+        Dim cm = New SqlCommand("SELECT Clave, Destino, Estado2 FROM Recibos WHERE Cuit = '" & txtCuit.Text & "' AND FechaOrd2 BETWEEN " & varDesdefechaOrd & " AND " & varHastafechaOrd & "  ORDER BY Clave")
         Dim dr As SqlDataReader
         Dim WClave, WDestino, WEstado2
 
@@ -133,8 +140,9 @@ Public Class ListadoValoresEnCarteraCuit
 
         varUno = "{Recibos.fechaord2} in " + x + varDesdefechaOrd + x + " to " + x + varHastafechaOrd + x
         varDos = " and {recibos.cuit} in " + x + txtCuit.Text + x + " to " + x + txtCuit.Text + x
+        Dim varTres As String = "AND {Recibos.Tipo2} = '" & TipoCheques & "'"
 
-        varFormula = varUno + varDos
+        varFormula = varUno + varDos + varTres
 
         Dim viewer As New ReportViewer("Listado de Valores en Cartera por Cuit", Globals.reportPathWithName("listavalorescuitnet.rpt"), varFormula)
 
