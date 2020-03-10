@@ -95,6 +95,12 @@
     <Compile Include="Maestro\Ingreso Envases\AgregarEnvases.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Maestro\Ingreso Envases\EnvasesEquivEnArticulo.Designer.vb">
+      <DependentUpon>EnvasesEquivEnArticulo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestro\Ingreso Envases\EnvasesEquivEnArticulo.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Maestro\Ingreso Envases\IngresoEnvases.Designer.vb">
       <DependentUpon>IngresoEnvases.vb</DependentUpon>
     </Compile>
@@ -111,6 +117,12 @@
       <DependentUpon>IngresoFliaMP.vb</DependentUpon>
     </Compile>
     <Compile Include="Maestro\Ingreso Familia MP\IngresoFliaMP.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestro\Ingreso Linea Venta\MostrarPTsXlinea.Designer.vb">
+      <DependentUpon>MostrarPTsXlinea.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestro\Ingreso Linea Venta\MostrarPTsXlinea.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Maestro\Ingreso Linea Venta\AgregarLineaVentas.Designer.vb">
@@ -192,6 +204,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Interfases\IAgregarFliaMP.vb" />
+    <Compile Include="Maestro\Ingreso Vendedores\MostrarClientesXVendedor.Designer.vb">
+      <DependentUpon>MostrarClientesXVendedor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestro\Ingreso Vendedores\MostrarClientesXVendedor.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Reportes\ReporteConcepDGastosImportacion.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -278,6 +296,9 @@
     <EmbeddedResource Include="Maestro\Ingreso Envases\AgregarEnvases.resx">
       <DependentUpon>AgregarEnvases.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Maestro\Ingreso Envases\EnvasesEquivEnArticulo.resx">
+      <DependentUpon>EnvasesEquivEnArticulo.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Maestro\Ingreso Envases\IngresoEnvases.resx">
       <DependentUpon>IngresoEnvases.vb</DependentUpon>
     </EmbeddedResource>
@@ -286,6 +307,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Maestro\Ingreso Familia MP\IngresoFliaMP.resx">
       <DependentUpon>IngresoFliaMP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestro\Ingreso Linea Venta\MostrarPTsXlinea.resx">
+      <DependentUpon>MostrarPTsXlinea.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Maestro\Ingreso Linea Venta\AgregarLineaVentas.resx">
       <DependentUpon>AgregarLineaVentas.vb</DependentUpon>
@@ -322,6 +346,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Maestro\Ingreso Linea Venta\IngresoLineasDeVentas.resx">
       <DependentUpon>IngresoLineasDeVentas.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestro\Ingreso Vendedores\MostrarClientesXVendedor.resx">
+      <DependentUpon>MostrarClientesXVendedor.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\ReporteConcepDGastosImportacion.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

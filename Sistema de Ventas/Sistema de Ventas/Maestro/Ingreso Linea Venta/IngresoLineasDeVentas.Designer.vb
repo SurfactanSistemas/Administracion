@@ -22,7 +22,7 @@ Partial Class IngresoLineasDeVentas
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.btnCerrar = New System.Windows.Forms.Button()
@@ -36,6 +36,7 @@ Partial Class IngresoLineasDeVentas
         Me.DGV_LineasVentas = New ConsultasVarias.DBDataGridView()
         Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MostrarPTsXLinea = New System.Windows.Forms.DataGridViewLinkColumn()
         Me.Panel1.SuspendLayout()
         CType(Me.DGV_LineasVentas, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -138,15 +139,15 @@ Partial Class IngresoLineasDeVentas
         '
         Me.DGV_LineasVentas.AllowUserToAddRows = False
         Me.DGV_LineasVentas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGV_LineasVentas.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Codigo, Me.Descripcion})
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGV_LineasVentas.DefaultCellStyle = DataGridViewCellStyle2
+        Me.DGV_LineasVentas.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Codigo, Me.Descripcion, Me.MostrarPTsXLinea})
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGV_LineasVentas.DefaultCellStyle = DataGridViewCellStyle1
         Me.DGV_LineasVentas.DoubleBuffered = True
         Me.DGV_LineasVentas.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.DGV_LineasVentas.Location = New System.Drawing.Point(1, 110)
@@ -176,6 +177,13 @@ Partial Class IngresoLineasDeVentas
         Me.Descripcion.Name = "Descripcion"
         Me.Descripcion.ReadOnly = True
         '
+        'MostrarPTsXLinea
+        '
+        Me.MostrarPTsXLinea.DataPropertyName = "MostrarPTsXLinea"
+        Me.MostrarPTsXLinea.HeaderText = "PT por linea"
+        Me.MostrarPTsXLinea.Name = "MostrarPTsXLinea"
+        Me.MostrarPTsXLinea.ReadOnly = True
+        '
         'IngresoLineasDeVentas
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -191,7 +199,6 @@ Partial Class IngresoLineasDeVentas
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.DGV_LineasVentas)
         Me.Name = "IngresoLineasDeVentas"
-        Me.Text = "IngresoLineasDeVentas"
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         CType(Me.DGV_LineasVentas, System.ComponentModel.ISupportInitialize).EndInit()
@@ -212,4 +219,5 @@ Partial Class IngresoLineasDeVentas
     Friend WithEvents DGV_LineasVentas As ConsultasVarias.DBDataGridView
     Friend WithEvents Codigo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents MostrarPTsXLinea As System.Windows.Forms.DataGridViewLinkColumn
 End Class

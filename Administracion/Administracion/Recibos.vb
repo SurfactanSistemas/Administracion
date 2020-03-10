@@ -530,7 +530,7 @@ Public Class Recibos
                     .Cells(2).Value = ""
                     .Cells(3).Value = ""
                 End With
-            Case 2, 3
+            Case 2, 3, 7
                 column = 1
             Case Else
                 Exit Sub
@@ -1143,7 +1143,7 @@ Public Class Recibos
         For Each row In gridFormasPago2.Rows
 
             With row
-                If Not IsNothing(.Cells(0).Value) AndAlso Val(.Cells(0).Value) = 2 Then
+                If Not IsNothing(.Cells(0).Value) AndAlso (Val(.Cells(0).Value) = 2 Or Val(.Cells(0).Value) = 5) Then
 
                     ' Controlamos que no se ingrese un numero = 0 para los cheques.
                     If IsNothing(.Cells(1).Value) OrElse Val(.Cells(1).Value) = 0 Then
@@ -3171,7 +3171,7 @@ Public Class Recibos
                             End If
                         Else
                             valor = valor.ToString().Substring(valor.ToString.Length - 1, 1)
-                            If valor = "1" Or valor = "2" Or valor = "3" Or valor = "4" Then
+                            If valor = "1" Or valor = "2" Or valor = "3" Or valor = "4" Or valor = "7" Then
                                 eventoSegunTipoEnFormaDePagoPara(CustomConvert.toIntOrZero(valor), iRow, iCol)
                             Else ' Sólo se aceptan los valores 1 (Efectivo) , 2 (Cheque), 3 (Doc) y 4 (Varios) ?
                                 gridFormasPago2.CurrentCell = gridFormasPago2.Rows(iRow).Cells(iCol)

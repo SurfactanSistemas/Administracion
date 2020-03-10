@@ -344,7 +344,7 @@ Partial Class RecibosProvisorios
         Me.CustomLabel10.Name = "CustomLabel10"
         Me.CustomLabel10.Size = New System.Drawing.Size(384, 22)
         Me.CustomLabel10.TabIndex = 118
-        Me.CustomLabel10.Text = "Tipo Doc.:    1) Ef.    2) Ch.    4) Varios "
+        Me.CustomLabel10.Text = "Tipo Doc.:    1) Ef.    2) Ch.    4) Varios   7) Ch. Electr"
         Me.CustomLabel10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'CustomLabel2

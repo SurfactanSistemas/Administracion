@@ -709,7 +709,17 @@ Namespace Clases
                 Throw New System.Exception("No se pudo crear el E-Mail solicitado." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
             End Try
         End Sub
+        Public Shared Function _QuitarAcentos(ByVal strNombre As String) As String
+            Const conAcentos = "áàäâÁÀÄÂéèëêÉÈËÊíìïîÍÌÏÎóòöôÓÒÖÔúùüûÚÙÜÛýÿÝ"
+            Const sinAcentos = "aaaaAAAAeeeeEEEEiiiiIIIIooooOOOOuuuuUUUUyyY"
+            Dim i As Integer
+            For i = Len(conAcentos) To 1 Step -1
+                strNombre = Replace(strNombre, Mid(conAcentos, i, 1), Mid(sinAcentos, i, 1))
+            Next
+            Return strNombre
+        End Function
 
     End Class
+
     
 End Namespace

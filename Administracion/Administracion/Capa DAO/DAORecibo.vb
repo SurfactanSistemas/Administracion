@@ -117,7 +117,7 @@ Public Class DAORecibo
                 If Val(.Cells(4).Value) <> 0 Then
 
                     Select Case Val(.Cells(0).Value)
-                        Case 2
+                        Case 2, 7
                             estado2 = "P"
                         Case 1, 4
                             estado2 = "X"

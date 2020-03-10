@@ -278,9 +278,15 @@ Public Class Depositos
         Dim item = ""
 
         Dim cn = New SqlConnection()
+        Dim filtro As String
+        If rbChFisicos.Checked = True Then
+            filtro = "Tipo2 = '02'"
+        Else
+            filtro = "Tipo2 = '07'"
+        End If
         Dim cm = New SqlCommand("SELECT Tiporeg, TipoReg, Estado2, Tipo2, Importe2, Numero2, " _
                                               & "Fecha2, Banco2, Clave, FechaOrd2, ClaveCheque FROM Recibos WHERE " _
-                                              & "TipoReg = '2' AND Estado2 <> 'X' AND Tipo2 = '02' " _
+                                              & "TipoReg = '2' AND Estado2 <> 'X' AND " & filtro & " " _
                                               & "ORDER BY FechaOrd2, Numero2")
         Dim dr As SqlDataReader
 
@@ -326,9 +332,15 @@ Public Class Depositos
         Dim item = ""
 
         Dim cn = New SqlConnection()
+        Dim filtro As String
+        If rbChFisicos.Checked = True Then
+            filtro = ""
+        Else
+            filtro = "AND Tipo2 = '07'"
+        End If
         Dim cm = New SqlCommand("SELECT Tiporeg, TipoReg, Estado2, Tipo2, Importe2, Numero2, " _
                                               & "Fecha2, Banco2, Clave, FechaOrd2, ClaveCheque FROM RecibosProvi WHERE " _
-                                              & "TipoReg = '2' AND Estado2 = 'P' AND ReciboDefinitivo = '0' AND FechaOrd2 > '20080430'" _
+                                              & "TipoReg = '2' AND Estado2 = 'P' " & filtro & " AND ReciboDefinitivo = '0' AND FechaOrd2 > '20080430'" _
                                               & "ORDER BY FechaOrd2, Numero2")
         Dim dr As SqlDataReader
 

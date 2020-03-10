@@ -8,7 +8,7 @@ Public Class IngresoLineasDeVentas : Implements IAgregarLineaVenta
 
     Private Sub IngresoLineasDeVentas_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim SQLCnslt As String = ""
-        SQLCnslt = "SELECT Codigo = Linea, Descripcion = Nombre FROM Lineas WHERE Linea <> 0 ORDER BY Linea"
+        SQLCnslt = "SELECT Codigo = Linea, Descripcion = Nombre, MostrarPTsXLinea = 'Ver Prod. Ter.' FROM Lineas WHERE Linea <> 0 ORDER BY Linea"
         Dim tablaRubro As DataTable = GetAll(SQLCnslt)
         DGV_LineasVentas.DataSource = tablaRubro
 
@@ -34,7 +34,7 @@ Public Class IngresoLineasDeVentas : Implements IAgregarLineaVenta
         If MsgBox("¿Desea eliminar la linea de venta " & Trim(DGV_LineasVentas.CurrentRow.Cells("Descripcion").Value) & "?", vbYesNo) = vbYes Then
             Dim SQlCnslt As String = "DELETE FROM Lineas WHERE Linea = '" & DGV_LineasVentas.CurrentRow.Cells("Codigo").Value & "'"
             ExecuteNonQueries({SQlCnslt})
-            SQlCnslt = "SELECT Codigo = Linea, Descripcion = Nombre FROM Lineas WHERE Linea <> 0 ORDER BY Linea"
+            SQlCnslt = "SELECT Codigo = Linea, Descripcion = Nombre, MostrarPTsXLinea = 'Ver Prod. Ter.' FROM Lineas WHERE Linea <> 0 ORDER BY Linea"
             Dim tablaLineasVentas As DataTable = GetAll(SQlCnslt)
             DGV_LineasVentas.DataSource = tablaLineasVentas
         End If
@@ -80,7 +80,7 @@ Public Class IngresoLineasDeVentas : Implements IAgregarLineaVenta
 
     Public Sub _ProcesarDatosLineaVenta() Implements IAgregarLineaVenta._ProcesarDatosLineaVenta
         Dim SQLCnslt As String = ""
-        SQLCnslt = "SELECT Codigo = linea, Descripcion = Nombre FROM lineas WHERE linea <> 0 ORDER BY linea"
+        SQLCnslt = "SELECT Codigo = linea, Descripcion = Nombre, MostrarPTsXLinea = 'Ver Prod. Ter.' FROM lineas WHERE linea <> 0 ORDER BY linea"
         Dim tablaRubro As DataTable = GetAll(SQLCnslt)
         DGV_LineasVentas.DataSource = tablaRubro
 
@@ -91,5 +91,13 @@ Public Class IngresoLineasDeVentas : Implements IAgregarLineaVenta
             .Reporte = New ReporteLineasDeVentas()
             .Mostrar()
         End With
+    End Sub
+
+    Private Sub DGV_LineasVentas_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGV_LineasVentas.CellContentClick
+        If DGV_LineasVentas.CurrentCell.ColumnIndex = 2 Then
+            With New MostrarPTsXlinea(DGV_LineasVentas.CurrentRow.Cells("Codigo").Value, DGV_LineasVentas.CurrentRow.Cells("Descripcion").Value)
+                .Show()
+            End With
+        End If
     End Sub
 End Class
