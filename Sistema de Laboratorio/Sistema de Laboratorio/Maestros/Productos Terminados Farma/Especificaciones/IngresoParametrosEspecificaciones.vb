@@ -153,6 +153,9 @@
             txtUnidad.Enabled = ckHabDesdeHasta.Checked
             txtParametro.Focus()
         Else
+            ckHabDesdeHasta.Checked = True
+            ckHabDesdeHasta_Click(Nothing, Nothing)
+
             txtFormula.Focus()
         End If
 

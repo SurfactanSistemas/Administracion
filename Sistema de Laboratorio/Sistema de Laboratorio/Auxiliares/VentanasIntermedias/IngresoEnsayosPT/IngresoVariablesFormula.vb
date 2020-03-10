@@ -122,8 +122,7 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
     Private Sub IngresoVariablesFormula_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         dgvVariables.Rows.Clear()
-        Dim wultima As Short = 1
-
+        
         Dim Wowner = TryCast(Owner, ParametrosDeEspecificacion)
 
 
@@ -139,61 +138,18 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
             If Dtabla.Rows.Count > 0 Then
                 For Each row As DataRow In Dtabla.Rows
                     With row
+
                         dgvVariables.Rows.Add(.Item("fila"), .Item("Variable"), .Item("Valor"), .Item("IDRenglon"))
 
                         txtValorEstandar.Text = .Item("ResultadoVerificado")
 
                     End With
                 Next
-
-
-
             Else
-                For i = 1 To 10
-                    If Variables(i, 2) Is Nothing Then
-                        Variables(i, 2) = ""
-                    End If
-                Next
-
-                For i = 1 To 10
-                    If Variables(i, 1) <> "" Then
-                        dgvVariables.Rows.Add(i, Variables(i, 1), Variables(i, 2).Replace(",", "."))
-                        wultima += 1
-                    End If
-                Next
-
-                '
-                ' Definimos las Referencias.
-                '
-                Dim regex As New Regex("R[0-9]{1,2}")
-
-                For Each m As Match In regex.Matches(Formula)
-
-                    Dim renglon As Integer = Val(m.Value.ToString.Replace("R", ""))
-
-
-                    If Wowner IsNot Nothing Then
-                        Dim x = dgvVariables.Rows.Add(wultima, m.Value, 0)
-
-                    Else
-                        If renglon <= DGV.Rows.Count And wultima <= 10 Then
-                            Dim x = dgvVariables.Rows.Add(wultima, m.Value, OrDefault(DGV.Rows(renglon - 1).Cells("Valor").Value, "0").ToString.Replace(",", "."))
-                            dgvVariables.Rows(x).Cells("WValor").ReadOnly = True
-                            wultima += 1
-                        End If
-                    End If
-
-
-                Next
-
-                '        For i = wultima To 10
-                '            dgvVariables.Rows.Add(i, "", "")
-                '        Next
-
-
-
-
+                _CargarDatosFormulaDefault()
             End If
+        Else
+            _CargarDatosFormulaDefault()
         End If
 
         txtFormula.Text = Formula
@@ -202,6 +158,45 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
             .CurrentCell = .Rows(0).Cells("WValor")
             '.Focus()
         End With
+
+    End Sub
+
+    Private Sub _CargarDatosFormulaDefault()
+        Dim wultima As Short = 1
+
+        For i = 1 To 10
+            If Variables(i, 2) Is Nothing Then
+                Variables(i, 2) = ""
+            End If
+        Next
+
+        For i = 1 To 10
+            If Variables(i, 1) <> "" Then
+                dgvVariables.Rows.Add(i, Variables(i, 1), Variables(i, 2).Replace(",", "."))
+                wultima += 1
+            End If
+        Next
+
+        '
+        ' Definimos las Referencias.
+        '
+        Dim regex As New Regex("R[0-9]{1,2}")
+
+        For Each m As Match In regex.Matches(Formula)
+
+            Dim renglon As Integer = Val(m.Value.ToString.Replace("R", ""))
+
+            If renglon <= DGV.Rows.Count And wultima <= 10 Then
+                Dim x = dgvVariables.Rows.Add(wultima, m.Value, OrDefault(DGV.Rows(renglon - 1).Cells("Valor").Value, "0").ToString.Replace(",", "."))
+                dgvVariables.Rows(x).Cells("WValor").ReadOnly = True
+                wultima += 1
+            End If
+            
+        Next
+
+        For i = wultima To 10
+            dgvVariables.Rows.Add(i, "", "")
+        Next
 
     End Sub
 
