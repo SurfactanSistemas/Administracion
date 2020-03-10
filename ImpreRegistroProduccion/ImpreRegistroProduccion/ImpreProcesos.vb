@@ -154,6 +154,7 @@ Public Class ImpreProcesos
 
             Next
 
+            'oMsg.Display()
             oMsg.Send()
 
         Catch ex As System.Exception
@@ -323,7 +324,7 @@ Public Class ImpreProcesos
         WImprePlanilla = OrDefault(WCargaIII.Item("ImprimePlanilla"), 0)
         WImprePlanillaII = OrDefault(WCargaIII.Item("ImprimePlanillaII"), 0)
         WImprePlanillaIII = OrDefault(WCargaIII.Item("ImprimePlanillaIII"), 0)
-        WImprePlanillaIV = OrDefault(WCargaIII.Item("ImprimePlanillaIII"), 0)
+        WImprePlanillaIV = OrDefault(WCargaIII.Item("ImprimePlanillaIV"), 0)
 
         Dim WMostrarHumedad As Integer = 0
 
