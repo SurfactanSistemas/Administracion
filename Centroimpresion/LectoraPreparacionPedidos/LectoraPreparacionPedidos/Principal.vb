@@ -19,6 +19,7 @@ Public Class Principal
     Private WCodPedido As String = ""
     Private WConteoEtiquetas As New List(Of String)
     Private WCliente As String = ""
+    Private WEmpresaHoja As String = ""
 
     Enum Tipo
         Exito
@@ -168,6 +169,7 @@ Public Class Principal
                 If Trim(txtCodigoGral.Text) = "" Then : Exit Sub : End If
 
                 WConteoEtiquetas.Clear()
+                WEmpresaHoja = "SurfactanSa"
 
                 Dim WCod = txtCodigoGral.Text.Trim()
 
@@ -202,10 +204,12 @@ Public Class Principal
                 Dim WDatosPedido As DataTable = GetAll("SELECT Pedido, Terminado, Lote1, Lote2, Lote3, Lote4, Lote5, Lote6, Lote7, Lote8, Lote9, Lote10, Lote11, Lote12 FROM Pedido WHERE Pedido = '" & WCodPedido & "' And Terminado = '" & txtCodProd.Text & "'")
 
                 Dim WPasa As Boolean = False
+                Dim WPasaProd As Boolean = False
 
                 For Each WDato As DataRow In WDatosPedido.Rows
                     If WDato.Item("Terminado") = txtCodProd.Text Then
                         WPasa = True
+                        WPasaProd = True
                         For i = 1 To 12
                             If Val(OrDefault(WDato.Item("Lote" & i), "")) <> 0 Then
                                 WPasa = False
@@ -219,9 +223,12 @@ Public Class Principal
                     End If
                 Next
 
-                If Not WPasa Then
+                If Not WPasa Or Not WPasaProd Then
                     MostrarMsgError("El Producto no se encuentra dentro del Pedido o la Partida no se es la que se encuentra informada en el mismo", Tipo.Falla)
-                    'Exit Sub
+                    If Not WPasaProd Then
+                        txtCodigoGral.Text = ""
+                        Exit Sub
+                    End If
                 End If
 
                 pnlCantidades.Visible = True
@@ -279,6 +286,8 @@ Public Class Principal
 
     Private Function _PartidaValida(ByVal WPartida) As DataTable
 
+        WEmpresaHoja = ""
+
         Dim WTabla As New DataTable
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("SELECT Hoja.Hoja, Hoja.Producto, RTRIM(LTRIM(ISNULL(Terminado.Descripcion, ''))) as Descripcion FROM Hoja LEFT OUTER JOIN Terminado ON Hoja.Producto = Terminado.Codigo WHERE Hoja = '" & WPartida & "' AND Renglon = '1'")
@@ -299,7 +308,27 @@ Public Class Principal
                 dr.Close()
                 cn.Close()
 
-                If WTabla.Rows.Count > 0 Then Exit For
+                If WTabla.Rows.Count > 0 Then
+
+                    Select Case i
+                        Case 1
+                            WEmpresaHoja = "SurfactanSa"
+                        Case 2
+                            WEmpresaHoja = "Surfactan_II"
+                        Case 3
+                            WEmpresaHoja = "Surfactan_III"
+                        Case 4
+                            WEmpresaHoja = "Surfactan_IV"
+                        Case 5
+                            WEmpresaHoja = "Surfactan_V"
+                        Case 6
+                            WEmpresaHoja = "Surfactan_VI"
+                        Case 7
+                            WEmpresaHoja = "Surfactan_VII"
+                    End Select
+
+                    Exit For
+                End If
             Next
 
         Catch ex As Exception
@@ -501,6 +530,24 @@ Public Class Principal
             WCantEtiq = Val(txtCantEtiq.Text)
             WCantPorEtiq = formatonumerico(txtCantPorEtiq.Text)
 
+            '
+            ' VALIDAMOS LA CANTIDAD QUE YA SE ENCUENTRA FRACCIONANDO.
+            '
+            Dim WCantidadPedido As Double = 0
+            Dim WCantidadFraccionada As Double = 0
+
+            Dim WPed As DataRow = GetSingle("SELECT Cantidad FROM Pedido WHERE Pedido = '" & txtPedido.Text & "' And Terminado = '" & txtCodProd.Text & "'")
+            If WPed IsNot Nothing Then WCantidadPedido = OrDefault(WPed.Item("Cantidad"), 0)
+
+            Dim WFrac As DataRow = GetSingle("SELECT Cantidad = SUM(CantPorEtiq) FROM ProcesoCentroImpresion WHERE Pedido = '" & txtPedido.Text & "' And EtiqFinal = '0'")
+            If WFrac IsNot Nothing Then WCantidadPedido = OrDefault(WPed.Item("Cantidad"), 0)
+
+            If WCantidadPedido > 0 Then
+                If WCantidadFraccionada >= WCantidadPedido Then
+                    MostrarMsgError("Ya se encuentran fraccionados " & formatonumerico(WCantidadFraccionada) & " Kgs de los " & formatonumerico(WCantidadPedido) & " Kgs que solicitan en el Pedido.", Tipo.Falla)
+                End If
+            End If
+
             For i = 1 To Val(WCantEtiq)
 
                 If Not SerialPort1.IsOpen() Then
@@ -694,6 +741,11 @@ Public Class Principal
                     ' MsgBox("El Código indicado no tiene el Formato Correcto", MsgBoxStyle.Exclamation)
                     ' Exit Sub
                     ' End If
+
+                    txtCodigoGral.Text = ""
+                    txtCodProd.Text = ""
+                    txtPartida.Text = ""
+                    txtUltPartida.Text = ""
 
                     '
                     ' Controlamos que el Pedido sea válido.
@@ -926,7 +978,7 @@ Public Class Principal
             Dim WEtiq As DataRow = GetSingle("SELECT ID FROM ProcesoCentroImpresion WHERE CodBarra = '" & txtCodEtiqPreenvasado.Text & "' And Estado = '" & EstadoEtiq.Habilitada & "' And EtiqFinal <> '1'")
 
             If WEtiq Is Nothing Then
-                MostrarMsgError("Etiqueta inexistente o no validada", Tipo.Exito)
+                MostrarMsgError("Etiqueta inexistente o no validada", Tipo.Falla)
                 txtCodEtiqPreenvasado.Text = ""
                 Exit Sub
             End If

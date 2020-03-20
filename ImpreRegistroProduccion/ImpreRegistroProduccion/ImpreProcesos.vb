@@ -76,23 +76,29 @@ Public Class ImpreProcesos
                         _GenerarReporteResultadosCalidad(WPartida, WTipoSalida, WFechaVto, WImpreFechaVto, WFechaElabora, WImpreFechaElaboracion)
                     Case 5
 
-                        Dim WLim = Environment.GetCommandLineArgs.Length - 1
+                        Dim WLim = Environment.GetCommandLineArgs.Length
 
                         Dim WDestinatarios As String = Environment.GetCommandLineArgs(2)
                         Dim WAsunto As String = ""
                         Dim WCuerpo = "", WAdjuntos = ""
 
+                        'For Each o As Object In Environment.GetCommandLineArgs
+                        'MsgBox(WLim)
+                        ' Next
+
                         If WLim > 3 Then
-                            WCuerpo = Environment.GetCommandLineArgs(3)
+                            WAsunto = Environment.GetCommandLineArgs(3)
                         End If
 
                         If WLim > 4 Then
-                            WAdjuntos = Environment.GetCommandLineArgs(4)
+                            WCuerpo = Environment.GetCommandLineArgs(4)
                         End If
 
-                        If WLim > 2 Then
-                            WAsunto = Environment.GetCommandLineArgs(3)
+                        If WLim > 5 Then
+                            WAdjuntos = Environment.GetCommandLineArgs(5)
                         End If
+
+                        'MsgBox(WAdjuntos)
 
                         _EnviarMail(WDestinatarios, WAsunto, WCuerpo, WAdjuntos)
 
@@ -148,11 +154,15 @@ Public Class ImpreProcesos
             ' Modificar por los E-Mails que correspondan.
             oMsg.To = wDestinatarios
 
-            For Each archivosAdjunto As String In wAdjuntos.Split(";")
+            If wAdjuntos.Split(";").Count > 0 Then
 
-                oMsg.Attachments.Add(archivosAdjunto)
+                For Each archivosAdjunto As String In wAdjuntos.Split(";")
 
-            Next
+                    If archivosAdjunto.Trim <> "" Then oMsg.Attachments.Add(archivosAdjunto)
+
+                Next
+
+            End If
 
             'oMsg.Display()
             oMsg.Send()
