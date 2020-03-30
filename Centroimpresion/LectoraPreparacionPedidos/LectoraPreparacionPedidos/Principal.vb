@@ -18,6 +18,7 @@ Public Class Principal
 
     Private WCodPedido As String = ""
     Private WConteoEtiquetas As New List(Of String)
+    Private WCliente As String = ""
 
     Enum Tipo
         Exito
@@ -219,8 +220,8 @@ Public Class Principal
                 Next
 
                 If Not WPasa Then
-                    Throw New Exception("El Producto no se encuentra dentro del Pedido o la Partida no se es la que se encuentra informada en el mismo")
-                    Exit Sub
+                    MostrarMsgError("El Producto no se encuentra dentro del Pedido o la Partida no se es la que se encuentra informada en el mismo", Tipo.Falla)
+                    'Exit Sub
                 End If
 
                 pnlCantidades.Visible = True
@@ -492,6 +493,8 @@ Public Class Principal
                 txtCantEtiq.Text = "1"
             End If
 
+            If Val(txtCantEtiq.Text) > 2 Then txtCantEtiq.Text = "2"
+
             Dim WPartida, WCantEtiq, WCantPorEtiq As String
 
             WPartida = Val(txtPartida.Text.Trim)
@@ -561,6 +564,8 @@ Public Class Principal
                 WTemplate = WTemplate.Replace("#PALABRA#", WPalabra)
                 WTemplate = WTemplate.Replace("#CODBARRAS#", WCodBarra)
                 WTemplate = WTemplate.Replace("#CANTETIQ#", "1")
+                WTemplate = WTemplate.Replace("#PEDIDO#", txtPedido.Text.PadLeft(6, "0"))
+                WTemplate = WTemplate.Replace("#CLIENTE#", Microsoft.VisualBasic.Right(WCliente.Trim.ToUpper, 20))
 
                 For Z = 1 To 9
                     WTemplate = WTemplate.Replace("#PICTO" & Z & "#", WPicto(Z))
@@ -570,7 +575,8 @@ Public Class Principal
 
                 SerialPort1.Close()
 
-                ExecuteNonQueries("INSERT INTO ProcesoCentroImpresion (Lote, CantEtiq, CantPorEtiq, Impresora, Impresion, Pedido, Estado, CodBarra) VALUES ('" & WPartida & "', '" & "1" & "', '" & WCantPorEtiq & "', '" & Trim(ComboBox1.Text.Replace("Pto de Trab.", "")) & "', '', '" & WCodPedido & "', '" & EstadoEtiq.SinDefinir & "', '" & WCodBarra & "')")
+                'ExecuteNonQueries("INSERT INTO ProcesoCentroImpresion (Lote, CantEtiq, CantPorEtiq, Impresora, Impresion, Pedido, Estado, CodBarra) VALUES ('" & WPartida & "', '" & "1" & "', '" & WCantPorEtiq & "', '" & Trim(ComboBox1.Text.Replace("Pto de Trab.", "")) & "', '', '" & WCodPedido & "', '" & EstadoEtiq.SinDefinir & "', '" & WCodBarra & "')")
+                ExecuteNonQueries("INSERT INTO ProcesoCentroImpresion (Lote, CantEtiq, CantPorEtiq, Impresora, Impresion, Pedido, Estado, CodBarra) VALUES ('" & WPartida & "', '" & "1" & "', '" & WCantPorEtiq & "', '" & Trim(ComboBox1.Text.Replace("Pto de Trab.", "")) & "', '', '" & WCodPedido & "', '" & EstadoEtiq.Habilitada & "', '" & WCodBarra & "')")
 
             Next
 
@@ -584,7 +590,7 @@ Public Class Principal
 
             txtContenedor.Focus()
 
-            'btnConfirmarPedido_Click(Nothing, Nothing)
+            btnConfirmarPedido_Click(Nothing, Nothing)
 
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
@@ -692,11 +698,17 @@ Public Class Principal
                     '
                     ' Controlamos que el Pedido sea válido.
                     '
-                    Dim WPedido As DataRow = GetSingle("SELECT Pedido FROM Pedido WHERE Pedido = '" & txtCodPedido.Text & "'")
+                    WCliente = ""
+                    Dim WPedido As DataRow = GetSingle("SELECT Cliente FROM Pedido WHERE Pedido = '" & txtCodPedido.Text & "'")
 
                     If IsNothing(WPedido) Then
                         MsgBox("El Pedido indicado no es correcto.", MsgBoxStyle.Exclamation)
                         Exit Sub
+                    Else
+                        Dim WCli As DataRow = GetSingle("SELECT Razon FROM Cliente WHERE Cliente = '" & WPedido.Item("Cliente") & "'")
+
+                        If WCli IsNot Nothing Then WCliente = Trim(OrDefault(WCli.Item("Razon"), ""))
+
                     End If
 
                     '
@@ -863,6 +875,7 @@ Public Class Principal
         pnlValidarContenedor.Visible = False
         pnlPedido.Visible = True
         txtCantEtiq.Text = "1"
+        txtCantPorEtiq.Text = "1"
         WCodPedido = ""
         WConteoEtiquetas.Clear()
         txtCodPedido.Text = ""

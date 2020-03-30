@@ -107,6 +107,38 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                 txtEtapa_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
             End If
 
+            '
+            ' En caso de que se encuentre actualizada la Hoja, sea monocomponente y tenga un único componente, traemos los datos del mismo.
+            '
+
+            ' ¿Mono componente?
+            If ProductoTerminado.EsMono(txtCodigo.Text) Then
+
+                Dim WComponentes As DataRow = GetSingle("SELECT Tipo, Articulo, Terminado, Lote1, Lote2, Lote3 FROM Hoja WHERE Hoja = '" & txtPartida.Text & "' AND Renglon = 1")
+                Dim WLote As String = ""
+                ' ¿Tiene mas de un componente?
+                For i = 1 To 3
+                    Dim x As String = Trim(OrDefault(WComponentes.Item("Lote" & i), ""))
+
+                    If Val(x) <> 0 Then
+                        If WLote = "" Then
+                            WLote = x
+                        Else
+                            ' Significa que tiene mas de un lote.
+                            Exit Sub
+                        End If
+                    End If
+
+                Next
+
+                With WComponentes
+                    txtComponente.Text = IIf(UCase(OrDefault(.Item("Tipo"), "M") = "T"), .Item("Terminado"), .Item("Articulo"))
+                End With
+
+                txtLotePartida.Text = WLote
+
+            End If
+
         ElseIf e.KeyData = Keys.Escape Then
             txtPartida.Text = ""
         End If
@@ -1844,7 +1876,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                     End If
 
                     If WComp IsNot Nothing Then
-                        txtCantidadEtiquetas.Focus()
+                        txtOOS.Focus()
                         Exit Sub
                     End If
                 Next
@@ -1856,7 +1888,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
             ElseIf longitud <> 0 Then
                 Exit Sub
             Else
-                txtCantidadEtiquetas.Focus()
+                txtOOS.Focus()
             End If
 
         ElseIf e.KeyData = Keys.Escape Then
@@ -1939,7 +1971,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                 Else
                     txtCantidadEtiquetas.Focus()
                 End If
-                
+
             Case Keys.Escape
 
                 txtEnvases.Text = ""
@@ -1949,7 +1981,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
     Private Sub txtCantidadEtiquetas_KeyDown(sender As Object, e As KeyEventArgs) Handles txtCantidadEtiquetas.KeyDown
         Select Case e.KeyData
             Case Keys.Enter
-                txtOOS.Focus()
+                txtArchivo.Focus()
             Case Keys.Escape
                 txtCantidadEtiquetas.Text = ""
 
@@ -1968,7 +2000,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
     Private Sub txtDesvio_KeyDown(sender As Object, e As KeyEventArgs) Handles txtDesvio.KeyDown
         Select Case e.KeyData
             Case Keys.Enter
-                txtArchivo.Focus()
+                txtCantidadEtiquetas.Focus()
             Case Keys.Escape
                 txtDesvio.Text = ""
         End Select
@@ -1983,6 +2015,88 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
         End Select
     End Sub
 
+    Private Sub btnTraerDatosEnsayosComponente_Click(sender As Object, e As EventArgs) Handles btnTraerDatosEnsayosComponente.Click
+
+        If ProductoTerminado.EsMono(txtCodigo.Text) And Val(txtLotePartida.Text) > 0 And Operador.EsFarma Then
+
+            Dim WEsMP As Boolean = txtComponente.Text.Trim.Length = 10
+            Dim WEnsayos As DataTable = Nothing
+
+            If WEsMP Then
+                WEnsayos = GetAll("SELECT * FROM PrueArtNuevo WHERE Producto = '" & txtComponente.Text & "' And Prueba = '" & txtLotePartida.Text & "' ORDER BY Clave")
+            Else
+                WEnsayos = GetAll("SELECT * FROM PrueTerFarma WHERE Producto = '" & txtComponente.Text & "' And Prueba = '" & txtLotePartida.Text & "' ORDER BY Clave")
+            End If
+
+            If WEnsayos Is Nothing OrElse WEnsayos.Rows.Count = 0 Then
+                MsgBox("No se encontraron datos de ensayos para el " & txtComponente.Text & " (" & txtLotePartida.Text & ") con el nuevo formato.", MsgBoxStyle.Exclamation)
+                Exit Sub
+            End If
+
+            ' VERIFICAMOS QUE TENGAN LA MISMA ESPECIFICACION.
+            If dgvEnsayos.Rows.Count < WEnsayos.Rows.Count Then
+                MsgBox("Se encontró que el " & txtComponente.Text & " (" & txtLotePartida.Text & ") no cuenta con los mismos ensayos que el Producto " & txtCodigo.Text & " (" & txtPartida.Text & ")", MsgBoxStyle.Exclamation)
+                Exit Sub
+            End If
+
+            For rocio = 1 To WEnsayos.Rows.Count
+
+                Dim WEnsayo As DataRow() = WEnsayos.Select("Renglon = '" & rocio & "'")
+
+                If WEnsayo.Count = 0 Then Continue For
+
+                Dim row As DataGridViewRow = dgvEnsayos.Rows(rocio - 1)
+                Dim WEns As DataRow = WEnsayo(0)
+
+                Dim WTipoDatoI, WTipoDatoII As String
+                Dim WValor, WResultado, WDesde, WHasta, WMenorIgual, WInforma, WFormula, WUnidad As String
+                Dim WVariables(10), WVariablesValores(10) As String
+
+                WTipoDatoI = row.Cells("TipoEspecif").Value
+                WTipoDatoII = WEns.Item("TipoEspecif")
+
+                WValor = Trim(WEns.Item("ValorReal"))
+                WDesde = Trim(WEns.Item("DesdeEspecif"))
+                WHasta = Trim(WEns.Item("HastaEspecif"))
+                WMenorIgual = Trim(WEns.Item("MenorIgualEspecif"))
+                WInforma = Trim(WEns.Item("InformaEspecif"))
+                WFormula = Trim(WEns.Item("FormulaEspecif"))
+                WUnidad = Trim(WEns.Item("UnidadEspecif"))
+
+                WResultado = _GenerarImpreResultado(WTipoDatoII, WDesde, WHasta, WUnidad, WValor)
+
+                For r As Integer = 1 To 10
+                    WVariables(r) = Trim(WEns.Item("Variable" & r))
+                    WVariablesValores(r) = Trim(WEns.Item("VariableValor" & r))
+                Next
+
+                '
+                ' Se agrega los datos unicamente si son iguales o si el tipo de dato entrante 
+                ' es 'Formula' y el saliente es 'Numerico'.
+                '
+                If (Val(WTipoDatoI) = Val(WTipoDatoII)) Or (Val(WTipoDatoI) = 1 And Val(WTipoDatoII) = 2) Then
+
+                    row.Cells("TipoEspecif").Value = WTipoDatoII
+                    row.Cells("Valor").Value = WValor
+                    row.Cells("Resultado").Value = WResultado
+                    row.Cells("DesdeEspecif").Value = WDesde
+                    row.Cells("HastaEspecif").Value = WHasta
+                    row.Cells("MenorIgualEspecif").Value = WMenorIgual
+                    row.Cells("InformaEspecif").Value = WInforma
+                    row.Cells("FormulaEspecif").Value = WFormula
+
+                    For r As integer = 1 To 10
+                        row.Cells("Variable" & r).Value = WVariables(r)
+                        row.Cells("VariableValor" & r).Value = WVariablesValores(r)
+                    Next
+
+                End If
+
+            Next
+
+        End If
+
+    End Sub
 
 End Class
 Friend Class FormatoNoNumericoException
