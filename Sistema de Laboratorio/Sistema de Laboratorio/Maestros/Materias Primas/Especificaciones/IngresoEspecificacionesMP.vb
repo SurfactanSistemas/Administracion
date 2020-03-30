@@ -2,7 +2,7 @@
 Imports ConsultasVarias
 Imports ConsultasVarias.Interfaces
 
-Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecificaciones, IListaConsultas, IAyudaPTs, IAyudaEnsayos, IIngresoClaveSeguridad
+Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecificaciones, IListaConsultas, IAyudaMPs, IAyudaEnsayos, IIngresoClaveSeguridad
 
     Enum TipoProcesosIngEspecif
         Revalida
@@ -963,7 +963,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
     End Function
 
     Private Function _PrepararActualizacionVersionFormatoViejo() As String
-        
+
         Dim columnas As String = ""
 
         For i = 1 To 20
@@ -2678,7 +2678,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
     End Sub
 
     Private Sub btnConsultas_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnConsultas.Click
-        With New ListaConsultas("Productos Terminados", "Ensayos")
+        With New ListaConsultas("Materias Primas", "Ensayos")
             .Show(Me)
         End With
     End Sub
@@ -2687,7 +2687,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
 
         Select Case Opcion
             Case 0
-                With New AyudaPTs
+                With New AyudaMPs
                     .Show(Me)
                 End With
             Case 1
@@ -2698,7 +2698,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
 
     End Sub
 
-    Public Sub _ProcesarAyudaPTs(ByVal Codigo As String, ByVal WDescripcion As String) Implements IAyudaPTs._ProcesarAyudaPTs
+    Public Sub _ProcesarAyudaMPs(ByVal Codigo As String, ByVal WDescripcion As String) Implements IAyudaMPs._ProcesarAyudaMPs
         txtCodigo.Text = Codigo
         txtCodigo_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
     End Sub
@@ -2790,7 +2790,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
             dgvEspecif.CurrentCell = dgvEspecif.Rows(_rRenglon).Cells(2)
             dgvEspecif.CurrentCell = dgvEspecif.Rows(_rRenglon).Cells(1)
         End If
-        
+
 
     End Sub
 
