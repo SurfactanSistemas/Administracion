@@ -141,7 +141,7 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
                     With row
                         dgvVariables.Rows.Add(.Item("fila"), .Item("Variable"), .Item("Valor"), .Item("IDRenglon"))
 
-                        txtValorEstandar.Text = .Item("ResultadoVerificado")
+                        txtValorEstandar.Text = (.Item("ResultadoVerificado")).ToString().Replace(",", ".")
 
                     End With
                 Next

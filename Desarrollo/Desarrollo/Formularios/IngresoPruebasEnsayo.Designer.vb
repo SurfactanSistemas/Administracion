@@ -214,6 +214,7 @@ Partial Class IngresoPruebasEnsayo
         Me.btnEliminar = New System.Windows.Forms.Button()
         Me.btnAceptar = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.btnImprimirEnsayosLab = New System.Windows.Forms.Button()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutMenu.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -986,6 +987,7 @@ Partial Class IngresoPruebasEnsayo
         'TabResultadosLaboratorio
         '
         Me.TabResultadosLaboratorio.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.TabResultadosLaboratorio.Controls.Add(Me.btnImprimirEnsayosLab)
         Me.TabResultadosLaboratorio.Controls.Add(Me.txtNotasLaboratorio)
         Me.TabResultadosLaboratorio.Controls.Add(Me.dgvLaboratorio)
         Me.TabResultadosLaboratorio.Controls.Add(Me.txtVisto)
@@ -1959,6 +1961,18 @@ Partial Class IngresoPruebasEnsayo
         Me.btnAceptar.Text = "Aceptar"
         Me.btnAceptar.UseVisualStyleBackColor = True
         '
+        'btnImprimirEnsayosLab
+        '
+        Me.btnImprimirEnsayosLab.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnImprimirEnsayosLab.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnImprimirEnsayosLab.ForeColor = System.Drawing.SystemColors.Control
+        Me.btnImprimirEnsayosLab.Location = New System.Drawing.Point(818, 367)
+        Me.btnImprimirEnsayosLab.Name = "btnImprimirEnsayosLab"
+        Me.btnImprimirEnsayosLab.Size = New System.Drawing.Size(136, 25)
+        Me.btnImprimirEnsayosLab.TabIndex = 16
+        Me.btnImprimirEnsayosLab.Text = "Imprime"
+        Me.btnImprimirEnsayosLab.UseVisualStyleBackColor = True
+        '
         'IngresoPruebasEnsayo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2168,4 +2182,5 @@ Partial Class IngresoPruebasEnsayo
     Friend WithEvents LaboratorioRequerido As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents LaboratorioResultado As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Button5 As System.Windows.Forms.Button
+    Friend WithEvents btnImprimirEnsayosLab As System.Windows.Forms.Button
 End Class
