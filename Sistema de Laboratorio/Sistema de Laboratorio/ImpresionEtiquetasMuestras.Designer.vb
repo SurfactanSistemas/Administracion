@@ -263,8 +263,11 @@ Partial Class ImpresionEtiquetasMuestras
         Me.Controls.Add(Me.txtDescripcionMP)
         Me.Controls.Add(Me.txtCodigoMP)
         Me.Controls.Add(Me.txtInforme)
+        Me.Location = New System.Drawing.Point(20, 20)
+        Me.MaximumSize = New System.Drawing.Size(555, 385)
+        Me.MinimumSize = New System.Drawing.Size(555, 385)
         Me.Name = "ImpresionEtiquetasMuestras"
-        Me.Text = "ImpresionEtiquetasMuestras"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)

@@ -74,6 +74,17 @@ Partial Class IngresoActualizacionHojaProduccionFarma
         Me.btnNuevaFila = New System.Windows.Forms.Button()
         Me.btnEditarFila = New System.Windows.Forms.Button()
         Me.DGV_IngredientosHojaProduccion = New ConsultasVarias.DBDataGridView()
+        Me.Linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MPoPT = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Cantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Lote1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CantLote1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Lote2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CantLote2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Lote3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CantLote3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.rtxtAgenda = New System.Windows.Forms.RichTextBox()
         Me.pnlAgenda = New System.Windows.Forms.Panel()
         Me.pnlAyuda = New System.Windows.Forms.Panel()
@@ -86,17 +97,6 @@ Partial Class IngresoActualizacionHojaProduccionFarma
         Me.txtAyuda = New System.Windows.Forms.TextBox()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.Label20 = New System.Windows.Forms.Label()
-        Me.Linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.MPoPT = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Cantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Lote1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CantLote1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Lote2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CantLote2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Lote3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CantLote3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         Me.pnlLotes.SuspendLayout()
         CType(Me.DGV_IngredientosHojaProduccion, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -129,7 +129,7 @@ Partial Class IngresoActualizacionHojaProduccionFarma
         'Label1
         '
         Me.Label1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.Control
@@ -142,7 +142,7 @@ Partial Class IngresoActualizacionHojaProduccionFarma
         'Label2
         '
         Me.Label2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.Control
@@ -604,9 +604,83 @@ Partial Class IngresoActualizacionHojaProduccionFarma
         Me.DGV_IngredientosHojaProduccion.Size = New System.Drawing.Size(734, 201)
         Me.DGV_IngredientosHojaProduccion.TabIndex = 13
         '
+        'Linea
+        '
+        Me.Linea.HeaderText = "Linea"
+        Me.Linea.Name = "Linea"
+        Me.Linea.Visible = False
+        '
+        'Tipo
+        '
+        Me.Tipo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Tipo.DataPropertyName = "Tipo"
+        Me.Tipo.HeaderText = "Tipo"
+        Me.Tipo.Name = "Tipo"
+        Me.Tipo.Width = 53
+        '
+        'MPoPT
+        '
+        Me.MPoPT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.MPoPT.DataPropertyName = "MPoPT"
+        Me.MPoPT.HeaderText = "Mat. Prima o Prod. Terminado"
+        Me.MPoPT.MinimumWidth = 180
+        Me.MPoPT.Name = "MPoPT"
+        Me.MPoPT.Width = 180
+        '
+        'Descripcion
+        '
+        Me.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Descripcion.DataPropertyName = "Descripcion"
+        Me.Descripcion.HeaderText = "Descripcion"
+        Me.Descripcion.Name = "Descripcion"
+        '
+        'Cantidad
+        '
+        Me.Cantidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Cantidad.DataPropertyName = "Cantidad"
+        Me.Cantidad.HeaderText = "Cantidad"
+        Me.Cantidad.Name = "Cantidad"
+        Me.Cantidad.Width = 74
+        '
+        'Lote1
+        '
+        Me.Lote1.HeaderText = "Lote1"
+        Me.Lote1.Name = "Lote1"
+        Me.Lote1.Visible = False
+        '
+        'CantLote1
+        '
+        Me.CantLote1.HeaderText = "CantLote1"
+        Me.CantLote1.Name = "CantLote1"
+        Me.CantLote1.Visible = False
+        '
+        'Lote2
+        '
+        Me.Lote2.HeaderText = "Lote2"
+        Me.Lote2.Name = "Lote2"
+        Me.Lote2.Visible = False
+        '
+        'CantLote2
+        '
+        Me.CantLote2.HeaderText = "CantLote2"
+        Me.CantLote2.Name = "CantLote2"
+        Me.CantLote2.Visible = False
+        '
+        'Lote3
+        '
+        Me.Lote3.HeaderText = "Lote3"
+        Me.Lote3.Name = "Lote3"
+        Me.Lote3.Visible = False
+        '
+        'CantLote3
+        '
+        Me.CantLote3.HeaderText = "CantLote3"
+        Me.CantLote3.Name = "CantLote3"
+        Me.CantLote3.Visible = False
+        '
         'rtxtAgenda
         '
-        Me.rtxtAgenda.Location = New System.Drawing.Point(3, 6)
+        Me.rtxtAgenda.Location = New System.Drawing.Point(0, 0)
         Me.rtxtAgenda.Name = "rtxtAgenda"
         Me.rtxtAgenda.Size = New System.Drawing.Size(565, 341)
         Me.rtxtAgenda.TabIndex = 46
@@ -615,7 +689,7 @@ Partial Class IngresoActualizacionHojaProduccionFarma
         'pnlAgenda
         '
         Me.pnlAgenda.Controls.Add(Me.rtxtAgenda)
-        Me.pnlAgenda.Location = New System.Drawing.Point(0, 94)
+        Me.pnlAgenda.Location = New System.Drawing.Point(140, 391)
         Me.pnlAgenda.Name = "pnlAgenda"
         Me.pnlAgenda.Size = New System.Drawing.Size(571, 350)
         Me.pnlAgenda.TabIndex = 47
@@ -721,7 +795,7 @@ Partial Class IngresoActualizacionHojaProduccionFarma
         'Label20
         '
         Me.Label20.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label20.AutoSize = True
         Me.Label20.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label20.ForeColor = System.Drawing.SystemColors.Control
@@ -730,80 +804,6 @@ Partial Class IngresoActualizacionHojaProduccionFarma
         Me.Label20.Size = New System.Drawing.Size(90, 20)
         Me.Label20.TabIndex = 3
         Me.Label20.Text = "Buscador "
-        '
-        'Linea
-        '
-        Me.Linea.HeaderText = "Linea"
-        Me.Linea.Name = "Linea"
-        Me.Linea.Visible = False
-        '
-        'Tipo
-        '
-        Me.Tipo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Tipo.DataPropertyName = "Tipo"
-        Me.Tipo.HeaderText = "Tipo"
-        Me.Tipo.Name = "Tipo"
-        Me.Tipo.Width = 53
-        '
-        'MPoPT
-        '
-        Me.MPoPT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.MPoPT.DataPropertyName = "MPoPT"
-        Me.MPoPT.HeaderText = "Mat. Prima o Prod. Terminado"
-        Me.MPoPT.MinimumWidth = 180
-        Me.MPoPT.Name = "MPoPT"
-        Me.MPoPT.Width = 180
-        '
-        'Descripcion
-        '
-        Me.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.Descripcion.DataPropertyName = "Descripcion"
-        Me.Descripcion.HeaderText = "Descripcion"
-        Me.Descripcion.Name = "Descripcion"
-        '
-        'Cantidad
-        '
-        Me.Cantidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Cantidad.DataPropertyName = "Cantidad"
-        Me.Cantidad.HeaderText = "Cantidad"
-        Me.Cantidad.Name = "Cantidad"
-        Me.Cantidad.Width = 74
-        '
-        'Lote1
-        '
-        Me.Lote1.HeaderText = "Lote1"
-        Me.Lote1.Name = "Lote1"
-        Me.Lote1.Visible = False
-        '
-        'CantLote1
-        '
-        Me.CantLote1.HeaderText = "CantLote1"
-        Me.CantLote1.Name = "CantLote1"
-        Me.CantLote1.Visible = False
-        '
-        'Lote2
-        '
-        Me.Lote2.HeaderText = "Lote2"
-        Me.Lote2.Name = "Lote2"
-        Me.Lote2.Visible = False
-        '
-        'CantLote2
-        '
-        Me.CantLote2.HeaderText = "CantLote2"
-        Me.CantLote2.Name = "CantLote2"
-        Me.CantLote2.Visible = False
-        '
-        'Lote3
-        '
-        Me.Lote3.HeaderText = "Lote3"
-        Me.Lote3.Name = "Lote3"
-        Me.Lote3.Visible = False
-        '
-        'CantLote3
-        '
-        Me.CantLote3.HeaderText = "CantLote3"
-        Me.CantLote3.Name = "CantLote3"
-        Me.CantLote3.Visible = False
         '
         'IngresoActualizacionHojaProduccionFarma
         '

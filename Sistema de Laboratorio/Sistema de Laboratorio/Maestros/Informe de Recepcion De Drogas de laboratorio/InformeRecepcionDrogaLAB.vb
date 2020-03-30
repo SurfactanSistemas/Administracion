@@ -1,4 +1,8 @@
-﻿Public Class InformeRecepcionDrogaLAB
+﻿Public Class InformeRecepcionDrogaLAB : Implements IBuscadorProveedor, IBuscarOrdenCompraXProvee
+
+
+
+
 
     Private Sub InformeRecepcionDrogaLAB_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
         txtOrdenCompra.Focus()
@@ -8,10 +12,9 @@
     Private Sub InformeRecepcionDrogaLAB_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Me.Text = ""
         PnlEstadoEnvases.Visible = False
-        pnlCertifAnaliyEstadoEtiquet.Visible = False
         pnlAviso.Visible = False
-        pnlAyudaProv.Visible = False
-        pnlBuscarProveedor.Visible = False
+
+
 
         txtNroInforme.Text = 0
         mastxtFecha.Text = Date.Today
@@ -206,7 +209,8 @@
                 End If
                 If TipoOrden <> 4 Or TipoOrden <> 3 Then Exit Sub 'sino es orden de drogas de lab termina el proceso
 
-                pnlCertifAnaliyEstadoEtiquet.Visible = True
+                
+
 
         End Select
     End Sub
@@ -222,23 +226,23 @@
         txtEnvase.Text = DGV_InformeRecepcion.CurrentRow.Cells("Envase").Value
 
         'panel pequeño
-        If DGV_InformeRecepcion.CurrentRow.Cells("Certificado1").Value = True Then
-            rabtnSI_CertifAnalisis2.Checked = True
-        Else
-            rabtnNO_CertifAnalisis2.Checked = True
-        End If
-
-        txtCertifAnalisis2.Text = DGV_InformeRecepcion.CurrentRow.Cells("Certificado2").Value
-
-        If DGV_InformeRecepcion.CurrentRow.Cells("Estado1").Value = True Then
-            rabtnSI_EstadoEnvases5.checked = True
-        Else
-            rabtnNO_EstadoEnvases5.Checked = True
-        End If
-
-        txtEstadoEnvases5.Text = DGV_InformeRecepcion.CurrentRow.Cells("Estado2").Value
-
-        mastxtVencimiento_pnlIngreCertif.Text = DGV_InformeRecepcion.CurrentRow.Cells("Fechavencimiento").Value
+'        If DGV_InformeRecepcion.CurrentRow.Cells("Certificado1").Value = True Then
+'            rabtnSI_CertifAnalisis2.Checked = True
+'        Else
+'            rabtnNO_CertifAnalisis2.Checked = True
+'        End If
+'
+'        txtCertifAnalisis2.Text = DGV_InformeRecepcion.CurrentRow.Cells("Certificado2").Value
+'
+'        If DGV_InformeRecepcion.CurrentRow.Cells("Estado1").Value = True Then
+'            rabtnSI_EstadoEnvases5.checked = True
+'        Else
+'            rabtnNO_EstadoEnvases5.Checked = True
+'        End If
+'
+'        txtEstadoEnvases5.Text = DGV_InformeRecepcion.CurrentRow.Cells("Estado2").Value
+'
+'        mastxtVencimiento_pnlIngreCertif.Text = DGV_InformeRecepcion.CurrentRow.Cells("Fechavencimiento").Value
 
 
         'Panel grande
@@ -345,7 +349,7 @@
 
 
 
-    Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtOrdenCompra.KeyPress, txtRemito.KeyPress, txtProveedor.KeyPress, txtNroInforme.KeyPress, txtEtiqueta.KeyPress, txtEnvase.KeyPress, mastxtVencimiento_pnlIngreCertif.KeyPress, mastxtFecha.KeyPress
+    Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtOrdenCompra.KeyPress, txtRemito.KeyPress, txtProveedor.KeyPress, txtNroInforme.KeyPress, txtEtiqueta.KeyPress, txtEnvase.KeyPress, mastxtFecha.KeyPress
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
             e.Handled = True
         End If
@@ -608,7 +612,7 @@
                                     If Val(txtDescOC.Text) <> Val(txtSaldoOC.Text) Then
                                         Dim Dife As Double = Str$(Val(txtSaldoOC.Text) - Val(txtDescOC.Text))
                                         Dim Termina As String = "Ingreso de Informe de recepcion"
-                                        Dim mensaje As String = "La orden de compra del " + mastxtMateriaPrima.Text + " quedara con un saldo pendiente de entrega de " + Dife + " Kgs" + vbCrLf + "Confirma este procedimiento"
+                                        Dim mensaje As String = "La orden de compra del " & mastxtMateriaPrima.Text & " quedara con un saldo pendiente de entrega de " & Dife & " Kgs" & vbCrLf & "Confirma este procedimiento"
                                         Dim Respuesta = MsgBox(mensaje, 32 + 4, Termina)
                                         If Respuesta <> 6 Then
                                             Exit Sub
@@ -636,9 +640,7 @@
         PnlEstadoEnvases.Visible = False
     End Sub
 
-    Private Sub btnAceptar_IngreCert_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAceptar_IngreCert.Click
-        pnlCertifAnaliyEstadoEtiquet.Visible = False
-    End Sub
+
 
     Private Sub txtProveedor_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtProveedor.KeyDown
 
@@ -663,10 +665,12 @@
                     SQLCnslt = SQLCnslt & "FROM Orden o INNER JOIN Articulo a ON o.Articulo = a.Codigo  WHERE (o.Tipo = 3 OR o.Tipo = 4) AND o.Saldo > 0 AND o.Recibida < o.Cantidad  AND o.Proveedor = '" & txtProveedor.Text & "' ORDER BY o.Articulo "
                     Dim tablaOrdenesCompra As DataTable = GetAll(SQLCnslt)
 
-                    DGV_AyudaProv.DataSource = tablaOrdenesCompra
+                    '  DGV_AyudaProv.DataSource = tablaOrdenesCompra
 
                     If tablaOrdenesCompra.Rows.Count > 0 Then
-                        pnlAyudaProv.Visible = True
+                        With New BuscadorOrdenCompraXProvee(txtProveedor.Text)
+                            .Show(Me)
+                        End With
                     Else
                         SQLCnslt = "Select Proveedor from proveedor where proveedor = '" & txtProveedor.Text & "'"
                         Dim row As DataRow = GetSingle(SQLCnslt)
@@ -683,16 +687,9 @@
         End Select
         End Sub
 
-    Private Sub btnVolver_pnlAyudaProv_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVolver_pnlAyudaProv.Click
-        pnlAyudaProv.Visible = False
-    End Sub
 
-    Private Sub DGV_AyudaProv_CellMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles DGV_AyudaProv.CellMouseDoubleClick
-        txtOrdenCompra.Text = DGV_AyudaProv.CurrentRow.Cells("NroOrden").Value
-        pnlAyudaProv.Visible = False
-        txtOrdenCompra_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
 
-    End Sub
+  
 
     Private Sub btnLimpiarForm_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiarForm.Click
         _LimpiarForm()
@@ -709,10 +706,12 @@
             SQLCnslt = SQLCnslt & "FROM Orden o INNER JOIN Articulo a ON o.Articulo = a.Codigo  WHERE (o.Tipo = 3 OR o.Tipo = 4) AND o.Saldo > 0 AND o.Recibida < o.Cantidad  AND o.Proveedor = '" & txtProveedor.Text & "' ORDER BY o.Articulo "
             Dim tablaOrdenesCompra As DataTable = GetAll(SQLCnslt)
 
-            DGV_AyudaProv.DataSource = tablaOrdenesCompra
+            ' DGV_AyudaProv.DataSource = tablaOrdenesCompra
 
             If tablaOrdenesCompra.Rows.Count > 0 Then
-                pnlAyudaProv.Visible = True
+                With New BuscadorOrdenCompraXProvee(txtProveedor.Text)
+                    .Show(Me)
+                End With
             End If
         End If
 
@@ -1088,33 +1087,17 @@
 
     End Function
 
-    Private Sub btnVolver_PnlProveedores_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVolver_PnlProveedores.Click
-        pnlBuscarProveedor.Visible = False
-    End Sub
 
     Private Sub btnBuscarProv_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBuscarProv.Click
-        txtBuscardorProv.Text = ""
-        Dim SQLCnslt As String
-        SQLCnslt = "SELECT CodigoProv = Proveedor, DescripcionProv = Nombre FROM Proveedor WHERE TipoProv = 4 or TipoProv = 2 or TipoProv = 31 ORDER BY Nombre "
-        Dim tablaProv As DataTable = GetAll(SQLCnslt)
-        DGV_Proveedores.DataSource = tablaProv
-        pnlBuscarProveedor.Visible = True
-        txtBuscardorProv.Focus()
+        With New BuscadorProveedor
+            .Show(Me)
+        End With
+        
     End Sub
 
-    Private Sub DGV_Proveedores_CellDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DGV_Proveedores.CellDoubleClick
-        txtProveedor.Text = DGV_Proveedores.CurrentRow.Cells("CodigoProv").Value
-        pnlBuscarProveedor.Visible = False
-        txtProveedor_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
-        txtDescripcionProv.Text = DGV_Proveedores.CurrentRow.Cells("DescripcionProv").Value
-    End Sub
+   
 
-
-    Private Sub txtBuscardorProv_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtBuscardorProv.KeyUp
-        Dim tabla As DataTable = DGV_Proveedores.DataSource
-        tabla.DefaultView.RowFilter = "CodigoProv LIKE '%" & txtBuscardorProv.Text & "%' OR DescripcionProv LIKE '%" & txtBuscardorProv.Text & "%'"
-        DGV_Proveedores.DataSource = tabla
-    End Sub
+   
 
     Private Sub mastxtFecha_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles mastxtFecha.KeyDown
         Select Case e.KeyData
@@ -1135,4 +1118,17 @@
                 txtRemito.Text = ""
         End Select
     End Sub
+
+    Public Sub ProcesarDatosProveedor(CodProvee As String, DescripcionProvee As String) Implements IBuscadorProveedor.ProcesarDatosProveedor
+
+        txtProveedor.Text = CodProvee
+        txtProveedor_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+        txtDescripcionProv.Text = DescripcionProvee
+    End Sub
+
+    Public Sub ProcesarDatosOrdenCompraProvee(NroOrdenCompra As Integer) Implements IBuscarOrdenCompraXProvee.ProcesarDatosOrdenCompraProvee
+        txtOrdenCompra.Text = NroOrdenCompra
+        txtOrdenCompra_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+    End Sub
+
 End Class

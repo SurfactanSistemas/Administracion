@@ -105,7 +105,6 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.dgvEnsayos = New ConsultasVarias.DBDataGridView()
-        Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Ensayo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Especificacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Farmacopea = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -146,6 +145,7 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.Decimales = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.OperadorIniciales = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.OperadorID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.gbDatosAdicionales.SuspendLayout()
@@ -282,7 +282,7 @@ Partial Class IngresoEnsayosLaboratorioMP
         'txtLoteProveedor
         '
         Me.txtLoteProveedor.Location = New System.Drawing.Point(868, 20)
-        Me.txtLoteProveedor.MaxLength = 6
+        Me.txtLoteProveedor.MaxLength = 30
         Me.txtLoteProveedor.Name = "txtLoteProveedor"
         Me.txtLoteProveedor.Size = New System.Drawing.Size(115, 20)
         Me.txtLoteProveedor.TabIndex = 2
@@ -1018,16 +1018,6 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.dgvEnsayos.Size = New System.Drawing.Size(992, 285)
         Me.dgvEnsayos.TabIndex = 4
         '
-        'Panel2
-        '
-        Me.Panel2.Controls.Add(Me.GroupBox2)
-        Me.Panel2.Controls.Add(Me.GroupBox3)
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(3, 349)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(992, 102)
-        Me.Panel2.TabIndex = 5
-        '
         'Ensayo
         '
         Me.Ensayo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
@@ -1335,6 +1325,16 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.OperadorID.Name = "OperadorID"
         Me.OperadorID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.OperadorID.Visible = False
+        '
+        'Panel2
+        '
+        Me.Panel2.Controls.Add(Me.GroupBox2)
+        Me.Panel2.Controls.Add(Me.GroupBox3)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel2.Location = New System.Drawing.Point(3, 349)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(992, 102)
+        Me.Panel2.TabIndex = 5
         '
         'IngresoEnsayosLaboratorioMP
         '

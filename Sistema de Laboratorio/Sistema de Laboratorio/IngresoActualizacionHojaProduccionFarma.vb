@@ -288,7 +288,7 @@ Public Class IngresoActualizacionHojaProduccionFarma
 
     Private Sub txtCantidad_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs, Optional ByRef Permitir As String = "N") Handles txtCantidad.KeyDown
 
-        Dim stock As Double
+        Dim stock As Double = 0
 
 
 
@@ -868,20 +868,28 @@ Public Class IngresoActualizacionHojaProduccionFarma
 
 
 
-                SQLCnslt = "SELECT Descripcion, Inicial, Entradas, Salidas FROM Articulo WHERE Codigo = '" & MPoPT & "'"
-                Dim RowArticulo As DataRow = GetSingle(SQLCnslt)
+'                SQLCnslt = "SELECT Descripcion, Inicial, Entradas, Salidas FROM Articulo WHERE Codigo = '" & MPoPT & "'"
+'                Dim RowArticulo As DataRow = GetSingle(SQLCnslt)
+'
+'                If RowArticulo IsNot Nothing Then
+'                    WStock = Val(RowArticulo.Item("Inicial") + RowArticulo.Item("Entradas") - RowArticulo.Item("Salidas"))
+'                    StockString = formatonumerico(WStock, 3)
+'                End If
 
-                If RowArticulo IsNot Nothing Then
-                    WStock = Val(RowArticulo.Item("Inicial") + RowArticulo.Item("Entradas") - RowArticulo.Item("Salidas"))
+                WStock = _CalcularStockTotalArticulo(MPoPT)
+                StockString = formatonumerico(WStock, 3)
+
+                'DESCUENTA EL STOCK DE LAS GUIAS DE SALIDAS
+                SQLCnslt = "SELECT SumStock= SUM(Cantidad) FROM Guia  WHERE Marca <> 'X' AND Movi = 'S' AND Tipo = 'M' AND Cantidad > 0 AND Articulo = '" & MPoPT & "'"
+                Dim rowG As DataRow = GetSingle(SQLCnslt)
+                If rowG IsNot Nothing Then
+                    WStock = WStock - OrDefault(rowG.Item("Sumstock"), 0)
                     StockString = formatonumerico(WStock, 3)
                 End If
 
-
-
-
                 'DESCUENTA EL STOCK DE LAS HOJAS, SI ES LA HOJA ACTUAL IGNORA EL STOCK
 
-                SQLCnslt = "SELECT Cantidad, Hoja FROM Hoja WHERE Articulo = '" & MPoPT & "' AND Real = 0 AND Marca <> 'X'"
+                SQLCnslt = "SELECT h.Cantidad, h.Hoja FROM Hoja h inner join Articulo A on h.Articulo = A.Codigo WHERE Articulo = '" & MPoPT & "' AND Real = 0 AND Marca <> 'X' AND h.FechaOrd >= A.OrdFechaCierre"
 
                 Dim tablahoja As DataTable = GetAll(SQLCnslt)
 
@@ -894,8 +902,8 @@ Public Class IngresoActualizacionHojaProduccionFarma
 
                         End If
                     Next
-                    WStock = WStock - StockReservadoEnHojas
-                    StockString = formatonumerico(WStock, 3)
+                    'WStock = WStock - StockReservadoEnHojas
+                    ' StockString = formatonumerico(WStock, 3)
                 End If
 
 
@@ -924,40 +932,52 @@ Public Class IngresoActualizacionHojaProduccionFarma
                 If Vencido > 0 Then
                     Dim mensaje As String = "Existe la materia prima " & MPoPT & " la cantidad de : " & Vencido & " Kgs. vencidos." & vbCrLf & "Comuniquese con el laboratorio para su revalida"
                     MsgBox(mensaje, 0, "Ingreso de Hoja de Produccion")
-                    WStock = WStock - Vencido
-                    StockString = formatonumerico(WStock, 3)
+'                    WStock = WStock - Vencido
+'                    StockString = formatonumerico(WStock, 3)
                 End If
 
                 'DESCUENTA EL STOCK MATERIAL BLOQUEADO
-                If Microsoft.VisualBasic.Left(mastxtMPoPT.Text, 2) = "PT" Then
-                    CantidadBloqueada = _CalcularBloqueo(Tipo, MPoPT)
-                    If CantidadBloqueada < 0 Then
-                        Dim mensaje As String
-                        mensaje = "Existe la Materia Prima " & MPoPT & " la cantidad de : " & CantidadBloqueada & " Kgs. Bloqueados" & vbCrLf & "Comuniquese con el laboratorio para su liberacion"
-                        MsgBox(mensaje, 0, "Ingreso de Hoja de Produccion")
-                        WStock = WStock - CantidadBloqueada
-                        StockString = formatonumerico(WStock, 3)
-                    End If
-                End If
 
+                CantidadBloqueada = _CalcularBloqueo(Tipo, MPoPT)
+                If CantidadBloqueada < 0 Then
+                    Dim mensaje As String
+                    mensaje = "Existe la Materia Prima " & MPoPT & " la cantidad de : " & CantidadBloqueada & " Kgs. Bloqueados" & vbCrLf & "Comuniquese con el laboratorio para su liberacion"
+                    MsgBox(mensaje, 0, "Ingreso de Hoja de Produccion")
+'                    WStock = WStock - CantidadBloqueada
+'                    StockString = formatonumerico(WStock, 3)
+                End If
+                
 
 
 
 
             Case "T"
-                SQLCnslt = "SELECT Descripcion, Inicial, Entradas, Salidas FROM Terminado WHERE Codigo = '" & MPoPT & "'"
-                Dim RowTerminado As DataRow = GetSingle(SQLCnslt)
+'                SQLCnslt = "SELECT Descripcion, Inicial, Entradas, Salidas FROM Terminado WHERE Codigo = '" & MPoPT & "'"
+'                Dim RowTerminado As DataRow = GetSingle(SQLCnslt)
+'
+'                If RowTerminado IsNot Nothing Then
+'                    WStock = RowTerminado.Item("Inicial") + RowTerminado.Item("Entradas") - RowTerminado.Item("Salidas")
+'                    'StockString = formatonumerico(WStock, 3)
+'                End If
 
-                If RowTerminado IsNot Nothing Then
-                    WStock = RowTerminado.Item("Inicial") + RowTerminado.Item("Entradas") - RowTerminado.Item("Salidas")
-                    'StockString = formatonumerico(WStock, 3)
+
+                WStock = _CalcularStockTotalTerminado(MPoPT)
+
+
+                'DESCUENTA EL STOCK DE LAS GUIAS DE SALIDAS
+                SQLCnslt = "SELECT SumStock= SUM(Cantidad) FROM Guia  WHERE Marca <> 'X' AND Movi = 'S' AND Tipo = 'T' AND Cantidad > 0 AND Terminado = '" & MPoPT & "'"
+                Dim rowG As DataRow = GetSingle(SQLCnslt)
+                If rowG IsNot Nothing Then
+                    WStock = WStock - OrDefault(rowG.Item("Sumstock"), 0)
+
                 End If
+
 
 
 
                 'DESCUENTA EL STOCK DE LAS HOJAS, SI ES LA HOJA ACTUAL IGNORA EL STOCK
 
-                SQLCnslt = "SELECT Cantidad, Hoja FROM Hoja WHERE Terminado = '" & MPoPT & "' AND Real = 0 AND Marca <> 'X'"
+                SQLCnslt = "SELECT h.Cantidad, h.Hoja FROM Hoja h inner join Terminado T on h.Terminado = T.Codigo WHERE h.Terminado = '" & MPoPT & "' AND h.Real = 0 AND h.Marca <> 'X' and h.FechaOrd >= T.OrdFechaCierre"
 
                 Dim tablahoja As DataTable = GetAll(SQLCnslt)
 
@@ -970,7 +990,8 @@ Public Class IngresoActualizacionHojaProduccionFarma
 
                         End If
                     Next
-                    WStock = WStock - StockReservadoEnHojas
+                    '  WStock = WStock - StockReservadoEnHojas
+
                 End If
 
 
@@ -988,6 +1009,7 @@ Public Class IngresoActualizacionHojaProduccionFarma
                     'LE SUMO EL VALOR DE LA FILA PARA QUE PERMITA EDITAR
                     If VerificaDatosHoja = "SE" Then
                         WStock = WStock + CantidadDeFila
+
                     End If
                 End If
 
@@ -996,14 +1018,16 @@ Public Class IngresoActualizacionHojaProduccionFarma
                 StockString = formatonumerico(WStock, 3)
 
 
+
+
                 If Microsoft.VisualBasic.Left(mastxtProducto.Text, 2) = "PT" Then
                     CantidadBloqueada = _CalcularBloqueo(Tipo, MPoPT)
                     If CantidadBloqueada < 0 Then
                         Dim mensaje As String
                         mensaje = "Existe el producto " & MPoPT & " la cantidad de : " & CantidadBloqueada & " Kgs. Bloqueados" & vbCrLf & "Comuniquese con el laboratorio para su liberacion"
                         MsgBox(mensaje, 0, "Ingreso de Hoja de Produccion")
-                        WStock = WStock - CantidadBloqueada
-                        StockString = formatonumerico(WStock, 3)
+                        '     WStock = WStock - CantidadBloqueada
+                        '    StockString = formatonumerico(WStock, 3)
                     End If
                 End If
 
@@ -1015,6 +1039,29 @@ Public Class IngresoActualizacionHojaProduccionFarma
         Return StockString
 
     End Function
+
+
+    Private Function _CalcularStockTotalArticulo(ByVal codigo As String) As Double
+        Dim SQLCnslt As String = "SELECT SumStock = (SUM(l.Liberada) + SUM(g.Cantidad)) FROM Laudo l LEFT OUTER JOIN Guia g on l.Articulo = g.Articulo WHERE l.Marca <> 'X' AND g.Marca <> 'X' AND g.Movi = 'E' AND g.Tipo = 'M' AND Liberada > 0 AND l.Articulo = '" & codigo & "' "
+        Dim row As DataRow = GetSingle(SQLCnslt)
+        Dim stockAcumulado As Double = 0
+        If row IsNot Nothing Then
+            stockAcumulado = OrDefault(row.Item("SumStock"), 0)
+        End If
+        Return stockAcumulado
+    End Function
+
+    Private Function _CalcularStockTotalTerminado(ByVal codigo As String) As Double
+        Dim SQLCnslt As String = "SELECT SumStock = (SUM(h.Real) + SUM(g.Cantidad)) FROM Hoja h LEFT OUTER JOIN Guia g on H.Producto = g.Terminado WHERE h.Marca <> 'X' AND g.Marca <> 'X' AND g.Movi = 'E' AND g.Tipo = 'T' AND H.Real > 0 AND H.Producto = '" & codigo & "' "
+        Dim row As DataRow = GetSingle(SQLCnslt)
+        Dim stockAcumulado As Double = 0
+        If row IsNot Nothing Then
+            stockAcumulado = OrDefault(row.Item("SumStock"), 0)
+        End If
+        Return stockAcumulado
+    End Function
+
+
     Private Function _CalcularVencido(ByVal Codigo As String) As Double
 
         Dim VTO, FechaVTO As String
@@ -1211,7 +1258,7 @@ Public Class IngresoActualizacionHojaProduccionFarma
         Next
 
         Return Vencido
-        
+
     End Function
 
 

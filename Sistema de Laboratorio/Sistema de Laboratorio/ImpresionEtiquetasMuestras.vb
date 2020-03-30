@@ -75,10 +75,10 @@
     Private Sub _BuscarInforme(ByVal NumInforme As String)
 
         Dim SQLCnsl As String
-        SQLCnsl = "SELECT Articulo = i.Articulo, DescripcionLista = i.Articulo + ' ' + CASE i.NombreComercial WHEN NULL THEN a.Descripcion ELSE i.NombreComercial END, "
-        SQLCnsl = SQLCnsl & "Descripcion = CASE i.NombreComercial WHEN NULL THEN a.Descripcion ELSE i.NombreComercial END, Lote1, Lote2, Lote3, Lote4, Lote5,"
-        SQLCnsl = SQLCnsl & "i.Lote6, i.Lote7, i.Lote8, i.Lote9, i.Lote10, i.Lote11, i.Lote12, i.Lote13, i.Lote14, i.Lote15, i.Lote16, i.Lote17, i.Lote18, i.Lote19, i.Lote20 "
-        SQLCnsl = SQLCnsl & "FROM Informe AS i INNER JOIN Articulo AS a ON i.Articulo = a.Codigo WHERE i.Informe = '" & txtInforme.Text & "' "
+        SQLCnsl = "SELECT Articulo = i.Articulo, DescripcionLista = i.Articulo + ' ' + CASE i.NombreComercial WHEN NULL THEN a.Descripcion ELSE i.NombreComercial END, " _
+                   & "Descripcion = CASE i.NombreComercial WHEN NULL THEN a.Descripcion ELSE i.NombreComercial END, Lote1, Lote2, Lote3, Lote4, Lote5," _
+                   & "i.Lote6, i.Lote7, i.Lote8, i.Lote9, i.Lote10, i.Lote11, i.Lote12, i.Lote13, i.Lote14, i.Lote15, i.Lote16, i.Lote17, i.Lote18, i.Lote19, i.Lote20 " _
+                   & "FROM Informe AS i INNER JOIN Articulo AS a ON i.Articulo = a.Codigo WHERE i.Informe = '" & txtInforme.Text & "' "
         tablaInforme = GetAll(SQLCnsl)
         LtbMP.DataSource = tablaInforme
         If (LtbMP.Items.Count > 1) Then

@@ -36,6 +36,8 @@ Partial Class HojaIngresoFrases
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.LblTitulo = New System.Windows.Forms.Label()
         Me.pnlListar = New System.Windows.Forms.Panel()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -45,8 +47,6 @@ Partial Class HojaIngresoFrases
         Me.Observa = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnVolPnlListar = New System.Windows.Forms.Button()
         Me.txtBuscadorListar = New System.Windows.Forms.TextBox()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.LblTitulo = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.pnlListar.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -168,13 +168,34 @@ Partial Class HojaIngresoFrases
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(32, Byte), Integer), CType(CType(74, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.Panel1.Controls.Add(Me.pnlListar)
         Me.Panel1.Controls.Add(Me.Label4)
         Me.Panel1.Controls.Add(Me.LblTitulo)
         Me.Panel1.Location = New System.Drawing.Point(-7, -8)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(581, 64)
         Me.Panel1.TabIndex = 24
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label4.Location = New System.Drawing.Point(385, 29)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(168, 22)
+        Me.Label4.TabIndex = 1
+        Me.Label4.Text = "SURFACTAN S.A"
+        '
+        'LblTitulo
+        '
+        Me.LblTitulo.AutoSize = True
+        Me.LblTitulo.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblTitulo.ForeColor = System.Drawing.SystemColors.Control
+        Me.LblTitulo.Location = New System.Drawing.Point(23, 31)
+        Me.LblTitulo.Name = "LblTitulo"
+        Me.LblTitulo.Size = New System.Drawing.Size(63, 20)
+        Me.LblTitulo.TabIndex = 0
+        Me.LblTitulo.Text = "Label4"
         '
         'pnlListar
         '
@@ -183,7 +204,7 @@ Partial Class HojaIngresoFrases
         Me.pnlListar.Controls.Add(Me.DGV_ListadoI)
         Me.pnlListar.Controls.Add(Me.btnVolPnlListar)
         Me.pnlListar.Controls.Add(Me.txtBuscadorListar)
-        Me.pnlListar.Location = New System.Drawing.Point(27, 20)
+        Me.pnlListar.Location = New System.Drawing.Point(25, 289)
         Me.pnlListar.Name = "pnlListar"
         Me.pnlListar.Size = New System.Drawing.Size(531, 265)
         Me.pnlListar.TabIndex = 25
@@ -277,33 +298,12 @@ Partial Class HojaIngresoFrases
         Me.txtBuscadorListar.Size = New System.Drawing.Size(485, 20)
         Me.txtBuscadorListar.TabIndex = 1
         '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label4.Location = New System.Drawing.Point(385, 29)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(168, 22)
-        Me.Label4.TabIndex = 1
-        Me.Label4.Text = "SURFACTAN S.A"
-        '
-        'LblTitulo
-        '
-        Me.LblTitulo.AutoSize = True
-        Me.LblTitulo.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblTitulo.ForeColor = System.Drawing.SystemColors.Control
-        Me.LblTitulo.Location = New System.Drawing.Point(23, 31)
-        Me.LblTitulo.Name = "LblTitulo"
-        Me.LblTitulo.Size = New System.Drawing.Size(63, 20)
-        Me.LblTitulo.TabIndex = 0
-        Me.LblTitulo.Text = "Label4"
-        '
         'HojaIngresoFrases
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(568, 324)
+        Me.Controls.Add(Me.pnlListar)
         Me.Controls.Add(Me.btnVolver)
         Me.Controls.Add(Me.btnImprimir)
         Me.Controls.Add(Me.btnListar)

@@ -22,9 +22,7 @@ Partial Class InformeRecepcionDrogaLAB
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -114,43 +112,10 @@ Partial Class InformeRecepcionDrogaLAB
         Me.lblAviso2 = New System.Windows.Forms.Label()
         Me.Label25 = New System.Windows.Forms.Label()
         Me.lblAviso1 = New System.Windows.Forms.Label()
-        Me.pnlCertifAnaliyEstadoEtiquet = New System.Windows.Forms.Panel()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.Label22 = New System.Windows.Forms.Label()
-        Me.mastxtVencimiento_pnlIngreCertif = New System.Windows.Forms.MaskedTextBox()
-        Me.btnAceptar_IngreCert = New System.Windows.Forms.Button()
-        Me.Label21 = New System.Windows.Forms.Label()
-        Me.txtEstadoEnvases5 = New System.Windows.Forms.TextBox()
-        Me.txtCertifAnalisis2 = New System.Windows.Forms.TextBox()
-        Me.panel5 = New System.Windows.Forms.Panel()
-        Me.rabtnNO_EstadoEnvases5 = New System.Windows.Forms.RadioButton()
-        Me.rabtnSI_EstadoEnvases5 = New System.Windows.Forms.RadioButton()
-        Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.rabtnNO_CertifAnalisis2 = New System.Windows.Forms.RadioButton()
-        Me.rabtnSI_CertifAnalisis2 = New System.Windows.Forms.RadioButton()
-        Me.EstadoEnvases5 = New System.Windows.Forms.Label()
-        Me.CertifAnalisis2 = New System.Windows.Forms.Label()
-        Me.pnlAyudaProv = New System.Windows.Forms.Panel()
-        Me.btnVolver_pnlAyudaProv = New System.Windows.Forms.Button()
-        Me.DGV_AyudaProv = New ConsultasVarias.DBDataGridView()
-        Me.AyudaArticulo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.AyudaDescripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.AyudaSaldo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NroOrden = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Panel7 = New System.Windows.Forms.Panel()
-        Me.Label16 = New System.Windows.Forms.Label()
         Me.btnGrabar = New System.Windows.Forms.Button()
         Me.btnLimpiarForm = New System.Windows.Forms.Button()
         Me.btnBuscarProv = New System.Windows.Forms.Button()
         Me.btnVolver = New System.Windows.Forms.Button()
-        Me.pnlBuscarProveedor = New System.Windows.Forms.Panel()
-        Me.txtBuscardorProv = New System.Windows.Forms.TextBox()
-        Me.btnVolver_PnlProveedores = New System.Windows.Forms.Button()
-        Me.DGV_Proveedores = New ConsultasVarias.DBDataGridView()
-        Me.CodigoProv = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DescripcionProv = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Panel8 = New System.Windows.Forms.Panel()
-        Me.Label23 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         CType(Me.DGV_InformeRecepcion, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PnlEstadoEnvases.SuspendLayout()
@@ -161,16 +126,6 @@ Partial Class InformeRecepcionDrogaLAB
         Me.pnlEstadoEnvases1.SuspendLayout()
         Me.pnlCertifAnali.SuspendLayout()
         Me.pnlAviso.SuspendLayout()
-        Me.pnlCertifAnaliyEstadoEtiquet.SuspendLayout()
-        Me.Panel2.SuspendLayout()
-        Me.panel5.SuspendLayout()
-        Me.Panel3.SuspendLayout()
-        Me.pnlAyudaProv.SuspendLayout()
-        CType(Me.DGV_AyudaProv, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel7.SuspendLayout()
-        Me.pnlBuscarProveedor.SuspendLayout()
-        CType(Me.DGV_Proveedores, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel8.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -187,7 +142,7 @@ Partial Class InformeRecepcionDrogaLAB
         'Label1
         '
         Me.Label1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.Control
@@ -200,7 +155,7 @@ Partial Class InformeRecepcionDrogaLAB
         'Label2
         '
         Me.Label2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.Control
@@ -274,14 +229,14 @@ Partial Class InformeRecepcionDrogaLAB
         Me.DGV_InformeRecepcion.AllowUserToResizeRows = False
         Me.DGV_InformeRecepcion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_InformeRecepcion.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Orden, Me.Producto, Me.Descripcion, Me.CantIngre, Me.SaldoOC, Me.DescOC, Me.Envase, Me.DescripcionEnvase, Me.Etiqueta, Me.Certificado1, Me.Certificado2, Me.Estado1, Me.Estado2, Me.FechaVencimiento, Me.EstadoEnvI, Me.ObservaI, Me.EstadoEnvIII, Me.ObservaIII, Me.EstadoEnvV, Me.EstadoEnvVII, Me.EstadoEnvIX, Me.CantidadEnv})
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGV_InformeRecepcion.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGV_InformeRecepcion.DefaultCellStyle = DataGridViewCellStyle1
         Me.DGV_InformeRecepcion.DoubleBuffered = True
         Me.DGV_InformeRecepcion.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.DGV_InformeRecepcion.Location = New System.Drawing.Point(13, 134)
@@ -647,7 +602,7 @@ Partial Class InformeRecepcionDrogaLAB
         Me.PnlEstadoEnvases.Controls.Add(Me.lblCertifAnalisis)
         Me.PnlEstadoEnvases.Controls.Add(Me.Label18)
         Me.PnlEstadoEnvases.Controls.Add(Me.Label17)
-        Me.PnlEstadoEnvases.Location = New System.Drawing.Point(111, 109)
+        Me.PnlEstadoEnvases.Location = New System.Drawing.Point(60, 63)
         Me.PnlEstadoEnvases.Name = "PnlEstadoEnvases"
         Me.PnlEstadoEnvases.Size = New System.Drawing.Size(638, 335)
         Me.PnlEstadoEnvases.TabIndex = 29
@@ -665,7 +620,7 @@ Partial Class InformeRecepcionDrogaLAB
         'Label20
         '
         Me.Label20.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label20.AutoSize = True
         Me.Label20.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label20.ForeColor = System.Drawing.SystemColors.Control
@@ -711,7 +666,7 @@ Partial Class InformeRecepcionDrogaLAB
         '
         'txtCertifAnalisis
         '
-        Me.txtCertifAnalisis.Location = New System.Drawing.Point(364, 78)
+        Me.txtCertifAnalisis.Location = New System.Drawing.Point(10, 20)
         Me.txtCertifAnalisis.MaxLength = 100
         Me.txtCertifAnalisis.Multiline = True
         Me.txtCertifAnalisis.Name = "txtCertifAnalisis"
@@ -996,272 +951,6 @@ Partial Class InformeRecepcionDrogaLAB
         Me.lblAviso1.TabIndex = 0
         Me.lblAviso1.Text = "A CONFIRMADO QUE DEJA PENDIENTE DE RECEPCION"
         '
-        'pnlCertifAnaliyEstadoEtiquet
-        '
-        Me.pnlCertifAnaliyEstadoEtiquet.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.pnlCertifAnaliyEstadoEtiquet.Controls.Add(Me.Panel2)
-        Me.pnlCertifAnaliyEstadoEtiquet.Controls.Add(Me.mastxtVencimiento_pnlIngreCertif)
-        Me.pnlCertifAnaliyEstadoEtiquet.Controls.Add(Me.btnAceptar_IngreCert)
-        Me.pnlCertifAnaliyEstadoEtiquet.Controls.Add(Me.Label21)
-        Me.pnlCertifAnaliyEstadoEtiquet.Controls.Add(Me.txtEstadoEnvases5)
-        Me.pnlCertifAnaliyEstadoEtiquet.Controls.Add(Me.txtCertifAnalisis2)
-        Me.pnlCertifAnaliyEstadoEtiquet.Controls.Add(Me.panel5)
-        Me.pnlCertifAnaliyEstadoEtiquet.Controls.Add(Me.Panel3)
-        Me.pnlCertifAnaliyEstadoEtiquet.Controls.Add(Me.EstadoEnvases5)
-        Me.pnlCertifAnaliyEstadoEtiquet.Controls.Add(Me.CertifAnalisis2)
-        Me.pnlCertifAnaliyEstadoEtiquet.Location = New System.Drawing.Point(167, 123)
-        Me.pnlCertifAnaliyEstadoEtiquet.Name = "pnlCertifAnaliyEstadoEtiquet"
-        Me.pnlCertifAnaliyEstadoEtiquet.Size = New System.Drawing.Size(570, 191)
-        Me.pnlCertifAnaliyEstadoEtiquet.TabIndex = 30
-        '
-        'Panel2
-        '
-        Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(32, Byte), Integer), CType(CType(74, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.Panel2.Controls.Add(Me.Label22)
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel2.Location = New System.Drawing.Point(0, 0)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(566, 46)
-        Me.Panel2.TabIndex = 20
-        '
-        'Label22
-        '
-        Me.Label22.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label22.AutoSize = True
-        Me.Label22.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label22.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label22.Location = New System.Drawing.Point(3, 7)
-        Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(452, 20)
-        Me.Label22.TabIndex = 3
-        Me.Label22.Text = "Ingreso de Certificado de Analisis y Estado de Envases"
-        '
-        'mastxtVencimiento_pnlIngreCertif
-        '
-        Me.mastxtVencimiento_pnlIngreCertif.Location = New System.Drawing.Point(143, 149)
-        Me.mastxtVencimiento_pnlIngreCertif.Mask = "00/00/0000"
-        Me.mastxtVencimiento_pnlIngreCertif.Name = "mastxtVencimiento_pnlIngreCertif"
-        Me.mastxtVencimiento_pnlIngreCertif.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.mastxtVencimiento_pnlIngreCertif.Size = New System.Drawing.Size(100, 20)
-        Me.mastxtVencimiento_pnlIngreCertif.TabIndex = 19
-        Me.mastxtVencimiento_pnlIngreCertif.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'btnAceptar_IngreCert
-        '
-        Me.btnAceptar_IngreCert.Location = New System.Drawing.Point(295, 148)
-        Me.btnAceptar_IngreCert.Name = "btnAceptar_IngreCert"
-        Me.btnAceptar_IngreCert.Size = New System.Drawing.Size(75, 23)
-        Me.btnAceptar_IngreCert.TabIndex = 18
-        Me.btnAceptar_IngreCert.Text = "Aceptar"
-        Me.btnAceptar_IngreCert.UseVisualStyleBackColor = True
-        '
-        'Label21
-        '
-        Me.Label21.AutoSize = True
-        Me.Label21.Location = New System.Drawing.Point(24, 152)
-        Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(65, 13)
-        Me.Label21.TabIndex = 16
-        Me.Label21.Text = "Vencimiento"
-        '
-        'txtEstadoEnvases5
-        '
-        Me.txtEstadoEnvases5.Location = New System.Drawing.Point(289, 101)
-        Me.txtEstadoEnvases5.MaxLength = 50
-        Me.txtEstadoEnvases5.Multiline = True
-        Me.txtEstadoEnvases5.Name = "txtEstadoEnvases5"
-        Me.txtEstadoEnvases5.Size = New System.Drawing.Size(260, 32)
-        Me.txtEstadoEnvases5.TabIndex = 15
-        '
-        'txtCertifAnalisis2
-        '
-        Me.txtCertifAnalisis2.Location = New System.Drawing.Point(289, 54)
-        Me.txtCertifAnalisis2.MaxLength = 50
-        Me.txtCertifAnalisis2.Multiline = True
-        Me.txtCertifAnalisis2.Name = "txtCertifAnalisis2"
-        Me.txtCertifAnalisis2.Size = New System.Drawing.Size(260, 32)
-        Me.txtCertifAnalisis2.TabIndex = 14
-        '
-        'panel5
-        '
-        Me.panel5.Controls.Add(Me.rabtnNO_EstadoEnvases5)
-        Me.panel5.Controls.Add(Me.rabtnSI_EstadoEnvases5)
-        Me.panel5.Location = New System.Drawing.Point(142, 101)
-        Me.panel5.Name = "panel5"
-        Me.panel5.Size = New System.Drawing.Size(141, 32)
-        Me.panel5.TabIndex = 13
-        '
-        'rabtnNO_EstadoEnvases5
-        '
-        Me.rabtnNO_EstadoEnvases5.AutoSize = True
-        Me.rabtnNO_EstadoEnvases5.Location = New System.Drawing.Point(97, 10)
-        Me.rabtnNO_EstadoEnvases5.Name = "rabtnNO_EstadoEnvases5"
-        Me.rabtnNO_EstadoEnvases5.Size = New System.Drawing.Size(39, 17)
-        Me.rabtnNO_EstadoEnvases5.TabIndex = 1
-        Me.rabtnNO_EstadoEnvases5.Text = "No"
-        Me.rabtnNO_EstadoEnvases5.UseVisualStyleBackColor = True
-        '
-        'rabtnSI_EstadoEnvases5
-        '
-        Me.rabtnSI_EstadoEnvases5.AutoSize = True
-        Me.rabtnSI_EstadoEnvases5.Checked = True
-        Me.rabtnSI_EstadoEnvases5.Location = New System.Drawing.Point(22, 10)
-        Me.rabtnSI_EstadoEnvases5.Name = "rabtnSI_EstadoEnvases5"
-        Me.rabtnSI_EstadoEnvases5.Size = New System.Drawing.Size(34, 17)
-        Me.rabtnSI_EstadoEnvases5.TabIndex = 0
-        Me.rabtnSI_EstadoEnvases5.TabStop = True
-        Me.rabtnSI_EstadoEnvases5.Text = "Si"
-        Me.rabtnSI_EstadoEnvases5.UseVisualStyleBackColor = True
-        '
-        'Panel3
-        '
-        Me.Panel3.Controls.Add(Me.rabtnNO_CertifAnalisis2)
-        Me.Panel3.Controls.Add(Me.rabtnSI_CertifAnalisis2)
-        Me.Panel3.Location = New System.Drawing.Point(142, 55)
-        Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(141, 32)
-        Me.Panel3.TabIndex = 12
-        '
-        'rabtnNO_CertifAnalisis2
-        '
-        Me.rabtnNO_CertifAnalisis2.AutoSize = True
-        Me.rabtnNO_CertifAnalisis2.Location = New System.Drawing.Point(97, 10)
-        Me.rabtnNO_CertifAnalisis2.Name = "rabtnNO_CertifAnalisis2"
-        Me.rabtnNO_CertifAnalisis2.Size = New System.Drawing.Size(39, 17)
-        Me.rabtnNO_CertifAnalisis2.TabIndex = 1
-        Me.rabtnNO_CertifAnalisis2.Text = "No"
-        Me.rabtnNO_CertifAnalisis2.UseVisualStyleBackColor = True
-        '
-        'rabtnSI_CertifAnalisis2
-        '
-        Me.rabtnSI_CertifAnalisis2.AutoSize = True
-        Me.rabtnSI_CertifAnalisis2.Checked = True
-        Me.rabtnSI_CertifAnalisis2.Location = New System.Drawing.Point(22, 10)
-        Me.rabtnSI_CertifAnalisis2.Name = "rabtnSI_CertifAnalisis2"
-        Me.rabtnSI_CertifAnalisis2.Size = New System.Drawing.Size(34, 17)
-        Me.rabtnSI_CertifAnalisis2.TabIndex = 0
-        Me.rabtnSI_CertifAnalisis2.TabStop = True
-        Me.rabtnSI_CertifAnalisis2.Text = "Si"
-        Me.rabtnSI_CertifAnalisis2.UseVisualStyleBackColor = True
-        '
-        'EstadoEnvases5
-        '
-        Me.EstadoEnvases5.AutoSize = True
-        Me.EstadoEnvases5.Location = New System.Drawing.Point(18, 111)
-        Me.EstadoEnvases5.MaximumSize = New System.Drawing.Size(200, 40)
-        Me.EstadoEnvases5.Name = "EstadoEnvases5"
-        Me.EstadoEnvases5.Size = New System.Drawing.Size(99, 13)
-        Me.EstadoEnvases5.TabIndex = 2
-        Me.EstadoEnvases5.Text = "Estado de Envases"
-        '
-        'CertifAnalisis2
-        '
-        Me.CertifAnalisis2.AutoSize = True
-        Me.CertifAnalisis2.Location = New System.Drawing.Point(15, 65)
-        Me.CertifAnalisis2.MaximumSize = New System.Drawing.Size(200, 40)
-        Me.CertifAnalisis2.Name = "CertifAnalisis2"
-        Me.CertifAnalisis2.Size = New System.Drawing.Size(87, 13)
-        Me.CertifAnalisis2.TabIndex = 1
-        Me.CertifAnalisis2.Text = "Certif. de Analisis"
-        '
-        'pnlAyudaProv
-        '
-        Me.pnlAyudaProv.Controls.Add(Me.btnVolver_pnlAyudaProv)
-        Me.pnlAyudaProv.Controls.Add(Me.DGV_AyudaProv)
-        Me.pnlAyudaProv.Controls.Add(Me.Panel7)
-        Me.pnlAyudaProv.Location = New System.Drawing.Point(107, 86)
-        Me.pnlAyudaProv.Name = "pnlAyudaProv"
-        Me.pnlAyudaProv.Size = New System.Drawing.Size(471, 253)
-        Me.pnlAyudaProv.TabIndex = 32
-        '
-        'btnVolver_pnlAyudaProv
-        '
-        Me.btnVolver_pnlAyudaProv.Location = New System.Drawing.Point(186, 223)
-        Me.btnVolver_pnlAyudaProv.Name = "btnVolver_pnlAyudaProv"
-        Me.btnVolver_pnlAyudaProv.Size = New System.Drawing.Size(75, 23)
-        Me.btnVolver_pnlAyudaProv.TabIndex = 2
-        Me.btnVolver_pnlAyudaProv.Text = "Volver"
-        Me.btnVolver_pnlAyudaProv.UseVisualStyleBackColor = True
-        '
-        'DGV_AyudaProv
-        '
-        Me.DGV_AyudaProv.AllowUserToAddRows = False
-        Me.DGV_AyudaProv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGV_AyudaProv.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.AyudaArticulo, Me.AyudaDescripcion, Me.AyudaSaldo, Me.NroOrden})
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGV_AyudaProv.DefaultCellStyle = DataGridViewCellStyle11
-        Me.DGV_AyudaProv.DoubleBuffered = True
-        Me.DGV_AyudaProv.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
-        Me.DGV_AyudaProv.Location = New System.Drawing.Point(10, 56)
-        Me.DGV_AyudaProv.Name = "DGV_AyudaProv"
-        Me.DGV_AyudaProv.OrdenamientoColumnasHabilitado = True
-        Me.DGV_AyudaProv.RowHeadersWidth = 15
-        Me.DGV_AyudaProv.RowTemplate.Height = 20
-        Me.DGV_AyudaProv.ShowCellToolTips = False
-        Me.DGV_AyudaProv.SinClickDerecho = False
-        Me.DGV_AyudaProv.Size = New System.Drawing.Size(451, 160)
-        Me.DGV_AyudaProv.TabIndex = 1
-        '
-        'AyudaArticulo
-        '
-        Me.AyudaArticulo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.AyudaArticulo.DataPropertyName = "AyudaArticulo"
-        Me.AyudaArticulo.HeaderText = "Materia Prima"
-        Me.AyudaArticulo.Name = "AyudaArticulo"
-        Me.AyudaArticulo.Width = 96
-        '
-        'AyudaDescripcion
-        '
-        Me.AyudaDescripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.AyudaDescripcion.DataPropertyName = "AyudaDescripcion"
-        Me.AyudaDescripcion.HeaderText = "Descripcion"
-        Me.AyudaDescripcion.Name = "AyudaDescripcion"
-        '
-        'AyudaSaldo
-        '
-        Me.AyudaSaldo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.AyudaSaldo.DataPropertyName = "AyudaSaldo"
-        Me.AyudaSaldo.HeaderText = "Saldo"
-        Me.AyudaSaldo.Name = "AyudaSaldo"
-        Me.AyudaSaldo.Width = 59
-        '
-        'NroOrden
-        '
-        Me.NroOrden.DataPropertyName = "NroOrden"
-        Me.NroOrden.HeaderText = "NroOrden"
-        Me.NroOrden.Name = "NroOrden"
-        Me.NroOrden.Visible = False
-        '
-        'Panel7
-        '
-        Me.Panel7.BackColor = System.Drawing.Color.FromArgb(CType(CType(32, Byte), Integer), CType(CType(74, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.Panel7.Controls.Add(Me.Label16)
-        Me.Panel7.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel7.Location = New System.Drawing.Point(0, 0)
-        Me.Panel7.Name = "Panel7"
-        Me.Panel7.Size = New System.Drawing.Size(471, 47)
-        Me.Panel7.TabIndex = 0
-        '
-        'Label16
-        '
-        Me.Label16.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label16.AutoSize = True
-        Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label16.Location = New System.Drawing.Point(9, 11)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(249, 20)
-        Me.Label16.TabIndex = 4
-        Me.Label16.Text = "Ayuda Ordenes por Proveedor"
-        '
         'btnGrabar
         '
         Me.btnGrabar.Location = New System.Drawing.Point(95, 467)
@@ -1300,109 +989,16 @@ Partial Class InformeRecepcionDrogaLAB
         Me.btnVolver.Text = "Volver"
         Me.btnVolver.UseVisualStyleBackColor = True
         '
-        'pnlBuscarProveedor
-        '
-        Me.pnlBuscarProveedor.Controls.Add(Me.txtBuscardorProv)
-        Me.pnlBuscarProveedor.Controls.Add(Me.btnVolver_PnlProveedores)
-        Me.pnlBuscarProveedor.Controls.Add(Me.DGV_Proveedores)
-        Me.pnlBuscarProveedor.Controls.Add(Me.Panel8)
-        Me.pnlBuscarProveedor.Location = New System.Drawing.Point(72, 119)
-        Me.pnlBuscarProveedor.Name = "pnlBuscarProveedor"
-        Me.pnlBuscarProveedor.Size = New System.Drawing.Size(498, 308)
-        Me.pnlBuscarProveedor.TabIndex = 37
-        '
-        'txtBuscardorProv
-        '
-        Me.txtBuscardorProv.Location = New System.Drawing.Point(10, 63)
-        Me.txtBuscardorProv.Name = "txtBuscardorProv"
-        Me.txtBuscardorProv.Size = New System.Drawing.Size(476, 20)
-        Me.txtBuscardorProv.TabIndex = 3
-        '
-        'btnVolver_PnlProveedores
-        '
-        Me.btnVolver_PnlProveedores.Location = New System.Drawing.Point(201, 280)
-        Me.btnVolver_PnlProveedores.Name = "btnVolver_PnlProveedores"
-        Me.btnVolver_PnlProveedores.Size = New System.Drawing.Size(75, 23)
-        Me.btnVolver_PnlProveedores.TabIndex = 2
-        Me.btnVolver_PnlProveedores.Text = "Volver"
-        Me.btnVolver_PnlProveedores.UseVisualStyleBackColor = True
-        '
-        'DGV_Proveedores
-        '
-        Me.DGV_Proveedores.AllowUserToAddRows = False
-        Me.DGV_Proveedores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGV_Proveedores.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CodigoProv, Me.DescripcionProv})
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGV_Proveedores.DefaultCellStyle = DataGridViewCellStyle12
-        Me.DGV_Proveedores.DoubleBuffered = True
-        Me.DGV_Proveedores.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
-        Me.DGV_Proveedores.Location = New System.Drawing.Point(10, 89)
-        Me.DGV_Proveedores.Name = "DGV_Proveedores"
-        Me.DGV_Proveedores.OrdenamientoColumnasHabilitado = True
-        Me.DGV_Proveedores.RowHeadersWidth = 15
-        Me.DGV_Proveedores.RowTemplate.Height = 20
-        Me.DGV_Proveedores.ShowCellToolTips = False
-        Me.DGV_Proveedores.SinClickDerecho = False
-        Me.DGV_Proveedores.Size = New System.Drawing.Size(476, 187)
-        Me.DGV_Proveedores.TabIndex = 1
-        '
-        'CodigoProv
-        '
-        Me.CodigoProv.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.CodigoProv.DataPropertyName = "CodigoProv"
-        Me.CodigoProv.HeaderText = "Codigo"
-        Me.CodigoProv.MinimumWidth = 100
-        Me.CodigoProv.Name = "CodigoProv"
-        '
-        'DescripcionProv
-        '
-        Me.DescripcionProv.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.DescripcionProv.DataPropertyName = "DescripcionProv"
-        Me.DescripcionProv.HeaderText = "Descripcion"
-        Me.DescripcionProv.Name = "DescripcionProv"
-        '
-        'Panel8
-        '
-        Me.Panel8.BackColor = System.Drawing.Color.FromArgb(CType(CType(32, Byte), Integer), CType(CType(74, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.Panel8.Controls.Add(Me.Label23)
-        Me.Panel8.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel8.Location = New System.Drawing.Point(0, 0)
-        Me.Panel8.Name = "Panel8"
-        Me.Panel8.Size = New System.Drawing.Size(498, 54)
-        Me.Panel8.TabIndex = 0
-        '
-        'Label23
-        '
-        Me.Label23.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label23.AutoSize = True
-        Me.Label23.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label23.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label23.Location = New System.Drawing.Point(6, 18)
-        Me.Label23.Name = "Label23"
-        Me.Label23.Size = New System.Drawing.Size(201, 20)
-        Me.Label23.TabIndex = 3
-        Me.Label23.Text = "Busqueda de Proveedor"
-        '
         'InformeRecepcionDrogaLAB
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(788, 496)
-        Me.Controls.Add(Me.pnlBuscarProveedor)
         Me.Controls.Add(Me.PnlEstadoEnvases)
         Me.Controls.Add(Me.btnVolver)
         Me.Controls.Add(Me.btnBuscarProv)
         Me.Controls.Add(Me.btnLimpiarForm)
         Me.Controls.Add(Me.btnGrabar)
-        Me.Controls.Add(Me.pnlAyudaProv)
-        Me.Controls.Add(Me.pnlCertifAnaliyEstadoEtiquet)
         Me.Controls.Add(Me.pnlAviso)
         Me.Controls.Add(Me.Label15)
         Me.Controls.Add(Me.Label14)
@@ -1433,10 +1029,11 @@ Partial Class InformeRecepcionDrogaLAB
         Me.Controls.Add(Me.mastxtFecha)
         Me.Controls.Add(Me.txtNroInforme)
         Me.Controls.Add(Me.Panel1)
-        Me.Location = New System.Drawing.Point(10, 20)
+        Me.Location = New System.Drawing.Point(20, 20)
+        Me.MaximumSize = New System.Drawing.Size(804, 535)
+        Me.MinimumSize = New System.Drawing.Size(804, 535)
         Me.Name = "InformeRecepcionDrogaLAB"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
-        Me.Text = "InformeRecepcionDrogaLAB"
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         CType(Me.DGV_InformeRecepcion, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1456,23 +1053,6 @@ Partial Class InformeRecepcionDrogaLAB
         Me.pnlCertifAnali.PerformLayout()
         Me.pnlAviso.ResumeLayout(False)
         Me.pnlAviso.PerformLayout()
-        Me.pnlCertifAnaliyEstadoEtiquet.ResumeLayout(False)
-        Me.pnlCertifAnaliyEstadoEtiquet.PerformLayout()
-        Me.Panel2.ResumeLayout(False)
-        Me.Panel2.PerformLayout()
-        Me.panel5.ResumeLayout(False)
-        Me.panel5.PerformLayout()
-        Me.Panel3.ResumeLayout(False)
-        Me.Panel3.PerformLayout()
-        Me.pnlAyudaProv.ResumeLayout(False)
-        CType(Me.DGV_AyudaProv, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.Panel7.ResumeLayout(False)
-        Me.Panel7.PerformLayout()
-        Me.pnlBuscarProveedor.ResumeLayout(False)
-        Me.pnlBuscarProveedor.PerformLayout()
-        CType(Me.DGV_Proveedores, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.Panel8.ResumeLayout(False)
-        Me.Panel8.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1536,20 +1116,6 @@ Partial Class InformeRecepcionDrogaLAB
     Friend WithEvents Label17 As System.Windows.Forms.Label
     Friend WithEvents Label19 As System.Windows.Forms.Label
     Friend WithEvents txtCantRechazada As System.Windows.Forms.TextBox
-    Friend WithEvents pnlCertifAnaliyEstadoEtiquet As System.Windows.Forms.Panel
-    Friend WithEvents txtEstadoEnvases5 As System.Windows.Forms.TextBox
-    Friend WithEvents txtCertifAnalisis2 As System.Windows.Forms.TextBox
-    Friend WithEvents panel5 As System.Windows.Forms.Panel
-    Friend WithEvents rabtnNO_EstadoEnvases5 As System.Windows.Forms.RadioButton
-    Friend WithEvents rabtnSI_EstadoEnvases5 As System.Windows.Forms.RadioButton
-    Friend WithEvents Panel3 As System.Windows.Forms.Panel
-    Friend WithEvents rabtnNO_CertifAnalisis2 As System.Windows.Forms.RadioButton
-    Friend WithEvents rabtnSI_CertifAnalisis2 As System.Windows.Forms.RadioButton
-    Friend WithEvents EstadoEnvases5 As System.Windows.Forms.Label
-    Friend WithEvents CertifAnalisis2 As System.Windows.Forms.Label
-    Friend WithEvents mastxtVencimiento_pnlIngreCertif As System.Windows.Forms.MaskedTextBox
-    Friend WithEvents btnAceptar_IngreCert As System.Windows.Forms.Button
-    Friend WithEvents Label21 As System.Windows.Forms.Label
     Friend WithEvents pnlAviso As System.Windows.Forms.Panel
     Friend WithEvents btnAceptar_pnlAviso As System.Windows.Forms.Button
     Friend WithEvents lblAviso3 As System.Windows.Forms.Label
@@ -1558,17 +1124,6 @@ Partial Class InformeRecepcionDrogaLAB
     Friend WithEvents lblAviso1 As System.Windows.Forms.Label
     Friend WithEvents Panel4 As System.Windows.Forms.Panel
     Friend WithEvents Label20 As System.Windows.Forms.Label
-    Friend WithEvents Panel2 As System.Windows.Forms.Panel
-    Friend WithEvents Label22 As System.Windows.Forms.Label
-    Friend WithEvents pnlAyudaProv As System.Windows.Forms.Panel
-    Friend WithEvents DGV_AyudaProv As ConsultasVarias.DBDataGridView
-    Friend WithEvents Panel7 As System.Windows.Forms.Panel
-    Friend WithEvents Label16 As System.Windows.Forms.Label
-    Friend WithEvents btnVolver_pnlAyudaProv As System.Windows.Forms.Button
-    Friend WithEvents AyudaArticulo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents AyudaDescripcion As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents AyudaSaldo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents NroOrden As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents btnGrabar As System.Windows.Forms.Button
     Friend WithEvents btnLimpiarForm As System.Windows.Forms.Button
     Friend WithEvents btnBuscarProv As System.Windows.Forms.Button
@@ -1595,12 +1150,4 @@ Partial Class InformeRecepcionDrogaLAB
     Friend WithEvents EstadoEnvVII As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents EstadoEnvIX As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents CantidadEnv As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents pnlBuscarProveedor As System.Windows.Forms.Panel
-    Friend WithEvents btnVolver_PnlProveedores As System.Windows.Forms.Button
-    Friend WithEvents DGV_Proveedores As ConsultasVarias.DBDataGridView
-    Friend WithEvents Panel8 As System.Windows.Forms.Panel
-    Friend WithEvents Label23 As System.Windows.Forms.Label
-    Friend WithEvents txtBuscardorProv As System.Windows.Forms.TextBox
-    Friend WithEvents CodigoProv As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DescripcionProv As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

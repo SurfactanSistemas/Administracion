@@ -96,11 +96,14 @@
     <Compile Include="Auxiliares\Interfaces\IActualizarPorNuevoIngreso.vb" />
     <Compile Include="Auxiliares\Interfaces\IAyudaMPDentroDeInforme.vb" />
     <Compile Include="Auxiliares\Interfaces\IAyudaPruebasAnteriores.vb" />
+    <Compile Include="Auxiliares\Interfaces\IBuscadorProveedor.vb" />
     <Compile Include="Auxiliares\Interfaces\IDefinicionFormulaEspecificacion.vb" />
     <Compile Include="Auxiliares\Interfaces\IDefinicionValoresFormula.vb" />
+    <Compile Include="Auxiliares\Interfaces\IFrasesHP.vb" />
     <Compile Include="Auxiliares\Interfaces\IIngresoMotivoDesvio.vb" />
     <Compile Include="Auxiliares\Interfaces\IIngresoParametrosEspecificaciones.vb" />
     <Compile Include="Auxiliares\Interfaces\INotasEnsayosProductosTerminados.vb" />
+    <Compile Include="Auxiliares\Interfaces\IBuscarOrdenCompraXProvee.vb" />
     <Compile Include="Auxiliares\Interfaces\IVerificacionFormula.vb" />
     <Compile Include="Auxiliares\VentanasIntermedias\HistorialCambios.Designer.vb">
       <DependentUpon>HistorialCambios.vb</DependentUpon>
@@ -215,10 +218,22 @@
     <Compile Include="ImpresionEtiquetasMuestras.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InformeRecepcionDrogaLAB.Designer.vb">
+    <Compile Include="Maestros\Informe de Recepcion De Drogas de laboratorio\BuscadorOrdenCompraXProvee.Designer.vb">
+      <DependentUpon>BuscadorOrdenCompraXProvee.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\Informe de Recepcion De Drogas de laboratorio\BuscadorOrdenCompraXProvee.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestros\Informe de Recepcion De Drogas de laboratorio\BuscadorProveedor.Designer.vb">
+      <DependentUpon>BuscadorProveedor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\Informe de Recepcion De Drogas de laboratorio\BuscadorProveedor.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestros\Informe de Recepcion De Drogas de laboratorio\InformeRecepcionDrogaLAB.Designer.vb">
       <DependentUpon>InformeRecepcionDrogaLAB.vb</DependentUpon>
     </Compile>
-    <Compile Include="InformeRecepcionDrogaLAB.vb">
+    <Compile Include="Maestros\Informe de Recepcion De Drogas de laboratorio\InformeRecepcionDrogaLAB.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="IngresoActualizacionHojaProduccionFarma.Designer.vb">
@@ -231,6 +246,18 @@
       <DependentUpon>IngresoFormulasEnsayo.vb</DependentUpon>
     </Compile>
     <Compile Include="IngresoFormulasEnsayo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestros\Ingreso Frases H &amp; P\CargaDatosFrases.Designer.vb">
+      <DependentUpon>CargaDatosFrases.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\Ingreso Frases H &amp; P\CargaDatosFrases.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestros\Ingreso Frases H &amp; P\IngresoFrasesH.Designer.vb">
+      <DependentUpon>IngresoFrasesH.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\Ingreso Frases H &amp; P\IngresoFrasesH.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Maestros\Materias Primas\Planillas de Ensayos MP\ImpresionPlanillaEnsayosMP.Designer.vb">
@@ -454,16 +481,16 @@
       <DependentUpon>ReporteDatosAdicionalesPT.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\IngresoFrasesHP\ReporteListadosP.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ReporteListadosP.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Reportes\IngresoFrasesHP\ReporteListadoFrasesH.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReporteListadoFrasesH.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\IngresoFrasesHP\ReporteListadosP.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteListadosP.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\Listado Ensayos PT\ReporteListadoEnsayosPT.vb">
@@ -681,7 +708,13 @@
     <EmbeddedResource Include="ImpresionEtiquetasMuestras.resx">
       <DependentUpon>ImpresionEtiquetasMuestras.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InformeRecepcionDrogaLAB.resx">
+    <EmbeddedResource Include="Maestros\Informe de Recepcion De Drogas de laboratorio\BuscadorOrdenCompraXProvee.resx">
+      <DependentUpon>BuscadorOrdenCompraXProvee.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\Informe de Recepcion De Drogas de laboratorio\BuscadorProveedor.resx">
+      <DependentUpon>BuscadorProveedor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\Informe de Recepcion De Drogas de laboratorio\InformeRecepcionDrogaLAB.resx">
       <DependentUpon>InformeRecepcionDrogaLAB.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="IngresoActualizacionHojaProduccionFarma.resx">
@@ -689,6 +722,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="IngresoFormulasEnsayo.resx">
       <DependentUpon>IngresoFormulasEnsayo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\Ingreso Frases H &amp; P\CargaDatosFrases.resx">
+      <DependentUpon>CargaDatosFrases.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\Ingreso Frases H &amp; P\IngresoFrasesH.resx">
+      <DependentUpon>IngresoFrasesH.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Maestros\Materias Primas\Planillas de Ensayos MP\ImpresionPlanillaEnsayosMP.resx">
       <DependentUpon>ImpresionPlanillaEnsayosMP.vb</DependentUpon>
@@ -796,13 +835,13 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteDatosAdicionalesPT.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\IngresoFrasesHP\ReporteListadosP.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>ReporteListadosP.vb</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\IngresoFrasesHP\ReporteListadoFrasesH.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteListadoFrasesH.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\IngresoFrasesHP\ReporteListadosP.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteListadosP.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Listado Ensayos PT\ReporteListadoEnsayosPT.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

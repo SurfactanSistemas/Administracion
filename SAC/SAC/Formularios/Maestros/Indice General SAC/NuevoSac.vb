@@ -15,6 +15,8 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
     Private WAbiertoPorCmd As Boolean = False
 
+    Private WPreguntarDespuesdeGrabar As Boolean = True
+
     Private WListTabPages As New List(Of TabPage)
 
     Private Const EXTENSIONES_PERMITIDAS = "*.bmp|*.png|*.jpg|*.jpeg|*.pdf|*.doc|*.docx|*.xls|*.xlsx|*.xlsm|*.txt"
@@ -1097,8 +1099,19 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
             End If
 
             If cmbEstado.SelectedIndex < 5 Then
-                MsgBox("Se detectó un ingreso de fecha de verificación, se cambiara el estado a Implementación Verificada")
-                cmbEstado.SelectedIndex = 5
+
+                Dim CantAcciones As Integer = 0
+                Dim CantFechas As Integer = 0
+                For i = 0 To 11
+                    If Trim(dgvVerificaciones.Rows(i).Cells("VerAcciones").Value) <> "" Then CantAcciones += 1
+                    If Trim(dgvVerificaciones.Rows(i).Cells("VerFechaI").Value.ToString().Replace("/", "")) <> "" Then CantFechas += 1
+                Next
+                If CantAcciones = CantFechas Then
+                    If MsgBox("Se detectó un ingreso de fecha de verificación, se cambiara el estado a Implementación Verificada", vbYesNo) = vbYes Then
+                        cmbEstado.SelectedIndex = 5
+                    End If
+                End If
+                
             End If
 
 
@@ -1674,21 +1687,28 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
                 Exit Sub
             End If
 
-            If ContinuarSalirMsgBox.Show("Actualización se ha realizado con Éxito" & vbCrLf _
+            If WPreguntarDespuesdeGrabar = True Then
+                If ContinuarSalirMsgBox.Show("Actualización se ha realizado con Éxito" & vbCrLf _
                                          & "Indique como quiere proseguir.", "Continuar editando SAC", "Volver a Indice") = DialogResult.OK Then
-                txtTipo.Focus()
-                Exit Sub
+                    txtTipo.Focus()
+                    Exit Sub
+                End If
+
+                Dim WOwner = CType(Owner, INuevoSAC)
+
+                If Not IsNothing(WOwner) Then
+                    WOwner._ProcesarNuevoSAC(txtTipo.Text, txtNumero.Text, txtAnio.Text)
+                    Close()
+                    Exit Sub
+                End If
+
+                btnLimpiar.PerformClick()
+
+
             End If
+            
 
-            Dim WOwner = CType(Owner, INuevoSAC)
-
-            If Not IsNothing(WOwner) Then
-                WOwner._ProcesarNuevoSAC(txtTipo.Text, txtNumero.Text, txtAnio.Text)
-                Close()
-                Exit Sub
-            End If
-
-            btnLimpiar.PerformClick()
+           
 
         Catch ex As System.Exception
             If Not IsNothing(trans) AndAlso Not IsNothing(trans.Connection) Then trans.Rollback()
@@ -1878,6 +1898,19 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
     Private Sub btnImprimir_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnImprimir.Click
         Try
+            Dim chekeoAbiertoCmd As Boolean = WAbiertoPorCmd
+            WPreguntarDespuesdeGrabar = False
+            If chekeoAbiertoCmd = True Then
+                WAbiertoPorCmd = False
+            End If
+            If WAbiertoPorCmd = False Then
+                If MsgBox("Si se ingresaron modificaciones no saldrán en la impresión hasta no haber grabado, ¿Desea grabar?", vbYesNo) = vbYes Then
+                    btnGrabar_Click(Nothing, Nothing)
+                End If
+            End If
+            WPreguntarDespuesdeGrabar = True
+            WAbiertoPorCmd = chekeoAbiertoCmd
+
             '
             ' Recargamos los datos de la SAC.
             '
@@ -2511,4 +2544,6 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
             End If
         End If
     End Sub
+
+
 End Class

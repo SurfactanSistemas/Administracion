@@ -22,8 +22,6 @@ Partial Class MovimientosVariosDeLaboratorio
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.txtNroMovimiento = New System.Windows.Forms.TextBox()
@@ -76,8 +74,6 @@ Partial Class MovimientosVariosDeLaboratorio
         Me.Cantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Movimiento = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Lote = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CodigoAyuda = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DescripcionAyuda = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         Me.pnlContra.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -318,7 +314,7 @@ Partial Class MovimientosVariosDeLaboratorio
         'Label12
         '
         Me.Label12.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label12.ForeColor = System.Drawing.SystemColors.Control
@@ -608,8 +604,10 @@ Partial Class MovimientosVariosDeLaboratorio
         Me.Controls.Add(Me.txtObservaciones)
         Me.Controls.Add(Me.cbxTipoMovimiento)
         Me.Controls.Add(Me.txtNroMovimiento)
+        Me.Location = New System.Drawing.Point(20, 20)
+        Me.MaximumSize = New System.Drawing.Size(855, 481)
+        Me.MinimumSize = New System.Drawing.Size(855, 481)
         Me.Name = "MovimientosVariosDeLaboratorio"
-        Me.Text = "MovimientosVariosDeLaboratorio"
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.pnlContra.ResumeLayout(False)

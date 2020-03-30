@@ -134,8 +134,7 @@ Public Class HojaIngresoFrases
     End Sub
 
     Private Function ContieneAlgoLaBase() As Integer
-        Dim cn As New SqlConnection(ConfigurationManager.ConnectionStrings("LOCAL").ToString())
-        cn.Open()
+  
         Dim SqlConsulta As String
         If (L = "H") Then
             SqlConsulta = "SELECT Codigo FROM FraseH WHERE Codigo = '" + txtCodigo.Text.ToString().Trim() + "' "
