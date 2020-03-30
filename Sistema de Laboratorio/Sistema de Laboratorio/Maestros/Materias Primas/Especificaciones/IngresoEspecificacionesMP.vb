@@ -3118,13 +3118,13 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
         Loop
     End Sub
 
-
-
     Private Sub btnNotas_Click(sender As Object, e As EventArgs) Handles btnNotas.Click
-        With New NotasCertificadosAnalisis(txtCodigo.Text, True)
-            .Show(Me)
-        End With
-    End Sub
+        If txtCodigo.Text.Replace(" ", "").Length = 10 Then
+            With New NotasCertificadosAnalisis(txtCodigo.Text, True)
+                .Show(Me)
+            End With
 
+        End If
+    End Sub
 
 End Class
