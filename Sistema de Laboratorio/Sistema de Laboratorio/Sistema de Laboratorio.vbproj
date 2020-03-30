@@ -505,6 +505,18 @@
       <DependentUpon>ReporteListadoEnsayosEnMP.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\Materias Primas\Especificaciones\ImpreEspecificacionesMP.vb">
+      <DependentUpon>ImpreEspecificacionesMP.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reportes\Materias Primas\Especificaciones\ImpreEspecificacionesMPIngles.vb">
+      <DependentUpon>ImpreEspecificacionesMPIngles.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Reportes\Materias Primas\Especificaciones\ReporteEspecificacionVersion.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -850,6 +862,14 @@
     <EmbeddedResource Include="Reportes\Materias Primas\Ensayos\ReporteListadoEnsayosEnMP.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteListadoEnsayosEnMP.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Materias Primas\Especificaciones\ImpreEspecificacionesMP.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ImpreEspecificacionesMP.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Materias Primas\Especificaciones\ImpreEspecificacionesMPIngles.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ImpreEspecificacionesMPIngles.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Materias Primas\Especificaciones\ReporteEspecificacionVersion.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
