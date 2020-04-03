@@ -26,9 +26,9 @@ Partial Class IngresoEspecificacionesMP
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -61,15 +61,6 @@ Partial Class IngresoEspecificacionesMP
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.dgvEspecif = New ConsultasVarias.DBDataGridView()
-        Me.TabPage3 = New System.Windows.Forms.TabPage()
-        Me.dgvEspecifIngles = New ConsultasVarias.DBDataGridView()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.NroRenglonIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.EnsayoIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.EspecificacionIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DescEnsayoIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FarmacopeaIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.UnidadEspecifIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.NroRenglon = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Ensayo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Especificacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -93,6 +84,15 @@ Partial Class IngresoEspecificacionesMP
         Me.Variable8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Variable9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Variable10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.dgvEspecifIngles = New ConsultasVarias.DBDataGridView()
+        Me.NroRenglonIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.EnsayoIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.EspecificacionIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DescEnsayoIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FarmacopeaIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.UnidadEspecifIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -482,6 +482,182 @@ Partial Class IngresoEspecificacionesMP
         Me.dgvEspecif.Size = New System.Drawing.Size(905, 251)
         Me.dgvEspecif.TabIndex = 0
         '
+        'NroRenglon
+        '
+        Me.NroRenglon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.NroRenglon.HeaderText = "Nro"
+        Me.NroRenglon.Name = "NroRenglon"
+        Me.NroRenglon.ReadOnly = True
+        Me.NroRenglon.Width = 49
+        '
+        'Ensayo
+        '
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Ensayo.DefaultCellStyle = DataGridViewCellStyle1
+        Me.Ensayo.HeaderText = "Ens."
+        Me.Ensayo.Name = "Ensayo"
+        Me.Ensayo.Width = 40
+        '
+        'Especificacion
+        '
+        Me.Especificacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Especificacion.HeaderText = "Descripción Ensayo"
+        Me.Especificacion.MinimumWidth = 250
+        Me.Especificacion.Name = "Especificacion"
+        Me.Especificacion.ReadOnly = True
+        Me.Especificacion.Width = 250
+        '
+        'DescEnsayo
+        '
+        Me.DescEnsayo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.DescEnsayo.HeaderText = "Descripción Parámetro"
+        Me.DescEnsayo.MinimumWidth = 150
+        Me.DescEnsayo.Name = "DescEnsayo"
+        Me.DescEnsayo.ReadOnly = True
+        '
+        'Farmacopea
+        '
+        Me.Farmacopea.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Farmacopea.HeaderText = "Farmacopea"
+        Me.Farmacopea.Name = "Farmacopea"
+        Me.Farmacopea.ReadOnly = True
+        Me.Farmacopea.Visible = False
+        '
+        'TipoEspecif
+        '
+        Me.TipoEspecif.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.TipoEspecif.HeaderText = "TipoEspecif"
+        Me.TipoEspecif.Name = "TipoEspecif"
+        Me.TipoEspecif.ReadOnly = True
+        Me.TipoEspecif.Visible = False
+        '
+        'DesdeEspecif
+        '
+        Me.DesdeEspecif.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.DesdeEspecif.HeaderText = "DesdeEspecif"
+        Me.DesdeEspecif.Name = "DesdeEspecif"
+        Me.DesdeEspecif.ReadOnly = True
+        Me.DesdeEspecif.Visible = False
+        '
+        'HastaEspecif
+        '
+        Me.HastaEspecif.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.HastaEspecif.HeaderText = "HastaEspecif"
+        Me.HastaEspecif.Name = "HastaEspecif"
+        Me.HastaEspecif.ReadOnly = True
+        Me.HastaEspecif.Visible = False
+        '
+        'UnidadEspecif
+        '
+        Me.UnidadEspecif.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.UnidadEspecif.HeaderText = "UnidadEspecif"
+        Me.UnidadEspecif.Name = "UnidadEspecif"
+        Me.UnidadEspecif.ReadOnly = True
+        Me.UnidadEspecif.Visible = False
+        '
+        'MenorIgualEspecif
+        '
+        Me.MenorIgualEspecif.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.MenorIgualEspecif.HeaderText = "MenorIgualEspecif"
+        Me.MenorIgualEspecif.Name = "MenorIgualEspecif"
+        Me.MenorIgualEspecif.ReadOnly = True
+        Me.MenorIgualEspecif.Visible = False
+        '
+        'InformaEspecif
+        '
+        Me.InformaEspecif.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.InformaEspecif.HeaderText = "InformaEspecif"
+        Me.InformaEspecif.Name = "InformaEspecif"
+        Me.InformaEspecif.ReadOnly = True
+        Me.InformaEspecif.Visible = False
+        '
+        'Parametro
+        '
+        Me.Parametro.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Parametro.HeaderText = "Parametro"
+        Me.Parametro.MinimumWidth = 150
+        Me.Parametro.Name = "Parametro"
+        Me.Parametro.ReadOnly = True
+        Me.Parametro.Width = 150
+        '
+        'FormulaEspecif
+        '
+        Me.FormulaEspecif.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.FormulaEspecif.HeaderText = "FormulaEspecif"
+        Me.FormulaEspecif.Name = "FormulaEspecif"
+        Me.FormulaEspecif.ReadOnly = True
+        Me.FormulaEspecif.Visible = False
+        '
+        'Variable1
+        '
+        Me.Variable1.HeaderText = "Variable1"
+        Me.Variable1.Name = "Variable1"
+        Me.Variable1.ReadOnly = True
+        Me.Variable1.Visible = False
+        '
+        'Variable2
+        '
+        Me.Variable2.HeaderText = "Variable2"
+        Me.Variable2.Name = "Variable2"
+        Me.Variable2.ReadOnly = True
+        Me.Variable2.Visible = False
+        '
+        'Variable3
+        '
+        Me.Variable3.HeaderText = "Variable3"
+        Me.Variable3.Name = "Variable3"
+        Me.Variable3.ReadOnly = True
+        Me.Variable3.Visible = False
+        '
+        'Variable4
+        '
+        Me.Variable4.HeaderText = "Variable4"
+        Me.Variable4.Name = "Variable4"
+        Me.Variable4.ReadOnly = True
+        Me.Variable4.Visible = False
+        '
+        'Variable5
+        '
+        Me.Variable5.HeaderText = "Variable5"
+        Me.Variable5.Name = "Variable5"
+        Me.Variable5.ReadOnly = True
+        Me.Variable5.Visible = False
+        '
+        'Variable6
+        '
+        Me.Variable6.HeaderText = "Variable6"
+        Me.Variable6.Name = "Variable6"
+        Me.Variable6.ReadOnly = True
+        Me.Variable6.Visible = False
+        '
+        'Variable7
+        '
+        Me.Variable7.HeaderText = "Variable7"
+        Me.Variable7.Name = "Variable7"
+        Me.Variable7.ReadOnly = True
+        Me.Variable7.Visible = False
+        '
+        'Variable8
+        '
+        Me.Variable8.HeaderText = "Variable8"
+        Me.Variable8.Name = "Variable8"
+        Me.Variable8.ReadOnly = True
+        Me.Variable8.Visible = False
+        '
+        'Variable9
+        '
+        Me.Variable9.HeaderText = "Variable9"
+        Me.Variable9.Name = "Variable9"
+        Me.Variable9.ReadOnly = True
+        Me.Variable9.Visible = False
+        '
+        'Variable10
+        '
+        Me.Variable10.HeaderText = "Variable10"
+        Me.Variable10.Name = "Variable10"
+        Me.Variable10.ReadOnly = True
+        Me.Variable10.Visible = False
+        '
         'TabPage3
         '
         Me.TabPage3.BackColor = System.Drawing.SystemColors.Control
@@ -570,190 +746,6 @@ Partial Class IngresoEspecificacionesMP
         Me.UnidadEspecifIngles.Name = "UnidadEspecifIngles"
         Me.UnidadEspecifIngles.ReadOnly = True
         Me.UnidadEspecifIngles.Width = 80
-        '
-        'NroRenglon
-        '
-        Me.NroRenglon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.NroRenglon.HeaderText = "Nro"
-        Me.NroRenglon.Name = "NroRenglon"
-        Me.NroRenglon.ReadOnly = True
-        Me.NroRenglon.Width = 49
-        '
-        'Ensayo
-        '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Ensayo.DefaultCellStyle = DataGridViewCellStyle1
-        Me.Ensayo.HeaderText = "Ens."
-        Me.Ensayo.Name = "Ensayo"
-        Me.Ensayo.Width = 40
-        '
-        'Especificacion
-        '
-        Me.Especificacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Especificacion.HeaderText = "Descripción Ensayo"
-        Me.Especificacion.MinimumWidth = 250
-        Me.Especificacion.Name = "Especificacion"
-        Me.Especificacion.ReadOnly = True
-        Me.Especificacion.Width = 250
-        '
-        'DescEnsayo
-        '
-        Me.DescEnsayo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.DescEnsayo.HeaderText = "Descripción Parámetro"
-        Me.DescEnsayo.MinimumWidth = 150
-        Me.DescEnsayo.Name = "DescEnsayo"
-        Me.DescEnsayo.ReadOnly = True
-        '
-        'Farmacopea
-        '
-        Me.Farmacopea.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Farmacopea.HeaderText = "Farmacopea"
-        Me.Farmacopea.Name = "Farmacopea"
-        Me.Farmacopea.ReadOnly = True
-        Me.Farmacopea.Visible = False
-        Me.Farmacopea.Width = 91
-        '
-        'TipoEspecif
-        '
-        Me.TipoEspecif.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.TipoEspecif.HeaderText = "TipoEspecif"
-        Me.TipoEspecif.Name = "TipoEspecif"
-        Me.TipoEspecif.ReadOnly = True
-        Me.TipoEspecif.Visible = False
-        Me.TipoEspecif.Width = 88
-        '
-        'DesdeEspecif
-        '
-        Me.DesdeEspecif.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.DesdeEspecif.HeaderText = "DesdeEspecif"
-        Me.DesdeEspecif.Name = "DesdeEspecif"
-        Me.DesdeEspecif.ReadOnly = True
-        Me.DesdeEspecif.Visible = False
-        Me.DesdeEspecif.Width = 98
-        '
-        'HastaEspecif
-        '
-        Me.HastaEspecif.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.HastaEspecif.HeaderText = "HastaEspecif"
-        Me.HastaEspecif.Name = "HastaEspecif"
-        Me.HastaEspecif.ReadOnly = True
-        Me.HastaEspecif.Visible = False
-        Me.HastaEspecif.Width = 95
-        '
-        'UnidadEspecif
-        '
-        Me.UnidadEspecif.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.UnidadEspecif.HeaderText = "UnidadEspecif"
-        Me.UnidadEspecif.Name = "UnidadEspecif"
-        Me.UnidadEspecif.ReadOnly = True
-        Me.UnidadEspecif.Visible = False
-        Me.UnidadEspecif.Width = 101
-        '
-        'MenorIgualEspecif
-        '
-        Me.MenorIgualEspecif.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.MenorIgualEspecif.HeaderText = "MenorIgualEspecif"
-        Me.MenorIgualEspecif.Name = "MenorIgualEspecif"
-        Me.MenorIgualEspecif.ReadOnly = True
-        Me.MenorIgualEspecif.Visible = False
-        Me.MenorIgualEspecif.Width = 120
-        '
-        'InformaEspecif
-        '
-        Me.InformaEspecif.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.InformaEspecif.HeaderText = "InformaEspecif"
-        Me.InformaEspecif.Name = "InformaEspecif"
-        Me.InformaEspecif.ReadOnly = True
-        Me.InformaEspecif.Visible = False
-        Me.InformaEspecif.Width = 102
-        '
-        'Parametro
-        '
-        Me.Parametro.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Parametro.HeaderText = "Parametro"
-        Me.Parametro.MinimumWidth = 150
-        Me.Parametro.Name = "Parametro"
-        Me.Parametro.ReadOnly = True
-        Me.Parametro.Width = 150
-        '
-        'FormulaEspecif
-        '
-        Me.FormulaEspecif.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.FormulaEspecif.HeaderText = "FormulaEspecif"
-        Me.FormulaEspecif.Name = "FormulaEspecif"
-        Me.FormulaEspecif.ReadOnly = True
-        Me.FormulaEspecif.Visible = False
-        Me.FormulaEspecif.Width = 104
-        '
-        'Variable1
-        '
-        Me.Variable1.HeaderText = "Variable1"
-        Me.Variable1.Name = "Variable1"
-        Me.Variable1.ReadOnly = True
-        Me.Variable1.Visible = False
-        '
-        'Variable2
-        '
-        Me.Variable2.HeaderText = "Variable2"
-        Me.Variable2.Name = "Variable2"
-        Me.Variable2.ReadOnly = True
-        Me.Variable2.Visible = False
-        '
-        'Variable3
-        '
-        Me.Variable3.HeaderText = "Variable3"
-        Me.Variable3.Name = "Variable3"
-        Me.Variable3.ReadOnly = True
-        Me.Variable3.Visible = False
-        '
-        'Variable4
-        '
-        Me.Variable4.HeaderText = "Variable4"
-        Me.Variable4.Name = "Variable4"
-        Me.Variable4.ReadOnly = True
-        Me.Variable4.Visible = False
-        '
-        'Variable5
-        '
-        Me.Variable5.HeaderText = "Variable5"
-        Me.Variable5.Name = "Variable5"
-        Me.Variable5.ReadOnly = True
-        Me.Variable5.Visible = False
-        '
-        'Variable6
-        '
-        Me.Variable6.HeaderText = "Variable6"
-        Me.Variable6.Name = "Variable6"
-        Me.Variable6.ReadOnly = True
-        Me.Variable6.Visible = False
-        '
-        'Variable7
-        '
-        Me.Variable7.HeaderText = "Variable7"
-        Me.Variable7.Name = "Variable7"
-        Me.Variable7.ReadOnly = True
-        Me.Variable7.Visible = False
-        '
-        'Variable8
-        '
-        Me.Variable8.HeaderText = "Variable8"
-        Me.Variable8.Name = "Variable8"
-        Me.Variable8.ReadOnly = True
-        Me.Variable8.Visible = False
-        '
-        'Variable9
-        '
-        Me.Variable9.HeaderText = "Variable9"
-        Me.Variable9.Name = "Variable9"
-        Me.Variable9.ReadOnly = True
-        Me.Variable9.Visible = False
-        '
-        'Variable10
-        '
-        Me.Variable10.HeaderText = "Variable10"
-        Me.Variable10.Name = "Variable10"
-        Me.Variable10.ReadOnly = True
-        Me.Variable10.Visible = False
         '
         'IngresoEspecificacionesMP
         '

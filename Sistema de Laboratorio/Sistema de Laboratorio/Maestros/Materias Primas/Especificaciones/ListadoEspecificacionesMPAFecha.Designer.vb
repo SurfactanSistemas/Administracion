@@ -26,6 +26,7 @@ Partial Class ListadoEspecificacionesMPAFecha
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.rbImpresora = New System.Windows.Forms.RadioButton()
         Me.rbPantalla = New System.Windows.Forms.RadioButton()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -38,7 +39,6 @@ Partial Class ListadoEspecificacionesMPAFecha
         Me.txtDesdeMes = New System.Windows.Forms.MaskedTextBox()
         Me.btnAceptar = New System.Windows.Forms.Button()
         Me.btnCerrar = New System.Windows.Forms.Button()
-        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
@@ -57,7 +57,7 @@ Partial Class ListadoEspecificacionesMPAFecha
         'Label2
         '
         Me.Label2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.Control
@@ -70,7 +70,7 @@ Partial Class ListadoEspecificacionesMPAFecha
         'Label1
         '
         Me.Label1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.Control
@@ -99,6 +99,13 @@ Partial Class ListadoEspecificacionesMPAFecha
         Me.GroupBox1.TabIndex = 3
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "PARÁMETROS"
+        '
+        'ProgressBar1
+        '
+        Me.ProgressBar1.Location = New System.Drawing.Point(34, 99)
+        Me.ProgressBar1.Name = "ProgressBar1"
+        Me.ProgressBar1.Size = New System.Drawing.Size(474, 16)
+        Me.ProgressBar1.TabIndex = 3
         '
         'rbImpresora
         '
@@ -137,9 +144,9 @@ Partial Class ListadoEspecificacionesMPAFecha
         Me.Label6.AutoSize = True
         Me.Label6.Location = New System.Drawing.Point(248, 77)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(110, 13)
+        Me.Label6.Size = New System.Drawing.Size(109, 13)
         Me.Label6.TabIndex = 1
-        Me.Label6.Text = "DESDE MAT. PRIMA"
+        Me.Label6.Text = "HASTA MAT. PRIMA"
         '
         'Label5
         '
@@ -220,13 +227,6 @@ Partial Class ListadoEspecificacionesMPAFecha
         Me.btnCerrar.TabIndex = 4
         Me.btnCerrar.Text = "CERRAR"
         Me.btnCerrar.UseVisualStyleBackColor = True
-        '
-        'ProgressBar1
-        '
-        Me.ProgressBar1.Location = New System.Drawing.Point(34, 99)
-        Me.ProgressBar1.Name = "ProgressBar1"
-        Me.ProgressBar1.Size = New System.Drawing.Size(474, 16)
-        Me.ProgressBar1.TabIndex = 3
         '
         'ListadoEspecificacionesMPAFecha
         '
