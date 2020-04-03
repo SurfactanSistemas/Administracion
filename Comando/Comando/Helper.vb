@@ -51,15 +51,7 @@ Module Helper
         Dim _empresa = empresas.Find(Function(e) UCase(e) = UCase(empresa))
 
         If Not IsNothing(_empresa) Then
-
-            TESTING = ConfigurationManager.AppSettings("TESTING")
-
-            If TESTING Then
-                Return ConfigurationManager.ConnectionStrings("LOCAL").ToString.Replace("#EMPRESA#", _empresa)
-            Else
-                Return ConfigurationManager.ConnectionStrings("SURFACTAN").ToString.Replace("#EMPRESA#", _empresa)
-            End If
-
+            Return ConfigurationManager.ConnectionStrings("SURFACTAN").ToString.Replace("#EMPRESA#", _empresa)
         Else
             Throw New Exception("No se pudo encontrar la empresa a la que se quiere conectar.")
         End If
