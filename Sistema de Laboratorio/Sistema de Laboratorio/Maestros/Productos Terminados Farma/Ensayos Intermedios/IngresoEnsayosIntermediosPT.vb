@@ -1734,7 +1734,6 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
 		With New VistaPrevia
 
-			'.Reporte = New imprecalidadresultado
 			If {0, 1}.Contains(wTipoSalida) Then
 				.Reporte = New imprecalidadresultadoReduccionAl80
 			ElseIf EsFarma() Then
@@ -1763,7 +1762,6 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 					.Mostrar()
 				Case 3
 					.Exportar(String.Format("{0}-{1}-{2}", txtCodigo.Text, txtPartida.Ceros(6), Date.Now.ToString("yyyyMMdd-HHmm")), ExportFormatType.PortableDocFormat, String.Format("{0}", _CarpetaEtapaIntermedia))
-					'.Exportar("Resultados de Calidad " & wPartida & " " & Date.Now.ToString("dd-MM-yyyy"), CrystalDecisions.Shared.ExportFormatType.WordForWindows)
 			End Select
 
 		End With
