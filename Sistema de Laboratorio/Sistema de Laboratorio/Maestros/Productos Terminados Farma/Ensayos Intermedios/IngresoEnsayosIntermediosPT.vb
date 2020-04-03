@@ -23,2080 +23,2033 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
     Private ReadOnly DESTINATARIOS_AVISO_ENSAYOS_INTERMEDIOS As String = ConfigurationManager.AppSettings("DESTINATARIOS_AVISO_ENSAYOS_INTERMEDIOS").ToString()
 
     Private Const RUTA_TEMP As String = "C:/tempEnsayosIntermedios/"
-    Private BaseEspecif As String = Operador.Base
-    Private TablaPrueTer As String = "PrueTerFarma"
-    Private TablaCargaV As String = "CargaV"
-    Private TablaCargaVIng As String = "CargaVIngles"
-
-    Private Sub btnCerrar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCerrar.Click
-        Close()
-    End Sub
-
-    Private Sub btnLimpiar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLimpiar.Click
-        For Each c As Control In {txtFechaRevalida, txtArchivo, txtCodigo, txtSubEtapa, txtConfecciono, txtEnvases, txtComponente, txtLotePartida, txtCantidadEtiquetas, txtDesvio, txtEtapa, txtFecha, txtLibros, txtOOS, txtPaginas, txtPartida, lblTipoProceso, txtFechaVto, lblDescEtapa, txtEspecifActual, txtEspecifOrig, txtRevalida, txtKilos}
-            c.Text = ""
-        Next
-        dgvEnsayos.Rows.Clear()
-
-        WNotas = New List(Of String)
-        For i = 0 To 8
-            WNotas.Add("")
-        Next
-
-        WEsPorDesvio = False
-        WMotivoDesvio = ""
-
-        txtSubEtapa.Visible = False
+	Private BaseEspecif As String = Base
+	Private TablaPrueTer As String = "PrueTerFarma"
+	Private TablaCargaV As String = "CargaV"
+	Private TablaCargaVIng As String = "CargaVIngles"
+
+	Private Sub btnCerrar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCerrar.Click
+		Close()
+	End Sub
+
+	Private Sub btnLimpiar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLimpiar.Click
+		For Each c As Control In {txtFechaRevalida, txtArchivo, txtCodigo, txtSubEtapa, txtConfecciono, txtEnvases, txtComponente, txtLotePartida, txtCantidadEtiquetas, txtDesvio, txtEtapa, txtFecha, txtLibros, txtOOS, txtPaginas, txtPartida, lblTipoProceso, txtFechaVto, lblDescEtapa, txtEspecifActual, txtEspecifOrig, txtRevalida, txtKilos}
+			c.Text = ""
+		Next
+		dgvEnsayos.Rows.Clear()
+
+		WNotas = New List(Of String)
+		For i = 0 To 8
+			WNotas.Add("")
+		Next
+
+		WEsPorDesvio = False
+		WMotivoDesvio = ""
+
+		txtSubEtapa.Visible = False
 
-        WMotivoClaveSeguridad = TiposSolicitudClaveSeguridad.General
-        WActualizacionBloqueada = False
-        WAutorizaActualizacionBloqueado = False
-        btnRevalida.Enabled = False
-        txtComponente.Enabled = False
-        txtLotePartida.Enabled = False
-        btnNotasCertAnalisis.Enabled = False
-        btnReimprimir.Visible = False
-        btnPoolEnsayos.Enabled = False
-        gbDatosAdicionales.Visible = False
+		WMotivoClaveSeguridad = TiposSolicitudClaveSeguridad.General
+		WActualizacionBloqueada = False
+		WAutorizaActualizacionBloqueado = False
+		btnRevalida.Enabled = False
+		txtComponente.Enabled = False
+		txtLotePartida.Enabled = False
+		btnNotasCertAnalisis.Enabled = False
+		btnReimprimir.Visible = False
+		btnPoolEnsayos.Enabled = False
+		gbDatosAdicionales.Visible = False
 
-        txtEtapa.ReadOnly = Not Operador.EsFarma
+		txtEtapa.ReadOnly = Not EsFarma()
 
-        txtPartida.Focus()
-    End Sub
+		txtPartida.Focus()
+	End Sub
 
-    Private Sub IngresoEnsayosIntermediosPT_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
-        If Not Operador.EsFarma Then
-            TablaPrueTer = "PrueTerNoFarma"
-            TablaCargaV = "CargaVNoFarma"
-            TablaCargaVIng = "CargaVNoFarmaIngles"
-            BaseEspecif = "Surfactan_II"
-        End If
-        dgvEnsayos.InhabilitarOrdenamientoColumnas()
-        btnLimpiar_Click(Nothing, Nothing)
-    End Sub
+	Private Sub IngresoEnsayosIntermediosPT_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
+		If Not EsFarma() Then
+			TablaPrueTer = "PrueTerNoFarma"
+			TablaCargaV = "CargaVNoFarma"
+			TablaCargaVIng = "CargaVNoFarmaIngles"
+			BaseEspecif = "Surfactan_II"
+		End If
+		dgvEnsayos.InhabilitarOrdenamientoColumnas()
+		btnLimpiar_Click(Nothing, Nothing)
+	End Sub
 
-    Private Sub IngresoEnsayosIntermediosPT_Shown(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Shown
-        txtPartida.Focus()
-    End Sub
+	Private Sub IngresoEnsayosIntermediosPT_Shown(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Shown
+		txtPartida.Focus()
+	End Sub
 
-    Private Sub txtPartida_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtPartida.KeyDown
+	Private Sub txtPartida_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtPartida.KeyDown
 
-        If e.KeyData = Keys.Enter Then
-            If Trim(txtPartida.Text) = "" Then : Exit Sub : End If
+		If e.KeyData = Keys.Enter Then
+			If Trim(txtPartida.Text) = "" Then : Exit Sub : End If
 
-            Dim WHoja As DataRow = GetSingle("SELECT Producto FROM Hoja WHERE Hoja = '" & txtPartida.Text & "' And Renglon in ('1', '01')")
+			Dim WHoja As DataRow = GetSingle("SELECT Producto FROM Hoja WHERE Hoja = '" & txtPartida.Text & "' And Renglon in ('1', '01')")
 
-            If IsNothing(WHoja) Then Exit Sub
+			If IsNothing(WHoja) Then Exit Sub
 
-            With WHoja
-                txtCodigo.Text = OrDefault(.Item("Producto"), "")
-            End With
+			With WHoja
+				txtCodigo.Text = OrDefault(.Item("Producto"), "")
+			End With
 
-            lblTipoProceso.Text = ""
+			lblTipoProceso.Text = ""
 
-            If Operador.EsFarma Then
-                Dim WCargaIII As DataRow = GetSingle("SELECT TipoProceso FROM CargaIII WHERE Terminado = '" & txtCodigo.Text & "' And Paso in ('1', '01')")
+			If EsFarma() Then
+				Dim WCargaIII As DataRow = GetSingle("SELECT TipoProceso FROM CargaIII WHERE Terminado = '" & txtCodigo.Text & "' And Paso in ('1', '01')")
 
-                If WCargaIII IsNot Nothing Then
-                    lblTipoProceso.Text = OrDefault(WCargaIII.Item("TipoProceso"), "").ToString.Trim.ToUpper
-                End If
+				If WCargaIII IsNot Nothing Then
+					lblTipoProceso.Text = OrDefault(WCargaIII.Item("TipoProceso"), "").ToString.Trim.ToUpper
+				End If
 
-                txtEtapa.Focus()
-            Else
-                txtEtapa.Text = "99"
-                txtEtapa_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
-            End If
+				txtEtapa.Focus()
+			Else
+				txtEtapa.Text = "99"
+				txtEtapa_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+			End If
 
-            '
-            ' En caso de que se encuentre actualizada la Hoja, sea monocomponente y tenga un único componente, traemos los datos del mismo.
-            '
+			'
+			' En caso de que se encuentre actualizada la Hoja, sea monocomponente y tenga un único componente, traemos los datos del mismo.
+			'
 
-            ' ¿Mono componente?
-            If ProductoTerminado.EsMono(txtCodigo.Text) Then
+			' ¿Mono componente?
+			If ProductoTerminado.EsMono(txtCodigo.Text) Then
 
-                Dim WComponentes As DataRow = GetSingle("SELECT Tipo, Articulo, Terminado, Lote1, Lote2, Lote3 FROM Hoja WHERE Hoja = '" & txtPartida.Text & "' AND Renglon = 1")
-                Dim WLote As String = ""
-                ' ¿Tiene mas de un componente?
-                For i = 1 To 3
-                    Dim x As String = Trim(OrDefault(WComponentes.Item("Lote" & i), ""))
+				Dim WComponentes As DataRow = GetSingle("SELECT Tipo, Articulo, Terminado, Lote1, Lote2, Lote3 FROM Hoja WHERE Hoja = '" & txtPartida.Text & "' AND Renglon = 1")
+				Dim WLote As String = ""
+				' ¿Tiene mas de un componente?
+				For i = 1 To 3
+					Dim x As String = Trim(OrDefault(WComponentes.Item("Lote" & i), ""))
 
-                    If Val(x) <> 0 Then
-                        If WLote = "" Then
-                            WLote = x
-                        Else
-                            ' Significa que tiene mas de un lote.
-                            Exit Sub
-                        End If
-                    End If
+					If Val(x) <> 0 Then
+						If WLote = "" Then
+							WLote = x
+						Else
+							' Significa que tiene mas de un lote.
+							Exit Sub
+						End If
+					End If
 
-                Next
+				Next
 
-                With WComponentes
-                    txtComponente.Text = IIf(UCase(OrDefault(.Item("Tipo"), "M") = "T"), .Item("Terminado"), .Item("Articulo"))
-                End With
+				With WComponentes
+					txtComponente.Text = IIf(UCase(OrDefault(.Item("Tipo"), "M") = "T"), .Item("Terminado"), .Item("Articulo"))
+				End With
 
-                txtLotePartida.Text = WLote
+				txtLotePartida.Text = WLote
 
-            End If
+			End If
 
-        ElseIf e.KeyData = Keys.Escape Then
-            txtPartida.Text = ""
-        End If
+		ElseIf e.KeyData = Keys.Escape Then
+			txtPartida.Text = ""
+		End If
 
-    End Sub
+	End Sub
 
-    Private Sub txtEtapa_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtEtapa.KeyDown, txtRevalida.KeyDown, txtKilos.KeyDown, txtEspecifOrig.KeyDown, txtEspecifActual.KeyDown, txtSubEtapa.KeyDown
+	Private Sub txtEtapa_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtEtapa.KeyDown, txtRevalida.KeyDown, txtKilos.KeyDown, txtEspecifOrig.KeyDown, txtEspecifActual.KeyDown, txtSubEtapa.KeyDown
 
-        If e.KeyData = Keys.Enter Then
-            If Val(txtEtapa.Text) = 0 Then : Exit Sub : End If
-            If Val(txtPartida.Text) = 0 Then : Exit Sub : End If
+		If e.KeyData = Keys.Enter Then
+			If Val(txtEtapa.Text) = 0 Then : Exit Sub : End If
+			If Val(txtPartida.Text) = 0 Then : Exit Sub : End If
 
-            WMotivoDesvio = ""
+			WMotivoDesvio = ""
 
-            btnGrabar.Text = "GRABAR"
+			btnGrabar.Text = "GRABAR"
 
-            _CrearCarpetaEtapaIntermedia()
+			_CrearCarpetaEtapaIntermedia()
 
-            Dim WEtapa, WPartida, WCodigo, WSubEtapa As String
+			Dim WEtapa, WPartida, WCodigo, WSubEtapa As String
 
-            WEtapa = txtEtapa.Text
-            WPartida = txtPartida.Text
-            WCodigo = txtCodigo.Text
-            WSubEtapa = txtSubEtapa.Text
+			WEtapa = txtEtapa.Text
+			WPartida = txtPartida.Text
+			WCodigo = txtCodigo.Text
+			WSubEtapa = txtSubEtapa.Text
 
-            btnLimpiar_Click(Nothing, Nothing)
+			btnLimpiar_Click(Nothing, Nothing)
 
-            txtEtapa.Text = WEtapa
-            txtCodigo.Text = WCodigo
-            txtPartida.Text = WPartida
-            txtSubEtapa.Text = WSubEtapa
+			txtEtapa.Text = WEtapa
+			txtCodigo.Text = WCodigo
+			txtPartida.Text = WPartida
+			txtSubEtapa.Text = WSubEtapa
 
+			Dim WExiste As DataRow
 
-            Dim WExiste As DataRow = Nothing
+			Dim WCargaVSubEtapas As DataRow = GetSingle("SELECT SubEtapas FROM " & TablaCargaV & " WHERE Terminado = '" & txtCodigo.Text & "' And Paso = '" & txtEtapa.Text & "' Order By Clave", BaseEspecif)
 
-            Dim WCargaVSubEtapas As DataRow = GetSingle("SELECT SubEtapas FROM " & TablaCargaV & " WHERE Terminado = '" & txtCodigo.Text & "' And Paso = '" & txtEtapa.Text & "' Order By Clave", BaseEspecif)
+			Dim WSubEtapas As Boolean = False
 
-            Dim WSubEtapas As Boolean = False
+			If WCargaVSubEtapas IsNot Nothing Then WSubEtapas = Val(OrDefault(WCargaVSubEtapas.Item("SubEtapas"), "")) = 1
 
-            If WCargaVSubEtapas IsNot Nothing Then WSubEtapas = Val(OrDefault(WCargaVSubEtapas.Item("SubEtapas"), "")) = 1
+			txtSubEtapa.Visible = WSubEtapas
 
-            txtSubEtapa.Visible = WSubEtapas
+			If Val(txtEtapa.Text) = 99 Then
+				txtSubEtapa.Visible = False
+				WExiste = GetSingle("SELECT TOP 1 Clave FROM " & TablaPrueTer & " WHERE Partida = '" + txtPartida.Text + "'")
+			Else
+				'
+				' En ésta parte únicamente entrarían los productos de Planta III.
+				'
+				WExiste = GetSingle("SELECT TOP 1 Clave FROM PrueterfarmaIntermedio WHERE Producto = '" + txtCodigo.Text + "' And Paso = '" & txtEtapa.Text & "' And SubEtapa = '" & Val(txtSubEtapa.Text) & "'")
 
-            If Val(txtEtapa.Text) = 99 Then
-                txtSubEtapa.Visible = False
-                WExiste = GetSingle("SELECT TOP 1 Clave FROM " & TablaPrueTer & " WHERE Partida = '" + txtPartida.Text + "'")
-            Else
-                '
-                ' En ésta parte únicamente entrarían los productos de Planta III.
-                '
-                WExiste = GetSingle("SELECT TOP 1 Clave FROM PrueterfarmaIntermedio WHERE Producto = '" + txtCodigo.Text + "' And Paso = '" & txtEtapa.Text & "' And SubEtapa = '" & Val(txtSubEtapa.Text) & "'")
+			End If
 
-            End If
+			lblTipoProceso.Text = ""
 
-            lblTipoProceso.Text = ""
+			If EsFarma() Then
+				Dim WCargaIII As DataRow = GetSingle("SELECT TipoProceso FROM CargaIII WHERE Terminado = '" & txtCodigo.Text & "' And Paso in ('1', '01')")
 
-            If Operador.EsFarma Then
-                Dim WCargaIII As DataRow = GetSingle("SELECT TipoProceso FROM CargaIII WHERE Terminado = '" & txtCodigo.Text & "' And Paso in ('1', '01')")
+				If WCargaIII IsNot Nothing Then
+					lblTipoProceso.Text = OrDefault(WCargaIII.Item("TipoProceso"), "").ToString.Trim.ToUpper
+				End If
 
-                If WCargaIII IsNot Nothing Then
-                    lblTipoProceso.Text = OrDefault(WCargaIII.Item("TipoProceso"), "").ToString.Trim.ToUpper
-                End If
+			End If
 
-            End If
+			If WExiste IsNot Nothing Then
 
-            If WExiste IsNot Nothing Then
+				btnReimprimir.Visible = True
 
-                btnReimprimir.Visible = True
+				Dim WPrueterFarma As DataTable
 
-                Dim WPrueterFarma As DataTable = Nothing
+				If Val(txtEtapa.Text) = 99 Then
+					WPrueterFarma = GetAll("SELECT * FROM " & TablaPrueTer & " WHERE Partida = '" & txtPartida.Text & "' And Producto = '" & txtCodigo.Text & "' Order By Clave")
+				Else
+					'
+					' En ésta parte únicamente entrarían los productos de Planta III.
+					'
+					WPrueterFarma = GetAll("SELECT * FROM PrueterFarmaIntermedio WHERE Partida = '" & txtPartida.Text & "' And Producto = '" & txtCodigo.Text & "' And Paso = '" & txtEtapa.Text & "' And SubEtapa = '" & Val(txtSubEtapa.Text) & "' Order By Clave")
+				End If
 
-                If Val(txtEtapa.Text) = 99 Then
-                    WPrueterFarma = GetAll("SELECT * FROM " & TablaPrueTer & " WHERE Partida = '" & txtPartida.Text & "' And Producto = '" & txtCodigo.Text & "' Order By Clave")
-                Else
-                    '
-                    ' En ésta parte únicamente entrarían los productos de Planta III.
-                    '
-                    WPrueterFarma = GetAll("SELECT * FROM PrueterFarmaIntermedio WHERE Partida = '" & txtPartida.Text & "' And Producto = '" & txtCodigo.Text & "' And Paso = '" & txtEtapa.Text & "' And SubEtapa = '" & Val(txtSubEtapa.Text) & "' Order By Clave")
-                End If
+				dgvEnsayos.Rows.Clear()
 
-                dgvEnsayos.Rows.Clear()
+				If WPrueterFarma.Rows.Count = 0 Then Exit Sub
 
-                If WPrueterFarma.Rows.Count = 0 Then Exit Sub
+				Dim WFecha = ""
+				Dim WConfecciono = ""
+				Dim WLibros = ""
+				Dim WPaginas = ""
+				Dim WNroOOS = ""
+				Dim WNroDesvio = ""
+				Dim WArchivo = ""
+				Dim WEnvases = ""
+				Dim WComponente = ""
+				Dim WLotePartida = ""
+				Dim WCantEtiq = 0
 
-                Dim WFecha = ""
-                Dim WConfecciono = ""
-                Dim WLibros = ""
-                Dim WPaginas = ""
-                Dim WNroOOS = ""
-                Dim WNroDesvio = ""
-                Dim WArchivo = ""
-                Dim WEnvases = ""
-                Dim WComponente = ""
-                Dim WLotePartida = ""
-                Dim WCantEtiq = 0
+				For Each row As DataRow In WPrueterFarma.Rows
+					With row
+						Dim WEns = OrDefault(.Item("Codigo"), "")
+						Dim WEspecificacion = OrDefault(.Item("Valor"), "")
 
-                For Each row As DataRow In WPrueterFarma.Rows
-                    With row
-                        Dim WEns = OrDefault(.Item("Codigo"), "")
-                        Dim WEspecificacion = OrDefault(.Item("Valor"), "")
+						Dim WResultado As String
+						Dim WFarmacopea = OrDefault(.Item("Farmacopea"), "")
+						Dim WTipoEspecif = OrDefault(.Item("TipoEspecif"), "")
+						Dim WDesdeEspecif = OrDefault(.Item("DesdeEspecif"), "")
+						Dim WHastaEspecif = OrDefault(.Item("HastaEspecif"), "")
+						Dim WUnidadEspecif = OrDefault(.Item("UnidadEspecif"), "")
+						Dim WMenorIgualEspecif = OrDefault(.Item("MenorIgualEspecif"), "")
+						Dim WInformaEspecif = OrDefault(.Item("InformaEspecif"), "")
+						Dim WFormulaEspecif = OrDefault(.Item("FormulaEspecif"), "")
+						Dim WImpreResultado = _GenerarImpreParametro(WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif)
 
-                        Dim WResultado = OrDefault(.Item("Resultado"), "")
-                        Dim WFarmacopea = OrDefault(.Item("Farmacopea"), "")
-                        Dim WTipoEspecif = OrDefault(.Item("TipoEspecif"), "")
-                        Dim WDesdeEspecif = OrDefault(.Item("DesdeEspecif"), "")
-                        Dim WHastaEspecif = OrDefault(.Item("HastaEspecif"), "")
-                        Dim WUnidadEspecif = OrDefault(.Item("UnidadEspecif"), "")
-                        Dim WMenorIgualEspecif = OrDefault(.Item("MenorIgualEspecif"), "")
-                        Dim WInformaEspecif = OrDefault(.Item("InformaEspecif"), "")
-                        Dim WFormulaEspecif = OrDefault(.Item("FormulaEspecif"), "")
-                        Dim WImpreResultado = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif)
+						Dim WOperador = OrDefault(.Item("OperadorLabora"), "")
+						Dim WValor = Trim(OrDefault(.Item("ValorReal"), ""))
 
+						WFecha = OrDefault(.Item("Fecha"), "")
+						WConfecciono = OrDefault(.Item("Confecciono"), "")
+						WLibros = OrDefault(.Item("Libros"), "")
+						WPaginas = OrDefault(.Item("Paginas"), "")
+						WNroOOS = OrDefault(.Item("NroOOS"), "")
+						WNroDesvio = OrDefault(.Item("NroDesvio"), "")
+						WArchivo = OrDefault(.Item("Archiva"), "")
+						WMotivoDesvio = OrDefault(.Item("MotivoDesvio"), "")
+						WEnvases = OrDefault(.Item("Envases"), "")
+						WComponente = OrDefault(.Item("Componente"), "")
+						WLotePartida = OrDefault(.Item("LotePartida"), "")
+						WCantEtiq = OrDefault(.Item("CantiEti"), 0)
 
-                        Dim WOperador = OrDefault(.Item("OperadorLabora"), "")
-                        Dim WValor = Trim(OrDefault(.Item("ValorReal"), ""))
+						Dim WFormulas(10, 2) As String
 
+						For i = 1 To 10
+							WFormulas(i, 1) = Trim(OrDefault(.Item("Variable" & i), ""))
+							WFormulas(i, 2) = Trim(OrDefault(.Item("VariableValor" & i), "0"))
+						Next
 
-                        WFecha = OrDefault(.Item("Fecha"), "")
-                        WConfecciono = OrDefault(.Item("Confecciono"), "")
-                        WLibros = OrDefault(.Item("Libros"), "")
-                        WPaginas = OrDefault(.Item("Paginas"), "")
-                        WNroOOS = OrDefault(.Item("NroOOS"), "")
-                        WNroDesvio = OrDefault(.Item("NroDesvio"), "")
-                        WArchivo = OrDefault(.Item("Archiva"), "")
-                        WMotivoDesvio = OrDefault(.Item("MotivoDesvio"), "")
-                        WEnvases = OrDefault(.Item("Envases"), "")
-                        WComponente = OrDefault(.Item("Componente"), "")
-                        WLotePartida = OrDefault(.Item("LotePartida"), "")
-                        WCantEtiq = OrDefault(.Item("CantiEti"), 0)
+						If Val(WTipoEspecif) = 0 And WImpreResultado <> "" Then WImpreResultado &= " (c)"
 
-                        Dim WFormulas(10, 2) As String
+						Dim WDescripcion As String
 
-                        For i = 1 To 10
-                            WFormulas(i, 1) = Trim(OrDefault(.Item("Variable" & i), ""))
-                            WFormulas(i, 2) = Trim(OrDefault(.Item("VariableValor" & i), "0"))
-                        Next
+						WResultado = _GenerarImpreResultado(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WValor)
 
-                        If Val(WTipoEspecif) = 0 And WImpreResultado <> "" Then WImpreResultado &= " (c)"
+						Dim r = dgvEnsayos.Rows.Add
 
-                        Dim WDescripcion = "" 'OrDefault(.Item("Ensayo"), 0)
+						With dgvEnsayos.Rows(r)
+							.Cells("Ensayo").Value = WEns
+							.Cells("Valor").Value = Trim(UCase(WValor))
+							.Cells("ValorBandera").Value = Trim(UCase(WValor))
+							.Cells("Resultado").Value = Trim(WResultado)
+							.Cells("Especificacion").Value = Trim(WEspecificacion)
+							.Cells("Descripcion").Value = Trim(WDescripcion)
+							.Cells("Farmacopea").Value = Trim(WFarmacopea)
+							.Cells("TipoEspecif").Value = WTipoEspecif
+							.Cells("DesdeEspecif").Value = WDesdeEspecif
+							.Cells("HastaEspecif").Value = WHastaEspecif
+							.Cells("UnidadEspecif").Value = WUnidadEspecif
+							.Cells("MenorIgualEspecif").Value = WMenorIgualEspecif
+							.Cells("InformaEspecif").Value = WInformaEspecif
+							.Cells("Parametro").Value = Trim(WImpreResultado)
+							.Cells("FormulaEspecif").Value = Trim(WFormulaEspecif)
 
-                        WResultado = _GenerarImpreResultado(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WValor)
+							.Cells("OperadorLabora").Value = Trim(WOperador)
 
-                        Dim r = dgvEnsayos.Rows.Add
+							Dim rowOP As DataRow = GetSingle("SELECT Iniciales FROM Operador WHERE Operador = '" & WOperador & "'", "SurfactanSa")
+							If rowOP IsNot Nothing Then
+								.Cells("OperadorIniciales").Value = OrDefault(rowOP.Item("Iniciales"), "")
+							Else
+								.Cells("OperadorIniciales").Value = ""
+							End If
 
-                        With dgvEnsayos.Rows(r)
-                            .Cells("Ensayo").Value = WEns
-                            .Cells("Valor").Value = Trim(UCase(WValor))
-                            .Cells("ValorBandera").Value = Trim(UCase(WValor))
-                            .Cells("Resultado").Value = Trim(WResultado)
-                            .Cells("Especificacion").Value = Trim(WEspecificacion)
-                            .Cells("Descripcion").Value = Trim(WDescripcion)
-                            .Cells("Farmacopea").Value = Trim(WFarmacopea)
-                            .Cells("TipoEspecif").Value = WTipoEspecif
-                            .Cells("DesdeEspecif").Value = WDesdeEspecif
-                            .Cells("HastaEspecif").Value = WHastaEspecif
-                            .Cells("UnidadEspecif").Value = WUnidadEspecif
-                            .Cells("MenorIgualEspecif").Value = WMenorIgualEspecif
-                            .Cells("InformaEspecif").Value = WInformaEspecif
-                            .Cells("Parametro").Value = Trim(WImpreResultado)
-                            .Cells("FormulaEspecif").Value = Trim(WFormulaEspecif)
+							For i = 1 To 10
+								.Cells("Variable" & i).Value = Trim(WFormulas(i, 1))
+								.Cells("VariableValor" & i).Value = WFormulas(i, 2)
+							Next
 
-                            .Cells("OperadorLabora").Value = Trim(WOperador)
+							.Cells("Decimales").Value = ""
 
-                            Dim rowOP As DataRow = GetSingle("SELECT Iniciales FROM Operador WHERE Operador = '" & WOperador & "'", "SurfactanSa")
-                            If rowOP IsNot Nothing Then
-                                .Cells("OperadorIniciales").Value = OrDefault(rowOP.Item("Iniciales"), "")
-                            Else
-                                .Cells("OperadorIniciales").Value = ""
-                            End If
+							Dim WDecimales As String = .Cells("Decimales").Value
 
+							If WDecimales.Trim = "" Then
+								WDecimales = _CalcularCantidadDecimales(WDesdeEspecif)
+								If Val(WDecimales) < _CalcularCantidadDecimales(WHastaEspecif) Then WDecimales = _CalcularCantidadDecimales(WHastaEspecif)
+							End If
 
+							.Cells("Resultado").Value = WResultado
+							.Cells("Valor").Value = WValor
 
+							If Double.TryParse(WValor, Nothing) Then
+								.Cells("Valor").Value = formatonumerico(WValor, WDecimales)
+							End If
 
-                            For i = 1 To 10
-                                .Cells("Variable" & i).Value = Trim(WFormulas(i, 1))
-                                .Cells("VariableValor" & i).Value = WFormulas(i, 2)
-                            Next
+							.Cells("Decimales").Value = WDecimales
 
-                            .Cells("Decimales").Value = ""
+						End With
 
-                            Dim WDecimales As String = .Cells("Decimales").Value
+					End With
 
-                            If WDecimales.Trim = "" Then
-                                WDecimales = _CalcularCantidadDecimales(WDesdeEspecif)
-                                If Val(WDecimales) < _CalcularCantidadDecimales(WHastaEspecif) Then WDecimales = _CalcularCantidadDecimales(WHastaEspecif)
-                            End If
+				Next
 
-                            .Cells("Resultado").Value = WResultado
-                            .Cells("Valor").Value = WValor
+				txtFecha.Text = Trim(WFecha)
+				txtConfecciono.Text = Trim(WConfecciono).ToUpper
+				txtLibros.Text = Trim(WLibros)
+				txtPaginas.Text = Trim(WPaginas)
+				txtOOS.Text = Trim(WNroOOS)
+				txtDesvio.Text = Trim(WNroDesvio)
+				txtArchivo.Text = Trim(WArchivo)
+				txtComponente.Text = Trim(WComponente)
+				txtEnvases.Text = Trim(WEnvases)
+				txtLotePartida.Text = Trim(WLotePartida)
+				If WCantEtiq > 0 Then txtCantidadEtiquetas.Text = Trim(WCantEtiq)
 
-                            If Double.TryParse(WValor, Nothing) Then
-                                .Cells("Valor").Value = formatonumerico(WValor, WDecimales)
-                            End If
+				If EsFarma() Then
+					Dim _Notas As DataRow = GetSingle("SELECT Nota1, Nota2, Nota3, Nota4, Nota5, Nota6, Nota7, Nota8, Nota9 FROM PrueterFarmaIntermedio WHERE Partida = '" & txtPartida.Text & "' And Producto = '" & txtCodigo.Text & "' And Paso = '" & txtEtapa.Text & "'")
 
-                            .Cells("Decimales").Value = WDecimales
+					WNotas.Clear()
 
-                        End With
+					If _Notas IsNot Nothing Then
 
-                    End With
+						For i = 0 To 8
 
-                Next
+							Dim WContenido As String = OrDefault(_Notas.Item("Nota" & i + 1), "")
 
-                txtFecha.Text = Trim(WFecha)
-                txtConfecciono.Text = Trim(WConfecciono).ToUpper
-                txtLibros.Text = Trim(WLibros)
-                txtPaginas.Text = Trim(WPaginas)
-                txtOOS.Text = Trim(WNroOOS)
-                txtDesvio.Text = Trim(WNroDesvio)
-                txtArchivo.Text = Trim(WArchivo)
-                txtComponente.Text = Trim(WComponente)
-                txtEnvases.Text = Trim(WEnvases)
-                txtLotePartida.Text = Trim(WLotePartida)
-                If WCantEtiq > 0 Then txtCantidadEtiquetas.Text = Trim(WCantEtiq)
+							WNotas.Add(Trim(WContenido))
 
-                If Operador.EsFarma Then
-                    Dim _Notas As DataRow = GetSingle("SELECT Nota1, Nota2, Nota3, Nota4, Nota5, Nota6, Nota7, Nota8, Nota9 FROM PrueterFarmaIntermedio WHERE Partida = '" & txtPartida.Text & "' And Producto = '" & txtCodigo.Text & "' And Paso = '" & txtEtapa.Text & "'")
+						Next
 
-                    WNotas.Clear()
+					End If
 
-                    If _Notas IsNot Nothing Then
+				End If
 
-                        For i = 0 To 8
+				btnGrabar.Text = "ACTUALIZAR"
 
-                            Dim WContenido As String = OrDefault(_Notas.Item("Nota" & i + 1), "")
+			Else
 
-                            WNotas.Add(Trim(WContenido))
+				Dim WCargaV As DataTable = GetAll("SELECT * FROM " & TablaCargaV & " WHERE Terminado = '" & txtCodigo.Text & "' And Paso = '" & txtEtapa.Text & "' Order By Clave", BaseEspecif)
 
-                        Next
+				If WCargaV.Rows.Count = 0 Then Exit Sub
 
-                    End If
+				dgvEnsayos.Rows.Clear()
 
-                End If
+				For Each row As DataRow In WCargaV.Rows
+					With row
+						Dim WEns = OrDefault(.Item("Ensayo"), 0)
+						Dim WEspecificacion = OrDefault(.Item("Valor"), "")
+						Dim WFarmacopea = OrDefault(.Item("Farmacopea"), "")
+						Dim WTipoEspecif = OrDefault(.Item("TipoEspecif"), "")
+						Dim WDesdeEspecif = OrDefault(.Item("DesdeEspecif"), "")
+						Dim WHastaEspecif = OrDefault(.Item("HastaEspecif"), "")
+						Dim WUnidadEspecif = OrDefault(.Item("UnidadEspecif"), "")
+						Dim WMenorIgualEspecif = OrDefault(.Item("MenorIgualEspecif"), "")
+						Dim WInformaEspecif = OrDefault(.Item("InformaEspecif"), "")
+						Dim WFormula = Trim(OrDefault(.Item("FormulaEspecif"), ""))
+						Dim WImpreParametro = _GenerarImpreParametro(WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif)
 
-                btnGrabar.Text = "ACTUALIZAR"
+						Dim WFormulas(10) As String
 
-            Else
+						For i = 1 To 10
+							WFormulas(i) = Trim(OrDefault(.Item("Variable" & i), ""))
+						Next
 
-                Dim WCargaV As DataTable = GetAll("SELECT * FROM " & TablaCargaV & " WHERE Terminado = '" & txtCodigo.Text & "' And Paso = '" & txtEtapa.Text & "' Order By Clave", BaseEspecif)
+						If Val(WTipoEspecif) = 0 And WImpreParametro <> "" Then WImpreParametro &= " (c)"
 
-                If WCargaV.Rows.Count = 0 Then Exit Sub
+						Dim WDescripcion = "" 'OrDefault(.Item("Ensayo"), 0)
 
-                dgvEnsayos.Rows.Clear()
+						Dim r = dgvEnsayos.Rows.Add
 
-                For Each row As DataRow In WCargaV.Rows
-                    With row
-                        Dim WEns = OrDefault(.Item("Ensayo"), 0)
-                        Dim WEspecificacion = OrDefault(.Item("Valor"), "")
-                        Dim WFarmacopea = OrDefault(.Item("Farmacopea"), "")
-                        Dim WTipoEspecif = OrDefault(.Item("TipoEspecif"), "")
-                        Dim WDesdeEspecif = OrDefault(.Item("DesdeEspecif"), "")
-                        Dim WHastaEspecif = OrDefault(.Item("HastaEspecif"), "")
-                        Dim WUnidadEspecif = OrDefault(.Item("UnidadEspecif"), "")
-                        Dim WMenorIgualEspecif = OrDefault(.Item("MenorIgualEspecif"), "")
-                        Dim WInformaEspecif = OrDefault(.Item("InformaEspecif"), "")
-                        Dim WFormula = Trim(OrDefault(.Item("FormulaEspecif"), ""))
-                        Dim WImpreParametro = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif)
+						With dgvEnsayos.Rows(r)
+							.Cells("Ensayo").Value = WEns
+							.Cells("Especificacion").Value = Trim(WEspecificacion)
+							.Cells("Descripcion").Value = Trim(WDescripcion)
+							.Cells("Farmacopea").Value = Trim(WFarmacopea)
+							.Cells("TipoEspecif").Value = WTipoEspecif
+							.Cells("DesdeEspecif").Value = WDesdeEspecif
+							.Cells("HastaEspecif").Value = WHastaEspecif
+							.Cells("UnidadEspecif").Value = WUnidadEspecif
+							.Cells("MenorIgualEspecif").Value = WMenorIgualEspecif
+							.Cells("InformaEspecif").Value = WInformaEspecif
+							.Cells("Parametro").Value = Trim(WImpreParametro)
+							.Cells("FormulaEspecif").Value = Trim(WFormula)
 
-                        Dim WFormulas(10) As String
+							For i = 1 To 10
+								.Cells("Variable" & i).Value = Trim(WFormulas(i))
+								.Cells("VariableValor" & i).Value = "0"
+							Next
 
-                        For i = 1 To 10
-                            WFormulas(i) = Trim(OrDefault(.Item("Variable" & i), ""))
-                        Next
+						End With
 
-                        If Val(WTipoEspecif) = 0 And WImpreParametro <> "" Then WImpreParametro &= " (c)"
+					End With
 
-                        Dim WDescripcion = "" 'OrDefault(.Item("Ensayo"), 0)
+				Next
 
-                        Dim r = dgvEnsayos.Rows.Add
+				Dim WRenglon = 0
 
-                        With dgvEnsayos.Rows(r)
-                            .Cells("Ensayo").Value = WEns
-                            .Cells("Especificacion").Value = Trim(WEspecificacion)
-                            .Cells("Descripcion").Value = Trim(WDescripcion)
-                            .Cells("Farmacopea").Value = Trim(WFarmacopea)
-                            .Cells("TipoEspecif").Value = WTipoEspecif
-                            .Cells("DesdeEspecif").Value = WDesdeEspecif
-                            .Cells("HastaEspecif").Value = WHastaEspecif
-                            .Cells("UnidadEspecif").Value = WUnidadEspecif
-                            .Cells("MenorIgualEspecif").Value = WMenorIgualEspecif
-                            .Cells("InformaEspecif").Value = WInformaEspecif
-                            .Cells("Parametro").Value = Trim(WImpreParametro)
-                            .Cells("FormulaEspecif").Value = Trim(WFormula)
+				'
+				' Cargamos las especificaciones en Inglés.
+				'
+				Dim WCargaVIngles As DataTable = GetAll("SELECT Valor, UnidadEspecif FROM " & TablaCargaVIng & " WHERE Terminado = '" & txtCodigo.Text & "' And Paso = '" & txtEtapa.Text & "' Order By Clave", BaseEspecif)
 
-                            For i = 1 To 10
-                                .Cells("Variable" & i).Value = Trim(WFormulas(i))
-                                .Cells("VariableValor" & i).Value = "0"
-                            Next
+				For Each row As DataRow In WCargaVIngles.Rows
 
-                        End With
+					With row
 
-                    End With
+						Dim WUnidadEspecif = Trim(OrDefault(.Item("UnidadEspecif"), ""))
+						Dim WEspecificacion = Trim(OrDefault(.Item("Valor"), ""))
 
-                Next
+						If WRenglon > dgvEnsayos.Rows.Count - 1 Then WRenglon = dgvEnsayos.Rows.Add
 
-                Dim WRenglon = 0
+						With dgvEnsayos.Rows(WRenglon)
 
-                '
-                ' Cargamos las especificaciones en Inglés.
-                '
-                Dim WCargaVIngles As DataTable = GetAll("SELECT Valor, UnidadEspecif FROM " & TablaCargaVIng & " WHERE Terminado = '" & txtCodigo.Text & "' And Paso = '" & txtEtapa.Text & "' Order By Clave", BaseEspecif)
+							If WUnidadEspecif = "" Then
+								.Cells("EspecificacionIngles").Value = WEspecificacion
+							Else
+								.Cells("EspecificacionIngles").Value = String.Format("{0} ({1})", WEspecificacion, WUnidadEspecif)
+							End If
 
-                For Each row As DataRow In WCargaVIngles.Rows
+							.Cells("UnidadEspecif").Value = WUnidadEspecif
+						End With
 
-                    With row
+						WRenglon += 1
 
-                        Dim WUnidadEspecif = Trim(OrDefault(.Item("UnidadEspecif"), ""))
-                        Dim WEspecificacion = Trim(OrDefault(.Item("Valor"), ""))
+					End With
 
-                        If WRenglon > dgvEnsayos.Rows.Count - 1 Then WRenglon = dgvEnsayos.Rows.Add
+				Next
 
-                        With dgvEnsayos.Rows(WRenglon)
+				txtFecha.Text = Date.Now.ToString("dd/MM/yyyy")
 
-                            If WUnidadEspecif = "" Then
-                                .Cells("EspecificacionIngles").Value = WEspecificacion
-                            Else
-                                .Cells("EspecificacionIngles").Value = String.Format("{0} ({1})", WEspecificacion, WUnidadEspecif)
-                            End If
+			End If
 
-                            .Cells("UnidadEspecif").Value = WUnidadEspecif
-                        End With
+			If EsFarma() Then
 
-                        WRenglon += 1
+				Dim WCargaIII As DataRow = GetSingle("SELECT DesEtapa FROM CargaIII WHERE Terminado = '" & txtCodigo.Text & "' And Paso = " & txtEtapa.Text & " And Renglon = 1")
 
-                    End With
+				If WCargaIII IsNot Nothing Then
+					lblDescEtapa.Text = OrDefault(WCargaIII.Item("DesEtapa"), "").ToString.Trim.ToUpper
+				End If
 
-                Next
+				If Val(txtEtapa.Text) = 99 Then
+					Dim WDatosAdicionales As DataRow = GetSingle("select h.Revalida, h.VersionIII VersionI, h.MesesRevalida, h.FechaRevalida, h.Real, t.VersionII from hoja h inner join Terminado t on t.Codigo = h.Producto where h.hoja = '" & txtPartida.Text & "'")
+					If WDatosAdicionales IsNot Nothing Then
+						With WDatosAdicionales
+							txtRevalida.Text = OrDefault(.Item("Revalida"), "")
+							txtEspecifOrig.Text = OrDefault(.Item("VersionI"), "")
+							txtMeses.Text = OrDefault(.Item("MesesRevalida"), "")
+							txtFechaRevalida.Text = OrDefault(.Item("FechaRevalida"), Space(8))
+							txtEspecifActual.Text = OrDefault(.Item("VersionII"), "")
+							txtKilos.Text = formatonumerico(OrDefault(.Item("Real"), ""))
+						End With
+					End If
+				End If
 
-                txtFecha.Text = Date.Now.ToString("dd/MM/yyyy")
+				txtFechaVto.Text = ProductoTerminado.CalcularFechaElabVto(txtCodigo.Text, txtPartida.Text, True)(1)
 
-            End If
+				'
+				' Cargamos en caso de que no tenga, el componente si es monoproducto.
+				'
+				If ProductoTerminado.EsMono(txtCodigo.Text) Then
+					Dim WComp As DataRow = GetSingle("SELECT Articulo = CASE WHEN Tipo = 'M' THEN Articulo1 ELSE Articulo2 END FROM Composicion WHERE Terminado = '" & txtCodigo.Text & "' Order by Renglon")
+					If WComp IsNot Nothing Then txtComponente.Text = Trim(OrDefault(WComp.Item("Articulo"), ""))
+				End If
 
-            If Operador.EsFarma Then
+				If Val(txtEtapa.Text) = 99 Then
+					btnNotasCertAnalisis.Enabled = True
+					btnRevalida.Enabled = True
+					txtComponente.Enabled = True
+					txtLotePartida.Enabled = True
+					gbDatosAdicionales.Visible = True
+				End If
+			End If
 
-                Dim WCargaIII As DataRow = GetSingle("SELECT DesEtapa FROM CargaIII WHERE Terminado = '" & txtCodigo.Text & "' And Paso = " & txtEtapa.Text & " And Renglon = 1")
+			If dgvEnsayos.Rows.Count > 0 Then
+				btnPoolEnsayos.Enabled = True
+				dgvEnsayos.CurrentCell = dgvEnsayos.Item("Valor", 0)
+				If txtSubEtapa.Visible And Val(txtSubEtapa.Text) = 0 Then
+					txtSubEtapa.Focus()
+				Else
+					dgvEnsayos.Focus()
+				End If
+			Else
+				txtSubEtapa.Visible = False
+				txtEtapa.Focus()
+			End If
 
-                If WCargaIII IsNot Nothing Then
-                    lblDescEtapa.Text = OrDefault(WCargaIII.Item("DesEtapa"), "").ToString.Trim.ToUpper
-                End If
+		ElseIf e.KeyData = Keys.Escape Then
+			txtEtapa.Text = ""
+		End If
 
-                If Val(txtEtapa.Text) = 99 Then
-                    Dim WDatosAdicionales As DataRow = GetSingle("select h.Revalida, h.VersionIII VersionI, h.MesesRevalida, h.FechaRevalida, h.Real, t.VersionII from hoja h inner join Terminado t on t.Codigo = h.Producto where h.hoja = '" & txtPartida.Text & "'")
-                    If WDatosAdicionales IsNot Nothing Then
-                        With WDatosAdicionales
-                            txtRevalida.Text = OrDefault(.Item("Revalida"), "")
-                            txtEspecifOrig.Text = OrDefault(.Item("VersionI"), "")
-                            txtMeses.Text = OrDefault(.Item("MesesRevalida"), "")
-                            txtFechaRevalida.Text = OrDefault(.Item("FechaRevalida"), Space(8))
-                            txtEspecifActual.Text = OrDefault(.Item("VersionII"), "")
-                            txtKilos.Text = formatonumerico(OrDefault(.Item("Real"), ""))
-                        End With
-                    End If
-                End If
+		'PONGO EN BLANCO LAS INICIALES PARA CONSTATAR EN LA GRABACION DESPUES
+		WIDOperadorAnalista = ""
 
-                txtFechaVto.Text = ProductoTerminado.CalcularFechaElabVto(txtCodigo.Text, txtPartida.Text, True)(1)
+	End Sub
 
-                '
-                ' Cargamos en caso de que no tenga, el componente si es monoproducto.
-                '
-                If ProductoTerminado.EsMono(txtCodigo.Text) Then
-                    Dim WComp As DataRow = GetSingle("SELECT Articulo = CASE WHEN Tipo = 'M' THEN Articulo1 ELSE Articulo2 END FROM Composicion WHERE Terminado = '" & txtCodigo.Text & "' Order by Renglon")
-                    If WComp IsNot Nothing Then txtComponente.Text = Trim(OrDefault(WComp.Item("Articulo"), ""))
-                End If
+	Private Sub _CrearCarpetaEtapaIntermedia()
+		Directory.CreateDirectory(_CarpetaEtapaIntermedia)
+	End Sub
 
-                If Val(txtEtapa.Text) = 99 Then
-                    btnNotasCertAnalisis.Enabled = True
-                    btnRevalida.Enabled = True
-                    txtComponente.Enabled = True
-                    txtLotePartida.Enabled = True
-                    gbDatosAdicionales.Visible = True
-                End If
-            End If
+	Private Function _GenerarImpreParametro(ByVal wDesdeEspecif As String, ByVal wHastaEspecif As String, ByVal wUnidadEspecif As String, ByVal wMenorIgualEspecif As String) As String
+		If Val(wDesdeEspecif) = 0 And Val(wHastaEspecif) = 0 Then Return "Cumple Ensayo"
+		If Trim(wDesdeEspecif) = "" And Trim(wHastaEspecif) = "" Then Return ""
 
-            If dgvEnsayos.Rows.Count > 0 Then
-                btnPoolEnsayos.Enabled = True
-                dgvEnsayos.CurrentCell = dgvEnsayos.Item("Valor", 0)
-                If txtSubEtapa.Visible And Val(txtSubEtapa.Text) = 0 Then
-                    txtSubEtapa.Focus()
-                Else
-                    dgvEnsayos.Focus()
-                End If
-            Else
-                txtSubEtapa.Visible = False
-                txtEtapa.Focus()
-            End If
+		wDesdeEspecif = Trim(wDesdeEspecif)
+		wHastaEspecif = Trim(wHastaEspecif)
+		wUnidadEspecif = Trim(wUnidadEspecif)
+		wMenorIgualEspecif = Trim(wMenorIgualEspecif)
 
-        ElseIf e.KeyData = Keys.Escape Then
-            txtEtapa.Text = ""
-        End If
+		If {99, 999, 9999, 99999}.Contains(Val(wHastaEspecif)) Then wHastaEspecif = "9999"
 
-        'PONGO EN BLANCO LAS INICIALES PARA CONSTATAR EN LA GRABACION DESPUES
-        WIDOperadorAnalista = ""
+		If Val(wDesdeEspecif) <> 0 Or Val(wHastaEspecif) <> 9999 Then
 
-    End Sub
+			If Val(wDesdeEspecif) <> 0 And Val(wHastaEspecif) <> 0 Then
+				Return String.Format("{0} - {1} {2}", wDesdeEspecif, wHastaEspecif, wUnidadEspecif)
+			End If
 
-    Private Sub _CrearCarpetaEtapaIntermedia()
-        Directory.CreateDirectory(_CarpetaEtapaIntermedia)
-    End Sub
+			If Val(wDesdeEspecif) = 0 And Val(wHastaEspecif) <> 0 Then
 
-    Private Function _GenerarImpreParametro(ByVal wTipoEspecif As String, ByVal wDesdeEspecif As String, ByVal wHastaEspecif As String, ByVal wUnidadEspecif As String, ByVal wMenorIgualEspecif As String) As String
-        If Val(wDesdeEspecif) = 0 And Val(wHastaEspecif) = 0 Then Return "Cumple Ensayo"
-        If Trim(wDesdeEspecif) = "" And Trim(wHastaEspecif) = "" Then Return ""
+				If Val(wMenorIgualEspecif) = 1 Then Return String.Format("Máximo {0} {1}", wHastaEspecif, wUnidadEspecif)
 
-        wTipoEspecif = Trim(wTipoEspecif)
-        wDesdeEspecif = Trim(wDesdeEspecif)
-        wHastaEspecif = Trim(wHastaEspecif)
-        wUnidadEspecif = Trim(wUnidadEspecif)
-        wMenorIgualEspecif = Trim(wMenorIgualEspecif)
+				Return String.Format("Menor a {0} {1}", wHastaEspecif, wUnidadEspecif)
 
-        If {99, 999, 9999, 99999}.Contains(Val(wHastaEspecif)) Then wHastaEspecif = "9999"
+			End If
 
-        If Val(wDesdeEspecif) <> 0 Or Val(wHastaEspecif) <> 9999 Then
+			If Val(wDesdeEspecif) <> 0 And Val(wHastaEspecif) = 9999 Then
 
-            If Val(wDesdeEspecif) <> 0 And Val(wHastaEspecif) <> 0 Then
-                Return String.Format("{0} - {1} {2}", wDesdeEspecif, wHastaEspecif, wUnidadEspecif)
-            End If
+				If Val(wMenorIgualEspecif) = 1 Then Return String.Format("Mínimo {0} {1}", wHastaEspecif, wUnidadEspecif)
 
-            If Val(wDesdeEspecif) = 0 And Val(wHastaEspecif) <> 0 Then
+				Return String.Format("Mayor a {0} {1}", wHastaEspecif, wUnidadEspecif)
 
-                If Val(wMenorIgualEspecif) = 1 Then Return String.Format("Máximo {0} {1}", wHastaEspecif, wUnidadEspecif)
+			End If
 
-                Return String.Format("Menor a {0} {1}", wHastaEspecif, wUnidadEspecif)
+		End If
 
-            End If
+		Return ""
+	End Function
 
-            If Val(wDesdeEspecif) <> 0 And Val(wHastaEspecif) = 9999 Then
+	Private Function _CarpetaEtapaIntermedia() As String
+		Return String.Format("{0}{1}/{2}", PATH_ENSAYOS_INTERMEDIOS, txtPartida.Ceros(6), txtEtapa.Ceros(2))
+	End Function
 
-                If Val(wMenorIgualEspecif) = 1 Then Return String.Format("Mínimo {0} {1}", wHastaEspecif, wUnidadEspecif)
+	Private Sub btnNotas_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnNotas.Click
 
-                Return String.Format("Mayor a {0} {1}", wHastaEspecif, wUnidadEspecif)
+		With New NotasEnsayosProductosTerminados
+			.Partida = Val(txtPartida.Text)
+			.Terminado = txtCodigo.Text
+			.Etapa = Val(txtEtapa.Text)
+			.Notas = WNotas
+			.ShowDialog(Me)
+		End With
 
-            End If
+	End Sub
 
-        End If
+	Public Sub _ProcesarNotasEnsayosProductosTerminados(ByVal _Notas As List(Of String)) Implements INotasEnsayosProductosTerminados._ProcesarNotasEnsayosProductosTerminados
+		WNotas = _Notas
+	End Sub
 
-        Return ""
-    End Function
+	Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData As Keys) As Boolean
 
-    Private Function _CarpetaEtapaIntermedia() As String
-        Return String.Format("{0}{1}/{2}", PATH_ENSAYOS_INTERMEDIOS, txtPartida.Ceros(6), txtEtapa.Ceros(2))
-    End Function
+		With dgvEnsayos
+			If .Focused Or .IsCurrentCellInEditMode Then ' Detectamos los ENTER tanto si solo estan en foco o si estan en edición una celda.
+				.CommitEdit(DataGridViewDataErrorContexts.Commit) ' Guardamos todos los datos que no hayan sido confirmados.
 
-    Private Sub btnNotas_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnNotas.Click
+				If .CurrentCell Is Nothing Then Return False
 
-        With New NotasEnsayosProductosTerminados
-            .Partida = Val(txtPartida.Text)
-            .Terminado = txtCodigo.Text
-            .Etapa = Val(txtEtapa.Text)
-            .Notas = WNotas
-            .ShowDialog(Me)
-        End With
+				Dim iCol = .CurrentCell.ColumnIndex
+				Dim iRow = .CurrentCell.RowIndex
 
-    End Sub
+				If msg.WParam.ToInt32() = Keys.Enter Then
 
-    Public Sub _ProcesarNotasEnsayosProductosTerminados(ByVal _Notas As List(Of String)) Implements INotasEnsayosProductosTerminados._ProcesarNotasEnsayosProductosTerminados
-        WNotas = _Notas
-    End Sub
+					If Not _ProcesarValorGrilla(.CurrentCell) Then Return True
 
-    Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData As Keys) As Boolean
+					Select Case iCol
+						Case 2
+							If iRow = .Rows.Count - 1 Then
 
-        With dgvEnsayos
-            If .Focused Or .IsCurrentCellInEditMode Then ' Detectamos los ENTER tanto si solo estan en foco o si estan en edición una celda.
-                .CommitEdit(DataGridViewDataErrorContexts.Commit) ' Guardamos todos los datos que no hayan sido confirmados.
+								' .CurrentCell = .Rows(iRow).Cells(iCol + 1)
+								txtLibros.Focus()
 
-                If .CurrentCell Is Nothing Then Return False
+							Else
+								.CurrentCell = .Rows(iRow + 1).Cells("Valor")
+							End If
 
-                Dim iCol = .CurrentCell.ColumnIndex
-                Dim iRow = .CurrentCell.RowIndex
+						Case Else
+							If iCol < 3 Then
+								.CurrentCell = .Rows(iRow).Cells(iCol + 1)
+							Else
+								If iRow < .Rows.Count - 1 Then
+									.CurrentCell = .Rows(iRow + 1).Cells("Valor")
+								End If
+							End If
+					End Select
 
-                If msg.WParam.ToInt32() = Keys.Enter Then
+					Return True
 
-                    If Not _ProcesarValorGrilla(.CurrentCell) Then Return True
+				ElseIf msg.WParam.ToInt32() = Keys.Escape Then
+					.Rows(iRow).Cells(iCol).Value = ""
 
-                    Select Case iCol
-                        Case 2
-                            If iRow = .Rows.Count - 1 Then
+					If iCol = 3 Then
+						.CurrentCell = .Rows(iRow).Cells(iCol - 1)
+					Else
+						.CurrentCell = .Rows(iRow).Cells(iCol + 1)
+					End If
 
-                                ' .CurrentCell = .Rows(iRow).Cells(iCol + 1)
-                                txtLibros.Focus()
+					.CurrentCell = .Rows(iRow).Cells(iCol)
+				End If
+			End If
 
-                            Else
-                                .CurrentCell = .Rows(iRow + 1).Cells("Valor")
-                            End If
+		End With
 
-                        Case Else
-                            If iCol < 3 Then
-                                .CurrentCell = .Rows(iRow).Cells(iCol + 1)
-                            Else
-                                If iRow < .Rows.Count - 1 Then
-                                    .CurrentCell = .Rows(iRow + 1).Cells("Valor")
-                                End If
-                            End If
-                    End Select
+		Return MyBase.ProcessCmdKey(msg, keyData)
+	End Function
 
-                    Return True
+	Private Function _ProcesarValorGrilla(ByVal WCelda As DataGridViewCell) As Boolean
 
-                ElseIf msg.WParam.ToInt32() = Keys.Escape Then
-                    .Rows(iRow).Cells(iCol).Value = ""
+		Try
 
-                    If iCol = 3 Then
-                        .CurrentCell = .Rows(iRow).Cells(iCol - 1)
-                    Else
-                        .CurrentCell = .Rows(iRow).Cells(iCol + 1)
-                    End If
+			With WCelda
+				Select Case dgvEnsayos.Columns(.ColumnIndex).Name.ToUpper
+					Case "VALOR"
+						Dim WValor As String = Trim(UCase(OrDefault(.Value, "")))
 
-                    .CurrentCell = .Rows(iRow).Cells(iCol)
-                End If
-            End If
+						If WValor = "P" And Val(OrDefault(dgvEnsayos.Rows(.RowIndex).Cells("TipoEspecif").Value, "")) <> 2 Then
+							dgvEnsayos.Rows(.RowIndex).Cells("Valor").Value = WValor
+							dgvEnsayos.Rows(.RowIndex).Cells("Resultado").Value = "PENDIENTE"
+						Else
 
-        End With
+							If WValor.StartsWith(".") Then WValor = "0" & WValor
 
-        Return MyBase.ProcessCmdKey(msg, keyData)
-    End Function
+							Dim WTipo As String
+							Dim WDesde As String
+							Dim WHasta As String
+							Dim WUnidad As String
+							Dim WFormula As String
+							Dim WDecimales As String
+							Dim WVariables(10, 2) As String
 
-    Private Function _ProcesarValorGrilla(ByVal WCelda As DataGridViewCell) As Boolean
+							With dgvEnsayos.Rows(.RowIndex)
 
-        Try
+								WTipo = OrDefault(.Cells("TipoEspecif").Value, "")
+								WDesde = OrDefault(.Cells("DesdeEspecif").Value, "")
+								WHasta = OrDefault(.Cells("HastaEspecif").Value, "")
+								WUnidad = OrDefault(.Cells("UnidadEspecif").Value, "")
+								WFormula = Trim(OrDefault(.Cells("FormulaEspecif").Value, ""))
+								WDecimales = Trim(OrDefault(.Cells("Decimales").Value, "2"))
 
-            With WCelda
-                Select Case dgvEnsayos.Columns(.ColumnIndex).Name.ToUpper
-                    Case "VALOR"
-                        Dim WValor As String = Trim(UCase(OrDefault(.Value, "")))
+								For i = 1 To 10
+									WVariables(i, 1) = Trim(OrDefault(.Cells("Variable" & i).Value, ""))
+									WVariables(i, 2) = Trim(OrDefault(.Cells("VariableValor" & i).Value, ""))
+								Next
 
-                        If WValor = "P" And Val(OrDefault(dgvEnsayos.Rows(.RowIndex).Cells("TipoEspecif").Value, "")) <> 2 Then
-                            dgvEnsayos.Rows(.RowIndex).Cells("Valor").Value = WValor
-                            dgvEnsayos.Rows(.RowIndex).Cells("Resultado").Value = "PENDIENTE"
-                        Else
+								If WFormula <> "" Then
 
-                            If WValor.StartsWith(".") Then WValor = "0" & WValor
+									With New IngresoVariablesFormula(WFormula, WVariables, WValor, dgvEnsayos, WDecimales)
+										Dim WDialogResult = .ShowDialog(Me)
+										If WDialogResult = DialogResult.OK Then
+											WValor = .Valor
+											WVariables = .Variables
+										Else
+											Return False
+										End If
+									End With
 
-                            Dim WTipo As String = ""
-                            Dim WDesde As String = ""
-                            Dim WHasta As String = ""
-                            Dim WUnidad As String = ""
-                            Dim WFormula As String = ""
-                            Dim WDecimales As String = ""
-                            Dim WVariables(10, 2) As String
+								End If
 
-                            With dgvEnsayos.Rows(.RowIndex)
+								Dim WResultado As String = _GenerarImpreResultado(WTipo, WDesde, WHasta, WUnidad, WValor)
 
-                                WTipo = OrDefault(.Cells("TipoEspecif").Value, "")
-                                WDesde = OrDefault(.Cells("DesdeEspecif").Value, "")
-                                WHasta = OrDefault(.Cells("HastaEspecif").Value, "")
-                                WUnidad = OrDefault(.Cells("UnidadEspecif").Value, "")
-                                WFormula = Trim(OrDefault(.Cells("FormulaEspecif").Value, ""))
-                                WDecimales = Trim(OrDefault(.Cells("Decimales").Value, "2"))
+								WDecimales = _CalcularCantidadDecimales(WDesde)
+								If Val(WDecimales) < _CalcularCantidadDecimales(WHasta) Then WDecimales = _CalcularCantidadDecimales(WHasta)
 
-                                For i = 1 To 10
-                                    WVariables(i, 1) = Trim(OrDefault(.Cells("Variable" & i).Value, ""))
-                                    WVariables(i, 2) = Trim(OrDefault(.Cells("VariableValor" & i).Value, ""))
-                                Next
+								.Cells("Resultado").Value = WResultado
+								.Cells("Valor").Value = WValor
 
-                                If WFormula <> "" Then
+								If Double.TryParse(WValor, Nothing) Then
+									.Cells("Valor").Value = formatonumerico(WValor, WDecimales)
+								End If
 
-                                    With New IngresoVariablesFormula(WFormula, WVariables, WValor, dgvEnsayos, WDecimales)
-                                        Dim WDialogResult = .ShowDialog(Me)
-                                        If WDialogResult = DialogResult.OK Then
-                                            WValor = .Valor
-                                            WVariables = .Variables
-                                            WDecimales = .Decimales
-                                        Else
-                                            Return False
-                                        End If
-                                    End With
+								.Cells("Decimales").Value = WDecimales
 
-                                End If
+								For i = 1 To 10
+									.Cells("VariableValor" & i).Value = Trim(OrDefault(WVariables(i, 2), ""))
+								Next
 
-                                Dim WResultado As String = _GenerarImpreResultado(WTipo, WDesde, WHasta, WUnidad, WValor)
+							End With
 
-                                'If WDecimales.Trim = "" Then
-                                WDecimales = _CalcularCantidadDecimales(WDesde)
-                                If Val(WDecimales) < _CalcularCantidadDecimales(WHasta) Then WDecimales = _CalcularCantidadDecimales(WHasta)
-                                'End If
+							If Not _ValidarDato(dgvEnsayos.Rows(.RowIndex)) Then
+								MsgBox("Resultado fuera de especificación", MsgBoxStyle.Information)
+								Return False
+							End If
 
-                                .Cells("Resultado").Value = WResultado
-                                .Cells("Valor").Value = WValor
+						End If
 
-                                If Double.TryParse(WValor, Nothing) Then
-                                    .Cells("Valor").Value = formatonumerico(WValor, WDecimales)
-                                End If
+				End Select
 
-                                .Cells("Decimales").Value = WDecimales
+				If .RowIndex + 1 = dgvEnsayos.Rows.Count Then txtLibros.Focus()
 
-                                For i = 1 To 10
-                                    .Cells("VariableValor" & i).Value = Trim(OrDefault(WVariables(i, 2), ""))
-                                Next
+			End With
 
-                            End With
+			Return True
 
-                            If Not _ValidarDato(dgvEnsayos.Rows(.RowIndex)) Then
-                                MsgBox("Resultado fuera de especificación", MsgBoxStyle.Information)
-                                Return False
-                            End If
+		Catch ex As FormatoNoNumericoException
+			MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+			Return False
+		Catch ex As Exception
+			MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+			Return False
+		End Try
 
-                        End If
+	End Function
 
-                End Select
+	Private Sub SoloNumero(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txtPartida.KeyPress, txtEtapa.KeyPress, txtRevalida.KeyPress, txtEspecifActual.KeyPress, txtEspecifOrig.KeyPress, txtCantidadEtiquetas.KeyPress, txtMeses.KeyPress
+		If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
+			e.Handled = True
+		End If
+	End Sub
 
-                If .RowIndex + 1 = dgvEnsayos.Rows.Count Then txtLibros.Focus()
+	Private Sub btnGrabar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnGrabar.Click
 
-            End With
+		Try
+			_ValidarDatos()
 
-            Return True
+			'
+			' Recalculamos los valores de las celdas que se calculen por Fórmula.
+			'
+			_RecalcularFormulas()
 
-        Catch ex As FormatoNoNumericoException
-            MsgBox(ex.Message, MsgBoxStyle.Exclamation)
-            Return False
-        Catch ex As Exception
-            MsgBox(ex.Message, MsgBoxStyle.Exclamation)
-            Return False
-        End Try
+			If WActualizacionBloqueada Then
 
-    End Function
+				WMotivoClaveSeguridad = TiposSolicitudClaveSeguridad.ActualizarEnsayoBloqueado
 
-    Private Sub SoloNumero(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txtPartida.KeyPress, txtEtapa.KeyPress, txtRevalida.KeyPress, txtEspecifActual.KeyPress, txtEspecifOrig.KeyPress, txtCantidadEtiquetas.KeyPress, txtMeses.KeyPress
-        If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
-            e.Handled = True
-        End If
-    End Sub
+				Dim frm As New IngresoClaveSeguridad()
+				frm.ShowDialog(Me)
 
-    Private Sub btnGrabar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnGrabar.Click
+				txtPartida.Focus()
 
-        Try
-            _ValidarDatos()
+				Exit Sub
 
-            '
-            ' Recalculamos los valores de las celdas que se calculen por Fórmula.
-            '
-            _RecalcularFormulas()
+			ElseIf WIDOperadorAnalista = "" Then
 
-            If WActualizacionBloqueada Then
+				WMotivoClaveSeguridad = TiposSolicitudClaveSeguridad.ActualizarEnsayoNoBloqueado
 
-                WMotivoClaveSeguridad = TiposSolicitudClaveSeguridad.ActualizarEnsayoBloqueado
+				Dim frm As New IngresoClaveSeguridad()
+				frm.ShowDialog(Me)
 
-                Dim frm As New IngresoClaveSeguridad()
-                frm.ShowDialog(Me)
+				txtPartida.Focus()
 
-                txtPartida.Focus()
+				Exit Sub
+			End If
 
-                Exit Sub
+			If Not _ValidarValoresIngresados() And Not WEsPorDesvio Then
 
-            ElseIf WIDOperadorAnalista = "" Then
+				If MsgBox("Algunos de los valores indicados, no se encuentran dentro de los valores especificados para este Producto y etapa." & vbCrLf & vbCrLf & vbCrLf & "¿Desea Continuar con la Grabación por Desvío?", MsgBoxStyle.YesNoCancel) <> MsgBoxResult.Yes Then
+					WEsPorDesvio = False
+					Exit Sub
+				End If
 
-                WMotivoClaveSeguridad = TiposSolicitudClaveSeguridad.ActualizarEnsayoNoBloqueado
+				If Val(txtDesvio.Text) = 0 Then Throw New Exception("Se debe indicar un número de Desvío.")
+				If Val(txtOOS.Text) = 0 Then Throw New Exception("Se debe indicar un número de OOS.")
 
-                Dim frm As New IngresoClaveSeguridad()
-                frm.ShowDialog(Me)
+				Dim mot As New IngresoMotivoDesvio(WMotivoDesvio)
 
-                txtPartida.Focus()
+				If mot.ShowDialog(Me) <> DialogResult.OK Then Exit Sub
 
-                Exit Sub
-            End If
+				WEsPorDesvio = True
 
-            If Not _ValidarValoresIngresados() And Not WEsPorDesvio Then
+			End If
 
-                If MsgBox("Algunos de los valores indicados, no se encuentran dentro de los valores especificados para este Producto y etapa." & vbCrLf & vbCrLf & vbCrLf & "¿Desea Continuar con la Grabación por Desvío?", MsgBoxStyle.YesNoCancel) <> MsgBoxResult.Yes Then
-                    WEsPorDesvio = False
-                    Exit Sub
-                End If
+			If txtDesvio.Text.Trim <> "" And Not WEsPorDesvio Then
 
-                If Val(txtDesvio.Text) = 0 Then Throw New Exception("Se debe indicar un número de Desvío.")
-                If Val(txtOOS.Text) = 0 Then Throw New Exception("Se debe indicar un número de OOS.")
+				If MsgBox("Ha indicado información de Desvío para este Producto y etapa." & vbCrLf & vbCrLf & vbCrLf & "Si ésto es correcto ¿Desea Continuar con la Grabación del Ensayo?", MsgBoxStyle.YesNoCancel) <> MsgBoxResult.Yes Then
+					WEsPorDesvio = False
+					Exit Sub
+				End If
 
-                Dim mot As New IngresoMotivoDesvio(WMotivoDesvio)
+				Dim mot As New IngresoMotivoDesvio(WMotivoDesvio)
 
-                If mot.ShowDialog(Me) <> DialogResult.OK Then Exit Sub
+				If mot.ShowDialog(Me) <> DialogResult.OK Then Exit Sub
 
-                '
-                ' TODO Consultar sobre implementación o no.
-                '
-                ' La solicitud de contraseña para los ensayos ingresados por Desvío, viene de la funcionalidad vieja.
-                ' Ahora se pide contraseña para grabar, ya sea para la grabación por parte de los analistas como por el jefe/supervisor.
-                '
+			End If
 
-                '                WMotivoClaveSeguridad = TiposSolicitudClaveSeguridad.IngresoEnsayoIntermedioPorDesvio
-                '
-                '                Dim frm As New IngresoClaveSeguridad
-                '                frm.ShowDialog(Me)
-                '
-                '                txtPartida.Focus()
-                '
-                '                Exit Sub
+			_CrearCarpetaEtapaIntermedia()
 
-                WEsPorDesvio = True
+			Dim WSqls As New List(Of String)
 
-            End If
+			Dim WPartida = txtPartida.Text
+			Dim WCodigo = txtCodigo.Text
+			Dim WEtapa = txtEtapa.Text
+			Dim WFecha = txtFecha.Text
+			Dim WFechaOrd = ordenaFecha(txtFecha.Text)
+			Dim WLibros = txtLibros.Text.Trim
+			Dim WPaginas = txtPaginas.Text.Trim
+			Dim WNroOOS = txtOOS.Text.Trim
+			Dim WNroDesvio = txtDesvio.Text.Trim
+			Dim WConfecciono = txtConfecciono.Text.Trim
+			Dim WArchivo = txtArchivo.Text.Trim
 
-            If txtDesvio.Text.Trim <> "" And Not WEsPorDesvio Then
+			Dim WPorDesvio = "0"
 
-                If MsgBox("Ha indicado información de Desvío para este Producto y etapa." & vbCrLf & vbCrLf & vbCrLf & "Si ésto es correcto ¿Desea Continuar con la Grabación del Ensayo?", MsgBoxStyle.YesNoCancel) <> MsgBoxResult.Yes Then
-                    WEsPorDesvio = False
-                    Exit Sub
-                End If
+			If WEsPorDesvio Then
+				WPorDesvio = "1"
+			Else
+				WMotivoDesvio = ""
+			End If
 
-                Dim mot As New IngresoMotivoDesvio(WMotivoDesvio)
+			Dim WLiberada = ""
 
-                If mot.ShowDialog(Me) <> DialogResult.OK Then Exit Sub
+			If WNotas Is Nothing OrElse WNotas.Count = 0 Then
+				For i = 0 To 9
+					WNotas.Add("")
+				Next
+			End If
 
-                '
-                ' TODO Consultar sobre implementación o no.
-                '
-                ' La solicitud de contraseña para los ensayos ingresados por Desvío, viene de la funcionalidad vieja.
-                ' Ahora se pide contraseña para grabar, ya sea para la grabación por parte de los analistas como por el jefe/supervisor.
-                '
+			Dim WRenglon = 0
 
-                'WMotivoClaveSeguridad = TiposSolicitudClaveSeguridad.IngresoEnsayoIntermedioPorDesvio
-                '
-                'Dim frm As New IngresoClaveSeguridad
-                'frm.ShowDialog(Me)
+			Dim WTipoProceso As String = Trim(lblTipoProceso.Text)
 
-            End If
+			Dim WEsUnaActualizacion As Boolean
 
-            _CrearCarpetaEtapaIntermedia()
+			Dim WTabla As String = IIf(Val(txtEtapa.Text) = 99, "Prueterfarma", "PrueterfarmaIntermedio")
 
-            Dim WSqls As New List(Of String)
+			If Val(txtEtapa.Text) = 99 Then
+				WTabla = TablaPrueTer
+			End If
 
-            Dim WPartida = txtPartida.Text
-            Dim WCodigo = txtCodigo.Text
-            Dim WEtapa = txtEtapa.Text
-            Dim WFecha = txtFecha.Text
-            Dim WFechaOrd = ordenaFecha(txtFecha.Text)
-            Dim WLibros = txtLibros.Text.Trim
-            Dim WPaginas = txtPaginas.Text.Trim
-            Dim WNroOOS = txtOOS.Text.Trim
-            Dim WNroDesvio = txtDesvio.Text.Trim
-            Dim WConfecciono = txtConfecciono.Text.Trim
-            Dim WArchivo = txtArchivo.Text.Trim
+			Dim WPrueterFarma As DataRow
 
-            Dim WPorDesvio = "0"
+			WPrueterFarma = GetSingle("SELECT TOP 1 Clave FROM PrueterFarmaIntermedio WHERE Partida = '" & WPartida & "' And Producto = '" & WCodigo & "' And Paso = '" & WEtapa & "' And subEtapa = '" & Val(txtSubEtapa.Text) & "'")
 
-            If WEsPorDesvio Then
-                WPorDesvio = "1"
-            Else
-                WMotivoDesvio = ""
-            End If
+			If Val(WEtapa) = 99 Then
 
-            'Dim WMotivoDesvio = ""
-            Dim WLiberada = ""
+				'If Operador.EsFarma Then WPrueterFarma = GetSingle("SELECT TOP 1 Clave FROM PrueterFarmaIntermedio WHERE Partida = '" & WPartida & "' And Producto = '" & WCodigo & "' And SubEtapa = ''")
 
-            If WNotas Is Nothing OrElse WNotas.Count = 0 Then
-                For i = 0 To 9
-                    WNotas.Add("")
-                Next
-            End If
+				WSqls.Add("DELETE FROM " & TablaPrueTer & " WHERE Partida = '" & WPartida & "' And Producto = '" & WCodigo & "' And Paso = '" & WEtapa & "' And SubEtapa = '" & Val(txtEtapa.Text) & "'")
 
-            Dim WRenglon = 0
+			Else
 
-            Dim WTipoProceso As String = Trim(lblTipoProceso.Text)
+				WSqls.Add("DELETE FROM PrueterfarmaIntermedio WHERE Partida = '" & WPartida & "' And Producto = '" & WCodigo & "' And Paso = '" & WEtapa & "' And subEtapa = '" & Val(txtSubEtapa.Text) & "'")
 
-            Dim WEsUnaActualizacion As Boolean = False
+			End If
 
-            Dim WTabla As String = IIf(Val(txtEtapa.Text) = 99, "Prueterfarma", "PrueterfarmaIntermedio")
+			WEsUnaActualizacion = WPrueterFarma IsNot Nothing
 
-            If Val(txtEtapa.Text) = 99 Then
-                WTabla = TablaPrueTer
-            End If
+			For Each row As DataGridViewRow In dgvEnsayos.Rows
+				With row
+					Dim WEns As String = OrDefault(.Cells("Ensayo").Value, 0)
+					Dim WEspecificacion As String = OrDefault(.Cells("Especificacion").Value, "")
+					Dim WValor As String = OrDefault(.Cells("Valor").Value, "")
+					Dim WValorBandera As String = OrDefault(.Cells("ValorBandera").Value, "")
+					Dim WResultado As String
+					Dim WFarmacopea As String = OrDefault(.Cells("Farmacopea").Value, "")
+					Dim WTipoEspecif As String = OrDefault(.Cells("TipoEspecif").Value, 0)
+					Dim WDesdeEspecif As String = OrDefault(.Cells("DesdeEspecif").Value, "")
+					Dim WHastaEspecif As String = OrDefault(.Cells("HastaEspecif").Value, "")
+					Dim WUnidadEspecif As String = OrDefault(.Cells("UnidadEspecif").Value, "")
+					Dim WMenorIgualEspecif As String = OrDefault(.Cells("MenorIgualEspecif").Value, 0)
+					Dim WInformaEspecif As String = OrDefault(.Cells("InformaEspecif").Value, 0)
+					Dim WObservaciones As String = OrDefault(.Cells("Observaciones").Value, "")
+					Dim WFormulaEspecif As String = OrDefault(.Cells("FormulaEspecif").Value, "")
+					Dim WParametro As String = Trim(OrDefault(.Cells("Parametro").Value, ""))
 
-            Dim WPrueterFarma As DataRow = Nothing
 
-            WPrueterFarma = GetSingle("SELECT TOP 1 Clave FROM PrueterFarmaIntermedio WHERE Partida = '" & WPartida & "' And Producto = '" & WCodigo & "' And Paso = '" & WEtapa & "' And subEtapa = '" & Val(txtSubEtapa.Text) & "'")
 
-            If Val(WEtapa) = 99 Then
+					Dim WOperadorLabora As String = WIDOperadorAnalista	' Se lo obtiene cuando se valida la contraseña.
 
-                'If Operador.EsFarma Then WPrueterFarma = GetSingle("SELECT TOP 1 Clave FROM PrueterFarmaIntermedio WHERE Partida = '" & WPartida & "' And Producto = '" & WCodigo & "' And SubEtapa = ''")
+					Dim WFormulas(10, 2) As String
 
-                WSqls.Add("DELETE FROM " & TablaPrueTer & " WHERE Partida = '" & WPartida & "' And Producto = '" & WCodigo & "' And Paso = '" & WEtapa & "' And SubEtapa = '" & Val(txtEtapa.Text) & "'")
+					For i = 1 To 10
+						WFormulas(i, 1) = Trim(OrDefault(.Cells("Variable" & i).Value, ""))
+						WFormulas(i, 2) = Trim(OrDefault(.Cells("VariableValor" & i).Value, "")).Replace(",", ".")
+					Next
 
-            Else
+					WResultado = _GenerarImpreResultado(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WValor)
 
-                WSqls.Add("DELETE FROM PrueterfarmaIntermedio WHERE Partida = '" & WPartida & "' And Producto = '" & WCodigo & "' And Paso = '" & WEtapa & "' And subEtapa = '" & Val(txtSubEtapa.Text) & "'")
+					WRenglon += 1
 
-            End If
+					Dim WClave = "1" & WCodigo & txtPartida.Ceros(6) & IIf(Val(txtEtapa.Text) = 99, "", txtEtapa.Ceros(2)) & WRenglon.Ceros(2)
 
-            WEsUnaActualizacion = WPrueterFarma IsNot Nothing
+					If Val(txtEtapa.Text) <> 99 Then WClave = "1" & WCodigo & txtPartida.Ceros(6) & txtEtapa.Ceros(2) & txtSubEtapa.Ceros(2) & WRenglon.Ceros(2)
 
-            For Each row As DataGridViewRow In dgvEnsayos.Rows
-                With row
-                    Dim WEns As String = OrDefault(.Cells("Ensayo").Value, 0)
-                    Dim WEspecificacion As String = OrDefault(.Cells("Especificacion").Value, "")
-                    Dim WValor As String = OrDefault(.Cells("Valor").Value, "")
-                    Dim WValorBandera As String = OrDefault(.Cells("ValorBandera").Value, "")
-                    Dim WResultado As String = OrDefault(.Cells("Resultado").Value, "")
-                    Dim WFarmacopea As String = OrDefault(.Cells("Farmacopea").Value, "")
-                    Dim WTipoEspecif As String = OrDefault(.Cells("TipoEspecif").Value, 0)
-                    Dim WDesdeEspecif As String = OrDefault(.Cells("DesdeEspecif").Value, "")
-                    Dim WHastaEspecif As String = OrDefault(.Cells("HastaEspecif").Value, "")
-                    Dim WUnidadEspecif As String = OrDefault(.Cells("UnidadEspecif").Value, "")
-                    Dim WMenorIgualEspecif As String = OrDefault(.Cells("MenorIgualEspecif").Value, 0)
-                    Dim WInformaEspecif As String = OrDefault(.Cells("InformaEspecif").Value, 0)
-                    Dim WObservaciones As String = OrDefault(.Cells("Observaciones").Value, "")
-                    Dim WFormulaEspecif As String = OrDefault(.Cells("FormulaEspecif").Value, "")
-                    Dim WParametro As String = Trim(OrDefault(.Cells("Parametro").Value, ""))
+					Dim ZSql = ""
 
+					ZSql = ZSql & "INSERT INTO " & WTabla & " ("
+					ZSql = ZSql & "Clave ,"
+					If Val(txtEtapa.Text) <> 99 Then ZSql = ZSql & "Paso , SubEtapa ,"
+					ZSql = ZSql & "Tipo ,"
+					ZSql = ZSql & "Partida ,"
+					ZSql = ZSql & "Renglon ,"
+					ZSql = ZSql & "Producto ,"
+					ZSql = ZSql & "Fecha ,"
+					ZSql = ZSql & "FechaOrd ,"
+					ZSql = ZSql & "Codigo ,"
+					ZSql = ZSql & "Valor ,"
+					ZSql = ZSql & "Resultado ,"
+					ZSql = ZSql & "Observaciones ,"
+					ZSql = ZSql & "ValorReal ,"
+					ZSql = ZSql & "TipoEspecif ,"
+					ZSql = ZSql & "InformaEspecif ,"
+					ZSql = ZSql & "MenorIgualEspecif ,"
+					ZSql = ZSql & "UnidadEspecif ,"
+					ZSql = ZSql & "DesdeEspecif ,"
+					ZSql = ZSql & "HastaEspecif ,"
+					ZSql = ZSql & "Farmacopea ,"
+					ZSql = ZSql & "PorDesvio ,"
+					ZSql = ZSql & "MotivoDesvio ,"
+					ZSql = ZSql & "NroDesvio ,"
+					ZSql = ZSql & "Libros ,"
+					ZSql = ZSql & "Archiva ,"
+					ZSql = ZSql & "NroOOS ,"
+					ZSql = ZSql & "Paginas ,"
+					ZSql = ZSql & "Estado ,"
+					ZSql = ZSql & "Confecciono ,"
+					ZSql = ZSql & "Impre1 ,"
+					ZSql = ZSql & "Impre2 ,"
+					ZSql = ZSql & "FormulaEspecif ,"
 
+					For i = 1 To 10
+						ZSql = ZSql & "Variable" & i & " ,"
+						ZSql = ZSql & "VariableValor" & i & " ,"
+					Next
 
-                    Dim WOperadorLabora As String = WIDOperadorAnalista ' Se lo obtiene cuando se valida la contraseña.
+					ZSql = ZSql & "Liberada ,"
+					ZSql = ZSql & "OperadorLabora)"
+					ZSql = ZSql & "Values ("
+					ZSql = ZSql & "'" & WClave & "',"
+					If Val(txtEtapa.Text) <> 99 Then ZSql = ZSql & "'" & Trim(txtEtapa.Text) & "', '" & Val(txtSubEtapa.Text) & "',"
+					ZSql = ZSql & "'" & "1" & "',"
+					ZSql = ZSql & "'" & WPartida.left(6) & "',"
+					ZSql = ZSql & "'" & WRenglon.left(2) & "',"
+					ZSql = ZSql & "'" & WCodigo.left(12) & "',"
+					ZSql = ZSql & "'" & WFecha & "',"
+					ZSql = ZSql & "'" & WFechaOrd & "',"
+					ZSql = ZSql & "'" & WEns & "',"
+					ZSql = ZSql & "'" & WEspecificacion.left(50) & "',"
+					ZSql = ZSql & "'" & WResultado.left(50) & "',"
+					ZSql = ZSql & "'" & WObservaciones.left(100) & "',"
+					ZSql = ZSql & "'" & WValor.left(10) & "',"
+					ZSql = ZSql & "'" & WTipoEspecif.left(1) & "',"
+					ZSql = ZSql & "'" & WInformaEspecif.left(1) & "',"
+					ZSql = ZSql & "'" & WMenorIgualEspecif.left(1) & "',"
+					ZSql = ZSql & "'" & WUnidadEspecif.left(20) & "',"
+					ZSql = ZSql & "'" & WDesdeEspecif.left(10) & "',"
+					ZSql = ZSql & "'" & WHastaEspecif.left(10) & "',"
+					ZSql = ZSql & "'" & WFarmacopea.left(10) & "',"
+					ZSql = ZSql & "'" & WPorDesvio.left(1) & "',"
+					ZSql = ZSql & "'" & WMotivoDesvio.left(100) & "',"
+					ZSql = ZSql & "'" & WNroDesvio.left(10) & "',"
+					ZSql = ZSql & "'" & WLibros.left(20) & "',"
+					ZSql = ZSql & "'" & WArchivo.left(30) & "',"
+					ZSql = ZSql & "'" & WNroOOS.left(10) & "',"
+					ZSql = ZSql & "'" & WPaginas.left(20) & "',"
+					ZSql = ZSql & "'" & "1" & "',"
+					ZSql = ZSql & "'" & WConfecciono.left(50) & "',"
+					ZSql = ZSql & "'" & WParametro.left(100) & "',"
+					ZSql = ZSql & "'" & WTipoProceso.left(100) & "',"
+					ZSql = ZSql & "'" & WFormulaEspecif & "',"
 
-                    Dim WFormulas(10, 2) As String
+					For i = 1 To 10
+						ZSql = ZSql & "'" & WFormulas(i, 1) & "',"
+						ZSql = ZSql & "'" & WFormulas(i, 2) & "',"
+					Next
 
-                    For i = 1 To 10
-                        WFormulas(i, 1) = Trim(OrDefault(.Cells("Variable" & i).Value, ""))
-                        WFormulas(i, 2) = Trim(OrDefault(.Cells("VariableValor" & i).Value, "")).Replace(",", ".")
-                    Next
+					If WNoGrabaIniciales = False Then
+						If WValorBandera <> WValor Then
+							ZSql = ZSql & "'" & WLiberada & "',"
+							ZSql = ZSql & "'" & WOperadorLabora & "')"
+						Else
+							ZSql = ZSql & "'" & WLiberada & "',"
+							ZSql = ZSql & "'" & Trim(.Cells("OperadorLabora").Value) & "')"
+						End If
+					Else
+						ZSql = ZSql & "'" & WLiberada & "',"
+						ZSql = ZSql & "'" & Trim(.Cells("OperadorLabora").Value) & "')"
+					End If
 
-                    WResultado = _GenerarImpreResultado(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WValor)
-                    'Dim WImpreResultado = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif)
 
-                    WRenglon += 1
+					WSqls.Add(ZSql)
 
-                    'Dim WClave = "1" & WCodigo & txtPartida.Text.PadLeft(6, "0") & txtEtapa.Text.PadLeft(2, "0") & WRenglon.ToString.PadLeft(2, "0")
-                    Dim WClave = "1" & WCodigo & txtPartida.Ceros(6) & IIf(Val(txtEtapa.Text) = 99, "", txtEtapa.Ceros(2)) & WRenglon.Ceros(2)
+				End With
 
-                    If Val(txtEtapa.Text) <> 99 Then WClave = "1" & WCodigo & txtPartida.Ceros(6) & txtEtapa.Ceros(2) & txtSubEtapa.Ceros(2) & WRenglon.Ceros(2)
+			Next
 
-                    Dim ZSql = ""
+			With WNotas
+				WSqls.Add("UPDATE " & WTabla & " SET " &
+						  "WDate = '" & Date.Now.ToString("dd-MM-yyyy") & "'," &
+						  "Operador = '" & Codigo & "'," &
+						  "Nota1 = '" & .Item(0) & "'," &
+						  "Nota2 = '" & .Item(1) & "'," &
+						  "Nota3 = '" & .Item(2) & "'," &
+						  "Nota4 = '" & .Item(3) & "'," &
+						  "Nota5 = '" & .Item(4) & "'," &
+						  "Nota6 = '" & .Item(5) & "'," &
+						  "Nota7 = '" & .Item(6) & "'," &
+						  "Nota8 = '" & .Item(7) & "'," &
+						  "Nota9 = '" & .Item(8) & "'," &
+						  "Envases = '" & txtEnvases.Text.Trim & "'," &
+						  "Componente = '" & txtComponente.Text.Trim & "'," &
+						  "lotePartida = '" & txtLotePartida.Text.Trim & "'," &
+						  "CantiEti = '" & txtCantidadEtiquetas.Text.Trim & "'" &
+						  " WHERE Partida = '" & WPartida & "' And Producto = '" & WCodigo & "' " & IIf(Val(txtEtapa.Text) = 99, "", "And Paso = '" & WEtapa & "'")
+						  )
+			End With
 
-                    ZSql = ZSql & "INSERT INTO " & WTabla & " ("
-                    ZSql = ZSql & "Clave ,"
-                    If Val(txtEtapa.Text) <> 99 Then ZSql = ZSql & "Paso , SubEtapa ,"
-                    ZSql = ZSql & "Tipo ,"
-                    ZSql = ZSql & "Partida ,"
-                    ZSql = ZSql & "Renglon ,"
-                    ZSql = ZSql & "Producto ,"
-                    ZSql = ZSql & "Fecha ,"
-                    ZSql = ZSql & "FechaOrd ,"
-                    ZSql = ZSql & "Codigo ,"
-                    ZSql = ZSql & "Valor ,"
-                    ZSql = ZSql & "Resultado ,"
-                    ZSql = ZSql & "Observaciones ,"
-                    ZSql = ZSql & "ValorReal ,"
-                    ZSql = ZSql & "TipoEspecif ,"
-                    ZSql = ZSql & "InformaEspecif ,"
-                    ZSql = ZSql & "MenorIgualEspecif ,"
-                    ZSql = ZSql & "UnidadEspecif ,"
-                    ZSql = ZSql & "DesdeEspecif ,"
-                    ZSql = ZSql & "HastaEspecif ,"
-                    ZSql = ZSql & "Farmacopea ,"
-                    ZSql = ZSql & "PorDesvio ,"
-                    ZSql = ZSql & "MotivoDesvio ,"
-                    ZSql = ZSql & "NroDesvio ,"
-                    ZSql = ZSql & "Libros ,"
-                    ZSql = ZSql & "Archiva ,"
-                    ZSql = ZSql & "NroOOS ,"
-                    ZSql = ZSql & "Paginas ,"
-                    ZSql = ZSql & "Estado ,"
-                    ZSql = ZSql & "Confecciono ,"
-                    ZSql = ZSql & "Impre1 ,"
-                    ZSql = ZSql & "Impre2 ,"
-                    ZSql = ZSql & "FormulaEspecif ,"
+			ExecuteNonQueries(WSqls.ToArray)
 
-                    For i = 1 To 10
-                        ZSql = ZSql & "Variable" & i & " ,"
-                        ZSql = ZSql & "VariableValor" & i & " ,"
-                    Next
+			If Val(txtEtapa.Text) <> 99 Then
 
-                    ZSql = ZSql & "Liberada ,"
-                    ZSql = ZSql & "OperadorLabora)"
-                    ZSql = ZSql & "Values ("
-                    ZSql = ZSql & "'" & WClave & "',"
-                    If Val(txtEtapa.Text) <> 99 Then ZSql = ZSql & "'" & Trim(txtEtapa.Text) & "', '" & Val(txtSubEtapa.Text) & "',"
-                    ZSql = ZSql & "'" & "1" & "',"
-                    ZSql = ZSql & "'" & WPartida.left(6) & "',"
-                    ZSql = ZSql & "'" & WRenglon.left(2) & "',"
-                    ZSql = ZSql & "'" & WCodigo.left(12) & "',"
-                    ZSql = ZSql & "'" & WFecha & "',"
-                    ZSql = ZSql & "'" & WFechaOrd & "',"
-                    ZSql = ZSql & "'" & WEns & "',"
-                    ZSql = ZSql & "'" & WEspecificacion.left(50) & "',"
-                    ZSql = ZSql & "'" & WResultado.left(50) & "',"
-                    ZSql = ZSql & "'" & WObservaciones.left(100) & "',"
-                    ZSql = ZSql & "'" & WValor.left(10) & "',"
-                    ZSql = ZSql & "'" & WTipoEspecif.left(1) & "',"
-                    ZSql = ZSql & "'" & WInformaEspecif.left(1) & "',"
-                    ZSql = ZSql & "'" & WMenorIgualEspecif.left(1) & "',"
-                    ZSql = ZSql & "'" & WUnidadEspecif.left(20) & "',"
-                    ZSql = ZSql & "'" & WDesdeEspecif.left(10) & "',"
-                    ZSql = ZSql & "'" & WHastaEspecif.left(10) & "',"
-                    ZSql = ZSql & "'" & WFarmacopea.left(10) & "',"
-                    ZSql = ZSql & "'" & WPorDesvio.left(1) & "',"
-                    ZSql = ZSql & "'" & WMotivoDesvio.left(100) & "',"
-                    ZSql = ZSql & "'" & WNroDesvio.left(10) & "',"
-                    ZSql = ZSql & "'" & WLibros.left(20) & "',"
-                    ZSql = ZSql & "'" & WArchivo.left(30) & "',"
-                    ZSql = ZSql & "'" & WNroOOS.left(10) & "',"
-                    ZSql = ZSql & "'" & WPaginas.left(20) & "',"
-                    ZSql = ZSql & "'" & "1" & "',"
-                    ZSql = ZSql & "'" & WConfecciono.left(50) & "',"
-                    ZSql = ZSql & "'" & WParametro.left(100) & "',"
-                    ZSql = ZSql & "'" & WTipoProceso.left(100) & "',"
-                    ZSql = ZSql & "'" & WFormulaEspecif & "',"
+				_GuardarNuevaVersionPDFConEnsayosIntermedios()
 
-                    For i = 1 To 10
-                        ZSql = ZSql & "'" & WFormulas(i, 1) & "',"
-                        ZSql = ZSql & "'" & WFormulas(i, 2) & "',"
-                    Next
+				_EnviarAvisoEnsayosIntermedios(WEsUnaActualizacion)
 
-                    If WNoGrabaIniciales = False Then
-                        If WValorBandera <> WValor Then
-                            ZSql = ZSql & "'" & WLiberada & "',"
-                            ZSql = ZSql & "'" & WOperadorLabora & "')"
-                        Else
-                            ZSql = ZSql & "'" & WLiberada & "',"
-                            ZSql = ZSql & "'" & Trim(.Cells("OperadorLabora").Value) & "')"
-                        End If
-                    Else
-                        ZSql = ZSql & "'" & WLiberada & "',"
-                        ZSql = ZSql & "'" & Trim(.Cells("OperadorLabora").Value) & "')"
-                    End If
+			Else
 
+				Dim WImpre() As String = _PrepararInformacionRegistroEnsayoFinalPT()
 
-                    WSqls.Add(ZSql)
+				'
+				' REALIZAMOS IMPRESION CON REDUCCION AL 80%
+				'
+				If EsFarma() Then _GenerarReporteResultadosCalidad(txtPartida.Text, 1, WImpre(0), WImpre(1), WImpre(2), WImpre(3))
+				'
+				' REALIZAMOS IMPRESION CON REDUCCION AL 100%
+				'
+				_GenerarReporteResultadosCalidad(txtPartida.Text, 4, WImpre(0), WImpre(1), WImpre(2), WImpre(3))
 
-                End With
+				'
+				' EXPORTAMOS EL PDF DE LA ETAPA FINAL.
+				'
+				_GenerarReporteResultadosCalidad(txtPartida.Text, 3, WImpre(0), WImpre(1), WImpre(2), WImpre(3))
 
-            Next
+			End If
 
-            With WNotas
-                WSqls.Add("UPDATE " & WTabla & " SET " &
-                          "WDate = '" & Date.Now.ToString("dd-MM-yyyy") & "'," &
-                          "Operador = '" & Codigo & "'," &
-                          "Nota1 = '" & .Item(0) & "'," &
-                          "Nota2 = '" & .Item(1) & "'," &
-                          "Nota3 = '" & .Item(2) & "'," &
-                          "Nota4 = '" & .Item(3) & "'," &
-                          "Nota5 = '" & .Item(4) & "'," &
-                          "Nota6 = '" & .Item(5) & "'," &
-                          "Nota7 = '" & .Item(6) & "'," &
-                          "Nota8 = '" & .Item(7) & "'," &
-                          "Nota9 = '" & .Item(8) & "'," &
-                          "Envases = '" & txtEnvases.Text.Trim & "'," &
-                          "Componente = '" & txtComponente.Text.Trim & "'," &
-                          "lotePartida = '" & txtLotePartida.Text.Trim & "'," &
-                          "CantiEti = '" & txtCantidadEtiquetas.Text.Trim & "'" &
-                          " WHERE Partida = '" & WPartida & "' And Producto = '" & WCodigo & "' " & IIf(Val(txtEtapa.Text) = 99, "", "And Paso = '" & WEtapa & "'")
-                          )
-            End With
+			btnLimpiar.PerformClick()
 
-            ExecuteNonQueries(WSqls.ToArray)
+			txtPartida.Focus()
 
-            'MsgBox("Actualizado")
+		Catch ex As Exception
+			MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+		End Try
 
-            If Val(txtEtapa.Text) <> 99 Then
+	End Sub
 
-                _GuardarNuevaVersionPDFConEnsayosIntermedios()
+	Private Sub _EnviarAvisoEnsayosIntermedios(Optional ByVal EsActualizacion As Boolean = False)
 
-                _EnviarAvisoEnsayosIntermedios(WEsUnaActualizacion)
+		Directory.CreateDirectory(RUTA_TEMP)
 
-            Else
+		Dim frm As New ConsultasVarias.VistaPrevia
 
-                Dim WImpre() As String = _PrepararInformacionRegistroEnsayoFinalPT()
+		With frm
+			.Reporte = New ValoresEnsayosIntermediosPTFarma
+			.Formula = "{PrueterFarmaIntermedio.Producto} = '" & txtCodigo.Text & "' And {PrueterFarmaIntermedio.Paso} = " & txtEtapa.Text & " And {PrueterFarmaIntermedio.Partida} = " & txtPartida.Text & " And {PrueterFarmaIntermedio.Producto} = {Terminado.Codigo}"
 
-                '
-                ' REALIZAMOS IMPRESION CON REDUCCION AL 80%
-                '
-                If Operador.EsFarma Then _GenerarReporteResultadosCalidad(txtPartida.Text, 1, WImpre(0), WImpre(1), WImpre(2), WImpre(3))
-                '
-                ' REALIZAMOS IMPRESION CON REDUCCION AL 100%
-                '
-                _GenerarReporteResultadosCalidad(txtPartida.Text, 4, WImpre(0), WImpre(1), WImpre(2), WImpre(3))
+			Dim nombreArchivo = String.Format("{0} {1} - Etapa {2}.pdf", txtCodigo.Text, txtPartida.Ceros(6), txtEtapa.Ceros(2))
 
-                '
-                ' EXPORTAMOS EL PDF DE LA ETAPA FINAL.
-                '
-                _GenerarReporteResultadosCalidad(txtPartida.Text, 3, WImpre(0), WImpre(1), WImpre(2), WImpre(3))
+			File.Delete(RUTA_TEMP & nombreArchivo)
 
-            End If
+			.Exportar(nombreArchivo, ExportFormatType.PortableDocFormat, RUTA_TEMP)
 
-            btnLimpiar.PerformClick()
+			Dim WTitulo, WCuerpo As String
 
-            txtPartida.Focus()
+			If EsActualizacion Then
+				WTitulo = "Actualización de Ensayos Intermedios Ingresados - " & txtCodigo.Text & " - Pda " & txtPartida.Ceros(6) & " - Etapa " & txtEtapa.Ceros(2) & ""
+				WCuerpo = "Se le informa sobre una actualización en el ingreso de Ensayos Intermedios para la Etapa <b>" & txtEtapa.Ceros(2) & "</b> correspondiente al Producto <b>" & txtCodigo.Text & "</b> Pda: <b>" & txtPartida.Ceros(6) & "</b> "
+			Else
+				WTitulo = "Ingreso de Ensayos Intermedios - " & txtCodigo.Text & " - Pda " & txtPartida.Ceros(6) & " - Etapa " & txtEtapa.Ceros(2) & ""
+				WCuerpo = "Se ha registrado un nuevo ingreso de Ensayos Intermedios para la Etapa " & txtEtapa.Ceros(2) & " correspondiente al Producto " & txtCodigo.Text & " Pda: " & txtPartida.Ceros(6) & " "
+			End If
 
-        Catch ex As Exception
-            MsgBox(ex.Message, MsgBoxStyle.Exclamation)
-            '        txtPartida.Focus()
-        End Try
+			If File.Exists(RUTA_TEMP & nombreArchivo) Then
+				.EnviarPorEmail(RUTA_TEMP & nombreArchivo, True, WTitulo, WCuerpo, DESTINATARIOS_AVISO_ENSAYOS_INTERMEDIOS)
+			Else
+				MsgBox("Ha ocurrido un inconveniente al querer generar el PDF con los ensayos intermedios.", MsgBoxStyle.Exclamation)
+			End If
 
-    End Sub
+		End With
+	End Sub
 
-    Private Sub _EnviarAvisoEnsayosIntermedios(Optional ByVal EsActualizacion As Boolean = False)
+	Private Sub _GuardarNuevaVersionPDFConEnsayosIntermedios()
 
-        Directory.CreateDirectory(RUTA_TEMP)
+		Dim frm As ConsultasVarias.VistaPrevia = New ConsultasVarias.VistaPrevia
 
-        Dim frm As New ConsultasVarias.VistaPrevia
+		With frm
+			.Reporte = New ValoresEnsayosIntermediosPTFarma
+			.Formula = "{PrueterFarmaIntermedio.Partida} = " & txtPartida.Text & " AND {Prueterfarmaintermedio.Paso} = " & txtEtapa.Text & " AND {Prueterfarmaintermedio.Producto} = '" & txtCodigo.Text & "' AND {Prueterfarmaintermedio.Producto} = {Terminado.Codigo}"
+		End With
 
-        With frm
-            .Reporte = New ValoresEnsayosIntermediosPTFarma
-            .Formula = "{PrueterFarmaIntermedio.Producto} = '" & txtCodigo.Text & "' And {PrueterFarmaIntermedio.Paso} = " & txtEtapa.Text & " And {PrueterFarmaIntermedio.Partida} = " & txtPartida.Text & " And {PrueterFarmaIntermedio.Producto} = {Terminado.Codigo}"
+		frm.Exportar(String.Format("{0}-{1}-{2}", txtCodigo.Text, txtPartida.Ceros(6), Date.Now.ToString("yyyyMMdd-HHmm")), ExportFormatType.PortableDocFormat, String.Format("{0}", _CarpetaEtapaIntermedia))
 
-            Dim nombreArchivo = String.Format("{0} {1} - Etapa {2}.pdf", txtCodigo.Text, txtPartida.Ceros(6), txtEtapa.Ceros(2))
+	End Sub
 
-            File.Delete(RUTA_TEMP & nombreArchivo)
+	Private Sub _RecalcularFormulas()
 
-            .Exportar(nombreArchivo, ExportFormatType.PortableDocFormat, RUTA_TEMP)
+		Dim WTipo As String
 
-            Dim WTitulo, WCuerpo As String
+		For Each row As DataGridViewRow In dgvEnsayos.Rows
+			With row
+				WTipo = OrDefault(.Cells("TipoEspecif").Value, "")
 
-            If EsActualizacion Then
-                WTitulo = "Actualización de Ensayos Intermedios Ingresados - " & txtCodigo.Text & " - Pda " & txtPartida.Ceros(6) & " - Etapa " & txtEtapa.Ceros(2) & ""
-                WCuerpo = "Se le informa sobre una actualización en el ingreso de Ensayos Intermedios para la Etapa <b>" & txtEtapa.Ceros(2) & "</b> correspondiente al Producto <b>" & txtCodigo.Text & "</b> Pda: <b>" & txtPartida.Ceros(6) & "</b> "
-            Else
-                WTitulo = "Ingreso de Ensayos Intermedios - " & txtCodigo.Text & " - Pda " & txtPartida.Ceros(6) & " - Etapa " & txtEtapa.Ceros(2) & ""
-                WCuerpo = "Se ha registrado un nuevo ingreso de Ensayos Intermedios para la Etapa " & txtEtapa.Ceros(2) & " correspondiente al Producto " & txtCodigo.Text & " Pda: " & txtPartida.Ceros(6) & " "
-            End If
+				If Val(WTipo) = 2 Then
 
-            If File.Exists(RUTA_TEMP & nombreArchivo) Then
-                .EnviarPorEmail(RUTA_TEMP & nombreArchivo, True, WTitulo, WCuerpo, DESTINATARIOS_AVISO_ENSAYOS_INTERMEDIOS)
-            Else
-                MsgBox("Ha ocurrido un inconveniente al querer generar el PDF con los ensayos intermedios.", MsgBoxStyle.Exclamation)
-            End If
+					Dim WFormula As String = OrDefault(.Cells("FormulaEspecif").Value, "")
 
-        End With
-    End Sub
+					Dim parser As New ExpressionParser()
 
-    Private Sub _GuardarNuevaVersionPDFConEnsayosIntermedios()
+					For i = 1 To 10
 
-        Dim frm As ConsultasVarias.VistaPrevia = New ConsultasVarias.VistaPrevia
+						Dim WValor As String = OrDefault(.Cells("VariableValor" & i).Value, "0").Replace(",", ".")
 
-        With frm
-            .Reporte = New ValoresEnsayosIntermediosPTFarma
-            .Formula = "{PrueterFarmaIntermedio.Partida} = " & txtPartida.Text & " AND {Prueterfarmaintermedio.Paso} = " & txtEtapa.Text & " AND {Prueterfarmaintermedio.Producto} = '" & txtCodigo.Text & "' AND {Prueterfarmaintermedio.Producto} = {Terminado.Codigo}"
-        End With
+						If WValor.StartsWith(".") Then WValor = "0" & WValor
 
-        frm.Exportar(String.Format("{0}-{1}-{2}", txtCodigo.Text, txtPartida.Ceros(6), Date.Now.ToString("yyyyMMdd-HHmm")), ExportFormatType.PortableDocFormat, String.Format("{0}", _CarpetaEtapaIntermedia))
+						parser.Values.Add("v" & i, WValor)
 
-    End Sub
+					Next
 
-    Private Sub _RecalcularFormulas()
+					Dim regex As New Regex("R[1-9]{1,2}")
 
-        Dim WTipo As String = ""
+					For Each m As Match In regex.Matches(WFormula)
 
-        For Each row As DataGridViewRow In dgvEnsayos.Rows
-            With row
-                WTipo = OrDefault(.Cells("TipoEspecif").Value, "")
+						Dim renglon As Integer = Val(m.Value.ToString.Replace("R", ""))
 
-                If Val(WTipo) = 2 Then
+						If renglon <= dgvEnsayos.Rows.Count Then
+							parser.Values.Add(LCase(m.Value), OrDefault(dgvEnsayos.Rows(renglon - 1).Cells("Valor").Value, "0").ToString.Replace(",", ""))
+						End If
 
-                    Dim WFormula As String = OrDefault(.Cells("FormulaEspecif").Value, "")
+					Next
 
-                    Dim parser As New ExpressionParser()
+					.Cells("Valor").Value = formatonumerico(OrDefault(parser.Parse(WFormula), "").ToString.Replace(",", "."), OrDefault(.Cells("Decimales").Value, 2))
 
-                    For i = 1 To 10
+					If OrDefault(.Cells("Decimales").Value, 2) = 0 Then
+						.Cells("Valor").Value = CInt(.Cells("Valor").Value.ToString.Replace(".", ","))
+					End If
 
-                        Dim WValor As String = OrDefault(.Cells("VariableValor" & i).Value, "0").Replace(",", ".")
+					If .Cells("Valor").Value = "NaN" Then
+						dgvEnsayos.CurrentCell = row.Cells("Valor")
+						dgvEnsayos.Focus()
+						Throw New FormatoNoNumericoException("Hay un error en los valores de las variables proporcionadas para la Fórmula. " & vbCrLf & vbCrLf & "Por favor, verifique y vuelva a intentar.")
+					End If
 
-                        If WValor.StartsWith(".") Then WValor = "0" & WValor
+				End If
 
-                        parser.Values.Add("v" & i, WValor)
+			End With
+		Next
 
-                    Next
+	End Sub
 
-                    Dim regex As New Regex("R[1-9]{1,2}")
+	'
+	' Validamos los valores ingresados.
+	'
+	' Se validan los datos para aquellos Prductos para los que se han definido
+	' las especificaciones por Sistema. En los casos de aquellos productos que no,
+	' se deja sin validación como hasta el dia de hoy.
+	'
+	Private Function _ValidarValoresIngresados() As Boolean
 
-                    For Each m As Match In regex.Matches(WFormula)
+		' ReSharper disable once LoopCanBeConvertedToQuery
+		For Each row As DataGridViewRow In dgvEnsayos.Rows
+			If Not _ValidarDato(row) Then Return False
+		Next
 
-                        Dim renglon As Integer = Val(m.Value.ToString.Replace("R", ""))
+		Return True
 
-                        If renglon <= dgvEnsayos.Rows.Count Then
-                            parser.Values.Add(LCase(m.Value), OrDefault(dgvEnsayos.Rows(renglon - 1).Cells("Valor").Value, "0").ToString.Replace(",", ""))
-                        End If
+	End Function
 
-                    Next
+	Private Function _ValidarDato(ByVal row As DataGridViewRow, Optional ByVal ModoSilencioso As Boolean = False) As Boolean
 
-                    .Cells("Valor").Value = formatonumerico(OrDefault(parser.Parse(WFormula), "").ToString.Replace(",", "."), OrDefault(.Cells("Decimales").Value, 2))
+		With row
 
-                    If OrDefault(.Cells("Decimales").Value, 2) = 0 Then
-                        .Cells("Valor").Value = CInt(.Cells("Valor").Value.ToString.Replace(".", ","))
-                    End If
+			Dim WTipo As String = OrDefault(.Cells("TipoEspecif").Value, "")
+			Dim WMenorIgual As String = OrDefault(.Cells("MenorIgualEspecif").Value, "")
+			Dim WMin As Double = Val(formatonumerico(OrDefault(.Cells("DesdeEspecif").Value, ""), 10))
+			Dim WMax As Double = Val(formatonumerico(OrDefault(.Cells("HastaEspecif").Value, ""), 10))
+			Dim WValor As String = OrDefault(.Cells("Valor").Value, "")
+			Dim WEns As String = OrDefault(.Cells("Ensayo").Value, "")
 
-                    If .Cells("Valor").Value = "NaN" Then
-                        dgvEnsayos.CurrentCell = row.Cells("Valor")
-                        dgvEnsayos.Focus()
-                        Throw New FormatoNoNumericoException("Hay un error en los valores de las variables proporcionadas para la Fórmula. " & vbCrLf & vbCrLf & "Por favor, verifique y vuelva a intentar.")
-                    End If
+			If WEns.Trim <> "" And WValor.Trim <> "" And WTipo.Trim <> "" Then
 
-                End If
+				If Val(WTipo) = 1 Or Val(WTipo) = 2 Then
 
-            End With
-        Next
+					If WValor.ToUpper <> "P" Then
 
-    End Sub
+						If Not Regex.IsMatch(WValor, "(^[\-]?\d+[\.\,]?(\d+)?$)") Then
+							dgvEnsayos.CurrentCell = row.Cells("Valor")
+							dgvEnsayos.Focus()
+							If Not ModoSilencioso Then
+								Throw New FormatoNoNumericoException("Hay un error de Formato en el valor proporcionado. " & vbCrLf & vbCrLf & "Se esperaba un valor numérico.")
+							Else
+								Return False
+							End If
+						End If
 
-    '
-    ' Validamos los valores ingresados.
-    '
-    ' Se validan los datos para aquellos Prductos para los que se han definido
-    ' las especificaciones por Sistema. En los casos de aquellos productos que no,
-    ' se deja sin validación como hasta el dia de hoy.
-    '
-    Private Function _ValidarValoresIngresados() As Boolean
+						Dim WValorNum As Double = Val(formatonumerico(WValor, 10))
 
-        ' ReSharper disable once LoopCanBeConvertedToQuery
-        For Each row As DataGridViewRow In dgvEnsayos.Rows
-            If Not _ValidarDato(row) Then Return False
-        Next
+						If Val(WMenorIgual) = 0 And (WValorNum < WMin Or WValorNum > WMax) Then Return False
 
-        Return True
+						If Val(WMenorIgual) = 1 And (WValorNum < WMin Or WValorNum >= WMax) Then Return False
 
-    End Function
+					End If
 
-    Private Function _ValidarDato(ByVal row As DataGridViewRow, Optional ByVal ModoSilencioso As Boolean = False) As Boolean
+				Else
 
-        With row
+					If Not {"S", "P", "N"}.Contains(WValor.ToUpper) Then Return False
 
-            Dim WTipo As String = OrDefault(.Cells("TipoEspecif").Value, "")
-            Dim WMenorIgual As String = OrDefault(.Cells("MenorIgualEspecif").Value, "")
-            Dim WMin As Double = Val(formatonumerico(OrDefault(.Cells("DesdeEspecif").Value, ""), 10))
-            Dim WMax As Double = Val(formatonumerico(OrDefault(.Cells("HastaEspecif").Value, ""), 10))
-            Dim WValor As String = OrDefault(.Cells("Valor").Value, "")
-            Dim WEns As String = OrDefault(.Cells("Ensayo").Value, "")
+				End If
 
-            If WEns.Trim <> "" And WValor.Trim <> "" And WTipo.Trim <> "" Then
+			End If
 
-                If Val(WTipo) = 1 Or Val(WTipo) = 2 Then
+		End With
+		Return True
+	End Function
 
-                    If WValor.ToUpper <> "P" Then
+	Private Function _GenerarImpreResultado(ByVal wTipoEspecif As Object, ByVal wDesdeEspecif As Object, ByVal wHastaEspecif As Object, ByVal wUnidadEspecif As Object, ByVal wValor As Object) As Object
 
-                        If Not Regex.IsMatch(WValor, "(^[\-]?\d+[\.\,]?(\d+)?$)") Then
-                            dgvEnsayos.CurrentCell = row.Cells("Valor")
-                            dgvEnsayos.Focus()
-                            If Not ModoSilencioso Then
-                                Throw New FormatoNoNumericoException("Hay un error de Formato en el valor proporcionado. " & vbCrLf & vbCrLf & "Se esperaba un valor numérico.")
-                            Else
-                                Return False
-                            End If
-                        End If
+		If wValor = "" Then Return ""
 
-                        Dim WValorNum As Double = Val(formatonumerico(WValor, 10))
+		If UCase(Trim(wValor)) = "P" Then Return "PENDIENTE"
 
-                        If Val(WMenorIgual) = 0 And (WValorNum < WMin Or WValorNum > WMax) Then Return False
+		If Val(wTipoEspecif) = 1 Or Val(wTipoEspecif) = 2 Then
 
-                        If Val(WMenorIgual) = 1 And (WValorNum < WMin Or WValorNum >= WMax) Then Return False
+			If Val(wDesdeEspecif) = 0 And Val(wHastaEspecif) = 9999 Then Return "CUMPLE"
 
-                    End If
+			Dim WValido As Double = 0
 
-                Else
+			If Not Double.TryParse(wValor.ToString, WValido) Then Return ""
 
-                    If Not {"S", "P", "N"}.Contains(WValor.ToUpper) Then Return False
+			Dim WDecimales As Short = _CalcularCantidadDecimales(wDesdeEspecif, 0)
 
-                End If
+			If WDecimales < _CalcularCantidadDecimales(wHastaEspecif, 0) Then WDecimales = _CalcularCantidadDecimales(wHastaEspecif, 0)
 
-            End If
+			wValor = formatonumerico(wValor, WDecimales)
 
-        End With
-        Return True
-    End Function
+			Return String.Format("{0} {1}", wValor, wUnidadEspecif)
 
-    Private Function _GenerarImpreResultado(ByVal wTipoEspecif As Object, ByVal wDesdeEspecif As Object, ByVal wHastaEspecif As Object, ByVal wUnidadEspecif As Object, ByVal wValor As Object) As Object
+		Else
 
-        If wValor = "" Then Return ""
+			Select Case UCase(wValor)
+				Case "S"
+					Return "CUMPLE"
+				Case "N"
+					Return "NO CUMPLE"
+				Case Else
+					Return ""
+			End Select
 
-        If UCase(Trim(wValor)) = "P" Then Return "PENDIENTE"
+		End If
 
-        If Val(wTipoEspecif) = 1 Or Val(wTipoEspecif) = 2 Then
+	End Function
 
-            If Val(wDesdeEspecif) = 0 And Val(wHastaEspecif) = 9999 Then Return "CUMPLE"
+	Private Sub _ValidarDatos()
+		'
+		' Verificamos Datos Obligatorios.
+		'
+		If Val(txtPartida.Text) = 0 Then Throw New Exception("No se ha cargado una partida válida.")
+		If txtCodigo.Text.Replace(" ", "").Length < 12 Then Throw New Exception("No se ha cargado un Código de Producto Terminado válido.")
+		If Val(txtEtapa.Text) = 0 Then Throw New Exception("No se ha cargado una Etapa válida.")
+		If txtLibros.Text.Trim = "" Then Throw New Exception("No se ha informado la información de Libros correspondiente.")
+		If txtPaginas.Text.Trim = "" Then Throw New Exception("No se ha informado la información de Páginas correspondiente.")
+		If txtConfecciono.Text.Trim = "" Then Throw New Exception("No se ha informado quién Confecciona el ingreso de Ensayos.")
 
-            Dim WValido As Double = 0
+		'
+		' Verificamos Datos Ingresados.
+		'
+		Dim WTerminado As DataRow = GetSingle("SELECT Codigo FROM Terminado WHERE Codigo = '" & txtCodigo.Text & "'")
+		If WTerminado Is Nothing Then Throw New Exception("El Código de Producto Terminado es inválido.")
 
-            If Not Double.TryParse(wValor.ToString, WValido) Then Return ""
+		Dim WHoja As DataRow = GetSingle("SELECT Producto FROM Hoja WHERE Hoja = '" & txtPartida.Text & "' And Renglon in ('1', '01')")
 
-            Dim WDecimales As Short = _CalcularCantidadDecimales(wDesdeEspecif, 0)
+		If WHoja Is Nothing Then Throw New Exception("La Hoja indicada es Inexistente.")
 
-            If WDecimales < _CalcularCantidadDecimales(wHastaEspecif, 0) Then WDecimales = _CalcularCantidadDecimales(wHastaEspecif, 0)
+		If WHoja.Item("Producto").ToString.ToUpper <> txtCodigo.Text.ToUpper Then Throw New Exception("El Código de Producto Terminado indicado no se corresponde con el indicado en la Hoja de Producción.")
 
-            wValor = formatonumerico(wValor, WDecimales)
+		If EsFarma() Then
+			'
+			' Verificamos si se ha grabado anteriormente por Desvio, en este caso se considera Bloqueado e imposible de ser actualizado por este medio.
+			'
+			Dim WDesvio As DataRow = GetSingle("SELECT TOP 1 PorDesvio, NroDesvio FROM PrueterFarmaIntermedio WHERE Producto = '" & txtCodigo.Text & "' AND Partida = '" & txtPartida.Text & "' AND Paso = '" & txtEtapa.Text & "' And Renglon = 1")
 
-            Return String.Format("{0} {1}", wValor, wUnidadEspecif)
+			If WDesvio IsNot Nothing Then
+				With WDesvio
+					Dim WPorDesvio As Integer = OrDefault(.Item("PorDesvio"), 0)
+					Dim WNroDesvio As String = OrDefault(.Item("NroDesvio"), "")
 
-        Else
+					If WPorDesvio = 1 And WNroDesvio.Trim <> "" Then Throw New Exception("Los resultados informados para esta Etapa, se encuentran Bloqueados debido a que fueron ingresados por Desvío.")
 
-            Select Case UCase(wValor)
-                Case "S"
-                    Return "CUMPLE"
-                Case "N"
-                    Return "NO CUMPLE"
-                Case Else
-                    Return ""
-            End Select
+				End With
+			End If
 
-        End If
 
-    End Function
+			'
+			' Validamos en caso de tener informado un componente si tiene o no un lote/partida valido/a.
+			'
+			If txtComponente.Text.Trim <> "" Then
 
-    Private Sub _ValidarDatos()
-        '
-        ' Verificamos Datos Obligatorios.
-        '
-        If Val(txtPartida.Text) = 0 Then Throw New Exception("No se ha cargado una partida válida.")
-        If txtCodigo.Text.Replace(" ", "").Length < 12 Then Throw New Exception("No se ha cargado un Código de Producto Terminado válido.")
-        If Val(txtEtapa.Text) = 0 Then Throw New Exception("No se ha cargado una Etapa válida.")
-        If txtLibros.Text.Trim = "" Then Throw New Exception("No se ha informado la información de Libros correspondiente.")
-        If txtPaginas.Text.Trim = "" Then Throw New Exception("No se ha informado la información de Páginas correspondiente.")
-        If txtConfecciono.Text.Trim = "" Then Throw New Exception("No se ha informado quién Confecciona el ingreso de Ensayos.")
+				Dim WLongitud As Short = txtComponente.Text.Replace(" ", "").Length
 
-        '
-        ' Verificamos Datos Ingresados.
-        '
-        Dim WTerminado As DataRow = GetSingle("SELECT Codigo FROM Terminado WHERE Codigo = '" & txtCodigo.Text & "'")
-        If WTerminado Is Nothing Then Throw New Exception("El Código de Producto Terminado es inválido.")
+				If WLongitud = 10 Or WLongitud = 12 Then
+					Dim WComp As DataRow
 
-        Dim WHoja As DataRow = GetSingle("SELECT Producto FROM Hoja WHERE Hoja = '" & txtPartida.Text & "' And Renglon in ('1', '01')")
+					If WLongitud = 10 Then
+						WComp = GetSingle("SELECT Codigo FROM Articulo WHERE Codigo = '" & txtComponente.Text & "'")
+					Else
+						WComp = GetSingle("SELECT Codigo FROM Terminado WHERE Codigo = '" & txtComponente.Text & "'")
+					End If
 
-        If WHoja Is Nothing Then Throw New Exception("La Hoja indicada es Inexistente.")
+					If WComp Is Nothing Then Throw New Exception("El código del Componente, no es un codigo válido.")
 
-        If WHoja.Item("Producto").ToString.ToUpper <> txtCodigo.Text.ToUpper Then Throw New Exception("El Código de Producto Terminado indicado no se corresponde con el indicado en la Hoja de Producción.")
+					Dim WLotePartida As DataRow = Nothing
 
-        If Operador.EsFarma Then
-            '
-            ' Verificamos si se ha grabado anteriormente por Desvio, en este caso se considera Bloqueado e imposible de ser actualizado por este medio.
-            '
-            Dim WDesvio As DataRow = GetSingle("SELECT TOP 1 PorDesvio, NroDesvio FROM PrueterFarmaIntermedio WHERE Producto = '" & txtCodigo.Text & "' AND Partida = '" & txtPartida.Text & "' AND Paso = '" & txtEtapa.Text & "' And Renglon = 1")
+					For Each empresa As String In Conexion.Empresas
+						If WLongitud = 10 Then
+							WLotePartida = GetSingle("SELECT Laudo FROM Laudo WHERE Articulo = '" & txtComponente.Text & "' And Laudo = '" & txtLotePartida.Text & "' And Renglon = '1'", empresa)
+						Else
+							WLotePartida = GetSingle("SELECT Hoja FROM Hoja WHERE Producto = '" & txtComponente.Text & "' And Hoja = '" & txtLotePartida.Text & "' And Renglon = '1'", empresa)
+						End If
+						If WLotePartida IsNot Nothing Then Exit For
+					Next
 
-            If WDesvio IsNot Nothing Then
-                With WDesvio
-                    Dim WPorDesvio As Integer = OrDefault(.Item("PorDesvio"), 0)
-                    Dim WNroDesvio As String = OrDefault(.Item("NroDesvio"), "")
+					If WLotePartida Is Nothing Then Throw New Exception("El Lote/Partida indicado para el Componente, no es válido.")
 
-                    If WPorDesvio = 1 And WNroDesvio.Trim <> "" Then Throw New Exception("Los resultados informados para esta Etapa, se encuentran Bloqueados debido a que fueron ingresados por Desvío.")
+				Else
+					Throw New Exception("El código del Componente, no es un codigo válido.")
+				End If
 
-                End With
-            End If
+			End If
+		End If
 
+		'
+		' Verificamos en caso de que ya se encuentre grabado, si tenia algun dato como Pendiente. En caso de que no, se pide la clave de seguridad para poder actualizar.
+		'
+		Dim WDatos As DataTable
 
-            '
-            ' Validamos en caso de tener informado un componente si tiene o no un lote/partida valido/a.
-            '
-            If txtComponente.Text.Trim <> "" Then
+		If Val(txtEtapa.Text) = 99 Then
+			WDatos = GetAll("SELECT ValorReal FROM " & TablaPrueTer & " WHERE Producto = '" & txtCodigo.Text & "' AND Partida = '" & txtPartida.Text & "' ORDER BY Clave")
+		Else
+			WDatos = GetAll("SELECT ValorReal FROM PrueterFarmaIntermedio WHERE Producto = '" & txtCodigo.Text & "' AND Partida = '" & txtPartida.Text & "' AND Paso = '" & txtEtapa.Text & "' And SubEtapa = '" & Val(txtSubEtapa.Text) & "' ORDER BY Clave")
+		End If
 
-                Dim WLongitud As Short = txtComponente.Text.Replace(" ", "").Length
+		If WDatos.Rows.Count > 0 Then
+			Dim WBloqueado = True
 
-                If WLongitud = 10 Or WLongitud = 12 Then
-                    Dim WComp As DataRow = Nothing
+			For Each row As DataRow In WDatos.Rows
+				Dim WValor As String = OrDefault(row.Item("ValorReal"), "")
 
-                    If WLongitud = 10 Then
-                        WComp = GetSingle("SELECT Codigo FROM Articulo WHERE Codigo = '" & txtComponente.Text & "'")
-                    Else
-                        WComp = GetSingle("SELECT Codigo FROM Terminado WHERE Codigo = '" & txtComponente.Text & "'")
-                    End If
+				If WValor.Trim.ToUpper = "P" Then WBloqueado = False
 
-                    If WComp Is Nothing Then Throw New Exception("El código del Componente, no es un codigo válido.")
+			Next
 
-                    Dim WLotePartida As DataRow = Nothing
+			WActualizacionBloqueada = WBloqueado And Not WAutorizaActualizacionBloqueado
 
-                    For Each empresa As String In Conexion.Empresas
-                        If WLongitud = 10 Then
-                            WLotePartida = GetSingle("SELECT Laudo FROM Laudo WHERE Articulo = '" & txtComponente.Text & "' And Laudo = '" & txtLotePartida.Text & "' And Renglon = '1'", empresa)
-                        Else
-                            WLotePartida = GetSingle("SELECT Hoja FROM Hoja WHERE Producto = '" & txtComponente.Text & "' And Hoja = '" & txtLotePartida.Text & "' And Renglon = '1'", empresa)
-                        End If
-                        If WLotePartida IsNot Nothing Then Exit For
-                    Next
+		End If
 
-                    If WLotePartida Is Nothing Then Throw New Exception("El Lote/Partida indicado para el Componente, no es válido.")
+	End Sub
 
-                Else
-                    Throw New Exception("El código del Componente, no es un codigo válido.")
-                End If
+	Public Sub _ProcesarIngresoClaveSeguridad(ByVal WClave As Object) Implements IIngresoClaveSeguridad._ProcesarIngresoClaveSeguridad
 
-            End If
-        End If
+		WNoGrabaIniciales = False
+		WIDOperadorAnalista = ""
 
-        '
-        ' Verificamos en caso de que ya se encuentre grabado, si tenia algun dato como Pendiente. En caso de que no, se pide la clave de seguridad para poder actualizar.
-        '
-        Dim WDatos As DataTable = Nothing
+		Select Case WMotivoClaveSeguridad
+			Case TiposSolicitudClaveSeguridad.IngresoEnsayoIntermedioPorDesvio
+				If WClave.ToString.ToUpper = "SEGURO" Then
+					WEsPorDesvio = True
+					btnGrabar.PerformClick()
+					Exit Sub
+				End If
 
-        If Val(txtEtapa.Text) = 99 Then
-            WDatos = GetAll("SELECT ValorReal FROM " & TablaPrueTer & " WHERE Producto = '" & txtCodigo.Text & "' AND Partida = '" & txtPartida.Text & "' ORDER BY Clave")
-        Else
-            WDatos = GetAll("SELECT ValorReal FROM PrueterFarmaIntermedio WHERE Producto = '" & txtCodigo.Text & "' AND Partida = '" & txtPartida.Text & "' AND Paso = '" & txtEtapa.Text & "' And SubEtapa = '" & Val(txtSubEtapa.Text) & "' ORDER BY Clave")
-        End If
+				MsgBox("Clave Incorrecta")
+				Dim frm As New IngresoClaveSeguridad
+				frm.ShowDialog(Me)
 
-        If WDatos.Rows.Count > 0 Then
-            Dim WBloqueado = True
+			Case TiposSolicitudClaveSeguridad.ActualizarEnsayoBloqueado
 
-            For Each row As DataRow In WDatos.Rows
-                Dim WValor As String = OrDefault(row.Item("ValorReal"), "")
+				Dim WDatos As DataRow = GetSingle("SELECT Operador, GrabaV, FechaGrabaV FROM Operador WHERE Clave = '" & UCase(WClave) & "'", "SurfactanSa")
 
-                If WValor.Trim.ToUpper = "P" Then WBloqueado = False
+				If WDatos IsNot Nothing Then
+					Dim WGrabaV As String = OrDefault(WDatos.Item("GrabaV"), "")
+					If WGrabaV.ToUpper = "S" Then
+						WAutorizaActualizacionBloqueado = True
+						WIDOperadorAnalista = OrDefault(WDatos.Item("Operador"), "")
+						WNoGrabaIniciales = True
+						btnGrabar.PerformClick()
+						Exit Sub
+					End If
+				End If
 
-            Next
+				MsgBox("Clave Incorrecta")
+				Dim frm As New IngresoClaveSeguridad
+				frm.ShowDialog(Me)
 
-            WActualizacionBloqueada = WBloqueado And Not WAutorizaActualizacionBloqueado
+			Case TiposSolicitudClaveSeguridad.ActualizarEnsayoNoBloqueado
 
-        End If
+				Dim WDatos As DataRow = GetSingle("SELECT Operador, AnalistaLab FROM Operador WHERE Clave = '" & UCase(WClave) & "'", "SurfactanSa")
 
-    End Sub
+				If WDatos IsNot Nothing Then
+					Dim AnalistasLabPermiso As String = OrDefault(WDatos.Item("AnalistaLab"), "")
+					If AnalistasLabPermiso.ToUpper = "S" Then
+						WIDOperadorAnalista = OrDefault(WDatos.Item("Operador"), "")
+						btnGrabar_Click(Nothing, Nothing)
+						Exit Sub
+					End If
+				End If
 
-    Public Sub _ProcesarIngresoClaveSeguridad(ByVal WClave As Object) Implements IIngresoClaveSeguridad._ProcesarIngresoClaveSeguridad
+				MsgBox("Clave Incorrecta")
+				Dim frm As New IngresoClaveSeguridad
+				frm.ShowDialog(Me)
 
-        WNoGrabaIniciales = False
-        WIDOperadorAnalista = ""
 
-        Select Case WMotivoClaveSeguridad
-            Case TiposSolicitudClaveSeguridad.IngresoEnsayoIntermedioPorDesvio
-                If WClave.ToString.ToUpper = "SEGURO" Then
-                    WEsPorDesvio = True
-                    btnGrabar.PerformClick()
-                    Exit Sub
-                End If
+			Case Else
+				MsgBox("Clave Incorrecta")
+				Dim frm As New IngresoClaveSeguridad
+				frm.ShowDialog(Me)
+		End Select
 
-                MsgBox("Clave Incorrecta")
-                Dim frm As New IngresoClaveSeguridad
-                frm.ShowDialog(Me)
+	End Sub
 
-            Case TiposSolicitudClaveSeguridad.ActualizarEnsayoBloqueado
+	Public Sub _ProcesarIngresoMotivoDesvio(ByVal _Motivo As Object) Implements IIngresoMotivoDesvio._ProcesarIngresoMotivoDesvio
+		WMotivoDesvio = Trim(_Motivo)
+	End Sub
 
-                Dim WDatos As DataRow = GetSingle("SELECT Operador, GrabaV, FechaGrabaV FROM Operador WHERE Clave = '" & UCase(WClave) & "'", "SurfactanSa")
+	Private Sub btnActualizarEspecif_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnActualizarEspecif.Click
 
-                If WDatos IsNot Nothing Then
-                    Dim WGrabaV As String = OrDefault(WDatos.Item("GrabaV"), "")
-                    If WGrabaV.ToUpper = "S" Then
-                        WAutorizaActualizacionBloqueado = True
-                        WIDOperadorAnalista = OrDefault(WDatos.Item("Operador"), "")
-                        WNoGrabaIniciales = True
-                        btnGrabar.PerformClick()
-                        Exit Sub
-                    End If
-                End If
+		Dim WPrueterFarmaI As DataTable
 
-                MsgBox("Clave Incorrecta")
-                Dim frm As New IngresoClaveSeguridad
-                frm.ShowDialog(Me)
+		If Val(txtEtapa.Text) = 99 Then
+			WPrueterFarmaI = GetAll("SELECT * FROM PrueTerFarma WHERE Partida = '" & txtPartida.Text & "' ORDER By Clave")
+		Else
+			WPrueterFarmaI = GetAll("SELECT * FROM PrueTerFarmaIntermedio WHERE Partida = '" & txtPartida.Text & "' ORDER By Clave")
+		End If
 
-            Case TiposSolicitudClaveSeguridad.ActualizarEnsayoNoBloqueado
+		Dim WRenglon As UShort = 0
 
-                Dim WDatos As DataRow = GetSingle("SELECT Operador, AnalistaLab FROM Operador WHERE Clave = '" & UCase(WClave) & "'", "SurfactanSa")
+		Dim WEns, WDescripcion, WEspecificacion, WFarmacopea, WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif, WInformaEspecif, WImpreParametro, WFormulaEspecif As String
 
-                If WDatos IsNot Nothing Then
-                    Dim AnalistasLabPermiso As String = OrDefault(WDatos.Item("AnalistaLab"), "")
-                    If AnalistasLabPermiso.ToUpper = "S" Then
-                        WIDOperadorAnalista = OrDefault(WDatos.Item("Operador"), "")
-                        btnGrabar_Click(Nothing, Nothing)
-                        Exit Sub
-                    End If
-                End If
+		For Each row As DataRow In WPrueterFarmaI.Rows
+			With row
+				WEns = OrDefault(.Item("Ensayo"), 0)
+				WEspecificacion = OrDefault(.Item("Valor"), "")
+				WFarmacopea = OrDefault(.Item("Farmacopea"), "")
+				WTipoEspecif = OrDefault(.Item("TipoEspecif"), "")
+				WDesdeEspecif = OrDefault(.Item("DesdeEspecif"), "")
+				WHastaEspecif = OrDefault(.Item("HastaEspecif"), "")
+				WUnidadEspecif = OrDefault(.Item("UnidadEspecif"), "")
+				WMenorIgualEspecif = OrDefault(.Item("MenorIgualEspecif"), "")
+				WInformaEspecif = OrDefault(.Item("InformaEspecif"), "")
+				WFormulaEspecif = OrDefault(.Item("FormulaEspecif"), "")
+				Dim WValor = Trim(OrDefault(.Item("ValorReal"), ""))
+				WImpreParametro = _GenerarImpreParametro(WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif)
 
-                MsgBox("Clave Incorrecta")
-                Dim frm As New IngresoClaveSeguridad
-                frm.ShowDialog(Me)
+				Dim WFormulas(10, 2) As String
 
+				For i = 1 To 10
+					WFormulas(i, 1) = Trim(OrDefault(.Item("Variable" & i), ""))
+					WFormulas(i, 2) = Trim(OrDefault(.Item("VariableValor" & i), "0"))
+				Next
 
-            Case Else
-                MsgBox("Clave Incorrecta")
-                Dim frm As New IngresoClaveSeguridad
-                frm.ShowDialog(Me)
-        End Select
+				If Val(WTipoEspecif) = 0 And WImpreParametro <> "" Then WImpreParametro &= " (c)"
 
-    End Sub
+				WDescripcion = "" 'OrDefault(.Item("Ensayo"), 0)
 
-    Public Sub _ProcesarIngresoMotivoDesvio(ByVal _Motivo As Object) Implements IIngresoMotivoDesvio._ProcesarIngresoMotivoDesvio
-        WMotivoDesvio = Trim(_Motivo)
-    End Sub
+				If WRenglon > dgvEnsayos.Rows.Count - 1 Then WRenglon = dgvEnsayos.Rows.Add
 
-    Private Sub btnActualizarEspecif_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnActualizarEspecif.Click
+				With dgvEnsayos.Rows(WRenglon)
+					.Cells("Ensayo").Value = WEns
+					.Cells("Especificacion").Value = Trim(WEspecificacion)
+					.Cells("Descripcion").Value = Trim(WDescripcion)
+					.Cells("Farmacopea").Value = Trim(WFarmacopea)
+					.Cells("TipoEspecif").Value = WTipoEspecif
+					.Cells("DesdeEspecif").Value = WDesdeEspecif
+					.Cells("HastaEspecif").Value = WHastaEspecif
+					.Cells("UnidadEspecif").Value = WUnidadEspecif
+					.Cells("MenorIgualEspecif").Value = WMenorIgualEspecif
+					.Cells("InformaEspecif").Value = WInformaEspecif
+					.Cells("Parametro").Value = Trim(WImpreParametro)
+					.Cells("FormulaEspecif").Value = Trim(WFormulaEspecif)
 
-        Dim WPrueterFarmaI As DataTable = Nothing
+					For i = 1 To 10
+						.Cells("Variable" & i).Value = Trim(WFormulas(i, 1))
+						.Cells("VariableValor" & i).Value = WFormulas(i, 2)
+					Next
 
-        If Val(txtEtapa.Text) = 99 Then
-            WPrueterFarmaI = GetAll("SELECT * FROM PrueTerFarma WHERE Partida = '" & txtPartida.Text & "' ORDER By Clave")
-        Else
-            WPrueterFarmaI = GetAll("SELECT * FROM PrueTerFarmaIntermedio WHERE Partida = '" & txtPartida.Text & "' ORDER By Clave")
-        End If
+					.Cells("Decimales").Value = "2"
 
-        Dim WRenglon As UShort = 0
+					If Val(WTipoEspecif) = 2 Then
 
-        Dim WEns, WDescripcion, WEspecificacion, WFarmacopea, WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif, WInformaEspecif, WImpreParametro, WFormulaEspecif As String
+						.Cells("Decimales").Value = _CalcularCantidadDecimales(WValor, 2) 'IIf(WValor.Trim = "", "2", "0")
 
-        For Each row As DataRow In WPrueterFarmaI.Rows
-            With row
-                WEns = OrDefault(.Item("Ensayo"), 0)
-                WEspecificacion = OrDefault(.Item("Valor"), "")
-                WFarmacopea = OrDefault(.Item("Farmacopea"), "")
-                WTipoEspecif = OrDefault(.Item("TipoEspecif"), "")
-                WDesdeEspecif = OrDefault(.Item("DesdeEspecif"), "")
-                WHastaEspecif = OrDefault(.Item("HastaEspecif"), "")
-                WUnidadEspecif = OrDefault(.Item("UnidadEspecif"), "")
-                WMenorIgualEspecif = OrDefault(.Item("MenorIgualEspecif"), "")
-                WInformaEspecif = OrDefault(.Item("InformaEspecif"), "")
-                WFormulaEspecif = OrDefault(.Item("FormulaEspecif"), "")
-                Dim WValor = Trim(OrDefault(.Item("ValorReal"), ""))
-                WImpreParametro = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif)
+					End If
 
-                Dim WFormulas(10, 2) As String
 
-                For i = 1 To 10
-                    WFormulas(i, 1) = Trim(OrDefault(.Item("Variable" & i), ""))
-                    WFormulas(i, 2) = Trim(OrDefault(.Item("VariableValor" & i), "0"))
-                Next
+				End With
 
-                If Val(WTipoEspecif) = 0 And WImpreParametro <> "" Then WImpreParametro &= " (c)"
+				WRenglon += 1
 
-                WDescripcion = "" 'OrDefault(.Item("Ensayo"), 0)
+			End With
 
-                If WRenglon > dgvEnsayos.Rows.Count - 1 Then WRenglon = dgvEnsayos.Rows.Add
+		Next
 
-                With dgvEnsayos.Rows(WRenglon)
-                    .Cells("Ensayo").Value = WEns
-                    .Cells("Especificacion").Value = Trim(WEspecificacion)
-                    .Cells("Descripcion").Value = Trim(WDescripcion)
-                    .Cells("Farmacopea").Value = Trim(WFarmacopea)
-                    .Cells("TipoEspecif").Value = WTipoEspecif
-                    .Cells("DesdeEspecif").Value = WDesdeEspecif
-                    .Cells("HastaEspecif").Value = WHastaEspecif
-                    .Cells("UnidadEspecif").Value = WUnidadEspecif
-                    .Cells("MenorIgualEspecif").Value = WMenorIgualEspecif
-                    .Cells("InformaEspecif").Value = WInformaEspecif
-                    .Cells("Parametro").Value = Trim(WImpreParametro)
-                    .Cells("FormulaEspecif").Value = Trim(WFormulaEspecif)
+		WRenglon = 0
 
-                    For i = 1 To 10
-                        .Cells("Variable" & i).Value = Trim(WFormulas(i, 1))
-                        .Cells("VariableValor" & i).Value = WFormulas(i, 2)
-                    Next
+		Dim WCargaV As DataTable = GetAll("SELECT * FROM CargaV WHERE Terminado = '" & txtCodigo.Text & "' And Paso = '" & txtEtapa.Text & "' Order by Clave")
 
-                    .Cells("Decimales").Value = "2"
+		For Each row As DataRow In WCargaV.Rows
+			With row
+				WEns = OrDefault(.Item("Ensayo"), 0)
+				WEspecificacion = OrDefault(.Item("Valor"), "")
+				WFarmacopea = OrDefault(.Item("Farmacopea"), "")
+				WTipoEspecif = OrDefault(.Item("TipoEspecif"), "")
+				WDesdeEspecif = OrDefault(.Item("DesdeEspecif"), "")
+				WHastaEspecif = OrDefault(.Item("HastaEspecif"), "")
+				WUnidadEspecif = OrDefault(.Item("UnidadEspecif"), "")
+				WMenorIgualEspecif = OrDefault(.Item("MenorIgualEspecif"), "")
+				WInformaEspecif = OrDefault(.Item("InformaEspecif"), "")
+				WFormulaEspecif = OrDefault(.Item("FormulaEspecif"), "")
+				WImpreParametro = _GenerarImpreParametro(WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif)
 
-                    If Val(WTipoEspecif) = 2 Then
+				Dim WFormulas(10) As String
 
-                        .Cells("Decimales").Value = _CalcularCantidadDecimales(WValor, 2) 'IIf(WValor.Trim = "", "2", "0")
+				For i = 1 To 10
+					WFormulas(i) = Trim(OrDefault(.Item("Variable" & i), ""))
+				Next
 
-                    End If
+				If Val(WTipoEspecif) = 0 And WImpreParametro <> "" Then WImpreParametro &= " (c)"
 
+				WDescripcion = "" 'OrDefault(.Item("Ensayo"), 0)
 
-                End With
+				If WRenglon > dgvEnsayos.Rows.Count - 1 Then WRenglon = dgvEnsayos.Rows.Add
 
-                WRenglon += 1
+				With dgvEnsayos.Rows(WRenglon)
+					.Cells("Ensayo").Value = WEns
+					.Cells("Especificacion").Value = Trim(WEspecificacion)
+					.Cells("EspecificacionIngles").Value = ""
+					.Cells("Descripcion").Value = Trim(WDescripcion)
+					.Cells("Farmacopea").Value = Trim(WFarmacopea)
+					.Cells("TipoEspecif").Value = WTipoEspecif
+					.Cells("DesdeEspecif").Value = WDesdeEspecif
+					.Cells("HastaEspecif").Value = WHastaEspecif
+					.Cells("UnidadEspecif").Value = WUnidadEspecif
+					.Cells("MenorIgualEspecif").Value = WMenorIgualEspecif
+					.Cells("InformaEspecif").Value = WInformaEspecif
+					.Cells("FormulaEspecif").Value = WFormulaEspecif
+					.Cells("Parametro").Value = Trim(WImpreParametro)
 
-            End With
+					For i = 1 To 10
+						.Cells("Variable" & i).Value = Trim(WFormulas(i))
+						.Cells("VariableValor" & i).Value = "0"
+					Next
 
-        Next
+				End With
 
-        WRenglon = 0
+				WRenglon += 1
 
-        Dim WCargaV As DataTable = GetAll("SELECT * FROM CargaV WHERE Terminado = '" & txtCodigo.Text & "' And Paso = '" & txtEtapa.Text & "' Order by Clave")
+			End With
 
-        For Each row As DataRow In WCargaV.Rows
-            With row
-                WEns = OrDefault(.Item("Ensayo"), 0)
-                WEspecificacion = OrDefault(.Item("Valor"), "")
-                WFarmacopea = OrDefault(.Item("Farmacopea"), "")
-                WTipoEspecif = OrDefault(.Item("TipoEspecif"), "")
-                WDesdeEspecif = OrDefault(.Item("DesdeEspecif"), "")
-                WHastaEspecif = OrDefault(.Item("HastaEspecif"), "")
-                WUnidadEspecif = OrDefault(.Item("UnidadEspecif"), "")
-                WMenorIgualEspecif = OrDefault(.Item("MenorIgualEspecif"), "")
-                WInformaEspecif = OrDefault(.Item("InformaEspecif"), "")
-                WFormulaEspecif = OrDefault(.Item("FormulaEspecif"), "")
-                WImpreParametro = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif)
+		Next
 
-                Dim WFormulas(10) As String
+		WRenglon = 0
 
-                For i = 1 To 10
-                    WFormulas(i) = Trim(OrDefault(.Item("Variable" & i), ""))
-                Next
+		'
+		' Cargamos las especificaciones en Inglés.
+		'
+		Dim WCargaVIngles As DataTable = GetAll("SELECT Valor, UnidadEspecif FROM CargaVIngles WHERE Terminado = '" & txtCodigo.Text & "' And Paso = '" & txtEtapa.Text & "' Order By Clave")
 
-                If Val(WTipoEspecif) = 0 And WImpreParametro <> "" Then WImpreParametro &= " (c)"
+		For Each row As DataRow In WCargaVIngles.Rows
 
-                WDescripcion = "" 'OrDefault(.Item("Ensayo"), 0)
+			With row
 
-                If WRenglon > dgvEnsayos.Rows.Count - 1 Then WRenglon = dgvEnsayos.Rows.Add
+				WUnidadEspecif = Trim(OrDefault(.Item("UnidadEspecif"), ""))
+				WEspecificacion = Trim(OrDefault(.Item("Valor"), ""))
 
-                With dgvEnsayos.Rows(WRenglon)
-                    .Cells("Ensayo").Value = WEns
-                    .Cells("Especificacion").Value = Trim(WEspecificacion)
-                    .Cells("EspecificacionIngles").Value = ""
-                    .Cells("Descripcion").Value = Trim(WDescripcion)
-                    .Cells("Farmacopea").Value = Trim(WFarmacopea)
-                    .Cells("TipoEspecif").Value = WTipoEspecif
-                    .Cells("DesdeEspecif").Value = WDesdeEspecif
-                    .Cells("HastaEspecif").Value = WHastaEspecif
-                    .Cells("UnidadEspecif").Value = WUnidadEspecif
-                    .Cells("MenorIgualEspecif").Value = WMenorIgualEspecif
-                    .Cells("InformaEspecif").Value = WInformaEspecif
-                    .Cells("FormulaEspecif").Value = WFormulaEspecif
-                    .Cells("Parametro").Value = Trim(WImpreParametro)
+				If WRenglon > dgvEnsayos.Rows.Count - 1 Then WRenglon = dgvEnsayos.Rows.Add
 
-                    For i = 1 To 10
-                        .Cells("Variable" & i).Value = Trim(WFormulas(i))
-                        .Cells("VariableValor" & i).Value = "0"
-                    Next
+				With dgvEnsayos.Rows(WRenglon)
 
-                End With
+					If WUnidadEspecif = "" Then
+						.Cells("EspecificacionIngles").Value = WEspecificacion
+					Else
+						.Cells("EspecificacionIngles").Value = String.Format("{0} ({1})", WEspecificacion, WUnidadEspecif)
+					End If
 
-                WRenglon += 1
+					.Cells("UnidadEspecif").Value = WUnidadEspecif
+				End With
 
-            End With
+				WRenglon += 1
 
-        Next
+			End With
 
-        WRenglon = 0
+		Next
 
-        '
-        ' Cargamos las especificaciones en Inglés.
-        '
-        Dim WCargaVIngles As DataTable = GetAll("SELECT Valor, UnidadEspecif FROM CargaVIngles WHERE Terminado = '" & txtCodigo.Text & "' And Paso = '" & txtEtapa.Text & "' Order By Clave")
+	End Sub
 
-        For Each row As DataRow In WCargaVIngles.Rows
+	Private Function _CalcularCantidadDecimales(ByVal WValor As String, Optional ByVal _Default As Short = 0) As Short
 
-            With row
+		If Double.TryParse(WValor, Nothing) Then
+			Dim aux As Integer = WValor.Trim.IndexOfAny({",", "."})
 
-                WUnidadEspecif = Trim(OrDefault(.Item("UnidadEspecif"), ""))
-                WEspecificacion = Trim(OrDefault(.Item("Valor"), ""))
+			If aux > 0 Then
+				Dim t As String = _Right(WValor, WValor.Trim.Replace(".", "").Replace(",", "").Length - aux)
+				Return t.Length
+			End If
+		End If
 
-                If WRenglon > dgvEnsayos.Rows.Count - 1 Then WRenglon = dgvEnsayos.Rows.Add
+		Return _Default
 
-                With dgvEnsayos.Rows(WRenglon)
+	End Function
 
-                    If WUnidadEspecif = "" Then
-                        .Cells("EspecificacionIngles").Value = WEspecificacion
-                    Else
-                        .Cells("EspecificacionIngles").Value = String.Format("{0} ({1})", WEspecificacion, WUnidadEspecif)
-                    End If
+	Private Sub btnImprimirEnsayosIngresados_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnRevalida.Click, btnReimprimir.Click
 
-                    .Cells("UnidadEspecif").Value = WUnidadEspecif
-                End With
+		If Val(txtEtapa.Text) = 99 Then
 
-                WRenglon += 1
+			Dim WImpre() As String = _PrepararInformacionRegistroEnsayoFinalPT()
 
-            End With
+			_GenerarReporteResultadosCalidad(txtPartida.Text, 2, WImpre(0), WImpre(1), WImpre(2), WImpre(3))
 
-        Next
+		Else
 
-    End Sub
+			With New VistaPrevia
+				.Reporte = New ValoresEnsayosIntermediosPTFarma
+				.Formula = "{PrueterFarmaIntermedio.Producto} = '" & txtCodigo.Text & "' And {PrueterFarmaIntermedio.Paso} = " & txtEtapa.Text & " And {PrueterFarmaIntermedio.Partida} = " & txtPartida.Text & " And {PrueterFarmaIntermedio.Producto} = {Terminado.Codigo}"
+				.Mostrar()
+			End With
 
-    Private Function _CalcularCantidadDecimales(ByVal WValor As String, Optional ByVal _Default As Short = 0) As Short
+		End If
 
-        If Double.TryParse(WValor, Nothing) Then
-            Dim aux As Integer = WValor.Trim.IndexOfAny({",", "."})
+	End Sub
 
-            If aux > 0 Then
-                Dim t As String = _Right(WValor, WValor.Trim.Replace(".", "").Replace(",", "").Length - aux)
-                Return t.Length
-            End If
-        End If
+	Private Function _PrepararInformacionRegistroEnsayoFinalPT() As String()
 
-        Return _Default
+		'
+		' Reprocesamos y Actualizamos las descripciones de los parámetros para que estén al dia con las posibles modificaciones.
+		'
+		Dim WPrueterFarmaI As DataTable = GetAll("SELECT Clave, TipoEspecif, DesdeEspecif, HastaEspecif, UnidadEspecif, MenorIgualEspecif, Valor FROM " & TablaPrueTer & " WHERE Partida = '" & txtPartida.Text & "' ORDER By Clave")
 
-    End Function
+		Dim WClave, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif, WImpreParametro As String
 
-    Private Sub btnImprimirEnsayosIngresados_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnRevalida.Click, btnReimprimir.Click
+		For Each row As DataRow In WPrueterFarmaI.Rows
+			With row
+				WClave = OrDefault(.Item("Clave"), "")
+				WDesdeEspecif = OrDefault(.Item("DesdeEspecif"), "")
+				WHastaEspecif = OrDefault(.Item("HastaEspecif"), "")
+				WUnidadEspecif = OrDefault(.Item("UnidadEspecif"), "")
+				WMenorIgualEspecif = OrDefault(.Item("MenorIgualEspecif"), "")
+				Dim WValor = Trim(OrDefault(.Item("Valor"), ""))
+				WImpreParametro = _GenerarImpreParametro(WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif)
 
-        If Val(txtEtapa.Text) = 99 Then
+				If WClave.Trim <> "" Then
+					ExecuteNonQueries({"UPDATE " & TablaPrueTer & " SET  Impre1 = '" & WImpreParametro & "', Impre2 = '" & WValor & "' WHERE Clave = '" & WClave & "'"})
+				End If
 
-            Dim WImpre() As String = _PrepararInformacionRegistroEnsayoFinalPT()
+			End With
+		Next
 
-            _GenerarReporteResultadosCalidad(txtPartida.Text, 2, WImpre(0), WImpre(1), WImpre(2), WImpre(3))
+		'
+		' Calculamos las Cantidades.
+		'
+		Dim WTeorico As String
+		WTeorico = "0"
+		Dim WHoja As DataRow = GetSingle("SELECT Teorico FROM Hoja WHERE Hoja = '" & txtPartida.Text & "' And Renglon = 1")
+		If WHoja IsNot Nothing Then
+			WTeorico = OrDefault(WHoja.Item("Teorico"), "0")
+		End If
 
-        Else
+		WTeorico = formatonumerico(WTeorico)
 
-            With New VistaPrevia
-                .Reporte = New ValoresEnsayosIntermediosPTFarma
-                .Formula = "{PrueterFarmaIntermedio.Producto} = '" & txtCodigo.Text & "' And {PrueterFarmaIntermedio.Paso} = " & txtEtapa.Text & " And {PrueterFarmaIntermedio.Partida} = " & txtPartida.Text & " And {PrueterFarmaIntermedio.Producto} = {Terminado.Codigo}"
-                .Mostrar()
-            End With
+		ExecuteNonQueries(String.Format("UPDATE " & TablaCargaV & " SET ImpreTerminado = '{0}', Partida = '{1}', FechaIng = '{2}', CantidadPartida = '{3}', ImprePaso = '99' WHERE Terminado = '{0}'", txtCodigo.Text, txtPartida.Text, txtFecha.Text, WTeorico))
 
-        End If
+		'
+		' Calculamos las Fechas de Elaboracion y Vencimiento.
+		'
+		Dim WPasaMono As Short = 0
+		Dim WEsFazon As Boolean
+		Dim WImpre1, WImpre2, WImpre3, WImpre4 As String
 
-    End Sub
+		Dim WMono As DataRow = GetSingle("SELECT Tipo FROM CodigoMono WHERE Codigo = '" & txtCodigo.Text & "'", "SurfactanSa")
+		If WMono IsNot Nothing Then WPasaMono = OrDefault(WMono.Item("Tipo"), 0)
 
-    Private Function _PrepararInformacionRegistroEnsayoFinalPT() As String()
+		Dim WTer As String = Mid(txtCodigo.Text, 4, 5)
+		WEsFazon = Val(WTer) > 2999 And Val(WTer) < 4000
+		WImpre1 = "F.Reanálisis:"
 
-        '
-        ' Reprocesamos y Actualizamos las descripciones de los parámetros para que estén al dia con las posibles modificaciones.
-        '
-        Dim WPrueterFarmaI As DataTable = GetAll("SELECT Clave, TipoEspecif, DesdeEspecif, HastaEspecif, UnidadEspecif, MenorIgualEspecif, Valor FROM " & TablaPrueTer & " WHERE Partida = '" & txtPartida.Text & "' ORDER By Clave")
+		If WPasaMono > 0 And WEsFazon Then
+			Dim WDatos As String() = ProductoTerminado._CalculaMonoOtro(txtPartida.Text, Base)
+			Dim WTipoVencimiento As Short = Val(WDatos(2))
+			WImpre1 = IIf(WTipoVencimiento = 1, "F.Reanálisis:", "F.Vencimiento:")
+		End If
 
-        Dim WClave, WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif, WImpreParametro As String
+		Dim WDatosII As String() = ProductoTerminado.CalcularFechaElabVto(txtCodigo.Text, txtPartida.Text)
 
-        For Each row As DataRow In WPrueterFarmaI.Rows
-            With row
-                WClave = OrDefault(.Item("Clave"), "")
-                WTipoEspecif = OrDefault(.Item("TipoEspecif"), "")
-                WDesdeEspecif = OrDefault(.Item("DesdeEspecif"), "")
-                WHastaEspecif = OrDefault(.Item("HastaEspecif"), "")
-                WUnidadEspecif = OrDefault(.Item("UnidadEspecif"), "")
-                WMenorIgualEspecif = OrDefault(.Item("MenorIgualEspecif"), "")
-                Dim WValor = Trim(OrDefault(.Item("Valor"), ""))
-                WImpreParametro = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif)
+		WImpre2 = WDatosII(1)
+		WImpre3 = ""
+		WImpre4 = ""
 
-                If WClave.Trim <> "" Then
-                    ExecuteNonQueries({"UPDATE " & TablaPrueTer & " SET  Impre1 = '" & WImpreParametro & "', Impre2 = '" & WValor & "' WHERE Clave = '" & WClave & "'"})
-                End If
+		If Trim(WDatosII(0)) <> "" Then
+			WImpre3 = "F.Elaboración:"
+			WImpre4 = WDatosII(0)
+		End If
 
-            End With
-        Next
+		Return {WImpre1, WImpre2, WImpre3, WImpre4}
 
-        '
-        ' Calculamos las Cantidades.
-        '
-        Dim WTeorico As String
-        WTeorico = "0"
-        Dim WHoja As DataRow = GetSingle("SELECT Teorico FROM Hoja WHERE Hoja = '" & txtPartida.Text & "' And Renglon = 1")
-        If WHoja IsNot Nothing Then
-            WTeorico = OrDefault(WHoja.Item("Teorico"), "0")
-        End If
+	End Function
 
-        WTeorico = formatonumerico(WTeorico)
+	Private Sub _GenerarReporteResultadosCalidad(ByVal wPartida As Integer, ByVal wTipoSalida As Integer, ByVal wFechaVto As String, ByVal wImpreFechaVto As String, ByVal wFechaElabora As String, ByVal wImpreFechaElaboracion As String)
 
-        ExecuteNonQueries(String.Format("UPDATE " & TablaCargaV & " SET ImpreTerminado = '{0}', Partida = '{1}', FechaIng = '{2}', CantidadPartida = '{3}', ImprePaso = '99' WHERE Terminado = '{0}'", txtCodigo.Text, txtPartida.Text, txtFecha.Text, WTeorico))
+		With New VistaPrevia
 
-        '
-        ' Calculamos las Fechas de Elaboracion y Vencimiento.
-        '
-        Dim WPasaMono As Short = 0
-        Dim WEsFazon As Boolean = False
-        Dim WImpre1, WImpre2, WImpre3, WImpre4 As String
+			If {0, 1}.Contains(wTipoSalida) Then
+				.Reporte = New imprecalidadresultadoReduccionAl80
+			ElseIf EsFarma() Then
+				.Reporte = New imprecalidadresultado
+			Else
+				.Reporte = New imprecalidadresultadoNoFarma
+			End If
 
-        Dim WMono As DataRow = GetSingle("SELECT Tipo FROM CodigoMono WHERE Codigo = '" & txtCodigo.Text & "'", "SurfactanSa")
-        If WMono IsNot Nothing Then WPasaMono = OrDefault(WMono.Item("Tipo"), 0)
+			.Reporte.SetParameterValue("FechaVto", wFechaVto)
+			.Reporte.SetParameterValue("ImpreFechaVto", wImpreFechaVto)
+			.Reporte.SetParameterValue("FechaElabora", wFechaElabora)
+			.Reporte.SetParameterValue("ImpreFechaElaboracion", wImpreFechaElaboracion)
 
-        Dim WTer As String = Mid(txtCodigo.Text, 4, 5)
-        WEsFazon = Val(WTer) > 2999 And Val(WTer) < 4000
-        WImpre1 = "F.Reanálisis:"
+			.Base = Base
 
-        If WPasaMono > 0 And WEsFazon Then
-            Dim WDatos As String() = ProductoTerminado._CalculaMonoOtro(txtPartida.Text, Operador.Base)
-            Dim WTipoVencimiento As Short = Val(WDatos(2))
-            WImpre1 = IIf(WTipoVencimiento = 1, "F.Reanálisis:", "F.Vencimiento:")
-        End If
+			If EsFarma() Then
+				.Formula = "{Prueterfarma.Partida} = " & wPartida & " And {Hoja.Hoja} = {Prueterfarma.Partida} And {Hoja.Renglon} = 1"
+			Else
+				.Formula = "{PrueterNofarma.Partida} = " & wPartida & " And {Hoja.Hoja} = {PrueterNofarma.Partida} And {Hoja.Renglon} = 1"
+			End If
 
-        Dim WDatosII As String() = ProductoTerminado.CalcularFechaElabVto(txtCodigo.Text, txtPartida.Text)
+			Select Case wTipoSalida
+				Case 0, 1, 4
+					.Imprimir()
+				Case 2
+					.Mostrar()
+				Case 3
+					.Exportar(String.Format("{0}-{1}-{2}", txtCodigo.Text, txtPartida.Ceros(6), Date.Now.ToString("yyyyMMdd-HHmm")), ExportFormatType.PortableDocFormat, String.Format("{0}", _CarpetaEtapaIntermedia))
+			End Select
 
-        WImpre2 = WDatosII(1)
-        WImpre3 = ""
-        WImpre4 = ""
+		End With
 
-        If Trim(WDatosII(0)) <> "" Then
-            WImpre3 = "F.Elaboración:"
-            WImpre4 = WDatosII(0)
-        End If
+	End Sub
 
-        Return {WImpre1, WImpre2, WImpre3, WImpre4}
+	Private Sub NumerosConComas(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txtKilos.KeyPress
+		If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) And Not (CChar(".")) = e.KeyChar Then
+			e.Handled = True
+		End If
+	End Sub
 
-    End Function
+	Private Sub btnNotasAnteriores_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnNotasAnteriores.Click
+		With New NotasAnterioresFarmaPT(txtPartida.Text, txtEtapa.Text)
+			.ShowDialog(Me)
+		End With
+	End Sub
 
-    Private Sub _GenerarReporteResultadosCalidad(ByVal wPartida As Integer, ByVal wTipoSalida As Integer, ByVal wFechaVto As String, ByVal wImpreFechaVto As String, ByVal wFechaElabora As String, ByVal wImpreFechaElaboracion As String)
+	Private Sub txtComponente_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtComponente.KeyDown
 
-        With New VistaPrevia
+		If e.KeyData = Keys.Enter Then
+			Dim longitud As Integer = txtComponente.Text.Replace(" ", "").Length
 
-            '.Reporte = New imprecalidadresultado
-            If {0, 1}.Contains(wTipoSalida) Then
-                .Reporte = New imprecalidadresultadoReduccionAl80
-            ElseIf Operador.EsFarma Then
-                .Reporte = New imprecalidadresultado
-            Else
-                .Reporte = New imprecalidadresultadoNoFarma
-            End If
+			If longitud = 10 Or longitud = 12 Then
 
-            .Reporte.SetParameterValue("FechaVto", wFechaVto)
-            .Reporte.SetParameterValue("ImpreFechaVto", wImpreFechaVto)
-            .Reporte.SetParameterValue("FechaElabora", wFechaElabora)
-            .Reporte.SetParameterValue("ImpreFechaElaboracion", wImpreFechaElaboracion)
+				Dim WComp As DataRow
 
-            .Base = Operador.Base
+				If longitud = 10 Then
+					WComp = GetSingle("SELECT Codigo FROM Articulo WHERE Codigo = '" & txtComponente.Text & "'")
+				Else
+					WComp = GetSingle("SELECT Codigo FROM Terminado WHERE Codigo = '" & txtComponente.Text & "'")
+				End If
 
-            If Operador.EsFarma Then
-                .Formula = "{Prueterfarma.Partida} = " & wPartida & " And {Hoja.Hoja} = {Prueterfarma.Partida} And {Hoja.Renglon} = 1"
-            Else
-                .Formula = "{PrueterNofarma.Partida} = " & wPartida & " And {Hoja.Hoja} = {PrueterNofarma.Partida} And {Hoja.Renglon} = 1"
-            End If
+				If WComp Is Nothing Then Exit Sub
 
-            Select Case wTipoSalida
-                Case 0, 1, 4
-                    .Imprimir()
-                Case 2
-                    .Mostrar()
-                Case 3
-                    .Exportar(String.Format("{0}-{1}-{2}", txtCodigo.Text, txtPartida.Ceros(6), Date.Now.ToString("yyyyMMdd-HHmm")), ExportFormatType.PortableDocFormat, String.Format("{0}", _CarpetaEtapaIntermedia))
-                    '.Exportar("Resultados de Calidad " & wPartida & " " & Date.Now.ToString("dd-MM-yyyy"), CrystalDecisions.Shared.ExportFormatType.WordForWindows)
-            End Select
+				txtLotePartida.Focus()
 
-        End With
+				Exit Sub
+			ElseIf longitud <> 0 Then
+				Exit Sub
+			End If
 
-    End Sub
+			txtCantidadEtiquetas.Focus()
 
-    Private Sub NumerosConComas(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txtKilos.KeyPress
-        If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) And Not (CChar(".")) = e.KeyChar Then
-            e.Handled = True
-        End If
-    End Sub
+		ElseIf e.KeyData = Keys.Escape Then
+			txtComponente.Text = ""
+		End If
 
-    Private Sub btnNotasAnteriores_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnNotasAnteriores.Click
-        With New NotasAnterioresFarmaPT(txtPartida.Text, txtEtapa.Text)
-            .ShowDialog(Me)
-        End With
-    End Sub
+	End Sub
 
-    Private Sub txtComponente_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtComponente.KeyDown
+	Private Sub txtLotePartida_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtLotePartida.KeyDown
 
-        If e.KeyData = Keys.Enter Then
-            Dim longitud As Integer = txtComponente.Text.Replace(" ", "").Length
+		If e.KeyData = Keys.Enter Then
+			Dim longitud As Integer = txtComponente.Text.Replace(" ", "").Length
 
-            If longitud = 10 Or longitud = 12 Then
+			If longitud = 10 Or longitud = 12 Then
 
-                Dim WComp As DataRow = Nothing
+				Dim WComp As DataRow = Nothing
 
-                If longitud = 10 Then
-                    WComp = GetSingle("SELECT Codigo FROM Articulo WHERE Codigo = '" & txtComponente.Text & "'")
-                Else
-                    WComp = GetSingle("SELECT Codigo FROM Terminado WHERE Codigo = '" & txtComponente.Text & "'")
-                End If
+				For Each emp As String In Conexion.Empresas
+					If longitud = 10 Then
+						WComp = GetSingle("SELECT Laudo FROM Laudo WHERE Laudo = '" & txtLotePartida.Text & "' And Renglon = '1'", emp)
+					Else
+						WComp = GetSingle("SELECT Hoja FROM Hoja WHERE Hoja = '" & txtLotePartida.Text & "'  And Renglon = '1'", emp)
+					End If
 
-                If WComp Is Nothing Then Exit Sub
+					If WComp IsNot Nothing Then
+						txtOOS.Focus()
+						Exit Sub
+					End If
+				Next
 
-                txtLotePartida.Focus()
+				If WComp Is Nothing Then
+					MsgBox("El Lote/Partida no se corresponde con ninguno registrado en el sistema.", MsgBoxStyle.Exclamation)
+					Exit Sub
+				End If
+			ElseIf longitud <> 0 Then
+				Exit Sub
+			Else
+				txtOOS.Focus()
+			End If
 
-                Exit Sub
-            ElseIf longitud <> 0 Then
-                Exit Sub
-            End If
+		ElseIf e.KeyData = Keys.Escape Then
+			txtLotePartida.Text = ""
+		End If
 
-            txtCantidadEtiquetas.Focus()
+	End Sub
 
-        ElseIf e.KeyData = Keys.Escape Then
-            txtComponente.Text = ""
-        End If
+	Private Sub btnNotasCertAnalisis_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnNotasCertAnalisis.Click
+		With New NotasCertificadosAnalisisFarmaPT(txtPartida.Text)
+			.ShowDialog(Me)
+		End With
+	End Sub
 
-    End Sub
+	Private Sub btnImprimirEnsayosIngresados_Click_1(ByVal sender As Object, ByVal e As EventArgs) Handles btnImprimirEnsayosIngresados.Click
+		With New PDFVersionesPTFarma(txtPartida.Text)
+			.ShowDialog(Me)
+		End With
+	End Sub
 
-    Private Sub txtLotePartida_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtLotePartida.KeyDown
+	Private Sub Button1_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnPoolEnsayos.Click
+		With New ListaPoolEnsayos(txtCodigo.Text, txtPartida.Text, txtEtapa.Text, dgvEnsayos.Rows)
+			.ShowDialog(Me)
+		End With
+	End Sub
 
-        If e.KeyData = Keys.Enter Then
-            Dim longitud As Integer = txtComponente.Text.Replace(" ", "").Length
+	Public Sub _ProcesarAyudaPruebasAnteriores(LotePartida As String) Implements IAyudaPruebasAnteriores._ProcesarAyudaPruebasAnteriores
+		txtPartida.Text = LotePartida
+		txtPartida_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+		txtEtapa.Text = "99"
+		txtEtapa_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+	End Sub
 
-            If longitud = 10 Or longitud = 12 Then
+	Private Sub btnConsulta_Click(sender As Object, e As EventArgs) Handles btnConsulta.Click
+		Dim WDatos As DataTable = GetAll("SELECT ptf.Fecha, ptf.Partida as LotePartida, ptf.Producto As Codigo, t.Descripcion FROM " & TablaPrueTer & " ptf INNER JOIN Terminado t ON t.Codigo = ptf.Producto AND ptf.Renglon = 1 ORDER BY ptf.FechaOrd DESC, ptf.Partida DESC")
+		With New AyudaPruebasAnteriores(WDatos)
+			.ShowDialog(Me)
+		End With
+	End Sub
 
-                Dim WComp As DataRow = Nothing
+	Private Sub txtPartida_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles txtPartida.MouseDoubleClick
+		btnConsulta_Click(Nothing, Nothing)
+	End Sub
 
-                For Each emp As String In Conexion.Empresas
-                    If longitud = 10 Then
-                        WComp = GetSingle("SELECT Laudo FROM Laudo WHERE Laudo = '" & txtLotePartida.Text & "' And Renglon = '1'", emp)
-                    Else
-                        WComp = GetSingle("SELECT Hoja FROM Hoja WHERE Hoja = '" & txtLotePartida.Text & "'  And Renglon = '1'", emp)
-                    End If
+	Private Sub txtLibros_KeyDown(sender As Object, e As KeyEventArgs) Handles txtLibros.KeyDown
+		Select Case e.KeyData
+			Case Keys.Enter
+				If txtLibros.Text <> "" Then
+					txtPaginas.Focus()
+				End If
 
-                    If WComp IsNot Nothing Then
-                        txtOOS.Focus()
-                        Exit Sub
-                    End If
-                Next
 
-                If WComp Is Nothing Then
-                    MsgBox("El Lote/Partida no se corresponde con ninguno registrado en el sistema.", MsgBoxStyle.Exclamation)
-                    Exit Sub
-                End If
-            ElseIf longitud <> 0 Then
-                Exit Sub
-            Else
-                txtOOS.Focus()
-            End If
+			Case Keys.Escape
 
-        ElseIf e.KeyData = Keys.Escape Then
-            txtLotePartida.Text = ""
-        End If
+				txtLibros.Text = ""
+		End Select
+	End Sub
 
-    End Sub
+	Private Sub txtPaginas_KeyDown(sender As Object, e As KeyEventArgs) Handles txtPaginas.KeyDown
+		Select Case e.KeyData
+			Case Keys.Enter
+				If txtPaginas.Text <> "" Then
 
-    Private Sub btnNotasCertAnalisis_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnNotasCertAnalisis.Click
-        With New NotasCertificadosAnalisisFarmaPT(txtPartida.Text)
-            .ShowDialog(Me)
-        End With
-    End Sub
+					txtEnvases.Focus()
 
-    Private Sub btnImprimirEnsayosIngresados_Click_1(ByVal sender As Object, ByVal e As EventArgs) Handles btnImprimirEnsayosIngresados.Click
-        With New PDFVersionesPTFarma(txtPartida.Text)
-            .ShowDialog(Me)
-        End With
-    End Sub
+				End If
 
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPoolEnsayos.Click
-        With New ListaPoolEnsayos(txtCodigo.Text, txtPartida.Text, txtEtapa.Text, dgvEnsayos.Rows)
-            .ShowDialog(Me)
-        End With
-    End Sub
+			Case Keys.Escape
 
-    Public Sub _ProcesarAyudaPruebasAnteriores(LotePartida As String) Implements IAyudaPruebasAnteriores._ProcesarAyudaPruebasAnteriores
-        txtPartida.Text = LotePartida
-        txtPartida_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
-        txtEtapa.Text = "99"
-        txtEtapa_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
-    End Sub
+				txtPaginas.Text = ""
+		End Select
+	End Sub
 
-    Private Sub btnConsulta_Click(sender As Object, e As EventArgs) Handles btnConsulta.Click
-        Dim WDatos As DataTable = GetAll("SELECT ptf.Fecha, ptf.Partida as LotePartida, ptf.Producto As Codigo, t.Descripcion FROM " & TablaPrueTer & " ptf INNER JOIN Terminado t ON t.Codigo = ptf.Producto AND ptf.Renglon = 1 ORDER BY ptf.FechaOrd DESC, ptf.Partida DESC")
-        With New AyudaPruebasAnteriores(WDatos)
-            .ShowDialog(Me)
-        End With
-    End Sub
+	Private Sub txtEnvases_KeyDown(sender As Object, e As KeyEventArgs) Handles txtEnvases.KeyDown
+		Select Case e.KeyData
+			Case Keys.Enter
 
-    Private Sub txtPartida_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles txtPartida.MouseDoubleClick
-        btnConsulta_Click(Nothing, Nothing)
-    End Sub
+				If txtComponente.Enabled Then
+					txtComponente.Focus()
+				Else
+					txtCantidadEtiquetas.Focus()
+				End If
 
-    Private Sub txtLibros_KeyDown(sender As Object, e As KeyEventArgs) Handles txtLibros.KeyDown
-        Select Case e.KeyData
-            Case Keys.Enter
-                If txtLibros.Text <> "" Then
-                    txtPaginas.Focus()
-                End If
+			Case Keys.Escape
 
+				txtEnvases.Text = ""
+		End Select
+	End Sub
 
-            Case Keys.Escape
+	Private Sub txtCantidadEtiquetas_KeyDown(sender As Object, e As KeyEventArgs) Handles txtCantidadEtiquetas.KeyDown
+		Select Case e.KeyData
+			Case Keys.Enter
+				txtArchivo.Focus()
+			Case Keys.Escape
+				txtCantidadEtiquetas.Text = ""
 
-                txtLibros.Text = ""
-        End Select
-    End Sub
+		End Select
+	End Sub
 
-    Private Sub txtPaginas_KeyDown(sender As Object, e As KeyEventArgs) Handles txtPaginas.KeyDown
-        Select Case e.KeyData
-            Case Keys.Enter
-                If txtPaginas.Text <> "" Then
+	Private Sub txtOOS_KeyDown(sender As Object, e As KeyEventArgs) Handles txtOOS.KeyDown
+		Select Case e.KeyData
+			Case Keys.Enter
+				txtDesvio.Focus()
+			Case Keys.Escape
+				txtOOS.Text = ""
+		End Select
+	End Sub
 
-                    txtEnvases.Focus()
+	Private Sub txtDesvio_KeyDown(sender As Object, e As KeyEventArgs) Handles txtDesvio.KeyDown
+		Select Case e.KeyData
+			Case Keys.Enter
+				txtCantidadEtiquetas.Focus()
+			Case Keys.Escape
+				txtDesvio.Text = ""
+		End Select
+	End Sub
 
-                End If
+	Private Sub txtArchivo_KeyDown(sender As Object, e As KeyEventArgs) Handles txtArchivo.KeyDown
+		Select Case e.KeyData
+			Case Keys.Enter
+				txtConfecciono.Focus()
+			Case Keys.Escape
+				txtArchivo.Text = ""
+		End Select
+	End Sub
 
-            Case Keys.Escape
+	Private Sub btnTraerDatosEnsayosComponente_Click(sender As Object, e As EventArgs) Handles btnTraerDatosEnsayosComponente.Click
 
-                txtPaginas.Text = ""
-        End Select
-    End Sub
+		If ProductoTerminado.EsMono(txtCodigo.Text) And Val(txtLotePartida.Text) > 0 And EsFarma() Then
 
-    Private Sub txtEnvases_KeyDown(sender As Object, e As KeyEventArgs) Handles txtEnvases.KeyDown
-        Select Case e.KeyData
-            Case Keys.Enter
+			Dim WEsMP As Boolean = txtComponente.Text.Trim.Length = 10
+			Dim WEnsayos As DataTable
 
-                If txtComponente.Enabled Then
-                    txtComponente.Focus()
-                Else
-                    txtCantidadEtiquetas.Focus()
-                End If
+			If WEsMP Then
+				WEnsayos = GetAll("SELECT * FROM PrueArtNuevo WHERE Producto = '" & txtComponente.Text & "' And Prueba = '" & txtLotePartida.Text & "' ORDER BY Clave")
+			Else
+				WEnsayos = GetAll("SELECT * FROM PrueTerFarma WHERE Producto = '" & txtComponente.Text & "' And Prueba = '" & txtLotePartida.Text & "' ORDER BY Clave")
+			End If
 
-            Case Keys.Escape
+			If WEnsayos Is Nothing OrElse WEnsayos.Rows.Count = 0 Then
+				MsgBox("No se encontraron datos de ensayos para el " & txtComponente.Text & " (" & txtLotePartida.Text & ") con el nuevo formato.", MsgBoxStyle.Exclamation)
+				Exit Sub
+			End If
 
-                txtEnvases.Text = ""
-        End Select
-    End Sub
+			' VERIFICAMOS QUE TENGAN LA MISMA ESPECIFICACION.
+			If dgvEnsayos.Rows.Count < WEnsayos.Rows.Count Then
+				MsgBox("Se encontró que el " & txtComponente.Text & " (" & txtLotePartida.Text & ") no cuenta con los mismos ensayos que el Producto " & txtCodigo.Text & " (" & txtPartida.Text & ")", MsgBoxStyle.Exclamation)
+				Exit Sub
+			End If
 
-    Private Sub txtCantidadEtiquetas_KeyDown(sender As Object, e As KeyEventArgs) Handles txtCantidadEtiquetas.KeyDown
-        Select Case e.KeyData
-            Case Keys.Enter
-                txtArchivo.Focus()
-            Case Keys.Escape
-                txtCantidadEtiquetas.Text = ""
+			For rocio = 1 To WEnsayos.Rows.Count
 
-        End Select
-    End Sub
+				Dim WEnsayo As DataRow() = WEnsayos.Select("Renglon = '" & rocio & "'")
 
-    Private Sub txtOOS_KeyDown(sender As Object, e As KeyEventArgs) Handles txtOOS.KeyDown
-        Select Case e.KeyData
-            Case Keys.Enter
-                txtDesvio.Focus()
-            Case Keys.Escape
-                txtOOS.Text = ""
-        End Select
-    End Sub
+				If WEnsayo.Count = 0 Then Continue For
 
-    Private Sub txtDesvio_KeyDown(sender As Object, e As KeyEventArgs) Handles txtDesvio.KeyDown
-        Select Case e.KeyData
-            Case Keys.Enter
-                txtCantidadEtiquetas.Focus()
-            Case Keys.Escape
-                txtDesvio.Text = ""
-        End Select
-    End Sub
+				Dim row As DataGridViewRow = dgvEnsayos.Rows(rocio - 1)
+				Dim WEns As DataRow = WEnsayo(0)
 
-    Private Sub txtArchivo_KeyDown(sender As Object, e As KeyEventArgs) Handles txtArchivo.KeyDown
-        Select Case e.KeyData
-            Case Keys.Enter
-                txtConfecciono.Focus()
-            Case Keys.Escape
-                txtArchivo.Text = ""
-        End Select
-    End Sub
+				Dim WTipoDatoI, WTipoDatoII As String
+				Dim WValor, WResultado, WDesde, WHasta, WMenorIgual, WInforma, WFormula, WUnidad As String
+				Dim WVariables(10), WVariablesValores(10) As String
 
-    Private Sub btnTraerDatosEnsayosComponente_Click(sender As Object, e As EventArgs) Handles btnTraerDatosEnsayosComponente.Click
+				WTipoDatoI = row.Cells("TipoEspecif").Value
+				WTipoDatoII = WEns.Item("TipoEspecif")
 
-        If ProductoTerminado.EsMono(txtCodigo.Text) And Val(txtLotePartida.Text) > 0 And Operador.EsFarma Then
+				WValor = Trim(WEns.Item("ValorReal"))
+				WDesde = Trim(WEns.Item("DesdeEspecif"))
+				WHasta = Trim(WEns.Item("HastaEspecif"))
+				WMenorIgual = Trim(WEns.Item("MenorIgualEspecif"))
+				WInforma = Trim(WEns.Item("InformaEspecif"))
+				WFormula = Trim(WEns.Item("FormulaEspecif"))
+				WUnidad = Trim(WEns.Item("UnidadEspecif"))
 
-            Dim WEsMP As Boolean = txtComponente.Text.Trim.Length = 10
-            Dim WEnsayos As DataTable = Nothing
+				WResultado = _GenerarImpreResultado(WTipoDatoII, WDesde, WHasta, WUnidad, WValor)
 
-            If WEsMP Then
-                WEnsayos = GetAll("SELECT * FROM PrueArtNuevo WHERE Producto = '" & txtComponente.Text & "' And Prueba = '" & txtLotePartida.Text & "' ORDER BY Clave")
-            Else
-                WEnsayos = GetAll("SELECT * FROM PrueTerFarma WHERE Producto = '" & txtComponente.Text & "' And Prueba = '" & txtLotePartida.Text & "' ORDER BY Clave")
-            End If
+				For r As Integer = 1 To 10
+					WVariables(r) = Trim(WEns.Item("Variable" & r))
+					WVariablesValores(r) = Trim(WEns.Item("VariableValor" & r))
+				Next
 
-            If WEnsayos Is Nothing OrElse WEnsayos.Rows.Count = 0 Then
-                MsgBox("No se encontraron datos de ensayos para el " & txtComponente.Text & " (" & txtLotePartida.Text & ") con el nuevo formato.", MsgBoxStyle.Exclamation)
-                Exit Sub
-            End If
+				'
+				' Se agrega los datos unicamente si son iguales o si el tipo de dato entrante 
+				' es 'Formula' y el saliente es 'Numerico'.
+				'
+				If (Val(WTipoDatoI) = Val(WTipoDatoII)) Or (Val(WTipoDatoI) = 1 And Val(WTipoDatoII) = 2) Then
 
-            ' VERIFICAMOS QUE TENGAN LA MISMA ESPECIFICACION.
-            If dgvEnsayos.Rows.Count < WEnsayos.Rows.Count Then
-                MsgBox("Se encontró que el " & txtComponente.Text & " (" & txtLotePartida.Text & ") no cuenta con los mismos ensayos que el Producto " & txtCodigo.Text & " (" & txtPartida.Text & ")", MsgBoxStyle.Exclamation)
-                Exit Sub
-            End If
+					row.Cells("TipoEspecif").Value = WTipoDatoII
+					row.Cells("Valor").Value = WValor
+					row.Cells("Resultado").Value = WResultado
+					row.Cells("DesdeEspecif").Value = WDesde
+					row.Cells("HastaEspecif").Value = WHasta
+					row.Cells("MenorIgualEspecif").Value = WMenorIgual
+					row.Cells("InformaEspecif").Value = WInforma
+					row.Cells("FormulaEspecif").Value = WFormula
 
-            For rocio = 1 To WEnsayos.Rows.Count
+					For r As Integer = 1 To 10
+						row.Cells("Variable" & r).Value = WVariables(r)
+						row.Cells("VariableValor" & r).Value = WVariablesValores(r)
+					Next
 
-                Dim WEnsayo As DataRow() = WEnsayos.Select("Renglon = '" & rocio & "'")
+				End If
 
-                If WEnsayo.Count = 0 Then Continue For
+			Next
 
-                Dim row As DataGridViewRow = dgvEnsayos.Rows(rocio - 1)
-                Dim WEns As DataRow = WEnsayo(0)
+		End If
 
-                Dim WTipoDatoI, WTipoDatoII As String
-                Dim WValor, WResultado, WDesde, WHasta, WMenorIgual, WInforma, WFormula, WUnidad As String
-                Dim WVariables(10), WVariablesValores(10) As String
-
-                WTipoDatoI = row.Cells("TipoEspecif").Value
-                WTipoDatoII = WEns.Item("TipoEspecif")
-
-                WValor = Trim(WEns.Item("ValorReal"))
-                WDesde = Trim(WEns.Item("DesdeEspecif"))
-                WHasta = Trim(WEns.Item("HastaEspecif"))
-                WMenorIgual = Trim(WEns.Item("MenorIgualEspecif"))
-                WInforma = Trim(WEns.Item("InformaEspecif"))
-                WFormula = Trim(WEns.Item("FormulaEspecif"))
-                WUnidad = Trim(WEns.Item("UnidadEspecif"))
-
-                WResultado = _GenerarImpreResultado(WTipoDatoII, WDesde, WHasta, WUnidad, WValor)
-
-                For r As Integer = 1 To 10
-                    WVariables(r) = Trim(WEns.Item("Variable" & r))
-                    WVariablesValores(r) = Trim(WEns.Item("VariableValor" & r))
-                Next
-
-                '
-                ' Se agrega los datos unicamente si son iguales o si el tipo de dato entrante 
-                ' es 'Formula' y el saliente es 'Numerico'.
-                '
-                If (Val(WTipoDatoI) = Val(WTipoDatoII)) Or (Val(WTipoDatoI) = 1 And Val(WTipoDatoII) = 2) Then
-
-                    row.Cells("TipoEspecif").Value = WTipoDatoII
-                    row.Cells("Valor").Value = WValor
-                    row.Cells("Resultado").Value = WResultado
-                    row.Cells("DesdeEspecif").Value = WDesde
-                    row.Cells("HastaEspecif").Value = WHasta
-                    row.Cells("MenorIgualEspecif").Value = WMenorIgual
-                    row.Cells("InformaEspecif").Value = WInforma
-                    row.Cells("FormulaEspecif").Value = WFormula
-
-                    For r As integer = 1 To 10
-                        row.Cells("Variable" & r).Value = WVariables(r)
-                        row.Cells("VariableValor" & r).Value = WVariablesValores(r)
-                    Next
-
-                End If
-
-            Next
-
-        End If
-
-    End Sub
+	End Sub
 
 End Class
 Friend Class FormatoNoNumericoException

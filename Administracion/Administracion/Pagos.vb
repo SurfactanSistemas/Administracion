@@ -7520,7 +7520,6 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
     End Sub
 
     Private Function _BuscarFechaFacturaPorProv(ByVal Tipo As String, ByVal Punto As String, ByVal Letra As String, ByVal Proveedor As String, ByVal Numero As String) As String
-        'Dim cn As New SqlConnection(ConfigurationManager.ConnectionStrings("LOCAL").ToString())
         Dim cn As New SqlConnection(Proceso._ConectarA())
         cn.Open()
         Dim SQLconsul As String
@@ -7539,7 +7538,6 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
 
 
     Private Function _BuscarParidadFacturaPorProv(ByVal Tipo As String, ByVal Punto As String, ByVal Letra As String, ByVal Proveedor As String, ByVal Numero As String) As Double
-        'Dim cn As New SqlConnection(ConfigurationManager.ConnectionStrings("LOCAL").ToString())
         Dim cn As New SqlConnection(Proceso._ConectarA())
         cn.Open()
         Dim SQLconsul As String
@@ -7829,7 +7827,6 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
     End Sub
 
     Private Function _BuscarTipoDePago(ByVal Tipo As String, ByVal Punto As String, ByVal Letra As String, ByVal Proveedor As String, ByVal Numero As String) As Integer
-        'Dim cn As New SqlConnection(ConfigurationManager.ConnectionStrings("LOCAL").ToString())
         Dim cn As New SqlConnection(Proceso._ConectarA())
         cn.Open()
         Dim SQLconsul As String

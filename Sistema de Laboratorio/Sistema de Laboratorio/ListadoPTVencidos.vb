@@ -21,9 +21,6 @@ Public Class ListadoPTVencidos
             If (Trim(mastxtDesde.Text.Replace("-", "")) = "") Then mastxtDesde.Text = "AA-00000-000"
             If (Trim(mastxtHasta.Text.Replace("-", "")) = "") Then mastxtHasta.Text = "ZZ-99999-999"
 
-            Dim cn As New SqlConnection(ConfigurationManager.ConnectionStrings("LOCAL").ToString())
-            cn.Open()
-
             Dim Renglon As Integer = 0
             Dim TablaReporte As New DataTable
             Dim sqlconsulta As String

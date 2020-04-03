@@ -123,19 +123,21 @@ Public Class ConsDeEspefXVersion
     End Sub
 
     Private Sub CargarDescripciones()
+    
+        For Each row As Datagridviewrow In DGV_ConsultaVersiones.Rows
+            With row
 
-        Dim cn As New SqlConnection(ConfigurationManager.ConnectionStrings("LOCAL").ToString())
-        cn.Open()
+                Dim e As Integer = Val(OrDefault(row.Cells("Ensayo").Value, ""))
 
-        Dim SQLConsulta As String
+                If e = 0 Then Continue For
 
-        For i As Integer = 1 To 9
-            If (DGV_ConsultaVersiones.Rows.Item(i - 1).Cells("Ensayo").Value <> "0") Then
-                SQLConsulta = "SELECT Codigo, Descripcion FROM Ensayos WHERE Codigo = '" & Trim(DGV_ConsultaVersiones.Rows.Item(i - 1).Cells("Ensayo").Value) & "'"
-                Dim Row As DataRow
-                Row = GetSingle(SQLConsulta, "Surfactan_II")
-                DGV_ConsultaVersiones.Rows.Item(i - 1).Cells("Descripcion").Value = Row.Item("Descripcion")
-            End If
+                Dim WEnsayo As DataRow = GetSingle("SELECT Descripcion FROM Ensayos WHERE Codigo = '" & e & "'")
+
+                If WEnsayo Is Nothing Then Continue For
+
+                row.Cells("Descripcion").Value = Trim(OrDefault(WEnsayo.Item("Descripcion"), ""))
+
+            End With
         Next
 
     End Sub
