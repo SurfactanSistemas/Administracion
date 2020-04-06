@@ -601,4 +601,7 @@ Public Class VerificacionLoteVencidoMP
     End Sub
 
 
+    Private Sub VerificacionLoteVencidoMP_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        If BackgroundWorker1.IsBusy Then BackgroundWorker1.CancelAsync()
+    End Sub
 End Class

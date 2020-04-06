@@ -23,19 +23,19 @@ Partial Class VerificacionLoteVencidoMP
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle26 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle25 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle39 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle27 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle28 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle29 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle30 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle31 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle32 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle33 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle34 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle35 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle36 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle37 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle38 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.btnAjustes = New System.Windows.Forms.Button()
         Me.btnVolver = New System.Windows.Forms.Button()
         Me.pnlContrasena = New System.Windows.Forms.Panel()
@@ -195,6 +195,7 @@ Partial Class VerificacionLoteVencidoMP
         'BackgroundWorker1
         '
         Me.BackgroundWorker1.WorkerReportsProgress = True
+        Me.BackgroundWorker1.WorkerSupportsCancellation = True
         '
         'ProgressBar1
         '
@@ -215,14 +216,14 @@ Partial Class VerificacionLoteVencidoMP
         Me.DGV_Verificacion.AllowUserToResizeRows = False
         Me.DGV_Verificacion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_Verificacion.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Check, Me.TipoMov, Me.MPrima, Me.Descripcion, Me.PlantaOrigen, Me.Lote, Me.PlantaHoja, Me.Hoja, Me.Fecha, Me.Stock, Me.SI, Me.SII, Me.SIII, Me.SIV, Me.SV, Me.SVI, Me.SVII, Me.Tipo, Me.DiferenciaEnDIas})
-        DataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle26.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle26.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle26.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle26.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle26.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGV_Verificacion.DefaultCellStyle = DataGridViewCellStyle26
+        DataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle39.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle39.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle39.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle39.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle39.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle39.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGV_Verificacion.DefaultCellStyle = DataGridViewCellStyle39
         Me.DGV_Verificacion.DoubleBuffered = True
         Me.DGV_Verificacion.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.DGV_Verificacion.Location = New System.Drawing.Point(11, 81)
@@ -268,8 +269,8 @@ Partial Class VerificacionLoteVencidoMP
         'PlantaOrigen
         '
         Me.PlantaOrigen.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.PlantaOrigen.DefaultCellStyle = DataGridViewCellStyle14
+        DataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.PlantaOrigen.DefaultCellStyle = DataGridViewCellStyle27
         Me.PlantaOrigen.HeaderText = "Planta O."
         Me.PlantaOrigen.Name = "PlantaOrigen"
         Me.PlantaOrigen.Width = 76
@@ -277,8 +278,8 @@ Partial Class VerificacionLoteVencidoMP
         'Lote
         '
         Me.Lote.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Lote.DefaultCellStyle = DataGridViewCellStyle15
+        DataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Lote.DefaultCellStyle = DataGridViewCellStyle28
         Me.Lote.HeaderText = "Lote"
         Me.Lote.Name = "Lote"
         Me.Lote.Width = 53
@@ -286,8 +287,8 @@ Partial Class VerificacionLoteVencidoMP
         'PlantaHoja
         '
         Me.PlantaHoja.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.PlantaHoja.DefaultCellStyle = DataGridViewCellStyle16
+        DataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.PlantaHoja.DefaultCellStyle = DataGridViewCellStyle29
         Me.PlantaHoja.HeaderText = "Planta H."
         Me.PlantaHoja.Name = "PlantaHoja"
         Me.PlantaHoja.Width = 76
@@ -295,8 +296,8 @@ Partial Class VerificacionLoteVencidoMP
         'Hoja
         '
         Me.Hoja.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Hoja.DefaultCellStyle = DataGridViewCellStyle17
+        DataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Hoja.DefaultCellStyle = DataGridViewCellStyle30
         Me.Hoja.HeaderText = "Hoja"
         Me.Hoja.Name = "Hoja"
         Me.Hoja.Width = 54
@@ -311,8 +312,8 @@ Partial Class VerificacionLoteVencidoMP
         'Stock
         '
         Me.Stock.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Stock.DefaultCellStyle = DataGridViewCellStyle18
+        DataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Stock.DefaultCellStyle = DataGridViewCellStyle31
         Me.Stock.HeaderText = "Stock"
         Me.Stock.Name = "Stock"
         Me.Stock.Width = 60
@@ -320,8 +321,8 @@ Partial Class VerificacionLoteVencidoMP
         'SI
         '
         Me.SI.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.SI.DefaultCellStyle = DataGridViewCellStyle19
+        DataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.SI.DefaultCellStyle = DataGridViewCellStyle32
         Me.SI.HeaderText = "SI"
         Me.SI.Name = "SI"
         Me.SI.Width = 42
@@ -329,8 +330,8 @@ Partial Class VerificacionLoteVencidoMP
         'SII
         '
         Me.SII.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.SII.DefaultCellStyle = DataGridViewCellStyle20
+        DataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.SII.DefaultCellStyle = DataGridViewCellStyle33
         Me.SII.HeaderText = "SII"
         Me.SII.Name = "SII"
         Me.SII.Width = 45
@@ -338,8 +339,8 @@ Partial Class VerificacionLoteVencidoMP
         'SIII
         '
         Me.SIII.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.SIII.DefaultCellStyle = DataGridViewCellStyle21
+        DataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.SIII.DefaultCellStyle = DataGridViewCellStyle34
         Me.SIII.HeaderText = "SIII"
         Me.SIII.Name = "SIII"
         Me.SIII.Width = 48
@@ -347,8 +348,8 @@ Partial Class VerificacionLoteVencidoMP
         'SIV
         '
         Me.SIV.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.SIV.DefaultCellStyle = DataGridViewCellStyle22
+        DataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.SIV.DefaultCellStyle = DataGridViewCellStyle35
         Me.SIV.HeaderText = "SIV"
         Me.SIV.Name = "SIV"
         Me.SIV.Width = 49
@@ -356,8 +357,8 @@ Partial Class VerificacionLoteVencidoMP
         'SV
         '
         Me.SV.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.SV.DefaultCellStyle = DataGridViewCellStyle23
+        DataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.SV.DefaultCellStyle = DataGridViewCellStyle36
         Me.SV.HeaderText = "SV"
         Me.SV.Name = "SV"
         Me.SV.Width = 46
@@ -365,8 +366,8 @@ Partial Class VerificacionLoteVencidoMP
         'SVI
         '
         Me.SVI.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.SVI.DefaultCellStyle = DataGridViewCellStyle24
+        DataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.SVI.DefaultCellStyle = DataGridViewCellStyle37
         Me.SVI.HeaderText = "SVI"
         Me.SVI.Name = "SVI"
         Me.SVI.Width = 49
@@ -374,8 +375,8 @@ Partial Class VerificacionLoteVencidoMP
         'SVII
         '
         Me.SVII.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.SVII.DefaultCellStyle = DataGridViewCellStyle25
+        DataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.SVII.DefaultCellStyle = DataGridViewCellStyle38
         Me.SVII.HeaderText = "SVII"
         Me.SVII.Name = "SVII"
         Me.SVII.Width = 52
@@ -403,8 +404,9 @@ Partial Class VerificacionLoteVencidoMP
         Me.Controls.Add(Me.DGV_Verificacion)
         Me.Controls.Add(Me.btnVolver)
         Me.Controls.Add(Me.btnAjustes)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "VerificacionLoteVencidoMP"
-        Me.Text = "VerificacionLoteVencidoMP"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.pnlContrasena.ResumeLayout(False)
         Me.pnlContrasena.PerformLayout()
         Me.Panel2.ResumeLayout(False)
