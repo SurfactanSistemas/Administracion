@@ -99,6 +99,7 @@
     <Compile Include="Auxiliares\Interfaces\IBuscadorProveedor.vb" />
     <Compile Include="Auxiliares\Interfaces\IDefinicionFormulaEspecificacion.vb" />
     <Compile Include="Auxiliares\Interfaces\IDefinicionValoresFormula.vb" />
+    <Compile Include="Auxiliares\Interfaces\IEnsayosMonoComponente.vb" />
     <Compile Include="Auxiliares\Interfaces\IFrasesHP.vb" />
     <Compile Include="Auxiliares\Interfaces\IIngresoMotivoDesvio.vb" />
     <Compile Include="Auxiliares\Interfaces\IIngresoParametrosEspecificaciones.vb" />
@@ -266,10 +267,16 @@
     <Compile Include="Maestros\Materias Primas\Planillas de Ensayos MP\ImpresionPlanillaEnsayosMP.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Maestros\Productos Terminados Farma\Planillas de Ensayos PT\ImpresionPlanillaEnsayosPT.Designer.vb">
+    <Compile Include="Maestros\Productos Terminados\Ensayos Intermedios\EnsayosMonocomponente.Designer.vb">
+      <DependentUpon>EnsayosMonocomponente.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\Productos Terminados\Ensayos Intermedios\EnsayosMonocomponente.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestros\Productos Terminados\Planillas de Ensayos PT\ImpresionPlanillaEnsayosPT.Designer.vb">
       <DependentUpon>ImpresionPlanillaEnsayosPT.vb</DependentUpon>
     </Compile>
-    <Compile Include="Maestros\Productos Terminados Farma\Planillas de Ensayos PT\ImpresionPlanillaEnsayosPT.vb">
+    <Compile Include="Maestros\Productos Terminados\Planillas de Ensayos PT\ImpresionPlanillaEnsayosPT.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ParametrosDeEspecificacion.Designer.vb">
@@ -374,52 +381,52 @@
     <Compile Include="Maestros\Materias Primas\Ingreso de Ensayos de Laboratorio\IngresoEnsayosLaboratorioMP.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Maestros\Productos Terminados Farma\Autorizacion de Pedidos\AutorizarPedido.Designer.vb">
+    <Compile Include="Maestros\Productos Terminados\Autorizacion de Pedidos\AutorizarPedido.Designer.vb">
       <DependentUpon>AutorizarPedido.vb</DependentUpon>
     </Compile>
-    <Compile Include="Maestros\Productos Terminados Farma\Autorizacion de Pedidos\AutorizarPedido.vb">
+    <Compile Include="Maestros\Productos Terminados\Autorizacion de Pedidos\AutorizarPedido.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Maestros\Productos Terminados Farma\Autorizacion de Pedidos\ListadoAutorizacionPedidos.Designer.vb">
+    <Compile Include="Maestros\Productos Terminados\Autorizacion de Pedidos\ListadoAutorizacionPedidos.Designer.vb">
       <DependentUpon>ListadoAutorizacionPedidos.vb</DependentUpon>
     </Compile>
-    <Compile Include="Maestros\Productos Terminados Farma\Autorizacion de Pedidos\ListadoAutorizacionPedidos.vb">
+    <Compile Include="Maestros\Productos Terminados\Autorizacion de Pedidos\ListadoAutorizacionPedidos.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Maestros\Productos Terminados Farma\Datos A Mostrar en CA\IngresoDatosMostrarEnCertificadosAnalisis.Designer.vb">
+    <Compile Include="Maestros\Productos Terminados\Datos A Mostrar en CA\IngresoDatosMostrarEnCertificadosAnalisis.Designer.vb">
       <DependentUpon>IngresoDatosMostrarEnCertificadosAnalisis.vb</DependentUpon>
     </Compile>
-    <Compile Include="Maestros\Productos Terminados Farma\Datos A Mostrar en CA\IngresoDatosMostrarEnCertificadosAnalisis.vb">
+    <Compile Include="Maestros\Productos Terminados\Datos A Mostrar en CA\IngresoDatosMostrarEnCertificadosAnalisis.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Maestros\Productos Terminados Farma\Emision CA\EmisionCertificadoAnalisis.Designer.vb">
+    <Compile Include="Maestros\Productos Terminados\Emision CA\EmisionCertificadoAnalisis.Designer.vb">
       <DependentUpon>EmisionCertificadoAnalisis.vb</DependentUpon>
     </Compile>
-    <Compile Include="Maestros\Productos Terminados Farma\Emision CA\EmisionCertificadoAnalisis.vb">
+    <Compile Include="Maestros\Productos Terminados\Emision CA\EmisionCertificadoAnalisis.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Maestros\Productos Terminados Farma\Ensayos Intermedios\IngresoEnsayosIntermediosPT.Designer.vb">
+    <Compile Include="Maestros\Productos Terminados\Ensayos Intermedios\IngresoEnsayosIntermediosPT.Designer.vb">
       <DependentUpon>IngresoEnsayosIntermediosPT.vb</DependentUpon>
     </Compile>
-    <Compile Include="Maestros\Productos Terminados Farma\Ensayos Intermedios\IngresoEnsayosIntermediosPT.vb">
+    <Compile Include="Maestros\Productos Terminados\Ensayos Intermedios\IngresoEnsayosIntermediosPT.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Maestros\Productos Terminados Farma\Especificaciones\DefinicionFormulaEspecificacion.Designer.vb">
+    <Compile Include="Maestros\Productos Terminados\Especificaciones\DefinicionFormulaEspecificacion.Designer.vb">
       <DependentUpon>DefinicionFormulaEspecificacion.vb</DependentUpon>
     </Compile>
-    <Compile Include="Maestros\Productos Terminados Farma\Especificaciones\DefinicionFormulaEspecificacion.vb">
+    <Compile Include="Maestros\Productos Terminados\Especificaciones\DefinicionFormulaEspecificacion.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Maestros\Productos Terminados Farma\Especificaciones\IngresoEspecificacionesPT.Designer.vb">
+    <Compile Include="Maestros\Productos Terminados\Especificaciones\IngresoEspecificacionesPT.Designer.vb">
       <DependentUpon>IngresoEspecificacionesPT.vb</DependentUpon>
     </Compile>
-    <Compile Include="Maestros\Productos Terminados Farma\Especificaciones\IngresoEspecificacionesPT.vb">
+    <Compile Include="Maestros\Productos Terminados\Especificaciones\IngresoEspecificacionesPT.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Maestros\Productos Terminados Farma\Especificaciones\IngresoParametrosEspecificaciones.Designer.vb">
+    <Compile Include="Maestros\Productos Terminados\Especificaciones\IngresoParametrosEspecificaciones.Designer.vb">
       <DependentUpon>IngresoParametrosEspecificaciones.vb</DependentUpon>
     </Compile>
-    <Compile Include="Maestros\Productos Terminados Farma\Especificaciones\IngresoParametrosEspecificaciones.vb">
+    <Compile Include="Maestros\Productos Terminados\Especificaciones\IngresoParametrosEspecificaciones.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MenuPrincipal.Designer.vb">
@@ -744,7 +751,10 @@
     <EmbeddedResource Include="Maestros\Materias Primas\Planillas de Ensayos MP\ImpresionPlanillaEnsayosMP.resx">
       <DependentUpon>ImpresionPlanillaEnsayosMP.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Maestros\Productos Terminados Farma\Planillas de Ensayos PT\ImpresionPlanillaEnsayosPT.resx">
+    <EmbeddedResource Include="Maestros\Productos Terminados\Ensayos Intermedios\EnsayosMonocomponente.resx">
+      <DependentUpon>EnsayosMonocomponente.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\Productos Terminados\Planillas de Ensayos PT\ImpresionPlanillaEnsayosPT.resx">
       <DependentUpon>ImpresionPlanillaEnsayosPT.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ParametrosDeEspecificacion.resx">
@@ -795,28 +805,28 @@
     <EmbeddedResource Include="Maestros\Materias Primas\Ingreso de Ensayos de Laboratorio\IngresoEnsayosLaboratorioMP.resx">
       <DependentUpon>IngresoEnsayosLaboratorioMP.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Maestros\Productos Terminados Farma\Autorizacion de Pedidos\AutorizarPedido.resx">
+    <EmbeddedResource Include="Maestros\Productos Terminados\Autorizacion de Pedidos\AutorizarPedido.resx">
       <DependentUpon>AutorizarPedido.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Maestros\Productos Terminados Farma\Autorizacion de Pedidos\ListadoAutorizacionPedidos.resx">
+    <EmbeddedResource Include="Maestros\Productos Terminados\Autorizacion de Pedidos\ListadoAutorizacionPedidos.resx">
       <DependentUpon>ListadoAutorizacionPedidos.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Maestros\Productos Terminados Farma\Datos A Mostrar en CA\IngresoDatosMostrarEnCertificadosAnalisis.resx">
+    <EmbeddedResource Include="Maestros\Productos Terminados\Datos A Mostrar en CA\IngresoDatosMostrarEnCertificadosAnalisis.resx">
       <DependentUpon>IngresoDatosMostrarEnCertificadosAnalisis.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Maestros\Productos Terminados Farma\Emision CA\EmisionCertificadoAnalisis.resx">
+    <EmbeddedResource Include="Maestros\Productos Terminados\Emision CA\EmisionCertificadoAnalisis.resx">
       <DependentUpon>EmisionCertificadoAnalisis.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Maestros\Productos Terminados Farma\Ensayos Intermedios\IngresoEnsayosIntermediosPT.resx">
+    <EmbeddedResource Include="Maestros\Productos Terminados\Ensayos Intermedios\IngresoEnsayosIntermediosPT.resx">
       <DependentUpon>IngresoEnsayosIntermediosPT.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Maestros\Productos Terminados Farma\Especificaciones\DefinicionFormulaEspecificacion.resx">
+    <EmbeddedResource Include="Maestros\Productos Terminados\Especificaciones\DefinicionFormulaEspecificacion.resx">
       <DependentUpon>DefinicionFormulaEspecificacion.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Maestros\Productos Terminados Farma\Especificaciones\IngresoEspecificacionesPT.resx">
+    <EmbeddedResource Include="Maestros\Productos Terminados\Especificaciones\IngresoEspecificacionesPT.resx">
       <DependentUpon>IngresoEspecificacionesPT.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Maestros\Productos Terminados Farma\Especificaciones\IngresoParametrosEspecificaciones.resx">
+    <EmbeddedResource Include="Maestros\Productos Terminados\Especificaciones\IngresoParametrosEspecificaciones.resx">
       <DependentUpon>IngresoParametrosEspecificaciones.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MenuPrincipal.resx">
@@ -996,7 +1006,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Auxiliares\Ayudas\" />
-    <Folder Include="Maestros\Productos Terminados No Farma\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
