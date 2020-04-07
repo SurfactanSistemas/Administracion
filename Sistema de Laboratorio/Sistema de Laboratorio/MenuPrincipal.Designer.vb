@@ -35,6 +35,7 @@ Partial Class MenuPrincipal
         Me.LotesVencidosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.VerificacionDeVencimientosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EmisiónDeEtiquetasSimplesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ImpresiónPlanillaDeEnsayosToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProductosTerminadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.IngresoDeEspecificacionesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ConsultaDeEspecificacionesPorVersionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -62,7 +63,6 @@ Partial Class MenuPrincipal
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnCambioEmpresa = New System.Windows.Forms.Button()
-        Me.ImpresiónPlanillaDeEnsayosToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -150,6 +150,12 @@ Partial Class MenuPrincipal
         Me.EmisiónDeEtiquetasSimplesToolStripMenuItem.Size = New System.Drawing.Size(297, 22)
         Me.EmisiónDeEtiquetasSimplesToolStripMenuItem.Text = "Emisión de Etiquetas Simples"
         '
+        'ImpresiónPlanillaDeEnsayosToolStripMenuItem1
+        '
+        Me.ImpresiónPlanillaDeEnsayosToolStripMenuItem1.Name = "ImpresiónPlanillaDeEnsayosToolStripMenuItem1"
+        Me.ImpresiónPlanillaDeEnsayosToolStripMenuItem1.Size = New System.Drawing.Size(297, 22)
+        Me.ImpresiónPlanillaDeEnsayosToolStripMenuItem1.Text = "Impresión Planilla de Ensayos"
+        '
         'ProductosTerminadosToolStripMenuItem
         '
         Me.ProductosTerminadosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IngresoDeEspecificacionesToolStripMenuItem, Me.ConsultaDeEspecificacionesPorVersionToolStripMenuItem, Me.ListaDeEspecificacionesDePTAFechaToolStripMenuItem, Me.ToolStripMenuItem1, Me.ListadoDeEnsayosDePTToolStripMenuItem, Me.ListaDePTVencidosToolStripMenuItem, Me.ToolStripMenuItem2, Me.ToolStripMenuItem3, Me.AutorizaciónDePedidosToolStripMenuItem, Me.ImpresiónPlanillaDeEnsayosToolStripMenuItem})
@@ -227,13 +233,13 @@ Partial Class MenuPrincipal
         'HToolStripMenuItem
         '
         Me.HToolStripMenuItem.Name = "HToolStripMenuItem"
-        Me.HToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.HToolStripMenuItem.Size = New System.Drawing.Size(83, 22)
         Me.HToolStripMenuItem.Text = "H"
         '
         'PToolStripMenuItem
         '
         Me.PToolStripMenuItem.Name = "PToolStripMenuItem"
-        Me.PToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.PToolStripMenuItem.Size = New System.Drawing.Size(83, 22)
         Me.PToolStripMenuItem.Text = "P"
         '
         'DatosAdicionalesToolStripMenuItem
@@ -289,7 +295,7 @@ Partial Class MenuPrincipal
         'FinDeSistemaToolStripMenuItem
         '
         Me.FinDeSistemaToolStripMenuItem.Name = "FinDeSistemaToolStripMenuItem"
-        Me.FinDeSistemaToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
+        Me.FinDeSistemaToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.FinDeSistemaToolStripMenuItem.Text = "Fin de Sistema"
         '
         'Panel1
@@ -337,12 +343,6 @@ Partial Class MenuPrincipal
         Me.btnCambioEmpresa.TabIndex = 2
         Me.btnCambioEmpresa.Text = "CAMBIAR EMPRESA"
         Me.btnCambioEmpresa.UseVisualStyleBackColor = True
-        '
-        'ImpresiónPlanillaDeEnsayosToolStripMenuItem1
-        '
-        Me.ImpresiónPlanillaDeEnsayosToolStripMenuItem1.Name = "ImpresiónPlanillaDeEnsayosToolStripMenuItem1"
-        Me.ImpresiónPlanillaDeEnsayosToolStripMenuItem1.Size = New System.Drawing.Size(297, 22)
-        Me.ImpresiónPlanillaDeEnsayosToolStripMenuItem1.Text = "Impresión Planilla de Ensayos"
         '
         'MenuPrincipal
         '
