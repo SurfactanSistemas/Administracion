@@ -1,14 +1,15 @@
-﻿Imports ConsultasVarias.Interfaces
+﻿Imports ConsultasVarias
+Imports ConsultasVarias.Interfaces
 
-Public Class ImpresionPlanillaEnsayosPT : Implements ConsultasVarias.Interfaces.IAyudaPTs
+Public Class ImpresionPlanillaEnsayosPT : Implements IAyudaPTs
 
     Private Sub btnAyuda_Click(sender As Object, e As EventArgs) Handles btnAyuda.Click
-        With New ConsultasVarias.AyudaPTs
+        With New AyudaPTs
             .ShowDialog(Me)
         End With
     End Sub
 
-    Public Sub _ProcesarAyudaPTs(Codigo As String, Descripcion As String) Implements IAyudaPTs._ProcesarAyudaPTs
+    Public Sub _ProcesarAyudaPTs(Codigo As String, wDescripcion As String) Implements IAyudaPTs._ProcesarAyudaPTs
         txtCodigo.Text = Codigo
         txtCodigo_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
         If Val(txtEtapa.Text) <> 0 Then txtEtapa_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
@@ -52,7 +53,7 @@ Public Class ImpresionPlanillaEnsayosPT : Implements ConsultasVarias.Interfaces.
 
     End Function
 
-    Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtEtapa.KeyPress
+    Private Sub SoloNumero(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txtEtapa.KeyPress
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
             e.Handled = True
         End If
@@ -80,10 +81,6 @@ Public Class ImpresionPlanillaEnsayosPT : Implements ConsultasVarias.Interfaces.
             Else
                 _CargarDatosEspecifNoFarma()
             End If
-
-            Dim WBaseII = "Surfactan_II"
-
-            If _EsPellital() Then WBaseII = "Pelitall_II"
 
             For Each row As DataGridViewRow In dgvEspecif.Rows
                 With row
@@ -130,7 +127,7 @@ Public Class ImpresionPlanillaEnsayosPT : Implements ConsultasVarias.Interfaces.
                     Dim WHastaEspecif As String = OrDefault(.Item("HastaEspecif"), "")
                     Dim WUnidadEspecif = OrDefault(.Item("UnidadEspecif"), "")
                     Dim WMenorIgualEspecif = OrDefault(.Item("MenorIgualEspecif"), "0")
-                    Dim WImpreParametro = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif)
+                    Dim WImpreParametro = _GenerarImpreParametro(WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif)
 
                     If Val(WTipoEspecif) = 0 And WImpreParametro <> "" Then WImpreParametro &= " (c)"
 
@@ -284,7 +281,7 @@ Public Class ImpresionPlanillaEnsayosPT : Implements ConsultasVarias.Interfaces.
                     Dim WHastaEspecif As String = OrDefault(.Item("HastaEspecif"), "")
                     Dim WUnidadEspecif = OrDefault(.Item("UnidadEspecif"), "")
                     Dim WMenorIgualEspecif = OrDefault(.Item("MenorIgualEspecif"), "0")
-                    Dim WImpreParametro = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif)
+                    Dim WImpreParametro = _GenerarImpreParametro(WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif)
 
                     If Val(WTipoEspecif) = 0 And WImpreParametro <> "" Then WImpreParametro &= " (c)"
 
@@ -334,7 +331,7 @@ Public Class ImpresionPlanillaEnsayosPT : Implements ConsultasVarias.Interfaces.
                 Dim WHastaEspecif As String = OrDefault(.Item("HastaEspecif"), "")
                 Dim WUnidadEspecif = OrDefault(.Item("UnidadEspecif"), "")
                 Dim WMenorIgualEspecif = OrDefault(.Item("MenorIgualEspecif"), "0")
-                Dim WImpreParametro = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif)
+                Dim WImpreParametro = _GenerarImpreParametro(WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif)
 
                 If Val(WTipoEspecif) = 0 And WImpreParametro <> "" Then WImpreParametro &= " (c)"
 
@@ -364,7 +361,7 @@ Public Class ImpresionPlanillaEnsayosPT : Implements ConsultasVarias.Interfaces.
 
     End Sub
 
-    Private Function _GenerarImpreParametro(ByVal wTipoEspecif As String, ByVal wDesdeEspecif As String, ByVal wHastaEspecif As String, ByVal wUnidadEspecif As String, ByVal wMenorIgualEspecif As String) As String
+    Private Function _GenerarImpreParametro(ByVal wDesdeEspecif As String, ByVal wHastaEspecif As String, ByVal wUnidadEspecif As String, ByVal wMenorIgualEspecif As String) As String
 
         wDesdeEspecif = OrDefault(Trim(wDesdeEspecif), "")
         wHastaEspecif = OrDefault(Trim(wHastaEspecif), "")

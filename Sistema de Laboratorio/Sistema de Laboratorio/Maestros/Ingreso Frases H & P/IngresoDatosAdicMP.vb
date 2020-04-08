@@ -1,7 +1,4 @@
-﻿Imports System.Configuration
-Imports System.Data.SqlClient
-
-Public Class IngresoDatosAdicMP
+﻿Public Class IngresoDatosAdicMP
     Dim consultaIndice As Integer = -1
     Dim PagLstbox As Integer = 1
     ReadOnly TipoProducto As String
@@ -42,7 +39,7 @@ Public Class IngresoDatosAdicMP
         If (e.KeyData = Keys.Enter) Then
             If (Trim(masktxtCodigo.Text.Replace(" ", "").Replace("-", "")) <> "") Then
                 Try
-                   
+
                     Dim CodigoArticulo As String = masktxtCodigo.Text
                     ComprobarEnter = CodigoArticulo
                     Dim sqlConsulta As String
@@ -78,7 +75,7 @@ Public Class IngresoDatosAdicMP
                             masktxtCodigo.Text = CodigoArticulo
                         End If
                     End If
-                    
+
 
                 Catch ex As Exception
                     MsgBox(ex.Message)
@@ -93,14 +90,13 @@ Public Class IngresoDatosAdicMP
 
     Private Sub CargarTab()
         Try
-           
+
             Dim sqlConsulta As String
             If (TipoProducto = "MP") Then
                 sqlConsulta = "SELECT * FROM DatosEtiquetaMP WHERE Articulo = '" & UCase(masktxtCodigo.Text) & "' ORDER BY Renglon"
             Else
                 sqlConsulta = "SELECT * FROM DatosEtiqueta WHERE Terminado = '" & UCase(masktxtCodigo.Text) & "' ORDER BY Renglon"
             End If
-
 
             Dim tabla As DataTable = GetAll(sqlConsulta)
 
@@ -117,18 +113,14 @@ Public Class IngresoDatosAdicMP
                 cbxMedioAmbiente9.SelectedIndex = tabla.Rows(0).Item("Pictograma9")
             End If
 
-
             Dim cantidadRenglonesDenomi As Integer = 0
             Dim YaCargoDenominaciones As Boolean = False
+
             'CARGO LOS RENGLONES PARA DENOMINACIONES
-            '            For i = DGV_DemoCompPeligrosos.Rows.Count + 1 To 100
-            '                DGV_DemoCompPeligrosos.Rows.Add("")
-            '            Next
             DGV_DemoCompPeligrosos.Rows.Clear()
             For i = DGV_DemoCompPeligrosos.Rows.Count To 100
                 DGV_DemoCompPeligrosos.Rows.Add("")
             Next
-
 
             For i As Integer = 0 To tabla.Rows.Count - 1
 
@@ -148,7 +140,7 @@ Public Class IngresoDatosAdicMP
 
                             End If
                         End If
-                        
+
 
 
 
@@ -158,14 +150,14 @@ Public Class IngresoDatosAdicMP
                         Else
                             sqlConsulta = "SELECT FraseP Codigo, Descripcion = TRIM(Descripcion1P) + ' ' + TRIM(Descripcion2P) + ' ' + TRIM(Descripcion3P), Observaciones FROM DatosEtiquetaMP WHERE Tipo = 2 AND Articulo = '" & UCase(masktxtCodigo.Text) & "' ORDER BY Renglon"
                         End If
-                        
+
                         Dim tablaP As DataTable = GetAll(sqlConsulta)
                         If tablaP IsNot Nothing Then
                             If (tablaP.Rows.Count > 0) Then
                                 DGV_FrasesP.DataSource = tablaP
                             End If
                         End If
-                        
+
 
 
                     Case "3"
@@ -209,7 +201,7 @@ Public Class IngresoDatosAdicMP
             End If
 
 
-        
+
 
 
             'Dim sqlConsulta As String
@@ -333,165 +325,77 @@ Public Class IngresoDatosAdicMP
 
     Private Sub LstboxConsultaDatos_Click(ByVal sender As Object, ByVal e As EventArgs) Handles LstboxConsultaDatos.Click
 
-
-
-
         If (PagLstbox = 1) Then
+
             LstboxConsultaDatos.BringToFront()
             DGV_Consulta.SendToBack()
+
+            LstboxConsultaDatos.Items.Clear()
+
+            Dim tabla As New DataTable
+            Dim sqlConsulta As String
+
             Select Case LstboxConsultaDatos.SelectedIndex
                 Case "0"
-                    Try
-                        consultaIndice = 0
-                        LstboxConsultaDatos.Items.Clear()
-                        Dim tabla As New DataTable
-                        Dim sqlConsulta As String
-                        If (TipoProducto = "PT") Then
-                            sqlConsulta = "SELECT Codigo, Descripcion FROM Terminado ORDER BY Codigo"
-                        Else
-                            sqlConsulta = "SELECT Codigo, Descripcion FROM Articulo ORDER BY Codigo"
-                        End If
+                    consultaIndice = 0
 
+                    If (TipoProducto = "PT") Then
+                        sqlConsulta = "SELECT Codigo, Descripcion FROM Terminado ORDER BY Codigo"
+                    Else
+                        sqlConsulta = "SELECT Codigo, Descripcion FROM Articulo ORDER BY Codigo"
+                    End If
 
-                        tabla = GetAll(sqlConsulta)
-                        If (tabla.Rows.Count > 0) Then
-                            DGV_Consulta.DataSource = tabla
+                    tabla = GetAll(sqlConsulta)
 
-                        End If
-                        '                      
-
-                    Catch ex As Exception
-                        MsgBox(ex.Message)
-                    End Try
                 Case "1"
-                    Try
-                        consultaIndice = 1
-                        LstboxConsultaDatos.Items.Clear()
-                        Dim tabla As New DataTable
-                        Dim sqlConsulta As String
-                        sqlConsulta = "SELECT Codigo, Descripcion,Observa Observaciones FROM FraseH ORDER BY Codigo"
+                    consultaIndice = 1
 
-                        tabla = GetAll(sqlConsulta, "SurfactanSA")
-                        If (tabla.Rows.Count > 0) Then
-                            DGV_Consulta.DataSource = tabla
+                    sqlConsulta = "SELECT Codigo, Descripcion,Observa Observaciones FROM FraseH ORDER BY Codigo"
 
-                        End If
-                        '                      
-                    Catch ex As Exception
-                        MsgBox(ex.Message)
-                    End Try
+                    tabla = GetAll(sqlConsulta, "SurfactanSA")
+
                 Case "2"
-                    Try
-                        consultaIndice = 2
-                        LstboxConsultaDatos.Items.Clear()
-                        Dim tabla As New DataTable
-                        Dim sqlConsulta As String
-                        sqlConsulta = "SELECT Codigo, Descripcion, Observa Observaciones FROM FraseP ORDER BY Codigo"
+                    consultaIndice = 2
 
-                        tabla = GetAll(sqlConsulta, "SurfactanSA")
-                        If (tabla.Rows.Count > 0) Then
-                            DGV_Consulta.DataSource = tabla
+                    sqlConsulta = "SELECT Codigo, Descripcion, Observa Observaciones FROM FraseP ORDER BY Codigo"
 
-                        End If
-                        '                       
-                    Catch ex As Exception
-                        MsgBox(ex.Message)
-                    End Try
+                    tabla = GetAll(sqlConsulta, "SurfactanSA")
+
             End Select
+
+            If tabla.Rows.Count > 0 Then DGV_Consulta.DataSource = tabla
+
             PagLstbox = 2
+
             DGV_Consulta.BringToFront()
             LstboxConsultaDatos.SendToBack()
+
+            DGV_Consulta.Visible = True
             txtConsultaDatos.Visible = True
             txtConsultaDatos.Focus()
-        Else
-
-
 
         End If
     End Sub
 
     Private Sub txtConsultaDatos_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtConsultaDatos.KeyUp
-        Dim sqlconsulta As String
-        Dim tabla As New DataTable
 
+        Dim datos As DataTable = TryCast(DGV_Consulta.DataSource, DataTable)
 
-        Select Case consultaIndice
-            Case "0"
-                Try
-                    LstboxConsultaDatos.Items.Clear()
-                    If (TipoProducto = "PT") Then
-                        sqlconsulta = "SELECT Codigo, Descripcion FROM Terminado WHERE Descripcion LIKE  '%" & txtConsultaDatos.Text.Trim() & "%' OR Codigo LIKE '%" & txtConsultaDatos.Text.Trim() & "%' ORDER BY Codigo"
-                    Else
-                        sqlconsulta = "SELECT Codigo, Descripcion FROM Articulo WHERE Descripcion LIKE  '%" & txtConsultaDatos.Text.Trim() & "%' OR Codigo LIKE '%" & txtConsultaDatos.Text.Trim() & "%' ORDER BY Codigo"
-                    End If
-
-                    tabla = GetAll(sqlconsulta)
-                    Dim tabla2 = TryCast(DGV_Consulta.DataSource, DataTable)
-                    If tabla2 IsNot Nothing Then tabla2.Rows.Clear()
-                    'DGV_FrasesH.DataSource = Nothing
-                    If (tabla.Rows.Count > 0) Then
-                        DGV_Consulta.DataSource = tabla
-
-                    End If
-                    '                 
-                Catch ex As Exception
-                    MsgBox(ex.Message)
-                End Try
-
-
-            Case "1"
-                Try
-                    LstboxConsultaDatos.Items.Clear()
-                    sqlconsulta = "SELECT Codigo, Descripcion, Observa Observaciones FROM FraseH WHERE Descripcion LIKE  '%" & txtConsultaDatos.Text.Trim() & "%' OR Codigo LIKE '%" & txtConsultaDatos.Text.Trim() & "%' ORDER BY Codigo"
-                    tabla = GetAll(sqlconsulta)
-                    Dim tabla2 = TryCast(DGV_Consulta.DataSource, DataTable)
-                    If tabla2 IsNot Nothing Then tabla2.Rows.Clear()
-                    'DGV_FrasesH.DataSource = Nothing
-                    If (tabla.Rows.Count > 0) Then
-                        DGV_Consulta.DataSource = tabla
-
-                    End If
-                    '                  
-                Catch ex As Exception
-                    MsgBox(ex.Message)
-                End Try
-
-
-            Case "2"
-                Try
-                    LstboxConsultaDatos.Items.Clear()
-                    sqlconsulta = "SELECT Codigo, Descripcion, Observa Observaciones FROM FraseP WHERE Descripcion LIKE  '%" & txtConsultaDatos.Text.Trim() & "%' OR Codigo LIKE '%" & txtConsultaDatos.Text.Trim() & "%' ORDER BY Codigo"
-                    tabla = GetAll(sqlconsulta)
-                    'DGV_FrasesP.DataSource = Nothing
-                    Dim tabla2 = TryCast(DGV_Consulta.DataSource, DataTable)
-                    If tabla2 IsNot Nothing Then tabla2.Rows.Clear()
-                    If (tabla.Rows.Count > 0) Then
-                        DGV_Consulta.DataSource = tabla
-
-                    End If
-                Catch ex As Exception
-                    MsgBox(ex.Message)
-                End Try
-
-        End Select
+        If datos IsNot Nothing Then datos.DefaultView.RowFilter = String.Format("Codigo LIKE '%{0}%' OR Descripcion LIKE '%{0}%'", txtConsultaDatos.Text)
 
     End Sub
 
     Private Sub btnAnteriorPag_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAnteriorPag.Click
         txtConsultaDatos.Visible = False
-        If (TipoProducto = "MP") Then
-            LstboxConsultaDatos.Items.Clear()
-            LstboxConsultaDatos.Items.Add("Materias Primas")
-            LstboxConsultaDatos.Items.Add("Frases H")
-            LstboxConsultaDatos.Items.Add("Frases P")
+        DGV_Consulta.Visible = False
 
-        Else
-            LstboxConsultaDatos.Items.Clear()
-            LstboxConsultaDatos.Items.Add("Productos Terminados")
-            LstboxConsultaDatos.Items.Add("Frases H")
-            LstboxConsultaDatos.Items.Add("Frases P")
+        With LstboxConsultaDatos.Items
+            .Clear()
+            If TipoProducto = "MP" Then : .Add("Materias Primas") : Else : .Add("Productos Terminados") : End If
+            .Add("Frases H")
+            .Add("Frases P")
+        End With
 
-        End If
         consultaIndice = -1
         PagLstbox = 1
         DGV_Consulta.SendToBack()
@@ -562,9 +466,9 @@ Public Class IngresoDatosAdicMP
 
     End Sub
 
-    Private Sub AgregarInglesHP(ByVal Codigo As String, ByVal QueTabla As String)
+    Private Sub AgregarInglesHP(ByVal WCodigo As String, ByVal QueTabla As String)
         Try
-            
+
             Dim sqlConsulta As String
             Select Case QueTabla
                 Case "FraseHINGLES"
@@ -576,7 +480,7 @@ Public Class IngresoDatosAdicMP
                         tabla.Columns.Add("Descripcion")
                         DGV_FrasesHIngles.DataSource = tabla
                     End If
-                    sqlConsulta = "SELECT Codigo, Descripcion = TRIM(DescripcionIngles) + ' ' + TRIM(DescripcionInglesII) + ' ' + TRIM(DescripcionInglesIII) FROM FrasehIngles WHERE Codigo = '" & Codigo & "'"
+                    sqlConsulta = "SELECT Codigo, Descripcion = TRIM(DescripcionIngles) + ' ' + TRIM(DescripcionInglesII) + ' ' + TRIM(DescripcionInglesIII) FROM FrasehIngles WHERE Codigo = '" & WCodigo & "'"
                     Dim tabla2 As DataTable = GetAll(sqlConsulta)
                     If (tabla2.Rows.Count) Then
                         For Each datar As DataRow In tabla2.Rows
@@ -591,7 +495,6 @@ Public Class IngresoDatosAdicMP
                         MsgBox("Esta Frase no esta ingresada en ingles")
                     End If
 
-
                 Case "FrasePINGLES"
                     Dim tabla As DataTable = TryCast(DGV_FrasesPIngles.DataSource, DataTable)
 
@@ -601,7 +504,7 @@ Public Class IngresoDatosAdicMP
                         tabla.Columns.Add("Descripcion")
                         DGV_FrasesPIngles.DataSource = tabla
                     End If
-                    sqlConsulta = "SELECT Codigo, Descripcion = TRIM(DescripcionIngles) + ' ' + TRIM(DescripcionInglesII) + ' ' + TRIM(DescripcionInglesIII) FROM FrasePIngles WHERE Codigo = '" & Codigo & "'"
+                    sqlConsulta = "SELECT Codigo, Descripcion = TRIM(DescripcionIngles) + ' ' + TRIM(DescripcionInglesII) + ' ' + TRIM(DescripcionInglesIII) FROM FrasePIngles WHERE Codigo = '" & WCodigo & "'"
 
                     Dim tabla2 As DataTable = GetAll(sqlConsulta)
                     If (tabla2.Rows.Count) Then
@@ -619,7 +522,7 @@ Public Class IngresoDatosAdicMP
             End Select
 
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
         End Try
 
     End Sub
@@ -643,85 +546,48 @@ Public Class IngresoDatosAdicMP
                 Dim Renglon = 1
                 For i As Integer = 1 To 100
                     If (TipoProducto = "PT") Then
-                        If (DGV_FrasesH.Rows.Count > 0) Then
-                            If (i <= DGV_FrasesH.Rows.Count) Then
-                                ' If Not DGV_FrasesH.Rows.Item(i - 1) Is Nothing Then
-                                If DGV_FrasesH.Rows.Item(i - 1).Cells("Codigo").Value <> "" Then
+                        If (DGV_FrasesH.Rows.Count > 0) AndAlso i <= DGV_FrasesH.Rows.Count AndAlso DGV_FrasesH.Rows.Item(i - 1).Cells("Codigo").Value <> "" Then
 
-                                    ClaveVariable = masktxtCodigo.Text.Trim() + Renglon.ToString().PadLeft(3, "0")
+                            ClaveVariable = masktxtCodigo.Text.Trim() + Renglon.ToString().PadLeft(3, "0")
 
-                                    sqlconsulta = "INSERT INTO DatosEtiqueta( Clave, Terminado, Renglon, Palabra, Pictograma1,"
-                                    sqlconsulta = sqlconsulta & " Pictograma2, Pictograma3, Pictograma4, Pictograma5, Pictograma6,"
-                                    sqlconsulta = sqlconsulta & " Pictograma7, Pictograma8, Pictograma9, Tipo, FraseH, Descripcion1H,"
-                                    sqlconsulta = sqlconsulta & " Descripcion2H, Descripcion3H, FraseP, Descripcion1P , Descripcion2P,"
-                                    sqlconsulta = sqlconsulta & " Descripcion3P, Observaciones, Denominacion) Values( '" & ClaveVariable & "' ,"
-                                    sqlconsulta = sqlconsulta & " '" & masktxtCodigo.Text & "' , '" & Renglon & "' , '" & cbxPalabraAdvertencia.SelectedIndex & "' ,"
-                                    sqlconsulta = sqlconsulta & " '" & cbxExplosivo1.SelectedIndex & "' , '" & cbxInflamable2.SelectedIndex & "' ,"
-                                    sqlconsulta = sqlconsulta & " '" & cbxCarburante3.SelectedIndex & "' , '" & cbxGasesBajo4.SelectedIndex & "' ,"
-                                    sqlconsulta = sqlconsulta & " '" & cbxCorrosivo5.SelectedIndex & "' , '" & cbxToxico6.SelectedIndex & "' ,"
-                                    sqlconsulta = sqlconsulta & " '" & cbxPeligro7.SelectedIndex & "' , '" & cbxPeligroPLASalud8.SelectedIndex & "' ,"
-                                    sqlconsulta = sqlconsulta & " '" & cbxMedioAmbiente9.SelectedIndex & "' , '" & "1" & "' , '" & DGV_FrasesH.Rows.Item(i - 1).Cells("Codigo").Value.ToString() & "' ,"
-                                    sqlconsulta = sqlconsulta & " '" & Trim(DGV_FrasesH.Rows.Item(i - 1).Cells("DescripcionH").Value.ToString().PadRight(450).Substring(0, 250)) & "' , '" & Trim(DGV_FrasesH.Rows.Item(i - 1).Cells("DescripcionH").Value.ToString().PadRight(450).Substring(250, 100)) & "' ,"
-                                    sqlconsulta = sqlconsulta & " '" & Trim(DGV_FrasesH.Rows.Item(i - 1).Cells("DescripcionH").Value.ToString().PadRight(450).Substring(350, 100)) & "' , '" & "" & "' ,"
-                                    sqlconsulta = sqlconsulta & " '" & "" & "' , '" & "" & "' , '" & "" & "' , '" & DGV_FrasesH.Rows.Item(i - 1).Cells("ObservacionesH").Value.ToString() & "' , '" & "" & "' )"
-
-                                    ExecuteNonQueries("SurfactanSA", sqlconsulta)
-                                    Renglon = Renglon + 1
-
-
-                                End If
-                            End If
-                        End If
-
-                        If (DGV_FrasesP.Rows.Count > 0) Then
-                            If (i <= DGV_FrasesP.Rows.Count) Then
-
-                                'If Not DGV_FrasesP.Rows.Item(i) Is Nothing Then
-                                If DGV_FrasesP.Rows.Item(i - 1).Cells("CodigoFraseP").Value <> "" Then
-                                    ClaveVariable = masktxtCodigo.Text.Trim() + Renglon.ToString().PadLeft(3, "0")
-
-                                    sqlconsulta = "INSERT INTO DatosEtiqueta( Clave, Terminado, Renglon, Palabra, Pictograma1,"
-                                    sqlconsulta = sqlconsulta & " Pictograma2, Pictograma3, Pictograma4, Pictograma5, Pictograma6,"
-                                    sqlconsulta = sqlconsulta & " Pictograma7, Pictograma8, Pictograma9, Tipo, FraseH, Descripcion1H,"
-                                    sqlconsulta = sqlconsulta & " Descripcion2H, Descripcion3H, FraseP, Descripcion1P , Descripcion2P,"
-                                    sqlconsulta = sqlconsulta & " Descripcion3P, Observaciones, Denominacion) Values( '" & ClaveVariable & "' ,"
-                                    sqlconsulta = sqlconsulta & " '" & masktxtCodigo.Text & "' , '" & Renglon & "' , '" & cbxPalabraAdvertencia.SelectedIndex & "' ,"
-                                    sqlconsulta = sqlconsulta & " '" & cbxExplosivo1.SelectedIndex & "' , '" & cbxInflamable2.SelectedIndex & "' ,"
-                                    sqlconsulta = sqlconsulta & " '" & cbxCarburante3.SelectedIndex & "' , '" & cbxGasesBajo4.SelectedIndex & "' ,"
-                                    sqlconsulta = sqlconsulta & " '" & cbxCorrosivo5.SelectedIndex & "' , '" & cbxToxico6.SelectedIndex & "' ,"
-                                    sqlconsulta = sqlconsulta & " '" & cbxPeligro7.SelectedIndex & "' , '" & cbxPeligroPLASalud8.SelectedIndex & "' ,"
-                                    sqlconsulta = sqlconsulta & " '" & cbxMedioAmbiente9.SelectedIndex & "' , '" & "2" & "' , '" & "" & "' ,"
-                                    sqlconsulta = sqlconsulta & " '" & "" & "' , '" & "" & "' ,"
-                                    sqlconsulta = sqlconsulta & " '" & "" & "' , '" & DGV_FrasesP.Rows.Item(i - 1).Cells("CodigoFraseP").Value.ToString() & "' ,"
-                                    sqlconsulta = sqlconsulta & " '" & Trim(DGV_FrasesP.Rows.Item(i - 1).Cells("DescripcionFraseP").Value.ToString().PadRight(450).Substring(0, 249)) & "' , '" & Trim(DGV_FrasesP.Rows.Item(i - 1).Cells("DescripcionFraseP").Value.ToString().PadRight(450).Substring(250, 100)) & "' ,"
-                                    sqlconsulta = sqlconsulta & " '" & Trim(DGV_FrasesP.Rows.Item(i - 1).Cells("DescripcionFraseP").Value.ToString().PadRight(450).Substring(350, 100)) & "' , '" & DGV_FrasesP.Rows.Item(i - 1).Cells("Observaciones").Value.ToString() & "' , '" & "" & "' )"
-
-                                    ExecuteNonQueries("SurfactanSA", sqlconsulta)
-
-                                    Renglon = Renglon + 1
-                                End If
-                            End If
-
-                        End If
-
-                        If (OrDefault(DGV_DemoCompPeligrosos.Rows(i - 1).Cells(0).Value, "") <> "") Then
-
-                            ClaveVariable = masktxtCodigo.Text.Trim() & Renglon.ToString().PadLeft(3, "0")
                             sqlconsulta = "INSERT INTO DatosEtiqueta( Clave, Terminado, Renglon, Palabra, Pictograma1,"
-                            sqlconsulta = sqlconsulta & " Pictograma2, Pictograma3, Pictograma4, Pictograma5, Pictograma6,"
-                            sqlconsulta = sqlconsulta & " Pictograma7, Pictograma8, Pictograma9, Tipo, FraseH, Descripcion1H,"
-                            sqlconsulta = sqlconsulta & " Descripcion2H, Descripcion3H, FraseP, Descripcion1P , Descripcion2P,"
-                            sqlconsulta = sqlconsulta & " Descripcion3P, Observaciones, Denominacion) Values( '" & ClaveVariable & "' ,"
-                            sqlconsulta = sqlconsulta & " '" & masktxtCodigo.Text & "' , '" & Renglon & "' , '" & cbxPalabraAdvertencia.SelectedIndex & "' ,"
-                            sqlconsulta = sqlconsulta & " '" & cbxExplosivo1.SelectedIndex & "' , '" & cbxInflamable2.SelectedIndex & "' ,"
-                            sqlconsulta = sqlconsulta & " '" & cbxCarburante3.SelectedIndex & "' , '" & cbxGasesBajo4.SelectedIndex & "' ,"
-                            sqlconsulta = sqlconsulta & " '" & cbxCorrosivo5.SelectedIndex & "' , '" & cbxToxico6.SelectedIndex & "' ,"
-                            sqlconsulta = sqlconsulta & " '" & cbxPeligro7.SelectedIndex & "' , '" & cbxPeligroPLASalud8.SelectedIndex & "' ,"
-                            sqlconsulta = sqlconsulta & " '" & cbxMedioAmbiente9.SelectedIndex & "' , '" & "3" & "' , '" & "" & "' ,"
-                            sqlconsulta = sqlconsulta & " '" & "" & "' , '" & "" & "' ,"
-                            sqlconsulta = sqlconsulta & " '" & "" & "' , '" & "" & "' ,"
-                            sqlconsulta = sqlconsulta & " '" & "" & "' , '" & "" & "' ,"
-                            sqlconsulta = sqlconsulta & " '" & "" & "' , '" & "" & "' , '" & Trim(DGV_DemoCompPeligrosos.Rows.Item(i - 1).Cells("Denominacion").Value.ToString()) & "' )"
+                            sqlconsulta &= " Pictograma2, Pictograma3, Pictograma4, Pictograma5, Pictograma6,"
+                            sqlconsulta &= " Pictograma7, Pictograma8, Pictograma9, Tipo, FraseH, Descripcion1H,"
+                            sqlconsulta &= " Descripcion2H, Descripcion3H, FraseP, Descripcion1P , Descripcion2P,"
+                            sqlconsulta &= " Descripcion3P, Observaciones, Denominacion) Values( '" & ClaveVariable & "' ,"
+                            sqlconsulta &= " '" & masktxtCodigo.Text & "' , '" & Renglon & "' , '" & cbxPalabraAdvertencia.SelectedIndex & "' ,"
+                            sqlconsulta &= " '" & cbxExplosivo1.SelectedIndex & "' , '" & cbxInflamable2.SelectedIndex & "' ,"
+                            sqlconsulta &= " '" & cbxCarburante3.SelectedIndex & "' , '" & cbxGasesBajo4.SelectedIndex & "' ,"
+                            sqlconsulta &= " '" & cbxCorrosivo5.SelectedIndex & "' , '" & cbxToxico6.SelectedIndex & "' ,"
+                            sqlconsulta &= " '" & cbxPeligro7.SelectedIndex & "' , '" & cbxPeligroPLASalud8.SelectedIndex & "' ,"
+                            sqlconsulta &= " '" & cbxMedioAmbiente9.SelectedIndex & "' , '" & "1" & "' , '" & DGV_FrasesH.Rows.Item(i - 1).Cells("Codigo").Value.ToString() & "' ,"
+                            sqlconsulta &= " '" & Trim(DGV_FrasesH.Rows.Item(i - 1).Cells("DescripcionH").Value.ToString().PadRight(450).Substring(0, 250)) & "' , '" & Trim(DGV_FrasesH.Rows.Item(i - 1).Cells("DescripcionH").Value.ToString().PadRight(450).Substring(250, 100)) & "' ,"
+                            sqlconsulta &= " '" & Trim(DGV_FrasesH.Rows.Item(i - 1).Cells("DescripcionH").Value.ToString().PadRight(450).Substring(350, 100)) & "' , '" & "" & "' ,"
+                            sqlconsulta &= " '" & "" & "' , '" & "" & "' , '" & "" & "' , '" & DGV_FrasesH.Rows.Item(i - 1).Cells("ObservacionesH").Value.ToString() & "' , '" & "" & "' )"
+
+                            ExecuteNonQueries("SurfactanSA", sqlconsulta)
+                            Renglon = Renglon + 1
+
+                        End If
+
+                        If DGV_FrasesP.Rows.Count > 0 AndAlso i <= DGV_FrasesP.Rows.Count AndAlso DGV_FrasesP.Rows.Item(i - 1).Cells("CodigoFraseP").Value <> "" Then
+                            ClaveVariable = masktxtCodigo.Text.Trim() + Renglon.ToString().PadLeft(3, "0")
+
+                            sqlconsulta = "INSERT INTO DatosEtiqueta( Clave, Terminado, Renglon, Palabra, Pictograma1,"
+                            sqlconsulta &= " Pictograma2, Pictograma3, Pictograma4, Pictograma5, Pictograma6,"
+                            sqlconsulta &= " Pictograma7, Pictograma8, Pictograma9, Tipo, FraseH, Descripcion1H,"
+                            sqlconsulta &= " Descripcion2H, Descripcion3H, FraseP, Descripcion1P , Descripcion2P,"
+                            sqlconsulta &= " Descripcion3P, Observaciones, Denominacion) Values( '" & ClaveVariable & "' ,"
+                            sqlconsulta &= " '" & masktxtCodigo.Text & "' , '" & Renglon & "' , '" & cbxPalabraAdvertencia.SelectedIndex & "' ,"
+                            sqlconsulta &= " '" & cbxExplosivo1.SelectedIndex & "' , '" & cbxInflamable2.SelectedIndex & "' ,"
+                            sqlconsulta &= " '" & cbxCarburante3.SelectedIndex & "' , '" & cbxGasesBajo4.SelectedIndex & "' ,"
+                            sqlconsulta &= " '" & cbxCorrosivo5.SelectedIndex & "' , '" & cbxToxico6.SelectedIndex & "' ,"
+                            sqlconsulta &= " '" & cbxPeligro7.SelectedIndex & "' , '" & cbxPeligroPLASalud8.SelectedIndex & "' ,"
+                            sqlconsulta &= " '" & cbxMedioAmbiente9.SelectedIndex & "' , '" & "2" & "' , '" & "" & "' ,"
+                            sqlconsulta &= " '" & "" & "' , '" & "" & "' ,"
+                            sqlconsulta &= " '" & "" & "' , '" & DGV_FrasesP.Rows.Item(i - 1).Cells("CodigoFraseP").Value.ToString() & "' ,"
+                            sqlconsulta &= " '" & Trim(DGV_FrasesP.Rows.Item(i - 1).Cells("DescripcionFraseP").Value.ToString().PadRight(450).Substring(0, 249)) & "' , '" & Trim(DGV_FrasesP.Rows.Item(i - 1).Cells("DescripcionFraseP").Value.ToString().PadRight(450).Substring(250, 100)) & "' ,"
+                            sqlconsulta &= " '" & Trim(DGV_FrasesP.Rows.Item(i - 1).Cells("DescripcionFraseP").Value.ToString().PadRight(450).Substring(350, 100)) & "' , '" & DGV_FrasesP.Rows.Item(i - 1).Cells("Observaciones").Value.ToString() & "' , '" & "" & "' )"
 
                             ExecuteNonQueries("SurfactanSA", sqlconsulta)
 
@@ -729,113 +595,120 @@ Public Class IngresoDatosAdicMP
 
                         End If
 
-                        If (DGV_FrasesHIngles.Rows.Count > 0) Then
-                            If (i <= DGV_FrasesHIngles.Rows.Count) Then
+                        If (OrDefault(DGV_DemoCompPeligrosos.Rows(i - 1).Cells(0).Value, "") <> "") Then
 
-                                ClaveVariable = masktxtCodigo.Text.Trim() + Renglon.ToString().PadLeft(3, "0")
+                            ClaveVariable = masktxtCodigo.Text.Trim() & Renglon.ToString().PadLeft(3, "0")
+                            sqlconsulta = "INSERT INTO DatosEtiqueta( Clave, Terminado, Renglon, Palabra, Pictograma1,"
+                            sqlconsulta &= " Pictograma2, Pictograma3, Pictograma4, Pictograma5, Pictograma6,"
+                            sqlconsulta &= " Pictograma7, Pictograma8, Pictograma9, Tipo, FraseH, Descripcion1H,"
+                            sqlconsulta &= " Descripcion2H, Descripcion3H, FraseP, Descripcion1P , Descripcion2P,"
+                            sqlconsulta &= " Descripcion3P, Observaciones, Denominacion) Values( '" & ClaveVariable & "' ,"
+                            sqlconsulta &= " '" & masktxtCodigo.Text & "' , '" & Renglon & "' , '" & cbxPalabraAdvertencia.SelectedIndex & "' ,"
+                            sqlconsulta &= " '" & cbxExplosivo1.SelectedIndex & "' , '" & cbxInflamable2.SelectedIndex & "' ,"
+                            sqlconsulta &= " '" & cbxCarburante3.SelectedIndex & "' , '" & cbxGasesBajo4.SelectedIndex & "' ,"
+                            sqlconsulta &= " '" & cbxCorrosivo5.SelectedIndex & "' , '" & cbxToxico6.SelectedIndex & "' ,"
+                            sqlconsulta &= " '" & cbxPeligro7.SelectedIndex & "' , '" & cbxPeligroPLASalud8.SelectedIndex & "' ,"
+                            sqlconsulta &= " '" & cbxMedioAmbiente9.SelectedIndex & "' , '" & "3" & "' , '" & "" & "' ,"
+                            sqlconsulta &= " '" & "" & "' , '" & "" & "' ,"
+                            sqlconsulta &= " '" & "" & "' , '" & "" & "' ,"
+                            sqlconsulta &= " '" & "" & "' , '" & "" & "' ,"
+                            sqlconsulta &= " '" & "" & "' , '" & "" & "' , '" & Trim(DGV_DemoCompPeligrosos.Rows.Item(i - 1).Cells("Denominacion").Value.ToString()) & "' )"
 
-                                sqlconsulta = "INSERT INTO DatosEtiquetaIngles (Clave ,Terminado ,Renglon ,Tipo ,"
-                                sqlconsulta = sqlconsulta & "FraseHIngles ,Descripcion1HIngles ,Descripcion2HIngles ,Descripcion3HIngles ,"
-                                sqlconsulta = sqlconsulta & "FrasePIngles ,Descripcion1PIngles ,Descripcion2PIngles ,Descripcion3PIngles )"
-                                sqlconsulta = sqlconsulta & "Values ('" & ClaveVariable & "', '" & masktxtCodigo.Text & "', '" & Renglon & "',"
-                                sqlconsulta = sqlconsulta & "'" & "4" & "', '" & DGV_FrasesHIngles.Rows.Item(i - 1).Cells("CodigoFraseHINgles").Value.ToString() & "', '" & Trim(DGV_FrasesHIngles.Rows.Item(i - 1).Cells("DescripcionFraseHINgles").Value.ToString().PadRight(450).Substring(0, 250)) & "',"
-                                sqlconsulta = sqlconsulta & "'" & Trim(DGV_FrasesHIngles.Rows.Item(i - 1).Cells("DescripcionFraseHINgles").Value.ToString().PadRight(450).Substring(250, 100)) & "', '" & Trim(DGV_FrasesHIngles.Rows.Item(i - 1).Cells("DescripcionFraseHINgles").Value.ToString().PadRight(450).Substring(350, 100)) & "',"
-                                sqlconsulta = sqlconsulta & "'" & "" & "',"
-                                sqlconsulta = sqlconsulta & "'" & "" & "',"
-                                sqlconsulta = sqlconsulta & "'" & "" & "',"
-                                sqlconsulta = sqlconsulta & "'" & "" & "')"
+                            ExecuteNonQueries("SurfactanSA", sqlconsulta)
 
-                                ExecuteNonQueries("SurfactanSA", sqlconsulta)
+                            Renglon = Renglon + 1
 
-                                Renglon = Renglon + 1
-
-                            End If
                         End If
 
-                        If (DGV_FrasesHIngles.Rows.Count > 0) Then
-                            If (i <= DGV_FrasesHIngles.Rows.Count) Then
+                        If (DGV_FrasesHIngles.Rows.Count > 0) AndAlso i <= DGV_FrasesHIngles.Rows.Count Then
 
-                                ClaveVariable = masktxtCodigo.Text.Trim() + Renglon.ToString().PadLeft(3, "0")
+                            ClaveVariable = masktxtCodigo.Text.Trim() + Renglon.ToString().PadLeft(3, "0")
 
-                                sqlconsulta = "INSERT INTO DatosEtiquetaIngles (Clave ,Terminado ,Renglon ,Tipo ,"
-                                sqlconsulta = sqlconsulta & "FraseHIngles ,Descripcion1HIngles ,Descripcion2HIngles ,Descripcion3HIngles ,"
-                                sqlconsulta = sqlconsulta & "FrasePIngles ,Descripcion1PIngles ,Descripcion2PIngles ,Descripcion3PIngles )"
-                                sqlconsulta = sqlconsulta & "Values ('" & ClaveVariable & "', '" & masktxtCodigo.Text & "', '" & Renglon & "',"
-                                sqlconsulta = sqlconsulta & "'" & "5" & "',"
-                                sqlconsulta = sqlconsulta & "'" & "" & "',"
-                                sqlconsulta = sqlconsulta & "'" & "" & "',"
-                                sqlconsulta = sqlconsulta & "'" & "" & "',"
-                                sqlconsulta = sqlconsulta & "'" & "" & "',"
-                                sqlconsulta = sqlconsulta & "'" & DGV_FrasesPIngles.Rows.Item(i - 1).Cells("CodigoFrasesPIngles").Value.ToString() & "', '" & Trim(DGV_FrasesPIngles.Rows.Item(i - 1).Cells("DescripcionFrasesPIngles").Value.ToString().PadRight(450).Substring(0, 250)) & "',"
-                                sqlconsulta = sqlconsulta & "'" & Trim(DGV_FrasesPIngles.Rows.Item(i - 1).Cells("DescripcionFrasesPIngles").Value.ToString().PadRight(450).Substring(250, 100)) & "', '" & Trim(DGV_FrasesPIngles.Rows.Item(i - 1).Cells("DescripcionFrasesPIngles").Value.ToString().PadRight(450).Substring(350, 100)) & "')"
+                            sqlconsulta = "INSERT INTO DatosEtiquetaIngles (Clave ,Terminado ,Renglon ,Tipo ,"
+                            sqlconsulta &= "FraseHIngles ,Descripcion1HIngles ,Descripcion2HIngles ,Descripcion3HIngles ,"
+                            sqlconsulta &= "FrasePIngles ,Descripcion1PIngles ,Descripcion2PIngles ,Descripcion3PIngles )"
+                            sqlconsulta &= "Values ('" & ClaveVariable & "', '" & masktxtCodigo.Text & "', '" & Renglon & "',"
+                            sqlconsulta &= "'" & "4" & "', '" & DGV_FrasesHIngles.Rows.Item(i - 1).Cells("CodigoFraseHINgles").Value.ToString() & "', '" & Trim(DGV_FrasesHIngles.Rows.Item(i - 1).Cells("DescripcionFraseHINgles").Value.ToString().PadRight(450).Substring(0, 250)) & "',"
+                            sqlconsulta &= "'" & Trim(DGV_FrasesHIngles.Rows.Item(i - 1).Cells("DescripcionFraseHINgles").Value.ToString().PadRight(450).Substring(250, 100)) & "', '" & Trim(DGV_FrasesHIngles.Rows.Item(i - 1).Cells("DescripcionFraseHINgles").Value.ToString().PadRight(450).Substring(350, 100)) & "',"
+                            sqlconsulta &= "'" & "" & "',"
+                            sqlconsulta &= "'" & "" & "',"
+                            sqlconsulta &= "'" & "" & "',"
+                            sqlconsulta &= "'" & "" & "')"
 
-                                ExecuteNonQueries("SurfactanSA", sqlconsulta)
+                            ExecuteNonQueries("SurfactanSA", sqlconsulta)
 
+                            Renglon = Renglon + 1
 
-                                Renglon = Renglon + 1
-
-                            End If
                         End If
 
+                        If (DGV_FrasesHIngles.Rows.Count > 0) AndAlso i <= DGV_FrasesHIngles.Rows.Count Then
+
+                            ClaveVariable = masktxtCodigo.Text.Trim() + Renglon.ToString().PadLeft(3, "0")
+
+                            sqlconsulta = "INSERT INTO DatosEtiquetaIngles (Clave ,Terminado ,Renglon ,Tipo ,"
+                            sqlconsulta &= "FraseHIngles ,Descripcion1HIngles ,Descripcion2HIngles ,Descripcion3HIngles ,"
+                            sqlconsulta &= "FrasePIngles ,Descripcion1PIngles ,Descripcion2PIngles ,Descripcion3PIngles )"
+                            sqlconsulta &= "Values ('" & ClaveVariable & "', '" & masktxtCodigo.Text & "', '" & Renglon & "',"
+                            sqlconsulta &= "'" & "5" & "',"
+                            sqlconsulta &= "'" & "" & "',"
+                            sqlconsulta &= "'" & "" & "',"
+                            sqlconsulta &= "'" & "" & "',"
+                            sqlconsulta &= "'" & "" & "',"
+                            sqlconsulta &= "'" & DGV_FrasesPIngles.Rows.Item(i - 1).Cells("CodigoFrasesPIngles").Value.ToString() & "', '" & Trim(DGV_FrasesPIngles.Rows.Item(i - 1).Cells("DescripcionFrasesPIngles").Value.ToString().PadRight(450).Substring(0, 250)) & "',"
+                            sqlconsulta &= "'" & Trim(DGV_FrasesPIngles.Rows.Item(i - 1).Cells("DescripcionFrasesPIngles").Value.ToString().PadRight(450).Substring(250, 100)) & "', '" & Trim(DGV_FrasesPIngles.Rows.Item(i - 1).Cells("DescripcionFrasesPIngles").Value.ToString().PadRight(450).Substring(350, 100)) & "')"
+
+                            ExecuteNonQueries("SurfactanSA", sqlconsulta)
+
+                            Renglon = Renglon + 1
+
+                        End If
 
                     Else
-                        If (DGV_FrasesH.Rows.Count > 0) Then
-                            If (i <= DGV_FrasesH.Rows.Count) Then
-                                ' If Not DGV_FrasesH.Rows.Item(i - 1) Is Nothing Then
-                                If DGV_FrasesH.Rows.Item(i - 1).Cells("Codigo").Value <> "" Then
-                                    ClaveVariable = masktxtCodigo.Text.Trim() + Renglon.ToString().PadLeft(3, "0")
+                        If (DGV_FrasesH.Rows.Count > 0) AndAlso i <= DGV_FrasesH.Rows.Count AndAlso DGV_FrasesH.Rows.Item(i - 1).Cells("Codigo").Value <> "" Then
+                            ClaveVariable = masktxtCodigo.Text.Trim() + Renglon.ToString().PadLeft(3, "0")
 
-                                    sqlconsulta = "INSERT INTO DatosEtiquetaMp( Clave, Articulo, Renglon, Palabra, Pictograma1,"
-                                    sqlconsulta = sqlconsulta & " Pictograma2, Pictograma3, Pictograma4, Pictograma5, Pictograma6,"
-                                    sqlconsulta = sqlconsulta & " Pictograma7, Pictograma8, Pictograma9, Tipo, FraseH, Descripcion1H,"
-                                    sqlconsulta = sqlconsulta & " Descripcion2H, Descripcion3H, FraseP, Descripcion1P , Descripcion2P,"
-                                    sqlconsulta = sqlconsulta & " Descripcion3P, Observaciones, Denominacion) Values( '" & ClaveVariable & "' ,"
-                                    sqlconsulta = sqlconsulta & " '" & masktxtCodigo.Text & "' , '" & Renglon & "' , '" & cbxPalabraAdvertencia.SelectedIndex & "' ,"
-                                    sqlconsulta = sqlconsulta & " '" & cbxExplosivo1.SelectedIndex & "' , '" & cbxInflamable2.SelectedIndex & "' ,"
-                                    sqlconsulta = sqlconsulta & " '" & cbxCarburante3.SelectedIndex & "' , '" & cbxGasesBajo4.SelectedIndex & "' ,"
-                                    sqlconsulta = sqlconsulta & " '" & cbxCorrosivo5.SelectedIndex & "' , '" & cbxToxico6.SelectedIndex & "' ,"
-                                    sqlconsulta = sqlconsulta & " '" & cbxPeligro7.SelectedIndex & "' , '" & cbxPeligroPLASalud8.SelectedIndex & "' ,"
-                                    sqlconsulta = sqlconsulta & " '" & cbxMedioAmbiente9.SelectedIndex & "' , '" & "1" & "' , '" & DGV_FrasesH.Rows.Item(i - 1).Cells("Codigo").Value.ToString() & "' ,"
-                                    sqlconsulta = sqlconsulta & " '" & Trim(DGV_FrasesH.Rows.Item(i - 1).Cells("DescripcionH").Value.ToString().PadRight(450).Substring(0, 250)) & "' , '" & Trim(DGV_FrasesH.Rows.Item(i - 1).Cells("DescripcionH").Value.ToString().PadRight(450).Substring(250, 100)) & "' ,"
-                                    sqlconsulta = sqlconsulta & " '" & Trim(DGV_FrasesH.Rows.Item(i - 1).Cells("DescripcionH").Value.ToString().PadRight(450).Substring(350, 100)) & "' , '" & "" & "' ,"
-                                    sqlconsulta = sqlconsulta & " '" & "" & "' , '" & "" & "' , '" & "" & "' , '" & DGV_FrasesH.Rows.Item(i - 1).Cells("ObservacionesH").Value.ToString() & "' , '" & "" & "' )"
+                            sqlconsulta = "INSERT INTO DatosEtiquetaMp( Clave, Articulo, Renglon, Palabra, Pictograma1,"
+                            sqlconsulta &= " Pictograma2, Pictograma3, Pictograma4, Pictograma5, Pictograma6,"
+                            sqlconsulta &= " Pictograma7, Pictograma8, Pictograma9, Tipo, FraseH, Descripcion1H,"
+                            sqlconsulta &= " Descripcion2H, Descripcion3H, FraseP, Descripcion1P , Descripcion2P,"
+                            sqlconsulta &= " Descripcion3P, Observaciones, Denominacion) Values( '" & ClaveVariable & "' ,"
+                            sqlconsulta &= " '" & masktxtCodigo.Text & "' , '" & Renglon & "' , '" & cbxPalabraAdvertencia.SelectedIndex & "' ,"
+                            sqlconsulta &= " '" & cbxExplosivo1.SelectedIndex & "' , '" & cbxInflamable2.SelectedIndex & "' ,"
+                            sqlconsulta &= " '" & cbxCarburante3.SelectedIndex & "' , '" & cbxGasesBajo4.SelectedIndex & "' ,"
+                            sqlconsulta &= " '" & cbxCorrosivo5.SelectedIndex & "' , '" & cbxToxico6.SelectedIndex & "' ,"
+                            sqlconsulta &= " '" & cbxPeligro7.SelectedIndex & "' , '" & cbxPeligroPLASalud8.SelectedIndex & "' ,"
+                            sqlconsulta &= " '" & cbxMedioAmbiente9.SelectedIndex & "' , '" & "1" & "' , '" & DGV_FrasesH.Rows.Item(i - 1).Cells("Codigo").Value.ToString() & "' ,"
+                            sqlconsulta &= " '" & Trim(DGV_FrasesH.Rows.Item(i - 1).Cells("DescripcionH").Value.ToString().PadRight(450).Substring(0, 250)) & "' , '" & Trim(DGV_FrasesH.Rows.Item(i - 1).Cells("DescripcionH").Value.ToString().PadRight(450).Substring(250, 100)) & "' ,"
+                            sqlconsulta &= " '" & Trim(DGV_FrasesH.Rows.Item(i - 1).Cells("DescripcionH").Value.ToString().PadRight(450).Substring(350, 100)) & "' , '" & "" & "' ,"
+                            sqlconsulta &= " '" & "" & "' , '" & "" & "' , '" & "" & "' , '" & DGV_FrasesH.Rows.Item(i - 1).Cells("ObservacionesH").Value.ToString() & "' , '" & "" & "' )"
 
-                                    ExecuteNonQueries("SurfactanSA", sqlconsulta)
-                                    Renglon = Renglon + 1
+                            ExecuteNonQueries("SurfactanSA", sqlconsulta)
+                            Renglon = Renglon + 1
 
-
-                                End If
-                            End If
                         End If
 
-                        If (DGV_FrasesP.Rows.Count > 0) Then
-                            If (i <= DGV_FrasesP.Rows.Count) Then
+                        If DGV_FrasesP.Rows.Count > 0 AndAlso i <= DGV_FrasesP.Rows.Count AndAlso DGV_FrasesP.Rows.Item(i - 1).Cells("CodigoFraseP").Value <> "" Then
+                            ClaveVariable = masktxtCodigo.Text.Trim() + Renglon.ToString().PadLeft(3, "0")
 
-                                'If Not DGV_FrasesP.Rows.Item(i) Is Nothing Then
-                                If DGV_FrasesP.Rows.Item(i - 1).Cells("CodigoFraseP").Value <> "" Then
-                                    ClaveVariable = masktxtCodigo.Text.Trim() + Renglon.ToString().PadLeft(3, "0")
+                            sqlconsulta = "INSERT INTO DatosEtiquetaMp( Clave, Articulo, Renglon, Palabra, Pictograma1,"
+                            sqlconsulta &= " Pictograma2, Pictograma3, Pictograma4, Pictograma5, Pictograma6,"
+                            sqlconsulta &= " Pictograma7, Pictograma8, Pictograma9, Tipo, FraseH, Descripcion1H,"
+                            sqlconsulta &= " Descripcion2H, Descripcion3H, FraseP, Descripcion1P , Descripcion2P,"
+                            sqlconsulta &= " Descripcion3P, Observaciones, Denominacion) Values( '" & ClaveVariable & "' ,"
+                            sqlconsulta &= " '" & masktxtCodigo.Text & "' , '" & Renglon & "' , '" & cbxPalabraAdvertencia.SelectedIndex & "' ,"
+                            sqlconsulta &= " '" & cbxExplosivo1.SelectedIndex & "' , '" & cbxInflamable2.SelectedIndex & "' ,"
+                            sqlconsulta &= " '" & cbxCarburante3.SelectedIndex & "' , '" & cbxGasesBajo4.SelectedIndex & "' ,"
+                            sqlconsulta &= " '" & cbxCorrosivo5.SelectedIndex & "' , '" & cbxToxico6.SelectedIndex & "' ,"
+                            sqlconsulta &= " '" & cbxPeligro7.SelectedIndex & "' , '" & cbxPeligroPLASalud8.SelectedIndex & "' ,"
+                            sqlconsulta &= " '" & cbxMedioAmbiente9.SelectedIndex & "' , '" & "2" & "' , '" & "" & "' ,"
+                            sqlconsulta &= " '" & "" & "' , '" & "" & "' ,"
+                            sqlconsulta &= " '" & "" & "' , '" & DGV_FrasesP.Rows.Item(i - 1).Cells("CodigoFraseP").Value.ToString() & "' ,"
+                            sqlconsulta &= " '" & Trim(DGV_FrasesP.Rows.Item(i - 1).Cells("DescripcionFraseP").Value.ToString().PadRight(450).Substring(0, 249)) & "' , '" & Trim(DGV_FrasesP.Rows.Item(i - 1).Cells("DescripcionFraseP").Value.ToString().PadRight(450).Substring(250, 100)) & "' ,"
+                            sqlconsulta &= " '" & Trim(DGV_FrasesP.Rows.Item(i - 1).Cells("DescripcionFraseP").Value.ToString().PadRight(450).Substring(350, 100)) & "' , '" & DGV_FrasesP.Rows.Item(i - 1).Cells("Observaciones").Value.ToString() & "' , '" & "" & "' )"
 
-                                    sqlconsulta = "INSERT INTO DatosEtiquetaMp( Clave, Articulo, Renglon, Palabra, Pictograma1,"
-                                    sqlconsulta = sqlconsulta & " Pictograma2, Pictograma3, Pictograma4, Pictograma5, Pictograma6,"
-                                    sqlconsulta = sqlconsulta & " Pictograma7, Pictograma8, Pictograma9, Tipo, FraseH, Descripcion1H,"
-                                    sqlconsulta = sqlconsulta & " Descripcion2H, Descripcion3H, FraseP, Descripcion1P , Descripcion2P,"
-                                    sqlconsulta = sqlconsulta & " Descripcion3P, Observaciones, Denominacion) Values( '" & ClaveVariable & "' ,"
-                                    sqlconsulta = sqlconsulta & " '" & masktxtCodigo.Text & "' , '" & Renglon & "' , '" & cbxPalabraAdvertencia.SelectedIndex & "' ,"
-                                    sqlconsulta = sqlconsulta & " '" & cbxExplosivo1.SelectedIndex & "' , '" & cbxInflamable2.SelectedIndex & "' ,"
-                                    sqlconsulta = sqlconsulta & " '" & cbxCarburante3.SelectedIndex & "' , '" & cbxGasesBajo4.SelectedIndex & "' ,"
-                                    sqlconsulta = sqlconsulta & " '" & cbxCorrosivo5.SelectedIndex & "' , '" & cbxToxico6.SelectedIndex & "' ,"
-                                    sqlconsulta = sqlconsulta & " '" & cbxPeligro7.SelectedIndex & "' , '" & cbxPeligroPLASalud8.SelectedIndex & "' ,"
-                                    sqlconsulta = sqlconsulta & " '" & cbxMedioAmbiente9.SelectedIndex & "' , '" & "2" & "' , '" & "" & "' ,"
-                                    sqlconsulta = sqlconsulta & " '" & "" & "' , '" & "" & "' ,"
-                                    sqlconsulta = sqlconsulta & " '" & "" & "' , '" & DGV_FrasesP.Rows.Item(i - 1).Cells("CodigoFraseP").Value.ToString() & "' ,"
-                                    sqlconsulta = sqlconsulta & " '" & Trim(DGV_FrasesP.Rows.Item(i - 1).Cells("DescripcionFraseP").Value.ToString().PadRight(450).Substring(0, 249)) & "' , '" & Trim(DGV_FrasesP.Rows.Item(i - 1).Cells("DescripcionFraseP").Value.ToString().PadRight(450).Substring(250, 100)) & "' ,"
-                                    sqlconsulta = sqlconsulta & " '" & Trim(DGV_FrasesP.Rows.Item(i - 1).Cells("DescripcionFraseP").Value.ToString().PadRight(450).Substring(350, 100)) & "' , '" & DGV_FrasesP.Rows.Item(i - 1).Cells("Observaciones").Value.ToString() & "' , '" & "" & "' )"
+                            ExecuteNonQueries("SurfactanSA", sqlconsulta)
 
-                                    ExecuteNonQueries("SurfactanSA", sqlconsulta)
-
-                                    Renglon = Renglon + 1
-                                End If
-                            End If
+                            Renglon = Renglon + 1
 
                         End If
 
@@ -865,7 +738,6 @@ Public Class IngresoDatosAdicMP
                         End If
                     End If
 
-
                 Next
 
                 If (TipoProducto = "PT") Then
@@ -875,7 +747,6 @@ Public Class IngresoDatosAdicMP
                 End If
 
                 Dim dr As DataRow = GetSingle(sqlconsulta)
-
 
                 Dim VarNaciones As String = ""
                 Dim VarClase As String = ""
@@ -891,7 +762,7 @@ Public Class IngresoDatosAdicMP
                 If (dr IsNot Nothing) Then
 
                     If (TipoProducto = "PT") Then
-                        VarTipoEtiqueta = IIf(IsDBNull(dr.item("Tipoeti")), "", dr.Item("Tipoeti"))
+                        VarTipoEtiqueta = IIf(IsDBNull(dr.Item("Tipoeti")), "", dr.Item("Tipoeti"))
                     End If
                     VarNaciones = IIf(IsDBNull(dr.Item("Naciones")), "", dr.Item("Naciones"))
                     VarClase = IIf(IsDBNull(dr.Item("Clase")), "", dr.Item("Clase"))
@@ -904,6 +775,7 @@ Public Class IngresoDatosAdicMP
                     VarEstadoProducto = IIf(IsDBNull(dr.Item("EstadoProducto")), "0", dr.Item("EstadoProducto"))
 
                 End If
+
                 Dim Grabar As String = "No"
 
                 If (VarTipoEtiqueta.Trim() <> txtTipoEtiqueta.Text.Trim()) Then
@@ -944,14 +816,9 @@ Public Class IngresoDatosAdicMP
                     estilo = vbYesNo + vbInformation + vbDefaultButton2
                     titulo = "Datos Onu"
 
-
-                    ' Display message.
                     Response = MsgBox(Mensaje, estilo, titulo)
-                    If Response = vbYes Then    ' User chose Yes.
-                        RespuestaUsuario = "Si"    ' Perform some action.
-                    Else    ' User chose No.
-                        RespuestaUsuario = "No"    ' Perform some action.
-                    End If
+
+                    RespuestaUsuario = IIf(Response = vbYes, "Si", "No")
 
                     If (RespuestaUsuario = "Si") Then
                         Dim EmpresasAgrabar(7) As String
@@ -966,41 +833,39 @@ Public Class IngresoDatosAdicMP
                         If (TipoProducto = "PT") Then
                             For i As Integer = 0 To 6
                                 sqlconsulta = "UPDATE Terminado SET "
-                                sqlconsulta = sqlconsulta + "Tipoeti = '" & txtTipoEtiqueta.Text.Trim() & "',"
-                                sqlconsulta = sqlconsulta + "Naciones = '" & txtNroNacionesUnidas.Text.Trim() & "',"
-                                sqlconsulta = sqlconsulta + "Clase = '" & txtClase.Text.Trim() & "',"
-                                sqlconsulta = sqlconsulta + "Intervencion = '" & txtIntervencion.Text.Trim() & "',"
-                                sqlconsulta = sqlconsulta + "Embalaje = '" & txtEmbalaje.Text.Trim() & "',"
-                                sqlconsulta = sqlconsulta + "DescriOnu = '" & txtCaracteristicas.Text.Trim() & "',"
-                                sqlconsulta = sqlconsulta + "Secundario = '" & txtSecundario.Text.Trim() & "',"
-                                sqlconsulta = sqlconsulta + "Riesgo = '" & txtRiesgo.Text.Trim() & "',"
-                                sqlconsulta = sqlconsulta + "EstadoProducto = '" & cbxEstado.SelectedIndex & "',"
-                                sqlconsulta = sqlconsulta + "TipoProducto = '" & cbxTipoProducto.SelectedIndex & "'"
-                                sqlconsulta = sqlconsulta + " WHERE Codigo = '" & masktxtCodigo.Text.Trim() & "'"
+                                sqlconsulta &= "Tipoeti = '" & txtTipoEtiqueta.Text.Trim() & "',"
+                                sqlconsulta &= "Naciones = '" & txtNroNacionesUnidas.Text.Trim() & "',"
+                                sqlconsulta &= "Clase = '" & txtClase.Text.Trim() & "',"
+                                sqlconsulta &= "Intervencion = '" & txtIntervencion.Text.Trim() & "',"
+                                sqlconsulta &= "Embalaje = '" & txtEmbalaje.Text.Trim() & "',"
+                                sqlconsulta &= "DescriOnu = '" & txtCaracteristicas.Text.Trim() & "',"
+                                sqlconsulta &= "Secundario = '" & txtSecundario.Text.Trim() & "',"
+                                sqlconsulta &= "Riesgo = '" & txtRiesgo.Text.Trim() & "',"
+                                sqlconsulta &= "EstadoProducto = '" & cbxEstado.SelectedIndex & "',"
+                                sqlconsulta &= "TipoProducto = '" & cbxTipoProducto.SelectedIndex & "'"
+                                sqlconsulta &= " WHERE Codigo = '" & masktxtCodigo.Text.Trim() & "'"
                                 ExecuteNonQueries(EmpresasAgrabar(i), {sqlconsulta})
                             Next
                         Else
                             For i As Integer = 0 To 6
                                 sqlconsulta = "UPDATE Articulo SET "
-                                sqlconsulta = sqlconsulta + "Naciones = '" & txtNroNacionesUnidas.Text.Trim() & "',"
-                                sqlconsulta = sqlconsulta + "Clase = '" & txtClase.Text.Trim() & "',"
-                                sqlconsulta = sqlconsulta + "Intervencion = '" & txtIntervencion.Text.Trim() & "',"
-                                sqlconsulta = sqlconsulta + "Embalaje = '" & txtEmbalaje.Text.Trim() & "',"
-                                sqlconsulta = sqlconsulta + "DescriOnu = '" & txtCaracteristicas.Text.Trim() & "',"
-                                sqlconsulta = sqlconsulta + "Secundario = '" & txtSecundario.Text.Trim() & "',"
-                                sqlconsulta = sqlconsulta + "Riesgo = '" & txtRiesgo.Text.Trim() & "',"
-                                sqlconsulta = sqlconsulta + "EstadoProducto = '" & cbxEstado.SelectedIndex & "',"
-                                sqlconsulta = sqlconsulta + "TipoProducto = '" & cbxTipoProducto.SelectedIndex & "'"
-                                sqlconsulta = sqlconsulta + " WHERE Codigo = '" & masktxtCodigo.Text.Trim() & "'"
+                                sqlconsulta &= "Naciones = '" & txtNroNacionesUnidas.Text.Trim() & "',"
+                                sqlconsulta &= "Clase = '" & txtClase.Text.Trim() & "',"
+                                sqlconsulta &= "Intervencion = '" & txtIntervencion.Text.Trim() & "',"
+                                sqlconsulta &= "Embalaje = '" & txtEmbalaje.Text.Trim() & "',"
+                                sqlconsulta &= "DescriOnu = '" & txtCaracteristicas.Text.Trim() & "',"
+                                sqlconsulta &= "Secundario = '" & txtSecundario.Text.Trim() & "',"
+                                sqlconsulta &= "Riesgo = '" & txtRiesgo.Text.Trim() & "',"
+                                sqlconsulta &= "EstadoProducto = '" & cbxEstado.SelectedIndex & "',"
+                                sqlconsulta &= "TipoProducto = '" & cbxTipoProducto.SelectedIndex & "'"
+                                sqlconsulta &= " WHERE Codigo = '" & masktxtCodigo.Text.Trim() & "'"
+
                                 ExecuteNonQueries(EmpresasAgrabar(i), {sqlconsulta})
                             Next
 
                         End If
                     End If
                 End If
-
-
-
 
                 Dim Palabra As Integer
                 Dim LugarImpresionI As Integer = 0
@@ -1015,14 +880,11 @@ Public Class IngresoDatosAdicMP
                 Dim Corte As Integer = 80
                 Dim hasta, HastaII, HastaIII As Integer
 
-
-
                 If (TipoProducto = "PT") Then
                     sqlconsulta = "SELECT * FROM DatosEtiqueta WHERE Terminado = '" & masktxtCodigo.Text & "'"
                 Else
                     sqlconsulta = "SELECT * FROM DatosEtiquetaMp WHERE Articulo = '" & masktxtCodigo.Text & "'"
                 End If
-
 
                 Dim tabla As DataTable = GetAll(sqlconsulta, "SurfactanSA")
 
@@ -1040,7 +902,6 @@ Public Class IngresoDatosAdicMP
                     Logo(6) = fila.Item("Pictograma7")
                     Logo(7) = fila.Item("Pictograma8")
                     Logo(8) = fila.Item("Pictograma9")
-
 
                     Select Case fila.Item("Tipo").ToString()
                         Case "1"
@@ -1080,9 +941,7 @@ Public Class IngresoDatosAdicMP
                             End If
                     End Select
 
-
                 Next
-
 
                 For i As Integer = 1 To 99
                     If (Trim(OrDefault(imprecionIII(i), "")) <> "") Then
@@ -1278,32 +1137,31 @@ Public Class IngresoDatosAdicMP
                 If Palabra = 1 Then
                     ImpreFrase(8) = "PELIGRO"
                 End If
-                If Palabra = 2 Then
-                    ImpreFrase(8) = "ATENCION"
-                End If
                 If (TipoProducto = "PT") Then
                     sqlconsulta = "UPDATE DatosEtiqueta SET "
-                    sqlconsulta = sqlconsulta + "Frase1 = '" & ImpreFrase(1).left(80) & "',"
-                    sqlconsulta = sqlconsulta + "Frase2 = '" & ImpreFrase(2).left(80) & "',"
-                    sqlconsulta = sqlconsulta + "Frase3 = '" & ImpreFrase(3).left(80) & "',"
-                    sqlconsulta = sqlconsulta + "Frase4 = '" & ImpreFrase(4).left(80) & "',"
-                    sqlconsulta = sqlconsulta + "Frase5 = '" & ImpreFrase(5).left(80) & "',"
-                    sqlconsulta = sqlconsulta + "Frase6 = '" & ImpreFrase(6).left(80) & "',"
-                    sqlconsulta = sqlconsulta + "Frase7 = '" & ImpreFrase(7).left(80) & "',"
-                    sqlconsulta = sqlconsulta + "Frase8 = '" & ImpreFrase(8).left(80) & "'"
-                    sqlconsulta = sqlconsulta + " Where Terminado = '" & masktxtCodigo.Text & "'"
+                    sqlconsulta &= "Frase1 = '" & ImpreFrase(1).left(80) & "',"
+                    sqlconsulta &= "Frase2 = '" & ImpreFrase(2).left(80) & "',"
+                    sqlconsulta &= "Frase3 = '" & ImpreFrase(3).left(80) & "',"
+                    sqlconsulta &= "Frase4 = '" & ImpreFrase(4).left(80) & "',"
+                    sqlconsulta &= "Frase5 = '" & ImpreFrase(5).left(80) & "',"
+                    sqlconsulta &= "Frase6 = '" & ImpreFrase(6).left(80) & "',"
+                    sqlconsulta &= "Frase7 = '" & ImpreFrase(7).left(80) & "',"
+                    sqlconsulta &= "Frase8 = '" & ImpreFrase(8).left(80) & "'"
+                    sqlconsulta &= " Where Terminado = '" & masktxtCodigo.Text & "'"
                 Else
                     sqlconsulta = "UPDATE DatosEtiquetaMp SET "
-                    sqlconsulta = sqlconsulta + "Frase1 = '" & ImpreFrase(1).left(80) & "',"
-                    sqlconsulta = sqlconsulta + "Frase2 = '" & ImpreFrase(2).left(80) & "',"
-                    sqlconsulta = sqlconsulta + "Frase3 = '" & ImpreFrase(3).left(80) & "',"
-                    sqlconsulta = sqlconsulta + "Frase4 = '" & ImpreFrase(4).left(80) & "',"
-                    sqlconsulta = sqlconsulta + "Frase5 = '" & ImpreFrase(5).left(80) & "',"
-                    sqlconsulta = sqlconsulta + "Frase6 = '" & ImpreFrase(6).left(80) & "',"
-                    sqlconsulta = sqlconsulta + "Frase7 = '" & ImpreFrase(7).left(80) & "',"
-                    sqlconsulta = sqlconsulta + "Frase8 = '" & ImpreFrase(8).left(80) & "'"
-                    sqlconsulta = sqlconsulta + " Where Articulo = '" & masktxtCodigo.Text & "'"
+                    sqlconsulta &= "Frase1 = '" & ImpreFrase(1).left(80) & "',"
+                    sqlconsulta &= "Frase2 = '" & ImpreFrase(2).left(80) & "',"
+                    sqlconsulta &= "Frase3 = '" & ImpreFrase(3).left(80) & "',"
+                    sqlconsulta &= "Frase4 = '" & ImpreFrase(4).left(80) & "',"
+                    sqlconsulta &= "Frase5 = '" & ImpreFrase(5).left(80) & "',"
+                    sqlconsulta &= "Frase6 = '" & ImpreFrase(6).left(80) & "',"
+                    sqlconsulta &= "Frase7 = '" & ImpreFrase(7).left(80) & "',"
+                    sqlconsulta &= "Frase8 = '" & ImpreFrase(8).left(80) & "'"
+                    sqlconsulta &= " Where Articulo = '" & masktxtCodigo.Text & "'"
                 End If
+
+                If Palabra = 2 Then ImpreFrase(8) = "ATENCION"
 
                 ExecuteNonQueries("SurfactanSA", sqlconsulta)
 
@@ -1314,7 +1172,6 @@ Public Class IngresoDatosAdicMP
                     LugarImpresionI = 0
                     LugarImpresionII = 0
                     LugarImpresionIII = 0
-
 
                     sqlconsulta = "SELECT * FROM DatosEtiqueta WHERE Terminado = '" & masktxtCodigo.Text.Trim() & "' ORDER BY Clave"
 
@@ -1334,7 +1191,6 @@ Public Class IngresoDatosAdicMP
                         Logo(6) = row.Item("Pictograma7")
                         Logo(7) = row.Item("Pictograma8")
                         Logo(8) = row.Item("Pictograma9")
-
 
                         Select Case row.Item("Tipo").ToString()
                             Case "1"
@@ -1374,7 +1230,6 @@ Public Class IngresoDatosAdicMP
                                 End If
                         End Select
                     End If
-
 
                     LugarFrase = 1
                     Corte = 100
@@ -1593,50 +1448,46 @@ Public Class IngresoDatosAdicMP
                         ImpreFrase(15) = "ATENCION"
                     End If
 
-
                     sqlconsulta = "DELETE DatosEtiquetaImpre WHERE Terminado = '" & masktxtCodigo.Text.Trim() & "'"
 
                     ExecuteNonQueries("SurfactanSA", sqlconsulta)
 
                     sqlconsulta = "INSERT INTO DatosEtiquetaImpre (Terminado, Pictograma1, Pictograma2, Pictograma3,"
-                    sqlconsulta = sqlconsulta & "Pictograma4, Pictograma5, Pictograma6, Pictograma7, Pictograma8,"
-                    sqlconsulta = sqlconsulta & "Pictograma9, Frase9, Frase10, Frase11, Frase12, Frase13, Frase14,"
-                    sqlconsulta = sqlconsulta & "Frase15, Frase16, Frase17, Frase18, Frase19, Frase20, Frase21,"
-                    sqlconsulta = sqlconsulta & "Frase22, Frase23) Values('" & masktxtCodigo.Text & "',"
-                    sqlconsulta = sqlconsulta & "'" & cbxExplosivo1.SelectedIndex.ToString() & "',"
-                    sqlconsulta = sqlconsulta & "'" & cbxInflamable2.SelectedIndex.ToString() & "',"
-                    sqlconsulta = sqlconsulta & "'" & cbxCarburante3.SelectedIndex.ToString() & "',"
-                    sqlconsulta = sqlconsulta & "'" & cbxGasesBajo4.SelectedIndex.ToString() & "',"
-                    sqlconsulta = sqlconsulta & "'" & cbxCorrosivo5.SelectedIndex.ToString() & "',"
-                    sqlconsulta = sqlconsulta & "'" & cbxToxico6.SelectedIndex.ToString() & "',"
-                    sqlconsulta = sqlconsulta & "'" & cbxPeligro7.SelectedIndex.ToString() & "',"
-                    sqlconsulta = sqlconsulta & "'" & cbxPeligroPLASalud8.SelectedIndex.ToString() & "',"
-                    sqlconsulta = sqlconsulta & "'" & cbxMedioAmbiente9.SelectedIndex.ToString() & "',"
-                    sqlconsulta = sqlconsulta & "'" & ImpreFrase(1).left(100) & "',"
-                    sqlconsulta = sqlconsulta & "'" & ImpreFrase(2).left(100) & "',"
-                    sqlconsulta = sqlconsulta & "'" & ImpreFrase(3).left(100) & "',"
-                    sqlconsulta = sqlconsulta & "'" & ImpreFrase(4).left(100) & "',"
-                    sqlconsulta = sqlconsulta & "'" & ImpreFrase(5).left(100) & "',"
-                    sqlconsulta = sqlconsulta & "'" & ImpreFrase(6).left(100) & "',"
-                    sqlconsulta = sqlconsulta & "'" & ImpreFrase(7).left(100) & "',"
-                    sqlconsulta = sqlconsulta & "'" & ImpreFrase(8).left(100) & "',"
-                    sqlconsulta = sqlconsulta & "'" & ImpreFrase(9).left(100) & "',"
-                    sqlconsulta = sqlconsulta & "'" & ImpreFrase(10).left(100) & "',"
-                    sqlconsulta = sqlconsulta & "'" & ImpreFrase(11).left(100) & "',"
-                    sqlconsulta = sqlconsulta & "'" & ImpreFrase(12).left(100) & "',"
-                    sqlconsulta = sqlconsulta & "'" & ImpreFrase(13).left(100) & "',"
-                    sqlconsulta = sqlconsulta & "'" & ImpreFrase(14).left(100) & "',"
-                    sqlconsulta = sqlconsulta & "'" & ImpreFrase(15).left(100) & "')"
+                    sqlconsulta &= "Pictograma4, Pictograma5, Pictograma6, Pictograma7, Pictograma8,"
+                    sqlconsulta &= "Pictograma9, Frase9, Frase10, Frase11, Frase12, Frase13, Frase14,"
+                    sqlconsulta &= "Frase15, Frase16, Frase17, Frase18, Frase19, Frase20, Frase21,"
+                    sqlconsulta &= "Frase22, Frase23) Values('" & masktxtCodigo.Text & "',"
+                    sqlconsulta &= "'" & cbxExplosivo1.SelectedIndex.ToString() & "',"
+                    sqlconsulta &= "'" & cbxInflamable2.SelectedIndex.ToString() & "',"
+                    sqlconsulta &= "'" & cbxCarburante3.SelectedIndex.ToString() & "',"
+                    sqlconsulta &= "'" & cbxGasesBajo4.SelectedIndex.ToString() & "',"
+                    sqlconsulta &= "'" & cbxCorrosivo5.SelectedIndex.ToString() & "',"
+                    sqlconsulta &= "'" & cbxToxico6.SelectedIndex.ToString() & "',"
+                    sqlconsulta &= "'" & cbxPeligro7.SelectedIndex.ToString() & "',"
+                    sqlconsulta &= "'" & cbxPeligroPLASalud8.SelectedIndex.ToString() & "',"
+                    sqlconsulta &= "'" & cbxMedioAmbiente9.SelectedIndex.ToString() & "',"
+                    sqlconsulta &= "'" & ImpreFrase(1).left(100) & "',"
+                    sqlconsulta &= "'" & ImpreFrase(2).left(100) & "',"
+                    sqlconsulta &= "'" & ImpreFrase(3).left(100) & "',"
+                    sqlconsulta &= "'" & ImpreFrase(4).left(100) & "',"
+                    sqlconsulta &= "'" & ImpreFrase(5).left(100) & "',"
+                    sqlconsulta &= "'" & ImpreFrase(6).left(100) & "',"
+                    sqlconsulta &= "'" & ImpreFrase(7).left(100) & "',"
+                    sqlconsulta &= "'" & ImpreFrase(8).left(100) & "',"
+                    sqlconsulta &= "'" & ImpreFrase(9).left(100) & "',"
+                    sqlconsulta &= "'" & ImpreFrase(10).left(100) & "',"
+                    sqlconsulta &= "'" & ImpreFrase(11).left(100) & "',"
+                    sqlconsulta &= "'" & ImpreFrase(12).left(100) & "',"
+                    sqlconsulta &= "'" & ImpreFrase(13).left(100) & "',"
+                    sqlconsulta &= "'" & ImpreFrase(14).left(100) & "',"
+                    sqlconsulta &= "'" & ImpreFrase(15).left(100) & "')"
 
                     ExecuteNonQueries("SurfactanSA", sqlconsulta)
 
                     '
-                    ' arma frase en inlgles
+                    ' Arma frase en inlgles
                     '
-                    '
-                    '
-                    '
-                    ' genera etiquetas para colorantes 8 renglones
+                    ' Genera etiquetas para colorantes 8 renglones
                     ' a 80 caracteres
                     '
 
@@ -2224,28 +2075,26 @@ Public Class IngresoDatosAdicMP
                     End If
 
                     sqlconsulta = "UPDATE DatosEtiquetaImpre SET "
-                    sqlconsulta = sqlconsulta & "Frase9Ingles = '" & ImpreFrase(1).left(100) & "',"
-                    sqlconsulta = sqlconsulta & "Frase10Ingles = '" & ImpreFrase(2).left(100) & "',"
-                    sqlconsulta = sqlconsulta & "Frase11Ingles = '" & ImpreFrase(3).left(100) & "',"
-                    sqlconsulta = sqlconsulta & "Frase12Ingles = '" & ImpreFrase(4).left(100) & "',"
-                    sqlconsulta = sqlconsulta & "Frase13Ingles = '" & ImpreFrase(5).left(100) & "',"
-                    sqlconsulta = sqlconsulta & "Frase14Ingles = '" & ImpreFrase(6).left(100) & "',"
-                    sqlconsulta = sqlconsulta & "Frase15Ingles = '" & ImpreFrase(7).left(100) & "',"
-                    sqlconsulta = sqlconsulta & "Frase16Ingles = '" & ImpreFrase(8).left(100) & "',"
-                    sqlconsulta = sqlconsulta & "Frase17Ingles = '" & ImpreFrase(9).left(100) & "',"
-                    sqlconsulta = sqlconsulta & "Frase18Ingles = '" & ImpreFrase(10).left(100) & "',"
-                    sqlconsulta = sqlconsulta & "Frase19Ingles = '" & ImpreFrase(11).left(100) & "',"
-                    sqlconsulta = sqlconsulta & "Frase20Ingles = '" & ImpreFrase(12).left(100) & "',"
-                    sqlconsulta = sqlconsulta & "Frase21Ingles = '" & ImpreFrase(13).left(100) & "',"
-                    sqlconsulta = sqlconsulta & "Frase22Ingles = '" & ImpreFrase(14).left(100) & "',"
-                    sqlconsulta = sqlconsulta & "Frase23Ingles = '" & ImpreFrase(15).left(100) & "'"
-                    sqlconsulta = sqlconsulta & " Where Terminado = '" & masktxtCodigo.Text.Trim() & "'"
+                    sqlconsulta &= "Frase9Ingles = '" & ImpreFrase(1).left(100) & "',"
+                    sqlconsulta &= "Frase10Ingles = '" & ImpreFrase(2).left(100) & "',"
+                    sqlconsulta &= "Frase11Ingles = '" & ImpreFrase(3).left(100) & "',"
+                    sqlconsulta &= "Frase12Ingles = '" & ImpreFrase(4).left(100) & "',"
+                    sqlconsulta &= "Frase13Ingles = '" & ImpreFrase(5).left(100) & "',"
+                    sqlconsulta &= "Frase14Ingles = '" & ImpreFrase(6).left(100) & "',"
+                    sqlconsulta &= "Frase15Ingles = '" & ImpreFrase(7).left(100) & "',"
+                    sqlconsulta &= "Frase16Ingles = '" & ImpreFrase(8).left(100) & "',"
+                    sqlconsulta &= "Frase17Ingles = '" & ImpreFrase(9).left(100) & "',"
+                    sqlconsulta &= "Frase18Ingles = '" & ImpreFrase(10).left(100) & "',"
+                    sqlconsulta &= "Frase19Ingles = '" & ImpreFrase(11).left(100) & "',"
+                    sqlconsulta &= "Frase20Ingles = '" & ImpreFrase(12).left(100) & "',"
+                    sqlconsulta &= "Frase21Ingles = '" & ImpreFrase(13).left(100) & "',"
+                    sqlconsulta &= "Frase22Ingles = '" & ImpreFrase(14).left(100) & "',"
+                    sqlconsulta &= "Frase23Ingles = '" & ImpreFrase(15).left(100) & "'"
+                    sqlconsulta &= " Where Terminado = '" & masktxtCodigo.Text.Trim() & "'"
 
                     ExecuteNonQueries("SurfactanSA", sqlconsulta)
 
                 End If
-
-
 
                 btnLimpiar_Click(Nothing, Nothing)
             Catch ex As Exception
@@ -2258,10 +2107,9 @@ Public Class IngresoDatosAdicMP
             End Try
         End If
 
-
     End Sub
 
-    Private Sub btnImprimirReporte_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimirReporte.Click
+    Private Sub btnImprimirReporte_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnImprimirReporte.Click
 
         If (TipoProducto = "PT") Then
 
@@ -2277,7 +2125,7 @@ Public Class IngresoDatosAdicMP
                 .Mostrar()
             End With
         End If
-        
+
     End Sub
 
     Private Sub masktxtCodigo_MouseDoubleClick(ByVal sender As Object, ByVal e As MouseEventArgs) Handles masktxtCodigo.MouseDoubleClick
@@ -2302,8 +2150,6 @@ Public Class IngresoDatosAdicMP
 
             End If
 
-
-
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
@@ -2314,23 +2160,9 @@ Public Class IngresoDatosAdicMP
         Close()
     End Sub
 
-
-
-
-
-
-
-
-
-
-
-
     Private Sub masktxtCodigo_Leave(ByVal sender As Object, ByVal e As EventArgs) Handles masktxtCodigo.Leave
-        If (ComprobarEnter = "" Or ComprobarEnter <> masktxtCodigo.Text) Then
-            masktxtCodigo_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
-        End If
+        If (ComprobarEnter = "" Or ComprobarEnter <> masktxtCodigo.Text) Then masktxtCodigo_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
     End Sub
-
 
     Private Sub cbxExplosivo1_DropDownClosed(ByVal sender As Object, ByVal e As EventArgs) Handles cbxExplosivo1.DropDownClosed, cbxToxico6.DropDownClosed, cbxPeligroPLASalud8.DropDownClosed, cbxPeligro7.DropDownClosed, cbxMedioAmbiente9.DropDownClosed, cbxInflamable2.DropDownClosed, cbxCorrosivo5.DropDownClosed, cbxCarburante3.DropDownClosed, cbxGasesBajo4.DropDownClosed
         Dim i As Integer = 0
@@ -2355,7 +2187,13 @@ Public Class IngresoDatosAdicMP
     End Sub
 
     Private Sub IngresoDatosAdicMP_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
-        Me.Text = ""
+        Text = ""
+
+        With pnlConsultarDatos
+            .Location = New Point(161, 132)
+            .Size = New Size(495, 274)
+        End With
+
         btnLimpiar_Click(Nothing, Nothing)
     End Sub
 
@@ -2381,28 +2219,35 @@ Public Class IngresoDatosAdicMP
         Return True
     End Function
 
-    Private Function VerRepetidosenDGV(ByVal Tipo As Integer, ByVal Codigo As String) As Boolean
+    Private Function VerRepetidosenDGV(ByVal Tipo As Integer, ByVal WCodigo As String) As Boolean
         Select Case Tipo
             Case "1"
-                ' ReSharper disable once LoopCanBeConvertedToQuery
-                For Each row As DataGridViewRow In DGV_FrasesH.Rows
-                    If (row.Cells(0).Value.ToString().Trim() = Codigo.Trim()) Then
-                        MsgBox("Esa frase H ya se encuentra en la lista")
-                        Return False
-                    End If
-                Next
+
+                Dim existe As Boolean = _ExisteFrase(DGV_FrasesH, WCodigo)
+
+                If existe Then
+                    MsgBox("Esa frase H ya se encuentra en la lista")
+                    Return False
+                End If
+
             Case "2"
-                ' ReSharper disable once LoopCanBeConvertedToQuery
-                For Each row As DataGridViewRow In DGV_FrasesP.Rows
-                    If (row.Cells(0).Value = Codigo) Then
-                        MsgBox("Esa frase P ya se encuentra en la lista")
-                        Return False
-                    End If
-                Next
+
+                Dim existe As Boolean = _ExisteFrase(DGV_FrasesP, WCodigo)
+
+                If existe Then
+                    MsgBox("Esa frase P ya se encuentra en la lista")
+                    Return False
+                End If
+
         End Select
+
         Return True
+
     End Function
 
+    Private Function _ExisteFrase(ByVal datos As DataGridView, WCodigo As String) As Boolean
+        Return datos.Rows.Cast(Of DataGridViewRow).ToList.Exists(Function(r) r.Cells(0).Value = WCodigo)
+    End Function
 
     Private Sub DGV_FrasesH_RowHeaderMouseDoubleClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DGV_FrasesH.RowHeaderMouseDoubleClick
         Dim tabla As DataTable = TryCast(DGV_FrasesH.DataSource, DataTable)
@@ -2410,49 +2255,33 @@ Public Class IngresoDatosAdicMP
         codigoH = DGV_FrasesH.CurrentRow.Cells("Codigo").Value.ToString().Trim()
         If MsgBox("¿Desea eliminar la frase H : " & codigoH & " ?", vbYesNo) = vbYes Then
             tabla.Rows.RemoveAt(DGV_FrasesH.CurrentRow.Index)
-            Try
-                If (TipoProducto = "PT") Then
-                    Dim tabla2 As DataTable = TryCast(DGV_FrasesHIngles.DataSource, DataTable)
-                    Dim RowABorrar As DataRow = Nothing
-                    For Each row As DataRow In tabla2.Rows
-                        If ((row.Item("Codigo").ToString()).Trim() = codigoH) Then
 
-                            RowABorrar = row
-                            'tabla2.Rows.Remove(row)
-                        End If
-                    Next
-                    If RowABorrar IsNot Nothing Then tabla2.Rows.Remove(RowABorrar)
-                End If
-            Catch ex As Exception
-                MsgBox(ex.Message)
-            End Try
+            If (TipoProducto = "PT") Then
+                Dim tabla2 As DataTable = TryCast(DGV_FrasesHIngles.DataSource, DataTable)
+
+                Dim RowABorrar As DataRow = tabla2.Rows.Cast(Of DataRow).First(Function(r) r.Item("Codigo") = codigoH)
+
+                If RowABorrar IsNot Nothing Then tabla2.Rows.Remove(RowABorrar)
+            End If
         End If
 
     End Sub
 
     Private Sub DGV_FrasesP_RowHeaderMouseDoubleClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DGV_FrasesP.RowHeaderMouseDoubleClick
         Dim tabla As DataTable = TryCast(DGV_FrasesP.DataSource, DataTable)
-        Dim codigo As String
-        codigo = DGV_FrasesP.CurrentRow.Cells("CodigoFraseP").Value.ToString().Trim()
-        If MsgBox("¿Desea eliminar la frase P : " & codigo & " ?", vbYesNo) = vbYes Then
+        Dim WCodigo As String
+        WCodigo = DGV_FrasesP.CurrentRow.Cells("CodigoFraseP").Value.ToString().Trim()
+        If MsgBox("¿Desea eliminar la frase P : " & WCodigo & " ?", vbYesNo) = vbYes Then
 
             tabla.Rows.RemoveAt(DGV_FrasesP.CurrentRow.Index)
-            Try
-                If (TipoProducto = "PT") Then
-                    Dim tabla2 As DataTable = TryCast(DGV_FrasesPIngles.DataSource, DataTable)
-                    Dim RowABorrar As DataRow = Nothing
-                    For Each row As DataRow In tabla2.Rows
-                        If ((row.Item("Codigo").ToString()).Trim() = codigo) Then
 
-                            RowABorrar = row
-                            'tabla2.Rows.Remove(row)
-                        End If
-                    Next
-                    If RowABorrar IsNot Nothing Then tabla2.Rows.Remove(RowABorrar)
-                End If
-            Catch ex As Exception
-                MsgBox(ex.Message)
-            End Try
+            If (TipoProducto = "PT") Then
+                Dim tabla2 As DataTable = TryCast(DGV_FrasesPIngles.DataSource, DataTable)
+
+                Dim RowABorrar As DataRow = tabla2.Rows.Cast(Of DataRow).First(Function(r) r.Item("Codigo") = WCodigo)
+
+                If RowABorrar IsNot Nothing Then tabla2.Rows.Remove(RowABorrar)
+            End If
 
         End If
     End Sub
@@ -2461,11 +2290,11 @@ Public Class IngresoDatosAdicMP
         Select Case e.KeyData
             Case Keys.Enter
 
-                    txtNroNacionesUnidas.Focus()
+                txtNroNacionesUnidas.Focus()
 
             Case Keys.Escape
 
-                    txtTipoEtiqueta.Text = ""
+                txtTipoEtiqueta.Text = ""
 
         End Select
     End Sub
@@ -2474,11 +2303,11 @@ Public Class IngresoDatosAdicMP
         Select Case e.KeyData
             Case Keys.Enter
 
-                    txtClase.Focus()
+                txtClase.Focus()
 
             Case Keys.Escape
 
-                    txtNroNacionesUnidas.Text = ""
+                txtNroNacionesUnidas.Text = ""
 
         End Select
     End Sub
@@ -2487,11 +2316,11 @@ Public Class IngresoDatosAdicMP
         Select Case e.KeyData
             Case Keys.Enter
 
-                    txtSecundario.Focus()
+                txtSecundario.Focus()
 
             Case Keys.Escape
 
-                    txtClase.Text = ""
+                txtClase.Text = ""
 
         End Select
     End Sub
@@ -2511,10 +2340,10 @@ Public Class IngresoDatosAdicMP
         Select Case e.KeyData
             Case Keys.Enter
 
-                    txtIntervencion.Focus()
+                txtIntervencion.Focus()
 
             Case Keys.Escape
-                    txtRiesgo.Text = ""
+                txtRiesgo.Text = ""
         End Select
     End Sub
 

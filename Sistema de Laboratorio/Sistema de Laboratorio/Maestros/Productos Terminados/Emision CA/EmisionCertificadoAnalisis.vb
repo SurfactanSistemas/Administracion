@@ -1,13 +1,13 @@
-﻿Imports System.IO
-Imports System.Text
-Imports ConsultasVarias
+﻿Imports ConsultasVarias
 Imports CrystalDecisions.CrystalReports.Engine
+Imports CrystalDecisions.Shared
+Imports Laboratorio.Entidades
 
 Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
 
     Private ReadOnly WDescParametrosIngles As New Dictionary(Of String, String) From {{"Menor a", "Less than"}, {"Mayor a", "Greater than"}, {"Máximo", "Maximum"}, {"Mínimo", "Minimum"}, {"Informativo", "Informative"}, {"Cumple Ensayo", "Conform to test"}, {"Cumple", "Complies"}}
 
-    Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
+    Private Sub btnLimpiar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLimpiar.Click
         For Each c As Control In {txtCliente, txtPartida, txtCantidad, lblDescCliente, lblDescProducto, lblDescProductocliente, lblTerminado}
             c.Text = ""
         Next
@@ -17,19 +17,19 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
         txtPartida.Focus()
     End Sub
 
-    Private Sub EmisionCertificadoAnalisis_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub EmisionCertificadoAnalisis_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         btnLimpiar_Click(Nothing, Nothing)
     End Sub
 
-    Private Sub btnCerrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrar.Click
+    Private Sub btnCerrar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCerrar.Click
         Close()
     End Sub
 
-    Private Sub EmisionCertificadoAnalisis_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+    Private Sub EmisionCertificadoAnalisis_Shown(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Shown
         txtPartida.Focus()
     End Sub
 
-    Private Sub txtCliente_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtCliente.MouseDoubleClick
+    Private Sub txtCliente_MouseDoubleClick(ByVal sender As Object, ByVal e As MouseEventArgs) Handles txtCliente.MouseDoubleClick
         Dim WCliente As DataTable = GetAll("SELECT Cliente Codigo, Razon Descripcion FROM Cliente WHERE Razon <> '' ORDER BY Razon")
         With New AyudaGeneral(WCliente)
             .ShowDialog(Me)
@@ -41,7 +41,7 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
         lblDescCliente.Text = row.Cells("Descripcion").Value
     End Sub
 
-    Private Sub btnAceptar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAceptar.Click
+    Private Sub btnAceptar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAceptar.Click
 
         If Val(txtCantidad.Text) = 0 Then txtCantidad.Text = "1"
         If txtCliente.Text.Trim = "" Then txtCliente.Text = "S00102"
@@ -61,7 +61,7 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
         Dim WTablaPrueter As String = "PrueterFarma"
         Dim WTablaCargaV As String = "CargaV"
 
-        If Not Operador.EsFarma Then
+        If Not EsFarma() Then
             WBase = "Surfactan_II"
             WTablaAltaCert = "AltaCertificadoNoFarma"
             WTablaPrueter = "PrueterNoFarma"
@@ -71,7 +71,7 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
         '
         ' Buscamos la Información de la Prueba.
         '
-        Dim WPrueterFarma As DataTable = GetAll("SELECT * FROM " & WTablaPrueter & " WHERE Partida = '" & txtPartida.Text & "' ORDER BY Renglon", Operador.Base)
+        Dim WPrueterFarma As DataTable = GetAll("SELECT * FROM " & WTablaPrueter & " WHERE Partida = '" & txtPartida.Text & "' ORDER BY Renglon", Base)
 
         If WPrueterFarma.Rows.Count = 0 Then
             MsgBox("No se ha encontrado pruebas ingresadas para el Lote Indicado.", MsgBoxStyle.Exclamation)
@@ -93,7 +93,7 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
         '
         ' Definimos las abreviaturas según idioma seleccionado.
         '
-        Dim ZZMes() As String = _AbreviaturasMesesSegunIdioma(cmbIdioma.SelectedIndex)
+        Dim ZZMes() As String = _AbreviaturasMesesSegunIdioma()
 
         '
         ' Buscamos los datos del Alta de Certificado. En caso de no tener definido, buscamos los de Surfactan.
@@ -155,7 +155,7 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
         ' Calculamos la Fecha de Elaboración y Vencimiento.
         '
         Dim WFechaElaboracion, WFechaVencimiento As String
-        Dim WDatos As String() = Entidades.ProductoTerminado.CalcularFechaElabVto(lblTerminado.Text, txtPartida.Text, True)
+        Dim WDatos As String() = ProductoTerminado.CalcularFechaElabVto(lblTerminado.Text, txtPartida.Text, True)
         WFechaElaboracion = WDatos(0)
         WFechaVencimiento = WDatos(1)
 
@@ -165,7 +165,7 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
         For Each row As DataRow In WPrueterFarma.Rows
             With row
 
-                .Item("Std") = Entidades.ProductoTerminado._GenerarImpreParametro(
+                .Item("Std") = ProductoTerminado._GenerarImpreParametro(
                         OrDefault(.Item("TipoEspecif"), ""),
                         OrDefault(.Item("DesdeEspecif"), ""),
                         OrDefault(.Item("HastaEspecif"), ""),
@@ -215,7 +215,7 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
                 Dim res() As DataRow = WCargaV.Select("Renglon = '" & .Item("Renglon") & "'")
                 If res.Count > 0 Then
                     WStdII = Trim(OrDefault(res(0).Item("Valor"), ""))
-                    If Not Operador.EsFarma Then
+                    If Not EsFarma() Then
                         WStdII = Trim(OrDefault(res(0).Item("DescEnsayo"), "")) & IIf(WStdII <> "", " ( " & WStdII & " )", "")
                     End If
                 End If
@@ -319,11 +319,11 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
         '
         ' Verificamos si tiene Lote Original.
         '
-        Dim WDatosMono() As String = Entidades.ProductoTerminado._CalculaMonoOtro(txtPartida.Text, Operador.Base)
-        Dim WDatosMonoInfo As DataRow = Entidades.ProductoTerminado.EsMonoInfo(lblTerminado.Text)
+        Dim WDatosMono() As String = ProductoTerminado._CalculaMonoOtro(txtPartida.Text, Base)
+        Dim WDatosMonoInfo As DataRow = ProductoTerminado.EsMonoInfo(lblTerminado.Text)
 
         If WDatosMonoInfo IsNot Nothing Then
-            If WDatosMonoInfo.Item("Tipo") > 0 And Entidades.ProductoTerminado.EsFazon(lblTerminado.Text) Then
+            If WDatosMonoInfo.Item("Tipo") > 0 And ProductoTerminado.EsFazon(lblTerminado.Text) Then
                 If Val(WDatosMono(3)) <> 1 Then
                     WImpreVto = IIf(cmbIdioma.SelectedIndex = 1, "Expiry Date:", "F.Vencimiento:")
                 End If
@@ -428,13 +428,13 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
 
         'rpt.SetParameterValue("MostrarLogo", 0)
         'rpt.SetParameterValue("MostrarPie", 0)
-        
+
         rpt.SetParameterValue("MostrarLogo", 1)
         rpt.SetParameterValue("MostrarPie", 1)
 
         With New VistaPrevia
             .Reporte = rpt
-            .Base = Operador.Base
+            .Base = Base
             Dim WNombre As String = WNombrePDF
 
             If WNombre.Trim = "" Then
@@ -457,7 +457,7 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
                 Case 1
                     .Imprimir()
                 Case 2
-                    .Exportar(WNombre, CrystalDecisions.Shared.ExportFormatType.PortableDocFormat)
+                    .Exportar(WNombre, ExportFormatType.PortableDocFormat)
             End Select
 
         End With
@@ -472,7 +472,7 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
         Dim WTablaCargaVNotasIng As String = "CargaVNotasIngles"
         Dim WBase As String = "Surfactan_II"
 
-        If Not Operador.EsFarma Then
+        If Not EsFarma() Then
             WTablaCargaVNotas = "CargaVNoFarmaNotas"
             WTablaCargaVNotasIng = "CargaVNoFarmaNotasIngles"
             WBase = "Surfactan_II"
@@ -533,7 +533,7 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
         Dim WTablaCargaVIng As String = "CargaVIngles"
         Dim WBase As String = "Surfactan_III"
 
-        If Not Operador.EsFarma Then
+        If Not EsFarma() Then
             WTablaCargaVIng = "CargaVNoFarmaIngles"
             WBase = "Surfactan_II"
         End If
@@ -555,7 +555,7 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
 
     End Sub
 
-    Private Function _AbreviaturasMesesSegunIdioma(p1 As Integer) As String()
+    Private Function _AbreviaturasMesesSegunIdioma() As String()
 
         Dim ZZMes() As String = New String(12) {}
 
@@ -642,7 +642,7 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
 
     End Sub
 
-    Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtCantidad.KeyPress, txtPartida.KeyPress
+    Private Sub SoloNumero(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txtCantidad.KeyPress, txtPartida.KeyPress
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
             e.Handled = True
         End If

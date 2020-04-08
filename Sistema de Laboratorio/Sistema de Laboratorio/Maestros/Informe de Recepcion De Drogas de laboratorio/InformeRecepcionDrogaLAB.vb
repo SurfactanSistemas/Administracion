@@ -1,29 +1,23 @@
 ﻿Public Class InformeRecepcionDrogaLAB : Implements IBuscadorProveedor, IBuscarOrdenCompraXProvee
 
-
-
-
-
-    Private Sub InformeRecepcionDrogaLAB_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+    Private Sub InformeRecepcionDrogaLAB_Shown(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Shown
         txtOrdenCompra.Focus()
     End Sub
 
-
-    Private Sub InformeRecepcionDrogaLAB_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Me.Text = ""
+    Private Sub InformeRecepcionDrogaLAB_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
+        Text = ""
         PnlEstadoEnvases.Visible = False
         pnlAviso.Visible = False
-
-
 
         txtNroInforme.Text = 0
         mastxtFecha.Text = Date.Today
         txtOrdenCompra.Text = 0
 
+        btnLimpiarForm_Click(Nothing, Nothing)
 
     End Sub
 
-    Private Sub txtNroInforme_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtNroInforme.KeyDown
+    Private Sub txtNroInforme_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtNroInforme.KeyDown
 
         Dim SQLCnsl As String
         Dim Entra As String = "N"
@@ -60,7 +54,7 @@
                     _LimpiarForm()
                     txtNroInforme.Focus()
                 End If
-                
+
             Case Keys.Escape
                 txtNroInforme.Text = ""
         End Select
@@ -100,90 +94,70 @@
     Private Sub _ProcesarInformesViejos()
         DGV_InformeRecepcion.Rows.Clear()
         Dim vuelta As Integer = -1
-        Dim variableAuxiliar As String
         Dim SQLCnslt As String
 
         SQLCnslt = "SELECT * FROM Informe WHERE Informe = '" & txtNroInforme.Text & "' ORDER BY Renglon"
-
 
         Dim tabla As DataTable = GetAll(SQLCnslt)
 
         If tabla.Rows.Count > 0 Then
             For Each Row As DataRow In tabla.Rows
-                vuelta += 1
-                DGV_InformeRecepcion.Rows.Add()
-                DGV_InformeRecepcion.Rows(vuelta).Cells("Orden").Value = Row.Item("Orden")
-                DGV_InformeRecepcion.Rows(vuelta).Cells("Producto").Value = Row.Item("Articulo")
-                DGV_InformeRecepcion.Rows(vuelta).Cells("CantIngre").Value = Row.Item("Cantidad")
-                DGV_InformeRecepcion.Rows(vuelta).Cells("DescOC").Value = Row.Item("Resta")
-                DGV_InformeRecepcion.Rows(vuelta).Cells("Envase").Value = Row.Item("Envase")
+                vuelta = DGV_InformeRecepcion.Rows.Add()
 
-                'Datos pnl Chico
-                variableAuxiliar = IIf(IsDBNull(Row.Item("Certificado1")), "0", Row.Item("Certificado1"))
-                If variableAuxiliar = 0 Then
-                    DGV_InformeRecepcion.Rows(vuelta).Cells("Certificado1").Value = False ' 0 = False
-                Else
-                    DGV_InformeRecepcion.Rows(vuelta).Cells("Certificado1").Value = True ' 1 = True
-                End If
+                With DGV_InformeRecepcion.Rows(vuelta)
 
-                DGV_InformeRecepcion.Rows(vuelta).Cells("Certificado2").Value = IIf(IsDBNull(Row.Item("Certificado2")), "", Row.Item("Certificado2"))
+                    .Cells("Orden").Value = Row.Item("Orden")
+                    .Cells("Producto").Value = Row.Item("Articulo")
+                    .Cells("CantIngre").Value = Row.Item("Cantidad")
+                    .Cells("DescOC").Value = Row.Item("Resta")
+                    .Cells("Envase").Value = Row.Item("Envase")
 
-                variableAuxiliar = IIf(IsDBNull(Row.Item("Estado1")), "0", Row.Item("Estado1"))
-                If variableAuxiliar = 0 Then
-                    DGV_InformeRecepcion.Rows(vuelta).Cells("Estado1").Value = False ' 0 = False
-                Else
-                    DGV_InformeRecepcion.Rows(vuelta).Cells("Estado1").Value = True ' 1 = true
-                End If
+                    .Cells("Certificado1").Value = Val(OrDefault(Row.Item("Certificado1"), "0")) > 0
 
-                DGV_InformeRecepcion.Rows(vuelta).Cells("Estado2").Value = IIf(IsDBNull(Row.Item("Estado2")), "", Row.Item("Estado2"))
-                DGV_InformeRecepcion.Rows(vuelta).Cells("FechaVencimiento").Value = IIf(IsDBNull(Row.Item("Fechavencimiento")), "  /  /    ", Row.Item("Fechavencimiento"))
+                    .Cells("Certificado2").Value = OrDefault(Row.Item("Certificado2"), "")
 
-                ' Datos para PnL Grande
-                DGV_InformeRecepcion.Rows(vuelta).Cells("EstadoEnvI").Value = IIf(IsDBNull(Row.Item("EstadoEnvI")), False, Row.Item("EstadoEnvI"))
-                DGV_InformeRecepcion.Rows(vuelta).Cells("ObservaI").Value = IIf(IsDBNull(Row.Item("ObservaI")), "", Row.Item("ObservaI")) + IIf(IsDBNull(Row.Item("ObservaII")), "", Row.Item("ObservaII"))
+                    .Cells("Estado1").Value = Val(OrDefault(Row.Item("Estado1"), "0")) > 0
 
-                DGV_InformeRecepcion.Rows(vuelta).Cells("EstadoEnvIII").Value = IIf(IsDBNull(Row.Item("EstadoEnvIII")), False, Row.Item("EstadoEnvIII"))
-                DGV_InformeRecepcion.Rows(vuelta).Cells("ObservaIII").Value = IIf(IsDBNull(Row.Item("ObservaIII")), "", Row.Item("ObservaIII")) + IIf(IsDBNull(Row.Item("ObservaIV")), "", Row.Item("ObservaIV"))
+                    .Cells("Estado2").Value = OrDefault(Row.Item("Estado2"), "")
+                    .Cells("FechaVencimiento").Value = OrDefault(Row.Item("Fechavencimiento"), "  /  /    ")
+                    .Cells("EstadoEnvI").Value = OrDefault(Row.Item("EstadoEnvI"), False)
+                    .Cells("ObservaI").Value = Trim(OrDefault(Row.Item("ObservaI"), "")) & " " & Trim(OrDefault(Row.Item("ObservaII"), ""))
+                    .Cells("EstadoEnvIII").Value = OrDefault(Row.Item("EstadoEnvIII"), False)
+                    .Cells("ObservaIII").Value = Trim(OrDefault(Row.Item("ObservaIII"), "")) & " " & Trim(OrDefault(Row.Item("ObservaIV"), ""))
+                    .Cells("EstadoEnvV").Value = OrDefault(Row.Item("EstadoEnvV"), False)
+                    .Cells("EstadoEnvVII").Value = OrDefault(Row.Item("EstadoEnvVII"), False)
+                    .Cells("EstadoEnvIX").Value = OrDefault(Row.Item("EstadoEnvIX"), False)
+                    .Cells("CantidadEnv").Value = OrDefault(Row.Item("CantidadEnv"), "0")
 
-                DGV_InformeRecepcion.Rows(vuelta).Cells("EstadoEnvV").Value = IIf(IsDBNull(Row.Item("EstadoEnvV")), False, Row.Item("EstadoEnvV"))
+                    SQLCnslt = "SELECT Descripcion FROM Envases WHERE Envases = '" & Row.Item("Envase") & "'"
 
-                DGV_InformeRecepcion.Rows(vuelta).Cells("EstadoEnvVII").Value = IIf(IsDBNull(Row.Item("EstadoEnvVII")), False, Row.Item("EstadoEnvVII"))
+                    Dim RowEnvases As DataRow = GetSingle(SQLCnslt)
 
-                DGV_InformeRecepcion.Rows(vuelta).Cells("EstadoEnvIX").Value = IIf(IsDBNull(Row.Item("EstadoEnvIX")), False, Row.Item("EstadoEnvIX"))
+                    If RowEnvases IsNot Nothing Then .Cells("DescripcionEnvase").Value = OrDefault(RowEnvases.Item("Descripcion"), "")
 
-                DGV_InformeRecepcion.Rows(vuelta).Cells("CantidadEnv").Value = IIf(IsDBNull(Row.Item("CantidadEnv")), "0", Row.Item("CantidadEnv"))
+                    .Cells("Descripcion").Value = ""
 
+                    SQLCnslt = "SELECT Descripcion FROM Articulo WHERE Codigo = '" & Row.Item("Articulo") & "'"
+                    Dim rowArticulo As DataRow = GetSingle(SQLCnslt)
 
-                SQLCnslt = "SELECT Descripcion FROM Envases WHERE Envases = '" & Row.Item("Envase") & "'"
+                    If rowArticulo IsNot Nothing Then .Cells("Descripcion").Value = rowArticulo.Item("Descripcion")
 
-                Dim RowEnvases As DataRow = GetSingle(SQLCnslt)
-
-                If RowEnvases IsNot Nothing Then
-                    DGV_InformeRecepcion.Rows(vuelta).Cells("DescripcionEnvase").Value = IIf(IsDBNull(RowEnvases.Item("Descripcion")), "", RowEnvases.Item("Descripcion"))
-                End If
-
-                SQLCnslt = "SELECT Descripcion FROM Articulo WHERE Codigo = '" & Row.Item("Articulo") & "'"
-                Dim rowArticulo As DataRow = GetSingle(SQLCnslt)
-
-                DGV_InformeRecepcion.Rows(vuelta).Cells("Descripcion").Value = rowArticulo.Item("Descripcion")
+                End With
             Next
         End If
     End Sub
 
-   
-    
-
-
     Sub _ModificarDatosGRilla()
-        For i As Integer = 0 To DGV_InformeRecepcion.Rows.Count - 1
-            If DGV_InformeRecepcion.Rows(i).Cells("Producto").Value = mastxtMateriaPrima.Text Then
-                DGV_InformeRecepcion.Rows(i).Cells("CantIngre").Value = txtCantIngre.Text
-                DGV_InformeRecepcion.Rows(i).Cells("DescOC").Value = txtDescOC.Text
-                DGV_InformeRecepcion.Rows(i).Cells("Envase").Value = txtEnvase.Text
-                DGV_InformeRecepcion.Rows(i).Cells("Etiqueta").Value = txtEtiqueta.Text
-                Exit For
-            End If
-        Next
+
+        Dim row As DataGridViewRow = DGV_InformeRecepcion.Rows.Cast(Of DataGridViewRow).ToList.First(Function(r) r.Cells("Producto").Value = mastxtMateriaPrima.Text)
+
+        If row IsNot Nothing Then
+            row.Cells("CantIngre").Value = txtCantIngre.Text
+            row.Cells("DescOC").Value = txtDescOC.Text
+            row.Cells("Envase").Value = txtEnvase.Text
+            row.Cells("Etiqueta").Value = txtEtiqueta.Text
+        End If
+
         txtOrden.Text = ""
         mastxtMateriaPrima.Text = ""
         txtDescripcionMP.Text = ""
@@ -193,29 +167,10 @@
         txtEnvase.Text = ""
         txtEtiqueta.Text = ""
         txtDescOC.Enabled = True
-    End Sub
-    
-    Private Sub txtEtiqueta_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtEtiqueta.KeyDown
-        Select Case e.KeyData
-            Case Keys.Enter
 
-                Dim TipoOrden As Integer = 0
-                Dim SQLCnslt As String
-                
-                SQLCnslt = "SELECT Tipo FROM Orden WHERE Orden = '" & txtOrden.Text & "' ORDER BY Renglon"
-                Dim rowOrden As DataRow = GetSingle(SQLCnslt)
-                If rowOrden IsNot Nothing Then
-                    TipoOrden = rowOrden.Item("Tipo")
-                End If
-                If TipoOrden <> 4 Or TipoOrden <> 3 Then Exit Sub 'sino es orden de drogas de lab termina el proceso
-
-                
-
-
-        End Select
     End Sub
 
-    Private Sub DGV_InformeRecepcion_CellDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DGV_InformeRecepcion.CellDoubleClick
+    Private Sub DGV_InformeRecepcion_CellDoubleClick(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles DGV_InformeRecepcion.CellDoubleClick
         'Renglon abajo de la grilla
         txtOrden.Text = DGV_InformeRecepcion.CurrentRow.Cells("Orden").Value
         mastxtMateriaPrima.Text = DGV_InformeRecepcion.CurrentRow.Cells("Producto").Value
@@ -225,61 +180,43 @@
         txtDescOC.Text = DGV_InformeRecepcion.CurrentRow.Cells("DescOC").Value
         txtEnvase.Text = DGV_InformeRecepcion.CurrentRow.Cells("Envase").Value
 
-        'panel pequeño
-'        If DGV_InformeRecepcion.CurrentRow.Cells("Certificado1").Value = True Then
-'            rabtnSI_CertifAnalisis2.Checked = True
-'        Else
-'            rabtnNO_CertifAnalisis2.Checked = True
-'        End If
-'
-'        txtCertifAnalisis2.Text = DGV_InformeRecepcion.CurrentRow.Cells("Certificado2").Value
-'
-'        If DGV_InformeRecepcion.CurrentRow.Cells("Estado1").Value = True Then
-'            rabtnSI_EstadoEnvases5.checked = True
-'        Else
-'            rabtnNO_EstadoEnvases5.Checked = True
-'        End If
-'
-'        txtEstadoEnvases5.Text = DGV_InformeRecepcion.CurrentRow.Cells("Estado2").Value
-'
-'        mastxtVencimiento_pnlIngreCertif.Text = DGV_InformeRecepcion.CurrentRow.Cells("Fechavencimiento").Value
-
-
         'Panel grande
 
-        If DGV_InformeRecepcion.CurrentRow.Cells("EstadoEnvI").Value = True Then
-            rabtnCum_CertifAnalisis.Checked = True
-        Else
-            rabtnNOCum_CertifAnalisis.Checked = True
-        End If
-        txtCertifAnalisis.Text = DGV_InformeRecepcion.CurrentRow.Cells("ObservaI").Value
+        With DGV_InformeRecepcion.CurrentRow
+            If .Cells("EstadoEnvI").Value = True Then
+                rabtnCum_CertifAnalisis.Checked = True
+            Else
+                rabtnNOCum_CertifAnalisis.Checked = True
+            End If
 
-        If DGV_InformeRecepcion.CurrentRow.Cells("EstadoEnvIII").Value = True Then
-            rabtnCum_EstadoEnvases1.Checked = True
-        Else
-            rabtnNOCum_EstadoEnvases1.Checked = True
-        End If
-        txtEstadoEnvases1.Text = DGV_InformeRecepcion.CurrentRow.Cells("ObservaIII").Value
+            txtCertifAnalisis.Text = .Cells("ObservaI").Value
+            If .Cells("EstadoEnvIII").Value = True Then
+                rabtnCum_EstadoEnvases1.Checked = True
+            Else
+                rabtnNOCum_EstadoEnvases1.Checked = True
+            End If
 
-        If DGV_InformeRecepcion.CurrentRow.Cells("EstadoEnvV").Value = True Then
-            rabtnCum_EstadoEnvases2.Checked = True
-        Else
-            rabtnNOCum_EstadoEnvases2.Checked = True
-        End If
+            txtEstadoEnvases1.Text = .Cells("ObservaIII").Value
+            If .Cells("EstadoEnvV").Value = True Then
+                rabtnCum_EstadoEnvases2.Checked = True
+            Else
+                rabtnNOCum_EstadoEnvases2.Checked = True
+            End If
 
-        If DGV_InformeRecepcion.CurrentRow.Cells("EstadoEnvVII").Value = True Then
-            rabtnCum_EstadoEnvases3.Checked = True
-        Else
-            rabtnNOCum_EstadoEnvases3.Checked = True
-        End If
+            If .Cells("EstadoEnvVII").Value = True Then
+                rabtnCum_EstadoEnvases3.Checked = True
+            Else
+                rabtnNOCum_EstadoEnvases3.Checked = True
+            End If
 
-        If DGV_InformeRecepcion.CurrentRow.Cells("EstadoEnvIX").Value = True Then
-            rabtnCum_EstadoEnvases4.Checked = True
-        Else
-            rabtnNOCum_EstadoEnvases4.Checked = True
-        End If
+            If .Cells("EstadoEnvIX").Value = True Then
+                rabtnCum_EstadoEnvases4.Checked = True
+            Else
+                rabtnNOCum_EstadoEnvases4.Checked = True
+            End If
 
-        txtCantRechazada.Text = DGV_InformeRecepcion.CurrentRow.Cells("CantidadEnv").Value
+            txtCantRechazada.Text = .Cells("CantidadEnv").Value
+        End With
 
         txtCantIngre.Focus()
 
@@ -290,20 +227,17 @@
     Sub _CargarLebels()
 
         Dim SQLCnslt As String
-       
 
         Dim Ensayo1 As String = "0"
         Dim Ensayo2 As String = "0"
         Dim Ensayo3 As String = "0"
         Dim Ensayo4 As String = "0"
-        Dim Ensayo5 As String = "0"
 
         lblCertifAnalisis.Text = ""
         lblEstadoEnvases1.Text = ""
         lblEstadoEnvases2.Text = ""
         lblEstadoEnvases3.Text = ""
         lblEstadoEnvases4.Text = ""
-
 
         SQLCnslt = "SELECT Ensayo1, Ensayo2, Ensayo3, Ensayo4, Ensayo5 FROM EspecificacionesUnifica WHERE Producto = '" & mastxtMateriaPrima.Text & "'"
 
@@ -314,62 +248,43 @@
             Ensayo2 = Str$(row.Item("Ensayo2"))
             Ensayo3 = Str$(row.Item("Ensayo3"))
             Ensayo4 = Str$(row.Item("Ensayo4"))
-            Ensayo5 = Str$(row.Item("Ensayo5"))
         End If
 
         SQLCnslt = "SELECT Descripcion FROM Ensayos WHERE Codigo = '" & Ensayo1 & "'"
         row = GetSingle(SQLCnslt, "Surfactan_II")
-        If row IsNot Nothing Then
-            lblEstadoEnvases1.Text = row.Item("Descripcion")
-        End If
+        If row IsNot Nothing Then lblEstadoEnvases1.Text = row.Item("Descripcion")
 
         SQLCnslt = "SELECT Descripcion FROM Ensayos WHERE Codigo = '" & Ensayo2 & "'"
         row = GetSingle(SQLCnslt, "Surfactan_II")
-        If row IsNot Nothing Then
-            lblEstadoEnvases2.Text = row.Item("Descripcion")
-        End If
+        If row IsNot Nothing Then lblEstadoEnvases2.Text = row.Item("Descripcion")
 
         SQLCnslt = "SELECT Descripcion FROM Ensayos WHERE Codigo = '" & Ensayo3 & "'"
         row = GetSingle(SQLCnslt, "Surfactan_II")
-        If row IsNot Nothing Then
-            lblEstadoEnvases3.Text = row.Item("Descripcion")
-        End If
+        If row IsNot Nothing Then lblEstadoEnvases3.Text = row.Item("Descripcion")
 
         SQLCnslt = "SELECT Descripcion FROM Ensayos WHERE Codigo = '" & Ensayo4 & "'"
         row = GetSingle(SQLCnslt, "Surfactan_II")
-        If row IsNot Nothing Then
-            lblEstadoEnvases4.Text = row.Item("Descripcion")
-        End If
+        If row IsNot Nothing Then lblEstadoEnvases4.Text = row.Item("Descripcion")
+
     End Sub
 
-    Private Sub btnAceptar_pnlAviso_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAceptar_pnlAviso.Click
+    Private Sub btnAceptar_pnlAviso_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAceptar_pnlAviso.Click
         pnlAviso.Visible = False
-
     End Sub
 
-
-
-    Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtOrdenCompra.KeyPress, txtRemito.KeyPress, txtProveedor.KeyPress, txtNroInforme.KeyPress, txtEtiqueta.KeyPress, txtEnvase.KeyPress, mastxtFecha.KeyPress
+    Private Sub SoloNumero(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txtOrdenCompra.KeyPress, txtRemito.KeyPress, txtProveedor.KeyPress, txtNroInforme.KeyPress, txtEtiqueta.KeyPress, txtEnvase.KeyPress, mastxtFecha.KeyPress
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
             e.Handled = True
         End If
     End Sub
 
-    
-
-
-
-
-    Private Sub NumerosConComas(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtCantIngre.KeyPress, txtDescOC.KeyPress, txtCantRechazada.KeyPress
+    Private Sub NumerosConComas(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txtCantIngre.KeyPress, txtDescOC.KeyPress, txtCantRechazada.KeyPress
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) And Not (CChar(".")) = e.KeyChar Then
             e.Handled = True
         End If
     End Sub
 
-
-
-
-    Private Sub txtOrdenCompra_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtOrdenCompra.KeyDown
+    Private Sub txtOrdenCompra_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtOrdenCompra.KeyDown
         Select Case e.KeyData
             Case Keys.Enter
 
@@ -438,33 +353,27 @@
 
             Dim tablaOrdenesCompra As DataTable = GetAll(SQLCnslt)
 
-            If tablaOrdenesCompra.Rows.Count > 0 Then
-                For i As Integer = 0 To tablaOrdenesCompra.Rows.Count - 1
-                    Dim Saldo As Double = tablaOrdenesCompra.Rows(i).Item("Cantidad") - tablaOrdenesCompra.Rows(i).Item("Recibida")
+            For Each row As DataRow In tablaOrdenesCompra.Rows.Cast(Of DataRow).Where(Function(r) r.Item("Cantidad") - r.Item("Recibida"))
 
-                    If Saldo > 0 Then
+                Dim Saldo As Double = row.Item("Cantidad") - row.Item("Recibida")
 
-                        Renglon += 1
+                Renglon = DGV_InformeRecepcion.Rows.Add()
 
-                        DGV_InformeRecepcion.Rows.Add()
+                With DGV_InformeRecepcion.Rows(Renglon)
+                    .Cells("Orden").Value = txtOrdenCompra.Text
+                    .Cells("Producto").Value = row.Item("Articulo")
 
+                    Saldo = row.Item("Cantidad") - row.Item("Recibida")
 
-                        DGV_InformeRecepcion.Rows(Renglon).Cells("Orden").Value = txtOrdenCompra.Text
-                        DGV_InformeRecepcion.Rows(Renglon).Cells("Producto").Value = tablaOrdenesCompra.Rows(i).Item("Articulo")
+                    .Cells("CantIngre").Value = "0.00"
+                    .Cells("SaldoOC").Value = formatonumerico(Saldo)
+                    .Cells("DescOC").Value = "0"
+                    .Cells("Envase").Value = ""
+                End With
 
-                        Saldo = tablaOrdenesCompra.Rows(i).Item("Cantidad") - tablaOrdenesCompra.Rows(i).Item("Recibida")
+                txtProveedor.Text = row.Item("Proveedor")
 
-
-                        DGV_InformeRecepcion.Rows(Renglon).Cells("CantIngre").Value = formatonumerico(0)
-                        DGV_InformeRecepcion.Rows(Renglon).Cells("SaldoOC").Value = formatonumerico(Saldo)
-                        DGV_InformeRecepcion.Rows(Renglon).Cells("DescOC").Value = formatonumerico(0)
-                        DGV_InformeRecepcion.Rows(Renglon).Cells("Envase").Value = ""
-                    End If
-                Next
-
-                txtProveedor.Text = tablaOrdenesCompra.Rows(0).Item("Proveedor")
-            End If
-
+            Next
 
             SQLCnslt = " SELECT Nombre FROM Proveedor WHERE Proveedor = '" & txtProveedor.Text & "'"
 
@@ -473,8 +382,6 @@
                 txtDescripcionProv.Text = RowProveedor.Item("Nombre")
             End If
 
-        
-        
             For Each DG_ROW As DataGridViewRow In DGV_InformeRecepcion.Rows
                 SQLCnslt = "SELECT Descripcion FROM Articulo WHERE Codigo = '" & DG_ROW.Cells("Producto").Value & "'"
                 Dim rowArticulo As DataRow = GetSingle(SQLCnslt)
@@ -492,7 +399,7 @@
 
     End Sub
 
-    Private Sub txtCantIngre_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCantIngre.KeyDown
+    Private Sub txtCantIngre_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtCantIngre.KeyDown
         Select Case e.KeyData
             Case Keys.Enter
                 If txtSaldoOC.Text = "" Then
@@ -516,51 +423,38 @@
         End Select
     End Sub
 
-    
- 
-    Private Sub txtDescOC_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDescOC.KeyDown
+    Private Sub txtDescOC_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtDescOC.KeyDown
         Select Case e.KeyData
             Case Keys.Enter
-                If txtSaldoOC.Text.Trim() = "" Then
-                    txtEnvase.Focus()
-                Else
 
-
-                    If Val(txtDescOC.Text) > Val(txtSaldoOC.Text) Then
-                        MsgBox("No puede ser mayor al Saldo de Orden de Compra")
-                        txtDescOC.Focus()
-                    Else
-                        If Val(txtDescOC.Text) < Val(txtSaldoOC.Text) And Val(txtDescOC.Text) < Val(txtCantIngre.Text) Then
-                            txtDescOC.Text = txtCantIngre.Text
-                        End If
-
-                        txtDescOC.Text = formatonumerico(txtDescOC.Text)
-                        txtEnvase.Focus()
-                    End If
+                If Val(txtDescOC.Text) > Val(txtSaldoOC.Text) Then
+                    MsgBox("No puede ser mayor al Saldo de Orden de Compra")
+                    txtDescOC.Focus()
+                    Exit Sub
+                ElseIf Val(txtDescOC.Text) < Val(txtSaldoOC.Text) And Val(txtDescOC.Text) < Val(txtCantIngre.Text) Then
+                        txtDescOC.Text = txtCantIngre.Text
                 End If
+
+                txtDescOC.Text = formatonumerico(txtDescOC.Text)
+
+                txtEnvase.Focus()
 
             Case Keys.Escape
                 txtDescOC.Text = ""
         End Select
     End Sub
 
-    Private Sub txtEnvase_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtEnvase.KeyDown
+    Private Sub txtEnvase_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtEnvase.KeyDown
         Select Case e.KeyData
             Case Keys.Enter
 
-                If txtSaldoOC.Text.Trim() = "" Then
-                    If Val(txtCantIngre.Text) > 0 And Val(txtDescOC.Text) > 0 Then
-                        If txtDescripcionMP.Text <> "" Then
-                            PnlEstadoEnvases.Visible = True
-                        End If
-                    End If
+                If txtSaldoOC.Text.Trim() = "" And Val(txtCantIngre.Text) > 0 And Val(txtDescOC.Text) > 0 And txtDescripcionMP.Text <> "" Then
+                    PnlEstadoEnvases.Visible = True
                 Else
                     If Val(txtCantIngre.Text) = 0 Then
                         txtCantIngre.Focus()
                         Exit Sub
-                    End If
-
-                    If Val(txtDescOC.Text) = 0 Then
+                    ElseIf Val(txtDescOC.Text) = 0 Then
                         txtDescOC.Focus()
                         Exit Sub
                     End If
@@ -584,65 +478,53 @@
                         Else
                             txtEnvase.Focus()
                         End If
-                        If txtEnvase.Text <> "" Then
-                            PnlEstadoEnvases.Visible = True
+
+                        PnlEstadoEnvases.Visible = txtEnvase.Text <> ""
+
+                    ElseIf TipoOrden = 3 Or TipoOrden = 4 Then
+
+                        Entra = "N"
+                        SQLCnslt = "SELECT Informe FROM Informe WHERE Informe = '" & _txtNroInforme.Text & "'"
+                        Dim rowInforme As DataRow = GetSingle(SQLCnslt)
+                        If rowInforme IsNot Nothing Then
+                            Entra = "S"
                         End If
-                    Else
-                        If TipoOrden = 3 Or TipoOrden = 4 Then
 
-                            Entra = "N"
-                            SQLCnslt = "SELECT Informe FROM Informe WHERE Informe = '" & _txtNroInforme.Text & "'"
-                            Dim rowInforme As DataRow = GetSingle(SQLCnslt)
-                            If rowInforme IsNot Nothing Then
-                                Entra = "S"
+                        txtEnvase.Text = "0"
+                        txtEtiqueta.Text = "0"
+
+                        If Entra = "N" And Val(txtDescOC.Text) > Val(txtSaldoOC.Text) Then
+                            Dim mensaje As String = "La cantidad a descontar supera el saldo de la orden de compra"
+                            MsgBox(mensaje, 0, "Ingreso de Informe de recepcion")
+                            txtDescOC.Text = ""
+                            txtDescOC.Focus()
+                            Exit Sub
+                        ElseIf Val(txtDescOC.Text) <> Val(txtSaldoOC.Text) Then
+                            Dim Dife As Double = Str$(Val(txtSaldoOC.Text) - Val(txtDescOC.Text))
+                            Dim Termina As String = "Ingreso de Informe de recepcion"
+                            Dim mensaje As String = "La orden de compra del " & mastxtMateriaPrima.Text & " quedara con un saldo pendiente de entrega de " & Dife & " Kgs" & vbCrLf & "Confirma este procedimiento"
+                            Dim Respuesta = MsgBox(mensaje, 32 + 4, Termina)
+                            If Respuesta <> 6 Then
+                                Exit Sub
                             End If
-
-                            txtEnvase.Text = "0"
-                            txtEtiqueta.Text = "0"
-
-
-                            If Entra = "N" Then
-                                If Val(txtDescOC.Text) > Val(txtSaldoOC.Text) Then
-                                    Dim mensaje As String = "La cantidad a descontar supera el saldo de la orden de compra"
-                                    MsgBox(mensaje, 0, "Ingreso de Informe de recepcion")
-                                    txtDescOC.Text = ""
-                                    txtDescOC.Focus()
-                                    Exit Sub
-                                Else
-                                    If Val(txtDescOC.Text) <> Val(txtSaldoOC.Text) Then
-                                        Dim Dife As Double = Str$(Val(txtSaldoOC.Text) - Val(txtDescOC.Text))
-                                        Dim Termina As String = "Ingreso de Informe de recepcion"
-                                        Dim mensaje As String = "La orden de compra del " & mastxtMateriaPrima.Text & " quedara con un saldo pendiente de entrega de " & Dife & " Kgs" & vbCrLf & "Confirma este procedimiento"
-                                        Dim Respuesta = MsgBox(mensaje, 32 + 4, Termina)
-                                        If Respuesta <> 6 Then
-                                            Exit Sub
-                                        End If
-                                        lblAviso2.Text = "LA CANTIDAD DE " + Str$(Dife) + " KGS. Y QUE EL PROVEEDOR"
-                                        pnlAviso.Visible = True
-                                    End If
-                                End If
-                            End If
-
-                            '_CargarLebels()
-
-                            _ModificarDatosGRilla()
+                            lblAviso2.Text = "LA CANTIDAD DE " + Str$(Dife) + " KGS. Y QUE EL PROVEEDOR"
+                            pnlAviso.Visible = True
                         End If
                     End If
 
-
+                    _ModificarDatosGRilla()
                 End If
+
             Case Keys.Escape
                 txtEnvase.Text = ""
         End Select
     End Sub
 
-    Private Sub btnAceptar_pnlEstadoEnvases_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAceptar_pnlEstadoEnvases.Click
+    Private Sub btnAceptar_pnlEstadoEnvases_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAceptar_pnlEstadoEnvases.Click
         PnlEstadoEnvases.Visible = False
     End Sub
 
-
-
-    Private Sub txtProveedor_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtProveedor.KeyDown
+    Private Sub txtProveedor_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtProveedor.KeyDown
 
         Dim SQLCnslt As String
 
@@ -685,21 +567,17 @@
             Case Keys.Escape
                 txtProveedor.Text = ""
         End Select
-        End Sub
+    End Sub
 
-
-
-  
-
-    Private Sub btnLimpiarForm_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiarForm.Click
+    Private Sub btnLimpiarForm_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLimpiarForm.Click
         _LimpiarForm()
     End Sub
 
-    Private Sub btnVolver_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVolver.Click
-        Me.Close()
+    Private Sub btnVolver_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnVolver.Click
+        Close()
     End Sub
 
-    Private Sub txtOrdenCompra_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtOrdenCompra.DoubleClick
+    Private Sub txtOrdenCompra_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles txtOrdenCompra.DoubleClick
         Dim SQLCnslt As String
         If txtProveedor.Text <> "" Then
             SQLCnslt = "SELECT AyudaDescripcion = a.Descripcion, AyudaArticulo = o.Articulo,  AyudaSaldo = o.Cantidad - o.Recibida, NroOrden = o.Orden "
@@ -718,7 +596,7 @@
 
     End Sub
 
-    Private Sub btnGrabar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGrabar.Click
+    Private Sub btnGrabar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnGrabar.Click
 
         Dim Auxiliar, Auxiliar2 As String
 
@@ -726,10 +604,9 @@
 
         If auxiliar <> "S" Then
             Dim mensaje As String = "La fecha del informe de recepcion es incorrecta"
-            MsgBox(mensaje, 0, "Ingreso de Orden de Compra")
+            MsgBox(mensaje, 0, "Ingreso de WOrden de Compra")
             Exit Sub
         End If
-
 
         If Trim(txtRemito.Text) = "" Then
             Dim mensaje As String = "Es obligatorio informar el numero de remito"
@@ -737,94 +614,18 @@
             Exit Sub
         End If
 
-
-
-        Dim Renglon As Integer = 0
-  
-
-        Dim Orden As String
-        Dim Articulo As String
-        Dim DesArticulo As String
-        Dim Cantidad As String
-        Dim Saldo As String
-        Dim Resta As String
-        Dim Envase As String
-        Dim CantiEti As String
-
-        Dim CertificadoSi As Integer
-        Dim CertificadoNo As Integer
-        Dim Certificado2 As String
-
-        Dim EstadoSi As Integer
-        Dim EstadoNo As Integer
-        Dim Estado2 As String
-
-        Dim Vencimiento As String
-        Dim OrdVencimiento As String
-
-        Dim Certificado1 As String = ""
-        Dim Estado1 As String = ""
-
-        Dim EstadoEnv1 As Integer
-        Dim EstadoEnv2 As Integer
-        Dim EstadoEnv3 As Integer
-        Dim EstadoEnv4 As Integer
-        Dim EstadoEnv5 As Integer
-        Dim EstadoEnv6 As Integer
-        Dim EstadoEnv7 As Integer
-        Dim EstadoEnv8 As Integer
-        Dim EstadoEnv9 As Integer
-        Dim EstadoEnv10 As Integer
-        Dim CantidadEnv As Integer
-        Dim ObservaI As String
-        Dim ObservaII As String
-        Dim ObservaIII As String
-        Dim ObservaIV As String
-
-        Dim Clave As String
-        Dim Informe As String
-        Dim Fecha As String
-        Dim Proveedor As String
-        Dim Remito As String
-        Dim Fechaord As String
-        Dim WDate As String
-
-
-        Dim ClaveOrden As String
-        Dim Recibida As String
-
-
-        Dim Entradas As String
-        Dim Costo1 As String
-        Dim Costo3 As String
-
-        Dim ClaveMovVar As String
-        Dim Tipo As String
-        Dim Terminado As String
-        Dim Movi As String
-        Dim Lote As String
-        Dim Tipomov As String
-        Dim Observaciones As String
-        Dim Marca As String
-
-        Dim SQLCnslt As String
+        Dim WOrden, Articulo, Cantidad, Resta, WEnvase, Vencimiento, OrdVencimiento, WCertificado1, WEstado1, WCertificado2, WObservaI, WObservaII, WObservaIII, WObservaIV, Clave, Informe, Fecha, Proveedor, Remito, Fechaord, WDate, ClaveWOrden, Recibida, Entradas, Costo1, Costo3, Tipo, Terminado, Movi, Lote, Tipomov, Observaciones, Marca, SQLCnslt, CodMovVar, WEstado2 As String
+        
+        Dim Renglon, CertificadoSi, CertificadoNo, EstadoSi, EstadoNo, EstadoEnv1, EstadoEnv2, EstadoEnv3, EstadoEnv4, EstadoEnv5, EstadoEnv6, EstadoEnv7, EstadoEnv8, EstadoEnv9, EstadoEnv10, WCantidadEnv As Integer
+        
         Dim listaSQLCnslt As New List(Of String)
-
-        'duda?
-        Dim CodMovVar As String
 
         SQLCnslt = "SELECT Codigo = MAX(Codigo) + 1 FROM Movvar "
         Dim rowmovvar As DataRow = GetSingle(SQLCnslt)
 
-        If rowmovvar IsNot Nothing Then
-            CodMovVar = rowmovvar.Item("Codigo")
-        Else
-            CodMovVar = 1
-        End If
-        'Hasta aca
+        CodMovVar = 1
 
-
-
+        If rowmovvar IsNot Nothing Then CodMovVar = rowmovvar.Item("Codigo")
 
         SQLCnslt = "SELECT Informe = MAX(Informe) +1 FROM Informe "
         Dim row As DataRow = GetSingle(SQLCnslt)
@@ -845,14 +646,12 @@
 
             With DGV_InformeRecepcion.Rows(i)
 
-                Orden = .Cells("Orden").Value
+                WOrden = .Cells("WOrden").Value
                 Articulo = UCase(.Cells("Producto").Value)
-                DesArticulo = UCase(.Cells("Descripcion").Value)
+                UCase(.Cells("Descripcion").Value)
                 Cantidad = .Cells("CantIngre").Value
-                Saldo = .Cells("SaldoOC").Value
                 Resta = .Cells("DescOC").Value
-                Envase = .Cells("Envase").Value
-                CantiEti = .Cells("Etiqueta").Value
+                WEnvase = .Cells("WEnvase").Value
 
             End With
 
@@ -869,26 +668,26 @@
 
             CertificadoSi = 1
             CertificadoNo = 0
-            Certificado2 = ""
+            WCertificado2 = ""
 
             EstadoSi = 1
             EstadoNo = 0
-            Estado2 = ""
+            WEstado2 = ""
 
             If CertificadoNo = 1 Then
-                Certificado1 = 0
+                WCertificado1 = 0
             End If
 
             If CertificadoSi = 1 Then
-                Certificado1 = 1
+                WCertificado1 = 1
             End If
 
             If EstadoNo = 1 Then
-                Estado1 = 1
+                WEstado1 = 1
             End If
 
             If EstadoSi = 1 Then
-                Estado1 = 1
+                WEstado1 = 1
             End If
 
             Vencimiento = "  /  /    "
@@ -904,11 +703,11 @@
             EstadoEnv8 = 0
             EstadoEnv9 = 1
             EstadoEnv10 = 0
-            CantidadEnv = 0
-            ObservaI = ""
-            ObservaII = ""
-            ObservaIII = ""
-            ObservaIV = ""
+            WCantidadEnv = 0
+            WObservaI = ""
+            WObservaII = ""
+            WObservaIII = ""
+            WObservaIV = ""
 
             If Articulo <> "" Then
 
@@ -928,32 +727,32 @@
 
 
                 SQLCnslt = "INSERT INTO Informe (Clave , Informe , Renglon , Fecha ,"
-                SQLCnslt = SQLCnslt & "Remito , Proveedor , Orden , Articulo , Cantidad ,"
-                SQLCnslt = SQLCnslt & "Resta , FechaOrd , Envase , Lote1 , Canti1 ,"
+                SQLCnslt = SQLCnslt & "Remito , Proveedor , WOrden , Articulo , Cantidad ,"
+                SQLCnslt = SQLCnslt & "Resta , FechaOrd , WEnvase , Lote1 , Canti1 ,"
                 SQLCnslt = SQLCnslt & "Lote2 , Canti2 , Lote3 , Canti3 , Lote4 ,"
-                SQLCnslt = SQLCnslt & "Canti4 ,Lote5 , Canti5 , Certificado1 , Certificado2 ,"
-                SQLCnslt = SQLCnslt & "Estado1 , Estado2 , EstadoEnvI , EstadoEnvII , EstadoEnvIII ,"
+                SQLCnslt = SQLCnslt & "Canti4 ,Lote5 , Canti5 , WCertificado1 , WCertificado2 ,"
+                SQLCnslt = SQLCnslt & "WEstado1 , WEstado2 , EstadoEnvI , EstadoEnvII , EstadoEnvIII ,"
                 SQLCnslt = SQLCnslt & "EstadoEnvIV , EstadoEnvV , EstadoEnvVI , EstadoEnvVII ,EstadoEnvVIII ,"
-                SQLCnslt = SQLCnslt & "EstadoEnvIX ,EstadoEnvX , CantidadEnv , ObservaI , ObservaII ,"
-                SQLCnslt = SQLCnslt & "ObservaIII , ObservaIV , FechaVencimiento , OrdFechaVencimiento )"
+                SQLCnslt = SQLCnslt & "EstadoEnvIX ,EstadoEnvX , WCantidadEnv , WObservaI , WObservaII ,"
+                SQLCnslt = SQLCnslt & "WObservaIII , WObservaIV , FechaVencimiento , OrdFechaVencimiento )"
                 SQLCnslt = SQLCnslt & "Values ('" & Clave & "', '" & Informe & "', '" & Renglon & "', '" & Fecha & "',"
-                SQLCnslt = SQLCnslt & "'" & Remito & "', '" & Proveedor & "', '" & Orden & "', '" & Articulo & "', '" & Cantidad & "',"
-                SQLCnslt = SQLCnslt & "'" & Resta & "', '" & Fechaord & "', '" & Envase & "', '" & XLote1 & "', '" & XCantiLote1 & "',"
+                SQLCnslt = SQLCnslt & "'" & Remito & "', '" & Proveedor & "', '" & WOrden & "', '" & Articulo & "', '" & Cantidad & "',"
+                SQLCnslt = SQLCnslt & "'" & Resta & "', '" & Fechaord & "', '" & WEnvase & "', '" & XLote1 & "', '" & XCantiLote1 & "',"
                 SQLCnslt = SQLCnslt & "'" & XLote2 & "', '" & XCantiLote2 & "', '" & XLote3 & "', '" & XCantiLote3 & "', '" & XLote4 & "',"
-                SQLCnslt = SQLCnslt & "'" & XCantiLote4 & "', '" & XLote5 & "', '" & XCantiLote5 & "', '" & Certificado1 & "', '" & Certificado2 & "',"
-                SQLCnslt = SQLCnslt & "'" & Estado1 & "', '" & Estado2 & "', '" & EstadoEnv1 & "', '" & EstadoEnv2 & "', '" & EstadoEnv3 & "',"
+                SQLCnslt = SQLCnslt & "'" & XCantiLote4 & "', '" & XLote5 & "', '" & XCantiLote5 & "', '" & WCertificado1 & "', '" & WCertificado2 & "',"
+                SQLCnslt = SQLCnslt & "'" & WEstado1 & "', '" & WEstado2 & "', '" & EstadoEnv1 & "', '" & EstadoEnv2 & "', '" & EstadoEnv3 & "',"
                 SQLCnslt = SQLCnslt & "'" & EstadoEnv4 & "', '" & EstadoEnv5 & "', '" & EstadoEnv6 & "', '" & EstadoEnv7 & "', '" & EstadoEnv8 & "',"
-                SQLCnslt = SQLCnslt & "'" & EstadoEnv9 & "', '" & EstadoEnv10 & "', '" & CantidadEnv & "', '" & ObservaI & "', '" & ObservaII & "',"
-                SQLCnslt = SQLCnslt & "'" & ObservaIII & "', '" & ObservaIV & "', '" & Vencimiento & "', '" & OrdVencimiento & "')"
+                SQLCnslt = SQLCnslt & "'" & EstadoEnv9 & "', '" & EstadoEnv10 & "', '" & WCantidadEnv & "', '" & WObservaI & "', '" & WObservaII & "',"
+                SQLCnslt = SQLCnslt & "'" & WObservaIII & "', '" & WObservaIV & "', '" & Vencimiento & "', '" & OrdVencimiento & "')"
 
                 listaSQLCnslt.Add(SQLCnslt)
 
-                Dim TipoOrden As Integer = 0
+                Dim TipoWOrden As Integer = 0
 
-                SQLCnslt = "SELECT Tipo FROM Orden WHERE Orden = '" & Orden & "'"
+                SQLCnslt = "SELECT Tipo FROM WOrden WHERE WOrden = '" & WOrden & "'"
                 row = GetSingle(SQLCnslt)
 
-                TipoOrden = row.Item("Tipo")
+                TipoWOrden = row.Item("Tipo")
 
 
                 SQLCnslt = "SELECT Pedido, Laboratorio FROM Articulo WHERE Codigo = '" & Articulo & "'"
@@ -962,7 +761,7 @@
 
                 If RowArticulo IsNot Nothing Then
 
-                    If TipoOrden <> 2 Then
+                    If TipoWOrden <> 2 Then
 
                         Dim Pedido As String = (RowArticulo.Item("Pedido") - Val(Resta)).ToString()
                         Dim Laboratorio As String = (RowArticulo.Item("Laboratorio") + Val(Cantidad)).ToString()
@@ -973,25 +772,25 @@
 
 
                         For j = 1 To 11
-                            SQLCnslt = "UPDATE  " & _AQueEmpresa(j) & ".dbo.Articulo SET Envase = '" & Envase & "', Proveedor = '" & Proveedor & "' WHERE Codigo = '" & Articulo & "'"
+                            SQLCnslt = "UPDATE  " & _AQueEmpresa(j) & ".dbo.Articulo SET WEnvase = '" & WEnvase & "', Proveedor = '" & Proveedor & "' WHERE Codigo = '" & Articulo & "'"
                             listaSQLCnslt.Add(SQLCnslt)
                         Next
 
-                        SQLCnslt = "SELECT Clave, Recibida FROM Orden WHERE Orden = '" & Orden & "' AND Articulo = '" & Articulo & "'"
+                        SQLCnslt = "SELECT Clave, Recibida FROM WOrden WHERE WOrden = '" & WOrden & "' AND Articulo = '" & Articulo & "'"
 
-                        Dim RowOrden As DataRow = GetSingle(SQLCnslt)
+                        Dim RowWOrden As DataRow = GetSingle(SQLCnslt)
 
-                        If RowOrden IsNot Nothing Then
-                            ClaveOrden = RowOrden.Item("Clave")
-                            Recibida = RowOrden.Item("Recibida") + Val(Resta)
+                        If RowWOrden IsNot Nothing Then
+                            ClaveWOrden = RowWOrden.Item("Clave")
+                            Recibida = RowWOrden.Item("Recibida") + Val(Resta)
 
-                            SQLCnslt = "UPDATE Orden SET Recibida = '" & Recibida & "', Wdate = '" & WDate & "' WHERE Clave = '" & ClaveOrden & "'"
+                            SQLCnslt = "UPDATE WOrden SET Recibida = '" & Recibida & "', Wdate = '" & WDate & "' WHERE Clave = '" & ClaveWOrden & "'"
 
                             listaSQLCnslt.Add(SQLCnslt)
 
 
                             If Val(txtOrden.Text) >= 800000 Then
-                                If TipoOrden = 3 Then
+                                If TipoWOrden = 3 Then
 
                                     If Val(Cantidad) <> 0 Then
 
@@ -1012,7 +811,6 @@
                                         Auxiliar = CodMovVar.PadLeft(6, "0")
                                         Auxiliar2 = Renglon.ToString().PadLeft(2, "0")
 
-                                        ClaveMovVar = Auxiliar + Auxiliar2
                                         Tipo = "M"
                                         Terminado = ""
                                         Movi = "E"
@@ -1047,7 +845,6 @@
         Else
             MsgBox("No informo ningun ingreso")
         End If
-        
 
     End Sub
 
@@ -1087,19 +884,13 @@
 
     End Function
 
-
-    Private Sub btnBuscarProv_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBuscarProv.Click
+    Private Sub btnBuscarProv_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnBuscarProv.Click
         With New BuscadorProveedor
             .Show(Me)
         End With
-        
     End Sub
 
-   
-
-   
-
-    Private Sub mastxtFecha_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles mastxtFecha.KeyDown
+    Private Sub mastxtFecha_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles mastxtFecha.KeyDown
         Select Case e.KeyData
             Case Keys.Enter
                 If ValidaFecha(mastxtFecha.Text) = "S" Then
@@ -1112,7 +903,7 @@
         End Select
     End Sub
 
-    Private Sub txtRemito_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRemito.KeyDown
+    Private Sub txtRemito_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtRemito.KeyDown
         Select Case e.KeyData
             Case Keys.Escape
                 txtRemito.Text = ""

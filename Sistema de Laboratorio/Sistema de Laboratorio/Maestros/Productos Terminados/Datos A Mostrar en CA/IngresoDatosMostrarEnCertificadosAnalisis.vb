@@ -1,5 +1,6 @@
 ﻿Public Class IngresoDatosMostrarEnCertificadosAnalisis
-    Private CerrarDspGrabar As Boolean = False
+    Private ReadOnly CerrarDspGrabar As Boolean = False
+
     Sub New(Optional ByVal Terminado As String = "", Optional ByVal Cliente As String = "", Optional ByVal CerrarDspGrabar As Boolean = False)
 
         ' Llamada necesaria para el diseñador.
@@ -10,7 +11,8 @@
         txtCliente.Text = Cliente
         Me.CerrarDspGrabar = CerrarDspGrabar
     End Sub
-    Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
+
+    Private Sub btnLimpiar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLimpiar.Click
 
         lblDescCliente.Text = ""
         lblDescProducto.Text = ""
@@ -21,7 +23,7 @@
         txtProducto.Focus()
     End Sub
 
-    Private Sub IngresoDatosMostrarEnCertificadosAnalisis_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub IngresoDatosMostrarEnCertificadosAnalisis_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
 
         If txtProducto.Text.Replace(" ", "").Length = 12 And txtCliente.Text.Replace(" ", "").Length = 6 Then
             txtProducto_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
@@ -32,11 +34,11 @@
 
     End Sub
 
-    Private Sub IngresoDatosMostrarEnCertificadosAnalisis_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+    Private Sub IngresoDatosMostrarEnCertificadosAnalisis_Shown(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Shown
         txtProducto.Focus()
     End Sub
 
-    Private Sub txtProducto_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtProducto.KeyDown
+    Private Sub txtProducto_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtProducto.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If txtProducto.Text.Replace(" ", "").Length < 12 Then : Exit Sub : End If
@@ -56,7 +58,7 @@
 
     End Sub
 
-    Private Sub txtCliente_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCliente.KeyDown
+    Private Sub txtCliente_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtCliente.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtCliente.Text) = "" Then txtCliente.Text = "S00102"
@@ -80,7 +82,7 @@
             '
             Dim WCert As DataTable = Nothing
 
-            If Operador.Base = "Surfactan_III" Then
+            If Base = "Surfactan_III" Then
                 WCert = GetAll("select cv.Ensayo, Descripcion = TRIM(e.Descripcion), Valor = TRIM(cv.Valor), acf.Marca FROM CargaV cv LEFT OUTER JOIN AltaCertificadoFarma acf ON acf.Terminado = cv.Terminado And acf.Renglon = cv.Renglon and acf.cliente = '" & txtCliente.Text & "' LEFT OUTER JOIN SurfactanSa.dbo.Cliente c ON c.Cliente = acf.Cliente LEFT OUTER JOIN Surfactan_II.dbo.Ensayos e ON e.Codigo = cv.Ensayo WHERE cv.Terminado = '" & txtProducto.Text & "' and cv.Paso = '99' order by cv.Renglon")
             Else
                 WCert = GetAll("select cv.Ensayo, Descripcion = TRIM(e.Descripcion), Valor = TRIM(cv.Valor), acf.Marca FROM CargaVNoFarma cv LEFT OUTER JOIN AltaCertificadoNoFarma acf ON acf.Terminado = cv.Terminado And acf.Renglon = cv.Renglon and acf.cliente = '" & txtCliente.Text & "' LEFT OUTER JOIN SurfactanSa.dbo.Cliente c ON c.Cliente = acf.Cliente LEFT OUTER JOIN Surfactan_II.dbo.Ensayos e ON e.Codigo = cv.Ensayo WHERE cv.Terminado = '" & txtProducto.Text & "' and cv.Paso = '99' order by cv.Renglon")
@@ -138,13 +140,13 @@
 
     End Sub
 
-    Private Sub btnCerrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrar.Click
+    Private Sub btnCerrar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCerrar.Click
         Close()
     End Sub
 
-    Private Sub btnGrabar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGrabar.Click
+    Private Sub btnGrabar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnGrabar.Click
 
-        If txtProducto.Text.Replace(" ", "").Length < 12 then Exit Sub
+        If txtProducto.Text.Replace(" ", "").Length < 12 Then Exit Sub
         If txtCliente.Text.Replace(" ", "").Length < 6 Then Exit Sub
 
         Dim WTer As DataRow = GetSingle("SELECT Codigo FROM Terminado WHERE Codigo = '" & txtProducto.Text & "'")
@@ -166,14 +168,14 @@
         Dim WSqls As New List(Of String)
 
         Dim WTerminado, WClave, WCliente, WRenglon, WMarca As String
-        
+
         WTerminado = txtProducto.Text
         WCliente = txtCliente.Text
 
-        Dim WEmpresaGrabacion As String = Operador.Base
+        Dim WEmpresaGrabacion As String = Base
         Dim WTablaAltaCertificado As String = "AltaCertificadoFarma"
 
-        If Operador.Base = "Surfactan_III" Then
+        If Base = "Surfactan_III" Then
             WSqls.Add("DELETE FROM AltaCertificadoFarma WHERE Terminado = '" & txtProducto.Text & "' And Cliente = '" & txtCliente.Text & "'")
         Else
             WTablaAltaCertificado = "AltaCertificadoNoFarma"
@@ -218,7 +220,7 @@
 
         ExecuteNonQueries(WEmpresaGrabacion, WSqls.ToArray)
 
-        If Me.CerrarDspGrabar Then
+        If CerrarDspGrabar Then
             btnCerrar_Click(Nothing, Nothing)
         Else
             btnLimpiar_Click(Nothing, Nothing)
@@ -226,7 +228,7 @@
 
     End Sub
 
-    Private Sub dgvDatos_CellMouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgvDatos.CellMouseClick
+    Private Sub dgvDatos_CellMouseClick(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles dgvDatos.CellMouseClick
         If e.ColumnIndex = dgvDatos.Columns("Marca").Index Then
 
             With dgvDatos.CurrentCell
