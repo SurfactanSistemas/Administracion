@@ -1,81 +1,65 @@
-﻿Imports System.Diagnostics.Eventing.Reader
-
-Public Class VerificacionDeVencimientosMP
+﻿Public Class VerificacionDeVencimientosMP
     Dim Referencia As Control
-    Private Sub btnVolver_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVolver.Click
-        Me.Close()
+    Private Sub btnVolver_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnVolver.Click
+        Close()
     End Sub
 
+    Private Sub btnAceptar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAceptar.Click
 
+        If mastxtFecha.Text.Replace("/", "").Trim() = "" Then mastxtFecha.Text = Date.Today
 
-    Private Sub btnAceptar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAceptar.Click
+        If mastxtDesdeArt.Text.Replace("-", "").Trim() = "" Then mastxtDesdeArt.Text = "AA-000-000"
 
-        If mastxtFecha.Text.Replace("/", "").Trim() = "" Then
-            mastxtFecha.Text = Date.Today
-        End If
+        If mastxtHastaArt.Text.Replace("-", "").Trim() = "" Then mastxtHastaArt.Text = "ZZ-999-999"
 
-        If mastxtDesdeArt.Text.Replace("-", "").Trim() = "" Then
-            mastxtDesdeArt.Text = "AA-000-000"
-        End If
+        If Val(txtDias.Text) = 0 Then txtDias.Text = 30
 
-        If mastxtHastaArt.Text.Replace("-", "").Trim() = "" Then
-            mastxtHastaArt.Text = "ZZ-999-999"
-        End If
+        Dim TablaARellenar As New DataTable
+        With TablaARellenar.Columns
+            .Add("Laudo")
+            .Add("Articulo")
+            .Add("Cantidad")
+            .Add("Saldo")
+            .Add("Empresa")
+            .Add("Vencimiento")
+            .Add("VencimientoOrdenado")
+            .Add("Fecha")
+            .Add("Tipo")
+        End With
 
-        If txtDias.Text = "0" Or txtDias.Text = "" Then
-            txtDias.Text = 30
-        End If
+        Dim TablaReporteVerificacionVenmientosMP As New DataTable
+        With TablaReporteVerificacionVenmientosMP.Columns
+            .Add("Laudo")
+            .Add("Fecha")
+            .Add("FechaOrdenada")
+            .Add("Articulo")
+            .Add("Cantidad")
+            .Add("Saldo")
+            .Add("Vencimiento")
+            .Add("Empresa")
+            .Add("DescripArticulo")
+            .Add("Dias")
+        End With
 
+        Dim Titulo As String
+        Titulo = "Del " + mastxtDesdeArt.Text + " Hasta el " + mastxtHastaArt.Text + " con diferencia de : " + txtDias.Text + " Dias"
 
+        _CargarTablaParaElReporte(TablaARellenar, TablaReporteVerificacionVenmientosMP)
 
-            Dim TablaARellenar As New DataTable
-            With TablaARellenar.Columns
-                .Add("Laudo")
-                .Add("Articulo")
-                .Add("Cantidad")
-                .Add("Saldo")
-                .Add("Empresa")
-                .Add("Vencimiento")
-                .Add("VencimientoOrdenado")
-                .Add("Fecha")
-                .Add("Tipo")
-            End With
-
-            Dim TablaReporteVerificacionVenmientosMP As New DataTable
-            With TablaReporteVerificacionVenmientosMP.Columns
-                .Add("Laudo")
-                .Add("Fecha")
-                .Add("FechaOrdenada")
-                .Add("Articulo")
-                .Add("Cantidad")
-                .Add("Saldo")
-                .Add("Vencimiento")
-                .Add("Empresa")
-                .Add("DescripArticulo")
-                .Add("Dias")
-            End With
-
-            Dim Titulo As String
-            Titulo = "Del " + mastxtDesdeArt.Text + " Hasta el " + mastxtHastaArt.Text + " con diferencia de : " + txtDias.Text + " Dias"
-
-            _CargarTablaParaElReporte(TablaARellenar, TablaReporteVerificacionVenmientosMP)
-
-
-            With New VistaPrevia
-                .Reporte = New ReporteVerificacionDeVencimientosMP()
-                .Reporte.SetDataSource(TablaReporteVerificacionVenmientosMP)
-                .Reporte.SetParameterValue("Titulo", Titulo)
-                .Reporte.SetParameterValue("impreRepEmpresa", Operador.Base)
-                prgbar.Visible = False
-                If (rabtnPantalla.Checked = True) Then
-                    .Mostrar()
-                Else
-                    .Imprimir()
-                End If
-            End With
+        With New VistaPrevia
+            .Reporte = New ReporteVerificacionDeVencimientosMP()
+            .Reporte.SetDataSource(TablaReporteVerificacionVenmientosMP)
+            .Reporte.SetParameterValue("Titulo", Titulo)
+            .Reporte.SetParameterValue("impreRepEmpresa", Base)
+            prgbar.Visible = False
+            If (rabtnPantalla.Checked = True) Then
+                .Mostrar()
+            Else
+                .Imprimir()
+            End If
+        End With
 
     End Sub
-
 
     Private Sub _CargarTablaParaElReporte(ByVal TablaARellenar As DataTable, ByVal TablaReporteVerificacionVenmientosMP As DataTable)
 
@@ -90,34 +74,36 @@ Public Class VerificacionDeVencimientosMP
         SQLCnslt = "SELECT Articulo, Liberada, Fecha, Laudo, Saldo, FechaVencimiento, OrdFechaVencimiento FROM Laudo WHERE Articulo >= "
         SQLCnslt = SQLCnslt & "'" & mastxtDesdeArt.Text & "' AND Articulo <= '" & mastxtHastaArt.Text & "' AND Saldo > 0 AND Marca <> 'X'"
 
-        Dim TablaLaudo As DataTable = GetAll(SQLCnslt, Operador.Base)
+        Dim TablaLaudo As DataTable = GetAll(SQLCnslt, Base)
 
-        If TablaLaudo.Rows.Count > 0 Then
-            For i As Integer = 0 To TablaLaudo.Rows.Count - 1
-                TablaARellenar.Rows.Add()
+        For Each row As Datarow In TablaLaudo.rows
+            Dim r As DataRow = TablaARellenar.NewRow
 
-                TablaARellenar.Rows(ContadorFilas).Item("Laudo") = TablaLaudo.Rows(i).Item("Laudo")
-                TablaARellenar.Rows(ContadorFilas).Item("Articulo") = TablaLaudo.Rows(i).Item("Articulo")
-                TablaARellenar.Rows(ContadorFilas).Item("Cantidad") = TablaLaudo.Rows(i).Item("Liberada")
-                TablaARellenar.Rows(ContadorFilas).Item("Saldo") = IIf(IsDBNull(TablaLaudo.Rows(i).Item("Saldo")), "0", TablaLaudo.Rows(i).Item("Saldo"))
+            With r
 
-                TablaARellenar.Rows(ContadorFilas).Item("Empresa") = _ObtenerEmpresa(Operador.Base)
+                .Item("Laudo") = row.Item("Laudo")
+                .Item("Articulo") = row.Item("Articulo")
+                .Item("Cantidad") = row.Item("Liberada")
+                .Item("Saldo") = OrDefault(row.Item("Saldo"), "0")
 
-                TablaARellenar.Rows(ContadorFilas).Item("Vencimiento") = IIf(IsDBNull(TablaLaudo.Rows(i).Item("FechaVencimiento")), "", TablaLaudo.Rows(i).Item("FechaVencimiento"))
-                TablaARellenar.Rows(ContadorFilas).Item("VencimientoOrdenado") = IIf(IsDBNull(TablaLaudo.Rows(i).Item("OrdFechaVencimiento")), "", TablaLaudo.Rows(i).Item("OrdFechaVencimiento"))
-                TablaARellenar.Rows(ContadorFilas).Item("Fecha") = IIf(IsDBNull(TablaLaudo.Rows(i).Item("Fecha")), "", TablaLaudo.Rows(i).Item("Fecha"))
-                TablaARellenar.Rows(ContadorFilas).Item("Tipo") = "L"
+                .Item("Empresa") = _ObtenerEmpresa(Base)
 
-                ContadorFilas += 1
-            Next
-        End If
+                .Item("Vencimiento") = OrDefault(row.Item("FechaVencimiento"), "")
+                .Item("VencimientoOrdenado") = OrDefault(row.Item("OrdFechaVencimiento"), "")
+                .Item("Fecha") = OrDefault(row.Item("Fecha"), "")
+                .Item("Tipo") = "L"
+
+            End With
+
+            TablaARellenar.Rows.Add(r)
+        Next
 
         'CARGO LAS GUIAS
 
         SQLCnslt = "SELECT Articulo, Cantidad, Lote, Saldo FROM Guia WHERE Articulo >= '" & mastxtDesdeArt.Text & "' AND Articulo <= '" & mastxtHastaArt.Text & "' "
         SQLCnslt = SQLCnslt & "AND Saldo > 0 AND Marca <> 'X' AND Codigo < 900000 AND Tipo = 'M' AND Movi = 'E'"
 
-        Dim TablaGuia As DataTable = GetAll(SQLCnslt, Operador.Base)
+        Dim TablaGuia As DataTable = GetAll(SQLCnslt, Base)
 
         If TablaGuia.Rows.Count > 0 Then
             For i = 0 To TablaGuia.Rows.Count - 1
@@ -143,9 +129,9 @@ Public Class VerificacionDeVencimientosMP
                     SQLCnslt = SQLCnslt & "AND Articulo = '" & TablaARellenar.Rows(i).Item("Articulo") & "'"
 
                     For j As Integer = 1 To 11
-                        Dim row As DataRow = GetSingle(SQLCnslt, _ObtenerEmpresa(Operador.Base, j), True)
+                        Dim row As DataRow = GetSingle(SQLCnslt, _ObtenerEmpresa(Base, j), True)
                         If row IsNot Nothing Then
-                            TablaARellenar.Rows(i).Item("Empresa") = _ObtenerEmpresa(_ObtenerEmpresa(Operador.Base, j))
+                            TablaARellenar.Rows(i).Item("Empresa") = _ObtenerEmpresa(_ObtenerEmpresa(Base, j))
 
                             TablaARellenar.Rows(i).Item("Vencimiento") = IIf(IsDBNull(row.Item("fechavencimiento")), "", row.Item("fechavencimiento"))
                             TablaARellenar.Rows(i).Item("VencimientoOrdenado") = IIf(IsDBNull(row.Item("OrdFechaVencimiento")), "", row.Item("OrdFechaVencimiento"))
@@ -180,16 +166,21 @@ Public Class VerificacionDeVencimientosMP
                             Meses = row.Item("Meses")
                         End If
 
-                        Dim Mes As Integer = Val(Microsoft.VisualBasic.Mid$(.Item("Fecha"), 4, 2))
+                        Dim Mes As Integer = Val(Mid(.Item("Fecha"), 4, 2))
                         Dim Ano As Integer = Val(Microsoft.VisualBasic.Right$(.Item("Fecha"), 4))
+                        Dim x As Integer = 0
 
-                        For ZCiclo = 1 To Meses
+                        Do
+                            x += 1
+
                             Mes = Mes + 1
                             If Mes > 12 Then
                                 Ano = Ano + 1
                                 Mes = 1
                             End If
-                        Next ZCiclo
+
+                            If x > Meses Then Exit Do
+                        Loop
 
                         Dim MesX As String = (Mes).ToString()
                         Dim AnoX As String = (Ano).ToString()
@@ -228,9 +219,6 @@ Public Class VerificacionDeVencimientosMP
                             End If
                         Loop
 
-                        REM WFechaActual = Right$(Fecha.Text, 4) + Mid$(Fecha.Text, 4, 2) + Left$(Fecha.Text, 2)
-                        REM WFechaVto = Right$(ZVto, 4) + Mid$(ZVto, 4, 2) + Left$(ZVto, 2)
-
                         Select Case Val(Mid$(Vto, 4, 2))
                             Case 2
                                 If Val(Mid$(Vto, 1, 2)) > 28 Then
@@ -251,9 +239,9 @@ Public Class VerificacionDeVencimientosMP
 
                         Dim DescripcionBuscada As String = fila.Item("Descripcion")
 
-
                         If Val(Dias) > (Val(txtDias.Text) * (-1)) And Val(Dias) < Val(txtDias.Text) Then
                             TablaReporteVerificacionVenmientosMP.Rows.Add()
+
                             TablaReporteVerificacionVenmientosMP.Rows(vuelta).Item("Laudo") = .Item("Laudo")
                             TablaReporteVerificacionVenmientosMP.Rows(vuelta).Item("Fecha") = .Item("Fecha")
                             TablaReporteVerificacionVenmientosMP.Rows(vuelta).Item("FechaOrdenada") = OrdFecha
@@ -276,17 +264,11 @@ Public Class VerificacionDeVencimientosMP
 
     End Sub
 
-
-
-    Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles mastxtFecha.KeyPress, txtDias.KeyPress, mastxtHastaArt.KeyPress, mastxtDesdeArt.KeyPress
+    Private Sub SoloNumero(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles mastxtFecha.KeyPress, txtDias.KeyPress, mastxtHastaArt.KeyPress, mastxtDesdeArt.KeyPress
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
             e.Handled = True
         End If
     End Sub
-
-
-
-
 
     Private Function _Calcula_vencimiento(ByVal WFecha As String, ByVal Plazo As Integer) As String
 
@@ -315,7 +297,6 @@ Public Class VerificacionDeVencimientosMP
 
         REM   DATA "0101","0105","2505", , ,"0907", ,"1210", ,"2512", , , , , ,
 
-        Dg = 0
         WAno = Mid$(WFecha, 7, 4)
         Ano = Val(WAno)
         WMes = Mid$(WFecha, 4, 2)
@@ -360,7 +341,6 @@ Public Class VerificacionDeVencimientosMP
         End If
 
     End Function
-
 
     Private Function _ObtenerEmpresa(ByVal Empresa As String, Optional ByVal NumEmpresa As Integer = 0) As String
         If NumEmpresa = 0 Then
@@ -435,8 +415,7 @@ Public Class VerificacionDeVencimientosMP
         Return ""
     End Function
 
-
-    Private Sub mastxtFecha_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles mastxtFecha.KeyDown
+    Private Sub mastxtFecha_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles mastxtFecha.KeyDown
         Select Case e.KeyData
             Case Keys.Enter
                 If mastxtFecha.Text.Length = 10 Then
@@ -449,7 +428,7 @@ Public Class VerificacionDeVencimientosMP
         End Select
     End Sub
 
-    Private Sub mastxtDesdeArt_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles mastxtDesdeArt.KeyDown
+    Private Sub mastxtDesdeArt_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles mastxtDesdeArt.KeyDown
         Select Case e.KeyData
             Case Keys.Enter
                 If mastxtDesdeArt.Text.Replace("-", "").Trim() = "" Then
@@ -463,7 +442,7 @@ Public Class VerificacionDeVencimientosMP
         End Select
     End Sub
 
-    Private Sub mastxtHastaArt_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles mastxtHastaArt.KeyDown
+    Private Sub mastxtHastaArt_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles mastxtHastaArt.KeyDown
         Select Case e.KeyData
             Case Keys.Enter
                 If mastxtHastaArt.Text.Replace("-", "").Trim() = "" Then
@@ -477,7 +456,7 @@ Public Class VerificacionDeVencimientosMP
         End Select
     End Sub
 
-    Private Sub txtDias_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDias.KeyDown
+    Private Sub txtDias_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtDias.KeyDown
         Select Case e.KeyData
             Case Keys.Enter
                 If txtDias.Text <> "" Then
@@ -486,14 +465,15 @@ Public Class VerificacionDeVencimientosMP
         End Select
     End Sub
 
-    Private Sub mastxtDesdeArt_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles mastxtDesdeArt.MouseDoubleClick
+    Private Sub mastxtDesdeArt_MouseDoubleClick(ByVal sender As Object, ByVal e As MouseEventArgs) Handles mastxtDesdeArt.MouseDoubleClick
         _CargarDGV_Ayuda()
         Referencia = mastxtDesdeArt
         pnlAyuda.Visible = True
     End Sub
 
-    Private Sub btnPnlVolver_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPnlVolver.Click
+    Private Sub btnPnlVolver_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnPnlVolver.Click
         pnlAyuda.Visible = False
+        If Referencia IsNot Nothing Then Referencia.Focus()
     End Sub
 
     Private Sub _CargarDGV_Ayuda()
@@ -504,45 +484,48 @@ Public Class VerificacionDeVencimientosMP
         End If
     End Sub
 
-    Private Sub DGV_Ayuda_CellClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DGV_Ayuda.CellClick
+    Private Sub DGV_Ayuda_CellClick(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles DGV_Ayuda.CellClick
         Referencia.Text = DGV_Ayuda.CurrentRow.Cells("Codigo").Value
         pnlAyuda.Visible = False
     End Sub
 
-    Private Sub btnBuscarDesde_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBuscarDesde.Click
+    Private Sub btnBuscarDesde_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnBuscarDesde.Click
         _CargarDGV_Ayuda()
         Referencia = mastxtDesdeArt
         pnlAyuda.Visible = True
+        txtAyuda.Focus()
     End Sub
 
-    Private Sub mastxtHastaArt_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles mastxtHastaArt.MouseDoubleClick
+    Private Sub mastxtHastaArt_MouseDoubleClick(ByVal sender As Object, ByVal e As MouseEventArgs) Handles mastxtHastaArt.MouseDoubleClick
         _CargarDGV_Ayuda()
         Referencia = mastxtHastaArt
         pnlAyuda.Visible = True
+        txtAyuda.Focus()
     End Sub
 
-    Private Sub btnBuscarHasta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBuscarHasta.Click
+    Private Sub btnBuscarHasta_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnBuscarHasta.Click
         _CargarDGV_Ayuda()
         Referencia = mastxtHastaArt
         pnlAyuda.Visible = True
+        txtAyuda.Focus()
     End Sub
 
-    
-    Private Sub txtAyuda_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtAyuda.KeyUp
+    Private Sub txtAyuda_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtAyuda.KeyUp
         Dim tabla2 As DataTable = TryCast(DGV_Ayuda.DataSource, DataTable)
         If tabla2 IsNot Nothing Then
             tabla2.DefaultView.RowFilter = "Codigo LIKE '%" & txtAyuda.Text & "%' OR Descripcion LIKE '%" & txtAyuda.Text & "%'"
         End If
-        
+
     End Sub
 
-    Private Sub VerificacionDeVencimientosMP_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Me.Text = ""
+    Private Sub VerificacionDeVencimientosMP_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
+        Text = ""
         mastxtFecha.Text = Date.Today
-
+        pnlAyuda.Size = New Size(422, 229)
+        pnlAyuda.Location = New Point(12, 3)
     End Sub
 
-    Private Sub VerificacionDeVencimientosMP_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+    Private Sub VerificacionDeVencimientosMP_Shown(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Shown
         mastxtDesdeArt.Focus()
     End Sub
 End Class

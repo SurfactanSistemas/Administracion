@@ -125,6 +125,8 @@
 
         tabla.DefaultView.RowFilter = "Descripcion LIKE '%" & txtBuscador.Text & "%'"
 
+        _CambiarAnalistaLabXIniciales()
+
     End Sub
 
  

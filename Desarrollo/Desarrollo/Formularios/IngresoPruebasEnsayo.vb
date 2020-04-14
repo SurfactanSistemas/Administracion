@@ -3624,6 +3624,7 @@ Public Class IngresoPruebasEnsayo
             Try
                 _GenerarHojaPiloto()
 
+                imprimirReporteEnsayos()
                 'btnLimpiar.PerformClick()
 
             Catch ex As Exception
@@ -4857,6 +4858,7 @@ Public Class IngresoPruebasEnsayo
 
     Private Sub Button5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button5.Click
         If Val(txtHojaProduccion.Text) > 0 Then _ImprimirHojaPiloto()
+        imprimirReporteEnsayos()
     End Sub
 
     Private Sub dgvArchivos_RowHeaderMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgvArchivos.RowHeaderMouseClick
@@ -4874,6 +4876,23 @@ Public Class IngresoPruebasEnsayo
                 End Try
 
             End If
+        End With
+    End Sub
+
+    Private Sub btnImprimirEnsayosLab_Click(sender As Object, e As EventArgs) Handles btnImprimirEnsayosLab.Click
+
+        With VistaPrevia
+            .Reporte = New ReporteEnsayosLaboratorio()
+            .Formula = "{CargaEnsayoIV.Orden}='" & txtOrden.Text & "' AND {CargaEnsayoIV.Version}=" & txtVersion.Text & ""
+            .Mostrar()
+        End With
+    End Sub
+
+    Sub imprimirReporteEnsayos()
+        With VistaPrevia
+            .Reporte = New ReporteEnsayosLaboratorio()
+            .Formula = "{CargaEnsayoIV.Orden}='" & txtOrden.Text & "' AND {CargaEnsayoIV.Version}=" & txtVersion.Text & ""
+            .Imprimir()
         End With
     End Sub
 End Class

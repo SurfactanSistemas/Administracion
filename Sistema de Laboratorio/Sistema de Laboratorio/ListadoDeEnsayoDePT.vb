@@ -1,62 +1,21 @@
-﻿Imports System.Configuration
-Imports System.Data.SqlClient
-
-Public Class ListadoDeEnsayoDePT
+﻿Public Class ListadoDeEnsayoDePT
 
     Private Sub btnVolver_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVolver.Click
-        Me.Close()
+        Close()
     End Sub
-
-
 
     Private Sub btnAceptar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAceptar.Click
 
-        Dim cn As New SqlConnection(ConfigurationManager.ConnectionStrings("LOCAL").ToString())
-        cn.Open()
-        Dim sqlconsulta As String
-        sqlconsulta = "DELETE VerificaEnsayo"
-        Dim cmd As New SqlCommand(sqlconsulta, cn)
-        cmd.ExecuteNonQuery()
+        ExecuteNonQueries("Surfactan_II", {"DELETE VerificaEnsayo"})
 
-
-        sqlconsulta = "SELECT Producto, Ensayo1 , Valor1, Ensayo2 , Valor2, Ensayo3 , Valor3,"
-        sqlconsulta = sqlconsulta & " Ensayo4 , Valor4, Ensayo5 , Valor5,Ensayo6 , Valor6, "
-        sqlconsulta = sqlconsulta & " Ensayo7 , Valor7,Ensayo8 , Valor8, Ensayo9 , Valor9, Ensayo10 , Valor10 FROM EspecifUnifica"
-        Dim dr As SqlDataReader
-        cmd = New SqlCommand(sqlconsulta, cn)
-        dr = cmd.ExecuteReader()
-        Dim tablaReporte As New DataTable
-        With tablaReporte.Columns
-            .Add("Producto")
-            .Add("Ensayo")
-            .Add("Valor")
-        End With
-
-
-
-        If (dr.HasRows) Then
-            While (dr.Read())
-
-                For i As Integer = 1 To 10
-                    If (dr.Item("Ensayo" & i) >= Val(txtDesde.Text) And dr.Item("Ensayo" & i) <= Val(txtHasta.Text)) Then
-                        Dim row As DataRow = tablaReporte.NewRow()
-                        row("Producto") = dr.Item("Producto")
-                        row("Ensayo") = dr.Item("Ensayo" & i)
-                        row("Valor") = dr.Item("Valor" & i)
-                        tablaReporte.Rows.Add(row)
-                    End If
-
-                Next
-            End While
-
-        End If
+        Dim WDatos As DataTable = _ProcesarDatos(txtDesde.Text, txtHasta.Text, "Surfactan_II")
 
         With New VistaPrevia
             .Base = "SURFACTAN_II"
             .Reporte = New ReporteListadoEnsayosPT()
-            .Reporte.SetDataSource(tablaReporte)
+            .Reporte.SetDataSource(WDatos)
 
-            If (rabPantalla.Checked = True) Then
+            If rabPantalla.Checked Then
                 .Mostrar()
             Else
                 .Imprimir()
@@ -66,29 +25,113 @@ Public Class ListadoDeEnsayoDePT
 
     End Sub
 
+    Private Function _ProcesarDatos(ByVal Desde As String, ByVal Hasta As String, ByVal Base As String) As DataTable
+        Dim WDatos As DataTable = New DBAuxi.VerificaEnsayosDataTable
+        Dim WDatosI As DataTable
+
+        Dim WColumnasI, WFiltroI, WFiltroII As String
+
+        WColumnasI = ""
+        WFiltroI = ""
+        WFiltroII = ""
+
+        For i = 1 To 10
+            WFiltroI &= String.Format("e.Ensayo{0} BETWEEN '{1}' And '{2}' OR ", i, Desde, Hasta)
+            WColumnasI &= String.Format("e.Ensayo{0}, e.Valor{0}, e.Valor{0}{0},", i)
+        Next
+
+        WFiltroI = WFiltroI.Trim.Substring(0, WFiltroI.Trim.LastIndexOf("OR"))
+        WColumnasI = WColumnasI.Trim.TrimEnd(",")
+
+        WFiltroII = ""
+
+        If Not ckPt.Checked And Not ckSe.Checked And Not ckNk.Checked Then
+            ckPt.Checked = True
+            ckSe.Checked = True
+            ckNk.Checked = True
+        End If
+
+        If ckPt.Checked Then WFiltroII &= "'PT',"
+        If ckSe.Checked Then WFiltroII &= "'SE',"
+        If ckNk.Checked Then WFiltroII &= "'NK',"
+
+        If WFiltroII.Trim.EndsWith(",") Then WFiltroII = WFiltroII.Trim.TrimEnd(",")
+
+        WDatosI = GetAll("SELECT e.Producto, a.Descripcion, " & WColumnasI & " FROM EspecifUnifica e INNER JOIN Terminado a ON a.Codigo = e.Producto WHERE LEFT(e.Producto, 2) IN (" & WFiltroII & ") AND (" & WFiltroI & ")", Base)
+
+        For Each row As DataRow In WDatosI.Rows
+            With row
+
+                For i = 1 To 10
+                    If OrDefault(.Item("Ensayo" & i), 0) >= Val(Desde) And OrDefault(.Item("Ensayo" & i), 0) <= Val(Hasta) Then
+                        Dim r As DataRow = WDatos.NewRow
+
+                        r.Item("Ensayo") = Trim(OrDefault(.Item("Ensayo" & i), 0))
+                        r.Item("DescEnsayo") = "" '
+                        r.Item("Producto") = Trim(OrDefault(.Item("Producto"), "")).ToUpper
+                        r.Item("Descripcion") = Trim(OrDefault(.Item("Descripcion"), "")).ToUpper
+                        r.Item("Resultado") = Trim(OrDefault(.Item("Valor" & i), "")) & " " & Trim(OrDefault(.Item("Valor" & i & i), ""))
+                        r.Item("Resultado") = r.Item("Resultado").ToString.Trim
+                        WDatos.Rows.Add(r)
+                    End If
+                Next
+
+            End With
+        Next
+
+        Dim WEnsayos As DataTable = (New DataView(WDatos)).ToTable(True, "Ensayo")
+
+        For Each row As DataRow In WEnsayos.Rows
+            Dim WDescripcion As String = ""
+            Dim WEnsayo As DataRow = GetSingle("SELECT Descripcion FROM Ensayos WHERE Codigo = '" & row.Item("Ensayo") & "'", Base)
+
+            If WEnsayo IsNot Nothing Then
+                WDescripcion = Trim(OrDefault(WEnsayo.Item("Descripcion"), ""))
+
+                For Each r As DataRow In WDatos.Select("Ensayo = " & row.Item("Ensayo"))
+                    r.Item("DescEnsayo") = WDescripcion.ToUpper
+                Next
+            End If
+        Next
+
+        Return WDatos
+
+    End Function
+
     Private Sub txtDesde_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDesde.KeyDown
         Select Case e.KeyData
             Case Keys.Enter
+                If Val(txtDesde.Text) = 0 Then Exit Sub
+
+                lblDescEnsayoI.Text = _TraerDescripcionEnsayo(txtDesde.Text)
+
                 txtHasta.Focus()
+
+            Case Keys.Escape
+                txtDesde.Text = ""
         End Select
     End Sub
 
-    Private Sub ListadoDeEnsayoDePT_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Me.Text = ""
-        txtDesde.Focus()
-    End Sub
+    Private Function _TraerDescripcionEnsayo(ByVal Ensayo As String)
 
+        Dim WEnsayo As DataRow = GetSingle("SELECT Descripcion FROM Ensayos WHERE Codigo = '" & Ensayo & "'", "Surfactan_II")
+
+        Return IIf(WEnsayo IsNot Nothing, OrDefault(WEnsayo.Item("Descripcion"), ""), "").ToString.Trim.ToUpper
+
+    End Function
+    
     Private Sub txtHasta_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtHasta.KeyDown
         Select Case e.KeyData
             Case Keys.Enter
-                If (txtHasta.Text = "") Then
-                    txtHasta.Text = txtDesde.Text
-                End If
+                If Val(txtHasta.Text) = 0 Then txtHasta.Text = txtDesde.Text
+                lblDescEnsayoII.Text = _TraerDescripcionEnsayo(txtHasta.Text)
 
+                txtDesde.Focus()
+
+            Case Keys.Escape
+                txtHasta.Text = ""
         End Select
     End Sub
-
-
 
     Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtDesde.KeyPress, txtHasta.KeyPress
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
@@ -96,6 +139,7 @@ Public Class ListadoDeEnsayoDePT
         End If
     End Sub
 
-
-
+    Private Sub ListadoDeEnsayoDePT_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        txtDesde.Focus()
+    End Sub
 End Class

@@ -2505,6 +2505,9 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
     End Sub
 
     Private Sub btnNotas_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNotas.Click
+
+        If txtTerminado.Text.Replace(" ", "").Length < 12 Then Exit Sub
+
         With New NotasCertificadosAnalisis(txtTerminado.Text)
             .Show(Me)
         End With

@@ -1,10 +1,6 @@
-﻿Imports System.Diagnostics.Eventing.Reader
-Imports System.Drawing.Text
+﻿Public Class MovimientosVariosDeLaboratorio
 
-Public Class MovimientosVariosDeLaboratorio
-
-
-    Private Sub cbxMP_DropDownClosed(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxMP.DropDownClosed
+    Private Sub cbxMP_DropDownClosed(ByVal sender As Object, ByVal e As EventArgs) Handles cbxMP.DropDownClosed
         If cbxMP.SelectedIndex = 0 Then
             mastxtCodigo.Text = ""
             mastxtCodigo.BackColor = SystemColors.Window
@@ -21,11 +17,11 @@ Public Class MovimientosVariosDeLaboratorio
         End If
     End Sub
 
-    Private Sub btnVolver_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVolver.Click
-        Me.Close()
+    Private Sub btnVolver_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnVolver.Click
+        Close()
     End Sub
 
-    Private Sub cbxMP_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cbxMP.KeyDown
+    Private Sub cbxMP_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles cbxMP.KeyDown
         Select Case e.KeyData
             Case Keys.Enter
                 If cbxMP.Text = "M" Then
@@ -44,8 +40,8 @@ Public Class MovimientosVariosDeLaboratorio
         End Select
     End Sub
 
-    Private Sub MovimientosVariosDeLaboratorio_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Me.Text = ""
+    Private Sub MovimientosVariosDeLaboratorio_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
+        Text = ""
         pnlContra.Visible = False
         pnlAyuda.Visible = False
         txtNroMovimiento.Text = 0
@@ -64,11 +60,11 @@ Public Class MovimientosVariosDeLaboratorio
         Return Row.Item("Codigo")
     End Function
 
-    Private Sub MovimientosVariosDeLaboratorio_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+    Private Sub MovimientosVariosDeLaboratorio_Shown(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Shown
         txtObservaciones.Focus()
     End Sub
 
-    Private Sub cbxTipoMovimiento_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cbxTipoMovimiento.KeyDown
+    Private Sub cbxTipoMovimiento_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles cbxTipoMovimiento.KeyDown
         Select Case e.KeyData
             Case Keys.Enter
                 If cbxTipoMovimiento.Text = "Entrada" Then
@@ -80,14 +76,14 @@ Public Class MovimientosVariosDeLaboratorio
         End Select
     End Sub
 
-    Private Sub txtObservaciones_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtObservaciones.KeyDown
+    Private Sub txtObservaciones_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtObservaciones.KeyDown
         Select Case e.KeyData
             Case Keys.Enter
                 mastxtCodigo.Focus()
         End Select
     End Sub
 
-    Private Sub mastxtCodigo_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles mastxtCodigo.KeyDown
+    Private Sub mastxtCodigo_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles mastxtCodigo.KeyDown
         Select Case e.KeyData
             Case Keys.Enter
                 If cbxMP.Text = "M" Then
@@ -113,103 +109,78 @@ Public Class MovimientosVariosDeLaboratorio
         End Select
     End Sub
 
-    Private Sub txtCantidad_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCantidad.KeyDown
+    Private Sub txtCantidad_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtCantidad.KeyDown
         Select Case e.KeyData
             Case Keys.Enter
-                If txtCantidad.Text <> "" Then
-                    If txtCantidad.Text > 0 Then
-                        txtCantidad.Text = formatonumerico(txtCantidad.Text)
-                        txtLote.Focus()
-                    End If
+                If Val(txtCantidad.Text) > 0 Then
+                    txtCantidad.Text = formatonumerico(txtCantidad.Text)
+                    txtLote.Focus()
                 End If
-
         End Select
     End Sub
 
-
-
-    Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtLote.KeyPress, mastxtFecha.KeyPress, txtNroMovimiento.KeyPress
+    Private Sub SoloNumero(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txtLote.KeyPress, mastxtFecha.KeyPress, txtNroMovimiento.KeyPress
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
             e.Handled = True
         End If
     End Sub
 
-
-
-    Private Sub NumerosConComas(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtCantidad.KeyPress
+    Private Sub NumerosConComas(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txtCantidad.KeyPress
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) And Not (CChar(".")) = e.KeyChar Then
             e.Handled = True
         End If
     End Sub
 
     Private Function _BuscarArticuloPT() As String
-        Dim SQLCnslt As String
-        If cbxMP.Text = "M" Then
-            SQLCnslt = "SELECT Descripcion FROM Articulo WHERE Codigo = '" & mastxtCodigo.Text & "'"
-        Else
-            SQLCnslt = "SELECT Descripcion FROM Terminado WHERE Codigo = '" & mastxtCodigo.Text & "'"
-        End If
-
+        Dim SQLCnslt As String = IIf(cbxMP.Text = "M", "SELECT Descripcion FROM Articulo WHERE Codigo = '" & mastxtCodigo.Text & "'", "SELECT Descripcion FROM Terminado WHERE Codigo = '" & mastxtCodigo.Text & "'")
+        
         Dim row As DataRow = GetSingle(SQLCnslt)
-        If row IsNot Nothing Then
-            Return row.Item("Descripcion")
-        Else
-            Return ""
-        End If
+
+        If row IsNot Nothing Then Return row.Item("Descripcion")
+        
+        Return ""
 
     End Function
 
-    Private Sub cbxTipoMovimiento_DropDownClosed(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxTipoMovimiento.DropDownClosed
-        If cbxTipoMovimiento.Text = "Entrada" Then
-            txtES.Text = "E"
-        Else
-            txtES.Text = "S"
-        End If
+    Private Sub cbxTipoMovimiento_DropDownClosed(ByVal sender As Object, ByVal e As EventArgs) Handles cbxTipoMovimiento.DropDownClosed
+        txtES.Text = IIf(cbxTipoMovimiento.Text = "Entrada", "E", "S")
     End Sub
 
-    Private Sub txtLote_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtLote.KeyDown
+    Private Sub txtLote_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtLote.KeyDown
 
         Select Case e.KeyData
             Case Keys.Enter
-                If txtNroMovimiento.Text <> "" And mastxtFecha.Text.Replace("/", "").Trim <> "" And txtDescripcion.Text <> "" Then
-                    If txtCantidad.Text <> "" And Val(txtCantidad.Text) > "0" Then
-                        If txtLote.Text <> "" Then
-                            If txtES.Text = "S" Then
-                                Dim stockActual As String = _ConsultarStock(txtLote.Text, cbxMP.Text)
-                                If stockActual <> "" AndAlso stockActual >= txtCantidad.Text Then
-                                    _AgregarFila()
-                                    _LimpiarAndPosition()
-                                Else
-                                    If stockActual = "" Then
-                                        MsgBox("Laudo/Hoja inexistente")
-                                    Else
-                                        MsgBox("Saldo insuficiente para descontar esa cantidad. Saldo Actual: " & stockActual)
-                                    End If
+                Dim WDatosValidos As Boolean = Val(txtNroMovimiento.Text) <> 0 And mastxtFecha.Text.Replace(" ", "").Length = 10 _
+                                               And txtDescripcion.Text <> "" AndAlso Val(txtCantidad.Text) > 0 AndAlso txtLote.Text <> "" _
+                                               AndAlso txtES.Text = "S"
 
-                                End If
-                            Else
-                                _AgregarFila()
-                                _LimpiarAndPosition()
+                If WDatosValidos Then
 
-                            End If
-                        End If
+                    Dim stockActual As String = _ConsultarStock(txtLote.Text)
+
+                    If stockActual <> "" AndAlso stockActual >= txtCantidad.Text Then
+                        _AgregarFila()
+                        _LimpiarAndPosition()
+                    ElseIf stockActual = "" Then
+                        MsgBox("Laudo/Hoja inexistente")
+                    Else
+                        MsgBox("Saldo insuficiente para descontar esa cantidad. Saldo Actual: " & stockActual)
                     End If
+
+                Else
+                    _AgregarFila()
+                    _LimpiarAndPosition()
                 End If
         End Select
     End Sub
 
-    Private Function _ConsultarStock(ByVal Lote As String, ByVal tipo As String) As String
-        Dim SQLCnslt As String
-        If cbxMP.Text = "M" Then
-            SQLCnslt = "SELECT Saldo FROM Laudo WHERE Laudo = '" & Lote & "' AND Renglon = 1"
-        Else
-            SQLCnslt = "SELECT Saldo FROM Hoja WHERE hoja = '" & Lote & "' AND Renglon = 1"
-        End If
+    Private Function _ConsultarStock(ByVal wLote As String) As String
+        Dim SQLCnslt As String = IIf(cbxMP.Text = "M", "SELECT Saldo FROM Laudo WHERE Laudo = '" & wLote & "' AND Renglon = 1", "SELECT Saldo FROM Hoja WHERE hoja = '" & wLote & "' AND Renglon = 1")
 
         Dim Row As DataRow = GetSingle(SQLCnslt)
-        If Row IsNot Nothing Then
-            Return Row.Item("Saldo")
-        End If
+
+        If Row IsNot Nothing Then Return Row.Item("Saldo")
+
         Return ""
 
     End Function
@@ -223,68 +194,67 @@ Public Class MovimientosVariosDeLaboratorio
     End Sub
 
     Private Sub _AgregarFila()
+
         DGV_Movimientos.Rows.Add()
-        DGV_Movimientos.Rows(DGV_Movimientos.Rows.Count - 1).Cells("Tipo").Value = cbxMP.Text
-        If cbxMP.Text = "T" Then
-            DGV_Movimientos.Rows(DGV_Movimientos.Rows.Count - 1).Cells("ProdTerminado").Value = mastxtCodigo.Text
-        Else
-            DGV_Movimientos.Rows(DGV_Movimientos.Rows.Count - 1).Cells("ProdTerminado").Value = "  -     -   "
 
-        End If
-        If cbxMP.Text = "M" Then
-            DGV_Movimientos.Rows(DGV_Movimientos.Rows.Count - 1).Cells("MateriaPrima").Value = mastxtCodigo.Text
-        Else
-            DGV_Movimientos.Rows(DGV_Movimientos.Rows.Count - 1).Cells("MateriaPrima").Value = "  -   -   "
-        End If
-        DGV_Movimientos.Rows(DGV_Movimientos.Rows.Count - 1).Cells("Descripcion").Value = txtDescripcion.Text
-        DGV_Movimientos.Rows(DGV_Movimientos.Rows.Count - 1).Cells("Cantidad").Value = txtCantidad.Text
-        DGV_Movimientos.Rows(DGV_Movimientos.Rows.Count - 1).Cells("Movimiento").Value = txtES.Text
-        DGV_Movimientos.Rows(DGV_Movimientos.Rows.Count - 1).Cells("Lote").Value = txtLote.Text
-    End Sub
+        Dim index As Integer = DGV_Movimientos.Rows.Count - 1
 
+        With DGV_Movimientos.Rows(index)
 
-    Private Sub cbxTipoMovimiento_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxTipoMovimiento.Leave
-        If cbxTipoMovimiento.Text = "Entrada" Then
-            txtES.Text = "E"
-        Else
-            txtES.Text = "S"
-        End If
-    End Sub
+            .Cells("Tipo").Value = cbxMP.Text
 
-    Private Sub btnGrabar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGrabar.Click
-        If Val(txtNroMovimiento.Text) = 0 Then
-            If ValidaFecha(mastxtFecha.Text) = "S" Then
-                pnlContra.Visible = True
-                txtContrasena.Focus()
+            If cbxMP.Text = "T" Then
+                .Cells("ProdTerminado").Value = mastxtCodigo.Text
+                .Cells("MateriaPrima").Value = "  -   -   "
             Else
-                MsgBox("La fecha es invalida, verifique que sea una fecha real")
-                mastxtFecha.Focus()
+                .Cells("MateriaPrima").Value = mastxtCodigo.Text
+                .Cells("ProdTerminado").Value = "  -     -   "
             End If
 
+            .Cells("Descripcion").Value = txtDescripcion.Text
+            .Cells("Cantidad").Value = txtCantidad.Text
+            .Cells("Movimiento").Value = txtES.Text
+            .Cells("Lote").Value = txtLote.Text
 
-        Else
-            If DGV_Movimientos.Rows.Count > 0 Then
-                MsgBox("El Nro. Movimiento debe ser valor 0 para poder grabar")
-            End If
+        End With
+    End Sub
+
+    Private Sub cbxTipoMovimiento_Leave(ByVal sender As Object, ByVal e As EventArgs) Handles cbxTipoMovimiento.Leave
+        txtES.Text = IIf(cbxTipoMovimiento.Text = "Entrada", "E", "S")
+    End Sub
+
+    Private Sub btnGrabar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnGrabar.Click
+
+        If Val(txtNroMovimiento.Text) <> 0 AndAlso DGV_Movimientos.Rows.Count > 0 Then
+
+            MsgBox("El Nro. Movimiento debe ser valor 0 para poder grabar", MsgBoxStyle.Exclamation)
+            Exit Sub
+
+        ElseIf Not ValidaFecha(mastxtFecha.Text) = "S" Then
+
+            MsgBox("La fecha es invalida, verifique que sea una fecha real")
+            mastxtFecha.Focus()
+            Exit Sub
+
         End If
 
+        pnlContra.Visible = True
+        txtContrasena.Focus()
 
     End Sub
 
-    Private Sub txtContrasena_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtContrasena.KeyDown
+    Private Sub txtContrasena_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtContrasena.KeyDown
         Select Case e.KeyData
             Case Keys.Enter
-                If UCase(txtContrasena.Text) = "AUTORIZO" Then
-                    If DGV_Movimientos.Rows.Count > 0 Then
-                        _GrabarMovimientos()
-                    End If
+                If UCase(txtContrasena.Text) = "AUTORIZO" AndAlso DGV_Movimientos.Rows.Count > 0 Then
+                    _GrabarMovimientos()
                 Else
                     txtContrasena.Text = ""
                 End If
         End Select
     End Sub
 
-    Private Sub btnpnlVolver_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnpnlVolver.Click
+    Private Sub btnpnlVolver_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnpnlVolver.Click
         pnlContra.Visible = False
         txtContrasena.Text = ""
     End Sub
@@ -304,7 +274,6 @@ Public Class MovimientosVariosDeLaboratorio
         For Each DGC_Row As DataGridViewRow In DGV_Movimientos.Rows
             With DGC_Row
 
-
                 WDate = Date.Now.ToString("MM-dd-yyyy")
 
                 Select Case .Cells("Tipo").Value
@@ -322,12 +291,9 @@ Public Class MovimientosVariosDeLaboratorio
                                 Entradas = formatonumerico(datarow.Item("Entradas"))
                             End If
 
-
                             SQLCnslt = "UPDATE Articulo SET Entradas = '" & Entradas & "',Salidas = '" & Salidas & "',Wdate = '" & WDate & "' WHERE Codigo = '" & Codigo & "'"
 
-
                             listaSQLCnslt.Add(SQLCnslt)
-
 
                             If Controla = 0 And Val(.Cells("Lote").Value) <> 0 Then
 
@@ -346,8 +312,6 @@ Public Class MovimientosVariosDeLaboratorio
 
                                     listaSQLCnslt.Add(SQLCnslt)
                                 End If
-
-
 
                             Else
                                 SQLCnslt = "SELECT Clave, Saldo FROM Guia WHERE Articulo = '" & .Cells("MateriaPrima").Value & "' AND Laudo = '" & .Cells("Lote").Value & "' AND Saldo > 0"
@@ -426,7 +390,6 @@ Public Class MovimientosVariosDeLaboratorio
                         End If
                 End Select
 
-
                 Renglon += 1
                 Dim RenglonConCeros As String = Renglon.ToString().PadLeft(2, "0")
                 Dim NroMoviConCeros As String = txtNroMovimiento.Text.PadLeft(6, "0")
@@ -436,10 +399,10 @@ Public Class MovimientosVariosDeLaboratorio
                 Dim Marca As String = ""
 
                 SQLCnslt = "INSERT INTO Movlab (Clave, Codigo, Renglon, Fecha, Tipo, Articulo, Terminado, Cantidad, FechaOrd, Movi, Tipomov, Observaciones, Wdate, Marca, Lote) "
-                SQLCnslt = SQLCnslt & "VALUES('" & Clave & "', '" & txtNroMovimiento.Text & "', '" & Renglon & "', '" & mastxtFecha.Text & "', '" & .Cells("Tipo").Value & "', "
-                SQLCnslt = SQLCnslt & "'" & .Cells("MateriaPrima").Value & "', '" & .Cells("ProdTerminado").Value & "', '" & .Cells("Cantidad").Value & "', '" & FechaOrd & "', "
-                SQLCnslt = SQLCnslt & "'" & .Cells("Movimiento").Value & "', '" & TipoMov & "', '" & txtObservaciones.Text & "', '" & WDate & "', '" & Marca & "', "
-                SQLCnslt = SQLCnslt & "'" & .Cells("Lote").Value & "')"
+                SQLCnslt &= "VALUES('" & Clave & "', '" & txtNroMovimiento.Text & "', '" & Renglon & "', '" & mastxtFecha.Text & "', '" & .Cells("Tipo").Value & "', "
+                SQLCnslt &= "'" & .Cells("MateriaPrima").Value & "', '" & .Cells("ProdTerminado").Value & "', '" & .Cells("Cantidad").Value & "', '" & FechaOrd & "', "
+                SQLCnslt &= "'" & .Cells("Movimiento").Value & "', '" & TipoMov & "', '" & txtObservaciones.Text & "', '" & WDate & "', '" & Marca & "', "
+                SQLCnslt &= "'" & .Cells("Lote").Value & "')"
 
                 listaSQLCnslt.Add(SQLCnslt)
 
@@ -452,8 +415,7 @@ Public Class MovimientosVariosDeLaboratorio
         btnpnlVolver_Click(Nothing, Nothing)
     End Sub
 
-
-    Private Sub txtNroMovimiento_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtNroMovimiento.KeyDown
+    Private Sub txtNroMovimiento_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtNroMovimiento.KeyDown
         Select Case e.KeyData
             Case Keys.Enter
                 If txtNroMovimiento.Text <> "" Then
@@ -476,7 +438,7 @@ Public Class MovimientosVariosDeLaboratorio
                         End If
 
                     End If
-                    
+
                 End If
         End Select
     End Sub
@@ -493,47 +455,43 @@ Public Class MovimientosVariosDeLaboratorio
         mastxtFecha.Text = Date.Today
         txtNroMovimiento.Text = 0
         txtNroMovimiento.Focus()
+        btnGrabar.Enabled = True
     End Sub
 
     Private Sub _ProcesoBusquedaMovVarios()
         Dim SQLCnslt As String = "SELECT Tipo, Terminado, Articulo, Cantidad, Movi, Lote, Observaciones, Fecha FROM Movlab WHERE Codigo = '" & txtNroMovimiento.Text & "' ORDER BY Renglon"
-        Dim Descripcion As String
+        Dim WDescripcion As String
         Dim tabla As DataTable = GetAll(SQLCnslt)
         If tabla.Rows.Count > 0 Then
             mastxtFecha.Text = tabla.Rows(0).Item("Fecha")
             txtObservaciones.Text = tabla.Rows(0).Item("Observaciones")
+            btnGrabar.Enabled = False
             For Each row As DataRow In tabla.Rows
                 With row
-                    Descripcion = _BuscarDescripcion(.Item("Tipo"), .Item("Terminado"), .Item("Articulo"))
-                    DGV_Movimientos.Rows.Add(.Item("Tipo"), .Item("Terminado"), .Item("Articulo"), Descripcion, .Item("Cantidad"), .Item("Movi"), .Item("Lote"))
+                    WDescripcion = _BuscarDescripcion(.Item("Tipo"), .Item("Terminado"), .Item("Articulo"))
+                    DGV_Movimientos.Rows.Add(.Item("Tipo"), .Item("Terminado"), .Item("Articulo"), WDescripcion, .Item("Cantidad"), .Item("Movi"), .Item("Lote"))
                 End With
 
             Next
         End If
     End Sub
 
-    Private Function _BuscarDescripcion(ByVal Tipo As String, ByVal Terminado As String, ByVal Articulo As String) As String
-        Dim SQLCnslt As String
-        If Tipo = "M" Then
-            SQLCnslt = "SELECT Descripcion FROM Articulo WHERE Codigo = '" & Articulo & "'"
-        Else
-            SQLCnslt = "SELECT Descripcion FROM Terminado WHERE Codigo = '" & Terminado & "'"
-        End If
+    Private Function _BuscarDescripcion(ByVal WTipo As String, ByVal Terminado As String, ByVal Articulo As String) As String
+        Dim SQLCnslt As String = IIf(WTipo = "M", "SELECT Descripcion FROM Articulo WHERE Codigo = '" & Articulo & "'", "SELECT Descripcion FROM Terminado WHERE Codigo = '" & Terminado & "'")
+
         Dim row As DataRow = GetSingle(SQLCnslt)
-        If row IsNot Nothing Then
-            Return row.Item("Descripcion")
-        Else
-            Return ""
-        End If
+        If row IsNot Nothing Then Return row.Item("Descripcion")
+
+        Return ""
 
     End Function
 
-    Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
+    Private Sub btnLimpiar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLimpiar.Click
         _LimpiarForm()
         txtNroMovimiento.Focus()
     End Sub
 
-    Private Sub mastxtFecha_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles mastxtFecha.KeyDown
+    Private Sub mastxtFecha_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles mastxtFecha.KeyDown
         Select Case e.KeyData
             Case Keys.Enter
                 If ValidaFecha(mastxtFecha.Text) = "S" Then
@@ -545,11 +503,11 @@ Public Class MovimientosVariosDeLaboratorio
         End Select
     End Sub
 
-    Private Sub btnpnlAyudaVolver_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnpnlAyudaVolver.Click
+    Private Sub btnpnlAyudaVolver_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnpnlAyudaVolver.Click
         pnlAyuda.Visible = False
     End Sub
 
-    Private Sub btnAyuda_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAyuda.Click
+    Private Sub btnAyuda_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAyuda.Click
         pnlAyuda.Visible = True
         cbxAyuda.SelectedIndex = 0
 
@@ -560,7 +518,7 @@ Public Class MovimientosVariosDeLaboratorio
         DGV_Ayuda.DataSource = tabla
     End Sub
 
-    Private Sub cbxAyuda_DropDownClosed(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxAyuda.DropDownClosed
+    Private Sub cbxAyuda_DropDownClosed(ByVal sender As Object, ByVal e As EventArgs) Handles cbxAyuda.DropDownClosed
         Dim SQLCnslt As String
         If cbxAyuda.SelectedIndex = 0 Then
             SQLCnslt = "SELECT CodigoAyuda = Codigo, DescripcionAyuda = Descripcion FROM Articulo"
@@ -579,15 +537,14 @@ Public Class MovimientosVariosDeLaboratorio
 
     End Sub
 
-    Private Sub txtAyuda_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtAyuda.KeyUp
+    Private Sub txtAyuda_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtAyuda.KeyUp
         Dim tabla As DataTable = TryCast(DGV_Ayuda.DataSource, DataTable)
 
         tabla.DefaultView.RowFilter = "CodigoAyuda LIKE '%" & txtAyuda.Text & "%' or DescripcionAyuda LIKE '%" & txtAyuda.Text & "%'"
         DGV_Ayuda.DataSource = tabla
     End Sub
 
-   
-    Private Sub DGV_Ayuda_CellMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles DGV_Ayuda.CellMouseDoubleClick
+    Private Sub DGV_Ayuda_CellMouseDoubleClick(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles DGV_Ayuda.CellMouseDoubleClick
 
         If cbxAyuda.SelectedIndex = 0 Then
             cbxMP.SelectedIndex = 0
@@ -601,8 +558,6 @@ Public Class MovimientosVariosDeLaboratorio
         pnlAyuda.Visible = False
 
         mastxtCodigo_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
-
-
 
     End Sub
 End Class

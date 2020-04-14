@@ -22,7 +22,7 @@ Partial Class VerificacionDeVencimientosMP
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.mastxtFecha = New System.Windows.Forms.MaskedTextBox()
         Me.mastxtDesdeArt = New System.Windows.Forms.MaskedTextBox()
         Me.mastxtHastaArt = New System.Windows.Forms.MaskedTextBox()
@@ -44,109 +44,106 @@ Partial Class VerificacionDeVencimientosMP
         Me.pnlAyuda = New System.Windows.Forms.Panel()
         Me.txtAyuda = New System.Windows.Forms.TextBox()
         Me.btnPnlVolver = New System.Windows.Forms.Button()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.Label7 = New System.Windows.Forms.Label()
         Me.DGV_Ayuda = New ConsultasVarias.DBDataGridView()
         Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         Me.pnlAyuda.SuspendLayout()
-        Me.Panel2.SuspendLayout()
         CType(Me.DGV_Ayuda, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'mastxtFecha
         '
-        Me.mastxtFecha.Location = New System.Drawing.Point(119, 76)
+        Me.mastxtFecha.Location = New System.Drawing.Point(123, 67)
         Me.mastxtFecha.Mask = "00/00/0000"
         Me.mastxtFecha.Name = "mastxtFecha"
         Me.mastxtFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.mastxtFecha.Size = New System.Drawing.Size(100, 20)
+        Me.mastxtFecha.Size = New System.Drawing.Size(74, 20)
         Me.mastxtFecha.TabIndex = 0
         Me.mastxtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'mastxtDesdeArt
         '
-        Me.mastxtDesdeArt.Location = New System.Drawing.Point(119, 117)
+        Me.mastxtDesdeArt.Location = New System.Drawing.Point(124, 96)
         Me.mastxtDesdeArt.Mask = ">LL-000-000"
         Me.mastxtDesdeArt.Name = "mastxtDesdeArt"
         Me.mastxtDesdeArt.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.mastxtDesdeArt.Size = New System.Drawing.Size(100, 20)
+        Me.mastxtDesdeArt.Size = New System.Drawing.Size(73, 20)
         Me.mastxtDesdeArt.TabIndex = 1
         Me.mastxtDesdeArt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'mastxtHastaArt
         '
-        Me.mastxtHastaArt.Location = New System.Drawing.Point(119, 156)
+        Me.mastxtHastaArt.Location = New System.Drawing.Point(286, 96)
         Me.mastxtHastaArt.Mask = ">LL-000-000"
         Me.mastxtHastaArt.Name = "mastxtHastaArt"
         Me.mastxtHastaArt.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.mastxtHastaArt.Size = New System.Drawing.Size(100, 20)
+        Me.mastxtHastaArt.Size = New System.Drawing.Size(73, 20)
         Me.mastxtHastaArt.TabIndex = 2
         Me.mastxtHastaArt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtDias
         '
-        Me.txtDias.Location = New System.Drawing.Point(119, 199)
+        Me.txtDias.Location = New System.Drawing.Point(123, 134)
         Me.txtDias.MaxLength = 3
         Me.txtDias.Name = "txtDias"
-        Me.txtDias.Size = New System.Drawing.Size(100, 20)
+        Me.txtDias.Size = New System.Drawing.Size(74, 20)
         Me.txtDias.TabIndex = 3
-        Me.txtDias.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtDias.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'btnAceptar
         '
-        Me.btnAceptar.Location = New System.Drawing.Point(389, 97)
+        Me.btnAceptar.Location = New System.Drawing.Point(101, 180)
         Me.btnAceptar.Name = "btnAceptar"
-        Me.btnAceptar.Size = New System.Drawing.Size(75, 23)
+        Me.btnAceptar.Size = New System.Drawing.Size(125, 47)
         Me.btnAceptar.TabIndex = 4
-        Me.btnAceptar.Text = "Aceptar"
+        Me.btnAceptar.Text = "ACEPTAR"
         Me.btnAceptar.UseVisualStyleBackColor = True
         '
         'btnVolver
         '
-        Me.btnVolver.Location = New System.Drawing.Point(389, 138)
+        Me.btnVolver.Location = New System.Drawing.Point(232, 180)
         Me.btnVolver.Name = "btnVolver"
-        Me.btnVolver.Size = New System.Drawing.Size(75, 23)
+        Me.btnVolver.Size = New System.Drawing.Size(125, 47)
         Me.btnVolver.TabIndex = 5
-        Me.btnVolver.Text = "Volver"
+        Me.btnVolver.Text = "CERRAR"
         Me.btnVolver.UseVisualStyleBackColor = True
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(27, 79)
+        Me.Label1.Location = New System.Drawing.Point(71, 71)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(37, 13)
+        Me.Label1.Size = New System.Drawing.Size(42, 13)
         Me.Label1.TabIndex = 7
-        Me.Label1.Text = "Fecha"
+        Me.Label1.Text = "FECHA"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(25, 120)
+        Me.Label2.Location = New System.Drawing.Point(69, 99)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(76, 13)
+        Me.Label2.Size = New System.Drawing.Size(44, 13)
         Me.Label2.TabIndex = 8
-        Me.Label2.Text = "Desde Articulo"
+        Me.Label2.Text = "DESDE"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(27, 159)
+        Me.Label3.Location = New System.Drawing.Point(237, 99)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(70, 13)
+        Me.Label3.Size = New System.Drawing.Size(43, 13)
         Me.Label3.TabIndex = 9
-        Me.Label3.Text = "HastaArticulo"
+        Me.Label3.Text = "HASTA"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(27, 201)
+        Me.Label4.Location = New System.Drawing.Point(79, 134)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(28, 13)
+        Me.Label4.Size = New System.Drawing.Size(32, 13)
         Me.Label4.TabIndex = 10
-        Me.Label4.Text = "Dias"
+        Me.Label4.Text = "DIAS"
         '
         'Panel1
         '
@@ -156,7 +153,7 @@ Partial Class VerificacionDeVencimientosMP
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(496, 70)
+        Me.Panel1.Size = New System.Drawing.Size(458, 52)
         Me.Panel1.TabIndex = 11
         '
         'Label6
@@ -164,11 +161,11 @@ Partial Class VerificacionDeVencimientosMP
         Me.Label6.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label6.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label6.Location = New System.Drawing.Point(12, 9)
+        Me.Label6.Location = New System.Drawing.Point(14, 17)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(246, 20)
+        Me.Label6.Size = New System.Drawing.Size(201, 18)
         Me.Label6.TabIndex = 2
         Me.Label6.Text = "Verificacion de Vencimientos "
         '
@@ -177,11 +174,11 @@ Partial Class VerificacionDeVencimientosMP
         Me.Label5.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label5.Location = New System.Drawing.Point(305, 35)
+        Me.Label5.Location = New System.Drawing.Point(289, 16)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(179, 24)
+        Me.Label5.Size = New System.Drawing.Size(155, 20)
         Me.Label5.TabIndex = 1
         Me.Label5.Text = "SURFACTAN S.A."
         '
@@ -189,30 +186,30 @@ Partial Class VerificacionDeVencimientosMP
         '
         Me.rabtnPantalla.AutoSize = True
         Me.rabtnPantalla.Checked = True
-        Me.rabtnPantalla.Location = New System.Drawing.Point(271, 121)
+        Me.rabtnPantalla.Location = New System.Drawing.Point(214, 69)
         Me.rabtnPantalla.Name = "rabtnPantalla"
-        Me.rabtnPantalla.Size = New System.Drawing.Size(63, 17)
+        Me.rabtnPantalla.Size = New System.Drawing.Size(80, 17)
         Me.rabtnPantalla.TabIndex = 12
         Me.rabtnPantalla.TabStop = True
-        Me.rabtnPantalla.Text = "Pantalla"
+        Me.rabtnPantalla.Text = "PANTALLA"
         Me.rabtnPantalla.UseVisualStyleBackColor = True
         '
         'rabtnImpresora
         '
         Me.rabtnImpresora.AutoSize = True
-        Me.rabtnImpresora.Location = New System.Drawing.Point(271, 166)
+        Me.rabtnImpresora.Location = New System.Drawing.Point(300, 69)
         Me.rabtnImpresora.Name = "rabtnImpresora"
-        Me.rabtnImpresora.Size = New System.Drawing.Size(71, 17)
+        Me.rabtnImpresora.Size = New System.Drawing.Size(89, 17)
         Me.rabtnImpresora.TabIndex = 13
-        Me.rabtnImpresora.Text = "Impresora"
+        Me.rabtnImpresora.Text = "IMPRESORA"
         Me.rabtnImpresora.UseVisualStyleBackColor = True
         '
         'prgbar
         '
-        Me.prgbar.Location = New System.Drawing.Point(234, 73)
+        Me.prgbar.Location = New System.Drawing.Point(12, 238)
         Me.prgbar.Maximum = 500
         Me.prgbar.Name = "prgbar"
-        Me.prgbar.Size = New System.Drawing.Size(250, 18)
+        Me.prgbar.Size = New System.Drawing.Size(434, 34)
         Me.prgbar.TabIndex = 14
         Me.prgbar.Visible = False
         '
@@ -220,7 +217,7 @@ Partial Class VerificacionDeVencimientosMP
         '
         Me.btnBuscarDesde.BackgroundImage = Global.Laboratorio.My.Resources.Resources.Consulta_Dat_N1
         Me.btnBuscarDesde.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnBuscarDesde.Location = New System.Drawing.Point(226, 117)
+        Me.btnBuscarDesde.Location = New System.Drawing.Point(200, 96)
         Me.btnBuscarDesde.Name = "btnBuscarDesde"
         Me.btnBuscarDesde.Size = New System.Drawing.Size(20, 20)
         Me.btnBuscarDesde.TabIndex = 15
@@ -230,7 +227,7 @@ Partial Class VerificacionDeVencimientosMP
         '
         Me.btnBuscarHasta.BackgroundImage = Global.Laboratorio.My.Resources.Resources.Consulta_Dat_N1
         Me.btnBuscarHasta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnBuscarHasta.Location = New System.Drawing.Point(226, 156)
+        Me.btnBuscarHasta.Location = New System.Drawing.Point(362, 96)
         Me.btnBuscarHasta.Name = "btnBuscarHasta"
         Me.btnBuscarHasta.Size = New System.Drawing.Size(20, 20)
         Me.btnBuscarHasta.TabIndex = 16
@@ -238,20 +235,19 @@ Partial Class VerificacionDeVencimientosMP
         '
         'pnlAyuda
         '
-        Me.pnlAyuda.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.pnlAyuda.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnlAyuda.Controls.Add(Me.txtAyuda)
         Me.pnlAyuda.Controls.Add(Me.btnPnlVolver)
-        Me.pnlAyuda.Controls.Add(Me.Panel2)
         Me.pnlAyuda.Controls.Add(Me.DGV_Ayuda)
-        Me.pnlAyuda.Location = New System.Drawing.Point(43, 3)
+        Me.pnlAyuda.Location = New System.Drawing.Point(392, 199)
         Me.pnlAyuda.Name = "pnlAyuda"
-        Me.pnlAyuda.Size = New System.Drawing.Size(420, 242)
+        Me.pnlAyuda.Size = New System.Drawing.Size(44, 33)
         Me.pnlAyuda.TabIndex = 3
         Me.pnlAyuda.Visible = False
         '
         'txtAyuda
         '
-        Me.txtAyuda.Location = New System.Drawing.Point(10, 34)
+        Me.txtAyuda.Location = New System.Drawing.Point(11, 5)
         Me.txtAyuda.MaxLength = 50
         Me.txtAyuda.Name = "txtAyuda"
         Me.txtAyuda.Size = New System.Drawing.Size(399, 20)
@@ -259,52 +255,29 @@ Partial Class VerificacionDeVencimientosMP
         '
         'btnPnlVolver
         '
-        Me.btnPnlVolver.Location = New System.Drawing.Point(164, 211)
+        Me.btnPnlVolver.Location = New System.Drawing.Point(159, 185)
         Me.btnPnlVolver.Name = "btnPnlVolver"
-        Me.btnPnlVolver.Size = New System.Drawing.Size(75, 22)
+        Me.btnPnlVolver.Size = New System.Drawing.Size(103, 36)
         Me.btnPnlVolver.TabIndex = 2
         Me.btnPnlVolver.Text = "Volver"
         Me.btnPnlVolver.UseVisualStyleBackColor = True
-        '
-        'Panel2
-        '
-        Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(32, Byte), Integer), CType(CType(74, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.Panel2.Controls.Add(Me.Label7)
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel2.Location = New System.Drawing.Point(0, 0)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(416, 29)
-        Me.Panel2.TabIndex = 1
-        '
-        'Label7
-        '
-        Me.Label7.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label7.Location = New System.Drawing.Point(5, 4)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(59, 20)
-        Me.Label7.TabIndex = 3
-        Me.Label7.Text = "Ayuda"
         '
         'DGV_Ayuda
         '
         Me.DGV_Ayuda.AllowUserToAddRows = False
         Me.DGV_Ayuda.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_Ayuda.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Codigo, Me.Descripcion})
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGV_Ayuda.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGV_Ayuda.DefaultCellStyle = DataGridViewCellStyle12
         Me.DGV_Ayuda.DoubleBuffered = True
         Me.DGV_Ayuda.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.DGV_Ayuda.Location = New System.Drawing.Point(10, 58)
+        Me.DGV_Ayuda.Location = New System.Drawing.Point(11, 29)
         Me.DGV_Ayuda.Name = "DGV_Ayuda"
         Me.DGV_Ayuda.OrdenamientoColumnasHabilitado = True
         Me.DGV_Ayuda.RowHeadersWidth = 15
@@ -333,7 +306,7 @@ Partial Class VerificacionDeVencimientosMP
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(496, 244)
+        Me.ClientSize = New System.Drawing.Size(458, 279)
         Me.Controls.Add(Me.pnlAyuda)
         Me.Controls.Add(Me.btnBuscarHasta)
         Me.Controls.Add(Me.btnBuscarDesde)
@@ -351,14 +324,15 @@ Partial Class VerificacionDeVencimientosMP
         Me.Controls.Add(Me.mastxtHastaArt)
         Me.Controls.Add(Me.mastxtDesdeArt)
         Me.Controls.Add(Me.mastxtFecha)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "VerificacionDeVencimientosMP"
-        Me.Text = "VerificacionDeVencimientosMP"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.pnlAyuda.ResumeLayout(False)
         Me.pnlAyuda.PerformLayout()
-        Me.Panel2.ResumeLayout(False)
-        Me.Panel2.PerformLayout()
         CType(Me.DGV_Ayuda, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -384,8 +358,6 @@ Partial Class VerificacionDeVencimientosMP
     Friend WithEvents btnBuscarHasta As System.Windows.Forms.Button
     Friend WithEvents pnlAyuda As System.Windows.Forms.Panel
     Friend WithEvents btnPnlVolver As System.Windows.Forms.Button
-    Friend WithEvents Panel2 As System.Windows.Forms.Panel
-    Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents DGV_Ayuda As ConsultasVarias.DBDataGridView
     Friend WithEvents txtAyuda As System.Windows.Forms.TextBox
     Friend WithEvents Codigo As System.Windows.Forms.DataGridViewTextBoxColumn

@@ -9,6 +9,7 @@
     End Sub
 
     Private Sub MenuPrincipal_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
+        LotesVencidosToolStripMenuItem.Visible = (Base = "Surfactan_II" Or Base = "SurfactanSa")
         AutorizaciónDePedidosToolStripMenuItem.Visible = Base = "Surfactan_III"
     End Sub
 
@@ -45,13 +46,13 @@
     End Sub
 
     Private Sub HToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles HToolStripMenuItem.Click
-        With New FrasesHP("H")
+        With New IngresoFrasesH("H")
             .Show(Me)
         End With
     End Sub
 
     Private Sub PToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles PToolStripMenuItem.Click
-        With New FrasesHP("P")
+        With New IngresoFrasesH("P")
             .Show(Me)
         End With
     End Sub

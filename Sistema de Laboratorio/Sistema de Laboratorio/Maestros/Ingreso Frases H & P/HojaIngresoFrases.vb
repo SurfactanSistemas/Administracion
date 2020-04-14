@@ -114,8 +114,7 @@ Public Class HojaIngresoFrases
             Dim TieneElRegistro As Integer = ContieneAlgoLaBase()
             If (txtCodigo.Text <> "") Then
                 If (TieneElRegistro > 0) Then
-                    Dim cn As New SqlConnection(ConfigurationManager.ConnectionStrings("LOCAL").ToString())
-                    cn.Open()
+                    
                     Dim SqlConsulta As String
                     If (L = "H") Then
                         SqlConsulta = "DELETE  FROM FraseH WHERE Codigo = '" + txtCodigo.Text.ToString().Trim() + "' "
@@ -134,8 +133,7 @@ Public Class HojaIngresoFrases
     End Sub
 
     Private Function ContieneAlgoLaBase() As Integer
-        Dim cn As New SqlConnection(ConfigurationManager.ConnectionStrings("LOCAL").ToString())
-        cn.Open()
+  
         Dim SqlConsulta As String
         If (L = "H") Then
             SqlConsulta = "SELECT Codigo FROM FraseH WHERE Codigo = '" + txtCodigo.Text.ToString().Trim() + "' "

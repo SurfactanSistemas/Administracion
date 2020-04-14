@@ -1,6 +1,4 @@
-﻿Imports System.Diagnostics.Eventing.Reader
-Imports System.IO
-Imports Laboratorio
+﻿Imports System.IO
 
 Public Class IngresoActualizacionHojaProduccionFarma
 
@@ -10,15 +8,12 @@ Public Class IngresoActualizacionHojaProduccionFarma
 
     Dim CantidadDeFila As Double
 
-
-
-
-    Private Sub btnVolver_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVolver.Click
-        Me.Close()
+    Private Sub btnVolver_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnVolver.Click
+        Close()
     End Sub
 
-    Private Sub IngresoActualizacionHojaProduccionFarma_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Me.Text = ""
+    Private Sub IngresoActualizacionHojaProduccionFarma_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
+        Text = ""
         cbxTipo.SelectedIndex = 0
         pnlLotes.Visible = False
         mastxtFecha.Text = Date.Today
@@ -28,15 +23,13 @@ Public Class IngresoActualizacionHojaProduccionFarma
         txtEspecificacionV3.Enabled = False
         pnlAgenda.Visible = False
         pnlAyuda.Visible = False
-
-
     End Sub
 
-    Private Sub IngresoActualizacionHojaProduccionFarma_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+    Private Sub IngresoActualizacionHojaProduccionFarma_Shown(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Shown
         txtHojaProduccion.Focus()
     End Sub
 
-    Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtHojaProduccion.KeyPress, txtVersionFormulaV1.KeyPress, txtProcedimientoV2.KeyPress, txtPartLote3.KeyPress, txtPartLote2.KeyPress, txtPartLote1.KeyPress, txtEspecificacionV3.KeyPress, txtEquipo.KeyPress
+    Private Sub SoloNumero(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txtHojaProduccion.KeyPress, txtVersionFormulaV1.KeyPress, txtProcedimientoV2.KeyPress, txtPartLote3.KeyPress, txtPartLote2.KeyPress, txtPartLote1.KeyPress, txtEspecificacionV3.KeyPress, txtEquipo.KeyPress
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
             e.Handled = True
         End If
@@ -44,14 +37,14 @@ Public Class IngresoActualizacionHojaProduccionFarma
 
 
 
-    Private Sub NumerosConComas(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtRendimientoTeorico.KeyPress, txtRendimientoReal.KeyPress, txtCantLote3.KeyPress, txtCantLote2.KeyPress, txtCantLote1.KeyPress, txtCantidad.KeyPress
+    Private Sub NumerosConComas(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txtRendimientoTeorico.KeyPress, txtRendimientoReal.KeyPress, txtCantLote3.KeyPress, txtCantLote2.KeyPress, txtCantLote1.KeyPress, txtCantidad.KeyPress
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) And Not (CChar(".")) = e.KeyChar Then
             e.Handled = True
         End If
     End Sub
 
 
-    Private Sub txtHojaProduccion_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtHojaProduccion.KeyDown
+    Private Sub txtHojaProduccion_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtHojaProduccion.KeyDown
 
         Select Case e.KeyData
             Case Keys.Enter
@@ -243,7 +236,7 @@ Public Class IngresoActualizacionHojaProduccionFarma
     End Sub
 
 
-    Private Sub cbxTipo_DropDownClosed(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxTipo.DropDownClosed
+    Private Sub cbxTipo_DropDownClosed(ByVal sender As Object, ByVal e As EventArgs) Handles cbxTipo.DropDownClosed
         If cbxTipo.Text = "M" Then
             lblMPoPT.Text = "Materia Prima"
             mastxtMPoPT.Mask = ">LL-000-000"
@@ -253,7 +246,7 @@ Public Class IngresoActualizacionHojaProduccionFarma
         End If
     End Sub
 
-    Private Sub cbxTipo_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxTipo.SelectedIndexChanged
+    Private Sub cbxTipo_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cbxTipo.SelectedIndexChanged
         If cbxTipo.Text = "M" Then
             lblMPoPT.Text = "Materia Prima"
             mastxtMPoPT.Mask = ">LL-000-000"
@@ -264,7 +257,7 @@ Public Class IngresoActualizacionHojaProduccionFarma
     End Sub
 
 
-    Private Sub DGV_IngredientosHojaProduccion_CellDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DGV_IngredientosHojaProduccion.CellDoubleClick
+    Private Sub DGV_IngredientosHojaProduccion_CellDoubleClick(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles DGV_IngredientosHojaProduccion.CellDoubleClick
 
         lineaSeleccionada = DGV_IngredientosHojaProduccion.CurrentRow.Cells("Linea").Value
 
@@ -286,9 +279,9 @@ Public Class IngresoActualizacionHojaProduccionFarma
         End With
     End Sub
 
-    Private Sub txtCantidad_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs, Optional ByRef Permitir As String = "N") Handles txtCantidad.KeyDown
+    Private Sub txtCantidad_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs, Optional ByRef Permitir As String = "N") Handles txtCantidad.KeyDown
 
-        Dim stock As Double
+        Dim stock As Double = 0
 
 
 
@@ -371,7 +364,7 @@ Public Class IngresoActualizacionHojaProduccionFarma
         End If
     End Sub
 
-    Private Sub btnNuevaFila_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNuevaFila.Click
+    Private Sub btnNuevaFila_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnNuevaFila.Click
 
         If txtDescripcionMPoPT.Text <> "" Then
             If txtCantidad.Text <> "" Then
@@ -394,7 +387,7 @@ Public Class IngresoActualizacionHojaProduccionFarma
 
     End Sub
 
-    Private Sub btnEditarFila_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEditarFila.Click
+    Private Sub btnEditarFila_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnEditarFila.Click
 
         If Val(txtCantidad.Text) > 0 Then
             Dim permitir As String = "NE"
@@ -448,26 +441,26 @@ Public Class IngresoActualizacionHojaProduccionFarma
 
         For i As Integer = 1 To 3
 
-            If Me.Controls("pnlLotes").Controls("txtPartLote" & i).Text <> "" Then
-                If Val(Me.Controls("pnlLotes").Controls("txtPartLote" & i).Text) <> 0 Then
+            If Controls("pnlLotes").Controls("txtPartLote" & i).Text <> "" Then
+                If Val(Controls("pnlLotes").Controls("txtPartLote" & i).Text) <> 0 Then
 
-                    If Me.Controls("pnlLotes").Controls("txtCantLote" & i).Text = "" Then
-                        listaMensaje.Add("Se ingreso el lote: " & Me.Controls("pnlLotes").Controls("txtPartLote" & i).Text & ", pero no una cantidad")
+                    If Controls("pnlLotes").Controls("txtCantLote" & i).Text = "" Then
+                        listaMensaje.Add("Se ingreso el lote: " & Controls("pnlLotes").Controls("txtPartLote" & i).Text & ", pero no una cantidad")
                     End If
-                    If Val(Me.Controls("pnlLotes").Controls("txtCantLote" & i).Text) = 0 Then
-                        listaMensaje.Add("Se ingreso el lote: " & Me.Controls("pnlLotes").Controls("txtPartLote" & i).Text & ", pero no una cantidad")
+                    If Val(Controls("pnlLotes").Controls("txtCantLote" & i).Text) = 0 Then
+                        listaMensaje.Add("Se ingreso el lote: " & Controls("pnlLotes").Controls("txtPartLote" & i).Text & ", pero no una cantidad")
                     End If
                 End If
             End If
 
-            If Me.Controls("pnlLotes").Controls("txtCantLote" & i).Text <> "" Then
-                If Val(Me.Controls("pnlLotes").Controls("txtCantLote" & i).Text) <> 0 Then
+            If Controls("pnlLotes").Controls("txtCantLote" & i).Text <> "" Then
+                If Val(Controls("pnlLotes").Controls("txtCantLote" & i).Text) <> 0 Then
 
-                    If Me.Controls("pnlLotes").Controls("txtPartLote" & i).Text = "" Then
-                        listaMensaje.Add("Se ingreso el Cantidad: " & Me.Controls("pnlLotes").Controls("txtCantLote" & i).Text & ", pero no una Lote")
+                    If Controls("pnlLotes").Controls("txtPartLote" & i).Text = "" Then
+                        listaMensaje.Add("Se ingreso el Cantidad: " & Controls("pnlLotes").Controls("txtCantLote" & i).Text & ", pero no una Lote")
                     End If
-                    If Val(Me.Controls("pnlLotes").Controls("txtPartLote" & i).Text) = 0 Then
-                        listaMensaje.Add("Se ingreso el Cantidad: " & Me.Controls("pnlLotes").Controls("txtCantLote" & i).Text & ", pero no una Lote")
+                    If Val(Controls("pnlLotes").Controls("txtPartLote" & i).Text) = 0 Then
+                        listaMensaje.Add("Se ingreso el Cantidad: " & Controls("pnlLotes").Controls("txtCantLote" & i).Text & ", pero no una Lote")
                     End If
                 End If
             End If
@@ -482,49 +475,42 @@ Public Class IngresoActualizacionHojaProduccionFarma
 
         End If
 
-
         For i As Integer = 1 To 3
 
-            If Me.Controls("pnlLotes").Controls("txtPartLote" & i).Text <> "" Then
-                If Val(Me.Controls("pnlLotes").Controls("txtPartLote" & i).Text) = 0 Then
-
-                    Continue For
-                End If
-            Else
+            If Val(Controls("pnlLotes").Controls("txtPartLote" & i).Text) <> 0 Then
                 Continue For
             End If
 
-
             If cbxTipo.Text = "M" Then
 
-                SQLCnslt = "SELECT Saldo FROM Laudo WHERE Articulo = '" & mastxtMPoPT.Text & "' AND Laudo = '" & Me.Controls("pnlLotes").Controls("txtPartLote" & i).Text & "' AND Marca <> 'X' AND Saldo > 0 "
+                SQLCnslt = "SELECT Saldo FROM Laudo WHERE Articulo = '" & mastxtMPoPT.Text & "' AND Laudo = '" & Controls("pnlLotes").Controls("txtPartLote" & i).Text & "' AND Marca <> 'X' AND Saldo > 0 "
 
                 Dim ROWLaudo As DataRow = GetSingle(SQLCnslt)
 
                 If ROWLaudo IsNot Nothing Then
 
-                    StockDisponible = ROWLaudo.Item("Saldo") - Val(Me.Controls("pnlLotes").Controls("txtCantLote" & i).Text)
+                    StockDisponible = ROWLaudo.Item("Saldo") - Val(Controls("pnlLotes").Controls("txtCantLote" & i).Text)
 
                     If StockDisponible < 0 Then
-                        listaMensaje.Add("Saldo insuficiente para el Lote " & Me.Controls("pnlLotes").Controls("txtPartLote" & i).Text)
+                        listaMensaje.Add("Saldo insuficiente para el Lote " & Controls("pnlLotes").Controls("txtPartLote" & i).Text)
                     End If
 
 
                 Else
 
-                    SQLCnslt = "SELECT Saldo FROM Guia WHERE Articulo = '" & mastxtMPoPT.Text & "' AND Lote = '" & Me.Controls("pnlLotes").Controls("txtPartLote" & i).Text & "' AND Marca <> 'X' AND Saldo > 0 AND Movi = 'E'"
+                    SQLCnslt = "SELECT Saldo FROM Guia WHERE Articulo = '" & mastxtMPoPT.Text & "' AND Lote = '" & Controls("pnlLotes").Controls("txtPartLote" & i).Text & "' AND Marca <> 'X' AND Saldo > 0 AND Movi = 'E'"
 
                     Dim ROWGuia As DataRow = GetSingle(SQLCnslt)
 
                     If ROWGuia IsNot Nothing Then
 
-                        StockDisponible = ROWGuia.Item("Saldo") - Val(Me.Controls("pnlLotes").Controls("txtCantLote" & i).Text)
+                        StockDisponible = ROWGuia.Item("Saldo") - Val(Controls("pnlLotes").Controls("txtCantLote" & i).Text)
 
                         If StockDisponible < 0 Then
-                            listaMensaje.Add("Saldo insuficiente para el lote " & Me.Controls("pnlLotes").Controls("txtPartLote" & i).Text)
+                            listaMensaje.Add("Saldo insuficiente para el lote " & Controls("pnlLotes").Controls("txtPartLote" & i).Text)
                         End If
                     Else
-                        listaMensaje.Add("No se encuentra el Lote de la Materia Prima: " & Me.Controls("pnlLotes").Controls("txtPartLote" & i).Text)
+                        listaMensaje.Add("No se encuentra el Lote de la Materia Prima: " & Controls("pnlLotes").Controls("txtPartLote" & i).Text)
 
                     End If
 
@@ -532,34 +518,34 @@ Public Class IngresoActualizacionHojaProduccionFarma
 
             Else
 
-                SQLCnslt = "SELECT Saldo FROM Hoja WHERE Producto = '" & mastxtMPoPT.Text & "' AND  Hoja = '" & Me.Controls("pnlLotes").Controls("txtPartLote" & i).Text & "' AND Marca <> 'X' AND Saldo > 0 "
+                SQLCnslt = "SELECT Saldo FROM Hoja WHERE Producto = '" & mastxtMPoPT.Text & "' AND  Hoja = '" & Controls("pnlLotes").Controls("txtPartLote" & i).Text & "' AND Marca <> 'X' AND Saldo > 0 "
 
                 Dim ROWHoja As DataRow = GetSingle(SQLCnslt)
 
                 If ROWHoja IsNot Nothing Then
 
-                    StockDisponible = ROWHoja.Item("Saldo") - Val(Me.Controls("pnlLotes").Controls("txtCantLote" & i).Text)
+                    StockDisponible = ROWHoja.Item("Saldo") - Val(Controls("pnlLotes").Controls("txtCantLote" & i).Text)
 
                     If StockDisponible < 0 Then
-                        listaMensaje.Add("Saldo insuficiente para el lote " & Me.Controls("pnlLotes").Controls("txtPartLote" & i).Text)
+                        listaMensaje.Add("Saldo insuficiente para el lote " & Controls("pnlLotes").Controls("txtPartLote" & i).Text)
                     End If
 
 
                 Else
 
-                    SQLCnslt = "SELECT Saldo FROM Guia WHERE Terminado = '" & mastxtMPoPT.Text & "' AND Lote = '" & Me.Controls("pnlLotes").Controls("txtPartLote" & i).Text & "' AND Marca <> 'X' AND Saldo > 0 AND Movi = 'E'"
+                    SQLCnslt = "SELECT Saldo FROM Guia WHERE Terminado = '" & mastxtMPoPT.Text & "' AND Lote = '" & Controls("pnlLotes").Controls("txtPartLote" & i).Text & "' AND Marca <> 'X' AND Saldo > 0 AND Movi = 'E'"
 
                     Dim ROWGuia As DataRow = GetSingle(SQLCnslt)
 
                     If ROWGuia IsNot Nothing Then
 
-                        StockDisponible = ROWGuia.Item("Saldo") - Val(Me.Controls("pnlLotes").Controls("txtCantLote" & i).Text)
+                        StockDisponible = ROWGuia.Item("Saldo") - Val(Controls("pnlLotes").Controls("txtCantLote" & i).Text)
 
                         If StockDisponible < 0 Then
-                            listaMensaje.Add("Saldo insuficiente para el lote " & Me.Controls("pnlLotes").Controls("txtPartLote" & i).Text)
+                            listaMensaje.Add("Saldo insuficiente para el lote " & Controls("pnlLotes").Controls("txtPartLote" & i).Text)
                         End If
                     Else
-                        listaMensaje.Add("No se encuentra el Lote de la Producto Terminado: " & Me.Controls("pnlLotes").Controls("txtPartLote" & i).Text)
+                        listaMensaje.Add("No se encuentra el Lote de la Producto Terminado: " & Controls("pnlLotes").Controls("txtPartLote" & i).Text)
 
                     End If
                 End If
@@ -582,7 +568,7 @@ Public Class IngresoActualizacionHojaProduccionFarma
 
 
 
-    Private Sub txtPartLote1_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtPartLote1.KeyDown
+    Private Sub txtPartLote1_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtPartLote1.KeyDown
         Select Case e.KeyData
             Case Keys.Enter
                 If txtPartLote1.Text = "0" Or txtPartLote1.Text = "" Then
@@ -597,7 +583,7 @@ Public Class IngresoActualizacionHojaProduccionFarma
 
     End Sub
 
-    Private Sub txtCantLote1_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCantLote1.KeyDown
+    Private Sub txtCantLote1_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtCantLote1.KeyDown
         Select Case e.KeyData
             Case Keys.Enter
                 txtCantLote1.Text = formatonumerico(txtCantLote1.Text)
@@ -608,7 +594,7 @@ Public Class IngresoActualizacionHojaProduccionFarma
 
     End Sub
 
-    Private Sub txtPartLote2_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtPartLote2.KeyDown
+    Private Sub txtPartLote2_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtPartLote2.KeyDown
         Select Case e.KeyData
             Case Keys.Enter
                 txtCantLote2.Focus()
@@ -618,7 +604,7 @@ Public Class IngresoActualizacionHojaProduccionFarma
 
     End Sub
 
-    Private Sub txtCantLote2_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCantLote2.KeyDown
+    Private Sub txtCantLote2_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtCantLote2.KeyDown
         Select Case e.KeyData
             Case Keys.Enter
                 txtCantLote2.Text = formatonumerico(txtCantLote2.Text)
@@ -629,7 +615,7 @@ Public Class IngresoActualizacionHojaProduccionFarma
 
     End Sub
 
-    Private Sub txtPartLote3_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtPartLote3.KeyDown
+    Private Sub txtPartLote3_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtPartLote3.KeyDown
         Select Case e.KeyData
             Case Keys.Enter
                 txtCantLote3.Focus()
@@ -639,7 +625,7 @@ Public Class IngresoActualizacionHojaProduccionFarma
 
     End Sub
 
-    Private Sub txtCantLote3_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCantLote3.KeyDown
+    Private Sub txtCantLote3_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtCantLote3.KeyDown
         Select Case e.KeyData
             Case Keys.Enter
                 txtCantLote3.Text = formatonumerico(txtCantLote3.Text)
@@ -651,11 +637,11 @@ Public Class IngresoActualizacionHojaProduccionFarma
     End Sub
 
 
-    Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
+    Private Sub btnLimpiar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLimpiar.Click
         _LimpiarForm()
     End Sub
 
-    Private Sub mastxtFecha_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles mastxtFecha.KeyDown
+    Private Sub mastxtFecha_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles mastxtFecha.KeyDown
         Select Case e.KeyData
             Case Keys.Enter
                 If ValidaFecha(mastxtFecha.Text) = "S" Then
@@ -669,7 +655,7 @@ Public Class IngresoActualizacionHojaProduccionFarma
 
 
 
-    Private Sub mastxtProducto_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles mastxtProducto.KeyDown
+    Private Sub mastxtProducto_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles mastxtProducto.KeyDown
         Select Case e.KeyData
             Case Keys.Enter
                 If mastxtProducto.Text.Trim().Length = 12 Then
@@ -679,7 +665,7 @@ Public Class IngresoActualizacionHojaProduccionFarma
                     If rowTerminado IsNot Nothing Then
 
                         If Microsoft.VisualBasic.Left(mastxtProducto.Text, 2) = "PT" Or Microsoft.VisualBasic.Left(mastxtProducto.Text, 2) = "SE" Or Microsoft.VisualBasic.Left(mastxtProducto.Text, 2) = "DW" Then
-                            If Val(Operador.Codigo) = 1 Or Val(Operador.Codigo) = 2 Or Val(Operador.Codigo) = 3 Or Val(Operador.Codigo) = 4 Then
+                            If Val(Codigo) = 1 Or Val(Codigo) = 2 Or Val(Codigo) = 3 Or Val(Codigo) = 4 Then
                                 Dim EstadoI As String = IIf(IsDBNull(rowTerminado.Item("Estado")), "", rowTerminado.Item("Estado"))
                                 Dim EstadoII As String = IIf(IsDBNull(rowTerminado.Item("Estadoi")), "", rowTerminado.Item("EstadoI"))
                                 Dim EstadoIII As String = IIf(IsDBNull(rowTerminado.Item("EstadoII")), "", rowTerminado.Item("EstadoII"))
@@ -719,7 +705,7 @@ Public Class IngresoActualizacionHojaProduccionFarma
         End Select
     End Sub
 
-    Private Sub txtEquipo_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtEquipo.KeyDown
+    Private Sub txtEquipo_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtEquipo.KeyDown
         Select Case e.KeyData
             Case Keys.Enter
                 txtRendimientoTeorico.Focus()
@@ -728,7 +714,7 @@ Public Class IngresoActualizacionHojaProduccionFarma
         End Select
     End Sub
 
-    Private Sub txtRendimientoTeorico_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRendimientoTeorico.KeyDown
+    Private Sub txtRendimientoTeorico_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtRendimientoTeorico.KeyDown
         Select Case e.KeyData
             Case Keys.Enter
                 txtRendimientoTeorico.Text = formatonumerico(txtRendimientoTeorico.Text)
@@ -811,30 +797,23 @@ Public Class IngresoActualizacionHojaProduccionFarma
 
             Next
 
-
-            Dim Tipo, MPoPT, Cantidad As String
-
-
+            Dim WTipo, WMPoPT As String
 
             For Each row As DataGridViewRow In DGV_IngredientosHojaProduccion.Rows
                 With row
-                    Tipo = .Cells("Tipo").Value
-                    MPoPT = .Cells("MPoPT").Value
-                    Cantidad = .Cells("Cantidad").Value
+                    WTipo = .Cells("Tipo").Value
+                    WMPoPT = .Cells("MPoPT").Value
                 End With
 
                 Dim WStock As Double = 0
                 Dim StockString As String
 
-                StockString = _CalcularSTOCKDEPRODUCTO(Tipo, MPoPT, WStock)
-
+                StockString = _CalcularSTOCKDEPRODUCTO(WTipo, WMPoPT, WStock)
 
                 With row
 
                     If Val(Cantidad) <= WStock Then
-
                         row.Cells("Cantidad").Value = Cantidad
-
                     Else
                         Dim Impre As String = StockString
 
@@ -844,44 +823,37 @@ Public Class IngresoActualizacionHojaProduccionFarma
                         row.Cells("Cantidad").Value = ""
                     End If
 
-
                 End With
             Next
-
-
 
         End If
 
     End Sub
 
-    Private Function _CalcularSTOCKDEPRODUCTO(ByVal Tipo As String, ByVal MPoPT As String, Optional ByRef WStock As Double = 0, Optional ByRef VerificaDatosHoja As String = "N") As String
+    Private Function _CalcularSTOCKDEPRODUCTO(ByVal WTipo As String, ByVal WMPoPT As String, Optional ByRef WStock As Double = 0, Optional ByRef VerificaDatosHoja As String = "N") As String
 
         Dim SQLCnslt As String
 
         Dim StockString As String = ""
-        Dim StockReservadoEnHojas As Double = 0
         Dim CantidadBloqueada As Double
 
-        Select Case Tipo
+        Select Case WTipo
             Case "M"
 
+                WStock = _CalcularStockTotalArticulo(WMPoPT)
+                StockString = formatonumerico(WStock, 3)
 
-
-
-                SQLCnslt = "SELECT Descripcion, Inicial, Entradas, Salidas FROM Articulo WHERE Codigo = '" & MPoPT & "'"
-                Dim RowArticulo As DataRow = GetSingle(SQLCnslt)
-
-                If RowArticulo IsNot Nothing Then
-                    WStock = Val(RowArticulo.Item("Inicial") + RowArticulo.Item("Entradas") - RowArticulo.Item("Salidas"))
+                'DESCUENTA EL STOCK DE LAS GUIAS DE SALIDAS
+                SQLCnslt = "SELECT SumStock= SUM(Cantidad) FROM Guia  WHERE Marca <> 'X' AND Movi = 'S' AND Tipo = 'M' AND Cantidad > 0 AND Articulo = '" & WMPoPT & "'"
+                Dim rowG As DataRow = GetSingle(SQLCnslt)
+                If rowG IsNot Nothing Then
+                    WStock = WStock - OrDefault(rowG.Item("Sumstock"), 0)
                     StockString = formatonumerico(WStock, 3)
                 End If
 
-
-
-
                 'DESCUENTA EL STOCK DE LAS HOJAS, SI ES LA HOJA ACTUAL IGNORA EL STOCK
 
-                SQLCnslt = "SELECT Cantidad, Hoja FROM Hoja WHERE Articulo = '" & MPoPT & "' AND Real = 0 AND Marca <> 'X'"
+                SQLCnslt = "SELECT h.Cantidad, h.Hoja FROM Hoja h inner join Articulo A on h.Articulo = A.Codigo WHERE Articulo = '" & WMPoPT & "' AND Real = 0 AND Marca <> 'X' AND h.FechaOrd >= A.OrdFechaCierre"
 
                 Dim tablahoja As DataTable = GetAll(SQLCnslt)
 
@@ -890,12 +862,10 @@ Public Class IngresoActualizacionHojaProduccionFarma
                     For i = 0 To tablahoja.Rows.Count - 1
                         If tablahoja.Rows(i).Item("Hoja") <> txtHojaProduccion.Text Then
 
-                            StockReservadoEnHojas += tablahoja.Rows(i).Item("Cantidad")
-
                         End If
                     Next
-                    WStock = WStock - StockReservadoEnHojas
-                    StockString = formatonumerico(WStock, 3)
+                    'WStock = WStock - StockReservadoEnHojas
+                    ' StockString = formatonumerico(WStock, 3)
                 End If
 
 
@@ -903,7 +873,7 @@ Public Class IngresoActualizacionHojaProduccionFarma
                     'DESCUENTA EL STOCK YA INGRESADO EN LA HOJA
                     Dim StockEnHojaActual As Double = 0
                     For i = 0 To DGV_IngredientosHojaProduccion.Rows.Count - 1
-                        If DGV_IngredientosHojaProduccion.Rows(i).Cells("MPoPT").Value = MPoPT Then
+                        If DGV_IngredientosHojaProduccion.Rows(i).Cells("MPoPT").Value = WMPoPT Then
                             StockEnHojaActual += Val(DGV_IngredientosHojaProduccion.Rows(i).Cells("Cantidad").Value)
                         End If
                     Next
@@ -919,25 +889,24 @@ Public Class IngresoActualizacionHojaProduccionFarma
 
                 'DESCUENTA EL STOCK DE MATERIA VENCIDO
                 Dim Vencido As Double = 0
-                Vencido = _CalcularVencido(MPoPT)
+                Vencido = _CalcularVencido(WMPoPT)
 
                 If Vencido > 0 Then
-                    Dim mensaje As String = "Existe la materia prima " & MPoPT & " la cantidad de : " & Vencido & " Kgs. vencidos." & vbCrLf & "Comuniquese con el laboratorio para su revalida"
+                    Dim mensaje As String = "Existe la materia prima " & WMPoPT & " la cantidad de : " & Vencido & " Kgs. vencidos." & vbCrLf & "Comuniquese con el laboratorio para su revalida"
                     MsgBox(mensaje, 0, "Ingreso de Hoja de Produccion")
-                    WStock = WStock - Vencido
-                    StockString = formatonumerico(WStock, 3)
+                    '                    WStock = WStock - Vencido
+                    '                    StockString = formatonumerico(WStock, 3)
                 End If
 
                 'DESCUENTA EL STOCK MATERIAL BLOQUEADO
-                If Microsoft.VisualBasic.Left(mastxtMPoPT.Text, 2) = "PT" Then
-                    CantidadBloqueada = _CalcularBloqueo(Tipo, MPoPT)
-                    If CantidadBloqueada < 0 Then
-                        Dim mensaje As String
-                        mensaje = "Existe la Materia Prima " & MPoPT & " la cantidad de : " & CantidadBloqueada & " Kgs. Bloqueados" & vbCrLf & "Comuniquese con el laboratorio para su liberacion"
-                        MsgBox(mensaje, 0, "Ingreso de Hoja de Produccion")
-                        WStock = WStock - CantidadBloqueada
-                        StockString = formatonumerico(WStock, 3)
-                    End If
+
+                CantidadBloqueada = _CalcularBloqueo(WTipo, WMPoPT)
+                If CantidadBloqueada < 0 Then
+                    Dim mensaje As String
+                    mensaje = "Existe la Materia Prima " & WMPoPT & " la cantidad de : " & CantidadBloqueada & " Kgs. Bloqueados" & vbCrLf & "Comuniquese con el laboratorio para su liberacion"
+                    MsgBox(mensaje, 0, "Ingreso de Hoja de Produccion")
+                    '                    WStock = WStock - CantidadBloqueada
+                    '                    StockString = formatonumerico(WStock, 3)
                 End If
 
 
@@ -945,19 +914,32 @@ Public Class IngresoActualizacionHojaProduccionFarma
 
 
             Case "T"
-                SQLCnslt = "SELECT Descripcion, Inicial, Entradas, Salidas FROM Terminado WHERE Codigo = '" & MPoPT & "'"
-                Dim RowTerminado As DataRow = GetSingle(SQLCnslt)
+                '                SQLCnslt = "SELECT Descripcion, Inicial, Entradas, Salidas FROM Terminado WHERE Codigo = '" & MPoPT & "'"
+                '                Dim RowTerminado As DataRow = GetSingle(SQLCnslt)
+                '
+                '                If RowTerminado IsNot Nothing Then
+                '                    WStock = RowTerminado.Item("Inicial") + RowTerminado.Item("Entradas") - RowTerminado.Item("Salidas")
+                '                    'StockString = formatonumerico(WStock, 3)
+                '                End If
 
-                If RowTerminado IsNot Nothing Then
-                    WStock = RowTerminado.Item("Inicial") + RowTerminado.Item("Entradas") - RowTerminado.Item("Salidas")
-                    'StockString = formatonumerico(WStock, 3)
+
+                WStock = _CalcularStockTotalTerminado(WMPoPT)
+
+
+                'DESCUENTA EL STOCK DE LAS GUIAS DE SALIDAS
+                SQLCnslt = "SELECT SumStock= SUM(Cantidad) FROM Guia  WHERE Marca <> 'X' AND Movi = 'S' AND Tipo = 'T' AND Cantidad > 0 AND Terminado = '" & WMPoPT & "'"
+                Dim rowG As DataRow = GetSingle(SQLCnslt)
+                If rowG IsNot Nothing Then
+                    WStock = WStock - OrDefault(rowG.Item("Sumstock"), 0)
+
                 End If
+
 
 
 
                 'DESCUENTA EL STOCK DE LAS HOJAS, SI ES LA HOJA ACTUAL IGNORA EL STOCK
 
-                SQLCnslt = "SELECT Cantidad, Hoja FROM Hoja WHERE Terminado = '" & MPoPT & "' AND Real = 0 AND Marca <> 'X'"
+                SQLCnslt = "SELECT h.Cantidad, h.Hoja FROM Hoja h inner join Terminado T on h.Terminado = T.Codigo WHERE h.Terminado = '" & WMPoPT & "' AND h.Real = 0 AND h.Marca <> 'X' and h.FechaOrd >= T.OrdFechaCierre"
 
                 Dim tablahoja As DataTable = GetAll(SQLCnslt)
 
@@ -966,11 +948,10 @@ Public Class IngresoActualizacionHojaProduccionFarma
                     For i = 0 To tablahoja.Rows.Count - 1
                         If tablahoja.Rows(i).Item("Hoja") <> txtHojaProduccion.Text Then
 
-                            StockReservadoEnHojas += tablahoja.Rows(i).Item("Cantidad")
-
                         End If
                     Next
-                    WStock = WStock - StockReservadoEnHojas
+                    '  WStock = WStock - StockReservadoEnHojas
+
                 End If
 
 
@@ -980,7 +961,7 @@ Public Class IngresoActualizacionHojaProduccionFarma
                     'DESCUENTA EL STOCK YA INGRESADO EN LA HOJA
                     Dim StockEnHojaActual As Double = 0
                     For i = 0 To DGV_IngredientosHojaProduccion.Rows.Count - 1
-                        If DGV_IngredientosHojaProduccion.Rows(i).Cells("MPoPT").Value = MPoPT Then
+                        If DGV_IngredientosHojaProduccion.Rows(i).Cells("MPoPT").Value = WMPoPT Then
                             StockEnHojaActual += Val(DGV_IngredientosHojaProduccion.Rows(i).Cells("Cantidad").Value)
                         End If
                     Next
@@ -988,6 +969,7 @@ Public Class IngresoActualizacionHojaProduccionFarma
                     'LE SUMO EL VALOR DE LA FILA PARA QUE PERMITA EDITAR
                     If VerificaDatosHoja = "SE" Then
                         WStock = WStock + CantidadDeFila
+
                     End If
                 End If
 
@@ -996,14 +978,16 @@ Public Class IngresoActualizacionHojaProduccionFarma
                 StockString = formatonumerico(WStock, 3)
 
 
+
+
                 If Microsoft.VisualBasic.Left(mastxtProducto.Text, 2) = "PT" Then
-                    CantidadBloqueada = _CalcularBloqueo(Tipo, MPoPT)
+                    CantidadBloqueada = _CalcularBloqueo(WTipo, WMPoPT)
                     If CantidadBloqueada < 0 Then
                         Dim mensaje As String
-                        mensaje = "Existe el producto " & MPoPT & " la cantidad de : " & CantidadBloqueada & " Kgs. Bloqueados" & vbCrLf & "Comuniquese con el laboratorio para su liberacion"
+                        mensaje = "Existe el producto " & WMPoPT & " la cantidad de : " & CantidadBloqueada & " Kgs. Bloqueados" & vbCrLf & "Comuniquese con el laboratorio para su liberacion"
                         MsgBox(mensaje, 0, "Ingreso de Hoja de Produccion")
-                        WStock = WStock - CantidadBloqueada
-                        StockString = formatonumerico(WStock, 3)
+                        '     WStock = WStock - CantidadBloqueada
+                        '    StockString = formatonumerico(WStock, 3)
                     End If
                 End If
 
@@ -1015,6 +999,29 @@ Public Class IngresoActualizacionHojaProduccionFarma
         Return StockString
 
     End Function
+
+
+    Private Function _CalcularStockTotalArticulo(ByVal codigo As String) As Double
+        Dim SQLCnslt As String = "SELECT SumStock = (SUM(l.Liberada) + SUM(g.Cantidad)) FROM Laudo l LEFT OUTER JOIN Guia g on l.Articulo = g.Articulo WHERE l.Marca <> 'X' AND g.Marca <> 'X' AND g.Movi = 'E' AND g.Tipo = 'M' AND Liberada > 0 AND l.Articulo = '" & codigo & "' "
+        Dim row As DataRow = GetSingle(SQLCnslt)
+        Dim stockAcumulado As Double = 0
+        If row IsNot Nothing Then
+            stockAcumulado = OrDefault(row.Item("SumStock"), 0)
+        End If
+        Return stockAcumulado
+    End Function
+
+    Private Function _CalcularStockTotalTerminado(ByVal codigo As String) As Double
+        Dim SQLCnslt As String = "SELECT SumStock = (SUM(h.Real) + SUM(g.Cantidad)) FROM Hoja h LEFT OUTER JOIN Guia g on H.Producto = g.Terminado WHERE h.Marca <> 'X' AND g.Marca <> 'X' AND g.Movi = 'E' AND g.Tipo = 'T' AND H.Real > 0 AND H.Producto = '" & codigo & "' "
+        Dim row As DataRow = GetSingle(SQLCnslt)
+        Dim stockAcumulado As Double = 0
+        If row IsNot Nothing Then
+            stockAcumulado = OrDefault(row.Item("SumStock"), 0)
+        End If
+        Return stockAcumulado
+    End Function
+
+
     Private Function _CalcularVencido(ByVal Codigo As String) As Double
 
         Dim VTO, FechaVTO As String
@@ -1113,13 +1120,11 @@ Public Class IngresoActualizacionHojaProduccionFarma
 
             With tabla.Rows(i)
                 VTO = ""
-                Dim FechaOrd As String = Microsoft.VisualBasic.Right$(.Item("Fecha"), 4) + Mid$(.Item("Fecha"), 4, 2) + Microsoft.VisualBasic.Left$(.Item("Fecha"), 2)
                 If .Item("FechaVencimiento") <> "" And .Item("FechaVencimiento") <> "  /  /    " And .Item("FechaVencimiento") <> " 00/00/0000" Then
                     If ValidaFecha(.Item("FechaVencimiento")) = "S" Then
                         VTO = .Item("FechaVencimiento")
                     End If
                 End If
-
 
                 If VTO = "" Then
 
@@ -1143,9 +1148,6 @@ Public Class IngresoActualizacionHojaProduccionFarma
 
                     Dim XMes As String = Mes.ToString()
                     Dim XAno As String = Ano.ToString()
-
-                    XMes.PadLeft(2, "0")
-                    XAno.PadLeft(6, "0")
 
                     If Val(Microsoft.VisualBasic.Left$(.Item("Fecha"), 2)) <= 30 Then
                         If Val(XMes) = 2 And Val(Microsoft.VisualBasic.Left$(.Item("Fecha"), 2)) > 28 Then
@@ -1211,7 +1213,7 @@ Public Class IngresoActualizacionHojaProduccionFarma
         Next
 
         Return Vencido
-        
+
     End Function
 
 
@@ -1310,13 +1312,13 @@ Public Class IngresoActualizacionHojaProduccionFarma
         Return "Pellital_V"
     End Function
 
-    Private Function _CalcularBloqueo(ByVal Tipo As String, ByVal Codigo As String) As Double
+    Private Function _CalcularBloqueo(ByVal WTipo As String, ByVal Codigo As String) As Double
         Dim Saldo As Double
         Dim CantidadBloqueada As Double = 0
         Dim SQLCnlst As String
 
 
-        If Tipo = "M" Then
+        If WTipo = "M" Then
             'CALCULA LOS SALDOS BLOQUEADOS DE LAUDO
             SQLCnlst = "SELECT Saldo FROM Laudo WHERE Articulo = '" & Codigo & "' AND Saldo <> 0 AND Estado = 'N'"
 
@@ -1374,7 +1376,7 @@ Public Class IngresoActualizacionHojaProduccionFarma
 
     End Function
 
-    Private Sub mastxtMPoPT_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles mastxtMPoPT.KeyDown
+    Private Sub mastxtMPoPT_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles mastxtMPoPT.KeyDown
         Dim SQLCnslt As String
 
         Select Case e.KeyData
@@ -1399,7 +1401,7 @@ Public Class IngresoActualizacionHojaProduccionFarma
         End Select
     End Sub
 
-    Private Sub DGV_IngredientosHojaProduccion_RowHeaderMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles DGV_IngredientosHojaProduccion.RowHeaderMouseDoubleClick
+    Private Sub DGV_IngredientosHojaProduccion_RowHeaderMouseDoubleClick(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles DGV_IngredientosHojaProduccion.RowHeaderMouseDoubleClick
 
         If MsgBox("¿Desea borrar la fila?", MsgBoxStyle.YesNo) = vbYes Then
             Dim filaBorrar As Integer = DGV_IngredientosHojaProduccion.CurrentRow.Index
@@ -1440,31 +1442,21 @@ Public Class IngresoActualizacionHojaProduccionFarma
                 Return "No permitido"
             End If
 
-
         End If
 
     End Function
 
-
-
-
-    Private Sub btnGrabar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGrabar.Click
+    Private Sub btnGrabar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnGrabar.Click
 
         Dim SQLCnslt As String
         Dim listaSQLCnslt As New List(Of String)
 
-
         For Each row As DataGridViewRow In DGV_IngredientosHojaProduccion.Rows
-
             If row.Cells("Cantidad").Value = "" Then
                 MsgBox("No se puede grabar si no hay stock suficiente")
                 Exit Sub
             End If
-
         Next
-
-
-
 
         If _ObtenerNroHojaDisponible(txtHojaProduccion.Text) = "No permitido" Then
 
@@ -1485,19 +1477,9 @@ Public Class IngresoActualizacionHojaProduccionFarma
 
         End If
 
-
-
-
-
-
-
         If Microsoft.VisualBasic.Left$(mastxtProducto.Text, 2) = "PT" Or Microsoft.VisualBasic.Left$(mastxtProducto.Text, 2) = "SE" Or Microsoft.VisualBasic.Left$(mastxtProducto.Text, 2) = "DW" Then
 
-
-
-
-
-            If Operador.Codigo = 1 Or Operador.Codigo = 2 Or Operador.Codigo = 3 Or Operador.Codigo = 4 Then
+            If Codigo = 1 Or Codigo = 2 Or Codigo = 3 Or Codigo = 4 Then
 
                 SQLCnslt = "SELECT Estado, EstadoI, EstadoII FROM Terminado WHERE Codigo = '" & mastxtProducto.Text & "'"
 
@@ -1525,14 +1507,12 @@ Public Class IngresoActualizacionHojaProduccionFarma
 
                 End If
 
-
-
                 Dim Suma As Double = 0
 
-                Dim tipo As String
+                Dim ZTipo As String = ""
                 Dim Articulo As String
                 Dim Terminado As String
-                Dim Cantidad As Double
+                Dim ZCantidad As Double
                 Dim Renglon As String = ""
 
                 Dim auxiliar(50, 7)
@@ -1548,9 +1528,8 @@ Public Class IngresoActualizacionHojaProduccionFarma
 
                         Suma = Suma + 1
 
-
-                        tipo = .Cells("Tipo").Value
-                        If tipo = "M" Then
+                        ZTipo = .Cells("Tipo").Value
+                        If ZTipo = "M" Then
 
                             Articulo = UCase(.Cells("MPoPT").Value)
                             Terminado = "  -     -  "
@@ -1559,15 +1538,9 @@ Public Class IngresoActualizacionHojaProduccionFarma
                             Articulo = "  -   -   "
                         End If
 
-                        Cantidad = Val(.Cells("Cantidad").Value)
-
-
-
-
+                        ZCantidad = Val(.Cells("Cantidad").Value)
 
                         Dim hoja As String
-
-
 
                         Renglon = .Cells("Linea").Value
                         Renglon = Renglon.PadLeft(2, "0")
@@ -1581,10 +1554,10 @@ Public Class IngresoActualizacionHojaProduccionFarma
                         Dim WReal As String = txtRendimientoReal.Text
                         Dim WFechaing As String = mastxtFechaIngreso.Text
                         Dim WFechaingord As String = Microsoft.VisualBasic.Right$(WFechaing, 4) + Mid$(WFechaing, 4, 2) + Microsoft.VisualBasic.Left$(WFechaing, 2)
-                        Dim WTipo As String = tipo
+                        Dim WTipo As String = ZTipo
                         Dim WTerminado As String = Terminado
                         Dim WArticulo As String = Articulo
-                        Dim WCantidad As String = formatonumerico(Cantidad, 3)
+                        Dim WCantidad As String = formatonumerico(ZCantidad, 3)
                         Dim WLote As String = "0"
                         Dim WDate As String = Date.Now.ToString("MM-dd-yyyy")
                         Dim WImporte As String = ""
@@ -1605,7 +1578,7 @@ Public Class IngresoActualizacionHojaProduccionFarma
                         Dim XCosto2 As Double = 0
                         Dim XCosto3 As Double = 0
 
-                        Select Case tipo
+                        Select Case ZTipo
                             Case "T"
 
                                 _Calcula_Costo_Produccion(Terminado, XCosto1, XCosto2, XCosto3)
@@ -1623,15 +1596,11 @@ Public Class IngresoActualizacionHojaProduccionFarma
 
                                 End If
 
-
                         End Select
 
                         WCosto1 = formatonumerico(XCosto1)
                         WCosto2 = formatonumerico(XCosto2)
                         WCosto3 = formatonumerico(XCosto3)
-
-
-
 
                         XParam = "'" + WClave & "','" _
                                      + WHoja & "','" _
@@ -1664,14 +1633,11 @@ Public Class IngresoActualizacionHojaProduccionFarma
 
                         listaSQLCnslt.Add(SQLCnslt)
 
-
                         Dim WFechaord As String = Microsoft.VisualBasic.Right$(WFecha, 4) + Mid$(WFecha, 4, 2) + Microsoft.VisualBasic.Left$(WFecha, 2)
 
                         SQLCnslt = "UPDATE Hoja SET Fechaord = '" & WFechaord & "', VersionI = '" & txtVersionFormulaV1.Text & "', VersionII = '" & txtProcedimientoV2.Text & "',  VersionIII = '" & txtEspecificacionV3.Text & "' WHERE Hoja = '" & txtHojaProduccion.Text & "'"
 
-
                         listaSQLCnslt.Add(SQLCnslt)
-
 
                         auxiliar(Renglon, 1) = WProducto
                         auxiliar(Renglon, 2) = WTerminado
@@ -1684,29 +1650,20 @@ Public Class IngresoActualizacionHojaProduccionFarma
                     End With
                 Next
 
-
-
-
-
-
                 If txtRendimientoReal.Text <> "" Then
                     If txtRendimientoReal.Text > 0 Then
 
                         For i = 1 To Val(Renglon)
 
-                            Dim Producto As String = auxiliar(i, 1)
                             Terminado = auxiliar(i, 2)
                             Articulo = auxiliar(i, 3)
                             Cantidad = auxiliar(i, 4)
-                            Dim Real As String = auxiliar(i, 5)
                             Dim Teorico As String = auxiliar(i, 6)
                             tipo = auxiliar(i, 7)
-
 
                             Dim WProceso As String = ""
                             Dim WEntradas As String = ""
                             Dim WDate As String = Date.Now.ToString("MM-dd-yyyy")
-
 
                             If i = 1 Then
 
@@ -1729,7 +1686,7 @@ Public Class IngresoActualizacionHojaProduccionFarma
 
                             Dim WSalidas As String
 
-                            Select Case tipo
+                            Select Case ZTipo
                                 Case "M"
 
                                     SQLCnslt = "SELECT Salidas FROM Articulo WHERE Codigo = '" & Articulo & "'"
@@ -1766,15 +1723,11 @@ Public Class IngresoActualizacionHojaProduccionFarma
 
                         Next
 
-
                     End If
 
                 End If
             End If
         End If
-
-
-
 
         If listaSQLCnslt.Count > 0 Then
             ExecuteNonQueries(listaSQLCnslt.ToArray())
@@ -1783,7 +1736,6 @@ Public Class IngresoActualizacionHojaProduccionFarma
         _LimpiarForm()
 
     End Sub
-
 
     Private Sub _Calcula_Costo_Produccion(ByVal Producto As String, ByRef XCosto1 As Double, ByRef XCosto2 As Double, ByRef XCosto3 As Double)
 
@@ -1808,7 +1760,6 @@ Public Class IngresoActualizacionHojaProduccionFarma
                     End If
                 End With
             Next
-
 
         End If
 
@@ -1842,12 +1793,7 @@ Public Class IngresoActualizacionHojaProduccionFarma
 
     End Sub
 
-
-
-
-
-
-    Private Sub btnBlockNotas_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBlockNotas.Click
+    Private Sub btnBlockNotas_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnBlockNotas.Click
         Try
             If pnlAgenda.Visible = False Then
                 If File.Exists("H" + txtHojaProduccion.Text + ".rtf") Then
@@ -1855,14 +1801,10 @@ Public Class IngresoActualizacionHojaProduccionFarma
                 Else
                     rtxtAgenda.LoadFile("blanco.rtf", 0)
                 End If
-                ' rtxtAgenda.LoadFile("blanco.rtf", 0)
-                'rtxtAgenda.LoadFile("H" + txtHojaProduccion.Text + ".rtf", 0)
                 pnlAgenda.Visible = True
                 rtxtAgenda.Focus()
 
-
             Else
-
                 rtxtAgenda.SaveFile("H" + txtHojaProduccion.Text + ".rtf", 0)
                 pnlAgenda.Visible = False
 
@@ -1873,8 +1815,7 @@ Public Class IngresoActualizacionHojaProduccionFarma
 
     End Sub
 
-
-    Private Sub btnConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsulta.Click
+    Private Sub btnConsulta_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnConsulta.Click
         txtAyuda.Text = ""
         pnlAyuda.Visible = True
         cbxAyuda.SelectedIndex = 0
@@ -1886,7 +1827,7 @@ Public Class IngresoActualizacionHojaProduccionFarma
         DGV_Ayuda.DataSource = tabla
     End Sub
 
-    Private Sub cbxAyuda_DropDownClosed(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxAyuda.DropDownClosed
+    Private Sub cbxAyuda_DropDownClosed(ByVal sender As Object, ByVal e As EventArgs) Handles cbxAyuda.DropDownClosed
         Dim SQLCnslt As String
         If cbxAyuda.SelectedIndex = 0 Then
             SQLCnslt = "SELECT CodigoAyuda = Codigo, DescripcionAyuda = Descripcion FROM Articulo"
@@ -1905,14 +1846,14 @@ Public Class IngresoActualizacionHojaProduccionFarma
 
     End Sub
 
-    Private Sub txtAyuda_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtAyuda.KeyUp
+    Private Sub txtAyuda_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtAyuda.KeyUp
         Dim tabla As DataTable = TryCast(DGV_Ayuda.DataSource, DataTable)
 
         tabla.DefaultView.RowFilter = "CodigoAyuda LIKE '%" & txtAyuda.Text & "%' or DescripcionAyuda LIKE '%" & txtAyuda.Text & "%'"
         DGV_Ayuda.DataSource = tabla
     End Sub
 
-    Private Sub DGV_Ayuda_CellMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles DGV_Ayuda.CellMouseDoubleClick
+    Private Sub DGV_Ayuda_CellMouseDoubleClick(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles DGV_Ayuda.CellMouseDoubleClick
 
         If cbxAyuda.SelectedIndex = 0 Then
             cbxTipo.SelectedIndex = 0
@@ -1930,12 +1871,12 @@ Public Class IngresoActualizacionHojaProduccionFarma
 
     End Sub
 
-    Private Sub btnpnlAyudaVolver_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnpnlAyudaVolver.Click
+    Private Sub btnpnlAyudaVolver_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnpnlAyudaVolver.Click
         pnlAyuda.Visible = False
         txtAyuda.Text = ""
     End Sub
 
-    Private Sub btnBajaHoja_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBajaHoja.Click
+    Private Sub btnBajaHoja_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnBajaHoja.Click
         If Val(txtRendimientoReal.Text) = 0 Then
             Dim SQLCnslt As String
 

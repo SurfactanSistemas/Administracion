@@ -2,7 +2,7 @@
 Imports ConsultasVarias
 Imports ConsultasVarias.Interfaces
 
-Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecificaciones, IListaConsultas, IAyudaPTs, IAyudaEnsayos, IIngresoClaveSeguridad
+Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecificaciones, IListaConsultas, IAyudaMPs, IAyudaEnsayos, IIngresoClaveSeguridad
 
     Enum TipoProcesosIngEspecif
         Revalida
@@ -12,6 +12,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
     Private WAutorizado As Boolean = False
     Private WActualizaVersion As Boolean = False
     Private WTipoProceso As TipoProcesosIngEspecif = Nothing
+    Private IDOperadorGrabacion As Short = 0
 
     Private Sub btnLimpiar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLimpiar.Click
         For Each control As Control In {txtControlCambios, txtDescTerminado, txtCodigo, txtCondicionMuestreo, txtDescIngles, txtCas, txtFecha, txtOperador, txtVersion}
@@ -150,7 +151,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
             Dim WCargaVFormatoViejo As New DataTable
             Dim WCargaVFormatoViejoIngles As New DataTable
 
-            For Each c As String In {"Ensayo", "Valor", "ControlCambio", "Farmacopea", "TipoEspecif", "DesdeEspecif", "HastaEspecif", "UnidadEspecif", "MenorIgualEspecif", "InformaEspecif", "FormulaEspecif"}
+            For Each c As String In {"Ensayo", "Valor", "ControlCambio", "Farmacopea", "TipoEspecif", "DesdeEspecif", "HastaEspecif", "UnidadEspecif", "MenorIgualEspecif", "InformaEspecif", "FormulaEspecif", "FechaGrabacion", "Version", "Operador"}
                 WCargaVFormatoViejo.Columns.Add(c)
                 WCargaVFormatoViejoIngles.Columns.Add(c)
             Next
@@ -173,7 +174,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
             '
             ' Transformamos la información vieja al Formato nuevo.
             '
-            Dim WEnsayo, WValor, WDesde, WHasta, WTipoEspecif, WInformaEspecif As String
+            Dim WEnsayo, WValor, WDesde, WHasta, WTipoEspecif, WInformaEspecif, WFecha, WVersion, WOperador As String
 
             For i = 1 To 20
 
@@ -182,6 +183,10 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
                     WEnsayo = Trim(OrDefault(.Item("Ensayo" & i), ""))
 
                     If Val(WEnsayo) = 0 Then Continue For
+
+                    WFecha = OrDefault(.Item("Fecha"), "")
+                    WVersion = OrDefault(.Item("Version"), "")
+                    WOperador = OrDefault(.Item("Operador"), "")
 
                     WValor = Trim(OrDefault(.Item("Valor" & i), ""))
                     WDesde = Trim(OrDefault(.Item("Desde" & i), ""))
@@ -201,6 +206,9 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
                     .Item("HastaEspecif") = WHasta
                     .Item("TipoEspecif") = WTipoEspecif
                     .Item("InformaEspecif") = WInformaEspecif
+                    .Item("FechaGrabacion") = WFecha
+                    .Item("Version") = WVersion
+                    .Item("Operador") = WOperador
                 End With
 
                 WCargaVFormatoViejo.Rows.Add(r)
@@ -253,12 +261,12 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
             txtFecha.Text = Trim(OrDefault(WEspecificacionesUnifica.Item("Fecha"), "  /  /    "))
             txtControlCambios.Text = Trim(OrDefault(WEspecificacionesUnifica.Item("ControlCambio"), ""))
 
-            Dim WOperador As String = Trim(OrDefault(WEspecificacionesUnifica.Item("Operador"), ""))
+            'Dim WOperador As String = Trim(OrDefault(WEspecificacionesUnifica.Item("Operador"), ""))
 
-            If Val(WOperador) > 0 Then
-                Dim temp As DataRow = GetSingle("SELECT Descripcion FROM Operador WHERE Operador = '" & WOperador & "'", "Surfactan_II")
-                If temp IsNot Nothing Then txtOperador.Text = Trim(OrDefault(temp.Item("Descripcion"), "")).ToUpper
-            End If
+            'If Val(WOperador) > 0 Then
+            '    Dim temp As DataRow = GetSingle("SELECT Descripcion FROM Operador WHERE Operador = '" & WOperador & "'", "Surfactan_II")
+            '    If temp IsNot Nothing Then txtOperador.Text = Trim(OrDefault(temp.Item("Descripcion"), "")).ToUpper
+            'End If
 
             If WEspecificacionesUnificaII IsNot Nothing Then
 
@@ -349,6 +357,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
     Private Sub _PoblarEspecificaciones(WCargaV As DataTable)
 
         Dim WNroRenglon As Integer = 1
+        Dim WOperador As String = ""
 
         dgvEspecif.Rows.Clear()
 
@@ -356,8 +365,6 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
         ' En caso de tener datos en el formato nuevo, los cargamos. Sino traemos y parseamos los datos del formato viejo al nuevo.
         '
         If WCargaV.Rows.Count > 0 Then
-
-
 
             For Each row As DataRow In WCargaV.Rows
                 'dgvEspecif.Rows.Add()
@@ -402,11 +409,22 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
 
                     End With
 
+                    WOperador = Trim(OrDefault(.Item("Operador"), ""))
+
+                    txtFecha.Text = OrDefault(.Item("FechaGrabacion"), "  /  /    ")
+                    txtVersion.Text = OrDefault(.Item("Version"), "")
                 End With
                 WNroRenglon += 1
+
             Next
 
+            If Val(WOperador) > 0 Then
+                Dim temp As DataRow = GetSingle("SELECT Descripcion FROM Operador WHERE Operador = '" & WOperador & "'", "Surfactan_II")
+                If temp IsNot Nothing Then txtOperador.Text = Trim(OrDefault(temp.Item("Descripcion"), "")).ToUpper
+            End If
 
+            If Val(ordenaFecha(txtFecha.Text)) = 0 Then txtFecha.Text = Date.Now.ToString("dd/MM/yyyy")
+            If Val(txtVersion.Text) = 0 Then txtVersion.Text = "1"
 
         End If
     End Sub
@@ -549,7 +567,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
         WSqls.AddRange(_PrepararGrabarEnFormatoViejo())
 
         If WActualizaVersion Then
-            WSqls.Add("INSERT INTO CargaVMPVersion (Clave,Articulo,Paso,Renglon,Fecha,Ensayo,Valor,DesEnsayo,Partida,CantidadPartida,DesPaso,Corte,ImprePaso,ControlCambio,[Version],Resultado,ObservaI,ObservaII,ObservaIII,ObservaIV,ImpreTerminado,fechaing,UnidadEspecif,TipoEspecif,DesdeEspecif,HastaEspecif,DesEnsayoII,Farmacopea,observacion1,observacion2,observacion3,observacion4,observacion5,observacion6,observacion7,observacion8,observacion9,observacion10,InformaEspecif,MenorIgualEspecif,FormulaEspecif,Variable1,Variable2,Variable3,Variable4,Variable5,Variable6,Variable7,Variable8,Variable9,Variable10,FechaGrabacion,MetAnaliticoTrazas,FechaInicio,FechaFinal) SELECT Clave,Articulo,Paso,Renglon,FechaGrabacion,Ensayo,Valor,DesEnsayo,Partida,CantidadPartida,DesPaso,Corte,ImprePaso,ControlCambio,[Version],Resultado,ObservaI,ObservaII,ObservaIII,ObservaIV,ImpreTerminado,fechaing,UnidadEspecif,TipoEspecif,DesdeEspecif,HastaEspecif,DesEnsayoII,Farmacopea,observacion1,observacion2,observacion3,observacion4,observacion5,observacion6,observacion7,observacion8,observacion9,observacion10,InformaEspecif,MenorIgualEspecif,FormulaEspecif,Variable1,Variable2,Variable3,Variable4,Variable5,Variable6,Variable7,Variable8,Variable9,Variable10,FechaGrabacion,MetAnaliticoTrazas, FechaGrabacion, '" & Date.Now.ToString("dd/MM/yyyy") & "' FROM CargaVMP WHERE Articulo = '" & txtCodigo.Text & "'")
+            WSqls.Add("INSERT INTO CargaVMPVersion (Clave,Articulo,Paso,Renglon,Fecha,Ensayo,Valor,DesEnsayo,Partida,CantidadPartida,DesPaso,Corte,ImprePaso,ControlCambio,[Version],Resultado,ObservaI,ObservaII,ObservaIII,ObservaIV,ImpreTerminado,fechaing,UnidadEspecif,TipoEspecif,DesdeEspecif,HastaEspecif,DesEnsayoII,Farmacopea,observacion1,observacion2,observacion3,observacion4,observacion5,observacion6,observacion7,observacion8,observacion9,observacion10,InformaEspecif,MenorIgualEspecif,FormulaEspecif,Variable1,Variable2,Variable3,Variable4,Variable5,Variable6,Variable7,Variable8,Variable9,Variable10,FechaGrabacion,MetAnaliticoTrazas,FechaInicio,FechaFinal, Operador) SELECT Clave,Articulo,Paso,Renglon,FechaGrabacion,Ensayo,Valor,DesEnsayo,Partida,CantidadPartida,DesPaso,Corte,ImprePaso,ControlCambio,[Version],Resultado,ObservaI,ObservaII,ObservaIII,ObservaIV,ImpreTerminado,fechaing,UnidadEspecif,TipoEspecif,DesdeEspecif,HastaEspecif,DesEnsayoII,Farmacopea,observacion1,observacion2,observacion3,observacion4,observacion5,observacion6,observacion7,observacion8,observacion9,observacion10,InformaEspecif,MenorIgualEspecif,FormulaEspecif,Variable1,Variable2,Variable3,Variable4,Variable5,Variable6,Variable7,Variable8,Variable9,Variable10,FechaGrabacion,MetAnaliticoTrazas, FechaGrabacion, '" & Date.Now.ToString("dd/MM/yyyy") & "', Operador FROM CargaVMP WHERE Articulo = '" & txtCodigo.Text & "'")
         End If
 
         '
@@ -558,7 +576,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
         WSqls.AddRange(_PrepararGrabarEnFormatoNuevo())
 
         If WActualizaVersion Then
-            WSqls.Add("UPDATE CargaVMP SET Version = [Version] + 1 WHERE Articulo = '" & txtCodigo.Text & "'")
+            WSqls.Add("UPDATE CargaVMP SET Version = [Version] + 1, FechaGrabacion = '" & Date.Now.ToString("dd/MM/yyyy") & "', Operador = '" & IDOperadorGrabacion & "' WHERE Articulo = '" & txtCodigo.Text & "'")
         End If
 
         '
@@ -601,7 +619,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
         ZLugarII = 0
         WRenglon = 0
 
-        If txtFecha.Text = "" Then txtFecha.Text = Date.Now.ToString("dd/MM/yyyy")
+        If Val(ordenaFecha(txtFecha.Text)) = 0 Then txtFecha.Text = Date.Now.ToString("dd/MM/yyyy")
 
         '
         ' Grabamos los datos de cada renglon.
@@ -677,6 +695,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
                 ZSql = ZSql & "Variable10 ,"
                 ZSql = ZSql & "FechaGrabacion ,"
                 ZSql = ZSql & "[Version] ,"
+                ZSql = ZSql & "Operador ,"
                 ZSql = ZSql & "Corte )"
                 ZSql = ZSql & "Values ("
                 ZSql = ZSql & "'" & WClave & "',"
@@ -708,6 +727,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
                 ZSql = ZSql & "'" & WVariable10 & "',"
                 ZSql = ZSql & "'" & txtFecha.Text & "',"
                 ZSql = ZSql & "'" & txtVersion.Text & "',"
+                ZSql = ZSql & "'" & IDOperadorGrabacion & "',"
                 ZSql = ZSql & "'" & WCorte & "')"
 
                 WConsultas.Add(ZSql)
@@ -959,11 +979,11 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
             End With
         Next
 
-        Return String.Format("UPDATE EspecificacionesUnifica SET {0} WDate = '{1}', Fecha = '{2}', Operador = '{3}', ControlCambio = '{4}' WHERE Producto = '{5}'", columnas, Date.Now.ToString("MM-dd-yyyy"), Date.Now.ToString("dd/MM/yyyy"), Operador.Codigo, txtControlCambios.Text.Trim, txtCodigo.Text)
+        Return String.Format("UPDATE EspecificacionesUnifica SET {0} WDate = '{1}', Fecha = '{2}', Operador = '{3}', ControlCambio = '{4}' WHERE Producto = '{5}'", columnas, Date.Now.ToString("MM-dd-yyyy"), Date.Now.ToString("dd/MM/yyyy"), IDOperadorGrabacion, txtControlCambios.Text.Trim, txtCodigo.Text)
     End Function
 
     Private Function _PrepararActualizacionVersionFormatoViejo() As String
-        
+
         Dim columnas As String = ""
 
         For i = 1 To 20
@@ -975,7 +995,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
             End With
         Next
 
-        Return String.Format("UPDATE EspecificacionesUnifica SET {0} WDate = '{1}', Version = Version + 1, Fecha = '{2}', Operador = '{3}', ControlCambio = '{4}' WHERE Producto = '{5}'", columnas, Date.Now.ToString("MM-dd-yyyy"), Date.Now.ToString("dd/MM/yyyy"), Operador.Codigo, txtControlCambios.Text.Trim, txtCodigo.Text)
+        Return String.Format("UPDATE EspecificacionesUnifica SET {0} WDate = '{1}', Version = Version + 1, Fecha = '{2}', Operador = '{3}', ControlCambio = '{4}' WHERE Producto = '{5}'", columnas, Date.Now.ToString("MM-dd-yyyy"), Date.Now.ToString("dd/MM/yyyy"), IDOperadorGrabacion, txtControlCambios.Text.Trim, txtCodigo.Text)
     End Function
 
     Private Function _PrepararAltaPrimeraVersionFormatoViejo() As String
@@ -1007,7 +1027,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
         sql &= columnas
         sql &= "[Version], Producto, WDate, FechaInicio, FechaFinal, ControlCambio, Operador"
         sql &= ") VALUES (" & valores & ""
-        sql &= " Version = 1, '" & txtCodigo.Text & "', '" & Date.Now.ToString("MM-dd-yyyy") & "', Fecha, '" & Date.Now.ToString("dd/MM/yyyy") & "', '" & txtControlCambios.Text.Trim & "', '" & Operador.Codigo & "')"
+        sql &= " Version = 1, '" & txtCodigo.Text & "', '" & Date.Now.ToString("MM-dd-yyyy") & "', Fecha, '" & Date.Now.ToString("dd/MM/yyyy") & "', '" & txtControlCambios.Text.Trim & "', '" & IDOperadorGrabacion & "')"
         Return sql
     End Function
 
@@ -2655,7 +2675,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
 
         ZSql = ""
         ZSql = ZSql & "UPDATE EspecifUnifica SET "
-        ZSql = ZSql & " Operador = '" & Operador.Codigo & "'"
+        ZSql = ZSql & " Operador = '" & IDOperadorGrabacion & "'"
         ZSql = ZSql & " Where Producto = '" + txtCodigo.Text & "'"
 
         WConsultasII.Add(ZSql)
@@ -2678,7 +2698,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
     End Sub
 
     Private Sub btnConsultas_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnConsultas.Click
-        With New ListaConsultas("Productos Terminados", "Ensayos")
+        With New ListaConsultas("Materias Primas", "Ensayos")
             .Show(Me)
         End With
     End Sub
@@ -2687,7 +2707,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
 
         Select Case Opcion
             Case 0
-                With New AyudaPTs
+                With New AyudaMPs
                     .Show(Me)
                 End With
             Case 1
@@ -2698,7 +2718,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
 
     End Sub
 
-    Public Sub _ProcesarAyudaPTs(ByVal Codigo As String, ByVal WDescripcion As String) Implements IAyudaPTs._ProcesarAyudaPTs
+    Public Sub _ProcesarAyudaMPs(ByVal Codigo As String, ByVal WDescripcion As String) Implements IAyudaMPs._ProcesarAyudaMPs
         txtCodigo.Text = Codigo
         txtCodigo_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
     End Sub
@@ -2728,12 +2748,15 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
     End Sub
 
     Public Sub _ProcesarIngresoClaveSeguridad(ByVal WClave As Object) Implements IIngresoClaveSeguridad._ProcesarIngresoClaveSeguridad
-        Dim WOperador As DataRow = GetSingle("SELECT * FROM Operador WHERE UPPER(Clave) = '" & WClave & "'")
+        Dim WOperador As DataRow = GetSingle("SELECT Operador, GrabaII FROM Operador WHERE UPPER(Clave) = '" & WClave & "'")
 
         Dim WGrabaII As String = ""
 
+        IDOperadorGrabacion = 0
+
         If WOperador IsNot Nothing Then
             WGrabaII = UCase(Trim(OrDefault(WOperador.Item("GrabaII"), "")))
+            IDOperadorGrabacion = WOperador.Item("Operador")
         End If
 
         Select Case WTipoProceso
@@ -2790,7 +2813,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
             dgvEspecif.CurrentCell = dgvEspecif.Rows(_rRenglon).Cells(2)
             dgvEspecif.CurrentCell = dgvEspecif.Rows(_rRenglon).Cells(1)
         End If
-        
+
 
     End Sub
 
@@ -3118,13 +3141,60 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
         Loop
     End Sub
 
-
-
     Private Sub btnNotas_Click(sender As Object, e As EventArgs) Handles btnNotas.Click
-        With New NotasCertificadosAnalisis(txtCodigo.Text, True)
-            .Show(Me)
-        End With
+        If txtCodigo.Text.Replace(" ", "").Length = 10 Then
+            With New NotasCertificadosAnalisis(txtCodigo.Text, True)
+                .Show(Me)
+            End With
+
+        End If
     End Sub
 
+    Private Sub btnImpresion_Click(sender As Object, e As EventArgs) Handles btnImpresion.Click
+        Dim WArticulo As DataRow = GetSingle("SELECT Codigo FROM Articulo WHERE Codigo = '" & txtCodigo.Text & "'")
 
+        If WArticulo Is Nothing Then Exit Sub
+
+        Dim WCargaV As DataTable = GetAll("SELECT Valor, Clave, MenorIgualEspecif, InformaEspecif, TipoEspecif, UnidadEspecif, DesdeEspecif, HastaEspecif, Farmacopea, Ensayo FROM CargaVMP WHERE Articulo = '" & txtCodigo.Text & "' Order by Clave", "Surfactan_II")
+
+        If WCargaV.Rows.Count = 0 Then Exit Sub
+
+        Dim WSqls As New List(Of String)
+
+        WSqls.Add(String.Format("UPDATE CargaVMP SET Partida = '0', ImprePaso = Paso, CantidadPartida = '' WHERE Articulo = '{0}'", txtCodigo.Text))
+
+        For Each row As DataRow In WCargaV.Rows
+            Dim WObservacion1 As String = ""
+
+            With row
+
+                WObservacion1 = _GenerarImpreParametro(OrDefault(.Item("TipoEspecif"), ""), OrDefault(.Item("DesdeEspecif"), ""), OrDefault(.Item("HastaEspecif"), ""), OrDefault(.Item("UnidadEspecif"), ""), OrDefault(.Item("MenorIgualEspecif"), ""))
+
+                WSqls.Add(String.Format("UPDATE CargaVMP SET Observacion1 = '{1}' WHERE Clave = '{0}'", .Item("Clave"), _Left(WObservacion1.Trim, 100)))
+
+            End With
+
+        Next
+
+        ExecuteNonQueries("Surfactan_II", WSqls.ToArray)
+
+        With New VistaPrevia
+            .Reporte = New ImpreEspecificacionesMP
+            .Formula = "{CargaV.Articulo}='" & txtCodigo.Text & "'"
+            .Base = "Surfactan_II"
+            '.Formula = "{CargaV.Terminado}='" & txtTerminado.Text & "' And {CargaV.Paso}=" & txtEtapa.Text & ""
+            .Mostrar()
+        End With
+
+        Dim WEspecIngles As DataRow = GetSingle("SELECT Clave FROM CargaVMPIngles WHERE Articulo = '" & txtCodigo.Text & "'", "Surfactan_II")
+
+        If WEspecIngles Is Nothing Then Exit Sub
+
+        With New VistaPrevia
+            .Base = "Surfactan_II"
+            .Reporte = New ImpreEspecificacionesMPIngles
+            .Formula = "{CargaV.Articulo}='" & txtCodigo.Text & "'"
+            .Mostrar()
+        End With
+    End Sub
 End Class

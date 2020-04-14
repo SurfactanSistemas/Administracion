@@ -22,10 +22,8 @@ Partial Class MovimientosVariosDeLaboratorio
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.txtNroMovimiento = New System.Windows.Forms.TextBox()
         Me.cbxTipoMovimiento = New System.Windows.Forms.ComboBox()
         Me.txtObservaciones = New System.Windows.Forms.TextBox()
@@ -66,8 +64,6 @@ Partial Class MovimientosVariosDeLaboratorio
         Me.DescripcionAyuda = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.cbxAyuda = New System.Windows.Forms.ComboBox()
         Me.txtAyuda = New System.Windows.Forms.TextBox()
-        Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.Label14 = New System.Windows.Forms.Label()
         Me.DGV_Movimientos = New ConsultasVarias.DBDataGridView()
         Me.Tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ProdTerminado = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -76,41 +72,40 @@ Partial Class MovimientosVariosDeLaboratorio
         Me.Cantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Movimiento = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Lote = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CodigoAyuda = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DescripcionAyuda = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         Me.pnlContra.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.pnlAyuda.SuspendLayout()
         CType(Me.DGV_Ayuda, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel4.SuspendLayout()
         CType(Me.DGV_Movimientos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'txtNroMovimiento
         '
-        Me.txtNroMovimiento.Location = New System.Drawing.Point(90, 66)
+        Me.txtNroMovimiento.Location = New System.Drawing.Point(94, 57)
         Me.txtNroMovimiento.MaxLength = 6
         Me.txtNroMovimiento.Name = "txtNroMovimiento"
-        Me.txtNroMovimiento.Size = New System.Drawing.Size(100, 20)
+        Me.txtNroMovimiento.Size = New System.Drawing.Size(51, 20)
         Me.txtNroMovimiento.TabIndex = 0
+        Me.txtNroMovimiento.Text = "999999"
+        Me.txtNroMovimiento.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'cbxTipoMovimiento
         '
         Me.cbxTipoMovimiento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbxTipoMovimiento.FormattingEnabled = True
-        Me.cbxTipoMovimiento.Items.AddRange(New Object() {"Entrada", "Salida"})
-        Me.cbxTipoMovimiento.Location = New System.Drawing.Point(524, 66)
+        Me.cbxTipoMovimiento.Items.AddRange(New Object() {"ENTRADA", "SALIDA"})
+        Me.cbxTipoMovimiento.Location = New System.Drawing.Point(446, 57)
         Me.cbxTipoMovimiento.Name = "cbxTipoMovimiento"
         Me.cbxTipoMovimiento.Size = New System.Drawing.Size(142, 21)
         Me.cbxTipoMovimiento.TabIndex = 2
         '
         'txtObservaciones
         '
-        Me.txtObservaciones.Location = New System.Drawing.Point(90, 93)
+        Me.txtObservaciones.Location = New System.Drawing.Point(117, 84)
         Me.txtObservaciones.MaxLength = 50
         Me.txtObservaciones.Name = "txtObservaciones"
-        Me.txtObservaciones.Size = New System.Drawing.Size(737, 20)
+        Me.txtObservaciones.Size = New System.Drawing.Size(710, 20)
         Me.txtObservaciones.TabIndex = 3
         '
         'cbxMP
@@ -126,24 +121,25 @@ Partial Class MovimientosVariosDeLaboratorio
         'mastxtCodigo
         '
         Me.mastxtCodigo.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.mastxtCodigo.Location = New System.Drawing.Point(58, 388)
+        Me.mastxtCodigo.Location = New System.Drawing.Point(59, 388)
         Me.mastxtCodigo.Name = "mastxtCodigo"
         Me.mastxtCodigo.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.mastxtCodigo.Size = New System.Drawing.Size(86, 20)
         Me.mastxtCodigo.TabIndex = 6
+        Me.mastxtCodigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtDescripcion
         '
         Me.txtDescripcion.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.txtDescripcion.Enabled = False
-        Me.txtDescripcion.Location = New System.Drawing.Point(154, 388)
+        Me.txtDescripcion.Location = New System.Drawing.Point(153, 388)
         Me.txtDescripcion.Name = "txtDescripcion"
         Me.txtDescripcion.Size = New System.Drawing.Size(470, 20)
         Me.txtDescripcion.TabIndex = 7
         '
         'txtCantidad
         '
-        Me.txtCantidad.Location = New System.Drawing.Point(630, 388)
+        Me.txtCantidad.Location = New System.Drawing.Point(631, 388)
         Me.txtCantidad.MaxLength = 8
         Me.txtCantidad.Name = "txtCantidad"
         Me.txtCantidad.Size = New System.Drawing.Size(96, 20)
@@ -170,80 +166,80 @@ Partial Class MovimientosVariosDeLaboratorio
         '
         'btnGrabar
         '
-        Me.btnGrabar.Location = New System.Drawing.Point(236, 414)
+        Me.btnGrabar.Location = New System.Drawing.Point(58, 418)
         Me.btnGrabar.Name = "btnGrabar"
-        Me.btnGrabar.Size = New System.Drawing.Size(75, 23)
+        Me.btnGrabar.Size = New System.Drawing.Size(157, 41)
         Me.btnGrabar.TabIndex = 11
-        Me.btnGrabar.Text = "Grabar"
+        Me.btnGrabar.Text = "GRABAR"
         Me.btnGrabar.UseVisualStyleBackColor = True
         '
         'btnLimpiar
         '
-        Me.btnLimpiar.Location = New System.Drawing.Point(332, 414)
+        Me.btnLimpiar.Location = New System.Drawing.Point(247, 418)
         Me.btnLimpiar.Name = "btnLimpiar"
-        Me.btnLimpiar.Size = New System.Drawing.Size(75, 23)
+        Me.btnLimpiar.Size = New System.Drawing.Size(157, 42)
         Me.btnLimpiar.TabIndex = 12
-        Me.btnLimpiar.Text = "Limpiar Grilla"
+        Me.btnLimpiar.Text = "LIMPIAR"
         Me.btnLimpiar.UseVisualStyleBackColor = True
         '
         'btnAyuda
         '
-        Me.btnAyuda.Location = New System.Drawing.Point(421, 413)
+        Me.btnAyuda.Location = New System.Drawing.Point(436, 417)
         Me.btnAyuda.Name = "btnAyuda"
-        Me.btnAyuda.Size = New System.Drawing.Size(75, 23)
+        Me.btnAyuda.Size = New System.Drawing.Size(157, 41)
         Me.btnAyuda.TabIndex = 13
-        Me.btnAyuda.Text = "Ayuda"
+        Me.btnAyuda.Text = "AYUDA"
         Me.btnAyuda.UseVisualStyleBackColor = True
         '
         'btnVolver
         '
-        Me.btnVolver.Location = New System.Drawing.Point(517, 412)
+        Me.btnVolver.Location = New System.Drawing.Point(625, 416)
         Me.btnVolver.Name = "btnVolver"
-        Me.btnVolver.Size = New System.Drawing.Size(75, 23)
+        Me.btnVolver.Size = New System.Drawing.Size(157, 41)
         Me.btnVolver.TabIndex = 14
-        Me.btnVolver.Text = "Volver"
+        Me.btnVolver.Text = "CERRAR"
         Me.btnVolver.UseVisualStyleBackColor = True
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(6, 71)
+        Me.Label1.Location = New System.Drawing.Point(10, 61)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(81, 13)
+        Me.Label1.Size = New System.Drawing.Size(76, 13)
         Me.Label1.TabIndex = 15
-        Me.Label1.Text = "Nro Movimiento"
+        Me.Label1.Text = "MOVIMIENTO"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(250, 69)
+        Me.Label2.Location = New System.Drawing.Point(173, 61)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(37, 13)
+        Me.Label2.Size = New System.Drawing.Size(42, 13)
         Me.Label2.TabIndex = 16
-        Me.Label2.Text = "Fecha"
+        Me.Label2.Text = "FECHA"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(430, 71)
+        Me.Label3.Location = New System.Drawing.Point(331, 61)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(85, 13)
+        Me.Label3.Size = New System.Drawing.Size(104, 13)
         Me.Label3.TabIndex = 17
-        Me.Label3.Text = "Tipo Movimiento"
+        Me.Label3.Text = "TIPO MOVIMIENTO"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(6, 96)
+        Me.Label4.Location = New System.Drawing.Point(10, 87)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(78, 13)
+        Me.Label4.Size = New System.Drawing.Size(98, 13)
         Me.Label4.TabIndex = 18
-        Me.Label4.Text = "Observaciones"
+        Me.Label4.Text = "OBSERVACIONES"
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(15, 370)
+        Me.Label5.Location = New System.Drawing.Point(17, 370)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(28, 13)
         Me.Label5.TabIndex = 19
@@ -261,20 +257,20 @@ Partial Class MovimientosVariosDeLaboratorio
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(155, 369)
+        Me.Label7.Location = New System.Drawing.Point(154, 369)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(63, 13)
+        Me.Label7.Size = New System.Drawing.Size(80, 13)
         Me.Label7.TabIndex = 21
-        Me.Label7.Text = "Descripcion"
+        Me.Label7.Text = "DESCRIPCIÓN"
         '
         'Label8
         '
         Me.Label8.AutoSize = True
         Me.Label8.Location = New System.Drawing.Point(630, 370)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(49, 13)
+        Me.Label8.Size = New System.Drawing.Size(62, 13)
         Me.Label8.TabIndex = 22
-        Me.Label8.Text = "Cantidad"
+        Me.Label8.Text = "CANTIDAD"
         '
         'Label9
         '
@@ -288,20 +284,21 @@ Partial Class MovimientosVariosDeLaboratorio
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(768, 369)
+        Me.Label10.Location = New System.Drawing.Point(773, 369)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(28, 13)
+        Me.Label10.Size = New System.Drawing.Size(35, 13)
         Me.Label10.TabIndex = 24
-        Me.Label10.Text = "Lote"
+        Me.Label10.Text = "LOTE"
         '
         'mastxtFecha
         '
-        Me.mastxtFecha.Location = New System.Drawing.Point(293, 66)
+        Me.mastxtFecha.Location = New System.Drawing.Point(222, 57)
         Me.mastxtFecha.Mask = "00/00/0000"
         Me.mastxtFecha.Name = "mastxtFecha"
         Me.mastxtFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.mastxtFecha.Size = New System.Drawing.Size(100, 20)
+        Me.mastxtFecha.Size = New System.Drawing.Size(71, 20)
         Me.mastxtFecha.TabIndex = 1
+        Me.mastxtFecha.Text = "99999999"
         Me.mastxtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Panel1
@@ -312,19 +309,19 @@ Partial Class MovimientosVariosDeLaboratorio
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(839, 60)
+        Me.Panel1.Size = New System.Drawing.Size(841, 50)
         Me.Panel1.TabIndex = 25
         '
         'Label12
         '
         Me.Label12.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label12.AutoSize = True
-        Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label12.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label12.Location = New System.Drawing.Point(3, 12)
+        Me.Label12.Location = New System.Drawing.Point(25, 16)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(286, 20)
+        Me.Label12.Size = New System.Drawing.Size(239, 18)
         Me.Label12.TabIndex = 2
         Me.Label12.Text = "Movimientos Varios de Laboratorio"
         '
@@ -333,11 +330,11 @@ Partial Class MovimientosVariosDeLaboratorio
         Me.Label11.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label11.AutoSize = True
-        Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label11.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label11.Location = New System.Drawing.Point(657, 25)
+        Me.Label11.Location = New System.Drawing.Point(663, 15)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(179, 24)
+        Me.Label11.Size = New System.Drawing.Size(155, 20)
         Me.Label11.TabIndex = 1
         Me.Label11.Text = "SURFACTAN S.A."
         '
@@ -398,7 +395,6 @@ Partial Class MovimientosVariosDeLaboratorio
         Me.pnlAyuda.Controls.Add(Me.DGV_Ayuda)
         Me.pnlAyuda.Controls.Add(Me.cbxAyuda)
         Me.pnlAyuda.Controls.Add(Me.txtAyuda)
-        Me.pnlAyuda.Controls.Add(Me.Panel4)
         Me.pnlAyuda.Location = New System.Drawing.Point(211, 113)
         Me.pnlAyuda.Name = "pnlAyuda"
         Me.pnlAyuda.Size = New System.Drawing.Size(403, 245)
@@ -406,17 +402,17 @@ Partial Class MovimientosVariosDeLaboratorio
         '
         'btnpnlAyudaVolver
         '
-        Me.btnpnlAyudaVolver.Location = New System.Drawing.Point(306, 44)
+        Me.btnpnlAyudaVolver.Location = New System.Drawing.Point(142, 208)
         Me.btnpnlAyudaVolver.Name = "btnpnlAyudaVolver"
-        Me.btnpnlAyudaVolver.Size = New System.Drawing.Size(75, 23)
+        Me.btnpnlAyudaVolver.Size = New System.Drawing.Size(119, 32)
         Me.btnpnlAyudaVolver.TabIndex = 5
-        Me.btnpnlAyudaVolver.Text = "Volver"
+        Me.btnpnlAyudaVolver.Text = "CERRAR"
         Me.btnpnlAyudaVolver.UseVisualStyleBackColor = True
         '
         'Label15
         '
         Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(12, 49)
+        Me.Label15.Location = New System.Drawing.Point(64, 20)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(100, 13)
         Me.Label15.TabIndex = 4
@@ -427,17 +423,17 @@ Partial Class MovimientosVariosDeLaboratorio
         Me.DGV_Ayuda.AllowUserToAddRows = False
         Me.DGV_Ayuda.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_Ayuda.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CodigoAyuda, Me.DescripcionAyuda})
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGV_Ayuda.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle23.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle23.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle23.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle23.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle23.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGV_Ayuda.DefaultCellStyle = DataGridViewCellStyle23
         Me.DGV_Ayuda.DoubleBuffered = True
         Me.DGV_Ayuda.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.DGV_Ayuda.Location = New System.Drawing.Point(10, 99)
+        Me.DGV_Ayuda.Location = New System.Drawing.Point(11, 74)
         Me.DGV_Ayuda.Name = "DGV_Ayuda"
         Me.DGV_Ayuda.OrdenamientoColumnasHabilitado = True
         Me.DGV_Ayuda.RowHeadersWidth = 15
@@ -467,55 +463,32 @@ Partial Class MovimientosVariosDeLaboratorio
         Me.cbxAyuda.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbxAyuda.FormattingEnabled = True
         Me.cbxAyuda.Items.AddRange(New Object() {"Materia Prima", "Producto Terminado"})
-        Me.cbxAyuda.Location = New System.Drawing.Point(113, 46)
+        Me.cbxAyuda.Location = New System.Drawing.Point(170, 17)
         Me.cbxAyuda.Name = "cbxAyuda"
         Me.cbxAyuda.Size = New System.Drawing.Size(168, 21)
         Me.cbxAyuda.TabIndex = 2
         '
         'txtAyuda
         '
-        Me.txtAyuda.Location = New System.Drawing.Point(10, 73)
+        Me.txtAyuda.Location = New System.Drawing.Point(11, 48)
         Me.txtAyuda.MaxLength = 100
         Me.txtAyuda.Name = "txtAyuda"
         Me.txtAyuda.Size = New System.Drawing.Size(381, 20)
         Me.txtAyuda.TabIndex = 1
-        '
-        'Panel4
-        '
-        Me.Panel4.BackColor = System.Drawing.Color.FromArgb(CType(CType(32, Byte), Integer), CType(CType(74, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.Panel4.Controls.Add(Me.Label14)
-        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel4.Location = New System.Drawing.Point(0, 0)
-        Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(403, 40)
-        Me.Panel4.TabIndex = 0
-        '
-        'Label14
-        '
-        Me.Label14.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label14.AutoSize = True
-        Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label14.Location = New System.Drawing.Point(8, 10)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(90, 20)
-        Me.Label14.TabIndex = 3
-        Me.Label14.Text = "Buscador "
         '
         'DGV_Movimientos
         '
         Me.DGV_Movimientos.AllowUserToAddRows = False
         Me.DGV_Movimientos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_Movimientos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Tipo, Me.ProdTerminado, Me.MateriaPrima, Me.Descripcion, Me.Cantidad, Me.Movimiento, Me.Lote})
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGV_Movimientos.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle24.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle24.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle24.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle24.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle24.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGV_Movimientos.DefaultCellStyle = DataGridViewCellStyle24
         Me.DGV_Movimientos.DoubleBuffered = True
         Me.DGV_Movimientos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.DGV_Movimientos.Location = New System.Drawing.Point(12, 119)
@@ -579,7 +552,7 @@ Partial Class MovimientosVariosDeLaboratorio
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(839, 442)
+        Me.ClientSize = New System.Drawing.Size(841, 469)
         Me.Controls.Add(Me.pnlAyuda)
         Me.Controls.Add(Me.pnlContra)
         Me.Controls.Add(Me.Panel1)
@@ -608,8 +581,11 @@ Partial Class MovimientosVariosDeLaboratorio
         Me.Controls.Add(Me.txtObservaciones)
         Me.Controls.Add(Me.cbxTipoMovimiento)
         Me.Controls.Add(Me.txtNroMovimiento)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.Location = New System.Drawing.Point(20, 20)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "MovimientosVariosDeLaboratorio"
-        Me.Text = "MovimientosVariosDeLaboratorio"
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.pnlContra.ResumeLayout(False)
@@ -619,8 +595,6 @@ Partial Class MovimientosVariosDeLaboratorio
         Me.pnlAyuda.ResumeLayout(False)
         Me.pnlAyuda.PerformLayout()
         CType(Me.DGV_Ayuda, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.Panel4.ResumeLayout(False)
-        Me.Panel4.PerformLayout()
         CType(Me.DGV_Movimientos, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -671,8 +645,6 @@ Partial Class MovimientosVariosDeLaboratorio
     Friend WithEvents DGV_Ayuda As ConsultasVarias.DBDataGridView
     Friend WithEvents cbxAyuda As System.Windows.Forms.ComboBox
     Friend WithEvents txtAyuda As System.Windows.Forms.TextBox
-    Friend WithEvents Panel4 As System.Windows.Forms.Panel
-    Friend WithEvents Label14 As System.Windows.Forms.Label
     Friend WithEvents btnpnlAyudaVolver As System.Windows.Forms.Button
     Friend WithEvents CodigoAyuda As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DescripcionAyuda As System.Windows.Forms.DataGridViewTextBoxColumn
