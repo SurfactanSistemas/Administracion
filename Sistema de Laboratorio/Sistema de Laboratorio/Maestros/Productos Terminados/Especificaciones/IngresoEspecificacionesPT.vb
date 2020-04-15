@@ -18,6 +18,9 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
         Next
 
         ckSubEtapas.Checked = False
+        ckSubEtapas.Visible = EsFarma()
+        txtEtapa.Visible = EsFarma()
+        lblEtapa.Visible = txtEtapa.Visible
 
         dgvProcedimientos.Rows.Clear()
         dgvEspecif.Rows.Clear()
@@ -675,7 +678,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
     End Function
 
     Private Sub btnSalir_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSalir.Click
-        If MsgBox("¿Está seguro de querer cerrar la ventana? " & vbCrLf & vbCrLf & " Todos los datos que no hayan sido guardados, se perderán.", MsgBoxStyle.YesNo) <> MsgBoxResult.Yes Then Exit Sub
+        If txtTerminado.Text.Replace(" ", "").Length = 12 AndAlso MsgBox("¿Está seguro de querer cerrar la ventana? " & vbCrLf & vbCrLf & " Todos los datos que no hayan sido guardados, se perderán.", MsgBoxStyle.YesNo) <> MsgBoxResult.Yes Then Exit Sub
         Close()
     End Sub
 
@@ -2735,13 +2738,16 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
         If WTerminado Is Nothing Then Exit Sub
 
-        Dim WCargaV As DataTable = GetAll("SELECT Valor, Clave, MenorIgualEspecif, InformaEspecif, TipoEspecif, UnidadEspecif, DesdeEspecif, HastaEspecif, Farmacopea, Ensayo FROM CargaV WHERE Terminado = '" & txtTerminado.Text & "' And Paso = '" & txtEtapa.Text & "' Order by Clave")
+        Dim WTablaCargaV As String = IIf(EsFarma, "CargaV", "CargaVNoFarma")
+        Dim WTablaCargaVIng As String = IIf(EsFarma, "CargaVIngles", "CargaVNoFarmaIngles")
+
+        Dim WCargaV As DataTable = GetAll("SELECT Valor, Clave, MenorIgualEspecif, InformaEspecif, TipoEspecif, UnidadEspecif, DesdeEspecif, HastaEspecif, Farmacopea, Ensayo FROM " & WTablaCargaV & " WHERE Terminado = '" & txtTerminado.Text & "' And Paso = '" & txtEtapa.Text & "' Order by Clave")
 
         If WCargaV.Rows.Count = 0 Then Exit Sub
 
         Dim WSqls As New List(Of String)
 
-        WSqls.Add(String.Format("UPDATE CargaV SET Partida = '0', ImprePaso = Paso, CantidadPartida = '' WHERE Terminado = '{0}'", txtTerminado.Text))
+        WSqls.Add(String.Format("UPDATE " & WTablaCargaV & " SET Partida = '0', ImprePaso = Paso, CantidadPartida = '' WHERE Terminado = '{0}'", txtTerminado.Text))
 
         For Each row As DataRow In WCargaV.Rows
             Dim WObservacion1 As String = ""
@@ -2750,7 +2756,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
                 WObservacion1 = _GenerarImpreParametro(OrDefault(.Item("TipoEspecif"), ""), OrDefault(.Item("DesdeEspecif"), ""), OrDefault(.Item("HastaEspecif"), ""), OrDefault(.Item("UnidadEspecif"), ""), OrDefault(.Item("MenorIgualEspecif"), ""))
 
-                WSqls.Add(String.Format("UPDATE CargaV SET Observacion1 = '{1}' WHERE Clave = '{0}'", .Item("Clave"), _Left(WObservacion1.Trim, 100)))
+                WSqls.Add(String.Format("UPDATE " & WTablaCargaV & " SET Observacion1 = '{1}' WHERE Clave = '{0}'", .Item("Clave"), _Left(WObservacion1.Trim, 100)))
 
             End With
 
@@ -2760,17 +2766,17 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
         With New VistaPrevia
             .Reporte = New ImpreEspecificacionesPT
-            .Formula = "{CargaV.Terminado}='" & txtTerminado.Text & "' And {CargaV.Paso} <> 99"
+            .Formula = "{CargaV.Terminado}='" & txtTerminado.Text & "' And {CargaV.Paso} = " & txtEtapa.Text
             .Mostrar()
         End With
 
-        Dim WEspecIngles As DataRow = GetSingle("SELECT Clave FROM CargaVIngles WHERE Terminado = '" & txtTerminado.Text & "' And Paso <> 99")
+        Dim WEspecIngles As DataRow = GetSingle("SELECT Clave FROM " & WTablaCargaVIng & " WHERE Terminado = '" & txtTerminado.Text & "' And Paso = " & txtEtapa.Text)
 
         If WEspecIngles Is Nothing Then Exit Sub
 
         With New VistaPrevia
             .Reporte = New ImpreEspecificacionesPTIngles
-            .Formula = "{CargaV.Terminado}='" & txtTerminado.Text & "' And {CargaV.Paso} <> 99"
+            .Formula = "{CargaV.Terminado}='" & txtTerminado.Text & "' And {CargaV.Paso} = " & txtEtapa.Text
             .Mostrar()
         End With
 
