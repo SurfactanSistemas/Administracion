@@ -1972,6 +1972,8 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
         Dim WSQls As New List(Of String)
 
+        WVerEstadoImple = ""
+
         WSQls.Add("DELETE FROM ImpreSACII")
 
         For i = 1 To 12
@@ -2545,5 +2547,47 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
         End If
     End Sub
 
+
+    Private Sub TabControl1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TabControl1.SelectedIndexChanged
+        '
+        ' Chequeamos en cada cambio de pestaña, las condiciones para el cambio automático de Estados.
+        '
+
+        Dim WEstadoActual As Integer = cmbEstado.SelectedIndex
+
+        Select Case WEstadoActual
+            Case Is < EstadosSac.ImplementacionAVerificar
+                Dim filas As Boolean = dgvImplementaciones.Rows.Cast(Of DataGridViewRow).ToList.TrueForAll(Function(r) OrDefault(r.Cells("Estado").Value, "") = "Imple.")
+
+                If filas Then
+                    cmbEstado.SelectedIndex = EstadosSac.ImplementacionAVerificar
+                    MsgBox("A Imple a Verificar")
+                End If
+            Case Is < EstadosSac.Implementacion
+                Dim filas As Boolean = dgvAcciones.Rows.Cast(Of DataGridViewRow).ToList.Any(Function(r) OrDefault(r.Cells(1).Value, "") <> "")
+
+                If filas Then
+                    cmbEstado.SelectedIndex = EstadosSac.Implementacion
+                    MsgBox("A Implementacion")
+                End If
+            Case Is < EstadosSac.Investigacion
+                If txtIngresoCausa.Text.Trim <> "" Then
+                    cmbEstado.SelectedIndex = EstadosSac.Investigacion
+                    MsgBox("A Iniciada")
+                End If
+
+        End Select
+
+    End Sub
+
+    Enum EstadosSac
+        SinAsignar
+        Iniciada
+        Investigacion
+        Implementacion
+        ImplementacionAVerificar
+        ImplementacionVerificada
+        Cerrada
+    End Enum
 
 End Class

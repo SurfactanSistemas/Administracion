@@ -144,6 +144,10 @@ Public Class Login
 
                         Clases.Conexion.EmpresaDeTrabajo = "SurfactanSa"
 
+                        WReferencia = ""
+                        WTitulo = ""
+                        WTipoProd = ""
+
                         Dim WINC As DataRow = GetSingle("SELECT Numero, Orden, TipoProd, Producto, Referencia, Titulo, Proveedor, Lote, Empresa FROM CargaIncidencias WHERE Incidencia  = '" & WNumero & "'")
 
                         If WINC IsNot Nothing Then

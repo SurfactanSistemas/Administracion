@@ -3,12 +3,9 @@ Imports System.IO
 Imports CrystalDecisions.CrystalReports.Engine
 Imports CrystalDecisions.Shared
 Imports System.Text.RegularExpressions
-Imports ClasesCompartidas
-Imports Microsoft.Office.Interop
 Imports Microsoft.Office.Interop.Outlook
 Imports PdfSharp.Pdf
 Imports PdfSharp.Pdf.IO
-Imports TallComponents.PDF
 
 Public Class VistaPrevia
     Public Property Reporte As ReportDocument
@@ -17,34 +14,26 @@ Public Class VistaPrevia
 
     Private Sub Reporte_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
 
-        With Me.CrystalReportViewer1
-            .ReportSource = Me.Reporte
-            '.Refresh()
+        With CrystalReportViewer1
+            .ReportSource = Reporte
         End With
 
     End Sub
 
     Public Sub EstablecerConexion(ByVal Servidor As String, ByVal BaseDatos As String)
-        With Me.Reporte
+        With Reporte
             .DataSourceConnections.Item(0).SetConnection(Trim(Servidor), Trim(BaseDatos), False)
-            '.Refresh()
         End With
     End Sub
 
     Public Sub _ReconectarBaseDatos()
-
-        ' MANDAMOS EL PARÁMETRO DE LA EMPRESA.
-
-        'If Reporte.ParameterFields.Count > 0 Then
-        '    Reporte.SetParameterValue(0, Globals.NombreEmpresa)
-        'End If
 
         ' CONECTAMOS CON LA BASE DE DATOS QUE CORRESPONDA.
         Dim cs = ""
 
         Try
             ' Buscamos el string de conexion.
-            cs = _ConectarA 'ClasesCompartidas.Globals.getConnectionString()
+            cs = _ConectarA()
         Catch ex As System.Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical)
             Return
@@ -61,7 +50,6 @@ Public Class VistaPrevia
         conexion.ServerName = cnsb.DataSource
         conexion.UserID = cnsb.UserID
         conexion.Password = cnsb.Password
-        ' conexion.IntegratedSecurity = True
 
         Dim tli As New TableLogOnInfo()
         tli.ConnectionInfo = conexion
@@ -82,46 +70,39 @@ Public Class VistaPrevia
 
         _ReconectarBaseDatos()
 
-        With Me.CrystalReportViewer1
+        With CrystalReportViewer1
 
-            .ReportSource = Me.Reporte
+            .ReportSource = Reporte
 
-            If Not String.IsNullOrEmpty(Me.Formula) Then
+            If Not String.IsNullOrEmpty(Formula) Then
 
-                .SelectionFormula = Me.Formula
+                .SelectionFormula = Formula
 
             End If
 
-            '.RefreshReport()
-
         End With
 
-        Me.Show()
+        Show()
 
     End Sub
 
     Public Sub Imprimir(Optional ByVal cant As Integer = 1)
-        'Me.Reporte.DataSourceConnections.Item(0).SetConnection("EMPRESA01", "SurfactanSA", False)
-
+        
         _ReconectarBaseDatos()
 
-        Me.Reporte.RecordSelectionFormula = IIf(IsNothing(Me.Formula), "", Me.Formula)
-        'Me.Reporte.Refresh()
-        Me.Reporte.PrintToPrinter(cant, True, 0, 0)
+        Reporte.RecordSelectionFormula = IIf(IsNothing(Formula), "", Formula)
+        Reporte.PrintToPrinter(cant, True, 0, 0)
     End Sub
 
     Public Sub GuardarPDF(ByVal NombreArchivo As String, Optional ByVal ruta As String = "")
-        ruta = IIf(ruta = "", System.Windows.Forms.Application.StartupPath & "/", ruta)
+        ruta = IIf(ruta = "", Windows.Forms.Application.StartupPath & "/", ruta)
 
         NombreArchivo = IIf(Regex.IsMatch(NombreArchivo, "(\.pdf)$"), NombreArchivo, NombreArchivo & ".pdf")
 
-        'Me.Reporte.DataSourceConnections.Item(0).SetConnection("EMPRESA01", "SurfactanSA", False)
-
         _ReconectarBaseDatos()
 
-        Me.Reporte.RecordSelectionFormula = IIf(IsNothing(Me.Formula), "", Me.Formula)
-        'Me.Reporte.Refresh()
-        Me.Reporte.ExportToDisk(ExportFormatType.PortableDocFormat, ruta & NombreArchivo)
+        Reporte.RecordSelectionFormula = IIf(IsNothing(Formula), "", Formula)
+        Reporte.ExportToDisk(ExportFormatType.PortableDocFormat, ruta & NombreArchivo)
     End Sub
 
     Public Sub Exportar(ByVal NombreArchivo As String, ByVal Formato As ExportFormatType, Optional ByVal ruta As String = "")
@@ -152,9 +133,8 @@ Public Class VistaPrevia
 
         _ReconectarBaseDatos()
 
-        Me.Reporte.RecordSelectionFormula = IIf(IsNothing(Me.Formula), "", Me.Formula)
-        'Me.Reporte.Refresh()
-        Me.Reporte.ExportToDisk(Formato, ruta & NombreArchivo)
+        Reporte.RecordSelectionFormula = IIf(IsNothing(Formula), "", Formula)
+        Reporte.ExportToDisk(Formato, ruta & NombreArchivo)
 
     End Sub
 
