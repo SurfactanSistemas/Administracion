@@ -1,25 +1,20 @@
 ﻿Public Class ImpresionEtiquetasMuestras
     Dim tablaInforme As New DataTable
 
-
-    Private Sub btnVolver_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVolver.Click
-        Me.Close()
+    Private Sub btnVolver_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnVolver.Click
+        Close()
     End Sub
 
-    Private Sub txtInforme_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtInforme.KeyDown
+    Private Sub txtInforme_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtInforme.KeyDown
         Select Case e.KeyData
             Case Keys.Enter
-                If (txtInforme.Text <> "") Then
-                    _BuscarInforme(txtInforme.Text)
-                End If
-
-
+                If (txtInforme.Text <> "") Then _BuscarInforme()
             Case Keys.Escape
                 txtInforme.Text = ""
         End Select
     End Sub
 
-    Private Sub mastxtFecha_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles mastxtFecha.KeyDown
+    Private Sub mastxtFecha_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles mastxtFecha.KeyDown, txtCodigoMP2.KeyDown
         Select Case e.KeyData
             Case Keys.Enter
                 If (ValidaFecha(mastxtFecha.Text) = "S") Then
@@ -34,7 +29,7 @@
         End Select
     End Sub
 
-    Private Sub mastxtFecha_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mastxtFecha.Leave
+    Private Sub mastxtFecha_Leave(ByVal sender As Object, ByVal e As EventArgs) Handles mastxtFecha.Leave, txtCodigoMP2.Leave
         If (ValidaFecha(mastxtFecha.Text) = "S") Then
             txtAnalista.Focus()
         Else
@@ -43,7 +38,7 @@
         End If
     End Sub
 
-    Private Sub txtAnalista_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtAnalista.KeyDown
+    Private Sub txtAnalista_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtAnalista.KeyDown
         Select Case e.KeyData
             Case Keys.Enter
                 If (txtAnalista.Text <> "") Then
@@ -55,24 +50,19 @@
 
     End Sub
 
-
-    Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TxtCantEtiq.KeyPress, txtInforme.KeyPress
+    Private Sub SoloNumero(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles TxtCantEtiq.KeyPress, txtInforme.KeyPress
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
             e.Handled = True
         End If
     End Sub
 
-    Private Sub TxtCantEtiq_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TxtCantEtiq.KeyDown
+    Private Sub TxtCantEtiq_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles TxtCantEtiq.KeyDown
 
-        Select Case e.KeyData
-
-            Case Keys.Escape
-                TxtCantEtiq.Text = ""
-        End Select
+        If e.KeyData = Keys.Escape Then TxtCantEtiq.Text = ""
 
     End Sub
 
-    Private Sub _BuscarInforme(ByVal NumInforme As String)
+    Private Sub _BuscarInforme()
 
         Dim SQLCnsl As String
         SQLCnsl = "SELECT Articulo = i.Articulo, DescripcionLista = i.Articulo + ' ' + CASE i.NombreComercial WHEN NULL THEN a.Descripcion ELSE i.NombreComercial END, " _
@@ -86,7 +76,7 @@
             LtbMP.Visible = True
         Else
             If (LtbMP.Items.Count = 1) Then
-                txtCodigoMP.Text = CType(LtbMP.SelectedItem, DataRowView).Item("Articulo")
+                txtcodigomp2.Text = CType(LtbMP.SelectedItem, DataRowView).Item("Articulo")
                 txtDescripcionMP.Text = CType(LtbMP.SelectedItem, DataRowView).Item("Descripcion")
                 LtbLotes.Items.Clear()
                 For i As Integer = 1 To 20
@@ -96,15 +86,13 @@
                 Next
                 If (LtbLotes.Items.Count > 1) Then
                     LtbLotes.Visible = True
+                ElseIf (LtbLotes.Items.Count = 1) Then
+                    txtLote.Text = LtbLotes.Items(0)
+                    mastxtFecha.Text = Today
                 Else
-                    If (LtbLotes.Items.Count = 1) Then
-                        txtLote.Text = LtbLotes.Items(0)
-                        mastxtFecha.Text = Today
-                    Else
-                        MsgBox("No tiene lote cargados puede cargarlo a mano")
-                        txtLote.Enabled = True
-                        txtLote.Focus()
-                    End If
+                    MsgBox("No tiene lote cargados puede cargarlo a mano")
+                    txtLote.Enabled = True
+                    txtLote.Focus()
                 End If
             Else
                 MsgBox("Este Informe no contiene Materias Primas")
@@ -113,25 +101,25 @@
 
     End Sub
 
-    Private Sub _buscarLote()
-
-    End Sub
-
-
-
-    Private Sub ImpresionEtiquetasMuestras_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Me.Text = ""
+    Private Sub ImpresionEtiquetasMuestras_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
+        Text = ""
         LtbMP.Visible = False
         LtbLotes.Visible = False
-        '        With tablaInforme.Columns
-        '            .Add("")
-        '        End With
+
+        With LtbLotes
+            .Location = New Point(123, 132)
+            .Size = New Size(293, 82)
+        End With
+
+        With LtbLotes
+            .Location = LtbLotes.Location
+            .Size = LtbLotes.Size
+        End With
+
     End Sub
 
-
-
-    Private Sub LtbMP_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles LtbMP.MouseClick
-        txtCodigoMP.Text = CType(LtbMP.SelectedItem, DataRowView).Item("Articulo")
+    Private Sub LtbMP_MouseClick(ByVal sender As Object, ByVal e As MouseEventArgs) Handles LtbMP.MouseClick
+        txtcodigomp2.Text = CType(LtbMP.SelectedItem, DataRowView).Item("Articulo")
         txtDescripcionMP.Text = CType(LtbMP.SelectedItem, DataRowView).Item("Descripcion")
         LtbMP.Visible = False
         LtbLotes.Items.Clear()
@@ -155,17 +143,16 @@
         End If
     End Sub
 
-
-    Private Sub LtbLotes_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles LtbLotes.MouseClick
+    Private Sub LtbLotes_MouseClick(ByVal sender As Object, ByVal e As MouseEventArgs) Handles LtbLotes.MouseClick
         txtLote.Text = LtbLotes.SelectedItem
         LtbLotes.Visible = False
         mastxtFecha.Text = Today
         txtAnalista.Focus()
     End Sub
 
-    Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
+    Private Sub btnLimpiar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLimpiar.Click
         txtInforme.Text = ""
-        txtCodigoMP.Text = ""
+        txtcodigomp2.Text = ""
         txtDescripcionMP.Text = ""
         txtLote.Text = ""
         mastxtFecha.Text = ""
@@ -173,7 +160,7 @@
         TxtCantEtiq.Text = ""
     End Sub
 
-    Private Sub btnAceptar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAceptar.Click
+    Private Sub btnAceptar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAceptar.Click
         If (_chekeoDatos()) Then
             With New VistaPrevia
                 .Reporte = New ReporteImpresionEtiquetasMuestras()
@@ -181,7 +168,7 @@
                 CantHojas = Math.Ceiling(CantHojas)
                 Dim contador As Integer = 1
                 For i As Integer = 1 To CantHojas
-                    .Reporte.SetParameterValue(0, txtCodigoMP.Text)
+                    .Reporte.SetParameterValue(0, txtcodigomp2.Text)
                     .Reporte.SetParameterValue(1, txtDescripcionMP.Text)
                     .Reporte.SetParameterValue(2, mastxtFecha.Text)
                     .Reporte.SetParameterValue(3, txtLote.Text)
@@ -220,13 +207,11 @@
     End Sub
 
     Private Function _chekeoDatos() As Boolean
-        If (txtInforme.Text <> "" And txtCodigoMP.Text <> "" And txtDescripcionMP.Text <> "") Then
-            If (txtLote.Text <> "" And txtAnalista.Text <> "" And mastxtFecha.Text <> "" And TxtCantEtiq.Text <> "") Then
-                If (TxtCantEtiq.Text > 0) Then
-                    Return True
-                End If
-            End If
-        End If
-        Return False
+
+        Dim WNingunoVacio As Boolean = {txtInforme, txtcodigomp2, txtDescripcionMP,
+                                       txtLote, txtAnalista, mastxtFecha}.All(Function(c As Control) c.Text <> "")
+
+        Return Not WNingunoVacio AndAlso Val(TxtCantEtiq.Text) > 0
+
     End Function
 End Class

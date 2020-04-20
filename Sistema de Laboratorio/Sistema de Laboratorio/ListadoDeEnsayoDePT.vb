@@ -31,6 +31,10 @@
 
         Dim WColumnasI, WFiltroI, WFiltroII As String
 
+        WColumnasI = ""
+        WFiltroI = ""
+        WFiltroII = ""
+
         For i = 1 To 10
             WFiltroI &= String.Format("e.Ensayo{0} BETWEEN '{1}' And '{2}' OR ", i, Desde, Hasta)
             WColumnasI &= String.Format("e.Ensayo{0}, e.Valor{0}, e.Valor{0}{0},", i)

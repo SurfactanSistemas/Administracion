@@ -1,110 +1,78 @@
-﻿Imports System.Data.SqlClient
+﻿Imports System.ComponentModel
 Imports ConsultasVarias
 
 Public Class VerificacionLoteVencidoMP
 
-    Private Sub VerificacionLoteVencidoMP_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Me.Text = ""
+    Private Sub VerificacionLoteVencidoMP_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         pnlContrasena.Visible = False
         CheckForIllegalCrossThreadCalls = False
         ProgressBar1.Value = 0
         ProgressBar1.Maximum = 100
-        For Each columna As DataGridViewColumn In DGV_Verificacion.Columns
-            columna.ReadOnly = True
-        Next
+        DGV_Verificacion.Columns.Cast(Of DataGridViewColumn).ToList.ForEach(Sub(c) c.ReadOnly = True)
         DGV_Verificacion.Columns("Check").ReadOnly = False
-        'BackgroundWorker1.RunWorkerAsync()
+
         Timer1.Start()
     End Sub
 
-    Private Function _CalcularStock(ByVal CodArticulo As String, ByVal Lote As String, Optional ByVal empresa As Integer = 0) As Double
-        Lote = Trim(Lote)
+    Private Function _CalcularStock(ByVal CodArticulo As String, ByVal WLote As String, Optional ByVal empresa As Integer = 0) As String
+        WLote = Trim(WLote)
         Dim Saldo As Double = 0
         Dim SQLCnslt As String
-        Dim tablaGuia As New DataTable
-        Dim tablaLaudo As New DataTable
         If empresa = 0 Then
+
             For i As Integer = 1 To 7
 
-                SQLCnslt = "SELECT Saldo FROM Laudo WHERE Articulo = '" & CodArticulo & "' AND Laudo = '" & Lote & "' AND Saldo > 0 AND Marca <> 'X' ORDER BY Laudo"
-                tablaLaudo = GetAll(SQLCnslt, _AQueEmpresa(i))
-                If tablaLaudo.Rows.Count > 0 Then
-                    For j As Integer = 0 To tablaLaudo.Rows.Count - 1
-                        Saldo += tablaLaudo.Rows(j).Item("Saldo")
-                    Next
-                End If
+                SQLCnslt = "SELECT Saldo = SUM(Saldo) FROM Laudo WHERE Articulo = '" & CodArticulo & "' AND Laudo = '" & WLote & "' AND Saldo > 0 And Renglon = '1' AND Marca <> 'X'"
 
-                SQLCnslt = "SELECT Saldo FROM Guia WHERE Articulo = '" & CodArticulo & "' AND Lote = '" & Lote & "' AND Saldo > 0 AND Tipo = 'M' AND Movi = 'E' ORDER BY Codigo"
-                tablaGuia = GetAll(SQLCnslt, _AQueEmpresa(i))
-                If tablaGuia.Rows.Count > 0 Then
-                    For j As Integer = 0 To tablaGuia.Rows.Count - 1
-                        Saldo += tablaGuia.Rows(j).Item("Saldo")
-                    Next
-                End If
+                Dim row As DataRow = GetSingle(SQLCnslt, _AQueEmpresa(i))
+
+                If row IsNot Nothing Then Saldo += OrDefault(row.Item("Saldo"), 0)
+
+                SQLCnslt = "SELECT Saldo = SUM(Saldo) FROM Guia WHERE Articulo = '" & CodArticulo & "' AND Lote = '" & WLote & "' AND Saldo > 0 AND Tipo = 'M' AND Movi = 'E'"
+
+                row = GetSingle(SQLCnslt, _AQueEmpresa(i))
+
+                If row IsNot Nothing Then Saldo += OrDefault(row.Item("Saldo"), 0)
 
             Next
 
-
-            Return Saldo
         Else
 
+            SQLCnslt = "SELECT SUM(Saldo) As Saldo FROM Laudo WHERE Articulo = '" & CodArticulo & "' AND Laudo = '" & WLote & "' And Renglon = '1' AND Marca <> 'X'"
 
-            SQLCnslt = "SELECT Saldo FROM Laudo WHERE Articulo = '" & CodArticulo & "' AND Laudo = '" & Lote & "' AND Saldo > 0 AND Marca <> 'X' ORDER BY Laudo"
-            tablaLaudo = GetAll(SQLCnslt, _AQueEmpresa(empresa))
-            If tablaLaudo.Rows.Count > 0 Then
-                For j As Integer = 0 To tablaLaudo.Rows.Count - 1
-                    Saldo += tablaLaudo.Rows(j).Item("Saldo")
-                Next
-            End If
+            Dim row As DataRow = GetSingle(SQLCnslt, _AQueEmpresa(empresa))
 
-            SQLCnslt = "SELECT Saldo FROM Guia WHERE Articulo = '" & CodArticulo & "' AND Lote = '" & Lote & "' AND Saldo > 0 AND Tipo = 'M' AND Movi = 'E' ORDER BY Codigo"
-            tablaGuia = GetAll(SQLCnslt, _AQueEmpresa(empresa))
-            If tablaGuia.Rows.Count > 0 Then
-                For j As Integer = 0 To tablaGuia.Rows.Count - 1
-                    Saldo += tablaGuia.Rows(j).Item("Saldo")
-                Next
-            End If
+            If row IsNot Nothing Then Saldo += OrDefault(row.Item("Saldo"), 0)
 
-            Return Saldo
+            SQLCnslt = "SELECT SUM(Saldo) As Saldo FROM Guia WHERE Articulo = '" & CodArticulo & "' AND Lote = '" & WLote & "' AND Saldo > 0 AND Tipo = 'M' AND Movi = 'E'"
+
+            row = GetSingle(SQLCnslt, _AQueEmpresa(empresa))
+
+            If row IsNot Nothing Then Saldo += OrDefault(row.Item("Saldo"), 0)
+
         End If
+
+        Return formatonumerico(Saldo)
     End Function
 
-    Private Function _CalculaDiferenciaDias(ByVal Articulo As String, ByVal Lote As String, ByVal Empresa As String) As Integer
+    Private Function _CalculaDiferenciaDias(ByVal Articulo As String, ByVal WLote As String, ByVal Empresa As String) As Integer
         Dim SQLCnslt As String
-        SQLCnslt = "SELECT Fecha, FechaVencimiento FROM Laudo WHERE Articulo = '" & Articulo & "' AND Laudo = '" & Lote & "'"
+        SQLCnslt = "SELECT l.Fecha, a.Meses FROM Laudo l INNER JOIN Articulo a ON a.Codigo = l.Articulo WHERE l.Articulo = '" & Articulo & "' AND l.Laudo = '" & WLote & "' And l.Renglon = '1'"
 
-        Dim row As DataRow = GetSingle(SQLCnslt, _AQueEmpresa(Empresa))
+        Dim WEnEmpresa As String = _AQueEmpresa(Empresa)
 
-        Dim Fecha, FechaVto, FechaOrd, Vencimiento As String
+        Dim row As DataRow = GetSingle(SQLCnslt, WEnEmpresa)
 
-        Vencimiento = ""
+        If row Is Nothing Then Return 0
 
-        Fecha = row.Item("Fecha")
-        FechaVto = IIf(IsDBNull(row.Item("FechaVencimiento")), "", row.Item("FechaVencimiento"))
+        Dim WFecha, Vencimiento As String
 
-        FechaOrd = CType(ordenaFecha(Fecha), String)
+        WFecha = OrDefault(row.Item("Fecha"), "00/00/0000")
 
-        If (FechaVto <> "" And FechaVto <> "  /  /    " And FechaVto <> "00/00/0000") Then
-            If (ValidaFecha(FechaVto) = "S") Then
-                Vencimiento = FechaVto
-            End If
-        End If
+        Dim meses As Integer = OrDefault(row.Item("Meses"), 0)
 
-        Dim meses As Integer = 0
-
-        If Vencimiento = "" Then
-
-
-            SQLCnslt = "SELECT Meses FROM Articulo WHERE Codigo = '" & Articulo & "'"
-
-            row = GetSingle(SQLCnslt, _AQueEmpresa(Empresa))
-
-            meses = row.Item("Meses")
-
-        End If
-
-        Dim Mes As Integer = Val(Mid$(Fecha, 4, 2))
-        Dim Ano As Integer = Val(Fecha.Substring(6, 4))
+        Dim Mes As Integer = Val(Mid$(WFecha, 4, 2))
+        Dim Ano As Integer = Val(WFecha.right(4))
 
         For i = 1 To meses
             Mes = Mes + 1
@@ -116,14 +84,14 @@ Public Class VerificacionLoteVencidoMP
 
         Dim MesStr, AnoStr As String
 
-        MesStr = Mes.ToString().PadLeft(2, "0")
-        AnoStr = Ano.ToString().PadLeft(4, "0")
+        MesStr = Mes.Ceros(2)
+        AnoStr = Ano.Ceros(4)
 
-        If Val(Fecha.Substring(0, 2)) <= 30 Then
-            If Mes = 2 And Val(Fecha.Substring(0, 2)) > 28 Then
+        If Val(WFecha.Substring(0, 2)) <= 30 Then
+            If Mes = 2 AndAlso Val(WFecha.left(2)) > 28 Then
                 Vencimiento = "28/" + MesStr + "/" + AnoStr
             Else
-                Vencimiento = Fecha.Substring(0, 3) + MesStr + "/" + AnoStr
+                Vencimiento = WFecha.Substring(0, 3) + MesStr + "/" + AnoStr
             End If
         Else
             If Mes = 2 Then
@@ -133,37 +101,33 @@ Public Class VerificacionLoteVencidoMP
             End If
         End If
 
-        If Vencimiento <> "" Then
-
-            Do
-
-                If (ValidaFecha(Vencimiento) = "S") Then
-                    Exit Do
-                Else
-                    Dim XFec1 As String = Vencimiento
-                    Dim SumaDia As Integer = 1
-                    Dim Xfec2 As String = _Calcula_vencimiento(XFec1, SumaDia)
-                    Vencimiento = Xfec2
-                End If
-            Loop
-
-            Dim ComparaI, ComparaII As String
-
-            Fecha = Date.Now.ToString("dd/MM/yyyy")
-
-
-            ComparaI = Fecha
-            If Microsoft.VisualBasic.Left$(Vencimiento, 2) > "28" Then
-                ComparaII = "28" + Mid$(Vencimiento, 3, 8)
+        Do
+            If (ValidaFecha(Vencimiento) = "S") Then
+                Exit Do
             Else
-                ComparaII = Vencimiento
+                Dim XFec1 As String = Vencimiento
+                Dim SumaDia As Integer = 1
+                Dim Xfec2 As String = _Calcula_vencimiento(XFec1, SumaDia)
+                Vencimiento = Xfec2
             End If
 
-            Dim Dias As Integer = DateDiff("d", ComparaI, ComparaII)
+        Loop
 
-            Return Dias
+        Dim ComparaI, ComparaII As String
+
+        WFecha = Date.Now.ToString("dd/MM/yyyy")
+
+        ComparaI = WFecha
+        If Microsoft.VisualBasic.Left$(Vencimiento, 2) > "28" Then
+            ComparaII = "28" + Mid$(Vencimiento, 3, 8)
+        Else
+            ComparaII = Vencimiento
         End If
-        Return 0
+
+        Dim Dias As Integer = DateDiff("d", ComparaI, ComparaII)
+
+        Return Dias
+
     End Function
 
     Private Function _Calcula_vencimiento(ByVal WFecha As String, ByVal Plazo As Integer) As String
@@ -171,12 +135,15 @@ Public Class VerificacionLoteVencidoMP
         Dim Wvenci As String
 
         Dim Dg As Integer
+
         Dim Ano As Integer
-        Dim WAno As String
         Dim Mes As Integer
-        Dim WMes As String
         Dim Dia As Integer
+
+        Dim WAno As String
+        Dim WMes As String
         Dim WDia As String
+
         Dim aa As Integer
         Dim Ds(20) As Integer
 
@@ -195,7 +162,6 @@ Public Class VerificacionLoteVencidoMP
 
         REM   DATA "0101","0105","2505", , ,"0907", ,"1210", ,"2512", , , , , ,
 
-        Dg = 0
         WAno = Mid$(WFecha, 7, 4)
         Ano = Val(WAno)
         WMes = Mid$(WFecha, 4, 2)
@@ -221,14 +187,11 @@ Public Class VerificacionLoteVencidoMP
 
         WDia$ = Dia.ToString().PadLeft(2, "0")
 
-
-
         Mes = aa
 
         WMes = Mes.ToString().PadLeft(2, "0")
 
         WAno = Ano.ToString().PadLeft(4, "0")
-
 
         Wvenci = WDia + "/" + WMes + "/" + WAno
 
@@ -236,65 +199,49 @@ Public Class VerificacionLoteVencidoMP
 
     End Function
 
-
-
     Private Function _BuscarDescripcion(ByVal CodArticulo As String) As String
-        Dim SQLCnsl As String
-        Dim row As DataRow
-        SQLCnsl = "SELECT Descripcion FROM Articulo WHERE Codigo = '" & CodArticulo & "'"
-        row = GetSingle(SQLCnsl)
-        Return row.Item("Descripcion")
+        Dim row As DataRow = GetSingle("SELECT Descripcion FROM Articulo WHERE Codigo = '" & CodArticulo & "'")
+        If row Is Nothing Then Return ""
+
+        Return Trim(OrDefault(row.Item("Descripcion"), ""))
     End Function
 
     Private Function _AQueEmpresa(ByVal Empresa As String) As String
-        If (Empresa = "1") Then
-            Return "SurfactanSa"
-        End If
-        If (Empresa = "2") Then
-            Return "Surfactan_II"
-        End If
-        If (Empresa = "3") Then
-            Return "Surfactan_III"
-        End If
-        If (Empresa = "4") Then
-            Return "Surfactan_IV"
-        End If
-        If (Empresa = "5") Then
-            Return "Surfactan_V"
-        End If
-        If (Empresa = "6") Then
-            Return "Surfactan_VI"
-        End If
 
-        Return "Surfactan_VII"
+        Select Case Val(Empresa)
+            Case 1
+                Return "SurfactanSa"
+            Case 2
+                Return "Surfactan_II"
+            Case 3
+                Return "Surfactan_III"
+            Case 4
+                Return "Surfactan_IV"
+            Case 5
+                Return "Surfactan_V"
+            Case 6
+                Return "Surfactan_VI"
+            Case Else
+                Return "Surfactan_VII"
+        End Select
 
     End Function
 
-    Private Sub btnVolver_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVolver.Click
-        Me.Close()
-    End Sub
-
-
-    Private Sub btnAjustes_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAjustes.Click
+    Private Sub btnAjustes_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAjustes.Click
         txtpnlContrasena.Text = ""
         pnlContrasena.Visible = True
         txtpnlContrasena.Focus()
     End Sub
 
-    Private Sub btnpnlVolver_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnpnlVolver.Click
+    Private Sub btnpnlVolver_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnpnlVolver.Click
         pnlContrasena.Visible = False
     End Sub
 
-    Private Sub DGV_Verificacion_SortCompare(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewSortCompareEventArgs) Handles DGV_Verificacion.SortCompare
+    Private Sub DGV_Verificacion_SortCompare(ByVal sender As Object, ByVal e As DataGridViewSortCompareEventArgs) Handles DGV_Verificacion.SortCompare
 
         Dim num1, num2
 
         Select Case e.Column.Index
-            '            Case 4
-            '
-            '                num1 = e.CellValue1
-            '                num2 = e.CellValue2
-            '
             Case 4, 5, 7, 9, 10, 11, 12, 13, 14, 15
 
                 num1 = CDbl(e.CellValue1)
@@ -321,27 +268,19 @@ Public Class VerificacionLoteVencidoMP
 
     End Sub
 
-
-    Private Sub txtpnlContrasena_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtpnlContrasena.KeyDown
-        Dim hayCambios As Boolean = False
+    Private Sub txtpnlContrasena_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtpnlContrasena.KeyDown
+        Dim hayCambios As Boolean
         Select Case e.KeyData
             Case Keys.Enter
                 If UCase(txtpnlContrasena.Text) = "INSUMOS" Then
 
-                    For Each Row As DataGridViewRow In DGV_Verificacion.Rows
-                        If (Row.Cells("Check").Value = True) Then
-                            hayCambios = True
-                            Exit For
-                        End If
-                    Next
-                    If hayCambios = True Then
-                        _ModificarTablas()
+                    hayCambios = DGV_Verificacion.Rows.Cast(Of DataGridViewRow).Any(Function(r) r.Cells("Check").Value)
 
+                    If hayCambios Then
+                        _ModificarTablas()
                     Else
                         MsgBox("No hay ninguna materia prima seleccionada")
-
                     End If
-
 
                 Else
                     txtpnlContrasena.Text = ""
@@ -352,70 +291,33 @@ Public Class VerificacionLoteVencidoMP
     End Sub
 
     Private Sub _ModificarTablas()
-        For Each row As DataGridViewRow In DGV_Verificacion.Rows
+        For Each row As DataGridViewRow In DGV_Verificacion.Rows.Cast(Of DataGridViewRow).ToList.FindAll(Function(c) c.Visible)
             If row.Cells("Check").Value = True Then
-                Dim Articulo, Lote As String
-                Dim empresa As Integer
-                Dim saldo As Double
-                Dim SI, SII, SIII, SIV, SV, SVI, SVII As Double
+
+                Dim Articulo, WLote As String
+                Dim empresa As Integer = 0
 
                 Articulo = row.Cells("MPrima").Value
-                Lote = row.Cells("Lote").Value
+                WLote = row.Cells("Lote").Value
 
-                SI = row.Cells("SI").Value
-                SII = row.Cells("SII").Value
-                SIII = row.Cells("SIII").Value
-                SIV = row.Cells("SIV").Value
-                SV = row.Cells("SV").Value
-                SVI = row.Cells("SVI").Value
-                SVII = row.Cells("SVII").Value
+                For Each c As String In {"SI", "SII", "SIII", "SIV", "SV", "SVI", "SVII"}
+                    empresa += 1
+                    GrabaPorPlanta(Articulo, WLote, empresa, row.Cells(c).Value)
+                Next
 
-                If SI <> 0 Then
-                    empresa = 1
-                    saldo = SI
-                    GrabaPorPlanta(Articulo, Lote, empresa, saldo)
-                End If
-                If SII <> 0 Then
-                    empresa = 2
-                    saldo = SII
-                    GrabaPorPlanta(Articulo, Lote, empresa, saldo)
-                End If
-                If SIII <> 0 Then
-                    empresa = 3
-                    saldo = SIII
-                    GrabaPorPlanta(Articulo, Lote, empresa, saldo)
-                End If
-                If SIV <> 0 Then
-                    empresa = 4
-                    saldo = SIV
-                    GrabaPorPlanta(Articulo, Lote, empresa, saldo)
-                End If
-                If SV <> 0 Then
-                    empresa = 5
-                    saldo = SV
-                    GrabaPorPlanta(Articulo, Lote, empresa, saldo)
-                End If
-                If SVI <> 0 Then
-                    empresa = 6
-                    saldo = SVI
-                    GrabaPorPlanta(Articulo, Lote, empresa, saldo)
-                End If
-                If SVII <> 0 Then
-                    empresa = 7
-                    saldo = SVII
-                    GrabaPorPlanta(Articulo, Lote, empresa, saldo)
-                End If
             End If
         Next
+
         pnlContrasena.Visible = False
         DGV_Verificacion.Rows.Clear()
+
         If Not BackgroundWorker1.IsBusy Then BackgroundWorker1.RunWorkerAsync()
     End Sub
 
-    Private Sub GrabaPorPlanta(ByVal Articulo As String, ByVal Lote As String, ByVal Empresa As Integer, ByVal Saldo As Double)
+    Private Sub GrabaPorPlanta(ByVal Articulo As String, ByVal WLote As String, ByVal Empresa As Integer, ByVal Saldo As Double)
         Try
 
-            Dim NroAjuste As Integer = 0
+            Dim NroAjuste As Integer
             Dim SQLCnslt As String
             SQLCnslt = "Select MAX(Codigo), Codigo FROM Movvar"
 
@@ -427,9 +329,9 @@ Public Class VerificacionLoteVencidoMP
             End If
 
             Dim renglon As Integer
-            Dim Tipo, Terminado, movi, auxiliar1, auxiliar2 As String
+            Dim WTipo, Terminado, movi, auxiliar1, auxiliar2 As String
             Dim cantidad As String
-            Tipo = "M"
+            WTipo = "M"
             Terminado = "  -     -   "
             cantidad = Saldo
             movi = "S"
@@ -452,7 +354,7 @@ Public Class VerificacionLoteVencidoMP
             GRenglon = CType(renglon, String)
             Gfecha = Date.Now.ToString("dd/MM/yyyy")
             GFechaord = ordenaFecha(Gfecha)
-            Gtipo = Tipo
+            Gtipo = WTipo
             GArticulo = Articulo
             GTerminado = Terminado
             GCantidad = formatonumerico(cantidad)
@@ -462,7 +364,7 @@ Public Class VerificacionLoteVencidoMP
             GClave = auxiliar2 + auxiliar1
             GDate = (Date.Now.ToString("MM/dd/yyyy")).Replace("/", "-")
             GMarca = ""
-            GLote = Lote
+            GLote = WLote
 
 
             SQLCnslt = "INSERT INTO Movvar(Clave, Codigo, Renglon, Fecha, Tipo, Articulo, Terminado, Cantidad, FechaOrd, Movi, Tipomov, Observaciones, Wdate, Marca, Lote) "
@@ -471,7 +373,7 @@ Public Class VerificacionLoteVencidoMP
 
             ExecuteNonQueries(_AQueEmpresa(Empresa), (SQLCnslt))
 
-            Dim GControla As Integer = 0
+            Dim GControla As Integer
             Dim GSalidas, GEntradas As String
 
             SQLCnslt = "SELECT  Controla, Salidas, Entradas FROM Articulo WHERE Codigo = '" & Articulo & "'"
@@ -488,9 +390,9 @@ Public Class VerificacionLoteVencidoMP
 
                 ExecuteNonQueries(_AQueEmpresa(Empresa), (SQLCnslt))
 
-                If GControla = 0 And Lote <> 0 Then
+                If GControla = 0 And WLote <> 0 Then
 
-                    SQLCnslt = "SELECT Clave, Saldo FROM Laudo WHERE Articulo = '" & Articulo & "' AND laudo = '" & Lote & "' ORDER BY Laudo"
+                    SQLCnslt = "SELECT Clave, Saldo FROM Laudo WHERE Articulo = '" & Articulo & "' AND laudo = '" & WLote & "' ORDER BY Laudo"
 
                     tabla.Clear()
                     tabla = GetAll(SQLCnslt, _AQueEmpresa(Empresa))
@@ -502,7 +404,7 @@ Public Class VerificacionLoteVencidoMP
                         ExecuteNonQueries(_AQueEmpresa(Empresa), (SQLCnslt))
                     Else
 
-                        SQLCnslt = "SELECT Clave, Saldo FROM Guia WHERE Articulo = '" & Articulo & "' AND Lote = '" & Lote & "' ORDER BY Saldo DESC, FechaOrd"
+                        SQLCnslt = "SELECT Clave, Saldo FROM Guia WHERE Articulo = '" & Articulo & "' AND Lote = '" & WLote & "' ORDER BY Saldo DESC, FechaOrd"
 
                         tabla.Clear()
                         tabla = GetAll(SQLCnslt, _AQueEmpresa(Empresa))
@@ -524,75 +426,85 @@ Public Class VerificacionLoteVencidoMP
         End Try
     End Sub
 
-    Private Sub BackgroundWorker1_DoWork(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorker1.DoWork
+    Private Sub BackgroundWorker1_DoWork(ByVal sender As Object, ByVal e As DoWorkEventArgs) Handles BackgroundWorker1.DoWork
 
-        Dim tablaVerificados As New DataTable
+        Dim tablaVerificados As DataTable
         Dim SQLCnlt As String
 
-        SQLCnlt = "SELECT *,TipoMov =  CASE WHEN TipoMov IS NULL THEN 'M' ELSE TipoMov END FROM VerificaVtoArti WHERE Estado = 0 AND Stock > 0 AND TipoMov = 'M'  ORDER BY Codigo"
-
-        tablaVerificados = GetAll(SQLCnlt)
-        BackgroundWorker1.ReportProgress(1, tablaVerificados)
-
-    End Sub
-
-
-    Private Sub BackgroundWorker1_ProgressChanged(ByVal sender As System.Object, ByVal e As System.ComponentModel.ProgressChangedEventArgs) Handles BackgroundWorker1.ProgressChanged
-        Dim tablaVerificados As DataTable = TryCast(e.UserState, DataTable)
-        Dim contador As Integer = 0
         DGV_Verificacion.Rows.Clear()
         ProgressBar1.Value = 0
         ProgressBar1.Visible = True
-        For Each row As DataRow In tablaVerificados.Rows
 
-            contador = DGV_Verificacion.Rows.Add()
-            'DATOS VISIBLES
-            DGV_Verificacion.Rows(contador).Cells("MPrima").Value = row.Item("Articulo")
-            DGV_Verificacion.Rows(contador).Cells("Descripcion").Value = _BuscarDescripcion(row.Item("Articulo"))
-            DGV_Verificacion.Rows(contador).Cells("PlantaOrigen").Value = row.Item("EmpresaPartida")
-            DGV_Verificacion.Rows(contador).Cells("Lote").Value = row.Item("Partida").ToString.Trim
+        SQLCnlt = "SELECT Numero, Articulo, Fecha, EmpresaPartida, Partida, EmpresaTipo, Tipo, TipoMov FROM VerificaVtoArti WHERE Estado = 0 AND Stock > 0 AND TipoMov = 'M'  ORDER BY Codigo"
 
-            If (UCase(row.Item("Tipo")) = "PED.") Then
-                DGV_Verificacion.Rows(contador).Cells("PlantaHoja").Value = "PED"
-            Else
-                DGV_Verificacion.Rows(contador).Cells("PlantaHoja").Value = UCase(row.Item("EmpresaTipo"))
-            End If
+        tablaVerificados = GetAll(SQLCnlt)
 
-            DGV_Verificacion.Rows(contador).Cells("Hoja").Value = row.Item("Numero")
-            DGV_Verificacion.Rows(contador).Cells("Fecha").Value = row.Item("Fecha")
-            DGV_Verificacion.Rows(contador).Cells("SI").Value = formatonumerico(_CalcularStock(row.Item("Articulo"), row.Item("Partida"), 1))
-            DGV_Verificacion.Rows(contador).Cells("SII").Value = formatonumerico(_CalcularStock(row.Item("Articulo"), row.Item("Partida"), 2))
-            DGV_Verificacion.Rows(contador).Cells("SIII").Value = formatonumerico(_CalcularStock(row.Item("Articulo"), row.Item("Partida"), 3))
-            DGV_Verificacion.Rows(contador).Cells("SIV").Value = formatonumerico(_CalcularStock(row.Item("Articulo"), row.Item("Partida"), 4))
-            DGV_Verificacion.Rows(contador).Cells("SV").Value = formatonumerico(_CalcularStock(row.Item("Articulo"), row.Item("Partida"), 5))
-            DGV_Verificacion.Rows(contador).Cells("SVI").Value = formatonumerico(_CalcularStock(row.Item("Articulo"), row.Item("Partida"), 6))
-            DGV_Verificacion.Rows(contador).Cells("SVII").Value = formatonumerico(_CalcularStock(row.Item("Articulo"), row.Item("Partida"), 7))
-            With DGV_Verificacion.Rows(contador)
-                .Cells("Stock").Value = formatonumerico(Val(.Cells("SI").Value) + Val(.Cells("SII").Value) + Val(.Cells("SIII").Value) + Val(.Cells("SIV").Value) + Val(.Cells("SV").Value) + Val(.Cells("SVI").Value) + Val(.Cells("SVII").Value))
-            End With
-            'DATOS INVISIBLES
-            DGV_Verificacion.Rows(contador).Cells("TipoMov").Value = row.Item("TipoMov")
-            DGV_Verificacion.Rows(contador).Cells("Tipo").Value = row.Item("Tipo")
-            DGV_Verificacion.Rows(contador).Cells("DiferenciaEnDias").Value = _CalculaDiferenciaDias(row.Item("Articulo"), row.Item("Partida"), row.Item("EmpresaPartida"))
-            'Aumento el contador para q grabe en otra 
-            If DGV_Verificacion.Rows(contador).Cells("Stock").Value = 0 Then
-                DGV_Verificacion.Rows.Remove(DGV_Verificacion.Rows(contador))
-            End If
-            ProgressBar1.Increment(1)
+        ProgressBar1.Maximum = tablaVerificados.Rows.Count + 5
+
+        For Each row As Datarow In tablaVerificados.Rows
+            BackgroundWorker1.ReportProgress(1, row)
         Next
-        ProgressBar1.Value = 0
-        ProgressBar1.Visible = False
+
     End Sub
 
-    Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
+
+    Private Sub BackgroundWorker1_ProgressChanged(ByVal sender As Object, ByVal e As ProgressChangedEventArgs) Handles BackgroundWorker1.ProgressChanged
+        Dim row As DataRow = TryCast(e.UserState, DataRow)
+        
+        With DGV_Verificacion.Rows(DGV_Verificacion.Rows.Add())
+
+            .Visible = False
+
+            .Cells("SI").Value = _CalcularStock(row.Item("Articulo"), row.Item("Partida"), 1)
+            .Cells("SII").Value = _CalcularStock(row.Item("Articulo"), row.Item("Partida"), 2)
+            .Cells("SIII").Value = _CalcularStock(row.Item("Articulo"), row.Item("Partida"), 3)
+            .Cells("SIV").Value = _CalcularStock(row.Item("Articulo"), row.Item("Partida"), 4)
+            .Cells("SV").Value = _CalcularStock(row.Item("Articulo"), row.Item("Partida"), 5)
+            .Cells("SVI").Value = _CalcularStock(row.Item("Articulo"), row.Item("Partida"), 6)
+            .Cells("SVII").Value = _CalcularStock(row.Item("Articulo"), row.Item("Partida"), 7)
+
+            .Cells("Stock").Value = formatonumerico(Val(.Cells("SI").Value) + Val(.Cells("SII").Value) + Val(.Cells("SIII").Value) + Val(.Cells("SIV").Value) + Val(.Cells("SV").Value) + Val(.Cells("SVI").Value) + Val(.Cells("SVII").Value))
+
+            If .Cells("Stock").Value > 0 Then
+                .Cells("MPrima").Value = row.Item("Articulo")
+                .Cells("Descripcion").Value = _BuscarDescripcion(row.Item("Articulo"))
+                .Cells("PlantaOrigen").Value = row.Item("EmpresaPartida")
+                .Cells("Lote").Value = row.Item("Partida").ToString.Trim
+
+                .Cells("PlantaHoja").Value = "PED"
+
+                If UCase(row.Item("Tipo")) <> "PED." Then .Cells("PlantaHoja").Value = UCase(row.Item("EmpresaTipo"))
+
+                .Cells("Hoja").Value = row.Item("Numero")
+                .Cells("Fecha").Value = row.Item("Fecha")
+
+                .Cells("TipoMov").Value = row.Item("TipoMov")
+                .Cells("Tipo").Value = row.Item("Tipo")
+                .Cells("DiferenciaEnDias").Value = _CalculaDiferenciaDias(row.Item("Articulo"), row.Item("Partida"), row.Item("EmpresaPartida"))
+
+                .Visible = True
+            End If
+
+            ProgressBar1.Increment(1)
+        End With
+
+        DGV_Verificacion.Refresh()
+
+    End Sub
+
+    Private Sub Timer1_Tick(ByVal sender As Object, ByVal e As EventArgs) Handles Timer1.Tick
         BackgroundWorker1.RunWorkerAsync()
-    End Sub
-
-    Private Sub BackgroundWorker1_RunWorkerCompleted(ByVal sender As System.Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BackgroundWorker1.RunWorkerCompleted
         Timer1.Stop()
     End Sub
 
-    Private Sub DGV_Verificacion_CellMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles DGV_Verificacion.CellMouseDoubleClick
+    Private Sub BackgroundWorker1_RunWorkerCompleted(ByVal sender As Object, ByVal e As RunWorkerCompletedEventArgs) Handles BackgroundWorker1.RunWorkerCompleted
+        
+        ProgressBar1.Value = 0
+        ProgressBar1.Visible = False
+
+    End Sub
+
+    Private Sub DGV_Verificacion_CellMouseDoubleClick(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles DGV_Verificacion.CellMouseDoubleClick
         If DGV_Verificacion.CurrentCell.ColumnIndex = 5 Then
             With New DetallesEnsayosMP(DGV_Verificacion.CurrentCell.Value)
                 .Show(Me)
@@ -600,5 +512,9 @@ Public Class VerificacionLoteVencidoMP
         End If
     End Sub
 
+
+    Private Sub VerificacionLoteVencidoMP_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        If BackgroundWorker1.IsBusy Then BackgroundWorker1.CancelAsync()
+    End Sub
 
 End Class

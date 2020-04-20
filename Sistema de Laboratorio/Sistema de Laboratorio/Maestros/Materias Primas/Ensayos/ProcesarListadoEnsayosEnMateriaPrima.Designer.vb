@@ -28,7 +28,6 @@ Partial Class ProcesarListadoEnsayosEnMateriaPrima
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(395, 249)
         Me.Name = "ProcesarListadoEnsayosEnMateriaPrima"
         Me.Text = "ProcesarListadoEnsayosEnMateriaPrima"
         Me.ResumeLayout(False)

@@ -41,9 +41,11 @@ Public Class ImpreProcesos
                         Dim WPartida As Integer = Environment.GetCommandLineArgs(3)
                         Dim WTipoSalida As Integer = Environment.GetCommandLineArgs(4)
                         Dim WNombrePDF As String = ""
+                        Dim WRuta As String = ""
                         If Environment.GetCommandLineArgs.Length > 5 Then WNombrePDF = Environment.GetCommandLineArgs(5)
+                        If Environment.GetCommandLineArgs.Length > 6 Then WRuta = Environment.GetCommandLineArgs(6)
 
-                        _GenerarCertificadoAnalisisFarma(WTipoReporte, WPartida, WTipoSalida, WNombrePDF)
+                        _GenerarCertificadoAnalisisFarma(WTipoReporte, WPartida, WTipoSalida, WNombrePDF, WRuta)
 
                     Case 3 ' Resultados de Calidad (PrueterFarma -> Registro de Producción)
 
@@ -102,11 +104,43 @@ Public Class ImpreProcesos
 
                         _EnviarMail(WDestinatarios, WAsunto, WCuerpo, WAdjuntos)
 
+                    Case 6 'HOJA DE RUTA (DANIEL RODRIGUEZ)
+
+                        Dim WLim = Environment.GetCommandLineArgs.Length
+
+                        Dim WHojaRuta As String = Environment.GetCommandLineArgs(2)
+                        Dim WRutaArchivo As String = "C:\TempHojaRuta"
+                        'Dim WCuerpo = "", WAdjuntos = ""
+
+                        'For Each o As Object In Environment.GetCommandLineArgs
+                        'MsgBox(WLim)
+                        ' Next
+
+                        If WLim > 3 Then
+                            WRutaArchivo = Environment.GetCommandLineArgs(3)
+                        End If
+
+                        _GenerarInformeHojaRuta(WHojaRuta, WRutaArchivo)
+
+                        'If WLim > 4 Then
+                        ' WCuerpo = Environment.GetCommandLineArgs(4)
+                        ' End If
+                        '
+                        '                        If WLim > 5 Then
+                        ' WAdjuntos = Environment.GetCommandLineArgs(5)
+                        ' End If
+                        '
+                        'MsgBox(WAdjuntos)
+
+                        '_EnviarMail(WHojaRuta, WAsunto, WCuerpo, WAdjuntos)
+
                     Case Else
                         Close()
                 End Select
 
             End If
+
+            '_GenerarInformeHojaRuta("17953", "C:\TempHojaRuta")
 
             'Dim WTipoReporte2 As Integer = 4
             'Dim WPartida2 As Integer = 0
@@ -137,6 +171,26 @@ Public Class ImpreProcesos
             Close()
 
         End Try
+
+    End Sub
+
+    Private Sub _GenerarInformeHojaRuta(WHojaRuta As String, WRutaArchivo As String)
+
+        If Val(WHojaRuta) = 0 Then Exit Sub
+        If Trim(WRutaArchivo) = "" Then WRutaArchivo = "C:\TempHojaRuta\"
+
+        If Not Directory.Exists(WRutaArchivo) Then Directory.CreateDirectory(WRutaArchivo)
+
+        Dim WHoja As DataRow = GetSingle("SELECT Hoja FROM HojaRuta WHERE Hoja = '" & WHojaRuta & "' And Archivo <> ''", "SurfactanSa")
+
+        If WHoja Is Nothing Then Exit Sub
+
+        With New VistaPrevia
+            .Base = "SurfactanSa"
+            .Reporte = New hojarutanuevo
+            .Formula = "{HojaRuta.Hoja} = " & WHojaRuta & " And {HojaRuta.Archivo} <> ''"
+            .Exportar(WHojaRuta & ".pdf", CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, WRutaArchivo)
+        End With
 
     End Sub
 
@@ -202,7 +256,7 @@ Public Class ImpreProcesos
 
     End Sub
 
-    Private Sub _GenerarCertificadoAnalisisFarma(ByVal WTipoReporte As Integer, ByVal wPartida As Integer, ByVal wTipoSalida As Integer, Optional ByVal WNombrePDF As String = "")
+    Private Sub _GenerarCertificadoAnalisisFarma(ByVal WTipoReporte As Integer, ByVal wPartida As Integer, ByVal wTipoSalida As Integer, Optional ByVal WNombrePDF As String = "", Optional ByVal Ruta As String = "")
 
         Dim frm As New ReportDocument
         Dim WFormulas() As String
@@ -253,7 +307,7 @@ Public Class ImpreProcesos
         frm.SetParameterValue("MostrarLogo", 0)
         frm.SetParameterValue("MostrarPie", 0)
 
-        If wTipoSalida = 3 Or wTipoSalida = 4 Or wTipoSalida = 6 Then
+        If wTipoSalida = 3 Or wTipoSalida = 4 Or wTipoSalida = 6 Or wTipoSalida = 7 Then
             frm.SetParameterValue("MostrarLogo", 1)
             frm.SetParameterValue("MostrarPie", 1)
         End If
@@ -266,6 +320,7 @@ Public Class ImpreProcesos
             Dim WRuta As String = ""
 
             If wTipoSalida = 4 Then WRuta = "C:\ImpreCertificados\"
+            If wTipoSalida = 7 Then WRuta = "\\193.168.0.2\w\Impresion pdf\Certificados Analisis Farma Liberacion Pedidos\" & Ruta
 
             If WNombre.Trim = "" Then
 
@@ -281,7 +336,7 @@ Public Class ImpreProcesos
 
                 Dim match = Regex.Split(WNombrePDF, "[\w+\.pdf]+$")
 
-                If match.Count > 0 AndAlso match(0).Trim <> "" Then
+                If match.Count > 0 AndAlso match(0).Trim <> "" And wTipoSalida <> 7 Then
                     wTipoSalida = 4
                     WRuta = match(0)
                     WNombre = WNombrePDF.Replace(WRuta, "")
@@ -290,6 +345,7 @@ Public Class ImpreProcesos
             End If
 
             If Not UCase(WNombre).EndsWith("PDF") And WNombre.Trim <> "" Then WNombre &= ".pdf"
+            If WRuta.EndsWith(Chr(34)) Then WRuta = WRuta.Substring(0, WRuta.IndexOf(Chr(34))) & "\"
 
             Select Case wTipoSalida
                 Case 1, 6
@@ -298,8 +354,10 @@ Public Class ImpreProcesos
                     .Mostrar()
                 Case 3
                     .Exportar(WNombre, CrystalDecisions.Shared.ExportFormatType.PortableDocFormat)
-                Case 4
+                Case 4, 7
+                    ' MsgBox("Tipo: " & wTipoSalida & " - Ruta: " & WRuta & " - Nombre PDF: " & WNombrePDF & " - Nombre: " & WNombre)
                     .Exportar(WNombre, CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, WRuta)
+                    If wTipoSalida = 7 Then .MergePDFs(WRuta, WNombrePDF)
                 Case 5
                     .Exportar(WNombre, CrystalDecisions.Shared.ExportFormatType.WordForWindows)
             End Select

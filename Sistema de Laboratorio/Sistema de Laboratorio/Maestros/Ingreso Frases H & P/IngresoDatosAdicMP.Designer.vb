@@ -107,8 +107,10 @@ Partial Class IngresoDatosAdicMP
         Me.btnAnteriorPag = New System.Windows.Forms.Button()
         Me.btnVolverConsultarDatos = New System.Windows.Forms.Button()
         Me.txtConsultaDatos = New System.Windows.Forms.TextBox()
-        Me.Panel1 = New System.Windows.Forms.Panel()
         Me.DGV_Consulta = New ConsultasVarias.DBDataGridView()
+        Me.Codigo1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ObservacionesConsulta = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LstboxConsultaDatos = New System.Windows.Forms.ListBox()
         Me.masktxtCodigo = New System.Windows.Forms.MaskedTextBox()
         Me.btnGrabar = New System.Windows.Forms.Button()
@@ -118,9 +120,7 @@ Partial Class IngresoDatosAdicMP
         Me.btnImprimirReporte = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Label21 = New System.Windows.Forms.Label()
-        Me.Codigo1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ObservacionesConsulta = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Label22 = New System.Windows.Forms.Label()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.PictureBox9, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -151,43 +151,43 @@ Partial Class IngresoDatosAdicMP
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.BackColor = System.Drawing.Color.FromArgb(CType(CType(32, Byte), Integer), CType(CType(74, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.Label1.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label1.Location = New System.Drawing.Point(7, 13)
+        Me.Label1.BackColor = System.Drawing.SystemColors.Control
+        Me.Label1.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Label1.Location = New System.Drawing.Point(19, 59)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(42, 13)
+        Me.Label1.Size = New System.Drawing.Size(49, 13)
         Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Articulo"
+        Me.Label1.Text = "CODIGO"
         '
         'txtNombreArticulo
         '
         Me.txtNombreArticulo.BackColor = System.Drawing.Color.DarkTurquoise
         Me.txtNombreArticulo.Enabled = False
         Me.txtNombreArticulo.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtNombreArticulo.Location = New System.Drawing.Point(215, 10)
+        Me.txtNombreArticulo.Location = New System.Drawing.Point(147, 55)
         Me.txtNombreArticulo.Name = "txtNombreArticulo"
-        Me.txtNombreArticulo.Size = New System.Drawing.Size(386, 20)
+        Me.txtNombreArticulo.Size = New System.Drawing.Size(415, 20)
         Me.txtNombreArticulo.TabIndex = 2
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.BackColor = System.Drawing.Color.FromArgb(CType(CType(32, Byte), Integer), CType(CType(74, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.Label2.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label2.Location = New System.Drawing.Point(8, 44)
+        Me.Label2.BackColor = System.Drawing.SystemColors.Control
+        Me.Label2.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Label2.Location = New System.Drawing.Point(568, 59)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(103, 13)
+        Me.Label2.Size = New System.Drawing.Size(135, 13)
         Me.Label2.TabIndex = 3
-        Me.Label2.Text = "Palabra Advertencia"
+        Me.Label2.Text = "PALABRA ADVERTENCIA"
         '
         'cbxPalabraAdvertencia
         '
         Me.cbxPalabraAdvertencia.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbxPalabraAdvertencia.FormattingEnabled = True
-        Me.cbxPalabraAdvertencia.Items.AddRange(New Object() {"", "Atencion", "Peligro"})
-        Me.cbxPalabraAdvertencia.Location = New System.Drawing.Point(140, 41)
+        Me.cbxPalabraAdvertencia.Items.AddRange(New Object() {"", "ATENCIÓN", "PELIGRO"})
+        Me.cbxPalabraAdvertencia.Location = New System.Drawing.Point(713, 55)
         Me.cbxPalabraAdvertencia.Name = "cbxPalabraAdvertencia"
-        Me.cbxPalabraAdvertencia.Size = New System.Drawing.Size(121, 21)
+        Me.cbxPalabraAdvertencia.Size = New System.Drawing.Size(93, 21)
         Me.cbxPalabraAdvertencia.TabIndex = 5
         '
         'TabControl1
@@ -199,14 +199,20 @@ Partial Class IngresoDatosAdicMP
         Me.TabControl1.Controls.Add(Me.TabPage5)
         Me.TabControl1.Controls.Add(Me.TabPage6)
         Me.TabControl1.Controls.Add(Me.TabPage7)
-        Me.TabControl1.Location = New System.Drawing.Point(13, 68)
+        Me.TabControl1.ItemSize = New System.Drawing.Size(150, 30)
+        Me.TabControl1.Location = New System.Drawing.Point(13, 82)
+        Me.TabControl1.Multiline = True
         Me.TabControl1.Name = "TabControl1"
+        Me.TabControl1.Padding = New System.Drawing.Point(50, 3)
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(756, 316)
+        Me.TabControl1.Size = New System.Drawing.Size(793, 392)
         Me.TabControl1.TabIndex = 6
+        Me.TabControl1.TabStop = False
         '
         'TabPage1
         '
+        Me.TabPage1.BackColor = System.Drawing.SystemColors.Control
+        Me.TabPage1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.TabPage1.Controls.Add(Me.cbxMedioAmbiente9)
         Me.TabPage1.Controls.Add(Me.cbxPeligroPLASalud8)
         Me.TabPage1.Controls.Add(Me.cbxPeligro7)
@@ -235,13 +241,12 @@ Partial Class IngresoDatosAdicMP
         Me.TabPage1.Controls.Add(Me.PictureBox2)
         Me.TabPage1.Controls.Add(Me.PictureBox1)
         Me.TabPage1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage1.Location = New System.Drawing.Point(4, 64)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(748, 290)
+        Me.TabPage1.Size = New System.Drawing.Size(785, 324)
         Me.TabPage1.TabIndex = 0
-        Me.TabPage1.Text = "Pictograma"
-        Me.TabPage1.UseVisualStyleBackColor = True
+        Me.TabPage1.Text = "PICTOGRAMA"
         '
         'cbxMedioAmbiente9
         '
@@ -249,7 +254,7 @@ Partial Class IngresoDatosAdicMP
         Me.cbxMedioAmbiente9.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbxMedioAmbiente9.FormattingEnabled = True
         Me.cbxMedioAmbiente9.Items.AddRange(New Object() {"", "1", "2", "3", "4", "5"})
-        Me.cbxMedioAmbiente9.Location = New System.Drawing.Point(467, 262)
+        Me.cbxMedioAmbiente9.Location = New System.Drawing.Point(592, 286)
         Me.cbxMedioAmbiente9.Name = "cbxMedioAmbiente9"
         Me.cbxMedioAmbiente9.Size = New System.Drawing.Size(83, 24)
         Me.cbxMedioAmbiente9.TabIndex = 26
@@ -260,7 +265,7 @@ Partial Class IngresoDatosAdicMP
         Me.cbxPeligroPLASalud8.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbxPeligroPLASalud8.FormattingEnabled = True
         Me.cbxPeligroPLASalud8.Items.AddRange(New Object() {"", "1", "2", "3", "4", "5"})
-        Me.cbxPeligroPLASalud8.Location = New System.Drawing.Point(344, 263)
+        Me.cbxPeligroPLASalud8.Location = New System.Drawing.Point(432, 286)
         Me.cbxPeligroPLASalud8.Name = "cbxPeligroPLASalud8"
         Me.cbxPeligroPLASalud8.Size = New System.Drawing.Size(83, 24)
         Me.cbxPeligroPLASalud8.TabIndex = 25
@@ -271,7 +276,7 @@ Partial Class IngresoDatosAdicMP
         Me.cbxPeligro7.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbxPeligro7.FormattingEnabled = True
         Me.cbxPeligro7.Items.AddRange(New Object() {"", "1", "2", "3", "4", "5"})
-        Me.cbxPeligro7.Location = New System.Drawing.Point(221, 263)
+        Me.cbxPeligro7.Location = New System.Drawing.Point(274, 286)
         Me.cbxPeligro7.Name = "cbxPeligro7"
         Me.cbxPeligro7.Size = New System.Drawing.Size(83, 24)
         Me.cbxPeligro7.TabIndex = 24
@@ -282,7 +287,7 @@ Partial Class IngresoDatosAdicMP
         Me.cbxToxico6.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbxToxico6.FormattingEnabled = True
         Me.cbxToxico6.Items.AddRange(New Object() {"", "1", "2", "3", "4", "5"})
-        Me.cbxToxico6.Location = New System.Drawing.Point(98, 263)
+        Me.cbxToxico6.Location = New System.Drawing.Point(117, 286)
         Me.cbxToxico6.Name = "cbxToxico6"
         Me.cbxToxico6.Size = New System.Drawing.Size(83, 24)
         Me.cbxToxico6.TabIndex = 23
@@ -293,7 +298,7 @@ Partial Class IngresoDatosAdicMP
         Me.cbxCorrosivo5.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbxCorrosivo5.FormattingEnabled = True
         Me.cbxCorrosivo5.Items.AddRange(New Object() {"", "1", "2", "3", "4", "5"})
-        Me.cbxCorrosivo5.Location = New System.Drawing.Point(521, 120)
+        Me.cbxCorrosivo5.Location = New System.Drawing.Point(664, 129)
         Me.cbxCorrosivo5.Name = "cbxCorrosivo5"
         Me.cbxCorrosivo5.Size = New System.Drawing.Size(83, 24)
         Me.cbxCorrosivo5.TabIndex = 22
@@ -304,7 +309,7 @@ Partial Class IngresoDatosAdicMP
         Me.cbxGasesBajo4.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbxGasesBajo4.FormattingEnabled = True
         Me.cbxGasesBajo4.Items.AddRange(New Object() {"", "1", "2", "3", "4", "5"})
-        Me.cbxGasesBajo4.Location = New System.Drawing.Point(402, 120)
+        Me.cbxGasesBajo4.Location = New System.Drawing.Point(512, 129)
         Me.cbxGasesBajo4.Name = "cbxGasesBajo4"
         Me.cbxGasesBajo4.Size = New System.Drawing.Size(83, 24)
         Me.cbxGasesBajo4.TabIndex = 21
@@ -315,7 +320,7 @@ Partial Class IngresoDatosAdicMP
         Me.cbxCarburante3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbxCarburante3.FormattingEnabled = True
         Me.cbxCarburante3.Items.AddRange(New Object() {"", "1", "2", "3", "4", "5"})
-        Me.cbxCarburante3.Location = New System.Drawing.Point(279, 120)
+        Me.cbxCarburante3.Location = New System.Drawing.Point(354, 129)
         Me.cbxCarburante3.Name = "cbxCarburante3"
         Me.cbxCarburante3.Size = New System.Drawing.Size(83, 24)
         Me.cbxCarburante3.TabIndex = 20
@@ -326,7 +331,7 @@ Partial Class IngresoDatosAdicMP
         Me.cbxInflamable2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbxInflamable2.FormattingEnabled = True
         Me.cbxInflamable2.Items.AddRange(New Object() {"", "1", "2", "3", "4", "5"})
-        Me.cbxInflamable2.Location = New System.Drawing.Point(156, 120)
+        Me.cbxInflamable2.Location = New System.Drawing.Point(195, 129)
         Me.cbxInflamable2.Name = "cbxInflamable2"
         Me.cbxInflamable2.Size = New System.Drawing.Size(83, 24)
         Me.cbxInflamable2.TabIndex = 19
@@ -337,7 +342,7 @@ Partial Class IngresoDatosAdicMP
         Me.cbxExplosivo1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbxExplosivo1.FormattingEnabled = True
         Me.cbxExplosivo1.Items.AddRange(New Object() {"", "1", "2", "3", "4", "5"})
-        Me.cbxExplosivo1.Location = New System.Drawing.Point(33, 120)
+        Me.cbxExplosivo1.Location = New System.Drawing.Point(38, 129)
         Me.cbxExplosivo1.Name = "cbxExplosivo1"
         Me.cbxExplosivo1.Size = New System.Drawing.Size(83, 24)
         Me.cbxExplosivo1.TabIndex = 18
@@ -345,18 +350,18 @@ Partial Class IngresoDatosAdicMP
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(464, 246)
+        Me.Label11.Location = New System.Drawing.Point(573, 266)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(98, 13)
+        Me.Label11.Size = New System.Drawing.Size(121, 13)
         Me.Label11.TabIndex = 17
-        Me.Label11.Text = "9 - Medio Ambiente"
+        Me.Label11.Text = "MEDIO AMBIENTE ( 9 )"
         '
         'PictureBox9
         '
         Me.PictureBox9.Image = Global.Laboratorio.My.Resources.Resources.SGA9
-        Me.PictureBox9.Location = New System.Drawing.Point(467, 157)
+        Me.PictureBox9.Location = New System.Drawing.Point(583, 165)
         Me.PictureBox9.Name = "PictureBox9"
-        Me.PictureBox9.Size = New System.Drawing.Size(83, 76)
+        Me.PictureBox9.Size = New System.Drawing.Size(100, 93)
         Me.PictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox9.TabIndex = 16
         Me.PictureBox9.TabStop = False
@@ -364,81 +369,81 @@ Partial Class IngresoDatosAdicMP
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(341, 246)
+        Me.Label10.Location = New System.Drawing.Point(401, 266)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(107, 13)
+        Me.Label10.Size = New System.Drawing.Size(145, 13)
         Me.Label10.TabIndex = 15
-        Me.Label10.Text = "8 - Peligro P/la Salud"
+        Me.Label10.Text = "PELIGRO P/ LA SALUD ( 8 )"
         '
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(218, 246)
+        Me.Label9.Location = New System.Drawing.Point(278, 266)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(54, 13)
+        Me.Label9.Size = New System.Drawing.Size(75, 13)
         Me.Label9.TabIndex = 14
-        Me.Label9.Text = "7 - Peligro"
+        Me.Label9.Text = "PELIGRO ( 7 )"
         '
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(95, 246)
+        Me.Label8.Location = New System.Drawing.Point(124, 266)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(54, 13)
+        Me.Label8.Size = New System.Drawing.Size(68, 13)
         Me.Label8.TabIndex = 13
-        Me.Label8.Text = "6 - Toxico"
+        Me.Label8.Text = "TÓXICO ( 6 )"
         '
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(518, 103)
+        Me.Label7.Location = New System.Drawing.Point(659, 112)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(66, 13)
+        Me.Label7.Size = New System.Drawing.Size(92, 13)
         Me.Label7.TabIndex = 12
-        Me.Label7.Text = "5 - Corrosivo"
+        Me.Label7.Text = "CORROSIVO ( 5 )"
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(399, 103)
+        Me.Label6.Location = New System.Drawing.Point(506, 112)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(76, 13)
+        Me.Label6.Size = New System.Drawing.Size(94, 13)
         Me.Label6.TabIndex = 11
-        Me.Label6.Text = "4 - Gases Bajo"
+        Me.Label6.Text = "GASES BAJO ( 4 )"
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(276, 103)
+        Me.Label5.Location = New System.Drawing.Point(344, 112)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(74, 13)
+        Me.Label5.Size = New System.Drawing.Size(102, 13)
         Me.Label5.TabIndex = 10
-        Me.Label5.Text = "3 - Carburante"
+        Me.Label5.Text = "CARBURANTE ( 3 )"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(153, 103)
+        Me.Label4.Location = New System.Drawing.Point(189, 112)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(70, 13)
+        Me.Label4.Size = New System.Drawing.Size(94, 13)
         Me.Label4.TabIndex = 9
-        Me.Label4.Text = "2 - Inflamable"
+        Me.Label4.Text = "INFLAMABLE ( 2 )"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(33, 103)
+        Me.Label3.Location = New System.Drawing.Point(35, 112)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(67, 13)
+        Me.Label3.Size = New System.Drawing.Size(88, 13)
         Me.Label3.TabIndex = 8
-        Me.Label3.Text = "1 - Explosivo"
+        Me.Label3.Text = "EXPLOSIVO ( 1 )"
         '
         'PictureBox8
         '
         Me.PictureBox8.Image = Global.Laboratorio.My.Resources.Resources.SGA8
-        Me.PictureBox8.Location = New System.Drawing.Point(344, 157)
+        Me.PictureBox8.Location = New System.Drawing.Point(423, 165)
         Me.PictureBox8.Name = "PictureBox8"
-        Me.PictureBox8.Size = New System.Drawing.Size(83, 76)
+        Me.PictureBox8.Size = New System.Drawing.Size(100, 93)
         Me.PictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox8.TabIndex = 7
         Me.PictureBox8.TabStop = False
@@ -446,9 +451,9 @@ Partial Class IngresoDatosAdicMP
         'PictureBox7
         '
         Me.PictureBox7.Image = Global.Laboratorio.My.Resources.Resources.SGA7
-        Me.PictureBox7.Location = New System.Drawing.Point(221, 157)
+        Me.PictureBox7.Location = New System.Drawing.Point(265, 165)
         Me.PictureBox7.Name = "PictureBox7"
-        Me.PictureBox7.Size = New System.Drawing.Size(83, 76)
+        Me.PictureBox7.Size = New System.Drawing.Size(100, 93)
         Me.PictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox7.TabIndex = 6
         Me.PictureBox7.TabStop = False
@@ -456,9 +461,9 @@ Partial Class IngresoDatosAdicMP
         'PictureBox6
         '
         Me.PictureBox6.Image = Global.Laboratorio.My.Resources.Resources.SGA6
-        Me.PictureBox6.Location = New System.Drawing.Point(98, 157)
+        Me.PictureBox6.Location = New System.Drawing.Point(108, 165)
         Me.PictureBox6.Name = "PictureBox6"
-        Me.PictureBox6.Size = New System.Drawing.Size(83, 76)
+        Me.PictureBox6.Size = New System.Drawing.Size(100, 93)
         Me.PictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox6.TabIndex = 5
         Me.PictureBox6.TabStop = False
@@ -466,9 +471,9 @@ Partial Class IngresoDatosAdicMP
         'PictureBox5
         '
         Me.PictureBox5.Image = Global.Laboratorio.My.Resources.Resources.SGA5
-        Me.PictureBox5.Location = New System.Drawing.Point(521, 20)
+        Me.PictureBox5.Location = New System.Drawing.Point(655, 9)
         Me.PictureBox5.Name = "PictureBox5"
-        Me.PictureBox5.Size = New System.Drawing.Size(83, 76)
+        Me.PictureBox5.Size = New System.Drawing.Size(100, 93)
         Me.PictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox5.TabIndex = 4
         Me.PictureBox5.TabStop = False
@@ -476,9 +481,9 @@ Partial Class IngresoDatosAdicMP
         'PictureBox4
         '
         Me.PictureBox4.Image = Global.Laboratorio.My.Resources.Resources.SGA4
-        Me.PictureBox4.Location = New System.Drawing.Point(402, 20)
+        Me.PictureBox4.Location = New System.Drawing.Point(503, 9)
         Me.PictureBox4.Name = "PictureBox4"
-        Me.PictureBox4.Size = New System.Drawing.Size(83, 76)
+        Me.PictureBox4.Size = New System.Drawing.Size(100, 93)
         Me.PictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox4.TabIndex = 3
         Me.PictureBox4.TabStop = False
@@ -486,9 +491,9 @@ Partial Class IngresoDatosAdicMP
         'PictureBox3
         '
         Me.PictureBox3.Image = Global.Laboratorio.My.Resources.Resources.SGA3
-        Me.PictureBox3.Location = New System.Drawing.Point(279, 20)
+        Me.PictureBox3.Location = New System.Drawing.Point(345, 9)
         Me.PictureBox3.Name = "PictureBox3"
-        Me.PictureBox3.Size = New System.Drawing.Size(83, 76)
+        Me.PictureBox3.Size = New System.Drawing.Size(100, 93)
         Me.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox3.TabIndex = 2
         Me.PictureBox3.TabStop = False
@@ -496,9 +501,9 @@ Partial Class IngresoDatosAdicMP
         'PictureBox2
         '
         Me.PictureBox2.Image = Global.Laboratorio.My.Resources.Resources.SGA2
-        Me.PictureBox2.Location = New System.Drawing.Point(156, 20)
+        Me.PictureBox2.Location = New System.Drawing.Point(186, 9)
         Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(83, 76)
+        Me.PictureBox2.Size = New System.Drawing.Size(100, 93)
         Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox2.TabIndex = 1
         Me.PictureBox2.TabStop = False
@@ -506,9 +511,9 @@ Partial Class IngresoDatosAdicMP
         'PictureBox1
         '
         Me.PictureBox1.Image = Global.Laboratorio.My.Resources.Resources.SGA1
-        Me.PictureBox1.Location = New System.Drawing.Point(33, 20)
+        Me.PictureBox1.Location = New System.Drawing.Point(29, 9)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(83, 76)
+        Me.PictureBox1.Size = New System.Drawing.Size(100, 93)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox1.TabIndex = 0
         Me.PictureBox1.TabStop = False
@@ -517,12 +522,12 @@ Partial Class IngresoDatosAdicMP
         '
         Me.TabPage2.Controls.Add(Me.DGV_FrasesH)
         Me.TabPage2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage2.Location = New System.Drawing.Point(4, 64)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(748, 290)
+        Me.TabPage2.Size = New System.Drawing.Size(785, 324)
         Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "FrasesH"
+        Me.TabPage2.Text = "FRASES H"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
         'DGV_FrasesH
@@ -539,9 +544,10 @@ Partial Class IngresoDatosAdicMP
         DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.DGV_FrasesH.DefaultCellStyle = DataGridViewCellStyle1
+        Me.DGV_FrasesH.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DGV_FrasesH.DoubleBuffered = True
         Me.DGV_FrasesH.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.DGV_FrasesH.Location = New System.Drawing.Point(-1, 0)
+        Me.DGV_FrasesH.Location = New System.Drawing.Point(3, 3)
         Me.DGV_FrasesH.Name = "DGV_FrasesH"
         Me.DGV_FrasesH.OrdenamientoColumnasHabilitado = False
         Me.DGV_FrasesH.ReadOnly = True
@@ -549,7 +555,7 @@ Partial Class IngresoDatosAdicMP
         Me.DGV_FrasesH.RowTemplate.Height = 20
         Me.DGV_FrasesH.ShowCellToolTips = False
         Me.DGV_FrasesH.SinClickDerecho = False
-        Me.DGV_FrasesH.Size = New System.Drawing.Size(749, 287)
+        Me.DGV_FrasesH.Size = New System.Drawing.Size(779, 318)
         Me.DGV_FrasesH.TabIndex = 0
         '
         'Codigo
@@ -586,12 +592,12 @@ Partial Class IngresoDatosAdicMP
         '
         Me.TabPage3.Controls.Add(Me.DGV_FrasesP)
         Me.TabPage3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TabPage3.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage3.Location = New System.Drawing.Point(4, 64)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(748, 290)
+        Me.TabPage3.Size = New System.Drawing.Size(785, 324)
         Me.TabPage3.TabIndex = 2
-        Me.TabPage3.Text = "Frases P"
+        Me.TabPage3.Text = "FRASES P"
         Me.TabPage3.UseVisualStyleBackColor = True
         '
         'DGV_FrasesP
@@ -607,9 +613,10 @@ Partial Class IngresoDatosAdicMP
         DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.DGV_FrasesP.DefaultCellStyle = DataGridViewCellStyle2
+        Me.DGV_FrasesP.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DGV_FrasesP.DoubleBuffered = True
         Me.DGV_FrasesP.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.DGV_FrasesP.Location = New System.Drawing.Point(0, 2)
+        Me.DGV_FrasesP.Location = New System.Drawing.Point(3, 3)
         Me.DGV_FrasesP.Name = "DGV_FrasesP"
         Me.DGV_FrasesP.OrdenamientoColumnasHabilitado = False
         Me.DGV_FrasesP.ReadOnly = True
@@ -617,7 +624,7 @@ Partial Class IngresoDatosAdicMP
         Me.DGV_FrasesP.RowTemplate.Height = 20
         Me.DGV_FrasesP.ShowCellToolTips = False
         Me.DGV_FrasesP.SinClickDerecho = False
-        Me.DGV_FrasesP.Size = New System.Drawing.Size(749, 287)
+        Me.DGV_FrasesP.Size = New System.Drawing.Size(779, 318)
         Me.DGV_FrasesP.TabIndex = 1
         '
         'CodigoFraseP
@@ -653,6 +660,8 @@ Partial Class IngresoDatosAdicMP
         '
         'TabPage4
         '
+        Me.TabPage4.BackColor = System.Drawing.SystemColors.Control
+        Me.TabPage4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.TabPage4.Controls.Add(Me.txtTipoEtiqueta)
         Me.TabPage4.Controls.Add(Me.lblTipoEtiqueta)
         Me.TabPage4.Controls.Add(Me.cbxTipoProducto)
@@ -674,17 +683,16 @@ Partial Class IngresoDatosAdicMP
         Me.TabPage4.Controls.Add(Me.Label13)
         Me.TabPage4.Controls.Add(Me.Label12)
         Me.TabPage4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TabPage4.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage4.Location = New System.Drawing.Point(4, 64)
         Me.TabPage4.Name = "TabPage4"
         Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage4.Size = New System.Drawing.Size(748, 290)
+        Me.TabPage4.Size = New System.Drawing.Size(785, 324)
         Me.TabPage4.TabIndex = 3
-        Me.TabPage4.Text = "Datos ONU"
-        Me.TabPage4.UseVisualStyleBackColor = True
+        Me.TabPage4.Text = "DATOS ONU"
         '
         'txtTipoEtiqueta
         '
-        Me.txtTipoEtiqueta.Location = New System.Drawing.Point(113, 9)
+        Me.txtTipoEtiqueta.Location = New System.Drawing.Point(115, 26)
         Me.txtTipoEtiqueta.MaxLength = 20
         Me.txtTipoEtiqueta.Name = "txtTipoEtiqueta"
         Me.txtTipoEtiqueta.Size = New System.Drawing.Size(157, 20)
@@ -694,11 +702,11 @@ Partial Class IngresoDatosAdicMP
         'lblTipoEtiqueta
         '
         Me.lblTipoEtiqueta.AutoSize = True
-        Me.lblTipoEtiqueta.Location = New System.Drawing.Point(16, 12)
+        Me.lblTipoEtiqueta.Location = New System.Drawing.Point(18, 29)
         Me.lblTipoEtiqueta.Name = "lblTipoEtiqueta"
-        Me.lblTipoEtiqueta.Size = New System.Drawing.Size(67, 13)
+        Me.lblTipoEtiqueta.Size = New System.Drawing.Size(89, 13)
         Me.lblTipoEtiqueta.TabIndex = 18
-        Me.lblTipoEtiqueta.Text = "TipoEtiqueta"
+        Me.lblTipoEtiqueta.Text = "TIPO ETIQUETA"
         Me.lblTipoEtiqueta.Visible = False
         '
         'cbxTipoProducto
@@ -706,7 +714,7 @@ Partial Class IngresoDatosAdicMP
         Me.cbxTipoProducto.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbxTipoProducto.FormattingEnabled = True
         Me.cbxTipoProducto.Items.AddRange(New Object() {"", "Neutro", "Acido Debil", "Acido Fuerte", "Alcalino Debil", "Alcalino Fuerte"})
-        Me.cbxTipoProducto.Location = New System.Drawing.Point(113, 235)
+        Me.cbxTipoProducto.Location = New System.Drawing.Point(132, 263)
         Me.cbxTipoProducto.Name = "cbxTipoProducto"
         Me.cbxTipoProducto.Size = New System.Drawing.Size(121, 21)
         Me.cbxTipoProducto.TabIndex = 17
@@ -714,18 +722,18 @@ Partial Class IngresoDatosAdicMP
         'Label20
         '
         Me.Label20.AutoSize = True
-        Me.Label20.Location = New System.Drawing.Point(16, 238)
+        Me.Label20.Location = New System.Drawing.Point(18, 266)
         Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(74, 13)
+        Me.Label20.Size = New System.Drawing.Size(96, 13)
         Me.Label20.TabIndex = 16
-        Me.Label20.Text = "Tipo Producto"
+        Me.Label20.Text = "TIPO PRODUCTO"
         '
         'cbxEstado
         '
         Me.cbxEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbxEstado.FormattingEnabled = True
         Me.cbxEstado.Items.AddRange(New Object() {"", "Polvo", "Liquido", "Metal", "Pasta"})
-        Me.cbxEstado.Location = New System.Drawing.Point(113, 198)
+        Me.cbxEstado.Location = New System.Drawing.Point(132, 226)
         Me.cbxEstado.Name = "cbxEstado"
         Me.cbxEstado.Size = New System.Drawing.Size(121, 21)
         Me.cbxEstado.TabIndex = 15
@@ -733,15 +741,15 @@ Partial Class IngresoDatosAdicMP
         'Label19
         '
         Me.Label19.AutoSize = True
-        Me.Label19.Location = New System.Drawing.Point(16, 201)
+        Me.Label19.Location = New System.Drawing.Point(18, 229)
         Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(40, 13)
+        Me.Label19.Size = New System.Drawing.Size(51, 13)
         Me.Label19.TabIndex = 14
-        Me.Label19.Text = "Estado"
+        Me.Label19.Text = "ESTADO"
         '
         'txtCaracteristicas
         '
-        Me.txtCaracteristicas.Location = New System.Drawing.Point(113, 163)
+        Me.txtCaracteristicas.Location = New System.Drawing.Point(132, 195)
         Me.txtCaracteristicas.MaxLength = 100
         Me.txtCaracteristicas.Name = "txtCaracteristicas"
         Me.txtCaracteristicas.Size = New System.Drawing.Size(629, 20)
@@ -750,15 +758,15 @@ Partial Class IngresoDatosAdicMP
         'Label18
         '
         Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(16, 170)
+        Me.Label18.Location = New System.Drawing.Point(18, 198)
         Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(76, 13)
+        Me.Label18.Size = New System.Drawing.Size(106, 13)
         Me.Label18.TabIndex = 12
-        Me.Label18.Text = "Caracteristicas"
+        Me.Label18.Text = "CARACTERÍSTICAS"
         '
         'txtEmbalaje
         '
-        Me.txtEmbalaje.Location = New System.Drawing.Point(113, 129)
+        Me.txtEmbalaje.Location = New System.Drawing.Point(132, 157)
         Me.txtEmbalaje.MaxLength = 10
         Me.txtEmbalaje.Name = "txtEmbalaje"
         Me.txtEmbalaje.Size = New System.Drawing.Size(157, 20)
@@ -767,15 +775,15 @@ Partial Class IngresoDatosAdicMP
         'Label17
         '
         Me.Label17.AutoSize = True
-        Me.Label17.Location = New System.Drawing.Point(16, 132)
+        Me.Label17.Location = New System.Drawing.Point(18, 160)
         Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(86, 13)
+        Me.Label17.Size = New System.Drawing.Size(104, 13)
         Me.Label17.TabIndex = 10
-        Me.Label17.Text = "Grupo Embalage"
+        Me.Label17.Text = "GRUPO EMBALAJE"
         '
         'txtIntervencion
         '
-        Me.txtIntervencion.Location = New System.Drawing.Point(113, 93)
+        Me.txtIntervencion.Location = New System.Drawing.Point(115, 124)
         Me.txtIntervencion.MaxLength = 10
         Me.txtIntervencion.Name = "txtIntervencion"
         Me.txtIntervencion.Size = New System.Drawing.Size(157, 20)
@@ -783,7 +791,7 @@ Partial Class IngresoDatosAdicMP
         '
         'txtRiesgo
         '
-        Me.txtRiesgo.Location = New System.Drawing.Point(642, 62)
+        Me.txtRiesgo.Location = New System.Drawing.Point(520, 124)
         Me.txtRiesgo.MaxLength = 10
         Me.txtRiesgo.Name = "txtRiesgo"
         Me.txtRiesgo.Size = New System.Drawing.Size(100, 20)
@@ -791,7 +799,7 @@ Partial Class IngresoDatosAdicMP
         '
         'txtSecundario
         '
-        Me.txtSecundario.Location = New System.Drawing.Point(490, 62)
+        Me.txtSecundario.Location = New System.Drawing.Point(340, 124)
         Me.txtSecundario.MaxLength = 10
         Me.txtSecundario.Name = "txtSecundario"
         Me.txtSecundario.Size = New System.Drawing.Size(100, 20)
@@ -799,7 +807,7 @@ Partial Class IngresoDatosAdicMP
         '
         'txtClase
         '
-        Me.txtClase.Location = New System.Drawing.Point(113, 62)
+        Me.txtClase.Location = New System.Drawing.Point(115, 90)
         Me.txtClase.MaxLength = 30
         Me.txtClase.Name = "txtClase"
         Me.txtClase.Size = New System.Drawing.Size(325, 20)
@@ -807,7 +815,7 @@ Partial Class IngresoDatosAdicMP
         '
         'txtNroNacionesUnidas
         '
-        Me.txtNroNacionesUnidas.Location = New System.Drawing.Point(113, 36)
+        Me.txtNroNacionesUnidas.Location = New System.Drawing.Point(115, 58)
         Me.txtNroNacionesUnidas.MaxLength = 10
         Me.txtNroNacionesUnidas.Name = "txtNroNacionesUnidas"
         Me.txtNroNacionesUnidas.Size = New System.Drawing.Size(157, 20)
@@ -816,58 +824,58 @@ Partial Class IngresoDatosAdicMP
         'Label16
         '
         Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(16, 96)
+        Me.Label16.Location = New System.Drawing.Point(18, 127)
         Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(78, 13)
+        Me.Label16.Size = New System.Drawing.Size(88, 13)
         Me.Label16.TabIndex = 19
-        Me.Label16.Text = "F. Intervencion"
+        Me.Label16.Text = "INTERVENCIÓN"
         '
         'Label15
         '
         Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(596, 65)
+        Me.Label15.Location = New System.Drawing.Point(471, 127)
         Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(40, 13)
+        Me.Label15.Size = New System.Drawing.Size(48, 13)
         Me.Label15.TabIndex = 3
-        Me.Label15.Text = "Riesgo"
+        Me.Label15.Text = "RIESGO"
         '
         'Label14
         '
         Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(444, 65)
+        Me.Label14.Location = New System.Drawing.Point(294, 127)
         Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(40, 13)
+        Me.Label14.Size = New System.Drawing.Size(42, 13)
         Me.Label14.TabIndex = 2
-        Me.Label14.Text = "R. Sec"
+        Me.Label14.Text = "R. SEC"
         '
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(16, 65)
+        Me.Label13.Location = New System.Drawing.Point(18, 93)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(33, 13)
+        Me.Label13.Size = New System.Drawing.Size(41, 13)
         Me.Label13.TabIndex = 1
-        Me.Label13.Text = "Clase"
+        Me.Label13.Text = "CLASE"
         '
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(13, 36)
+        Me.Label12.Location = New System.Drawing.Point(18, 61)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(74, 13)
+        Me.Label12.Size = New System.Drawing.Size(61, 13)
         Me.Label12.TabIndex = 0
-        Me.Label12.Text = "Nro. N.Unidas"
+        Me.Label12.Text = "NRO ONU:"
         '
         'TabPage5
         '
         Me.TabPage5.Controls.Add(Me.DGV_DemoCompPeligrosos)
         Me.TabPage5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TabPage5.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage5.Location = New System.Drawing.Point(4, 64)
         Me.TabPage5.Name = "TabPage5"
         Me.TabPage5.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage5.Size = New System.Drawing.Size(748, 290)
+        Me.TabPage5.Size = New System.Drawing.Size(785, 324)
         Me.TabPage5.TabIndex = 4
-        Me.TabPage5.Text = "Denominacion componentes peligrosos"
+        Me.TabPage5.Text = "DENOMINACION COMP. PELIGROSOS"
         Me.TabPage5.UseVisualStyleBackColor = True
         '
         'DGV_DemoCompPeligrosos
@@ -883,16 +891,17 @@ Partial Class IngresoDatosAdicMP
         DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White
         DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.DGV_DemoCompPeligrosos.DefaultCellStyle = DataGridViewCellStyle3
+        Me.DGV_DemoCompPeligrosos.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DGV_DemoCompPeligrosos.DoubleBuffered = True
         Me.DGV_DemoCompPeligrosos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.DGV_DemoCompPeligrosos.Location = New System.Drawing.Point(-1, 0)
+        Me.DGV_DemoCompPeligrosos.Location = New System.Drawing.Point(3, 3)
         Me.DGV_DemoCompPeligrosos.Name = "DGV_DemoCompPeligrosos"
         Me.DGV_DemoCompPeligrosos.OrdenamientoColumnasHabilitado = False
         Me.DGV_DemoCompPeligrosos.RowHeadersWidth = 15
         Me.DGV_DemoCompPeligrosos.RowTemplate.Height = 20
         Me.DGV_DemoCompPeligrosos.ShowCellToolTips = False
         Me.DGV_DemoCompPeligrosos.SinClickDerecho = False
-        Me.DGV_DemoCompPeligrosos.Size = New System.Drawing.Size(749, 294)
+        Me.DGV_DemoCompPeligrosos.Size = New System.Drawing.Size(779, 318)
         Me.DGV_DemoCompPeligrosos.TabIndex = 0
         '
         'Denominacion
@@ -906,11 +915,11 @@ Partial Class IngresoDatosAdicMP
         'TabPage6
         '
         Me.TabPage6.Controls.Add(Me.DGV_FrasesHIngles)
-        Me.TabPage6.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage6.Location = New System.Drawing.Point(4, 64)
         Me.TabPage6.Name = "TabPage6"
-        Me.TabPage6.Size = New System.Drawing.Size(748, 290)
+        Me.TabPage6.Size = New System.Drawing.Size(785, 324)
         Me.TabPage6.TabIndex = 5
-        Me.TabPage6.Text = "Frases H Ingles"
+        Me.TabPage6.Text = "FRASES H (INGLÉS)"
         Me.TabPage6.UseVisualStyleBackColor = True
         '
         'DGV_FrasesHIngles
@@ -927,9 +936,10 @@ Partial Class IngresoDatosAdicMP
         DataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White
         DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.DGV_FrasesHIngles.DefaultCellStyle = DataGridViewCellStyle4
+        Me.DGV_FrasesHIngles.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DGV_FrasesHIngles.DoubleBuffered = True
         Me.DGV_FrasesHIngles.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.DGV_FrasesHIngles.Location = New System.Drawing.Point(0, 2)
+        Me.DGV_FrasesHIngles.Location = New System.Drawing.Point(0, 0)
         Me.DGV_FrasesHIngles.Name = "DGV_FrasesHIngles"
         Me.DGV_FrasesHIngles.OrdenamientoColumnasHabilitado = False
         Me.DGV_FrasesHIngles.ReadOnly = True
@@ -937,7 +947,7 @@ Partial Class IngresoDatosAdicMP
         Me.DGV_FrasesHIngles.RowTemplate.Height = 20
         Me.DGV_FrasesHIngles.ShowCellToolTips = False
         Me.DGV_FrasesHIngles.SinClickDerecho = False
-        Me.DGV_FrasesHIngles.Size = New System.Drawing.Size(749, 287)
+        Me.DGV_FrasesHIngles.Size = New System.Drawing.Size(785, 324)
         Me.DGV_FrasesHIngles.TabIndex = 1
         '
         'CodigoFraseHINgles
@@ -963,11 +973,11 @@ Partial Class IngresoDatosAdicMP
         'TabPage7
         '
         Me.TabPage7.Controls.Add(Me.DGV_FrasesPIngles)
-        Me.TabPage7.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage7.Location = New System.Drawing.Point(4, 64)
         Me.TabPage7.Name = "TabPage7"
-        Me.TabPage7.Size = New System.Drawing.Size(748, 290)
+        Me.TabPage7.Size = New System.Drawing.Size(785, 324)
         Me.TabPage7.TabIndex = 6
-        Me.TabPage7.Text = "Frases P Ingles"
+        Me.TabPage7.Text = "FRASES P (INGLÉS)"
         Me.TabPage7.UseVisualStyleBackColor = True
         '
         'DGV_FrasesPIngles
@@ -984,9 +994,10 @@ Partial Class IngresoDatosAdicMP
         DataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.White
         DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.DGV_FrasesPIngles.DefaultCellStyle = DataGridViewCellStyle5
+        Me.DGV_FrasesPIngles.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DGV_FrasesPIngles.DoubleBuffered = True
         Me.DGV_FrasesPIngles.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.DGV_FrasesPIngles.Location = New System.Drawing.Point(0, 2)
+        Me.DGV_FrasesPIngles.Location = New System.Drawing.Point(0, 0)
         Me.DGV_FrasesPIngles.Name = "DGV_FrasesPIngles"
         Me.DGV_FrasesPIngles.OrdenamientoColumnasHabilitado = False
         Me.DGV_FrasesPIngles.ReadOnly = True
@@ -994,7 +1005,7 @@ Partial Class IngresoDatosAdicMP
         Me.DGV_FrasesPIngles.RowTemplate.Height = 20
         Me.DGV_FrasesPIngles.ShowCellToolTips = False
         Me.DGV_FrasesPIngles.SinClickDerecho = False
-        Me.DGV_FrasesPIngles.Size = New System.Drawing.Size(749, 287)
+        Me.DGV_FrasesPIngles.Size = New System.Drawing.Size(785, 324)
         Me.DGV_FrasesPIngles.TabIndex = 2
         '
         'CodigoFrasesPIngles
@@ -1019,51 +1030,43 @@ Partial Class IngresoDatosAdicMP
         '
         'pnlConsultarDatos
         '
+        Me.pnlConsultarDatos.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnlConsultarDatos.Controls.Add(Me.btnAnteriorPag)
         Me.pnlConsultarDatos.Controls.Add(Me.btnVolverConsultarDatos)
         Me.pnlConsultarDatos.Controls.Add(Me.txtConsultaDatos)
-        Me.pnlConsultarDatos.Controls.Add(Me.Panel1)
         Me.pnlConsultarDatos.Controls.Add(Me.DGV_Consulta)
         Me.pnlConsultarDatos.Controls.Add(Me.LstboxConsultaDatos)
-        Me.pnlConsultarDatos.Location = New System.Drawing.Point(158, 88)
+        Me.pnlConsultarDatos.Location = New System.Drawing.Point(119, 134)
         Me.pnlConsultarDatos.Name = "pnlConsultarDatos"
-        Me.pnlConsultarDatos.Size = New System.Drawing.Size(495, 268)
+        Me.pnlConsultarDatos.Size = New System.Drawing.Size(537, 272)
         Me.pnlConsultarDatos.TabIndex = 1
         '
         'btnAnteriorPag
         '
-        Me.btnAnteriorPag.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAnteriorPag.Location = New System.Drawing.Point(396, 242)
+        Me.btnAnteriorPag.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAnteriorPag.Location = New System.Drawing.Point(362, 216)
         Me.btnAnteriorPag.Name = "btnAnteriorPag"
-        Me.btnAnteriorPag.Size = New System.Drawing.Size(89, 23)
+        Me.btnAnteriorPag.Size = New System.Drawing.Size(120, 47)
         Me.btnAnteriorPag.TabIndex = 3
-        Me.btnAnteriorPag.Text = "Anterior Pag."
+        Me.btnAnteriorPag.Text = "PAG. ANT."
         Me.btnAnteriorPag.UseVisualStyleBackColor = True
         '
         'btnVolverConsultarDatos
         '
         Me.btnVolverConsultarDatos.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnVolverConsultarDatos.Location = New System.Drawing.Point(201, 242)
+        Me.btnVolverConsultarDatos.Location = New System.Drawing.Point(187, 216)
         Me.btnVolverConsultarDatos.Name = "btnVolverConsultarDatos"
-        Me.btnVolverConsultarDatos.Size = New System.Drawing.Size(75, 23)
+        Me.btnVolverConsultarDatos.Size = New System.Drawing.Size(120, 47)
         Me.btnVolverConsultarDatos.TabIndex = 2
-        Me.btnVolverConsultarDatos.Text = "Volver"
+        Me.btnVolverConsultarDatos.Text = "CERRAR"
         Me.btnVolverConsultarDatos.UseVisualStyleBackColor = True
         '
         'txtConsultaDatos
         '
-        Me.txtConsultaDatos.Location = New System.Drawing.Point(9, 13)
+        Me.txtConsultaDatos.Location = New System.Drawing.Point(9, 22)
         Me.txtConsultaDatos.Name = "txtConsultaDatos"
         Me.txtConsultaDatos.Size = New System.Drawing.Size(476, 20)
         Me.txtConsultaDatos.TabIndex = 0
-        '
-        'Panel1
-        '
-        Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(32, Byte), Integer), CType(CType(74, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.Panel1.Location = New System.Drawing.Point(3, 3)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(524, 32)
-        Me.Panel1.TabIndex = 5
         '
         'DGV_Consulta
         '
@@ -1080,107 +1083,15 @@ Partial Class IngresoDatosAdicMP
         Me.DGV_Consulta.DefaultCellStyle = DataGridViewCellStyle6
         Me.DGV_Consulta.DoubleBuffered = True
         Me.DGV_Consulta.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.DGV_Consulta.Location = New System.Drawing.Point(8, 39)
+        Me.DGV_Consulta.Location = New System.Drawing.Point(9, 48)
         Me.DGV_Consulta.Name = "DGV_Consulta"
         Me.DGV_Consulta.OrdenamientoColumnasHabilitado = True
         Me.DGV_Consulta.RowHeadersWidth = 15
         Me.DGV_Consulta.RowTemplate.Height = 20
         Me.DGV_Consulta.ShowCellToolTips = False
         Me.DGV_Consulta.SinClickDerecho = False
-        Me.DGV_Consulta.Size = New System.Drawing.Size(476, 199)
+        Me.DGV_Consulta.Size = New System.Drawing.Size(476, 142)
         Me.DGV_Consulta.TabIndex = 4
-        '
-        'LstboxConsultaDatos
-        '
-        Me.LstboxConsultaDatos.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LstboxConsultaDatos.FormattingEnabled = True
-        Me.LstboxConsultaDatos.ItemHeight = 20
-        Me.LstboxConsultaDatos.Location = New System.Drawing.Point(8, 37)
-        Me.LstboxConsultaDatos.Name = "LstboxConsultaDatos"
-        Me.LstboxConsultaDatos.Size = New System.Drawing.Size(477, 204)
-        Me.LstboxConsultaDatos.TabIndex = 1
-        '
-        'masktxtCodigo
-        '
-        Me.masktxtCodigo.Location = New System.Drawing.Point(90, 10)
-        Me.masktxtCodigo.Mask = ">LL-000-000"
-        Me.masktxtCodigo.Name = "masktxtCodigo"
-        Me.masktxtCodigo.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.masktxtCodigo.Size = New System.Drawing.Size(100, 20)
-        Me.masktxtCodigo.TabIndex = 7
-        Me.masktxtCodigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'btnGrabar
-        '
-        Me.btnGrabar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnGrabar.Location = New System.Drawing.Point(17, 390)
-        Me.btnGrabar.Name = "btnGrabar"
-        Me.btnGrabar.Size = New System.Drawing.Size(92, 40)
-        Me.btnGrabar.TabIndex = 8
-        Me.btnGrabar.Text = "Grabar"
-        Me.btnGrabar.UseVisualStyleBackColor = True
-        '
-        'btnLimpiar
-        '
-        Me.btnLimpiar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnLimpiar.Location = New System.Drawing.Point(180, 390)
-        Me.btnLimpiar.Name = "btnLimpiar"
-        Me.btnLimpiar.Size = New System.Drawing.Size(92, 40)
-        Me.btnLimpiar.TabIndex = 9
-        Me.btnLimpiar.Text = "Limpiar Grillas"
-        Me.btnLimpiar.UseVisualStyleBackColor = True
-        '
-        'btnConsultarDatos
-        '
-        Me.btnConsultarDatos.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnConsultarDatos.Location = New System.Drawing.Point(349, 390)
-        Me.btnConsultarDatos.Name = "btnConsultarDatos"
-        Me.btnConsultarDatos.Size = New System.Drawing.Size(92, 40)
-        Me.btnConsultarDatos.TabIndex = 10
-        Me.btnConsultarDatos.Text = "Consultar Datos"
-        Me.btnConsultarDatos.UseVisualStyleBackColor = True
-        '
-        'btnVolver
-        '
-        Me.btnVolver.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnVolver.Location = New System.Drawing.Point(674, 390)
-        Me.btnVolver.Name = "btnVolver"
-        Me.btnVolver.Size = New System.Drawing.Size(92, 40)
-        Me.btnVolver.TabIndex = 11
-        Me.btnVolver.Text = "Volver"
-        Me.btnVolver.UseVisualStyleBackColor = True
-        '
-        'btnImprimirReporte
-        '
-        Me.btnImprimirReporte.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnImprimirReporte.Location = New System.Drawing.Point(523, 390)
-        Me.btnImprimirReporte.Name = "btnImprimirReporte"
-        Me.btnImprimirReporte.Size = New System.Drawing.Size(92, 40)
-        Me.btnImprimirReporte.TabIndex = 12
-        Me.btnImprimirReporte.Text = "Imprimir Reporte"
-        Me.btnImprimirReporte.UseVisualStyleBackColor = True
-        '
-        'Panel2
-        '
-        Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(32, Byte), Integer), CType(CType(74, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.Panel2.Controls.Add(Me.Label21)
-        Me.Panel2.Location = New System.Drawing.Point(-7, -2)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(811, 69)
-        Me.Panel2.TabIndex = 0
-        '
-        'Label21
-        '
-        Me.Label21.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label21.AutoSize = True
-        Me.Label21.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label21.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label21.Location = New System.Drawing.Point(621, 12)
-        Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(155, 20)
-        Me.Label21.TabIndex = 1
-        Me.Label21.Text = "SURFACTAN S.A."
         '
         'Codigo1
         '
@@ -1204,11 +1115,119 @@ Partial Class IngresoDatosAdicMP
         Me.ObservacionesConsulta.Name = "ObservacionesConsulta"
         Me.ObservacionesConsulta.ReadOnly = True
         '
+        'LstboxConsultaDatos
+        '
+        Me.LstboxConsultaDatos.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LstboxConsultaDatos.FormattingEnabled = True
+        Me.LstboxConsultaDatos.ItemHeight = 18
+        Me.LstboxConsultaDatos.Location = New System.Drawing.Point(9, 54)
+        Me.LstboxConsultaDatos.Name = "LstboxConsultaDatos"
+        Me.LstboxConsultaDatos.Size = New System.Drawing.Size(476, 130)
+        Me.LstboxConsultaDatos.TabIndex = 1
+        '
+        'masktxtCodigo
+        '
+        Me.masktxtCodigo.Location = New System.Drawing.Point(72, 55)
+        Me.masktxtCodigo.Mask = ">LL-000-000"
+        Me.masktxtCodigo.Name = "masktxtCodigo"
+        Me.masktxtCodigo.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.masktxtCodigo.Size = New System.Drawing.Size(69, 20)
+        Me.masktxtCodigo.TabIndex = 7
+        Me.masktxtCodigo.Text = "AA999999"
+        Me.masktxtCodigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'btnGrabar
+        '
+        Me.btnGrabar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnGrabar.Location = New System.Drawing.Point(32, 480)
+        Me.btnGrabar.Name = "btnGrabar"
+        Me.btnGrabar.Size = New System.Drawing.Size(135, 49)
+        Me.btnGrabar.TabIndex = 8
+        Me.btnGrabar.Text = "GRABAR"
+        Me.btnGrabar.UseVisualStyleBackColor = True
+        '
+        'btnLimpiar
+        '
+        Me.btnLimpiar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnLimpiar.Location = New System.Drawing.Point(188, 480)
+        Me.btnLimpiar.Name = "btnLimpiar"
+        Me.btnLimpiar.Size = New System.Drawing.Size(135, 49)
+        Me.btnLimpiar.TabIndex = 9
+        Me.btnLimpiar.Text = "LIMPIAR"
+        Me.btnLimpiar.UseVisualStyleBackColor = True
+        '
+        'btnConsultarDatos
+        '
+        Me.btnConsultarDatos.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnConsultarDatos.Location = New System.Drawing.Point(344, 480)
+        Me.btnConsultarDatos.Name = "btnConsultarDatos"
+        Me.btnConsultarDatos.Size = New System.Drawing.Size(135, 49)
+        Me.btnConsultarDatos.TabIndex = 10
+        Me.btnConsultarDatos.Text = "CONSULTAR DATOS"
+        Me.btnConsultarDatos.UseVisualStyleBackColor = True
+        '
+        'btnVolver
+        '
+        Me.btnVolver.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnVolver.Location = New System.Drawing.Point(656, 480)
+        Me.btnVolver.Name = "btnVolver"
+        Me.btnVolver.Size = New System.Drawing.Size(135, 49)
+        Me.btnVolver.TabIndex = 11
+        Me.btnVolver.Text = "CERRAR"
+        Me.btnVolver.UseVisualStyleBackColor = True
+        '
+        'btnImprimirReporte
+        '
+        Me.btnImprimirReporte.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnImprimirReporte.Location = New System.Drawing.Point(500, 480)
+        Me.btnImprimirReporte.Name = "btnImprimirReporte"
+        Me.btnImprimirReporte.Size = New System.Drawing.Size(135, 49)
+        Me.btnImprimirReporte.TabIndex = 12
+        Me.btnImprimirReporte.Text = "IMPRIMIR"
+        Me.btnImprimirReporte.UseVisualStyleBackColor = True
+        '
+        'Panel2
+        '
+        Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(32, Byte), Integer), CType(CType(74, Byte), Integer), CType(CType(95, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.Label22)
+        Me.Panel2.Controls.Add(Me.Label21)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel2.Location = New System.Drawing.Point(0, 0)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(816, 49)
+        Me.Panel2.TabIndex = 0
+        '
+        'Label21
+        '
+        Me.Label21.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label21.AutoSize = True
+        Me.Label21.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label21.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label21.Location = New System.Drawing.Point(637, 13)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(155, 20)
+        Me.Label21.TabIndex = 1
+        Me.Label21.Text = "SURFACTAN S.A."
+        '
+        'Label22
+        '
+        Me.Label22.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label22.AutoSize = True
+        Me.Label22.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label22.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label22.Location = New System.Drawing.Point(24, 14)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(288, 18)
+        Me.Label22.TabIndex = 1
+        Me.Label22.Text = "DATOS ADICIONALES (MATERIA PRIMA)"
+        '
         'IngresoDatosAdicMP
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(781, 442)
+        Me.ClientSize = New System.Drawing.Size(816, 538)
         Me.Controls.Add(Me.pnlConsultarDatos)
         Me.Controls.Add(Me.btnImprimirReporte)
         Me.Controls.Add(Me.btnVolver)
@@ -1222,11 +1241,11 @@ Partial Class IngresoDatosAdicMP
         Me.Controls.Add(Me.txtNombreArticulo)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Panel2)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Location = New System.Drawing.Point(20, 20)
-        Me.MaximumSize = New System.Drawing.Size(797, 481)
-        Me.MinimumSize = New System.Drawing.Size(797, 481)
+        Me.MaximizeBox = False
         Me.Name = "IngresoDatosAdicMP"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout()
@@ -1332,7 +1351,6 @@ Partial Class IngresoDatosAdicMP
     Friend WithEvents btnAnteriorPag As System.Windows.Forms.Button
     Friend WithEvents DGV_Consulta As ConsultasVarias.DBDataGridView
     Friend WithEvents btnImprimirReporte As System.Windows.Forms.Button
-    Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents Label21 As System.Windows.Forms.Label
     Friend WithEvents Codigo As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -1354,4 +1372,5 @@ Partial Class IngresoDatosAdicMP
     Friend WithEvents Codigo1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ObservacionesConsulta As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Label22 As System.Windows.Forms.Label
 End Class

@@ -35,6 +35,7 @@ Partial Class IngresoEspecificacionesPT
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.ckSubEtapas = New System.Windows.Forms.CheckBox()
         Me.AgregarRenglon = New System.Windows.Forms.Button()
         Me.btnHistorialCambios = New System.Windows.Forms.Button()
         Me.btnNotas = New System.Windows.Forms.Button()
@@ -52,7 +53,7 @@ Partial Class IngresoEspecificacionesPT
         Me.Label7 = New System.Windows.Forms.Label()
         Me.txtTerminado = New System.Windows.Forms.MaskedTextBox()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
+        Me.lblEtapa = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
@@ -97,7 +98,6 @@ Partial Class IngresoEspecificacionesPT
         Me.FarmacopeaIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.UnidadEspecifIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ckSubEtapas = New System.Windows.Forms.CheckBox()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -166,7 +166,7 @@ Partial Class IngresoEspecificacionesPT
         Me.GroupBox1.Controls.Add(Me.Label7)
         Me.GroupBox1.Controls.Add(Me.txtTerminado)
         Me.GroupBox1.Controls.Add(Me.Label6)
-        Me.GroupBox1.Controls.Add(Me.Label4)
+        Me.GroupBox1.Controls.Add(Me.lblEtapa)
         Me.GroupBox1.Controls.Add(Me.Label5)
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Location = New System.Drawing.Point(8, 51)
@@ -174,6 +174,16 @@ Partial Class IngresoEspecificacionesPT
         Me.GroupBox1.Size = New System.Drawing.Size(899, 147)
         Me.GroupBox1.TabIndex = 3
         Me.GroupBox1.TabStop = False
+        '
+        'ckSubEtapas
+        '
+        Me.ckSubEtapas.AutoSize = True
+        Me.ckSubEtapas.Location = New System.Drawing.Point(410, 126)
+        Me.ckSubEtapas.Name = "ckSubEtapas"
+        Me.ckSubEtapas.Size = New System.Drawing.Size(224, 17)
+        Me.ckSubEtapas.TabIndex = 7
+        Me.ckSubEtapas.Text = "LLEVA CONTROLES CON SUB ETAPAS"
+        Me.ckSubEtapas.UseVisualStyleBackColor = True
         '
         'AgregarRenglon
         '
@@ -342,14 +352,14 @@ Partial Class IngresoEspecificacionesPT
         Me.Label6.TabIndex = 0
         Me.Label6.Text = "Tipo de Proceso:"
         '
-        'Label4
+        'lblEtapa
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(570, 16)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(34, 13)
-        Me.Label4.TabIndex = 0
-        Me.Label4.Text = "Paso:"
+        Me.lblEtapa.AutoSize = True
+        Me.lblEtapa.Location = New System.Drawing.Point(570, 16)
+        Me.lblEtapa.Name = "lblEtapa"
+        Me.lblEtapa.Size = New System.Drawing.Size(34, 13)
+        Me.lblEtapa.TabIndex = 0
+        Me.lblEtapa.Text = "Paso:"
         '
         'Label5
         '
@@ -764,16 +774,6 @@ Partial Class IngresoEspecificacionesPT
         Me.UnidadEspecifIngles.Name = "UnidadEspecifIngles"
         Me.UnidadEspecifIngles.Width = 80
         '
-        'ckSubEtapas
-        '
-        Me.ckSubEtapas.AutoSize = True
-        Me.ckSubEtapas.Location = New System.Drawing.Point(410, 126)
-        Me.ckSubEtapas.Name = "ckSubEtapas"
-        Me.ckSubEtapas.Size = New System.Drawing.Size(224, 17)
-        Me.ckSubEtapas.TabIndex = 7
-        Me.ckSubEtapas.Text = "LLEVA CONTROLES CON SUB ETAPAS"
-        Me.ckSubEtapas.UseVisualStyleBackColor = True
-        '
         'IngresoEspecificacionesPT
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -807,7 +807,7 @@ Partial Class IngresoEspecificacionesPT
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents txtDescTerminado As System.Windows.Forms.TextBox
     Friend WithEvents txtEtapa As System.Windows.Forms.MaskedTextBox
-    Friend WithEvents Label4 As System.Windows.Forms.Label
+    Friend WithEvents lblEtapa As System.Windows.Forms.Label
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents txtControlCambios As System.Windows.Forms.TextBox
     Friend WithEvents txtTipoProceso As System.Windows.Forms.TextBox

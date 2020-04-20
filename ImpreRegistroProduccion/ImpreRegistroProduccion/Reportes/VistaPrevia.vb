@@ -3,11 +3,14 @@ Imports System.IO
 Imports CrystalDecisions.CrystalReports.Engine
 Imports CrystalDecisions.Shared
 Imports System.Text.RegularExpressions
+Imports PdfSharp.Pdf
+Imports PdfSharp.Pdf.IO
 
 Public Class VistaPrevia
     Public Property Reporte As ReportDocument
 
     Public Property Formula As String
+    Public Property Base As String = "Surfactan_III"
 
     Private Sub Reporte_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
@@ -51,7 +54,7 @@ Public Class VistaPrevia
 
         Try
             ' Buscamos el string de conexion.
-            cs = Helper._ConectarA("Surfactan_III") 'ClasesCompartidas.Globals.getConnectionString()
+            cs = Helper._ConectarA(Base) 'ClasesCompartidas.Globals.getConnectionString()
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical)
             Return
@@ -186,6 +189,8 @@ Public Class VistaPrevia
 
         _ReconectarBaseDatos()
 
+        If Not ruta.EndsWith("/") Or Not ruta.EndsWith("\") Then ruta &= "\"
+
         Me.Reporte.RecordSelectionFormula = IIf(IsNothing(Me.Formula), "", Me.Formula)
         'Me.Reporte.Refresh()
         Me.Reporte.ExportToDisk(Formato, ruta & NombreArchivo)
@@ -226,29 +231,29 @@ Public Class VistaPrevia
 
     'End Sub
 
-    'Public Sub MergePDFs(ByVal WRuta As String, ByVal WNombreArchivo As String)
+    Public Sub MergePDFs(ByVal WRuta As String, ByVal WNombreArchivo As String)
 
-    '    Dim Archivos As String() = System.IO.Directory.GetFiles(WRuta, "*.pdf")
-    '    Dim outPdf As PdfDocument = New PdfDocument()
+        Dim Archivos As String() = System.IO.Directory.GetFiles(WRuta, "*.pdf")
+        Dim outPdf As PdfDocument = New PdfDocument()
 
-    '    For Each file As String In Archivos
-    '        Using one As PdfDocument = PdfReader.Open(file, PdfDocumentOpenMode.Import)
+        For Each file As String In Archivos
+            Using one As PdfDocument = PdfReader.Open(file, PdfDocumentOpenMode.Import)
 
-    '            CopyPages(one, outPdf)
+                CopyPages(one, outPdf)
 
-    '        End Using
-    '    Next
+            End Using
+        Next
 
-    '    outPdf.Save(WRuta & WNombreArchivo)
+        outPdf.Save(WRuta & WNombreArchivo)
 
-    'End Sub
+    End Sub
 
-    'Private Sub CopyPages(ByVal _from As PdfDocument, ByRef _to As PdfDocument)
-    '    For i = 0 To _from.PageCount - 1
-    '        _to.AddPage(_from.Pages(i))
-    '    Next
+    Private Sub CopyPages(ByVal _from As PdfDocument, ByRef _to As PdfDocument)
+        For i = 0 To _from.PageCount - 1
+            _to.AddPage(_from.Pages(i))
+        Next
 
-    'End Sub
+    End Sub
     Public Sub DesdeArchivo(ByVal s As String)
         Reporte = New ReportDocument
         Reporte.Load(s)

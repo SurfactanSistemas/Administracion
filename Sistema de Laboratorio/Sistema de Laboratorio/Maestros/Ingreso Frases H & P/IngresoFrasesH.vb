@@ -1,5 +1,6 @@
 ﻿Public Class IngresoFrasesH : Implements IFrasesHP
-    Dim FRASE As String
+    ReadOnly FRASE As String
+
     Sub New(ByVal TipoFrase As String)
 
         ' Llamada necesaria para el diseñador.
@@ -21,7 +22,6 @@
         Dim tabla As DataTable = GetAll(SQLCnslt, "SurfactanSA")
 
         DGV_Frases.DataSource = tabla
-
 
     End Sub
 
@@ -103,8 +103,6 @@
         DGV_Frases.DataSource = tabla
     End Sub
 
-
-
     Private Sub txtAccesoRapido_KeyDown(sender As Object, e As KeyEventArgs) Handles txtAccesoRapido.KeyDown
         Select Case e.KeyData
             Case Keys.Enter
@@ -119,9 +117,7 @@
                 Next
         End Select
     End Sub
-
-  
-
+    
     Private Sub DGV_Frases_CellMouseDoubleClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DGV_Frases.CellMouseDoubleClick
         If e.ColumnIndex <> -1 Then
             With New CargaDatosFrases(FRASE, DGV_Frases.CurrentRow.Cells("Codigo").Value, DGV_Frases.CurrentRow.Cells("Descripcion").Value, DGV_Frases.CurrentRow.Cells("Observaciones").Value)
@@ -129,4 +125,5 @@
             End With
         End If
     End Sub
+
 End Class

@@ -1352,8 +1352,8 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad, IA
 		' En el caso de los DY, el saldo se acumula en el Primer Laudo.
 		WSaldo = IIf(Val(WLaudoOriginal) > 0, "0", WLiberada)
 
-		WSqls.Add(String.Format("INSERT INTO Laudo (Clave, Laudo, Renglon, Fecha, Articulo, Liberada, Devuelta, Orden, Marca, Lote, Rechazo, Informe, Actualiza, WDate, Saldo, Origen, PartiOri, Envase) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13}', '{14}', '{15}', '{16}', '{17}' )",
-							 WClave, WPrueba, "1", txtFecha.Text, txtCodigo.Text, WLiberada, WDevuelta, WOrden, "", WLote, WRechazo, WInforme, WActualiza, Date.Now.ToString("MM-dd-yyyy"), WSaldo, WOrigen, WPartiOri, WEnvase))
+        WSqls.Add(String.Format("INSERT INTO Laudo (Clave, Laudo, Renglon, Fecha, Articulo, Liberada, Devuelta, Orden, Marca, Lote, Rechazo, Informe, Actualiza, WDate, Saldo, Origen, PartiOri, Envase) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13}', '{14}', '{15}', '{16}', '{17}' )",
+                             WClave, WPrueba, "1", txtFecha.Text, txtCodigo.Text, WLiberada, WDevuelta, WOrden, "", WLote, WRechazo, WInforme, "N", Date.Now.ToString("MM-dd-yyyy"), WSaldo, WOrigen, WPartiOri, WEnvase))
 
 		WSqls.Add(String.Format("UPDATE Laudo SET NroDespacho = '{0}', FechaVencimiento = '{1}', TipoVencimiento = '{2}', FechaElaboracion = '{3}', OrdFechaVencimiento = '{4}', Procedencia = '{6}', FechaOrd = '{7}' WHERE Laudo = '{5}'", WNroDespacho, WVenc, WTipoVenc, WFechaElab, ordenaFecha(WVenc), txtPartida.Text, WProcedencia, WFechaOrd))
 
@@ -1729,8 +1729,6 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad, IA
 				End If
 
 				MsgBox("Clave Incorrecta")
-				Dim frm As New IngresoClaveSeguridad
-				frm.ShowDialog(Me)
 
 			Case TiposSolicitudClaveSeguridad.ActualizarEnsayoNoBloqueado
 
@@ -1746,14 +1744,10 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad, IA
 				End If
 
 				MsgBox("Clave Incorrecta")
-				Dim frm As New IngresoClaveSeguridad
-				frm.ShowDialog(Me)
 
 			Case Else
 				MsgBox("Clave Incorrecta")
-				Dim frm As New IngresoClaveSeguridad
-				frm.ShowDialog(Me)
-		End Select
+        End Select
 
 	End Sub
 

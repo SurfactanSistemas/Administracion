@@ -56,7 +56,7 @@ Partial Class IngresoFrasesH
         Me.DGV_Frases.DefaultCellStyle = DataGridViewCellStyle1
         Me.DGV_Frases.DoubleBuffered = True
         Me.DGV_Frases.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.DGV_Frases.Location = New System.Drawing.Point(12, 135)
+        Me.DGV_Frases.Location = New System.Drawing.Point(12, 89)
         Me.DGV_Frases.Name = "DGV_Frases"
         Me.DGV_Frases.OrdenamientoColumnasHabilitado = True
         Me.DGV_Frases.RowHeadersWidth = 15
@@ -98,95 +98,95 @@ Partial Class IngresoFrasesH
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(648, 64)
+        Me.Panel1.Size = New System.Drawing.Size(648, 50)
         Me.Panel1.TabIndex = 25
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label4.Location = New System.Drawing.Point(468, 31)
+        Me.Label4.Location = New System.Drawing.Point(477, 15)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(168, 22)
+        Me.Label4.Size = New System.Drawing.Size(150, 20)
         Me.Label4.TabIndex = 1
         Me.Label4.Text = "SURFACTAN S.A"
         '
         'LblTitulo
         '
         Me.LblTitulo.AutoSize = True
-        Me.LblTitulo.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblTitulo.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblTitulo.ForeColor = System.Drawing.SystemColors.Control
-        Me.LblTitulo.Location = New System.Drawing.Point(12, 9)
+        Me.LblTitulo.Location = New System.Drawing.Point(21, 16)
         Me.LblTitulo.Name = "LblTitulo"
-        Me.LblTitulo.Size = New System.Drawing.Size(63, 20)
+        Me.LblTitulo.Size = New System.Drawing.Size(51, 18)
         Me.LblTitulo.TabIndex = 0
         Me.LblTitulo.Text = "Label4"
         '
         'btnAgregarFrase
         '
-        Me.btnAgregarFrase.Location = New System.Drawing.Point(375, 69)
+        Me.btnAgregarFrase.Location = New System.Drawing.Point(127, 302)
         Me.btnAgregarFrase.Name = "btnAgregarFrase"
-        Me.btnAgregarFrase.Size = New System.Drawing.Size(79, 36)
+        Me.btnAgregarFrase.Size = New System.Drawing.Size(122, 42)
         Me.btnAgregarFrase.TabIndex = 26
         Me.btnAgregarFrase.Text = "AGREGAR FRASE"
         Me.btnAgregarFrase.UseVisualStyleBackColor = True
         '
         'btnImprimir
         '
-        Me.btnImprimir.Location = New System.Drawing.Point(460, 69)
+        Me.btnImprimir.Location = New System.Drawing.Point(255, 303)
         Me.btnImprimir.Name = "btnImprimir"
-        Me.btnImprimir.Size = New System.Drawing.Size(95, 35)
+        Me.btnImprimir.Size = New System.Drawing.Size(139, 41)
         Me.btnImprimir.TabIndex = 27
         Me.btnImprimir.Text = "IMPRIMIR POR PANTALLA"
         Me.btnImprimir.UseVisualStyleBackColor = True
         '
         'txtBuscador
         '
-        Me.txtBuscador.Location = New System.Drawing.Point(130, 112)
+        Me.txtBuscador.Location = New System.Drawing.Point(200, 59)
         Me.txtBuscador.Name = "txtBuscador"
-        Me.txtBuscador.Size = New System.Drawing.Size(506, 20)
+        Me.txtBuscador.Size = New System.Drawing.Size(436, 20)
         Me.txtBuscador.TabIndex = 28
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(127, 96)
+        Me.Label1.Location = New System.Drawing.Point(127, 63)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(52, 13)
+        Me.Label1.Size = New System.Drawing.Size(67, 13)
         Me.Label1.TabIndex = 29
-        Me.Label1.Text = "Buscador"
+        Me.Label1.Text = "BUSCADOR"
         '
         'btnCerrar
         '
-        Me.btnCerrar.Location = New System.Drawing.Point(561, 69)
+        Me.btnCerrar.Location = New System.Drawing.Point(400, 303)
         Me.btnCerrar.Name = "btnCerrar"
-        Me.btnCerrar.Size = New System.Drawing.Size(75, 35)
+        Me.btnCerrar.Size = New System.Drawing.Size(121, 41)
         Me.btnCerrar.TabIndex = 30
         Me.btnCerrar.Text = "CERRAR"
         Me.btnCerrar.UseVisualStyleBackColor = True
         '
         'txtAccesoRapido
         '
-        Me.txtAccesoRapido.Location = New System.Drawing.Point(12, 112)
+        Me.txtAccesoRapido.Location = New System.Drawing.Point(64, 59)
         Me.txtAccesoRapido.Name = "txtAccesoRapido"
-        Me.txtAccesoRapido.Size = New System.Drawing.Size(112, 20)
+        Me.txtAccesoRapido.Size = New System.Drawing.Size(56, 20)
         Me.txtAccesoRapido.TabIndex = 31
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(13, 96)
+        Me.Label2.Location = New System.Drawing.Point(13, 63)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(80, 13)
+        Me.Label2.Size = New System.Drawing.Size(49, 13)
         Me.Label2.TabIndex = 32
-        Me.Label2.Text = "Acceso Rapido"
+        Me.Label2.Text = "CODIGO"
         '
         'IngresoFrasesH
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(648, 348)
+        Me.ClientSize = New System.Drawing.Size(648, 351)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.txtAccesoRapido)
         Me.Controls.Add(Me.btnCerrar)
