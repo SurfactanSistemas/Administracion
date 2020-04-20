@@ -40,7 +40,6 @@
                 Try
 
                     Dim CodigoArticulo As String = masktxtCodigo.Text
-                    ComprobarEnter = CodigoArticulo
                     Dim sqlConsulta As String
                     If (TipoProducto = "MP") Then
                         sqlConsulta = "SELECT * FROM Articulo WHERE Codigo = '" & UCase(masktxtCodigo.Text) & "'"
