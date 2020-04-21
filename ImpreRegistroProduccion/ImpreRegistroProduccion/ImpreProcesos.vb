@@ -347,15 +347,18 @@ Public Class ImpreProcesos
             If Not UCase(WNombre).EndsWith("PDF") And WNombre.Trim <> "" Then WNombre &= ".pdf"
             If WRuta.EndsWith(Chr(34)) Then WRuta = WRuta.Substring(0, WRuta.IndexOf(Chr(34))) & "\"
 
+            'MsgBox(wTipoSalida)
+
             Select Case wTipoSalida
                 Case 1, 6
                     .Imprimir()
                 Case 2
                     .Mostrar()
                 Case 3
+                    'MsgBox(WNombre)
                     .Exportar(WNombre, CrystalDecisions.Shared.ExportFormatType.PortableDocFormat)
                 Case 4, 7
-                    ' MsgBox("Tipo: " & wTipoSalida & " - Ruta: " & WRuta & " - Nombre PDF: " & WNombrePDF & " - Nombre: " & WNombre)
+                    'MsgBox("Tipo: " & wTipoSalida & " - Ruta: " & WRuta & " - Nombre PDF: " & WNombrePDF & " - Nombre: " & WNombre)
                     .Exportar(WNombre, CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, WRuta)
                     If wTipoSalida = 7 Then .MergePDFs(WRuta, WNombrePDF)
                 Case 5
