@@ -30,16 +30,16 @@ Partial Class IngresoDatosMostrarEnCertificadosAnalisis
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.dgvDatos = New ConsultasVarias.DBDataGridView()
-        Me.lblDescProducto = New System.Windows.Forms.Label()
-        Me.txtProducto = New System.Windows.Forms.MaskedTextBox()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.lblDescCliente = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.txtCliente = New System.Windows.Forms.MaskedTextBox()
-        Me.btnGrabar = New System.Windows.Forms.Button()
-        Me.btnCerrar = New System.Windows.Forms.Button()
         Me.btnLimpiar = New System.Windows.Forms.Button()
+        Me.btnCerrar = New System.Windows.Forms.Button()
+        Me.btnGrabar = New System.Windows.Forms.Button()
+        Me.txtCliente = New System.Windows.Forms.MaskedTextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.txtProducto = New System.Windows.Forms.MaskedTextBox()
+        Me.lblDescCliente = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.lblDescProducto = New System.Windows.Forms.Label()
+        Me.dgvDatos = New ConsultasVarias.DBDataGridView()
         Me.Ensayo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Valor = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -63,7 +63,7 @@ Partial Class IngresoDatosMostrarEnCertificadosAnalisis
         'Label2
         '
         Me.Label2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.Control
@@ -76,7 +76,7 @@ Partial Class IngresoDatosMostrarEnCertificadosAnalisis
         'Label1
         '
         Me.Label1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.Control
@@ -89,8 +89,8 @@ Partial Class IngresoDatosMostrarEnCertificadosAnalisis
         'GroupBox1
         '
         Me.GroupBox1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox1.Controls.Add(Me.btnLimpiar)
         Me.GroupBox1.Controls.Add(Me.btnCerrar)
         Me.GroupBox1.Controls.Add(Me.btnGrabar)
@@ -106,12 +106,106 @@ Partial Class IngresoDatosMostrarEnCertificadosAnalisis
         Me.GroupBox1.TabIndex = 3
         Me.GroupBox1.TabStop = False
         '
+        'btnLimpiar
+        '
+        Me.btnLimpiar.Location = New System.Drawing.Point(615, 41)
+        Me.btnLimpiar.Name = "btnLimpiar"
+        Me.btnLimpiar.Size = New System.Drawing.Size(128, 23)
+        Me.btnLimpiar.TabIndex = 2
+        Me.btnLimpiar.Text = "LIMPIAR"
+        Me.btnLimpiar.UseVisualStyleBackColor = True
+        '
+        'btnCerrar
+        '
+        Me.btnCerrar.Location = New System.Drawing.Point(615, 64)
+        Me.btnCerrar.Name = "btnCerrar"
+        Me.btnCerrar.Size = New System.Drawing.Size(128, 23)
+        Me.btnCerrar.TabIndex = 2
+        Me.btnCerrar.Text = "CERRAR"
+        Me.btnCerrar.UseVisualStyleBackColor = True
+        '
+        'btnGrabar
+        '
+        Me.btnGrabar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnGrabar.Location = New System.Drawing.Point(615, 8)
+        Me.btnGrabar.Name = "btnGrabar"
+        Me.btnGrabar.Size = New System.Drawing.Size(128, 33)
+        Me.btnGrabar.TabIndex = 2
+        Me.btnGrabar.Text = "GRABAR"
+        Me.btnGrabar.UseVisualStyleBackColor = True
+        '
+        'txtCliente
+        '
+        Me.txtCliente.Location = New System.Drawing.Point(87, 43)
+        Me.txtCliente.Mask = ">L00000"
+        Me.txtCliente.Name = "txtCliente"
+        Me.txtCliente.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtCliente.Size = New System.Drawing.Size(52, 20)
+        Me.txtCliente.TabIndex = 1
+        Me.txtCliente.Text = "A00000"
+        Me.txtCliente.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(29, 47)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(52, 13)
+        Me.Label6.TabIndex = 0
+        Me.Label6.Text = "CLIENTE"
+        '
+        'txtProducto
+        '
+        Me.txtProducto.Location = New System.Drawing.Point(87, 17)
+        Me.txtProducto.Mask = ">LL-00000-000"
+        Me.txtProducto.Name = "txtProducto"
+        Me.txtProducto.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtProducto.Size = New System.Drawing.Size(78, 20)
+        Me.txtProducto.TabIndex = 1
+        Me.txtProducto.Text = "PT00000000"
+        Me.txtProducto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'lblDescCliente
+        '
+        Me.lblDescCliente.BackColor = System.Drawing.Color.Cyan
+        Me.lblDescCliente.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.lblDescCliente.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.lblDescCliente.Location = New System.Drawing.Point(145, 42)
+        Me.lblDescCliente.Name = "lblDescCliente"
+        Me.lblDescCliente.Padding = New System.Windows.Forms.Padding(5, 0, 0, 0)
+        Me.lblDescCliente.Size = New System.Drawing.Size(463, 23)
+        Me.lblDescCliente.TabIndex = 0
+        Me.lblDescCliente.Text = "PRODUCTO"
+        Me.lblDescCliente.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(13, 21)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(68, 13)
+        Me.Label4.TabIndex = 0
+        Me.Label4.Text = "PRODUCTO"
+        '
+        'lblDescProducto
+        '
+        Me.lblDescProducto.BackColor = System.Drawing.Color.Cyan
+        Me.lblDescProducto.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.lblDescProducto.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.lblDescProducto.Location = New System.Drawing.Point(171, 16)
+        Me.lblDescProducto.Name = "lblDescProducto"
+        Me.lblDescProducto.Padding = New System.Windows.Forms.Padding(5, 0, 0, 0)
+        Me.lblDescProducto.Size = New System.Drawing.Size(437, 23)
+        Me.lblDescProducto.TabIndex = 0
+        Me.lblDescProducto.Text = "PRODUCTO"
+        Me.lblDescProducto.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
         'dgvDatos
         '
         Me.dgvDatos.AllowUserToAddRows = False
         Me.dgvDatos.AllowUserToDeleteRows = False
         Me.dgvDatos.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvDatos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Ensayo, Me.Descripcion, Me.Valor, Me.Marca})
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -136,100 +230,6 @@ Partial Class IngresoDatosMostrarEnCertificadosAnalisis
         Me.dgvDatos.SinClickDerecho = False
         Me.dgvDatos.Size = New System.Drawing.Size(762, 328)
         Me.dgvDatos.TabIndex = 4
-        '
-        'lblDescProducto
-        '
-        Me.lblDescProducto.BackColor = System.Drawing.Color.Cyan
-        Me.lblDescProducto.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.lblDescProducto.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.lblDescProducto.Location = New System.Drawing.Point(171, 16)
-        Me.lblDescProducto.Name = "lblDescProducto"
-        Me.lblDescProducto.Padding = New System.Windows.Forms.Padding(5, 0, 0, 0)
-        Me.lblDescProducto.Size = New System.Drawing.Size(437, 23)
-        Me.lblDescProducto.TabIndex = 0
-        Me.lblDescProducto.Text = "PRODUCTO"
-        Me.lblDescProducto.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'txtProducto
-        '
-        Me.txtProducto.Location = New System.Drawing.Point(87, 17)
-        Me.txtProducto.Mask = ">LL-00000-000"
-        Me.txtProducto.Name = "txtProducto"
-        Me.txtProducto.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtProducto.Size = New System.Drawing.Size(78, 20)
-        Me.txtProducto.TabIndex = 1
-        Me.txtProducto.Text = "PT00000000"
-        Me.txtProducto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(13, 21)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(68, 13)
-        Me.Label4.TabIndex = 0
-        Me.Label4.Text = "PRODUCTO"
-        '
-        'lblDescCliente
-        '
-        Me.lblDescCliente.BackColor = System.Drawing.Color.Cyan
-        Me.lblDescCliente.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.lblDescCliente.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.lblDescCliente.Location = New System.Drawing.Point(145, 42)
-        Me.lblDescCliente.Name = "lblDescCliente"
-        Me.lblDescCliente.Padding = New System.Windows.Forms.Padding(5, 0, 0, 0)
-        Me.lblDescCliente.Size = New System.Drawing.Size(463, 23)
-        Me.lblDescCliente.TabIndex = 0
-        Me.lblDescCliente.Text = "PRODUCTO"
-        Me.lblDescCliente.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(29, 47)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(52, 13)
-        Me.Label6.TabIndex = 0
-        Me.Label6.Text = "CLIENTE"
-        '
-        'txtCliente
-        '
-        Me.txtCliente.Location = New System.Drawing.Point(87, 43)
-        Me.txtCliente.Mask = ">L00000"
-        Me.txtCliente.Name = "txtCliente"
-        Me.txtCliente.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtCliente.Size = New System.Drawing.Size(52, 20)
-        Me.txtCliente.TabIndex = 1
-        Me.txtCliente.Text = "A00000"
-        Me.txtCliente.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'btnGrabar
-        '
-        Me.btnGrabar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnGrabar.Location = New System.Drawing.Point(615, 8)
-        Me.btnGrabar.Name = "btnGrabar"
-        Me.btnGrabar.Size = New System.Drawing.Size(128, 33)
-        Me.btnGrabar.TabIndex = 2
-        Me.btnGrabar.Text = "GRABAR"
-        Me.btnGrabar.UseVisualStyleBackColor = True
-        '
-        'btnCerrar
-        '
-        Me.btnCerrar.Location = New System.Drawing.Point(615, 64)
-        Me.btnCerrar.Name = "btnCerrar"
-        Me.btnCerrar.Size = New System.Drawing.Size(128, 23)
-        Me.btnCerrar.TabIndex = 2
-        Me.btnCerrar.Text = "CERRAR"
-        Me.btnCerrar.UseVisualStyleBackColor = True
-        '
-        'btnLimpiar
-        '
-        Me.btnLimpiar.Location = New System.Drawing.Point(615, 41)
-        Me.btnLimpiar.Name = "btnLimpiar"
-        Me.btnLimpiar.Size = New System.Drawing.Size(128, 23)
-        Me.btnLimpiar.TabIndex = 2
-        Me.btnLimpiar.Text = "LIMPIAR"
-        Me.btnLimpiar.UseVisualStyleBackColor = True
         '
         'Ensayo
         '
