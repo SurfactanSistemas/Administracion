@@ -2,7 +2,6 @@
     Dim consultaIndice As Integer = -1
     Dim PagLstbox As Integer = 1
     ReadOnly TipoProducto As String
-    Dim ComprobarEnter As String = ""
 
     Sub New(ByVal TipoProductoLLamadaMenu)
 
@@ -41,7 +40,6 @@
                 Try
 
                     Dim CodigoArticulo As String = masktxtCodigo.Text
-                    ComprobarEnter = CodigoArticulo
                     Dim sqlConsulta As String
                     If (TipoProducto = "MP") Then
                         sqlConsulta = "SELECT * FROM Articulo WHERE Codigo = '" & UCase(masktxtCodigo.Text) & "'"
@@ -321,60 +319,6 @@
 
 
 
-    End Sub
-
-    Private Sub LstboxConsultaDatos_Click(ByVal sender As Object, ByVal e As EventArgs) Handles LstboxConsultaDatos.Click
-
-        If (PagLstbox = 1) Then
-
-            LstboxConsultaDatos.BringToFront()
-            DGV_Consulta.SendToBack()
-
-            LstboxConsultaDatos.Items.Clear()
-
-            Dim tabla As New DataTable
-            Dim sqlConsulta As String
-
-            Select Case LstboxConsultaDatos.SelectedIndex
-                Case "0"
-                    consultaIndice = 0
-
-                    If (TipoProducto = "PT") Then
-                        sqlConsulta = "SELECT Codigo, Descripcion FROM Terminado ORDER BY Codigo"
-                    Else
-                        sqlConsulta = "SELECT Codigo, Descripcion FROM Articulo ORDER BY Codigo"
-                    End If
-
-                    tabla = GetAll(sqlConsulta)
-
-                Case "1"
-                    consultaIndice = 1
-
-                    sqlConsulta = "SELECT Codigo, Descripcion,Observa Observaciones FROM FraseH ORDER BY Codigo"
-
-                    tabla = GetAll(sqlConsulta, "SurfactanSA")
-
-                Case "2"
-                    consultaIndice = 2
-
-                    sqlConsulta = "SELECT Codigo, Descripcion, Observa Observaciones FROM FraseP ORDER BY Codigo"
-
-                    tabla = GetAll(sqlConsulta, "SurfactanSA")
-
-            End Select
-
-            If tabla.Rows.Count > 0 Then DGV_Consulta.DataSource = tabla
-
-            PagLstbox = 2
-
-            DGV_Consulta.BringToFront()
-            LstboxConsultaDatos.SendToBack()
-
-            DGV_Consulta.Visible = True
-            txtConsultaDatos.Visible = True
-            txtConsultaDatos.Focus()
-
-        End If
     End Sub
 
     Private Sub txtConsultaDatos_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtConsultaDatos.KeyUp
@@ -2129,41 +2073,15 @@
     End Sub
 
     Private Sub masktxtCodigo_MouseDoubleClick(ByVal sender As Object, ByVal e As MouseEventArgs) Handles masktxtCodigo.MouseDoubleClick
-        pnlConsultarDatos.Visible = True
-        txtConsultaDatos.Visible = True
-        DGV_Consulta.BringToFront()
-        LstboxConsultaDatos.SendToBack()
-        Try
-            consultaIndice = 0
-            LstboxConsultaDatos.Items.Clear()
-            Dim tabla As New DataTable
-            Dim sqlConsulta As String
-            If (TipoProducto = "MP") Then
-                sqlConsulta = "SELECT Codigo, Descripcion FROM Articulo ORDER BY Codigo"
-            Else
-                sqlConsulta = "SELECT Codigo, Descripcion FROM Terminado ORDER BY Codigo"
-            End If
-            tabla = GetAll(sqlConsulta)
-
-            If (tabla.Rows.Count > 0) Then
-                DGV_Consulta.DataSource = tabla
-
-            End If
-
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
-
+        btnConsultarDatos_Click(Nothing, Nothing)
+        LstboxConsultaDatos.SelectedIndex = 0
+        LstboxConsultaDatos_MouseClick(Nothing, Nothing)
     End Sub
 
     Private Sub btnVolver_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnVolver.Click
         Close()
     End Sub
-
-    Private Sub masktxtCodigo_Leave(ByVal sender As Object, ByVal e As EventArgs) Handles masktxtCodigo.Leave
-        If (ComprobarEnter = "" Or ComprobarEnter <> masktxtCodigo.Text) Then masktxtCodigo_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
-    End Sub
-
+    
     Private Sub cbxExplosivo1_DropDownClosed(ByVal sender As Object, ByVal e As EventArgs) Handles cbxExplosivo1.DropDownClosed, cbxToxico6.DropDownClosed, cbxPeligroPLASalud8.DropDownClosed, cbxPeligro7.DropDownClosed, cbxMedioAmbiente9.DropDownClosed, cbxInflamable2.DropDownClosed, cbxCorrosivo5.DropDownClosed, cbxCarburante3.DropDownClosed, cbxGasesBajo4.DropDownClosed
         Dim i As Integer = 0
         Dim x As Integer() = {0, 0, 0, 0, 0, 0}
@@ -2396,5 +2314,59 @@
             Case Keys.Escape
                 cbxTipoProducto.SelectedIndex = 0
         End Select
+    End Sub
+
+    Private Sub LstboxConsultaDatos_MouseClick(sender As Object, e As MouseEventArgs) Handles LstboxConsultaDatos.MouseClick
+        If (PagLstbox = 1) Then
+
+            LstboxConsultaDatos.BringToFront()
+            DGV_Consulta.SendToBack()
+            txtConsultaDatos.Text = ""
+
+            Dim tabla As New DataTable
+            Dim sqlConsulta As String
+
+            Select Case LstboxConsultaDatos.SelectedIndex
+                Case 0
+                    consultaIndice = 0
+
+                    If (TipoProducto = "PT") Then
+                        sqlConsulta = "SELECT Codigo, Descripcion FROM Terminado ORDER BY Codigo"
+                    Else
+                        sqlConsulta = "SELECT Codigo, Descripcion FROM Articulo ORDER BY Codigo"
+                    End If
+
+                    tabla = GetAll(sqlConsulta)
+
+                Case 1
+                    consultaIndice = 1
+
+                    sqlConsulta = "SELECT Codigo, Descripcion,Observa Observaciones FROM FraseH ORDER BY Codigo"
+
+                    tabla = GetAll(sqlConsulta, "SurfactanSA")
+
+                Case 2
+                    consultaIndice = 2
+
+                    sqlConsulta = "SELECT Codigo, Descripcion, Observa Observaciones FROM FraseP ORDER BY Codigo"
+
+                    tabla = GetAll(sqlConsulta, "SurfactanSA")
+
+            End Select
+
+            If tabla.Rows.Count > 0 Then DGV_Consulta.DataSource = tabla
+
+            PagLstbox = 2
+
+            LstboxConsultaDatos.Items.Clear()
+
+            DGV_Consulta.BringToFront()
+            LstboxConsultaDatos.SendToBack()
+
+            DGV_Consulta.Visible = True
+            txtConsultaDatos.Visible = True
+            txtConsultaDatos.Focus()
+
+        End If
     End Sub
 End Class

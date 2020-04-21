@@ -560,4 +560,8 @@
         mastxtCodigo_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
 
     End Sub
+
+    Private Sub cbxTipoMovimiento_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbxTipoMovimiento.SelectedIndexChanged
+        txtES.Text = IIf(cbxTipoMovimiento.SelectedIndex = 0, "E", "S")
+    End Sub
 End Class

@@ -29,15 +29,6 @@
         End Select
     End Sub
 
-    Private Sub mastxtFecha_Leave(ByVal sender As Object, ByVal e As EventArgs) Handles mastxtFecha.Leave, txtCodigoMP2.Leave
-        If (ValidaFecha(mastxtFecha.Text) = "S") Then
-            txtAnalista.Focus()
-        Else
-            MsgBox("Ingrese un fecha valida")
-            mastxtFecha.Focus()
-        End If
-    End Sub
-
     Private Sub txtAnalista_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtAnalista.KeyDown
         Select Case e.KeyData
             Case Keys.Enter
@@ -65,8 +56,7 @@
     Private Sub _BuscarInforme()
 
         Dim SQLCnsl As String
-        SQLCnsl = "SELECT Articulo = i.Articulo, DescripcionLista = i.Articulo + ' ' + CASE i.NombreComercial WHEN NULL THEN a.Descripcion ELSE i.NombreComercial END, " _
-                   & "Descripcion = CASE i.NombreComercial WHEN NULL THEN a.Descripcion ELSE i.NombreComercial END, Lote1, Lote2, Lote3, Lote4, Lote5," _
+        SQLCnsl = "SELECT Articulo = i.Articulo , DescripcionLista = i.Articulo + ' ' + ISNULL(i.NombreComercial, a.Descripcion), Descripcion = ISNULL(i.NombreComercial, a.Descripcion), Lote1, Lote2, Lote3, Lote4, Lote5," _
                    & "i.Lote6, i.Lote7, i.Lote8, i.Lote9, i.Lote10, i.Lote11, i.Lote12, i.Lote13, i.Lote14, i.Lote15, i.Lote16, i.Lote17, i.Lote18, i.Lote19, i.Lote20 " _
                    & "FROM Informe AS i INNER JOIN Articulo AS a ON i.Articulo = a.Codigo WHERE i.Informe = '" & txtInforme.Text & "' "
         tablaInforme = GetAll(SQLCnsl)
@@ -111,10 +101,12 @@
             .Size = New Size(293, 82)
         End With
 
-        With LtbLotes
+        With LtbMP
             .Location = LtbLotes.Location
             .Size = LtbLotes.Size
         End With
+
+        btnLimpiar_Click(Nothing, Nothing)
 
     End Sub
 
@@ -155,7 +147,7 @@
         txtcodigomp2.Text = ""
         txtDescripcionMP.Text = ""
         txtLote.Text = ""
-        mastxtFecha.Text = ""
+        mastxtFecha.Text = Date.Now.ToString("dd/MM/yyyy")
         txtAnalista.Text = ""
         TxtCantEtiq.Text = ""
     End Sub
@@ -214,4 +206,12 @@
         Return Not WNingunoVacio AndAlso Val(TxtCantEtiq.Text) > 0
 
     End Function
+
+    Private Sub txtLote_KeyDown(sender As Object, e As KeyEventArgs) Handles txtLote.KeyDown
+        If e.KeyData = Keys.Enter Then
+            If txtLote.Text.Trim = "" Then txtAnalista.Focus()
+        ElseIf e.KeyData = Keys.Escape Then
+            txtLote.Text = ""
+        End If
+    End Sub
 End Class

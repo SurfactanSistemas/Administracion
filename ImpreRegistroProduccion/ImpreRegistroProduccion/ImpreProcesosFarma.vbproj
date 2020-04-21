@@ -79,7 +79,7 @@
     <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.Office.Interop.Outlook, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
+    <Reference Include="Microsoft.Office.Interop.Outlook, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="PdfSharp">
@@ -165,10 +165,15 @@
       <DependentUpon>certificadonuevofarmasegunda.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\HojaRuta\hojarutanuevo.vb">
+    <Compile Include="Reportes\DBAuxi.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>hojarutanuevo.rpt</DependentUpon>
+      <DependentUpon>DBAuxi.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\HojaRuta\ResumenHojaRuta.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ResumenHojaRuta.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\Registro Produccion Farma\conciliacionmuestreo.vb">
@@ -349,9 +354,9 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>certificadonuevofarmasegunda.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\HojaRuta\hojarutanuevo.rpt">
+    <EmbeddedResource Include="Reportes\HojaRuta\ResumenHojaRuta.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>hojarutanuevo.vb</LastGenOutput>
+      <LastGenOutput>ResumenHojaRuta.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Registro Produccion Farma\conciliacionmuestreo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -491,6 +496,17 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Reportes\DBAuxi.xsc">
+      <DependentUpon>DBAuxi.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\DBAuxi.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DBAuxi.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Reportes\DBAuxi.xss">
+      <DependentUpon>DBAuxi.xsd</DependentUpon>
+    </None>
     <None Include="Resources\LogoSurfactan.jpg" />
   </ItemGroup>
   <ItemGroup>

@@ -18,7 +18,7 @@ Imports System
 Imports System.ComponentModel
 
 
-Public Class hojarutanuevo
+Public Class ImpreEspecificacionesPTNofarma
     Inherits ReportClass
     
     Public Sub New()
@@ -27,7 +27,7 @@ Public Class hojarutanuevo
     
     Public Overrides Property ResourceName() As String
         Get
-            Return "hojarutanuevo.rpt"
+            Return "ImpreEspecificacionesPTNofarma.rpt"
         End Get
         Set
             'Do nothing
@@ -45,7 +45,7 @@ Public Class hojarutanuevo
     
     Public Overrides Property FullResourceName() As String
         Get
-            Return "ImpreProcesosFarma.hojarutanuevo.rpt"
+            Return "Laboratorio.ImpreEspecificacionesPTNofarma.rpt"
         End Get
         Set
             'Do nothing
@@ -94,7 +94,7 @@ Public Class hojarutanuevo
 End Class
 
 <System.Drawing.ToolboxBitmapAttribute(GetType(CrystalDecisions.[Shared].ExportOptions), "report.bmp")>  _
-Public Class Cachedhojarutanuevo
+Public Class CachedImpreEspecificacionesPTNofarma
     Inherits Component
     Implements ICachedReport
     
@@ -136,7 +136,7 @@ Public Class Cachedhojarutanuevo
     End Property
     
     Public Overridable Function CreateReport() As CrystalDecisions.CrystalReports.Engine.ReportDocument Implements CrystalDecisions.ReportSource.ICachedReport.CreateReport
-        Dim rpt As hojarutanuevo = New hojarutanuevo()
+        Dim rpt As ImpreEspecificacionesPTNofarma = New ImpreEspecificacionesPTNofarma()
         rpt.Site = Me.Site
         Return rpt
     End Function
