@@ -660,12 +660,6 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
                                 dgvVerificaciones.Columns("VerAcciones").AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells
                             End If
 
-                            If cmbEstado.SelectedIndex < 3 Then
-                                MsgBox("Se detectó un ingreso de acción, se cambiara el estado a Implementada")
-                                cmbEstado.SelectedIndex = 3
-                            End If
-                            
-
                         Case 2
 
                             If Val(valor) <> 0 Then
@@ -754,10 +748,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
                             If Val(valor) <> 0 Then
                                 .Rows(iRow).Cells("ImpleDescResponsable").Value = _TraerDescripcionResponsable(valor)
                             End If
-                            If cmbEstado.SelectedIndex < 4 Then
-                                MsgBox("Se detectó un ingreso de una acción, se cambiara el estado a Implementación a Verificar")
-                                cmbEstado.SelectedIndex = 4
-                            End If
+                            
                         Case 4
 
                             If valor.Replace(" ", "").Length = 10 Then
@@ -1972,6 +1963,8 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
         Dim WSQls As New List(Of String)
 
+        WVerEstadoImple = ""
+
         WSQls.Add("DELETE FROM ImpreSACII")
 
         For i = 1 To 12
@@ -2457,7 +2450,6 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
         Dim WTipo = dgvIncidencias.CurrentRow.Cells("Tipo").Value
         Dim WIncid = dgvIncidencias.CurrentRow.Cells("Incidencia").Value
 
-
         Select Case WTipo
             Case TipoIncidencias.General
                 Dim frm As New DetallesIncidencia(WIncid)
@@ -2472,7 +2464,6 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
                     .Show(Me)
                 End With
         End Select
-
 
     End Sub
 
@@ -2504,46 +2495,60 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
         End If
     End Sub
 
-    'Private Sub txtFechaAux_Leave(ByVal sender As Object, ByVal e As EventArgs) Handles txtFechaAux.Leave
-    '    'With dgvAcciones
-    '    '    If .CurrentRow.Index - 1 >= 0 Then
-    '    '        .Rows(.CurrentRow.Index - 1).Cells("Plazo").Value = txtFechaAux.Text
-    '    '        txtFechaAux.Visible = False
-    '    '    End If
-    '    'End With
-    'End Sub
+    Private Sub TabControl1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TabControl1.SelectedIndexChanged
+        '
+        ' Chequeamos en cada cambio de pestaña, las condiciones para el cambio automático de Estados.
+        '
+        Dim WEstadoActual As Integer = cmbEstado.SelectedIndex
 
-    'Private Sub txtFechaAux2_Leave(ByVal sender As Object, ByVal e As EventArgs) Handles txtFechaAux2.Leave
-    '    dgvImplementaciones.CurrentRow.Cells("ImpleFecha").Value = txtFechaAux2.Text
-    '    txtFechaAux2.Visible = False
-    'End Sub
-
-    'Private Sub txtFechaAux3_Leave(ByVal sender As Object, ByVal e As EventArgs) Handles txtFechaAux3.Leave
-    '    dgvVerificaciones.CurrentRow.Cells("VerFechaI").Value = txtFechaAux3.Text
-    '    txtFechaAux3.Visible = False
-    'End Sub
-
-    'Private Sub txtFechaAux4_Leave(ByVal sender As Object, ByVal e As EventArgs) Handles txtFechaAux4.Leave
-    '    dgvVerificaciones.CurrentRow.Cells("VerFechaII").Value = txtFechaAux4.Text
-    '    txtFechaAux4.Visible = False
-    'End Sub
-
-    'Private Sub dgvAcciones_CellBeginEdit(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellCancelEventArgs) Handles dgvAcciones.CellBeginEdit
-    '    If dgvAcciones.CurrentCell.ColumnIndex = 4 Then
-    '        MsgBox(dgvAcciones.CurrentCell.Value)
-    '    End If
-    'End Sub
-
-    
-   
-    Private Sub txtIngresoCausa_Leave(sender As Object, e As EventArgs) Handles txtIngresoCausa.Leave
-        If Trim(txtIngresoCausa.Text) <> "" Then
-            If cmbEstado.SelectedIndex < 2 Then
-                MsgBox("Se detectó un ingreso de una causa, se cambiara el estado a Investigación")
-                cmbEstado.SelectedIndex = 2
-            End If
+        '
+        ' Verificamos para Implementación a Verificar.
+        '
+        If WEstadoActual < EstadosSac.ImplementacionAVerificar AndAlso _HayImplementacionesAVerificar() Then
+            cmbEstado.SelectedIndex = EstadosSac.ImplementacionAVerificar
+            Exit Sub
         End If
+
+        '
+        ' Verificamos para Implementación.
+        '
+        If WEstadoActual < EstadosSac.Implementacion AndAlso _HayAccionesImplementadas() Then
+            cmbEstado.SelectedIndex = EstadosSac.Implementacion
+            Exit Sub
+        End If
+
+        '
+        ' Verificamos para Investigación.
+        '
+        If WEstadoActual < EstadosSac.Investigacion AndAlso txtIngresoCausa.Text.Trim <> "" Then
+            cmbEstado.SelectedIndex = EstadosSac.Investigacion
+            Exit Sub
+        End If
+
     End Sub
 
+    Private Function _HayImplementacionesAVerificar() As Boolean
+
+        Dim filas As List(Of DataGridViewRow) = dgvImplementaciones.Rows.Cast(Of DataGridViewRow).ToList _
+                                        .FindAll(Function(r) Trim(OrDefault(r.Cells("ImpleAcciones").Value, "")) <> "")
+        If filas.Count = 0 Then Return False
+
+        Return filas.TrueForAll(Function(r) UCase(Trim(OrDefault(r.Cells("Estado").Value, ""))) = "IMPLE.")
+
+    End Function
+
+    Private Function _HayAccionesImplementadas() As Boolean
+        Return dgvAcciones.Rows.Cast(Of DataGridViewRow).ToList.Any(Function(r) Trim(OrDefault(r.Cells(1).Value, "")) <> "")
+    End Function
+
+    Enum EstadosSac
+        SinAsignar
+        Iniciada
+        Investigacion
+        Implementacion
+        ImplementacionAVerificar
+        ImplementacionVerificada
+        Cerrada
+    End Enum
 
 End Class

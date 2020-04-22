@@ -470,7 +470,7 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
 
         Dim WTablaCargaVNotas As String = "CargaVNotas"
         Dim WTablaCargaVNotasIng As String = "CargaVNotasIngles"
-        Dim WBase As String = "Surfactan_II"
+        Dim WBase As String = "Surfactan_III"
 
         If Not EsFarma() Then
             WTablaCargaVNotas = "CargaVNoFarmaNotas"

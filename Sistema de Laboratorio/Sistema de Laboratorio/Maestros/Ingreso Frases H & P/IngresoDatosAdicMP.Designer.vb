@@ -107,11 +107,11 @@ Partial Class IngresoDatosAdicMP
         Me.btnAnteriorPag = New System.Windows.Forms.Button()
         Me.btnVolverConsultarDatos = New System.Windows.Forms.Button()
         Me.txtConsultaDatos = New System.Windows.Forms.TextBox()
+        Me.LstboxConsultaDatos = New System.Windows.Forms.ListBox()
         Me.DGV_Consulta = New ConsultasVarias.DBDataGridView()
         Me.Codigo1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ObservacionesConsulta = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.LstboxConsultaDatos = New System.Windows.Forms.ListBox()
         Me.masktxtCodigo = New System.Windows.Forms.MaskedTextBox()
         Me.btnGrabar = New System.Windows.Forms.Button()
         Me.btnLimpiar = New System.Windows.Forms.Button()
@@ -119,8 +119,8 @@ Partial Class IngresoDatosAdicMP
         Me.btnVolver = New System.Windows.Forms.Button()
         Me.btnImprimirReporte = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.Label21 = New System.Windows.Forms.Label()
         Me.Label22 = New System.Windows.Forms.Label()
+        Me.Label21 = New System.Windows.Forms.Label()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.PictureBox9, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1034,8 +1034,8 @@ Partial Class IngresoDatosAdicMP
         Me.pnlConsultarDatos.Controls.Add(Me.btnAnteriorPag)
         Me.pnlConsultarDatos.Controls.Add(Me.btnVolverConsultarDatos)
         Me.pnlConsultarDatos.Controls.Add(Me.txtConsultaDatos)
-        Me.pnlConsultarDatos.Controls.Add(Me.DGV_Consulta)
         Me.pnlConsultarDatos.Controls.Add(Me.LstboxConsultaDatos)
+        Me.pnlConsultarDatos.Controls.Add(Me.DGV_Consulta)
         Me.pnlConsultarDatos.Location = New System.Drawing.Point(119, 134)
         Me.pnlConsultarDatos.Name = "pnlConsultarDatos"
         Me.pnlConsultarDatos.Size = New System.Drawing.Size(537, 272)
@@ -1068,6 +1068,16 @@ Partial Class IngresoDatosAdicMP
         Me.txtConsultaDatos.Size = New System.Drawing.Size(476, 20)
         Me.txtConsultaDatos.TabIndex = 0
         '
+        'LstboxConsultaDatos
+        '
+        Me.LstboxConsultaDatos.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LstboxConsultaDatos.FormattingEnabled = True
+        Me.LstboxConsultaDatos.ItemHeight = 18
+        Me.LstboxConsultaDatos.Location = New System.Drawing.Point(9, 54)
+        Me.LstboxConsultaDatos.Name = "LstboxConsultaDatos"
+        Me.LstboxConsultaDatos.Size = New System.Drawing.Size(476, 130)
+        Me.LstboxConsultaDatos.TabIndex = 1
+        '
         'DGV_Consulta
         '
         Me.DGV_Consulta.AllowUserToAddRows = False
@@ -1083,14 +1093,14 @@ Partial Class IngresoDatosAdicMP
         Me.DGV_Consulta.DefaultCellStyle = DataGridViewCellStyle6
         Me.DGV_Consulta.DoubleBuffered = True
         Me.DGV_Consulta.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.DGV_Consulta.Location = New System.Drawing.Point(9, 48)
+        Me.DGV_Consulta.Location = New System.Drawing.Point(9, 54)
         Me.DGV_Consulta.Name = "DGV_Consulta"
         Me.DGV_Consulta.OrdenamientoColumnasHabilitado = True
         Me.DGV_Consulta.RowHeadersWidth = 15
         Me.DGV_Consulta.RowTemplate.Height = 20
         Me.DGV_Consulta.ShowCellToolTips = False
         Me.DGV_Consulta.SinClickDerecho = False
-        Me.DGV_Consulta.Size = New System.Drawing.Size(476, 142)
+        Me.DGV_Consulta.Size = New System.Drawing.Size(476, 130)
         Me.DGV_Consulta.TabIndex = 4
         '
         'Codigo1
@@ -1114,16 +1124,6 @@ Partial Class IngresoDatosAdicMP
         Me.ObservacionesConsulta.HeaderText = "Observaciones"
         Me.ObservacionesConsulta.Name = "ObservacionesConsulta"
         Me.ObservacionesConsulta.ReadOnly = True
-        '
-        'LstboxConsultaDatos
-        '
-        Me.LstboxConsultaDatos.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LstboxConsultaDatos.FormattingEnabled = True
-        Me.LstboxConsultaDatos.ItemHeight = 18
-        Me.LstboxConsultaDatos.Location = New System.Drawing.Point(9, 54)
-        Me.LstboxConsultaDatos.Name = "LstboxConsultaDatos"
-        Me.LstboxConsultaDatos.Size = New System.Drawing.Size(476, 130)
-        Me.LstboxConsultaDatos.TabIndex = 1
         '
         'masktxtCodigo
         '
@@ -1197,19 +1197,6 @@ Partial Class IngresoDatosAdicMP
         Me.Panel2.Size = New System.Drawing.Size(816, 49)
         Me.Panel2.TabIndex = 0
         '
-        'Label21
-        '
-        Me.Label21.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label21.AutoSize = True
-        Me.Label21.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label21.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label21.Location = New System.Drawing.Point(637, 13)
-        Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(155, 20)
-        Me.Label21.TabIndex = 1
-        Me.Label21.Text = "SURFACTAN S.A."
-        '
         'Label22
         '
         Me.Label22.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -1222,6 +1209,19 @@ Partial Class IngresoDatosAdicMP
         Me.Label22.Size = New System.Drawing.Size(288, 18)
         Me.Label22.TabIndex = 1
         Me.Label22.Text = "DATOS ADICIONALES (MATERIA PRIMA)"
+        '
+        'Label21
+        '
+        Me.Label21.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label21.AutoSize = True
+        Me.Label21.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label21.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label21.Location = New System.Drawing.Point(637, 13)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(155, 20)
+        Me.Label21.TabIndex = 1
+        Me.Label21.Text = "SURFACTAN S.A."
         '
         'IngresoDatosAdicMP
         '

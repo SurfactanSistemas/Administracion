@@ -1,4 +1,6 @@
-﻿Public Class IngresoDatosMostrarEnCertificadosAnalisis
+﻿Imports ConsultasVarias
+
+Public Class IngresoDatosMostrarEnCertificadosAnalisis : Implements ConsultasVarias.IAyudaGeneral
     Private ReadOnly CerrarDspGrabar As Boolean = False
 
     Sub New(Optional ByVal Terminado As String = "", Optional ByVal Cliente As String = "", Optional ByVal CerrarDspGrabar As Boolean = False)
@@ -65,9 +67,6 @@
 
             If dgvDatos.DataSource IsNot Nothing Then DirectCast(dgvDatos.DataSource, DataTable).Rows.Clear()
             lblDescCliente.Text = ""
-
-            If txtProducto.Text.Replace(" ", "").Length < 12 Then Exit Sub
-
             '
             ' Cargamos Datos de Cliente.
             '
@@ -76,6 +75,8 @@
             If WCli Is Nothing Then Exit Sub
 
             lblDescCliente.Text = Trim(OrDefault(WCli.Item("Razon"), ""))
+
+            If txtProducto.Text.Replace(" ", "").Length < 12 Then Exit Sub
 
             '
             ' Cargamos Datos que pueden salir en Certificado de Análisis.
@@ -236,5 +237,16 @@
             End With
 
         End If
+    End Sub
+
+    Public Sub _ProcesarAyudaGeneral(row As DataGridViewRow) Implements IAyudaGeneral._ProcesarAyudaGeneral
+        txtCliente.Text = row.Cells("Codigo").Value
+        txtCliente_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+    End Sub
+
+    Private Sub txtCliente_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles txtCliente.MouseDoubleClick
+        With New AyudaGeneral(GetAll("SELECT Cliente As Codigo, Razon As Descripcion FROM Cliente WHERE Razon <> ''"))
+            .Show(Me)
+        End With
     End Sub
 End Class

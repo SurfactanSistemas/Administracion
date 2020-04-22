@@ -53,7 +53,7 @@
                             If tabla IsNot Nothing Then
 
                                 For i As Integer = 1 To 10
-                                    DGV_ConsultaVersiones.Rows.Item(i - 1).Cells("Ensayo").Value = OrDefault(tabla.Item("Ensayo" & i), "")
+                                    If Val(OrDefault(tabla.Item("Ensayo" & i), "")) <> 0 Then DGV_ConsultaVersiones.Rows.Item(i - 1).Cells("Ensayo").Value = OrDefault(tabla.Item("Ensayo" & i), "")
                                     DGV_ConsultaVersiones.Rows.Item(i - 1).Cells("ValorEstandar").Value = tabla.Item("Valor" & i) & OrDefault(tabla.Item("Valor" & i & i), "")
                                     DGV_ConsultaVersiones.Rows.Item(i - 1).Cells("Desde").Value = tabla.Item("Desde" & i)
                                     DGV_ConsultaVersiones.Rows.Item(i - 1).Cells("Hasta").Value = tabla.Item("Hasta" & i)
@@ -226,4 +226,16 @@
         Return 0
 
     End Function
+
+    Private Sub btnVolver_Click(sender As Object, e As EventArgs) Handles btnVolver.Click
+        Close()
+    End Sub
+
+    Private Sub ConsDeEspefXVersion_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        mastxtCodigo.Text = ""
+    End Sub
+
+    Private Sub ConsDeEspefXVersion_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        mastxtCodigo.Focus()
+    End Sub
 End Class

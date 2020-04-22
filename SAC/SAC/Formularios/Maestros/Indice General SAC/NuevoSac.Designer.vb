@@ -507,7 +507,7 @@ Partial Class NuevoSac
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
         Me.TabControl1.ShowToolTips = True
-        Me.TabControl1.Size = New System.Drawing.Size(1037, 366)
+        Me.TabControl1.Size = New System.Drawing.Size(1037, 348)
         Me.TabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed
         Me.TabControl1.TabIndex = 3
         '
@@ -522,7 +522,7 @@ Partial Class NuevoSac
         Me.TabPage1.Location = New System.Drawing.Point(4, 29)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(1029, 333)
+        Me.TabPage1.Size = New System.Drawing.Size(1029, 315)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Descripción"
         '
@@ -1359,7 +1359,7 @@ Partial Class NuevoSac
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(0, 174)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(1037, 366)
+        Me.Panel2.Size = New System.Drawing.Size(1037, 348)
         Me.Panel2.TabIndex = 4
         '
         'Panel3
@@ -1537,7 +1537,7 @@ Partial Class NuevoSac
         Me.Panel4.Controls.Add(Me.btnImprimir)
         Me.Panel4.Controls.Add(Me.btnLimpiar)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel4.Location = New System.Drawing.Point(0, 540)
+        Me.Panel4.Location = New System.Drawing.Point(0, 522)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(1037, 47)
         Me.Panel4.TabIndex = 8
@@ -1548,7 +1548,7 @@ Partial Class NuevoSac
         '
         'NuevoSac
         '
-        Me.ClientSize = New System.Drawing.Size(1037, 587)
+        Me.ClientSize = New System.Drawing.Size(1037, 569)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel4)
         Me.Controls.Add(Me.Panel3)

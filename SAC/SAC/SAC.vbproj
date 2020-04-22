@@ -84,7 +84,7 @@
     </Reference>
     <Reference Include="PdfSharp, Version=1.32.2608.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>PDFSharp\PdfSharp.dll</HintPath>
+      <HintPath>..\..\PDFSharp\PdfSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -99,10 +99,6 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="TallComponents.PDF.Kit, Version=4.0.31.0, Culture=neutral, PublicKeyToken=76bf2dedaa68ccb5, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>.\TallComponents.PDF.Kit.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -673,18 +669,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="PDFSharp\de\PdfSharp.resources.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="PDFSharp\PdfSharp.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="PDFSharp\PdfSharp.pdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="PDFSharp\PdfSharp.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\Aceptar N2.png" />
     <Content Include="Resources\actualizar.png" />
     <Content Include="Resources\AddInvoice.png" />

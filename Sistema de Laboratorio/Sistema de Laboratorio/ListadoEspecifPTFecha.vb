@@ -68,7 +68,6 @@
         Dim datos As DataTable = GetAll(sqlconsulta, "Surfactan_II")
         With datos.Columns
             .Add("Titulo")
-            .Add("Descripcion")
         End With
 
         For Each row As DataRow In datos.Rows
@@ -97,5 +96,8 @@
 
     Private Sub ListadoEspecifPTFecha_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Text = ""
+        For Each mk As MaskedTextBox In Controls.OfType(Of MaskedTextBox)()
+            mk.Text = ""
+        Next
     End Sub
 End Class
