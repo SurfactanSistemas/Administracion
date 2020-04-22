@@ -140,7 +140,7 @@ Public Class ImpreProcesos
 
             End If
 
-            '_GenerarInformeHojaRuta("17953", "C:\TempHojaRuta")
+            '_GenerarInformeHojaRuta("17899", "C:\TempHojaRuta")
 
             'Dim WTipoReporte2 As Integer = 4
             'Dim WPartida2 As Integer = 0
@@ -181,13 +181,60 @@ Public Class ImpreProcesos
 
         If Not Directory.Exists(WRutaArchivo) Then Directory.CreateDirectory(WRutaArchivo)
 
-        Dim WHoja As DataRow = GetSingle("SELECT Hoja FROM HojaRuta WHERE Hoja = '" & WHojaRuta & "' And Archivo <> ''", "SurfactanSa")
+        Dim WHoja As DataTable = GetAll("SELECT Hoja, Pedido, Remito FROM HojaRuta WHERE Hoja = '" & WHojaRuta & "' And Archivo <> ''", "SurfactanSa")
 
-        If WHoja Is Nothing Then Exit Sub
+        If WHoja.Rows.Count = 0 Then Exit Sub
+
+        '
+        ' Armamos los registros para el reporte.
+        '
+        'ExecuteNonQueries("SurfactanSa", {"DELETE FROM HojaRutaLotePedidos WHERE Pedido = ''"})
+        Dim WColumnas As String = ""
+
+        For i As Integer = 1 To 5
+            WColumnas &= String.Format("Lote{0}, CantiLote{0}, UltimoLote{0}, UltimoCantiLote{0},", i)
+        Next
+
+        WColumnas = WColumnas.Substring(0, WColumnas.LastIndexOf(","))
+
+        Dim WSqls As New List(Of String)
+
+        WHoja.Rows.Cast(Of DataRow).ToList.ForEach(Sub(p) WSqls.Add("DELETE FROM HojaRutaLotePedidos WHERE Pedido = '" & p.Item("Pedido") & "' And Remito = '" & p.Item("Remito") & "'"))
+
+        For Each row As DataRow In WHoja.Rows
+
+            If row.Item("Pedido") = 401340 Then Stop
+
+            Dim WPedido As DataTable = GetAll("SELECT Terminado, " & WColumnas & " FROM Pedido WHERE Pedido = '" & row.Item("Pedido") & "' And (Remito = '" & row.Item("Remito") & "' Or NroRemito = '" & row.Item("Remito") & "')", "SurfactanSa")
+
+            For Each WProd As DataRow In WPedido.Rows
+
+                Dim WLote, WCant As String
+
+                For i As Integer = 1 To 5
+                    WLote = OrDefault(WProd.Item("Lote" & i), "")
+                    WCant = formatonumerico(OrDefault(WProd.Item("CantiLote" & i), ""))
+
+                    If Val(WLote) = 0 And Val(WCant) = 0 Then
+                        WLote = OrDefault(WProd.Item("UltimoLote" & i), "")
+                        WCant = formatonumerico(OrDefault(WProd.Item("UltimoCantiLote" & i), ""))
+                    End If
+
+                    If Val(WLote) = 0 Or Val(WCant) = 0 Then Continue For
+
+                    WSqls.Add(String.Format("INSERT INTO HojaRutaLotePedidos (Pedido, Remito, Producto, Lote, Cantidad) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}')", row.Item("Pedido"), row.Item("Remito"), WProd.Item("Terminado"), WLote, WCant))
+
+                Next
+
+            Next
+
+        Next
+
+        ExecuteNonQueries("SurfactanSa", WSqls.ToArray)
 
         With New VistaPrevia
             .Base = "SurfactanSa"
-            .Reporte = New hojarutanuevo
+            .Reporte = New ResumenHojaRuta
             .Formula = "{HojaRuta.Hoja} = " & WHojaRuta & " And {HojaRuta.Archivo} <> ''"
             .Exportar(WHojaRuta & ".pdf", CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, WRutaArchivo)
         End With
@@ -347,15 +394,18 @@ Public Class ImpreProcesos
             If Not UCase(WNombre).EndsWith("PDF") And WNombre.Trim <> "" Then WNombre &= ".pdf"
             If WRuta.EndsWith(Chr(34)) Then WRuta = WRuta.Substring(0, WRuta.IndexOf(Chr(34))) & "\"
 
+            'MsgBox(wTipoSalida)
+
             Select Case wTipoSalida
                 Case 1, 6
                     .Imprimir()
                 Case 2
                     .Mostrar()
                 Case 3
+                    'MsgBox(WNombre)
                     .Exportar(WNombre, CrystalDecisions.Shared.ExportFormatType.PortableDocFormat)
                 Case 4, 7
-                    ' MsgBox("Tipo: " & wTipoSalida & " - Ruta: " & WRuta & " - Nombre PDF: " & WNombrePDF & " - Nombre: " & WNombre)
+                    'MsgBox("Tipo: " & wTipoSalida & " - Ruta: " & WRuta & " - Nombre PDF: " & WNombrePDF & " - Nombre: " & WNombre)
                     .Exportar(WNombre, CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, WRuta)
                     If wTipoSalida = 7 Then .MergePDFs(WRuta, WNombrePDF)
                 Case 5

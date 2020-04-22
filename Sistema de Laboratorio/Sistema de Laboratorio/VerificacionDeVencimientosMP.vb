@@ -124,7 +124,7 @@
             Next
             Dim vuelta As Integer = 0
             For i = 0 To TablaARellenar.Rows.Count - 1
-                If TablaARellenar.Rows(i).Item("Tipo") = "G" Then
+                If OrDefault(TablaARellenar.Rows(i).Item("Tipo"), "") = "G" Then
                     SQLCnslt = "SELECT Fecha, FechaVencimiento, OrdFechaVencimiento FROM Laudo WHERE Laudo = '" & TablaARellenar.Rows(i).Item("Laudo") & "' "
                     SQLCnslt = SQLCnslt & "AND Articulo = '" & TablaARellenar.Rows(i).Item("Articulo") & "'"
 

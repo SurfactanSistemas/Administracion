@@ -182,17 +182,20 @@ Public Class VistaPrevia
 
             End With
         Else
+
             If Not Directory.Exists(ruta) Then
                 Directory.CreateDirectory(ruta)
             End If
+
+            If Not ruta.EndsWith("/") And Not ruta.EndsWith(Chr(92)) Then ruta &= "\"
+
         End If
 
         _ReconectarBaseDatos()
 
-        If Not ruta.EndsWith("/") Or Not ruta.EndsWith("\") Then ruta &= "\"
-
         Me.Reporte.RecordSelectionFormula = IIf(IsNothing(Me.Formula), "", Me.Formula)
         'Me.Reporte.Refresh()
+        '        MsgBox(ruta & NombreArchivo)
         Me.Reporte.ExportToDisk(Formato, ruta & NombreArchivo)
 
     End Sub
