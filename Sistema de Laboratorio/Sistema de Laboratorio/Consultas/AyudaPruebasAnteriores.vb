@@ -32,4 +32,8 @@
     Private Sub AyudaPruebasAnteriores_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         txtFiltrar.Focus()
     End Sub
+
+    Private Sub btnBorrar_Click(sender As Object, e As EventArgs) Handles btnBorrar.Click
+        Close()
+    End Sub
 End Class

@@ -23,6 +23,8 @@ Public Class IngresoActualizacionHojaProduccionFarma
         txtEspecificacionV3.Enabled = False
         pnlAgenda.Visible = False
         pnlAyuda.Visible = False
+
+        _LimpiarForm()
     End Sub
 
     Private Sub IngresoActualizacionHojaProduccionFarma_Shown(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Shown
@@ -664,7 +666,7 @@ Public Class IngresoActualizacionHojaProduccionFarma
 
                     If rowTerminado IsNot Nothing Then
 
-                        If Microsoft.VisualBasic.Left(mastxtProducto.Text, 2) = "PT" Or Microsoft.VisualBasic.Left(mastxtProducto.Text, 2) = "SE" Or Microsoft.VisualBasic.Left(mastxtProducto.Text, 2) = "DW" Then
+                        If {"SurfactanSa", "Surfactan_II"}.Contains(Operador.Base) AndAlso (Microsoft.VisualBasic.Left(mastxtProducto.Text, 2) = "PT" Or Microsoft.VisualBasic.Left(mastxtProducto.Text, 2) = "SE" Or Microsoft.VisualBasic.Left(mastxtProducto.Text, 2) = "DW") Then
                             If Val(Codigo) = 1 Or Val(Codigo) = 2 Or Val(Codigo) = 3 Or Val(Codigo) = 4 Then
                                 Dim EstadoI As String = IIf(IsDBNull(rowTerminado.Item("Estado")), "", rowTerminado.Item("Estado"))
                                 Dim EstadoII As String = IIf(IsDBNull(rowTerminado.Item("Estadoi")), "", rowTerminado.Item("EstadoI"))
@@ -800,9 +802,11 @@ Public Class IngresoActualizacionHojaProduccionFarma
             Dim WTipo, WMPoPT As String
 
             For Each row As DataGridViewRow In DGV_IngredientosHojaProduccion.Rows
+                Dim WCantidad As String = ""
                 With row
                     WTipo = .Cells("Tipo").Value
                     WMPoPT = .Cells("MPoPT").Value
+                    WCantidad = .Cells("Cantidad").Value
                 End With
 
                 Dim WStock As Double = 0
@@ -812,8 +816,8 @@ Public Class IngresoActualizacionHojaProduccionFarma
 
                 With row
 
-                    If Val(Cantidad) <= WStock Then
-                        row.Cells("Cantidad").Value = Cantidad
+                    If Val(WCantidad) <= WStock Then
+                        row.Cells("Cantidad").Value = WCantidad
                     Else
                         Dim Impre As String = StockString
 
@@ -1483,7 +1487,7 @@ Public Class IngresoActualizacionHojaProduccionFarma
 
                 SQLCnslt = "SELECT Estado, EstadoI, EstadoII FROM Terminado WHERE Codigo = '" & mastxtProducto.Text & "'"
 
-                Dim rowTerminado As DataRow = GetSingle(SQLCnslt)
+                Dim rowTerminado As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
 
                 If rowTerminado IsNot Nothing Then
 
