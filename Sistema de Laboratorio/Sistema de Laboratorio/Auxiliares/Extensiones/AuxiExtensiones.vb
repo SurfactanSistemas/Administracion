@@ -1,7 +1,12 @@
 ﻿Imports System.Runtime.CompilerServices
 
 Module AuxiExtensiones
-    
+
+    <Extension()>
+    Public Function AsList(Of t As {IEnumerable})(ByVal rows As t) As List(Of t)
+        Return rows.Cast(Of t).ToList
+    End Function
+
     <Extension()>
     Public Function Ceros(ByVal txt As TextBox, ByVal longitud As Object) As String
         Return txt.Text.PadLeft(longitud, "0")

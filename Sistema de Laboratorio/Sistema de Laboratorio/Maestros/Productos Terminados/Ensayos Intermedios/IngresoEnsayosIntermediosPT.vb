@@ -1,5 +1,4 @@
-﻿
-Imports System.Configuration
+﻿Imports System.Configuration
 Imports System.IO
 Imports System.Text.RegularExpressions
 Imports ConsultasVarias
@@ -62,6 +61,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
         txtEtapa.ReadOnly = Not EsFarma()
 
         txtPartida.Focus()
+
     End Sub
 
     Private Sub IngresoEnsayosIntermediosPT_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
