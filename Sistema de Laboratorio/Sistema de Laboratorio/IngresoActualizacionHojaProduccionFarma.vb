@@ -839,8 +839,216 @@ Public Class IngresoActualizacionHojaProduccionFarma
 
     End Function
 
-    Function _SaldoMPXLote(ByVal WLote As String) As Double
-        Dim WCodMP As String = WLote
+    Function _SaldoPTXCodigo(ByVal _LotePT As String) As Double
+        
+        Dim WMovimientos As New DataTable
+
+        With WMovimientos.Columns
+            .Add("Entrada")
+            .Add("Salida")
+            .Add("Marca")
+        End With
+
+        Dim empresa As String = Operador.Base
+
+        '
+        ' Busco Stock generado por Hojas de Producción.
+        '
+        Dim WSql As String = ""
+
+        WSql = "SELECT sum(h.Real) FROM Hoja h INNER JOIN Terminado t ON t.COdigo = h.Producto WHERE h.Producto = '" & _LotePT & "' And h.Marca <> 'X' And h.Renglon = '1'"
+
+        Dim WHojasTotal As DataRow = GetSingle(WSql, empresa)
+
+        If WHojasTotal IsNot Nothing Then
+            Dim r = WMovimientos.NewRow
+            With r
+                .Item("Entrada") = formatonumerico(OrDefault(WHojasTotal.Item(0), 0))
+                .Item("Salida") = ""
+            End With
+            WMovimientos.Rows.Add(r)
+        End If
+
+        Dim WLiberada As String
+
+        '
+        ' Busco uso como componente en Hojas de Producción posteriores a la Fecha de Cierre (Incluyendo a las que no se encuentran cerradas).
+        '
+        Dim WHojasComponente As DataRow = GetSingle("SELECT SUM(CASE WHEN ISNULL(Lote1, 0) = 0 And ISNULL(Lote2, 0) = 0 And ISNULL(Lote3, 0) = 0 THEN Cantidad ELSE (Canti1 + Canti2 + Canti3) END) FROM Hoja h INNER JOIN Terminado t ON t.Codigo = h.Terminado WHERE Tipo = 'T' and h.Marca <> 'X' And h.FechaOrd >= t.OrdFechaCierre And h.Terminado = '" & _LotePT & "'", empresa)
+
+        If WHojasComponente IsNot Nothing Then
+            Dim r = WMovimientos.NewRow
+            With r
+                .Item("Salida") = formatonumerico(OrDefault(WHojasComponente.Item(0), 0))
+                .Item("Entrada") = ""
+            End With
+            WMovimientos.Rows.Add(r)
+        End If
+
+        '
+        ' Busco Entradas en Movimientos Varios.
+        '
+        Dim WMovVars As DataRow = GetSingle("SELECT sum(Cantidad) FROM MovVar WHERE Tipo = 'T' And MARCA <> 'X' And Movi = 'E' And Terminado = '" & _LotePT & "'", empresa)
+
+        If WMovVars IsNot Nothing Then
+            Dim r = WMovimientos.NewRow
+            With r
+                .Item("Entrada") = formatonumerico(OrDefault(WMovVars.Item(0), 0))
+                .Item("Salida") = ""
+            End With
+            WMovimientos.Rows.Add(r)
+        End If
+
+        '
+        ' Busco Salidas en Movimientos Varios.
+        '
+        WMovVars = GetSingle("SELECT sum(Cantidad) FROM MovVar WHERE Tipo = 'T' And MARCA <> 'X' And Movi = 'S' And Terminado = '" & _LotePT & "'", empresa)
+
+        If WMovVars IsNot Nothing Then
+            Dim r = WMovimientos.NewRow
+            With r
+                .Item("Salida") = formatonumerico(OrDefault(WMovVars.Item(0), 0))
+                .Item("Entrada") = ""
+            End With
+            WMovimientos.Rows.Add(r)
+        End If
+
+        '
+        ' Busco Entradas en Guias.
+        '
+        Dim WGuiasInt As DataRow = GetSingle("SELECT SUM(Cantidad) FROM Guia WHERE Tipo = 'T' And Marca <> 'X' and movi = 'E' And Terminado = '" & _LotePT & "'", empresa)
+
+        If WGuiasInt IsNot Nothing Then
+            Dim r = WMovimientos.NewRow
+            With r
+                .Item("Salida") = ""
+                .Item("Entrada") = formatonumerico(OrDefault(WGuiasInt.Item(0), 0))
+            End With
+            WMovimientos.Rows.Add(r)
+        End If
+
+        '
+        ' Busco Salidas en Guias.
+        '
+        WGuiasInt = GetSingle("SELECT SUM(Cantidad) FROM Guia WHERE Tipo = 'T' And Marca <> 'X' and movi = 'S' And Terminado = '" & _LotePT & "'", empresa)
+
+        If WGuiasInt IsNot Nothing Then
+            Dim r = WMovimientos.NewRow
+            With r
+                .Item("Entrada") = ""
+                .Item("Salida") = formatonumerico(OrDefault(WGuiasInt.Item(0), 0))
+            End With
+            WMovimientos.Rows.Add(r)
+        End If
+
+        '
+        ' Busco Entradas en Movimientos de Laboratorio.
+        '
+        Dim WMovLab As DataRow = GetSingle("SELECT SUM(Cantidad) FROM MovLab WHERE Tipo = 'T' And MARCA <> 'X' And Terminado = '" & _LotePT & "' And movi = 'E'", empresa)
+
+        If WMovLab IsNot Nothing Then
+            Dim r = WMovimientos.NewRow
+            With r
+                .Item("Salida") = ""
+                .Item("Entrada") = formatonumerico(OrDefault(WMovLab.Item(0), 0))
+            End With
+            WMovimientos.Rows.Add(r)
+        End If
+
+        '
+        ' Busco Salidas en Movimientos de Laboratorio.
+        '
+        WMovLab = GetSingle("SELECT SUM(Cantidad) FROM MovLab WHERE Tipo = 'T' And MARCA <> 'X' And Terminado = '" & _LotePT & "' And movi = 'S'", empresa)
+
+        If WMovLab IsNot Nothing Then
+            Dim r = WMovimientos.NewRow
+            With r
+                .Item("Entrada") = ""
+                .Item("Salida") = formatonumerico(OrDefault(WMovLab.Item(0), 0))
+            End With
+            WMovimientos.Rows.Add(r)
+        End If
+
+        '
+        ' Busco movimientos en Estadisticas.
+        '
+        Dim WEstadisticas As DataTable = GetAll("SELECT e.Tipo, e.LoteAdicional, e.Canti1, e.Canti2, e.Canti3, e.Canti4, e.Canti5 FROM Estadistica e LEFT OUTER JOIN Cliente c ON c.Cliente = e.Cliente WHERE e.Marca <> 'X' And e.Articulo = '" & _LotePT & "'", empresa)
+
+        For Each row As DataRow In WEstadisticas.Rows
+
+            Dim XLotes(12, 2) As String
+            Dim WTipo
+
+            With row
+                WTipo = OrDefault(.Item("Tipo"), 0)
+
+                For i = 1 To 5
+                    XLotes(i, 2) = OrDefault(.Item("Canti" & i), "")
+                Next
+
+                Dim WLoteAdicional As String = OrDefault(.Item("LoteAdicional"), "")
+                WLoteAdicional = WLoteAdicional.PadRight(98, "0")
+
+                XLotes(6, 2) = Mid$(WLoteAdicional, 9, 6)
+                XLotes(7, 2) = Mid$(WLoteAdicional, 23, 6)
+                XLotes(8, 2) = Mid$(WLoteAdicional, 37, 6)
+                XLotes(9, 2) = Mid$(WLoteAdicional, 51, 6)
+                XLotes(10, 2) = Mid$(WLoteAdicional, 65, 6)
+                XLotes(11, 2) = Mid$(WLoteAdicional, 79, 6)
+                XLotes(12, 2) = Mid$(WLoteAdicional, 93, 6)
+
+            End With
+
+            For i = 1 To 12
+
+                WLiberada = Math.Abs(Val(formatonumerico(XLotes(i, 2))))
+
+                If Val(WLiberada) = 0 Then Continue For
+
+                Dim r = WMovimientos.NewRow
+                With r
+                    If Val(WTipo) = 1 Then
+                        .Item("Salida") = formatonumerico(WLiberada)
+                        .Item("Entrada") = ""
+                    Else
+                        .Item("Entrada") = formatonumerico(WLiberada)
+                        .Item("Salida") = ""
+                    End If
+
+                End With
+                WMovimientos.Rows.Add(r)
+
+            Next
+
+        Next
+
+        '
+        ' Calculo Salidas por Consignaciones.
+        '
+        Dim WConsig As DataRow = GetSingle("select sum(Cantidad - Facturado) from Consig where Terminado = '" & _LotePT & "' and Marca <> 'X'", empresa)
+
+        If WConsig IsNot Nothing Then
+            Dim r = WMovimientos.NewRow
+            With r
+                .Item("Entrada") = ""
+                .Item("Salida") = formatonumerico(OrDefault(WConsig.Item(0), 0))
+            End With
+            WMovimientos.Rows.Add(r)
+        End If
+
+        Dim WSaldo As Double = 0
+
+        For Each m As DataRow In WMovimientos.Rows
+            WSaldo += Val(m.Item("Entrada"))
+            WSaldo -= Val(m.Item("Salida"))
+        Next
+
+        Return Val(formatonumerico(WSaldo))
+
+    End Function
+
+    Function _SaldoMPXCodigo(ByVal _LoteMp As String) As Double
+        Dim WCodMP As String = _LoteMp
         Dim WTipoMat As String = ""
         Dim WMarca As String = ""
         Dim Auxi = ""
@@ -863,10 +1071,9 @@ Public Class IngresoActualizacionHojaProduccionFarma
         ' Busco el o los Laudos que se correspondan con el Lote o PartiOrig segun sea o no Reventa.
         '
         Dim WSql As String = ""
-        
-        WSql = "SELECT sum(l.Liberada) FROM Laudo l INNER JOIN Articulo a ON a.COdigo = l.Articulo WHERE l.Articulo = '" & WLote & "' And l.Marca <> 'X' And l.Liberada > 0"
 
-        'Dim WLaudos As DataTable = GetAll(WSql, empresa)
+        WSql = "SELECT sum(l.Liberada) FROM Laudo l INNER JOIN Articulo a ON a.COdigo = l.Articulo WHERE l.Articulo = '" & _LoteMp & "' And l.Marca <> 'X' And l.Liberada > 0"
+
         Dim WLaudos As DataRow = GetSingle(WSql, empresa)
 
         If WLaudos IsNot Nothing Then
@@ -880,82 +1087,24 @@ Public Class IngresoActualizacionHojaProduccionFarma
 
         Dim WLiberada As String
 
-        'WMarca = ""
-        'If WLaudos.Rows.Count > 0 Then
-
-        '    For Each row As DataRow In WLaudos.Rows
-        '        With row
-        '            WLiberada = OrDefault(.Item("Liberada"), 0)
-        '            WMarca = OrDefault(.Item("Marca"), "")
-
-        '            If WFiltroMarca = "" And WMarca = "X" Then WLiberada = OrDefault(.Item("LiberadaAnt"), 0)
-
-        '            WLiberada = formatonumerico(WLiberada)
-
-        '            Auxi = OrDefault(.Item("Orden"), 0)
-
-        '        End With
-
-        '        If Val(WLiberada) <> 0 Then
-        '            Dim r = WMovimientos.NewRow
-        '            With r
-        '                .Item("Entrada") = formatonumerico(WLiberada)
-        '                .Item("Salida") = ""
-        '                .Item("Marca") = WMarca
-        '            End With
-        '            WMovimientos.Rows.Add(r)
-        '        End If
-
-        '    Next
-
-        'End If
-
         '
-        ' Busco uso en Hojas de Producción posteriores a la Fecha de Cierre
+        ' Busco uso en Hojas de Producción posteriores a la Fecha de Cierre (Incluyendo a las que no se encuentran cerradas).
         '
-
-        'Dim WHojas As DataTable = GetAll("SELECT Fecha, Hoja, Canti1, Canti2, Canti3, Lote1, Lote2, Lote3, Marca FROM Hoja WHERE Tipo = 'M' " & WFiltroMarca & " And (RIGHT(Fecha, 4) + SUBSTRING(Fecha, 4, 2) + LEFT(Fecha, 2)) >= '" & WFechaCierreOrd & "' And (Lote1 = '" & WLote & "' Or Lote2 = '" & WLote & "' Or Lote3 = '" & WLote & "')", empresa)
-        Dim WHojas As DataRow = GetSingle("SELECT sum(Canti1 + Canti2 + Canti3) FROM Hoja h INNER JOIN Articulo a ON a.Codigo = h.Articulo WHERE Tipo = 'M' and Marca <> 'X' And h.FechaOrd >= a.OrdFechaCierre And h.Articulo = '" & WLote & "'", empresa)
+        Dim WHojas As DataRow = GetSingle("SELECT SUM(CASE WHEN ISNULL(Lote1, 0) = 0 And ISNULL(Lote2, 0) = 0 And ISNULL(Lote3, 0) = 0 THEN Cantidad ELSE (Canti1 + Canti2 + Canti3) END) FROM Hoja h INNER JOIN Articulo a ON a.Codigo = h.Articulo WHERE Tipo = 'M' and Marca <> 'X' And h.FechaOrd >= a.OrdFechaCierre And h.Articulo = '" & _LoteMp & "'", empresa)
 
         If WHojas IsNot Nothing Then
             Dim r = WMovimientos.NewRow
             With r
-                .Item("Salida") = formatonumerico(OrDefault(WHojas.item(0), 0))
+                .Item("Salida") = formatonumerico(OrDefault(WHojas.Item(0), 0))
                 .Item("Entrada") = ""
             End With
             WMovimientos.Rows.Add(r)
         End If
 
-        'WMarca = ""
-        'For Each row As DataRow In WHojas.Rows
-        '    With row
-        '        For i = 1 To 3
-        '            Auxi = OrDefault(.Item("Lote" & i), 0)
-
-        '            If Val(Auxi) = Val(WLote) Then
-        '                WLiberada = OrDefault(.Item("Canti" & i), 0)
-        '                WLiberada = formatonumerico(WLiberada)
-        '                WMarca = OrDefault(.Item("Marca"), "")
-
-        '                Dim r = WMovimientos.NewRow
-        '                With r
-        '                    .Item("Salida") = formatonumerico(WLiberada)
-        '                    .Item("Entrada") = ""
-        '                    .Item("Marca") = WMarca
-        '                End With
-        '                WMovimientos.Rows.Add(r)
-
-        '            End If
-
-        '        Next
-        '    End With
-        'Next
-
         '
         ' Busco Entradas en Movimientos Varios.
         '
-        'Dim WMovVars As DataTable = GetAll("SELECT Cantidad, Marca, Movi FROM MovVar WHERE Tipo = 'M' " & WFiltroMarca & " And Lote = '" & WLote & "'", empresa)
-        Dim WMovVars As DataRow = GetSingle("SELECT sum(Cantidad) FROM MovVar WHERE Tipo = 'M' And MARCA <> 'X' And Movi = 'E' And Articulo = '" & WLote & "'", empresa)
+        Dim WMovVars As DataRow = GetSingle("SELECT sum(Cantidad) FROM MovVar WHERE Tipo = 'M' And MARCA <> 'X' And Movi = 'E' And Articulo = '" & _LoteMp & "'", empresa)
 
         If WMovVars IsNot Nothing Then
             Dim r = WMovimientos.NewRow
@@ -969,8 +1118,7 @@ Public Class IngresoActualizacionHojaProduccionFarma
         '
         ' Busco Salidas en Movimientos Varios.
         '
-        'Dim WMovVars As DataTable = GetAll("SELECT Cantidad, Marca, Movi FROM MovVar WHERE Tipo = 'M' " & WFiltroMarca & " And Lote = '" & WLote & "'", empresa)
-        WMovVars = GetSingle("SELECT sum(Cantidad) FROM MovVar WHERE Tipo = 'M' And MARCA <> 'X' And Movi = 'S' And Articulo = '" & WLote & "'", empresa)
+        WMovVars = GetSingle("SELECT sum(Cantidad) FROM MovVar WHERE Tipo = 'M' And MARCA <> 'X' And Movi = 'S' And Articulo = '" & _LoteMp & "'", empresa)
 
         If WMovVars IsNot Nothing Then
             Dim r = WMovimientos.NewRow
@@ -981,33 +1129,10 @@ Public Class IngresoActualizacionHojaProduccionFarma
             WMovimientos.Rows.Add(r)
         End If
 
-
-        'WMarca = ""
-        'For Each row As DataRow In WMovVars.Rows
-        '    With row
-
-        '        WLiberada = OrDefault(.Item("Cantidad"), 0)
-
-        '        WLiberada = formatonumerico(WLiberada)
-        '        Auxi = OrDefault(.Item("Movi"), "")
-        '        WMarca = OrDefault(.Item("Marca"), "")
-
-        '        Dim r = WMovimientos.NewRow
-        '        With r
-        '            .Item("Salida") = IIf(Auxi = "E", "", formatonumerico(WLiberada))
-        '            .Item("Entrada") = IIf(Auxi = "S", "", formatonumerico(WLiberada))
-        '            .Item("Marca") = WMarca
-        '        End With
-        '        WMovimientos.Rows.Add(r)
-
-        '    End With
-        'Next
-
         '
         ' Busco Entradas en Guias.
         '
-        'Dim WGuiasInt As DataTable = GetAll("SELECT Cantidad, CantidadAnt, Marca, Movi FROM Guia WHERE Tipo = 'M' " & WFiltroMarca & " And (Lote = '" & WLote & "' Or Partida = '" & WLote & "' Or (PartiOri = '" & WPartiOrig & "' And PartiOri <> ''))", empresa)
-        Dim WGuiasInt As DataRow = GetSingle("SELECT SUM(Cantidad) FROM Guia WHERE Tipo = 'M' And Marca <> 'X' and movi = 'E' And Articulo = '" & WLote & "'", empresa)
+        Dim WGuiasInt As DataRow = GetSingle("SELECT SUM(Cantidad) FROM Guia WHERE Tipo = 'M' And Marca <> 'X' and movi = 'E' And Articulo = '" & _LoteMp & "'", empresa)
 
         If WGuiasInt IsNot Nothing Then
             Dim r = WMovimientos.NewRow
@@ -1021,8 +1146,7 @@ Public Class IngresoActualizacionHojaProduccionFarma
         '
         ' Busco Salidas en Guias.
         '
-        'Dim WGuiasInt As DataTable = GetAll("SELECT Cantidad, CantidadAnt, Marca, Movi FROM Guia WHERE Tipo = 'M' " & WFiltroMarca & " And (Lote = '" & WLote & "' Or Partida = '" & WLote & "' Or (PartiOri = '" & WPartiOrig & "' And PartiOri <> ''))", empresa)
-        WGuiasInt = GetSingle("SELECT SUM(Cantidad) FROM Guia WHERE Tipo = 'M' And Marca <> 'X' and movi = 'S' And Articulo = '" & WLote & "'", empresa)
+        WGuiasInt = GetSingle("SELECT SUM(Cantidad) FROM Guia WHERE Tipo = 'M' And Marca <> 'X' and movi = 'S' And Articulo = '" & _LoteMp & "'", empresa)
 
         If WGuiasInt IsNot Nothing Then
             Dim r = WMovimientos.NewRow
@@ -1033,35 +1157,10 @@ Public Class IngresoActualizacionHojaProduccionFarma
             WMovimientos.Rows.Add(r)
         End If
 
-
-        'WMarca = ""
-        'For Each row As DataRow In WGuiasInt.Rows
-        '    With row
-
-        '        WLiberada = OrDefault(.Item("Cantidad"), 0)
-
-        '        If WFiltroMarca = "" And OrDefault(.Item("Marca"), "") = "X" Then WLiberada = OrDefault(.Item("CantidadAnt"), 0)
-
-        '        WLiberada = formatonumerico(WLiberada)
-        '        WMarca = OrDefault(.Item("Marca"), "")
-        '        Dim WMovi = OrDefault(.Item("Movi"), "")
-
-        '        Dim r = WMovimientos.NewRow
-        '        With r
-        '            .Item("Salida") = IIf(WMovi = "E", "", formatonumerico(WLiberada))
-        '            .Item("Entrada") = IIf(WMovi = "S", "", formatonumerico(WLiberada))
-        '            .Item("Marca") = WMarca
-        '        End With
-        '        WMovimientos.Rows.Add(r)
-
-        '    End With
-        'Next
-
         '
         ' Busco Entradas en Movimientos de Laboratorio.
         '
-        'Dim WMovLab As DataTable = GetAll("SELECT Cantidad, Movi, Marca FROM MovLab WHERE Tipo = 'M' " & WFiltroMarca & " And Lote = '" & WLote & "'", empresa)
-        Dim WMovLab As DataRow = GetSingle("SELECT SUM(Cantidad) FROM MovLab WHERE Tipo = 'M' And MARCA <> 'X' And Articulo = '" & WLote & "' And movi = 'E'", empresa)
+        Dim WMovLab As DataRow = GetSingle("SELECT SUM(Cantidad) FROM MovLab WHERE Tipo = 'M' And MARCA <> 'X' And Articulo = '" & _LoteMp & "' And movi = 'E'", empresa)
 
         If WMovLab IsNot Nothing Then
             Dim r = WMovimientos.NewRow
@@ -1075,8 +1174,7 @@ Public Class IngresoActualizacionHojaProduccionFarma
         '
         ' Busco Salidas en Movimientos de Laboratorio.
         '
-        'Dim WMovLab As DataTable = GetAll("SELECT Cantidad, Movi, Marca FROM MovLab WHERE Tipo = 'M' " & WFiltroMarca & " And Lote = '" & WLote & "'", empresa)
-        WMovLab = GetSingle("SELECT SUM(Cantidad) FROM MovLab WHERE Tipo = 'M' And MARCA <> 'X' And Articulo = '" & WLote & "' And movi = 'S'", empresa)
+        WMovLab = GetSingle("SELECT SUM(Cantidad) FROM MovLab WHERE Tipo = 'M' And MARCA <> 'X' And Articulo = '" & _LoteMp & "' And movi = 'S'", empresa)
 
         If WMovLab IsNot Nothing Then
             Dim r = WMovimientos.NewRow
@@ -1087,27 +1185,6 @@ Public Class IngresoActualizacionHojaProduccionFarma
             WMovimientos.Rows.Add(r)
         End If
 
-        'WMarca = ""
-        'For Each row As DataRow In WMovLab.Rows
-        '    With row
-
-        '        WLiberada = OrDefault(.Item("Cantidad"), 0)
-
-        '        WLiberada = formatonumerico(WLiberada)
-        '        Auxi = OrDefault(.Item("Movi"), "")
-        '        WMarca = OrDefault(.Item("Marca"), "")
-
-        '        Dim r = WMovimientos.NewRow
-        '        With r
-        '            .Item("Salida") = IIf(Auxi = "E", "", formatonumerico(WLiberada))
-        '            .Item("Entrada") = IIf(Auxi = "S", "", formatonumerico(WLiberada))
-        '            .Item("Marca") = WMarca
-        '        End With
-        '        WMovimientos.Rows.Add(r)
-
-        '    End With
-        'Next
-
         Auxi = WCodMP
 
         If WTipoMat = "DK" Then Auxi = "DY-" & Microsoft.VisualBasic.Right(WCodMP, 7)
@@ -1116,7 +1193,7 @@ Public Class IngresoActualizacionHojaProduccionFarma
 
         If WFiltroMarca <> "" Then WFiltroMarca = " And e.Marca <> 'X' "
 
-        Dim WEstadisticas As DataTable = GetAll("SELECT Cliente = c.Razon, e.Marca, e.Tipo, e.TipoPro, e.Fecha, e.Numero, e.Cliente, e.LoteAdicional, e.Lote1, e.Lote2, e.Lote3, e.Lote4, e.Lote5, e.Canti1, e.Canti2, e.Canti3, e.Canti4, e.Canti5 FROM Estadistica e LEFT OUTER JOIN Cliente c ON c.Cliente = e.Cliente WHERE e.TipoProDy = 'M' " & WFiltroMarca & " And e.ArticuloDy = '" & Auxi & "'", empresa)
+        Dim WEstadisticas As DataTable = GetAll("SELECT e.Tipo, e.LoteAdicional, e.Canti1, e.Canti2, e.Canti3, e.Canti4, e.Canti5 FROM Estadistica e LEFT OUTER JOIN Cliente c ON c.Cliente = e.Cliente WHERE e.TipoProDy = 'M' " & WFiltroMarca & " And e.ArticuloDy = '" & Auxi & "'", empresa)
         WMarca = ""
         For Each row As DataRow In WEstadisticas.Rows
 
@@ -1143,30 +1220,22 @@ Public Class IngresoActualizacionHojaProduccionFarma
 
                         End If
                     Case Else
-                        If (WTipo = 2 And Auxi = WTipoMat) Or WTipo = 1 Then
+                        If WTipo = 2 Or WTipo = 1 Then
                             WMarca = OrDefault(.Item("Marca"), "")
 
                             For i = 1 To 5
-                                XLotes(i, 1) = OrDefault(.Item("Lote" & i), "")
                                 XLotes(i, 2) = OrDefault(.Item("Canti" & i), "")
                             Next
 
                             Dim WLoteAdicional As String = OrDefault(.Item("LoteAdicional"), "")
                             WLoteAdicional = WLoteAdicional.PadRight(98, "0")
 
-                            XLotes(6, 1) = Mid$(WLoteAdicional, 1, 8)
                             XLotes(6, 2) = Mid$(WLoteAdicional, 9, 6)
-                            XLotes(7, 1) = Mid$(WLoteAdicional, 15, 8)
                             XLotes(7, 2) = Mid$(WLoteAdicional, 23, 6)
-                            XLotes(8, 1) = Mid$(WLoteAdicional, 29, 8)
                             XLotes(8, 2) = Mid$(WLoteAdicional, 37, 6)
-                            XLotes(9, 1) = Mid$(WLoteAdicional, 43, 8)
                             XLotes(9, 2) = Mid$(WLoteAdicional, 51, 6)
-                            XLotes(10, 1) = Mid$(WLoteAdicional, 57, 8)
                             XLotes(10, 2) = Mid$(WLoteAdicional, 65, 6)
-                            XLotes(11, 1) = Mid$(WLoteAdicional, 71, 8)
                             XLotes(11, 2) = Mid$(WLoteAdicional, 79, 6)
-                            XLotes(12, 1) = Mid$(WLoteAdicional, 85, 8)
                             XLotes(12, 2) = Mid$(WLoteAdicional, 93, 6)
 
                         End If
@@ -1176,29 +1245,23 @@ Public Class IngresoActualizacionHojaProduccionFarma
 
             For i = 1 To 12
 
-                Auxi = XLotes(i, 1)
+                WLiberada = Math.Abs(Val(formatonumerico(XLotes(i, 2))))
 
-                If Val(Auxi) = WLote Then
+                If Val(WLiberada) = 0 Then Continue For
 
-                    WLiberada = Math.Abs(Val(formatonumerico(XLotes(i, 2))))
+                Dim r = WMovimientos.NewRow
+                With r
 
-                    Dim r = WMovimientos.NewRow
-                    With r
+                    If Val(WTipo) = 2 Then
+                        .Item("Entrada") = formatonumerico(WLiberada)
+                        .Item("Salida") = ""
+                    Else
+                        .Item("Salida") = formatonumerico(WLiberada)
+                        .Item("Entrada") = ""
+                    End If
 
-                        If Val(WTipo) = 2 Then
-                            .Item("Entrada") = formatonumerico(WLiberada)
-                            .Item("Salida") = ""
-                        Else
-                            .Item("Salida") = formatonumerico(WLiberada)
-                            .Item("Entrada") = ""
-                        End If
-
-                        .Item("Marca") = WMarca
-
-                    End With
-                    WMovimientos.Rows.Add(r)
-
-                End If
+                End With
+                WMovimientos.Rows.Add(r)
 
             Next
 
@@ -1207,10 +1270,8 @@ Public Class IngresoActualizacionHojaProduccionFarma
         Dim WSaldo As Double = 0
 
         For Each m As DataRow In WMovimientos.Rows
-            If OrDefault(m.Item("Marca"), "") <> "X" Then
-                WSaldo += Val(m.Item("Entrada"))
-                WSaldo -= Val(m.Item("Salida"))
-            End If
+            WSaldo += Val(m.Item("Entrada"))
+            WSaldo -= Val(m.Item("Salida"))
         Next
 
         Return Val(formatonumerico(WSaldo))
@@ -1224,55 +1285,24 @@ Public Class IngresoActualizacionHojaProduccionFarma
         Dim StockString As String = ""
         Dim CantidadBloqueada As Double
 
-        Dim ZStockTotal As Double = 0
-
         Select Case WTipo
             Case "M"
 
-                If WMPoPT = "AA-100-100" Then Stop
-
-                Dim WAhora As Date = Date.Now
-
-                'Dim WLaudos As DataTable = GetAll("SELECT l.Laudo FROM Laudo l INNER JOIN Articulo a ON a.Codigo = l.Articulo WHERE l.FechaOrd >= a.OrdFechaCierre And l.Articulo = '" & WMPoPT & "' And l.Marca <> 'X' And l.Saldo > 0")
-
-                Dim w As Stopwatch = New Stopwatch()
-
-                w.Start()
-                WStock = _SaldoMPXLote(WMPoPT)
-                w.Stop()
-
-                MsgBox(w.ElapsedMilliseconds)
-
-                'WStock = _CalcularStockTotalArticulo(WMPoPT)
+                WStock = _SaldoMPXCodigo(WMPoPT)
+                
                 StockString = formatonumerico(WStock, 3)
-                '
-                'DESCUENTA EL STOCK DE LAS GUIAS DE SALIDAS
-                SQLCnslt = "SELECT SumStock= SUM(Cantidad) FROM Guia  WHERE Marca <> 'X' AND Movi = 'S' AND Tipo = 'M' AND Cantidad > 0 AND Articulo = '" & WMPoPT & "'"
-                Dim rowG As DataRow = GetSingle(SQLCnslt)
-                If rowG IsNot Nothing Then
-                    WStock = WStock - OrDefault(rowG.Item("Sumstock"), 0)
-                    StockString = formatonumerico(WStock, 3)
+                
+                'DETERMINA EL STOCK RESERVADO SEGUN LAS HOJAS QUE SE ENCUENTRAN AUN ABIERTAS, SI ES LA HOJA ACTUAL NO LA TOMA EN CUENTA.
+                SQLCnslt = "SELECT SUM(h.Cantidad) FROM Hoja h INNER JOIN Articulo a ON a.Codigo = h.Articulo WHERE Articulo = '" & WMPoPT & "' AND Real = 0 AND Marca <> 'X' AND h.FechaOrd >= a.OrdFechaCierre AND h.Hoja <> '" & txtHojaProduccion.Text & "'"
+
+                Dim tablahoja As DataRow = GetSingle(SQLCnslt)
+                Dim WStockReservado As String = ""
+
+                WStockReservado = formatonumerico(OrDefault(tablahoja.Item(0), 0), 3)
+
+                If Val(WStockReservado) > 0 Then
+                    MsgBox(String.Format("Stock Total:  {1} Kgs{0}Stock Reservado:  {2} Kgs{0}Stock Disponible:  {3}{0}", vbCrLf, WStock, Val(WStockReservado), WStock - Val(WStockReservado)))
                 End If
-
-                'DESCUENTA EL STOCK DE LAS HOJAS, SI ES LA HOJA ACTUAL IGNORA EL STOCK
-                'DESCUENTA EL STOCK DE LAS HOJAS QUE SE ENCUENTRAN AUN ABIERTAS, SI ES LA HOJA ACTUAL NO LA TOMA EN CUENTA.
-                SQLCnslt = "SELECT h.Cantidad, h.Hoja FROM Hoja h INNER JOIN Articulo a ON a.Codigo = h.Articulo WHERE Articulo = '" & WMPoPT & "' AND Real = 0 AND Marca <> 'X' AND h.FechaOrd >= a.OrdFechaCierre AND h.Hoja <> '" & txtHojaProduccion.Text & "'"
-
-                Dim tablahoja As DataTable = GetAll(SQLCnslt)
-
-                WStock -= tablahoja.Rows.Cast(Of DataRow).ToList.Sum(Function(r) OrDefault(r.Item("Cantidad"), 0))
-
-                'If tablahoja.Rows.Count > 0 Then
-                '
-                '    For i = 0 To tablahoja.Rows.Count - 1
-                '        If tablahoja.Rows(i).Item("Hoja") <> txtHojaProduccion.Text Then
-                '
-                '        End If
-                '    Next
-                '    'WStock = WStock - StockReservadoEnHojas
-                '    ' StockString = formatonumerico(WStock, 3)
-                'End If
-
 
                 If VerificaDatosHoja <> "N" Then
                     'DESCUENTA EL STOCK YA INGRESADO EN LA HOJA
@@ -1289,8 +1319,6 @@ Public Class IngresoActualizacionHojaProduccionFarma
                     End If
                     StockString = formatonumerico(WStock, 3)
                 End If
-
-
 
                 'DESCUENTA EL STOCK DE MATERIA VENCIDO
                 Dim Vencido As Double = 0
@@ -1299,68 +1327,34 @@ Public Class IngresoActualizacionHojaProduccionFarma
                 If Vencido > 0 Then
                     Dim mensaje As String = "Existe la materia prima " & WMPoPT & " la cantidad de : " & Vencido & " Kgs. vencidos." & vbCrLf & "Comuniquese con el laboratorio para su revalida"
                     MsgBox(mensaje, 0, "Ingreso de Hoja de Produccion")
-                    '                    WStock = WStock - Vencido
-                    '                    StockString = formatonumerico(WStock, 3)
                 End If
 
                 'DESCUENTA EL STOCK MATERIAL BLOQUEADO
-
                 CantidadBloqueada = _CalcularBloqueo(WTipo, WMPoPT)
                 If CantidadBloqueada < 0 Then
                     Dim mensaje As String
                     mensaje = "Existe la Materia Prima " & WMPoPT & " la cantidad de : " & CantidadBloqueada & " Kgs. Bloqueados" & vbCrLf & "Comuniquese con el laboratorio para su liberacion"
                     MsgBox(mensaje, 0, "Ingreso de Hoja de Produccion")
-                    '                    WStock = WStock - CantidadBloqueada
-                    '                    StockString = formatonumerico(WStock, 3)
                 End If
-
-
-
-
 
             Case "T"
-                '                SQLCnslt = "SELECT Descripcion, Inicial, Entradas, Salidas FROM Terminado WHERE Codigo = '" & MPoPT & "'"
-                '                Dim RowTerminado As DataRow = GetSingle(SQLCnslt)
-                '
-                '                If RowTerminado IsNot Nothing Then
-                '                    WStock = RowTerminado.Item("Inicial") + RowTerminado.Item("Entradas") - RowTerminado.Item("Salidas")
-                '                    'StockString = formatonumerico(WStock, 3)
-                '                End If
+                
+                WStock = _SaldoPTXCodigo(WMPoPT)
 
-
-                WStock = _CalcularStockTotalTerminado(WMPoPT)
-
-
-                'DESCUENTA EL STOCK DE LAS GUIAS DE SALIDAS
-                SQLCnslt = "SELECT SumStock= SUM(Cantidad) FROM Guia  WHERE Marca <> 'X' AND Movi = 'S' AND Tipo = 'T' AND Cantidad > 0 AND Terminado = '" & WMPoPT & "'"
-                Dim rowG As DataRow = GetSingle(SQLCnslt)
-                If rowG IsNot Nothing Then
-                    WStock = WStock - OrDefault(rowG.Item("Sumstock"), 0)
-
-                End If
-
-
-
+                StockString = formatonumerico(WStock, 3)
 
                 'DESCUENTA EL STOCK DE LAS HOJAS, SI ES LA HOJA ACTUAL IGNORA EL STOCK
+                SQLCnslt = "SELECT SUM(h.Cantidad) FROM Hoja h inner join Terminado T on h.Terminado = T.Codigo WHERE h.Terminado = '" & WMPoPT & "' AND h.Real = 0 AND h.Marca <> 'X' and h.FechaOrd >= T.OrdFechaCierre"
 
-                SQLCnslt = "SELECT h.Cantidad, h.Hoja FROM Hoja h inner join Terminado T on h.Terminado = T.Codigo WHERE h.Terminado = '" & WMPoPT & "' AND h.Real = 0 AND h.Marca <> 'X' and h.FechaOrd >= T.OrdFechaCierre"
+                Dim tablahoja As DataRow = GetSingle(SQLCnslt)
 
-                Dim tablahoja As DataTable = GetAll(SQLCnslt)
+                Dim WStockReservado As String = ""
 
-                If tablahoja.Rows.Count > 0 Then
+                WStockReservado = formatonumerico(OrDefault(tablahoja.Item(0), 0), 3)
 
-                    For i = 0 To tablahoja.Rows.Count - 1
-                        If tablahoja.Rows(i).Item("Hoja") <> txtHojaProduccion.Text Then
-
-                        End If
-                    Next
-                    '  WStock = WStock - StockReservadoEnHojas
-
+                If Val(WStockReservado) > 0 Then
+                    MsgBox(String.Format("Stock Total:  {1} Kgs{0}Stock Reservado:  {2} Kgs{0}Stock Disponible:  {3}{0}", vbCrLf, WStock, Val(WStockReservado), WStock - Val(WStockReservado)))
                 End If
-
-
-
 
                 If VerificaDatosHoja <> "N" Then
                     'DESCUENTA EL STOCK YA INGRESADO EN LA HOJA
@@ -1378,46 +1372,19 @@ Public Class IngresoActualizacionHojaProduccionFarma
                     End If
                 End If
 
-
-
-                StockString = formatonumerico(WStock, 3)
-
-
-
-
                 If Microsoft.VisualBasic.Left(mastxtProducto.Text, 2) = "PT" Then
                     CantidadBloqueada = _CalcularBloqueo(WTipo, WMPoPT)
                     If CantidadBloqueada < 0 Then
                         Dim mensaje As String
                         mensaje = "Existe el producto " & WMPoPT & " la cantidad de : " & CantidadBloqueada & " Kgs. Bloqueados" & vbCrLf & "Comuniquese con el laboratorio para su liberacion"
                         MsgBox(mensaje, 0, "Ingreso de Hoja de Produccion")
-                        '     WStock = WStock - CantidadBloqueada
-                        '    StockString = formatonumerico(WStock, 3)
                     End If
                 End If
 
-
-
         End Select
-
 
         Return StockString
 
-    End Function
-
-    Private Function _CalcularStockTotalArticulo(ByVal codigo As String) As Double
-        Dim stockAcumulado As Double = 0
-
-        Dim SQLCnslt As String = "SELECT SumStock = SUM(l.Liberada) FROM Laudo l WHERE l.Marca <> 'X' AND l.Liberada > 0 AND l.Articulo = '" & codigo & "' "
-        Dim row As DataRow = GetSingle(SQLCnslt)
-
-        If row IsNot Nothing Then stockAcumulado += OrDefault(row.Item("SumStock"), 0)
-
-        SQLCnslt = "SELECT SumStock = SUM(g.Cantidad) FROM Guia g WHERE g.Marca <> 'X' AND g.Movi = 'E' AND g.Tipo = 'M' AND g.Articulo = '" & codigo & "' "
-        row = GetSingle(SQLCnslt)
-        If row IsNot Nothing Then stockAcumulado += OrDefault(row.Item("SumStock"), 0)
-
-        Return stockAcumulado
     End Function
 
     Private Function _CalcularStockTotalTerminado(ByVal codigo As String) As Double
@@ -1463,54 +1430,37 @@ Public Class IngresoActualizacionHojaProduccionFarma
         End If
         'PROCESA VENCIDOS DE LAUDO
 
-        SQLCnslt = "SELECT Marca, Articulo, Laudo, Saldo, Liberada, Fecha, FechaVencimiento, Clave FROM Laudo WHERE Articulo = '" & Codigo & "' AND Saldo <> 0"
+        SQLCnslt = "SELECT Marca, Articulo, Laudo, Saldo, Liberada, Fecha, FechaVencimiento, Clave FROM Laudo WHERE Articulo = '" & Codigo & "' AND Saldo <> 0 And Marca <> 'X'"
 
         Dim tablaLaudo As DataTable = GetAll(SQLCnslt)
 
-        If tablaLaudo.Rows.Count > 0 Then
-            For i = 0 To tablaLaudo.Rows.Count - 1
-                If tablaLaudo.Rows(i).Item("Marca") <> "X" Then
-                    If tablaLaudo.Rows(i).Item("Saldo") <> 0 Then
+        For Each row As Datarow In tablaLaudo.Rows
+            With row
 
-                        Dim saldo As Double = formatonumerico(IIf(tablaLaudo.Rows(i).Item("Saldo"), 0, tablaLaudo.Rows(i).Item("Saldo")))
-                        FechaVTO = IIf(IsDBNull(tablaLaudo.Rows(i).Item("Fechavencimiento")), "", tablaLaudo.Rows(i).Item("Fechavencimiento"))
-                        With tablaLaudo.Rows(i)
-                            tabla.Rows.Add(.Item("Laudo"), saldo, .Item("Articulo"), .Item("Liberada"), .Item("Fecha"), FechaVTO, .Item("Clave"), "L")
-                        End With
+                Dim saldo As Double = OrDefault(.Item("Saldo"), 0)
+                FechaVTO = OrDefault(.Item("Fechavencimiento"), "")
 
-                    End If
-                End If
-            Next
-        End If
+                tabla.Rows.Add(.Item("Laudo"), saldo, .Item("Articulo"), .Item("Liberada"), .Item("Fecha"), FechaVTO, .Item("Clave"), "L")
+
+            End With
+        Next
 
         'PROCESA VENCIDOS DE LAS GUIAS DE TRANSLADO INTERNO
 
-        SQLCnslt = " SELECT Marca, Saldo, Lote, Codigo, Articulo, Cantidad, Saldo, Fecha, Clave, Tipo FROM Guia WHERE Articulo = '" & Codigo & "' AND Saldo <> 0"
+        SQLCnslt = " SELECT Marca, Saldo, Lote, Codigo, Articulo, Cantidad, Saldo, Fecha, Clave, Tipo FROM Guia WHERE Articulo = '" & Codigo & "' AND Saldo <> 0 And Codigo < 900000 And Marca <> 'X' And Tipo = 'M'"
 
         Dim tablaGuias As DataTable = GetAll(SQLCnslt)
 
-        If tablaGuias.Rows.Count > 0 Then
-            For i = 0 To tablaGuias.Rows.Count - 1
+        For Each row As Datarow In tablaGuias.Rows
+            With row
 
-                With tablaGuias.Rows(i)
+                Dim laudo As String = IIf(IsDBNull(.Item("Lote")), 0, .Item("Lote"))
+                Dim Saldo As String = formatonumerico(IIf(IsDBNull(.Item("Saldo")), 0, .Item("Saldo")))
 
-                    If .Item("Marca") <> "X" And .Item("Saldo") <> 0 And .Item("Codigo") < 900000 Then
+                tabla.Rows.Add(laudo, .Item("Articulo"), .Item("Cantidad"), Saldo, .Item("Fecha"), "", .Item("Clave"), "G")
 
-                        If .Item("Tipo") = "M" Then
-
-                            Dim laudo As String = IIf(IsDBNull(.Item("Lote")), 0, .Item("Lote"))
-                            Dim Saldo As String = formatonumerico(IIf(IsDBNull(.Item("Saldo")), 0, .Item("Saldo")))
-
-                            tabla.Rows.Add(laudo, .Item("Articulo"), .Item("Cantidad"), Saldo, .Item("Fecha"), "", .Item("Clave"), "G")
-
-                        End If
-
-                    End If
-
-                End With
-            Next
-        End If
-
+            End With
+        Next
 
         For i = 0 To tabla.Rows.Count - 1
 
@@ -1630,7 +1580,6 @@ Public Class IngresoActualizacionHojaProduccionFarma
         Return Vencido
 
     End Function
-
 
     Private Function _Calcula_vencimiento(ByVal WFecha As String, ByVal Plazo As Integer) As String
 
