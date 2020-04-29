@@ -25,15 +25,7 @@ Partial Class ListadoImputacionesContable
         Me.components = New System.ComponentModel.Container()
         Me.txthastafecha = New System.Windows.Forms.MaskedTextBox()
         Me.txtDesdeFecha = New System.Windows.Forms.MaskedTextBox()
-        Me.CustomLabel2 = New Administracion.CustomLabel()
-        Me.CustomLabel1 = New Administracion.CustomLabel()
-        Me.CustomLabel4 = New Administracion.CustomLabel()
-        Me.CustomLabel3 = New Administracion.CustomLabel()
-        Me.CustomLabel5 = New Administracion.CustomLabel()
-        Me.btnConsulta = New Administracion.CustomButton()
         Me.btnCancela = New System.Windows.Forms.Button()
-        Me.txtAyuda = New Administracion.CustomTextBox()
-        Me.lstAyuda = New Administracion.CustomListBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.chkDepositos = New System.Windows.Forms.CheckBox()
         Me.chkRecibos = New System.Windows.Forms.CheckBox()
@@ -46,16 +38,28 @@ Partial Class ListadoImputacionesContable
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.btnPantalla = New Administracion.CustomButton()
-        Me.btnImprimir = New Administracion.CustomButton()
+        Me.gbpb = New System.Windows.Forms.GroupBox()
+        Me.pb = New System.Windows.Forms.ProgressBar()
         Me.lstFiltrada = New Administracion.CustomListBox()
+        Me.txtAyuda = New Administracion.CustomTextBox()
+        Me.lstAyuda = New Administracion.CustomListBox()
+        Me.btnImprimir = New Administracion.CustomButton()
+        Me.btnPantalla = New Administracion.CustomButton()
+        Me.btnConsulta = New Administracion.CustomButton()
+        Me.CustomLabel5 = New Administracion.CustomLabel()
+        Me.CustomLabel1 = New Administracion.CustomLabel()
+        Me.CustomLabel2 = New Administracion.CustomLabel()
+        Me.CustomLabel3 = New Administracion.CustomLabel()
+        Me.CustomLabel4 = New Administracion.CustomLabel()
         Me.GroupBox1.SuspendLayout()
         Me.Panel1.SuspendLayout()
+        Me.Panel2.SuspendLayout()
+        Me.gbpb.SuspendLayout()
         Me.SuspendLayout()
         '
         'txthastafecha
         '
-        Me.txthastafecha.Location = New System.Drawing.Point(365, 71)
+        Me.txthastafecha.Location = New System.Drawing.Point(376, 19)
         Me.txthastafecha.Mask = "##/##/####"
         Me.txthastafecha.Name = "txthastafecha"
         Me.txthastafecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -64,98 +68,12 @@ Partial Class ListadoImputacionesContable
         '
         'txtDesdeFecha
         '
-        Me.txtDesdeFecha.Location = New System.Drawing.Point(143, 71)
+        Me.txtDesdeFecha.Location = New System.Drawing.Point(154, 19)
         Me.txtDesdeFecha.Mask = "##/##/####"
         Me.txtDesdeFecha.Name = "txtDesdeFecha"
         Me.txtDesdeFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.txtDesdeFecha.Size = New System.Drawing.Size(106, 20)
         Me.txtDesdeFecha.TabIndex = 24
-        '
-        'CustomLabel2
-        '
-        Me.CustomLabel2.AutoSize = True
-        Me.CustomLabel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.CustomLabel2.ControlAssociationKey = -1
-        Me.CustomLabel2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.CustomLabel2.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel2.Location = New System.Drawing.Point(284, 72)
-        Me.CustomLabel2.Name = "CustomLabel2"
-        Me.CustomLabel2.Size = New System.Drawing.Size(81, 18)
-        Me.CustomLabel2.TabIndex = 27
-        Me.CustomLabel2.Text = "Hasta Fecha"
-        '
-        'CustomLabel1
-        '
-        Me.CustomLabel1.AutoSize = True
-        Me.CustomLabel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.CustomLabel1.ControlAssociationKey = -1
-        Me.CustomLabel1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.CustomLabel1.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel1.Location = New System.Drawing.Point(55, 72)
-        Me.CustomLabel1.Name = "CustomLabel1"
-        Me.CustomLabel1.Size = New System.Drawing.Size(86, 18)
-        Me.CustomLabel1.TabIndex = 26
-        Me.CustomLabel1.Text = "Desde Fecha"
-        '
-        'CustomLabel4
-        '
-        Me.CustomLabel4.AutoSize = True
-        Me.CustomLabel4.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.CustomLabel4.ControlAssociationKey = -1
-        Me.CustomLabel4.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.CustomLabel4.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel4.Location = New System.Drawing.Point(276, 111)
-        Me.CustomLabel4.Name = "CustomLabel4"
-        Me.CustomLabel4.Size = New System.Drawing.Size(89, 18)
-        Me.CustomLabel4.TabIndex = 29
-        Me.CustomLabel4.Text = "Hasta Cuenta"
-        '
-        'CustomLabel3
-        '
-        Me.CustomLabel3.AutoSize = True
-        Me.CustomLabel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.CustomLabel3.ControlAssociationKey = -1
-        Me.CustomLabel3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.CustomLabel3.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel3.Location = New System.Drawing.Point(47, 111)
-        Me.CustomLabel3.Name = "CustomLabel3"
-        Me.CustomLabel3.Size = New System.Drawing.Size(94, 18)
-        Me.CustomLabel3.TabIndex = 28
-        Me.CustomLabel3.Text = "Desde Cuenta"
-        '
-        'CustomLabel5
-        '
-        Me.CustomLabel5.AutoSize = True
-        Me.CustomLabel5.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.CustomLabel5.ControlAssociationKey = -1
-        Me.CustomLabel5.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.CustomLabel5.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel5.Location = New System.Drawing.Point(154, 151)
-        Me.CustomLabel5.Name = "CustomLabel5"
-        Me.CustomLabel5.Size = New System.Drawing.Size(82, 18)
-        Me.CustomLabel5.TabIndex = 34
-        Me.CustomLabel5.Text = "Tipo Listado"
-        '
-        'btnConsulta
-        '
-        Me.btnConsulta.BackgroundImage = Global.Administracion.My.Resources.Resources.Consulta_Dat_N1
-        Me.btnConsulta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnConsulta.Cleanable = False
-        Me.btnConsulta.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnConsulta.EnterIndex = -1
-        Me.btnConsulta.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnConsulta.FlatAppearance.BorderSize = 0
-        Me.btnConsulta.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnConsulta.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnConsulta.LabelAssociationKey = -1
-        Me.btnConsulta.Location = New System.Drawing.Point(195, 269)
-        Me.btnConsulta.Name = "btnConsulta"
-        Me.btnConsulta.Size = New System.Drawing.Size(67, 37)
-        Me.btnConsulta.TabIndex = 41
-        Me.ToolTip1.SetToolTip(Me.btnConsulta, "Consulta de Cuentas Contables")
-        Me.btnConsulta.UseVisualStyleBackColor = True
         '
         'btnCancela
         '
@@ -175,31 +93,6 @@ Partial Class ListadoImputacionesContable
         Me.ToolTip1.SetToolTip(Me.btnCancela, "Cerrar")
         Me.btnCancela.UseVisualStyleBackColor = True
         '
-        'txtAyuda
-        '
-        Me.txtAyuda.Cleanable = False
-        Me.txtAyuda.Empty = True
-        Me.txtAyuda.EnterIndex = -1
-        Me.txtAyuda.LabelAssociationKey = -1
-        Me.txtAyuda.Location = New System.Drawing.Point(62, 324)
-        Me.txtAyuda.Name = "txtAyuda"
-        Me.txtAyuda.Size = New System.Drawing.Size(409, 20)
-        Me.txtAyuda.TabIndex = 43
-        Me.txtAyuda.Validator = Administracion.ValidatorType.None
-        Me.txtAyuda.Visible = False
-        '
-        'lstAyuda
-        '
-        Me.lstAyuda.Cleanable = False
-        Me.lstAyuda.EnterIndex = -1
-        Me.lstAyuda.FormattingEnabled = True
-        Me.lstAyuda.LabelAssociationKey = -1
-        Me.lstAyuda.Location = New System.Drawing.Point(62, 350)
-        Me.lstAyuda.Name = "lstAyuda"
-        Me.lstAyuda.Size = New System.Drawing.Size(409, 160)
-        Me.lstAyuda.TabIndex = 42
-        Me.lstAyuda.Visible = False
-        '
         'GroupBox1
         '
         Me.GroupBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
@@ -208,7 +101,7 @@ Partial Class ListadoImputacionesContable
         Me.GroupBox1.Controls.Add(Me.chkPagos)
         Me.GroupBox1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.Control
-        Me.GroupBox1.Location = New System.Drawing.Point(62, 175)
+        Me.GroupBox1.Location = New System.Drawing.Point(66, 158)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(409, 45)
         Me.GroupBox1.TabIndex = 44
@@ -217,7 +110,9 @@ Partial Class ListadoImputacionesContable
         'chkDepositos
         '
         Me.chkDepositos.AutoSize = True
-        Me.chkDepositos.Location = New System.Drawing.Point(288, 16)
+        Me.chkDepositos.Checked = True
+        Me.chkDepositos.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkDepositos.Location = New System.Drawing.Point(290, 16)
         Me.chkDepositos.Name = "chkDepositos"
         Me.chkDepositos.Size = New System.Drawing.Size(89, 22)
         Me.chkDepositos.TabIndex = 2
@@ -227,7 +122,9 @@ Partial Class ListadoImputacionesContable
         'chkRecibos
         '
         Me.chkRecibos.AutoSize = True
-        Me.chkRecibos.Location = New System.Drawing.Point(151, 16)
+        Me.chkRecibos.Checked = True
+        Me.chkRecibos.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkRecibos.Location = New System.Drawing.Point(153, 16)
         Me.chkRecibos.Name = "chkRecibos"
         Me.chkRecibos.Size = New System.Drawing.Size(75, 22)
         Me.chkRecibos.TabIndex = 1
@@ -237,7 +134,9 @@ Partial Class ListadoImputacionesContable
         'chkPagos
         '
         Me.chkPagos.AutoSize = True
-        Me.chkPagos.Location = New System.Drawing.Point(27, 17)
+        Me.chkPagos.Checked = True
+        Me.chkPagos.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkPagos.Location = New System.Drawing.Point(29, 16)
         Me.chkPagos.Name = "chkPagos"
         Me.chkPagos.Size = New System.Drawing.Size(63, 22)
         Me.chkPagos.TabIndex = 0
@@ -246,7 +145,7 @@ Partial Class ListadoImputacionesContable
         '
         'txtDesdeCuenta
         '
-        Me.txtDesdeCuenta.Location = New System.Drawing.Point(143, 110)
+        Me.txtDesdeCuenta.Location = New System.Drawing.Point(154, 58)
         Me.txtDesdeCuenta.MaxLength = 10
         Me.txtDesdeCuenta.Name = "txtDesdeCuenta"
         Me.txtDesdeCuenta.Size = New System.Drawing.Size(106, 20)
@@ -255,7 +154,7 @@ Partial Class ListadoImputacionesContable
         '
         'txtHastaCuenta
         '
-        Me.txtHastaCuenta.Location = New System.Drawing.Point(365, 110)
+        Me.txtHastaCuenta.Location = New System.Drawing.Point(376, 58)
         Me.txtHastaCuenta.MaxLength = 10
         Me.txtHastaCuenta.Name = "txtHastaCuenta"
         Me.txtHastaCuenta.Size = New System.Drawing.Size(106, 20)
@@ -265,7 +164,7 @@ Partial Class ListadoImputacionesContable
         'TipoListado
         '
         Me.TipoListado.FormattingEnabled = True
-        Me.TipoListado.Location = New System.Drawing.Point(239, 150)
+        Me.TipoListado.Location = New System.Drawing.Point(239, 90)
         Me.TipoListado.Name = "TipoListado"
         Me.TipoListado.Size = New System.Drawing.Size(148, 21)
         Me.TipoListado.TabIndex = 47
@@ -305,31 +204,79 @@ Partial Class ListadoImputacionesContable
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.TipoListado)
+        Me.Panel2.Controls.Add(Me.gbpb)
+        Me.Panel2.Controls.Add(Me.CustomLabel5)
+        Me.Panel2.Controls.Add(Me.txtHastaCuenta)
+        Me.Panel2.Controls.Add(Me.txthastafecha)
+        Me.Panel2.Controls.Add(Me.txtDesdeCuenta)
+        Me.Panel2.Controls.Add(Me.CustomLabel1)
+        Me.Panel2.Controls.Add(Me.CustomLabel2)
+        Me.Panel2.Controls.Add(Me.txtDesdeFecha)
+        Me.Panel2.Controls.Add(Me.CustomLabel3)
+        Me.Panel2.Controls.Add(Me.CustomLabel4)
         Me.Panel2.Location = New System.Drawing.Point(0, 49)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(541, 212)
         Me.Panel2.TabIndex = 49
         '
-        'btnPantalla
+        'gbpb
         '
-        Me.btnPantalla.BackgroundImage = Global.Administracion.My.Resources.Resources.Screen_preview
-        Me.btnPantalla.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnPantalla.Cleanable = False
-        Me.btnPantalla.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnPantalla.EnterIndex = -1
-        Me.btnPantalla.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnPantalla.FlatAppearance.BorderSize = 0
-        Me.btnPantalla.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnPantalla.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnPantalla.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnPantalla.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnPantalla.LabelAssociationKey = -1
-        Me.btnPantalla.Location = New System.Drawing.Point(283, 269)
-        Me.btnPantalla.Name = "btnPantalla"
-        Me.btnPantalla.Size = New System.Drawing.Size(67, 37)
-        Me.btnPantalla.TabIndex = 41
-        Me.ToolTip1.SetToolTip(Me.btnPantalla, "Mostrar Reporte por Pantalla")
-        Me.btnPantalla.UseVisualStyleBackColor = True
+        Me.gbpb.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.gbpb.Controls.Add(Me.pb)
+        Me.gbpb.Font = New System.Drawing.Font("Calibri", 11.25!)
+        Me.gbpb.ForeColor = System.Drawing.SystemColors.Control
+        Me.gbpb.Location = New System.Drawing.Point(66, 156)
+        Me.gbpb.Name = "gbpb"
+        Me.gbpb.Size = New System.Drawing.Size(409, 50)
+        Me.gbpb.TabIndex = 48
+        Me.gbpb.TabStop = False
+        Me.gbpb.Text = "PROCESANDO PAGOS"
+        '
+        'pb
+        '
+        Me.pb.Location = New System.Drawing.Point(11, 20)
+        Me.pb.Name = "pb"
+        Me.pb.Size = New System.Drawing.Size(387, 21)
+        Me.pb.Style = System.Windows.Forms.ProgressBarStyle.Continuous
+        Me.pb.TabIndex = 0
+        '
+        'lstFiltrada
+        '
+        Me.lstFiltrada.Cleanable = False
+        Me.lstFiltrada.EnterIndex = -1
+        Me.lstFiltrada.FormattingEnabled = True
+        Me.lstFiltrada.LabelAssociationKey = -1
+        Me.lstFiltrada.Location = New System.Drawing.Point(62, 350)
+        Me.lstFiltrada.Name = "lstFiltrada"
+        Me.lstFiltrada.Size = New System.Drawing.Size(409, 160)
+        Me.lstFiltrada.TabIndex = 50
+        Me.lstFiltrada.Visible = False
+        '
+        'txtAyuda
+        '
+        Me.txtAyuda.Cleanable = False
+        Me.txtAyuda.Empty = True
+        Me.txtAyuda.EnterIndex = -1
+        Me.txtAyuda.LabelAssociationKey = -1
+        Me.txtAyuda.Location = New System.Drawing.Point(62, 324)
+        Me.txtAyuda.Name = "txtAyuda"
+        Me.txtAyuda.Size = New System.Drawing.Size(409, 20)
+        Me.txtAyuda.TabIndex = 43
+        Me.txtAyuda.Validator = Administracion.ValidatorType.None
+        Me.txtAyuda.Visible = False
+        '
+        'lstAyuda
+        '
+        Me.lstAyuda.Cleanable = False
+        Me.lstAyuda.EnterIndex = -1
+        Me.lstAyuda.FormattingEnabled = True
+        Me.lstAyuda.LabelAssociationKey = -1
+        Me.lstAyuda.Location = New System.Drawing.Point(62, 350)
+        Me.lstAyuda.Name = "lstAyuda"
+        Me.lstAyuda.Size = New System.Drawing.Size(409, 160)
+        Me.lstAyuda.TabIndex = 42
+        Me.lstAyuda.Visible = False
         '
         'btnImprimir
         '
@@ -352,17 +299,112 @@ Partial Class ListadoImputacionesContable
         Me.ToolTip1.SetToolTip(Me.btnImprimir, "Imprimir Reporte")
         Me.btnImprimir.UseVisualStyleBackColor = True
         '
-        'lstFiltrada
+        'btnPantalla
         '
-        Me.lstFiltrada.Cleanable = False
-        Me.lstFiltrada.EnterIndex = -1
-        Me.lstFiltrada.FormattingEnabled = True
-        Me.lstFiltrada.LabelAssociationKey = -1
-        Me.lstFiltrada.Location = New System.Drawing.Point(62, 350)
-        Me.lstFiltrada.Name = "lstFiltrada"
-        Me.lstFiltrada.Size = New System.Drawing.Size(409, 160)
-        Me.lstFiltrada.TabIndex = 50
-        Me.lstFiltrada.Visible = False
+        Me.btnPantalla.BackgroundImage = Global.Administracion.My.Resources.Resources.Screen_preview
+        Me.btnPantalla.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnPantalla.Cleanable = False
+        Me.btnPantalla.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnPantalla.EnterIndex = -1
+        Me.btnPantalla.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnPantalla.FlatAppearance.BorderSize = 0
+        Me.btnPantalla.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnPantalla.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnPantalla.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnPantalla.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnPantalla.LabelAssociationKey = -1
+        Me.btnPantalla.Location = New System.Drawing.Point(283, 269)
+        Me.btnPantalla.Name = "btnPantalla"
+        Me.btnPantalla.Size = New System.Drawing.Size(67, 37)
+        Me.btnPantalla.TabIndex = 41
+        Me.ToolTip1.SetToolTip(Me.btnPantalla, "Mostrar Reporte por Pantalla")
+        Me.btnPantalla.UseVisualStyleBackColor = True
+        '
+        'btnConsulta
+        '
+        Me.btnConsulta.BackgroundImage = Global.Administracion.My.Resources.Resources.Consulta_Dat_N1
+        Me.btnConsulta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnConsulta.Cleanable = False
+        Me.btnConsulta.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnConsulta.EnterIndex = -1
+        Me.btnConsulta.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnConsulta.FlatAppearance.BorderSize = 0
+        Me.btnConsulta.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnConsulta.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnConsulta.LabelAssociationKey = -1
+        Me.btnConsulta.Location = New System.Drawing.Point(195, 269)
+        Me.btnConsulta.Name = "btnConsulta"
+        Me.btnConsulta.Size = New System.Drawing.Size(67, 37)
+        Me.btnConsulta.TabIndex = 41
+        Me.ToolTip1.SetToolTip(Me.btnConsulta, "Consulta de Cuentas Contables")
+        Me.btnConsulta.UseVisualStyleBackColor = True
+        '
+        'CustomLabel5
+        '
+        Me.CustomLabel5.AutoSize = True
+        Me.CustomLabel5.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.CustomLabel5.ControlAssociationKey = -1
+        Me.CustomLabel5.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.CustomLabel5.ForeColor = System.Drawing.SystemColors.Control
+        Me.CustomLabel5.Location = New System.Drawing.Point(154, 91)
+        Me.CustomLabel5.Name = "CustomLabel5"
+        Me.CustomLabel5.Size = New System.Drawing.Size(82, 18)
+        Me.CustomLabel5.TabIndex = 34
+        Me.CustomLabel5.Text = "Tipo Listado"
+        '
+        'CustomLabel1
+        '
+        Me.CustomLabel1.AutoSize = True
+        Me.CustomLabel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.CustomLabel1.ControlAssociationKey = -1
+        Me.CustomLabel1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.CustomLabel1.ForeColor = System.Drawing.SystemColors.Control
+        Me.CustomLabel1.Location = New System.Drawing.Point(66, 20)
+        Me.CustomLabel1.Name = "CustomLabel1"
+        Me.CustomLabel1.Size = New System.Drawing.Size(86, 18)
+        Me.CustomLabel1.TabIndex = 26
+        Me.CustomLabel1.Text = "Desde Fecha"
+        '
+        'CustomLabel2
+        '
+        Me.CustomLabel2.AutoSize = True
+        Me.CustomLabel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.CustomLabel2.ControlAssociationKey = -1
+        Me.CustomLabel2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.CustomLabel2.ForeColor = System.Drawing.SystemColors.Control
+        Me.CustomLabel2.Location = New System.Drawing.Point(295, 20)
+        Me.CustomLabel2.Name = "CustomLabel2"
+        Me.CustomLabel2.Size = New System.Drawing.Size(81, 18)
+        Me.CustomLabel2.TabIndex = 27
+        Me.CustomLabel2.Text = "Hasta Fecha"
+        '
+        'CustomLabel3
+        '
+        Me.CustomLabel3.AutoSize = True
+        Me.CustomLabel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.CustomLabel3.ControlAssociationKey = -1
+        Me.CustomLabel3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.CustomLabel3.ForeColor = System.Drawing.SystemColors.Control
+        Me.CustomLabel3.Location = New System.Drawing.Point(58, 59)
+        Me.CustomLabel3.Name = "CustomLabel3"
+        Me.CustomLabel3.Size = New System.Drawing.Size(94, 18)
+        Me.CustomLabel3.TabIndex = 28
+        Me.CustomLabel3.Text = "Desde Cuenta"
+        '
+        'CustomLabel4
+        '
+        Me.CustomLabel4.AutoSize = True
+        Me.CustomLabel4.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.CustomLabel4.ControlAssociationKey = -1
+        Me.CustomLabel4.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.CustomLabel4.ForeColor = System.Drawing.SystemColors.Control
+        Me.CustomLabel4.Location = New System.Drawing.Point(287, 59)
+        Me.CustomLabel4.Name = "CustomLabel4"
+        Me.CustomLabel4.Size = New System.Drawing.Size(89, 18)
+        Me.CustomLabel4.TabIndex = 29
+        Me.CustomLabel4.Text = "Hasta Cuenta"
         '
         'ListadoImputacionesContable
         '
@@ -371,9 +413,6 @@ Partial Class ListadoImputacionesContable
         Me.ClientSize = New System.Drawing.Size(540, 318)
         Me.Controls.Add(Me.lstFiltrada)
         Me.Controls.Add(Me.Panel1)
-        Me.Controls.Add(Me.TipoListado)
-        Me.Controls.Add(Me.txtHastaCuenta)
-        Me.Controls.Add(Me.txtDesdeCuenta)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.txtAyuda)
         Me.Controls.Add(Me.lstAyuda)
@@ -381,19 +420,15 @@ Partial Class ListadoImputacionesContable
         Me.Controls.Add(Me.btnPantalla)
         Me.Controls.Add(Me.btnConsulta)
         Me.Controls.Add(Me.btnCancela)
-        Me.Controls.Add(Me.CustomLabel5)
-        Me.Controls.Add(Me.CustomLabel4)
-        Me.Controls.Add(Me.CustomLabel3)
-        Me.Controls.Add(Me.txthastafecha)
-        Me.Controls.Add(Me.txtDesdeFecha)
-        Me.Controls.Add(Me.CustomLabel2)
-        Me.Controls.Add(Me.CustomLabel1)
         Me.Controls.Add(Me.Panel2)
         Me.Name = "ListadoImputacionesContable"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
+        Me.gbpb.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -424,4 +459,6 @@ Partial Class ListadoImputacionesContable
     Friend WithEvents lstFiltrada As Administracion.CustomListBox
     Friend WithEvents btnPantalla As Administracion.CustomButton
     Friend WithEvents btnImprimir As Administracion.CustomButton
+    Friend WithEvents gbpb As System.Windows.Forms.GroupBox
+    Friend WithEvents pb As System.Windows.Forms.ProgressBar
 End Class

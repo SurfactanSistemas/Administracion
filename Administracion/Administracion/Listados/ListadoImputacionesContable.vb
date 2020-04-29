@@ -1,21 +1,19 @@
 ﻿Imports System.Data.SqlClient
 Imports ClasesCompartidas
-Imports ConsultasVarias
 Imports CrystalDecisions.Shared
-Imports ConsultasVarias.VistaPrevia
 
 Public Class ListadoImputacionesContable
 
     Dim txtVectorBanco(1000) As String
 
-    Private Sub ListadoImputacionesContable_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub ListadoImputacionesContable_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         Label2.Text = Globals.NombreEmpresa()
-        txtDesdeFecha.Text = "  /  /    "
-        txthastafecha.Text = "  /  /    "
+
+        txtDesdeFecha.Text = "01/" & Date.Now.AddMonths(-1).ToString("MM/yyyy")
+        txthastafecha.Text = "31/" & Date.Now.AddMonths(-1).ToString("MM/yyyy")
 
         txtDesdeCuenta.Text = ""
         txtHastaCuenta.Text = "99999999999"
-
 
         TipoListado.Items.Clear()
         TipoListado.Items.Add("Completo")
@@ -23,13 +21,11 @@ Public Class ListadoImputacionesContable
         TipoListado.Items.Add("Exportar Resumido a Excel")
         TipoListado.SelectedIndex = 0
 
-        chkDepositos.Checked = False
-        chkPagos.Checked = False
-        chkRecibos.Checked = False
+        gbpb.Visible = False
     End Sub
 
     Private Sub txtdesdefecha_KeyPress(ByVal sender As Object, _
-               ByVal e As System.Windows.Forms.KeyPressEventArgs) _
+               ByVal e As KeyPressEventArgs) _
                Handles txtDesdeFecha.KeyPress
         If e.KeyChar = Convert.ToChar(Keys.Return) Then
             e.Handled = True
@@ -39,12 +35,12 @@ Public Class ListadoImputacionesContable
         ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
             e.Handled = True
             txtDesdeFecha.Text = "  /  /    "
-            Me.txtDesdeFecha.SelectionStart = 0
+            txtDesdeFecha.SelectionStart = 0
         End If
     End Sub
 
     Private Sub txthastafecha_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs) _
+                   ByVal e As KeyPressEventArgs) _
                    Handles txthastafecha.KeyPress
         If e.KeyChar = Convert.ToChar(Keys.Return) Then
             e.Handled = True
@@ -54,12 +50,12 @@ Public Class ListadoImputacionesContable
         ElseIf e.KeyChar = Convert.ToChar(Keys.Escape) Then
             e.Handled = True
             txthastafecha.Text = "  /  /    "
-            Me.txthastafecha.SelectionStart = 0
+            txthastafecha.SelectionStart = 0
         End If
     End Sub
 
     Private Sub txtdesdecuenta_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs) _
+                   ByVal e As KeyPressEventArgs) _
                    Handles txtDesdeCuenta.KeyPress
         If e.KeyChar = Convert.ToChar(Keys.Return) Then
             e.Handled = True
@@ -75,7 +71,7 @@ Public Class ListadoImputacionesContable
     End Sub
 
     Private Sub txthastacuenta_KeyPress(ByVal sender As Object, _
-                   ByVal e As System.Windows.Forms.KeyPressEventArgs) _
+                   ByVal e As KeyPressEventArgs) _
                    Handles txtHastaCuenta.KeyPress
         If e.KeyChar = Convert.ToChar(Keys.Return) Then
             e.Handled = True
@@ -89,15 +85,15 @@ Public Class ListadoImputacionesContable
         End If
     End Sub
 
-    Private Sub btnCancela_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancela.Click
-        Me.Close()
+    Private Sub btnCancela_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCancela.Click
+        Close()
         MenuPrincipal.Show()
     End Sub
 
 
-    Private Sub btnConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsulta.Click
+    Private Sub btnConsulta_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnConsulta.Click
 
-        Me.Size = New System.Drawing.Size(556, 557)
+        Size = New Size(556, 557)
 
         lstAyuda.DataSource = DAOCuentaContable.buscarCuentaContablePorDescripcion("")
 
@@ -128,7 +124,7 @@ Public Class ListadoImputacionesContable
         txtDesdeCuenta.Focus()
     End Sub
 
-    Private Sub lstAyuda_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstAyuda.Click
+    Private Sub lstAyuda_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lstAyuda.Click
         mostrarcuenta(lstAyuda.SelectedValue)
         REM txtDesdeProveedor.Text = lstAyuda.SelectedValue.id
     End Sub
@@ -167,11 +163,20 @@ Public Class ListadoImputacionesContable
 
         'Dim banco As New Banco(0, "", New CuentaContable(0, ""))
 
+        With pb
+            .Value = 0
+            .Step = 1
+            .Visible = True
+        End With
+
+        gbpb.Visible = True
+        gbpb.Refresh()
+
         SQLConnector.retrieveDataTable("limpiar_impCyb")
 
         txtEmpresa = "Surfactan S.A."
 
-        If Proceso._EsPellital() Then
+        If _EsPellital() Then
             txtEmpresa = "Pellital S.A."
             WEmpresa = "8"
         End If
@@ -193,16 +198,20 @@ Public Class ListadoImputacionesContable
 
         Next
 
-
-
         txtCorte = ""
         txtCuenta = ""
         txtRenglonII = 0
 
         If chkPagos.Checked = True Then
 
+            gbpb.Text = "PROCESANDO ORDENES PAGOS"
+            gbpb.Refresh()
+
             Dim tabla As DataTable
             tabla = SQLConnector.retrieveDataTable("buscar_pagos_fecha", txtDesdefechaOrd, txtHastafechaOrd)
+
+            pb.Value = 0
+            pb.Maximum = tabla.Rows.Count
 
             For Each row As DataRow In tabla.Rows
 
@@ -251,7 +260,7 @@ Public Class ListadoImputacionesContable
 
                                 txtCuenta = "2001"
 
-                                If Proceso._EsPellital() AndAlso Val(CampoProveedor.id) = 10077777777 Then
+                                If _EsPellital() AndAlso Val(CampoProveedor.id) = 10077777777 Then
                                     txtCuenta = "2046"
                                 End If
 
@@ -287,7 +296,7 @@ Public Class ListadoImputacionesContable
                         txtEmpresa = 1
                         txtTituloList = "Surfactan S.A."
 
-                        If Proceso._EsPellital() Then
+                        If _EsPellital() Then
                             txtTituloList = "Pellital S.A."
                         End If
 
@@ -436,7 +445,7 @@ Public Class ListadoImputacionesContable
                         txtEmpresa = 1
                         txtTituloList = "Surfactan S.A."
 
-                        If Proceso._EsPellital() Then
+                        If _EsPellital() Then
                             txtTituloList = "Pellital S.A."
                         End If
 
@@ -537,7 +546,10 @@ Public Class ListadoImputacionesContable
 
                 End Select
 
+                pb.Increment(1)
             Next
+
+            pb.Value = 0
 
         End If
 
@@ -584,17 +596,19 @@ Public Class ListadoImputacionesContable
         ZRetIb(22, 2) = "198"
         ZRetIb(23, 2) = "198"
 
-
-        Dim ZExcluir(1000) As String
-        Dim Zex = 0
-
         txtCorte = ""
         txtRenglonII = 0
 
         If chkRecibos.Checked = True Then
 
+            gbpb.Text = "PROCESANDO RECIBOS"
+            gbpb.Refresh()
+
             Dim tabla As DataTable
             tabla = SQLConnector.retrieveDataTable("buscar_recibos_fecha", txtDesdefechaOrd, txtHastafechaOrd)
+
+            pb.Value = 0
+            pb.Maximum = tabla.Rows.Count
 
             For Each row As DataRow In tabla.Rows
 
@@ -709,7 +723,7 @@ Public Class ListadoImputacionesContable
                         txtEmpresa = 1
                         txtTituloList = "Surfactan S.A."
 
-                        If Proceso._EsPellital() Then
+                        If _EsPellital() Then
                             txtTituloList = "Pellital S.A."
                         End If
 
@@ -752,7 +766,7 @@ Public Class ListadoImputacionesContable
                         txtEmpresa = 1
                         txtTituloList = "Surfactan S.A."
 
-                        If Proceso._EsPellital() Then
+                        If _EsPellital() Then
                             txtTituloList = "Pellital S.A."
                         End If
 
@@ -788,7 +802,7 @@ Public Class ListadoImputacionesContable
                     txtEmpresa = 1
                     txtTituloList = "Surfactan S.A."
 
-                    If Proceso._EsPellital() Then
+                    If _EsPellital() Then
                         txtTituloList = "Pellital S.A."
                     End If
 
@@ -825,7 +839,7 @@ Public Class ListadoImputacionesContable
                     txtEmpresa = 1
                     txtTituloList = "Surfactan S.A."
 
-                    If Proceso._EsPellital() Then
+                    If _EsPellital() Then
                         txtTituloList = "Pellital S.A."
                     End If
 
@@ -861,7 +875,7 @@ Public Class ListadoImputacionesContable
                     txtEmpresa = 1
                     txtTituloList = "Surfactan S.A."
 
-                    If Proceso._EsPellital() Then
+                    If _EsPellital() Then
                         txtTituloList = "Pellital S.A."
                     End If
 
@@ -908,7 +922,7 @@ Public Class ListadoImputacionesContable
                         txtTituloList = "Surfactan S.A."
                         txtCuenta = "100"
 
-                        If Proceso._EsPellital() Then
+                        If _EsPellital() Then
                             txtTituloList = "Pellital S.A."
                         End If
 
@@ -944,7 +958,7 @@ Public Class ListadoImputacionesContable
                         txtTituloList = "Surfactan S.A."
                         txtCuenta = "6113"
 
-                        If Proceso._EsPellital() Then
+                        If _EsPellital() Then
                             txtTituloList = "Pellital S.A."
                         End If
 
@@ -960,19 +974,26 @@ Public Class ListadoImputacionesContable
 
                 End If
 
+                pb.Increment(1)
+
             Next
+
+            pb.Value = 0
 
             '
             ' Buscamos los datos de las retenciones que no estaban implementadas y las discrimamos por cuentas.
             '
             Try
-                Dim WRetIBs As DataTable = _BuscarRetencionesIBRecibos(Proceso.ordenaFecha(txtDesdeFecha.Text), Proceso.ordenaFecha(txthastafecha.Text))
+                Dim WRetIBs As DataTable = _BuscarRetencionesIBRecibos(ordenaFecha(txtDesdeFecha.Text), ordenaFecha(txthastafecha.Text))
                 Dim WRecibo = "", WFecha = "", WImporte = ""
 
                 If Not IsNothing(WRetIBs) Then
+
+                    gbpb.Text = "PROCESANDO IIBB DE RECIBOS"
+                    gbpb.Refresh()
+                    pb.Maximum = WRetIBs.Rows.Count
+
                     For Each ret As DataRow In WRetIBs.Rows
-
-
 
                         With ret
 
@@ -983,7 +1004,7 @@ Public Class ListadoImputacionesContable
                                 If IsDBNull(.Item("RetIb" & i)) Then
                                     ZRetIb(i, 1) = "0"
                                 Else
-                                    ZRetIb(i, 1) = Proceso.formatonumerico(.Item("RetIb" & i))
+                                    ZRetIb(i, 1) = formatonumerico(.Item("RetIb" & i))
                                 End If
                             Next
 
@@ -998,7 +1019,7 @@ Public Class ListadoImputacionesContable
                                 txtRenglonII = txtRenglonII + 1
                                 txtCuenta = ZRetIb(i, 2)
 
-                                WImporte = Proceso.formatonumerico(ZRetIb(i, 1))
+                                WImporte = formatonumerico(ZRetIb(i, 1))
 
                                 txtTipomovi = "3"
                                 txtNroInterno = WRecibo
@@ -1012,12 +1033,12 @@ Public Class ListadoImputacionesContable
                                 txtObservaciones = ""
                                 txtDebito = Val(WImporte)
                                 txtCredito = 0
-                                txtFechaOrd = Proceso.ordenaFecha(WFecha)
+                                txtFechaOrd = ordenaFecha(WFecha)
                                 txtTitulo = "Recibos"
                                 txtEmpresa = 1
                                 txtTituloList = "Surfactan S.A."
 
-                                If Proceso._EsPellital() Then
+                                If _EsPellital() Then
                                     txtTituloList = "Pellital S.A."
                                 End If
 
@@ -1033,8 +1054,9 @@ Public Class ListadoImputacionesContable
                             End If
 
                         Next
-
+                        pb.Increment(1)
                     Next
+                    pb.Value = 0
                 End If
 
             Catch ex As Exception
@@ -1051,8 +1073,14 @@ Public Class ListadoImputacionesContable
 
         If chkDepositos.Checked = True Then
 
+            gbpb.Text = "PROCESANDO DEPÓSITOS"
+            gbpb.Refresh()
+
             Dim tabla As DataTable
             tabla = SQLConnector.retrieveDataTable("buscar_depositos_fecha", txtDesdefechaOrd, txtHastafechaOrd)
+
+            pb.Value = 0
+            pb.Maximum = tabla.Rows.Count
 
             For Each row As DataRow In tabla.Rows
 
@@ -1081,7 +1109,7 @@ Public Class ListadoImputacionesContable
                 txtEmpresa = 1
                 txtTituloList = "Surfactan S.A."
 
-                If Proceso._EsPellital() Then
+                If _EsPellital() Then
                     txtTituloList = "Pellital S.A."
                 End If
 
@@ -1124,7 +1152,7 @@ Public Class ListadoImputacionesContable
                 txtEmpresa = 1
                 txtTituloList = "Surfactan S.A."
 
-                If Proceso._EsPellital() Then
+                If _EsPellital() Then
                     txtTituloList = "Pellital S.A."
                 End If
 
@@ -1136,16 +1164,17 @@ Public Class ListadoImputacionesContable
                 SQLConnector.executeProcedure("alta_impcyb", txtClave, txtTipomovi, txtNroInterno, txtProveedor, txtTipo, txtLetra, txtPunto, txtNumero,
                                               txtRenglon, txtFecha, txtObservaciones, txtCuenta, txtCredito, txtDebito, txtFechaOrd, txtTitulo, txtEmpresa, txtTituloList, txtVarios, txtClaveOrd)
 
+                pb.Increment(1)
             Next
 
-
+            pb.Value = 0
 
         End If
 
+        gbpb.Visible = False
 
         txtUno = "{Impcyb.Cuenta} in " + x + txtDesdeCuenta.Text + x + " to " + x + txtHastaCuenta.Text + x
         txtFormula = txtUno
-
 
         Select Case TipoListado.SelectedIndex
             Case 0
@@ -1187,7 +1216,7 @@ Public Class ListadoImputacionesContable
 
         Try
 
-            cn.ConnectionString = Proceso._ConectarA
+            cn.ConnectionString = _ConectarA
             cn.Open()
             cm.Connection = cn
 
@@ -1217,7 +1246,7 @@ Public Class ListadoImputacionesContable
     End Function
 
 
-    Private Sub txtDesdeCuenta_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtDesdeCuenta.MouseDoubleClick, txtHastaCuenta.MouseDoubleClick
+    Private Sub txtDesdeCuenta_MouseDoubleClick(ByVal sender As Object, ByVal e As MouseEventArgs) Handles txtDesdeCuenta.MouseDoubleClick, txtHastaCuenta.MouseDoubleClick
         btnConsulta.PerformClick()
     End Sub
 
@@ -1269,25 +1298,26 @@ Public Class ListadoImputacionesContable
     '        texto.Text = ""
     '    End Sub
 
-    Private Sub txtAyuda_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAyuda.TextChanged
+    Private Sub txtAyuda_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles txtAyuda.TextChanged
         _FiltrarDinamicamente()
     End Sub
 
-    Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtDesdeCuenta.KeyPress, txtHastaCuenta.KeyPress
+    Private Sub SoloNumero(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txtDesdeCuenta.KeyPress, txtHastaCuenta.KeyPress
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
             e.Handled = True
         End If
     End Sub
 
-    Private Sub btnPantalla_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPantalla.Click
+    Private Sub btnPantalla_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnPantalla.Click
         _Imprimir(Reporte.Pantalla)
     End Sub
 
-    Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
+    Private Sub btnImprimir_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnImprimir.Click
         _Imprimir(Reporte.Imprimir)
     End Sub
 
-    Private Sub ListadoImputacionesContable_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+    Private Sub ListadoImputacionesContable_Shown(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Shown
         txtDesdeFecha.Focus()
+        txtDesdeFecha.Select(0, 10)
     End Sub
 End Class
