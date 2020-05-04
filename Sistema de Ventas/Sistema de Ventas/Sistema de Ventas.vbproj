@@ -77,6 +77,39 @@
   <ItemGroup>
     <Compile Include="Interfases\IAgregarEnvase.vb" />
     <Compile Include="Interfases\IAgregarGastosImpo.vb" />
+    <Compile Include="Interfases\IConsultaCambios.vb" />
+    <Compile Include="Interfases\IConsultaTerminado.vb" />
+    <Compile Include="Interfases\IConsulta_Orden_Trabajo.vb" />
+    <Compile Include="Maestro\Consulta de revisiones de ensayos.Designer.vb">
+      <DependentUpon>Consulta de revisiones de ensayos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestro\Consulta de revisiones de ensayos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestro\ConsultaDeVersionesComposicionPT.Designer.vb">
+      <DependentUpon>ConsultaDeVersionesComposicionPT.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestro\ConsultaDeVersionesComposicionPT.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestro\ConsultaTerminado.Designer.vb">
+      <DependentUpon>ConsultaTerminado.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestro\ConsultaTerminado.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestro\Consulta_Cambios.Designer.vb">
+      <DependentUpon>Consulta_Cambios.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestro\Consulta_Cambios.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestro\Consulta_Orden_Trabajo.Designer.vb">
+      <DependentUpon>Consulta_Orden_Trabajo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestro\Consulta_Orden_Trabajo.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Maestro\Ingreso conceptos de gastos de importacion\AgregarConcepDGastosImpor.Designer.vb">
       <DependentUpon>AgregarConcepDGastosImpor.vb</DependentUpon>
     </Compile>
@@ -210,6 +243,24 @@
     <Compile Include="Maestro\Ingreso Vendedores\MostrarClientesXVendedor.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Maestro\Ingreso_Cambios.Designer.vb">
+      <DependentUpon>Ingreso_Cambios.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestro\Ingreso_Cambios.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestro\Listar_Cambios.Designer.vb">
+      <DependentUpon>Listar_Cambios.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestro\Listar_Cambios.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reportes\ReporteListaCambios.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteListaCambios.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\ReporteConcepDGastosImportacion.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -287,6 +338,21 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Maestro\Consulta de revisiones de ensayos.resx">
+      <DependentUpon>Consulta de revisiones de ensayos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestro\ConsultaDeVersionesComposicionPT.resx">
+      <DependentUpon>ConsultaDeVersionesComposicionPT.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestro\ConsultaTerminado.resx">
+      <DependentUpon>ConsultaTerminado.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestro\Consulta_Cambios.resx">
+      <DependentUpon>Consulta_Cambios.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestro\Consulta_Orden_Trabajo.resx">
+      <DependentUpon>Consulta_Orden_Trabajo.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Maestro\Ingreso conceptos de gastos de importacion\AgregarConcepDGastosImpor.resx">
       <DependentUpon>AgregarConcepDGastosImpor.vb</DependentUpon>
     </EmbeddedResource>
@@ -349,6 +415,16 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Maestro\Ingreso Vendedores\MostrarClientesXVendedor.resx">
       <DependentUpon>MostrarClientesXVendedor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestro\Ingreso_Cambios.resx">
+      <DependentUpon>Ingreso_Cambios.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestro\Listar_Cambios.resx">
+      <DependentUpon>Listar_Cambios.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ReporteListaCambios.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteListaCambios.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\ReporteConcepDGastosImportacion.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

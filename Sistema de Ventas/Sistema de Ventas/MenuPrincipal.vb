@@ -53,4 +53,22 @@ Public Class MenuPrincipal
             .Show()
         End With
     End Sub
+
+    Private Sub ConsultaDeVersionesDeComposicionDePTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ConsultaDeVersionesDeComposicionDePTToolStripMenuItem.Click
+        With ConsultaDeVersionesComposicionPT
+            .Show()
+        End With
+    End Sub
+
+    Private Sub ConsultaDeRevisionesDeEnsayosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ConsultaDeRevisionesDeEnsayosToolStripMenuItem.Click
+        With Consulta_de_revisiones_de_ensayos
+            .Show()
+        End With
+    End Sub
+
+    Private Sub IngresoDeCambiosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles IngresoDeCambiosToolStripMenuItem.Click
+        With Ingreso_Cambios
+            .Show()
+        End With
+    End Sub
 End Class

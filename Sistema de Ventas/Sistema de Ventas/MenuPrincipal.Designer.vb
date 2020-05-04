@@ -33,12 +33,15 @@ Partial Class MenuPrincipal
         Me.IngresoDeLineasDeVentasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.IngresoDeFamiliasDeMateriasPrimasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.IngresoDeEnvasesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.IngresoDeGastosDeImportacionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NovedadesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PedidosPendientesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProcesosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FinDeSistemasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.IngresoDeGastosDeImportacionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ConsultaDeVersionesDeComposicionDePTToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ConsultaDeRevisionesDeEnsayosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.IngresoDeCambiosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.panel1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -89,7 +92,7 @@ Partial Class MenuPrincipal
         '
         'MaestrosToolStripMenuItem
         '
-        Me.MaestrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IngresoRubroToolStripMenuItem, Me.IngresoVendedoresToolStripMenuItem, Me.CondicionDePagoToolStripMenuItem, Me.IngresoDeLineasDeVentasToolStripMenuItem, Me.IngresoDeFamiliasDeMateriasPrimasToolStripMenuItem, Me.IngresoDeEnvasesToolStripMenuItem, Me.IngresoDeGastosDeImportacionToolStripMenuItem})
+        Me.MaestrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IngresoRubroToolStripMenuItem, Me.IngresoVendedoresToolStripMenuItem, Me.CondicionDePagoToolStripMenuItem, Me.IngresoDeLineasDeVentasToolStripMenuItem, Me.IngresoDeFamiliasDeMateriasPrimasToolStripMenuItem, Me.IngresoDeEnvasesToolStripMenuItem, Me.IngresoDeGastosDeImportacionToolStripMenuItem, Me.ConsultaDeVersionesDeComposicionDePTToolStripMenuItem, Me.ConsultaDeRevisionesDeEnsayosToolStripMenuItem, Me.IngresoDeCambiosToolStripMenuItem})
         Me.MaestrosToolStripMenuItem.Name = "MaestrosToolStripMenuItem"
         Me.MaestrosToolStripMenuItem.Size = New System.Drawing.Size(67, 20)
         Me.MaestrosToolStripMenuItem.Text = "Maestros"
@@ -97,38 +100,44 @@ Partial Class MenuPrincipal
         'IngresoRubroToolStripMenuItem
         '
         Me.IngresoRubroToolStripMenuItem.Name = "IngresoRubroToolStripMenuItem"
-        Me.IngresoRubroToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
+        Me.IngresoRubroToolStripMenuItem.Size = New System.Drawing.Size(311, 22)
         Me.IngresoRubroToolStripMenuItem.Text = "Ingreso Rubro"
         '
         'IngresoVendedoresToolStripMenuItem
         '
         Me.IngresoVendedoresToolStripMenuItem.Name = "IngresoVendedoresToolStripMenuItem"
-        Me.IngresoVendedoresToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
+        Me.IngresoVendedoresToolStripMenuItem.Size = New System.Drawing.Size(311, 22)
         Me.IngresoVendedoresToolStripMenuItem.Text = "Ingreso Vendedores"
         '
         'CondicionDePagoToolStripMenuItem
         '
         Me.CondicionDePagoToolStripMenuItem.Name = "CondicionDePagoToolStripMenuItem"
-        Me.CondicionDePagoToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
+        Me.CondicionDePagoToolStripMenuItem.Size = New System.Drawing.Size(311, 22)
         Me.CondicionDePagoToolStripMenuItem.Text = "Ingreso de  Condiciones de Pago"
         '
         'IngresoDeLineasDeVentasToolStripMenuItem
         '
         Me.IngresoDeLineasDeVentasToolStripMenuItem.Name = "IngresoDeLineasDeVentasToolStripMenuItem"
-        Me.IngresoDeLineasDeVentasToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
+        Me.IngresoDeLineasDeVentasToolStripMenuItem.Size = New System.Drawing.Size(311, 22)
         Me.IngresoDeLineasDeVentasToolStripMenuItem.Text = "Ingreso de Lineas de Ventas"
         '
         'IngresoDeFamiliasDeMateriasPrimasToolStripMenuItem
         '
         Me.IngresoDeFamiliasDeMateriasPrimasToolStripMenuItem.Name = "IngresoDeFamiliasDeMateriasPrimasToolStripMenuItem"
-        Me.IngresoDeFamiliasDeMateriasPrimasToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
+        Me.IngresoDeFamiliasDeMateriasPrimasToolStripMenuItem.Size = New System.Drawing.Size(311, 22)
         Me.IngresoDeFamiliasDeMateriasPrimasToolStripMenuItem.Text = "Ingreso de Familias de Materias Primas"
         '
         'IngresoDeEnvasesToolStripMenuItem
         '
         Me.IngresoDeEnvasesToolStripMenuItem.Name = "IngresoDeEnvasesToolStripMenuItem"
-        Me.IngresoDeEnvasesToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
+        Me.IngresoDeEnvasesToolStripMenuItem.Size = New System.Drawing.Size(311, 22)
         Me.IngresoDeEnvasesToolStripMenuItem.Text = "Ingreso de Envases"
+        '
+        'IngresoDeGastosDeImportacionToolStripMenuItem
+        '
+        Me.IngresoDeGastosDeImportacionToolStripMenuItem.Name = "IngresoDeGastosDeImportacionToolStripMenuItem"
+        Me.IngresoDeGastosDeImportacionToolStripMenuItem.Size = New System.Drawing.Size(311, 22)
+        Me.IngresoDeGastosDeImportacionToolStripMenuItem.Text = "Ingreso de Gastos de Importacion"
         '
         'NovedadesToolStripMenuItem
         '
@@ -162,11 +171,23 @@ Partial Class MenuPrincipal
         Me.FinDeSistemasToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
         Me.FinDeSistemasToolStripMenuItem.Text = "Fin de Sistema"
         '
-        'IngresoDeGastosDeImportacionToolStripMenuItem
+        'ConsultaDeVersionesDeComposicionDePTToolStripMenuItem
         '
-        Me.IngresoDeGastosDeImportacionToolStripMenuItem.Name = "IngresoDeGastosDeImportacionToolStripMenuItem"
-        Me.IngresoDeGastosDeImportacionToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
-        Me.IngresoDeGastosDeImportacionToolStripMenuItem.Text = "Ingreso de Gastos de Importacion"
+        Me.ConsultaDeVersionesDeComposicionDePTToolStripMenuItem.Name = "ConsultaDeVersionesDeComposicionDePTToolStripMenuItem"
+        Me.ConsultaDeVersionesDeComposicionDePTToolStripMenuItem.Size = New System.Drawing.Size(311, 22)
+        Me.ConsultaDeVersionesDeComposicionDePTToolStripMenuItem.Text = "Consulta de Versiones de Composicion de PT"
+        '
+        'ConsultaDeRevisionesDeEnsayosToolStripMenuItem
+        '
+        Me.ConsultaDeRevisionesDeEnsayosToolStripMenuItem.Name = "ConsultaDeRevisionesDeEnsayosToolStripMenuItem"
+        Me.ConsultaDeRevisionesDeEnsayosToolStripMenuItem.Size = New System.Drawing.Size(311, 22)
+        Me.ConsultaDeRevisionesDeEnsayosToolStripMenuItem.Text = "Consulta de Revisiones de Ensayos"
+        '
+        'IngresoDeCambiosToolStripMenuItem
+        '
+        Me.IngresoDeCambiosToolStripMenuItem.Name = "IngresoDeCambiosToolStripMenuItem"
+        Me.IngresoDeCambiosToolStripMenuItem.Size = New System.Drawing.Size(311, 22)
+        Me.IngresoDeCambiosToolStripMenuItem.Text = "Ingreso de Cambios"
         '
         'MenuPrincipal
         '
@@ -204,5 +225,8 @@ Partial Class MenuPrincipal
     Friend WithEvents IngresoDeFamiliasDeMateriasPrimasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents IngresoDeEnvasesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents IngresoDeGastosDeImportacionToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ConsultaDeVersionesDeComposicionDePTToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ConsultaDeRevisionesDeEnsayosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents IngresoDeCambiosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class
