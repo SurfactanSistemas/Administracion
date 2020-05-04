@@ -59,6 +59,7 @@ Namespace Entidades
         Public Shared Function CalcularFechaElabVto(ByVal Producto As String, ByVal Partida As String, Optional ByVal SoloConsulta As Boolean = False) As String()
             Dim WFechaVto As String = ""
             Dim WElaboracion As String = ""
+            Dim WLoteOriginal As String = ""
 
             Dim WTerm As DataRow = Info(Producto, {"Vida", "Linea"})
 
@@ -211,13 +212,15 @@ Namespace Entidades
                     '
                     ' Verificamos si se trata de un Mono Producto.
                     '
-                    Dim WBuscaMono As DataRow = GetSingle("SELECT Codigo FROM CodigoMono WHERE Codigo = '" & Producto & "'", "SurfactanSa")
+                    Dim WBuscaMono As DataRow = GetSingle("SELECT Codigo FROM CodigoMono WHERE Codigo = '" & WMezclaCodTerminado & "'", "SurfactanSa")
 
                     If WBuscaMono IsNot Nothing Or WLinea = 20 Or WLinea = 28 Then
 
-                        Dim WDatosMono() As String = _CalculaMonoOtro(Partida, WEmpresaHoja)
+                        Dim WDatosMono() As String
 
-                        If WDatosMono(0) = "-1" And WDatosMono(1) = "-1" Then Return {"", ""}
+                        WDatosMono = _CalculaMonoOtro(WMezclaPartida, WEmpresaHoja)
+
+                        If WDatosMono(0) = "-1" And WDatosMono(1) = "-1" Then Return {"", "", ""}
 
                         If Trim(WDatosMono(1)) <> "" Then
                             WVencimiento = WDatosMono(1)
@@ -226,6 +229,8 @@ Namespace Entidades
                         If Trim(WDatosMono(0)) <> "" Then
                             WElaboracion = WDatosMono(0)
                         End If
+
+                        If WDatosMono(3).Trim <> "" Then WLoteOriginal = WDatosMono(3).Trim
 
                         If WVencimiento <> "" Then
                             If Val(ordenaFecha(WVencimiento)) < Val(WFechaActualOrd) Then
@@ -238,6 +243,7 @@ Namespace Entidades
                         End If
 
                     End If
+
                 Else
                     Dim WDatosMono() As String = _CalculaMonoOtro(Partida, WEmpresaHoja)
 
@@ -287,7 +293,7 @@ Namespace Entidades
                 End If
             End If
             
-            Return {WElaboracion, WVencimiento}
+            Return {WElaboracion, WVencimiento, WLoteOriginal}
         End Function
 
         ''' <summary>

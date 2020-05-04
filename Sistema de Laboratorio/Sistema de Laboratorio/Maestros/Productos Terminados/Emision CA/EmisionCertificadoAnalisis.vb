@@ -49,7 +49,7 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
         '
         ' Buscamos la Información del Cliente.
         '
-        Dim WCliente As DataRow = GetSingle("SELECT * FROM Cliente WHERE Cliente = '" & txtCliente.Text & "'", "SurfactanSA")
+        Dim WCliente As DataRow = GetSingle("SELECT Idioma, Razon FROM Cliente WHERE Cliente = '" & txtCliente.Text & "'", "SurfactanSA")
 
         If WCliente Is Nothing Then
             MsgBox("El Cliente no es válido", MsgBoxStyle.Exclamation)
@@ -154,10 +154,11 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
         '
         ' Calculamos la Fecha de Elaboración y Vencimiento.
         '
-        Dim WFechaElaboracion, WFechaVencimiento As String
+        Dim WFechaElaboracion, WFechaVencimiento, WLoteOriginal As String
         Dim WDatos As String() = ProductoTerminado.CalcularFechaElabVto(lblTerminado.Text, txtPartida.Text, True)
         WFechaElaboracion = WDatos(0)
         WFechaVencimiento = WDatos(1)
+        WLoteOriginal = WDatos(2)
 
         '
         ' Para ajustar descripción de Parámetros.
@@ -313,7 +314,6 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
 
         Dim WImpreCargaVNotas As String = _ObtenerNotasExtrasDePT()
 
-        Dim WLoteOriginal As String = ""
         Dim WImpreVto As String = IIf(cmbIdioma.SelectedIndex = 1, "Retest Date:", "F.Reanálisis:")
 
         '
@@ -334,7 +334,9 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
         Dim WCodRNPA As String = ""
         If WTerminado IsNot Nothing Then WCodRNPA = Trim(OrDefault(WTerminado.Item("CodRnpa"), ""))
 
-        If WDatosMono IsNot Nothing AndAlso WDatosMono(3) <> "" Then WLoteOriginal = "Ref: " & Trim(WDatosMono(3))
+        If WDatosMono IsNot Nothing AndAlso WDatosMono(3) <> "" Then WLoteOriginal = Trim(WDatosMono(3))
+
+        If WLoteOriginal.Trim <> "" Then WLoteOriginal = "Ref: " & WLoteOriginal
 
         Dim rpt As ReportDocument = Nothing
         Dim WTipoRepote As Short = 0

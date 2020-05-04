@@ -147,7 +147,7 @@ Public Class ImpreProcesos
             'Dim WTerminado2 As String = "PT-25062-780"
             'Dim WTipoSalida2 As Integer = 2
 
-            ''_GenerarCertificadoAnalisisFarma(WTipoReporte2, WPartida2, WTipoSalida2)
+            '_GenerarCertificadoAnalisisFarma(1, 310583, 3)
 
             'WTipoReporte2 = 3
 
@@ -309,6 +309,8 @@ Public Class ImpreProcesos
         Dim WFormulas() As String
         Dim WNombreArchivoFormulas As String = "C:\ImpreCertificados\" & wPartida
 
+        Directory.CreateDirectory("C:\ImpreCertificados")
+
         '
         ' Determinamos el Reporte a imprimir y los datos de las formulas a pasar como parámetro.
         '
@@ -332,12 +334,12 @@ Public Class ImpreProcesos
                 WNombreArchivoFormulas &= "FormulasSegunda.txt"
 
             Case Else
-                Close()
+                Exit Sub
         End Select
 
         If Not File.Exists(WNombreArchivoFormulas) Then
             MsgBox("No se encuentra archivo " & WNombreArchivoFormulas)
-            Close()
+            Exit Sub
         End If
 
         WFormulas = File.ReadAllLines(WNombreArchivoFormulas, UTF7Encoding.UTF7)
