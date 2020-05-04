@@ -18,15 +18,6 @@ Public Class ConsultaCheque
             gridCheque.Rows.Clear()
             If cmbTipo.SelectedIndex = 0 Then
                 _ListarChequesTerceros(txtCheque.Text)
-                'For Each row In SQLConnector.retrieveDataTable("get_cheques_terceros", txtCheque.Text).Rows
-                '    gridCheque.Rows.Add(row("Numero2").ToString,
-                '                        row("Banco").ToString,
-                '                        formatonumerico(redondeo(Convert.ToDouble(row("Importe2"))), "#######0.#0", "."),
-                '                        row("Fecha").ToString,
-                '                        row("Fecha2").ToString,
-                '                        row("Recibo").ToString,
-                '                        row("Cliente").ToString)
-                'Next
             Else
                 For Each row In SQLConnector.retrieveDataTable("get_cheques_propios", txtCheque.Text).Rows
                     gridCheque.Rows.Add(row("Numero2").ToString,
@@ -35,6 +26,7 @@ Public Class ConsultaCheque
                                         row("Fecha").ToString,
                                         row("Fecha2").ToString,
                                         row("Recibo").ToString,
+                                        row("Cuit").ToString,
                                         row("Proveedor").ToString)
                 Next
             End If
@@ -52,7 +44,7 @@ Public Class ConsultaCheque
         SQLConnector.conexionSql(cn, cm)
 
         Try
-            cm.CommandText = "SELECT r.Numero2, r.Banco2, r.Importe2, r.Fecha, r.Fecha2, r.Recibo, r.Cliente, cli.Razon FROM Recibos as r, Cliente as cli WHERE r.Cliente = cli.Cliente and Tiporeg= '2' and (Tipo2 = '2' or Tipo2 = '02' or Tipo2 = ' 2') and ISNULL(Numero2,'') LIKE ('%" & cheque & "') order by FechaOrd2"
+            cm.CommandText = "SELECT r.Numero2, r.Banco2, r.Importe2, r.Fecha, r.Fecha2, r.Recibo, r.Cliente, cli.Razon, r.Cuit FROM Recibos as r, Cliente as cli WHERE r.Cliente = cli.Cliente and Tiporeg= '2' and (Tipo2 = '2' or Tipo2 = '02' or Tipo2 = ' 2') and ISNULL(Numero2,'') LIKE ('%" & cheque & "') order by FechaOrd2"
             dr = cm.ExecuteReader()
 
             If dr.HasRows Then
@@ -64,6 +56,7 @@ Public Class ConsultaCheque
                                             dr.Item("Fecha"),
                                             dr.Item("Fecha2"),
                                             "Rec: " & dr.Item("Recibo"),
+                                            dr.Item("Cuit"),
                                             dr.Item("Cliente") & " " & dr.Item("Razon"))
                 Loop
 
@@ -97,6 +90,7 @@ Public Class ConsultaCheque
                                             dr.Item("Fecha"),
                                             dr.Item("Fecha2"),
                                             "Dep: " & dr.Item("Deposito"),
+                                            "",
                                             dr.Item("Banco") & " " & dr.Item("Nombre"))
                 Loop
 
@@ -118,7 +112,7 @@ Public Class ConsultaCheque
 
         Try
             'cm.CommandText = "SELECT d.Numero2, d.Observaciones2, d.Importe2, d.Fecha, d.Fecha2, d.Orden, d.Proveedor, b.Nombre, d.Observaciones FROM Pagos as d, Proveedor as b Where d.Proveedor = b.Proveedor and Tiporeg = '2' and (Tipo2 = '3' Or Tipo2= '03') and ISNULL(Numero2,'') LIKE ('%" & cheque & "') Order by FechaOrd2"
-            cm.CommandText = "SELECT d.Numero2, d.Observaciones2, d.Importe2, d.Fecha, d.Fecha2, d.Orden, isnull(b.Proveedor, '') as Proveedor, isnull(b.Nombre, '') as Nombre, d.Observaciones FROM Pagos as d FULL OUTER JOIN Proveedor as b ON b.Proveedor = d.Proveedor  Where d.Tiporeg = '2' and (d.Tipo2 = '3' Or d.Tipo2= '03' Or d.Tipo2= ' 3') and d.Numero2 LIKE '%" & cheque & "' Order by FechaOrd2"
+            cm.CommandText = "SELECT d.Numero2, d.Observaciones2, d.Importe2, d.Fecha, d.Fecha2, d.Orden, isnull(b.Proveedor, '') as Proveedor, isnull(b.Nombre, '') as Nombre, d.Observaciones, d.Cuit FROM Pagos as d FULL OUTER JOIN Proveedor as b ON b.Proveedor = d.Proveedor  Where d.Tiporeg = '2' and (d.Tipo2 = '3' Or d.Tipo2= '03' Or d.Tipo2= ' 3') and d.Numero2 LIKE '%" & cheque & "' Order by FechaOrd2"
             dr = cm.ExecuteReader()
 
             If dr.HasRows Then
@@ -130,6 +124,7 @@ Public Class ConsultaCheque
                                             dr.Item("Fecha"),
                                             dr.Item("Fecha2"),
                                             "O.P.: " & dr.Item("Orden"),
+                                            dr.Item("Cuit"),
                                             dr.Item("Proveedor") & " " & IIf(IsDBNull(dr.Item("Nombre")), dr.Item("Observaciones"), dr.Item("Nombre")))
                 Loop
 
