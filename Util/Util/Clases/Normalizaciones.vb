@@ -4,8 +4,9 @@
         ''' <summary>
         ''' Setea la Configuración Regional de la PC, pisando la configuración actual.
         ''' </summary>
-        ''' <returns>Devuelve <c>Verdadero</c> en caso de que se haya modificado alguna configuración, <c>Falso</c> en caso de que no haya hecho falta realizar modificación alguna.</returns>
-        ''' <remarks></remarks>
+        ''' <returns>
+        ''' Devuelve <c>Verdadero</c> en caso de que se haya modificado alguna configuración, <c>Falso</c> en caso de que no haya hecho falta realizar modificación alguna.
+        '''</returns>
         Public Shared Function ConfiguracionRegional() As Boolean
 
             '

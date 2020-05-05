@@ -3,6 +3,7 @@ Imports System.Text
 Imports System.Text.RegularExpressions
 Imports CrystalDecisions.CrystalReports.Engine
 Imports Microsoft.Office.Interop.Outlook
+Imports Util.Clases
 
 Public Class ImpreProcesos
 
@@ -20,24 +21,9 @@ Public Class ImpreProcesos
 
                 Select Case WProceso
                     Case 1, 4, 2, 3, 6
-                        Dim val1 = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Control Panel\International", "sDecimal", ".")
-                        Dim val2 = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Control Panel\International", "sThousand", ",")
-                        Dim val3 = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Control Panel\International", "sMonDecimalSep", ".")
-                        Dim val4 = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Control Panel\International", "sMonThousandSep", ",")
-                        Dim val5 = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Control Panel\International", "sShortDate", "")
 
-                        If val1 <> "," Or val2 <> "." Or val3 <> "," Or val4 <> "." Or val5 <> "dd/MM/yyyy" Then
-
-                            My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Control Panel\International", "sCurrency", "$")
-                            My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Control Panel\International", "sDate", "/")
-                            My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Control Panel\International", "sDecimal", ",")
-                            My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Control Panel\International", "sMonDecimalSep", ",")
-                            My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Control Panel\International", "sMonThousandSep", ".")
-                            My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Control Panel\International", "sShortDate", "dd/MM/yyyy")
-                            My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Control Panel\International", "sThousand", ".")
-
+                        If Normalizaciones.ConfiguracionRegional() Then
                             MsgBox("La CONFIGURACIÓN REGIONAL de su PC no se encontraba correctamente seteada y hubo que modificarla." & vbCrLf & " Por favor, vuelva a realizar la acción que solicitó para que tome la nueva configuración.", MsgBoxStyle.Exclamation)
-
                             Close()
                         End If
 
