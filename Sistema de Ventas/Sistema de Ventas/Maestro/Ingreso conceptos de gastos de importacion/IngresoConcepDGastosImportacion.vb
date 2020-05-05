@@ -1,5 +1,5 @@
-﻿Imports ConsultasVarias
-Imports ConsultasVarias.Clases.Query
+﻿Imports Util
+Imports Util.Clases.Query
 
 Public Class IngresoConcepDGastosImportacion : Implements IAgregarGastosImpo
     Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles btnCerrar.Click

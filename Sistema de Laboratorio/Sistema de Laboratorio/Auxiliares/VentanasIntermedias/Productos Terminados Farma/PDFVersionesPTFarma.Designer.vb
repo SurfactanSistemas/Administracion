@@ -34,7 +34,7 @@ Partial Class PDFVersionesPTFarma
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnVolver = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
-        Me.dgvDatos = New ConsultasVarias.DBDataGridView()
+        Me.dgvDatos = New Util.DBDataGridView()
         Me.Partida = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Etapa = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CantVersiones = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -249,7 +249,7 @@ Partial Class PDFVersionesPTFarma
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents btnVolver As System.Windows.Forms.Button
     Friend WithEvents Button2 As System.Windows.Forms.Button
-    Friend WithEvents dgvDatos As ConsultasVarias.DBDataGridView
+    Friend WithEvents dgvDatos As Util.DBDataGridView
     Friend WithEvents Partida As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Etapa As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents CantVersiones As System.Windows.Forms.DataGridViewTextBoxColumn

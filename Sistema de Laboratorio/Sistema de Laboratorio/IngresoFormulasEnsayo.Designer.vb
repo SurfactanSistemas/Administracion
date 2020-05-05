@@ -23,7 +23,7 @@ Partial Class IngresoFormulasEnsayo
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Me.DGV_Formulas = New ConsultasVarias.DBDataGridView()
+        Me.DGV_Formulas = New Util.DBDataGridView()
         Me.txtBuscador = New System.Windows.Forms.TextBox()
         Me.btnAgregar = New System.Windows.Forms.Button()
         Me.btnVolver = New System.Windows.Forms.Button()
@@ -193,7 +193,7 @@ Partial Class IngresoFormulasEnsayo
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents DGV_Formulas As ConsultasVarias.DBDataGridView
+    Friend WithEvents DGV_Formulas As Util.DBDataGridView
     Friend WithEvents txtBuscador As System.Windows.Forms.TextBox
     Friend WithEvents btnAgregar As System.Windows.Forms.Button
     Friend WithEvents btnVolver As System.Windows.Forms.Button

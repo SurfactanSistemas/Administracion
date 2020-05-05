@@ -1,6 +1,6 @@
 ﻿Imports System.Configuration
 
-Public Class Helper : Inherits ConsultasVarias.Clases.Helper
+Public Class Helper : Inherits Util.Clases.Helper
 
     Public Overloads Shared Function _ConectarA(ByVal empresa As Integer) As String
 

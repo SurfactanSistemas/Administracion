@@ -29,7 +29,7 @@ Partial Class EnsayosMonocomponente
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Me.dgvEnsayos = New ConsultasVarias.DBDataGridView()
+        Me.dgvEnsayos = New Util.DBDataGridView()
         Me.Ensayo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Especificacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Farmacopea = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -609,7 +609,7 @@ Partial Class EnsayosMonocomponente
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents dgvEnsayos As ConsultasVarias.DBDataGridView
+    Friend WithEvents dgvEnsayos As Util.DBDataGridView
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents Label2 As System.Windows.Forms.Label

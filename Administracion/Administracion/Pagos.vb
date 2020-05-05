@@ -3,7 +3,7 @@ Imports ClasesCompartidas
 Imports System.Data.SqlClient
 Imports System.Globalization
 Imports System.IO
-Imports ConsultasVarias.Clases
+Imports Util.Clases
 Imports CrystalDecisions.CrystalReports.Engine
 Imports Microsoft.Office.Core
 Imports Microsoft.Office.Interop.Outlook
@@ -4350,7 +4350,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
 
         If GenerarPDF Then
 
-            Dim frm2 As New ConsultasVarias.VistaPrevia
+            Dim frm2 As New Util.VistaPrevia
             frm2.Reporte = crdoc
 
             frm2.Reporte.SetParameterValue("EsTransferencia", 1)
@@ -4731,7 +4731,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
 
             crdoc.SetParameterValue("MostrarFirma", 1)
 
-            Dim frm2 As New ConsultasVarias.VistaPrevia
+            Dim frm2 As New Util.VistaPrevia
             frm2.Reporte = crdoc
 
             Conexion.EmpresaDeTrabajo = "SurfactanSa"
@@ -5089,7 +5089,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
 
             crdoc.SetParameterValue("MostrarFirma", 1)
 
-            Dim frm2 As New ConsultasVarias.VistaPrevia
+            Dim frm2 As New Util.VistaPrevia
             frm2.Reporte = crdoc
 
             Conexion.EmpresaDeTrabajo = "SurfactanSa"
@@ -5595,7 +5595,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
 
             crdoc.SetParameterValue("MostrarFirma", 1)
 
-            Dim frm2 As New ConsultasVarias.VistaPrevia
+            Dim frm2 As New Util.VistaPrevia
             frm2.Reporte = crdoc
 
             Conexion.EmpresaDeTrabajo = "SurfactanSa"
@@ -5719,7 +5719,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
 
             crdoc.SetParameterValue("MostrarFirma", 1)
 
-            Dim frm2 As New ConsultasVarias.VistaPrevia
+            Dim frm2 As New Util.VistaPrevia
             frm2.Reporte = crdoc
 
             Conexion.EmpresaDeTrabajo = "SurfactanSa"
@@ -5925,7 +5925,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
 
             If GenerarPDF Then
 
-                Dim frm2 As New ConsultasVarias.VistaPrevia
+                Dim frm2 As New Util.VistaPrevia
                 frm2.Reporte = crdoc
 
                 Conexion.EmpresaDeTrabajo = "SurfactanSa"

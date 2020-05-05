@@ -1,9 +1,9 @@
-﻿Imports ConsultasVarias.Interfaces
+﻿Imports Util.Interfaces
 
-Public Class ImpresionPlanillaEnsayosMP : Implements ConsultasVarias.Interfaces.IAyudaMPs
+Public Class ImpresionPlanillaEnsayosMP : Implements Util.Interfaces.IAyudaMPs
 
     Private Sub btnAyuda_Click(sender As Object, e As EventArgs) Handles btnAyuda.Click
-        With New ConsultasVarias.AyudaMPs
+        With New Util.AyudaMPs
             .ShowDialog(Me)
         End With
     End Sub
@@ -173,7 +173,7 @@ Public Class ImpresionPlanillaEnsayosMP : Implements ConsultasVarias.Interfaces.
             WTabla.Rows.Add(r)
         Next
 
-        With New ConsultasVarias.VistaPrevia
+        With New Util.VistaPrevia
             .Reporte = New PlanillaEnsayos
             .Reporte.SetDataSource(WTabla)
             '.Mostrar()

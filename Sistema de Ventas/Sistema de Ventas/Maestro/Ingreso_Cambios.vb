@@ -1,6 +1,6 @@
-﻿Imports ConsultasVarias
-Imports ConsultasVarias.Clases.Query
-Imports ConsultasVarias.Clases.Helper
+﻿Imports Util
+Imports Util.Clases.Query
+Imports Util.Clases.Helper
 Public Class Ingreso_Cambios: Implements IConsultaCambios
 
     Private Sub Ingreso_Cambios_Load(sender As Object, e As EventArgs) Handles MyBase.Load

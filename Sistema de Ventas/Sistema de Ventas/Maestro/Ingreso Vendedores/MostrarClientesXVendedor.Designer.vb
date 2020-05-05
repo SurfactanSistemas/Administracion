@@ -26,7 +26,7 @@ Partial Class MostrarClientesXVendedor
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.label1 = New System.Windows.Forms.Label()
-        Me.DGV_ClientesXVendedor = New ConsultasVarias.DBDataGridView()
+        Me.DGV_ClientesXVendedor = New Util.DBDataGridView()
         Me.txtNroVendedor = New System.Windows.Forms.TextBox()
         Me.txtNomVendedor = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -199,7 +199,7 @@ Partial Class MostrarClientesXVendedor
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Private WithEvents Label2 As System.Windows.Forms.Label
     Private WithEvents label1 As System.Windows.Forms.Label
-    Friend WithEvents DGV_ClientesXVendedor As ConsultasVarias.DBDataGridView
+    Friend WithEvents DGV_ClientesXVendedor As Util.DBDataGridView
     Friend WithEvents txtNroVendedor As System.Windows.Forms.TextBox
     Friend WithEvents txtNomVendedor As System.Windows.Forms.TextBox
     Friend WithEvents Label3 As System.Windows.Forms.Label

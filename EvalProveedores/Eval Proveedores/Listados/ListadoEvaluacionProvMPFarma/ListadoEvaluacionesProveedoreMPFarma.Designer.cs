@@ -35,7 +35,7 @@
             this.Label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.dgvProveedores = new ConsultasVarias.DBDataGridView();
+            this.dgvProveedores = new Util.DBDataGridView();
             this.Listar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -348,7 +348,7 @@
         private System.Windows.Forms.Button btnPantalla;
         private System.Windows.Forms.Button btnImprimir;
         private System.Windows.Forms.Button btnCerrar;
-        private ConsultasVarias.DBDataGridView dgvProveedores;
+        private Util.DBDataGridView dgvProveedores;
         private System.Windows.Forms.Button btnExportar;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Listar;

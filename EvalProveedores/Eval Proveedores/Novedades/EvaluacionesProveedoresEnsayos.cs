@@ -24,7 +24,7 @@ namespace Eval_Proveedores.Novedades
         private void _CargarDatos()
         {
             DataTable datos =
-                ConsultasVarias.Clases.Query.GetAll(
+                Util.Clases.Query.GetAll(
                     "SELECT ee.Proveedor, p.Nombre, ee.Periodo, ee.Mes, ee.Ano, ee.Fecha, ee.Vencimiento, ee.Evaluador, ee.Calificacion FROM EvaluaEnsayos ee INNER JOIN Proveedor p ON p.Proveedor= ee.Proveedor order by p.Nombre, ee.Ano DESC, ee.Mes DESC");
 
             dgvEvaluaciones.DataSource = datos;

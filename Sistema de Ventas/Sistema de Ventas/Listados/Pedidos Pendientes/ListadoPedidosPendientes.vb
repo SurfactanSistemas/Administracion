@@ -1,7 +1,7 @@
 ﻿
-Imports ConsultasVarias
-Imports ConsultasVarias.Clases.Helper
-Imports ConsultasVarias.Clases.Query
+Imports Util
+Imports Util.Clases.Helper
+Imports Util.Clases.Query
 Imports CrystalDecisions.Shared
 
 Public Class ListadoPedidosPendientes : Implements IBuscadorCliente, IBuscadorVendedor

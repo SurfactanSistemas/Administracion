@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccesoADatos", "AccesoADato
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logica-Negocio", "Logica-Negocio\Logica-Negocio.csproj", "{E67E8CF4-04C9-4AFD-BDA7-AC28A3E6594D}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ConsultasVarias", "..\ConsultasVarias\ConsultasVarias\ConsultasVarias.vbproj", "{CC5D60FD-9755-4C61-B96C-F56173586BB9}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Util", "..\Util\Util\Util.vbproj", "{CC5D60FD-9755-4C61-B96C-F56173586BB9}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "EvaluacionProvMPFarma", "..\Administracion\EvaluacionProvMPFarma\EvaluacionProvMPFarma.vbproj", "{27070567-9E32-498F-83BF-641C853E8ACA}"
 EndProject

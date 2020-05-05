@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using ConsultasVarias.Clases;
+using Util.Clases;
 
 namespace Eval_Proveedores.Novedades
 {

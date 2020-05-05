@@ -1,6 +1,6 @@
-﻿Imports ConsultasVarias
-Imports ConsultasVarias.Clases.Query
-Imports ConsultasVarias.Clases.Helper
+﻿Imports Util
+Imports Util.Clases.Query
+Imports Util.Clases.Helper
 Public Class Listar_Cambios
 
     Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles btnCerrar.Click

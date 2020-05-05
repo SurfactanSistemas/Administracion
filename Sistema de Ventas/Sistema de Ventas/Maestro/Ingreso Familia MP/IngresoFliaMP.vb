@@ -1,5 +1,5 @@
-﻿Imports ConsultasVarias
-Imports ConsultasVarias.Clases.Query
+﻿Imports Util
+Imports Util.Clases.Query
 
 Public Class IngresoFliaMP : Implements  IAgregarFliaMP
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles btnCerrar.Click

@@ -25,7 +25,7 @@ Partial Class BuscadorProveedor
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.txtBuscardorProv = New System.Windows.Forms.TextBox()
         Me.btnVolver_PnlProveedores = New System.Windows.Forms.Button()
-        Me.DGV_Proveedores = New ConsultasVarias.DBDataGridView()
+        Me.DGV_Proveedores = New Util.DBDataGridView()
         Me.CodigoProv = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DescripcionProv = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel8 = New System.Windows.Forms.Panel()
@@ -136,7 +136,7 @@ Partial Class BuscadorProveedor
     End Sub
     Friend WithEvents txtBuscardorProv As System.Windows.Forms.TextBox
     Friend WithEvents btnVolver_PnlProveedores As System.Windows.Forms.Button
-    Friend WithEvents DGV_Proveedores As ConsultasVarias.DBDataGridView
+    Friend WithEvents DGV_Proveedores As Util.DBDataGridView
     Friend WithEvents CodigoProv As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DescripcionProv As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Panel8 As System.Windows.Forms.Panel

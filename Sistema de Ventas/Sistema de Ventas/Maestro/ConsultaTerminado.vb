@@ -1,6 +1,6 @@
-﻿Imports ConsultasVarias
-Imports ConsultasVarias.Clases.Query
-Imports ConsultasVarias.Clases.Helper
+﻿Imports Util
+Imports Util.Clases.Query
+Imports Util.Clases.Helper
 Public Class ConsultaTerminado
 
     Private Sub DbDataGridView1_CellMouseDoubleClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DGV_Terminado.CellMouseDoubleClick

@@ -1,6 +1,6 @@
 ﻿Imports System.IO
-Imports ConsultasVarias
-Imports ConsultasVarias.Interfaces
+Imports Util
+Imports Util.Interfaces
 
 Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecificaciones, IListaConsultas, IAyudaPTs, IAyudaEnsayos, IIngresoClaveSeguridad
 

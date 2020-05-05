@@ -1,8 +1,8 @@
-﻿Imports ConsultasVarias
-Imports ConsultasVarias.Interfaces
-Imports ConsultasVarias.Clases
-Imports ConsultasVarias.Clases.Helper
-Imports ConsultasVarias.Clases.Query
+﻿Imports Util
+Imports Util.Interfaces
+Imports Util.Clases
+Imports Util.Clases.Helper
+Imports Util.Clases.Query
 
 Public Class ListadoLaudosMPPorCodigo : Implements IAyudaMPs, IExportar
 

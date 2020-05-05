@@ -32,7 +32,7 @@ Partial Class MostrarPTsXlinea
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txtNomLineaVen = New System.Windows.Forms.TextBox()
         Me.txtNroLineaVen = New System.Windows.Forms.TextBox()
-        Me.DGV_PTsXLinVen = New ConsultasVarias.DBDataGridView()
+        Me.DGV_PTsXLinVen = New Util.DBDataGridView()
         Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
@@ -201,7 +201,7 @@ Partial Class MostrarPTsXlinea
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents txtNomLineaVen As System.Windows.Forms.TextBox
     Friend WithEvents txtNroLineaVen As System.Windows.Forms.TextBox
-    Friend WithEvents DGV_PTsXLinVen As ConsultasVarias.DBDataGridView
+    Friend WithEvents DGV_PTsXLinVen As Util.DBDataGridView
     Friend WithEvents Codigo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

@@ -54,7 +54,7 @@ Public Class Login
             Dim WBaseDatos As String = CType(cmbEmpresas.SelectedItem, DataRowView).Item("BaseDatos")
 
             Conexion.EmpresaDeTrabajo = WBaseDatos
-            ConsultasVarias.Clases.Conexion.EmpresaDeTrabajo = WBaseDatos
+            Util.Clases.Conexion.EmpresaDeTrabajo = WBaseDatos
 
             Dim WOperador As DataRow = GetSingle("SELECT Operador, Descripcion FROM Operador WHERE UPPER(Clave) = '" & txtClave.Text & "'", WBaseDatos)
 
@@ -101,7 +101,7 @@ Public Class Login
             Dim WBaseDatos As String = CType(cmbEmpresas.SelectedItem, DataRowView).Item("BaseDatos")
 
             Conexion.EmpresaDeTrabajo = WBaseDatos
-            ConsultasVarias.Clases.Conexion.EmpresaDeTrabajo = WBaseDatos
+            Util.Clases.Conexion.EmpresaDeTrabajo = WBaseDatos
 
             Dim WOperador As DataRow = GetSingle("SELECT Operador, Descripcion FROM Operador WHERE UPPER(Clave) = '" & txtClave.Text & "'", WBaseDatos)
 

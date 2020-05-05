@@ -1,4 +1,4 @@
-﻿Imports ConsultasVarias.Clases.Query
+﻿Imports Util.Clases.Query
 Public Class AgregarFliaMP
     Sub New(ByVal Accion As Integer, Optional ByVal Descripcion As String = "")
 

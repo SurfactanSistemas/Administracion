@@ -39,7 +39,7 @@ Partial Class IngresoDatosMostrarEnCertificadosAnalisis
         Me.lblDescCliente = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.lblDescProducto = New System.Windows.Forms.Label()
-        Me.dgvDatos = New ConsultasVarias.DBDataGridView()
+        Me.dgvDatos = New Util.DBDataGridView()
         Me.Ensayo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Valor = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -293,7 +293,7 @@ Partial Class IngresoDatosMostrarEnCertificadosAnalisis
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
-    Friend WithEvents dgvDatos As ConsultasVarias.DBDataGridView
+    Friend WithEvents dgvDatos As Util.DBDataGridView
     Friend WithEvents txtProducto As System.Windows.Forms.MaskedTextBox
     Friend WithEvents lblDescProducto As System.Windows.Forms.Label
     Friend WithEvents txtCliente As System.Windows.Forms.MaskedTextBox

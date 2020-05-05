@@ -32,7 +32,7 @@ Partial Class ListadoDevoluciones
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.dgvDevoluciones = New ConsultasVarias.DBDataGridView()
+        Me.dgvDevoluciones = New Util.DBDataGridView()
         Me.Devolucion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FechaOrd = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -602,7 +602,7 @@ Partial Class ListadoDevoluciones
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents dgvDevoluciones As ConsultasVarias.DBDataGridView
+    Friend WithEvents dgvDevoluciones As Util.DBDataGridView
     Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents panel99 As System.Windows.Forms.GroupBox
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox

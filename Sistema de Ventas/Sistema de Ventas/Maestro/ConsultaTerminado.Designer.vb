@@ -26,7 +26,7 @@ Partial Class ConsultaTerminado
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.DGV_Terminado = New ConsultasVarias.DBDataGridView()
+        Me.DGV_Terminado = New Util.DBDataGridView()
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -138,7 +138,7 @@ Partial Class ConsultaTerminado
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Private WithEvents Label6 As System.Windows.Forms.Label
     Private WithEvents Label7 As System.Windows.Forms.Label
-    Friend WithEvents DGV_Terminado As ConsultasVarias.DBDataGridView
+    Friend WithEvents DGV_Terminado As Util.DBDataGridView
     Friend WithEvents btnCerrar As System.Windows.Forms.Button
     Friend WithEvents Codigo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn

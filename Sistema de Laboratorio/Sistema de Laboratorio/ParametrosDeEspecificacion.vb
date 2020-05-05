@@ -1,4 +1,4 @@
-﻿Imports ConsultasVarias
+﻿Imports Util
 
 Public Class ParametrosDeEspecificacion
     Dim Renglon As Integer

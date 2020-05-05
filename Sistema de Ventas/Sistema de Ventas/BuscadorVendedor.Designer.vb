@@ -26,7 +26,7 @@ Partial Class BuscadorVendedor
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.label1 = New System.Windows.Forms.Label()
-        Me.DGV_Vendedores = New ConsultasVarias.DBDataGridView()
+        Me.DGV_Vendedores = New Util.DBDataGridView()
         Me.TxtBuscador = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -147,7 +147,7 @@ Partial Class BuscadorVendedor
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Private WithEvents Label2 As System.Windows.Forms.Label
     Private WithEvents label1 As System.Windows.Forms.Label
-    Friend WithEvents DGV_Vendedores As ConsultasVarias.DBDataGridView
+    Friend WithEvents DGV_Vendedores As Util.DBDataGridView
     Friend WithEvents TxtBuscador As System.Windows.Forms.TextBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Codigo As System.Windows.Forms.DataGridViewTextBoxColumn

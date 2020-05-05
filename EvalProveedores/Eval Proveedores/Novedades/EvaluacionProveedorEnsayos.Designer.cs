@@ -71,7 +71,7 @@
             this.lblCalificacion1 = new System.Windows.Forms.Label();
             this.lblCalificacion2 = new System.Windows.Forms.Label();
             this.lblCalificacion3 = new System.Windows.Forms.Label();
-            this.dgvDatos = new ConsultasVarias.DBDataGridView();
+            this.dgvDatos = new Util.DBDataGridView();
             this.Parametros = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Criterio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Calificacion1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -680,7 +680,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lblAviso;
-        private ConsultasVarias.DBDataGridView dgvDatos;
+        private Util.DBDataGridView dgvDatos;
         private System.Windows.Forms.GroupBox gbSectores;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox cmbSector1;

@@ -1,4 +1,4 @@
-﻿Imports ConsultasVarias
+﻿Imports Util
 
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class IngresoEspecificacionesMP
@@ -60,7 +60,7 @@ Partial Class IngresoEspecificacionesMP
         Me.Label3 = New System.Windows.Forms.Label()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.dgvEspecif = New ConsultasVarias.DBDataGridView()
+        Me.dgvEspecif = New Util.DBDataGridView()
         Me.NroRenglon = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Ensayo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Especificacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -85,7 +85,7 @@ Partial Class IngresoEspecificacionesMP
         Me.Variable9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Variable10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
-        Me.dgvEspecifIngles = New ConsultasVarias.DBDataGridView()
+        Me.dgvEspecifIngles = New Util.DBDataGridView()
         Me.NroRenglonIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.EnsayoIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.EspecificacionIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -789,7 +789,7 @@ Partial Class IngresoEspecificacionesMP
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents dgvEspecif As DBDataGridView
     Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
-    Friend WithEvents dgvEspecifIngles As ConsultasVarias.DBDataGridView
+    Friend WithEvents dgvEspecifIngles As Util.DBDataGridView
     Friend WithEvents btnHistorialCambios As System.Windows.Forms.Button
     Friend WithEvents txtCondicionMuestreo As System.Windows.Forms.TextBox
     Friend WithEvents Label4 As System.Windows.Forms.Label

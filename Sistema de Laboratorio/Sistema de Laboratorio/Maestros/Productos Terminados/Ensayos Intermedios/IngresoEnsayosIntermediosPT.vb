@@ -1,7 +1,7 @@
 ﻿Imports System.Configuration
 Imports System.IO
 Imports System.Text.RegularExpressions
-Imports ConsultasVarias
+Imports Util
 
 Imports CrystalDecisions.Shared
 Imports info.lundin.math
@@ -1077,7 +1077,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
         Directory.CreateDirectory(RUTA_TEMP)
 
-        Dim frm As New ConsultasVarias.VistaPrevia
+        Dim frm As New Util.VistaPrevia
 
         With frm
             .Reporte = New ValoresEnsayosIntermediosPTFarma
@@ -1110,7 +1110,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
     Private Sub _GuardarNuevaVersionPDFConEnsayosIntermedios()
 
-        Dim frm As ConsultasVarias.VistaPrevia = New ConsultasVarias.VistaPrevia
+        Dim frm As Util.VistaPrevia = New Util.VistaPrevia
 
         With frm
             .Reporte = New ValoresEnsayosIntermediosPTFarma

@@ -30,7 +30,7 @@ Partial Class ConsultaDeVersionesComposicionPT
         Me.txtFechaInicial = New System.Windows.Forms.TextBox()
         Me.txtFechaFinal = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.DGV_Composicion = New ConsultasVarias.DBDataGridView()
+        Me.DGV_Composicion = New Util.DBDataGridView()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txtDescripcion = New System.Windows.Forms.TextBox()
@@ -315,7 +315,7 @@ Partial Class ConsultaDeVersionesComposicionPT
     Friend WithEvents txtFechaInicial As System.Windows.Forms.TextBox
     Friend WithEvents txtFechaFinal As System.Windows.Forms.TextBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents DGV_Composicion As ConsultasVarias.DBDataGridView
+    Friend WithEvents DGV_Composicion As Util.DBDataGridView
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents txtDescripcion As System.Windows.Forms.TextBox

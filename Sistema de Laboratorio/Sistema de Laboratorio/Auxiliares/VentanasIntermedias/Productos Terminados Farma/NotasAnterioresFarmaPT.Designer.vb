@@ -26,7 +26,7 @@ Partial Class NotasAnterioresFarmaPT
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.dgvNotasAnteriores = New ConsultasVarias.DBDataGridView()
+        Me.dgvNotasAnteriores = New Util.DBDataGridView()
         Me.Nota = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnAceptar = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
@@ -140,7 +140,7 @@ Partial Class NotasAnterioresFarmaPT
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents dgvNotasAnteriores As ConsultasVarias.DBDataGridView
+    Friend WithEvents dgvNotasAnteriores As Util.DBDataGridView
     Friend WithEvents Nota As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents btnAceptar As System.Windows.Forms.Button
 End Class

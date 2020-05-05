@@ -37,7 +37,7 @@ Partial Class Consulta_de_revisiones_de_ensayos
         Me.txtFechaEntraga = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.DGV_Ensayos = New ConsultasVarias.DBDataGridView()
+        Me.DGV_Ensayos = New Util.DBDataGridView()
         Me.Version = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Etapaa = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Participantes = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -314,7 +314,7 @@ Partial Class Consulta_de_revisiones_de_ensayos
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents DGV_Ensayos As ConsultasVarias.DBDataGridView
+    Friend WithEvents DGV_Ensayos As Util.DBDataGridView
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Private WithEvents Label6 As System.Windows.Forms.Label
     Private WithEvents Label7 As System.Windows.Forms.Label

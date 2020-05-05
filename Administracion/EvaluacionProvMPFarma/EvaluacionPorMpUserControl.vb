@@ -1,7 +1,7 @@
 ﻿Imports System.ComponentModel
 Imports System.Threading
-Imports ConsultasVarias
-Imports ConsultasVarias.Clases
+Imports Util
+Imports Util.Clases
 Imports EvaluacionProvMPFarma.Helper
 
 Public Class EvaluacionPorMpUserControl

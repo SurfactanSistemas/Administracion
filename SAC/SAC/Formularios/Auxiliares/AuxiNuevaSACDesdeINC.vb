@@ -218,7 +218,7 @@ Public Class AuxiNuevaSACDesdeINC
             Dim WTipo As String = cmbTipo.SelectedIndex
             Dim WAnio As String = Mid(txtFecha.Text, 7, 4) 'txtAnio.Text
 
-            Dim frm As New ConsultasVarias.VistaPrevia
+            Dim frm As New Util.VistaPrevia
 
             With frm
 
@@ -228,8 +228,8 @@ Public Class AuxiNuevaSACDesdeINC
 
             End With
 
-            ConsultasVarias.Clases.Conexion.EmpresaDeTrabajo = "SurfactanSa"
-            ConsultasVarias.Clases.Helper._ExportarReporte(frm, ConsultasVarias.Clases.Enumeraciones.FormatoExportacion.PDF, WTipo & WNumero & WAnio & ".pdf", "C:\TempReclamos\")
+            Util.Clases.Conexion.EmpresaDeTrabajo = "SurfactanSa"
+            Util.Clases.Helper._ExportarReporte(frm, Util.Clases.Enumeraciones.FormatoExportacion.PDF, WTipo & WNumero & WAnio & ".pdf", "C:\TempReclamos\")
 
             If File.Exists("C:\TempReclamos\" & WTipo & WNumero & WAnio & ".pdf") Then
                 oMsg.Attachments.Add("C:\TempReclamos\" & WTipo & WNumero & WAnio & ".pdf")

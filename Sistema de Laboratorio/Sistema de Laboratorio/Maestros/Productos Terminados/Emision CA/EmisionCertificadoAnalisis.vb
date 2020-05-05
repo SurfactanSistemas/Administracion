@@ -1,4 +1,4 @@
-﻿Imports ConsultasVarias
+﻿Imports Util
 Imports CrystalDecisions.CrystalReports.Engine
 Imports CrystalDecisions.Shared
 Imports Laboratorio.Entidades

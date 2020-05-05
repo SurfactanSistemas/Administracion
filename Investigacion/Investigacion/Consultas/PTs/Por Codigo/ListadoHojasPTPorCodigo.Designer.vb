@@ -1,8 +1,8 @@
-﻿Imports ConsultasVarias
-Imports ConsultasVarias.Clases
-Imports ConsultasVarias.Clases.Query
-Imports ConsultasVarias.Clases.Helper
-Imports ConsultasVarias.Clases.Globales
+﻿Imports Util
+Imports Util.Clases
+Imports Util.Clases.Query
+Imports Util.Clases.Helper
+Imports Util.Clases.Globales
 
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class ListadoHojasPTPorCodigo
@@ -63,7 +63,7 @@ Partial Class ListadoHojasPTPorCodigo
         Me.ToolStripMenuItem5 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem6 = New System.Windows.Forms.ToolStripMenuItem()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.dgvLaudos = New ConsultasVarias.DBDataGridView()
+        Me.dgvLaudos = New Util.DBDataGridView()
         Me.btnCalcularSaldos = New System.Windows.Forms.Button()
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.Panel1.SuspendLayout()

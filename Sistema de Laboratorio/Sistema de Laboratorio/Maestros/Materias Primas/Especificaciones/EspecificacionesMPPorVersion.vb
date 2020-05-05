@@ -1,5 +1,5 @@
-﻿Imports ConsultasVarias
-Imports ConsultasVarias.Interfaces
+﻿Imports Util
+Imports Util.Interfaces
 Imports Laboratorio.Entidades
 
 Public Class EspecificacionesMPPorVersion : Implements IAyudaMPs

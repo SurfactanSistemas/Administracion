@@ -1,5 +1,5 @@
 ﻿
-Imports ConsultasVarias.Clases.Query
+Imports Util.Clases.Query
 Public Class Consulta_Orden_Trabajo
 
     Private Sub Consulta_Orden_Trabajo_Load(sender As Object, e As EventArgs) Handles MyBase.Load

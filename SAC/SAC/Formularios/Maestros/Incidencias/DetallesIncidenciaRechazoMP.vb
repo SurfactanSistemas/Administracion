@@ -1,7 +1,7 @@
 ﻿Imports System.Configuration
 Imports System.IO
 Imports System.Text.RegularExpressions
-Imports ConsultasVarias
+Imports Util
 Imports CrystalDecisions.Shared
 Imports Microsoft.Office.Interop.Outlook
 Imports Microsoft.VisualBasic.FileIO
@@ -563,7 +563,7 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
             '
             ' Generamos el PDf para poder adjuntarlo.
             '
-            Dim frm As New ConsultasVarias.VistaPrevia
+            Dim frm As New Util.VistaPrevia
 
             With frm
 
@@ -582,8 +582,8 @@ Public Class DetallesIncidenciaRechazoMP : Implements IAuxiNuevaSACDesdeINC, IAy
 
                 Directory.CreateDirectory(WRuta)
 
-                ConsultasVarias.Clases.Conexion.EmpresaDeTrabajo = "SurfactanSa"
-                ConsultasVarias.Clases.Helper._ExportarReporte(frm, ConsultasVarias.Clases.Enumeraciones.FormatoExportacion.PDF, WNombreArchivo, WRuta)
+                Util.Clases.Conexion.EmpresaDeTrabajo = "SurfactanSa"
+                Util.Clases.Helper._ExportarReporte(frm, Util.Clases.Enumeraciones.FormatoExportacion.PDF, WNombreArchivo, WRuta)
 
                 If File.Exists(WRuta & WNombreArchivo) Then oMsg.Attachments.Add(WRuta & WNombreArchivo)
 

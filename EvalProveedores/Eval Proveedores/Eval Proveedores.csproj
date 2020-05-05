@@ -63,7 +63,7 @@
     <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
     <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="DataGridViewCustomColumn">
-      <HintPath>..\..\ConsultasVarias\ConsultasVarias\CustomControls\DataGridViewCustomColumn.dll</HintPath>
+      <HintPath>..\..\Util\Util\CustomControls\DataGridViewCustomColumn.dll</HintPath>
     </Reference>
     <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
     <Reference Include="Microsoft.Office.Interop.Outlook, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
@@ -1106,9 +1106,9 @@
       <Project>{27070567-9E32-498F-83BF-641C853E8ACA}</Project>
       <Name>EvaluacionProvMPFarma</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\ConsultasVarias\ConsultasVarias\ConsultasVarias.vbproj">
+    <ProjectReference Include="..\..\Util\Util\Util.vbproj">
       <Project>{CC5D60FD-9755-4C61-B96C-F56173586BB9}</Project>
-      <Name>ConsultasVarias</Name>
+      <Name>Util</Name>
     </ProjectReference>
     <ProjectReference Include="..\Logica-Negocio\Logica-Negocio.csproj">
       <Project>{E67E8CF4-04C9-4AFD-BDA7-AC28A3E6594D}</Project>

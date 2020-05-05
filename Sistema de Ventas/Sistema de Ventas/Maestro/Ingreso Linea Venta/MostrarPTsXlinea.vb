@@ -1,4 +1,4 @@
-﻿Imports ConsultasVarias.Clases.Query
+﻿Imports Util.Clases.Query
 
 Public Class MostrarPTsXlinea
     Sub New(ByVal NroLineaVenta As Integer, ByVal NomLineaVenta As String)

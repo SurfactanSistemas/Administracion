@@ -1,4 +1,4 @@
-﻿Imports ConsultasVarias.Clases.Query
+﻿Imports Util.Clases.Query
 Public Class AgregarVendedor
     Sub New(ByVal Codigo As Integer, Optional ByVal Nombre As String = "", Optional ByVal Email1 As String = "", Optional ByVal Email2 As String = "")
 

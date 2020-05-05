@@ -1,4 +1,4 @@
-﻿Imports ConsultasVarias
+﻿Imports Util
 
 Public Class ListaEnsayos : Implements IActualizarPorNuevoIngreso, IListarReporteDesdeHastaBasico
 
@@ -93,13 +93,13 @@ Public Class ListaEnsayos : Implements IActualizarPorNuevoIngreso, IListarReport
 
     End Sub
 
-    Public Sub _ProcesarListarReporteDesdeHastaBasico(ByVal Desde As String, ByVal Hasta As String, ByVal TipoVisualizacion As ConsultasVarias.Clases.Enumeraciones.TipoVisualizacionReporte) Implements IListarReporteDesdeHastaBasico._ProcesarListarReporteDesdeHastaBasico
+    Public Sub _ProcesarListarReporteDesdeHastaBasico(ByVal Desde As String, ByVal Hasta As String, ByVal TipoVisualizacion As Util.Clases.Enumeraciones.TipoVisualizacionReporte) Implements IListarReporteDesdeHastaBasico._ProcesarListarReporteDesdeHastaBasico
         With New VistaPrevia
             .Reporte = New ReporteListadoEnsayos
             .Formula = "{Ensayos.Codigo} IN " & Desde & " TO " & Hasta & ""
             .Base = IIf(_EsPellital, "Pelitall_II", "Surfactan_II")
 
-            If TipoVisualizacion = ConsultasVarias.Clases.Enumeraciones.TipoVisualizacionReporte.Pantalla Then
+            If TipoVisualizacion = Util.Clases.Enumeraciones.TipoVisualizacionReporte.Pantalla Then
                 .Mostrar()
             Else
                 .Imprimir()

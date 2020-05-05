@@ -41,7 +41,7 @@ Partial Class HojaIngresoFrases
         Me.pnlListar = New System.Windows.Forms.Panel()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.DGV_ListadoI = New ConsultasVarias.DBDataGridView()
+        Me.DGV_ListadoI = New Util.DBDataGridView()
         Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Observa = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -349,7 +349,7 @@ Partial Class HojaIngresoFrases
     Friend WithEvents pnlListar As System.Windows.Forms.Panel
     Friend WithEvents txtBuscadorListar As System.Windows.Forms.TextBox
     Friend WithEvents btnVolPnlListar As System.Windows.Forms.Button
-    Friend WithEvents DGV_ListadoI As ConsultasVarias.DBDataGridView
+    Friend WithEvents DGV_ListadoI As Util.DBDataGridView
     Friend WithEvents Codigo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Observa As System.Windows.Forms.DataGridViewTextBoxColumn

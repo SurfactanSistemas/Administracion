@@ -62,12 +62,12 @@ Partial Class IngresoDatosAdicMP
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.DGV_FrasesH = New ConsultasVarias.DBDataGridView()
+        Me.DGV_FrasesH = New Util.DBDataGridView()
         Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DescripcionH = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ObservacionesH = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
-        Me.DGV_FrasesP = New ConsultasVarias.DBDataGridView()
+        Me.DGV_FrasesP = New Util.DBDataGridView()
         Me.CodigoFraseP = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DescripcionFraseP = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Observaciones = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -93,14 +93,14 @@ Partial Class IngresoDatosAdicMP
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
-        Me.DGV_DemoCompPeligrosos = New ConsultasVarias.DBDataGridView()
+        Me.DGV_DemoCompPeligrosos = New Util.DBDataGridView()
         Me.Denominacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage6 = New System.Windows.Forms.TabPage()
-        Me.DGV_FrasesHIngles = New ConsultasVarias.DBDataGridView()
+        Me.DGV_FrasesHIngles = New Util.DBDataGridView()
         Me.CodigoFraseHINgles = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DescripcionFraseHINgles = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage7 = New System.Windows.Forms.TabPage()
-        Me.DGV_FrasesPIngles = New ConsultasVarias.DBDataGridView()
+        Me.DGV_FrasesPIngles = New Util.DBDataGridView()
         Me.CodigoFrasesPIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DescripcionFrasesPIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.pnlConsultarDatos = New System.Windows.Forms.Panel()
@@ -108,7 +108,7 @@ Partial Class IngresoDatosAdicMP
         Me.btnVolverConsultarDatos = New System.Windows.Forms.Button()
         Me.txtConsultaDatos = New System.Windows.Forms.TextBox()
         Me.LstboxConsultaDatos = New System.Windows.Forms.ListBox()
-        Me.DGV_Consulta = New ConsultasVarias.DBDataGridView()
+        Me.DGV_Consulta = New Util.DBDataGridView()
         Me.Codigo1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ObservacionesConsulta = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -1317,14 +1317,14 @@ Partial Class IngresoDatosAdicMP
     Friend WithEvents cbxCarburante3 As System.Windows.Forms.ComboBox
     Friend WithEvents cbxInflamable2 As System.Windows.Forms.ComboBox
     Friend WithEvents cbxExplosivo1 As System.Windows.Forms.ComboBox
-    Friend WithEvents DGV_FrasesH As ConsultasVarias.DBDataGridView
-    Friend WithEvents DGV_FrasesP As ConsultasVarias.DBDataGridView
+    Friend WithEvents DGV_FrasesH As Util.DBDataGridView
+    Friend WithEvents DGV_FrasesP As Util.DBDataGridView
     Friend WithEvents Label16 As System.Windows.Forms.Label
     Friend WithEvents Label15 As System.Windows.Forms.Label
     Friend WithEvents Label14 As System.Windows.Forms.Label
     Friend WithEvents Label13 As System.Windows.Forms.Label
     Friend WithEvents Label12 As System.Windows.Forms.Label
-    Friend WithEvents DGV_DemoCompPeligrosos As ConsultasVarias.DBDataGridView
+    Friend WithEvents DGV_DemoCompPeligrosos As Util.DBDataGridView
     Friend WithEvents masktxtCodigo As System.Windows.Forms.MaskedTextBox
     Friend WithEvents cbxTipoProducto As System.Windows.Forms.ComboBox
     Friend WithEvents Label20 As System.Windows.Forms.Label
@@ -1349,7 +1349,7 @@ Partial Class IngresoDatosAdicMP
     Friend WithEvents txtConsultaDatos As System.Windows.Forms.TextBox
     Friend WithEvents btnVolverConsultarDatos As System.Windows.Forms.Button
     Friend WithEvents btnAnteriorPag As System.Windows.Forms.Button
-    Friend WithEvents DGV_Consulta As ConsultasVarias.DBDataGridView
+    Friend WithEvents DGV_Consulta As Util.DBDataGridView
     Friend WithEvents btnImprimirReporte As System.Windows.Forms.Button
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents Label21 As System.Windows.Forms.Label
@@ -1362,9 +1362,9 @@ Partial Class IngresoDatosAdicMP
     Friend WithEvents txtTipoEtiqueta As System.Windows.Forms.TextBox
     Friend WithEvents lblTipoEtiqueta As System.Windows.Forms.Label
     Friend WithEvents TabPage6 As System.Windows.Forms.TabPage
-    Friend WithEvents DGV_FrasesHIngles As ConsultasVarias.DBDataGridView
+    Friend WithEvents DGV_FrasesHIngles As Util.DBDataGridView
     Friend WithEvents TabPage7 As System.Windows.Forms.TabPage
-    Friend WithEvents DGV_FrasesPIngles As ConsultasVarias.DBDataGridView
+    Friend WithEvents DGV_FrasesPIngles As Util.DBDataGridView
     Friend WithEvents CodigoFraseHINgles As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DescripcionFraseHINgles As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents CodigoFrasesPIngles As System.Windows.Forms.DataGridViewTextBoxColumn

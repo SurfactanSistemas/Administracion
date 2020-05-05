@@ -1,5 +1,5 @@
 ﻿
-Imports ConsultasVarias.Clases.Query
+Imports Util.Clases.Query
 Public Class BuscadorCliente
 
     Private Sub BuscadorCliente_Load(sender As Object, e As EventArgs) Handles MyBase.Load

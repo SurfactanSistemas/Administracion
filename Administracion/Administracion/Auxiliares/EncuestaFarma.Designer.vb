@@ -26,7 +26,7 @@ Partial Class EncuestaFarma
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.dgvProductos = New ConsultasVarias.DBDataGridView()
+        Me.dgvProductos = New Util.DBDataGridView()
         Me.Producto = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Enviar = New System.Windows.Forms.DataGridViewCheckBoxColumn()
@@ -266,7 +266,7 @@ Partial Class EncuestaFarma
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents dgvProductos As ConsultasVarias.DBDataGridView
+    Friend WithEvents dgvProductos As Util.DBDataGridView
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents rbIng As System.Windows.Forms.RadioButton
     Friend WithEvents rbEsp As System.Windows.Forms.RadioButton

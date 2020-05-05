@@ -26,7 +26,7 @@ Partial Class IngresoNuevoPoolEnsayos
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.dgvPooles = New ConsultasVarias.DBDataGridView()
+        Me.dgvPooles = New Util.DBDataGridView()
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Valor = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Observacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -202,7 +202,7 @@ Partial Class IngresoNuevoPoolEnsayos
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents dgvPooles As ConsultasVarias.DBDataGridView
+    Friend WithEvents dgvPooles As Util.DBDataGridView
     Friend WithEvents btnGrabar As System.Windows.Forms.Button
     Friend WithEvents btnCancelar As System.Windows.Forms.Button
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox

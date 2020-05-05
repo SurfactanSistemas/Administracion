@@ -1,5 +1,5 @@
-﻿Imports ConsultasVarias
-Imports ConsultasVarias.Interfaces
+﻿Imports Util
+Imports Util.Interfaces
 
 Public Class ImpresionPlanillaEnsayosPT : Implements IAyudaPTs
 
@@ -444,7 +444,7 @@ Public Class ImpresionPlanillaEnsayosPT : Implements IAyudaPTs
             Renglon += 1
         Next
 
-        With New ConsultasVarias.VistaPrevia
+        With New Util.VistaPrevia
             .Reporte = New PlanillaEnsayos
             .Reporte.SetDataSource(WTabla)
             '.Mostrar()

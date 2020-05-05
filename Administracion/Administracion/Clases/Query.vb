@@ -1,5 +1,5 @@
 ﻿Imports System.Data.SqlClient
-'Imports ConsultasVarias.Clases
+'Imports Util.Clases
 
 Module Query
 

@@ -73,7 +73,7 @@ Partial Class IngresoActualizacionHojaProduccionFarma
         Me.btnBajaHoja = New System.Windows.Forms.Button()
         Me.btnNuevaFila = New System.Windows.Forms.Button()
         Me.btnEditarFila = New System.Windows.Forms.Button()
-        Me.DGV_IngredientosHojaProduccion = New ConsultasVarias.DBDataGridView()
+        Me.DGV_IngredientosHojaProduccion = New Util.DBDataGridView()
         Me.Linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.MPoPT = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -90,7 +90,7 @@ Partial Class IngresoActualizacionHojaProduccionFarma
         Me.pnlAyuda = New System.Windows.Forms.Panel()
         Me.btnpnlAyudaVolver = New System.Windows.Forms.Button()
         Me.Label19 = New System.Windows.Forms.Label()
-        Me.DGV_Ayuda = New ConsultasVarias.DBDataGridView()
+        Me.DGV_Ayuda = New Util.DBDataGridView()
         Me.CodigoAyuda = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DescripcionAyuda = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.cbxAyuda = New System.Windows.Forms.ComboBox()
@@ -890,7 +890,7 @@ Partial Class IngresoActualizacionHojaProduccionFarma
     Friend WithEvents txtEquipo As System.Windows.Forms.TextBox
     Friend WithEvents txtRendimientoTeorico As System.Windows.Forms.TextBox
     Friend WithEvents txtRendimientoReal As System.Windows.Forms.TextBox
-    Friend WithEvents DGV_IngredientosHojaProduccion As ConsultasVarias.DBDataGridView
+    Friend WithEvents DGV_IngredientosHojaProduccion As Util.DBDataGridView
     Friend WithEvents cbxTipo As System.Windows.Forms.ComboBox
     Friend WithEvents mastxtMPoPT As System.Windows.Forms.MaskedTextBox
     Friend WithEvents txtDescripcionMPoPT As System.Windows.Forms.TextBox
@@ -930,7 +930,7 @@ Partial Class IngresoActualizacionHojaProduccionFarma
     Friend WithEvents pnlAyuda As System.Windows.Forms.Panel
     Friend WithEvents btnpnlAyudaVolver As System.Windows.Forms.Button
     Friend WithEvents Label19 As System.Windows.Forms.Label
-    Friend WithEvents DGV_Ayuda As ConsultasVarias.DBDataGridView
+    Friend WithEvents DGV_Ayuda As Util.DBDataGridView
     Friend WithEvents CodigoAyuda As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DescripcionAyuda As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents cbxAyuda As System.Windows.Forms.ComboBox

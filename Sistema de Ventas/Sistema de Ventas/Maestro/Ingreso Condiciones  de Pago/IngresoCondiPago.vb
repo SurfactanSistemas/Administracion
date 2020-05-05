@@ -1,5 +1,5 @@
-﻿Imports ConsultasVarias
-Imports ConsultasVarias.Clases.Query
+﻿Imports Util
+Imports Util.Clases.Query
 Public Class IngresoCondiPago : Implements IAgregarPago
 
     Private Sub bntCerrar_Click(sender As Object, e As EventArgs) Handles bntCerrar.Click

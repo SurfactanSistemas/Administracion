@@ -1,5 +1,5 @@
-﻿Imports ConsultasVarias
-Imports ConsultasVarias.Clases.Query
+﻿Imports Util
+Imports Util.Clases.Query
 
 Public Class IngresoRubros : Implements IAgregarRubro
 

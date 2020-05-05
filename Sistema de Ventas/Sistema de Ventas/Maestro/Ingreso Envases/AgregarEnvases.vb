@@ -1,4 +1,4 @@
-﻿Imports ConsultasVarias.Clases.Query
+﻿Imports Util.Clases.Query
 Public Class AgregarEnvases
 
     Sub New(ByVal Codigo As Integer, Optional ByVal Descripcion As String = "", Optional ByVal Abreviatura As String = "", Optional ByVal Kilos As String = "", Optional ByVal Tipo As String = "", Optional ByVal Peso As String = "")

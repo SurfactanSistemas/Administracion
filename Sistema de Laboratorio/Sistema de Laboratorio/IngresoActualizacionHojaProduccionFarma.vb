@@ -1,5 +1,5 @@
 ﻿Imports System.IO
-Imports ConsultasVarias.Clases
+Imports Util.Clases
 
 Public Class IngresoActualizacionHojaProduccionFarma
 

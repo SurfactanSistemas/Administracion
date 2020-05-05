@@ -1,8 +1,8 @@
 ﻿Imports System.Configuration
 Imports System.IO
-Imports ConsultasVarias.Clases
+Imports Util.Clases
 Imports CrystalDecisions.Shared
-Imports Conexion = ConsultasVarias.Clases.Conexion
+Imports Conexion = Util.Clases.Conexion
 
 Public Class Login
 
@@ -65,7 +65,7 @@ Public Class Login
                         Dim WAsunto As String = Datos(6)
                         Dim WCuerpoMsj As String = Datos(7)
 
-                        Dim frm As New ConsultasVarias.VistaPrevia
+                        Dim frm As New Util.VistaPrevia
 
                         With frm
 
@@ -76,10 +76,10 @@ Public Class Login
                         End With
 
                         Conexion.EmpresaDeTrabajo = "SurfactanSa"
-                        ConsultasVarias.Clases.Helper._ExportarReporte(frm, Enumeraciones.FormatoExportacion.PDF, WTipo & WNumero & WAnio & ".pdf", "C:\TempReclamos\")
+                        Util.Clases.Helper._ExportarReporte(frm, Enumeraciones.FormatoExportacion.PDF, WTipo & WNumero & WAnio & ".pdf", "C:\TempReclamos\")
 
                         If File.Exists("C:\TempReclamos\" & WTipo & WNumero & WAnio & ".pdf") Then
-                            ConsultasVarias.Clases.Helper._EnviarEmail(WDirecciones, WAsunto, WCuerpoMsj, {"C:\TempReclamos\" & WTipo & WNumero & WAnio & ".pdf"}, False)
+                            Util.Clases.Helper._EnviarEmail(WDirecciones, WAsunto, WCuerpoMsj, {"C:\TempReclamos\" & WTipo & WNumero & WAnio & ".pdf"}, False)
                         Else
                             MsgBox("No se encontró el archivo " & "C:\TempReclamos\" & WTipo & WNumero & WAnio & ".pdf")
                         End If
@@ -108,7 +108,7 @@ Public Class Login
                             WAnio = OrDefault(WRecl.Item("Ano"), "")
                         End If
 
-                        Dim frm As New ConsultasVarias.VistaPrevia
+                        Dim frm As New Util.VistaPrevia
 
                         With frm
 
@@ -123,10 +123,10 @@ Public Class Login
                         '
                         WDirecciones = _DefinirMailsExtras(WNumero, WDirecciones)
 
-                        ConsultasVarias.Clases.Helper._ExportarReporte(frm, Enumeraciones.FormatoExportacion.PDF, WNumeroTipo & " - " & WAnio & " Reclamo.pdf", "C:\TempReclamos\")
+                        Util.Clases.Helper._ExportarReporte(frm, Enumeraciones.FormatoExportacion.PDF, WNumeroTipo & " - " & WAnio & " Reclamo.pdf", "C:\TempReclamos\")
 
                         If File.Exists("C:\TempReclamos\" & WNumeroTipo & " - " & WAnio & " Reclamo.pdf") Then
-                            ConsultasVarias.Clases.Helper._EnviarEmail(WDirecciones, WAsunto, WCuerpoMsj, {"C:\TempReclamos\" & WNumeroTipo & " - " & WAnio & " Reclamo.pdf"}, WEnviarAutomatico)
+                            Util.Clases.Helper._EnviarEmail(WDirecciones, WAsunto, WCuerpoMsj, {"C:\TempReclamos\" & WNumeroTipo & " - " & WAnio & " Reclamo.pdf"}, WEnviarAutomatico)
                         Else
                             MsgBox("No se encontró el archivo " & "C:\TempReclamos\" & WNumero & "Reclamo.pdf")
                         End If
@@ -137,7 +137,7 @@ Public Class Login
                         Dim WAsunto As String = "" 'Datos(4)
                         Dim WCuerpoMsj As String = "" ' Datos(5)
 
-                        Dim frm As New ConsultasVarias.VistaPrevia
+                        Dim frm As New Util.VistaPrevia
 
                         Dim WTipoProd, WNumeroINC, WArticulo, WNombreComercial, WProveedor, WLoteProv, WLaudo, WEmpresa, WOrden, WReferencia, WTitulo As String
                         WNumeroINC = ""
@@ -234,10 +234,10 @@ Public Class Login
                             If File.Exists(WRuta & WNombreArchivo) Then File.Delete(WRuta & WNombreArchivo)
 
                             Conexion.EmpresaDeTrabajo = "SurfactanSa"
-                            ConsultasVarias.Clases.Helper._ExportarReporte(frm, Enumeraciones.FormatoExportacion.PDF, WNombreArchivo, WRuta)
+                            Util.Clases.Helper._ExportarReporte(frm, Enumeraciones.FormatoExportacion.PDF, WNombreArchivo, WRuta)
 
                             If File.Exists(WRuta & WNombreArchivo) Then
-                                ConsultasVarias.Clases.Helper._EnviarEmail(WDirecciones, WAsunto, WCuerpoMsj, {WRuta & WNombreArchivo}, True)
+                                Util.Clases.Helper._EnviarEmail(WDirecciones, WAsunto, WCuerpoMsj, {WRuta & WNombreArchivo}, True)
                             Else
                                 MsgBox("No se encontró el archivo " & WRuta & WNombreArchivo)
                             End If
@@ -266,10 +266,10 @@ Public Class Login
                                 If File.Exists(WRuta & WNombreArchivo) Then File.Delete(WRuta & WNombreArchivo)
 
                                 Conexion.EmpresaDeTrabajo = "SurfactanSa"
-                                ConsultasVarias.Clases.Helper._ExportarReporte(frm, Enumeraciones.FormatoExportacion.PDF, WNombreArchivo, WRuta)
+                                Util.Clases.Helper._ExportarReporte(frm, Enumeraciones.FormatoExportacion.PDF, WNombreArchivo, WRuta)
 
                                 If File.Exists(WRuta & WNombreArchivo) Then
-                                    ConsultasVarias.Clases.Helper._EnviarEmail(WDirecciones, WAsunto, WCuerpoMsj, {WRuta & WNombreArchivo}, True)
+                                    Util.Clases.Helper._EnviarEmail(WDirecciones, WAsunto, WCuerpoMsj, {WRuta & WNombreArchivo}, True)
                                 Else
                                     MsgBox("No se encontró el archivo " & WRuta & WNombreArchivo)
                                 End If
@@ -293,7 +293,7 @@ Public Class Login
                             WAnio = OrDefault(WRecl.Item("Ano"), "")
                         End If
 
-                        Dim frm As New ConsultasVarias.VistaPrevia
+                        Dim frm As New Util.VistaPrevia
 
                         With frm
 
@@ -308,10 +308,10 @@ Public Class Login
                         '
                         ' De aca, van a venir los mails de los responsables. Agregamos las que faltan.
                         '
-                        'ConsultasVarias.Clases.Helper._ExportarReporte(frm, Enumeraciones.FormatoExportacion.PDF, WNumero & "Reclamo.pdf", "C:\TempReclamos\")
+                        'Util.Clases.Helper._ExportarReporte(frm, Enumeraciones.FormatoExportacion.PDF, WNumero & "Reclamo.pdf", "C:\TempReclamos\")
 
                         'If File.Exists("C:\TempReclamos\" & WNumero & "Reclamo.pdf") Then
-                        ' ConsultasVarias.Clases.Helper._EnviarEmail(WDirecciones, WAsunto, WCuerpoMsj, {"C:\TempReclamos\" & WNumero & "Reclamo.pdf"}, True)
+                        ' Util.Clases.Helper._EnviarEmail(WDirecciones, WAsunto, WCuerpoMsj, {"C:\TempReclamos\" & WNumero & "Reclamo.pdf"}, True)
                         ' Else
                         ' MsgBox("No se encontró el archivo " & "C:\TempReclamos\" & WNumero & "Reclamo.pdf")
                         ' End If
@@ -334,7 +334,7 @@ Public Class Login
                             WAnio = OrDefault(WRecl.Item("Ano"), "")
                         End If
 
-                        Dim frm As New ConsultasVarias.VistaPrevia
+                        Dim frm As New Util.VistaPrevia
 
                         With frm
 
@@ -349,10 +349,10 @@ Public Class Login
                         '
                         WDirecciones = "" '_DefinirMailsExtras(WNumero, WDirecciones)
 
-                        ConsultasVarias.Clases.Helper._ExportarReporte(frm, Enumeraciones.FormatoExportacion.PDF, WNumeroTipo & " - " & WAnio & " Reclamo.pdf", "C:\TempReclamos\")
+                        Util.Clases.Helper._ExportarReporte(frm, Enumeraciones.FormatoExportacion.PDF, WNumeroTipo & " - " & WAnio & " Reclamo.pdf", "C:\TempReclamos\")
 
                         If File.Exists("C:\TempReclamos\" & WNumeroTipo & " - " & WAnio & " Reclamo.pdf") Then
-                            ConsultasVarias.Clases.Helper._EnviarEmail(WDirecciones, WAsunto, WCuerpoMsj, {"C:\TempReclamos\" & WNumeroTipo & " - " & WAnio & " Reclamo.pdf"}, WEnviarAutomatico)
+                            Util.Clases.Helper._EnviarEmail(WDirecciones, WAsunto, WCuerpoMsj, {"C:\TempReclamos\" & WNumeroTipo & " - " & WAnio & " Reclamo.pdf"}, WEnviarAutomatico)
                         Else
                             MsgBox("No se encontró el archivo " & "C:\TempReclamos\" & WNumero & "Reclamo.pdf")
                         End If
@@ -373,7 +373,7 @@ Public Class Login
                             WAnio = OrDefault(WRecl.Item("Ano"), "")
                         End If
 
-                        Dim frm As New ConsultasVarias.VistaPrevia
+                        Dim frm As New Util.VistaPrevia
                         Dim WRutaArchRelacSAC As String = ConfigurationManager.AppSettings("ARCHIVOS_RELACIONADOS") & "SAC_" & WClaveSAC
 
                         If Not Directory.Exists(WRutaArchRelacSAC) Then
@@ -598,7 +598,7 @@ Public Class Login
     '    Dim frm As New VistaPrevia
     '    For i As Integer = 0 To 60
     '        'VistaPrevia.EnviarPorEmail("C:\tempIndice\INC 0076 - 26-08-2019.pdf", true)
-    '        ConsultasVarias.Clases.Helper._EnviarEmail("dsuarez@surfactan.com.ar", ".", "Prueba", {"C:\tempIndice\INC 0076 - 26-08-2019.pdf"}, True)
+    '        Util.Clases.Helper._EnviarEmail("dsuarez@surfactan.com.ar", ".", "Prueba", {"C:\tempIndice\INC 0076 - 26-08-2019.pdf"}, True)
     '    Next
     'End Sub
 End Class

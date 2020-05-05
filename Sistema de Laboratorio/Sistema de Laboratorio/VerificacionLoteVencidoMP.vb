@@ -1,5 +1,5 @@
 ﻿Imports System.ComponentModel
-Imports ConsultasVarias
+Imports Util
 
 Public Class VerificacionLoteVencidoMP
 

@@ -4,12 +4,12 @@ Imports System.IO
 Imports System.Text.RegularExpressions
 Imports System.Threading
 Imports EvaluacionProvMPFarma.Helper
-Imports ConsultasVarias.Clases.Query
+Imports Util.Clases.Query
 
 
 
 
-Public Class EvaluacionProveedorMateriaPrima : Implements IAyudaProveedores, ConsultasVarias.IIngresoClaveSeguridad
+Public Class EvaluacionProveedorMateriaPrima : Implements IAyudaProveedores, Util.IIngresoClaveSeguridad
 
     Private WProveedor As String
     Private WAutorizadoGrabar As Boolean = False
@@ -190,7 +190,7 @@ Public Class EvaluacionProveedorMateriaPrima : Implements IAyudaProveedores, Con
         If TabControl1.TabPages.Count = 0 Then Exit Sub
 
         If Not WAutorizadoGrabar Then
-            With New ConsultasVarias.IngresoClaveSeguridad
+            With New Util.IngresoClaveSeguridad
                 .ShowDialog(Me)
             End With
             Exit Sub
@@ -220,7 +220,7 @@ Public Class EvaluacionProveedorMateriaPrima : Implements IAyudaProveedores, Con
             Dim WEstadoMP As Integer = WControl._ObtenerEstado()
             Dim WFechaEvaluaVto As String = WControl._ObtenerFechaEvaluaVto()
             Dim WFechaEvaluaVtoOrd As String = ordenaFecha(WFechaEvaluaVto)
-            Dim WDatos As ConsultasVarias.DBDataGridView = WControl._ObtenerDatosItems()
+            Dim WDatos As Util.DBDataGridView = WControl._ObtenerDatosItems()
 
             Dim WClave, WReq, WSolicitado, WFechaSolicitado, WFechaSolicitadoOrd, WEntrego, WFechaEntrego, WFechaEntregoOrd, WAprobo, WFechaAprobo, WFechaAproboOrd, WFechaVto, WFechaVtoOrd, WAclaraciones As String
 
@@ -363,7 +363,7 @@ Public Class EvaluacionProveedorMateriaPrima : Implements IAyudaProveedores, Con
 
     End Sub
 
-    Public Sub _ProcesarIngresoClaveSeguridad(ByVal WClave As Object) Implements ConsultasVarias.IIngresoClaveSeguridad._ProcesarIngresoClaveSeguridad
+    Public Sub _ProcesarIngresoClaveSeguridad(ByVal WClave As Object) Implements Util.IIngresoClaveSeguridad._ProcesarIngresoClaveSeguridad
         Dim _Operador As DataRow = GetSingle("SELECT Operador, EvaluaProvMpFarma Permiso FROM Operador WHERE UPPER(Clave) = '" & WClave.ToString().ToUpper() & "'")
 
         If _Operador IsNot Nothing Then

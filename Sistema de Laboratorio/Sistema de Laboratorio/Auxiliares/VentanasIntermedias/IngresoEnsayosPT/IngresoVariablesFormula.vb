@@ -1,5 +1,5 @@
 ﻿Imports System.Text.RegularExpressions
-Imports ConsultasVarias
+Imports Util
 Imports info.lundin.math
 
 Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad

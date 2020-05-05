@@ -593,7 +593,7 @@ Public Class ArqueoDeCheques: implements IArqueoCheques
 
 
 
-        With New ConsultasVarias.VistaPrevia
+        With New Util.VistaPrevia
             .Reporte = New ReporteArqueoCheques
             .Reporte.SetDataSource(TablaArqueoCheques)
 
@@ -710,7 +710,7 @@ Public Class ArqueoDeCheques: implements IArqueoCheques
 
 
 
-        With New ConsultasVarias.VistaPrevia
+        With New Util.VistaPrevia
             .Reporte = New ReporteArqueoCheques
             .Reporte.SetDataSource(TablaArqueoCheques)
 
@@ -725,7 +725,7 @@ Public Class ArqueoDeCheques: implements IArqueoCheques
 
         Total = _Sumartexts()
 
-        With New ConsultasVarias.VistaPrevia
+        With New Util.VistaPrevia
             .Reporte = New ReporteArqueoMensualChequesAcumulado()
             .Reporte.SetParameterValue(0, Label9.Text)
             .Reporte.SetParameterValue(1, Label10.Text)

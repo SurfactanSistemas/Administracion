@@ -56,7 +56,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DataGridViewCustomColumn">
-      <HintPath>..\..\ConsultasVarias\ConsultasVarias\CustomControls\DataGridViewCustomColumn.dll</HintPath>
+      <HintPath>..\..\Util\Util\CustomControls\DataGridViewCustomColumn.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -166,9 +166,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ConsultasVarias\ConsultasVarias\ConsultasVarias.vbproj">
+    <ProjectReference Include="..\..\Util\Util\Util.vbproj">
       <Project>{CC5D60FD-9755-4C61-B96C-F56173586BB9}</Project>
-      <Name>ConsultasVarias</Name>
+      <Name>Util</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

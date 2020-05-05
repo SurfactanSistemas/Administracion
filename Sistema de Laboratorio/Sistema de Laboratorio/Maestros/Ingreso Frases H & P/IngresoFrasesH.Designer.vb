@@ -23,7 +23,7 @@ Partial Class IngresoFrasesH
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Me.DGV_Frases = New ConsultasVarias.DBDataGridView()
+        Me.DGV_Frases = New Util.DBDataGridView()
         Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Observaciones = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -206,7 +206,7 @@ Partial Class IngresoFrasesH
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents DGV_Frases As ConsultasVarias.DBDataGridView
+    Friend WithEvents DGV_Frases As Util.DBDataGridView
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents LblTitulo As System.Windows.Forms.Label

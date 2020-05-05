@@ -32,7 +32,7 @@ Partial Class EnvasesEquivEnArticulo
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txtNomEnvases = New System.Windows.Forms.TextBox()
         Me.txtNroEnvases = New System.Windows.Forms.TextBox()
-        Me.DGV_EnvasesEnArticulo = New ConsultasVarias.DBDataGridView()
+        Me.DGV_EnvasesEnArticulo = New Util.DBDataGridView()
         Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Nombre = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
@@ -205,7 +205,7 @@ Partial Class EnvasesEquivEnArticulo
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents txtNomEnvases As System.Windows.Forms.TextBox
     Friend WithEvents txtNroEnvases As System.Windows.Forms.TextBox
-    Friend WithEvents DGV_EnvasesEnArticulo As ConsultasVarias.DBDataGridView
+    Friend WithEvents DGV_EnvasesEnArticulo As Util.DBDataGridView
     Friend WithEvents Codigo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Nombre As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

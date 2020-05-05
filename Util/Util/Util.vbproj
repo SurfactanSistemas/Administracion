@@ -1,0 +1,308 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CC5D60FD-9755-4C61-B96C-F56173586BB9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <StartupObject>
+    </StartupObject>
+    <RootNamespace>Util</RootNamespace>
+    <AssemblyName>Util</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>Util.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>Util.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Design, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="DataGridViewCustomColumn, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>CustomControls\DataGridViewCustomColumn.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Outlook, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="PdfSharp, Version=1.32.2608.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\PdfSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Auxiliares\AyudaGeneral.Designer.vb">
+      <DependentUpon>AyudaGeneral.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Auxiliares\AyudaGeneral.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Auxiliares\DerivadoListarReporteDesdeHastaBasico.Designer.vb">
+      <DependentUpon>DerivadoListarReporteDesdeHastaBasico.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Auxiliares\DerivadoListarReporteDesdeHastaBasico.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Auxiliares\Exportar.Designer.vb">
+      <DependentUpon>Exportar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Auxiliares\Exportar.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Auxiliares\IngresoClaveSeguridad.Designer.vb">
+      <DependentUpon>IngresoClaveSeguridad.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Auxiliares\IngresoClaveSeguridad.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Auxiliares\ListarReporteDesdeHastaBasico.Designer.vb">
+      <DependentUpon>ListarReporteDesdeHastaBasico.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Auxiliares\ListarReporteDesdeHastaBasico.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Auxiliares\VistaPrevia.Designer.vb">
+      <DependentUpon>VistaPrevia.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Auxiliares\VistaPrevia.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Clases\Conexion.vb" />
+    <Compile Include="Clases\Enumeraciones.vb" />
+    <Compile Include="Clases\Globales.vb" />
+    <Compile Include="Clases\Helper.vb" />
+    <Compile Include="Clases\Operador.vb" />
+    <Compile Include="Clases\Query.vb" />
+    <Compile Include="Consultas\ListaConsultas.Designer.vb">
+      <DependentUpon>ListaConsultas.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Consultas\ListaConsultas.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Consultas\MPs\AyudaMPs.Designer.vb">
+      <DependentUpon>AyudaMPs.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Consultas\MPs\AyudaMPs.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Consultas\PTs\AyudaPTs.Designer.vb">
+      <DependentUpon>AyudaPTs.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Consultas\PTs\AyudaPTs.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Consultas\MPs\DetalleMovimientosMP.designer.vb">
+      <DependentUpon>DetalleMovimientosMP.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Consultas\MPs\DetalleMovimientosMP.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Consultas\Ensayos\AyudaEnsayos.Designer.vb">
+      <DependentUpon>AyudaEnsayos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Consultas\Ensayos\AyudaEnsayos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Consultas\PTs\DetalleMovimientosPT.designer.vb">
+      <DependentUpon>DetalleMovimientosPT.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Consultas\PTs\DetalleMovimientosPT.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Consultas\MPs\DetallesEnsayosMP.designer.vb">
+      <DependentUpon>DetallesEnsayosMP.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Consultas\MPs\DetallesEnsayosMP.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Consultas\PTs\DetallesEnsayosPT.designer.vb">
+      <DependentUpon>DetallesEnsayosPT.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Consultas\PTs\DetallesEnsayosPT.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Consultas\HojasProduccion\DetallesHojaProduccion.designer.vb">
+      <DependentUpon>DetallesHojaProduccion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Consultas\HojasProduccion\DetallesHojaProduccion.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomControls\DBDataGridView.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomControls\MyMaskedTextBoxColumn.vb" />
+    <Compile Include="Form1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.vb">
+      <DependentUpon>Form1.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interfaces\IAyudaEnsayos.vb" />
+    <Compile Include="Interfaces\IAyudaGeneral.vb" />
+    <Compile Include="Interfaces\IAyudaPTs.vb" />
+    <Compile Include="Interfaces\IAyudaMPs.vb" />
+    <Compile Include="Interfaces\IExportar.vb" />
+    <Compile Include="Interfaces\IIngresoClaveSeguridad.vb" />
+    <Compile Include="Interfaces\IListaConsultas.vb" />
+    <Compile Include="Interfaces\IListarReporteDesdeHastaBasico.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Auxiliares\AyudaGeneral.resx">
+      <DependentUpon>AyudaGeneral.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Auxiliares\Exportar.resx">
+      <DependentUpon>Exportar.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Auxiliares\IngresoClaveSeguridad.resx">
+      <DependentUpon>IngresoClaveSeguridad.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Auxiliares\ListarReporteDesdeHastaBasico.resx">
+      <DependentUpon>ListarReporteDesdeHastaBasico.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Auxiliares\VistaPrevia.resx">
+      <DependentUpon>VistaPrevia.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Consultas\ListaConsultas.resx">
+      <DependentUpon>ListaConsultas.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Consultas\MPs\AyudaMPs.resx">
+      <DependentUpon>AyudaMPs.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Consultas\PTs\AyudaPTs.resx">
+      <DependentUpon>AyudaPTs.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Consultas\MPs\DetalleMovimientosMP.resx">
+      <DependentUpon>DetalleMovimientosMP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Consultas\Ensayos\AyudaEnsayos.resx">
+      <DependentUpon>AyudaEnsayos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Consultas\PTs\DetalleMovimientosPT.resx">
+      <DependentUpon>DetalleMovimientosPT.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Consultas\MPs\DetallesEnsayosMP.resx">
+      <DependentUpon>DetallesEnsayosMP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Consultas\PTs\DetallesEnsayosPT.resx">
+      <DependentUpon>DetallesEnsayosPT.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Consultas\HojasProduccion\DetallesHojaProduccion.resx">
+      <DependentUpon>DetallesHojaProduccion.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CustomControls\DataGridViewCustomColumn.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\PdfSharp.dll" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
