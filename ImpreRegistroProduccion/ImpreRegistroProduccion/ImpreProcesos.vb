@@ -11,6 +11,14 @@ Public Class ImpreProcesos
     Private Sub ImpreRegistroProduccion_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         Try
+            My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Control Panel\International", "sCurrency", "$")
+            My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Control Panel\International", "sDate", "/")
+            My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Control Panel\International", "sDecimal", ",")
+            My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Control Panel\International", "sMonDecimalSep", ",")
+            My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Control Panel\International", "sMonThousandSep", ".")
+            My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Control Panel\International", "sShortDate", "dd/MM/yyyy")
+            My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Control Panel\International", "sThousand", ".")
+
             If Environment.GetCommandLineArgs.Length > 1 Then
 
                 Dim WProceso As Integer = Environment.GetCommandLineArgs(1)
@@ -157,7 +165,7 @@ Public Class ImpreProcesos
             ''Dim WPartida2 As Integer = "310445"
             'Dim WPartida2 As Integer = "0"
 
-            '_GenerarRegistroProduccion(WTerminado2, WPartida2, 0, 0, 1, 0, 1, True, 1)
+            _GenerarRegistroProduccion("PT-25015-110", "310479", 0, 0, 1, 0, 1, True, 1)
 
             'Dim WImpreFechaVto2 = "", WFechaElabora2 = "", WImpreFechaElaboracion2 = "", WFechaVto2 = ""
 
