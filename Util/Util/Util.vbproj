@@ -134,6 +134,7 @@
     <Compile Include="Clases\Enumeraciones.vb" />
     <Compile Include="Clases\Globales.vb" />
     <Compile Include="Clases\Helper.vb" />
+    <Compile Include="Clases\Normalizaciones.vb" />
     <Compile Include="Clases\Operador.vb" />
     <Compile Include="Clases\Query.vb" />
     <Compile Include="Consultas\ListaConsultas.Designer.vb">
