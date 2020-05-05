@@ -11,17 +11,38 @@ Public Class ImpreProcesos
     Private Sub ImpreRegistroProduccion_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         Try
-            My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Control Panel\International", "sCurrency", "$")
-            My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Control Panel\International", "sDate", "/")
-            My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Control Panel\International", "sDecimal", ",")
-            My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Control Panel\International", "sMonDecimalSep", ",")
-            My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Control Panel\International", "sMonThousandSep", ".")
-            My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Control Panel\International", "sShortDate", "dd/MM/yyyy")
-            My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Control Panel\International", "sThousand", ".")
 
             If Environment.GetCommandLineArgs.Length > 1 Then
 
                 Dim WProceso As Integer = Environment.GetCommandLineArgs(1)
+
+                'WProceso = 1
+
+                Select Case WProceso
+                    Case 1, 4, 2, 3, 6
+                        Dim val1 = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Control Panel\International", "sDecimal", ".")
+                        Dim val2 = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Control Panel\International", "sThousand", ",")
+                        Dim val3 = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Control Panel\International", "sMonDecimalSep", ".")
+                        Dim val4 = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Control Panel\International", "sMonThousandSep", ",")
+                        Dim val5 = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Control Panel\International", "sShortDate", "")
+
+                        If val1 <> "," Or val2 <> "." Or val3 <> "," Or val4 <> "." Or val5 <> "dd/MM/yyyy" Then
+
+                            My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Control Panel\International", "sCurrency", "$")
+                            My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Control Panel\International", "sDate", "/")
+                            My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Control Panel\International", "sDecimal", ",")
+                            My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Control Panel\International", "sMonDecimalSep", ",")
+                            My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Control Panel\International", "sMonThousandSep", ".")
+                            My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Control Panel\International", "sShortDate", "dd/MM/yyyy")
+                            My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Control Panel\International", "sThousand", ".")
+
+                            MsgBox("La CONFIGURACIÓN REGIONAL de su PC no se encontraba correctamente seteada y hubo que modificarla." & vbCrLf & " Por favor, vuelva a realizar la acción que solicitó para que tome la nueva configuración.", MsgBoxStyle.Exclamation)
+
+                            Close()
+                        End If
+
+                End Select
+
 
                 Select Case WProceso
                     Case 1, 4 ' REGISTRO DE PRODUCCIÓN.
@@ -165,7 +186,7 @@ Public Class ImpreProcesos
             ''Dim WPartida2 As Integer = "310445"
             'Dim WPartida2 As Integer = "0"
 
-            _GenerarRegistroProduccion("PT-25015-110", "310479", 0, 0, 1, 0, 1, True, 1)
+            ' _GenerarRegistroProduccion("PT-25015-110", "310479", 0, 0, 1, 0, 1, True, 1)
 
             'Dim WImpreFechaVto2 = "", WFechaElabora2 = "", WImpreFechaElaboracion2 = "", WFechaVto2 = ""
 
@@ -431,13 +452,10 @@ Public Class ImpreProcesos
 
         _ProcesarInformacionParaRegistroProduccion(WTerminado, WPartida, RegistroMaestro)
 
-        Dim WEscrito = 0
-
         Dim WTer As DataRow = GetSingle("SELECT Escrito, MarcaLabora FROM Terminado WHERE Codigo = '" & WTerminado & "'")
 
         If WTer Is Nothing Then Close()
 
-        WEscrito = OrDefault(WTer.Item("Escrito"), 0)
         Dim WMarcaLabora = OrDefault(WTer.Item("MarcaLabora"), 0)
 
         Dim WImprePlanilla = 0
@@ -578,7 +596,7 @@ Public Class ImpreProcesos
         ' Buscamos informacion del Terminado y Hoja.
         '
         Dim WTerm As DataRow = GetSingle("SELECT Descripcion, Linea, Vida FROM Terminado WHERE Codigo = '" & wTerminado & "'")
-        Dim WHoja As DataTable = GetAll("SELECT * FROM Hoja WHERE Hoja = '" & wPartida & "' Order by Renglon", "Surfactan_III")
+        Dim WHoja As DataTable = GetAll("SELECT Teorico, Fecha, Terminado, Articulo, Lote1, Lote2, Lote3, Tipo FROM Hoja WHERE Hoja = '" & wPartida & "' Order by Renglon", "Surfactan_III")
 
         If IsNothing(WTerm) Then Throw New System.Exception("No existe Producto Terminado con Código '" & wTerminado & "'")
         If WHoja.Rows.Count = 0 And Not RegistroMaestro Then Throw New System.Exception("No existe Hoja '" & wTerminado & "'")
@@ -791,7 +809,7 @@ Public Class ImpreProcesos
         WSqls.Add("UPDATE CargaIII SET Partida = '" & wPartida & "', CantidadPartida = '" & formatonumerico(OrDefault(WTeorico, 0)) & "' WHERE Terminado = '" & wTerminado & "'")
         WSqls.Add("UPDATE CargaV SET Partida = '" & wPartida & "', CantidadPartida = '" & formatonumerico(OrDefault(WTeorico, 0)) & "', ImprePaso = Paso WHERE Terminado = '" & wTerminado & "'")
 
-        Dim WCargaIII As DataRow = GetSingle("SELECT TOP 1 * FROM CargaIII WHERE Terminado = '" & wTerminado & "' Order by Clave", "Surfactan_III")
+        Dim WCargaIII As DataRow = GetSingle("SELECT TOP 1 Version, FechaVersion, TipoProceso FROM CargaIII WHERE Terminado = '" & wTerminado & "' Order by Clave", "Surfactan_III")
 
         Dim WVers, WFechaVersion, WTipoProceso As String
 
