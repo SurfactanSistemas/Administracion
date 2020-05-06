@@ -3221,10 +3221,10 @@ Public Class Recibos
                                     Dim _mes As String = Mid(valor, 4, 2)
 
                                     Select Case Val(_mes)
-                                        Case Is < 7
-                                            valor = Mid(valor, 1, 2) & "/" & _mes & "/" & "2020"
+                                        Case Is < 6
+                                            valor = Mid(valor, 1, 2) & "/" & _mes & "/" & "2021"
                                         Case Else
-                                            valor = Mid(valor, 1, 2) & "/" & _mes & "/" & "2019"
+                                            valor = Mid(valor, 1, 2) & "/" & _mes & "/" & "2020"
                                     End Select
 
                                 End If
@@ -5713,10 +5713,10 @@ Public Class Recibos
                 Dim _mes As String = Mid(txtFechaAux.Text, 4, 2)
 
                 Select Case Val(_mes)
-                    Case Is < 7
-                        txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & "2020"
+                    Case Is < 6
+                        txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & "2021"
                     Case Else
-                        txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & "2019"
+                        txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & "2020"
                 End Select
 
             End If

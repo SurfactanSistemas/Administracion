@@ -6178,7 +6178,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
 
                 Select Case Val(_mes)
                     Case Is < 6
-                        txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & "2020"
+                        txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & "2021"
                     Case Else
                         txtFechaAux.Text = txtFechaAux.Text & Mid(txtFecha.Text, 7, 4)
                 End Select
