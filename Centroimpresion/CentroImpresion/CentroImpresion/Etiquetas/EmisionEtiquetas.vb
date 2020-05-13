@@ -1616,9 +1616,10 @@ Public Class EmisionEtiquetas
             ImpreRNPQ = "SI"
 
             If Trim(txtCliente.Text) = "" Then
-                rpt = New etinuevanormachica25000
-                rpt.SetParameterValue("ImpreVto", "F.Vencimiento:")
-                'rpt = New etinuevanormachicaprueba
+                'rpt = New etinuevanormachica25000
+                rpt = New etinuevanormachicaprueba
+                'rpt.SetParameterValue("ImpreVto", "F.Vencimiento:")
+
             Else
                 rpt = New etinuevanormachica
             End If
