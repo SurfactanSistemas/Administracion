@@ -412,6 +412,7 @@ Public Class ImpreProcesos
             If WRuta.EndsWith(Chr(34)) Then WRuta = WRuta.Substring(0, WRuta.IndexOf(Chr(34))) & "\"
 
             'MsgBox(wTipoSalida)
+            'MsgBox(WRuta)
 
             Select Case wTipoSalida
                 Case 1, 6
@@ -424,7 +425,7 @@ Public Class ImpreProcesos
                 Case 4, 7
                     'MsgBox("Tipo: " & wTipoSalida & " - Ruta: " & WRuta & " - Nombre PDF: " & WNombrePDF & " - Nombre: " & WNombre)
                     .Exportar(WNombre, CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, WRuta)
-                    If wTipoSalida = 7 Then .MergePDFs(WRuta, WNombrePDF)
+                    If wTipoSalida = 7 And WTipoReporte <> 2 Then .MergePDFs(WRuta, WNombrePDF)
                 Case 5
                     .Exportar(WNombre, CrystalDecisions.Shared.ExportFormatType.WordForWindows)
             End Select
