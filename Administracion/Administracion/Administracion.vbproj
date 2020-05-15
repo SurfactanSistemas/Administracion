@@ -750,14 +750,14 @@
     <Compile Include="Reportes\ListadoCtaCtePrvSelectivoPrueba.vb">
       <DependentUpon>ListadoCtaCtePrvSelectivoPrueba.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\ReciboDefinitivoEmailPellital.vb">
       <DependentUpon>ReciboDefinitivoEmailPellital.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\ListadoBancos.vb">
       <AutoGen>True</AutoGen>
@@ -851,8 +851,8 @@
     <Compile Include="Reportes\ReciboDefinitivoEmail.vb">
       <DependentUpon>ReciboDefinitivoEmail.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\DepositoBancario2.vb">
       <DependentUpon>DepositoBancario2.rpt</DependentUpon>
@@ -944,8 +944,8 @@
     <Compile Include="Reportes\ReciboDefinitivo.vb">
       <DependentUpon>ReciboDefinitivo.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\DetallesFacturacion.Designer.vb">
       <AutoGen>True</AutoGen>
