@@ -36,8 +36,8 @@ namespace Vista
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.P_Buscar = new System.Windows.Forms.Panel();
             this.P_Filtrado = new System.Windows.Forms.Panel();
             this.LBFiltro = new System.Windows.Forms.Label();
@@ -58,6 +58,7 @@ namespace Vista
             this.BtEtiquetas = new System.Windows.Forms.Button();
             this.BtEliminar = new System.Windows.Forms.Button();
             this.BtRemito = new System.Windows.Forms.Button();
+            this.btnRemitosVarios = new System.Windows.Forms.Button();
             this.BtFin = new System.Windows.Forms.Button();
             this.BtImpresion = new System.Windows.Forms.Button();
             this.DGV_Muestra = new System.Windows.Forms.DataGridView();
@@ -110,7 +111,9 @@ namespace Vista
             this.label3 = new System.Windows.Forms.Label();
             this.toolTip_Eliminar = new System.Windows.Forms.ToolTip(this.components);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnRemitosVarios = new System.Windows.Forms.Button();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
             this.P_Buscar.SuspendLayout();
             this.P_Filtrado.SuspendLayout();
             this.P_Botones.SuspendLayout();
@@ -121,6 +124,7 @@ namespace Vista
             this.CMS_Filtros.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // P_Buscar
@@ -366,6 +370,20 @@ namespace Vista
             this.BtRemito.UseVisualStyleBackColor = true;
             this.BtRemito.Click += new System.EventHandler(this.BtRemito_Click);
             // 
+            // btnRemitosVarios
+            // 
+            this.btnRemitosVarios.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnRemitosVarios.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRemitosVarios.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRemitosVarios.Location = new System.Drawing.Point(8, 441);
+            this.btnRemitosVarios.Margin = new System.Windows.Forms.Padding(0);
+            this.btnRemitosVarios.Name = "btnRemitosVarios";
+            this.btnRemitosVarios.Size = new System.Drawing.Size(79, 50);
+            this.btnRemitosVarios.TabIndex = 7;
+            this.btnRemitosVarios.Text = "REMITOS VARIOS";
+            this.btnRemitosVarios.UseVisualStyleBackColor = true;
+            this.btnRemitosVarios.Click += new System.EventHandler(this.btnRemitosVarios_Click);
+            // 
             // BtFin
             // 
             this.BtFin.BackgroundImage = global::Vista.Properties.Resources.Salir1;
@@ -429,17 +447,17 @@ namespace Vista
             this.DGV_Muestra.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DGV_Muestra.Location = new System.Drawing.Point(103, 3);
             this.DGV_Muestra.Name = "DGV_Muestra";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGV_Muestra.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.DGV_Muestra.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV_Muestra.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.DGV_Muestra.RowsDefaultCellStyle = dataGridViewCellStyle10;
             this.DGV_Muestra.Size = new System.Drawing.Size(781, 523);
             this.DGV_Muestra.TabIndex = 8;
             this.DGV_Muestra.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGV_Muestra_ColumnHeaderMouseClick);
@@ -744,8 +762,8 @@ namespace Vista
             // 
             // label4
             // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
@@ -757,8 +775,8 @@ namespace Vista
             // 
             // label3
             // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.White;
@@ -786,24 +804,36 @@ namespace Vista
             this.tableLayoutPanel1.Size = new System.Drawing.Size(787, 638);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
-            // btnRemitosVarios
+            // backgroundWorker1
             // 
-            this.btnRemitosVarios.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnRemitosVarios.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRemitosVarios.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRemitosVarios.Location = new System.Drawing.Point(8, 441);
-            this.btnRemitosVarios.Margin = new System.Windows.Forms.Padding(0);
-            this.btnRemitosVarios.Name = "btnRemitosVarios";
-            this.btnRemitosVarios.Size = new System.Drawing.Size(79, 50);
-            this.btnRemitosVarios.TabIndex = 7;
-            this.btnRemitosVarios.Text = "REMITOS VARIOS";
-            this.btnRemitosVarios.UseVisualStyleBackColor = true;
-            this.btnRemitosVarios.Click += new System.EventHandler(this.btnRemitosVarios_Click);
+            this.backgroundWorker1.WorkerReportsProgress = true;
+            this.backgroundWorker1.WorkerSupportsCancellation = true;
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.label5);
+            this.panel3.Location = new System.Drawing.Point(373, 166);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(310, 100);
+            this.panel3.TabIndex = 4;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(16, 44);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(278, 13);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "CARGANDO DATOS... POR FAVOR, ESPERE...";
             // 
             // Muestra
             // 
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(787, 638);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.tableLayoutPanel1);
             this.MinimumSize = new System.Drawing.Size(803, 39);
             this.Name = "Muestra";
@@ -824,6 +854,8 @@ namespace Vista
             this.panel1.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -903,6 +935,9 @@ namespace Vista
         private DataGridViewTextBoxColumn OrdenFecha;
         private DataGridViewTextBoxColumn Lote1;
         private Button btnRemitosVarios;
+        private BackgroundWorker backgroundWorker1;
+        private Panel panel3;
+        private Label label5;
     }
 }
 

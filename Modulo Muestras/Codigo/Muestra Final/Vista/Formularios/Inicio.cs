@@ -41,6 +41,7 @@ namespace Vista
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            CheckForIllegalCrossThreadCalls = false;
 
             TB_Desde.Text = DateTime.Now.Year.ToString();
             TB_Hasta.Text = TB_Desde.Text;
@@ -48,24 +49,7 @@ namespace Vista
             ConfigurationManager.AppSettings["Fecha_Desde"] = TB_Desde.Text;
             ConfigurationManager.AppSettings["Fecha_Hasta"] = TB_Hasta.Text;
 
-            dt = new DataTable();
-            dt.Clear();
-            dt = M.TraerLista(TB_Desde.Text, TB_Hasta.Text);
-
-            //Se utiliza esta columna para ordenar las fechas.
-            dt.Columns.Add("OrdenFecha", typeof(string));
-
-            foreach (DataRow Fila in dt.Rows)
-            {
-               Fila["OrdenFecha"] = Fila[2].ToString().Substring(6,4) + Fila[2].ToString().Substring(2, 4) + Fila[2].ToString().Substring(0, 2);
-            }
-
-            DGV_Muestra.DataSource = dt;
-
-            //LimpiarFechas();
-
-            //Limpio cualquier filtro existente
-            ((DataTable) DGV_Muestra.DataSource).DefaultView.RowFilter = string.Empty;
+            backgroundWorker1.RunWorkerAsync();
 
             //DGV_Muestra.SortedColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
         }
@@ -1144,6 +1128,40 @@ namespace Vista
                     break;
                 }
             }
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            dt = new DataTable();
+            dt.Clear();
+            dt = M.TraerLista(TB_Desde.Text, TB_Hasta.Text);
+
+            //Se utiliza esta columna para ordenar las fechas.
+            dt.Columns.Add("OrdenFecha", typeof(string));
+
+            foreach (DataRow Fila in dt.Rows)
+            {
+                Fila["OrdenFecha"] = Fila[2].ToString().Substring(6, 4) + Fila[2].ToString().Substring(2, 4) + Fila[2].ToString().Substring(0, 2);
+            }
+
+            backgroundWorker1.ReportProgress(0, dt);
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            DGV_Muestra.DataSource = (DataTable) e.UserState;
+
+            //LimpiarFechas();
+
+            //Limpio cualquier filtro existente
+            ((DataTable)DGV_Muestra.DataSource).DefaultView.RowFilter = string.Empty;
+
+            panel3.Visible = false;
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            TB_Hasta.Focus();
         }
     }
 }
