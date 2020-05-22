@@ -241,9 +241,9 @@ Partial Class CuentaCorrientePantalla
         Me.boxPantallaProveedores.Controls.Add(Me.lstFiltrada)
         Me.boxPantallaProveedores.Controls.Add(Me.lstAyuda)
         Me.boxPantallaProveedores.Controls.Add(Me.txtAyuda)
-        Me.boxPantallaProveedores.Location = New System.Drawing.Point(136, 180)
+        Me.boxPantallaProveedores.Location = New System.Drawing.Point(624, 338)
         Me.boxPantallaProveedores.Name = "boxPantallaProveedores"
-        Me.boxPantallaProveedores.Size = New System.Drawing.Size(541, 218)
+        Me.boxPantallaProveedores.Size = New System.Drawing.Size(53, 60)
         Me.boxPantallaProveedores.TabIndex = 27
         Me.boxPantallaProveedores.TabStop = False
         Me.boxPantallaProveedores.Visible = False

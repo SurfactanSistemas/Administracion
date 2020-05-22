@@ -36,7 +36,10 @@
 
         Dim WOwner As IAyudaGeneral = TryCast(Owner, IAyudaGeneral)
 
-        If WOwner IsNot Nothing Then WOwner._ProcesarAyudaGeneral(dgvDatos.CurrentRow)
+        If WOwner IsNot Nothing Then
+            Hide()
+            WOwner._ProcesarAyudaGeneral(dgvDatos.CurrentRow)
+        End If
 
         Close()
 

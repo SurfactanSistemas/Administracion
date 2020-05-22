@@ -1,7 +1,8 @@
 ﻿Imports ClasesCompartidas
 Imports System.Data.SqlClient
+Imports Util
 
-Public Class CuentaCorrientePantalla
+Public Class CuentaCorrientePantalla : Implements IAyudaGeneral
 
     Private _NrosInternos As New List(Of Object)
     Private WPOSINICIALCONSULTA As Point
@@ -206,29 +207,31 @@ Public Class CuentaCorrientePantalla
 
     Private Sub btnConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsulta.Click
         Try
+            With New AyudaGeneral(GetAll("SELECT Proveedor As Codigo, Nombre As Descripcion FROM Proveedor ORDER BY Proveedor"), "AYUDA DE PROVEEDORES")
+                .ShowDialog(Me)
+            End With
+            'boxPantallaProveedores.Visible = True
 
-            boxPantallaProveedores.Visible = True
+            ''Dim WProveedores = DAOProveedor.buscarProveedoresActivoPorNombre("")
 
-            'Dim WProveedores = DAOProveedor.buscarProveedoresActivoPorNombre("")
+            'Dim WProveedores As New DataTable
 
-            Dim WProveedores As New DataTable
+            'WProveedores = _TraerProveedoresActivos()
 
-            WProveedores = _TraerProveedoresActivos()
+            'lstAyuda.Items.Clear()
 
-            lstAyuda.Items.Clear()
+            'If Not IsNothing(WProveedores) Then
 
-            If Not IsNothing(WProveedores) Then
+            '    For Each WProveedor As DataRow In WProveedores.Rows
 
-                For Each WProveedor As DataRow In WProveedores.Rows
+            '        lstAyuda.Items.Add(WProveedor.Item("Proveedor").PadLeft(11) & Space(5) & WProveedor.Item("Nombre"))
 
-                    lstAyuda.Items.Add(WProveedor.Item("Proveedor").PadLeft(11) & Space(5) & WProveedor.Item("Nombre"))
+            '    Next
 
-                Next
+            'End If
 
-            End If
-
-            txtAyuda.Text = ""
-            txtAyuda.Focus()
+            'txtAyuda.Text = ""
+            'txtAyuda.Focus()
 
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -987,4 +990,8 @@ Public Class CuentaCorrientePantalla
 
     End Sub
 
+    Public Sub _ProcesarAyudaGeneral(row As DataGridViewRow) Implements IAyudaGeneral._ProcesarAyudaGeneral
+        txtProveedor.Text = row.Cells("Codigo").Value
+        txtProveedor_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+    End Sub
 End Class
