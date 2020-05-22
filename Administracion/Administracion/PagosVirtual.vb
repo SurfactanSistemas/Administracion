@@ -3207,7 +3207,7 @@ Public Class PagosVirtual
         If e.KeyData = Keys.Enter Then
 
             btnEnviarAviso.Enabled = True
-            btnActualizarCarpetas.Enabled = True
+            'btnActualizarCarpetas.Enabled = True
 
             If Trim(txtOrdenPago.Text) <> "" Then
                 txtOrdenPago.Text = ceros(txtOrdenPago.Text, 6)
@@ -3234,7 +3234,7 @@ Public Class PagosVirtual
                     mostrarOrdenDePago(DAOPagos.buscarOrdenPorNumero(txtOrdenPago.Text))
 
                     btnEnviarAviso.Enabled = True
-                    btnActualizarCarpetas.Visible = True
+                    'btnActualizarCarpetas.Visible = True
 
 
 
