@@ -254,6 +254,7 @@ Partial Class PagosVirtual
         Me.gridPagos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.gridPagos.Location = New System.Drawing.Point(4, 152)
         Me.gridPagos.Name = "gridPagos"
+        Me.gridPagos.ReadOnly = True
         Me.gridPagos.RowHeadersWidth = 25
         Me.gridPagos.Size = New System.Drawing.Size(374, 227)
         Me.gridPagos.TabIndex = 56
@@ -265,6 +266,7 @@ Partial Class PagosVirtual
         Me.Tipo.HeaderText = "Tipo"
         Me.Tipo.MaxInputLength = 2
         Me.Tipo.Name = "Tipo"
+        Me.Tipo.ReadOnly = True
         Me.Tipo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.Tipo.Width = 35
         '
@@ -273,6 +275,7 @@ Partial Class PagosVirtual
         Me.Letra.HeaderText = "Letra"
         Me.Letra.MaxInputLength = 1
         Me.Letra.Name = "Letra"
+        Me.Letra.ReadOnly = True
         Me.Letra.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.Letra.Width = 40
         '
@@ -283,6 +286,7 @@ Partial Class PagosVirtual
         Me.Punto.HeaderText = "Punto"
         Me.Punto.MaxInputLength = 6
         Me.Punto.Name = "Punto"
+        Me.Punto.ReadOnly = True
         Me.Punto.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.Punto.Width = 45
         '
@@ -293,6 +297,7 @@ Partial Class PagosVirtual
         Me.Numero.HeaderText = "Número"
         Me.Numero.MaxInputLength = 8
         Me.Numero.Name = "Numero"
+        Me.Numero.ReadOnly = True
         Me.Numero.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.Numero.Width = 70
         '
@@ -302,6 +307,7 @@ Partial Class PagosVirtual
         Me.Importe.DefaultCellStyle = DataGridViewCellStyle5
         Me.Importe.HeaderText = "Importe"
         Me.Importe.Name = "Importe"
+        Me.Importe.ReadOnly = True
         Me.Importe.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.Importe.Width = 75
         '
@@ -310,6 +316,7 @@ Partial Class PagosVirtual
         Me.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.Descripcion.HeaderText = "Descripción"
         Me.Descripcion.Name = "Descripcion"
+        Me.Descripcion.ReadOnly = True
         Me.Descripcion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
         'ImpoNeto
@@ -324,18 +331,21 @@ Partial Class PagosVirtual
         '
         Me.CuentaContable.HeaderText = "CuentaContable"
         Me.CuentaContable.Name = "CuentaContable"
+        Me.CuentaContable.ReadOnly = True
         Me.CuentaContable.Visible = False
         '
         'MarcaDifCambio
         '
         Me.MarcaDifCambio.HeaderText = "MarcaDifCambio"
         Me.MarcaDifCambio.Name = "MarcaDifCambio"
+        Me.MarcaDifCambio.ReadOnly = True
         Me.MarcaDifCambio.Visible = False
         '
         'MarcaCHR
         '
         Me.MarcaCHR.HeaderText = "MarcaCHR"
         Me.MarcaCHR.Name = "MarcaCHR"
+        Me.MarcaCHR.ReadOnly = True
         Me.MarcaCHR.Visible = False
         '
         'Clave
