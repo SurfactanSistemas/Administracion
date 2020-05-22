@@ -107,7 +107,7 @@ Public Class Pagos
 
     Private Function _ExisteOrdenDePago(ByVal NumOrden) As Boolean
         Dim cn = New SqlConnection()
-        Dim cm = New SqlCommand("SELECT TOP 1 Orden FROM Pagos WHERE Orden = '" & NumOrden & "'")
+        Dim cm = New SqlCommand("SELECT TOP 1 Orden FROM Pagos WHERE Orden = '" & NumOrden & "' And MarcaVirtual <> 'X'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -725,7 +725,7 @@ Public Class Pagos
         Dim XClaves As New List(Of Object)
         Dim _Item As String
         Dim cn = New SqlConnection()
-        Dim cm = New SqlCommand("SELECT cp.NroInterno, cp.Total, cp.Saldo, cp.Impre, cp.Letra, cp.Punto, " & "cp.Numero, cp.Fecha, cp.Clave FROM CtaCtePrv as cp WHERE cp.Proveedor = '" & Trim(txtProveedor.Text) & "' and cp.Saldo <> 0 ORDER BY cp.OrdFecha ASC, cp.Numero")
+        Dim cm = New SqlCommand("SELECT cp.NroInterno, cp.Total, cp.Saldo, cp.Impre, cp.Letra, cp.Punto, " & "cp.Numero, cp.Fecha, cp.Clave FROM CtaCtePrv as cp WHERE cp.Proveedor = '" & Trim(txtProveedor.Text) & "' and cp.Saldo <> 0 And cp.MarcaVirtual <> 'X' ORDER BY cp.OrdFecha ASC, cp.Numero")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -3208,11 +3208,15 @@ Public Class Pagos
                 txtOrdenPago.Text = ceros(txtOrdenPago.Text, 6)
 
                 Try
-                    mostrarOrdenDePago(DAOPagos.buscarOrdenPorNumero(txtOrdenPago.Text))
 
-                    Dim WOrd As DataRow = GetSingle("SELECT * FROM Pagos WHERE Orden = '" & txtOrdenPago.Text & "' And Renglon = '01'")
+                    Dim WOrd As DataRow = GetSingle("SELECT MarcaVirtual, Carpeta1, Carpeta2, Carpeta3, Carpeta4, Carpeta5, Carpeta6, Carpeta7, Carpeta8, Carpeta9 FROM Pagos WHERE Orden = '" & txtOrdenPago.Text & "' And Renglon = '01'")
 
                     If WOrd IsNot Nothing Then
+
+                        If OrDefault(WOrd.Item("MarcaVirtual"), "") = "X" Then
+                            MsgBox("La Orden de Pago indicada, es una OP Virtual y por tanto no puede ser consultada por medio de este formulario.", MsgBoxStyle.Information)
+                            Exit Sub
+                        End If
 
                         For i = 1 To 9
                             _Carpetas(i) = Trim(OrDefault(WOrd.Item("Carpeta" & i), ""))
@@ -3221,6 +3225,8 @@ Public Class Pagos
                         txtOrdenPago.Enabled = False
 
                     End If
+
+                    mostrarOrdenDePago(DAOPagos.buscarOrdenPorNumero(txtOrdenPago.Text))
 
                     btnEnviarAviso.Enabled = True
                     btnActualizarCarpetas.Visible = True
