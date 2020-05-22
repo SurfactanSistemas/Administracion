@@ -24,15 +24,25 @@ Public Class CuentaCorrientePantalla : Implements IAyudaGeneral
         GRilla.Columns("Fecha").ValueType = GetType(Date)
         GRilla.Columns("Vencimiento").ValueType = GetType(Date)
 
+        GRilla.Columns.Cast(Of DataGridViewColumn).ToList.ForEach(Sub(c)
+                                                                      c.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells
+                                                                      c.DefaultCellStyle.Padding = New Padding(5, 0, 5, 0)
+                                                                      c.MinimumWidth = 80
+                                                                      c.DefaultCellStyle.BackColor = Color.WhiteSmoke
+                                                                  End Sub)
+        GRilla.Columns("Numero").AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+
         _PurgarSaldosCtaCtePrvs()
     End Sub
 
     Private Sub _Proceso()
 
+        If Val(txtProveedor.Text) = 0 Then Exit Sub
+
         Dim WRenglon As Integer
         Dim WSuma As Double
 
-        GRilla.Rows.Clear()
+        'GRilla.Rows.Clear()
         _NrosInternos.Clear()
         WRenglon = 0
 
@@ -49,65 +59,37 @@ Public Class CuentaCorrientePantalla : Implements IAyudaGeneral
         Dim tabla As DataTable
         tabla = _BuscarCuentaCorrienteProveedorDeuda(txtProveedor.Text, WTipo) 'SQLConnector.retrieveDataTable("buscar_cuenta_corriente_proveedores_deuda", txtProveedor.Text, WTipo)
 
+        GRilla.DataSource = tabla
+
+        GRilla.Refresh()
+
         If tabla.Rows.Count > 0 Then
 
-            For Each row As DataRow In tabla.Rows
+            For Each row As DataGridViewRow In GRilla.Rows
 
-                GRilla.Rows.Add()
+                'If row.Cells("NroInterno").Value <> 0 Then
+                '    Dim WIvaComp As DataRow = _TraerDatosIvaComp(row.Cells("NroInterno").Value)
 
-                GRilla.Item("Tipo", WRenglon).Value = row.Item("Impre") 'CamposCtaCtePrv.Impre
+                '    If Not IsNothing(WIvaComp) AndAlso WIvaComp.Item("MarcaDifCambio") = 1 Then
+                '        row.Cells("Tipo").Value = "NDC"
+                '    End If
 
-                If row.Item("NroInterno") <> 0 Then
-                    Dim WIvaComp As DataRow = _TraerDatosIvaComp(row.Item("NroInterno"))
+                'End If
 
-                    If Not IsNothing(WIvaComp) Then
-                        GRilla.Item("Tipo", WRenglon).Value = IIf(WIvaComp.Item("MarcaDifCambio") = 1, "NDC", row.Item("Impre"))
-                    End If
-
+                If OrDefault(row.Cells("MarcaVirtual").Value, "") = "X" Then
+                    row.DefaultCellStyle.BackColor = IIf(OrDefault(row.Cells("Impre").Value, "") = "OP", Color.LightBlue, Color.GreenYellow)
                 End If
 
-                GRilla.Item("Letra", WRenglon).Value = row.Item("Letra") 'CamposCtaCtePrv.letra
-                GRilla.Item("Punto", WRenglon).Value = row.Item("Punto") 'CamposCtaCtePrv.punto
-                GRilla.Item("Numero", WRenglon).Value = row.Item("Numero") 'CamposCtaCtePrv.numero
-                GRilla.Item("Importe", WRenglon).Value = formatonumerico(row.Item("Total"))
+                WSuma += row.Cells("Saldo").Value 'CamposCtaCtePrv.saldo
 
-                If row.Item("Total") < 0 Then
-
-                    GRilla.Item("Credito", WRenglon).Value = formatonumerico(-1 * row.Item("Total"))
-
-                Else
-
-                    GRilla.Item("Debito", WRenglon).Value = formatonumerico(row.Item("Total"))
-
-                End If
-
-                GRilla.Item("Saldo", WRenglon).Value = formatonumerico(row.Item("Saldo"))
-                GRilla.Item("Fecha", WRenglon).Value = row.Item("Fecha") 'CamposCtaCtePrv.fecha
-                GRilla.Item("OrdFecha", WRenglon).Value = ordenaFecha(row.Item("Fecha"))
-                GRilla.Item("Vencimiento", WRenglon).Value = row.Item("Vencimiento") 'CamposCtaCtePrv.vencimiento
-                GRilla.Item("OrdVencimiento", WRenglon).Value = ordenaFecha(row.Item("Vencimiento"))
-
-                If OrDefault(row.Item("MarcaVirtual"), "") = "X" Then
-                    GRilla.Rows(WRenglon).DefaultCellStyle.BackColor = IIf(OrDefault(row.Item("Impre"), "") = "OP", Color.LightBlue, Color.GreenYellow)
-                End If
-
-                GRilla.CurrentCell = GRilla.Rows(WRenglon).Cells(0)
-                GRilla.Focus()
-
-                WRenglon = WRenglon + 1
-                WSuma = WSuma + row.Item("Saldo") 'CamposCtaCtePrv.saldo
-
-                _NrosInternos.Add({row.Item("Numero"), row.Item("NroInterno")})
-
-                GRilla.Refresh()
+                _NrosInternos.Add({row.Cells("Numero").Value, row.Cells("NroInterno").Value})
 
             Next
-        Else
-            GRilla.Rows.Add()
         End If
 
-        GRilla.AllowUserToAddRows = False
         txtSaldo.Text = formatonumerico(WSuma)
+
+        txtProveedor.Focus()
     End Sub
 
     Private Function _TraerDatosIvaComp(ByVal nroInterno As Object) As DataRow
@@ -160,24 +142,29 @@ Public Class CuentaCorrientePantalla : Implements IAyudaGeneral
 
         Try
 
-            ZSql = "select LTRIM(RTRIM(ISNULL(CtaCtePrv.Tipo, ''))) as Tipo " _
-                & ", LTRIM(RTRIM(ISNULL(CtaCtePrv.Letra, ''))) as Letra" _
-                & ", LTRIM(RTRIM(ISNULL(CtaCtePrv.Punto, ''))) as Punto" _
-                & ", LTRIM(RTRIM(ISNULL(CtaCtePrv.Numero, ''))) as Numero" _
-                & ", ISNULL(CtaCtePrv.Total, 0) as Total" _
-                & ", ISNULL(CtaCtePrv.Saldo, 0) as Saldo" _
-                & ", LTRIM(RTRIM(ISNULL(CtaCtePrv.fecha, ''))) as Fecha" _
-                & ", LTRIM(RTRIM(ISNULL(CtaCtePrv.Vencimiento, ''))) as Vencimiento" _
-                & ", LTRIM(RTRIM(ISNULL(CtaCtePrv.NroInterno, 0))) as NroInterno" _
-                & ", LTRIM(RTRIM(ISNULL(CtaCtePrv.Impre, ''))) as Impre" _
-                & ", LTRIM(RTRIM(ISNULL(CtaCtePrv.MarcaVirtual, ''))) as MarcaVirtual" _
-                & " FROM CtaCtePrv" _
-                & " WHERE CtaCtePrv.Proveedor = '" & WProveedor & "'" _
+            ZSql = "select Tipo = CASE WHEN ISNULL(ic.MarcaDifCambio, 0) = 1 THEN 'NDC' ELSE cc.Impre END " _
+                & ", cc.Letra" _
+                & ", cc.Numero " _
+                & ", cc.Fecha" _
+                & ", Debito = CASE WHEN cc.Total > 0 THEN cc.Total ELSE 0 END" _
+                & ", Credito = CASE WHEN cc.Total > 0 THEN 0 ELSE cc.Total * -1 END" _
+                & ", cc.Saldo" _
+                & ", cc.Vencimiento" _
+                & ", Importe = CASE WHEN cc.Total > 0 THEN cc.Total ELSE cc.Total * -1 END" _
+                & ", cc.Punto" _
+                & ", cc.OrdFecha" _
+                & ", cc.OrdVencimiento" _
+                & ", cc.NroInterno" _
+                & ", cc.Impre" _
+                & ", cc.MarcaVirtual" _
+                & " FROM CtaCtePrv cc" _
+                & " LEFT OUTER JOIN IvaComp ic ON ic.NroInterno = cc.NroInterno" _
+                & " WHERE cc.Proveedor = '" & WProveedor & "'" _
                 & "#PARCIAL#" _
-                & " ORDER BY CtaCtePrv.Proveedor, CtaCtePrv.OrdFecha, CtaCtePrv.Tipo,CtaCtePrv.Numero"
+                & " ORDER BY cc.Proveedor, cc.OrdFecha, cc.Tipo,cc.Numero"
 
             If wTipo = "P" Then
-                ZSql = ZSql.Replace("#PARCIAL#", " AND Saldo <> 0")
+                ZSql = ZSql.Replace("#PARCIAL#", " AND cc.Saldo <> 0")
             Else
                 ZSql = ZSql.Replace("#PARCIAL#", "")
             End If
@@ -287,8 +274,7 @@ Public Class CuentaCorrientePantalla : Implements IAyudaGeneral
 
     Private Sub mostrarProveedor(ByVal proveedor As DataRow)
 
-        If IsNothing(proveedor) Then : Exit Sub
-        End If
+        If IsNothing(proveedor) Then Exit Sub
 
         ' Reseteamos resumen de montos automático.
         gbSaldoCtaCliente.Visible = False
@@ -547,34 +533,14 @@ Public Class CuentaCorrientePantalla : Implements IAyudaGeneral
             End If
 
             Try
-                Dim WProveedor As DataTable = _TraerDatosProveedor(txtProveedor.Text)
 
-                If WProveedor.Rows.Count > 0 Then
+                Dim WProveedor As DataRow = GetSingle("SELECT Nombre, Proveedor, ClienteAsociado FROM Proveedor WHERE Proveedor = '" & txtProveedor.Text & "'") '_TraerDatosProveedor(txtProveedor.Text)
 
-                    txtProveedor.Text = WProveedor.Rows(0).Item("Proveedor")
-                    txtRazon.Text = WProveedor.Rows(0).Item("Nombre")
-
-                    mostrarProveedor(WProveedor(0))
-
-                End If
+                mostrarProveedor(WProveedor)
 
             Catch ex As Exception
                 MsgBox(ex.Message)
             End Try
-            'Dim CampoProveedor As Proveedor = DAOProveedor.buscarProveedorPorCodigo(txtProveedor.Text)
-            'If IsNothing(CampoProveedor) Then
-            '    MsgBox("Proveedor incorrecto")
-            '    txtProveedor.Focus()
-            'Else
-            '    mostrarProveedor(CampoProveedor)
-
-            '    If GRilla.Rows.Count > 0 Then
-            '        GRilla.CurrentCell = GRilla.Rows(0).Cells(0)
-            '    Else
-            '        txtProveedor.Focus()
-            '    End If
-
-            'End If
 
         ElseIf e.KeyData = Keys.Escape Then
             txtProveedor.Text = ""
