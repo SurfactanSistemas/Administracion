@@ -2267,6 +2267,7 @@ Public Class PagosVirtual
                 ZSql &= " SaldoList = '',"
                 ZSql &= " NroInterno = 0,"
                 ZSql &= " Lista = '',"
+                ZSql &= " MarcaVirtual = 'X',"
                 ZSql &= " Acumulado = 0"
                 ZSql &= " WHERE Clave = '" & XClaveCtaprv & "'"
 
@@ -2274,7 +2275,7 @@ Public Class PagosVirtual
 
                 ZSql = ""
                 ZSql &= "INSERT INTO CtaCtePrv"
-                ZSql &= " (Clave, Proveedor, Letra, Tipo, Punto, Numero, fecha, Estado, Vencimiento, Vencimiento1, Total, Saldo, OrdFecha, OrdVencimiento, Impre, Empresa, SaldoList, NroInterno, Lista, Acumulado, Pago, Paridad, ImporteOriginal, Cuota, FacturaOriginal, NroInternoAsociado, DesProveOriginal, Tarjeta, Observaciones, Interes, IvaInteres, Referencia, TituloI, TituloII, Auxi1, Auxi2, Auxi3, Auxi4, FechaOriginal, OrdFechaOriginal) VALUES ("
+                ZSql &= " (Clave, Proveedor, Letra, Tipo, Punto, Numero, fecha, Estado, Vencimiento, Vencimiento1, Total, Saldo, OrdFecha, OrdVencimiento, Impre, Empresa, SaldoList, NroInterno, Lista, Acumulado, Pago, Paridad, ImporteOriginal, Cuota, FacturaOriginal, NroInternoAsociado, DesProveOriginal, Tarjeta, Observaciones, Interes, IvaInteres, Referencia, TituloI, TituloII, Auxi1, Auxi2, Auxi3, Auxi4, FechaOriginal, OrdFechaOriginal, MarcaVirtual) VALUES ("
                 ZSql &= "'" & XClaveCtaprv & "',"
                 ZSql &= "'" & XProveedor & "',"
                 ZSql &= "'" & WLetra & "',"
@@ -2291,7 +2292,7 @@ Public Class PagosVirtual
                 ZSql &= "'" & XOrdVencimiento & "',"
                 ZSql &= "'" & XImpre & "',"
                 ZSql &= "'" & XEmpresa & "',"
-                ZSql &= " '', '', '', '', '', '', 0, 0, 0, 0,'','','', 0, 0,'','','','','','','', '', '')"
+                ZSql &= " '', '', '', '', '', '', 0, 0, 0, 0,'','','', 0, 0,'','','','','','','', '', '', 'X')"
 
             End If
 
@@ -2442,6 +2443,7 @@ Public Class PagosVirtual
         ZSql = ZSql & " Carpeta8 = " & Val(_Carpetas(9)) & ","
         ZSql = ZSql & " Carpeta9 = " & Val(_Carpetas(10)) & ","
         ZSql = ZSql & " Titulo = '',"
+        ZSql = ZSql & " MarcaVirtual = 'X',"
         ZSql = ZSql & " TituloI = ''"
         ZSql = ZSql & " Where Orden = " & "'" & txtOrdenPago.Text & "'"
 
@@ -3211,11 +3213,15 @@ Public Class PagosVirtual
                 txtOrdenPago.Text = ceros(txtOrdenPago.Text, 6)
 
                 Try
-                    mostrarOrdenDePago(DAOPagos.buscarOrdenPorNumero(txtOrdenPago.Text))
 
-                    Dim WOrd As DataRow = GetSingle("SELECT * FROM Pagos WHERE Orden = '" & txtOrdenPago.Text & "' And Renglon = '01'")
+                    Dim WOrd As DataRow = GetSingle("SELECT MarcaVirtual, Carpeta1, Carpeta2, Carpeta3, Carpeta4, Carpeta5, Carpeta6, Carpeta7, Carpeta8, Carpeta9  FROM Pagos WHERE Orden = '" & txtOrdenPago.Text & "' And Renglon = '01'")
 
                     If WOrd IsNot Nothing Then
+
+                        If OrDefault(WOrd.Item("MarcaVirtual"), "") <> "X" Then
+                            MsgBox("La Orden de Pago indicada, no se trata de una OP Virtual.", MsgBoxStyle.Exclamation)
+                            Exit Sub
+                        End If
 
                         For i = 1 To 9
                             _Carpetas(i) = Trim(OrDefault(WOrd.Item("Carpeta" & i), ""))
@@ -3224,6 +3230,8 @@ Public Class PagosVirtual
                         txtOrdenPago.Enabled = False
 
                     End If
+
+                    mostrarOrdenDePago(DAOPagos.buscarOrdenPorNumero(txtOrdenPago.Text))
 
                     btnEnviarAviso.Enabled = True
                     btnActualizarCarpetas.Visible = True

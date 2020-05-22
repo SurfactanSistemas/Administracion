@@ -85,10 +85,19 @@ Public Class CuentaCorrientePantalla
                 GRilla.Item("Vencimiento", WRenglon).Value = row.Item("Vencimiento") 'CamposCtaCtePrv.vencimiento
                 GRilla.Item("OrdVencimiento", WRenglon).Value = Proceso.ordenaFecha(row.Item("Vencimiento"))
 
+                If OrDefault(row.Item("MarcaVirtual"), "") = "X" Then
+                    GRilla.Rows(WRenglon).DefaultCellStyle.BackColor = IIf(OrDefault(row.Item("Impre"), "") = "OP", Color.LightBlue, Color.GreenYellow)
+                End If
+
+                GRilla.CurrentCell = GRilla.Rows(WRenglon).Cells(0)
+                GRilla.Focus()
+
                 WRenglon = WRenglon + 1
                 WSuma = WSuma + row.Item("Saldo") 'CamposCtaCtePrv.saldo
 
                 _NrosInternos.Add({row.Item("Numero"), row.Item("NroInterno")})
+
+                GRilla.Refresh()
 
             Next
         Else
@@ -159,6 +168,7 @@ Public Class CuentaCorrientePantalla
                 & ", LTRIM(RTRIM(ISNULL(CtaCtePrv.Vencimiento, ''))) as Vencimiento" _
                 & ", LTRIM(RTRIM(ISNULL(CtaCtePrv.NroInterno, 0))) as NroInterno" _
                 & ", LTRIM(RTRIM(ISNULL(CtaCtePrv.Impre, ''))) as Impre" _
+                & ", LTRIM(RTRIM(ISNULL(CtaCtePrv.MarcaVirtual, ''))) as MarcaVirtual" _
                 & " FROM CtaCtePrv" _
                 & " WHERE CtaCtePrv.Proveedor = '" & WProveedor & "'" _
                 & "#PARCIAL#" _
@@ -350,7 +360,7 @@ Public Class CuentaCorrientePantalla
         _TraerSaldoCuentaProveedor(proveedor)
         Call _Proceso()
 
-        GRilla.CurrentCell = GRilla.Rows(0).Cells(0) ' Nos posicionamos en la grilla.
+        'GRilla.CurrentCell = GRilla.Rows(0).Cells(0) ' Nos posicionamos en la grilla.
     End Sub
 
     Private Sub lstAyuda_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstAyuda.Click
