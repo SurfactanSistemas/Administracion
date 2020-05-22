@@ -327,4 +327,10 @@
             .Show(Me)
         End With
     End Sub
+
+    Private Sub OrdenDePagoVirtualToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OrdenDePagoVirtualToolStripMenuItem.Click
+        With New PagosVirtual
+            .Show(Me)
+        End With
+    End Sub
 End Class
