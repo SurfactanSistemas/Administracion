@@ -295,7 +295,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Dim tabla As New DataTable
         Dim cn = New SqlConnection()
         'Dim cm = "SELECT ccp.Tipo, ccp.Letra, ccp.Punto, ccp.Numero, ccp.Total, ccp.Saldo, ccp.Fecha, ccp.Vencimiento, ccp.Vencimiento1, Impre = CASE ISNULL(i.Rechazado, 0) WHEN 1 THEN 'CHR' ELSE ccp.Impre END, ccp.NroInterno, ccp.Clave, ccp.Pago, ccp.Paridad FROM CtaCtePrv ccp LEFT OUTER JOIN IvaComp i ON i.NroInterno = ccp.NroInterno WHERE ccp.Proveedor = '" & proveedor.Trim() & "' AND ccp.Saldo <> 0 ORDER BY ccp.Proveedor, ccp.OrdFecha, ccp.NroInterno"
-        Dim cm = "SELECT ccp.Tipo, ccp.Letra, ccp.Punto, ccp.Numero, ccp.Total, ccp.Saldo, ccp.Fecha, ccp.Vencimiento, ccp.Vencimiento1, Impre = CASE ISNULL(i.Rechazado, 0) WHEN 1 THEN 'CHR' ELSE ccp.Impre END, ccp.NroInterno, ccp.Clave, ccp.Pago, ccp.Paridad FROM CtaCtePrv ccp LEFT OUTER JOIN IvaComp i ON i.NroInterno = ccp.NroInterno WHERE ccp.Proveedor = '" & proveedor.Trim() & "' AND ccp.Saldo <> 0 ORDER BY ccp.Proveedor, ccp.OrdFecha, ccp.Numero"
+        Dim cm = "SELECT ccp.Tipo, ccp.Letra, ccp.Punto, ccp.Numero, ccp.Total, ccp.Saldo, ccp.Fecha, ccp.Vencimiento, ccp.Vencimiento1, Impre = CASE ISNULL(i.Rechazado, 0) WHEN 1 THEN 'CHR' ELSE ccp.Impre END, ccp.NroInterno, ccp.Clave, ccp.Pago, ccp.Paridad, ccp.MarcaVirtual FROM CtaCtePrv ccp LEFT OUTER JOIN IvaComp i ON i.NroInterno = ccp.NroInterno WHERE ccp.Proveedor = '" & proveedor.Trim() & "' AND ccp.Saldo <> 0 ORDER BY ccp.Proveedor, ccp.OrdFecha, ccp.Numero"
         Dim dr As New SqlDataAdapter(cm, cn)
 
         Try
@@ -795,6 +795,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
 
                         Try
                             SQLConnector.executeProcedure("alta_impCtaCtePrvNetII", CCPrv.Clave, CCPrv.Proveedor, CCPrv.Tipo, CCPrv.letra, CCPrv.punto, CCPrv.numero, varTotal, varSaldo, CCPrv.fecha, CCPrv.vencimiento, CCPrv.VencimientoII, CCPrv.Impre, CCPrv.nroInterno, txtEmpresa, varAcumulado, WOrden, txtFechaEmision.Text, "", "", "", varParidadTotal, varSaldoOriginal, varDife, 0, 0, "", varRetIb, varRetGan, varAcuNeto, varParidad, varTotalUs, varSaldoUs, varAcumulaUs, varPago, IIf(varParidad = 0, 0, varPesosOrig), varDifCambio, AcumDifCambio, AcumPesosOrig)
+                            If OrDefault(row("MarcaVirtual"), "") = "X" Then ExecuteNonQueries({"UPDATE impCtaCtePrvNet SET MarcaVirtual = 'X' WHERE Clave = '" & row("Clave") & "'"})
                         Catch ex As Exception
                             MsgBox(ex.Message, MsgBoxStyle.Critical)
                             Exit Sub

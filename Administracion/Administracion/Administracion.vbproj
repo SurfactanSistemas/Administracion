@@ -466,6 +466,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="PagosVirtual.Designer.vb">
+      <DependentUpon>PagosVirtual.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PagosVirtual.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Pagos\CarpetasPagos.Designer.vb">
       <DependentUpon>CarpetasPagos.vb</DependentUpon>
     </Compile>
@@ -1155,6 +1161,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModificaIntereses.resx">
       <DependentUpon>ModificaIntereses.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PagosVirtual.resx">
+      <DependentUpon>PagosVirtual.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pagos\CarpetasPagos.resx">
       <DependentUpon>CarpetasPagos.vb</DependentUpon>

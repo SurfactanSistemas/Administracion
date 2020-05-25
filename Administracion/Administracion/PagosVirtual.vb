@@ -8,7 +8,7 @@ Imports CrystalDecisions.CrystalReports.Engine
 Imports Microsoft.Office.Core
 Imports Microsoft.Office.Interop.Outlook
 
-Public Class Pagos
+Public Class PagosVirtual
     Dim pagos As New List(Of DetalleCompraCuentaCorriente)
     Dim cheques As New List(Of Cheque)
     Private XParidadTotal As String = "0"
@@ -107,7 +107,7 @@ Public Class Pagos
 
     Private Function _ExisteOrdenDePago(ByVal NumOrden) As Boolean
         Dim cn = New SqlConnection()
-        Dim cm = New SqlCommand("SELECT TOP 1 Orden FROM Pagos WHERE Orden = '" & NumOrden & "' And MarcaVirtual <> 'X'")
+        Dim cm = New SqlCommand("SELECT TOP 1 Orden FROM Pagos WHERE Orden = '" & NumOrden & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -629,7 +629,8 @@ Public Class Pagos
 
                 If Not IsNothing(proveedor) Then
                     mostrarProveedor(proveedor)
-                    btnCtaCte.PerformClick()
+                    'btnCtaCte.PerformClick()
+                    btnCtaCte_Click(Nothing, Nothing)
                 Else
                     txtRazonSocial.Text = ""
                     MessageBox.Show("El proveedor ingresado es inexistente")
@@ -725,7 +726,7 @@ Public Class Pagos
         Dim XClaves As New List(Of Object)
         Dim _Item As String
         Dim cn = New SqlConnection()
-        Dim cm = New SqlCommand("SELECT cp.NroInterno, cp.Total, cp.Saldo, cp.Impre, cp.Letra, cp.Punto, " & "cp.Numero, cp.Fecha, cp.Clave FROM CtaCtePrv as cp WHERE cp.Proveedor = '" & Trim(txtProveedor.Text) & "' and cp.Saldo <> 0 And cp.MarcaVirtual <> 'X' ORDER BY cp.OrdFecha ASC, cp.Numero")
+        Dim cm = New SqlCommand("SELECT cp.NroInterno, cp.Total, cp.Saldo, cp.Impre, cp.Letra, cp.Punto, " & "cp.Numero, cp.Fecha, cp.Clave FROM CtaCtePrv as cp WHERE cp.Proveedor = '" & Trim(txtProveedor.Text) & "' and cp.Saldo <> 0 And ISNULL(MarcaVirtual, '') <> 'X' ORDER BY cp.OrdFecha ASC, cp.Numero")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -1372,6 +1373,7 @@ Public Class Pagos
                         .Cells(2).Value = XPunto
                         .Cells(3).Value = XNumero
                         .Cells(4).Value = formatonumerico(XSaldo)
+                        .Cells("Clave").Value = Trim(clave)
 
                         Select Case Val(XTipo)
                             Case 1
@@ -1389,38 +1391,38 @@ Public Class Pagos
                         .Cells("MarcaCHR").Value = WMarcaCHR
                     End With
 
-                    If Val(XPago) = 2 Then
-
-                        If Val(XParidad) <> 0 And WMarcaDifCambio = 0 And ckCalculaDifCambio.Checked Then
-                            XParidadTotal = txtParidad.Text '_TraerCambioDivisa(txtFechaParidad.Text)
-
-                            XSaldoUS = (Val(_NormalizarNumero(XSaldo)) / Val(XParidad.Replace(",", "."))) * Val(_NormalizarNumero(XParidadTotal, 4))
-
-                            Dim diferencia As String = Val(_NormalizarNumero(XSaldoUS)) - Val(_NormalizarNumero(XSaldo))
-
-                            ' Si hay diferencia se agrega una ND.
-                            If Val(diferencia) <> 0 Then
-
-                                XRow = _ProximaFilaVaciaPagos() 'gridPagos.Rows.Add()
-
-                                With gridPagos.Rows(XRow)
-
-                                    .Cells(0).Value = IIf(Val(diferencia) > 0, "02", "03")
-                                    .Cells(1).Value = XLetra
-                                    .Cells(2).Value = XPunto
-                                    .Cells(3).Value = "99999999"
-                                    .Cells(4).Value = _NormalizarNumero(diferencia)
-                                    .Cells(5).Value = IIf(Val(diferencia) > 0, "N/D por Diferencia de Cambio ", "N/C por Diferencia de Cambio ") ' "N/D por Diferencia de Cambio "
-                                    .Cells("MarcaDifCambio").Value = WMarcaDifCambio
-                                    .Cells("MarcaCHR").Value = WMarcaCHR
-
-                                End With
-
-                            End If
-
-                        End If
-
-                    End If
+                    'If Val(XPago) = 2 Then
+                    '
+                    '    If Val(XParidad) <> 0 And WMarcaDifCambio = 0 And ckCalculaDifCambio.Checked Then
+                    '        XParidadTotal = txtParidad.Text '_TraerCambioDivisa(txtFechaParidad.Text)
+                    '
+                    '        XSaldoUS = (Val(_NormalizarNumero(XSaldo)) / Val(XParidad.Replace(",", "."))) * Val(_NormalizarNumero(XParidadTotal, 4))
+                    '
+                    '        Dim diferencia As String = Val(_NormalizarNumero(XSaldoUS)) - Val(_NormalizarNumero(XSaldo))
+                    '
+                    '        ' Si hay diferencia se agrega una ND.
+                    '        If Val(diferencia) <> 0 Then
+                    '
+                    '            XRow = _ProximaFilaVaciaPagos() 'gridPagos.Rows.Add()
+                    '
+                    '            With gridPagos.Rows(XRow)
+                    '
+                    '                .Cells(0).Value = IIf(Val(diferencia) > 0, "02", "03")
+                    '                .Cells(1).Value = XLetra
+                    '                .Cells(2).Value = XPunto
+                    '                .Cells(3).Value = "99999999"
+                    '                .Cells(4).Value = _NormalizarNumero(diferencia)
+                    '                .Cells(5).Value = IIf(Val(diferencia) > 0, "N/D por Diferencia de Cambio ", "N/C por Diferencia de Cambio ") ' "N/D por Diferencia de Cambio "
+                    '                .Cells("MarcaDifCambio").Value = WMarcaDifCambio
+                    '                .Cells("MarcaCHR").Value = WMarcaCHR
+                    '
+                    '            End With
+                    '
+                    '        End If
+                    '
+                    '    End If
+                    '
+                    'End If
 
                 End If
             End With
@@ -1656,7 +1658,7 @@ Public Class Pagos
 
         optCtaCte.Checked = True
 
-        ckNoCalcRetenciones.Checked = False
+        ckNoCalcRetenciones.Checked = True
 
         btnEnviarAviso.Enabled = False
         btnActualizarCarpetas.Visible = False
@@ -2008,7 +2010,8 @@ Public Class Pagos
                     ' Actualizamos la Cta Cte del Proveedor.
                     XClaveCtaprv = txtProveedor.Text & XLetra1 & XTipo1 & XPunto1 & XNumero1
 
-                    ZSql = "UPDATE CtaCtePrv SET Saldo = Saldo - " & Str(XImporte1) & " WHERE Clave = '" & XClaveCtaprv & "'"
+                    'ZSql = "UPDATE CtaCtePrv SET Saldo = Saldo - " & Str(XImporte1) & " WHERE Clave = '" & XClaveCtaprv & "'"
+                    ZSql = "UPDATE CtaCtePrv SET MarcaVirtual = 'X' WHERE Clave = '" & XClaveCtaprv & "'"
 
                     Try
                         cn.Open()
@@ -2149,71 +2152,71 @@ Public Class Pagos
                         cn.Close()
                     End Try
 
-                    If Val(XTipo2) = 3 Then
+                    'If Val(XTipo2) = 3 Then
 
-                        XDestino = "O.P:" + txtOrdenPago.Text
+                    '    XDestino = "O.P:" + txtOrdenPago.Text
 
-                        If Val(XTipoRecibo) = 1 Then
+                    '    If Val(XTipoRecibo) = 1 Then
 
-                            ZSql = ""
-                            ZSql = ZSql + "UPDATE Recibos SET "
-                            ZSql = ZSql + "Estado2 = " + "'" + "X" + "',"
-                            ZSql = ZSql + "Destino = " + "'" + XDestino + "'"
-                            ZSql = ZSql + " Where Clave = " + "'" + ZClaveRecibo + "'"
+                    '        ZSql = ""
+                    '        ZSql = ZSql + "UPDATE Recibos SET "
+                    '        ZSql = ZSql + "Estado2 = " + "'" + "X" + "',"
+                    '        ZSql = ZSql + "Destino = " + "'" + XDestino + "'"
+                    '        ZSql = ZSql + " Where Clave = " + "'" + ZClaveRecibo + "'"
 
-                        Else
-                            ZSql = ""
-                            ZSql = ZSql + "UPDATE RecibosProvi SET "
-                            ZSql = ZSql + "Estado2 = " + "'" + "X" + "',"
-                            ZSql = ZSql + "Destino = " + "'" + XDestino + "'"
-                            ZSql = ZSql + " Where Clave = " + "'" + ZClaveRecibo + "'"
+                    '    Else
+                    '        ZSql = ""
+                    '        ZSql = ZSql + "UPDATE RecibosProvi SET "
+                    '        ZSql = ZSql + "Estado2 = " + "'" + "X" + "',"
+                    '        ZSql = ZSql + "Destino = " + "'" + XDestino + "'"
+                    '        ZSql = ZSql + " Where Clave = " + "'" + ZClaveRecibo + "'"
 
-                        End If
+                    '    End If
 
-                        Try
-                            cn.Open()
-                            cm.CommandText = ZSql
-                            cm.ExecuteNonQuery()
+                    '    Try
+                    '        cn.Open()
+                    '        cm.CommandText = ZSql
+                    '        cm.ExecuteNonQuery()
 
-                        Catch ex As System.Exception
-                            MsgBox("Hubo un problema al querer actualizar el estado del Cheque en la Base de Datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
-                            Exit Sub
-                        Finally
-                            cn.Close()
-                        End Try
+                    '    Catch ex As System.Exception
+                    '        MsgBox("Hubo un problema al querer actualizar el estado del Cheque en la Base de Datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
+                    '        Exit Sub
+                    '    Finally
+                    '        cn.Close()
+                    '    End Try
 
-                    End If
+                    'End If
 
-                    If Val(XTipo2) = 4 Then
+                    'If Val(XTipo2) = 4 Then
 
-                        XSaldo = ""
-                        XSaldoUs = ""
-                        XEstado = "1"
-                        XDate = Date.Now().ToString("MM-dd-yyyy")
+                    '    XSaldo = ""
+                    '    XSaldoUs = ""
+                    '    XEstado = "1"
+                    '    XDate = Date.Now().ToString("MM-dd-yyyy")
 
-                        ZSql = ""
-                        ZSql = ZSql + "UPDATE CtaCte SET "
-                        ZSql = ZSql + "Saldo = " + "'" + Str(XSaldo) + "',"
-                        ZSql = ZSql + "SaldoUs = " + "'" + Str(XSaldoUs) + "',"
-                        ZSql = ZSql + "Estado2 = " + "'" + XEstado + "',"
-                        ZSql = ZSql + "WDate = " + "'" + XDate + "'"
-                        ZSql = ZSql + " Where Clave = " + "'" + XClaveCtaCte + "'"
+                    '    ZSql = ""
+                    '    ZSql = ZSql + "UPDATE CtaCte SET "
+                    '    ZSql = ZSql + "Saldo = " + "'" + Str(XSaldo) + "',"
+                    '    ZSql = ZSql + "SaldoUs = " + "'" + Str(XSaldoUs) + "',"
+                    '    ZSql = ZSql + "Estado2 = " + "'" + XEstado + "',"
+                    '    ZSql = ZSql + "WDate = " + "'" + XDate + "'"
+                    '    ZSql = ZSql + " Where Clave = " + "'" + XClaveCtaCte + "'"
 
 
-                        Try
+                    '    Try
 
-                            cn.Open()
-                            cm.CommandText = ZSql
-                            cm.ExecuteNonQuery()
+                    '        cn.Open()
+                    '        cm.CommandText = ZSql
+                    '        cm.ExecuteNonQuery()
 
-                        Catch ex As System.Exception
-                            MsgBox("Hubo un problema al querer actualizar la Cuenta corriente en la Base de Datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
-                            Exit Sub
-                        Finally
-                            cn.Close()
-                        End Try
+                    '    Catch ex As System.Exception
+                    '        MsgBox("Hubo un problema al querer actualizar la Cuenta corriente en la Base de Datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
+                    '        Exit Sub
+                    '    Finally
+                    '        cn.Close()
+                    '    End Try
 
-                    End If
+                    'End If
 
                 End If
 
@@ -2264,6 +2267,7 @@ Public Class Pagos
                 ZSql &= " SaldoList = '',"
                 ZSql &= " NroInterno = 0,"
                 ZSql &= " Lista = '',"
+                ZSql &= " MarcaVirtual = 'X',"
                 ZSql &= " Acumulado = 0"
                 ZSql &= " WHERE Clave = '" & XClaveCtaprv & "'"
 
@@ -2271,7 +2275,7 @@ Public Class Pagos
 
                 ZSql = ""
                 ZSql &= "INSERT INTO CtaCtePrv"
-                ZSql &= " (Clave, Proveedor, Letra, Tipo, Punto, Numero, fecha, Estado, Vencimiento, Vencimiento1, Total, Saldo, OrdFecha, OrdVencimiento, Impre, Empresa, SaldoList, NroInterno, Lista, Acumulado, Pago, Paridad, ImporteOriginal, Cuota, FacturaOriginal, NroInternoAsociado, DesProveOriginal, Tarjeta, Observaciones, Interes, IvaInteres, Referencia, TituloI, TituloII, Auxi1, Auxi2, Auxi3, Auxi4, FechaOriginal, OrdFechaOriginal) VALUES ("
+                ZSql &= " (Clave, Proveedor, Letra, Tipo, Punto, Numero, fecha, Estado, Vencimiento, Vencimiento1, Total, Saldo, OrdFecha, OrdVencimiento, Impre, Empresa, SaldoList, NroInterno, Lista, Acumulado, Pago, Paridad, ImporteOriginal, Cuota, FacturaOriginal, NroInternoAsociado, DesProveOriginal, Tarjeta, Observaciones, Interes, IvaInteres, Referencia, TituloI, TituloII, Auxi1, Auxi2, Auxi3, Auxi4, FechaOriginal, OrdFechaOriginal, MarcaVirtual) VALUES ("
                 ZSql &= "'" & XClaveCtaprv & "',"
                 ZSql &= "'" & XProveedor & "',"
                 ZSql &= "'" & WLetra & "',"
@@ -2288,7 +2292,7 @@ Public Class Pagos
                 ZSql &= "'" & XOrdVencimiento & "',"
                 ZSql &= "'" & XImpre & "',"
                 ZSql &= "'" & XEmpresa & "',"
-                ZSql &= " '', '', '', '', '', '', 0, 0, 0, 0,'','','', 0, 0,'','','','','','','', '', '')"
+                ZSql &= " '', '', '', '', '', '', 0, 0, 0, 0,'','','', 0, 0,'','','','','','','', '', '', 'X')"
 
             End If
 
@@ -2308,116 +2312,116 @@ Public Class Pagos
 
         End If
 
-        If optAnticipos.Checked Then
+        'If optAnticipos.Checked Then
 
-            WLetra = "A"
-            WTipo = "05"
-            WPunto = "0000"
-            WNumero = ceros(txtOrdenPago.Text, 8)
-            XProveedor = txtProveedor.Text
+        '    WLetra = "A"
+        '    WTipo = "05"
+        '    WPunto = "0000"
+        '    WNumero = ceros(txtOrdenPago.Text, 8)
+        '    XProveedor = txtProveedor.Text
 
-            XFecha = txtFecha.Text
-            XEstado = "1"
-            XVencimiento = "  /  /    "
-            XVencimiento1 = "  /  /    "
-            XTotal = Val(formatonumerico(lblFormaPagos.Text))
-            XTotal = Val(XTotal * -1)
-            XSaldo = XTotal
-            XOrdFecha = ordenaFecha(XFecha)
-            XOrdVencimiento = "00000000"
-            XImpre = "AN"
-            XEmpresa = "1"
+        '    XFecha = txtFecha.Text
+        '    XEstado = "1"
+        '    XVencimiento = "  /  /    "
+        '    XVencimiento1 = "  /  /    "
+        '    XTotal = Val(formatonumerico(lblFormaPagos.Text))
+        '    XTotal = Val(XTotal * -1)
+        '    XSaldo = XTotal
+        '    XOrdFecha = ordenaFecha(XFecha)
+        '    XOrdVencimiento = "00000000"
+        '    XImpre = "AN"
+        '    XEmpresa = "1"
 
-            XClaveCtaprv = XProveedor + WLetra + WTipo + WPunto + WNumero
+        '    XClaveCtaprv = XProveedor + WLetra + WTipo + WPunto + WNumero
 
-            If _ExisteCtaCtePrv(XClaveCtaprv) Then
+        '    If _ExisteCtaCtePrv(XClaveCtaprv) Then
 
-                ZSql = ""
-                ZSql &= "UPDATE CtaCtePrv SET"
-                ZSql &= " Proveedor = '" & XProveedor & "',"
-                ZSql &= " Letra  = '" & WLetra & "',"
-                ZSql &= " Tipo = '" & WTipo & "',"
-                ZSql &= " Punto = '" & WPunto & "',"
-                ZSql &= " Numero = '" & WNumero & "',"
-                ZSql &= " Fecha = '" & XFecha & "',"
-                ZSql &= " Estado = '" & XEstado & "',"
-                ZSql &= " Vencimiento = '" & XVencimiento & "',"
-                ZSql &= " Vencimiento1 = '" & XVencimiento1 & "',"
-                ZSql &= " Total = " & Str(XTotal) & ","
-                ZSql &= " Saldo = " & Str(XSaldo) & ","
-                ZSql &= " OrdFecha = '" & XOrdFecha & "',"
-                ZSql &= " OrdVencimiento = '" & XOrdVencimiento & "',"
-                ZSql &= " Impre = '" & XImpre & "',"
-                ZSql &= " Empresa = '" & XEmpresa & "',"
-                ZSql &= " SaldoList = '',"
-                ZSql &= " NroInterno = 0,"
-                ZSql &= " Lista = '',"
-                ZSql &= " Paridad = '',"
-                ZSql &= " Pago = '',"
-                ZSql &= " Acumulado = 0"
-                ZSql &= " WHERE Clave = '" & XClaveCtaprv & "'"
+        '        ZSql = ""
+        '        ZSql &= "UPDATE CtaCtePrv SET"
+        '        ZSql &= " Proveedor = '" & XProveedor & "',"
+        '        ZSql &= " Letra  = '" & WLetra & "',"
+        '        ZSql &= " Tipo = '" & WTipo & "',"
+        '        ZSql &= " Punto = '" & WPunto & "',"
+        '        ZSql &= " Numero = '" & WNumero & "',"
+        '        ZSql &= " Fecha = '" & XFecha & "',"
+        '        ZSql &= " Estado = '" & XEstado & "',"
+        '        ZSql &= " Vencimiento = '" & XVencimiento & "',"
+        '        ZSql &= " Vencimiento1 = '" & XVencimiento1 & "',"
+        '        ZSql &= " Total = " & Str(XTotal) & ","
+        '        ZSql &= " Saldo = " & Str(XSaldo) & ","
+        '        ZSql &= " OrdFecha = '" & XOrdFecha & "',"
+        '        ZSql &= " OrdVencimiento = '" & XOrdVencimiento & "',"
+        '        ZSql &= " Impre = '" & XImpre & "',"
+        '        ZSql &= " Empresa = '" & XEmpresa & "',"
+        '        ZSql &= " SaldoList = '',"
+        '        ZSql &= " NroInterno = 0,"
+        '        ZSql &= " Lista = '',"
+        '        ZSql &= " Paridad = '',"
+        '        ZSql &= " Pago = '',"
+        '        ZSql &= " Acumulado = 0"
+        '        ZSql &= " WHERE Clave = '" & XClaveCtaprv & "'"
 
-            Else
+        '    Else
 
-                ZSql = ""
-                ZSql &= "INSERT INTO CtaCtePrv"
-                ZSql &= " (Clave, Proveedor, Letra, Tipo, Punto, Numero, fecha, Estado, Vencimiento, Vencimiento1, Total, Saldo, OrdFecha, OrdVencimiento, Impre, Empresa, SaldoList, NroInterno, Lista, Acumulado, Pago, Paridad, ImporteOriginal, Cuota, FacturaOriginal, NroInternoAsociado, DesProveOriginal, Tarjeta, Observaciones, Interes, IvaInteres, Referencia, TituloI, TituloII, Auxi1, Auxi2, Auxi3, Auxi4, FechaOriginal, OrdFechaOriginal) VALUES ("
-                ZSql &= "'" & XClaveCtaprv & "',"
-                ZSql &= "'" & XProveedor & "',"
-                ZSql &= "'" & WLetra & "',"
-                ZSql &= "'" & WTipo & "',"
-                ZSql &= "'" & WPunto & "',"
-                ZSql &= "'" & WNumero & "',"
-                ZSql &= "'" & XFecha & "',"
-                ZSql &= "'" & XEstado & "',"
-                ZSql &= "'" & XVencimiento & "',"
-                ZSql &= "'" & XVencimiento1 & "',"
-                ZSql &= "" & Str(XTotal) & ","
-                ZSql &= "" & Str(XSaldo) & ","
-                ZSql &= "'" & XOrdFecha & "',"
-                ZSql &= "'" & XOrdVencimiento & "',"
-                ZSql &= "'" & XImpre & "',"
-                ZSql &= "'" & XEmpresa & "',"
-                ZSql &= " '', '', '', '', '', '', 0, 0, 0, 0,'','','', 0, 0,'','','','','','','', '', '')"
+        '        ZSql = ""
+        '        ZSql &= "INSERT INTO CtaCtePrv"
+        '        ZSql &= " (Clave, Proveedor, Letra, Tipo, Punto, Numero, fecha, Estado, Vencimiento, Vencimiento1, Total, Saldo, OrdFecha, OrdVencimiento, Impre, Empresa, SaldoList, NroInterno, Lista, Acumulado, Pago, Paridad, ImporteOriginal, Cuota, FacturaOriginal, NroInternoAsociado, DesProveOriginal, Tarjeta, Observaciones, Interes, IvaInteres, Referencia, TituloI, TituloII, Auxi1, Auxi2, Auxi3, Auxi4, FechaOriginal, OrdFechaOriginal) VALUES ("
+        '        ZSql &= "'" & XClaveCtaprv & "',"
+        '        ZSql &= "'" & XProveedor & "',"
+        '        ZSql &= "'" & WLetra & "',"
+        '        ZSql &= "'" & WTipo & "',"
+        '        ZSql &= "'" & WPunto & "',"
+        '        ZSql &= "'" & WNumero & "',"
+        '        ZSql &= "'" & XFecha & "',"
+        '        ZSql &= "'" & XEstado & "',"
+        '        ZSql &= "'" & XVencimiento & "',"
+        '        ZSql &= "'" & XVencimiento1 & "',"
+        '        ZSql &= "" & Str(XTotal) & ","
+        '        ZSql &= "" & Str(XSaldo) & ","
+        '        ZSql &= "'" & XOrdFecha & "',"
+        '        ZSql &= "'" & XOrdVencimiento & "',"
+        '        ZSql &= "'" & XImpre & "',"
+        '        ZSql &= "'" & XEmpresa & "',"
+        '        ZSql &= " '', '', '', '', '', '', 0, 0, 0, 0,'','','', 0, 0,'','','','','','','', '', '')"
 
-            End If
+        '    End If
 
 
-            Try
+        '    Try
 
-                cn.Open()
-                cm.CommandText = ZSql
-                cm.ExecuteNonQuery()
+        '        cn.Open()
+        '        cm.CommandText = ZSql
+        '        cm.ExecuteNonQuery()
 
-            Catch ex As System.Exception
-                MsgBox("Hubo un problema al querer grabar la informacion en la Cta Cte la Base de Datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
-                Exit Sub
-            Finally
-                cn.Close()
-            End Try
+        '    Catch ex As System.Exception
+        '        MsgBox("Hubo un problema al querer grabar la informacion en la Cta Cte la Base de Datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
+        '        Exit Sub
+        '    Finally
+        '        cn.Close()
+        '    End Try
 
-        End If
+        'End If
 
         ' Tipo6?
 
-        ' Actualizo retenciones en caso de existir
-        Dim _Clave = Microsoft.VisualBasic.Right(txtFecha.Text, 2) & Mid(txtFecha.Text, 4, 2) & txtProveedor.Text
-        'XNeto = 0
-        ZSql = ""
-        ZSql &= "UPDATE Retencion SET Neto = Neto + " & Str(XNeto) & ", Retenido = Retenido + " & Str(XRetencion) & " WHERE Clave = '" & _Clave & "'"
+        '' Actualizo retenciones en caso de existir
+        'Dim _Clave = Microsoft.VisualBasic.Right(txtFecha.Text, 2) & Mid(txtFecha.Text, 4, 2) & txtProveedor.Text
+        ''XNeto = 0
+        'ZSql = ""
+        'ZSql &= "UPDATE Retencion SET Neto = Neto + " & Str(XNeto) & ", Retenido = Retenido + " & Str(XRetencion) & " WHERE Clave = '" & _Clave & "'"
 
-        Try
+        'Try
 
-            cn.Open()
-            cm.CommandText = ZSql
-            cm.ExecuteNonQuery()
+        '    cn.Open()
+        '    cm.CommandText = ZSql
+        '    cm.ExecuteNonQuery()
 
-        Catch ex As System.Exception
-            MsgBox("Hubo un problema al querer Actualizar la información de Retención en la Base de Datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
-            Exit Sub
-        Finally
-            cn.Close()
-        End Try
+        'Catch ex As System.Exception
+        '    MsgBox("Hubo un problema al querer Actualizar la información de Retención en la Base de Datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
+        '    Exit Sub
+        'Finally
+        '    cn.Close()
+        'End Try
 
         ' Actualizamos los valores de las carpetas.
 
@@ -2439,6 +2443,7 @@ Public Class Pagos
         ZSql = ZSql & " Carpeta8 = " & Val(_Carpetas(9)) & ","
         ZSql = ZSql & " Carpeta9 = " & Val(_Carpetas(10)) & ","
         ZSql = ZSql & " Titulo = '',"
+        ZSql = ZSql & " MarcaVirtual = 'X',"
         ZSql = ZSql & " TituloI = ''"
         ZSql = ZSql & " Where Orden = " & "'" & txtOrdenPago.Text & "'"
 
@@ -2455,76 +2460,76 @@ Public Class Pagos
             cn.Close()
         End Try
 
-        Dim _Empresas = Empresas 'As New List(Of String) From {}
-
-        If _Empresas.Count > 0 Then
-            For Ciclo = 1 To 10
-
-                If Val(_Carpetas(Ciclo)) <> 0 Then
-
-                    WEntra = "N"
-
-                    Dim dr As SqlDataReader
-                    Dim ZProveedor = ""
-
-                    For Each _Empresa As String In _Empresas
-
-                        ZSql = ""
-                        ZSql = ZSql + "Select Proveedor"
-                        ZSql = ZSql + " FROM Orden"
-                        ZSql = ZSql + " Where Orden.Carpeta = " + "'" + _Carpetas(Ciclo) + "'"
-
-                        Try
-                            cn.ConnectionString = _CS(_Empresa)
-                            cn.Open()
-                            cm.CommandText = ZSql
-                            dr = cm.ExecuteReader()
-
-                            If dr.HasRows Then
-                                dr.Read()
-                                ZProveedor = dr.Item("Proveedor")
-                                WEntra = "S"
-                            End If
-
-                        Catch ex As System.Exception
-                            MsgBox("Hubo un problema al querer la información de la Orden de Compra en la Base de Datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
-                            Exit Sub
-                        Finally
-                            cn.Close()
-                        End Try
-
-                        If WEntra <> "N" Then
-                            If txtProveedor.Text <> ZProveedor Then
-                                ZSql = ""
-                                ZSql = ZSql + "UPDATE Orden SET "
-                                ZSql = ZSql + " PagoDespacho = 1"
-                                ZSql = ZSql + " Where Orden.Carpeta = " + "'" + _Carpetas(Ciclo) + "'"
-
-                                Try
-
-                                    cn.Open()
-                                    cm.CommandText = ZSql
-                                    cm.ExecuteNonQuery()
-
-                                Catch ex As System.Exception
-                                    MsgBox("Hubo un problema al querer Actualizar la información de la Orden de Pago en la Base de Datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
-                                    Exit Sub
-                                Finally
-                                    cn.Close()
-                                End Try
-
-                            End If
-
-                            Exit For
-
-                        End If
-
-                    Next
-
-                End If
-
-            Next
-        End If
+        'Dim _Empresas = Empresas 'As New List(Of String) From {}
+        '
+        'If _Empresas.Count > 0 Then
+        '    For Ciclo = 1 To 10
+        '
+        '        If Val(_Carpetas(Ciclo)) <> 0 Then
+        '
+        '            WEntra = "N"
+        '
+        '            Dim dr As SqlDataReader
+        '            Dim ZProveedor = ""
+        '
+        '            For Each _Empresa As String In _Empresas
+        '
+        '                ZSql = ""
+        '                ZSql = ZSql + "Select Proveedor"
+        '                ZSql = ZSql + " FROM Orden"
+        '                ZSql = ZSql + " Where Orden.Carpeta = " + "'" + _Carpetas(Ciclo) + "'"
+        '
+        '                Try
+        '                    cn.ConnectionString = _CS(_Empresa)
+        '                    cn.Open()
+        '                    cm.CommandText = ZSql
+        '                    dr = cm.ExecuteReader()
+        '
+        '                    If dr.HasRows Then
+        '                        dr.Read()
+        '                        ZProveedor = dr.Item("Proveedor")
+        '                        WEntra = "S"
+        '                    End If
+        '
+        '                Catch ex As System.Exception
+        '                    MsgBox("Hubo un problema al querer la información de la Orden de Compra en la Base de Datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
+        '                    Exit Sub
+        '                Finally
+        '                    cn.Close()
+        '                End Try
+        '
+        '                If WEntra <> "N" Then
+        '                    If txtProveedor.Text <> ZProveedor Then
+        '                        ZSql = ""
+        '                        ZSql = ZSql + "UPDATE Orden SET "
+        '                        ZSql = ZSql + " PagoDespacho = 1"
+        '                        ZSql = ZSql + " Where Orden.Carpeta = " + "'" + _Carpetas(Ciclo) + "'"
+        '
+        '                        Try
+        '
+        '                            cn.Open()
+        '                            cm.CommandText = ZSql
+        '                            cm.ExecuteNonQuery()
+        '
+        '                        Catch ex As System.Exception
+        '                            MsgBox("Hubo un problema al querer Actualizar la información de la Orden de Pago en la Base de Datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
+        '                            Exit Sub
+        '                        Finally
+        '                            cn.Close()
+        '                        End Try
+        '
+        '                    End If
+        '
+        '                    Exit For
+        '
+        '                End If
+        '
+        '            Next
+        '
+        '        End If
+        '
+        '    Next
+        'End If
 
         ' Reconectamos a la base original.
         cn.ConnectionString = _CS()
@@ -3202,19 +3207,19 @@ Public Class Pagos
         If e.KeyData = Keys.Enter Then
 
             btnEnviarAviso.Enabled = True
-            btnActualizarCarpetas.Enabled = True
+            'btnActualizarCarpetas.Enabled = True
 
             If Trim(txtOrdenPago.Text) <> "" Then
                 txtOrdenPago.Text = ceros(txtOrdenPago.Text, 6)
 
                 Try
 
-                    Dim WOrd As DataRow = GetSingle("SELECT MarcaVirtual, Carpeta1, Carpeta2, Carpeta3, Carpeta4, Carpeta5, Carpeta6, Carpeta7, Carpeta8, Carpeta9 FROM Pagos WHERE Orden = '" & txtOrdenPago.Text & "' And Renglon = '01'")
+                    Dim WOrd As DataRow = GetSingle("SELECT MarcaVirtual, Carpeta1, Carpeta2, Carpeta3, Carpeta4, Carpeta5, Carpeta6, Carpeta7, Carpeta8, Carpeta9  FROM Pagos WHERE Orden = '" & txtOrdenPago.Text & "' And Renglon = '01'")
 
                     If WOrd IsNot Nothing Then
 
-                        If OrDefault(WOrd.Item("MarcaVirtual"), "") = "X" Then
-                            MsgBox("La Orden de Pago indicada, es una OP Virtual y por tanto no puede ser consultada por medio de este formulario.", MsgBoxStyle.Information)
+                        If OrDefault(WOrd.Item("MarcaVirtual"), "") <> "X" Then
+                            MsgBox("La Orden de Pago indicada, no se trata de una OP Virtual.", MsgBoxStyle.Exclamation)
                             Exit Sub
                         End If
 
@@ -3229,7 +3234,7 @@ Public Class Pagos
                     mostrarOrdenDePago(DAOPagos.buscarOrdenPorNumero(txtOrdenPago.Text))
 
                     btnEnviarAviso.Enabled = True
-                    btnActualizarCarpetas.Visible = True
+                    'btnActualizarCarpetas.Visible = True
 
 
 
@@ -3303,7 +3308,7 @@ Public Class Pagos
         Return valido
     End Function
 
-Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData As Keys) As Boolean
+    Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData As Keys) As Boolean
 
         If gridFormaPagos.Focused Or gridFormaPagos.IsCurrentCellInEditMode Then ' Detectamos los ENTER tanto si solo estan en foco o si estan en edición una celda.
             gridFormaPagos.CommitEdit(DataGridViewDataErrorContexts.Commit) ' Guardamos todos los datos que no hayan sido confirmados.
@@ -3363,7 +3368,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
                             'valor = valor.ToString().Substring(valor.ToString.Length - 1, 1)
 
                             Select Case Val(valor)
-                                Case 1, 2, 3, 4, 5, 6, 7
+                                Case 1 ' Sólo Efectivo.
 
                                     eventoSegunTipoEnFormaDePagoPara(CustomConvert.toIntOrZero(valor), iRow, iCol)
 
@@ -4203,7 +4208,8 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
                     ElseIf Val(.Cells(0).Value) <> 3 Or Val(txtProveedor.Text) = 0 Then
 
                         WImpre2(Impre2, 1) = .Cells(1).Value
-                        WImpre2(Impre2, 2) = .Cells(4).Value
+                        'WImpre2(Impre2, 2) = .Cells(4).Value
+                        WImpre2(Impre2, 2) = "Cancelado c/Valores y Efectivo."
                         WImpre2(Impre2, 3) = .Cells(5).Value
                         WImpre2(Impre2, 4) = .Cells(2).Value
 
@@ -4216,7 +4222,9 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
                     End If
 
                     Lugar = Lugar + 1
+
                 End If
+
             End With
         Next iRow
 
@@ -4224,7 +4232,8 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
             For WCiclo = 1 To 15
                 If Val(WImpre2(WCiclo, 3)) = 0 Then
                     WImpre2(WCiclo, 1) = ""
-                    WImpre2(WCiclo, 2) = "Valores S/Detalle"
+                    'WImpre2(WCiclo, 2) = "Valores S/Detalle"
+                    WImpre2(Impre2, 2) = "Cancelado c/Valores y Efectivo."
                     WImpre2(WCiclo, 3) = Str$(SumaTercero)
                     WImpre2(WCiclo, 4) = ""
                     Exit For
@@ -6114,6 +6123,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
             Select Case _TipoConsulta
                 Case 0
                     mostrarProveedor(CLBFiltrado.SelectedItem.ToString)
+                    btnCtaCte_Click(Nothing, Nothing)
                 Case 1
 
                     _TraerCtaCte(CLBFiltrado.SelectedItem, indice)
@@ -6143,7 +6153,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
             Select Case _TipoConsulta
                 Case 0
                     mostrarProveedor(lstConsulta.SelectedItem.ToString)
-                    btnCtaCte.PerformClick()
+                    btnCtaCte_Click(Nothing, Nothing)
                 Case 1
                     ' Ctas Ctes
                     If Trim(lstConsulta.SelectedItem) = "" Or Not optCtaCte.Checked Then
@@ -6254,7 +6264,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
 
                 End If
             End If
-         
+
         End With
     End Sub
 
@@ -7085,6 +7095,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
 
     Private Sub ckNoCalcRetenciones_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles ckNoCalcRetenciones.CheckedChanged, ckNoCalcRetenciones.CheckStateChanged
         _RecalcularRetenciones()
+        sumarImportes()
     End Sub
 
     Private Sub gridPagos_Enter(ByVal sender As Object, ByVal e As EventArgs) Handles gridPagos.Enter, gridFormaPagos.Enter
@@ -7417,8 +7428,8 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
                     End If
                 Next
 
-                .Send()
-                '.Display()
+                '.Send()
+                .Display()
 
             End With
 
@@ -7459,7 +7470,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
         Else
             MsgBox("Factura en pesos, no hay calculo de diferencia")
         End If
-       
+
     End Sub
 
     Private Sub btnVolver_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVolver.Click
