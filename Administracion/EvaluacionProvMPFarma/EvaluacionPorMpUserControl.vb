@@ -191,7 +191,7 @@ Public Class EvaluacionPorMpUserControl
 
                 dgvItemsEvaluados.ClearSelection()
 
-                If {1, 2, 3, 18, 19, 20, 21}.Contains(id) Then
+                If {1, 2, 3, 18, 19, 20, 21, 35, 36, 37, 38}.Contains(id) Then
                     Dim WFechaVto As String = Trim(OrDefault(.Cells("Vto").Value, ""))
 
                     If WFechaVto.Replace("/", "").Trim() <> "" Then
@@ -270,7 +270,7 @@ Public Class EvaluacionPorMpUserControl
     End Sub
 
     Private Sub dgvItemsEvaluados_CellContentClick(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles dgvItemsEvaluados.CellContentClick
-        If {2, 4, 6, 8}.Contains(e.ColumnIndex) Then dgvItemsEvaluados.CommitEdit(DataGridViewDataErrorContexts.Commit)
+        If {2, 4, 6, 8, 35, 36, 37, 38}.Contains(e.ColumnIndex) Then dgvItemsEvaluados.CommitEdit(DataGridViewDataErrorContexts.Commit)
     End Sub
 
     Private Sub dgvItemsEvaluados_CellValueChanged(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles dgvItemsEvaluados.CellValueChanged
@@ -328,7 +328,7 @@ Public Class EvaluacionPorMpUserControl
             Select Case e.ColumnIndex
                 Case 3, 5, 7, 8
 
-                    If (e.ColumnIndex = 8 AndAlso {1, 2, 3, 18, 19, 20, 21}.Contains(e.RowIndex)) Or e.ColumnIndex <> 8 Then
+                    If (e.ColumnIndex = 8 AndAlso {1, 2, 3, 18, 19, 20, 21, 35, 36, 37, 38}.Contains(e.RowIndex)) Or e.ColumnIndex <> 8 Then
 
                         .Rows(e.RowIndex).Cells(e.ColumnIndex).Style.BackColor = Globales.WBackColorSecundario
 
