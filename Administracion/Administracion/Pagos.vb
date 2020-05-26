@@ -6114,6 +6114,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
             Select Case _TipoConsulta
                 Case 0
                     mostrarProveedor(CLBFiltrado.SelectedItem.ToString)
+                    btnCtaCte_Click(Nothing, Nothing)
                 Case 1
 
                     _TraerCtaCte(CLBFiltrado.SelectedItem, indice)
@@ -6143,7 +6144,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
             Select Case _TipoConsulta
                 Case 0
                     mostrarProveedor(lstConsulta.SelectedItem.ToString)
-                    btnCtaCte.PerformClick()
+                    btnCtaCte_Click(Nothing, Nothing)
                 Case 1
                     ' Ctas Ctes
                     If Trim(lstConsulta.SelectedItem) = "" Or Not optCtaCte.Checked Then
