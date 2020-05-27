@@ -1,66 +1,35 @@
 ﻿Imports ClasesCompartidas
+Imports Util
 
-Public Class ListadoCuentaCorrienteProveedores
+Public Class ListadoCuentaCorrienteProveedores : Implements IAyudaGeneral
 
     Enum Reporte
         Imprimir
         Pantalla
     End Enum
 
-    Private Sub ListadoCuentaCorrienteProveedores_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub ListadoCuentaCorrienteProveedores_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         Label2.Text = Globals.NombreEmpresa()
         txtDesdeProveedor.Text = "0"
         txtHastaProveedor.Text = "99999999999"
         opcPendiente.Checked = True
         opcCompleto.Checked = False
 
-        Proceso._PurgarSaldosCtaCtePrvs()
+        _PurgarSaldosCtaCtePrvs()
     End Sub
 
-    Private Sub btnCancela_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancela.Click
-        Me.Close()
-        MenuPrincipal.Show()
+    Private Sub btnCancela_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCancela.Click
+        Close()
     End Sub
 
-    Private Sub btnConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsulta.Click
+    Private Sub btnConsulta_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnConsulta.Click
 
-        Me.Size = New System.Drawing.Size(606, 505)
-
-        Dim WProveedores = DAOProveedor.buscarProveedoresActivoPorNombre("")
-
-        lstAyuda.Items.Clear()
-
-        For Each WProveedor As Proveedor In WProveedores
-            lstAyuda.Items.Add(WProveedor.id.PadLeft(11) & Space(5) & WProveedor.razonSocial)
-        Next
-
-        txtAyuda.Text = ""
-        txtAyuda.Visible = True
-        lstAyuda.Visible = True
-
-        txtAyuda.Focus()
+        With New AyudaGeneral(GetAll("SELECT Proveedor Codigo, Nombre Descripcion FROM Proveedor ORDER BY Nombre"), "LISTADO DE PROVEEDORES DISPONIBLES")
+            .Show(Me)
+        End With
 
     End Sub
-
-    Private Sub mostrarProveedor(ByVal proveedor As Proveedor)
-        txtDesdeProveedor.Text = proveedor.id
-        txtHastaProveedor.Text = proveedor.id
-        txtDesdeProveedor.Focus()
-    End Sub
-
-    Private Sub lstAyuda_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstAyuda.Click
-
-        If String.IsNullOrEmpty(lstAyuda.SelectedItem) Then Exit Sub
-
-        Dim Wcodigo = Microsoft.VisualBasic.Left$(lstAyuda.SelectedItem, 11)
-
-        Dim WProveedor As Proveedor = DAOProveedor.buscarProveedorPorCodigo(Trim(Wcodigo))
-
-        If IsNothing(WProveedor) Then Exit Sub
-
-        mostrarProveedor(WProveedor)
-    End Sub
-
+    
     Private Sub _Imprimir(ByVal TipoImpresion As Reporte)
         Dim txtUno As String
 
@@ -84,7 +53,7 @@ Public Class ListadoCuentaCorrienteProveedores
 
         txtEmpresa = "Surfactan S.A."
 
-        If Proceso._EsPellital() Then
+        If _EsPellital() Then
             txtEmpresa = "Pellital S.A."
         End If
 
@@ -132,90 +101,40 @@ Public Class ListadoCuentaCorrienteProveedores
         txtUno = "{ImpCtaCtePrvNet.Proveedor} in " & x & WDesde & x & " to " & x & WHasta & x
         txtFormula = txtUno
 
-        Dim viewer As New ReportViewer("Listado de Corriente de Proveedres", Globals.reportPathWithName("wccprvnet.rpt"), txtFormula)
+        With New VistaPrevia
+            .Reporte = New wccprvnet()
+            .Formula = txtFormula
 
+            Select Case TipoImpresion
+                Case Reporte.Imprimir
+                    .Imprimir()
+                Case Reporte.Pantalla
+                    .Mostrar()
+            End Select
 
-        Select Case TipoImpresion
-            Case Reporte.Imprimir
-                viewer.imprimirReporte()
-            Case Reporte.Pantalla
-                viewer.Show()
-        End Select
+        End With
 
     End Sub
 
-    ' Rutinas de Filtrado Dinámico.
-    Private Sub _FiltrarDinamicamente()
-        Dim origen As ListBox = lstAyuda
-        Dim final As ListBox = lstFiltrada
-        Dim cadena As String = Trim(txtAyuda.Text)
-
-        final.Items.Clear()
-
-        If UCase(Trim(cadena)) <> "" Then
-
-            For Each item In origen.Items
-
-                If UCase(item.ToString()).Contains(UCase(Trim(cadena))) Then
-
-                    final.Items.Add(item)
-
-                End If
-
-            Next
-
-            final.Visible = True
-
-        Else
-
-            final.Visible = False
-
-        End If
-    End Sub
-
-    Private Sub lstFiltrada_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lstFiltrada.MouseClick
-        Dim origen As ListBox = lstAyuda
-        Dim filtrado As ListBox = lstFiltrada
-        Dim texto As TextBox = txtAyuda
-
-        If String.IsNullOrEmpty(filtrado.SelectedItem) Then Exit Sub
-
-        ' Buscamos el texto exacto del item seleccionado y seleccionamos el mismo item segun su indice en la lista de origen.
-        origen.SelectedIndex = origen.FindStringExact(filtrado.SelectedItem.ToString)
-
-        ' Llamamos al evento que tenga asosiado el control de origen.
-        lstAyuda_Click(Nothing, Nothing)
-
-
-        ' Sacamos de vista los resultados filtrados.
-        filtrado.Visible = False
-        texto.Text = ""
-    End Sub
-
-    Private Sub txtAyuda_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAyuda.TextChanged
-        _FiltrarDinamicamente()
-    End Sub
-
-    Private Sub txtDesdeProveedor_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtDesdeProveedor.MouseDoubleClick, txtHastaProveedor.MouseDoubleClick
+    Private Sub txtDesdeProveedor_MouseDoubleClick(ByVal sender As Object, ByVal e As MouseEventArgs) Handles txtDesdeProveedor.MouseDoubleClick, txtHastaProveedor.MouseDoubleClick
         btnConsulta.PerformClick()
     End Sub
 
-
-    Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtDesdeProveedor.KeyPress, txtHastaProveedor.KeyPress
+    Private Sub SoloNumero(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txtDesdeProveedor.KeyPress, txtHastaProveedor.KeyPress
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
             e.Handled = True
         End If
     End Sub
 
-    Private Sub btnPorPantalla_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPorPantalla.Click
+    Private Sub btnPorPantalla_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnPorPantalla.Click
         _Imprimir(Reporte.Pantalla)
     End Sub
 
-    Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
+    Private Sub btnImprimir_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnImprimir.Click
         _Imprimir(Reporte.Imprimir)
     End Sub
 
-    Private Sub txtDesdeProveedor_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDesdeProveedor.KeyDown
+    Private Sub txtDesdeProveedor_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtDesdeProveedor.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtDesdeProveedor.Text) = "" Then : Exit Sub : End If
@@ -228,7 +147,7 @@ Public Class ListadoCuentaCorrienteProveedores
 
     End Sub
 
-    Private Sub txtHastaProveedor_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtHastaProveedor.KeyDown
+    Private Sub txtHastaProveedor_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtHastaProveedor.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtHastaProveedor.Text) = "" Then : Exit Sub : End If
@@ -239,5 +158,11 @@ Public Class ListadoCuentaCorrienteProveedores
             txtHastaProveedor.Text = ""
         End If
 
+    End Sub
+
+    Public Sub _ProcesarAyudaGeneral(row As DataGridViewRow) Implements IAyudaGeneral._ProcesarAyudaGeneral
+        txtDesdeProveedor.Text = row.Cells("Codigo").Value
+        txtHastaProveedor.Text = txtDesdeProveedor.Text
+        txtHastaProveedor.Focus()
     End Sub
 End Class

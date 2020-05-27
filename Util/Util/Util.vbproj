@@ -62,7 +62,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>CustomControls\DataGridViewCustomColumn.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Office.Interop.Outlook, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+    <Reference Include="Interop.Microsoft.Office.Interop.Outlook">
+      <HintPath>..\..\Administracion\Administracion\obj\x86\Debug\Interop.Microsoft.Office.Interop.Outlook.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="PdfSharp, Version=1.32.2608.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
