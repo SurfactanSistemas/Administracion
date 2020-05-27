@@ -250,7 +250,7 @@ Public Class ImpreProcesos
         With New VistaPrevia
             .Base = "SurfactanSa"
             .Reporte = New ResumenHojaRuta
-            .Formula = "{HojaRuta.Hoja} = " & WHojaRuta & " And {HojaRuta.Archivo} <> ''"
+            .Formula = "{HojaRuta.Hoja} = " & WHojaRuta '& " And {HojaRuta.Archivo} <> ''"
             .Exportar(WHojaRuta & ".pdf", CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, WRutaArchivo)
         End With
 
