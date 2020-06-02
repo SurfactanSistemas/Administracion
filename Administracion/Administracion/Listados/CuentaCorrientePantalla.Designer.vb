@@ -25,53 +25,18 @@ Partial Class CuentaCorrientePantalla
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle77 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle67 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle68 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle69 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle70 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle71 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle72 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle73 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle74 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle75 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle76 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GRilla = New Util.DBDataGridView()
-        Me.opcCompleto = New System.Windows.Forms.RadioButton()
-        Me.opcPendiente = New System.Windows.Forms.RadioButton()
-        Me.pnlSelectivo = New System.Windows.Forms.Panel()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.txtFechaSelectivo = New System.Windows.Forms.MaskedTextBox()
-        Me.btnGrabarSelectivo = New Administracion.CustomButton()
-        Me.btnCerrarFechaSelectivo = New Administracion.CustomButton()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.gbSaldoCtaCliente = New System.Windows.Forms.GroupBox()
-        Me.lblClienteAsociado = New Administracion.CustomLabel()
-        Me.lblSaldoCuentaProveedor = New Administracion.CustomLabel()
-        Me.CBProveedorSelectivo = New System.Windows.Forms.CheckBox()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.btnCancela = New Administracion.CustomButton()
-        Me.btnConsulta = New Administracion.CustomButton()
-        Me.txtProveedor = New Administracion.CustomTextBox()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.lblTotalNC = New System.Windows.Forms.Label()
-        Me.lblTotalPagos = New System.Windows.Forms.Label()
-        Me.lblTotalND = New System.Windows.Forms.Label()
-        Me.lblTotalFC = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.btnLimpiar = New Administracion.CustomButton()
-        Me.txtSaldo = New Administracion.CustomTextBox()
-        Me.CustomLabel2 = New Administracion.CustomLabel()
-        Me.txtRazon = New Administracion.CustomTextBox()
-        Me.CustomLabel1 = New Administracion.CustomLabel()
-        Me.CustomLabel3 = New Administracion.CustomLabel()
         Me.Tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Letra = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Punto = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -87,11 +52,46 @@ Partial Class CuentaCorrientePantalla
         Me.MarcaVirtual = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Impre = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.NroInterno = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.Label10 = New System.Windows.Forms.Label()
+        Me.opcCompleto = New System.Windows.Forms.RadioButton()
+        Me.opcPendiente = New System.Windows.Forms.RadioButton()
+        Me.pnlSelectivo = New System.Windows.Forms.Panel()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.txtFechaSelectivo = New System.Windows.Forms.MaskedTextBox()
+        Me.btnGrabarSelectivo = New Administracion.CustomButton()
+        Me.btnCerrarFechaSelectivo = New Administracion.CustomButton()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.gbSaldoCtaCliente = New System.Windows.Forms.GroupBox()
+        Me.lblClienteAsociado = New Administracion.CustomLabel()
+        Me.lblSaldoCuentaProveedor = New Administracion.CustomLabel()
+        Me.CBProveedorSelectivo = New System.Windows.Forms.CheckBox()
+        Me.CustomLabel3 = New Administracion.CustomLabel()
+        Me.txtProveedor = New Administracion.CustomTextBox()
+        Me.txtRazon = New Administracion.CustomTextBox()
+        Me.CustomLabel2 = New Administracion.CustomLabel()
+        Me.txtSaldo = New Administracion.CustomTextBox()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.btnCancela = New Administracion.CustomButton()
+        Me.btnConsulta = New Administracion.CustomButton()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.lblTotalNC = New System.Windows.Forms.Label()
+        Me.lblTotalPagos = New System.Windows.Forms.Label()
+        Me.lblTotalND = New System.Windows.Forms.Label()
+        Me.lblTotalFC = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.btnLimpiar = New Administracion.CustomButton()
+        Me.CustomLabel1 = New Administracion.CustomLabel()
         CType(Me.GRilla, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlSelectivo.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -106,14 +106,14 @@ Partial Class CuentaCorrientePantalla
         Me.GRilla.AllowUserToAddRows = False
         Me.GRilla.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.GRilla.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Tipo, Me.Letra, Me.Punto, Me.Numero, Me.Fecha, Me.Debito, Me.Credito, Me.Saldo, Me.Vencimiento, Me.OrdFecha, Me.OrdVencimiento, Me.Importe, Me.MarcaVirtual, Me.Impre, Me.NroInterno})
-        DataGridViewCellStyle77.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle77.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle77.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle77.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle77.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle77.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle77.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.GRilla.DefaultCellStyle = DataGridViewCellStyle77
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.GRilla.DefaultCellStyle = DataGridViewCellStyle11
         Me.GRilla.DoubleBuffered = True
         Me.GRilla.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.GRilla.Location = New System.Drawing.Point(46, 144)
@@ -125,6 +125,145 @@ Partial Class CuentaCorrientePantalla
         Me.GRilla.Size = New System.Drawing.Size(652, 258)
         Me.GRilla.StandardTab = True
         Me.GRilla.TabIndex = 1
+        '
+        'Tipo
+        '
+        Me.Tipo.DataPropertyName = "Tipo"
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        Me.Tipo.DefaultCellStyle = DataGridViewCellStyle1
+        Me.Tipo.HeaderText = "Tipo"
+        Me.Tipo.Name = "Tipo"
+        Me.Tipo.ReadOnly = True
+        Me.Tipo.Width = 50
+        '
+        'Letra
+        '
+        Me.Letra.DataPropertyName = "Letra"
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        Me.Letra.DefaultCellStyle = DataGridViewCellStyle2
+        Me.Letra.HeaderText = "Letra"
+        Me.Letra.Name = "Letra"
+        Me.Letra.ReadOnly = True
+        Me.Letra.Visible = False
+        Me.Letra.Width = 50
+        '
+        'Punto
+        '
+        Me.Punto.DataPropertyName = "Punto"
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        Me.Punto.DefaultCellStyle = DataGridViewCellStyle3
+        Me.Punto.HeaderText = "Punto"
+        Me.Punto.Name = "Punto"
+        Me.Punto.ReadOnly = True
+        Me.Punto.Visible = False
+        Me.Punto.Width = 50
+        '
+        'Numero
+        '
+        Me.Numero.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Numero.DataPropertyName = "Numero"
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        Me.Numero.DefaultCellStyle = DataGridViewCellStyle4
+        Me.Numero.HeaderText = "Numero"
+        Me.Numero.Name = "Numero"
+        Me.Numero.ReadOnly = True
+        '
+        'Fecha
+        '
+        Me.Fecha.DataPropertyName = "Fecha"
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle5
+        Me.Fecha.HeaderText = "Fecha"
+        Me.Fecha.Name = "Fecha"
+        Me.Fecha.ReadOnly = True
+        '
+        'Debito
+        '
+        Me.Debito.DataPropertyName = "Debito"
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle6.Format = "N2"
+        Me.Debito.DefaultCellStyle = DataGridViewCellStyle6
+        Me.Debito.HeaderText = "Debito"
+        Me.Debito.Name = "Debito"
+        '
+        'Credito
+        '
+        Me.Credito.DataPropertyName = "Credito"
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle7.Format = "N2"
+        Me.Credito.DefaultCellStyle = DataGridViewCellStyle7
+        Me.Credito.HeaderText = "Crédito"
+        Me.Credito.Name = "Credito"
+        '
+        'Saldo
+        '
+        Me.Saldo.DataPropertyName = "Saldo"
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        DataGridViewCellStyle8.Format = "N2"
+        DataGridViewCellStyle8.NullValue = Nothing
+        Me.Saldo.DefaultCellStyle = DataGridViewCellStyle8
+        Me.Saldo.HeaderText = "Saldo"
+        Me.Saldo.Name = "Saldo"
+        Me.Saldo.ReadOnly = True
+        '
+        'Vencimiento
+        '
+        Me.Vencimiento.DataPropertyName = "Vencimiento"
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        Me.Vencimiento.DefaultCellStyle = DataGridViewCellStyle9
+        Me.Vencimiento.HeaderText = "Vencimiento"
+        Me.Vencimiento.Name = "Vencimiento"
+        Me.Vencimiento.ReadOnly = True
+        '
+        'OrdFecha
+        '
+        Me.OrdFecha.DataPropertyName = "OrdFecha"
+        Me.OrdFecha.HeaderText = "OrdFecha"
+        Me.OrdFecha.Name = "OrdFecha"
+        Me.OrdFecha.Visible = False
+        '
+        'OrdVencimiento
+        '
+        Me.OrdVencimiento.DataPropertyName = "OrdVencimiento"
+        Me.OrdVencimiento.HeaderText = "OrdVencimiento"
+        Me.OrdVencimiento.Name = "OrdVencimiento"
+        Me.OrdVencimiento.Visible = False
+        '
+        'Importe
+        '
+        Me.Importe.DataPropertyName = "Importe"
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        DataGridViewCellStyle10.Format = "N2"
+        DataGridViewCellStyle10.NullValue = Nothing
+        Me.Importe.DefaultCellStyle = DataGridViewCellStyle10
+        Me.Importe.HeaderText = "Importe"
+        Me.Importe.Name = "Importe"
+        Me.Importe.ReadOnly = True
+        Me.Importe.Visible = False
+        '
+        'MarcaVirtual
+        '
+        Me.MarcaVirtual.DataPropertyName = "MarcaVirtual"
+        Me.MarcaVirtual.HeaderText = "MarcaVirtual"
+        Me.MarcaVirtual.Name = "MarcaVirtual"
+        Me.MarcaVirtual.ReadOnly = True
+        Me.MarcaVirtual.Visible = False
+        '
+        'Impre
+        '
+        Me.Impre.DataPropertyName = "Impre"
+        Me.Impre.HeaderText = "Impre"
+        Me.Impre.Name = "Impre"
+        Me.Impre.ReadOnly = True
+        Me.Impre.Visible = False
+        '
+        'NroInterno
+        '
+        Me.NroInterno.DataPropertyName = "NroInterno"
+        Me.NroInterno.HeaderText = "NroInterno"
+        Me.NroInterno.Name = "NroInterno"
+        Me.NroInterno.ReadOnly = True
+        Me.NroInterno.Visible = False
         '
         'opcCompleto
         '
@@ -289,6 +428,63 @@ Partial Class CuentaCorrientePantalla
         Me.Panel2.Size = New System.Drawing.Size(754, 88)
         Me.Panel2.TabIndex = 30
         '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label11.Location = New System.Drawing.Point(128, 68)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(164, 13)
+        Me.Label11.TabIndex = 26
+        Me.Label11.Text = "Cta Cte Cancelada por OP Virtual"
+        Me.Label11.Visible = False
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label12.Location = New System.Drawing.Point(61, 68)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(27, 13)
+        Me.Label12.TabIndex = 26
+        Me.Label12.Text = "Ref:"
+        Me.Label12.Visible = False
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label10.Location = New System.Drawing.Point(331, 68)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(54, 13)
+        Me.Label10.TabIndex = 26
+        Me.Label10.Text = "OP Virtual"
+        Me.Label10.Visible = False
+        '
+        'Label9
+        '
+        Me.Label9.BackColor = System.Drawing.Color.GreenYellow
+        Me.Label9.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Label9.ForeColor = System.Drawing.Color.GreenYellow
+        Me.Label9.Location = New System.Drawing.Point(94, 66)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(28, 17)
+        Me.Label9.TabIndex = 25
+        Me.Label9.Text = "   "
+        Me.Label9.Visible = False
+        '
+        'Label8
+        '
+        Me.Label8.BackColor = System.Drawing.Color.LightBlue
+        Me.Label8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Label8.ForeColor = System.Drawing.Color.LightBlue
+        Me.Label8.Location = New System.Drawing.Point(297, 66)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(28, 17)
+        Me.Label8.TabIndex = 25
+        Me.Label8.Text = "   "
+        Me.Label8.Visible = False
+        '
         'gbSaldoCtaCliente
         '
         Me.gbSaldoCtaCliente.Controls.Add(Me.lblClienteAsociado)
@@ -347,6 +543,78 @@ Partial Class CuentaCorrientePantalla
         Me.CBProveedorSelectivo.Text = "Seleccionar para Pago Semanal"
         Me.CBProveedorSelectivo.UseVisualStyleBackColor = True
         '
+        'CustomLabel3
+        '
+        Me.CustomLabel3.AutoSize = True
+        Me.CustomLabel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.CustomLabel3.ControlAssociationKey = -1
+        Me.CustomLabel3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.CustomLabel3.ForeColor = System.Drawing.SystemColors.Control
+        Me.CustomLabel3.Location = New System.Drawing.Point(21, 13)
+        Me.CustomLabel3.Name = "CustomLabel3"
+        Me.CustomLabel3.Size = New System.Drawing.Size(73, 18)
+        Me.CustomLabel3.TabIndex = 3
+        Me.CustomLabel3.Text = "Proveedor"
+        '
+        'txtProveedor
+        '
+        Me.txtProveedor.BackColor = System.Drawing.SystemColors.Control
+        Me.txtProveedor.Cleanable = False
+        Me.txtProveedor.Empty = True
+        Me.txtProveedor.EnterIndex = -1
+        Me.txtProveedor.ForeColor = System.Drawing.SystemColors.WindowText
+        Me.txtProveedor.LabelAssociationKey = -1
+        Me.txtProveedor.Location = New System.Drawing.Point(94, 10)
+        Me.txtProveedor.MaxLength = 11
+        Me.txtProveedor.Name = "txtProveedor"
+        Me.txtProveedor.Size = New System.Drawing.Size(108, 20)
+        Me.txtProveedor.TabIndex = 0
+        Me.txtProveedor.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ToolTip1.SetToolTip(Me.txtProveedor, "Doble Click: Abrir Consulta de Proveedores")
+        Me.txtProveedor.Validator = Administracion.ValidatorType.None
+        '
+        'txtRazon
+        '
+        Me.txtRazon.BackColor = System.Drawing.Color.Gainsboro
+        Me.txtRazon.Cleanable = False
+        Me.txtRazon.Empty = True
+        Me.txtRazon.EnterIndex = -1
+        Me.txtRazon.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtRazon.LabelAssociationKey = -1
+        Me.txtRazon.Location = New System.Drawing.Point(208, 10)
+        Me.txtRazon.Name = "txtRazon"
+        Me.txtRazon.ReadOnly = True
+        Me.txtRazon.Size = New System.Drawing.Size(298, 20)
+        Me.txtRazon.TabIndex = 6
+        Me.txtRazon.Validator = Administracion.ValidatorType.None
+        '
+        'CustomLabel2
+        '
+        Me.CustomLabel2.AutoSize = True
+        Me.CustomLabel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.CustomLabel2.ControlAssociationKey = -1
+        Me.CustomLabel2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.CustomLabel2.ForeColor = System.Drawing.SystemColors.Control
+        Me.CustomLabel2.Location = New System.Drawing.Point(21, 37)
+        Me.CustomLabel2.Name = "CustomLabel2"
+        Me.CustomLabel2.Size = New System.Drawing.Size(42, 18)
+        Me.CustomLabel2.TabIndex = 8
+        Me.CustomLabel2.Text = "Saldo"
+        '
+        'txtSaldo
+        '
+        Me.txtSaldo.Cleanable = False
+        Me.txtSaldo.Empty = True
+        Me.txtSaldo.EnterIndex = -1
+        Me.txtSaldo.LabelAssociationKey = -1
+        Me.txtSaldo.Location = New System.Drawing.Point(94, 34)
+        Me.txtSaldo.Name = "txtSaldo"
+        Me.txtSaldo.ReadOnly = True
+        Me.txtSaldo.Size = New System.Drawing.Size(108, 20)
+        Me.txtSaldo.TabIndex = 7
+        Me.txtSaldo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtSaldo.Validator = Administracion.ValidatorType.None
+        '
         'btnCancela
         '
         Me.btnCancela.BackColor = System.Drawing.SystemColors.Control
@@ -390,23 +658,6 @@ Partial Class CuentaCorrientePantalla
         Me.btnConsulta.TabIndex = 26
         Me.ToolTip1.SetToolTip(Me.btnConsulta, "Abrir Consulta")
         Me.btnConsulta.UseVisualStyleBackColor = False
-        '
-        'txtProveedor
-        '
-        Me.txtProveedor.BackColor = System.Drawing.SystemColors.Control
-        Me.txtProveedor.Cleanable = False
-        Me.txtProveedor.Empty = True
-        Me.txtProveedor.EnterIndex = -1
-        Me.txtProveedor.ForeColor = System.Drawing.SystemColors.WindowText
-        Me.txtProveedor.LabelAssociationKey = -1
-        Me.txtProveedor.Location = New System.Drawing.Point(94, 10)
-        Me.txtProveedor.MaxLength = 11
-        Me.txtProveedor.Name = "txtProveedor"
-        Me.txtProveedor.Size = New System.Drawing.Size(108, 20)
-        Me.txtProveedor.TabIndex = 0
-        Me.txtProveedor.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.ToolTip1.SetToolTip(Me.txtProveedor, "Doble Click: Abrir Consulta de Proveedores")
-        Me.txtProveedor.Validator = Administracion.ValidatorType.None
         '
         'GroupBox1
         '
@@ -519,48 +770,6 @@ Partial Class CuentaCorrientePantalla
         Me.btnLimpiar.TabIndex = 28
         Me.btnLimpiar.UseVisualStyleBackColor = False
         '
-        'txtSaldo
-        '
-        Me.txtSaldo.Cleanable = False
-        Me.txtSaldo.Empty = True
-        Me.txtSaldo.EnterIndex = -1
-        Me.txtSaldo.LabelAssociationKey = -1
-        Me.txtSaldo.Location = New System.Drawing.Point(94, 34)
-        Me.txtSaldo.Name = "txtSaldo"
-        Me.txtSaldo.ReadOnly = True
-        Me.txtSaldo.Size = New System.Drawing.Size(108, 20)
-        Me.txtSaldo.TabIndex = 7
-        Me.txtSaldo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txtSaldo.Validator = Administracion.ValidatorType.None
-        '
-        'CustomLabel2
-        '
-        Me.CustomLabel2.AutoSize = True
-        Me.CustomLabel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.CustomLabel2.ControlAssociationKey = -1
-        Me.CustomLabel2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.CustomLabel2.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel2.Location = New System.Drawing.Point(21, 37)
-        Me.CustomLabel2.Name = "CustomLabel2"
-        Me.CustomLabel2.Size = New System.Drawing.Size(42, 18)
-        Me.CustomLabel2.TabIndex = 8
-        Me.CustomLabel2.Text = "Saldo"
-        '
-        'txtRazon
-        '
-        Me.txtRazon.BackColor = System.Drawing.Color.Gainsboro
-        Me.txtRazon.Cleanable = False
-        Me.txtRazon.Empty = True
-        Me.txtRazon.EnterIndex = -1
-        Me.txtRazon.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtRazon.LabelAssociationKey = -1
-        Me.txtRazon.Location = New System.Drawing.Point(208, 10)
-        Me.txtRazon.Name = "txtRazon"
-        Me.txtRazon.ReadOnly = True
-        Me.txtRazon.Size = New System.Drawing.Size(298, 20)
-        Me.txtRazon.TabIndex = 6
-        Me.txtRazon.Validator = Administracion.ValidatorType.None
-        '
         'CustomLabel1
         '
         Me.CustomLabel1.AutoSize = True
@@ -569,210 +778,6 @@ Partial Class CuentaCorrientePantalla
         Me.CustomLabel1.Name = "CustomLabel1"
         Me.CustomLabel1.Size = New System.Drawing.Size(0, 13)
         Me.CustomLabel1.TabIndex = 5
-        '
-        'CustomLabel3
-        '
-        Me.CustomLabel3.AutoSize = True
-        Me.CustomLabel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.CustomLabel3.ControlAssociationKey = -1
-        Me.CustomLabel3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.CustomLabel3.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel3.Location = New System.Drawing.Point(21, 13)
-        Me.CustomLabel3.Name = "CustomLabel3"
-        Me.CustomLabel3.Size = New System.Drawing.Size(73, 18)
-        Me.CustomLabel3.TabIndex = 3
-        Me.CustomLabel3.Text = "Proveedor"
-        '
-        'Tipo
-        '
-        Me.Tipo.DataPropertyName = "Tipo"
-        DataGridViewCellStyle67.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        Me.Tipo.DefaultCellStyle = DataGridViewCellStyle67
-        Me.Tipo.HeaderText = "Tipo"
-        Me.Tipo.Name = "Tipo"
-        Me.Tipo.ReadOnly = True
-        Me.Tipo.Width = 50
-        '
-        'Letra
-        '
-        Me.Letra.DataPropertyName = "Letra"
-        DataGridViewCellStyle68.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        Me.Letra.DefaultCellStyle = DataGridViewCellStyle68
-        Me.Letra.HeaderText = "Letra"
-        Me.Letra.Name = "Letra"
-        Me.Letra.ReadOnly = True
-        Me.Letra.Visible = False
-        Me.Letra.Width = 50
-        '
-        'Punto
-        '
-        Me.Punto.DataPropertyName = "Punto"
-        DataGridViewCellStyle69.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        Me.Punto.DefaultCellStyle = DataGridViewCellStyle69
-        Me.Punto.HeaderText = "Punto"
-        Me.Punto.Name = "Punto"
-        Me.Punto.ReadOnly = True
-        Me.Punto.Visible = False
-        Me.Punto.Width = 50
-        '
-        'Numero
-        '
-        Me.Numero.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.Numero.DataPropertyName = "Numero"
-        DataGridViewCellStyle70.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        Me.Numero.DefaultCellStyle = DataGridViewCellStyle70
-        Me.Numero.HeaderText = "Numero"
-        Me.Numero.Name = "Numero"
-        Me.Numero.ReadOnly = True
-        '
-        'Fecha
-        '
-        Me.Fecha.DataPropertyName = "Fecha"
-        DataGridViewCellStyle71.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle71
-        Me.Fecha.HeaderText = "Fecha"
-        Me.Fecha.Name = "Fecha"
-        Me.Fecha.ReadOnly = True
-        '
-        'Debito
-        '
-        Me.Debito.DataPropertyName = "Debito"
-        DataGridViewCellStyle72.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle72.Format = "N2"
-        Me.Debito.DefaultCellStyle = DataGridViewCellStyle72
-        Me.Debito.HeaderText = "Debito"
-        Me.Debito.Name = "Debito"
-        '
-        'Credito
-        '
-        Me.Credito.DataPropertyName = "Credito"
-        DataGridViewCellStyle73.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle73.Format = "N2"
-        Me.Credito.DefaultCellStyle = DataGridViewCellStyle73
-        Me.Credito.HeaderText = "Crédito"
-        Me.Credito.Name = "Credito"
-        '
-        'Saldo
-        '
-        Me.Saldo.DataPropertyName = "Saldo"
-        DataGridViewCellStyle74.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        DataGridViewCellStyle74.Format = "N2"
-        DataGridViewCellStyle74.NullValue = Nothing
-        Me.Saldo.DefaultCellStyle = DataGridViewCellStyle74
-        Me.Saldo.HeaderText = "Saldo"
-        Me.Saldo.Name = "Saldo"
-        Me.Saldo.ReadOnly = True
-        '
-        'Vencimiento
-        '
-        Me.Vencimiento.DataPropertyName = "Vencimiento"
-        DataGridViewCellStyle75.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        Me.Vencimiento.DefaultCellStyle = DataGridViewCellStyle75
-        Me.Vencimiento.HeaderText = "Vencimiento"
-        Me.Vencimiento.Name = "Vencimiento"
-        Me.Vencimiento.ReadOnly = True
-        '
-        'OrdFecha
-        '
-        Me.OrdFecha.DataPropertyName = "OrdFecha"
-        Me.OrdFecha.HeaderText = "OrdFecha"
-        Me.OrdFecha.Name = "OrdFecha"
-        Me.OrdFecha.Visible = False
-        '
-        'OrdVencimiento
-        '
-        Me.OrdVencimiento.DataPropertyName = "OrdVencimiento"
-        Me.OrdVencimiento.HeaderText = "OrdVencimiento"
-        Me.OrdVencimiento.Name = "OrdVencimiento"
-        Me.OrdVencimiento.Visible = False
-        '
-        'Importe
-        '
-        Me.Importe.DataPropertyName = "Importe"
-        DataGridViewCellStyle76.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        DataGridViewCellStyle76.Format = "N2"
-        DataGridViewCellStyle76.NullValue = Nothing
-        Me.Importe.DefaultCellStyle = DataGridViewCellStyle76
-        Me.Importe.HeaderText = "Importe"
-        Me.Importe.Name = "Importe"
-        Me.Importe.ReadOnly = True
-        Me.Importe.Visible = False
-        '
-        'MarcaVirtual
-        '
-        Me.MarcaVirtual.DataPropertyName = "MarcaVirtual"
-        Me.MarcaVirtual.HeaderText = "MarcaVirtual"
-        Me.MarcaVirtual.Name = "MarcaVirtual"
-        Me.MarcaVirtual.ReadOnly = True
-        Me.MarcaVirtual.Visible = False
-        '
-        'Impre
-        '
-        Me.Impre.DataPropertyName = "Impre"
-        Me.Impre.HeaderText = "Impre"
-        Me.Impre.Name = "Impre"
-        Me.Impre.ReadOnly = True
-        Me.Impre.Visible = False
-        '
-        'NroInterno
-        '
-        Me.NroInterno.DataPropertyName = "NroInterno"
-        Me.NroInterno.HeaderText = "NroInterno"
-        Me.NroInterno.Name = "NroInterno"
-        Me.NroInterno.ReadOnly = True
-        Me.NroInterno.Visible = False
-        '
-        'Label8
-        '
-        Me.Label8.BackColor = System.Drawing.Color.LightBlue
-        Me.Label8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Label8.ForeColor = System.Drawing.Color.LightBlue
-        Me.Label8.Location = New System.Drawing.Point(297, 66)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(28, 17)
-        Me.Label8.TabIndex = 25
-        Me.Label8.Text = "   "
-        '
-        'Label9
-        '
-        Me.Label9.BackColor = System.Drawing.Color.GreenYellow
-        Me.Label9.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Label9.ForeColor = System.Drawing.Color.GreenYellow
-        Me.Label9.Location = New System.Drawing.Point(94, 66)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(28, 17)
-        Me.Label9.TabIndex = 25
-        Me.Label9.Text = "   "
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label10.Location = New System.Drawing.Point(331, 68)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(54, 13)
-        Me.Label10.TabIndex = 26
-        Me.Label10.Text = "OP Virtual"
-        '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label11.Location = New System.Drawing.Point(128, 68)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(164, 13)
-        Me.Label11.TabIndex = 26
-        Me.Label11.Text = "Cta Cte Cancelada por OP Virtual"
-        '
-        'Label12
-        '
-        Me.Label12.AutoSize = True
-        Me.Label12.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label12.Location = New System.Drawing.Point(61, 68)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(27, 13)
-        Me.Label12.TabIndex = 26
-        Me.Label12.Text = "Ref:"
         '
         'CuentaCorrientePantalla
         '

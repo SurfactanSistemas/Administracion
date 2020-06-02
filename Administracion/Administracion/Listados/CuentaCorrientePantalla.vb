@@ -9,6 +9,7 @@ Public Class CuentaCorrientePantalla : Implements IAyudaGeneral
     Private WPOSINICIALCONSULTA As Point
     Private WPOSINICIALCERRAR As Point
     Private WPOSINICIALLIMPIAR As Point
+    Private WOrientacionASC As Boolean = False
 
     Private Sub CuentaCorrientePantalla_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         Label2.Text = Globals.NombreEmpresa()
@@ -76,9 +77,9 @@ Public Class CuentaCorrientePantalla : Implements IAyudaGeneral
 
                 'End If
 
-                If OrDefault(row.Cells("MarcaVirtual").Value, "") = "X" Then
-                    row.DefaultCellStyle.BackColor = IIf(OrDefault(row.Cells("Impre").Value, "") = "OP", Color.LightBlue, Color.GreenYellow)
-                End If
+                'If OrDefault(row.Cells("MarcaVirtual").Value, "") = "X" Then
+                '    row.DefaultCellStyle.BackColor = IIf(OrDefault(row.Cells("Impre").Value, "") = "OP", Color.LightBlue, Color.GreenYellow)
+                'End If
 
                 WSuma += row.Cells("Saldo").Value 'CamposCtaCtePrv.saldo
 
@@ -793,5 +794,21 @@ Public Class CuentaCorrientePantalla : Implements IAyudaGeneral
     Public Sub _ProcesarAyudaGeneral(row As DataGridViewRow) Implements IAyudaGeneral._ProcesarAyudaGeneral
         txtProveedor.Text = row.Cells("Codigo").Value
         txtProveedor_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+    End Sub
+
+    Private Sub GRilla_ColumnHeaderMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles GRilla.ColumnHeaderMouseClick
+        Dim col As String = ""
+
+        If e.ColumnIndex = GRilla.Columns("Fecha").Index Then
+            col = "OrdFecha"
+        ElseIf e.ColumnIndex = GRilla.Columns("Vencimiento").Index Then
+            col = "OrdVencimiento"
+        End If
+
+        If col <> "" Then
+            TryCast(GRilla.DataSource, DataTable).DefaultView.Sort = col & " " & IIf(WOrientacionASC, "ASC", "DESC")
+            WOrientacionASC = Not WOrientacionASC
+        End If
+
     End Sub
 End Class
