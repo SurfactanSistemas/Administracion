@@ -11,6 +11,21 @@ Public Class ReportViewer
     Dim Direccion As String
     Dim reporte As New ReportDocument
 
+    Sub New(ByVal nombreReporte As String, ByVal Reporte As ReportDocument, ByVal formulaReporte As String, ByVal nombreExporta As String)
+
+        ' Llamada necesaria para el diseñador.
+        InitializeComponent()
+
+        nombre = nombreReporte
+        nombrePdf = nombreExporta
+        ruta = ""
+        formula = formulaReporte
+        Direccion = ""
+
+        Me.reporte = Reporte
+
+    End Sub
+
     Public Sub New(ByVal nombreReporte As String, ByVal rutaReporte As String, ByVal formulaReporte As String, ByVal nombreExporta As String, ByVal DireccionEntrega As String)
         InitializeComponent()
         nombre = nombreReporte

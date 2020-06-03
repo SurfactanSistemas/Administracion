@@ -27,9 +27,9 @@
                    ByVal calificacionCategoria As Integer, ByVal tipoIB As Integer, ByVal certificaciones As Integer, ByVal tipoEstado As Integer, ByVal calif As Integer,
                    ByVal SEDRONARVto As String, ByVal categoriaVto As String, ByVal CAIVto As String, ByVal certificadosVto As String, ByVal calificacionVto As String,
                    ByVal cufe1Dir As String, ByVal cufe2Dir As String, ByVal cufe3Dir As String, ByVal cuentaContable As CuentaContable, ByVal rubroProv As RubroProveedor,
-                   ByVal _PaginaWeb As String, ByVal ContactoNombre1 As String, ByVal ContactoCargo1 As String, ByVal ContactoTelefono1 As String, ByVal ContactoEmail1 As String,
-                   ByVal ContactoNombre2 As String, ByVal ContactoCargo2 As String, ByVal ContactoTelefono2 As String, ByVal ContactoEmail2 As String,
-                   ByVal ContactoNombre3 As String, ByVal ContactoCargo3 As String, ByVal ContactoTelefono3 As String, ByVal ContactoEmail3 As String, Optional ByVal _ClienteAsociado As Cliente = Nothing, Optional ByVal _Inhabilitado As String = "0", Optional ByVal _rubro As String = "")
+                   Optional ByVal _PaginaWeb As String = "", Optional ByVal ContactoNombre1 As String = "", Optional ByVal ContactoCargo1 As String = "", Optional ByVal ContactoTelefono1 As String = "", Optional ByVal ContactoEmail1 As String = "",
+                   Optional ByVal ContactoNombre2 As String = "", Optional ByVal ContactoCargo2 As String = "", Optional ByVal ContactoTelefono2 As String = "", Optional ByVal ContactoEmail2 As String = "",
+                   Optional ByVal ContactoNombre3 As String = "", Optional ByVal ContactoCargo3 As String = "", Optional ByVal ContactoTelefono3 As String = "", Optional ByVal ContactoEmail3 As String = "", Optional ByVal _ClienteAsociado As Cliente = Nothing, Optional ByVal _Inhabilitado As String = "0", Optional ByVal _rubro As String = "")
 
         id = Trim(codigo)
         razonSocial = Trim(nombre)

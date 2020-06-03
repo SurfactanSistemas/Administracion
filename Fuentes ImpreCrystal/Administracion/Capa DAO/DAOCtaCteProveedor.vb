@@ -1,4 +1,5 @@
-﻿Imports ClasesCompartidas
+﻿
+Imports ClasesCompartidas
 
 Public Class DAOCtaCteProveedor
 
@@ -58,7 +59,7 @@ Public Class DAOCtaCteProveedor
         For Each row In SQLConnector.retrieveDataTable("get_cuentas_sin_saldar", proveedor.id).Rows
             cuentas.Add(New DetalleCompraCuentaCorriente(row("Impre").ToString, row("Punto").ToString, row("Numero").ToString,
                                                          row("Letra").ToString, row("fecha").ToString, row("Saldo"),
-                                                         row("Total"), row("NroInterno").ToString, proveedor))
+                                                         row("Total"), row("NroInterno"), proveedor))
         Next
         Return cuentas
     End Function

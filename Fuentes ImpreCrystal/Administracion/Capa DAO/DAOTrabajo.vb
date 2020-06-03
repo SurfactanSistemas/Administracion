@@ -1,9 +1,8 @@
-﻿
-Imports ClasesCompartidas
+﻿Imports ClasesCompartidas
 
-Public Class DAOTrabajo
+Public Module DAOTrabajo
 
-    Public Shared Function buscarTrabajoPorCodigo(ByVal codigoInt As Integer)
+    Public Function buscarTrabajoPorCodigo(ByVal codigoInt As Integer)
         Try
             Dim codigo As Integer = codigoInt
             Dim tabla As DataTable
@@ -18,4 +17,4 @@ Public Class DAOTrabajo
         End Try
     End Function
 
-End Class
+End Module

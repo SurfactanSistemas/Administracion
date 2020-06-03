@@ -222,6 +222,8 @@
         p.WaitForInputIdle()
         REM p.WaitForExit()
 
+        Return Nothing
+
     End Function
 
 

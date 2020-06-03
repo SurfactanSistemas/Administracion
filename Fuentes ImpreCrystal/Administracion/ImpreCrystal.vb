@@ -1,5 +1,5 @@
-﻿Imports ClasesCompartidas
-Imports System.IO
+﻿Imports System.IO
+Imports CrystalDecisions.CrystalReports.Engine
 
 Public Class ImpreCrystal
 
@@ -441,6 +441,20 @@ Public Class ImpreCrystal
                         Dim viewer As New ReportViewer("Certificados de Analisis", "n:\net\crystal\CertificadoTanatexPdfNet.rpt", txtFormula, txtNombrePdf, "")
                         viewer.descargarComoPDF()
                 End Select
+
+            Case 14
+                txtUno = "{ImpreFactura.Numero} in " + x + "0" + x + " to " + x + "999999" + x
+                txtDos = ""
+                txtFormula = txtUno + txtDos
+
+                txtNombrePdf = "14" + " 0009-" + ceros(txtOrden, 8)
+                txtNombreBusqueda = "c:\orden\" + "14" + " 0009-" + ceros(txtOrden, 8) + ".pdf"
+                If File.Exists(txtNombreBusqueda) Then
+                    File.Delete(txtNombreBusqueda)
+                End If
+
+                Dim viewer As New ReportViewer("Facturas", New imprerechazadosurfa(), txtFormula, txtNombrePdf)
+                viewer.descargarComoPDF()
 
             Case Else
 
