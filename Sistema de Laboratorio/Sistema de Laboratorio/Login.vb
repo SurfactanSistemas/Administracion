@@ -16,17 +16,17 @@ Public Class Login
             .Columns.Add("BaseDatos")
 
             With .Rows
-                .Add("SURFACTAN I.", "SurfactanSa")
+                .Add("SURFACTAN I", "SurfactanSa")
                 .Add("SURFACTAN II", "Surfactan_II")
                 .Add("SURFACTAN III", "Surfactan_III")
                 .Add("SURFACTAN IV", "Surfactan_IV")
                 .Add("SURFACTAN V", "Surfactan_V")
                 .Add("SURFACTAN VI", "Surfactan_VI")
                 .Add("SURFACTAN VII", "Surfactan_VII")
-                .Add("PELLITAL I", "PellitalSa")
-                .Add("PELLITAL II", "Pelitall_II") ' Está asi en la Base de Datos.
-                .Add("PELLITAL III", "Pellital_III")
-                .Add("PELLITAL V", "Pellital_V")
+                '.Add("PELLITAL I", "PellitalSa")
+                '.Add("PELLITAL II", "Pelitall_II") ' Está asi en la Base de Datos.
+                '.Add("PELLITAL III", "Pellital_III")
+                '.Add("PELLITAL V", "Pellital_V")
             End With
 
         End With

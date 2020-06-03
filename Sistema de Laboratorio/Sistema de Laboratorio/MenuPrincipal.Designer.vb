@@ -295,7 +295,7 @@ Partial Class MenuPrincipal
         'FinDeSistemaToolStripMenuItem
         '
         Me.FinDeSistemaToolStripMenuItem.Name = "FinDeSistemaToolStripMenuItem"
-        Me.FinDeSistemaToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.FinDeSistemaToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
         Me.FinDeSistemaToolStripMenuItem.Text = "Fin de Sistema"
         '
         'Panel1
