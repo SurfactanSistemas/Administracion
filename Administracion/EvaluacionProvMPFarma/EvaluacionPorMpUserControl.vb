@@ -121,7 +121,7 @@ Public Class EvaluacionPorMpUserControl
 
         If WDatos IsNot Nothing Then
 
-            For i = 1 To 35
+            For i = 1 To dgvItemsEvaluados.Rows.Count
 
                 Dim WDato As DataRow() = WDatos.Select("Renglon = '" & i & "'")
 
