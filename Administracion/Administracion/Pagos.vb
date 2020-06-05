@@ -105,7 +105,7 @@ Public Class Pagos
 
     Private Function _ExisteOrdenDePago(ByVal NumOrden) As Boolean
         Dim cn = New SqlConnection()
-        Dim cm = New SqlCommand("SELECT TOP 1 Orden FROM Pagos WHERE Orden = '" & NumOrden & "' And MarcaVirtual <> 'X'")
+        Dim cm = New SqlCommand("SELECT TOP 1 Orden FROM Pagos WHERE Orden = '" & NumOrden & "' And ISNULL(MarcaVirtual, '') <> 'X'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
