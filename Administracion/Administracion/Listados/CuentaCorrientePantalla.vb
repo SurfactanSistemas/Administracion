@@ -160,7 +160,7 @@ Public Class CuentaCorrientePantalla : Implements IAyudaGeneral
                 & ", cc.MarcaVirtual" _
                 & " FROM CtaCtePrv cc" _
                 & " LEFT OUTER JOIN IvaComp ic ON ic.NroInterno = cc.NroInterno" _
-                & " WHERE cc.Proveedor = '" & WProveedor & "'" _
+                & " WHERE cc.Proveedor = '" & WProveedor & "' And ISNULL(cc.MarcaVirtual, '') <> 'X' " _
                 & "#PARCIAL#" _
                 & " ORDER BY cc.Proveedor, cc.OrdFecha, cc.Tipo,cc.Numero"
 

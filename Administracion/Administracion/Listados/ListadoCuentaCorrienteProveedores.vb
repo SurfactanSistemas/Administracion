@@ -58,11 +58,15 @@ Public Class ListadoCuentaCorrienteProveedores : Implements IAyudaGeneral
         End If
 
         Dim tabla As DataTable
-        tabla = SQLConnector.retrieveDataTable("buscar_cuenta_corriente_proveedores_desdehasta", txtDesdeProveedor.Text, txtHastaProveedor.Text, WTipo)
+        'tabla = SQLConnector.retrieveDataTable("buscar_cuenta_corriente_proveedores_desdehasta", txtDesdeProveedor.Text, txtHastaProveedor.Text, WTipo)
+
+        Dim WFiltro As String = IIf(opcCompleto.Checked, "", " And Saldo <> 0")
+
+        tabla = GetAll("SELECT Tipo, Letra, Punto, Numero, Total, Saldo, fecha, Vencimiento, Vencimiento1, Impre, NroInterno, Clave, Proveedor FROM CtactePrv WHERE ISNULL(MarcaVirtual, '') <> 'X' " & WFiltro & " ORDER BY Proveedor, OrdFecha, Tipo, Numero")
 
         For Each row As DataRow In tabla.Rows
 
-            Dim CCPrv As New CtaCteProveedoresDeudaDesdeHasta(row.Item(0).ToString, row.Item(1).ToString, row.Item(2).ToString, row.Item(3).ToString, row.Item(4), row.Item(5), row.Item(6).ToString, row.Item(7).ToString, row.Item(8).ToString, row.Item(9).ToString, row.Item(10), row.Item(11).ToString, row.Item(12).ToString)
+            Dim CCPrv As New CtaCteProveedoresDeudaDesdeHasta(row.Item("Tipo").ToString, row.Item("Letra").ToString, row.Item("Punto").ToString, row.Item("Numero").ToString, row.Item("Total"), row.Item("Saldo"), row.Item("Fecha").ToString, row.Item("Vencimiento").ToString, row.Item("Vencimiento1").ToString, row.Item("Impre").ToString, row.Item("NroInterno"), row.Item("Clave").ToString, row.Item("Proveedor").ToString)
 
             If ckSoloAnticipos.Checked And UCase(CCPrv.Impre) <> "AN" Then Continue For
 
