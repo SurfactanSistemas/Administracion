@@ -4667,7 +4667,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
         ' Completamos los renglones faltantes.
 
         Dim XRenglon = WRenglon
-        For WRenglon = XRenglon To XMAXFILAS
+        For WRenglon = XRenglon To WLimite
 
             row = Tabla.NewRow
 
@@ -5028,7 +5028,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
         ' Completamos los renglones faltantes.
 
         Dim XReglon = WRenglon
-        For WRenglon = XReglon To XMAXFILAS
+        For WRenglon = XReglon To WLimite
 
             row = Tabla.NewRow
 
@@ -5540,7 +5540,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
         ' Completamos los renglones faltantes.
 
         Dim XRenglon = WRenglon
-        For WRenglon = XRenglon + 1 To XMAXFILAS
+        For WRenglon = XRenglon + 1 To WLimite
 
             row = Tabla.NewRow
 
@@ -5882,7 +5882,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
         Next iRow
 
         ' Completamos los renglones que resten.
-        For iRow = LugarResumen To XMAXFILAS - 1
+        For iRow = LugarResumen To WLimite - 1
 
             ZZOrden = txtOrdenPago.Text
             ZZRenglon = Str$(LugarResumen)
