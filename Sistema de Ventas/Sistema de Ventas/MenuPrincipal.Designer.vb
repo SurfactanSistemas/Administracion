@@ -34,14 +34,16 @@ Partial Class MenuPrincipal
         Me.IngresoDeFamiliasDeMateriasPrimasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.IngresoDeEnvasesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.IngresoDeGastosDeImportacionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ConsultaDeVersionesDeComposicionDePTToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ConsultaDeRevisionesDeEnsayosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.IngresoDeCambiosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NovedadesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PedidosDesarrolloToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PedidosPendientesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProcesosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FinDeSistemasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ConsultaDeVersionesDeComposicionDePTToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ConsultaDeRevisionesDeEnsayosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.IngresoDeCambiosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HojaDeRutaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.panel1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -139,11 +141,36 @@ Partial Class MenuPrincipal
         Me.IngresoDeGastosDeImportacionToolStripMenuItem.Size = New System.Drawing.Size(311, 22)
         Me.IngresoDeGastosDeImportacionToolStripMenuItem.Text = "Ingreso de Gastos de Importacion"
         '
+        'ConsultaDeVersionesDeComposicionDePTToolStripMenuItem
+        '
+        Me.ConsultaDeVersionesDeComposicionDePTToolStripMenuItem.Name = "ConsultaDeVersionesDeComposicionDePTToolStripMenuItem"
+        Me.ConsultaDeVersionesDeComposicionDePTToolStripMenuItem.Size = New System.Drawing.Size(311, 22)
+        Me.ConsultaDeVersionesDeComposicionDePTToolStripMenuItem.Text = "Consulta de Versiones de Composicion de PT"
+        '
+        'ConsultaDeRevisionesDeEnsayosToolStripMenuItem
+        '
+        Me.ConsultaDeRevisionesDeEnsayosToolStripMenuItem.Name = "ConsultaDeRevisionesDeEnsayosToolStripMenuItem"
+        Me.ConsultaDeRevisionesDeEnsayosToolStripMenuItem.Size = New System.Drawing.Size(311, 22)
+        Me.ConsultaDeRevisionesDeEnsayosToolStripMenuItem.Text = "Consulta de Revisiones de Ensayos"
+        '
+        'IngresoDeCambiosToolStripMenuItem
+        '
+        Me.IngresoDeCambiosToolStripMenuItem.Name = "IngresoDeCambiosToolStripMenuItem"
+        Me.IngresoDeCambiosToolStripMenuItem.Size = New System.Drawing.Size(311, 22)
+        Me.IngresoDeCambiosToolStripMenuItem.Text = "Ingreso de Cambios"
+        '
         'NovedadesToolStripMenuItem
         '
+        Me.NovedadesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PedidosDesarrolloToolStripMenuItem, Me.HojaDeRutaToolStripMenuItem})
         Me.NovedadesToolStripMenuItem.Name = "NovedadesToolStripMenuItem"
         Me.NovedadesToolStripMenuItem.Size = New System.Drawing.Size(78, 20)
         Me.NovedadesToolStripMenuItem.Text = "Novedades"
+        '
+        'PedidosDesarrolloToolStripMenuItem
+        '
+        Me.PedidosDesarrolloToolStripMenuItem.Name = "PedidosDesarrolloToolStripMenuItem"
+        Me.PedidosDesarrolloToolStripMenuItem.Size = New System.Drawing.Size(172, 22)
+        Me.PedidosDesarrolloToolStripMenuItem.Text = "Pedidos Desarrollo"
         '
         'ListadosToolStripMenuItem
         '
@@ -171,23 +198,11 @@ Partial Class MenuPrincipal
         Me.FinDeSistemasToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
         Me.FinDeSistemasToolStripMenuItem.Text = "Fin de Sistema"
         '
-        'ConsultaDeVersionesDeComposicionDePTToolStripMenuItem
+        'HojaDeRutaToolStripMenuItem
         '
-        Me.ConsultaDeVersionesDeComposicionDePTToolStripMenuItem.Name = "ConsultaDeVersionesDeComposicionDePTToolStripMenuItem"
-        Me.ConsultaDeVersionesDeComposicionDePTToolStripMenuItem.Size = New System.Drawing.Size(311, 22)
-        Me.ConsultaDeVersionesDeComposicionDePTToolStripMenuItem.Text = "Consulta de Versiones de Composicion de PT"
-        '
-        'ConsultaDeRevisionesDeEnsayosToolStripMenuItem
-        '
-        Me.ConsultaDeRevisionesDeEnsayosToolStripMenuItem.Name = "ConsultaDeRevisionesDeEnsayosToolStripMenuItem"
-        Me.ConsultaDeRevisionesDeEnsayosToolStripMenuItem.Size = New System.Drawing.Size(311, 22)
-        Me.ConsultaDeRevisionesDeEnsayosToolStripMenuItem.Text = "Consulta de Revisiones de Ensayos"
-        '
-        'IngresoDeCambiosToolStripMenuItem
-        '
-        Me.IngresoDeCambiosToolStripMenuItem.Name = "IngresoDeCambiosToolStripMenuItem"
-        Me.IngresoDeCambiosToolStripMenuItem.Size = New System.Drawing.Size(311, 22)
-        Me.IngresoDeCambiosToolStripMenuItem.Text = "Ingreso de Cambios"
+        Me.HojaDeRutaToolStripMenuItem.Name = "HojaDeRutaToolStripMenuItem"
+        Me.HojaDeRutaToolStripMenuItem.Size = New System.Drawing.Size(172, 22)
+        Me.HojaDeRutaToolStripMenuItem.Text = "Hoja de Ruta"
         '
         'MenuPrincipal
         '
@@ -228,5 +243,7 @@ Partial Class MenuPrincipal
     Friend WithEvents ConsultaDeVersionesDeComposicionDePTToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ConsultaDeRevisionesDeEnsayosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents IngresoDeCambiosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents PedidosDesarrolloToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents HojaDeRutaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

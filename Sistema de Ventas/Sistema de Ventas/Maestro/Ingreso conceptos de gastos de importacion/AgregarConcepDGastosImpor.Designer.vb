@@ -117,9 +117,9 @@ Partial Class AgregarConcepDGastosImpor
         Me.label1.ForeColor = System.Drawing.Color.White
         Me.label1.Location = New System.Drawing.Point(3, 9)
         Me.label1.Name = "label1"
-        Me.label1.Size = New System.Drawing.Size(269, 17)
+        Me.label1.Size = New System.Drawing.Size(253, 17)
         Me.label1.TabIndex = 2
-        Me.label1.Text = "Ingreso de Familia de Materia Prima"
+        Me.label1.Text = "Ingreso de Gastos de Importacion"
         '
         'AgregarConcepDGastosImpor
         '
