@@ -1,5 +1,5 @@
-﻿Imports ConsultasVarias.Clases.Query
-Imports ConsultasVarias.Clases.Helper
+﻿Imports Util.Clases.Query
+Imports Util.Clases.Helper
 Public Class OrdenesTrabajoDesarrollo : Implements IOrdenDeTrabajoDesarrollo
 
 

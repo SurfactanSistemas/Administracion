@@ -35,7 +35,7 @@ Partial Class OrdenesTrabajoDesarrollo
         Me.btnFiltrar = New System.Windows.Forms.Button()
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.btnAgregar = New System.Windows.Forms.Button()
-        Me.DGV_OrdenesDesarrollo = New ConsultasVarias.DBDataGridView()
+        Me.DGV_OrdenesDesarrollo = New Util.DBDataGridView()
         Me.Pedido = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.RazonSocial = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -251,7 +251,7 @@ Partial Class OrdenesTrabajoDesarrollo
     Friend WithEvents txtDesripcion As System.Windows.Forms.TextBox
     Friend WithEvents txtFechaDesde As System.Windows.Forms.MaskedTextBox
     Friend WithEvents txtFechaHasta As System.Windows.Forms.MaskedTextBox
-    Friend WithEvents DGV_OrdenesDesarrollo As ConsultasVarias.DBDataGridView
+    Friend WithEvents DGV_OrdenesDesarrollo As Util.DBDataGridView
     Friend WithEvents cbxEstado As System.Windows.Forms.ComboBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Label2 As System.Windows.Forms.Label

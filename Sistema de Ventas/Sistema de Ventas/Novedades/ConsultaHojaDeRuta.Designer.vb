@@ -41,7 +41,7 @@ Partial Class ConsultaHojaDeRuta
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.DGV_HojaRuta = New ConsultasVarias.DBDataGridView()
+        Me.DGV_HojaRuta = New Util.DBDataGridView()
         Me.Pedido = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Cliente = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Razon = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -391,7 +391,7 @@ Partial Class ConsultaHojaDeRuta
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents Label8 As System.Windows.Forms.Label
-    Friend WithEvents DGV_HojaRuta As ConsultasVarias.DBDataGridView
+    Friend WithEvents DGV_HojaRuta As Util.DBDataGridView
     Friend WithEvents Pedido As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Cliente As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Razon As System.Windows.Forms.DataGridViewTextBoxColumn
