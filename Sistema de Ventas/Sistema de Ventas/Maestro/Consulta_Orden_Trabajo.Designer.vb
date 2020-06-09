@@ -42,7 +42,7 @@ Partial Class Consulta_Orden_Trabajo
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(314, 61)
+        Me.Panel1.Size = New System.Drawing.Size(364, 61)
         Me.Panel1.TabIndex = 2
         '
         'Label6
@@ -51,7 +51,7 @@ Partial Class Consulta_Orden_Trabajo
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold)
         Me.Label6.ForeColor = System.Drawing.Color.White
-        Me.Label6.Location = New System.Drawing.Point(147, 32)
+        Me.Label6.Location = New System.Drawing.Point(197, 32)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(155, 20)
         Me.Label6.TabIndex = 3
@@ -91,12 +91,12 @@ Partial Class Consulta_Orden_Trabajo
         Me.DGV_Ordenes.RowTemplate.Height = 20
         Me.DGV_Ordenes.ShowCellToolTips = False
         Me.DGV_Ordenes.SinClickDerecho = False
-        Me.DGV_Ordenes.Size = New System.Drawing.Size(289, 167)
+        Me.DGV_Ordenes.Size = New System.Drawing.Size(339, 167)
         Me.DGV_Ordenes.TabIndex = 3
         '
         'btnCerrar
         '
-        Me.btnCerrar.Location = New System.Drawing.Point(121, 285)
+        Me.btnCerrar.Location = New System.Drawing.Point(130, 285)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(75, 23)
         Me.btnCerrar.TabIndex = 4
@@ -105,15 +105,15 @@ Partial Class Consulta_Orden_Trabajo
         '
         'txtFiltro
         '
-        Me.txtFiltro.Location = New System.Drawing.Point(15, 86)
+        Me.txtFiltro.Location = New System.Drawing.Point(13, 86)
         Me.txtFiltro.Name = "txtFiltro"
-        Me.txtFiltro.Size = New System.Drawing.Size(287, 20)
+        Me.txtFiltro.Size = New System.Drawing.Size(339, 20)
         Me.txtFiltro.TabIndex = 5
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(15, 67)
+        Me.Label1.Location = New System.Drawing.Point(12, 70)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(29, 13)
         Me.Label1.TabIndex = 6
@@ -123,7 +123,7 @@ Partial Class Consulta_Orden_Trabajo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(314, 314)
+        Me.ClientSize = New System.Drawing.Size(364, 314)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.txtFiltro)
         Me.Controls.Add(Me.btnCerrar)

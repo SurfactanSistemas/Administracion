@@ -20,4 +20,9 @@ Public Class ConsultaTerminado
     Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles btnCerrar.Click
         Close()
     End Sub
+
+    Private Sub txtBuscador_KeyUp(sender As Object, e As KeyEventArgs) Handles txtBuscador.KeyUp
+        Dim tabla As DataTable = DGV_Terminado.DataSource
+        tabla.DefaultView.RowFilter = "Codigo LIKE '%" & txtBuscador.Text & "%' OR Descripcion LIKE '%" & txtBuscador.Text & "%'"
+    End Sub
 End Class

@@ -75,4 +75,15 @@
             .Show(Me)
         End With
     End Sub
+    Private Sub PedidosDesarrolloToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PedidosDesarrolloToolStripMenuItem.Click
+        With OrdenesTrabajoDesarrollo
+            .Show()
+        End With
+    End Sub
+
+    Private Sub HojaDeRutaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HojaDeRutaToolStripMenuItem.Click
+        With ConsultaHojaDeRuta
+            .Show()
+        End With
+    End Sub
 End Class

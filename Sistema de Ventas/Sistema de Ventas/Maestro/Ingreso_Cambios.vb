@@ -165,12 +165,23 @@ Public Class Ingreso_Cambios: Implements IConsultaCambios
                 End If
 
                 ExecuteNonQueries({SQLcnslt})
+                MsgBox("Se a grabado con exito los cambios para el dia " & mastxtFecha.Text)
+                limpiar()
             Else
                 MsgBox("Asegurese de que esten cargadas las paridad para DOLAR y para U$S Divisa", vbOK)
             End If
         End If
     End Sub
 
+    Sub limpiar()
+        txtDolar.Text = "0.000"
+        txtDivisa.Text = "0.000"
+        txtEuro.Text = "0.000"
+        txtReflex30.Text = "0.000"
+        txtReflex60.Text = "0.000"
+        txtReflex90.Text = "0.000"
+        txtReflex120.Text = "0.000"
+    End Sub
     Function eliminaComas(ByVal numero As String)
         Return numero.Replace(",", ".")
     End Function

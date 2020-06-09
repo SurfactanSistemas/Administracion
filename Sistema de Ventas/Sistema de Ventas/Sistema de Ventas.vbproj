@@ -81,6 +81,7 @@
     <Compile Include="Interfases\IConsultaTerminado.vb" />
     <Compile Include="Interfases\IConsulta_Orden_Trabajo.vb" />
     <Compile Include="Interfases\INotificacionCambios.vb" />
+    <Compile Include="Interfases\IOrdenDeTrabajoDesarrollo.vb" />
     <Compile Include="Maestro\Consulta de revisiones de ensayos.Designer.vb">
       <DependentUpon>Consulta de revisiones de ensayos.vb</DependentUpon>
     </Compile>
@@ -274,6 +275,36 @@
     <Compile Include="Maestro\Precios por Cliente\PreciosPorClienteProductos.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Novedades\ConsultaHojaDeRuta.Designer.vb">
+      <DependentUpon>ConsultaHojaDeRuta.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Novedades\ConsultaHojaDeRuta.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Novedades\Ordenes de Trabajo Desarrollo\AutorizarOrdenTrabajo.Designer.vb">
+      <DependentUpon>AutorizarOrdenTrabajo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Novedades\Ordenes de Trabajo Desarrollo\AutorizarOrdenTrabajo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Novedades\Ordenes de Trabajo Desarrollo\IngresoPedidoDesarrollo.Designer.vb">
+      <DependentUpon>IngresoPedidoDesarrollo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Novedades\Ordenes de Trabajo Desarrollo\IngresoPedidoDesarrollo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Novedades\Ordenes de Trabajo Desarrollo\OrdenesTrabajoDesarrollo.Designer.vb">
+      <DependentUpon>OrdenesTrabajoDesarrollo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Novedades\Ordenes de Trabajo Desarrollo\OrdenesTrabajoDesarrollo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reportes\hojarutacotnuevo.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>hojarutacotnuevo.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\ReporteListaCambios.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -449,6 +480,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Maestro\Precios por Cliente\PreciosPorClienteProductos.resx">
       <DependentUpon>PreciosPorClienteProductos.vb</DependentUpon>
+    <EmbeddedResource Include="Novedades\ConsultaHojaDeRuta.resx">
+      <DependentUpon>ConsultaHojaDeRuta.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Novedades\Ordenes de Trabajo Desarrollo\AutorizarOrdenTrabajo.resx">
+      <DependentUpon>AutorizarOrdenTrabajo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Novedades\Ordenes de Trabajo Desarrollo\IngresoPedidoDesarrollo.resx">
+      <DependentUpon>IngresoPedidoDesarrollo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Novedades\Ordenes de Trabajo Desarrollo\OrdenesTrabajoDesarrollo.resx">
+      <DependentUpon>OrdenesTrabajoDesarrollo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\hojarutacotnuevo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>hojarutacotnuevo.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\ReporteListaCambios.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

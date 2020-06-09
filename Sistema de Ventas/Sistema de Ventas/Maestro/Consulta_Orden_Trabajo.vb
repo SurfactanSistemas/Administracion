@@ -28,4 +28,8 @@ Public Class Consulta_Orden_Trabajo
         End If
         Close()
     End Sub
+
+    Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles btnCerrar.Click
+        Close()
+    End Sub
 End Class
