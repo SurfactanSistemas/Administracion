@@ -1,4 +1,4 @@
-﻿Imports ConsultasVarias.Clases.Query
+﻿Imports Util.Clases.Query
 Public Class EnvasesEquivEnArticulo
 
     Sub New(ByVal NroEnvase As Integer, ByVal NomEnvase As String)

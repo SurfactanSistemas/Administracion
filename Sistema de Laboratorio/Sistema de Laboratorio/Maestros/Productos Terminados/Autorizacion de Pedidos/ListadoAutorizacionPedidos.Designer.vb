@@ -27,7 +27,7 @@ Partial Class ListadoAutorizacionPedidos
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.dgvPedidos = New ConsultasVarias.DBDataGridView()
+        Me.dgvPedidos = New Util.DBDataGridView()
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.btnActualizar = New System.Windows.Forms.Button()
         Me.Pedido = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -211,7 +211,7 @@ Partial Class ListadoAutorizacionPedidos
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents dgvPedidos As ConsultasVarias.DBDataGridView
+    Friend WithEvents dgvPedidos As Util.DBDataGridView
     Friend WithEvents btnCerrar As System.Windows.Forms.Button
     Friend WithEvents btnActualizar As System.Windows.Forms.Button
     Friend WithEvents Pedido As System.Windows.Forms.DataGridViewTextBoxColumn

@@ -23,7 +23,7 @@ Partial Class VistaPreviaDBAuxi
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Me.DbDataGridView1 = New ConsultasVarias.DBDataGridView()
+        Me.DbDataGridView1 = New Util.DBDataGridView()
         CType(Me.DbDataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -66,5 +66,5 @@ Partial Class VistaPreviaDBAuxi
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents DbDataGridView1 As ConsultasVarias.DBDataGridView
+    Friend WithEvents DbDataGridView1 As Util.DBDataGridView
 End Class

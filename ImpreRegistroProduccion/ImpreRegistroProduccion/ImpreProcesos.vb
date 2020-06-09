@@ -3,6 +3,7 @@ Imports System.Text
 Imports System.Text.RegularExpressions
 Imports CrystalDecisions.CrystalReports.Engine
 Imports Microsoft.Office.Interop.Outlook
+Imports Util.Clases
 
 Public Class ImpreProcesos
 
@@ -11,9 +12,23 @@ Public Class ImpreProcesos
     Private Sub ImpreRegistroProduccion_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         Try
+
             If Environment.GetCommandLineArgs.Length > 1 Then
 
                 Dim WProceso As Integer = Environment.GetCommandLineArgs(1)
+
+                'WProceso = 1
+
+                Select Case WProceso
+                    Case 1, 4, 2, 3, 6
+
+                        If Normalizaciones.ConfiguracionRegional() Then
+                            MsgBox("La CONFIGURACIÓN REGIONAL de su PC no se encontraba correctamente seteada y hubo que modificarla." & vbCrLf & " Por favor, vuelva a realizar la acción que solicitó para que tome la nueva configuración.", MsgBoxStyle.Exclamation)
+                            Close()
+                        End If
+
+                End Select
+
 
                 Select Case WProceso
                     Case 1, 4 ' REGISTRO DE PRODUCCIÓN.
@@ -147,7 +162,7 @@ Public Class ImpreProcesos
             'Dim WTerminado2 As String = "PT-25062-780"
             'Dim WTipoSalida2 As Integer = 2
 
-            ''_GenerarCertificadoAnalisisFarma(WTipoReporte2, WPartida2, WTipoSalida2)
+            '_GenerarCertificadoAnalisisFarma(1, 310583, 3)
 
             'WTipoReporte2 = 3
 
@@ -157,7 +172,7 @@ Public Class ImpreProcesos
             ''Dim WPartida2 As Integer = "310445"
             'Dim WPartida2 As Integer = "0"
 
-            '_GenerarRegistroProduccion(WTerminado2, WPartida2, 0, 0, 1, 0, 1, True, 1)
+            ' _GenerarRegistroProduccion("PT-25015-110", "310479", 0, 0, 1, 0, 1, True, 1)
 
             'Dim WImpreFechaVto2 = "", WFechaElabora2 = "", WImpreFechaElaboracion2 = "", WFechaVto2 = ""
 
@@ -235,7 +250,7 @@ Public Class ImpreProcesos
         With New VistaPrevia
             .Base = "SurfactanSa"
             .Reporte = New ResumenHojaRuta
-            .Formula = "{HojaRuta.Hoja} = " & WHojaRuta & " And {HojaRuta.Archivo} <> ''"
+            .Formula = "{HojaRuta.Hoja} = " & WHojaRuta '& " And {HojaRuta.Archivo} <> ''"
             .Exportar(WHojaRuta & ".pdf", CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, WRutaArchivo)
         End With
 
@@ -309,6 +324,8 @@ Public Class ImpreProcesos
         Dim WFormulas() As String
         Dim WNombreArchivoFormulas As String = "C:\ImpreCertificados\" & wPartida
 
+        Directory.CreateDirectory("C:\ImpreCertificados")
+
         '
         ' Determinamos el Reporte a imprimir y los datos de las formulas a pasar como parámetro.
         '
@@ -332,12 +349,12 @@ Public Class ImpreProcesos
                 WNombreArchivoFormulas &= "FormulasSegunda.txt"
 
             Case Else
-                Close()
+                Exit Sub
         End Select
 
         If Not File.Exists(WNombreArchivoFormulas) Then
             MsgBox("No se encuentra archivo " & WNombreArchivoFormulas)
-            Close()
+            Exit Sub
         End If
 
         WFormulas = File.ReadAllLines(WNombreArchivoFormulas, UTF7Encoding.UTF7)
@@ -395,6 +412,7 @@ Public Class ImpreProcesos
             If WRuta.EndsWith(Chr(34)) Then WRuta = WRuta.Substring(0, WRuta.IndexOf(Chr(34))) & "\"
 
             'MsgBox(wTipoSalida)
+            'MsgBox(WRuta)
 
             Select Case wTipoSalida
                 Case 1, 6
@@ -407,7 +425,7 @@ Public Class ImpreProcesos
                 Case 4, 7
                     'MsgBox("Tipo: " & wTipoSalida & " - Ruta: " & WRuta & " - Nombre PDF: " & WNombrePDF & " - Nombre: " & WNombre)
                     .Exportar(WNombre, CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, WRuta)
-                    If wTipoSalida = 7 Then .MergePDFs(WRuta, WNombrePDF)
+                    If wTipoSalida = 7 And WTipoReporte <> 2 Then .MergePDFs(WRuta, WNombrePDF)
                 Case 5
                     .Exportar(WNombre, CrystalDecisions.Shared.ExportFormatType.WordForWindows)
             End Select
@@ -421,13 +439,10 @@ Public Class ImpreProcesos
 
         _ProcesarInformacionParaRegistroProduccion(WTerminado, WPartida, RegistroMaestro)
 
-        Dim WEscrito = 0
-
         Dim WTer As DataRow = GetSingle("SELECT Escrito, MarcaLabora FROM Terminado WHERE Codigo = '" & WTerminado & "'")
 
         If WTer Is Nothing Then Close()
 
-        WEscrito = OrDefault(WTer.Item("Escrito"), 0)
         Dim WMarcaLabora = OrDefault(WTer.Item("MarcaLabora"), 0)
 
         Dim WImprePlanilla = 0
@@ -568,7 +583,7 @@ Public Class ImpreProcesos
         ' Buscamos informacion del Terminado y Hoja.
         '
         Dim WTerm As DataRow = GetSingle("SELECT Descripcion, Linea, Vida FROM Terminado WHERE Codigo = '" & wTerminado & "'")
-        Dim WHoja As DataTable = GetAll("SELECT * FROM Hoja WHERE Hoja = '" & wPartida & "' Order by Renglon", "Surfactan_III")
+        Dim WHoja As DataTable = GetAll("SELECT Teorico, Fecha, Terminado, Articulo, Lote1, Lote2, Lote3, Tipo FROM Hoja WHERE Hoja = '" & wPartida & "' Order by Renglon", "Surfactan_III")
 
         If IsNothing(WTerm) Then Throw New System.Exception("No existe Producto Terminado con Código '" & wTerminado & "'")
         If WHoja.Rows.Count = 0 And Not RegistroMaestro Then Throw New System.Exception("No existe Hoja '" & wTerminado & "'")
@@ -781,7 +796,7 @@ Public Class ImpreProcesos
         WSqls.Add("UPDATE CargaIII SET Partida = '" & wPartida & "', CantidadPartida = '" & formatonumerico(OrDefault(WTeorico, 0)) & "' WHERE Terminado = '" & wTerminado & "'")
         WSqls.Add("UPDATE CargaV SET Partida = '" & wPartida & "', CantidadPartida = '" & formatonumerico(OrDefault(WTeorico, 0)) & "', ImprePaso = Paso WHERE Terminado = '" & wTerminado & "'")
 
-        Dim WCargaIII As DataRow = GetSingle("SELECT TOP 1 * FROM CargaIII WHERE Terminado = '" & wTerminado & "' Order by Clave", "Surfactan_III")
+        Dim WCargaIII As DataRow = GetSingle("SELECT TOP 1 Version, FechaVersion, TipoProceso FROM CargaIII WHERE Terminado = '" & wTerminado & "' Order by Clave", "Surfactan_III")
 
         Dim WVers, WFechaVersion, WTipoProceso As String
 

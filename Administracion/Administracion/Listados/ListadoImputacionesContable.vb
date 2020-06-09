@@ -900,7 +900,7 @@ Public Class ListadoImputacionesContable
 
                         txtAuxiliar = 0
 
-                        For Each o As String In {"Aranceles", "IvaAranceles", "Derechos", "IvaDerechos"}
+                        For Each o As String In {"Aranceles", "IvaAranceles", "Derechos", "IvaDerechos", "IvaPercepcion"}
                             txtAuxiliar += OrDefault(WDatosFCE.Item(o), 0)
                         Next
 

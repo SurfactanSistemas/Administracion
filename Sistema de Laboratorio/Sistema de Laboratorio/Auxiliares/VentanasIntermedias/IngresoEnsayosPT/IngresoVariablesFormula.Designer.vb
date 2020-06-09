@@ -27,7 +27,7 @@ Partial Class IngresoVariablesFormula
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.dgvVariables = New ConsultasVarias.DBDataGridView()
+        Me.dgvVariables = New Util.DBDataGridView()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.txtDecimales = New System.Windows.Forms.TextBox()
@@ -251,7 +251,7 @@ Partial Class IngresoVariablesFormula
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents dgvVariables As ConsultasVarias.DBDataGridView
+    Friend WithEvents dgvVariables As Util.DBDataGridView
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents btnAceptar As System.Windows.Forms.Button
     Friend WithEvents btnCancelar As System.Windows.Forms.Button

@@ -33,7 +33,7 @@ Partial Class IngresoCondiPago
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txtBuscador = New System.Windows.Forms.TextBox()
         Me.txtAccesoRap = New System.Windows.Forms.TextBox()
-        Me.DGV_Pagos = New ConsultasVarias.DBDataGridView()
+        Me.DGV_Pagos = New Util.DBDataGridView()
         Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Nombre = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Dias = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -248,7 +248,7 @@ Partial Class IngresoCondiPago
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents txtBuscador As System.Windows.Forms.TextBox
     Friend WithEvents txtAccesoRap As System.Windows.Forms.TextBox
-    Friend WithEvents DGV_Pagos As ConsultasVarias.DBDataGridView
+    Friend WithEvents DGV_Pagos As Util.DBDataGridView
     Friend WithEvents Codigo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Nombre As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Dias As System.Windows.Forms.DataGridViewTextBoxColumn

@@ -1,4 +1,6 @@
-﻿Public Class MenuPrincipal
+﻿Imports System.Configuration
+
+Public Class MenuPrincipal
     ReadOnly forms As New List(Of Form)
     Dim loginOpen As Boolean = False
 
@@ -261,6 +263,14 @@
 
     Private Sub MenuPrincipal_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
         _PurgarSaldosCtaCtePrvs()
+
+        Dim WPermitidos() = ConfigurationManager.AppSettings("PERMISOS_OP_VIRTUAL").ToString.Split(",")
+        Dim WNombrePC = Proceso.getNombrePC
+
+        Dim PermisoOp = (From N In WPermitidos Where UCase(Trim(N)) = UCase(Trim(WNombrePC))).Any()
+
+        OrdenDePagoVirtualToolStripMenuItem.Visible = PermisoOp
+
     End Sub
 
     Private Sub EnvíoDeAvisoDeOPAProveedoresPorEMailToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles EnvíoDeAvisoDeOPAProveedoresPorEMailToolStripMenuItem.Click
@@ -279,7 +289,7 @@
 
         Dim WDatos As DataTable = GetAll("SELECT Numero2, Importe2, Clave FROM ConsultaChequesRecibosII")
 
-        For Each row As Datarow In WDatos.Rows
+        For Each row As DataRow In WDatos.Rows
             With row
 
                 If Microsoft.VisualBasic.Left(.Item("Numero2").ToString, 4) <> "0000" Then
@@ -324,6 +334,12 @@
 
     Private Sub SecundarioToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SecundarioToolStripMenuItem.Click
         With New ArqueoDeChequesSecundario
+            .Show(Me)
+        End With
+    End Sub
+
+    Private Sub OrdenDePagoVirtualToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OrdenDePagoVirtualToolStripMenuItem.Click
+        With New PagosVirtual
             .Show(Me)
         End With
     End Sub

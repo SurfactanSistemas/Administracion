@@ -1,6 +1,6 @@
-﻿Imports ConsultasVarias
-Imports ConsultasVarias.Clases.Query
-Imports ConsultasVarias.Clases.Helper
+﻿Imports Util
+Imports Util.Clases.Query
+Imports Util.Clases.Helper
 Public Class Consulta_de_revisiones_de_ensayos: Implements IConsulta_Orden_Trabajo
 
 

@@ -1,4 +1,4 @@
-﻿Imports ConsultasVarias
+﻿Imports Util
 
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class HistorialCambios
@@ -29,7 +29,7 @@ Partial Class HistorialCambios
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.dgvVersiones = New ConsultasVarias.DBDataGridView()
+        Me.dgvVersiones = New Util.DBDataGridView()
         Me.Version = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FechaInicio = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FechaFinal = New System.Windows.Forms.DataGridViewTextBoxColumn()

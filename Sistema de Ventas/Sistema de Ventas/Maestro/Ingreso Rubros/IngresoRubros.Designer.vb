@@ -23,7 +23,7 @@ Partial Class IngresoRubros
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Me.DGV_Rubros = New ConsultasVarias.DBDataGridView()
+        Me.DGV_Rubros = New Util.DBDataGridView()
         Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1 = New System.Windows.Forms.Panel()
@@ -200,7 +200,7 @@ Partial Class IngresoRubros
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents DGV_Rubros As ConsultasVarias.DBDataGridView
+    Friend WithEvents DGV_Rubros As Util.DBDataGridView
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Private WithEvents Label2 As System.Windows.Forms.Label
     Private WithEvents label1 As System.Windows.Forms.Label

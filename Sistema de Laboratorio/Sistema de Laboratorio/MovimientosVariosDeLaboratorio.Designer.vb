@@ -59,12 +59,12 @@ Partial Class MovimientosVariosDeLaboratorio
         Me.pnlAyuda = New System.Windows.Forms.Panel()
         Me.btnpnlAyudaVolver = New System.Windows.Forms.Button()
         Me.Label15 = New System.Windows.Forms.Label()
-        Me.DGV_Ayuda = New ConsultasVarias.DBDataGridView()
+        Me.DGV_Ayuda = New Util.DBDataGridView()
         Me.CodigoAyuda = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DescripcionAyuda = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.cbxAyuda = New System.Windows.Forms.ComboBox()
         Me.txtAyuda = New System.Windows.Forms.TextBox()
-        Me.DGV_Movimientos = New ConsultasVarias.DBDataGridView()
+        Me.DGV_Movimientos = New Util.DBDataGridView()
         Me.Tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ProdTerminado = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.MateriaPrima = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -603,7 +603,7 @@ Partial Class MovimientosVariosDeLaboratorio
     Friend WithEvents txtNroMovimiento As System.Windows.Forms.TextBox
     Friend WithEvents cbxTipoMovimiento As System.Windows.Forms.ComboBox
     Friend WithEvents txtObservaciones As System.Windows.Forms.TextBox
-    Friend WithEvents DGV_Movimientos As ConsultasVarias.DBDataGridView
+    Friend WithEvents DGV_Movimientos As Util.DBDataGridView
     Friend WithEvents cbxMP As System.Windows.Forms.ComboBox
     Friend WithEvents mastxtCodigo As System.Windows.Forms.MaskedTextBox
     Friend WithEvents txtDescripcion As System.Windows.Forms.TextBox
@@ -642,7 +642,7 @@ Partial Class MovimientosVariosDeLaboratorio
     Friend WithEvents Label13 As System.Windows.Forms.Label
     Friend WithEvents pnlAyuda As System.Windows.Forms.Panel
     Friend WithEvents Label15 As System.Windows.Forms.Label
-    Friend WithEvents DGV_Ayuda As ConsultasVarias.DBDataGridView
+    Friend WithEvents DGV_Ayuda As Util.DBDataGridView
     Friend WithEvents cbxAyuda As System.Windows.Forms.ComboBox
     Friend WithEvents txtAyuda As System.Windows.Forms.TextBox
     Friend WithEvents btnpnlAyudaVolver As System.Windows.Forms.Button

@@ -47,7 +47,7 @@ Partial Class VerificacionLoteVencidoMP
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.DGV_Verificacion = New ConsultasVarias.DBDataGridView()
+        Me.DGV_Verificacion = New Util.DBDataGridView()
         Me.Check = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.TipoMov = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.MPrima = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -385,7 +385,7 @@ Partial Class VerificacionLoteVencidoMP
 
     End Sub
     Friend WithEvents btnAjustes As System.Windows.Forms.Button
-    Friend WithEvents DGV_Verificacion As ConsultasVarias.DBDataGridView
+    Friend WithEvents DGV_Verificacion As Util.DBDataGridView
     Friend WithEvents pnlContrasena As System.Windows.Forms.Panel
     Friend WithEvents txtpnlContrasena As System.Windows.Forms.TextBox
     Private WithEvents Label1 As System.Windows.Forms.Label

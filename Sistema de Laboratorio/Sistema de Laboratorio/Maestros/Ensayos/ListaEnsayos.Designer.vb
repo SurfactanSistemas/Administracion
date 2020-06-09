@@ -29,7 +29,7 @@ Partial Class ListaEnsayos
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.txtFiltrar = New System.Windows.Forms.TextBox()
-        Me.dgvEnsayos = New ConsultasVarias.DBDataGridView()
+        Me.dgvEnsayos = New Util.DBDataGridView()
         Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Button1 = New System.Windows.Forms.Button()
@@ -207,7 +207,7 @@ Partial Class ListaEnsayos
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents txtFiltrar As System.Windows.Forms.TextBox
-    Friend WithEvents dgvEnsayos As ConsultasVarias.DBDataGridView
+    Friend WithEvents dgvEnsayos As Util.DBDataGridView
     Friend WithEvents Codigo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Button1 As System.Windows.Forms.Button

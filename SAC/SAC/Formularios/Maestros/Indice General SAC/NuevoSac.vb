@@ -1728,7 +1728,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
             Dim WNumero As String = txtNumero.Text
             Dim WAnio As String = txtAnio.Text
             
-            Dim frm As New ConsultasVarias.VistaPrevia
+            Dim frm As New Util.VistaPrevia
 
             _PrepararImpreSacII()
 
@@ -1740,8 +1740,8 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
             End With
 
-            ConsultasVarias.Clases.Conexion.EmpresaDeTrabajo = "SurfactanSa"
-            ConsultasVarias.Clases.Helper._ExportarReporte(frm, ConsultasVarias.Clases.Enumeraciones.FormatoExportacion.PDF, WTipo & WNumero & WAnio & ".pdf", "C:\TempReclamos\")
+            Util.Clases.Conexion.EmpresaDeTrabajo = "SurfactanSa"
+            Util.Clases.Helper._ExportarReporte(frm, Util.Clases.Enumeraciones.FormatoExportacion.PDF, WTipo & WNumero & WAnio & ".pdf", "C:\TempReclamos\")
 
             If File.Exists("C:\TempReclamos\" & WTipo & WNumero & WAnio & ".pdf") Then
                 oMsg.Attachments.Add("C:\TempReclamos\" & WTipo & WNumero & WAnio & ".pdf")

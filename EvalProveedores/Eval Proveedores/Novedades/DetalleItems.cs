@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Windows.Forms;
-using ConsultasVarias;
+using Util;
 using Eval_Proveedores.Listados.DetalleItemsMP;
 using VistaPrevia = Eval_Proveedores.Listados.VistaPrevia;
 

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
-using ConsultasVarias;
-using ConsultasVarias.Clases;
+using Util;
+using Util.Clases;
 using CrystalDecisions.CrystalReports.Engine;
 using CrystalDecisions.Shared;
 
@@ -100,16 +100,16 @@ namespace Eval_Proveedores.Listados.ListadoEvaluacionProvMPFarma
 
         private void btnPantalla_Click(object sender, EventArgs e)
         {
-            ConsultasVarias.VistaPrevia frm = _GenerarReporte();
+            Util.VistaPrevia frm = _GenerarReporte();
 
             frm.Mostrar();
         }
 
-        private ConsultasVarias.VistaPrevia _GenerarReporte()
+        private Util.VistaPrevia _GenerarReporte()
         {
             string WFiltroProv = "";
 
-            ConsultasVarias.VistaPrevia frm = new ConsultasVarias.VistaPrevia();
+            Util.VistaPrevia frm = new Util.VistaPrevia();
             ReportDocument rpt = null;
 
             if (rbListadoCompleto.Checked || rbEvalVencida.Checked)
@@ -171,7 +171,7 @@ namespace Eval_Proveedores.Listados.ListadoEvaluacionProvMPFarma
 
         private void btnImprimir_Click(object sender, EventArgs e)
         {
-            ConsultasVarias.VistaPrevia frm = _GenerarReporte();
+            Util.VistaPrevia frm = _GenerarReporte();
 
             frm.Mostrar();
         }
@@ -184,7 +184,7 @@ namespace Eval_Proveedores.Listados.ListadoEvaluacionProvMPFarma
 
         public void _ProcesarExportar(Enum TipoSalida)
         {
-            ConsultasVarias.VistaPrevia frm = _GenerarReporte();
+            Util.VistaPrevia frm = _GenerarReporte();
 
             switch ((Enumeraciones.FormatoExportacion) TipoSalida)
             {

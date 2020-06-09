@@ -1,4 +1,4 @@
-﻿Imports ConsultasVarias.Clases.Query
+﻿Imports Util.Clases.Query
 Public Class AgregaPago
 
     Sub New(ByVal Codigo As Integer, Optional ByVal Nombre As String = "", Optional ByVal Dias As String = "", Optional ByVal Plazo As String = "", Optional ByVal Tasa As String = "", Optional ByVal Descuento As String = "")

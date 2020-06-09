@@ -4,7 +4,7 @@
     Private _IDBase As Short
     Public ReadOnly Property IDBase() As Short
         Get
-            Return ConsultasVarias.Clases.Helper._IdEmpresaSegunBase(Base)
+            Return Util.Clases.Helper._IdEmpresaSegunBase(Base)
         End Get
     End Property
 

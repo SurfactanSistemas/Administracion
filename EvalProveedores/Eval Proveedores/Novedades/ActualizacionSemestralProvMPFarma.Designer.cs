@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
-using ConsultasVarias;
+using Util;
 
 namespace Eval_Proveedores.Novedades
 {
@@ -84,7 +84,7 @@ namespace Eval_Proveedores.Novedades
             this.ckPlantaI = new System.Windows.Forms.CheckBox();
             this.ckTodos = new System.Windows.Forms.CheckBox();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.DGV_EvalSemProve = new ConsultasVarias.DBDataGridView();
+            this.DGV_EvalSemProve = new Util.DBDataGridView();
             this.label2 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.Proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -102,7 +102,7 @@ namespace Eval_Proveedores.Novedades
             this.PorcTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Retrasos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EvaCal = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.FechaEvaluaProvMPFarmaII = new ConsultasVarias.MyMaskedTextBoxColumn();
+            this.FechaEvaluaProvMPFarmaII = new Util.MyMaskedTextBoxColumn();
             this.VencEvaluacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.VerEvalua = new System.Windows.Forms.DataGridViewLinkColumn();
             this.panel1.SuspendLayout();

@@ -91,13 +91,14 @@ Partial Class MenuPrincipal
         Me.ToolStripMenuItem10 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem11 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ArqueoDeChequesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PrincipalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SecundarioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.FinDelSistemaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.btnCambio = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.PrincipalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SecundarioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OrdenDePagoVirtualToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
@@ -156,7 +157,7 @@ Partial Class MenuPrincipal
         '
         'NovedadesToolStripMenuItem
         '
-        Me.NovedadesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IngresoDeNovedadesToolStripMenuItem, Me.ConsultaDeRemitosToolStripMenuItem, Me.AplicacionDeCorpobantesToolStripMenuItem, Me.IngresoDePagosToolStripMenuItem, Me.DepositosToolStripMenuItem, Me.RecibosToolStripMenuItem, Me.ConsultaDeChequesToolStripMenuItem, Me.InteresesToolStripMenuItem, Me.SeleccionDeRecibosAAplicarDifverenciaDeCambioToolStripMenuItem, Me.IngresoDeProveedorAPagoSemanalToolStripMenuItem})
+        Me.NovedadesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IngresoDeNovedadesToolStripMenuItem, Me.ConsultaDeRemitosToolStripMenuItem, Me.AplicacionDeCorpobantesToolStripMenuItem, Me.IngresoDePagosToolStripMenuItem, Me.DepositosToolStripMenuItem, Me.RecibosToolStripMenuItem, Me.ConsultaDeChequesToolStripMenuItem, Me.InteresesToolStripMenuItem, Me.SeleccionDeRecibosAAplicarDifverenciaDeCambioToolStripMenuItem, Me.IngresoDeProveedorAPagoSemanalToolStripMenuItem, Me.OrdenDePagoVirtualToolStripMenuItem})
         Me.NovedadesToolStripMenuItem.Name = "NovedadesToolStripMenuItem"
         Me.NovedadesToolStripMenuItem.Size = New System.Drawing.Size(78, 20)
         Me.NovedadesToolStripMenuItem.Text = "Novedades"
@@ -529,6 +530,18 @@ Partial Class MenuPrincipal
         Me.ArqueoDeChequesToolStripMenuItem.Size = New System.Drawing.Size(375, 22)
         Me.ArqueoDeChequesToolStripMenuItem.Text = "Arqueo de cheques"
         '
+        'PrincipalToolStripMenuItem
+        '
+        Me.PrincipalToolStripMenuItem.Name = "PrincipalToolStripMenuItem"
+        Me.PrincipalToolStripMenuItem.Size = New System.Drawing.Size(133, 22)
+        Me.PrincipalToolStripMenuItem.Text = "Principal"
+        '
+        'SecundarioToolStripMenuItem
+        '
+        Me.SecundarioToolStripMenuItem.Name = "SecundarioToolStripMenuItem"
+        Me.SecundarioToolStripMenuItem.Size = New System.Drawing.Size(133, 22)
+        Me.SecundarioToolStripMenuItem.Text = "Secundario"
+        '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
@@ -580,17 +593,11 @@ Partial Class MenuPrincipal
         Me.Button1.UseVisualStyleBackColor = True
         Me.Button1.Visible = False
         '
-        'PrincipalToolStripMenuItem
+        'OrdenDePagoVirtualToolStripMenuItem
         '
-        Me.PrincipalToolStripMenuItem.Name = "PrincipalToolStripMenuItem"
-        Me.PrincipalToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.PrincipalToolStripMenuItem.Text = "Principal"
-        '
-        'SecundarioToolStripMenuItem
-        '
-        Me.SecundarioToolStripMenuItem.Name = "SecundarioToolStripMenuItem"
-        Me.SecundarioToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.SecundarioToolStripMenuItem.Text = "Secundario"
+        Me.OrdenDePagoVirtualToolStripMenuItem.Name = "OrdenDePagoVirtualToolStripMenuItem"
+        Me.OrdenDePagoVirtualToolStripMenuItem.Size = New System.Drawing.Size(350, 22)
+        Me.OrdenDePagoVirtualToolStripMenuItem.Text = "Orden de Pago Virtual"
         '
         'MenuPrincipal
         '
@@ -688,4 +695,5 @@ Partial Class MenuPrincipal
     Friend WithEvents ArqueoDeChequesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents PrincipalToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SecundarioToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents OrdenDePagoVirtualToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class

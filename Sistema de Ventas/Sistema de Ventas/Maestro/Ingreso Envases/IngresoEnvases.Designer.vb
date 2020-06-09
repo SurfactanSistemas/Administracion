@@ -35,7 +35,7 @@ Partial Class IngresoEnvases
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.label1 = New System.Windows.Forms.Label()
-        Me.DGV_Envases = New ConsultasVarias.DBDataGridView()
+        Me.DGV_Envases = New Util.DBDataGridView()
         Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Abreviatura = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -269,7 +269,7 @@ Partial Class IngresoEnvases
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Private WithEvents Label2 As System.Windows.Forms.Label
     Private WithEvents label1 As System.Windows.Forms.Label
-    Friend WithEvents DGV_Envases As ConsultasVarias.DBDataGridView
+    Friend WithEvents DGV_Envases As Util.DBDataGridView
     Friend WithEvents Codigo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Abreviatura As System.Windows.Forms.DataGridViewTextBoxColumn

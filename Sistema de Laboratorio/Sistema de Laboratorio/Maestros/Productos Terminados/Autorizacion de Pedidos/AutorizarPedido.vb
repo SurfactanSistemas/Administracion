@@ -1,5 +1,5 @@
-﻿Imports ConsultasVarias
-Imports ConsultasVarias.Clases
+﻿Imports Util
+Imports Util.Clases
 
 Public Class AutorizarPedido
     Private Pedido As String

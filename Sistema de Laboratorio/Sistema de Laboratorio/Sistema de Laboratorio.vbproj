@@ -1046,9 +1046,9 @@
     <None Include="SGA\SGA1.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ConsultasVarias\ConsultasVarias\ConsultasVarias.vbproj">
+    <ProjectReference Include="..\..\Util\Util\Util.vbproj">
       <Project>{CC5D60FD-9755-4C61-B96C-F56173586BB9}</Project>
-      <Name>ConsultasVarias</Name>
+      <Name>Util</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

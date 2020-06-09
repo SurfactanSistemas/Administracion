@@ -37,7 +37,7 @@ Partial Class ConsDeEspefXVersion
         Me.btnVolver = New System.Windows.Forms.Button()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtControlDeCambios = New System.Windows.Forms.TextBox()
-        Me.DGV_ConsultaVersiones = New ConsultasVarias.DBDataGridView()
+        Me.DGV_ConsultaVersiones = New Util.DBDataGridView()
         Me.Ensayo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ValorEstandar = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -332,7 +332,7 @@ Partial Class ConsDeEspefXVersion
     Friend WithEvents btnVolver As System.Windows.Forms.Button
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents txtControlDeCambios As System.Windows.Forms.TextBox
-    Friend WithEvents DGV_ConsultaVersiones As ConsultasVarias.DBDataGridView
+    Friend WithEvents DGV_ConsultaVersiones As Util.DBDataGridView
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents Label5 As System.Windows.Forms.Label

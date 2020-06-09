@@ -1,9 +1,9 @@
 ﻿Imports System.Text.RegularExpressions
-Imports ConsultasVarias
-Imports ConsultasVarias.Clases
-Imports ConsultasVarias.Clases.Globales
-Imports ConsultasVarias.Clases.Query
-Imports ConsultasVarias.Clases.Helper
+Imports Util
+Imports Util.Clases
+Imports Util.Clases.Globales
+Imports Util.Clases.Query
+Imports Util.Clases.Helper
 
 Public Class ListadoDevoluciones:Implements IExportar
 

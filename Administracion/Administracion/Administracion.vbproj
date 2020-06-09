@@ -48,6 +48,7 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <WarningsAsErrors>
     </WarningsAsErrors>
+    <Optimize>true</Optimize>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -141,11 +142,11 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="DataGridViewCustomColumn">
-      <HintPath>..\..\ConsultasVarias\ConsultasVarias\CustomControls\DataGridViewCustomColumn.dll</HintPath>
+      <HintPath>..\..\Util\Util\CustomControls\DataGridViewCustomColumn.dll</HintPath>
     </Reference>
     <Reference Include="PdfSharp, Version=1.32.2608.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\ConsultasVarias\ConsultasVarias\lib\PdfSharp.dll</HintPath>
+      <HintPath>..\..\Util\Util\lib\PdfSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -466,6 +467,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="PagosVirtual.Designer.vb">
+      <DependentUpon>PagosVirtual.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PagosVirtual.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Pagos\CarpetasPagos.Designer.vb">
       <DependentUpon>CarpetasPagos.vb</DependentUpon>
     </Compile>
@@ -750,14 +757,14 @@
     <Compile Include="Reportes\ListadoCtaCtePrvSelectivoPrueba.vb">
       <DependentUpon>ListadoCtaCtePrvSelectivoPrueba.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\ReciboDefinitivoEmailPellital.vb">
       <DependentUpon>ReciboDefinitivoEmailPellital.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\ListadoBancos.vb">
       <AutoGen>True</AutoGen>
@@ -807,6 +814,12 @@
       <DependentUpon>ReporteImputa2netExportacionExcel.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\wccprvnet.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>wccprvnet.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\wimpcybNet.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -851,8 +864,8 @@
     <Compile Include="Reportes\ReciboDefinitivoEmail.vb">
       <DependentUpon>ReciboDefinitivoEmail.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\DepositoBancario2.vb">
       <DependentUpon>DepositoBancario2.rpt</DependentUpon>
@@ -944,8 +957,8 @@
     <Compile Include="Reportes\ReciboDefinitivo.vb">
       <DependentUpon>ReciboDefinitivo.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\DetallesFacturacion.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -1156,6 +1169,9 @@
     <EmbeddedResource Include="ModificaIntereses.resx">
       <DependentUpon>ModificaIntereses.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PagosVirtual.resx">
+      <DependentUpon>PagosVirtual.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Pagos\CarpetasPagos.resx">
       <DependentUpon>CarpetasPagos.vb</DependentUpon>
     </EmbeddedResource>
@@ -1335,6 +1351,10 @@
     <EmbeddedResource Include="Reportes\ReporteImputa2netExportacionExcel.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteImputa2netExportacionExcel.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\wccprvnet.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>wccprvnet.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\wimpcybNet.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -1923,9 +1943,9 @@
     <None Include="Resources\add.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ConsultasVarias\ConsultasVarias\ConsultasVarias.vbproj">
+    <ProjectReference Include="..\..\Util\Util\Util.vbproj">
       <Project>{CC5D60FD-9755-4C61-B96C-F56173586BB9}</Project>
-      <Name>ConsultasVarias</Name>
+      <Name>Util</Name>
     </ProjectReference>
     <ProjectReference Include="..\EvaluacionProvMPFarma\EvaluacionProvMPFarma.vbproj">
       <Project>{27070567-9E32-498F-83BF-641C853E8ACA}</Project>

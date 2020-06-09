@@ -23,7 +23,7 @@ Partial Class BuscadorCliente
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Me.DGV_Clientes = New ConsultasVarias.DBDataGridView()
+        Me.DGV_Clientes = New Util.DBDataGridView()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.label1 = New System.Windows.Forms.Label()
@@ -144,7 +144,7 @@ Partial Class BuscadorCliente
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents DGV_Clientes As ConsultasVarias.DBDataGridView
+    Friend WithEvents DGV_Clientes As Util.DBDataGridView
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Private WithEvents Label2 As System.Windows.Forms.Label
     Private WithEvents label1 As System.Windows.Forms.Label

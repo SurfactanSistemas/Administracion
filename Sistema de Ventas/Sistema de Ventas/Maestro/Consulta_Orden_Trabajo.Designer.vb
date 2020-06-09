@@ -26,7 +26,7 @@ Partial Class Consulta_Orden_Trabajo
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.DGV_Ordenes = New ConsultasVarias.DBDataGridView()
+        Me.DGV_Ordenes = New Util.DBDataGridView()
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.txtFiltro = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -140,7 +140,7 @@ Partial Class Consulta_Orden_Trabajo
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Private WithEvents Label6 As System.Windows.Forms.Label
     Private WithEvents Label7 As System.Windows.Forms.Label
-    Friend WithEvents DGV_Ordenes As ConsultasVarias.DBDataGridView
+    Friend WithEvents DGV_Ordenes As Util.DBDataGridView
     Friend WithEvents btnCerrar As System.Windows.Forms.Button
     Friend WithEvents txtFiltro As System.Windows.Forms.TextBox
     Friend WithEvents Label1 As System.Windows.Forms.Label

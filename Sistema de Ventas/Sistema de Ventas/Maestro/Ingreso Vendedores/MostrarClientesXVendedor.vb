@@ -1,4 +1,4 @@
-﻿Imports ConsultasVarias.Clases.Query
+﻿Imports Util.Clases.Query
 Public Class MostrarClientesXVendedor
 
     Sub New(ByVal NroVendedor As Integer, ByVal NombreVendedor As String)

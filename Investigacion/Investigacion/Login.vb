@@ -1,7 +1,7 @@
 ﻿
 Imports System.Configuration
-Imports ConsultasVarias.Clases
-Imports ConsultasVarias.Clases.Helper
+Imports Util.Clases
+Imports Util.Clases.Helper
 
 Public Class Login
 

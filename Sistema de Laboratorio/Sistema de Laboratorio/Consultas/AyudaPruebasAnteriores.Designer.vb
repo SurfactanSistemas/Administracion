@@ -33,7 +33,7 @@ Partial Class AyudaPruebasAnteriores
         Me.btnBorrar = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txtFiltrar = New System.Windows.Forms.TextBox()
-        Me.dgvDatos = New ConsultasVarias.DBDataGridView()
+        Me.dgvDatos = New Util.DBDataGridView()
         Me.Fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LotePartida = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -211,7 +211,7 @@ Partial Class AyudaPruebasAnteriores
     Friend WithEvents btnBorrar As System.Windows.Forms.Button
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents txtFiltrar As System.Windows.Forms.TextBox
-    Friend WithEvents dgvDatos As ConsultasVarias.DBDataGridView
+    Friend WithEvents dgvDatos As Util.DBDataGridView
     Friend WithEvents Fecha As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents LotePartida As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Codigo As System.Windows.Forms.DataGridViewTextBoxColumn

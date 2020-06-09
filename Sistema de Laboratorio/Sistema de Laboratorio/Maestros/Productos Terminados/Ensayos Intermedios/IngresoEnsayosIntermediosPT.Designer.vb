@@ -1,4 +1,4 @@
-﻿Imports ConsultasVarias
+﻿Imports Util
 
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class IngresoEnsayosIntermediosPT
@@ -100,7 +100,7 @@ Partial Class IngresoEnsayosIntermediosPT
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.btnTraerDatosEnsayosComponente = New System.Windows.Forms.Button()
-        Me.dgvEnsayos = New ConsultasVarias.DBDataGridView()
+        Me.dgvEnsayos = New Util.DBDataGridView()
         Me.Ensayo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Especificacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Farmacopea = New System.Windows.Forms.DataGridViewTextBoxColumn()

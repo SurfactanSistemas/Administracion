@@ -45,7 +45,7 @@ Partial Class AutorizarPedido
         Me.Label5 = New System.Windows.Forms.Label()
         Me.lblPedido = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.dgvDatos = New ConsultasVarias.DBDataGridView()
+        Me.dgvDatos = New Util.DBDataGridView()
         Me.Producto = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Cantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -417,7 +417,7 @@ Partial Class AutorizarPedido
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents lblPedido As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents dgvDatos As ConsultasVarias.DBDataGridView
+    Friend WithEvents dgvDatos As Util.DBDataGridView
     Friend WithEvents Producto As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Cantidad As System.Windows.Forms.DataGridViewTextBoxColumn

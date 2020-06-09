@@ -65,7 +65,7 @@ Partial Class ArqueoDeCheques
         Me.txtMontoTotal = New System.Windows.Forms.TextBox()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.txtTraerCambios = New System.Windows.Forms.Button()
-        Me.DGV_Cheques = New ConsultasVarias.DBDataGridView()
+        Me.DGV_Cheques = New Util.DBDataGridView()
         Me.Fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Numero = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Importe = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -628,7 +628,7 @@ Partial Class ArqueoDeCheques
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents DGV_Cheques As ConsultasVarias.DBDataGridView
+    Friend WithEvents DGV_Cheques As Util.DBDataGridView
     Friend WithEvents txtCodigoCheque As System.Windows.Forms.TextBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents mastxtFecha As System.Windows.Forms.MaskedTextBox

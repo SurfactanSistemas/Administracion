@@ -4,7 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
-using ConsultasVarias.Clases;
+using Util.Clases;
 using CrystalDecisions.CrystalReports.Engine;
 using Eval_Proveedores.Listados.CalculoEvaluacionSemestralProveedorEnvases;
 

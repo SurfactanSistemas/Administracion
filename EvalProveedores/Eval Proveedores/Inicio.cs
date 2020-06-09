@@ -133,7 +133,7 @@ namespace Eval_Proveedores
 
         private void Inicio_Load(object sender, EventArgs e)
         {
-            ConsultasVarias.Clases.Conexion.EmpresaDeTrabajo = "SurfactanSA";
+            Util.Clases.Conexion.EmpresaDeTrabajo = "SurfactanSA";
         }
 
         private void listadoDeEvaluaciónDeProveedoresDeMateriaPrimaParaFarmaToolStripMenuItem_Click(object sender, EventArgs e)

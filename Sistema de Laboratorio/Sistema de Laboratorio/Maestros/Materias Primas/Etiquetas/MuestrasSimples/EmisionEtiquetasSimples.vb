@@ -1,4 +1,4 @@
-﻿Imports ConsultasVarias.Clases
+﻿Imports Util.Clases
 Imports CrystalDecisions.CrystalReports.Engine
 
 Public Class EmisionEtiquetasSimples : Implements IAyudaMPDentroDeInforme

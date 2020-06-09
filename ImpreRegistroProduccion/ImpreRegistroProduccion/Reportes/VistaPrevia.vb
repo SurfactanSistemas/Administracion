@@ -1,8 +1,10 @@
 ﻿
+Imports System.Globalization
 Imports System.IO
 Imports CrystalDecisions.CrystalReports.Engine
 Imports CrystalDecisions.Shared
 Imports System.Text.RegularExpressions
+Imports CrystalDecisions.ReportAppServer.DataDefModel
 Imports PdfSharp.Pdf
 Imports PdfSharp.Pdf.IO
 
@@ -70,7 +72,7 @@ Public Class VistaPrevia
             Reporte.Subreports(i).SetDatabaseLogon(cnsb.UserID, cnsb.Password, cnsb.DataSource, cnsb.InitialCatalog)
         Next
 
-        Dim conexion As New ConnectionInfo
+        Dim conexion As New CrystalDecisions.Shared.ConnectionInfo
         conexion.DatabaseName = cnsb.InitialCatalog
         conexion.ServerName = cnsb.DataSource
         conexion.UserID = cnsb.UserID
@@ -81,7 +83,7 @@ Public Class VistaPrevia
         tli.ConnectionInfo = conexion
 
         ' Volvemos a asignar los datos de conexion pero ahora a cada una de las tablas que tenga el reporte.
-        For Each tabla As Table In Reporte.Database.Tables
+        For Each tabla As CrystalDecisions.CrystalReports.Engine.Table In Reporte.Database.Tables
 
             Dim _logInfo As TableLogOnInfo = tabla.LogOnInfo
 
@@ -93,7 +95,7 @@ Public Class VistaPrevia
 
         For i As Integer = 0 To Reporte.Subreports.Count - 1
 
-            For Each tabla As Table In Reporte.Subreports(i).Database.Tables
+            For Each tabla As CrystalDecisions.CrystalReports.Engine.Table In Reporte.Subreports(i).Database.Tables
 
                 Dim _logInfo As TableLogOnInfo = tabla.LogOnInfo
 

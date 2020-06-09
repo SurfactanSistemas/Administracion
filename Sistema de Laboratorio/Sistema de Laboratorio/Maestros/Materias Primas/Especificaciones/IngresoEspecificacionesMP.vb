@@ -1,6 +1,6 @@
-﻿Imports ConsultasVarias
-Imports ConsultasVarias.Clases
-Imports ConsultasVarias.Interfaces
+﻿Imports Util
+Imports Util.Clases
+Imports Util.Interfaces
 
 Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecificaciones, IListaConsultas, IAyudaMPs, IAyudaEnsayos, IIngresoClaveSeguridad
 

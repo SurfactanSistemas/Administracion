@@ -88,8 +88,9 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ClasesCompartidas">
-      <HintPath>..\..\ClasesCompartidas\ClasesCompartidas\bin\Debug\ClasesCompartidas.dll</HintPath>
+    <Reference Include="ClasesCompartidas, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\ClasesCompartidas.dll</HintPath>
     </Reference>
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -143,6 +144,7 @@
     <Compile Include="Capa DAO\DAOBanco.vb" />
     <Compile Include="Capa DAO\DAOCuentaContable.vb" />
     <Compile Include="Capa DAO\DAOTipoCambio.vb" />
+    <Compile Include="Capa DAO\DAOTrabajo.vb" />
     <Compile Include="CargaIntereses.Designer.vb">
       <DependentUpon>CargaIntereses.vb</DependentUpon>
     </Compile>
@@ -150,6 +152,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Clases\QueryController.vb" />
+    <Compile Include="Clases\Trabajo.vb" />
     <Compile Include="ComprasNovedades\AperturaCompras.Designer.vb">
       <DependentUpon>AperturaCompras.vb</DependentUpon>
     </Compile>
@@ -387,12 +390,6 @@
     <Compile Include="Listados\ListadoValoresEnCartera.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Procesos\ProcesoPercepciones.Designer.vb">
-      <DependentUpon>ProcesoPercepciones.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Procesos\ProcesoPercepciones.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="ProveedoresABM\ObservacionesProveedor.Designer.vb">
       <DependentUpon>ObservacionesProveedor.vb</DependentUpon>
     </Compile>
@@ -422,6 +419,12 @@
     </Compile>
     <Compile Include="ProveedoresABM\ProveedoresABM.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reporte\imprerechazadosurfa.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>imprerechazadosurfa.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="ReportViewer.Designer.vb">
       <DependentUpon>ReportViewer.vb</DependentUpon>
@@ -603,9 +606,6 @@
     <EmbeddedResource Include="ProveedoresABM\ObservacionesProveedor.resx">
       <DependentUpon>ObservacionesProveedor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Procesos\ProcesoPercepciones.resx">
-      <DependentUpon>ProcesoPercepciones.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Procesos\ProcesoRetencionesPagos.resx">
       <DependentUpon>ProcesoRetencionesPagos.vb</DependentUpon>
     </EmbeddedResource>
@@ -617,6 +617,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ProveedoresABM\ProveedoresABM.resx">
       <DependentUpon>ProveedoresABM.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporte\imprerechazadosurfa.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>imprerechazadosurfa.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportViewer.resx">
       <DependentUpon>ReportViewer.vb</DependentUpon>
@@ -641,7 +645,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Administracion_TemporaryKey.pfx" />
     <None Include="app.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
@@ -660,7 +663,7 @@
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
       <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 y x64%29</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -880,6 +883,10 @@
       <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

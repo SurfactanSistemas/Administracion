@@ -1,4 +1,4 @@
-﻿Imports ConsultasVarias
+﻿Imports Util
 
 Public Class ModifNumeracionINC : Implements IIngresoClaveSeguridad
 

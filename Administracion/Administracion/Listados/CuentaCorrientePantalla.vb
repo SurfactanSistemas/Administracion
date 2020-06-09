@@ -1,14 +1,17 @@
-ï»¿Imports ClasesCompartidas
+Imports ClasesCompartidas
 Imports System.Data.SqlClient
+Imports System.Threading
+Imports Util
 
-Public Class CuentaCorrientePantalla
+Public Class CuentaCorrientePantalla : Implements IAyudaGeneral
 
-    Private _NrosInternos As New List(Of Object)
+    Private ReadOnly _NrosInternos As New List(Of Object)
     Private WPOSINICIALCONSULTA As Point
     Private WPOSINICIALCERRAR As Point
     Private WPOSINICIALLIMPIAR As Point
+    Private WOrientacionASC As Boolean = False
 
-    Private Sub CuentaCorrientePantalla_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub CuentaCorrientePantalla_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         Label2.Text = Globals.NombreEmpresa()
 
         WPOSINICIALCONSULTA = btnConsulta.Location
@@ -22,15 +25,25 @@ Public Class CuentaCorrientePantalla
         GRilla.Columns("Fecha").ValueType = GetType(Date)
         GRilla.Columns("Vencimiento").ValueType = GetType(Date)
 
-        Proceso._PurgarSaldosCtaCtePrvs()
+        GRilla.Columns.Cast(Of DataGridViewColumn).ToList.ForEach(Sub(c)
+                                                                      c.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells
+                                                                      c.DefaultCellStyle.Padding = New Padding(5, 0, 5, 0)
+                                                                      c.MinimumWidth = 80
+                                                                      c.DefaultCellStyle.BackColor = Color.WhiteSmoke
+                                                                  End Sub)
+        GRilla.Columns("Numero").AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+
+        _PurgarSaldosCtaCtePrvs()
     End Sub
 
     Private Sub _Proceso()
 
+        If Val(txtProveedor.Text) = 0 Then Exit Sub
+
         Dim WRenglon As Integer
         Dim WSuma As Double
 
-        GRilla.Rows.Clear()
+        'GRilla.Rows.Clear()
         _NrosInternos.Clear()
         WRenglon = 0
 
@@ -47,56 +60,37 @@ Public Class CuentaCorrientePantalla
         Dim tabla As DataTable
         tabla = _BuscarCuentaCorrienteProveedorDeuda(txtProveedor.Text, WTipo) 'SQLConnector.retrieveDataTable("buscar_cuenta_corriente_proveedores_deuda", txtProveedor.Text, WTipo)
 
+        GRilla.DataSource = tabla
+
+        GRilla.Refresh()
+
         If tabla.Rows.Count > 0 Then
 
-            For Each row As DataRow In tabla.Rows
+            For Each row As DataGridViewRow In GRilla.Rows
 
-                GRilla.Rows.Add()
+                'If row.Cells("NroInterno").Value <> 0 Then
+                '    Dim WIvaComp As DataRow = _TraerDatosIvaComp(row.Cells("NroInterno").Value)
 
-                GRilla.Item("Tipo", WRenglon).Value = row.Item("Impre") 'CamposCtaCtePrv.Impre
+                '    If Not IsNothing(WIvaComp) AndAlso WIvaComp.Item("MarcaDifCambio") = 1 Then
+                '        row.Cells("Tipo").Value = "NDC"
+                '    End If
 
-                If row.Item("NroInterno") <> 0 Then
-                    Dim WIvaComp As DataRow = _TraerDatosIvaComp(row.Item("NroInterno"))
+                'End If
 
-                    If Not IsNothing(WIvaComp) Then
-                        GRilla.Item("Tipo", WRenglon).Value = IIf(WIvaComp.Item("MarcaDifCambio") = 1, "NDC", row.Item("Impre"))
-                    End If
+                'If OrDefault(row.Cells("MarcaVirtual").Value, "") = "X" Then
+                '    row.DefaultCellStyle.BackColor = IIf(OrDefault(row.Cells("Impre").Value, "") = "OP", Color.LightBlue, Color.GreenYellow)
+                'End If
 
-                End If
+                WSuma += row.Cells("Saldo").Value 'CamposCtaCtePrv.saldo
 
-                GRilla.Item("Letra", WRenglon).Value = row.Item("Letra") 'CamposCtaCtePrv.letra
-                GRilla.Item("Punto", WRenglon).Value = row.Item("Punto") 'CamposCtaCtePrv.punto
-                GRilla.Item("Numero", WRenglon).Value = row.Item("Numero") 'CamposCtaCtePrv.numero
-                GRilla.Item("Importe", WRenglon).Value = formatonumerico(row.Item("Total"))
-
-                If row.Item("Total") < 0 Then
-
-                    GRilla.Item("Credito", WRenglon).Value = formatonumerico(-1 * row.Item("Total"))
-
-                Else
-
-                    GRilla.Item("Debito", WRenglon).Value = formatonumerico(row.Item("Total"))
-
-                End If
-
-                GRilla.Item("Saldo", WRenglon).Value = formatonumerico(row.Item("Saldo"))
-                GRilla.Item("Fecha", WRenglon).Value = row.Item("Fecha") 'CamposCtaCtePrv.fecha
-                GRilla.Item("OrdFecha", WRenglon).Value = Proceso.ordenaFecha(row.Item("Fecha"))
-                GRilla.Item("Vencimiento", WRenglon).Value = row.Item("Vencimiento") 'CamposCtaCtePrv.vencimiento
-                GRilla.Item("OrdVencimiento", WRenglon).Value = Proceso.ordenaFecha(row.Item("Vencimiento"))
-
-                WRenglon = WRenglon + 1
-                WSuma = WSuma + row.Item("Saldo") 'CamposCtaCtePrv.saldo
-
-                _NrosInternos.Add({row.Item("Numero"), row.Item("NroInterno")})
+                _NrosInternos.Add({row.Cells("Numero").Value, row.Cells("NroInterno").Value})
 
             Next
-        Else
-            GRilla.Rows.Add()
         End If
 
-        GRilla.AllowUserToAddRows = False
         txtSaldo.Text = formatonumerico(WSuma)
+
+        txtProveedor.Focus()
     End Sub
 
     Private Function _TraerDatosIvaComp(ByVal nroInterno As Object) As DataRow
@@ -149,29 +143,35 @@ Public Class CuentaCorrientePantalla
 
         Try
 
-            ZSql = "select LTRIM(RTRIM(ISNULL(CtaCtePrv.Tipo, ''))) as Tipo " _
-                & ", LTRIM(RTRIM(ISNULL(CtaCtePrv.Letra, ''))) as Letra" _
-                & ", LTRIM(RTRIM(ISNULL(CtaCtePrv.Punto, ''))) as Punto" _
-                & ", LTRIM(RTRIM(ISNULL(CtaCtePrv.Numero, ''))) as Numero" _
-                & ", ISNULL(CtaCtePrv.Total, 0) as Total" _
-                & ", ISNULL(CtaCtePrv.Saldo, 0) as Saldo" _
-                & ", LTRIM(RTRIM(ISNULL(CtaCtePrv.fecha, ''))) as Fecha" _
-                & ", LTRIM(RTRIM(ISNULL(CtaCtePrv.Vencimiento, ''))) as Vencimiento" _
-                & ", LTRIM(RTRIM(ISNULL(CtaCtePrv.NroInterno, 0))) as NroInterno" _
-                & ", LTRIM(RTRIM(ISNULL(CtaCtePrv.Impre, ''))) as Impre" _
-                & " FROM CtaCtePrv" _
-                & " WHERE CtaCtePrv.Proveedor = '" & WProveedor & "'" _
+            ZSql = "select Tipo = CASE WHEN ISNULL(ic.MarcaDifCambio, 0) = 1 THEN 'NDC' ELSE cc.Impre END " _
+                & ", cc.Letra" _
+                & ", cc.Numero " _
+                & ", cc.Fecha" _
+                & ", Debito = CASE WHEN cc.Total > 0 THEN cc.Total ELSE 0 END" _
+                & ", Credito = CASE WHEN cc.Total > 0 THEN 0 ELSE cc.Total * -1 END" _
+                & ", cc.Saldo" _
+                & ", cc.Vencimiento" _
+                & ", Importe = CASE WHEN cc.Total > 0 THEN cc.Total ELSE cc.Total * -1 END" _
+                & ", cc.Punto" _
+                & ", cc.OrdFecha" _
+                & ", cc.OrdVencimiento" _
+                & ", cc.NroInterno" _
+                & ", cc.Impre" _
+                & ", cc.MarcaVirtual" _
+                & " FROM CtaCtePrv cc" _
+                & " LEFT OUTER JOIN IvaComp ic ON ic.NroInterno = cc.NroInterno" _
+                & " WHERE cc.Proveedor = '" & WProveedor & "' And ISNULL(cc.MarcaVirtual, '') <> 'X' " _
                 & "#PARCIAL#" _
-                & " ORDER BY CtaCtePrv.Proveedor, CtaCtePrv.OrdFecha, CtaCtePrv.Tipo,CtaCtePrv.Numero"
+                & " ORDER BY cc.Proveedor, cc.OrdFecha, cc.Tipo,cc.Numero"
 
             If wTipo = "P" Then
-                ZSql = ZSql.Replace("#PARCIAL#", " AND Saldo <> 0")
+                ZSql = ZSql.Replace("#PARCIAL#", " AND cc.Saldo <> 0")
             Else
                 ZSql = ZSql.Replace("#PARCIAL#", "")
             End If
 
 
-            cn.ConnectionString = Proceso._ConectarA
+            cn.ConnectionString = _ConectarA
             cn.Open()
             cm.Connection = cn
             cm.CommandText = ZSql
@@ -194,72 +194,16 @@ Public Class CuentaCorrientePantalla
         Return _tabla
     End Function
 
-    Private Sub btnConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsulta.Click
+    Private Sub btnConsulta_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnConsulta.Click
         Try
-
-            boxPantallaProveedores.Visible = True
-
-            'Dim WProveedores = DAOProveedor.buscarProveedoresActivoPorNombre("")
-
-            Dim WProveedores As New DataTable
-
-            WProveedores = _TraerProveedoresActivos()
-
-            lstAyuda.Items.Clear()
-
-            If Not IsNothing(WProveedores) Then
-
-                For Each WProveedor As DataRow In WProveedores.Rows
-
-                    lstAyuda.Items.Add(WProveedor.Item("Proveedor").PadLeft(11) & Space(5) & WProveedor.Item("Nombre"))
-
-                Next
-
-            End If
-
-            txtAyuda.Text = ""
-            txtAyuda.Focus()
+            With New AyudaGeneral(GetAll("SELECT Proveedor As Codigo, Nombre As Descripcion FROM Proveedor ORDER BY Nombre"), "AYUDA DE PROVEEDORES")
+                .ShowDialog(Me)
+            End With
 
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
     End Sub
-
-    Private Function _TraerProveedoresActivos() As DataTable
-
-        Dim tabla As New DataTable
-        Dim cn = New SqlConnection()
-        Dim cm = New SqlCommand("SELECT Proveedor, Nombre FROM Proveedor WHERE Inhabilitado <> '1' OR Inhabilitado is null")
-        Dim dr As SqlDataReader
-
-        Try
-
-            cn.ConnectionString = Proceso._ConectarA
-            cn.Open()
-            cm.Connection = cn
-
-            dr = cm.ExecuteReader()
-
-            If dr.HasRows Then
-
-                tabla.Load(dr)
-
-            End If
-
-        Catch ex As Exception
-            Throw New Exception("Hubo un problema al querer listar los Proveedores Activos desde la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
-        Finally
-
-            dr = Nothing
-            cn.Close()
-            cn = Nothing
-            cm = Nothing
-
-        End Try
-
-        Return tabla
-
-    End Function
 
     Private Sub _TraerSaldoCuentaProveedor(ByVal proveedor As DataRow)
 
@@ -271,7 +215,7 @@ Public Class CuentaCorrientePantalla
         Dim dr As SqlDataReader
 
         If Trim(cliente) = "" Then
-            lblSaldoCuentaProveedor.Text = Proceso.formatonumerico(WSaldo)
+            lblSaldoCuentaProveedor.Text = formatonumerico(WSaldo)
             Exit Sub
         End If
 
@@ -331,10 +275,9 @@ Public Class CuentaCorrientePantalla
 
     Private Sub mostrarProveedor(ByVal proveedor As DataRow)
 
-        If IsNothing(proveedor) Then : Exit Sub
-        End If
+        If IsNothing(proveedor) Then Exit Sub
 
-        ' Reseteamos resumen de montos automÃ¡tico.
+        ' Reseteamos resumen de montos automático.
         gbSaldoCtaCliente.Visible = False
         GroupBox1.Visible = False
         btnCancela.Location = WPOSINICIALCERRAR 'New Point(342, 541)
@@ -345,69 +288,12 @@ Public Class CuentaCorrientePantalla
         'lstFiltrada.Visible = False
         txtProveedor.Text = proveedor.Item("Proveedor")
         txtRazon.Text = proveedor.Item("Nombre")
-        boxPantallaProveedores.Visible = False
         _TraerProveedorSelectivo()
         _TraerSaldoCuentaProveedor(proveedor)
         Call _Proceso()
 
-        GRilla.CurrentCell = GRilla.Rows(0).Cells(0) ' Nos posicionamos en la grilla.
+        'GRilla.CurrentCell = GRilla.Rows(0).Cells(0) ' Nos posicionamos en la grilla.
     End Sub
-
-    Private Sub lstAyuda_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstAyuda.Click
-
-        If String.IsNullOrEmpty(lstAyuda.SelectedItem) Then Exit Sub
-
-        Dim Wcodigo = Microsoft.VisualBasic.Left$(lstAyuda.SelectedItem, 11)
-
-        Dim WProveedor As New DataTable
-
-        WProveedor = _TraerProveedorPorCodigo(WCodigo)
-
-        'Dim WProveedor = DAOProveedor.buscarProveedorPorCodigo(Wcodigo)
-
-        If IsNothing(WProveedor) Then Exit Sub
-
-        If WProveedor.Rows.Count > 0 Then
-            mostrarProveedor(WProveedor.Rows(0))
-        End If
-
-    End Sub
-
-    Private Function _TraerProveedorPorCodigo(ByVal WCodigo As String) As DataTable
-
-        Dim cn = New SqlConnection()
-        Dim cm = New SqlCommand("SELECT * FROM Proveedor WHERE Proveedor = '" & WCodigo & "'")
-        Dim dr As SqlDataReader
-        Dim tabla As New DataTable
-
-        Try
-
-            cn.ConnectionString = Proceso._ConectarA
-            cn.Open()
-            cm.Connection = cn
-
-            dr = cm.ExecuteReader()
-
-            If dr.HasRows Then
-
-                tabla.Load(dr)
-
-            End If
-
-        Catch ex As Exception
-            Throw New Exception("Hubo un problema al querer consultar los datos completos del Proveedor desde la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
-        Finally
-
-            dr = Nothing
-            cn.Close()
-            cn = Nothing
-            cm = Nothing
-
-        End Try
-
-        Return tabla
-
-    End Function
 
     Private Sub _TraerProveedorSelectivo()
         Dim cn = New SqlConnection()
@@ -441,12 +327,11 @@ Public Class CuentaCorrientePantalla
         End Try
     End Sub
 
-    Private Sub btnCancela_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancela.Click
-        Me.Close()
-        MenuPrincipal.Show()
+    Private Sub btnCancela_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCancela.Click
+        Close()
     End Sub
 
-    Private Sub opcCompleto_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles opcCompleto.CheckedChanged
+    Private Sub opcCompleto_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles opcCompleto.CheckedChanged
         Call _Proceso()
     End Sub
 
@@ -486,7 +371,7 @@ Public Class CuentaCorrientePantalla
 
         Try
 
-            cn.ConnectionString = Proceso._ConectarA
+            cn.ConnectionString = _ConectarA
             cn.Open()
             cm.Connection = cn
 
@@ -542,7 +427,7 @@ Public Class CuentaCorrientePantalla
         Return exito
     End Function
 
-    Private Sub CBProveedorSelectivo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CBProveedorSelectivo.Click
+    Private Sub CBProveedorSelectivo_Click(ByVal sender As Object, ByVal e As EventArgs) Handles CBProveedorSelectivo.Click
 
         If CBProveedorSelectivo.Checked Then
 
@@ -564,7 +449,7 @@ Public Class CuentaCorrientePantalla
         If Trim(txtProveedor.Text) <> "" Then
             If CBProveedorSelectivo.Checked Then
 
-                If MsgBox("Â¿EstÃ¡ seguro de que quiere colocar al proveedor actual al listado de Proveedores Selectivos?", MsgBoxStyle.YesNo) = DialogResult.Yes Then
+                If MsgBox("¿Está seguro de que quiere colocar al proveedor actual al listado de Proveedores Selectivos?", MsgBoxStyle.YesNo) = DialogResult.Yes Then
 
                     If Not _AltaProveedorSelectivo(txtProveedor.Text, WFecha) Then
                         CBProveedorSelectivo.Checked = False
@@ -577,7 +462,7 @@ Public Class CuentaCorrientePantalla
 
             Else
 
-                If MsgBox("Â¿EstÃ¡ seguro de que quiere eliminar al proveedor actual del listado de Proveedores Selectivos?", MsgBoxStyle.YesNo) = DialogResult.Yes Then
+                If MsgBox("¿Está seguro de que quiere eliminar al proveedor actual del listado de Proveedores Selectivos?", MsgBoxStyle.YesNo) = DialogResult.Yes Then
 
                     If Not _EliminarProveedorSelectivo(txtProveedor.Text, WFecha) Then
                         CBProveedorSelectivo.Checked = True
@@ -592,7 +477,7 @@ Public Class CuentaCorrientePantalla
         End If
     End Sub
 
-    Private Sub GRilla_CellMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles GRilla.CellMouseDoubleClick
+    Private Sub GRilla_CellMouseDoubleClick(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles GRilla.CellMouseDoubleClick
         Dim _NroInterno = ""
         Dim WNumero = "" ' Guardamos el numero de factura para buscar el nro interno.
 
@@ -637,7 +522,7 @@ Public Class CuentaCorrientePantalla
         End Select
     End Sub
 
-    Private Sub txtProveedor_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtProveedor.KeyDown
+    Private Sub txtProveedor_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtProveedor.KeyDown
 
         If e.KeyData = Keys.Enter Then
 
@@ -649,34 +534,14 @@ Public Class CuentaCorrientePantalla
             End If
 
             Try
-                Dim WProveedor As DataTable = _TraerDatosProveedor(txtProveedor.Text)
 
-                If WProveedor.Rows.Count > 0 Then
+                Dim WProveedor As DataRow = GetSingle("SELECT Nombre, Proveedor, ClienteAsociado FROM Proveedor WHERE Proveedor = '" & txtProveedor.Text & "'") '_TraerDatosProveedor(txtProveedor.Text)
 
-                    txtProveedor.Text = WProveedor.Rows(0).Item("Proveedor")
-                    txtRazon.Text = WProveedor.Rows(0).Item("Nombre")
-
-                    mostrarProveedor(WProveedor(0))
-
-                End If
+                mostrarProveedor(WProveedor)
 
             Catch ex As Exception
                 MsgBox(ex.Message)
             End Try
-            'Dim CampoProveedor As Proveedor = DAOProveedor.buscarProveedorPorCodigo(txtProveedor.Text)
-            'If IsNothing(CampoProveedor) Then
-            '    MsgBox("Proveedor incorrecto")
-            '    txtProveedor.Focus()
-            'Else
-            '    mostrarProveedor(CampoProveedor)
-
-            '    If GRilla.Rows.Count > 0 Then
-            '        GRilla.CurrentCell = GRilla.Rows(0).Cells(0)
-            '    Else
-            '        txtProveedor.Focus()
-            '    End If
-
-            'End If
 
         ElseIf e.KeyData = Keys.Escape Then
             txtProveedor.Text = ""
@@ -695,7 +560,7 @@ Public Class CuentaCorrientePantalla
 
         Try
 
-            cn.ConnectionString = Proceso._ConectarA
+            cn.ConnectionString = _ConectarA
             cn.Open()
             cm.Connection = cn
 
@@ -722,57 +587,11 @@ Public Class CuentaCorrientePantalla
 
     End Function
 
-    Private Sub txtProveedor_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtProveedor.MouseDoubleClick
-
+    Private Sub txtProveedor_MouseDoubleClick(ByVal sender As Object, ByVal e As MouseEventArgs) Handles txtProveedor.MouseDoubleClick
         btnConsulta.PerformClick()
     End Sub
 
-    Private Sub txtAyuda_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAyuda.TextChanged
-        _FiltrarDinamicamente()
-    End Sub
-
-    Private Sub _FiltrarDinamicamente()
-        Dim origen As ListBox = lstAyuda
-        Dim final As ListBox = lstFiltrada
-        Dim cadena As String = Trim(txtAyuda.Text)
-
-        final.Items.Clear()
-
-        If UCase(Trim(cadena)) <> "" Then
-
-            For Each item In origen.Items
-
-                If UCase(item.ToString()).Contains(UCase(Trim(cadena))) Then
-
-                    final.Items.Add(item)
-
-                End If
-
-            Next
-
-            final.Visible = True
-
-        Else
-
-            final.Visible = False
-
-        End If
-    End Sub
-
-    Private Sub lstFiltrada_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lstFiltrada.MouseClick
-        Dim origen As ListBox = lstAyuda
-        Dim filtrado As ListBox = lstFiltrada
-
-        ' Buscamos el texto exacto del item seleccionado y seleccionamos el mismo item segun su indice en la lista de origen.
-        origen.SelectedItem = filtrado.SelectedItem
-
-        ' Llamamos al evento que tenga asosiado el control de origen.
-        lstAyuda_Click(Nothing, Nothing)
-
-        ' Sacamos de vista los resultados filtrados.
-    End Sub
-
-    Private Sub lblSaldoCuentaProveedor_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lblSaldoCuentaProveedor.MouseDoubleClick
+    Private Sub lblSaldoCuentaProveedor_MouseDoubleClick(ByVal sender As Object, ByVal e As MouseEventArgs) Handles lblSaldoCuentaProveedor.MouseDoubleClick
         _AbrirDetallesFactura()
     End Sub
 
@@ -786,11 +605,11 @@ Public Class CuentaCorrientePantalla
         End With
     End Sub
 
-    Private Sub lblClienteAsociado_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lblClienteAsociado.MouseDoubleClick
+    Private Sub lblClienteAsociado_MouseDoubleClick(ByVal sender As Object, ByVal e As MouseEventArgs) Handles lblClienteAsociado.MouseDoubleClick
         _AbrirDetallesFactura()
     End Sub
 
-    Private Sub GRilla_CellMouseUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles GRilla.CellMouseUp
+    Private Sub GRilla_CellMouseUp(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles GRilla.CellMouseUp
         Dim _filas As New List(Of DataGridViewRow)
         Dim _WTotalFC, _WTotalND, _WTotalNC, _WTotalPagos, _Valor As Double
         Dim comienzo, final, actual As Integer
@@ -825,7 +644,7 @@ Public Class CuentaCorrientePantalla
 
                 If Not IsNothing(.Cells("Importe").Value) Then
 
-                    _Valor = Proceso.formatonumerico(.Cells("Importe").Value).replace(".", ",")
+                    _Valor = formatonumerico(.Cells("Importe").Value).replace(".", ",")
 
                     If _Valor <> 0 Then
                         Select Case .Cells("Tipo").Value
@@ -842,7 +661,7 @@ Public Class CuentaCorrientePantalla
                     End If
 
                 End If
-                actual = Val(Proceso.ordenaFecha(.Cells("Fecha").Value.ToString))
+                actual = Val(ordenaFecha(.Cells("Fecha").Value.ToString))
 
                 ' Determinamos el rango en el cual estamos trabajando.
                 If comienzo = 0 Or final = 0 Then
@@ -864,20 +683,20 @@ Public Class CuentaCorrientePantalla
         lblTotalNC.Text = "$ " & _WTotalNC
         lblTotalPagos.Text = "$ " & _WTotalPagos
 
-        ' Animamos los botones para dar lugar al panel con la informaciÃ³n de los totales.
+        ' Animamos los botones para dar lugar al panel con la información de los totales.
         For i = btnCancela.Location.X To 280 Step -1
             btnConsulta.Location = New Point(i - 258, btnCancela.Location.Y)
             btnCancela.Location = New Point(i - 129, btnCancela.Location.Y)
             btnLimpiar.Location = New Point(i, btnCancela.Location.Y)
-            Threading.Thread.Sleep(0.8)
+            Thread.Sleep(0.8)
         Next
 
         ' Mostramos el panel y le colocamos el titulo junto con el periodo determinado mas arriba.
         GroupBox1.Visible = True
-        GroupBox1.Text = "Montos detallados por periodo: " & Proceso.DesOrdenaFecha(comienzo) & " al " & Proceso.DesOrdenaFecha(final)
+        GroupBox1.Text = "Montos detallados por periodo: " & DesOrdenaFecha(comienzo) & " al " & DesOrdenaFecha(final)
     End Sub
 
-    Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
+    Private Sub btnLimpiar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLimpiar.Click
         txtProveedor.Text = ""
         txtRazon.Text = ""
         txtSaldo.Text = "0.00"
@@ -893,19 +712,19 @@ Public Class CuentaCorrientePantalla
         txtProveedor.Focus()
     End Sub
 
-    Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtProveedor.KeyPress
+    Private Sub SoloNumero(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txtProveedor.KeyPress
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
             e.Handled = True
         End If
     End Sub
 
-    Private Sub NumerosConComas(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSaldo.KeyPress
+    Private Sub NumerosConComas(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txtSaldo.KeyPress
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) And Not (CChar(".")) = e.KeyChar Then
             e.Handled = True
         End If
     End Sub
 
-    Private Sub GRilla_SortCompare(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewSortCompareEventArgs) Handles GRilla.SortCompare
+    Private Sub GRilla_SortCompare(ByVal sender As Object, ByVal e As DataGridViewSortCompareEventArgs) Handles GRilla.SortCompare
 
         GRilla.ClearSelection()
 
@@ -919,8 +738,8 @@ Public Class CuentaCorrientePantalla
 
             Case 2, 6
 
-                num1 = Proceso.ordenaFecha(e.CellValue1)
-                num2 = Proceso.ordenaFecha(e.CellValue2)
+                num1 = ordenaFecha(e.CellValue1)
+                num2 = ordenaFecha(e.CellValue2)
 
             Case Else
                 Exit Sub
@@ -937,20 +756,15 @@ Public Class CuentaCorrientePantalla
         e.Handled = True
     End Sub
 
-    Private Sub btnCerrarConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrarConsulta.Click
-        boxPantallaProveedores.Visible = False
-        txtProveedor.Focus()
-    End Sub
-
-    Private Sub btnCerrarFechaSelectivo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrarFechaSelectivo.Click
+    Private Sub btnCerrarFechaSelectivo_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCerrarFechaSelectivo.Click
         pnlSelectivo.Visible = False
         CBProveedorSelectivo.Checked = False
         txtFechaSelectivo.Clear()
     End Sub
 
-    Private Sub btnGrabarSelectivo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGrabarSelectivo.Click
+    Private Sub btnGrabarSelectivo_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnGrabarSelectivo.Click
 
-        If Proceso._ValidarFecha(txtFechaSelectivo.Text) Then
+        If _ValidarFecha(txtFechaSelectivo.Text) Then
 
             _GrabarSelectivo(txtFechaSelectivo.Text)
             pnlSelectivo.Visible = False
@@ -959,12 +773,12 @@ Public Class CuentaCorrientePantalla
 
     End Sub
 
-    Private Sub txtFechaSelectivo_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFechaSelectivo.KeyDown
+    Private Sub txtFechaSelectivo_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtFechaSelectivo.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtFechaSelectivo.Text).Length < 10 Then : Exit Sub : End If
 
-            If Not Proceso._ValidarFecha(txtFechaSelectivo.Text) Then
+            If Not _ValidarFecha(txtFechaSelectivo.Text) Then
 
                 MsgBox("Fecha Invalida", MsgBoxStyle.Exclamation)
                 txtFechaSelectivo.Focus()
@@ -977,4 +791,24 @@ Public Class CuentaCorrientePantalla
 
     End Sub
 
+    Public Sub _ProcesarAyudaGeneral(row As DataGridViewRow) Implements IAyudaGeneral._ProcesarAyudaGeneral
+        txtProveedor.Text = row.Cells("Codigo").Value
+        txtProveedor_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+    End Sub
+
+    Private Sub GRilla_ColumnHeaderMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles GRilla.ColumnHeaderMouseClick
+        Dim col As String = ""
+
+        If e.ColumnIndex = GRilla.Columns("Fecha").Index Then
+            col = "OrdFecha"
+        ElseIf e.ColumnIndex = GRilla.Columns("Vencimiento").Index Then
+            col = "OrdVencimiento"
+        End If
+
+        If col <> "" Then
+            TryCast(GRilla.DataSource, DataTable).DefaultView.Sort = col & " " & IIf(WOrientacionASC, "ASC", "DESC")
+            WOrientacionASC = Not WOrientacionASC
+        End If
+
+    End Sub
 End Class

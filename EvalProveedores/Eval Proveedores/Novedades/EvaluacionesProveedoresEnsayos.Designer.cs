@@ -30,7 +30,7 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.dgvEvaluaciones = new ConsultasVarias.DBDataGridView();
+            this.dgvEvaluaciones = new Util.DBDataGridView();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnNueva = new System.Windows.Forms.Button();
             this.btnCerrar = new System.Windows.Forms.Button();
@@ -297,7 +297,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
-        private ConsultasVarias.DBDataGridView dgvEvaluaciones;
+        private Util.DBDataGridView dgvEvaluaciones;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TextBox txtFiltrar;
         private System.Windows.Forms.Label label2;

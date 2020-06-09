@@ -34,7 +34,7 @@ Partial Class NotasCertificadosAnalisis
         Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.lblIdNota = New System.Windows.Forms.Label()
-        Me.dgvNotas = New ConsultasVarias.DBDataGridView()
+        Me.dgvNotas = New Util.DBDataGridView()
         Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Nota = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
@@ -214,7 +214,7 @@ Partial Class NotasCertificadosAnalisis
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents dgvNotas As ConsultasVarias.DBDataGridView
+    Friend WithEvents dgvNotas As Util.DBDataGridView
     Friend WithEvents txtObservacion As System.Windows.Forms.TextBox
     Friend WithEvents btnGrabar As System.Windows.Forms.Button
     Friend WithEvents btnEliminar As System.Windows.Forms.Button

@@ -1,5 +1,5 @@
 ﻿Imports System.ComponentModel
-Imports ConsultasVarias
+Imports Util
 Imports Microsoft.VisualBasic.CompilerServices
 
 <DesignerGenerated()> _
@@ -48,7 +48,7 @@ Partial Class EvaluacionPorMpUserControl
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.cmbAux = New System.Windows.Forms.ComboBox()
         Me.txtFechaAux = New System.Windows.Forms.MaskedTextBox()
-        Me.dgvItemsEvaluados = New ConsultasVarias.DBDataGridView()
+        Me.dgvItemsEvaluados = New Util.DBDataGridView()
         Me.Req = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Requisitos = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Solicitado = New System.Windows.Forms.DataGridViewCheckBoxColumn()

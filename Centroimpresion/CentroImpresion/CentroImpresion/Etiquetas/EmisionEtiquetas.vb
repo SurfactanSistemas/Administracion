@@ -1616,9 +1616,10 @@ Public Class EmisionEtiquetas
             ImpreRNPQ = "SI"
 
             If Trim(txtCliente.Text) = "" Then
-                rpt = New etinuevanormachica25000
-                rpt.SetParameterValue("ImpreVto", "F.Vencimiento:")
-                'rpt = New etinuevanormachicaprueba
+                'rpt = New etinuevanormachica25000
+                rpt = New etinuevanormachicaprueba
+                'rpt.SetParameterValue("ImpreVto", "F.Vencimiento:")
+
             Else
                 rpt = New etinuevanormachica
             End If
@@ -1650,7 +1651,7 @@ Public Class EmisionEtiquetas
                 Dim SQLCnslt As String = "SELECT Sedronar FROM Terminado WHERE Codigo = '" & txtTerminado.Text & "'"
                 Dim row As DataRow = GetSingle(SQLCnslt)
                 If row IsNot Nothing Then
-                    If OrDefault(Val(row.Item("Sedronar")), 0) = 1 Then
+                    If Val(OrDefault(row.Item("Sedronar"), 0)) = 1 Then
                         Sedronar = "RNPQ: 1160/97"
                     End If
                 End If

@@ -1,7 +1,7 @@
 ﻿Imports System.ComponentModel
 Imports System.Threading
-Imports ConsultasVarias
-Imports ConsultasVarias.Clases
+Imports Util
+Imports Util.Clases
 Imports EvaluacionProvMPFarma.Helper
 
 Public Class EvaluacionPorMpUserControl
@@ -57,7 +57,7 @@ Public Class EvaluacionPorMpUserControl
         WRow = -1
         Wcol = -1
 
-        Dim WFilas As New List(Of String) From {"", "Cuest Evaluacion Inicial", "Habilitacion / Licencias A: Proveedor", "Habilitacion / Licencias B: Fabricante", "GMP", "Especificacion con Vida Útil / Reanálisis", "Compromiso y Aviso de Cambios", "Trazabilidad", "Cumplimiento Envases", "FDS (En Español preferentemente)", "Hoja Técnica Completa", "Organigrama", "Impurezas Elementales", "Alergenos", "BSE/TSE", "GMO", "OVI/Residual Solvents", "Nano Partículas", "Decl. Contaminantes", "ISO 9001-2015", "BRC Food", "Kosher", "Halal", "Contramuestras", "Proceso/Ruta de Síntesis", "Métodos de Control", "Datos de la Molécula", "Irradiación - ETO - Aguas Madres", "Valores Nutricionales", "Apto para Dieta", "Control Terrorismo/BioTerrorismo", "Control de Plagas", "Orgánico", "Inorgánico", "A: Informa Fabricante - B: Es Fabricante", "Auditoría"}
+        Dim WFilas As New List(Of String) From {"", "Cuest Evaluacion Inicial", "Habilitacion / Licencias A: Proveedor", "Habilitacion / Licencias B: Fabricante", "GMP", "Especificacion con Vida Útil / Reanálisis", "Compromiso y Aviso de Cambios", "Trazabilidad", "Cumplimiento Envases", "FDS (En Español preferentemente)", "Hoja Técnica Completa", "Organigrama", "Impurezas Elementales", "Alergenos", "BSE/TSE", "GMO", "OVI/Residual Solvents", "Nano Partículas", "Decl. Contaminantes", "ISO 9001-2015", "BRC Food", "Kosher", "Halal", "Contramuestras", "Proceso/Ruta de Síntesis", "Métodos de Control", "Datos de la Molécula", "Irradiación - ETO - Aguas Madres", "Valores Nutricionales", "Apto para Dieta", "Control Terrorismo/BioTerrorismo", "Control de Plagas", "Orgánico", "Inorgánico", "A: Informa Fabricante - B: Es Fabricante", "Auditoría", "Aprobacìón INAL/SENASA", "PNA/ANAC", "ISO 14001", "ISO 18001"}
 
         For i = 1 To WFilas.Count - 1
             dgvItemsEvaluados.Rows.Add(i, WFilas(i), False, "", False, "", "", "", "", "")
@@ -121,7 +121,7 @@ Public Class EvaluacionPorMpUserControl
 
         If WDatos IsNot Nothing Then
 
-            For i = 1 To 35
+            For i = 1 To dgvItemsEvaluados.Rows.Count
 
                 Dim WDato As DataRow() = WDatos.Select("Renglon = '" & i & "'")
 
@@ -191,7 +191,7 @@ Public Class EvaluacionPorMpUserControl
 
                 dgvItemsEvaluados.ClearSelection()
 
-                If {1, 2, 3, 18, 19, 20, 21}.Contains(id) Then
+                If {1, 2, 3, 18, 19, 20, 21, 35, 36, 37, 38}.Contains(id) Then
                     Dim WFechaVto As String = Trim(OrDefault(.Cells("Vto").Value, ""))
 
                     If WFechaVto.Replace("/", "").Trim() <> "" Then
@@ -270,7 +270,7 @@ Public Class EvaluacionPorMpUserControl
     End Sub
 
     Private Sub dgvItemsEvaluados_CellContentClick(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles dgvItemsEvaluados.CellContentClick
-        If {2, 4, 6, 8}.Contains(e.ColumnIndex) Then dgvItemsEvaluados.CommitEdit(DataGridViewDataErrorContexts.Commit)
+        If {2, 4, 6, 8, 35, 36, 37, 38}.Contains(e.ColumnIndex) Then dgvItemsEvaluados.CommitEdit(DataGridViewDataErrorContexts.Commit)
     End Sub
 
     Private Sub dgvItemsEvaluados_CellValueChanged(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles dgvItemsEvaluados.CellValueChanged
@@ -328,7 +328,7 @@ Public Class EvaluacionPorMpUserControl
             Select Case e.ColumnIndex
                 Case 3, 5, 7, 8
 
-                    If (e.ColumnIndex = 8 AndAlso {1, 2, 3, 18, 19, 20, 21}.Contains(e.RowIndex)) Or e.ColumnIndex <> 8 Then
+                    If (e.ColumnIndex = 8 AndAlso {1, 2, 3, 18, 19, 20, 21, 35, 36, 37, 38}.Contains(e.RowIndex)) Or e.ColumnIndex <> 8 Then
 
                         .Rows(e.RowIndex).Cells(e.ColumnIndex).Style.BackColor = Globales.WBackColorSecundario
 

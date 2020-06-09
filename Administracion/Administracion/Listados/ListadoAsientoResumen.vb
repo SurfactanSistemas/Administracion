@@ -154,9 +154,10 @@ Public Class ListadoAsientoResumen
             Case 2
                 With New VistaPrevia
                     .Reporte = New ReporteImputa2netExportacionExcel
-                    .Reporte.RecordSelectionFormula = txtFormula
+                    '.Reporte.RecordSelectionFormula = txtFormula
                     .Reporte.SetParameterValue(0, txthastafecha.Text)
                     .Reporte.SetParameterValue(1, "Asiento Resumen")
+                    .Formula = txtFormula
                     '.Mostrar()
                     .Exportar("", ExportFormatType.Excel, "")
 

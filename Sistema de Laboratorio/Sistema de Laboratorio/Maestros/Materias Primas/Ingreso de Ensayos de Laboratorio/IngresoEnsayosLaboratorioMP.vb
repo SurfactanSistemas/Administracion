@@ -1,8 +1,8 @@
 ﻿Imports System.Configuration
 Imports System.IO
 Imports System.Text.RegularExpressions
-Imports ConsultasVarias
-Imports ConsultasVarias.Clases
+Imports Util
+Imports Util.Clases
 Imports CrystalDecisions.Shared
 Imports info.lundin.math
 Imports Laboratorio.Entidades
@@ -1203,7 +1203,7 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad, IA
 
 		If WOrden IsNot Nothing Then WDestino = Val(OrDefault(WOrden.Item("Destino"), ""))
 
-		If WDestino = 0 OrElse WDestino = ConsultasVarias.Clases.Helper._IdEmpresaSegunBase(Base) Then Return WSqls
+		If WDestino = 0 OrElse WDestino = Util.Clases.Helper._IdEmpresaSegunBase(Base) Then Return WSqls
 
 		'
 		' Busco próxima guía.
@@ -1288,7 +1288,7 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad, IA
 				'
 				If Val(WTipoOrden) = 1 Then
 					For Each e As String In Conexion.Empresas
-						Dim empreID = ConsultasVarias.Clases.Helper._IdEmpresaSegunBase(e)
+						Dim empreID = Util.Clases.Helper._IdEmpresaSegunBase(e)
 						WSQls.Add(String.Format("UPDATE {3}.dbo.Articulo SET PtaOrdenI = '{1}', OrdenI = '{2}' WHERE Codigo = '{0}'", txtCodigo.Text, empreID, txtOrden.Text, e))
 					Next
 				End If
@@ -1309,7 +1309,7 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad, IA
 				End If
 
 				For Each e As String In Conexion.Empresas
-					Dim empreID = ConsultasVarias.Clases.Helper._IdEmpresaSegunBase(e)
+					Dim empreID = Util.Clases.Helper._IdEmpresaSegunBase(e)
 					WSQls.Add(String.Format("UPDATE {3}.dbo.Articulo SET {4} = '{1}', {5} = '{2}', {6} = '{7}' WHERE Codigo = '{0}'",
 											txtCodigo.Text, empreID, txtOrden.Text, e, WCampoII, WCampoIII, WCampoI, WPrecio))
 				Next

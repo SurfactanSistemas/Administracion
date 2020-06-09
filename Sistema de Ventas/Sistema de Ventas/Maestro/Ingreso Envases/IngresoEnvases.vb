@@ -1,6 +1,6 @@
-﻿Imports ConsultasVarias
-Imports ConsultasVarias.Clases.Query
-Imports ConsultasVarias.Clases.Helper
+﻿Imports Util
+Imports Util.Clases.Query
+Imports Util.Clases.Helper
 Public Class IngresoEnvases : Implements IAgregarEnvase
 
     Public Sub _ProcesarDatosEnvases() Implements IAgregarEnvase._ProcesarDatosEnvases

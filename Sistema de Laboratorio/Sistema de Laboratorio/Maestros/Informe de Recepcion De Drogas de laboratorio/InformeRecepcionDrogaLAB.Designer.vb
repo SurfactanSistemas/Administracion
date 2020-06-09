@@ -32,7 +32,7 @@ Partial Class InformeRecepcionDrogaLAB
         Me.txtProveedor = New System.Windows.Forms.TextBox()
         Me.txtDescripcionProv = New System.Windows.Forms.TextBox()
         Me.txtRemito = New System.Windows.Forms.TextBox()
-        Me.DGV_InformeRecepcion = New ConsultasVarias.DBDataGridView()
+        Me.DGV_InformeRecepcion = New Util.DBDataGridView()
         Me.Orden = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Producto = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -1085,7 +1085,7 @@ Partial Class InformeRecepcionDrogaLAB
     Friend WithEvents txtProveedor As System.Windows.Forms.TextBox
     Friend WithEvents txtDescripcionProv As System.Windows.Forms.TextBox
     Friend WithEvents txtRemito As System.Windows.Forms.TextBox
-    Friend WithEvents DGV_InformeRecepcion As ConsultasVarias.DBDataGridView
+    Friend WithEvents DGV_InformeRecepcion As Util.DBDataGridView
     Friend WithEvents txtOrden As System.Windows.Forms.TextBox
     Friend WithEvents mastxtMateriaPrima As System.Windows.Forms.MaskedTextBox
     Friend WithEvents txtDescripcionMP As System.Windows.Forms.TextBox

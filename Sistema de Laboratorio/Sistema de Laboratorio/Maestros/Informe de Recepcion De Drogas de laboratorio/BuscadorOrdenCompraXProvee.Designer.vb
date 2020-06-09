@@ -24,7 +24,7 @@ Partial Class BuscadorOrdenCompraXProvee
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.btnVolver_pnlAyudaProv = New System.Windows.Forms.Button()
-        Me.DGV_AyudaProv = New ConsultasVarias.DBDataGridView()
+        Me.DGV_AyudaProv = New Util.DBDataGridView()
         Me.AyudaArticulo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.AyudaDescripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.AyudaSaldo = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -141,7 +141,7 @@ Partial Class BuscadorOrdenCompraXProvee
 
     End Sub
     Friend WithEvents btnVolver_pnlAyudaProv As System.Windows.Forms.Button
-    Friend WithEvents DGV_AyudaProv As ConsultasVarias.DBDataGridView
+    Friend WithEvents DGV_AyudaProv As Util.DBDataGridView
     Friend WithEvents AyudaArticulo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents AyudaDescripcion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents AyudaSaldo As System.Windows.Forms.DataGridViewTextBoxColumn

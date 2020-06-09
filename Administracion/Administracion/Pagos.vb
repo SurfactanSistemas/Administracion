@@ -1,11 +1,9 @@
-﻿Imports System.Configuration
-Imports ClasesCompartidas
+﻿Imports ClasesCompartidas
 Imports System.Data.SqlClient
 Imports System.Globalization
 Imports System.IO
-Imports ConsultasVarias.Clases
+Imports Util.Clases
 Imports CrystalDecisions.CrystalReports.Engine
-Imports Microsoft.Office.Core
 Imports Microsoft.Office.Interop.Outlook
 
 Public Class Pagos
@@ -24,7 +22,7 @@ Public Class Pagos
 
     Private WGrillaReferencia As DataGridView
 
-    Private Const XMAXFILAS = 15
+    Private Const XMAXFILAS = 30
     Private WRow, Wcol, WRowVarios As Integer
 
     Private WTipoProv, WTipoIva, WTipoIb, WTipoIbCaba, WPorceIb, WPorceIbCaba As String
@@ -107,7 +105,7 @@ Public Class Pagos
 
     Private Function _ExisteOrdenDePago(ByVal NumOrden) As Boolean
         Dim cn = New SqlConnection()
-        Dim cm = New SqlCommand("SELECT TOP 1 Orden FROM Pagos WHERE Orden = '" & NumOrden & "'")
+        Dim cm = New SqlCommand("SELECT TOP 1 Orden FROM Pagos WHERE Orden = '" & NumOrden & "' And ISNULL(MarcaVirtual, '') <> 'X'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -725,7 +723,7 @@ Public Class Pagos
         Dim XClaves As New List(Of Object)
         Dim _Item As String
         Dim cn = New SqlConnection()
-        Dim cm = New SqlCommand("SELECT cp.NroInterno, cp.Total, cp.Saldo, cp.Impre, cp.Letra, cp.Punto, " & "cp.Numero, cp.Fecha, cp.Clave FROM CtaCtePrv as cp WHERE cp.Proveedor = '" & Trim(txtProveedor.Text) & "' and cp.Saldo <> 0 ORDER BY cp.OrdFecha ASC, cp.Numero")
+        Dim cm = New SqlCommand("SELECT cp.NroInterno, cp.Total, cp.Saldo, cp.Impre, cp.Letra, cp.Punto, " & "cp.Numero, cp.Fecha, cp.Clave FROM CtaCtePrv as cp WHERE cp.Proveedor = '" & Trim(txtProveedor.Text) & "' and cp.Saldo <> 0 And ISNULL(cp.MarcaVirtual, '') <> 'X' ORDER BY cp.OrdFecha ASC, cp.Numero")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -1157,8 +1155,8 @@ Public Class Pagos
         End If
 
         ' Comprobamos que aun haya lugar para seguir cancelando Facturas.
-        If gridPagos.Rows.Count > 15 Then
-            MsgBox("La cantidad de facturas a cancelar supera las 15", MsgBoxStyle.Information)
+        If gridPagos.Rows.Cast(Of DataGridViewRow).Count(Function(r) Val(OrDefault(r.Cells("Importe").Value, "")) <> 0) >= 30 Then
+            MsgBox("La cantidad de facturas a cancelar supera las " & XMAXFILAS, MsgBoxStyle.Information)
             Exit Sub
         End If
 
@@ -1441,8 +1439,8 @@ Public Class Pagos
         Dim XClave = ""
 
         ' Comprobamos que aun haya lugar para seguir cancelando Facturas.
-        If gridFormaPagos.Rows.Count > 15 Then
-            MsgBox("La cantidad de facturas a cancelar supera las 15", MsgBoxStyle.Information)
+        If gridPagos.Rows.Cast(Of DataGridViewRow).Count(Function(r) Val(OrDefault(r.Cells("Importe").Value, "")) <> 0) >= 30 Then
+            MsgBox("La cantidad de facturas a cancelar supera las " & XMAXFILAS, MsgBoxStyle.Information)
             Exit Sub
         End If
 
@@ -3208,11 +3206,15 @@ Public Class Pagos
                 txtOrdenPago.Text = ceros(txtOrdenPago.Text, 6)
 
                 Try
-                    mostrarOrdenDePago(DAOPagos.buscarOrdenPorNumero(txtOrdenPago.Text))
 
-                    Dim WOrd As DataRow = GetSingle("SELECT * FROM Pagos WHERE Orden = '" & txtOrdenPago.Text & "' And Renglon = '01'")
+                    Dim WOrd As DataRow = GetSingle("SELECT MarcaVirtual, Carpeta1, Carpeta2, Carpeta3, Carpeta4, Carpeta5, Carpeta6, Carpeta7, Carpeta8, Carpeta9 FROM Pagos WHERE Orden = '" & txtOrdenPago.Text & "' And Renglon = '01'")
 
                     If WOrd IsNot Nothing Then
+
+                        If OrDefault(WOrd.Item("MarcaVirtual"), "") = "X" Then
+                            MsgBox("La Orden de Pago indicada, es una OP Virtual y por tanto no puede ser consultada por medio de este formulario.", MsgBoxStyle.Information)
+                            Exit Sub
+                        End If
 
                         For i = 1 To 9
                             _Carpetas(i) = Trim(OrDefault(WOrd.Item("Carpeta" & i), ""))
@@ -3221,6 +3223,8 @@ Public Class Pagos
                         txtOrdenPago.Enabled = False
 
                     End If
+
+                    mostrarOrdenDePago(DAOPagos.buscarOrdenPorNumero(txtOrdenPago.Text))
 
                     btnEnviarAviso.Enabled = True
                     btnActualizarCarpetas.Visible = True
@@ -4016,11 +4020,11 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
         Dim WEmpresa = "SURFACTAN S.A."
         Dim XRazon, XCuitProveedor, WTipo, WLetra, WPunto, WNumero, ClaveCtaprv, WCtaProveedor, WCtaEfectivo, WCtaCheques, ClaveBanco As String
         Dim WRenglon, XTotal, XCantidad As Double
-        Dim WImpresion(15, 10) As String
-        Dim WImpre2(15, 10) As String
-        Dim WDebito(15, 2) As String
-        Dim WCredito(15, 4) As String
-        Dim WCuenta(15, 2) As String
+        Dim WImpresion(XMAXFILAS, 10) As String
+        Dim WImpre2(XMAXFILAS, 10) As String
+        Dim WDebito(XMAXFILAS, 2) As String
+        Dim WCredito(XMAXFILAS, 4) As String
+        Dim WCuenta(XMAXFILAS, 2) As String
         Dim cn As New SqlConnection()
         Dim cm As New SqlCommand
         Dim dr As SqlDataReader
@@ -4215,7 +4219,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
         Next iRow
 
         If SumaTercero <> 0 Then
-            For WCiclo = 1 To 15
+            For WCiclo = 1 To XMAXFILAS
                 If Val(WImpre2(WCiclo, 3)) = 0 Then
                     WImpre2(WCiclo, 1) = ""
                     WImpre2(WCiclo, 2) = "Valores S/Detalle"
@@ -4236,7 +4240,11 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
         ' Creo las Columnas
         _PrepararTablaOrdenPago(Tabla)
 
-        For WCiclo = 0 To 14
+        Dim WCantFacts As Integer = gridPagos.Rows.Cast(Of DataGridViewRow).Count(Function(r) Val(OrDefault(r.Cells("Importe").Value, 0)) <> 0)
+
+        Dim WLimite As Integer = IIf(WCantFacts > 15, 30, 15)
+
+        For WCiclo = 0 To WLimite - 1
 
             WFecha1 = ""
             WNumero1 = ""
@@ -4298,7 +4306,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
 
             Tabla.Rows.Add(row)
 
-            If Not GenerarPDF Then
+            If Not GenerarPDF AndAlso WLimite = 15 Then
                 row = Tabla.NewRow()
 
                 With row
@@ -4350,7 +4358,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
 
         If GenerarPDF Then
 
-            Dim frm2 As New ConsultasVarias.VistaPrevia
+            Dim frm2 As New Util.VistaPrevia
             frm2.Reporte = crdoc
 
             frm2.Reporte.SetParameterValue("EsTransferencia", 1)
@@ -4362,7 +4370,8 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
             Helper._ExportarReporte(frm2, Enumeraciones.FormatoExportacion.PDF, txtOrdenPago.Text & "OrdenPago.pdf", "C:/ImpreOrdenPagoTemp/")
 
         Else
-            frm.Imprimir()
+            Dim WCantImpresiones As Short = IIf(WLimite = 15, 1, 2)
+            frm.Imprimir(WCantImpresiones)
         End If
 
 
@@ -4513,6 +4522,8 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
             .Columns.Add("Retencion1").DataType = Type.GetType("System.Double")
         End With
 
+        Dim WCantFacts As Integer = gridPagos.Rows.Cast(Of DataGridViewRow).Count(Function(r) Val(r.Cells("Importe").Value) <> 0)
+        Dim WLimite As Integer = IIf(WCantFacts > 15, 30, 15)
 
         For iRow = 0 To gridPagos.Rows.Count - 1
 
@@ -4616,7 +4627,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
 
                 Tabla.Rows.Add(row)
 
-                If Not GenerarPDF Then
+                If Not GenerarPDF AndAlso WLimite = 15 Then
 
                     row = Tabla.NewRow
 
@@ -4656,7 +4667,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
         ' Completamos los renglones faltantes.
 
         Dim XRenglon = WRenglon
-        For WRenglon = XRenglon To 15
+        For WRenglon = XRenglon To WLimite
 
             row = Tabla.NewRow
 
@@ -4687,7 +4698,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
 
             Tabla.Rows.Add(row)
 
-            If Not GenerarPDF Then
+            If Not GenerarPDF AndAlso WLimite = 15 Then
 
                 row = Tabla.NewRow
 
@@ -4731,7 +4742,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
 
             crdoc.SetParameterValue("MostrarFirma", 1)
 
-            Dim frm2 As New ConsultasVarias.VistaPrevia
+            Dim frm2 As New Util.VistaPrevia
             frm2.Reporte = crdoc
 
             Conexion.EmpresaDeTrabajo = "SurfactanSa"
@@ -4741,11 +4752,11 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
             Helper._ExportarReporte(frm2, Enumeraciones.FormatoExportacion.PDF, txtOrdenPago.Text & "OrdenPagoIVA.pdf", "C:/ImpreOrdenPagoTemp/")
 
         Else
-            With VistaPrevia
+            Dim cantImpre = IIf(WLimite = 15, 1, 2)
+            With New VistaPrevia
                 .Reporte = crdoc
                 '.Mostrar()
-                .Imprimir()
-                .Dispose()
+                .Imprimir(cantImpre)
             End With
         End If
     End Sub
@@ -4857,6 +4868,8 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
             .Columns.Add("Retencion1").DataType = Type.GetType("System.Double")
         End With
 
+        Dim WCantFacts As Integer = gridPagos.Rows.Cast(Of DataGridViewRow).Count(Function(r) Val(r.Cells("Importe").Value) <> 0)
+        Dim WLimite As Integer = IIf(WCantFacts > 15, 30, 15)
 
         For iRow = 0 To gridPagos.Rows.Count - 1
 
@@ -4975,7 +4988,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
 
                 Tabla.Rows.Add(row)
 
-                If Not GenerarPDF Then
+                If Not GenerarPDF AndAlso WLimite = 15 Then
 
                     row = Tabla.NewRow
 
@@ -5015,7 +5028,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
         ' Completamos los renglones faltantes.
 
         Dim XReglon = WRenglon
-        For WRenglon = XReglon To 15
+        For WRenglon = XReglon To WLimite
 
             row = Tabla.NewRow
 
@@ -5046,7 +5059,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
 
             Tabla.Rows.Add(row)
 
-            If Not GenerarPDF Then
+            If Not GenerarPDF AndAlso WLimite = 15 Then
 
                 row = Tabla.NewRow
 
@@ -5089,7 +5102,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
 
             crdoc.SetParameterValue("MostrarFirma", 1)
 
-            Dim frm2 As New ConsultasVarias.VistaPrevia
+            Dim frm2 As New Util.VistaPrevia
             frm2.Reporte = crdoc
 
             Conexion.EmpresaDeTrabajo = "SurfactanSa"
@@ -5100,11 +5113,12 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
 
         Else
 
-            With VistaPrevia
+            Dim cantImpre = IIf(WLimite = 15, 1, 2)
+
+            With New VistaPrevia
                 .Reporte = crdoc
                 '.Mostrar()
-                .Imprimir()
-                .Reporte.Dispose()
+                .Imprimir(cantImpre)
             End With
 
         End If
@@ -5250,6 +5264,9 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
             .Columns.Add("Retencion1").DataType = Type.GetType("System.Double")
         End With
 
+        Dim WCantFacts As Integer = gridPagos.Rows.Cast(Of DataGridViewRow).Count(Function(r) Val(r.Cells("Importe").Value) <> 0)
+
+        Dim WLimite As Integer = IIf(WCantFacts > 15, 30, 15)
 
         For iRow = 0 To gridPagos.Rows.Count - 1
 
@@ -5341,7 +5358,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
 
                                 Tabla.Rows.Add(row)
 
-                                If Not GenerarPDF Then
+                                If Not GenerarPDF AndAlso WLimite = 15 Then
                                     row = Tabla.NewRow
 
                                     row.Item("Clave") = "2" + ceros(txtOrdenPago.Text, 6) + ceros(WRenglon, 2)
@@ -5412,7 +5429,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
 
                                 Tabla.Rows.Add(row)
 
-                                If Not GenerarPDF Then
+                                If Not GenerarPDF AndAlso WLimite = 15 Then
                                     row = Tabla.NewRow
 
                                     row.Item("Clave") = "2" + ceros(txtOrdenPago.Text, 6) + ceros(WRenglon, 2)
@@ -5480,7 +5497,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
 
                                 Tabla.Rows.Add(row)
 
-                                If Not GenerarPDF Then
+                                If Not GenerarPDF AndAlso WLimite = 15 Then
                                     row = Tabla.NewRow
 
                                     row.Item("Clave") = "2" + ceros(txtOrdenPago.Text, 6) + ceros(WRenglon, 2)
@@ -5523,7 +5540,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
         ' Completamos los renglones faltantes.
 
         Dim XRenglon = WRenglon
-        For WRenglon = XRenglon + 1 To 15
+        For WRenglon = XRenglon + 1 To WLimite
 
             row = Tabla.NewRow
 
@@ -5554,7 +5571,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
 
             Tabla.Rows.Add(row)
 
-            If Not GenerarPDF Then
+            If Not GenerarPDF AndAlso WLimite = 15 Then
                 row = Tabla.NewRow
 
                 row.Item("Clave") = "2" + ceros(txtOrdenPago.Text, 6) + ceros(WRenglon, 2)
@@ -5595,7 +5612,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
 
             crdoc.SetParameterValue("MostrarFirma", 1)
 
-            Dim frm2 As New ConsultasVarias.VistaPrevia
+            Dim frm2 As New Util.VistaPrevia
             frm2.Reporte = crdoc
 
             Conexion.EmpresaDeTrabajo = "SurfactanSa"
@@ -5605,11 +5622,11 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
             Helper._ExportarReporte(frm2, Enumeraciones.FormatoExportacion.PDF, txtOrdenPago.Text & "OrdenPagoIB.pdf", "C:/ImpreOrdenPagoTemp/")
 
         Else
-            With VistaPrevia
+            Dim cantImpre = IIf(WLimite = 15, 1, 2)
+            With New VistaPrevia
                 .Reporte = crdoc
                 '.Mostrar()
-                .Imprimir()
-                .Reporte.Dispose()
+                .Imprimir(cantImpre)
             End With
         End If
     End Sub
@@ -5719,7 +5736,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
 
             crdoc.SetParameterValue("MostrarFirma", 1)
 
-            Dim frm2 As New ConsultasVarias.VistaPrevia
+            Dim frm2 As New Util.VistaPrevia
             frm2.Reporte = crdoc
 
             Conexion.EmpresaDeTrabajo = "SurfactanSa"
@@ -5730,11 +5747,10 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
 
         Else
 
-            With VistaPrevia
+            With New VistaPrevia
                 .Reporte = crdoc
                 '.Mostrar()
                 .Imprimir()
-                .Dispose()
             End With
 
         End If
@@ -5795,6 +5811,10 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
 
         _PrepararTablaOrdenPagoDiscriminacionTerceros(Tabla)
 
+        Dim WCantFacts As Integer = gridFormaPagos.Rows.Cast(Of DataGridViewRow).Count(Function(r) Val(r.Cells(5).Value) <> 0 And Val(r.Cells(3).Value) = 3)
+
+        Dim WLimite As Integer = IIf(WCantFacts > 15, 30, 15)
+
         For iRow = 0 To gridFormaPagos.Rows.Count - 1
             With gridFormaPagos.Rows(iRow)
                 If Val(.Cells(5).Value) <> 0 Then
@@ -5831,7 +5851,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
 
                         Tabla.Rows.Add(row)
 
-                        If Not GenerarPDF Then
+                        If Not GenerarPDF AndAlso WLimite = 15 Then
 
                             row = Tabla.NewRow()
 
@@ -5862,7 +5882,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
         Next iRow
 
         ' Completamos los renglones que resten.
-        For iRow = LugarResumen To 14
+        For iRow = LugarResumen To WLimite - 1
 
             ZZOrden = txtOrdenPago.Text
             ZZRenglon = Str$(LugarResumen)
@@ -5894,7 +5914,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
 
             Tabla.Rows.Add(row)
 
-            If Not GenerarPDF Then
+            If Not GenerarPDF AndAlso WLimite = 15 Then
                 row = Tabla.NewRow()
 
                 With row
@@ -5925,7 +5945,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
 
             If GenerarPDF Then
 
-                Dim frm2 As New ConsultasVarias.VistaPrevia
+                Dim frm2 As New Util.VistaPrevia
                 frm2.Reporte = crdoc
 
                 Conexion.EmpresaDeTrabajo = "SurfactanSa"
@@ -5936,11 +5956,12 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
 
             Else
 
-                With VistaPrevia
+                Dim cantImpre As Short = IIf(WLimite = 15, 1, 2)
+
+                With New VistaPrevia
                     .Reporte = crdoc
                     '.Mostrar()
-                    .Imprimir()
-                    .Reporte.Dispose()
+                    .Imprimir(cantImpre)
                 End With
 
             End If
@@ -6108,6 +6129,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
             Select Case _TipoConsulta
                 Case 0
                     mostrarProveedor(CLBFiltrado.SelectedItem.ToString)
+                    btnCtaCte_Click(Nothing, Nothing)
                 Case 1
 
                     _TraerCtaCte(CLBFiltrado.SelectedItem, indice)
@@ -6137,7 +6159,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
             Select Case _TipoConsulta
                 Case 0
                     mostrarProveedor(lstConsulta.SelectedItem.ToString)
-                    btnCtaCte.PerformClick()
+                    btnCtaCte_Click(Nothing, Nothing)
                 Case 1
                     ' Ctas Ctes
                     If Trim(lstConsulta.SelectedItem) = "" Or Not optCtaCte.Checked Then
@@ -6177,8 +6199,8 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
                 Dim _mes As String = Mid(txtFechaAux.Text, 4, 2)
 
                 Select Case Val(_mes)
-                    Case Is < 6
-                        txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & "2020"
+                    Case Is < 5
+                        txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & "2021"
                     Case Else
                         txtFechaAux.Text = txtFechaAux.Text & Mid(txtFecha.Text, 7, 4)
                 End Select
@@ -7576,7 +7598,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
         Dim Fechaord As String = ordenaFecha(txtFechaParidad.Text)
         Dim importeDolar As Double = redondeo(Val(txtTotal.Text) / Val(txtParidad.Text.Replace(",", ".")))
         tablaChequesAdolar.Rows.Add("00", "Retenciones", "", txtTotal.Text, txtParidad.Text, importeDolar, txtTotal.Text, False, Fechaord, txtTotal.Text)
-        For i As Integer = 1 To 15
+        For i As Integer = 1 To XMAXFILAS
             If (gridFormaPagos.Rows(i - 1).Cells("Importe2").Value <> "") Then
                 tablaChequesAdolar.Rows.Add()
                 tablaChequesAdolar.Rows(i).Item("Tipo") = gridFormaPagos.Rows(i - 1).Cells("Tipo2").Value

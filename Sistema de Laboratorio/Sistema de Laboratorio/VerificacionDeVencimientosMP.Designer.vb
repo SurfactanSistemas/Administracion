@@ -44,7 +44,7 @@ Partial Class VerificacionDeVencimientosMP
         Me.pnlAyuda = New System.Windows.Forms.Panel()
         Me.txtAyuda = New System.Windows.Forms.TextBox()
         Me.btnPnlVolver = New System.Windows.Forms.Button()
-        Me.DGV_Ayuda = New ConsultasVarias.DBDataGridView()
+        Me.DGV_Ayuda = New Util.DBDataGridView()
         Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
@@ -358,7 +358,7 @@ Partial Class VerificacionDeVencimientosMP
     Friend WithEvents btnBuscarHasta As System.Windows.Forms.Button
     Friend WithEvents pnlAyuda As System.Windows.Forms.Panel
     Friend WithEvents btnPnlVolver As System.Windows.Forms.Button
-    Friend WithEvents DGV_Ayuda As ConsultasVarias.DBDataGridView
+    Friend WithEvents DGV_Ayuda As Util.DBDataGridView
     Friend WithEvents txtAyuda As System.Windows.Forms.TextBox
     Friend WithEvents Codigo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn

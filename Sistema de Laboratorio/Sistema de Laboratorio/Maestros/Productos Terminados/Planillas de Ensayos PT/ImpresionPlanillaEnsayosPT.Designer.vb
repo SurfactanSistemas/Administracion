@@ -35,7 +35,7 @@ Partial Class ImpresionPlanillaEnsayosPT
         Me.txtEtapa = New System.Windows.Forms.TextBox()
         Me.btnAyuda = New System.Windows.Forms.Button()
         Me.btnCerrar = New System.Windows.Forms.Button()
-        Me.dgvEspecif = New ConsultasVarias.DBDataGridView()
+        Me.dgvEspecif = New Util.DBDataGridView()
         Me.Ensayo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DescParametros = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -353,7 +353,7 @@ Partial Class ImpresionPlanillaEnsayosPT
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents dgvEspecif As ConsultasVarias.DBDataGridView
+    Friend WithEvents dgvEspecif As Util.DBDataGridView
     Friend WithEvents btnImprimir As System.Windows.Forms.Button
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents txtCodigo As System.Windows.Forms.MaskedTextBox

@@ -28,7 +28,7 @@ Partial Class Consulta_Cambios
         Me.label1 = New System.Windows.Forms.Label()
         Me.txtFiltro = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.DGV_Cambios = New ConsultasVarias.DBDataGridView()
+        Me.DGV_Cambios = New Util.DBDataGridView()
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.Fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.OrdFecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -221,7 +221,7 @@ Partial Class Consulta_Cambios
     Private WithEvents label1 As System.Windows.Forms.Label
     Friend WithEvents txtFiltro As System.Windows.Forms.TextBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents DGV_Cambios As ConsultasVarias.DBDataGridView
+    Friend WithEvents DGV_Cambios As Util.DBDataGridView
     Friend WithEvents btnCerrar As System.Windows.Forms.Button
     Friend WithEvents Fecha As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents OrdFecha As System.Windows.Forms.DataGridViewTextBoxColumn

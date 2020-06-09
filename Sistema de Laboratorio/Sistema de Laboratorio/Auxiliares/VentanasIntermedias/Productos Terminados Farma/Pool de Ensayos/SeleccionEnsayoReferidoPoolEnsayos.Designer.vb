@@ -26,7 +26,7 @@ Partial Class SeleccionEnsayoReferidoPoolEnsayos
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.dgvDatos = New ConsultasVarias.DBDataGridView()
+        Me.dgvDatos = New Util.DBDataGridView()
         Me.btnCancelar = New System.Windows.Forms.Button()
         Me.Ensayo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -154,7 +154,7 @@ Partial Class SeleccionEnsayoReferidoPoolEnsayos
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents dgvDatos As ConsultasVarias.DBDataGridView
+    Friend WithEvents dgvDatos As Util.DBDataGridView
     Friend WithEvents btnCancelar As System.Windows.Forms.Button
     Friend WithEvents Ensayo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn

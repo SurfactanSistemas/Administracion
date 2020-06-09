@@ -1,5 +1,5 @@
 ﻿Imports System.ComponentModel
-Imports ConsultasVarias.Clases.Query
+Imports Util.Clases.Query
 
 Public Class AyudaProveedores
 

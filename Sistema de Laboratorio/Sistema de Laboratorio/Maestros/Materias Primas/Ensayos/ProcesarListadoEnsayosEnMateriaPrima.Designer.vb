@@ -1,6 +1,6 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class ProcesarListadoEnsayosEnMateriaPrima
-    Inherits ConsultasVarias.DerivadoListarReporteDesdeHastaBasico
+    Inherits Util.DerivadoListarReporteDesdeHastaBasico
 
     'Form overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()> _

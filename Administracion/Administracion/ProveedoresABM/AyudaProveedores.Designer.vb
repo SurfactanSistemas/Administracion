@@ -27,7 +27,7 @@ Partial Class AyudaProveedores
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.dgvProveedores = New ConsultasVarias.DBDataGridView()
+        Me.dgvProveedores = New Util.DBDataGridView()
         Me.Proveedor = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Nombre = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
@@ -136,7 +136,7 @@ Partial Class AyudaProveedores
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
-    Friend WithEvents dgvProveedores As ConsultasVarias.DBDataGridView
+    Friend WithEvents dgvProveedores As Util.DBDataGridView
     Friend WithEvents Proveedor As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Nombre As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

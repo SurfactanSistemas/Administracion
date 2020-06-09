@@ -1,4 +1,4 @@
-﻿Imports ConsultasVarias
+﻿Imports Util
 
 Public Class ProcesarListadoEnsayosEnMateriaPrima : Implements IListarReporteDesdeHastaBasico
 
@@ -17,7 +17,7 @@ Public Class ProcesarListadoEnsayosEnMateriaPrima : Implements IListarReporteDes
 
     End Sub
 
-    Public Sub _ProcesarListarReporteDesdeHastaBasico(ByVal Desde As String, ByVal Hasta As String, ByVal TipoVisualizacion As ConsultasVarias.Clases.Enumeraciones.TipoVisualizacionReporte) Implements IListarReporteDesdeHastaBasico._ProcesarListarReporteDesdeHastaBasico
+    Public Sub _ProcesarListarReporteDesdeHastaBasico(ByVal Desde As String, ByVal Hasta As String, ByVal TipoVisualizacion As Util.Clases.Enumeraciones.TipoVisualizacionReporte) Implements IListarReporteDesdeHastaBasico._ProcesarListarReporteDesdeHastaBasico
         Dim WParam As New Dictionary(Of String, Object)
 
         WParam.Add("@Ensayo1", Desde)
@@ -35,7 +35,7 @@ Public Class ProcesarListadoEnsayosEnMateriaPrima : Implements IListarReporteDes
         With New VistaPrevia
             .Reporte = rpt
 
-            If TipoVisualizacion = ConsultasVarias.Clases.Enumeraciones.TipoVisualizacionReporte.Pantalla Then
+            If TipoVisualizacion = Util.Clases.Enumeraciones.TipoVisualizacionReporte.Pantalla Then
                 .Mostrar()
             Else
                 .Imprimir()

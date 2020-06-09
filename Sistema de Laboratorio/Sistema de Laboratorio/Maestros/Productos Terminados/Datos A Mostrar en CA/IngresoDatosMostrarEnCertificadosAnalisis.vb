@@ -1,6 +1,6 @@
-﻿Imports ConsultasVarias
+﻿Imports Util
 
-Public Class IngresoDatosMostrarEnCertificadosAnalisis : Implements ConsultasVarias.IAyudaGeneral
+Public Class IngresoDatosMostrarEnCertificadosAnalisis : Implements Util.IAyudaGeneral
     Private ReadOnly CerrarDspGrabar As Boolean = False
 
     Sub New(Optional ByVal Terminado As String = "", Optional ByVal Cliente As String = "", Optional ByVal CerrarDspGrabar As Boolean = False)
