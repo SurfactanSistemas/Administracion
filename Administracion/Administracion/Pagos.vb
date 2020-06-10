@@ -876,8 +876,10 @@ Public Class Pagos
         Dim itemTemplate = "#NUMERO#  #FECHA#  #IMPORTE#  #BANCO#"
         Dim item = ""
 
+        Dim WTipoCheque As String = IIf(rbChFisico.Checked, "Tipo2 IN ('02', '2')", "Tipo2 IN ('07', '7')")
+
         Dim cn = New SqlConnection()
-        Dim cm = New SqlCommand("SELECT Tiporeg, TipoReg, Estado2, Tipo2, Importe2, Numero2, " & "Fecha2, Banco2, Clave, FechaOrd2 FROM Recibos WHERE " & "TipoReg = '2' AND Estado2 <> 'X' AND (Tipo2 = '02' OR Tipo2= '07')" & "ORDER BY FechaOrd2, Numero2")
+        Dim cm = New SqlCommand("SELECT Tiporeg, TipoReg, Estado2, Tipo2, Importe2, Numero2, " & "Fecha2, Banco2, Clave, FechaOrd2 FROM Recibos WHERE " & "TipoReg = '2' AND Estado2 <> 'X' AND " & WTipoCheque & "ORDER BY FechaOrd2, Numero2")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -917,9 +919,10 @@ Public Class Pagos
         Dim _ChequesRecibos As New List(Of Object)
         Dim itemTemplate = "#NUMERO#  #FECHA#  #IMPORTE#  #BANCO#"
         Dim item = ""
+        Dim WTipoCheque As String = IIf(rbChFisico.Checked, "Tipo2 IN ('02', '2')", "Tipo2 IN ('07', '7')")
 
         Dim cn = New SqlConnection()
-        Dim cm = New SqlCommand("SELECT Tiporeg, TipoReg, Estado2, Tipo2, Importe2, Numero2, " & "Fecha2, Banco2, Clave, FechaOrd2 FROM RecibosProvi WHERE " & "TipoReg = '2' AND Estado2 = 'P' AND ReciboDefinitivo = '0' AND FechaOrd2 > '20080430'" & "ORDER BY FechaOrd2, Numero2")
+        Dim cm = New SqlCommand("SELECT Tiporeg, TipoReg, Estado2, Tipo2, Importe2, Numero2, " & "Fecha2, Banco2, Clave, FechaOrd2 FROM RecibosProvi WHERE " & "TipoReg = '2' AND Estado2 = 'P' AND ReciboDefinitivo = '0' AND FechaOrd2 > '20080430' And " & WTipoCheque & "ORDER BY FechaOrd2, Numero2")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -971,7 +974,7 @@ Public Class Pagos
         _ChequesTotales.AddRange(_ChequesRecibos)
         _ChequesTotales.AddRange(_ChequesRecibosProvisorios)
 
-        ' Los oredenamos de manera ASC
+        ' Los ordenamos de manera ASC
         _ChequesTotales.Sort(Function(a As Object, b As Object)
                                  Return Val(a(2)) < Val(b(2))
                              End Function)
@@ -7866,4 +7869,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
     End Function
 
 
+    Private Sub rbChElectronico_MouseClick(sender As Object, e As MouseEventArgs) Handles rbChFisico.MouseClick, rbChElectronico.MouseClick
+        btnChequesTerceros_Click(Nothing, Nothing)
+    End Sub
 End Class

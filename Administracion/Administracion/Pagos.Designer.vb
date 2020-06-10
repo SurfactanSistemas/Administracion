@@ -68,6 +68,10 @@ Partial Class Pagos
         Me.Cuenta = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.UltTipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.txtObservaciones = New Administracion.CustomTextBox()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.rbChElectronico = New System.Windows.Forms.RadioButton()
+        Me.rbChFisico = New System.Windows.Forms.RadioButton()
         Me.CustomLabel17 = New Administracion.CustomLabel()
         Me.pnlDifCamXFactura = New System.Windows.Forms.Panel()
         Me.btnVolver = New System.Windows.Forms.Button()
@@ -112,7 +116,6 @@ Partial Class Pagos
         Me.txtOrdenPago = New Administracion.CustomTextBox()
         Me.txtProveedor = New Administracion.CustomTextBox()
         Me.txtRazonSocial = New Administracion.CustomTextBox()
-        Me.txtObservaciones = New Administracion.CustomTextBox()
         Me.txtBanco = New Administracion.CustomTextBox()
         Me.txtNombreBanco = New Administracion.CustomTextBox()
         Me.CustomLabel6 = New Administracion.CustomLabel()
@@ -148,6 +151,7 @@ Partial Class Pagos
         CType(Me.gridPagos, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gridFormaPagos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
         Me.pnlDifCamXFactura.SuspendLayout()
         CType(Me.GridPagosXFacturas, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlPedirCuenta.SuspendLayout()
@@ -453,6 +457,8 @@ Partial Class Pagos
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.txtObservaciones)
+        Me.Panel2.Controls.Add(Me.GroupBox3)
         Me.Panel2.Controls.Add(Me.CustomLabel17)
         Me.Panel2.Controls.Add(Me.pnlDifCamXFactura)
         Me.Panel2.Controls.Add(Me.btnDifCambioXFactura)
@@ -481,7 +487,6 @@ Partial Class Pagos
         Me.Panel2.Controls.Add(Me.txtOrdenPago)
         Me.Panel2.Controls.Add(Me.txtProveedor)
         Me.Panel2.Controls.Add(Me.txtRazonSocial)
-        Me.Panel2.Controls.Add(Me.txtObservaciones)
         Me.Panel2.Controls.Add(Me.txtBanco)
         Me.Panel2.Controls.Add(Me.txtNombreBanco)
         Me.Panel2.Controls.Add(Me.GroupBox1)
@@ -511,15 +516,62 @@ Partial Class Pagos
         Me.Panel2.Size = New System.Drawing.Size(778, 447)
         Me.Panel2.TabIndex = 73
         '
+        'txtObservaciones
+        '
+        Me.txtObservaciones.Cleanable = True
+        Me.txtObservaciones.Empty = True
+        Me.txtObservaciones.EnterIndex = 4
+        Me.txtObservaciones.LabelAssociationKey = 4
+        Me.txtObservaciones.Location = New System.Drawing.Point(90, 54)
+        Me.txtObservaciones.MaxLength = 100
+        Me.txtObservaciones.Name = "txtObservaciones"
+        Me.txtObservaciones.Size = New System.Drawing.Size(366, 20)
+        Me.txtObservaciones.TabIndex = 31
+        Me.txtObservaciones.Validator = Administracion.ValidatorType.None
+        '
+        'GroupBox3
+        '
+        Me.GroupBox3.Controls.Add(Me.rbChElectronico)
+        Me.GroupBox3.Controls.Add(Me.rbChFisico)
+        Me.GroupBox3.ForeColor = System.Drawing.SystemColors.Control
+        Me.GroupBox3.Location = New System.Drawing.Point(301, 73)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(155, 50)
+        Me.GroupBox3.TabIndex = 133
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "Tipo Cheque"
+        '
+        'rbChElectronico
+        '
+        Me.rbChElectronico.AutoSize = True
+        Me.rbChElectronico.Location = New System.Drawing.Point(69, 19)
+        Me.rbChElectronico.Name = "rbChElectronico"
+        Me.rbChElectronico.Size = New System.Drawing.Size(78, 17)
+        Me.rbChElectronico.TabIndex = 0
+        Me.rbChElectronico.Text = "Electrónico"
+        Me.rbChElectronico.UseVisualStyleBackColor = True
+        '
+        'rbChFisico
+        '
+        Me.rbChFisico.AutoSize = True
+        Me.rbChFisico.Checked = True
+        Me.rbChFisico.Location = New System.Drawing.Point(7, 19)
+        Me.rbChFisico.Name = "rbChFisico"
+        Me.rbChFisico.Size = New System.Drawing.Size(54, 17)
+        Me.rbChFisico.TabIndex = 0
+        Me.rbChFisico.TabStop = True
+        Me.rbChFisico.Text = "Físico"
+        Me.rbChFisico.UseVisualStyleBackColor = True
+        '
         'CustomLabel17
         '
         Me.CustomLabel17.AutoSize = True
         Me.CustomLabel17.ControlAssociationKey = 3
-        Me.CustomLabel17.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.CustomLabel17.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel17.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel17.Location = New System.Drawing.Point(12, 20)
+        Me.CustomLabel17.Location = New System.Drawing.Point(9, 10)
         Me.CustomLabel17.Name = "CustomLabel17"
-        Me.CustomLabel17.Size = New System.Drawing.Size(99, 18)
+        Me.CustomLabel17.Size = New System.Drawing.Size(79, 14)
         Me.CustomLabel17.TabIndex = 132
         Me.CustomLabel17.Text = "Orden de Pago"
         '
@@ -530,9 +582,9 @@ Partial Class Pagos
         Me.pnlDifCamXFactura.Controls.Add(Me.btnAceptar)
         Me.pnlDifCamXFactura.Controls.Add(Me.GridPagosXFacturas)
         Me.pnlDifCamXFactura.Controls.Add(Me.CustomLabel1)
-        Me.pnlDifCamXFactura.Location = New System.Drawing.Point(60, 38)
+        Me.pnlDifCamXFactura.Location = New System.Drawing.Point(156, 299)
         Me.pnlDifCamXFactura.Name = "pnlDifCamXFactura"
-        Me.pnlDifCamXFactura.Size = New System.Drawing.Size(467, 300)
+        Me.pnlDifCamXFactura.Size = New System.Drawing.Size(467, 74)
         Me.pnlDifCamXFactura.TabIndex = 131
         '
         'btnVolver
@@ -718,7 +770,7 @@ Partial Class Pagos
         Me.btnEnviarAviso.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnEnviarAviso.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnEnviarAviso.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnEnviarAviso.Location = New System.Drawing.Point(319, 19)
+        Me.btnEnviarAviso.Location = New System.Drawing.Point(322, 7)
         Me.btnEnviarAviso.Name = "btnEnviarAviso"
         Me.btnEnviarAviso.Size = New System.Drawing.Size(133, 23)
         Me.btnEnviarAviso.TabIndex = 128
@@ -878,7 +930,7 @@ Partial Class Pagos
         '
         'txtFecha
         '
-        Me.txtFecha.Location = New System.Drawing.Point(243, 20)
+        Me.txtFecha.Location = New System.Drawing.Point(246, 10)
         Me.txtFecha.Mask = "00/00/0000"
         Me.txtFecha.Name = "txtFecha"
         Me.txtFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -931,7 +983,7 @@ Partial Class Pagos
         Me.CustomLabel2.ControlAssociationKey = 2
         Me.CustomLabel2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel2.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel2.Location = New System.Drawing.Point(193, 21)
+        Me.CustomLabel2.Location = New System.Drawing.Point(196, 11)
         Me.CustomLabel2.Name = "CustomLabel2"
         Me.CustomLabel2.Size = New System.Drawing.Size(44, 18)
         Me.CustomLabel2.TabIndex = 1
@@ -953,11 +1005,11 @@ Partial Class Pagos
         '
         Me.CustomLabel3.AutoSize = True
         Me.CustomLabel3.ControlAssociationKey = 3
-        Me.CustomLabel3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.CustomLabel3.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel3.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel3.Location = New System.Drawing.Point(36, 49)
+        Me.CustomLabel3.Location = New System.Drawing.Point(31, 35)
         Me.CustomLabel3.Name = "CustomLabel3"
-        Me.CustomLabel3.Size = New System.Drawing.Size(73, 18)
+        Me.CustomLabel3.Size = New System.Drawing.Size(57, 14)
         Me.CustomLabel3.TabIndex = 2
         Me.CustomLabel3.Text = "Proveedor"
         '
@@ -977,11 +1029,11 @@ Partial Class Pagos
         '
         Me.CustomLabel4.AutoSize = True
         Me.CustomLabel4.ControlAssociationKey = 4
-        Me.CustomLabel4.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.CustomLabel4.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel4.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel4.Location = New System.Drawing.Point(10, 76)
+        Me.CustomLabel4.Location = New System.Drawing.Point(9, 57)
         Me.CustomLabel4.Name = "CustomLabel4"
-        Me.CustomLabel4.Size = New System.Drawing.Size(99, 18)
+        Me.CustomLabel4.Size = New System.Drawing.Size(79, 14)
         Me.CustomLabel4.TabIndex = 3
         Me.CustomLabel4.Text = "Observaciones"
         '
@@ -989,11 +1041,11 @@ Partial Class Pagos
         '
         Me.CustomLabel5.AutoSize = True
         Me.CustomLabel5.ControlAssociationKey = 5
-        Me.CustomLabel5.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.CustomLabel5.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel5.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel5.Location = New System.Drawing.Point(64, 103)
+        Me.CustomLabel5.Location = New System.Drawing.Point(51, 79)
         Me.CustomLabel5.Name = "CustomLabel5"
-        Me.CustomLabel5.Size = New System.Drawing.Size(45, 18)
+        Me.CustomLabel5.Size = New System.Drawing.Size(37, 14)
         Me.CustomLabel5.TabIndex = 4
         Me.CustomLabel5.Text = "Banco"
         '
@@ -1003,7 +1055,7 @@ Partial Class Pagos
         Me.txtOrdenPago.Empty = True
         Me.txtOrdenPago.EnterIndex = 1
         Me.txtOrdenPago.LabelAssociationKey = 1
-        Me.txtOrdenPago.Location = New System.Drawing.Point(112, 20)
+        Me.txtOrdenPago.Location = New System.Drawing.Point(90, 10)
         Me.txtOrdenPago.MaxLength = 6
         Me.txtOrdenPago.Name = "txtOrdenPago"
         Me.txtOrdenPago.Size = New System.Drawing.Size(75, 20)
@@ -1017,7 +1069,7 @@ Partial Class Pagos
         Me.txtProveedor.Empty = False
         Me.txtProveedor.EnterIndex = 3
         Me.txtProveedor.LabelAssociationKey = 3
-        Me.txtProveedor.Location = New System.Drawing.Point(112, 46)
+        Me.txtProveedor.Location = New System.Drawing.Point(90, 32)
         Me.txtProveedor.MaxLength = 11
         Me.txtProveedor.Name = "txtProveedor"
         Me.txtProveedor.Size = New System.Drawing.Size(95, 20)
@@ -1032,25 +1084,12 @@ Partial Class Pagos
         Me.txtRazonSocial.Empty = False
         Me.txtRazonSocial.EnterIndex = -1
         Me.txtRazonSocial.LabelAssociationKey = 3
-        Me.txtRazonSocial.Location = New System.Drawing.Point(213, 46)
+        Me.txtRazonSocial.Location = New System.Drawing.Point(187, 32)
         Me.txtRazonSocial.Name = "txtRazonSocial"
         Me.txtRazonSocial.ReadOnly = True
-        Me.txtRazonSocial.Size = New System.Drawing.Size(240, 20)
+        Me.txtRazonSocial.Size = New System.Drawing.Size(269, 20)
         Me.txtRazonSocial.TabIndex = 30
         Me.txtRazonSocial.Validator = Administracion.ValidatorType.None
-        '
-        'txtObservaciones
-        '
-        Me.txtObservaciones.Cleanable = True
-        Me.txtObservaciones.Empty = True
-        Me.txtObservaciones.EnterIndex = 4
-        Me.txtObservaciones.LabelAssociationKey = 4
-        Me.txtObservaciones.Location = New System.Drawing.Point(112, 73)
-        Me.txtObservaciones.MaxLength = 100
-        Me.txtObservaciones.Name = "txtObservaciones"
-        Me.txtObservaciones.Size = New System.Drawing.Size(341, 20)
-        Me.txtObservaciones.TabIndex = 31
-        Me.txtObservaciones.Validator = Administracion.ValidatorType.None
         '
         'txtBanco
         '
@@ -1058,10 +1097,10 @@ Partial Class Pagos
         Me.txtBanco.Empty = True
         Me.txtBanco.EnterIndex = 5
         Me.txtBanco.LabelAssociationKey = 5
-        Me.txtBanco.Location = New System.Drawing.Point(112, 100)
+        Me.txtBanco.Location = New System.Drawing.Point(90, 76)
         Me.txtBanco.MaxLength = 8
         Me.txtBanco.Name = "txtBanco"
-        Me.txtBanco.Size = New System.Drawing.Size(95, 20)
+        Me.txtBanco.Size = New System.Drawing.Size(26, 20)
         Me.txtBanco.TabIndex = 32
         Me.txtBanco.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.ToolTip1.SetToolTip(Me.txtBanco, "Doble Click: Abrir Consulta de Cuentas Contables")
@@ -1074,10 +1113,10 @@ Partial Class Pagos
         Me.txtNombreBanco.Enabled = False
         Me.txtNombreBanco.EnterIndex = -1
         Me.txtNombreBanco.LabelAssociationKey = 5
-        Me.txtNombreBanco.Location = New System.Drawing.Point(213, 100)
+        Me.txtNombreBanco.Location = New System.Drawing.Point(118, 76)
         Me.txtNombreBanco.Name = "txtNombreBanco"
         Me.txtNombreBanco.ReadOnly = True
-        Me.txtNombreBanco.Size = New System.Drawing.Size(240, 20)
+        Me.txtNombreBanco.Size = New System.Drawing.Size(181, 20)
         Me.txtNombreBanco.TabIndex = 33
         Me.txtNombreBanco.Validator = Administracion.ValidatorType.None
         '
@@ -1549,6 +1588,8 @@ Partial Class Pagos
         CType(Me.gridFormaPagos, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox3.PerformLayout()
         Me.pnlDifCamXFactura.ResumeLayout(False)
         Me.pnlDifCamXFactura.PerformLayout()
         CType(Me.GridPagosXFacturas, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1663,4 +1704,7 @@ Partial Class Pagos
     Friend WithEvents Paridad As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ImporteDolares As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents CustomLabel17 As Administracion.CustomLabel
+    Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
+    Friend WithEvents rbChElectronico As System.Windows.Forms.RadioButton
+    Friend WithEvents rbChFisico As System.Windows.Forms.RadioButton
 End Class
