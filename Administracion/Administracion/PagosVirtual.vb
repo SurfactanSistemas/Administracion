@@ -5824,6 +5824,7 @@ Public Class PagosVirtual
                         ZZFechaCheque = .Cells(2).Value
                         ZZBancoCheque = .Cells(4).Value
                         ZZCuit = .Cells(7).Value
+                        Dim ZZTipo = Val(.Cells("Tipo2").Value)
 
                         row = Tabla.NewRow
 
@@ -5841,6 +5842,7 @@ Public Class PagosVirtual
                             .Item("Banco") = ZZBancoCheque
                             .Item("Razon") = XRazon
                             .Item("CuitProveedor") = XCuitProveedor
+                            .Item("Tipo") = ZZTipo
 
                         End With
 
@@ -5863,6 +5865,7 @@ Public Class PagosVirtual
                                 .Item("Banco") = ZZBancoCheque
                                 .Item("Razon") = XRazon
                                 .Item("CuitProveedor") = XCuitProveedor
+                                .Item("Tipo") = ZZTipo
                             End With
 
                             Tabla.Rows.Add(row)
@@ -5904,7 +5907,7 @@ Public Class PagosVirtual
                 .Item("Banco") = ZZBancoCheque
                 .Item("Razon") = XRazon
                 .Item("CuitProveedor") = XCuitProveedor
-
+                .Item("Tipo") = 0
             End With
 
             Tabla.Rows.Add(row)
@@ -5925,6 +5928,7 @@ Public Class PagosVirtual
                     .Item("Banco") = ZZBancoCheque
                     .Item("Razon") = XRazon
                     .Item("CuitProveedor") = XCuitProveedor
+                    .Item("Tipo") = 0
                 End With
 
                 Tabla.Rows.Add(row)
@@ -6010,6 +6014,7 @@ Public Class PagosVirtual
             .Columns.Add("Banco")
             .Columns.Add("Razon")
             .Columns.Add("CuitProveedor")
+            .Columns.Add("Tipo").DataType = Type.GetType("System.Integer")
         End With
     End Sub
 
