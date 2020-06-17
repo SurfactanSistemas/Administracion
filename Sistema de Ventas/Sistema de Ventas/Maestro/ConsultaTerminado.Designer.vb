@@ -26,12 +26,8 @@ Partial Class ConsultaTerminado
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
-<<<<<<< HEAD
-        Me.DGV_Terminado = New ConsultasVarias.DBDataGridView()
-=======
         Me.DGV_Terminado = New Util.DBDataGridView()
         Me.btnCerrar = New System.Windows.Forms.Button()
->>>>>>> a3a91045fea7894c9e374878954fc720e92cc946
         Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnCerrar = New System.Windows.Forms.Button()

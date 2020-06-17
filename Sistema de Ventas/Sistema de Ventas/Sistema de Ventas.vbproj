@@ -80,6 +80,7 @@
     <Compile Include="Interfases\IConsultaCambios.vb" />
     <Compile Include="Interfases\IConsultaTerminado.vb" />
     <Compile Include="Interfases\IConsulta_Orden_Trabajo.vb" />
+    <Compile Include="Interfases\IHojaDeRuta.vb" />
     <Compile Include="Interfases\IOrdenDeTrabajoDesarrollo.vb" />
     <Compile Include="Maestro\Consulta de revisiones de ensayos.Designer.vb">
       <DependentUpon>Consulta de revisiones de ensayos.vb</DependentUpon>
@@ -260,6 +261,12 @@
       <DependentUpon>ConsultaHojaDeRuta.vb</DependentUpon>
     </Compile>
     <Compile Include="Novedades\ConsultaHojaDeRuta.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Novedades\ConsultaHojaDeRutaXRangoFecha.Designer.vb">
+      <DependentUpon>ConsultaHojaDeRutaXRangoFecha.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Novedades\ConsultaHojaDeRutaXRangoFecha.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Novedades\Ordenes de Trabajo Desarrollo\AutorizarOrdenTrabajo.Designer.vb">
@@ -455,6 +462,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Novedades\ConsultaHojaDeRuta.resx">
       <DependentUpon>ConsultaHojaDeRuta.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Novedades\ConsultaHojaDeRutaXRangoFecha.resx">
+      <DependentUpon>ConsultaHojaDeRutaXRangoFecha.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Novedades\Ordenes de Trabajo Desarrollo\AutorizarOrdenTrabajo.resx">
       <DependentUpon>AutorizarOrdenTrabajo.vb</DependentUpon>
