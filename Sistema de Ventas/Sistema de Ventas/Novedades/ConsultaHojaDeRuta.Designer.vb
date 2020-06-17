@@ -41,7 +41,10 @@ Partial Class ConsultaHojaDeRuta
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.DGV_HojaRuta = New ConsultasVarias.DBDataGridView()
+        Me.btnLimpiar = New System.Windows.Forms.Button()
+        Me.btnImprimir = New System.Windows.Forms.Button()
+        Me.btnBuscarFecha = New System.Windows.Forms.Button()
+        Me.DGV_HojaRuta = New Util.DBDataGridView()
         Me.Pedido = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Cliente = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Razon = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -55,21 +58,24 @@ Partial Class ConsultaHojaDeRuta
         Me.Clave = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Integridad = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Archivo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.btnLimpiar = New System.Windows.Forms.Button()
-        Me.btnImprimir = New System.Windows.Forms.Button()
+        Me.panel1 = New System.Windows.Forms.Panel()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.btnCerrar = New System.Windows.Forms.Button()
         CType(Me.DGV_HojaRuta, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'txtNroHoja
         '
-        Me.txtNroHoja.Location = New System.Drawing.Point(78, 13)
+        Me.txtNroHoja.Location = New System.Drawing.Point(78, 42)
         Me.txtNroHoja.Name = "txtNroHoja"
         Me.txtNroHoja.Size = New System.Drawing.Size(100, 20)
         Me.txtNroHoja.TabIndex = 0
         '
         'txtFecha
         '
-        Me.txtFecha.Location = New System.Drawing.Point(227, 12)
+        Me.txtFecha.Location = New System.Drawing.Point(227, 41)
         Me.txtFecha.Mask = "00/00/0000"
         Me.txtFecha.Name = "txtFecha"
         Me.txtFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -78,42 +84,42 @@ Partial Class ConsultaHojaDeRuta
         '
         'txtTotalPesos
         '
-        Me.txtTotalPesos.Location = New System.Drawing.Point(398, 13)
+        Me.txtTotalPesos.Location = New System.Drawing.Point(398, 42)
         Me.txtTotalPesos.Name = "txtTotalPesos"
         Me.txtTotalPesos.Size = New System.Drawing.Size(100, 20)
         Me.txtTotalPesos.TabIndex = 2
         '
         'txtTotalKilos
         '
-        Me.txtTotalKilos.Location = New System.Drawing.Point(571, 12)
+        Me.txtTotalKilos.Location = New System.Drawing.Point(571, 41)
         Me.txtTotalKilos.Name = "txtTotalKilos"
         Me.txtTotalKilos.Size = New System.Drawing.Size(100, 20)
         Me.txtTotalKilos.TabIndex = 3
         '
         'txtChofer
         '
-        Me.txtChofer.Location = New System.Drawing.Point(78, 39)
+        Me.txtChofer.Location = New System.Drawing.Point(78, 68)
         Me.txtChofer.Name = "txtChofer"
         Me.txtChofer.Size = New System.Drawing.Size(100, 20)
         Me.txtChofer.TabIndex = 4
         '
         'txtCamion
         '
-        Me.txtCamion.Location = New System.Drawing.Point(459, 39)
+        Me.txtCamion.Location = New System.Drawing.Point(459, 68)
         Me.txtCamion.Name = "txtCamion"
         Me.txtCamion.Size = New System.Drawing.Size(100, 20)
         Me.txtCamion.TabIndex = 5
         '
         'txtNroViaje
         '
-        Me.txtNroViaje.Location = New System.Drawing.Point(78, 65)
+        Me.txtNroViaje.Location = New System.Drawing.Point(78, 94)
         Me.txtNroViaje.Name = "txtNroViaje"
         Me.txtNroViaje.Size = New System.Drawing.Size(100, 20)
         Me.txtNroViaje.TabIndex = 6
         '
         'txtRetiraProv
         '
-        Me.txtRetiraProv.Location = New System.Drawing.Point(253, 64)
+        Me.txtRetiraProv.Location = New System.Drawing.Point(253, 93)
         Me.txtRetiraProv.Name = "txtRetiraProv"
         Me.txtRetiraProv.Size = New System.Drawing.Size(464, 20)
         Me.txtRetiraProv.TabIndex = 7
@@ -121,7 +127,7 @@ Partial Class ConsultaHojaDeRuta
         'txtChoferDesc
         '
         Me.txtChoferDesc.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtChoferDesc.Location = New System.Drawing.Point(184, 38)
+        Me.txtChoferDesc.Location = New System.Drawing.Point(184, 67)
         Me.txtChoferDesc.Name = "txtChoferDesc"
         Me.txtChoferDesc.ReadOnly = True
         Me.txtChoferDesc.Size = New System.Drawing.Size(221, 20)
@@ -130,7 +136,7 @@ Partial Class ConsultaHojaDeRuta
         'txtCamionDesc
         '
         Me.txtCamionDesc.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtCamionDesc.Location = New System.Drawing.Point(565, 39)
+        Me.txtCamionDesc.Location = New System.Drawing.Point(565, 68)
         Me.txtCamionDesc.Name = "txtCamionDesc"
         Me.txtCamionDesc.ReadOnly = True
         Me.txtCamionDesc.Size = New System.Drawing.Size(221, 20)
@@ -139,7 +145,7 @@ Partial Class ConsultaHojaDeRuta
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(9, 16)
+        Me.Label1.Location = New System.Drawing.Point(9, 45)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(52, 13)
         Me.Label1.TabIndex = 10
@@ -148,7 +154,7 @@ Partial Class ConsultaHojaDeRuta
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(184, 16)
+        Me.Label2.Location = New System.Drawing.Point(184, 45)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(37, 13)
         Me.Label2.TabIndex = 11
@@ -157,7 +163,7 @@ Partial Class ConsultaHojaDeRuta
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(329, 16)
+        Me.Label3.Location = New System.Drawing.Point(329, 45)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(63, 13)
         Me.Label3.TabIndex = 12
@@ -166,7 +172,7 @@ Partial Class ConsultaHojaDeRuta
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(509, 16)
+        Me.Label4.Location = New System.Drawing.Point(509, 45)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(56, 13)
         Me.Label4.TabIndex = 13
@@ -175,7 +181,7 @@ Partial Class ConsultaHojaDeRuta
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(20, 42)
+        Me.Label5.Location = New System.Drawing.Point(20, 71)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(38, 13)
         Me.Label5.TabIndex = 14
@@ -184,7 +190,7 @@ Partial Class ConsultaHojaDeRuta
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(414, 42)
+        Me.Label6.Location = New System.Drawing.Point(414, 71)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(42, 13)
         Me.Label6.TabIndex = 15
@@ -193,7 +199,7 @@ Partial Class ConsultaHojaDeRuta
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(1, 68)
+        Me.Label7.Location = New System.Drawing.Point(1, 97)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(68, 13)
         Me.Label7.TabIndex = 16
@@ -202,11 +208,38 @@ Partial Class ConsultaHojaDeRuta
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(184, 68)
+        Me.Label8.Location = New System.Drawing.Point(184, 97)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(63, 13)
         Me.Label8.TabIndex = 17
         Me.Label8.Text = "Retira Prov."
+        '
+        'btnLimpiar
+        '
+        Me.btnLimpiar.Location = New System.Drawing.Point(469, 463)
+        Me.btnLimpiar.Name = "btnLimpiar"
+        Me.btnLimpiar.Size = New System.Drawing.Size(75, 23)
+        Me.btnLimpiar.TabIndex = 19
+        Me.btnLimpiar.Text = "Limpiar"
+        Me.btnLimpiar.UseVisualStyleBackColor = True
+        '
+        'btnImprimir
+        '
+        Me.btnImprimir.Location = New System.Drawing.Point(334, 463)
+        Me.btnImprimir.Name = "btnImprimir"
+        Me.btnImprimir.Size = New System.Drawing.Size(75, 23)
+        Me.btnImprimir.TabIndex = 20
+        Me.btnImprimir.Text = "Imprimir"
+        Me.btnImprimir.UseVisualStyleBackColor = True
+        '
+        'btnBuscarFecha
+        '
+        Me.btnBuscarFecha.Location = New System.Drawing.Point(143, 463)
+        Me.btnBuscarFecha.Name = "btnBuscarFecha"
+        Me.btnBuscarFecha.Size = New System.Drawing.Size(141, 23)
+        Me.btnBuscarFecha.TabIndex = 21
+        Me.btnBuscarFecha.Text = "Buscar Rango Fechas"
+        Me.btnBuscarFecha.UseVisualStyleBackColor = True
         '
         'DGV_HojaRuta
         '
@@ -223,7 +256,7 @@ Partial Class ConsultaHojaDeRuta
         Me.DGV_HojaRuta.DefaultCellStyle = DataGridViewCellStyle1
         Me.DGV_HojaRuta.DoubleBuffered = True
         Me.DGV_HojaRuta.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.DGV_HojaRuta.Location = New System.Drawing.Point(4, 90)
+        Me.DGV_HojaRuta.Location = New System.Drawing.Point(4, 119)
         Me.DGV_HojaRuta.Name = "DGV_HojaRuta"
         Me.DGV_HojaRuta.OrdenamientoColumnasHabilitado = True
         Me.DGV_HojaRuta.RowHeadersWidth = 15
@@ -236,6 +269,7 @@ Partial Class ConsultaHojaDeRuta
         'Pedido
         '
         Me.Pedido.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Pedido.DataPropertyName = "Pedido"
         Me.Pedido.HeaderText = "Pedido"
         Me.Pedido.Name = "Pedido"
         Me.Pedido.Width = 65
@@ -243,6 +277,7 @@ Partial Class ConsultaHojaDeRuta
         'Cliente
         '
         Me.Cliente.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Cliente.DataPropertyName = "Cliente"
         Me.Cliente.HeaderText = "Cliente"
         Me.Cliente.Name = "Cliente"
         Me.Cliente.Width = 64
@@ -250,6 +285,7 @@ Partial Class ConsultaHojaDeRuta
         'Razon
         '
         Me.Razon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Razon.DataPropertyName = "Razon"
         Me.Razon.HeaderText = "Razon"
         Me.Razon.Name = "Razon"
         Me.Razon.Width = 63
@@ -257,6 +293,7 @@ Partial Class ConsultaHojaDeRuta
         'Remito
         '
         Me.Remito.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Remito.DataPropertyName = "Remito"
         Me.Remito.HeaderText = "Remito"
         Me.Remito.Name = "Remito"
         Me.Remito.Width = 65
@@ -264,6 +301,7 @@ Partial Class ConsultaHojaDeRuta
         'Kilos
         '
         Me.Kilos.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Kilos.DataPropertyName = "Kilos"
         Me.Kilos.HeaderText = "Kilos"
         Me.Kilos.Name = "Kilos"
         Me.Kilos.Width = 54
@@ -271,6 +309,7 @@ Partial Class ConsultaHojaDeRuta
         'Pesos
         '
         Me.Pesos.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Pesos.DataPropertyName = "Pesos"
         Me.Pesos.HeaderText = "      $"
         Me.Pesos.Name = "Pesos"
         Me.Pesos.Width = 56
@@ -278,6 +317,7 @@ Partial Class ConsultaHojaDeRuta
         'Clase
         '
         Me.Clase.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Clase.DataPropertyName = "Clase"
         Me.Clase.HeaderText = "Clase"
         Me.Clase.Name = "Clase"
         Me.Clase.Width = 58
@@ -285,6 +325,7 @@ Partial Class ConsultaHojaDeRuta
         'Provincia
         '
         Me.Provincia.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Provincia.DataPropertyName = "Provincia"
         Me.Provincia.HeaderText = "Provincia"
         Me.Provincia.Name = "Provincia"
         Me.Provincia.Width = 76
@@ -292,6 +333,7 @@ Partial Class ConsultaHojaDeRuta
         'Direccion
         '
         Me.Direccion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Direccion.DataPropertyName = "Direccion"
         Me.Direccion.HeaderText = "Direccion"
         Me.Direccion.Name = "Direccion"
         Me.Direccion.Width = 77
@@ -299,51 +341,84 @@ Partial Class ConsultaHojaDeRuta
         'Comprobante
         '
         Me.Comprobante.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Comprobante.DataPropertyName = "Comprobante"
         Me.Comprobante.HeaderText = "Comprobante"
         Me.Comprobante.Name = "Comprobante"
         Me.Comprobante.Width = 95
         '
         'Clave
         '
+        Me.Clave.DataPropertyName = "Clave"
         Me.Clave.HeaderText = "Clave"
         Me.Clave.Name = "Clave"
         Me.Clave.Visible = False
         '
         'Integridad
         '
+        Me.Integridad.DataPropertyName = "Integridad"
         Me.Integridad.HeaderText = "Integridad"
         Me.Integridad.Name = "Integridad"
         Me.Integridad.Visible = False
         '
         'Archivo
         '
+        Me.Archivo.DataPropertyName = "Archivo"
         Me.Archivo.HeaderText = "Archivo"
         Me.Archivo.Name = "Archivo"
         Me.Archivo.Visible = False
         '
-        'btnLimpiar
+        'panel1
         '
-        Me.btnLimpiar.Location = New System.Drawing.Point(423, 434)
-        Me.btnLimpiar.Name = "btnLimpiar"
-        Me.btnLimpiar.Size = New System.Drawing.Size(75, 23)
-        Me.btnLimpiar.TabIndex = 19
-        Me.btnLimpiar.Text = "Limpiar"
-        Me.btnLimpiar.UseVisualStyleBackColor = True
+        Me.panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(34, Byte), Integer), CType(CType(74, Byte), Integer), CType(CType(95, Byte), Integer))
+        Me.panel1.Controls.Add(Me.Label9)
+        Me.panel1.Controls.Add(Me.Label10)
+        Me.panel1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.panel1.Location = New System.Drawing.Point(0, 0)
+        Me.panel1.Name = "panel1"
+        Me.panel1.Size = New System.Drawing.Size(808, 40)
+        Me.panel1.TabIndex = 22
         '
-        'btnImprimir
+        'Label9
         '
-        Me.btnImprimir.Location = New System.Drawing.Point(288, 434)
-        Me.btnImprimir.Name = "btnImprimir"
-        Me.btnImprimir.Size = New System.Drawing.Size(75, 23)
-        Me.btnImprimir.TabIndex = 20
-        Me.btnImprimir.Text = "Imprimir"
-        Me.btnImprimir.UseVisualStyleBackColor = True
+        Me.Label9.Anchor = System.Windows.Forms.AnchorStyles.Right
+        Me.Label9.AutoSize = True
+        Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold)
+        Me.Label9.ForeColor = System.Drawing.Color.White
+        Me.Label9.Location = New System.Drawing.Point(632, 10)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(155, 20)
+        Me.Label9.TabIndex = 0
+        Me.Label9.Text = "SURFACTAN S.A."
+        '
+        'Label10
+        '
+        Me.Label10.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.Label10.AutoSize = True
+        Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.Label10.ForeColor = System.Drawing.Color.White
+        Me.Label10.Location = New System.Drawing.Point(21, 12)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(171, 17)
+        Me.Label10.TabIndex = 0
+        Me.Label10.Text = "Consulta Hoja de Ruta"
+        '
+        'btnCerrar
+        '
+        Me.btnCerrar.Location = New System.Drawing.Point(571, 463)
+        Me.btnCerrar.Name = "btnCerrar"
+        Me.btnCerrar.Size = New System.Drawing.Size(75, 23)
+        Me.btnCerrar.TabIndex = 23
+        Me.btnCerrar.Text = "Cerrar"
+        Me.btnCerrar.UseVisualStyleBackColor = True
         '
         'ConsultaHojaDeRuta
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(808, 460)
+        Me.ClientSize = New System.Drawing.Size(808, 490)
+        Me.Controls.Add(Me.btnCerrar)
+        Me.Controls.Add(Me.panel1)
+        Me.Controls.Add(Me.btnBuscarFecha)
         Me.Controls.Add(Me.btnImprimir)
         Me.Controls.Add(Me.btnLimpiar)
         Me.Controls.Add(Me.DGV_HojaRuta)
@@ -369,6 +444,8 @@ Partial Class ConsultaHojaDeRuta
         Me.Name = "ConsultaHojaDeRuta"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         CType(Me.DGV_HojaRuta, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.panel1.ResumeLayout(False)
+        Me.panel1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -391,7 +468,9 @@ Partial Class ConsultaHojaDeRuta
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents Label8 As System.Windows.Forms.Label
-    Friend WithEvents DGV_HojaRuta As ConsultasVarias.DBDataGridView
+    Friend WithEvents DGV_HojaRuta As Util.DBDataGridView
+    Friend WithEvents btnLimpiar As System.Windows.Forms.Button
+    Friend WithEvents btnImprimir As System.Windows.Forms.Button
     Friend WithEvents Pedido As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Cliente As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Razon As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -405,6 +484,9 @@ Partial Class ConsultaHojaDeRuta
     Friend WithEvents Clave As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Integridad As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Archivo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents btnLimpiar As System.Windows.Forms.Button
-    Friend WithEvents btnImprimir As System.Windows.Forms.Button
+    Friend WithEvents btnBuscarFecha As System.Windows.Forms.Button
+    Private WithEvents panel1 As System.Windows.Forms.Panel
+    Private WithEvents Label9 As System.Windows.Forms.Label
+    Private WithEvents Label10 As System.Windows.Forms.Label
+    Friend WithEvents btnCerrar As System.Windows.Forms.Button
 End Class

@@ -1,7 +1,7 @@
-﻿Imports ConsultasVarias
-Imports ConsultasVarias.Clases.Query
-Imports ConsultasVarias.Clases.Helper
-Public Class ConsultaHojaDeRuta
+﻿Imports Util
+Imports Util.Clases.Query
+Imports Util.Clases.Helper
+Public Class ConsultaHojaDeRuta : Implements IHojaDeRuta
 
     Private Sub txtNroHoja_KeyDown(sender As Object, e As KeyEventArgs) Handles txtNroHoja.KeyDown
         Select Case e.KeyData
@@ -48,14 +48,14 @@ Public Class ConsultaHojaDeRuta
                     'End If
 
 
-                        Dim ValorKilos As Double
-                        If Val(Array2(1)) <> 0 Then
-                            ValorKilos = Val(Array2(1))
-                        Else
-                            ValorKilos = Val(.Item("Kilos"))
-                        End If
+                    Dim ValorKilos As Double
+                    If Val(Array2(1)) <> 0 Then
+                        ValorKilos = Val(Array2(1))
+                    Else
+                        ValorKilos = Val(.Item("Kilos"))
+                    End If
 
-                        DGV_HojaRuta.Rows.Add(.Item("Pedido"), .Item("Cliente"), .Item("Razon"),
+                    DGV_HojaRuta.Rows.Add(.Item("Pedido"), .Item("Cliente"), .Item("Razon"),
                                               Array1(2), ValorKilos, formatonumerico(Array2(0), 2),
                                               .Item("Seguridad"), Array1(0), Array1(1),
                                               IIf(IsDBNull(Row.Item("Comprobante")), "", Row.Item("Comprobante")), .Item("Clave"),
@@ -75,7 +75,7 @@ Public Class ConsultaHojaDeRuta
             If rowChofer IsNot Nothing Then
                 txtChoferDesc.Text = rowChofer.Item("Descripcion")
             End If
-            
+
             '
             '   Call Calcula_Click
             '
@@ -192,10 +192,10 @@ Public Class ConsultaHojaDeRuta
 
 
 
- 
-   
 
-   
+
+
+
 
 
     Private Sub btnLimpiar_Click(sender As Object, e As EventArgs) Handles btnLimpiar.Click
@@ -214,45 +214,128 @@ Public Class ConsultaHojaDeRuta
 
     Private Sub btnImprimir_Click(sender As Object, e As EventArgs) Handles btnImprimir.Click
 
-        Dim SQLCnslt As String = "SELECT hr.Hoja, hr.Renglon, hr.Fecha, hr.Chofer, hr.Camion, hr.Pedido, hr.Cliente," _
-                    & " hr.Remito, hr.Seguridad, hr.Kilos, hr.ObservaI, hr.ObservaII, hr.Bultos, hr.Razon," _
-                    & " c.Descripcion, c.patente, ch.Descripcion FROM Camion c RIGHT JOIN  hojaruta hr" _
-                    & " ON c.Codigo  = hr.Camion left join chofer ch on hr.Chofer = ch.Codigo WHERE hr.Hoja = '" & txtNroHoja.Text & "'"
+        Dim SQLCnslt As String
+        Dim tabla As New DataTable
+        With tabla.Columns
+            .Add("Pedido")
+            .Add("Cliente")
+            .Add("Razon")
+            .Add("Remito")
+            .Add("Kilos")
+            .Add("Pesos")
+            .Add("Clase")
+            .Add("Provincia")
+            .Add("Direccion")
+            .Add("Comprobante")
+            .Add("Clave")
+            .Add("Integridad")
+            .Add("Articulo")
+            .Add("Cuit")
+            .Add("Postal")
+            .Add("Factura")
+            .Add("CodigoArticulo")
+            .Add("Punto")
+        End With
+        'Paso los valores del DGV a la tabla
+        For Each DGV_Row As DataGridViewRow In DGV_HojaRuta.Rows
+            With DGV_Row
+                tabla.Rows.Add(
+                    .Cells("Pedido").Value,
+                    .Cells("Cliente").Value, .Cells("Razon").Value,
+                    .Cells("Remito").Value, .Cells("Kilos").Value,
+                    .Cells("Pesos").Value, .Cells("Clase").Value,
+                    .Cells("Provincia").Value, .Cells("Direccion").Value,
+                    .Cells("Comprobante").Value, .Cells("Clave").Value,
+                    .Cells("Integridad").Value, .Cells("Archivo").Value,
+                    "",
+                    "",
+                    "",
+                    "",
+                    "")
+            End With
+        Next
+
+        For Each Row As DataRow In tabla.Rows
+            SQLCnslt = "SELECT Cuit, Postal FROM Cliente WHERE Cliente = '" & Row.Item("Cliente") & "'"
+            Dim rowCliente As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+            If rowCliente IsNot Nothing Then
+                Row.Item("Cuit") = rowCliente.Item("Cuit")
+                Row.Item("Postal") = rowCliente.Item("Postal")
+            End If
+
+            SQLCnslt = "SELECT Remito, Numero FROM CtaCte WHERE Pedido = '" & Row.Item("Pedido") & "' Order by OrdFecha DESC"
+            Dim tablaCtaCte As DataTable = GetAll(SQLCnslt, "SurfactanSa")
+            If tablaCtaCte.Rows.Count > 0 Then
+                For Each RowCtaCte As DataRow In tablaCtaCte.Rows
+                    If Val(RowCtaCte.Item("Remito")) = Val(Row.Item("Remito")) Then
+                        Row.Item("Factura") = RowCtaCte.Item("Numero")
+                    End If
+                Next
+            End If
+
+            SQLCnslt = " SELECT TipoPedido FROM Pedido WHERE Pedido = '" & Row.Item("Pedido") & "'"
+            Dim RowPedido As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+            If RowPedido IsNot Nothing Then
+                Select Case RowPedido.Item("TipoPedido")
+                    Case 1
+                        'WTipoPedido = "CO"
+                        Row.Item("CodigoArticulo") = "320411"
+                        Row.Item("Punto") = "1"
+                    Case 3
+                        ' WTipoPedido = "BI"
+                        Row.Item("CodigoArticulo") = "340391"
+                        Row.Item("Punto") = "4"
+                    Case 4
+                        '  WTipoPedido = "FA"
+                        Row.Item("CodigoArticulo") = "291815"
+                        Row.Item("Punto") = "3"
+                    Case 5
+                        ' WTipoPedido = "PG"
+                        Row.Item("CodigoArticulo") = "340391"
+                        Row.Item("Punto") = "1"
+                    Case Else
+                        ' WTipoPedido = "PT"
+                        Row.Item("CodigoArticulo") = "340391"
+                        Row.Item("Punto") = "4"
+                End Select
+            End If
+
+
+            SQLCnslt = "UPDATE HojaRuta SET Remito = '" & Row.Item("Remito") & "', " _
+                & "Kilos = '" & Row.Item("Kilos") & "', " _
+                & "Pesos = '" & Row.Item("Pesos") & "', " _
+                & "Razon = '" & Row.Item("Razon") & "', " _
+                & "Cuit = '" & Row.Item("Cuit") & "', " _
+                & "Postal = '" & Row.Item("Postal") & "', " _
+                & "Direccion = '" & Row.Item("Direccion") & "', " _
+                & "Factura = '" & Row.Item("Factura") & "', " _
+                & "Punto = '" & Row.Item("Punto") & "', " _
+                & "Provincia = '" & Row.Item("Provincia") & "', " _
+                & "CodigoArticulo = '" & Row.Item("CodigoArticulo") & "' " _
+                & "WHERE Clave = '" & Row.Item("Clave") & "'"
+
+            ExecuteNonQueries({SQLCnslt}, "SurfactanSa")
+
+        Next
+
+
+        Dim Formula As String = "{HojaRuta.Hoja} = " & txtNroHoja.Text & ""
         With New VistaPrevia
             .Reporte = New hojarutacotnuevo()
-            .Formula = SQLCnslt
+            .Formula = Formula
             .Mostrar()
         End With
-        '  DbConnect = db.Connect
-        '  DSQ = getDatabase(DbConnect)
-        '
-        '  Listado.SQLQuery = "SELECT HojaRuta.Hoja, HojaRuta.Renglon, HojaRuta.Fecha, HojaRuta.Chofer, HojaRuta.Camion, HojaRuta.Pedido, HojaRuta.Cliente, HojaRuta.Remito, HojaRuta.Seguridad, HojaRuta.Kilos, HojaRuta.ObservaI, HojaRuta.ObservaII, HojaRuta.Bultos, HojaRuta.Razon, " _
-        '          + "Chofer.Descripcion, " _
-        '          + "Camion.Descripcion, Camion.Patente " _
-        '          + "From " _
-        '          + DSQ + ".dbo.HojaRuta HojaRuta, " _
-        '          + DSQ + ".dbo.Chofer Chofer, " _
-        '          + DSQ + ".dbo.Camion Camion " _
-        '          + "Where " _
-        '          + "HojaRuta.Chofer = Chofer.Codigo AND " _
-        '          + "HojaRuta.Camion = Camion.Codigo AND " _
-        '          + "HojaRuta.Hoja >= " + Hoja.Text + " AND " _
-        '          + "HojaRuta.Hoja <= " + Hoja.Text
-        '
-        '  Listado.Connect = Connect()
-        '
-        '  Listado.GroupSelectionFormula = "{HojaRuta.Hoja} in " + Hoja.Text + " to " + Hoja.Text
-        '  Listado.SelectionFormula = "{HojaRuta.Hoja} in " + Hoja.Text + " to " + Hoja.Text
-        '
-        '  Listado.Destination = 1
-        '  REM Listado.Destination = 0
-        '
-        '  If Val(WEmpresa) = 1 Then
-        '      Listado.ReportFileName = "HojaRuta.rpt"
-        '  Else
-        '      Listado.ReportFileName = "HojaRutapelli.rpt"
-        '  End If
-        '
-        '  Listado.Action = 1
+
+    End Sub
+
+    Private Sub btnBuscarFecha_Click(sender As Object, e As EventArgs) Handles btnBuscarFecha.Click
+        With ConsultaHojaDeRutaXRangoFecha
+            .Show(Me)
+        End With
+    End Sub
+
+    Public Sub CargarHojaDeRuta(Hoja As String) Implements IHojaDeRuta.CargarHojaDeRuta
+        txtNroHoja.Text = Hoja
+        txtNroHoja_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
     End Sub
 End Class
