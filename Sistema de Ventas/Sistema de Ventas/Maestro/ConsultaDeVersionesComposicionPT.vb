@@ -58,7 +58,7 @@ Public Class ConsultaDeVersionesComposicionPT : Implements IConsultaTerminado
             Dim tablaComposicion As DataTable = GetAll(SQLCnslt)
             If tablaComposicion.Rows.Count > 0 Then
                 For Each row As DataRow In tablaComposicion.Rows
-                    Dim DescripcionAux As String
+                    Dim DescripcionAux As String = ""
                     If row.Item("Tipo") = "M" Then
                         SQLCnslt = "SELECT Descripcion FROM Articulo WHERE Codigo = '" & row.Item("Articulo1") & "'"
                         Dim RowArticulo As DataRow = GetSingle(SQLCnslt)
