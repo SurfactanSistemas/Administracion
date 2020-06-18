@@ -1,7 +1,8 @@
-﻿Imports Util
+﻿Imports Util.Clases
 Imports Util.Clases.Query
 Imports Util.Clases.Helper
 Public Class ConsultaHojaDeRutaXRangoFecha
+    Private ReadOnly tablaDGV As New DataTable
 
     Private Sub ConsultaHojaDeRutaXRangoFecha_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         txtFechaDesde.Focus()
@@ -21,6 +22,7 @@ Public Class ConsultaHojaDeRutaXRangoFecha
     Private Sub txtFechaHasta_KeyDown(sender As Object, e As KeyEventArgs) Handles txtFechaHasta.KeyDown
         Select Case e.KeyData
             Case Keys.Enter
+
                 If ValidaFecha(txtFechaHasta.Text) = "S" And ValidaFecha(txtFechaDesde.Text) = "S" Then
                     Cargar_DGV()
                 End If
@@ -30,192 +32,166 @@ Public Class ConsultaHojaDeRutaXRangoFecha
     End Sub
 
     Private Sub Cargar_DGV()
+        
+        Dim w As Stopwatch = Stopwatch.StartNew
+
+        tablaDGV.Rows.Clear()
+
         'BORRO LO QUE ALLA CARGADO
-        DGV_HojaRuta.DataSource = Nothing
+        'DGV_HojaRuta.DataSource = Nothing
         ProgressBar1.Value = 0
         ProgressBar1.Visible = True
 
-        Dim PosicionTabla As Integer = 0
-        Dim tablaDGV As New DataTable
-        With tablaDGV.Columns
-            .Add("Hoja")
-            .Add("Factura")
-            .Add("Remito")
-            .Add("Pedido")
-            .Add("RazonSocial")
-            .Add("Producto")
-            .Add("Descripcion")
-            .Add("Kilos")
-            .Add("Cliente")
-        End With
-
-        Dim SQLCnslt As String = "SELECT Pedido, Cliente, Razon, Remito, Hoja " _
-                                 & "FROM HojaRuta " _
-                                 & "WHERE OrdFecha >= '" & ordenaFecha(txtFechaDesde.Text) & "' AND OrdFecha <= '" & ordenaFecha(txtFechaHasta.Text) & "' " _
-                                 & "Order by Clave"
+        Dim SQLCnslt As String = "SELECT hr.Pedido, hr.Cliente, hr.Razon, Remito = CASE WHEN ISNULL(p.Remito, 0) = 0 THEN hr.Remito ELSE p.Remito END, hr.Hoja, p.TipoPedido " _
+                                 & "FROM HojaRuta hr LEFT OUTER JOIN Pedido p ON p.Pedido = hr.Pedido And p.Renglon = 1 " _
+                                 & "WHERE hr.OrdFecha BETWEEN '" & ordenaFecha(txtFechaDesde.Text) & "' AND '" & ordenaFecha(txtFechaHasta.Text) & "' " _
+                                 & "Order by hr.Clave"
         Dim tablaDatos As DataTable = GetAll(SQLCnslt, "SurfactanSa")
 
-        If tablaDatos.Rows.Count > 0 Then
-            With tablaDatos.Columns
-                .Add("Factura")
-                .Add("TipoPedido")
-            End With
+        If tablaDatos.Rows.Count = 0 Then Exit Sub
 
+        With tablaDatos.Columns
+            .Add("Factura")
+        End With
 
-            For Each Row As DataRow In tablaDatos.Rows
+        ProgressBar1.Maximum = tablaDatos.Rows.Count + 1
 
-                Row.Item("Factura") = 0
+        For Each Row As DataRow In tablaDatos.Rows
 
-                SQLCnslt = "SELECT Remito, TipoPedido FROM Pedido WHERE Pedido = '" & Row.Item("Pedido") & "'"
-                Dim RowPEDIDO As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
-                If RowPEDIDO IsNot Nothing Then
-                    ' Row.Item("Remito") = IIf(IsDBNull(RowPEDIDO.Item("Remito")), "", RowPEDIDO.Item("Remito"))
-                    Row.Item("Remito") = IIf(IsDBNull(RowPEDIDO.Item("Remito")), "0", RowPEDIDO.Item("Remito"))
-                    Row.Item("TipoPedido") = IIf(IsDBNull(RowPEDIDO.Item("TipoPedido")), "0", RowPEDIDO.Item("TipoPedido"))
-                End If
+            Row.Item("Factura") = 0
 
+            SQLCnslt = "SELECT Pedido, Remito, Numero FROM CtaCte " _
+                     & "WHERE Pedido = '" & Row.Item("Pedido") & "' And Remito = '" & Row.Item("Remito") & "'"
+            Dim TablaCtaCte As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
 
-                SQLCnslt = "SELECT Pedido, Remito, Numero FROM CtaCte " _
-                         & "WHERE Pedido = '" & Row.Item("Pedido") & "'"
-                Dim TablaCtaCte As DataTable = GetAll(SQLCnslt, "SurfactanSa")
+            If TablaCtaCte IsNot Nothing Then Row.Item("Factura") = TablaCtaCte.Item("Numero")
+            
+            If Val(Row.Item("Factura")) <> 0 Then
 
-                If TablaCtaCte.Rows.Count > 0 Then
-                    For Each RowCtaCte As DataRow In TablaCtaCte.Rows
-                        If Val(Row.Item("Remito")) = Val(RowCtaCte.Item("Remito")) Then
-                            Row.Item("Factura") = RowCtaCte.Item("Numero")
-                        End If
+                SQLCnslt = "SELECT Numero, Cliente, Articulo, Cantidad FROM Estadistica " _
+                        & "WHERE Numero = '" & Row.Item("Factura") & "' AND Cliente = '" & Row.Item("Cliente") & "'"
+
+                Dim tablaEstadistica As DataTable = GetAll(SQLCnslt, "SurfactanSa")
+
+                If tablaEstadistica.Rows.Count > 0 Then
+                    For Each RowEstadistica As DataRow In tablaEstadistica.Rows
+                        Dim r As DataRow = tablaDGV.NewRow
+
+                        With r
+                            .Item("Hoja") = Row.Item("Hoja")
+                            .Item("Factura") = Row.Item("Factura")
+                            .Item("Remito") = ""
+
+                            If Row.Item("Remito") <> 0 Then .Item("Remito") = Row.Item("Remito")
+
+                            .Item("Pedido") = Row.Item("Pedido")
+                            .Item("RazonSocial") = Row.Item("Razon")
+
+                            Dim Articulo As String = RowEstadistica("Articulo").ToString.ToUpper
+
+                            If Articulo.StartsWith("PT") Then
+                                .Item("Producto") = Articulo
+                                .Item("Tipo") = "T"
+                            Else
+                                .Item("Producto") = Helper.Left(Articulo, 3) & Helper.Right(Articulo, 7)
+                                .Item("Tipo") = "M"
+                            End If
+
+                            .Item("Descripcion") = ""
+                            .Item("Kilos") = RowEstadistica.Item("Cantidad")
+                            .Item("Cliente") = Row.Item("Cliente")
+                        End With
+
+                        tablaDGV.Rows.Add(r)
+
                     Next
                 End If
 
-                If Val(Row.Item("Factura")) <> 0 Then
+            Else
+                Dim WCantidadFac, WSumaCantidad, WKilos As String
 
-                    SQLCnslt = "SELECT Numero, Cliente, Articulo, Cantidad FROM Estadistica " _
-                            & "WHERE Numero = '" & Row.Item("Factura") & "' AND Cliente = '" & Row.Item("Cliente") & "'"
+                SQLCnslt = "SELECT Pedido, SumaCantidad = (CantiLote1 + CantiLote2 + CantiLote3 + CantiLote4 + CantiLote5), Cantidad, Terminado, CantidadFac " _
+                         & "FROM Pedido WHERE Pedido = '" & Row.Item("Pedido") & "'"
 
-                    Dim tablaEstadistica As DataTable = GetAll(SQLCnslt, "SurfactanSa")
+                Dim tablaPedido As DataTable = GetAll(SQLCnslt, "SurfactanSa")
 
-                    If tablaEstadistica.Rows.Count > 0 Then
-                        For Each RowEstadistica As DataRow In tablaEstadistica.Rows
-                            tablaDGV.Rows.Add()
-                            tablaDGV(PosicionTabla).Item("Hoja") = Row.Item("Hoja")
-                            tablaDGV(PosicionTabla).Item("Factura") = Row.Item("Factura")
-                            If Row.Item("Remito") = 0 Then
-                                tablaDGV(PosicionTabla).Item("Remito") = ""
-                            Else
-                                tablaDGV(PosicionTabla).Item("Remito") = Row.Item("Remito")
-                            End If
-                            tablaDGV(PosicionTabla).Item("Pedido") = Row.Item("Pedido")
-                            tablaDGV(PosicionTabla).Item("RazonSocial") = Row.Item("Razon")
-                            If UCase(Microsoft.VisualBasic.Left(RowEstadistica.Item("Articulo"), 2)) <> "PT" Then
-                                tablaDGV(PosicionTabla).Item("Producto") = UCase(Microsoft.VisualBasic.Left(RowEstadistica.Item("Articulo"), 3)) & Microsoft.VisualBasic.Right(RowEstadistica.Item("Articulo"), 7)
-                            Else
-                                tablaDGV(PosicionTabla).Item("Producto") = RowEstadistica.Item("Articulo")
-                            End If
-                            ' tablaDGV(PosicionTabla).Item("Producto") = RowEstadistica.Item("Articulo")
-                            tablaDGV(PosicionTabla).Item("Descripcion") = ""
-                            tablaDGV(PosicionTabla).Item("Kilos") = formatonumerico(RowEstadistica.Item("Cantidad"), 3)
-                            tablaDGV(PosicionTabla).Item("Cliente") = Row.Item("Cliente")
+                For Each RowPed As DataRow In tablaPedido.Rows
+                    Dim r As DataRow = tablaDGV.NewRow
 
-                            PosicionTabla += 1
-                            ProgressBar1.Value += 1
-                        Next
-                    End If
+                    With r
 
-                Else
-                    Dim WCantidad1, WCantidad2, WCantidad3, WCantidad4, WCantidad5, WCantidadFac, WSumaCantidad, WKilos As String
+                        WCantidadFac = OrDefault(RowPed("CantidadFac"), 0)
+                        WSumaCantidad = OrDefault(RowPed("SumaCantidad"), 0)
 
+                        If Val(WSumaCantidad) = 0 Then WSumaCantidad = WCantidadFac
 
-                    SQLCnslt = "SELECT Pedido, CantiLote1, CantiLote2, CantiLote3, CantiLote4, CantiLote5, Cantidad, Terminado, CantidadFac " _
-                             & "FROM Pedido WHERE Pedido = '" & Row.Item("Pedido") & "'"
+                        WKilos = IIf(Val(WSumaCantidad) <> 0, WSumaCantidad, RowPed("Cantidad"))
 
-                    Dim tablaPedido As DataTable = GetAll(SQLCnslt, "SurfactanSa")
+                        .Item("Hoja") = Row("Hoja")
+                        .Item("Factura") = ""
+                        .Item("Remito") = ""
+                        If Row("Remito") <> 0 Then .Item("Remito") = Row("Remito")
+                        .Item("Pedido") = Row("Pedido")
+                        .Item("RazonSocial") = Row("Razon")
 
-                    If tablaPedido.Rows.Count > 0 Then
-                        For Each RowPed As DataRow In tablaPedido.Rows
-                            WCantidad1 = IIf(IsDBNull(RowPed.Item("CantiLote1")), "0", RowPed.Item("CantiLote1"))
-                            WCantidad2 = IIf(IsDBNull(RowPed.Item("CantiLote2")), "0", RowPed.Item("CantiLote2"))
-                            WCantidad3 = IIf(IsDBNull(RowPed.Item("CantiLote3")), "0", RowPed.Item("CantiLote3"))
-                            WCantidad4 = IIf(IsDBNull(RowPed.Item("CantiLote4")), "0", RowPed.Item("CantiLote4"))
-                            WCantidad5 = IIf(IsDBNull(RowPed.Item("CantiLote5")), "0", RowPed.Item("CantiLote5"))
-                            WCantidadFac = IIf(IsDBNull(RowPed.Item("CantidadFac")), "0", RowPed.Item("CantidadFac"))
-                            WSumaCantidad = Val(WCantidad1) + Val(WCantidad2) + Val(WCantidad3) + Val(WCantidad4) + Val(WCantidad5)
+                        Dim Terminado As String = UCase(RowPed("Terminado"))
 
-                            If Val(WSumaCantidad) = 0 Then
-                                WSumaCantidad = WCantidadFac
-                            End If
-                            If Val(WSumaCantidad) <> 0 Then
-                                WKilos = WSumaCantidad
-                            Else
-                                WKilos = RowPed.Item("Cantidad")
-                            End If
+                        If Terminado.StartsWith("PT") Then
+                            .Item("Producto") = Terminado
+                            .Item("Tipo") = "T"
+                        Else
+                            .Item("Producto") = Helper.Left(Terminado, 3) & Helper.Right(Terminado, 7)
+                            .Item("Tipo") = "M"
+                        End If
 
-                            tablaDGV.Rows.Add()
-                            tablaDGV(PosicionTabla).Item("Hoja") = Row.Item("Hoja")
-                            tablaDGV(PosicionTabla).Item("Factura") = ""
-                            If Row.Item("Remito") = 0 Then
-                                tablaDGV(PosicionTabla).Item("Remito") = ""
-                            Else
-                                tablaDGV(PosicionTabla).Item("Remito") = Row.Item("Remito")
-                            End If
-                            tablaDGV(PosicionTabla).Item("Pedido") = Row.Item("Pedido")
-                            tablaDGV(PosicionTabla).Item("RazonSocial") = Row.Item("Razon")
-                            If UCase(Microsoft.VisualBasic.Left(RowPed.Item("Terminado"), 2)) <> "PT" Then
-                                tablaDGV(PosicionTabla).Item("Producto") = UCase(Microsoft.VisualBasic.Left(RowPed.Item("Terminado"), 3)) & Microsoft.VisualBasic.Right(RowPed.Item("Terminado"), 7)
-                            Else
-                                tablaDGV(PosicionTabla).Item("Producto") = RowPed.Item("Terminado")
-                            End If
-                            tablaDGV(PosicionTabla).Item("Descripcion") = ""
-                            tablaDGV(PosicionTabla).Item("Kilos") = formatonumerico(WKilos, 3)
-                            tablaDGV(PosicionTabla).Item("Cliente") = Row.Item("Cliente")
+                        .Item("Descripcion") = ""
+                        .Item("Kilos") = formatonumerico(WKilos, 3)
+                        .Item("Cliente") = Row("Cliente")
+                    End With
 
-                            PosicionTabla += 1
-                            ProgressBar1.Value += 1
+                    tablaDGV.Rows.Add(r)
+                Next
 
-                        Next
+            End If
 
-                    End If
+            ProgressBar1.Value += 1
 
+        Next
 
-                End If
+        Dim auxi As DataView = New DataView(tablaDGV)
+        Dim WTerminados As DataRow() = auxi.ToTable(True, "Producto", "Tipo").Select("Tipo = 'T'")
+        Dim WArticulos As DataRow() = auxi.ToTable(True, "Producto", "Tipo").Select("Tipo = 'M'")
 
+        For Each o As DataRow In WTerminados
+            Dim Desc As String = ""
+
+            SQLCnslt = "SELECT Descripcion FROM Terminado WHERE Codigo = '" & o("Producto") & "'"
+            Dim RowTerminado As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+            If RowTerminado IsNot Nothing Then Desc = RowTerminado.Item("Descripcion")
+
+            For Each o1 As DataRow In tablaDGV.Select("Producto = '" & o("Producto") & "'")
+                o1("Descripcion") = Desc.Trim
             Next
 
+        Next
 
-            For Each Row_DGV As DataRow In tablaDGV.Rows
-                Dim Cliente As String = Row_DGV.Item("Cliente")
-                Dim Producto As String = Row_DGV.Item("Producto")
-                Dim WTipoPro As String = "T"
+        For Each o As DataRow In WArticulos
 
-                If UCase(Microsoft.VisualBasic.Left(Producto, 2)) <> "PT" Then
-                    WTipoPro = "M"
-                End If
+            Dim Desc As String = ""
 
-                Select Case WTipoPro
-                    Case "M"
-                        SQLCnslt = "SELECT Descripcion FROM Articulo WHERE Codigo = '" & Producto & "'"
-                        Dim RowArticulo As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
-                        If RowArticulo IsNot Nothing Then
-                            Row_DGV.Item("Descripcion") = RowArticulo.Item("Descripcion")
-                        End If
-                    Case "T"
-                        SQLCnslt = "SELECT Descripcion FROM Terminado WHERE Codigo = '" & Producto & "'"
-                        Dim RowTerminado As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
-                        If RowTerminado IsNot Nothing Then
-                            Row_DGV.Item("Descripcion") = RowTerminado.Item("Descripcion")
-                        End If
-                End Select
+            SQLCnslt = "SELECT Descripcion FROM Articulo WHERE Codigo = '" & o("Producto") & "'"
+            Dim RowArticulo As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+            If RowArticulo IsNot Nothing Then Desc = RowArticulo.Item("Descripcion")
 
+            For Each o1 As DataRow In tablaDGV.Select("Producto = '" & o("Producto") & "'")
+                o1("Descripcion") = Desc.Trim
             Next
-            ProgressBar1.Value = 1000
-            DGV_HojaRuta.DataSource = tablaDGV
 
-            ProgressBar1.Visible = False
-        End If
+        Next
+
+        ProgressBar1.Visible = False
+
     End Sub
-
-
-
-
 
     Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles btnCerrar.Click
         Close()
@@ -235,4 +211,23 @@ Public Class ConsultaHojaDeRutaXRangoFecha
     End Sub
 
    
+    Private Sub ConsultaHojaDeRutaXRangoFecha_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        With tablaDGV.Columns
+            .Add("Hoja")
+            .Add("Factura")
+            .Add("Remito")
+            .Add("Pedido")
+            .Add("RazonSocial")
+            .Add("Producto")
+            .Add("Descripcion")
+            .Add("Kilos")
+            .Add("Cliente")
+            .Add("Tipo")
+        End With
+
+        DGV_HojaRuta.DataSource = tablaDGV
+
+    End Sub
+
 End Class
