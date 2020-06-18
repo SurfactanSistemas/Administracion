@@ -28,14 +28,6 @@ Partial Class ConsultaHojaDeRutaXRangoFecha
         Me.Label2 = New System.Windows.Forms.Label()
         Me.label1 = New System.Windows.Forms.Label()
         Me.DGV_HojaRuta = New Util.DBDataGridView()
-        Me.txtFechaDesde = New System.Windows.Forms.MaskedTextBox()
-        Me.txtFechaHasta = New System.Windows.Forms.MaskedTextBox()
-        Me.txtFiltro = New System.Windows.Forms.TextBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
-        Me.btnCerrar = New System.Windows.Forms.Button()
         Me.Hoja = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Factura = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Remito = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -45,6 +37,14 @@ Partial Class ConsultaHojaDeRutaXRangoFecha
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Kilos = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Cliente = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.txtFechaDesde = New System.Windows.Forms.MaskedTextBox()
+        Me.txtFechaHasta = New System.Windows.Forms.MaskedTextBox()
+        Me.txtFiltro = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
+        Me.btnCerrar = New System.Windows.Forms.Button()
         Me.panel1.SuspendLayout()
         CType(Me.DGV_HojaRuta, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -108,78 +108,6 @@ Partial Class ConsultaHojaDeRutaXRangoFecha
         Me.DGV_HojaRuta.SinClickDerecho = False
         Me.DGV_HojaRuta.Size = New System.Drawing.Size(671, 277)
         Me.DGV_HojaRuta.TabIndex = 5
-        '
-        'txtFechaDesde
-        '
-        Me.txtFechaDesde.Location = New System.Drawing.Point(76, 47)
-        Me.txtFechaDesde.Mask = "00/00/0000"
-        Me.txtFechaDesde.Name = "txtFechaDesde"
-        Me.txtFechaDesde.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtFechaDesde.Size = New System.Drawing.Size(100, 20)
-        Me.txtFechaDesde.TabIndex = 6
-        '
-        'txtFechaHasta
-        '
-        Me.txtFechaHasta.Location = New System.Drawing.Point(223, 46)
-        Me.txtFechaHasta.Mask = "00/00/0000"
-        Me.txtFechaHasta.Name = "txtFechaHasta"
-        Me.txtFechaHasta.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtFechaHasta.Size = New System.Drawing.Size(100, 20)
-        Me.txtFechaHasta.TabIndex = 7
-        '
-        'txtFiltro
-        '
-        Me.txtFiltro.Location = New System.Drawing.Point(76, 79)
-        Me.txtFiltro.Name = "txtFiltro"
-        Me.txtFiltro.Size = New System.Drawing.Size(391, 20)
-        Me.txtFiltro.TabIndex = 8
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(3, 50)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(71, 13)
-        Me.Label3.TabIndex = 9
-        Me.Label3.Text = "Fecha Desde"
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(31, 82)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(29, 13)
-        Me.Label4.TabIndex = 10
-        Me.Label4.Text = "Filtro"
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(182, 50)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(35, 13)
-        Me.Label5.TabIndex = 11
-        Me.Label5.Text = "Hasta"
-        '
-        'ProgressBar1
-        '
-        Me.ProgressBar1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.ProgressBar1.Location = New System.Drawing.Point(472, 47)
-        Me.ProgressBar1.Maximum = 1000
-        Me.ProgressBar1.Name = "ProgressBar1"
-        Me.ProgressBar1.Size = New System.Drawing.Size(211, 23)
-        Me.ProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous
-        Me.ProgressBar1.TabIndex = 12
-        Me.ProgressBar1.Visible = False
-        '
-        'btnCerrar
-        '
-        Me.btnCerrar.Location = New System.Drawing.Point(596, 76)
-        Me.btnCerrar.Name = "btnCerrar"
-        Me.btnCerrar.Size = New System.Drawing.Size(75, 23)
-        Me.btnCerrar.TabIndex = 13
-        Me.btnCerrar.Text = "Cerrar"
-        Me.btnCerrar.UseVisualStyleBackColor = True
         '
         'Hoja
         '
@@ -256,6 +184,78 @@ Partial Class ConsultaHojaDeRutaXRangoFecha
         Me.Cliente.HeaderText = "Cliente"
         Me.Cliente.Name = "Cliente"
         Me.Cliente.Visible = False
+        '
+        'txtFechaDesde
+        '
+        Me.txtFechaDesde.Location = New System.Drawing.Point(76, 47)
+        Me.txtFechaDesde.Mask = "00/00/0000"
+        Me.txtFechaDesde.Name = "txtFechaDesde"
+        Me.txtFechaDesde.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtFechaDesde.Size = New System.Drawing.Size(100, 20)
+        Me.txtFechaDesde.TabIndex = 6
+        '
+        'txtFechaHasta
+        '
+        Me.txtFechaHasta.Location = New System.Drawing.Point(223, 46)
+        Me.txtFechaHasta.Mask = "00/00/0000"
+        Me.txtFechaHasta.Name = "txtFechaHasta"
+        Me.txtFechaHasta.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtFechaHasta.Size = New System.Drawing.Size(100, 20)
+        Me.txtFechaHasta.TabIndex = 7
+        '
+        'txtFiltro
+        '
+        Me.txtFiltro.Location = New System.Drawing.Point(76, 79)
+        Me.txtFiltro.Name = "txtFiltro"
+        Me.txtFiltro.Size = New System.Drawing.Size(391, 20)
+        Me.txtFiltro.TabIndex = 8
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(3, 50)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(71, 13)
+        Me.Label3.TabIndex = 9
+        Me.Label3.Text = "Fecha Desde"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(31, 82)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(29, 13)
+        Me.Label4.TabIndex = 10
+        Me.Label4.Text = "Filtro"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(182, 50)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(35, 13)
+        Me.Label5.TabIndex = 11
+        Me.Label5.Text = "Hasta"
+        '
+        'ProgressBar1
+        '
+        Me.ProgressBar1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.ProgressBar1.Location = New System.Drawing.Point(472, 47)
+        Me.ProgressBar1.Maximum = 1000
+        Me.ProgressBar1.Name = "ProgressBar1"
+        Me.ProgressBar1.Size = New System.Drawing.Size(211, 23)
+        Me.ProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous
+        Me.ProgressBar1.TabIndex = 12
+        Me.ProgressBar1.Visible = False
+        '
+        'btnCerrar
+        '
+        Me.btnCerrar.Location = New System.Drawing.Point(596, 76)
+        Me.btnCerrar.Name = "btnCerrar"
+        Me.btnCerrar.Size = New System.Drawing.Size(75, 23)
+        Me.btnCerrar.TabIndex = 13
+        Me.btnCerrar.Text = "Cerrar"
+        Me.btnCerrar.UseVisualStyleBackColor = True
         '
         'ConsultaHojaDeRutaXRangoFecha
         '
