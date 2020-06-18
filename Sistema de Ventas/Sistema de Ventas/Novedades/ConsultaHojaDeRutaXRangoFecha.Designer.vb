@@ -22,20 +22,12 @@ Partial Class ConsultaHojaDeRutaXRangoFecha
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.label1 = New System.Windows.Forms.Label()
         Me.DGV_HojaRuta = New Util.DBDataGridView()
-        Me.txtFechaDesde = New System.Windows.Forms.MaskedTextBox()
-        Me.txtFechaHasta = New System.Windows.Forms.MaskedTextBox()
-        Me.txtFiltro = New System.Windows.Forms.TextBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
-        Me.btnCerrar = New System.Windows.Forms.Button()
         Me.Hoja = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Factura = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Remito = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -45,6 +37,14 @@ Partial Class ConsultaHojaDeRutaXRangoFecha
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Kilos = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Cliente = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.txtFechaDesde = New System.Windows.Forms.MaskedTextBox()
+        Me.txtFechaHasta = New System.Windows.Forms.MaskedTextBox()
+        Me.txtFiltro = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
+        Me.btnCerrar = New System.Windows.Forms.Button()
         Me.panel1.SuspendLayout()
         CType(Me.DGV_HojaRuta, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -89,14 +89,14 @@ Partial Class ConsultaHojaDeRutaXRangoFecha
         Me.DGV_HojaRuta.AllowUserToAddRows = False
         Me.DGV_HojaRuta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_HojaRuta.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Hoja, Me.Factura, Me.Remito, Me.Pedido, Me.RazonSocial, Me.Producto, Me.Descripcion, Me.Kilos, Me.Cliente})
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGV_HojaRuta.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGV_HojaRuta.DefaultCellStyle = DataGridViewCellStyle4
         Me.DGV_HojaRuta.DoubleBuffered = True
         Me.DGV_HojaRuta.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.DGV_HojaRuta.Location = New System.Drawing.Point(12, 105)
@@ -108,78 +108,6 @@ Partial Class ConsultaHojaDeRutaXRangoFecha
         Me.DGV_HojaRuta.SinClickDerecho = False
         Me.DGV_HojaRuta.Size = New System.Drawing.Size(671, 277)
         Me.DGV_HojaRuta.TabIndex = 5
-        '
-        'txtFechaDesde
-        '
-        Me.txtFechaDesde.Location = New System.Drawing.Point(76, 47)
-        Me.txtFechaDesde.Mask = "00/00/0000"
-        Me.txtFechaDesde.Name = "txtFechaDesde"
-        Me.txtFechaDesde.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtFechaDesde.Size = New System.Drawing.Size(100, 20)
-        Me.txtFechaDesde.TabIndex = 6
-        '
-        'txtFechaHasta
-        '
-        Me.txtFechaHasta.Location = New System.Drawing.Point(223, 46)
-        Me.txtFechaHasta.Mask = "00/00/0000"
-        Me.txtFechaHasta.Name = "txtFechaHasta"
-        Me.txtFechaHasta.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtFechaHasta.Size = New System.Drawing.Size(100, 20)
-        Me.txtFechaHasta.TabIndex = 7
-        '
-        'txtFiltro
-        '
-        Me.txtFiltro.Location = New System.Drawing.Point(76, 79)
-        Me.txtFiltro.Name = "txtFiltro"
-        Me.txtFiltro.Size = New System.Drawing.Size(391, 20)
-        Me.txtFiltro.TabIndex = 8
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(3, 50)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(71, 13)
-        Me.Label3.TabIndex = 9
-        Me.Label3.Text = "Fecha Desde"
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(31, 82)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(29, 13)
-        Me.Label4.TabIndex = 10
-        Me.Label4.Text = "Filtro"
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(182, 50)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(35, 13)
-        Me.Label5.TabIndex = 11
-        Me.Label5.Text = "Hasta"
-        '
-        'ProgressBar1
-        '
-        Me.ProgressBar1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.ProgressBar1.Location = New System.Drawing.Point(472, 47)
-        Me.ProgressBar1.Maximum = 1000
-        Me.ProgressBar1.Name = "ProgressBar1"
-        Me.ProgressBar1.Size = New System.Drawing.Size(211, 23)
-        Me.ProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous
-        Me.ProgressBar1.TabIndex = 12
-        Me.ProgressBar1.Visible = False
-        '
-        'btnCerrar
-        '
-        Me.btnCerrar.Location = New System.Drawing.Point(596, 76)
-        Me.btnCerrar.Name = "btnCerrar"
-        Me.btnCerrar.Size = New System.Drawing.Size(75, 23)
-        Me.btnCerrar.TabIndex = 13
-        Me.btnCerrar.Text = "Cerrar"
-        Me.btnCerrar.UseVisualStyleBackColor = True
         '
         'Hoja
         '
@@ -243,8 +171,8 @@ Partial Class ConsultaHojaDeRutaXRangoFecha
         '
         Me.Kilos.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Kilos.DataPropertyName = "Kilos"
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Kilos.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Kilos.DefaultCellStyle = DataGridViewCellStyle3
         Me.Kilos.HeaderText = "Kilos"
         Me.Kilos.Name = "Kilos"
         Me.Kilos.ReadOnly = True
@@ -256,6 +184,78 @@ Partial Class ConsultaHojaDeRutaXRangoFecha
         Me.Cliente.HeaderText = "Cliente"
         Me.Cliente.Name = "Cliente"
         Me.Cliente.Visible = False
+        '
+        'txtFechaDesde
+        '
+        Me.txtFechaDesde.Location = New System.Drawing.Point(76, 47)
+        Me.txtFechaDesde.Mask = "00/00/0000"
+        Me.txtFechaDesde.Name = "txtFechaDesde"
+        Me.txtFechaDesde.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtFechaDesde.Size = New System.Drawing.Size(100, 20)
+        Me.txtFechaDesde.TabIndex = 6
+        '
+        'txtFechaHasta
+        '
+        Me.txtFechaHasta.Location = New System.Drawing.Point(223, 46)
+        Me.txtFechaHasta.Mask = "00/00/0000"
+        Me.txtFechaHasta.Name = "txtFechaHasta"
+        Me.txtFechaHasta.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txtFechaHasta.Size = New System.Drawing.Size(100, 20)
+        Me.txtFechaHasta.TabIndex = 7
+        '
+        'txtFiltro
+        '
+        Me.txtFiltro.Location = New System.Drawing.Point(76, 79)
+        Me.txtFiltro.Name = "txtFiltro"
+        Me.txtFiltro.Size = New System.Drawing.Size(391, 20)
+        Me.txtFiltro.TabIndex = 8
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(3, 50)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(71, 13)
+        Me.Label3.TabIndex = 9
+        Me.Label3.Text = "Fecha Desde"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(31, 82)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(29, 13)
+        Me.Label4.TabIndex = 10
+        Me.Label4.Text = "Filtro"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(182, 50)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(35, 13)
+        Me.Label5.TabIndex = 11
+        Me.Label5.Text = "Hasta"
+        '
+        'ProgressBar1
+        '
+        Me.ProgressBar1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.ProgressBar1.Location = New System.Drawing.Point(367, 47)
+        Me.ProgressBar1.Maximum = 1000
+        Me.ProgressBar1.Name = "ProgressBar1"
+        Me.ProgressBar1.Size = New System.Drawing.Size(211, 23)
+        Me.ProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous
+        Me.ProgressBar1.TabIndex = 12
+        Me.ProgressBar1.Visible = False
+        '
+        'btnCerrar
+        '
+        Me.btnCerrar.Location = New System.Drawing.Point(596, 50)
+        Me.btnCerrar.Name = "btnCerrar"
+        Me.btnCerrar.Size = New System.Drawing.Size(84, 45)
+        Me.btnCerrar.TabIndex = 13
+        Me.btnCerrar.Text = "CERRAR"
+        Me.btnCerrar.UseVisualStyleBackColor = True
         '
         'ConsultaHojaDeRutaXRangoFecha
         '
@@ -272,6 +272,8 @@ Partial Class ConsultaHojaDeRutaXRangoFecha
         Me.Controls.Add(Me.txtFechaDesde)
         Me.Controls.Add(Me.DGV_HojaRuta)
         Me.Controls.Add(Me.panel1)
+        Me.MaximumSize = New System.Drawing.Size(708, 433)
+        Me.MinimumSize = New System.Drawing.Size(708, 433)
         Me.Name = "ConsultaHojaDeRutaXRangoFecha"
         Me.panel1.ResumeLayout(False)
         Me.panel1.PerformLayout()

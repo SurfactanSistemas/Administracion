@@ -40,11 +40,11 @@ Partial Class MenuPrincipal
         Me.PreciosPorClienteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NovedadesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PedidosDesarrolloToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HojaDeRutaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PedidosPendientesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProcesosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FinDeSistemasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.HojaDeRutaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.panel1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -176,8 +176,14 @@ Partial Class MenuPrincipal
         'PedidosDesarrolloToolStripMenuItem
         '
         Me.PedidosDesarrolloToolStripMenuItem.Name = "PedidosDesarrolloToolStripMenuItem"
-        Me.PedidosDesarrolloToolStripMenuItem.Size = New System.Drawing.Size(172, 22)
+        Me.PedidosDesarrolloToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
         Me.PedidosDesarrolloToolStripMenuItem.Text = "Pedidos Desarrollo"
+        '
+        'HojaDeRutaToolStripMenuItem
+        '
+        Me.HojaDeRutaToolStripMenuItem.Name = "HojaDeRutaToolStripMenuItem"
+        Me.HojaDeRutaToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
+        Me.HojaDeRutaToolStripMenuItem.Text = "Consulta Hoja de Ruta"
         '
         'ListadosToolStripMenuItem
         '
@@ -204,12 +210,6 @@ Partial Class MenuPrincipal
         Me.FinDeSistemasToolStripMenuItem.Name = "FinDeSistemasToolStripMenuItem"
         Me.FinDeSistemasToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
         Me.FinDeSistemasToolStripMenuItem.Text = "Fin de Sistema"
-        '
-        'HojaDeRutaToolStripMenuItem
-        '
-        Me.HojaDeRutaToolStripMenuItem.Name = "HojaDeRutaToolStripMenuItem"
-        Me.HojaDeRutaToolStripMenuItem.Size = New System.Drawing.Size(172, 22)
-        Me.HojaDeRutaToolStripMenuItem.Text = "Hoja de Ruta"
         '
         'MenuPrincipal
         '

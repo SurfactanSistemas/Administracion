@@ -338,4 +338,6 @@ Public Class ConsultaHojaDeRuta : Implements IHojaDeRuta
         txtNroHoja.Text = Hoja
         txtNroHoja_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
     End Sub
+
+
 End Class
