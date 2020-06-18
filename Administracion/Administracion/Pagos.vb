@@ -5832,6 +5832,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
                         ZZFechaCheque = .Cells(2).Value
                         ZZBancoCheque = .Cells(4).Value
                         ZZCuit = .Cells(7).Value
+                        Dim ZZTipo = Val(.Cells("Tipo2").Value)
 
                         row = Tabla.NewRow
 
@@ -5849,6 +5850,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
                             .Item("Banco") = ZZBancoCheque
                             .Item("Razon") = XRazon
                             .Item("CuitProveedor") = XCuitProveedor
+                            .Item("Tipo") = ZZTipo
 
                         End With
 
@@ -5871,6 +5873,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
                                 .Item("Banco") = ZZBancoCheque
                                 .Item("Razon") = XRazon
                                 .Item("CuitProveedor") = XCuitProveedor
+                                .Item("Tipo") = ZZTipo
                             End With
 
                             Tabla.Rows.Add(row)
@@ -5912,6 +5915,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
                 .Item("Banco") = ZZBancoCheque
                 .Item("Razon") = XRazon
                 .Item("CuitProveedor") = XCuitProveedor
+                .Item("Tipo") = 0
 
             End With
 
@@ -5933,6 +5937,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
                     .Item("Banco") = ZZBancoCheque
                     .Item("Razon") = XRazon
                     .Item("CuitProveedor") = XCuitProveedor
+                    .Item("Tipo") = 0
                 End With
 
                 Tabla.Rows.Add(row)
@@ -6019,6 +6024,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
             .Columns.Add("Banco")
             .Columns.Add("Razon")
             .Columns.Add("CuitProveedor")
+            .Columns.Add("Tipo").DataType = Type.GetType("System.Integer")
         End With
     End Sub
 
