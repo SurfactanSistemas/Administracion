@@ -4874,7 +4874,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
         Dim WCantFacts As Integer = gridPagos.Rows.Cast(Of DataGridViewRow).Count(Function(r) Val(r.Cells("Importe").Value) <> 0)
         Dim WLimite As Integer = IIf(WCantFacts > 15, 30, 15)
 
-        For iRow = 0 To gridPagos.Rows.Count - 1
+        For iRow = 0 To WLimite - 1
 
             With gridPagos.Rows(iRow)
                 WLetra = .Cells(1).Value
