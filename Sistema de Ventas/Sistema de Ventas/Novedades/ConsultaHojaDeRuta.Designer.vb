@@ -22,7 +22,7 @@ Partial Class ConsultaHojaDeRuta
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.txtNroHoja = New System.Windows.Forms.TextBox()
         Me.txtFecha = New System.Windows.Forms.MaskedTextBox()
         Me.txtTotalPesos = New System.Windows.Forms.TextBox()
@@ -216,29 +216,29 @@ Partial Class ConsultaHojaDeRuta
         '
         'btnLimpiar
         '
-        Me.btnLimpiar.Location = New System.Drawing.Point(469, 463)
+        Me.btnLimpiar.Location = New System.Drawing.Point(417, 439)
         Me.btnLimpiar.Name = "btnLimpiar"
-        Me.btnLimpiar.Size = New System.Drawing.Size(75, 23)
+        Me.btnLimpiar.Size = New System.Drawing.Size(103, 47)
         Me.btnLimpiar.TabIndex = 19
-        Me.btnLimpiar.Text = "Limpiar"
+        Me.btnLimpiar.Text = "LIMPIAR"
         Me.btnLimpiar.UseVisualStyleBackColor = True
         '
         'btnImprimir
         '
-        Me.btnImprimir.Location = New System.Drawing.Point(334, 463)
+        Me.btnImprimir.Location = New System.Drawing.Point(268, 439)
         Me.btnImprimir.Name = "btnImprimir"
-        Me.btnImprimir.Size = New System.Drawing.Size(75, 23)
+        Me.btnImprimir.Size = New System.Drawing.Size(103, 47)
         Me.btnImprimir.TabIndex = 20
-        Me.btnImprimir.Text = "Imprimir"
+        Me.btnImprimir.Text = "IMPRIMIR"
         Me.btnImprimir.UseVisualStyleBackColor = True
         '
         'btnBuscarFecha
         '
-        Me.btnBuscarFecha.Location = New System.Drawing.Point(143, 463)
+        Me.btnBuscarFecha.Location = New System.Drawing.Point(118, 439)
         Me.btnBuscarFecha.Name = "btnBuscarFecha"
-        Me.btnBuscarFecha.Size = New System.Drawing.Size(141, 23)
+        Me.btnBuscarFecha.Size = New System.Drawing.Size(103, 47)
         Me.btnBuscarFecha.TabIndex = 21
-        Me.btnBuscarFecha.Text = "Buscar Rango Fechas"
+        Me.btnBuscarFecha.Text = "BUSCAR RANGO FECHAS"
         Me.btnBuscarFecha.UseVisualStyleBackColor = True
         '
         'DGV_HojaRuta
@@ -246,14 +246,14 @@ Partial Class ConsultaHojaDeRuta
         Me.DGV_HojaRuta.AllowUserToAddRows = False
         Me.DGV_HojaRuta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_HojaRuta.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Pedido, Me.Cliente, Me.Razon, Me.Remito, Me.Kilos, Me.Pesos, Me.Clase, Me.Provincia, Me.Direccion, Me.Comprobante, Me.Clave, Me.Integridad, Me.Archivo})
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGV_HojaRuta.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGV_HojaRuta.DefaultCellStyle = DataGridViewCellStyle2
         Me.DGV_HojaRuta.DoubleBuffered = True
         Me.DGV_HojaRuta.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.DGV_HojaRuta.Location = New System.Drawing.Point(4, 119)
@@ -263,7 +263,7 @@ Partial Class ConsultaHojaDeRuta
         Me.DGV_HojaRuta.RowTemplate.Height = 20
         Me.DGV_HojaRuta.ShowCellToolTips = False
         Me.DGV_HojaRuta.SinClickDerecho = False
-        Me.DGV_HojaRuta.Size = New System.Drawing.Size(789, 341)
+        Me.DGV_HojaRuta.Size = New System.Drawing.Size(789, 314)
         Me.DGV_HojaRuta.TabIndex = 18
         '
         'Pedido
@@ -375,7 +375,7 @@ Partial Class ConsultaHojaDeRuta
         Me.panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.panel1.Location = New System.Drawing.Point(0, 0)
         Me.panel1.Name = "panel1"
-        Me.panel1.Size = New System.Drawing.Size(808, 40)
+        Me.panel1.Size = New System.Drawing.Size(799, 40)
         Me.panel1.TabIndex = 22
         '
         'Label9
@@ -384,7 +384,7 @@ Partial Class ConsultaHojaDeRuta
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold)
         Me.Label9.ForeColor = System.Drawing.Color.White
-        Me.Label9.Location = New System.Drawing.Point(632, 10)
+        Me.Label9.Location = New System.Drawing.Point(623, 10)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(155, 20)
         Me.Label9.TabIndex = 0
@@ -404,18 +404,18 @@ Partial Class ConsultaHojaDeRuta
         '
         'btnCerrar
         '
-        Me.btnCerrar.Location = New System.Drawing.Point(571, 463)
+        Me.btnCerrar.Location = New System.Drawing.Point(565, 439)
         Me.btnCerrar.Name = "btnCerrar"
-        Me.btnCerrar.Size = New System.Drawing.Size(75, 23)
+        Me.btnCerrar.Size = New System.Drawing.Size(103, 47)
         Me.btnCerrar.TabIndex = 23
-        Me.btnCerrar.Text = "Cerrar"
+        Me.btnCerrar.Text = "CERRAR"
         Me.btnCerrar.UseVisualStyleBackColor = True
         '
         'ConsultaHojaDeRuta
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(808, 490)
+        Me.ClientSize = New System.Drawing.Size(799, 489)
         Me.Controls.Add(Me.btnCerrar)
         Me.Controls.Add(Me.panel1)
         Me.Controls.Add(Me.btnBuscarFecha)
@@ -441,6 +441,8 @@ Partial Class ConsultaHojaDeRuta
         Me.Controls.Add(Me.txtFecha)
         Me.Controls.Add(Me.txtNroHoja)
         Me.Location = New System.Drawing.Point(20, 20)
+        Me.MaximumSize = New System.Drawing.Size(815, 528)
+        Me.MinimumSize = New System.Drawing.Size(815, 528)
         Me.Name = "ConsultaHojaDeRuta"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         CType(Me.DGV_HojaRuta, System.ComponentModel.ISupportInitialize).EndInit()
