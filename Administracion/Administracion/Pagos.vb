@@ -6024,7 +6024,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
             .Columns.Add("Banco")
             .Columns.Add("Razon")
             .Columns.Add("CuitProveedor")
-            .Columns.Add("Tipo").DataType = Type.GetType("System.Integer")
+            .Columns.Add("Tipo").DataType = Type.GetType("System.Int32")
         End With
     End Sub
 
