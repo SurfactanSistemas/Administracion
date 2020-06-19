@@ -7,25 +7,39 @@ Imports PdfSharp.Pdf
 Imports PdfSharp.Pdf.IO
 
 Public Class VistaPrevia
-    Public Property Reporte As ReportDocument
 
-    Public Property Formula As String
+    Private _Reporte As ReportDocument
+    Public Property Reporte() As ReportDocument
+        Get
+            Return _Reporte
+        End Get
+        Set(ByVal value As ReportDocument)
+            _Reporte = value
 
-    Private Sub Reporte_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+            CrystalReportViewer1.ReportSource = value
 
-        With Me.CrystalReportViewer1
-            .ReportSource = Me.Reporte
-        End With
-    End Sub
+        End Set
+    End Property
 
-    Public Sub EstablecerConexion(ByVal Servidor As String, ByVal BaseDatos As String)
-        With Me.Reporte
-            .DataSourceConnections.Item(0).SetConnection(Trim(Servidor), Trim(BaseDatos), False)
-            .Refresh()
-        End With
-    End Sub
+    Private _Formula As String
+    Public Property Formula() As String
+        Get
+            Return _Formula
+        End Get
+        Set(ByVal value As String)
+            _Formula = value
+            _Reporte.RecordSelectionFormula = _Formula
+        End Set
+    End Property
+
+
+    'Public Property Formula As String
+
+    Public Property Reconectar As Boolean = True
 
     Private Sub _ReconectarBaseDatos()
+
+        If Not Reconectar Then Exit Sub
 
         ' MANDAMOS EL PARÁMETRO DE LA EMPRESA.
 
@@ -104,8 +118,11 @@ Public Class VistaPrevia
 
         _ReconectarBaseDatos()
 
-        Me.CrystalReportViewer1.SelectionFormula = IIf(IsNothing(Me.Formula), "", Me.Formula)
+        'Me.CrystalReportViewer1.ReportSource = Me.Reporte
+
+        'Me.CrystalReportViewer1.SelectionFormula = IIf(IsNothing(Me.Formula), "", Me.Formula)
         'Me.CrystalReportViewer1.Refresh()
+
         Me.Show()
         'Me.Dispose()
     End Sub

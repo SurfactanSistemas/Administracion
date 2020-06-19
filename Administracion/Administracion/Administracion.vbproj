@@ -48,7 +48,7 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <WarningsAsErrors>
     </WarningsAsErrors>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -740,6 +740,12 @@
       <DependentUpon>AnalisisDiferenciaCambioXFacturas.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\ListadoCtaCtePrvSelectivoPrueba1.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ListadoCtaCtePrvSelectivoPrueba.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\ReporteImpcybnetResumidoParaExcel.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -753,12 +759,6 @@
     </Compile>
     <Compile Include="Reportes\DBAuxi.vb">
       <DependentUpon>DBAuxi.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="Reportes\ListadoCtaCtePrvSelectivoPrueba.vb">
-      <DependentUpon>ListadoCtaCtePrvSelectivoPrueba.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\ReciboDefinitivoEmailPellital.vb">
       <DependentUpon>ReciboDefinitivoEmailPellital.rpt</DependentUpon>
@@ -1308,13 +1308,13 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>AnalisisDiferenciaCambioXFacturas.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ListadoCtaCtePrvSelectivoPrueba.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ListadoCtaCtePrvSelectivoPrueba1.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\ReporteImpcybnetResumidoParaExcel.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteImpcybnetResumidoParaExcel.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\ListadoCtaCtePrvSelectivoPrueba.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>ListadoCtaCtePrvSelectivoPrueba.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\ReciboDefinitivoEmailPellital.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
