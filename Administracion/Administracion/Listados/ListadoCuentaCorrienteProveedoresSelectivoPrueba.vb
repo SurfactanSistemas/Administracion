@@ -834,7 +834,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
                                 .Item("Saldo") = varSaldo
                                 .Item("Fecha") = CCPrv.fecha
                                 .Item("Vencimiento") = CCPrv.vencimiento
-                                .Item("Vencimiento") = CCPrv.VencimientoII
+                                .Item("Vencimiento1") = CCPrv.VencimientoII
                                 .Item("Impre") = CCPrv.Impre
                                 .Item("NroInterno") = CCPrv.nroInterno
                                 .Item("Empresa") = varEmpresa
