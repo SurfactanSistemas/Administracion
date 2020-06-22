@@ -1,12 +1,16 @@
 ﻿Imports System.ComponentModel
 Imports ClasesCompartidas
 Imports System.Data.SqlClient
+Imports CrystalDecisions.CrystalReports.Engine
+Imports CrystalDecisions.Windows.Forms
 
 Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
 
     Dim varRenglon As Integer
     Dim varTotal, varSaldo, varTotalUs, varSaldoUs, varSaldoOriginal, varDife, varParidad, varParidadTotal As Double
     Dim _Claves As New List(Of Object)
+
+    Dim WTipoSalida As Reporte
 
     Private Sub ListadoCuentaCorrienteProveedoresSelectivo_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         Label2.Text = Globals.NombreEmpresa()
@@ -16,6 +20,8 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         '_CargarProveedoresPreCargados()
         _Claves.Clear()
 
+        CheckForIllegalCrossThreadCalls = False
+
         _PurgarSaldosCtaCtePrvs()
     End Sub
 
@@ -23,6 +29,11 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Dim _Proveedores As New List(Of Object)
         'Dim _CargadosHaceMasDeUnaSemana As Integer = 0
         'Dim _FechaLimite As String = _DeterminarFechaLimite()
+
+        GRilla.DataSource = GetAll("SELECT ps.Proveedor, p.Nombre, ps.EnviarAvisoOp FROM ProveedorSelectivo ps INNER JOIN Proveedor p ON p.Proveedor = ps.Proveedor WHERE ps.Fecha = '" & txtFechaEmision.Text & "' ORDER BY p.Nombre")
+
+        Exit Sub
+
         Dim cn = New SqlConnection()
         Dim cm = New SqlCommand("SELECT Proveedor, FechaOrd, EnviarAvisoOp FROM ProveedorSelectivo WHERE Fecha = '" & txtFechaEmision.Text & "'")
         Dim dr As SqlDataReader
@@ -421,6 +432,10 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
 
     Private Sub _Imprimir(ByVal TipoImpresion As Reporte)
 
+        Dim ds As New DBAuxi
+
+        Dim WTabla As DataTable = New DBAuxi.impCtaCtePrvNetDataTable 'ds.Tables("impCtaCtePrvNet")
+
         Dim txtUno, txtDos As String
         Dim txtFormula As String
         Dim x As Char = Chr(34)
@@ -443,14 +458,14 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Dim varAcumulaNeto, varAcumulaNetoII, varAcumulaIva, varPesosOrig, varDifCambio, AcumPesosOrig, AcumPesosOrigII, AcumDifCambio As Double
         Dim varRetIbI, varRetIbII As Double
 
-        Try
+        'Try
 
-            _LimpiarImpCtaCtePrvNet()
+        '    _LimpiarImpCtaCtePrvNet()
 
-        Catch ex As Exception
-            MsgBox(ex.Message)
-            Exit Sub
-        End Try
+        'Catch ex As Exception
+        '    MsgBox(ex.Message)
+        '    Exit Sub
+        'End Try
 
         txtEmpresa = "Surfactan S.A."
         varEmpresa = 1
@@ -477,12 +492,16 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
 
         GRilla.CommitEdit(DataGridViewDataErrorContexts.Commit)
 
+        ProgressBar1.Maximum = GRilla.Rows.Count + 1
+
         For varCiclo = 0 To GRilla.Rows.Count - 1
 
             varAcumulaUs = 0
             varProveedor = GRilla.Item(0, varCiclo).Value
 
             If Trim(varProveedor) <> "" Then
+
+                Dim datosProveedor As DataRow = GetSingle("SELECT Proveedor, Nombre, NombreCheque, ImpreCuitCliente, FormaPago FROM Proveedor WHERE Proveedor = '" & varProveedor & "'", IIf(_EsPellital, "Pellital_III", "SurfactanSa"))
 
                 varAcumulado = 0
                 varAcumulaIva = 0
@@ -795,8 +814,59 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
                         End If
 
                         Try
-                            SQLConnector.executeProcedure("alta_impCtaCtePrvNetII", CCPrv.Clave, CCPrv.Proveedor, CCPrv.Tipo, CCPrv.letra, CCPrv.punto, CCPrv.numero, varTotal, varSaldo, CCPrv.fecha, CCPrv.vencimiento, CCPrv.VencimientoII, CCPrv.Impre, CCPrv.nroInterno, txtEmpresa, varAcumulado, WOrden, txtFechaEmision.Text, "", "", "", varParidadTotal, varSaldoOriginal, varDife, 0, 0, "", varRetIb, varRetGan, varAcuNeto, varParidad, varTotalUs, varSaldoUs, varAcumulaUs, varPago, IIf(varParidad = 0, 0, varPesosOrig), varDifCambio, AcumDifCambio, AcumPesosOrig)
-                            If OrDefault(row("MarcaVirtual"), "") = "X" Then ExecuteNonQueries({"UPDATE impCtaCtePrvNet SET MarcaVirtual = 'X' WHERE Clave = '" & row("Clave") & "'"})
+                            'SQLConnector.executeProcedure("alta_impCtaCtePrvNetII", CCPrv.Clave, CCPrv.Proveedor, CCPrv.Tipo, CCPrv.letra,
+                            '                              CCPrv.punto, CCPrv.numero, varTotal, varSaldo, CCPrv.fecha, CCPrv.vencimiento, CCPrv.VencimientoII,
+                            '                              CCPrv.Impre, CCPrv.nroInterno, txtEmpresa, varAcumulado, WOrden, txtFechaEmision.Text, "", "", "",
+                            '                              varParidadTotal, varSaldoOriginal, varDife, 0, 0, "", varRetIb, varRetGan, varAcuNeto, varParidad,
+                            '                              varTotalUs, varSaldoUs, varAcumulaUs, varPago, IIf(varParidad = 0, 0, varPesosOrig),
+                            '                              varDifCambio, AcumDifCambio, AcumPesosOrig)
+
+                            Dim r2 As DataRow = WTabla.NewRow
+
+                            With r2
+                                .Item("Clave") = CCPrv.Clave
+                                .Item("Proveedor") = CCPrv.Proveedor
+                                .Item("Tipo") = CCPrv.Tipo
+                                .Item("Letra") = CCPrv.letra
+                                .Item("Punto") = CCPrv.punto
+                                .Item("Numero") = CCPrv.numero
+                                .Item("Total") = varTotal
+                                .Item("Saldo") = varSaldo
+                                .Item("Fecha") = CCPrv.fecha
+                                .Item("Vencimiento") = CCPrv.vencimiento
+                                .Item("Vencimiento1") = CCPrv.VencimientoII
+                                .Item("Impre") = CCPrv.Impre
+                                .Item("NroInterno") = CCPrv.nroInterno
+                                .Item("Empresa") = varEmpresa
+                                .Item("Acumulado") = varAcumulado
+                                .Item("Orden") = WOrden
+                                .Item("Titulo1") = txtFechaEmision.Text
+                                .Item("Impre1") = varParidadTotal
+                                .Item("Impre2") = varSaldoOriginal
+                                .Item("Impre3") = varDife
+                                .Item("RetIb") = varRetIb
+                                .Item("RetGanan") = varRetGan
+                                .Item("AcuNeto") = varAcuNeto
+                                .Item("Paridad") = varParidad
+                                .Item("TotalUs") = varTotalUs
+                                .Item("SaldoUs") = varSaldoUs
+                                .Item("AcumulaUs") = varAcumulaUs
+                                .Item("Pago") = varPago
+                                .Item("PesosOrig") = IIf(varParidad = 0, 0, varPesosOrig)
+                                .Item("Difcambio") = varDifCambio
+                                .Item("AcumDifCambio") = AcumDifCambio
+                                .Item("AcumPesosOrig") = AcumPesosOrig
+                                .Item("MarcaVirtual") = OrDefault(row("MarcaVirtual"), "")
+
+                                .Item("Nombre") = OrDefault(datosProveedor("Nombre"), "")
+                                .Item("NombreCheque") = OrDefault(datosProveedor("NombreCheque"), "")
+                                .Item("ImpreCuitCliente") = OrDefault(datosProveedor("ImpreCuitCliente"), "")
+                                .Item("FormaPago") = OrDefault(datosProveedor("FormaPago"), "")
+                            End With
+
+                            WTabla.Rows.Add(r2)
+
+                            'If OrDefault(row("MarcaVirtual"), "") = "X" Then ExecuteNonQueries({"UPDATE impCtaCtePrvNet SET MarcaVirtual = 'X' WHERE Clave = '" & row("Clave") & "'"})
                         Catch ex As Exception
                             MsgBox(ex.Message, MsgBoxStyle.Critical)
                             Exit Sub
@@ -808,26 +878,15 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
 
             End If
 
+            ProgressBar1.Increment(1)
+
         Next
 
-        _ActualizarMarcaCuitCliente()
+        '_ActualizarMarcaCuitCliente()
 
-        txtUno = "{impCtaCtePrvNet.Proveedor} in " + x + "" + x + " to " + x + "ZZZZZZZZZZZ" + x
-        txtDos = " and {impCtaCtePrvNet.Saldo} <> 0.00"
-        txtFormula = txtUno + txtDos
+        'ds.Tables.AddRange({New DBAuxi.AvisosNoEnviadosDataTable, New DBAuxi.TablaArqueoChequesDataTable, New DBAuxi.TablaChequesAQueFacturaDataTable, WTabla, WTablaProveedor})
 
-        With VistaPrevia
-            .Reporte = New ListadoCtaCtePrvSelectivoPrueba
-
-            .Formula = txtFormula
-
-            Select Case TipoImpresion
-                Case Reporte.Imprimir
-                    .Imprimir()
-                Case Reporte.Pantalla
-                    .Mostrar()
-            End Select
-        End With
+        BackgroundWorker1.ReportProgress(0, WTabla)
 
     End Sub
 
@@ -974,13 +1033,18 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
     End Sub
 
     Private Sub btnPantalla_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnPantalla.Click
-        _Imprimir(Reporte.Pantalla)
+        If Not BackgroundWorker1.IsBusy Then
+            WTipoSalida = Reporte.Pantalla
+            BackgroundWorker1.RunWorkerAsync()
+        End If
     End Sub
 
     Private Sub btnImprimir_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnImprimir.Click
 
-        _Imprimir(Reporte.Imprimir)
-        MsgBox("El reporte se ha impreso correctamente.", MsgBoxStyle.Information)
+        If Not BackgroundWorker1.IsBusy Then
+            WTipoSalida = Reporte.Imprimir
+            BackgroundWorker1.RunWorkerAsync()
+        End If
 
     End Sub
 
@@ -1182,5 +1246,39 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         _DeshabilitarConsulta()
     End Sub
 
-   
+    Private Sub BackgroundWorker1_DoWork(sender As Object, e As DoWorkEventArgs) Handles BackgroundWorker1.DoWork
+        _Imprimir(WTipoSalida)
+    End Sub
+
+    Private Sub BackgroundWorker1_ProgressChanged(sender As Object, e As ProgressChangedEventArgs) Handles BackgroundWorker1.ProgressChanged
+        Dim WTabla As DataTable = TryCast(e.UserState, DataTable)
+
+        Dim rpt As New ListadoCtaCtePrvSelectivoPrueba
+        rpt.SetDataSource(WTabla)
+
+        With New VistaPrevia
+
+            .Reporte = rpt
+
+            .Reconectar = False
+
+            .Formula = "{impCtaCtePrvNet.Proveedor} in '' to 'ZZZZZZZZZZZ' and {impCtaCtePrvNet.Saldo} <> 0.00"
+
+            Select Case WTipoSalida
+                Case Reporte.Imprimir
+                    .Imprimir()
+                Case Reporte.Pantalla
+                    .Mostrar()
+            End Select
+        End With
+
+    End Sub
+
+    Private Sub BackgroundWorker1_RunWorkerCompleted(sender As Object, e As RunWorkerCompletedEventArgs) Handles BackgroundWorker1.RunWorkerCompleted
+        ProgressBar1.Value = 0
+
+        If WTipoSalida = Reporte.Imprimir Then
+            MsgBox("El reporte se ha impreso correctamente.", MsgBoxStyle.Information)
+        End If
+    End Sub
 End Class
