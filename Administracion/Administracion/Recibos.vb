@@ -310,7 +310,7 @@ Public Class Recibos
 
                             .Read()
 
-                            _Paridad = _NormalizarNumero(.Item("Paridad").ToString)
+                            _Paridad = formatonumerico(.Item("Paridad").ToString, 4)
                             _TipoCompo = Val(IIf(IsDBNull(.Item("TipoCompo")), 0, .Item("TipoCompo")))
 
                         End With
@@ -329,7 +329,7 @@ Public Class Recibos
                 'If _Provincia = 24 And Val(_TotalUs) <> 0 Then
                 If _Provincia = 24 Then
 
-                    lblTotalDebitos.Text += (Val(_NormalizarNumero(row.Cells(4).Value)) * Val(_NormalizarNumero(_Paridad)))
+                    lblTotalDebitos.Text += (Val(_NormalizarNumero(row.Cells(4).Value)) * Val(_Paridad))
 
                     lblDolares.Text += Val(_NormalizarNumero(row.Cells(4).Value))
 
@@ -340,7 +340,7 @@ Public Class Recibos
                     'If _TipoCompo <> 2 And _Paridad <> 0 Then
                     If _Paridad <> 0 Then
 
-                        lblDolares.Text += (Val(_NormalizarNumero(row.Cells(4).Value)) / Val(_NormalizarNumero(_Paridad)))
+                        lblDolares.Text += (Val(_NormalizarNumero(row.Cells(4).Value)) / Val(_Paridad))
 
                     End If
 
@@ -5905,4 +5905,138 @@ Public Class Recibos
 
         End If
     End Sub
+
+    Private Sub lblDolares_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles lblDolares.MouseDoubleClick
+
+        Dim WFacturas As DataTable = New BDDifCambioRecibos.FacturasDataTable
+
+        For Each row As DataGridViewRow In gridPagos2.Rows
+
+            If Trim(OrDefault(row.Cells("Numero2").Value, "")) = "" Then Continue For
+
+            Dim Factura As DataRow = GetSingle("SELECT Paridad, TipoCompo, Fecha FROM CtaCte WHERE clave = '" & row.Cells("Tipo2").Value & ceros(row.Cells("Numero2").Value, 8) & "01'")
+
+            If Factura Is Nothing Then
+                MsgBox("La factura " & row.Cells("Numero2").Value & " no se ha encontrado.", MsgBoxStyle.Exclamation)
+                Exit Sub
+            End If
+
+            Dim Paridad As Double = Val(formatonumerico(OrDefault(Factura("Paridad"), 0), 4))
+            Dim TipoComp As String = OrDefault(Factura("TipoCompo"), "")
+
+            Dim Importe As Double = Val(formatonumerico(OrDefault(row.Cells("Importe2").Value, "")))
+
+            If Paridad = 0 Then Paridad = 1
+
+            Dim r As DataRow = WFacturas.NewRow
+
+            With r
+                .Item("Recibo") = txtRecibo.Text
+                .Item("FechaRecibo") = txtFecha.Text
+                .Item("Cliente") = txtCliente.Text.ToUpper
+                .Item("Razon") = txtNombre.Text.ToUpper
+                .Item("ParidadRecibo") = Val(formatonumerico(txtParidad.Text))
+                .Item("TotalRecibo") = Val(formatonumerico(lblTotalCreditos.Text))
+                .Item("Tipo") = row.Cells("Tipo2").Value
+                .Item("Letra") = row.Cells("Letra2").Value
+                .Item("Punto") = row.Cells("Punto2").Value
+                .Item("Numero") = row.Cells("Numero2").Value
+                .Item("Fecha") = Factura("Fecha")
+                .Item("FechaOrd") = ordenaFecha(.Item("Fecha"))
+                .Item("Paridad") = Paridad
+                .Item("Pesos") = IIf(_Provincia = 24, Importe * Paridad, Importe)
+                .Item("Dolares") = IIf(_Provincia = 24, Importe, Importe / Paridad)
+            End With
+
+            WFacturas.Rows.Add(r)
+        Next
+
+        With New VistaPrevia
+            .Reporte = New DifCambioRecibos
+            .Reporte.SetDataSource(WFacturas)
+            .Reconectar = False
+            .Mostrar()
+        End With
+
+    End Sub
+
+    Private Function _ProcesarFacturas()
+        Dim _Paridad, _TipoCompo As String
+        Dim _Error = False
+        lblTotalDebitos.Text = 0
+        lblDolares.Text = 0
+        lblDiferencia.Text = 0
+
+        For Each row As DataGridViewRow In gridPagos2.Rows
+
+            _Paridad = 0
+            _TipoCompo = 0
+
+            If Val(row.Cells(4).Value) <> 0 Then
+
+                Dim cn = New SqlConnection()
+                Dim cm = New SqlCommand("SELECT Paridad, TipoCompo FROM CtaCte WHERE clave = '" & row.Cells(0).Value & ceros(row.Cells(3).Value, 8) & "01'")
+                Dim dr As SqlDataReader
+
+                SQLConnector.conexionSql(cn, cm)
+
+                Try
+
+                    dr = cm.ExecuteReader()
+
+                    If dr.HasRows Then
+
+                        With dr
+
+                            .Read()
+
+                            _Paridad = _NormalizarNumero(.Item("Paridad").ToString)
+                            _TipoCompo = Val(IIf(IsDBNull(.Item("TipoCompo")), 0, .Item("TipoCompo")))
+
+                        End With
+
+                    End If
+
+                Catch ex As Exception
+                    MsgBox("Hubo un problema al querer consultar la informacón de la Cuenta Corriente.", MsgBoxStyle.Critical)
+                    _Error = True
+                Finally
+
+                    cn.Close()
+
+                End Try
+
+                'If _Provincia = 24 And Val(_TotalUs) <> 0 Then
+                If _Provincia = 24 Then
+
+                    lblTotalDebitos.Text += (Val(_NormalizarNumero(row.Cells(4).Value)) * Val(_NormalizarNumero(_Paridad)))
+
+                    lblDolares.Text += Val(_NormalizarNumero(row.Cells(4).Value))
+
+                Else
+
+                    lblTotalDebitos.Text += Val(_NormalizarNumero(row.Cells(4).Value))
+
+                    'If _TipoCompo <> 2 And _Paridad <> 0 Then
+                    If _Paridad <> 0 Then
+
+                        lblDolares.Text += (Val(_NormalizarNumero(row.Cells(4).Value)) / Val(_NormalizarNumero(_Paridad)))
+
+                    End If
+
+                End If
+
+            End If
+        Next
+
+        lblTotalDebitos.Text = _NormalizarNumero(lblTotalDebitos.Text)
+        lblDiferencia.Text = Val(_NormalizarNumero(lblTotalDebitos.Text)) - Val(_NormalizarNumero(lblTotalCreditos.Text))
+        lblDolares.Text = _NormalizarNumero(lblDolares.Text)
+
+        _RecalcularDolaresfinales()
+
+        Return _Error
+
+    End Function
+
 End Class
