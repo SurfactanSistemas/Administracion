@@ -6039,4 +6039,7 @@ Public Class Recibos
 
     End Function
 
+    Private Sub btnDetallesDifCambio_Click(sender As Object, e As EventArgs) Handles btnDetallesDifCambio.Click
+        lblDolares_MouseDoubleClick(Nothing, Nothing)
+    End Sub
 End Class

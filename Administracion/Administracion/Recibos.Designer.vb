@@ -26,6 +26,10 @@ Partial Class Recibos
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -33,10 +37,6 @@ Partial Class Recibos
         Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.optVarios = New System.Windows.Forms.RadioButton()
         Me.optAnticipos = New System.Windows.Forms.RadioButton()
@@ -50,6 +50,12 @@ Partial Class Recibos
         Me.btnActualizarDatosFCE = New System.Windows.Forms.Button()
         Me.btnCargarDatosFCE = New System.Windows.Forms.Button()
         Me.gridPagos2 = New System.Windows.Forms.DataGridView()
+        Me.Tipo2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Letra2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Punto2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Numero2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Importe2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ImporteMax = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.lblDiferencia = New Administracion.CustomLabel()
         Me.CustomLabel8 = New Administracion.CustomLabel()
         Me.txtFechaAux = New System.Windows.Forms.MaskedTextBox()
@@ -109,12 +115,7 @@ Partial Class Recibos
         Me.btnLimpiar = New Administracion.CustomButton()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.Tipo2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Letra2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Punto2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Numero2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Importe2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ImporteMax = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnDetallesDifCambio = New Administracion.CustomButton()
         Me.GroupBox1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -207,12 +208,13 @@ Partial Class Recibos
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.lblDiferencia)
+        Me.Panel2.Controls.Add(Me.btnDetallesDifCambio)
         Me.Panel2.Controls.Add(Me.txtCostoFCE)
         Me.Panel2.Controls.Add(Me.CustomLabel15)
         Me.Panel2.Controls.Add(Me.btnActualizarDatosFCE)
         Me.Panel2.Controls.Add(Me.btnCargarDatosFCE)
         Me.Panel2.Controls.Add(Me.gridPagos2)
-        Me.Panel2.Controls.Add(Me.lblDiferencia)
         Me.Panel2.Controls.Add(Me.CustomLabel8)
         Me.Panel2.Controls.Add(Me.txtFechaAux)
         Me.Panel2.Controls.Add(Me.txtFecha)
@@ -350,6 +352,64 @@ Partial Class Recibos
         Me.gridPagos2.Size = New System.Drawing.Size(382, 194)
         Me.gridPagos2.TabIndex = 130
         '
+        'Tipo2
+        '
+        Me.Tipo2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Tipo2.DefaultCellStyle = DataGridViewCellStyle2
+        Me.Tipo2.HeaderText = "Tipo"
+        Me.Tipo2.MaxInputLength = 31
+        Me.Tipo2.Name = "Tipo2"
+        Me.Tipo2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Tipo2.Width = 34
+        '
+        'Letra2
+        '
+        Me.Letra2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Letra2.DefaultCellStyle = DataGridViewCellStyle3
+        Me.Letra2.HeaderText = "Letra"
+        Me.Letra2.MaxInputLength = 1
+        Me.Letra2.Name = "Letra2"
+        Me.Letra2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Letra2.Width = 59
+        '
+        'Punto2
+        '
+        Me.Punto2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Punto2.DefaultCellStyle = DataGridViewCellStyle4
+        Me.Punto2.HeaderText = "Punto"
+        Me.Punto2.MaxInputLength = 4
+        Me.Punto2.Name = "Punto2"
+        Me.Punto2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Punto2.Width = 55
+        '
+        'Numero2
+        '
+        Me.Numero2.HeaderText = "Numero"
+        Me.Numero2.MaxInputLength = 8
+        Me.Numero2.Name = "Numero2"
+        Me.Numero2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'Importe2
+        '
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle5.Format = "N2"
+        DataGridViewCellStyle5.NullValue = Nothing
+        Me.Importe2.DefaultCellStyle = DataGridViewCellStyle5
+        Me.Importe2.HeaderText = "Importe"
+        Me.Importe2.Name = "Importe2"
+        Me.Importe2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'ImporteMax
+        '
+        Me.ImporteMax.HeaderText = "ImporteMax"
+        Me.ImporteMax.Name = "ImporteMax"
+        Me.ImporteMax.ReadOnly = True
+        Me.ImporteMax.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.ImporteMax.Visible = False
+        '
         'lblDiferencia
         '
         Me.lblDiferencia.BackColor = System.Drawing.SystemColors.Control
@@ -368,7 +428,7 @@ Partial Class Recibos
         Me.CustomLabel8.ControlAssociationKey = 9
         Me.CustomLabel8.Font = New System.Drawing.Font("Calibri", 9.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel8.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel8.Location = New System.Drawing.Point(264, 460)
+        Me.CustomLabel8.Location = New System.Drawing.Point(274, 460)
         Me.CustomLabel8.Name = "CustomLabel8"
         Me.CustomLabel8.Size = New System.Drawing.Size(66, 15)
         Me.CustomLabel8.TabIndex = 128
@@ -441,7 +501,7 @@ Partial Class Recibos
         Me.CustomLabel14.BackColor = System.Drawing.SystemColors.Control
         Me.CustomLabel14.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.CustomLabel14.ControlAssociationKey = -1
-        Me.CustomLabel14.Location = New System.Drawing.Point(163, 455)
+        Me.CustomLabel14.Location = New System.Drawing.Point(136, 455)
         Me.CustomLabel14.Name = "CustomLabel14"
         Me.CustomLabel14.Size = New System.Drawing.Size(74, 22)
         Me.CustomLabel14.TabIndex = 121
@@ -453,7 +513,7 @@ Partial Class Recibos
         Me.lblDolares.BackColor = System.Drawing.SystemColors.Control
         Me.lblDolares.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblDolares.ControlAssociationKey = -1
-        Me.lblDolares.Location = New System.Drawing.Point(163, 428)
+        Me.lblDolares.Location = New System.Drawing.Point(136, 428)
         Me.lblDolares.Name = "lblDolares"
         Me.lblDolares.Size = New System.Drawing.Size(74, 22)
         Me.lblDolares.TabIndex = 121
@@ -929,7 +989,7 @@ Partial Class Recibos
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold)
         Me.Label6.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label6.Location = New System.Drawing.Point(48, 459)
+        Me.Label6.Location = New System.Drawing.Point(21, 459)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(115, 14)
         Me.Label6.TabIndex = 125
@@ -938,11 +998,11 @@ Partial Class Recibos
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label4.Font = New System.Drawing.Font("Calibri", 9.25!, System.Drawing.FontStyle.Bold)
         Me.Label4.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label4.Location = New System.Drawing.Point(240, 429)
+        Me.Label4.Location = New System.Drawing.Point(249, 432)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(103, 18)
+        Me.Label4.Size = New System.Drawing.Size(91, 15)
         Me.Label4.TabIndex = 125
         Me.Label4.Text = "Total Débito ($)"
         '
@@ -951,7 +1011,7 @@ Partial Class Recibos
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold)
         Me.Label3.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label3.Location = New System.Drawing.Point(38, 432)
+        Me.Label3.Location = New System.Drawing.Point(11, 432)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(126, 14)
         Me.Label3.TabIndex = 125
@@ -1159,63 +1219,27 @@ Partial Class Recibos
         Me.Panel3.Size = New System.Drawing.Size(883, 60)
         Me.Panel3.TabIndex = 134
         '
-        'Tipo2
+        'btnDetallesDifCambio
         '
-        Me.Tipo2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Tipo2.DefaultCellStyle = DataGridViewCellStyle2
-        Me.Tipo2.HeaderText = "Tipo"
-        Me.Tipo2.MaxInputLength = 31
-        Me.Tipo2.Name = "Tipo2"
-        Me.Tipo2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Tipo2.Width = 34
-        '
-        'Letra2
-        '
-        Me.Letra2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Letra2.DefaultCellStyle = DataGridViewCellStyle3
-        Me.Letra2.HeaderText = "Letra"
-        Me.Letra2.MaxInputLength = 1
-        Me.Letra2.Name = "Letra2"
-        Me.Letra2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Letra2.Width = 59
-        '
-        'Punto2
-        '
-        Me.Punto2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Punto2.DefaultCellStyle = DataGridViewCellStyle4
-        Me.Punto2.HeaderText = "Punto"
-        Me.Punto2.MaxInputLength = 4
-        Me.Punto2.Name = "Punto2"
-        Me.Punto2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Punto2.Width = 55
-        '
-        'Numero2
-        '
-        Me.Numero2.HeaderText = "Numero"
-        Me.Numero2.MaxInputLength = 8
-        Me.Numero2.Name = "Numero2"
-        Me.Numero2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'Importe2
-        '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle5.Format = "N2"
-        DataGridViewCellStyle5.NullValue = Nothing
-        Me.Importe2.DefaultCellStyle = DataGridViewCellStyle5
-        Me.Importe2.HeaderText = "Importe"
-        Me.Importe2.Name = "Importe2"
-        Me.Importe2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'ImporteMax
-        '
-        Me.ImporteMax.HeaderText = "ImporteMax"
-        Me.ImporteMax.Name = "ImporteMax"
-        Me.ImporteMax.ReadOnly = True
-        Me.ImporteMax.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.ImporteMax.Visible = False
+        Me.btnDetallesDifCambio.BackColor = System.Drawing.SystemColors.Control
+        Me.btnDetallesDifCambio.BackgroundImage = Global.Administracion.My.Resources.Resources.Informe
+        Me.btnDetallesDifCambio.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnDetallesDifCambio.Cleanable = False
+        Me.btnDetallesDifCambio.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnDetallesDifCambio.EnterIndex = -1
+        Me.btnDetallesDifCambio.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnDetallesDifCambio.FlatAppearance.BorderSize = 0
+        Me.btnDetallesDifCambio.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnDetallesDifCambio.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnDetallesDifCambio.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnDetallesDifCambio.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDetallesDifCambio.LabelAssociationKey = -1
+        Me.btnDetallesDifCambio.Location = New System.Drawing.Point(216, 428)
+        Me.btnDetallesDifCambio.Name = "btnDetallesDifCambio"
+        Me.btnDetallesDifCambio.Size = New System.Drawing.Size(26, 27)
+        Me.btnDetallesDifCambio.TabIndex = 134
+        Me.ToolTip1.SetToolTip(Me.btnDetallesDifCambio, "Detalles de cálculo de Dif de Cambio.")
+        Me.btnDetallesDifCambio.UseVisualStyleBackColor = False
         '
         'Recibos
         '
@@ -1317,4 +1341,5 @@ Partial Class Recibos
     Friend WithEvents Numero2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Importe2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ImporteMax As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents btnDetallesDifCambio As Administracion.CustomButton
 End Class
