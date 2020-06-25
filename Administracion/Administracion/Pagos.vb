@@ -7615,6 +7615,9 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
                 tablaChequesAdolar.Rows(i).Item("Fecha") = gridFormaPagos.Rows(i - 1).Cells("Fecha2").Value
                 tablaChequesAdolar.Rows(i).Item("Importe") = gridFormaPagos.Rows(i - 1).Cells("Importe2").Value
                 Dim fecha As String = tablaChequesAdolar.Rows(i).Item("Fecha")
+
+                If fecha.Replace(" ", "").Length < 10 Then Continue For
+
                 Dim FechaAVerificar As DateTime
                 FechaAVerificar = DateTime.ParseExact(fecha, "dd/MM/yyyy", New CultureInfo("en-US"))
                 If (FechaAVerificar.DayOfWeek = 6) Then

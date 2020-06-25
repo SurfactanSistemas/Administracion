@@ -44,7 +44,7 @@ Partial Class SeleccionTipoIncidencia
         'Label2
         '
         Me.Label2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.Control
@@ -57,7 +57,7 @@ Partial Class SeleccionTipoIncidencia
         'Label1
         '
         Me.Label1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.Control
@@ -69,20 +69,22 @@ Partial Class SeleccionTipoIncidencia
         '
         'btnInformeGral
         '
+        Me.btnInformeGral.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnInformeGral.Location = New System.Drawing.Point(31, 74)
         Me.btnInformeGral.Name = "btnInformeGral"
         Me.btnInformeGral.Size = New System.Drawing.Size(194, 54)
         Me.btnInformeGral.TabIndex = 1
-        Me.btnInformeGral.Text = "INFORME GENERAL"
+        Me.btnInformeGral.Text = "INCIDENTE GENERAL"
         Me.btnInformeGral.UseVisualStyleBackColor = True
         '
         'btnInformeRechazo
         '
+        Me.btnInformeRechazo.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnInformeRechazo.Location = New System.Drawing.Point(233, 74)
         Me.btnInformeRechazo.Name = "btnInformeRechazo"
         Me.btnInformeRechazo.Size = New System.Drawing.Size(194, 54)
         Me.btnInformeRechazo.TabIndex = 2
-        Me.btnInformeRechazo.Text = "INFORME POR RECHAZO EN RECEPCIÓN"
+        Me.btnInformeRechazo.Text = "INCIDENTE EN RECEPCIÓN"
         Me.btnInformeRechazo.UseVisualStyleBackColor = True
         '
         'SeleccionTipoIncidencia
@@ -98,7 +100,6 @@ Partial Class SeleccionTipoIncidencia
         Me.MinimizeBox = False
         Me.Name = "SeleccionTipoIncidencia"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "SeleccionTipoIncidencia"
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)
