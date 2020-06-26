@@ -511,6 +511,7 @@ Public Class Depositos
                     .Cells("Nombre").Value = WNombre
                     .Cells("Importe").Value = WImporte
                     .Cells("ClaveCheque").Value = ClaveRecibo
+                    .Cells("Virtual").Value = IIf(rbChElectronicos.Checked, "1", "0")
 
                 End With
 
@@ -598,6 +599,7 @@ Public Class Depositos
                         WFecha2 = row.Cells("Fecha").Value
                         WImporte2 = Val(Proceso.formatonumerico(row.Cells("Importe").Value))
                         WObservaciones2 = row.Cells("nombre").Value
+                        Dim WVirtual As String = row.Cells("Virtual").Value
                         WObservaciones2 = Microsoft.VisualBasic.Left$(WObservaciones2, 20)
                         WEmpresa = 1
                         WImpoLista = 0
@@ -606,8 +608,8 @@ Public Class Depositos
                             Continue For
                         End If
 
-                        cm.CommandText = "INSERT INTO Depositos (Clave, Deposito, Renglon, Banco, Fecha, FechaOrd, Importe, Acredita, AcreditaOrd, Tipo2, Numero2, Fecha2, Importe2, Observaciones2, Empresa, ImpoLista) " _
-                                        & " Values ('" & WClave & "', '" & WDeposito & "', '" & WRenglon & "', " & Str$(WBanco) & ", '" & WFecha & "', '" & WFechaOrd & "', " & Str$(WImporte) & ", '" & WFechaAcredita & "', '" & WFechaAcreditaOrd & "', '" & WTipo2 & "', '" & WNumero2 & "', '" & WFecha2 & "', " & Str$(WImporte2) & ", '" & WObservaciones2 & "', " & Str$(WEmpresa) & ", " & Str$(WImpoLista) & ")"
+                        cm.CommandText = "INSERT INTO Depositos (Clave, Deposito, Renglon, Banco, Fecha, FechaOrd, Importe, Acredita, AcreditaOrd, Tipo2, Numero2, Fecha2, Importe2, Observaciones2, Empresa, ImpoLista, ChequeVirtual) " _
+                                        & " Values ('" & WClave & "', '" & WDeposito & "', '" & WRenglon & "', " & Str$(WBanco) & ", '" & WFecha & "', '" & WFechaOrd & "', " & Str$(WImporte) & ", '" & WFechaAcredita & "', '" & WFechaAcreditaOrd & "', '" & WTipo2 & "', '" & WNumero2 & "', '" & WFecha2 & "', " & Str$(WImporte2) & ", '" & WObservaciones2 & "', " & Str$(WEmpresa) & ", " & Str$(WImpoLista) & ", '" & WVirtual & "')"
 
                         cm.ExecuteNonQuery()
 
@@ -841,7 +843,7 @@ Public Class Depositos
             Dim cn = New SqlConnection()
             Dim cm = New SqlCommand("")
             Dim dr As SqlDataReader
-            Dim WDeposito, WRenglon, WBanco, WFecha, WImporte, WFechaAcredita, WTipo2, WNumero2, WFecha2, WImporte2, WObservaciones2, rowIndex
+            Dim WDeposito, WRenglon, WBanco, WFecha, WImporte, WFechaAcredita, WTipo2, WNumero2, WFecha2, WImporte2, WObservaciones2, rowIndex, WVirtual
 
             btnLimpiar.PerformClick()
 
@@ -873,6 +875,7 @@ Public Class Depositos
                             WFecha2 = IIf(IsDBNull(.Item("Fecha2")), "", Trim(.Item("Fecha2")))
                             WImporte2 = IIf(IsDBNull(.Item("Importe2")), "0", Proceso.formatonumerico(Trim(.Item("Importe2"))))
                             WObservaciones2 = IIf(IsDBNull(.Item("Observaciones2")), "", Trim(.Item("Observaciones2")))
+                            WVirtual = OrDefault(.Item("ChequeVirtual"), "0")
 
                             If Val(WRenglon) = 1 Then
                                 txtNroDeposito.Text = WDeposito
@@ -892,6 +895,7 @@ Public Class Depositos
                                 .Cells(2).Value = WFecha2
                                 .Cells(3).Value = WObservaciones2
                                 .Cells(4).Value = WImporte2
+                                .Cells("Virtual").Value = WVirtual
 
                             End With
 
@@ -1054,7 +1058,7 @@ Public Class Depositos
                         Case 1
                             WTipo = "Efectivo"
                         Case 3
-                            WTipo = "Cheque"
+                            WTipo = IIf(.Cells("Virtual").Value = "1", "Cheque Elec.", "Cheque")
                             WNumero = .Cells(1).Value
                             WDescripcion = .Cells(3).Value.ToString.Split("/")(0)
                         Case Else
@@ -1427,6 +1431,7 @@ Public Class Depositos
                 .Cells(3).Value = WBanco
                 .Cells(4).Value = WImporte
                 .Cells(5).Value = WClave
+                .Cells("Virtual").Value = IIf(rbChElectronicos.Checked, "1", "0")
 
                 .Cells(0).ReadOnly = True
                 .Cells(1).ReadOnly = True

@@ -65,6 +65,10 @@ Module Proceso
 
         End Try
 
+        ExecuteNonQueries({"Update CtaCtePrv set MarcaVirtual = '' where MarcaVirtual IS NULL"})
+
+        ExecuteNonQueries({"Update Pagos set MarcaVirtual = '' where MarcaVirtual IS NULL"})
+
     End Sub
 
     Public Function _NormalizarFilas(ByVal tabla As DataTable) As DataTable
