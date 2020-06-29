@@ -31,7 +31,7 @@ Public Class MenuPrincipal
 
     Private Sub Button2_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button2.Click
 
-        Dim WGuiasOrigen As DataTable = GetAll("SELECT * FROM Guia WHERE FechaOrd >= '20180801' And upper(Movi) = 'S' Order by Codigo", ComboBox1.SelectedItem)
+        Dim WGuiasOrigen As DataTable = GetAll("SELECT Destino, Tipo, Codigo, Articulo, Terminado FROM Guia WHERE FechaOrd >= '20180801' And upper(Movi) = 'S' Order by Codigo", ComboBox1.SelectedItem)
         Dim WGuiasAImprimir As DataTable = WGuiasOrigen.Clone
 
         ProgressBar1.Maximum = WGuiasOrigen.Rows.Count

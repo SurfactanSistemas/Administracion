@@ -211,7 +211,7 @@ Public Class DetalleMovimientosPT
         ' Busco uso en Hojas de Producción posteriores a la Fecha de Cierre
         '
 
-        Dim WHojas As DataTable = GetAll("SELECT * FROM Hoja WHERE Tipo = 'T' " & WFiltroMarca & " And (Lote1 = '" & WLote & "' Or Lote2 = '" & WLote & "' Or Lote3 = '" & WLote & "')", empresa)
+        Dim WHojas As DataTable = GetAll("SELECT * FROM Hoja WHERE Tipo = 'T' And Terminado = '" & WCodPT & "' " & WFiltroMarca & " And (Lote1 = '" & WLote & "' Or Lote2 = '" & WLote & "' Or Lote3 = '" & WLote & "')", empresa)
 
         For Each row As DataRow In WHojas.Rows
             WMarca = ""
