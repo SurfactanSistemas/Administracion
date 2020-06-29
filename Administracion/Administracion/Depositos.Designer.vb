@@ -645,6 +645,7 @@ Partial Class Depositos
         Me.Virtual.HeaderText = "Virtual"
         Me.Virtual.Name = "Virtual"
         Me.Virtual.ReadOnly = True
+        Me.Virtual.Visible = False
         '
         'Depositos
         '
