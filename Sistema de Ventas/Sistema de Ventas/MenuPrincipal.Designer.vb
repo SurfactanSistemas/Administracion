@@ -41,6 +41,7 @@ Partial Class MenuPrincipal
         Me.NovedadesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PedidosDesarrolloToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HojaDeRutaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.VerificacionDeCostoDeProductosTerminadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PedidosPendientesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProcesosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -168,7 +169,7 @@ Partial Class MenuPrincipal
         '
         'NovedadesToolStripMenuItem
         '
-        Me.NovedadesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PedidosDesarrolloToolStripMenuItem, Me.HojaDeRutaToolStripMenuItem})
+        Me.NovedadesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PedidosDesarrolloToolStripMenuItem, Me.HojaDeRutaToolStripMenuItem, Me.VerificacionDeCostoDeProductosTerminadosToolStripMenuItem})
         Me.NovedadesToolStripMenuItem.Name = "NovedadesToolStripMenuItem"
         Me.NovedadesToolStripMenuItem.Size = New System.Drawing.Size(78, 20)
         Me.NovedadesToolStripMenuItem.Text = "Novedades"
@@ -176,14 +177,20 @@ Partial Class MenuPrincipal
         'PedidosDesarrolloToolStripMenuItem
         '
         Me.PedidosDesarrolloToolStripMenuItem.Name = "PedidosDesarrolloToolStripMenuItem"
-        Me.PedidosDesarrolloToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
+        Me.PedidosDesarrolloToolStripMenuItem.Size = New System.Drawing.Size(322, 22)
         Me.PedidosDesarrolloToolStripMenuItem.Text = "Pedidos Desarrollo"
         '
         'HojaDeRutaToolStripMenuItem
         '
         Me.HojaDeRutaToolStripMenuItem.Name = "HojaDeRutaToolStripMenuItem"
-        Me.HojaDeRutaToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
+        Me.HojaDeRutaToolStripMenuItem.Size = New System.Drawing.Size(322, 22)
         Me.HojaDeRutaToolStripMenuItem.Text = "Consulta Hoja de Ruta"
+        '
+        'VerificacionDeCostoDeProductosTerminadosToolStripMenuItem
+        '
+        Me.VerificacionDeCostoDeProductosTerminadosToolStripMenuItem.Name = "VerificacionDeCostoDeProductosTerminadosToolStripMenuItem"
+        Me.VerificacionDeCostoDeProductosTerminadosToolStripMenuItem.Size = New System.Drawing.Size(322, 22)
+        Me.VerificacionDeCostoDeProductosTerminadosToolStripMenuItem.Text = "Verificacion de Costo de Productos Terminados"
         '
         'ListadosToolStripMenuItem
         '
@@ -253,5 +260,6 @@ Partial Class MenuPrincipal
     Friend WithEvents PreciosPorClienteToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents PedidosDesarrolloToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents HojaDeRutaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents VerificacionDeCostoDeProductosTerminadosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class
