@@ -81,4 +81,10 @@
             .Show()
         End With
     End Sub
+
+    Private Sub VerificacionDeCostoDeProductosTerminadosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles VerificacionDeCostoDeProductosTerminadosToolStripMenuItem.Click
+        With VerificacionCostoDePT
+            .Show()
+        End With
+    End Sub
 End Class

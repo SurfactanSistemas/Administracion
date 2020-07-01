@@ -82,6 +82,7 @@
     <Compile Include="Interfases\IConsulta_Orden_Trabajo.vb" />
     <Compile Include="Interfases\IHojaDeRuta.vb" />
     <Compile Include="Interfases\IOrdenDeTrabajoDesarrollo.vb" />
+    <Compile Include="Interfases\IVerificaCostoPT.vb" />
     <Compile Include="Maestro\Consulta de revisiones de ensayos.Designer.vb">
       <DependentUpon>Consulta de revisiones de ensayos.vb</DependentUpon>
     </Compile>
@@ -257,16 +258,16 @@
     <Compile Include="Maestro\Listar_Cambios.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Novedades\ConsultaHojaDeRuta.Designer.vb">
+    <Compile Include="Novedades\Consulta Hoja de Ruta\ConsultaHojaDeRuta.Designer.vb">
       <DependentUpon>ConsultaHojaDeRuta.vb</DependentUpon>
     </Compile>
-    <Compile Include="Novedades\ConsultaHojaDeRuta.vb">
+    <Compile Include="Novedades\Consulta Hoja de Ruta\ConsultaHojaDeRuta.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Novedades\ConsultaHojaDeRutaXRangoFecha.Designer.vb">
+    <Compile Include="Novedades\Consulta Hoja de Ruta\ConsultaHojaDeRutaXRangoFecha.Designer.vb">
       <DependentUpon>ConsultaHojaDeRutaXRangoFecha.vb</DependentUpon>
     </Compile>
-    <Compile Include="Novedades\ConsultaHojaDeRutaXRangoFecha.vb">
+    <Compile Include="Novedades\Consulta Hoja de Ruta\ConsultaHojaDeRutaXRangoFecha.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Novedades\Ordenes de Trabajo Desarrollo\AutorizarOrdenTrabajo.Designer.vb">
@@ -285,6 +286,18 @@
       <DependentUpon>OrdenesTrabajoDesarrollo.vb</DependentUpon>
     </Compile>
     <Compile Include="Novedades\Ordenes de Trabajo Desarrollo\OrdenesTrabajoDesarrollo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Novedades\Verificacion de Cost de Productos Terminados\Ayuda_MP.Designer.vb">
+      <DependentUpon>Ayuda_MP.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Novedades\Verificacion de Cost de Productos Terminados\Ayuda_MP.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Novedades\Verificacion de Cost de Productos Terminados\VerificacionCostoDePT.Designer.vb">
+      <DependentUpon>VerificacionCostoDePT.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Novedades\Verificacion de Cost de Productos Terminados\VerificacionCostoDePT.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Reportes\hojarutacotnuevo.vb">
@@ -374,6 +387,18 @@
       <DependentUpon>ReporteVendedores.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\ReporteVerificaCosto.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteVerificaCosto.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ReporteVerificaCostoOtro1.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteVerificaCostoOtro.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Maestro\Consulta de revisiones de ensayos.resx">
@@ -460,10 +485,10 @@
     <EmbeddedResource Include="Maestro\Listar_Cambios.resx">
       <DependentUpon>Listar_Cambios.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Novedades\ConsultaHojaDeRuta.resx">
+    <EmbeddedResource Include="Novedades\Consulta Hoja de Ruta\ConsultaHojaDeRuta.resx">
       <DependentUpon>ConsultaHojaDeRuta.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Novedades\ConsultaHojaDeRutaXRangoFecha.resx">
+    <EmbeddedResource Include="Novedades\Consulta Hoja de Ruta\ConsultaHojaDeRutaXRangoFecha.resx">
       <DependentUpon>ConsultaHojaDeRutaXRangoFecha.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Novedades\Ordenes de Trabajo Desarrollo\AutorizarOrdenTrabajo.resx">
@@ -474,6 +499,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Novedades\Ordenes de Trabajo Desarrollo\OrdenesTrabajoDesarrollo.resx">
       <DependentUpon>OrdenesTrabajoDesarrollo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Novedades\Verificacion de Cost de Productos Terminados\Ayuda_MP.resx">
+      <DependentUpon>Ayuda_MP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Novedades\Verificacion de Cost de Productos Terminados\VerificacionCostoDePT.resx">
+      <DependentUpon>VerificacionCostoDePT.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\hojarutacotnuevo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -523,6 +554,14 @@
     <EmbeddedResource Include="Reportes\ReporteVendedores.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteVendedores.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ReporteVerificaCosto.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteVerificaCosto.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ReporteVerificaCostoOtro.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteVerificaCostoOtro1.vb</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
