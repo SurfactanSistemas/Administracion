@@ -7,8 +7,6 @@ Imports Microsoft.Office.Interop
 Public Class Recibos
     ' Variables y Constantes para fecha en grilla.
     Private WRow, Wcol As Integer
-    Private Const YMARGEN = 233
-    Private Const XMARGEN = 471
 
     ' Variables para alta de nuevo recibo
     Private _ComprobanteRetIva As String = ""
@@ -21,9 +19,7 @@ Public Class Recibos
             _RetIB19, _CompIB19, _RetIB20, _CompIB20, _RetIB21, _CompIB21, _RetIB22, _CompIB22, _RetIB23, _CompIB23 As String
 
     ' Variables para impresion de Recibo.
-    ' Variables para impresion de Recibo.d
-    Dim WRazon, WDireccion, WLocalidad, WProvincia, WPostal, _
-            WRecibo, WFecha, WCliente, WEmail As String
+    Dim WRazon, WDireccion, WLocalidad, WProvincia, WPostal, WEmail As String
 
     ' Variables Auxiliares
     Private _Provincia As Integer = 0
@@ -42,9 +38,7 @@ Public Class Recibos
             XImporte5, XImporte6, XImporte7, XDate, XParam, XSql, XClaveCheque, XBancoCheque, XSucursalCheque, _
             XChequeCheque, XCuentaCheque, XCuit, XClaveCuit, XNet As String
 
-    Dim iRow, renglon As Integer
-    Dim _Cheque As Object = Nothing
-    Dim _CuitExistente As Boolean = False
+    Dim renglon As Integer
     Dim cn As SqlConnection = New SqlConnection()
     Dim cm As SqlCommand = New SqlCommand()
     Dim dr As SqlDataReader
@@ -56,6 +50,8 @@ Public Class Recibos
     ' No tengo idea de para que son.
     Dim queryController As QueryController
     Dim commonEventsHandler As New CommonEventsHandler
+
+    Private WEnviarHojaCalculoDifCambio As Boolean = False
 
     Private Sub Recibos_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
@@ -493,9 +489,6 @@ Public Class Recibos
         WLocalidad = ""
         WProvincia = ""
         WPostal = ""
-        WRecibo = ""
-        WFecha = ""
-        WCliente = ""
         WEmail = ""
 
         _ClavesCheques.Clear()
@@ -4797,7 +4790,7 @@ Public Class Recibos
 
     End Sub
 
-    Private Sub _EnviarReciboPorEmail(ByVal crdoc As ReportDocument, ByVal WEmail As String)
+    Private Sub _EnviarReciboPorEmail(ByVal crdoc As ReportDocument, ByVal Email As String)
         Dim archivo As String = "Recibo" & Trim(txtRecibo.Text) & ".pdf"
         Dim ruta As String = Application.StartupPath & "/"
         Dim _to, _bcc, _asunto, _mensaje, _adjunto As String
@@ -5955,7 +5948,23 @@ Public Class Recibos
             .Reporte = New DifCambioRecibos
             .Reporte.SetDataSource(WFacturas)
             .Reconectar = False
-            .Mostrar()
+            If WEnviarHojaCalculoDifCambio Then
+                Dim WRuta, WNombrePdf As String
+
+                WRuta = "C:\TempHojasDifCambio\"
+
+                System.IO.Directory.CreateDirectory(WRuta)
+
+                WNombrePdf = "DifCambioRec" & txtRecibo.Text & ".pdf"
+
+                .Exportar(WNombrePdf, ExportFormatType.PortableDocFormat, WRuta)
+
+                Dim WBody As String = "<p>Estimado Cliente.</p><p>Se le adjunta la <b><em>Hoja de Análisis de Diferencia de Cambio</em></b>, correspondiente al recibo <b>" & txtRecibo.Text & "</b>.</p>"
+
+                .EnviarPorEmail(WRuta & WNombrePdf, True, "SURFACTAN S.A. - Hoja de Análisis de Diferencia de Cambio - Recibo: " & txtRecibo.Text, WBody, WEmail, "dbertolini@surfactan.com.ar;gferreyra@surfactan.com.ar")
+            Else
+                .Mostrar()
+            End If
         End With
 
     End Sub
@@ -6040,6 +6049,16 @@ Public Class Recibos
     End Function
 
     Private Sub btnDetallesDifCambio_Click(sender As Object, e As EventArgs) Handles btnDetallesDifCambio.Click
+        WEnviarHojaCalculoDifCambio = False
+
+        Dim WResp = MsgBox("¿Quiere enviar la Hoja de Cálculo de Diferencia de Cambio al Cliente?", MsgBoxStyle.YesNoCancel)
+
+        If Not {MsgBoxResult.Yes, MsgBoxResult.No}.Contains(WResp) Then Exit Sub
+
+        WEnviarHojaCalculoDifCambio = WResp = MsgBoxResult.Yes
+
         lblDolares_MouseDoubleClick(Nothing, Nothing)
+
+        WEnviarHojaCalculoDifCambio = False
     End Sub
 End Class

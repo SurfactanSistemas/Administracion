@@ -195,13 +195,13 @@ Public Class VistaPrevia
 
     End Sub
 
-    Public Sub EnviarPorEmail(ByVal NombreArchivo As String, Optional ByVal WEnvioAutomatico As Boolean = False, Optional ByVal Subject As String = "", Optional ByVal Body As String = "", Optional ByVal Direcciones As String = "")
+    Public Sub EnviarPorEmail(ByVal NombreArchivo As String, Optional ByVal WEnvioAutomatico As Boolean = False, Optional ByVal Subject As String = "", Optional ByVal Body As String = "", Optional ByVal Direcciones As String = "", Optional ByVal cc As String = "")
 
-        EnviarEmail(NombreArchivo, WEnvioAutomatico, Subject, Body, Direcciones)
+        EnviarEmail(NombreArchivo, WEnvioAutomatico, Subject, Body, Direcciones, cc)
 
     End Sub
 
-    Private Sub EnviarEmail(ByVal Archivo As String, ByVal EnvioAutomatico As Boolean, Optional ByVal Subject As String = "", Optional ByVal Body As String = "", Optional ByVal Direcciones As String = "")
+    Private Sub EnviarEmail(ByVal PathArchivo As String, ByVal EnvioAutomatico As Boolean, Optional ByVal Subject As String = "", Optional ByVal Body As String = "", Optional ByVal Direcciones As String = "", Optional ByVal cc As String = "")
         Dim oApp As _Application
         Dim oMsg As _MailItem
 
@@ -215,11 +215,12 @@ Public Class VistaPrevia
             oMsg.Subject = Subject
             oMsg.HTMLBody = "<p>" & Body.Replace(vbCrLf, "<br/>") & "<p>" & oMsg.HTMLBody
 
-            oMsg.Attachments.Add(Archivo)
+            oMsg.Attachments.Add(PathArchivo)
 
             ' Modificar por los E-Mails que correspondan.
             'oMsg.To = "gferreyra@surfactan.com.ar"
             oMsg.To = Direcciones
+            oMsg.CC = cc
 
             If EnvioAutomatico Then
                 oMsg.Send()
