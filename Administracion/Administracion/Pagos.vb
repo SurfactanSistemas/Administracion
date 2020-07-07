@@ -33,7 +33,7 @@ Public Class Pagos
     Private _SoloLectura As String = False
 
     Dim XTiporeg, XNumero2, XFecha2, XBanco2, XImporte2, XDestino, XEstado, XVencimiento, XVencimiento1, XTotal, XSaldo, XSaldoUs, XOrdFecha, XOrdVencimiento, XImpre, XNeto, XDate, XParam, XSql As String
-
+    
     Public Property SoloLectura As Boolean
         Get
             Return _SoloLectura
@@ -3304,7 +3304,7 @@ Public Class Pagos
         Return valido
     End Function
 
-Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData As Keys) As Boolean
+    Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData As Keys) As Boolean
 
         If gridFormaPagos.Focused Or gridFormaPagos.IsCurrentCellInEditMode Then ' Detectamos los ENTER tanto si solo estan en foco o si estan en edición una celda.
             gridFormaPagos.CommitEdit(DataGridViewDataErrorContexts.Commit) ' Guardamos todos los datos que no hayan sido confirmados.
@@ -6279,7 +6279,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
 
                 End If
             End If
-         
+
         End With
     End Sub
 
@@ -6994,10 +6994,10 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
 
         Dim ImprimeParidad As Boolean = _ConsultaImprecionDeParidad()
 
-        With VistaPrevia
+        With New VistaPrevia
             .Reporte = New AnalisisDiferenciaCambioOP
             .Reporte.SetParameterValue(0, ImprimeParidad)
-            .Formula = "{Pagos.Orden} IN '" & txtOrdenPago.Text & "' TO '" & txtOrdenPago.Text & "' AND {Pagos.Impolist} <> 0 AND {Pagos.TipoReg} IN '2' TO '2'"
+            .Formula = "{Pagos.Orden} IN '" & txtOrdenPago.Text & "' TO '" & txtOrdenPago.Text & "' AND {Pagos.Impolist} <> 0 AND {Pagos.TipoReg} IN '2' TO '2' And {Pagos.Proveedor} = '" & txtProveedor.Text & "'"
             .Mostrar()
             '.Imprimir()
         End With
@@ -7484,7 +7484,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
         Else
             MsgBox("Factura en pesos, no hay calculo de diferencia")
         End If
-       
+
     End Sub
 
     Private Sub btnVolver_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVolver.Click
@@ -7539,10 +7539,21 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
                 Dim Paridad As Double
                 GridPagosXFacturas.Rows(filasNuevas).Cells("ImportePesos").Value = gridPagos.Rows(i).Cells("Importe").Value
                 ImportePesos = GridPagosXFacturas.Rows(filasNuevas).Cells("ImportePesos").Value
-                GridPagosXFacturas.Rows(filasNuevas).Cells("Paridad").Value = _BuscarParidadFacturaPorProv(Tipo, Punto, Letra, CodProveedor, Numero)  'redondeo(_BuscarCambioDiviza(Fecha))
-                Paridad = GridPagosXFacturas.Rows(filasNuevas).Cells("Paridad").Value()
-                Div = Val(ImportePesos) / Paridad
-                GridPagosXFacturas.Rows(filasNuevas).Cells("ImporteDolares").Value = redondeo(Div)
+                GridPagosXFacturas.Rows(filasNuevas).Cells("Paridad").Value = formatonumerico(_BuscarParidadFacturaPorProv(Tipo, Punto, Letra, CodProveedor, Numero))
+
+                If GridPagosXFacturas.Rows(filasNuevas).Cells("Paridad").Value = 0 Then
+                    GridPagosXFacturas.Rows(filasNuevas).Cells("Paridad").Value = formatonumerico(txtParidad.Text)
+                End If
+                'redondeo(_BuscarCambioDiviza(Fecha))
+                Paridad = Val(GridPagosXFacturas.Rows(filasNuevas).Cells("Paridad").Value)
+
+                If Paridad = 0 Then
+                    Div = 0
+                Else
+                    Div = Val(ImportePesos) / Val(formatonumerico(Paridad))
+                End If
+
+                GridPagosXFacturas.Rows(filasNuevas).Cells("ImporteDolares").Value = formatonumerico(Div)
                 filasNuevas = filasNuevas + 1
             End If
 
@@ -7605,8 +7616,8 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
         'End With
 
         Dim Fechaord As String = ordenaFecha(txtFechaParidad.Text)
-        Dim importeDolar As Double = redondeo(Val(txtTotal.Text) / Val(txtParidad.Text.Replace(",", ".")))
-        tablaChequesAdolar.Rows.Add("00", "Retenciones", "", txtTotal.Text, txtParidad.Text, importeDolar, txtTotal.Text, False, Fechaord, txtTotal.Text)
+        Dim importeDolar As Double = Val(formatonumerico(txtTotal.Text)) / Val(formatonumerico(txtParidad.Text))
+        tablaChequesAdolar.Rows.Add("00", "Retenciones", "", txtTotal.Text, txtParidad.Text, formatonumerico(importeDolar), txtTotal.Text, False, Fechaord, txtTotal.Text)
         For i As Integer = 1 To XMAXFILAS
             If (gridFormaPagos.Rows(i - 1).Cells("Importe2").Value <> "") Then
                 tablaChequesAdolar.Rows.Add()
@@ -7628,7 +7639,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
                     End If
                 End If
 
-                tablaChequesAdolar.Rows(i).Item("Paridad") = _BuscarCambioDiviza(FechaAVerificar.ToString())
+                tablaChequesAdolar.Rows(i).Item("Paridad") = _BuscarCambioDiviza(FechaAVerificar.ToString("dd/MM/yyyy"))
 
                 If (tablaChequesAdolar.Rows(i).Item("Paridad") = 0) Then
                     For j As Integer = 0 To 29
@@ -7654,9 +7665,11 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
                 End If
 
 
+                Dim _Paridad As Double = Val(formatonumerico(tablaChequesAdolar.Rows(i).Item("Paridad").ToString))
+                If _Paridad = 0 Then _Paridad = 1
 
-                Dim CalculoImpDolares As Double = Val(gridFormaPagos.Rows(i - 1).Cells("Importe2").Value) / Val(tablaChequesAdolar.Rows(i).Item("Paridad").ToString().Replace(",", "."))
-                tablaChequesAdolar.Rows(i).Item("ImporteDolares") = redondeo(CalculoImpDolares)
+                Dim CalculoImpDolares As Double = Val(gridFormaPagos.Rows(i - 1).Cells("Importe2").Value) / _Paridad
+                tablaChequesAdolar.Rows(i).Item("ImporteDolares") = formatonumerico(CalculoImpDolares)
                 tablaChequesAdolar.Rows(i).Item("SaldoCheque") = gridFormaPagos.Rows(i - 1).Cells("Importe2").Value
                 tablaChequesAdolar.Rows(i).Item("UsadoParaListar") = False
                 tablaChequesAdolar.Rows(i).Item("FechaOrdenada") = ordenaFecha(gridFormaPagos.Rows(i - 1).Cells("Fecha2").Value)
@@ -7779,7 +7792,7 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
                                                 ArrayMontosEnPesosAmostrar(contadorCheques) = row.Item("Importe").ToString().Replace(",", ".")
                                                 Dim ValorAdolar As String = Val(ImporteRestante.Replace(",", ".")) / Val(row.Item("Paridad").ToString().Replace(",", "."))
                                                 ValorAdolar = redondeo(ValorAdolar).ToString().Replace(",", ".")
-                                                tablachesquesAQueFactura.Rows.Add(Factura.Cells("NumeroXFactura").Value, row.Item("Numero"), row.Item("Importe"), ValorAdolar, ImporteRestante.Replace(",", "."))
+                                                tablachesquesAQueFactura.Rows.Add(Factura.Cells("NumeroXFactura").Value, row.Item("Numero"), row.Item("Importe"), formatonumerico(ValorAdolar), ImporteRestante.Replace(",", "."))
                                             End If
 
                                         End If
@@ -7798,8 +7811,8 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
                                             row.Item("UsadoParaListar") = True
                                             ArrayMontosEnPesosAmostrar(contadorCheques) = row.Item("SaldoAMostrar")
                                             Dim ValorAdolar As String = Val(row.Item("SaldoAMostrar").ToString().Replace(",", ".")) / Val(row.Item("Paridad").ToString().Replace(",", "."))
-                                            ValorAdolar = redondeo(ValorAdolar).ToString().Replace(",", ".")
-                                            tablachesquesAQueFactura.Rows.Add(Factura.Cells("NumeroXFactura").Value, row.Item("Numero"), row.Item("Importe"), ValorAdolar, ArrayMontosEnPesosAmostrar(contadorCheques))
+                                            ValorAdolar = formatonumerico(ValorAdolar).ToString().Replace(",", ".")
+                                            tablachesquesAQueFactura.Rows.Add(Factura.Cells("NumeroXFactura").Value, row.Item("Numero"), row.Item("Importe"), formatonumerico(ValorAdolar), ArrayMontosEnPesosAmostrar(contadorCheques))
                                             Exit For
                                         End If
                                     Next
@@ -7832,19 +7845,20 @@ Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData A
             Dim TotalFacturaDolares As Double = 0
             For Each cheque As DataRow In tablachesquesAQueFactura.Rows
                 If (Factura.Item("Numero") = cheque("NumeroFactura")) Then
-                    TotalFacturaPesos = TotalFacturaPesos + Val(cheque("ImporteUsado"))
-                    TotalFacturaDolares = TotalFacturaDolares + cheque("ValorEnDolares").replace(".", ",")
+                    TotalFacturaPesos += Val(formatonumerico(cheque("ImporteUsado")))
+                    TotalFacturaDolares += Val(formatonumerico(cheque("ValorEnDolares")))
                     TotalFacturaDolares = redondeo(TotalFacturaDolares)
                 End If
             Next
-            Factura.Item("TotalChequesPesos") = TotalFacturaPesos
-            Factura.Item("TotalChequesDolares") = TotalFacturaDolares
-            Factura.Item("Diferencia") = Factura.Item("ImporteDolares") - Factura.Item("TotalChequesDolares")
+            Factura.Item("TotalChequesPesos") = Val(formatonumerico(TotalFacturaPesos))
+            Factura.Item("TotalChequesDolares") = Val(formatonumerico(TotalFacturaDolares))
+            Factura.Item("Diferencia") = Val(formatonumerico(Factura.Item("ImporteDolares"))) - Val(formatonumerico(Factura.Item("TotalChequesDolares")))
         Next
         Dim ParidadDelDia As String = _BuscarCambioDiviza(Date.Today)
 
         ' GridPagosXFacturas.DataSource = tablachesquesAQueFactura
-        With VistaPrevia
+        With New VistaPrevia
+            .Reconectar = False
             .Reporte = New AnalisisDiferenciaCambioXFacturas()
             Dim ds As New DataSet
             ds.Tables.AddRange({tablaChequesAdolar, tablachesquesAQueFactura, TablaSeleccionados})

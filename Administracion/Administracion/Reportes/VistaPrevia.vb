@@ -29,6 +29,7 @@ Public Class VistaPrevia
         Set(ByVal value As String)
             _Formula = value
             _Reporte.RecordSelectionFormula = _Formula
+            Me.CrystalReportViewer1.SelectionFormula = _Formula
         End Set
     End Property
 
