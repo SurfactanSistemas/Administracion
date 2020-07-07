@@ -34,14 +34,15 @@ Partial Class MenuPrincipal
         Me.IngresoDeFamiliasDeMateriasPrimasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.IngresoDeEnvasesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.IngresoDeGastosDeImportacionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ConsultaDeVersionesDeComposicionDePTToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ConsultaDeRevisionesDeEnsayosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.IngresoDeCambiosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PreciosPorClienteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NovedadesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PedidosPendientesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProcesosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FinDeSistemasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ConsultaDeVersionesDeComposicionDePTToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ConsultaDeRevisionesDeEnsayosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.IngresoDeCambiosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.panel1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -92,7 +93,7 @@ Partial Class MenuPrincipal
         '
         'MaestrosToolStripMenuItem
         '
-        Me.MaestrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IngresoRubroToolStripMenuItem, Me.IngresoVendedoresToolStripMenuItem, Me.CondicionDePagoToolStripMenuItem, Me.IngresoDeLineasDeVentasToolStripMenuItem, Me.IngresoDeFamiliasDeMateriasPrimasToolStripMenuItem, Me.IngresoDeEnvasesToolStripMenuItem, Me.IngresoDeGastosDeImportacionToolStripMenuItem, Me.ConsultaDeVersionesDeComposicionDePTToolStripMenuItem, Me.ConsultaDeRevisionesDeEnsayosToolStripMenuItem, Me.IngresoDeCambiosToolStripMenuItem})
+        Me.MaestrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IngresoRubroToolStripMenuItem, Me.IngresoVendedoresToolStripMenuItem, Me.CondicionDePagoToolStripMenuItem, Me.IngresoDeLineasDeVentasToolStripMenuItem, Me.IngresoDeFamiliasDeMateriasPrimasToolStripMenuItem, Me.IngresoDeEnvasesToolStripMenuItem, Me.IngresoDeGastosDeImportacionToolStripMenuItem, Me.ConsultaDeVersionesDeComposicionDePTToolStripMenuItem, Me.ConsultaDeRevisionesDeEnsayosToolStripMenuItem, Me.IngresoDeCambiosToolStripMenuItem, Me.PreciosPorClienteToolStripMenuItem})
         Me.MaestrosToolStripMenuItem.Name = "MaestrosToolStripMenuItem"
         Me.MaestrosToolStripMenuItem.Size = New System.Drawing.Size(67, 20)
         Me.MaestrosToolStripMenuItem.Text = "Maestros"
@@ -139,6 +140,30 @@ Partial Class MenuPrincipal
         Me.IngresoDeGastosDeImportacionToolStripMenuItem.Size = New System.Drawing.Size(311, 22)
         Me.IngresoDeGastosDeImportacionToolStripMenuItem.Text = "Ingreso de Gastos de Importacion"
         '
+        'ConsultaDeVersionesDeComposicionDePTToolStripMenuItem
+        '
+        Me.ConsultaDeVersionesDeComposicionDePTToolStripMenuItem.Name = "ConsultaDeVersionesDeComposicionDePTToolStripMenuItem"
+        Me.ConsultaDeVersionesDeComposicionDePTToolStripMenuItem.Size = New System.Drawing.Size(311, 22)
+        Me.ConsultaDeVersionesDeComposicionDePTToolStripMenuItem.Text = "Consulta de Versiones de Composicion de PT"
+        '
+        'ConsultaDeRevisionesDeEnsayosToolStripMenuItem
+        '
+        Me.ConsultaDeRevisionesDeEnsayosToolStripMenuItem.Name = "ConsultaDeRevisionesDeEnsayosToolStripMenuItem"
+        Me.ConsultaDeRevisionesDeEnsayosToolStripMenuItem.Size = New System.Drawing.Size(311, 22)
+        Me.ConsultaDeRevisionesDeEnsayosToolStripMenuItem.Text = "Consulta de Revisiones de Ensayos"
+        '
+        'IngresoDeCambiosToolStripMenuItem
+        '
+        Me.IngresoDeCambiosToolStripMenuItem.Name = "IngresoDeCambiosToolStripMenuItem"
+        Me.IngresoDeCambiosToolStripMenuItem.Size = New System.Drawing.Size(311, 22)
+        Me.IngresoDeCambiosToolStripMenuItem.Text = "Ingreso de Cambios"
+        '
+        'PreciosPorClienteToolStripMenuItem
+        '
+        Me.PreciosPorClienteToolStripMenuItem.Name = "PreciosPorClienteToolStripMenuItem"
+        Me.PreciosPorClienteToolStripMenuItem.Size = New System.Drawing.Size(311, 22)
+        Me.PreciosPorClienteToolStripMenuItem.Text = "Precios por Cliente"
+        '
         'NovedadesToolStripMenuItem
         '
         Me.NovedadesToolStripMenuItem.Name = "NovedadesToolStripMenuItem"
@@ -170,24 +195,6 @@ Partial Class MenuPrincipal
         Me.FinDeSistemasToolStripMenuItem.Name = "FinDeSistemasToolStripMenuItem"
         Me.FinDeSistemasToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
         Me.FinDeSistemasToolStripMenuItem.Text = "Fin de Sistema"
-        '
-        'ConsultaDeVersionesDeComposicionDePTToolStripMenuItem
-        '
-        Me.ConsultaDeVersionesDeComposicionDePTToolStripMenuItem.Name = "ConsultaDeVersionesDeComposicionDePTToolStripMenuItem"
-        Me.ConsultaDeVersionesDeComposicionDePTToolStripMenuItem.Size = New System.Drawing.Size(311, 22)
-        Me.ConsultaDeVersionesDeComposicionDePTToolStripMenuItem.Text = "Consulta de Versiones de Composicion de PT"
-        '
-        'ConsultaDeRevisionesDeEnsayosToolStripMenuItem
-        '
-        Me.ConsultaDeRevisionesDeEnsayosToolStripMenuItem.Name = "ConsultaDeRevisionesDeEnsayosToolStripMenuItem"
-        Me.ConsultaDeRevisionesDeEnsayosToolStripMenuItem.Size = New System.Drawing.Size(311, 22)
-        Me.ConsultaDeRevisionesDeEnsayosToolStripMenuItem.Text = "Consulta de Revisiones de Ensayos"
-        '
-        'IngresoDeCambiosToolStripMenuItem
-        '
-        Me.IngresoDeCambiosToolStripMenuItem.Name = "IngresoDeCambiosToolStripMenuItem"
-        Me.IngresoDeCambiosToolStripMenuItem.Size = New System.Drawing.Size(311, 22)
-        Me.IngresoDeCambiosToolStripMenuItem.Text = "Ingreso de Cambios"
         '
         'MenuPrincipal
         '
@@ -228,5 +235,6 @@ Partial Class MenuPrincipal
     Friend WithEvents ConsultaDeVersionesDeComposicionDePTToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ConsultaDeRevisionesDeEnsayosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents IngresoDeCambiosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents PreciosPorClienteToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

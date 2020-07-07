@@ -1,6 +1,4 @@
-﻿Imports Sistema_de_Ventas.Maestro.Ingreso_conceptos_de_gastos_de_importacion
-
-Public Class MenuPrincipal
+﻿Public Class MenuPrincipal
 
     Private Sub FinDeSistemasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FinDeSistemasToolStripMenuItem.Click
         Close()
@@ -69,6 +67,12 @@ Public Class MenuPrincipal
     Private Sub IngresoDeCambiosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles IngresoDeCambiosToolStripMenuItem.Click
         With Ingreso_Cambios
             .Show()
+        End With
+    End Sub
+
+    Private Sub PreciosPorClienteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PreciosPorClienteToolStripMenuItem.Click
+        With New PreciosPorCliente
+            .Show(Me)
         End With
     End Sub
 End Class
