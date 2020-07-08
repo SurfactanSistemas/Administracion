@@ -5827,7 +5827,10 @@ Public Class Recibos
 
                 Dim WBody As String = "<p>Estimado Cliente.</p><p>Se le adjunta la <b><em>Hoja de Análisis de Diferencia de Cambio</em></b>, correspondiente al recibo <b>" & txtRecibo.Text & "</b>.</p>"
 
-                .EnviarPorEmail(WRuta & WNombrePdf, True, "SURFACTAN S.A. - Hoja de Análisis de Diferencia de Cambio - Recibo: " & txtRecibo.Text, WBody, WEmail, "dbertolini@surfactan.com.ar;gferreyra@surfactan.com.ar")
+                _EnviarEmail(WEmail, "dbertolini@surfactan.com.ar;gferreyra@surfactan.com.ar", "SURFACTAN S.A. - Hoja de Análisis de Diferencia de Cambio - Recibo: " & txtRecibo.Text, WBody, WRuta & WNombrePdf)
+
+                MsgBox("¡Email enviado correctamente!", MsgBoxStyle.Information)
+
             Else
                 .Mostrar()
             End If
