@@ -68,10 +68,16 @@ Public Class PreciosClienteProducto
 
             Dim WDatos As DataRow = Nothing
 
+            Dim WColumnasFac As String = ""
+
+            For i = 1 To 5
+                WColumnasFac &= String.Format("{1}.Fecha{0}, {1}.Factura{0}, {1}.Precio{0}, {1}.Cantidad{0},", i, IIf(rbTerminado.Checked, "p", "pmp"))
+            Next
+
             If rbTerminado.Checked Then
-                WDatos = GetSingle("SELECT p.Precio, p.Fecha, p.Estado, p.Pago, p.Descripcion, p.DescripcionFarma, DescProd = t.Descripcion FROM Precios p INNER JOIN Terminado t ON t.Codigo = p.Terminado WHERE p.Terminado = '" & txtProducto.Text & "' and p.Cliente = '" & txtCliente.Text & "'")
+                WDatos = GetSingle("SELECT " & WColumnasFac & " p.Precio, p.Fecha, p.Estado, p.Pago, p.Descripcion, p.DescripcionFarma, DescProd = t.Descripcion FROM Precios p INNER JOIN Terminado t ON t.Codigo = p.Terminado WHERE p.Terminado = '" & txtProducto.Text & "' and p.Cliente = '" & txtCliente.Text & "'")
             Else
-                WDatos = GetSingle("SELECT pmp.Precio, pmp.Fecha, pmp.Estado, pmp.Pago, Descripcion = CASE LTRIM(RTRIM(a.DescriComercial)) WHEN '' THEN a.Descripcion ELSE a.DescriComercial END, DescProd = a.Descripcion FROM Preciosmp pmp INNER JOIN Articulo a ON a.Codigo = pmp.Articulo WHERE pmp.articulo = '" & txtProducto.Text & "' AND pmp.cliente = '" & txtCliente.Text & "'")
+                WDatos = GetSingle("SELECT " & WColumnasFac & " pmp.Precio, pmp.Fecha, pmp.Estado, pmp.Pago, Descripcion = CASE LTRIM(RTRIM(a.DescriComercial)) WHEN '' THEN a.Descripcion ELSE a.DescriComercial END, DescProd = a.Descripcion FROM Preciosmp pmp INNER JOIN Articulo a ON a.Codigo = pmp.Articulo WHERE pmp.articulo = '" & txtProducto.Text & "' AND pmp.cliente = '" & txtCliente.Text & "'")
             End If
 
             If WDatos IsNot Nothing Then
@@ -95,6 +101,19 @@ Public Class PreciosClienteProducto
                     lblDescripcion.Text = "DESC ADIC."
                     lblDescripcion2.Text = "2° Renglon Etiq."
                 End If
+
+                dgvFacturas.Rows.Clear()
+
+                For i = 1 To 5
+                    Dim WFecha, WFactura, WPrecio, WCantidad As String
+
+                    WFecha = OrDefault(WDatos("Fecha" & i), "")
+                    WFactura = OrDefault(WDatos("Factura" & i), "")
+                    WPrecio = formatonumerico(OrDefault(WDatos("Precio" & i), ""))
+                    WCantidad = formatonumerico(OrDefault(WDatos("Cantidad" & i), 0))
+
+                    dgvFacturas.Rows.Add(WFecha, WFactura, WPrecio, WCantidad)
+                Next
 
             End If
 

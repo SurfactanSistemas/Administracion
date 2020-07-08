@@ -22,8 +22,8 @@ Partial Class PreciosPorClienteProductos
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.label1 = New System.Windows.Forms.Label()
@@ -36,14 +36,18 @@ Partial Class PreciosPorClienteProductos
         Me.txtFiltrar = New System.Windows.Forms.TextBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.bntNuevo = New System.Windows.Forms.Button()
-        Me.dgvProductos = New Util.DBDataGridView()
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
+        Me.dgvProductos = New Util.DBDataGridView()
         Me.Producto = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Actualizado_el = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Operador = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Estado = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.rbTodos = New System.Windows.Forms.RadioButton()
+        Me.rbTerminados = New System.Windows.Forms.RadioButton()
+        Me.rbReventa = New System.Windows.Forms.RadioButton()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.panel1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -95,16 +99,20 @@ Partial Class PreciosPorClienteProductos
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 40)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 2
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 83.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 97.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(716, 348)
         Me.TableLayoutPanel1.TabIndex = 6
         '
         'Panel2
         '
+        Me.Panel2.Controls.Add(Me.rbReventa)
+        Me.Panel2.Controls.Add(Me.rbTerminados)
+        Me.Panel2.Controls.Add(Me.rbTodos)
         Me.Panel2.Controls.Add(Me.lblRazon)
         Me.Panel2.Controls.Add(Me.Label4)
         Me.Panel2.Controls.Add(Me.txtCliente)
+        Me.Panel2.Controls.Add(Me.Label5)
         Me.Panel2.Controls.Add(Me.Label3)
         Me.Panel2.Controls.Add(Me.txtFiltrar)
         Me.Panel2.Controls.Add(Me.Button1)
@@ -113,7 +121,7 @@ Partial Class PreciosPorClienteProductos
         Me.Panel2.Location = New System.Drawing.Point(0, 0)
         Me.Panel2.Margin = New System.Windows.Forms.Padding(0)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(716, 83)
+        Me.Panel2.Size = New System.Drawing.Size(716, 97)
         Me.Panel2.TabIndex = 0
         '
         'lblRazon
@@ -121,9 +129,9 @@ Partial Class PreciosPorClienteProductos
         Me.lblRazon.BackColor = System.Drawing.Color.Cyan
         Me.lblRazon.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblRazon.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblRazon.Location = New System.Drawing.Point(162, 15)
+        Me.lblRazon.Location = New System.Drawing.Point(154, 15)
         Me.lblRazon.Name = "lblRazon"
-        Me.lblRazon.Size = New System.Drawing.Size(417, 21)
+        Me.lblRazon.Size = New System.Drawing.Size(416, 21)
         Me.lblRazon.TabIndex = 2
         Me.lblRazon.Text = "CLIENTE"
         Me.lblRazon.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -131,7 +139,7 @@ Partial Class PreciosPorClienteProductos
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(33, 19)
+        Me.Label4.Location = New System.Drawing.Point(25, 19)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(52, 13)
         Me.Label4.TabIndex = 2
@@ -139,7 +147,7 @@ Partial Class PreciosPorClienteProductos
         '
         'txtCliente
         '
-        Me.txtCliente.Location = New System.Drawing.Point(88, 15)
+        Me.txtCliente.Location = New System.Drawing.Point(80, 15)
         Me.txtCliente.Name = "txtCliente"
         Me.txtCliente.Size = New System.Drawing.Size(68, 20)
         Me.txtCliente.TabIndex = 1
@@ -147,7 +155,7 @@ Partial Class PreciosPorClienteProductos
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(30, 49)
+        Me.Label3.Location = New System.Drawing.Point(25, 45)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(52, 13)
         Me.Label3.TabIndex = 2
@@ -155,17 +163,17 @@ Partial Class PreciosPorClienteProductos
         '
         'txtFiltrar
         '
-        Me.txtFiltrar.Location = New System.Drawing.Point(88, 45)
+        Me.txtFiltrar.Location = New System.Drawing.Point(80, 41)
         Me.txtFiltrar.Name = "txtFiltrar"
-        Me.txtFiltrar.Size = New System.Drawing.Size(342, 20)
+        Me.txtFiltrar.Size = New System.Drawing.Size(490, 20)
         Me.txtFiltrar.TabIndex = 1
         '
         'Button1
         '
         Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(576, 42)
+        Me.Button1.Location = New System.Drawing.Point(576, 53)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(128, 25)
+        Me.Button1.Size = New System.Drawing.Size(137, 35)
         Me.Button1.TabIndex = 0
         Me.Button1.Text = "CERRAR"
         Me.Button1.UseVisualStyleBackColor = True
@@ -173,12 +181,17 @@ Partial Class PreciosPorClienteProductos
         'bntNuevo
         '
         Me.bntNuevo.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.bntNuevo.Location = New System.Drawing.Point(436, 42)
+        Me.bntNuevo.Location = New System.Drawing.Point(576, 14)
         Me.bntNuevo.Name = "bntNuevo"
-        Me.bntNuevo.Size = New System.Drawing.Size(134, 25)
+        Me.bntNuevo.Size = New System.Drawing.Size(137, 35)
         Me.bntNuevo.TabIndex = 0
         Me.bntNuevo.Text = "NUEVO PRODUCTO"
         Me.bntNuevo.UseVisualStyleBackColor = True
+        '
+        'BackgroundWorker1
+        '
+        Me.BackgroundWorker1.WorkerReportsProgress = True
+        Me.BackgroundWorker1.WorkerSupportsCancellation = True
         '
         'dgvProductos
         '
@@ -186,18 +199,18 @@ Partial Class PreciosPorClienteProductos
         Me.dgvProductos.AllowUserToDeleteRows = False
         Me.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvProductos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Producto, Me.Descripcion, Me.Actualizado_el, Me.Operador, Me.Tipo, Me.Estado})
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvProductos.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvProductos.DefaultCellStyle = DataGridViewCellStyle4
         Me.dgvProductos.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvProductos.DoubleBuffered = True
         Me.dgvProductos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.dgvProductos.Location = New System.Drawing.Point(3, 86)
+        Me.dgvProductos.Location = New System.Drawing.Point(3, 100)
         Me.dgvProductos.Name = "dgvProductos"
         Me.dgvProductos.OrdenamientoColumnasHabilitado = True
         Me.dgvProductos.ReadOnly = True
@@ -205,13 +218,8 @@ Partial Class PreciosPorClienteProductos
         Me.dgvProductos.RowTemplate.Height = 20
         Me.dgvProductos.ShowCellToolTips = False
         Me.dgvProductos.SinClickDerecho = False
-        Me.dgvProductos.Size = New System.Drawing.Size(710, 259)
+        Me.dgvProductos.Size = New System.Drawing.Size(710, 245)
         Me.dgvProductos.TabIndex = 1
-        '
-        'BackgroundWorker1
-        '
-        Me.BackgroundWorker1.WorkerReportsProgress = True
-        Me.BackgroundWorker1.WorkerSupportsCancellation = True
         '
         'Producto
         '
@@ -234,8 +242,8 @@ Partial Class PreciosPorClienteProductos
         '
         Me.Actualizado_el.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Actualizado_el.DataPropertyName = "Actualizado_el"
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Actualizado_el.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Actualizado_el.DefaultCellStyle = DataGridViewCellStyle3
         Me.Actualizado_el.HeaderText = "Actualizado el"
         Me.Actualizado_el.Name = "Actualizado_el"
         Me.Actualizado_el.ReadOnly = True
@@ -266,6 +274,48 @@ Partial Class PreciosPorClienteProductos
         Me.Estado.Name = "Estado"
         Me.Estado.ReadOnly = True
         Me.Estado.Width = 65
+        '
+        'rbTodos
+        '
+        Me.rbTodos.AutoSize = True
+        Me.rbTodos.Location = New System.Drawing.Point(103, 69)
+        Me.rbTodos.Name = "rbTodos"
+        Me.rbTodos.Size = New System.Drawing.Size(63, 17)
+        Me.rbTodos.TabIndex = 3
+        Me.rbTodos.TabStop = True
+        Me.rbTodos.Text = "TODOS"
+        Me.rbTodos.UseVisualStyleBackColor = True
+        '
+        'rbTerminados
+        '
+        Me.rbTerminados.AutoSize = True
+        Me.rbTerminados.Location = New System.Drawing.Point(182, 69)
+        Me.rbTerminados.Name = "rbTerminados"
+        Me.rbTerminados.Size = New System.Drawing.Size(168, 17)
+        Me.rbTerminados.TabIndex = 3
+        Me.rbTerminados.TabStop = True
+        Me.rbTerminados.Text = "PRODUCTOS TERMINADOS"
+        Me.rbTerminados.UseVisualStyleBackColor = True
+        '
+        'rbReventa
+        '
+        Me.rbReventa.AutoSize = True
+        Me.rbReventa.Location = New System.Drawing.Point(366, 69)
+        Me.rbReventa.Name = "rbReventa"
+        Me.rbReventa.Size = New System.Drawing.Size(76, 17)
+        Me.rbReventa.TabIndex = 3
+        Me.rbReventa.TabStop = True
+        Me.rbReventa.Text = "REVENTA"
+        Me.rbReventa.UseVisualStyleBackColor = True
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(16, 71)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(61, 13)
+        Me.Label5.TabIndex = 2
+        Me.Label5.Text = "MOSTRAR"
         '
         'PreciosPorClienteProductos
         '
@@ -306,4 +356,8 @@ Partial Class PreciosPorClienteProductos
     Friend WithEvents Operador As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Tipo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Estado As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents rbReventa As System.Windows.Forms.RadioButton
+    Friend WithEvents rbTerminados As System.Windows.Forms.RadioButton
+    Friend WithEvents rbTodos As System.Windows.Forms.RadioButton
+    Friend WithEvents Label5 As System.Windows.Forms.Label
 End Class
