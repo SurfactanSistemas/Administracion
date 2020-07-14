@@ -45,6 +45,7 @@ Public Class Recibos
     Dim dr As SqlDataReader
 
     Dim WDatosFCE As DataRow
+    Dim ZAcumRecibo As Double = 0
 
     Dim WOffset As Integer = 1
 
@@ -285,9 +286,13 @@ Public Class Recibos
         lblDolares.Text = 0
         lblDiferencia.Text = 0
 
+        ZAcumRecibo = 0
+
         For Each row As DataGridViewRow In gridPagos2.Rows
 
             _Paridad = 0
+
+            Dim ZTipo As Integer = Val(OrDefault(row.Cells("Tipo2").Value, ""))
 
             If Val(row.Cells(4).Value) <> 0 Then
 
@@ -308,7 +313,7 @@ Public Class Recibos
                             .Read()
 
                             _Paridad = formatonumerico(.Item("Paridad").ToString, 4)
-                            
+
                         End With
 
                     End If
@@ -322,23 +327,33 @@ Public Class Recibos
 
                 End Try
 
+                If {1, 2}.Contains(ZTipo) Then
+                    If _Provincia = 24 Then
+
+                        lblDolares.Text += Val(_NormalizarNumero(row.Cells(4).Value))
+                        ZAcumRecibo += (Val(_NormalizarNumero(row.Cells(4).Value)) * Val(_Paridad))
+
+                    Else
+
+                        ZAcumRecibo += Val(_NormalizarNumero(row.Cells(4).Value))
+
+                        If _Paridad <> 0 Then
+
+                            lblDolares.Text += (Val(_NormalizarNumero(row.Cells(4).Value)) / Val(_Paridad))
+
+                        End If
+
+                    End If
+                End If
+
                 'If _Provincia = 24 And Val(_TotalUs) <> 0 Then
                 If _Provincia = 24 Then
 
                     lblTotalDebitos.Text += (Val(_NormalizarNumero(row.Cells(4).Value)) * Val(_Paridad))
 
-                    lblDolares.Text += Val(_NormalizarNumero(row.Cells(4).Value))
-
                 Else
 
                     lblTotalDebitos.Text += Val(_NormalizarNumero(row.Cells(4).Value))
-
-                    'If _TipoCompo <> 2 And _Paridad <> 0 Then
-                    If _Paridad <> 0 Then
-
-                        lblDolares.Text += (Val(_NormalizarNumero(row.Cells(4).Value)) / Val(_Paridad))
-
-                    End If
 
                 End If
 
@@ -361,7 +376,7 @@ Public Class Recibos
 
     Private Sub _RecalcularDolaresfinales()
         If Val(_NormalizarNumero(txtParidad.Text)) > 0 Then
-            lblDolares.Text = Val(_NormalizarNumero(lblDolares.Text)) - (Val(_NormalizarNumero(lblTotalDebitos.Text)) / Val(_NormalizarNumero(txtParidad.Text)))
+            lblDolares.Text = Val(_NormalizarNumero(lblDolares.Text)) - (Val(_NormalizarNumero(ZAcumRecibo)) / Val(_NormalizarNumero(txtParidad.Text)))
             lblDolares.Text = Val(_NormalizarNumero(lblDolares.Text)) * -1
 
             'lblDolares.Text = _NormalizarNumero(lblDolares.Text)
@@ -974,6 +989,13 @@ Public Class Recibos
                     If IsDate(row.Cells(2).Value) And IsDate(txtFecha.Text) And DateDiff(DateInterval.Day, CDate(row.Cells(2).Value), CDate(txtFecha.Text)) > 30 Then
                         _Error = True
                         Exit For
+                    End If
+
+                    Dim aux As String = Trim(OrDefault(row.Cells(3).Value, ""))
+                    Dim WCodigoBanco As String = _GenerarCodigoBanco(aux)
+
+                    If Not aux.Contains(WCodigoBanco) Then
+                        row.Cells(3).Value = WCodigoBanco
                     End If
 
                 End If
@@ -3153,7 +3175,13 @@ Public Class Recibos
                                 End If
 
                             ElseIf iCol = 3 Then
-                                gridFormasPago2.Rows(iRow).Cells(iCol).Value = _GenerarCodigoBanco(valor)
+                                Dim WCodigoBanco As String = _GenerarCodigoBanco(valor)
+                                Dim aux As String = Trim(OrDefault(gridFormasPago2.Rows(iRow).Cells(iCol).Value, ""))
+
+                                If Not aux.Contains(WCodigoBanco) AndAlso Val(OrDefault(gridFormasPago2.Rows(iRow).Cells(0).Value, "")) = 2 Then
+                                    gridFormasPago2.Rows(iRow).Cells(iCol).Value = WCodigoBanco
+                                End If
+
                                 gridFormasPago2.CurrentCell = gridFormasPago2.Rows(iRow).Cells(iCol + 1)
                             Else
                                 gridFormasPago2.CurrentCell = gridFormasPago2.Rows(iRow).Cells(iCol + 1)
@@ -5643,8 +5671,8 @@ Public Class Recibos
                 txtFechaAux.Visible = True
                 txtFechaAux.Focus()
             End If
-        End With
 
+        End With
     End Sub
 
     Private Sub gridRecibos_CellEnter(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles gridFormasPago2.CellEnter
@@ -5769,8 +5797,16 @@ Public Class Recibos
     Private Sub lblDolares_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles lblDolares.MouseDoubleClick
 
         Dim WFacturas As DataTable = New BDDifCambioRecibos.FacturasDataTable
+        Dim WAcumRecibo As Double = 0
 
         For Each row As DataGridViewRow In gridPagos2.Rows
+
+            Dim ZTipo2 As Integer = Val(OrDefault(row.Cells("Tipo2").Value, ""))
+
+            '
+            ' Evitamos las Notas por Dif de Cambio y sólamente procesamos las Facturas ""Normales".
+            '
+            If Not {1, 2}.Contains(ZTipo2) Then Continue For
 
             If Trim(OrDefault(row.Cells("Numero2").Value, "")) = "" Then Continue For
 
@@ -5789,13 +5825,18 @@ Public Class Recibos
 
             Dim r As DataRow = WFacturas.NewRow
 
+            Dim WPesos As Double = IIf(_Provincia = 24, WImporte * Paridad, WImporte)
+            Dim WDolares As Double = IIf(_Provincia = 24, WImporte, WImporte / Paridad)
+
+            WAcumRecibo += WPesos
+
             With r
                 .Item("Recibo") = txtRecibo.Text
                 .Item("FechaRecibo") = txtFecha.Text
                 .Item("Cliente") = txtCliente.Text.ToUpper
                 .Item("Razon") = txtNombre.Text.ToUpper
                 .Item("ParidadRecibo") = Val(formatonumerico(txtParidad.Text))
-                .Item("TotalRecibo") = Val(formatonumerico(lblTotalCreditos.Text))
+                .Item("TotalRecibo") = 0 'Val(formatonumerico(lblTotalCreditos.Text))
                 .Item("Tipo") = row.Cells("Tipo2").Value
                 .Item("Letra") = row.Cells("Letra2").Value
                 .Item("Punto") = row.Cells("Punto2").Value
@@ -5803,11 +5844,17 @@ Public Class Recibos
                 .Item("Fecha") = Factura("Fecha")
                 .Item("FechaOrd") = ordenaFecha(.Item("Fecha"))
                 .Item("Paridad") = Paridad
-                .Item("Pesos") = IIf(_Provincia = 24, WImporte * Paridad, WImporte)
-                .Item("Dolares") = IIf(_Provincia = 24, WImporte, WImporte / Paridad)
+                .Item("Pesos") = WPesos
+                .Item("Dolares") = WDolares
             End With
 
             WFacturas.Rows.Add(r)
+        Next
+
+        WAcumRecibo = Val(formatonumerico(WAcumRecibo))
+
+        For Each row As Datarow In WFacturas.Rows
+            row("TotalRecibo") = WAcumRecibo
         Next
 
         With New VistaPrevia
@@ -5850,5 +5897,21 @@ Public Class Recibos
         lblDolares_MouseDoubleClick(Nothing, Nothing)
 
         WEnviarHojaCalculoDifCambio = False
+    End Sub
+
+    Private Sub gridFormasPago2_CellLeave(sender As Object, e As DataGridViewCellEventArgs) Handles gridFormasPago2.CellLeave
+        If e.ColumnIndex = 3 Then
+            
+        End If
+    End Sub
+
+    Private Sub gridFormasPago2_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles gridFormasPago2.CellValueChanged
+        For Each row As DataGridViewRow In gridFormasPago2.Rows
+            With row
+                If Val(OrDefault(.Cells(0).Value, "")) = 2 Then
+                    .Cells(3).Value = _GenerarCodigoBanco(OrDefault(.Cells(3).Value, ""))
+                End If
+            End With
+        Next
     End Sub
 End Class

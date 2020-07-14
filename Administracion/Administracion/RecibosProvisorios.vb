@@ -2071,4 +2071,13 @@ Public Class RecibosProvisorios
         End If
     End Sub
 
+    Private Sub gridRecibos_CellValueChanged_1(sender As Object, e As DataGridViewCellEventArgs) Handles gridRecibos.CellValueChanged
+        For Each row As DataGridViewRow In gridRecibos.Rows
+            With row
+                If Val(OrDefault(.Cells(0).Value, "")) = 2 Then
+                    .Cells(3).Value = _GenerarCodigoBanco(OrDefault(.Cells(3).Value, ""))
+                End If
+            End With
+        Next
+    End Sub
 End Class
