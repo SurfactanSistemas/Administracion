@@ -305,7 +305,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
     Private Function _BuscarCtaCtePrvSelectivo(ByVal proveedor As String) As DataTable
         Dim tabla As New DataTable
         Dim cn = New SqlConnection()
-        'Dim cm = "SELECT ccp.Tipo, ccp.Letra, ccp.Punto, ccp.Numero, ccp.Total, ccp.Saldo, ccp.Fecha, ccp.Vencimiento, ccp.Vencimiento1, Impre = CASE ISNULL(i.Rechazado, 0) WHEN 1 THEN 'CHR' ELSE ccp.Impre END, ccp.NroInterno, ccp.Clave, ccp.Pago, ccp.Paridad FROM CtaCtePrv ccp LEFT OUTER JOIN IvaComp i ON i.NroInterno = ccp.NroInterno WHERE ccp.Proveedor = '" & proveedor.Trim() & "' AND ccp.Saldo <> 0 ORDER BY ccp.Proveedor, ccp.OrdFecha, ccp.NroInterno"
+        'Dim cm = "SELECT ccp.Tipo, ccp.Letra, ccp.Punto, ccp.Numero, ccp.Tovartal, ccp.Saldo, ccp.Fecha, ccp.Vencimiento, ccp.Vencimiento1, Impre = CASE ISNULL(i.Rechazado, 0) WHEN 1 THEN 'CHR' ELSE ccp.Impre END, ccp.NroInterno, ccp.Clave, ccp.Pago, ccp.Paridad FROM CtaCtePrv ccp LEFT OUTER JOIN IvaComp i ON i.NroInterno = ccp.NroInterno WHERE ccp.Proveedor = '" & proveedor.Trim() & "' AND ccp.Saldo <> 0 ORDER BY ccp.Proveedor, ccp.OrdFecha, ccp.NroInterno"
         'Dim cm = "SELECT ccp.Tipo, ccp.Letra, ccp.Punto, ccp.Numero, ccp.Total, ccp.Saldo, ccp.Fecha, ccp.Vencimiento, ccp.Vencimiento1, Impre = CASE ISNULL(i.Rechazado, 0) WHEN 1 THEN 'CHR' ELSE ccp.Impre END, ccp.NroInterno, ccp.Clave, ccp.Pago, ccp.Paridad, ccp.MarcaVirtual FROM CtaCtePrv ccp LEFT OUTER JOIN IvaComp i ON i.NroInterno = ccp.NroInterno WHERE ccp.Proveedor = '" & proveedor.Trim() & "' AND ccp.Saldo <> 0 ORDER BY ccp.Proveedor, ccp.OrdFecha, ccp.Numero"
         Dim cm = "SELECT ccp.Tipo, ccp.Letra, ccp.Punto, ccp.Numero, ccp.Total, ccp.Saldo, ccp.Fecha, ccp.Vencimiento, ccp.Vencimiento1, Impre = CASE ISNULL(i.Rechazado, 0) WHEN 1 THEN 'CHR' ELSE ccp.Impre END, ccp.NroInterno, ccp.Clave, ccp.Pago, ccp.Paridad, ccp.MarcaVirtual FROM CtaCtePrv ccp LEFT OUTER JOIN IvaComp i ON i.NroInterno = ccp.NroInterno WHERE ccp.Proveedor = '" & proveedor.Trim() & "' AND ccp.Saldo <> 0 And ISNULL(ccp.MarcaVirtual, '') <> 'X' ORDER BY ccp.Proveedor, ccp.OrdFecha, ccp.Numero"
         Dim dr As New SqlDataAdapter(cm, cn)
@@ -514,6 +514,12 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
                 AcumPesosOrig = 0
                 AcumPesosOrigII = 0
 
+                varRetIbI = 0
+                varRetIbII = 0
+                varRetIb = 0
+                varRetIva = 0
+                varRetGan = 0
+
                 varTotal = 0
                 varSaldo = 0
                 varTotalUs = 0
@@ -639,11 +645,11 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
 
                         End If
 
-                        varRetIbI = 0
-                        varRetIbII = 0
-                        varRetIb = 0
-                        varRetIva = 0
-                        varRetGan = 0
+                        'varRetIbI = 0
+                        'varRetIbII = 0
+                        'varRetIb = 0
+                        'varRetIva = 0
+                        'varRetGan = 0
 
                         '
                         'calcula el neto para el calculo de las retenciones
