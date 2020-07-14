@@ -80,6 +80,7 @@
     <Compile Include="Interfases\IConsultaCambios.vb" />
     <Compile Include="Interfases\IConsultaTerminado.vb" />
     <Compile Include="Interfases\IConsulta_Orden_Trabajo.vb" />
+    <Compile Include="Interfases\INotificacionCambios.vb" />
     <Compile Include="Maestro\Consulta de revisiones de ensayos.Designer.vb">
       <DependentUpon>Consulta de revisiones de ensayos.vb</DependentUpon>
     </Compile>

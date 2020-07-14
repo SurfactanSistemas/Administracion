@@ -389,7 +389,7 @@ Partial Class PreciosClienteProducto
         Me.dgvFacturas.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.dgvFacturas.Location = New System.Drawing.Point(5, 216)
         Me.dgvFacturas.Name = "dgvFacturas"
-        Me.dgvFacturas.OrdenamientoColumnasHabilitado = True
+        Me.dgvFacturas.OrdenamientoColumnasHabilitado = False
         Me.dgvFacturas.ReadOnly = True
         Me.dgvFacturas.RowHeadersWidth = 15
         Me.dgvFacturas.RowTemplate.Height = 20
@@ -406,6 +406,7 @@ Partial Class PreciosClienteProducto
         Me.Fecha.HeaderText = "Fecha"
         Me.Fecha.Name = "Fecha"
         Me.Fecha.ReadOnly = True
+        Me.Fecha.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
         'Factura
         '
@@ -416,6 +417,7 @@ Partial Class PreciosClienteProducto
         Me.Factura.HeaderText = "Factura"
         Me.Factura.Name = "Factura"
         Me.Factura.ReadOnly = True
+        Me.Factura.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
         'Precio
         '
@@ -425,6 +427,7 @@ Partial Class PreciosClienteProducto
         Me.Precio.HeaderText = "Precio"
         Me.Precio.Name = "Precio"
         Me.Precio.ReadOnly = True
+        Me.Precio.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
         'Cantidad
         '
@@ -434,6 +437,7 @@ Partial Class PreciosClienteProducto
         Me.Cantidad.HeaderText = "Cantidad"
         Me.Cantidad.Name = "Cantidad"
         Me.Cantidad.ReadOnly = True
+        Me.Cantidad.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
         'PreciosClienteProducto
         '

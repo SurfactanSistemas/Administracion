@@ -170,7 +170,7 @@ Partial Class PreciosPorCliente
         Me.dgvClientes.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.dgvClientes.Location = New System.Drawing.Point(3, 51)
         Me.dgvClientes.Name = "dgvClientes"
-        Me.dgvClientes.OrdenamientoColumnasHabilitado = True
+        Me.dgvClientes.OrdenamientoColumnasHabilitado = False
         Me.dgvClientes.ReadOnly = True
         Me.dgvClientes.RowHeadersWidth = 15
         Me.dgvClientes.RowTemplate.Height = 20
@@ -186,7 +186,8 @@ Partial Class PreciosPorCliente
         Me.Cliente.HeaderText = "Cliente"
         Me.Cliente.Name = "Cliente"
         Me.Cliente.ReadOnly = True
-        Me.Cliente.Width = 64
+        Me.Cliente.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Cliente.Width = 45
         '
         'Razon
         '
@@ -195,6 +196,7 @@ Partial Class PreciosPorCliente
         Me.Razon.HeaderText = "Razon"
         Me.Razon.Name = "Razon"
         Me.Razon.ReadOnly = True
+        Me.Razon.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
         'NumProd
         '
@@ -203,7 +205,8 @@ Partial Class PreciosPorCliente
         Me.NumProd.HeaderText = "Num. Prod."
         Me.NumProd.Name = "NumProd"
         Me.NumProd.ReadOnly = True
-        Me.NumProd.Width = 85
+        Me.NumProd.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.NumProd.Width = 66
         '
         'BackgroundWorker1
         '

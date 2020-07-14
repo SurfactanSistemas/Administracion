@@ -1,7 +1,7 @@
 ﻿Imports Util.Clases.Query
 Imports Util.Clases.Helper
 
-Public Class PreciosPorClienteProductos
+Public Class PreciosPorClienteProductos : Implements INotificacionCambios
 
     Private WCliente As String = ""
 
@@ -31,7 +31,7 @@ Public Class PreciosPorClienteProductos
 
         BackgroundWorker1.ReportProgress(1, WClienteDatos)
 
-        Dim WProductos As DataTable = GetAll("SELECT Producto, Tipo, Descripcion, Estado = CASE Estado WHEN '2' THEN 'COTIZACIÓN' WHEN '1' THEN 'HISTÓRICO' ELSE 'ACTIVO' END, Operador = '' FROM (SELECT Terminado As Producto, Tipo = 'T', Descripcion, ISNULL(Estado, 0) As Estado FROM Precios WHERE Cliente = '" & WCliente & "' UNION SELECT pmp.Articulo AS Producto, Tipo = 'M', Descripcion = CASE WHEN ISNULL(a.DescriComercial,'') = '' THEN a.Descripcion ELSE a.DescriComercial END, ISNULL(Estado, 0) As Estado  FROM PreciosMp pmp INNER JOIN Articulo a ON a.Codigo = pmp.Articulo WHERE Cliente = '" & WCliente & "') AS p ORDER BY p.Producto")
+        Dim WProductos As DataTable = GetAll("SELECT Producto, Tipo, Descripcion, Estado = CASE Estado WHEN '2' THEN 'COTIZACIÓN' WHEN '1' THEN 'HISTÓRICO' ELSE 'ACTIVO' END, Fecha, Operador = '' FROM (SELECT Terminado As Producto, Tipo = 'T', Descripcion, ISNULL(Estado, 0) As Estado, Fecha = SUBSTRING(Fecha, 4, 2) + '/' + LEFT(Fecha, 2) + '/' + RIGHT(Fecha, 4) FROM Precios WHERE Cliente = '" & WCliente & "' UNION SELECT pmp.Articulo AS Producto, Tipo = 'M', Descripcion = CASE WHEN ISNULL(a.DescriComercial,'') = '' THEN a.Descripcion ELSE a.DescriComercial END, ISNULL(Estado, 0) As Estado, Fecha = SUBSTRING(pmp.Fecha, 4, 2) + '/' + LEFT(pmp.Fecha, 2) + '/' + RIGHT(pmp.Fecha, 4) FROM PreciosMp pmp INNER JOIN Articulo a ON a.Codigo = pmp.Articulo WHERE Cliente = '" & WCliente & "') AS p ORDER BY p.Producto")
 
         BackgroundWorker1.ReportProgress(2, WProductos)
 
@@ -101,5 +101,15 @@ Public Class PreciosPorClienteProductos
             .Show(Me)
         End With
 
+    End Sub
+
+    Public Sub NotificarCambios() Implements INotificacionCambios.NotificarCambios
+        If Not BackgroundWorker1.IsBusy Then BackgroundWorker1.RunWorkerAsync()
+    End Sub
+
+    Private Sub bntNuevo_Click(sender As Object, e As EventArgs) Handles bntNuevo.Click
+        With New PreciosClienteProducto(txtCliente.Text)
+            .Show(Me)
+        End With
     End Sub
 End Class

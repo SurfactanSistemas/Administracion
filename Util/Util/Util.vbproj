@@ -133,6 +133,7 @@
     </Compile>
     <Compile Include="Clases\Conexion.vb" />
     <Compile Include="Clases\Enumeraciones.vb" />
+    <Compile Include="Clases\ExtMethods.vb" />
     <Compile Include="Clases\Globales.vb" />
     <Compile Include="Clases\Helper.vb" />
     <Compile Include="Clases\Normalizaciones.vb" />

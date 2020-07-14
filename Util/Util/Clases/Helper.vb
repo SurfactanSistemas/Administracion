@@ -7,6 +7,7 @@ Imports Microsoft.Office.Interop.Outlook
 Namespace Clases
 
     Public Class Helper
+
         Public Shared Function Right(ByVal txt As String, ByVal lng As Integer) As String
             Return Microsoft.VisualBasic.Right(txt, lng)
         End Function
@@ -719,7 +720,10 @@ Namespace Clases
             Return strNombre
         End Function
 
+        Public Shared Function Mid(ByVal txt As String, ByVal start As Integer, ByVal length As Byte) As String
+            Return Microsoft.VisualBasic.Mid(txt, start, length)
+        End Function
+
     End Class
 
-    
 End Namespace

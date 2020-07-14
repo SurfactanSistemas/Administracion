@@ -22,16 +22,20 @@ Partial Class PreciosPorClienteProductos
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.label1 = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.rbReventa = New System.Windows.Forms.RadioButton()
+        Me.rbTerminados = New System.Windows.Forms.RadioButton()
+        Me.rbTodos = New System.Windows.Forms.RadioButton()
         Me.lblRazon = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtCliente = New System.Windows.Forms.TextBox()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txtFiltrar = New System.Windows.Forms.TextBox()
         Me.Button1 = New System.Windows.Forms.Button()
@@ -44,10 +48,6 @@ Partial Class PreciosPorClienteProductos
         Me.Operador = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Estado = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.rbTodos = New System.Windows.Forms.RadioButton()
-        Me.rbTerminados = New System.Windows.Forms.RadioButton()
-        Me.rbReventa = New System.Windows.Forms.RadioButton()
-        Me.Label5 = New System.Windows.Forms.Label()
         Me.panel1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -124,6 +124,39 @@ Partial Class PreciosPorClienteProductos
         Me.Panel2.Size = New System.Drawing.Size(716, 97)
         Me.Panel2.TabIndex = 0
         '
+        'rbReventa
+        '
+        Me.rbReventa.AutoSize = True
+        Me.rbReventa.Location = New System.Drawing.Point(366, 69)
+        Me.rbReventa.Name = "rbReventa"
+        Me.rbReventa.Size = New System.Drawing.Size(76, 17)
+        Me.rbReventa.TabIndex = 3
+        Me.rbReventa.TabStop = True
+        Me.rbReventa.Text = "REVENTA"
+        Me.rbReventa.UseVisualStyleBackColor = True
+        '
+        'rbTerminados
+        '
+        Me.rbTerminados.AutoSize = True
+        Me.rbTerminados.Location = New System.Drawing.Point(182, 69)
+        Me.rbTerminados.Name = "rbTerminados"
+        Me.rbTerminados.Size = New System.Drawing.Size(168, 17)
+        Me.rbTerminados.TabIndex = 3
+        Me.rbTerminados.TabStop = True
+        Me.rbTerminados.Text = "PRODUCTOS TERMINADOS"
+        Me.rbTerminados.UseVisualStyleBackColor = True
+        '
+        'rbTodos
+        '
+        Me.rbTodos.AutoSize = True
+        Me.rbTodos.Location = New System.Drawing.Point(103, 69)
+        Me.rbTodos.Name = "rbTodos"
+        Me.rbTodos.Size = New System.Drawing.Size(63, 17)
+        Me.rbTodos.TabIndex = 3
+        Me.rbTodos.TabStop = True
+        Me.rbTodos.Text = "TODOS"
+        Me.rbTodos.UseVisualStyleBackColor = True
+        '
         'lblRazon
         '
         Me.lblRazon.BackColor = System.Drawing.Color.Cyan
@@ -151,6 +184,15 @@ Partial Class PreciosPorClienteProductos
         Me.txtCliente.Name = "txtCliente"
         Me.txtCliente.Size = New System.Drawing.Size(68, 20)
         Me.txtCliente.TabIndex = 1
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(16, 71)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(61, 13)
+        Me.Label5.TabIndex = 2
+        Me.Label5.Text = "MOSTRAR"
         '
         'Label3
         '
@@ -199,20 +241,20 @@ Partial Class PreciosPorClienteProductos
         Me.dgvProductos.AllowUserToDeleteRows = False
         Me.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvProductos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Producto, Me.Descripcion, Me.Actualizado_el, Me.Operador, Me.Tipo, Me.Estado})
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvProductos.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvProductos.DefaultCellStyle = DataGridViewCellStyle2
         Me.dgvProductos.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvProductos.DoubleBuffered = True
         Me.dgvProductos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.dgvProductos.Location = New System.Drawing.Point(3, 100)
         Me.dgvProductos.Name = "dgvProductos"
-        Me.dgvProductos.OrdenamientoColumnasHabilitado = True
+        Me.dgvProductos.OrdenamientoColumnasHabilitado = False
         Me.dgvProductos.ReadOnly = True
         Me.dgvProductos.RowHeadersWidth = 15
         Me.dgvProductos.RowTemplate.Height = 20
@@ -228,7 +270,8 @@ Partial Class PreciosPorClienteProductos
         Me.Producto.HeaderText = "Producto"
         Me.Producto.Name = "Producto"
         Me.Producto.ReadOnly = True
-        Me.Producto.Width = 75
+        Me.Producto.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Producto.Width = 56
         '
         'Descripcion
         '
@@ -237,17 +280,21 @@ Partial Class PreciosPorClienteProductos
         Me.Descripcion.HeaderText = "Descripcion"
         Me.Descripcion.Name = "Descripcion"
         Me.Descripcion.ReadOnly = True
+        Me.Descripcion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
         'Actualizado_el
         '
         Me.Actualizado_el.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Actualizado_el.DataPropertyName = "Actualizado_el"
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Actualizado_el.DefaultCellStyle = DataGridViewCellStyle3
+        Me.Actualizado_el.DataPropertyName = "Fecha"
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle1.Format = "D"
+        DataGridViewCellStyle1.NullValue = Nothing
+        Me.Actualizado_el.DefaultCellStyle = DataGridViewCellStyle1
         Me.Actualizado_el.HeaderText = "Actualizado el"
         Me.Actualizado_el.Name = "Actualizado_el"
         Me.Actualizado_el.ReadOnly = True
-        Me.Actualizado_el.Width = 98
+        Me.Actualizado_el.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Actualizado_el.Width = 79
         '
         'Operador
         '
@@ -256,7 +303,8 @@ Partial Class PreciosPorClienteProductos
         Me.Operador.HeaderText = "Operador"
         Me.Operador.Name = "Operador"
         Me.Operador.ReadOnly = True
-        Me.Operador.Width = 76
+        Me.Operador.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Operador.Width = 57
         '
         'Tipo
         '
@@ -264,6 +312,7 @@ Partial Class PreciosPorClienteProductos
         Me.Tipo.HeaderText = "Tipo"
         Me.Tipo.Name = "Tipo"
         Me.Tipo.ReadOnly = True
+        Me.Tipo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.Tipo.Visible = False
         '
         'Estado
@@ -273,49 +322,8 @@ Partial Class PreciosPorClienteProductos
         Me.Estado.HeaderText = "Estado"
         Me.Estado.Name = "Estado"
         Me.Estado.ReadOnly = True
-        Me.Estado.Width = 65
-        '
-        'rbTodos
-        '
-        Me.rbTodos.AutoSize = True
-        Me.rbTodos.Location = New System.Drawing.Point(103, 69)
-        Me.rbTodos.Name = "rbTodos"
-        Me.rbTodos.Size = New System.Drawing.Size(63, 17)
-        Me.rbTodos.TabIndex = 3
-        Me.rbTodos.TabStop = True
-        Me.rbTodos.Text = "TODOS"
-        Me.rbTodos.UseVisualStyleBackColor = True
-        '
-        'rbTerminados
-        '
-        Me.rbTerminados.AutoSize = True
-        Me.rbTerminados.Location = New System.Drawing.Point(182, 69)
-        Me.rbTerminados.Name = "rbTerminados"
-        Me.rbTerminados.Size = New System.Drawing.Size(168, 17)
-        Me.rbTerminados.TabIndex = 3
-        Me.rbTerminados.TabStop = True
-        Me.rbTerminados.Text = "PRODUCTOS TERMINADOS"
-        Me.rbTerminados.UseVisualStyleBackColor = True
-        '
-        'rbReventa
-        '
-        Me.rbReventa.AutoSize = True
-        Me.rbReventa.Location = New System.Drawing.Point(366, 69)
-        Me.rbReventa.Name = "rbReventa"
-        Me.rbReventa.Size = New System.Drawing.Size(76, 17)
-        Me.rbReventa.TabIndex = 3
-        Me.rbReventa.TabStop = True
-        Me.rbReventa.Text = "REVENTA"
-        Me.rbReventa.UseVisualStyleBackColor = True
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(16, 71)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(61, 13)
-        Me.Label5.TabIndex = 2
-        Me.Label5.Text = "MOSTRAR"
+        Me.Estado.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Estado.Width = 46
         '
         'PreciosPorClienteProductos
         '
@@ -350,14 +358,14 @@ Partial Class PreciosPorClienteProductos
     Friend WithEvents lblRazon As System.Windows.Forms.Label
     Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
     Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents rbReventa As System.Windows.Forms.RadioButton
+    Friend WithEvents rbTerminados As System.Windows.Forms.RadioButton
+    Friend WithEvents rbTodos As System.Windows.Forms.RadioButton
+    Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents Producto As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Actualizado_el As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Operador As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Tipo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Estado As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents rbReventa As System.Windows.Forms.RadioButton
-    Friend WithEvents rbTerminados As System.Windows.Forms.RadioButton
-    Friend WithEvents rbTodos As System.Windows.Forms.RadioButton
-    Friend WithEvents Label5 As System.Windows.Forms.Label
 End Class
