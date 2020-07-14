@@ -56,7 +56,7 @@ Public Class Recibos
     Dim commonEventsHandler As New CommonEventsHandler
 
     Private WEnviarHojaCalculoDifCambio As Boolean = False
-    
+
     Private Sub Recibos_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
 
         Label2.Text = Globals.NombreEmpresa()
@@ -5589,7 +5589,7 @@ Public Class Recibos
         MsgBox("El interes a pagar es de " + Str$(ZZSuma), MsgBoxStyle.Information, "Emision de Recibos")
 
     End Sub
-    
+
     Private Sub txtFechaAux_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtFechaAux.KeyDown
 
         If e.KeyData = Keys.Enter Then
@@ -5901,7 +5901,7 @@ Public Class Recibos
 
     Private Sub gridFormasPago2_CellLeave(sender As Object, e As DataGridViewCellEventArgs) Handles gridFormasPago2.CellLeave
         If e.ColumnIndex = 3 Then
-            
+
         End If
     End Sub
 
