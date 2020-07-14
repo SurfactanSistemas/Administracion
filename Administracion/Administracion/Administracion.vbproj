@@ -1980,6 +1980,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Firma.JPG" />
+    <None Include="Resources\exm.png" />
     <None Include="Resources\Exito.png" />
     <None Include="Resources\Error.png" />
     <None Include="Resources\internet.png" />

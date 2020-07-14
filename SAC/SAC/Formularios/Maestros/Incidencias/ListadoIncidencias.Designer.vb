@@ -23,12 +23,14 @@ Partial Class ListadoIncidencias
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.TxtBuscador = New System.Windows.Forms.TextBox()
         Me.GroupBox7 = New System.Windows.Forms.GroupBox()
         Me.rbTipoPT = New System.Windows.Forms.RadioButton()
         Me.rbTipoMP = New System.Windows.Forms.RadioButton()
@@ -81,8 +83,6 @@ Partial Class ListadoIncidencias
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.CopiarConCabecerasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CopiarSóloDatosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TxtBuscador = New System.Windows.Forms.TextBox()
-        Me.Label8 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox7.SuspendLayout()
@@ -155,6 +155,22 @@ Partial Class ListadoIncidencias
         Me.GroupBox1.TabIndex = 4
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Parámetros"
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(6, 206)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(52, 13)
+        Me.Label8.TabIndex = 7
+        Me.Label8.Text = "Buscador"
+        '
+        'TxtBuscador
+        '
+        Me.TxtBuscador.Location = New System.Drawing.Point(7, 222)
+        Me.TxtBuscador.Name = "TxtBuscador"
+        Me.TxtBuscador.Size = New System.Drawing.Size(485, 20)
+        Me.TxtBuscador.TabIndex = 6
         '
         'GroupBox7
         '
@@ -339,7 +355,7 @@ Partial Class ListadoIncidencias
         '
         Me.clbTipos.CheckOnClick = True
         Me.clbTipos.FormattingEnabled = True
-        Me.clbTipos.Items.AddRange(New Object() {"TODAS", "INCIDENCIA GENERAL MP/PT", "INCIDENCIA POR RECHAZO EN RECEPCIÓN"})
+        Me.clbTipos.Items.AddRange(New Object() {"TODAS", "INCIDENCIA GENERAL MP/PT", "INCIDENTE EN RECEPCIÓN"})
         Me.clbTipos.Location = New System.Drawing.Point(16, 18)
         Me.clbTipos.Name = "clbTipos"
         Me.clbTipos.Size = New System.Drawing.Size(164, 94)
@@ -501,8 +517,8 @@ Partial Class ListadoIncidencias
         '
         Me.Anio.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Anio.DataPropertyName = "Anio"
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Anio.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Anio.DefaultCellStyle = DataGridViewCellStyle1
         Me.Anio.HeaderText = "Año"
         Me.Anio.MaxInputLength = 4
         Me.Anio.Name = "Anio"
@@ -513,8 +529,8 @@ Partial Class ListadoIncidencias
         '
         Me.Numero.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Numero.DataPropertyName = "Numero"
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Numero.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Numero.DefaultCellStyle = DataGridViewCellStyle2
         Me.Numero.HeaderText = "Numero"
         Me.Numero.Name = "Numero"
         Me.Numero.ReadOnly = True
@@ -668,22 +684,6 @@ Partial Class ListadoIncidencias
         Me.CopiarSóloDatosToolStripMenuItem.Name = "CopiarSóloDatosToolStripMenuItem"
         Me.CopiarSóloDatosToolStripMenuItem.Size = New System.Drawing.Size(228, 22)
         Me.CopiarSóloDatosToolStripMenuItem.Text = "Copiar Sólo Datos"
-        '
-        'TxtBuscador
-        '
-        Me.TxtBuscador.Location = New System.Drawing.Point(7, 222)
-        Me.TxtBuscador.Name = "TxtBuscador"
-        Me.TxtBuscador.Size = New System.Drawing.Size(485, 20)
-        Me.TxtBuscador.TabIndex = 6
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(6, 206)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(52, 13)
-        Me.Label8.TabIndex = 7
-        Me.Label8.Text = "Buscador"
         '
         'ListadoIncidencias
         '

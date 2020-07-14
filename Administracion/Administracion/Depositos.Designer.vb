@@ -30,25 +30,20 @@ Partial Class Depositos
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.gridCheques = New System.Windows.Forms.DataGridView()
-        Me.tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.numero = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.nombre = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.importe = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ClaveCheque = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.rbChElectronicos = New System.Windows.Forms.RadioButton()
+        Me.rbChFisicos = New System.Windows.Forms.RadioButton()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.rbVentaCheques = New System.Windows.Forms.RadioButton()
         Me.rbDepósito = New System.Windows.Forms.RadioButton()
         Me.btnEliminarFila = New System.Windows.Forms.Button()
+        Me.lstSeleccion = New Administracion.CustomListBox()
         Me.txtFechaAcreditacion = New System.Windows.Forms.MaskedTextBox()
         Me.txtFecha = New System.Windows.Forms.MaskedTextBox()
-        Me.txtAyuda = New System.Windows.Forms.TextBox()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.lstSeleccion = New Administracion.CustomListBox()
         Me.txtImporte = New Administracion.CustomTextBox()
         Me.CustomLabel3 = New Administracion.CustomLabel()
         Me.CustomLabel4 = New Administracion.CustomLabel()
@@ -62,20 +57,26 @@ Partial Class Depositos
         Me.CustomLabel6 = New Administracion.CustomLabel()
         Me.lstFiltrado = New Administracion.CustomListBox()
         Me.lstConsulta = New Administracion.CustomListBox()
+        Me.txtAyuda = New System.Windows.Forms.TextBox()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.btnCerrar = New Administracion.CustomButton()
         Me.btnConsulta = New Administracion.CustomButton()
         Me.btnChequeTerceros = New Administracion.CustomButton()
         Me.btnLimpiar = New Administracion.CustomButton()
         Me.btnImpresion = New Administracion.CustomButton()
         Me.btnAgregar = New Administracion.CustomButton()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.rbChFisicos = New System.Windows.Forms.RadioButton()
-        Me.rbChElectronicos = New System.Windows.Forms.RadioButton()
+        Me.tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.numero = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.nombre = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.importe = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ClaveCheque = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Virtual = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.gridCheques, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'gridCheques
@@ -90,7 +91,7 @@ Partial Class Depositos
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.gridCheques.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.gridCheques.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.gridCheques.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.tipo, Me.numero, Me.fecha, Me.nombre, Me.importe, Me.ClaveCheque})
+        Me.gridCheques.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.tipo, Me.numero, Me.fecha, Me.nombre, Me.importe, Me.ClaveCheque, Me.Virtual})
         DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window
         DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -115,56 +116,6 @@ Partial Class Depositos
         Me.gridCheques.Size = New System.Drawing.Size(446, 206)
         Me.gridCheques.StandardTab = True
         Me.gridCheques.TabIndex = 0
-        '
-        'tipo
-        '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.tipo.DefaultCellStyle = DataGridViewCellStyle2
-        Me.tipo.HeaderText = "Tipo"
-        Me.tipo.MaxInputLength = 31
-        Me.tipo.Name = "tipo"
-        Me.tipo.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.tipo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.tipo.Width = 50
-        '
-        'numero
-        '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.numero.DefaultCellStyle = DataGridViewCellStyle3
-        Me.numero.HeaderText = "Numero"
-        Me.numero.Name = "numero"
-        Me.numero.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.numero.Width = 80
-        '
-        'fecha
-        '
-        Me.fecha.HeaderText = "Fecha"
-        Me.fecha.Name = "fecha"
-        Me.fecha.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.fecha.Width = 80
-        '
-        'nombre
-        '
-        Me.nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.nombre.HeaderText = "Nombre"
-        Me.nombre.Name = "nombre"
-        Me.nombre.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'importe
-        '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.importe.DefaultCellStyle = DataGridViewCellStyle4
-        Me.importe.HeaderText = "Importe"
-        Me.importe.Name = "importe"
-        Me.importe.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.importe.Width = 110
-        '
-        'ClaveCheque
-        '
-        Me.ClaveCheque.HeaderText = "ClaveCheque"
-        Me.ClaveCheque.Name = "ClaveCheque"
-        Me.ClaveCheque.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.ClaveCheque.Visible = False
         '
         'Panel1
         '
@@ -228,6 +179,40 @@ Partial Class Depositos
         Me.Panel2.Size = New System.Drawing.Size(772, 373)
         Me.Panel2.TabIndex = 18
         '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.rbChElectronicos)
+        Me.GroupBox2.Controls.Add(Me.rbChFisicos)
+        Me.GroupBox2.ForeColor = System.Drawing.SystemColors.Control
+        Me.GroupBox2.Location = New System.Drawing.Point(376, 12)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(77, 111)
+        Me.GroupBox2.TabIndex = 23
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Tipos de cheques"
+        '
+        'rbChElectronicos
+        '
+        Me.rbChElectronicos.AutoSize = True
+        Me.rbChElectronicos.Location = New System.Drawing.Point(5, 65)
+        Me.rbChElectronicos.Name = "rbChElectronicos"
+        Me.rbChElectronicos.Size = New System.Drawing.Size(55, 17)
+        Me.rbChElectronicos.TabIndex = 1
+        Me.rbChElectronicos.Text = "Electr."
+        Me.rbChElectronicos.UseVisualStyleBackColor = True
+        '
+        'rbChFisicos
+        '
+        Me.rbChFisicos.AutoSize = True
+        Me.rbChFisicos.Checked = True
+        Me.rbChFisicos.Location = New System.Drawing.Point(6, 31)
+        Me.rbChFisicos.Name = "rbChFisicos"
+        Me.rbChFisicos.Size = New System.Drawing.Size(57, 17)
+        Me.rbChFisicos.TabIndex = 0
+        Me.rbChFisicos.TabStop = True
+        Me.rbChFisicos.Text = "Fisicos"
+        Me.rbChFisicos.UseVisualStyleBackColor = True
+        '
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.rbVentaCheques)
@@ -271,6 +256,19 @@ Partial Class Depositos
         Me.btnEliminarFila.Text = "Eliminar Fila"
         Me.btnEliminarFila.UseVisualStyleBackColor = True
         '
+        'lstSeleccion
+        '
+        Me.lstSeleccion.Cleanable = False
+        Me.lstSeleccion.EnterIndex = -1
+        Me.lstSeleccion.FormattingEnabled = True
+        Me.lstSeleccion.Items.AddRange(New Object() {"Bancos", "Cheques de Terceros"})
+        Me.lstSeleccion.LabelAssociationKey = -1
+        Me.lstSeleccion.Location = New System.Drawing.Point(459, 9)
+        Me.lstSeleccion.Name = "lstSeleccion"
+        Me.lstSeleccion.Size = New System.Drawing.Size(305, 355)
+        Me.lstSeleccion.TabIndex = 14
+        Me.lstSeleccion.Visible = False
+        '
         'txtFechaAcreditacion
         '
         Me.txtFechaAcreditacion.Location = New System.Drawing.Point(139, 61)
@@ -292,27 +290,6 @@ Partial Class Depositos
         Me.txtFecha.TabIndex = 17
         Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtFecha.ValidatingType = GetType(Date)
-        '
-        'txtAyuda
-        '
-        Me.txtAyuda.Location = New System.Drawing.Point(459, 9)
-        Me.txtAyuda.Name = "txtAyuda"
-        Me.txtAyuda.Size = New System.Drawing.Size(304, 20)
-        Me.txtAyuda.TabIndex = 19
-        Me.txtAyuda.Visible = False
-        '
-        'lstSeleccion
-        '
-        Me.lstSeleccion.Cleanable = False
-        Me.lstSeleccion.EnterIndex = -1
-        Me.lstSeleccion.FormattingEnabled = True
-        Me.lstSeleccion.Items.AddRange(New Object() {"Bancos", "Cheques de Terceros"})
-        Me.lstSeleccion.LabelAssociationKey = -1
-        Me.lstSeleccion.Location = New System.Drawing.Point(459, 9)
-        Me.lstSeleccion.Name = "lstSeleccion"
-        Me.lstSeleccion.Size = New System.Drawing.Size(305, 355)
-        Me.lstSeleccion.TabIndex = 14
-        Me.lstSeleccion.Visible = False
         '
         'txtImporte
         '
@@ -479,6 +456,14 @@ Partial Class Depositos
         Me.lstConsulta.TabIndex = 8
         Me.lstConsulta.Visible = False
         '
+        'txtAyuda
+        '
+        Me.txtAyuda.Location = New System.Drawing.Point(459, 9)
+        Me.txtAyuda.Name = "txtAyuda"
+        Me.txtAyuda.Size = New System.Drawing.Size(304, 20)
+        Me.txtAyuda.TabIndex = 19
+        Me.txtAyuda.Visible = False
+        '
         'btnCerrar
         '
         Me.btnCerrar.BackgroundImage = Global.Administracion.My.Resources.Resources.Salir2
@@ -605,39 +590,62 @@ Partial Class Depositos
         Me.ToolTip1.SetToolTip(Me.btnAgregar, "Aceptar")
         Me.btnAgregar.UseVisualStyleBackColor = True
         '
-        'GroupBox2
+        'tipo
         '
-        Me.GroupBox2.Controls.Add(Me.rbChElectronicos)
-        Me.GroupBox2.Controls.Add(Me.rbChFisicos)
-        Me.GroupBox2.ForeColor = System.Drawing.SystemColors.Control
-        Me.GroupBox2.Location = New System.Drawing.Point(376, 12)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(77, 111)
-        Me.GroupBox2.TabIndex = 23
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Tipos de cheques"
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.tipo.DefaultCellStyle = DataGridViewCellStyle2
+        Me.tipo.HeaderText = "Tipo"
+        Me.tipo.MaxInputLength = 31
+        Me.tipo.Name = "tipo"
+        Me.tipo.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.tipo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.tipo.Width = 50
         '
-        'rbChFisicos
+        'numero
         '
-        Me.rbChFisicos.AutoSize = True
-        Me.rbChFisicos.Checked = True
-        Me.rbChFisicos.Location = New System.Drawing.Point(6, 31)
-        Me.rbChFisicos.Name = "rbChFisicos"
-        Me.rbChFisicos.Size = New System.Drawing.Size(57, 17)
-        Me.rbChFisicos.TabIndex = 0
-        Me.rbChFisicos.TabStop = True
-        Me.rbChFisicos.Text = "Fisicos"
-        Me.rbChFisicos.UseVisualStyleBackColor = True
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.numero.DefaultCellStyle = DataGridViewCellStyle3
+        Me.numero.HeaderText = "Numero"
+        Me.numero.Name = "numero"
+        Me.numero.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.numero.Width = 80
         '
-        'rbChElectronicos
+        'fecha
         '
-        Me.rbChElectronicos.AutoSize = True
-        Me.rbChElectronicos.Location = New System.Drawing.Point(5, 65)
-        Me.rbChElectronicos.Name = "rbChElectronicos"
-        Me.rbChElectronicos.Size = New System.Drawing.Size(55, 17)
-        Me.rbChElectronicos.TabIndex = 1
-        Me.rbChElectronicos.Text = "Electr."
-        Me.rbChElectronicos.UseVisualStyleBackColor = True
+        Me.fecha.HeaderText = "Fecha"
+        Me.fecha.Name = "fecha"
+        Me.fecha.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.fecha.Width = 80
+        '
+        'nombre
+        '
+        Me.nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.nombre.HeaderText = "Nombre"
+        Me.nombre.Name = "nombre"
+        Me.nombre.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'importe
+        '
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.importe.DefaultCellStyle = DataGridViewCellStyle4
+        Me.importe.HeaderText = "Importe"
+        Me.importe.Name = "importe"
+        Me.importe.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.importe.Width = 110
+        '
+        'ClaveCheque
+        '
+        Me.ClaveCheque.HeaderText = "ClaveCheque"
+        Me.ClaveCheque.Name = "ClaveCheque"
+        Me.ClaveCheque.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.ClaveCheque.Visible = False
+        '
+        'Virtual
+        '
+        Me.Virtual.HeaderText = "Virtual"
+        Me.Virtual.Name = "Virtual"
+        Me.Virtual.ReadOnly = True
+        Me.Virtual.Visible = False
         '
         'Depositos
         '
@@ -662,10 +670,10 @@ Partial Class Depositos
         Me.Panel1.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -698,12 +706,6 @@ Partial Class Depositos
     Friend WithEvents txtAyuda As System.Windows.Forms.TextBox
     Friend WithEvents lstFiltrado As Administracion.CustomListBox
     Friend WithEvents btnChequeTerceros As Administracion.CustomButton
-    Friend WithEvents tipo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents numero As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents fecha As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents nombre As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents importe As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ClaveCheque As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents btnEliminarFila As System.Windows.Forms.Button
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents rbVentaCheques As System.Windows.Forms.RadioButton
@@ -711,4 +713,11 @@ Partial Class Depositos
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents rbChElectronicos As System.Windows.Forms.RadioButton
     Friend WithEvents rbChFisicos As System.Windows.Forms.RadioButton
+    Friend WithEvents tipo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents numero As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents fecha As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents nombre As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents importe As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ClaveCheque As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Virtual As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

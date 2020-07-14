@@ -44,7 +44,7 @@ Public Class ConsultaCheque
         SQLConnector.conexionSql(cn, cm)
 
         Try
-            cm.CommandText = "SELECT r.Numero2, r.Banco2, r.Importe2, r.Fecha, r.Fecha2, r.Recibo, r.Cliente, cli.Razon, r.Cuit FROM Recibos as r, Cliente as cli WHERE r.Cliente = cli.Cliente and Tiporeg= '2' and (Tipo2 = '2' or Tipo2 = '02' or Tipo2 = ' 2') and ISNULL(Numero2,'') LIKE ('%" & cheque & "') order by FechaOrd2"
+            cm.CommandText = "SELECT r.Numero2, r.Banco2, r.Importe2, r.Fecha, r.Fecha2, r.Recibo, r.Cliente, cli.Razon, r.Cuit FROM Recibos as r LEFT OUTER JOIN Cliente as cli ON cli.Cliente = r.Cliente WHERE Tiporeg= '2' and (Tipo2 = '2' or Tipo2 = '02' or Tipo2 = ' 2') and ISNULL(Numero2,'') LIKE ('%" & cheque & "') order by FechaOrd2"
             dr = cm.ExecuteReader()
 
             If dr.HasRows Then

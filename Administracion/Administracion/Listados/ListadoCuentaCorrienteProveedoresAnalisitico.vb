@@ -163,7 +163,7 @@ Public Class ListadoCuentaCorrienteProveedoresAnalisitico
 
         varUno = "{CtaCtePrv.Proveedor} in " + x + txtDesdeProveedor.Text + x + " to " + x + txtHastaProveedor.Text + x
         varDos = " and {CtaCtePrv.ordfecha} in " + x + varDesdeFecha + x + " to " + x + varHastaFecha + x
-        varTres = " and not ({CtaCtePrv.Saldo} in -1.00 to 1.00)"
+        varTres = " and not ({CtaCtePrv.Saldo} in -1.00 to 1.00) and {CtaCtePrv.MarcaVirtual} <> 'X'"
 
         varFormula = varUno + varDos + varTres
 

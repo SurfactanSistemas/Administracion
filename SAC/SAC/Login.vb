@@ -65,6 +65,13 @@ Public Class Login
                         Dim WAsunto As String = Datos(6)
                         Dim WCuerpoMsj As String = Datos(7)
 
+                        If Datos.Length > 2 Then WTipo = Datos(2)
+                        If Datos.Length > 3 Then WNumero = Datos(3)
+                        If Datos.Length > 4 Then WAnio = Datos(4)
+                        If Datos.Length > 5 Then WDirecciones = Datos(5)
+                        If Datos.Length > 6 Then WAsunto = Datos(6)
+                        If Datos.Length > 7 Then WCuerpoMsj = Datos(7)
+
                         Dim frm As New Util.VistaPrevia
 
                         With frm
@@ -112,7 +119,7 @@ Public Class Login
 
                         With frm
 
-                            .Reporte = New ReclamoClienteAvisoMail
+                            .Reporte = New ReclamoClienteAvisoMailII
 
                             .Formula = "{CentroReclamos.Numero} = " & WNumero & ""
 
