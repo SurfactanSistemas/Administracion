@@ -1,8 +1,9 @@
-﻿Imports Util.Clases
+﻿Imports Util
+Imports Util.Clases
 Imports Util.Clases.Query
 Imports Util.Clases.Helper
 
-Public Class PreciosClienteProducto
+Public Class PreciosClienteProducto : Implements Util.IAyudaGeneral
 
     Sub New(Optional ByVal Cliente As String = "", Optional Producto As String = "", Optional ByVal Reventa As Boolean = False)
 
@@ -200,7 +201,7 @@ Public Class PreciosClienteProducto
     End Sub
 
     Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles btnCerrar.Click
-        
+
         Close()
     End Sub
 
@@ -222,5 +223,31 @@ Public Class PreciosClienteProducto
 
     Private Sub PreciosClienteProducto_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If Not {12, 10}.Contains(txtProducto.Text.Replace(" ", "").Length) Then btnLimpiar_Click(Nothing, Nothing)
+    End Sub
+
+    Private Sub txtCliente_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles txtCliente.MouseDoubleClick
+        With New Util.AyudaGeneral(GetAll("SELECT Cliente Codigo, Razon Descripcion FROM Cliente ORDER BY Razon"), "AYUDA CLIENTES")
+            .Show(Me)
+        End With
+    End Sub
+
+    Public Sub _ProcesarAyudaGeneral(row As DataGridViewRow) Implements IAyudaGeneral._ProcesarAyudaGeneral
+        txtCliente.Text = row.Cells("Codigo").Value
+        txtCliente_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+    End Sub
+
+    Private Sub txtProducto_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles txtProducto.MouseDoubleClick
+        Dim WData As DataTable
+
+        If rbTerminado.Checked Then
+            WData = GetAll("SELECT Codigo, Descripcion FROM Terminado ORDER BY Descripion")
+        Else
+            WData = GetAll("SELECT Codigo, Descripcion FROM Articulo ORDER BY Descripion")
+        End If
+
+        With New AyudaGeneral(WData, "Ayuda" & IIf(rbTerminado.Checked, "Productos Terminados", "MP Reventa"))
+            .Show(Me)
+        End With
+
     End Sub
 End Class
