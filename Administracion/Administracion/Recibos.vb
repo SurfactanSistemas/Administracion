@@ -4768,10 +4768,14 @@ Public Class Recibos
 
             With _Mail
 
+                Dim el = .GetInspector
+
                 .To = _to
                 .BCC = _bcc
                 .Subject = _subject
-                .Body = _body
+                '.Body = _body
+
+                .HTMLBody = _body & .HTMLBody
 
                 If Trim(_adjunto) <> "" Then
                     .Attachments.Add(_adjunto)
