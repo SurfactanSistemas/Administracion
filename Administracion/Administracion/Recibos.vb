@@ -1114,6 +1114,9 @@ Public Class Recibos
         For Each row In gridFormasPago2.Rows
 
             With row
+
+                If Val(OrDefault(.Cells("tipo").value, "")) = 2 Then .Cells("banco").Value = _GenerarCodigoBanco(.Cells("banco").Value)
+
                 If Not IsNothing(.Cells(0).Value) AndAlso (Val(.Cells(0).Value) = 2 Or Val(.Cells(0).Value) = 5) Then
 
                     ' Controlamos que no se ingrese un numero = 0 para los cheques.
@@ -3337,6 +3340,9 @@ Public Class Recibos
     End Function
 
     Private Function _GenerarCodigoBanco(ByVal WBanco As String) As String
+
+        If WBanco.Trim = "" Then Return ""
+
         WBanco = WBanco.ToString.Split("/")(0) ' Agarramos el nombre del banco, sin el cod del cliente.
 
         Return WBanco & "/" & Mid(txtCliente.Text, 1, 1) & Val(Mid(txtCliente.Text, 2, 6)).ToString()
