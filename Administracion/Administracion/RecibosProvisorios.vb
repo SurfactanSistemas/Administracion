@@ -546,6 +546,7 @@ Public Class RecibosProvisorios
                     Case 1, 4
                         Continue For
                     Case 2, 7
+                        .Cells("Banco").Value = _GenerarCodigoBanco(.Cells("Banco").Value)
                         Dim WNumero As String = If(.Cells("Numero").Value, "")
                         Dim WFecha As String = If(.Cells("Fecha").Value, "")
                         Dim WBanco As String = If(.Cells("Banco").Value, "")
@@ -1437,10 +1438,12 @@ Public Class RecibosProvisorios
         Return _LecturaCorrecta
     End Function
 
-    Private Function _GenerarCodigoBanco(ByVal _Banco As String) As String
-        _Banco = _Banco.ToString.Split("/")(0) ' Agarramos el nombre del banco, sin el cod del cliente.
+    Private Function _GenerarCodigoBanco(ByVal ZBanco As String) As String
+        If ZBanco.Trim = "" Then Return ""
 
-        Return _Banco & "/" & Mid(txtCliente.Text, 1, 1) & Val(Mid(txtCliente.Text, 2, 6)).ToString()
+        ZBanco = ZBanco.Split("/")(0) ' Agarramos el nombre del banco, sin el cod del cliente.
+
+        Return ZBanco & "/" & Mid(txtCliente.Text, 1, 1) & Val(Mid(txtCliente.Text, 2, 6)).ToString()
     End Function
 
     Private Function _ChequeYaCargado(ByVal ClaveCheque) As Boolean
