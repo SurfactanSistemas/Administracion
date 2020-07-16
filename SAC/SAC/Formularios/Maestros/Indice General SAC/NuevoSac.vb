@@ -293,7 +293,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
     Private Function _TraerEstado(ByVal item As Object) As Object
 
-        Select Case OrDefault(item, 0)
+        Select Case Val(OrDefault(item, 0))
             Case 1
                 Return "Imple."
             Case 2
@@ -1994,13 +1994,14 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
                 WVerRespImple = OrDefault(.Cells("VerResponsableI").Value, 0)
                 WVerFechaImple = OrDefault(.Cells("VerFechaI").Value, 0)
-                WVerDescEstadoImple = OrDefault(.Cells("VerEstadoI").Value, 0)
+                WVerDescEstadoImple = OrDefault(.Cells("VerEstadoI").Value, "")
                 'WDescEstadoImple = _TraerEstado(WVerEstadoImple)
 
                 WVerRespEfect = OrDefault(.Cells("VerResponsableII").Value, 0)
                 WVerFechaEfect = OrDefault(.Cells("VerFechaII").Value, 0)
-                WVerEstadoEfect = OrDefault(.Cells("VerEstadoII").Value, 0)
-                WDescEstadoEfect = _TraerEstado(WVerEstadoImple)
+                WVerEstadoEfect = OrDefault(.Cells("VerEstadoII").Value, "")
+                'WDescEstadoEfect = _TraerEstado(WVerEstadoImple)
+                'WDescEstadoEfect = _TraerEstado(WVerEstadoEfect)
 
                 WVerComentarios = OrDefault(.Cells("VerComentario").Value, "")
 
@@ -2014,7 +2015,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
             WSql = String.Format("INSERT INTO ImpreSacII (Clave, Renglon, Tipo, Numero, Ano, FechaSac, Accion, DescAccion, RespAccion, FechaAccion, RespImple, FechaImple, DescImpleEstado, ImpleComentarios, VerImpleResp, VerImpleEstado, VerImpleFecha, VerEfecResp, VerEfecEstado, VerEfecFecha, VerComentario) " &
                                  " VALUES " &
                                  " ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{20}', '{9}', '{10}', '{11}', '{12}', '{13}', '{14}', '{15}', '{16}', '{17}', '{18}', '{19}')",
-                                 WClave, i, txtTipo.Text, txtNumero.Text, txtAnio.Text, txtFecha.Text, WNroAccion, WDescAccion, WRespAccion, WRespImple, WImpleFecha, WDescEstadoImple, WImpleComentarios, WVerRespImple, WVerDescEstadoImple, WVerFechaImple, WVerRespEfect, WDescEstadoEfect, WVerFechaEfect, WVerComentarios, WFechaAccion)
+                                 WClave, i, txtTipo.Text, txtNumero.Text, txtAnio.Text, txtFecha.Text, WNroAccion, WDescAccion, WRespAccion, WRespImple, WImpleFecha, WDescEstadoImple, WImpleComentarios, WVerRespImple, WVerDescEstadoImple, WVerFechaImple, WVerRespEfect, WVerEstadoEfect, WVerFechaEfect, WVerComentarios, WFechaAccion)
 
             WSQls.Add(WSql)
 
