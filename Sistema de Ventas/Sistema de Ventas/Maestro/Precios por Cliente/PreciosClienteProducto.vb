@@ -207,6 +207,56 @@ Public Class PreciosClienteProducto : Implements Util.IAyudaGeneral
 
     Private Sub btnGrabar_Click(sender As Object, e As EventArgs) Handles btnGrabar.Click
 
+        '
+        ' Validamos los datos dependiendo de que tipo de producto se esté trabajando.
+        '
+        If rbTerminado.Checked Then
+            If Not datosValidosPT() Then Exit Sub
+        Else
+            If Not datosValidosReventa() then Exit Sub
+        End If
+
+        '
+        ' Creamos el Objeto.
+        '
+        Dim WPrecio As New PrecioCliente
+
+        With WPrecio
+            .Cliente = txtCliente.Text
+            .Producto = txtProducto.Text
+            .Descripcion = txtDescComercial.Text
+
+            If rbTerminado.Checked Then
+                Dim WEsFarma As Double = Not Helper._EsPellital AndAlso Val(Helper.Mid(txtProducto.Text, 4, 5) >= 25000 And Val(Helper.Mid(txtProducto.Text, 4, 5) <= 25999))
+                If WEsFarma Then
+                    .Descripcion = lblDescProducto.Text.Trim & " - " & txtDescComercial.Text
+                    .DescripcionFarma = txtDescComercial.Text.Trim
+                End If
+            End If
+
+            .Estado = cmbEstado.SelectedIndex
+            .Fecha = lblUltimaActualizacion.Text
+            .Pago = txtCondicionPago.Text
+            .Precio = txtPrecio.Text
+
+            Dim i As Short = 0
+
+            For Each row As Datagridviewrow In dgvFacturas.Rows
+                .Facturas(i, 0) = OrDefault(row.Cells("Fecha").Value, "")
+                .Facturas(i, 1) = OrDefault(row.Cells("Factura").Value, "")
+                .Facturas(i, 2) = formatonumerico(OrDefault(row.Cells("Precio").Value, ""))
+                .Facturas(i, 3) = formatonumerico(OrDefault(row.Cells("Cantidad").Value, ""))
+                i += 1
+            Next
+
+            For x = i To 4
+                .Facturas(x, 0) = ""
+                .Facturas(x, 1) = ""
+                .Facturas(x, 2) = ""
+                .Facturas(x, 3) = ""
+            Next
+
+        End With
 
         Dim WOwner As INotificacionCambios = TryCast(Owner, INotificacionCambios)
 
@@ -214,6 +264,115 @@ Public Class PreciosClienteProducto : Implements Util.IAyudaGeneral
 
         Close()
     End Sub
+
+    Private Function datosValidosReventa() As Boolean
+
+        '
+        ' Existe Codigo de Producto.
+        '
+        Dim WReventa As DataRow = GetSingle("SELECT Meses as Vida, Reventa FROM Articulo WHERE Codigo = '" & txtProducto.Text & "'")
+
+        If WReventa Is Nothing Then
+            MsgBox("El Producto indicado, no existe.", MsgBoxStyle.Exclamation)
+            Return False
+        End If
+
+        '
+        ' Habilitado para la Reventa.
+        '
+        Dim WHabilitado As Short = Val(OrDefault(WReventa("Reventa"), ""))
+
+        If WHabilitado <= 0 Then
+            MsgBox("El Producto indicado, no se encuentra habilitado para la Reventa.", MsgBoxStyle.Exclamation)
+            Return False
+        End If
+
+        '
+        ' Si Cliente exige control de Vida Util, verifica si se tiene definido en la Ficha del Producto.
+        '
+        Dim WCliente As DataRow = GetSingle("SELECT ImpreVto FROM Cliente WHERE Cliente = '" & txtCliente.Text & "'")
+
+        If WCliente Is Nothing Then
+            MsgBox("El Cliente indicado, no existe.", MsgBoxStyle.Exclamation)
+            Return False
+        End If
+
+        Dim WImpreVto As Short = Val(OrDefault(WCliente("ImpreVto"), ""))
+
+        If WImpreVto > 0 Then
+            Dim WVida As Short = Val(OrDefault(WReventa("Vida"), ""))
+
+            If WVida <= 0 Then
+                MsgBox("Atención! El Cliente exige Vida Util en el Producto y el mismo no se encuentra definido en la Ficha del Codigo '" & txtProducto.Text & "'.", MsgBoxStyle.Information)
+            End If
+
+        End If
+
+        Return True
+
+    End Function
+
+    Private Function datosValidosPT() As Boolean
+
+        '
+        ' Habilitado para la Venta.
+        '
+        Dim WPrefijo As String = Helper.Left(txtProducto.Text, 2).ToUpper
+
+        If Not {"PT", "PE", "YQ", "YF", "YP", "YH"}.Contains(WPrefijo) Then
+            MsgBox("El Producto indicado, no se encuentra habilitado para la Venta.", MsgBoxStyle.Exclamation)
+            Return False
+        End If
+
+        '
+        ' Existe Codigo de Producto.
+        '
+        Dim WTerminado As DataRow = GetSingle("SELECT Vida FROM Terminado WHERE Codigo = '" & txtProducto.Text & "'")
+
+        If WTerminado Is Nothing Then
+            MsgBox("El Producto indicado, no existe.", MsgBoxStyle.Exclamation)
+            Return False
+        End If
+
+        '
+        ' Si Cliente exige control de Vida Util, verifica si se tiene definido en la Ficha del Producto.
+        '
+        Dim WCliente As DataRow = GetSingle("SELECT ImpreVto FROM Cliente WHERE Cliente = '" & txtCliente.Text & "'")
+
+        If WCliente Is Nothing Then
+            MsgBox("El Cliente indicado, no existe.", MsgBoxStyle.Exclamation)
+            Return False
+        End If
+
+        Dim WImpreVto As Short = Val(OrDefault(WCliente("ImpreVto"), ""))
+
+        If WImpreVto > 0 Then
+            Dim WVida As Short = Val(OrDefault(WTerminado("Vida"), ""))
+
+            If WVida <= 0 Then
+                MsgBox("Atención! El Cliente exige Vida Util en el Producto y el mismo no se encuentra definido en la Ficha del Codigo '" & txtProducto.Text & "'.", MsgBoxStyle.Information)
+            End If
+
+        End If
+
+        '
+        ' En caso de que se trate de un Producto Farma, verifica la longitud final de la Descripcion.
+        '
+        Dim WEsFarma As Double = Not Helper._EsPellital AndAlso Val(Helper.Mid(txtProducto.Text, 4, 5) >= 25000 And Val(Helper.Mid(txtProducto.Text, 4, 5) <= 25999))
+
+        If WEsFarma Then
+            Dim WLong As Short = (lblDescProducto.Text.Trim & " - " & txtDescComercial.Text.Trim).Length
+
+            If WLong > 50 Then
+                MsgBox("El Producto es Farma, por tanto el Nombre del Producto + Descripcion Farma, no pueden superar en conjunto los 50 caracteres.", MsgBoxStyle.Exclamation)
+                Return False
+            End If
+
+        End If
+
+        Return True
+
+    End Function
 
     Private Sub btnLimpiar_Click(sender As Object, e As EventArgs) Handles btnLimpiar.Click
         For Each c As Control In {txtCondicionPago, txtDescComercial, txtPrecio, txtProducto, lblDescPago, lblDescProducto, lblDescripcion2, lblRazon, lblRazon, lblUltimaActualizacion}
@@ -237,6 +396,7 @@ Public Class PreciosClienteProducto : Implements Util.IAyudaGeneral
     End Sub
 
     Private Sub txtProducto_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles txtProducto.MouseDoubleClick
+
         Dim WData As DataTable
 
         If rbTerminado.Checked Then
@@ -250,4 +410,40 @@ Public Class PreciosClienteProducto : Implements Util.IAyudaGeneral
         End With
 
     End Sub
+
+    Class PrecioCliente
+        Public ReadOnly Property Clave() As String
+            Get
+                Return Cliente & Producto
+            End Get
+        End Property
+        Public ReadOnly Property WDate() As String
+            Get
+                Return Date.Now.ToString("MM-dd-yyyy")
+            End Get
+        End Property
+
+        Public Cliente As String
+        Public Producto As String
+        
+        Private _Precio As String
+        Public Property Precio() As String
+            Get
+                Return _Precio
+            End Get
+            Set(ByVal value As String)
+                _Precio = formatonumerico(value)
+            End Set
+        End Property
+
+        Public Descripcion As String
+        Public DescripcionFarma As String
+        Public Pago As String
+        Public Fecha As String
+        Public Estado As String
+
+        Public Facturas(0, 3) As String
+
+    End Class
+
 End Class
