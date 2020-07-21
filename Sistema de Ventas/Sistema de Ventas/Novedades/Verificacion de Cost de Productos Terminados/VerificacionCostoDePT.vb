@@ -4,6 +4,9 @@ Imports Util.Clases.Helper
 Public Class VerificacionCostoDePT : Implements IVerificaCostoPT
 
     Private Sub btn_ProcCostosFuturos_Click(sender As Object, e As EventArgs) Handles btn_ProcCostosFuturos.Click
+        'Confirmo los cambios que no se hubiera guardado
+        DGV_Articulos.CommitEdit(DataGridViewDataErrorContexts.Commit)
+
 
         Dim SQLCnslt As String = "DELETE ComparaCostos"
 
