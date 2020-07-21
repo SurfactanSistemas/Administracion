@@ -227,9 +227,11 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
                 Else
                     Variables(i, 1) = OrDefault(.Rows(i - 1).Cells("Variable").Value, "")
                     Variables(i, 2) = OrDefault(.Rows(i - 1).Cells("WValor").Value, "0").ToString.Replace(",", ".")
+
+                    If Val(Variables(i, 2)) = 0 Then Variables(i, 2) = "0"
+
                 End If
                 
-
             Next
         End With
 
@@ -332,7 +334,7 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
 
                     SQLCnslt = "INSERT INTO FormulasVerificadasValores (IDRenglon, Formula, Variable , Valor ,AnalistaLab, ResultadoVerificado, Fila)" &
                     "VALUES('" & RenglonID & "', '" & txtFormula.Text & "', '" & RowDGV.Cells("Variable").Value &
-                        "' , '" & RowDGV.Cells("WValor").Value & "' , '" & WDatos.Item("Operador") & "', ' " & txtValorEstandar.Text & "','" & Fila & "')"
+                        "' , '" & RowDGV.Cells("WValor").Value & "' , '" & WDatos.Item("Operador") & "', '" & txtValorEstandar.Text & "','" & Fila & "')"
 
                     Fila += 1
 
