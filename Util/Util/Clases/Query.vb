@@ -1,5 +1,6 @@
 ﻿Imports System.Configuration
 Imports System.Data.SqlClient
+Imports System.IO
 
 Namespace Clases
 
@@ -92,6 +93,11 @@ Namespace Clases
                         cm.Transaction = trans
 
                         For Each _q As String In q
+
+                            Using sw As New StreamWriter(Environment.SpecialFolder.Desktop & "sql.txt")
+                                sw.WriteLine(_q)
+                            End Using
+
                             cm.CommandText = _q
                             cm.ExecuteNonQuery()
                         Next

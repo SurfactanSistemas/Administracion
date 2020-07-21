@@ -3,7 +3,7 @@ Imports Util.Clases
 Imports Util.Clases.Query
 Imports Util.Clases.Helper
 
-Public Class PreciosClienteProducto : Implements Util.IAyudaGeneral
+Public Class PreciosClienteProducto : Implements IAyudaGeneral
 
     Sub New(Optional ByVal Cliente As String = "", Optional Producto As String = "", Optional ByVal Reventa As Boolean = False)
 
@@ -98,7 +98,7 @@ Public Class PreciosClienteProducto : Implements Util.IAyudaGeneral
 
                     .Text = OrDefault(WDatos("Fecha"), "  /  /    ")
 
-                    .Text = Helper.Mid(.Text, 4, 2) & "/" & Helper.Left(.Text, 2) & "/" & Helper.Right(.Text, 4)
+                    .Text = Mid(.Text, 4, 2) & "/" & Helper.Left(.Text, 2) & "/" & Helper.Right(.Text, 4)
 
                 End With
 
@@ -213,7 +213,7 @@ Public Class PreciosClienteProducto : Implements Util.IAyudaGeneral
         If rbTerminado.Checked Then
             If Not datosValidosPT() Then Exit Sub
         Else
-            If Not datosValidosReventa() then Exit Sub
+            If Not datosValidosReventa() Then Exit Sub
         End If
 
         '
@@ -227,7 +227,7 @@ Public Class PreciosClienteProducto : Implements Util.IAyudaGeneral
             .Descripcion = txtDescComercial.Text
 
             If rbTerminado.Checked Then
-                Dim WEsFarma As Double = Not Helper._EsPellital AndAlso Val(Helper.Mid(txtProducto.Text, 4, 5) >= 25000 And Val(Helper.Mid(txtProducto.Text, 4, 5) <= 25999))
+                Dim WEsFarma As Double = Not _EsPellital() AndAlso Val(Mid(txtProducto.Text, 4, 5) >= 25000 And Val(Mid(txtProducto.Text, 4, 5) <= 25999))
                 If WEsFarma Then
                     .Descripcion = lblDescProducto.Text.Trim & " - " & txtDescComercial.Text
                     .DescripcionFarma = txtDescComercial.Text.Trim
@@ -241,7 +241,7 @@ Public Class PreciosClienteProducto : Implements Util.IAyudaGeneral
 
             Dim i As Short = 0
 
-            For Each row As Datagridviewrow In dgvFacturas.Rows
+            For Each row As DataGridViewRow In dgvFacturas.Rows
                 .Facturas(i, 0) = OrDefault(row.Cells("Fecha").Value, "")
                 .Facturas(i, 1) = OrDefault(row.Cells("Factura").Value, "")
                 .Facturas(i, 2) = formatonumerico(OrDefault(row.Cells("Precio").Value, ""))
@@ -257,6 +257,41 @@ Public Class PreciosClienteProducto : Implements Util.IAyudaGeneral
             Next
 
         End With
+
+        '
+        ' Realizamos la Grabación/Actualización.
+        '
+        Dim ZSql As String = ""
+
+        Dim WTabla As String = IIf(rbTerminado.Checked, "Precios", "PreciosMp")
+        Dim WColumnaProducto As String = IIf(rbTerminado.Checked, "Terminado", "Articulo")
+
+        Dim WExiste As DataRow = GetSingle(String.Format("SELECT Clave FROM {0} WHERE Clave = '{1}'", WTabla, WPrecio.Clave))
+
+        If WExiste Is Nothing Then
+
+            With WPrecio
+                ZSql = String.Format("INSERT INTO " & WTabla & " (Clave, Cliente, {0}, Precio, Descripcion, Fecha1, Factura1, Precio1, Cantidad1, Fecha2, Factura2, Precio2, Cantidad2, Fecha3, Factura3, Precio3, Cantidad3, Fecha4, Factura4, Precio4, Cantidad4, Fecha5, Factura5, Precio5, Cantidad5, WDate, Fecha, Pago, Estado, DescripcionFarma, DescripcionIngles, DescripcionFarmaIngles, PrecioAnterior) " &
+                " VALUES ('{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}','{18}','{19}','{20}','{21}','{22}','{23}','{24}','{25}','{26}','{27}','{28}','{29}','{30}','{31}','{32}','{33}')", WColumnaProducto, .Clave, .Cliente, .Producto, .Precio, .Descripcion, .Facturas(0, 0), .Facturas(0, 1), .Facturas(0, 2), .Facturas(0, 3), .Facturas(1, 0), .Facturas(1, 1), .Facturas(1, 2), .Facturas(1, 3), .Facturas(2, 0), .Facturas(2, 1), .Facturas(2, 2), .Facturas(2, 3), .Facturas(3, 0), .Facturas(3, 1), .Facturas(3, 2), .Facturas(3, 3), .Facturas(4, 0), .Facturas(4, 1), .Facturas(4, 2), .Facturas(4, 3), .WDate, .Fecha, .Pago, .Estado, .DescripcionFarma, "", "", "")
+            End With
+        
+        Else
+
+            With WPrecio
+                If rbTerminado.Checked Then
+                    ZSql = String.Format("UPDATE " & WTabla & " SET " & WColumnaProducto & " = '{0}', Precio = '{1}', Descripcion = '{2}', Fecha1 = '{3}', Factura1 = '{4}', Precio1 = '{5}', Cantidad1 = '{6}', Fecha2 = '{7}', Factura2 = '{8}', Precio2 = '{9}', Cantidad2 = '{10}', Fecha3 = '{11}', Factura3 = '{12}', Precio3 = '{13}', Cantidad3 = '{14}', Fecha4 = '{15}', Factura4 = '{16}', Precio4 = '{17}', Cantidad4 = '{18}', Fecha5 = '{19}', Factura5 = '{20}', Precio5 = '{21}', Cantidad5 = '{22}', WDate = '{23}', Fecha = '{24}', Pago = '{25}', Estado = '{26}', DescripcionFarma = '{27}' WHERE Clave = '" & .Clave & "'",
+                                         .Producto, .Precio, .Descripcion, .Facturas(0, 0), .Facturas(0, 1), .Facturas(0, 2), .Facturas(0, 3), .Facturas(1, 0), .Facturas(1, 1), .Facturas(1, 2), .Facturas(1, 3), .Facturas(2, 0), .Facturas(2, 1), .Facturas(2, 2), .Facturas(2, 3), .Facturas(3, 0), .Facturas(3, 1), .Facturas(3, 2), .Facturas(3, 3), .Facturas(4, 0), .Facturas(4, 1), .Facturas(4, 2), .Facturas(4, 3), .WDate, .Fecha, .Pago, .Estado, .DescripcionFarma)
+                Else
+                    ZSql = String.Format("UPDATE " & WTabla & " SET " & WColumnaProducto & " = '{0}', Precio = '{1}', Fecha1 = '{3}', Factura1 = '{4}', Precio1 = '{5}', Cantidad1 = '{6}', Fecha2 = '{7}', Factura2 = '{8}', Precio2 = '{9}', Cantidad2 = '{10}', Fecha3 = '{11}', Factura3 = '{12}', Precio3 = '{13}', Cantidad3 = '{14}', Fecha4 = '{15}', Factura4 = '{16}', Precio4 = '{17}', Cantidad4 = '{18}', Fecha5 = '{19}', Factura5 = '{20}', Precio5 = '{21}', Cantidad5 = '{22}', WDate = '{23}', Fecha = '{24}', Pago = '{25}', Estado = '{26}' WHERE Clave = '" & .Clave & "'",
+                                         .Producto, .Precio, .Descripcion, .Facturas(0, 0), .Facturas(0, 1), .Facturas(0, 2), .Facturas(0, 3), .Facturas(1, 0), .Facturas(1, 1), .Facturas(1, 2), .Facturas(1, 3), .Facturas(2, 0), .Facturas(2, 1), .Facturas(2, 2), .Facturas(2, 3), .Facturas(3, 0), .Facturas(3, 1), .Facturas(3, 2), .Facturas(3, 3), .Facturas(4, 0), .Facturas(4, 1), .Facturas(4, 2), .Facturas(4, 3), .WDate, .Fecha, .Pago, .Estado)
+                End If
+            End With
+
+        End If
+
+        'MsgBox(ZSql)
+
+        ExecuteNonQueries({ZSql})
 
         Dim WOwner As INotificacionCambios = TryCast(Owner, INotificacionCambios)
 
@@ -358,7 +393,7 @@ Public Class PreciosClienteProducto : Implements Util.IAyudaGeneral
         '
         ' En caso de que se trate de un Producto Farma, verifica la longitud final de la Descripcion.
         '
-        Dim WEsFarma As Double = Not Helper._EsPellital AndAlso Val(Helper.Mid(txtProducto.Text, 4, 5) >= 25000 And Val(Helper.Mid(txtProducto.Text, 4, 5) <= 25999))
+        Dim WEsFarma As Double = Not _EsPellital() AndAlso Val(Mid(txtProducto.Text, 4, 5) >= 25000 And Val(Mid(txtProducto.Text, 4, 5) <= 25999))
 
         If WEsFarma Then
             Dim WLong As Short = (lblDescProducto.Text.Trim & " - " & txtDescComercial.Text.Trim).Length
@@ -385,7 +420,7 @@ Public Class PreciosClienteProducto : Implements Util.IAyudaGeneral
     End Sub
 
     Private Sub txtCliente_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles txtCliente.MouseDoubleClick
-        With New Util.AyudaGeneral(GetAll("SELECT Cliente Codigo, Razon Descripcion FROM Cliente ORDER BY Razon"), "AYUDA CLIENTES")
+        With New AyudaGeneral(GetAll("SELECT Cliente Codigo, Razon Descripcion FROM Cliente ORDER BY Razon"), "AYUDA CLIENTES")
             .Show(Me)
         End With
     End Sub
@@ -425,7 +460,7 @@ Public Class PreciosClienteProducto : Implements Util.IAyudaGeneral
 
         Public Cliente As String
         Public Producto As String
-        
+
         Private _Precio As String
         Public Property Precio() As String
             Get
@@ -439,10 +474,20 @@ Public Class PreciosClienteProducto : Implements Util.IAyudaGeneral
         Public Descripcion As String
         Public DescripcionFarma As String
         Public Pago As String
-        Public Fecha As String
+        Private _Fecha As String
+
+        Public Property Fecha() As String
+            Get
+                Return _Fecha
+            End Get
+            Set(ByVal value As String)
+                _Fecha = IIf(value.Replace("/", "").Trim = "", Date.Now.ToString("dd/MM/yyyy"), value)
+            End Set
+        End Property
+
         Public Estado As String
 
-        Public Facturas(0, 3) As String
+        Public Facturas = New String(4, 3) {}
 
     End Class
 
