@@ -24,12 +24,12 @@ Module AuxiExtensiones
 
     <Extension()>
     Public Function left(ByVal obj As Object, ByVal longitud As Object) As String
-        Return Microsoft.VisualBasic.Left$(OrDefault(obj, "").ToString.PadRight(longitud), longitud)
+        Return Microsoft.VisualBasic.Left$(OrDefault(obj, "").ToString.Trim.PadRight(longitud), longitud)
     End Function
 
     <Extension()>
     Public Function right(ByVal obj As Object, ByVal longitud As Object) As String
-        Return Microsoft.VisualBasic.Right(OrDefault(obj, "").ToString.PadRight(longitud), longitud)
+        Return Microsoft.VisualBasic.Right(OrDefault(obj, "").ToString.Trim.PadRight(longitud), longitud)
     End Function
 
     <Extension()>

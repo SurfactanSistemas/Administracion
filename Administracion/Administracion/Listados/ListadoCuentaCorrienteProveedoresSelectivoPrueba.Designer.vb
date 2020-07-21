@@ -26,6 +26,9 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.txtFechaEmision = New System.Windows.Forms.MaskedTextBox()
         Me.GRilla = New System.Windows.Forms.DataGridView()
+        Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Razon = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.EnviarAviso = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -33,14 +36,6 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.GrupoConsultas = New System.Windows.Forms.Panel()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
-        Me.btnImprimir = New Administracion.CustomButton()
-        Me.btnPantalla = New Administracion.CustomButton()
-        Me.btnLimpiarTodo = New Administracion.CustomButton()
-        Me.CustomButton1 = New Administracion.CustomButton()
-        Me.btnConsulta = New Administracion.CustomButton()
-        Me.btnCancela = New Administracion.CustomButton()
         Me.btnCerrarConsulta = New Administracion.CustomButton()
         Me.lstFiltrada = New Administracion.CustomListBox()
         Me.txtAyuda = New Administracion.CustomTextBox()
@@ -49,10 +44,16 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Me.CustomLabel3 = New Administracion.CustomLabel()
         Me.CustomLabel1 = New Administracion.CustomLabel()
         Me.txtDesdeProveedor = New Administracion.CustomTextBox()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.btnImprimir = New Administracion.CustomButton()
+        Me.btnPantalla = New Administracion.CustomButton()
+        Me.btnLimpiarTodo = New Administracion.CustomButton()
+        Me.CustomButton1 = New Administracion.CustomButton()
+        Me.btnConsulta = New Administracion.CustomButton()
+        Me.btnCancela = New Administracion.CustomButton()
+        Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.lstAyuda_Filtrada = New Administracion.CustomListBox()
-        Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Razon = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.EnviarAviso = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CustomButton2 = New Administracion.CustomButton()
         CType(Me.GRilla, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -83,6 +84,34 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Me.GRilla.Size = New System.Drawing.Size(557, 271)
         Me.GRilla.StandardTab = True
         Me.GRilla.TabIndex = 52
+        '
+        'Codigo
+        '
+        Me.Codigo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Codigo.DataPropertyName = "Proveedor"
+        Me.Codigo.HeaderText = "Codigo"
+        Me.Codigo.MaxInputLength = 11
+        Me.Codigo.Name = "Codigo"
+        Me.Codigo.Width = 65
+        '
+        'Razon
+        '
+        Me.Razon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Razon.DataPropertyName = "Nombre"
+        Me.Razon.HeaderText = "Razon Social"
+        Me.Razon.Name = "Razon"
+        '
+        'EnviarAviso
+        '
+        Me.EnviarAviso.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.EnviarAviso.DataPropertyName = "EnviarAvisoOp"
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.EnviarAviso.DefaultCellStyle = DataGridViewCellStyle1
+        Me.EnviarAviso.HeaderText = "Env. Aviso"
+        Me.EnviarAviso.Name = "EnviarAviso"
+        Me.EnviarAviso.ReadOnly = True
+        Me.EnviarAviso.Width = 83
         '
         'Panel1
         '
@@ -161,131 +190,6 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Consulta"
-        '
-        'BackgroundWorker1
-        '
-        Me.BackgroundWorker1.WorkerReportsProgress = True
-        Me.BackgroundWorker1.WorkerSupportsCancellation = True
-        '
-        'btnImprimir
-        '
-        Me.btnImprimir.BackgroundImage = Global.Administracion.My.Resources.Resources.imprimir
-        Me.btnImprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnImprimir.Cleanable = False
-        Me.btnImprimir.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnImprimir.EnterIndex = -1
-        Me.btnImprimir.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnImprimir.FlatAppearance.BorderSize = 0
-        Me.btnImprimir.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnImprimir.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnImprimir.LabelAssociationKey = -1
-        Me.btnImprimir.Location = New System.Drawing.Point(458, 417)
-        Me.btnImprimir.Name = "btnImprimir"
-        Me.btnImprimir.Size = New System.Drawing.Size(48, 40)
-        Me.btnImprimir.TabIndex = 61
-        Me.ToolTip1.SetToolTip(Me.btnImprimir, "Imprimir Reporte")
-        Me.btnImprimir.UseVisualStyleBackColor = True
-        '
-        'btnPantalla
-        '
-        Me.btnPantalla.BackgroundImage = Global.Administracion.My.Resources.Resources.Screen_preview
-        Me.btnPantalla.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnPantalla.Cleanable = False
-        Me.btnPantalla.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnPantalla.EnterIndex = -1
-        Me.btnPantalla.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnPantalla.FlatAppearance.BorderSize = 0
-        Me.btnPantalla.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnPantalla.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnPantalla.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnPantalla.LabelAssociationKey = -1
-        Me.btnPantalla.Location = New System.Drawing.Point(385, 417)
-        Me.btnPantalla.Name = "btnPantalla"
-        Me.btnPantalla.Size = New System.Drawing.Size(48, 40)
-        Me.btnPantalla.TabIndex = 61
-        Me.ToolTip1.SetToolTip(Me.btnPantalla, "Mostrar Reporte por Pantalla")
-        Me.btnPantalla.UseVisualStyleBackColor = True
-        '
-        'btnLimpiarTodo
-        '
-        Me.btnLimpiarTodo.BackgroundImage = Global.Administracion.My.Resources.Resources.Limpiar
-        Me.btnLimpiarTodo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnLimpiarTodo.Cleanable = False
-        Me.btnLimpiarTodo.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnLimpiarTodo.EnterIndex = -1
-        Me.btnLimpiarTodo.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnLimpiarTodo.FlatAppearance.BorderSize = 0
-        Me.btnLimpiarTodo.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnLimpiarTodo.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnLimpiarTodo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnLimpiarTodo.LabelAssociationKey = -1
-        Me.btnLimpiarTodo.Location = New System.Drawing.Point(312, 417)
-        Me.btnLimpiarTodo.Name = "btnLimpiarTodo"
-        Me.btnLimpiarTodo.Size = New System.Drawing.Size(48, 40)
-        Me.btnLimpiarTodo.TabIndex = 61
-        Me.ToolTip1.SetToolTip(Me.btnLimpiarTodo, "Limpiar Seleccionados / Todos")
-        Me.btnLimpiarTodo.UseVisualStyleBackColor = True
-        '
-        'CustomButton1
-        '
-        Me.CustomButton1.BackgroundImage = Global.Administracion.My.Resources.Resources.refresh
-        Me.CustomButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.CustomButton1.Cleanable = False
-        Me.CustomButton1.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.CustomButton1.EnterIndex = -1
-        Me.CustomButton1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.CustomButton1.FlatAppearance.BorderSize = 0
-        Me.CustomButton1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.CustomButton1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.CustomButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.CustomButton1.LabelAssociationKey = -1
-        Me.CustomButton1.Location = New System.Drawing.Point(237, 417)
-        Me.CustomButton1.Name = "CustomButton1"
-        Me.CustomButton1.Size = New System.Drawing.Size(50, 40)
-        Me.CustomButton1.TabIndex = 58
-        Me.ToolTip1.SetToolTip(Me.CustomButton1, "Cargar Listado Parcial de Proveedores Selectivo")
-        Me.CustomButton1.UseVisualStyleBackColor = True
-        '
-        'btnConsulta
-        '
-        Me.btnConsulta.BackgroundImage = Global.Administracion.My.Resources.Resources.Consulta_Dat_N1
-        Me.btnConsulta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnConsulta.Cleanable = False
-        Me.btnConsulta.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnConsulta.EnterIndex = -1
-        Me.btnConsulta.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnConsulta.FlatAppearance.BorderSize = 0
-        Me.btnConsulta.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnConsulta.LabelAssociationKey = -1
-        Me.btnConsulta.Location = New System.Drawing.Point(162, 417)
-        Me.btnConsulta.Name = "btnConsulta"
-        Me.btnConsulta.Size = New System.Drawing.Size(50, 40)
-        Me.btnConsulta.TabIndex = 58
-        Me.ToolTip1.SetToolTip(Me.btnConsulta, "Consultar Proveedores")
-        Me.btnConsulta.UseVisualStyleBackColor = True
-        '
-        'btnCancela
-        '
-        Me.btnCancela.BackgroundImage = Global.Administracion.My.Resources.Resources.Salir2
-        Me.btnCancela.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnCancela.Cleanable = False
-        Me.btnCancela.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnCancela.EnterIndex = -1
-        Me.btnCancela.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnCancela.FlatAppearance.BorderSize = 0
-        Me.btnCancela.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnCancela.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnCancela.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCancela.LabelAssociationKey = -1
-        Me.btnCancela.Location = New System.Drawing.Point(82, 417)
-        Me.btnCancela.Name = "btnCancela"
-        Me.btnCancela.Size = New System.Drawing.Size(55, 40)
-        Me.btnCancela.TabIndex = 57
-        Me.ToolTip1.SetToolTip(Me.btnCancela, "Cerrar Ventana")
-        Me.btnCancela.UseVisualStyleBackColor = True
         '
         'btnCerrarConsulta
         '
@@ -397,6 +301,131 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Me.ToolTip1.SetToolTip(Me.txtDesdeProveedor, "Doble Click: Abrir Consulta de Proveedores")
         Me.txtDesdeProveedor.Validator = Administracion.ValidatorType.None
         '
+        'btnImprimir
+        '
+        Me.btnImprimir.BackgroundImage = Global.Administracion.My.Resources.Resources.imprimir
+        Me.btnImprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnImprimir.Cleanable = False
+        Me.btnImprimir.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnImprimir.EnterIndex = -1
+        Me.btnImprimir.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnImprimir.FlatAppearance.BorderSize = 0
+        Me.btnImprimir.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnImprimir.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnImprimir.LabelAssociationKey = -1
+        Me.btnImprimir.Location = New System.Drawing.Point(468, 417)
+        Me.btnImprimir.Name = "btnImprimir"
+        Me.btnImprimir.Size = New System.Drawing.Size(48, 40)
+        Me.btnImprimir.TabIndex = 61
+        Me.ToolTip1.SetToolTip(Me.btnImprimir, "Imprimir Reporte")
+        Me.btnImprimir.UseVisualStyleBackColor = True
+        '
+        'btnPantalla
+        '
+        Me.btnPantalla.BackgroundImage = Global.Administracion.My.Resources.Resources.Screen_preview
+        Me.btnPantalla.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnPantalla.Cleanable = False
+        Me.btnPantalla.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnPantalla.EnterIndex = -1
+        Me.btnPantalla.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnPantalla.FlatAppearance.BorderSize = 0
+        Me.btnPantalla.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnPantalla.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnPantalla.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnPantalla.LabelAssociationKey = -1
+        Me.btnPantalla.Location = New System.Drawing.Point(385, 417)
+        Me.btnPantalla.Name = "btnPantalla"
+        Me.btnPantalla.Size = New System.Drawing.Size(48, 40)
+        Me.btnPantalla.TabIndex = 61
+        Me.ToolTip1.SetToolTip(Me.btnPantalla, "Mostrar Reporte por Pantalla")
+        Me.btnPantalla.UseVisualStyleBackColor = True
+        '
+        'btnLimpiarTodo
+        '
+        Me.btnLimpiarTodo.BackgroundImage = Global.Administracion.My.Resources.Resources.Limpiar
+        Me.btnLimpiarTodo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnLimpiarTodo.Cleanable = False
+        Me.btnLimpiarTodo.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnLimpiarTodo.EnterIndex = -1
+        Me.btnLimpiarTodo.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnLimpiarTodo.FlatAppearance.BorderSize = 0
+        Me.btnLimpiarTodo.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnLimpiarTodo.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnLimpiarTodo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnLimpiarTodo.LabelAssociationKey = -1
+        Me.btnLimpiarTodo.Location = New System.Drawing.Point(312, 417)
+        Me.btnLimpiarTodo.Name = "btnLimpiarTodo"
+        Me.btnLimpiarTodo.Size = New System.Drawing.Size(48, 40)
+        Me.btnLimpiarTodo.TabIndex = 61
+        Me.ToolTip1.SetToolTip(Me.btnLimpiarTodo, "Limpiar Seleccionados / Todos")
+        Me.btnLimpiarTodo.UseVisualStyleBackColor = True
+        '
+        'CustomButton1
+        '
+        Me.CustomButton1.BackgroundImage = Global.Administracion.My.Resources.Resources.refresh
+        Me.CustomButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.CustomButton1.Cleanable = False
+        Me.CustomButton1.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.CustomButton1.EnterIndex = -1
+        Me.CustomButton1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.CustomButton1.FlatAppearance.BorderSize = 0
+        Me.CustomButton1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.CustomButton1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.CustomButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.CustomButton1.LabelAssociationKey = -1
+        Me.CustomButton1.Location = New System.Drawing.Point(237, 417)
+        Me.CustomButton1.Name = "CustomButton1"
+        Me.CustomButton1.Size = New System.Drawing.Size(50, 40)
+        Me.CustomButton1.TabIndex = 58
+        Me.ToolTip1.SetToolTip(Me.CustomButton1, "Cargar Listado Parcial de Proveedores Selectivo")
+        Me.CustomButton1.UseVisualStyleBackColor = True
+        '
+        'btnConsulta
+        '
+        Me.btnConsulta.BackgroundImage = Global.Administracion.My.Resources.Resources.Consulta_Dat_N1
+        Me.btnConsulta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnConsulta.Cleanable = False
+        Me.btnConsulta.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnConsulta.EnterIndex = -1
+        Me.btnConsulta.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnConsulta.FlatAppearance.BorderSize = 0
+        Me.btnConsulta.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnConsulta.LabelAssociationKey = -1
+        Me.btnConsulta.Location = New System.Drawing.Point(162, 417)
+        Me.btnConsulta.Name = "btnConsulta"
+        Me.btnConsulta.Size = New System.Drawing.Size(50, 40)
+        Me.btnConsulta.TabIndex = 58
+        Me.ToolTip1.SetToolTip(Me.btnConsulta, "Consultar Proveedores")
+        Me.btnConsulta.UseVisualStyleBackColor = True
+        '
+        'btnCancela
+        '
+        Me.btnCancela.BackgroundImage = Global.Administracion.My.Resources.Resources.Salir2
+        Me.btnCancela.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnCancela.Cleanable = False
+        Me.btnCancela.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnCancela.EnterIndex = -1
+        Me.btnCancela.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnCancela.FlatAppearance.BorderSize = 0
+        Me.btnCancela.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnCancela.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnCancela.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCancela.LabelAssociationKey = -1
+        Me.btnCancela.Location = New System.Drawing.Point(82, 417)
+        Me.btnCancela.Name = "btnCancela"
+        Me.btnCancela.Size = New System.Drawing.Size(55, 40)
+        Me.btnCancela.TabIndex = 57
+        Me.ToolTip1.SetToolTip(Me.btnCancela, "Cerrar Ventana")
+        Me.btnCancela.UseVisualStyleBackColor = True
+        '
+        'BackgroundWorker1
+        '
+        Me.BackgroundWorker1.WorkerReportsProgress = True
+        Me.BackgroundWorker1.WorkerSupportsCancellation = True
+        '
         'lstAyuda_Filtrada
         '
         Me.lstAyuda_Filtrada.Cleanable = False
@@ -409,39 +438,31 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Me.lstAyuda_Filtrada.TabIndex = 62
         Me.lstAyuda_Filtrada.Visible = False
         '
-        'Codigo
+        'CustomButton2
         '
-        Me.Codigo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Codigo.DataPropertyName = "Proveedor"
-        Me.Codigo.HeaderText = "Codigo"
-        Me.Codigo.MaxInputLength = 11
-        Me.Codigo.Name = "Codigo"
-        Me.Codigo.Width = 65
-        '
-        'Razon
-        '
-        Me.Razon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.Razon.DataPropertyName = "Nombre"
-        Me.Razon.HeaderText = "Razon Social"
-        Me.Razon.Name = "Razon"
-        '
-        'EnviarAviso
-        '
-        Me.EnviarAviso.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.EnviarAviso.DataPropertyName = "EnviarAvisoOp"
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.EnviarAviso.DefaultCellStyle = DataGridViewCellStyle1
-        Me.EnviarAviso.HeaderText = "Env. Aviso"
-        Me.EnviarAviso.Name = "EnviarAviso"
-        Me.EnviarAviso.ReadOnly = True
-        Me.EnviarAviso.Width = 83
+        Me.CustomButton2.BackgroundImage = Global.Administracion.My.Resources.Resources.imprimir
+        Me.CustomButton2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.CustomButton2.Cleanable = False
+        Me.CustomButton2.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.CustomButton2.EnterIndex = -1
+        Me.CustomButton2.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.CustomButton2.FlatAppearance.BorderSize = 0
+        Me.CustomButton2.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.CustomButton2.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.CustomButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.CustomButton2.LabelAssociationKey = -1
+        Me.CustomButton2.Location = New System.Drawing.Point(536, 426)
+        Me.CustomButton2.Name = "CustomButton2"
+        Me.CustomButton2.Size = New System.Drawing.Size(41, 23)
+        Me.CustomButton2.TabIndex = 61
+        Me.CustomButton2.UseVisualStyleBackColor = True
         '
         'ListadoCuentaCorrienteProveedoresSelectivoPrueba
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(589, 469)
+        Me.Controls.Add(Me.CustomButton2)
         Me.Controls.Add(Me.btnImprimir)
         Me.Controls.Add(Me.btnPantalla)
         Me.Controls.Add(Me.btnLimpiarTodo)
@@ -493,4 +514,5 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
     Friend WithEvents Codigo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Razon As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents EnviarAviso As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents CustomButton2 As Administracion.CustomButton
 End Class

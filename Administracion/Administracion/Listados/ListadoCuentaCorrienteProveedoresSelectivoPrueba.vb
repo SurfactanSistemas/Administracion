@@ -307,6 +307,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Dim cn = New SqlConnection()
         'Dim cm = "SELECT ccp.Tipo, ccp.Letra, ccp.Punto, ccp.Numero, ccp.Tovartal, ccp.Saldo, ccp.Fecha, ccp.Vencimiento, ccp.Vencimiento1, Impre = CASE ISNULL(i.Rechazado, 0) WHEN 1 THEN 'CHR' ELSE ccp.Impre END, ccp.NroInterno, ccp.Clave, ccp.Pago, ccp.Paridad FROM CtaCtePrv ccp LEFT OUTER JOIN IvaComp i ON i.NroInterno = ccp.NroInterno WHERE ccp.Proveedor = '" & proveedor.Trim() & "' AND ccp.Saldo <> 0 ORDER BY ccp.Proveedor, ccp.OrdFecha, ccp.NroInterno"
         'Dim cm = "SELECT ccp.Tipo, ccp.Letra, ccp.Punto, ccp.Numero, ccp.Total, ccp.Saldo, ccp.Fecha, ccp.Vencimiento, ccp.Vencimiento1, Impre = CASE ISNULL(i.Rechazado, 0) WHEN 1 THEN 'CHR' ELSE ccp.Impre END, ccp.NroInterno, ccp.Clave, ccp.Pago, ccp.Paridad, ccp.MarcaVirtual FROM CtaCtePrv ccp LEFT OUTER JOIN IvaComp i ON i.NroInterno = ccp.NroInterno WHERE ccp.Proveedor = '" & proveedor.Trim() & "' AND ccp.Saldo <> 0 ORDER BY ccp.Proveedor, ccp.OrdFecha, ccp.Numero"
+        ' Dim cm = "SELECT ccp.Tipo, ccp.Letra, ccp.Punto, ccp.Numero, ccp.Total, ccp.Saldo, ccp.Fecha, ccp.Vencimiento, ccp.Vencimiento1, Impre = CASE ISNULL(i.Rechazado, 0) WHEN 1 THEN 'CHR' ELSE ccp.Impre END, ccp.NroInterno, ccp.Clave, ccp.Pago, ccp.Paridad, ccp.MarcaVirtual FROM CtaCtePrv ccp LEFT OUTER JOIN IvaComp i ON i.NroInterno = ccp.NroInterno WHERE ccp.Proveedor = '" & proveedor.Trim() & "' AND ccp.Saldo <> 0 And ISNULL(ccp.MarcaVirtual, '') <> 'X' and ccp.pago =2 ORDER BY ccp.Proveedor, ccp.OrdFecha, ccp.Numero"
         Dim cm = "SELECT ccp.Tipo, ccp.Letra, ccp.Punto, ccp.Numero, ccp.Total, ccp.Saldo, ccp.Fecha, ccp.Vencimiento, ccp.Vencimiento1, Impre = CASE ISNULL(i.Rechazado, 0) WHEN 1 THEN 'CHR' ELSE ccp.Impre END, ccp.NroInterno, ccp.Clave, ccp.Pago, ccp.Paridad, ccp.MarcaVirtual FROM CtaCtePrv ccp LEFT OUTER JOIN IvaComp i ON i.NroInterno = ccp.NroInterno WHERE ccp.Proveedor = '" & proveedor.Trim() & "' AND ccp.Saldo <> 0 And ISNULL(ccp.MarcaVirtual, '') <> 'X' ORDER BY ccp.Proveedor, ccp.OrdFecha, ccp.Numero"
         Dim dr As New SqlDataAdapter(cm, cn)
 
@@ -1286,5 +1287,13 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         If WTipoSalida = Reporte.Imprimir Then
             MsgBox("El reporte se ha impreso correctamente.", MsgBoxStyle.Information)
         End If
+    End Sub
+
+    Private Sub CustomButton2_Click(sender As Object, e As EventArgs) Handles CustomButton2.Click
+        Dim s As DataTable = GetAll("Select distinct proveedor from ctacteprv where pago = 2")
+
+        For Each r As DataRow In s.Rows
+            GRilla.Rows.Add(r("proveedor"))
+        Next
     End Sub
 End Class

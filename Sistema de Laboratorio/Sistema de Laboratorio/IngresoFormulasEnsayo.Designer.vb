@@ -130,34 +130,40 @@ Partial Class IngresoFormulasEnsayo
         '
         'Renglon
         '
+        Me.Renglon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Renglon.DataPropertyName = "Renglon"
         Me.Renglon.HeaderText = "Renglon"
         Me.Renglon.Name = "Renglon"
         Me.Renglon.ReadOnly = True
         Me.Renglon.Visible = False
+        Me.Renglon.Width = 53
         '
         'Descripcion
         '
+        Me.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.Descripcion.DataPropertyName = "Descripcion"
         Me.Descripcion.HeaderText = "Descripcion"
         Me.Descripcion.Name = "Descripcion"
         Me.Descripcion.ReadOnly = True
-        Me.Descripcion.Width = 300
         '
         'Formula
         '
+        Me.Formula.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Formula.DataPropertyName = "Formula"
         Me.Formula.HeaderText = "Formula"
         Me.Formula.Name = "Formula"
         Me.Formula.ReadOnly = True
+        Me.Formula.Width = 69
         '
         'AnalistaLab
         '
+        Me.AnalistaLab.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.AnalistaLab.DataPropertyName = "AnalistaLab"
         Me.AnalistaLab.HeaderText = "AnalistaLab"
         Me.AnalistaLab.Name = "AnalistaLab"
         Me.AnalistaLab.ReadOnly = True
         Me.AnalistaLab.Visible = False
+        Me.AnalistaLab.Width = 87
         '
         'Analista
         '
@@ -168,12 +174,16 @@ Partial Class IngresoFormulasEnsayo
         '
         'CheckVerificado
         '
+        Me.CheckVerificado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.CheckVerificado.DataPropertyName = "CheckVerificado"
-        Me.CheckVerificado.HeaderText = "Check Verificado"
+        Me.CheckVerificado.FalseValue = "0"
+        Me.CheckVerificado.HeaderText = "Verificado"
         Me.CheckVerificado.Name = "CheckVerificado"
         Me.CheckVerificado.ReadOnly = True
         Me.CheckVerificado.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.CheckVerificado.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.CheckVerificado.TrueValue = "1"
+        Me.CheckVerificado.Width = 79
         '
         'IngresoFormulasEnsayo
         '

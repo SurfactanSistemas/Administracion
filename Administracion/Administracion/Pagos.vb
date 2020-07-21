@@ -1526,7 +1526,7 @@ Public Class Pagos
                     End If
 
                     XClave = clave
-                    XTipo = "3"
+                    XTipo = IIf(rbChFisico.Checked, "3", "7")
                     XNumero = .Item("Numero2").ToString()
                     XFecha = .Item("Fecha2").ToString()
                     XBanco = .Item("Banco2").ToString()
@@ -4349,6 +4349,7 @@ Public Class Pagos
         Dim frm As New VistaPrevia
         frm.Reporte = crdoc
         frm.Reporte.SetParameterValue("EsTransferencia", 0)
+        frm.Reporte.SetParameterValue("CuitProv", XCuitProveedor)
 
         Dim WFechasTransferencias = ""
         Dim WOrdenPago As DataTable = _TraerDatosOrdenPago(txtOrdenPago.Text)
@@ -4365,6 +4366,7 @@ Public Class Pagos
             frm2.Reporte = crdoc
 
             frm2.Reporte.SetParameterValue("EsTransferencia", 1)
+            frm2.Reporte.SetParameterValue("CuitProv", XCuitProveedor)
 
             Conexion.EmpresaDeTrabajo = "SurfactanSa"
 
@@ -5821,7 +5823,7 @@ Public Class Pagos
         For iRow = 0 To gridFormaPagos.Rows.Count - 1
             With gridFormaPagos.Rows(iRow)
                 If Val(.Cells(5).Value) <> 0 Then
-                    If Val(.Cells(0).Value) = 3 Then
+                    If Val(.Cells(0).Value) = 3 Or Val(.Cells(0).Value) = 7 Then
 
                         ZZOrden = txtOrdenPago.Text
                         ZZRenglon = Str$(LugarResumen)
@@ -5981,7 +5983,7 @@ Public Class Pagos
         Dim discriminar = True
 
         Dim cn = New SqlConnection()
-        Dim cm = New SqlCommand("SELECT TOP 1 Tipo2 FROM Pagos WHERE Orden = '" & ceros(Orden, 6) & "' AND (Tipo2 = '3' Or Tipo2 = '03')")
+        Dim cm = New SqlCommand("SELECT TOP 1 Tipo2 FROM Pagos WHERE Orden = '" & ceros(Orden, 6) & "' AND ((Tipo2 = '3' Or Tipo2 = '03') OR (Tipo2 = '7' Or Tipo2 = '07'))")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)

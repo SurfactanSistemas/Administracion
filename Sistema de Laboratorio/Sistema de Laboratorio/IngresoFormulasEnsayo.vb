@@ -78,7 +78,7 @@
     Private Sub IngresoFormulasEnsayo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         'Dim SQLCnslt As String = "SELECT Renglon = f.Renglon, Descripcion = f.Descripcion, Formula = f.Formula, AnalistaLab = o.Iniciales, CheckVerificado = EstadoVerificado  FROM FormulasDeEnsayos f JOIN SurfactanSa.dbo.Operador o ON f.AnalistaLab = o.Operador"
-        Dim SQLCnslt As String = "SELECT Renglon, Descripcion, Formula , AnalistaLab, CheckVerificado = EstadoVerificado  FROM FormulasDeEnsayos"
+        Dim SQLCnslt As String = "SELECT Renglon, RTRIM(Upper(Descripcion)) Descripcion, RTRIM(Formula) Formula , RTRIM(AnalistaLab) AnalistaLab, CheckVerificado = EstadoVerificado FROM FormulasDeEnsayos"
 
         Dim tabla As DataTable = GetAll(SQLCnslt, "Surfactan_II")
 
