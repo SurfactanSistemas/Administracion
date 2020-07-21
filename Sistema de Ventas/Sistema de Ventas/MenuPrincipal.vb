@@ -92,4 +92,52 @@
             .Show()
         End With
     End Sub
+
+    Private Sub ListadoDeCashFlowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ListadoDeCashFlowToolStripMenuItem.Click
+        With ListadoCashFlow
+            .Show()
+        End With
+    End Sub
+
+    Private Sub ListadoDeVentasPorProvinciaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ListadoDeVentasPorProvinciaToolStripMenuItem.Click
+        With Listado_VentasXProvincia
+            .Show()
+        End With
+    End Sub
+
+    Private Sub AutorizacionDePedidosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AutorizacionDePedidosToolStripMenuItem.Click
+        With AutorizacionDePedidos
+            .Show()
+        End With
+    End Sub
+
+    Private Sub IngresoGastosDeImportacionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles IngresoGastosDeImportacionToolStripMenuItem.Click
+        With IngresoGastosImportacion
+            .Show()
+        End With
+    End Sub
+
+    Private Sub IngresoGastosDeImportacionParcialToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles IngresoGastosDeImportacionParcialToolStripMenuItem.Click
+        With IngresoGastosDeImportacionParcial
+            .Show()
+        End With
+    End Sub
+
+    Private Sub IngresoDeSolicitudPedidoDeVentaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles IngresoDeSolicitudPedidoDeVentaToolStripMenuItem.Click
+        '  With Ingreso_Solicitud_Pedido_Venta
+        '  .Show()
+        ' End With
+    End Sub
+
+    Private Sub CuentaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CuentaToolStripMenuItem.Click
+        With CuentaCorrientes_DeClientes
+            .Show()
+        End With
+    End Sub
+
+    Private Sub SaldosDeCtaCteDeClientesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaldosDeCtaCteDeClientesToolStripMenuItem.Click
+        With SaldoDe_CtaCte_deCliente
+            .Show()
+        End With
+    End Sub
 End Class
