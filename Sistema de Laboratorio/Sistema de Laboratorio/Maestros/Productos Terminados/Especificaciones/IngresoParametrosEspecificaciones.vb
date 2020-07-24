@@ -146,6 +146,8 @@
         If rbNumerico.Checked Then
             txtFormula.Enabled = False
             btnDefinirFormula.Enabled = False
+            txtDesde.Enabled = True
+            txtHasta.Enabled = True
             txtDesde.Focus()
         ElseIf rbCumpleNoCumple.Checked Then
             txtDesde.Enabled = ckHabDesdeHasta.Checked

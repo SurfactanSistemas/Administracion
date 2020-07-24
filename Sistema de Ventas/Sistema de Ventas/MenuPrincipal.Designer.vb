@@ -37,6 +37,7 @@ Partial Class MenuPrincipal
         Me.ConsultaDeVersionesDeComposicionDePTToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ConsultaDeRevisionesDeEnsayosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.IngresoDeCambiosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PreciosPorClienteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NovedadesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PedidosDesarrolloToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HojaDeRutaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -50,9 +51,12 @@ Partial Class MenuPrincipal
         Me.ListadoDeCashFlowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListadoDeVentasPorProvinciaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CuentaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SaldosDeCtaCteDeClientesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProcesosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FinDeSistemasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SaldosDeCtaCteDeClientesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SubdiarioDeIvaVentasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ListadoDeMercaderiaEnRemitosAFacturasPorClienteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ListadoDeMercaderiaEnRemitosAFacturasPorClienteToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.panel1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -103,7 +107,7 @@ Partial Class MenuPrincipal
         '
         'MaestrosToolStripMenuItem
         '
-        Me.MaestrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IngresoRubroToolStripMenuItem, Me.IngresoVendedoresToolStripMenuItem, Me.CondicionDePagoToolStripMenuItem, Me.IngresoDeLineasDeVentasToolStripMenuItem, Me.IngresoDeFamiliasDeMateriasPrimasToolStripMenuItem, Me.IngresoDeEnvasesToolStripMenuItem, Me.IngresoDeGastosDeImportacionToolStripMenuItem, Me.ConsultaDeVersionesDeComposicionDePTToolStripMenuItem, Me.ConsultaDeRevisionesDeEnsayosToolStripMenuItem, Me.IngresoDeCambiosToolStripMenuItem})
+        Me.MaestrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IngresoRubroToolStripMenuItem, Me.IngresoVendedoresToolStripMenuItem, Me.CondicionDePagoToolStripMenuItem, Me.IngresoDeLineasDeVentasToolStripMenuItem, Me.IngresoDeFamiliasDeMateriasPrimasToolStripMenuItem, Me.IngresoDeEnvasesToolStripMenuItem, Me.IngresoDeGastosDeImportacionToolStripMenuItem, Me.ConsultaDeVersionesDeComposicionDePTToolStripMenuItem, Me.ConsultaDeRevisionesDeEnsayosToolStripMenuItem, Me.IngresoDeCambiosToolStripMenuItem, Me.PreciosPorClienteToolStripMenuItem})
         Me.MaestrosToolStripMenuItem.Name = "MaestrosToolStripMenuItem"
         Me.MaestrosToolStripMenuItem.Size = New System.Drawing.Size(67, 20)
         Me.MaestrosToolStripMenuItem.Text = "Maestros"
@@ -168,6 +172,12 @@ Partial Class MenuPrincipal
         Me.IngresoDeCambiosToolStripMenuItem.Size = New System.Drawing.Size(311, 22)
         Me.IngresoDeCambiosToolStripMenuItem.Text = "Ingreso de Cambios"
         '
+        'PreciosPorClienteToolStripMenuItem
+        '
+        Me.PreciosPorClienteToolStripMenuItem.Name = "PreciosPorClienteToolStripMenuItem"
+        Me.PreciosPorClienteToolStripMenuItem.Size = New System.Drawing.Size(311, 22)
+        Me.PreciosPorClienteToolStripMenuItem.Text = "Precios por Cliente"
+        '
         'NovedadesToolStripMenuItem
         '
         Me.NovedadesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PedidosDesarrolloToolStripMenuItem, Me.HojaDeRutaToolStripMenuItem, Me.VerificacionDeCostoDeProductosTerminadosToolStripMenuItem, Me.AutorizacionDePedidosToolStripMenuItem, Me.IngresoGastosDeImportacionToolStripMenuItem, Me.IngresoGastosDeImportacionParcialToolStripMenuItem, Me.IngresoDeSolicitudPedidoDeVentaToolStripMenuItem})
@@ -221,7 +231,7 @@ Partial Class MenuPrincipal
         '
         Me.ListadosToolStripMenuItem.Checked = True
         Me.ListadosToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.ListadosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PedidosPendientesToolStripMenuItem, Me.ListadoDeCashFlowToolStripMenuItem, Me.ListadoDeVentasPorProvinciaToolStripMenuItem, Me.CuentaToolStripMenuItem, Me.SaldosDeCtaCteDeClientesToolStripMenuItem})
+        Me.ListadosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PedidosPendientesToolStripMenuItem, Me.ListadoDeCashFlowToolStripMenuItem, Me.ListadoDeVentasPorProvinciaToolStripMenuItem, Me.CuentaToolStripMenuItem, Me.SaldosDeCtaCteDeClientesToolStripMenuItem, Me.SubdiarioDeIvaVentasToolStripMenuItem, Me.ListadoDeMercaderiaEnRemitosAFacturasPorClienteToolStripMenuItem, Me.ListadoDeMercaderiaEnRemitosAFacturasPorClienteToolStripMenuItem1})
         Me.ListadosToolStripMenuItem.Name = "ListadosToolStripMenuItem"
         Me.ListadosToolStripMenuItem.Size = New System.Drawing.Size(62, 20)
         Me.ListadosToolStripMenuItem.Text = "Listados"
@@ -250,6 +260,12 @@ Partial Class MenuPrincipal
         Me.CuentaToolStripMenuItem.Size = New System.Drawing.Size(238, 22)
         Me.CuentaToolStripMenuItem.Text = "Cuenta Corriente de Cliente"
         '
+        'SaldosDeCtaCteDeClientesToolStripMenuItem
+        '
+        Me.SaldosDeCtaCteDeClientesToolStripMenuItem.Name = "SaldosDeCtaCteDeClientesToolStripMenuItem"
+        Me.SaldosDeCtaCteDeClientesToolStripMenuItem.Size = New System.Drawing.Size(238, 22)
+        Me.SaldosDeCtaCteDeClientesToolStripMenuItem.Text = "Saldos de Cta Cte de Clientes"
+        '
         'ProcesosToolStripMenuItem
         '
         Me.ProcesosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FinDeSistemasToolStripMenuItem})
@@ -263,11 +279,23 @@ Partial Class MenuPrincipal
         Me.FinDeSistemasToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
         Me.FinDeSistemasToolStripMenuItem.Text = "Fin de Sistema"
         '
-        'SaldosDeCtaCteDeClientesToolStripMenuItem
+        'SubdiarioDeIvaVentasToolStripMenuItem
         '
-        Me.SaldosDeCtaCteDeClientesToolStripMenuItem.Name = "SaldosDeCtaCteDeClientesToolStripMenuItem"
-        Me.SaldosDeCtaCteDeClientesToolStripMenuItem.Size = New System.Drawing.Size(238, 22)
-        Me.SaldosDeCtaCteDeClientesToolStripMenuItem.Text = "Saldos de Cta Cte de Clientes"
+        Me.SubdiarioDeIvaVentasToolStripMenuItem.Name = "SubdiarioDeIvaVentasToolStripMenuItem"
+        Me.SubdiarioDeIvaVentasToolStripMenuItem.Size = New System.Drawing.Size(238, 22)
+        Me.SubdiarioDeIvaVentasToolStripMenuItem.Text = "Subdiario de Iva Ventas"
+        '
+        'ListadoDeMercaderiaEnRemitosAFacturasPorClienteToolStripMenuItem
+        '
+        Me.ListadoDeMercaderiaEnRemitosAFacturasPorClienteToolStripMenuItem.Name = "ListadoDeMercaderiaEnRemitosAFacturasPorClienteToolStripMenuItem"
+        Me.ListadoDeMercaderiaEnRemitosAFacturasPorClienteToolStripMenuItem.Size = New System.Drawing.Size(369, 22)
+        Me.ListadoDeMercaderiaEnRemitosAFacturasPorClienteToolStripMenuItem.Text = "Listado de Mercaderia en Remitos a Facturas por Cliente"
+        '
+        'ListadoDeMercaderiaEnRemitosAFacturasPorClienteToolStripMenuItem1
+        '
+        Me.ListadoDeMercaderiaEnRemitosAFacturasPorClienteToolStripMenuItem1.Name = "ListadoDeMercaderiaEnRemitosAFacturasPorClienteToolStripMenuItem1"
+        Me.ListadoDeMercaderiaEnRemitosAFacturasPorClienteToolStripMenuItem1.Size = New System.Drawing.Size(374, 22)
+        Me.ListadoDeMercaderiaEnRemitosAFacturasPorClienteToolStripMenuItem1.Text = "Listado de Mercaderia en Remitos a Facturas por Articulo"
         '
         'MenuPrincipal
         '
@@ -308,6 +336,7 @@ Partial Class MenuPrincipal
     Friend WithEvents ConsultaDeVersionesDeComposicionDePTToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ConsultaDeRevisionesDeEnsayosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents IngresoDeCambiosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents PreciosPorClienteToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents PedidosDesarrolloToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents HojaDeRutaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents VerificacionDeCostoDeProductosTerminadosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -319,5 +348,8 @@ Partial Class MenuPrincipal
     Friend WithEvents IngresoDeSolicitudPedidoDeVentaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents CuentaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SaldosDeCtaCteDeClientesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents SubdiarioDeIvaVentasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ListadoDeMercaderiaEnRemitosAFacturasPorClienteToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ListadoDeMercaderiaEnRemitosAFacturasPorClienteToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
 
 End Class

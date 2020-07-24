@@ -176,13 +176,10 @@ Public Class VistaPrevia
     End Sub
 
     Private Sub EnviarEmail(ByVal Archivo As String, ByVal EnvioAutomatico As Boolean, Optional ByVal Subject As String = "", Optional ByVal Body As String = "", Optional ByVal Direcciones As String = "")
-        Dim oApp As _Application
-        Dim oMsg As _MailItem
+        Dim oApp As New Application()
 
         Try
-            oApp = New Application()
-
-            oMsg = oApp.CreateItem(OlItemType.olMailItem)
+            Dim oMsg As MailItem = oApp.CreateItem(OlItemType.olMailItem)
 
             Dim el = oMsg.GetInspector
 

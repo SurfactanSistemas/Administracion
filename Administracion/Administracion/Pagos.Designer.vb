@@ -457,10 +457,10 @@ Partial Class Pagos
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.pnlDifCamXFactura)
         Me.Panel2.Controls.Add(Me.txtObservaciones)
         Me.Panel2.Controls.Add(Me.GroupBox3)
         Me.Panel2.Controls.Add(Me.CustomLabel17)
-        Me.Panel2.Controls.Add(Me.pnlDifCamXFactura)
         Me.Panel2.Controls.Add(Me.btnDifCambioXFactura)
         Me.Panel2.Controls.Add(Me.ckCalculaDifCambio)
         Me.Panel2.Controls.Add(Me.btnActualizarCarpetas)
@@ -582,9 +582,9 @@ Partial Class Pagos
         Me.pnlDifCamXFactura.Controls.Add(Me.btnAceptar)
         Me.pnlDifCamXFactura.Controls.Add(Me.GridPagosXFacturas)
         Me.pnlDifCamXFactura.Controls.Add(Me.CustomLabel1)
-        Me.pnlDifCamXFactura.Location = New System.Drawing.Point(156, 299)
+        Me.pnlDifCamXFactura.Location = New System.Drawing.Point(156, 73)
         Me.pnlDifCamXFactura.Name = "pnlDifCamXFactura"
-        Me.pnlDifCamXFactura.Size = New System.Drawing.Size(467, 74)
+        Me.pnlDifCamXFactura.Size = New System.Drawing.Size(467, 300)
         Me.pnlDifCamXFactura.TabIndex = 131
         '
         'btnVolver
@@ -593,7 +593,7 @@ Partial Class Pagos
         Me.btnVolver.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnVolver.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnVolver.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnVolver.Location = New System.Drawing.Point(247, 257)
+        Me.btnVolver.Location = New System.Drawing.Point(257, 257)
         Me.btnVolver.Name = "btnVolver"
         Me.btnVolver.Size = New System.Drawing.Size(76, 37)
         Me.btnVolver.TabIndex = 132
@@ -607,7 +607,7 @@ Partial Class Pagos
         Me.btnAceptar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAceptar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnAceptar.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnAceptar.Location = New System.Drawing.Point(123, 256)
+        Me.btnAceptar.Location = New System.Drawing.Point(133, 256)
         Me.btnAceptar.Name = "btnAceptar"
         Me.btnAceptar.Size = New System.Drawing.Size(76, 37)
         Me.btnAceptar.TabIndex = 131

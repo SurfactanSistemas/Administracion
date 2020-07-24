@@ -193,7 +193,7 @@ Public Class ListadoProyeccionCobrosAnalitico
 
 
         varUno = "{CtaCtePrv.Proveedor} in " + x + txtDesdeProveedor.Text + x + " to " + x + txtHastaProveedor.Text + x
-        varDos = " and not ({CtaCtePrv.Saldo} in -1.00 to 1.00)"
+        varDos = " and not ({CtaCtePrv.Saldo} in -1.00 to 1.00) And {CtaCtePrv.MarcaVirtual} <> 'X'"
         varTres = ""
 
         varFormula = varUno + varDos + varTres

@@ -1,14 +1,14 @@
 ﻿Imports ClasesCompartidas
 Imports System.Data.SqlClient
+Imports System.Globalization
+Imports System.IO
 Imports CrystalDecisions.CrystalReports.Engine
 Imports CrystalDecisions.Shared
-Imports Microsoft.Office.Interop
+Imports Microsoft.Office.Interop.Outlook
 
 Public Class Recibos
     ' Variables y Constantes para fecha en grilla.
     Private WRow, Wcol As Integer
-    Private Const YMARGEN = 233
-    Private Const XMARGEN = 471
 
     ' Variables para alta de nuevo recibo
     Private _ComprobanteRetIva As String = ""
@@ -21,17 +21,14 @@ Public Class Recibos
             _RetIB19, _CompIB19, _RetIB20, _CompIB20, _RetIB21, _CompIB21, _RetIB22, _CompIB22, _RetIB23, _CompIB23 As String
 
     ' Variables para impresion de Recibo.
-    ' Variables para impresion de Recibo.d
-    Dim WRazon, WDireccion, WLocalidad, WProvincia, WPostal, _
-            WRecibo, WFecha, WCliente, WEmail As String
+    Dim WRazon, WDireccion, WLocalidad, WProvincia, WPostal, WEmail As String
 
     ' Variables Auxiliares
     Private _Provincia As Integer = 0
     Const _SEPARADOR As String = "    "
     Private _TipoConsulta As Integer = 0
-    Private _ValoresMax As New List(Of Object)
-    Private _CuentasContables As New List(Of Object)
-    Private _ClavesCheques As New List(Of Object)
+    Private ReadOnly _CuentasContables As New List(Of Object)
+    Private ReadOnly _ClavesCheques As New List(Of Object)
     Dim XRenglon, XRecibo, XCliente, XFecha, XFechaOrd, XTipoRec, XRetganancias, XRetIva, XRetotra, _
             XRetencion, XTiporeg, XTipo, XNumero, ClaveCtaCte, XTipo1, XLetra1, XPunto1, XNumero1, XImporte1, XTipo2, _
             XNumero2, XFecha2, XFechaOrd2, XBanco2, XImporte2, XEstado2, XObservaciones, XEmpresa, XClave, _
@@ -42,22 +39,25 @@ Public Class Recibos
             XImporte5, XImporte6, XImporte7, XDate, XParam, XSql, XClaveCheque, XBancoCheque, XSucursalCheque, _
             XChequeCheque, XCuentaCheque, XCuit, XClaveCuit, XNet As String
 
-    Dim iRow, renglon As Integer
-    Dim _Cheque As Object = Nothing
-    Dim _CuitExistente As Boolean = False
-    Dim cn As SqlConnection = New SqlConnection()
-    Dim cm As SqlCommand = New SqlCommand()
+    Dim renglon As Integer
+    ReadOnly cn As SqlConnection = New SqlConnection()
+    ReadOnly cm As SqlCommand = New SqlCommand()
     Dim dr As SqlDataReader
 
     Dim WDatosFCE As DataRow
+    Dim ZAcumRecibo As Double = 0
 
     Dim WOffset As Integer = 1
 
     ' No tengo idea de para que son.
+    ' ReSharper disable once UnusedMember.Local
     Dim queryController As QueryController
+    ' ReSharper disable once UnusedMember.Local
     Dim commonEventsHandler As New CommonEventsHandler
 
-    Private Sub Recibos_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private WEnviarHojaCalculoDifCambio As Boolean = False
+
+    Private Sub Recibos_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
 
         Label2.Text = Globals.NombreEmpresa()
 
@@ -80,7 +80,7 @@ Public Class Recibos
         txtProvi.Focus()
     End Sub
 
-    Private Sub lstSeleccion_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstSeleccion.Click
+    Private Sub lstSeleccion_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lstSeleccion.Click
 
         Select Case lstSeleccion.SelectedIndex
             Case 0
@@ -93,27 +93,26 @@ Public Class Recibos
                 _TipoConsulta = 1
                 _CargarCtasCtes()
 
-            Case Else
         End Select
 
     End Sub
 
     Private Sub _CargarCtasCtes()
-        Dim cn = New SqlConnection()
-        Dim cm = New SqlCommand("SELECT Impre, Numero, Fecha, Saldo FROM CtaCte WHERE Saldo <> 0 AND Cliente = '" & Trim(txtCliente.Text) & "' order by OrdFecha, Numero")
-        Dim dr As SqlDataReader
+        Dim _cn As SqlConnection = New SqlConnection()
+        Dim _cm As SqlCommand = New SqlCommand("SELECT Impre, Numero, Fecha, Saldo FROM CtaCte WHERE Saldo <> 0 AND Cliente = '" & Trim(txtCliente.Text) & "' order by OrdFecha, Numero")
+        Dim _dr As SqlDataReader
 
-        SQLConnector.conexionSql(cn, cm)
+        SQLConnector.conexionSql(_cn, _cm)
 
         Try
 
-            dr = cm.ExecuteReader()
+            _dr = _cm.ExecuteReader()
             lstConsulta.Items.Clear()
 
-            If dr.HasRows Then
+            If _dr.HasRows Then
 
-                Do While dr.Read()
-                    lstConsulta.Items.Add(dr.Item("Impre") & _SEPARADOR & ceros(dr.Item("Numero"), 6) & _SEPARADOR & dr.Item("Fecha") & _SEPARADOR & _Redondear(dr.Item("Saldo")).ToString.PadLeft(10, "_"))
+                Do While _dr.Read()
+                    lstConsulta.Items.Add(_dr.Item("Impre") & _SEPARADOR & ceros(_dr.Item("Numero"), 6) & _SEPARADOR & _dr.Item("Fecha") & _SEPARADOR & _Redondear(_dr.Item("Saldo")).ToString.PadLeft(10, "_"))
                 Loop
 
                 _HabilitarConsultas()
@@ -121,42 +120,42 @@ Public Class Recibos
                 MsgBox("No se pudieron hallar Cuentas Corrientes asociadas a este Cliente", MsgBoxStyle.Information)
             End If
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar las Cuentas Corrientes del Cliente especificado.", MsgBoxStyle.Critical)
         Finally
 
-            cn.Close()
+            _cn.Close()
 
         End Try
     End Sub
 
     Private Sub _CargarClientes()
-        Dim cn = New SqlConnection()
-        Dim cm = New SqlCommand("SELECT Cliente, Razon FROM Cliente")
-        Dim dr As SqlDataReader
+        Dim _cn As SqlConnection = New SqlConnection()
+        Dim _cm As SqlCommand = New SqlCommand("SELECT Cliente, Razon FROM Cliente")
+        Dim _dr As SqlDataReader
 
-        SQLConnector.conexionSql(cn, cm)
+        SQLConnector.conexionSql(_cn, _cm)
 
         Try
 
-            dr = cm.ExecuteReader()
+            _dr = _cm.ExecuteReader()
             lstConsulta.Items.Clear()
 
-            If dr.HasRows Then
+            If _dr.HasRows Then
 
-                Do While dr.Read()
-                    lstConsulta.Items.Add(dr.Item("Cliente") & _SEPARADOR & dr.Item("Razon"))
+                Do While _dr.Read()
+                    lstConsulta.Items.Add(_dr.Item("Cliente") & _SEPARADOR & _dr.Item("Razon"))
                 Loop
 
             End If
 
             _HabilitarConsultas()
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar los Clientes.", MsgBoxStyle.Critical)
         Finally
 
-            cn.Close()
+            _cn.Close()
 
         End Try
     End Sub
@@ -168,12 +167,12 @@ Public Class Recibos
         txtConsulta.Focus()
     End Sub
 
-    Private Sub btnConsulta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsulta.Click
+    Private Sub btnConsulta_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnConsulta.Click
         _ResetearConsultas()
         lstSeleccion.Visible = True
     End Sub
 
-    Private Sub txtConsulta_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtConsulta.KeyDown
+    Private Sub txtConsulta_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtConsulta.KeyDown
 
         If e.KeyData = Keys.Escape Then
             txtConsulta.Text = ""
@@ -205,7 +204,7 @@ Public Class Recibos
         End If
     End Sub
 
-    Private Sub lstConsulta_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstConsulta.Click
+    Private Sub lstConsulta_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lstConsulta.Click
 
         If Trim(lstConsulta.SelectedItem) <> "" Then
             _TraerConsulta(lstConsulta.SelectedItem)
@@ -227,22 +226,22 @@ Public Class Recibos
 
     Private Sub _AsignarCtaCte(ByVal stringCtaCte As String)
         Dim cuenta As String() = stringCtaCte.Replace(_SEPARADOR, "$").Split("$")
-        Dim cn = New SqlConnection()
-        Dim cm = New SqlCommand("SELECT Numero, Tipo, Saldo, TotalUs, Paridad FROM CtaCte WHERE Numero = '" & cuenta(1) & "' and Impre = '" & cuenta(0) & "' and Cliente = '" & Trim(txtCliente.Text) & "'")
-        Dim dr As SqlDataReader
+        Dim _cn = New SqlConnection()
+        Dim _cm = New SqlCommand("SELECT Numero, Tipo, Saldo, TotalUs, Paridad FROM CtaCte WHERE Numero = '" & cuenta(1) & "' and Impre = '" & cuenta(0) & "' and Cliente = '" & Trim(txtCliente.Text) & "'")
+        Dim _dr As SqlDataReader
         Dim row As Integer
 
-        SQLConnector.conexionSql(cn, cm)
+        SQLConnector.conexionSql(_cn, _cm)
 
         Try
 
-            dr = cm.ExecuteReader()
+            _dr = _cm.ExecuteReader()
 
-            If dr.HasRows Then
+            If _dr.HasRows Then
 
-                Do While dr.Read()
+                Do While _dr.Read()
 
-                    If Not _CuentaUtilizada(dr.Item("Numero")) Then
+                    If Not _CuentaUtilizada(_dr.Item("Numero")) Then
 
                         If gridPagos2.Rows.Count = 1 AndAlso (Trim(gridPagos2.Rows(0).Cells(0).Value) = "" OrElse IsNothing(gridPagos2.Rows(0).Cells(0).Value)) Then
                             row = 0
@@ -254,10 +253,10 @@ Public Class Recibos
                         End If
 
                         With gridPagos2.Rows(row)
-                            .Cells(0).Value = dr.Item("Tipo")
-                            .Cells(3).Value = dr.Item("Numero")
-                            .Cells(4).Value = _Redondear(dr.Item("Saldo"))
-                            .Cells(5).Value = _Redondear(dr.Item("Saldo"))
+                            .Cells(0).Value = _dr.Item("Tipo")
+                            .Cells(3).Value = _dr.Item("Numero")
+                            .Cells(4).Value = _Redondear(_dr.Item("Saldo"))
+                            .Cells(5).Value = _Redondear(_dr.Item("Saldo"))
                             '.Cells(4).Value = _NormalizarNumero(dr.Item("Saldo"))
                             '.Cells(5).Value = _NormalizarNumero(dr.Item("Saldo"))
                         End With
@@ -270,79 +269,91 @@ Public Class Recibos
 
             End If
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar la informacón de la Cuenta Corriente.", MsgBoxStyle.Critical)
         Finally
 
-            cn.Close()
+            _cn.Close()
 
         End Try
 
     End Sub
 
     Private Function _SumarDebitos() As Boolean
-        Dim _Paridad, _TipoCompo As String
+        Dim _Paridad As String
         Dim _Error = False
         lblTotalDebitos.Text = 0
         lblDolares.Text = 0
         lblDiferencia.Text = 0
 
+        ZAcumRecibo = 0
+
         For Each row As DataGridViewRow In gridPagos2.Rows
 
             _Paridad = 0
-            _TipoCompo = 0
+
+            Dim ZTipo As Integer = Val(OrDefault(row.Cells("Tipo2").Value, ""))
 
             If Val(row.Cells(4).Value) <> 0 Then
 
-                Dim cn = New SqlConnection()
-                Dim cm = New SqlCommand("SELECT Paridad, TipoCompo FROM CtaCte WHERE clave = '" & row.Cells(0).Value & ceros(row.Cells(3).Value, 8) & "01'")
-                Dim dr As SqlDataReader
+                Dim _cn = New SqlConnection()
+                Dim _cm = New SqlCommand("SELECT Paridad, TipoCompo FROM CtaCte WHERE clave = '" & row.Cells(0).Value & ceros(row.Cells(3).Value, 8) & "01'")
+                Dim _dr As SqlDataReader
 
-                SQLConnector.conexionSql(cn, cm)
+                SQLConnector.conexionSql(_cn, _cm)
 
                 Try
 
-                    dr = cm.ExecuteReader()
+                    _dr = _cm.ExecuteReader()
 
-                    If dr.HasRows Then
+                    If _dr.HasRows Then
 
-                        With dr
+                        With _dr
 
                             .Read()
 
-                            _Paridad = _NormalizarNumero(.Item("Paridad").ToString)
-                            _TipoCompo = Val(IIf(IsDBNull(.Item("TipoCompo")), 0, .Item("TipoCompo")))
+                            _Paridad = formatonumerico(.Item("Paridad").ToString, 4)
 
                         End With
 
                     End If
 
-                Catch ex As Exception
+                Catch ex As System.Exception
                     MsgBox("Hubo un problema al querer consultar la informacón de la Cuenta Corriente.", MsgBoxStyle.Critical)
                     _Error = True
                 Finally
 
-                    cn.Close()
+                    _cn.Close()
 
                 End Try
+
+                If {1, 2}.Contains(ZTipo) Then
+                    If _Provincia = 24 Then
+
+                        lblDolares.Text += Val(_NormalizarNumero(row.Cells(4).Value))
+                        ZAcumRecibo += (Val(_NormalizarNumero(row.Cells(4).Value)) * Val(_Paridad))
+
+                    Else
+
+                        ZAcumRecibo += Val(_NormalizarNumero(row.Cells(4).Value))
+
+                        If _Paridad <> 0 Then
+
+                            lblDolares.Text += (Val(_NormalizarNumero(row.Cells(4).Value)) / Val(_Paridad))
+
+                        End If
+
+                    End If
+                End If
 
                 'If _Provincia = 24 And Val(_TotalUs) <> 0 Then
                 If _Provincia = 24 Then
 
-                    lblTotalDebitos.Text += (Val(_NormalizarNumero(row.Cells(4).Value)) * Val(_NormalizarNumero(_Paridad)))
-
-                    lblDolares.Text += Val(_NormalizarNumero(row.Cells(4).Value))
+                    lblTotalDebitos.Text += (Val(_NormalizarNumero(row.Cells(4).Value)) * Val(_Paridad))
 
                 Else
 
                     lblTotalDebitos.Text += Val(_NormalizarNumero(row.Cells(4).Value))
-
-                    'If _TipoCompo <> 2 And _Paridad <> 0 Then
-                    If _Paridad <> 0 Then
-
-                        lblDolares.Text += (Val(_NormalizarNumero(row.Cells(4).Value)) / Val(_NormalizarNumero(_Paridad)))
-
-                    End If
 
                 End If
 
@@ -359,13 +370,13 @@ Public Class Recibos
 
     End Function
 
-    Private Function _Redondear(ByVal numero As String) As String
-        Return _NormalizarNumero(Math.Round(Val(_NormalizarNumero(numero)), 2))
+    Private Function _Redondear(ByVal WNumero As String) As String
+        Return _NormalizarNumero(Math.Round(Val(_NormalizarNumero(WNumero)), 2))
     End Function
 
     Private Sub _RecalcularDolaresfinales()
         If Val(_NormalizarNumero(txtParidad.Text)) > 0 Then
-            lblDolares.Text = Val(_NormalizarNumero(lblDolares.Text)) - (Val(_NormalizarNumero(lblTotalDebitos.Text)) / Val(_NormalizarNumero(txtParidad.Text)))
+            lblDolares.Text = Val(_NormalizarNumero(lblDolares.Text)) - (Val(_NormalizarNumero(ZAcumRecibo)) / Val(_NormalizarNumero(txtParidad.Text)))
             lblDolares.Text = Val(_NormalizarNumero(lblDolares.Text)) * -1
 
             'lblDolares.Text = _NormalizarNumero(lblDolares.Text)
@@ -409,7 +420,7 @@ Public Class Recibos
         txtConsulta.Visible = False
     End Sub
 
-    Private Sub btnLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLimpiar.Click
+    Private Sub btnLimpiar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLimpiar.Click
         Cleanner.clean(Me)
         setDefaults()
     End Sub
@@ -493,9 +504,6 @@ Public Class Recibos
         WLocalidad = ""
         WProvincia = ""
         WPostal = ""
-        WRecibo = ""
-        WFecha = ""
-        WCliente = ""
         WEmail = ""
 
         _ClavesCheques.Clear()
@@ -520,8 +528,8 @@ Public Class Recibos
         _Provincia = 0
     End Sub
 
-    Private Sub eventoSegunTipoEnFormaDePagoPara(ByVal val As Integer, ByVal rowIndex As Integer, ByVal columnIndex As Integer)
-        Dim column As Integer = columnIndex
+    Private Sub eventoSegunTipoEnFormaDePagoPara(ByVal val As Integer, ByVal rowIndex As Integer)
+        Dim column As Integer
         Select Case val
             Case 1, 4
                 column = 4
@@ -539,32 +547,8 @@ Public Class Recibos
         gridFormasPago2.CurrentCell = gridFormasPago2.Rows(rowIndex).Cells(column)
     End Sub
 
-    ' CHECKEAR PARA QUE ESTA
-    Private Sub agregarClienteABanco()
-        For Each row As DataGridViewRow In gridFormasPago2.Rows
-            If row.Cells(3).Value <> "" Then
-                If row.Cells(3).Value.ToString.Length > 20 Or row.Cells(3).Value.ToString.Contains("/") Then
-                    'row.Cells(3).Value = ""
-                Else
-                    row.Cells(3).Value = row.Cells(3).Value.ToString & clienteSinCeros()
-                End If
-            End If
-        Next
-    End Sub
-
-    ' CHECKEAR PARA QUE ESTA.
-    Private Function clienteSinCeros()
-        Try
-            Dim cliente As String = txtCliente.Text
-            Dim numero As Integer = CustomConvert.toIntOrZero(cliente.Substring(1, cliente.Count - 1))
-            Return "/" & cliente.First & numero
-        Catch ex As Exception
-            Return ""
-        End Try
-    End Function
-
-    Private Sub btnCerrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrar.Click
-        Me.Close()
+    Private Sub btnCerrar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCerrar.Click
+        Close()
     End Sub
 
     Private Sub mostrarRecibo(ByVal recibo As Recibo)
@@ -715,7 +699,7 @@ Public Class Recibos
 
             End If
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
@@ -727,19 +711,19 @@ Public Class Recibos
         End Try
     End Sub
 
-    Private Function _NormalizarFecha(ByRef fecha As String) As Boolean
+    Private Function _NormalizarFecha(ByRef WFecha As String) As Boolean
         Dim _FechaValida = True
-        Dim _Fecha As String() = fecha.Split("/")
+        Dim ZFecha As String() = WFecha.Split("/")
 
         Try
-            _Fecha(0) = Val(_Fecha(0)).ToString()
-            _Fecha(1) = Val(_Fecha(1)).ToString()
-            _Fecha(2) = Val(_Fecha(2)).ToString()
+            ZFecha(0) = Val(ZFecha(0)).ToString()
+            ZFecha(1) = Val(ZFecha(1)).ToString()
+            ZFecha(2) = Val(ZFecha(2)).ToString()
 
-            fecha = String.Join("/", _Fecha)
+            WFecha = String.Join("/", ZFecha)
 
-            fecha = Date.ParseExact(fecha, "d/M/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo).ToString("dd/MM/yyyy")
-        Catch ex As Exception
+            WFecha = Date.ParseExact(WFecha, "d/M/yyyy", DateTimeFormatInfo.InvariantInfo).ToString("dd/MM/yyyy")
+        Catch ex As System.Exception
             _FechaValida = False
             MsgBox("El formato de la fecha ingresada no es válido.", MsgBoxStyle.Information)
         End Try
@@ -747,8 +731,8 @@ Public Class Recibos
         Return _FechaValida
     End Function
 
-    Private Sub mostrarTipoRecibo(ByVal tipo As Integer)
-        Select Case tipo
+    Private Sub mostrarTipoRecibo(ByVal WTipo As Integer)
+        Select Case WTipo
             Case 3
                 optVarios.Checked = True
             Case 2
@@ -759,31 +743,31 @@ Public Class Recibos
     End Sub
 
     Private Sub mostrarReciboProvisorio(ByVal _ReciboProvisorio As String)
-        Dim cn = New SqlConnection()
-        Dim cm = New SqlCommand("SELECT * FROM RecibosProvi WHERE Recibo = '" + _ReciboProvisorio + "' order by Renglon")
-        Dim dr As SqlDataReader
-        Dim _reciboProvi = 0
+        Dim _cn = New SqlConnection()
+        Dim _cm = New SqlCommand("SELECT * FROM RecibosProvi WHERE Recibo = '" + _ReciboProvisorio + "' order by Renglon")
+        Dim _dr As SqlDataReader
+        Dim _reciboProvi As Integer
 
         If Trim(_ReciboProvisorio) = "" Then
             Exit Sub
         End If
 
-        SQLConnector.conexionSql(cn, cm)
+        SQLConnector.conexionSql(_cn, _cm)
 
         Try
 
-            dr = cm.ExecuteReader()
+            _dr = _cm.ExecuteReader()
 
-            If dr.HasRows Then
+            If _dr.HasRows Then
                 btnLimpiar.PerformClick()
                 _ClavesCheques.Clear()
                 _CuentasContables.Clear()
                 gridFormasPago2.Rows.Clear()
 
-                Do While dr.Read()
-                    Dim renglon As String = dr.Item("Renglon").ToString()
+                Do While _dr.Read()
+                    Dim WRenglon As String = _dr.Item("Renglon").ToString()
 
-                    _reciboProvi = IIf(IsDBNull(dr.Item("ReciboDefinitivo")), 0, dr.Item("ReciboDefinitivo"))
+                    _reciboProvi = IIf(IsDBNull(_dr.Item("ReciboDefinitivo")), 0, _dr.Item("ReciboDefinitivo"))
 
                     If Val(_reciboProvi) <> 0 Then
                         MsgBox("El recibo Provisorio indicado ya se encuentra asociado a un Recibo Definitivo y no se encuentra disponible.", MsgBoxStyle.Information)
@@ -791,79 +775,78 @@ Public Class Recibos
                     End If
 
 
-                    If renglon = "01" Then
-                        txtProvi.Text = IIf(IsDBNull(dr.Item("Recibo")), "", dr.Item("Recibo"))
-                        txtFecha.Text = IIf(IsDBNull(dr.Item("Fecha")), "", dr.Item("Fecha"))
-                        txtCliente.Text = IIf(IsDBNull(dr.Item("Cliente")), "", dr.Item("Cliente"))
+                    If WRenglon = "01" Then
+                        txtProvi.Text = IIf(IsDBNull(_dr.Item("Recibo")), "", _dr.Item("Recibo"))
+                        txtFecha.Text = IIf(IsDBNull(_dr.Item("Fecha")), "", _dr.Item("Fecha"))
+                        txtCliente.Text = IIf(IsDBNull(_dr.Item("Cliente")), "", _dr.Item("Cliente"))
                         Dim cliente As Cliente = DAOCliente.buscarClientePorCodigo(txtCliente.Text)
 
                         If Not IsNothing(cliente) Then
                             txtNombre.Text = cliente.razon
-                            cliente = Nothing
                         End If
 
                         _DeterminarParidad()
 
-                        txtRetGanancias.Text = IIf(IsDBNull(dr.Item("RetGanancias")), "0", dr.Item("RetGanancias"))
-                        _ComprobanteRetGanancias = IIf(IsDBNull(dr.Item("ComproGanan")), "", dr.Item("ComproGanan"))
-                        txtRetIva.Text = IIf(IsDBNull(dr.Item("RetIva")), "0", dr.Item("RetIva"))
-                        _ComprobanteRetIva = IIf(IsDBNull(dr.Item("ComproIva")), "", dr.Item("ComproIva"))
-                        txtRetSuss.Text = IIf(IsDBNull(dr.Item("RetSuss")), "0", dr.Item("RetSuss"))
-                        _ComprobanteRetSuss = IIf(IsDBNull(dr.Item("ComproSuss")), "", dr.Item("ComproSuss"))
-                        txtRetIB.Text = IIf(IsDBNull(dr.Item("RetOtra")), "0", dr.Item("RetOtra"))
+                        txtRetGanancias.Text = IIf(IsDBNull(_dr.Item("RetGanancias")), "0", _dr.Item("RetGanancias"))
+                        _ComprobanteRetGanancias = IIf(IsDBNull(_dr.Item("ComproGanan")), "", _dr.Item("ComproGanan"))
+                        txtRetIva.Text = IIf(IsDBNull(_dr.Item("RetIva")), "0", _dr.Item("RetIva"))
+                        _ComprobanteRetIva = IIf(IsDBNull(_dr.Item("ComproIva")), "", _dr.Item("ComproIva"))
+                        txtRetSuss.Text = IIf(IsDBNull(_dr.Item("RetSuss")), "0", _dr.Item("RetSuss"))
+                        _ComprobanteRetSuss = IIf(IsDBNull(_dr.Item("ComproSuss")), "", _dr.Item("ComproSuss"))
+                        txtRetIB.Text = IIf(IsDBNull(_dr.Item("RetOtra")), "0", _dr.Item("RetOtra"))
                         'txtParidad.Text = IIf(IsDBNull(dr.Item("Paridad")), "0", dr.Item("Paridad"))
-                        _RetIB1 = IIf(IsDBNull(dr.Item("RetIb1")), "0", dr.Item("RetIb1"))
-                        _CompIB1 = IIf(IsDBNull(dr.Item("NroRetIb1")), "", dr.Item("NroRetIb1"))
-                        _RetIB2 = IIf(IsDBNull(dr.Item("RetIb2")), "0", dr.Item("RetIb2"))
-                        _CompIB2 = IIf(IsDBNull(dr.Item("NroRetIb2")), "", dr.Item("NroRetIb2"))
-                        _RetIB3 = IIf(IsDBNull(dr.Item("RetIb3")), "0", dr.Item("RetIb3"))
-                        _CompIB3 = IIf(IsDBNull(dr.Item("NroRetIb3")), "", dr.Item("NroRetIb3"))
-                        _RetIB4 = IIf(IsDBNull(dr.Item("RetIb4")), "0", dr.Item("RetIb4"))
-                        _CompIB4 = IIf(IsDBNull(dr.Item("NroRetIb4")), "", dr.Item("NroRetIb4"))
-                        _RetIB5 = IIf(IsDBNull(dr.Item("RetIb5")), "0", dr.Item("RetIb5"))
-                        _CompIB5 = IIf(IsDBNull(dr.Item("NroRetIb5")), "", dr.Item("NroRetIb5"))
-                        _RetIB6 = IIf(IsDBNull(dr.Item("RetIb6")), "0", dr.Item("RetIb6"))
-                        _CompIB6 = IIf(IsDBNull(dr.Item("NroRetIb6")), "", dr.Item("NroRetIb6"))
-                        _RetIB7 = IIf(IsDBNull(dr.Item("RetIb7")), "0", dr.Item("RetIb7"))
-                        _CompIB7 = IIf(IsDBNull(dr.Item("NroRetIb7")), "", dr.Item("NroRetIb7"))
-                        _RetIB8 = IIf(IsDBNull(dr.Item("RetIb8")), "0", dr.Item("RetIb8"))
-                        _CompIB8 = IIf(IsDBNull(dr.Item("NroRetIb8")), "", dr.Item("NroRetIb8"))
+                        _RetIB1 = IIf(IsDBNull(_dr.Item("RetIb1")), "0", _dr.Item("RetIb1"))
+                        _CompIB1 = IIf(IsDBNull(_dr.Item("NroRetIb1")), "", _dr.Item("NroRetIb1"))
+                        _RetIB2 = IIf(IsDBNull(_dr.Item("RetIb2")), "0", _dr.Item("RetIb2"))
+                        _CompIB2 = IIf(IsDBNull(_dr.Item("NroRetIb2")), "", _dr.Item("NroRetIb2"))
+                        _RetIB3 = IIf(IsDBNull(_dr.Item("RetIb3")), "0", _dr.Item("RetIb3"))
+                        _CompIB3 = IIf(IsDBNull(_dr.Item("NroRetIb3")), "", _dr.Item("NroRetIb3"))
+                        _RetIB4 = IIf(IsDBNull(_dr.Item("RetIb4")), "0", _dr.Item("RetIb4"))
+                        _CompIB4 = IIf(IsDBNull(_dr.Item("NroRetIb4")), "", _dr.Item("NroRetIb4"))
+                        _RetIB5 = IIf(IsDBNull(_dr.Item("RetIb5")), "0", _dr.Item("RetIb5"))
+                        _CompIB5 = IIf(IsDBNull(_dr.Item("NroRetIb5")), "", _dr.Item("NroRetIb5"))
+                        _RetIB6 = IIf(IsDBNull(_dr.Item("RetIb6")), "0", _dr.Item("RetIb6"))
+                        _CompIB6 = IIf(IsDBNull(_dr.Item("NroRetIb6")), "", _dr.Item("NroRetIb6"))
+                        _RetIB7 = IIf(IsDBNull(_dr.Item("RetIb7")), "0", _dr.Item("RetIb7"))
+                        _CompIB7 = IIf(IsDBNull(_dr.Item("NroRetIb7")), "", _dr.Item("NroRetIb7"))
+                        _RetIB8 = IIf(IsDBNull(_dr.Item("RetIb8")), "0", _dr.Item("RetIb8"))
+                        _CompIB8 = IIf(IsDBNull(_dr.Item("NroRetIb8")), "", _dr.Item("NroRetIb8"))
 
-                        _RetIB9 = IIf(IsDBNull(dr.Item("RetIb9")), "", dr.Item("RetIb9"))
-                        _CompIB9 = IIf(IsDBNull(dr.Item("NroRetIb9")), "", dr.Item("NroRetIb9"))
-                        _RetIB10 = IIf(IsDBNull(dr.Item("RetIb10")), "", dr.Item("RetIb10"))
-                        _CompIB10 = IIf(IsDBNull(dr.Item("NroRetIb10")), "", dr.Item("NroRetIb10"))
-                        _RetIB11 = IIf(IsDBNull(dr.Item("RetIb11")), "", dr.Item("RetIb11"))
-                        _CompIB11 = IIf(IsDBNull(dr.Item("NroRetIb11")), "", dr.Item("NroRetIb11"))
-                        _RetIB12 = IIf(IsDBNull(dr.Item("RetIb12")), "", dr.Item("RetIb12"))
-                        _CompIB12 = IIf(IsDBNull(dr.Item("NroRetIb12")), "", dr.Item("NroRetIb12"))
-                        _RetIB13 = IIf(IsDBNull(dr.Item("RetIb13")), "", dr.Item("RetIb13"))
-                        _CompIB13 = IIf(IsDBNull(dr.Item("NroRetIb13")), "", dr.Item("NroRetIb13"))
-                        _RetIB14 = IIf(IsDBNull(dr.Item("RetIb14")), "", dr.Item("RetIb14"))
-                        _CompIB14 = IIf(IsDBNull(dr.Item("NroRetIb14")), "", dr.Item("NroRetIb14"))
+                        _RetIB9 = IIf(IsDBNull(_dr.Item("RetIb9")), "", _dr.Item("RetIb9"))
+                        _CompIB9 = IIf(IsDBNull(_dr.Item("NroRetIb9")), "", _dr.Item("NroRetIb9"))
+                        _RetIB10 = IIf(IsDBNull(_dr.Item("RetIb10")), "", _dr.Item("RetIb10"))
+                        _CompIB10 = IIf(IsDBNull(_dr.Item("NroRetIb10")), "", _dr.Item("NroRetIb10"))
+                        _RetIB11 = IIf(IsDBNull(_dr.Item("RetIb11")), "", _dr.Item("RetIb11"))
+                        _CompIB11 = IIf(IsDBNull(_dr.Item("NroRetIb11")), "", _dr.Item("NroRetIb11"))
+                        _RetIB12 = IIf(IsDBNull(_dr.Item("RetIb12")), "", _dr.Item("RetIb12"))
+                        _CompIB12 = IIf(IsDBNull(_dr.Item("NroRetIb12")), "", _dr.Item("NroRetIb12"))
+                        _RetIB13 = IIf(IsDBNull(_dr.Item("RetIb13")), "", _dr.Item("RetIb13"))
+                        _CompIB13 = IIf(IsDBNull(_dr.Item("NroRetIb13")), "", _dr.Item("NroRetIb13"))
+                        _RetIB14 = IIf(IsDBNull(_dr.Item("RetIb14")), "", _dr.Item("RetIb14"))
+                        _CompIB14 = IIf(IsDBNull(_dr.Item("NroRetIb14")), "", _dr.Item("NroRetIb14"))
 
-                        _RetIB15 = IIf(IsDBNull(dr.Item("RetIb15")), "", dr.Item("RetIb15"))
-                        _CompIB15 = IIf(IsDBNull(dr.Item("NroRetIb15")), "", dr.Item("NroRetIb15"))
-                        _RetIB16 = IIf(IsDBNull(dr.Item("RetIb16")), "", dr.Item("RetIb16"))
-                        _CompIB16 = IIf(IsDBNull(dr.Item("NroRetIb16")), "", dr.Item("NroRetIb16"))
-                        _RetIB17 = IIf(IsDBNull(dr.Item("RetIb17")), "", dr.Item("RetIb17"))
-                        _CompIB17 = IIf(IsDBNull(dr.Item("NroRetIb17")), "", dr.Item("NroRetIb17"))
-                        _RetIB18 = IIf(IsDBNull(dr.Item("RetIb18")), "", dr.Item("RetIb18"))
-                        _CompIB18 = IIf(IsDBNull(dr.Item("NroRetIb18")), "", dr.Item("NroRetIb18"))
-                        _RetIB19 = IIf(IsDBNull(dr.Item("RetIb19")), "", dr.Item("RetIb19"))
-                        _CompIB19 = IIf(IsDBNull(dr.Item("NroRetIb19")), "", dr.Item("NroRetIb19"))
-                        _RetIB20 = IIf(IsDBNull(dr.Item("RetIb20")), "", dr.Item("RetIb20"))
-                        _CompIB20 = IIf(IsDBNull(dr.Item("NroRetIb20")), "", dr.Item("NroRetIb20"))
-                        _RetIB21 = IIf(IsDBNull(dr.Item("RetIb21")), "", dr.Item("RetIb21"))
-                        _CompIB21 = IIf(IsDBNull(dr.Item("NroRetIb21")), "", dr.Item("NroRetIb21"))
-                        _RetIB22 = IIf(IsDBNull(dr.Item("RetIb22")), "", dr.Item("RetIb22"))
-                        _CompIB22 = IIf(IsDBNull(dr.Item("NroRetIb22")), "", dr.Item("NroRetIb22"))
-                        _RetIB23 = IIf(IsDBNull(dr.Item("RetIb23")), "", dr.Item("RetIb23"))
-                        _CompIB23 = IIf(IsDBNull(dr.Item("NroRetIb23")), "", dr.Item("NroRetIb23"))
+                        _RetIB15 = IIf(IsDBNull(_dr.Item("RetIb15")), "", _dr.Item("RetIb15"))
+                        _CompIB15 = IIf(IsDBNull(_dr.Item("NroRetIb15")), "", _dr.Item("NroRetIb15"))
+                        _RetIB16 = IIf(IsDBNull(_dr.Item("RetIb16")), "", _dr.Item("RetIb16"))
+                        _CompIB16 = IIf(IsDBNull(_dr.Item("NroRetIb16")), "", _dr.Item("NroRetIb16"))
+                        _RetIB17 = IIf(IsDBNull(_dr.Item("RetIb17")), "", _dr.Item("RetIb17"))
+                        _CompIB17 = IIf(IsDBNull(_dr.Item("NroRetIb17")), "", _dr.Item("NroRetIb17"))
+                        _RetIB18 = IIf(IsDBNull(_dr.Item("RetIb18")), "", _dr.Item("RetIb18"))
+                        _CompIB18 = IIf(IsDBNull(_dr.Item("NroRetIb18")), "", _dr.Item("NroRetIb18"))
+                        _RetIB19 = IIf(IsDBNull(_dr.Item("RetIb19")), "", _dr.Item("RetIb19"))
+                        _CompIB19 = IIf(IsDBNull(_dr.Item("NroRetIb19")), "", _dr.Item("NroRetIb19"))
+                        _RetIB20 = IIf(IsDBNull(_dr.Item("RetIb20")), "", _dr.Item("RetIb20"))
+                        _CompIB20 = IIf(IsDBNull(_dr.Item("NroRetIb20")), "", _dr.Item("NroRetIb20"))
+                        _RetIB21 = IIf(IsDBNull(_dr.Item("RetIb21")), "", _dr.Item("RetIb21"))
+                        _CompIB21 = IIf(IsDBNull(_dr.Item("NroRetIb21")), "", _dr.Item("NroRetIb21"))
+                        _RetIB22 = IIf(IsDBNull(_dr.Item("RetIb22")), "", _dr.Item("RetIb22"))
+                        _CompIB22 = IIf(IsDBNull(_dr.Item("NroRetIb22")), "", _dr.Item("NroRetIb22"))
+                        _RetIB23 = IIf(IsDBNull(_dr.Item("RetIb23")), "", _dr.Item("RetIb23"))
+                        _CompIB23 = IIf(IsDBNull(_dr.Item("NroRetIb23")), "", _dr.Item("NroRetIb23"))
 
-                        If Val(IIf(IsDBNull(dr.Item("TipoRec")), "0", dr.Item("TipoRec"))) = 1 Then
+                        If Val(IIf(IsDBNull(_dr.Item("TipoRec")), "0", _dr.Item("TipoRec"))) = 1 Then
                             optCtaCte.Checked = True
-                        ElseIf Val(IIf(IsDBNull(dr.Item("TipoRec")), "0", dr.Item("TipoRec"))) = 2 Then
+                        ElseIf Val(IIf(IsDBNull(_dr.Item("TipoRec")), "0", _dr.Item("TipoRec"))) = 2 Then
                             optAnticipos.Checked = True
                         End If
 
@@ -872,16 +855,16 @@ Public Class Recibos
                     Dim _FormaPagoActual As Integer = gridFormasPago2.Rows.Add()
 
                     With gridFormasPago2.Rows(_FormaPagoActual)
-                        .Cells(0).Value = IIf(IsDBNull(dr.Item("Tipo2")), "", dr.Item("Tipo2"))
-                        .Cells(1).Value = IIf(IsDBNull(dr.Item("Numero2")), "", dr.Item("Numero2"))
-                        .Cells(2).Value = IIf(IsDBNull(dr.Item("Fecha2")), "", dr.Item("Fecha2"))
-                        .Cells(3).Value = IIf(IsDBNull(dr.Item("banco2")), "", dr.Item("banco2"))
-                        .Cells("NroCuit").Value = IIf(IsDBNull(dr.Item("Cuit")), "00000000000", dr.Item("Cuit"))
-                        .Cells(4).Value = _NormalizarNumero(Str$(IIf(IsDBNull(dr.Item("Importe2")), "0", dr.Item("Importe2"))))
+                        .Cells(0).Value = IIf(IsDBNull(_dr.Item("Tipo2")), "", _dr.Item("Tipo2"))
+                        .Cells(1).Value = IIf(IsDBNull(_dr.Item("Numero2")), "", _dr.Item("Numero2"))
+                        .Cells(2).Value = IIf(IsDBNull(_dr.Item("Fecha2")), "", _dr.Item("Fecha2"))
+                        .Cells(3).Value = IIf(IsDBNull(_dr.Item("banco2")), "", _dr.Item("banco2"))
+                        .Cells("NroCuit").Value = IIf(IsDBNull(_dr.Item("Cuit")), "00000000000", _dr.Item("Cuit"))
+                        .Cells(4).Value = _NormalizarNumero(Str$(IIf(IsDBNull(_dr.Item("Importe2")), "0", _dr.Item("Importe2"))))
                     End With
 
-                    If Val(dr.Item("Tipo2")) = 2 Then
-                        With dr
+                    If Val(_dr.Item("Tipo2")) = 2 Then
+                        With _dr
                             _ClavesCheques.Add({CInt(IIf(IsDBNull(.Item("Renglon")), "", .Item("Renglon"))) - 1, _
                                                      IIf(IsDBNull(.Item("ClaveCheque")), "", .Item("ClaveCheque")), _
                                                      IIf(IsDBNull(.Item("BancoCheque")), "", .Item("BancoCheque")), _
@@ -896,7 +879,7 @@ Public Class Recibos
                         End With
                     End If
 
-                    With dr
+                    With _dr
                         If Val(IIf(IsDBNull(.Item("Tipo2")), "0", .Item("Tipo2"))) = 4 Then
 
                             _CuentasContables.Add({Val(.Item("Renglon")) - 1, IIf(IsDBNull(.Item("Cuenta")), "", .Item("Cuenta"))})
@@ -923,55 +906,55 @@ Public Class Recibos
 
             End If
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar el recibo provisorio.", MsgBoxStyle.Critical)
         Finally
 
 
-            cn.Close()
+            _cn.Close()
 
 
         End Try
     End Sub
 
-    Private Sub _DeterminarParidad(Optional ByVal fecha As String = "")
-        Dim _Fecha As String = IIf(fecha = "", txtFecha.Text, fecha)
-        Dim cn = New SqlConnection()
-        Dim cm = New SqlCommand("SELECT Cambio FROM Cambios WHERE Fecha = '" & _Fecha & "'")
-        Dim dr As SqlDataReader
+    Private Sub _DeterminarParidad(Optional ByVal WFecha As String = "")
+        Dim ZFecha As String = IIf(WFecha = "", txtFecha.Text, WFecha)
+        Dim _cn = New SqlConnection()
+        Dim _cm = New SqlCommand("SELECT Cambio FROM Cambios WHERE Fecha = '" & ZFecha & "'")
+        Dim _dr As SqlDataReader
 
         If Trim(txtFecha.Text) <> "" Then
 
-            SQLConnector.conexionSql(cn, cm)
+            SQLConnector.conexionSql(_cn, _cm)
 
             Try
 
-                dr = cm.ExecuteReader()
+                _dr = _cm.ExecuteReader()
 
-                If dr.HasRows Then
+                If _dr.HasRows Then
 
-                    dr.Read()
+                    _dr.Read()
 
-                    txtParidad.Text = _NormalizarNumero(dr.Item("Cambio"))
+                    txtParidad.Text = _NormalizarNumero(_dr.Item("Cambio"))
 
                 Else
                     txtParidad.Text = ""
                 End If
 
-            Catch ex As Exception
+            Catch ex As System.Exception
                 MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
             Finally
 
-                cn.Close()
+                _cn.Close()
 
             End Try
         End If
 
     End Sub
 
-    Private Function _NormalizarNumero(ByVal numero As String) As String
+    Private Function _NormalizarNumero(ByVal WNumero As String) As String
 
-        Return Proceso.formatonumerico(numero)
+        Return formatonumerico(WNumero)
 
     End Function
 
@@ -1006,6 +989,13 @@ Public Class Recibos
                     If IsDate(row.Cells(2).Value) And IsDate(txtFecha.Text) And DateDiff(DateInterval.Day, CDate(row.Cells(2).Value), CDate(txtFecha.Text)) > 30 Then
                         _Error = True
                         Exit For
+                    End If
+
+                    Dim aux As String = Trim(OrDefault(row.Cells(3).Value, ""))
+                    Dim WCodigoBanco As String = _GenerarCodigoBanco(aux)
+
+                    If Not aux.Contains(WCodigoBanco) Then
+                        row.Cells(3).Value = WCodigoBanco
                     End If
 
                 End If
@@ -1047,40 +1037,40 @@ Public Class Recibos
     End Sub
 
     Private Sub mostrarCliente(ByVal cliente As String)
-        Dim cn = New SqlConnection()
-        Dim cm = New SqlCommand("SELECT c.Cliente, c.Razon, c.Direccion, c.Localidad, c.Provincia, p.Nombre, c.Postal, c.EmailFacturaII as Email " _
+        Dim _cn = New SqlConnection()
+        Dim _cm = New SqlCommand("SELECT c.Cliente, c.Razon, c.Direccion, c.Localidad, c.Provincia, p.Nombre, c.Postal, c.EmailFacturaII as Email " _
                                               & " FROM Cliente as c, Provincia as p WHERE c.Cliente = '" & cliente & "' AND p.Provincia = c.Provincia")
-        Dim dr As SqlDataReader
+        Dim _dr As SqlDataReader
 
-        SQLConnector.conexionSql(cn, cm)
+        SQLConnector.conexionSql(_cn, _cm)
 
         Try
 
-            dr = cm.ExecuteReader()
+            _dr = _cm.ExecuteReader()
 
-            If dr.HasRows Then
+            If _dr.HasRows Then
 
-                dr.Read()
+                _dr.Read()
 
-                txtCliente.Text = dr.Item("Cliente")
-                txtNombre.Text = dr.Item("Razon")
-                _Provincia = Val(dr.Item("Provincia"))
-                WRazon = dr.Item("Razon")
-                WDireccion = dr.Item("Direccion")
-                WLocalidad = dr.Item("Localidad")
-                WProvincia = dr.Item("Nombre")
-                WPostal = dr.Item("Postal")
-                WEmail = IIf(IsDBNull(dr.Item("Email")), "", dr.Item("Email"))
+                txtCliente.Text = _dr.Item("Cliente")
+                txtNombre.Text = _dr.Item("Razon")
+                _Provincia = Val(_dr.Item("Provincia"))
+                WRazon = _dr.Item("Razon")
+                WDireccion = _dr.Item("Direccion")
+                WLocalidad = _dr.Item("Localidad")
+                WProvincia = _dr.Item("Nombre")
+                WPostal = _dr.Item("Postal")
+                WEmail = IIf(IsDBNull(_dr.Item("Email")), "", _dr.Item("Email"))
             Else
                 MsgBox("El cliente especificado, no existe. Compruebe y vuelva a intentarlo.")
             End If
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer cargar los datos del Cliente solicitado.", MsgBoxStyle.Critical)
         Finally
 
 
-            cn.Close()
+            _cn.Close()
 
 
         End Try
@@ -1097,15 +1087,7 @@ Public Class Recibos
         End If
     End Sub
 
-    Private Sub mostrarCuentaContable(ByVal cuentaCompleta As CuentaContable)
-
-        txtCuenta.Text = cuentaCompleta.id
-        txtNombreCuenta.Text = cuentaCompleta.descripcion
-
-    End Sub
-
-
-    Private Sub txtCliente_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtCliente.Leave
+    Private Sub txtCliente_Leave(ByVal sender As Object, ByVal e As EventArgs) Handles txtCliente.Leave
 
         If Trim(txtCliente.Text) <> "" Then
             mostrarCliente(txtCliente.Text)
@@ -1113,7 +1095,7 @@ Public Class Recibos
 
     End Sub
 
-    Private Sub txtProvi_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtProvi.Leave
+    Private Sub txtProvi_Leave(ByVal sender As Object, ByVal e As EventArgs) Handles txtProvi.Leave
 
         If Trim(txtProvi.Text) <> "" Then
             txtProvi.Text = ceros(txtProvi.Text, 6)
@@ -1121,18 +1103,7 @@ Public Class Recibos
 
     End Sub
 
-    Private Function tipoRecibo()
-        If optCtaCte.Checked Then
-            Return 1
-        Else
-            If optAnticipos.Checked Then
-                Return 2
-            End If
-        End If
-        Return 3
-    End Function
-
-    Private Sub btnAgregar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregar.Click
+    Private Sub btnAgregar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAgregar.Click
         ' Comprobamos que el numero de recibo sea cero. En caso de que no,
         ' Chequeamos si el numero se corresponde con algun Recibo existente y se avisa al usuario de que no se permite actualizar.
         Dim WMarcaDiferencia = ""
@@ -1143,6 +1114,9 @@ Public Class Recibos
         For Each row In gridFormasPago2.Rows
 
             With row
+
+                If Val(OrDefault(.Cells("tipo").value, "")) = 2 Then .Cells("banco").Value = _GenerarCodigoBanco(.Cells("banco").Value)
+
                 If Not IsNothing(.Cells(0).Value) AndAlso (Val(.Cells(0).Value) = 2 Or Val(.Cells(0).Value) = 5) Then
 
                     ' Controlamos que no se ingrese un numero = 0 para los cheques.
@@ -1293,7 +1267,7 @@ Public Class Recibos
                 Dim WIvaComp As DataRow = GetSingle("SELECT Max(NroInterno) As Ultimo FROM IvaComp")
 
                 If WIvaComp IsNot Nothing Then
-                    Dim WProximo As Integer = 0
+                    Dim WProximo As Integer
 
                     WProximo = OrDefault(WIvaComp.Item("Ultimo"), 0) + 1
 
@@ -1307,25 +1281,25 @@ Public Class Recibos
                     '
                     SQLConnector.executeProcedure("alta_imputacion", "2" & WProximo & "01", "2", WDatosFCE.Item("Proveedor"), "99",
                                                 "A", "0000", WDatosFCE.Item("Boleto"), "01",
-                                                txtFecha.Text, "", "100", 0, formatonumerico(Val(formatonumerico(WNetoCmp)) + Val(formatonumerico(WIvaCmp)) + Val(formatonumerico(WIvaPercepcion))), WProximo, Proceso.ordenaFecha(txtFecha.Text))
+                                                txtFecha.Text, "", "100", 0, formatonumerico(Val(formatonumerico(WNetoCmp)) + Val(formatonumerico(WIvaCmp)) + Val(formatonumerico(WIvaPercepcion))), WProximo, ordenaFecha(txtFecha.Text))
                     '
                     ' ALTA DE GASTOS
                     '
                     SQLConnector.executeProcedure("alta_imputacion", "2" & WProximo & "02", "2", WDatosFCE.Item("Proveedor"), "99",
                                                 "A", "0000", WDatosFCE.Item("Boleto"), "02",
-                                                txtFecha.Text, "", "5654", Val(formatonumerico(WNetoCmp)), 0, WProximo, Proceso.ordenaFecha(txtFecha.Text))
+                                                txtFecha.Text, "", "5654", Val(formatonumerico(WNetoCmp)), 0, WProximo, ordenaFecha(txtFecha.Text))
                     '
                     ' ALTA DE IVA
                     '
                     SQLConnector.executeProcedure("alta_imputacion", "2" & WProximo & "03", "2", WDatosFCE.Item("Proveedor"), "99",
                                                 "A", "0000", WDatosFCE.Item("Boleto"), "03",
-                                                txtFecha.Text, "", "151", Val(formatonumerico(WIvaCmp)), 0, WProximo, Proceso.ordenaFecha(txtFecha.Text))
+                                                txtFecha.Text, "", "151", Val(formatonumerico(WIvaCmp)), 0, WProximo, ordenaFecha(txtFecha.Text))
                     '
                     'ALTA DE IVA PERCEPCION
                     '
                     SQLConnector.executeProcedure("alta_imputacion", "2" & WProximo & "03", "2", WDatosFCE.Item("Proveedor"), "99",
                                                "A", "0000", WDatosFCE.Item("Boleto"), "03",
-                                               txtFecha.Text, "", "152", Val(formatonumerico(WIvaPercepcion)), 0, WProximo, Proceso.ordenaFecha(txtFecha.Text))
+                                               txtFecha.Text, "", "152", Val(formatonumerico(WIvaPercepcion)), 0, WProximo, ordenaFecha(txtFecha.Text))
 
                     ZSqls.Add("UPDATE IvaComp SET Exento = 0, Iva27 = 0, Iva105 = 0, Ib = 0, Impre = 'OC', OrdFecha = '" & ordenaFecha(txtFecha.Text) & "' WHERE NroInterno  = '" & WProximo & "'")
 
@@ -1346,9 +1320,6 @@ Public Class Recibos
                     .Dispose()
                 End With
             End If
-
-            ' Si llegamos hasta aca se supone que todo salio bien.
-            'MsgBox("Se ha generado correctamente el Recibo solicitado. Nº de Recibo: " & txtRecibo.Text, MsgBoxStyle.Information)
 
             ' Recargamos los datos del recibo.
             mostrarRecibo(DAORecibo.buscarRecibo(txtRecibo.Text))
@@ -1382,7 +1353,7 @@ Public Class Recibos
 
             End If
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
@@ -1396,11 +1367,11 @@ Public Class Recibos
     Private Sub _AltaCreditos(ByVal WMarcaDiferencia As String)
 
         Dim iRow As Integer
-        Dim _Cheque As Object = Nothing
+        Dim _Cheque As Object
         Dim _CuitExistente = False
-        Dim cn = New SqlConnection()
-        Dim cm = New SqlCommand()
-        Dim dr As SqlDataReader
+        Dim _cn = New SqlConnection()
+        Dim _cm = New SqlCommand()
+        Dim _dr As SqlDataReader
 
         ' Ahora guardamos los creditos.
         For iRow = 0 To gridFormasPago2.Rows.Count - 1
@@ -1479,16 +1450,16 @@ Public Class Recibos
                 End If
 
                 If Trim(txtProvi.Text) <> "" Then
-                    cm.CommandText = "SELECT Estado2 FROM RecibosProvi Where Recibo = '" & txtProvi.Text & "'  AND Numero2 = '" & XNumero2 & "'"
-                    SQLConnector.conexionSql(cn, cm)
+                    _cm.CommandText = "SELECT Estado2 FROM RecibosProvi Where Recibo = '" & txtProvi.Text & "'  AND Numero2 = '" & XNumero2 & "'"
+                    SQLConnector.conexionSql(_cn, _cm)
 
                     Try
 
-                        dr = cm.ExecuteReader()
+                        _dr = _cm.ExecuteReader()
 
-                        If dr.HasRows Then
+                        If _dr.HasRows Then
 
-                            With dr
+                            With _dr
                                 .Read()
 
                                 XEstado2 = Trim(UCase(.Item("Estado2")))
@@ -1497,12 +1468,12 @@ Public Class Recibos
 
                         End If
 
-                    Catch ex As Exception
+                    Catch ex As System.Exception
                         MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
                     Finally
 
 
-                        cn.Close()
+                        _cn.Close()
 
 
                         XSql = ""
@@ -1549,19 +1520,19 @@ Public Class Recibos
                 & "FechaDepo, FechaDepoOrd, MarcaDiferencia) " _
                 & "VALUES(" & XParam & ")"
 
-                cm.CommandText = XSql
-                SQLConnector.conexionSql(cn, cm)
+                _cm.CommandText = XSql
+                SQLConnector.conexionSql(_cn, _cm)
 
                 Try
-                    cm.ExecuteNonQuery()
+                    _cm.ExecuteNonQuery()
 
-                Catch ex As Exception
+                Catch ex As System.Exception
                     MsgBox("Hubo un problema al querer guardar el nuevo recibo.", MsgBoxStyle.Critical)
                     Exit Sub
                 Finally
 
 
-                    cn.Close()
+                    _cn.Close()
 
 
                     XSql = ""
@@ -1579,19 +1550,19 @@ Public Class Recibos
                  & " CuentaCheque = " + "'" + XCuentaCheque + "'" _
                  & " Where Clave = " + "'" + XClave + "'"
 
-                cm.CommandText = XSql
-                SQLConnector.conexionSql(cn, cm)
+                _cm.CommandText = XSql
+                SQLConnector.conexionSql(_cn, _cm)
 
                 Try
-                    cm.ExecuteNonQuery()
+                    _cm.ExecuteNonQuery()
 
-                Catch ex As Exception
+                Catch ex As System.Exception
                     MsgBox("Hubo un problema al querer actualizar el recibo corriente.", MsgBoxStyle.Critical)
                     Exit Sub
                 Finally
 
 
-                    cn.Close()
+                    _cn.Close()
 
 
                     XSql = ""
@@ -1604,25 +1575,25 @@ Public Class Recibos
 
                 If Trim(XCuit) <> "" Then
 
-                    cm.CommandText = "SELECT Clave FROM Cuit Where Clave = '" & XClaveCuit & "'"
-                    SQLConnector.conexionSql(cn, cm)
+                    _cm.CommandText = "SELECT Clave FROM Cuit Where Clave = '" & XClaveCuit & "'"
+                    SQLConnector.conexionSql(_cn, _cm)
 
                     Try
 
-                        dr = cm.ExecuteReader()
+                        _dr = _cm.ExecuteReader()
 
-                        If dr.HasRows Then
+                        If _dr.HasRows Then
 
                             _CuitExistente = True
 
                         End If
 
-                    Catch ex As Exception
+                    Catch ex As System.Exception
                         MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
                     Finally
 
 
-                        cn.Close()
+                        _cn.Close()
 
 
                         XSql = ""
@@ -1635,19 +1606,19 @@ Public Class Recibos
                         ' Damos de alta el nuevo Cuit.
                         XSql = "INSERT INTO Cuit (Clave, Banco, Sucursal, Cuenta, Cuit) Values ('" + XClaveCuit + "','" + XBancoCheque + "','" + XSucursalCheque + "','" + XCuentaCheque + "', '" + XCuit + "')"
 
-                        cm.CommandText = XSql
-                        SQLConnector.conexionSql(cn, cm)
+                        _cm.CommandText = XSql
+                        SQLConnector.conexionSql(_cn, _cm)
 
                         Try
-                            cm.ExecuteNonQuery()
+                            _cm.ExecuteNonQuery()
 
-                        Catch ex As Exception
+                        Catch ex As System.Exception
                             MsgBox("Hubo un problema al querer guardar el nuevo Cuit.", MsgBoxStyle.Critical)
                             Exit Sub
                         Finally
 
 
-                            cn.Close()
+                            _cn.Close()
 
 
                             XSql = ""
@@ -1732,19 +1703,19 @@ Public Class Recibos
                             & "Importe2, Importe3, Importe4, Importe5, Importe6, Importe7, WDate, Seguro, Flete, ImpoIb) " _
                             & "VALUES(" & XParam & ")"
 
-                    cm.CommandText = XSql
-                    SQLConnector.conexionSql(cn, cm)
+                    _cm.CommandText = XSql
+                    SQLConnector.conexionSql(_cn, _cm)
 
                     Try
-                        cm.ExecuteNonQuery()
+                        _cm.ExecuteNonQuery()
 
-                    Catch ex As Exception
+                    Catch ex As System.Exception
                         MsgBox("Hubo un problema al querer guardar la nueva Cuenta Corriente.", MsgBoxStyle.Critical)
                         Exit Sub
                     Finally
 
 
-                        cn.Close()
+                        _cn.Close()
 
 
                         XSql = ""
@@ -1772,7 +1743,7 @@ Public Class Recibos
 
             cm.ExecuteNonQuery()
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
@@ -1796,7 +1767,7 @@ Public Class Recibos
 
             cm.ExecuteNonQuery()
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
@@ -1831,7 +1802,7 @@ Public Class Recibos
 
             End If
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
@@ -1901,7 +1872,7 @@ Public Class Recibos
         Try
             cm.ExecuteNonQuery()
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer actualizar el recibo.", MsgBoxStyle.Critical)
             Exit Sub
         Finally
@@ -2002,7 +1973,7 @@ Public Class Recibos
         Try
             cm.ExecuteNonQuery()
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer guardar la nueva Cuenta Corriente.", MsgBoxStyle.Critical)
             Exit Sub
         Finally
@@ -2019,16 +1990,13 @@ Public Class Recibos
 
     Private Sub _AltaCtaCte(ByVal WMarcaDiferencia As String)
 
-        Dim iRow, WRow As Integer
-        Dim _Cheque As Object = Nothing
-        Dim _CuitExistente = False
-        Dim cn = New SqlConnection()
-        Dim cm = New SqlCommand()
-        Dim dr As SqlDataReader
+        Dim iRow As Integer
+        Dim _cn = New SqlConnection()
+        Dim _cm = New SqlCommand()
+        Dim _dr As SqlDataReader
 
         For iRow = 0 To gridPagos2.Rows.Count - 1
 
-            WRow = iRow
             If Not IsNothing(gridPagos2.Rows(iRow).Cells(4).Value) AndAlso Val(gridPagos2.Rows(iRow).Cells(4).Value) <> 0 Then
 
                 renglon += 1
@@ -2122,19 +2090,19 @@ Public Class Recibos
                 & "FechaDepo, FechaDepoOrd, ClaveCheque, Cuit, Provisorio, BancoCheque, SucursalCheque, ChequeCheque, CuentaCheque, MarcaDiferencia) " _
                 & "VALUES(" & XParam & ")"
 
-                cm.CommandText = XSql
-                SQLConnector.conexionSql(cn, cm)
+                _cm.CommandText = XSql
+                SQLConnector.conexionSql(_cn, _cm)
 
                 Try
-                    cm.ExecuteNonQuery()
+                    _cm.ExecuteNonQuery()
 
-                Catch ex As Exception
+                Catch ex As System.Exception
                     MsgBox("Hubo un problema al querer guardar el nuevo recibo.", MsgBoxStyle.Critical)
                     Exit Sub
                 Finally
 
 
-                    cn.Close()
+                    _cn.Close()
 
 
                     XSql = ""
@@ -2144,16 +2112,16 @@ Public Class Recibos
 
                 ' Calculamos el saldo para poder actualizar la cuenta cte.
                 ClaveCtaCte = XTipo1 + XNumero1 + "01"
-                cm.CommandText = "SELECT Saldo, Total, TotalUs, Estado FROM CtaCte Where Clave = '" & ClaveCtaCte & "' and Cliente = '" & Trim(txtCliente.Text) & "'"
-                SQLConnector.conexionSql(cn, cm)
+                _cm.CommandText = "SELECT Saldo, Total, TotalUs, Estado FROM CtaCte Where Clave = '" & ClaveCtaCte & "' and Cliente = '" & Trim(txtCliente.Text) & "'"
+                SQLConnector.conexionSql(_cn, _cm)
 
                 Try
 
-                    dr = cm.ExecuteReader()
+                    _dr = _cm.ExecuteReader()
 
-                    If dr.HasRows Then
+                    If _dr.HasRows Then
 
-                        With dr
+                        With _dr
                             .Read()
 
                             XSaldo = Val(_NormalizarNumero(.Item("Saldo"))) - Val(XImporteBaja)
@@ -2179,12 +2147,12 @@ Public Class Recibos
                         Exit Sub
                     End If
 
-                Catch ex As Exception
+                Catch ex As System.Exception
                     MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
                 Finally
 
 
-                    cn.Close()
+                    _cn.Close()
 
 
                     XSql = ""
@@ -2202,19 +2170,19 @@ Public Class Recibos
                     & " Wdate = '" & XDate & "'" _
                     & " WHERE Clave = '" & ClaveCtaCte & "' and Cliente = '" & Trim(txtCliente.Text) & "'"
 
-                cm.CommandText = XSql
-                SQLConnector.conexionSql(cn, cm)
+                _cm.CommandText = XSql
+                SQLConnector.conexionSql(_cn, _cm)
 
                 Try
-                    cm.ExecuteNonQuery()
+                    _cm.ExecuteNonQuery()
 
-                Catch ex As Exception
+                Catch ex As System.Exception
                     MsgBox("Hubo un problema al querer actualizar la cuenta corriente.", MsgBoxStyle.Critical)
                     Exit Sub
                 Finally
 
 
-                    cn.Close()
+                    _cn.Close()
 
 
                     XSql = ""
@@ -2319,7 +2287,7 @@ Public Class Recibos
         Try
             cm.ExecuteNonQuery()
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer guardar el nuevo recibo.", MsgBoxStyle.Critical)
             Exit Sub
         Finally
@@ -2428,7 +2396,7 @@ Public Class Recibos
         Try
             cm.ExecuteNonQuery()
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer guardar la nueva Cuenta Corriente.", MsgBoxStyle.Critical)
             Exit Sub
         Finally
@@ -2514,7 +2482,7 @@ Public Class Recibos
         Try
             cm.ExecuteNonQuery()
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer guardar el nuevo recibo.", MsgBoxStyle.Critical)
             Exit Sub
         Finally
@@ -2589,7 +2557,7 @@ Public Class Recibos
                 disponible = False
             End If
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
@@ -2620,7 +2588,7 @@ Public Class Recibos
 
             End If
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
@@ -2634,35 +2602,7 @@ Public Class Recibos
         Return ultimo + 1
     End Function
 
-    Private Function crearFormasPago() As List(Of FormaPago)
-        Dim formasPago As New List(Of FormaPago)
-        For Each row As DataGridViewRow In gridFormasPago2.Rows
-            If Not row.IsNewRow Then
-                formasPago.Add(New FormaPago(row.Cells(0).Value, 0, asString(row.Cells(1).Value), asString(row.Cells(2).Value), asString(row.Cells(3).Value), CustomConvert.toDoubleOrZero(row.Cells(4).Value)))
-            End If
-        Next
-        Return formasPago
-    End Function
-
-    Private Function crearPagos() As List(Of Pago)
-        Dim pagos As New List(Of Pago)
-        For Each row As DataGridViewRow In gridPagos2.Rows
-            If Not row.IsNewRow Then
-                pagos.Add(New Pago(row.Cells(0).Value, asString(row.Cells(1).Value), asString(row.Cells(2).Value), asString(row.Cells(3).Value), "", CustomConvert.toDoubleOrZero(row.Cells(4).Value)))
-            End If
-        Next
-        Return pagos
-    End Function
-
-    Private Function asString(ByVal value)
-        If IsNothing(value) Then
-            Return ""
-        Else
-            Return value.ToString
-        End If
-    End Function
-
-    Private Sub optCtaCte_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles optCtaCte.CheckedChanged
+    Private Sub optCtaCte_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optCtaCte.CheckedChanged
         If Not optCtaCte.Checked Then
             gridPagos2.Rows.Clear()
             gridPagos2.AllowUserToAddRows = False
@@ -2672,7 +2612,7 @@ Public Class Recibos
         End If
     End Sub
 
-    Private Sub optVarios_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles optVarios.CheckedChanged
+    Private Sub optVarios_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optVarios.CheckedChanged
         If Not optVarios.Checked Then
             txtCuenta.Enabled = False
             txtCuenta.Empty = True
@@ -2685,11 +2625,11 @@ Public Class Recibos
         End If
     End Sub
 
-    Private Sub txtRetGanancias_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRetGanancias.KeyDown
+    Private Sub txtRetGanancias_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtRetGanancias.KeyDown
         If e.KeyData = Keys.Enter Then
 
             If Val(txtRetGanancias.Text) > 0 Then
-                _PedirInformacion("Ingrese el Número de Comprobante de Retención de Ganancias", txtRetGanancias, _ComprobanteRetGanancias)
+                _PedirInformacion("Ingrese el Número de Comprobante de Retención de Ganancias", _ComprobanteRetGanancias)
             End If
 
             _SaltarA(txtRetIB)
@@ -2698,7 +2638,7 @@ Public Class Recibos
         End If
     End Sub
 
-    Private Sub _PedirInformacion(ByVal msg As String, ByRef control As TextBox, ByRef VariableDestino As String)
+    Private Sub _PedirInformacion(ByVal msg As String, ByRef VariableDestino As String)
 
         With InformacionRetenciones
 
@@ -2720,22 +2660,22 @@ Public Class Recibos
         control.Focus()
     End Sub
 
-    Private Sub txtRetIva_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRetIva.KeyDown
+    Private Sub txtRetIva_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtRetIva.KeyDown
         If e.KeyData = Keys.Enter Then
 
             If Val(txtRetIva.Text) > 0 Then
-                _PedirInformacion("Ingrese el Número de Comprobante de Retención de IVA", txtRetIva, _ComprobanteRetIva)
+                _PedirInformacion("Ingrese el Número de Comprobante de Retención de IVA", _ComprobanteRetIva)
             End If
 
             _SaltarA(txtRetSuss)
         End If
     End Sub
 
-    Private Sub txtRetSuss_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRetSuss.KeyDown
+    Private Sub txtRetSuss_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtRetSuss.KeyDown
         If e.KeyData = Keys.Enter Then
 
             If Val(txtRetSuss.Text) > 0 Then
-                _PedirInformacion("Ingrese el Número de Comprobante de Retención de SUSS", txtRetSuss, _ComprobanteRetSuss)
+                _PedirInformacion("Ingrese el Número de Comprobante de Retención de SUSS", _ComprobanteRetSuss)
             End If
 
             _SaltarA(txtObservaciones)
@@ -2744,7 +2684,7 @@ Public Class Recibos
         End If
     End Sub
 
-    Private Sub txtRetIB_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRetIB.KeyDown
+    Private Sub txtRetIB_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtRetIB.KeyDown
         If e.KeyData = Keys.Enter Then
 
             _SaltarA(txtObservaciones)
@@ -2799,7 +2739,7 @@ Public Class Recibos
         End If
     End Sub
 
-    Private Sub txtRetIB_Enter(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtRetIB.Enter
+    Private Sub txtRetIB_Enter(ByVal sender As Object, ByVal e As EventArgs) Handles txtRetIB.Enter
         With DatosIB
 
             .txtRetIB1.Text = _RetIB1
@@ -2937,7 +2877,7 @@ Public Class Recibos
         txtRetIB.Text = totalIB
     End Sub
 
-    Private Sub txtProvi_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtProvi.KeyDown
+    Private Sub txtProvi_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtProvi.KeyDown
 
         If e.KeyData = Keys.Enter Then
             txtProvi.Text = ceros(txtProvi.Text, 6)
@@ -2949,7 +2889,7 @@ Public Class Recibos
 
     End Sub
 
-    Private Sub txtRetGanancias_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtRetGanancias.Leave
+    Private Sub txtRetGanancias_Leave(ByVal sender As Object, ByVal e As EventArgs) Handles txtRetGanancias.Leave
 
         If txtRetGanancias.Text = "" Then
             txtRetGanancias.Text = 0
@@ -2958,7 +2898,7 @@ Public Class Recibos
         _SumarCreditos()
     End Sub
 
-    Private Sub txtRetIB_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtRetIB.Leave
+    Private Sub txtRetIB_Leave(ByVal sender As Object, ByVal e As EventArgs) Handles txtRetIB.Leave
         If txtRetIB.Text = "" Then
             txtRetIB.Text = 0
         End If
@@ -2966,7 +2906,7 @@ Public Class Recibos
         _SumarCreditos()
     End Sub
 
-    Private Sub txtRetIva_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtRetIva.Leave
+    Private Sub txtRetIva_Leave(ByVal sender As Object, ByVal e As EventArgs) Handles txtRetIva.Leave
         If txtRetIva.Text = "" Then
             txtRetIva.Text = 0
         End If
@@ -2974,7 +2914,7 @@ Public Class Recibos
         _SumarCreditos()
     End Sub
 
-    Private Sub txtRetSuss_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtRetSuss.Leave
+    Private Sub txtRetSuss_Leave(ByVal sender As Object, ByVal e As EventArgs) Handles txtRetSuss.Leave
         If txtRetSuss.Text = "" Then
             txtRetSuss.Text = 0
         End If
@@ -2982,7 +2922,7 @@ Public Class Recibos
         _SumarCreditos()
     End Sub
 
-    Private Sub txtRecibo_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRecibo.KeyDown
+    Private Sub txtRecibo_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtRecibo.KeyDown
 
         If e.KeyData = Keys.Enter Then
 
@@ -2997,10 +2937,10 @@ Public Class Recibos
 
     End Sub
 
-    Private Sub txtFecha_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFecha.KeyDown
+    Private Sub txtFecha_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtFecha.KeyDown
         If e.KeyData = Keys.Enter Then
 
-            If Proceso._ValidarFecha(txtFecha.Text) Then
+            If _ValidarFecha(txtFecha.Text) Then
 
                 _DeterminarParidad()
 
@@ -3017,7 +2957,7 @@ Public Class Recibos
         End If
     End Sub
 
-    Private Sub txtCliente_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCliente.KeyDown
+    Private Sub txtCliente_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtCliente.KeyDown
         If e.KeyData = Keys.Enter Then
 
             If Trim(txtCliente.Text) = "" Then
@@ -3033,7 +2973,7 @@ Public Class Recibos
         End If
     End Sub
 
-    Private Sub txtParidad_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtParidad.KeyDown
+    Private Sub txtParidad_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtParidad.KeyDown
         If e.KeyData = Keys.Enter Then
 
             If Val(txtParidad.Text) > 0 Then
@@ -3048,7 +2988,7 @@ Public Class Recibos
         End If
     End Sub
 
-    Private Sub txtObservaciones_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtObservaciones.KeyDown
+    Private Sub txtObservaciones_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtObservaciones.KeyDown
         If e.KeyValue = Keys.Enter Then
             With gridFormasPago2
                 If .Rows.Count = 0 Then .Rows.Add()
@@ -3066,7 +3006,7 @@ Public Class Recibos
     End Function
 
     Private Function _EsControl(ByVal keycode) As Boolean
-        Dim valido = False
+        Dim valido As Boolean
 
         Select Case keycode
             Case Keys.Enter, Keys.Escape, Keys.Right, Keys.Left, Keys.Back
@@ -3083,7 +3023,7 @@ Public Class Recibos
     End Function
 
     Private Function _EsNumeroOControl(ByVal keycode) As Boolean
-        Dim valido = False
+        Dim valido As Boolean
 
         If _EsNumero(CInt(keycode)) Or _EsControl(keycode) Then
             valido = True
@@ -3095,7 +3035,7 @@ Public Class Recibos
     End Function
 
     Private Function _EsDecimalOControl(ByVal keycode) As Boolean
-        Dim valido = False
+        Dim valido As Boolean
 
         If _EsDecimal(CInt(keycode)) Or _EsControl(keycode) Then
             valido = True
@@ -3106,7 +3046,7 @@ Public Class Recibos
         Return valido
     End Function
 
-    Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message, ByVal keyData As System.Windows.Forms.Keys) As Boolean
+    Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData As Keys) As Boolean
 
         If gridFormasPago2.Focused Or gridFormasPago2.IsCurrentCellInEditMode Then ' Detectamos los ENTER tanto si solo estan en foco o si estan en edición una celda.
             gridFormasPago2.CommitEdit(DataGridViewDataErrorContexts.Commit) ' Guardamos todos los datos que no hayan sido confirmados.
@@ -3145,7 +3085,7 @@ Public Class Recibos
 
                         ' Se formatea en caso de que se cargue con la Lectora Nueva de Cheques.
                         If valor.StartsWith(";") Then
-                            valor = "C" & Microsoft.VisualBasic.Mid(valor, 2, 29) & "E"
+                            valor = "C" & Mid(valor, 2, 29) & "E"
                         End If
 
                         If Trim(valor.ToString.Length) = 31 Then
@@ -3153,7 +3093,7 @@ Public Class Recibos
                                 Dim _c As Object = _ClavesCheques.FindLast(Function(c) c(0) = iRow)
 
                                 If Not IsNothing(_c) Then
-                                    If Proceso.CuitValido(_c(6)) Then
+                                    If CuitValido(_c(6)) Then
 
                                         gridFormasPago2.Rows(iRow).Cells(5).Value = "1"
 
@@ -3172,7 +3112,7 @@ Public Class Recibos
                         Else
                             valor = valor.ToString().Substring(valor.ToString.Length - 1, 1)
                             If valor = "1" Or valor = "2" Or valor = "3" Or valor = "4" Or valor = "7" Then
-                                eventoSegunTipoEnFormaDePagoPara(CustomConvert.toIntOrZero(valor), iRow, iCol)
+                                eventoSegunTipoEnFormaDePagoPara(CustomConvert.toIntOrZero(valor), iRow)
                             Else ' Sólo se aceptan los valores 1 (Efectivo) , 2 (Cheque), 3 (Doc) y 4 (Varios) ?
                                 gridFormasPago2.CurrentCell = gridFormasPago2.Rows(iRow).Cells(iCol)
                             End If
@@ -3238,7 +3178,13 @@ Public Class Recibos
                                 End If
 
                             ElseIf iCol = 3 Then
-                                gridFormasPago2.Rows(iRow).Cells(iCol).Value = _GenerarCodigoBanco(valor)
+                                Dim WCodigoBanco As String = _GenerarCodigoBanco(valor)
+                                Dim aux As String = Trim(OrDefault(gridFormasPago2.Rows(iRow).Cells(iCol).Value, ""))
+
+                                If Not aux.Contains(WCodigoBanco) AndAlso Val(OrDefault(gridFormasPago2.Rows(iRow).Cells(0).Value, "")) = 2 Then
+                                    gridFormasPago2.Rows(iRow).Cells(iCol).Value = WCodigoBanco
+                                End If
+
                                 gridFormasPago2.CurrentCell = gridFormasPago2.Rows(iRow).Cells(iCol + 1)
                             Else
                                 gridFormasPago2.CurrentCell = gridFormasPago2.Rows(iRow).Cells(iCol + 1)
@@ -3284,7 +3230,7 @@ Public Class Recibos
 
                                 Try
                                     gridFormasPago2.CurrentCell = gridFormasPago2.Rows(iRow + 1).Cells(0)
-                                Catch ex As Exception
+                                Catch ex As System.Exception
                                     gridFormasPago2.Rows.Add()
                                     gridFormasPago2.CurrentCell = gridFormasPago2.Rows(iRow + 1).Cells(0)
                                 End Try
@@ -3319,7 +3265,7 @@ Public Class Recibos
                 _SumarCreditos()
             End If
         End If
-        
+
         If gridPagos2.Focused Or gridPagos2.IsCurrentCellInEditMode Then ' Detectamos los ENTER tanto si solo estan en foco o si estan en edición una celda.
             gridPagos2.CommitEdit(DataGridViewDataErrorContexts.Commit) ' Guardamos todos los datos que no hayan sido confirmados.
 
@@ -3360,7 +3306,7 @@ Public Class Recibos
                             gridPagos2.CurrentCell = gridPagos2.Rows(iRow + 1).Cells(0)
                         End If
 
-                    Catch ex As Exception
+                    Catch ex As System.Exception
                         If Not IsNothing(gridPagos2.Rows(iRow).Cells(4).Value) AndAlso Val(gridPagos2.Rows(iRow).Cells(4).Value) <> 0 Then
                             gridPagos2.Rows.Add()
                             gridPagos2.CurrentCell = gridPagos2.Rows(iRow + 1).Cells(0)
@@ -3393,10 +3339,13 @@ Public Class Recibos
         Return MyBase.ProcessCmdKey(msg, keyData)
     End Function
 
-    Private Function _GenerarCodigoBanco(ByVal _Banco As String) As String
-        _Banco = _Banco.ToString.Split("/")(0) ' Agarramos el nombre del banco, sin el cod del cliente.
+    Private Function _GenerarCodigoBanco(ByVal WBanco As String) As String
 
-        Return _Banco & "/" & Mid(txtCliente.Text, 1, 1) & Val(Mid(txtCliente.Text, 2, 6)).ToString()
+        If WBanco.Trim = "" Then Return ""
+
+        WBanco = WBanco.ToString.Split("/")(0) ' Agarramos el nombre del banco, sin el cod del cliente.
+
+        Return WBanco & "/" & Mid(txtCliente.Text, 1, 1) & Val(Mid(txtCliente.Text, 2, 6)).ToString()
     End Function
 
     Private Function _ChequeYaCargado(ByVal ClaveCheque) As Boolean
@@ -3436,7 +3385,7 @@ Public Class Recibos
                 utilizado = True
             End If
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
@@ -3461,7 +3410,7 @@ Public Class Recibos
                 utilizado = True
             End If
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
@@ -3485,7 +3434,7 @@ Public Class Recibos
     End Function
 
     Private Function _ProcesarCheque(ByVal row As Integer, ByVal ClaveCheque As String) As Boolean
-        Dim _ClaveBanco, _Banco, _Sucursal, _NumCheque, _NumCta, _Cuit As String
+        Dim _ClaveBanco, WBanco, _Sucursal, _NumCheque, _NumCta, _Cuit As String
         Dim _LecturaCorrecta = True
 
         If Not _FormatoValidoDeCheque(ClaveCheque) Then
@@ -3494,7 +3443,7 @@ Public Class Recibos
         End If
 
         _ClaveBanco = Mid$(ClaveCheque, 2, 3)
-        _Banco = _ObtenerNombreBanco(_ClaveBanco)
+        WBanco = _ObtenerNombreBanco(_ClaveBanco)
         _Sucursal = Mid$(ClaveCheque, 5, 3)
         _NumCheque = Mid$(ClaveCheque, 12, 8)
         _NumCta = Mid$(ClaveCheque, 20, 11)
@@ -3510,7 +3459,7 @@ Public Class Recibos
         End If
 
         ' Extraer Datos del String.
-        If _Banco = "" Then
+        If WBanco = "" Then
             _LecturaCorrecta = False
             MsgBox("Error en la lectura de los datos del codigo de banco del cheque")
         End If
@@ -3519,7 +3468,7 @@ Public Class Recibos
             .Cells(0).Value = "02"
             .Cells(1).Value = _NumCheque
             .Cells(2).Value = ""
-            .Cells(3).Value = _Banco & "/" & Mid(txtCliente.Text, 1, 1) & Val(Mid(txtCliente.Text, 2, 6)).ToString()
+            .Cells(3).Value = WBanco & "/" & Mid(txtCliente.Text, 1, 1) & Val(Mid(txtCliente.Text, 2, 6)).ToString()
         End With
 
         ' Buscamos si existe el cuit.
@@ -3549,7 +3498,7 @@ Public Class Recibos
 
             End If
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
@@ -3577,7 +3526,7 @@ Public Class Recibos
 
             End If
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
@@ -3590,7 +3539,7 @@ Public Class Recibos
 
 
     Private Sub _GuardarNuevoCheque(ByVal row As Integer, ByVal Clave As String, _
-                                    ByVal banco As String, ByVal sucursal As String, _
+                                    ByVal WBanco As String, ByVal sucursal As String, _
                                     ByVal numCheque As String, ByVal numCta As String, _
                                     ByVal _Cuit As String)
 
@@ -3600,7 +3549,7 @@ Public Class Recibos
             _ClavesCheques.Remove(buscar)
         End If
 
-        _ClavesCheques.Add({row, Clave, banco, sucursal, numCheque, numCta, _Cuit, "", ""})
+        _ClavesCheques.Add({row, Clave, WBanco, sucursal, numCheque, numCta, _Cuit, "", ""})
 
     End Sub
 
@@ -3609,7 +3558,7 @@ Public Class Recibos
     End Function
 
     Private Sub _PedirClaveCheque(ByVal row As Integer)
-        Dim _clave, _banco, _sucursal, _cheque, _cuenta, _cuit, _estado, _destino As String
+        Dim _clave, WBanco, _sucursal, _cheque, _cuenta, _cuit, _estado, _destino As String
         Dim buscar As Object
 
         _cuit = ""
@@ -3631,19 +3580,18 @@ Public Class Recibos
         End With
 
         _clave = ""
-        _banco = ""
+        WBanco = ""
         _sucursal = ""
         _cheque = ""
         _cuenta = ""
         _estado = ""
         _destino = ""
 
-        buscar = Nothing
         buscar = _ClavesCheques.Find(Function(c) c(0) = row)
         If Not IsNothing(buscar) Then
 
             _clave = buscar(1)
-            _banco = buscar(2)
+            WBanco = buscar(2)
             _sucursal = buscar(3)
             _cheque = buscar(4)
             _cuenta = buscar(5)
@@ -3653,7 +3601,7 @@ Public Class Recibos
             _ClavesCheques.Remove(buscar)
         End If
 
-        _ClavesCheques.Add({row, _clave, _banco, _sucursal, _cheque, _cuenta, _cuit, _estado, _destino})
+        _ClavesCheques.Add({row, _clave, WBanco, _sucursal, _cheque, _cuenta, _cuit, _estado, _destino})
 
         gridFormasPago2.Rows(row).Cells("NroCuit").Value = _cuit
 
@@ -3661,20 +3609,20 @@ Public Class Recibos
 
     Private Sub _PedirCuentaContable(ByVal row As Integer)
         Dim cuenta = ""
-        Dim buscar As Object = Nothing
+        Dim buscar As Object
 
         buscar = _CuentasContables.FindLast(Function(c) c(0) = row)
 
         If Not IsNothing(buscar) Then
 
             cuenta = buscar(1)
-            _PedirInformacion("Ingrese Cuenta Contable", New TextBox(), cuenta)
+            _PedirInformacion("Ingrese Cuenta Contable", cuenta)
 
         End If
 
         Do While Not _CuentaContableValida(cuenta) And Trim(cuenta) <> "0"
 
-            _PedirInformacion("Ingrese Cuenta Contable", New TextBox(), cuenta)
+            _PedirInformacion("Ingrese Cuenta Contable", cuenta)
 
         Loop
 
@@ -3698,7 +3646,7 @@ Public Class Recibos
 
             End If
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
@@ -3712,27 +3660,13 @@ Public Class Recibos
         Return _CuentaValida
     End Function
 
-    Private Sub _ComprobarDebitoPosible(ByVal iRow As Integer, ByVal iCol As Integer)
-        Dim _Maximo As Object = _ValoresMax.FindLast(Function(m) m(0) = gridPagos2.Rows(iRow).Cells(3).Value)
-        If Not IsNothing(_Maximo) Then
-            If iCol = 4 And (IsNothing(gridPagos2.CurrentCell.Value) Or Val(gridPagos2.CurrentCell.Value) > _Maximo(1)) Then
-                MsgBox("El valor del importe indicado no puede ser mayor a " & _Maximo(1))
-                gridPagos2.CurrentCell = gridPagos2.Rows(iRow).Cells(iCol)
-            Else
-                gridPagos2.CurrentCell.Value = _NormalizarNumero(Val(gridPagos2.CurrentCell.Value))
-                _SumarDebitos()
-                gridPagos2.CurrentCell = gridPagos2.Rows(iRow + 1).Cells(iCol)
-            End If
-        End If
-    End Sub
-
-    Private Sub lstFiltrada_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lstFiltrada.SelectedIndexChanged
+    Private Sub lstFiltrada_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles lstFiltrada.SelectedIndexChanged
         If Trim(lstFiltrada.SelectedItem) <> "" Then
             _TraerConsulta(lstFiltrada.SelectedItem)
         End If
     End Sub
 
-    Private Sub txtCuenta_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCuenta.KeyDown
+    Private Sub txtCuenta_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtCuenta.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtCuenta.Text) <> "" Then
@@ -3747,20 +3681,12 @@ Public Class Recibos
 
     End Sub
 
-    Private Sub txtFecha_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
-
-        If Trim(txtFecha.Text).Length = 10 Then
-            _DeterminarParidad()
-        End If
-
-    End Sub
-
-    Private Sub btnImpresion_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImpresion.Click
+    Private Sub btnImpresion_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnImpresion.Click
 
         ' Chequeamos que se haya cargado un recibo antes de mandar a imprimir.
         If Val(txtRecibo.Text) > 0 Then
 
-            If Proceso._EsPellital Then
+            If _EsPellital() Then
                 _PrepararEImprimirReciboPellital()
             Else
                 _PrepararEImprimirRecibo()
@@ -3779,12 +3705,12 @@ Public Class Recibos
             Exit Sub
         End If
 
-        Dim Retencion, Cheque, Documento, Total2f, Pesos, Bonos, Dolares, Ajuste, Compe, Transfe, Total2, Total1 As Double
+        Dim Retencion, Cheque, Documento, Pesos, Bonos, Dolares, Ajuste, Compe, Transfe, Total2, Total1 As Double
         Dim Vector(30, 10) As String
         Dim WEntra(100, 120) As String
         Dim ImpreTipo(100) As String
-        Dim XLugar = 0
-        Dim iRow = 0
+        Dim XLugar As Integer
+        Dim iRow As Integer
 
         ' Inicializamos todas las variable a utilizar.
         If optVarios.Checked Then
@@ -3795,15 +3721,10 @@ Public Class Recibos
             WPostal = ""
         End If
 
-        WRecibo = Val(txtRecibo.Text)
-        WFecha = txtFecha.Text
-        WCliente = txtCliente.Text
-
         Retencion = Val(txtRetGanancias.Text) + Val(txtRetIva.Text) + Val(_NormalizarNumero(txtRetIB.Text)) + Val(txtRetSuss.Text)
 
         Cheque = 0
         Documento = 0
-        Total2f = 0
         Pesos = 0
         Bonos = 0
         Dolares = 0
@@ -3897,8 +3818,6 @@ Public Class Recibos
                                     Ajuste = Ajuste + Val(Vector(Ciclo, 9))
                                 Case 157, 7, 8
                                     Bonos = Bonos + Val(Vector(Ciclo, 9))
-                                Case Else
-                                    REM Pesos = Pesos + Val(Vector(Ciclo, 9))
                             End Select
                         End If
                     Case 2
@@ -4022,7 +3941,6 @@ Public Class Recibos
                             WEntra(Pasa, 94) = Vector(Ciclo, 7)
                             WEntra(Pasa, 95) = Vector(Ciclo, 9)
                             WEntra(Pasa, 96) = Vector(Ciclo, 8)
-                        Case Else
                     End Select
                 Next Pasa
             End If
@@ -4371,101 +4289,101 @@ Public Class Recibos
             .Columns.Add("Provincia")
             .Columns.Add("Postal")
             .Columns.Add("Impre1")
-            .Columns.Add("Importe1").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Importe1").DataType = Type.GetType("System.Double")
 
             .Columns.Add("Fecha2")
             .Columns.Add("Tipo2")
             .Columns.Add("Numero2")
-            .Columns.Add("Importe2").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Importe2").DataType = Type.GetType("System.Double")
 
             .Columns.Add("Fecha21")
             .Columns.Add("Tipo21")
             .Columns.Add("Numero21")
-            .Columns.Add("Importe21").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Importe21").DataType = Type.GetType("System.Double")
             .Columns.Add("Fecha22")
             .Columns.Add("Tipo22")
             .Columns.Add("Numero22")
-            .Columns.Add("Importe22").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Importe22").DataType = Type.GetType("System.Double")
 
             .Columns.Add("Cheque1")
             .Columns.Add("Venci1")
-            .Columns.Add("Impo1").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Impo1").DataType = Type.GetType("System.Double")
             .Columns.Add("Banco1")
             .Columns.Add("Cheque2")
             .Columns.Add("Venci2")
-            .Columns.Add("Impo2").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Impo2").DataType = Type.GetType("System.Double")
             .Columns.Add("Banco2")
             .Columns.Add("Cheque3")
             .Columns.Add("Venci3")
-            .Columns.Add("Impo3").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Impo3").DataType = Type.GetType("System.Double")
             .Columns.Add("Banco3")
             .Columns.Add("Cheque4")
             .Columns.Add("Venci4")
-            .Columns.Add("Impo4").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Impo4").DataType = Type.GetType("System.Double")
             .Columns.Add("Banco4")
             .Columns.Add("Cheque5")
             .Columns.Add("Venci5")
-            .Columns.Add("Impo5").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Impo5").DataType = Type.GetType("System.Double")
             .Columns.Add("Banco5")
             .Columns.Add("Cheque6")
             .Columns.Add("Venci6")
-            .Columns.Add("Impo6").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Impo6").DataType = Type.GetType("System.Double")
             .Columns.Add("Banco6")
             .Columns.Add("Cheque7")
             .Columns.Add("Venci7")
-            .Columns.Add("Impo7").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Impo7").DataType = Type.GetType("System.Double")
             .Columns.Add("Banco7")
             .Columns.Add("Cheque8")
             .Columns.Add("Venci8")
-            .Columns.Add("Impo8").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Impo8").DataType = Type.GetType("System.Double")
             .Columns.Add("Banco8")
             .Columns.Add("Cheque9")
             .Columns.Add("Venci9")
-            .Columns.Add("Impo9").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Impo9").DataType = Type.GetType("System.Double")
             .Columns.Add("Banco9")
             .Columns.Add("Cheque10")
             .Columns.Add("Venci10")
-            .Columns.Add("Impo10").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Impo10").DataType = Type.GetType("System.Double")
             .Columns.Add("Banco10")
             .Columns.Add("Cheque11")
             .Columns.Add("Venci11")
-            .Columns.Add("Impo11").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Impo11").DataType = Type.GetType("System.Double")
             .Columns.Add("Banco11")
             .Columns.Add("Cheque12")
             .Columns.Add("Venci12")
-            .Columns.Add("Impo12").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Impo12").DataType = Type.GetType("System.Double")
             .Columns.Add("Banco12")
             .Columns.Add("Cheque13")
             .Columns.Add("Venci13")
-            .Columns.Add("Impo13").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Impo13").DataType = Type.GetType("System.Double")
             .Columns.Add("Banco13")
             .Columns.Add("Cheque14")
             .Columns.Add("Venci14")
-            .Columns.Add("Impo14").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Impo14").DataType = Type.GetType("System.Double")
             .Columns.Add("Banco14")
             .Columns.Add("Cheque15")
             .Columns.Add("Venci15")
-            .Columns.Add("Impo15").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Impo15").DataType = Type.GetType("System.Double")
             .Columns.Add("Banco15")
             .Columns.Add("Cheque16")
             .Columns.Add("Venci16")
-            .Columns.Add("Impo16").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Impo16").DataType = Type.GetType("System.Double")
             .Columns.Add("Banco16")
             .Columns.Add("Cheque17")
             .Columns.Add("Venci17")
-            .Columns.Add("Impo17").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Impo17").DataType = Type.GetType("System.Double")
             .Columns.Add("Banco17")
             .Columns.Add("Cheque18")
             .Columns.Add("Venci18")
-            .Columns.Add("Impo18").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Impo18").DataType = Type.GetType("System.Double")
             .Columns.Add("Banco18")
             .Columns.Add("Cheque19")
             .Columns.Add("Venci19")
-            .Columns.Add("Impo19").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Impo19").DataType = Type.GetType("System.Double")
             .Columns.Add("Banco19")
             .Columns.Add("Cheque20")
             .Columns.Add("Venci20")
-            .Columns.Add("Impo20").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Impo20").DataType = Type.GetType("System.Double")
             .Columns.Add("Banco20")
             .Columns.Add("Signo21")
             .Columns.Add("Signo22")
@@ -4501,7 +4419,7 @@ Public Class Recibos
 
         End If
 
-        If Proceso._EsPellital() Then
+        If _EsPellital() Then
             crdoc = New ReciboDefinitivoEmailPellital
         End If
 
@@ -4586,7 +4504,7 @@ Public Class Recibos
                     Dim W As Double = Val(WEntra(i, 10).ToString.Replace(",", ".")) * Val(formatonumerico(txtParidad.Text))
                     WTotalRecibo += Val(formatonumerico(W))
                 Else
-                    WTotalRecibo += Val(Proceso.formatonumerico(WEntra(i, 10)))
+                    WTotalRecibo += Val(formatonumerico(WEntra(i, 10)))
                 End If
             End If
         Next
@@ -4604,7 +4522,7 @@ Public Class Recibos
 
                     WIndice += 1
 
-                    WImpre1 &= RSet(Trim(WSigno) & " " & Val(Proceso.formatonumerico(Trim(WImporte1))).ToString("##,###0.00"), 32 - WImpre1.ToString().Length)
+                    WImpre1 &= RSet(Trim(WSigno) & " " & Val(formatonumerico(Trim(WImporte1))).ToString("##,###0.00"), 32 - WImpre1.ToString().Length)
 
                     .Item("Impre" & WIndice) = Trim(WImpre1)
 
@@ -4712,7 +4630,7 @@ Public Class Recibos
             .Columns.Add("Recibo")
             .Columns.Add("Cheque")
             .Columns.Add("Venci")
-            .Columns.Add("Impo").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Impo").DataType = Type.GetType("System.Double")
             .Columns.Add("Banco")
             .Columns.Add("Renglon")
         End With
@@ -4721,7 +4639,7 @@ Public Class Recibos
             .Columns.Add("Recibo")
             .Columns.Add("Cheque")
             .Columns.Add("Venci")
-            .Columns.Add("Impo").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Impo").DataType = Type.GetType("System.Double")
             .Columns.Add("Banco")
             .Columns.Add("Renglon")
         End With
@@ -4781,8 +4699,8 @@ Public Class Recibos
 
         If enviarEmail Then
             Try
-                _EnviarReciboPorEmail(crdoc, WEmail)
-            Catch ex As Exception ' En caso de que por alguna razoón no se haya podido enviar el email, se realizan las dos impresiones como se venia haciendo.
+                _EnviarReciboPorEmail(crdoc)
+            Catch ex As System.Exception ' En caso de que por alguna razoón no se haya podido enviar el email, se realizan las dos impresiones como se venia haciendo.
                 MsgBox(ex.Message _
                       & vbCrLf & vbCrLf & vbCrLf & vbCrLf _
                       & "Se realizarán las dos impresiones normales.")
@@ -4797,9 +4715,9 @@ Public Class Recibos
 
     End Sub
 
-    Private Sub _EnviarReciboPorEmail(ByVal crdoc As ReportDocument, ByVal WEmail As String)
+    Private Sub _EnviarReciboPorEmail(ByVal crdoc As ReportDocument)
         Dim archivo As String = "Recibo" & Trim(txtRecibo.Text) & ".pdf"
-        Dim ruta As String = Application.StartupPath & "/"
+        Dim ruta As String = Windows.Forms.Application.StartupPath & "/"
         Dim _to, _bcc, _asunto, _mensaje, _adjunto As String
 
         Try
@@ -4807,12 +4725,11 @@ Public Class Recibos
             crdoc.ExportToDisk(ExportFormatType.PortableDocFormat, ruta & archivo)
 
             ' Confirmamos que se haya guardado correctamente el archivo.
-            If Not System.IO.File.Exists(ruta & archivo) Then
-                Throw New Exception
+            If Not File.Exists(ruta & archivo) Then
+                Throw New System.Exception
             End If
-        Catch ex As Exception
-            Throw New Exception("No se pudo generar el archivo PDF del Recibo. Se detiene el envio por email del mismo.")
-            Exit Sub
+        Catch ex As System.Exception
+            Throw New System.Exception("No se pudo generar el archivo PDF del Recibo. Se detiene el envio por email del mismo.")
         End Try
 
         Try
@@ -4826,17 +4743,17 @@ Public Class Recibos
             ' Enviamos por email e imprimimos una copia.
             _EnviarEmail(_to, _bcc, _asunto, _mensaje, _adjunto)
 
-        Catch ex As Exception
-            Throw New Exception("No se pudo enviar el E-Mail.")
+        Catch ex As System.Exception
+            Throw New System.Exception("No se pudo enviar el E-Mail.")
         End Try
 
         Try
             ' Eliminamos el archivo.
 
-            If System.IO.File.Exists(ruta & archivo) Then
-                System.IO.File.Delete(ruta & archivo)
+            If File.Exists(ruta & archivo) Then
+                File.Delete(ruta & archivo)
             End If
-        Catch ex As Exception
+        Catch ex As System.Exception
             'Throw New Exception("No se pudo generar el archivo PDF del Recibo. Se detiene el envio por email del mismo.")
             Exit Sub
         End Try
@@ -4844,17 +4761,21 @@ Public Class Recibos
     End Sub
 
     Private Sub _EnviarEmail(ByVal _to As String, ByVal _bcc As String, ByVal _subject As String, ByVal _body As String, ByVal _adjunto As String)
-        Dim _Outlook As New Outlook.Application
+        Dim _Outlook As New Application
 
         Try
-            Dim _Mail As Outlook.MailItem = _Outlook.CreateItem(Outlook.OlItemType.olMailItem)
+            Dim _Mail As MailItem = _Outlook.CreateItem(OlItemType.olMailItem)
 
             With _Mail
+
+                Dim el = .GetInspector
 
                 .To = _to
                 .BCC = _bcc
                 .Subject = _subject
-                .Body = _body
+                '.Body = _body
+
+                .HTMLBody = _body & .HTMLBody
 
                 If Trim(_adjunto) <> "" Then
                     .Attachments.Add(_adjunto)
@@ -4864,27 +4785,14 @@ Public Class Recibos
 
             _Mail.Send()
 
-            _Mail = Nothing
-
-            'Me.Close()
-
-        Catch ex As Exception
-            Throw New Exception("Ocurrió un problema al querer enviar el email a los proveedores.")
-        Finally
-            _Outlook = Nothing
+        Catch ex As System.Exception
+            Throw New System.Exception("Ocurrió un problema al querer enviar el email a los proveedores.")
         End Try
 
     End Sub
 
     Private Sub _Imprimir(ByVal crdoc As ReportDocument, Optional ByVal cant As Integer = 1)
         crdoc.PrintToPrinter(cant, True, 0, 0)
-    End Sub
-
-    Private Sub _VistaPrevia(ByVal crdoc As ReportDocument)
-        With VistaPrevia
-            .Reporte = crdoc
-            .Mostrar()
-        End With
     End Sub
 
     Private Sub _PrepararEImprimirRecibo()
@@ -4896,14 +4804,14 @@ Public Class Recibos
             Exit Sub
         End If
 
-        Dim Retencion, Cheque, Documento, Total2f, Pesos, Bonos, Dolares, Ajuste, Compe, Transfe, Total2, Total1 As Double
+        Dim Retencion, Cheque, Documento, Pesos, Bonos, Dolares, Ajuste, Compe, Transfe, Total2, Total1 As Double
         Dim Vector(50, 10) As String
         Dim WEntra(100, 180) As String
         Dim WCheques(100, 5) As String
         Dim WRCheques = 0
         Dim ImpreTipo(100) As String
-        Dim XLugar = 0
-        Dim iRow = 0
+        Dim XLugar As Integer
+        Dim iRow As Integer
 
         ' Inicializamos todas las variable a utilizar.
         If optVarios.Checked Then
@@ -4914,15 +4822,10 @@ Public Class Recibos
             WPostal = ""
         End If
 
-        WRecibo = Val(txtRecibo.Text)
-        WFecha = txtFecha.Text
-        WCliente = txtCliente.Text
-
         Retencion = Val(txtRetGanancias.Text) + Val(txtRetIva.Text) + Val(_NormalizarNumero(txtRetIB.Text)) + Val(txtRetSuss.Text)
 
         Cheque = 0
         Documento = 0
-        Total2f = 0
         Pesos = 0
         Bonos = 0
         Dolares = 0
@@ -5013,7 +4916,7 @@ Public Class Recibos
         End With
 
         ' Calculamos totales y subtotales en base a los tipos de créditos.
-        Dim _ciclo = 0
+        Dim _ciclo As Integer
         For Ciclo = 0 To 40
             _ciclo = Ciclo
             If Val(Vector(Ciclo, 9)) <> 0 Then
@@ -5505,7 +5408,7 @@ Public Class Recibos
     End Sub
 
     Private Function _ObtenerFechaCtaCte(ByVal clave As String) As String
-        Dim fecha = ""
+        Dim WFecha = ""
 
         cm.CommandText = "SELECT fecha FROM CtaCte WHERE Clave = '" & clave & "'"
 
@@ -5518,11 +5421,11 @@ Public Class Recibos
             If dr.HasRows Then
                 dr.Read()
 
-                fecha = dr.Item("fecha")
+                WFecha = dr.Item("fecha")
 
             End If
 
-        Catch ex As Exception
+        Catch ex As System.Exception
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
@@ -5530,14 +5433,14 @@ Public Class Recibos
 
         End Try
 
-        Return fecha
+        Return WFecha
     End Function
 
-    Private Sub btnDias_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDias.Click
+    Private Sub btnDias_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnDias.Click
         Dim Suma1, Suma2, Suma3, Suma4 As Double
         Dim FechaBase = "01/01/2006"
-        Dim XFecha1 = ""
-        Dim iRow = 0
+        Dim XFecha1 As String
+        Dim iRow As Integer
 
         Suma1 = 0
         Suma2 = 0
@@ -5613,20 +5516,19 @@ Public Class Recibos
             .Columns.Add("Numero")
             .Columns.Add("Fecha2")
             .Columns.Add("Banco")
-            .Columns.Add("Importe").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Importe").DataType = Type.GetType("System.Double")
             .Columns.Add("Dias")
             .Columns.Add("Tasa")
-            .Columns.Add("Intereses").DataType = System.Type.GetType("System.Double")
+            .Columns.Add("Intereses").DataType = Type.GetType("System.Double")
         End With
     End Sub
 
-    Private Sub btnIntereses_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnIntereses.Click
+    Private Sub btnIntereses_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnIntereses.Click
         Dim tabla = New DataTable("Detalles")
         Dim DiasTasa = ""
-        _PedirInformacion("Informe la tasa Mensual", New TextBox, DiasTasa)
+        _PedirInformacion("Informe la tasa Mensual", DiasTasa)
 
         Dim ZZSuma As Double = 0
-        Dim ZZCodigo As Double = 0
 
         Dim FechaBase As String = txtFecha.Text
 
@@ -5698,11 +5600,7 @@ Public Class Recibos
 
     End Sub
 
-    Private Sub txtFecha_TypeValidationCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TypeValidationEventArgs)
-        e.Cancel = Proceso._ValidarFecha(txtFecha.Text, e.IsValidInput)
-    End Sub
-
-    Private Sub txtFechaAux_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFechaAux.KeyDown
+    Private Sub txtFechaAux_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtFechaAux.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtFechaAux.Text.Replace("/", "")) = "" Then : Exit Sub : End If
@@ -5723,7 +5621,7 @@ Public Class Recibos
 
             'Debug.Print(Proceso._ValidarFecha(Trim(txtFechaAux.Text)))
 
-            If Proceso._ValidarFecha(Trim(txtFechaAux.Text)) And WRow >= 0 And Wcol >= 0 Then
+            If _ValidarFecha(Trim(txtFechaAux.Text)) And WRow >= 0 And Wcol >= 0 Then
 
                 If _ChequeVencido(Trim(txtFechaAux.Text)) Then
                     MsgBox("La fecha del cheque introducida es inválida", MsgBoxStyle.Critical)
@@ -5755,19 +5653,39 @@ Public Class Recibos
 
     End Sub
 
-    Private Sub txtCliente_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtCliente.MouseDoubleClick
+    Private Sub txtCliente_MouseDoubleClick(ByVal sender As Object, ByVal e As MouseEventArgs) Handles txtCliente.MouseDoubleClick
         lstSeleccion.SelectedIndex = 0
 
         lstSeleccion_Click(Nothing, Nothing)
     End Sub
 
-    Private Sub btnCtaCte_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCtaCte.Click
+    Private Sub btnCtaCte_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCtaCte.Click
         lstSeleccion.SelectedIndex = 1
 
         lstSeleccion_Click(Nothing, Nothing)
     End Sub
 
-    Private Sub gridRecibos_CellClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles gridFormasPago2.CellClick
+    Private Sub gridRecibos_CellClick(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles gridFormasPago2.CellClick
+        With gridFormasPago2
+            If e.ColumnIndex = 2 Then
+
+                Dim _location As Point = .GetCellDisplayRectangle(2, e.RowIndex, False).Location
+
+                .ClearSelection()
+                _location.Y += .Location.Y + (.CurrentCell.Size.Height / 4) - 1.5
+                _location.X += .Location.X + (.CurrentCell.Size.Width - txtFechaAux.Size.Width) - 3
+                txtFechaAux.Location = _location
+                txtFechaAux.Text = .Rows(e.RowIndex).Cells(2).Value
+                WRow = e.RowIndex
+                Wcol = e.ColumnIndex
+                txtFechaAux.Visible = True
+                txtFechaAux.Focus()
+            End If
+
+        End With
+    End Sub
+
+    Private Sub gridRecibos_CellEnter(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles gridFormasPago2.CellEnter
         With gridFormasPago2
             If e.ColumnIndex = 2 Then
 
@@ -5784,37 +5702,17 @@ Public Class Recibos
                 txtFechaAux.Focus()
             End If
         End With
-
     End Sub
 
-    Private Sub gridRecibos_CellEnter(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles gridFormasPago2.CellEnter
-        With gridFormasPago2
-            If e.ColumnIndex = 2 Then
-
-                Dim _location As Point = .GetCellDisplayRectangle(2, e.RowIndex, False).Location
-
-                .ClearSelection()
-                _location.Y += .Location.Y + (.CurrentCell.Size.Height / 4) - 1.5
-                _location.X += .Location.X + (.CurrentCell.Size.Width - txtFechaAux.Size.Width) - 3
-                txtFechaAux.Location = _location
-                txtFechaAux.Text = .Rows(e.RowIndex).Cells(2).Value
-                WRow = e.RowIndex
-                Wcol = e.ColumnIndex
-                txtFechaAux.Visible = True
-                txtFechaAux.Focus()
-            End If
-        End With
-    End Sub
-
-    Private Sub Recibos_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+    Private Sub Recibos_Shown(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Shown
         txtProvi.Focus()
     End Sub
 
-    Private Sub lblDolares_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblDolares.TextChanged
+    Private Sub lblDolares_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles lblDolares.TextChanged
         CustomLabel14.Text = _NormalizarNumero(Val(_NormalizarNumero(lblDolares.Text)) * Val(txtParidad.Text))
     End Sub
 
-    Private Sub optVarios_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles optVarios.Click, optCtaCte.Click, optAnticipos.Click
+    Private Sub optVarios_Click(ByVal sender As Object, ByVal e As EventArgs) Handles optVarios.Click, optCtaCte.Click, optAnticipos.Click
 
         CustomLabel15.Visible = optCtaCte.Checked
         txtCostoFCE.Visible = optCtaCte.Checked
@@ -5822,12 +5720,12 @@ Public Class Recibos
 
     End Sub
 
-    Private Sub btnCargarDatosFCE_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCargarDatosFCE.Click
+    Private Sub btnCargarDatosFCE_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCargarDatosFCE.Click
         With New IngresoDatosFCE(WDatosFCE)
 
             Dim result As DialogResult = .ShowDialog(Me)
 
-            If result = Windows.Forms.DialogResult.OK Then
+            If result = DialogResult.OK Then
                 WDatosFCE = .DatosFCE
             End If
 
@@ -5838,11 +5736,11 @@ Public Class Recibos
         End With
     End Sub
 
-    Private Sub txtCostoFCE_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtCostoFCE.MouseDoubleClick
+    Private Sub txtCostoFCE_MouseDoubleClick(ByVal sender As Object, ByVal e As MouseEventArgs) Handles txtCostoFCE.MouseDoubleClick
         If optCtaCte.Checked Then btnCargarDatosFCE_Click(Nothing, Nothing)
     End Sub
 
-    Private Sub btnActualizarDatosFCE_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnActualizarDatosFCE.Click
+    Private Sub btnActualizarDatosFCE_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnActualizarDatosFCE.Click
         If WDatosFCE IsNot Nothing Then
 
             WDatosFCE.Item("Boleto") = WDatosFCE.Item("Boleto").ToString.PadLeft(8, "0")
@@ -5863,7 +5761,7 @@ Public Class Recibos
             Dim WIvaComp As DataRow = GetSingle("SELECT Max(NroInterno) As Ultimo FROM IvaComp")
 
             If WIvaComp IsNot Nothing Then
-                Dim WProximo As Integer = 0
+                Dim WProximo As Integer
 
                 WProximo = OrDefault(WIvaComp.Item("Ultimo"), 0) + 1
 
@@ -5877,19 +5775,19 @@ Public Class Recibos
                 '
                 SQLConnector.executeProcedure("alta_imputacion", "2" & WProximo & "01", "2", WDatosFCE.Item("Proveedor"), "99",
                                             "A", "0000", WDatosFCE.Item("Boleto"), "01",
-                                            txtFecha.Text, "", "100", 0, Val(formatonumerico(WNetoCmp)) + Val(formatonumerico(WIvaCmp)), WProximo, Proceso.ordenaFecha(txtFecha.Text))
+                                            txtFecha.Text, "", "100", 0, Val(formatonumerico(WNetoCmp)) + Val(formatonumerico(WIvaCmp)), WProximo, ordenaFecha(txtFecha.Text))
                 '
                 ' ALTA DE GASTOS
                 '
                 SQLConnector.executeProcedure("alta_imputacion", "2" & WProximo & "02", "2", WDatosFCE.Item("Proveedor"), "99",
                                             "A", "0000", WDatosFCE.Item("Boleto"), "02",
-                                            txtFecha.Text, "", "5654", Val(formatonumerico(WNetoCmp)), 0, WProximo, Proceso.ordenaFecha(txtFecha.Text))
+                                            txtFecha.Text, "", "5654", Val(formatonumerico(WNetoCmp)), 0, WProximo, ordenaFecha(txtFecha.Text))
                 '
                 ' ALTA DE IVA
                 '
                 SQLConnector.executeProcedure("alta_imputacion", "2" & WProximo & "03", "2", WDatosFCE.Item("Proveedor"), "99",
                                             "A", "0000", WDatosFCE.Item("Boleto"), "03",
-                                            txtFecha.Text, "", "151", Val(formatonumerico(WIvaCmp)), 0, WProximo, Proceso.ordenaFecha(txtFecha.Text))
+                                            txtFecha.Text, "", "151", Val(formatonumerico(WIvaCmp)), 0, WProximo, ordenaFecha(txtFecha.Text))
 
                 ZSqls.Add("UPDATE IvaComp SET Exento = 0, Iva27 = 0, Iva5 = 0, Iva105 = 0, Ib = 0, Impre = 'OC', OrdFecha = '" & ordenaFecha(txtFecha.Text) & "' WHERE NroInterno  = '" & WProximo & "'")
 
@@ -5904,5 +5802,126 @@ Public Class Recibos
             txtRecibo.Focus()
 
         End If
+    End Sub
+
+    Private Sub lblDolares_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles lblDolares.MouseDoubleClick
+
+        Dim WFacturas As DataTable = New BDDifCambioRecibos.FacturasDataTable
+        Dim WAcumRecibo As Double = 0
+
+        For Each row As DataGridViewRow In gridPagos2.Rows
+
+            Dim ZTipo2 As Integer = Val(OrDefault(row.Cells("Tipo2").Value, ""))
+
+            '
+            ' Evitamos las Notas por Dif de Cambio y sólamente procesamos las Facturas ""Normales".
+            '
+            If Not {1, 2}.Contains(ZTipo2) Then Continue For
+
+            If Trim(OrDefault(row.Cells("Numero2").Value, "")) = "" Then Continue For
+
+            Dim Factura As DataRow = GetSingle("SELECT Paridad, TipoCompo, Fecha FROM CtaCte WHERE clave = '" & row.Cells("Tipo2").Value & ceros(row.Cells("Numero2").Value, 8) & "01'")
+
+            If Factura Is Nothing Then
+                MsgBox("La factura " & row.Cells("Numero2").Value & " no se ha encontrado.", MsgBoxStyle.Exclamation)
+                Exit Sub
+            End If
+
+            Dim Paridad As Double = Val(formatonumerico(OrDefault(Factura("Paridad"), 0), 4))
+
+            Dim WImporte As Double = Val(formatonumerico(OrDefault(row.Cells("Importe2").Value, "")))
+
+            If Paridad = 0 Then Paridad = 1
+
+            Dim r As DataRow = WFacturas.NewRow
+
+            Dim WPesos As Double = IIf(_Provincia = 24, WImporte * Paridad, WImporte)
+            Dim WDolares As Double = IIf(_Provincia = 24, WImporte, WImporte / Paridad)
+
+            WAcumRecibo += WPesos
+
+            With r
+                .Item("Recibo") = txtRecibo.Text
+                .Item("FechaRecibo") = txtFecha.Text
+                .Item("Cliente") = txtCliente.Text.ToUpper
+                .Item("Razon") = txtNombre.Text.ToUpper
+                .Item("ParidadRecibo") = Val(formatonumerico(txtParidad.Text))
+                .Item("TotalRecibo") = 0 'Val(formatonumerico(lblTotalCreditos.Text))
+                .Item("Tipo") = row.Cells("Tipo2").Value
+                .Item("Letra") = row.Cells("Letra2").Value
+                .Item("Punto") = row.Cells("Punto2").Value
+                .Item("Numero") = row.Cells("Numero2").Value
+                .Item("Fecha") = Factura("Fecha")
+                .Item("FechaOrd") = ordenaFecha(.Item("Fecha"))
+                .Item("Paridad") = Paridad
+                .Item("Pesos") = WPesos
+                .Item("Dolares") = WDolares
+            End With
+
+            WFacturas.Rows.Add(r)
+        Next
+
+        WAcumRecibo = Val(formatonumerico(WAcumRecibo))
+
+        For Each row As Datarow In WFacturas.Rows
+            row("TotalRecibo") = WAcumRecibo
+        Next
+
+        With New VistaPrevia
+            .Reporte = New DifCambioRecibos
+            .Reporte.SetDataSource(WFacturas)
+            .Reconectar = False
+            If WEnviarHojaCalculoDifCambio Then
+                Dim WRuta, WNombrePdf As String
+
+                WRuta = "C:\TempHojasDifCambio\"
+
+                Directory.CreateDirectory(WRuta)
+
+                WNombrePdf = "DifCambioRec" & txtRecibo.Text & ".pdf"
+
+                .Exportar(WNombrePdf, ExportFormatType.PortableDocFormat, WRuta)
+
+                Dim WBody As String = "<p>Estimado Cliente.</p><p>Se le adjunta la <b><em>Hoja de Análisis de Diferencia de Cambio</em></b>, correspondiente al recibo <b>" & txtRecibo.Text & "</b>.</p>"
+
+                _EnviarEmail(WEmail, "dbertolini@surfactan.com.ar;gferreyra@surfactan.com.ar", "SURFACTAN S.A. - Hoja de Análisis de Diferencia de Cambio - Recibo: " & txtRecibo.Text, WBody, WRuta & WNombrePdf)
+
+                MsgBox("¡Email enviado correctamente!", MsgBoxStyle.Information)
+
+            Else
+                .Mostrar()
+            End If
+        End With
+
+    End Sub
+
+    Private Sub btnDetallesDifCambio_Click(sender As Object, e As EventArgs) Handles btnDetallesDifCambio.Click
+        WEnviarHojaCalculoDifCambio = False
+
+        Dim WResp = MsgBox("¿Quiere enviar la Hoja de Cálculo de Diferencia de Cambio al Cliente?", MsgBoxStyle.YesNoCancel)
+
+        If Not {MsgBoxResult.Yes, MsgBoxResult.No}.Contains(WResp) Then Exit Sub
+
+        WEnviarHojaCalculoDifCambio = WResp = MsgBoxResult.Yes
+
+        lblDolares_MouseDoubleClick(Nothing, Nothing)
+
+        WEnviarHojaCalculoDifCambio = False
+    End Sub
+
+    Private Sub gridFormasPago2_CellLeave(sender As Object, e As DataGridViewCellEventArgs) Handles gridFormasPago2.CellLeave
+        If e.ColumnIndex = 3 Then
+
+        End If
+    End Sub
+
+    Private Sub gridFormasPago2_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles gridFormasPago2.CellValueChanged
+        For Each row As DataGridViewRow In gridFormasPago2.Rows
+            With row
+                If Val(OrDefault(.Cells(0).Value, "")) = 2 Then
+                    .Cells(3).Value = _GenerarCodigoBanco(OrDefault(.Cells(3).Value, ""))
+                End If
+            End With
+        Next
     End Sub
 End Class

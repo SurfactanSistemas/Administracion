@@ -728,6 +728,11 @@
       <DependentUpon>AvisosNoEnviados.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\BDDifCambioRecibos.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BDDifCambioRecibos.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\ControlDeFacturacion.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -738,6 +743,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AnalisisDiferenciaCambioXFacturas.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\DifCambioRecibos.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DifCambioRecibos.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\ListadoCtaCtePrvSelectivoPrueba1.vb">
@@ -1308,6 +1319,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>AnalisisDiferenciaCambioXFacturas.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\DifCambioRecibos.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DifCambioRecibos.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\ListadoCtaCtePrvSelectivoPrueba.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ListadoCtaCtePrvSelectivoPrueba1.vb</LastGenOutput>
@@ -1693,6 +1708,17 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Reportes\BDDifCambioRecibos.xsc">
+      <DependentUpon>BDDifCambioRecibos.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\BDDifCambioRecibos.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>BDDifCambioRecibos.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Reportes\BDDifCambioRecibos.xss">
+      <DependentUpon>BDDifCambioRecibos.xsd</DependentUpon>
+    </None>
     <None Include="Reportes\DBAuxi.xsc">
       <DependentUpon>DBAuxi.xsd</DependentUpon>
     </None>
@@ -1954,6 +1980,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Firma.JPG" />
+    <None Include="Resources\exm.png" />
     <None Include="Resources\Exito.png" />
     <None Include="Resources\Error.png" />
     <None Include="Resources\internet.png" />

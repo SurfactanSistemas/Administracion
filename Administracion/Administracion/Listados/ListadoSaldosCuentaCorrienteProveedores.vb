@@ -56,7 +56,7 @@ Public Class ListadoSaldosCuentaCorrienteProveedores
         Dim x As Char = Chr(34)
 
         txtUno = "{CtaCtePrv.Proveedor} in " + x + txtDesdeProveedor.Text + x + " to " + x + txtHastaProveedor.Text + x
-        txtDos = " and {CtaCtePrv.Saldo} <> 0"
+        txtDos = " and {CtaCtePrv.Saldo} <> 0 And {CtaCtePrv.MarcaVirtual} <> 'X'"
         txtFormula = txtUno + txtDos
 
         Dim viewer As New ReportViewer("saldos de ctacte", Globals.reportPathWithName("wsaldoprvnet.rpt"), txtFormula)

@@ -4,7 +4,7 @@ Imports Util.Clases.Helper
 Public Class ConsultaCliente
 
     Private Sub ConsultaCliente_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim SQLCnslt As String = "SELECT Cliente, Razon FROM Cliente"
+        Dim SQLCnslt As String = "SELECT Cliente, Razon FROM Cliente ORDER BY Cliente ASC"
 
         Dim TablaCliente As DataTable = GetAll(SQLCnslt, "SurfactanSa")
 

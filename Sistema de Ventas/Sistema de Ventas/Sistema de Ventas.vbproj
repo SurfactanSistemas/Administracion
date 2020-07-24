@@ -75,6 +75,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Consulta_Terminado.Designer.vb">
+      <DependentUpon>Consulta_Terminado.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Consulta_Terminado.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Interfases\IAgregarEnvase.vb" />
     <Compile Include="Interfases\IAgregarGastosImpo.vb" />
     <Compile Include="Interfases\IAutorizacionDePedidos.vb" />
@@ -83,6 +89,8 @@
     <Compile Include="Interfases\IConsultaTerminado.vb" />
     <Compile Include="Interfases\IConsulta_GasImportacion.vb" />
     <Compile Include="Interfases\IConsulta_Orden_Trabajo.vb" />
+    <Compile Include="Interfases\IConsulta_Terminado.vb" />
+    <Compile Include="Interfases\INotificacionCambios.vb" />
     <Compile Include="Interfases\IGastosImpoParcial.vb" />
     <Compile Include="Interfases\IHojaDeRuta.vb" />
     <Compile Include="Interfases\IOrdenDeTrabajoDesarrollo.vb" />
@@ -103,6 +111,24 @@
       <DependentUpon>ListadoCashFlow.vb</DependentUpon>
     </Compile>
     <Compile Include="Listados\Listado de Cash Flow\ListadoCashFlow.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\Listado_IvaVentas.Designer.vb">
+      <DependentUpon>Listado_IvaVentas.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\Listado_IvaVentas.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\Listado_Mercaderia_Remitos_FactuArticulo.Designer.vb">
+      <DependentUpon>Listado_Mercaderia_Remitos_FactuArticulo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\Listado_Mercaderia_Remitos_FactuArticulo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\Listado_Mercaderia_Remitos_FactuCliente.Designer.vb">
+      <DependentUpon>Listado_Mercaderia_Remitos_FactuCliente.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\Listado_Mercaderia_Remitos_FactuCliente.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Listados\Listado_VentasXProvincia.Designer.vb">
@@ -292,6 +318,24 @@
     <Compile Include="Maestro\Listar_Cambios.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Maestro\Precios por Cliente\PreciosClienteProducto.Designer.vb">
+      <DependentUpon>PreciosClienteProducto.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestro\Precios por Cliente\PreciosClienteProducto.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestro\Precios por Cliente\PreciosPorCliente.Designer.vb">
+      <DependentUpon>PreciosPorCliente.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestro\Precios por Cliente\PreciosPorCliente.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestro\Precios por Cliente\PreciosPorClienteProductos.Designer.vb">
+      <DependentUpon>PreciosPorClienteProductos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestro\Precios por Cliente\PreciosPorClienteProductos.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Novedades\Autorizacion de Pedidos\AutorizacionDePedidos.Designer.vb">
       <DependentUpon>AutorizacionDePedidos.vb</DependentUpon>
     </Compile>
@@ -394,10 +438,22 @@
       <DependentUpon>hojarutacotnuevo.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\ReporteAnalisisND.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteAnalisisND.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\ReporteCashFlow.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReporteCashFlow.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ReporteIvaVentas.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteIvaVentas.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\ReporteListaCambios.vb">
@@ -511,6 +567,18 @@
       <DependentUpon>ReporteVerificaCostoOtro.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\Reporte_Mercad_FacturasXArticulo.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte_Mercad_FacturasXArticulo.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Reporte_Mercad_FacturasXCliente.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte_Mercad_FacturasXCliente.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="VentanaPassword.Designer.vb">
       <DependentUpon>VentanaPassword.vb</DependentUpon>
     </Compile>
@@ -519,6 +587,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Consulta_Terminado.resx">
+      <DependentUpon>Consulta_Terminado.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Listados\CuentaCorrientes_DeClientes.resx">
       <DependentUpon>CuentaCorrientes_DeClientes.vb</DependentUpon>
     </EmbeddedResource>
@@ -527,6 +598,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\Listado de Cash Flow\ListadoCashFlow.resx">
       <DependentUpon>ListadoCashFlow.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Listado_IvaVentas.resx">
+      <DependentUpon>Listado_IvaVentas.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Listado_Mercaderia_Remitos_FactuArticulo.resx">
+      <DependentUpon>Listado_Mercaderia_Remitos_FactuArticulo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Listado_Mercaderia_Remitos_FactuCliente.resx">
+      <DependentUpon>Listado_Mercaderia_Remitos_FactuCliente.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\Listado_VentasXProvincia.resx">
       <DependentUpon>Listado_VentasXProvincia.vb</DependentUpon>
@@ -618,6 +698,15 @@
     <EmbeddedResource Include="Maestro\Listar_Cambios.resx">
       <DependentUpon>Listar_Cambios.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Maestro\Precios por Cliente\PreciosClienteProducto.resx">
+      <DependentUpon>PreciosClienteProducto.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestro\Precios por Cliente\PreciosPorCliente.resx">
+      <DependentUpon>PreciosPorCliente.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestro\Precios por Cliente\PreciosPorClienteProductos.resx">
+      <DependentUpon>PreciosPorClienteProductos.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Novedades\Autorizacion de Pedidos\AutorizacionDePedidos.resx">
       <DependentUpon>AutorizacionDePedidos.vb</DependentUpon>
     </EmbeddedResource>
@@ -670,9 +759,17 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>hojarutacotnuevo.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ReporteAnalisisND.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteAnalisisND.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\ReporteCashFlow.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteCashFlow.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ReporteIvaVentas.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteIvaVentas.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\ReporteListaCambios.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -738,6 +835,14 @@
     <EmbeddedResource Include="Reportes\ReporteVerificaCostoOtro.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteVerificaCostoOtro1.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Reporte_Mercad_FacturasXArticulo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte_Mercad_FacturasXArticulo.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Reporte_Mercad_FacturasXCliente.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte_Mercad_FacturasXCliente.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="VentanaPassword.resx">
       <DependentUpon>VentanaPassword.vb</DependentUpon>

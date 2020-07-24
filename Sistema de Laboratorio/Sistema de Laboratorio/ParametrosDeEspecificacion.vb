@@ -53,6 +53,8 @@ Public Class ParametrosDeEspecificacion
 
     Private Sub btnAceptar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAceptar.Click
 
+        txtFormula.Text = txtFormula.Text.Replace("=", "")
+
         Dim Mofidicado As Boolean = False
 
         For i = 1 To 10
@@ -66,7 +68,7 @@ Public Class ParametrosDeEspecificacion
         Dim row As DataRow = GetSingle(SQLCnslt, "Surfactan_II")
 
         If row IsNot Nothing Then
-            If row.Item("EstadoVerificado") = True Then
+            If OrDefault(row.Item("EstadoVerificado"), False) = True Then
                 For i = 1 To 10
 
                     If WparametrosFormula(i) <> Trim(OrDefault(row.Item("Var" & i), "")) Then

@@ -739,8 +739,12 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
             'Pasar valores a la tabla ingles
             Dim index As Integer = dgvEspecif.CurrentRow.Index
 
-            If index > dgvEspecifIngles.Rows.Count - 1 Then
-                dgvEspecifIngles.Rows.Add()
+            If dgvEspecif.Rows.Count > dgvEspecifIngles.Rows.Count Then
+
+                For i = dgvEspecifIngles.Rows.Count To dgvEspecif.Rows.Count - 1
+                    dgvEspecifIngles.Rows.Add()
+                Next
+
             End If
 
             dgvEspecifIngles.Rows(index).Cells("EnsayoIngles").Value = .Cells("Ensayo").Value

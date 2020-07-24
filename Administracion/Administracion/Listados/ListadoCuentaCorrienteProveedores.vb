@@ -57,12 +57,25 @@ Public Class ListadoCuentaCorrienteProveedores : Implements IAyudaGeneral
             txtEmpresa = "Pellital S.A."
         End If
 
+        Dim WDesde, WHasta
+
+        WDesde = txtDesdeProveedor.Text
+        WHasta = txtHastaProveedor.Text
+
+        If Trim(WDesde) = "" Then
+            WDesde = "0"
+        End If
+
+        If Trim(WHasta) = "" Then
+            WHasta = "99999999999"
+        End If
+
         Dim tabla As DataTable
         'tabla = SQLConnector.retrieveDataTable("buscar_cuenta_corriente_proveedores_desdehasta", txtDesdeProveedor.Text, txtHastaProveedor.Text, WTipo)
 
         Dim WFiltro As String = IIf(opcCompleto.Checked, "", " And Saldo <> 0")
 
-        tabla = GetAll("SELECT Tipo, Letra, Punto, Numero, Total, Saldo, fecha, Vencimiento, Vencimiento1, Impre, NroInterno, Clave, Proveedor FROM CtactePrv WHERE ISNULL(MarcaVirtual, '') <> 'X' " & WFiltro & " ORDER BY Proveedor, OrdFecha, Tipo, Numero")
+        tabla = GetAll("SELECT Tipo, Letra, Punto, Numero, Total, Saldo, fecha, Vencimiento, Vencimiento1, Impre, NroInterno, Clave, Proveedor FROM CtactePrv WHERE ISNULL(MarcaVirtual, '') <> 'X' And Proveedor BETWEEN '" & WDesde & "' And '" & WHasta & "' " & WFiltro & " ORDER BY Proveedor, OrdFecha, Tipo, Numero")
 
         For Each row As DataRow In tabla.Rows
 
@@ -88,19 +101,6 @@ Public Class ListadoCuentaCorrienteProveedores : Implements IAyudaGeneral
             SQLConnector.executeProcedure("alta_impCtaCtePrvNet", CCPrv.Clave, CCPrv.Proveedor, CCPrv.Tipo, CCPrv.letra, CCPrv.punto, CCPrv.numero, CCPrv.total, CCPrv.saldo, CCPrv.fecha, CCPrv.vencimiento, CCPrv.VencimientoII, CCPrv.Impre, CCPrv.nroInterno, txtEmpresa, WSuma, WOrden, "", "", "", "", 0, 0, 0, 0, 0, "", 0, 0, 0, 0, 0, 0, 0, 0)
 
         Next
-
-        Dim WDesde, WHasta
-
-        WDesde = txtDesdeProveedor.Text
-        WHasta = txtHastaProveedor.Text
-
-        If Trim(WDesde) = "" Then
-            WDesde = "0"
-        End If
-
-        If Trim(WHasta) = "" Then
-            WHasta = "99999999999"
-        End If
 
         txtUno = "{ImpCtaCtePrvNet.Proveedor} in " & x & WDesde & x & " to " & x & WHasta & x
         txtFormula = txtUno

@@ -250,11 +250,11 @@ Partial Class ConsultaHojaDeRutaXRangoFecha
         '
         'btnCerrar
         '
-        Me.btnCerrar.Location = New System.Drawing.Point(596, 50)
+        Me.btnCerrar.Location = New System.Drawing.Point(596, 76)
         Me.btnCerrar.Name = "btnCerrar"
-        Me.btnCerrar.Size = New System.Drawing.Size(84, 45)
+        Me.btnCerrar.Size = New System.Drawing.Size(75, 23)
         Me.btnCerrar.TabIndex = 13
-        Me.btnCerrar.Text = "CERRAR"
+        Me.btnCerrar.Text = "Cerrar"
         Me.btnCerrar.UseVisualStyleBackColor = True
         '
         'ConsultaHojaDeRutaXRangoFecha

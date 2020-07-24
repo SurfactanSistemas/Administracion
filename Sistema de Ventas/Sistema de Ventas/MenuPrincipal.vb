@@ -70,6 +70,11 @@
         End With
     End Sub
 
+    Private Sub PreciosPorClienteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PreciosPorClienteToolStripMenuItem.Click
+        With New PreciosPorCliente
+            .Show(Me)
+        End With
+    End Sub
     Private Sub PedidosDesarrolloToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PedidosDesarrolloToolStripMenuItem.Click
         With OrdenesTrabajoDesarrollo
             .Show()
@@ -132,6 +137,24 @@
 
     Private Sub SaldosDeCtaCteDeClientesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaldosDeCtaCteDeClientesToolStripMenuItem.Click
         With SaldoDe_CtaCte_deCliente
+            .Show()
+        End With
+    End Sub
+
+    Private Sub SubdiarioDeIvaVentasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SubdiarioDeIvaVentasToolStripMenuItem.Click
+        With Listado_IvaVentas
+            .Show()
+        End With
+    End Sub
+
+    Private Sub ListadoDeMercaderiaEnRemitosAFacturasPorClienteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ListadoDeMercaderiaEnRemitosAFacturasPorClienteToolStripMenuItem.Click
+        With Listado_Mercaderia_Remitos_FactuCliente
+            .Show()
+        End With
+    End Sub
+
+    Private Sub ListadoDeMercaderiaEnRemitosAFacturasPorClienteToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ListadoDeMercaderiaEnRemitosAFacturasPorClienteToolStripMenuItem1.Click
+        With Listado_Mercaderia_Remitos_FactuArticulo
             .Show()
         End With
     End Sub
