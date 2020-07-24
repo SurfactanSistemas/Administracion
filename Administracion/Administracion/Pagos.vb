@@ -2150,7 +2150,7 @@ Public Class Pagos
                         cn.Close()
                     End Try
 
-                    If Val(XTipo2) = 3 Then
+                    If Val(XTipo2) = 3 Or Val(XTipo2) = 7 Then
 
                         XDestino = "O.P:" + txtOrdenPago.Text
 
