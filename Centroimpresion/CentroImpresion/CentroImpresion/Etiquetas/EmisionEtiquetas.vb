@@ -283,18 +283,19 @@ Public Class EmisionEtiquetas
         '
         ' Verifico que el Código de Producto exista.
         '
-        Dim WTer As DataRow = GetSingle("SELECT Linea, Vida, MarcaLabora FROM Terminado WHERE Codigo = '" & txtTerminado.Text & "'")
+        Dim WTer As DataRow = GetSingle("SELECT Linea, Vida, MarcaLabora, Sedronar FROM Terminado WHERE Codigo = '" & txtTerminado.Text & "'")
 
         If WTer Is Nothing Then
             MsgBox("El Producto indicado no existe.", MsgBoxStyle.Exclamation)
             Exit Sub
         End If
 
+        Dim WSedronar As Byte = Val(OrDefault(WTer("Sedronar"), ""))
+
         Dim WCli As DataRow = GetSingle("SELECT Cliente, Razon, ImpreVto, Provincia, Idioma, EtiI, EtiII, DirEntrega FROM Cliente WHERE Cliente = '" & txtCliente.Text & "'")
         Dim WCodSegI As String = CodigoSeguridad(txtLote.Text)
 
         Dim IdEmpresa As Integer = Helper._IdEmpresaSegunBase(WEmpresaHoja)
-
 
         '
         ' Comprobamos los datos para el Cliente, en caso de que se haya definido uno.
@@ -1565,11 +1566,10 @@ Public Class EmisionEtiquetas
 
         Dim ds As New DataSet
 
-
-        Dim ImpreRNPQ As String = "NO"
-
+        Dim ImpreRNPQ As String = "SI"
 
         If WTipoPro = "CO" Then
+            ImpreRNPQ = "NO"
             rpt = New etinuevacolorante
         ElseIf WTipoPro = "FA" Then
 
@@ -1613,8 +1613,6 @@ Public Class EmisionEtiquetas
 
         Else
 
-            ImpreRNPQ = "SI"
-
             If Trim(txtCliente.Text) = "" Then
                 'rpt = New etinuevanormachica25000
                 rpt = New etinuevanormachicaprueba
@@ -1635,7 +1633,6 @@ Public Class EmisionEtiquetas
         ds.Tables.Add(WPictograma2)
         ds.Tables.Add(WPictograma3)
         ds.Tables.Add(WPictograma4)
-
 
         rpt.SetDataSource(ds)
 
