@@ -7643,7 +7643,11 @@ Public Class Pagos
                 tablaChequesAdolar.Rows(i).Item("Importe") = gridFormaPagos.Rows(i - 1).Cells("Importe2").Value
                 Dim fecha As String = tablaChequesAdolar.Rows(i).Item("Fecha")
 
-                If fecha.Replace(" ", "").Length < 10 Then Continue For
+                If fecha.Replace(" ", "").Length < 10 And (Val(tablaChequesAdolar.Rows(i).Item("Tipo")) <> 2 And Val(tablaChequesAdolar.Rows(i).Item("Tipo")) <> 3) Then
+                    fecha = txtFechaParidad.Text
+                ElseIf fecha.Replace(" ", "").Length < 10 Then
+                    Continue For
+                End If
 
                 Dim FechaAVerificar As DateTime
                 FechaAVerificar = DateTime.ParseExact(fecha, "dd/MM/yyyy", New CultureInfo("en-US"))
