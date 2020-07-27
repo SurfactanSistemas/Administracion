@@ -7475,17 +7475,28 @@ Public Class Pagos
 
     Private Sub btnDifCambioXFactura_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDifCambioXFactura.Click
 
-        Dim TipoPago As Integer
-        TipoPago = _BuscarTipoDePago(gridPagos.Rows(0).Cells("Tipo").Value, gridPagos.Rows(0).Cells("Punto").Value, gridPagos.Rows(0).Cells("Letra").Value, txtProveedor.Text, gridPagos.Rows(0).Cells("Numero").Value)
-        If (TipoPago = 2) Then
+        If gridPagos.Rows.Cast(Of DataGridViewRow).Any(Function(r) Val(OrDefault(r.Cells("Importe").Value, "")) <> 0) Then
+
             For Each Factura As DataGridViewRow In GridPagosXFacturas.Rows
                 Factura.Cells("Check").Value = False
             Next
             pnlDifCamXFactura.Visible = True
             _CargarGridPagosXFactura()
-        Else
-            MsgBox("Factura en pesos, no hay calculo de diferencia")
+
         End If
+
+        'Dim TipoPago As Integer
+        'TipoPago = _BuscarTipoDePago(gridPagos.Rows(0).Cells("Tipo").Value, gridPagos.Rows(0).Cells("Punto").Value, gridPagos.Rows(0).Cells("Letra").Value, txtProveedor.Text, gridPagos.Rows(0).Cells("Numero").Value)
+        'If (TipoPago = 2) Then
+        '    For Each Factura As DataGridViewRow In GridPagosXFacturas.Rows
+        '        Factura.Cells("Check").Value = False
+        '    Next
+        '    pnlDifCamXFactura.Visible = True
+        '    _CargarGridPagosXFactura()
+        '    'Else
+        '    '    MsgBox("Factura en pesos, no hay calculo de diferencia")
+        '    'End If
+        'End If
 
     End Sub
 
@@ -7529,6 +7540,9 @@ Public Class Pagos
                 Letra = GridPagosXFacturas.Rows(filasNuevas).Cells("Letra3").Value
 
                 GridPagosXFacturas.Rows(filasNuevas).Cells("Fecha").Value = _BuscarFechaFacturaPorProv(Tipo, Punto, Letra, CodProveedor, Numero)
+
+                If GridPagosXFacturas.Rows(filasNuevas).Cells("Fecha").Value = "NoSeEncontro" Then Continue For
+
                 Dim Fecha As DateTime = Convert.ToDateTime(GridPagosXFacturas.Rows(filasNuevas).Cells("Fecha").Value)
                 If (Fecha.DayOfWeek = 0) Then
                     Fecha.AddDays(1)
@@ -7736,7 +7750,7 @@ Public Class Pagos
 
                         contadorCheques = contadorCheques + 1
 
-                        If (row.Item("SaldoCheque") <> "0") Then
+                        If Val(OrDefault(row.Item("SaldoCheque"), "")) <> 0 Then
 
 
                             If (row.Item("Importe") = row.Item("SaldoAMostrar")) Then
