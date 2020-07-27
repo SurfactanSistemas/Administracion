@@ -158,4 +158,16 @@
             .Show()
         End With
     End Sub
+
+    Private Sub ListadoDeVentasFueraDeFechaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ListadoDeVentasFueraDeFechaToolStripMenuItem.Click
+        With Listado_Ventas_FueraDeFecha
+            .Show()
+        End With
+    End Sub
+
+    Private Sub ListadoDePreciosGrupoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ListadoDePreciosGrupoToolStripMenuItem.Click
+        With Listado_Precios_Grupo
+            .Show()
+        End With
+    End Sub
 End Class
