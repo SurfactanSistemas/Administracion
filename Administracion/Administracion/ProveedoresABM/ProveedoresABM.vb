@@ -90,6 +90,8 @@ Public Class ProveedoresABM
         txtPorcelCABA.Text = ""
         txtMailOp.Text = ""
 
+        ckAceptaCheques.Checked = False
+
         CKBProveedorInactivo.Checked = False
 
         cufe1 = Tuple.Create("", "")
@@ -260,8 +262,10 @@ Public Class ProveedoresABM
 
         Next
 
+        Dim WAceptaCheques As Short = IIf(ckAceptaCheques.Checked, 1, 0)
+
         For Each empresa As String In Proceso.Empresas
-            ExecuteNonQueries(empresa, {"UPDATE Proveedor SET FormaPago = '" & cmbFormaPago.SelectedIndex & "' WHERE Proveedor = '" & txtCodigo.Text & "'"})
+            ExecuteNonQueries(empresa, {"UPDATE Proveedor SET FormaPago = '" & cmbFormaPago.SelectedIndex & "', AceptaCheques = '" & WAceptaCheques & "' WHERE Proveedor = '" & txtCodigo.Text & "'"})
         Next
 
         If (_ProveedorExistente(txtCodigo.Text)) Then
@@ -436,8 +440,10 @@ Public Class ProveedoresABM
                 _ActualizarMailOpProveedor(txtCodigo.Text)
             End If
 
+            Dim WAceptaCheques As Short = IIf(ckAceptaCheques.Checked, 1, 0)
+
             For Each empresa As String In Proceso.Empresas
-                ExecuteNonQueries(empresa, {"UPDATE Proveedor SET FormaPago = '" & cmbFormaPago.SelectedIndex & "' WHERE Proveedor = '" & txtCodigo.Text & "'"})
+                ExecuteNonQueries(empresa, {"UPDATE Proveedor SET FormaPago = '" & cmbFormaPago.SelectedIndex & "', AceptaCheques = '" & WAceptaCheques & "' WHERE Proveedor = '" & txtCodigo.Text & "'"})
             Next
 
             MsgBox("Proveedor guardado correctamente.", MsgBoxStyle.Information)
@@ -618,12 +624,14 @@ Public Class ProveedoresABM
             cmbEstado.ForeColor = Color.White
         End If
 
-        Dim WProv As DataRow = GetSingle("SELECT FormaPago FROM Proveedor WHERE Proveedor = '" & proveedor.id & "'")
+        Dim WProv As DataRow = GetSingle("SELECT FormaPago, AceptaCheques FROM Proveedor WHERE Proveedor = '" & proveedor.id & "'")
 
         cmbFormaPago.SelectedIndex = 0
+        ckAceptaCheques.Checked = False
 
         If WProv IsNot Nothing Then
             cmbFormaPago.SelectedIndex = Val(OrDefault(WProv.Item("FormaPago"), "0"))
+            ckAceptaCheques.Checked = Val(OrDefault(WProv("AceptaCheques"), "")) = 1
         End If
 
     End Sub
