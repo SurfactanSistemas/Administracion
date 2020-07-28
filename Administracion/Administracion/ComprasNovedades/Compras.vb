@@ -896,7 +896,7 @@ Public Class Compras
     Private Sub traerValoresIb(ByVal nroInterno As String)
 
         Dim cn = New SqlConnection()
-        Dim cm = New SqlCommand("SELECT TOP 1 RetIB1, RetIB2, RetIB3, RetIB4, RetIB5, RetIB6, RetIB7, RetIB8, RetIB9, RetIB10, RetIB11, RetIB12, RetIB13, RetIB14 FROM IvaComp WHERE NroInterno = '" & Trim(nroInterno) & "'")
+        Dim cm = New SqlCommand("SELECT TOP 1 RetIB1, RetIB2, RetIB3, RetIB4, RetIB5, RetIB6, RetIB7, RetIB8, RetIB9, RetIB10, RetIB11, RetIB12, RetIB13, RetIB14, RetIB15, RetIB16 FROM IvaComp WHERE NroInterno = '" & Trim(nroInterno) & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
