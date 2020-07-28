@@ -6,16 +6,14 @@ Imports System.Text.RegularExpressions
 Public Class Compras
 
     Dim diasPlazo As Integer = 0
-    Dim letrasValidas As New List(Of String) From {"A", "B", "C", "X", "M", "I"}
+    ReadOnly letrasValidas As New List(Of String) From {"A", "B", "C", "X", "M", "I"}
     Dim proveedor As Proveedor
     Dim apertura As New Apertura
     Dim esModificacion As Boolean = False
     Private _RetIB1, _RetIB2, _RetIB3, _RetIB4, _RetIB5, _RetIB6, _RetIB7, _
-            _RetIB8, _RetIB9, _RetIB10, _RetIB11, _RetIB12, _RetIB13, _RetIB14 As String
-    Private ImpoIb(14, 2) As String
+            _RetIB8, _RetIB9, _RetIB10, _RetIB11, _RetIB12, _RetIB13, _RetIB14, _RetIB15, _RetIB16 As String
+    Private ImpoIb(16, 2) As String
     Dim _PyMENacion() As Integer = {0, 0, 0} ' Cuotas, Mes, Año.
-
-    Private _PreguntarPorRecalculo As Boolean = True
 
     Dim commonEventsHandler As New CommonEventsHandler
 
@@ -78,6 +76,8 @@ Public Class Compras
         _RetIB12 = ""
         _RetIB13 = ""
         _RetIB14 = ""
+        _RetIB15 = ""
+        _RetIB16 = ""
 
         Array.Clear(_PyMENacion, 0, _PyMENacion.Length)
         Array.Clear(ImpoIb, 0, ImpoIb.Length)
@@ -151,13 +151,6 @@ Public Class Compras
 
         Return vencido
     End Function
-
-    Public Sub mostrarProveedor(ByVal _proveedorAMostrar As String)
-        Dim proveedorAMostrar As Proveedor = DAOProveedor.buscarProveedorPorNombre(_proveedorAMostrar)(0)
-
-        mostrarProveedor(proveedorAMostrar)
-
-    End Sub
 
     Private Function _ExtraerSoloNumeros(ByVal Plazo As String) As String
         Dim regex As New Regex("[^0-9]+")
@@ -378,7 +371,7 @@ Public Class Compras
     End Sub
 
     Private Sub btnAgregar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAgregar.Click
-        Dim validoComoPymenacion = False
+        Dim validoComoPymenacion As Boolean
 
         _EliminarFilasEnBlanco()
 
@@ -502,7 +495,7 @@ Public Class Compras
         End If
 
         Dim cn = New SqlConnection()
-        Dim cm = New SqlCommand("UPDATE IvaComp SET Rechazado = " & WRechazado & ", MarcaDifCambio = '" & WMarcaDifCambio & "' WHERE NroInterno = '" & NroInterno & "'")
+        Dim cm = New SqlCommand("UPDATE IvaComp SET Rechazado = " & WRechazado & ", MarcaDifCambio = '" & WMarcaDifCambio & "', RetIb15 = '" & formatonumerico(_RetIB15) & "', RetIb16 = '" & formatonumerico(_RetIB16) & "' WHERE NroInterno = '" & NroInterno & "'")
 
         SQLConnector.conexionSql(cn, cm)
 
@@ -515,8 +508,6 @@ Public Class Compras
         Finally
 
             cn.Close()
-            cn = Nothing
-            cm = Nothing
 
         End Try
 
@@ -595,8 +586,6 @@ Public Class Compras
         Finally
 
             cn.Close()
-            cn = Nothing
-            cm = Nothing
 
         End Try
 
@@ -656,12 +645,6 @@ Public Class Compras
 
             Dim total, sumaIvas, ivaRG3337, ingresosBrutos, diferencia As Double
 
-            total = 0
-            sumaIvas = 0
-            ivaRG3337 = 0
-            ingresosBrutos = 0
-            diferencia = 0
-
             gridAsientos.Rows.Clear()
 
             If _UtilizaApertura() Then
@@ -698,7 +681,7 @@ Public Class Compras
                     End If
 
                 Else
-                    For i = 0 To 14
+                    For i = 0 To 16
 
                         If Val(ImpoIb(i, 1)) <> 0 Then
                             _Cta = DAOCuentaContable.buscarCuentaContablePorCodigo(Trim(ImpoIb(i, 2)))
@@ -726,7 +709,7 @@ Public Class Compras
                     End If
 
                 Else
-                    For i = 0 To 14
+                    For i = 0 To 16
 
                         If Val(formatonumerico(ImpoIb(i, 1))) <> 0 Then
 
@@ -871,10 +854,7 @@ Public Class Compras
             Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
         Finally
 
-            dr = Nothing
             cn.Close()
-            cn = Nothing
-            cm = Nothing
 
         End Try
 
@@ -906,10 +886,7 @@ Public Class Compras
             Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
         Finally
 
-            dr = Nothing
             cn.Close()
-            cn = Nothing
-            cm = Nothing
 
         End Try
 
@@ -945,6 +922,8 @@ Public Class Compras
                 _RetIB12 = IIf(Not IsDBNull(dr.Item("RetIB12")), dr.Item("RetIB12"), "")
                 _RetIB13 = IIf(Not IsDBNull(dr.Item("RetIB13")), dr.Item("RetIB13"), "")
                 _RetIB14 = IIf(Not IsDBNull(dr.Item("RetIB14")), dr.Item("RetIB14"), "")
+                _RetIB15 = OrDefault(dr.Item("RetIB15"), "")
+                _RetIB16 = OrDefault(dr.Item("RetIB16"), "")
 
             End If
 
@@ -952,10 +931,7 @@ Public Class Compras
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
-            dr = Nothing
             cn.Close()
-            cn = Nothing
-            cm = Nothing
 
         End Try
 
@@ -1126,7 +1102,7 @@ Public Class Compras
                 Exit Sub
             End If
 
-            Dim _NumeroInterno = ""
+            Dim _NumeroInterno As String
 
             If Trim(txtCodigoProveedor.Text) <> "" And cmbTipo.SelectedIndex >= 0 And CBLetra.SelectedIndex >= 0 And Trim(txtPunto.Text) <> "" And Trim(txtNumero.Text) <> "" Then
                 Dim tipo As String = IIf(cmbTipo.SelectedItem = "OC", "99", ceros(cmbTipo.SelectedIndex, 2))
@@ -1272,7 +1248,7 @@ Public Class Compras
     End Function
 
     Private Sub txtRemito_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtRemito.KeyDown
-        Dim _ValidoComoPymeNacion = False
+        Dim _ValidoComoPymeNacion As Boolean
 
         If e.KeyData = Keys.Enter Then
             _SaltarA(cmbFormaPago)
@@ -1401,9 +1377,6 @@ Public Class Compras
         Finally
 
             cn.Close()
-            cn = Nothing
-            cm = Nothing
-            dr = Nothing
 
         End Try
 
@@ -1412,7 +1385,7 @@ Public Class Compras
 
     Private Function _PrepararSQLRemitosPymeNacion(ByVal remitos() As String) As String
         Dim sqlRemitos = ""
-        Dim _CantRemitos = 0
+        Dim _CantRemitos As Short
 
         For Each remito As String In remitos
             If Trim(remito) <> "" Then
@@ -1472,16 +1445,10 @@ Public Class Compras
 
                 cn.Close()
 
-
             End Try
 
 
             If Trim(cs) <> "" Then
-
-                dr = Nothing
-                cn = Nothing
-                cm = Nothing
-
                 Exit For
             End If
 
@@ -1653,6 +1620,8 @@ Public Class Compras
             .txtRetIB12.Text = _RetIB12
             .txtRetIB13.Text = _RetIB13
             .txtRetIB14.Text = _RetIB14
+            .txtRetIB15.Text = _RetIB15
+            .txtRetIB16.Text = _RetIB16
 
             .ShowDialog(Me)
 
@@ -1670,6 +1639,8 @@ Public Class Compras
             _RetIB12 = asDouble(.txtRetIB12.Text)
             _RetIB13 = asDouble(.txtRetIB13.Text)
             _RetIB14 = asDouble(.txtRetIB14.Text)
+            _RetIB15 = asDouble(.txtRetIB15.Text)
+            _RetIB16 = asDouble(.txtRetIB16.Text)
 
             Array.Clear(ImpoIb, 0, ImpoIb.Length)
 
@@ -1707,6 +1678,10 @@ Public Class Compras
             ImpoIb(13, 2) = "169"
             ImpoIb(14, 1) = _RetIB14
             ImpoIb(14, 2) = "168"
+            ImpoIb(15, 1) = _RetIB15
+            ImpoIb(15, 2) = "184"
+            ImpoIb(16, 1) = _RetIB16
+            ImpoIb(16, 2) = "183"
 
             .Dispose()
 
@@ -1738,6 +1713,8 @@ Public Class Compras
         totalIB += Val(_FormatearNumero(_RetIB12))
         totalIB += Val(_FormatearNumero(_RetIB13))
         totalIB += Val(_FormatearNumero(_RetIB14))
+        totalIB += Val(_FormatearNumero(_RetIB15))
+        totalIB += Val(_FormatearNumero(_RetIB16))
 
         txtPercIB.Text = _FormatearNumero(totalIB)
 
@@ -2003,10 +1980,7 @@ Public Class Compras
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
-            dr = Nothing
             cn.Close()
-            cn = Nothing
-            cm = Nothing
 
         End Try
 
@@ -2037,10 +2011,7 @@ Public Class Compras
             MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
         Finally
 
-            dr = Nothing
             cn.Close()
-            cn = Nothing
-            cm = Nothing
 
         End Try
 
@@ -2063,8 +2034,6 @@ Public Class Compras
         Finally
 
             cn.Close()
-            cn = Nothing
-            cm = Nothing
 
         End Try
 
@@ -2085,8 +2054,6 @@ Public Class Compras
         Finally
 
             cn.Close()
-            cn = Nothing
-            cm = Nothing
 
         End Try
     End Sub
@@ -2106,8 +2073,6 @@ Public Class Compras
         Finally
 
             cn.Close()
-            cn = Nothing
-            cm = Nothing
 
         End Try
     End Sub
@@ -2127,8 +2092,6 @@ Public Class Compras
         Finally
 
             cn.Close()
-            cn = Nothing
-            cm = Nothing
 
         End Try
     End Sub
@@ -2148,8 +2111,6 @@ Public Class Compras
         Finally
 
             cn.Close()
-            cn = Nothing
-            cm = Nothing
 
         End Try
     End Sub
@@ -2171,8 +2132,6 @@ Public Class Compras
         Finally
 
             cn.Close()
-            cn = Nothing
-            cm = Nothing
 
         End Try
     End Sub
