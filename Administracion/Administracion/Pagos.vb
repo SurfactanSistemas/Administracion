@@ -4352,11 +4352,13 @@ Public Class Pagos
         frm.Reporte.SetParameterValue("CuitProv", XCuitProveedor)
 
         Dim WFechasTransferencias = ""
+        Dim WFechasECheques As String = ""
         Dim WOrdenPago As DataTable = _TraerDatosOrdenPago(txtOrdenPago.Text)
+        Dim WHayECheques As Boolean
+        
+        Dim EsPorTransferencia As Boolean = GetEsPorTransferencia(WOrdenPago, WFechasTransferencias, WHayECheques, WFechasECheques)
 
-        Dim EsPorTransferencia As Boolean = GetEsPorTransferencia(WOrdenPago, WFechasTransferencias)
-
-        If EsPorTransferencia Then
+        If EsPorTransferencia Or WHayECheques Then
             frm.Reporte.SetParameterValue("EsTransferencia", 1)
         End If
 
@@ -7148,8 +7150,10 @@ Public Class Pagos
 
             If WOrdenPago.Rows.Count > 0 Then
                 Dim WFechasTransferencias = ""
+                Dim WFechasECheques = ""
+                Dim WHayECheques As Boolean
 
-                EsPorTransferencia = GetEsPorTransferencia(WOrdenPago, WFechasTransferencias)
+                EsPorTransferencia = GetEsPorTransferencia(WOrdenPago, WFechasTransferencias, WHayECheques, WFechasECheques)
 
                 With WOrdenPago.Rows(0)
 
@@ -7160,7 +7164,7 @@ Public Class Pagos
 
                         WFechasTransferencias = WFechasTransferencias.TrimEnd(",")
 
-                        _EnviarAvisoOPDisponible(WProveedor, WDescProveedor, txtOrdenPago.Text, EsPorTransferencia, WFechasTransferencias)
+                        _EnviarAvisoOPDisponible(WProveedor, WDescProveedor, txtOrdenPago.Text, EsPorTransferencia, WFechasTransferencias, HayECheques:=WHayECheques, FechasECheques:=WFechasECheques)
 
                         MsgBox("¡Aviso enviado correctamente!", MsgBoxStyle.Information)
 
@@ -7177,8 +7181,9 @@ Public Class Pagos
         Cursor = Cursors.Default
     End Sub
 
-    Private Function GetEsPorTransferencia(ByVal WOrdenPago As DataTable, ByRef WFechasTransferencias As String) As Boolean
+    Private Function GetEsPorTransferencia(ByVal WOrdenPago As DataTable, ByRef WFechasTransferencias As String, ByRef WHayECheques As Boolean, ByRef FechasECheques As String) As Boolean
         Dim EsPorTransferencia = False
+        WHayECheques = False
 
         For Each row As DataRow In WOrdenPago.Rows
 
@@ -7204,6 +7209,13 @@ Public Class Pagos
 
                         If EsPorTransferencia Then Exit For
                     Case 3
+                    Case 7
+                        WHayECheques = True
+
+                        If Not FechasECheques.Contains(OrDefault(.Item("Fecha2"), "")) Then
+                            FechasECheques &= OrDefault(.Item("Fecha2"), "") & ","
+                        End If
+
                     Case Else
                         EsPorTransferencia = False
                 End Select
@@ -7240,7 +7252,7 @@ Public Class Pagos
         Return tabla
     End Function
 
-    Private Sub _EnviarAvisoOPDisponible(ByVal Proveedor As String, ByVal DescProveedor As String, Optional ByVal OrdenPago As String = "", Optional ByVal EsPorTransferencia As Boolean = False, Optional ByVal wFechasTransferencias As String = "", Optional ByVal PorTransferenciaYCheques As Boolean = False)
+    Private Sub _EnviarAvisoOPDisponible(ByVal Proveedor As String, ByVal DescProveedor As String, Optional ByVal OrdenPago As String = "", Optional ByVal EsPorTransferencia As Boolean = False, Optional ByVal wFechasTransferencias As String = "", Optional ByVal PorTransferenciaYCheques As Boolean = False, Optional ByVal HayECheques As Boolean = False, Optional ByVal FechasECheques As String = "")
 
         If Proveedor.Trim = "" Then Exit Sub
         If EsPorTransferencia And Trim(OrdenPago) = "" Then Exit Sub
@@ -7285,6 +7297,40 @@ Public Class Pagos
 
                     End If
 
+                    If HayECheques Then
+
+                        WBody &= " y a través de Cheque(s) Electrónico(s)"
+
+                        If FechasECheques.Trim <> "" Then
+
+                            If FechasECheques.Split(",").Count > 1 Then
+                                WBody &= " con las siguientes fechas: "
+                            Else
+                                WBody &= " con fecha: "
+                            End If
+
+                            WBody &= "<strong>" & FechasECheques.TrimEnd(",") & "</strong>"
+
+                        End If
+
+                    End If
+
+                ElseIf HayECheques Then
+
+                    WBody = "Informamos que en el día de la fecha, SURFACTAN S.A. le ha realizado un pago a través de Cheque(s) Electrónico(s)"
+
+                    If FechasECheques.Trim <> "" Then
+
+                        If FechasECheques.Split(",").Count > 1 Then
+                            WBody &= " con las siguientes fechas: "
+                        Else
+                            WBody &= " con fecha: "
+                        End If
+
+                        WBody &= "<strong>" & FechasECheques & "</strong>"
+
+                    End If
+
                     If PorTransferenciaYCheques Then
                         WBody &= "." & "<br/>" & "<br/>" & "Además tiene Cheque(s) para retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, de <strong>Lunes a Viernes</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
                     Else
@@ -7308,7 +7354,7 @@ Public Class Pagos
 
                 Dim WAdjuntos As New List(Of String)
 
-                If EsPorTransferencia And Not PorTransferenciaYCheques Then
+                If (EsPorTransferencia Or HayECheques) And Not PorTransferenciaYCheques Then
                     WAdjuntos = _PrepararAdjuntos(OrdenPago)
                 End If
 
