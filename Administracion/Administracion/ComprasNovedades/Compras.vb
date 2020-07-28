@@ -1679,9 +1679,9 @@ Public Class Compras
             ImpoIb(14, 1) = _RetIB14
             ImpoIb(14, 2) = "168"
             ImpoIb(15, 1) = _RetIB15
-            ImpoIb(15, 2) = "184"
+            ImpoIb(15, 2) = "199"
             ImpoIb(16, 1) = _RetIB16
-            ImpoIb(16, 2) = "183"
+            ImpoIb(16, 2) = "198"
 
             .Dispose()
 
