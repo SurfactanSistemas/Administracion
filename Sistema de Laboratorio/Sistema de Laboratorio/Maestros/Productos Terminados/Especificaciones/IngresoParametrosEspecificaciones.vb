@@ -148,6 +148,7 @@
             btnDefinirFormula.Enabled = False
             txtDesde.Enabled = True
             txtHasta.Enabled = True
+            txtUnidad.Enabled = True
             txtDesde.Focus()
         ElseIf rbCumpleNoCumple.Checked Then
             txtDesde.Enabled = ckHabDesdeHasta.Checked
