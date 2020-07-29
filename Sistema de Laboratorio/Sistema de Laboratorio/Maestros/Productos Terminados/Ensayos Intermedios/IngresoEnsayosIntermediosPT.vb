@@ -868,10 +868,11 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
                 'If Operador.EsFarma Then WPrueterFarma = GetSingle("SELECT TOP 1 Clave FROM PrueterFarmaIntermedio WHERE Partida = '" & WPartida & "' And Producto = '" & WCodigo & "' And SubEtapa = ''")
 
-                WSqls.Add("DELETE FROM " & TablaPrueTer & " WHERE Partida = '" & WPartida & "' And Producto = '" & WCodigo & "' And Paso = '" & WEtapa & "' And SubEtapa = '" & Val(txtEtapa.Text) & "'")
+                WSqls.Add("DELETE FROM " & TablaPrueTer & " WHERE Partida = '" & WPartida & "' And Producto = '" & WCodigo & "'")
 
             Else
 
+                WSqls.Add("UPDATE PrueterfarmaIntermedio SET SubEtapa = '0' WHERE SubEtapa IS NULL Or SubEtapa = ''")
                 WSqls.Add("DELETE FROM PrueterfarmaIntermedio WHERE Partida = '" & WPartida & "' And Producto = '" & WCodigo & "' And Paso = '" & WEtapa & "' And subEtapa = '" & Val(txtSubEtapa.Text) & "'")
 
             End If
@@ -1974,88 +1975,11 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
     Private Sub btnTraerDatosEnsayosComponente_Click(sender As Object, e As EventArgs) Handles btnTraerDatosEnsayosComponente.Click
 
+        If Val(txtLotePartida.Text) = 0 Then Exit Sub
+
         Dim frm As New EnsayosMonocomponente(txtComponente.Text, txtLotePartida.Text)
 
         frm.Show(Me)
-
-        If ProductoTerminado.EsMono(txtCodigo.Text) And Val(txtLotePartida.Text) > 0 And EsFarma() Then
-
-            'Dim WEsMP As Boolean = txtComponente.Text.Trim.Length = 10
-            'Dim WEnsayos As DataTable
-
-            'If WEsMP Then
-            '	WEnsayos = GetAll("SELECT * FROM PrueArtNuevo WHERE Producto = '" & txtComponente.Text & "' And Prueba = '" & txtLotePartida.Text & "' ORDER BY Clave")
-            'Else
-            '	WEnsayos = GetAll("SELECT * FROM PrueTerFarma WHERE Producto = '" & txtComponente.Text & "' And Prueba = '" & txtLotePartida.Text & "' ORDER BY Clave")
-            'End If
-
-            'If WEnsayos Is Nothing OrElse WEnsayos.Rows.Count = 0 Then
-            '	MsgBox("No se encontraron datos de ensayos para el " & txtComponente.Text & " (" & txtLotePartida.Text & ") con el nuevo formato.", MsgBoxStyle.Exclamation)
-            '	Exit Sub
-            'End If
-
-            '' VERIFICAMOS QUE TENGAN LA MISMA ESPECIFICACION.
-            'If dgvEnsayos.Rows.Count < WEnsayos.Rows.Count Then
-            '	MsgBox("Se encontró que el " & txtComponente.Text & " (" & txtLotePartida.Text & ") no cuenta con los mismos ensayos que el Producto " & txtCodigo.Text & " (" & txtPartida.Text & ")", MsgBoxStyle.Exclamation)
-            '	Exit Sub
-            'End If
-
-            'For rocio = 1 To WEnsayos.Rows.Count
-
-            '	Dim WEnsayo As DataRow() = WEnsayos.Select("Renglon = '" & rocio & "'")
-
-            '	If WEnsayo.Count = 0 Then Continue For
-
-            '	Dim row As DataGridViewRow = dgvEnsayos.Rows(rocio - 1)
-            '	Dim WEns As DataRow = WEnsayo(0)
-
-            '	Dim WTipoDatoI, WTipoDatoII As String
-            '	Dim WValor, WResultado, WDesde, WHasta, WMenorIgual, WInforma, WFormula, WUnidad As String
-            '	Dim WVariables(10), WVariablesValores(10) As String
-
-            '	WTipoDatoI = row.Cells("TipoEspecif").Value
-            '	WTipoDatoII = WEns.Item("TipoEspecif")
-
-            '	WValor = Trim(WEns.Item("ValorReal"))
-            '	WDesde = Trim(WEns.Item("DesdeEspecif"))
-            '	WHasta = Trim(WEns.Item("HastaEspecif"))
-            '	WMenorIgual = Trim(WEns.Item("MenorIgualEspecif"))
-            '	WInforma = Trim(WEns.Item("InformaEspecif"))
-            '	WFormula = Trim(WEns.Item("FormulaEspecif"))
-            '	WUnidad = Trim(WEns.Item("UnidadEspecif"))
-
-            '	WResultado = _GenerarImpreResultado(WTipoDatoII, WDesde, WHasta, WUnidad, WValor)
-
-            '	For r As Integer = 1 To 10
-            '		WVariables(r) = Trim(WEns.Item("Variable" & r))
-            '		WVariablesValores(r) = Trim(WEns.Item("VariableValor" & r))
-            '	Next
-
-            '	'
-            '	' Se agrega los datos unicamente si son iguales o si el tipo de dato entrante 
-            '	' es 'Formula' y el saliente es 'Numerico'.
-            '	'
-            '	If (Val(WTipoDatoI) = Val(WTipoDatoII)) Or (Val(WTipoDatoI) = 1 And Val(WTipoDatoII) = 2) Then
-
-            '		row.Cells("TipoEspecif").Value = WTipoDatoII
-            '		row.Cells("Valor").Value = WValor
-            '		row.Cells("Resultado").Value = WResultado
-            '		row.Cells("DesdeEspecif").Value = WDesde
-            '		row.Cells("HastaEspecif").Value = WHasta
-            '		row.Cells("MenorIgualEspecif").Value = WMenorIgual
-            '		row.Cells("InformaEspecif").Value = WInforma
-            '		row.Cells("FormulaEspecif").Value = WFormula
-
-            '		For r As Integer = 1 To 10
-            '			row.Cells("Variable" & r).Value = WVariables(r)
-            '			row.Cells("VariableValor" & r).Value = WVariablesValores(r)
-            '		Next
-
-            '	End If
-
-            'Next
-
-        End If
 
     End Sub
 
