@@ -749,7 +749,6 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
             dgvEspecifIngles.Rows(index).Cells("EnsayoIngles").Value = .Cells("Ensayo").Value
             dgvEspecifIngles.Rows(index).Cells("EspecificacionIngles").Value = .Cells("Especificacion").Value
-            dgvEspecifIngles.Rows(index).Cells("DescEnsayoIngles").Value = ""
             dgvEspecifIngles.Rows(index).Cells("FarmacopeaIngles").Value = .Cells("Farmacopea").Value
             dgvEspecifIngles.Rows(index).Cells("UnidadEspecifIngles").Value = .Cells("UnidadEspecif").Value
 
