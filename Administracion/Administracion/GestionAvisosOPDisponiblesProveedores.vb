@@ -136,7 +136,7 @@ Public Class GestionAvisosOPDisponiblesProveedores
 
     End Function
 
-    Private Sub _EnviarAvisoOPDisponible(ByVal ZProveedor As String, ByVal wDescProveedor As String, Optional ByVal OrdenPago As String = "", Optional ByVal EsPorTransferencia As Boolean = False, Optional ByVal wFechasTransferencias As String = "", Optional ByVal PorTransferenciaYCheques As Boolean = False)
+    Private Sub _EnviarAvisoOPDisponible(ByVal ZProveedor As String, ByVal wDescProveedor As String, Optional ByVal OrdenPago As String = "", Optional ByVal EsPorTransferencia As Boolean = False, Optional ByVal wFechasTransferencias As String = "", Optional ByVal PorTransferenciaYCheques As Boolean = False, Optional ByVal HayECheques As Boolean = False, Optional ByVal FechasECheques As String = "")
 
         If ZProveedor.Trim = "" Then Exit Sub
         If EsPorTransferencia And Trim(OrdenPago) = "" Then Exit Sub
@@ -181,6 +181,45 @@ Public Class GestionAvisosOPDisponiblesProveedores
                         End If
 
                         WBody &= "<strong>" & wFechasTransferencias & "</strong>"
+
+                    End If
+
+                    If PorTransferenciaYCheques Then
+                        WBody &= "." & "<br/>" & "<br/>" & "Además tiene Cheque(s) para retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, de <strong>Lunes a Viernes</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
+                    Else
+                        WBody &= "." & "<br/>" & "<br/>" & "Adjuntamos Orden de Pago y retenciones si correspondiesen."
+                    End If
+                    If HayECheques Then
+
+                        WBody &= " y a través de Cheque(s) Electrónico(s)"
+
+                        If FechasECheques.Trim <> "" Then
+
+                            If FechasECheques.Split(",").Count > 1 Then
+                                WBody &= " con las siguientes fechas: "
+                            Else
+                                WBody &= " con fecha: "
+                            End If
+
+                            WBody &= "<strong>" & FechasECheques.TrimEnd(",") & "</strong>"
+
+                        End If
+
+                    End If
+
+                ElseIf HayECheques Then
+
+                    WBody = "Informamos que en el día de la fecha, SURFACTAN S.A. le ha realizado un pago a través de Cheque(s) Electrónico(s)"
+
+                    If FechasECheques.Trim <> "" Then
+
+                        If FechasECheques.Split(",").Count > 1 Then
+                            WBody &= " con las siguientes fechas: "
+                        Else
+                            WBody &= " con fecha: "
+                        End If
+
+                        WBody &= "<strong>" & FechasECheques & "</strong>"
 
                     End If
 
@@ -367,6 +406,7 @@ Public Class GestionAvisosOPDisponiblesProveedores
 
         For Each row2 As DataGridViewRow In dgvPagos.Rows
             Dim WFechasTransferencias As String = ""
+            Dim WFechasECheques As String = ""
             With row2
                 Dim WOrden As String = OrDefault(.Cells("Orden").Value, "")
                 Dim WEnviar As Boolean = OrDefault(.Cells("Enviar").Value, False)
@@ -385,6 +425,7 @@ Public Class GestionAvisosOPDisponiblesProveedores
                 '
                 Dim WOrdenPago As DataTable = _TraerDatosOrdenPago(WOrden)
                 Dim EsPorTransferencia As Boolean = False
+                Dim WHayECheques As Boolean = False
                 Dim PorTransferenciaYCheques As Boolean = False
                 Dim WProveedor As String = ""
 
@@ -413,6 +454,13 @@ Public Class GestionAvisosOPDisponiblesProveedores
                                     End If
 
                                     If EsPorTransferencia Then Exit For
+                                Case 7
+                                    WHayECheques = True
+
+                                    If Not WFechasECheques.Contains(OrDefault(.Item("Fecha2"), "")) Then
+                                        WFechasECheques &= OrDefault(.Item("Fecha2"), "") & ","
+                                    End If
+
                                 Case 3
                                     If EsPorTransferencia Then PorTransferenciaYCheques = True
                                 Case Else
@@ -432,7 +480,7 @@ Public Class GestionAvisosOPDisponiblesProveedores
 
                             WFechasTransferencias = WFechasTransferencias.TrimEnd(",")
 
-                            _EnviarAvisoOPDisponible(WProveedor, WDescProveedor, WOrden, EsPorTransferencia, WFechasTransferencias, PorTransferenciaYCheques)
+                            _EnviarAvisoOPDisponible(WProveedor, WDescProveedor, WOrden, EsPorTransferencia, WFechasTransferencias, PorTransferenciaYCheques, HayECheques:=WHayECheques, FechasECheques:=WFechasECheques)
 
                         End If
 

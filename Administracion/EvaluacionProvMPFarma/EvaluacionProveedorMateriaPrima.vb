@@ -6,15 +6,12 @@ Imports System.Threading
 Imports EvaluacionProvMPFarma.Helper
 Imports Util.Clases.Query
 
-
-
-
 Public Class EvaluacionProveedorMateriaPrima : Implements IAyudaProveedores, Util.IIngresoClaveSeguridad
 
     Private WProveedor As String
     Private WAutorizadoGrabar As Boolean = False
     Private ZOperador As Integer = 0
-    Private WCodMP As String = ""
+    Private ReadOnly WCodMP As String = ""
     Private WTipoMP As Integer = 0
 
     Sub New(Optional ByVal Proveedor As String = "", Optional ByVal HabilitarGrabacion As Boolean = False, Optional ByVal CodMP As String = "", Optional ByVal TipoMP As Integer = 0)
@@ -34,8 +31,6 @@ Public Class EvaluacionProveedorMateriaPrima : Implements IAyudaProveedores, Uti
     End Sub
 
     Private Sub EvaluacionProveedorMateriaPrima_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
-
-        'Conexion.EmpresaDeTrabajo = "SurfactanSa"
 
         CheckForIllegalCrossThreadCalls = False
         WAutorizadoGrabar = False
@@ -61,7 +56,7 @@ Public Class EvaluacionProveedorMateriaPrima : Implements IAyudaProveedores, Uti
 
         TabControl1.TabPages.Clear()
 
-        Dim WFiltro As String = _GenerarFiltroPorTipo(Me.WTipoMP)
+        Dim WFiltro As String = _GenerarFiltroPorTipo(WTipoMP)
         Dim WDatos As DataTable = GetAll("SELECT DISTINCT ct.Articulo MP, a.Descripcion FROM Cotiza ct INNER JOIN Articulo a ON a.Codigo = ct.Articulo  And (" & WFiltro & ")  WHERE ct.Proveedor = '" & txtProveedor.Text & "' Order by ct.Articulo")
 
         For i = 0 To WDatos.Rows.Count - 1
@@ -108,17 +103,15 @@ Public Class EvaluacionProveedorMateriaPrima : Implements IAyudaProveedores, Uti
 
     End Sub
 
-    Private Function _GenerarFiltroPorTipo(ByVal wTipoMp As Integer) As String
-        Select Case (wTipoMp)
-            Case 0
-                Return "ISNULL(a.ClasificacionFarma,0) = 1 Or (ISNULL(a.ClasificacionFarma,0) = 0 And a.ReqEvalEspecial = '1'" & _
-                ") Or (ISNULL(a.ClasificacionFarma,0) > 1 And a.ReqEvalEspecial = '1') "
+    Private Function _GenerarFiltroPorTipo(ByVal TipoMp As Integer) As String
+        Select Case (TipoMp)
             Case 1
                 Return "ISNULL(a.ClasificacionFarma,0) = 1"
             Case Is > 1
-                Return String.Format("ISNULL(a.ClasificacionFarma,0) = ${0} And a.ReqEvalEspecial = '1'", wTipoMp)
-                '            Case Else
-                '                Return "ISNULL(a.ClasificacionFarma, 0) = 0 And a.ReqEvalEspecial = '1'"
+                Return String.Format("ISNULL(a.ClasificacionFarma,0) = ${0} And a.ReqEvalEspecial = '1'", TipoMp)
+            Case Else
+                Return "ISNULL(a.ClasificacionFarma,0) = 1 Or (ISNULL(a.ClasificacionFarma,0) = 0 And a.ReqEvalEspecial = '1'" & _
+                       ") Or (ISNULL(a.ClasificacionFarma,0) > 1 And a.ReqEvalEspecial = '1') "
         End Select
 
     End Function
@@ -154,8 +147,7 @@ Public Class EvaluacionProveedorMateriaPrima : Implements IAyudaProveedores, Uti
 
             TabControl1.TabPages.Add(WTab)
             ComboBox1.Items.Add(WDato.Item("MP"))
-            WTab = Nothing
-
+            
             GC.Collect()
 
         End If
@@ -209,9 +201,9 @@ Public Class EvaluacionProveedorMateriaPrima : Implements IAyudaProveedores, Uti
 
         For Each MP As TabPage In TabControl1.TabPages
 
-            Dim WCodMP As String = MP.Text
+            Dim ZCodMP As String = MP.Text
 
-            Directory.CreateDirectory(WPath & "/" & WCodMP)
+            Directory.CreateDirectory(WPath & "/" & ZCodMP)
 
             If MP.Controls.OfType(Of EvaluacionPorMpUserControl)().Count() = 0 Then Continue For
 
@@ -226,14 +218,14 @@ Public Class EvaluacionProveedorMateriaPrima : Implements IAyudaProveedores, Uti
 
             Dim WSqls As New List(Of String)
 
-            WSqls.Add("DELETE FROM EvaluacionProvMp WHERE Proveedor = '" & WProveedor & "' And Articulo = '" & WCodMP & "'")
+            WSqls.Add("DELETE FROM EvaluacionProvMp WHERE Proveedor = '" & WProveedor & "' And Articulo = '" & ZCodMP & "'")
 
             For Each row As DataGridViewRow In WDatos.Rows
                 With row
 
                     WReq = .Cells("Req").Value
 
-                    Directory.CreateDirectory(WPath & "/" & WCodMP & "/" & WReq.PadLeft(2, "0"))
+                    Directory.CreateDirectory(WPath & "/" & ZCodMP & "/" & WReq.PadLeft(2, "0"))
 
                     WSolicitado = IIf(.Cells("Solicitado").Value, "1", "0")
                     WFechaSolicitado = OrDefault(.Cells("FechaSolicitado").Value, "")
@@ -252,10 +244,10 @@ Public Class EvaluacionProveedorMateriaPrima : Implements IAyudaProveedores, Uti
 
                     WAclaraciones = Trim(OrDefault(.Cells("Aclaraciones").Value, ""))
 
-                    WClave = WProveedor.PadLeft(11, "0") & WCodMP & WReq.PadLeft(2, "0")
-                    
+                    WClave = WProveedor.PadLeft(11, "0") & ZCodMP & WReq.PadLeft(2, "0")
+
                     Dim WSql As String = String.Format("INSERT INTO EvaluacionProvMP (Clave, Proveedor, Renglon, Solicitado, FechaSolicitado, FechaSolicitadoOrd, Entrego, FechaEntrego, FechaEntregoOrd, Aprobo, FechaAprobo, FechaAproboOrd, Aclaraciones, EstadoMp, FechaVto, FechaVtoOrd, Articulo, Operador, FechaEvaluaVto, FechaEvaluaVtoOrd, Fecha, FechaOrd) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13}', '{14}', '{15}', '{16}', '{17}', '{18}', '{19}', '{20}', '{21}')",
-                                                       WClave, WProveedor, WReq, WSolicitado, WFechaSolicitado, WFechaSolicitadoOrd, WEntrego, WFechaEntrego, WFechaEntregoOrd, WAprobo, WFechaAprobo, WFechaAproboOrd, WAclaraciones, WEstadoMP, WFechaVto, WFechaVtoOrd, WCodMP, ZOperador, WFechaEvaluaVto, WFechaEvaluaVtoOrd, WFecha, WFechaOrd)
+                                                       WClave, WProveedor, WReq, WSolicitado, WFechaSolicitado, WFechaSolicitadoOrd, WEntrego, WFechaEntrego, WFechaEntregoOrd, WAprobo, WFechaAprobo, WFechaAproboOrd, WAclaraciones, WEstadoMP, WFechaVto, WFechaVtoOrd, ZCodMP, ZOperador, WFechaEvaluaVto, WFechaEvaluaVtoOrd, WFecha, WFechaOrd)
 
                     WSqls.Add(WSql)
 
@@ -341,7 +333,7 @@ Public Class EvaluacionProveedorMateriaPrima : Implements IAyudaProveedores, Uti
 
     Public Sub _ProcesarAyudaProveedores(ByVal Codigo As String, ByVal Nombre As String, Optional ByVal TipoMP As Integer = 0) Implements IAyudaProveedores._ProcesarAyudaProveedores
         txtProveedor.Text = Codigo
-        Me.WTipoMP = TipoMP
+        WTipoMP = TipoMP
         txtProveedor_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
     End Sub
 
@@ -354,8 +346,6 @@ Public Class EvaluacionProveedorMateriaPrima : Implements IAyudaProveedores, Uti
             WProveedor = txtProveedor.Text
 
             _TraerInformacionProveedorMP()
-
-
 
         ElseIf e.KeyData = Keys.Escape Then
             txtProveedor.Text = ""
@@ -373,11 +363,9 @@ Public Class EvaluacionProveedorMateriaPrima : Implements IAyudaProveedores, Uti
 
         btnGrabar_Click(Nothing, Nothing)
 
-
     End Sub
 
-    
-    Private Sub BtnCopiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnCopiar.Click
+    Private Sub BtnCopiar_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles BtnCopiar.Click
 
         If TabControl1.TabPages.Count <= 1 Then
             MsgBox("El Proveedor no comercializa la cantidad necesaria de Productos como para ser copiados.", MsgBoxStyle.Information)
@@ -390,62 +378,62 @@ Public Class EvaluacionProveedorMateriaPrima : Implements IAyudaProveedores, Uti
 
     End Sub
 
-
-
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
         Dim Codigo, Descripcion, DescComercial As String
+
         If ComboBox1.SelectedItem = TabControl1.SelectedTab.Text Then
             MsgBox("Accion innecesaria. Quiere copiar en la misma materia prima .")
-        Else
-            Codigo = TabControl1.SelectedTab.Text
-            Descripcion = TabControl1.SelectedTab.Controls(0).Controls("TableLayoutPanel1").Controls("GroupBox1").Controls("lblDescripcion").Text
-            DescComercial = TabControl1.SelectedTab.Controls(0).Controls("TableLayoutPanel1").Controls("GroupBox1").Controls("lblDescComercial").Text
-
-            Dim WControl = New EvaluacionPorMpUserControl(txtProveedor.Text, ComboBox1.SelectedItem, True, Codigo, Descripcion, DescComercial)
-
-            WControl.Dock = DockStyle.Fill
-
-            WControl.HabilitarControles(btnGrabar.Enabled)
-
-            TabControl1.SelectedTab.Controls.Clear()
-
-'            WControl.lblCodigo.Text = Codigo
-'            WControl.lblDescripcion.Text = Descripcion
-'            WControl.lblDescComercial.Text = DescComercial
-'            TabControl1.SelectedTab.Controls(0).Controls("TableLayoutPanel1").Controls("GroupBox1").Controls("lblCodigo").Text = Codigo
-'            TabControl1.SelectedTab.Controls(0).Controls("TableLayoutPanel1").Controls("GroupBox1").Controls("lblDescripcion").Text = Descripcion
-'            TabControl1.SelectedTab.Controls(0).Controls("TableLayoutPanel1").Controls("GroupBox1").Controls("lblDescComercial").Text = DescComercial
-            TabControl1.SelectedTab.Controls.Add(WControl)
-           
-            PanelCopiarGrilla.Visible = False
-            If CheckBox1.Checked = True Then
-                Dim WPath As String = ConfigurationManager.AppSettings("PATH_DOCS_EVAL_PROV_MP")
-                Dim archivos As String()
-                Dim destino As String
-                For i = 1 To 35
-                    If i < 10 Then
-                        archivos = Directory.GetFiles(WPath & "" & WProveedor & "\" & ComboBox1.SelectedItem & "\" & "0" & i)
-                        destino = WPath & "" & WProveedor & "\" & TabControl1.SelectedTab.Text & "\" & "0" & i
-                   
-                    Else
-                        archivos = Directory.GetFiles(WPath & "" & WProveedor & "\" & ComboBox1.SelectedItem & "\" & i)
-                        destino = WPath & "" & WProveedor & "\" & TabControl1.SelectedTab.Text & "\" & i
-                    End If
-                    For Each Archivo In archivos
-                        Dim NombreArchivo = destino & "\" & Path.GetFileName(Archivo)
-                        If True = File.Exists(NombreArchivo) Then
-                            If True = YesNOMSGBOX(Path.GetFileName(Archivo)) Then
-                                File.Copy(Archivo, NombreArchivo,True)
-                            End If
-                            Continue For
-                        End If
-                        File.Copy(Archivo, NombreArchivo)
-                    Next
-                Next
-            End If
+            Exit Sub
         End If
-       
+
+        Codigo = TabControl1.SelectedTab.Text
+        Descripcion = TabControl1.SelectedTab.Controls(0).Controls("TableLayoutPanel1").Controls("GroupBox1").Controls("lblDescripcion").Text
+        DescComercial = TabControl1.SelectedTab.Controls(0).Controls("TableLayoutPanel1").Controls("GroupBox1").Controls("lblDescComercial").Text
+
+        Dim WControl = New EvaluacionPorMpUserControl(txtProveedor.Text, ComboBox1.SelectedItem, True, Codigo, Descripcion, DescComercial)
+
+        WControl.Dock = DockStyle.Fill
+
+        WControl.HabilitarControles(btnGrabar.Enabled)
+
+        TabControl1.SelectedTab.Controls.Clear()
+
+        TabControl1.SelectedTab.Controls.Add(WControl)
+
+        PanelCopiarGrilla.Visible = False
+
+        If CheckBox1.Checked Then
+            Dim WPath As String = ConfigurationManager.AppSettings("PATH_DOCS_EVAL_PROV_MP")
+            Dim destino As String
+
+            For i = 1 To 39
+
+                Dim ZSubCarpetaArchivo As String = WPath & "" & WProveedor & "\" & ComboBox1.SelectedItem & "\" & i.ToString.PadLeft(2, "0")
+
+                destino = WPath & "" & WProveedor & "\" & TabControl1.SelectedTab.Text & "\" & i.ToString.PadLeft(2, "0")
+
+                _CopiarArchivos(ZSubCarpetaArchivo, destino)
+
+            Next
+        End If
+
     End Sub
+
+    Private Sub _CopiarArchivos(ByVal Origen As String, ByVal destino As String)
+
+        Dim archivos As String() = Directory.GetFiles(Origen)
+
+        For Each Archivo In archivos
+
+            Dim NombreArchivo = destino & "\" & Path.GetFileName(Archivo)
+
+            If File.Exists(NombreArchivo) AndAlso Not YesNOMSGBOX(Path.GetFileName(Archivo)) Then Continue For
+
+            File.Copy(Archivo, NombreArchivo, True)
+
+        Next
+    End Sub
+
     Private Function YesNOMSGBOX(ByVal nombreAr As String) As Boolean
         Dim Msg, Style, Title, Help, Ctxt, Response
         Msg = "¿Desea sobre escribir el Archivo " & nombreAr & "?"    ' Define message.
@@ -464,24 +452,17 @@ Public Class EvaluacionProveedorMateriaPrima : Implements IAyudaProveedores, Uti
         PanelCopiarGrilla.Visible = False
     End Sub
 
-   
     Private Sub BntLimpiar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BntLimpiar.Click
-        If (btnGrabar.Enabled = True) Then
-            If (OKCancelMsgBox() = True) Then
-                txtProveedor.Text = ""
-                TabControl1.TabPages.Clear()
-                With New AyudaProveedores
-                    .ShowDialog(Me)
-                End With
-            End If
-        Else
-            txtProveedor.Text = ""
-            TabControl1.TabPages.Clear()
-            With New AyudaProveedores
-                .ShowDialog(Me)
-            End With
-        End If
-     
+
+        If btnGrabar.Enabled AndAlso Not OKCancelMsgBox() Then Exit Sub
+
+        txtProveedor.Text = ""
+        TabControl1.TabPages.Clear()
+
+        With New AyudaProveedores
+            .ShowDialog(Me)
+        End With
+
     End Sub
 
     Private Function OKCancelMsgBox() As Boolean
@@ -496,7 +477,4 @@ Public Class EvaluacionProveedorMateriaPrima : Implements IAyudaProveedores, Uti
         Return False
     End Function
 
-    
- 
-  
 End Class

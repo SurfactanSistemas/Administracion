@@ -70,11 +70,6 @@
 
     End Sub
 
-
-   
-
-
-
     Private Sub IngresoFormulasEnsayo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         'Dim SQLCnslt As String = "SELECT Renglon = f.Renglon, Descripcion = f.Descripcion, Formula = f.Formula, AnalistaLab = o.Iniciales, CheckVerificado = EstadoVerificado  FROM FormulasDeEnsayos f JOIN SurfactanSa.dbo.Operador o ON f.AnalistaLab = o.Operador"
@@ -113,10 +108,10 @@
 
     Private Sub btnAgregar_Click(sender As Object, e As EventArgs) Handles btnAgregar.Click
      
-
         With New ParametrosDeEspecificacion
-            .Show(Me)
+            .ShowDialog(Me)
         End With
+
     End Sub
 
     Private Sub txtBuscador_KeyUp(sender As Object, e As KeyEventArgs) Handles txtBuscador.KeyUp

@@ -28,9 +28,10 @@ Partial Class IngresoEspecificacionesPT
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -66,6 +67,15 @@ Partial Class IngresoEspecificacionesPT
         Me.Cantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.dgvEspecif = New Util.DBDataGridView()
+        Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.dgvEspecifIngles = New Util.DBDataGridView()
+        Me.NroRenglonIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.EnsayoIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.EspecificacionIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DescEnsayoIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FarmacopeaIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.UnidadEspecifIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.NroRenglon = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Ensayo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Especificacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -89,15 +99,6 @@ Partial Class IngresoEspecificacionesPT
         Me.Variable8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Variable9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Variable10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TabPage3 = New System.Windows.Forms.TabPage()
-        Me.dgvEspecifIngles = New Util.DBDataGridView()
-        Me.NroRenglonIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.EnsayoIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.EspecificacionIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DescEnsayoIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FarmacopeaIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.UnidadEspecifIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -495,14 +496,14 @@ Partial Class IngresoEspecificacionesPT
         Me.dgvEspecif.AllowUserToDeleteRows = False
         Me.dgvEspecif.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvEspecif.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NroRenglon, Me.Ensayo, Me.Especificacion, Me.DescEnsayo, Me.Farmacopea, Me.TipoEspecif, Me.DesdeEspecif, Me.HastaEspecif, Me.UnidadEspecif, Me.MenorIgualEspecif, Me.InformaEspecif, Me.Parametro, Me.FormulaEspecif, Me.Variable1, Me.Variable2, Me.Variable3, Me.Variable4, Me.Variable5, Me.Variable6, Me.Variable7, Me.Variable8, Me.Variable9, Me.Variable10})
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvEspecif.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvEspecif.DefaultCellStyle = DataGridViewCellStyle6
         Me.dgvEspecif.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvEspecif.DoubleBuffered = True
         Me.dgvEspecif.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
@@ -515,6 +516,88 @@ Partial Class IngresoEspecificacionesPT
         Me.dgvEspecif.SinClickDerecho = False
         Me.dgvEspecif.Size = New System.Drawing.Size(905, 264)
         Me.dgvEspecif.TabIndex = 0
+        '
+        'TabPage3
+        '
+        Me.TabPage3.BackColor = System.Drawing.SystemColors.Control
+        Me.TabPage3.Controls.Add(Me.dgvEspecifIngles)
+        Me.TabPage3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TabPage3.Location = New System.Drawing.Point(4, 34)
+        Me.TabPage3.Name = "TabPage3"
+        Me.TabPage3.Size = New System.Drawing.Size(911, 270)
+        Me.TabPage3.TabIndex = 2
+        Me.TabPage3.Text = "ESPECIFICACIONES INGLÉS"
+        '
+        'dgvEspecifIngles
+        '
+        Me.dgvEspecifIngles.AllowUserToAddRows = False
+        Me.dgvEspecifIngles.AllowUserToDeleteRows = False
+        Me.dgvEspecifIngles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvEspecifIngles.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NroRenglonIngles, Me.EnsayoIngles, Me.EspecificacionIngles, Me.DescEnsayoIngles, Me.FarmacopeaIngles, Me.UnidadEspecifIngles})
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvEspecifIngles.DefaultCellStyle = DataGridViewCellStyle7
+        Me.dgvEspecifIngles.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.dgvEspecifIngles.DoubleBuffered = True
+        Me.dgvEspecifIngles.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
+        Me.dgvEspecifIngles.Location = New System.Drawing.Point(0, 0)
+        Me.dgvEspecifIngles.Name = "dgvEspecifIngles"
+        Me.dgvEspecifIngles.OrdenamientoColumnasHabilitado = True
+        Me.dgvEspecifIngles.RowHeadersWidth = 10
+        Me.dgvEspecifIngles.RowTemplate.Height = 20
+        Me.dgvEspecifIngles.ShowCellToolTips = False
+        Me.dgvEspecifIngles.SinClickDerecho = False
+        Me.dgvEspecifIngles.Size = New System.Drawing.Size(911, 270)
+        Me.dgvEspecifIngles.TabIndex = 1
+        '
+        'NroRenglonIngles
+        '
+        Me.NroRenglonIngles.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.NroRenglonIngles.HeaderText = "Nro."
+        Me.NroRenglonIngles.Name = "NroRenglonIngles"
+        Me.NroRenglonIngles.Width = 52
+        '
+        'EnsayoIngles
+        '
+        Me.EnsayoIngles.HeaderText = "Ens."
+        Me.EnsayoIngles.Name = "EnsayoIngles"
+        Me.EnsayoIngles.Width = 40
+        '
+        'EspecificacionIngles
+        '
+        Me.EspecificacionIngles.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.EspecificacionIngles.HeaderText = "Descripción Ensayo"
+        Me.EspecificacionIngles.MinimumWidth = 250
+        Me.EspecificacionIngles.Name = "EspecificacionIngles"
+        Me.EspecificacionIngles.ReadOnly = True
+        Me.EspecificacionIngles.Width = 250
+        '
+        'DescEnsayoIngles
+        '
+        Me.DescEnsayoIngles.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.DescEnsayoIngles.HeaderText = "Descripción Parámetro Inglés"
+        Me.DescEnsayoIngles.MinimumWidth = 150
+        Me.DescEnsayoIngles.Name = "DescEnsayoIngles"
+        '
+        'FarmacopeaIngles
+        '
+        Me.FarmacopeaIngles.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.FarmacopeaIngles.HeaderText = "Farmacopea"
+        Me.FarmacopeaIngles.Name = "FarmacopeaIngles"
+        Me.FarmacopeaIngles.Width = 91
+        '
+        'UnidadEspecifIngles
+        '
+        Me.UnidadEspecifIngles.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.UnidadEspecifIngles.HeaderText = "Unidad"
+        Me.UnidadEspecifIngles.MinimumWidth = 80
+        Me.UnidadEspecifIngles.Name = "UnidadEspecifIngles"
+        Me.UnidadEspecifIngles.Width = 80
         '
         'NroRenglon
         '
@@ -551,11 +634,12 @@ Partial Class IngresoEspecificacionesPT
         '
         'Farmacopea
         '
-        Me.Farmacopea.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Farmacopea.DefaultCellStyle = DataGridViewCellStyle5
         Me.Farmacopea.HeaderText = "Farmacopea"
         Me.Farmacopea.Name = "Farmacopea"
         Me.Farmacopea.ReadOnly = True
-        Me.Farmacopea.Visible = False
+        Me.Farmacopea.Width = 75
         '
         'TipoEspecif
         '
@@ -564,6 +648,7 @@ Partial Class IngresoEspecificacionesPT
         Me.TipoEspecif.Name = "TipoEspecif"
         Me.TipoEspecif.ReadOnly = True
         Me.TipoEspecif.Visible = False
+        Me.TipoEspecif.Width = 88
         '
         'DesdeEspecif
         '
@@ -572,6 +657,7 @@ Partial Class IngresoEspecificacionesPT
         Me.DesdeEspecif.Name = "DesdeEspecif"
         Me.DesdeEspecif.ReadOnly = True
         Me.DesdeEspecif.Visible = False
+        Me.DesdeEspecif.Width = 98
         '
         'HastaEspecif
         '
@@ -580,6 +666,7 @@ Partial Class IngresoEspecificacionesPT
         Me.HastaEspecif.Name = "HastaEspecif"
         Me.HastaEspecif.ReadOnly = True
         Me.HastaEspecif.Visible = False
+        Me.HastaEspecif.Width = 95
         '
         'UnidadEspecif
         '
@@ -588,6 +675,7 @@ Partial Class IngresoEspecificacionesPT
         Me.UnidadEspecif.Name = "UnidadEspecif"
         Me.UnidadEspecif.ReadOnly = True
         Me.UnidadEspecif.Visible = False
+        Me.UnidadEspecif.Width = 101
         '
         'MenorIgualEspecif
         '
@@ -596,6 +684,7 @@ Partial Class IngresoEspecificacionesPT
         Me.MenorIgualEspecif.Name = "MenorIgualEspecif"
         Me.MenorIgualEspecif.ReadOnly = True
         Me.MenorIgualEspecif.Visible = False
+        Me.MenorIgualEspecif.Width = 120
         '
         'InformaEspecif
         '
@@ -604,6 +693,7 @@ Partial Class IngresoEspecificacionesPT
         Me.InformaEspecif.Name = "InformaEspecif"
         Me.InformaEspecif.ReadOnly = True
         Me.InformaEspecif.Visible = False
+        Me.InformaEspecif.Width = 102
         '
         'Parametro
         '
@@ -621,6 +711,7 @@ Partial Class IngresoEspecificacionesPT
         Me.FormulaEspecif.Name = "FormulaEspecif"
         Me.FormulaEspecif.ReadOnly = True
         Me.FormulaEspecif.Visible = False
+        Me.FormulaEspecif.Width = 104
         '
         'Variable1
         '
@@ -692,88 +783,6 @@ Partial Class IngresoEspecificacionesPT
         Me.Variable10.ReadOnly = True
         Me.Variable10.Visible = False
         '
-        'TabPage3
-        '
-        Me.TabPage3.BackColor = System.Drawing.SystemColors.Control
-        Me.TabPage3.Controls.Add(Me.dgvEspecifIngles)
-        Me.TabPage3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TabPage3.Location = New System.Drawing.Point(4, 34)
-        Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Size = New System.Drawing.Size(911, 270)
-        Me.TabPage3.TabIndex = 2
-        Me.TabPage3.Text = "ESPECIFICACIONES INGLÉS"
-        '
-        'dgvEspecifIngles
-        '
-        Me.dgvEspecifIngles.AllowUserToAddRows = False
-        Me.dgvEspecifIngles.AllowUserToDeleteRows = False
-        Me.dgvEspecifIngles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvEspecifIngles.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NroRenglonIngles, Me.EnsayoIngles, Me.EspecificacionIngles, Me.DescEnsayoIngles, Me.FarmacopeaIngles, Me.UnidadEspecifIngles})
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvEspecifIngles.DefaultCellStyle = DataGridViewCellStyle6
-        Me.dgvEspecifIngles.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.dgvEspecifIngles.DoubleBuffered = True
-        Me.dgvEspecifIngles.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.dgvEspecifIngles.Location = New System.Drawing.Point(0, 0)
-        Me.dgvEspecifIngles.Name = "dgvEspecifIngles"
-        Me.dgvEspecifIngles.OrdenamientoColumnasHabilitado = True
-        Me.dgvEspecifIngles.RowHeadersWidth = 10
-        Me.dgvEspecifIngles.RowTemplate.Height = 20
-        Me.dgvEspecifIngles.ShowCellToolTips = False
-        Me.dgvEspecifIngles.SinClickDerecho = False
-        Me.dgvEspecifIngles.Size = New System.Drawing.Size(911, 270)
-        Me.dgvEspecifIngles.TabIndex = 1
-        '
-        'NroRenglonIngles
-        '
-        Me.NroRenglonIngles.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.NroRenglonIngles.HeaderText = "Nro."
-        Me.NroRenglonIngles.Name = "NroRenglonIngles"
-        Me.NroRenglonIngles.Width = 52
-        '
-        'EnsayoIngles
-        '
-        Me.EnsayoIngles.HeaderText = "Ens."
-        Me.EnsayoIngles.Name = "EnsayoIngles"
-        Me.EnsayoIngles.Width = 40
-        '
-        'EspecificacionIngles
-        '
-        Me.EspecificacionIngles.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.EspecificacionIngles.HeaderText = "Descripción Ensayo"
-        Me.EspecificacionIngles.MinimumWidth = 250
-        Me.EspecificacionIngles.Name = "EspecificacionIngles"
-        Me.EspecificacionIngles.ReadOnly = True
-        Me.EspecificacionIngles.Width = 250
-        '
-        'DescEnsayoIngles
-        '
-        Me.DescEnsayoIngles.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.DescEnsayoIngles.HeaderText = "Descripción Parámetro Inglés"
-        Me.DescEnsayoIngles.MinimumWidth = 150
-        Me.DescEnsayoIngles.Name = "DescEnsayoIngles"
-        '
-        'FarmacopeaIngles
-        '
-        Me.FarmacopeaIngles.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.FarmacopeaIngles.HeaderText = "Farmacopea"
-        Me.FarmacopeaIngles.Name = "FarmacopeaIngles"
-        Me.FarmacopeaIngles.Width = 91
-        '
-        'UnidadEspecifIngles
-        '
-        Me.UnidadEspecifIngles.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.UnidadEspecifIngles.HeaderText = "Unidad"
-        Me.UnidadEspecifIngles.MinimumWidth = 80
-        Me.UnidadEspecifIngles.Name = "UnidadEspecifIngles"
-        Me.UnidadEspecifIngles.Width = 80
-        '
         'IngresoEspecificacionesPT
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -836,6 +845,13 @@ Partial Class IngresoEspecificacionesPT
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents btnHistorialCambios As System.Windows.Forms.Button
     Friend WithEvents AgregarRenglon As System.Windows.Forms.Button
+    Friend WithEvents NroRenglonIngles As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents EnsayoIngles As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents EspecificacionIngles As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DescEnsayoIngles As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents FarmacopeaIngles As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents UnidadEspecifIngles As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ckSubEtapas As System.Windows.Forms.CheckBox
     Friend WithEvents NroRenglon As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Ensayo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Especificacion As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -859,11 +875,4 @@ Partial Class IngresoEspecificacionesPT
     Friend WithEvents Variable8 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Variable9 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Variable10 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents NroRenglonIngles As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents EnsayoIngles As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents EspecificacionIngles As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DescEnsayoIngles As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents FarmacopeaIngles As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents UnidadEspecifIngles As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ckSubEtapas As System.Windows.Forms.CheckBox
 End Class

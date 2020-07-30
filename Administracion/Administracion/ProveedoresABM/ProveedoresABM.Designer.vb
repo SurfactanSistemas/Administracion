@@ -38,6 +38,7 @@ Partial Class ProveedoresABM
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.ckAceptaCheques = New System.Windows.Forms.CheckBox()
         Me.btnEvaluacion = New System.Windows.Forms.Button()
         Me.GrupoConsultas = New System.Windows.Forms.Panel()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
@@ -67,6 +68,7 @@ Partial Class ProveedoresABM
         Me.txtNroSEDRONAR1 = New Administracion.CustomTextBox()
         Me.cmbCategoria2 = New Administracion.CustomComboBox()
         Me.cmbCategoria1 = New Administracion.CustomComboBox()
+        Me.cmbFormaPago = New Administracion.CustomComboBox()
         Me.cmbRubro = New Administracion.CustomComboBox()
         Me.txtDiasPlazo = New Administracion.CustomTextBox()
         Me.CustomLabel23 = New Administracion.CustomLabel()
@@ -137,7 +139,6 @@ Partial Class ProveedoresABM
         Me.txtCAIVto = New System.Windows.Forms.MaskedTextBox()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.txtCAI = New Administracion.CustomTextBox()
-        Me.cmbFormaPago = New Administracion.CustomComboBox()
         Me.GroupBox1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -318,6 +319,7 @@ Partial Class ProveedoresABM
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.ckAceptaCheques)
         Me.Panel2.Controls.Add(Me.btnEvaluacion)
         Me.Panel2.Controls.Add(Me.GrupoConsultas)
         Me.Panel2.Controls.Add(Me.CKBProveedorInactivo)
@@ -390,6 +392,18 @@ Partial Class ProveedoresABM
         Me.Panel2.Size = New System.Drawing.Size(763, 437)
         Me.Panel2.TabIndex = 84
         '
+        'ckAceptaCheques
+        '
+        Me.ckAceptaCheques.AutoSize = True
+        Me.ckAceptaCheques.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ckAceptaCheques.ForeColor = System.Drawing.SystemColors.Control
+        Me.ckAceptaCheques.Location = New System.Drawing.Point(124, 98)
+        Me.ckAceptaCheques.Name = "ckAceptaCheques"
+        Me.ckAceptaCheques.Size = New System.Drawing.Size(124, 17)
+        Me.ckAceptaCheques.TabIndex = 114
+        Me.ckAceptaCheques.Text = "ACEPTA E-CHEQ"
+        Me.ckAceptaCheques.UseVisualStyleBackColor = True
+        '
         'btnEvaluacion
         '
         Me.btnEvaluacion.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
@@ -407,7 +421,7 @@ Partial Class ProveedoresABM
         'GrupoConsultas
         '
         Me.GrupoConsultas.Controls.Add(Me.GroupBox4)
-        Me.GrupoConsultas.Location = New System.Drawing.Point(124, 108)
+        Me.GrupoConsultas.Location = New System.Drawing.Point(124, 116)
         Me.GrupoConsultas.Name = "GrupoConsultas"
         Me.GrupoConsultas.Size = New System.Drawing.Size(506, 220)
         Me.GrupoConsultas.TabIndex = 98
@@ -422,9 +436,9 @@ Partial Class ProveedoresABM
         Me.GroupBox4.Controls.Add(Me.btnCerrarConsultas)
         Me.GroupBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.GroupBox4.ForeColor = System.Drawing.SystemColors.Control
-        Me.GroupBox4.Location = New System.Drawing.Point(5, 3)
+        Me.GroupBox4.Location = New System.Drawing.Point(5, 6)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(493, 213)
+        Me.GroupBox4.Size = New System.Drawing.Size(493, 210)
         Me.GroupBox4.TabIndex = 81
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Consultas"
@@ -794,6 +808,21 @@ Partial Class ProveedoresABM
         Me.ToolTip1.SetToolTip(Me.cmbCategoria1, "Provincia")
         Me.cmbCategoria1.Validator = Administracion.ValidatorType.None
         '
+        'cmbFormaPago
+        '
+        Me.cmbFormaPago.Cleanable = True
+        Me.cmbFormaPago.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbFormaPago.Empty = True
+        Me.cmbFormaPago.EnterIndex = 22
+        Me.cmbFormaPago.FormattingEnabled = True
+        Me.cmbFormaPago.Items.AddRange(New Object() {"", "TRANSFERENCIA", "CHQ PROPIO AL DIA", "CHQ PROPIO DIFERIDO", "CHQ TERCERO AL DIA", "CHQ TERCERO DIFERIDO"})
+        Me.cmbFormaPago.LabelAssociationKey = 21
+        Me.cmbFormaPago.Location = New System.Drawing.Point(553, 190)
+        Me.cmbFormaPago.Name = "cmbFormaPago"
+        Me.cmbFormaPago.Size = New System.Drawing.Size(198, 21)
+        Me.cmbFormaPago.TabIndex = 77
+        Me.cmbFormaPago.Validator = Administracion.ValidatorType.None
+        '
         'cmbRubro
         '
         Me.cmbRubro.Cleanable = True
@@ -1157,11 +1186,11 @@ Partial Class ProveedoresABM
         Me.CustomLabel35.ControlAssociationKey = 10
         Me.CustomLabel35.Font = New System.Drawing.Font("Arial", 8.0!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel35.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel35.Location = New System.Drawing.Point(188, 97)
+        Me.CustomLabel35.Location = New System.Drawing.Point(272, 99)
         Me.CustomLabel35.Name = "CustomLabel35"
-        Me.CustomLabel35.Size = New System.Drawing.Size(137, 14)
+        Me.CustomLabel35.Size = New System.Drawing.Size(60, 14)
         Me.CustomLabel35.TabIndex = 8
-        Me.CustomLabel35.Text = "E-Mail Ordenes de Pago"
+        Me.CustomLabel35.Text = "E-Mail OP:"
         '
         'txtEmail
         '
@@ -1763,21 +1792,6 @@ Partial Class ProveedoresABM
         Me.txtCAI.Validator = Administracion.ValidatorType.None
         Me.txtCAI.Visible = False
         '
-        'cmbFormaPago
-        '
-        Me.cmbFormaPago.Cleanable = True
-        Me.cmbFormaPago.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbFormaPago.Empty = True
-        Me.cmbFormaPago.EnterIndex = 22
-        Me.cmbFormaPago.FormattingEnabled = True
-        Me.cmbFormaPago.Items.AddRange(New Object() {"", "TRANSFERENCIA", "CHQ PROPIO AL DIA", "CHQ PROPIO DIFERIDO", "CHQ TERCERO AL DIA", "CHQ TERCERO DIFERIDO"})
-        Me.cmbFormaPago.LabelAssociationKey = 21
-        Me.cmbFormaPago.Location = New System.Drawing.Point(553, 190)
-        Me.cmbFormaPago.Name = "cmbFormaPago"
-        Me.cmbFormaPago.Size = New System.Drawing.Size(198, 21)
-        Me.cmbFormaPago.TabIndex = 77
-        Me.cmbFormaPago.Validator = Administracion.ValidatorType.None
-        '
         'ProveedoresABM
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1931,4 +1945,5 @@ Partial Class ProveedoresABM
     Friend WithEvents btnEvaluacion As Button
     Friend WithEvents CustomLabel36 As Administracion.CustomLabel
     Friend WithEvents cmbFormaPago As Administracion.CustomComboBox
+    Friend WithEvents ckAceptaCheques As System.Windows.Forms.CheckBox
 End Class

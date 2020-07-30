@@ -67,7 +67,7 @@ Partial Class EvaluacionProveedorMateriaPrima
         'Label2
         '
         Me.Label2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Calibri", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.Control
@@ -80,13 +80,13 @@ Partial Class EvaluacionProveedorMateriaPrima
         'Label1
         '
         Me.Label1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Font = New System.Drawing.Font("Calibri", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.Control
         Me.Label1.Location = New System.Drawing.Point(19, 16)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(344, 19)
+        Me.Label1.Size = New System.Drawing.Size(307, 18)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "EVALUACIÓN DE PROVEEDOR DE MATERIA PRIMA"
         '
@@ -216,10 +216,10 @@ Partial Class EvaluacionProveedorMateriaPrima
         '
         'Button3
         '
-        Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button3.Location = New System.Drawing.Point(149, 132)
+        Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button3.Location = New System.Drawing.Point(282, 131)
         Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(101, 34)
+        Me.Button3.Size = New System.Drawing.Size(155, 42)
         Me.Button3.TabIndex = 3
         Me.Button3.Text = "VOLVER"
         Me.Button3.UseVisualStyleBackColor = True
@@ -227,60 +227,60 @@ Partial Class EvaluacionProveedorMateriaPrima
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(343, 64)
+        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.Label6.Location = New System.Drawing.Point(394, 56)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(57, 17)
+        Me.Label6.Size = New System.Drawing.Size(39, 13)
         Me.Label6.TabIndex = 6
         Me.Label6.Text = "Label6"
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(281, 64)
+        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.Label5.Location = New System.Drawing.Point(332, 56)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(29, 17)
+        Me.Label5.Size = New System.Drawing.Size(22, 13)
         Me.Label5.TabIndex = 5
         Me.Label5.Text = "EN"
         '
         'CheckBox1
         '
         Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CheckBox1.Location = New System.Drawing.Point(164, 90)
+        Me.CheckBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.CheckBox1.Location = New System.Drawing.Point(187, 91)
         Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(225, 21)
+        Me.CheckBox1.Size = New System.Drawing.Size(173, 17)
         Me.CheckBox1.TabIndex = 4
         Me.CheckBox1.Text = "Copiar tambien los documentos"
         Me.CheckBox1.UseVisualStyleBackColor = True
         '
         'Button2
         '
-        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button2.Location = New System.Drawing.Point(318, 132)
+        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button2.Location = New System.Drawing.Point(110, 131)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(101, 34)
+        Me.Button2.Size = New System.Drawing.Size(155, 42)
         Me.Button2.TabIndex = 2
         Me.Button2.Text = "ACEPTAR"
         Me.Button2.UseVisualStyleBackColor = True
         '
         'ComboBox1
         '
-        Me.ComboBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(62, 59)
+        Me.ComboBox1.Location = New System.Drawing.Point(113, 52)
         Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(188, 26)
+        Me.ComboBox1.Size = New System.Drawing.Size(188, 21)
         Me.ComboBox1.TabIndex = 1
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(20, 13)
+        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.Label4.Location = New System.Drawing.Point(81, 13)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(511, 20)
+        Me.Label4.Size = New System.Drawing.Size(384, 15)
         Me.Label4.TabIndex = 0
         Me.Label4.Text = "ELIJA DE QUE MATERIA PRIMA DESEA COPIAR LA GRILLA"
         '
