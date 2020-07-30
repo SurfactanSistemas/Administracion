@@ -41,7 +41,7 @@ namespace AccesoADatos
                 {  
                     using (SqlCommand cmd = new SqlCommand())
                     {
-                        foreach (string WEmpresa in new string[] { "SurfactanSa", "surfactan_II", "surfactan_III", "surfactan_IV", "surfactan_V" })
+                        foreach (string WEmpresa in new string[] { "SurfactanSa", "surfactan_II", "surfactan_III", "surfactan_IV", "surfactan_V", "surfactan_VI", "surfactan_VII" })
                         {
                             if (conn.State == ConnectionState.Open) conn.Close();
 

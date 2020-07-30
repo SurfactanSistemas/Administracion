@@ -37,7 +37,10 @@ namespace Eval_Proveedores.Listados.CheckListRecepcion
 
                 if (TB_Hasta.Text == "") throw new Exception("Se debe ingresar la fecha hasta donde se desea filtrar");
 
-                dtInforme = IBOL.Lista();
+                //dtInforme = IBOL.Lista();
+                
+                dtInforme = IBOL.Lista(Helper.OrdenarFecha(TB_Desde.Text), Helper.OrdenarFecha(TB_Hasta.Text));
+
                 FechaDesde = int.Parse(TB_Desde.Text.Substring(6, 4) + TB_Desde.Text.Substring(3, 2) + TB_Desde.Text.Substring(0, 2));
 
                 FechaHasta = int.Parse(TB_Hasta.Text.Substring(6, 4) + TB_Hasta.Text.Substring(3, 2) + TB_Hasta.Text.Substring(0, 2));
