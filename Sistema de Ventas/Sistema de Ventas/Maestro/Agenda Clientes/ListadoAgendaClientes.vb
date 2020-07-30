@@ -16,8 +16,8 @@ Public Class ListadoAgendaClientes
 
     Private Sub ListadoAgendaClientes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        txtDesde.Text = Date.Now.ToString("dd/MM/yyyy")
-        txtHasta.Text = txtDesde.Text
+        txtDesde.Text = ""
+        txtHasta.Text = ""
 
         CheckForIllegalCrossThreadCalls = False
 
@@ -28,7 +28,7 @@ Public Class ListadoAgendaClientes
     Private Sub txtDesde_KeyDown(sender As Object, e As KeyEventArgs) Handles txtDesde.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            If txtDesde.Text.Replace(" ", "").Length < 10 Then : Exit Sub : End If
+            'If txtDesde.Text.Replace(" ", "").Length < 10 Then : Exit Sub : End If
 
             txtHasta.Focus()
 
@@ -41,7 +41,7 @@ Public Class ListadoAgendaClientes
     Private Sub txtHasta_KeyDown(sender As Object, e As KeyEventArgs) Handles txtHasta.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            If txtHasta.Text.Replace(" ", "").Length < 10 Then : Exit Sub : End If
+            'If txtHasta.Text.Replace(" ", "").Length < 10 Then : Exit Sub : End If
 
             If Not BackgroundWorker1.IsBusy Then BackgroundWorker1.RunWorkerAsync()
 
@@ -59,12 +59,18 @@ Public Class ListadoAgendaClientes
         Dim WDesde As String = Helper.ordenaFecha(txtDesde.Text)
         Dim WHasta As String = Helper.ordenaFecha(txtHasta.Text)
 
-        If Val(WHasta) < Val(WDesde) Then
+        Dim WFiltroFechas As String = ""
+
+        If Val(WHasta) = 0 Or Val(WDesde) = 0 Then
+            WFiltroFechas = ""
+        ElseIf Val(WHasta) < Val(WDesde) Then
             MsgBox("Las Fechas deben ser contiguas.", MsgBoxStyle.Exclamation)
             Exit Sub
+        Else
+            WFiltroFechas = " ac.FechaOrd BETWEEN '" & WDesde & "' AND '" & WHasta & "' AND"
         End If
 
-        Dim WDatos As DataTable = GetAll("SELECT ac.ID, ac.Fecha, ac.Cliente, Razon = RTRIM(c.Razon), ac.Horario, Anotaciones = RTRIM(ac.Anotaciones) FROM AgendaClientes ac INNER JOIN Cliente c ON c.Cliente = ac.Cliente WHERE ac.Baja <> '1' AND ac.FechaOrd BETWEEN '" & WDesde & "' AND '" & WHasta & "' ORDER BY ac.FechaOrd DESC, ac.Cliente")
+        Dim WDatos As DataTable = GetAll("SELECT ac.ID, ac.Fecha, ac.Cliente, Razon = RTRIM(c.Razon), ac.Horario, Anotaciones = RTRIM(ac.Anotaciones) FROM AgendaClientes ac INNER JOIN Cliente c ON c.Cliente = ac.Cliente WHERE " & WFiltroFechas & " ac.Baja <> '1' ORDER BY ac.FechaOrd, ac.Cliente")
 
         WDatos.Columns.Add("Sel")
 
@@ -76,6 +82,17 @@ Public Class ListadoAgendaClientes
         Dim tabla As DataTable = TryCast(e.UserState, DataTable)
 
         dgvAgenda.DataSource = tabla
+
+        If tabla IsNot Nothing Then
+            Dim WMax As DataRow = tabla.Rows.Cast(Of DataRow).First()
+            Dim WMin As DataRow = tabla.Rows.Cast(Of DataRow).Last()
+
+            If WMax IsNot Nothing And WMin IsNot Nothing Then
+                txtHasta.Text = WMin("Fecha")
+                txtDesde.Text = WMax("Fecha")
+            End If
+
+        End If
 
     End Sub
 
@@ -89,6 +106,7 @@ Public Class ListadoAgendaClientes
     End Sub
 
     Private Sub btnBaja_Click(sender As Object, e As EventArgs) Handles btnBaja.Click
+
         Dim tabla As DataTable = TryCast(dgvAgenda.DataSource, DataTable)
 
         If tabla Is Nothing Then Exit Sub
@@ -99,9 +117,15 @@ Public Class ListadoAgendaClientes
             Zsql.Add(String.Format("UPDATE AgendaClientes SET Baja = '1' WHERE ID = '{0}'", r("ID")))
         Next
 
-        If Zsql.Count > 0 Then ExecuteNonQueries(Zsql.ToArray)
+        If Zsql.Count > 0 Then
 
-        BackgroundWorker1.RunWorkerAsync()
+            If MsgBox("¿Está seguro de dar de baja las entradas agendadas?", MsgBoxStyle.YesNoCancel) <> MsgBoxResult.Yes Then Exit Sub
+
+            ExecuteNonQueries(Zsql.ToArray)
+
+            BackgroundWorker1.RunWorkerAsync()
+
+        End If
 
     End Sub
 End Class
