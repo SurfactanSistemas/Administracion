@@ -118,6 +118,12 @@
     <Compile Include="Listados\SaldoDe_CtaCte_deCliente.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Maestro\Agenda Clientes\ListadoAgendaClientes.Designer.vb">
+      <DependentUpon>ListadoAgendaClientes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestro\Agenda Clientes\ListadoAgendaClientes.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Maestro\Consulta de revisiones de ensayos.Designer.vb">
       <DependentUpon>Consulta de revisiones de ensayos.vb</DependentUpon>
     </Compile>
@@ -311,7 +317,6 @@
     <Compile Include="Maestro\Precios por Cliente\PreciosPorClienteProductos.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Novedades\ConsultaHojaDeRuta.Designer.vb">
     <Compile Include="Novedades\Autorizacion de Pedidos\AutorizacionDePedidos.Designer.vb">
       <DependentUpon>AutorizacionDePedidos.vb</DependentUpon>
     </Compile>
@@ -554,6 +559,9 @@
     <EmbeddedResource Include="Listados\SaldoDe_CtaCte_deCliente.resx">
       <DependentUpon>SaldoDe_CtaCte_deCliente.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Maestro\Agenda Clientes\ListadoAgendaClientes.resx">
+      <DependentUpon>ListadoAgendaClientes.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Maestro\Consulta de revisiones de ensayos.resx">
       <DependentUpon>Consulta de revisiones de ensayos.vb</DependentUpon>
     </EmbeddedResource>
@@ -646,7 +654,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Maestro\Precios por Cliente\PreciosPorClienteProductos.resx">
       <DependentUpon>PreciosPorClienteProductos.vb</DependentUpon>
-    <EmbeddedResource Include="Novedades\ConsultaHojaDeRuta.resx">
+    </EmbeddedResource>
     <EmbeddedResource Include="Novedades\Autorizacion de Pedidos\AutorizacionDePedidos.resx">
       <DependentUpon>AutorizacionDePedidos.vb</DependentUpon>
     </EmbeddedResource>

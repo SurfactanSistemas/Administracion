@@ -51,9 +51,10 @@ Partial Class MenuPrincipal
         Me.ListadoDeCashFlowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListadoDeVentasPorProvinciaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CuentaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SaldosDeCtaCteDeClientesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProcesosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FinDeSistemasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SaldosDeCtaCteDeClientesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AgendaDeClientesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.panel1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -104,7 +105,7 @@ Partial Class MenuPrincipal
         '
         'MaestrosToolStripMenuItem
         '
-        Me.MaestrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IngresoRubroToolStripMenuItem, Me.IngresoVendedoresToolStripMenuItem, Me.CondicionDePagoToolStripMenuItem, Me.IngresoDeLineasDeVentasToolStripMenuItem, Me.IngresoDeFamiliasDeMateriasPrimasToolStripMenuItem, Me.IngresoDeEnvasesToolStripMenuItem, Me.IngresoDeGastosDeImportacionToolStripMenuItem, Me.ConsultaDeVersionesDeComposicionDePTToolStripMenuItem, Me.ConsultaDeRevisionesDeEnsayosToolStripMenuItem, Me.IngresoDeCambiosToolStripMenuItem, Me.PreciosPorClienteToolStripMenuItem})
+        Me.MaestrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IngresoRubroToolStripMenuItem, Me.IngresoVendedoresToolStripMenuItem, Me.CondicionDePagoToolStripMenuItem, Me.IngresoDeLineasDeVentasToolStripMenuItem, Me.IngresoDeFamiliasDeMateriasPrimasToolStripMenuItem, Me.IngresoDeEnvasesToolStripMenuItem, Me.IngresoDeGastosDeImportacionToolStripMenuItem, Me.ConsultaDeVersionesDeComposicionDePTToolStripMenuItem, Me.ConsultaDeRevisionesDeEnsayosToolStripMenuItem, Me.IngresoDeCambiosToolStripMenuItem, Me.PreciosPorClienteToolStripMenuItem, Me.AgendaDeClientesToolStripMenuItem})
         Me.MaestrosToolStripMenuItem.Name = "MaestrosToolStripMenuItem"
         Me.MaestrosToolStripMenuItem.Size = New System.Drawing.Size(67, 20)
         Me.MaestrosToolStripMenuItem.Text = "Maestros"
@@ -257,6 +258,12 @@ Partial Class MenuPrincipal
         Me.CuentaToolStripMenuItem.Size = New System.Drawing.Size(238, 22)
         Me.CuentaToolStripMenuItem.Text = "Cuenta Corriente de Cliente"
         '
+        'SaldosDeCtaCteDeClientesToolStripMenuItem
+        '
+        Me.SaldosDeCtaCteDeClientesToolStripMenuItem.Name = "SaldosDeCtaCteDeClientesToolStripMenuItem"
+        Me.SaldosDeCtaCteDeClientesToolStripMenuItem.Size = New System.Drawing.Size(238, 22)
+        Me.SaldosDeCtaCteDeClientesToolStripMenuItem.Text = "Saldos de Cta Cte de Clientes"
+        '
         'ProcesosToolStripMenuItem
         '
         Me.ProcesosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FinDeSistemasToolStripMenuItem})
@@ -270,11 +277,11 @@ Partial Class MenuPrincipal
         Me.FinDeSistemasToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
         Me.FinDeSistemasToolStripMenuItem.Text = "Fin de Sistema"
         '
-        'SaldosDeCtaCteDeClientesToolStripMenuItem
+        'AgendaDeClientesToolStripMenuItem
         '
-        Me.SaldosDeCtaCteDeClientesToolStripMenuItem.Name = "SaldosDeCtaCteDeClientesToolStripMenuItem"
-        Me.SaldosDeCtaCteDeClientesToolStripMenuItem.Size = New System.Drawing.Size(238, 22)
-        Me.SaldosDeCtaCteDeClientesToolStripMenuItem.Text = "Saldos de Cta Cte de Clientes"
+        Me.AgendaDeClientesToolStripMenuItem.Name = "AgendaDeClientesToolStripMenuItem"
+        Me.AgendaDeClientesToolStripMenuItem.Size = New System.Drawing.Size(311, 22)
+        Me.AgendaDeClientesToolStripMenuItem.Text = "Agenda de Clientes"
         '
         'MenuPrincipal
         '
@@ -327,5 +334,6 @@ Partial Class MenuPrincipal
     Friend WithEvents IngresoDeSolicitudPedidoDeVentaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents CuentaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SaldosDeCtaCteDeClientesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents AgendaDeClientesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class
