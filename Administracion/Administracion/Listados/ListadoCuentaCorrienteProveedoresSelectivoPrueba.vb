@@ -87,6 +87,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
                 Exit Sub
             End If
 
+            If TryCast(GRilla.DataSource, DataTable) IsNot Nothing Then GRilla.DataSource = Nothing
 
             varRenglon = GRilla.Rows.Add()
             GRilla.Item(0, varRenglon).Value = CampoProveedor.id
@@ -502,7 +503,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
 
             If Trim(varProveedor) <> "" Then
 
-                Dim datosProveedor As DataRow = GetSingle("SELECT Proveedor, Nombre, NombreCheque, ImpreCuitCliente, FormaPago FROM Proveedor WHERE Proveedor = '" & varProveedor & "'", IIf(_EsPellital, "Pellital_III", "SurfactanSa"))
+                Dim datosProveedor As DataRow = GetSingle("SELECT Proveedor, Nombre, NombreCheque, ImpreCuitCliente, FormaPago, AceptaCheques FROM Proveedor WHERE Proveedor = '" & varProveedor & "'", IIf(_EsPellital, "Pellital_III", "SurfactanSa"))
 
                 varAcumulado = 0
                 varAcumulaIva = 0
@@ -869,6 +870,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
                                 .Item("NombreCheque") = OrDefault(datosProveedor("NombreCheque"), "")
                                 .Item("ImpreCuitCliente") = OrDefault(datosProveedor("ImpreCuitCliente"), "")
                                 .Item("FormaPago") = OrDefault(datosProveedor("FormaPago"), "")
+                                .Item("AceptaECheque") = Val(OrDefault(datosProveedor("AceptaCheques"), "")) = 1
                             End With
 
                             WTabla.Rows.Add(r2)
