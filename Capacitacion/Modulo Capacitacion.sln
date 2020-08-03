@@ -1,7 +1,12 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modulo Capacitacion", "Modulo Capacitacion\Modulo Capacitacion.csproj", "{5F597B8F-999D-4058-955A-881149268840}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CC5D60FD-9755-4C61-B96C-F56173586BB9} = {CC5D60FD-9755-4C61-B96C-F56173586BB9}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Negocio", "Negocio\Negocio.csproj", "{C6CCA416-B083-403E-B128-F045B18C4D2F}"
 EndProject
