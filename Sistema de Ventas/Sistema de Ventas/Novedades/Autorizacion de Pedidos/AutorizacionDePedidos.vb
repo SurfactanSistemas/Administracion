@@ -546,8 +546,8 @@ Public Class AutorizacionDePedidos : Implements IAutorizacionDePedidos
                                     WArticulo = Microsoft.VisualBasic.Left$(WCodigoTerminado, 3) + Microsoft.VisualBasic.Right$(WCodigoTerminado, 7)
                             End Select
 
-                            Dim WEnsayo As String
-                            Dim WNombre As String
+                            Dim WEnsayo As String = ""
+                            Dim WNombre As String = ""
 
 
 
@@ -710,7 +710,7 @@ Public Class AutorizacionDePedidos : Implements IAutorizacionDePedidos
                                     ZZProveedor = Row_CodArticulo.Item("Proveedor")
 
 
-                                    Dim WCodigoNuevo As String
+                                    Dim WCodigoNuevo As String = ""
 
                                     SQLCnslt2 = "SELECT Codigo FROM Articulo WHERE Codigo <= '" & "ML-999-100" & "' ORDER BY Codigo"
 
@@ -991,7 +991,7 @@ Public Class AutorizacionDePedidos : Implements IAutorizacionDePedidos
                     Dim WTipoPedido As Integer = 0
                     Dim WTipoPed As Integer = 0
                     Dim WFechaPedido As String = "00/00/0000"
-                    Dim Wcliente As String
+                    Dim Wcliente As String = ""
 
                     Dim SQLCnslt4 As String = "SELECT TipoPedido, Tipoped, Fecha, Cliente FROM Pedido WHERE Pedido = '" & WPedido & "' ORDER BY Clave"
 

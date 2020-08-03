@@ -113,6 +113,30 @@
     <Compile Include="Listados\Listado de Cash Flow\ListadoCashFlow.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Listados\Listado_Analisis_Devoluciones.Designer.vb">
+      <DependentUpon>Listado_Analisis_Devoluciones.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\Listado_Analisis_Devoluciones.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\Listado_CalculoCosto_NacionalizacionMercaderia.Designer.vb">
+      <DependentUpon>Listado_CalculoCosto_NacionalizacionMercaderia.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\Listado_CalculoCosto_NacionalizacionMercaderia.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\Listado_Clientes_XVendedor.Designer.vb">
+      <DependentUpon>Listado_Clientes_XVendedor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\Listado_Clientes_XVendedor.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\Listado_GralProductos.Designer.vb">
+      <DependentUpon>Listado_GralProductos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\Listado_GralProductos.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Listados\Listado_IvaVentas.Designer.vb">
       <DependentUpon>Listado_IvaVentas.vb</DependentUpon>
     </Compile>
@@ -131,10 +155,40 @@
     <Compile Include="Listados\Listado_Mercaderia_Remitos_FactuCliente.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Listados\Listado_Minutas.Designer.vb">
+      <DependentUpon>Listado_Minutas.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\Listado_Minutas.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\Listado_Pedi_Pendi_Fazon_Pellital.Designer.vb">
+      <DependentUpon>Listado_Pedi_Pendi_Fazon_Pellital.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\Listado_Pedi_Pendi_Fazon_Pellital.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\Listado_Precios_Compara_Cliente.Designer.vb">
+      <DependentUpon>Listado_Precios_Compara_Cliente.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\Listado_Precios_Compara_Cliente.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\Listado_Precios_Compara_Grupos.Designer.vb">
+      <DependentUpon>Listado_Precios_Compara_Grupos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\Listado_Precios_Compara_Grupos.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Listados\Listado_Precios_Grupo.Designer.vb">
       <DependentUpon>Listado_Precios_Grupo.vb</DependentUpon>
     </Compile>
     <Compile Include="Listados\Listado_Precios_Grupo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\Listado_PT_SinVentas.Designer.vb">
+      <DependentUpon>Listado_PT_SinVentas.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\Listado_PT_SinVentas.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Listados\Listado_VentasXProvincia.Designer.vb">
@@ -585,6 +639,42 @@
       <DependentUpon>ReporteVerificaCostoOtro.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\Reporte_CarpetaParcial.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte_CarpetaParcial.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Reporte_Clientes_XVendedor.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte_Clientes_XVendedor.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Reporte_ListadoAnalisis_Devoluciones.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte_ListadoAnalisis_Devoluciones.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Reporte_ListadoGeneral_Producto.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte_ListadoGeneral_Producto.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Reporte_Listado_Minutas.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte_Listado_Minutas.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Reporte_Lista_Precios_Compa_Clientes.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte_Lista_Precios_Compa_Clientes.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\Reporte_Mercad_FacturasXArticulo.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -597,6 +687,18 @@
       <DependentUpon>Reporte_Mercad_FacturasXCliente.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\Reporte_Pedidos_Pendientes_Fazon_Pellital.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte_Pedidos_Pendientes_Fazon_Pellital.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Reporte_PreciosCompa.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte_PreciosCompa.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\Reporte_Precios_Grupo_ConCodigo.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -607,6 +709,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reporte_Precios_Grupo_SinCodigo.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Reporte_PT_SinVentas.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte_PT_SinVentas.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="VentanaPassword.Designer.vb">
@@ -629,6 +737,18 @@
     <EmbeddedResource Include="Listados\Listado de Cash Flow\ListadoCashFlow.resx">
       <DependentUpon>ListadoCashFlow.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Listado_Analisis_Devoluciones.resx">
+      <DependentUpon>Listado_Analisis_Devoluciones.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Listado_CalculoCosto_NacionalizacionMercaderia.resx">
+      <DependentUpon>Listado_CalculoCosto_NacionalizacionMercaderia.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Listado_Clientes_XVendedor.resx">
+      <DependentUpon>Listado_Clientes_XVendedor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Listado_GralProductos.resx">
+      <DependentUpon>Listado_GralProductos.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Listados\Listado_IvaVentas.resx">
       <DependentUpon>Listado_IvaVentas.vb</DependentUpon>
     </EmbeddedResource>
@@ -638,8 +758,23 @@
     <EmbeddedResource Include="Listados\Listado_Mercaderia_Remitos_FactuCliente.resx">
       <DependentUpon>Listado_Mercaderia_Remitos_FactuCliente.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Listado_Minutas.resx">
+      <DependentUpon>Listado_Minutas.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Listado_Pedi_Pendi_Fazon_Pellital.resx">
+      <DependentUpon>Listado_Pedi_Pendi_Fazon_Pellital.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Listado_Precios_Compara_Cliente.resx">
+      <DependentUpon>Listado_Precios_Compara_Cliente.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Listado_Precios_Compara_Grupos.resx">
+      <DependentUpon>Listado_Precios_Compara_Grupos.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Listados\Listado_Precios_Grupo.resx">
       <DependentUpon>Listado_Precios_Grupo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Listado_PT_SinVentas.resx">
+      <DependentUpon>Listado_PT_SinVentas.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\Listado_VentasXProvincia.resx">
       <DependentUpon>Listado_VentasXProvincia.vb</DependentUpon>
@@ -876,6 +1011,30 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteVerificaCostoOtro1.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Reporte_CarpetaParcial.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte_CarpetaParcial.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Reporte_Clientes_XVendedor.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte_Clientes_XVendedor.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Reporte_ListadoAnalisis_Devoluciones.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte_ListadoAnalisis_Devoluciones.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Reporte_ListadoGeneral_Producto.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte_ListadoGeneral_Producto.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Reporte_Listado_Minutas.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte_Listado_Minutas.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Reporte_Lista_Precios_Compa_Clientes.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte_Lista_Precios_Compa_Clientes.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Reporte_Mercad_FacturasXArticulo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Reporte_Mercad_FacturasXArticulo.vb</LastGenOutput>
@@ -884,6 +1043,14 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Reporte_Mercad_FacturasXCliente.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Reporte_Pedidos_Pendientes_Fazon_Pellital.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte_Pedidos_Pendientes_Fazon_Pellital.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Reporte_PreciosCompa.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte_PreciosCompa.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Reporte_Precios_Grupo_ConCodigo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Reporte_Precios_Grupo_ConCodigo.vb</LastGenOutput>
@@ -891,6 +1058,10 @@
     <EmbeddedResource Include="Reportes\Reporte_Precios_Grupo_SinCodigo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Reporte_Precios_Grupo_SinCodigo.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Reporte_PT_SinVentas.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte_PT_SinVentas.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="VentanaPassword.resx">
       <DependentUpon>VentanaPassword.vb</DependentUpon>

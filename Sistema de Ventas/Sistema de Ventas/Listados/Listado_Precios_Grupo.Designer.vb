@@ -35,12 +35,12 @@ Partial Class Listado_Precios_Grupo
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Label7 = New System.Windows.Forms.Label()
         Me.txt_DesdeLinea = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.txt_HastaLinea = New System.Windows.Forms.TextBox()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
         Me.panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -54,7 +54,7 @@ Partial Class Listado_Precios_Grupo
         Me.panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.panel1.Location = New System.Drawing.Point(0, 0)
         Me.panel1.Name = "panel1"
-        Me.panel1.Size = New System.Drawing.Size(355, 40)
+        Me.panel1.Size = New System.Drawing.Size(364, 40)
         Me.panel1.TabIndex = 23
         '
         'Label2
@@ -63,7 +63,7 @@ Partial Class Listado_Precios_Grupo
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold)
         Me.Label2.ForeColor = System.Drawing.Color.White
-        Me.Label2.Location = New System.Drawing.Point(200, 20)
+        Me.Label2.Location = New System.Drawing.Point(209, 20)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(155, 20)
         Me.Label2.TabIndex = 0
@@ -77,9 +77,9 @@ Partial Class Listado_Precios_Grupo
         Me.label1.ForeColor = System.Drawing.Color.White
         Me.label1.Location = New System.Drawing.Point(3, 13)
         Me.label1.Name = "label1"
-        Me.label1.Size = New System.Drawing.Size(182, 17)
+        Me.label1.Size = New System.Drawing.Size(205, 17)
         Me.label1.TabIndex = 0
-        Me.label1.Text = "Listado Precios (Grupo)"
+        Me.label1.Text = "Listado de Precios (Grupo)"
         '
         'txt_DesdeLista
         '
@@ -121,7 +121,7 @@ Partial Class Listado_Precios_Grupo
         '
         'btn_Cerrar
         '
-        Me.btn_Cerrar.Location = New System.Drawing.Point(262, 112)
+        Me.btn_Cerrar.Location = New System.Drawing.Point(268, 114)
         Me.btn_Cerrar.Name = "btn_Cerrar"
         Me.btn_Cerrar.Size = New System.Drawing.Size(75, 46)
         Me.btn_Cerrar.TabIndex = 31
@@ -130,7 +130,7 @@ Partial Class Listado_Precios_Grupo
         '
         'btn_Aceptar
         '
-        Me.btn_Aceptar.Location = New System.Drawing.Point(262, 48)
+        Me.btn_Aceptar.Location = New System.Drawing.Point(268, 50)
         Me.btn_Aceptar.Name = "btn_Aceptar"
         Me.btn_Aceptar.Size = New System.Drawing.Size(75, 46)
         Me.btn_Aceptar.TabIndex = 30
@@ -178,6 +178,15 @@ Partial Class Listado_Precios_Grupo
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Lista"
         '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(121, 19)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(35, 13)
+        Me.Label4.TabIndex = 34
+        Me.Label4.Text = "Hasta"
+        '
         'GroupBox2
         '
         Me.GroupBox2.Controls.Add(Me.Label7)
@@ -190,6 +199,15 @@ Partial Class Listado_Precios_Grupo
         Me.GroupBox2.TabIndex = 37
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Linea"
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(6, 20)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(38, 13)
+        Me.Label7.TabIndex = 35
+        Me.Label7.Text = "Desde"
         '
         'txt_DesdeLinea
         '
@@ -216,29 +234,11 @@ Partial Class Listado_Precios_Grupo
         Me.txt_HastaLinea.Size = New System.Drawing.Size(37, 20)
         Me.txt_HastaLinea.TabIndex = 25
         '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(121, 19)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(35, 13)
-        Me.Label4.TabIndex = 34
-        Me.Label4.Text = "Hasta"
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(6, 20)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(38, 13)
-        Me.Label7.TabIndex = 35
-        Me.Label7.Text = "Desde"
-        '
         'Listado_Precios_Grupo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(355, 236)
+        Me.ClientSize = New System.Drawing.Size(364, 236)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.Label5)

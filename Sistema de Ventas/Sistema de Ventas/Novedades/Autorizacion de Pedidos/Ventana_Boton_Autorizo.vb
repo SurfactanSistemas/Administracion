@@ -204,7 +204,7 @@ Public Class Ventana_Boton_Autorizo
         Dim WMes As String
         Dim Dia As Integer
         Dim WDia As String
-        Dim Di As Integer
+
         Dim aa As Integer
         Dim Ds(20) As Integer
 
