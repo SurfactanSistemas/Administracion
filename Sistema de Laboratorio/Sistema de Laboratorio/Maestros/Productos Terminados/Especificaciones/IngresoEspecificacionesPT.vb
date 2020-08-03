@@ -173,7 +173,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                     Dim WInformaEspecif = OrDefault(.Item("InformaEspecif"), "0")
                     Dim WFormulaEspecif = OrDefault(.Item("FormulaEspecif"), "")
                     Dim WSubEtapas = Val(OrDefault(.Item("SubEtapas"), "")) = 1
-                    Dim WImpreParametro = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif)
+                    Dim WImpreParametro = _GenerarImpreParametro(WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif, WInformaEspecif)
 
                     If Val(WTipoEspecif) = 0 And WImpreParametro <> "" Then WImpreParametro &= " (c)"
 
@@ -362,17 +362,9 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
                     With WEspecificacionesUnifica
 
-                        WEnsayo = ""
-
                         WValor = Trim(OrDefault(.Item("Valor" & i & "Ing"), ""))
 
                         If WValor = "" Then Continue For
-
-                        WDesde = ""
-                        WHasta = ""
-
-                        WTipoEspecif = ""
-                        WInformaEspecif = ""
 
                     End With
                 Next
@@ -475,7 +467,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                     Dim WMenorIgualEspecif = OrDefault(.Item("MenorIgualEspecif"), "0")
                     Dim WInformaEspecif = OrDefault(.Item("InformaEspecif"), "0")
                     Dim WFormulaEspecif = OrDefault(.Item("FormulaEspecif"), "")
-                    Dim WImpreParametro = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif)
+                    Dim WImpreParametro = _GenerarImpreParametro(WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif, WInformaEspecif)
 
                     If Val(WTipoEspecif) = 0 And WImpreParametro <> "" Then WImpreParametro &= " (c)"
 
@@ -565,7 +557,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                 Dim WInformaEspecif = OrDefault(.Item("InformaEspecif"), "0")
                 Dim WFormulaEspecif = OrDefault(.Item("FormulaEspecif"), "")
                 Dim WSubEtapas = Val(OrDefault(.Item("SubEtapas"), "")) = 1
-                Dim WImpreParametro = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif)
+                Dim WImpreParametro = _GenerarImpreParametro(WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif, WInformaEspecif)
 
                 If Val(WTipoEspecif) = 0 And WImpreParametro <> "" Then WImpreParametro &= " (c)"
 
@@ -640,17 +632,19 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
         TabControl1.SelectTab(1)
     End Sub
 
-    Private Function _GenerarImpreParametro(ByVal wTipoEspecif As String, ByVal wDesdeEspecif As String, ByVal wHastaEspecif As String, ByVal wUnidadEspecif As String, ByVal wMenorIgualEspecif As String) As String
+    Private Function _GenerarImpreParametro(ByVal wDesdeEspecif As String, ByVal wHastaEspecif As String, ByVal wUnidadEspecif As String, ByVal wMenorIgualEspecif As String, WInformaEspecif As String) As String
 
-        wTipoEspecif = OrDefault(Trim(wTipoEspecif), "")
         wDesdeEspecif = OrDefault(Trim(wDesdeEspecif), "")
         wHastaEspecif = OrDefault(Trim(wHastaEspecif), "")
         wUnidadEspecif = OrDefault(Trim(wUnidadEspecif), "")
         wMenorIgualEspecif = OrDefault(Trim(wMenorIgualEspecif), "")
+        WInformaEspecif = OrDefault(Trim(WInformaEspecif), "")
 
         If Val(wDesdeEspecif) = 0 And Val(wHastaEspecif) = 0 Then Return "Cumple Ensayo"
 
         If Val(wDesdeEspecif) <> 0 Or Val(wHastaEspecif) <> 9999 Then
+
+            If Val(WInformaEspecif) = 0 Then Return "Informativo"
 
             If Val(wDesdeEspecif) <> 0 And Val(wHastaEspecif) <> 0 Then
                 Return String.Format("{0} - {1} {2}", wDesdeEspecif, wHastaEspecif, wUnidadEspecif)
@@ -725,7 +719,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
             .Cells("Farmacopea").Value = WFarmacopea
             .Cells("FormulaEspecif").Value = Formula
 
-            Dim WImpreParametro = _GenerarImpreParametro(Tipo, Desde, Hasta, Unidad, MenorIgual)
+            Dim WImpreParametro = _GenerarImpreParametro(Desde, Hasta, Unidad, MenorIgual, Informa)
 
 
             If Val(Tipo) = 0 And WImpreParametro <> "" Then WImpreParametro &= " (c)"
@@ -749,7 +743,6 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
             dgvEspecifIngles.Rows(index).Cells("EnsayoIngles").Value = .Cells("Ensayo").Value
             dgvEspecifIngles.Rows(index).Cells("EspecificacionIngles").Value = .Cells("Especificacion").Value
-            dgvEspecifIngles.Rows(index).Cells("DescEnsayoIngles").Value = ""
             dgvEspecifIngles.Rows(index).Cells("FarmacopeaIngles").Value = .Cells("Farmacopea").Value
             dgvEspecifIngles.Rows(index).Cells("UnidadEspecifIngles").Value = .Cells("UnidadEspecif").Value
 
@@ -1042,7 +1035,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
     Private Sub _GrabarEspecificacionPTNoFarma()
 
         Dim WSQLs As New List(Of String)
-        Dim sql As String = ""
+        Dim sql As String
         Dim WActualiza As Boolean = False
 
         Dim WEspecif As DataRow = GetSingle("SELECT Version FROM EspecifUnifica WHERE Producto = '" & txtTerminado.Text & "'", "Surfactan_II")
@@ -1076,7 +1069,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
         WSQLs.Add("UPDATE EspecifUnifica SET Operador = '" & Codigo & "' WHERE Producto = '" & txtTerminado.Text & "' OR Producto = '" & "NK" & txtTerminado.Text.right(10) & "' Or Producto = '" & "RE" & txtTerminado.Text.right(10) & "'")
 
-        Dim WExisteHojaTecnica As Boolean = False
+        Dim WExisteHojaTecnica As Boolean
         '
         ' Verificamos si existe la Hoja Técnica.
         '
@@ -1588,21 +1581,10 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
         WImprePlanillaII = ""
         WImprePlanillaIII = ""
         WMetodo = ""
-        WLibera = ""
         WLimpieza = ""
         WEpp = ""
         WHumedad = ""
         WPeso = ""
-        WEquipo = ""
-        WArticulo = ""
-        WPTerminado = ""
-        WLetra = ""
-        WCantidad = ""
-        WPoe = ""
-        WIdentificacion = ""
-        WPoeLimpieza = ""
-        WArea = ""
-        ZTipoProceso = ""
         '
         ' Extraemos los datos de CargaIII.
         '
@@ -1746,7 +1728,6 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
         WImprePeso = ""
         WImpreHumedad = ""
         WDesEpp = ""
-        WTipo = ""
 
         Dim WMatAuxi As DataRow = GetSingle("SELECT Descripcion FROM MaterialAuxiliar WHERE Codigo = '" & WEpp & "'")
 
@@ -1874,8 +1855,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
         WBlanco = ""
         WImpreItem = ""
-        WDescriI = ""
-        WDescriII = ""
+        
         Dim WNumFila As Integer = 0
 
         For Each row As DataRow In WCargaIII.Rows
@@ -2181,8 +2161,8 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
     Private Sub _ActualizarVersionEspecificacion(ByVal ZGrabaEspe As String(,))
 
-        Dim ZSql As String = ""
-        Dim ZVersion As String = ""
+        Dim ZSql As String
+        Dim ZVersion As String
         Dim WConsultasII As New List(Of String)
 
         Dim WEspecifUnifica As DataTable = GetAll("SELECT Ensayo1, Ensayo2, Ensayo3, Ensayo4, Ensayo5, Ensayo6, Ensayo7, Ensayo8, Ensayo9, Ensayo10, " _
@@ -2613,7 +2593,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
     End Function
 
     Private Function _EsControl(ByVal keycode) As Boolean
-        Dim valido As Boolean = False
+        Dim valido As Boolean
 
         Select Case keycode
             Case Keys.Enter, Keys.Escape, Keys.Right, Keys.Left, Keys.Back
@@ -2630,27 +2610,11 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
     End Function
 
     Private Function _EsNumeroOControl(ByVal keycode) As Boolean
-        Dim valido As Boolean = False
-
-        If _EsNumero(CInt(keycode)) Or _EsControl(keycode) Then
-            valido = True
-        Else
-            valido = False
-        End If
-
-        Return valido
+        Return _EsNumero(CInt(keycode)) Or _EsControl(keycode)
     End Function
 
     Private Function _EsDecimalOControl(ByVal keycode) As Boolean
-        Dim valido As Boolean = False
-
-        If _EsDecimal(CInt(keycode)) Or _EsControl(keycode) Then
-            valido = True
-        Else
-            valido = False
-        End If
-
-        Return valido
+        Return _EsDecimal(CInt(keycode)) Or _EsControl(keycode)
     End Function
 
     Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData As Keys) As Boolean
@@ -2754,11 +2718,11 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
         WSqls.Add(String.Format("UPDATE " & WTablaCargaV & " SET Partida = '0', ImprePaso = Paso, CantidadPartida = '' WHERE Terminado = '{0}'", txtTerminado.Text))
 
         For Each row As DataRow In WCargaV.Rows
-            Dim WObservacion1 As String = ""
+            Dim WObservacion1 As String
 
             With row
 
-                WObservacion1 = _GenerarImpreParametro(OrDefault(.Item("TipoEspecif"), ""), OrDefault(.Item("DesdeEspecif"), ""), OrDefault(.Item("HastaEspecif"), ""), OrDefault(.Item("UnidadEspecif"), ""), OrDefault(.Item("MenorIgualEspecif"), ""))
+                WObservacion1 = _GenerarImpreParametro(OrDefault(.Item("DesdeEspecif"), ""), OrDefault(.Item("HastaEspecif"), ""), OrDefault(.Item("UnidadEspecif"), ""), OrDefault(.Item("MenorIgualEspecif"), ""), OrDefault(.Item("InformaEspecif"), ""))
 
                 WSqls.Add(String.Format("UPDATE " & WTablaCargaV & " SET Observacion1 = '{1}' WHERE Clave = '{0}'", .Item("Clave"), _Left(WObservacion1.Trim, 100)))
 

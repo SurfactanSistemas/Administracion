@@ -22,7 +22,7 @@ Partial Class IngresoFormulasEnsayo
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.DGV_Formulas = New Util.DBDataGridView()
         Me.txtBuscador = New System.Windows.Forms.TextBox()
         Me.btnAgregar = New System.Windows.Forms.Button()
@@ -46,49 +46,51 @@ Partial Class IngresoFormulasEnsayo
         Me.DGV_Formulas.AllowUserToDeleteRows = False
         Me.DGV_Formulas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_Formulas.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Renglon, Me.Descripcion, Me.Formula, Me.AnalistaLab, Me.Analista, Me.CheckVerificado})
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGV_Formulas.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGV_Formulas.DefaultCellStyle = DataGridViewCellStyle3
+        Me.DGV_Formulas.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.DGV_Formulas.DoubleBuffered = True
         Me.DGV_Formulas.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
-        Me.DGV_Formulas.Location = New System.Drawing.Point(3, 147)
+        Me.DGV_Formulas.Location = New System.Drawing.Point(0, 115)
         Me.DGV_Formulas.Name = "DGV_Formulas"
         Me.DGV_Formulas.OrdenamientoColumnasHabilitado = True
         Me.DGV_Formulas.RowHeadersWidth = 15
         Me.DGV_Formulas.RowTemplate.Height = 20
         Me.DGV_Formulas.ShowCellToolTips = False
         Me.DGV_Formulas.SinClickDerecho = False
-        Me.DGV_Formulas.Size = New System.Drawing.Size(583, 202)
+        Me.DGV_Formulas.Size = New System.Drawing.Size(589, 239)
         Me.DGV_Formulas.TabIndex = 0
         '
         'txtBuscador
         '
-        Me.txtBuscador.Location = New System.Drawing.Point(4, 121)
+        Me.txtBuscador.Location = New System.Drawing.Point(3, 89)
         Me.txtBuscador.Name = "txtBuscador"
         Me.txtBuscador.Size = New System.Drawing.Size(582, 20)
         Me.txtBuscador.TabIndex = 1
         '
         'btnAgregar
         '
-        Me.btnAgregar.Location = New System.Drawing.Point(4, 77)
+        Me.btnAgregar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAgregar.Location = New System.Drawing.Point(3, 46)
         Me.btnAgregar.Name = "btnAgregar"
-        Me.btnAgregar.Size = New System.Drawing.Size(75, 37)
+        Me.btnAgregar.Size = New System.Drawing.Size(158, 37)
         Me.btnAgregar.TabIndex = 2
         Me.btnAgregar.Text = "AGREGAR FORMULA"
         Me.btnAgregar.UseVisualStyleBackColor = True
         '
         'btnVolver
         '
-        Me.btnVolver.Location = New System.Drawing.Point(511, 78)
+        Me.btnVolver.Location = New System.Drawing.Point(167, 46)
         Me.btnVolver.Name = "btnVolver"
-        Me.btnVolver.Size = New System.Drawing.Size(75, 37)
+        Me.btnVolver.Size = New System.Drawing.Size(140, 37)
         Me.btnVolver.TabIndex = 3
-        Me.btnVolver.Text = "VOLVER"
+        Me.btnVolver.Text = "CERRAR"
         Me.btnVolver.UseVisualStyleBackColor = True
         '
         'Panel1
@@ -99,7 +101,7 @@ Partial Class IngresoFormulasEnsayo
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(598, 71)
+        Me.Panel1.Size = New System.Drawing.Size(589, 39)
         Me.Panel1.TabIndex = 4
         '
         'Label1
@@ -107,13 +109,13 @@ Partial Class IngresoFormulasEnsayo
         Me.Label1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label1.Location = New System.Drawing.Point(9, 9)
+        Me.Label1.Location = New System.Drawing.Point(11, 11)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(214, 17)
+        Me.Label1.Size = New System.Drawing.Size(235, 17)
         Me.Label1.TabIndex = 2
-        Me.Label1.Text = "Ingreso Formulas de Ensayo"
+        Me.Label1.Text = "INGRESO FÓRMULAS DE ENSAYO"
         '
         'Label2
         '
@@ -122,7 +124,7 @@ Partial Class IngresoFormulasEnsayo
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label2.Location = New System.Drawing.Point(407, 34)
+        Me.Label2.Location = New System.Drawing.Point(400, 7)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(179, 24)
         Me.Label2.TabIndex = 1
@@ -143,17 +145,17 @@ Partial Class IngresoFormulasEnsayo
         Me.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.Descripcion.DataPropertyName = "Descripcion"
         Me.Descripcion.HeaderText = "Descripcion"
+        Me.Descripcion.MinimumWidth = 200
         Me.Descripcion.Name = "Descripcion"
         Me.Descripcion.ReadOnly = True
         '
         'Formula
         '
-        Me.Formula.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Formula.DataPropertyName = "Formula"
         Me.Formula.HeaderText = "Formula"
         Me.Formula.Name = "Formula"
         Me.Formula.ReadOnly = True
-        Me.Formula.Width = 69
+        Me.Formula.Width = 150
         '
         'AnalistaLab
         '
@@ -167,35 +169,40 @@ Partial Class IngresoFormulasEnsayo
         '
         'Analista
         '
+        Me.Analista.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Analista.DataPropertyName = "Analista"
         Me.Analista.HeaderText = "Analista"
         Me.Analista.Name = "Analista"
         Me.Analista.ReadOnly = True
+        Me.Analista.Width = 69
         '
         'CheckVerificado
         '
         Me.CheckVerificado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.CheckVerificado.DataPropertyName = "CheckVerificado"
         Me.CheckVerificado.FalseValue = "0"
-        Me.CheckVerificado.HeaderText = "Verificado"
+        Me.CheckVerificado.HeaderText = "Verif."
         Me.CheckVerificado.Name = "CheckVerificado"
         Me.CheckVerificado.ReadOnly = True
         Me.CheckVerificado.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.CheckVerificado.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         Me.CheckVerificado.TrueValue = "1"
-        Me.CheckVerificado.Width = 79
+        Me.CheckVerificado.Width = 56
         '
         'IngresoFormulasEnsayo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(598, 354)
+        Me.ClientSize = New System.Drawing.Size(589, 354)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.btnVolver)
         Me.Controls.Add(Me.btnAgregar)
         Me.Controls.Add(Me.txtBuscador)
         Me.Controls.Add(Me.DGV_Formulas)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.MaximizeBox = False
         Me.Name = "IngresoFormulasEnsayo"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         CType(Me.DGV_Formulas, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()

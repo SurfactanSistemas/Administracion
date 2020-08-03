@@ -49,6 +49,18 @@
 
     Private Sub txtRetIB8_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRetIB8.KeyDown
         If e.KeyData = Keys.Enter Then
+            _SaltarA(txtRetIB15)
+        End If
+    End Sub
+
+    Private Sub txtRetIB15_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRetIB15.KeyDown
+        If e.KeyData = Keys.Enter Then
+            _SaltarA(txtRetIB16)
+        End If
+    End Sub
+
+    Private Sub txtRetIB16_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRetIB16.KeyDown
+        If e.KeyData = Keys.Enter Then
             _SaltarA(txtRetIB9)
         End If
     End Sub
@@ -105,20 +117,13 @@
 
     End Sub
 
-    Private Sub txtRetIB1_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtRetIB1.Leave, txtRetIB2.Leave, txtRetIB3.Leave, txtRetIB4.Leave, txtRetIB5.Leave, txtRetIB5.Leave, txtRetIB6.Leave, txtRetIB7.Leave, txtRetIB8.Leave, txtRetIB9.Leave, txtRetIB10.Leave, txtRetIB11.Leave, txtRetIB12.Leave, txtRetIB13.Leave, txtRetIB14.Leave
+    Private Sub txtRetIB1_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtRetIB1.Leave, txtRetIB2.Leave, txtRetIB3.Leave, txtRetIB4.Leave, txtRetIB5.Leave, txtRetIB5.Leave, txtRetIB6.Leave, txtRetIB7.Leave, txtRetIB8.Leave, txtRetIB9.Leave, txtRetIB10.Leave, txtRetIB11.Leave, txtRetIB12.Leave, txtRetIB13.Leave, txtRetIB14.Leave, txtRetIB15.Leave, txtRetIB16.Leave
         _NormalizarValores()
     End Sub
 
     Private Sub _NormalizarValores()
-        Dim campos As New List(Of TextBox) From {txtRetIB1, txtRetIB2, txtRetIB3, txtRetIB4, txtRetIB5, txtRetIB5, txtRetIB6, txtRetIB7, txtRetIB8, txtRetIB9, txtRetIB10, txtRetIB11, txtRetIB12, txtRetIB13, txtRetIB14}
-
-        For Each c As TextBox In campos
-
-            If c.Text = "" Then
-                c.Text = "0"
-            End If
-
-            c.Text = CustomConvert.asStringWithDecimalPlaces(Trim(c.Text.Replace(".", ",")), 2)
+        For Each c As TextBox In {txtRetIB1, txtRetIB2, txtRetIB3, txtRetIB4, txtRetIB5, txtRetIB5, txtRetIB6, txtRetIB7, txtRetIB8, txtRetIB9, txtRetIB10, txtRetIB11, txtRetIB12, txtRetIB13, txtRetIB14, txtRetIB15, txtRetIB16}
+            c.Text = formatonumerico(c.Text)
         Next
     End Sub
 End Class

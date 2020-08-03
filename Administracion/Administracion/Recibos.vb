@@ -5924,4 +5924,5 @@ Public Class Recibos
             End With
         Next
     End Sub
+
 End Class

@@ -404,8 +404,11 @@ Partial Class ParametrosDeEspecificacion
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.gbVariables)
         Me.Controls.Add(Me.Panel1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "ParametrosDeEspecificacion"
-        Me.Text = "IParametrosDeEspecificacion"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.gbVariables.ResumeLayout(False)

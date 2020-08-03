@@ -48,10 +48,11 @@
         rbCumpleNoCumple.Checked = WTipoEspecif = 0
         rbNumerico.Checked = WTipoEspecif = 1
         rbFormula.Checked = WTipoEspecif = 2
-        ckInforma.Checked = WInformaEspecif = 1
         ckMenorIgual.Checked = WMenorIgualEspecif = 1
 
         rbCumpleNoCumple_Click(Nothing, Nothing)
+
+        ckInforma.Checked = WInformaEspecif = 1
 
     End Sub
 
@@ -131,6 +132,7 @@
         ckInforma.Enabled = True
         ckMenorIgual.Enabled = True
         txtFormula.Enabled = True
+        ckInforma.Checked = True
 
         ckHabDesdeHasta.Visible = rbCumpleNoCumple.Checked
 
@@ -148,11 +150,14 @@
             btnDefinirFormula.Enabled = False
             txtDesde.Enabled = True
             txtHasta.Enabled = True
+            txtUnidad.Enabled = True
             txtDesde.Focus()
         ElseIf rbCumpleNoCumple.Checked Then
             txtDesde.Enabled = ckHabDesdeHasta.Checked
             txtHasta.Enabled = ckHabDesdeHasta.Checked
             txtUnidad.Enabled = ckHabDesdeHasta.Checked
+            ckInforma.Checked = False
+
             txtParametro.Focus()
         Else
             ckHabDesdeHasta.Checked = True
