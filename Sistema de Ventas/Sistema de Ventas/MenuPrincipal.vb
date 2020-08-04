@@ -224,4 +224,10 @@
             .Show()
         End With
     End Sub
+
+    Private Sub ListadoDeVerificacionDeDYSinVentasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ListadoDeVerificacionDeDYSinVentasToolStripMenuItem.Click
+        With Listado_DY_SinVentas
+            .Show()
+        End With
+    End Sub
 End Class

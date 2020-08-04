@@ -131,6 +131,12 @@
     <Compile Include="Listados\Listado_Clientes_XVendedor.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Listados\Listado_DY_SinVentas.Designer.vb">
+      <DependentUpon>Listado_DY_SinVentas.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\Listado_DY_SinVentas.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Listados\Listado_GralProductos.Designer.vb">
       <DependentUpon>Listado_GralProductos.vb</DependentUpon>
     </Compile>
@@ -745,6 +751,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\Listado_Clientes_XVendedor.resx">
       <DependentUpon>Listado_Clientes_XVendedor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Listado_DY_SinVentas.resx">
+      <DependentUpon>Listado_DY_SinVentas.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\Listado_GralProductos.resx">
       <DependentUpon>Listado_GralProductos.vb</DependentUpon>
