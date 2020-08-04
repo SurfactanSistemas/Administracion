@@ -106,11 +106,11 @@ Public Class Listado_DY_SinVentas
                 Dim RowMinimo As DataRow = GetSingle(SQLCnslt, VectorEmpre(i))
                 If RowMinimo IsNot Nothing Then
 
-                    Dim WStock1 As Double = RowMinimo.Item("Stock1")
-                    Dim WStock2 As Double = RowMinimo.Item("Stock2")
-                    Dim WStock3 As Double = RowMinimo.Item("Stock3")
-                    Dim WStock4 As Double = RowMinimo.Item("Stock4")
-                    Dim WStock5 As Double = RowMinimo.Item("Stock5")
+                    Dim WStock1 As String = formatonumerico(RowMinimo.Item("Stock1"))
+                    Dim WStock2 As String = formatonumerico(RowMinimo.Item("Stock2"))
+                    Dim WStock3 As String = formatonumerico(RowMinimo.Item("Stock3"))
+                    Dim WStock4 As String = formatonumerico(RowMinimo.Item("Stock4"))
+                    Dim WStock5 As String = formatonumerico(RowMinimo.Item("Stock5"))
 
                     Select Case i
                         Case 0

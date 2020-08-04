@@ -197,6 +197,12 @@
     <Compile Include="Listados\Listado_PT_SinVentas.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Listados\Listado_Remitos.Designer.vb">
+      <DependentUpon>Listado_Remitos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\Listado_Remitos.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Listados\Listado_VentasXProvincia.Designer.vb">
       <DependentUpon>Listado_VentasXProvincia.vb</DependentUpon>
     </Compile>
@@ -675,6 +681,12 @@
       <DependentUpon>Reporte_Listado_Minutas.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\Reporte_Listado_Remitos.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte_Listado_Remitos.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\Reporte_Lista_Precios_Compa_Clientes.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -784,6 +796,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\Listado_PT_SinVentas.resx">
       <DependentUpon>Listado_PT_SinVentas.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Listado_Remitos.resx">
+      <DependentUpon>Listado_Remitos.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\Listado_VentasXProvincia.resx">
       <DependentUpon>Listado_VentasXProvincia.vb</DependentUpon>
@@ -1039,6 +1054,10 @@
     <EmbeddedResource Include="Reportes\Reporte_Listado_Minutas.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Reporte_Listado_Minutas.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Reporte_Listado_Remitos.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte_Listado_Remitos.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Reporte_Lista_Precios_Compa_Clientes.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

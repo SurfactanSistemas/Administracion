@@ -230,4 +230,10 @@
             .Show()
         End With
     End Sub
+
+    Private Sub ListadoDeRemitosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ListadoDeRemitosToolStripMenuItem.Click
+        With Listado_Remitos
+            .Show()
+        End With
+    End Sub
 End Class
