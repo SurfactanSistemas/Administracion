@@ -8,6 +8,26 @@ Namespace Clases
 
     Public Class Helper
 
+        Public Shared Function FormatoCodigoCliente(ByVal codigo As String) As String
+            codigo = codigo.Replace(" ", "")
+
+            If codigo.Length < 2 Then Return codigo
+
+            Return Left(codigo, 1) & String.Format("{0,5:00000}", Val(codigo.Substring(1, codigo.Length - 1)))
+        End Function
+
+        Public Shared Function EsFeriado(ByVal fecha As String) As Boolean
+            Dim WDate As Date
+
+            If Not _ValidarFecha(fecha) OrElse Not Date.TryParseExact(fecha, "dd/MM/yyyy", Nothing, Nothing, WDate) Then
+
+                Throw New System.Exception("La Fecha no tiene el formato correcto (dd/MM/yyyy)")
+
+            End If
+
+            Return WDate.DayOfWeek = DayOfWeek.Saturday Or WDate.DayOfWeek = DayOfWeek.Sunday
+        End Function
+
         Public Shared Function Right(ByVal txt As String, ByVal lng As Integer) As String
             Return Microsoft.VisualBasic.Right(txt, lng)
         End Function

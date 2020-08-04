@@ -1,7 +1,7 @@
 ﻿Imports Util.Clases
 Imports Util.Clases.Query
 
-Public Class ListadoAgendaClientes
+Public Class ListadoAgendaClientes :Implements INotificacionCambios
 
     Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles btnCerrar.Click
         Close()
@@ -115,6 +115,21 @@ Public Class ListadoAgendaClientes
 
         For Each r As DataRow In tabla.Select("Sel = 1")
             Zsql.Add(String.Format("UPDATE AgendaClientes SET Baja = '1' WHERE ID = '{0}'", r("ID")))
+
+            Dim WCli As DataRow = GetSingle(String.Format("SELECT Fecha, Anotacion, Hora, FechaII, HoraII, AnotacionII FROM Cliente WHERE Cliente = '{0}' And (Fecha = '{1}' Or FechaII = '{1}')", r("Cliente"), r("Fecha")))
+
+            ' Limpiamos también la entrada en el formato viejo.
+            If WCli IsNot Nothing Then
+                Dim WFecha As String = Helper.OrDefault(WCli("Fecha"), "")
+
+                If WFecha = r("Fecha") Then
+                    Zsql.Add(String.Format("UPDATE Cliente Set Fecha = '  /  /    ', Hora = '', Anotacion = '' WHERE Cliente = '{0}'", r("Cliente")))
+                Else
+                    Zsql.Add(String.Format("UPDATE Cliente Set FechaII = '  /  /    ', HoraII = '', AnotacionII = '' WHERE Cliente = '{0}'", r("Cliente")))
+                End If
+
+            End If
+
         Next
 
         If Zsql.Count > 0 Then
@@ -123,9 +138,35 @@ Public Class ListadoAgendaClientes
 
             ExecuteNonQueries(Zsql.ToArray)
 
-            BackgroundWorker1.RunWorkerAsync()
+            If Not BackgroundWorker1.IsBusy Then BackgroundWorker1.RunWorkerAsync()
 
         End If
+
+    End Sub
+
+    Private Sub btnNuevo_Click(sender As Object, e As EventArgs) Handles btnNuevo.Click
+        With New AltaAgenda
+            .ShowDialog(Me)
+        End With
+    End Sub
+
+    Public Sub NotificarCambios() Implements INotificacionCambios.NotificarCambios
+        txtDesde.Text = ""
+        txtHasta.Text = ""
+        If Not BackgroundWorker1.IsBusy Then BackgroundWorker1.RunWorkerAsync()
+    End Sub
+
+    Private Sub dgvAgenda_CellMouseDoubleClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgvAgenda.CellMouseDoubleClick
+        If e.RowIndex < 0 Or e.ColumnIndex < 0 Then Exit Sub
+
+        Dim Cli, Fec As String
+
+        Cli = Helper.OrDefault(dgvAgenda.CurrentRow.Cells("Cliente").Value, "")
+        Fec = Helper.OrDefault(dgvAgenda.CurrentRow.Cells("Fecha").Value, "")
+
+        With New AltaAgenda(Cli, Fec)
+            .ShowDialog(Me)
+        End With
 
     End Sub
 End Class
