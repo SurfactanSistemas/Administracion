@@ -285,7 +285,6 @@ Partial Class ListadoAgendaClientes
         Me.ID.ReadOnly = True
         Me.ID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.ID.Visible = False
-        Me.ID.Width = 24
         '
         'Fecha
         '

@@ -419,6 +419,12 @@
     <Compile Include="Novedades\Verificacion de Cost de Productos Terminados\VerificacionCostoDePT.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Reportes\Agenda Clientes\ReporteAgendaClientes.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteAgendaClientes.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\hojarutacotnuevo.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -711,6 +717,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Novedades\Verificacion de Cost de Productos Terminados\VerificacionCostoDePT.resx">
       <DependentUpon>VerificacionCostoDePT.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Agenda Clientes\ReporteAgendaClientes.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteAgendaClientes.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\hojarutacotnuevo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

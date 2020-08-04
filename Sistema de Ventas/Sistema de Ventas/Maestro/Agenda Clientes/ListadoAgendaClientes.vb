@@ -70,7 +70,7 @@ Public Class ListadoAgendaClientes :Implements INotificacionCambios
             WFiltroFechas = " ac.FechaOrd BETWEEN '" & WDesde & "' AND '" & WHasta & "' AND"
         End If
 
-        Dim WDatos As DataTable = GetAll("SELECT ac.ID, ac.Fecha, ac.Cliente, Razon = RTRIM(c.Razon), ac.Horario, Anotaciones = RTRIM(ac.Anotaciones) FROM AgendaClientes ac INNER JOIN Cliente c ON c.Cliente = ac.Cliente WHERE " & WFiltroFechas & " ac.Baja <> '1' ORDER BY ac.FechaOrd, ac.Cliente")
+        Dim WDatos As DataTable = GetAll("SELECT ac.ID, ac.Fecha, ac.Cliente, Razon = RTRIM(c.Razon), ac.Horario, Anotaciones = UPPER(RTRIM(ac.Anotaciones)) FROM AgendaClientes ac INNER JOIN Cliente c ON c.Cliente = ac.Cliente WHERE " & WFiltroFechas & " ac.Baja <> '1' ORDER BY ac.FechaOrd, ac.Cliente")
 
         WDatos.Columns.Add("Sel")
 
@@ -168,5 +168,39 @@ Public Class ListadoAgendaClientes :Implements INotificacionCambios
             .ShowDialog(Me)
         End With
 
+    End Sub
+
+    Private Sub btnImprimir_Click(sender As Object, e As EventArgs) Handles btnImprimir.Click
+
+        Dim datos As DataTable = GetAll("SELECT ac.Fecha, ac.Cliente, c.Razon, c.Telefono, ac.Horario, Anotaciones = UPPER(ac.Anotaciones) FROM AgendaClientes ac INNER JOIN Cliente c ON c.Cliente = ac.Cliente WHERE Baja <> '1' And FechaOrd BETWEEN '" & Helper.ordenaFecha(txtDesde.Text) & "' And '" & Helper.ordenaFecha(txtHasta.Text) & "' ORDER BY ac.FechaOrd, ac.Cliente")
+
+        If datos Is Nothing Then Exit Sub
+
+        Dim tabla As DataTable = New DBAuxi.AgendaClientesDataTable
+
+        For Each r As datarow In datos.Rows
+            Dim t As DataRow = tabla.NewRow
+
+            t("Cliente") = r("Cliente")
+            t("Razon") = UCase(r("Razon"))
+            t("Anotaciones") = r("Anotaciones")
+            t("Horario") = r("Horario")
+            t("Telefono") = r("Telefono")
+            t("Fecha") = r("Fecha")
+            t("FechaOrd") = Helper.ordenaFecha(r("Fecha"))
+
+            tabla.Rows.Add(t)
+        Next
+
+        Dim rpt As New ReporteAgendaClientes
+
+        rpt.SetDataSource(tabla)
+
+        rpt.SetParameterValue("ImpreRangoFechas", String.Format("Entre Fechas {0} - {1}", txtDesde.Text, txtHasta))
+
+        With New Util.VistaPrevia
+            .Reporte = rpt
+            .Mostrar()
+        End With
     End Sub
 End Class

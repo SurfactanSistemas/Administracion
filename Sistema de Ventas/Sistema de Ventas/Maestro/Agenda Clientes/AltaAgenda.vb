@@ -288,9 +288,9 @@ Public Class AltaAgenda : Implements Util.IAyudaGeneral
         Dim WExisteNuevo As DataRow = GetSingle("SELECT ID FROM AgendaClientes WHERE Fecha = '" & txtFecha.Text & "' And Cliente = '" & txtCliente.Text & "' And Baja = '0'")
 
         If WExisteNuevo IsNot Nothing Then
-            WSql.Add(String.Format("UPDATE AgendaClientes SET Anotaciones = '{1}', Horario = '{2}' WHERE ID = '{0}'", WExisteNuevo("ID"), txtObservacion.Text, txtHora.Text))
+            WSql.Add(String.Format("UPDATE AgendaClientes SET Anotaciones = '{1}', Horario = '{2}' WHERE ID = '{0}'", WExisteNuevo("ID"), txtObservacion.Text.ToUpper, txtHora.Text))
         Else
-            WSql.Add(String.Format("INSERT INTO AgendaClientes (Cliente, Fecha, FechaOrd, Anotaciones, Horario) VALUES ('{0}','{1}','{2}','{3}','{4}')", txtCliente.Text, txtFecha.Text, ordenaFecha(txtFecha.Text), txtObservacion.Text, txtHora.Text))
+            WSql.Add(String.Format("INSERT INTO AgendaClientes (Cliente, Fecha, FechaOrd, Anotaciones, Horario) VALUES ('{0}','{1}','{2}','{3}','{4}')", txtCliente.Text, txtFecha.Text, ordenaFecha(txtFecha.Text), txtObservacion.Text.ToUpper, txtHora.Text))
         End If
 
         WSql.Add(String.Format("UPDATE Cliente SET Fecha = '{1}', Anotacion = '{2}', Hora  = '{3}', FechaII = '{4}', AnotacionII = '{5}', HoraII  = '{6}', OrdFecha = '{7}', OrdFechaII = '{8}' WHERE Cliente = '{0}'", txtCliente.Text, WFecha1, WAnotacionI, WHora1, WFecha2, WAnotacionII, WHora2, ordenaFecha(WFecha1), ordenaFecha(WFecha2)))
