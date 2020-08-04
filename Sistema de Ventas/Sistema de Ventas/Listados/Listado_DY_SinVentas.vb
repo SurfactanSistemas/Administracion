@@ -19,7 +19,8 @@ Public Class Listado_DY_SinVentas
 
         Dim SQLCnslt As String = "DELETE Minimo"
 
-        ListaSQLCnslt.Add(SQLCnslt)
+        ExecuteNonQueries({SQLCnslt}, Operador.Base)
+        'ListaSQLCnslt.Add(SQLCnslt)
 
         Dim VectorEmpre(7) As String
 
@@ -78,12 +79,12 @@ Public Class Listado_DY_SinVentas
 
             For Each RowCalculo As DataRow In TablaCalculo.Rows
 
-                Dim WTerminado As String = IIf(IsDBNull(RowCalculo.Item("Codigo")), "", RowCalculo.Item("Codigo"))
+                Dim WTerminado As String = RowCalculo.Item("Codigo")
                 WTerminado = Microsoft.VisualBasic.Left$(WTerminado, 3) & "00" & Microsoft.VisualBasic.Right$(WTerminado, 7)
 
                 Dim WArticulo As String = ""
                 Dim WCodigo As String = WTerminado
-                Dim WDescri1 As String = Trim(IIf(IsDBNull(RowCalculo.Item("Descripcion")), "", RowCalculo.Item("Descripcion"))).PadRight(50, "")
+                Dim WDescri1 As String = Trim(RowCalculo.Item("Descripcion")).PadRight(50, "")
                 Dim WStock As String = formatonumerico(OrDefault(RowCalculo.Item("Stock"), ""))
                 Dim WDescripcion As String = ""
                 Dim WMInimo As String = ""

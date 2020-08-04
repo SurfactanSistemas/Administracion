@@ -32,8 +32,8 @@ Public Class Listado_PT_SinVentas : Implements IConsulta_Terminado
 
         Dim SQLCnslt As String = "DELETE Minimo"
 
-        'ExecuteNonQueries({SQLCnslt})
-        ListaSQLCnslt.Add(SQLCnslt)
+        ExecuteNonQueries({SQLCnslt})
+        'ListaSQLCnslt.Add(SQLCnslt)
         
         Dim VectorEmpre(7) As String
 
@@ -338,11 +338,11 @@ Public Class Listado_PT_SinVentas : Implements IConsulta_Terminado
     End Sub
 
     Private Sub Listado_PT_SinVentas_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ' txt_DesdeTer.Text = "AA-00000-000"
-        ' txt_HastaTer.Text = "ZZ-99999-999"
-        ' txt_DesdeFecha.Text = "01/01/2020"
-        ' txt_HastaFecha.Text = "01/12/2020"
-        ' txt_Porcentaje.Text = 50
+        txt_DesdeTer.Text = "AA-00000-000"
+        txt_HastaTer.Text = "ZZ-99999-999"
+        txt_DesdeFecha.Text = "01/01/2020"
+        txt_HastaFecha.Text = "01/12/2020"
+        txt_Porcentaje.Text = 50
     End Sub
 
     Private Sub txt_DesdeTer_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_DesdeTer.KeyDown
