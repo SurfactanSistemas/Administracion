@@ -29,7 +29,7 @@ Public Class AgendaReclamoACliente
     Private Sub btnAceptar_Click(sender As Object, e As EventArgs) Handles btnAceptar.Click
         Dim WSql As New List(Of String)
 
-        WSql.Add("DELETE FROM Reclamo WHERE Cliente = '" & WCliente & "'")
+        WSql.Add("DELETE FROM Reclamo WHERE Codigo = '" & WCliente & "'")
         WSql.Add("INSERT INTO Reclamo (Codigo, Observacion) VALUES ('" & WCliente & "', '" & txtObservacion.Text.Trim & "')")
 
         ExecuteNonQueries(WSql.ToArray)

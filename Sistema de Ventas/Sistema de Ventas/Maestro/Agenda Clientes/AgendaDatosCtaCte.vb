@@ -142,7 +142,9 @@ Public Class AgendaDatosCtaCte
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        ' todo llamar a la ventana de reclamos.
+        With New AgendaReclamoACliente(txtCliente.Text)
+            .ShowDialog(Me)
+        End With
     End Sub
 
     Private Sub AgendaDatosCtaCte_Load(sender As Object, e As EventArgs) Handles MyBase.Load
