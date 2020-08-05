@@ -118,10 +118,28 @@
     <Compile Include="Listados\SaldoDe_CtaCte_deCliente.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Maestro\Agenda Clientes\AgendaDatosCtaCte.Designer.vb">
+      <DependentUpon>AgendaDatosCtaCte.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestro\Agenda Clientes\AgendaDatosCtaCte.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestro\Agenda Clientes\AgendaReclamoACliente.Designer.vb">
+      <DependentUpon>AgendaReclamoACliente.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestro\Agenda Clientes\AgendaReclamoACliente.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Maestro\Agenda Clientes\AltaAgenda.Designer.vb">
       <DependentUpon>AltaAgenda.vb</DependentUpon>
     </Compile>
     <Compile Include="Maestro\Agenda Clientes\AltaAgenda.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestro\Agenda Clientes\AltaMinuta.Designer.vb">
+      <DependentUpon>AltaMinuta.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestro\Agenda Clientes\AltaMinuta.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Maestro\Agenda Clientes\ListadoAgendaClientes.Designer.vb">
@@ -419,6 +437,12 @@
     <Compile Include="Novedades\Verificacion de Cost de Productos Terminados\VerificacionCostoDePT.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Reportes\Agenda Clientes\ReporteMinuta.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteMinuta.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\Agenda Clientes\ReporteAgendaClientes.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -571,8 +595,17 @@
     <EmbeddedResource Include="Listados\SaldoDe_CtaCte_deCliente.resx">
       <DependentUpon>SaldoDe_CtaCte_deCliente.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Maestro\Agenda Clientes\AgendaDatosCtaCte.resx">
+      <DependentUpon>AgendaDatosCtaCte.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestro\Agenda Clientes\AgendaReclamoACliente.resx">
+      <DependentUpon>AgendaReclamoACliente.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Maestro\Agenda Clientes\AltaAgenda.resx">
       <DependentUpon>AltaAgenda.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestro\Agenda Clientes\AltaMinuta.resx">
+      <DependentUpon>AltaMinuta.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Maestro\Agenda Clientes\ListadoAgendaClientes.resx">
       <DependentUpon>ListadoAgendaClientes.vb</DependentUpon>
@@ -717,6 +750,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Novedades\Verificacion de Cost de Productos Terminados\VerificacionCostoDePT.resx">
       <DependentUpon>VerificacionCostoDePT.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Agenda Clientes\ReporteMinuta.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteMinuta.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Agenda Clientes\ReporteAgendaClientes.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

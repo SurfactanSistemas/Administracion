@@ -59,7 +59,7 @@ Public Class ListadoAgendaClientes :Implements INotificacionCambios
         Dim WDesde As String = Helper.ordenaFecha(txtDesde.Text)
         Dim WHasta As String = Helper.ordenaFecha(txtHasta.Text)
 
-        Dim WFiltroFechas As String = ""
+        Dim WFiltroFechas As String
 
         If Val(WHasta) = 0 Or Val(WDesde) = 0 Then
             WFiltroFechas = ""

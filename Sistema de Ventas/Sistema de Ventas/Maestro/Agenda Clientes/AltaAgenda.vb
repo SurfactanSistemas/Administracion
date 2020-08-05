@@ -3,7 +3,7 @@ Imports Util.Clases.Helper
 Imports Util.Clases.Query
 Imports System.Globalization
 
-Public Class AltaAgenda : Implements Util.IAyudaGeneral
+Public Class AltaAgenda : Implements IAyudaGeneral
     Private ReadOnly WCliente As String
     Private ReadOnly WFecha As String
 
@@ -44,19 +44,23 @@ Public Class AltaAgenda : Implements Util.IAyudaGeneral
 
     Public Sub _ProcesarAyudaGeneral(row As DataGridViewRow) Implements IAyudaGeneral._ProcesarAyudaGeneral
         txtCliente.Text = OrDefault(row.Cells("Codigo").Value, "")
-        ' todo llamar a evento txtcliente keydown
+        txtCliente_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
     End Sub
 
     Private Sub btnCtaCte_Click(sender As Object, e As EventArgs) Handles btnCtaCte.Click
-        ' todo llamar a la ventana de Cta cte cuando esté creada.
+        With New AgendaDatosCtaCte(txtCliente.Text)
+            .ShowDialog(Me)
+        End With
     End Sub
 
     Private Sub btnDatosCliente_Click(sender As Object, e As EventArgs) Handles btnDatosCliente.Click
-        ' todo armar una ventana con la información básica que puede interesar.
+        ' todo armar una ventana con la información del cliente cuando esté desarrollado..
     End Sub
 
     Private Sub btnMinuta_Click(sender As Object, e As EventArgs) Handles btnMinuta.Click
-        ' todo llamar a ventana de minutas.
+        With New AltaMinuta(txtCliente.Text)
+            .ShowDialog(Me)
+        End With
     End Sub
 
     Private Sub txtCliente_KeyDown(sender As Object, e As KeyEventArgs) Handles txtCliente.KeyDown
@@ -85,7 +89,7 @@ Public Class AltaAgenda : Implements Util.IAyudaGeneral
     Private Sub txtFecha_KeyDown(sender As Object, e As KeyEventArgs) Handles txtFecha.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            
+
             Dim WDatos As DataRow = GetSingle("SELECT Anotaciones, Horario FROM AgendaClientes WHERE Cliente = '" & txtCliente.Text & "' And Fecha = '" & txtFecha.Text & "' And Baja <> '1'")
 
             If WDatos IsNot Nothing Then
@@ -180,9 +184,9 @@ Public Class AltaAgenda : Implements Util.IAyudaGeneral
         Dim WFecha1, WFecha2, WHora1, WHora2, WAnotacionI, WAnotacionII As String
         Dim WExiste As DataRow
 
-        Dim WCliente As DataRow = GetSingle("SELECT Fecha, Hora, Anotacion, FechaII, HoraII, AnotacionII FROM Cliente WHERE Cliente = '" & txtCliente.Text & "'")
+        Dim Cliente As DataRow = GetSingle("SELECT Fecha, Hora, Anotacion, FechaII, HoraII, AnotacionII FROM Cliente WHERE Cliente = '" & txtCliente.Text & "'")
 
-        If WCliente Is Nothing Then
+        If Cliente Is Nothing Then
             MsgBox("El Cliente indicado, no es un Cliente válido.", MsgBoxStyle.Exclamation)
             Exit Sub
         End If
@@ -196,12 +200,12 @@ Public Class AltaAgenda : Implements Util.IAyudaGeneral
             End If
         End If
 
-        WFecha1 = OrDefault(WCliente("Fecha"), "  /  /    ")
-        WFecha2 = OrDefault(WCliente("FechaII"), "  /  /    ")
-        WAnotacionI = OrDefault(WCliente("Anotacion"), "")
-        WAnotacionII = OrDefault(WCliente("AnotacionII"), "")
-        WHora1 = formatonumerico(OrDefault(WCliente("Hora"), ""))
-        WHora2 = formatonumerico(OrDefault(WCliente("HoraII"), ""))
+        WFecha1 = OrDefault(Cliente("Fecha"), "  /  /    ")
+        WFecha2 = OrDefault(Cliente("FechaII"), "  /  /    ")
+        WAnotacionI = OrDefault(Cliente("Anotacion"), "")
+        WAnotacionII = OrDefault(Cliente("AnotacionII"), "")
+        WHora1 = formatonumerico(OrDefault(Cliente("Hora"), ""))
+        WHora2 = formatonumerico(OrDefault(Cliente("HoraII"), ""))
 
         Dim WHoraDecimal As String = formatonumerico(TimeSpan.ParseExact(txtHora.Text, "h\:mm", CultureInfo.InvariantCulture).TotalHours)
 
