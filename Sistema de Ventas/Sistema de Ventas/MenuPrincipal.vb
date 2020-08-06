@@ -242,4 +242,10 @@
             .Show()
         End With
     End Sub
+
+    Private Sub ComposiciónDeProductosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ComposiciónDeProductosToolStripMenuItem.Click
+        With New ListadoComposicionesProductos
+            .Show(Me)
+        End With
+    End Sub
 End Class
