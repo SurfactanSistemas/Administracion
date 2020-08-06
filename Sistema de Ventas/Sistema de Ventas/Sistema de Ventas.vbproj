@@ -552,6 +552,11 @@
       <DependentUpon>ReporteAgendaClientes.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\DBAuxi.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DBAuxi.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\hojarutacotnuevo.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -651,11 +656,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="Reportes\DBAuxi.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DBAuxi.xsd</DependentUpon>
     </Compile>
     <Compile Include="Reportes\ReportePedidosPendientes.vb">
       <AutoGen>True</AutoGen>
@@ -1175,9 +1175,9 @@
       <DependentUpon>DBAuxi.xsd</DependentUpon>
     </None>
     <None Include="Reportes\DBAuxi.xsd">
-      <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>DBAuxi.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
     </None>
     <None Include="Reportes\DBAuxi.xss">
       <DependentUpon>DBAuxi.xsd</DependentUpon>
