@@ -658,7 +658,7 @@ Public Class Ingreso_Solicitud_Pedido_Venta
         Dim WMes As String
         Dim Dia As Integer
         Dim WDia As String
-        Dim Di As Integer
+
         Dim aa As Integer
         Dim Ds(20) As Integer
 

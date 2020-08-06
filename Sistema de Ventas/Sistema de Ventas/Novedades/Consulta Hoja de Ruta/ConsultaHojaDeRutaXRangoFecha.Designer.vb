@@ -240,7 +240,7 @@ Partial Class ConsultaHojaDeRutaXRangoFecha
         'ProgressBar1
         '
         Me.ProgressBar1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.ProgressBar1.Location = New System.Drawing.Point(472, 47)
+        Me.ProgressBar1.Location = New System.Drawing.Point(367, 47)
         Me.ProgressBar1.Maximum = 1000
         Me.ProgressBar1.Name = "ProgressBar1"
         Me.ProgressBar1.Size = New System.Drawing.Size(211, 23)

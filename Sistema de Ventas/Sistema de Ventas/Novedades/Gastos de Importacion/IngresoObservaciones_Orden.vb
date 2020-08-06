@@ -163,8 +163,8 @@ Public Class IngresoObservaciones_Orden
         Next
 
 
-        Dim WTipoPago As String
-        Dim WFecha As String
+        Dim WTipoPago As String = ""
+        Dim WFecha As String = ""
 
         Dim OrdenAuxi As String = WORDEN.PadLeft(6, "0")
 
