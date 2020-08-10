@@ -75,6 +75,18 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Consulta_DY.Designer.vb">
+      <DependentUpon>Consulta_DY.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Consulta_DY.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Consulta_MP.Designer.vb">
+      <DependentUpon>Consulta_MP.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Consulta_MP.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Consulta_Terminado.Designer.vb">
       <DependentUpon>Consulta_Terminado.vb</DependentUpon>
     </Compile>
@@ -87,7 +99,9 @@
     <Compile Include="Interfases\IBuscarClienteCashFlow.vb" />
     <Compile Include="Interfases\IConsultaCambios.vb" />
     <Compile Include="Interfases\IConsultaTerminado.vb" />
+    <Compile Include="Interfases\IConsulta_DY.vb" />
     <Compile Include="Interfases\IConsulta_GasImportacion.vb" />
+    <Compile Include="Interfases\IConsulta_MP.vb" />
     <Compile Include="Interfases\IConsulta_Orden_Trabajo.vb" />
     <Compile Include="Interfases\IConsulta_Terminado.vb" />
     <Compile Include="Interfases\INotificacionCambios.vb" />
@@ -101,10 +115,10 @@
     <Compile Include="Listados\CuentaCorrientes_DeClientes.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Listados\Listado de Cash Flow\ConsultaCliente.Designer.vb">
+    <Compile Include="ConsultaCliente.Designer.vb">
       <DependentUpon>ConsultaCliente.vb</DependentUpon>
     </Compile>
-    <Compile Include="Listados\Listado de Cash Flow\ConsultaCliente.vb">
+    <Compile Include="ConsultaCliente.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Listados\Listado de Cash Flow\ListadoCashFlow.Designer.vb">
@@ -396,6 +410,12 @@
     <Compile Include="Maestro\Listar_Cambios.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Maestro\ModificacionDe_Precio.Designer.vb">
+      <DependentUpon>ModificacionDe_Precio.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestro\ModificacionDe_Precio.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Maestro\Precios por Cliente\PreciosClienteProducto.Designer.vb">
       <DependentUpon>PreciosClienteProducto.vb</DependentUpon>
     </Compile>
@@ -420,6 +440,18 @@
     <Compile Include="Novedades\Autorizacion de Pedidos\AutorizacionDePedidos.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Novedades\Centro Importaciones\Centro_Importaciones.Designer.vb">
+      <DependentUpon>Centro_Importaciones.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Novedades\Centro Importaciones\Centro_Importaciones.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Novedades\Centro Importaciones\Centro_Importaciones_CarpetasPendientes.Designer.vb">
+      <DependentUpon>Centro_Importaciones_CarpetasPendientes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Novedades\Centro Importaciones\Centro_Importaciones_CarpetasPendientes.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Novedades\Consulta Hoja de Ruta\ConsultaHojaDeRuta.Designer.vb">
       <DependentUpon>ConsultaHojaDeRuta.vb</DependentUpon>
     </Compile>
@@ -430,6 +462,12 @@
       <DependentUpon>ConsultaHojaDeRutaXRangoFecha.vb</DependentUpon>
     </Compile>
     <Compile Include="Novedades\Consulta Hoja de Ruta\ConsultaHojaDeRutaXRangoFecha.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Novedades\Envio_DeMails_Clientes.Designer.vb">
+      <DependentUpon>Envio_DeMails_Clientes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Novedades\Envio_DeMails_Clientes.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Novedades\Gastos de Importacion Parciales\Articulos_GastosImportacionParcial.Designer.vb">
@@ -743,13 +781,19 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Consulta_DY.resx">
+      <DependentUpon>Consulta_DY.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Consulta_MP.resx">
+      <DependentUpon>Consulta_MP.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Consulta_Terminado.resx">
       <DependentUpon>Consulta_Terminado.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\CuentaCorrientes_DeClientes.resx">
       <DependentUpon>CuentaCorrientes_DeClientes.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Listados\Listado de Cash Flow\ConsultaCliente.resx">
+    <EmbeddedResource Include="ConsultaCliente.resx">
       <DependentUpon>ConsultaCliente.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\Listado de Cash Flow\ListadoCashFlow.resx">
@@ -893,6 +937,9 @@
     <EmbeddedResource Include="Maestro\Listar_Cambios.resx">
       <DependentUpon>Listar_Cambios.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Maestro\ModificacionDe_Precio.resx">
+      <DependentUpon>ModificacionDe_Precio.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Maestro\Precios por Cliente\PreciosClienteProducto.resx">
       <DependentUpon>PreciosClienteProducto.vb</DependentUpon>
     </EmbeddedResource>
@@ -905,11 +952,20 @@
     <EmbeddedResource Include="Novedades\Autorizacion de Pedidos\AutorizacionDePedidos.resx">
       <DependentUpon>AutorizacionDePedidos.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Novedades\Centro Importaciones\Centro_Importaciones.resx">
+      <DependentUpon>Centro_Importaciones.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Novedades\Centro Importaciones\Centro_Importaciones_CarpetasPendientes.resx">
+      <DependentUpon>Centro_Importaciones_CarpetasPendientes.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Novedades\Consulta Hoja de Ruta\ConsultaHojaDeRuta.resx">
       <DependentUpon>ConsultaHojaDeRuta.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Novedades\Consulta Hoja de Ruta\ConsultaHojaDeRutaXRangoFecha.resx">
       <DependentUpon>ConsultaHojaDeRutaXRangoFecha.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Novedades\Envio_DeMails_Clientes.resx">
+      <DependentUpon>Envio_DeMails_Clientes.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Novedades\Gastos de Importacion Parciales\Articulos_GastosImportacionParcial.resx">
       <DependentUpon>Articulos_GastosImportacionParcial.vb</DependentUpon>
@@ -1127,7 +1183,35 @@
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Outlook">
+      <Guid>{00062FFF-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>9</VersionMajor>
+      <VersionMinor>6</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -2,7 +2,7 @@
 Imports Util.Clases.Query
 Imports Util.Clases.Helper
 
-Public Class Listado_DY_SinVentas
+Public Class Listado_DY_SinVentas : Implements IConsulta_DY
 
     Private Sub btn_Aceptar_Click(sender As Object, e As EventArgs) Handles btn_Aceptar.Click
 
@@ -328,10 +328,31 @@ Public Class Listado_DY_SinVentas
     End Sub
 
     Private Sub Listado_DY_SinVentas_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        txt_DesdeMP.Text = "DY-000-000"
-        txt_HastaMP.Text = "DY-999-999"
-        txt_DesdeFecha.Text = "01/01/2020"
-        txt_HastaFecha.Text = "01/12/2020"
-        txt_Porcentaje.Text = 50
+        ' txt_DesdeMP.Text = "DY-000-000"
+        ' txt_HastaMP.Text = "DY-999-999"
+        ' txt_DesdeFecha.Text = "01/01/2020"
+        ' txt_HastaFecha.Text = "01/12/2020"
+        ' txt_Porcentaje.Text = 50
+    End Sub
+
+    Private Sub btn_Consulta_Click(sender As Object, e As EventArgs) Handles btn_Consulta.Click
+        With Consulta_DY
+            .Show(Me)
+        End With
+    End Sub
+
+    Public Sub PasaCodigo(Codigo As String, Accion As String) Implements IConsulta_DY.PasaCodigo
+        If Accion = "Ambos" Then
+            txt_DesdeMP.Text = Codigo
+            txt_HastaMP.Text = Codigo
+        End If
+
+        If Accion = "Desde" Then
+            txt_DesdeMP.Text = Codigo
+        End If
+
+        If Accion = "Hasta" Then
+            txt_HastaMP.Text = Codigo
+        End If
     End Sub
 End Class
