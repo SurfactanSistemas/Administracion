@@ -456,6 +456,7 @@ Partial Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Me.CustomButton2.Size = New System.Drawing.Size(41, 23)
         Me.CustomButton2.TabIndex = 61
         Me.CustomButton2.UseVisualStyleBackColor = True
+        Me.CustomButton2.Visible = False
         '
         'ListadoCuentaCorrienteProveedoresSelectivoPrueba
         '

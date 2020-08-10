@@ -235,6 +235,36 @@
     <Compile Include="Listados\SaldoDe_CtaCte_deCliente.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Maestro\Agenda Clientes\AgendaDatosCtaCte.Designer.vb">
+      <DependentUpon>AgendaDatosCtaCte.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestro\Agenda Clientes\AgendaDatosCtaCte.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestro\Agenda Clientes\AgendaReclamoACliente.Designer.vb">
+      <DependentUpon>AgendaReclamoACliente.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestro\Agenda Clientes\AgendaReclamoACliente.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestro\Agenda Clientes\AltaAgenda.Designer.vb">
+      <DependentUpon>AltaAgenda.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestro\Agenda Clientes\AltaAgenda.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestro\Agenda Clientes\AltaMinuta.Designer.vb">
+      <DependentUpon>AltaMinuta.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestro\Agenda Clientes\AltaMinuta.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestro\Agenda Clientes\ListadoAgendaClientes.Designer.vb">
+      <DependentUpon>ListadoAgendaClientes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestro\Agenda Clientes\ListadoAgendaClientes.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Maestro\Consulta de revisiones de ensayos.Designer.vb">
       <DependentUpon>Consulta de revisiones de ensayos.vb</DependentUpon>
     </Compile>
@@ -548,6 +578,23 @@
     <Compile Include="Novedades\Verificacion de Cost de Productos Terminados\VerificacionCostoDePT.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Reportes\Agenda Clientes\ReporteMinuta.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteMinuta.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Agenda Clientes\ReporteAgendaClientes.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteAgendaClientes.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\DBAuxi.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DBAuxi.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\hojarutacotnuevo.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -647,11 +694,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="Reportes\DBAuxi.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DBAuxi.xsd</DependentUpon>
     </Compile>
     <Compile Include="Reportes\ReportePedidosPendientes.vb">
       <AutoGen>True</AutoGen>
@@ -853,6 +895,21 @@
     <EmbeddedResource Include="Listados\SaldoDe_CtaCte_deCliente.resx">
       <DependentUpon>SaldoDe_CtaCte_deCliente.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Maestro\Agenda Clientes\AgendaDatosCtaCte.resx">
+      <DependentUpon>AgendaDatosCtaCte.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestro\Agenda Clientes\AgendaReclamoACliente.resx">
+      <DependentUpon>AgendaReclamoACliente.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestro\Agenda Clientes\AltaAgenda.resx">
+      <DependentUpon>AltaAgenda.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestro\Agenda Clientes\AltaMinuta.resx">
+      <DependentUpon>AltaMinuta.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestro\Agenda Clientes\ListadoAgendaClientes.resx">
+      <DependentUpon>ListadoAgendaClientes.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Maestro\Consulta de revisiones de ensayos.resx">
       <DependentUpon>Consulta de revisiones de ensayos.vb</DependentUpon>
     </EmbeddedResource>
@@ -1005,6 +1062,14 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Novedades\Verificacion de Cost de Productos Terminados\VerificacionCostoDePT.resx">
       <DependentUpon>VerificacionCostoDePT.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Agenda Clientes\ReporteMinuta.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteMinuta.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Agenda Clientes\ReporteAgendaClientes.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteAgendaClientes.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\hojarutacotnuevo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -1166,9 +1231,9 @@
       <DependentUpon>DBAuxi.xsd</DependentUpon>
     </None>
     <None Include="Reportes\DBAuxi.xsd">
-      <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>DBAuxi.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
     </None>
     <None Include="Reportes\DBAuxi.xss">
       <DependentUpon>DBAuxi.xsd</DependentUpon>

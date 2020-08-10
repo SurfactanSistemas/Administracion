@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows.Forms;
 
+
 namespace Modulo_Capacitacion.Novedades
 {
     partial class IngresoDeCursosRealizados
@@ -32,16 +33,18 @@ namespace Modulo_Capacitacion.Novedades
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.LBPerfil = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.dgvGrilla = new System.Windows.Forms.DataGridView();
+            this.dgvGrilla = new Util.DBDataGridView();
             this.Legajo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DNI = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Sector = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Observaciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.asignarNuevoLegajoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -175,13 +178,27 @@ namespace Modulo_Capacitacion.Novedades
             this.Legajo,
             this.Nombre,
             this.DNI,
+            this.Sector,
             this.Observaciones});
             this.dgvGrilla.ContextMenuStrip = this.contextMenuStrip1;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(217)))), ((int)(((byte)(232)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(170)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvGrilla.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvGrilla.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvGrilla.DoubleBuffered = true;
+            this.dgvGrilla.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dgvGrilla.Location = new System.Drawing.Point(0, 0);
             this.dgvGrilla.Margin = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.dgvGrilla.Name = "dgvGrilla";
+            this.dgvGrilla.OrdenamientoColumnasHabilitado = false;
             this.dgvGrilla.RowHeadersWidth = 15;
+            this.dgvGrilla.ShowCellToolTips = false;
+            this.dgvGrilla.SinClickDerecho = false;
             this.dgvGrilla.Size = new System.Drawing.Size(797, 316);
             this.dgvGrilla.TabIndex = 36;
             this.dgvGrilla.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvGrilla_RowHeaderMouseDoubleClick);
@@ -192,7 +209,8 @@ namespace Modulo_Capacitacion.Novedades
             this.Legajo.DataPropertyName = "Legajo";
             this.Legajo.HeaderText = "Legajo";
             this.Legajo.Name = "Legajo";
-            this.Legajo.Width = 64;
+            this.Legajo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Legajo.Width = 45;
             // 
             // Nombre
             // 
@@ -200,15 +218,27 @@ namespace Modulo_Capacitacion.Novedades
             this.Nombre.DataPropertyName = "Descripcion";
             this.Nombre.HeaderText = "Nombre";
             this.Nombre.Name = "Nombre";
+            this.Nombre.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // DNI
             // 
             this.DNI.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.DNI.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.DNI.DefaultCellStyle = dataGridViewCellStyle4;
             this.DNI.HeaderText = "DNI";
             this.DNI.MinimumWidth = 100;
             this.DNI.Name = "DNI";
+            this.DNI.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Sector
+            // 
+            this.Sector.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Sector.DataPropertyName = "Sector";
+            this.Sector.HeaderText = "Sector";
+            this.Sector.Name = "Sector";
+            this.Sector.ReadOnly = true;
+            this.Sector.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Sector.Width = 44;
             // 
             // Observaciones
             // 
@@ -217,6 +247,7 @@ namespace Modulo_Capacitacion.Novedades
             this.Observaciones.MaxInputLength = 50;
             this.Observaciones.MinimumWidth = 300;
             this.Observaciones.Name = "Observaciones";
+            this.Observaciones.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.Observaciones.Width = 300;
             // 
             // contextMenuStrip1
@@ -466,7 +497,7 @@ namespace Modulo_Capacitacion.Novedades
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(20, 44);
+            this.label1.Location = new System.Drawing.Point(15, 44);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 18);
             this.label1.TabIndex = 6;
@@ -542,7 +573,7 @@ namespace Modulo_Capacitacion.Novedades
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(20, 76);
+            this.label2.Location = new System.Drawing.Point(15, 76);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(68, 18);
             this.label2.TabIndex = 37;
@@ -562,11 +593,11 @@ namespace Modulo_Capacitacion.Novedades
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(20, 127);
+            this.label3.Location = new System.Drawing.Point(15, 127);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(47, 18);
+            this.label3.Size = new System.Drawing.Size(73, 18);
             this.label3.TabIndex = 38;
-            this.label3.Text = "Temas";
+            this.label3.Text = "Contenido";
             // 
             // txtHoras
             // 
@@ -604,7 +635,7 @@ namespace Modulo_Capacitacion.Novedades
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(22, 102);
+            this.label4.Location = new System.Drawing.Point(15, 102);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(66, 18);
             this.label4.TabIndex = 40;
@@ -646,7 +677,7 @@ namespace Modulo_Capacitacion.Novedades
             this.pnlAyuda.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(139)))), ((int)(((byte)(82)))));
             this.pnlAyuda.Controls.Add(this.panel7);
             this.pnlAyuda.Controls.Add(this.groupBox1);
-            this.pnlAyuda.Location = new System.Drawing.Point(120, 107);
+            this.pnlAyuda.Location = new System.Drawing.Point(120, 118);
             this.pnlAyuda.Name = "pnlAyuda";
             this.pnlAyuda.Size = new System.Drawing.Size(560, 373);
             this.pnlAyuda.TabIndex = 9;
@@ -682,9 +713,9 @@ namespace Modulo_Capacitacion.Novedades
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.txtAyuda);
             this.groupBox1.ForeColor = System.Drawing.SystemColors.Control;
-            this.groupBox1.Location = new System.Drawing.Point(14, 13);
+            this.groupBox1.Location = new System.Drawing.Point(14, 8);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(528, 307);
+            this.groupBox1.Size = new System.Drawing.Size(528, 311);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Ayuda";
@@ -790,7 +821,7 @@ namespace Modulo_Capacitacion.Novedades
         private Label LFechaAviso;
         private TextBox txtCodigo;
         private TextBox txtInstructor;
-        private DataGridView dgvGrilla;
+        private Util.DBDataGridView dgvGrilla;
         private TextBox txtDesTema;
         private TextBox txtCurso;
         private ComboBox cmbTipoProgramacion;
@@ -832,10 +863,11 @@ namespace Modulo_Capacitacion.Novedades
         private ToolStripMenuItem eliminarFilaToolStripMenuItem;
         private ToolStripMenuItem asignarNuevoLegajoToolStripMenuItem;
         private Button btnImprimir;
+        private Button button1;
         private DataGridViewTextBoxColumn Legajo;
         private DataGridViewTextBoxColumn Nombre;
         private DataGridViewTextBoxColumn DNI;
+        private DataGridViewTextBoxColumn Sector;
         private DataGridViewTextBoxColumn Observaciones;
-        private Button button1;
     }
 }

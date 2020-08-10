@@ -179,7 +179,7 @@ namespace Modulo_Capacitacion.Novedades
                     {
                         cmd.Connection = conn;
 
-                        cmd.CommandText = "select cu.Codigo, cu.Curso, c.Descripcion as DesCurso, cu.Tema, t.Descripcion as DesTema, cu.Fecha, cu.Horas, cu.TipoI, cu.TipoII, cu.Instructor, cu.Actividad, cu.Temas, cu.Legajo, l.Descripcion as DesLegajo, cu.Observaciones, ISNULL(l.Dni, '') Dni from Cursadas cu LEFT OUTER JOIN Legajo l ON cu.Legajo = l.Codigo and l.Renglon = 1 LEFT OUTER JOIN Curso c ON cu.Curso = c.Codigo LEFT OUTER JOIN Tema t ON cu.Tema = t.Tema AND c.Codigo = t.Curso where cu.Codigo = '" + WCodigo + "' order by cu.Renglon";
+                        cmd.CommandText = "select cu.Codigo, cu.Curso, c.Descripcion as DesCurso, cu.Tema, t.Descripcion as DesTema, cu.Fecha, cu.Horas, cu.TipoI, cu.TipoII, cu.Instructor, cu.Actividad, cu.Temas, cu.Legajo, l.Descripcion as DesLegajo, cu.Observaciones, ISNULL(l.Dni, '') Dni, ISNULL(ta.Descripcion, '') As DescSector from Cursadas cu LEFT OUTER JOIN Legajo l ON cu.Legajo = l.Codigo and l.Renglon = 1 LEFT OUTER JOIN Curso c ON cu.Curso = c.Codigo LEFT OUTER JOIN Tema t ON cu.Tema = t.Tema AND c.Codigo = t.Curso LEFT OUTER JOIN Tarea ta ON ta.Codigo = l.Sector And ta.Renglon = 1 where cu.Codigo = '" + WCodigo + "' order by cu.Renglon";
 
                         using (SqlDataReader dr = cmd.ExecuteReader())
                         {
@@ -209,6 +209,7 @@ namespace Modulo_Capacitacion.Novedades
                             dgvGrilla.Rows[WRenglon].Cells["Nombre"].Value = row["DesLegajo"].ToString().Trim();
                             dgvGrilla.Rows[WRenglon].Cells["Dni"].Value = row["Dni"].ToString().Trim();
                             dgvGrilla.Rows[WRenglon].Cells["Observaciones"].Value = row["Observaciones"].ToString().Trim();
+                            dgvGrilla.Rows[WRenglon].Cells["Sector"].Value = row["DescSector"].ToString().Trim();
 
                         }
 

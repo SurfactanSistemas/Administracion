@@ -141,6 +141,12 @@
         End With
     End Sub
 
+    Private Sub AgendaDeClientesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AgendaDeClientesToolStripMenuItem.Click
+        With New ListadoAgendaClientes
+            .Show(Me)
+        End With
+    End Sub
+
     Private Sub SubdiarioDeIvaVentasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SubdiarioDeIvaVentasToolStripMenuItem.Click
         With Listado_IvaVentas
             .Show()

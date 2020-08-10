@@ -77,6 +77,20 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="AgendaClientes" msprop:Generator_TableClassName="AgendaClientesDataTable" msprop:Generator_TableVarName="tableAgendaClientes" msprop:Generator_TablePropName="AgendaClientes" msprop:Generator_RowDeletingName="AgendaClientesRowDeleting" msprop:Generator_RowChangingName="AgendaClientesRowChanging" msprop:Generator_RowEvHandlerName="AgendaClientesRowChangeEventHandler" msprop:Generator_RowDeletedName="AgendaClientesRowDeleted" msprop:Generator_UserTableName="AgendaClientes" msprop:Generator_RowChangedName="AgendaClientesRowChanged" msprop:Generator_RowEvArgName="AgendaClientesRowChangeEvent" msprop:Generator_RowClassName="AgendaClientesRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Cliente" msprop:Generator_ColumnVarNameInTable="columnCliente" msprop:Generator_ColumnPropNameInRow="Cliente" msprop:Generator_ColumnPropNameInTable="ClienteColumn" msprop:Generator_UserColumnName="Cliente" type="xs:string" minOccurs="0" />
+              <xs:element name="Razon" msprop:Generator_ColumnVarNameInTable="columnRazon" msprop:Generator_ColumnPropNameInRow="Razon" msprop:Generator_ColumnPropNameInTable="RazonColumn" msprop:Generator_UserColumnName="Razon" type="xs:string" minOccurs="0" />
+              <xs:element name="Fecha" msprop:Generator_ColumnVarNameInTable="columnFecha" msprop:Generator_ColumnPropNameInRow="Fecha" msprop:Generator_ColumnPropNameInTable="FechaColumn" msprop:Generator_UserColumnName="Fecha" type="xs:string" minOccurs="0" />
+              <xs:element name="FechaOrd" msprop:Generator_ColumnVarNameInTable="columnFechaOrd" msprop:Generator_ColumnPropNameInRow="FechaOrd" msprop:Generator_ColumnPropNameInTable="FechaOrdColumn" msprop:Generator_UserColumnName="FechaOrd" type="xs:int" default="0" minOccurs="0" />
+              <xs:element name="Horario" msprop:Generator_ColumnVarNameInTable="columnHorario" msprop:Generator_ColumnPropNameInRow="Horario" msprop:Generator_ColumnPropNameInTable="HorarioColumn" msprop:Generator_UserColumnName="Horario" type="xs:string" minOccurs="0" />
+              <xs:element name="Anotaciones" msprop:Generator_ColumnVarNameInTable="columnAnotaciones" msprop:Generator_ColumnPropNameInRow="Anotaciones" msprop:Generator_ColumnPropNameInTable="AnotacionesColumn" msprop:Generator_UserColumnName="Anotaciones" type="xs:string" minOccurs="0" />
+              <xs:element name="ID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" minOccurs="0" />
+              <xs:element name="Telefono" msprop:Generator_ColumnVarNameInTable="columnTelefono" msprop:Generator_ColumnPropNameInRow="Telefono" msprop:Generator_ColumnPropNameInTable="TelefonoColumn" msprop:Generator_UserColumnName="Telefono" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+          </xs:complexType>
+        </xs:element>
         <xs:element name="TablaReporteMercad_FacturasXCliente" msprop:Generator_TableClassName="TablaReporteMercad_FacturasXClienteDataTable" msprop:Generator_TableVarName="tableTablaReporteMercad_FacturasXCliente" msprop:Generator_TablePropName="TablaReporteMercad_FacturasXCliente" msprop:Generator_RowDeletingName="TablaReporteMercad_FacturasXClienteRowDeleting" msprop:Generator_RowChangingName="TablaReporteMercad_FacturasXClienteRowChanging" msprop:Generator_RowEvHandlerName="TablaReporteMercad_FacturasXClienteRowChangeEventHandler" msprop:Generator_RowDeletedName="TablaReporteMercad_FacturasXClienteRowDeleted" msprop:Generator_UserTableName="TablaReporteMercad_FacturasXCliente" msprop:Generator_RowChangedName="TablaReporteMercad_FacturasXClienteRowChanged" msprop:Generator_RowEvArgName="TablaReporteMercad_FacturasXClienteRowChangeEvent" msprop:Generator_RowClassName="TablaReporteMercad_FacturasXClienteRow">
           <xs:complexType>
             <xs:sequence>
