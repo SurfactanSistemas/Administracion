@@ -253,6 +253,7 @@ Public Class Centro_Importaciones
                 Dim ZZPagoDespachoII As String = "0"
                 Dim ZZTipoPago As String = IIf(IsDBNull(RowPasa.Item("TipoPago")), "", RowPasa.Item("TipoPago"))
 
+
                 Dim TablaAnticipo As New DataTable
                 With TablaAnticipo.Columns
                     .Add("Orden")
@@ -262,30 +263,37 @@ Public Class Centro_Importaciones
 
                 Dim ZZSuma As Double = 0
 
-                SQLCnslt = "SELECT Carpeta, Carpeta1, Carpeta2, Carpeta3, Carpeta4, Carpeta5, Carpeta6, Carpeta7, Carpeta8, Carpeta9," _
-                            & " Orden, Proveedor, Observaciones2, Tipoord, Tiporeg, Tipo1, Numero1, Punto1, Importe1, Paridad " _
-                            & " FROM Pagos" _
-                            & " WHERE (Carpeta = '" & ZZCarpeta & "'" _
-                            & " OR Carpeta1 = '" & ZZCarpeta & "'" _
-                            & " OR Carpeta2 = '" & ZZCarpeta & "'" _
-                            & " OR Carpeta3 = '" & ZZCarpeta & "'" _
-                            & " OR Carpeta4 = '" & ZZCarpeta & "'" _
-                            & " OR Carpeta5 = '" & ZZCarpeta & "'" _
-                            & " OR Carpeta6 = '" & ZZCarpeta & "'" _
-                            & " OR Carpeta7 = '" & ZZCarpeta & "'" _
-                            & " OR Carpeta8 = '" & ZZCarpeta & "'" _
-                            & " OR Carpeta9 = '" & ZZCarpeta & "')" _
-                            & " AND TipoReg = '" & "1" & "'" _
-                            & " ORDER BY clave"
-
-                Dim TablaPagos As DataTable = GetAll(SQLCnslt, Operador.Base)
-
-                If TablaPagos.Rows.Count > 0 Then
-
-                    For Each RowPagos As DataRow In TablaPagos.Rows
 
 
-                        If ZZProveedor = RowPagos.Item("Proveedor") Then
+
+                If ZZProveedor <> "" Then
+
+
+                    SQLCnslt = "SELECT Carpeta, Carpeta1, Carpeta2, Carpeta3, Carpeta4, Carpeta5, Carpeta6, Carpeta7, Carpeta8, Carpeta9," _
+                                & " Orden, Proveedor, Observaciones2, Tipoord, Tiporeg, Tipo1, Numero1, Punto1, Importe1, Paridad " _
+                                & " FROM Pagos" _
+                                & " WHERE (Carpeta = '" & ZZCarpeta & "'" _
+                                & " OR Carpeta1 = '" & ZZCarpeta & "'" _
+                                & " OR Carpeta2 = '" & ZZCarpeta & "'" _
+                                & " OR Carpeta3 = '" & ZZCarpeta & "'" _
+                                & " OR Carpeta4 = '" & ZZCarpeta & "'" _
+                                & " OR Carpeta5 = '" & ZZCarpeta & "'" _
+                                & " OR Carpeta6 = '" & ZZCarpeta & "'" _
+                                & " OR Carpeta7 = '" & ZZCarpeta & "'" _
+                                & " OR Carpeta8 = '" & ZZCarpeta & "'" _
+                                & " OR Carpeta9 = '" & ZZCarpeta & "')" _
+                                & " AND TipoReg = '" & "1" & "'" _
+                                & " AND Proveedor = '" & ZZProveedor & "'" _
+                                & " ORDER BY clave"
+
+                    Dim TablaPagos As DataTable = GetAll(SQLCnslt, Operador.Base)
+
+                    If TablaPagos.Rows.Count > 0 Then
+
+
+                        For Each RowPagos As DataRow In TablaPagos.Rows
+
+
 
                             Dim WWWOrden As String = RowPagos.Item("Orden")
                             Dim WWWObservaciones As String = Trim(RowPagos.Item("Observaciones2"))
@@ -355,23 +363,30 @@ Public Class Centro_Importaciones
                                         Next Aaa
                                     End If
                                 End If
-                                
+
 
                             End If
 
-                        Else
+
 
                             ZZPagoDespachoII = "1"
 
-                        End If
-                    Next
+
+                        Next
+
+                    End If
+
+
 
                 End If
 
 
+
+
+
                 For CicloII = 0 To TablaAnticipo.Rows.Count - 1
                     Dim WImporte As String = IIf(IsDBNull(TablaAnticipo.Rows(CicloII).Item("Importe")), "0", TablaAnticipo.Rows(CicloII).Item("Importe"))
-                    ZZSuma = ZZSuma + Val(Wimporte)
+                    ZZSuma = ZZSuma + Val(WImporte)
                 Next
 
 
@@ -467,7 +482,7 @@ Public Class Centro_Importaciones
 
             Next
 
-            ZZCiclaProceso = "N"
+        ZZCiclaProceso = "N"
 
         End If
 
@@ -1020,11 +1035,11 @@ Public Class Centro_Importaciones
 
                         Select Case RowOrd.Item("PagoLetra")
                             Case 0
-                                DGV_Muestra.Rows(WLugar).Cells("PagoTotal").Value = "Pendiente"
+                                DGV_Muestra.Rows(WLugar).Cells("PagoLetra").Value = "Pendiente"
                             Case Else
-                                DGV_Muestra.Rows(WLugar).Cells("PagoTotal").Value = "Pagado"
+                                DGV_Muestra.Rows(WLugar).Cells("PagoLetra").Value = "Pagado"
                         End Select
-                        DGV_Muestra.Rows(WLugar).Cells("VtoTotal").Value = IIf(IsDBNull(RowOrd.Item("VtoLetra")), "0", RowOrd.Item("VtoLetra"))
+                        DGV_Muestra.Rows(WLugar).Cells("VtoLetra").Value = IIf(IsDBNull(RowOrd.Item("VtoLetra")), "0", RowOrd.Item("VtoLetra"))
 
                         If ColumnaOpcion = 15 Then
                             ZZSumaArticulo = ZZSumaArticulo + RowOrd.Item("Cantidad")
@@ -1034,6 +1049,7 @@ Public Class Centro_Importaciones
                         REM Muestra.TextMatrix(WLugar, 18) = IIf(IsNull(rstOrden!pagoparcialletra), "0", rstOrden!pagoparcialletra)
                         REM Muestra.TextMatrix(WLugar, 18) = Pusing("###,###", Muestra.TextMatrix(WLugar, 18))
 
+                        'DGV_Muestra.Rows(WLugar).Cells("USPagadoLetra").Value = ""
 
                         DGV_Muestra.Rows(WLugar).Cells("FEmbarque").Value = IIf(IsDBNull(RowOrd.Item("FechaEmbarque")), "", RowOrd.Item("FechaEmbarque"))
                         DGV_Muestra.Rows(WLugar).Cells("SaldoLetra").Value = IIf(IsDBNull(RowOrd.Item("FechaDJai")), "", RowOrd.Item("FechaDJai"))
@@ -1073,7 +1089,7 @@ Public Class Centro_Importaciones
 
             Dim ZOrden As String = rowMuestra.Cells("Orden").Value
 
-            Dim ZPagoLetra As String = rowMuestra.Cells("PagoTotal").Value
+            Dim ZPagoLetra As String = rowMuestra.Cells("PagoLetra").Value
 
 
             Dim SQLCnlst As String = "Select pagoparcialletra" _
@@ -1139,7 +1155,7 @@ Public Class Centro_Importaciones
             Dim ZFechaLlegada = rowMuestra.Cells("FLLegada").Value
             Dim ZPagoDespacho = rowMuestra.Cells("Despacho").Value
 
-            Dim ZFechaLetra = rowMuestra.Cells("VtoTotal").Value
+            Dim ZFechaLetra = rowMuestra.Cells("VtoLetra").Value
             Dim ZFechaDJai = rowMuestra.Cells("SaldoLetra").Value
 
             If Trim(ZDJai) <> "" Then
@@ -1270,7 +1286,7 @@ Public Class Centro_Importaciones
                     DGV_Muestra.Rows(Fila).Cells("FEmbarque").Value = RowPas.Item("FEmbarque")
                     DGV_Muestra.Rows(Fila).Cells("SaldoLetra").Value = RowPas.Item("SaldoLetra")
 
-                
+
 
                     Dim ZDJai As String = DGV_Muestra.Rows(Fila).Cells("Djai").Value
                     Dim ZFechaLlegada As String = DGV_Muestra.Rows(Fila).Cells("FLLegada").Value
@@ -1283,7 +1299,7 @@ Public Class Centro_Importaciones
                         If Trim(ZFechaDJai) <> "" Then
 
                             If ValidaFecha(ZFechaDJai) = "S" Then
-                                
+
                                 Dim Wvencimiento As String = Calcula_vencimiento(ZFechaDJai, 180)
 
                                 Dim ZZOrdFecha As String = Date.Today.ToString("yyyyMMdd")
@@ -1315,7 +1331,7 @@ Public Class Centro_Importaciones
                             If ZZOrdFechaLetra <= ZZOrdFecha Then
 
                                 DGV_Muestra.Rows(Fila).Cells("LetraTotal").Style.BackColor = Color.FromArgb(&H8080FF)
-                           
+
                             End If
                         End If
                     End If
@@ -1330,7 +1346,7 @@ Public Class Centro_Importaciones
             Next
 
 
-         
+
 
 
         End If

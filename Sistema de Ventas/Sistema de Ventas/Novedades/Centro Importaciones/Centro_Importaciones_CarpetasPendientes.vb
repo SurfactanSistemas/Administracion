@@ -7,6 +7,10 @@ Public Class Centro_Importaciones_CarpetasPendientes
 
     Sub New(ByVal Tabla As DataTable)
 
+        ' Llamada necesaria para el diseñador.
+        InitializeComponent()
+
+        ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
 
 
         With tablaResivida.Columns
@@ -32,7 +36,6 @@ Public Class Centro_Importaciones_CarpetasPendientes
 
 
 
-        MsgBox("HOLA")
 
 
 
@@ -49,16 +52,21 @@ Public Class Centro_Importaciones_CarpetasPendientes
         For Each row As DataRow In tablaResivida.Rows
 
             With row
-                Dim WAno As String = Microsoft.VisualBasic.Right$(.Item("FechaInforme"), 4)
-                Dim WMes As String = Mid$(.Item("FechaInforme"), 4, 2)
-                Dim WDia As String = Microsoft.VisualBasic.Left$(.Item("FechaInforme"), 2)
+                'CONSULTAR GASTON
+                Dim WOrden As String = IIf(IsDBNull(.Item("Orden")), "Nulo", .Item("Orden"))
+                If WOrden = "Nulo" Then
+                    Continue For
+                End If
 
-                Dim WOrden As String = .Item("Orden")
                 Dim WCarpeta As String = .Item("Carpeta")
                 Dim WCodProveedor As String = .Item("Proveedor")
                 Dim WNombreProveedor As String = ""
                 Dim WFechaInforme As String = .Item("FechaInforme")
                 Dim WEmpresa As String = .Item("Empresa")
+
+                Dim WAno As String = Microsoft.VisualBasic.Right$(.Item("FechaInforme"), 4)
+                Dim WMes As String = Mid$(.Item("FechaInforme"), 4, 2)
+                Dim WDia As String = Microsoft.VisualBasic.Left$(.Item("FechaInforme"), 2)
                 Dim WFechaInformeOrd As String = WAno & WMes & WDia
 
                 DGV_Pendientes.Rows.Add()
@@ -82,7 +90,7 @@ Public Class Centro_Importaciones_CarpetasPendientes
         If DGV_Pendientes.Rows.Count > 0 Then
             For Each DGVPen_Row As DataGridViewRow In DGV_Pendientes.Rows
 
-                Dim ZZProveedor As String = DGVPen_Row.Cells("Proveedor").Value
+                Dim ZZProveedor As String = DGVPen_Row.Cells("CodProveedor").Value
                 Dim SQLCnlst As String = "SELECT Nombre" _
                                         & " FROM Proveedor" _
                                         & " WHERE Proveedor = '" & ZZProveedor & "'"
