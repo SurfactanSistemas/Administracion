@@ -5,7 +5,7 @@ Imports Util.Clases.Helper
 Imports Util
 Imports Util.Interfaces
 
-Public Class ListadoComposicionesProductos : Implements IExportar, IAyudaPTs
+Public Class ListadoComposicionesProductos : Implements IExportar, IAyudaPTs, INotificacionCambios
 
     Private WControl As MaskedTextBox
 
@@ -173,6 +173,21 @@ Public Class ListadoComposicionesProductos : Implements IExportar, IAyudaPTs
 
     Private Sub txtProducto_KeyDown(sender As Object, e As KeyEventArgs) Handles txtProducto.KeyDown
 
+        If e.KeyData = Keys.Enter Then
+            Dim Prod As DataRow = GetSingle("SELECT Codigo FROM Terminado WHERE Codigo = '" & txtProducto.Text & "'")
+
+            If Prod Is Nothing Then Exit Sub
+
+            With New ComposicionProducto(txtProducto.Text)
+                .Show(Me)
+            End With
+
+            txtProducto.Text = ""
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtProducto.Text = ""
+        End If
+
     End Sub
 
     Private Sub txtProducto_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles txtProducto.MouseDoubleClick
@@ -186,5 +201,15 @@ Public Class ListadoComposicionesProductos : Implements IExportar, IAyudaPTs
         With New ComposicionProducto
             .Show(Me)
         End With
+    End Sub
+
+    Private Sub dgvListado_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvListado.CellDoubleClick
+        With New ComposicionProducto(dgvListado.CurrentRow.Cells("Producto").Value)
+            .Show(Me)
+        End With
+    End Sub
+
+    Public Sub NotificarCambios() Implements INotificacionCambios.NotificarCambios
+        btnBuscar_Click(Nothing, Nothing)
     End Sub
 End Class

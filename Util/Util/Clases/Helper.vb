@@ -248,8 +248,10 @@ Namespace Clases
 
             valor = IIf(Trim(valor) = "", "0", Trim(valor))
 
-            valor = valor.Replace(".", ",")
-            valor = valor.Replace(":", ",")
+            If Not (valor.Contains(",") And valor.Contains(".")) Then
+                valor = valor.Replace(".", ",")
+                valor = valor.Replace(":", ",")
+            End If
 
             ' Redondeamos a los decimales indicados con "." como separador de decimales.
             _valor = FormatNumber(CDbl(valor), decimales)

@@ -22,19 +22,13 @@ Partial Class ComposicionProducto
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.label1 = New System.Windows.Forms.Label()
-        Me.dgvComponentes = New Util.DBDataGridView()
-        Me.Tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Terminado = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Articulo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Cantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txtProducto = New System.Windows.Forms.MaskedTextBox()
         Me.lblDescProducto = New System.Windows.Forms.Label()
@@ -47,12 +41,27 @@ Partial Class ComposicionProducto
         Me.Label11 = New System.Windows.Forms.Label()
         Me.lblResponsable = New System.Windows.Forms.Label()
         Me.btnGrabar = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button4 = New System.Windows.Forms.Button()
-        Me.Button5 = New System.Windows.Forms.Button()
-        Me.Button6 = New System.Windows.Forms.Button()
+        Me.btnLimpiar = New System.Windows.Forms.Button()
+        Me.btnCerrar = New System.Windows.Forms.Button()
+        Me.btnConsulta = New System.Windows.Forms.Button()
+        Me.btnRevalida = New System.Windows.Forms.Button()
+        Me.btnBloqueo = New System.Windows.Forms.Button()
+        Me.btnDatosAdicionales = New System.Windows.Forms.Button()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.txtRefLaboratorio = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.txtObservaciones = New System.Windows.Forms.TextBox()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.txtControlCambios = New System.Windows.Forms.TextBox()
+        Me.btnCaratula = New System.Windows.Forms.Button()
+        Me.btnPTConSedronar = New System.Windows.Forms.Button()
+        Me.btnComposicionSedronar = New System.Windows.Forms.Button()
+        Me.dgvComponentes = New Util.DBDataGridView()
+        Me.Tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Terminado = New Util.MyMaskedTextBoxColumn()
+        Me.Articulo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Cantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.panel1.SuspendLayout()
         CType(Me.dgvComponentes, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -92,93 +101,10 @@ Partial Class ComposicionProducto
         Me.label1.TabIndex = 0
         Me.label1.Text = "COMPOSICIÓN DE PRODUCTO"
         '
-        'dgvComponentes
-        '
-        Me.dgvComponentes.AllowUserToAddRows = False
-        Me.dgvComponentes.AllowUserToDeleteRows = False
-        Me.dgvComponentes.AllowUserToResizeColumns = False
-        Me.dgvComponentes.AllowUserToResizeRows = False
-        Me.dgvComponentes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvComponentes.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Tipo, Me.Terminado, Me.Articulo, Me.Descripcion, Me.Cantidad})
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvComponentes.DefaultCellStyle = DataGridViewCellStyle12
-        Me.dgvComponentes.DoubleBuffered = True
-        Me.dgvComponentes.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.dgvComponentes.Location = New System.Drawing.Point(4, 98)
-        Me.dgvComponentes.Name = "dgvComponentes"
-        Me.dgvComponentes.OrdenamientoColumnasHabilitado = False
-        Me.dgvComponentes.RowHeadersWidth = 15
-        Me.dgvComponentes.RowTemplate.Height = 20
-        Me.dgvComponentes.ShowCellToolTips = False
-        Me.dgvComponentes.SinClickDerecho = False
-        Me.dgvComponentes.Size = New System.Drawing.Size(702, 198)
-        Me.dgvComponentes.TabIndex = 41
-        '
-        'Tipo
-        '
-        Me.Tipo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Tipo.DataPropertyName = "Tipo"
-        Me.Tipo.HeaderText = "Tipo"
-        Me.Tipo.Name = "Tipo"
-        Me.Tipo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Tipo.Width = 34
-        '
-        'Terminado
-        '
-        Me.Terminado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Terminado.DataPropertyName = "Terminado"
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Terminado.DefaultCellStyle = DataGridViewCellStyle9
-        Me.Terminado.HeaderText = "Prod. Term."
-        Me.Terminado.Name = "Terminado"
-        Me.Terminado.ReadOnly = True
-        Me.Terminado.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Terminado.Width = 68
-        '
-        'Articulo
-        '
-        Me.Articulo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Articulo.DataPropertyName = "Articulo"
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Articulo.DefaultCellStyle = DataGridViewCellStyle10
-        Me.Articulo.HeaderText = "Mat. Prima"
-        Me.Articulo.Name = "Articulo"
-        Me.Articulo.ReadOnly = True
-        Me.Articulo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Articulo.Width = 63
-        '
-        'Descripcion
-        '
-        Me.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.Descripcion.DataPropertyName = "Descripcion"
-        Me.Descripcion.HeaderText = "Descripcion"
-        Me.Descripcion.Name = "Descripcion"
-        Me.Descripcion.ReadOnly = True
-        Me.Descripcion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'Cantidad
-        '
-        Me.Cantidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Cantidad.DataPropertyName = "Cantidad"
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle11.Format = "N4"
-        DataGridViewCellStyle11.NullValue = "0"
-        Me.Cantidad.DefaultCellStyle = DataGridViewCellStyle11
-        Me.Cantidad.HeaderText = "Cantidad"
-        Me.Cantidad.Name = "Cantidad"
-        Me.Cantidad.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Cantidad.Width = 55
-        '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(15, 48)
+        Me.Label3.Location = New System.Drawing.Point(15, 49)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(68, 13)
         Me.Label3.TabIndex = 42
@@ -186,7 +112,7 @@ Partial Class ComposicionProducto
         '
         'txtProducto
         '
-        Me.txtProducto.Location = New System.Drawing.Point(89, 45)
+        Me.txtProducto.Location = New System.Drawing.Point(89, 46)
         Me.txtProducto.Mask = ">LL-00000-000"
         Me.txtProducto.Name = "txtProducto"
         Me.txtProducto.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -200,7 +126,7 @@ Partial Class ComposicionProducto
         Me.lblDescProducto.BackColor = System.Drawing.Color.Cyan
         Me.lblDescProducto.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblDescProducto.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDescProducto.Location = New System.Drawing.Point(174, 45)
+        Me.lblDescProducto.Location = New System.Drawing.Point(174, 46)
         Me.lblDescProducto.Name = "lblDescProducto"
         Me.lblDescProducto.Padding = New System.Windows.Forms.Padding(5, 0, 0, 0)
         Me.lblDescProducto.Size = New System.Drawing.Size(522, 21)
@@ -305,77 +231,250 @@ Partial Class ComposicionProducto
         Me.btnGrabar.Text = "GRABAR"
         Me.btnGrabar.UseVisualStyleBackColor = True
         '
-        'Button1
+        'btnLimpiar
         '
-        Me.Button1.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.Button1.Location = New System.Drawing.Point(146, 420)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(95, 43)
-        Me.Button1.TabIndex = 44
-        Me.Button1.Text = "LIMPIAR"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnLimpiar.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.btnLimpiar.Location = New System.Drawing.Point(146, 420)
+        Me.btnLimpiar.Name = "btnLimpiar"
+        Me.btnLimpiar.Size = New System.Drawing.Size(95, 43)
+        Me.btnLimpiar.TabIndex = 44
+        Me.btnLimpiar.Text = "LIMPIAR"
+        Me.btnLimpiar.UseVisualStyleBackColor = True
         '
-        'Button2
+        'btnCerrar
         '
-        Me.Button2.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.Button2.Location = New System.Drawing.Point(254, 420)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(95, 43)
-        Me.Button2.TabIndex = 44
-        Me.Button2.Text = "CERRAR"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.btnCerrar.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.btnCerrar.Location = New System.Drawing.Point(254, 420)
+        Me.btnCerrar.Name = "btnCerrar"
+        Me.btnCerrar.Size = New System.Drawing.Size(95, 43)
+        Me.btnCerrar.TabIndex = 44
+        Me.btnCerrar.Text = "CERRAR"
+        Me.btnCerrar.UseVisualStyleBackColor = True
         '
-        'Button3
+        'btnConsulta
         '
-        Me.Button3.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.Button3.Location = New System.Drawing.Point(362, 420)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(95, 43)
-        Me.Button3.TabIndex = 44
-        Me.Button3.Text = "CONSULTA"
-        Me.Button3.UseVisualStyleBackColor = True
+        Me.btnConsulta.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.btnConsulta.Location = New System.Drawing.Point(362, 420)
+        Me.btnConsulta.Name = "btnConsulta"
+        Me.btnConsulta.Size = New System.Drawing.Size(95, 43)
+        Me.btnConsulta.TabIndex = 44
+        Me.btnConsulta.Text = "CONSULTA"
+        Me.btnConsulta.UseVisualStyleBackColor = True
         '
-        'Button4
+        'btnRevalida
         '
-        Me.Button4.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.Button4.Location = New System.Drawing.Point(470, 420)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(95, 43)
-        Me.Button4.TabIndex = 44
-        Me.Button4.Text = "REVALIDA"
-        Me.Button4.UseVisualStyleBackColor = True
+        Me.btnRevalida.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.btnRevalida.Location = New System.Drawing.Point(470, 420)
+        Me.btnRevalida.Name = "btnRevalida"
+        Me.btnRevalida.Size = New System.Drawing.Size(95, 43)
+        Me.btnRevalida.TabIndex = 44
+        Me.btnRevalida.Text = "REVALIDA"
+        Me.btnRevalida.UseVisualStyleBackColor = True
         '
-        'Button5
+        'btnBloqueo
         '
-        Me.Button5.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.Button5.Location = New System.Drawing.Point(578, 420)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(95, 43)
-        Me.Button5.TabIndex = 44
-        Me.Button5.Text = "BLOQUEO"
-        Me.Button5.UseVisualStyleBackColor = True
+        Me.btnBloqueo.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.btnBloqueo.Location = New System.Drawing.Point(578, 420)
+        Me.btnBloqueo.Name = "btnBloqueo"
+        Me.btnBloqueo.Size = New System.Drawing.Size(95, 43)
+        Me.btnBloqueo.TabIndex = 44
+        Me.btnBloqueo.Text = "BLOQUEO"
+        Me.btnBloqueo.UseVisualStyleBackColor = True
         '
-        'Button6
+        'btnDatosAdicionales
         '
-        Me.Button6.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.Button6.Location = New System.Drawing.Point(578, 362)
-        Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(95, 43)
-        Me.Button6.TabIndex = 44
-        Me.Button6.Text = "DATOS ADICIONALES"
-        Me.Button6.UseVisualStyleBackColor = True
+        Me.btnDatosAdicionales.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.btnDatosAdicionales.Location = New System.Drawing.Point(361, 324)
+        Me.btnDatosAdicionales.Name = "btnDatosAdicionales"
+        Me.btnDatosAdicionales.Size = New System.Drawing.Size(95, 37)
+        Me.btnDatosAdicionales.TabIndex = 44
+        Me.btnDatosAdicionales.Text = "DATOS ADICIONALES"
+        Me.btnDatosAdicionales.UseVisualStyleBackColor = True
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(25, 343)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(111, 13)
+        Me.Label4.TabIndex = 42
+        Me.Label4.Text = "REF. LABORATORIO"
+        '
+        'txtRefLaboratorio
+        '
+        Me.txtRefLaboratorio.Location = New System.Drawing.Point(142, 339)
+        Me.txtRefLaboratorio.Name = "txtRefLaboratorio"
+        Me.txtRefLaboratorio.Size = New System.Drawing.Size(129, 20)
+        Me.txtRefLaboratorio.TabIndex = 45
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(38, 368)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(98, 13)
+        Me.Label6.TabIndex = 42
+        Me.Label6.Text = "OBSERVACIONES"
+        '
+        'txtObservaciones
+        '
+        Me.txtObservaciones.Location = New System.Drawing.Point(142, 364)
+        Me.txtObservaciones.Name = "txtObservaciones"
+        Me.txtObservaciones.Size = New System.Drawing.Size(415, 20)
+        Me.txtObservaciones.TabIndex = 45
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(8, 393)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(128, 13)
+        Me.Label8.TabIndex = 42
+        Me.Label8.Text = "CONTROL DE CAMBIOS"
+        '
+        'txtControlCambios
+        '
+        Me.txtControlCambios.Location = New System.Drawing.Point(142, 389)
+        Me.txtControlCambios.Name = "txtControlCambios"
+        Me.txtControlCambios.Size = New System.Drawing.Size(415, 20)
+        Me.txtControlCambios.TabIndex = 45
+        '
+        'btnCaratula
+        '
+        Me.btnCaratula.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.btnCaratula.Location = New System.Drawing.Point(462, 324)
+        Me.btnCaratula.Name = "btnCaratula"
+        Me.btnCaratula.Size = New System.Drawing.Size(95, 37)
+        Me.btnCaratula.TabIndex = 44
+        Me.btnCaratula.Text = "CARÁTULA"
+        Me.btnCaratula.UseVisualStyleBackColor = True
+        '
+        'btnPTConSedronar
+        '
+        Me.btnPTConSedronar.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.btnPTConSedronar.Location = New System.Drawing.Point(563, 324)
+        Me.btnPTConSedronar.Name = "btnPTConSedronar"
+        Me.btnPTConSedronar.Size = New System.Drawing.Size(143, 37)
+        Me.btnPTConSedronar.TabIndex = 44
+        Me.btnPTConSedronar.Text = "PT's CON MP SEDRONAR"
+        Me.btnPTConSedronar.UseVisualStyleBackColor = True
+        '
+        'btnComposicionSedronar
+        '
+        Me.btnComposicionSedronar.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.btnComposicionSedronar.Location = New System.Drawing.Point(563, 367)
+        Me.btnComposicionSedronar.Name = "btnComposicionSedronar"
+        Me.btnComposicionSedronar.Size = New System.Drawing.Size(143, 42)
+        Me.btnComposicionSedronar.TabIndex = 44
+        Me.btnComposicionSedronar.Text = "COMPOSICIÓN % SEDRONAR"
+        Me.btnComposicionSedronar.UseVisualStyleBackColor = True
+        '
+        'dgvComponentes
+        '
+        Me.dgvComponentes.AllowUserToAddRows = False
+        Me.dgvComponentes.AllowUserToDeleteRows = False
+        Me.dgvComponentes.AllowUserToResizeColumns = False
+        Me.dgvComponentes.AllowUserToResizeRows = False
+        Me.dgvComponentes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvComponentes.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Tipo, Me.Terminado, Me.Articulo, Me.Descripcion, Me.Cantidad})
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvComponentes.DefaultCellStyle = DataGridViewCellStyle8
+        Me.dgvComponentes.DoubleBuffered = True
+        Me.dgvComponentes.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
+        Me.dgvComponentes.Location = New System.Drawing.Point(4, 98)
+        Me.dgvComponentes.Name = "dgvComponentes"
+        Me.dgvComponentes.OrdenamientoColumnasHabilitado = False
+        Me.dgvComponentes.RowHeadersWidth = 15
+        Me.dgvComponentes.RowTemplate.Height = 20
+        Me.dgvComponentes.ShowCellToolTips = False
+        Me.dgvComponentes.SinClickDerecho = False
+        Me.dgvComponentes.Size = New System.Drawing.Size(702, 221)
+        Me.dgvComponentes.TabIndex = 41
+        '
+        'Tipo
+        '
+        Me.Tipo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Tipo.DataPropertyName = "Tipo"
+        Me.Tipo.HeaderText = "Tipo"
+        Me.Tipo.MaxInputLength = 1
+        Me.Tipo.Name = "Tipo"
+        Me.Tipo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Tipo.Width = 34
+        '
+        'Terminado
+        '
+        Me.Terminado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Terminado.DataPropertyName = "Terminado"
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Terminado.DefaultCellStyle = DataGridViewCellStyle5
+        Me.Terminado.HeaderText = "Prod. Term."
+        Me.Terminado.IncludeLiterals = True
+        Me.Terminado.IncludePrompt = True
+        Me.Terminado.Mask = ">LL-00000-000"
+        Me.Terminado.Name = "Terminado"
+        Me.Terminado.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.Terminado.ReadOnly = True
+        Me.Terminado.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Terminado.ValidatingType = Nothing
+        Me.Terminado.Width = 68
+        '
+        'Articulo
+        '
+        Me.Articulo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Articulo.DataPropertyName = "Articulo"
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Articulo.DefaultCellStyle = DataGridViewCellStyle6
+        Me.Articulo.HeaderText = "Mat. Prima"
+        Me.Articulo.Name = "Articulo"
+        Me.Articulo.ReadOnly = True
+        Me.Articulo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Articulo.Width = 63
+        '
+        'Descripcion
+        '
+        Me.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Descripcion.DataPropertyName = "Descripcion"
+        Me.Descripcion.HeaderText = "Descripcion"
+        Me.Descripcion.Name = "Descripcion"
+        Me.Descripcion.ReadOnly = True
+        Me.Descripcion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'Cantidad
+        '
+        Me.Cantidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Cantidad.DataPropertyName = "Cantidad"
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle7.Format = "N5"
+        DataGridViewCellStyle7.NullValue = "0"
+        Me.Cantidad.DefaultCellStyle = DataGridViewCellStyle7
+        Me.Cantidad.HeaderText = "Cantidad"
+        Me.Cantidad.Name = "Cantidad"
+        Me.Cantidad.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Cantidad.Width = 55
         '
         'ComposicionProducto
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(710, 471)
-        Me.Controls.Add(Me.Button6)
-        Me.Controls.Add(Me.Button5)
-        Me.Controls.Add(Me.Button3)
-        Me.Controls.Add(Me.Button2)
-        Me.Controls.Add(Me.Button4)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.txtControlCambios)
+        Me.Controls.Add(Me.txtObservaciones)
+        Me.Controls.Add(Me.txtRefLaboratorio)
+        Me.Controls.Add(Me.btnComposicionSedronar)
+        Me.Controls.Add(Me.btnPTConSedronar)
+        Me.Controls.Add(Me.btnCaratula)
+        Me.Controls.Add(Me.btnDatosAdicionales)
+        Me.Controls.Add(Me.btnBloqueo)
+        Me.Controls.Add(Me.btnConsulta)
+        Me.Controls.Add(Me.btnCerrar)
+        Me.Controls.Add(Me.btnRevalida)
+        Me.Controls.Add(Me.btnLimpiar)
         Me.Controls.Add(Me.btnGrabar)
         Me.Controls.Add(Me.txtProducto)
         Me.Controls.Add(Me.lblResponsable)
@@ -386,14 +485,18 @@ Partial Class ComposicionProducto
         Me.Controls.Add(Me.lblVersion)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.lblDescProducto)
+        Me.Controls.Add(Me.Label8)
+        Me.Controls.Add(Me.Label6)
+        Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.dgvComponentes)
         Me.Controls.Add(Me.panel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.Location = New System.Drawing.Point(20, 20)
         Me.MaximizeBox = False
         Me.Name = "ComposicionProducto"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.panel1.ResumeLayout(False)
         Me.panel1.PerformLayout()
         CType(Me.dgvComponentes, System.ComponentModel.ISupportInitialize).EndInit()
@@ -405,11 +508,6 @@ Partial Class ComposicionProducto
     Private WithEvents Label2 As System.Windows.Forms.Label
     Private WithEvents label1 As System.Windows.Forms.Label
     Friend WithEvents dgvComponentes As Util.DBDataGridView
-    Friend WithEvents Tipo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Terminado As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Articulo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Cantidad As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents txtProducto As System.Windows.Forms.MaskedTextBox
     Friend WithEvents lblDescProducto As System.Windows.Forms.Label
@@ -422,10 +520,24 @@ Partial Class ComposicionProducto
     Friend WithEvents Label11 As System.Windows.Forms.Label
     Friend WithEvents lblResponsable As System.Windows.Forms.Label
     Friend WithEvents btnGrabar As System.Windows.Forms.Button
-    Friend WithEvents Button1 As System.Windows.Forms.Button
-    Friend WithEvents Button2 As System.Windows.Forms.Button
-    Friend WithEvents Button3 As System.Windows.Forms.Button
-    Friend WithEvents Button4 As System.Windows.Forms.Button
-    Friend WithEvents Button5 As System.Windows.Forms.Button
-    Friend WithEvents Button6 As System.Windows.Forms.Button
+    Friend WithEvents btnLimpiar As System.Windows.Forms.Button
+    Friend WithEvents btnCerrar As System.Windows.Forms.Button
+    Friend WithEvents btnConsulta As System.Windows.Forms.Button
+    Friend WithEvents btnRevalida As System.Windows.Forms.Button
+    Friend WithEvents btnBloqueo As System.Windows.Forms.Button
+    Friend WithEvents btnDatosAdicionales As System.Windows.Forms.Button
+    Friend WithEvents Label4 As System.Windows.Forms.Label
+    Friend WithEvents txtRefLaboratorio As System.Windows.Forms.TextBox
+    Friend WithEvents Label6 As System.Windows.Forms.Label
+    Friend WithEvents txtObservaciones As System.Windows.Forms.TextBox
+    Friend WithEvents Label8 As System.Windows.Forms.Label
+    Friend WithEvents txtControlCambios As System.Windows.Forms.TextBox
+    Friend WithEvents btnCaratula As System.Windows.Forms.Button
+    Friend WithEvents btnPTConSedronar As System.Windows.Forms.Button
+    Friend WithEvents btnComposicionSedronar As System.Windows.Forms.Button
+    Friend WithEvents Tipo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Terminado As Util.MyMaskedTextBoxColumn
+    Friend WithEvents Articulo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Cantidad As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class
