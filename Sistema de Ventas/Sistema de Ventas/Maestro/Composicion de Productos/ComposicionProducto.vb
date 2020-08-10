@@ -479,13 +479,11 @@ Public Class ComposicionProducto : Implements IComposicionDatosAdicionales, IIng
 
         ' Calcula el contenido porcentual.
         Dim WKilosComposicion As Double = dgvComponentes.Rows.Cast(Of DataGridViewRow).ToList.Sum(Function(r) Val(formatonumerico(r.Cells("Cantidad").Value, 5)))
-        MsgBox(String.Format("Kilos Composicion: {0:N5}", WKilosComposicion))
 
         Dim WKilosTotalSedronar As Double = WArts.Sum(Function(r) r.Cantidad)
-        MsgBox(String.Format("Kilos Sedronar: {0:N5}", WKilosTotalSedronar))
 
         Dim WComposicionPorcentual As Double = (WKilosTotalSedronar / WKilosComposicion) * 100
-        MsgBox(String.Format("Composicion Porcentual: {0:N2} %", WComposicionPorcentual))
+        MsgBox(String.Format("Kilos Composicion: {0:N5}{3}Kilos MP Sedronar: {1:N5}{3}Composicion Porcentual: {2:N2} %", WKilosComposicion, WKilosTotalSedronar, WComposicionPorcentual, vbCrLf))
 
         ' Avisa el resultado.
 
