@@ -655,6 +655,86 @@ Public Class ComposicionProducto : Implements IComposicionDatosAdicionales, IIng
         End If
 
     End Sub
+
+    Private Sub btnGrabar_Click(sender As Object, e As EventArgs) Handles btnGrabar.Click
+
+        Dim WRestriccion As Boolean = dgvComponentes.Rows.Cast(Of DataGridViewRow).ToList.Any(Function(r) _ComponenteRestringido(r))
+
+        If WRestriccion Then
+            If MsgBox("Hay componente que se encuentran restringidos ¿Desea proceder con la grabación?", MsgBoxStyle.YesNoCancel) <> MsgBoxResult.Yes Then Exit Sub
+        End If
+
+        If Not WAutorizado Then
+            WProceso = Proceso.Grabacion
+            With New IngresoClaveSeguridad
+                .ShowDialog(Me)
+            End With
+            Exit Sub
+        End If
+
+        WAutorizado = False
+
+        '
+        ' Grabamos la version actual.
+        '
+        Dim WSqls As New List(Of String)
+
+        Dim s As String
+
+        s = String.Format("INSERT INTO ComposicionVersion (Clave, Terminado, Version, Renglon, Tipo, Articulo1, Articulo2, Cantidad, FechaInicio, FechaFinal, Referencia, Observaciones1, Observaciones2) SELECT c.Terminado + RIGHT(concat('0000', t.Version), 4) + c.Renglon, c.Terminado, t.Version, c.Renglon, c.Tipo, c.Articulo1, c.Articulo2, c.Cantidad, t.FechaVersion, '{1}', c.Referencia, c.Observaciones1, c.Observaciones2 FROM Composicion c INNER JOIN Terminado t ON t.Codigo = c.Terminado WHERE c.Terminado = '{0}'", txtProducto.Text, Date.Now.ToString("dd/MM/yyyy"))
+
+        WSqls.Add(s)
+
+        '
+        ' Grabamos la nueva versión.
+        '
+
+        WSqls.Add("DELETE FROM Composicion WHERE Terminado = '" & txtProducto.Text & "'")
+
+        Dim WRenglon As Short
+
+        For Each row As DataGridViewRow In dgvComponentes.Rows
+
+            With row
+                If Val(OrDefault(.Cells("Cantidad").Value, "")) = 0 Then Continue For
+
+                s = String.Format("INSERT INTO Composicion (Clave, Terminado, Renglon, Articulo1, Articulo2, Cantidad) VALUES ('{0}','{1}','{2}','{3}','{4}','{5}')", txtProducto.Text & ceros(WRenglon, 2), txtProducto.Text, WRenglon, .Cells("Articulo").Value, .Cells("Terminado").Value, formatonumerico(.Cells("Cantidad").Value, 5))
+
+            End With
+
+        Next
+
+        WSqls.Add(String.Format("UPDATE Composicion SET WDate = '{1}', Referencia = '{2}', Observaciones1 = '{3}', Observaciones2 = '{4}', Operador = '{5}' WHERE Terminado = '{0}'", txtProducto.Text, Date.Now.ToString("MM-dd-yyyy"), txtRefLaboratorio.Text, txtObservaciones.Text, txtControlCambios.Text, Operador.Codigo))
+
+        '
+        ' Actualizamos los datos del Terminado.
+        '
+        For Each emp As String In Conexion.Empresas
+            WSqls.Add(String.Format("UPDATE {1}.dbo.Terminado SET Version = Version + 1, Estado = 'S', EstadoI = 'N', EstadoII = 'N', FechaVersion = '{2}', Observa = '' WHERE Codigo = '{0}'", txtProducto.Text, emp, Date.Now.ToString("dd/MM/yyyy")))
+        Next
+
+        Dim Wowner As INotificacionCambios = TryCast(Owner, INotificacionCambios)
+
+        If Wowner IsNot Nothing Then Wowner.NotificarCambios()
+
+        Close()
+
+    End Sub
+
+    Private Function _ComponenteRestringido(row As DataGridViewRow) As Boolean
+
+        If OrDefault(row.Cells("Tipo"), "") = "T" Then
+            Dim Ter As DataRow = GetSingle("SELECT Restringido FROM Terminado WHERE Codigo = '" & row.Cells("Terminado").Value & "'")
+
+            If Ter IsNot Nothing Then Return Val(OrDefault(Ter("Restringido"), "")) = 1
+        Else
+            Dim Art As DataRow = GetSingle("SELECT Restringido FROM Articulo WHERE Codigo = '" & row.Cells("Articulo").Value & "'")
+
+            If Art IsNot Nothing Then Return Val(OrDefault(Art("Restringido"), "")) = 1
+        End If
+
+        Return False
+    End Function
 End Class
 
 Public Class DatosAdicionales
