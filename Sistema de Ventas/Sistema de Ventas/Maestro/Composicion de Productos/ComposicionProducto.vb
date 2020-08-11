@@ -27,6 +27,7 @@ Public Class ComposicionProducto : Implements IComposicionDatosAdicionales, IIng
 
     Private Sub ComposicionProducto_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'btnLimpiar_Click(Nothing, Nothing)
+        CheckForIllegalCrossThreadCalls = False
         txtProducto_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
     End Sub
 
@@ -102,9 +103,11 @@ Public Class ComposicionProducto : Implements IComposicionDatosAdicionales, IIng
 
     Private Sub btnLimpiar_Click(sender As Object, e As EventArgs) Handles btnLimpiar.Click
 
-        For Each c As Control In {txtControlCambios, txtObservaciones, txtProducto, txtRefLaboratorio, lblDescProducto, lblEstado, lblFecha, lblResponsable, lblVersion}
+        For Each c As Control In {txtControlCambios, txtObservaciones, txtProducto, txtRefLaboratorio, lblDescProducto, lblEstado, lblFecha, lblResponsable, lblVersion, gbPb}
             c.Text = ""
         Next
+
+        pnlPb.Visible = False
 
         WAutorizado = False
         WProceso = Nothing
@@ -455,6 +458,27 @@ Public Class ComposicionProducto : Implements IComposicionDatosAdicionales, IIng
             End If
         Next
 
+        Mps.AddRange(_DescomponerPT(Pts))
+
+        ' Suma la cantidad de Kilos de las MPs que sean Sedronar.
+
+        Dim WArts As List(Of Mp) = Mps.FindAll(Function(r) _EsSedronar(r.Codigo))
+
+        ' Calcula el contenido porcentual.
+        Dim WKilosComposicion As Double = dgvComponentes.Rows.Cast(Of DataGridViewRow).ToList.Sum(Function(r) Val(formatonumerico(r.Cells("Cantidad").Value, 5)))
+
+        Dim WKilosTotalSedronar As Double = WArts.Sum(Function(r) r.Cantidad)
+
+        Dim WComposicionPorcentual As Double = (WKilosTotalSedronar / WKilosComposicion) * 100
+
+        MsgBox(String.Format("Kilos Composicion: {0:N5}{3}Kilos MP Sedronar: {1:N5}{3}Composicion Porcentual: {2:N2} %", WKilosComposicion, WKilosTotalSedronar, WComposicionPorcentual, vbCrLf))
+
+    End Sub
+
+    Private Function _DescomponerPT(pts As List(Of Pt)) As IEnumerable(Of Mp)
+
+        Dim Mps As New List(Of Mp)
+
         ' Busca la composicion de los PTs que puede llegar a haber y los separa en PTs y MPs.
         Dim WLimite As Short = Pts.Count
         Dim WComienzo As Short = 0
@@ -473,21 +497,9 @@ Public Class ComposicionProducto : Implements IComposicionDatosAdicionales, IIng
             WComienzo += 1
         End While
 
-        ' Suma la cantidad de Kilos de las MPs que sean Sedronar.
+        Return Mps
 
-        Dim WArts As List(Of Mp) = Mps.FindAll(Function(r) _EsSedronar(r.Codigo))
-
-        ' Calcula el contenido porcentual.
-        Dim WKilosComposicion As Double = dgvComponentes.Rows.Cast(Of DataGridViewRow).ToList.Sum(Function(r) Val(formatonumerico(r.Cells("Cantidad").Value, 5)))
-
-        Dim WKilosTotalSedronar As Double = WArts.Sum(Function(r) r.Cantidad)
-
-        Dim WComposicionPorcentual As Double = (WKilosTotalSedronar / WKilosComposicion) * 100
-        MsgBox(String.Format("Kilos Composicion: {0:N5}{3}Kilos MP Sedronar: {1:N5}{3}Composicion Porcentual: {2:N2} %", WKilosComposicion, WKilosTotalSedronar, WComposicionPorcentual, vbCrLf))
-
-        ' Avisa el resultado.
-
-    End Sub
+    End Function
 
     Private Function _EsSedronar(codigo As String) As Boolean
         Dim Art As DataRow = GetSingle("SELECT Sedronar FROM Articulo WHERE Codigo = '" & codigo & "'")
@@ -517,6 +529,132 @@ Public Class ComposicionProducto : Implements IComposicionDatosAdicionales, IIng
         End Sub
     End Class
 
+    Private Sub btnPTConSedronar_Click(sender As Object, e As EventArgs) Handles btnPTConSedronar.Click
+        'If Not BackgroundWorker1.IsBusy Then BackgroundWorker1.RunWorkerAsync()
+
+        With New VistaPrevia
+            .Reporte = New ReporteListadoTerminadosSedronar
+            .Mostrar()
+        End With
+
+    End Sub
+
+    Private Sub BackgroundWorker1_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorker1.DoWork
+        Dim WPts As DataTable = GetAll("SELECT c.Terminado, Total = sum(c.Cantidad) FROM Composicion c GROUP BY c.Terminado")
+
+        BackgroundWorker1.ReportProgress(1, WPts)
+
+    End Sub
+
+    Private Sub BackgroundWorker1_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles BackgroundWorker1.ProgressChanged
+
+        pb.Value = 0
+        pb.Visible = True
+
+        pnlPb.Visible = True
+        pnlPb.Refresh()
+
+        Dim WPts As DataTable = TryCast(e.UserState, DataTable)
+
+        pb.Maximum = WPts.Rows.Count
+
+        If WPts Is Nothing Then Exit Sub
+
+        Dim _Pts As List(Of Pt) = WPts.Rows.Cast(Of DataRow).ToList.ConvertAll(Function(r) New Pt(r("Terminado"), r("Total")))
+
+        Dim WSqls As New List(Of String)
+
+        For Each p As Pt In _Pts
+
+            Dim Pts As New List(Of Pt)
+            Dim Mps As New List(Of Mp)
+
+            Pts.Add(p)
+
+            ' Busca la composicion de los PTs que puede llegar a haber y los separa en PTs y MPs.
+            Dim WLimite As Short = Pts.Count
+            Dim WComienzo As Short = 0
+
+            While WComienzo < WLimite And WComienzo < 5 '200
+                Dim pt As Pt = Pts(WComienzo)
+                Dim Composicion As DataTable = GetAll("SELECT Tipo, Articulo1 As Articulo, Articulo2 As Terminado, Cantidad FROM Composicion WHERE Terminado = '" & pt.Codigo & "' ORDER BY Renglon")
+                For Each row As DataRow In Composicion.Rows
+                    If OrDefault(row("Tipo"), "") = "T" Then
+                        Pts.Add(New Pt(row("Terminado"), Val(formatonumerico(row("Cantidad"), 5))))
+                        WLimite += 1
+                    ElseIf OrDefault(row("Tipo"), "") = "M" Then
+                        Mps.Add(New Mp(row("Articulo"), Val(formatonumerico(row("Cantidad"), 5))))
+                    End If
+                Next
+                WComienzo += 1
+            End While
+
+            ' Suma la cantidad de Kilos de las MPs que sean Sedronar.
+            Dim WArts As List(Of Mp) = Mps.FindAll(Function(r) _EsSedronar(r.Codigo))
+
+            ' Calcula el contenido porcentual.
+            Dim WKilosComposicion As Double = p.Cantidad
+
+            Dim WKilosTotalSedronar As Double = WArts.Sum(Function(r) r.Cantidad)
+
+            Dim WComposicionPorcentual As Double = (WKilosTotalSedronar / WKilosComposicion) * 100
+
+            WSqls.Add(String.Format("UPDATE Terminado SET PorceSedronar = '{0}' WHERE Codigo = '{1}'", formatonumerico(WComposicionPorcentual), p.Codigo))
+
+            pb.Increment(1)
+
+            gbPb.Text = String.Format("GENERANDO REPORTE - PROCESANDO DATOS {0} de {1}", pb.Value - 1, WPts.Rows.Count)
+            gbPb.Refresh()
+
+        Next
+
+        If WSqls.Count > 0 Then
+
+            ExecuteNonQueries(WSqls.ToArray)
+
+        End If
+
+    End Sub
+
+    Private Sub BackgroundWorker1_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BackgroundWorker1.RunWorkerCompleted
+        pnlPb.Visible = False
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        If BackgroundWorker1.IsBusy Then BackgroundWorker1.CancelAsync()
+
+        pnlPb.Visible = False
+        gbPb.Text = ""
+
+        txtProducto.Focus()
+
+    End Sub
+
+    Private Sub txtRefLaboratorio_KeyDown(sender As Object, e As KeyEventArgs) Handles txtRefLaboratorio.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            'If Trim(txtRefLaboratorio.Text) = "" Then : Exit Sub : End If
+
+            txtObservaciones.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtRefLaboratorio.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtObservaciones_KeyDown(sender As Object, e As KeyEventArgs) Handles txtObservaciones.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            '    If Trim(txtObservaciones.Text) = "" Then : Exit Sub : End If
+
+            txtControlCambios.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtObservaciones.Text = ""
+        End If
+
+    End Sub
 End Class
 
 Public Class DatosAdicionales

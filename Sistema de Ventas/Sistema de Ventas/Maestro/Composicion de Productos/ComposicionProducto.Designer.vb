@@ -22,10 +22,10 @@ Partial Class ComposicionProducto
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.label1 = New System.Windows.Forms.Label()
@@ -57,13 +57,20 @@ Partial Class ComposicionProducto
         Me.btnPTConSedronar = New System.Windows.Forms.Button()
         Me.btnComposicionSedronar = New System.Windows.Forms.Button()
         Me.dgvComponentes = New Util.DBDataGridView()
+        Me.pnlPb = New System.Windows.Forms.Panel()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.gbPb = New System.Windows.Forms.GroupBox()
+        Me.pb = New System.Windows.Forms.ProgressBar()
+        Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.Tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Terminado = New Util.MyMaskedTextBoxColumn()
-        Me.Articulo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Articulo = New Util.MyMaskedTextBoxColumn()
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Cantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.panel1.SuspendLayout()
         CType(Me.dgvComponentes, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.pnlPb.SuspendLayout()
+        Me.gbPb.SuspendLayout()
         Me.SuspendLayout()
         '
         'panel1
@@ -377,14 +384,14 @@ Partial Class ComposicionProducto
         Me.dgvComponentes.AllowUserToResizeRows = False
         Me.dgvComponentes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvComponentes.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Tipo, Me.Terminado, Me.Articulo, Me.Descripcion, Me.Cantidad})
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvComponentes.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvComponentes.DefaultCellStyle = DataGridViewCellStyle4
         Me.dgvComponentes.DoubleBuffered = True
         Me.dgvComponentes.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.dgvComponentes.Location = New System.Drawing.Point(4, 98)
@@ -396,6 +403,46 @@ Partial Class ComposicionProducto
         Me.dgvComponentes.SinClickDerecho = False
         Me.dgvComponentes.Size = New System.Drawing.Size(702, 221)
         Me.dgvComponentes.TabIndex = 41
+        '
+        'pnlPb
+        '
+        Me.pnlPb.Controls.Add(Me.Button1)
+        Me.pnlPb.Controls.Add(Me.gbPb)
+        Me.pnlPb.Location = New System.Drawing.Point(31, 183)
+        Me.pnlPb.Name = "pnlPb"
+        Me.pnlPb.Size = New System.Drawing.Size(649, 104)
+        Me.pnlPb.TabIndex = 46
+        '
+        'Button1
+        '
+        Me.Button1.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.Button1.Location = New System.Drawing.Point(277, 70)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(95, 29)
+        Me.Button1.TabIndex = 45
+        Me.Button1.Text = "CANCELAR"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'gbPb
+        '
+        Me.gbPb.Controls.Add(Me.pb)
+        Me.gbPb.Location = New System.Drawing.Point(8, 8)
+        Me.gbPb.Name = "gbPb"
+        Me.gbPb.Size = New System.Drawing.Size(632, 60)
+        Me.gbPb.TabIndex = 0
+        Me.gbPb.TabStop = False
+        '
+        'pb
+        '
+        Me.pb.Location = New System.Drawing.Point(11, 20)
+        Me.pb.Name = "pb"
+        Me.pb.Size = New System.Drawing.Size(613, 30)
+        Me.pb.TabIndex = 0
+        '
+        'BackgroundWorker1
+        '
+        Me.BackgroundWorker1.WorkerReportsProgress = True
+        Me.BackgroundWorker1.WorkerSupportsCancellation = True
         '
         'Tipo
         '
@@ -411,8 +458,8 @@ Partial Class ComposicionProducto
         '
         Me.Terminado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Terminado.DataPropertyName = "Terminado"
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Terminado.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Terminado.DefaultCellStyle = DataGridViewCellStyle1
         Me.Terminado.HeaderText = "Prod. Term."
         Me.Terminado.IncludeLiterals = True
         Me.Terminado.IncludePrompt = True
@@ -428,12 +475,17 @@ Partial Class ComposicionProducto
         '
         Me.Articulo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Articulo.DataPropertyName = "Articulo"
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Articulo.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Articulo.DefaultCellStyle = DataGridViewCellStyle2
         Me.Articulo.HeaderText = "Mat. Prima"
+        Me.Articulo.IncludeLiterals = True
+        Me.Articulo.IncludePrompt = True
+        Me.Articulo.Mask = ">LL-000-000"
         Me.Articulo.Name = "Articulo"
+        Me.Articulo.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.Articulo.ReadOnly = True
-        Me.Articulo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Articulo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Articulo.ValidatingType = Nothing
         Me.Articulo.Width = 63
         '
         'Descripcion
@@ -449,10 +501,10 @@ Partial Class ComposicionProducto
         '
         Me.Cantidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Cantidad.DataPropertyName = "Cantidad"
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle7.Format = "N5"
-        DataGridViewCellStyle7.NullValue = "0"
-        Me.Cantidad.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle3.Format = "N5"
+        DataGridViewCellStyle3.NullValue = "0"
+        Me.Cantidad.DefaultCellStyle = DataGridViewCellStyle3
         Me.Cantidad.HeaderText = "Cantidad"
         Me.Cantidad.Name = "Cantidad"
         Me.Cantidad.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
@@ -463,6 +515,7 @@ Partial Class ComposicionProducto
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(710, 471)
+        Me.Controls.Add(Me.pnlPb)
         Me.Controls.Add(Me.txtControlCambios)
         Me.Controls.Add(Me.txtObservaciones)
         Me.Controls.Add(Me.txtRefLaboratorio)
@@ -500,6 +553,8 @@ Partial Class ComposicionProducto
         Me.panel1.ResumeLayout(False)
         Me.panel1.PerformLayout()
         CType(Me.dgvComponentes, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.pnlPb.ResumeLayout(False)
+        Me.gbPb.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -535,9 +590,14 @@ Partial Class ComposicionProducto
     Friend WithEvents btnCaratula As System.Windows.Forms.Button
     Friend WithEvents btnPTConSedronar As System.Windows.Forms.Button
     Friend WithEvents btnComposicionSedronar As System.Windows.Forms.Button
+    Friend WithEvents pnlPb As System.Windows.Forms.Panel
+    Friend WithEvents gbPb As System.Windows.Forms.GroupBox
+    Friend WithEvents pb As System.Windows.Forms.ProgressBar
+    Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
+    Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents Tipo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Terminado As Util.MyMaskedTextBoxColumn
-    Friend WithEvents Articulo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Articulo As Util.MyMaskedTextBoxColumn
     Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Cantidad As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

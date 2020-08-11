@@ -581,6 +581,11 @@
       <DependentUpon>ReporteListadoComposicionProductos.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\Composicion de Productos\ReporteListadoTerminadosSedronar.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteListadoTerminadosSedronar.rpt</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\DBAuxi.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1056,6 +1061,10 @@
     <EmbeddedResource Include="Reportes\Composicion de Productos\ReporteListadoComposicionProductos.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteListadoComposicionProductos.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Composicion de Productos\ReporteListadoTerminadosSedronar.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteListadoTerminadosSedronar.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\hojarutacotnuevo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
