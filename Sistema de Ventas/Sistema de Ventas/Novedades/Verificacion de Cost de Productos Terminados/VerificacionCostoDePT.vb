@@ -111,7 +111,7 @@ Public Class VerificacionCostoDePT : Implements IVerificaCostoPT
                 Dim WFechaOrdenI As String = ""
                 Dim WFechaOrdenII As String = ""
                 Dim WFechaOrdenIII As String = ""
-                Dim BaseConsultar As String
+
 
                 SQLCnslt = "SELECT Factor ,OrdenI ,OrdenII ,OrdenIII ,PtaOrdenI ,PtaOrdenII ,PtaOrdenIII FROM Articulo " _
                           & "WHERE Codigo = '" & WMateria & "'"
@@ -339,7 +339,7 @@ Public Class VerificacionCostoDePT : Implements IVerificaCostoPT
         End With
 
         Dim i As Integer = 0
-        Dim Entra As String
+        Dim Entra As String = ""
         'AGREGO EL PRIMER CODIGO DEL PRODUCTO QUE VOY A CALCULAR
         TablaTerminados.Rows.Add(UCase(Producto), 1)
 
@@ -487,7 +487,7 @@ Public Class VerificacionCostoDePT : Implements IVerificaCostoPT
         Dim Costo As Double = 0
         Dim WCostoAux As Double
         Dim WCosto As Double
-        Dim Calculo As Double
+
 
         'CALCULO POR CADA MATERIA PRIMA CUANTO ME CUESTA PARA  HACER LA CANTIDAD DEL PRODUCTO INICIAL
         For Each row As DataRow In TablaMP.Rows
@@ -548,7 +548,7 @@ Public Class VerificacionCostoDePT : Implements IVerificaCostoPT
         End With
 
         Dim i As Integer = 0
-        Dim Entra As String
+        Dim Entra As String = ""
         'AGREGO EL PRIMER CODIGO DEL PRODUCTO QUE VOY A CALCULAR
         TablaTerminados.Rows.Add(UCase(Producto), 1)
 

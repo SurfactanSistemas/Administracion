@@ -1,7 +1,7 @@
 ﻿Imports Util.Clases
 Imports Util.Clases.Query
 
-Public Class ListadoAgendaClientes
+Public Class ListadoAgendaClientes :Implements INotificacionCambios
 
     Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles btnCerrar.Click
         Close()
@@ -59,7 +59,7 @@ Public Class ListadoAgendaClientes
         Dim WDesde As String = Helper.ordenaFecha(txtDesde.Text)
         Dim WHasta As String = Helper.ordenaFecha(txtHasta.Text)
 
-        Dim WFiltroFechas As String = ""
+        Dim WFiltroFechas As String
 
         If Val(WHasta) = 0 Or Val(WDesde) = 0 Then
             WFiltroFechas = ""
@@ -70,7 +70,7 @@ Public Class ListadoAgendaClientes
             WFiltroFechas = " ac.FechaOrd BETWEEN '" & WDesde & "' AND '" & WHasta & "' AND"
         End If
 
-        Dim WDatos As DataTable = GetAll("SELECT ac.ID, ac.Fecha, ac.Cliente, Razon = RTRIM(c.Razon), ac.Horario, Anotaciones = RTRIM(ac.Anotaciones) FROM AgendaClientes ac INNER JOIN Cliente c ON c.Cliente = ac.Cliente WHERE " & WFiltroFechas & " ac.Baja <> '1' ORDER BY ac.FechaOrd, ac.Cliente")
+        Dim WDatos As DataTable = GetAll("SELECT ac.ID, ac.Fecha, ac.Cliente, Razon = RTRIM(c.Razon), ac.Horario, Anotaciones = UPPER(RTRIM(ac.Anotaciones)) FROM AgendaClientes ac INNER JOIN Cliente c ON c.Cliente = ac.Cliente WHERE " & WFiltroFechas & " ac.Baja <> '1' ORDER BY ac.FechaOrd, ac.Cliente")
 
         WDatos.Columns.Add("Sel")
 
@@ -115,6 +115,21 @@ Public Class ListadoAgendaClientes
 
         For Each r As DataRow In tabla.Select("Sel = 1")
             Zsql.Add(String.Format("UPDATE AgendaClientes SET Baja = '1' WHERE ID = '{0}'", r("ID")))
+
+            Dim WCli As DataRow = GetSingle(String.Format("SELECT Fecha, Anotacion, Hora, FechaII, HoraII, AnotacionII FROM Cliente WHERE Cliente = '{0}' And (Fecha = '{1}' Or FechaII = '{1}')", r("Cliente"), r("Fecha")))
+
+            ' Limpiamos también la entrada en el formato viejo.
+            If WCli IsNot Nothing Then
+                Dim WFecha As String = Helper.OrDefault(WCli("Fecha"), "")
+
+                If WFecha = r("Fecha") Then
+                    Zsql.Add(String.Format("UPDATE Cliente Set Fecha = '  /  /    ', Hora = '', Anotacion = '' WHERE Cliente = '{0}'", r("Cliente")))
+                Else
+                    Zsql.Add(String.Format("UPDATE Cliente Set FechaII = '  /  /    ', HoraII = '', AnotacionII = '' WHERE Cliente = '{0}'", r("Cliente")))
+                End If
+
+            End If
+
         Next
 
         If Zsql.Count > 0 Then
@@ -123,9 +138,69 @@ Public Class ListadoAgendaClientes
 
             ExecuteNonQueries(Zsql.ToArray)
 
-            BackgroundWorker1.RunWorkerAsync()
+            If Not BackgroundWorker1.IsBusy Then BackgroundWorker1.RunWorkerAsync()
 
         End If
 
+    End Sub
+
+    Private Sub btnNuevo_Click(sender As Object, e As EventArgs) Handles btnNuevo.Click
+        With New AltaAgenda
+            .ShowDialog(Me)
+        End With
+    End Sub
+
+    Public Sub NotificarCambios() Implements INotificacionCambios.NotificarCambios
+        txtDesde.Text = ""
+        txtHasta.Text = ""
+        If Not BackgroundWorker1.IsBusy Then BackgroundWorker1.RunWorkerAsync()
+    End Sub
+
+    Private Sub dgvAgenda_CellMouseDoubleClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgvAgenda.CellMouseDoubleClick
+        If e.RowIndex < 0 Or e.ColumnIndex < 0 Then Exit Sub
+
+        Dim Cli, Fec As String
+
+        Cli = Helper.OrDefault(dgvAgenda.CurrentRow.Cells("Cliente").Value, "")
+        Fec = Helper.OrDefault(dgvAgenda.CurrentRow.Cells("Fecha").Value, "")
+
+        With New AltaAgenda(Cli, Fec)
+            .ShowDialog(Me)
+        End With
+
+    End Sub
+
+    Private Sub btnImprimir_Click(sender As Object, e As EventArgs) Handles btnImprimir.Click
+
+        Dim datos As DataTable = GetAll("SELECT ac.Fecha, ac.Cliente, c.Razon, c.Telefono, ac.Horario, Anotaciones = UPPER(ac.Anotaciones) FROM AgendaClientes ac INNER JOIN Cliente c ON c.Cliente = ac.Cliente WHERE Baja <> '1' And FechaOrd BETWEEN '" & Helper.ordenaFecha(txtDesde.Text) & "' And '" & Helper.ordenaFecha(txtHasta.Text) & "' ORDER BY ac.FechaOrd, ac.Cliente")
+
+        If datos Is Nothing Then Exit Sub
+
+        Dim tabla As DataTable = New DBAuxi.AgendaClientesDataTable
+
+        For Each r As datarow In datos.Rows
+            Dim t As DataRow = tabla.NewRow
+
+            t("Cliente") = r("Cliente")
+            t("Razon") = UCase(r("Razon"))
+            t("Anotaciones") = r("Anotaciones")
+            t("Horario") = r("Horario")
+            t("Telefono") = r("Telefono")
+            t("Fecha") = r("Fecha")
+            t("FechaOrd") = Helper.ordenaFecha(r("Fecha"))
+
+            tabla.Rows.Add(t)
+        Next
+
+        Dim rpt As New ReporteAgendaClientes
+
+        rpt.SetDataSource(tabla)
+
+        rpt.SetParameterValue("ImpreRangoFechas", String.Format("Entre Fechas {0} - {1}", txtDesde.Text, txtHasta))
+
+        With New Util.VistaPrevia
+            .Reporte = rpt
+            .Mostrar()
+        End With
     End Sub
 End Class

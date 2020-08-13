@@ -461,8 +461,8 @@ Public Class IngresoGastosDeImportacionParcial : Implements IGastosImpoParcial, 
         txt_Empresa.Text = ""
         txt_Fecha.Text = Date.Today.ToString("dd/MM/yyyy")
 
-        Dim Wcodigo1 As String
-        Dim Wcodigo2 As String
+        Dim Wcodigo1 As String = ""
+        Dim Wcodigo2 As String = ""
 
         Dim SQLCnslt As String = "Select CodigoMayor = Max(Codigo) FROM MovGasParcial"
         Dim row As DataRow = GetSingle(SQLCnslt, Operador.Base)
