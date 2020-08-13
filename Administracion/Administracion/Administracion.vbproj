@@ -825,6 +825,12 @@
       <DependentUpon>ReporteImputa2netExportacionExcel.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\wccprvfecNet.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>wccprvfecNet.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\wccprvnet.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -992,6 +998,12 @@
     </Compile>
     <Compile Include="Reportes\VistaPrevia.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reportes\wsaldoprvnet.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>wsaldoprvnet.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="ReportViewer.Designer.vb">
       <DependentUpon>ReportViewer.vb</DependentUpon>
@@ -1367,6 +1379,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteImputa2netExportacionExcel.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\wccprvfecNet.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>wccprvfecNet.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\wccprvnet.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>wccprvnet.vb</LastGenOutput>
@@ -1441,6 +1457,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\VistaPrevia.resx">
       <DependentUpon>VistaPrevia.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\wsaldoprvnet.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>wsaldoprvnet.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportViewer.resx">
       <DependentUpon>ReportViewer.vb</DependentUpon>

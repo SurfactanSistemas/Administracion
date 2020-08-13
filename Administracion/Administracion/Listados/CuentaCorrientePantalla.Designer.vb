@@ -87,6 +87,7 @@ Partial Class CuentaCorrientePantalla
         Me.CustomLabel1 = New Administracion.CustomLabel()
         Me.lblClienteAsociado = New Administracion.CustomLabel()
         Me.lblSaldoCuentaProveedor = New Administracion.CustomLabel()
+        Me.lblAceptaTransferencia = New Administracion.CustomLabel()
         Me.lblAceptaCheque = New Administracion.CustomLabel()
         Me.CustomLabel3 = New Administracion.CustomLabel()
         Me.txtProveedor = New Administracion.CustomTextBox()
@@ -117,7 +118,7 @@ Partial Class CuentaCorrientePantalla
         Me.GRilla.DefaultCellStyle = DataGridViewCellStyle11
         Me.GRilla.DoubleBuffered = True
         Me.GRilla.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.GRilla.Location = New System.Drawing.Point(46, 144)
+        Me.GRilla.Location = New System.Drawing.Point(46, 149)
         Me.GRilla.Name = "GRilla"
         Me.GRilla.OrdenamientoColumnasHabilitado = True
         Me.GRilla.RowHeadersWidth = 15
@@ -272,7 +273,7 @@ Partial Class CuentaCorrientePantalla
         Me.opcCompleto.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.opcCompleto.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.opcCompleto.ForeColor = System.Drawing.SystemColors.Control
-        Me.opcCompleto.Location = New System.Drawing.Point(383, 37)
+        Me.opcCompleto.Location = New System.Drawing.Point(383, 29)
         Me.opcCompleto.Name = "opcCompleto"
         Me.opcCompleto.Size = New System.Drawing.Size(87, 22)
         Me.opcCompleto.TabIndex = 24
@@ -286,7 +287,7 @@ Partial Class CuentaCorrientePantalla
         Me.opcPendiente.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
         Me.opcPendiente.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.opcPendiente.ForeColor = System.Drawing.SystemColors.Control
-        Me.opcPendiente.Location = New System.Drawing.Point(278, 37)
+        Me.opcPendiente.Location = New System.Drawing.Point(278, 29)
         Me.opcPendiente.Name = "opcPendiente"
         Me.opcPendiente.Size = New System.Drawing.Size(91, 22)
         Me.opcPendiente.TabIndex = 23
@@ -339,9 +340,10 @@ Partial Class CuentaCorrientePantalla
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(32, Byte), Integer), CType(CType(74, Byte), Integer), CType(CType(95, Byte), Integer))
         Me.Panel1.Controls.Add(Me.Label2)
         Me.Panel1.Controls.Add(Me.Label1)
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(779, 50)
+        Me.Panel1.Size = New System.Drawing.Size(753, 39)
         Me.Panel1.TabIndex = 29
         '
         'Label2
@@ -349,7 +351,7 @@ Partial Class CuentaCorrientePantalla
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Calibri", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label2.Location = New System.Drawing.Point(605, 10)
+        Me.Label2.Location = New System.Drawing.Point(587, 6)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(156, 26)
         Me.Label2.TabIndex = 1
@@ -360,7 +362,7 @@ Partial Class CuentaCorrientePantalla
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Calibri", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label1.Location = New System.Drawing.Point(27, 15)
+        Me.Label1.Location = New System.Drawing.Point(9, 11)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(221, 18)
         Me.Label1.TabIndex = 0
@@ -376,6 +378,7 @@ Partial Class CuentaCorrientePantalla
         Me.Panel2.Controls.Add(Me.Label8)
         Me.Panel2.Controls.Add(Me.gbSaldoCtaCliente)
         Me.Panel2.Controls.Add(Me.CBProveedorSelectivo)
+        Me.Panel2.Controls.Add(Me.lblAceptaTransferencia)
         Me.Panel2.Controls.Add(Me.lblAceptaCheque)
         Me.Panel2.Controls.Add(Me.CustomLabel3)
         Me.Panel2.Controls.Add(Me.txtProveedor)
@@ -384,16 +387,16 @@ Partial Class CuentaCorrientePantalla
         Me.Panel2.Controls.Add(Me.opcCompleto)
         Me.Panel2.Controls.Add(Me.txtSaldo)
         Me.Panel2.Controls.Add(Me.opcPendiente)
-        Me.Panel2.Location = New System.Drawing.Point(0, 50)
+        Me.Panel2.Location = New System.Drawing.Point(0, 38)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(754, 88)
+        Me.Panel2.Size = New System.Drawing.Size(754, 107)
         Me.Panel2.TabIndex = 30
         '
         'Label11
         '
         Me.Label11.AutoSize = True
         Me.Label11.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label11.Location = New System.Drawing.Point(253, 68)
+        Me.Label11.Location = New System.Drawing.Point(490, 84)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(164, 13)
         Me.Label11.TabIndex = 26
@@ -404,7 +407,7 @@ Partial Class CuentaCorrientePantalla
         '
         Me.Label12.AutoSize = True
         Me.Label12.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label12.Location = New System.Drawing.Point(186, 68)
+        Me.Label12.Location = New System.Drawing.Point(423, 84)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(27, 13)
         Me.Label12.TabIndex = 26
@@ -415,7 +418,7 @@ Partial Class CuentaCorrientePantalla
         '
         Me.Label10.AutoSize = True
         Me.Label10.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label10.Location = New System.Drawing.Point(456, 68)
+        Me.Label10.Location = New System.Drawing.Point(693, 84)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(54, 13)
         Me.Label10.TabIndex = 26
@@ -427,7 +430,7 @@ Partial Class CuentaCorrientePantalla
         Me.Label9.BackColor = System.Drawing.Color.GreenYellow
         Me.Label9.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Label9.ForeColor = System.Drawing.Color.GreenYellow
-        Me.Label9.Location = New System.Drawing.Point(219, 66)
+        Me.Label9.Location = New System.Drawing.Point(456, 82)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(28, 17)
         Me.Label9.TabIndex = 25
@@ -439,7 +442,7 @@ Partial Class CuentaCorrientePantalla
         Me.Label8.BackColor = System.Drawing.Color.LightBlue
         Me.Label8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Label8.ForeColor = System.Drawing.Color.LightBlue
-        Me.Label8.Location = New System.Drawing.Point(422, 66)
+        Me.Label8.Location = New System.Drawing.Point(659, 82)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(28, 17)
         Me.Label8.TabIndex = 25
@@ -466,7 +469,7 @@ Partial Class CuentaCorrientePantalla
         Me.CBProveedorSelectivo.AutoSize = True
         Me.CBProveedorSelectivo.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CBProveedorSelectivo.ForeColor = System.Drawing.SystemColors.Control
-        Me.CBProveedorSelectivo.Location = New System.Drawing.Point(517, 9)
+        Me.CBProveedorSelectivo.Location = New System.Drawing.Point(517, 5)
         Me.CBProveedorSelectivo.Name = "CBProveedorSelectivo"
         Me.CBProveedorSelectivo.Size = New System.Drawing.Size(217, 22)
         Me.CBProveedorSelectivo.TabIndex = 0
@@ -709,6 +712,21 @@ Partial Class CuentaCorrientePantalla
         Me.lblSaldoCuentaProveedor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.ToolTip1.SetToolTip(Me.lblSaldoCuentaProveedor, "Cliente Asociado (Doble Click para abrir Facturas)")
         '
+        'lblAceptaTransferencia
+        '
+        Me.lblAceptaTransferencia.BackColor = System.Drawing.SystemColors.Highlight
+        Me.lblAceptaTransferencia.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.lblAceptaTransferencia.ControlAssociationKey = -1
+        Me.lblAceptaTransferencia.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.lblAceptaTransferencia.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblAceptaTransferencia.Location = New System.Drawing.Point(235, 62)
+        Me.lblAceptaTransferencia.Name = "lblAceptaTransferencia"
+        Me.lblAceptaTransferencia.Size = New System.Drawing.Size(135, 24)
+        Me.lblAceptaTransferencia.TabIndex = 3
+        Me.lblAceptaTransferencia.Text = "ACEPTA TRANSF."
+        Me.lblAceptaTransferencia.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblAceptaTransferencia.Visible = False
+        '
         'lblAceptaCheque
         '
         Me.lblAceptaCheque.BackColor = System.Drawing.SystemColors.ActiveCaption
@@ -716,9 +734,9 @@ Partial Class CuentaCorrientePantalla
         Me.lblAceptaCheque.ControlAssociationKey = -1
         Me.lblAceptaCheque.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
         Me.lblAceptaCheque.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblAceptaCheque.Location = New System.Drawing.Point(21, 61)
+        Me.lblAceptaCheque.Location = New System.Drawing.Point(94, 62)
         Me.lblAceptaCheque.Name = "lblAceptaCheque"
-        Me.lblAceptaCheque.Size = New System.Drawing.Size(159, 24)
+        Me.lblAceptaCheque.Size = New System.Drawing.Size(135, 24)
         Me.lblAceptaCheque.TabIndex = 3
         Me.lblAceptaCheque.Text = "ACEPTA E-CHEQ"
         Me.lblAceptaCheque.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -731,7 +749,7 @@ Partial Class CuentaCorrientePantalla
         Me.CustomLabel3.ControlAssociationKey = -1
         Me.CustomLabel3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel3.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel3.Location = New System.Drawing.Point(21, 13)
+        Me.CustomLabel3.Location = New System.Drawing.Point(21, 7)
         Me.CustomLabel3.Name = "CustomLabel3"
         Me.CustomLabel3.Size = New System.Drawing.Size(73, 18)
         Me.CustomLabel3.TabIndex = 3
@@ -745,7 +763,7 @@ Partial Class CuentaCorrientePantalla
         Me.txtProveedor.EnterIndex = -1
         Me.txtProveedor.ForeColor = System.Drawing.SystemColors.WindowText
         Me.txtProveedor.LabelAssociationKey = -1
-        Me.txtProveedor.Location = New System.Drawing.Point(94, 10)
+        Me.txtProveedor.Location = New System.Drawing.Point(94, 6)
         Me.txtProveedor.MaxLength = 11
         Me.txtProveedor.Name = "txtProveedor"
         Me.txtProveedor.Size = New System.Drawing.Size(108, 20)
@@ -762,7 +780,7 @@ Partial Class CuentaCorrientePantalla
         Me.txtRazon.EnterIndex = -1
         Me.txtRazon.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtRazon.LabelAssociationKey = -1
-        Me.txtRazon.Location = New System.Drawing.Point(208, 10)
+        Me.txtRazon.Location = New System.Drawing.Point(208, 6)
         Me.txtRazon.Name = "txtRazon"
         Me.txtRazon.ReadOnly = True
         Me.txtRazon.Size = New System.Drawing.Size(298, 20)
@@ -776,7 +794,7 @@ Partial Class CuentaCorrientePantalla
         Me.CustomLabel2.ControlAssociationKey = -1
         Me.CustomLabel2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel2.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel2.Location = New System.Drawing.Point(21, 37)
+        Me.CustomLabel2.Location = New System.Drawing.Point(21, 29)
         Me.CustomLabel2.Name = "CustomLabel2"
         Me.CustomLabel2.Size = New System.Drawing.Size(42, 18)
         Me.CustomLabel2.TabIndex = 8
@@ -788,7 +806,7 @@ Partial Class CuentaCorrientePantalla
         Me.txtSaldo.Empty = True
         Me.txtSaldo.EnterIndex = -1
         Me.txtSaldo.LabelAssociationKey = -1
-        Me.txtSaldo.Location = New System.Drawing.Point(94, 34)
+        Me.txtSaldo.Location = New System.Drawing.Point(94, 28)
         Me.txtSaldo.Name = "txtSaldo"
         Me.txtSaldo.ReadOnly = True
         Me.txtSaldo.Size = New System.Drawing.Size(108, 20)
@@ -887,4 +905,5 @@ Partial Class CuentaCorrientePantalla
     Friend WithEvents Label10 As System.Windows.Forms.Label
     Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents lblAceptaCheque As Administracion.CustomLabel
+    Friend WithEvents lblAceptaTransferencia As Administracion.CustomLabel
 End Class

@@ -144,6 +144,7 @@
               <xs:element name="FormaPago" msprop:Generator_ColumnVarNameInTable="columnFormaPago" msprop:Generator_ColumnPropNameInRow="FormaPago" msprop:Generator_ColumnPropNameInTable="FormaPagoColumn" msprop:Generator_UserColumnName="FormaPago" type="xs:string" minOccurs="0" />
               <xs:element name="NombreCheque" msprop:Generator_ColumnVarNameInTable="columnNombreCheque" msprop:Generator_ColumnPropNameInRow="NombreCheque" msprop:Generator_ColumnPropNameInTable="NombreChequeColumn" msprop:Generator_UserColumnName="NombreCheque" type="xs:string" minOccurs="0" />
               <xs:element name="AceptaECheque" msprop:Generator_ColumnVarNameInTable="columnAceptaECheque" msprop:Generator_ColumnPropNameInRow="AceptaECheque" msprop:Generator_ColumnPropNameInTable="AceptaEChequeColumn" msprop:Generator_UserColumnName="AceptaECheque" type="xs:boolean" minOccurs="0" />
+              <xs:element name="AceptaTransf" msprop:Generator_ColumnVarNameInTable="columnAceptaTransf" msprop:Generator_ColumnPropNameInRow="AceptaTransf" msprop:Generator_ColumnPropNameInTable="AceptaTransfColumn" msprop:Generator_UserColumnName="AceptaTransf" type="xs:boolean" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

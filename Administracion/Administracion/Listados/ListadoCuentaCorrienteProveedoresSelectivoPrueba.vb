@@ -503,7 +503,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
 
             If Trim(varProveedor) <> "" Then
 
-                Dim datosProveedor As DataRow = GetSingle("SELECT Proveedor, Nombre, NombreCheque, ImpreCuitCliente, FormaPago, AceptaCheques FROM Proveedor WHERE Proveedor = '" & varProveedor & "'", IIf(_EsPellital, "Pellital_III", "SurfactanSa"))
+                Dim datosProveedor As DataRow = GetSingle("SELECT Proveedor, Nombre, NombreCheque, ImpreCuitCliente, FormaPago, AceptaCheques, AceptaTransferencias FROM Proveedor WHERE Proveedor = '" & varProveedor & "'", IIf(_EsPellital, "Pellital_III", "SurfactanSa"))
 
                 varAcumulado = 0
                 varAcumulaIva = 0
@@ -871,6 +871,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
                                 .Item("ImpreCuitCliente") = OrDefault(datosProveedor("ImpreCuitCliente"), "")
                                 .Item("FormaPago") = OrDefault(datosProveedor("FormaPago"), "")
                                 .Item("AceptaECheque") = Val(OrDefault(datosProveedor("AceptaCheques"), "")) = 1
+                                .Item("AceptaTransf") = Val(OrDefault(datosProveedor("AceptaTransferencias"), "")) = 1
                             End With
 
                             WTabla.Rows.Add(r2)
