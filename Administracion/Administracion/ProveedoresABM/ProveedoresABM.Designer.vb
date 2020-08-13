@@ -139,6 +139,7 @@ Partial Class ProveedoresABM
         Me.txtCAIVto = New System.Windows.Forms.MaskedTextBox()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.txtCAI = New Administracion.CustomTextBox()
+        Me.ckAceptaTransferencias = New System.Windows.Forms.CheckBox()
         Me.GroupBox1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -319,6 +320,7 @@ Partial Class ProveedoresABM
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.ckAceptaTransferencias)
         Me.Panel2.Controls.Add(Me.ckAceptaCheques)
         Me.Panel2.Controls.Add(Me.btnEvaluacion)
         Me.Panel2.Controls.Add(Me.GrupoConsultas)
@@ -395,11 +397,12 @@ Partial Class ProveedoresABM
         'ckAceptaCheques
         '
         Me.ckAceptaCheques.AutoSize = True
-        Me.ckAceptaCheques.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ckAceptaCheques.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.ckAceptaCheques.Font = New System.Drawing.Font("Arial", 7.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ckAceptaCheques.ForeColor = System.Drawing.SystemColors.Control
-        Me.ckAceptaCheques.Location = New System.Drawing.Point(124, 98)
+        Me.ckAceptaCheques.Location = New System.Drawing.Point(38, 98)
         Me.ckAceptaCheques.Name = "ckAceptaCheques"
-        Me.ckAceptaCheques.Size = New System.Drawing.Size(124, 17)
+        Me.ckAceptaCheques.Size = New System.Drawing.Size(105, 16)
         Me.ckAceptaCheques.TabIndex = 114
         Me.ckAceptaCheques.Text = "ACEPTA E-CHEQ"
         Me.ckAceptaCheques.UseVisualStyleBackColor = True
@@ -1172,10 +1175,10 @@ Partial Class ProveedoresABM
         Me.txtMailOp.Empty = True
         Me.txtMailOp.EnterIndex = 10
         Me.txtMailOp.LabelAssociationKey = 10
-        Me.txtMailOp.Location = New System.Drawing.Point(331, 96)
+        Me.txtMailOp.Location = New System.Drawing.Point(380, 96)
         Me.txtMailOp.MaxLength = 250
         Me.txtMailOp.Name = "txtMailOp"
-        Me.txtMailOp.Size = New System.Drawing.Size(420, 20)
+        Me.txtMailOp.Size = New System.Drawing.Size(371, 20)
         Me.txtMailOp.TabIndex = 27
         Me.txtMailOp.Validator = Administracion.ValidatorType.None
         '
@@ -1186,7 +1189,7 @@ Partial Class ProveedoresABM
         Me.CustomLabel35.ControlAssociationKey = 10
         Me.CustomLabel35.Font = New System.Drawing.Font("Arial", 8.0!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel35.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel35.Location = New System.Drawing.Point(272, 99)
+        Me.CustomLabel35.Location = New System.Drawing.Point(315, 99)
         Me.CustomLabel35.Name = "CustomLabel35"
         Me.CustomLabel35.Size = New System.Drawing.Size(60, 14)
         Me.CustomLabel35.TabIndex = 8
@@ -1792,6 +1795,19 @@ Partial Class ProveedoresABM
         Me.txtCAI.Validator = Administracion.ValidatorType.None
         Me.txtCAI.Visible = False
         '
+        'ckAceptaTransferencias
+        '
+        Me.ckAceptaTransferencias.AutoSize = True
+        Me.ckAceptaTransferencias.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.ckAceptaTransferencias.Font = New System.Drawing.Font("Arial", 7.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ckAceptaTransferencias.ForeColor = System.Drawing.SystemColors.Control
+        Me.ckAceptaTransferencias.Location = New System.Drawing.Point(148, 98)
+        Me.ckAceptaTransferencias.Name = "ckAceptaTransferencias"
+        Me.ckAceptaTransferencias.Size = New System.Drawing.Size(157, 16)
+        Me.ckAceptaTransferencias.TabIndex = 115
+        Me.ckAceptaTransferencias.Text = "ACEPTA TRANSFERENCIAS"
+        Me.ckAceptaTransferencias.UseVisualStyleBackColor = True
+        '
         'ProveedoresABM
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1946,4 +1962,5 @@ Partial Class ProveedoresABM
     Friend WithEvents CustomLabel36 As Administracion.CustomLabel
     Friend WithEvents cmbFormaPago As Administracion.CustomComboBox
     Friend WithEvents ckAceptaCheques As System.Windows.Forms.CheckBox
+    Friend WithEvents ckAceptaTransferencias As System.Windows.Forms.CheckBox
 End Class

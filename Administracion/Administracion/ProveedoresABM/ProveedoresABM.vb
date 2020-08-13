@@ -91,6 +91,7 @@ Public Class ProveedoresABM
         txtMailOp.Text = ""
 
         ckAceptaCheques.Checked = False
+        ckAceptaTransferencias.Checked = False
 
         CKBProveedorInactivo.Checked = False
 
@@ -263,9 +264,10 @@ Public Class ProveedoresABM
         Next
 
         Dim WAceptaCheques As Short = IIf(ckAceptaCheques.Checked, 1, 0)
+        Dim WAceptaTransferencias As Short = IIf(ckAceptaTransferencias.Checked, 1, 0)
 
         For Each empresa As String In Proceso.Empresas
-            ExecuteNonQueries(empresa, {"UPDATE Proveedor SET FormaPago = '" & cmbFormaPago.SelectedIndex & "', AceptaCheques = '" & WAceptaCheques & "' WHERE Proveedor = '" & txtCodigo.Text & "'"})
+            ExecuteNonQueries(empresa, {"UPDATE Proveedor SET FormaPago = '" & cmbFormaPago.SelectedIndex & "', AceptaCheques = '" & WAceptaCheques & "', AceptaTransferencias = '" & WAceptaTransferencias & "' WHERE Proveedor = '" & txtCodigo.Text & "'"})
         Next
 
         If (_ProveedorExistente(txtCodigo.Text)) Then
@@ -441,9 +443,10 @@ Public Class ProveedoresABM
             End If
 
             Dim WAceptaCheques As Short = IIf(ckAceptaCheques.Checked, 1, 0)
+            Dim WAceptaTransferencias As Short = IIf(ckAceptaTransferencias.Checked, 1, 0)
 
             For Each empresa As String In Proceso.Empresas
-                ExecuteNonQueries(empresa, {"UPDATE Proveedor SET FormaPago = '" & cmbFormaPago.SelectedIndex & "', AceptaCheques = '" & WAceptaCheques & "' WHERE Proveedor = '" & txtCodigo.Text & "'"})
+                ExecuteNonQueries(empresa, {"UPDATE Proveedor SET FormaPago = '" & cmbFormaPago.SelectedIndex & "', AceptaCheques = '" & WAceptaCheques & "', AceptaTransferencias = '" & WAceptaTransferencias & "' WHERE Proveedor = '" & txtCodigo.Text & "'"})
             Next
 
             MsgBox("Proveedor guardado correctamente.", MsgBoxStyle.Information)
@@ -624,7 +627,7 @@ Public Class ProveedoresABM
             cmbEstado.ForeColor = Color.White
         End If
 
-        Dim WProv As DataRow = GetSingle("SELECT FormaPago, AceptaCheques FROM Proveedor WHERE Proveedor = '" & proveedor.id & "'")
+        Dim WProv As DataRow = GetSingle("SELECT FormaPago, AceptaCheques, AceptaTransferencias FROM Proveedor WHERE Proveedor = '" & proveedor.id & "'")
 
         cmbFormaPago.SelectedIndex = 0
         ckAceptaCheques.Checked = False
@@ -632,6 +635,7 @@ Public Class ProveedoresABM
         If WProv IsNot Nothing Then
             cmbFormaPago.SelectedIndex = Val(OrDefault(WProv.Item("FormaPago"), "0"))
             ckAceptaCheques.Checked = Val(OrDefault(WProv("AceptaCheques"), "")) = 1
+            ckAceptaTransferencias.Checked = Val(OrDefault(WProv("AceptaTransferencias"), "")) = 1
         End If
 
     End Sub

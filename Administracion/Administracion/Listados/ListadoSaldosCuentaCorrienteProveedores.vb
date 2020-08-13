@@ -59,15 +59,20 @@ Public Class ListadoSaldosCuentaCorrienteProveedores
         txtDos = " and {CtaCtePrv.Saldo} <> 0 And {CtaCtePrv.MarcaVirtual} <> 'X'"
         txtFormula = txtUno + txtDos
 
-        Dim viewer As New ReportViewer("saldos de ctacte", Globals.reportPathWithName("wsaldoprvnet.rpt"), txtFormula)
+        'Dim viewer As New ReportViewer("saldos de ctacte", Globals.reportPathWithName("wsaldoprvnet.rpt"), txtFormula)
+
+        With New VistaPrevia
+            .Reporte = New wsaldoprvnet
+            .Formula = txtFormula
+            Select Case TipoImpresion
+                Case Reporte.Imprimir
+                    .Imprimir()
+                Case Reporte.Pantalla
+                    .Mostrar()
+            End Select
+        End With
 
 
-        Select Case TipoImpresion
-            Case Reporte.Imprimir
-                viewer.imprimirReporte()
-            Case Reporte.Pantalla
-                viewer.Show()
-        End Select
 
     End Sub
 
