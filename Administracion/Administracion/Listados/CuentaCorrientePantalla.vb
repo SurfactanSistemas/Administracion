@@ -535,7 +535,9 @@ Public Class CuentaCorrientePantalla : Implements IAyudaGeneral
 
             Try
 
-                Dim WProveedor As DataRow = GetSingle("SELECT Nombre, Proveedor, ClienteAsociado FROM Proveedor WHERE Proveedor = '" & txtProveedor.Text & "'") '_TraerDatosProveedor(txtProveedor.Text)
+                Dim WProveedor As DataRow = GetSingle("SELECT Nombre, Proveedor, ClienteAsociado, AceptaCheques FROM Proveedor WHERE Proveedor = '" & txtProveedor.Text & "'") '_TraerDatosProveedor(txtProveedor.Text)
+
+                If WProveedor IsNot Nothing Then lblAceptaCheque.Visible = Val(OrDefault(WProveedor("AceptaCheques"), "")) = 1
 
                 mostrarProveedor(WProveedor)
 
