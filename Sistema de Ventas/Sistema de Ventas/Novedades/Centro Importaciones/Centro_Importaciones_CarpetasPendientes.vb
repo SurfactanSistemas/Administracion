@@ -106,4 +106,158 @@ Public Class Centro_Importaciones_CarpetasPendientes
 
 
     End Sub
+
+    Private Sub btn_CerrarP_Click(sender As Object, e As EventArgs) Handles btn_CerrarP.Click
+        Close()
+    End Sub
+
+    Private Sub btn_Impresion_Click(sender As Object, e As EventArgs) Handles btn_Impresion.Click
+
+
+
+
+        Dim SQLCnlst As String = "DELETE ControlImpoImpre"
+
+        ExecuteNonQueries({SQLCnlst}, Operador.Base)
+
+        Dim ListaSQLCnslt As New List(Of String)
+
+        For Each DGVRow As DataGridViewRow In DGV_Pendientes.Rows
+
+            Dim WOrden As String = DGVRow.Cells("orden").Value
+            Dim WCarpeta As String = DGVRow.Cells("Carpeta").Value
+            Dim WProveedor As String = DGVRow.Cells("NombreProveedor").Value
+            Dim WFecha As String = DGVRow.Cells("FechaInforme").Value
+
+            Dim WEmpresa As String
+            Select Case UCase(DGVRow.Cells("Empresa").Value)
+                Case "SURFACTANSA"
+                    WEmpresa = "I"
+                Case "SURFACTAN_II"
+                    WEmpresa = "II"
+                Case "SURFACTAN_III"
+                    WEmpresa = "III"
+                Case "SURFACTAN_V"
+                    WEmpresa = "V"
+                Case "SURFACTAN_VI"
+                    WEmpresa = "VI"
+                Case "SURFACTAN_VII"
+                    WEmpresa = "VII"
+
+            End Select
+
+
+            Dim ZOrden As String = WOrden
+            Dim ZPta As String = WEmpresa
+            Dim ZFecha As String = WFecha
+            Dim ZProveedor As String = WProveedor
+            Dim ZMoneda As String = ""
+            Dim ZCarpeta As String = WCarpeta
+            Dim ZDJai As String = ""
+            Dim ZOrigen As String = ""
+            Dim ZIncoterms As String = ""
+            Dim ZTransporte As String = ""
+            Dim ZFLLegada As String = ""
+            Dim ZTPago As String = ""
+            Dim ZDespacho As String = ""
+            Dim ZPagoDespacho As String = ""
+            Dim ZLetra As String = ""
+            Dim ZPagoLetra As String = ""
+            Dim ZVtoLetra As String = ""
+            Dim ZPagoParcial As String = ""
+            Dim ZFEmbarque As String = ""
+
+            Dim ZSumaI As String = DGV_Pendientes.Rows.Count.ToString()
+            Dim ZSumaII As String = ""
+
+
+
+            SQLCnlst = "INSERT INTO ControlImpoImpre (" _
+            & "Orden ," _
+            & "Pta ," _
+            & "Fecha ," _
+            & "Proveedor ," _
+            & "Moneda ," _
+            & "Carpeta ," _
+            & "Djai ," _
+            & "Origen ," _
+            & "Incoterms ," _
+            & "Transporte," _
+            & "FLLegada  ," _
+            & "TPago ," _
+            & "SumaI ," _
+            & "SumaII ," _
+            & "Despacho ," _
+            & "PagoDespacho ," _
+            & "Letra ," _
+            & "PagoLetra ," _
+            & "VtoLetra ," _
+            & "PagoParcial ," _
+            & "FEmbarque) " _
+            & "Values (" _
+            & "'" & ZOrden & "'," _
+            & "'" & ZPta & "'," _
+            & "'" & ZFecha & "'," _
+            & "'" & ZProveedor & "'," _
+            & "'" & ZMoneda & "'," _
+            & "'" & ZCarpeta & "'," _
+            & "'" & ZDJai & "'," _
+            & "'" & ZOrigen & "'," _
+            & "'" & ZIncoterms & "'," _
+            & "'" & ZTransporte & "'," _
+            & "'" & ZFLLegada & "'," _
+            & "'" & ZTPago & "'," _
+            & "'" & ZSumaI & "'," _
+            & "'" & ZSumaII & "'," _
+            & "'" & ZDespacho & "'," _
+            & "'" & ZPagoDespacho & "'," _
+            & "'" & ZLetra & "'," _
+            & "'" & ZPagoLetra & "'," _
+            & "'" & ZVtoLetra & "'," _
+            & "'" & ZPagoParcial & "'," _
+            & "'" & ZFEmbarque & "')"
+
+            ListaSQLCnslt.Add(SQLCnlst)
+        Next
+
+        If ListaSQLCnslt.Count > 0 Then
+            ExecuteNonQueries(ListaSQLCnslt.ToArray(), Operador.Base)
+            With New VistaPrevia
+                .Reporte = New Reporte_CentroDe_Exportacion_Pendientes()
+
+                .Mostrar()
+            End With
+
+        End If
+
+    End Sub
+
+    Private Sub DGV_Pendientes_CellMouseDoubleClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DGV_Pendientes.CellMouseDoubleClick
+
+        Dim Worden As String = DGV_Pendientes.CurrentRow.Cells("Orden").Value
+        Dim WCarpeta As String = DGV_Pendientes.CurrentRow.Cells("Carpeta").Value
+        Dim WPlanta As String = DGV_Pendientes.CurrentRow.Cells("Empresa").Value
+
+        Dim WEmpresa As String = ""
+        Select Case WPlanta
+            Case "I"
+                WEmpresa = "SurfactanSa"
+            Case "II"
+                WEmpresa = "Surfactan_II"
+            Case "III"
+                WEmpresa = "Surfactan_III"
+            Case "V"
+                WEmpresa = "Surfactan_V"
+            Case "VI"
+                WEmpresa = "Surfactan_VI"
+            Case "VII"
+                WEmpresa = "Surfactan_VII"
+        End Select
+
+
+        With New Ingreso_OrdenCompra(Worden, WCarpeta, WPlanta)
+            .Show()
+        End With
+
+    End Sub
 End Class

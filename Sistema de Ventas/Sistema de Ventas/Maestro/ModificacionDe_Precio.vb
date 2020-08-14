@@ -367,7 +367,7 @@ Public Class ModificacionDe_Precio : Implements IBuscarClienteCashFlow, IConsult
 
    
     Private Sub btn_ConsultaMP_Click(sender As Object, e As EventArgs) Handles btn_ConsultaMP.Click
-        With Consulta_MP
+        With New Consulta_MP()
             If .Visible = True Then
                 .Visible = False
             End If

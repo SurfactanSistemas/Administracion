@@ -97,6 +97,7 @@
     <Compile Include="Interfases\IAgregarGastosImpo.vb" />
     <Compile Include="Interfases\IAutorizacionDePedidos.vb" />
     <Compile Include="Interfases\IBuscarClienteCashFlow.vb" />
+    <Compile Include="Interfases\ICentroImportaciones_auxiliar.vb" />
     <Compile Include="Interfases\IConsultaCambios.vb" />
     <Compile Include="Interfases\IConsultaTerminado.vb" />
     <Compile Include="Interfases\IConsulta_DY.vb" />
@@ -482,6 +483,18 @@
     <Compile Include="Novedades\Centro Importaciones\Centro_Importaciones_CarpetasPendientes.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Novedades\Centro Importaciones\Ingreso_OrdenCompra.Designer.vb">
+      <DependentUpon>Ingreso_OrdenCompra.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Novedades\Centro Importaciones\Ingreso_OrdenCompra.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Novedades\Centro Importaciones\Ventana_auxiliar.Designer.vb">
+      <DependentUpon>Ventana_auxiliar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Novedades\Centro Importaciones\Ventana_auxiliar.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Novedades\Consulta Hoja de Ruta\ConsultaHojaDeRuta.Designer.vb">
       <DependentUpon>ConsultaHojaDeRuta.vb</DependentUpon>
     </Compile>
@@ -735,6 +748,18 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reporte_CarpetaParcial.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Reporte_CentroDe_Exportacion.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte_CentroDe_Exportacion.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Reporte_CentroDe_Exportacion_Pendientes.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte_CentroDe_Exportacion_Pendientes.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\Reporte_Clientes_XVendedor.vb">
@@ -1015,6 +1040,12 @@
     <EmbeddedResource Include="Novedades\Centro Importaciones\Centro_Importaciones_CarpetasPendientes.resx">
       <DependentUpon>Centro_Importaciones_CarpetasPendientes.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Novedades\Centro Importaciones\Ingreso_OrdenCompra.resx">
+      <DependentUpon>Ingreso_OrdenCompra.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Novedades\Centro Importaciones\Ventana_auxiliar.resx">
+      <DependentUpon>Ventana_auxiliar.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Novedades\Consulta Hoja de Ruta\ConsultaHojaDeRuta.resx">
       <DependentUpon>ConsultaHojaDeRuta.vb</DependentUpon>
     </EmbeddedResource>
@@ -1160,6 +1191,14 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Reporte_CarpetaParcial.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Reporte_CentroDe_Exportacion.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte_CentroDe_Exportacion.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Reporte_CentroDe_Exportacion_Pendientes.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte_CentroDe_Exportacion_Pendientes.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Reporte_Clientes_XVendedor.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Reporte_Clientes_XVendedor.vb</LastGenOutput>
@@ -1258,6 +1297,15 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>9</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
     <COMReference Include="Microsoft.Office.Interop.Outlook">
       <Guid>{00062FFF-0000-0000-C000-000000000046}</Guid>
       <VersionMajor>9</VersionMajor>
@@ -1271,6 +1319,15 @@
       <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
       <VersionMajor>2</VersionMajor>
       <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
       <Lcid>0</Lcid>
       <WrapperTool>primary</WrapperTool>
       <Isolated>False</Isolated>

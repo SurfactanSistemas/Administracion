@@ -29,13 +29,11 @@ Partial Class Centro_Importaciones
         Me.btn_Exportacion = New System.Windows.Forms.Button()
         Me.btn_Djai = New System.Windows.Forms.Button()
         Me.btn_Actualiza = New System.Windows.Forms.Button()
-        Me.cbx_Ordenamiento = New System.Windows.Forms.ComboBox()
         Me.cbx_FiltroI = New System.Windows.Forms.ComboBox()
         Me.cbx_FiltroII = New System.Windows.Forms.ComboBox()
         Me.cbx_FiltroIII = New System.Windows.Forms.ComboBox()
         Me.cbx_Activas = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.chk_LetraPendiente = New System.Windows.Forms.CheckBox()
@@ -101,9 +99,9 @@ Partial Class Centro_Importaciones
         Me.label1.ForeColor = System.Drawing.Color.White
         Me.label1.Location = New System.Drawing.Point(3, 6)
         Me.label1.Name = "label1"
-        Me.label1.Size = New System.Drawing.Size(180, 17)
+        Me.label1.Size = New System.Drawing.Size(185, 17)
         Me.label1.TabIndex = 0
-        Me.label1.Text = "Modificacion de Precios"
+        Me.label1.Text = "Centro de Importaciones"
         '
         'btn_Exportacion
         '
@@ -132,19 +130,11 @@ Partial Class Centro_Importaciones
         Me.btn_Actualiza.Text = "ACTUALIZA"
         Me.btn_Actualiza.UseVisualStyleBackColor = True
         '
-        'cbx_Ordenamiento
-        '
-        Me.cbx_Ordenamiento.FormattingEnabled = True
-        Me.cbx_Ordenamiento.Items.AddRange(New Object() {"Orden", "Planta", "Fecha", "Proveedor", "Moneda", "Carpeta", "DJai", "Origen", "Incoterms", "Tipo", "Fecha LLegada", "Tipo Pago", "Despacho", "Pago Des", "Letra", "Pago Letra", "Vto.Letra"})
-        Me.cbx_Ordenamiento.Location = New System.Drawing.Point(192, 56)
-        Me.cbx_Ordenamiento.Name = "cbx_Ordenamiento"
-        Me.cbx_Ordenamiento.Size = New System.Drawing.Size(121, 21)
-        Me.cbx_Ordenamiento.TabIndex = 40
-        '
         'cbx_FiltroI
         '
+        Me.cbx_FiltroI.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbx_FiltroI.FormattingEnabled = True
-        Me.cbx_FiltroI.Items.AddRange(New Object() {"", "Orden", "Fecha", "Proveedor", "Carpeta", "DJai", "Origen", "Incoterms", "Transporte", "F.LLegada", "T.Pago", "Pago Despacho", "Pago Letra", "Vto. Letra", "M.Prima"})
+        Me.cbx_FiltroI.Items.AddRange(New Object() {"", "Orden", "Planta", "Fecha", "Proveedor", "Carpeta", "DJai", "Origen", "Incoterms", "Transporte", "F.LLegada", "T.Pago", "Pago Despacho", "Pago Letra", "Vto. Letra", "M.Prima"})
         Me.cbx_FiltroI.Location = New System.Drawing.Point(363, 56)
         Me.cbx_FiltroI.Name = "cbx_FiltroI"
         Me.cbx_FiltroI.Size = New System.Drawing.Size(121, 21)
@@ -152,6 +142,7 @@ Partial Class Centro_Importaciones
         '
         'cbx_FiltroII
         '
+        Me.cbx_FiltroII.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbx_FiltroII.FormattingEnabled = True
         Me.cbx_FiltroII.Items.AddRange(New Object() {"", "Planta", "Fecha", "Proveedor", "Origen", "Incoterms", "Transporte", "F.LLegada", "T.Pago", "Pago Despacho", "Pago Letra", "Vto. Letra"})
         Me.cbx_FiltroII.Location = New System.Drawing.Point(490, 57)
@@ -161,6 +152,7 @@ Partial Class Centro_Importaciones
         '
         'cbx_FiltroIII
         '
+        Me.cbx_FiltroIII.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbx_FiltroIII.FormattingEnabled = True
         Me.cbx_FiltroIII.Items.AddRange(New Object() {"", "Planta", "Fecha", "Proveedor", "Origen", "Incoterms", "Transporte", "F.LLegada", "T.Pago", "Pago Despacho", "Pago Letra", "Vto. Letra"})
         Me.cbx_FiltroIII.Location = New System.Drawing.Point(617, 58)
@@ -170,6 +162,7 @@ Partial Class Centro_Importaciones
         '
         'cbx_Activas
         '
+        Me.cbx_Activas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbx_Activas.FormattingEnabled = True
         Me.cbx_Activas.Items.AddRange(New Object() {"Activas", "Cerradas"})
         Me.cbx_Activas.Location = New System.Drawing.Point(850, 57)
@@ -185,15 +178,6 @@ Partial Class Centro_Importaciones
         Me.Label3.Size = New System.Drawing.Size(29, 13)
         Me.Label3.TabIndex = 45
         Me.Label3.Text = "Filtro"
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(113, 59)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(73, 13)
-        Me.Label4.TabIndex = 46
-        Me.Label4.Text = "Ordenamiento"
         '
         'Label5
         '
@@ -300,6 +284,7 @@ Partial Class Centro_Importaciones
         Me.Orden.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Orden.HeaderText = "Orden"
         Me.Orden.Name = "Orden"
+        Me.Orden.ReadOnly = True
         Me.Orden.Width = 61
         '
         'Pta
@@ -307,6 +292,7 @@ Partial Class Centro_Importaciones
         Me.Pta.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Pta.HeaderText = "Pta"
         Me.Pta.Name = "Pta"
+        Me.Pta.ReadOnly = True
         Me.Pta.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Pta.Width = 48
         '
@@ -315,6 +301,7 @@ Partial Class Centro_Importaciones
         Me.Fecha.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Fecha.HeaderText = "Fecha"
         Me.Fecha.Name = "Fecha"
+        Me.Fecha.ReadOnly = True
         Me.Fecha.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Fecha.Width = 62
         '
@@ -323,6 +310,7 @@ Partial Class Centro_Importaciones
         Me.Proveedor.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Proveedor.HeaderText = "Proveedor"
         Me.Proveedor.Name = "Proveedor"
+        Me.Proveedor.ReadOnly = True
         Me.Proveedor.Width = 81
         '
         'Mon
@@ -330,6 +318,7 @@ Partial Class Centro_Importaciones
         Me.Mon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Mon.HeaderText = "Mon"
         Me.Mon.Name = "Mon"
+        Me.Mon.ReadOnly = True
         Me.Mon.Width = 53
         '
         'Carpeta
@@ -337,6 +326,7 @@ Partial Class Centro_Importaciones
         Me.Carpeta.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Carpeta.HeaderText = "Carpeta"
         Me.Carpeta.Name = "Carpeta"
+        Me.Carpeta.ReadOnly = True
         Me.Carpeta.Width = 69
         '
         'DJai
@@ -344,6 +334,7 @@ Partial Class Centro_Importaciones
         Me.DJai.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.DJai.HeaderText = "DJai"
         Me.DJai.Name = "DJai"
+        Me.DJai.ReadOnly = True
         Me.DJai.Width = 53
         '
         'Origen
@@ -351,6 +342,7 @@ Partial Class Centro_Importaciones
         Me.Origen.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Origen.HeaderText = "Origen"
         Me.Origen.Name = "Origen"
+        Me.Origen.ReadOnly = True
         Me.Origen.Width = 63
         '
         'Incoterms
@@ -358,6 +350,7 @@ Partial Class Centro_Importaciones
         Me.Incoterms.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Incoterms.HeaderText = "Incoterms"
         Me.Incoterms.Name = "Incoterms"
+        Me.Incoterms.ReadOnly = True
         Me.Incoterms.Width = 78
         '
         'Transporte
@@ -365,6 +358,7 @@ Partial Class Centro_Importaciones
         Me.Transporte.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Transporte.HeaderText = "Transporte"
         Me.Transporte.Name = "Transporte"
+        Me.Transporte.ReadOnly = True
         Me.Transporte.Width = 83
         '
         'FLLegada
@@ -372,6 +366,7 @@ Partial Class Centro_Importaciones
         Me.FLLegada.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.FLLegada.HeaderText = "F.LLegada"
         Me.FLLegada.Name = "FLLegada"
+        Me.FLLegada.ReadOnly = True
         Me.FLLegada.Width = 83
         '
         'TPago
@@ -379,6 +374,7 @@ Partial Class Centro_Importaciones
         Me.TPago.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.TPago.HeaderText = "T.Pago"
         Me.TPago.Name = "TPago"
+        Me.TPago.ReadOnly = True
         Me.TPago.Width = 67
         '
         'Despacho
@@ -386,6 +382,7 @@ Partial Class Centro_Importaciones
         Me.Despacho.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Despacho.HeaderText = "Despacho"
         Me.Despacho.Name = "Despacho"
+        Me.Despacho.ReadOnly = True
         Me.Despacho.Width = 81
         '
         'PagoDes
@@ -393,6 +390,7 @@ Partial Class Centro_Importaciones
         Me.PagoDes.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.PagoDes.HeaderText = "Pago Des"
         Me.PagoDes.Name = "PagoDes"
+        Me.PagoDes.ReadOnly = True
         Me.PagoDes.Width = 73
         '
         'LetraTotal
@@ -400,6 +398,7 @@ Partial Class Centro_Importaciones
         Me.LetraTotal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.LetraTotal.HeaderText = "Letra Total"
         Me.LetraTotal.Name = "LetraTotal"
+        Me.LetraTotal.ReadOnly = True
         Me.LetraTotal.Width = 77
         '
         'PagoLetra
@@ -407,6 +406,7 @@ Partial Class Centro_Importaciones
         Me.PagoLetra.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.PagoLetra.HeaderText = "Pago Letra"
         Me.PagoLetra.Name = "PagoLetra"
+        Me.PagoLetra.ReadOnly = True
         Me.PagoLetra.Width = 78
         '
         'VtoLetra
@@ -414,6 +414,7 @@ Partial Class Centro_Importaciones
         Me.VtoLetra.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.VtoLetra.HeaderText = "Vto Letra"
         Me.VtoLetra.Name = "VtoLetra"
+        Me.VtoLetra.ReadOnly = True
         Me.VtoLetra.Width = 69
         '
         'USPagadoLetra
@@ -421,6 +422,7 @@ Partial Class Centro_Importaciones
         Me.USPagadoLetra.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.USPagadoLetra.HeaderText = "U$S Pagado Letra"
         Me.USPagadoLetra.Name = "USPagadoLetra"
+        Me.USPagadoLetra.ReadOnly = True
         Me.USPagadoLetra.Width = 110
         '
         'FEmbarque
@@ -428,6 +430,7 @@ Partial Class Centro_Importaciones
         Me.FEmbarque.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.FEmbarque.HeaderText = "F.Embarque"
         Me.FEmbarque.Name = "FEmbarque"
+        Me.FEmbarque.ReadOnly = True
         Me.FEmbarque.Width = 89
         '
         'SaldoLetra
@@ -435,12 +438,14 @@ Partial Class Centro_Importaciones
         Me.SaldoLetra.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.SaldoLetra.HeaderText = "Saldo Letra"
         Me.SaldoLetra.Name = "SaldoLetra"
+        Me.SaldoLetra.ReadOnly = True
         Me.SaldoLetra.Width = 79
         '
         'ProveedorCod
         '
         Me.ProveedorCod.HeaderText = "ProveedorCod"
         Me.ProveedorCod.Name = "ProveedorCod"
+        Me.ProveedorCod.ReadOnly = True
         Me.ProveedorCod.Visible = False
         '
         'Centro_Importaciones
@@ -457,13 +462,11 @@ Partial Class Centro_Importaciones
         Me.Controls.Add(Me.chk_LetraPendiente)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.cbx_Activas)
         Me.Controls.Add(Me.cbx_FiltroIII)
         Me.Controls.Add(Me.cbx_FiltroII)
         Me.Controls.Add(Me.cbx_FiltroI)
-        Me.Controls.Add(Me.cbx_Ordenamiento)
         Me.Controls.Add(Me.btn_Actualiza)
         Me.Controls.Add(Me.btn_Djai)
         Me.Controls.Add(Me.btn_Exportacion)
@@ -484,13 +487,11 @@ Partial Class Centro_Importaciones
     Friend WithEvents btn_Exportacion As System.Windows.Forms.Button
     Friend WithEvents btn_Djai As System.Windows.Forms.Button
     Friend WithEvents btn_Actualiza As System.Windows.Forms.Button
-    Friend WithEvents cbx_Ordenamiento As System.Windows.Forms.ComboBox
     Friend WithEvents cbx_FiltroI As System.Windows.Forms.ComboBox
     Friend WithEvents cbx_FiltroII As System.Windows.Forms.ComboBox
     Friend WithEvents cbx_FiltroIII As System.Windows.Forms.ComboBox
     Friend WithEvents cbx_Activas As System.Windows.Forms.ComboBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents chk_LetraPendiente As System.Windows.Forms.CheckBox

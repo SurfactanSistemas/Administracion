@@ -1,9 +1,12 @@
 ﻿Imports Util
 Imports Util.Clases.Query
 Imports Util.Clases.Helper
+Imports System.IO
 
 
-Public Class Centro_Importaciones
+
+
+Public Class Centro_Importaciones : Implements ICentroImportaciones_auxiliar
 
 
     'VariablesGlobales en Version vieja
@@ -25,6 +28,20 @@ Public Class Centro_Importaciones
     Dim FiltroVtoI As String
     Dim FiltroVtoII As String
     Dim ZProcesa As String
+
+
+
+    Dim ZZFiltroOrdenI As String
+    Dim ZZFiltroOrdenII As String
+    Dim ZZFiltroOrdenIII As String
+
+
+    Dim ZZColumnaI As Integer
+    Dim ZZColumnaII As Integer
+    Dim ZZColumnaIII As Integer
+
+    Dim ZZTipoFiltro As Integer
+
     'Fin de Globales
 
    
@@ -33,9 +50,9 @@ Public Class Centro_Importaciones
 
     Private Sub Proceso_Click()
 
-        '  If ZProcesa = "N" Then
-        '     Exit Sub
-        '   End If
+        If ZProcesa = "N" Then
+            Exit Sub
+        End If
 
 
 
@@ -69,7 +86,7 @@ Public Class Centro_Importaciones
         Dim SQLCnslt As String = ""
 
 
-        Dim TablaAenviar As New DataTable
+        Dim TablaAenviar As New System.Data.DataTable
         With TablaAenviar.Columns
             .Add("Orden")
             .Add("Carpeta")
@@ -81,7 +98,7 @@ Public Class Centro_Importaciones
 
 
         Dim LugarTabla As Integer = 0
-        Dim TablaPasa As New DataTable
+        Dim TablaPasa As New System.Data.DataTable
         With TablaPasa.Columns
             .Add("Empresa")
             .Add("Orden")
@@ -118,7 +135,7 @@ Public Class Centro_Importaciones
                     & " AND FechaOrd >= '20140101'" _
                     & " ORDER BY Clave"
 
-                Dim TablaOrden As DataTable = GetAll(SQLCnslt, VectorEmpresas(CiclaEmpresa))
+                Dim TablaOrden As System.Data.DataTable = GetAll(SQLCnslt, VectorEmpresas(CiclaEmpresa))
 
                 If TablaOrden.Rows.Count > 0 Then
 
@@ -157,7 +174,7 @@ Public Class Centro_Importaciones
 
 
 
-                Dim TablaPendienteII As New DataTable
+                Dim TablaPendienteII As New System.Data.DataTable
 
                 With TablaPendienteII.Columns
                     .Add("Orden")
@@ -176,7 +193,7 @@ Public Class Centro_Importaciones
                 & " AND Tipo = 1" _
                 & " ORDER BY Clave"
 
-                Dim TablaOrdenII As DataTable = GetAll(SQLCnslt, VectorEmpresas(CiclaEmpresa))
+                Dim TablaOrdenII As System.Data.DataTable = GetAll(SQLCnslt, VectorEmpresas(CiclaEmpresa))
                 If TablaOrdenII.Rows.Count > 0 Then
                     For Each RowOrden As DataRow In TablaOrdenII.Rows
 
@@ -204,7 +221,7 @@ Public Class Centro_Importaciones
 
                     If RowPendi IsNot Nothing Then
 
-                        Dim fechaactual As Date = Date.Today.ToString("MM/dd/yyyy")
+                        Dim fechaactual As Date = Date.Today.ToString()
                         Dim FechaInforme As Date = RowPendi.Item("Fecha")
 
                         Dim ZZDias As Integer = DateDiff("d", FechaInforme, fechaactual)
@@ -254,7 +271,7 @@ Public Class Centro_Importaciones
                 Dim ZZTipoPago As String = IIf(IsDBNull(RowPasa.Item("TipoPago")), "", RowPasa.Item("TipoPago"))
 
 
-                Dim TablaAnticipo As New DataTable
+                Dim TablaAnticipo As New System.Data.DataTable
                 With TablaAnticipo.Columns
                     .Add("Orden")
                     .Add("Importe")
@@ -286,7 +303,7 @@ Public Class Centro_Importaciones
                                 & " AND Proveedor = '" & ZZProveedor & "'" _
                                 & " ORDER BY clave"
 
-                    Dim TablaPagos As DataTable = GetAll(SQLCnslt, Operador.Base)
+                    Dim TablaPagos As System.Data.DataTable = GetAll(SQLCnslt, Operador.Base)
 
                     If TablaPagos.Rows.Count > 0 Then
 
@@ -482,7 +499,7 @@ Public Class Centro_Importaciones
 
             Next
 
-        ZZCiclaProceso = "N"
+            ZZCiclaProceso = "N"
 
         End If
 
@@ -524,205 +541,205 @@ Public Class Centro_Importaciones
 
             Select Case ColumnaOpcion
                 Case 0, 1, 2
-                    SQLCnslt = "SELECT Orden.Tipo, Orden.Recibida, Orden.Cantidad, Orden.Clave, Orden.Orden, Orden.fecha, Orden.fechaord, Orden.Proveedor, Orden.Articulo, " _
-                    & "Orden.Cantidad, Orden.Precio, Orden.Condicion, Orden.Moneda, Orden.Carpeta, Orden.Djai, Orden.derechos, Orden.Origen, Orden.Leyenda, Orden.TipoImpo, " _
-                    & "Orden.PagoDespacho, Orden.Fechallegada, Orden.FechaEmbarque, Orden.impodespacho, Orden.tipopago, Orden.vtodespacho, Orden.impoletra, Orden.vtoletra, " _
-                    & "Orden.pagoletra, Orden.fechadjai,  Proveedor.Nombre as [WProveedor]" _
-                    & " FROM Orden, Proveedor" _
-                    & " WHERE Orden.Proveedor = Proveedor.Proveedor" _
-                    & " AND Orden.Tipo = 1" _
-                    & " AND Orden.Cantidad <> 0" _
-                    & " AND Orden.Renglon = 1" _
-                    & " AND fechaOrd >=20140101" _
-                    & " ORDER BY Orden.Clave"
+                    SQLCnslt = "SELECT o.Tipo, o.Recibida, o.Cantidad, o.Clave, o.Orden, o.fecha, o.fechaord, " _
+                        & "o.Proveedor, o.Articulo, o.Cantidad, o.Precio, o.Condicion, o.Moneda, o.Carpeta, " _
+                        & "o.Djai, o.derechos, o.Origen, o.Leyenda, o.TipoImpo, o.PagoDespacho, o.Fechallegada, " _
+                        & "o.FechaEmbarque, o.impodespacho, o.tipopago, o.vtodespacho, o.impoletra, o.vtoletra, " _
+                        & "o.pagoletra, o.fechadjai,  p.Nombre " _
+                        & " FROM Orden o inner join Proveedor p on o.Proveedor = p.Proveedor" _
+                        & " WHERE o.Tipo = 1" _
+                        & " AND o.Cantidad <> 0" _
+                        & " AND o.Renglon = 1" _
+                        & " AND fechaOrd >=20140101" _
+                        & " ORDER BY o.Clave"
 
 
 
 
                 Case 3
-                    SQLCnslt = "SELECT Orden.Tipo, Orden.Recibida, Orden.Cantidad, Orden.Clave, Orden.Orden, Orden.fecha, Orden.fechaord, Orden.Proveedor, Orden.Articulo, " _
-                      & "Orden.Cantidad, Orden.Precio, Orden.Condicion, Orden.Moneda, Orden.Carpeta, Orden.Djai, Orden.derechos, Orden.Origen, Orden.Leyenda, Orden.TipoImpo, " _
-                      & "Orden.PagoDespacho, Orden.Fechallegada, Orden.FechaEmbarque, Orden.impodespacho, Orden.tipopago, Orden.vtodespacho, Orden.impoletra, Orden.vtoletra, " _
-                      & "Orden.pagoletra, Orden.fechadjai,  Proveedor.Nombre as [WProveedor]" _
-                      & " FROM Orden, Proveedor" _
-                      & " WHERE Orden.Proveedor = Proveedor.Proveedor" _
-                      & " AND Orden.Tipo = 1" _
-                      & " AND Orden.Cantidad <> 0" _
-                      & " AND Orden.Renglon = 1" _
-                      & " AND Orden.FechaOrd >= '" & Seleccion & "'" _
-                      & " AND Orden.FechaOrd <= '" & SeleccionII & "'" _
-                      & " ORDER BY Orden.Clave"
+                    SQLCnslt = "SELECT o.Tipo, o.Recibida, o.Cantidad, o.Clave, o.Orden, o.fecha, o.fechaord, " _
+                           & "o.Proveedor, o.Articulo, o.Cantidad, o.Precio, o.Condicion, o.Moneda, o.Carpeta, " _
+                           & "o.Djai, o.derechos, o.Origen, o.Leyenda, o.TipoImpo, o.PagoDespacho, o.Fechallegada, " _
+                           & "o.FechaEmbarque, o.impodespacho, o.tipopago, o.vtodespacho, o.impoletra, o.vtoletra, " _
+                           & "o.pagoletra, o.fechadjai,  p.Nombre " _
+                           & " FROM Orden o inner join Proveedor p on o.Proveedor = p.Proveedor" _
+                           & " WHERE o.Tipo = 1" _
+                           & " AND o.Cantidad <> 0" _
+                           & " AND o.Renglon = 1" _
+                           & " AND o.FechaOrd >= '" & Seleccion & "'" _
+                           & " AND o.FechaOrd <= '" & SeleccionII & "'" _
+                           & " ORDER BY o.Clave"
 
 
                 Case 4
-                    SQLCnslt = "SELECT Orden.Tipo, Orden.Recibida, Orden.Cantidad, Orden.Clave, Orden.Orden, Orden.fecha, Orden.fechaord, Orden.Proveedor, Orden.Articulo, " _
-                     & "Orden.Cantidad, Orden.Precio, Orden.Condicion, Orden.Moneda, Orden.Carpeta, Orden.Djai, Orden.derechos, Orden.Origen, Orden.Leyenda, Orden.TipoImpo, " _
-                     & "Orden.PagoDespacho, Orden.Fechallegada, Orden.FechaEmbarque, Orden.impodespacho, Orden.tipopago, Orden.vtodespacho, Orden.impoletra, Orden.vtoletra, " _
-                     & "Orden.pagoletra, Orden.fechadjai,  Proveedor.Nombre as [WProveedor]" _
-                     & " FROM Orden, Proveedor" _
-                     & " WHERE Orden.Proveedor = Proveedor.Proveedor" _
-                     & " AND Orden.Tipo = 1" _
-                     & " AND Orden.Cantidad <> 0" _
-                     & " AND Orden.Renglon = 1" _
-                     & " AND Orden.Proveedor = '" & Seleccion & "'" _
-                     & " AND fechaord >= 20140101" _
-                     & " ORDER BY Orden.Clave"
+                    SQLCnslt = "SELECT o.Tipo, o.Recibida, o.Cantidad, o.Clave, o.Orden, o.fecha, o.fechaord, " _
+                       & "o.Proveedor, o.Articulo, o.Cantidad, o.Precio, o.Condicion, o.Moneda, o.Carpeta, " _
+                       & "o.Djai, o.derechos, o.Origen, o.Leyenda, o.TipoImpo, o.PagoDespacho, o.Fechallegada, " _
+                       & "o.FechaEmbarque, o.impodespacho, o.tipopago, o.vtodespacho, o.impoletra, o.vtoletra, " _
+                       & "o.pagoletra, o.fechadjai,  p.Nombre " _
+                       & " FROM Orden o inner join Proveedor p on o.Proveedor = p.Proveedor" _
+                       & " WHERE o.Tipo = 1" _
+                       & " AND o.Cantidad <> 0" _
+                       & " AND o.Renglon = 1" _
+                       & " AND o.Proveedor = '" & Seleccion & "'" _
+                       & " AND fechaord >= 20140101" _
+                       & " ORDER BY o.Clave"
 
 
                 Case 6
-                    SQLCnslt = "SELECT Orden.Tipo, Orden.Recibida, Orden.Cantidad, Orden.Clave, Orden.Orden, Orden.fecha, Orden.fechaord, Orden.Proveedor, Orden.Articulo, " _
-                       & "Orden.Cantidad, Orden.Precio, Orden.Condicion, Orden.Moneda, Orden.Carpeta, Orden.Djai, Orden.derechos, Orden.Origen, Orden.Leyenda, Orden.TipoImpo, " _
-                       & "Orden.PagoDespacho, Orden.Fechallegada, Orden.FechaEmbarque, Orden.impodespacho, Orden.tipopago, Orden.vtodespacho, Orden.impoletra, Orden.vtoletra, " _
-                       & "Orden.pagoletra, Orden.fechadjai,  Proveedor.Nombre as [WProveedor]" _
-                       & " FROM Orden, Proveedor" _
-                       & " WHERE Orden.Proveedor = Proveedor.Proveedor" _
-                       & " AND Orden.Tipo = 1" _
-                       & " AND Orden.Cantidad <> 0" _
-                       & " AND Orden.Renglon = 1" _
-                       & " AND Orden.Djai = '" & Seleccion & "'" _
+                    SQLCnslt = "SELECT o.Tipo, o.Recibida, o.Cantidad, o.Clave, o.Orden, o.fecha, o.fechaord, " _
+                       & "o.Proveedor, o.Articulo, o.Cantidad, o.Precio, o.Condicion, o.Moneda, o.Carpeta, " _
+                       & "o.Djai, o.derechos, o.Origen, o.Leyenda, o.TipoImpo, o.PagoDespacho, o.Fechallegada, " _
+                       & "o.FechaEmbarque, o.impodespacho, o.tipopago, o.vtodespacho, o.impoletra, o.vtoletra, " _
+                       & "o.pagoletra, o.fechadjai,  p.Nombre " _
+                       & " FROM Orden o inner join Proveedor p on o.Proveedor = p.Proveedor" _
+                       & " WHERE o.Tipo = 1" _
+                       & " AND o.Cantidad <> 0" _
+                       & " AND o.Renglon = 1" _
+                       & " AND o.Djai = '" & Seleccion & "'" _
                        & " AND fechaord >=20140101" _
-                       & " ORDER BY Orden.Clave"
+                       & " ORDER BY o.Clave"
 
 
                 Case 7
-                    SQLCnslt = "SELECT Orden.Tipo, Orden.Recibida, Orden.Cantidad, Orden.Clave, Orden.Orden, Orden.fecha, Orden.fechaord, Orden.Proveedor, Orden.Articulo, " _
-                      & "Orden.Cantidad, Orden.Precio, Orden.Condicion, Orden.Moneda, Orden.Carpeta, Orden.Djai, Orden.derechos, Orden.Origen, Orden.Leyenda, Orden.TipoImpo, " _
-                      & "Orden.PagoDespacho, Orden.Fechallegada, Orden.FechaEmbarque, Orden.impodespacho, Orden.tipopago, Orden.vtodespacho, Orden.impoletra, Orden.vtoletra, " _
-                      & "Orden.pagoletra, Orden.fechadjai,  Proveedor.Nombre as [WProveedor]" _
-                      & " FROM Orden, Proveedor" _
-                      & " WHERE Orden.Proveedor = Proveedor.Proveedor" _
-                      & " AND Orden.Tipo = 1" _
-                      & " AND Orden.Cantidad <> 0" _
-                      & " AND Orden.Renglon = 1" _
-                      & " AND fechaord >= 20140101" _
-                      & " AND Orden.Origen = '" & Seleccion & "'" _
-                      & " ORDER BY Orden.Clave"
+                    SQLCnslt = "SELECT o.Tipo, o.Recibida, o.Cantidad, o.Clave, o.Orden, o.fecha, o.fechaord, " _
+                       & "o.Proveedor, o.Articulo, o.Cantidad, o.Precio, o.Condicion, o.Moneda, o.Carpeta, " _
+                       & "o.Djai, o.derechos, o.Origen, o.Leyenda, o.TipoImpo, o.PagoDespacho, o.Fechallegada, " _
+                       & "o.FechaEmbarque, o.impodespacho, o.tipopago, o.vtodespacho, o.impoletra, o.vtoletra, " _
+                       & "o.pagoletra, o.fechadjai,  p.Nombre " _
+                       & " FROM Orden o inner join Proveedor p on o.Proveedor = p.Proveedor" _
+                       & " WHERE o.Tipo = 1" _
+                       & " AND o.Cantidad <> 0" _
+                       & " AND o.Renglon = 1" _
+                       & " AND fechaord >= 20140101" _
+                       & " AND o.Origen = '" & Seleccion & "'" _
+                       & " ORDER BY o.Clave"
 
 
                 Case 8
-                    SQLCnslt = "SELECT Orden.Tipo, Orden.Recibida, Orden.Cantidad, Orden.Clave, Orden.Orden, Orden.fecha, Orden.fechaord, Orden.Proveedor, Orden.Articulo, " _
-                   & "Orden.Cantidad, Orden.Precio, Orden.Condicion, Orden.Moneda, Orden.Carpeta, Orden.Djai, Orden.derechos, Orden.Origen, Orden.Leyenda, Orden.TipoImpo, " _
-                   & "Orden.PagoDespacho, Orden.Fechallegada, Orden.FechaEmbarque, Orden.impodespacho, Orden.tipopago, Orden.vtodespacho, Orden.impoletra, Orden.vtoletra, " _
-                   & "Orden.pagoletra, Orden.fechadjai,  Proveedor.Nombre as [WProveedor]" _
-                   & " FROM Orden, Proveedor" _
-                   & " WHERE Orden.Proveedor = Proveedor.Proveedor" _
-                   & " AND Orden.Tipo = 1" _
-                   & " AND Orden.Cantidad <> 0" _
-                   & " AND Orden.Renglon = 1" _
-                   & " AND fechaord >=20140101" _
-                   & " AND Orden.Leyenda = '" & Seleccion & "'" _
-                   & " ORDER BY Orden.Clave"
+                    SQLCnslt = "SELECT o.Tipo, o.Recibida, o.Cantidad, o.Clave, o.Orden, o.fecha, o.fechaord, " _
+                        & "o.Proveedor, o.Articulo, o.Cantidad, o.Precio, o.Condicion, o.Moneda, o.Carpeta, " _
+                        & "o.Djai, o.derechos, o.Origen, o.Leyenda, o.TipoImpo, o.PagoDespacho, o.Fechallegada, " _
+                        & "o.FechaEmbarque, o.impodespacho, o.tipopago, o.vtodespacho, o.impoletra, o.vtoletra, " _
+                        & "o.pagoletra, o.fechadjai,  p.Nombre " _
+                        & " FROM Orden o inner join Proveedor p on o.Proveedor = p.Proveedor" _
+                        & " WHERE o.Tipo = 1" _
+                        & " AND o.Cantidad <> 0" _
+                        & " AND o.Renglon = 1" _
+                        & " AND fechaord >=20140101" _
+                        & " AND o.Leyenda = '" & Seleccion & "'" _
+                        & " ORDER BY o.Clave"
 
 
                 Case 9
-                    SQLCnslt = "SELECT Orden.Tipo, Orden.Recibida, Orden.Cantidad, Orden.Clave, Orden.Orden, Orden.fecha, Orden.fechaord, Orden.Proveedor, Orden.Articulo, " _
-                     & "Orden.Cantidad, Orden.Precio, Orden.Condicion, Orden.Moneda, Orden.Carpeta, Orden.Djai, Orden.derechos, Orden.Origen, Orden.Leyenda, Orden.TipoImpo, " _
-                     & "Orden.PagoDespacho, Orden.Fechallegada, Orden.FechaEmbarque, Orden.impodespacho, Orden.tipopago, Orden.vtodespacho, Orden.impoletra, Orden.vtoletra, " _
-                     & "Orden.pagoletra, Orden.fechadjai,  Proveedor.Nombre as [WProveedor]" _
-                     & " FROM Orden, Proveedor" _
-                     & " WHERE Orden.Proveedor = Proveedor.Proveedor" _
-                     & " AND Orden.Tipo = 1" _
-                     & " AND Orden.Cantidad <> 0" _
-                     & " AND Orden.Renglon = 1" _
-                     & " and fechaord >= 20140101" _
-                     & " and Orden.TipoImpo = '" & Seleccion & "'" _
-                     & " Order by Orden.Clave"
+                    SQLCnslt = "SELECT o.Tipo, o.Recibida, o.Cantidad, o.Clave, o.Orden, o.fecha, o.fechaord, " _
+                       & "o.Proveedor, o.Articulo, o.Cantidad, o.Precio, o.Condicion, o.Moneda, o.Carpeta, " _
+                       & "o.Djai, o.derechos, o.Origen, o.Leyenda, o.TipoImpo, o.PagoDespacho, o.Fechallegada, " _
+                       & "o.FechaEmbarque, o.impodespacho, o.tipopago, o.vtodespacho, o.impoletra, o.vtoletra, " _
+                       & "o.pagoletra, o.fechadjai,  p.Nombre " _
+                       & " FROM Orden o inner join Proveedor p on o.Proveedor = p.Proveedor" _
+                       & " WHERE o.Tipo = 1" _
+                       & " AND o.Cantidad <> 0" _
+                       & " AND o.Renglon = 1" _
+                       & " and fechaord >= 20140101" _
+                       & " and o.TipoImpo = '" & Seleccion & "'" _
+                       & " Order by o.Clave"
 
 
                 Case 10
-                    SQLCnslt = "SELECT Orden.Tipo, Orden.Recibida, Orden.Cantidad, Orden.Clave, Orden.Orden, Orden.fecha, Orden.fechaord, Orden.Proveedor, Orden.Articulo, " _
-                     & "Orden.Cantidad, Orden.Precio, Orden.Condicion, Orden.Moneda, Orden.Carpeta, Orden.Djai, Orden.derechos, Orden.Origen, Orden.Leyenda, Orden.TipoImpo, " _
-                     & "Orden.PagoDespacho, Orden.Fechallegada, Orden.FechaEmbarque, Orden.impodespacho, Orden.tipopago, Orden.vtodespacho, Orden.impoletra, Orden.vtoletra, " _
-                     & "Orden.pagoletra, Orden.fechadjai,  Proveedor.Nombre as [WProveedor]" _
-                     & " FROM Orden, Proveedor" _
-                     & " WHERE Orden.Proveedor = Proveedor.Proveedor" _
-                     & " AND Orden.Tipo = 1" _
-                     & " AND Orden.Cantidad <> 0" _
-                     & " AND Orden.Renglon = 1" _
-                     & " AND fechaord >= 20140101" _
-                     & " ORDER BY Orden.Clave"
+                    SQLCnslt = "SELECT o.Tipo, o.Recibida, o.Cantidad, o.Clave, o.Orden, o.fecha, o.fechaord, " _
+                       & "o.Proveedor, o.Articulo, o.Cantidad, o.Precio, o.Condicion, o.Moneda, o.Carpeta, " _
+                       & "o.Djai, o.derechos, o.Origen, o.Leyenda, o.TipoImpo, o.PagoDespacho, o.Fechallegada, " _
+                       & "o.FechaEmbarque, o.impodespacho, o.tipopago, o.vtodespacho, o.impoletra, o.vtoletra, " _
+                       & "o.pagoletra, o.fechadjai,  p.Nombre " _
+                       & " FROM Orden o inner join Proveedor p on o.Proveedor = p.Proveedor" _
+                       & " WHERE o.Tipo = 1" _
+                       & " AND o.Cantidad <> 0" _
+                       & " AND o.Renglon = 1" _
+                       & " AND fechaord >= 20140101" _
+                       & " ORDER BY o.Clave"
 
                     WDesdeFecha = Seleccion
                     WHastaFecha = SeleccionII
 
                 Case 11
-                    SQLCnslt = "SELECT Orden.Tipo, Orden.Recibida, Orden.Cantidad, Orden.Clave, Orden.Orden, Orden.fecha, Orden.fechaord, Orden.Proveedor, Orden.Articulo, " _
-                      & "Orden.Cantidad, Orden.Precio, Orden.Condicion, Orden.Moneda, Orden.Carpeta, Orden.Djai, Orden.derechos, Orden.Origen, Orden.Leyenda, Orden.TipoImpo, " _
-                      & "Orden.PagoDespacho, Orden.Fechallegada, Orden.FechaEmbarque, Orden.impodespacho, Orden.tipopago, Orden.vtodespacho, Orden.impoletra, Orden.vtoletra, " _
-                      & "Orden.pagoletra, Orden.fechadjai,  Proveedor.Nombre as [WProveedor]" _
-                      & " FROM Orden, Proveedor" _
-                      & " WHERE Orden.Proveedor = Proveedor.Proveedor" _
-                      & " AND Orden.Tipo = 1" _
-                      & " AND Orden.Cantidad <> 0" _
-                      & " AND Orden.Renglon = 1" _
-                      & " AND Orden.TipoPago = '" & Seleccion & "'" _
-                      & " AND fechaord >= 20140101" _
-                      & " ORDER BY Orden.Clave"
+                    SQLCnslt = "SELECT o.Tipo, o.Recibida, o.Cantidad, o.Clave, o.Orden, o.fecha, o.fechaord, " _
+                       & "o.Proveedor, o.Articulo, o.Cantidad, o.Precio, o.Condicion, o.Moneda, o.Carpeta, " _
+                       & "o.Djai, o.derechos, o.Origen, o.Leyenda, o.TipoImpo, o.PagoDespacho, o.Fechallegada, " _
+                       & "o.FechaEmbarque, o.impodespacho, o.tipopago, o.vtodespacho, o.impoletra, o.vtoletra, " _
+                       & "o.pagoletra, o.fechadjai,  p.Nombre " _
+                       & " FROM Orden o inner join Proveedor p on o.Proveedor = p.Proveedor" _
+                       & " WHERE o.Tipo = 1" _
+                       & " AND o.Cantidad <> 0" _
+                       & " AND o.Renglon = 1" _
+                       & " AND o.TipoPago = '" & Seleccion & "'" _
+                       & " AND fechaord >= 20140101" _
+                       & " ORDER BY o.Clave"
 
 
                 Case 12
-                    SQLCnslt = "SELECT Orden.Tipo, Orden.Recibida, Orden.Cantidad, Orden.Clave, Orden.Orden, Orden.fecha, Orden.fechaord, Orden.Proveedor, Orden.Articulo, " _
-                     & "Orden.Cantidad, Orden.Precio, Orden.Condicion, Orden.Moneda, Orden.Carpeta, Orden.Djai, Orden.derechos, Orden.Origen, Orden.Leyenda, Orden.TipoImpo, " _
-                     & "Orden.PagoDespacho, Orden.Fechallegada, Orden.FechaEmbarque, Orden.impodespacho, Orden.tipopago, Orden.vtodespacho, Orden.impoletra, Orden.vtoletra, " _
-                     & "Orden.pagoletra, Orden.fechadjai,  Proveedor.Nombre as [WProveedor]" _
-                     & " FROM Orden, Proveedor" _
-                     & " WHERE Orden.Proveedor = Proveedor.Proveedor" _
-                     & " AND Orden.Tipo = 1" _
-                     & " AND Orden.Cantidad <> 0" _
-                     & " AND Orden.Renglon = 1" _
-                     & " AND Orden.PagoDespacho = '" & Seleccion & "'" _
-                     & " AND fechaord >= 20140101" _
-                     & " ORDER BY Orden.Clave"
+                    SQLCnslt = "SELECT o.Tipo, o.Recibida, o.Cantidad, o.Clave, o.Orden, o.fecha, o.fechaord, " _
+                       & "o.Proveedor, o.Articulo, o.Cantidad, o.Precio, o.Condicion, o.Moneda, o.Carpeta, " _
+                       & "o.Djai, o.derechos, o.Origen, o.Leyenda, o.TipoImpo, o.PagoDespacho, o.Fechallegada, " _
+                       & "o.FechaEmbarque, o.impodespacho, o.tipopago, o.vtodespacho, o.impoletra, o.vtoletra, " _
+                       & "o.pagoletra, o.fechadjai,  p.Nombre " _
+                       & " FROM Orden o inner join Proveedor p on o.Proveedor = p.Proveedor" _
+                       & " WHERE o.Tipo = 1" _
+                       & " AND o.Cantidad <> 0" _
+                       & " AND o.Renglon = 1" _
+                       & " AND o.PagoDespacho = '" & Seleccion & "'" _
+                       & " AND fechaord >= 20140101" _
+                       & " ORDER BY o.Clave"
 
 
                 Case 13
-                    SQLCnslt = "SELECT Orden.Tipo, Orden.Recibida, Orden.Cantidad, Orden.Clave, Orden.Orden, Orden.fecha, Orden.fechaord, Orden.Proveedor, Orden.Articulo, " _
-                     & "Orden.Cantidad, Orden.Precio, Orden.Condicion, Orden.Moneda, Orden.Carpeta, Orden.Djai, Orden.derechos, Orden.Origen, Orden.Leyenda, Orden.TipoImpo, " _
-                     & "Orden.PagoDespacho, Orden.Fechallegada, Orden.FechaEmbarque, Orden.impodespacho, Orden.tipopago, Orden.vtodespacho, Orden.impoletra, Orden.vtoletra, " _
-                     & "Orden.pagoletra, Orden.fechadjai,  Proveedor.Nombre as [WProveedor]" _
-                     & " FROM Orden, Proveedor" _
-                     & " WHERE Orden.Proveedor = Proveedor.Proveedor" _
-                     & " AND Orden.Tipo = 1" _
-                     & " AND Orden.Cantidad <> 0" _
-                     & " AND Orden.Renglon = 1" _
-                     & " AND fechaord >= 20140101" _
-                     & " ORDER BY Orden.Clave"
+                    SQLCnslt = "SELECT o.Tipo, o.Recibida, o.Cantidad, o.Clave, o.Orden, o.fecha, o.fechaord, " _
+                       & "o.Proveedor, o.Articulo, o.Cantidad, o.Precio, o.Condicion, o.Moneda, o.Carpeta, " _
+                       & "o.Djai, o.derechos, o.Origen, o.Leyenda, o.TipoImpo, o.PagoDespacho, o.Fechallegada, " _
+                       & "o.FechaEmbarque, o.impodespacho, o.tipopago, o.vtodespacho, o.impoletra, o.vtoletra, " _
+                       & "o.pagoletra, o.fechadjai,  p.Nombre " _
+                       & " FROM Orden o inner join Proveedor p on o.Proveedor = p.Proveedor" _
+                       & " WHERE o.Tipo = 1" _
+                       & " AND o.Cantidad <> 0" _
+                       & " AND o.Renglon = 1" _
+                       & " AND fechaord >= 20140101" _
+                       & " ORDER BY o.Clave"
                     ' ZSql = ZSql + " and Orden.PagoLetra = " + "'" + Seleccion + "'"
 
                 Case 14
-                    SQLCnslt = "SELECT Orden.Tipo, Orden.Recibida, Orden.Cantidad, Orden.Clave, Orden.Orden, Orden.fecha, Orden.fechaord, Orden.Proveedor, Orden.Articulo, " _
-                     & "Orden.Cantidad, Orden.Precio, Orden.Condicion, Orden.Moneda, Orden.Carpeta, Orden.Djai, Orden.derechos, Orden.Origen, Orden.Leyenda, Orden.TipoImpo, " _
-                     & "Orden.PagoDespacho, Orden.Fechallegada, Orden.FechaEmbarque, Orden.impodespacho, Orden.tipopago, Orden.vtodespacho, Orden.impoletra, Orden.vtoletra, " _
-                     & "Orden.pagoletra, Orden.fechadjai,  Proveedor.Nombre as [WProveedor]" _
-                     & " FROM Orden, Proveedor" _
-                     & " WHERE Orden.Proveedor = Proveedor.Proveedor" _
-                     & " AND Orden.Tipo = 1" _
-                     & " AND Orden.Cantidad <> 0" _
-                     & " AND Orden.Renglon = 1" _
-                     & " AND fechaord >= 20140101" _
-                     & " ORDER BY Orden.Clave"
+                    SQLCnslt = "SELECT o.Tipo, o.Recibida, o.Cantidad, o.Clave, o.Orden, o.fecha, o.fechaord, " _
+                       & "o.Proveedor, o.Articulo, o.Cantidad, o.Precio, o.Condicion, o.Moneda, o.Carpeta, " _
+                       & "o.Djai, o.derechos, o.Origen, o.Leyenda, o.TipoImpo, o.PagoDespacho, o.Fechallegada, " _
+                       & "o.FechaEmbarque, o.impodespacho, o.tipopago, o.vtodespacho, o.impoletra, o.vtoletra, " _
+                       & "o.pagoletra, o.fechadjai,  p.Nombre " _
+                       & " FROM Orden o inner join Proveedor p on o.Proveedor = p.Proveedor" _
+                       & " WHERE  o.Tipo = 1" _
+                       & " AND o.Cantidad <> 0" _
+                       & " AND o.Renglon = 1" _
+                       & " AND fechaord >= 20140101" _
+                       & " ORDER BY o.Clave"
 
                     WDesdeFecha = Microsoft.VisualBasic.Right$(FiltroVtoI, 4) + Mid$(FiltroVtoI, 4, 2) + Microsoft.VisualBasic.Left$(FiltroVtoI, 2)
                     WHastaFecha = Microsoft.VisualBasic.Right$(FiltroVtoII, 4) + Mid$(FiltroVtoII, 4, 2) + Microsoft.VisualBasic.Left$(FiltroVtoII, 2)
 
                 Case 15
-                    SQLCnslt = "SELECT Orden.Tipo, Orden.Recibida, Orden.Cantidad, Orden.Clave, Orden.Orden, Orden.fecha, Orden.fechaord, Orden.Proveedor, Orden.Articulo, " _
-                      & "Orden.Cantidad, Orden.Precio, Orden.Condicion, Orden.Moneda, Orden.Carpeta, Orden.Djai, Orden.derechos, Orden.Origen, Orden.Leyenda, Orden.TipoImpo, " _
-                      & "Orden.PagoDespacho, Orden.Fechallegada, Orden.FechaEmbarque, Orden.impodespacho, Orden.tipopago, Orden.vtodespacho, Orden.impoletra, Orden.vtoletra, " _
-                      & "Orden.pagoletra, Orden.fechadjai,  Proveedor.Nombre as [WProveedor]" _
-                      & " FROM Orden, Proveedor" _
-                      & " WHERE Orden.Proveedor = Proveedor.Proveedor" _
-                      & " AND Orden.Tipo = 1" _
-                      & " AND Orden.Cantidad <> 0" _
-                      & " AND fechaord >= 20140101" _
-                      & " AND Orden.Articulo = '" & Seleccion & "'" _
-                      & " ORDER BY Orden.Clave"
+                    SQLCnslt = "SELECT o.Tipo, o.Recibida, o.Cantidad, o.Clave, o.Orden, o.fecha, o.fechaord, " _
+                       & "o.Proveedor, o.Articulo, o.Cantidad, o.Precio, o.Condicion, o.Moneda, o.Carpeta, " _
+                       & "o.Djai, o.derechos, o.Origen, o.Leyenda, o.TipoImpo, o.PagoDespacho, o.Fechallegada, " _
+                       & "o.FechaEmbarque, o.impodespacho, o.tipopago, o.vtodespacho, o.impoletra, o.vtoletra, " _
+                       & "o.pagoletra, o.fechadjai,  p.Nombre " _
+                       & " FROM Orden o inner join Proveedor p on o.Proveedor = p.Proveedor" _
+                       & " WHERE o.Tipo = 1" _
+                       & " AND o.Cantidad <> 0" _
+                       & " AND fechaord >= 20140101" _
+                       & " AND o.Articulo = '" & Seleccion & "'" _
+                       & " ORDER BY o.Clave"
 
 
                 Case Else
             End Select
 
-            Dim tablaOrd As DataTable = GetAll(SQLCnslt, VectorEmpresas(CiclaEmpresa))
+            Dim tablaOrd As System.Data.DataTable = GetAll(SQLCnslt, VectorEmpresas(CiclaEmpresa))
 
             If tablaOrd.Rows.Count > 0 Then
 
@@ -744,7 +761,7 @@ Public Class Centro_Importaciones
                             ZEntra = "S"
                         End If
                     Else
-                        If ZZRecibida <> 0 And RowOrd.Item("PagoLetra = 1") Then
+                        If ZZRecibida <> 0 And RowOrd.Item("PagoLetra") = 1 Then
                             ZEntra = "S"
                         Else
                             ZEntra = "N"
@@ -952,8 +969,11 @@ Public Class Centro_Importaciones
                                 DGV_Muestra.Rows(WLugar).Cells("Pta").Value = "VII"
                             Case Else
                         End Select
-                        DGV_Muestra.Rows(WLugar).Cells("Fecha").Value = Microsoft.VisualBasic.Left$(RowOrd.Item("Fecha"), 5) + "/" + Mid$(RowOrd.Item("Fecha"), 9, 2)
-                        DGV_Muestra.Rows(WLugar).Cells("Proveedor").Value = RowOrd.Item("WProveedor")
+
+                        'DGV_Muestra.Rows(WLugar).Cells("Fecha").Value = Microsoft.VisualBasic.Left$(RowOrd.Item("Fecha"), 5) + "/" + Mid$(RowOrd.Item("Fecha"), 9, 2)
+                        DGV_Muestra.Rows(WLugar).Cells("Fecha").Value = RowOrd.Item("Fecha")
+
+                        DGV_Muestra.Rows(WLugar).Cells("Proveedor").Value = RowOrd.Item("Nombre")
 
                         Select Case RowOrd.Item("Moneda")
                             Case 0
@@ -1020,6 +1040,7 @@ Public Class Centro_Importaciones
 
                         Select Case RowOrd.Item("PagoDespacho")
                             Case 0
+
                                 ZZSumaDespacho = ZZSumaDespacho + Val(DGV_Muestra.Rows(WLugar).Cells("Despacho").Value)
                                 DGV_Muestra.Rows(WLugar).Cells("PagoDes").Value = "Pendiente"
                             Case Else
@@ -1202,7 +1223,7 @@ Public Class Centro_Importaciones
 
         If ColumnaOpcion = 13 Or ColumnaOpcionII = 10 Or ColumnaOpcionIII = 10 Or ZZBorra = "S" Then
 
-            Dim TablaPas As New DataTable
+            Dim TablaPas As New System.Data.DataTable
 
             With TablaPas.Columns
                 .Add("Orden")
@@ -1220,37 +1241,39 @@ Public Class Centro_Importaciones
                 .Add("Despacho")
                 .Add("PagoDes")
                 .Add("LetraTotal")
-                .Add("PagoTotal")
-                .Add("VtoTotal")
+                .Add("PagoLetra")
+                .Add("VtoLetra")
                 .Add("UsPagadoLetra")
                 .Add("FEmbarque")
                 .Add("SaldoLetra")
+                .Add("ProveedorCod")
             End With
 
 
             Dim Fila As Integer = 0
             For Each row In DGV_Muestra.Rows
                 TablaPas.Rows.Add()
-                TablaPas.Rows(Fila).Item("Orden") = row.cell("Orden").value
-                TablaPas.Rows(Fila).Item("Pta") = row.cell("Pta").value
-                TablaPas.Rows(Fila).Item("Fecha") = row.cell("Fecha").value
-                TablaPas.Rows(Fila).Item("Proveedor") = row.cell("Proveedor").value
-                TablaPas.Rows(Fila).Item("Mon") = row.cell("Mon").value
-                TablaPas.Rows(Fila).Item("Carpeta") = row.cell("Carpeta").value
-                TablaPas.Rows(Fila).Item("Djai") = row.cell("Djai").value
-                TablaPas.Rows(Fila).Item("Origen") = row.cell("Origen").value
-                TablaPas.Rows(Fila).Item("Incoterms") = row.cell("Incoterms").value
-                TablaPas.Rows(Fila).Item("Transporte") = row.cell("Transporte").value
-                TablaPas.Rows(Fila).Item("FLLegada") = row.cell("FLLegada").value
-                TablaPas.Rows(Fila).Item("TPago") = row.cell("TPago").value
-                TablaPas.Rows(Fila).Item("Despacho") = row.cell("Despacho").value
-                TablaPas.Rows(Fila).Item("PagoDes") = row.cell("PagoDes").value
-                TablaPas.Rows(Fila).Item("LetraTotal") = row.cell("LetraTotal").value
-                TablaPas.Rows(Fila).Item("PagoTotal") = row.cell("PagoTotal").value
-                TablaPas.Rows(Fila).Item("VtoTotal") = row.cell("VtoTotal").value
-                TablaPas.Rows(Fila).Item("UsPagadoLetra") = row.cell("UsPagadoLetra").value
-                TablaPas.Rows(Fila).Item("FEmbarque") = row.cell("FEmbarque").value
-                TablaPas.Rows(Fila).Item("SaldoLetra") = row.cell("SaldoLetra").value
+                TablaPas.Rows(Fila).Item("Orden") = row.cells("Orden").value
+                TablaPas.Rows(Fila).Item("Pta") = row.cells("Pta").value
+                TablaPas.Rows(Fila).Item("Fecha") = row.cells("Fecha").value
+                TablaPas.Rows(Fila).Item("Proveedor") = row.cells("Proveedor").value
+                TablaPas.Rows(Fila).Item("Mon") = row.cells("Mon").value
+                TablaPas.Rows(Fila).Item("Carpeta") = row.cells("Carpeta").value
+                TablaPas.Rows(Fila).Item("Djai") = row.cells("Djai").value
+                TablaPas.Rows(Fila).Item("Origen") = row.cells("Origen").value
+                TablaPas.Rows(Fila).Item("Incoterms") = row.cells("Incoterms").value
+                TablaPas.Rows(Fila).Item("Transporte") = row.cells("Transporte").value
+                TablaPas.Rows(Fila).Item("FLLegada") = row.cells("FLLegada").value
+                TablaPas.Rows(Fila).Item("TPago") = row.cells("TPago").value
+                TablaPas.Rows(Fila).Item("Despacho") = row.cells("Despacho").value
+                TablaPas.Rows(Fila).Item("PagoDes") = row.cells("PagoDes").value
+                TablaPas.Rows(Fila).Item("LetraTotal") = row.cells("LetraTotal").value
+                TablaPas.Rows(Fila).Item("PagoLetra") = row.cells("PagoLetra").value
+                TablaPas.Rows(Fila).Item("VtoLetra") = row.cells("VtoLetra").value
+                TablaPas.Rows(Fila).Item("UsPagadoLetra") = row.cells("UsPagadoLetra").value
+                TablaPas.Rows(Fila).Item("FEmbarque") = row.cells("FEmbarque").value
+                TablaPas.Rows(Fila).Item("SaldoLetra") = row.cells("SaldoLetra").value
+                TablaPas.Rows(Fila).Item("ProveedorCod") = row.cells("ProveedorCod").value
 
                 Fila += 1
             Next
@@ -1280,19 +1303,19 @@ Public Class Centro_Importaciones
                     DGV_Muestra.Rows(Fila).Cells("Despacho").Value = RowPas.Item("Despacho")
                     DGV_Muestra.Rows(Fila).Cells("PagoDes").Value = RowPas.Item("PagoDes")
                     DGV_Muestra.Rows(Fila).Cells("LetraTotal").Value = RowPas.Item("LetraTotal")
-                    DGV_Muestra.Rows(Fila).Cells("PagoTotal").Value = RowPas.Item("PagoTotal")
-                    DGV_Muestra.Rows(Fila).Cells("VtoTotal").Value = RowPas.Item("VtoTotal")
+                    DGV_Muestra.Rows(Fila).Cells("PagoLetra").Value = RowPas.Item("PagoLetra")
+                    DGV_Muestra.Rows(Fila).Cells("VtoLetra").Value = RowPas.Item("VtoLetra")
                     DGV_Muestra.Rows(Fila).Cells("UsPagadoLetra").Value = RowPas.Item("UsPagadoLetra")
                     DGV_Muestra.Rows(Fila).Cells("FEmbarque").Value = RowPas.Item("FEmbarque")
                     DGV_Muestra.Rows(Fila).Cells("SaldoLetra").Value = RowPas.Item("SaldoLetra")
-
+                    DGV_Muestra.Rows(Fila).Cells("ProveedorCod").Value = RowPas.Item("ProveedorCod")
 
 
                     Dim ZDJai As String = DGV_Muestra.Rows(Fila).Cells("Djai").Value
                     Dim ZFechaLlegada As String = DGV_Muestra.Rows(Fila).Cells("FLLegada").Value
                     Dim ZPagoDespacho As String = DGV_Muestra.Rows(Fila).Cells("PagoDes").Value
-                    Dim ZPagoLetra As String = DGV_Muestra.Rows(Fila).Cells("PagoTotal").Value
-                    Dim ZFechaLetra As String = DGV_Muestra.Rows(Fila).Cells("VtoTotal").Value
+                    Dim ZPagoLetra As String = DGV_Muestra.Rows(Fila).Cells("PagoLetra").Value
+                    Dim ZFechaLetra As String = DGV_Muestra.Rows(Fila).Cells("VtoLetra").Value
                     Dim ZFechaDJai As String = DGV_Muestra.Rows(Fila).Cells("SaldoLetra").Value
 
                     If Trim(ZDJai) <> "" Then
@@ -1448,7 +1471,7 @@ Public Class Centro_Importaciones
 
       
 
-        cbx_Ordenamiento.SelectedIndex = 5
+        'cbx_Ordenamiento.SelectedIndex = 5
 
         cbx_FiltroI.SelectedIndex = 0
         cbx_FiltroII.SelectedIndex = 0
@@ -1460,11 +1483,941 @@ Public Class Centro_Importaciones
 
 
 
-        Proceso_Click()
         'Call OrdenaI_click()
 
         REM Call Proceso_Click
+        Proceso_Click()
 
 
+
+    End Sub
+
+    Private Sub btn_Actualiza_Click(sender As Object, e As EventArgs) Handles btn_Actualiza.Click
+        Proceso_Click()
+    End Sub
+
+    Private Sub chk_LetraPendiente_CheckedChanged(sender As Object, e As EventArgs) Handles chk_LetraPendiente.CheckedChanged
+        Proceso_Click()
+    End Sub
+
+    Private Sub cbx_FiltroI_DropDownClosed(sender As Object, e As EventArgs) Handles cbx_FiltroI.DropDownClosed
+
+        ColumnaOpcion = cbx_FiltroI.SelectedIndex
+        ZZFiltroOrdenI = cbx_FiltroI.SelectedIndex
+        ZZTipoFiltro = 1
+
+      
+
+        Select Case ColumnaOpcion
+            Case 0
+                Call Proceso_Click()
+
+            Case 1
+                With New Ventana_auxiliar(ColumnaOpcion, cbx_Activas.SelectedIndex)
+                    .Show(Me)
+                End With
+                
+
+            Case 2
+                With New Ventana_auxiliar(ColumnaOpcion)
+                    .Show(Me)
+                End With
+      
+
+            Case 3
+                With New Ventana_auxiliar(ColumnaOpcion)
+                    .Show(Me)
+                End With
+          
+            Case 4, 6, 7
+                With New Ventana_auxiliar(ColumnaOpcion)
+                    .Show(Me)
+                End With
+
+
+            Case 5
+                With New Ventana_auxiliar(ColumnaOpcion)
+                    .Show(Me)
+                End With
+                
+            Case 8, 9, 11, 12, 13
+                With New Ventana_auxiliar(ColumnaOpcion)
+                    .Show(Me)
+                End With
+            Case 10
+                With New Ventana_auxiliar(ColumnaOpcion)
+                    .Show(Me)
+                End With
+          
+            Case 14
+                With New Ventana_auxiliar(ColumnaOpcion)
+                    .Show(Me)
+                End With
+               
+            Case 15
+                With New Ventana_auxiliar(ColumnaOpcion)
+                    .Show(Me)
+                End With
+             
+
+        End Select
+    End Sub
+
+    Public Sub PasaFiltro(Filtro As String) Implements ICentroImportaciones_auxiliar.PasaFiltro
+        If Filtro <> "" Then
+            Select Case ZZTipoFiltro
+                Case 1
+                    Seleccion = Filtro
+                Case 2
+                    SeleccionIII = Filtro
+                Case Else
+                    SeleccionV = Filtro
+            End Select
+
+        Else
+
+            Seleccion = ""
+
+            Select Case ZZTipoFiltro
+                Case 1
+                    ColumnaOpcion = 0
+                Case 2
+                    ColumnaOpcionII = 0
+                Case Else
+                    ColumnaOpcionIII = 0
+            End Select
+
+        End If
+        
+        Proceso_Click()
+    End Sub
+
+    Public Sub pasafechas(Desde As String, Hasta As String) Implements ICentroImportaciones_auxiliar.pasafechas
+        Select Case ZZTipoFiltro
+            Case 1
+                Seleccion = Desde
+                SeleccionII = Hasta
+            Case 2
+                SeleccionIII = Desde
+                SeleccionIV = Hasta
+            Case 3
+                SeleccionV = Desde
+                SeleccionVI = Hasta
+            Case Else
+        End Select
+
+
+        Call Proceso_Click()
+
+    End Sub
+
+    Public Sub PasaOrden(Orden As String, Planta As String) Implements ICentroImportaciones_auxiliar.PasaOrden
+
+        Dim SQLCnslt As String = "SELECT o.Tipo, o.Recibida, o.Cantidad, o.Clave, o.Orden, o.fecha, o.fechaord, " _
+                     & "o.Proveedor, o.Articulo, o.Cantidad, o.Precio, o.Condicion, o.Moneda, o.Carpeta, " _
+                     & "o.Djai, o.derechos, o.Origen, o.Leyenda, o.TipoImpo, o.PagoDespacho, o.Fechallegada, " _
+                     & "o.FechaEmbarque, o.impodespacho, o.tipopago, o.vtodespacho, o.impoletra, o.vtoletra, " _
+                     & "o.pagoletra, o.fechadjai, o.PagoParcialLetra,  p.Nombre " _
+                     & " FROM Orden o INNER JOIN Proveedor p ON o.Proveedor = p.Proveedor" _
+                     & " WHERE o.Orden = '" & Orden & "'" _
+                     & " AND fechaord >=20140101"
+
+        Dim RowOrden As DataRow = GetSingle(SQLCnslt, Planta)
+        If RowOrden IsNot Nothing Then
+
+            DGV_Muestra.Rows.Clear()
+            DGV_Muestra.Rows.Add()
+            Dim lugar As Integer = 0
+            Dim ZDJai As String = IIf(IsDBNull(RowOrden.Item("DJai")), "", RowOrden.Item("DJai"))
+
+
+            DGV_Muestra.Rows(lugar).Cells("Orden").Value = RowOrden.Item("Orden")
+
+            Dim WPta As String
+            Select Case UCase(Planta)
+                Case "SURFACTANSA"
+                    WPta = "I"
+                Case "SURFACTAN_II"
+                    WPta = "II"
+                Case "SURFACTAN_III"
+                    WPta = "III"
+                Case "SURFACTAN_V"
+                    WPta = "V"
+                Case "SURFACTAN_VI"
+                    WPta = "VI"
+                Case "SURFACTAN_VII"
+                    WPta = "VII"
+                Case Else
+            End Select
+            DGV_Muestra.Rows(lugar).Cells("Pta").Value = WPta
+
+            DGV_Muestra.Rows(lugar).Cells("Fecha").Value = Microsoft.VisualBasic.Left$(RowOrden.Item("Fecha"), 5) + "/" + Mid$(RowOrden.Item("Fecha"), 9, 2)
+            DGV_Muestra.Rows(lugar).Cells("Proveedor").Value = RowOrden.Item("Nombre")
+
+            Dim WMon As String
+            Select Case RowOrden.Item("Moneda")
+                Case 0
+                    WMon = "U$S"
+                Case 1
+                    WMon = "$"
+                Case 2
+                    WMon = "Eur"
+            End Select
+            DGV_Muestra.Rows(lugar).Cells("Mon").Value = WMon
+
+
+            DGV_Muestra.Rows(lugar).Cells("Carpeta").Value = RowOrden.Item("Carpeta")
+            DGV_Muestra.Rows(lugar).Cells("Djai").Value = ZDJai
+            DGV_Muestra.Rows(lugar).Cells("Origen").Value = RowOrden.Item("Origen")
+
+            Dim WIncoterms As String
+            Select Case RowOrden.Item("Leyenda")
+                Case 1
+                    WIncoterms = "FOB"
+                Case 2
+                    WIncoterms = "CIF"
+                Case 3
+                    WIncoterms = "CFR"
+                Case 4
+                    WIncoterms = "CPT"
+                Case 5
+                    WIncoterms = "EXW"
+                Case 6
+                    WIncoterms = "FCA"
+                Case Else
+                    WIncoterms = ""
+            End Select
+            DGV_Muestra.Rows(lugar).Cells("Incoterms").Value = WIncoterms
+
+            Dim WTransporte As String
+            Select Case RowOrden.Item("TipoImpo")
+                Case 1
+                    WTransporte = "Maritimo"
+                Case 2
+                    WTransporte = "Terrestre"
+                Case 3
+                    WTransporte = "Aereo"
+                Case Else
+                    WTransporte = ""
+            End Select
+            DGV_Muestra.Rows(lugar).Cells("Transporte").Value = WTransporte
+
+            DGV_Muestra.Rows(lugar).Cells("FLLegada").Value = IIf(IsDBNull(RowOrden.Item("FechaLlegada")), "", RowOrden.Item("FechaLlegada"))
+
+            Dim WTPago As String
+            Select Case RowOrden.Item("TipoPago")
+                Case 1
+                    WTPago = "Pago Anti."
+                Case 2
+                    WTPago = "A la vista"
+                Case 3
+                    WTPago = "Cta.Cte."
+                Case Else
+                    WTPago = ""
+            End Select
+            DGV_Muestra.Rows(lugar).Cells("TPago").Value = WTPago
+
+            DGV_Muestra.Rows(lugar).Cells("Despacho").Value = formatonumerico(RowOrden.Item("ImpoDespacho"))
+
+
+            Dim WPagoDes As String
+            Select Case RowOrden.Item("PagoDespacho")
+                Case 0
+                    WPagoDes = "Pendiente"
+                Case Else
+                    WPagoDes = "Pagado"
+            End Select
+            DGV_Muestra.Rows(lugar).Cells("PagoDes").Value = WPagoDes
+
+
+            DGV_Muestra.Rows(lugar).Cells("LetraTotal").Value = formatonumerico(RowOrden.Item("ImpoLetra"))
+
+
+            Dim WPagoLetra As String
+            Select Case RowOrden.Item("PagoLetra")
+                Case 0
+                    WPagoLetra = "Pendiente"
+                Case Else
+                    WPagoLetra = "Pagado"
+            End Select
+            DGV_Muestra.Rows(lugar).Cells("PagoLetra").Value = WPagoLetra
+
+            DGV_Muestra.Rows(lugar).Cells("VtoLetra").Value = RowOrden.Item("VtoLetra")
+            DGV_Muestra.Rows(lugar).Cells("USPagadoLetra").Value = RowOrden.Item("PagoParcialLetra")
+            DGV_Muestra.Rows(lugar).Cells("FEmbarque").Value = IIf(IsDBNull(RowOrden.Item("FechaEmbarque")), "", RowOrden.Item("FechaEmbarque"))
+            DGV_Muestra.Rows(lugar).Cells("SaldoLetra").Value = IIf(IsDBNull(RowOrden.Item("FechaDJai")), "", RowOrden.Item("FechaDJai"))
+            DGV_Muestra.Rows(lugar).Cells("ProveedorCod").Value = RowOrden.Item("Proveedor")
+
+            Dim ZZSumaLetra As Double = Val(DGV_Muestra.Rows(lugar).Cells("LetraTotal").Value) - Val(DGV_Muestra.Rows(lugar).Cells("USPagadoLetra").Value)
+            Dim ZZSumaDespacho As Double = Val(DGV_Muestra.Rows(lugar).Cells("Despacho").Value)
+
+            txt_SumaDespacho.Text = formatonumerico(ZZSumaDespacho)
+
+
+            txt_SumaLetra.Text = formatonumerico(ZZSumaLetra)
+        End If
+
+
+    End Sub
+
+    Public Sub PasaCarpeta(Carpeta As String, Planta As String) Implements ICentroImportaciones_auxiliar.PasaCarpeta
+
+        Dim SQLCnslt As String = "SELECT o.Tipo, o.Recibida, o.Cantidad, o.Clave, o.Orden, o.fecha, o.fechaord, " _
+                     & "o.Proveedor, o.Articulo, o.Cantidad, o.Precio, o.Condicion, o.Moneda, o.Carpeta, " _
+                     & "o.Djai, o.derechos, o.Origen, o.Leyenda, o.TipoImpo, o.PagoDespacho, o.Fechallegada, " _
+                     & "o.FechaEmbarque, o.impodespacho, o.tipopago, o.vtodespacho, o.impoletra, o.vtoletra, " _
+                     & "o.pagoletra, o.fechadjai, o.PagoParcialLetra,  p.Nombre " _
+                     & " FROM Orden o INNER JOIN Proveedor p ON o.Proveedor = p.Proveedor" _
+                     & " WHERE o.Carpeta = '" & Carpeta & "'" _
+                     & " AND fechaord >=20140101"
+
+        Dim RowOrden As DataRow = GetSingle(SQLCnslt, Planta)
+        If RowOrden IsNot Nothing Then
+
+            DGV_Muestra.Rows.Clear()
+            DGV_Muestra.Rows.Add()
+            Dim lugar As Integer = 0
+            Dim ZDJai As String = IIf(IsDBNull(RowOrden.Item("DJai")), "", RowOrden.Item("DJai"))
+
+
+            DGV_Muestra.Rows(lugar).Cells("Orden").Value = RowOrden.Item("Orden")
+
+            Dim WPta As String
+            Select Case UCase(Planta)
+                Case "SURFACTANSA"
+                    WPta = "I"
+                Case "SURFACTAN_II"
+                    WPta = "II"
+                Case "SURFACTAN_III"
+                    WPta = "III"
+                Case "SURFACTAN_V"
+                    WPta = "V"
+                Case "SURFACTAN_VI"
+                    WPta = "VI"
+                Case "SURFACTAN_VII"
+                    WPta = "VII"
+                Case Else
+            End Select
+            DGV_Muestra.Rows(lugar).Cells("Pta").Value = WPta
+
+            DGV_Muestra.Rows(lugar).Cells("Fecha").Value = Microsoft.VisualBasic.Left$(RowOrden.Item("Fecha"), 5) + "/" + Mid$(RowOrden.Item("Fecha"), 9, 2)
+            DGV_Muestra.Rows(lugar).Cells("Proveedor").Value = RowOrden.Item("Nombre")
+
+            Dim WMon As String
+            Select Case RowOrden.Item("Moneda")
+                Case 0
+                    WMon = "U$S"
+                Case 1
+                    WMon = "$"
+                Case 2
+                    WMon = "Eur"
+            End Select
+            DGV_Muestra.Rows(lugar).Cells("Mon").Value = WMon
+
+
+            DGV_Muestra.Rows(lugar).Cells("Carpeta").Value = RowOrden.Item("Carpeta")
+            DGV_Muestra.Rows(lugar).Cells("Djai").Value = ZDJai
+            DGV_Muestra.Rows(lugar).Cells("Origen").Value = RowOrden.Item("Origen")
+
+            Dim WIncoterms As String
+            Select Case RowOrden.Item("Leyenda")
+                Case 1
+                    WIncoterms = "FOB"
+                Case 2
+                    WIncoterms = "CIF"
+                Case 3
+                    WIncoterms = "CFR"
+                Case 4
+                    WIncoterms = "CPT"
+                Case 5
+                    WIncoterms = "EXW"
+                Case 6
+                    WIncoterms = "FCA"
+                Case Else
+                    WIncoterms = ""
+            End Select
+            DGV_Muestra.Rows(lugar).Cells("Incoterms").Value = WIncoterms
+
+            Dim WTransporte As String
+            Select Case RowOrden.Item("TipoImpo")
+                Case 1
+                    WTransporte = "Maritimo"
+                Case 2
+                    WTransporte = "Terrestre"
+                Case 3
+                    WTransporte = "Aereo"
+                Case Else
+                    WTransporte = ""
+            End Select
+            DGV_Muestra.Rows(lugar).Cells("Transporte").Value = WTransporte
+
+            DGV_Muestra.Rows(lugar).Cells("FLLegada").Value = IIf(IsDBNull(RowOrden.Item("FechaLlegada")), "", RowOrden.Item("FechaLlegada"))
+
+            Dim WTPago As String
+            Select Case RowOrden.Item("TipoPago")
+                Case 1
+                    WTPago = "Pago Anti."
+                Case 2
+                    WTPago = "A la vista"
+                Case 3
+                    WTPago = "Cta.Cte."
+                Case Else
+                    WTPago = ""
+            End Select
+            DGV_Muestra.Rows(lugar).Cells("TPago").Value = WTPago
+
+            DGV_Muestra.Rows(lugar).Cells("Despacho").Value = formatonumerico(RowOrden.Item("ImpoDespacho"))
+
+
+            Dim WPagoDes As String
+            Select Case RowOrden.Item("PagoDespacho")
+                Case 0
+                    WPagoDes = "Pendiente"
+                Case Else
+                    WPagoDes = "Pagado"
+            End Select
+            DGV_Muestra.Rows(lugar).Cells("PagoDes").Value = WPagoDes
+
+
+            DGV_Muestra.Rows(lugar).Cells("LetraTotal").Value = formatonumerico(RowOrden.Item("ImpoLetra"))
+
+
+            Dim WPagoLetra As String
+            Select Case RowOrden.Item("PagoLetra")
+                Case 0
+                    WPagoLetra = "Pendiente"
+                Case Else
+                    WPagoLetra = "Pagado"
+            End Select
+            DGV_Muestra.Rows(lugar).Cells("PagoLetra").Value = WPagoLetra
+
+            DGV_Muestra.Rows(lugar).Cells("VtoLetra").Value = RowOrden.Item("VtoLetra")
+            DGV_Muestra.Rows(lugar).Cells("USPagadoLetra").Value = RowOrden.Item("PagoParcialLetra")
+            DGV_Muestra.Rows(lugar).Cells("FEmbarque").Value = IIf(IsDBNull(RowOrden.Item("FechaEmbarque")), "", RowOrden.Item("FechaEmbarque"))
+            DGV_Muestra.Rows(lugar).Cells("SaldoLetra").Value = IIf(IsDBNull(RowOrden.Item("FechaDJai")), "", RowOrden.Item("FechaDJai"))
+            DGV_Muestra.Rows(lugar).Cells("ProveedorCod").Value = RowOrden.Item("Proveedor")
+
+            Dim ZZSumaLetra As Double = Val(DGV_Muestra.Rows(lugar).Cells("LetraTotal").Value) - Val(DGV_Muestra.Rows(lugar).Cells("USPagadoLetra").Value)
+            Dim ZZSumaDespacho As Double = Val(DGV_Muestra.Rows(lugar).Cells("Despacho").Value)
+
+            txt_SumaDespacho.Text = formatonumerico(ZZSumaDespacho)
+
+
+            txt_SumaLetra.Text = formatonumerico(ZZSumaLetra)
+        End If
+
+    End Sub
+
+    Public Sub PasaTXTDjai(Fecha As String) Implements ICentroImportaciones_auxiliar.PasaTXTDjai
+
+
+        Dim ZZPasa(1000, 10) As String
+        Dim ZZLugarPasa As Integer
+        Dim LugarPlanilla As Integer
+
+        Erase ZZPasa
+        ZZLugarPasa = 0
+        LugarPlanilla = 7
+
+        REM
+        REM proceso los comodatos
+        REM
+
+        '' Creamos un objeto Excel
+
+        Dim appExcel = CreateObject("Excel.application")
+
+        Dim ruta As String = "C:\Djai\djai.xls"
+
+        If Len(Dir(ruta)) > 0 Then
+
+            Dim objLibro = appExcel.workbooks.Open(ruta)
+
+            Do
+
+                LugarPlanilla = LugarPlanilla + 1
+
+           
+                Dim Aa4 As Double = appExcel.cells(LugarPlanilla, 4).Value
+
+                Dim Aa9 As String = appExcel.cells(LugarPlanilla, 9).Value
+
+                If Trim(appExcel.cells(LugarPlanilla, 1).Value) <> "" Then
+
+                    If Val(Aa4) <> 0 And Trim(Aa9) <> "" Then
+                        REM If Mid$(FechaTxtDjai.Text, 4, 7) = Mid$(appExcel.cells(LugarPlanilla, 6).Value, 4, 7) Then
+
+                        ZZLugarPasa = ZZLugarPasa + 1
+
+                        ZZPasa(ZZLugarPasa, 1) = appExcel.cells(LugarPlanilla, 1).Value
+                        ZZPasa(ZZLugarPasa, 2) = appExcel.cells(LugarPlanilla, 2).Value
+                        ZZPasa(ZZLugarPasa, 3) = appExcel.cells(LugarPlanilla, 3).Value
+                        Dim ZZImporte As Double = appExcel.cells(LugarPlanilla, 4).Value
+                        ZZPasa(ZZLugarPasa, 4) = Str$(ZZImporte)
+                        ZZPasa(ZZLugarPasa, 5) = appExcel.cells(LugarPlanilla, 5).Value
+                        ZZPasa(ZZLugarPasa, 6) = appExcel.cells(LugarPlanilla, 6).Value
+                        ZZPasa(ZZLugarPasa, 7) = appExcel.cells(LugarPlanilla, 7).Value
+                        ZZPasa(ZZLugarPasa, 8) = appExcel.cells(LugarPlanilla, 8).Value
+                        ZZPasa(ZZLugarPasa, 9) = appExcel.cells(LugarPlanilla, 9).Value
+
+                    End If
+
+                Else
+
+                    If LugarPlanilla = 1000 Then
+                        Exit Do
+                    End If
+
+
+                End If
+
+            Loop
+
+            appExcel.Quit()
+
+        End If
+
+
+
+        Dim XNOmbre As String = "c:\DJAI\F4106." & "30549165083." & Microsoft.VisualBasic.Right$(Fecha, 4) & Mid$(Fecha, 4, 2) & "00.0000.txt"
+
+        'Abro el archivos para que sino existe lo creo
+        Dim Test As New FileStream(XNOmbre, FileMode.OpenOrCreate)
+        Test.Close()
+
+        Dim Archivo As New StreamWriter(XNOmbre)
+        'open XNombreFor Output As #1
+
+        Dim WImpo1 As String = "01"
+        Dim WImpo2 As String = "30549165083"
+        Dim WImpo3 As String = "4106"
+        Dim WImpo4 As String = "00100"
+        Dim WImpo5 As String = Microsoft.VisualBasic.Right$(Fecha, 4) & Mid$(Fecha, 4, 2)
+        Dim WImpo6 As String = "00"
+        Dim WImpo7 As String = "0103"
+        Dim WImpo8 As String = "857"
+
+        Dim WImpre As String = WImpo1 + WImpo2 + WImpo3 + WImpo4 + WImpo5 + WImpo6 + WImpo7 + WImpo8
+
+        Archivo.WriteLine(WImpre)
+        ' Print #1, WImpre
+
+
+        For Ciclo = 1 To ZZLugarPasa
+
+            WImpo1 = "02"
+            WImpo2 = Trim(ZZPasa(Ciclo, 9))
+            WImpo3 = Trim(ZZPasa(Ciclo, 7))
+            WImpo4 = Trim(ZZPasa(Ciclo, 9))
+            WImpo5 = Str$(Val(ZZPasa(Ciclo, 4)) * 100)
+            WImpo5 = WImpo5.PadLeft(15, "0")
+
+
+            WImpre = WImpo1 + WImpo2 + WImpo3 + WImpo4 + WImpo5
+            Archivo.WriteLine(WImpre)
+            ' Print #1, WImpre
+
+        Next Ciclo
+
+        Archivo.Close()
+        'Close #1
+
+
+        Dim mensaje As String = "El archivo se a generado el archivo " & "c:\DJAI\F4106." & "30549165083." & Microsoft.VisualBasic.Right$(Fecha, 4) & Mid$(Fecha, 4, 2) & "00.0000.txt"
+        MsgBox(mensaje, 0, "Archivo de Proveedores")
+
+
+
+
+
+    End Sub
+
+    Private Sub cbx_FiltroII_DropDownClosed(sender As Object, e As EventArgs) Handles cbx_FiltroII.DropDownClosed
+
+        Dim SelecionadoFiltro As Integer = cbx_FiltroII.SelectedIndex
+        ColumnaOpcionII = cbx_FiltroII.SelectedIndex
+
+
+
+        'LE AGREGO UN MAS 1 o 3 PARA QUE SE IGUALE A EL FILTRO I 
+        'QUE TIENE MAS VALORES
+        If SelecionadoFiltro > 0 Then
+            If SelecionadoFiltro >= 1 And SelecionadoFiltro <= 3 Then
+                SelecionadoFiltro += 1
+            Else
+                SelecionadoFiltro += 3
+            End If
+
+        End If
+
+        ZZFiltroOrdenII = cbx_FiltroII.SelectedIndex
+        ZZTipoFiltro = 2
+
+
+      
+
+        Select Case SelecionadoFiltro
+            Case 0 'Vacio
+                '  Call Proceso_Click()
+
+            Case 1 'ORDEN
+                With New Ventana_auxiliar(SelecionadoFiltro)
+                    .Show(Me)
+                End With
+
+
+            Case 2 'PLANTA
+                With New Ventana_auxiliar(SelecionadoFiltro)
+                    .Show(Me)
+                End With
+
+
+            Case 3 'FECHA
+                With New Ventana_auxiliar(SelecionadoFiltro)
+                    .Show(Me)
+                End With
+
+            Case 4, 6, 7 '4- Proveedor/ 6-DJai / 7-Origen  
+                With New Ventana_auxiliar(SelecionadoFiltro)
+                    .Show(Me)
+                End With
+
+
+            Case 5 'Carpeta
+                With New Ventana_auxiliar(SelecionadoFiltro)
+                    .Show(Me)
+                End With
+
+            Case 8, 9, 11, 12, 13 '8-Incoterms /9-Transporte/11-TPago/12-PagoDespacho/13-PagoLetra
+                With New Ventana_auxiliar(SelecionadoFiltro)
+                    .Show(Me)
+                End With
+            Case 10 ' FLLegada
+                With New Ventana_auxiliar(SelecionadoFiltro)
+                    .Show(Me)
+                End With
+
+            Case 14 'VtoLetra
+                With New Ventana_auxiliar(SelecionadoFiltro)
+                    .Show(Me)
+                End With
+
+            Case 15 'M.Prima
+                With New Ventana_auxiliar(SelecionadoFiltro)
+                    .Show(Me)
+                End With
+
+
+        End Select
+
+
+
+   
+    End Sub
+
+    Private Sub cbx_FiltroIII_DropDownClosed(sender As Object, e As EventArgs) Handles cbx_FiltroIII.DropDownClosed
+
+        Dim SelecionadoFiltro As Integer = cbx_FiltroIII.SelectedIndex
+        ColumnaOpcionIII = cbx_FiltroIII.SelectedIndex
+
+
+
+        'LE AGREGO UN MAS 1 o 3 PARA QUE SE IGUALE A EL FILTRO I 
+        'QUE TIENE MAS VALORES
+        If SelecionadoFiltro > 0 Then
+            If SelecionadoFiltro >= 1 And SelecionadoFiltro <= 3 Then
+                SelecionadoFiltro += 1
+            Else
+                SelecionadoFiltro += 3
+            End If
+
+        End If
+
+        ZZFiltroOrdenIII = cbx_FiltroIII.SelectedIndex
+        ZZTipoFiltro = 3
+
+
+
+
+        Select Case SelecionadoFiltro
+            Case 0 'Vacio
+                '  Call Proceso_Click()
+
+            Case 1 'ORDEN
+                With New Ventana_auxiliar(SelecionadoFiltro)
+                    .Show(Me)
+                End With
+
+
+            Case 2 'PLANTA
+                With New Ventana_auxiliar(SelecionadoFiltro)
+                    .Show(Me)
+                End With
+
+
+            Case 3 'FECHA
+                With New Ventana_auxiliar(SelecionadoFiltro)
+                    .Show(Me)
+                End With
+
+            Case 4, 6, 7 '4- Proveedor/ 6-DJai / 7-Origen  
+                With New Ventana_auxiliar(SelecionadoFiltro)
+                    .Show(Me)
+                End With
+
+
+            Case 5 'Carpeta
+                With New Ventana_auxiliar(SelecionadoFiltro)
+                    .Show(Me)
+                End With
+
+            Case 8, 9, 11, 12, 13 '8-Incoterms /9-Transporte/11-TPago/12-PagoDespacho/13-PagoLetra
+                With New Ventana_auxiliar(SelecionadoFiltro)
+                    .Show(Me)
+                End With
+            Case 10 ' FLLegada
+                With New Ventana_auxiliar(SelecionadoFiltro)
+                    .Show(Me)
+                End With
+
+            Case 14 'VtoLetra
+                With New Ventana_auxiliar(SelecionadoFiltro)
+                    .Show(Me)
+                End With
+
+            Case 15 'M.Prima
+                With New Ventana_auxiliar(SelecionadoFiltro)
+                    .Show(Me)
+                End With
+
+     
+        End Select
+
+
+    End Sub
+
+    Private Sub DGV_Muestra_SortCompare(sender As Object, e As DataGridViewSortCompareEventArgs) Handles DGV_Muestra.SortCompare
+        Dim num1, num2
+
+        Select Case e.Column.Index
+            Case 0, 5
+                'INTEGER
+                num1 = CInt(e.CellValue1)
+                num2 = CInt(e.CellValue2)
+            Case 1
+                Select Case e.CellValue1
+                    Case "I"
+                        num1 = 1
+                    Case "II"
+                        num1 = 2
+                    Case "III"
+                        num1 = 3
+                    Case "V"
+                        num1 = 5
+                    Case "VI"
+                        num1 = 6
+                    Case "VII"
+                        num1 = 7
+                End Select
+                Select Case e.CellValue2
+                    Case "I"
+                        num2 = 1
+                    Case "II"
+                        num2 = 2
+                    Case "III"
+                        num2 = 3
+                    Case "V"
+                        num2 = 5
+                    Case "VI"
+                        num2 = 6
+                    Case "VII"
+                        num2 = 7
+                End Select
+
+            Case 3, 4, 6, 7, 8, 9, 11, 13, 15
+                'String
+                num1 = e.CellValue1
+                num2 = e.CellValue2
+
+            Case 2, 10, 16, 18, 19
+                'Fechas
+                num1 = ordenaFecha(e.CellValue1)
+                num2 = ordenaFecha(e.CellValue2)
+
+            Case 12, 14, 17
+                'Numericos con coma
+                num1 = CDbl(e.CellValue1)
+                num2 = CDbl(e.CellValue2)
+            Case Else
+                Exit Sub
+        End Select
+
+        If num1 < num2 Then
+            e.SortResult = -1
+        ElseIf num1 = num2 Then
+            e.SortResult = 0
+        Else
+            e.SortResult = 1
+        End If
+
+        e.Handled = True
+
+    End Sub
+
+    Private Sub btn_Exportacion_Click(sender As Object, e As EventArgs) Handles btn_Exportacion.Click
+
+        Dim SQLCnlst As String = "DELETE ControlImpoImpre"
+
+        ExecuteNonQueries({SQLCnlst}, Operador.Base)
+
+        Dim ListaSQLCnslt As New List(Of String)
+
+        For Each DGVRow As DataGridViewRow In DGV_Muestra.SelectedRows
+
+            Dim ZOrden As String = DGVRow.Cells("Orden").Value
+            Dim ZPta As String = DGVRow.Cells("Pta").Value
+            Dim ZFecha As String = DGVRow.Cells("Fecha").Value
+            Dim ZProveedor As String = DGVRow.Cells("Proveedor").Value
+            Dim ZMoneda As String = DGVRow.Cells("Mon").Value
+            Dim ZCarpeta As String = DGVRow.Cells("Carpeta").Value
+            Dim ZDJai As String = DGVRow.Cells("Djai").Value
+            Dim ZOrigen As String = DGVRow.Cells("Origen").Value
+            Dim ZIncoterms As String = DGVRow.Cells("Incoterms").Value
+            Dim ZTransporte As String = DGVRow.Cells("Transporte").Value
+            Dim ZFLLegada As String = DGVRow.Cells("FLLegada").Value
+            Dim ZTPago As String = DGVRow.Cells("TPago").Value
+            Dim ZDespacho As String = DGVRow.Cells("Despacho").Value
+            Dim ZPagoDespacho As String = DGVRow.Cells("PagoDes").Value
+            Dim ZLetra As String =DGVRow.Cells("LetraTotal").Value
+            Dim ZPagoLetra As String = DGVRow.Cells("PagoLetra").Value
+            Dim ZVtoLetra As String =DGVRow.Cells("VtoLetra").Value
+            Dim ZPagoParcial As String = DGVRow.Cells("UsPagadoLetra").Value
+            Dim ZFEmbarque As String = DGVRow.Cells("FEmbarque").Value
+
+            Dim ZSumaI As String = "0"
+            If ZPagoDespacho = "Pendiente" Then
+                ZSumaI = ZDespacho
+            End If
+            Dim ZSumaII As String = "0"
+            If ZPagoLetra = "Pendiente" Then
+                ZSumaII = Str(Val(ZLetra) - Val(ZPagoParcial))
+                If Val(ZSumaII) < 0 Then
+                    ZSumaII = "0"
+                End If
+            End If
+
+
+            SQLCnlst = "INSERT INTO ControlImpoImpre (" _
+            & "Orden ," _
+            & "Pta ," _
+            & "Fecha ," _
+            & "Proveedor ," _
+            & "Moneda ," _
+            & "Carpeta ," _
+            & "Djai ," _
+            & "Origen ," _
+            & "Incoterms ," _
+            & "Transporte," _
+            & "FLLegada  ," _
+            & "TPago ," _
+            & "SumaI ," _
+            & "SumaII ," _
+            & "Despacho ," _
+            & "PagoDespacho ," _
+            & "Letra ," _
+            & "PagoLetra ," _
+            & "VtoLetra ," _
+            & "PagoParcial ," _
+            & "FEmbarque) " _
+            & "Values (" _
+            & "'" & ZOrden & "'," _
+            & "'" & ZPta & "'," _
+            & "'" & ZFecha & "'," _
+            & "'" & ZProveedor & "'," _
+            & "'" & ZMoneda & "'," _
+            & "'" & ZCarpeta & "'," _
+            & "'" & ZDJai & "'," _
+            & "'" & ZOrigen & "'," _
+            & "'" & ZIncoterms & "'," _
+            & "'" & ZTransporte & "'," _
+            & "'" & ZFLLegada & "'," _
+            & "'" & ZTPago & "'," _
+            & "'" & ZSumaI & "'," _
+            & "'" & ZSumaII & "'," _
+            & "'" & ZDespacho & "'," _
+            & "'" & ZPagoDespacho & "'," _
+            & "'" & ZLetra & "'," _
+            & "'" & ZPagoLetra & "'," _
+            & "'" & ZVtoLetra & "'," _
+            & "'" & ZPagoParcial & "'," _
+            & "'" & ZFEmbarque & "')"
+
+            ListaSQLCnslt.Add(SQLCnlst)
+        Next
+
+        If ListaSQLCnslt.Count > 0 Then
+            ExecuteNonQueries(ListaSQLCnslt.ToArray(), Operador.Base)
+
+            With New VistaPrevia
+                .Reporte = New Reporte_CentroDe_Exportacion()
+
+                .Mostrar()
+            End With
+        End If
+
+     
+
+    End Sub
+
+    Private Sub DGV_Muestra_MouseUp(sender As Object, e As MouseEventArgs) Handles DGV_Muestra.MouseUp
+
+        For Each cell As DataGridViewCell In DGV_Muestra.SelectedCells
+            DGV_Muestra.Rows(cell.RowIndex).Selected = True
+
+        Next
+    End Sub
+
+    Private Sub DGV_Muestra_CellMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DGV_Muestra.CellMouseClick
+        DGV_Muestra.Rows(DGV_Muestra.CurrentCell.RowIndex).Selected = True
+    End Sub
+
+    Private Sub btn_Djai_Click(sender As Object, e As EventArgs) Handles btn_Djai.Click
+        With New Ventana_auxiliar(20)
+            .Show(Me)
+        End With
+    End Sub
+
+    Private Sub DGV_Muestra_CellMouseDoubleClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DGV_Muestra.CellMouseDoubleClick
+
+        Dim Worden As String = DGV_Muestra.CurrentRow.Cells("Orden").Value
+        Dim WCarpeta As String = DGV_Muestra.CurrentRow.Cells("Carpeta").Value
+        Dim WPlanta As String = DGV_Muestra.CurrentRow.Cells("Pta").Value
+
+        Dim WEmpresa As String = ""
+        Select Case WPlanta
+            Case "I"
+                WEmpresa = "SurfactanSa"
+            Case "II"
+                WEmpresa = "Surfactan_II"
+            Case "III"
+                WEmpresa = "Surfactan_III"
+            Case "V"
+                WEmpresa = "Surfactan_V"
+            Case "VI"
+                WEmpresa = "Surfactan_VI"
+            Case "VII"
+                WEmpresa = "Surfactan_VII"
+        End Select
+
+
+
+        With New Ingreso_OrdenCompra(Worden, WCarpeta, WEmpresa)
+            .Show()
+        End With
+
+
+        With New IngresoObservaciones_Orden(Worden, WCarpeta, WEmpresa)
+            .Show()
+        End With
     End Sub
 End Class

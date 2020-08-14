@@ -2,6 +2,23 @@
 
 Public Class Consulta_MP
 
+    Dim Devuelvo As Integer
+    Sub New(Optional ByVal Devolver As Integer = 2)
+
+        ' Llamada necesaria para el diseñador.
+        InitializeComponent()
+
+        ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
+
+        Devuelvo = Devolver
+
+        If Devolver = 1 Then
+            chk_Desde.Visible = False
+            chk_Hasta.Visible = False
+        End If
+        
+    End Sub
+
     Private Sub ConsultaTermiando_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim SQLCnslt As String = "SELECT Codigo, Descripcion FROM Articulo ORDER BY Codigo ASC"
 
