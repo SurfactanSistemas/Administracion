@@ -602,6 +602,12 @@
     <Compile Include="Novedades\Autorizacion de Pedidos\Ventana_Boton_Autorizo.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Novedades\Pedidos\IngresoPedido.Designer.vb">
+      <DependentUpon>IngresoPedido.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Novedades\Pedidos\IngresoPedido.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Novedades\Verificacion de Cost de Productos Terminados\Ayuda_MP.Designer.vb">
       <DependentUpon>Ayuda_MP.vb</DependentUpon>
     </Compile>
@@ -1138,6 +1144,9 @@
     <EmbeddedResource Include="Novedades\Autorizacion de Pedidos\Ventana_Boton_Autorizo.resx">
       <DependentUpon>Ventana_Boton_Autorizo.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Novedades\Pedidos\IngresoPedido.resx">
+      <DependentUpon>IngresoPedido.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Novedades\Verificacion de Cost de Productos Terminados\Ayuda_MP.resx">
       <DependentUpon>Ayuda_MP.vb</DependentUpon>
     </EmbeddedResource>
@@ -1396,6 +1405,7 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

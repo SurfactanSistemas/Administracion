@@ -266,4 +266,10 @@
             .Show(Me)
         End With
     End Sub
+
+    Private Sub IngresoDePedidoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles IngresoDePedidoToolStripMenuItem.Click
+        With New IngresoPedido
+            .Show(Me)
+        End With
+    End Sub
 End Class
