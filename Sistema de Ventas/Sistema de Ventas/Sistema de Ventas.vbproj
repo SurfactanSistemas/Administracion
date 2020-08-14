@@ -79,6 +79,24 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Listados\Listado de Cash Flow\ConsultaCliente.Designer.vb">
+      <DependentUpon>ConsultaCliente.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\Listado de Cash Flow\ConsultaCliente.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Consulta_DY.Designer.vb">
+      <DependentUpon>Consulta_DY.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Consulta_DY.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Consulta_MP.designer.vb">
+      <DependentUpon>Consulta_MP.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Consulta_MP.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Consulta_Terminado.Designer.vb">
       <DependentUpon>Consulta_Terminado.vb</DependentUpon>
     </Compile>
@@ -93,7 +111,9 @@
     <Compile Include="Interfases\IComposicionDatosAdicionales.vb" />
     <Compile Include="Interfases\IConsultaCambios.vb" />
     <Compile Include="Interfases\IConsultaTerminado.vb" />
+    <Compile Include="Interfases\IConsulta_DY.vb" />
     <Compile Include="Interfases\IConsulta_GasImportacion.vb" />
+    <Compile Include="Interfases\IConsulta_MP.vb" />
     <Compile Include="Interfases\IConsulta_Orden_Trabajo.vb" />
     <Compile Include="Interfases\IConsulta_Terminado.vb" />
     <Compile Include="Interfases\INotificacionCambios.vb" />
@@ -107,10 +127,6 @@
     <Compile Include="Listados\CuentaCorrientes_DeClientes.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Listados\Listado de Cash Flow\ConsultaCliente.Designer.vb">
-      <DependentUpon>ConsultaCliente.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Listados\Listado de Cash Flow\ConsultaCliente.vb" />
     <Compile Include="Listados\Listado de Cash Flow\ListadoCashFlow.Designer.vb">
       <DependentUpon>ListadoCashFlow.vb</DependentUpon>
     </Compile>
@@ -448,6 +464,12 @@
     <Compile Include="Maestro\Listar_Cambios.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Maestro\ModificacionDe_Precio.Designer.vb">
+      <DependentUpon>ModificacionDe_Precio.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestro\ModificacionDe_Precio.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Maestro\Precios por Cliente\PreciosClienteProducto.Designer.vb">
       <DependentUpon>PreciosClienteProducto.vb</DependentUpon>
     </Compile>
@@ -506,6 +528,12 @@
       <DependentUpon>ConsultaHojaDeRutaXRangoFecha.vb</DependentUpon>
     </Compile>
     <Compile Include="Novedades\Consulta Hoja de Ruta\ConsultaHojaDeRutaXRangoFecha.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Novedades\Envio_DeMails_Clientes.designer.vb">
+      <DependentUpon>Envio_DeMails_Clientes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Novedades\Envio_DeMails_Clientes.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Novedades\Gastos de Importacion Parciales\Articulos_GastosImportacionParcial.Designer.vb">
@@ -847,6 +875,12 @@
       <DependentUpon>Reporte_PT_SinVentas.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\wpedpen.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>wpedpen.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="VentanaPassword.Designer.vb">
       <DependentUpon>VentanaPassword.vb</DependentUpon>
     </Compile>
@@ -855,14 +889,20 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Listados\Listado de Cash Flow\ConsultaCliente.resx">
+      <DependentUpon>ConsultaCliente.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Consulta_DY.resx">
+      <DependentUpon>Consulta_DY.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Consulta_MP.resx">
+      <DependentUpon>Consulta_MP.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Consulta_Terminado.resx">
       <DependentUpon>Consulta_Terminado.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\CuentaCorrientes_DeClientes.resx">
       <DependentUpon>CuentaCorrientes_DeClientes.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Listados\Listado de Cash Flow\ConsultaCliente.resx">
-      <DependentUpon>ConsultaCliente.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\Listado de Cash Flow\ListadoCashFlow.resx">
       <DependentUpon>ListadoCashFlow.vb</DependentUpon>
@@ -1029,6 +1069,9 @@
     <EmbeddedResource Include="Maestro\Listar_Cambios.resx">
       <DependentUpon>Listar_Cambios.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Maestro\ModificacionDe_Precio.resx">
+      <DependentUpon>ModificacionDe_Precio.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Maestro\Precios por Cliente\PreciosClienteProducto.resx">
       <DependentUpon>PreciosClienteProducto.vb</DependentUpon>
     </EmbeddedResource>
@@ -1058,6 +1101,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Novedades\Consulta Hoja de Ruta\ConsultaHojaDeRutaXRangoFecha.resx">
       <DependentUpon>ConsultaHojaDeRutaXRangoFecha.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Novedades\Envio_DeMails_Clientes.resx">
+      <DependentUpon>Envio_DeMails_Clientes.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Novedades\Gastos de Importacion Parciales\Articulos_GastosImportacionParcial.resx">
       <DependentUpon>Articulos_GastosImportacionParcial.vb</DependentUpon>
@@ -1262,6 +1308,10 @@
     <EmbeddedResource Include="Reportes\Reporte_PT_SinVentas.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Reporte_PT_SinVentas.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\wpedpen.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>wpedpen.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="VentanaPassword.resx">
       <DependentUpon>VentanaPassword.vb</DependentUpon>
