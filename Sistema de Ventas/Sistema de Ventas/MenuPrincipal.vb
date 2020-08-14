@@ -243,21 +243,27 @@
         End With
     End Sub
 
+    Private Sub ComposiciónDeProductosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ComposiciónDeProductosToolStripMenuItem.Click
+        With New ListadoComposicionesProductos
+            .Show(Me)
+        End With
+    End Sub
+
     Private Sub EnvioDeEmailsAClientesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EnvioDeEmailsAClientesToolStripMenuItem.Click
         With Envio_DeMails_Clientes
-            .Show()
+            .Show(Me)
         End With
     End Sub
 
     Private Sub ModificacionDePreciosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ModificacionDePreciosToolStripMenuItem.Click
         With ModificacionDe_Precio
-            .Show()
+            .Show(Me)
         End With
     End Sub
 
     Private Sub CentroDeControlImportacionesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CentroDeControlImportacionesToolStripMenuItem.Click
         With Centro_Importaciones
-            .Show()
+            .Show(Me)
         End With
     End Sub
 End Class

@@ -45,30 +45,30 @@ Partial Class Exportar
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(337, 50)
+        Me.Panel1.Size = New System.Drawing.Size(337, 41)
         Me.Panel1.TabIndex = 2
         '
         'Label2
         '
         Me.Label2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label2.Location = New System.Drawing.Point(25, 16)
+        Me.Label2.Location = New System.Drawing.Point(25, 12)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(60, 18)
+        Me.Label2.Size = New System.Drawing.Size(72, 18)
         Me.Label2.TabIndex = 0
-        Me.Label2.Text = "Exportar"
+        Me.Label2.Text = "EXPORTAR"
         '
         'Label1
         '
         Me.Label1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label1.Location = New System.Drawing.Point(217, 16)
+        Me.Label1.Location = New System.Drawing.Point(217, 12)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(108, 18)
         Me.Label1.TabIndex = 0
@@ -78,12 +78,11 @@ Partial Class Exportar
         '
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Controls.Add(Me.ComboBox1)
-        Me.GroupBox1.Location = New System.Drawing.Point(13, 59)
+        Me.GroupBox1.Location = New System.Drawing.Point(13, 44)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(312, 67)
         Me.GroupBox1.TabIndex = 3
         Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Parámetros"
         '
         'Label3
         '
@@ -96,8 +95,9 @@ Partial Class Exportar
         '
         'ComboBox1
         '
+        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"Imprimir", "Mostrar por Pantalla", "PDF", "EXCEL", "WORD", "Enviar por Correo (como PDF Adjunto)"})
+        Me.ComboBox1.Items.AddRange(New Object() {"IMPRIMIR", "MOSTRAR POR PANTALLA", "PDF", "EXCEL", "WORD", "ADJUNTO EN MAIL"})
         Me.ComboBox1.Location = New System.Drawing.Point(72, 26)
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(225, 21)
@@ -105,20 +105,20 @@ Partial Class Exportar
         '
         'btnAceptar
         '
-        Me.btnAceptar.Location = New System.Drawing.Point(60, 137)
+        Me.btnAceptar.Location = New System.Drawing.Point(39, 118)
         Me.btnAceptar.Name = "btnAceptar"
-        Me.btnAceptar.Size = New System.Drawing.Size(101, 28)
+        Me.btnAceptar.Size = New System.Drawing.Size(121, 48)
         Me.btnAceptar.TabIndex = 4
-        Me.btnAceptar.Text = "Exportar"
+        Me.btnAceptar.Text = "EXPORTAR"
         Me.btnAceptar.UseVisualStyleBackColor = True
         '
         'btnCancelar
         '
-        Me.btnCancelar.Location = New System.Drawing.Point(176, 137)
+        Me.btnCancelar.Location = New System.Drawing.Point(176, 118)
         Me.btnCancelar.Name = "btnCancelar"
-        Me.btnCancelar.Size = New System.Drawing.Size(101, 28)
+        Me.btnCancelar.Size = New System.Drawing.Size(121, 48)
         Me.btnCancelar.TabIndex = 4
-        Me.btnCancelar.Text = "Cancelar"
+        Me.btnCancelar.Text = "CANCELAR"
         Me.btnCancelar.UseVisualStyleBackColor = True
         '
         'Exportar

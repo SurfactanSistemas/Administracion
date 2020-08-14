@@ -1,7 +1,7 @@
 ﻿Public Class AyudaGeneral
 
-    Private Datos As DataTable = Nothing
-    Private Titulo As String = ""
+    Private ReadOnly Datos As DataTable = Nothing
+    Private ReadOnly Titulo As String = ""
 
     Sub New(ByVal Datos As DataTable, Optional ByVal Titulo As String = "AYUDA")
 
@@ -43,5 +43,9 @@
 
         Close()
 
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Close()
     End Sub
 End Class

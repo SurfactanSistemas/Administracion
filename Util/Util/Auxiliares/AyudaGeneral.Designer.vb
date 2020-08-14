@@ -27,9 +27,9 @@ Partial Class AyudaGeneral
         Me.lblTitulo = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.dgvDatos = New Util.DBDataGridView()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
@@ -50,7 +50,7 @@ Partial Class AyudaGeneral
         'lblTitulo
         '
         Me.lblTitulo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.lblTitulo.AutoSize = True
         Me.lblTitulo.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTitulo.ForeColor = System.Drawing.SystemColors.Control
@@ -63,7 +63,7 @@ Partial Class AyudaGeneral
         'Label1
         '
         Me.Label1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.Control
@@ -78,8 +78,8 @@ Partial Class AyudaGeneral
         Me.dgvDatos.AllowUserToAddRows = False
         Me.dgvDatos.AllowUserToDeleteRows = False
         Me.dgvDatos.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvDatos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Codigo, Me.Descripcion})
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -103,15 +103,6 @@ Partial Class AyudaGeneral
         Me.dgvDatos.Size = New System.Drawing.Size(474, 225)
         Me.dgvDatos.TabIndex = 4
         '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(166, 324)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(142, 39)
-        Me.Button1.TabIndex = 5
-        Me.Button1.Text = "CERRAR"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
         'Codigo
         '
         Me.Codigo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
@@ -130,6 +121,15 @@ Partial Class AyudaGeneral
         Me.Descripcion.Name = "Descripcion"
         Me.Descripcion.ReadOnly = True
         Me.Descripcion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(166, 324)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(142, 39)
+        Me.Button1.TabIndex = 5
+        Me.Button1.Text = "CERRAR"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'Label3
         '

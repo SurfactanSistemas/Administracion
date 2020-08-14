@@ -43,7 +43,6 @@ Public Class VistaPrevia
         Dim cs = ""
         If Base = "" Then
             Base = Util.Operador.Base
-
         End If
         Try
             ' Buscamos el string de conexion.

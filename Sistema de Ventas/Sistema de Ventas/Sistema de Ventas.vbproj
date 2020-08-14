@@ -50,6 +50,10 @@
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="DataGridViewCustomColumn, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Util\Util\CustomControls\DataGridViewCustomColumn.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -75,18 +79,6 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Consulta_DY.Designer.vb">
-      <DependentUpon>Consulta_DY.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Consulta_DY.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Consulta_MP.Designer.vb">
-      <DependentUpon>Consulta_MP.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Consulta_MP.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Consulta_Terminado.Designer.vb">
       <DependentUpon>Consulta_Terminado.vb</DependentUpon>
     </Compile>
@@ -98,11 +90,10 @@
     <Compile Include="Interfases\IAutorizacionDePedidos.vb" />
     <Compile Include="Interfases\IBuscarClienteCashFlow.vb" />
     <Compile Include="Interfases\ICentroImportaciones_auxiliar.vb" />
+    <Compile Include="Interfases\IComposicionDatosAdicionales.vb" />
     <Compile Include="Interfases\IConsultaCambios.vb" />
     <Compile Include="Interfases\IConsultaTerminado.vb" />
-    <Compile Include="Interfases\IConsulta_DY.vb" />
     <Compile Include="Interfases\IConsulta_GasImportacion.vb" />
-    <Compile Include="Interfases\IConsulta_MP.vb" />
     <Compile Include="Interfases\IConsulta_Orden_Trabajo.vb" />
     <Compile Include="Interfases\IConsulta_Terminado.vb" />
     <Compile Include="Interfases\INotificacionCambios.vb" />
@@ -116,12 +107,10 @@
     <Compile Include="Listados\CuentaCorrientes_DeClientes.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ConsultaCliente.Designer.vb">
+    <Compile Include="Listados\Listado de Cash Flow\ConsultaCliente.Designer.vb">
       <DependentUpon>ConsultaCliente.vb</DependentUpon>
     </Compile>
-    <Compile Include="ConsultaCliente.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Listados\Listado de Cash Flow\ConsultaCliente.vb" />
     <Compile Include="Listados\Listado de Cash Flow\ListadoCashFlow.Designer.vb">
       <DependentUpon>ListadoCashFlow.vb</DependentUpon>
     </Compile>
@@ -264,6 +253,24 @@
       <DependentUpon>ListadoAgendaClientes.vb</DependentUpon>
     </Compile>
     <Compile Include="Maestro\Agenda Clientes\ListadoAgendaClientes.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestro\Composicion de Productos\ComposicionDatosAdicionales.Designer.vb">
+      <DependentUpon>ComposicionDatosAdicionales.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestro\Composicion de Productos\ComposicionDatosAdicionales.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestro\Composicion de Productos\ComposicionProducto.Designer.vb">
+      <DependentUpon>ComposicionProducto.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestro\Composicion de Productos\ComposicionProducto.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestro\Composicion de Productos\ListadoComposicionesProductos.Designer.vb">
+      <DependentUpon>ListadoComposicionesProductos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestro\Composicion de Productos\ListadoComposicionesProductos.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Maestro\Consulta de revisiones de ensayos.Designer.vb">
@@ -441,12 +448,6 @@
     <Compile Include="Maestro\Listar_Cambios.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Maestro\ModificacionDe_Precio.Designer.vb">
-      <DependentUpon>ModificacionDe_Precio.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Maestro\ModificacionDe_Precio.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Maestro\Precios por Cliente\PreciosClienteProducto.Designer.vb">
       <DependentUpon>PreciosClienteProducto.vb</DependentUpon>
     </Compile>
@@ -505,12 +506,6 @@
       <DependentUpon>ConsultaHojaDeRutaXRangoFecha.vb</DependentUpon>
     </Compile>
     <Compile Include="Novedades\Consulta Hoja de Ruta\ConsultaHojaDeRutaXRangoFecha.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Novedades\Envio_DeMails_Clientes.Designer.vb">
-      <DependentUpon>Envio_DeMails_Clientes.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Novedades\Envio_DeMails_Clientes.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Novedades\Gastos de Importacion Parciales\Articulos_GastosImportacionParcial.Designer.vb">
@@ -601,6 +596,18 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReporteAgendaClientes.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Composicion de Productos\ReporteListadoComposicionProductos.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteListadoComposicionProductos.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Composicion de Productos\ReporteListadoTerminadosSedronar.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteListadoTerminadosSedronar.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\DBAuxi.Designer.vb">
@@ -848,19 +855,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Consulta_DY.resx">
-      <DependentUpon>Consulta_DY.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Consulta_MP.resx">
-      <DependentUpon>Consulta_MP.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Consulta_Terminado.resx">
       <DependentUpon>Consulta_Terminado.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\CuentaCorrientes_DeClientes.resx">
       <DependentUpon>CuentaCorrientes_DeClientes.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ConsultaCliente.resx">
+    <EmbeddedResource Include="Listados\Listado de Cash Flow\ConsultaCliente.resx">
       <DependentUpon>ConsultaCliente.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\Listado de Cash Flow\ListadoCashFlow.resx">
@@ -934,6 +935,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Maestro\Agenda Clientes\ListadoAgendaClientes.resx">
       <DependentUpon>ListadoAgendaClientes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestro\Composicion de Productos\ComposicionDatosAdicionales.resx">
+      <DependentUpon>ComposicionDatosAdicionales.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestro\Composicion de Productos\ComposicionProducto.resx">
+      <DependentUpon>ComposicionProducto.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestro\Composicion de Productos\ListadoComposicionesProductos.resx">
+      <DependentUpon>ListadoComposicionesProductos.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Maestro\Consulta de revisiones de ensayos.resx">
       <DependentUpon>Consulta de revisiones de ensayos.vb</DependentUpon>
@@ -1019,9 +1029,6 @@
     <EmbeddedResource Include="Maestro\Listar_Cambios.resx">
       <DependentUpon>Listar_Cambios.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Maestro\ModificacionDe_Precio.resx">
-      <DependentUpon>ModificacionDe_Precio.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Maestro\Precios por Cliente\PreciosClienteProducto.resx">
       <DependentUpon>PreciosClienteProducto.vb</DependentUpon>
     </EmbeddedResource>
@@ -1051,9 +1058,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Novedades\Consulta Hoja de Ruta\ConsultaHojaDeRutaXRangoFecha.resx">
       <DependentUpon>ConsultaHojaDeRutaXRangoFecha.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Novedades\Envio_DeMails_Clientes.resx">
-      <DependentUpon>Envio_DeMails_Clientes.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Novedades\Gastos de Importacion Parciales\Articulos_GastosImportacionParcial.resx">
       <DependentUpon>Articulos_GastosImportacionParcial.vb</DependentUpon>
@@ -1101,6 +1105,14 @@
     <EmbeddedResource Include="Reportes\Agenda Clientes\ReporteAgendaClientes.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteAgendaClientes.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Composicion de Productos\ReporteListadoComposicionProductos.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteListadoComposicionProductos.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Composicion de Productos\ReporteListadoTerminadosSedronar.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteListadoTerminadosSedronar.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\hojarutacotnuevo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
