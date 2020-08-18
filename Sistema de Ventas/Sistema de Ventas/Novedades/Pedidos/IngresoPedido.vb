@@ -135,6 +135,10 @@ Public Class IngresoPedido
         dgvEnvases.Rows.Clear()
         dgvEnvasesII.Rows.Clear()
 
+        For i = 0 To 2
+            dgvEnvasesII.Rows.Add("", "")
+        Next
+
         Dim Ped As DataRow = GetSingle("SELECT Max(Pedido) As Maximo FROM Pedido")
 
         If Ped IsNot Nothing Then txtPedido.Text = OrDefault(Ped("Maximo"), "0")
@@ -197,6 +201,130 @@ Public Class IngresoPedido
 
         ElseIf e.KeyData = Keys.Escape Then
             txtCliente.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub dgvItems_RowHeaderMouseDoubleClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgvItems.RowHeaderMouseDoubleClick
+        If e.ColumnIndex <> -1 Then Exit Sub
+
+        With dgvEnvasesII
+            .Rows(0).Cells("CodigoEnvase").Value = dgvItems.CurrentRow.Cells("Envase1").Value
+            .Rows(0).Cells("CantidadEnvase").Value = dgvItems.CurrentRow.Cells("Canti1").Value
+            .Rows(1).Cells("CodigoEnvase").Value = dgvItems.CurrentRow.Cells("Envase2").Value
+            .Rows(1).Cells("CantidadEnvase").Value = dgvItems.CurrentRow.Cells("Canti2").Value
+            .Rows(2).Cells("CodigoEnvase").Value = dgvItems.CurrentRow.Cells("Envase3").Value
+            .Rows(2).Cells("CantidadEnvase").Value = dgvItems.CurrentRow.Cells("Canti3").Value
+        End With
+
+        Dim WProducto As String
+
+        With dgvItems.CurrentRow
+            WProducto = .Cells("Terminado").Value
+        End With
+
+        If WProducto.Replace("-", "").Trim = "" Then Exit Sub
+
+        '
+        ' Calculamos los Kilos pedidos.
+        '
+        Dim WStockPed As DataRow = GetSingle("SELECT SUM(Cantidad - Facturado) As Total FROM Pedido WHERE Terminado = '" & WProducto & "' And Pedido <> '" & txtPedido.Text & "' GROUP BY Terminado")
+        
+        lblPedido.Text = String.Format("{0:N2}", IIf(WStockPed IsNot Nothing, WStockPed(0), 0))
+
+        '
+        ' Determinamos el tipo de Producto.
+        '
+        Dim WTipoProd As String = "M"
+
+        If Not {"PT", "YQ", "YF", "YP", "YH", "PE"}.Contains(dgvItems.CurrentRow.Cells("Terminado").Value) Then WTipoProd = "T"
+
+        '
+        ' Calculamos el Stock dependiendo del tipo de Prod.
+        '
+        For Each c As Control In {lblSI, lblSII, lblSIII, lblSIV, lblSV, lblSVI, lblSVII}
+            c.Text = "0,00"
+        Next
+
+        If WTipoProd = "M" Then
+            Dim WStockMp As DataRow = GetSingle("SELECT (Inicial + Entradas - Salidas) FROM Articulo WHERE Codigo = '" & Helper.Left(WProducto, 3) & Helper.Right(WProducto, 7) & "'")
+            lblSI.Text = String.Format("{0:N2}", IIf(WStockMp IsNot Nothing, WStockMp(0), 0))
+        Else
+
+            Dim WStockSI As DataRow = GetSingle("SELECT (Inicial + Entradas - Salidas) FROM Terminado WHERE Codigo = '" & WProducto & "'")
+            If WStockSI IsNot Nothing Then lblSI.Text = String.Format("{0:N2}", WStockSI(0))
+
+            Dim WStockSII As DataRow = GetSingle("SELECT (Inicial + Entradas - Salidas) FROM Terminado WHERE Codigo = '" & WProducto & "'", "Surfactan_II")
+            If WStockSII IsNot Nothing Then lblSII.Text = String.Format("{0:N2}", WStockSII(0))
+
+            Dim WStockSIII As DataRow = GetSingle("SELECT (Inicial + Entradas - Salidas) FROM Terminado WHERE Codigo = '" & WProducto & "'", "Surfactan_III")
+            If WStockSIII IsNot Nothing Then lblSIII.Text = String.Format("{0:N2}", WStockSIII(0))
+
+            Dim WStockSIV As DataRow = GetSingle("SELECT (Inicial + Entradas - Salidas) FROM Terminado WHERE Codigo = '" & WProducto & "'", "Surfactan_IV")
+            If WStockSIV IsNot Nothing Then lblSIV.Text = String.Format("{0:N2}", WStockSIV(0))
+
+            Dim WStockSV As DataRow = GetSingle("SELECT (Inicial + Entradas - Salidas) FROM Terminado WHERE Codigo = '" & WProducto & "'", "Surfactan_V")
+            If WStockSV IsNot Nothing Then lblSV.Text = String.Format("{0:N2}", WStockSV(0))
+
+            Dim WStockSVI As DataRow = GetSingle("SELECT (Inicial + Entradas - Salidas) FROM Terminado WHERE Codigo = '" & WProducto & "'", "Surfactan_VI")
+            If WStockSVI IsNot Nothing Then lblSVI.Text = String.Format("{0:N2}", WStockSVI(0))
+
+            Dim WStockSVII As DataRow = GetSingle("SELECT (Inicial + Entradas - Salidas) FROM Terminado WHERE Codigo = '" & WProducto & "'", "Surfactan_VII")
+            If WStockSVII IsNot Nothing Then lblSVII.Text = String.Format("{0:N2}", WStockSVII(0))
+
+        End If
+
+        lblStock.Text = String.Format("{0:N2}", {lblSI, lblSII, lblSIII, lblSIV, lblSV, lblSVI, lblSVII}.Sum(Function(l) Val(formatonumerico(l.Text))))
+
+        lblProduccion.Text = "0,00"
+
+        lblDisponible.Text = String.Format("{0:N2}", Val(formatonumerico(lblStock.Text)) - Val(formatonumerico(lblPedido.Text)) + Val(formatonumerico(lblProduccion.Text)))
+
+        _CargaEnvases(WProducto)
+
+    End Sub
+
+    Private Sub _CargaEnvases(ByVal Producto As String)
+        '
+        ' Determinamos el tipo de Producto.
+        '
+        Dim WTipoProd As String = "M"
+
+        If Not {"PT", "YQ", "YF", "YP", "YH", "PE"}.Contains(Producto) Then WTipoProd = "T"
+
+        dgvEnvases.Rows.Clear()
+
+        For i = 1 To 6
+            dgvEnvases.Rows.Add("", "", "")
+        Next
+
+        If WTipoProd = "T" Then
+            Dim WEnvs As DataRow = GetSingle("SELECT Envase1, Envase2, Envase3, Envase4, Envase5, Envase6 FROM Terminado WHERE Codigo = '" & Producto & "'")
+
+            If WEnvs IsNot Nothing Then
+
+                For i = 1 To 6
+                    Dim Cod As String = OrDefault(WEnvs("Envase" & i), "")
+
+                    If Val(Cod) = 0 Then Continue For
+
+                    dgvEnvases.Rows(i - 1).Cells("Cod").Value = Cod
+
+                    Dim WEnv As DataRow = GetSingle("SELECT Abreviatura, kilos FROM Envases WHERE Envases = '" & Cod & "'")
+                    If WEnv IsNot Nothing Then
+                        dgvEnvases.Rows(i - 1).Cells("Desc").Value = OrDefault(WEnv("abreviatura"), "")
+                        dgvEnvases.Rows(i - 1).Cells("Kg").Value = OrDefault(WEnv("Kg"), "")
+                    End If
+                Next
+
+            End If
+
+        End If
+
+        If dgvEnvases.Rows(0).Cells("Cod").Value = "" Then
+            dgvEnvases.Rows(0).Cells("Cod").Value = "99"
+            dgvEnvases.Rows(0).Cells("Desc").Value = "Indist."
+            dgvEnvases.Rows(0).Cells("Kg").Value = "0"
         End If
 
     End Sub

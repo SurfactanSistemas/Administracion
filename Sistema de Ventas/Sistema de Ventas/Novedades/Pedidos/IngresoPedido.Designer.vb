@@ -762,7 +762,7 @@ Partial Class IngresoPedido
         Me.Label40.BackColor = System.Drawing.Color.Cyan
         Me.Label40.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Label40.Font = New System.Drawing.Font("Arial", 6.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label40.Location = New System.Drawing.Point(10, 152)
+        Me.Label40.Location = New System.Drawing.Point(10, 135)
         Me.Label40.Name = "Label40"
         Me.Label40.Padding = New System.Windows.Forms.Padding(5, 0, 0, 0)
         Me.Label40.Size = New System.Drawing.Size(128, 15)
@@ -849,6 +849,8 @@ Partial Class IngresoPedido
         '
         Me.dgvItems.AllowUserToAddRows = False
         Me.dgvItems.AllowUserToDeleteRows = False
+        Me.dgvItems.AllowUserToResizeColumns = False
+        Me.dgvItems.AllowUserToResizeRows = False
         Me.dgvItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Terminado, Me.Descripcion, Me.Cantidad, Me.Precio, Me.Envase1, Me.Canti1, Me.Envase2, Me.Canti2, Me.Envase3, Me.Canti3, Me.Especificaciones, Me.NombreComercial, Me.OrdenTrabajo, Me.Referencia})
         DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -866,6 +868,7 @@ Partial Class IngresoPedido
         Me.dgvItems.Name = "dgvItems"
         Me.dgvItems.OrdenamientoColumnasHabilitado = False
         Me.dgvItems.RowHeadersWidth = 15
+        Me.dgvItems.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.dgvItems.RowTemplate.Height = 20
         Me.dgvItems.ShowCellToolTips = False
         Me.dgvItems.SinClickDerecho = False
@@ -1020,7 +1023,9 @@ Partial Class IngresoPedido
         '
         Me.dgvEnvasesII.AllowUserToAddRows = False
         Me.dgvEnvasesII.AllowUserToDeleteRows = False
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.dgvEnvasesII.AllowUserToResizeColumns = False
+        Me.dgvEnvasesII.AllowUserToResizeRows = False
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
         DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
@@ -1028,7 +1033,8 @@ Partial Class IngresoPedido
         DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgvEnvasesII.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
-        Me.dgvEnvasesII.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvEnvasesII.ColumnHeadersHeight = 20
+        Me.dgvEnvasesII.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.dgvEnvasesII.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CodigoEnvase, Me.CantidadEnvase})
         DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
@@ -1040,7 +1046,7 @@ Partial Class IngresoPedido
         Me.dgvEnvasesII.DefaultCellStyle = DataGridViewCellStyle4
         Me.dgvEnvasesII.DoubleBuffered = True
         Me.dgvEnvasesII.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.dgvEnvasesII.Location = New System.Drawing.Point(10, 168)
+        Me.dgvEnvasesII.Location = New System.Drawing.Point(10, 151)
         Me.dgvEnvasesII.Name = "dgvEnvasesII"
         Me.dgvEnvasesII.OrdenamientoColumnasHabilitado = False
         Me.dgvEnvasesII.ReadOnly = True
@@ -1053,10 +1059,10 @@ Partial Class IngresoPedido
         DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgvEnvasesII.RowHeadersDefaultCellStyle = DataGridViewCellStyle5
         Me.dgvEnvasesII.RowHeadersWidth = 5
-        Me.dgvEnvasesII.RowTemplate.Height = 20
+        Me.dgvEnvasesII.RowTemplate.Height = 18
         Me.dgvEnvasesII.ShowCellToolTips = False
         Me.dgvEnvasesII.SinClickDerecho = False
-        Me.dgvEnvasesII.Size = New System.Drawing.Size(128, 59)
+        Me.dgvEnvasesII.Size = New System.Drawing.Size(128, 77)
         Me.dgvEnvasesII.TabIndex = 1
         '
         'CodigoEnvase
@@ -1085,6 +1091,8 @@ Partial Class IngresoPedido
         '
         Me.dgvEnvases.AllowUserToAddRows = False
         Me.dgvEnvases.AllowUserToDeleteRows = False
+        Me.dgvEnvases.AllowUserToResizeColumns = False
+        Me.dgvEnvases.AllowUserToResizeRows = False
         DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
         DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1121,7 +1129,7 @@ Partial Class IngresoPedido
         Me.dgvEnvases.RowTemplate.Height = 20
         Me.dgvEnvases.ShowCellToolTips = False
         Me.dgvEnvases.SinClickDerecho = False
-        Me.dgvEnvases.Size = New System.Drawing.Size(139, 133)
+        Me.dgvEnvases.Size = New System.Drawing.Size(139, 120)
         Me.dgvEnvases.TabIndex = 0
         '
         'Cod
