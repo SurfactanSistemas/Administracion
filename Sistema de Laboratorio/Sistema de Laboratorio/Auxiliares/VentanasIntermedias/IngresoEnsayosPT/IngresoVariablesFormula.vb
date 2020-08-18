@@ -139,7 +139,7 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
                 For Each row As DataRow In Dtabla.Rows
                     With row
 
-                        dgvVariables.Rows.Add(.Item("fila"), .Item("Variable"), .Item("Valor"), .Item("IDRenglon"))
+                        dgvVariables.Rows.Add(.Item("fila"), Trim(.Item("Variable")), Trim(.Item("Valor")), .Item("IDRenglon"))
 
                         txtValorEstandar.Text = (.Item("ResultadoVerificado")).ToString().Replace(",", ".")
 
@@ -165,9 +165,8 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
         Dim wultima As Short = 1
 
         For i = 1 To 10
-            If Variables(i, 2) Is Nothing Then
-                Variables(i, 2) = ""
-            End If
+            Variables(i, 1) = Trim(Variables(i, 1))
+            Variables(i, 2) = Trim(OrDefault(Variables(i, 2), ""))
         Next
 
         For i = 1 To 10
@@ -186,7 +185,7 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
 
             Dim renglon As Integer = Val(m.Value.ToString.Replace("R", ""))
 
-            If renglon <= DGV.Rows.Count And wultima <= 10 Then
+            If DGV IsNot Nothing AndAlso renglon <= DGV.Rows.Count And wultima <= 10 Then
                 Dim x = dgvVariables.Rows.Add(wultima, m.Value, OrDefault(DGV.Rows(renglon - 1).Cells("Valor").Value, "0").ToString.Replace(",", "."))
                 dgvVariables.Rows(x).Cells("WValor").ReadOnly = True
                 wultima += 1

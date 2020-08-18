@@ -191,19 +191,19 @@ Partial Class IngresoVariablesFormula
         '
         'IdVariable
         '
-        Me.IdVariable.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.IdVariable.HeaderText = "ID"
-        Me.IdVariable.MinimumWidth = 100
+        Me.IdVariable.MinimumWidth = 40
         Me.IdVariable.Name = "IdVariable"
         Me.IdVariable.ReadOnly = True
+        Me.IdVariable.Width = 40
         '
         'Variable
         '
-        Me.Variable.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Variable.HeaderText = "Variable"
-        Me.Variable.MinimumWidth = 100
+        Me.Variable.MinimumWidth = 200
         Me.Variable.Name = "Variable"
         Me.Variable.ReadOnly = True
+        Me.Variable.Width = 200
         '
         'WValor
         '
