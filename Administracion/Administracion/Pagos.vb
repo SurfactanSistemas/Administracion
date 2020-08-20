@@ -601,12 +601,31 @@ Public Class Pagos
 
             If Trim(txtProveedor.Text) <> "" Then
 
-                txtProveedor.Text = txtProveedor.Text
+                txtFormasPagosAceptadas.Text = ""
+                txtFormasPagosAceptadas.Visible = False
 
                 Dim proveedor As Proveedor = DAOProveedor.buscarProveedorPorCodigo(txtProveedor.Text)
 
                 If Not IsNothing(proveedor) Then
                     mostrarProveedor(proveedor)
+
+                    Dim Prov As DataRow = GetSingle("SELECT AceptaCheques, AceptaTransferencias FROM Proveedor WHERE Proveedor = '" & txtProveedor.Text & "'")
+
+                    If Prov IsNot Nothing Then
+
+                        If OrDefault(Prov("AceptaCheques"), "") <> "" Then
+                            txtFormasPagosAceptadas.Text = "ACEPTA E-CHEQ"
+                        End If
+
+                        If OrDefault(Prov("AceptaTransferencias"), "") <> "" Then
+                            If txtFormasPagosAceptadas.Text <> "" Then txtFormasPagosAceptadas.Text &= " / "
+                            txtFormasPagosAceptadas.Text &= "ACEPTA TRANSFERENCIAS"
+                        End If
+
+                    End If
+
+                    txtFormasPagosAceptadas.Visible = txtFormasPagosAceptadas.Text.Trim <> ""
+
                     btnCtaCte.PerformClick()
                 Else
                     txtRazonSocial.Text = ""
@@ -1623,6 +1642,9 @@ Public Class Pagos
         btnActualizarCarpetas.Visible = False
 
         txtOrdenPago.Enabled = True
+
+        txtFormasPagosAceptadas.Text = ""
+        txtFormasPagosAceptadas.Visible = False
 
     End Sub
 
