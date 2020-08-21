@@ -244,26 +244,56 @@
     End Sub
 
     Private Sub ComposiciónDeProductosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ComposiciónDeProductosToolStripMenuItem.Click
-        With New ListadoComposicionesProductos
-            .Show(Me)
+        With ListadoComposicionesProductos
+            .Show()
         End With
     End Sub
 
     Private Sub EnvioDeEmailsAClientesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EnvioDeEmailsAClientesToolStripMenuItem.Click
         With Envio_DeMails_Clientes
-            .Show(Me)
+            .Show()
         End With
     End Sub
 
     Private Sub ModificacionDePreciosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ModificacionDePreciosToolStripMenuItem.Click
         With ModificacionDe_Precio
-            .Show(Me)
+            .Show()
         End With
     End Sub
 
     Private Sub CentroDeControlImportacionesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CentroDeControlImportacionesToolStripMenuItem.Click
         With Centro_Importaciones
-            .Show(Me)
+            .Show()
+        End With
+    End Sub
+
+    Private Sub ConsultaCtaCteDeClientesPorPantallaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ConsultaCtaCteDeClientesPorPantallaToolStripMenuItem.Click
+        With Consulta_CtaCteClientes_XPantalla
+            .Show()
+        End With
+    End Sub
+
+    Private Sub ListadoDeCtaCteDeClienteAFechaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ListadoDeCtaCteDeClienteAFechaToolStripMenuItem.Click
+        With Listado_CtaCte_deClientes_aFecha
+            .Show()
+        End With
+    End Sub
+
+    Private Sub ListadoDeGastosDeImportacionPorCarpetaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ListadoDeGastosDeImportacionPorCarpetaToolStripMenuItem.Click
+        With Listado_GastosImportacionXCarpeta
+            .Show()
+        End With
+    End Sub
+
+    Private Sub ListadoDeCalculoDeCostoDeImportacionPorCarpetaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ListadoDeCalculoDeCostoDeImportacionPorCarpetaToolStripMenuItem.Click
+        With Listado_CalculoCosto_ImportacionXCarpeta
+            .Show()
+        End With
+    End Sub
+
+    Private Sub ProyeccionDeCtaCteAFechaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProyeccionDeCtaCteAFechaToolStripMenuItem.Click
+        With ProyeccionCtaCteFecha
+            .Show()
         End With
     End Sub
 End Class

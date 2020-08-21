@@ -81,7 +81,7 @@ Public Class ModificacionDe_Precio : Implements IBuscarClienteCashFlow, IConsult
 
     End Sub
 
-  Private Sub txt_DesdeCliPT_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_DesdeCliPT.KeyDown
+    Private Sub txt_DesdeCliPT_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_DesdeCliPT.KeyDown
 
         Select Case e.KeyData
             Case Keys.Enter
@@ -230,7 +230,7 @@ Public Class ModificacionDe_Precio : Implements IBuscarClienteCashFlow, IConsult
             .Show(Me)
         End With
     End Sub
-   
+
 
     Public Sub CompletaCliente(CodigoCliente As String, Accion As String) Implements IBuscarClienteCashFlow.CompletaCliente
         If TabControl1.SelectedIndex = 0 Then
@@ -365,7 +365,7 @@ Public Class ModificacionDe_Precio : Implements IBuscarClienteCashFlow, IConsult
 
     End Sub
 
-   
+
     Private Sub btn_ConsultaMP_Click(sender As Object, e As EventArgs) Handles btn_ConsultaMP.Click
         With New Consulta_MP()
             If .Visible = True Then

@@ -1,4 +1,5 @@
-﻿Imports Util.Clases.Query
+﻿
+Imports Util.Clases.Query
 
 Public Class Consulta_MP
 
@@ -16,7 +17,7 @@ Public Class Consulta_MP
             chk_Desde.Visible = False
             chk_Hasta.Visible = False
         End If
-        
+
     End Sub
 
     Private Sub ConsultaTermiando_Load(sender As Object, e As EventArgs) Handles MyBase.Load

@@ -4,13 +4,16 @@ Imports Util.Clases.Helper
 
 Public Class Consulta_DY
 
+
+
+
     Private Sub Consulta_DY_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim SQLCnslt As String = "SELECT Codigo, Descripcion FROM Articulo WHERE Codigo LIKE 'DY%' ORDER BY Codigo ASC"
 
         Dim TablaDY As DataTable = GetAll(SQLCnslt, "SurfactanSa")
 
         If TablaDY.Rows.Count > 0 Then
-            
+
             DGV_DY.DataSource = TablaDY
 
         End If
@@ -43,4 +46,5 @@ Public Class Consulta_DY
 
 
     End Sub
+
 End Class

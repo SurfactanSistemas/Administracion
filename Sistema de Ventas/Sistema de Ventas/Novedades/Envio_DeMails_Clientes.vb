@@ -50,7 +50,7 @@ Public Class Envio_DeMails_Clientes
             MsgBox(ex.Message)
         End Try
 
-      
+
     End Sub
 
 
@@ -96,7 +96,7 @@ Public Class Envio_DeMails_Clientes
 
         End If
 
-       
+
 
 
         Dim ZDireccion As New List(Of String)
@@ -292,17 +292,17 @@ Public Class Envio_DeMails_Clientes
                 txt_Asunto.Text = ""
 
         End Select
-        
+
 
     End Sub
 
     Private Sub txt_LineaExtraI_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txt_LineaExtraI.KeyDown
 
-        Select e.KeyData
+        Select Case e.KeyData
             Case Keys.Enter
-            'If Trim(txtLineaExtraI.Text) = "" Then : Exit Sub : End If
+                'If Trim(txtLineaExtraI.Text) = "" Then : Exit Sub : End If
 
-            txt_LineaExtraII.Focus()
+                txt_LineaExtraII.Focus()
 
             Case Keys.Escape
                 txt_LineaExtraI.Text = ""
