@@ -81,6 +81,7 @@ Partial Class MenuPrincipal
         Me.FinDeSistemasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListadoDeCalculoDeCostoDeImportacionPorCarpetaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProyeccionDeCtaCteAFechaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.IngresoDePedidoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.panel1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -222,7 +223,7 @@ Partial Class MenuPrincipal
         '
         'NovedadesToolStripMenuItem
         '
-        Me.NovedadesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PedidosDesarrolloToolStripMenuItem, Me.HojaDeRutaToolStripMenuItem, Me.VerificacionDeCostoDeProductosTerminadosToolStripMenuItem, Me.AutorizacionDePedidosToolStripMenuItem, Me.IngresoGastosDeImportacionToolStripMenuItem, Me.IngresoGastosDeImportacionParcialToolStripMenuItem, Me.IngresoDeSolicitudPedidoDeVentaToolStripMenuItem, Me.EnvioDeEmailsAClientesToolStripMenuItem, Me.CentroDeControlImportacionesToolStripMenuItem})
+        Me.NovedadesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IngresoDePedidoToolStripMenuItem, Me.PedidosDesarrolloToolStripMenuItem, Me.HojaDeRutaToolStripMenuItem, Me.VerificacionDeCostoDeProductosTerminadosToolStripMenuItem, Me.AutorizacionDePedidosToolStripMenuItem, Me.IngresoGastosDeImportacionToolStripMenuItem, Me.IngresoGastosDeImportacionParcialToolStripMenuItem, Me.IngresoDeSolicitudPedidoDeVentaToolStripMenuItem, Me.EnvioDeEmailsAClientesToolStripMenuItem, Me.CentroDeControlImportacionesToolStripMenuItem})
         Me.NovedadesToolStripMenuItem.Name = "NovedadesToolStripMenuItem"
         Me.NovedadesToolStripMenuItem.Size = New System.Drawing.Size(78, 20)
         Me.NovedadesToolStripMenuItem.Text = "Novedades"
@@ -465,6 +466,11 @@ Partial Class MenuPrincipal
         Me.ProyeccionDeCtaCteAFechaToolStripMenuItem.Name = "ProyeccionDeCtaCteAFechaToolStripMenuItem"
         Me.ProyeccionDeCtaCteAFechaToolStripMenuItem.Size = New System.Drawing.Size(370, 22)
         Me.ProyeccionDeCtaCteAFechaToolStripMenuItem.Text = "Proyeccion de Cta Cte a Fecha"
+        'IngresoDePedidoToolStripMenuItem
+        '
+        Me.IngresoDePedidoToolStripMenuItem.Name = "IngresoDePedidoToolStripMenuItem"
+        Me.IngresoDePedidoToolStripMenuItem.Size = New System.Drawing.Size(322, 22)
+        Me.IngresoDePedidoToolStripMenuItem.Text = "Ingreso de Pedido"
         '
         'MenuPrincipal
         '
@@ -544,5 +550,6 @@ Partial Class MenuPrincipal
     Friend WithEvents ListadoDeGastosDeImportacionPorCarpetaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ListadoDeCalculoDeCostoDeImportacionPorCarpetaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ProyeccionDeCtaCteAFechaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents IngresoDePedidoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

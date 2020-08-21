@@ -83,6 +83,10 @@
       <DependentUpon>ConsultaCliente.vb</DependentUpon>
     </Compile>
     <Compile Include="ConsultaCliente.vb">
+    <Compile Include="Listados\Listado de Cash Flow\ConsultaCliente.Designer.vb">
+      <DependentUpon>ConsultaCliente.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\Listado de Cash Flow\ConsultaCliente.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Consulta_DY.Designer.vb">
@@ -644,6 +648,12 @@
     <Compile Include="Novedades\Autorizacion de Pedidos\Ventana_Boton_Autorizo.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Novedades\Pedidos\IngresoPedido.Designer.vb">
+      <DependentUpon>IngresoPedido.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Novedades\Pedidos\IngresoPedido.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Novedades\Verificacion de Cost de Productos Terminados\Ayuda_MP.Designer.vb">
       <DependentUpon>Ayuda_MP.vb</DependentUpon>
     </Compile>
@@ -947,6 +957,12 @@
       <DependentUpon>Reporte_PT_SinVentas.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\wpedpen.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>wpedpen.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="VentanaPassword.Designer.vb">
       <DependentUpon>VentanaPassword.vb</DependentUpon>
     </Compile>
@@ -955,6 +971,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Listados\Listado de Cash Flow\ConsultaCliente.resx">
+      <DependentUpon>ConsultaCliente.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Consulta_DY.resx">
+      <DependentUpon>Consulta_DY.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Consulta_MP.resx">
+      <DependentUpon>Consulta_MP.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Consulta_Terminado.resx">
       <DependentUpon>Consulta_Terminado.vb</DependentUpon>
     </EmbeddedResource>
@@ -1147,6 +1172,9 @@
     <EmbeddedResource Include="Maestro\Listar_Cambios.resx">
       <DependentUpon>Listar_Cambios.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Maestro\ModificacionDe_Precio.resx">
+      <DependentUpon>ModificacionDe_Precio.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Maestro\Precios por Cliente\PreciosClienteProducto.resx">
       <DependentUpon>PreciosClienteProducto.vb</DependentUpon>
     </EmbeddedResource>
@@ -1176,6 +1204,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Novedades\Consulta Hoja de Ruta\ConsultaHojaDeRutaXRangoFecha.resx">
       <DependentUpon>ConsultaHojaDeRutaXRangoFecha.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Novedades\Envio_DeMails_Clientes.resx">
+      <DependentUpon>Envio_DeMails_Clientes.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Novedades\Gastos de Importacion Parciales\Articulos_GastosImportacionParcial.resx">
       <DependentUpon>Articulos_GastosImportacionParcial.vb</DependentUpon>
@@ -1209,6 +1240,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Novedades\Autorizacion de Pedidos\Ventana_Boton_Autorizo.resx">
       <DependentUpon>Ventana_Boton_Autorizo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Novedades\Pedidos\IngresoPedido.resx">
+      <DependentUpon>IngresoPedido.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Novedades\Verificacion de Cost de Productos Terminados\Ayuda_MP.resx">
       <DependentUpon>Ayuda_MP.vb</DependentUpon>
@@ -1401,6 +1435,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Reporte_PT_SinVentas.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\wpedpen.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>wpedpen.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="VentanaPassword.resx">
       <DependentUpon>VentanaPassword.vb</DependentUpon>
     </EmbeddedResource>
@@ -1484,6 +1522,7 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

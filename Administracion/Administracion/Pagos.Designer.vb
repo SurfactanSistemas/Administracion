@@ -127,6 +127,7 @@ Partial Class Pagos
         Me.txtProveedor = New Administracion.CustomTextBox()
         Me.txtRazonSocial = New Administracion.CustomTextBox()
         Me.txtBanco = New Administracion.CustomTextBox()
+        Me.txtFormasPagosAceptadas = New Administracion.CustomTextBox()
         Me.txtNombreBanco = New Administracion.CustomTextBox()
         Me.CustomLabel6 = New Administracion.CustomLabel()
         Me.CustomLabel7 = New Administracion.CustomLabel()
@@ -488,6 +489,7 @@ Partial Class Pagos
         Me.Panel2.Controls.Add(Me.txtProveedor)
         Me.Panel2.Controls.Add(Me.txtRazonSocial)
         Me.Panel2.Controls.Add(Me.txtBanco)
+        Me.Panel2.Controls.Add(Me.txtFormasPagosAceptadas)
         Me.Panel2.Controls.Add(Me.txtNombreBanco)
         Me.Panel2.Controls.Add(Me.GroupBox1)
         Me.Panel2.Controls.Add(Me.gridFormaPagos)
@@ -523,9 +525,9 @@ Partial Class Pagos
         Me.pnlDifCamXFactura.Controls.Add(Me.btnAceptar)
         Me.pnlDifCamXFactura.Controls.Add(Me.GridPagosXFacturas)
         Me.pnlDifCamXFactura.Controls.Add(Me.CustomLabel1)
-        Me.pnlDifCamXFactura.Location = New System.Drawing.Point(156, 73)
+        Me.pnlDifCamXFactura.Location = New System.Drawing.Point(354, 73)
         Me.pnlDifCamXFactura.Name = "pnlDifCamXFactura"
-        Me.pnlDifCamXFactura.Size = New System.Drawing.Size(467, 300)
+        Me.pnlDifCamXFactura.Size = New System.Drawing.Size(269, 300)
         Me.pnlDifCamXFactura.TabIndex = 131
         '
         'btnVolver
@@ -1295,6 +1297,22 @@ Partial Class Pagos
         Me.ToolTip1.SetToolTip(Me.txtBanco, "Doble Click: Abrir Consulta de Cuentas Contables")
         Me.txtBanco.Validator = Administracion.ValidatorType.Numeric
         '
+        'txtFormasPagosAceptadas
+        '
+        Me.txtFormasPagosAceptadas.BackColor = System.Drawing.SystemColors.InactiveCaption
+        Me.txtFormasPagosAceptadas.Cleanable = True
+        Me.txtFormasPagosAceptadas.Empty = True
+        Me.txtFormasPagosAceptadas.Enabled = False
+        Me.txtFormasPagosAceptadas.EnterIndex = -1
+        Me.txtFormasPagosAceptadas.LabelAssociationKey = 5
+        Me.txtFormasPagosAceptadas.Location = New System.Drawing.Point(13, 101)
+        Me.txtFormasPagosAceptadas.Name = "txtFormasPagosAceptadas"
+        Me.txtFormasPagosAceptadas.ReadOnly = True
+        Me.txtFormasPagosAceptadas.Size = New System.Drawing.Size(282, 20)
+        Me.txtFormasPagosAceptadas.TabIndex = 33
+        Me.txtFormasPagosAceptadas.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtFormasPagosAceptadas.Validator = Administracion.ValidatorType.None
+        '
         'txtNombreBanco
         '
         Me.txtNombreBanco.Cleanable = True
@@ -1707,4 +1725,5 @@ Partial Class Pagos
     Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
     Friend WithEvents rbChElectronico As System.Windows.Forms.RadioButton
     Friend WithEvents rbChFisico As System.Windows.Forms.RadioButton
+    Friend WithEvents txtFormasPagosAceptadas As Administracion.CustomTextBox
 End Class
