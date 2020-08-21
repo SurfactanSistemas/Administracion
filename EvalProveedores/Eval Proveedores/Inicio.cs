@@ -22,6 +22,14 @@ namespace Eval_Proveedores
             {
                 cnx.Open();
             }
+
+            // Determinamos si se lo llama por linea de comandos.
+            if (Environment.GetCommandLineArgs().Length > 1)
+            {
+                VencimientosProximosEvaluaciones frm = new VencimientosProximosEvaluaciones();
+                frm.ShowDialog(this);
+                Close();
+            }
         }
 
         private void ctiDeEvaluaciónSemestralDeProveedoresDeEnvasesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -152,6 +160,12 @@ namespace Eval_Proveedores
         private void evaluaciónDeProveedoresDeEnsayosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EvaluacionesProveedoresEnsayos frm = new EvaluacionesProveedoresEnsayos();
+            frm.Show(this);
+        }
+
+        private void previsiónDeVencimientosDeEvaluacionesDeProveedoresDeMateriaPrimaParaFarmaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            VencimientosProximosEvaluaciones frm = new VencimientosProximosEvaluaciones();
             frm.Show(this);
         }
     }
