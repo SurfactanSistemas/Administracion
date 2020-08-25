@@ -7,7 +7,7 @@ Public Class VencimientosProximosEvaluaciones
 
     Private Sub VencimientosProximosEvaluaciones_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        txtDesde.Text = Date.Now.AddDays(-7).ToString("dd/MM/yyyy")
+        txtDesde.Text = "" 'Date.Now.AddDays(-7).ToString("dd/MM/yyyy")
         txtHasta.Text = Date.Now.AddMonths(1).ToString("dd/MM/yyyy")
 
         _CargarDatos()
@@ -27,6 +27,8 @@ Public Class VencimientosProximosEvaluaciones
         WDatos.DefaultView.Sort = "FechaOrd ASC, Proveedor, Nombre"
 
         dgvItems.DataSource = WDatos
+
+        txtDesde.Text = WDatos.Rows.Cast(Of DataRow).ToList.First()("Fecha")
 
         For Each row As DataGridViewRow In dgvItems.Rows
             If Val(row.Cells("Item").Value) = 0 Then
@@ -66,6 +68,7 @@ Public Class VencimientosProximosEvaluaciones
 
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
         _CargarDatos()
+        TextBox1_KeyUp(Nothing, Nothing)
     End Sub
 
     Private Sub txtDesde_KeyDown(sender As Object, e As KeyEventArgs) Handles txtDesde.KeyDown
