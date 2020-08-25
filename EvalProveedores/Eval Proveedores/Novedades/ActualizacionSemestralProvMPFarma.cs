@@ -249,7 +249,9 @@ namespace Eval_Proveedores.Novedades
                 {
                     var WProveedor = Helper.OrDefault(row.Cells["Proveedor"].Value, "").ToString();
                     var WEstadoMP = _TraerIDEvaluacion(Helper.OrDefault(row.Cells["EvaCal"].Value, 0)).ToString();
-                    var WFechaEvaluaVto = Helper.OrDefault(row.Cells["FechaEvaluaProvMPFarmaII"].Value, "").ToString();
+                    var WFechaEntrego = Helper.OrDefault(row.Cells["FechaEvaluaProvMPFarmaII"].Value, "").ToString();
+                    var WFechaEntregoOrd = Helper.OrdenarFecha(WFechaEntrego);
+                    var WFechaEvaluaVto = Helper.OrDefault(row.Cells["VencEvaluacion"].Value, "").ToString();
                     var WFechaEvaluaVtoOrd = Helper.OrdenarFecha(WFechaEvaluaVto);
                     var WCodMP = Helper.OrDefault(row.Cells["Articulo"].Value, "").ToString();
                     var WFecha = DateTime.Now.ToString("dd/MM/yyyy");
@@ -261,13 +263,13 @@ namespace Eval_Proveedores.Novedades
 
                     if (WEvaluacion != null)
                     {
-                        ZSqls.Add("UPDATE EvaluacionProvMP SET Fecha = '" + WFecha + "', FechaOrd = '" + WFechaOrd + "', EstadoMP = '" + WEstadoMP + "', FechaEvaluaVto = '" + WFechaEvaluaVto + "', FechaEvaluaVtoOrd = '" + WFechaEvaluaVtoOrd + "', Operador = '" + WEvaluador + "' WHERE Proveedor = '" + WProveedor + "' And Articulo = '" + WCodMP + "'");
+                        ZSqls.Add("UPDATE EvaluacionProvMP SET Fecha = '" + WFecha + "', FechaOrd = '" + WFechaOrd + "', EstadoMP = '" + WEstadoMP + "', FechaEntrego = '" + WFechaEntrego + "', FechaEntregoOrd = '" + WFechaEntregoOrd + "', Operador = '" + WEvaluador + "', FechaEvaluaVto = '" + WFechaEvaluaVto + "', FechaEvaluaVtoOrd = '" + WFechaEvaluaVtoOrd + "' WHERE Proveedor = '" + WProveedor + "' And Articulo = '" + WCodMP + "'");
                     }
                     else
                     {
                         string WClave = WProveedor.PadLeft(11, '0') + WCodMP + "01";
 
-                        ZSqls.Add(string.Format("INSERT INTO EvaluacionProvMP (Clave, Proveedor, Articulo, Renglon, Fecha, FechaOrd, FechaEvaluaVto, FechaEvaluaVtoOrd, Operador, EstadoMP) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}')", WClave, WProveedor, WCodMP, 1, WFecha, WFechaOrd, WFechaEvaluaVto, WFechaEvaluaVtoOrd, WEvaluador, WEstadoMP));
+                        ZSqls.Add(string.Format("INSERT INTO EvaluacionProvMP (Clave, Proveedor, Articulo, Renglon, Fecha, FechaOrd, FechaEntrego, FechaEntregoOrd, Operador, EstadoMP, FechaEvaluaVto, FechaEvaluaVtoOrd) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}')", WClave, WProveedor, WCodMP, 1, WFecha, WFechaOrd, WFechaEntrego, WFechaEntregoOrd, WEvaluador, WEstadoMP, WFechaEvaluaVto, WFechaEvaluaVtoOrd));
                     }
                 }
 

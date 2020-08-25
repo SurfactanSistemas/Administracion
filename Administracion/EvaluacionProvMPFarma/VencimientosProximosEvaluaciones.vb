@@ -8,7 +8,7 @@ Public Class VencimientosProximosEvaluaciones
     Private Sub VencimientosProximosEvaluaciones_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         txtDesde.Text = Date.Now.AddDays(-7).ToString("dd/MM/yyyy")
-        txtHasta.Text = Date.Now.AddMonths(2).ToString("dd/MM/yyyy")
+        txtHasta.Text = Date.Now.AddMonths(1).ToString("dd/MM/yyyy")
 
         _CargarDatos()
 
