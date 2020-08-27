@@ -258,12 +258,16 @@ namespace Eval_Proveedores.Novedades
                     var WFechaOrd = Helper.OrdenarFecha(WFecha);
 
                     DataRow WEvaluacion =
-                        Query.GetSingle("SELECT Clave FROM EvaluacionProvMP WHERE Proveedor = '" + WProveedor +
+                        Query.GetSingle("SELECT Clave, CantOCEventual FROM EvaluacionProvMP WHERE Proveedor = '" + WProveedor +
                                         "' And Articulo = '" + WCodMP + "'");
 
                     if (WEvaluacion != null)
                     {
-                        ZSqls.Add("UPDATE EvaluacionProvMP SET Fecha = '" + WFecha + "', FechaOrd = '" + WFechaOrd + "', EstadoMP = '" + WEstadoMP + "', FechaEntrego = '" + WFechaEntrego + "', FechaEntregoOrd = '" + WFechaEntregoOrd + "', Operador = '" + WEvaluador + "', FechaEvaluaVto = '" + WFechaEvaluaVto + "', FechaEvaluaVtoOrd = '" + WFechaEvaluaVtoOrd + "' WHERE Proveedor = '" + WProveedor + "' And Articulo = '" + WCodMP + "'");
+                        var WCantOCEventual = Helper.OrDefault(WEvaluacion["CantOCEventual"], 0);
+
+                        if (WEstadoMP != "3") WCantOCEventual = 0;
+
+                        ZSqls.Add("UPDATE EvaluacionProvMP SET Fecha = '" + WFecha + "', FechaOrd = '" + WFechaOrd + "', EstadoMP = '" + WEstadoMP + "', FechaEntrego = '" + WFechaEntrego + "', FechaEntregoOrd = '" + WFechaEntregoOrd + "', Operador = '" + WEvaluador + "', FechaEvaluaVto = '" + WFechaEvaluaVto + "', FechaEvaluaVtoOrd = '" + WFechaEvaluaVtoOrd + "', CantOCEventual = '" + WCantOCEventual.ToString() + "' WHERE Proveedor = '" + WProveedor + "' And Articulo = '" + WCodMP + "'");
                     }
                     else
                     {
