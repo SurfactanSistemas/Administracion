@@ -147,7 +147,7 @@ Public Class EvaluacionProveedorMateriaPrima : Implements IAyudaProveedores, Uti
 
             TabControl1.TabPages.Add(WTab)
             ComboBox1.Items.Add(WDato.Item("MP"))
-            
+
             GC.Collect()
 
         End If
@@ -172,7 +172,7 @@ Public Class EvaluacionProveedorMateriaPrima : Implements IAyudaProveedores, Uti
         If btnGrabar.Enabled Then
             If MsgBox("¿Está seguro de querer salir? Se perderán los datos que no se hayan guardado.", MsgBoxStyle.YesNo) <> MsgBoxResult.Yes Then Exit Sub
         End If
-
+        
         Close()
 
     End Sub
