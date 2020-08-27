@@ -75,13 +75,14 @@ Public Class ListadoCuentaCorrienteProveedores : Implements IAyudaGeneral
 
         Dim WFiltro As String = IIf(opcCompleto.Checked, "", " And Saldo <> 0")
 
-        tabla = GetAll("SELECT Tipo, Letra, Punto, Numero, Total, Saldo, fecha, Vencimiento, Vencimiento1, Impre, NroInterno, Clave, Proveedor FROM CtactePrv WHERE ISNULL(MarcaVirtual, '') <> 'X' And Proveedor BETWEEN '" & WDesde & "' And '" & WHasta & "' " & WFiltro & " ORDER BY Proveedor, OrdFecha, Tipo, Numero")
+        tabla = GetAll("SELECT Tipo, Letra, Punto, Numero, Total, Saldo, fecha, Vencimiento, Vencimiento1, Impre, NroInterno, Clave, Proveedor, Pago FROM CtactePrv WHERE ISNULL(MarcaVirtual, '') <> 'X' And Proveedor BETWEEN '" & WDesde & "' And '" & WHasta & "' " & WFiltro & " ORDER BY Proveedor, OrdFecha, Tipo, Numero")
 
         For Each row As DataRow In tabla.Rows
 
             Dim CCPrv As New CtaCteProveedoresDeudaDesdeHasta(row.Item("Tipo").ToString, row.Item("Letra").ToString, row.Item("Punto").ToString, row.Item("Numero").ToString, row.Item("Total"), row.Item("Saldo"), row.Item("Fecha").ToString, row.Item("Vencimiento").ToString, row.Item("Vencimiento1").ToString, row.Item("Impre").ToString, row.Item("NroInterno"), row.Item("Clave").ToString, row.Item("Proveedor").ToString)
 
             If ckSoloAnticipos.Checked And UCase(CCPrv.Impre) <> "AN" Then Continue For
+            If ckSoloDolares.Checked And Val(OrDefault(row("Pago"), "")) <> 2 Then Continue For
 
             If txtLLave = 0 Then
                 txtLLave = 1

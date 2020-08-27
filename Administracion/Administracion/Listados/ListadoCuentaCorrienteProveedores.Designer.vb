@@ -38,11 +38,12 @@ Partial Class ListadoCuentaCorrienteProveedores
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.ckSoloAnticipos = New System.Windows.Forms.CheckBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.btnPorPantalla = New Administracion.CustomButton()
         Me.btnImprimir = New Administracion.CustomButton()
         Me.lstFiltrada = New Administracion.CustomListBox()
-        Me.ckSoloAnticipos = New System.Windows.Forms.CheckBox()
+        Me.ckSoloDolares = New System.Windows.Forms.CheckBox()
         Me.Grupo1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -242,6 +243,7 @@ Partial Class ListadoCuentaCorrienteProveedores
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.ckSoloDolares)
         Me.Panel2.Controls.Add(Me.ckSoloAnticipos)
         Me.Panel2.Controls.Add(Me.txtDesdeProveedor)
         Me.Panel2.Controls.Add(Me.CustomLabel1)
@@ -252,6 +254,18 @@ Partial Class ListadoCuentaCorrienteProveedores
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(590, 155)
         Me.Panel2.TabIndex = 29
+        '
+        'ckSoloAnticipos
+        '
+        Me.ckSoloAnticipos.AutoSize = True
+        Me.ckSoloAnticipos.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ckSoloAnticipos.ForeColor = System.Drawing.SystemColors.Control
+        Me.ckSoloAnticipos.Location = New System.Drawing.Point(354, 18)
+        Me.ckSoloAnticipos.Name = "ckSoloAnticipos"
+        Me.ckSoloAnticipos.Size = New System.Drawing.Size(136, 17)
+        Me.ckSoloAnticipos.TabIndex = 21
+        Me.ckSoloAnticipos.Text = "Sólo Anticipos (AN)"
+        Me.ckSoloAnticipos.UseVisualStyleBackColor = True
         '
         'btnPorPantalla
         '
@@ -305,17 +319,17 @@ Partial Class ListadoCuentaCorrienteProveedores
         Me.lstFiltrada.TabIndex = 30
         Me.lstFiltrada.Visible = False
         '
-        'ckSoloAnticipos
+        'ckSoloDolares
         '
-        Me.ckSoloAnticipos.AutoSize = True
-        Me.ckSoloAnticipos.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ckSoloAnticipos.ForeColor = System.Drawing.SystemColors.Control
-        Me.ckSoloAnticipos.Location = New System.Drawing.Point(354, 18)
-        Me.ckSoloAnticipos.Name = "ckSoloAnticipos"
-        Me.ckSoloAnticipos.Size = New System.Drawing.Size(136, 17)
-        Me.ckSoloAnticipos.TabIndex = 21
-        Me.ckSoloAnticipos.Text = "Sólo Anticipos (AN)"
-        Me.ckSoloAnticipos.UseVisualStyleBackColor = True
+        Me.ckSoloDolares.AutoSize = True
+        Me.ckSoloDolares.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ckSoloDolares.ForeColor = System.Drawing.SystemColors.Control
+        Me.ckSoloDolares.Location = New System.Drawing.Point(354, 41)
+        Me.ckSoloDolares.Name = "ckSoloDolares"
+        Me.ckSoloDolares.Size = New System.Drawing.Size(153, 17)
+        Me.ckSoloDolares.TabIndex = 21
+        Me.ckSoloDolares.Text = "Sólo c/ cláusula Dolar"
+        Me.ckSoloDolares.UseVisualStyleBackColor = True
         '
         'ListadoCuentaCorrienteProveedores
         '
@@ -362,4 +376,5 @@ Partial Class ListadoCuentaCorrienteProveedores
     Friend WithEvents btnPorPantalla As Administracion.CustomButton
     Friend WithEvents btnImprimir As Administracion.CustomButton
     Friend WithEvents ckSoloAnticipos As System.Windows.Forms.CheckBox
+    Friend WithEvents ckSoloDolares As System.Windows.Forms.CheckBox
 End Class
