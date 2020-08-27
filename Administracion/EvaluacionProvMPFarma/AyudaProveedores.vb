@@ -38,6 +38,8 @@ Public Class AyudaProveedores
                 '                Return "ISNULL(a.ClasificacionFarma, 0) = 0 And a.ReqEvalEspecial = '1'"
         End Select
 
+        Return ""
+
     End Function
 
     Private Sub BackgroundWorker1_ProgressChanged(ByVal sender As Object, ByVal e As ProgressChangedEventArgs) Handles BackgroundWorker1.ProgressChanged

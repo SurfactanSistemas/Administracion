@@ -214,6 +214,14 @@ Public Class EvaluacionProveedorMateriaPrima : Implements IAyudaProveedores, Uti
             Dim WFechaEvaluaVtoOrd As String = ordenaFecha(WFechaEvaluaVto)
             Dim WDatos As Util.DBDataGridView = WControl._ObtenerDatosItems()
 
+            Dim WCantOCEventual As Short = 0
+
+            Dim WEval As DataRow = GetSingle("SELECT CantOCEventual FROM EvaluacionProvMP WHERE Proveedor = '" & WProveedor & "' And Articulo = '" & ZCodMP & "' And Renglon = 1")
+
+            If WEval IsNot Nothing Then WCantOCEventual = OrDefault(WEval("cantOCEventual"), 0)
+
+            If WEstadoMP <> 3 Then WCantOCEventual = 0
+
             Dim WClave, WReq, WSolicitado, WFechaSolicitado, WFechaSolicitadoOrd, WEntrego, WFechaEntrego, WFechaEntregoOrd, WAprobo, WFechaAprobo, WFechaAproboOrd, WFechaVto, WFechaVtoOrd, WAclaraciones As String
 
             Dim WSqls As New List(Of String)
@@ -246,8 +254,8 @@ Public Class EvaluacionProveedorMateriaPrima : Implements IAyudaProveedores, Uti
 
                     WClave = WProveedor.PadLeft(11, "0") & ZCodMP & WReq.PadLeft(2, "0")
 
-                    Dim WSql As String = String.Format("INSERT INTO EvaluacionProvMP (Clave, Proveedor, Renglon, Solicitado, FechaSolicitado, FechaSolicitadoOrd, Entrego, FechaEntrego, FechaEntregoOrd, Aprobo, FechaAprobo, FechaAproboOrd, Aclaraciones, EstadoMp, FechaVto, FechaVtoOrd, Articulo, Operador, FechaEvaluaVto, FechaEvaluaVtoOrd, Fecha, FechaOrd) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13}', '{14}', '{15}', '{16}', '{17}', '{18}', '{19}', '{20}', '{21}')",
-                                                       WClave, WProveedor, WReq, WSolicitado, WFechaSolicitado, WFechaSolicitadoOrd, WEntrego, WFechaEntrego, WFechaEntregoOrd, WAprobo, WFechaAprobo, WFechaAproboOrd, WAclaraciones, WEstadoMP, WFechaVto, WFechaVtoOrd, ZCodMP, ZOperador, WFechaEvaluaVto, WFechaEvaluaVtoOrd, WFecha, WFechaOrd)
+                    Dim WSql As String = String.Format("INSERT INTO EvaluacionProvMP (Clave, Proveedor, Renglon, Solicitado, FechaSolicitado, FechaSolicitadoOrd, Entrego, FechaEntrego, FechaEntregoOrd, Aprobo, FechaAprobo, FechaAproboOrd, Aclaraciones, EstadoMp, FechaVto, FechaVtoOrd, Articulo, Operador, FechaEvaluaVto, FechaEvaluaVtoOrd, Fecha, FechaOrd, CantOCEventual) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13}', '{14}', '{15}', '{16}', '{17}', '{18}', '{19}', '{20}', '{21}', '{22}')",
+                                                       WClave, WProveedor, WReq, WSolicitado, WFechaSolicitado, WFechaSolicitadoOrd, WEntrego, WFechaEntrego, WFechaEntregoOrd, WAprobo, WFechaAprobo, WFechaAproboOrd, WAclaraciones, WEstadoMP, WFechaVto, WFechaVtoOrd, ZCodMP, ZOperador, WFechaEvaluaVto, WFechaEvaluaVtoOrd, WFecha, WFechaOrd, WCantOCEventual)
 
                     WSqls.Add(WSql)
 

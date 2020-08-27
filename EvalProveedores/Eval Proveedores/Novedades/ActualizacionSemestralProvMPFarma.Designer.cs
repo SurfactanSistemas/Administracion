@@ -103,7 +103,7 @@ namespace Eval_Proveedores.Novedades
             this.Retrasos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EvaCal = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.FechaEvaluaProvMPFarmaII = new Util.MyMaskedTextBoxColumn();
-            this.VencEvaluacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.VencEvaluacion = new Util.MyMaskedTextBoxColumn();
             this.VerEvalua = new System.Windows.Forms.DataGridViewLinkColumn();
             this.panel1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -199,7 +199,6 @@ namespace Eval_Proveedores.Novedades
             this.button2.TabIndex = 79;
             this.toolTip1.SetToolTip(this.button2, "Grabar");
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Visible = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // btnImprimir
@@ -764,9 +763,14 @@ namespace Eval_Proveedores.Novedades
             dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             this.VencEvaluacion.DefaultCellStyle = dataGridViewCellStyle14;
             this.VencEvaluacion.HeaderText = "Venc. Evalua.";
+            this.VencEvaluacion.IncludeLiterals = true;
+            this.VencEvaluacion.IncludePrompt = true;
+            this.VencEvaluacion.Mask = "00/00/0000";
             this.VencEvaluacion.Name = "VencEvaluacion";
-            this.VencEvaluacion.ReadOnly = true;
+            this.VencEvaluacion.PromptChar = ' ';
             this.VencEvaluacion.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.VencEvaluacion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.VencEvaluacion.ValidatingType = null;
             this.VencEvaluacion.Width = 91;
             // 
             // VerEvalua
@@ -884,7 +888,7 @@ namespace Eval_Proveedores.Novedades
         private System.Windows.Forms.DataGridViewTextBoxColumn Retrasos;
         private System.Windows.Forms.DataGridViewComboBoxColumn EvaCal;
         private MyMaskedTextBoxColumn FechaEvaluaProvMPFarmaII;
-        private System.Windows.Forms.DataGridViewTextBoxColumn VencEvaluacion;
+        private MyMaskedTextBoxColumn VencEvaluacion;
         private System.Windows.Forms.DataGridViewLinkColumn VerEvalua;
     }
 }
