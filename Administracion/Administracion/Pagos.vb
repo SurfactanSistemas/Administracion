@@ -590,22 +590,22 @@ Public Class Pagos
 
         txtFormasPagosAceptadas.Visible = False
 
-        Dim Prov As DataRow = GetSingle("SELECT AceptaCheques, AceptaTransferencias FROM Proveedor WHERE Proveedor = '" & txtProveedor.Text & "'")
+        'Dim Prov As DataRow = GetSingle("SELECT AceptaCheques, AceptaTransferencias FROM Proveedor WHERE Proveedor = '" & txtProveedor.Text & "'")
 
-        If Prov IsNot Nothing Then
+        'If Prov IsNot Nothing Then
 
-            If OrDefault(Prov("AceptaCheques"), "") <> "" Then
-                txtFormasPagosAceptadas.Text = "ACEPTA E-CHEQ"
-            End If
+        '    If OrDefault(Prov("AceptaCheques"), "") <> "" Then
+        '        txtFormasPagosAceptadas.Text = "ACEPTA E-CHEQ"
+        '    End If
 
-            If OrDefault(Prov("AceptaTransferencias"), "") <> "" Then
-                If txtFormasPagosAceptadas.Text <> "" Then txtFormasPagosAceptadas.Text &= " / "
-                txtFormasPagosAceptadas.Text &= "ACEPTA TRANSFERENCIAS"
-            End If
+        '    If OrDefault(Prov("AceptaTransferencias"), "") <> "" Then
+        '        If txtFormasPagosAceptadas.Text <> "" Then txtFormasPagosAceptadas.Text &= " / "
+        '        txtFormasPagosAceptadas.Text &= "ACEPTA TRANSFERENCIAS"
+        '    End If
 
-        End If
+        'End If
 
-        txtFormasPagosAceptadas.Visible = txtFormasPagosAceptadas.Text.Trim <> ""
+        'txtFormasPagosAceptadas.Visible = txtFormasPagosAceptadas.Text.Trim <> ""
 
     End Sub
 
