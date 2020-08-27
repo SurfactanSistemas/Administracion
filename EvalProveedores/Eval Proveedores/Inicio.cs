@@ -26,7 +26,7 @@ namespace Eval_Proveedores
             // Determinamos si se lo llama por linea de comandos.
             if (Environment.GetCommandLineArgs().Length > 1)
             {
-                VencimientosProximosEvaluaciones frm = new VencimientosProximosEvaluaciones();
+                VencimientosProximosEvaluaciones frm = new VencimientosProximosEvaluaciones(true);
                 frm.ShowDialog(this);
                 Close();
             }

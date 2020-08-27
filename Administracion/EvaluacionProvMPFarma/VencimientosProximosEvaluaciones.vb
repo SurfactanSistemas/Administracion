@@ -1,9 +1,20 @@
-﻿Imports Util.Clases.Query
+﻿Imports System.IO
+Imports Util.Clases.Query
 Imports Util.Clases.Helper
 
 Public Class VencimientosProximosEvaluaciones
 
     Private dir As DireccionOrdenamiento = DireccionOrdenamiento.ASC
+    Private ReadOnly WGenerarReporteSemanal As Boolean = False
+
+    Sub New(Optional ByVal GenerarReporteSemanal As Boolean = False)
+
+        ' Llamada necesaria para el diseñador.
+        InitializeComponent()
+
+        ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
+        WGenerarReporteSemanal = GenerarReporteSemanal
+    End Sub
 
     Private Sub VencimientosProximosEvaluaciones_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -26,9 +37,69 @@ Public Class VencimientosProximosEvaluaciones
 
         WDatos.DefaultView.Sort = "FechaOrd ASC, Proveedor, Nombre"
 
-        dgvItems.DataSource = WDatos
-
         txtDesde.Text = WDatos.Rows.Cast(Of DataRow).ToList.First()("Fecha")
+
+        If WGenerarReporteSemanal Then
+
+            Dim WExcelApp As New Microsoft.Office.Interop.Excel.Application
+
+            Dim WB As Microsoft.Office.Interop.Excel.Workbook = WExcelApp.Workbooks.Open(Application.StartupPath & "/" & "template.xlsx")
+
+            Try
+                WB.Activate()
+
+                Dim WSheet As Microsoft.Office.Interop.Excel.Worksheet = WB.Worksheets(1)
+
+                Const WOffsetCabecera As Short = 4
+
+                Dim WRenglon As Short = WOffsetCabecera
+
+                WSheet.Cells(2, 1).Value = String.Format("DESDE  {0}  AL  {1}", txtDesde.Text, txtHasta.Text)
+
+                For Each eval As DataRow In WDatos.Rows
+
+                    WRenglon += 1
+
+                    With WSheet
+
+                        .Cells(WRenglon, 1) = eval("Proveedor")
+                        .Cells(WRenglon, 2) = eval("Nombre")
+                        .Cells(WRenglon, 3) = eval("Articulo")
+                        .Cells(WRenglon, 4) = eval("Descripcion")
+                        .Cells(WRenglon, 5) = eval("Fecha")
+                        .Cells(WRenglon, 6) = eval("Item")
+                        .Cells(WRenglon, 7) = eval("DescItem")
+
+                    End With
+
+                Next
+
+                If WRenglon > 0 Then
+
+                    WExcelApp.DisplayAlerts = False
+                    'WB.SaveAs(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) & "/" & WPedido(0)("Pedido") & ".xls")
+                    Dim WNombreArchivo As String = Path.GetTempPath & "VencimientosEvalProvMPFarma" & Date.Now.ToString("yyyyMMdd") & ".xlsx"
+
+                    WB.SaveAs(WNombreArchivo)
+
+                    WExcelApp.DisplayAlerts = False
+
+                    Dim WDestinatarios As String = "calidad@surfactan.com.ar; calidad2@surfactan.com.ar; isocalidad@surfactan.com.ar; ebiglieri@surfactan.com.ar; wbarosio@surfactan.com.ar; msosa@surfactan.com.ar; gferreyra@surfactan.com.ar"
+
+                    Helper._EnviarEmail(WDestinatarios, "VENCIMIENTOS EVALUACION DE PROV DE MP FARMA", "SE ADJUNTAN LOS VENCIMIENTOS DE LAS EVALUACIONES DE PROVEEDORES DE MP FARMA CORRESPONDIENTE AL PERIODO COMPRENDIDO ENTRE EL " & txtDesde.Text & " Y " & txtHasta.Text, {WNombreArchivo})
+
+                End If
+
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            Finally
+                WB.Close()
+            End Try
+
+            Close()
+        End If
+
+        dgvItems.DataSource = WDatos
 
         For Each row As DataGridViewRow In dgvItems.Rows
             If Val(row.Cells("Item").Value) = 0 Then
