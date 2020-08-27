@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using Eval_Proveedores.Interfaces;
 using Util;
 using Util.Clases;
 using EvaluacionProvMPFarma;
@@ -13,7 +14,7 @@ using Logica_Negocio;
 
 namespace Eval_Proveedores.Novedades
 {
-    public partial class ActualizacionSemestralProvMPFarma : Form
+    public partial class ActualizacionSemestralProvMPFarma : Form, IActualizaEvalProv
     {
         readonly EvalSemestralBOL ESBOL = new EvalSemestralBOL();
         DataTable dtEvaluacion = new DataTable();
@@ -660,12 +661,6 @@ namespace Eval_Proveedores.Novedades
         private void DGV_EvalSemProve_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
-            //if (DGV_EvalSemProve.Columns[e.ColumnIndex].Name == "Actualiza")
-            //{
-            //    var WValor = DGV_EvalSemProve.CurrentCell.Value ?? "";
-
-            //    DGV_EvalSemProve.CurrentCell.Value = (WValor.ToString().Trim() == "") ? "X" : "";
-            //}
 
             if (DGV_EvalSemProve.Columns[e.ColumnIndex].Name == "VerEvalua")
             {
@@ -674,7 +669,7 @@ namespace Eval_Proveedores.Novedades
                     string WProveedor = DGV_EvalSemProve.CurrentRow.Cells["Proveedor"].Value.ToString();
                     string WCodMP = DGV_EvalSemProve.CurrentRow.Cells["Articulo"].Value.ToString();
 
-                    EvaluacionProveedorMateriaPrima _frm = new EvaluacionProveedorMateriaPrima(WProveedor, false, WCodMP);
+                    EvaluacionProveedorMateriaPrima _frm = new EvaluacionProveedorMateriaPrima(WProveedor, true, WCodMP);
                     _frm.Show(this);
                 }
             }
@@ -687,6 +682,21 @@ namespace Eval_Proveedores.Novedades
             if (FechaFarmaCol != null && e.ColumnIndex == FechaFarmaCol.Index)
             {
                 DGV_EvalSemProve.CurrentCell.Selected = false;
+            }
+        }
+
+        public void _ProcesarActualizaEvalProv(string Proveedor, string Articulo, int Estado, string FechaEval, string FechaVto)
+        {
+            foreach (DataGridViewRow row in DGV_EvalSemProve.Rows)
+            {
+                if (row.Cells["Proveedor"].Value.ToString() == Proveedor &&
+                    row.Cells["Articulo"].Value.ToString() == Articulo)
+                {
+                    row.Cells["EvaCal"].Value = _TraerDescEvaluacion(Estado);
+                    row.Cells["FechaEvaluaProvMPFarmaII"].Value = FechaEval;
+                    row.Cells["VencEvaluacion"].Value = FechaVto;
+                    return;
+                }
             }
         }
     }
