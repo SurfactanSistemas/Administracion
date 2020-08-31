@@ -5,9 +5,11 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using Modulo_Capacitacion.Listados;
 using Modulo_Capacitacion.Reportes.Cursada;
 using Negocio;
+using Util;
+using VistaPrevia = Modulo_Capacitacion.Listados.VistaPrevia;
+using Util.Clases;
 
 namespace Modulo_Capacitacion.Novedades
 {
@@ -209,9 +211,19 @@ namespace Modulo_Capacitacion.Novedades
                             dgvGrilla.Rows[WRenglon].Cells["Nombre"].Value = row["DesLegajo"].ToString().Trim();
                             dgvGrilla.Rows[WRenglon].Cells["Dni"].Value = row["Dni"].ToString().Trim();
                             dgvGrilla.Rows[WRenglon].Cells["Observaciones"].Value = row["Observaciones"].ToString().Trim();
-                            dgvGrilla.Rows[WRenglon].Cells["Sector"].Value = row["DescSector"].ToString().Trim();
+                            dgvGrilla.Rows[WRenglon].Cells["Sector"].Value = "";
+                            //dgvGrilla.Rows[WRenglon].Cells["Sector"].Value = row["DescSector"].ToString().Trim();
 
                         }
+                        foreach (DataGridViewRow Row in dgvGrilla.Rows)
+                        {
+
+                            string SQLCnslt = "SELECT ImprePerfil From Legajo WHERE Codigo = '" + Row.Cells["Legajo"].Value + "'";
+                            DataRow DataLegajo = Query.GetSingle(SQLCnslt);
+                            Row.Cells["Sector"].Value = DataLegajo["ImprePerfil"].ToString().Trim();    
+                        }
+
+                        
 
                         //dgvGrilla.Rows.Add();
                     }
