@@ -4,9 +4,6 @@ Imports Util.Clases.Helper
 
 Public Class Consulta_DY
 
-
-
-
     Private Sub Consulta_DY_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim SQLCnslt As String = "SELECT Codigo, Descripcion FROM Articulo WHERE Codigo LIKE 'DY%' ORDER BY Codigo ASC"
 

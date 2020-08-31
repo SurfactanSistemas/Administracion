@@ -79,10 +79,72 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConsultaCliente.Designer.vb">
-      <DependentUpon>ConsultaCliente.vb</DependentUpon>
+    <Compile Include="Listados\Analisis_Cumplimiento_PedidosDeVentas.Designer.vb">
+      <DependentUpon>Analisis_Cumplimiento_PedidosDeVentas.vb</DependentUpon>
     </Compile>
-    <Compile Include="ConsultaCliente.vb">
+    <Compile Include="Listados\Analisis_Cumplimiento_PedidosDeVentas.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\Listado_PercepcionesIIBB.Designer.vb">
+      <DependentUpon>Listado_PercepcionesIIBB.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\Listado_PercepcionesIIBB.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\Listado_VentasDiarasPendientesDePago.Designer.vb">
+      <DependentUpon>Listado_VentasDiarasPendientesDePago.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\Listado_VentasDiarasPendientesDePago.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reportes\Reporte_AnalisisPed.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte_AnalisisPed.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Reporte_AnalisisPedConcepto.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte_AnalisisPedConcepto.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Reporte_AnalisisPedOtro.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte_AnalisisPedOtro.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Reporte_AnalisisPedOtroResu.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte_AnalisisPedOtroResu.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Reporte_AnalisisPedResu.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte_AnalisisPedResu.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Reporte_AnalisisPedTotal.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte_AnalisisPedTotal.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Reporte_AnalisisPed_Indicador.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte_AnalisisPed_Indicador.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Reporte_Listadado_OCPendientes_deMP.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte_Listadado_OCPendientes_deMP.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Listados\Listado de Cash Flow\ConsultaCliente.Designer.vb">
       <DependentUpon>ConsultaCliente.vb</DependentUpon>
     </Compile>
@@ -179,6 +241,12 @@
     <Compile Include="Listados\Listado_Clientes_XVendedor.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Listados\Listado_CtaCte_Analitico.Designer.vb">
+      <DependentUpon>Listado_CtaCte_Analitico.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\Listado_CtaCte_Analitico.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Listados\Listado_CtaCte_deClientes_aFecha.Designer.vb">
       <DependentUpon>Listado_CtaCte_deClientes_aFecha.vb</DependentUpon>
     </Compile>
@@ -227,6 +295,12 @@
     <Compile Include="Listados\Listado_Minutas.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Listados\Listado_OrdCompra_Pendientes_deMP.Designer.vb">
+      <DependentUpon>Listado_OrdCompra_Pendientes_deMP.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\Listado_OrdCompra_Pendientes_deMP.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Listados\Listado_Pedi_Pendi_Fazon_Pellital.Designer.vb">
       <DependentUpon>Listado_Pedi_Pendi_Fazon_Pellital.vb</DependentUpon>
     </Compile>
@@ -249,6 +323,12 @@
       <DependentUpon>Listado_Precios_Grupo.vb</DependentUpon>
     </Compile>
     <Compile Include="Listados\Listado_Precios_Grupo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\LIstado_Proyeccion_CtaCteClienteAnalitico.Designer.vb">
+      <DependentUpon>LIstado_Proyeccion_CtaCteClienteAnalitico.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\LIstado_Proyeccion_CtaCteClienteAnalitico.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Listados\Listado_PT_SinVentas.Designer.vb">
@@ -280,6 +360,12 @@
     </Compile>
     <Compile Include="Listados\ProyeccionCtaCteFecha.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reportes\Reporte_Listado_CtaCte_Analitico.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte_Listado_CtaCte_Analitico.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Listados\SaldoDe_CtaCte_deCliente.Designer.vb">
       <DependentUpon>SaldoDe_CtaCte_deCliente.vb</DependentUpon>
@@ -891,6 +977,30 @@
       <DependentUpon>Reporte_ListadoGeneral_Producto.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\Reporte_Listado_IBVen.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte_Listado_IBVen.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Reporte_Listado_IB_Ciudad.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte_Listado_IB_Ciudad.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Reporte_Listado_IB_Tucu.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte_Listado_IB_Tucu.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Reporte_Listado_IB_Ven_Ciudad.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte_Listado_IB_Ven_Ciudad.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\Reporte_Listado_Minutas.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -901,6 +1011,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reporte_Listado_Remitos.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Reporte_Listado_VentasDiariasPendientesPago.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte_Listado_VentasDiariasPendientesPago.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\Reporte_Lista_Precios_Compa_Clientes.vb">
@@ -945,6 +1061,18 @@
       <DependentUpon>Reporte_Precios_Grupo_SinCodigo.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\Reporte_ProyCtaCteAnaliticoCliente.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte_ProyCtaCteAnaliticoCliente.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Reporte_ProyCtaCteAnaliticoVendedor.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte_ProyCtaCteAnaliticoVendedor.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\Reporte_ProyeccionCtaCteAFecha.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -971,6 +1099,47 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Listados\Analisis_Cumplimiento_PedidosDeVentas.resx">
+      <DependentUpon>Analisis_Cumplimiento_PedidosDeVentas.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Listado_PercepcionesIIBB.resx">
+      <DependentUpon>Listado_PercepcionesIIBB.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Listado_VentasDiarasPendientesDePago.resx">
+      <DependentUpon>Listado_VentasDiarasPendientesDePago.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Reporte_AnalisisPed.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte_AnalisisPed.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Reporte_AnalisisPedConcepto.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte_AnalisisPedConcepto.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Reporte_AnalisisPedOtro.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte_AnalisisPedOtro.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Reporte_AnalisisPedOtroResu.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte_AnalisisPedOtroResu.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Reporte_AnalisisPedResu.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte_AnalisisPedResu.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Reporte_AnalisisPedTotal.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte_AnalisisPedTotal.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Reporte_AnalisisPed_Indicador.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte_AnalisisPed_Indicador.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Reporte_Listadado_OCPendientes_deMP.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte_Listadado_OCPendientes_deMP.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Listados\Listado de Cash Flow\ConsultaCliente.resx">
       <DependentUpon>ConsultaCliente.vb</DependentUpon>
     </EmbeddedResource>
@@ -1010,6 +1179,9 @@
     <EmbeddedResource Include="Listados\Listado_Clientes_XVendedor.resx">
       <DependentUpon>Listado_Clientes_XVendedor.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Listado_CtaCte_Analitico.resx">
+      <DependentUpon>Listado_CtaCte_Analitico.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Listados\Listado_CtaCte_deClientes_aFecha.resx">
       <DependentUpon>Listado_CtaCte_deClientes_aFecha.vb</DependentUpon>
     </EmbeddedResource>
@@ -1034,6 +1206,9 @@
     <EmbeddedResource Include="Listados\Listado_Minutas.resx">
       <DependentUpon>Listado_Minutas.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Listado_OrdCompra_Pendientes_deMP.resx">
+      <DependentUpon>Listado_OrdCompra_Pendientes_deMP.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Listados\Listado_Pedi_Pendi_Fazon_Pellital.resx">
       <DependentUpon>Listado_Pedi_Pendi_Fazon_Pellital.vb</DependentUpon>
     </EmbeddedResource>
@@ -1045,6 +1220,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\Listado_Precios_Grupo.resx">
       <DependentUpon>Listado_Precios_Grupo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\LIstado_Proyeccion_CtaCteClienteAnalitico.resx">
+      <DependentUpon>LIstado_Proyeccion_CtaCteClienteAnalitico.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\Listado_PT_SinVentas.resx">
       <DependentUpon>Listado_PT_SinVentas.vb</DependentUpon>
@@ -1060,6 +1238,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\ProyeccionCtaCteFecha.resx">
       <DependentUpon>ProyeccionCtaCteFecha.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Reporte_Listado_CtaCte_Analitico.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte_Listado_CtaCte_Analitico.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\SaldoDe_CtaCte_deCliente.resx">
       <DependentUpon>SaldoDe_CtaCte_deCliente.vb</DependentUpon>
@@ -1391,6 +1573,22 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Reporte_ListadoGeneral_Producto.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Reporte_Listado_IBVen.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte_Listado_IBVen.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Reporte_Listado_IB_Ciudad.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte_Listado_IB_Ciudad.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Reporte_Listado_IB_Tucu.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte_Listado_IB_Tucu.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Reporte_Listado_IB_Ven_Ciudad.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte_Listado_IB_Ven_Ciudad.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Reporte_Listado_Minutas.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Reporte_Listado_Minutas.vb</LastGenOutput>
@@ -1398,6 +1596,10 @@
     <EmbeddedResource Include="Reportes\Reporte_Listado_Remitos.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Reporte_Listado_Remitos.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Reporte_Listado_VentasDiariasPendientesPago.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte_Listado_VentasDiariasPendientesPago.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Reporte_Lista_Precios_Compa_Clientes.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -1426,6 +1628,14 @@
     <EmbeddedResource Include="Reportes\Reporte_Precios_Grupo_SinCodigo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Reporte_Precios_Grupo_SinCodigo.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Reporte_ProyCtaCteAnaliticoCliente.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte_ProyCtaCteAnaliticoCliente.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Reporte_ProyCtaCteAnaliticoVendedor.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte_ProyCtaCteAnaliticoVendedor.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Reporte_ProyeccionCtaCteAFecha.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -1522,7 +1732,9 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="bin\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

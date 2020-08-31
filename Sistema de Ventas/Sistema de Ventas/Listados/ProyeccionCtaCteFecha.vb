@@ -46,8 +46,6 @@ Public Class ProyeccionCtaCteFecha
         For Each RowPeriodo As DataRow In TablaPeriodo.Rows
 
 
-
-
             Dim WWClave As String
             Dim WWFecha As String = ""
             Dim WWImpo1 As Double = 0
@@ -57,9 +55,6 @@ Public Class ProyeccionCtaCteFecha
             Dim WWImpo5 As Double = 0
             Dim WWImpo6 As Double = 0
             Dim WWImpo7 As Double = 0
-
-
-
 
 
             Dim WAuxiAnio As String = Trim(RowPeriodo.Item("Anio"))

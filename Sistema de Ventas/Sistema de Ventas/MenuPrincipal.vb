@@ -302,4 +302,40 @@
             .Show(Me)
         End With
     End Sub
+
+    Private Sub ProyeccionDeCtaCteDeClientesAnaliticoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProyeccionDeCtaCteDeClientesAnaliticoToolStripMenuItem.Click
+        With LIstado_Proyeccion_CtaCteClienteAnalitico
+            .Show()
+        End With
+    End Sub
+
+    Private Sub ListadoDeCtaCteAnaliticoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ListadoDeCtaCteAnaliticoToolStripMenuItem.Click
+        With Listado_CtaCte_Analitico
+            .Show()
+        End With
+    End Sub
+
+    Private Sub ListadoDeOrdenesDeCompraPendientesDeMPToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ListadoDeOrdenesDeCompraPendientesDeMPToolStripMenuItem.Click
+        With Listado_OrdCompra_Pendientes_deMP
+            .Show()
+        End With
+    End Sub
+
+    Private Sub ListadoDeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ListadoDeToolStripMenuItem.Click
+        With Analisis_Cumplimiento_PedidosDeVentas
+            .Show()
+        End With
+    End Sub
+
+    Private Sub ListadoPercepcionDeIngresosBrutosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ListadoPercepcionDeIngresosBrutosToolStripMenuItem.Click
+        With Listado_PercepcionesIIBB
+            .Show()
+        End With
+    End Sub
+
+    Private Sub ListadoVentasDiariasPendientesDePagoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ListadoVentasDiariasPendientesDePagoToolStripMenuItem.Click
+        With Listado_VentasDiarasPendientesDePago
+            .Show()
+        End With
+    End Sub
 End Class
