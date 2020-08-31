@@ -6,6 +6,7 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
 
     Public Property Formula As String
     Public Property Variables As String(,)
+    Public Property Referencias As String(,)
     Public Property Valor As String
     Public Property Decimales As String
 
@@ -92,7 +93,7 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
 
 
 
-    Sub New(ByVal Formula As String, ByVal Variables(,) As String, ByVal Valor As String, Optional ByVal Grilla As DataGridView = Nothing, Optional ByVal Decimales As Object = Nothing, Optional ByVal Renglon As Integer = -1)
+    Sub New(ByVal Formula As String, ByVal Variables(,) As String, ByVal Valor As String, Optional ByVal Grilla As DataGridView = Nothing, Optional ByVal Decimales As Object = Nothing, Optional ByVal Renglon As Integer = -1, Optional ByVal Referencias(,) As String = Nothing)
 
         ' This call is required by the designer.
         InitializeComponent()
@@ -100,9 +101,11 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
         ' Add any initialization after the InitializeComponent() call.
 
         Me.Variables = Variables
+        Me.Referencias = Referencias
         Me.Decimales = OrDefault(Decimales, 2)
         Me.Formula = Trim(Formula)
         Me.Valor = Valor.Replace(",", ".")
+
         DGV = Grilla
 
         txtDecimales.Text = Me.Decimales
@@ -167,11 +170,21 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
         For i = 1 To 10
             Variables(i, 1) = Trim(Variables(i, 1))
             Variables(i, 2) = Trim(OrDefault(Variables(i, 2), ""))
+
+            Referencias(i, 1) = Trim(Referencias(i, 1))
+            Referencias(i, 2) = Trim(OrDefault(Referencias(i, 2), ""))
         Next
 
         For i = 1 To 10
             If Variables(i, 1) <> "" Then
                 dgvVariables.Rows.Add(i, Variables(i, 1), Variables(i, 2).Replace(",", "."))
+                wultima += 1
+            End If
+        Next
+
+        For i = 1 To 10
+            If Referencias(i, 1) <> "" Then
+                dgvVariables.Rows.Add(wultima, Referencias(i, 1), Referencias(i, 2).Replace(",", "."))
                 wultima += 1
             End If
         Next
@@ -221,9 +234,10 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
             For i = 1 To dgvVariables.Rows.Count
 
                 If .Rows(i - 1).Cells("WValor").Value.ToString.StartsWith(".") Then .Rows(i - 1).Cells("WValor").Value = "0" & .Rows(i - 1).Cells("WValor").Value
-                If regex.IsMatch(OrDefault(.Rows(i - 1).Cells("Variable").Value, "")) Then
 
-                Else
+                If Not .Rows(i - 1).Cells("Variable").Value.ToString.StartsWith("R") Then
+
+                    Variables(i, 0) = OrDefault(.Rows(i - 1).Cells("idVariable").Value, "")
                     Variables(i, 1) = OrDefault(.Rows(i - 1).Cells("Variable").Value, "")
                     Variables(i, 2) = OrDefault(.Rows(i - 1).Cells("WValor").Value, "0").ToString.Replace(",", ".")
 
@@ -241,19 +255,33 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
 
         With parser.Values
             For i = 1 To 10
-                If Variables(i, 1).Trim <> "" Then
+                If Variables(i, 1).Trim <> "" And Formula.ToLower.Contains("v" & Variables(i, 0)) Then
                     .Add("v" & i, Variables(i, 2))
+                End If
+            Next
+        End With
+
+        With parser.Values
+            For i = 1 To 10
+                If Referencias(i, 1).Trim <> "" And Formula.ToUpper.Contains(Referencias(i, 1)) Then
+                    If Val(Referencias(i, 2)) = 0 Then Referencias(i, 2) = "0"
+                    .Add(Referencias(i, 1).ToLower, Referencias(i, 2))
                 End If
             Next
         End With
 
         'Dim regex As New Regex("R[0-9]{1,2}")
 
-        For Each row As DataGridViewRow In dgvVariables.Rows
-            If regex.IsMatch(OrDefault(row.Cells("Variable").Value, "")) Then parser.Values.Add(LCase(row.Cells("Variable").Value.ToString), OrDefault(row.Cells("WValor").Value, "0").ToString.Replace(",", "."))
-        Next
+        'For Each row As DataGridViewRow In dgvVariables.Rows
+        '    If regex.IsMatch(OrDefault(row.Cells("Variable").Value, "")) Then parser.Values.Add(LCase(row.Cells("Variable").Value.ToString), OrDefault(row.Cells("WValor").Value, "0").ToString.Replace(",", "."))
+        'Next
 
         Valor = formatonumerico(parser.Parse(Formula), Val(txtDecimales.Text))
+
+        If Not regex.IsMatch(Valor, "\d") Then
+            MsgBox("El resultado del cálculo no es correcto.", MsgBoxStyle.Exclamation)
+            Exit Sub
+        End If
 
         If Val(txtDecimales.Text) = 0 Then Valor = CInt(Valor.Replace(".", ","))
 

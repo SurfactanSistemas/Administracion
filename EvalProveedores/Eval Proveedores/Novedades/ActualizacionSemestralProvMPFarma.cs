@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using Eval_Proveedores.Interfaces;
 using Util;
 using Util.Clases;
 using EvaluacionProvMPFarma;
@@ -13,7 +14,7 @@ using Logica_Negocio;
 
 namespace Eval_Proveedores.Novedades
 {
-    public partial class ActualizacionSemestralProvMPFarma : Form
+    public partial class ActualizacionSemestralProvMPFarma : Form, IActualizaEvalProv
     {
         readonly EvalSemestralBOL ESBOL = new EvalSemestralBOL();
         DataTable dtEvaluacion = new DataTable();
@@ -249,25 +250,31 @@ namespace Eval_Proveedores.Novedades
                 {
                     var WProveedor = Helper.OrDefault(row.Cells["Proveedor"].Value, "").ToString();
                     var WEstadoMP = _TraerIDEvaluacion(Helper.OrDefault(row.Cells["EvaCal"].Value, 0)).ToString();
-                    var WFechaEvaluaVto = Helper.OrDefault(row.Cells["FechaEvaluaProvMPFarmaII"].Value, "").ToString();
+                    var WFechaEntrego = Helper.OrDefault(row.Cells["FechaEvaluaProvMPFarmaII"].Value, "").ToString();
+                    var WFechaEntregoOrd = Helper.OrdenarFecha(WFechaEntrego);
+                    var WFechaEvaluaVto = Helper.OrDefault(row.Cells["VencEvaluacion"].Value, "").ToString();
                     var WFechaEvaluaVtoOrd = Helper.OrdenarFecha(WFechaEvaluaVto);
                     var WCodMP = Helper.OrDefault(row.Cells["Articulo"].Value, "").ToString();
                     var WFecha = DateTime.Now.ToString("dd/MM/yyyy");
                     var WFechaOrd = Helper.OrdenarFecha(WFecha);
 
                     DataRow WEvaluacion =
-                        Query.GetSingle("SELECT Clave FROM EvaluacionProvMP WHERE Proveedor = '" + WProveedor +
+                        Query.GetSingle("SELECT Clave, CantOCEventual FROM EvaluacionProvMP WHERE Proveedor = '" + WProveedor +
                                         "' And Articulo = '" + WCodMP + "'");
 
                     if (WEvaluacion != null)
                     {
-                        ZSqls.Add("UPDATE EvaluacionProvMP SET Fecha = '" + WFecha + "', FechaOrd = '" + WFechaOrd + "', EstadoMP = '" + WEstadoMP + "', FechaEvaluaVto = '" + WFechaEvaluaVto + "', FechaEvaluaVtoOrd = '" + WFechaEvaluaVtoOrd + "', Operador = '" + WEvaluador + "' WHERE Proveedor = '" + WProveedor + "' And Articulo = '" + WCodMP + "'");
+                        var WCantOCEventual = Helper.OrDefault(WEvaluacion["CantOCEventual"], 0);
+
+                        if (WEstadoMP != "3") WCantOCEventual = 0;
+
+                        ZSqls.Add("UPDATE EvaluacionProvMP SET Fecha = '" + WFecha + "', FechaOrd = '" + WFechaOrd + "', EstadoMP = '" + WEstadoMP + "', FechaEntrego = '" + WFechaEntrego + "', FechaEntregoOrd = '" + WFechaEntregoOrd + "', Operador = '" + WEvaluador + "', FechaEvaluaVto = '" + WFechaEvaluaVto + "', FechaEvaluaVtoOrd = '" + WFechaEvaluaVtoOrd + "', CantOCEventual = '" + WCantOCEventual.ToString() + "' WHERE Proveedor = '" + WProveedor + "' And Articulo = '" + WCodMP + "'");
                     }
                     else
                     {
                         string WClave = WProveedor.PadLeft(11, '0') + WCodMP + "01";
 
-                        ZSqls.Add(string.Format("INSERT INTO EvaluacionProvMP (Clave, Proveedor, Articulo, Renglon, Fecha, FechaOrd, FechaEvaluaVto, FechaEvaluaVtoOrd, Operador, EstadoMP) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}')", WClave, WProveedor, WCodMP, 1, WFecha, WFechaOrd, WFechaEvaluaVto, WFechaEvaluaVtoOrd, WEvaluador, WEstadoMP));
+                        ZSqls.Add(string.Format("INSERT INTO EvaluacionProvMP (Clave, Proveedor, Articulo, Renglon, Fecha, FechaOrd, FechaEntrego, FechaEntregoOrd, Operador, EstadoMP, FechaEvaluaVto, FechaEvaluaVtoOrd) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}')", WClave, WProveedor, WCodMP, 1, WFecha, WFechaOrd, WFechaEntrego, WFechaEntregoOrd, WEvaluador, WEstadoMP, WFechaEvaluaVto, WFechaEvaluaVtoOrd));
                     }
                 }
 
@@ -654,12 +661,6 @@ namespace Eval_Proveedores.Novedades
         private void DGV_EvalSemProve_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
-            //if (DGV_EvalSemProve.Columns[e.ColumnIndex].Name == "Actualiza")
-            //{
-            //    var WValor = DGV_EvalSemProve.CurrentCell.Value ?? "";
-
-            //    DGV_EvalSemProve.CurrentCell.Value = (WValor.ToString().Trim() == "") ? "X" : "";
-            //}
 
             if (DGV_EvalSemProve.Columns[e.ColumnIndex].Name == "VerEvalua")
             {
@@ -668,7 +669,7 @@ namespace Eval_Proveedores.Novedades
                     string WProveedor = DGV_EvalSemProve.CurrentRow.Cells["Proveedor"].Value.ToString();
                     string WCodMP = DGV_EvalSemProve.CurrentRow.Cells["Articulo"].Value.ToString();
 
-                    EvaluacionProveedorMateriaPrima _frm = new EvaluacionProveedorMateriaPrima(WProveedor, false, WCodMP);
+                    EvaluacionProveedorMateriaPrima _frm = new EvaluacionProveedorMateriaPrima(WProveedor, true, WCodMP);
                     _frm.Show(this);
                 }
             }
@@ -681,6 +682,21 @@ namespace Eval_Proveedores.Novedades
             if (FechaFarmaCol != null && e.ColumnIndex == FechaFarmaCol.Index)
             {
                 DGV_EvalSemProve.CurrentCell.Selected = false;
+            }
+        }
+
+        public void _ProcesarActualizaEvalProv(string Proveedor, string Articulo, int Estado, string FechaEval, string FechaVto)
+        {
+            foreach (DataGridViewRow row in DGV_EvalSemProve.Rows)
+            {
+                if (row.Cells["Proveedor"].Value.ToString() == Proveedor &&
+                    row.Cells["Articulo"].Value.ToString() == Articulo)
+                {
+                    row.Cells["EvaCal"].Value = _TraerDescEvaluacion(Estado);
+                    row.Cells["FechaEvaluaProvMPFarmaII"].Value = FechaEval;
+                    row.Cells["VencEvaluacion"].Value = FechaVto;
+                    return;
+                }
             }
         }
     }

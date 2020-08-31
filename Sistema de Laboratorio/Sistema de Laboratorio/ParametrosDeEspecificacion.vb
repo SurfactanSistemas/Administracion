@@ -1,4 +1,5 @@
-﻿Imports Util
+﻿Imports System.Text.RegularExpressions
+Imports Util
 
 Public Class ParametrosDeEspecificacion
     Dim Renglon As Integer
@@ -291,14 +292,31 @@ Public Class ParametrosDeEspecificacion
         If row IsNot Nothing Then
 
             Dim Wvariables(11, 2) As String
+            Dim WReferencias(11, 2) As String
             Dim WFormula As String = Trim(txtFormula.Text)
             Dim Wvalor As String = ""
+            Dim WRenglon As Short = 0
 
             For i = 1 To 10
-                Wvariables(i, 1) = Trim(OrDefault(gbVariables.Controls.Item("txtVar" & i).Text, ""))
+
+                WRenglon += 1
+
+                Wvariables(WRenglon, 1) = Trim(OrDefault(gbVariables.Controls.Item("txtVar" & WRenglon).Text, ""))
+
             Next
 
-            With New IngresoVariablesFormula(WFormula, Wvariables, Wvalor, Nothing, Nothing, Renglon)
+            Dim regex As New Regex("R[0-9]{1,2}")
+
+            Dim mts As MatchCollection = regex.Matches(WFormula)
+
+            WRenglon = 0
+
+            For Each mt As Match In mts
+                WRenglon += 1
+                WReferencias(WRenglon, 1) = mt.Value
+            Next
+
+            With New IngresoVariablesFormula(WFormula, Wvariables, Wvalor, Nothing, Nothing, Renglon, WReferencias)
                 .Show(Me)
             End With
         End If
