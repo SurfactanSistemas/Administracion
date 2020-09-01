@@ -34,9 +34,10 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.TB_CodProveedor = new System.Windows.Forms.TextBox();
             this.CB_ObservProve = new System.Windows.Forms.ComboBox();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.TB_CodProveedor = new System.Windows.Forms.ComboBox();
+            this.TB_CodProveedorr = new System.Windows.Forms.ComboBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.TB_NombProveedor = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -94,8 +95,6 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.CB_Calif31 = new System.Windows.Forms.ComboBox();
             this.CB_Calif21 = new System.Windows.Forms.ComboBox();
-            this.LB_Crit12 = new System.Windows.Forms.Label();
-            this.LB_Crit11 = new System.Windows.Forms.Label();
             this.LB_Param1 = new System.Windows.Forms.Label();
             this.CB_Calif11 = new System.Windows.Forms.ComboBox();
             this.textBox7 = new System.Windows.Forms.TextBox();
@@ -103,6 +102,7 @@
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.lblPrimerCriterio = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -153,13 +153,13 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(897, 626);
             this.panel3.TabIndex = 0;
-            this.panel3.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panel3_MouseClick);
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.TB_CodProveedor);
             this.groupBox1.Controls.Add(this.CB_ObservProve);
             this.groupBox1.Controls.Add(this.panel5);
-            this.groupBox1.Controls.Add(this.TB_CodProveedor);
+            this.groupBox1.Controls.Add(this.TB_CodProveedorr);
             this.groupBox1.Controls.Add(this.panel4);
             this.groupBox1.Controls.Add(this.TB_NombProveedor);
             this.groupBox1.Controls.Add(this.label4);
@@ -172,6 +172,16 @@
             this.groupBox1.TabIndex = 100;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "PROVEEDOR";
+            // 
+            // TB_CodProveedor
+            // 
+            this.TB_CodProveedor.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.TB_CodProveedor.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.TB_CodProveedor.Location = new System.Drawing.Point(91, 20);
+            this.TB_CodProveedor.Name = "TB_CodProveedor";
+            this.TB_CodProveedor.Size = new System.Drawing.Size(138, 26);
+            this.TB_CodProveedor.TabIndex = 103;
+            this.TB_CodProveedor.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_CodProveedor_KeyDown_1);
             // 
             // CB_ObservProve
             // 
@@ -189,15 +199,15 @@
             this.panel5.Size = new System.Drawing.Size(23, 32);
             this.panel5.TabIndex = 55;
             // 
-            // TB_CodProveedor
+            // TB_CodProveedorr
             // 
-            this.TB_CodProveedor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
-            this.TB_CodProveedor.FormattingEnabled = true;
-            this.TB_CodProveedor.Location = new System.Drawing.Point(91, 20);
-            this.TB_CodProveedor.Name = "TB_CodProveedor";
-            this.TB_CodProveedor.Size = new System.Drawing.Size(138, 26);
-            this.TB_CodProveedor.TabIndex = 1;
-            this.TB_CodProveedor.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_CodProveedor_KeyDown);
+            this.TB_CodProveedorr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
+            this.TB_CodProveedorr.FormattingEnabled = true;
+            this.TB_CodProveedorr.Location = new System.Drawing.Point(91, 20);
+            this.TB_CodProveedorr.Name = "TB_CodProveedorr";
+            this.TB_CodProveedorr.Size = new System.Drawing.Size(138, 26);
+            this.TB_CodProveedorr.TabIndex = 1;
+            this.TB_CodProveedorr.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_CodProveedor_KeyDown);
             // 
             // panel4
             // 
@@ -473,7 +483,6 @@
             this.TB_PromedioTot.Size = new System.Drawing.Size(121, 20);
             this.TB_PromedioTot.TabIndex = 70;
             this.TB_PromedioTot.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.TB_PromedioTot.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TB_PromedioTot_MouseClick);
             // 
             // TB_Promedio3
             // 
@@ -482,7 +491,6 @@
             this.TB_Promedio3.ReadOnly = true;
             this.TB_Promedio3.Size = new System.Drawing.Size(18, 20);
             this.TB_Promedio3.TabIndex = 69;
-            this.TB_Promedio3.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TB_Promedio3_MouseClick);
             this.TB_Promedio3.TextChanged += new System.EventHandler(this._ActualizarCalificacion);
             // 
             // TB_Promedio2
@@ -492,7 +500,6 @@
             this.TB_Promedio2.ReadOnly = true;
             this.TB_Promedio2.Size = new System.Drawing.Size(18, 20);
             this.TB_Promedio2.TabIndex = 68;
-            this.TB_Promedio2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TB_Promedio2_MouseClick);
             this.TB_Promedio2.TextChanged += new System.EventHandler(this._ActualizarCalificacion);
             // 
             // TB_Promedio1
@@ -502,7 +509,6 @@
             this.TB_Promedio1.ReadOnly = true;
             this.TB_Promedio1.Size = new System.Drawing.Size(18, 20);
             this.TB_Promedio1.TabIndex = 67;
-            this.TB_Promedio1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TB_Promedio1_MouseClick);
             this.TB_Promedio1.TextChanged += new System.EventHandler(this._ActualizarCalificacion);
             // 
             // textBox9
@@ -555,7 +561,6 @@
             this.CB_Calif34.Visible = false;
             this.CB_Calif34.SelectedIndexChanged += new System.EventHandler(this.CB_Calif34_SelectedIndexChanged);
             this.CB_Calif34.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CB_Calif34_KeyDown);
-            this.CB_Calif34.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CB_Calif34_MouseClick);
             // 
             // CB_Calif24
             // 
@@ -572,7 +577,6 @@
             this.CB_Calif24.Visible = false;
             this.CB_Calif24.SelectedIndexChanged += new System.EventHandler(this.CB_Calif24_SelectedIndexChanged);
             this.CB_Calif24.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CB_Calif24_KeyDown);
-            this.CB_Calif24.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CB_Calif24_MouseClick);
             // 
             // LB_Crit42
             // 
@@ -607,7 +611,6 @@
             this.CB_Calif14.Visible = false;
             this.CB_Calif14.SelectedIndexChanged += new System.EventHandler(this.CB_Calif14_SelectedIndexChanged);
             this.CB_Calif14.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CB_Calif14_KeyDown);
-            this.CB_Calif14.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CB_Calif14_MouseClick);
             // 
             // LB_Param41
             // 
@@ -656,7 +659,6 @@
             this.CB_Calif33.Visible = false;
             this.CB_Calif33.SelectedIndexChanged += new System.EventHandler(this.CB_Calif33_SelectedIndexChanged);
             this.CB_Calif33.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CB_Calif33_KeyDown);
-            this.CB_Calif33.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CB_Calif33_MouseClick);
             // 
             // CB_Calif23
             // 
@@ -673,7 +675,6 @@
             this.CB_Calif23.Visible = false;
             this.CB_Calif23.SelectedIndexChanged += new System.EventHandler(this.CB_Calif23_SelectedIndexChanged);
             this.CB_Calif23.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CB_Calif23_KeyDown);
-            this.CB_Calif23.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CB_Calif23_MouseClick);
             // 
             // LB_Crit32
             // 
@@ -717,7 +718,6 @@
             this.CB_Calif13.Visible = false;
             this.CB_Calif13.SelectedIndexChanged += new System.EventHandler(this.CB_Calif13_SelectedIndexChanged);
             this.CB_Calif13.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CB_Calif13_KeyDown);
-            this.CB_Calif13.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CB_Calif13_MouseClick);
             // 
             // groupBox5
             // 
@@ -743,7 +743,6 @@
             this.CB_Calif32.Visible = false;
             this.CB_Calif32.SelectedIndexChanged += new System.EventHandler(this.CB_Calif32_SelectedIndexChanged);
             this.CB_Calif32.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CB_Calif32_KeyDown);
-            this.CB_Calif32.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CB_Calif32_MouseClick);
             // 
             // CB_Calif22
             // 
@@ -755,7 +754,6 @@
             this.CB_Calif22.Visible = false;
             this.CB_Calif22.SelectedIndexChanged += new System.EventHandler(this.CB_Calif22_SelectedIndexChanged);
             this.CB_Calif22.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CB_Calif22_KeyDown);
-            this.CB_Calif22.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CB_Calif22_MouseClick);
             // 
             // LB_Crit22
             // 
@@ -794,7 +792,6 @@
             this.CB_Calif12.Visible = false;
             this.CB_Calif12.SelectedIndexChanged += new System.EventHandler(this.CB_Calif12_SelectedIndexChanged);
             this.CB_Calif12.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CB_Calif12_KeyDown);
-            this.CB_Calif12.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CB_Calif12_MouseClick);
             // 
             // groupBox4
             // 
@@ -817,7 +814,6 @@
             this.CB_Sec3.TabIndex = 15;
             this.CB_Sec3.SelectedIndexChanged += new System.EventHandler(this.CB_Sec3_SelectedIndexChanged);
             this.CB_Sec3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CB_Sec3_KeyDown);
-            this.CB_Sec3.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CB_Sec3_MouseClick);
             // 
             // CB_Sec2
             // 
@@ -828,7 +824,6 @@
             this.CB_Sec2.TabIndex = 10;
             this.CB_Sec2.SelectedIndexChanged += new System.EventHandler(this.CB_Sec2_SelectedIndexChanged);
             this.CB_Sec2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CB_Sec2_KeyDown);
-            this.CB_Sec2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CB_Sec2_MouseClick);
             // 
             // CB_Sec1
             // 
@@ -839,7 +834,6 @@
             this.CB_Sec1.TabIndex = 5;
             this.CB_Sec1.SelectedIndexChanged += new System.EventHandler(this.CB_Sec1_SelectedIndexChanged);
             this.CB_Sec1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CB_Sec1_KeyDown);
-            this.CB_Sec1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CB_Sec1_MouseClick);
             // 
             // label6
             // 
@@ -852,10 +846,9 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.lblPrimerCriterio);
             this.groupBox3.Controls.Add(this.CB_Calif31);
             this.groupBox3.Controls.Add(this.CB_Calif21);
-            this.groupBox3.Controls.Add(this.LB_Crit12);
-            this.groupBox3.Controls.Add(this.LB_Crit11);
             this.groupBox3.Controls.Add(this.LB_Param1);
             this.groupBox3.Controls.Add(this.CB_Calif11);
             this.groupBox3.Location = new System.Drawing.Point(0, 128);
@@ -874,7 +867,6 @@
             this.CB_Calif31.Visible = false;
             this.CB_Calif31.SelectedIndexChanged += new System.EventHandler(this.CB_Calif31_SelectedIndexChanged);
             this.CB_Calif31.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CB_Calif31_KeyDown);
-            this.CB_Calif31.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CB_Calif31_MouseClick);
             // 
             // CB_Calif21
             // 
@@ -886,25 +878,6 @@
             this.CB_Calif21.Visible = false;
             this.CB_Calif21.SelectedIndexChanged += new System.EventHandler(this.CB_Calif21_SelectedIndexChanged);
             this.CB_Calif21.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CB_Calif21_KeyDown);
-            this.CB_Calif21.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CB_Calif21_MouseClick);
-            // 
-            // LB_Crit12
-            // 
-            this.LB_Crit12.AutoSize = true;
-            this.LB_Crit12.Location = new System.Drawing.Point(281, 29);
-            this.LB_Crit12.Name = "LB_Crit12";
-            this.LB_Crit12.Size = new System.Drawing.Size(121, 13);
-            this.LB_Crit12.TabIndex = 60;
-            this.LB_Crit12.Text = "correcto funcionamiento";
-            // 
-            // LB_Crit11
-            // 
-            this.LB_Crit11.AutoSize = true;
-            this.LB_Crit11.Location = new System.Drawing.Point(281, 16);
-            this.LB_Crit11.Name = "LB_Crit11";
-            this.LB_Crit11.Size = new System.Drawing.Size(150, 13);
-            this.LB_Crit11.TabIndex = 53;
-            this.LB_Crit11.Text = "Equipo / Instalación quedo en";
             // 
             // LB_Param1
             // 
@@ -926,7 +899,6 @@
             this.CB_Calif11.SelectedIndexChanged += new System.EventHandler(this.CB_Calif11_SelectedIndexChanged);
             this.CB_Calif11.TextUpdate += new System.EventHandler(this._ActualizarCalificacion);
             this.CB_Calif11.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CB_Calif11_KeyDown);
-            this.CB_Calif11.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CB_Calif11_MouseClick);
             // 
             // textBox7
             // 
@@ -968,6 +940,14 @@
             this.label2.TabIndex = 42;
             this.label2.Text = "Periodo:";
             // 
+            // lblPrimerCriterio
+            // 
+            this.lblPrimerCriterio.Location = new System.Drawing.Point(270, 16);
+            this.lblPrimerCriterio.Name = "lblPrimerCriterio";
+            this.lblPrimerCriterio.Size = new System.Drawing.Size(200, 26);
+            this.lblPrimerCriterio.TabIndex = 111;
+            this.lblPrimerCriterio.Text = "Equipo / Instalación quedo en correcto funcionamiento";
+            // 
             // IngEvalMantenimiento
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -979,6 +959,7 @@
             this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(927, 720);
             this.Name = "IngEvalMantenimiento";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.IngEvalTransportista_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -1055,8 +1036,6 @@
         private System.Windows.Forms.ComboBox CB_Sec2;
         private System.Windows.Forms.ComboBox CB_Calif31;
         private System.Windows.Forms.ComboBox CB_Calif21;
-        private System.Windows.Forms.Label LB_Crit12;
-        private System.Windows.Forms.Label LB_Crit11;
         private System.Windows.Forms.TextBox textBox16;
         private System.Windows.Forms.TextBox textBox15;
         private System.Windows.Forms.TextBox textBox14;
@@ -1070,7 +1049,7 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.ComboBox TB_NombProveedor;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.ComboBox TB_CodProveedor;
+        private System.Windows.Forms.ComboBox TB_CodProveedorr;
         private System.Windows.Forms.MaskedTextBox TB_Mes;
         private System.Windows.Forms.MaskedTextBox TB_Año;
         private System.Windows.Forms.ComboBox CB_ObservProve;
@@ -1078,5 +1057,7 @@
         private System.Windows.Forms.Label lblCalificacion3;
         private System.Windows.Forms.Label lblCalificacion2;
         private System.Windows.Forms.Label lblCalificacion1;
+        private System.Windows.Forms.TextBox TB_CodProveedor;
+        private System.Windows.Forms.Label lblPrimerCriterio;
     }
 }

@@ -65,7 +65,7 @@ namespace Eval_Proveedores.Novedades
                 if (CB_Transp.Checked == true)
                 {
 
-                    Tipo = 1;
+                    Tipo = 15;
                     IngEvalTransp IngTra = new IngEvalTransp(Tipo);
                     IngTra.ShowDialog();
                     Close();
