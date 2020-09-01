@@ -5,7 +5,6 @@ using System.Windows.Forms;
 using CrystalDecisions.CrystalReports.Engine;
 using CrystalDecisions.Shared;
 using Microsoft.Office.Interop.Outlook;
-using Application = Microsoft.Office.Interop.Outlook.Application;
 using Exception = System.Exception;
 
 namespace Modulo_Capacitacion.Listados
@@ -112,7 +111,7 @@ namespace Modulo_Capacitacion.Listados
         {
             try
             {
-                var oApp = new Application();
+                var oApp = new Microsoft.Office.Interop.Outlook.Application();
 
                 Thread.Sleep(1000);
 

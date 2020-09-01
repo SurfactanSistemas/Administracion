@@ -7,9 +7,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Modulo_Capacitacion.Reportes.Cursada;
 using Negocio;
-using Util;
 using VistaPrevia = Modulo_Capacitacion.Listados.VistaPrevia;
-using Util.Clases;
 
 namespace Modulo_Capacitacion.Novedades
 {
@@ -96,7 +94,7 @@ namespace Modulo_Capacitacion.Novedades
 
         private void BuscarDescripcionCurso()
         {
-            int valor = 0;
+            int valor;
 
             int.TryParse(txtCurso.Text, out valor);
 
@@ -110,7 +108,7 @@ namespace Modulo_Capacitacion.Novedades
 
         private void BuscarDescripcionTema()
         {
-            int valor = 0;
+            int valor;
 
             int.TryParse(txtTema.Text, out valor);
 
@@ -181,7 +179,7 @@ namespace Modulo_Capacitacion.Novedades
                     {
                         cmd.Connection = conn;
 
-                        cmd.CommandText = "select cu.Codigo, cu.Curso, c.Descripcion as DesCurso, cu.Tema, t.Descripcion as DesTema, cu.Fecha, cu.Horas, cu.TipoI, cu.TipoII, cu.Instructor, cu.Actividad, cu.Temas, cu.Legajo, l.Descripcion as DesLegajo, cu.Observaciones, ISNULL(l.Dni, '') Dni, ISNULL(ta.Descripcion, '') As DescSector from Cursadas cu LEFT OUTER JOIN Legajo l ON cu.Legajo = l.Codigo and l.Renglon = 1 LEFT OUTER JOIN Curso c ON cu.Curso = c.Codigo LEFT OUTER JOIN Tema t ON cu.Tema = t.Tema AND c.Codigo = t.Curso LEFT OUTER JOIN Tarea ta ON ta.Codigo = l.Sector And ta.Renglon = 1 where cu.Codigo = '" + WCodigo + "' order by cu.Renglon";
+                        cmd.CommandText = "select cu.Codigo, cu.Curso, c.Descripcion as DesCurso, cu.Tema, t.Descripcion as DesTema, cu.Fecha, cu.Horas, cu.TipoI, cu.TipoII, cu.Instructor, cu.Actividad, cu.Temas, cu.Legajo, l.Descripcion as DesLegajo, cu.Observaciones, ISNULL(l.Dni, '') Dni, ISNULL(s.Descripcion, '') As DescSector from Cursadas cu LEFT OUTER JOIN Legajo l ON cu.Legajo = l.Codigo and l.Renglon = 1 LEFT OUTER JOIN Curso c ON cu.Curso = c.Codigo LEFT OUTER JOIN Tema t ON cu.Tema = t.Tema AND c.Codigo = t.Curso LEFT OUTER JOIN Sector s ON s.Codigo = l.Sector And l.Renglon = 1 where cu.Codigo = '" + WCodigo + "' order by cu.Renglon";
 
                         using (SqlDataReader dr = cmd.ExecuteReader())
                         {
@@ -211,21 +209,9 @@ namespace Modulo_Capacitacion.Novedades
                             dgvGrilla.Rows[WRenglon].Cells["Nombre"].Value = row["DesLegajo"].ToString().Trim();
                             dgvGrilla.Rows[WRenglon].Cells["Dni"].Value = row["Dni"].ToString().Trim();
                             dgvGrilla.Rows[WRenglon].Cells["Observaciones"].Value = row["Observaciones"].ToString().Trim();
-                            dgvGrilla.Rows[WRenglon].Cells["Sector"].Value = "";
-                            //dgvGrilla.Rows[WRenglon].Cells["Sector"].Value = row["DescSector"].ToString().Trim();
+                            dgvGrilla.Rows[WRenglon].Cells["Sector"].Value = row["DescSector"].ToString().Trim();
 
                         }
-                        foreach (DataGridViewRow Row in dgvGrilla.Rows)
-                        {
-
-                            string SQLCnslt = "SELECT ImprePerfil From Legajo WHERE Codigo = '" + Row.Cells["Legajo"].Value + "'";
-                            DataRow DataLegajo = Query.GetSingle(SQLCnslt);
-                            Row.Cells["Sector"].Value = DataLegajo["ImprePerfil"].ToString().Trim();    
-                        }
-
-                        
-
-                        //dgvGrilla.Rows.Add();
                     }
 
                 }
@@ -241,7 +227,7 @@ namespace Modulo_Capacitacion.Novedades
         {
             try
             {
-                bool existe = false;
+                bool existe;
 
                 using (SqlConnection conn = new SqlConnection())
                 {
@@ -497,7 +483,7 @@ namespace Modulo_Capacitacion.Novedades
         {
             try
             {
-                bool WValido = false;
+                bool WValido;
 
                 using (SqlConnection conn = new SqlConnection())
                 {
@@ -598,11 +584,9 @@ namespace Modulo_Capacitacion.Novedades
 
         private void btnAyuda_Click(object sender, EventArgs e)
         {
-            DataTable tabla = new DataTable();
-
             WTipoConsulta = 4;
 
-            tabla = _TraerLegajos();
+            DataTable tabla = _TraerLegajos();
 
             DataTable tabla2 = tabla.Clone();
 
@@ -921,9 +905,7 @@ namespace Modulo_Capacitacion.Novedades
 
         private void btnAyudaTema_Click(object sender, EventArgs e)
         {
-            DataTable tabla = new DataTable();
-
-            tabla = _TraerTemas();
+            DataTable tabla = _TraerTemas();
 
             dgvAyuda.DataSource = tabla;
 
@@ -940,7 +922,7 @@ namespace Modulo_Capacitacion.Novedades
 
         private void btnAyudaCursos_Click(object sender, EventArgs e)
         {
-            DataTable tabla = new DataTable();
+            DataTable tabla;
 
             if (txtTema.Text.Trim() == "")
             {
