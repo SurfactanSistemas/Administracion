@@ -99,6 +99,7 @@ namespace Eval_Proveedores.Novedades
             {
                 BuscarTitulo();
                 TB_CodProveedorr.Text = Eva.Proveedor;
+                TB_CodProveedor.Text = Eva.Proveedor;
                 TB_NombProveedor.Text = NombProve;
                 P = PBOL.Find(TB_CodProveedorr.Text);
                 TB_ObservProve.Text = P.ObservacionesII;
@@ -815,7 +816,7 @@ namespace Eval_Proveedores.Novedades
             EVAR.Param2 = LB_Param2.Text;
             EVAR.Param3 = LB_Param3.Text;
             EVAR.Param4 = LB_Param41.Text + " " + LB_Param42.Text.Substring(0, 7);
-            EVAR.Criterio1 = lblPrimerCriterio.Text; //LB_Crit11.Text + " " + LB_Crit12.Text.Substring(0, 13);
+            EVAR.Criterio1 = Util.Clases.Helper.Left(lblPrimerCriterio.Text, 50); //LB_Crit11.Text + " " + LB_Crit12.Text.Substring(0, 13);
             EVAR.Criterio2 = LB_Crit21.Text + " " + LB_Crit22.Text.Substring(0, 13);
             EVAR.Criterio3 = LB_Crit31.Text + " " + LB_Crit32.Text;
             EVAR.Criterio4 = LB_Crit41.Text + " " + LB_Crit42.Text.Substring(0, 12);
@@ -908,6 +909,7 @@ namespace Eval_Proveedores.Novedades
             //SOLO SE PERMITE LIMPIAR A PANTALLA CUANDO NO SE MODIFICA
             if (Modificar == false)
             {
+                TB_CodProveedor.Text = "";
                 //GB_Prove.Visible = false;
                 TB_CodProveedorr.Text = "";
                 TB_NombProveedor.Text = "";
@@ -962,8 +964,6 @@ namespace Eval_Proveedores.Novedades
         {
             if (e.KeyCode == Keys.Enter)
             {
-
-
                 TB_Mes.Focus();
                 TB_ObservProve.Text = CB_ObservProve.Text;
             }
@@ -1382,6 +1382,24 @@ namespace Eval_Proveedores.Novedades
 
                     TB_Mes.Focus();
                 }
+            }
+        }
+
+        private void TB_NombProveedor_SelectedValueChanged(object sender, EventArgs e)
+        {
+            TB_CodProveedor.Text = TB_NombProveedor.SelectedValue.ToString();
+            TB_CodProveedorr.Text = TB_CodProveedor.Text;
+        }
+
+        private void IngEvalMantenimiento_Shown(object sender, EventArgs e)
+        {
+            if (Modificar)
+            {
+                TB_Mes.Focus();
+            }
+            else
+            {
+                TB_CodProveedor.Focus();
             }
         }
     }

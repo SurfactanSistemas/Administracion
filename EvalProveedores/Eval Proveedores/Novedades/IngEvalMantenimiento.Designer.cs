@@ -93,6 +93,7 @@
             this.CB_Sec1 = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lblPrimerCriterio = new System.Windows.Forms.Label();
             this.CB_Calif31 = new System.Windows.Forms.ComboBox();
             this.CB_Calif21 = new System.Windows.Forms.ComboBox();
             this.LB_Param1 = new System.Windows.Forms.Label();
@@ -102,7 +103,6 @@
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.lblPrimerCriterio = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -223,6 +223,7 @@
             this.TB_NombProveedor.Name = "TB_NombProveedor";
             this.TB_NombProveedor.Size = new System.Drawing.Size(249, 26);
             this.TB_NombProveedor.TabIndex = 2;
+            this.TB_NombProveedor.SelectedValueChanged += new System.EventHandler(this.TB_NombProveedor_SelectedValueChanged);
             this.TB_NombProveedor.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_NombProveedor_KeyDown);
             // 
             // label4
@@ -857,6 +858,14 @@
             this.groupBox3.TabIndex = 60;
             this.groupBox3.TabStop = false;
             // 
+            // lblPrimerCriterio
+            // 
+            this.lblPrimerCriterio.Location = new System.Drawing.Point(270, 16);
+            this.lblPrimerCriterio.Name = "lblPrimerCriterio";
+            this.lblPrimerCriterio.Size = new System.Drawing.Size(200, 26);
+            this.lblPrimerCriterio.TabIndex = 111;
+            this.lblPrimerCriterio.Text = "Equipo / Instalación quedo en correcto funcionamiento";
+            // 
             // CB_Calif31
             // 
             this.CB_Calif31.FormattingEnabled = true;
@@ -940,14 +949,6 @@
             this.label2.TabIndex = 42;
             this.label2.Text = "Periodo:";
             // 
-            // lblPrimerCriterio
-            // 
-            this.lblPrimerCriterio.Location = new System.Drawing.Point(270, 16);
-            this.lblPrimerCriterio.Name = "lblPrimerCriterio";
-            this.lblPrimerCriterio.Size = new System.Drawing.Size(200, 26);
-            this.lblPrimerCriterio.TabIndex = 111;
-            this.lblPrimerCriterio.Text = "Equipo / Instalación quedo en correcto funcionamiento";
-            // 
             // IngEvalMantenimiento
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -961,6 +962,7 @@
             this.Name = "IngEvalMantenimiento";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.IngEvalTransportista_Load);
+            this.Shown += new System.EventHandler(this.IngEvalMantenimiento_Shown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);

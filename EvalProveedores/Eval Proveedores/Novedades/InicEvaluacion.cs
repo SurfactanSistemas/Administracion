@@ -17,7 +17,7 @@ namespace Eval_Proveedores.Novedades
         ProveedorBOL PBOL = new ProveedorBOL();
         string columna = "";
         int ValidClave;
-
+        private string _orden = "ASC";
 
         public InicEvaluacion()
         {
@@ -30,6 +30,8 @@ namespace Eval_Proveedores.Novedades
             TraerLista();
             //DGV_Evaluaciones.Focus();
             txtCodigo.Focus();
+
+            
         }
 
         private void TraerLista()
@@ -44,11 +46,17 @@ namespace Eval_Proveedores.Novedades
             dtEva.Columns.Add("Estado", typeof(string));
             dtEva.Columns.Add("DescTipo", typeof(string));
             dtEva.Columns.Add("DescFecha", typeof(string));
+            dtEva.Columns.Add("PeriodoOrd", typeof(string));
+            dtEva.Columns.Add("PromOrd", typeof(double));
             foreach (DataRow fila in dtEva.Rows)
             {
                 fila["Clave"] = fila["Proveedor"] + fila["Mes"].ToString().PadLeft(2, '0') + fila["Ano"].ToString().PadLeft(4, '0');
+                
+                fila["PeriodoOrd"] = fila["Ano"].ToString().PadLeft(4, '0') + fila["Mes"].ToString().PadLeft(2, '0');
 
                 //fila["NombProve"] = row[0]["Nombre"];
+
+                fila["PromOrd"] = double.Parse(Util.Clases.Helper.formatonumerico(fila["Promedio"].ToString()).ToString());
 
                 if (fila["ProveEstado"].ToString() == "")
                 {
@@ -420,5 +428,44 @@ namespace Eval_Proveedores.Novedades
         {
 
         }
+
+        private void DGV_Evaluaciones_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+
+            DGV_Evaluaciones.ClearSelection();
+            DGV_Evaluaciones.Rows[e.RowIndex].Selected = true;
+            BTModifEvaluacion.PerformClick();
+        }
+
+        private void DGV_Evaluaciones_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridViewColumn col = DGV_Evaluaciones.Columns[e.ColumnIndex];
+            DataTable tabla = (DGV_Evaluaciones.DataSource as DataTable);
+
+            if (col == null || tabla == null) return;
+
+            _orden = _orden == "ASC" ? "DESC" : "ASC";
+
+            switch (col.DataPropertyName)
+            {
+                case "DescFecha":
+                {
+                    tabla.DefaultView.Sort = "PeriodoOrd " + _orden;
+                    break;
+                }
+                case "Promedio":
+                {
+                    tabla.DefaultView.Sort = "PromOrd " + _orden;
+                    break;
+                }
+                default:
+                {
+                    tabla.DefaultView.Sort = col.DataPropertyName + " " + _orden;
+                    break;
+                }
+            }
+        }
+
     }
 }

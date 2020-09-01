@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -49,18 +49,6 @@
             this.BT_MenuFiltros = new System.Windows.Forms.Button();
             this.CB_Tipo = new System.Windows.Forms.ComboBox();
             this.DGV_Evaluaciones = new System.Windows.Forms.DataGridView();
-            this.Clave = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NombProve = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DescTipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.periodoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DescPer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Observ = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Mes = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PromedioTot = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ano = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.evaluaGenBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.Bt_Fin = new System.Windows.Forms.Button();
@@ -74,6 +62,20 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.Clave = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NombProve = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DescTipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.periodoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DescPer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Observ = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Mes = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PromedioTot = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ano = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PeriodoOrd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PromOrd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.P_Verde.SuspendLayout();
             this.PProve.SuspendLayout();
@@ -310,104 +312,28 @@
             this.Observ,
             this.Mes,
             this.PromedioTot,
-            this.Ano});
+            this.Ano,
+            this.PeriodoOrd,
+            this.PromOrd});
             this.DGV_Evaluaciones.DataSource = this.evaluaGenBindingSource;
             this.DGV_Evaluaciones.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DGV_Evaluaciones.Location = new System.Drawing.Point(101, 0);
             this.DGV_Evaluaciones.Margin = new System.Windows.Forms.Padding(0);
             this.DGV_Evaluaciones.Name = "DGV_Evaluaciones";
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DGV_Evaluaciones.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.DGV_Evaluaciones.ReadOnly = true;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DGV_Evaluaciones.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.DGV_Evaluaciones.Size = new System.Drawing.Size(757, 351);
             this.DGV_Evaluaciones.TabIndex = 5;
             this.DGV_Evaluaciones.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Evaluaciones_CellContentClick);
+            this.DGV_Evaluaciones.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGV_Evaluaciones_CellMouseDoubleClick);
+            this.DGV_Evaluaciones.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGV_Evaluaciones_ColumnHeaderMouseClick);
             this.DGV_Evaluaciones.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGV_Evaluaciones_RowHeaderMouseDoubleClick);
-            // 
-            // Clave
-            // 
-            this.Clave.DataPropertyName = "Clave";
-            this.Clave.HeaderText = "Clave";
-            this.Clave.Name = "Clave";
-            this.Clave.Visible = false;
-            // 
-            // Proveedor
-            // 
-            this.Proveedor.DataPropertyName = "Proveedor";
-            this.Proveedor.HeaderText = "Proveedor";
-            this.Proveedor.Name = "Proveedor";
-            // 
-            // NombProve
-            // 
-            this.NombProve.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.NombProve.DataPropertyName = "NombProve";
-            this.NombProve.HeaderText = "Nombre Proveedor";
-            this.NombProve.Name = "NombProve";
-            // 
-            // Estado
-            // 
-            this.Estado.DataPropertyName = "Estado";
-            this.Estado.HeaderText = "Estado Proveedor";
-            this.Estado.Name = "Estado";
-            // 
-            // Tipo
-            // 
-            this.Tipo.DataPropertyName = "Tipo";
-            this.Tipo.HeaderText = "Tipo";
-            this.Tipo.Name = "Tipo";
-            this.Tipo.Visible = false;
-            this.Tipo.Width = 50;
-            // 
-            // DescTipo
-            // 
-            this.DescTipo.DataPropertyName = "DescTipo";
-            this.DescTipo.HeaderText = "Tipo";
-            this.DescTipo.Name = "DescTipo";
-            // 
-            // periodoDataGridViewTextBoxColumn
-            // 
-            this.periodoDataGridViewTextBoxColumn.DataPropertyName = "Periodo";
-            this.periodoDataGridViewTextBoxColumn.HeaderText = "Periodo";
-            this.periodoDataGridViewTextBoxColumn.Name = "periodoDataGridViewTextBoxColumn";
-            this.periodoDataGridViewTextBoxColumn.Visible = false;
-            this.periodoDataGridViewTextBoxColumn.Width = 50;
-            // 
-            // DescPer
-            // 
-            this.DescPer.DataPropertyName = "DescFecha";
-            this.DescPer.HeaderText = "Periodo";
-            this.DescPer.Name = "DescPer";
-            // 
-            // Observ
-            // 
-            this.Observ.DataPropertyName = "Observaciones";
-            this.Observ.HeaderText = "Observaciones";
-            this.Observ.Name = "Observ";
-            this.Observ.Width = 200;
-            // 
-            // Mes
-            // 
-            this.Mes.DataPropertyName = "Mes";
-            this.Mes.HeaderText = "Mes";
-            this.Mes.Name = "Mes";
-            this.Mes.Visible = false;
-            // 
-            // PromedioTot
-            // 
-            this.PromedioTot.DataPropertyName = "Promedio";
-            this.PromedioTot.HeaderText = "PromedioTot";
-            this.PromedioTot.Name = "PromedioTot";
-            // 
-            // Ano
-            // 
-            this.Ano.DataPropertyName = "Año";
-            this.Ano.HeaderText = "Año";
-            this.Ano.Name = "Ano";
-            this.Ano.Visible = false;
             // 
             // evaluaGenBindingSource
             // 
@@ -548,6 +474,114 @@
             this.panel2.Size = new System.Drawing.Size(95, 345);
             this.panel2.TabIndex = 0;
             // 
+            // Clave
+            // 
+            this.Clave.DataPropertyName = "Clave";
+            this.Clave.HeaderText = "Clave";
+            this.Clave.Name = "Clave";
+            this.Clave.ReadOnly = true;
+            this.Clave.Visible = false;
+            // 
+            // Proveedor
+            // 
+            this.Proveedor.DataPropertyName = "Proveedor";
+            this.Proveedor.HeaderText = "Proveedor";
+            this.Proveedor.Name = "Proveedor";
+            this.Proveedor.ReadOnly = true;
+            // 
+            // NombProve
+            // 
+            this.NombProve.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.NombProve.DataPropertyName = "NombProve";
+            this.NombProve.HeaderText = "Nombre Proveedor";
+            this.NombProve.Name = "NombProve";
+            this.NombProve.ReadOnly = true;
+            // 
+            // Estado
+            // 
+            this.Estado.DataPropertyName = "Estado";
+            this.Estado.HeaderText = "Estado Proveedor";
+            this.Estado.Name = "Estado";
+            this.Estado.ReadOnly = true;
+            // 
+            // Tipo
+            // 
+            this.Tipo.DataPropertyName = "Tipo";
+            this.Tipo.HeaderText = "Tipo";
+            this.Tipo.Name = "Tipo";
+            this.Tipo.ReadOnly = true;
+            this.Tipo.Visible = false;
+            this.Tipo.Width = 50;
+            // 
+            // DescTipo
+            // 
+            this.DescTipo.DataPropertyName = "DescTipo";
+            this.DescTipo.HeaderText = "Tipo";
+            this.DescTipo.Name = "DescTipo";
+            this.DescTipo.ReadOnly = true;
+            // 
+            // periodoDataGridViewTextBoxColumn
+            // 
+            this.periodoDataGridViewTextBoxColumn.DataPropertyName = "Periodo";
+            this.periodoDataGridViewTextBoxColumn.HeaderText = "Periodo";
+            this.periodoDataGridViewTextBoxColumn.Name = "periodoDataGridViewTextBoxColumn";
+            this.periodoDataGridViewTextBoxColumn.ReadOnly = true;
+            this.periodoDataGridViewTextBoxColumn.Visible = false;
+            this.periodoDataGridViewTextBoxColumn.Width = 50;
+            // 
+            // DescPer
+            // 
+            this.DescPer.DataPropertyName = "DescFecha";
+            this.DescPer.HeaderText = "Periodo";
+            this.DescPer.Name = "DescPer";
+            this.DescPer.ReadOnly = true;
+            // 
+            // Observ
+            // 
+            this.Observ.DataPropertyName = "Observaciones";
+            this.Observ.HeaderText = "Observaciones";
+            this.Observ.Name = "Observ";
+            this.Observ.ReadOnly = true;
+            this.Observ.Width = 200;
+            // 
+            // Mes
+            // 
+            this.Mes.DataPropertyName = "Mes";
+            this.Mes.HeaderText = "Mes";
+            this.Mes.Name = "Mes";
+            this.Mes.ReadOnly = true;
+            this.Mes.Visible = false;
+            // 
+            // PromedioTot
+            // 
+            this.PromedioTot.DataPropertyName = "Promedio";
+            this.PromedioTot.HeaderText = "PromedioTot";
+            this.PromedioTot.Name = "PromedioTot";
+            this.PromedioTot.ReadOnly = true;
+            // 
+            // Ano
+            // 
+            this.Ano.DataPropertyName = "Año";
+            this.Ano.HeaderText = "Año";
+            this.Ano.Name = "Ano";
+            this.Ano.ReadOnly = true;
+            this.Ano.Visible = false;
+            // 
+            // PeriodoOrd
+            // 
+            this.PeriodoOrd.DataPropertyName = "PeriodoOrd";
+            this.PeriodoOrd.HeaderText = "PeriodoOrd";
+            this.PeriodoOrd.Name = "PeriodoOrd";
+            this.PeriodoOrd.ReadOnly = true;
+            this.PeriodoOrd.Visible = false;
+            // 
+            // PromOrd
+            // 
+            this.PromOrd.HeaderText = "PromOrd";
+            this.PromOrd.Name = "PromOrd";
+            this.PromOrd.ReadOnly = true;
+            this.PromOrd.Visible = false;
+            // 
             // InicEvaluacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -608,6 +642,8 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TextBox TBFiltroAno;
+        private System.Windows.Forms.TextBox txtCodigo;
+        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Clave;
         private System.Windows.Forms.DataGridViewTextBoxColumn Proveedor;
         private System.Windows.Forms.DataGridViewTextBoxColumn NombProve;
@@ -620,7 +656,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Mes;
         private System.Windows.Forms.DataGridViewTextBoxColumn PromedioTot;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ano;
-        private System.Windows.Forms.TextBox txtCodigo;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PeriodoOrd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PromOrd;
     }
 }
