@@ -92,9 +92,9 @@
             // 
             // BT_Cancelar
             // 
-            this.BT_Cancelar.Location = new System.Drawing.Point(161, 172);
+            this.BT_Cancelar.Location = new System.Drawing.Point(153, 158);
             this.BT_Cancelar.Name = "BT_Cancelar";
-            this.BT_Cancelar.Size = new System.Drawing.Size(75, 23);
+            this.BT_Cancelar.Size = new System.Drawing.Size(106, 41);
             this.BT_Cancelar.TabIndex = 7;
             this.BT_Cancelar.Text = "Cancelar";
             this.BT_Cancelar.UseVisualStyleBackColor = true;
@@ -102,9 +102,9 @@
             // 
             // Bt_Aceptar
             // 
-            this.Bt_Aceptar.Location = new System.Drawing.Point(19, 172);
+            this.Bt_Aceptar.Location = new System.Drawing.Point(11, 158);
             this.Bt_Aceptar.Name = "Bt_Aceptar";
-            this.Bt_Aceptar.Size = new System.Drawing.Size(75, 23);
+            this.Bt_Aceptar.Size = new System.Drawing.Size(106, 41);
             this.Bt_Aceptar.TabIndex = 6;
             this.Bt_Aceptar.Text = "Aceptar";
             this.Bt_Aceptar.UseVisualStyleBackColor = true;
@@ -114,7 +114,7 @@
             // 
             this.CB_Otros.AutoSize = true;
             this.CB_Otros.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CB_Otros.Location = new System.Drawing.Point(161, 128);
+            this.CB_Otros.Location = new System.Drawing.Point(161, 120);
             this.CB_Otros.Name = "CB_Otros";
             this.CB_Otros.Size = new System.Drawing.Size(57, 19);
             this.CB_Otros.TabIndex = 5;
@@ -126,7 +126,7 @@
             // 
             this.CB_Mant.AutoSize = true;
             this.CB_Mant.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CB_Mant.Location = new System.Drawing.Point(19, 128);
+            this.CB_Mant.Location = new System.Drawing.Point(19, 120);
             this.CB_Mant.Name = "CB_Mant";
             this.CB_Mant.Size = new System.Drawing.Size(112, 19);
             this.CB_Mant.TabIndex = 4;
@@ -138,7 +138,7 @@
             // 
             this.CB_Calibracion.AutoSize = true;
             this.CB_Calibracion.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CB_Calibracion.Location = new System.Drawing.Point(161, 82);
+            this.CB_Calibracion.Location = new System.Drawing.Point(161, 74);
             this.CB_Calibracion.Name = "CB_Calibracion";
             this.CB_Calibracion.Size = new System.Drawing.Size(85, 19);
             this.CB_Calibracion.TabIndex = 3;
@@ -160,7 +160,7 @@
             // 
             this.CB_Transp.AutoSize = true;
             this.CB_Transp.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CB_Transp.Location = new System.Drawing.Point(19, 82);
+            this.CB_Transp.Location = new System.Drawing.Point(19, 74);
             this.CB_Transp.Name = "CB_Transp";
             this.CB_Transp.Size = new System.Drawing.Size(97, 19);
             this.CB_Transp.TabIndex = 1;
@@ -184,13 +184,14 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.ClientSize = new System.Drawing.Size(284, 261);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(300, 300);
             this.MinimumSize = new System.Drawing.Size(300, 300);
             this.Name = "ConsultaTipo";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.ConsultaTipo_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

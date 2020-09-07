@@ -83,15 +83,28 @@ namespace Eval_Proveedores.Novedades
             TB_Promedio2.Visible = false;
             TB_Promedio3.Visible = false;
 
+            if (Tipo == 15)
+            {
+                lblPrimerCriterio.Text = "Cumple con los requisitos y necesidades de la Empresa";
+            }else if (Tipo == 2)
+            {
+                lblPrimerCriterio.Text = "Entrega Certif. , Presenta evidencias de Trazabilidad e Idoneidad Técnica.";
+            }
+            else
+            {
+                lblPrimerCriterio.Text = "Equipo / Instalación quedo en correcto funcionamiento";
+            }
+
             if (Modificar == true)
             {
                 BuscarTitulo();
+                TB_CodProveedorr.Text = Eva.Proveedor;
                 TB_CodProveedor.Text = Eva.Proveedor;
                 TB_NombProveedor.Text = NombProve;
-                P = PBOL.Find(TB_CodProveedor.Text);
+                P = PBOL.Find(TB_CodProveedorr.Text);
                 TB_ObservProve.Text = P.ObservacionesII;
                 //TB_CodProveedor.DropDownStyle = ComboBoxStyle.DropDownList;
-                TB_CodProveedor.Enabled = false;
+                TB_CodProveedorr.Enabled = false;
                 TB_NombProveedor.Enabled = false;
                 if (Estado == "Inhabilitado") TB_Estado.Visible = true;
                 if (Eva.Mes < 10)
@@ -161,32 +174,11 @@ namespace Eval_Proveedores.Novedades
 
         private void CargarProveedores()
         {
-           /* switch (Tipo)
-            {
-                case 2:
-                    dtProveedores.Clear();
-                    dtProveedores = PBOL.ListaTipo(8);
-                    break;
-
-                case 4:
-                    dtProveedores.Clear();
-                    dtProveedores = PBOL.ListaSinTipo();
-                    break;
-
-                case 5:
-                    dtProveedores.Clear();
-                    dtProveedores = PBOL.ListaSinTipo();
-                    break;
-            }
-            * */
             dtProveedores.Clear();
             dtProveedores = PBOL.ListaSinTipo();
             
-
-            DataRow fila;
-            fila = dtProveedores.NewRow();
+            DataRow fila = dtProveedores.NewRow();
             dtProveedores.Rows.InsertAt(fila, 0);
-
 
             CargarNombres();
             CargarCodigos();
@@ -233,10 +225,10 @@ namespace Eval_Proveedores.Novedades
 
         private void CargarCodigos()
         {
-            TB_CodProveedor.DataSource = dtProveedores;
-            TB_CodProveedor.DisplayMember = "Proveedor";
-            TB_CodProveedor.ValueMember = "Proveedor";
-            TB_CodProveedor.Text = "";
+            TB_CodProveedorr.DataSource = dtProveedores;
+            TB_CodProveedorr.DisplayMember = "Proveedor";
+            TB_CodProveedorr.ValueMember = "Proveedor";
+            TB_CodProveedorr.Text = "";
 
             AutoCompleteStringCollection stringCodArti = new AutoCompleteStringCollection();
             foreach (DataRow row in dtProveedores.Rows)
@@ -245,6 +237,10 @@ namespace Eval_Proveedores.Novedades
 
             }
 
+            TB_CodProveedorr.AutoCompleteCustomSource = stringCodArti;
+            TB_CodProveedorr.AutoCompleteMode = AutoCompleteMode.Suggest;
+            TB_CodProveedorr.AutoCompleteSource = AutoCompleteSource.CustomSource;
+
             TB_CodProveedor.AutoCompleteCustomSource = stringCodArti;
             TB_CodProveedor.AutoCompleteMode = AutoCompleteMode.Suggest;
             TB_CodProveedor.AutoCompleteSource = AutoCompleteSource.CustomSource;
@@ -252,8 +248,6 @@ namespace Eval_Proveedores.Novedades
 
         private void BuscarTitulo()
         {
-            
-
             if (this.Eva.Tipo == 2) LB_TitEva.Text = "MODIFICAR EVALUACION DE PROVEEDOR DE CALIBRACION";
 
             if (this.Eva.Tipo == 4) LB_TitEva.Text = "MODIFICAR EVALUACION DE PROVEEDOR DE MANTENIMIENTO";
@@ -342,7 +336,7 @@ namespace Eval_Proveedores.Novedades
             switch (Tipo)
             {
                 
-                case 8:
+                case 2:
                     LB_TitEva.Text = "INGRESO DE EVALUACION DE PROVEEDORES DE CALIBRACION";
                     break;
 
@@ -725,7 +719,7 @@ namespace Eval_Proveedores.Novedades
 
                 WAutorizado = false;
 
-                if (TB_CodProveedor.Text == "") throw new Exception("Se debe ingresar el proveedor que desea evaluar");
+                if (TB_CodProveedorr.Text == "") throw new Exception("Se debe ingresar el proveedor que desea evaluar");
 
                 if (TB_Mes.Text == "") throw new Exception("Se debe ingresar el mes de la evaluación");
 
@@ -787,7 +781,7 @@ namespace Eval_Proveedores.Novedades
                 {
                     cnx.Open();
                     string sqlQuery = "update Proveedor set ObservacionesII = '" + TB_ObservProve.Text.Trim() +
-                                      "' WHERE proveedor = '" + TB_CodProveedor.Text + "'";
+                                      "' WHERE proveedor = '" + TB_CodProveedorr.Text + "'";
 
                     using (SqlCommand cmd = new SqlCommand(sqlQuery, cnx))
                     {
@@ -805,8 +799,8 @@ namespace Eval_Proveedores.Novedades
             SacarPromedio3();
 
             CalificarProve();
-            EVAR.Clave = TB_CodProveedor.Text + TB_Mes.Text.PadLeft(2, '0') + TB_Año.Text;
-            EVAR.Proveedor = TB_CodProveedor.Text;
+            EVAR.Clave = TB_CodProveedorr.Text + TB_Mes.Text.PadLeft(2, '0') + TB_Año.Text;
+            EVAR.Proveedor = TB_CodProveedorr.Text;
             EVAR.Mes = int.Parse(TB_Mes.Text);
             EVAR.Año = int.Parse(TB_Año.Text);
             EVAR.PromedioTot = double.Parse(TB_PromedioTot.Text);
@@ -822,7 +816,7 @@ namespace Eval_Proveedores.Novedades
             EVAR.Param2 = LB_Param2.Text;
             EVAR.Param3 = LB_Param3.Text;
             EVAR.Param4 = LB_Param41.Text + " " + LB_Param42.Text.Substring(0, 7);
-            EVAR.Criterio1 = LB_Crit11.Text + " " + LB_Crit12.Text.Substring(0, 13);
+            EVAR.Criterio1 = Util.Clases.Helper.Left(lblPrimerCriterio.Text, 50); //LB_Crit11.Text + " " + LB_Crit12.Text.Substring(0, 13);
             EVAR.Criterio2 = LB_Crit21.Text + " " + LB_Crit22.Text.Substring(0, 13);
             EVAR.Criterio3 = LB_Crit31.Text + " " + LB_Crit32.Text;
             EVAR.Criterio4 = LB_Crit41.Text + " " + LB_Crit42.Text.Substring(0, 12);
@@ -879,7 +873,7 @@ namespace Eval_Proveedores.Novedades
             try
             {
                
-                if (TB_CodProveedor.Text == "") throw new Exception("Se debe ingresar el proveedor que desea evaluar");
+                if (TB_CodProveedorr.Text == "") throw new Exception("Se debe ingresar el proveedor que desea evaluar");
 
                 PromedioTot = 10;
                 if ((TB_Promedio1.Text == "") && (TB_Promedio2.Text == "") && (TB_Promedio3.Text == "") || (TB_Promedio1.Text == "0") && (TB_Promedio2.Text == "0") && (TB_Promedio3.Text == "0"))
@@ -915,8 +909,9 @@ namespace Eval_Proveedores.Novedades
             //SOLO SE PERMITE LIMPIAR A PANTALLA CUANDO NO SE MODIFICA
             if (Modificar == false)
             {
-                //GB_Prove.Visible = false;
                 TB_CodProveedor.Text = "";
+                //GB_Prove.Visible = false;
+                TB_CodProveedorr.Text = "";
                 TB_NombProveedor.Text = "";
                 TB_Estado.Visible = false;
 
@@ -965,160 +960,10 @@ namespace Eval_Proveedores.Novedades
             CalificarProve();
         }
 
-
-
-
-        #region Ayuda Proveedor
-
-        private void TB_CodProve_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-
-        private void RBDescripcion_CheckedChanged_1(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void RBCodigo_CheckedChanged_1(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void TBFiltro_TextChanged_1(object sender, EventArgs e)
-        {
-           
-        }
-
-        private void LBProveedor_MouseCaptureChanged_1(object sender, EventArgs e)
-        {
-            
-
-        }
-
-        private void TB_NombProve_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-
-        private void panel3_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-
-        private void CB_Sec1_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-
-        private void CB_Sec2_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-
-        private void CB_Sec3_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-
-        private void CB_Calif11_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-
-        private void CB_Calif21_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-
-        private void CB_Calif31_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-
-        private void CB_Calif12_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-
-        private void CB_Calif22_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-
-        private void CB_Calif32_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-
-        private void CB_Calif13_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-
-        private void CB_Calif23_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-
-        private void CB_Calif33_MouseClick(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void CB_Calif14_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-
-        private void CB_Calif24_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-
-        private void CB_Calif34_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-
-        private void TB_Promedio1_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-
-        private void TB_Promedio2_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-
-        private void TB_Promedio3_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-
-        private void TB_PromedioTot_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-
-        private void LB_ObservProve_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-
-        private void LB_ObservEva_MouseClick(object sender, MouseEventArgs e)
-        {
-            
-        }
-
-        #endregion
-
         private void TB_NombProveedor_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-
-
                 TB_Mes.Focus();
                 TB_ObservProve.Text = CB_ObservProve.Text;
             }
@@ -1128,7 +973,12 @@ namespace Eval_Proveedores.Novedades
         {
             if (e.KeyCode == Keys.Enter)
             {
+                DataRow Prov = Util.Clases.Query.GetSingle("SELECT Nombre FROM Proveedor WHERE Proveedor = '" + TB_CodProveedorr.Text + "'");
 
+                if (Prov != null)
+                {
+                    TB_NombProveedor.Text = Prov["Nombre"].ToString();
+                }
 
                 TB_Mes.Focus();
             }
@@ -1414,7 +1264,7 @@ namespace Eval_Proveedores.Novedades
 
         private void InhabilitarProveedor()
         {
-            P.Codigo = TB_CodProveedor.Text;
+            P.Codigo = TB_CodProveedorr.Text;
             PBOL.Inhabilitar(P, "SurfactanSA");
             PBOL.Inhabilitar(P, "Surfactan_V");
             PBOL.Inhabilitar(P, "Surfactan_II");
@@ -1520,6 +1370,37 @@ namespace Eval_Proveedores.Novedades
             WAutorizado = Habilitame.Evaluar(seccion, clave);
 
             BT_Guardar_Click(null, null);
+        }
+
+        private void TB_CodProveedor_KeyDown_1(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (TB_CodProveedor.Text.Trim().Length == 11)
+                {
+                    TB_CodProveedorr.Text = TB_CodProveedor.Text;
+
+                    TB_Mes.Focus();
+                }
+            }
+        }
+
+        private void TB_NombProveedor_SelectedValueChanged(object sender, EventArgs e)
+        {
+            TB_CodProveedor.Text = TB_NombProveedor.SelectedValue.ToString();
+            TB_CodProveedorr.Text = TB_CodProveedor.Text;
+        }
+
+        private void IngEvalMantenimiento_Shown(object sender, EventArgs e)
+        {
+            if (Modificar)
+            {
+                TB_Mes.Focus();
+            }
+            else
+            {
+                TB_CodProveedor.Focus();
+            }
         }
     }
 }

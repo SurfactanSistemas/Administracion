@@ -37,7 +37,19 @@ namespace Eval_Proveedores.Novedades
 
         private void EvaluacionProveedorEnsayos_Load(object sender, EventArgs e)
         {
-            if (Owner == null) btnLimpiar_Click(null, null);
+            string Mes = txtMes.Text;
+            string Ano = txtAno.Text;
+            string Prov = txtProveedor.Text;
+            
+            btnLimpiar_Click(null, null);
+
+            txtProveedor.Text = Prov;
+            txtProveedor_KeyDown(txtProveedor, new KeyEventArgs(Keys.Enter));
+
+            txtMes.Text = Mes;
+            txtAno.Text = Ano;
+
+            txtProveedor_KeyDown(txtAno, new KeyEventArgs(Keys.Enter));
 
             foreach (
                 Control c in
