@@ -50,11 +50,11 @@ Public Class CuentaCorrientes_DeClientes : Implements IBuscarClienteCashFlow
             Dim WAno As String = Microsoft.VisualBasic.Right$(txt_DesdeFecha.Text, 4)
             Dim WMes As String = Microsoft.VisualBasic.Mid$(txt_DesdeFecha.Text, 4, 2)
             Dim WDia As String = Microsoft.VisualBasic.Left$(txt_DesdeFecha.Text, 2)
-            Dim WDesdeFecha As String = WAno + WMes + WDia
+            Dim WDesdeFecha As String = WAno & WMes & WDia
             WAno = Microsoft.VisualBasic.Right$(txt_HastaFecha.Text, 4)
             WMes = Microsoft.VisualBasic.Mid$(txt_HastaFecha.Text, 4, 2)
             WDia = Microsoft.VisualBasic.Left$(txt_HastaFecha.Text, 2)
-            Dim WHastaFecha As String = WAno + WMes + WDia
+            Dim WHastaFecha As String = WAno & WMes & WDia
 
             Dim ListaSQLCnslt As New List(Of String)
             Dim SQLCnslt As String = "UPDATE Ctacte SET Tipo = '06' WHERE Tipo = '6'"
@@ -191,8 +191,17 @@ Public Class CuentaCorrientes_DeClientes : Implements IBuscarClienteCashFlow
             SQLCnslt = "SELECT clave, cliente, tipo, impre, numero, renglon, Fecha, vencimiento, vencimiento1, total, " _
                  & " saldo, totalus, saldous, ordfecha, ordvencimiento, ordvencimiento1, Importe1, importe2, importe3, importe4 " _
                  & " FROM Ctacte" _
-                 & " Where Ctacte.Cliente >=  '" & txt_Desde.Text & "'" _
-                 & " and Ctacte.Cliente <= '" & txt_Hasta.Text & "'"
+                 & " WHERE Cliente >=  '" & txt_Desde.Text & "'" _
+                 & " AND Cliente <= '" & txt_Hasta.Text & "'"
+
+
+            If Trim(WDesdeFecha.Replace("/", "")) <> "" And Trim(WHastaFecha.Replace("/", "")) <> "" Then
+                'SQLCnslt = SQLCnslt & "AND OrdFecha >= '" & WDesdeFecha & "' AND OrdFecha <= '" & WHastaFecha & "'"
+                SQLCnslt = SQLCnslt & "AND ((OrdFecha >= '" & WDesdeFecha & "' AND OrdFecha <= '" & WHastaFecha & "') " _
+                                       & "OR (OrdVencimiento >= '" & WDesdeFecha & "' AND OrdVencimiento <= '" & WHastaFecha & "'))"
+            End If
+
+
 
             Dim tablaCtaCte As DataTable = GetAll(SQLCnslt, Operador.Base)
 
@@ -344,24 +353,36 @@ Public Class CuentaCorrientes_DeClientes : Implements IBuscarClienteCashFlow
 
                     Dim RowCli As DataRow = GetSingle(SQLCnslt, Operador.Base)
                     If RowCli IsNot Nothing Then
-                        WRazon = RowCli("Razon")
+                        WRazon = RowCli.Item("Razon")
+                        Row_Rep.Item("Razon") = WRazon
                         WProvincia = RowCli("Provincia")
                     End If
 
 
                     If cbx_TipoCliente.SelectedIndex = 1 And WProvincia <> 24 Then
+
                         ListaFilas_ABorrar.Add(Posiciones)
                     End If
-
+                    Posiciones += 1
                 Next
 
 
                 'CONSULTAR SI ESTA BIEN ESTA LOGICA
                 If ListaFilas_ABorrar.Count > 0 Then
-                    For i = ListaFilas_ABorrar.Count To 0
-                        tablaCtaCte.Rows.RemoveAt(i)
+
+                    ListaFilas_ABorrar.Sort()
+                    ListaFilas_ABorrar.Reverse()
+
+
+                    ' For i = ListaFilas_ABorrar.Count To 0
+                    '     tablaCtaCte.Rows.RemoveAt(i)
+                    ' Next
+                    For i = 0 To (ListaFilas_ABorrar.Count - 1)
+
+                        tablaReporteCtaCte.Rows.RemoveAt(ListaFilas_ABorrar(i))
                     Next
                 End If
+               
 
 
             End If
@@ -396,32 +417,21 @@ Public Class CuentaCorrientes_DeClientes : Implements IBuscarClienteCashFlow
             Dim NombreBase As String = Operador.Base
 
 
-            Dim DesdeFecha As String
-            Dim HastaFecha As String
-            If Trim(txt_DesdeFecha.Text.Replace("/", "")) = "" Or (Trim(txt_DesdeFecha.Text).Length < 10) Then
-                DesdeFecha = "00000000"
-            Else
-                DesdeFecha = ordenaFecha(txt_DesdeFecha.Text)
-            End If
-
-            If Trim(txt_HastaFecha.Text.Replace("/", "")) = "" Or (Trim(txt_HastaFecha.Text).Length < 10) Then
-                HastaFecha = "99999999"
-            Else
-                HastaFecha = ordenaFecha(txt_HastaFecha.Text)
-            End If
-
 
             Dim Formula As String = "{tablaReporteCtaCte.Cliente} >= '" & txt_Desde.Text & "' AND {tablaReporteCtaCte.Cliente} <=  '" & txt_Hasta.Text & "'"
 
 
-            If chk_FechaVto.Checked Then
-                Formula = Formula + " AND {tablaReporteCtaCte.OrdVencimiento} >= '" & DesdeFecha & "' AND {tablaReporteCtaCte.OrdVencimiento} <=  '" & HastaFecha & "'"
-            Else
-                Formula = Formula + " AND {tablaReporteCtaCte.FechaOrd} >= '" & DesdeFecha & "' AND {tablaReporteCtaCte.FechaOrd} <=  '" & HastaFecha & "'"
+            ' If chk_FechaVto.Checked Then
+            '     Formula = Formula + " AND {tablaReporteCtaCte.OrdVencimiento} >= '" & DesdeFecha & "' AND {tablaReporteCtaCte.OrdVencimiento} <=  '" & HastaFecha & "'"
+            ' Else
+            '     Formula = Formula + " AND {tablaReporteCtaCte.FechaOrd} >= '" & DesdeFecha & "' AND {tablaReporteCtaCte.FechaOrd} <=  '" & HastaFecha & "'"
+            ' End If
+
+
+            If Trim(WDesdeFecha.Replace("/", "")) <> "" And Trim(WHastaFecha.Replace("/", "")) <> "" Then
+                Formula = Formula + " AND (({tablaReporteCtaCte.OrdVencimiento} >= '" & WDesdeFecha & "' AND {tablaReporteCtaCte.OrdVencimiento} <=  '" & WHastaFecha & "') " _
+                    & " OR ({tablaReporteCtaCte.FechaOrd} >= '" & WDesdeFecha & "' AND {tablaReporteCtaCte.FechaOrd} <=  '" & WHastaFecha & "'))"
             End If
-
-
-
 
 
 

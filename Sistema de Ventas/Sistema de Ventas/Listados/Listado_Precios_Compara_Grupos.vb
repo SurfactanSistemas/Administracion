@@ -65,13 +65,13 @@ Public Class Listado_Precios_Compara_Grupos
                 Dim ZClave As String = rowCarga.Item("Clave")
                 Dim ZPrecio As Double = Val(rowCarga.Item("Precio"))
 
-
-                Dim Costo As Double = formatonumerico(Calcula_Costo(ZTerminado))
+                Dim CostoAux As Double = Calcula_Costo(ZTerminado)
+                Dim Costo As Double = Val(formatonumerico(CostoAux, 2))
 
                 If Costo <> 0 Then
 
                     REM ZDife = ZPrecio - Costo
-                    Dim ZPorce As Double = formatonumerico(ZPrecio / Costo)
+                    Dim ZPorce As Double = Val(formatonumerico(ZPrecio / Costo))
                     ' Call redondeo(ZPorce)
                     Dim CostoII As Double = 0
 
@@ -79,8 +79,8 @@ Public Class Listado_Precios_Compara_Grupos
                     Dim ZDife As String
 
                     SQLCnslt = "UPDATE CargaLista SET " _
-                                & " CostoI = '" & Costo & "'," _
-                                & " FactorI = '" & ZPorce & "'," _
+                                & " CostoI = '" & Costo.ToString().Replace(",", ".") & "'," _
+                                & " FactorI = '" & ZPorce.ToString().Replace(",", ".") & "'," _
                                 & " FechaI = '" & txt_Fecha.Text & "'," _
                                 & " CostoII = '" & 0 & "'," _
                                 & " FactorII = '" & 0 & "'," _
@@ -96,13 +96,13 @@ Public Class Listado_Precios_Compara_Grupos
 
                         SQLCnslt = "Select Costo, Fecha" _
                                 & " FROM CargaListaII" _
-                                & " Where CargaListaII.Terminado = " + "'" + ZTerminado + "'" _
-                                & " and CargaListaII.OrdFecha <= " + "'" + WFechaCompa + "'"
+                                & " Where CargaListaII.Terminado = '" & ZTerminado & "'" _
+                                & " and CargaListaII.OrdFecha <= '" & WFechaCompa & "'"
 
                         Dim RowCargaLisII As DataRow = GetSingle(SQLCnslt, Operador.Base)
 
                         If RowCargaLisII IsNot Nothing Then
-                            CostoII = formatonumerico(RowCargaLisII.Item("Costo"))
+                            CostoII = Val(formatonumerico(RowCargaLisII.Item("Costo"), 2))
                             FechaII = RowCargaLisII.Item("Fecha")
 
                         End If
@@ -110,7 +110,7 @@ Public Class Listado_Precios_Compara_Grupos
                         If CostoII <> 0 Then
 
                             REM ZDife = ZPrecio - CostoII
-                            ZPorce = formatonumerico(ZPrecio / CostoII)
+                            ZPorce = Val(formatonumerico(ZPrecio / CostoII))
                             'Call redondeo(ZPorce)
                             ZDife = ""
 
@@ -123,8 +123,8 @@ Public Class Listado_Precios_Compara_Grupos
                             End If
 
                             SQLCnslt = "UPDATE CargaLista SET " _
-                            & " CostoII = '" & CostoII & "'," _
-                            & " FactorII = '" & ZPorce & "'," _
+                            & " CostoII = '" & CostoII.ToString().Replace(",", ".") & "'," _
+                            & " FactorII = '" & ZPorce.ToString().Replace(",", ".") & "'," _
                             & " FechaII = '" & FechaII & "'," _
                             & " Porce = '" & ZDife & "'" _
                             & " Where Clave = '" & ZClave & "'"
@@ -146,7 +146,7 @@ Public Class Listado_Precios_Compara_Grupos
                     If rowCargaII IsNot Nothing Then
 
                         SQLCnslt = "UPDATE CargaListaII SET " _
-                                  & " Costo = '" & Str$(Costo) & "'" _
+                                  & " Costo = '" & Costo.ToString().Replace(",", ".") & "'" _
                                   & " Where Clave = '" & ZClave & "'"
 
                         ExecuteNonQueries({SQLCnslt}, Operador.Base)
@@ -165,7 +165,7 @@ Public Class Listado_Precios_Compara_Grupos
                                      & "'" & txt_Fecha.Text & "'," _
                                      & "'" & WFecha & "'," _
                                      & "'" & ZTerminado & "'," _
-                                     & "'" & Str$(Costo) & "')"
+                                     & "'" & Costo.ToString().Replace(",", ".") & "')"
 
                         ExecuteNonQueries({SQLCnslt}, Operador.Base)
 

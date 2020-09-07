@@ -121,17 +121,18 @@ Public Class Listado_Ventas_FueraDeFecha
                             End If
                         Next Ciclo
 
-                        REM 1 - DOMINGO
-                        REM 2 - LUNES
-                        REM 3 - MARTES
-                        REM 4 - MIERCOLES
-                        REM 5 - JUEVES
-                        REM 6 - VIERNES
-                        REM 7 - SABADO
+                        REM 0 - DOMINGO
+                        REM 1 - LUNES
+                        REM 2 - MARTES
+                        REM 3 - MIERCOLES
+                        REM 4 - JUEVES
+                        REM 5 - VIERNES
+                        REM 6 - SABADO
                         Dim XFec1 As String = WFechaDesde
-                        Dim DXfec1 As Date = CType(XFec1, Date)
+                        Dim DXfec1 As Date = XFec1
+                        'Dim DXfec1 As Date = CType(XFec1, Date)
                         Dim BDia As Integer = DXfec1.DayOfWeek()
-                        If BDia = 1 Or BDia = 7 Then
+                        If BDia = 0 Or BDia = 6 Then
                             Feriado = "S"
                         End If
 
@@ -154,12 +155,26 @@ Public Class Listado_Ventas_FueraDeFecha
 
             End If
 
+            Fila += 1
         Next
 
 
-        For i = listaFilasABorrar.Count To 0
-            TablaVentasFueraFecha.Rows.RemoveAt(i)
-        Next
+        ' For i = listaFilasABorrar.Count To 0
+        '     TablaVentasFueraFecha.Rows.RemoveAt(i)
+        ' Next
+        
+        If listaFilasABorrar.Count > 0 Then
+
+            listaFilasABorrar.Sort()
+            listaFilasABorrar.Reverse()
+            
+            For i = 0 To (listaFilasABorrar.Count - 1)
+                TablaVentasFueraFecha.Rows.RemoveAt(listaFilasABorrar(i))
+            Next
+        End If
+
+
+
 
 
         Dim WTitulo As String = "Entre el " & txt_DesdeFecha.Text & " hasta el " & txt_HastaFecha.Text

@@ -32,6 +32,7 @@ Partial Class CuentaCorrientes_DeClientes
         Me.rabtn_Pantalla = New System.Windows.Forms.RadioButton()
         Me.rabtn_Impresora = New System.Windows.Forms.RadioButton()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.chk_FechaVto = New System.Windows.Forms.CheckBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -52,7 +53,6 @@ Partial Class CuentaCorrientes_DeClientes
         Me.btn_Aceptar = New System.Windows.Forms.Button()
         Me.btn_Consulta = New System.Windows.Forms.Button()
         Me.btn_Cerrar = New System.Windows.Forms.Button()
-        Me.chk_FechaVto = New System.Windows.Forms.CheckBox()
         Me.panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -175,6 +175,19 @@ Partial Class CuentaCorrientes_DeClientes
         Me.GroupBox1.TabIndex = 11
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Control Listado"
+        '
+        'chk_FechaVto
+        '
+        Me.chk_FechaVto.AutoSize = True
+        Me.chk_FechaVto.Checked = True
+        Me.chk_FechaVto.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chk_FechaVto.Location = New System.Drawing.Point(296, 108)
+        Me.chk_FechaVto.Name = "chk_FechaVto"
+        Me.chk_FechaVto.Size = New System.Drawing.Size(131, 17)
+        Me.chk_FechaVto.TabIndex = 20
+        Me.chk_FechaVto.Text = "Fecha de vencimiento"
+        Me.chk_FechaVto.UseVisualStyleBackColor = True
+        Me.chk_FechaVto.Visible = False
         '
         'Label6
         '
@@ -379,18 +392,6 @@ Partial Class CuentaCorrientes_DeClientes
         Me.btn_Cerrar.TabIndex = 14
         Me.btn_Cerrar.Text = "CERRAR"
         Me.btn_Cerrar.UseVisualStyleBackColor = True
-        '
-        'chk_FechaVto
-        '
-        Me.chk_FechaVto.AutoSize = True
-        Me.chk_FechaVto.Checked = True
-        Me.chk_FechaVto.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chk_FechaVto.Location = New System.Drawing.Point(296, 108)
-        Me.chk_FechaVto.Name = "chk_FechaVto"
-        Me.chk_FechaVto.Size = New System.Drawing.Size(131, 17)
-        Me.chk_FechaVto.TabIndex = 20
-        Me.chk_FechaVto.Text = "Fecha de vencimiento"
-        Me.chk_FechaVto.UseVisualStyleBackColor = True
         '
         'CuentaCorrientes_DeClientes
         '

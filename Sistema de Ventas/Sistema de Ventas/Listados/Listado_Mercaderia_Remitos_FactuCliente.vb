@@ -9,7 +9,7 @@ Public Class Listado_Mercaderia_Remitos_FactuCliente : Implements IBuscarCliente
     End Sub
 
     Private Sub btn_Consulta_Click(sender As Object, e As EventArgs) Handles btn_Consulta.Click
-        With ConsultaCliente
+        With New ConsultaCliente
             .Show(Me)
         End With
     End Sub
@@ -190,4 +190,15 @@ Public Class Listado_Mercaderia_Remitos_FactuCliente : Implements IBuscarCliente
     End Sub
 
 
+    Private Sub txt_Desde_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles txt_Desde.MouseDoubleClick
+        With New ConsultaCliente
+            .Show(Me)
+        End With
+    End Sub
+
+    Private Sub txt_Hasta_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles txt_Hasta.MouseDoubleClick
+        With New ConsultaCliente
+            .Show(Me)
+        End With
+    End Sub
 End Class

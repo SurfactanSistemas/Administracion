@@ -4,12 +4,8 @@ Imports Util.Clases.Helper
 
 Public Class Listado_IvaVentas
 
-
-
-
     Private Sub btn_Cerrar_Click(sender As Object, e As EventArgs) Handles btn_Cerrar.Click
         Close()
-
     End Sub
 
     Private Sub txt_DesdeFecha_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_DesdeFecha.KeyDown

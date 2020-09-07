@@ -810,7 +810,7 @@ Partial Public Class DBAuxi
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-        Public Overloads Function AddTablaAuxRow(ByVal Pedido As String, ByVal Cliente As String, ByVal Fecha As String, ByVal FecEntrega As String, ByVal Terminado As String, ByVal Cantidad As String, ByVal FechaOrd As String, ByVal Facturado As String, ByVal Importe As String, ByVal Autorizo As String, ByVal TipoPed As Integer, ByVal Descripcion As String, ByVal Razon As String, ByVal Vendedor As String) As TablaAuxRow
+        Public Overloads Function AddTablaAuxRow(ByVal Pedido As Double, ByVal Cliente As String, ByVal Fecha As String, ByVal FecEntrega As String, ByVal Terminado As String, ByVal Cantidad As String, ByVal FechaOrd As String, ByVal Facturado As String, ByVal Importe As String, ByVal Autorizo As String, ByVal TipoPed As Integer, ByVal Descripcion As String, ByVal Razon As String, ByVal Vendedor As String) As TablaAuxRow
             Dim rowTablaAuxRow As TablaAuxRow = CType(Me.NewRow, TablaAuxRow)
             Dim columnValuesArray() As Object = New Object() {Pedido, Cliente, Fecha, FecEntrega, Terminado, Cantidad, FechaOrd, Facturado, Importe, Autorizo, TipoPed, Descripcion, Razon, Vendedor}
             rowTablaAuxRow.ItemArray = columnValuesArray
@@ -854,7 +854,7 @@ Partial Public Class DBAuxi
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Private Sub InitClass()
-            Me.columnPedido = New Global.System.Data.DataColumn("Pedido", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnPedido = New Global.System.Data.DataColumn("Pedido", GetType(Double), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnPedido)
             Me.columnCliente = New Global.System.Data.DataColumn("Cliente", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnCliente)
@@ -2616,7 +2616,7 @@ Partial Public Class DBAuxi
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-        Public Overloads Function AddTablaReporteMercad_FacturasXClienteRow(ByVal Cliente As String, ByVal Fecha As String, ByVal FechaOrd As String, ByVal Numero As String, ByVal Entrada As Double, ByVal Salida As Double, ByVal Lista1 As String, ByVal Descripcion As String, ByVal Terminado As String, ByVal DescriTer As String, ByVal Saldo As Double) As TablaReporteMercad_FacturasXClienteRow
+        Public Overloads Function AddTablaReporteMercad_FacturasXClienteRow(ByVal Cliente As String, ByVal Fecha As String, ByVal FechaOrd As String, ByVal Numero As Double, ByVal Entrada As Double, ByVal Salida As Double, ByVal Lista1 As String, ByVal Descripcion As String, ByVal Terminado As String, ByVal DescriTer As String, ByVal Saldo As Double) As TablaReporteMercad_FacturasXClienteRow
             Dim rowTablaReporteMercad_FacturasXClienteRow As TablaReporteMercad_FacturasXClienteRow = CType(Me.NewRow, TablaReporteMercad_FacturasXClienteRow)
             Dim columnValuesArray() As Object = New Object() {Cliente, Fecha, FechaOrd, Numero, Entrada, Salida, Lista1, Descripcion, Terminado, DescriTer, Saldo}
             rowTablaReporteMercad_FacturasXClienteRow.ItemArray = columnValuesArray
@@ -2663,7 +2663,7 @@ Partial Public Class DBAuxi
             MyBase.Columns.Add(Me.columnFecha)
             Me.columnFechaOrd = New Global.System.Data.DataColumn("FechaOrd", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnFechaOrd)
-            Me.columnNumero = New Global.System.Data.DataColumn("Numero", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnNumero = New Global.System.Data.DataColumn("Numero", GetType(Double), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnNumero)
             Me.columnEntrada = New Global.System.Data.DataColumn("Entrada", GetType(Double), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnEntrada)
@@ -4314,15 +4314,15 @@ Partial Public Class DBAuxi
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-        Public Property Pedido() As String
+        Public Property Pedido() As Double
             Get
                 Try
-                    Return CType(Me(Me.tableTablaAux.PedidoColumn), String)
+                    Return CType(Me(Me.tableTablaAux.PedidoColumn), Double)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("El valor de la columna 'Pedido' de la tabla 'TablaAux' es DBNull.", e)
                 End Try
             End Get
-            Set(value As String)
+            Set(value As Double)
                 Me(Me.tableTablaAux.PedidoColumn) = value
             End Set
         End Property
@@ -5767,16 +5767,16 @@ Partial Public Class DBAuxi
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-        Public Property Numero() As String
+        Public Property Numero() As Double
             Get
                 Try
-                    Return CType(Me(Me.tableTablaReporteMercad_FacturasXCliente.NumeroColumn), String)
+                    Return CType(Me(Me.tableTablaReporteMercad_FacturasXCliente.NumeroColumn), Double)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("El valor de la columna 'Numero' de la tabla 'TablaReporteMercad_FacturasXCliente'" & _
                             " es DBNull.", e)
                 End Try
             End Get
-            Set(value As String)
+            Set(value As Double)
                 Me(Me.tableTablaReporteMercad_FacturasXCliente.NumeroColumn) = value
             End Set
         End Property

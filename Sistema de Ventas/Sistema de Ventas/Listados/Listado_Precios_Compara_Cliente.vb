@@ -24,11 +24,7 @@ Public Class Listado_Precios_Compara_Cliente : Implements IBuscadorCliente
         
         ListaSQLCnslt.Add(SQLCnlst)
        
-
-
-
-
-
+        
         SQLCnlst = "Select Terminado, Fecha, Precio " _
                     & " FROM Precios" _
                     & " Where Precios.Cliente = '" & ZCliente & "'"
@@ -127,7 +123,7 @@ Public Class Listado_Precios_Compara_Cliente : Implements IBuscadorCliente
                 Dim ZLista As String = "9999"
                 Dim ZRenglon As String = Fila
                 Dim ZFecha As String = ZFechaI
-                Dim ZOrdFecha As String = ordenaFecha(ZFechaI)
+                Dim ZOrdFecha As String = Microsoft.VisualBasic.Right$(ZFechaI, 4) & Microsoft.VisualBasic.Left$(ZFechaI, 2) & Mid$(ZFechaI, 4, 2)
                 Dim ZTitulo As String = "Cliente : " & ZCliente & "   " & ZRazon
                 Dim ZObservaciones = ""
 
@@ -401,7 +397,7 @@ Public Class Listado_Precios_Compara_Cliente : Implements IBuscadorCliente
     End Sub
 
     Private Sub btn_Consulta_Click(sender As Object, e As EventArgs) Handles btn_Consulta.Click
-        With BuscadorCliente
+        With New BuscadorCliente
             .Show(Me)
         End With
     End Sub
@@ -409,5 +405,11 @@ Public Class Listado_Precios_Compara_Cliente : Implements IBuscadorCliente
     Public Sub _ProcesarDatosCLiente(Codigo As String, Nombre As String) Implements IBuscadorCliente._ProcesarDatosCLiente
         txt_Cliente.Text = Codigo
         txt_DesCliente.Text = Nombre
+    End Sub
+
+    Private Sub txt_Cliente_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles txt_Cliente.MouseDoubleClick
+        With New BuscadorCliente
+            .Show(Me)
+        End With
     End Sub
 End Class

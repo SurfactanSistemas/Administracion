@@ -325,4 +325,18 @@ Public Class ListadoCashFlow : Implements IBuscarClienteCashFlow
             txt_HastaCodigo.Text = CodigoCliente
         End If
     End Sub
+
+    
+    Private Sub txt_DesdeCodigo_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles txt_DesdeCodigo.MouseDoubleClick
+        With ConsultaCliente
+            .Show(Me)
+        End With
+    End Sub
+
+    Private Sub txt_HastaCodigo_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles txt_HastaCodigo.MouseDoubleClick
+        With ConsultaCliente
+            .Show(Me)
+        End With
+    End Sub
+
 End Class

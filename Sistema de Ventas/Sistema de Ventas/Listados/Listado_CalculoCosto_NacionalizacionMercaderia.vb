@@ -320,7 +320,8 @@ Public Class Listado_CalculoCosto_NacionalizacionMercaderia
 
         
 
-        Dim WFormula As String = "{Carpeta.Carpeta} >= " & txt_Carpeta.Text & " AND {Carpeta.Carpeta} <= " & txt_Carpeta.Text & ""
+        Dim WFormula As String = "{Carpeta.Carpeta} >= " & txt_Carpeta.Text & " AND {Carpeta.Carpeta} <= " & txt_Carpeta.Text & " " _
+                                 & "AND {Carpeta.CantidadII} > 0"
 
         With New VistaPrevia
             .Reporte = New Reporte_CarpetaParcial()

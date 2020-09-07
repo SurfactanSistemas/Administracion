@@ -95,4 +95,8 @@ Public Class Listado_Remitos
                 txt_HastaFecha.Text = ""
         End Select
     End Sub
+
+    Private Sub Listado_Remitos_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        txt_DesdeFecha.Focus()
+    End Sub
 End Class

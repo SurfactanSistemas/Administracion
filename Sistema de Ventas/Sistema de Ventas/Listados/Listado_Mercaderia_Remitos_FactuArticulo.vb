@@ -8,7 +8,7 @@ Public Class Listado_Mercaderia_Remitos_FactuArticulo : Implements IConsulta_Ter
     End Sub
 
     Private Sub btn_Consulta_Click(sender As Object, e As EventArgs) Handles btn_Consulta.Click
-        With Consulta_Terminado
+        With New Consulta_Terminado
             .Show(Me)
         End With
     End Sub
@@ -153,5 +153,54 @@ Public Class Listado_Mercaderia_Remitos_FactuArticulo : Implements IConsulta_Ter
             End If
 
         End With
+    End Sub
+
+    Private Sub txt_DesdeCodigo_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles txt_DesdeCodigo.MouseDoubleClick
+        With New Consulta_Terminado
+            .Show(Me)
+        End With
+    End Sub
+
+    Private Sub txt_HastaCodigo_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles txt_HastaCodigo.MouseDoubleClick
+        With New Consulta_Terminado
+            .Show(Me)
+        End With
+    End Sub
+
+    Private Sub txt_DesdeCodigo_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_DesdeCodigo.KeyDown
+        Select Case e.KeyData
+            Case Keys.Enter
+                If Trim(txt_DesdeCodigo.Text.Replace("-", "")) = "" Then
+                    txt_DesdeCodigo.Text = "AA-00000-000"
+                    txt_HastaCodigo.Focus()
+                    txt_HastaCodigo.SelectAll()
+                Else
+                    If txt_DesdeCodigo.Text.Length = 12 Then
+                        txt_HastaCodigo.Focus()
+                        txt_HastaCodigo.SelectAll()
+                    End If
+                End If
+
+            Case Keys.Escape
+                txt_DesdeCodigo.Text = ""
+
+        End Select
+    End Sub
+
+    Private Sub txt_HastaCodigo_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_HastaCodigo.KeyDown
+        Select Case e.KeyData
+            Case Keys.Enter
+                If Trim(txt_HastaCodigo.Text.Replace("-", "")) = "" Then
+                    txt_HastaCodigo.Text = "ZZ-00000-000"
+                End If
+
+            Case Keys.Escape
+                txt_HastaCodigo.Text = ""
+
+        End Select
+    End Sub
+
+    Private Sub Listado_Mercaderia_Remitos_FactuArticulo_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        txt_DesdeCodigo.Focus()
     End Sub
 End Class

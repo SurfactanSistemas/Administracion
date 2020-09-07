@@ -11,7 +11,7 @@ Public Class SaldoDe_CtaCte_deCliente : Implements IBuscarClienteCashFlow
     End Sub
 
     Private Sub btn_Consulta_Click(sender As Object, e As EventArgs) Handles btn_Consulta.Click
-        With ConsultaCliente
+        With New ConsultaCliente
             .Show(Me)
         End With
     End Sub
@@ -109,7 +109,7 @@ Public Class SaldoDe_CtaCte_deCliente : Implements IBuscarClienteCashFlow
             End If
         End If
 
-        If rabtn_Pesos.Checked = True Then
+        If rabtn_Total.Checked = True Then
             If rabtn_Pesos.Checked = True Then
                 SQLCnslt = "UPDATE  Ctacte SET Importe1	=Total ,Importe2 = '0' ,Importe3 = Saldo " _
                         & "WHERE Cliente >= '" & txt_Desde.Text & "' AND Cliente <= '" & txt_Hasta.Text & "' " _
@@ -211,5 +211,16 @@ Public Class SaldoDe_CtaCte_deCliente : Implements IBuscarClienteCashFlow
 
 
         End Select
+    End Sub
+
+    Private Sub txt_Desde_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles txt_Desde.MouseDoubleClick
+        With New ConsultaCliente
+            .Show(Me)
+        End With
+    End Sub
+    Private Sub txt_Hasta_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles txt_Hasta.MouseDoubleClick
+        With New ConsultaCliente
+            .Show(Me)
+        End With
     End Sub
 End Class

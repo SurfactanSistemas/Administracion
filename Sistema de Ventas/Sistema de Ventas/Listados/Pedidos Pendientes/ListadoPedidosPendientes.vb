@@ -183,22 +183,39 @@ Public Class ListadoPedidosPendientes : Implements IBuscadorCliente, IBuscadorVe
         End With
 
 
+'        SQLCnslt = "SELECT  P.Pedido, P.Cliente, P.Fecha, P.FecEntrega, P.Terminado, P.Cantidad,P.FechaOrd, P.Facturado," _
+'                      & "  Importe = ( P.Cantidad - (Case when M.Remito <> 0 then  P.Cantidad else  P.Facturado end)), P.Autorizo, P.Tipoped, C.Razon, C.Vendedor " _
+'                      & " FROM Pedido P Left outer JOIN Muestra M ON P.Pedido = M.Pedido AND (P.Terminado = M.Producto or P.Terminado = M.Articulo)" _
+'                      & " LEFT OUTER JOIN Cliente C ON P.Cliente = C.Cliente" _
+'                      & " WHERE P.Cantidad > P.Facturado AND (P.TipoPed = 5 OR P.TipoPed = 6) AND Fechaord >= '" & WDesde & "' AND Fechaord <= '" & WHasta & "' ORDER BY P.Fechaord"
+
         SQLCnslt = "SELECT  P.Pedido, P.Cliente, P.Fecha, P.FecEntrega, P.Terminado, P.Cantidad,P.FechaOrd, P.Facturado," _
                       & "  Importe = ( P.Cantidad - (Case when M.Remito <> 0 then  P.Cantidad else  P.Facturado end)), P.Autorizo, P.Tipoped, C.Razon, C.Vendedor " _
-                      & " FROM Pedido P Left outer JOIN Muestra M ON P.Pedido = M.Pedido AND (P.Terminado = M.Producto or P.Terminado = M.Articulo)" _
-                      & " LEFT OUTER JOIN Cliente C ON P.Cliente = C.Cliente" _
-                      & " WHERE P.Cantidad > P.Facturado AND (P.TipoPed = 5 OR P.TipoPed = 6) AND Fechaord >= '" & WDesde & "' AND Fechaord <= '" & WHasta & "' ORDER BY P.Fechaord"
+                              & " FROM Pedido P Left outer JOIN Muestra M ON P.Pedido = M.Pedido AND (P.Terminado = M.Producto or P.Terminado = M.Articulo)" _
+                              & " LEFT OUTER JOIN Cliente C ON P.Cliente = C.Cliente" _
+                              & " WHERE P.Cantidad > P.Facturado AND (P.TipoPed = 5 OR P.TipoPed = 6)" _
+                              & " AND (P.Fechaord >= '" & WDesde & "' AND P.Fechaord <= '" & WHasta & "') OR (P.OrdFecEntrega >= '" & WDesde & "' AND P.OrdFecEntrega <= '" & WHasta & "')" _
+                              & " ORDER BY P.Fechaord"
+
+
 
         TablaAux = GetAll(SQLCnslt)
+        
 
         With TablaAux.Columns
             .Add("Descripcion")
         End With
-
+        '        SQLCnslt = "Select Pedido, Cliente, Fecha, FecEntrega, Terminado, Cantidad, FechaOrd, Facturado, Autorizo, Tipoped " _
+        '                    & "FROM Pedido WHERE Cantidad > Facturado " _
+        '                    & "AND (TipoPed = 5 or TipoPed = 6) " _
+        '                    & "AND FechaOrd >= '" & WDesde & "' AND FechaOrd <= '" & WHasta & "' " _
+        '                    & "ORDER BY fechaord"
+        '        Dim TablaPedido As DataTable = GetAll(SQLCnslt, Operador.Base)
 
         If TablaAux.Rows.Count > 0 Then
             For i = 0 To TablaAux.Rows.Count - 1
                 Dim Wproducto As String = TablaAux.Rows(i).Item("Terminado")
+                Dim WCliente As String = TablaAux.Rows(i).Item("Cliente")
                 Dim WtipoPro = Microsoft.VisualBasic.Left(Wproducto, 2)
 
 
@@ -207,9 +224,12 @@ Public Class ListadoPedidosPendientes : Implements IBuscadorCliente, IBuscadorVe
 
 
 
-                        SQLCnslt = "SELECT distinct Descripcion = Case When (P.Terminado >= 'ML-00000-000' or P.Terminado <= 'ML-99999-999')" _
-                                  & "THEN P.NombreComercial ELSE T.Descripcion END FROM Pedido P INNER JOIN Terminado T ON P.Terminado = T.Codigo " _
-                                  & "WHERE Codigo = '" & Wproducto & "'"
+'                        SQLCnslt = "SELECT distinct Descripcion = Case When (P.Terminado >= 'ML-00000-000' or P.Terminado <= 'ML-99999-999')" _
+'                                  & "THEN P.NombreComercial ELSE T.Descripcion END FROM Pedido P INNER JOIN Terminado T ON P.Terminado = T.Codigo " _
+                        '                                  & "WHERE Codigo = '" & Wproducto & "' AND Cliente = '" & WCliente & "'"
+                        SQLCnslt = "SELECT distinct T.Descripcion " _
+                                 & "FROM Pedido P INNER JOIN Terminado T ON P.Terminado = T.Codigo " _
+                                 & "WHERE Codigo = '" & Wproducto & "' AND Cliente = '" & WCliente & "'"
 
                         Dim row As DataRow = GetSingle(SQLCnslt)
                         If row IsNot Nothing Then
@@ -218,6 +238,8 @@ Public Class ListadoPedidosPendientes : Implements IBuscadorCliente, IBuscadorVe
 
 
                     Case Else
+
+
                         Dim WArticulo As String = Microsoft.VisualBasic.Left(Wproducto, 3) + Microsoft.VisualBasic.Right(Wproducto, 7)
 
                         SQLCnslt = "SELECT Descripcion FROM Articulo WHERE Codigo = '" & WArticulo & "'"
@@ -225,8 +247,21 @@ Public Class ListadoPedidosPendientes : Implements IBuscadorCliente, IBuscadorVe
                         If row IsNot Nothing Then
                             TablaAux.Rows(i).Item("Descripcion") = row.Item("Descripcion")
                         End If
+
+
                 End Select
+
+                If WtipoPro = "ML" Then
+                    SQLCnslt = "Select NombreComercial FROM Pedido WHERE Pedido = '" & TablaAux.Rows(i).Item("Pedido") & "'"
+                    Dim RowPe As DataRow = GetSingle(SQLCnslt)
+                    If RowPe IsNot Nothing Then
+                        TablaAux.Rows(i).Item("Descripcion") = RowPe.Item("NombreComercial")
+                    End If
+                End If
             Next
+
+
+
         End If
 
 
@@ -249,19 +284,23 @@ Public Class ListadoPedidosPendientes : Implements IBuscadorCliente, IBuscadorVe
 
                 Case 2
 
-                    .Formula = " {TablaAux.Cliente} >= '" & UCase(txtCliente1.Text) & "' AND {TablaAux.Cliente} <= '" & UCase(txtCliente2.Text) & "'"
+                    .Formula = " {TablaAux.Cliente} >= '" & UCase(txtCliente1.Text) & "' AND {TablaAux.Cliente} <= '" & UCase(txtCliente2.Text) & "'" _
+                                & "AND {TablaAux.Importe} <> 0"
 
                 Case 3
 
-                    .Formula = " {TablaAux.Vendedor} = " & txtVendedor.Text & ""
+                    .Formula = " {TablaAux.Vendedor} = " & txtVendedor.Text & "" _
+                                & "AND {TablaAux.Importe} <> 0"
 
                 Case 4
 
                     If CmbTipo.SelectedItem = "MP" Then
                         .Formula = " {TablaAux.Terminado} >= '" & Microsoft.VisualBasic.Left(mastxtProductoDesde.Text, 3) & "00" & Microsoft.VisualBasic.Right(mastxtProductoDesde.Text, 7) & "'" _
-                                                    & " AND {TablaAux.Terminado} <= '" & Microsoft.VisualBasic.Left(mastxtProductoHasta.Text, 3) & "00" & Microsoft.VisualBasic.Right(mastxtProductoHasta.Text, 7) & "'"
+                                                    & " AND {TablaAux.Terminado} <= '" & Microsoft.VisualBasic.Left(mastxtProductoHasta.Text, 3) & "00" & Microsoft.VisualBasic.Right(mastxtProductoHasta.Text, 7) & "'" _
+                                                    & "AND {TablaAux.Importe} <> 0"
                     Else
-                        .Formula = " {TablaAux.Terminado} >= '" & mastxtProductoDesde.Text & "' AND {TablaAux.Terminado} <= '" & mastxtProductoHasta.Text & "'"
+                        .Formula = " {TablaAux.Terminado} >= '" & mastxtProductoDesde.Text & "' AND {TablaAux.Terminado} <= '" & mastxtProductoHasta.Text & "'" _
+                                    & "AND {TablaAux.Importe} <> 0"
                     End If
 
                 Case 5
@@ -269,10 +308,12 @@ Public Class ListadoPedidosPendientes : Implements IBuscadorCliente, IBuscadorVe
                     If CmbTipo.SelectedItem = "MP" Then
                         .Formula = " {TablaAux.Terminado} >= '" & Microsoft.VisualBasic.Left(mastxtProductoDesde.Text, 3) & "00" & Microsoft.VisualBasic.Right(mastxtProductoDesde.Text, 7) & "'" _
                                                     & " AND {TablaAux.Terminado} <= '" & Microsoft.VisualBasic.Left(mastxtProductoHasta.Text, 3) & "00" & Microsoft.VisualBasic.Right(mastxtProductoDesde.Text, 7) & "'" _
-                                                    & "AND {TablaAux.Cliente} >= '" & UCase(txtCliente1.Text) & "' AND {TablaAux.Cliente} <= '" & UCase(txtCliente2.Text) & "'"
+                                                    & "AND {TablaAux.Cliente} >= '" & UCase(txtCliente1.Text) & "' AND {TablaAux.Cliente} <= '" & UCase(txtCliente2.Text) & "'" _
+                                                    & "AND {TablaAux.Importe} <> 0"
                     Else
-                        .Formula = " {TablaAux.Terminado} >= '" & mastxtProductoDesde.Text & "' AND {TablaAux.Terminado} <= '" & mastxtProductoHasta.Text & "'" _
-                                                    & "AND {TablaAux.Cliente} >= '" & UCase(txtCliente1.Text) & "' AND {TablaAux.Cliente} <= '" & UCase(txtCliente2.Text) & "'"
+                        .Formula = " {TablaAux.Terminado} >= '" & mastxtProductoDesde.Text & "' AND {TablaAux.Terminado} <= '" & mastxtProductoHasta.Text & "' " _
+                                                    & "AND {TablaAux.Cliente} >= '" & UCase(txtCliente1.Text) & "' AND {TablaAux.Cliente} <= '" & UCase(txtCliente2.Text) & "' " _
+                                                    & "AND {TablaAux.Importe} <> 0"
                     End If
 
             End Select

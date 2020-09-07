@@ -2,6 +2,10 @@
 Imports Util.Clases.Query
 Imports Util.Clases.Helper
 
+Imports System.Runtime.InteropServices
+
+Imports System.Diagnostics
+
 Public Class Listado_PT_SinVentas : Implements IConsulta_Terminado
 
 
@@ -337,13 +341,7 @@ Public Class Listado_PT_SinVentas : Implements IConsulta_Terminado
       
     End Sub
 
-    Private Sub Listado_PT_SinVentas_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        txt_DesdeTer.Text = "AA-00000-000"
-        txt_HastaTer.Text = "ZZ-99999-999"
-        txt_DesdeFecha.Text = "01/01/2020"
-        txt_HastaFecha.Text = "01/12/2020"
-        txt_Porcentaje.Text = 50
-    End Sub
+  
 
     Private Sub txt_DesdeTer_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_DesdeTer.KeyDown
         Select Case e.KeyData
@@ -408,9 +406,10 @@ Public Class Listado_PT_SinVentas : Implements IConsulta_Terminado
 
     Private Sub btn_Consulta_Click(sender As Object, e As EventArgs) Handles btn_Consulta.Click
 
-        With Consulta_Terminado
+        With New Consulta_Terminado
             .Show(Me)
         End With
+
 
     End Sub
 
@@ -432,4 +431,24 @@ Public Class Listado_PT_SinVentas : Implements IConsulta_Terminado
     Private Sub Listado_PT_SinVentas_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         txt_DesdeTer.Focus()
     End Sub
+
+    Private Sub txt_DesdeTer_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles txt_DesdeTer.MouseDoubleClick
+
+        With New Consulta_Terminado
+            .Show(Me)
+        End With
+
+
+    End Sub
+
+    Private Sub txt_HastaTer_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles txt_HastaTer.MouseDoubleClick
+
+        With New Consulta_Terminado
+            .Show(Me)
+        End With
+
+    End Sub
+
+
+
 End Class

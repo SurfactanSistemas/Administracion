@@ -85,9 +85,9 @@ Partial Class MenuPrincipal
         Me.ListadoDeOrdenesDeCompraPendientesDeMPToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListadoDeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListadoPercepcionDeIngresosBrutosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ListadoVentasDiariasPendientesDePagoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProcesosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FinDeSistemasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ListadoVentasDiariasPendientesDePagoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.panel1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -379,7 +379,7 @@ Partial Class MenuPrincipal
         '
         Me.ListadoGralDePreciosToolStripMenuItem.Name = "ListadoGralDePreciosToolStripMenuItem"
         Me.ListadoGralDePreciosToolStripMenuItem.Size = New System.Drawing.Size(405, 22)
-        Me.ListadoGralDePreciosToolStripMenuItem.Text = "Listado Gral. de Precios"
+        Me.ListadoGralDePreciosToolStripMenuItem.Text = "Listado Gral. de Productos"
         '
         'ListadoCalcToolStripMenuItem
         '
@@ -496,6 +496,12 @@ Partial Class MenuPrincipal
         Me.ListadoPercepcionDeIngresosBrutosToolStripMenuItem.Size = New System.Drawing.Size(381, 22)
         Me.ListadoPercepcionDeIngresosBrutosToolStripMenuItem.Text = "Listado Percepcion de Ingresos Brutos"
         '
+        'ListadoVentasDiariasPendientesDePagoToolStripMenuItem
+        '
+        Me.ListadoVentasDiariasPendientesDePagoToolStripMenuItem.Name = "ListadoVentasDiariasPendientesDePagoToolStripMenuItem"
+        Me.ListadoVentasDiariasPendientesDePagoToolStripMenuItem.Size = New System.Drawing.Size(381, 22)
+        Me.ListadoVentasDiariasPendientesDePagoToolStripMenuItem.Text = "Listado Ventas Diarias Pendientes de Pago"
+        '
         'ProcesosToolStripMenuItem
         '
         Me.ProcesosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FinDeSistemasToolStripMenuItem})
@@ -508,12 +514,6 @@ Partial Class MenuPrincipal
         Me.FinDeSistemasToolStripMenuItem.Name = "FinDeSistemasToolStripMenuItem"
         Me.FinDeSistemasToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
         Me.FinDeSistemasToolStripMenuItem.Text = "Fin de Sistema"
-        '
-        'ListadoVentasDiariasPendientesDePagoToolStripMenuItem
-        '
-        Me.ListadoVentasDiariasPendientesDePagoToolStripMenuItem.Name = "ListadoVentasDiariasPendientesDePagoToolStripMenuItem"
-        Me.ListadoVentasDiariasPendientesDePagoToolStripMenuItem.Size = New System.Drawing.Size(381, 22)
-        Me.ListadoVentasDiariasPendientesDePagoToolStripMenuItem.Text = "Listado Ventas Diarias Pendientes de Pago"
         '
         'MenuPrincipal
         '
