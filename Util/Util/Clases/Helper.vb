@@ -117,10 +117,10 @@ Namespace Clases
             Return row
 
         End Function
+        
+        Public Shared Function _ConectarA(Optional ByVal empresa As String = "SurfactanSa", Optional ByVal TmbPellital As Boolean = False) As String
 
-        Public Shared Function _ConectarA(Optional ByVal empresa As String = "") As String
-
-            Return Conexion._ConectarA(empresa)
+            Return Conexion._ConectarA(empresa, TmbPellital)
 
         End Function
 

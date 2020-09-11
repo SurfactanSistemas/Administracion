@@ -354,11 +354,13 @@
             // 
             this.BT_Inhabilitar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_Inhabilitar.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.BT_Inhabilitar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_Inhabilitar.ForeColor = System.Drawing.SystemColors.Control;
             this.BT_Inhabilitar.Location = new System.Drawing.Point(719, 405);
             this.BT_Inhabilitar.Name = "BT_Inhabilitar";
             this.BT_Inhabilitar.Size = new System.Drawing.Size(142, 27);
             this.BT_Inhabilitar.TabIndex = 109;
+            this.BT_Inhabilitar.Text = "INHABILITAR";
             this.toolTip1.SetToolTip(this.BT_Inhabilitar, "Calificar");
             this.BT_Inhabilitar.UseVisualStyleBackColor = true;
             this.BT_Inhabilitar.Click += new System.EventHandler(this.BT_Inhabilitar_Click);

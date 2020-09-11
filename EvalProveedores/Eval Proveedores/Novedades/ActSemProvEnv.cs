@@ -275,7 +275,7 @@ namespace Eval_Proveedores.Novedades
                 DataTable dtInformeProve = new DataTable();
 
                 dtInformeProve = ESBOL.ListaInformeProve(Helper.OrdenarFecha(TB_Desde.Text), Helper.OrdenarFecha(TB_Hasta.Text),
-                    _Empresa, 1, _Prove);
+                    _Empresa, 2, _Prove);
 
                 //dtInformeProve.Columns.Add("DesArticulo", typeof(string));
                 dtInformeProve.Columns.Add("SaldoOC", typeof (double));

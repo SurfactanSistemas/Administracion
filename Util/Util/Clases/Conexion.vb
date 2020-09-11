@@ -6,6 +6,7 @@ Namespace Clases
 
     Public Class Conexion
 
+        Private Shared TmbPellital As Boolean = False
         Public Shared EsPellital As Boolean = False
         Public Shared _EmpresaTrabajo As String = ""
         Public Shared WAtributosOperador(10, 100) As String
@@ -47,7 +48,12 @@ Namespace Clases
 
                     Case "SURFACTAN", "LOCAL"
 
-                        Return New List(Of String) From {"SurfactanSA", "surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII"}
+                        Dim x As List(Of String) = New List(Of String) From {"SurfactanSA", "surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII"}
+                        If TmbPellital Then x.AddRange({"PellitalSA", "Pelitall_II", "Pellital_III", "Pellital_V"})
+
+                        Return x
+
+                        'Return New List(Of String) From {"SurfactanSA", "surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII"}
 
                     Case "PELLITAL"
                         '
@@ -63,7 +69,7 @@ Namespace Clases
             End Get
         End Property
 
-        Public Shared Function _ConectarA(ByVal empresa As String) As String
+        Public Shared Function _ConectarA(ByVal empresa As String, Optional ByVal _TmbPellital As Boolean = False) As String
             If String.IsNullOrEmpty(empresa) Then
 
                 If EmpresaDeTrabajo = "" Then Throw New Exception("Empresa no definida para realizar la conexión a la Base de Datos.")
@@ -71,6 +77,8 @@ Namespace Clases
                 empresa = EmpresaDeTrabajo
 
             End If
+
+            TmbPellital = _TmbPellital
 
             If EsPellital AndAlso empresa = "SurfactanSA" Then
                 empresa = "Pellital_III"

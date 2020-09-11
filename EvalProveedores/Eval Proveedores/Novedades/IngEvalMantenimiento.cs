@@ -1250,6 +1250,9 @@ namespace Eval_Proveedores.Novedades
 
         private void BT_Inhabilitar_Click(object sender, EventArgs e)
         {
+            if (MessageBox.Show("¿Está seguro de querer inhabilitar el Proveedor?", "",
+                MessageBoxButtons.YesNoCancel) != DialogResult.Yes) return;
+
             if (TB_PromedioTot.Text != "")
             {
                 InhabilitarProveedor();

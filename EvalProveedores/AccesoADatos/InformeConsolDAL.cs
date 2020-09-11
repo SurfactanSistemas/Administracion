@@ -30,7 +30,7 @@ namespace AccesoADatos
             }
         }
 
-        private void _ConsolidarInformes(string WDesde, string WHasta)
+        private void _ConsolidarInformes(string WDesde, string WHasta, int Tipo)
         {
 
             try
@@ -49,9 +49,13 @@ namespace AccesoADatos
                             conn.Open();
 
                             cmd.Connection = conn;
-                            cmd.CommandText = "SELECT Informe, Fecha, FechaOrd, Expreso, Chapa, Chofer, Item1, Item2, Item3, Item4, Item5, Item6, Item7, Item8, Placa, Rombo, ISNULL(Observaciones, '') Observaciones, ISNULL(DesExpreso, '') DesExpreso "
-                                                + " From Informe "
-                                                + " WHERE Expreso > 0 AND Renglon = 1 AND FechaOrd BETWEEN '" + WDesde + "' AND '" + WHasta + "'";
+
+                            if (Tipo == 0)
+                            {
+                                cmd.CommandText = "SELECT Informe, Fecha, FechaOrd, Expreso, Chapa, Chofer, Item1, Item2, Item3, Item4, Item5, Item6, Item7, Item8, Placa, Rombo, ISNULL(Observaciones, '') Observaciones, ISNULL(DesExpreso, '') DesExpreso "
+                                                  + " From Informe "
+                                                  + " WHERE Expreso > 0 AND Renglon = 1 AND FechaOrd BETWEEN '" + WDesde + "' AND '" + WHasta + "'";
+                            }
 
                             using (SqlDataReader dr = cmd.ExecuteReader())
                             {
@@ -116,9 +120,9 @@ namespace AccesoADatos
         
         }
 
-        public DataTable Lista(string wDesde, string wHasta)
+        public DataTable Lista(string wDesde, string wHasta, int Tipo = 0)
         {
-            _ConsolidarInformes(wDesde, wHasta);
+            _ConsolidarInformes(wDesde, wHasta, Tipo);
 
             return Lista();
         }

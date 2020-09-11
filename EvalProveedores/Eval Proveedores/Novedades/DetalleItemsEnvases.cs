@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using Eval_Proveedores.Listados;
 using Eval_Proveedores.Listados.DetalleItemsEnvases;
+using Util.Clases;
 
 namespace Eval_Proveedores.Novedades
 {
@@ -73,11 +74,14 @@ namespace Eval_Proveedores.Novedades
                 DGV_EvalSemProve.Rows[_index].Cells["Informe"].Value = fila["Informe"].ToString();
                 DGV_EvalSemProve.Rows[_index].Cells["Cantidad"].Value = Helper.FormatoNumerico(fila["Cantidad"].ToString());
                 DGV_EvalSemProve.Rows[_index].Cells["FechaEntrega"].Value = fila["fecha"].ToString();
-                
+
                 DGV_EvalSemProve.Rows[_index].Cells["Liberada"].Value = fila["Liberada"].ToString();
                 DGV_EvalSemProve.Rows[_index].Cells["Laudo"].Value = fila["Laudo"].ToString();
                 DGV_EvalSemProve.Rows[_index].Cells["Devuelta"].Value = fila["Devuelta"].ToString();
                 DGV_EvalSemProve.Rows[_index].Cells["Rechazado"].Value = _DeterminarRechazado(fila["Devuelta"].ToString());
+
+                DGV_EvalSemProve.Rows[_index].Cells["Cantidad"].Value = Helper.FormatoNumerico(fila["Liberada"].ToString());
+
                 DGV_EvalSemProve.Rows[_index].Cells["SaldoOC"].Value = Helper.FormatoNumerico(fila["SaldoOC"].ToString());
                 DGV_EvalSemProve.Rows[_index].Cells["DesconOC"].Value = Helper.FormatoNumerico(fila["DesconOC"].ToString());
                 DGV_EvalSemProve.Rows[_index].Cells["EnvaseOC"].Value = fila["EnvaseOC"].ToString();

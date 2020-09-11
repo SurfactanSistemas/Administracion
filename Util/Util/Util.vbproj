@@ -133,6 +133,12 @@
     <Compile Include="Auxiliares\VistaPrevia.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Auxiliares\VistaPreviaDb.Designer.vb">
+      <DependentUpon>VistaPreviaDb.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Auxiliares\VistaPreviaDb.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Clases\Conexion.vb" />
     <Compile Include="Clases\Enumeraciones.vb" />
     <Compile Include="Clases\ExtMethods.vb" />
@@ -245,6 +251,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Auxiliares\VistaPrevia.resx">
       <DependentUpon>VistaPrevia.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Auxiliares\VistaPreviaDb.resx">
+      <DependentUpon>VistaPreviaDb.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Consultas\ListaConsultas.resx">
       <DependentUpon>ListaConsultas.vb</DependentUpon>

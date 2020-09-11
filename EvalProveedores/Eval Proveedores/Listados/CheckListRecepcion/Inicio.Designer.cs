@@ -33,11 +33,13 @@
             this.LBChofer = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.cmbTipo = new System.Windows.Forms.ComboBox();
             this.BT_Pantalla = new System.Windows.Forms.Button();
             this.BT_Imprimir = new System.Windows.Forms.Button();
             this.BT_Salir = new System.Windows.Forms.Button();
             this.TB_Hasta = new System.Windows.Forms.MaskedTextBox();
             this.TB_Desde = new System.Windows.Forms.MaskedTextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
@@ -77,17 +79,31 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.Control;
+            this.panel3.Controls.Add(this.cmbTipo);
             this.panel3.Controls.Add(this.BT_Pantalla);
             this.panel3.Controls.Add(this.BT_Imprimir);
             this.panel3.Controls.Add(this.BT_Salir);
             this.panel3.Controls.Add(this.TB_Hasta);
             this.panel3.Controls.Add(this.TB_Desde);
+            this.panel3.Controls.Add(this.label3);
             this.panel3.Controls.Add(this.label2);
             this.panel3.Controls.Add(this.label1);
             this.panel3.Location = new System.Drawing.Point(7, 7);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(373, 233);
             this.panel3.TabIndex = 0;
+            // 
+            // cmbTipo
+            // 
+            this.cmbTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTipo.FormattingEnabled = true;
+            this.cmbTipo.Items.AddRange(new object[] {
+            "EXPORTACIONES",
+            "ENVASES"});
+            this.cmbTipo.Location = new System.Drawing.Point(172, 118);
+            this.cmbTipo.Name = "cmbTipo";
+            this.cmbTipo.Size = new System.Drawing.Size(121, 21);
+            this.cmbTipo.TabIndex = 82;
             // 
             // BT_Pantalla
             // 
@@ -130,7 +146,7 @@
             // 
             // TB_Hasta
             // 
-            this.TB_Hasta.Location = new System.Drawing.Point(193, 87);
+            this.TB_Hasta.Location = new System.Drawing.Point(193, 73);
             this.TB_Hasta.Mask = "00/00/0000";
             this.TB_Hasta.Name = "TB_Hasta";
             this.TB_Hasta.PromptChar = ' ';
@@ -141,7 +157,7 @@
             // 
             // TB_Desde
             // 
-            this.TB_Desde.Location = new System.Drawing.Point(193, 42);
+            this.TB_Desde.Location = new System.Drawing.Point(193, 28);
             this.TB_Desde.Mask = "00/00/0000";
             this.TB_Desde.Name = "TB_Desde";
             this.TB_Desde.PromptChar = ' ';
@@ -151,11 +167,21 @@
             this.TB_Desde.ValidatingType = typeof(System.DateTime);
             this.TB_Desde.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Desde_KeyDown);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(55, 118);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(39, 18);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Tipo:";
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(55, 87);
+            this.label2.Location = new System.Drawing.Point(55, 73);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(85, 18);
             this.label2.TabIndex = 2;
@@ -165,7 +191,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(55, 45);
+            this.label1.Location = new System.Drawing.Point(55, 31);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(90, 18);
             this.label1.TabIndex = 1;
@@ -183,6 +209,7 @@
             this.MaximumSize = new System.Drawing.Size(402, 323);
             this.MinimumSize = new System.Drawing.Size(402, 323);
             this.Name = "Inicio";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.Inicio_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -206,5 +233,7 @@
         private System.Windows.Forms.MaskedTextBox TB_Desde;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox cmbTipo;
     }
 }
