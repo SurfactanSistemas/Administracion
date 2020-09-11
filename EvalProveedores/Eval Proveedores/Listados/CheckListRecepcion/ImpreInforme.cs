@@ -33,7 +33,7 @@ namespace Eval_Proveedores.Listados.CheckListRecepcion
             this.Tipo = Tipo;
             InitializeComponent();
         }
-
+        
         private void ImpreInforme_Load(object sender, EventArgs e)
         {
             DSInforme Ds = new DSInforme();
