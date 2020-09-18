@@ -321,20 +321,20 @@ Public Class Analisis_Cumplimiento_PedidosDeVentas
                             End If
                         Next
 
-                        REM 1 - DOMINGO
-                        REM 2 - LUNES
-                        REM 3 - MARTES
-                        REM 4 - MIERCOLES
-                        REM 5 - JUEVES
-                        REM 6 - VIERNES
-                        REM 7 - SABADO
+                        REM 0 - DOMINGO
+                        REM 1 - LUNES
+                        REM 2 - MARTES
+                        REM 3 - MIERCOLES
+                        REM 4 - JUEVES
+                        REM 5 - VIERNES
+                        REM 6 - SABADO
 
                         Dim XFec1 As String = WFechaDesde
                         ' Dim strDia As String = Format$(XFec1, "dddd")
                         Dim Xfec1Date As Date = XFec1
                         Dim Bdia As Integer = Xfec1Date.DayOfWeek
                         'Dim BDia As Integer = Format(XFec1, "w")
-                        If BDia = 1 Or BDia = 7 Then
+                        If Bdia = 0 Or Bdia = 6 Then
                             Feriado = "S"
                         End If
 
@@ -664,5 +664,9 @@ Public Class Analisis_Cumplimiento_PedidosDeVentas
         cbx_Tipo.SelectedIndex = 0
         cbx_FechaEntrega.SelectedIndex = 0
         cbx_FechaPedido.SelectedIndex = 0
+    End Sub
+
+    Private Sub Analisis_Cumplimiento_PedidosDeVentas_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        txt_DesdeFecha.Focus()
     End Sub
 End Class

@@ -156,12 +156,12 @@ Public Class Listado_CtaCte_deClientes_aFecha : Implements IBuscarClienteCashFlo
             For Each RowReci As DataRow In TablaReci.Rows
 
                 TablaReciAux.Rows.Add()
-                TablaReci.Rows(Renglon).Item("Tipo") = RowReci.Item("Tipo1")
-                TablaReci.Rows(Renglon).Item("Numero") = RowReci.Item("Numero1")
-                TablaReci.Rows(Renglon).Item("Importe") = RowReci.Item("Importe1")
-                TablaReci.Rows(Renglon).Item("Clave") = RowReci.Item("Clave")
-                TablaReci.Rows(Renglon).Item("Recibo") = RowReci.Item("Recibo")
-                TablaReci.Rows(Renglon).Item("Cliente") = RowReci.Item("Cliente")
+                TablaReciAux.Rows(Renglon).Item("Tipo") = RowReci.Item("Tipo1")
+                TablaReciAux.Rows(Renglon).Item("Numero") = RowReci.Item("Numero1")
+                TablaReciAux.Rows(Renglon).Item("Importe") = RowReci.Item("Importe1")
+                TablaReciAux.Rows(Renglon).Item("Clave") = RowReci.Item("Clave")
+                TablaReciAux.Rows(Renglon).Item("Recibo") = RowReci.Item("Recibo")
+                TablaReciAux.Rows(Renglon).Item("Cliente") = RowReci.Item("Cliente")
 
                 Renglon += 1
             Next

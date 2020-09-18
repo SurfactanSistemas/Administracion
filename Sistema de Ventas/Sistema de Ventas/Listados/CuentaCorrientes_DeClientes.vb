@@ -201,8 +201,10 @@ Public Class CuentaCorrientes_DeClientes : Implements IBuscarClienteCashFlow
                                        & "OR (OrdVencimiento >= '" & WDesdeFecha & "' AND OrdVencimiento <= '" & WHastaFecha & "'))"
             End If
 
+            SQLCnslt = SQLCnslt & "ORDER BY Cliente"
 
-
+            Dim Acumulado As Double = 0
+            Dim ClienteAnterior As String = "A00000"
             Dim tablaCtaCte As DataTable = GetAll(SQLCnslt, Operador.Base)
 
             If tablaCtaCte.Rows.Count > 0 Then
@@ -291,7 +293,16 @@ Public Class CuentaCorrientes_DeClientes : Implements IBuscarClienteCashFlow
                                     .Item("Importe1") = Val(formatonumerico(WImporte1))
                                     .Item("Importe2") = Val(formatonumerico(WImporte2))
                                     .Item("Importe3") = Val(formatonumerico(WImporte3))
-                                    .Item("Importe4") = Val(formatonumerico(WImporte4))
+
+                                    If ClienteAnterior <> WCliente Then
+                                        Acumulado = 0
+                                    End If
+                                    ClienteAnterior = WCliente
+
+                                    Acumulado = Acumulado + Val(formatonumerico(WImporte3))
+                                    WImporte4 = Acumulado
+                                    '.Item("Importe4") = Val(formatonumerico(WImporte4))
+                                    .Item("Importe4") = WImporte4
                                 End With
 
 

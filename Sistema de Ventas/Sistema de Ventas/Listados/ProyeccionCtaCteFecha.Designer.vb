@@ -32,10 +32,10 @@ Partial Class ProyeccionCtaCteFecha
         Me.label1 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.txt_DesdeFecha = New System.Windows.Forms.MaskedTextBox()
-        Me.txt_HastaFecha = New System.Windows.Forms.MaskedTextBox()
         Me.rabtn_Dolares = New System.Windows.Forms.RadioButton()
         Me.rabtn_Pesos = New System.Windows.Forms.RadioButton()
+        Me.txt_DesdeFecha = New System.Windows.Forms.MaskedTextBox()
+        Me.txt_HastaFecha = New System.Windows.Forms.MaskedTextBox()
         Me.panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
@@ -144,24 +144,6 @@ Partial Class ProyeccionCtaCteFecha
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Moneda"
         '
-        'txt_DesdeFecha
-        '
-        Me.txt_DesdeFecha.Location = New System.Drawing.Point(104, 59)
-        Me.txt_DesdeFecha.Mask = "00/00/0000"
-        Me.txt_DesdeFecha.Name = "txt_DesdeFecha"
-        Me.txt_DesdeFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txt_DesdeFecha.Size = New System.Drawing.Size(72, 20)
-        Me.txt_DesdeFecha.TabIndex = 79
-        '
-        'txt_HastaFecha
-        '
-        Me.txt_HastaFecha.Location = New System.Drawing.Point(104, 88)
-        Me.txt_HastaFecha.Mask = "00/00/0000"
-        Me.txt_HastaFecha.Name = "txt_HastaFecha"
-        Me.txt_HastaFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txt_HastaFecha.Size = New System.Drawing.Size(72, 20)
-        Me.txt_HastaFecha.TabIndex = 80
-        '
         'rabtn_Dolares
         '
         Me.rabtn_Dolares.AutoSize = True
@@ -183,6 +165,24 @@ Partial Class ProyeccionCtaCteFecha
         Me.rabtn_Pesos.TabStop = True
         Me.rabtn_Pesos.Text = "Pesos"
         Me.rabtn_Pesos.UseVisualStyleBackColor = True
+        '
+        'txt_DesdeFecha
+        '
+        Me.txt_DesdeFecha.Location = New System.Drawing.Point(104, 59)
+        Me.txt_DesdeFecha.Mask = "00/00/0000"
+        Me.txt_DesdeFecha.Name = "txt_DesdeFecha"
+        Me.txt_DesdeFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txt_DesdeFecha.Size = New System.Drawing.Size(72, 20)
+        Me.txt_DesdeFecha.TabIndex = 79
+        '
+        'txt_HastaFecha
+        '
+        Me.txt_HastaFecha.Location = New System.Drawing.Point(104, 88)
+        Me.txt_HastaFecha.Mask = "00/00/0000"
+        Me.txt_HastaFecha.Name = "txt_HastaFecha"
+        Me.txt_HastaFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txt_HastaFecha.Size = New System.Drawing.Size(72, 20)
+        Me.txt_HastaFecha.TabIndex = 80
         '
         'ProyeccionCtaCteFecha
         '

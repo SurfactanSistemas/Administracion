@@ -14,7 +14,7 @@ Public Class Listado_CtaCte_Analitico : Implements IBuscarClienteCashFlow
 
 
     Private Sub btn_Consulta_Click(sender As Object, e As EventArgs) Handles btn_Consulta.Click
-        With ConsultaCliente
+        With New ConsultaCliente
             .Show(Me)
         End With
     End Sub
@@ -163,10 +163,21 @@ Public Class Listado_CtaCte_Analitico : Implements IBuscarClienteCashFlow
 
     End Sub
 
-    Private Sub Listado_CtaCte_Analitico_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        txt_Fecha.Text = "01/05/2020"
-        txt_DesdeCodigo.Text = "A00000"
-        txt_HastaCodigo.Text = "Z99999"
-        txt_Dias.Text = 90
+  
+
+    Private Sub Listado_CtaCte_Analitico_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        txt_Fecha.Text = Date.Today.ToString("dd/MM/yyyy")
+    End Sub
+
+    Private Sub txt_DesdeCodigo_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles txt_DesdeCodigo.MouseDoubleClick
+        With New ConsultaCliente
+            .Show(Me)
+        End With
+    End Sub
+
+    Private Sub txt_HastaCodigo_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles txt_HastaCodigo.MouseDoubleClick
+        With New ConsultaCliente
+            .Show(Me)
+        End With
     End Sub
 End Class

@@ -41,7 +41,7 @@ Public Class Consulta_CtaCteClientes_XPantalla : Implements IBuscarClienteCashFl
         End If
         If rabtn_Documentos.Checked Then
 
-            SQLCnslt = SQLCnslt & " AND (Tipo >= 50 OR Tipo <> 60)"
+            SQLCnslt = SQLCnslt & " AND Tipo >= 50 AND Tipo <> 60"
             
         End If
         'FIN FILTRO Tipo de listado
@@ -266,8 +266,8 @@ Public Class Consulta_CtaCteClientes_XPantalla : Implements IBuscarClienteCashFl
         If chk_RevertirOrd.Checked Then
             WSaldo = 0
             For ciclo = (DGV_CtaCte.Rows.Count - 1) To 0 Step -1
-                WSaldo = WSaldo + Val(DGV_CtaCte.Rows(Renglon).Cells("Saldo").Value)
-                DGV_CtaCte.Rows(Renglon).Cells("Acumulado").Value = formatonumerico(WSaldo)
+                WSaldo = WSaldo + Val(DGV_CtaCte.Rows(ciclo).Cells("Saldo").Value)
+                DGV_CtaCte.Rows(ciclo).Cells("Acumulado").Value = formatonumerico(WSaldo)
             Next
         End If
         
@@ -348,7 +348,7 @@ Public Class Consulta_CtaCteClientes_XPantalla : Implements IBuscarClienteCashFl
                                  & "ct.ordfecha, ct.ordvencimiento, ct.ordvencimiento1, ct.Importe1, ct.importe2, " _
                                  & "ct.importe3, ct.importe4 " _
                                  & " FROM Ctacte ct INNER JOIN Cliente C ON ct.Cliente = c.Cliente" _
-                                 & " Where ct.Cliente >=  '" & WCliente & "'"
+                                 & " Where ct.Cliente =  '" & WCliente & "' and ct.saldo <> 0"
         If chk_Ultimos5.Checked Then
             Dim año As Integer = Date.Today.Year - 5
             Dim OrdFechaActual As String = año & Date.Today.Month.ToString().PadLeft(2, "0") & Date.Today.Day.ToString().ToString().PadLeft(2, "0")
@@ -459,5 +459,57 @@ Public Class Consulta_CtaCteClientes_XPantalla : Implements IBuscarClienteCashFl
         With New DatosdeCliente(txt_Cliente.Text)
             .Show(Me)
         End With
+    End Sub
+
+    Private Sub DGV_CtaCte_SortCompare(sender As Object, e As DataGridViewSortCompareEventArgs) Handles DGV_CtaCte.SortCompare
+
+        Dim num1, num2
+
+        Select Case e.Column.Index
+            Case 0
+                'String
+                num1 = e.CellValue1
+                num2 = e.CellValue2
+
+            Case 1
+                'INTEGER
+                num1 = CInt(e.CellValue1)
+                num2 = CInt(e.CellValue2)
+          
+            Case 2, 6, 7
+                'Fechas
+                num1 = ordenaFecha(e.CellValue1)
+                num2 = ordenaFecha(e.CellValue2)
+
+            Case 3, 4, 5, 8
+                'Numericos con coma
+                num1 = CDbl(Val(e.CellValue1))
+                num2 = CDbl(Val(e.CellValue2))
+            Case Else
+                Exit Sub
+        End Select
+
+        If num1 < num2 Then
+            e.SortResult = -1
+        ElseIf num1 = num2 Then
+            e.SortResult = 0
+        Else
+            e.SortResult = 1
+        End If
+
+        e.Handled = True
+
+    End Sub
+
+  
+
+    Private Sub txt_Cliente_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles txt_Cliente.MouseDoubleClick
+        With New ConsultaCliente()
+            .Show(Me)
+        End With
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        txt_Cliente_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
     End Sub
 End Class

@@ -22,12 +22,12 @@ Partial Class Consulta_CtaCteClientes_XPantalla
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.label1 = New System.Windows.Forms.Label()
@@ -63,6 +63,7 @@ Partial Class Consulta_CtaCteClientes_XPantalla
         Me.Vencimiento = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.VencimientoII = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Acumulado = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -221,7 +222,7 @@ Partial Class Consulta_CtaCteClientes_XPantalla
         Me.GroupBox3.Controls.Add(Me.rabtn_CtaCte)
         Me.GroupBox3.Location = New System.Drawing.Point(445, 56)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(117, 84)
+        Me.GroupBox3.Size = New System.Drawing.Size(117, 62)
         Me.GroupBox3.TabIndex = 46
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Tipo de Listado"
@@ -229,19 +230,17 @@ Partial Class Consulta_CtaCteClientes_XPantalla
         'rabtn_Total
         '
         Me.rabtn_Total.AutoSize = True
-        Me.rabtn_Total.Checked = True
-        Me.rabtn_Total.Location = New System.Drawing.Point(6, 55)
+        Me.rabtn_Total.Location = New System.Drawing.Point(6, 45)
         Me.rabtn_Total.Name = "rabtn_Total"
         Me.rabtn_Total.Size = New System.Drawing.Size(49, 17)
         Me.rabtn_Total.TabIndex = 4
-        Me.rabtn_Total.TabStop = True
         Me.rabtn_Total.Text = "Total"
         Me.rabtn_Total.UseVisualStyleBackColor = True
         '
         'rabtn_Documentos
         '
         Me.rabtn_Documentos.AutoSize = True
-        Me.rabtn_Documentos.Location = New System.Drawing.Point(6, 38)
+        Me.rabtn_Documentos.Location = New System.Drawing.Point(6, 28)
         Me.rabtn_Documentos.Name = "rabtn_Documentos"
         Me.rabtn_Documentos.Size = New System.Drawing.Size(85, 17)
         Me.rabtn_Documentos.TabIndex = 3
@@ -251,10 +250,12 @@ Partial Class Consulta_CtaCteClientes_XPantalla
         'rabtn_CtaCte
         '
         Me.rabtn_CtaCte.AutoSize = True
-        Me.rabtn_CtaCte.Location = New System.Drawing.Point(6, 22)
+        Me.rabtn_CtaCte.Checked = True
+        Me.rabtn_CtaCte.Location = New System.Drawing.Point(6, 12)
         Me.rabtn_CtaCte.Name = "rabtn_CtaCte"
         Me.rabtn_CtaCte.Size = New System.Drawing.Size(66, 17)
         Me.rabtn_CtaCte.TabIndex = 2
+        Me.rabtn_CtaCte.TabStop = True
         Me.rabtn_CtaCte.Text = "Cta. Cte."
         Me.rabtn_CtaCte.UseVisualStyleBackColor = True
         '
@@ -330,14 +331,14 @@ Partial Class Consulta_CtaCteClientes_XPantalla
         Me.DGV_CtaCte.AllowUserToAddRows = False
         Me.DGV_CtaCte.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_CtaCte.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Tipo, Me.Numero, Me.Fecha, Me.Debito, Me.Credito, Me.Saldo, Me.Vencimiento, Me.VencimientoII, Me.Acumulado})
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGV_CtaCte.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle18.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle18.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle18.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle18.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGV_CtaCte.DefaultCellStyle = DataGridViewCellStyle18
         Me.DGV_CtaCte.DoubleBuffered = True
         Me.DGV_CtaCte.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.DGV_CtaCte.Location = New System.Drawing.Point(14, 153)
@@ -352,64 +353,101 @@ Partial Class Consulta_CtaCteClientes_XPantalla
         '
         'Tipo
         '
+        Me.Tipo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Tipo.HeaderText = "Tipo"
         Me.Tipo.Name = "Tipo"
+        Me.Tipo.ReadOnly = True
+        Me.Tipo.Width = 53
         '
         'Numero
         '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Numero.DefaultCellStyle = DataGridViewCellStyle1
+        Me.Numero.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Numero.DefaultCellStyle = DataGridViewCellStyle13
         Me.Numero.HeaderText = "Numero"
         Me.Numero.Name = "Numero"
+        Me.Numero.ReadOnly = True
+        Me.Numero.Width = 69
         '
         'Fecha
         '
+        Me.Fecha.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Fecha.HeaderText = "Fecha"
         Me.Fecha.Name = "Fecha"
+        Me.Fecha.ReadOnly = True
+        Me.Fecha.Width = 62
         '
         'Debito
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Debito.DefaultCellStyle = DataGridViewCellStyle2
+        Me.Debito.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Debito.DefaultCellStyle = DataGridViewCellStyle14
         Me.Debito.HeaderText = "Debito"
         Me.Debito.Name = "Debito"
+        Me.Debito.ReadOnly = True
+        Me.Debito.Width = 63
         '
         'Credito
         '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Credito.DefaultCellStyle = DataGridViewCellStyle3
+        Me.Credito.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Credito.DefaultCellStyle = DataGridViewCellStyle15
         Me.Credito.HeaderText = "Credito"
         Me.Credito.Name = "Credito"
+        Me.Credito.ReadOnly = True
+        Me.Credito.Width = 65
         '
         'Saldo
         '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Saldo.DefaultCellStyle = DataGridViewCellStyle4
+        Me.Saldo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Saldo.DefaultCellStyle = DataGridViewCellStyle16
         Me.Saldo.HeaderText = "Saldo"
         Me.Saldo.Name = "Saldo"
+        Me.Saldo.ReadOnly = True
+        Me.Saldo.Width = 59
         '
         'Vencimiento
         '
+        Me.Vencimiento.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Vencimiento.HeaderText = "Vencimiento"
         Me.Vencimiento.Name = "Vencimiento"
+        Me.Vencimiento.ReadOnly = True
+        Me.Vencimiento.Width = 90
         '
         'VencimientoII
         '
+        Me.VencimientoII.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.VencimientoII.HeaderText = "VencimientoII"
         Me.VencimientoII.Name = "VencimientoII"
+        Me.VencimientoII.ReadOnly = True
+        Me.VencimientoII.Width = 96
         '
         'Acumulado
         '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Acumulado.DefaultCellStyle = DataGridViewCellStyle5
+        Me.Acumulado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Acumulado.DefaultCellStyle = DataGridViewCellStyle17
         Me.Acumulado.HeaderText = "Acumulado"
         Me.Acumulado.Name = "Acumulado"
+        Me.Acumulado.ReadOnly = True
+        Me.Acumulado.Width = 85
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(458, 120)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(98, 27)
+        Me.Button1.TabIndex = 54
+        Me.Button1.Text = "LEE DATOS"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'Consulta_CtaCteClientes_XPantalla
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(772, 440)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.btn_Listar)
         Me.Controls.Add(Me.btn_Cerrar)
         Me.Controls.Add(Me.btn_ConsultaCliente)
@@ -478,4 +516,5 @@ Partial Class Consulta_CtaCteClientes_XPantalla
     Friend WithEvents Vencimiento As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents VencimientoII As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Acumulado As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Button1 As System.Windows.Forms.Button
 End Class

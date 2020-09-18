@@ -63,7 +63,7 @@ Public Class Listado_CalculoCosto_ImportacionXCarpeta
 
         Dim WArancel As String = ""
         Dim WOrden As String = ""
-        Dim WEmpresaOtro As String = ""
+        Dim WEmpresaOtro As Integer = 0
 
         SQLCnslt = "SELECT Marca, Derechos, Orden, Empresa, Concepto, Importe " _
                     & "FROM Movgas " _
@@ -175,10 +175,10 @@ Public Class Listado_CalculoCosto_ImportacionXCarpeta
 
                 TablaVector.Rows(Renglon).Item("Carpeta") = txt_Carpeta.Text
                 TablaVector.Rows(Renglon).Item("Articulo") = rowOrden.Item("Articulo")
-                TablaVector.Rows(Renglon).Item("Cantidad") = Str$(rowOrden.Item("Cantidad"))
+                TablaVector.Rows(Renglon).Item("Cantidad") = rowOrden.Item("Cantidad")
                 TablaVector.Rows(Renglon).Item("Precio") = Str$(ZZPrecio)
                 TablaVector.Rows(Renglon).Item("Total") = Str$(rowOrden.Item("Cantidad") * ZZPrecio)
-
+                
                 If IsDBNull(rowOrden.Item("Derechos")) Then
                     TablaVector.Rows(Renglon).Item("Derechos") = ""
                 Else
@@ -221,36 +221,45 @@ Public Class Listado_CalculoCosto_ImportacionXCarpeta
             End If
             'aa = Vector(Ciclo, 2)
             WCosto = Val(Rowvector.Item("Precio")) + WSeguro + WFlete
-            WCosto = formatonumerico(WCosto)
+            WCosto = Val(formatonumerico(WCosto))
             Rowvector.Item("Precio") = Str$(WCosto)
 
 
 
             Dim WArticulo As String = Rowvector.Item("Articulo")
+            Dim TotalAux As Double
 
             SQLCnslt = "SELECT * FROM Articulo WHERE Codigo = '" & WArticulo & "'"
             Dim RowArti As DataRow = GetSingle(SQLCnslt, Operador.Base)
             If RowArti IsNot Nothing Then
-                Rowvector.Item("Total") = Str$(Val(Rowvector.Item("Cantidad")) * Val(Rowvector.Item("Precio")))
-                Dim XArancel As Double = Val(Rowvector.Item("Total")) * Val(Rowvector.Item("Derechos")) / 100
+                TotalAux = Val(formatonumerico(Rowvector.Item("Cantidad") * Val(Rowvector.Item("Precio")), 2))
+                Rowvector.Item("Total") = TotalAux
 
-                Rowvector.Item("TotalXArancel") = Str$(Val(Rowvector.Item("Total")) + XArancel)
+
+                Dim DerechosAux As Double = Val(formatonumerico(Rowvector.Item("Derechos")))
+
+                Dim XArancel As Double = Val(formatonumerico((TotalAux * DerechosAux / 100), 3))
+
+                Dim TotalXArancelAux As Double = Val(Rowvector.Item("Total")) + XArancel
+                Rowvector.Item("TotalXArancel") = TotalXArancelAux
                 WTotal = WTotal + Val(Rowvector.Item("Total"))
                 ImpoArancel = ImpoArancel + XArancel
 
             End If
 
+        Next
 
 
-
+        For Each Rowvector As DataRow In TablaVector.Rows
             If WTotal <> 0 Then
-                Rowvector.Item("GastosImpo") = Str$((Val(Rowvector.Item("Total")) / WTotal) * ImpoGastos)
+                Dim TotalAux As Double = Rowvector.Item("Total")
+                'Dim GastosImpoAux as double= Str$((Val(Rowvector.Item("Total")) / WTotal) * ImpoGastos)
+                Dim GastosImpoAux As Double = (TotalAux / WTotal) * ImpoGastos
+                Rowvector.Item("GastosImpo") = GastosImpoAux
             End If
             If Val(Rowvector.Item("Cantidad")) <> 0 Then
                 Rowvector.Item("GastosTotal") = Str$((Val(Rowvector.Item("TotalXArancel")) + Val(Rowvector.Item("GastosImpo"))) / Val(Rowvector.Item("Cantidad")))
             End If
-           
-
 
         Next
 
@@ -263,7 +272,7 @@ Public Class Listado_CalculoCosto_ImportacionXCarpeta
             WCoeficiente = ""
         End If
 
-     
+
 
 
 
@@ -272,7 +281,7 @@ Public Class Listado_CalculoCosto_ImportacionXCarpeta
         Dim XLeyenda As String = Str$(WLeyenda)
         For Each Rowvector As DataRow In TablaVector.Rows
 
-            
+
             SQLCnslt = "INSERT INTO  Carpeta(" _
                          & "Carpeta," _
                          & "Articulo, " _
@@ -287,14 +296,14 @@ Public Class Listado_CalculoCosto_ImportacionXCarpeta
                          & "Clave, " _
                          & "Leyenda) " _
                          & "VALUES(" _
-                         & "	'" & Rowvector.Item("Carpeta") & "', " _
+                         & "'" & Rowvector.Item("Carpeta") & "', " _
                          & "'" & Rowvector.Item("Articulo") & "', " _
                          & "'" & Rowvector.Item("Cantidad") & "', " _
                          & "'" & Rowvector.Item("Precio") & "', " _
-                         & "'" & Rowvector.Item("Total") & "', " _
+                         & "'" & Rowvector.Item("Total").ToString().Replace(",", ".") & "', " _
                          & "'" & Rowvector.Item("Derechos") & "', " _
-                         & "'" & Rowvector.Item("TotalXArancel") & "', " _
-                         & "'" & Rowvector.Item("GastosImpo") & "', " _
+                         & "'" & Rowvector.Item("TotalXArancel").ToString().Replace(",", ".") & "', " _
+                         & "'" & Rowvector.Item("GastosImpo").ToString().Replace(",", ".") & "', " _
                          & "'" & Rowvector.Item("GastosTotal") & "', " _
                          & "'" & WCoeficiente & "', " _
                          & "'" & Rowvector.Item("Clave") & "', " _
@@ -303,11 +312,11 @@ Public Class Listado_CalculoCosto_ImportacionXCarpeta
             ListaSQLCnslt.Add(SQLCnslt)
 
         Next
-        
+
         If ListaSQLCnslt.Count > 0 Then
             ExecuteNonQueries(ListaSQLCnslt.ToArray(), Operador.Base)
         End If
-        
+
 
 
 

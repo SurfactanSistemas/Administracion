@@ -248,7 +248,7 @@ Public Class LIstado_Proyeccion_CtaCteClienteAnalitico : Implements IBuscarClien
     End Sub
 
     Private Sub btn_Consulta_Click(sender As Object, e As EventArgs) Handles btn_Consulta.Click
-        With ConsultaCliente
+        With New ConsultaCliente
             .Show(Me)
         End With
     End Sub
@@ -268,4 +268,21 @@ Public Class LIstado_Proyeccion_CtaCteClienteAnalitico : Implements IBuscarClien
     End Sub
 
     
+    Private Sub LIstado_Proyeccion_CtaCteClienteAnalitico_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        txt_Fecha.Text = Date.Today.ToString("dd/MM/yyyy")
+        cbx_Tipo.SelectedIndex = 0
+    End Sub
+
+   
+    Private Sub txt_DesdeCodigo_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles txt_DesdeCodigo.MouseDoubleClick
+        With New ConsultaCliente
+            .Show(Me)
+        End With
+    End Sub
+
+    Private Sub txt_HastaCodigo_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles txt_HastaCodigo.MouseDoubleClick
+        With New ConsultaCliente
+            .Show(Me)
+        End With
+    End Sub
 End Class

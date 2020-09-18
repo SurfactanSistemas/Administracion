@@ -356,4 +356,34 @@ Public Class ProyeccionCtaCteFecha
 
 
     End Sub
+
+    Private Sub ProyeccionCtaCteFecha_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        txt_DesdeFecha.Focus()
+    End Sub
+
+    Private Sub txt_DesdeFecha_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_DesdeFecha.KeyDown
+        Select Case e.KeyData
+            Case Keys.Enter
+                If ValidaFecha(txt_DesdeFecha.Text) = "S" Then
+                    txt_HastaFecha.Focus()
+                Else
+                    MsgBox("La fecha desde es invalida, verificar")
+                    txt_DesdeFecha.SelectAll()
+                End If
+            Case Keys.Escape
+                txt_DesdeFecha.Text = ""
+        End Select
+    End Sub
+
+    Private Sub txt_HastaFecha_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_HastaFecha.KeyDown
+        Select Case e.KeyData
+            Case Keys.Enter
+                If ValidaFecha(txt_HastaFecha.Text) <> "S" Then
+                    MsgBox("La fecha hasta es invalida, verificar")
+                    txt_HastaFecha.SelectAll()
+                End If
+            Case Keys.Escape
+                txt_HastaFecha.Text = ""
+        End Select
+    End Sub
 End Class
