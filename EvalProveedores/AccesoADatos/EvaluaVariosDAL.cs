@@ -4,6 +4,7 @@ using Negocio;
 using System.Data;
 using System.Data.SqlClient;
 using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace AccesoADatos
 {
@@ -79,45 +80,46 @@ namespace AccesoADatos
                     SqlDataReader dataReader = cmd.ExecuteReader();
                     if (dataReader.Read())
                     {
+                        MessageBox.Show(Helper.OrDefault(dataReader["Califica11"], "0").ToString());
                         EvaluaVarios Eva = new EvaluaVarios
                         {
-                            Clave = Convert.ToString(dataReader["Clave"]),
-                            Proveedor = Convert.ToString(dataReader["Proveedor"]),
-                            Mes = Convert.ToInt32(dataReader["Mes"]),
-                            Año = Convert.ToInt32(dataReader["Ano"]),
-                            PromedioTot = Convert.ToDouble(dataReader["Promedio"]),
-                            Promedio11 = Convert.ToDouble(dataReader["Promedio11"]),
-                            Promedio22 = Convert.ToDouble(dataReader["Promedio22"]),
-                            Promedio33 = Convert.ToDouble(dataReader["Promedio33"]),
-                            Observ = Convert.ToString(dataReader["Observaciones"]),
-                            Periodo = Convert.ToString(dataReader["Periodo"]),
-                            Tipo = Convert.ToInt32(dataReader["Tipo"]),
-                            Param1 = Convert.ToString(dataReader["Parametro1"]),
-                            Param2 = Convert.ToString(dataReader["Parametro2"]),
-                            Param3 = Convert.ToString(dataReader["Parametro3"]),
-                            Param4 = Convert.ToString(dataReader["Parametro4"]),
-                            Criterio1 = Convert.ToString(dataReader["Criterio1"]),
-                            Criterio2 = Convert.ToString(dataReader["Criterio2"]),
-                            Criterio3 = Convert.ToString(dataReader["Criterio3"]),
-                            Criterio4 = Convert.ToString(dataReader["Criterio4"]),
-                            Calif11 = Convert.ToInt32(dataReader["Califica11"]),
-                            Calif12 = Convert.ToInt32(dataReader["Califica12"]),
-                            Calif13 = Convert.ToInt32(dataReader["Califica13"]),
-                            Calif14 = Convert.ToInt32(dataReader["Califica14"]),
-                            Calif21 = Convert.ToInt32(dataReader["Califica21"]),
-                            Calif22 = Convert.ToInt32(dataReader["Califica22"]),
-                            Calif23 = Convert.ToInt32(dataReader["Califica23"]),
-                            Calif24 = Convert.ToInt32(dataReader["Califica24"]),
-                            Calif31 = Convert.ToInt32(dataReader["Califica31"]),
-                            Calif32 = Convert.ToInt32(dataReader["Califica32"]),
-                            Calif33 = Convert.ToInt32(dataReader["Califica33"]),
-                            Calif34 = Convert.ToInt32(dataReader["Califica34"]),
-                            Sector1 = Convert.ToInt32(dataReader["Sector1"]),
-                            Sector2 = Convert.ToInt32(dataReader["Sector2"]),
-                            Sector3 = Convert.ToInt32(dataReader["Sector3"]),
-                            DesSector1 = Convert.ToString(dataReader["DesSector1"]),
-                            DesSector2 = Convert.ToString(dataReader["DesSector2"]),
-                            DesSector3 = Convert.ToString(dataReader["DesSector3"]),
+                            Clave = Helper.OrDefault(dataReader["Clave"], "").ToString(),
+                            Proveedor = Helper.OrDefault(dataReader["Proveedor"], "").ToString(),
+                            Mes = (int) Helper.OrDefault(dataReader["Mes"], ""),
+                            Año = (int) Helper.OrDefault(dataReader["Ano"], "0"),
+                            PromedioTot = (double) Helper.OrDefault(dataReader["Promedio"], "0,0"),
+                            Promedio11 = (double) Helper.OrDefault(dataReader["Promedio11"], "0,0"),
+                            Promedio22 =  (double) Helper.OrDefault(dataReader["Promedio22"], "0,0"),
+                            Promedio33 =  (double) Helper.OrDefault(dataReader["Promedio33"], "0,0"),
+                            Observ = Helper.OrDefault(dataReader["Observaciones"], "").ToString(),
+                            Periodo = Helper.OrDefault(dataReader["Periodo"], "").ToString(),
+                            Tipo = Convert.ToInt32(Helper.OrDefault(dataReader["Tipo"], "").ToString()),
+                            Param1 = Helper.OrDefault(dataReader["Parametro1"], "").ToString(),
+                            Param2 = Helper.OrDefault(dataReader["Parametro2"], "").ToString(),
+                            Param3 = Helper.OrDefault(dataReader["Parametro3"], "").ToString(),
+                            Param4 = Helper.OrDefault(dataReader["Parametro4"], "").ToString(),
+                            Criterio1 = Helper.OrDefault(dataReader["Criterio1"], "").ToString(),
+                            Criterio2 = Helper.OrDefault(dataReader["Criterio2"], "").ToString(),
+                            Criterio3 = Helper.OrDefault(dataReader["Criterio3"], "").ToString(),
+                            Criterio4 = Helper.OrDefault(dataReader["Criterio4"], "").ToString(),
+                            Calif11 = Convert.ToInt32(Helper.OrDefault(dataReader["Califica11"], "0")),
+                            Calif12 = Convert.ToInt32(Helper.OrDefault(dataReader["Califica12"], "0")),
+                            Calif13 = Convert.ToInt32(Helper.OrDefault(dataReader["Califica13"], "0")),
+                            Calif14 = Convert.ToInt32(Helper.OrDefault(dataReader["Califica14"], "0")),
+                            Calif21 = Convert.ToInt32(Helper.OrDefault(dataReader["Califica21"], "0")),
+                            Calif22 = Convert.ToInt32(Helper.OrDefault(dataReader["Califica22"], "0")),
+                            Calif23 = Convert.ToInt32(Helper.OrDefault(dataReader["Califica23"], "0")),
+                            Calif24 = Convert.ToInt32(Helper.OrDefault(dataReader["Califica24"], "0")),
+                            Calif31 = Convert.ToInt32(Helper.OrDefault(dataReader["Califica31"], "0")),
+                            Calif32 = Convert.ToInt32(Helper.OrDefault(dataReader["Califica32"], "0")),
+                            Calif33 = Convert.ToInt32(Helper.OrDefault(dataReader["Califica33"], "0")),
+                            Calif34 = Convert.ToInt32(Helper.OrDefault(dataReader["Califica34"], "0")),
+                            Sector1 = Convert.ToInt32(Helper.OrDefault(dataReader["Sector1"], "0")),
+                            Sector2 = Convert.ToInt32(Helper.OrDefault(dataReader["Sector2"], "0")),
+                            Sector3 = Convert.ToInt32(Helper.OrDefault(dataReader["Sector3"], "0")),
+                            DesSector1 = Helper.OrDefault(dataReader["DesSector1"], "").ToString(),
+                            DesSector2 = Helper.OrDefault(dataReader["DesSector2"], "").ToString(),
+                            DesSector3 = Helper.OrDefault(dataReader["DesSector3"], "").ToString(),
                         };
                         return Eva;
                     }
@@ -218,7 +220,13 @@ namespace AccesoADatos
             }
         }
 
+    }
 
-
+    class Helper
+    {
+        public static object OrDefault(object valor, object def)
+        {
+            return valor == null || valor is DBNull ? def : valor;
+        }
     }
 }

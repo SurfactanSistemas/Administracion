@@ -147,8 +147,8 @@ namespace Eval_Proveedores.Novedades
             //ValidarClave();
             //if (ValidClave == 1)
             //{
-                try
-                {
+                //try
+                //{
                     if (DGV_Evaluaciones.SelectedRows.Count == 0) throw new Exception("No se ha seleccionado ninguna Evaluación");
 
                     if (DGV_Evaluaciones.SelectedRows.Count > 1) throw new Exception("Se ha seleccionado mas de una  Evaluación");
@@ -180,12 +180,12 @@ namespace Eval_Proveedores.Novedades
                     }
 
 
-                }
-                catch (Exception err)
-                {
+                //}
+                //catch (Exception err)
+                //{
 
-                    MessageBox.Show(err.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                //    MessageBox.Show(err.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //}
             //}
             
         }
