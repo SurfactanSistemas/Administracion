@@ -35,6 +35,8 @@ Partial Class ListadoLaudosMPPorCodigo
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
+        Me.btnCalcularSaldos = New System.Windows.Forms.Button()
         Me.ckIncluirHistoricos = New System.Windows.Forms.CheckBox()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.cmbOrdenIII = New System.Windows.Forms.ComboBox()
@@ -61,9 +63,8 @@ Partial Class ListadoLaudosMPPorCodigo
         Me.ToolStripMenuItem6 = New System.Windows.Forms.ToolStripMenuItem()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.dgvLaudos = New Util.DBDataGridView()
-        Me.btnCalcularSaldos = New System.Windows.Forms.Button()
-        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
+        Me.btnExportarListadoEnsayosPorPartida = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -88,7 +89,7 @@ Partial Class ListadoLaudosMPPorCodigo
         'Label3
         '
         Me.Label3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.ForeColor = System.Drawing.SystemColors.Control
@@ -101,7 +102,7 @@ Partial Class ListadoLaudosMPPorCodigo
         'Label2
         '
         Me.Label2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.Control
@@ -113,6 +114,7 @@ Partial Class ListadoLaudosMPPorCodigo
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.btnExportarListadoEnsayosPorPartida)
         Me.GroupBox1.Controls.Add(Me.ProgressBar1)
         Me.GroupBox1.Controls.Add(Me.btnCalcularSaldos)
         Me.GroupBox1.Controls.Add(Me.ckIncluirHistoricos)
@@ -135,10 +137,26 @@ Partial Class ListadoLaudosMPPorCodigo
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "PARÁMETROS DE BÚSQUEDA"
         '
+        'ProgressBar1
+        '
+        Me.ProgressBar1.Location = New System.Drawing.Point(604, 132)
+        Me.ProgressBar1.Name = "ProgressBar1"
+        Me.ProgressBar1.Size = New System.Drawing.Size(383, 10)
+        Me.ProgressBar1.TabIndex = 12
+        '
+        'btnCalcularSaldos
+        '
+        Me.btnCalcularSaldos.Location = New System.Drawing.Point(810, 70)
+        Me.btnCalcularSaldos.Name = "btnCalcularSaldos"
+        Me.btnCalcularSaldos.Size = New System.Drawing.Size(177, 34)
+        Me.btnCalcularSaldos.TabIndex = 10
+        Me.btnCalcularSaldos.Text = "Calcula SALDOS"
+        Me.btnCalcularSaldos.UseVisualStyleBackColor = True
+        '
         'ckIncluirHistoricos
         '
         Me.ckIncluirHistoricos.AutoSize = True
-        Me.ckIncluirHistoricos.Location = New System.Drawing.Point(606, 94)
+        Me.ckIncluirHistoricos.Location = New System.Drawing.Point(606, 79)
         Me.ckIncluirHistoricos.Name = "ckIncluirHistoricos"
         Me.ckIncluirHistoricos.Size = New System.Drawing.Size(198, 17)
         Me.ckIncluirHistoricos.TabIndex = 9
@@ -389,31 +407,27 @@ Partial Class ListadoLaudosMPPorCodigo
         Me.dgvLaudos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.dgvLaudos.Location = New System.Drawing.Point(3, 174)
         Me.dgvLaudos.Name = "dgvLaudos"
+        Me.dgvLaudos.OrdenamientoColumnasHabilitado = True
         Me.dgvLaudos.ReadOnly = True
         Me.dgvLaudos.RowHeadersWidth = 15
         Me.dgvLaudos.ShowCellToolTips = False
+        Me.dgvLaudos.SinClickDerecho = False
         Me.dgvLaudos.Size = New System.Drawing.Size(1002, 276)
         Me.dgvLaudos.TabIndex = 12
         Me.dgvLaudos.TabStop = False
         '
-        'btnCalcularSaldos
-        '
-        Me.btnCalcularSaldos.Location = New System.Drawing.Point(810, 85)
-        Me.btnCalcularSaldos.Name = "btnCalcularSaldos"
-        Me.btnCalcularSaldos.Size = New System.Drawing.Size(177, 34)
-        Me.btnCalcularSaldos.TabIndex = 10
-        Me.btnCalcularSaldos.Text = "Calcula SALDOS"
-        Me.btnCalcularSaldos.UseVisualStyleBackColor = True
-        '
-        'ProgressBar1
-        '
-        Me.ProgressBar1.Location = New System.Drawing.Point(604, 132)
-        Me.ProgressBar1.Name = "ProgressBar1"
-        Me.ProgressBar1.Size = New System.Drawing.Size(383, 10)
-        Me.ProgressBar1.TabIndex = 12
-        '
         'BackgroundWorker1
         '
+        '
+        'btnExportarListadoEnsayosPorPartida
+        '
+        Me.btnExportarListadoEnsayosPorPartida.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnExportarListadoEnsayosPorPartida.Location = New System.Drawing.Point(604, 106)
+        Me.btnExportarListadoEnsayosPorPartida.Name = "btnExportarListadoEnsayosPorPartida"
+        Me.btnExportarListadoEnsayosPorPartida.Size = New System.Drawing.Size(383, 24)
+        Me.btnExportarListadoEnsayosPorPartida.TabIndex = 13
+        Me.btnExportarListadoEnsayosPorPartida.Text = "EXPORTAR LISTADO DE ENSAYOS POR LAUDO"
+        Me.btnExportarListadoEnsayosPorPartida.UseVisualStyleBackColor = True
         '
         'ListadoLaudosMPPorCodigo
         '
@@ -471,4 +485,5 @@ Partial Class ListadoLaudosMPPorCodigo
     Friend WithEvents btnCalcularSaldos As System.Windows.Forms.Button
     Friend WithEvents ProgressBar1 As System.Windows.Forms.ProgressBar
     Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
+    Friend WithEvents btnExportarListadoEnsayosPorPartida As System.Windows.Forms.Button
 End Class
