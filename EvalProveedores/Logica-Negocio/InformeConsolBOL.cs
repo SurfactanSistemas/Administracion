@@ -18,9 +18,9 @@ namespace Logica_Negocio
             return _InformeDAL.Lista();
         }
 
-        public DataTable Lista(string WDesde, string WHasta)
+        public DataTable Lista(string WDesde, string WHasta, int Tipo = 0)
         {
-            return _InformeDAL.Lista(WDesde, WHasta);
+            return _InformeDAL.Lista(WDesde, WHasta, Tipo);
         }
     }
 }

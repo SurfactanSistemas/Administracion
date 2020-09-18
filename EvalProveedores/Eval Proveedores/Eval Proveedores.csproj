@@ -189,6 +189,12 @@
     <Compile Include="Listados\CheckListRecepcion\Inicio.Designer.cs">
       <DependentUpon>Inicio.cs</DependentUpon>
     </Compile>
+    <Compile Include="Listados\CheckListRecepcion\ReporteInformeMP.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteInformeMP.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Listados\CheckListRecepcion\ReportInforme.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -645,6 +651,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\CheckListRecepcion\Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\CheckListRecepcion\ReporteInformeMP.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteInformeMP.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\CheckListRecepcion\ReportInforme.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
