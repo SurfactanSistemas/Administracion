@@ -122,6 +122,10 @@ Namespace Clases
             ExecuteNonQueries({q})
         End Sub
 
+        Public Shared Sub ExecuteNonQueries(ByVal q As String(), ByVal empresa As String)
+            ExecuteNonQueries(empresa, q)
+        End Sub
+
         Public Shared Sub ExecuteNonQueries(ByVal empresa As String, ByVal ParamArray q As String())
 
             Dim trans As SqlTransaction = Nothing

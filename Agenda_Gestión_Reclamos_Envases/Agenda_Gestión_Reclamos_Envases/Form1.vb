@@ -61,102 +61,142 @@ Public Class Form1 : Implements IPasarFecha
         ProgressBar1.Value = 0
         ProgressBar1.Visible = True
 
+        Dim SQLCnslt As String = "SELECT DISTINCT c.Cliente, c.Razon, ISNULL(re.FechaOrd, '') FechaOrd FROM Cliente c INNER JOIN Estadistica e ON e.Cliente = c.Cliente LEFT OUTER JOIN ReclamosEnvReProg re ON re.Cliente = c.Cliente WHERE c.Cliente BETWEEN '" & txt_DesdeCodigo.Text & "' AND '" & txt_HastaCodigo.Text & "' AND c.Provincia < 24"
 
+        If txt_DesdeCodigo.Text = "A00000" And txt_HastaCodigo.Text = "Z99999" Then
+            SQLCnslt = "SELECT DISTINCT c.Cliente, c.Razon, ISNULL(re.FechaOrd, '') FechaOrd FROM Cliente c INNER JOIN Estadistica e ON e.Cliente = c.Cliente LEFT OUTER JOIN ReclamosEnvReProg re ON re.Cliente = c.Cliente WHERE c.Provincia < 24 AND e.OrdFecha > '20190101'"
+        End If
 
-        Dim SQLCnslt As String = "SELECT Cliente, Razon FROM Cliente WHERE Cliente >= '" & txt_DesdeCodigo.Text & "' AND Cliente <= '" & txt_HastaCodigo.Text & "' AND Provincia <> 24 ORDER BY Cliente"
-
+        'Dim SQLCnslt As String = "SELECT Cliente, Razon FROM Cliente WHERE Cliente >= '" & txt_DesdeCodigo.Text & "' AND Cliente <= '" & txt_HastaCodigo.Text & "' AND Provincia <> 24 ORDER BY Cliente"
+        'Dim SQLCnslt As String = "SELECT DISTINCT c.Cliente, c.Razon FROM Cliente c INNER JOIN Estadistica e ON e.Cliente = c.Cliente WHERE c.Cliente BETWEEN '" & txt_DesdeCodigo.Text & "' AND '" & txt_HastaCodigo.Text & "' AND c.Provincia < 24 AND e.OrdFecha > '20190101'"
         Dim TablaCli As DataTable = GetAll(SQLCnslt, "SurfactanSa")
 
+        ProgressBar1.Maximum = TablaCli.Rows.Count + 5
+
         If TablaCli.Rows.Count > 0 Then
-            For Each RowCli As DataRow In TablaCli.Rows
+            'For Each RowCli As DataRow In TablaCli.Rows
+            For Each RowCli As DataRow In TablaCli.Select("FechaOrd >= '" & FechaActualOrd & "' Or FechaOrd = ''")
 
                 ' VERIFICAMOS SI SE ENCUENTRA EN LA TABLA RE REPROGRAMACION DE LLAMADOS
-                SQLCnslt = "SELECT FechaOrd FROM ReclamosEnvReProg WHERE Cliente = '" & RowCli.Item("Cliente") & "'"
-                Dim RowRecla As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+                'SQLCnslt = "SELECT FechaOrd FROM ReclamosEnvReProg WHERE Cliente = '" & RowCli.Item("Cliente") & "'"
+                'Dim RowRecla As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
 
-                If RowRecla IsNot Nothing Then
-                    If FechaActualOrd < RowRecla.Item("FechaOrd") Then
-                        'SI LA FECHA ACTUAL ES MENOR QUE LA FECHA QUE SE REPROGRAMO EL LLAMADO, SALTEAMOS AL CLIENTE
-                        Continue For
-                        'Else
-                        'SI LA FECHA ES MAYOR O IGUAL QUIERE DECIR QUE YA SE ALCANZO LA FECHA DE REPROGRAMACION 
-                        'POR ESO ELIMINAMOS EL REGISTRO Y CONTINUAMOS CON LOS CALCULOS
-                        '  SQLCnslt = "DELETE FROM ReclamosEnvReProg WHERE Cliente = '" & RowCli.Item("Cliente") & "'"
-                        '  ExecuteNonQueries({SQLCnslt}, "SurfactanSa")
-                    End If
-                End If
+                'If RowRecla IsNot Nothing Then
+                '    If FechaActualOrd < RowRecla.Item("FechaOrd") Then
+                '        'SI LA FECHA ACTUAL ES MENOR QUE LA FECHA QUE SE REPROGRAMO EL LLAMADO, SALTEAMOS AL CLIENTE
+                '        Continue For
+                '        'Else
+                '        'SI LA FECHA ES MAYOR O IGUAL QUIERE DECIR QUE YA SE ALCANZO LA FECHA DE REPROGRAMACION 
+                '        'POR ESO ELIMINAMOS EL REGISTRO Y CONTINUAMOS CON LOS CALCULOS
+                '        '  SQLCnslt = "DELETE FROM ReclamosEnvReProg WHERE Cliente = '" & RowCli.Item("Cliente") & "'"
+                '        '  ExecuteNonQueries({SQLCnslt}, "SurfactanSa")
+                '    End If
+                'End If
 
                 Dim CantidadEntradas As Integer = 0
 
-                SQLCnslt = "SELECT de.Cantidad " _
+                'SQLCnslt = "SELECT de.Cantidad " _
+                '            & "FROM Surfactan_II.dbo.DevolucionEnvases de INNER JOIN SurfactanSa.dbo.EquivEnvArticulo eea ON de.Envase = eea.Articulo " _
+                '            & "WHERE de.Cliente = '" & RowCli.Item("Cliente") & "' " _
+                '            & "AND de.OrdFecha >= '" & DesdeFechaOrd & "' AND de.OrdFecha <= '" & FechaActualOrd & "'" _
+                '            & "AND eea.Envase = 30"
+
+                'Dim tablaDevolEnv As DataTable = GetAll(SQLCnslt)
+
+                'If tablaDevolEnv.Rows.Count > 0 Then
+                '    For Each rowdevolEnv As DataRow In tablaDevolEnv.Rows
+                '        CantidadEntradas = CantidadEntradas + rowdevolEnv.Item("Cantidad")
+                '    Next
+                'End If
+
+                SQLCnslt = "SELECT SUM(de.Cantidad) " _
                             & "FROM Surfactan_II.dbo.DevolucionEnvases de INNER JOIN SurfactanSa.dbo.EquivEnvArticulo eea ON de.Envase = eea.Articulo " _
                             & "WHERE de.Cliente = '" & RowCli.Item("Cliente") & "' " _
-                            & "AND de.OrdFecha >= '" & DesdeFechaOrd & "' AND de.OrdFecha <= '" & FechaActualOrd & "'" _
+                            & "AND de.OrdFecha >= '" & DesdeFechaOrd & "'" _
                             & "AND eea.Envase = 30"
+                '& "AND de.OrdFecha >= '" & DesdeFechaOrd & "' AND de.OrdFecha <= '" & FechaActualOrd & "'" _
+                '& "AND eea.Envase = 30"
 
-                Dim tablaDevolEnv As DataTable = GetAll(SQLCnslt)
+                Dim EntDev As DataRow = GetSingle(SQLCnslt)
 
-                If tablaDevolEnv.Rows.Count > 0 Then
-                    For Each rowdevolEnv As DataRow In tablaDevolEnv.Rows
-                        CantidadEntradas = CantidadEntradas + rowdevolEnv.Item("Cantidad")
-                    Next
-                End If
+                If EntDev IsNot Nothing Then CantidadEntradas += OrDefault(EntDev(0), 0)
 
                 'FALTAN LAS ENTRADAS EN HOJARUTADEENV EN PLANTA I
-                SQLCnslt = "SELECT hrde.Cantidad " _
+                'SQLCnslt = "SELECT hrde.Cantidad " _
+                '            & "FROM HojaRutaDevEnv hrde INNER JOIN EquivEnvArticulo eea ON hrde.Envase = eea.Articulo " _
+                '            & "WHERE hrde.Cliente = '" & RowCli.Item("Cliente") & "' " _
+                '            & "AND hrde.FechaOrd >= '20200101' AND hrde.FechaOrd <= '20200910' " _
+                '            & "AND eea.Envase = 30"
+                'Dim tablaHojaRuta As DataTable = GetAll(SQLCnslt)
+
+                'If tablaHojaRuta.Rows.Count > 0 Then
+                '    For Each rowHojaRuta As DataRow In tablaHojaRuta.Rows
+                '        CantidadEntradas = CantidadEntradas + rowHojaRuta.Item("Cantidad")
+                '    Next
+                'End If
+
+                SQLCnslt = "SELECT SUM(hrde.Cantidad) " _
                             & "FROM HojaRutaDevEnv hrde INNER JOIN EquivEnvArticulo eea ON hrde.Envase = eea.Articulo " _
                             & "WHERE hrde.Cliente = '" & RowCli.Item("Cliente") & "' " _
-                            & "AND hrde.FechaOrd >= '20200101' AND hrde.FechaOrd <= '20200910' " _
+                            & "AND hrde.FechaOrd >= '" & DesdeFechaOrd & "'" _
                             & "AND eea.Envase = 30"
-                Dim tablaHojaRuta As DataTable = GetAll(SQLCnslt)
+                '& "AND hrde.FechaOrd >= '20200101' AND hrde.FechaOrd <= '20200910' " _
+                '            & "AND eea.Envase = 30"
+                Dim EntHojaRuta As DataRow = GetSingle(SQLCnslt)
 
-                If tablaHojaRuta.Rows.Count > 0 Then
-                    For Each rowHojaRuta As DataRow In tablaHojaRuta.Rows
-                        CantidadEntradas = CantidadEntradas + rowHojaRuta.Item("Cantidad")
-                    Next
-                End If
-
+                If EntHojaRuta IsNot Nothing Then CantidadEntradas += OrDefault(EntHojaRuta(0), 0)
 
                 Dim CantidadSalidas As Integer = 0
 
-                SQLCnslt = "SELECT Cantidad FROM MovEnv " _
+                'SQLCnslt = "SELECT Cantidad FROM MovEnv " _
+                '            & "WHERE Cliente = '" & RowCli.Item("Cliente") & "' " _
+                '            & "AND FechaOrd >= '" & DesdeFechaOrd & "' AND FechaOrd <= '" & FechaActualOrd & "'" _
+                '            & "AND Envase = 30 AND Marca <> 'X' "
+
+                'Dim tablaSalidas As DataTable = GetAll(SQLCnslt, "SurfactanSa")
+
+                'If tablaSalidas.Rows.Count > 0 Then
+                '    For Each rowSal As DataRow In tablaSalidas.Rows
+                '        CantidadSalidas = CantidadSalidas + rowSal.Item("Cantidad")
+                '    Next
+                'End If
+
+                SQLCnslt = "SELECT SUM(Cantidad) FROM MovEnv " _
                             & "WHERE Cliente = '" & RowCli.Item("Cliente") & "' " _
-                            & "AND FechaOrd >= '" & DesdeFechaOrd & "' AND FechaOrd <= '" & FechaActualOrd & "'" _
+                            & "AND FechaOrd >= '" & DesdeFechaOrd & "'" _
                             & "AND Envase = 30 AND Marca <> 'X' "
+                '& "AND FechaOrd >= '" & DesdeFechaOrd & "' AND FechaOrd <= '" & FechaActualOrd & "'" _
+                '            & "AND Envase = 30 AND Marca <> 'X' "
+                Dim Salidas As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
 
-                Dim tablaSalidas As DataTable = GetAll(SQLCnslt, "SurfactanSa")
-
-                If tablaSalidas.Rows.Count > 0 Then
-                    For Each rowSal As DataRow In tablaSalidas.Rows
-                        CantidadSalidas = CantidadSalidas + rowSal.Item("Cantidad")
-                    Next
-                End If
+                If Salidas IsNot Nothing Then CantidadSalidas += OrDefault(Salidas(0), 0)
 
                 Dim Dif As Integer = CantidadSalidas - CantidadEntradas
 
-                If Dif <> 0 Then
-                    TablaAux.Rows.Add(RowCli.Item("Cliente"), RowCli.Item("Razon"), CantidadEntradas, CantidadSalidas, Dif)
-                End If
+                'If Dif <> 0 Then
+                TablaAux.Rows.Add(RowCli.Item("Cliente"), RowCli.Item("Razon"), CantidadEntradas, CantidadSalidas, Dif)
+                'End If
 
                 ProgressBar1.Value += 1
             Next
 
             DGV_Clientes.DataSource = TablaAux
+
+            TablaCli.DefaultView.Sort = "Cliente"
+
             If chk_MostrarAFavor.Checked Then
                 TablaAux.DefaultView.RowFilter = ""
             Else
                 TablaAux.DefaultView.RowFilter = "Diferencia > 0"
             End If
-            ProgressBar1.Value = 3000
+            'ProgressBar1.Value = 3000
             ProgressBar1.Visible = False
         End If
     End Sub
 
-
-
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        cbx_AFecha.SelectedIndex = 1
+        cbx_AFecha.SelectedIndex = 3
         ProgressBar1.Value = 0
         ProgressBar1.Visible = True
 
@@ -167,6 +207,8 @@ Public Class Form1 : Implements IPasarFecha
             .Add("Salidas")
             .Add("Diferencia")
         End With
+
+        Operador.Base = "SurfactanSa"
 
         ' Indicamos (por ejemplo en el evento Load) que el BackgroundWorker va a informar sobre el progreso 
 
@@ -223,55 +265,83 @@ Public Class Form1 : Implements IPasarFecha
 
                 Dim CantidadEntradas As Integer = 0
 
-                SQLCnslt = "SELECT de.Cantidad " _
+                'SQLCnslt = "SELECT de.Cantidad " _
+                '            & "FROM Surfactan_II.dbo.DevolucionEnvases de INNER JOIN SurfactanSa.dbo.EquivEnvArticulo eea ON de.Envase = eea.Articulo " _
+                '            & "WHERE de.Cliente = '" & RowCli.Item("Cliente") & "' " _
+                '            & "AND de.OrdFecha >= '" & DesdeFechaOrd & "' AND de.OrdFecha <= '" & FechaActualOrd & "'" _
+                '            & "AND eea.Envase = 30"
+
+                'Dim tablaDevolEnv As DataTable = GetAll(SQLCnslt)
+
+                'If tablaDevolEnv.Rows.Count > 0 Then
+                '    For Each rowdevolEnv As DataRow In tablaDevolEnv.Rows
+                '        CantidadEntradas = CantidadEntradas + rowdevolEnv.Item("Cantidad")
+                '    Next
+                'End If
+
+                SQLCnslt = "SELECT SUM(de.Cantidad) " _
                             & "FROM Surfactan_II.dbo.DevolucionEnvases de INNER JOIN SurfactanSa.dbo.EquivEnvArticulo eea ON de.Envase = eea.Articulo " _
                             & "WHERE de.Cliente = '" & RowCli.Item("Cliente") & "' " _
                             & "AND de.OrdFecha >= '" & DesdeFechaOrd & "' AND de.OrdFecha <= '" & FechaActualOrd & "'" _
                             & "AND eea.Envase = 30"
 
-                Dim tablaDevolEnv As DataTable = GetAll(SQLCnslt)
+                Dim DevolEnv As DataRow = GetSingle(SQLCnslt)
 
-                If tablaDevolEnv.Rows.Count > 0 Then
-                    For Each rowdevolEnv As DataRow In tablaDevolEnv.Rows
-                        CantidadEntradas = CantidadEntradas + rowdevolEnv.Item("Cantidad")
-                    Next
-                End If
+                If DevolEnv IsNot Nothing Then CantidadEntradas += OrDefault(DevolEnv(0), 0)
 
                 'FALTAN LAS ENTRADAS EN HOJARUTADEENV EN PLANTA I
-                SQLCnslt = "SELECT hrde.Cantidad " _
+                'SQLCnslt = "SELECT hrde.Cantidad " _
+                '            & "FROM HojaRutaDevEnv hrde INNER JOIN EquivEnvArticulo eea ON hrde.Envase = eea.Articulo " _
+                '            & "WHERE hrde.Cliente = '" & RowCli.Item("Cliente") & "' " _
+                '            & "AND hrde.FechaOrd >= '20200101' AND hrde.FechaOrd <= '20200910' " _
+                '            & "AND eea.Envase = 30"
+                'Dim tablaHojaRuta As DataTable = GetAll(SQLCnslt)
+
+                'If tablaHojaRuta.Rows.Count > 0 Then
+                '    For Each rowHojaRuta As DataRow In tablaHojaRuta.Rows
+                '        CantidadEntradas = CantidadEntradas + rowHojaRuta.Item("Cantidad")
+                '    Next
+                'End If
+
+                SQLCnslt = "SELECT SUM(hrde.Cantidad) " _
                             & "FROM HojaRutaDevEnv hrde INNER JOIN EquivEnvArticulo eea ON hrde.Envase = eea.Articulo " _
                             & "WHERE hrde.Cliente = '" & RowCli.Item("Cliente") & "' " _
                             & "AND hrde.FechaOrd >= '20200101' AND hrde.FechaOrd <= '20200910' " _
                             & "AND eea.Envase = 30"
-                Dim tablaHojaRuta As DataTable = GetAll(SQLCnslt)
 
-                If tablaHojaRuta.Rows.Count > 0 Then
-                    For Each rowHojaRuta As DataRow In tablaHojaRuta.Rows
-                        CantidadEntradas = CantidadEntradas + rowHojaRuta.Item("Cantidad")
-                    Next
-                End If
+                Dim EntHojaRuta As DataRow = GetSingle(SQLCnslt)
 
+                If EntHojaRuta IsNot Nothing Then CantidadEntradas += OrDefault(EntHojaRuta(0), 0)
 
                 Dim CantidadSalidas As Integer = 0
 
-                SQLCnslt = "SELECT Cantidad FROM MovEnv " _
+                'SQLCnslt = "SELECT Cantidad FROM MovEnv " _
+                '            & "WHERE Cliente = '" & RowCli.Item("Cliente") & "' " _
+                '            & "AND FechaOrd >= '" & DesdeFechaOrd & "' AND FechaOrd <= '" & FechaActualOrd & "'" _
+                '            & "AND Envase = 30 AND Marca <> 'X' "
+
+                'Dim tablaSalidas As DataTable = GetAll(SQLCnslt, "SurfactanSa")
+
+                'If tablaSalidas.Rows.Count > 0 Then
+                '    For Each rowSal As DataRow In tablaSalidas.Rows
+                '        CantidadSalidas = CantidadSalidas + rowSal.Item("Cantidad")
+                '    Next
+                'End If
+
+                SQLCnslt = "SELECT SUM(Cantidad) FROM MovEnv " _
                             & "WHERE Cliente = '" & RowCli.Item("Cliente") & "' " _
                             & "AND FechaOrd >= '" & DesdeFechaOrd & "' AND FechaOrd <= '" & FechaActualOrd & "'" _
                             & "AND Envase = 30 AND Marca <> 'X' "
 
-                Dim tablaSalidas As DataTable = GetAll(SQLCnslt, "SurfactanSa")
+                Dim SalidasMovEnv As DataRow = GetSingle(SQLCnslt)
 
-                If tablaSalidas.Rows.Count > 0 Then
-                    For Each rowSal As DataRow In tablaSalidas.Rows
-                        CantidadSalidas = CantidadSalidas + rowSal.Item("Cantidad")
-                    Next
-                End If
+                If SalidasMovEnv IsNot Nothing Then CantidadSalidas += OrDefault(SalidasMovEnv(0), 0)
 
                 Dim Dif As Integer = CantidadSalidas - CantidadEntradas
 
-                If Dif <> 0 Then
-                    TablaAux.Rows.Add(RowCli.Item("Cliente"), RowCli.Item("Razon"), CantidadEntradas, CantidadSalidas, Dif)
-                End If
+                'If Dif <> 0 Then
+                TablaAux.Rows.Add(RowCli.Item("Cliente"), RowCli.Item("Razon"), CantidadEntradas, CantidadSalidas, Dif)
+                'End If
 
                 ProgressBar1.Value += 1
             Next
@@ -306,7 +376,7 @@ Public Class Form1 : Implements IPasarFecha
     Private Sub chk_MostrarAFavor_Click(sender As Object, e As EventArgs) Handles chk_MostrarAFavor.Click
         Dim TablaFiltrar As DataTable = DGV_Clientes.DataSource
         If chk_MostrarAFavor.Checked Then
-            TablaFiltrar.DefaultView.RowFilter = ""
+            TablaFiltrar.DefaultView.RowFilter = "Diferencia <> 0"
         Else
             TablaFiltrar.DefaultView.RowFilter = "Diferencia > 0"
         End If
@@ -397,5 +467,9 @@ Public Class Form1 : Implements IPasarFecha
 
     Private Sub Form1_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         txt_DesdeCodigo.Focus()
+    End Sub
+
+    Private Sub chk_MostrarAFavor_CheckedChanged(sender As Object, e As EventArgs) Handles chk_MostrarAFavor.CheckedChanged
+
     End Sub
 End Class
