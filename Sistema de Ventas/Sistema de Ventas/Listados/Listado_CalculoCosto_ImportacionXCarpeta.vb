@@ -51,7 +51,7 @@ Public Class Listado_CalculoCosto_ImportacionXCarpeta
 
         Dim SQLCnslt As String = "DELETE Carpeta"
 
-        ExecuteNonQueries({SQLCnslt}, Operador.Base)
+        ExecuteNonQueries(Operador.Base, {SQLCnslt})
 
 
         Dim WMarca As String = ""
@@ -314,7 +314,7 @@ Public Class Listado_CalculoCosto_ImportacionXCarpeta
         Next
 
         If ListaSQLCnslt.Count > 0 Then
-            ExecuteNonQueries(ListaSQLCnslt.ToArray(), Operador.Base)
+            ExecuteNonQueries(Operador.Base, ListaSQLCnslt.ToArray())
         End If
 
 

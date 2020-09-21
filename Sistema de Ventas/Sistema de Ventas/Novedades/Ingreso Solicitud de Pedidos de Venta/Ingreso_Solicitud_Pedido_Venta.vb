@@ -1697,7 +1697,7 @@ Public Class Ingreso_Solicitud_Pedido_Venta
         If MsgBox("¿Desea eliminar el pedido nro. : " & txt_Pedido.Text & "?", vbYesNo) = vbYes Then
             Dim SQLCnslt As String = "DELETE PedidoSol WHERE Pedido = '" & txt_Pedido.Text & "'"
 
-            ExecuteNonQueries({SQLCnslt}, Operador.Base)
+            ExecuteNonQueries(Operador.Base, {SQLCnslt})
 
             btn_Limpiar_Click(Nothing, Nothing)
         End If
@@ -2326,7 +2326,7 @@ Public Class Ingreso_Solicitud_Pedido_Venta
 
         Next
 
-        ExecuteNonQueries(listaSQlCnslt.ToArray(), Operador.Base)
+        ExecuteNonQueries(Operador.Base, listaSQlCnslt.ToArray())
 
         'SE COMENTA PARA QUE NO TIRE ERROR
         '' If MsgBox("Desea Imprimir la solicitud del pedido", vbYesNo) = vbYes Then

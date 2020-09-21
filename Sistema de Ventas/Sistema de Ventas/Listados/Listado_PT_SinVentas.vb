@@ -215,7 +215,7 @@ Public Class Listado_PT_SinVentas : Implements IConsulta_Terminado
         Next
 
        
-        ExecuteNonQueries(ListaSQLCnslt.ToArray(), Operador.Base)
+        ExecuteNonQueries(Operador.Base, ListaSQLCnslt.ToArray())
 
 
 
@@ -324,7 +324,7 @@ Public Class Listado_PT_SinVentas : Implements IConsulta_Terminado
 
         Next
 
-        ExecuteNonQueries(ListaSQLCnslt.ToArray(), Operador.Base)
+        ExecuteNonQueries(Operador.Base, ListaSQLCnslt.ToArray())
 
         With New VistaPrevia
             .Reporte = New Reporte_PT_SinVentas()

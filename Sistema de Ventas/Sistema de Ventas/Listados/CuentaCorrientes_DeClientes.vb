@@ -162,7 +162,7 @@ Public Class CuentaCorrientes_DeClientes : Implements IBuscarClienteCashFlow
                 End If
             End If
 
-            ExecuteNonQueries(ListaSQLCnslt.ToArray(), Operador.Base)
+            ExecuteNonQueries(Operador.Base, ListaSQLCnslt.ToArray())
 
 
             Dim ZZSaldoIni As Integer = 0

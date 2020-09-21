@@ -66,7 +66,7 @@ Public Class Listado_VentasDiarasPendientesDePago
                                 & "Importe7 = 0, " _
                                 & "Importe8 = 0"
 
-        ExecuteNonQueries({SQLCnslt}, Operador.Base)
+        ExecuteNonQueries(Operador.Base, {SQLCnslt})
 
 
 
@@ -75,12 +75,12 @@ Public Class Listado_VentasDiarasPendientesDePago
                     & "WHERE OrdFecha >= '" & WDesde & "' " _
                     & "AND OrdFecha <= '" & WHasta & "'"
 
-        ExecuteNonQueries({SQLCnslt}, Operador.Base)
+        ExecuteNonQueries(Operador.Base, {SQLCnslt})
         
         
         Dim WTitulo As String = "del " & txt_DesdeFecha.Text & " al " & txt_HastaFecha.Text
         
-        Dim WFormula As String = "{CtaCte.OrdFecha} >= '" & WDesde & "' AND {CtaCte.OrdFecha} <= '" & WHasta & "'"
+        Dim WFormula As String = "{CtaCte.OrdFecha} >= '" & WDesde & "' AND {CtaCte.OrdFecha} <= '" & WHasta & "' AND {CtaCte.Saldo} > 0"
 
         With New VistaPrevia
             .Reporte = New Reporte_Listado_VentasDiariasPendientesPago()

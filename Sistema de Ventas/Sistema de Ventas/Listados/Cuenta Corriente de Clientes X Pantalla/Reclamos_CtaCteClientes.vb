@@ -51,7 +51,7 @@ Public Class Reclamos_CtaCteClientes
 
         listaSQLCnslt.Add(SQLCnslt)
 
-        ExecuteNonQueries(listaSQLCnslt.ToArray(), Operador.Base)
+        ExecuteNonQueries(Operador.Base, listaSQLCnslt.ToArray())
 
         Close()
 

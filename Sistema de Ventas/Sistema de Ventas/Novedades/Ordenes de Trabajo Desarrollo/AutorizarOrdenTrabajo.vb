@@ -58,7 +58,7 @@ Public Class AutorizarOrdenTrabajo
                                      & "CodigoOrden = '" & txtCodDesarrollo.Text & "' " _
                                      & "WHERE Pedido = '" & WPedido & "'"
 
-            ExecuteNonQueries({SQLCnslt}, "SurfactanSa")
+            ExecuteNonQueries("SurfactanSa", {SQLCnslt})
 
             Close()
 

@@ -38,7 +38,7 @@ Public Class Listado_VentasXProvincia
             & "WHERE OrdFecha >= '" & WDesde & "' AND OrdFecha <= '" & WHasta & "' and Iva1 = 0"
         Lista.Add(SQLCnslt)
 
-        ExecuteNonQueries(Lista.ToArray(), "SurfactanSa")
+        ExecuteNonQueries("SurfactanSa", Lista.ToArray())
 
         Dim WTitulo As String = "del " + txt_FechaDesde.Text + " al " + txt_FechaHasta.Text
 

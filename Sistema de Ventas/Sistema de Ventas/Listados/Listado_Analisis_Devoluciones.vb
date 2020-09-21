@@ -136,7 +136,7 @@ Public Class Listado_Analisis_Devolucionesvb
 
         End If
 
-        ExecuteNonQueries(ListaSQLCnslt.ToArray(), Operador.Base)
+        ExecuteNonQueries(Operador.Base, ListaSQLCnslt.ToArray())
 
 
         Dim WTitulo As String = "entre el " & txt_Desde.Text & " hasta el " & txt_Hasta.Text

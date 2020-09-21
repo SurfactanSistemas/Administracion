@@ -88,7 +88,7 @@ Public Class Listado_Precios_Compara_Grupos
                                 & " Porce = '" & 0 & "'" _
                                 & " Where Clave = '" & ZClave & "'"
 
-                    ExecuteNonQueries({SQLCnslt}, Operador.Base)
+                    ExecuteNonQueries(Operador.Base, {SQLCnslt})
 
 
                     If txt_FechaCompa.Text <> "  /  /    " Then
@@ -129,7 +129,7 @@ Public Class Listado_Precios_Compara_Grupos
                             & " Porce = '" & ZDife & "'" _
                             & " Where Clave = '" & ZClave & "'"
 
-                            ExecuteNonQueries({SQLCnslt}, Operador.Base)
+                            ExecuteNonQueries(Operador.Base, {SQLCnslt})
 
                         End If
 
@@ -149,7 +149,7 @@ Public Class Listado_Precios_Compara_Grupos
                                   & " Costo = '" & Costo.ToString().Replace(",", ".") & "'" _
                                   & " Where Clave = '" & ZClave & "'"
 
-                        ExecuteNonQueries({SQLCnslt}, Operador.Base)
+                        ExecuteNonQueries(Operador.Base, {SQLCnslt})
 
                     Else
 
@@ -167,7 +167,7 @@ Public Class Listado_Precios_Compara_Grupos
                                      & "'" & ZTerminado & "'," _
                                      & "'" & Costo.ToString().Replace(",", ".") & "')"
 
-                        ExecuteNonQueries({SQLCnslt}, Operador.Base)
+                        ExecuteNonQueries(Operador.Base, {SQLCnslt})
 
                     End If
 

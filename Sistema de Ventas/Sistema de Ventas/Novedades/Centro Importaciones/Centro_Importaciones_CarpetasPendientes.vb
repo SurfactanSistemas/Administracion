@@ -118,7 +118,7 @@ Public Class Centro_Importaciones_CarpetasPendientes
 
         Dim SQLCnlst As String = "DELETE ControlImpoImpre"
 
-        ExecuteNonQueries({SQLCnlst}, Operador.Base)
+        ExecuteNonQueries(Operador.Base, {SQLCnlst})
 
         Dim ListaSQLCnslt As New List(Of String)
 
@@ -221,7 +221,7 @@ Public Class Centro_Importaciones_CarpetasPendientes
         Next
 
         If ListaSQLCnslt.Count > 0 Then
-            ExecuteNonQueries(ListaSQLCnslt.ToArray(), Operador.Base)
+            ExecuteNonQueries(Operador.Base, ListaSQLCnslt.ToArray())
             With New VistaPrevia
                 .Reporte = New Reporte_CentroDe_Exportacion_Pendientes()
 

@@ -153,7 +153,7 @@ Public Class Listado_IvaVentas
             & "WHERE OrdFecha >= '" & WDesde & "' AND OrdFecha <= '" & WHasta & "' and Iva1 = '0'"
         listaSQLCnslt.Add(SQLCnslt)
 
-        ExecuteNonQueries(listaSQLCnslt.ToArray(), Operador.Base)
+        ExecuteNonQueries(Operador.Base, listaSQLCnslt.ToArray())
 
         Dim WTitulo As String = "del " + txt_DesdeFecha.Text + " al " + txt_HastaFecha.Text
 
@@ -266,7 +266,7 @@ Public Class Listado_IvaVentas
             & "WHERE OrdFecha >= '" & WDesde & "' AND OrdFecha <= '" & WHasta & "' AND Iva1 = '0'"
         listaSQLCnslt.Add(SQLCnslt)
 
-        ExecuteNonQueries(listaSQLCnslt.ToArray(), Operador.Base)
+        ExecuteNonQueries(Operador.Base, listaSQLCnslt.ToArray())
 
 
         Dim WTitulo As String = "Del " & txt_DesdeFecha.Text & " al " & txt_HastaFecha.Text

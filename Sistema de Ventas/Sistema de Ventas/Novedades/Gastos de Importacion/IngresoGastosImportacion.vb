@@ -668,7 +668,7 @@ Public Class IngresoGastosImportacion : Implements IConsulta_GasImportacion
             Next
 
 
-            ExecuteNonQueries(ListaSQLCnslt.ToArray(), Operador.Base)
+            ExecuteNonQueries(Operador.Base, ListaSQLCnslt.ToArray())
 
 
             btn_Limpiar_Click(Nothing, Nothing)
