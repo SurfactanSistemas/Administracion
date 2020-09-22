@@ -87,7 +87,7 @@ namespace Eval_Proveedores.Novedades
                     DGV_EvalSemProve.Rows[WRenglon].Cells["PorcTotal"].Value = Helper._DeterminarPorcentajeTotal(ZMovimientos, ZCertificadosOk, ZEnvasesOk);
 
                     DataRow WDatoEvalua =
-                        Query.GetSingle("SELECT EstadoMP, FechaEvaluaVto, FechaEntrego FROM EvaluacionProvMP WHERE Proveedor = '" +
+                        Query.GetSingle("SELECT EstadoMP, FechaEvaluaVto, FechaVto FROM EvaluacionProvMP WHERE Proveedor = '" +
                                         WProveedor["Proveedor"] + "' And Articulo = '" + WProveedor["Articulo"] + "' And Renglon = 1");
 
                     DGV_EvalSemProve.Rows[WRenglon].Cells["EvaCal"].Value = _TraerDescEvaluacion(0);
@@ -100,7 +100,7 @@ namespace Eval_Proveedores.Novedades
                             _TraerDescEvaluacion(WDatoEvalua["EstadoMP"]);
 
                         DGV_EvalSemProve.Rows[WRenglon].Cells["FechaEvaluaProvMPFarmaII"].Value =
-                            Helper.OrDefault(WDatoEvalua["FechaEntrego"], "");
+                            Helper.OrDefault(WDatoEvalua["FechaVto"], "");
 
                         DGV_EvalSemProve.Rows[WRenglon].Cells["VencEvaluacion"].Value =
                             Helper.OrDefault(WDatoEvalua["FechaEvaluaVto"], "");
@@ -268,13 +268,13 @@ namespace Eval_Proveedores.Novedades
 
                         if (WEstadoMP != "3") WCantOCEventual = 0;
 
-                        ZSqls.Add("UPDATE EvaluacionProvMP SET Fecha = '" + WFecha + "', FechaOrd = '" + WFechaOrd + "', EstadoMP = '" + WEstadoMP + "', FechaEntrego = '" + WFechaEntrego + "', FechaEntregoOrd = '" + WFechaEntregoOrd + "', Operador = '" + WEvaluador + "', FechaEvaluaVto = '" + WFechaEvaluaVto + "', FechaEvaluaVtoOrd = '" + WFechaEvaluaVtoOrd + "', CantOCEventual = '" + WCantOCEventual.ToString() + "' WHERE Proveedor = '" + WProveedor + "' And Articulo = '" + WCodMP + "'");
+                        ZSqls.Add("UPDATE EvaluacionProvMP SET Fecha = '" + WFecha + "', FechaOrd = '" + WFechaOrd + "', EstadoMP = '" + WEstadoMP + "', FechaVto = '" + WFechaEntrego + "', FechaVtoOrd = '" + WFechaEntregoOrd + "', Operador = '" + WEvaluador + "', FechaEvaluaVto = '" + WFechaEvaluaVto + "', FechaEvaluaVtoOrd = '" + WFechaEvaluaVtoOrd + "', CantOCEventual = '" + WCantOCEventual.ToString() + "' WHERE Proveedor = '" + WProveedor + "' And Articulo = '" + WCodMP + "'");
                     }
                     else
                     {
                         string WClave = WProveedor.PadLeft(11, '0') + WCodMP + "01";
 
-                        ZSqls.Add(string.Format("INSERT INTO EvaluacionProvMP (Clave, Proveedor, Articulo, Renglon, Fecha, FechaOrd, FechaEntrego, FechaEntregoOrd, Operador, EstadoMP, FechaEvaluaVto, FechaEvaluaVtoOrd) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}')", WClave, WProveedor, WCodMP, 1, WFecha, WFechaOrd, WFechaEntrego, WFechaEntregoOrd, WEvaluador, WEstadoMP, WFechaEvaluaVto, WFechaEvaluaVtoOrd));
+                        ZSqls.Add(string.Format("INSERT INTO EvaluacionProvMP (Clave, Proveedor, Articulo, Renglon, Fecha, FechaOrd, FechaVto, FechaVtoOrd, Operador, EstadoMP, FechaEvaluaVto, FechaEvaluaVtoOrd) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}')", WClave, WProveedor, WCodMP, 1, WFecha, WFechaOrd, WFechaEntrego, WFechaEntregoOrd, WEvaluador, WEstadoMP, WFechaEvaluaVto, WFechaEvaluaVtoOrd));
                     }
                 }
 
