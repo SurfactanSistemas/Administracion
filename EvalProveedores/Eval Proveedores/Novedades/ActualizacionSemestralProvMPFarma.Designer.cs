@@ -847,7 +847,7 @@ namespace Eval_Proveedores.Novedades
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.MaskedTextBox TB_Hasta;
         private System.Windows.Forms.Button button1;
-        private DBDataGridView DGV_EvalSemProve;
+        private Util.DBDataGridView DGV_EvalSemProve;
         private System.Windows.Forms.Label LB_Titulo;
         private System.Windows.Forms.Button BT_Salir;
         private System.Windows.Forms.Button button2;

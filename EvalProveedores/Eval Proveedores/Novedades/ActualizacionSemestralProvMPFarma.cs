@@ -5,22 +5,21 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
-using Eval_Proveedores.Interfaces;
-using Util;
-using Util.Clases;
 using EvaluacionProvMPFarma;
+using Eval_Proveedores.Interfaces;
 using Eval_Proveedores.Listados.EvaSemActProve;
 using Logica_Negocio;
+using Util.Clases;
 
 namespace Eval_Proveedores.Novedades
 {
     public partial class ActualizacionSemestralProvMPFarma : Form, IActualizaEvalProv
     {
         readonly EvalSemestralBOL ESBOL = new EvalSemestralBOL();
-        DataTable dtEvaluacion = new DataTable();
-        DataTable dtInformeMuestra = new DataTable();
+        readonly DataTable dtEvaluacion = new DataTable();
+        readonly DataTable dtInformeMuestra = new DataTable();
         DataTable dtInformeDetalle = new DataTable();
-        string[] _Empresas = { "SurfactanSA", "Surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII", "Pelitall_II", "Pellital_III", "Pellital_V" };
+        readonly string[] _Empresas = { "SurfactanSA", "Surfactan_II", "Surfactan_III", "Surfactan_IV", "Surfactan_V", "Surfactan_VI", "Surfactan_VII", "Pelitall_II", "Pellital_III", "Pellital_V" };
         IniEvaSemActProve frm = new IniEvaSemActProve();
         private int WTipoImpresion = 1;
         bool WImprimiendo;
@@ -237,7 +236,7 @@ namespace Eval_Proveedores.Novedades
             Close();
         }
 
-        private void BT_Guardar_Click(object sender, EventArgs e)
+        private void BT_Guardar_Click()
         {
             try
             {
@@ -250,8 +249,8 @@ namespace Eval_Proveedores.Novedades
                 {
                     var WProveedor = Helper.OrDefault(row.Cells["Proveedor"].Value, "").ToString();
                     var WEstadoMP = _TraerIDEvaluacion(Helper.OrDefault(row.Cells["EvaCal"].Value, 0)).ToString();
-                    var WFechaEntrego = Helper.OrDefault(row.Cells["FechaEvaluaProvMPFarmaII"].Value, "").ToString();
-                    var WFechaEntregoOrd = Helper.OrdenarFecha(WFechaEntrego);
+                    var WFechaVto = Helper.OrDefault(row.Cells["FechaEvaluaProvMPFarmaII"].Value, "").ToString();
+                    var WFechaVtoOrd = Helper.OrdenarFecha(WFechaVto);
                     var WFechaEvaluaVto = Helper.OrDefault(row.Cells["VencEvaluacion"].Value, "").ToString();
                     var WFechaEvaluaVtoOrd = Helper.OrdenarFecha(WFechaEvaluaVto);
                     var WCodMP = Helper.OrDefault(row.Cells["Articulo"].Value, "").ToString();
@@ -268,13 +267,13 @@ namespace Eval_Proveedores.Novedades
 
                         if (WEstadoMP != "3") WCantOCEventual = 0;
 
-                        ZSqls.Add("UPDATE EvaluacionProvMP SET Fecha = '" + WFecha + "', FechaOrd = '" + WFechaOrd + "', EstadoMP = '" + WEstadoMP + "', FechaVto = '" + WFechaEntrego + "', FechaVtoOrd = '" + WFechaEntregoOrd + "', Operador = '" + WEvaluador + "', FechaEvaluaVto = '" + WFechaEvaluaVto + "', FechaEvaluaVtoOrd = '" + WFechaEvaluaVtoOrd + "', CantOCEventual = '" + WCantOCEventual.ToString() + "' WHERE Proveedor = '" + WProveedor + "' And Articulo = '" + WCodMP + "'");
+                        ZSqls.Add("UPDATE EvaluacionProvMP SET Fecha = '" + WFecha + "', FechaOrd = '" + WFechaOrd + "', EstadoMP = '" + WEstadoMP + "', FechaVto = '" + WFechaVto + "', FechaVtoOrd = '" + WFechaVtoOrd + "', Operador = '" + WEvaluador + "', FechaEvaluaVto = '" + WFechaEvaluaVto + "', FechaEvaluaVtoOrd = '" + WFechaEvaluaVtoOrd + "', CantOCEventual = '" + WCantOCEventual + "' WHERE Proveedor = '" + WProveedor + "' And Articulo = '" + WCodMP + "'");
                     }
                     else
                     {
                         string WClave = WProveedor.PadLeft(11, '0') + WCodMP + "01";
 
-                        ZSqls.Add(string.Format("INSERT INTO EvaluacionProvMP (Clave, Proveedor, Articulo, Renglon, Fecha, FechaOrd, FechaVto, FechaVtoOrd, Operador, EstadoMP, FechaEvaluaVto, FechaEvaluaVtoOrd) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}')", WClave, WProveedor, WCodMP, 1, WFecha, WFechaOrd, WFechaEntrego, WFechaEntregoOrd, WEvaluador, WEstadoMP, WFechaEvaluaVto, WFechaEvaluaVtoOrd));
+                        ZSqls.Add(string.Format("INSERT INTO EvaluacionProvMP (Clave, Proveedor, Articulo, Renglon, Fecha, FechaOrd, FechaVto, FechaVtoOrd, Operador, EstadoMP, FechaEvaluaVto, FechaEvaluaVtoOrd) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}')", WClave, WProveedor, WCodMP, 1, WFecha, WFechaOrd, WFechaVto, WFechaVtoOrd, WEvaluador, WEstadoMP, WFechaEvaluaVto, WFechaEvaluaVtoOrd));
                     }
                 }
 
@@ -470,7 +469,7 @@ namespace Eval_Proveedores.Novedades
 
 	            button3.PerformClick();
 
-	            BT_Guardar_Click(null, null);
+	            BT_Guardar_Click();
 
 	        }else if (e.KeyData == Keys.Escape){
 	        	txtClave.Text = "";
@@ -685,12 +684,12 @@ namespace Eval_Proveedores.Novedades
             }
         }
 
-        public void _ProcesarActualizaEvalProv(string Proveedor, string Articulo, int Estado, string FechaEval, string FechaVto)
+        public void _ProcesarActualizaEvalProv(string _Proveedor, string _Articulo, int Estado, string FechaEval, string FechaVto)
         {
             foreach (DataGridViewRow row in DGV_EvalSemProve.Rows)
             {
-                if (row.Cells["Proveedor"].Value.ToString() == Proveedor &&
-                    row.Cells["Articulo"].Value.ToString() == Articulo)
+                if (row.Cells["Proveedor"].Value.ToString() == _Proveedor &&
+                    row.Cells["Articulo"].Value.ToString() == _Articulo)
                 {
                     row.Cells["EvaCal"].Value = _TraerDescEvaluacion(Estado);
                     row.Cells["FechaEvaluaProvMPFarmaII"].Value = FechaEval;
