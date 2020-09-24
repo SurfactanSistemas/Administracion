@@ -40,6 +40,7 @@ Partial Class Compras
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.PanelPrincipal = New System.Windows.Forms.Panel()
+        Me.btn_Adjuntar = New System.Windows.Forms.Button()
         Me.ckMarcaDifCambio = New System.Windows.Forms.CheckBox()
         Me.ckChequeRechazado = New System.Windows.Forms.CheckBox()
         Me.CustomButton1 = New Administracion.CustomButton()
@@ -102,6 +103,7 @@ Partial Class Compras
         Me.btnEliminar = New Administracion.CustomButton()
         Me.btnConsultaNroFactura = New Administracion.CustomButton()
         Me.btnLimpiar = New Administracion.CustomButton()
+        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.gbTipo.SuspendLayout()
         CType(Me.gridAsientos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
@@ -241,6 +243,7 @@ Partial Class Compras
         'PanelPrincipal
         '
         Me.PanelPrincipal.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.PanelPrincipal.Controls.Add(Me.btn_Adjuntar)
         Me.PanelPrincipal.Controls.Add(Me.ckMarcaDifCambio)
         Me.PanelPrincipal.Controls.Add(Me.ckChequeRechazado)
         Me.PanelPrincipal.Controls.Add(Me.CustomButton1)
@@ -303,6 +306,18 @@ Partial Class Compras
         Me.PanelPrincipal.Size = New System.Drawing.Size(814, 551)
         Me.PanelPrincipal.TabIndex = 63
         '
+        'btn_Adjuntar
+        '
+        Me.btn_Adjuntar.AllowDrop = True
+        Me.btn_Adjuntar.BackgroundImage = Global.Administracion.My.Resources.Resources.images
+        Me.btn_Adjuntar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btn_Adjuntar.Location = New System.Drawing.Point(596, 33)
+        Me.btn_Adjuntar.Name = "btn_Adjuntar"
+        Me.btn_Adjuntar.Size = New System.Drawing.Size(45, 31)
+        Me.btn_Adjuntar.TabIndex = 66
+        Me.ToolTip1.SetToolTip(Me.btn_Adjuntar, "Adjuntar Documento")
+        Me.btn_Adjuntar.UseVisualStyleBackColor = True
+        '
         'ckMarcaDifCambio
         '
         Me.ckMarcaDifCambio.AutoSize = True
@@ -351,7 +366,7 @@ Partial Class Compras
         '
         'txtVtoCAI
         '
-        Me.txtVtoCAI.Location = New System.Drawing.Point(705, 39)
+        Me.txtVtoCAI.Location = New System.Drawing.Point(716, 39)
         Me.txtVtoCAI.Mask = "00/00/0000"
         Me.txtVtoCAI.Name = "txtVtoCAI"
         Me.txtVtoCAI.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -412,7 +427,7 @@ Partial Class Compras
         Me.CBLetra.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CBLetra.FormattingEnabled = True
         Me.CBLetra.Items.AddRange(New Object() {"", "A", "B", "C", "X", "M", "I"})
-        Me.CBLetra.Location = New System.Drawing.Point(321, 39)
+        Me.CBLetra.Location = New System.Drawing.Point(288, 39)
         Me.CBLetra.Name = "CBLetra"
         Me.CBLetra.Size = New System.Drawing.Size(36, 21)
         Me.CBLetra.TabIndex = 62
@@ -423,7 +438,7 @@ Partial Class Compras
         Me.txtNumero.Empty = False
         Me.txtNumero.EnterIndex = 6
         Me.txtNumero.LabelAssociationKey = 7
-        Me.txtNumero.Location = New System.Drawing.Point(535, 40)
+        Me.txtNumero.Location = New System.Drawing.Point(502, 40)
         Me.txtNumero.MaxLength = 8
         Me.txtNumero.Name = "txtNumero"
         Me.txtNumero.Size = New System.Drawing.Size(91, 20)
@@ -490,7 +505,7 @@ Partial Class Compras
         Me.CustomLabel5.ControlAssociationKey = 5
         Me.CustomLabel5.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel5.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel5.Location = New System.Drawing.Point(276, 41)
+        Me.CustomLabel5.Location = New System.Drawing.Point(243, 41)
         Me.CustomLabel5.Name = "CustomLabel5"
         Me.CustomLabel5.Size = New System.Drawing.Size(39, 18)
         Me.CustomLabel5.TabIndex = 4
@@ -544,7 +559,7 @@ Partial Class Compras
         Me.CustomLabel6.ControlAssociationKey = 6
         Me.CustomLabel6.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel6.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel6.Location = New System.Drawing.Point(361, 41)
+        Me.CustomLabel6.Location = New System.Drawing.Point(328, 41)
         Me.CustomLabel6.Name = "CustomLabel6"
         Me.CustomLabel6.Size = New System.Drawing.Size(45, 18)
         Me.CustomLabel6.TabIndex = 5
@@ -569,7 +584,7 @@ Partial Class Compras
         Me.CustomLabel7.ControlAssociationKey = 7
         Me.CustomLabel7.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel7.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel7.Location = New System.Drawing.Point(471, 41)
+        Me.CustomLabel7.Location = New System.Drawing.Point(438, 41)
         Me.CustomLabel7.Name = "CustomLabel7"
         Me.CustomLabel7.Size = New System.Drawing.Size(59, 18)
         Me.CustomLabel7.TabIndex = 6
@@ -581,7 +596,7 @@ Partial Class Compras
         Me.lblVtoCai.ControlAssociationKey = 8
         Me.lblVtoCai.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.lblVtoCai.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblVtoCai.Location = New System.Drawing.Point(636, 41)
+        Me.lblVtoCai.Location = New System.Drawing.Point(647, 41)
         Me.lblVtoCai.Name = "lblVtoCai"
         Me.lblVtoCai.Size = New System.Drawing.Size(70, 18)
         Me.lblVtoCai.TabIndex = 8
@@ -978,7 +993,7 @@ Partial Class Compras
         Me.txtPunto.Empty = False
         Me.txtPunto.EnterIndex = 5
         Me.txtPunto.LabelAssociationKey = 6
-        Me.txtPunto.Location = New System.Drawing.Point(412, 40)
+        Me.txtPunto.Location = New System.Drawing.Point(379, 40)
         Me.txtPunto.MaxLength = 4
         Me.txtPunto.Name = "txtPunto"
         Me.txtPunto.Size = New System.Drawing.Size(50, 20)
@@ -1143,6 +1158,10 @@ Partial Class Compras
         Me.ToolTip1.SetToolTip(Me.btnLimpiar, "Limpiar Formulario")
         Me.btnLimpiar.UseVisualStyleBackColor = True
         '
+        'OpenFileDialog1
+        '
+        Me.OpenFileDialog1.FileName = "OpenFileDialog1"
+        '
         'Compras
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1247,4 +1266,6 @@ Partial Class Compras
     Friend WithEvents Debito As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Credito As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ckMarcaDifCambio As System.Windows.Forms.CheckBox
+    Friend WithEvents btn_Adjuntar As System.Windows.Forms.Button
+    Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
 End Class

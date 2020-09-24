@@ -292,6 +292,12 @@
     <Compile Include="DetallesRemitosProveedor.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="EditorArchivos.Designer.vb">
+      <DependentUpon>EditorArchivos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EditorArchivos.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="EnvioEmailProveedores.Designer.vb">
       <DependentUpon>EnvioEmailProveedores.vb</DependentUpon>
     </Compile>
@@ -1107,6 +1113,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DetallesRemitosProveedor.resx">
       <DependentUpon>DetallesRemitosProveedor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditorArchivos.resx">
+      <DependentUpon>EditorArchivos.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EnvioEmailProveedores.resx">
       <DependentUpon>EnvioEmailProveedores.vb</DependentUpon>
@@ -2000,6 +2009,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Firma.JPG" />
+    <None Include="Resources\Image1.png" />
+    <None Include="Resources\icono.png" />
+    <None Include="Resources\images.png" />
     <None Include="Resources\exm.png" />
     <None Include="Resources\Exito.png" />
     <None Include="Resources\Error.png" />
