@@ -90,12 +90,15 @@ Public Class Compras
         _RetIB15 = ""
         _RetIB16 = ""
 
+        If Directory.Exists("C:\Auxiliar") Then Directory.Delete("C:\Auxiliar", True)
 
-        If DirecctorioVacio("C:\Auxiliar") Then
-            For Each archivo As String In Directory.GetFiles("C:\Auxiliar")
-                File.Delete(archivo)
-            Next
-        End If
+        Directory.CreateDirectory("C:\Auxiliar")
+
+        'If DirecctorioVacio("C:\Auxiliar") Then
+        '    For Each archivo As String In Directory.GetFiles("C:\Auxiliar")
+        '        File.Delete(archivo)
+        '    Next
+        'End If
         
         Array.Clear(_PyMENacion, 0, _PyMENacion.Length)
         Array.Clear(ImpoIb, 0, ImpoIb.Length)
