@@ -304,7 +304,7 @@ Public Class Ventana_Boton_Autorizo
                             & "'" & WFechaEntregaOrd & "', '" & RazonCliente & "', '" & "" & "', '" & "" & "', '" & cbx_Concepto.TabIndex & "', " _
                             & "'" & 0 & "', '" & 1 & "', '" & WVersionPedido & "')"
 
-                    ExecuteNonQueries({SQLCnslt}, "SurfactanSa")
+                    ExecuteNonQueries("SurfactanSa", {SQLCnslt})
                 End If
 
                 Dim WOwner As IAutorizacionDePedidos = TryCast(Owner, IAutorizacionDePedidos)

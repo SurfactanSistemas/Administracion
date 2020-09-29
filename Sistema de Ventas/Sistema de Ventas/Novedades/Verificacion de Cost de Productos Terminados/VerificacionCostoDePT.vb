@@ -10,7 +10,7 @@ Public Class VerificacionCostoDePT : Implements IVerificaCostoPT
 
         Dim SQLCnslt As String = "DELETE ComparaCostos"
 
-        ExecuteNonQueries({SQLCnslt}, "SurfactanSa")
+        ExecuteNonQueries("SurfactanSa", {SQLCnslt})
 
         Dim TablaLista As New DataTable
 
@@ -287,7 +287,7 @@ Public Class VerificacionCostoDePT : Implements IVerificaCostoPT
                              & "Values ('" & WProducto & "', '" & WDescripcion & "', '" & WCostoI & "', " _
                              & "'" & WCostoII & "', '" & WCostoIII & "')"
 
-                    ExecuteNonQueries({SQLCnslt}, "SurfactanSa")
+                    ExecuteNonQueries("SurfactanSa", {SQLCnslt})
 
                 End If
 
@@ -834,7 +834,7 @@ Public Class VerificacionCostoDePT : Implements IVerificaCostoPT
                                                      & "Precio2 = '" & 0 & "', " _
                                                      & "MarcaPrecio = '" & "" & "'"
 
-        ExecuteNonQueries({SQLCnslt}, "SurfactanSa")
+        ExecuteNonQueries("SurfactanSa", {SQLCnslt})
 
 
 
@@ -920,7 +920,7 @@ Public Class VerificacionCostoDePT : Implements IVerificaCostoPT
                                         & "  MarcaPrecio = '" & "S" & "' " _
                                         & "  WHERE Codigo = '" & Producto & "'"
 
-            ExecuteNonQueries({SQLCnslt}, "SurfactanSa")
+            ExecuteNonQueries("SurfactanSa", {SQLCnslt})
 
         Next
 

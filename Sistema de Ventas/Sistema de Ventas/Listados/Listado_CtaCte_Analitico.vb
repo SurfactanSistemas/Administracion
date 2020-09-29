@@ -140,7 +140,7 @@ Public Class Listado_CtaCte_Analitico : Implements IBuscarClienteCashFlow
         
         Dim SQLCnslt As String = "UPDATE CtaCte SET Empresa = 1"
 
-        ExecuteNonQueries({SQLCnslt}, Operador.Base)
+        ExecuteNonQueries(Operador.Base, {SQLCnslt})
 
 
         Dim WFormula As String = "{CtaCte.Cliente} >= '" & txt_DesdeCodigo.Text & "' AND {CtaCte.Cliente} <=  '" & txt_HastaCodigo.Text & "' " _

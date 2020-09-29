@@ -70,7 +70,7 @@ Public Class Derechos_GastosImportacion
 
         Next
 
-        ExecuteNonQueries(ListaSQlCnslt.ToArray(), "SurfactanSa")
+        ExecuteNonQueries("SurfactanSa", ListaSQlCnslt.ToArray())
 
         Close()
     End Sub

@@ -138,7 +138,7 @@ Public Class SaldoDe_CtaCte_deCliente : Implements IBuscarClienteCashFlow
 
 
 
-        ExecuteNonQueries(ListaSQLCnslt.ToArray(), Operador.Base)
+        ExecuteNonQueries(Operador.Base, ListaSQLCnslt.ToArray())
 
         Dim WTitulo As String = ""
 

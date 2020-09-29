@@ -115,7 +115,7 @@ Public Class Analisis_Cumplimiento_PedidosDeVentas
                     & " Dias = 0," _
                     & " TipoFecha = '" & cbx_FechaEntrega.SelectedIndex & "'," _
                     & " Titulo = '" & WTitulo & "'"
-        ExecuteNonQueries({SQLCnslt}, Operador.Base)
+        ExecuteNonQueries(Operador.Base, {SQLCnslt})
       
 
         Dim Renglon As Integer = 0
@@ -524,7 +524,7 @@ Public Class Analisis_Cumplimiento_PedidosDeVentas
 
 
 
-                ExecuteNonQueries({SQLCnslt}, Operador.Base)
+                ExecuteNonQueries(Operador.Base, {SQLCnslt})
 
             End If
             REM by nan

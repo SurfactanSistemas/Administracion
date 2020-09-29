@@ -56,10 +56,10 @@ Public Class Listado_CtaCte_deClientes_aFecha : Implements IBuscarClienteCashFlo
 
         
         Dim SQLCnslt As String = "Update Ctacte SET Tipo = '06' WHERE Tipo = 6"
-        ExecuteNonQueries({SQLCnslt}, Operador.Base)
+        ExecuteNonQueries(Operador.Base, {SQLCnslt})
 
         SQLCnslt = "Update Ctacte SET Tipo = '07' WHERE Tipo = 7"
-        ExecuteNonQueries({SQLCnslt}, Operador.Base)
+        ExecuteNonQueries(Operador.Base, {SQLCnslt})
 
 
         Dim TablaReporteCtaCteCliFecha As DataTable = New DBAuxi.TablaReporteCtaCteCliFechaDataTable()

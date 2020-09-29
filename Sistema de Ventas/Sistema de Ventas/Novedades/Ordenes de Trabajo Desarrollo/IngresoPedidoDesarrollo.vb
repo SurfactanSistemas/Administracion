@@ -118,7 +118,7 @@ Public Class IngresoPedidoDesarrollo
                          & "'" & txtReferencia3.Text & "')"
 
 
-                ExecuteNonQueries({SQLCnslt}, "SurfactanSa")
+                ExecuteNonQueries("SurfactanSa", {SQLCnslt})
 
                 MsgBox("Se asigno el numero de pedido " + WPedido)
             Else
@@ -157,7 +157,7 @@ Public Class IngresoPedidoDesarrollo
                              & "ReferenciaIII = '" & txtReferencia3.Text & "' " _
                              & "WHERE Pedido = '" & txtPedido.Text & "'"
 
-                    ExecuteNonQueries({SQLCnslt}, "SurfactanSa")
+                    ExecuteNonQueries("SurfactanSa", {SQLCnslt})
 
 
                 End If

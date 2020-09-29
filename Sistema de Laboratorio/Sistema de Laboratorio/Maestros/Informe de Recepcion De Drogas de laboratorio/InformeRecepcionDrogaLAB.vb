@@ -803,7 +803,7 @@
                                             Costo1 = (RowArticulo.Item("Costo1")).ToString()
                                             Costo3 = (IIf(IsDBNull(RowArticulo.Item("Costo3")), "0", RowArticulo.Item("Costo3"))).ToString()
 
-                                            SQLCnslt = "UPDATE SET Laboratorio = '" & Laboratorio & "', Entradas = '" & Entradas & "', Wdate = " & WDate & "', Costo1 = '" & Costo1 & "', Costo3 = '" & Costo3 & "' WHERE Codigo = '" & Articulo & "'"
+                                            SQLCnslt = "UPDATE Articulo SET Laboratorio = '" & Laboratorio & "', Entradas = '" & Entradas & "', Wdate = " & WDate & "', Costo1 = '" & Costo1 & "', Costo3 = '" & Costo3 & "' WHERE Codigo = '" & Articulo & "'"
                                             listaSQLCnslt.Add(SQLCnslt)
                                         End If
 

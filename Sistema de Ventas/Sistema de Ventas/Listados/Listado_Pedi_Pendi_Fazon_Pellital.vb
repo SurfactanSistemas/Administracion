@@ -14,12 +14,12 @@ Public Class Listado_Pedi_Pendi_Fazon_Pellital
 
         Dim SQLCnlst As String = "UPDATE Pedido SET Importe = 0"
 
-        ExecuteNonQueries({SQLCnlst}, "SurfactanSa")
+        ExecuteNonQueries("SurfactanSa", {SQLCnlst})
 
         SQLCnlst = "UPDATE  Pedido SET Importe = Cantidad - Facturado WHERE OrdFecEntrega >= '" & WDesde & "' " _
                     & "AND OrdFecentrega <= '" & WHasta & "'"
 
-        ExecuteNonQueries({SQLCnlst}, "SurfactanSa")
+        ExecuteNonQueries("SurfactanSa", {SQLCnlst})
 
         
         SQLCnlst = "SELECT Terminado FROM Pedido WHERE Importe > 0 ORDER BY Pedido"
@@ -66,7 +66,7 @@ Public Class Listado_Pedi_Pendi_Fazon_Pellital
 
                     SQLCnlst = "UPDATE Pedido SET Descripcion = '" & WDescripcion & "' WHERE Articulo = '" & WArticulo & "'"
 
-                    ExecuteNonQueries({SQLCnlst}, "SurfactanSa")
+                    ExecuteNonQueries("SurfactanSa", {SQLCnlst})
 
                 End If
 
@@ -83,7 +83,7 @@ Public Class Listado_Pedi_Pendi_Fazon_Pellital
 
                     SQLCnlst = "PDATE Pedido SET Descripcion = '" & WDescripcion & "'  WHERE Terminado = '" & WTerminado & "'"
 
-                    ExecuteNonQueries({SQLCnlst}, "SurfactanSa")
+                    ExecuteNonQueries("SurfactanSa", {SQLCnlst})
 
                 End If
 
@@ -94,7 +94,7 @@ Public Class Listado_Pedi_Pendi_Fazon_Pellital
         SQLCnlst = "UPDATE Pedido SET Descripcion = NombreComercial WHERE Terminado >= '" & "ML-00000-000" & "' " _
                     & "AND Terminado <= '" & "ML-99999-999" & "'"
 
-        ExecuteNonQueries({SQLCnlst}, "SurfactanSa")
+        ExecuteNonQueries("SurfactanSa", {SQLCnlst})
 
 
         

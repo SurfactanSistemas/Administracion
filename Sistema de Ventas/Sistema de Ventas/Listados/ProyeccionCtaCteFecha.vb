@@ -82,14 +82,14 @@ Public Class ProyeccionCtaCteFecha
 
             Dim SQLCnslt As String = "UPDATE CtaCte SET ProyectaSaldo = '" & "0" & "'"
 
-            ExecuteNonQueries({SQLCnslt}, Operador.Base)
+            ExecuteNonQueries(Operador.Base, {SQLCnslt})
 
             SQLCnslt = "UPDATE CtaCte SET " _
                         & "ProyectaSaldo = Saldo" _
                         & " Where Tipo < '" & "06" & "'" _
                         & " and OrdFecha <= '" & WFecha & "'"
 
-            ExecuteNonQueries({SQLCnslt}, Operador.Base)
+            ExecuteNonQueries(Operador.Base, {SQLCnslt})
 
 
 
@@ -198,7 +198,7 @@ Public Class ProyeccionCtaCteFecha
                             & "ProyectaSaldo = ProyectaSaldo + '" & Str$(WImporte) & "'" _
                             & " Where Clave = '" & WClave & "'"
 
-                ExecuteNonQueries({SQLCnslt}, Operador.Base)
+                ExecuteNonQueries(Operador.Base, {SQLCnslt})
 
             Next
 

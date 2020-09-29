@@ -314,7 +314,7 @@ Public Class ConsultaHojaDeRuta : Implements IHojaDeRuta
                 & "CodigoArticulo = '" & Row.Item("CodigoArticulo") & "' " _
                 & "WHERE Clave = '" & Row.Item("Clave") & "'"
 
-            ExecuteNonQueries({SQLCnslt}, "SurfactanSa")
+            ExecuteNonQueries("SurfactanSa", {SQLCnslt})
 
         Next
 

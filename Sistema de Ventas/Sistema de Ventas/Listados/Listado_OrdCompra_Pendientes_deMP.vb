@@ -89,7 +89,7 @@ Public Class Listado_OrdCompra_Pendientes_deMP : Implements IConsulta_MP
 
         Dim SQLCnslt As String = "DELETE ListaOrdenII"
 
-        ExecuteNonQueries({SQLCnslt}, Operador.Base)
+        ExecuteNonQueries(Operador.Base, {SQLCnslt})
 
 
         Dim vectorEmpresas(2) As String
@@ -101,7 +101,7 @@ Public Class Listado_OrdCompra_Pendientes_deMP : Implements IConsulta_MP
             
             SQLCnslt = "UPDATE Orden SET Saldo = Cantidad - Recibida"
 
-            ExecuteNonQueries({SQLCnslt}, vectorEmpresas(CicloEmpresa))
+            ExecuteNonQueries(vectorEmpresas(CicloEmpresa), {SQLCnslt})
 
             Dim TablaOrdenes As New DataTable
             With TablaOrdenes.Columns
@@ -153,7 +153,7 @@ Public Class Listado_OrdCompra_Pendientes_deMP : Implements IConsulta_MP
 
                 SQLCnslt = "UPDATE  Orden SET OrdFecha2 = '" & WFecha2 & "' WHERE Orden = '" & WOrden & "'"
 
-                ExecuteNonQueries({SQLCnslt}, vectorEmpresas(CicloEmpresa))
+                ExecuteNonQueries(vectorEmpresas(CicloEmpresa), {SQLCnslt})
             Next XX
 
             SQLCnslt = "Select PedidoImpo, FechaImpo, TipoImpo, Orden, Fecha, Proveedor,  " _
@@ -288,7 +288,7 @@ Public Class Listado_OrdCompra_Pendientes_deMP : Implements IConsulta_MP
                 & "'" & WFechaPedido & "'," _
                 & "'" & WTipoPedido & "')"
 
-                ExecuteNonQueries({SQLCnslt}, Operador.Base)
+                ExecuteNonQueries(Operador.Base, {SQLCnslt})
             
             Next
 
