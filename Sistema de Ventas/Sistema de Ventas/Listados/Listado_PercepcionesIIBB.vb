@@ -30,7 +30,7 @@ Public Class Listado_PercepcionesIIBB
                 SQLCnslt = "UPDATE Ctacte SET " _
                            & " ImpoIbTucu = 0" _
                            & " WHERE ImpoIbTucu IS NULL"
-                ExecuteNonQueries({SQLCnslt}, Operador.Base)
+                ExecuteNonQueries(Operador.Base, {SQLCnslt})
 
                 SQLCnslt = "UPDATE  Ctacte SET " _
                             & "Importe4 = 0, " _
@@ -39,7 +39,7 @@ Public Class Listado_PercepcionesIIBB
                             & "Importe7 = 0, " _
                             & "Importe8	= 0"
 
-                ExecuteNonQueries({SQLCnslt}, Operador.Base)
+                ExecuteNonQueries(Operador.Base, {SQLCnslt})
 
                 REM Procesa las cobranzas
 
@@ -170,7 +170,7 @@ Public Class Listado_PercepcionesIIBB
                                     & "Importe8 = ImpoIB " _
                                     & "WHERE Clave = '" & ClaveCtacte & "'"
 
-                        ExecuteNonQueries({SQLCnslt}, Operador.Base)
+                        ExecuteNonQueries(Operador.Base, {SQLCnslt})
 
                     End If
                 Next
@@ -206,7 +206,7 @@ Public Class Listado_PercepcionesIIBB
                             & "WHERE ImpoIbTucu IS NULL "
 
 
-                ExecuteNonQueries({SQLCnslt}, Operador.Base)
+                ExecuteNonQueries(Operador.Base, {SQLCnslt})
 
                 Dim WFormula As String = "{CtaCte.Tipo} >= '" & "01" & "' AND {CtaCte.Tipo} <= '" & "05" & "' " _
                                          & "AND {CtaCte.ImpoIbTucu} <> 0 " _
@@ -232,7 +232,7 @@ Public Class Listado_PercepcionesIIBB
                            & "ImpoIbCiudad = 0 " _
                            & "WHERE ImpoIbCiudad IS NULL"
 
-                ExecuteNonQueries({SQLCnslt}, Operador.Base)
+                ExecuteNonQueries(Operador.Base, {SQLCnslt})
 
                 
                 Dim WTitulo As String = "del " & txt_DesdeFecha.Text & " al " & txt_HastaFecha.Text
@@ -260,13 +260,13 @@ Public Class Listado_PercepcionesIIBB
                 SQLCnslt = "UPDATE Ctacte SET " _
                             & " ImpoIbTucu = 0" _
                             & " Where ImpoIbTucu IS NULL"
-                ExecuteNonQueries({SQLCnslt}, Operador.Base)
+                ExecuteNonQueries(Operador.Base, {SQLCnslt})
 
                 SQLCnslt = "UPDATE Ctacte SET " _
                            & " ImpoIbCiudad = 0" _
                            & " Where ImpoIbCiudad IS NULL"
 
-                ExecuteNonQueries({SQLCnslt}, Operador.Base)
+                ExecuteNonQueries(Operador.Base, {SQLCnslt})
 
                 SQLCnslt = "UPDATE  Ctacte SET " _
                             & "Importe4 = 0, " _
@@ -275,7 +275,7 @@ Public Class Listado_PercepcionesIIBB
                             & "Importe7 = 0, " _
                             & "Importe8	= 0"
 
-                ExecuteNonQueries({SQLCnslt}, Operador.Base)
+                ExecuteNonQueries(Operador.Base, {SQLCnslt})
 
                 REM Procesa las cobranzas
 
@@ -392,7 +392,7 @@ Public Class Listado_PercepcionesIIBB
                                     & "Importe8 = ImpoIbCiudad " _
                                     & "WHERE Clave = '" & ClaveCtacte & "'"
 
-                        ExecuteNonQueries({SQLCnslt}, Operador.Base)
+                        ExecuteNonQueries(Operador.Base, {SQLCnslt})
 
                     End If
                 Next

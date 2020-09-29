@@ -173,7 +173,7 @@ Public Class LIstado_Proyeccion_CtaCteClienteAnalitico : Implements IBuscarClien
         Dim SQLCnslt As String = "UPDATE CtaCte SET " _
                                 & " Empresa = 1"
 
-        ExecuteNonQueries({SQLCnslt}, Operador.Base)
+        ExecuteNonQueries(Operador.Base, {SQLCnslt})
 
 
         Dim Wformula As String

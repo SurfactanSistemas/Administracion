@@ -2,8 +2,19 @@
 Imports ClasesCompartidas
 Imports System.Data.SqlClient
 Imports System.Text.RegularExpressions
+Imports System.IO
+Imports Microsoft.VisualBasic.CompilerServices
+
 
 Public Class Compras
+
+    'Variables de adjuntar archivos
+    Private Const EXTENSIONES_PERMITIDAS = "*.bmp|*.png|*.jpg|*.jpeg|*.pdf|*.doc|*.docx|*.xls|*.xlsx"
+
+    Dim RutaGuardar As String = "\\193.168.0.2\g$\vb\NET\ArchivosRelacionadosFacturasCompras"
+    Dim RutaArchivo As String = ""
+    'Fin variables de adjuntar archivos
+
 
     Dim diasPlazo As Integer = 0
     ReadOnly letrasValidas As New List(Of String) From {"A", "B", "C", "X", "M", "I"}
@@ -79,6 +90,13 @@ Public Class Compras
         _RetIB15 = ""
         _RetIB16 = ""
 
+
+        If DirecctorioVacio("C:\Auxiliar") Then
+            For Each archivo As String In Directory.GetFiles("C:\Auxiliar")
+                File.Delete(archivo)
+            Next
+        End If
+        
         Array.Clear(_PyMENacion, 0, _PyMENacion.Length)
         Array.Clear(ImpoIb, 0, ImpoIb.Length)
 
@@ -452,6 +470,13 @@ Public Class Compras
                 End Try
 
             End If
+
+            If DirecctorioVacio("C:\Auxiliar") Then
+                _SubirArchvios(compra.nroInterno)
+            End If
+
+
+
             MsgBox("El número de Factura asignado es: " & compra.nroInterno, MsgBoxStyle.Information)
 
             _ComprobarANProveedor()
@@ -836,7 +861,7 @@ Public Class Compras
 
         Try
 
-            cn.ConnectionString = _ConectarA
+            cn.ConnectionString = _ConectarA()
             cn.Open()
             cm.Connection = cn
 
@@ -868,7 +893,7 @@ Public Class Compras
 
         Try
 
-            cn.ConnectionString = _ConectarA
+            cn.ConnectionString = _ConectarA()
             cn.Open()
             cm.Connection = cn
 
@@ -1419,7 +1444,7 @@ Public Class Compras
 
             Dim Wrem = "SurfactanSA"
 
-            If _EsPellital Then
+            If _EsPellital() Then
                 Wrem = "Pellital_III"
             End If
 
@@ -1571,7 +1596,7 @@ Public Class Compras
                 WCuenta = DAOCuentaContable.proveedoresInternacionales
             End If
 
-            If IsNothing(cuenta) Then
+            If IsNothing(Cuenta) Then
                 MsgBox("No se encontró una cuenta asociada para poder calcular el Asiento correspondiente.", MsgBoxStyle.Information)
                 Exit Sub
             End If
@@ -2061,7 +2086,7 @@ Public Class Compras
     Private Sub _BorrarImputaciones()
         Dim cn = New SqlConnection()
         Dim cm = New SqlCommand("DELETE FROM Imputac WHERE NroInterno = '" & Trim(txtNroInterno.Text) & "'")
-        
+
         SQLConnector.conexionSql(cn, cm)
 
         Try
@@ -2262,5 +2287,97 @@ Public Class Compras
         calcularAsiento()
 
     End Sub
+
+
+    ' DESARROLLO DEL BOTON DE ADJUNTAR
+
+    'Private Sub btn_Adjuntar_DragEnter(ByVal sender As Object, ByVal e As DragEventArgs) Handles btn_Adjuntar.DragEnter
+    '    _PermitirDrag(e)
+    'End Sub
+    '
+    'Private Sub btn_Adjuntar_DragDrop(ByVal sender As Object, ByVal e As DragEventArgs) Handles btn_Adjuntar.DragDrop
+    '    _ProcesarDragDeArchivo(e)
+    'End Sub
+    '
+    'Private Sub _PermitirDrag(ByVal e As DragEventArgs)
+    '    If e.Data.GetDataPresent(DataFormats.FileDrop) Then
+    '        e.Effect = DragDropEffects.Copy
+    '    End If
+    'End Sub
+    '
+    'Private Sub _ProcesarDragDeArchivo(ByVal e As DragEventArgs)
+    '    Dim archivos() As String = e.Data.GetData(DataFormats.FileDrop)
+    '    RutaArchivo = archivos(0)
+    '    '_SubirArchvios(archivos)
+    'End Sub
+
+    Private Sub btn_Adjuntar_Click(sender As Object, e As EventArgs) Handles btn_Adjuntar.Click
+        If Trim(txtNroInterno.Text) = "" Then
+            Dim CarpetaAux As String = "C:\" & "Auxiliar"
+            If Not Directory.Exists(CarpetaAux) Then
+                Directory.CreateDirectory(CarpetaAux)
+            End If
+            With New EditorArchivos(2, CarpetaAux)
+                'With New EditorArchivos(2, RutaGuardar & "\Auxiliar")
+                .Show()
+            End With
+        Else
+            With New EditorArchivos(2, RutaGuardar & "\" & txtNroInterno.Text)
+                .Show()
+            End With
+        End If
+       
+    End Sub
+
+
+    Private Sub _SubirArchvios(ByVal NroInterno As String)
+
+        Dim WDestino = RutaGuardar & "\" & NroInterno
+        Dim WCantCorrectas = 0
+
+        'If RutaArchivo.Length = 0 Then : Return : End If
+
+        Try
+            'Verificamos sino existe la carpeta, sino existe la creamos
+            If (Not Directory.Exists(WDestino)) Then
+                Directory.CreateDirectory(WDestino)
+            End If
+        Catch ex As Exception
+
+        End Try
+
+        For Each archivo As String In Directory.GetFiles("C:\Auxiliar")
+            Try
+                Dim NombreArchivo As String = archivo.Remove(0, ("C:\Auxiliar\").Length)
+                If Not File.Exists(WDestino & "\" & NombreArchivo) Then
+                    'Si no existe lo copio
+                    File.Move(archivo, WDestino & "\" & NombreArchivo)
+                    WCantCorrectas += 1
+                    File.Delete(archivo)
+                Else
+                    'sino llegan a haber borrado los archivos y le adjuntan uno
+                    ' que ya existe con el mismo nombre consutamos si sobre escribir
+                    If MsgBox("El Archivo """ & Path.GetFileName(archivo) & """, ya existe en la carpeta. ¿Desea sobreescribir el archivo existente?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                        File.Delete(WDestino & "\" & NombreArchivo)
+                        File.Move(archivo, WDestino & "\" & NombreArchivo)
+                        WCantCorrectas += 1
+
+                    End If
+                End If
+
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Critical)
+                Return
+            End Try
+        Next
+
+
+
+    End Sub
+
+    Public Function DirecctorioVacio(ByVal Ruta As String) As Boolean
+        Return Directory.EnumerateFileSystemEntries(Ruta).Any()
+    End Function
+
 
 End Class

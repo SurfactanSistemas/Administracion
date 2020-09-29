@@ -19,7 +19,7 @@ Public Class Listado_DY_SinVentas : Implements IConsulta_DY
 
         Dim SQLCnslt As String = "DELETE Minimo"
 
-        ExecuteNonQueries({SQLCnslt}, Operador.Base)
+        ExecuteNonQueries(Operador.Base, {SQLCnslt})
         'ListaSQLCnslt.Add(SQLCnslt)
 
         Dim VectorEmpre(7) As String
@@ -195,7 +195,7 @@ Public Class Listado_DY_SinVentas : Implements IConsulta_DY
         Next
 
 
-        ExecuteNonQueries(ListaSQLCnslt.ToArray(), Operador.Base)
+        ExecuteNonQueries(Operador.Base, ListaSQLCnslt.ToArray())
 
 
         ListaSQLCnslt.Clear()
@@ -305,7 +305,7 @@ Public Class Listado_DY_SinVentas : Implements IConsulta_DY
 
         Next
 
-          ExecuteNonQueries(ListaSQLCnslt.ToArray(), Operador.Base)
+        ExecuteNonQueries(Operador.Base, ListaSQLCnslt.ToArray())
 
         With New VistaPrevia
             .Reporte = New Reporte_PT_SinVentas()

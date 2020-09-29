@@ -1,4 +1,5 @@
 ﻿Imports System.Data.SqlClient
+Imports System.IO
 Imports ClasesCompartidas
 Imports System.Text.RegularExpressions
 
@@ -305,4 +306,32 @@ Public Class ConsultaDatosFactura
 
         e.Handled = True
     End Sub
+
+    Private Sub btn_VerAdjunto_Click(sender As Object, e As EventArgs) Handles btn_VerAdjunto.Click
+        Dim RutaGuardar As String = "\\193.168.0.2\g$\vb\NET\ArchivosRelacionadosFacturasCompras"
+        Try
+            If (Not Directory.Exists(RutaGuardar & "\" & NroInterno)) Then
+                MsgBox("No existe ningun archivo para este numero interno")
+                Exit Sub
+            End If
+            Dim RutaArchivo() As String = Directory.GetFiles(RutaGuardar & "\" & NroInterno)
+
+            ' If RutaArchivo.Any() Then
+            With New EditorArchivos(2, RutaGuardar & "\" & NroInterno, False)
+                .Show(Me)
+            End With
+            '  For Each RutaArc In RutaArchivo
+            '      Process.Start(RutaArc, "f")
+            '  Next
+            'Else
+            '   MsgBox("Existe una carpeta para este numero interno, pero no contiene archivos adjuntos", vbExclamation)
+            'End If
+
+        Catch ex As Exception
+
+        End Try
+        
+    End Sub
+
+
 End Class

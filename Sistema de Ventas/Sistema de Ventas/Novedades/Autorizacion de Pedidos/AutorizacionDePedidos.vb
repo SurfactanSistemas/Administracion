@@ -1202,7 +1202,7 @@ Public Class AutorizacionDePedidos : Implements IAutorizacionDePedidos
             Next
 
             'EJECTUTAMOS TODAS LAS MODIFICACIONES A LAS TABLAS
-            ExecuteNonQueries(ListaSQLCnslt.ToArray(), "SurfactanSa")
+            ExecuteNonQueries("SurfactanSa", ListaSQLCnslt.ToArray())
         End If
     End Sub
 

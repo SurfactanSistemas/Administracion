@@ -186,7 +186,7 @@ Public Class OrdenesTrabajoDesarrollo : Implements IOrdenDeTrabajoDesarrollo
     Private Sub DGV_OrdenesDesarrollo_RowHeaderMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DGV_OrdenesDesarrollo.RowHeaderMouseClick
         If MsgBox("¿Desea borrar el pedido numero " & DGV_OrdenesDesarrollo.CurrentRow.Cells("Pedido").Value & "?", vbYesNo) = vbYes Then
             Dim SQLCnsl As String = "DELETE FROM PedidoOrdenTrabajo WHERE Pedido = '" & Val(DGV_OrdenesDesarrollo.CurrentRow.Cells("Pedido").Value) & "'"
-            ExecuteNonQueries({SQLCnsl}, "SurfactanSa")
+            ExecuteNonQueries("SurfactanSa", {SQLCnsl})
             btnFiltrar_Click(Nothing, Nothing)
         End If
     End Sub

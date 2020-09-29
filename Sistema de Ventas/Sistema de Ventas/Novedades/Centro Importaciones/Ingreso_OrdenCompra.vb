@@ -244,7 +244,7 @@ Public Class Ingreso_OrdenCompra
                 & " TipoPago = '" & ZZTipoPago & "'" _
                 & " Where Orden = '" & txt_Orden.Text & "'"
 
-                ExecuteNonQueries({SQLCnslt}, WBASEACONECTAR)
+                ExecuteNonQueries(WBASEACONECTAR, {SQLCnslt})
             End If
 
         End If
@@ -255,7 +255,7 @@ Public Class Ingreso_OrdenCompra
                     Dim SqlCnslt As String = "UPDATE Articulo SET " _
                                             & " Posarance = '" & DGV_Orden.Rows(i).Cells("PosicionArancelaria").Value & "'" _
                                             & " Where Codigo = '" & DGV_Orden.Rows(i).Cells("Producto").Value & "'"
-                    ExecuteNonQueries({SqlCnslt}, Operador.Base)
+                    ExecuteNonQueries(Operador.Base, {SqlCnslt})
                 End If
             End If
         Next

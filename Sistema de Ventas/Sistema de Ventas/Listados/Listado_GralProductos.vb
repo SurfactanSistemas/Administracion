@@ -292,7 +292,7 @@ Public Class Listado_GralProductos
 
         ListaSQLCnslt.Add(SQLCnslt)
 
-        ExecuteNonQueries({SQLCnslt}, Operador.Base)
+        ExecuteNonQueries(Operador.Base, {SQLCnslt})
 
 
         Dim WFormula As String = "{Terminado.Linea} >= " & txt_Desde.Text & " AND {Terminado.Linea} <= " & txt_Hasta.Text & "" _

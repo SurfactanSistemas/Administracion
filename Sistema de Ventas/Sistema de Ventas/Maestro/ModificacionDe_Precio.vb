@@ -52,7 +52,7 @@ Public Class ModificacionDe_Precio : Implements IBuscarClienteCashFlow, IConsult
 
             Next
 
-            ExecuteNonQueries(listaSQLCnslt.ToArray(), Operador.Base)
+            ExecuteNonQueries(Operador.Base, listaSQLCnslt.ToArray())
             LimpiarPantalla()
 
         End If
@@ -358,7 +358,7 @@ Public Class ModificacionDe_Precio : Implements IBuscarClienteCashFlow, IConsult
 
             Next
 
-            ExecuteNonQueries(listaSQLCnslt.ToArray(), Operador.Base)
+            ExecuteNonQueries(Operador.Base, listaSQLCnslt.ToArray())
             LimpiarPantalla()
 
         End If

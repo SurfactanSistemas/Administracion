@@ -216,7 +216,7 @@ Public Class Listado_Precios_Compara_Cliente : Implements IBuscadorCliente
             Next
         End If
 
-        ExecuteNonQueries(ListaSQLCnslt.ToArray(), Operador.Base)
+        ExecuteNonQueries(Operador.Base, ListaSQLCnslt.ToArray())
       
 
         Dim WFormula As String = "{CargaLista.Lista} = " & ZVersion & " AND {CargaLista.Linea}  >= " & "0" & " AND {CargaLista.Linea}  <= " & "9999"

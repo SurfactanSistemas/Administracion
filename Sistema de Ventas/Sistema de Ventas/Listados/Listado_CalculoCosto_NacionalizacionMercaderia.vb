@@ -316,7 +316,7 @@ Public Class Listado_CalculoCosto_NacionalizacionMercaderia
 
         Next
 
-        ExecuteNonQueries(ListaSQLCnslt.ToArray(), Operador.Base)
+        ExecuteNonQueries(Operador.Base, ListaSQLCnslt.ToArray())
 
         
 

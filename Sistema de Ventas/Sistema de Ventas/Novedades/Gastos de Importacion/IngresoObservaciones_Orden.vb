@@ -215,7 +215,7 @@ Public Class IngresoObservaciones_Orden
 
         ListaSQLCnslt.Add(SQLCnslt)
 
-        ExecuteNonQueries(ListaSQLCnslt.ToArray(), Operador.Base)
+        ExecuteNonQueries(Operador.Base, ListaSQLCnslt.ToArray())
 
         Close()
 

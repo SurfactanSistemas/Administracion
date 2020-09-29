@@ -22,6 +22,7 @@ Partial Class ConsultaDatosFactura
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -37,6 +38,16 @@ Partial Class ConsultaDatosFactura
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.DGVArticulos = New System.Windows.Forms.DataGridView()
+        Me.Informe = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FechaInforme = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Remito = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Orden = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FechaOrden = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Carpeta = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Producto = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Cantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Precio = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.txtFechaFactura = New System.Windows.Forms.MaskedTextBox()
         Me.txtFechaInformeRecepcion = New System.Windows.Forms.MaskedTextBox()
@@ -58,6 +69,7 @@ Partial Class ConsultaDatosFactura
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.btn_VerAdjunto = New System.Windows.Forms.Button()
         Me.txtFechaVto2 = New System.Windows.Forms.MaskedTextBox()
         Me.txtFechaVto1 = New System.Windows.Forms.MaskedTextBox()
         Me.txtFechaVtoIva = New System.Windows.Forms.MaskedTextBox()
@@ -74,16 +86,7 @@ Partial Class ConsultaDatosFactura
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
-        Me.Informe = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FechaInforme = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Remito = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Orden = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FechaOrden = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Carpeta = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Producto = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Cantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Precio = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Panel1.SuspendLayout()
         CType(Me.DGVArticulos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -152,6 +155,120 @@ Partial Class ConsultaDatosFactura
         Me.DGVArticulos.ShowCellToolTips = False
         Me.DGVArticulos.Size = New System.Drawing.Size(837, 349)
         Me.DGVArticulos.TabIndex = 33
+        '
+        'Informe
+        '
+        Me.Informe.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Informe.DataPropertyName = "Informe"
+        DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Informe.DefaultCellStyle = DataGridViewCellStyle21
+        Me.Informe.HeaderText = "Inf"
+        Me.Informe.Name = "Informe"
+        Me.Informe.ReadOnly = True
+        Me.Informe.Width = 44
+        '
+        'FechaInforme
+        '
+        Me.FechaInforme.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.FechaInforme.DataPropertyName = "FechaInforme"
+        DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.FechaInforme.DefaultCellStyle = DataGridViewCellStyle22
+        Me.FechaInforme.HeaderText = "Fecha Inf"
+        Me.FechaInforme.Name = "FechaInforme"
+        Me.FechaInforme.ReadOnly = True
+        Me.FechaInforme.Width = 77
+        '
+        'Remito
+        '
+        Me.Remito.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Remito.DataPropertyName = "Remito"
+        DataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Remito.DefaultCellStyle = DataGridViewCellStyle23
+        Me.Remito.HeaderText = "Remito"
+        Me.Remito.Name = "Remito"
+        Me.Remito.ReadOnly = True
+        Me.Remito.Width = 65
+        '
+        'Orden
+        '
+        Me.Orden.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Orden.DataPropertyName = "Orden"
+        DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle24.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Orden.DefaultCellStyle = DataGridViewCellStyle24
+        Me.Orden.HeaderText = "Orden"
+        Me.Orden.Name = "Orden"
+        Me.Orden.ReadOnly = True
+        Me.Orden.Width = 61
+        '
+        'FechaOrden
+        '
+        Me.FechaOrden.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.FechaOrden.DataPropertyName = "FechaOrden"
+        DataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.FechaOrden.DefaultCellStyle = DataGridViewCellStyle25
+        Me.FechaOrden.HeaderText = "Fecha"
+        Me.FechaOrden.Name = "FechaOrden"
+        Me.FechaOrden.ReadOnly = True
+        Me.FechaOrden.Width = 62
+        '
+        'Carpeta
+        '
+        Me.Carpeta.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Carpeta.DataPropertyName = "Carpeta"
+        DataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Carpeta.DefaultCellStyle = DataGridViewCellStyle26
+        Me.Carpeta.HeaderText = "Carpeta"
+        Me.Carpeta.Name = "Carpeta"
+        Me.Carpeta.ReadOnly = True
+        Me.Carpeta.Width = 69
+        '
+        'Producto
+        '
+        Me.Producto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Producto.DataPropertyName = "Producto"
+        DataGridViewCellStyle27.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Producto.DefaultCellStyle = DataGridViewCellStyle27
+        Me.Producto.HeaderText = "Producto"
+        Me.Producto.Name = "Producto"
+        Me.Producto.ReadOnly = True
+        Me.Producto.Width = 75
+        '
+        'Descripcion
+        '
+        Me.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Descripcion.DataPropertyName = "Descripcion"
+        DataGridViewCellStyle28.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Descripcion.DefaultCellStyle = DataGridViewCellStyle28
+        Me.Descripcion.HeaderText = "Descripcion"
+        Me.Descripcion.Name = "Descripcion"
+        Me.Descripcion.ReadOnly = True
+        '
+        'Cantidad
+        '
+        Me.Cantidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Cantidad.DataPropertyName = "Cantidad"
+        DataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle29.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle29.NullValue = "0"
+        Me.Cantidad.DefaultCellStyle = DataGridViewCellStyle29
+        Me.Cantidad.HeaderText = "Cantidad"
+        Me.Cantidad.Name = "Cantidad"
+        Me.Cantidad.ReadOnly = True
+        Me.Cantidad.Width = 74
+        '
+        'Precio
+        '
+        Me.Precio.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Precio.DataPropertyName = "Precio"
+        DataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle30.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle30.NullValue = "0"
+        Me.Precio.DefaultCellStyle = DataGridViewCellStyle30
+        Me.Precio.HeaderText = "Precio"
+        Me.Precio.Name = "Precio"
+        Me.Precio.ReadOnly = True
+        Me.Precio.Width = 62
         '
         'GroupBox1
         '
@@ -396,6 +513,7 @@ Partial Class ConsultaDatosFactura
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.btn_VerAdjunto)
         Me.GroupBox2.Controls.Add(Me.txtFechaVto2)
         Me.GroupBox2.Controls.Add(Me.txtFechaVto1)
         Me.GroupBox2.Controls.Add(Me.txtFechaVtoIva)
@@ -420,6 +538,17 @@ Partial Class ConsultaDatosFactura
         Me.GroupBox2.TabIndex = 1
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Detalles"
+        '
+        'btn_VerAdjunto
+        '
+        Me.btn_VerAdjunto.BackgroundImage = Global.Administracion.My.Resources.Resources.icono
+        Me.btn_VerAdjunto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btn_VerAdjunto.Location = New System.Drawing.Point(574, 100)
+        Me.btn_VerAdjunto.Name = "btn_VerAdjunto"
+        Me.btn_VerAdjunto.Size = New System.Drawing.Size(42, 46)
+        Me.btn_VerAdjunto.TabIndex = 3
+        Me.ToolTip1.SetToolTip(Me.btn_VerAdjunto, "Ver Archivo Adjunto")
+        Me.btn_VerAdjunto.UseVisualStyleBackColor = True
         '
         'txtFechaVto2
         '
@@ -589,120 +718,6 @@ Partial Class ConsultaDatosFactura
         Me.Label14.TabIndex = 0
         Me.Label14.Text = "Nro de Interno:"
         '
-        'Informe
-        '
-        Me.Informe.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Informe.DataPropertyName = "Informe"
-        DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Informe.DefaultCellStyle = DataGridViewCellStyle21
-        Me.Informe.HeaderText = "Inf"
-        Me.Informe.Name = "Informe"
-        Me.Informe.ReadOnly = True
-        Me.Informe.Width = 44
-        '
-        'FechaInforme
-        '
-        Me.FechaInforme.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.FechaInforme.DataPropertyName = "FechaInforme"
-        DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.FechaInforme.DefaultCellStyle = DataGridViewCellStyle22
-        Me.FechaInforme.HeaderText = "Fecha Inf"
-        Me.FechaInforme.Name = "FechaInforme"
-        Me.FechaInforme.ReadOnly = True
-        Me.FechaInforme.Width = 77
-        '
-        'Remito
-        '
-        Me.Remito.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Remito.DataPropertyName = "Remito"
-        DataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Remito.DefaultCellStyle = DataGridViewCellStyle23
-        Me.Remito.HeaderText = "Remito"
-        Me.Remito.Name = "Remito"
-        Me.Remito.ReadOnly = True
-        Me.Remito.Width = 65
-        '
-        'Orden
-        '
-        Me.Orden.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Orden.DataPropertyName = "Orden"
-        DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle24.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Orden.DefaultCellStyle = DataGridViewCellStyle24
-        Me.Orden.HeaderText = "Orden"
-        Me.Orden.Name = "Orden"
-        Me.Orden.ReadOnly = True
-        Me.Orden.Width = 61
-        '
-        'FechaOrden
-        '
-        Me.FechaOrden.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.FechaOrden.DataPropertyName = "FechaOrden"
-        DataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.FechaOrden.DefaultCellStyle = DataGridViewCellStyle25
-        Me.FechaOrden.HeaderText = "Fecha"
-        Me.FechaOrden.Name = "FechaOrden"
-        Me.FechaOrden.ReadOnly = True
-        Me.FechaOrden.Width = 62
-        '
-        'Carpeta
-        '
-        Me.Carpeta.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Carpeta.DataPropertyName = "Carpeta"
-        DataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Carpeta.DefaultCellStyle = DataGridViewCellStyle26
-        Me.Carpeta.HeaderText = "Carpeta"
-        Me.Carpeta.Name = "Carpeta"
-        Me.Carpeta.ReadOnly = True
-        Me.Carpeta.Width = 69
-        '
-        'Producto
-        '
-        Me.Producto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Producto.DataPropertyName = "Producto"
-        DataGridViewCellStyle27.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Producto.DefaultCellStyle = DataGridViewCellStyle27
-        Me.Producto.HeaderText = "Producto"
-        Me.Producto.Name = "Producto"
-        Me.Producto.ReadOnly = True
-        Me.Producto.Width = 75
-        '
-        'Descripcion
-        '
-        Me.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.Descripcion.DataPropertyName = "Descripcion"
-        DataGridViewCellStyle28.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Descripcion.DefaultCellStyle = DataGridViewCellStyle28
-        Me.Descripcion.HeaderText = "Descripcion"
-        Me.Descripcion.Name = "Descripcion"
-        Me.Descripcion.ReadOnly = True
-        '
-        'Cantidad
-        '
-        Me.Cantidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Cantidad.DataPropertyName = "Cantidad"
-        DataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle29.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle29.NullValue = "0"
-        Me.Cantidad.DefaultCellStyle = DataGridViewCellStyle29
-        Me.Cantidad.HeaderText = "Cantidad"
-        Me.Cantidad.Name = "Cantidad"
-        Me.Cantidad.ReadOnly = True
-        Me.Cantidad.Width = 74
-        '
-        'Precio
-        '
-        Me.Precio.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Precio.DataPropertyName = "Precio"
-        DataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle30.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle30.NullValue = "0"
-        Me.Precio.DefaultCellStyle = DataGridViewCellStyle30
-        Me.Precio.HeaderText = "Precio"
-        Me.Precio.Name = "Precio"
-        Me.Precio.ReadOnly = True
-        Me.Precio.Width = 62
-        '
         'ConsultaDatosFactura
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -779,4 +794,6 @@ Partial Class ConsultaDatosFactura
     Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Cantidad As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Precio As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents btn_VerAdjunto As System.Windows.Forms.Button
+    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
 End Class

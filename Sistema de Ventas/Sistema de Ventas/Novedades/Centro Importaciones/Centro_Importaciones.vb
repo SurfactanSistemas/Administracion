@@ -122,7 +122,7 @@ Public Class Centro_Importaciones : Implements ICentroImportaciones_auxiliar
                 & " MarcaActualiza = '" & "" & "'" _
                 & " Where MarcaActualiza IS NULL"
 
-                ExecuteNonQueries({SQLCnslt}, VectorEmpresas(CiclaEmpresa))
+                ExecuteNonQueries(VectorEmpresas(CiclaEmpresa), {SQLCnslt})
 
 
 
@@ -484,13 +484,13 @@ Public Class Centro_Importaciones : Implements ICentroImportaciones_auxiliar
                                 & " PagoParcialLetra = '" & ZZPagado & "'" _
                                 & " WHERE Orden = '" & ZZOrden & "'"
 
-                    ExecuteNonQueries({SQLCnslt}, ConectarA)
+                    ExecuteNonQueries(ConectarA, {SQLCnslt})
 
                     If ZZGrabaII = "S" Then
                         SQLCnslt = "UPDATE Orden SET" _
                                 & " TipoPago = '" & ZZTipoPago & "'" _
                                 & " WHERE Orden = '" & ZZOrden & "'"
-                        ExecuteNonQueries({SQLCnslt}, ConectarA)
+                        ExecuteNonQueries(ConectarA, {SQLCnslt})
                     End If
 
 
@@ -2268,7 +2268,7 @@ Public Class Centro_Importaciones : Implements ICentroImportaciones_auxiliar
 
         Dim SQLCnlst As String = "DELETE ControlImpoImpre"
 
-        ExecuteNonQueries({SQLCnlst}, Operador.Base)
+        ExecuteNonQueries(Operador.Base, {SQLCnlst})
 
         Dim ListaSQLCnslt As New List(Of String)
 
@@ -2356,7 +2356,7 @@ Public Class Centro_Importaciones : Implements ICentroImportaciones_auxiliar
         Next
 
         If ListaSQLCnslt.Count > 0 Then
-            ExecuteNonQueries(ListaSQLCnslt.ToArray(), Operador.Base)
+            ExecuteNonQueries(Operador.Base, ListaSQLCnslt.ToArray())
 
             With New VistaPrevia
                 .Reporte = New Reporte_CentroDe_Exportacion()
