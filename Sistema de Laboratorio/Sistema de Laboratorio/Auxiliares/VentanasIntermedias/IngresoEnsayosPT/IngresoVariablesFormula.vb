@@ -306,18 +306,6 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
                 Me.Close()
                 Exit Sub
 
-
-
-
-                '
-                '
-                '
-                '
-                '
-                '
-                '
-
-
             End If
         End If
 
