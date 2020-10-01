@@ -70,9 +70,9 @@ Partial Class ClientesReprogramados
         Me.label1.ForeColor = System.Drawing.Color.White
         Me.label1.Location = New System.Drawing.Point(3, 6)
         Me.label1.Name = "label1"
-        Me.label1.Size = New System.Drawing.Size(202, 17)
+        Me.label1.Size = New System.Drawing.Size(63, 17)
         Me.label1.TabIndex = 0
-        Me.label1.Text = "LLamadas Reprogramadas"
+        Me.label1.Text = "Agenda"
         '
         'Label3
         '
@@ -145,10 +145,10 @@ Partial Class ClientesReprogramados
         '
         Me.FechaRepro.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.FechaRepro.DataPropertyName = "FechaRePro"
-        Me.FechaRepro.HeaderText = "Fecha Reprogramada"
+        Me.FechaRepro.HeaderText = "Fecha Reprog."
         Me.FechaRepro.Name = "FechaRepro"
         Me.FechaRepro.ReadOnly = True
-        Me.FechaRepro.Width = 123
+        Me.FechaRepro.Width = 103
         '
         'FechaReProgOrd
         '

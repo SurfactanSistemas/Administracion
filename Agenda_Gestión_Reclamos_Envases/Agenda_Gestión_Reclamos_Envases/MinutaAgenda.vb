@@ -71,6 +71,7 @@ Public Class MinutaAgenda
                                          & "Tipo, " _
                                          & "Cliente, " _
                                          & "NroHojaRuta, " _
+                                         & "NroRemito, " _
                                          & "Fecha, " _
                                          & "FechaOrd, " _
                                          & "WDate, " _
@@ -80,6 +81,7 @@ Public Class MinutaAgenda
                                          & "VALUES( " _
                                          & "'" & "HojaRu" & "', " _
                                          & "'" & txt_Cliente.Text & "', " _
+                                         & "'" & "" & "', " _
                                          & "'" & "" & "', " _
                                          & "'" & Date.Today.ToString("dd/MM/yyyy") & "', " _
                                          & "'" & ordenaFecha(Date.Today.ToString("dd/MM/yyyy")) & "', " _
@@ -138,6 +140,7 @@ Public Class MinutaAgenda
                                              & "Tipo, " _
                                              & "Cliente, " _
                                              & "NroHojaRuta, " _
+                                             & "NroRemito, " _
                                              & "Fecha, " _
                                              & "FechaOrd, " _
                                              & "WDate, " _
@@ -148,6 +151,7 @@ Public Class MinutaAgenda
                                              & "'" & "Camion" & "', " _
                                              & "'" & txt_Cliente.Text & "', " _
                                              & "'" & "" & "', " _
+                                             & "'" & "" & "', " _
                                              & "'" & Date.Today.ToString("dd/MM/yyyy") & "', " _
                                              & "'" & ordenaFecha(Date.Today.ToString("dd/MM/yyyy")) & "', " _
                                              & "'" & Date.Today.ToString("yyyy-MM-dd") & "', " _
@@ -156,6 +160,11 @@ Public Class MinutaAgenda
                                              & "'" & 0 & "')"
 
                     ExecuteNonQueries({SQLCnslt}, "SurfactanSa")
+
+                    '
+                    ' Aca agregar un aviso por mail.
+                    '
+                    MsgBox("Aca saldría un aviso por mail. No se encuentra habilitado para que no lleguen avisos mientras probabamos.", MsgBoxStyle.Information)
 
                 End If
             Else

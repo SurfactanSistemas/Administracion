@@ -75,4 +75,5 @@ Public Class ClientesReprogramados : Implements IPasaCliente
             DGV_Clientes.DataSource = TablaReclamos
         End If
     End Sub
+
 End Class

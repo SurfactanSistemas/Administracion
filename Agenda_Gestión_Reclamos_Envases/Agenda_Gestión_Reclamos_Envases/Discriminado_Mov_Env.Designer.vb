@@ -22,7 +22,11 @@ Partial Class Discriminado_Mov_Env
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.label1 = New System.Windows.Forms.Label()
@@ -34,6 +38,9 @@ Partial Class Discriminado_Mov_Env
         Me.txt_TotalEntradas = New System.Windows.Forms.TextBox()
         Me.txt_TotalSalidas = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.rbTotal = New System.Windows.Forms.RadioButton()
+        Me.rbEntradas = New System.Windows.Forms.RadioButton()
+        Me.rbSalidas = New System.Windows.Forms.RadioButton()
         Me.Tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Hoja = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.MovEnv = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -85,24 +92,24 @@ Partial Class Discriminado_Mov_Env
         Me.DGV_MovDetallados.AllowUserToAddRows = False
         Me.DGV_MovDetallados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_MovDetallados.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Tipo, Me.Hoja, Me.MovEnv, Me.Fecha, Me.Entrada, Me.Salida, Me.FechaOrd})
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGV_MovDetallados.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGV_MovDetallados.DefaultCellStyle = DataGridViewCellStyle5
         Me.DGV_MovDetallados.DoubleBuffered = True
         Me.DGV_MovDetallados.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.DGV_MovDetallados.Location = New System.Drawing.Point(7, 79)
+        Me.DGV_MovDetallados.Location = New System.Drawing.Point(7, 105)
         Me.DGV_MovDetallados.Name = "DGV_MovDetallados"
         Me.DGV_MovDetallados.OrdenamientoColumnasHabilitado = True
         Me.DGV_MovDetallados.RowHeadersWidth = 15
         Me.DGV_MovDetallados.RowTemplate.Height = 20
         Me.DGV_MovDetallados.ShowCellToolTips = False
         Me.DGV_MovDetallados.SinClickDerecho = False
-        Me.DGV_MovDetallados.Size = New System.Drawing.Size(489, 279)
+        Me.DGV_MovDetallados.Size = New System.Drawing.Size(489, 253)
         Me.DGV_MovDetallados.TabIndex = 129
         '
         'txt_Cliente
@@ -120,14 +127,14 @@ Partial Class Discriminado_Mov_Env
         Me.txt_ClienteDes.Location = New System.Drawing.Point(78, 53)
         Me.txt_ClienteDes.Name = "txt_ClienteDes"
         Me.txt_ClienteDes.ReadOnly = True
-        Me.txt_ClienteDes.Size = New System.Drawing.Size(278, 20)
+        Me.txt_ClienteDes.Size = New System.Drawing.Size(302, 20)
         Me.txt_ClienteDes.TabIndex = 131
         '
         'btn_Cerrar
         '
-        Me.btn_Cerrar.Location = New System.Drawing.Point(422, 53)
+        Me.btn_Cerrar.Location = New System.Drawing.Point(386, 53)
         Me.btn_Cerrar.Name = "btn_Cerrar"
-        Me.btn_Cerrar.Size = New System.Drawing.Size(75, 23)
+        Me.btn_Cerrar.Size = New System.Drawing.Size(111, 46)
         Me.btn_Cerrar.TabIndex = 132
         Me.btn_Cerrar.Text = "CERRAR"
         Me.btn_Cerrar.UseVisualStyleBackColor = True
@@ -168,19 +175,52 @@ Partial Class Discriminado_Mov_Env
         Me.Label4.TabIndex = 136
         Me.Label4.Text = "Total Salidas"
         '
+        'rbTotal
+        '
+        Me.rbTotal.AutoSize = True
+        Me.rbTotal.Checked = True
+        Me.rbTotal.Location = New System.Drawing.Point(78, 79)
+        Me.rbTotal.Name = "rbTotal"
+        Me.rbTotal.Size = New System.Drawing.Size(49, 17)
+        Me.rbTotal.TabIndex = 137
+        Me.rbTotal.TabStop = True
+        Me.rbTotal.Text = "Total"
+        Me.rbTotal.UseVisualStyleBackColor = True
+        '
+        'rbEntradas
+        '
+        Me.rbEntradas.AutoSize = True
+        Me.rbEntradas.Location = New System.Drawing.Point(161, 79)
+        Me.rbEntradas.Name = "rbEntradas"
+        Me.rbEntradas.Size = New System.Drawing.Size(67, 17)
+        Me.rbEntradas.TabIndex = 137
+        Me.rbEntradas.Text = "Entradas"
+        Me.rbEntradas.UseVisualStyleBackColor = True
+        '
+        'rbSalidas
+        '
+        Me.rbSalidas.AutoSize = True
+        Me.rbSalidas.Location = New System.Drawing.Point(270, 79)
+        Me.rbSalidas.Name = "rbSalidas"
+        Me.rbSalidas.Size = New System.Drawing.Size(59, 17)
+        Me.rbSalidas.TabIndex = 137
+        Me.rbSalidas.Text = "Salidas"
+        Me.rbSalidas.UseVisualStyleBackColor = True
+        '
         'Tipo
         '
-        Me.Tipo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Tipo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.Tipo.DataPropertyName = "Tipo"
         Me.Tipo.HeaderText = "Tipo"
         Me.Tipo.Name = "Tipo"
         Me.Tipo.ReadOnly = True
-        Me.Tipo.Width = 53
         '
         'Hoja
         '
         Me.Hoja.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Hoja.DataPropertyName = "Hoja"
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Hoja.DefaultCellStyle = DataGridViewCellStyle1
         Me.Hoja.HeaderText = "Nro Hoja"
         Me.Hoja.Name = "Hoja"
         Me.Hoja.ReadOnly = True
@@ -190,10 +230,12 @@ Partial Class Discriminado_Mov_Env
         '
         Me.MovEnv.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.MovEnv.DataPropertyName = "MovEnv"
-        Me.MovEnv.HeaderText = "Cod. MovEnv"
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.MovEnv.DefaultCellStyle = DataGridViewCellStyle2
+        Me.MovEnv.HeaderText = "Numero"
         Me.MovEnv.Name = "MovEnv"
         Me.MovEnv.ReadOnly = True
-        Me.MovEnv.Width = 97
+        Me.MovEnv.Width = 69
         '
         'Fecha
         '
@@ -208,6 +250,8 @@ Partial Class Discriminado_Mov_Env
         '
         Me.Entrada.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Entrada.DataPropertyName = "Entrada"
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Entrada.DefaultCellStyle = DataGridViewCellStyle3
         Me.Entrada.HeaderText = "Entrada"
         Me.Entrada.Name = "Entrada"
         Me.Entrada.ReadOnly = True
@@ -217,6 +261,8 @@ Partial Class Discriminado_Mov_Env
         '
         Me.Salida.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Salida.DataPropertyName = "Salida"
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Salida.DefaultCellStyle = DataGridViewCellStyle4
         Me.Salida.HeaderText = "Salida"
         Me.Salida.Name = "Salida"
         Me.Salida.ReadOnly = True
@@ -236,6 +282,9 @@ Partial Class Discriminado_Mov_Env
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(504, 410)
+        Me.Controls.Add(Me.rbSalidas)
+        Me.Controls.Add(Me.rbEntradas)
+        Me.Controls.Add(Me.rbTotal)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.txt_TotalSalidas)
         Me.Controls.Add(Me.txt_TotalEntradas)
@@ -264,6 +313,9 @@ Partial Class Discriminado_Mov_Env
     Friend WithEvents txt_TotalEntradas As System.Windows.Forms.TextBox
     Friend WithEvents txt_TotalSalidas As System.Windows.Forms.TextBox
     Friend WithEvents Label4 As System.Windows.Forms.Label
+    Friend WithEvents rbTotal As System.Windows.Forms.RadioButton
+    Friend WithEvents rbEntradas As System.Windows.Forms.RadioButton
+    Friend WithEvents rbSalidas As System.Windows.Forms.RadioButton
     Friend WithEvents Tipo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Hoja As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents MovEnv As System.Windows.Forms.DataGridViewTextBoxColumn

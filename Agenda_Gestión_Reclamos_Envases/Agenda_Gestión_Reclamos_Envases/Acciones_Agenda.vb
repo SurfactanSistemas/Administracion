@@ -8,7 +8,7 @@ Public Class Acciones_Agenda
         Close()
     End Sub
 
-    Sub New(ByVal Codigo As String, ByVal Fecha As String, ByVal Observaciones As String)
+    Sub New(ByVal Codigo As String, Optional ByVal Fecha As String = "", Optional ByVal Observaciones As String = "")
 
         ' Llamada necesaria para el diseñador.
         InitializeComponent()
@@ -81,7 +81,10 @@ Public Class Acciones_Agenda
                 WOwner.ActualizaGrilla()
             End If
 
+            Close()
+
         End If
+
     End Sub
 
   

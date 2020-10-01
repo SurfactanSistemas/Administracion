@@ -1,4 +1,5 @@
 ﻿Imports Util
+Imports Util.Clases
 Imports Util.Clases.Query
 Imports Util.Clases.Helper
 
@@ -9,6 +10,8 @@ Public Class Form1 : Implements IPasarFecha
     Dim FechaActual As String = Date.Today.ToString("dd/MM/yyyy")
     Dim FechaActualOrd As String = ordenaFecha(FechaActual)
     Dim TablaAux As New DataTable
+
+    Private WOrd As String = ""
 
     Private Sub btn_Cerrar_Click(sender As Object, e As EventArgs) Handles btn_Cerrar.Click
         Close()
@@ -182,13 +185,14 @@ Public Class Form1 : Implements IPasarFecha
 
             DGV_Clientes.DataSource = TablaAux
 
-            TablaCli.DefaultView.Sort = "Cliente"
+            'TablaCli.DefaultView.Sort = "Cliente desc"
 
             If chk_MostrarAFavor.Checked Then
                 TablaAux.DefaultView.RowFilter = ""
             Else
                 TablaAux.DefaultView.RowFilter = "Diferencia > 0"
             End If
+            TablaCli.DefaultView.Sort = "Cliente"
             'ProgressBar1.Value = 3000
             ProgressBar1.Visible = False
         End If
@@ -199,13 +203,14 @@ Public Class Form1 : Implements IPasarFecha
         cbx_AFecha.SelectedIndex = 3
         ProgressBar1.Value = 0
         ProgressBar1.Visible = True
+        pnlListado.Visible = False
 
         With TablaAux.Columns
             .Add("Cliente")
             .Add("Descripcion")
-            .Add("Entradas")
-            .Add("Salidas")
-            .Add("Diferencia")
+            .Add("Entradas").DefaultValue = GetType(Int32)
+            .Add("Salidas").DefaultValue = GetType(Int32)
+            .Add("Diferencia").DefaultValue = GetType(Int32)
         End With
 
         Operador.Base = "SurfactanSa"
@@ -367,11 +372,12 @@ Public Class Form1 : Implements IPasarFecha
 
 
 
-    Private Sub txt_Procesar_Click(sender As Object, e As EventArgs) Handles txt_Procesar.Click
+    Private Sub txt_Procesar_Click(sender As Object, e As EventArgs) Handles btn_Procesar.Click
         Proceso()
+        txt_Filtro.Focus()
     End Sub
 
- 
+
 
     Private Sub chk_MostrarAFavor_Click(sender As Object, e As EventArgs) Handles chk_MostrarAFavor.Click
         Dim TablaFiltrar As DataTable = DGV_Clientes.DataSource
@@ -404,13 +410,24 @@ Public Class Form1 : Implements IPasarFecha
     End Sub
 
     Private Sub btn_ReprogramarLlamado_Click(sender As Object, e As EventArgs) Handles btn_ReprogramarLlamado.Click
+
         If DGV_Clientes.SelectedRows.Count = 1 Then
+
+            '
+            ' Busco las minutas pendientes, si existen y agarro siempre la mas próxima.
+            '
+            Dim WMinuta As DataRow = GetSingle("SELECT Fecha FROM DevolucionEnvMinutas WHERE Cliente = '" & DGV_Clientes.SelectedRows(0).Cells("Cliente").Value & "' And CantEnvIngresan = 0 Order By FechaOrd")
+
+            If WMinuta IsNot Nothing Then
+                If MsgBox("El Cliente " & DGV_Clientes.SelectedRows(0).Cells("Descripcion").Value & " ya tiene generada una minuta para el dia " & WMinuta("Fecha") & vbCrLf & "¿Quiere continuar?", MsgBoxStyle.YesNoCancel) <> MsgBoxResult.Yes Then Exit Sub
+            End If
+
             With New FechaReprog
                 .Show(Me)
             End With
 
         End If
-        
+
     End Sub
 
     Public Sub pasaFecha(Fecha As String, Observaciones As String) Implements IPasarFecha.pasaFecha
@@ -470,6 +487,135 @@ Public Class Form1 : Implements IPasarFecha
     End Sub
 
     Private Sub chk_MostrarAFavor_CheckedChanged(sender As Object, e As EventArgs) Handles chk_MostrarAFavor.CheckedChanged
+
+    End Sub
+
+    Private Sub DGV_Clientes_SortCompare(sender As Object, e As DataGridViewSortCompareEventArgs) 'Handles DGV_Clientes.SortCompare
+        Dim num1, num2
+
+        Select Case e.Column.Index
+            Case 0
+            Case 1
+
+                'String
+                num1 = e.CellValue1
+                num2 = e.CellValue2
+
+            Case 2, 3, 4
+                'INTEGER
+                num1 = CInt(e.CellValue1)
+                num2 = CInt(e.CellValue2)
+
+                ' Case 2, 6, 7
+                '     'Fechas
+                '     num1 = ordenaFecha(e.CellValue1)
+                '     num2 = ordenaFecha(e.CellValue2)
+
+                'Case 3, 4, 5, 8
+                '    'Numericos con coma
+                '    num1 = CDbl(Val(e.CellValue1))
+                '    num2 = CDbl(Val(e.CellValue2))
+            Case Else
+                Exit Sub
+        End Select
+
+        If num1 < num2 Then
+            e.SortResult = -1
+        ElseIf num1 = num2 Then
+            e.SortResult = 0
+        Else
+            e.SortResult = 1
+        End If
+
+        e.Handled = True
+    End Sub
+
+    Private Sub DGV_Clientes_ColumnHeaderMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DGV_Clientes.ColumnHeaderMouseClick
+
+        'DGV_Clientes.DataSource = TablaAux
+
+        TablaAux = TryCast(DGV_Clientes.DataSource, DataTable)
+
+        ' Yo, lo haría asi. O mejor dicho, lo hago así.
+
+        WOrd = IIf(WOrd = "", "DESC", "")
+
+        'If chk_MostrarAFavor.Checked Then
+        '    TablaAux.DefaultView.RowFilter = ""
+        'Else
+        '    TablaAux.DefaultView.RowFilter = "Diferencia > 0"
+        'End If
+
+        Select Case e.ColumnIndex
+
+            Case 0
+                TablaAux.DefaultView.Sort = "Cliente " & WOrd ' si lo pones como aca, sin nada, te lo toma como ASC
+            Case 1
+                TablaAux.DefaultView.Sort = "Descripcion " & WOrd
+            Case 2
+                ' Deberias poner una bandera para poder switchear entre ASC y DESC
+                TablaAux.DefaultView.Sort = "Entradas " & WOrd ' "Convert('Entradas', System.Double) DESC"
+            Case 3
+                TablaAux.DefaultView.Sort = "Salidas " & WOrd
+            Case 4
+                TablaAux.DefaultView.Sort = "Diferencia " & WOrd
+
+        End Select
+
+    End Sub
+
+    Private Sub txt_DesdeCodigo_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_DesdeCodigo.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txt_DesdeCodigo.Text) = "" Then : Exit Sub : End If
+
+            txt_DesdeCodigo.Text = Helper.FormatoCodigoCliente(txt_DesdeCodigo.Text)
+
+            txt_HastaCodigo.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txt_DesdeCodigo.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txt_HastaCodigo_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_HastaCodigo.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txt_HastaCodigo.Text) = "" Then : Exit Sub : End If
+
+            txt_HastaCodigo.Text = Helper.FormatoCodigoCliente(txt_HastaCodigo.Text)
+
+            btn_Procesar.PerformClick()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txt_HastaCodigo.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub btnListadoMinutas_Click(sender As Object, e As EventArgs) Handles btnListadoMinutas.Click
+        pnlListado.Visible = True
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        pnlListado.Visible = False
+    End Sub
+
+    Private Sub btnListar_Click(sender As Object, e As EventArgs) Handles btnListar.Click
+        Dim WFormula As String = ""
+
+        If rbCumplidos.Checked Then
+            WFormula = "{DevolucionEnvMinutas.CantEnvIngresan} > 0"
+        ElseIf rbFaltantes.Checked Then
+            WFormula = "{DevolucionEnvMinutas.CantEnvIngresan} = 0"
+        End If
+
+        With New VistaPrevia
+            .Reporte = New ListadoMinutas()
+            .Formula = WFormula
+            .Mostrar()
+        End With
 
     End Sub
 End Class
