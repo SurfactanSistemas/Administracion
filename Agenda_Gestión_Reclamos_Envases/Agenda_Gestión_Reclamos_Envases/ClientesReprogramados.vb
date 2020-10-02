@@ -4,6 +4,8 @@ Imports Util.Clases.Helper
 
 Public Class ClientesReprogramados : Implements IPasaCliente
 
+    Private WOrd As String = ""
+
     Private Sub btn_Cerrar_Click(sender As Object, e As EventArgs) Handles btn_Cerrar.Click
         Close()
     End Sub
@@ -76,4 +78,14 @@ Public Class ClientesReprogramados : Implements IPasaCliente
         End If
     End Sub
 
+    Private Sub ClientesReprogramados_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
+
+    Private Sub DGV_Clientes_ColumnHeaderMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DGV_Clientes.ColumnHeaderMouseClick
+        If e.ColumnIndex = DGV_Clientes.Columns("FechaRePro").Index Then
+            WOrd = IIf(WOrd = "", "DESC", "")
+            TryCast(DGV_Clientes.DataSource, DataTable).DefaultView.Sort = "FechaReProgOrd " & WOrd
+        End If
+    End Sub
 End Class

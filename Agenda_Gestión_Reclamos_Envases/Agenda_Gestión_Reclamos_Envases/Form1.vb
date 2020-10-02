@@ -177,7 +177,20 @@ Public Class Form1 : Implements IPasarFecha
                 Dim Dif As Integer = CantidadSalidas - CantidadEntradas
 
                 'If Dif <> 0 Then
-                TablaAux.Rows.Add(RowCli.Item("Cliente"), RowCli.Item("Razon"), CantidadEntradas, CantidadSalidas, Dif)
+
+                Dim r As DataRow = TablaAux.NewRow()
+
+                With r
+                    .Item("Cliente") = RowCli("Cliente")
+                    .Item("Descripcion") = RowCli("Razon")
+                    .Item("Entradas") = CantidadEntradas
+                    .Item("Salidas") = CantidadSalidas
+                    .Item("Diferencia") = Dif
+                End With
+
+                TablaAux.Rows.Add(r)
+
+                'TablaAux.Rows.Add(RowCli.Item("Cliente"), RowCli.Item("Razon"), CantidadEntradas, CantidadSalidas, Dif)
                 'End If
 
                 ProgressBar1.Value += 1
@@ -208,9 +221,9 @@ Public Class Form1 : Implements IPasarFecha
         With TablaAux.Columns
             .Add("Cliente")
             .Add("Descripcion")
-            .Add("Entradas").DefaultValue = GetType(Int32)
-            .Add("Salidas").DefaultValue = GetType(Int32)
-            .Add("Diferencia").DefaultValue = GetType(Int32)
+            .Add("Entradas", GetType(Int32))
+            .Add("Salidas", GetType(Int32))
+            .Add("Diferencia", GetType(Int32))
         End With
 
         Operador.Base = "SurfactanSa"
@@ -344,8 +357,20 @@ Public Class Form1 : Implements IPasarFecha
 
                 Dim Dif As Integer = CantidadSalidas - CantidadEntradas
 
+                Dim r As DataRow = TablaAux.NewRow()
+
+                With r
+                    .Item("Cliente") = RowCli("Cliente")
+                    .Item("Descripcion") = RowCli("Razon")
+                    .Item("Entradas") = CantidadEntradas
+                    .Item("Salidas") = CantidadSalidas
+                    .Item("Diferencia") = Dif
+                End With
+
+                TablaAux.Rows.Add(r)
+
                 'If Dif <> 0 Then
-                TablaAux.Rows.Add(RowCli.Item("Cliente"), RowCli.Item("Razon"), CantidadEntradas, CantidadSalidas, Dif)
+                '                TablaAux.Rows.Add(RowCli.Item("Cliente"), RowCli.Item("Razon"), CantidadEntradas, CantidadSalidas, Dif)
                 'End If
 
                 ProgressBar1.Value += 1
@@ -534,7 +559,7 @@ Public Class Form1 : Implements IPasarFecha
 
         'DGV_Clientes.DataSource = TablaAux
 
-        TablaAux = TryCast(DGV_Clientes.DataSource, DataTable)
+        Dim TablaAuxII As DataTable = TryCast(DGV_Clientes.DataSource, DataTable)
 
         ' Yo, lo haría asi. O mejor dicho, lo hago así.
 
@@ -549,16 +574,16 @@ Public Class Form1 : Implements IPasarFecha
         Select Case e.ColumnIndex
 
             Case 0
-                TablaAux.DefaultView.Sort = "Cliente " & WOrd ' si lo pones como aca, sin nada, te lo toma como ASC
+                TablaAuxII.DefaultView.Sort = "Cliente " & WOrd ' si lo pones como aca, sin nada, te lo toma como ASC
             Case 1
-                TablaAux.DefaultView.Sort = "Descripcion " & WOrd
+                TablaAuxII.DefaultView.Sort = "Descripcion " & WOrd
             Case 2
                 ' Deberias poner una bandera para poder switchear entre ASC y DESC
-                TablaAux.DefaultView.Sort = "Entradas " & WOrd ' "Convert('Entradas', System.Double) DESC"
+                TablaAuxII.DefaultView.Sort = "Entradas " & WOrd ' "Convert('Entradas', System.Double) DESC"
             Case 3
-                TablaAux.DefaultView.Sort = "Salidas " & WOrd
+                TablaAuxII.DefaultView.Sort = "Salidas " & WOrd
             Case 4
-                TablaAux.DefaultView.Sort = "Diferencia " & WOrd
+                TablaAuxII.DefaultView.Sort = "Diferencia " & WOrd
 
         End Select
 

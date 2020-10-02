@@ -231,6 +231,8 @@ Partial Class Discriminado_Mov_Env
         Me.MovEnv.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.MovEnv.DataPropertyName = "MovEnv"
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle2.Format = "N0"
+        DataGridViewCellStyle2.NullValue = "0"
         Me.MovEnv.DefaultCellStyle = DataGridViewCellStyle2
         Me.MovEnv.HeaderText = "Numero"
         Me.MovEnv.Name = "MovEnv"
@@ -251,6 +253,8 @@ Partial Class Discriminado_Mov_Env
         Me.Entrada.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Entrada.DataPropertyName = "Entrada"
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle3.Format = "N0"
+        DataGridViewCellStyle3.NullValue = "0"
         Me.Entrada.DefaultCellStyle = DataGridViewCellStyle3
         Me.Entrada.HeaderText = "Entrada"
         Me.Entrada.Name = "Entrada"
@@ -262,6 +266,8 @@ Partial Class Discriminado_Mov_Env
         Me.Salida.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Salida.DataPropertyName = "Salida"
         DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle4.Format = "N0"
+        DataGridViewCellStyle4.NullValue = "0"
         Me.Salida.DefaultCellStyle = DataGridViewCellStyle4
         Me.Salida.HeaderText = "Salida"
         Me.Salida.Name = "Salida"

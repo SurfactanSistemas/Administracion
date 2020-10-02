@@ -7,6 +7,7 @@ Public Class Discriminado_Mov_Env
     Private TablaDetallado As New DataTable
     Private _codigo As String
     Private _cbx_index As Integer
+    Private WOrd As String = ""
 
     Sub New(ByVal Codigo As String, ByVal Cbx_Index As Integer)
 
@@ -185,5 +186,12 @@ Public Class Discriminado_Mov_Env
 
     Private Sub rbTotal_Click(sender As Object, e As EventArgs) Handles rbTotal.Click, rbSalidas.Click, rbEntradas.Click
         _Proceso()
+    End Sub
+
+    Private Sub DGV_MovDetallados_ColumnHeaderMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DGV_MovDetallados.ColumnHeaderMouseClick
+        If e.ColumnIndex = DGV_MovDetallados.Columns("Fecha").Index Then
+            WOrd = IIf(WOrd = "", "DESC", "")
+            TryCast(DGV_MovDetallados.DataSource, DataTable).DefaultView.Sort = "FechaOrd " & WOrd
+        End If
     End Sub
 End Class

@@ -22,7 +22,10 @@ Partial Class Form1
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.label1 = New System.Windows.Forms.Label()
@@ -42,19 +45,19 @@ Partial Class Form1
         Me.txt_DesdeCodigo = New System.Windows.Forms.TextBox()
         Me.txt_HastaCodigo = New System.Windows.Forms.TextBox()
         Me.DGV_Clientes = New Util.DBDataGridView()
+        Me.btnListadoMinutas = New System.Windows.Forms.Button()
+        Me.pnlListado = New System.Windows.Forms.Panel()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.rbFaltantes = New System.Windows.Forms.RadioButton()
+        Me.rbCumplidos = New System.Windows.Forms.RadioButton()
+        Me.rbCompleto = New System.Windows.Forms.RadioButton()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.btnListar = New System.Windows.Forms.Button()
         Me.Cliente = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Entradas = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Salidas = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Diferencia = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.btnListadoMinutas = New System.Windows.Forms.Button()
-        Me.pnlListado = New System.Windows.Forms.Panel()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.rbCompleto = New System.Windows.Forms.RadioButton()
-        Me.rbCumplidos = New System.Windows.Forms.RadioButton()
-        Me.rbFaltantes = New System.Windows.Forms.RadioButton()
-        Me.btnListar = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
         Me.panel1.SuspendLayout()
         CType(Me.DGV_Clientes, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlListado.SuspendLayout()
@@ -228,14 +231,14 @@ Partial Class Form1
         Me.DGV_Clientes.AllowUserToAddRows = False
         Me.DGV_Clientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_Clientes.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Cliente, Me.Descripcion, Me.Entradas, Me.Salidas, Me.Diferencia})
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGV_Clientes.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGV_Clientes.DefaultCellStyle = DataGridViewCellStyle4
         Me.DGV_Clientes.DoubleBuffered = True
         Me.DGV_Clientes.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.DGV_Clientes.Location = New System.Drawing.Point(6, 133)
@@ -247,50 +250,6 @@ Partial Class Form1
         Me.DGV_Clientes.SinClickDerecho = False
         Me.DGV_Clientes.Size = New System.Drawing.Size(522, 232)
         Me.DGV_Clientes.TabIndex = 128
-        '
-        'Cliente
-        '
-        Me.Cliente.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Cliente.DataPropertyName = "Cliente"
-        Me.Cliente.HeaderText = "Cliente"
-        Me.Cliente.Name = "Cliente"
-        Me.Cliente.ReadOnly = True
-        Me.Cliente.Width = 64
-        '
-        'Descripcion
-        '
-        Me.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.Descripcion.DataPropertyName = "Descripcion"
-        Me.Descripcion.HeaderText = "Descripcion"
-        Me.Descripcion.Name = "Descripcion"
-        Me.Descripcion.ReadOnly = True
-        '
-        'Entradas
-        '
-        Me.Entradas.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Entradas.DataPropertyName = "Entradas"
-        Me.Entradas.HeaderText = "Entradas"
-        Me.Entradas.Name = "Entradas"
-        Me.Entradas.ReadOnly = True
-        Me.Entradas.Width = 74
-        '
-        'Salidas
-        '
-        Me.Salidas.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Salidas.DataPropertyName = "Salidas"
-        Me.Salidas.HeaderText = "Salidas"
-        Me.Salidas.Name = "Salidas"
-        Me.Salidas.ReadOnly = True
-        Me.Salidas.Width = 66
-        '
-        'Diferencia
-        '
-        Me.Diferencia.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Diferencia.DataPropertyName = "Diferencia"
-        Me.Diferencia.HeaderText = "Diferencia"
-        Me.Diferencia.Name = "Diferencia"
-        Me.Diferencia.ReadOnly = True
-        Me.Diferencia.Width = 80
         '
         'btnListadoMinutas
         '
@@ -322,17 +281,16 @@ Partial Class Form1
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         '
-        'rbCompleto
+        'rbFaltantes
         '
-        Me.rbCompleto.AutoSize = True
-        Me.rbCompleto.Checked = True
-        Me.rbCompleto.Location = New System.Drawing.Point(27, 30)
-        Me.rbCompleto.Name = "rbCompleto"
-        Me.rbCompleto.Size = New System.Drawing.Size(84, 17)
-        Me.rbCompleto.TabIndex = 0
-        Me.rbCompleto.TabStop = True
-        Me.rbCompleto.Text = "COMPLETO"
-        Me.rbCompleto.UseVisualStyleBackColor = True
+        Me.rbFaltantes.AutoSize = True
+        Me.rbFaltantes.Location = New System.Drawing.Point(27, 85)
+        Me.rbFaltantes.Name = "rbFaltantes"
+        Me.rbFaltantes.Size = New System.Drawing.Size(119, 17)
+        Me.rbFaltantes.TabIndex = 0
+        Me.rbFaltantes.TabStop = True
+        Me.rbFaltantes.Text = "SÓLO FALTANTES"
+        Me.rbFaltantes.UseVisualStyleBackColor = True
         '
         'rbCumplidos
         '
@@ -345,16 +303,26 @@ Partial Class Form1
         Me.rbCumplidos.Text = "SÓLO CUMPLIDOS"
         Me.rbCumplidos.UseVisualStyleBackColor = True
         '
-        'rbFaltantes
+        'rbCompleto
         '
-        Me.rbFaltantes.AutoSize = True
-        Me.rbFaltantes.Location = New System.Drawing.Point(27, 85)
-        Me.rbFaltantes.Name = "rbFaltantes"
-        Me.rbFaltantes.Size = New System.Drawing.Size(119, 17)
-        Me.rbFaltantes.TabIndex = 0
-        Me.rbFaltantes.TabStop = True
-        Me.rbFaltantes.Text = "SÓLO FALTANTES"
-        Me.rbFaltantes.UseVisualStyleBackColor = True
+        Me.rbCompleto.AutoSize = True
+        Me.rbCompleto.Checked = True
+        Me.rbCompleto.Location = New System.Drawing.Point(27, 30)
+        Me.rbCompleto.Name = "rbCompleto"
+        Me.rbCompleto.Size = New System.Drawing.Size(84, 17)
+        Me.rbCompleto.TabIndex = 0
+        Me.rbCompleto.TabStop = True
+        Me.rbCompleto.Text = "COMPLETO"
+        Me.rbCompleto.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(179, 89)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(217, 27)
+        Me.Button2.TabIndex = 130
+        Me.Button2.Text = "CANCELAR"
+        Me.Button2.UseVisualStyleBackColor = True
         '
         'btnListar
         '
@@ -365,14 +333,59 @@ Partial Class Form1
         Me.btnListar.Text = "GENERAR LISTADO"
         Me.btnListar.UseVisualStyleBackColor = True
         '
-        'Button2
+        'Cliente
         '
-        Me.Button2.Location = New System.Drawing.Point(179, 89)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(217, 27)
-        Me.Button2.TabIndex = 130
-        Me.Button2.Text = "CANCELAR"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.Cliente.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Cliente.DataPropertyName = "Cliente"
+        Me.Cliente.HeaderText = "Cliente"
+        Me.Cliente.Name = "Cliente"
+        Me.Cliente.ReadOnly = True
+        Me.Cliente.Width = 64
+        '
+        'Descripcion
+        '
+        Me.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Descripcion.DataPropertyName = "Descripcion"
+        Me.Descripcion.HeaderText = "Descripcion"
+        Me.Descripcion.Name = "Descripcion"
+        Me.Descripcion.ReadOnly = True
+        '
+        'Entradas
+        '
+        Me.Entradas.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Entradas.DataPropertyName = "Entradas"
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle1.Format = "N0"
+        DataGridViewCellStyle1.NullValue = Nothing
+        Me.Entradas.DefaultCellStyle = DataGridViewCellStyle1
+        Me.Entradas.HeaderText = "Entradas"
+        Me.Entradas.Name = "Entradas"
+        Me.Entradas.ReadOnly = True
+        Me.Entradas.Width = 74
+        '
+        'Salidas
+        '
+        Me.Salidas.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Salidas.DataPropertyName = "Salidas"
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle2.Format = "N0"
+        Me.Salidas.DefaultCellStyle = DataGridViewCellStyle2
+        Me.Salidas.HeaderText = "Salidas"
+        Me.Salidas.Name = "Salidas"
+        Me.Salidas.ReadOnly = True
+        Me.Salidas.Width = 66
+        '
+        'Diferencia
+        '
+        Me.Diferencia.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Diferencia.DataPropertyName = "Diferencia"
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle3.Format = "N0"
+        Me.Diferencia.DefaultCellStyle = DataGridViewCellStyle3
+        Me.Diferencia.HeaderText = "Diferencia"
+        Me.Diferencia.Name = "Diferencia"
+        Me.Diferencia.ReadOnly = True
+        Me.Diferencia.Width = 80
         '
         'Form1
         '
@@ -427,11 +440,6 @@ Partial Class Form1
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents txt_DesdeCodigo As System.Windows.Forms.TextBox
     Friend WithEvents txt_HastaCodigo As System.Windows.Forms.TextBox
-    Friend WithEvents Cliente As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Entradas As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Salidas As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Diferencia As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents btnListadoMinutas As System.Windows.Forms.Button
     Friend WithEvents pnlListado As System.Windows.Forms.Panel
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
@@ -440,5 +448,10 @@ Partial Class Form1
     Friend WithEvents rbCompleto As System.Windows.Forms.RadioButton
     Friend WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents btnListar As System.Windows.Forms.Button
+    Friend WithEvents Cliente As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Entradas As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Salidas As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Diferencia As System.Windows.Forms.DataGridViewTextBoxColumn
 
 End Class
