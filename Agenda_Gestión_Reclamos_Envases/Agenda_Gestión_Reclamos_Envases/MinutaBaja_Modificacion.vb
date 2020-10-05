@@ -2,7 +2,7 @@
 Imports Util.Clases.Query
 Imports Util.Clases.Helper
 Public Class MinutaBaja_Modificacion
-
+    Dim Mails As String = "andy.fdra@gmail.com;andy_fdra@hotmail.com"
     Dim ID As Integer
 
     Sub New(ByVal IdTabla As Integer, ByVal DesCliente As String)
@@ -100,7 +100,7 @@ Public Class MinutaBaja_Modificacion
                                & "por 1000 litros, a el cliente " & DesCliente & " (" & Cliente & "). Se acordo que sea enviado" _
                                & " el dia " & FechaRetirar & "."
 
-        Dim Mails As String = "andy.fdra@gmail.com;andy_fdra@hotmail.com"
+
         Helper._EnviarEmail(Mails, "SOLICITUD DE ENVIO DE CAMION", Cuerpo, {}, True)
     End Sub
 End Class

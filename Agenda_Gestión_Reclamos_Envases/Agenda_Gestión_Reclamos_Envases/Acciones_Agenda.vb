@@ -119,11 +119,17 @@ Public Class Acciones_Agenda : Implements IBorrarDeAgenda
     End Sub
 
     Private Sub txt_Fecha_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_Fecha.KeyDown
-        If ValidaFecha(txt_Fecha.Text) = "S" Then
-            txt_Observaciones.Focus()
-        Else
-            MsgBox("La fecha es invalida, verifique")
-            txt_Fecha.SelectAll()
-        End If
+        Select Case e.KeyData
+            Case Keys.Enter
+                If ValidaFecha(txt_Fecha.Text) = "S" Then
+                    txt_Observaciones.Focus()
+                Else
+                    MsgBox("La fecha es invalida, verifique")
+                    txt_Fecha.SelectAll()
+                End If
+            Case Keys.Escape
+                txt_Fecha.Text = ""
+        End Select
+        
     End Sub
 End Class
