@@ -111,6 +111,12 @@
     <Compile Include="ClientesReprogramados.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ConsultaCliente.designer.vb">
+      <DependentUpon>ConsultaCliente.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ConsultaCliente.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Discriminado_Mov_Env.Designer.vb">
       <DependentUpon>Discriminado_Mov_Env.vb</DependentUpon>
     </Compile>
@@ -137,6 +143,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="IBorrarDeAgenda.vb" />
+    <Compile Include="IBuscarClienteCashFlow.vb" />
     <Compile Include="IMinutaDirecta.vb" />
     <Compile Include="IPasaCliente.vb" />
     <Compile Include="MinutaAgenda.Designer.vb">
@@ -197,6 +204,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ClientesReprogramados.resx">
       <DependentUpon>ClientesReprogramados.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConsultaCliente.resx">
+      <DependentUpon>ConsultaCliente.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Discriminado_Mov_Env.resx">
       <DependentUpon>Discriminado_Mov_Env.vb</DependentUpon>

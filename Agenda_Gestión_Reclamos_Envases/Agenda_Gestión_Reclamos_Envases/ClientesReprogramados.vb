@@ -97,4 +97,8 @@ Public Class ClientesReprogramados : Implements IPasaCliente, IBorrarDeAgenda
             Close()
         End If
     End Sub
+
+    Private Sub DGV_Clientes_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGV_Clientes.CellClick
+        DGV_Clientes.Rows(DGV_Clientes.CurrentCell.RowIndex).Selected = True
+    End Sub
 End Class

@@ -41,6 +41,8 @@ Public Class Acciones_Agenda : Implements IBorrarDeAgenda
 
         End If
 
+
+
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btn_BorrarDeAgenda.Click
@@ -109,5 +111,19 @@ Public Class Acciones_Agenda : Implements IBorrarDeAgenda
             Close()
         End If
 
+    End Sub
+
+    
+    Private Sub Acciones_Agenda_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        txt_Fecha.Focus()
+    End Sub
+
+    Private Sub txt_Fecha_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_Fecha.KeyDown
+        If ValidaFecha(txt_Fecha.Text) = "S" Then
+            txt_Observaciones.Focus()
+        Else
+            MsgBox("La fecha es invalida, verifique")
+            txt_Fecha.SelectAll()
+        End If
     End Sub
 End Class

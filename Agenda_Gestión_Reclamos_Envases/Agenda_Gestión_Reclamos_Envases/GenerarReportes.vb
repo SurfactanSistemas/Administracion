@@ -11,6 +11,7 @@ Public Class GenerarReportes
             txt_FechaDesde.Text = ""
             txt_FechaHasta.Text = ""
             pnl_Fechas.Visible = True
+            txt_FechaDesde.Focus()
             Exit Sub
         End If
 
@@ -53,5 +54,27 @@ Public Class GenerarReportes
 
     Private Sub btn_Cancelar_Click(sender As Object, e As EventArgs) Handles btn_Cancelar.Click
         pnl_Fechas.Visible = False
+    End Sub
+
+    Private Sub txt_FechaDesde_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_FechaDesde.KeyDown
+        Select Case e.KeyData
+            Case Keys.Enter
+                If ValidaFecha(txt_FechaDesde.Text) = "S" Then
+                    txt_FechaHasta.Focus()
+                End If
+            Case Keys.Escape
+                txt_FechaDesde.Text = ""
+        End Select
+    End Sub
+
+    Private Sub txt_FechaHasta_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_FechaHasta.KeyDown
+        Select Case e.KeyData
+            Case Keys.Enter
+                If ValidaFecha(txt_FechaHasta.Text) = "S" Then
+                    btn_Aceptar_Click(Nothing, Nothing)
+                End If
+            Case Keys.Escape
+                txt_FechaHasta.Text = ""
+        End Select
     End Sub
 End Class

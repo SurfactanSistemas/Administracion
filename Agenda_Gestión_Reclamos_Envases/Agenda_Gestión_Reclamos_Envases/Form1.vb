@@ -3,7 +3,7 @@ Imports Util.Clases
 Imports Util.Clases.Query
 Imports Util.Clases.Helper
 
-Public Class Form1 : Implements IPasarFecha
+Public Class Form1 : Implements IPasarFecha, IBuscarClienteCashFlow
 
 
 
@@ -494,6 +494,8 @@ Public Class Form1 : Implements IPasarFecha
 
             txt_DesdeCodigo.Text = Helper.FormatoCodigoCliente(txt_DesdeCodigo.Text)
 
+            txt_DesdeCodigo.Text = UCase(txt_DesdeCodigo.Text)
+
             txt_HastaCodigo.Focus()
 
         ElseIf e.KeyData = Keys.Escape Then
@@ -509,6 +511,8 @@ Public Class Form1 : Implements IPasarFecha
 
             txt_HastaCodigo.Text = Helper.FormatoCodigoCliente(txt_HastaCodigo.Text)
 
+            txt_HastaCodigo.Text = UCase(txt_HastaCodigo.Text)
+
             btn_Procesar.PerformClick()
 
         ElseIf e.KeyData = Keys.Escape Then
@@ -522,10 +526,26 @@ Public Class Form1 : Implements IPasarFecha
             .Show()
         End With
     End Sub
-
-   
-
-   
-
     
+    Private Sub txt_DesdeCodigo_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles txt_DesdeCodigo.MouseDoubleClick
+        With New ConsultaCliente
+            .Show(Me)
+        End With
+    End Sub
+
+    Public Sub CompletaCliente(CodigoCliente As String, Accion As String) Implements IBuscarClienteCashFlow.CompletaCliente
+        If Accion = "Ambos" Then
+            txt_DesdeCodigo.Text = CodigoCliente
+            txt_HastaCodigo.Text = CodigoCliente
+        End If
+
+        If Accion = "Desde" Then
+            txt_DesdeCodigo.Text = CodigoCliente
+        End If
+
+        If Accion = "Hasta" Then
+            txt_HastaCodigo.Text = CodigoCliente
+        End If
+    End Sub
+
 End Class

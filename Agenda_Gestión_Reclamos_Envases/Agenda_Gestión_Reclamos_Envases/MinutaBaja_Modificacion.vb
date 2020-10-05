@@ -1,4 +1,5 @@
-﻿Imports Util.Clases.Query
+﻿Imports Util.Clases
+Imports Util.Clases.Query
 Imports Util.Clases.Helper
 Public Class MinutaBaja_Modificacion
 
@@ -74,6 +75,8 @@ Public Class MinutaBaja_Modificacion
                                        & "FechaRetirar = '" & txt_fecha.Text & "', " _
                                        & "CantEnvRetirar = '" & Val(txt_Cantidad.Text) & "' " _
                                        & "WHERE ID = '" & ID & "'"
+
+
                 Else
                     MsgBox("El campo de fecha a retirar es invalido, verificar.")
                     Exit Sub
@@ -81,10 +84,23 @@ Public Class MinutaBaja_Modificacion
             End If
 
             ExecuteNonQueries({SQLCnslt}, "SurfactanSa")
+            If cbx_Tipo.SelectedIndex = 1 Then
+                _Generarmails(txt_Cliente.Text, txt_ClienteDes.Text, txt_fecha.Text, Val(txt_Cantidad.Text))
+            End If
             Close()
         Catch ex As Exception
 
         End Try
         
+    End Sub
+
+    Private Sub _Generarmails(ByVal Cliente As String, ByVal DesCliente As String, ByVal FechaRetirar As String, ByVal CantRetirar As String)
+
+        Dim Cuerpo As String = "Se solicita el envio de un camion para retirar la cantidad de " & CantRetirar & " contenedores " _
+                               & "por 1000 litros, a el cliente " & DesCliente & " (" & Cliente & "). Se acordo que sea enviado" _
+                               & " el dia " & FechaRetirar & "."
+
+        Dim Mails As String = "andy.fdra@gmail.com;andy_fdra@hotmail.com"
+        Helper._EnviarEmail(Mails, "SOLICITUD DE ENVIO DE CAMION", Cuerpo, {}, True)
     End Sub
 End Class

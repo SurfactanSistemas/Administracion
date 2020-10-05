@@ -29,11 +29,11 @@ Partial Class PedidosPendientesXClientes
         Me.txt_ClienteDes = New System.Windows.Forms.TextBox()
         Me.txt_Cliente = New System.Windows.Forms.TextBox()
         Me.DGV_PedidosPendientes = New Util.DBDataGridView()
-        Me.btn_Cerrar = New System.Windows.Forms.Button()
         Me.Pedido = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FechaPedido = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FecEntrega = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.OrdFecEntrega = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btn_Cerrar = New System.Windows.Forms.Button()
         Me.panel1.SuspendLayout()
         CType(Me.DGV_PedidosPendientes, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -116,15 +116,6 @@ Partial Class PedidosPendientesXClientes
         Me.DGV_PedidosPendientes.Size = New System.Drawing.Size(306, 238)
         Me.DGV_PedidosPendientes.TabIndex = 136
         '
-        'btn_Cerrar
-        '
-        Me.btn_Cerrar.Location = New System.Drawing.Point(318, 82)
-        Me.btn_Cerrar.Name = "btn_Cerrar"
-        Me.btn_Cerrar.Size = New System.Drawing.Size(68, 43)
-        Me.btn_Cerrar.TabIndex = 139
-        Me.btn_Cerrar.Text = "CERRAR"
-        Me.btn_Cerrar.UseVisualStyleBackColor = True
-        '
         'Pedido
         '
         Me.Pedido.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
@@ -158,7 +149,15 @@ Partial Class PedidosPendientesXClientes
         Me.OrdFecEntrega.Name = "OrdFecEntrega"
         Me.OrdFecEntrega.ReadOnly = True
         Me.OrdFecEntrega.Visible = False
-        Me.OrdFecEntrega.Width = 104
+        '
+        'btn_Cerrar
+        '
+        Me.btn_Cerrar.Location = New System.Drawing.Point(318, 82)
+        Me.btn_Cerrar.Name = "btn_Cerrar"
+        Me.btn_Cerrar.Size = New System.Drawing.Size(68, 43)
+        Me.btn_Cerrar.TabIndex = 139
+        Me.btn_Cerrar.Text = "CERRAR"
+        Me.btn_Cerrar.UseVisualStyleBackColor = True
         '
         'PedidosPendientesXClientes
         '

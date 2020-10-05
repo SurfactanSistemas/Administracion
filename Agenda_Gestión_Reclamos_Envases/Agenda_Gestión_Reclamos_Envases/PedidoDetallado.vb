@@ -58,4 +58,8 @@ Public Class PedidoDetallado
     Private Sub btn_Cerrar_Click(sender As Object, e As EventArgs) Handles btn_Cerrar.Click
         Close()
     End Sub
+
+    Private Sub DGV_PedidosPendientes_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGV_PedidosPendientes.CellClick
+        DGV_PedidosPendientes.Rows(DGV_PedidosPendientes.CurrentCell.RowIndex).Selected = True
+    End Sub
 End Class
