@@ -130,11 +130,25 @@
       <DependentUpon>Form1.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="GenerarReportes.Designer.vb">
+      <DependentUpon>GenerarReportes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="GenerarReportes.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IBorrarDeAgenda.vb" />
+    <Compile Include="IMinutaDirecta.vb" />
     <Compile Include="IPasaCliente.vb" />
     <Compile Include="MinutaAgenda.Designer.vb">
       <DependentUpon>MinutaAgenda.vb</DependentUpon>
     </Compile>
     <Compile Include="MinutaAgenda.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MinutaBaja_Modificacion.Designer.vb">
+      <DependentUpon>MinutaBaja_Modificacion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MinutaBaja_Modificacion.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -193,8 +207,14 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GenerarReportes.resx">
+      <DependentUpon>GenerarReportes.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MinutaAgenda.resx">
       <DependentUpon>MinutaAgenda.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MinutaBaja_Modificacion.resx">
+      <DependentUpon>MinutaBaja_Modificacion.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

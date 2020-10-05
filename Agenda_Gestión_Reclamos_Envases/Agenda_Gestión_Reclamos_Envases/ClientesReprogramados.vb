@@ -2,7 +2,7 @@
 Imports Util.Clases.Query
 Imports Util.Clases.Helper
 
-Public Class ClientesReprogramados : Implements IPasaCliente
+Public Class ClientesReprogramados : Implements IPasaCliente, IBorrarDeAgenda
 
     Private WOrd As String = ""
 
@@ -33,7 +33,7 @@ Public Class ClientesReprogramados : Implements IPasaCliente
         Dim TablaFiltrar As DataTable = DGV_Clientes.DataSource
 
         TablaFiltrar.DefaultView.RowFilter = "Cliente LIKE '%" & txt_Filtro.Text & "%' OR Descripcion LIKE '%" & txt_Filtro.Text & "%'"
-        
+
     End Sub
 
     Private Sub DGV_Clientes_CellMouseDoubleClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DGV_Clientes.CellMouseDoubleClick
@@ -86,6 +86,15 @@ Public Class ClientesReprogramados : Implements IPasaCliente
         If e.ColumnIndex = DGV_Clientes.Columns("FechaRePro").Index Then
             WOrd = IIf(WOrd = "", "DESC", "")
             TryCast(DGV_Clientes.DataSource, DataTable).DefaultView.Sort = "FechaReProgOrd " & WOrd
+        end if
+    End Sub
+
+    Public Sub BorrarDeAgenda(Codigo As String) Implements IBorrarDeAgenda.BorrarDeAgenda
+        Dim WOwner As IPasaCliente = TryCast(Owner, IPasaCliente)
+
+        If WOwner IsNot Nothing Then
+            WOwner.PasaCliente(Codigo)
+            Close()
         End If
     End Sub
 End Class

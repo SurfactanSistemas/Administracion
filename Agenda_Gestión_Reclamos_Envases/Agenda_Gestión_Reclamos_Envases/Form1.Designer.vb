@@ -45,23 +45,14 @@ Partial Class Form1
         Me.txt_DesdeCodigo = New System.Windows.Forms.TextBox()
         Me.txt_HastaCodigo = New System.Windows.Forms.TextBox()
         Me.DGV_Clientes = New Util.DBDataGridView()
-        Me.btnListadoMinutas = New System.Windows.Forms.Button()
-        Me.pnlListado = New System.Windows.Forms.Panel()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.rbFaltantes = New System.Windows.Forms.RadioButton()
-        Me.rbCumplidos = New System.Windows.Forms.RadioButton()
-        Me.rbCompleto = New System.Windows.Forms.RadioButton()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.btnListar = New System.Windows.Forms.Button()
         Me.Cliente = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Entradas = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Salidas = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Diferencia = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnListadoMinutas = New System.Windows.Forms.Button()
         Me.panel1.SuspendLayout()
         CType(Me.DGV_Clientes, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.pnlListado.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'panel1
@@ -251,88 +242,6 @@ Partial Class Form1
         Me.DGV_Clientes.Size = New System.Drawing.Size(522, 232)
         Me.DGV_Clientes.TabIndex = 128
         '
-        'btnListadoMinutas
-        '
-        Me.btnListadoMinutas.Location = New System.Drawing.Point(317, 371)
-        Me.btnListadoMinutas.Name = "btnListadoMinutas"
-        Me.btnListadoMinutas.Size = New System.Drawing.Size(217, 39)
-        Me.btnListadoMinutas.TabIndex = 130
-        Me.btnListadoMinutas.Text = "LISTADO DE MINUTAS"
-        Me.btnListadoMinutas.UseVisualStyleBackColor = True
-        '
-        'pnlListado
-        '
-        Me.pnlListado.Controls.Add(Me.GroupBox1)
-        Me.pnlListado.Location = New System.Drawing.Point(58, 189)
-        Me.pnlListado.Name = "pnlListado"
-        Me.pnlListado.Size = New System.Drawing.Size(421, 141)
-        Me.pnlListado.TabIndex = 144
-        '
-        'GroupBox1
-        '
-        Me.GroupBox1.Controls.Add(Me.rbFaltantes)
-        Me.GroupBox1.Controls.Add(Me.rbCumplidos)
-        Me.GroupBox1.Controls.Add(Me.rbCompleto)
-        Me.GroupBox1.Controls.Add(Me.Button2)
-        Me.GroupBox1.Controls.Add(Me.btnListar)
-        Me.GroupBox1.Location = New System.Drawing.Point(7, 3)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(406, 130)
-        Me.GroupBox1.TabIndex = 0
-        Me.GroupBox1.TabStop = False
-        '
-        'rbFaltantes
-        '
-        Me.rbFaltantes.AutoSize = True
-        Me.rbFaltantes.Location = New System.Drawing.Point(27, 85)
-        Me.rbFaltantes.Name = "rbFaltantes"
-        Me.rbFaltantes.Size = New System.Drawing.Size(119, 17)
-        Me.rbFaltantes.TabIndex = 0
-        Me.rbFaltantes.TabStop = True
-        Me.rbFaltantes.Text = "SÓLO FALTANTES"
-        Me.rbFaltantes.UseVisualStyleBackColor = True
-        '
-        'rbCumplidos
-        '
-        Me.rbCumplidos.AutoSize = True
-        Me.rbCumplidos.Location = New System.Drawing.Point(27, 57)
-        Me.rbCumplidos.Name = "rbCumplidos"
-        Me.rbCumplidos.Size = New System.Drawing.Size(120, 17)
-        Me.rbCumplidos.TabIndex = 0
-        Me.rbCumplidos.TabStop = True
-        Me.rbCumplidos.Text = "SÓLO CUMPLIDOS"
-        Me.rbCumplidos.UseVisualStyleBackColor = True
-        '
-        'rbCompleto
-        '
-        Me.rbCompleto.AutoSize = True
-        Me.rbCompleto.Checked = True
-        Me.rbCompleto.Location = New System.Drawing.Point(27, 30)
-        Me.rbCompleto.Name = "rbCompleto"
-        Me.rbCompleto.Size = New System.Drawing.Size(84, 17)
-        Me.rbCompleto.TabIndex = 0
-        Me.rbCompleto.TabStop = True
-        Me.rbCompleto.Text = "COMPLETO"
-        Me.rbCompleto.UseVisualStyleBackColor = True
-        '
-        'Button2
-        '
-        Me.Button2.Location = New System.Drawing.Point(179, 89)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(217, 27)
-        Me.Button2.TabIndex = 130
-        Me.Button2.Text = "CANCELAR"
-        Me.Button2.UseVisualStyleBackColor = True
-        '
-        'btnListar
-        '
-        Me.btnListar.Location = New System.Drawing.Point(179, 17)
-        Me.btnListar.Name = "btnListar"
-        Me.btnListar.Size = New System.Drawing.Size(217, 55)
-        Me.btnListar.TabIndex = 130
-        Me.btnListar.Text = "GENERAR LISTADO"
-        Me.btnListar.UseVisualStyleBackColor = True
-        '
         'Cliente
         '
         Me.Cliente.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
@@ -387,12 +296,20 @@ Partial Class Form1
         Me.Diferencia.ReadOnly = True
         Me.Diferencia.Width = 80
         '
+        'btnListadoMinutas
+        '
+        Me.btnListadoMinutas.Location = New System.Drawing.Point(317, 371)
+        Me.btnListadoMinutas.Name = "btnListadoMinutas"
+        Me.btnListadoMinutas.Size = New System.Drawing.Size(217, 39)
+        Me.btnListadoMinutas.TabIndex = 130
+        Me.btnListadoMinutas.Text = "LISTADO DE MINUTAS"
+        Me.btnListadoMinutas.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(537, 414)
-        Me.Controls.Add(Me.pnlListado)
         Me.Controls.Add(Me.txt_HastaCodigo)
         Me.Controls.Add(Me.txt_DesdeCodigo)
         Me.Controls.Add(Me.Label5)
@@ -414,9 +331,6 @@ Partial Class Form1
         Me.panel1.ResumeLayout(False)
         Me.panel1.PerformLayout()
         CType(Me.DGV_Clientes, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.pnlListado.ResumeLayout(False)
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -441,13 +355,6 @@ Partial Class Form1
     Friend WithEvents txt_DesdeCodigo As System.Windows.Forms.TextBox
     Friend WithEvents txt_HastaCodigo As System.Windows.Forms.TextBox
     Friend WithEvents btnListadoMinutas As System.Windows.Forms.Button
-    Friend WithEvents pnlListado As System.Windows.Forms.Panel
-    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
-    Friend WithEvents rbFaltantes As System.Windows.Forms.RadioButton
-    Friend WithEvents rbCumplidos As System.Windows.Forms.RadioButton
-    Friend WithEvents rbCompleto As System.Windows.Forms.RadioButton
-    Friend WithEvents Button2 As System.Windows.Forms.Button
-    Friend WithEvents btnListar As System.Windows.Forms.Button
     Friend WithEvents Cliente As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Entradas As System.Windows.Forms.DataGridViewTextBoxColumn

@@ -2,7 +2,7 @@
 Imports Util.Clases.Query
 Imports Util.Clases.Helper
 
-Public Class Acciones_Agenda
+Public Class Acciones_Agenda : Implements IBorrarDeAgenda
 
     Private Sub btn_Cerrar_Click(sender As Object, e As EventArgs) Handles btn_Cerrar.Click
         Close()
@@ -98,5 +98,16 @@ Public Class Acciones_Agenda
         With New MinutaAgenda(txt_Cliente.Text, txt_ClienteDes.Text)
             .Show(Me)
         End With
+    End Sub
+
+    Public Sub BorrarDeAgenda(Codigo As String) Implements IBorrarDeAgenda.BorrarDeAgenda
+       
+        Dim WOwner As IPasaCliente = TryCast(Owner, IPasaCliente)
+
+        If WOwner IsNot Nothing Then
+            WOwner.PasaCliente(txt_Cliente.Text)
+            Close()
+        End If
+
     End Sub
 End Class
