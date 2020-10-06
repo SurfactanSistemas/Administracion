@@ -142,10 +142,10 @@
     <Compile Include="GenerarReportes.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="IBorrarDeAgenda.vb" />
-    <Compile Include="IBuscarClienteCashFlow.vb" />
-    <Compile Include="IMinutaDirecta.vb" />
-    <Compile Include="IPasaCliente.vb" />
+    <Compile Include="Interfaces\IBorrarDeAgenda.vb" />
+    <Compile Include="Interfaces\IBuscarClienteCashFlow.vb" />
+    <Compile Include="Interfaces\IMinutaDirecta.vb" />
+    <Compile Include="Interfaces\IPasaCliente.vb" />
     <Compile Include="MinutaAgenda.Designer.vb">
       <DependentUpon>MinutaAgenda.vb</DependentUpon>
     </Compile>
@@ -173,7 +173,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="IPasarFecha.vb" />
+    <Compile Include="Interfaces\IPasarFecha.vb" />
     <Compile Include="PedidoDetallado.Designer.vb">
       <DependentUpon>PedidoDetallado.vb</DependentUpon>
     </Compile>

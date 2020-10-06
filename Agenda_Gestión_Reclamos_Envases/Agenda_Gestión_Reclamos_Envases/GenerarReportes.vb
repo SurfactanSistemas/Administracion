@@ -6,26 +6,12 @@ Public Class GenerarReportes
 
     Private Sub btnListar_Click(sender As Object, e As EventArgs) Handles btnListar.Click
         Dim WFormula As String = ""
-
-        If rbCumplidos.Checked Then
-            txt_FechaDesde.Text = ""
-            txt_FechaHasta.Text = ""
-            pnl_Fechas.Visible = True
-            txt_FechaDesde.Focus()
-            Exit Sub
-        End If
-
-
-        If rbFaltantes.Checked Then
-            WFormula = "{DevolucionEnvMinutas.CantEnvIngresan} = 0"
-        End If
-
-        With New VistaPrevia
-            .Reporte = New ListadoMinutas()
-            .Formula = WFormula
-            .Mostrar()
-        End With
-
+        
+        txt_FechaDesde.Text = ""
+        txt_FechaHasta.Text = ""
+        pnl_Fechas.Visible = True
+        txt_FechaDesde.Focus()
+        
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
@@ -36,12 +22,45 @@ Public Class GenerarReportes
         Dim WFormula As String
         Dim WDesde As String = txt_FechaDesde.Text
         Dim WHasta As String = txt_FechaHasta.Text
+
+        Dim MuestraTodos As String = "N"
+        If Trim(WDesde.Replace("/", "")) = "" And Trim(WHasta.Replace("/", "")) = "" Then
+            MuestraTodos = "S"
+        End If
         If ValidaFecha(txt_FechaDesde.Text) = "S" And ValidaFecha(txt_FechaHasta.Text) = "S" Then
-            WDesde = Microsoft.VisualBasic.Right(WDesde, 4) & "-" & Mid(WDesde, 4, 2) & "-" & Microsoft.VisualBasic.Left(WDesde, 2)
-            WHasta = Microsoft.VisualBasic.Right(WHasta, 4) & "-" & Mid(WHasta, 4, 2) & "-" & Microsoft.VisualBasic.Left(WHasta, 2)
+            If (rbFaltantes.Checked Or rbCompleto.Checked) Then
+                WDesde = ordenaFecha(WDesde)
+                WHasta = ordenaFecha(WHasta)
+            Else
+                WDesde = Microsoft.VisualBasic.Right(WDesde, 4) & "-" & Mid(WDesde, 4, 2) & "-" & Microsoft.VisualBasic.Left(WDesde, 2)
+                WHasta = Microsoft.VisualBasic.Right(WHasta, 4) & "-" & Mid(WHasta, 4, 2) & "-" & Microsoft.VisualBasic.Left(WHasta, 2)
+            End If
+            
         End If
 
-        WFormula = "{DevolucionEnvMinutas.CantEnvIngresan} > 0 AND {DevolucionEnvMinutas.WDate} >= '" & WDesde & "' AND {DevolucionEnvMinutas.WDate} <= '" & WHasta & "'"
+
+        If rbCumplidos.Checked Then
+            If MuestraTodos = "N" Then
+                WFormula = "{DevolucionEnvMinutas.CantEnvIngresan} > 0 AND {DevolucionEnvMinutas.WDate} >= '" & WDesde & "' AND {DevolucionEnvMinutas.WDate} <= '" & WHasta & "'"
+            Else
+                WFormula = "{DevolucionEnvMinutas.CantEnvIngresan} > 0"
+            End If
+        End If
+
+        If rbFaltantes.Checked Then
+            If MuestraTodos = "N" Then
+                WFormula = "{DevolucionEnvMinutas.CantEnvIngresan} = 0 AND {DevolucionEnvMinutas.FechaOrd} >= '" & WDesde & "' AND {DevolucionEnvMinutas.FechaOrd} <= '" & WHasta & "'"
+            Else
+                WFormula = "{DevolucionEnvMinutas.CantEnvIngresan} = 0"
+            End If
+        End If
+
+        If rbCompleto.Checked Then
+            If MuestraTodos = "N" Then
+                WFormula = "{DevolucionEnvMinutas.FechaOrd} >= '" & WDesde & "' AND {DevolucionEnvMinutas.FechaOrd} <= '" & WHasta & "'"
+            End If
+        End If
+
 
         pnl_Fechas.Visible = False
 
