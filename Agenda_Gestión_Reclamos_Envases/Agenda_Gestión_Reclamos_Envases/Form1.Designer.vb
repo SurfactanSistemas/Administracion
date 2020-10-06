@@ -22,7 +22,10 @@ Partial Class Form1
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.label1 = New System.Windows.Forms.Label()
@@ -32,7 +35,7 @@ Partial Class Form1
         Me.chk_MostrarAFavor = New System.Windows.Forms.CheckBox()
         Me.txt_Filtro = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.txt_Procesar = New System.Windows.Forms.Button()
+        Me.btn_Procesar = New System.Windows.Forms.Button()
         Me.btn_ReprogramarLlamado = New System.Windows.Forms.Button()
         Me.btn_ListaReprogramados = New System.Windows.Forms.Button()
         Me.cbx_AFecha = New System.Windows.Forms.ComboBox()
@@ -47,6 +50,7 @@ Partial Class Form1
         Me.Entradas = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Salidas = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Diferencia = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnListadoMinutas = New System.Windows.Forms.Button()
         Me.panel1.SuspendLayout()
         CType(Me.DGV_Clientes, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -88,9 +92,9 @@ Partial Class Form1
         '
         'btn_Cerrar
         '
-        Me.btn_Cerrar.Location = New System.Drawing.Point(233, 369)
+        Me.btn_Cerrar.Location = New System.Drawing.Point(50, 371)
         Me.btn_Cerrar.Name = "btn_Cerrar"
-        Me.btn_Cerrar.Size = New System.Drawing.Size(75, 33)
+        Me.btn_Cerrar.Size = New System.Drawing.Size(116, 39)
         Me.btn_Cerrar.TabIndex = 130
         Me.btn_Cerrar.Text = "CERRAR"
         Me.btn_Cerrar.UseVisualStyleBackColor = True
@@ -133,14 +137,14 @@ Partial Class Form1
         Me.Label3.TabIndex = 134
         Me.Label3.Text = "Filtro"
         '
-        'txt_Procesar
+        'btn_Procesar
         '
-        Me.txt_Procesar.Location = New System.Drawing.Point(233, 54)
-        Me.txt_Procesar.Name = "txt_Procesar"
-        Me.txt_Procesar.Size = New System.Drawing.Size(83, 41)
-        Me.txt_Procesar.TabIndex = 135
-        Me.txt_Procesar.Text = "LEER DATOS"
-        Me.txt_Procesar.UseVisualStyleBackColor = True
+        Me.btn_Procesar.Location = New System.Drawing.Point(233, 54)
+        Me.btn_Procesar.Name = "btn_Procesar"
+        Me.btn_Procesar.Size = New System.Drawing.Size(83, 41)
+        Me.btn_Procesar.TabIndex = 135
+        Me.btn_Procesar.Text = "LEER DATOS"
+        Me.btn_Procesar.UseVisualStyleBackColor = True
         '
         'btn_ReprogramarLlamado
         '
@@ -157,7 +161,7 @@ Partial Class Form1
         Me.btn_ListaReprogramados.Name = "btn_ListaReprogramados"
         Me.btn_ListaReprogramados.Size = New System.Drawing.Size(117, 41)
         Me.btn_ListaReprogramados.TabIndex = 137
-        Me.btn_ListaReprogramados.Text = "CLIENTES REPROGRAMADOS"
+        Me.btn_ListaReprogramados.Text = "AGENDA"
         Me.btn_ListaReprogramados.UseVisualStyleBackColor = True
         '
         'cbx_AFecha
@@ -218,14 +222,14 @@ Partial Class Form1
         Me.DGV_Clientes.AllowUserToAddRows = False
         Me.DGV_Clientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_Clientes.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Cliente, Me.Descripcion, Me.Entradas, Me.Salidas, Me.Diferencia})
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGV_Clientes.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGV_Clientes.DefaultCellStyle = DataGridViewCellStyle8
         Me.DGV_Clientes.DoubleBuffered = True
         Me.DGV_Clientes.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.DGV_Clientes.Location = New System.Drawing.Point(6, 133)
@@ -259,6 +263,10 @@ Partial Class Form1
         '
         Me.Entradas.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Entradas.DataPropertyName = "Entradas"
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle5.Format = "N0"
+        DataGridViewCellStyle5.NullValue = Nothing
+        Me.Entradas.DefaultCellStyle = DataGridViewCellStyle5
         Me.Entradas.HeaderText = "Entradas"
         Me.Entradas.Name = "Entradas"
         Me.Entradas.ReadOnly = True
@@ -268,6 +276,9 @@ Partial Class Form1
         '
         Me.Salidas.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Salidas.DataPropertyName = "Salidas"
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle6.Format = "N0"
+        Me.Salidas.DefaultCellStyle = DataGridViewCellStyle6
         Me.Salidas.HeaderText = "Salidas"
         Me.Salidas.Name = "Salidas"
         Me.Salidas.ReadOnly = True
@@ -277,16 +288,28 @@ Partial Class Form1
         '
         Me.Diferencia.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Diferencia.DataPropertyName = "Diferencia"
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle7.Format = "N0"
+        Me.Diferencia.DefaultCellStyle = DataGridViewCellStyle7
         Me.Diferencia.HeaderText = "Diferencia"
         Me.Diferencia.Name = "Diferencia"
         Me.Diferencia.ReadOnly = True
         Me.Diferencia.Width = 80
         '
+        'btnListadoMinutas
+        '
+        Me.btnListadoMinutas.Location = New System.Drawing.Point(317, 371)
+        Me.btnListadoMinutas.Name = "btnListadoMinutas"
+        Me.btnListadoMinutas.Size = New System.Drawing.Size(217, 39)
+        Me.btnListadoMinutas.TabIndex = 130
+        Me.btnListadoMinutas.Text = "LISTADO DE MINUTAS"
+        Me.btnListadoMinutas.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(537, 407)
+        Me.ClientSize = New System.Drawing.Size(537, 414)
         Me.Controls.Add(Me.txt_HastaCodigo)
         Me.Controls.Add(Me.txt_DesdeCodigo)
         Me.Controls.Add(Me.Label5)
@@ -295,11 +318,12 @@ Partial Class Form1
         Me.Controls.Add(Me.cbx_AFecha)
         Me.Controls.Add(Me.btn_ListaReprogramados)
         Me.Controls.Add(Me.btn_ReprogramarLlamado)
-        Me.Controls.Add(Me.txt_Procesar)
+        Me.Controls.Add(Me.btn_Procesar)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.txt_Filtro)
         Me.Controls.Add(Me.chk_MostrarAFavor)
         Me.Controls.Add(Me.ProgressBar1)
+        Me.Controls.Add(Me.btnListadoMinutas)
         Me.Controls.Add(Me.btn_Cerrar)
         Me.Controls.Add(Me.DGV_Clientes)
         Me.Controls.Add(Me.panel1)
@@ -321,12 +345,7 @@ Partial Class Form1
     Friend WithEvents chk_MostrarAFavor As System.Windows.Forms.CheckBox
     Friend WithEvents txt_Filtro As System.Windows.Forms.TextBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents txt_Procesar As System.Windows.Forms.Button
-    Friend WithEvents Cliente As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Entradas As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Salidas As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Diferencia As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents btn_Procesar As System.Windows.Forms.Button
     Friend WithEvents btn_ReprogramarLlamado As System.Windows.Forms.Button
     Friend WithEvents btn_ListaReprogramados As System.Windows.Forms.Button
     Friend WithEvents cbx_AFecha As System.Windows.Forms.ComboBox
@@ -335,5 +354,11 @@ Partial Class Form1
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents txt_DesdeCodigo As System.Windows.Forms.TextBox
     Friend WithEvents txt_HastaCodigo As System.Windows.Forms.TextBox
+    Friend WithEvents btnListadoMinutas As System.Windows.Forms.Button
+    Friend WithEvents Cliente As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Entradas As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Salidas As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Diferencia As System.Windows.Forms.DataGridViewTextBoxColumn
 
 End Class

@@ -1,4 +1,5 @@
 ﻿Imports Util
+Imports Util.Clases
 Imports Util.Clases.Query
 Imports Util.Clases.Helper
 
@@ -60,17 +61,20 @@ Public Class MinutaAgenda
 
                         ExecuteNonQueries({SQLCnslt}, "SurfactanSa")
 
+                        SacarDeAgenda(txt_Cliente.Text)
+
                         Exit Sub
                     Else
                         Exit Sub
                     End If
                 End If
 
-                
+
                 SQLCnslt = "INSERT INTO DevolucionEnvMinutas ( " _
                                          & "Tipo, " _
                                          & "Cliente, " _
                                          & "NroHojaRuta, " _
+                                         & "NroRemito, " _
                                          & "Fecha, " _
                                          & "FechaOrd, " _
                                          & "WDate, " _
@@ -81,6 +85,7 @@ Public Class MinutaAgenda
                                          & "'" & "HojaRu" & "', " _
                                          & "'" & txt_Cliente.Text & "', " _
                                          & "'" & "" & "', " _
+                                         & "'" & "" & "', " _
                                          & "'" & Date.Today.ToString("dd/MM/yyyy") & "', " _
                                          & "'" & ordenaFecha(Date.Today.ToString("dd/MM/yyyy")) & "', " _
                                          & "'" & Date.Today.ToString("yyyy-MM-dd") & "', " _
@@ -90,8 +95,10 @@ Public Class MinutaAgenda
 
                 ExecuteNonQueries({SQLCnslt}, "SurfactanSa")
 
+                SacarDeAgenda(txt_Cliente.Text)
+
             End If
-            End If
+        End If
 
     End Sub
 
@@ -101,6 +108,11 @@ Public Class MinutaAgenda
             If ValidaFecha(txt_fecha.Text) = "S" Then
                 If MsgBox("¿Desea asignar que envie un camion al cliente " & txt_ClienteDes.Text & "," _
                      & "para que se retiren la cantidad de " & txt_Cantidad.Text & " contenedores?", vbYesNo) = vbYes Then
+
+                    Dim Cliente As String = txt_Cliente.Text
+                    Dim FechaRetirar As String = txt_fecha.Text
+                    Dim CantEnvRetirar As String = txt_Cantidad.Text
+
 
                     Dim SQLCnslt As String = "SELECT ID, CantEnvRetirar, FechaRetirar " _
                                              & "FROM DevolucionEnvMinutas " _
@@ -125,6 +137,11 @@ Public Class MinutaAgenda
 
                             ExecuteNonQueries({SQLCnslt}, "SurfactanSa")
 
+                 
+                            _Generarmails(Cliente, txt_ClienteDes.Text, FechaRetirar, CantEnvRetirar)
+
+                            SacarDeAgenda(Cliente)
+
                             Exit Sub
                         Else
                             Exit Sub
@@ -138,6 +155,7 @@ Public Class MinutaAgenda
                                              & "Tipo, " _
                                              & "Cliente, " _
                                              & "NroHojaRuta, " _
+                                             & "NroRemito, " _
                                              & "Fecha, " _
                                              & "FechaOrd, " _
                                              & "WDate, " _
@@ -148,6 +166,7 @@ Public Class MinutaAgenda
                                              & "'" & "Camion" & "', " _
                                              & "'" & txt_Cliente.Text & "', " _
                                              & "'" & "" & "', " _
+                                             & "'" & "" & "', " _
                                              & "'" & Date.Today.ToString("dd/MM/yyyy") & "', " _
                                              & "'" & ordenaFecha(Date.Today.ToString("dd/MM/yyyy")) & "', " _
                                              & "'" & Date.Today.ToString("yyyy-MM-dd") & "', " _
@@ -157,6 +176,11 @@ Public Class MinutaAgenda
 
                     ExecuteNonQueries({SQLCnslt}, "SurfactanSa")
 
+
+                    _Generarmails(Cliente, txt_ClienteDes.Text, FechaRetirar, CantEnvRetirar)
+
+                    SacarDeAgenda(Cliente)
+
                 End If
             Else
                 MsgBox("La Fecha a Retirar es invalida, verificar")
@@ -164,7 +188,7 @@ Public Class MinutaAgenda
                 txt_fecha.SelectAll()
                 Exit Sub
             End If
-           
+
         End If
 
 
@@ -173,4 +197,33 @@ Public Class MinutaAgenda
     Private Sub btn_Cerrar_Click(sender As Object, e As EventArgs) Handles btn_Cerrar.Click
         Close()
     End Sub
+
+
+    Private Sub _Generarmails(ByVal Cliente As String, ByVal DesCliente As String, ByVal FechaRetirar As String, ByVal CantRetirar As String)
+
+        Dim Cuerpo As String = "Se solicita el envio de un camion para retirar la cantidad de " & CantRetirar & " contenedores " _
+                               & "por 1000 litros, a el cliente " & DesCliente & " (" & Cliente & "). Se acordo que sea enviado" _
+                               & " el dia " & FechaRetirar & "."
+
+        Dim Mails As String = "andy.fdra@gmail.com;andy_fdra@hotmail.com"
+        Helper._EnviarEmail(Mails, "SOLICITUD DE ENVIO DE CAMION", Cuerpo, {}, True)
+    End Sub
+
+    Private Sub SacarDeAgenda(ByVal CodigoCli As String)
+        Dim WOwner As IBorrarDeAgenda = TryCast(Owner, IBorrarDeAgenda)
+
+        If WOwner IsNot Nothing Then
+            WOwner.BorrarDeAgenda(CodigoCli)
+            Close()
+        End If
+
+        Dim WOwner2 As IMinutaDirecta = TryCast(Owner, IMinutaDirecta)
+
+        If WOwner2 IsNot Nothing Then
+            WOwner2.CerrarIngresoAgenda()
+            Close()
+        End If
+
+    End Sub
+
 End Class

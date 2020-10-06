@@ -2,6 +2,7 @@
 Imports System.IO
 Imports ClasesCompartidas
 Imports System.Text.RegularExpressions
+Imports CrystalDecisions.Shared
 
 Public Class ConsultaDatosFactura
 
@@ -316,21 +317,26 @@ Public Class ConsultaDatosFactura
             End If
             Dim RutaArchivo() As String = Directory.GetFiles(RutaGuardar & "\" & NroInterno)
 
-            ' If RutaArchivo.Any() Then
+            If Directory.GetFiles(RutaGuardar & "\" & NroInterno).Count() = 1 Then
+                For Each Archivo As String In Directory.GetFiles(RutaGuardar & "\" & NroInterno)
+                    Try
+                        Process.Start(Archivo, "f")
+                        Exit Sub
+                    Catch ex As Exception
+
+                    End Try
+                Next
+            End If
+            
             With New EditorArchivos(2, RutaGuardar & "\" & NroInterno, False)
                 .Show(Me)
             End With
-            '  For Each RutaArc In RutaArchivo
-            '      Process.Start(RutaArc, "f")
-            '  Next
-            'Else
-            '   MsgBox("Existe una carpeta para este numero interno, pero no contiene archivos adjuntos", vbExclamation)
-            'End If
+
 
         Catch ex As Exception
 
         End Try
-        
+
     End Sub
 
 

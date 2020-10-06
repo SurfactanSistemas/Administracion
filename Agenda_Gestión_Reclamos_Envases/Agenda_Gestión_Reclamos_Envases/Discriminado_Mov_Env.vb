@@ -4,84 +4,81 @@ Imports Util.Clases.Query
 Imports Util.Clases.Helper
 
 Public Class Discriminado_Mov_Env
-    Dim TablaDetallado As New DataTable
+    Private TablaDetallado As New DataTable
+    Private _codigo As String
+    Private _cbx_index As Integer
+    Private WOrd As String = ""
+
     Sub New(ByVal Codigo As String, ByVal Cbx_Index As Integer)
+
+        _codigo = Codigo
+        _cbx_index = Cbx_Index
 
         ' Llamada necesaria para el diseñador.
         InitializeComponent()
 
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
-
-        txt_Cliente.Text = Codigo
         
-        Dim SQLCnslt As String = "SELECT Razon FROM Cliente WHERE Cliente = '" & Codigo & "'"
-        Dim RowCli As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
-        If RowCli IsNot Nothing Then
-            txt_ClienteDes.Text = RowCli.Item("Razon")
-        End If
+    End Sub
+
+    Private Sub _Proceso()
+
+        TablaDetallado.Rows.Clear()
+
+        Dim Codigo As String = _codigo
+        Dim Cbx_Index As Integer = _cbx_index
+        Dim SQLCnslt As String
 
         Dim DesdeFecha As String = BuscarFechaDesde(Cbx_Index)
         Dim DesdeFechaOrd As String = ordenaFecha(DesdeFecha)
         Dim FechaActualOrd As String = ordenaFecha(Date.Today.ToString("dd/MM/yyyy"))
 
-        With TablaDetallado.Columns
-            .Add("Tipo")
-            .Add("Hoja")
-            .Add("MovEnv")
-            .Add("Fecha")
-            .Add("Entrada")
-            .Add("Salida")
-            .Add("FechaOrd")
-        End With
+        If rbEntradas.Checked Or rbTotal.Checked Then
 
-        Dim CantidadEntradas As Integer = 0
+            SQLCnslt = "SELECT  de.Envase, de.Fecha, de.OrdFecha, Entradas = de.Cantidad " _
+                       & "FROM Surfactan_II.dbo.DevolucionEnvases de INNER JOIN SurfactanSa.dbo.EquivEnvArticulo eea ON de.Envase = eea.Articulo " _
+                       & "WHERE de.Cliente = '" & Codigo & "' " _
+                       & "AND de.OrdFecha >= '" & DesdeFechaOrd & "' AND de.OrdFecha <= '" & FechaActualOrd & "'" _
+                       & "AND eea.Envase = 30"
 
-        SQLCnslt = "SELECT  de.Envase, de.Fecha, de.OrdFecha, Entradas = de.Cantidad " _
-                    & "FROM Surfactan_II.dbo.DevolucionEnvases de INNER JOIN SurfactanSa.dbo.EquivEnvArticulo eea ON de.Envase = eea.Articulo " _
-                    & "WHERE de.Cliente = '" & Codigo & "' " _
-                    & "AND de.OrdFecha >= '" & DesdeFechaOrd & "' AND de.OrdFecha <= '" & FechaActualOrd & "'" _
-                    & "AND eea.Envase = 30"
+            Dim tablaDevolEnv As DataTable = GetAll(SQLCnslt)
 
-        Dim tablaDevolEnv As DataTable = GetAll(SQLCnslt)
+            If tablaDevolEnv.Rows.Count > 0 Then
+                For Each rowdevolEnv As DataRow In tablaDevolEnv.Rows
+                    TablaDetallado.Rows.Add("Devolucion Envases", "", "", rowdevolEnv.Item("Fecha"), rowdevolEnv.Item("Entradas"), 0, rowdevolEnv.Item("OrdFecha"))
+                Next
+            End If
 
-        If tablaDevolEnv.Rows.Count > 0 Then
-            For Each rowdevolEnv As DataRow In tablaDevolEnv.Rows
-                TablaDetallado.Rows.Add("Devolucion Envases", "", "", rowdevolEnv.Item("Fecha"), rowdevolEnv.Item("Entradas"), 0, rowdevolEnv.Item("OrdFecha"))
-            Next
+            SQLCnslt = "SELECT hrde.Hoja, hrde.Fecha, hrde.FechaOrd, Entradas = hrde.Cantidad " _
+                       & "FROM HojaRutaDevEnv hrde INNER JOIN EquivEnvArticulo eea ON hrde.Envase = eea.Articulo " _
+                       & "WHERE hrde.Cliente = '" & Codigo & "' " _
+                       & "AND hrde.FechaOrd >= '20200101' AND hrde.FechaOrd <= '20200910' " _
+                       & "AND eea.Envase = 30"
+            Dim tablaHojaRuta As DataTable = GetAll(SQLCnslt)
+
+            If tablaHojaRuta.Rows.Count > 0 Then
+                For Each rowHojaRuta As DataRow In tablaHojaRuta.Rows
+                    TablaDetallado.Rows.Add("Hoja de Ruta", rowHojaRuta.Item("Hoja"), "", rowHojaRuta.Item("Fecha"), rowHojaRuta.Item("Entradas"), 0, rowHojaRuta.Item("FechaOrd"))
+                Next
+            End If
+
         End If
 
+        If rbSalidas.Checked Or rbTotal.Checked Then
+            SQLCnslt = "SELECT NroMovEnv = Codigo, Fecha, FechaOrd, Salidas = Cantidad FROM MovEnv " _
+                   & "WHERE Cliente = '" & Codigo & "' " _
+                   & "AND FechaOrd >= '" & DesdeFechaOrd & "' AND FechaOrd <= '" & FechaActualOrd & "'" _
+                   & "AND Envase = 30 AND Marca <> 'X' "
 
+            Dim tablaSalidas As DataTable = GetAll(SQLCnslt, "SurfactanSa")
 
-        SQLCnslt = "SELECT hrde.Hoja, hrde.Fecha, hrde.FechaOrd, Entradas = hrde.Cantidad " _
-                    & "FROM HojaRutaDevEnv hrde INNER JOIN EquivEnvArticulo eea ON hrde.Envase = eea.Articulo " _
-                    & "WHERE hrde.Cliente = '" & Codigo & "' " _
-                    & "AND hrde.FechaOrd >= '20200101' AND hrde.FechaOrd <= '20200910' " _
-                    & "AND eea.Envase = 30"
-        Dim tablaHojaRuta As DataTable = GetAll(SQLCnslt)
-
-        If tablaHojaRuta.Rows.Count > 0 Then
-            For Each rowHojaRuta As DataRow In tablaHojaRuta.Rows
-                TablaDetallado.Rows.Add("Hoja de Ruta", rowHojaRuta.Item("Hoja"), "", rowHojaRuta.Item("Fecha"), rowHojaRuta.Item("Entradas"), 0, rowHojaRuta.Item("FechaOrd"))
-            Next
+            If tablaSalidas.Rows.Count > 0 Then
+                For Each rowSal As DataRow In tablaSalidas.Rows
+                    TablaDetallado.Rows.Add("Remito", "", rowSal.Item("NroMovEnv").ToString().Remove(0, 1), rowSal.Item("Fecha"), 0, rowSal.Item("Salidas"), rowSal.Item("FechaOrd"))
+                Next
+            End If
         End If
 
-
-
-        Dim CantidadSalidas As Integer = 0
-
-        SQLCnslt = "SELECT NroMovEnv = Codigo, Fecha, FechaOrd, Salidas = Cantidad FROM MovEnv " _
-                    & "WHERE Cliente = '" & Codigo & "' " _
-                    & "AND FechaOrd >= '" & DesdeFechaOrd & "' AND FechaOrd <= '" & FechaActualOrd & "'" _
-                    & "AND Envase = 30 AND Marca <> 'X' "
-
-        Dim tablaSalidas As DataTable = GetAll(SQLCnslt, "SurfactanSa")
-
-        If tablaSalidas.Rows.Count > 0 Then
-            For Each rowSal As DataRow In tablaSalidas.Rows
-                TablaDetallado.Rows.Add("Mov. Env.", "", rowSal.Item("NroMovEnv"), rowSal.Item("Fecha"), 0, rowSal.Item("Salidas"), rowSal.Item("FechaOrd"))
-            Next
-        End If
-        
         DGV_MovDetallados.DataSource = TablaDetallado
         Dim TSalidas As Integer = 0
         Dim TEntradas As Integer = 0
@@ -90,12 +87,11 @@ Public Class Discriminado_Mov_Env
             TEntradas = TEntradas + DGV_row.Cells("Entrada").Value
             TSalidas = TSalidas + +DGV_row.Cells("Salida").Value
         Next
-        
+
         txt_TotalEntradas.Text = TEntradas
         txt_TotalSalidas.Text = TSalidas
 
         DGV_MovDetallados.Sort(DGV_MovDetallados.Columns(6), System.ComponentModel.ListSortDirection.Ascending)
-
 
     End Sub
 
@@ -164,6 +160,38 @@ Public Class Discriminado_Mov_Env
         e.Handled = True
 
     End Sub
+    
+    Private Sub Discriminado_Mov_Env_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-   
+        txt_Cliente.Text = _codigo
+
+        Dim SQLCnslt As String = "SELECT Razon FROM Cliente WHERE Cliente = '" & _codigo & "'"
+        Dim RowCli As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+        If RowCli IsNot Nothing Then
+            txt_ClienteDes.Text = RowCli.Item("Razon")
+        End If
+
+        With TablaDetallado.Columns
+            .Add("Tipo")
+            .Add("Hoja")
+            .Add("MovEnv")
+            .Add("Fecha")
+            .Add("Entrada")
+            .Add("Salida")
+            .Add("FechaOrd")
+        End With
+
+        _Proceso()
+    End Sub
+
+    Private Sub rbTotal_Click(sender As Object, e As EventArgs) Handles rbTotal.Click, rbSalidas.Click, rbEntradas.Click
+        _Proceso()
+    End Sub
+
+    Private Sub DGV_MovDetallados_ColumnHeaderMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DGV_MovDetallados.ColumnHeaderMouseClick
+        If e.ColumnIndex = DGV_MovDetallados.Columns("Fecha").Index Then
+            WOrd = IIf(WOrd = "", "DESC", "")
+            TryCast(DGV_MovDetallados.DataSource, DataTable).DefaultView.Sort = "FechaOrd " & WOrd
+        End If
+    End Sub
 End Class

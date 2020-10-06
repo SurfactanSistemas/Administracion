@@ -1,6 +1,47 @@
 ﻿Imports Util
 Imports Util.Clases.Helper
-Public Class FechaReprog
+Imports Util.Clases.Query
+Public Class FechaReprog : Implements IMinutaDirecta
+
+    Private CODIGOCLI As String
+    Private CLIENTEDES As String
+    Sub New(ByVal Codigo As String)
+
+        ' Llamada necesaria para el diseñador.
+        InitializeComponent()
+
+        ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
+
+
+        Dim SQLCnslt As String = "SELECT Razon, Telefono, Contacto, Horario, Email, EmailEnv, Direccion, DirEntregaII, DirEntregaIII, DirEntregaIV, DirEntregaV " _
+                                 & "FROM Cliente WHERE Cliente = '" & Codigo & "'"
+
+        Dim RowCli As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+
+        If RowCli IsNot Nothing Then
+            Dim Contacto As String = "Razon: " & RowCli.Item("Razon") & "" & vbCrLf & "" _
+                                   & "Contacto: " & RowCli.Item("Contacto") & "" & vbCrLf & "" _
+                                   & "Telefono: " & RowCli.Item("Telefono") & " " & vbCrLf & "" _
+                                   & "Horarios: " & RowCli.Item("Horario") & " " & vbCrLf & "" _
+                                   & "Mail: " & RowCli.Item("Email") & " " & vbCrLf & "" _
+                                   & "Mail Envases: " & RowCli.Item("EmailEnv") & " " & vbCrLf & "" _
+                                   & "Direcciones: " & RowCli.Item("Direccion") & " " & vbCrLf & "                  " _
+                                   & "- " & RowCli.Item("DirEntregaII") & " " & vbCrLf & "                  " _
+                                   & "- " & RowCli.Item("DirEntregaIII") & " " & vbCrLf & "                  " _
+                                   & "- " & RowCli.Item("DirEntregaIV") & " " & vbCrLf & "                  " _
+                                   & "- " & RowCli.Item("DirEntregaV") & " " & vbCrLf & ""
+
+            txt_DatosContacto.Text = Contacto
+
+            CODIGOCLI = Codigo
+            CLIENTEDES = RowCli.Item("Razon")
+
+        End If
+
+    End Sub
+
+
+
 
     Private Sub btn_Cerrar_Click(sender As Object, e As EventArgs) Handles btn_Cerrar.Click
         Close()
@@ -23,4 +64,13 @@ Public Class FechaReprog
 
     End Sub
 
+    Private Sub btn_Minuta_Click(sender As Object, e As EventArgs) Handles btn_Minuta.Click
+        With New MinutaAgenda(CODIGOCLI, CLIENTEDES)
+            .Show(Me)
+        End With
+    End Sub
+
+    Public Sub CerrarIngresoAgenda() Implements IMinutaDirecta.CerrarIngresoAgenda
+        Close()
+    End Sub
 End Class

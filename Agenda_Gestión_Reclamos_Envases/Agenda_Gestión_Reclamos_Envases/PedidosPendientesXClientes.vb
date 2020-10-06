@@ -41,4 +41,8 @@ Public Class PedidosPendientesXClientes
             .Show(Me)
         End With
     End Sub
+
+    Private Sub DGV_PedidosPendientes_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGV_PedidosPendientes.CellClick
+        DGV_PedidosPendientes.Rows(DGV_PedidosPendientes.CurrentCell.RowIndex).Selected = True
+    End Sub
 End Class

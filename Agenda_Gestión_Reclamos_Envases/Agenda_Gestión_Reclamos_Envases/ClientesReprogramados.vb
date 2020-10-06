@@ -2,7 +2,9 @@
 Imports Util.Clases.Query
 Imports Util.Clases.Helper
 
-Public Class ClientesReprogramados : Implements IPasaCliente
+Public Class ClientesReprogramados : Implements IPasaCliente, IBorrarDeAgenda
+
+    Private WOrd As String = ""
 
     Private Sub btn_Cerrar_Click(sender As Object, e As EventArgs) Handles btn_Cerrar.Click
         Close()
@@ -31,7 +33,7 @@ Public Class ClientesReprogramados : Implements IPasaCliente
         Dim TablaFiltrar As DataTable = DGV_Clientes.DataSource
 
         TablaFiltrar.DefaultView.RowFilter = "Cliente LIKE '%" & txt_Filtro.Text & "%' OR Descripcion LIKE '%" & txt_Filtro.Text & "%'"
-        
+
     End Sub
 
     Private Sub DGV_Clientes_CellMouseDoubleClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DGV_Clientes.CellMouseDoubleClick
@@ -74,5 +76,29 @@ Public Class ClientesReprogramados : Implements IPasaCliente
         If TablaReclamos.Rows.Count > 0 Then
             DGV_Clientes.DataSource = TablaReclamos
         End If
+    End Sub
+
+    Private Sub ClientesReprogramados_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
+
+    Private Sub DGV_Clientes_ColumnHeaderMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DGV_Clientes.ColumnHeaderMouseClick
+        If e.ColumnIndex = DGV_Clientes.Columns("FechaRePro").Index Then
+            WOrd = IIf(WOrd = "", "DESC", "")
+            TryCast(DGV_Clientes.DataSource, DataTable).DefaultView.Sort = "FechaReProgOrd " & WOrd
+        end if
+    End Sub
+
+    Public Sub BorrarDeAgenda(Codigo As String) Implements IBorrarDeAgenda.BorrarDeAgenda
+        Dim WOwner As IPasaCliente = TryCast(Owner, IPasaCliente)
+
+        If WOwner IsNot Nothing Then
+            WOwner.PasaCliente(Codigo)
+            Close()
+        End If
+    End Sub
+
+    Private Sub DGV_Clientes_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGV_Clientes.CellClick
+        DGV_Clientes.Rows(DGV_Clientes.CurrentCell.RowIndex).Selected = True
     End Sub
 End Class

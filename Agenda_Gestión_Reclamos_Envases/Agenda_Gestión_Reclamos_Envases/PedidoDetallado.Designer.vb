@@ -30,12 +30,12 @@ Partial Class PedidoDetallado
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txt_Pedido = New System.Windows.Forms.TextBox()
         Me.DGV_PedidosPendientes = New Util.DBDataGridView()
-        Me.btn_Cerrar = New System.Windows.Forms.Button()
         Me.Terminado = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FecEntrega = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Pendiente = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.OrdFecEntrega = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btn_Cerrar = New System.Windows.Forms.Button()
         Me.panel1.SuspendLayout()
         CType(Me.DGV_PedidosPendientes, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -118,15 +118,6 @@ Partial Class PedidoDetallado
         Me.DGV_PedidosPendientes.Size = New System.Drawing.Size(424, 184)
         Me.DGV_PedidosPendientes.TabIndex = 133
         '
-        'btn_Cerrar
-        '
-        Me.btn_Cerrar.Location = New System.Drawing.Point(358, 50)
-        Me.btn_Cerrar.Name = "btn_Cerrar"
-        Me.btn_Cerrar.Size = New System.Drawing.Size(75, 23)
-        Me.btn_Cerrar.TabIndex = 134
-        Me.btn_Cerrar.Text = "CERRAR"
-        Me.btn_Cerrar.UseVisualStyleBackColor = True
-        '
         'Terminado
         '
         Me.Terminado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
@@ -172,6 +163,15 @@ Partial Class PedidoDetallado
         Me.OrdFecEntrega.HeaderText = "OrdFecEntrega"
         Me.OrdFecEntrega.Name = "OrdFecEntrega"
         Me.OrdFecEntrega.Visible = False
+        '
+        'btn_Cerrar
+        '
+        Me.btn_Cerrar.Location = New System.Drawing.Point(358, 50)
+        Me.btn_Cerrar.Name = "btn_Cerrar"
+        Me.btn_Cerrar.Size = New System.Drawing.Size(75, 23)
+        Me.btn_Cerrar.TabIndex = 134
+        Me.btn_Cerrar.Text = "CERRAR"
+        Me.btn_Cerrar.UseVisualStyleBackColor = True
         '
         'PedidoDetallado
         '

@@ -29,12 +29,12 @@ Partial Class ClientesReprogramados
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txt_Filtro = New System.Windows.Forms.TextBox()
         Me.DGV_Clientes = New Util.DBDataGridView()
-        Me.btn_Cerrar = New System.Windows.Forms.Button()
         Me.Cliente = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FechaRepro = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FechaReProgOrd = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Observaciones = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btn_Cerrar = New System.Windows.Forms.Button()
         Me.panel1.SuspendLayout()
         CType(Me.DGV_Clientes, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -47,7 +47,7 @@ Partial Class ClientesReprogramados
         Me.panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.panel1.Location = New System.Drawing.Point(0, 0)
         Me.panel1.Name = "panel1"
-        Me.panel1.Size = New System.Drawing.Size(432, 50)
+        Me.panel1.Size = New System.Drawing.Size(431, 50)
         Me.panel1.TabIndex = 128
         '
         'Label2
@@ -56,7 +56,7 @@ Partial Class ClientesReprogramados
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold)
         Me.Label2.ForeColor = System.Drawing.Color.White
-        Me.Label2.Location = New System.Drawing.Point(277, 30)
+        Me.Label2.Location = New System.Drawing.Point(276, 30)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(155, 20)
         Me.Label2.TabIndex = 0
@@ -70,9 +70,9 @@ Partial Class ClientesReprogramados
         Me.label1.ForeColor = System.Drawing.Color.White
         Me.label1.Location = New System.Drawing.Point(3, 6)
         Me.label1.Name = "label1"
-        Me.label1.Size = New System.Drawing.Size(202, 17)
+        Me.label1.Size = New System.Drawing.Size(63, 17)
         Me.label1.TabIndex = 0
-        Me.label1.Text = "LLamadas Reprogramadas"
+        Me.label1.Text = "Agenda"
         '
         'Label3
         '
@@ -115,15 +115,6 @@ Partial Class ClientesReprogramados
         Me.DGV_Clientes.Size = New System.Drawing.Size(421, 259)
         Me.DGV_Clientes.TabIndex = 135
         '
-        'btn_Cerrar
-        '
-        Me.btn_Cerrar.Location = New System.Drawing.Point(345, 55)
-        Me.btn_Cerrar.Name = "btn_Cerrar"
-        Me.btn_Cerrar.Size = New System.Drawing.Size(75, 33)
-        Me.btn_Cerrar.TabIndex = 138
-        Me.btn_Cerrar.Text = "CERRAR"
-        Me.btn_Cerrar.UseVisualStyleBackColor = True
-        '
         'Cliente
         '
         Me.Cliente.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
@@ -145,10 +136,10 @@ Partial Class ClientesReprogramados
         '
         Me.FechaRepro.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.FechaRepro.DataPropertyName = "FechaRePro"
-        Me.FechaRepro.HeaderText = "Fecha Reprogramada"
+        Me.FechaRepro.HeaderText = "Fecha Reprog."
         Me.FechaRepro.Name = "FechaRepro"
         Me.FechaRepro.ReadOnly = True
-        Me.FechaRepro.Width = 123
+        Me.FechaRepro.Width = 95
         '
         'FechaReProgOrd
         '
@@ -164,11 +155,20 @@ Partial Class ClientesReprogramados
         Me.Observaciones.Name = "Observaciones"
         Me.Observaciones.Visible = False
         '
+        'btn_Cerrar
+        '
+        Me.btn_Cerrar.Location = New System.Drawing.Point(345, 55)
+        Me.btn_Cerrar.Name = "btn_Cerrar"
+        Me.btn_Cerrar.Size = New System.Drawing.Size(75, 33)
+        Me.btn_Cerrar.TabIndex = 138
+        Me.btn_Cerrar.Text = "CERRAR"
+        Me.btn_Cerrar.UseVisualStyleBackColor = True
+        '
         'ClientesReprogramados
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(432, 356)
+        Me.ClientSize = New System.Drawing.Size(431, 356)
         Me.Controls.Add(Me.btn_Cerrar)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.txt_Filtro)

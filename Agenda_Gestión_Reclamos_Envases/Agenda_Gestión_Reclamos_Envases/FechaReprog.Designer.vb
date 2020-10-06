@@ -31,6 +31,9 @@ Partial Class FechaReprog
         Me.btn_Cerrar = New System.Windows.Forms.Button()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txt_Observaciones = New System.Windows.Forms.TextBox()
+        Me.txt_DatosContacto = New System.Windows.Forms.TextBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.btn_Minuta = New System.Windows.Forms.Button()
         Me.panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -65,13 +68,13 @@ Partial Class FechaReprog
         Me.label1.ForeColor = System.Drawing.Color.White
         Me.label1.Location = New System.Drawing.Point(3, 6)
         Me.label1.Name = "label1"
-        Me.label1.Size = New System.Drawing.Size(152, 17)
+        Me.label1.Size = New System.Drawing.Size(124, 17)
         Me.label1.TabIndex = 0
-        Me.label1.Text = "Fecha Reprogramar"
+        Me.label1.Text = "Agendar Cliente"
         '
         'txt_Fecha
         '
-        Me.txt_Fecha.Location = New System.Drawing.Point(96, 69)
+        Me.txt_Fecha.Location = New System.Drawing.Point(96, 230)
         Me.txt_Fecha.Mask = "00/00/0000"
         Me.txt_Fecha.Name = "txt_Fecha"
         Me.txt_Fecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -81,7 +84,7 @@ Partial Class FechaReprog
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(12, 72)
+        Me.Label3.Location = New System.Drawing.Point(12, 233)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(75, 13)
         Me.Label3.TabIndex = 130
@@ -89,7 +92,7 @@ Partial Class FechaReprog
         '
         'btn_Aceptar
         '
-        Me.btn_Aceptar.Location = New System.Drawing.Point(144, 189)
+        Me.btn_Aceptar.Location = New System.Drawing.Point(80, 350)
         Me.btn_Aceptar.Name = "btn_Aceptar"
         Me.btn_Aceptar.Size = New System.Drawing.Size(75, 23)
         Me.btn_Aceptar.TabIndex = 131
@@ -98,7 +101,7 @@ Partial Class FechaReprog
         '
         'btn_Cerrar
         '
-        Me.btn_Cerrar.Location = New System.Drawing.Point(224, 189)
+        Me.btn_Cerrar.Location = New System.Drawing.Point(182, 350)
         Me.btn_Cerrar.Name = "btn_Cerrar"
         Me.btn_Cerrar.Size = New System.Drawing.Size(75, 23)
         Me.btn_Cerrar.TabIndex = 132
@@ -108,7 +111,7 @@ Partial Class FechaReprog
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(12, 100)
+        Me.Label4.Location = New System.Drawing.Point(12, 261)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(78, 13)
         Me.Label4.TabIndex = 133
@@ -116,18 +119,49 @@ Partial Class FechaReprog
         '
         'txt_Observaciones
         '
-        Me.txt_Observaciones.Location = New System.Drawing.Point(96, 97)
+        Me.txt_Observaciones.Location = New System.Drawing.Point(96, 258)
         Me.txt_Observaciones.MaxLength = 300
         Me.txt_Observaciones.Multiline = True
         Me.txt_Observaciones.Name = "txt_Observaciones"
         Me.txt_Observaciones.Size = New System.Drawing.Size(318, 86)
         Me.txt_Observaciones.TabIndex = 134
         '
+        'txt_DatosContacto
+        '
+        Me.txt_DatosContacto.Location = New System.Drawing.Point(96, 59)
+        Me.txt_DatosContacto.MaxLength = 300
+        Me.txt_DatosContacto.Multiline = True
+        Me.txt_DatosContacto.Name = "txt_DatosContacto"
+        Me.txt_DatosContacto.ReadOnly = True
+        Me.txt_DatosContacto.Size = New System.Drawing.Size(318, 164)
+        Me.txt_DatosContacto.TabIndex = 135
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(12, 62)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(50, 26)
+        Me.Label5.TabIndex = 136
+        Me.Label5.Text = "Datos de" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Contacto"
+        '
+        'btn_Minuta
+        '
+        Me.btn_Minuta.Location = New System.Drawing.Point(335, 351)
+        Me.btn_Minuta.Name = "btn_Minuta"
+        Me.btn_Minuta.Size = New System.Drawing.Size(75, 23)
+        Me.btn_Minuta.TabIndex = 137
+        Me.btn_Minuta.Text = "MINUTA"
+        Me.btn_Minuta.UseVisualStyleBackColor = True
+        '
         'FechaReprog
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(426, 224)
+        Me.ClientSize = New System.Drawing.Size(426, 378)
+        Me.Controls.Add(Me.btn_Minuta)
+        Me.Controls.Add(Me.Label5)
+        Me.Controls.Add(Me.txt_DatosContacto)
         Me.Controls.Add(Me.txt_Observaciones)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.btn_Cerrar)
@@ -151,4 +185,7 @@ Partial Class FechaReprog
     Friend WithEvents btn_Cerrar As System.Windows.Forms.Button
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents txt_Observaciones As System.Windows.Forms.TextBox
+    Friend WithEvents txt_DatosContacto As System.Windows.Forms.TextBox
+    Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents btn_Minuta As System.Windows.Forms.Button
 End Class

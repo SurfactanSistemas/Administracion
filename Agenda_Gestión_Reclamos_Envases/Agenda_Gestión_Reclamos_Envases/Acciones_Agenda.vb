@@ -2,13 +2,13 @@
 Imports Util.Clases.Query
 Imports Util.Clases.Helper
 
-Public Class Acciones_Agenda
+Public Class Acciones_Agenda : Implements IBorrarDeAgenda
 
     Private Sub btn_Cerrar_Click(sender As Object, e As EventArgs) Handles btn_Cerrar.Click
         Close()
     End Sub
 
-    Sub New(ByVal Codigo As String, ByVal Fecha As String, ByVal Observaciones As String)
+    Sub New(ByVal Codigo As String, Optional ByVal Fecha As String = "", Optional ByVal Observaciones As String = "")
 
         ' Llamada necesaria para el diseñador.
         InitializeComponent()
@@ -40,6 +40,8 @@ Public Class Acciones_Agenda
             txt_DatosContacto.Text = Contacto
 
         End If
+
+
 
     End Sub
 
@@ -81,7 +83,10 @@ Public Class Acciones_Agenda
                 WOwner.ActualizaGrilla()
             End If
 
+            Close()
+
         End If
+
     End Sub
 
   
@@ -95,5 +100,36 @@ Public Class Acciones_Agenda
         With New MinutaAgenda(txt_Cliente.Text, txt_ClienteDes.Text)
             .Show(Me)
         End With
+    End Sub
+
+    Public Sub BorrarDeAgenda(Codigo As String) Implements IBorrarDeAgenda.BorrarDeAgenda
+       
+        Dim WOwner As IPasaCliente = TryCast(Owner, IPasaCliente)
+
+        If WOwner IsNot Nothing Then
+            WOwner.PasaCliente(txt_Cliente.Text)
+            Close()
+        End If
+
+    End Sub
+
+    
+    Private Sub Acciones_Agenda_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        txt_Fecha.Focus()
+    End Sub
+
+    Private Sub txt_Fecha_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_Fecha.KeyDown
+        Select Case e.KeyData
+            Case Keys.Enter
+                If ValidaFecha(txt_Fecha.Text) = "S" Then
+                    txt_Observaciones.Focus()
+                Else
+                    MsgBox("La fecha es invalida, verifique")
+                    txt_Fecha.SelectAll()
+                End If
+            Case Keys.Escape
+                txt_Fecha.Text = ""
+        End Select
+        
     End Sub
 End Class
