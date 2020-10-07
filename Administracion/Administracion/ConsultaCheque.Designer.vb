@@ -44,6 +44,7 @@ Partial Class ConsultaCheque
         Me.comprobante = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Cuit = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.observaciones = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TipoCheque = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.gridCheque, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -55,7 +56,7 @@ Partial Class ConsultaCheque
         Me.gridCheque.AllowUserToDeleteRows = False
         Me.gridCheque.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.gridCheque.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.gridCheque.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Cheque, Me.Banco, Me.Importe, Me.FechaComprobante, Me.fechaCheque, Me.comprobante, Me.Cuit, Me.observaciones})
+        Me.gridCheque.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Cheque, Me.Banco, Me.Importe, Me.FechaComprobante, Me.fechaCheque, Me.comprobante, Me.Cuit, Me.observaciones, Me.TipoCheque})
         Me.gridCheque.Location = New System.Drawing.Point(13, 40)
         Me.gridCheque.Name = "gridCheque"
         Me.gridCheque.ReadOnly = True
@@ -274,6 +275,14 @@ Partial Class ConsultaCheque
         Me.observaciones.Name = "observaciones"
         Me.observaciones.ReadOnly = True
         '
+        'TipoCheque
+        '
+        Me.TipoCheque.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.TipoCheque.HeaderText = "Tipo "
+        Me.TipoCheque.Name = "TipoCheque"
+        Me.TipoCheque.ReadOnly = True
+        Me.TipoCheque.Width = 56
+        '
         'ConsultaCheque
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -313,4 +322,5 @@ Partial Class ConsultaCheque
     Friend WithEvents comprobante As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Cuit As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents observaciones As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents TipoCheque As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class
