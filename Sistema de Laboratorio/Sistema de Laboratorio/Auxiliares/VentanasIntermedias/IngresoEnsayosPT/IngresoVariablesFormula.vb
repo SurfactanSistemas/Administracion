@@ -246,6 +246,23 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
                 End If
                 
             Next
+
+            For i = 1 To dgvVariables.Rows.Count
+
+                If .Rows(i - 1).Cells("WValor").Value.ToString.StartsWith(".") Then .Rows(i - 1).Cells("WValor").Value = "0" & .Rows(i - 1).Cells("WValor").Value
+
+                If .Rows(i - 1).Cells("Variable").Value.ToString.StartsWith("R") Then
+
+                    Referencias(i, 0) = OrDefault(.Rows(i - 1).Cells("idVariable").Value, "")
+                    Referencias(i, 1) = OrDefault(.Rows(i - 1).Cells("Variable").Value, "")
+                    Referencias(i, 2) = OrDefault(.Rows(i - 1).Cells("WValor").Value, "0").ToString.Replace(",", ".")
+
+                    If Val(Referencias(i, 2)) = 0 Then Referencias(i, 2) = "0"
+
+                End If
+
+            Next
+
         End With
 
         '
@@ -263,7 +280,7 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
 
         With parser.Values
             For i = 1 To 10
-                If Referencias(i, 1).Trim <> "" And Formula.ToUpper.Contains(Referencias(i, 1)) Then
+                If Referencias(i, 1).Trim <> "" And Referencias(i, 2).Trim <> "" And Formula.ToUpper.Contains(Referencias(i, 1)) Then
                     If Val(Referencias(i, 2)) = 0 Then Referencias(i, 2) = "0"
                     .Add(Referencias(i, 1).ToLower, Referencias(i, 2))
                 End If

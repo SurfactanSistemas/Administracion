@@ -22,7 +22,7 @@ Partial Class IngresoFormulasEnsayo
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.DGV_Formulas = New Util.DBDataGridView()
         Me.txtBuscador = New System.Windows.Forms.TextBox()
         Me.btnAgregar = New System.Windows.Forms.Button()
@@ -46,14 +46,14 @@ Partial Class IngresoFormulasEnsayo
         Me.DGV_Formulas.AllowUserToDeleteRows = False
         Me.DGV_Formulas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_Formulas.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Renglon, Me.Descripcion, Me.Formula, Me.AnalistaLab, Me.Analista, Me.CheckVerificado})
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGV_Formulas.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGV_Formulas.DefaultCellStyle = DataGridViewCellStyle1
         Me.DGV_Formulas.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.DGV_Formulas.DoubleBuffered = True
         Me.DGV_Formulas.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
@@ -182,6 +182,7 @@ Partial Class IngresoFormulasEnsayo
         Me.CheckVerificado.DataPropertyName = "CheckVerificado"
         Me.CheckVerificado.FalseValue = "0"
         Me.CheckVerificado.HeaderText = "Verif."
+        Me.CheckVerificado.IndeterminateValue = "0"
         Me.CheckVerificado.Name = "CheckVerificado"
         Me.CheckVerificado.ReadOnly = True
         Me.CheckVerificado.Resizable = System.Windows.Forms.DataGridViewTriState.[True]

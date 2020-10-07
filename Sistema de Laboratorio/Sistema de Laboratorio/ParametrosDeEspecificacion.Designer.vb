@@ -93,6 +93,7 @@ Partial Class ParametrosDeEspecificacion
         '
         'txtDescripcion
         '
+        Me.txtDescripcion.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtDescripcion.Location = New System.Drawing.Point(87, 48)
         Me.txtDescripcion.MaxLength = 200
         Me.txtDescripcion.Multiline = True
@@ -159,6 +160,7 @@ Partial Class ParametrosDeEspecificacion
         '
         'txtVar8
         '
+        Me.txtVar8.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtVar8.Location = New System.Drawing.Point(222, 94)
         Me.txtVar8.MaxLength = 20
         Me.txtVar8.Name = "txtVar8"
@@ -168,6 +170,7 @@ Partial Class ParametrosDeEspecificacion
         '
         'txtVar4
         '
+        Me.txtVar4.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtVar4.Location = New System.Drawing.Point(50, 94)
         Me.txtVar4.MaxLength = 20
         Me.txtVar4.Name = "txtVar4"
@@ -197,6 +200,7 @@ Partial Class ParametrosDeEspecificacion
         '
         'txtVar7
         '
+        Me.txtVar7.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtVar7.Location = New System.Drawing.Point(222, 70)
         Me.txtVar7.MaxLength = 20
         Me.txtVar7.Name = "txtVar7"
@@ -206,6 +210,7 @@ Partial Class ParametrosDeEspecificacion
         '
         'txtVar3
         '
+        Me.txtVar3.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtVar3.Location = New System.Drawing.Point(50, 70)
         Me.txtVar3.MaxLength = 20
         Me.txtVar3.Name = "txtVar3"
@@ -235,6 +240,7 @@ Partial Class ParametrosDeEspecificacion
         '
         'txtVar10
         '
+        Me.txtVar10.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtVar10.Location = New System.Drawing.Point(401, 47)
         Me.txtVar10.MaxLength = 20
         Me.txtVar10.Name = "txtVar10"
@@ -244,6 +250,7 @@ Partial Class ParametrosDeEspecificacion
         '
         'txtVar6
         '
+        Me.txtVar6.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtVar6.Location = New System.Drawing.Point(222, 47)
         Me.txtVar6.MaxLength = 20
         Me.txtVar6.Name = "txtVar6"
@@ -253,6 +260,7 @@ Partial Class ParametrosDeEspecificacion
         '
         'txtVar2
         '
+        Me.txtVar2.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtVar2.Location = New System.Drawing.Point(50, 47)
         Me.txtVar2.MaxLength = 20
         Me.txtVar2.Name = "txtVar2"
@@ -292,6 +300,7 @@ Partial Class ParametrosDeEspecificacion
         '
         'txtVar9
         '
+        Me.txtVar9.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtVar9.Location = New System.Drawing.Point(401, 23)
         Me.txtVar9.MaxLength = 20
         Me.txtVar9.Name = "txtVar9"
@@ -301,6 +310,7 @@ Partial Class ParametrosDeEspecificacion
         '
         'txtVar5
         '
+        Me.txtVar5.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtVar5.Location = New System.Drawing.Point(222, 23)
         Me.txtVar5.MaxLength = 20
         Me.txtVar5.Name = "txtVar5"
@@ -320,6 +330,7 @@ Partial Class ParametrosDeEspecificacion
         '
         'txtVar1
         '
+        Me.txtVar1.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtVar1.Location = New System.Drawing.Point(50, 23)
         Me.txtVar1.MaxLength = 20
         Me.txtVar1.Name = "txtVar1"
