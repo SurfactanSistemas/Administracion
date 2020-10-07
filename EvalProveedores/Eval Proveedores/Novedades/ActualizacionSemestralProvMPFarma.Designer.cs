@@ -85,8 +85,6 @@ namespace Eval_Proveedores.Novedades
             this.ckTodos = new System.Windows.Forms.CheckBox();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.DGV_EvalSemProve = new Util.DBDataGridView();
-            this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.Proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MarcaPerformance = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Razon = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -105,6 +103,8 @@ namespace Eval_Proveedores.Novedades
             this.FechaEvaluaProvMPFarmaII = new Util.MyMaskedTextBoxColumn();
             this.VencEvaluacion = new Util.MyMaskedTextBoxColumn();
             this.VerEvalua = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.label2 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.pnlClave.SuspendLayout();
@@ -560,32 +560,6 @@ namespace Eval_Proveedores.Novedades
             this.DGV_EvalSemProve.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_EvalSemProve_CellDoubleClick);
             this.DGV_EvalSemProve.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_EvalSemProve_CellEnter);
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(67, 106);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(195, 13);
-            this.label2.TabIndex = 85;
-            this.label2.Text = "FILTRAR POR TIPO PRODUCTO";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "TODOS",
-            "FARMA",
-            "FOOD",
-            "VETERINARIO",
-            "ENVASES",
-            "EXC. FARMA",
-            "OTROS"});
-            this.comboBox1.Location = new System.Drawing.Point(271, 101);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 86;
-            // 
             // Proveedor
             // 
             this.Proveedor.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
@@ -786,6 +760,32 @@ namespace Eval_Proveedores.Novedades
             this.VerEvalua.UseColumnTextForLinkValue = true;
             this.VerEvalua.Width = 96;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(67, 106);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(195, 13);
+            this.label2.TabIndex = 85;
+            this.label2.Text = "FILTRAR POR TIPO PRODUCTO";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "TODOS",
+            "FARMA",
+            "FOOD",
+            "VETERINARIO",
+            "ENVASES",
+            "EXC. FARMA",
+            "OTROS"});
+            this.comboBox1.Location = new System.Drawing.Point(271, 101);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 86;
+            // 
             // ActualizacionSemestralProvMPFarma
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -847,7 +847,7 @@ namespace Eval_Proveedores.Novedades
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.MaskedTextBox TB_Hasta;
         private System.Windows.Forms.Button button1;
-        private DBDataGridView DGV_EvalSemProve;
+        private Util.DBDataGridView DGV_EvalSemProve;
         private System.Windows.Forms.Label LB_Titulo;
         private System.Windows.Forms.Button BT_Salir;
         private System.Windows.Forms.Button button2;

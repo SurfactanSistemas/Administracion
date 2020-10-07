@@ -323,8 +323,7 @@ Public Class ParametrosDeEspecificacion
 
     End Sub
 
-
-
-
-
+    Private Sub txtFormula_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtFormula.KeyPress
+        e.Handled = Not {"v", "V", "r", "R", "/", "(", ")", "[", "]", "^", "+", "-", "*"}.ToList().Any(Function(v) CChar(v) = e.KeyChar) And Not Char.IsNumber(e.KeyChar) And Not Chr(Keys.Back) = e.KeyChar And Not Chr(Keys.Delete) = e.KeyChar
+    End Sub
 End Class

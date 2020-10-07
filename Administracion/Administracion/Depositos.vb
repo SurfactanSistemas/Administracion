@@ -877,6 +877,14 @@ Public Class Depositos
                             WObservaciones2 = IIf(IsDBNull(.Item("Observaciones2")), "", Trim(.Item("Observaciones2")))
                             WVirtual = OrDefault(.Item("ChequeVirtual"), "0")
 
+                            'Cambiamos el valor de los radio butons segun el tipo de cheque para
+                            'hacerlo visible al usuario
+                            If WVirtual = 1 Then
+                                rbChElectronicos.Checked = True
+                            Else
+                                rbChFisicos.Checked = True
+                            End If
+
                             If Val(WRenglon) = 1 Then
                                 txtNroDeposito.Text = WDeposito
                                 txtFecha.Text = WFecha
