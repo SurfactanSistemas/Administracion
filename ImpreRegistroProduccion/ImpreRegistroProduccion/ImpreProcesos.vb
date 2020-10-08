@@ -29,7 +29,6 @@ Public Class ImpreProcesos
 
                 End Select
 
-
                 Select Case WProceso
                     Case 1, 4 ' REGISTRO DE PRODUCCIÓN.
 
@@ -148,12 +147,18 @@ Public Class ImpreProcesos
                         'MsgBox(WAdjuntos)
 
                         '_EnviarMail(WHojaRuta, WAsunto, WCuerpo, WAdjuntos)
+                    Case 7
+                        Dim WNroPedido As Integer = Environment.GetCommandLineArgs(2)
+
+                        _EnviarAvisoPedidoAutorizado(WNroPedido)
 
                     Case Else
                         Close()
                 End Select
 
             End If
+
+            _EnviarAvisoPedidoAutorizado("409990")
 
             '_GenerarInformeHojaRuta("17899", "C:\TempHojaRuta")
 
@@ -188,6 +193,113 @@ Public Class ImpreProcesos
         End Try
 
     End Sub
+
+    Private Sub _EnviarAvisoPedidoAutorizado(ByVal WNroPedido As String)
+        Dim WPed As DataTable = GetAll("SELECT c.Provincia, t.Descripcion, p.* FROM Pedido p INNER JOIN Cliente c ON c.Cliente = p.Cliente INNER JOIN Terminado t ON t.Codigo = p.Terminado WHERE p.Pedido = '" & WNroPedido & "' And p.MarcaFactura = '1' ORDER BY p.Renglon", "SurfactanSa")
+        Dim WDir As String() = {"grodriguez", "hsein", "calidad2", "calidad", "ebiglieri", "isocalidad", "hmuller", "scoppiello", "sup3", "planta7"}
+        Dim WDirecciones As String = ""
+
+        If WPed.Rows.Count = 0 Then Exit Sub
+
+        Dim WEnIngles As Boolean = Val(OrDefault(WPed.Rows(0)("Provincia"), "")) = 24
+
+        WDir.ToList().ForEach(Sub(d) WDirecciones &= d & "@surfactan.com.ar;")
+
+        If WDirecciones = "" Or WPed.Rows.Count = 0 Then Exit Sub
+
+        Dim WAsunto As String = "El Pedido " & WNroPedido & " ha sido autorizado."
+        Dim WCuerpo As String = "Se notifica que el pedido " & WNroPedido & ", se encuentra autorizado por Aseg. de la Calidad." & vbCrLf & vbCrLf & "Se adjuntan los FDS y Certificados correspondientes a los Productos y Partidas involucradas."
+
+        Dim WArchivos As New List(Of String)
+
+        For Each r As DataRow In WPed.Rows
+
+            Dim esProductoReventa As Boolean = _EsProductoReventa(r("Terminado"))
+            Dim WRutaCertificado As String = ""
+            Dim WNombrePdf As String = ""
+            
+            '
+            ' Determino el tipo de Producto.
+            '
+            If esProductoReventa Then
+                WRutaCertificado = "\\193.168.0.2\w\impresion pdf\Certificados Analisis Farma Reventa\"
+            Else
+                WRutaCertificado = "\\193.168.0.2\w\impresion pdf\Certificados Analisis Farma Liberacion Pedidos\" & WNroPedido & "\"
+            End If
+
+            For i = 1 To 12
+
+                Dim WPartida As String = OrDefault(r("Lote" & i), "")
+                Dim WCantidad As String = formatonumerico(OrDefault(r("CantiLote" & i), "0"))
+
+                If Val(WPartida) = 0 Or Val(WCantidad) = 0 Then Continue For
+
+                If esProductoReventa Then
+                    WNombrePdf = "*" & "P" & WPartida & "* LP*.pdf"
+                Else
+                    WNombrePdf = "*" & "Pda " & WPartida & "*.pdf"
+                End If
+
+                If Directory.Exists(WRutaCertificado) Then
+
+                    Dim wcer As String() = Directory.GetFiles(WRutaCertificado, WNombrePdf, SearchOption.TopDirectoryOnly)
+
+                    WArchivos.AddRange(wcer)
+
+                    If wcer.Count = 0 Then
+                        MsgBox("No se encontró el CoA correspondiente a la partida " & WPartida, MsgBoxStyle.Exclamation)
+                        Exit Sub
+                    End If
+
+                Else
+                    MsgBox("No se encontró el CoA correspondiente a la partida " & WPartida, MsgBoxStyle.Exclamation)
+                    Exit Sub
+                End If
+
+            Next
+
+            '
+            ' Buscamos el FDS del Producto.
+            '
+            Dim WTer As String = r("Terminado")
+            WTer = Microsoft.VisualBasic.Right(WTer.Replace(" ", "").Replace("/", "").Replace("-", "").PadLeft(8, "0"), 8)
+            Dim WBuscarEn As String = "\\193.168.0.2\w\impresion pdf\FDS\"
+
+            Dim WFDSs As String() = Directory.GetFiles(WBuscarEn, String.Format("FDS*{0}*.pdf", WTer), SearchOption.TopDirectoryOnly)
+
+            Dim arch As String = ""
+
+            For Each wfdS As String In WFDSs
+
+                wfdS = UCase(wfdS)
+
+                If WEnIngles Then
+                    If wfdS.Contains("-ING") Or wfdS.Contains(" ING") Then
+                        arch = wfdS
+                        Exit For
+                    End If
+                Else
+                    If Not wfdS.Contains("-ING") And Not wfdS.Contains(" ING") Then
+                        arch = wfdS
+                        Exit For
+                    End If
+                End If
+
+                If arch.Trim = "" Then arch = wfdS
+
+            Next
+
+            If arch.Trim <> "" Then WArchivos.Add(arch)
+
+        Next
+
+        _EnviarMail(WDirecciones, WAsunto, WCuerpo, String.Join(";", WArchivos.ToArray()))
+
+    End Sub
+
+    Private Function _EsProductoReventa(ByVal Prod As String) As Boolean
+        Return GetSingle("SELECT Codigo FROM CodigoMono WHERE Codigo = '" & Prod & "' And Tipo = 0", "SurfactanSa") IsNot Nothing
+    End Function
 
     Private Sub _GenerarInformeHojaRuta(WHojaRuta As String, WRutaArchivo As String)
 
@@ -280,8 +392,8 @@ Public Class ImpreProcesos
 
             End If
 
-            'oMsg.Display()
-            oMsg.Send()
+            oMsg.Display()
+            'oMsg.Send()
 
         Catch ex As System.Exception
             Throw New System.Exception("No se pudo crear el E-Mail solicitado." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
