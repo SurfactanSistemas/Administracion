@@ -2,7 +2,8 @@
 Imports Util.Clases.Query
 Imports Util.Clases.Helper
 Public Class MinutaBaja_Modificacion
-    Dim Mails As String = "andy.fdra@gmail.com;andy_fdra@hotmail.com"
+    'Si modifica los mails modificar tambien en MinutaAgenda
+    Dim Mails As String = "drodriguez@surfactan.com.ar;hmuller@surfactan.com.ar"
     Dim ID As Integer
 
     Sub New(ByVal IdTabla As Integer, ByVal DesCliente As String)
@@ -91,13 +92,13 @@ Public Class MinutaBaja_Modificacion
         Catch ex As Exception
 
         End Try
-        
+
     End Sub
 
     Private Sub _Generarmails(ByVal Cliente As String, ByVal DesCliente As String, ByVal FechaRetirar As String, ByVal CantRetirar As String)
 
-        Dim Cuerpo As String = "Se solicita el envio de un camion para retirar la cantidad de " & CantRetirar & " contenedores " _
-                               & "por 1000 litros, a el cliente " & DesCliente & " (" & Cliente & "). Se acordo que sea enviado" _
+        Dim Cuerpo As String = "Se solicita el envio de un camion para retirar la cantidad de " & CantRetirar & " contenedores" _
+                               & ", a el cliente " & DesCliente & " (" & Cliente & "). Se acordo que sea enviado" _
                                & " el dia " & FechaRetirar & "."
 
 

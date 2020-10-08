@@ -343,4 +343,10 @@ Public Class MenuPrincipal
             .Show(Me)
         End With
     End Sub
+
+    Private Sub InformeRecepcionSinFacturasRegistradasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InformeRecepcionSinFacturasRegistradasToolStripMenuItem.Click
+        With New InformeRep_SinFac_registradas
+            .Show(Me)
+        End With
+    End Sub
 End Class

@@ -39,6 +39,8 @@ Partial Public Class DBAuxi
     
     Private tableimpCtaCtePrvNet As impCtaCtePrvNetDataTable
 
+    Private tableReporte_InformeSinFac_Registradas As Reporte_InformeSinFac_RegistradasDataTable
+
     Private _schemaSerializationMode As Global.System.Data.SchemaSerializationMode = Global.System.Data.SchemaSerializationMode.IncludeSchema
 
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
@@ -88,6 +90,9 @@ Partial Public Class DBAuxi
             End If
             If (Not (ds.Tables("impCtaCtePrvNet")) Is Nothing) Then
                 MyBase.Tables.Add(New impCtaCtePrvNetDataTable(ds.Tables("impCtaCtePrvNet")))
+            End If
+            If (Not (ds.Tables("Reporte_InformeSinFac_Registradas")) Is Nothing) Then
+                MyBase.Tables.Add(New Reporte_InformeSinFac_RegistradasDataTable(ds.Tables("Reporte_InformeSinFac_Registradas")))
             End If
             Me.DataSetName = ds.DataSetName
             Me.Prefix = ds.Prefix
@@ -173,6 +178,16 @@ Partial Public Class DBAuxi
     Public ReadOnly Property impCtaCtePrvNet() As impCtaCtePrvNetDataTable
         Get
             Return Me.tableimpCtaCtePrvNet
+        End Get
+    End Property
+
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+     Global.System.ComponentModel.Browsable(False), _
+     Global.System.ComponentModel.DesignerSerializationVisibility(Global.System.ComponentModel.DesignerSerializationVisibility.Content)> _
+    Public ReadOnly Property Reporte_InformeSinFac_Registradas() As Reporte_InformeSinFac_RegistradasDataTable
+        Get
+            Return Me.tableReporte_InformeSinFac_Registradas
         End Get
     End Property
 
@@ -264,6 +279,9 @@ Partial Public Class DBAuxi
             If (Not (ds.Tables("impCtaCtePrvNet")) Is Nothing) Then
                 MyBase.Tables.Add(New impCtaCtePrvNetDataTable(ds.Tables("impCtaCtePrvNet")))
             End If
+            If (Not (ds.Tables("Reporte_InformeSinFac_Registradas")) Is Nothing) Then
+                MyBase.Tables.Add(New Reporte_InformeSinFac_RegistradasDataTable(ds.Tables("Reporte_InformeSinFac_Registradas")))
+            End If
             Me.DataSetName = ds.DataSetName
             Me.Prefix = ds.Prefix
             Me.Namespace = ds.Namespace
@@ -338,6 +356,12 @@ Partial Public Class DBAuxi
                 Me.tableimpCtaCtePrvNet.InitVars()
             End If
         End If
+        Me.tableReporte_InformeSinFac_Registradas = CType(MyBase.Tables("Reporte_InformeSinFac_Registradas"), Reporte_InformeSinFac_RegistradasDataTable)
+        If (initTable = True) Then
+            If (Not (Me.tableReporte_InformeSinFac_Registradas) Is Nothing) Then
+                Me.tableReporte_InformeSinFac_Registradas.InitVars()
+            End If
+        End If
     End Sub
 
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
@@ -362,6 +386,8 @@ Partial Public Class DBAuxi
         MyBase.Tables.Add(Me.table_tablaChequesEliminados)
         Me.tableimpCtaCtePrvNet = New impCtaCtePrvNetDataTable()
         MyBase.Tables.Add(Me.tableimpCtaCtePrvNet)
+        Me.tableReporte_InformeSinFac_Registradas = New Reporte_InformeSinFac_RegistradasDataTable()
+        MyBase.Tables.Add(Me.tableReporte_InformeSinFac_Registradas)
     End Sub
 
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
@@ -403,6 +429,12 @@ Partial Public Class DBAuxi
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
     Private Function ShouldSerializeimpCtaCtePrvNet() As Boolean
+        Return False
+    End Function
+
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+    Private Function ShouldSerializeReporte_InformeSinFac_Registradas() As Boolean
         Return False
     End Function
 
@@ -484,6 +516,9 @@ Partial Public Class DBAuxi
 
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
     Public Delegate Sub impCtaCtePrvNetRowChangeEventHandler(ByVal sender As Object, ByVal e As impCtaCtePrvNetRowChangeEvent)
+
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+    Public Delegate Sub Reporte_InformeSinFac_RegistradasRowChangeEventHandler(ByVal sender As Object, ByVal e As Reporte_InformeSinFac_RegistradasRowChangeEvent)
 
     '''<summary>
     '''Represents the strongly named DataTable class.
@@ -3435,6 +3470,362 @@ Partial Public Class DBAuxi
     End Class
 
     '''<summary>
+    '''Represents the strongly named DataTable class.
+    '''</summary>
+    <Global.System.Serializable(), _
+     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")> _
+    Partial Public Class Reporte_InformeSinFac_RegistradasDataTable
+        Inherits Global.System.Data.TypedTableBase(Of Reporte_InformeSinFac_RegistradasRow)
+
+        Private columnInforme As Global.System.Data.DataColumn
+
+        Private columnProveedor As Global.System.Data.DataColumn
+
+        Private columnRazon As Global.System.Data.DataColumn
+
+        Private columnOrden As Global.System.Data.DataColumn
+
+        Private columnArticulo As Global.System.Data.DataColumn
+
+        Private columnDescripcion As Global.System.Data.DataColumn
+
+        Private columnCantidad As Global.System.Data.DataColumn
+
+        Private columnMoneda As Global.System.Data.DataColumn
+
+        Private columnPrecio As Global.System.Data.DataColumn
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Sub New()
+            MyBase.New()
+            Me.TableName = "Reporte_InformeSinFac_Registradas"
+            Me.BeginInit()
+            Me.InitClass()
+            Me.EndInit()
+        End Sub
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Friend Sub New(ByVal table As Global.System.Data.DataTable)
+            MyBase.New()
+            Me.TableName = table.TableName
+            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
+                Me.CaseSensitive = table.CaseSensitive
+            End If
+            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
+                Me.Locale = table.Locale
+            End If
+            If (table.Namespace <> table.DataSet.Namespace) Then
+                Me.Namespace = table.Namespace
+            End If
+            Me.Prefix = table.Prefix
+            Me.MinimumCapacity = table.MinimumCapacity
+        End Sub
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
+            MyBase.New(info, context)
+            Me.InitVars()
+        End Sub
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public ReadOnly Property InformeColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnInforme
+            End Get
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public ReadOnly Property ProveedorColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnProveedor
+            End Get
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public ReadOnly Property RazonColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnRazon
+            End Get
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public ReadOnly Property OrdenColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnOrden
+            End Get
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public ReadOnly Property ArticuloColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnArticulo
+            End Get
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public ReadOnly Property DescripcionColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnDescripcion
+            End Get
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public ReadOnly Property CantidadColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCantidad
+            End Get
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public ReadOnly Property MonedaColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnMoneda
+            End Get
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public ReadOnly Property PrecioColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnPrecio
+            End Get
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Browsable(False)> _
+        Public ReadOnly Property Count() As Integer
+            Get
+                Return Me.Rows.Count
+            End Get
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Default Public ReadOnly Property Item(ByVal index As Integer) As Reporte_InformeSinFac_RegistradasRow
+            Get
+                Return CType(Me.Rows(index), Reporte_InformeSinFac_RegistradasRow)
+            End Get
+        End Property
+
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Event Reporte_InformeSinFac_RegistradasRowChanging As Reporte_InformeSinFac_RegistradasRowChangeEventHandler
+
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Event Reporte_InformeSinFac_RegistradasRowChanged As Reporte_InformeSinFac_RegistradasRowChangeEventHandler
+
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Event Reporte_InformeSinFac_RegistradasRowDeleting As Reporte_InformeSinFac_RegistradasRowChangeEventHandler
+
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Event Reporte_InformeSinFac_RegistradasRowDeleted As Reporte_InformeSinFac_RegistradasRowChangeEventHandler
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Overloads Sub AddReporte_InformeSinFac_RegistradasRow(ByVal row As Reporte_InformeSinFac_RegistradasRow)
+            Me.Rows.Add(row)
+        End Sub
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Overloads Function AddReporte_InformeSinFac_RegistradasRow(ByVal Informe As String, ByVal Proveedor As String, ByVal Razon As String, ByVal Orden As String, ByVal Articulo As String, ByVal Descripcion As String, ByVal Cantidad As Double, ByVal Moneda As String, ByVal Precio As Double) As Reporte_InformeSinFac_RegistradasRow
+            Dim rowReporte_InformeSinFac_RegistradasRow As Reporte_InformeSinFac_RegistradasRow = CType(Me.NewRow, Reporte_InformeSinFac_RegistradasRow)
+            Dim columnValuesArray() As Object = New Object() {Informe, Proveedor, Razon, Orden, Articulo, Descripcion, Cantidad, Moneda, Precio}
+            rowReporte_InformeSinFac_RegistradasRow.ItemArray = columnValuesArray
+            Me.Rows.Add(rowReporte_InformeSinFac_RegistradasRow)
+            Return rowReporte_InformeSinFac_RegistradasRow
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Overrides Function Clone() As Global.System.Data.DataTable
+            Dim cln As Reporte_InformeSinFac_RegistradasDataTable = CType(MyBase.Clone, Reporte_InformeSinFac_RegistradasDataTable)
+            cln.InitVars()
+            Return cln
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
+            Return New Reporte_InformeSinFac_RegistradasDataTable()
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Friend Sub InitVars()
+            Me.columnInforme = MyBase.Columns("Informe")
+            Me.columnProveedor = MyBase.Columns("Proveedor")
+            Me.columnRazon = MyBase.Columns("Razon")
+            Me.columnOrden = MyBase.Columns("Orden")
+            Me.columnArticulo = MyBase.Columns("Articulo")
+            Me.columnDescripcion = MyBase.Columns("Descripcion")
+            Me.columnCantidad = MyBase.Columns("Cantidad")
+            Me.columnMoneda = MyBase.Columns("Moneda")
+            Me.columnPrecio = MyBase.Columns("Precio")
+        End Sub
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Private Sub InitClass()
+            Me.columnInforme = New Global.System.Data.DataColumn("Informe", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnInforme)
+            Me.columnProveedor = New Global.System.Data.DataColumn("Proveedor", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnProveedor)
+            Me.columnRazon = New Global.System.Data.DataColumn("Razon", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnRazon)
+            Me.columnOrden = New Global.System.Data.DataColumn("Orden", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnOrden)
+            Me.columnArticulo = New Global.System.Data.DataColumn("Articulo", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnArticulo)
+            Me.columnDescripcion = New Global.System.Data.DataColumn("Descripcion", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnDescripcion)
+            Me.columnCantidad = New Global.System.Data.DataColumn("Cantidad", GetType(Double), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnCantidad)
+            Me.columnMoneda = New Global.System.Data.DataColumn("Moneda", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnMoneda)
+            Me.columnPrecio = New Global.System.Data.DataColumn("Precio", GetType(Double), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnPrecio)
+        End Sub
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Function NewReporte_InformeSinFac_RegistradasRow() As Reporte_InformeSinFac_RegistradasRow
+            Return CType(Me.NewRow, Reporte_InformeSinFac_RegistradasRow)
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
+            Return New Reporte_InformeSinFac_RegistradasRow(builder)
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Protected Overrides Function GetRowType() As Global.System.Type
+            Return GetType(Reporte_InformeSinFac_RegistradasRow)
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanged(e)
+            If (Not (Me.Reporte_InformeSinFac_RegistradasRowChangedEvent) Is Nothing) Then
+                RaiseEvent Reporte_InformeSinFac_RegistradasRowChanged(Me, New Reporte_InformeSinFac_RegistradasRowChangeEvent(CType(e.Row, Reporte_InformeSinFac_RegistradasRow), e.Action))
+            End If
+        End Sub
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanging(e)
+            If (Not (Me.Reporte_InformeSinFac_RegistradasRowChangingEvent) Is Nothing) Then
+                RaiseEvent Reporte_InformeSinFac_RegistradasRowChanging(Me, New Reporte_InformeSinFac_RegistradasRowChangeEvent(CType(e.Row, Reporte_InformeSinFac_RegistradasRow), e.Action))
+            End If
+        End Sub
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleted(e)
+            If (Not (Me.Reporte_InformeSinFac_RegistradasRowDeletedEvent) Is Nothing) Then
+                RaiseEvent Reporte_InformeSinFac_RegistradasRowDeleted(Me, New Reporte_InformeSinFac_RegistradasRowChangeEvent(CType(e.Row, Reporte_InformeSinFac_RegistradasRow), e.Action))
+            End If
+        End Sub
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleting(e)
+            If (Not (Me.Reporte_InformeSinFac_RegistradasRowDeletingEvent) Is Nothing) Then
+                RaiseEvent Reporte_InformeSinFac_RegistradasRowDeleting(Me, New Reporte_InformeSinFac_RegistradasRowChangeEvent(CType(e.Row, Reporte_InformeSinFac_RegistradasRow), e.Action))
+            End If
+        End Sub
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Sub RemoveReporte_InformeSinFac_RegistradasRow(ByVal row As Reporte_InformeSinFac_RegistradasRow)
+            Me.Rows.Remove(row)
+        End Sub
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType()
+            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence()
+            Dim ds As DBAuxi = New DBAuxi()
+            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
+            any1.MinOccurs = New Decimal(0)
+            any1.MaxOccurs = Decimal.MaxValue
+            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any1)
+            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
+            any2.MinOccurs = New Decimal(1)
+            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any2)
+            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute1.Name = "namespace"
+            attribute1.FixedValue = ds.Namespace
+            type.Attributes.Add(attribute1)
+            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute2.Name = "tableTypeName"
+            attribute2.FixedValue = "Reporte_InformeSinFac_RegistradasDataTable"
+            type.Attributes.Add(attribute2)
+            type.Particle = sequence
+            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
+            If xs.Contains(dsSchema.TargetNamespace) Then
+                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Try
+                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
+                    dsSchema.Write(s1)
+                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
+                    Do While schemas.MoveNext
+                        schema = CType(schemas.Current, Global.System.Xml.Schema.XmlSchema)
+                        s2.SetLength(0)
+                        schema.Write(s2)
+                        If (s1.Length = s2.Length) Then
+                            s1.Position = 0
+                            s2.Position = 0
+
+                            Do While ((s1.Position <> s1.Length) _
+                                        AndAlso (s1.ReadByte = s2.ReadByte))
+
+
+                            Loop
+                            If (s1.Position = s1.Length) Then
+                                Return type
+                            End If
+                        End If
+
+                    Loop
+                Finally
+                    If (Not (s1) Is Nothing) Then
+                        s1.Close()
+                    End If
+                    If (Not (s2) Is Nothing) Then
+                        s2.Close()
+                    End If
+                End Try
+            End If
+            xs.Add(dsSchema)
+            Return type
+        End Function
+    End Class
+
+    '''<summary>
     '''Represents strongly named DataRow class.
     '''</summary>
     Partial Public Class AvisosNoEnviadosRow
@@ -6109,6 +6500,274 @@ Partial Public Class DBAuxi
     End Class
 
     '''<summary>
+    '''Represents strongly named DataRow class.
+    '''</summary>
+    Partial Public Class Reporte_InformeSinFac_RegistradasRow
+        Inherits Global.System.Data.DataRow
+
+        Private tableReporte_InformeSinFac_Registradas As Reporte_InformeSinFac_RegistradasDataTable
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
+            MyBase.New(rb)
+            Me.tableReporte_InformeSinFac_Registradas = CType(Me.Table, Reporte_InformeSinFac_RegistradasDataTable)
+        End Sub
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Property Informe() As String
+            Get
+                Try
+                    Return CType(Me(Me.tableReporte_InformeSinFac_Registradas.InformeColumn), String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("El valor de la columna 'Informe' de la tabla 'Reporte_InformeSinFac_Registradas' " & _
+                            "es DBNull.", e)
+                End Try
+            End Get
+            Set(value As String)
+                Me(Me.tableReporte_InformeSinFac_Registradas.InformeColumn) = value
+            End Set
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Property Proveedor() As String
+            Get
+                Try
+                    Return CType(Me(Me.tableReporte_InformeSinFac_Registradas.ProveedorColumn), String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("El valor de la columna 'Proveedor' de la tabla 'Reporte_InformeSinFac_Registradas" & _
+                            "' es DBNull.", e)
+                End Try
+            End Get
+            Set(value As String)
+                Me(Me.tableReporte_InformeSinFac_Registradas.ProveedorColumn) = value
+            End Set
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Property Razon() As String
+            Get
+                Try
+                    Return CType(Me(Me.tableReporte_InformeSinFac_Registradas.RazonColumn), String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("El valor de la columna 'Razon' de la tabla 'Reporte_InformeSinFac_Registradas' es" & _
+                            " DBNull.", e)
+                End Try
+            End Get
+            Set(value As String)
+                Me(Me.tableReporte_InformeSinFac_Registradas.RazonColumn) = value
+            End Set
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Property Orden() As String
+            Get
+                Try
+                    Return CType(Me(Me.tableReporte_InformeSinFac_Registradas.OrdenColumn), String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("El valor de la columna 'Orden' de la tabla 'Reporte_InformeSinFac_Registradas' es" & _
+                            " DBNull.", e)
+                End Try
+            End Get
+            Set(value As String)
+                Me(Me.tableReporte_InformeSinFac_Registradas.OrdenColumn) = value
+            End Set
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Property Articulo() As String
+            Get
+                Try
+                    Return CType(Me(Me.tableReporte_InformeSinFac_Registradas.ArticuloColumn), String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("El valor de la columna 'Articulo' de la tabla 'Reporte_InformeSinFac_Registradas'" & _
+                            " es DBNull.", e)
+                End Try
+            End Get
+            Set(value As String)
+                Me(Me.tableReporte_InformeSinFac_Registradas.ArticuloColumn) = value
+            End Set
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Property Descripcion() As String
+            Get
+                Try
+                    Return CType(Me(Me.tableReporte_InformeSinFac_Registradas.DescripcionColumn), String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("El valor de la columna 'Descripcion' de la tabla 'Reporte_InformeSinFac_Registrad" & _
+                            "as' es DBNull.", e)
+                End Try
+            End Get
+            Set(value As String)
+                Me(Me.tableReporte_InformeSinFac_Registradas.DescripcionColumn) = value
+            End Set
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Property Cantidad() As Double
+            Get
+                Try
+                    Return CType(Me(Me.tableReporte_InformeSinFac_Registradas.CantidadColumn), Double)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("El valor de la columna 'Cantidad' de la tabla 'Reporte_InformeSinFac_Registradas'" & _
+                            " es DBNull.", e)
+                End Try
+            End Get
+            Set(value As Double)
+                Me(Me.tableReporte_InformeSinFac_Registradas.CantidadColumn) = value
+            End Set
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Property Moneda() As String
+            Get
+                Try
+                    Return CType(Me(Me.tableReporte_InformeSinFac_Registradas.MonedaColumn), String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("El valor de la columna 'Moneda' de la tabla 'Reporte_InformeSinFac_Registradas' e" & _
+                            "s DBNull.", e)
+                End Try
+            End Get
+            Set(value As String)
+                Me(Me.tableReporte_InformeSinFac_Registradas.MonedaColumn) = value
+            End Set
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Property Precio() As Double
+            Get
+                Try
+                    Return CType(Me(Me.tableReporte_InformeSinFac_Registradas.PrecioColumn), Double)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("El valor de la columna 'Precio' de la tabla 'Reporte_InformeSinFac_Registradas' e" & _
+                            "s DBNull.", e)
+                End Try
+            End Get
+            Set(value As Double)
+                Me(Me.tableReporte_InformeSinFac_Registradas.PrecioColumn) = value
+            End Set
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Function IsInformeNull() As Boolean
+            Return Me.IsNull(Me.tableReporte_InformeSinFac_Registradas.InformeColumn)
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Sub SetInformeNull()
+            Me(Me.tableReporte_InformeSinFac_Registradas.InformeColumn) = Global.System.Convert.DBNull
+        End Sub
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Function IsProveedorNull() As Boolean
+            Return Me.IsNull(Me.tableReporte_InformeSinFac_Registradas.ProveedorColumn)
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Sub SetProveedorNull()
+            Me(Me.tableReporte_InformeSinFac_Registradas.ProveedorColumn) = Global.System.Convert.DBNull
+        End Sub
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Function IsRazonNull() As Boolean
+            Return Me.IsNull(Me.tableReporte_InformeSinFac_Registradas.RazonColumn)
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Sub SetRazonNull()
+            Me(Me.tableReporte_InformeSinFac_Registradas.RazonColumn) = Global.System.Convert.DBNull
+        End Sub
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Function IsOrdenNull() As Boolean
+            Return Me.IsNull(Me.tableReporte_InformeSinFac_Registradas.OrdenColumn)
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Sub SetOrdenNull()
+            Me(Me.tableReporte_InformeSinFac_Registradas.OrdenColumn) = Global.System.Convert.DBNull
+        End Sub
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Function IsArticuloNull() As Boolean
+            Return Me.IsNull(Me.tableReporte_InformeSinFac_Registradas.ArticuloColumn)
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Sub SetArticuloNull()
+            Me(Me.tableReporte_InformeSinFac_Registradas.ArticuloColumn) = Global.System.Convert.DBNull
+        End Sub
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Function IsDescripcionNull() As Boolean
+            Return Me.IsNull(Me.tableReporte_InformeSinFac_Registradas.DescripcionColumn)
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Sub SetDescripcionNull()
+            Me(Me.tableReporte_InformeSinFac_Registradas.DescripcionColumn) = Global.System.Convert.DBNull
+        End Sub
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Function IsCantidadNull() As Boolean
+            Return Me.IsNull(Me.tableReporte_InformeSinFac_Registradas.CantidadColumn)
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Sub SetCantidadNull()
+            Me(Me.tableReporte_InformeSinFac_Registradas.CantidadColumn) = Global.System.Convert.DBNull
+        End Sub
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Function IsMonedaNull() As Boolean
+            Return Me.IsNull(Me.tableReporte_InformeSinFac_Registradas.MonedaColumn)
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Sub SetMonedaNull()
+            Me(Me.tableReporte_InformeSinFac_Registradas.MonedaColumn) = Global.System.Convert.DBNull
+        End Sub
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Function IsPrecioNull() As Boolean
+            Return Me.IsNull(Me.tableReporte_InformeSinFac_Registradas.PrecioColumn)
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Sub SetPrecioNull()
+            Me(Me.tableReporte_InformeSinFac_Registradas.PrecioColumn) = Global.System.Convert.DBNull
+        End Sub
+    End Class
+
+    '''<summary>
     '''Row event argument class
     '''</summary>
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
@@ -6346,6 +7005,42 @@ Partial Public Class DBAuxi
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public ReadOnly Property Row() As impCtaCtePrvNetRow
+            Get
+                Return Me.eventRow
+            End Get
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public ReadOnly Property Action() As Global.System.Data.DataRowAction
+            Get
+                Return Me.eventAction
+            End Get
+        End Property
+    End Class
+
+    '''<summary>
+    '''Row event argument class
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+    Public Class Reporte_InformeSinFac_RegistradasRowChangeEvent
+        Inherits Global.System.EventArgs
+
+        Private eventRow As Reporte_InformeSinFac_RegistradasRow
+
+        Private eventAction As Global.System.Data.DataRowAction
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Sub New(ByVal row As Reporte_InformeSinFac_RegistradasRow, ByVal action As Global.System.Data.DataRowAction)
+            MyBase.New()
+            Me.eventRow = row
+            Me.eventAction = action
+        End Sub
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public ReadOnly Property Row() As Reporte_InformeSinFac_RegistradasRow
             Get
                 Return Me.eventRow
             End Get

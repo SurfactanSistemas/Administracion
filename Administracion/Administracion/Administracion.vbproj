@@ -310,6 +310,12 @@
     <Compile Include="GestionAvisosOPDisponiblesProveedores.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="InformeRep_SinFac_registradas.Designer.vb">
+      <DependentUpon>InformeRep_SinFac_registradas.vb</DependentUpon>
+    </Compile>
+    <Compile Include="InformeRep_SinFac_registradas.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Interfaces\IArqueoCheques.vb" />
     <Compile Include="Interfaces\IAyudaProveedores.vb" />
     <Compile Include="Listados\ConsultaDatosFactura.Designer.vb">
@@ -831,6 +837,12 @@
       <DependentUpon>ReporteImputa2netExportacionExcel.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\Reporte_InformeSinFacturasRegistradas.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte_InformeSinFacturasRegistradas.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\wccprvfecNet.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1123,6 +1135,9 @@
     <EmbeddedResource Include="GestionAvisosOPDisponiblesProveedores.resx">
       <DependentUpon>GestionAvisosOPDisponiblesProveedores.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="InformeRep_SinFac_registradas.resx">
+      <DependentUpon>InformeRep_SinFac_registradas.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Listados\ConsultaDatosFactura.resx">
       <DependentUpon>ConsultaDatosFactura.vb</DependentUpon>
     </EmbeddedResource>
@@ -1387,6 +1402,10 @@
     <EmbeddedResource Include="Reportes\ReporteImputa2netExportacionExcel.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteImputa2netExportacionExcel.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Reporte_InformeSinFacturasRegistradas.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte_InformeSinFacturasRegistradas.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\wccprvfecNet.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
