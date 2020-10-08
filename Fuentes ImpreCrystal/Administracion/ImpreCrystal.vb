@@ -1,5 +1,7 @@
 ﻿Imports System.IO
 Imports CrystalDecisions.CrystalReports.Engine
+Imports CrystalDecisions.Shared
+Imports Util
 
 Public Class ImpreCrystal
 
@@ -36,13 +38,13 @@ Public Class ImpreCrystal
         pasanombre.Text = ""
 
         If Not IsNothing(trabajo) Then
-            txtProceso = trabajo.proceso
-            txtPlanta = trabajo.planta
-            txtOrden = trabajo.orden.ToString
-            txtCodigo = trabajo.codigo
-            txtDestino = trabajo.destino
-            txtOrden = trabajo.orden.ToString
-            txtNombre = trabajo.nombre.ToString
+            txtProceso = trabajo.Proceso
+            txtPlanta = trabajo.Planta
+            txtOrden = trabajo.Orden.ToString
+            txtCodigo = trabajo.Codigo
+            txtDestino = trabajo.Destino
+            txtOrden = trabajo.Orden.ToString
+            txtNombre = trabajo.Nombre.ToString
         Else
             MsgBox("no  encontro registro")
         End If
@@ -76,32 +78,74 @@ Public Class ImpreCrystal
 
                         Select Case txtPlanta
                             Case 1
-                                Dim viewer As New ReportViewer("Ordenes de Compra de Importaciones", "n:\net\crystal\ImpreOrdenImportacionPlantaINet.rpt", txtFormula, txtNombrePdf, "")
-                                viewer.descargarComoPDF()
+                                With New VistaPrevia
+                                    .Base = "SurfactanSa"
+                                    .Reporte = New impreordenimportacionplantainet()
+                                    .Formula = txtFormula
+                                    .Exportar(txtNombrePdf, ExportFormatType.PortableDocFormat, "c:\Orden")
+                                End With
+                                'Dim viewer As New ReportViewer("Ordenes de Compra de Importaciones", "n:\net\crystal\ImpreOrdenImportacionPlantaINet.rpt", txtFormula, txtNombrePdf, "")
+                                'viewer.descargarComoPDF()
 
                             Case 3
-                                Dim viewer As New ReportViewer("Ordenes de Compra de Importaciones", "n:\net\crystal\ImpreOrdenImportacionPlantaIINet.rpt", txtFormula, txtNombrePdf, "")
-                                viewer.descargarComoPDF()
+                                With New VistaPrevia
+                                    .Base = "Surfactan_II"
+                                    .Reporte = New impreordenimportacionplantaiinet()
+                                    .Formula = txtFormula
+                                    .Exportar(txtNombrePdf, ExportFormatType.PortableDocFormat, "c:\Orden")
+                                End With
+                                'Dim viewer As New ReportViewer("Ordenes de Compra de Importaciones", "n:\net\crystal\ImpreOrdenImportacionPlantaIINet.rpt", txtFormula, txtNombrePdf, "")
+                                'viewer.descargarComoPDF()
 
                             Case 5
-                                Dim viewer As New ReportViewer("Ordenes de Compra de Importaciones", "n:\net\crystal\ImpreOrdenImportacionPlantaIIINet.rpt", txtFormula, txtNombrePdf, "")
-                                viewer.descargarComoPDF()
+                                With New VistaPrevia
+                                    .Base = "Surfactan_III"
+                                    .Reporte = New impreordenimportacionplantaiiinet()
+                                    .Formula = txtFormula
+                                    .Exportar(txtNombrePdf, ExportFormatType.PortableDocFormat, "c:\Orden")
+                                End With
+                                'Dim viewer As New ReportViewer("Ordenes de Compra de Importaciones", "n:\net\crystal\ImpreOrdenImportacionPlantaIIINet.rpt", txtFormula, txtNombrePdf, "")
+                                'viewer.descargarComoPDF()
 
                             Case 6
-                                Dim viewer As New ReportViewer("Ordenes de Compra de Importaciones", "n:\net\crystal\ImpreOrdenImportacionPlantaIVNet.rpt", txtFormula, txtNombrePdf, "")
-                                viewer.descargarComoPDF()
+                                With New VistaPrevia
+                                    .Base = "Surfactan_IV"
+                                    .Reporte = New impreordenimportacionplantaivnet()
+                                    .Formula = txtFormula
+                                    .Exportar(txtNombrePdf, ExportFormatType.PortableDocFormat, "c:\Orden")
+                                End With
+                                'Dim viewer As New ReportViewer("Ordenes de Compra de Importaciones", "n:\net\crystal\ImpreOrdenImportacionPlantaIVNet.rpt", txtFormula, txtNombrePdf, "")
+                                'viewer.descargarComoPDF()
 
                             Case 7
-                                Dim viewer As New ReportViewer("Ordenes de Compra de Importaciones", "n:\net\crystal\ImpreOrdenImportacionPlantaVnet.rpt", txtFormula, txtNombrePdf, "")
-                                viewer.descargarComoPDF()
+                                With New VistaPrevia
+                                    .Base = "Surfactan_V"
+                                    .Reporte = New impreordenimportacionplantavnet()
+                                    .Formula = txtFormula
+                                    .Exportar(txtNombrePdf, ExportFormatType.PortableDocFormat, "c:\Orden")
+                                End With
+                                'Dim viewer As New ReportViewer("Ordenes de Compra de Importaciones", "n:\net\crystal\ImpreOrdenImportacionPlantaVnet.rpt", txtFormula, txtNombrePdf, "")
+                                'viewer.descargarComoPDF()
 
                             Case 10
-                                Dim viewer As New ReportViewer("Ordenes de Compra de Importaciones", "n:\net\crystal\ImpreOrdenImportacionPlantaVINet.rpt", txtFormula, txtNombrePdf, "")
-                                viewer.descargarComoPDF()
+                                With New VistaPrevia
+                                    .Base = "Surfactan_VI"
+                                    .Reporte = New impreordenimportacionplantavinet()
+                                    .Formula = txtFormula
+                                    .Exportar(txtNombrePdf, ExportFormatType.PortableDocFormat, "c:\Orden")
+                                End With
+                                'Dim viewer As New ReportViewer("Ordenes de Compra de Importaciones", "n:\net\crystal\ImpreOrdenImportacionPlantaVINet.rpt", txtFormula, txtNombrePdf, "")
+                                'viewer.descargarComoPDF()
 
                             Case Else
-                                Dim viewer As New ReportViewer("Ordenes de Compra de Importaciones", "n:\net\crystal\ImpreOrdenImportacionPlantaVIINet.rpt", txtFormula, txtNombrePdf, "")
-                                viewer.descargarComoPDF()
+                                With New VistaPrevia
+                                    .Base = "Surfactan_VII"
+                                    .Reporte = New impreordenimportacionplantavinet()
+                                    .Formula = txtFormula
+                                    .Exportar(txtNombrePdf, ExportFormatType.PortableDocFormat, "c:\Orden")
+                                End With
+                                'Dim viewer As New ReportViewer("Ordenes de Compra de Importaciones", "n:\net\crystal\ImpreOrdenImportacionPlantaVIINet.rpt", txtFormula, txtNombrePdf, "")
+                                'viewer.descargarComoPDF()
 
                         End Select
 
@@ -129,8 +173,15 @@ Public Class ImpreCrystal
                             File.Delete(txtNombreBusqueda)
                         End If
 
-                        Dim viewer As New ReportViewer("Especificaciones de Ordenes de Compra de Importaciones", "n:\net\crystal\recuired specs po nro net.rpt", txtFormula, txtNombrePdf, "")
-                        viewer.descargarComoPDF()
+                        With New VistaPrevia
+                            .Base = "Surfactan_II"
+                            .Reporte = New recuired_specs_po_nro_net()
+                            .Formula = txtFormula
+                            .Exportar(txtNombrePdf, ExportFormatType.PortableDocFormat, "c:\Orden")
+                        End With
+
+                        'Dim viewer As New ReportViewer("Especificaciones de Ordenes de Compra de Importaciones", "n:\net\crystal\recuired specs po nro net.rpt", txtFormula, txtNombrePdf, "")
+                        'viewer.descargarComoPDF()
 
                 End Select
 
@@ -413,48 +464,48 @@ Public Class ImpreCrystal
                     File.Delete(txtNombreBusqueda)
                 End If
 
-                    Dim viewer As New ReportViewer("Especificaciones de Ordenes de Compra (INGLES)", "n:\net\crystal\ListaEspePdfInglesNet.rpt", txtFormula, txtNombrePdf, "")
-                    viewer.descargarComoPDF()
+                Dim viewer As New ReportViewer("Especificaciones de Ordenes de Compra (INGLES)", "n:\net\crystal\ListaEspePdfInglesNet.rpt", txtFormula, txtNombrePdf, "")
+                viewer.descargarComoPDF()
 
             Case 13
-                    REM genera las certificados de analisis
-                    txtUno = "{Certificado.Partida} in 0 to 999999"
-                    txtDos = ""
-                    txtFormula = txtUno + txtDos
+                REM genera las certificados de analisis
+                txtUno = "{Certificado.Partida} in 0 to 999999"
+                txtDos = ""
+                txtFormula = txtUno + txtDos
 
-                    Select Case txtDestino
-                        Case 0
-                            Dim viewer As New ReportViewer("Certificados de Analisis", "N:\net\crystal\CertificadoTanatexPdfNet.rpt", txtFormula, "", "")
-                            viewer.Show()
+                Select Case txtDestino
+                    Case 0
+                        Dim viewer As New ReportViewer("Certificados de Analisis", "N:\net\crystal\CertificadoTanatexPdfNet.rpt", txtFormula, "", "")
+                        viewer.Show()
 
-                        Case 1
-                            Dim viewer As New ReportViewer("Certificados de Analisis", "N:\net\crystal\CertificadoTanatexPdfNet.rpt", txtFormula, "", "")
-                            viewer.imprimirReporte()
+                    Case 1
+                        Dim viewer As New ReportViewer("Certificados de Analisis", "N:\net\crystal\CertificadoTanatexPdfNet.rpt", txtFormula, "", "")
+                        viewer.imprimirReporte()
 
-                        Case Else
-                            pasanombre.Text = "N:\Net\ProcesoImpresionPDF\CertificadosTanatex\"
-                            txtNombrePdf = LTrim(RTrim(txtNombre))
-                            txtNombreBusqueda = "N:\Net\ProcesoImpresionPDF\CertificadosTanatex\" + txtNombre + ".pdf"
-                            If File.Exists(txtNombreBusqueda) Then
-                                File.Delete(txtNombreBusqueda)
-                            End If
-                            Dim viewer As New ReportViewer("Certificados de Analisis", "n:\net\crystal\CertificadoTanatexPdfNet.rpt", txtFormula, txtNombrePdf, "")
-                            viewer.descargarComoPDF()
-                    End Select
+                    Case Else
+                        pasanombre.Text = "N:\Net\ProcesoImpresionPDF\CertificadosTanatex\"
+                        txtNombrePdf = LTrim(RTrim(txtNombre))
+                        txtNombreBusqueda = "N:\Net\ProcesoImpresionPDF\CertificadosTanatex\" + txtNombre + ".pdf"
+                        If File.Exists(txtNombreBusqueda) Then
+                            File.Delete(txtNombreBusqueda)
+                        End If
+                        Dim viewer As New ReportViewer("Certificados de Analisis", "n:\net\crystal\CertificadoTanatexPdfNet.rpt", txtFormula, txtNombrePdf, "")
+                        viewer.descargarComoPDF()
+                End Select
 
             Case 14
-                    txtUno = "{ImpreFactura.Numero} in " + x + "0" + x + " to " + x + "999999" + x
-                    txtDos = ""
-                    txtFormula = txtUno + txtDos
+                txtUno = "{ImpreFactura.Numero} in " + x + "0" + x + " to " + x + "999999" + x
+                txtDos = ""
+                txtFormula = txtUno + txtDos
 
-                    txtNombrePdf = "14" + " 0009-" + ceros(txtOrden, 8)
-                    txtNombreBusqueda = "c:\orden\" + "14" + " 0009-" + ceros(txtOrden, 8) + ".pdf"
-                    If File.Exists(txtNombreBusqueda) Then
-                        File.Delete(txtNombreBusqueda)
-                    End If
+                txtNombrePdf = "14" + " 0009-" + ceros(txtOrden, 8)
+                txtNombreBusqueda = "c:\orden\" + "14" + " 0009-" + ceros(txtOrden, 8) + ".pdf"
+                If File.Exists(txtNombreBusqueda) Then
+                    File.Delete(txtNombreBusqueda)
+                End If
 
-                    Dim viewer As New ReportViewer("Facturas", New imprerechazadosurfa(), txtFormula, txtNombrePdf)
-                    viewer.descargarComoPDF()
+                Dim viewer As New ReportViewer("Facturas", New imprerechazadosurfa(), txtFormula, txtNombrePdf)
+                viewer.descargarComoPDF()
 
             Case Else
 
