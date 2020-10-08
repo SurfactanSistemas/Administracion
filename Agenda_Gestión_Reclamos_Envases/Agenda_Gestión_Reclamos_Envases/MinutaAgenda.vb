@@ -4,7 +4,8 @@ Imports Util.Clases.Query
 Imports Util.Clases.Helper
 
 Public Class MinutaAgenda
-
+    'Si modifica los mails modificar tambien en MinutaBaja_Modificacion
+    Dim Mails As String = "drodriguez@surfactan.com.ar;hmuller@surfactan.com.ar"
     Sub New(ByVal Cliente As String, ByVal DesCliente As String)
 
         ' Llamada necesaria para el diseñador.
@@ -201,11 +202,11 @@ Public Class MinutaAgenda
 
     Private Sub _Generarmails(ByVal Cliente As String, ByVal DesCliente As String, ByVal FechaRetirar As String, ByVal CantRetirar As String)
 
-        Dim Cuerpo As String = "Se solicita el envio de un camion para retirar la cantidad de " & CantRetirar & " contenedores " _
-                               & "por 1000 litros, a el cliente " & DesCliente & " (" & Cliente & "). Se acordo que sea enviado" _
+        Dim Cuerpo As String = "Se solicita el envio de un camion para retirar la cantidad de " & CantRetirar & " contenedores" _
+                               & ", a el cliente " & DesCliente & " (" & Cliente & "). Se acordo que sea enviado" _
                                & " el dia " & FechaRetirar & "."
 
-        Dim Mails As String = "andy.fdra@gmail.com;andy_fdra@hotmail.com"
+
         Helper._EnviarEmail(Mails, "SOLICITUD DE ENVIO DE CAMION", Cuerpo, {}, True)
     End Sub
 
