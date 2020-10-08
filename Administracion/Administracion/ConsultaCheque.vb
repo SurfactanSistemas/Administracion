@@ -52,7 +52,7 @@ Public Class ConsultaCheque
 
                 Do While dr.Read()
                     gridCheque.Rows.Add(dr.Item("Numero2"),
-                                        dr.Item("Banco2"),
+                                        Trim(dr.Item("Banco2")),
                                             formatonumerico(redondeo(Convert.ToDouble(dr.Item("Importe2"))), "#######0.#0", "."),
                                             dr.Item("Fecha"),
                                             dr.Item("Fecha2"),

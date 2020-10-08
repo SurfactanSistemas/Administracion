@@ -1579,4 +1579,7 @@ Public Class Depositos
         sumarImportes()
     End Sub
 
+    Private Sub rbChElectronicos_MouseClick(sender As Object, e As MouseEventArgs) Handles rbChFisicos.MouseClick, rbChElectronicos.MouseClick
+        btnChequeTerceros_Click(Nothing, Nothing)
+    End Sub
 End Class

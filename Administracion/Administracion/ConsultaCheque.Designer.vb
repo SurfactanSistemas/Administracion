@@ -26,16 +26,16 @@ Partial Class ConsultaCheque
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.gridCheque = New System.Windows.Forms.DataGridView()
         Me.cmbTipo = New System.Windows.Forms.ComboBox()
-        Me.CustomLabel1 = New Administracion.CustomLabel()
-        Me.txtCheque = New Administracion.CustomTextBox()
-        Me.btnProceso = New Administracion.CustomButton()
-        Me.btnCerrar = New Administracion.CustomButton()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.btnCerrar = New Administracion.CustomButton()
+        Me.CustomLabel1 = New Administracion.CustomLabel()
+        Me.txtCheque = New Administracion.CustomTextBox()
         Me.CustomButton1 = New Administracion.CustomButton()
+        Me.btnProceso = New Administracion.CustomButton()
         Me.Cheque = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Banco = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Importe = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -68,80 +68,13 @@ Partial Class ConsultaCheque
         '
         'cmbTipo
         '
+        Me.cmbTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbTipo.FormattingEnabled = True
         Me.cmbTipo.Items.AddRange(New Object() {"Cheque Terceros", "Cheques Propios"})
         Me.cmbTipo.Location = New System.Drawing.Point(363, 10)
         Me.cmbTipo.Name = "cmbTipo"
         Me.cmbTipo.Size = New System.Drawing.Size(255, 21)
         Me.cmbTipo.TabIndex = 1
-        '
-        'CustomLabel1
-        '
-        Me.CustomLabel1.AutoSize = True
-        Me.CustomLabel1.ControlAssociationKey = -1
-        Me.CustomLabel1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.CustomLabel1.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel1.Location = New System.Drawing.Point(169, 12)
-        Me.CustomLabel1.Name = "CustomLabel1"
-        Me.CustomLabel1.Size = New System.Drawing.Size(56, 18)
-        Me.CustomLabel1.TabIndex = 7
-        Me.CustomLabel1.Text = "Cheque"
-        '
-        'txtCheque
-        '
-        Me.txtCheque.Cleanable = False
-        Me.txtCheque.Empty = True
-        Me.txtCheque.EnterIndex = -1
-        Me.txtCheque.LabelAssociationKey = -1
-        Me.txtCheque.Location = New System.Drawing.Point(236, 11)
-        Me.txtCheque.MaxLength = 8
-        Me.txtCheque.Name = "txtCheque"
-        Me.txtCheque.Size = New System.Drawing.Size(121, 20)
-        Me.txtCheque.TabIndex = 0
-        Me.txtCheque.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txtCheque.Validator = Administracion.ValidatorType.None
-        '
-        'btnProceso
-        '
-        Me.btnProceso.BackgroundImage = Global.Administracion.My.Resources.Resources.Aceptar_N2
-        Me.btnProceso.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnProceso.Cleanable = False
-        Me.btnProceso.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnProceso.EnterIndex = -1
-        Me.btnProceso.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnProceso.FlatAppearance.BorderSize = 0
-        Me.btnProceso.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnProceso.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnProceso.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnProceso.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnProceso.LabelAssociationKey = -1
-        Me.btnProceso.Location = New System.Drawing.Point(214, 430)
-        Me.btnProceso.Name = "btnProceso"
-        Me.btnProceso.Size = New System.Drawing.Size(59, 60)
-        Me.btnProceso.TabIndex = 4
-        Me.ToolTip1.SetToolTip(Me.btnProceso, "Aceptar")
-        Me.btnProceso.UseVisualStyleBackColor = True
-        '
-        'btnCerrar
-        '
-        Me.btnCerrar.BackgroundImage = Global.Administracion.My.Resources.Resources.Salir2
-        Me.btnCerrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnCerrar.Cleanable = False
-        Me.btnCerrar.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnCerrar.EnterIndex = -1
-        Me.btnCerrar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.btnCerrar.FlatAppearance.BorderSize = 0
-        Me.btnCerrar.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.btnCerrar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.btnCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCerrar.LabelAssociationKey = -1
-        Me.btnCerrar.Location = New System.Drawing.Point(512, 430)
-        Me.btnCerrar.Name = "btnCerrar"
-        Me.btnCerrar.Size = New System.Drawing.Size(59, 60)
-        Me.btnCerrar.TabIndex = 3
-        Me.ToolTip1.SetToolTip(Me.btnCerrar, "Cerrar")
-        Me.btnCerrar.UseVisualStyleBackColor = True
         '
         'Panel1
         '
@@ -187,6 +120,53 @@ Partial Class ConsultaCheque
         Me.Panel2.Size = New System.Drawing.Size(786, 367)
         Me.Panel2.TabIndex = 9
         '
+        'btnCerrar
+        '
+        Me.btnCerrar.BackgroundImage = Global.Administracion.My.Resources.Resources.Salir2
+        Me.btnCerrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnCerrar.Cleanable = False
+        Me.btnCerrar.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnCerrar.EnterIndex = -1
+        Me.btnCerrar.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnCerrar.FlatAppearance.BorderSize = 0
+        Me.btnCerrar.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnCerrar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCerrar.LabelAssociationKey = -1
+        Me.btnCerrar.Location = New System.Drawing.Point(512, 430)
+        Me.btnCerrar.Name = "btnCerrar"
+        Me.btnCerrar.Size = New System.Drawing.Size(59, 60)
+        Me.btnCerrar.TabIndex = 3
+        Me.ToolTip1.SetToolTip(Me.btnCerrar, "Cerrar")
+        Me.btnCerrar.UseVisualStyleBackColor = True
+        '
+        'CustomLabel1
+        '
+        Me.CustomLabel1.AutoSize = True
+        Me.CustomLabel1.ControlAssociationKey = -1
+        Me.CustomLabel1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.CustomLabel1.ForeColor = System.Drawing.SystemColors.Control
+        Me.CustomLabel1.Location = New System.Drawing.Point(169, 12)
+        Me.CustomLabel1.Name = "CustomLabel1"
+        Me.CustomLabel1.Size = New System.Drawing.Size(56, 18)
+        Me.CustomLabel1.TabIndex = 7
+        Me.CustomLabel1.Text = "Cheque"
+        '
+        'txtCheque
+        '
+        Me.txtCheque.Cleanable = False
+        Me.txtCheque.Empty = True
+        Me.txtCheque.EnterIndex = -1
+        Me.txtCheque.LabelAssociationKey = -1
+        Me.txtCheque.Location = New System.Drawing.Point(236, 11)
+        Me.txtCheque.MaxLength = 8
+        Me.txtCheque.Name = "txtCheque"
+        Me.txtCheque.Size = New System.Drawing.Size(121, 20)
+        Me.txtCheque.TabIndex = 0
+        Me.txtCheque.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtCheque.Validator = Administracion.ValidatorType.None
+        '
         'CustomButton1
         '
         Me.CustomButton1.BackgroundImage = Global.Administracion.My.Resources.Resources.Limpiar
@@ -208,6 +188,27 @@ Partial Class ConsultaCheque
         Me.ToolTip1.SetToolTip(Me.CustomButton1, "Limpiar Formulario")
         Me.CustomButton1.UseVisualStyleBackColor = True
         '
+        'btnProceso
+        '
+        Me.btnProceso.BackgroundImage = Global.Administracion.My.Resources.Resources.Aceptar_N2
+        Me.btnProceso.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnProceso.Cleanable = False
+        Me.btnProceso.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnProceso.EnterIndex = -1
+        Me.btnProceso.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnProceso.FlatAppearance.BorderSize = 0
+        Me.btnProceso.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.btnProceso.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnProceso.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnProceso.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnProceso.LabelAssociationKey = -1
+        Me.btnProceso.Location = New System.Drawing.Point(214, 430)
+        Me.btnProceso.Name = "btnProceso"
+        Me.btnProceso.Size = New System.Drawing.Size(59, 60)
+        Me.btnProceso.TabIndex = 4
+        Me.ToolTip1.SetToolTip(Me.btnProceso, "Aceptar")
+        Me.btnProceso.UseVisualStyleBackColor = True
+        '
         'Cheque
         '
         Me.Cheque.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
@@ -218,16 +219,17 @@ Partial Class ConsultaCheque
         '
         'Banco
         '
-        Me.Banco.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Banco.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Banco.FillWeight = 70.0!
         Me.Banco.HeaderText = "Banco"
         Me.Banco.MaxInputLength = 50
         Me.Banco.Name = "Banco"
         Me.Banco.ReadOnly = True
+        Me.Banco.Width = 63
         '
         'Importe
         '
-        Me.Importe.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.Importe.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         Me.Importe.DefaultCellStyle = DataGridViewCellStyle1
         Me.Importe.HeaderText = "Importe"
@@ -237,7 +239,7 @@ Partial Class ConsultaCheque
         '
         'FechaComprobante
         '
-        Me.FechaComprobante.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.FechaComprobante.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.FechaComprobante.HeaderText = "Fecha Comp."
         Me.FechaComprobante.Name = "FechaComprobante"
         Me.FechaComprobante.ReadOnly = True
@@ -245,11 +247,11 @@ Partial Class ConsultaCheque
         '
         'fechaCheque
         '
-        Me.fechaCheque.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.fechaCheque.HeaderText = "Fecha Cheque"
+        Me.fechaCheque.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.fechaCheque.HeaderText = "Fecha Chq"
         Me.fechaCheque.Name = "fechaCheque"
         Me.fechaCheque.ReadOnly = True
-        Me.fechaCheque.Width = 102
+        Me.fechaCheque.Width = 84
         '
         'comprobante
         '
@@ -269,19 +271,20 @@ Partial Class ConsultaCheque
         '
         'observaciones
         '
-        Me.observaciones.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.observaciones.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.observaciones.FillWeight = 130.0!
         Me.observaciones.HeaderText = "Observaciones"
         Me.observaciones.Name = "observaciones"
         Me.observaciones.ReadOnly = True
+        Me.observaciones.Width = 103
         '
         'TipoCheque
         '
         Me.TipoCheque.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.TipoCheque.HeaderText = "Tipo "
+        Me.TipoCheque.HeaderText = "Tipo"
         Me.TipoCheque.Name = "TipoCheque"
         Me.TipoCheque.ReadOnly = True
-        Me.TipoCheque.Width = 56
+        Me.TipoCheque.Width = 53
         '
         'ConsultaCheque
         '
