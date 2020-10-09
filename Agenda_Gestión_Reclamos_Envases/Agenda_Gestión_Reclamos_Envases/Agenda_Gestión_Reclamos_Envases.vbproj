@@ -123,6 +123,12 @@
     <Compile Include="Discriminado_Mov_Env.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="EnviarMAIL_Cliente.Designer.vb">
+      <DependentUpon>EnviarMAIL_Cliente.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EnviarMAIL_Cliente.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FechaReprog.Designer.vb">
       <DependentUpon>FechaReprog.vb</DependentUpon>
     </Compile>
@@ -210,6 +216,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Discriminado_Mov_Env.resx">
       <DependentUpon>Discriminado_Mov_Env.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EnviarMAIL_Cliente.resx">
+      <DependentUpon>EnviarMAIL_Cliente.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FechaReprog.resx">
       <DependentUpon>FechaReprog.vb</DependentUpon>
