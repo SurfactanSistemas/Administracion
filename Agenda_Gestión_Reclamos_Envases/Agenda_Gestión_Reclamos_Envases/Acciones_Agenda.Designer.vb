@@ -38,6 +38,7 @@ Partial Class Acciones_Agenda
         Me.btn_ModificarAgenda = New System.Windows.Forms.Button()
         Me.btn_PedidosPendientes = New System.Windows.Forms.Button()
         Me.btn_Minutas = New System.Windows.Forms.Button()
+        Me.btn_Mail = New System.Windows.Forms.Button()
         Me.panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -132,9 +133,9 @@ Partial Class Acciones_Agenda
         '
         'btn_Cerrar
         '
-        Me.btn_Cerrar.Location = New System.Drawing.Point(441, 84)
+        Me.btn_Cerrar.Location = New System.Drawing.Point(442, 94)
         Me.btn_Cerrar.Name = "btn_Cerrar"
-        Me.btn_Cerrar.Size = New System.Drawing.Size(68, 27)
+        Me.btn_Cerrar.Size = New System.Drawing.Size(67, 27)
         Me.btn_Cerrar.TabIndex = 138
         Me.btn_Cerrar.Text = "CERRAR"
         Me.btn_Cerrar.UseVisualStyleBackColor = True
@@ -159,16 +160,16 @@ Partial Class Acciones_Agenda
         '
         'btn_BorrarDeAgenda
         '
-        Me.btn_BorrarDeAgenda.Location = New System.Drawing.Point(442, 117)
+        Me.btn_BorrarDeAgenda.Location = New System.Drawing.Point(442, 150)
         Me.btn_BorrarDeAgenda.Name = "btn_BorrarDeAgenda"
-        Me.btn_BorrarDeAgenda.Size = New System.Drawing.Size(67, 67)
+        Me.btn_BorrarDeAgenda.Size = New System.Drawing.Size(67, 49)
         Me.btn_BorrarDeAgenda.TabIndex = 141
         Me.btn_BorrarDeAgenda.Text = "BORRAR DE AGENDA"
         Me.btn_BorrarDeAgenda.UseVisualStyleBackColor = True
         '
         'btn_ModificarAgenda
         '
-        Me.btn_ModificarAgenda.Location = New System.Drawing.Point(363, 84)
+        Me.btn_ModificarAgenda.Location = New System.Drawing.Point(363, 94)
         Me.btn_ModificarAgenda.Name = "btn_ModificarAgenda"
         Me.btn_ModificarAgenda.Size = New System.Drawing.Size(76, 27)
         Me.btn_ModificarAgenda.TabIndex = 142
@@ -177,27 +178,37 @@ Partial Class Acciones_Agenda
         '
         'btn_PedidosPendientes
         '
-        Me.btn_PedidosPendientes.Location = New System.Drawing.Point(363, 117)
+        Me.btn_PedidosPendientes.Location = New System.Drawing.Point(363, 129)
         Me.btn_PedidosPendientes.Name = "btn_PedidosPendientes"
-        Me.btn_PedidosPendientes.Size = New System.Drawing.Size(76, 34)
+        Me.btn_PedidosPendientes.Size = New System.Drawing.Size(76, 40)
         Me.btn_PedidosPendientes.TabIndex = 143
         Me.btn_PedidosPendientes.Text = "PED. PENDIENTES"
         Me.btn_PedidosPendientes.UseVisualStyleBackColor = True
         '
         'btn_Minutas
         '
-        Me.btn_Minutas.Location = New System.Drawing.Point(364, 157)
+        Me.btn_Minutas.Location = New System.Drawing.Point(364, 172)
         Me.btn_Minutas.Name = "btn_Minutas"
         Me.btn_Minutas.Size = New System.Drawing.Size(75, 27)
         Me.btn_Minutas.TabIndex = 144
         Me.btn_Minutas.Text = "MINUTAS"
         Me.btn_Minutas.UseVisualStyleBackColor = True
         '
+        'btn_Mail
+        '
+        Me.btn_Mail.Location = New System.Drawing.Point(442, 122)
+        Me.btn_Mail.Name = "btn_Mail"
+        Me.btn_Mail.Size = New System.Drawing.Size(67, 27)
+        Me.btn_Mail.TabIndex = 145
+        Me.btn_Mail.Text = "MAIL"
+        Me.btn_Mail.UseVisualStyleBackColor = True
+        '
         'Acciones_Agenda
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(515, 363)
+        Me.Controls.Add(Me.btn_Mail)
         Me.Controls.Add(Me.btn_Minutas)
         Me.Controls.Add(Me.btn_PedidosPendientes)
         Me.Controls.Add(Me.btn_ModificarAgenda)
@@ -235,4 +246,5 @@ Partial Class Acciones_Agenda
     Friend WithEvents btn_ModificarAgenda As System.Windows.Forms.Button
     Friend WithEvents btn_PedidosPendientes As System.Windows.Forms.Button
     Friend WithEvents btn_Minutas As System.Windows.Forms.Button
+    Friend WithEvents btn_Mail As System.Windows.Forms.Button
 End Class

@@ -132,4 +132,10 @@ Public Class Acciones_Agenda : Implements IBorrarDeAgenda
         End Select
         
     End Sub
+
+    Private Sub btn_Mail_Click(sender As Object, e As EventArgs) Handles btn_Mail.Click
+        With New EnviarMAIL_Cliente(txt_Cliente.Text)
+            .Show(Me)
+        End With
+    End Sub
 End Class

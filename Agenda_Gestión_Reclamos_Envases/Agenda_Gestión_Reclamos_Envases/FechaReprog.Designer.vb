@@ -34,6 +34,7 @@ Partial Class FechaReprog
         Me.txt_DatosContacto = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.btn_Minuta = New System.Windows.Forms.Button()
+        Me.btn_MAIL = New System.Windows.Forms.Button()
         Me.panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -147,18 +148,28 @@ Partial Class FechaReprog
         '
         'btn_Minuta
         '
-        Me.btn_Minuta.Location = New System.Drawing.Point(335, 351)
+        Me.btn_Minuta.Location = New System.Drawing.Point(344, 350)
         Me.btn_Minuta.Name = "btn_Minuta"
         Me.btn_Minuta.Size = New System.Drawing.Size(75, 23)
         Me.btn_Minuta.TabIndex = 137
         Me.btn_Minuta.Text = "MINUTA"
         Me.btn_Minuta.UseVisualStyleBackColor = True
         '
+        'btn_MAIL
+        '
+        Me.btn_MAIL.Location = New System.Drawing.Point(263, 350)
+        Me.btn_MAIL.Name = "btn_MAIL"
+        Me.btn_MAIL.Size = New System.Drawing.Size(75, 23)
+        Me.btn_MAIL.TabIndex = 138
+        Me.btn_MAIL.Text = "MAIL"
+        Me.btn_MAIL.UseVisualStyleBackColor = True
+        '
         'FechaReprog
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(426, 378)
+        Me.Controls.Add(Me.btn_MAIL)
         Me.Controls.Add(Me.btn_Minuta)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.txt_DatosContacto)
@@ -188,4 +199,5 @@ Partial Class FechaReprog
     Friend WithEvents txt_DatosContacto As System.Windows.Forms.TextBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents btn_Minuta As System.Windows.Forms.Button
+    Friend WithEvents btn_MAIL As System.Windows.Forms.Button
 End Class

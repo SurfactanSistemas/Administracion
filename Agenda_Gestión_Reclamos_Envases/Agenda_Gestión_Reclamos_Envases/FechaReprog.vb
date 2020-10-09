@@ -73,4 +73,10 @@ Public Class FechaReprog : Implements IMinutaDirecta
     Public Sub CerrarIngresoAgenda() Implements IMinutaDirecta.CerrarIngresoAgenda
         Close()
     End Sub
+
+    Private Sub btn_MAIL_Click(sender As Object, e As EventArgs) Handles btn_MAIL.Click
+        With New EnviarMAIL_Cliente(CODIGOCLI)
+            .Show(Me)
+        End With
+    End Sub
 End Class
