@@ -158,7 +158,7 @@ Public Class ImpreProcesos
 
             End If
 
-            _EnviarAvisoPedidoAutorizado("409990")
+            '_EnviarAvisoPedidoAutorizado("409990")
 
             '_GenerarInformeHojaRuta("17899", "C:\TempHojaRuta")
 
@@ -293,6 +293,19 @@ Public Class ImpreProcesos
 
         Next
 
+        '
+        ' Agregamos los adicionales que pidiesen haber (Ej: Informes de Particulas, Informes de Ionics, etc).
+        '
+        Dim WBuscarAdicionales As String = "\\193.168.0.2\w\impresion pdf\Documentacion Adicional Pedidos\" & WNroPedido & "\"
+
+        If Directory.Exists(WBuscarAdicionales) Then
+
+            Dim WAdicionales As String() = Directory.GetFiles(WBuscarAdicionales, "*", SearchOption.TopDirectoryOnly)
+
+            WArchivos.AddRange(WAdicionales)
+
+        End If
+
         _EnviarMail(WDirecciones, WAsunto, WCuerpo, String.Join(";", WArchivos.ToArray()))
 
     End Sub
@@ -392,8 +405,8 @@ Public Class ImpreProcesos
 
             End If
 
-            oMsg.Display()
-            'oMsg.Send()
+            'oMsg.Display()
+            oMsg.Send()
 
         Catch ex As System.Exception
             Throw New System.Exception("No se pudo crear el E-Mail solicitado." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
