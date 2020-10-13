@@ -152,6 +152,12 @@
     <Compile Include="Interfaces\IBuscarClienteCashFlow.vb" />
     <Compile Include="Interfaces\IMinutaDirecta.vb" />
     <Compile Include="Interfaces\IPasaCliente.vb" />
+    <Compile Include="ListadoDeMailsEnviados.Designer.vb">
+      <DependentUpon>ListadoDeMailsEnviados.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ListadoDeMailsEnviados.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="MinutaAgenda.Designer.vb">
       <DependentUpon>MinutaAgenda.vb</DependentUpon>
     </Compile>
@@ -228,6 +234,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GenerarReportes.resx">
       <DependentUpon>GenerarReportes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListadoDeMailsEnviados.resx">
+      <DependentUpon>ListadoDeMailsEnviados.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MinutaAgenda.resx">
       <DependentUpon>MinutaAgenda.vb</DependentUpon>

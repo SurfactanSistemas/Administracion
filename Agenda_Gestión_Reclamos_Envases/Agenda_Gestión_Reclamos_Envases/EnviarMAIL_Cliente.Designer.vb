@@ -88,6 +88,7 @@ Partial Class EnviarMAIL_Cliente
         'txt_Texto
         '
         Me.txt_Texto.Location = New System.Drawing.Point(59, 132)
+        Me.txt_Texto.MaxLength = 900
         Me.txt_Texto.Multiline = True
         Me.txt_Texto.Name = "txt_Texto"
         Me.txt_Texto.Size = New System.Drawing.Size(398, 190)

@@ -79,4 +79,10 @@ Public Class FechaReprog : Implements IMinutaDirecta
             .Show(Me)
         End With
     End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        With New PedidosPendientesXClientes(CODIGOCLI, CLIENTEDES)
+            .Show(Me)
+        End With
+    End Sub
 End Class
