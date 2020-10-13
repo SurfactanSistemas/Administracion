@@ -152,6 +152,7 @@ Public Class Form1 : Implements IPasarFecha, IBuscarClienteCashFlow
                 TablaAux.DefaultView.RowFilter = "Diferencia > 0"
             End If
 
+            TablaAux.DefaultView.Sort() = "Cliente"
 
             ProgressBar1.Visible = False
         End If

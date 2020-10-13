@@ -39,6 +39,7 @@ Partial Class Acciones_Agenda
         Me.btn_PedidosPendientes = New System.Windows.Forms.Button()
         Me.btn_Minutas = New System.Windows.Forms.Button()
         Me.btn_Mail = New System.Windows.Forms.Button()
+        Me.btn_MailsEnviados = New System.Windows.Forms.Button()
         Me.panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -50,7 +51,7 @@ Partial Class Acciones_Agenda
         Me.panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.panel1.Location = New System.Drawing.Point(0, 0)
         Me.panel1.Name = "panel1"
-        Me.panel1.Size = New System.Drawing.Size(515, 50)
+        Me.panel1.Size = New System.Drawing.Size(520, 50)
         Me.panel1.TabIndex = 129
         '
         'Label2
@@ -59,7 +60,7 @@ Partial Class Acciones_Agenda
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold)
         Me.Label2.ForeColor = System.Drawing.Color.White
-        Me.Label2.Location = New System.Drawing.Point(360, 30)
+        Me.Label2.Location = New System.Drawing.Point(365, 30)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(155, 20)
         Me.Label2.TabIndex = 0
@@ -128,14 +129,14 @@ Partial Class Acciones_Agenda
         Me.txt_DatosContacto.Multiline = True
         Me.txt_DatosContacto.Name = "txt_DatosContacto"
         Me.txt_DatosContacto.ReadOnly = True
-        Me.txt_DatosContacto.Size = New System.Drawing.Size(503, 154)
+        Me.txt_DatosContacto.Size = New System.Drawing.Size(509, 154)
         Me.txt_DatosContacto.TabIndex = 137
         '
         'btn_Cerrar
         '
-        Me.btn_Cerrar.Location = New System.Drawing.Point(442, 94)
+        Me.btn_Cerrar.Location = New System.Drawing.Point(442, 82)
         Me.btn_Cerrar.Name = "btn_Cerrar"
-        Me.btn_Cerrar.Size = New System.Drawing.Size(67, 27)
+        Me.btn_Cerrar.Size = New System.Drawing.Size(73, 27)
         Me.btn_Cerrar.TabIndex = 138
         Me.btn_Cerrar.Text = "CERRAR"
         Me.btn_Cerrar.UseVisualStyleBackColor = True
@@ -160,16 +161,16 @@ Partial Class Acciones_Agenda
         '
         'btn_BorrarDeAgenda
         '
-        Me.btn_BorrarDeAgenda.Location = New System.Drawing.Point(442, 150)
+        Me.btn_BorrarDeAgenda.Location = New System.Drawing.Point(364, 150)
         Me.btn_BorrarDeAgenda.Name = "btn_BorrarDeAgenda"
-        Me.btn_BorrarDeAgenda.Size = New System.Drawing.Size(67, 49)
+        Me.btn_BorrarDeAgenda.Size = New System.Drawing.Size(75, 49)
         Me.btn_BorrarDeAgenda.TabIndex = 141
         Me.btn_BorrarDeAgenda.Text = "BORRAR DE AGENDA"
         Me.btn_BorrarDeAgenda.UseVisualStyleBackColor = True
         '
         'btn_ModificarAgenda
         '
-        Me.btn_ModificarAgenda.Location = New System.Drawing.Point(363, 94)
+        Me.btn_ModificarAgenda.Location = New System.Drawing.Point(363, 82)
         Me.btn_ModificarAgenda.Name = "btn_ModificarAgenda"
         Me.btn_ModificarAgenda.Size = New System.Drawing.Size(76, 27)
         Me.btn_ModificarAgenda.TabIndex = 142
@@ -178,7 +179,7 @@ Partial Class Acciones_Agenda
         '
         'btn_PedidosPendientes
         '
-        Me.btn_PedidosPendientes.Location = New System.Drawing.Point(363, 129)
+        Me.btn_PedidosPendientes.Location = New System.Drawing.Point(363, 110)
         Me.btn_PedidosPendientes.Name = "btn_PedidosPendientes"
         Me.btn_PedidosPendientes.Size = New System.Drawing.Size(76, 40)
         Me.btn_PedidosPendientes.TabIndex = 143
@@ -187,27 +188,38 @@ Partial Class Acciones_Agenda
         '
         'btn_Minutas
         '
-        Me.btn_Minutas.Location = New System.Drawing.Point(364, 172)
+        Me.btn_Minutas.Location = New System.Drawing.Point(442, 110)
         Me.btn_Minutas.Name = "btn_Minutas"
-        Me.btn_Minutas.Size = New System.Drawing.Size(75, 27)
+        Me.btn_Minutas.Size = New System.Drawing.Size(73, 27)
         Me.btn_Minutas.TabIndex = 144
         Me.btn_Minutas.Text = "MINUTAS"
         Me.btn_Minutas.UseVisualStyleBackColor = True
         '
         'btn_Mail
         '
-        Me.btn_Mail.Location = New System.Drawing.Point(442, 122)
+        Me.btn_Mail.Location = New System.Drawing.Point(442, 137)
         Me.btn_Mail.Name = "btn_Mail"
-        Me.btn_Mail.Size = New System.Drawing.Size(67, 27)
+        Me.btn_Mail.Size = New System.Drawing.Size(73, 27)
         Me.btn_Mail.TabIndex = 145
         Me.btn_Mail.Text = "MAIL"
         Me.btn_Mail.UseVisualStyleBackColor = True
+        '
+        'btn_MailsEnviados
+        '
+        Me.btn_MailsEnviados.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btn_MailsEnviados.Location = New System.Drawing.Point(442, 164)
+        Me.btn_MailsEnviados.Name = "btn_MailsEnviados"
+        Me.btn_MailsEnviados.Size = New System.Drawing.Size(73, 35)
+        Me.btn_MailsEnviados.TabIndex = 146
+        Me.btn_MailsEnviados.Text = "MAILS ENVIADOS"
+        Me.btn_MailsEnviados.UseVisualStyleBackColor = True
         '
         'Acciones_Agenda
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(515, 363)
+        Me.ClientSize = New System.Drawing.Size(520, 363)
+        Me.Controls.Add(Me.btn_MailsEnviados)
         Me.Controls.Add(Me.btn_Mail)
         Me.Controls.Add(Me.btn_Minutas)
         Me.Controls.Add(Me.btn_PedidosPendientes)
@@ -247,4 +259,5 @@ Partial Class Acciones_Agenda
     Friend WithEvents btn_PedidosPendientes As System.Windows.Forms.Button
     Friend WithEvents btn_Minutas As System.Windows.Forms.Button
     Friend WithEvents btn_Mail As System.Windows.Forms.Button
+    Friend WithEvents btn_MailsEnviados As System.Windows.Forms.Button
 End Class

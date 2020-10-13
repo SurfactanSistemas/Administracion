@@ -35,6 +35,10 @@ Public Class MinutaAgenda
 
         If Val(txt_Cantidad.Text) > 0 Then
 
+            Dim Cliente As String = txt_Cliente.Text
+            Dim FechaRetirar As String = txt_fecha.Text
+            Dim CantEnvRetirar As String = txt_Cantidad.Text
+
 
             If MsgBox("¿Desea asignar que para la siguiente hoja de ruta del cliente " & txt_ClienteDes.Text & "," _
                               & "se retiren la cantidad de " & txt_Cantidad.Text & " contenedores?", vbYesNo) = vbYes Then
@@ -62,8 +66,9 @@ Public Class MinutaAgenda
 
                         ExecuteNonQueries({SQLCnslt}, "SurfactanSa")
 
-                        SacarDeAgenda(txt_Cliente.Text)
+                        SacarDeAgenda(Cliente)
 
+                        LimpiarMails(Cliente)
                         Exit Sub
                     Else
                         Exit Sub
@@ -96,7 +101,9 @@ Public Class MinutaAgenda
 
                 ExecuteNonQueries({SQLCnslt}, "SurfactanSa")
 
-                SacarDeAgenda(txt_Cliente.Text)
+                SacarDeAgenda(Cliente)
+
+                LimpiarMails(Cliente)
 
             End If
         End If
@@ -143,6 +150,8 @@ Public Class MinutaAgenda
 
                             SacarDeAgenda(Cliente)
 
+                            LimpiarMails(Cliente)
+
                             Exit Sub
                         Else
                             Exit Sub
@@ -181,6 +190,8 @@ Public Class MinutaAgenda
                     _Generarmails(Cliente, txt_ClienteDes.Text, FechaRetirar, CantEnvRetirar)
 
                     SacarDeAgenda(Cliente)
+
+                    LimpiarMails(Cliente)
 
                 End If
             Else
@@ -227,4 +238,18 @@ Public Class MinutaAgenda
 
     End Sub
 
+    Private Sub LimpiarMails(ByVal CodCliente As String)
+        Try
+
+            Dim SQLCnslt As String = "DELETE FROM DevolucionEnvMails WHERE Cliente = '" & CodCliente & "'"
+
+            ExecuteNonQueries("SurfactanSa", SQLCnslt)
+
+        Catch ex As Exception
+
+        End Try
+
+
+    End Sub
+    
 End Class

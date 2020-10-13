@@ -35,6 +35,7 @@ Partial Class FechaReprog
         Me.Label5 = New System.Windows.Forms.Label()
         Me.btn_Minuta = New System.Windows.Forms.Button()
         Me.btn_MAIL = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -93,7 +94,7 @@ Partial Class FechaReprog
         '
         'btn_Aceptar
         '
-        Me.btn_Aceptar.Location = New System.Drawing.Point(80, 350)
+        Me.btn_Aceptar.Location = New System.Drawing.Point(99, 350)
         Me.btn_Aceptar.Name = "btn_Aceptar"
         Me.btn_Aceptar.Size = New System.Drawing.Size(75, 23)
         Me.btn_Aceptar.TabIndex = 131
@@ -102,7 +103,7 @@ Partial Class FechaReprog
         '
         'btn_Cerrar
         '
-        Me.btn_Cerrar.Location = New System.Drawing.Point(182, 350)
+        Me.btn_Cerrar.Location = New System.Drawing.Point(342, 350)
         Me.btn_Cerrar.Name = "btn_Cerrar"
         Me.btn_Cerrar.Size = New System.Drawing.Size(75, 23)
         Me.btn_Cerrar.TabIndex = 132
@@ -148,7 +149,7 @@ Partial Class FechaReprog
         '
         'btn_Minuta
         '
-        Me.btn_Minuta.Location = New System.Drawing.Point(344, 350)
+        Me.btn_Minuta.Location = New System.Drawing.Point(261, 350)
         Me.btn_Minuta.Name = "btn_Minuta"
         Me.btn_Minuta.Size = New System.Drawing.Size(75, 23)
         Me.btn_Minuta.TabIndex = 137
@@ -157,18 +158,28 @@ Partial Class FechaReprog
         '
         'btn_MAIL
         '
-        Me.btn_MAIL.Location = New System.Drawing.Point(263, 350)
+        Me.btn_MAIL.Location = New System.Drawing.Point(180, 350)
         Me.btn_MAIL.Name = "btn_MAIL"
         Me.btn_MAIL.Size = New System.Drawing.Size(75, 23)
         Me.btn_MAIL.TabIndex = 138
         Me.btn_MAIL.Text = "MAIL"
         Me.btn_MAIL.UseVisualStyleBackColor = True
         '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(12, 339)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 34)
+        Me.Button1.TabIndex = 139
+        Me.Button1.Text = "PED. PENDIENTEs"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'FechaReprog
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(426, 378)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.btn_MAIL)
         Me.Controls.Add(Me.btn_Minuta)
         Me.Controls.Add(Me.Label5)
@@ -200,4 +211,5 @@ Partial Class FechaReprog
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents btn_Minuta As System.Windows.Forms.Button
     Friend WithEvents btn_MAIL As System.Windows.Forms.Button
+    Friend WithEvents Button1 As System.Windows.Forms.Button
 End Class

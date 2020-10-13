@@ -52,11 +52,26 @@ Public Class Acciones_Agenda : Implements IBorrarDeAgenda
 
             If WOwner IsNot Nothing Then
                 WOwner.PasaCliente(txt_Cliente.Text)
+                LimpiarMails(txt_Cliente.Text)
                 Close()
             End If
         End If
     End Sub
 
+
+    Private Sub LimpiarMails(ByVal CodCliente As String)
+        Try
+
+            Dim SQLCnslt As String = "DELETE FROM DevolucionEnvMails WHERE Cliente = '" & CodCliente & "'"
+
+            ExecuteNonQueries("SurfactanSa", SQLCnslt)
+
+        Catch ex As Exception
+
+        End Try
+
+
+    End Sub
     Private Sub btn_ModificarAgenda_Click(sender As Object, e As EventArgs) Handles btn_ModificarAgenda.Click
 
         If ValidaFecha(txt_Fecha.Text) <> "S" Then
@@ -135,6 +150,12 @@ Public Class Acciones_Agenda : Implements IBorrarDeAgenda
 
     Private Sub btn_Mail_Click(sender As Object, e As EventArgs) Handles btn_Mail.Click
         With New EnviarMAIL_Cliente(txt_Cliente.Text)
+            .Show(Me)
+        End With
+    End Sub
+
+    Private Sub btn_MailsEnviados_Click(sender As Object, e As EventArgs) Handles btn_MailsEnviados.Click
+        With New ListadoDeMailsEnviados(txt_Cliente.Text, txt_ClienteDes.Text)
             .Show(Me)
         End With
     End Sub
