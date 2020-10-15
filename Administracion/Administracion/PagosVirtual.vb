@@ -3343,6 +3343,9 @@ Public Class PagosVirtual
                         If valor.StartsWith(";") Then
                             valor = "C" & Microsoft.VisualBasic.Mid(valor, 2, 29) & "E"
                         End If
+                        If valor.StartsWith(",") Then
+                            valor = "C" & Microsoft.VisualBasic.Mid(valor, 2, 29) & "E"
+                        End If
 
                         If Trim(valor.ToString.Length) = 31 Then
                             If _ProcesarCheque(iRow, valor) Then
