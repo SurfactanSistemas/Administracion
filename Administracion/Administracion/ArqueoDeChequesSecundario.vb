@@ -48,6 +48,7 @@
             Case Keys.Enter
                 If txtCodigoCheque.Text <> "" Then
                     txtCodigoCheque.Text = txtCodigoCheque.Text.ToUpper().Replace(";", "C").Replace(":", "E")
+                    txtCodigoCheque.Text = txtCodigoCheque.Text.ToUpper().Replace(",", "C").Replace(".", "E")
                     If txtCodigoCheque.Text.Length = 31 Then
                         For Each row As DataRow In tablaRecibos.Rows
                             If Trim(row.Item("ClaveCheque")).ToUpper = txtCodigoCheque.Text.ToUpper And row.Item("Marca") = "P" Then

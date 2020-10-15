@@ -279,6 +279,8 @@ Public Class ArqueoDeCheques: implements IArqueoCheques
             Case Keys.Enter
                 If txtCodigoCheque.Text <> "" Then
                     txtCodigoCheque.Text = txtCodigoCheque.Text.ToUpper().Replace(";", "C").Replace(":", "E")
+                    txtCodigoCheque.Text = txtCodigoCheque.Text.ToUpper().Replace(",", "C").Replace(".", "E")
+
                     If txtCodigoCheque.Text.Length = 31 Then
                         For Each row As DataGridViewRow In DGV_Cheques.Rows
                             If Trim(row.Cells("ClaveCheque").Value).ToUpper = txtCodigoCheque.Text.ToUpper Then
