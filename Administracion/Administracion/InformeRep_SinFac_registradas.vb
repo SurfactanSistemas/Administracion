@@ -31,15 +31,7 @@ Public Class InformeRep_SinFac_registradas
         Dim WHastaFec As String = ordenaFecha(txt_HastaFecha.Text)
 
         Dim TablaReporte As New DBAuxi.Reporte_InformeSinFac_RegistradasDataTable
-        'With TablaReporte.Columns
-        '    .Add("Informe")
-        '    .Add("Proveedor")
-        '    .Add("Razon")
-        '    .Add("Orden")
-        '    .Add("Articulo")
-        '    .Add("Descripcion")
-        '    .Add("Cantidad")
-        'End With
+  
 
         Dim VectorEmpresas(6) As String
         VectorEmpresas(0) = "SurfactanSa"
@@ -52,7 +44,7 @@ Public Class InformeRep_SinFac_registradas
 
         Dim SQLCnslt As String = ""
         For i = 0 To 6
-            SQLCnslt = "SELECT i.Informe, i.Proveedor, i.Orden, i.Remito, i.Articulo , i.Cantidad, p.Nombre FROM Informe i INNER JOIN Proveedor p ON i.Proveedor = p.Proveedor WHERE i.FechaOrd >= '" & WDesdeFec & "' AND i.FechaOrd <= '" & WHastaFec & "' ORDER BY FechaOrd Desc"
+            SQLCnslt = "SELECT i.Informe, i.Proveedor, i.Orden, i.Remito, i.Articulo , i.Cantidad, i.Fecha, i.FechaOrd, p.Nombre FROM Informe i INNER JOIN Proveedor p ON i.Proveedor = p.Proveedor WHERE i.FechaOrd >= '" & WDesdeFec & "' AND i.FechaOrd <= '" & WHastaFec & "' ORDER BY FechaOrd Desc"
             Dim TablaInforme As DataTable = GetAll(SQLCnslt, VectorEmpresas(i))
             If TablaInforme.Rows.Count > 0 Then
                 For Each RowInforme As DataRow In TablaInforme.Rows
@@ -90,7 +82,10 @@ Public Class InformeRep_SinFac_registradas
                                                   "",
                                                   .Item("Cantidad"),
                                                   Moneda,
-                                                  RowOrden.Item("Precio"))
+                                                  RowOrden.Item("Precio"),
+                                                  .Item("Remito"),
+                                                  .Item("Fecha"),
+                                                  .Item("FechaOrd"))
                         End With
                     End If
                 Next
@@ -106,12 +101,21 @@ Public Class InformeRep_SinFac_registradas
             End If
         Next
 
+        Dim Wformula As String = ""
+
+        If rabtn_Dolares.Checked Then
+            Wformula = "{Reporte_InformeSinFac_Registradas.Moneda} = 'Dolares'"
+        ElseIf rabtn_Pesos.Checked Then
+            Wformula = "{Reporte_InformeSinFac_Registradas.Moneda} = 'Pesos'"
+        End If
+
         Dim WTitulo As String = "Desde " & txt_DesdeFecha.Text & " Hasta " & txt_HastaFecha.Text & ""
 
         With New VistaPrevia
             .Reporte = New Reporte_InformeSinFacturasRegistradas()
             .Reporte.SetDataSource(CType(TablaReporte, DataTable))
             .Reporte.SetParameterValue(0, WTitulo)
+            .Formula = Wformula
             .Mostrar()
         End With
 

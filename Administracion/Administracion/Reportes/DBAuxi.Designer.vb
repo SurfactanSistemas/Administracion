@@ -3495,6 +3495,12 @@ Partial Public Class DBAuxi
 
         Private columnPrecio As Global.System.Data.DataColumn
 
+        Private columnRemito As Global.System.Data.DataColumn
+
+        Private columnFecha As Global.System.Data.DataColumn
+
+        Private columnFechaOrd As Global.System.Data.DataColumn
+
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public Sub New()
@@ -3603,6 +3609,30 @@ Partial Public Class DBAuxi
         End Property
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public ReadOnly Property RemitoColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnRemito
+            End Get
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public ReadOnly Property FechaColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnFecha
+            End Get
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public ReadOnly Property FechaOrdColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnFechaOrd
+            End Get
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
          Global.System.ComponentModel.Browsable(False)> _
         Public ReadOnly Property Count() As Integer
@@ -3639,9 +3669,9 @@ Partial Public Class DBAuxi
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-        Public Overloads Function AddReporte_InformeSinFac_RegistradasRow(ByVal Informe As String, ByVal Proveedor As String, ByVal Razon As String, ByVal Orden As String, ByVal Articulo As String, ByVal Descripcion As String, ByVal Cantidad As Double, ByVal Moneda As String, ByVal Precio As Double) As Reporte_InformeSinFac_RegistradasRow
+        Public Overloads Function AddReporte_InformeSinFac_RegistradasRow(ByVal Informe As String, ByVal Proveedor As String, ByVal Razon As String, ByVal Orden As String, ByVal Articulo As String, ByVal Descripcion As String, ByVal Cantidad As Double, ByVal Moneda As String, ByVal Precio As Double, ByVal Remito As String, ByVal Fecha As String, ByVal FechaOrd As String) As Reporte_InformeSinFac_RegistradasRow
             Dim rowReporte_InformeSinFac_RegistradasRow As Reporte_InformeSinFac_RegistradasRow = CType(Me.NewRow, Reporte_InformeSinFac_RegistradasRow)
-            Dim columnValuesArray() As Object = New Object() {Informe, Proveedor, Razon, Orden, Articulo, Descripcion, Cantidad, Moneda, Precio}
+            Dim columnValuesArray() As Object = New Object() {Informe, Proveedor, Razon, Orden, Articulo, Descripcion, Cantidad, Moneda, Precio, Remito, Fecha, FechaOrd}
             rowReporte_InformeSinFac_RegistradasRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowReporte_InformeSinFac_RegistradasRow)
             Return rowReporte_InformeSinFac_RegistradasRow
@@ -3673,6 +3703,9 @@ Partial Public Class DBAuxi
             Me.columnCantidad = MyBase.Columns("Cantidad")
             Me.columnMoneda = MyBase.Columns("Moneda")
             Me.columnPrecio = MyBase.Columns("Precio")
+            Me.columnRemito = MyBase.Columns("Remito")
+            Me.columnFecha = MyBase.Columns("Fecha")
+            Me.columnFechaOrd = MyBase.Columns("FechaOrd")
         End Sub
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
@@ -3696,6 +3729,12 @@ Partial Public Class DBAuxi
             MyBase.Columns.Add(Me.columnMoneda)
             Me.columnPrecio = New Global.System.Data.DataColumn("Precio", GetType(Double), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnPrecio)
+            Me.columnRemito = New Global.System.Data.DataColumn("Remito", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnRemito)
+            Me.columnFecha = New Global.System.Data.DataColumn("Fecha", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnFecha)
+            Me.columnFechaOrd = New Global.System.Data.DataColumn("FechaOrd", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnFechaOrd)
         End Sub
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
@@ -6660,6 +6699,54 @@ Partial Public Class DBAuxi
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Property Remito() As String
+            Get
+                Try
+                    Return CType(Me(Me.tableReporte_InformeSinFac_Registradas.RemitoColumn), String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("El valor de la columna 'Remito' de la tabla 'Reporte_InformeSinFac_Registradas' e" & _
+                            "s DBNull.", e)
+                End Try
+            End Get
+            Set(value As String)
+                Me(Me.tableReporte_InformeSinFac_Registradas.RemitoColumn) = value
+            End Set
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Property Fecha() As String
+            Get
+                Try
+                    Return CType(Me(Me.tableReporte_InformeSinFac_Registradas.FechaColumn), String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("El valor de la columna 'Fecha' de la tabla 'Reporte_InformeSinFac_Registradas' es" & _
+                            " DBNull.", e)
+                End Try
+            End Get
+            Set(value As String)
+                Me(Me.tableReporte_InformeSinFac_Registradas.FechaColumn) = value
+            End Set
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Property FechaOrd() As String
+            Get
+                Try
+                    Return CType(Me(Me.tableReporte_InformeSinFac_Registradas.FechaOrdColumn), String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("El valor de la columna 'FechaOrd' de la tabla 'Reporte_InformeSinFac_Registradas'" & _
+                            " es DBNull.", e)
+                End Try
+            End Get
+            Set(value As String)
+                Me(Me.tableReporte_InformeSinFac_Registradas.FechaOrdColumn) = value
+            End Set
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public Function IsInformeNull() As Boolean
             Return Me.IsNull(Me.tableReporte_InformeSinFac_Registradas.InformeColumn)
         End Function
@@ -6764,6 +6851,42 @@ Partial Public Class DBAuxi
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public Sub SetPrecioNull()
             Me(Me.tableReporte_InformeSinFac_Registradas.PrecioColumn) = Global.System.Convert.DBNull
+        End Sub
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Function IsRemitoNull() As Boolean
+            Return Me.IsNull(Me.tableReporte_InformeSinFac_Registradas.RemitoColumn)
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Sub SetRemitoNull()
+            Me(Me.tableReporte_InformeSinFac_Registradas.RemitoColumn) = Global.System.Convert.DBNull
+        End Sub
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Function IsFechaNull() As Boolean
+            Return Me.IsNull(Me.tableReporte_InformeSinFac_Registradas.FechaColumn)
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Sub SetFechaNull()
+            Me(Me.tableReporte_InformeSinFac_Registradas.FechaColumn) = Global.System.Convert.DBNull
+        End Sub
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Function IsFechaOrdNull() As Boolean
+            Return Me.IsNull(Me.tableReporte_InformeSinFac_Registradas.FechaOrdColumn)
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Sub SetFechaOrdNull()
+            Me(Me.tableReporte_InformeSinFac_Registradas.FechaOrdColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
 

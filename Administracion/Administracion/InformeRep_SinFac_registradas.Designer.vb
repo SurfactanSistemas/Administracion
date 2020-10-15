@@ -32,6 +32,9 @@ Partial Class InformeRep_SinFac_registradas
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.rabtn_Total = New System.Windows.Forms.RadioButton()
+        Me.rabtn_Dolares = New System.Windows.Forms.RadioButton()
+        Me.rabtn_Pesos = New System.Windows.Forms.RadioButton()
         Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -48,7 +51,7 @@ Partial Class InformeRep_SinFac_registradas
         '
         'txt_DesdeFecha
         '
-        Me.txt_DesdeFecha.Location = New System.Drawing.Point(139, 57)
+        Me.txt_DesdeFecha.Location = New System.Drawing.Point(97, 57)
         Me.txt_DesdeFecha.Mask = "00/00/0000"
         Me.txt_DesdeFecha.Name = "txt_DesdeFecha"
         Me.txt_DesdeFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -57,7 +60,7 @@ Partial Class InformeRep_SinFac_registradas
         '
         'txt_HastaFecha
         '
-        Me.txt_HastaFecha.Location = New System.Drawing.Point(139, 96)
+        Me.txt_HastaFecha.Location = New System.Drawing.Point(97, 96)
         Me.txt_HastaFecha.Mask = "00/00/0000"
         Me.txt_HastaFecha.Name = "txt_HastaFecha"
         Me.txt_HastaFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -67,7 +70,7 @@ Partial Class InformeRep_SinFac_registradas
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(62, 60)
+        Me.Label1.Location = New System.Drawing.Point(20, 60)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(71, 13)
         Me.Label1.TabIndex = 16
@@ -76,7 +79,7 @@ Partial Class InformeRep_SinFac_registradas
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(62, 99)
+        Me.Label2.Location = New System.Drawing.Point(20, 99)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(68, 13)
         Me.Label2.TabIndex = 17
@@ -84,7 +87,7 @@ Partial Class InformeRep_SinFac_registradas
         '
         'btn_Aceptar
         '
-        Me.btn_Aceptar.Location = New System.Drawing.Point(218, 58)
+        Me.btn_Aceptar.Location = New System.Drawing.Point(262, 58)
         Me.btn_Aceptar.Name = "btn_Aceptar"
         Me.btn_Aceptar.Size = New System.Drawing.Size(108, 54)
         Me.btn_Aceptar.TabIndex = 18
@@ -93,7 +96,7 @@ Partial Class InformeRep_SinFac_registradas
         '
         'btn_Cerrar
         '
-        Me.btn_Cerrar.Location = New System.Drawing.Point(342, 58)
+        Me.btn_Cerrar.Location = New System.Drawing.Point(386, 58)
         Me.btn_Cerrar.Name = "btn_Cerrar"
         Me.btn_Cerrar.Size = New System.Drawing.Size(108, 54)
         Me.btn_Cerrar.TabIndex = 19
@@ -134,11 +137,46 @@ Partial Class InformeRep_SinFac_registradas
         Me.Label4.TabIndex = 0
         Me.Label4.Text = "INF. RECEP. S/ FAC REGISTRADAS"
         '
+        'rabtn_Total
+        '
+        Me.rabtn_Total.AutoSize = True
+        Me.rabtn_Total.Location = New System.Drawing.Point(193, 55)
+        Me.rabtn_Total.Name = "rabtn_Total"
+        Me.rabtn_Total.Size = New System.Drawing.Size(49, 17)
+        Me.rabtn_Total.TabIndex = 31
+        Me.rabtn_Total.Text = "Total"
+        Me.rabtn_Total.UseVisualStyleBackColor = True
+        '
+        'rabtn_Dolares
+        '
+        Me.rabtn_Dolares.AutoSize = True
+        Me.rabtn_Dolares.Checked = True
+        Me.rabtn_Dolares.Location = New System.Drawing.Point(193, 77)
+        Me.rabtn_Dolares.Name = "rabtn_Dolares"
+        Me.rabtn_Dolares.Size = New System.Drawing.Size(61, 17)
+        Me.rabtn_Dolares.TabIndex = 32
+        Me.rabtn_Dolares.TabStop = True
+        Me.rabtn_Dolares.Text = "Dolares"
+        Me.rabtn_Dolares.UseVisualStyleBackColor = True
+        '
+        'rabtn_Pesos
+        '
+        Me.rabtn_Pesos.AutoSize = True
+        Me.rabtn_Pesos.Location = New System.Drawing.Point(193, 100)
+        Me.rabtn_Pesos.Name = "rabtn_Pesos"
+        Me.rabtn_Pesos.Size = New System.Drawing.Size(54, 17)
+        Me.rabtn_Pesos.TabIndex = 33
+        Me.rabtn_Pesos.Text = "Pesos"
+        Me.rabtn_Pesos.UseVisualStyleBackColor = True
+        '
         'InformeRep_SinFac_registradas
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(512, 135)
+        Me.Controls.Add(Me.rabtn_Pesos)
+        Me.Controls.Add(Me.rabtn_Dolares)
+        Me.Controls.Add(Me.rabtn_Total)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.btn_Cerrar)
         Me.Controls.Add(Me.btn_Aceptar)
@@ -163,4 +201,7 @@ Partial Class InformeRep_SinFac_registradas
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Label4 As System.Windows.Forms.Label
+    Friend WithEvents rabtn_Total As System.Windows.Forms.RadioButton
+    Friend WithEvents rabtn_Dolares As System.Windows.Forms.RadioButton
+    Friend WithEvents rabtn_Pesos As System.Windows.Forms.RadioButton
 End Class
