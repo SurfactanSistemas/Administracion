@@ -209,32 +209,81 @@ Public Class ImpreCrystal
 
                         Select Case txtPlanta
                             Case 1
-                                Dim viewer As New ReportViewer("Ordenes de Compra", "n:\net\crystal\Orden1Net.rpt", txtFormula, txtNombrePdf, txtNombre)
-                                viewer.descargarComoPDF()
+                                With New VistaPrevia
+                                    .Base = "SurfactanSa"
+                                    .Reporte = New orden1net
+                                    .Reporte.SetParameterValue(0, txtNombre)
+                                    .Formula = txtFormula
+                                    .Exportar(txtNombrePdf, ExportFormatType.PortableDocFormat, "c:\Orden")
+                                End With
+                                'Dim viewer As New ReportViewer("Ordenes de Compra", "n:\net\crystal\Orden1Net.rpt", txtFormula, txtNombrePdf, txtNombre)
+                                'viewer.descargarComoPDF()
 
                             Case 3
-                                Dim viewer As New ReportViewer("Ordenes de Compra", "n:\net\crystal\orden2Net.rpt", txtFormula, txtNombrePdf, txtNombre)
-                                viewer.descargarComoPDF()
+                                With New VistaPrevia
+                                    .Base = "Surfactan_II"
+                                    .Reporte = New orden2net
+                                    .Reporte.SetParameterValue(0, txtNombre)
+                                    .Formula = txtFormula
+                                    .Exportar(txtNombrePdf, ExportFormatType.PortableDocFormat, "c:\Orden")
+                                End With
+                                'Dim viewer As New ReportViewer("Ordenes de Compra", "n:\net\crystal\orden2Net.rpt", txtFormula, txtNombrePdf, txtNombre)
+                                'viewer.descargarComoPDF()
 
                             Case 5
-                                Dim viewer As New ReportViewer("Ordenes de Compra", "n:\net\crystal\Orden3Net.rpt", txtFormula, txtNombrePdf, txtNombre)
-                                viewer.descargarComoPDF()
+                                With New VistaPrevia
+                                    .Base = "Surfactan_III"
+                                    .Reporte = New orden3net
+                                    .Reporte.SetParameterValue(0, txtNombre)
+                                    .Formula = txtFormula
+                                    .Exportar(txtNombrePdf, ExportFormatType.PortableDocFormat, "c:\Orden")
+                                End With
+                                'Dim viewer As New ReportViewer("Ordenes de Compra", "n:\net\crystal\Orden3Net.rpt", txtFormula, txtNombrePdf, txtNombre)
+                                'viewer.descargarComoPDF()
 
                             Case 6
-                                Dim viewer As New ReportViewer("Ordenes de Compra", "n:\net\crystal\Orden4Net.rpt", txtFormula, txtNombrePdf, txtNombre)
-                                viewer.descargarComoPDF()
+                                With New VistaPrevia
+                                    .Base = "Surfactan_IV"
+                                    .Reporte = New orden4net
+                                    .Reporte.SetParameterValue(0, txtNombre)
+                                    .Formula = txtFormula
+                                    .Exportar(txtNombrePdf, ExportFormatType.PortableDocFormat, "c:\Orden")
+                                End With
+                                'Dim viewer As New ReportViewer("Ordenes de Compra", "n:\net\crystal\Orden4Net.rpt", txtFormula, txtNombrePdf, txtNombre)
+                                'viewer.descargarComoPDF()
 
                             Case 7
-                                Dim viewer As New ReportViewer("Ordenes de Compra", "n:\net\crystal\Orden7Net.rpt", txtFormula, txtNombrePdf, txtNombre)
-                                viewer.descargarComoPDF()
+                                With New VistaPrevia
+                                    .Base = "Surfactan_V"
+                                    .Reporte = New orden7net
+                                    .Reporte.SetParameterValue(0, txtNombre)
+                                    .Formula = txtFormula
+                                    .Exportar(txtNombrePdf, ExportFormatType.PortableDocFormat, "c:\Orden")
+                                End With
+                                'Dim viewer As New ReportViewer("Ordenes de Compra", "n:\net\crystal\Orden7Net.rpt", txtFormula, txtNombrePdf, txtNombre)
+                                'viewer.descargarComoPDF()
 
                             Case 10
-                                Dim viewer As New ReportViewer("Ordenes de Compra", "n:\net\crystal\Orden110Net.rpt", txtFormula, txtNombrePdf, txtNombre)
-                                viewer.descargarComoPDF()
+                                With New VistaPrevia
+                                    .Base = "Surfactan_VI"
+                                    .Reporte = New orden110net
+                                    .Reporte.SetParameterValue(0, txtNombre)
+                                    .Formula = txtFormula
+                                    .Exportar(txtNombrePdf, ExportFormatType.PortableDocFormat, "c:\Orden")
+                                End With
+                                'Dim viewer As New ReportViewer("Ordenes de Compra", "n:\net\crystal\Orden110Net.rpt", txtFormula, txtNombrePdf, txtNombre)
+                                'viewer.descargarComoPDF()
 
                             Case 11
-                                Dim viewer As New ReportViewer("Ordenes de Compra", "n:\net\crystal\Orden111Net.rpt", txtFormula, txtNombrePdf, txtNombre)
-                                viewer.descargarComoPDF()
+                                With New VistaPrevia
+                                    .Base = "Surfactan_VII"
+                                    .Reporte = New orden111net
+                                    .Reporte.SetParameterValue(0, txtNombre)
+                                    .Formula = txtFormula
+                                    .Exportar(txtNombrePdf, ExportFormatType.PortableDocFormat, "c:\Orden")
+                                End With
+                                'Dim viewer As New ReportViewer("Ordenes de Compra", "n:\net\crystal\Orden111Net.rpt", txtFormula, txtNombrePdf, txtNombre)
+                                'viewer.descargarComoPDF()
 
                             Case Else
 
