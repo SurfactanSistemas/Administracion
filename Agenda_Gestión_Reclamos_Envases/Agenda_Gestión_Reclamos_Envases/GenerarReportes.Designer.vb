@@ -31,12 +31,12 @@ Partial Class GenerarReportes
         Me.Button2 = New System.Windows.Forms.Button()
         Me.btnListar = New System.Windows.Forms.Button()
         Me.pnl_Fechas = New System.Windows.Forms.Panel()
-        Me.btn_Aceptar = New System.Windows.Forms.Button()
-        Me.btn_Cancelar = New System.Windows.Forms.Button()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.txt_FechaDesde = New System.Windows.Forms.MaskedTextBox()
         Me.txt_FechaHasta = New System.Windows.Forms.MaskedTextBox()
+        Me.txt_FechaDesde = New System.Windows.Forms.MaskedTextBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.btn_Cancelar = New System.Windows.Forms.Button()
+        Me.btn_Aceptar = New System.Windows.Forms.Button()
         Me.panel1.SuspendLayout()
         Me.pnl_Fechas.SuspendLayout()
         Me.SuspendLayout()
@@ -130,6 +130,7 @@ Partial Class GenerarReportes
         '
         'pnl_Fechas
         '
+        Me.pnl_Fechas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnl_Fechas.Controls.Add(Me.txt_FechaHasta)
         Me.pnl_Fechas.Controls.Add(Me.txt_FechaDesde)
         Me.pnl_Fechas.Controls.Add(Me.Label4)
@@ -142,41 +143,14 @@ Partial Class GenerarReportes
         Me.pnl_Fechas.TabIndex = 136
         Me.pnl_Fechas.Visible = False
         '
-        'btn_Aceptar
+        'txt_FechaHasta
         '
-        Me.btn_Aceptar.Location = New System.Drawing.Point(20, 54)
-        Me.btn_Aceptar.Name = "btn_Aceptar"
-        Me.btn_Aceptar.Size = New System.Drawing.Size(75, 23)
-        Me.btn_Aceptar.TabIndex = 0
-        Me.btn_Aceptar.Text = "ACEPTAR"
-        Me.btn_Aceptar.UseVisualStyleBackColor = True
-        '
-        'btn_Cancelar
-        '
-        Me.btn_Cancelar.Location = New System.Drawing.Point(111, 54)
-        Me.btn_Cancelar.Name = "btn_Cancelar"
-        Me.btn_Cancelar.Size = New System.Drawing.Size(75, 23)
-        Me.btn_Cancelar.TabIndex = 1
-        Me.btn_Cancelar.Text = "CANCELAR"
-        Me.btn_Cancelar.UseVisualStyleBackColor = True
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(17, 9)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(38, 13)
-        Me.Label3.TabIndex = 2
-        Me.Label3.Text = "Desde"
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(115, 9)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(35, 13)
-        Me.Label4.TabIndex = 3
-        Me.Label4.Text = "Hasta"
+        Me.txt_FechaHasta.Location = New System.Drawing.Point(118, 25)
+        Me.txt_FechaHasta.Mask = "00/00/0000"
+        Me.txt_FechaHasta.Name = "txt_FechaHasta"
+        Me.txt_FechaHasta.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txt_FechaHasta.Size = New System.Drawing.Size(65, 20)
+        Me.txt_FechaHasta.TabIndex = 5
         '
         'txt_FechaDesde
         '
@@ -187,14 +161,41 @@ Partial Class GenerarReportes
         Me.txt_FechaDesde.Size = New System.Drawing.Size(65, 20)
         Me.txt_FechaDesde.TabIndex = 4
         '
-        'txt_FechaHasta
+        'Label4
         '
-        Me.txt_FechaHasta.Location = New System.Drawing.Point(118, 25)
-        Me.txt_FechaHasta.Mask = "00/00/0000"
-        Me.txt_FechaHasta.Name = "txt_FechaHasta"
-        Me.txt_FechaHasta.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txt_FechaHasta.Size = New System.Drawing.Size(65, 20)
-        Me.txt_FechaHasta.TabIndex = 5
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(115, 9)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(35, 13)
+        Me.Label4.TabIndex = 3
+        Me.Label4.Text = "Hasta"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(17, 9)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(38, 13)
+        Me.Label3.TabIndex = 2
+        Me.Label3.Text = "Desde"
+        '
+        'btn_Cancelar
+        '
+        Me.btn_Cancelar.Location = New System.Drawing.Point(111, 54)
+        Me.btn_Cancelar.Name = "btn_Cancelar"
+        Me.btn_Cancelar.Size = New System.Drawing.Size(75, 23)
+        Me.btn_Cancelar.TabIndex = 1
+        Me.btn_Cancelar.Text = "CANCELAR"
+        Me.btn_Cancelar.UseVisualStyleBackColor = True
+        '
+        'btn_Aceptar
+        '
+        Me.btn_Aceptar.Location = New System.Drawing.Point(20, 54)
+        Me.btn_Aceptar.Name = "btn_Aceptar"
+        Me.btn_Aceptar.Size = New System.Drawing.Size(75, 23)
+        Me.btn_Aceptar.TabIndex = 0
+        Me.btn_Aceptar.Text = "ACEPTAR"
+        Me.btn_Aceptar.UseVisualStyleBackColor = True
         '
         'GenerarReportes
         '

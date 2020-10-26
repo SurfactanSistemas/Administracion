@@ -88,7 +88,7 @@ Public Class Form1 : Implements IPasarFecha, IBuscarClienteCashFlow
                 SQLCnslt = "SELECT SUM(de.Cantidad) " _
                             & "FROM Surfactan_II.dbo.DevolucionEnvases de INNER JOIN SurfactanSa.dbo.EquivEnvArticulo eea ON de.Envase = eea.Articulo " _
                             & "WHERE de.Cliente = '" & RowCli.Item("Cliente") & "' " _
-                            & "AND de.OrdFecha >= '" & DesdeFechaOrd & "'" _
+                            & "AND de.OrdFecha >= '" & DesdeFechaOrd & "' AND de.OrdFecha <= '" & FechaActualOrd & "' " _
                             & "AND eea.Envase = 30"
                
 
@@ -101,20 +101,32 @@ Public Class Form1 : Implements IPasarFecha, IBuscarClienteCashFlow
                 SQLCnslt = "SELECT SUM(hrde.Cantidad) " _
                             & "FROM HojaRutaDevEnv hrde INNER JOIN EquivEnvArticulo eea ON hrde.Envase = eea.Articulo " _
                             & "WHERE hrde.Cliente = '" & RowCli.Item("Cliente") & "' " _
-                            & "AND hrde.FechaOrd >= '" & DesdeFechaOrd & "'" _
+                            & "AND hrde.FechaOrd >= '" & DesdeFechaOrd & "' AND hrde.FechaOrd <= '" & FechaActualOrd & "' " _
                             & "AND eea.Envase = 30"
                
                 Dim EntHojaRuta As DataRow = GetSingle(SQLCnslt)
 
                 If EntHojaRuta IsNot Nothing Then CantidadEntradas += OrDefault(EntHojaRuta(0), 0)
 
+
+                SQLCnslt = "SELECT SUM(Cantidad) FROM MovEnv " _
+                            & "WHERE Cliente = '" & RowCli.Item("Cliente") & "' " _
+                            & "AND FechaOrd >= '" & DesdeFechaOrd & "' AND FechaOrd <= '" & FechaActualOrd & "' " _
+                            & "AND Movimiento = 'E' AND Envase = 30 AND Marca <> 'X' "
+
+                Dim EntrMovEnv As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+
+                If EntrMovEnv IsNot Nothing Then CantidadEntradas += OrDefault(EntrMovEnv(0), 0)
+
+
+
                 Dim CantidadSalidas As Integer = 0
 
 
                 SQLCnslt = "SELECT SUM(Cantidad) FROM MovEnv " _
                             & "WHERE Cliente = '" & RowCli.Item("Cliente") & "' " _
-                            & "AND FechaOrd >= '" & DesdeFechaOrd & "'" _
-                            & "AND Envase = 30 AND Marca <> 'X' "
+                            & "AND FechaOrd >= '" & DesdeFechaOrd & "' AND FechaOrd <= '" & FechaActualOrd & "'" _
+                            & "AND Movimiento = 'S' AND Envase = 30 AND Marca <> 'X' "
                
                 Dim Salidas As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
 

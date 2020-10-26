@@ -52,7 +52,7 @@ Public Class Discriminado_Mov_Env
             SQLCnslt = "SELECT hrde.Hoja, hrde.Fecha, hrde.FechaOrd, Entradas = hrde.Cantidad " _
                        & "FROM HojaRutaDevEnv hrde INNER JOIN EquivEnvArticulo eea ON hrde.Envase = eea.Articulo " _
                        & "WHERE hrde.Cliente = '" & Codigo & "' " _
-                       & "AND hrde.FechaOrd >= '20200101' AND hrde.FechaOrd <= '20200910' " _
+                       & "AND hrde.FechaOrd >= '" & DesdeFechaOrd & "' AND hrde.FechaOrd <= '" & FechaActualOrd & "' " _
                        & "AND eea.Envase = 30"
             Dim tablaHojaRuta As DataTable = GetAll(SQLCnslt)
 
@@ -62,13 +62,30 @@ Public Class Discriminado_Mov_Env
                 Next
             End If
 
+            SQLCnslt = "SELECT NroMovEnv = Codigo, Fecha, FechaOrd, Entradas = Cantidad FROM MovEnv " _
+                  & "WHERE Cliente = '" & Codigo & "' " _
+                  & "AND FechaOrd >= '" & DesdeFechaOrd & "' AND FechaOrd <= '" & FechaActualOrd & "'" _
+                  & "AND Movimiento = 'E' AND Envase = 30 AND Marca <> 'X' "
+
+            Dim tablaSalidas As DataTable = GetAll(SQLCnslt, "SurfactanSa")
+
+            If tablaSalidas.Rows.Count > 0 Then
+                For Each rowSal As DataRow In tablaSalidas.Rows
+                    TablaDetallado.Rows.Add("Remito", "", rowSal.Item("NroMovEnv").ToString().Remove(0, 1), rowSal.Item("Fecha"), rowSal.Item("Entradas"), 0, rowSal.Item("FechaOrd"))
+                Next
+            End If
+
+
+
+
+
         End If
 
         If rbSalidas.Checked Or rbTotal.Checked Then
             SQLCnslt = "SELECT NroMovEnv = Codigo, Fecha, FechaOrd, Salidas = Cantidad FROM MovEnv " _
                    & "WHERE Cliente = '" & Codigo & "' " _
                    & "AND FechaOrd >= '" & DesdeFechaOrd & "' AND FechaOrd <= '" & FechaActualOrd & "'" _
-                   & "AND Envase = 30 AND Marca <> 'X' "
+                   & "AND Movimiento = 'S' AND Envase = 30 AND Marca <> 'X' "
 
             Dim tablaSalidas As DataTable = GetAll(SQLCnslt, "SurfactanSa")
 
@@ -85,7 +102,7 @@ Public Class Discriminado_Mov_Env
 
         For Each DGV_row As DataGridViewRow In DGV_MovDetallados.Rows
             TEntradas = TEntradas + DGV_row.Cells("Entrada").Value
-            TSalidas = TSalidas + +DGV_row.Cells("Salida").Value
+            TSalidas = TSalidas + DGV_row.Cells("Salida").Value
         Next
 
         txt_TotalEntradas.Text = TEntradas
