@@ -256,6 +256,19 @@ Public Class ImpreProcesos
                     Exit Sub
                 End If
 
+                '
+                ' Agregamos los adicionales que pidiesen haber (Ej: Informes de Particulas, Informes de Ionics, etc).
+                '
+                Dim WBuscarAdicionales As String = "\\193.168.0.2\w\impresion pdf\Documentacion Adicional Pedidos\" & WPartida & "\"
+
+                If Directory.Exists(WBuscarAdicionales) Then
+
+                    Dim WAdicionales As String() = Directory.GetFiles(WBuscarAdicionales, "*", SearchOption.TopDirectoryOnly)
+
+                    WArchivos.AddRange(WAdicionales)
+
+                End If
+
             Next
 
             '
@@ -292,19 +305,6 @@ Public Class ImpreProcesos
             If arch.Trim <> "" Then WArchivos.Add(arch)
 
         Next
-
-        '
-        ' Agregamos los adicionales que pidiesen haber (Ej: Informes de Particulas, Informes de Ionics, etc).
-        '
-        Dim WBuscarAdicionales As String = "\\193.168.0.2\w\impresion pdf\Documentacion Adicional Pedidos\" & WNroPedido & "\"
-
-        If Directory.Exists(WBuscarAdicionales) Then
-
-            Dim WAdicionales As String() = Directory.GetFiles(WBuscarAdicionales, "*", SearchOption.TopDirectoryOnly)
-
-            WArchivos.AddRange(WAdicionales)
-
-        End If
 
         _EnviarMail(WDirecciones, WAsunto, WCuerpo, String.Join(";", WArchivos.ToArray()))
 
