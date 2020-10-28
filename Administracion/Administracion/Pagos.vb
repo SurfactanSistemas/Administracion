@@ -2584,6 +2584,8 @@ Public Class Pagos
         ' Imprimimos los comprobantes pertinentes.
         btnImprimir.PerformClick()
 
+        btnEnviarAviso_Click(Nothing, Nothing)
+
         ' Limpiamos pantalla.
         btnLimpiar.PerformClick()
     End Sub
@@ -7308,7 +7310,7 @@ Public Class Pagos
                     End If
                 Next
 
-                _EnviarEmail(WMailOp, "", "Orden de Pago - SURFACTAN S.A. - ", WBody, WAdjuntos.ToArray)
+                _EnviarEmail(WMailOp, "juanfs@surfactan.com.ar;mlarias@surfactan.com.ar;gferreyra@surfactan.com.ar", "Orden de Pago - SURFACTAN S.A. - ", WBody, WAdjuntos.ToArray)
 
                 _MarcarOPComoEnviada(OrdenPago)
 
