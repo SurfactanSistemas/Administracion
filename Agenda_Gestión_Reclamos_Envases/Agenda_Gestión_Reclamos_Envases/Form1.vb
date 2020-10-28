@@ -109,14 +109,14 @@ Public Class Form1 : Implements IPasarFecha, IBuscarClienteCashFlow
                 If EntHojaRuta IsNot Nothing Then CantidadEntradas += OrDefault(EntHojaRuta(0), 0)
 
 
-                SQLCnslt = "SELECT SUM(Cantidad) FROM MovEnv " _
-                            & "WHERE Cliente = '" & RowCli.Item("Cliente") & "' " _
-                            & "AND FechaOrd >= '" & DesdeFechaOrd & "' AND FechaOrd <= '" & FechaActualOrd & "' " _
-                            & "AND Movimiento = 'E' AND Envase = 30 AND Marca <> 'X' "
-
-                Dim EntrMovEnv As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
-
-                If EntrMovEnv IsNot Nothing Then CantidadEntradas += OrDefault(EntrMovEnv(0), 0)
+'                SQLCnslt = "SELECT SUM(Cantidad) FROM MovEnv " _
+'                            & "WHERE Cliente = '" & RowCli.Item("Cliente") & "' " _
+'                            & "AND FechaOrd >= '" & DesdeFechaOrd & "' AND FechaOrd <= '" & FechaActualOrd & "' " _
+'                            & "AND Movimiento = 'E' AND Envase = 30 AND Marca <> 'X' "
+'
+'                Dim EntrMovEnv As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+'
+'                If EntrMovEnv IsNot Nothing Then CantidadEntradas += OrDefault(EntrMovEnv(0), 0)
 
 
 

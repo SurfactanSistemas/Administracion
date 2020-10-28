@@ -33,6 +33,7 @@ Public Class Discriminado_Mov_Env
         Dim DesdeFechaOrd As String = ordenaFecha(DesdeFecha)
         Dim FechaActualOrd As String = ordenaFecha(Date.Today.ToString("dd/MM/yyyy"))
 
+
         If rbEntradas.Checked Or rbTotal.Checked Then
 
             SQLCnslt = "SELECT  de.Envase, de.Fecha, de.OrdFecha, Entradas = de.Cantidad " _
@@ -62,25 +63,24 @@ Public Class Discriminado_Mov_Env
                 Next
             End If
 
-            SQLCnslt = "SELECT NroMovEnv = Codigo, Fecha, FechaOrd, Entradas = Cantidad FROM MovEnv " _
-                  & "WHERE Cliente = '" & Codigo & "' " _
-                  & "AND FechaOrd >= '" & DesdeFechaOrd & "' AND FechaOrd <= '" & FechaActualOrd & "'" _
-                  & "AND Movimiento = 'E' AND Envase = 30 AND Marca <> 'X' "
-
-            Dim tablaSalidas As DataTable = GetAll(SQLCnslt, "SurfactanSa")
-
-            If tablaSalidas.Rows.Count > 0 Then
-                For Each rowSal As DataRow In tablaSalidas.Rows
-                    TablaDetallado.Rows.Add("Remito", "", rowSal.Item("NroMovEnv").ToString().Remove(0, 1), rowSal.Item("Fecha"), rowSal.Item("Entradas"), 0, rowSal.Item("FechaOrd"))
-                Next
-            End If
-
+            '   SQLCnslt = "SELECT NroMovEnv = Codigo, Fecha, FechaOrd, Entradas = Cantidad FROM MovEnv " _
+            '              & "WHERE Cliente = '" & Codigo & "' " _
+            '              & "AND FechaOrd >= '" & DesdeFechaOrd & "' AND FechaOrd <= '" & FechaActualOrd & "'" _
+            '              & "AND Movimiento = 'E' AND Envase = 30 AND Marca <> 'X' "
+            '
+            '   Dim tablaSalidas As DataTable = GetAll(SQLCnslt, "SurfactanSa")
+            '
+            '   If tablaSalidas.Rows.Count > 0 Then
+            '       For Each rowSal As DataRow In tablaSalidas.Rows
+            '           TablaDetallado.Rows.Add("Remito", "", rowSal.Item("NroMovEnv").ToString().Remove(0, 1), rowSal.Item("Fecha"), rowSal.Item("Entradas"), 0, rowSal.Item("FechaOrd"))
+            '       Next
+            '   End If
+            '
 
 
 
 
         End If
-
         If rbSalidas.Checked Or rbTotal.Checked Then
             SQLCnslt = "SELECT NroMovEnv = Codigo, Fecha, FechaOrd, Salidas = Cantidad FROM MovEnv " _
                    & "WHERE Cliente = '" & Codigo & "' " _
