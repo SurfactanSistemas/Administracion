@@ -234,7 +234,7 @@ Public Class Login
 
                             WNombreArchivo &= ".pdf"
 
-                            WDirecciones = "ebiglieri@surfactan.com.ar; calidad@surfactan.com.ar; wbarosio@surfactan.com.ar; calidad2@surfactan.com.ar; isocalidad@surfactan.com.ar;juanfs@surfactan.com.ar; lsantos@surfactan.com.ar; drodriguez@surfactan.com.ar; iburgos@surfactan.com.ar; ctomaszek@surfactan.com.ar; mlarias@surfactan.com.ar; mescames@surfactan.com.ar; supcc@surfactan.com.ar; svarela@surfactan.com.ar; textil@surfactan.com.ar; hfondeville@surfactan.com.ar; hsuarez@surfactan.com.ar;gferreyra@surfactan.com.ar;"
+                            WDirecciones = "ebiglieri@surfactan.com.ar; calidad3@surfactan.com.ar; calidad@surfactan.com.ar; wbarosio@surfactan.com.ar; calidad2@surfactan.com.ar; isocalidad@surfactan.com.ar;juanfs@surfactan.com.ar; lsantos@surfactan.com.ar; drodriguez@surfactan.com.ar; iburgos@surfactan.com.ar; ctomaszek@surfactan.com.ar; mlarias@surfactan.com.ar; mescames@surfactan.com.ar; supcc@surfactan.com.ar; svarela@surfactan.com.ar; textil@surfactan.com.ar; hfondeville@surfactan.com.ar; hsuarez@surfactan.com.ar;gferreyra@surfactan.com.ar;"
 
                             If Not Directory.Exists(WRuta) Then Directory.CreateDirectory(WRuta) 'Directory.Delete(WRuta, True)
 
@@ -446,7 +446,7 @@ Public Class Login
                 Next
         End Select
 
-        For Each d As String In ("ebiglieri@surfactan.com.ar; calidad2@surfactan.com.ar; calidad@surfactan.com.ar; isocalidad@surfactan.com.ar; wbarosio@surfactan.com.ar; wbarosio@gmail.com; lsantos@surfactan.com.ar; juanfs@surfactan.com.ar").Split(";")
+        For Each d As String In ("ebiglieri@surfactan.com.ar; calidad3@surfactan.com.ar; calidad2@surfactan.com.ar; calidad@surfactan.com.ar; isocalidad@surfactan.com.ar; wbarosio@surfactan.com.ar; wbarosio@gmail.com; lsantos@surfactan.com.ar; juanfs@surfactan.com.ar").Split(";")
             If Not WDirecciones.Contains(Trim(d)) Then WDirecciones &= Trim(d) & ";"
         Next
 

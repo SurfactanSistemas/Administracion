@@ -101,7 +101,7 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
         ' Add any initialization after the InitializeComponent() call.
 
         Me.Variables = Variables
-        Me.Referencias = Referencias
+        Me.Referencias = OrDefault(Referencias, New String(11, 2) {})
         Me.Decimales = OrDefault(Decimales, 2)
         Me.Formula = Trim(Formula)
         Me.Valor = Valor.Replace(",", ".")

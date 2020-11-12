@@ -300,12 +300,28 @@ Public Class ImpreCrystal
 
                 Select Case txtDestino
                     Case 0
-                        Dim viewer As New ReportViewer("Especificaciones de Ordenes de Compra", "N:\net\crystal\ListaEspePdfNet.rpt", txtFormula, "", "")
-                        viewer.Show()
+                        With New VistaPrevia
+                            .Base = "Surfactan_II"
+                            .Reporte = New listaespepdfnet
+                            '.Reporte.SetParameterValue(0, txtNombre)
+                            .Formula = txtFormula
+                            .Mostrar()
+                            '.Exportar(txtNombrePdf, ExportFormatType.PortableDocFormat, "c:\Orden")
+                        End With
+                        'Dim viewer As New ReportViewer("Especificaciones de Ordenes de Compra", "N:\net\crystal\ListaEspePdfNet.rpt", txtFormula, "", "")
+                        'viewer.Show()
 
                     Case 1
-                        Dim viewer As New ReportViewer("Especificaciones de Ordenes de Compra", "N:\net\crystal\ListaEspePdfNet.rpt", txtFormula, "", "")
-                        viewer.imprimirReporte()
+                        With New VistaPrevia
+                            .Base = "Surfactan_II"
+                            .Reporte = New listaespepdfnet
+                            '.Reporte.SetParameterValue(0, txtNombre)
+                            .Formula = txtFormula
+                            .Imprimir()
+                            '.Exportar(txtNombrePdf, ExportFormatType.PortableDocFormat, "c:\Orden")
+                        End With
+                        'Dim viewer As New ReportViewer("Especificaciones de Ordenes de Compra", "N:\net\crystal\ListaEspePdfNet.rpt", txtFormula, "", "")
+                        'viewer.imprimirReporte()
 
                     Case Else
                         txtNombrePdf = txtOrden + " Especificaciones"
@@ -314,8 +330,16 @@ Public Class ImpreCrystal
                             File.Delete(txtNombreBusqueda)
                         End If
 
-                        Dim viewer As New ReportViewer("Especificaciones de Ordenes de Compra", "n:\net\crystal\ListaEspePdfNet.rpt", txtFormula, txtNombrePdf, "")
-                        viewer.descargarComoPDF()
+                        With New VistaPrevia
+                            .Base = "Surfactan_II"
+                            .Reporte = New listaespepdfnet
+                            '.Reporte.SetParameterValue(0, txtNombre)
+                            .Formula = txtFormula
+                            .Exportar(txtNombrePdf, ExportFormatType.PortableDocFormat, "c:\Orden")
+                        End With
+
+                        'Dim viewer As New ReportViewer("Especificaciones de Ordenes de Compra", "n:\net\crystal\ListaEspePdfNet.rpt", txtFormula, txtNombrePdf, "")
+                        'viewer.descargarComoPDF()
 
                 End Select
 

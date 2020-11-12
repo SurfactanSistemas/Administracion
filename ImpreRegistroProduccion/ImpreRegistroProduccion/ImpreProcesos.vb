@@ -167,7 +167,7 @@ Public Class ImpreProcesos
             'Dim WTerminado2 As String = "PT-25062-780"
             'Dim WTipoSalida2 As Integer = 2
 
-            '_GenerarCertificadoAnalisisFarma(1, 310583, 3)
+            '_GenerarCertificadoAnalisisFarma(3, 311007, 3)
 
             'WTipoReporte2 = 3
 
@@ -185,7 +185,10 @@ Public Class ImpreProcesos
             '_GenerarReporteResultadosCalidad(WPartida2, 4, WFechaVto2, WImpreFechaVto2, WFechaElabora2, WImpreFechaElaboracion2)
 
         Catch ex As System.Exception
-            MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+            'MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+            Using sw As New StreamWriter("\\193.168.0.2\g$\vb\NET\ImpreProcesosFarma\Ejecutable\" & "error.txt")
+                sw.WriteLine(Date.Now.ToString() & " " & ex.Message & ex.StackTrace)
+            End Using
         Finally
 
             Close()
@@ -195,19 +198,20 @@ Public Class ImpreProcesos
     End Sub
 
     Private Sub _EnviarAvisoPedidoAutorizado(ByVal WNroPedido As String)
-        Dim WPed As DataTable = GetAll("SELECT c.Provincia, t.Descripcion, p.* FROM Pedido p INNER JOIN Cliente c ON c.Cliente = p.Cliente INNER JOIN Terminado t ON t.Codigo = p.Terminado WHERE p.Pedido = '" & WNroPedido & "' And p.MarcaFactura = '1' ORDER BY p.Renglon", "SurfactanSa")
-        Dim WDir As String() = {"grodriguez", "hsein", "calidad2", "calidad", "ebiglieri", "isocalidad", "hmuller", "scoppiello", "sup3", "planta7"}
+        Dim WPed As DataTable = GetAll("SELECT c.Razon, c.Provincia, t.Descripcion, p.* FROM Pedido p INNER JOIN Cliente c ON c.Cliente = p.Cliente INNER JOIN Terminado t ON t.Codigo = p.Terminado WHERE p.Pedido = '" & WNroPedido & "' And p.MarcaFactura = '1' ORDER BY p.Renglon", "SurfactanSa")
+        Dim WDir As String() = {"grodriguez", "hsein", "calidad3", "calidad2", "calidad", "ebiglieri", "isocalidad", "hmuller", "scoppiello", "sup3", "planta7"}
         Dim WDirecciones As String = ""
 
         If WPed.Rows.Count = 0 Then Exit Sub
 
         Dim WEnIngles As Boolean = Val(OrDefault(WPed.Rows(0)("Provincia"), "")) = 24
+        Dim WDescCliente As String = Trim(UCase((OrDefault(WPed.Rows(0)("Razon"), ""))))
 
         WDir.ToList().ForEach(Sub(d) WDirecciones &= d & "@surfactan.com.ar;")
 
         If WDirecciones = "" Or WPed.Rows.Count = 0 Then Exit Sub
 
-        Dim WAsunto As String = "El Pedido " & WNroPedido & " ha sido autorizado."
+        Dim WAsunto As String = "El Pedido " & WNroPedido & " de " & WDescCliente & ", ha sido autorizado."
         Dim WCuerpo As String = "Se notifica que el pedido " & WNroPedido & ", se encuentra autorizado por Aseg. de la Calidad." & vbCrLf & vbCrLf & "Se adjuntan los FDS y Certificados correspondientes a los Productos y Partidas involucradas."
 
         Dim WArchivos As New List(Of String)
@@ -306,7 +310,7 @@ Public Class ImpreProcesos
 
         Next
 
-        _EnviarMail(WDirecciones, WAsunto, WCuerpo, String.Join(";", WArchivos.ToArray()))
+        _EnviarMail(WDirecciones, WAsunto, WCuerpo, String.Join(";", WArchivos.ToArray()), False)
 
     End Sub
 
@@ -381,7 +385,7 @@ Public Class ImpreProcesos
 
     End Sub
 
-    Private Sub _EnviarMail(wDestinatarios As String, wAsunto As String, wCuerpo As String, wAdjuntos As String)
+    Private Sub _EnviarMail(wDestinatarios As String, wAsunto As String, wCuerpo As String, wAdjuntos As String, Optional ByVal EnvioAutomatico As Boolean = True)
         Dim oApp As _Application
         Dim oMsg As _MailItem
 
@@ -405,8 +409,11 @@ Public Class ImpreProcesos
 
             End If
 
-            'oMsg.Display()
-            oMsg.Send()
+            If EnvioAutomatico Then
+                oMsg.Send()
+            Else
+                oMsg.Display()
+            End If
 
         Catch ex As System.Exception
             Throw New System.Exception("No se pudo crear el E-Mail solicitado." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
@@ -509,7 +516,11 @@ Public Class ImpreProcesos
             Dim WRuta As String = ""
 
             If wTipoSalida = 4 Then WRuta = "C:\ImpreCertificados\"
-            If wTipoSalida = 7 Then WRuta = "\\193.168.0.2\w\Impresion pdf\Certificados Analisis Farma Liberacion Pedidos\" & Ruta
+            If wTipoSalida = 7 Then WRuta = "C:\ImpreCertificados\" & wPartida
+
+            If WRuta.Trim <> "" AndAlso Not Directory.Exists(WRuta) Then Directory.CreateDirectory(WRuta)
+
+            'If wTipoSalida = 7 Then WRuta = "\\193.168.0.2\w\Impresion pdf\Certificados Analisis Farma Liberacion Pedidos\" & Ruta
 
             If WNombre.Trim = "" Then
 
@@ -544,13 +555,50 @@ Public Class ImpreProcesos
                     .Imprimir()
                 Case 2
                     .Mostrar()
+                Case 8
+                    If Directory.Exists("C:\ImpreCertificados\" & wPartida) Then Directory.Delete("C:\ImpreCertificados\" & wPartida, True)
+                    .Exportar(WNombre, CrystalDecisions.Shared.ExportFormatType.PortableDocFormat)
                 Case 3
                     'MsgBox(WNombre)
-                    .Exportar(WNombre, CrystalDecisions.Shared.ExportFormatType.PortableDocFormat)
+                    If WNombre.ToUpper.EndsWith("PRIMERA.PDF") Then
+                        Directory.Delete("C:\ImpreCertificados\" & wPartida, True)
+                        .Exportar(WNombre, CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, "C:\ImpreCertificados\" & wPartida)
+                    Else
+                        .Exportar(WNombre, CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, "C:\ImpreCertificados\" & wPartida)
+                        .MergePDFs("C:\ImpreCertificados\" & wPartida & "\", WNombre)
+                        With New SaveFileDialog
+                            .InitialDirectory = "C:\"
+                            .RestoreDirectory = True
+                            .DefaultExt = "pdf"
+                            If .ShowDialog() = Windows.Forms.DialogResult.OK Then
+                                File.Copy("C:\ImpreCertificados\" & wPartida & "\" & WNombre, .FileName)
+                            End If
+                        End With
+                    End If
+
                 Case 4, 7
                     'MsgBox("Tipo: " & wTipoSalida & " - Ruta: " & WRuta & " - Nombre PDF: " & WNombrePDF & " - Nombre: " & WNombre)
-                    .Exportar(WNombre, CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, WRuta)
-                    If wTipoSalida = 7 And WTipoReporte <> 2 Then .MergePDFs(WRuta, WNombrePDF)
+
+                    If wTipoSalida = 7 And (WTipoReporte = 2 Or WTipoReporte = 1) Then Directory.Delete("C:\ImpreCertificados\" & wPartida & "\", True)
+
+                    .Exportar(WTipoReporte & "-" & WNombre, CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, WRuta)
+
+                    If wTipoSalida = 7 And WTipoReporte <> 2 Then
+
+                        If Not WRuta.EndsWith("\") Then WRuta &= "\"
+
+                        'MsgBox(WRuta & "      " & WNombrePDF)
+
+                        .MergePDFs(WRuta, WNombrePDF)
+
+                        'MsgBox("\\193.168.0.2\w\Impresion pdf\Certificados Analisis Farma Liberacion Pedidos\" & Ruta)
+
+                        '"\\193.168.0.2\w\Impresion pdf\Certificados Analisis Farma Liberacion Pedidos\" & Ruta
+
+                        If Not Directory.Exists("\\193.168.0.2\w\Impresion pdf\Certificados Analisis Farma Liberacion Pedidos\" & Ruta.Replace(Chr(34), "") & "\") Then Directory.CreateDirectory("\\193.168.0.2\w\Impresion pdf\Certificados Analisis Farma Liberacion Pedidos\" & Ruta.Replace(Chr(34), "") & "\")
+
+                        File.Copy("C:\ImpreCertificados\" & wPartida & "\" & WNombrePDF, "\\193.168.0.2\w\Impresion pdf\Certificados Analisis Farma Liberacion Pedidos\" & Ruta.Replace(Chr(34), "") & "\" & WNombrePDF, True)
+                    End If
                 Case 5
                     .Exportar(WNombre, CrystalDecisions.Shared.ExportFormatType.WordForWindows)
             End Select

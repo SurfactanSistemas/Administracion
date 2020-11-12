@@ -4356,6 +4356,7 @@ Public Class PagosVirtual
         Dim frm As New VistaPrevia
         frm.Reporte = crdoc
         frm.Reporte.SetParameterValue("EsTransferencia", 0)
+        frm.Reporte.SetParameterValue("CuitProv", XCuitProveedor)
 
         Dim WFechasTransferencias = ""
         Dim WOrdenPago As DataTable = _TraerDatosOrdenPago(txtOrdenPago.Text)
@@ -4372,6 +4373,7 @@ Public Class PagosVirtual
             frm2.Reporte = crdoc
 
             frm2.Reporte.SetParameterValue("EsTransferencia", 1)
+            frm.Reporte.SetParameterValue("CuitProv", XCuitProveedor)
 
             Conexion.EmpresaDeTrabajo = "SurfactanSa"
 
