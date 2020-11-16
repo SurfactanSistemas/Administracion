@@ -6,6 +6,19 @@ Public Class AvisoOPAProveedores
 
     Private WNoEnviados(,) As String = New String(1000, 2) {}
     Dim WIndiceNoEnviados As Integer = 0
+    Private WPorComando As Boolean = True
+    Private WBCC As String = ""
+
+    Sub New(Optional ByVal PorComando As Boolean = False)
+
+        ' Llamada necesaria para el diseñador.
+        InitializeComponent()
+
+        ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
+
+        WPorComando = PorComando
+
+    End Sub
 
     Private Sub btnCerrar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCerrar.Click
         Close()
@@ -64,6 +77,17 @@ Public Class AvisoOPAProveedores
 
     Private Sub AvisoOPAProveedores_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         btnLimpiar.PerformClick()
+
+        If WPorComando Then
+
+            WBCC = "recepcion@surfactan.com.ar;"
+
+            btnEnviar_Click(Nothing, Nothing)
+
+            Close()
+
+        End If
+
     End Sub
 
     Private Sub btnEnviar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnEnviar.Click
@@ -179,7 +203,7 @@ Public Class AvisoOPAProveedores
 
             ProgressBar1.Value = 0
 
-            If WIndiceNoEnviados > 0 Then
+            If WIndiceNoEnviados > 0 And Not WPorComando Then
                 MsgBox("Hay Proveedores a los que no se pudieron enviar el Aviso debido a que no tienen informado una Casilla de Mail a dónde enviar el mismo.", MsgBoxStyle.Information)
 
                 Dim tabla As DataTable = New DBAuxi.AvisosNoEnviadosDataTable
@@ -210,7 +234,11 @@ Public Class AvisoOPAProveedores
 
             End If
 
-            MsgBox("¡Proceso finalizado correctamente!", MsgBoxStyle.Information)
+            If Not WPorComando Then
+                MsgBox("¡Proceso finalizado correctamente!", MsgBoxStyle.Information)
+            Else
+                Close()
+            End If
 
         Catch ex As System.Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
@@ -439,7 +467,7 @@ Public Class AvisoOPAProveedores
 
                 If EsPorTransferencia Then
 
-                    WBody = "Informamos que en el día de hoy, SURFACTAN S.A. le ha realizado una transferencia"
+                    WBody = "Informamos que durante el transcurso del día de hoy, SURFACTAN S.A. le realizará una transferencia"
 
                     If wFechasTransferencias.Trim <> "" Then
 
@@ -454,7 +482,8 @@ Public Class AvisoOPAProveedores
                     End If
 
                     If PorTransferenciaYCheques Then
-                        WBody &= "." & "<br/>" & "<br/>" & "Así mismo, tiene Cheque(s) para retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir del día <strong>" & txtAPartirFecha.Text & "</strong> de <strong>Lunes a Viernes</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
+                        'WBody &= "." & "<br/>" & "<br/>" & "Así mismo, tiene Cheque(s) para retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir del día <strong>" & txtAPartirFecha.Text & "</strong> los <strong>Martes y Jueves</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
+                        WBody &= "." & "<br/>" & "<br/>" & "Así mismo, tiene Cheque(s) para retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir de la <strong>semana próxima</strong> los <strong>Martes y Jueves</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
                     Else
                         WBody &= "." & "<br/>" & "<br/>" & "Adjuntamos Orden de Pago y retenciones si correspondiesen."
                     End If
@@ -494,14 +523,14 @@ Public Class AvisoOPAProveedores
                     End If
 
                     If PorTransferenciaYCheques Then
-                        WBody &= "." & "<br/>" & "<br/>" & "Además tiene Cheque(s) para retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, de <strong>Lunes a Viernes</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
+                        WBody &= "." & "<br/>" & "<br/>" & "Además tiene Cheque(s) para retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir de la <strong>semana próxima</strong>, los <strong>Martes y Jueves</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
                     Else
                         WBody &= "." & "<br/>" & "<br/>" & "Adjuntamos Orden de Pago y retenciones si correspondiesen."
                     End If
 
                 Else
 
-                    WBody = "Informamos que se encuentra a su disposición un pago que podrá ser retirado por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir del día <strong>" & txtAPartirFecha.Text & "</strong> de <strong>Lunes a Viernes</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
+                    WBody = "Informamos que se encuentra a su disposición un pago que podrá ser retirado por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir del <strong>Lunes 02/11/2020</strong>, los <strong>Martes y Jueves</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
 
                 End If
 
@@ -526,7 +555,7 @@ Public Class AvisoOPAProveedores
                     End If
                 Next
 
-                _EnviarEmail(WMailOp, "", "Orden de Pago - SURFACTAN S.A. - ", WBody, WAdjuntos.ToArray)
+                _EnviarEmail(WMailOp, WBCC, "Orden de Pago - SURFACTAN S.A. - ", WBody, WAdjuntos.ToArray)
 
                 _MarcarOPComoEnviada(OrdenPago)
 
@@ -604,6 +633,14 @@ Public Class AvisoOPAProveedores
         Try
             Dim _Mail As MailItem = _Outlook.CreateItem(OlItemType.olMailItem)
 
+            Dim WAC As Account = Nothing
+
+            For Each a As Account In _Outlook.Session.Accounts
+                If a.DisplayName = "recepcion@surfactan.com.ar" Then
+                    WAC = a
+                End If
+            Next
+
             With _Mail
 
                 '
@@ -615,6 +652,9 @@ Public Class AvisoOPAProveedores
                 .To = _to
                 .BCC = _bcc
                 .Subject = _subject
+
+                If WAC IsNot Nothing Then .SendUsingAccount = WAC
+
                 '.Body = _body
                 Dim WFirmaAct As String = ""
                 'WFirmaAct &= "<br/>" & "<h2><u><strong>CRONOGRAMA DE PRÓXIMAS ACTIVIDADES</strong></u></h2>"

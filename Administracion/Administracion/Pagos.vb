@@ -2579,10 +2579,27 @@ Public Class Pagos
 
         txtOrdenPago.Text = WOrdPago
 
+        If txtProveedor.Text <> "" Then
+            Dim WEmailOp_ As DataRow = GetSingle("SELECT MailOp FROM Proveedor WHERE Proveedor = '" & txtProveedor.Text & "'")
+
+            Dim Wpasa As Boolean = False
+
+            If WEmailOp_ IsNot Nothing Then
+                Wpasa = Trim(OrDefault(WEmailOp_(0), "")) <> ""
+            End If
+
+            If Not Wpasa Then
+                MsgBox("El Proveedor (" & txtProveedor.Text & ")  " & txtRazonSocial.Text.ToUpper.Trim & ", no tiene cargado un mail donde enviar el Aviso de OP.", MsgBoxStyle.Information)
+            End If
+
+        End If
+
         txtOrdenPago_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
 
         ' Imprimimos los comprobantes pertinentes.
         btnImprimir.PerformClick()
+
+        'btnEnviarAviso_Click(Nothing, Nothing)
 
         ' Limpiamos pantalla.
         btnLimpiar.PerformClick()
@@ -7227,7 +7244,7 @@ Public Class Pagos
 
                 If EsPorTransferencia Then
 
-                    WBody = "Informamos que en el día de la fecha, SURFACTAN S.A. le ha realizado una transferencia"
+                    WBody = "Informamos que durante el transcurso del día de hoy, SURFACTAN S.A. le realizará una transferencia"
 
                     If wFechasTransferencias.Trim <> "" Then
 
@@ -7276,14 +7293,14 @@ Public Class Pagos
                     End If
 
                     If PorTransferenciaYCheques Then
-                        WBody &= "." & "<br/>" & "<br/>" & "Además tiene Cheque(s) para retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, de <strong>Lunes a Viernes</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
+                        WBody &= "." & "<br/>" & "<br/>" & "Además tiene Cheque(s) para retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir de la <strong>semana próxima</strong>, los <strong>Martes y Juevess</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
                     Else
                         WBody &= "." & "<br/>" & "<br/>" & "Adjuntamos Orden de Pago y retenciones si correspondiesen."
                     End If
 
                 Else
 
-                    WBody = "Informamos que se encuentra a su disposición un pago que podrá ser retirado por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, de <strong>Lunes a Viernes</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
+                    WBody = "Informamos que se encuentra a su disposición un pago que podrá ser retirado por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir del Lunes 02/11/2020, los <strong>Martes y Jueves</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
 
                 End If
 
@@ -7308,7 +7325,7 @@ Public Class Pagos
                     End If
                 Next
 
-                _EnviarEmail(WMailOp, "", "Orden de Pago - SURFACTAN S.A. - ", WBody, WAdjuntos.ToArray)
+                _EnviarEmail(WMailOp, "juanfs@surfactan.com.ar;mlarias@surfactan.com.ar", "Orden de Pago - SURFACTAN S.A. - ", WBody, WAdjuntos.ToArray)
 
                 _MarcarOPComoEnviada(OrdenPago)
 

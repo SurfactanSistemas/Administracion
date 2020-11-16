@@ -246,6 +246,8 @@ Public Class VistaPrevia
 
                 CopyPages(one, outPdf)
 
+                'one.Close()
+
             End Using
         Next
 

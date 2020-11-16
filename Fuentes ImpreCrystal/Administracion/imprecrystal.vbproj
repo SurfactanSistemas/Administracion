@@ -468,6 +468,12 @@
       <DependentUpon>listaespepdfinglesnet.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\listaespepdfnet.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>listaespepdfnet.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\orden110net.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -743,6 +749,10 @@
     <EmbeddedResource Include="Reportes\listaespepdfinglesnet.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>listaespepdfinglesnet.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\listaespepdfnet.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>listaespepdfnet.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\orden110net.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
