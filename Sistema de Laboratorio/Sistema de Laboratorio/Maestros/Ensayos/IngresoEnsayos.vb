@@ -6,7 +6,7 @@ Public Class IngresoEnsayos : Implements IIngresoClaveSeguridad
     Private WAutorizado As Boolean = False
     Private WProceso As Byte = 0
 
-    Sub New(Optional ByVal Codigo As Object = 0)
+    Sub New(Optional ByVal Codigo As Object = 0, Optional ByVal Permiso As Boolean = False)
 
         ' This call is required by the designer.
         InitializeComponent()
@@ -44,6 +44,14 @@ Public Class IngresoEnsayos : Implements IIngresoClaveSeguridad
         txtCodigo.ReadOnly = True
 
         txtDescripcion.Focus()
+
+        If Permiso = False Then
+            For Each c As TextBox In Me.GroupBox1.Controls.OfType(Of TextBox)()
+                c.ReadOnly = True
+            Next
+            btnGrabar.Enabled = False
+            btnEliminar.Enabled = False
+        End If
 
     End Sub
 

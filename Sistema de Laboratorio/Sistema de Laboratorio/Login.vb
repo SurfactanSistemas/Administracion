@@ -56,7 +56,7 @@ Public Class Login
             Conexion.EmpresaDeTrabajo = WBaseDatos
             Util.Clases.Conexion.EmpresaDeTrabajo = WBaseDatos
 
-            Dim WOperador As DataRow = GetSingle("SELECT Operador, Descripcion FROM Operador WHERE UPPER(Clave) = '" & txtClave.Text & "'", WBaseDatos)
+            Dim WOperador As DataRow = GetSingle("SELECT Operador, Descripcion, Perfil FROM Operador WHERE UPPER(Clave) = '" & txtClave.Text & "'", WBaseDatos)
 
             If IsNothing(WOperador) Then Throw New Exception("Clave Errónea")
 
@@ -65,6 +65,7 @@ Public Class Login
                 Operador.Codigo = OrDefault(.Item("Operador"), 0)
                 Operador.Clave = txtClave.Text.Trim
                 Operador.Descripcion = OrDefault(.Item("Descripcion"), "")
+                Operador.Perfil = OrDefault(.Item("Perfil"), "")
             End With
 
             Select Case WOpcion
@@ -103,7 +104,7 @@ Public Class Login
             Conexion.EmpresaDeTrabajo = WBaseDatos
             Util.Clases.Conexion.EmpresaDeTrabajo = WBaseDatos
 
-            Dim WOperador As DataRow = GetSingle("SELECT Operador, Descripcion FROM Operador WHERE UPPER(Clave) = '" & txtClave.Text & "'", WBaseDatos)
+            Dim WOperador As DataRow = GetSingle("SELECT Operador, Descripcion, Perfil FROM Operador WHERE UPPER(Clave) = '" & txtClave.Text & "'", WBaseDatos)
 
             If IsNothing(WOperador) Then Throw New Exception("Clave Errónea")
 
@@ -112,6 +113,7 @@ Public Class Login
                 Operador.Codigo = OrDefault(.Item("Operador"), 0)
                 Operador.Clave = txtClave.Text.Trim
                 Operador.Descripcion = OrDefault(.Item("Descripcion"), "")
+                Operador.Perfil = OrDefault(.Item("Perfil"), "")
             End With
 
             Dim frm As New MenuPrincipal()

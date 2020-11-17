@@ -1,5 +1,19 @@
 ﻿Public Class IngresoFormulasEnsayo : Implements IGrabadoDeFormula
+    Dim PermisoGrabar As Boolean
+    Sub New(ByVal ID As String)
 
+        ' Llamada necesaria para el diseñador.
+        InitializeComponent()
+
+        ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
+
+        Dim SQLCnslt As String = "SELECT Escritura FROM PermisosPerfiles WHERE ID = '" & ID & "' AND Sistema = 'LABORATORIO' AND Perfil = '" & Operador.Perfil & "' ORDER BY ID"
+        Dim Row As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+        If Row IsNot Nothing Then
+            PermisoGrabar = Row.Item("Escritura")
+        End If
+
+    End Sub
     Sub _GrabarFormula(Formula As String, ParametrosFormula As String(), Descripcion As String, Optional Renglon As Integer = 0) Implements IGrabadoDeFormula._GrabarFormula
 
     End Sub

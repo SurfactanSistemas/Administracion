@@ -89,7 +89,7 @@
     End Sub
 
     Private Sub btnAyudaFormula_Click(sender As Object, e As EventArgs) Handles btnAyudaFormula.Click
-        With New IngresoFormulasEnsayo
+        With New IngresoFormulasEnsayo("00")
             .Show(Me)
         End With
     End Sub
