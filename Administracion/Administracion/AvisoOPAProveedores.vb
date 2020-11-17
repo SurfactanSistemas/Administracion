@@ -180,6 +180,7 @@ Public Class AvisoOPAProveedores
                             WProveedor = OrDefault(.Item("Proveedor"), "")
                             Dim WDescProveedor = OrDefault(.Item("Nombre"), "")
                             Dim WFechaOP As String = OrDefault(.Item("Fecha"), "")
+                            Dim WTipoOrd As Integer = Val(OrDefault(.Item("TipoOrd"), ""))
 
                             If Trim(WProveedor) <> "" Then
 
@@ -187,7 +188,7 @@ Public Class AvisoOPAProveedores
 
                                 WFechasTransferencias = WFechasTransferencias.TrimEnd(",")
 
-                                _EnviarAvisoOPDisponible(WProveedor, WDescProveedor, WOrden, EsPorTransferencia, WFechasTransferencias, PorTransferenciaYCheques, HayECheques:=WHayECheques, FechasECheques:=WFechasECheques)
+                                _EnviarAvisoOPDisponible(WProveedor, WDescProveedor, WOrden, EsPorTransferencia, WFechasTransferencias, PorTransferenciaYCheques, HayECheques:=WHayECheques, FechasECheques:=WFechasECheques, TipoOrd:=WTipoOrd)
 
                             End If
 
@@ -366,7 +367,7 @@ Public Class AvisoOPAProveedores
 
             Using cm As New SqlCommand()
                 cm.Connection = cn
-                cm.CommandText = "SELECT p.Proveedor, p.Fecha, pr.Nombre, p.Tipo2, p.Importe2, p.Numero2, p.Importe, p.Cuenta, p.Fecha2 FROM Pagos p LEFT OUTER JOIN Proveedor pr ON pr.Proveedor = p.Proveedor WHERE p.Orden = '" & OrdenPago & "' and p.TipoReg IN ('02', '2') Order by p.Tipo2"
+                cm.CommandText = "SELECT p.Proveedor, p.Fecha, pr.Nombre, p.Tipo2, p.Importe2, p.Numero2, p.Importe, p.Cuenta, p.Fecha2, p.TipoOrd FROM Pagos p LEFT OUTER JOIN Proveedor pr ON pr.Proveedor = p.Proveedor WHERE p.Orden = '" & OrdenPago & "' and p.TipoReg IN ('02', '2') Order by p.Tipo2"
 
                 Using dr As SqlDataReader = cm.ExecuteReader
 
@@ -399,7 +400,7 @@ Public Class AvisoOPAProveedores
         End If
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT DISTINCT p.Proveedor, p.Orden, p.TipoOrd FROM Pagos p WHERE p.Proveedor <> '' And p.TipoOrd IN ('1', '3', '4', '5') And ISNULL(AvisoMailOp, '0') = '0' And " & WFiltro & " ")
+        Dim cm As SqlCommand = New SqlCommand("SELECT DISTINCT p.Proveedor, p.Orden, p.TipoOrd FROM Pagos p WHERE p.Proveedor <> '' And p.TipoOrd IN ('1', '2', '3', '4', '5') And ISNULL(AvisoMailOp, '0') = '0' And " & WFiltro & " ")
         Dim dr As SqlDataReader
 
         Try
@@ -428,7 +429,7 @@ Public Class AvisoOPAProveedores
         Return WTabla
     End Function
 
-    Private Sub _EnviarAvisoOPDisponible(ByVal Proveedor As String, ByVal wDescProveedor As String, Optional ByVal OrdenPago As String = "", Optional ByVal EsPorTransferencia As Boolean = False, Optional ByVal wFechasTransferencias As String = "", Optional ByVal PorTransferenciaYCheques As Boolean = False, Optional ByVal HayECheques As Boolean = False, Optional ByVal FechasECheques As String = "")
+    Private Sub _EnviarAvisoOPDisponible(ByVal Proveedor As String, ByVal wDescProveedor As String, Optional ByVal OrdenPago As String = "", Optional ByVal EsPorTransferencia As Boolean = False, Optional ByVal wFechasTransferencias As String = "", Optional ByVal PorTransferenciaYCheques As Boolean = False, Optional ByVal HayECheques As Boolean = False, Optional ByVal FechasECheques As String = "", Optional ByVal TipoOrd As Integer = 0)
 
         If Proveedor.Trim = "" Then Exit Sub
         If EsPorTransferencia And Trim(OrdenPago) = "" Then Exit Sub
@@ -555,7 +556,18 @@ Public Class AvisoOPAProveedores
                     End If
                 Next
 
-                _EnviarEmail(WMailOp, WBCC, "Orden de Pago - SURFACTAN S.A. - ", WBody, WAdjuntos.ToArray)
+                Dim WAsunto As String = "ORDEN DE PAGO - SURFACTAN S.A. - "
+
+                If TipoOrd = 2 Then ' Si es Anticipo
+                    WBCC &= "juanfs@surfactan.com.ar;mlarias@surfactan.com.ar;"
+                    WAsunto = "ANTICIPO DE PAGO - SURFACTAN S.A. - "
+                End If
+
+                _EnviarEmail(WMailOp, WBCC, WAsunto, WBody, WAdjuntos.ToArray)
+
+                If WPorComando Then
+                    WBCC = "recepcion@surfactan.com.ar;"
+                End If
 
                 _MarcarOPComoEnviada(OrdenPago)
 
