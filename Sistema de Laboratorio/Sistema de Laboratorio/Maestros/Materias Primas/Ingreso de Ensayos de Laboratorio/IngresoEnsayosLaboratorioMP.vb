@@ -364,16 +364,18 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad, IA
 								End If
 							Else
 
-								If RowEspecifacionesIII.Item("Ensayo" & i) <> 0 Then
+                                If RowEspecifacionesIII IsNot Nothing Then
+                                    If RowEspecifacionesIII.Item("Ensayo" & i) <> 0 Then
 
-									WEnsayo = Trim(RowEspecifacionesIII.Item("Ensayo" & i))
+                                        WEnsayo = Trim(RowEspecifacionesIII.Item("Ensayo" & i))
 
-									WEspecificacion = Trim(RowEspecifacionesIII.Item("Valor" & i))
+                                        WEspecificacion = Trim(RowEspecifacionesIII.Item("Valor" & i))
 
-									WResultado = Trim(row.Item("Valor" & i))
-									dgvEnsayos.Rows.Add(WEnsayo, WEspecificacion, "", "", "", WResultado)
+                                        WResultado = Trim(row.Item("Valor" & i))
+                                        dgvEnsayos.Rows.Add(WEnsayo, WEspecificacion, "", "", "", WResultado)
 
-								End If
+                                    End If
+                                End If
 
 							End If
 
