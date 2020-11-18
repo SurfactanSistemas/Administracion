@@ -56,7 +56,7 @@ Public Class Login
             Conexion.EmpresaDeTrabajo = WBaseDatos
             Util.Clases.Conexion.EmpresaDeTrabajo = WBaseDatos
 
-            Dim WOperador As DataRow = GetSingle("SELECT Operador, Descripcion, Perfil FROM Operador WHERE UPPER(Clave) = '" & txtClave.Text & "'", WBaseDatos)
+            Dim WOperador As DataRow = GetSingle("SELECT Operador, Descripcion, Perfil FROM Operador WHERE UPPER(Clave) = '" & txtClave.Text & "'", "SurfactanSa")
 
             If IsNothing(WOperador) Then Throw New Exception("Clave Errónea")
 
@@ -104,7 +104,7 @@ Public Class Login
             Conexion.EmpresaDeTrabajo = WBaseDatos
             Util.Clases.Conexion.EmpresaDeTrabajo = WBaseDatos
 
-            Dim WOperador As DataRow = GetSingle("SELECT Operador, Descripcion, Perfil FROM Operador WHERE UPPER(Clave) = '" & txtClave.Text & "'", WBaseDatos)
+            Dim WOperador As DataRow = GetSingle("SELECT Operador, Descripcion, Perfil FROM Operador WHERE UPPER(Clave) = '" & txtClave.Text & "'", "SurfactanSa")
 
             If IsNothing(WOperador) Then Throw New Exception("Clave Errónea")
 

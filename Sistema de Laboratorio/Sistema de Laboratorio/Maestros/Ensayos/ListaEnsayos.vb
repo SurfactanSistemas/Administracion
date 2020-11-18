@@ -12,7 +12,7 @@ Public Class ListaEnsayos : Implements IActualizarPorNuevoIngreso, IListarReport
 
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
 
-        Dim SQLCnslt As String = "SELECT Escritura FROM PermisosPerfiles WHERE ID = '" & ID & "' AND Sistema = 'LABORATORIO' AND Perfil = '" & Operador.Perfil & "' ORDER BY ID"
+        Dim SQLCnslt As String = "SELECT Escritura FROM PermisosPerfiles WHERE ID = '" & ID & "' AND Sistema = 'LABORATORIO' AND Perfil = '" & Operador.Perfil & "' AND Planta = '" & Operador.Base & "' ORDER BY ID"
         Dim Row As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
         If Row IsNot Nothing Then
             PermisoGrabar = Row.Item("Escritura")

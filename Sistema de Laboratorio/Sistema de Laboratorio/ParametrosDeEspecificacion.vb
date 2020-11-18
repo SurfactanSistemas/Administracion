@@ -7,7 +7,7 @@ Public Class ParametrosDeEspecificacion
 
     Dim WparametrosFormula(11) As String
 
-    Sub New(Optional ByVal Fila As Integer = 0)
+    Sub New(Optional ByVal Fila As Integer = 0, Optional ByVal Permiso As Boolean = False)
 
 
         ' Llamada necesaria para el diseñador.
@@ -19,6 +19,16 @@ Public Class ParametrosDeEspecificacion
 
         If Renglon > 0 Then _PoblarGrilla(Renglon)
 
+        If Permiso = False Then
+            For Each c As TextBox In Me.gbVariables.Controls.OfType(Of TextBox)()
+                c.ReadOnly = True
+            Next
+            For Each c As TextBox In Me.GroupBox2.Controls.OfType(Of TextBox)()
+                c.ReadOnly = True
+            Next
+            btnAceptar.Enabled = False
+            btnVerificar.Enabled = False
+        End If
 
     End Sub
 

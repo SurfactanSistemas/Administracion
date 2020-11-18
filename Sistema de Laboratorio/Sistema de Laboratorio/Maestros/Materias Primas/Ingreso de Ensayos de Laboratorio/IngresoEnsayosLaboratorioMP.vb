@@ -9,6 +9,8 @@ Imports Laboratorio.Entidades
 
 Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad, IAyudaPruebasAnteriores
 
+
+
     Private WNotas As New List(Of String)
     Private WEsPorDesvio As Boolean = False
     Private WEsPorRechazo As Boolean = False
@@ -27,6 +29,21 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad, IA
 
 	Private WEnvase, WCert1, WCert2, WEstado1, WEstado2, WVenc, WFechaElab, WTipoVenc, WCantidadLaudo, WProcedencia, WNroDespacho As String
 
+    Dim PermisoGrabar As Boolean
+    Sub New(ByVal ID As String)
+
+        ' Llamada necesaria para el diseñador.
+        InitializeComponent()
+
+        ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
+        Dim SQLCnslt As String = "SELECT Escritura FROM PermisosPerfiles WHERE ID = '" & ID & "' AND Sistema = 'LABORATORIO' AND Perfil = '" & Operador.Perfil & "' AND Planta = '" & Operador.Base & "' ORDER BY ID"
+        Dim Row As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+        If Row IsNot Nothing Then
+            PermisoGrabar = Row.Item("Escritura")
+        End If
+
+
+    End Sub
 	Private Sub btnCerrar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCerrar.Click
 		Close()
 	End Sub
@@ -64,7 +81,14 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad, IA
 
 		btnGrabar.Text = "GRABAR"
 
-		WActualiza = False
+        WActualiza = False
+
+        If PermisoGrabar = False Then
+
+            btnGrabar.Enabled = False
+
+        End If
+
 	End Sub
 
 	Private Sub IngresoEnsayosIntermediosPT_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load

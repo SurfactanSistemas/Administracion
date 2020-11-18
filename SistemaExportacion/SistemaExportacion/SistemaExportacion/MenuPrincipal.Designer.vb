@@ -32,6 +32,16 @@ Partial Class MenuPrincipal
         Me.Label2 = New System.Windows.Forms.Label()
         Me.LayoutCuerpoPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.dgvPrincipal = New System.Windows.Forms.DataGridView()
+        Me.NroProforma = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Cliente = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Razon = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Pais = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Total = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FechaLimite = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PackingList = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PackingListImg = New System.Windows.Forms.DataGridViewImageColumn()
+        Me.Entregado = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.btnAperturaArchivos = New System.Windows.Forms.Button()
@@ -47,16 +57,6 @@ Partial Class MenuPrincipal
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtFiltrarPor = New System.Windows.Forms.TextBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.NroProforma = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Cliente = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Razon = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Pais = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Total = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FechaLimite = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PackingList = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PackingListImg = New System.Windows.Forms.DataGridViewImageColumn()
-        Me.Entregado = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutCabecera.SuspendLayout()
         Me.LayoutCuerpoPrincipal.SuspendLayout()
@@ -161,6 +161,86 @@ Partial Class MenuPrincipal
         Me.dgvPrincipal.Size = New System.Drawing.Size(824, 348)
         Me.dgvPrincipal.TabIndex = 0
         '
+        'NroProforma
+        '
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.NroProforma.DefaultCellStyle = DataGridViewCellStyle1
+        Me.NroProforma.HeaderText = "Nro Proforma"
+        Me.NroProforma.MaxInputLength = 6
+        Me.NroProforma.Name = "NroProforma"
+        Me.NroProforma.ReadOnly = True
+        '
+        'Fecha
+        '
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle2
+        Me.Fecha.HeaderText = "Fecha"
+        Me.Fecha.MaxInputLength = 10
+        Me.Fecha.Name = "Fecha"
+        Me.Fecha.ReadOnly = True
+        '
+        'Cliente
+        '
+        Me.Cliente.HeaderText = "Cliente"
+        Me.Cliente.MaxInputLength = 6
+        Me.Cliente.Name = "Cliente"
+        Me.Cliente.ReadOnly = True
+        '
+        'Razon
+        '
+        Me.Razon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Razon.HeaderText = "Razon Social"
+        Me.Razon.Name = "Razon"
+        Me.Razon.ReadOnly = True
+        '
+        'Pais
+        '
+        Me.Pais.HeaderText = "Pais"
+        Me.Pais.Name = "Pais"
+        Me.Pais.ReadOnly = True
+        '
+        'Total
+        '
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Total.DefaultCellStyle = DataGridViewCellStyle3
+        Me.Total.HeaderText = "Monto Total"
+        Me.Total.Name = "Total"
+        Me.Total.ReadOnly = True
+        '
+        'FechaLimite
+        '
+        Me.FechaLimite.HeaderText = "FechaLimite"
+        Me.FechaLimite.MaxInputLength = 8
+        Me.FechaLimite.Name = "FechaLimite"
+        Me.FechaLimite.ReadOnly = True
+        Me.FechaLimite.Visible = False
+        '
+        'PackingList
+        '
+        Me.PackingList.HeaderText = "PackingList"
+        Me.PackingList.Name = "PackingList"
+        Me.PackingList.ReadOnly = True
+        Me.PackingList.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.PackingList.Visible = False
+        '
+        'PackingListImg
+        '
+        Me.PackingListImg.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.PackingListImg.HeaderText = "Packing List"
+        Me.PackingListImg.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom
+        Me.PackingListImg.Name = "PackingListImg"
+        Me.PackingListImg.ReadOnly = True
+        Me.PackingListImg.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.PackingListImg.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.PackingListImg.Width = 90
+        '
+        'Entregado
+        '
+        Me.Entregado.HeaderText = "Entregado"
+        Me.Entregado.Name = "Entregado"
+        Me.Entregado.ReadOnly = True
+        Me.Entregado.Visible = False
+        '
         'Panel1
         '
         Me.Panel1.Controls.Add(Me.Button1)
@@ -179,7 +259,7 @@ Partial Class MenuPrincipal
         Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.Button1.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Location = New System.Drawing.Point(5, 219)
+        Me.Button1.Location = New System.Drawing.Point(5, 150)
         Me.Button1.Margin = New System.Windows.Forms.Padding(10, 10, 0, 10)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(74, 56)
@@ -193,7 +273,7 @@ Partial Class MenuPrincipal
         Me.btnAperturaArchivos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.btnAperturaArchivos.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnAperturaArchivos.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAperturaArchivos.Location = New System.Drawing.Point(5, 154)
+        Me.btnAperturaArchivos.Location = New System.Drawing.Point(5, 87)
         Me.btnAperturaArchivos.Margin = New System.Windows.Forms.Padding(10, 10, 0, 10)
         Me.btnAperturaArchivos.Name = "btnAperturaArchivos"
         Me.btnAperturaArchivos.Size = New System.Drawing.Size(74, 56)
@@ -207,7 +287,7 @@ Partial Class MenuPrincipal
         Me.btnHistorialProforma.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.btnHistorialProforma.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnHistorialProforma.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnHistorialProforma.Location = New System.Drawing.Point(5, 89)
+        Me.btnHistorialProforma.Location = New System.Drawing.Point(5, 212)
         Me.btnHistorialProforma.Margin = New System.Windows.Forms.Padding(10, 10, 0, 10)
         Me.btnHistorialProforma.Name = "btnHistorialProforma"
         Me.btnHistorialProforma.Size = New System.Drawing.Size(74, 56)
@@ -215,6 +295,7 @@ Partial Class MenuPrincipal
         Me.btnHistorialProforma.Text = "Historial de Proforma"
         Me.ToolTip1.SetToolTip(Me.btnHistorialProforma, "Abrir Formulario para Alta / Consulta de Proforma")
         Me.btnHistorialProforma.UseVisualStyleBackColor = True
+        Me.btnHistorialProforma.Visible = False
         '
         'btnNuevaProforma
         '
@@ -339,86 +420,6 @@ Partial Class MenuPrincipal
         Me.txtFiltrarPor.Name = "txtFiltrarPor"
         Me.txtFiltrarPor.Size = New System.Drawing.Size(164, 20)
         Me.txtFiltrarPor.TabIndex = 0
-        '
-        'NroProforma
-        '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.NroProforma.DefaultCellStyle = DataGridViewCellStyle1
-        Me.NroProforma.HeaderText = "Nro Proforma"
-        Me.NroProforma.MaxInputLength = 6
-        Me.NroProforma.Name = "NroProforma"
-        Me.NroProforma.ReadOnly = True
-        '
-        'Fecha
-        '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle2
-        Me.Fecha.HeaderText = "Fecha"
-        Me.Fecha.MaxInputLength = 10
-        Me.Fecha.Name = "Fecha"
-        Me.Fecha.ReadOnly = True
-        '
-        'Cliente
-        '
-        Me.Cliente.HeaderText = "Cliente"
-        Me.Cliente.MaxInputLength = 6
-        Me.Cliente.Name = "Cliente"
-        Me.Cliente.ReadOnly = True
-        '
-        'Razon
-        '
-        Me.Razon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.Razon.HeaderText = "Razon Social"
-        Me.Razon.Name = "Razon"
-        Me.Razon.ReadOnly = True
-        '
-        'Pais
-        '
-        Me.Pais.HeaderText = "Pais"
-        Me.Pais.Name = "Pais"
-        Me.Pais.ReadOnly = True
-        '
-        'Total
-        '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Total.DefaultCellStyle = DataGridViewCellStyle3
-        Me.Total.HeaderText = "Monto Total"
-        Me.Total.Name = "Total"
-        Me.Total.ReadOnly = True
-        '
-        'FechaLimite
-        '
-        Me.FechaLimite.HeaderText = "FechaLimite"
-        Me.FechaLimite.MaxInputLength = 8
-        Me.FechaLimite.Name = "FechaLimite"
-        Me.FechaLimite.ReadOnly = True
-        Me.FechaLimite.Visible = False
-        '
-        'PackingList
-        '
-        Me.PackingList.HeaderText = "PackingList"
-        Me.PackingList.Name = "PackingList"
-        Me.PackingList.ReadOnly = True
-        Me.PackingList.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.PackingList.Visible = False
-        '
-        'PackingListImg
-        '
-        Me.PackingListImg.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.PackingListImg.HeaderText = "Packing List"
-        Me.PackingListImg.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom
-        Me.PackingListImg.Name = "PackingListImg"
-        Me.PackingListImg.ReadOnly = True
-        Me.PackingListImg.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.PackingListImg.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.PackingListImg.Width = 90
-        '
-        'Entregado
-        '
-        Me.Entregado.HeaderText = "Entregado"
-        Me.Entregado.Name = "Entregado"
-        Me.Entregado.ReadOnly = True
-        Me.Entregado.Visible = False
         '
         'MenuPrincipal
         '

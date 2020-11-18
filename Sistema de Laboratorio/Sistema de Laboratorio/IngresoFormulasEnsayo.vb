@@ -7,10 +7,14 @@
 
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
 
-        Dim SQLCnslt As String = "SELECT Escritura FROM PermisosPerfiles WHERE ID = '" & ID & "' AND Sistema = 'LABORATORIO' AND Perfil = '" & Operador.Perfil & "' ORDER BY ID"
+        Dim SQLCnslt As String = "SELECT Escritura FROM PermisosPerfiles WHERE ID = '" & ID & "' AND Sistema = 'LABORATORIO' AND Perfil = '" & Operador.Perfil & "' AND Planta = '" & Operador.Base & "' ORDER BY ID"
         Dim Row As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
         If Row IsNot Nothing Then
             PermisoGrabar = Row.Item("Escritura")
+        End If
+
+        If PermisoGrabar = False Then
+            btnAgregar.Enabled = False
         End If
 
     End Sub
@@ -122,7 +126,7 @@
 
     Private Sub btnAgregar_Click(sender As Object, e As EventArgs) Handles btnAgregar.Click
      
-        With New ParametrosDeEspecificacion
+        With New ParametrosDeEspecificacion(0, PermisoGrabar)
             .ShowDialog(Me)
         End With
 
@@ -163,7 +167,7 @@
         End If
 
         If e.ColumnIndex <> -1 Then
-            With New ParametrosDeEspecificacion(DGV_Formulas.CurrentRow.Cells("Renglon").Value)
+            With New ParametrosDeEspecificacion(DGV_Formulas.CurrentRow.Cells("Renglon").Value, PermisoGrabar)
                 .Show(Me)
             End With
         End If

@@ -14,6 +14,21 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
     Private WTipoProceso As TipoProcesosIngEspecif = Nothing
     Private IDOperadorGrabacion As Short = 0
 
+    Dim PermisoGrabar As Boolean
+    Sub New(ByVal ID As String)
+
+        ' Llamada necesaria para el diseñador.
+        InitializeComponent()
+
+        ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
+        Dim SQLCnslt As String = "SELECT Escritura FROM PermisosPerfiles WHERE ID = '" & ID & "' AND Sistema = 'LABORATORIO' AND Perfil = '" & Operador.Perfil & "' AND Planta = '" & Operador.Base & "' ORDER BY ID"
+        Dim Row As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+        If Row IsNot Nothing Then
+            PermisoGrabar = Row.Item("Escritura")
+        End If
+    End Sub
+
+
     Private Sub btnLimpiar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLimpiar.Click
         For Each control As Control In {txtControlCambios, txtDescTerminado, txtCodigo, txtCondicionMuestreo, txtDescIngles, txtCas, txtFecha, txtOperador, txtVersion}
             control.Text = ""

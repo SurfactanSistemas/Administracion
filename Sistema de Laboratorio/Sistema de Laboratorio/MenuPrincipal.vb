@@ -296,13 +296,17 @@
     End Sub
 
     Private Sub EspecificacionesToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles EspecificacionesToolStripMenuItem1_05.Click
-        With New IngresoEspecificacionesMP
+        Dim itemStrip As ToolStripMenuItem = TryCast(sender, ToolStripMenuItem)
+        Dim id As String = Microsoft.VisualBasic.Right(itemStrip.Name, 2)
+        With New IngresoEspecificacionesMP(id)
             .Show(Me)
         End With
     End Sub
 
     Private Sub IngresoDeEnsayosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles IngresoDeEnsayosToolStripMenuItem_04.Click
-        With New IngresoEnsayosLaboratorioMP
+        Dim itemStrip As ToolStripMenuItem = TryCast(sender, ToolStripMenuItem)
+        Dim id As String = Microsoft.VisualBasic.Right(itemStrip.Name, 2)
+        With New IngresoEnsayosLaboratorioMP(id)
             .Show(Me)
         End With
     End Sub
