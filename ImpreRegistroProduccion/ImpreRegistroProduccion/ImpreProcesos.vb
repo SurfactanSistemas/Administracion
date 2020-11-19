@@ -158,7 +158,7 @@ Public Class ImpreProcesos
 
             End If
 
-            '_EnviarAvisoPedidoAutorizado("409990")
+            '_EnviarAvisoPedidoAutorizado("415981")
 
             '_GenerarInformeHojaRuta("17899", "C:\TempHojaRuta")
 
@@ -251,12 +251,29 @@ Public Class ImpreProcesos
                     WArchivos.AddRange(wcer)
 
                     If wcer.Count = 0 Then
-                        MsgBox("No se encontró el CoA correspondiente a la partida " & WPartida, MsgBoxStyle.Exclamation)
+
+                        If esProductoReventa Then
+
+                            WNombrePdf = "*" & " " & WPartida & ".pdf"
+
+                            wcer = Directory.GetFiles(WRutaCertificado, WNombrePdf, SearchOption.TopDirectoryOnly)
+
+                            WArchivos.AddRange(wcer)
+
+                            If wcer.Count = 0 Then
+                                MsgBox("No se encontró el CoA correspondiente a la partida " & WPartida, MsgBoxStyle.Exclamation)
+                            End If
+
+                        Else
+                            MsgBox("No se encontró el CoA correspondiente a la partida " & WPartida, MsgBoxStyle.Exclamation)
+                        End If
+
                         Exit Sub
+
                     End If
 
                 Else
-                    MsgBox("No se encontró el CoA correspondiente a la partida " & WPartida, MsgBoxStyle.Exclamation)
+                    MsgBox("No se encontra la carpeta con el CoA correspondiente a la partida " & WPartida, MsgBoxStyle.Exclamation)
                     Exit Sub
                 End If
 

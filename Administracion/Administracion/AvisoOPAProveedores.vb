@@ -533,6 +533,10 @@ Public Class AvisoOPAProveedores
 
                     WBody = "Informamos que se encuentra a su disposición un pago que podrá ser retirado por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir de la <strong>semana próxima</strong>, los <strong>Martes y Jueves</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
 
+                    If TipoOrd = 2 Then ' Si es anticipo.
+                        WMailOp = "juanfs@surfactan.com.ar;mlarias@surfactan.com.ar;"
+                    End If
+
                 End If
 
                 If Trim(wDescProveedor) <> "" Then
@@ -559,15 +563,15 @@ Public Class AvisoOPAProveedores
                 Dim WAsunto As String = "ORDEN DE PAGO - SURFACTAN S.A. - "
 
                 If TipoOrd = 2 Then ' Si es Anticipo
-                    WBCC &= "juanfs@surfactan.com.ar;mlarias@surfactan.com.ar;"
+                    'WBCC &= "juanfs@surfactan.com.ar;mlarias@surfactan.com.ar;"
                     WAsunto = "ANTICIPO DE PAGO - SURFACTAN S.A. - "
                 End If
 
                 _EnviarEmail(WMailOp, WBCC, WAsunto, WBody, WAdjuntos.ToArray)
 
-                If WPorComando Then
-                    WBCC = "recepcion@surfactan.com.ar;"
-                End If
+                'If WPorComando Then
+                '    WBCC = "recepcion@surfactan.com.ar;"
+                'End If
 
                 _MarcarOPComoEnviada(OrdenPago)
 
