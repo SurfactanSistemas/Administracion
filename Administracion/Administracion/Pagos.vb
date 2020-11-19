@@ -4024,12 +4024,13 @@ Public Class Pagos
         WRenglon = 0
         ZZTotal = 0
         XCantidad = 0
+        Dim XCBU As String = ""
 
         SQLConnector.conexionSql(cn, cm)
 
         ' Sacamos el resto de informacion del proveedor.
         Try
-            cm.CommandText = "SELECT Cuit, Nombre FROM Proveedor WHERE Proveedor = '" & Trim(txtProveedor.Text) & "'"
+            cm.CommandText = "SELECT Cuit, Nombre, Cbu FROM Proveedor WHERE Proveedor = '" & Trim(txtProveedor.Text) & "'"
             dr = cm.ExecuteReader()
 
             If dr.HasRows Then
@@ -4037,6 +4038,7 @@ Public Class Pagos
                 dr.Read()
                 XRazon = dr.Item("Nombre")
                 XCuitProveedor = dr.Item("Cuit")
+                XCBU = Trim(OrDefault(dr.Item("Cbu"), ""))
 
             End If
 
@@ -4321,6 +4323,7 @@ Public Class Pagos
         frm.Reporte = crdoc
         frm.Reporte.SetParameterValue("EsTransferencia", 0)
         frm.Reporte.SetParameterValue("CuitProv", XCuitProveedor)
+        frm.Reporte.SetParameterValue("CbuProv", XCBU)
 
         Dim WFechasTransferencias = ""
         Dim WFechasECheques As String = ""
