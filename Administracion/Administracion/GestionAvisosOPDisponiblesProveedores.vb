@@ -13,6 +13,7 @@ Public Class GestionAvisosOPDisponiblesProveedores
 
     Private Sub GestionAvisosOPDisponiblesProveedores_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         btnLimpiar_Click(Nothing, Nothing)
+        If _EsPellital() Then Label2.Text = "PELLITAL S.A."
     End Sub
 
     Private Sub GestionAvisosOPDisponiblesProveedores_Shown(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Shown
