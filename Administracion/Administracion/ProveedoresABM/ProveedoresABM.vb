@@ -89,6 +89,7 @@ Public Class ProveedoresABM
         txtPorcelProv.Text = ""
         txtPorcelCABA.Text = ""
         txtMailOp.Text = ""
+        txtCbu.Text = ""
 
         ckAceptaCheques.Checked = False
         ckAceptaTransferencias.Checked = False
@@ -296,6 +297,15 @@ Public Class ProveedoresABM
             End If
         End If
 
+        '
+        ' Validamos la longitud en caso de ser Cargado.
+        '
+        If txtCbu.Text.Trim <> "" Then
+            If txtCbu.Text.Trim.Length < 22 Then
+                MsgBox("El CBU indicado no es válido.", MsgBoxStyle.Information)
+                Exit Sub
+            End If
+        End If
 
         ' Validamos la cuenta corriente en caso de que haya colocado alguna.
         If Trim(txtCuenta.Text) <> "" Then
@@ -439,7 +449,7 @@ Public Class ProveedoresABM
 
             If (_ProveedorExistente(txtCodigo.Text)) Then
                 _ActualizarCertificadosProveedor(txtCodigo.Text)
-                _ActualizarMailOpProveedor(txtCodigo.Text)
+                _ActualizarVariosProveedor(txtCodigo.Text)
             End If
 
             Dim WAceptaCheques As Short = IIf(ckAceptaCheques.Checked, 1, 0)
@@ -456,18 +466,18 @@ Public Class ProveedoresABM
         End Try
     End Sub
 
-    Private Sub _ActualizarMailOpProveedor(ByVal WProveedor As String)
+    Private Sub _ActualizarVariosProveedor(ByVal WProveedor As String)
 
         Dim cn = New SqlConnection()
         Dim cm = New SqlCommand()
 
         Try
 
-            cn.ConnectionString = _ConectarA
+            cn.ConnectionString = _ConectarA()
             cn.Open()
             cm.Connection = cn
 
-            cm.CommandText = "UPDATE Proveedor SET MailOp = '" & txtMailOp.Text.Trim & "' WHERE Proveedor = '" & WProveedor & "'"
+            cm.CommandText = "UPDATE Proveedor SET MailOp = '" & txtMailOp.Text.Trim & "', Cbu = '" & txtCbu.Text.Trim & "' WHERE Proveedor = '" & WProveedor & "'"
 
             cm.ExecuteNonQuery()
 
@@ -627,12 +637,13 @@ Public Class ProveedoresABM
             cmbEstado.ForeColor = Color.White
         End If
 
-        Dim WProv As DataRow = GetSingle("SELECT FormaPago, AceptaCheques, AceptaTransferencias FROM Proveedor WHERE Proveedor = '" & proveedor.id & "'")
+        Dim WProv As DataRow = GetSingle("SELECT FormaPago, AceptaCheques, AceptaTransferencias, Cbu FROM Proveedor WHERE Proveedor = '" & proveedor.id & "'")
 
         cmbFormaPago.SelectedIndex = 0
         ckAceptaCheques.Checked = False
 
         If WProv IsNot Nothing Then
+            txtCbu.Text = Trim(OrDefault(WProv.Item("Cbu"), ""))
             cmbFormaPago.SelectedIndex = Val(OrDefault(WProv.Item("FormaPago"), "0"))
             ckAceptaCheques.Checked = Val(OrDefault(WProv("AceptaCheques"), "")) = 1
             ckAceptaTransferencias.Checked = Val(OrDefault(WProv("AceptaTransferencias"), "")) = 1
