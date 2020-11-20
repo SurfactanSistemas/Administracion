@@ -242,7 +242,11 @@ Public Class AvisoOPAProveedores
             End If
 
         Catch ex As System.Exception
-            MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+            If Not WPorComando Then
+                MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+            Else
+                Close()
+            End If
         End Try
 
     End Sub
