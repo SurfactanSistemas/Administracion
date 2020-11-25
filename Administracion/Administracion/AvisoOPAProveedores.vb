@@ -563,7 +563,8 @@ Public Class AvisoOPAProveedores
                 Dim WAsunto As String = "ORDEN DE PAGO - SURFACTAN S.A. - "
 
                 If TipoOrd = 2 Then ' Si es Anticipo
-                    WBCC &= "juanfs@surfactan.com.ar;mlarias@surfactan.com.ar;"
+                    'WBCC &= "juanfs@surfactan.com.ar;mlarias@surfactan.com.ar;"
+                    WMailOp = "juanfs@surfactan.com.ar;mlarias@surfactan.com.ar;"
                     WAsunto = "ANTICIPO DE PAGO - SURFACTAN S.A. - "
                 End If
 
