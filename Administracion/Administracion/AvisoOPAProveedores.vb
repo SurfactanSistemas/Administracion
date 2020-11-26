@@ -189,7 +189,7 @@ Public Class AvisoOPAProveedores
                                 WFechasTransferencias = WFechasTransferencias.TrimEnd(",")
 
                                 If _EsPellital() Then
-                                    _EnviarAvisoOPDisponible(WProveedor, WDescProveedor, WOrden, EsPorTransferencia, WFechasTransferencias, PorTransferenciaYCheques, HayECheques:=WHayECheques, FechasECheques:=WFechasECheques, TipoOrd:=WTipoOrd)
+                                    _EnviarAvisoOPDisponiblePellital(WProveedor, WDescProveedor, WOrden, EsPorTransferencia, WFechasTransferencias, PorTransferenciaYCheques, HayECheques:=WHayECheques, FechasECheques:=WFechasECheques, TipoOrd:=WTipoOrd)
                                 Else
                                     _EnviarAvisoOPDisponible(WProveedor, WDescProveedor, WOrden, EsPorTransferencia, WFechasTransferencias, PorTransferenciaYCheques, HayECheques:=WHayECheques, FechasECheques:=WFechasECheques, TipoOrd:=WTipoOrd)
                                 End If
@@ -650,7 +650,7 @@ Public Class AvisoOPAProveedores
 
                     If PorTransferenciaYCheques Then
                         'WBody &= "." & "<br/>" & "<br/>" & "Así mismo, tiene Cheque(s) para retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir del día <strong>" & txtAPartirFecha.Text & "</strong> los <strong>Martes y Jueves</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
-                        WBody &= "." & "<br/>" & "<br/>" & "Así mismo, tiene Cheque(s) para retirar por nuestras oficinas <em>(Tucumán 3475, B1644CAQ Victoria, Buenos Aires)</em>, a partir de la <strong>semana próxima</strong> los <strong>Martes y Jueves</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
+                        WBody &= "." & "<br/>" & "<br/>" & "Así mismo, tiene Cheque(s) para retirar por nuestras oficinas <em>(Tucumán 3475, B1644CAQ Victoria, Buenos Aires)</em>, a partir de la <strong>semana próxima</strong> los <strong>Martes y Jueves</strong> en el horario de <strong>08:00 a 15:00 hs.</strong>"
                     Else
                         WBody &= "." & "<br/>" & "<br/>" & "Adjuntamos Orden de Pago y retenciones si correspondiesen."
                     End If
@@ -690,14 +690,14 @@ Public Class AvisoOPAProveedores
                     End If
 
                     If PorTransferenciaYCheques Then
-                        WBody &= "." & "<br/>" & "<br/>" & "Además tiene Cheque(s) para retirar por nuestras oficinas <em>(Tucumán 3475, B1644CAQ Victoria, Buenos Aires)</em>, a partir de la <strong>semana próxima</strong>, los <strong>Martes y Jueves</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
+                        WBody &= "." & "<br/>" & "<br/>" & "Además tiene Cheque(s) para retirar por nuestras oficinas <em>(Tucumán 3475, B1644CAQ Victoria, Buenos Aires)</em>, a partir de la <strong>semana próxima</strong>, los <strong>Martes y Jueves</strong> en el horario de <strong>08:00 a 15:00 hs.</strong>"
                     Else
                         WBody &= "." & "<br/>" & "<br/>" & "Adjuntamos Orden de Pago y retenciones si correspondiesen."
                     End If
 
                 Else
 
-                    WBody = "Informamos que se encuentra a su disposición un pago que podrá ser retirado por nuestras oficinas <em>(Tucumán 3475, B1644CAQ Victoria, Buenos Aires)</em>, a partir de la <strong>semana próxima</strong>, los <strong>Martes y Jueves</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
+                    WBody = "Informamos que se encuentra a su disposición un pago que podrá ser retirado por nuestras oficinas <em>(Tucumán 3475, B1644CAQ Victoria, Buenos Aires)</em>, a partir de la <strong>semana próxima</strong>, los <strong>Martes y Jueves</strong> en el horario de <strong>08:00 a 15:00 hs.</strong>"
 
                 End If
 
@@ -725,7 +725,7 @@ Public Class AvisoOPAProveedores
                 Dim WAsunto As String = "ORDEN DE PAGO - PELLITAL S.A. - "
 
                 If TipoOrd = 2 Then ' Si es Anticipo
-                    WBCC &= "svitale@pellital.com.ar;"
+                    'WBCC &= "svitale@pellital.com.ar;"
                     
                     WAsunto = "ANTICIPO DE PAGO - PELLITAL S.A. - "
 
@@ -734,7 +734,7 @@ Public Class AvisoOPAProveedores
                 _EnviarEmail(WMailOp, WBCC, WAsunto, WBody, WAdjuntos.ToArray)
 
                 If WPorComando Then
-                    WBCC = "svitale@pellital.com.ar;"
+                    'WBCC = "svitale@pellital.com.ar;"
                 End If
 
                 _MarcarOPComoEnviada(OrdenPago)
