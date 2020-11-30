@@ -4723,6 +4723,12 @@ Public Class Pagos
 
             crdoc.SetParameterValue("MostrarFirma", 1)
 
+            If _EsPellital() Then
+                crdoc.SetParameterValue("TipoFirma", 1)
+            Else
+                crdoc.SetParameterValue("TipoFirma", 0)
+            End If
+
             Dim frm2 As New Util.VistaPrevia
             frm2.Reporte = crdoc
 
@@ -5082,6 +5088,12 @@ Public Class Pagos
         If GenerarPDF Then
 
             crdoc.SetParameterValue("MostrarFirma", 1)
+
+            If _EsPellital() Then
+                crdoc.SetParameterValue("TipoFirma", 1)
+            Else
+                crdoc.SetParameterValue("TipoFirma", 0)
+            End If
 
             Dim frm2 As New Util.VistaPrevia
             frm2.Reporte = crdoc
@@ -5593,6 +5605,12 @@ Public Class Pagos
 
             crdoc.SetParameterValue("MostrarFirma", 1)
 
+            If _EsPellital() Then
+                crdoc.SetParameterValue("TipoFirma", 1)
+            Else
+                crdoc.SetParameterValue("TipoFirma", 0)
+            End If
+
             Dim frm2 As New Util.VistaPrevia
             frm2.Reporte = crdoc
 
@@ -5716,6 +5734,12 @@ Public Class Pagos
         If GenerarPDF Then
 
             crdoc.SetParameterValue("MostrarFirma", 1)
+
+            If _EsPellital() Then
+                crdoc.SetParameterValue("TipoFirma", 1)
+            Else
+                crdoc.SetParameterValue("TipoFirma", 0)
+            End If
 
             Dim frm2 As New Util.VistaPrevia
             frm2.Reporte = crdoc
