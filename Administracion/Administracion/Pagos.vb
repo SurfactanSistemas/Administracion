@@ -4329,8 +4329,10 @@ Public Class Pagos
         Dim WFechasECheques As String = ""
         Dim WOrdenPago As DataTable = _TraerDatosOrdenPago(txtOrdenPago.Text)
         Dim WHayECheques As Boolean
+        Dim WHayCompensaciones As Boolean
 
-        Dim EsPorTransferencia As Boolean = GetEsPorTransferencia(WOrdenPago, WFechasTransferencias, WHayECheques, WFechasECheques)
+
+        Dim EsPorTransferencia As Boolean = GetEsPorTransferencia(WOrdenPago, WFechasTransferencias, WHayECheques, WFechasECheques, WHayCompensaciones)
 
         If EsPorTransferencia Or WHayECheques Then
             frm.Reporte.SetParameterValue("EsTransferencia", 1)
@@ -7140,8 +7142,9 @@ Public Class Pagos
                 Dim WFechasTransferencias = ""
                 Dim WFechasECheques = ""
                 Dim WHayECheques As Boolean
+                Dim WHayCompensaciones As Boolean
 
-                EsPorTransferencia = GetEsPorTransferencia(WOrdenPago, WFechasTransferencias, WHayECheques, WFechasECheques)
+                EsPorTransferencia = GetEsPorTransferencia(WOrdenPago, WFechasTransferencias, WHayECheques, WFechasECheques, WHayCompensaciones)
 
                 With WOrdenPago.Rows(0)
 
@@ -7173,7 +7176,7 @@ Public Class Pagos
         Cursor = Cursors.Default
     End Sub
 
-    Private Function GetEsPorTransferencia(ByVal WOrdenPago As DataTable, ByRef WFechasTransferencias As String, ByRef WHayECheques As Boolean, ByRef FechasECheques As String) As Boolean
+    Private Function GetEsPorTransferencia(ByVal WOrdenPago As DataTable, ByRef WFechasTransferencias As String, ByRef WHayECheques As Boolean, ByRef FechasECheques As String, ByRef WHayCompensaciones As Boolean) As Boolean
         Dim EsPorTransferencia = False
         WHayECheques = False
 
@@ -7194,6 +7197,10 @@ Public Class Pagos
 
                     Case 6
                         EsPorTransferencia = Val(OrDefault(.Item("Cuenta"), "00")) = 5
+                        '
+                        'TODO revisar bien cómo se determina si hay o no una compensación.
+                        '
+                        WHayCompensaciones = Val(OrDefault(.Item("Cuenta"), "00")) = 5
 
                         If EsPorTransferencia And Not WFechasTransferencias.Contains(OrDefault(.Item("Fecha2"), "")) Then
                             WFechasTransferencias &= OrDefault(.Item("Fecha2"), "") & ","
@@ -7244,7 +7251,7 @@ Public Class Pagos
         Return tabla
     End Function
 
-    Private Sub _EnviarAvisoOPDisponible(ByVal Proveedor As String, ByVal DescProveedor As String, Optional ByVal OrdenPago As String = "", Optional ByVal EsPorTransferencia As Boolean = False, Optional ByVal wFechasTransferencias As String = "", Optional ByVal PorTransferenciaYCheques As Boolean = False, Optional ByVal HayECheques As Boolean = False, Optional ByVal FechasECheques As String = "")
+    Private Sub _EnviarAvisoOPDisponible(ByVal Proveedor As String, ByVal DescProveedor As String, Optional ByVal OrdenPago As String = "", Optional ByVal EsPorTransferencia As Boolean = False, Optional ByVal wFechasTransferencias As String = "", Optional ByVal PorTransferenciaYCheques As Boolean = False, Optional ByVal HayECheques As Boolean = False, Optional ByVal FechasECheques As String = "", Optional ByVal WHayCompensaciones As Boolean = False)
 
         If Proveedor.Trim = "" Then Exit Sub
         If EsPorTransferencia And Trim(OrdenPago) = "" Then Exit Sub
@@ -7275,7 +7282,10 @@ Public Class Pagos
 
                 If EsPorTransferencia Then
 
-                    WBody = "Informamos que durante el transcurso del día de hoy, SURFACTAN S.A. le realizará una transferencia"
+                    'WBody = "Informamos que durante el transcurso del día de hoy, SURFACTAN S.A. le realizará una transferencia"
+                    WBody = "Informamos que durante el transcurso del día de hoy, SURFACTAN S.A. le realizará un pago mediante los siguientes métodos de pagos: "
+
+                    WBody &= vbCrLf & "- Transferencia Bancaria"
 
                     If wFechasTransferencias.Trim <> "" Then
 
@@ -7285,13 +7295,14 @@ Public Class Pagos
                             WBody &= " con fecha: "
                         End If
 
-                        WBody &= "<strong>" & wFechasTransferencias & "</strong>"
+                        WBody &= "<strong>" & wFechasTransferencias & "</strong>."
 
                     End If
 
                     If HayECheques Then
 
-                        WBody &= " y a través de Cheque(s) Electrónico(s)"
+                        'WBody &= vbCrLf & "Además, través de Cheque(s) Electrónico(s)"
+                        WBody &= vbCrLf & "- Cheque(s) Electrónico(s)"
 
                         If FechasECheques.Trim <> "" Then
 
@@ -7307,9 +7318,19 @@ Public Class Pagos
 
                     End If
 
+                    If WHayCompensaciones Then
+                        '
+                        ' TODO Ver bien cuál es el texto a poner.
+                        '
+                        WBody &= vbCrLf & "- Compensación de Pago."
+                    End If
+
                 ElseIf HayECheques Then
 
-                    WBody = "Informamos que en el día de la fecha, SURFACTAN S.A. le ha realizado un pago a través de Cheque(s) Electrónico(s)"
+                    'WBody = "Informamos que en el día de la fecha, SURFACTAN S.A. le ha realizado un pago a través de Cheque(s) Electrónico(s)"
+                    WBody = "Informamos que en el día de la fecha, SURFACTAN S.A. le ha realizado un pago mediante los siguientes metodos de pago:"
+
+                    WBody &= vbCrLf & "- Cheque(s) Electrónico(s)"
 
                     If FechasECheques.Trim <> "" Then
 
@@ -7323,8 +7344,16 @@ Public Class Pagos
 
                     End If
 
+                    If WHayCompensaciones Then
+                        '
+                        ' TODO Ver bien cuál es el texto a poner.
+                        '
+                        WBody &= vbCrLf & "- Compensación de Pago."
+                    End If
+
                     If PorTransferenciaYCheques Then
-                        WBody &= "." & "<br/>" & "<br/>" & "Además tiene Cheque(s) para retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir de la <strong>semana próxima</strong>, los <strong>Martes y Juevess</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
+                        WBody &= vbCrLf & "- Cheque(s) que deberá retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir de la <strong>semana próxima</strong>, los <strong>Martes y Juevess</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>."
+                        'WBody &= "." & "<br/>" & "<br/>" & "Además tiene Cheque(s) para retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir de la <strong>semana próxima</strong>, los <strong>Martes y Juevess</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
                     Else
                         WBody &= "." & "<br/>" & "<br/>" & "Adjuntamos Orden de Pago y retenciones si correspondiesen."
                     End If
@@ -7356,7 +7385,7 @@ Public Class Pagos
                     End If
                 Next
 
-                _EnviarEmail(WMailOp, "juanfs@surfactan.com.ar;mlarias@surfactan.com.ar", "Orden de Pago - SURFACTAN S.A. - ", WBody, WAdjuntos.ToArray)
+                _EnviarEmail(WMailOp, "", "Orden de Pago - SURFACTAN S.A. - ", WBody, WAdjuntos.ToArray)
 
                 _MarcarOPComoEnviada(OrdenPago)
 
@@ -7366,10 +7395,7 @@ Public Class Pagos
             Throw New System.Exception("Hubo un problema al querer procesar el envío de mail por OP Disponible." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
         Finally
 
-
             cn.Close()
-
-
 
         End Try
     End Sub
