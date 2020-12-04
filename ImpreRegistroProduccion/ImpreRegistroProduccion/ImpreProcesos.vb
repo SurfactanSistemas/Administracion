@@ -520,7 +520,7 @@ Public Class ImpreProcesos
         frm.SetParameterValue("MostrarLogo", 0)
         frm.SetParameterValue("MostrarPie", 0)
 
-        If wTipoSalida = 3 Or wTipoSalida = 4 Or wTipoSalida = 6 Or wTipoSalida = 7 Then
+        If wTipoSalida = 3 Or wTipoSalida = 4 Or wTipoSalida = 6 Or wTipoSalida = 7 Or wTipoSalida = 8 Then
             frm.SetParameterValue("MostrarLogo", 1)
             frm.SetParameterValue("MostrarPie", 1)
         End If
