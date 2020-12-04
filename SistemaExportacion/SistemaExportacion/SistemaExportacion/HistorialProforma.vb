@@ -2,7 +2,7 @@
 Imports System.IO
 Imports Microsoft.VisualBasic.FileIO
 Imports Microsoft.Office.Interop
-
+Imports Util.Clases.Helper
 Public Class HistorialProforma
 
     ' Para controles de grilla.
@@ -28,11 +28,13 @@ Public Class HistorialProforma
 
     Private Sub HistorialProforma_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
+        cmb_Carpeta.SelectedIndex = 0
+
         If Not IsNothing(Me.NroProforma) Then
             Try
                 _LimpiarTodo()
 
-                txtNroProforma.Text = Helper.ceros(Me.NroProforma, 6)
+                txtNroProforma.Text = ceros(Me.NroProforma, 6)
 
                 _TraerHistorialYArchivos()
 
@@ -58,7 +60,7 @@ Public Class HistorialProforma
     End Sub
 
     Private Function _CS()
-        Return Helper._ConectarA()
+        Return _ConectarA()
     End Function
 
     Private Sub _LimpiarTodo()
@@ -152,7 +154,7 @@ Public Class HistorialProforma
                             .Cells("NroObservacion").Value = WNroObservacion & WRefPrimeraFilaObs
                         Else
                             WNroObsAnt = WNroObservacion
-                            WRefPrimeraFilaObs = Helper.ceros(XRenglon, 4)
+                            WRefPrimeraFilaObs = ceros(XRenglon, 4)
                             .Cells("NroObservacion").Value = WNroObservacion & WRefPrimeraFilaObs
                         End If
 
@@ -262,7 +264,7 @@ Public Class HistorialProforma
                             .Cells("RenglonEspecificacion").Value = WRenglon '& WRefPrimeraFilaEsp
                         Else
                             WNroObsAnt = WNroEspecificacion
-                            WRefPrimeraFilaEsp = Helper.ceros(XRenglon, 4)
+                            WRefPrimeraFilaEsp = ceros(XRenglon, 4)
                             .Cells("NroEspecificacion").Value = WNroEspecificacion '& WRefPrimeraFilaEsp
                             .Cells("RenglonEspecificacion").Value = WRenglon '& WRefPrimeraFilaEsp
                         End If
@@ -293,7 +295,7 @@ Public Class HistorialProforma
             If Trim(txtNroProforma.Text) = "" Then : Exit Sub : End If
 
             Try
-                Dim WNroProforma = Helper.ceros(txtNroProforma.Text, 6)
+                Dim WNroProforma = ceros(txtNroProforma.Text, 6)
 
                 _LimpiarTodo()
 
@@ -603,7 +605,7 @@ Public Class HistorialProforma
     Private Function _DatosValidos() As Boolean
 
         ' Validamos que la fecha indicada sea correcta.
-        If Not Helper._ValidarFecha(txtFecha.Text) Then
+        If Not _ValidarFecha(txtFecha.Text) Then
             MsgBox("La fecha indicada no es válida", MsgBoxStyle.Critical)
             txtFecha.Focus()
             Return False
@@ -646,9 +648,9 @@ Public Class HistorialProforma
         cm.Transaction = trans
 
         ZSql = ""
-        WNroProforma = Helper.ceros(txtNroProforma.Text, 6)
+        WNroProforma = ceros(txtNroProforma.Text, 6)
         WFecha = txtFecha.Text
-        WFechaOrd = Helper.ordenaFecha(WFecha)
+        WFechaOrd = ordenaFecha(WFecha)
         WCliente = txtCliente.Text
         WObservacion = Trim(txtObservacion.Text)
         WClaveObs = Trim(WClaveObservacion.Text)
@@ -720,9 +722,9 @@ Public Class HistorialProforma
                         If Trim(WFilasAGrabar(x)) <> "" And WFilasAGrabar(x) <> vbLf Then
                             WRenglon += 1
 
-                            XRenglon = Helper.ceros(WRenglon, 2)
+                            XRenglon = ceros(WRenglon, 2)
 
-                            WClave = Helper.ceros(WNroObservacion, 6) + XRenglon
+                            WClave = ceros(WNroObservacion, 6) + XRenglon
 
                             ZSql = ""
                             ZSql = "INSERT INTO ProformaExportacionHistorial (Clave, NroObservacion, Renglon, Proforma, Usuario, Fecha, FechaOrd, Observaciones) "
@@ -864,7 +866,7 @@ Public Class HistorialProforma
         If e.KeyData = Keys.Enter Then
             If Trim(txtFecha.Text.Replace("/", "")) = "" Then : Exit Sub : End If
 
-            If Helper._ValidarFecha(txtFecha.Text) Then
+            If _ValidarFecha(txtFecha.Text) Then
                 txtUsuario.Focus()
             End If
 
@@ -1016,7 +1018,7 @@ Public Class HistorialProforma
             Return False
         End If
 
-        If Trim(txtNroProforma.Text).Length < 6 Then : txtNroProforma.Text = Helper.ceros(txtNroProforma.Text, 6) : End If
+        If Trim(txtNroProforma.Text).Length < 6 Then : txtNroProforma.Text = ceros(txtNroProforma.Text, 6) : End If
 
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 Proforma FROM ProformaExportacion WHERE Proforma = '" & txtNroProforma.Text & "'")
@@ -1110,9 +1112,21 @@ Public Class HistorialProforma
             Exit Sub
         End If
 
-        If txtNroProforma.Text.Trim.Length < 6 Then : txtNroProforma.Text = Helper.ceros(txtNroProforma.Text, 6) : End If
+        If txtNroProforma.Text.Trim.Length < 6 Then : txtNroProforma.Text = ceros(txtNroProforma.Text, 6) : End If
 
-        WRutaArchivosRelacionados = _RutaCarpetaArchivos() & "\" & txtNroProforma.Text
+        Select Case cmb_Carpeta.SelectedItem
+            Case "General"
+                WRutaArchivosRelacionados = _RutaCarpetaArchivos() & "\" & txtNroProforma.Text
+            Case "Proforma"
+                WRutaArchivosRelacionados = _RutaCarpetaArchivos() & "\" & txtNroProforma.Text & "\Proforma"
+            Case "FDS"
+                WRutaArchivosRelacionados = _RutaCarpetaArchivos() & "\" & txtNroProforma.Text & "\FDS"
+            Case "Certificado"
+                WRutaArchivosRelacionados = _RutaCarpetaArchivos() & "\" & txtNroProforma.Text & "\Certificado"
+            Case "Packing List"
+                WRutaArchivosRelacionados = _RutaCarpetaArchivos() & "\" & txtNroProforma.Text & "\Packing List"
+        End Select
+        'WRutaArchivosRelacionados = _RutaCarpetaArchivos() & "\" & txtNroProforma.Text
 
         ' Creamos la Carpeta en caso de que no exista aún.
         If Not Directory.Exists(WRutaArchivosRelacionados) Then
@@ -1173,7 +1187,7 @@ Public Class HistorialProforma
         Dim dr As SqlDataReader
 
         Try
-            cn.ConnectionString = Helper._ConectarA
+            cn.ConnectionString = _ConectarA()
             cn.Open()
             cm.Connection = cn
 
@@ -1216,7 +1230,7 @@ Public Class HistorialProforma
 
     Private Sub _ProcesarDragDeArchivo(ByVal e As System.Windows.Forms.DragEventArgs)
 
-        If Trim(txtNroProforma.Text).Length < 6 Then : txtNroProforma.Text = Helper.ceros(txtNroProforma.Text, 6) : End If
+        If Trim(txtNroProforma.Text).Length < 6 Then : txtNroProforma.Text = ceros(txtNroProforma.Text, 6) : End If
 
         Dim archivos() As String = e.Data.GetData(DataFormats.FileDrop)
         
@@ -1234,7 +1248,22 @@ Public Class HistorialProforma
     End Sub
 
     Private Sub _SubirArchivos(ByVal archivos() As String)
-        Dim WRutaArchivosRelacionados = _RutaCarpetaArchivos() & "\" & txtNroProforma.Text
+
+        Dim WRutaArchivosRelacionados As String
+        Select Case cmb_Carpeta.SelectedItem
+            Case "General"
+                WRutaArchivosRelacionados = _RutaCarpetaArchivos() & "\" & txtNroProforma.Text
+            Case "Proforma"
+                WRutaArchivosRelacionados = _RutaCarpetaArchivos() & "\" & txtNroProforma.Text & "\Proforma"
+            Case "FDS"
+                WRutaArchivosRelacionados = _RutaCarpetaArchivos() & "\" & txtNroProforma.Text & "\FDS"
+            Case "Certificado"
+                WRutaArchivosRelacionados = _RutaCarpetaArchivos() & "\" & txtNroProforma.Text & "\Certificado"
+            Case "Packing List"
+                WRutaArchivosRelacionados = _RutaCarpetaArchivos() & "\" & txtNroProforma.Text & "\Packing List"
+        End Select
+
+        'Dim WRutaArchivosRelacionados = _RutaCarpetaArchivos() & "\" & txtNroProforma.Text
         Dim WDestino As String = ""
         Dim WCantCorrectas = 0
 
@@ -1377,7 +1406,7 @@ Public Class HistorialProforma
         If e.KeyData = Keys.Enter Then
             If Trim(txtFechaEspecificacion.Text).Length < 10 Then : Exit Sub : End If
 
-            If Helper._ValidarFecha(txtFechaEspecificacion.Text) Then
+            If _ValidarFecha(txtFechaEspecificacion.Text) Then
 
                 cmbTipoEspecificacion.Focus()
                 cmbTipoEspecificacion.DroppedDown = True
@@ -1432,7 +1461,7 @@ Public Class HistorialProforma
             Return False
         End If
 
-        If Not Helper._ValidarFecha(txtFechaEspecificacion.Text) Then
+        If Not _ValidarFecha(txtFechaEspecificacion.Text) Then
             MsgBox("La fecha de Especificación indicada no es una fecha válida.", MsgBoxStyle.Exclamation)
             Return False
         End If
@@ -1473,9 +1502,9 @@ Public Class HistorialProforma
         cm.Transaction = trans
 
         ZSql = ""
-        WNroProforma = Helper.ceros(txtNroProforma.Text, 6)
+        WNroProforma = ceros(txtNroProforma.Text, 6)
         WFecha = txtFecha.Text
-        WFechaOrd = Helper.ordenaFecha(WFecha)
+        WFechaOrd = ordenaFecha(WFecha)
         WTipo = cmbTipoEspecificacion.SelectedIndex
         WEspecificacion = Trim(txtEspecificacion.Text)
         WClaveEsp = Trim(WNroEspecificacion.Text)
@@ -1546,9 +1575,9 @@ Public Class HistorialProforma
                         If Trim(WFilasAGrabar(x)) <> "" And WFilasAGrabar(x) <> vbLf Then
                             WRenglon += 1
 
-                            XRenglon = Helper.ceros(WRenglon, 2)
+                            XRenglon = ceros(WRenglon, 2)
 
-                            WClave = Helper.ceros(WNroEspecif, 6) + XRenglon
+                            WClave = ceros(WNroEspecif, 6) + XRenglon
 
                             ZSql = ""
                             ZSql = "INSERT INTO ProformaExportacionEspecificaciones (Clave, NroEspecificacion, Renglon, Proforma, Especificacion, Tipo, Fecha, FechaOrd, Usuario) "
@@ -1788,5 +1817,9 @@ Public Class HistorialProforma
         End Try
 
         btnCerrarFormularioEspecificacion.PerformClick()
+    End Sub
+
+    Private Sub cmb_Carpeta_DropDownClosed(sender As Object, e As EventArgs) Handles cmb_Carpeta.DropDownClosed
+        _CargarArchivosRelacionados()
     End Sub
 End Class

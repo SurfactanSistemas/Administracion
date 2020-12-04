@@ -1,5 +1,5 @@
 ﻿Imports System.Data.SqlClient
-
+Imports Util.Clases.Helper
 Public Class MenuPrincipal
 
     Private Sub btnNuevaProforma_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNuevaProforma.Click
@@ -51,6 +51,7 @@ Public Class MenuPrincipal
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand()
         Dim dr As SqlDataReader
+        'Dim WFiltro = "AND (Entregado <> '1' OR Entregado IS NULL)"
         Dim WFiltro = "AND (Entregado <> 'X' OR Entregado IS NULL)"
 
         If ckMostrarEntregadas.Checked then WFiltro = ""
@@ -59,12 +60,12 @@ Public Class MenuPrincipal
 
         Try
 
-            cn.ConnectionString = Helper._ConectarA
+            cn.ConnectionString = _ConectarA()
             cn.Open()
             cm.Connection = cn
             cm.CommandText = ZSql
             dr = cm.ExecuteReader()
-            
+
             dgvPrincipal.Rows.Clear()
 
             If dr.HasRows Then
@@ -109,7 +110,7 @@ Public Class MenuPrincipal
                         .Cells("Cliente").Value = WCliente
                         .Cells("Razon").Value = WRazon
                         .Cells("Pais").Value = WPais
-                        .Cells("Total").Value = Helper.formatonumerico(WTotal)
+                        .Cells("Total").Value = formatonumerico(WTotal)
                         .Cells("FechaLimite").Value = IIf(Val(WFechaLimite) <> 0, WFechaLimite, "")
                         .Cells("PackingList").Value = WPackingList
                         .Cells("PackingListImg").Value = IIf(Val(WPackingList) = 0, My.Resources.cancelado, My.Resources.ok)
@@ -147,7 +148,7 @@ Public Class MenuPrincipal
                 ' Chequeamos que tenga fecha limite indicada.
                 If Trim(.Cells("FechaLimite").Value) <> "" Then
 
-                    If Val(Helper.ordenaFecha(Date.Now.ToString("dd/MM/yyyy"))) > Val(.Cells("FechaLimite").Value) And .Cells("PackingList").Value <> "1" Then
+                    If Val(ordenaFecha(Date.Now.ToString("dd/MM/yyyy"))) > Val(.Cells("FechaLimite").Value) And .Cells("PackingList").Value <> "1" Then
                         .DefaultCellStyle.BackColor = Color.Red
                         .DefaultCellStyle.ForeColor = Color.White
                     End If
@@ -166,7 +167,7 @@ Public Class MenuPrincipal
 
         Try
 
-            cn.ConnectionString = Helper._ConectarA
+            cn.ConnectionString = _ConectarA()
             cn.Open()
             cm.Connection = cn
 
@@ -212,7 +213,7 @@ Public Class MenuPrincipal
                         .Cells("Cliente").Value = WCliente
                         .Cells("Razon").Value = WRazon
                         .Cells("Pais").Value = WPais
-                        .Cells("Total").Value = Helper.formatonumerico(WTotal)
+                        .Cells("Total").Value = formatonumerico(WTotal)
                     End With
 
                 Loop
@@ -326,7 +327,7 @@ Public Class MenuPrincipal
 
         Try
 
-            cn.ConnectionString = Helper._ConectarA
+            cn.ConnectionString = _ConectarA()
             cn.Open()
             cm.Connection = cn
             dr = cm.ExecuteReader()
@@ -366,7 +367,7 @@ Public Class MenuPrincipal
                         WRowIndex = dgvPrincipal.Rows.Add
                     End With
 
-                    If Val(Helper.ordenaFecha(Date.Now.ToString("dd/MM/yyyy"))) > Helper.ordenaFecha(WFechaLimite) Then
+                    If Val(ordenaFecha(Date.Now.ToString("dd/MM/yyyy"))) > ordenaFecha(WFechaLimite) Then
 
                         With dgvPrincipal.Rows(WRowIndex)
                             .Cells("NroProforma").Value = WProforma
@@ -374,7 +375,7 @@ Public Class MenuPrincipal
                             .Cells("Cliente").Value = WCliente
                             .Cells("Razon").Value = WRazon
                             .Cells("Pais").Value = WPais
-                            .Cells("Total").Value = Helper.formatonumerico(WTotal)
+                            .Cells("Total").Value = formatonumerico(WTotal)
                             .Cells("FechaLimite").Value = IIf(Val(WFechaLimite) <> 0, WFechaLimite, "")
                             .Cells("PackingList").Value = WPackingList
                         End With
@@ -414,7 +415,7 @@ Public Class MenuPrincipal
 
         Try
 
-            cn.ConnectionString = Helper._ConectarA
+            cn.ConnectionString = _ConectarA()
             cn.Open()
             cm.Connection = cn
             dr = cm.ExecuteReader()
@@ -462,7 +463,7 @@ Public Class MenuPrincipal
                         .Cells("Cliente").Value = WCliente
                         .Cells("Razon").Value = WRazon
                         .Cells("Pais").Value = WPais
-                        .Cells("Total").Value = Helper.formatonumerico(WTotal)
+                        .Cells("Total").Value = formatonumerico(WTotal)
                         .Cells("FechaLimite").Value = IIf(Val(WFechaLimite) <> 0, WFechaLimite, "")
                         .Cells("PackingList").Value = WPackingList
                     End With
@@ -543,8 +544,8 @@ Public Class MenuPrincipal
 
             Case 1
 
-                num1 = Helper.ordenaFecha(e.CellValue1)
-                num2 = Helper.ordenaFecha(e.CellValue2)
+                num1 = ordenaFecha(e.CellValue1)
+                num2 = ordenaFecha(e.CellValue2)
 
             Case Else
                 Exit Sub

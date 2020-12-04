@@ -3,7 +3,8 @@
     Dim PagLstbox As Integer = 1
     ReadOnly TipoProducto As String
 
-    Sub New(ByVal TipoProductoLLamadaMenu)
+    Dim PermisoGrabar As Boolean
+    Sub New(ByVal TipoProductoLLamadaMenu As String, ByVal ID As String)
 
         TipoProducto = TipoProductoLLamadaMenu
 
@@ -30,6 +31,11 @@
             Label1.Text = "Prod. Terminado"
         End If
 
+        Dim SQLCnslt As String = "SELECT Escritura FROM PermisosPerfiles WHERE ID = '" & ID & "' AND Sistema = 'LABORATORIO' AND Perfil = '" & Operador.Perfil & "' AND Planta = '" & Operador.Base & "' ORDER BY ID"
+        Dim Row As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+        If Row IsNot Nothing Then
+            PermisoGrabar = Row.Item("Escritura")
+        End If
 
     End Sub
 
@@ -2113,6 +2119,10 @@
         End With
 
         btnLimpiar_Click(Nothing, Nothing)
+        If PermisoGrabar = False Then
+            btnGrabar.Enabled = False
+        End If
+
     End Sub
 
     Private Function ValidarCbxPictogramas() As Boolean

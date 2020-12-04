@@ -1,5 +1,21 @@
 ﻿Public Class InformeRecepcionDrogaLAB : Implements IBuscadorProveedor, IBuscarOrdenCompraXProvee
 
+    Dim PermisoGrabar As String
+
+    Sub New(ByVal Id As String)
+
+        ' Llamada necesaria para el diseñador.
+        InitializeComponent()
+
+        ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
+        Dim SQLCnslt As String = "SELECT Escritura FROM PermisosPerfiles WHERE ID = '" & ID & "' AND Sistema = 'LABORATORIO' AND Perfil = '" & Operador.Perfil & "' AND Planta = '" & Operador.Base & "' ORDER BY ID"
+        Dim Row As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+        If Row IsNot Nothing Then
+            PermisoGrabar = Row.Item("Escritura")
+        End If
+    End Sub
+
+
     Private Sub InformeRecepcionDrogaLAB_Shown(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Shown
         txtOrdenCompra.Focus()
     End Sub
@@ -14,6 +30,21 @@
         txtOrdenCompra.Text = 0
 
         btnLimpiarForm_Click(Nothing, Nothing)
+
+        If PermisoGrabar = False Then
+            btnGrabar.Enabled = False
+
+            txtOrden.ReadOnly = True
+            txtDescripcionMP.ReadOnly = True
+            mastxtMateriaPrima.ReadOnly = True
+            txtCantIngre.ReadOnly = True
+            txtSaldoOC.ReadOnly = True
+            txtEnvase.ReadOnly = True
+            txtEtiqueta.ReadOnly = True
+            txtSaldoOC.ReadOnly = True
+            txtDescOC.ReadOnly = True
+        End If
+
 
     End Sub
 
@@ -89,6 +120,9 @@
 
         btnGrabar.Enabled = True
         txtOrdenCompra.Focus()
+        If PermisoGrabar = False Then
+            btnGrabar.Enabled = False
+        End If
     End Sub
 
     Private Sub _ProcesarInformesViejos()

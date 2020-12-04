@@ -3,7 +3,8 @@
 Public Class IngresoDatosMostrarEnCertificadosAnalisis : Implements Util.IAyudaGeneral
     Private ReadOnly CerrarDspGrabar As Boolean = False
 
-    Sub New(Optional ByVal Terminado As String = "", Optional ByVal Cliente As String = "", Optional ByVal CerrarDspGrabar As Boolean = False)
+    Dim PermisoGrabar As Boolean
+    Sub New(Optional ByVal Terminado As String = "", Optional ByVal Cliente As String = "", Optional ByVal CerrarDspGrabar As Boolean = False, Optional ByVal ID As String = "00")
 
         ' Llamada necesaria para el diseñador.
         InitializeComponent()
@@ -12,6 +13,15 @@ Public Class IngresoDatosMostrarEnCertificadosAnalisis : Implements Util.IAyudaG
         txtProducto.Text = Terminado
         txtCliente.Text = Cliente
         Me.CerrarDspGrabar = CerrarDspGrabar
+        If Val(ID) <> 0 Then
+            Dim SQLCnslt As String = "SELECT Escritura FROM PermisosPerfiles WHERE ID = '" & ID & "' AND Sistema = 'LABORATORIO' AND Perfil = '" & Operador.Perfil & "' AND Planta = '" & Operador.Base & "' ORDER BY ID"
+            Dim Row As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+            If Row IsNot Nothing Then
+                PermisoGrabar = Row.Item("Escritura")
+            End If
+        End If
+        
+
     End Sub
 
     Private Sub btnLimpiar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLimpiar.Click
@@ -32,6 +42,10 @@ Public Class IngresoDatosMostrarEnCertificadosAnalisis : Implements Util.IAyudaG
             txtCliente_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
         Else
             btnLimpiar_Click(Nothing, Nothing)
+        End If
+
+        If PermisoGrabar = False Then
+            btnGrabar.Enabled = False
         End If
 
     End Sub

@@ -16,6 +16,21 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
+    <PublishUrl>publicar\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -93,6 +108,12 @@
     <Compile Include="Clases\ExtensionesTipoSqlConnection.vb" />
     <Compile Include="Clases\ExtensionesTipoString.vb" />
     <Compile Include="Clases\ExtensionesTipoFecha.vb" />
+    <Compile Include="Formularios\ActualizarDatosEnvases.Designer.vb">
+      <DependentUpon>ActualizarDatosEnvases.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\ActualizarDatosEnvases.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\Auxiliares\AuxiProductoPartida.Designer.vb">
       <DependentUpon>AuxiProductoPartida.vb</DependentUpon>
     </Compile>
@@ -142,6 +163,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Helper.vb" />
+    <Compile Include="ArchivosProforma.designer.vb">
+      <DependentUpon>ArchivosProforma.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ArchivosProforma.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Login.designer.vb">
       <DependentUpon>Login.vb</DependentUpon>
     </Compile>
@@ -176,6 +203,12 @@
       <DependentUpon>NotaEmpaque.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\NotaEmpaqueIngles.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NotaEmpaqueIngles.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\PlanillaPallets.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -190,6 +223,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Formularios\ActualizarDatosEnvases.resx">
+      <DependentUpon>ActualizarDatosEnvases.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Auxiliares\AuxiProductoPartida.resx">
       <DependentUpon>AuxiProductoPartida.vb</DependentUpon>
     </EmbeddedResource>
@@ -214,6 +250,9 @@
     <EmbeddedResource Include="Formularios\Proforma.resx">
       <DependentUpon>Proforma.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ArchivosProforma.resx">
+      <DependentUpon>ArchivosProforma.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.vb</DependentUpon>
     </EmbeddedResource>
@@ -229,6 +268,10 @@
     <EmbeddedResource Include="Reportes\NotaEmpaque.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>NotaEmpaque.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\NotaEmpaqueIngles.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>NotaEmpaqueIngles.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\PlanillaPallets.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -301,6 +344,66 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Outlook1">
+      <Guid>{00062FFF-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>9</VersionMajor>
+      <VersionMinor>6</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Util\Util\Util.vbproj">
+      <Project>{cc5d60fd-9755-4c61-b96c-f56173586bb9}</Project>
+      <Name>Util</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 y x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

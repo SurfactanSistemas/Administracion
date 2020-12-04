@@ -5,8 +5,8 @@
     Private WTerminado As String = ""
     Dim Base As String = Operador.Base
     Dim Tabla As String = "CargaVNotas"
-
-    Sub New(ByVal Terminado As String, Optional ByVal EsArticulo As Boolean = False)
+    Dim PermisoGrabar As Boolean = True
+    Sub New(ByVal Terminado As String, Optional ByVal EsArticulo As Boolean = False, Optional ByVal Permiso As Boolean = True)
 
         ' This call is required by the designer.
         InitializeComponent()
@@ -17,6 +17,11 @@
             WEsArticulo = EsArticulo
             Tabla = "CargaVNotasMP"
         End If
+
+        If Permiso = False Then
+            PermisoGrabar = Permiso
+        End If
+
 
         WTerminado = Terminado
     End Sub
@@ -31,6 +36,11 @@
                 Tabla = "CargaVNoFarmaNotas"
             End If
 
+        End If
+
+        If PermisoGrabar = False Then
+            btnGrabar.Enabled = False
+            btnEliminar.Enabled = False
         End If
 
         _CargarNotas()

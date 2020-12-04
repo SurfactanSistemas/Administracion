@@ -100,10 +100,51 @@
     <Compile Include="ConsultaArticulosProforma.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ConsultaCliente.designer.vb">
+      <DependentUpon>ConsultaCliente.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ConsultaCliente.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConsultaPedidosDeProforma.Designer.vb">
+      <DependentUpon>ConsultaPedidosDeProforma.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ConsultaPedidosDeProforma.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConsultaPedidosPendXCliente.Designer.vb">
+      <DependentUpon>ConsultaPedidosPendXCliente.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ConsultaPedidosPendXCliente.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Consulta_Terminado.designer.vb">
+      <DependentUpon>Consulta_Terminado.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Consulta_Terminado.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="HistorialProforma.Designer.vb">
       <DependentUpon>HistorialProforma.vb</DependentUpon>
     </Compile>
     <Compile Include="HistorialProforma.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interface\IConsultaCliente.vb" />
+    <Compile Include="Interface\IConsultaPedidos.vb" />
+    <Compile Include="Interface\IConsultaPedPrepo.vb" />
+    <Compile Include="Interface\IConsulta_Terminado.vb" />
+    <Compile Include="Interface\IPreProforma.vb" />
+    <Compile Include="Login.designer.vb">
+      <DependentUpon>Login.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Login.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuPreProformas.Designer.vb">
+      <DependentUpon>MenuPreProformas.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MenuPreProformas.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MenuPrincipal.vb">
@@ -128,7 +169,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Helper.vb" />
     <Compile Include="Proforma.Designer.vb">
       <DependentUpon>Proforma.vb</DependentUpon>
     </Compile>
@@ -147,6 +187,12 @@
     <Compile Include="Reportes\VistaPrevia.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PedidoProforma.Designer.vb">
+      <DependentUpon>PedidoProforma.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PedidoProforma.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ArchivosRelacionados.resx">
@@ -155,8 +201,26 @@
     <EmbeddedResource Include="ConsultaArticulosProforma.resx">
       <DependentUpon>ConsultaArticulosProforma.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ConsultaCliente.resx">
+      <DependentUpon>ConsultaCliente.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConsultaPedidosDeProforma.resx">
+      <DependentUpon>ConsultaPedidosDeProforma.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConsultaPedidosPendXCliente.resx">
+      <DependentUpon>ConsultaPedidosPendXCliente.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Consulta_Terminado.resx">
+      <DependentUpon>Consulta_Terminado.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HistorialProforma.resx">
       <DependentUpon>HistorialProforma.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login.resx">
+      <DependentUpon>Login.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuPreProformas.resx">
+      <DependentUpon>MenuPreProformas.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MenuPrincipal.resx">
       <DependentUpon>MenuPrincipal.vb</DependentUpon>
@@ -172,10 +236,13 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\ProformaVistaPrevia.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>ProformaVistaPrevia.vb</LastGenOutput>
+      <LastGenOutput>ProformaVistaPrevia1.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\VistaPrevia.resx">
       <DependentUpon>VistaPrevia.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PedidoProforma.resx">
+      <DependentUpon>PedidoProforma.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -355,6 +422,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ok.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\ArmadoPallets\ArmadoPallets\ArmadoPallets.vbproj">
+      <Project>{dbedaca3-8ffa-4d9c-a3e0-35330fe6c9de}</Project>
+      <Name>ArmadoPallets</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Util\Util\Util.vbproj">
+      <Project>{cc5d60fd-9755-4c61-b96c-f56173586bb9}</Project>
+      <Name>Util</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

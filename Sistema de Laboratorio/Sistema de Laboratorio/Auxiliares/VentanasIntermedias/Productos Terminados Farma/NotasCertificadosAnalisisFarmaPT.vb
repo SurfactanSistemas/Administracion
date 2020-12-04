@@ -1,14 +1,15 @@
 ﻿Public Class NotasCertificadosAnalisisFarmaPT
 
     Private ReadOnly WPartida As String = ""
-
-    Sub New(ByVal Partida As String)
+    Dim PermisoGrabar As Boolean
+    Sub New(ByVal Partida As String, ByVal Permiso As Boolean)
 
         ' This call is required by the designer.
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
         WPartida = Partida
+        PermisoGrabar = Permiso
     End Sub
 
     Private Sub NotasAnterioresFarmaPT_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -30,6 +31,9 @@
             .Focus()
 
         End With
+        If PermisoGrabar = False Then
+            btnAceptar.Enabled = False
+        End If
     End Sub
 
     Private Sub btnCerrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrar.Click

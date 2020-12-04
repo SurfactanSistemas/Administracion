@@ -1,8 +1,10 @@
-﻿Imports System.Data.SqlClient
+﻿Imports System.Configuration
+Imports System.Data.SqlClient
 Imports System.Globalization
 Imports CrystalDecisions.Shared
 Imports System.IO
 Imports Microsoft.Office.Interop.Outlook
+
 
 Namespace Clases
 
@@ -746,6 +748,32 @@ Namespace Clases
             Return Microsoft.VisualBasic.Mid(txt, start, length)
         End Function
 
-    End Class
 
+        Public Shared Function _CarpetaArchivosCompartidos()
+            Try
+                Return ConfigurationManager.AppSettings("ARCHIVOS_RELACIONADOS") & "\"
+            Catch ex As System.Exception
+                Throw New System.Exception("No se pudo recuperar la direccion de la Carpeta de Archivos Relacionados. " & vbCrLf & "Motivo: " & ex.Message)
+            End Try
+        End Function
+
+        Public Shared Function _CarpetaArchivosProforma(Optional ByVal _NroProforma As String = "") As String
+            _NroProforma = Trim(_NroProforma)
+
+            If _NroProforma = "" Then
+                Return _CarpetaArchivosCompartidos()
+            End If
+
+            If _NroProforma.Length < 6 Then : _NroProforma = Helper.ceros(_NroProforma, 6) : End If
+
+            Return _CarpetaArchivosCompartidos() & _NroProforma & "\"
+
+        End Function
+
+        Public Shared Sub _MsgBoxConMotivo(ByVal ex As System.Exception, Optional ByVal msg As String = "Error general.")
+            MsgBox(msg & vbCrLf & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Exclamation)
+        End Sub
+
+        
+    End Class
 End Namespace

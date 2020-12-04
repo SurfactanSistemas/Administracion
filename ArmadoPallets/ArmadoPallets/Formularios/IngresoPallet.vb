@@ -1,6 +1,7 @@
 ﻿Imports System.Data.SqlClient
 Imports System.IO
 Imports ArmadoPallets.Clases
+Imports CrystalDecisions.CrystalReports.Engine
 
 Public Class IngresoPallet
 
@@ -10,7 +11,7 @@ Public Class IngresoPallet
     Private WNroPallet As Integer
     Dim target As Control
 
-    Sub New(Optional ByVal WProforma As String = "", Optional ByVal WPedido As String = "", Optional ByVal XNroPallet As Integer = -1)
+    Sub New(Optional ByVal WProforma As String = "", Optional ByVal WPedido As String = "", Optional ByVal XNroPallet As Integer = -1, Optional ByVal GrabarPermiso As Boolean = True)
 
         ' This call is required by the designer.
         InitializeComponent()
@@ -20,8 +21,14 @@ Public Class IngresoPallet
         txtPedido.Text = WPedido
         WNroPallet = XNroPallet
         target = dgvProductos
-
+        If GrabarPermiso = False Then
+            btnAgregarPallet.Visible = False
+            btnLimpiar.Visible = False
+            btnAgregarPT.Visible = False
+            btnEliminar.Visible = False
+        End If
     End Sub
+
 
     Private Sub IngresoPallet_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         WRow = -1
@@ -43,7 +50,7 @@ Public Class IngresoPallet
         txtPedido.Text = txtPedido.Text.Trim.PadLeft(6, "0")
 
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT CodigoPallet, Altura, Producto, Partida, CodigoEnvase, Bultos, KgBultos, FechaDisponible FROM ArmadoPallets WHERE Proforma = '" & txtProforma.Text & "' AND Pedido = '" & txtPedido.Text & "' AND Pallet = '" & WNroPallet & "' ORDER BY Pallet")
+        Dim cm As SqlCommand = New SqlCommand("SELECT CodigoPallet, Altura, Producto, Partida, CodigoEnvase, Bultos, KgBultos, FechaDisponible, TamanioBase FROM ArmadoPallets WHERE Proforma = '" & txtProforma.Text & "' AND Pedido = '" & txtPedido.Text & "' AND Pallet = '" & WNroPallet & "' ORDER BY Pallet")
         Dim dr As SqlDataReader
 
         Try
@@ -55,6 +62,7 @@ Public Class IngresoPallet
 
             dr = cm.ExecuteReader()
 
+            Dim TamanioBase As String
             With dr
                 If .HasRows Then
 
@@ -63,6 +71,7 @@ Public Class IngresoPallet
                         txtCodigo.Text = IIf(IsDBNull(.Item("CodigoPallet")), "", .Item("CodigoPallet"))
                         txtAltura.Text = IIf(IsDBNull(.Item("Altura")), "", .Item("Altura"))
                         txtDisponible.Text = IIf(IsDBNull(.Item("FechaDisponible")), "", .Item("FechaDisponible"))
+                        TamanioBase = IIf(IsDBNull(.Item("TamanioBase")), "", .Item("TamanioBase"))
 
                         Dim R = dgvProductos.Rows.Add
 
@@ -71,6 +80,9 @@ Public Class IngresoPallet
                         dgvProductos.Rows(R).Cells("Envase").Value = IIf(IsDBNull(.Item("CodigoEnvase")), "", .Item("CodigoEnvase"))
                         dgvProductos.Rows(R).Cells("CantidadUnidades").Value = IIf(IsDBNull(.Item("Bultos")), "", .Item("Bultos"))
                         dgvProductos.Rows(R).Cells("KgUnidad").Value = IIf(IsDBNull(.Item("KgBultos")), "", .Item("KgBultos"))
+                        Dim WKgBultoUnidad As String = _TraerKgEnvase(dgvProductos.Rows(R).Cells("Envase").Value)
+                        dgvProductos.Rows(R).Cells("Tara").Value = Helper.formatonumerico(WKgBultoUnidad)
+                        'dgvProductos.Rows(R).Cells("KgUnidad").Value = IIf(IsDBNull(.Item("KgBultos")), "", .Item("KgBultos"))
 
                     Loop
 
@@ -102,6 +114,11 @@ Public Class IngresoPallet
 
             ' Se selecciona la fila para que se actualicen las demas filas y se muestren los datos.
             dgvProductos.CurrentCell = dgvProductos.Rows(_R).Cells(0)
+
+            If TamanioBase <> "" Then
+                txt_Base.Text = TamanioBase
+            End If
+
 
         Catch ex As Exception
             Throw New Exception("Hubo un problema al cargar los Pallets referidos a esta Proforma desde la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
@@ -138,61 +155,61 @@ Public Class IngresoPallet
                     txtAltura.Text = ""
                     lblDescPallet.Text = ""
                     lblTara.Text = ""
-                    lblBase.Text = ""
+                    txt_Base.Text = ""
                 End If
 
                 Exit Sub
             End If
-                If Len(txtCodigo.Text.Replace(" ", "")) < 10 Then : Exit Sub : End If
+            If Len(txtCodigo.Text.Replace(" ", "")) < 10 Then : Exit Sub : End If
 
-                txtCodigo.Text = UCase(txtCodigo.Text)
+            txtCodigo.Text = UCase(txtCodigo.Text)
 
-                Dim cn As SqlConnection = New SqlConnection()
-                Dim cm As SqlCommand = New SqlCommand("SELECT Descripcion, TamanioBase, Tara FROM Articulo WHERE Codigo = '" & txtCodigo.Text & "'")
-                Dim dr As SqlDataReader
+            Dim cn As SqlConnection = New SqlConnection()
+            Dim cm As SqlCommand = New SqlCommand("SELECT Descripcion, TamanioBase, Tara FROM Articulo WHERE Codigo = '" & txtCodigo.Text & "'")
+            Dim dr As SqlDataReader
 
-                Try
+            Try
 
-                    cn.ConnectionString = Helper._ConectarA
-                    cn.Open()
-                    cm.Connection = cn
+                cn.ConnectionString = Helper._ConectarA
+                cn.Open()
+                cm.Connection = cn
 
-                    dr = cm.ExecuteReader()
+                dr = cm.ExecuteReader()
 
-                    lblDescPallet.Text = ""
-                    lblBase.Text = ""
-                    lblTara.Text = ""
+                lblDescPallet.Text = ""
+                txt_Base.Text = ""
+                lblTara.Text = ""
 
-                    If dr.HasRows Then
+                If dr.HasRows Then
 
-                        dr.Read()
+                    dr.Read()
 
-                        lblDescPallet.Text = IIf(IsDBNull(dr.Item("Descripcion")), "", dr.Item("Descripcion"))
-                        lblBase.Text = IIf(IsDBNull(dr.Item("TamanioBase")), "", dr.Item("TamanioBase"))
-                        lblTara.Text = IIf(IsDBNull(dr.Item("Tara")), "0", dr.Item("Tara"))
+                    lblDescPallet.Text = IIf(IsDBNull(dr.Item("Descripcion")), "", dr.Item("Descripcion"))
+                    txt_Base.Text = IIf(IsDBNull(dr.Item("TamanioBase")), "", dr.Item("TamanioBase"))
+                    lblTara.Text = IIf(IsDBNull(dr.Item("Tara")), "0", dr.Item("Tara"))
 
-                        lblDescPallet.Text = UCase(lblDescPallet.Text.Trim)
-                        lblBase.Text = UCase(lblBase.Text.Trim)
-                        lblTara.Text = Helper.formatonumerico(lblTara.Text)
+                    lblDescPallet.Text = UCase(lblDescPallet.Text.Trim)
+                    txt_Base.Text = UCase(txt_Base.Text.Trim)
+                    lblTara.Text = Helper.formatonumerico(lblTara.Text)
 
-                        txtAltura.Focus()
+                    txtAltura.Focus()
 
-                    End If
+                End If
 
-                Catch ex As Exception
-                    MsgBox("Hubo un problema al querer consultar la información del Pallet desde la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
-                Finally
+            Catch ex As Exception
+                MsgBox("Hubo un problema al querer consultar la información del Pallet desde la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+            Finally
 
-                    dr = Nothing
-                    cn.Close()
-                    cn = Nothing
-                    cm = Nothing
+                dr = Nothing
+                cn.Close()
+                cn = Nothing
+                cm = Nothing
 
-                End Try
+            End Try
 
-            ElseIf e.KeyData = Keys.Escape Then
-                txtCodigo.Clear()
-            End If
+        ElseIf e.KeyData = Keys.Escape Then
+            txtCodigo.Clear()
+        End If
 
     End Sub
 
@@ -258,7 +275,7 @@ Public Class IngresoPallet
 
                 If WDescTerminado <> "" Then
                     .Rows(WRow).Cells("DescEnvase").Value = WDescTerminado
-                    .Rows(WRow).Cells("KgUnidad").Value = Helper.formatonumerico(WKgBultoUnidad)
+                    .Rows(WRow).Cells("Tara").Value = Helper.formatonumerico(WKgBultoUnidad)
 
                     .CurrentCell = .Rows(WRow).Cells("CantidadUnidades")
 
@@ -455,8 +472,8 @@ Public Class IngresoPallet
         txtFechaAux.Clear()
         txtFechaAux2.Visible = False
         txtFechaAux2.Clear()
-
-        For Each lbl As Label In {lblBase, lblTara, lblTotalKgBrutos, lblTotalKgNetos}
+        txt_Base.Text = ""
+        For Each lbl As Label In {lblTara, lblTotalKgBrutos, lblTotalKgNetos}
             lbl.Text = ""
         Next
 
@@ -472,7 +489,7 @@ Public Class IngresoPallet
             txtAltura.Text = Helper.formatonumerico(txtAltura.Text)
 
             txtDisponible.Focus()
-            
+
         ElseIf e.KeyData = Keys.Escape Then
             txtAltura.Text = ""
         End If
@@ -618,19 +635,22 @@ Public Class IngresoPallet
 
     Private Sub _CalcularPesos()
         Dim WPeso = 0.0
+        Dim WTaraEnvases = 0.0
         For Each row As DataGridViewRow In dgvProductos.Rows
 
             Dim P1 = If(row.Cells("CantidadUnidades").Value, 0)
             Dim P2 = If(row.Cells("KgUnidad").Value, 0)
+            Dim P3 = If(row.Cells("Tara").Value, 0)
 
             P1 = Val(Helper.formatonumerico(P1))
             P2 = Val(Helper.formatonumerico(P2))
+            P3 = Val(Helper.formatonumerico(P3))
 
-            WPeso += P1 * P2
-
+            WPeso += (P1 * P2)
+            WTaraEnvases += (P1 * P3)
         Next
 
-        lblTotalKgBrutos.Text = Val(Helper.formatonumerico(WPeso)) + Val(lblTara.Text)
+        lblTotalKgBrutos.Text = Val(Helper.formatonumerico(WPeso)) + Val(lblTara.Text) + Val(Helper.formatonumerico(WTaraEnvases))
         lblTotalKgNetos.Text = Helper.formatonumerico(WPeso)
 
         lblTotalKgBrutos.Text = Helper.formatonumerico(lblTotalKgBrutos.Text)
@@ -739,6 +759,7 @@ Public Class IngresoPallet
                 Dim WKgUnidad = If(row.Cells("KgUnidad").Value, "")
                 Dim WDisponible = txtDisponible.Text
                 Dim WDisponibleOrd = Helper.ordenaFecha(WDisponible)
+                Dim WBase = Trim(txt_Base.Text)
 
                 If WTerminado.ToString.Replace("-", "").Trim = "" Then
                     Continue For
@@ -778,10 +799,10 @@ Public Class IngresoPallet
 
                 WClave = WProforma & Helper.ceros(WNroPallet, 2) & Helper.ceros(WRenglon, 2)
 
-                cm.CommandText = String.Format("INSERT INTO ArmadoPallets (Clave, Proforma, Pedido, Pallet, Renglon, CodigoPallet, Altura, CodigoEnvase, Bultos, KgBultos, Producto, Partida, FechaDisponible, FechaDisponibleOrd, WDate)" &
+                cm.CommandText = String.Format("INSERT INTO ArmadoPallets (Clave, Proforma, Pedido, Pallet, Renglon, CodigoPallet, Altura, CodigoEnvase, Bultos, KgBultos, Producto, Partida, FechaDisponible, FechaDisponibleOrd, WDate, TamanioBase)" &
                                                " VALUES " &
-                                               "('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', {6}, '{7}', '{8}', {9}, '{10}', '{11}', '{12}', '{13}', '{14}')",
-                                               WClave, WProforma, WPedido, WNroPallet, WRenglon, WCodPallet, WAltura, WEnvase, WCantUnidades, WKgUnidad, WTerminado, WPartida, WDisponible, WDisponibleOrd, WDate)
+                                               "('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', {6}, '{7}', '{8}', {9}, '{10}', '{11}', '{12}', '{13}', '{14}', '{15}')",
+                                               WClave, WProforma, WPedido, WNroPallet, WRenglon, WCodPallet, WAltura, WEnvase, WCantUnidades, WKgUnidad, WTerminado, WPartida, WDisponible, WDisponibleOrd, WDate, WBase)
                 cm.ExecuteNonQuery()
 
             Next
@@ -1094,7 +1115,7 @@ Public Class IngresoPallet
             txtAltura.Text = ""
             lblDescPallet.Text = ""
             lblTara.Text = ""
-            lblBase.Text = ""
+            txt_Base.Text = ""
         End If
     End Sub
 
@@ -1107,4 +1128,12 @@ Public Class IngresoPallet
             txtFechaAux2_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
         End If
     End Sub
+
+    Private Sub btn_ActualizarDatosEnvases_Click(sender As Object, e As EventArgs) Handles btn_ActualizarDatosEnvases.Click
+        With New ActualizarDatosEnvases
+            .Show(Me)
+        End With
+    End Sub
+
+    
 End Class

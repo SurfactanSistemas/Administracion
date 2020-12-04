@@ -2,7 +2,8 @@
 
 Public Class CargaDatosFrases
     Dim FRASE As String
-    Sub New(ByVal FRASEHP As String, Optional ByVal Codigo As String = "", Optional ByVal Descripcion As String = "", Optional ByVal Observacion As String = "")
+    Dim PermisoGrabar As Boolean
+    Sub New(ByVal FRASEHP As String, Optional ByVal Codigo As String = "", Optional ByVal Descripcion As String = "", Optional ByVal Observacion As String = "", Optional ByVal PermisoGra As Boolean = False)
 
         ' Llamada necesaria para el diseñador.
         InitializeComponent()
@@ -15,7 +16,7 @@ Public Class CargaDatosFrases
             txtDescripcion.Text = Trim(Descripcion)
             txtObservaciones.Text = Trim(Observacion)
         End If
-
+        PermisoGrabar = PermisoGra
     End Sub
 
   
@@ -58,5 +59,14 @@ Public Class CargaDatosFrases
 
     Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles btnCerrar.Click
         Close()
+    End Sub
+
+    Private Sub CargaDatosFrases_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If PermisoGrabar = False Then
+            btnGrabar.Enabled = False
+            txtCodigo.ReadOnly = True
+            txtDescripcion.ReadOnly = True
+            txtObservaciones.ReadOnly = True
+        End If
     End Sub
 End Class

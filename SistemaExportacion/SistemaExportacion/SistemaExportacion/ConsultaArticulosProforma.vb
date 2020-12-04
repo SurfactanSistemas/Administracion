@@ -1,5 +1,5 @@
 ﻿Imports System.Data.SqlClient
-
+Imports Util.Clases.Helper
 Public Class ConsultaArticulosProforma
 
     Private Sub ConsultaArticulosProforma_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -28,7 +28,7 @@ Public Class ConsultaArticulosProforma
         WRow = 0
 
         Try
-            cn.ConnectionString = Helper._ConectarA()
+            cn.ConnectionString = _ConectarA()
             cn.Open()
             cm.Connection = cn
 
@@ -59,8 +59,8 @@ Public Class ConsultaArticulosProforma
                         .Cells("Razon").Value = WRazon
                         .Cells("Codigo").Value = WCodigo
                         .Cells("Descripcion").Value = WDescripcion
-                        .Cells("Cantidad").Value = Helper.formatonumerico(WCantidad)
-                        .Cells("Precio").Value = Helper.formatonumerico(WPrecio)
+                        .Cells("Cantidad").Value = formatonumerico(WCantidad)
+                        .Cells("Precio").Value = formatonumerico(WPrecio)
 
                     End With
 
@@ -145,7 +145,7 @@ Public Class ConsultaArticulosProforma
 
         Try
 
-            cn.ConnectionString = Helper._ConectarA
+            cn.ConnectionString = _ConectarA()
             cn.Open()
             cm.Connection = cn
 
@@ -188,8 +188,8 @@ Public Class ConsultaArticulosProforma
                         .Cells("Razon").Value = WRazon
                         .Cells("Codigo").Value = WCodigo
                         .Cells("Descripcion").Value = WDescripcion
-                        .Cells("Cantidad").Value = Helper.formatonumerico(WCantidad)
-                        .Cells("Precio").Value = Helper.formatonumerico(WPrecio)
+                        .Cells("Cantidad").Value = formatonumerico(WCantidad)
+                        .Cells("Precio").Value = formatonumerico(WPrecio)
 
                     End With
 
@@ -225,8 +225,8 @@ Public Class ConsultaArticulosProforma
 
             Case 1
 
-                num1 = Helper.ordenaFecha(e.CellValue1)
-                num2 = Helper.ordenaFecha(e.CellValue2)
+                num1 = ordenaFecha(e.CellValue1)
+                num2 = ordenaFecha(e.CellValue2)
 
             Case Else
                 Exit Sub

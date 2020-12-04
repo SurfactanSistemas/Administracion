@@ -3,6 +3,20 @@ Imports Util
 
 Public Class VerificacionLoteVencidoMP
 
+    Dim PermisoGrabar As Boolean = True
+    Sub New(ByVal ID As String)
+
+        ' Llamada necesaria para el diseñador.
+        InitializeComponent()
+
+        ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
+        Dim SQLCnslt As String = "SELECT Escritura FROM PermisosPerfiles WHERE ID = '" & ID & "' AND Sistema = 'LABORATORIO' AND Perfil = '" & Operador.Perfil & "' AND Planta = '" & Operador.Base & "' ORDER BY ID"
+        Dim Row As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+        If Row IsNot Nothing Then
+            PermisoGrabar = Row.Item("Escritura")
+        End If
+    End Sub
+
     Private Sub VerificacionLoteVencidoMP_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         pnlContrasena.Visible = False
         CheckForIllegalCrossThreadCalls = False
@@ -10,6 +24,10 @@ Public Class VerificacionLoteVencidoMP
         ProgressBar1.Maximum = 100
         DGV_Verificacion.Columns.Cast(Of DataGridViewColumn).ToList.ForEach(Sub(c) c.ReadOnly = True)
         DGV_Verificacion.Columns("Check").ReadOnly = False
+
+        If PermisoGrabar = False Then
+            btnAjustes.Enabled = False
+        End If
 
         Timer1.Start()
     End Sub
@@ -441,7 +459,7 @@ Public Class VerificacionLoteVencidoMP
 
         ProgressBar1.Maximum = tablaVerificados.Rows.Count + 5
 
-        For Each row As Datarow In tablaVerificados.Rows
+        For Each row As DataRow In tablaVerificados.Rows
             BackgroundWorker1.ReportProgress(1, row)
         Next
 
@@ -450,7 +468,7 @@ Public Class VerificacionLoteVencidoMP
 
     Private Sub BackgroundWorker1_ProgressChanged(ByVal sender As Object, ByVal e As ProgressChangedEventArgs) Handles BackgroundWorker1.ProgressChanged
         Dim row As DataRow = TryCast(e.UserState, DataRow)
-        
+
         With DGV_Verificacion.Rows(DGV_Verificacion.Rows.Add())
 
             .Visible = False
@@ -498,7 +516,7 @@ Public Class VerificacionLoteVencidoMP
     End Sub
 
     Private Sub BackgroundWorker1_RunWorkerCompleted(ByVal sender As Object, ByVal e As RunWorkerCompletedEventArgs) Handles BackgroundWorker1.RunWorkerCompleted
-        
+
         ProgressBar1.Value = 0
         ProgressBar1.Visible = False
 

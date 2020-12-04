@@ -25,6 +25,7 @@ Partial Class IngresoPallet
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LayoutPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.LayoutMenu = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel4 = New System.Windows.Forms.Panel()
@@ -35,6 +36,7 @@ Partial Class IngresoPallet
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.txt_Base = New System.Windows.Forms.TextBox()
         Me.txtDisponible = New System.Windows.Forms.MaskedTextBox()
         Me.txtCodigo = New System.Windows.Forms.MaskedTextBox()
         Me.Label10 = New System.Windows.Forms.Label()
@@ -45,10 +47,10 @@ Partial Class IngresoPallet
         Me.lblTara = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.lblBase = New System.Windows.Forms.Label()
         Me.lblDescPallet = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.btn_ActualizarDatosEnvases = New System.Windows.Forms.Button()
         Me.btnAgregarPallet = New System.Windows.Forms.Button()
         Me.btnEliminar = New System.Windows.Forms.Button()
         Me.btnAgregarPT = New System.Windows.Forms.Button()
@@ -70,6 +72,7 @@ Partial Class IngresoPallet
         Me.DescEnvase = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CantidadUnidades = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.KgUnidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Tara = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutMenu.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -200,6 +203,7 @@ Partial Class IngresoPallet
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.txt_Base)
         Me.GroupBox1.Controls.Add(Me.txtDisponible)
         Me.GroupBox1.Controls.Add(Me.txtCodigo)
         Me.GroupBox1.Controls.Add(Me.Label10)
@@ -210,7 +214,6 @@ Partial Class IngresoPallet
         Me.GroupBox1.Controls.Add(Me.lblTara)
         Me.GroupBox1.Controls.Add(Me.Label5)
         Me.GroupBox1.Controls.Add(Me.Label4)
-        Me.GroupBox1.Controls.Add(Me.lblBase)
         Me.GroupBox1.Controls.Add(Me.lblDescPallet)
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Location = New System.Drawing.Point(6, -1)
@@ -219,6 +222,14 @@ Partial Class IngresoPallet
         Me.GroupBox1.TabIndex = 2
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Información Pallet"
+        '
+        'txt_Base
+        '
+        Me.txt_Base.Location = New System.Drawing.Point(401, 49)
+        Me.txt_Base.MaxLength = 15
+        Me.txt_Base.Name = "txt_Base"
+        Me.txt_Base.Size = New System.Drawing.Size(100, 20)
+        Me.txt_Base.TabIndex = 4
         '
         'txtDisponible
         '
@@ -296,6 +307,7 @@ Partial Class IngresoPallet
         Me.lblTara.Name = "lblTara"
         Me.lblTara.Size = New System.Drawing.Size(65, 21)
         Me.lblTara.TabIndex = 0
+        Me.lblTara.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'Label5
         '
@@ -316,17 +328,6 @@ Partial Class IngresoPallet
         Me.Label4.Size = New System.Drawing.Size(45, 16)
         Me.Label4.TabIndex = 0
         Me.Label4.Text = "Altura:"
-        '
-        'lblBase
-        '
-        Me.lblBase.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
-        Me.lblBase.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.lblBase.Cursor = System.Windows.Forms.Cursors.No
-        Me.lblBase.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblBase.Location = New System.Drawing.Point(397, 48)
-        Me.lblBase.Name = "lblBase"
-        Me.lblBase.Size = New System.Drawing.Size(97, 21)
-        Me.lblBase.TabIndex = 0
         '
         'lblDescPallet
         '
@@ -351,6 +352,7 @@ Partial Class IngresoPallet
         '
         'Panel5
         '
+        Me.Panel5.Controls.Add(Me.btn_ActualizarDatosEnvases)
         Me.Panel5.Controls.Add(Me.btnAgregarPallet)
         Me.Panel5.Controls.Add(Me.btnEliminar)
         Me.Panel5.Controls.Add(Me.btnAgregarPT)
@@ -362,6 +364,15 @@ Partial Class IngresoPallet
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Size = New System.Drawing.Size(833, 62)
         Me.Panel5.TabIndex = 1
+        '
+        'btn_ActualizarDatosEnvases
+        '
+        Me.btn_ActualizarDatosEnvases.Location = New System.Drawing.Point(746, 7)
+        Me.btn_ActualizarDatosEnvases.Name = "btn_ActualizarDatosEnvases"
+        Me.btn_ActualizarDatosEnvases.Size = New System.Drawing.Size(75, 49)
+        Me.btn_ActualizarDatosEnvases.TabIndex = 1
+        Me.btn_ActualizarDatosEnvases.Text = "Actualizar Datos Envases"
+        Me.btn_ActualizarDatosEnvases.UseVisualStyleBackColor = True
         '
         'btnAgregarPallet
         '
@@ -507,7 +518,7 @@ Partial Class IngresoPallet
         Me.dgvProductos.AllowUserToAddRows = False
         Me.dgvProductos.AllowUserToDeleteRows = False
         Me.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvProductos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Terminado, Me.DescTerminado, Me.Partida, Me.Envase, Me.DescEnvase, Me.CantidadUnidades, Me.KgUnidad})
+        Me.dgvProductos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Terminado, Me.DescTerminado, Me.Partida, Me.Envase, Me.DescEnvase, Me.CantidadUnidades, Me.KgUnidad, Me.Tara})
         Me.dgvProductos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.dgvProductos.Location = New System.Drawing.Point(3, 3)
         Me.dgvProductos.Name = "dgvProductos"
@@ -576,6 +587,13 @@ Partial Class IngresoPallet
         Me.KgUnidad.Name = "KgUnidad"
         Me.KgUnidad.Width = 90
         '
+        'Tara
+        '
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Tara.DefaultCellStyle = DataGridViewCellStyle4
+        Me.Tara.HeaderText = "Tara x Unidad"
+        Me.Tara.Name = "Tara"
+        '
         'IngresoPallet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -632,7 +650,6 @@ Partial Class IngresoPallet
     Friend WithEvents Label10 As System.Windows.Forms.Label
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents lblTara As System.Windows.Forms.Label
-    Friend WithEvents lblBase As System.Windows.Forms.Label
     Friend WithEvents lblDescPallet As System.Windows.Forms.Label
     Friend WithEvents btnLimpiar As System.Windows.Forms.Button
     Friend WithEvents txtCodigo As System.Windows.Forms.MaskedTextBox
@@ -652,4 +669,7 @@ Partial Class IngresoPallet
     Friend WithEvents DescEnvase As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents CantidadUnidades As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents KgUnidad As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Tara As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents btn_ActualizarDatosEnvases As System.Windows.Forms.Button
+    Friend WithEvents txt_Base As System.Windows.Forms.TextBox
 End Class

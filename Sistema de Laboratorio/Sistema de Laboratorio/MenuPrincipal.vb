@@ -94,46 +94,54 @@
 
     Private Sub PermisosMenu()
 
-        Dim SQLCnslt As String = "SELECT ID, Visible, Lectura, Escritura FROM PermisosPerfiles WHERE Sistema = '" & SISTEMA & "' AND Perfil = '" & Operador.Perfil & "' ORDER BY ID"
+        Dim SQLCnslt As String = "SELECT ID, Visible, Lectura, Escritura FROM PermisosPerfiles WHERE Sistema = '" & SISTEMA & "' AND Perfil = '" & Operador.Perfil & "' AND Planta = '" & Operador.Base & "' ORDER BY ID"
         Dim TablaDatos As DataTable = GetAll(SQLCnslt, "SurfactanSA")
 
+        If TablaDatos.Rows.Count = 0 Then
+
+            MsgBox("No tiene permisos configurados para esta planta")
+            DeshabilitarTodos()
+        Else
+            For Each Item1 As ToolStripMenuItem In Me.MenuStrip1.Items
+                Dim ID As String = Microsoft.VisualBasic.Right(Item1.Name, 2)
+                Dim Row = BuscarPermisos(TablaDatos, Microsoft.VisualBasic.Right(Item1.Name, 2))
+                If Not Row.Item("Visible") Then
+                    Item1.Enabled = False
+                End If
+                If Item1.DropDownItems.Count > 0 Then
+
+                    For Each Item2 As ToolStripMenuItem In Item1.DropDownItems
+
+                        If Item2.DropDownItems.Count > 0 Then
+
+                            For Each Item3 As ToolStripMenuItem In Item2.DropDownItems
+                                Dim Row3 = BuscarPermisos(TablaDatos, Microsoft.VisualBasic.Right(Item3.Name, 2))
+                                If Not Row3.Item("Visible") Then
+                                    Item3.Enabled = False
+                                End If
+
+                            Next
+                        Else
+                            Dim Row2 = BuscarPermisos(TablaDatos, Microsoft.VisualBasic.Right(Item2.Name, 2))
+                            If Not Row2.Item("Visible") Then
+                                Item2.Enabled = False
+                            End If
+
+                        End If
+
+
+                    Next
+                End If
+
+
+            Next
+
+        End If
         'For Each Item1 As ToolStripMenuItem In (New MenuPrincipal).MenuStrip1.Items
 
         'DeshabilitarTodos()
 
-        For Each Item1 As ToolStripMenuItem In Me.MenuStrip1.Items
-            Dim ID As String = Microsoft.VisualBasic.Right(Item1.Name, 2)
-            Dim Row = BuscarPermisos(TablaDatos, Microsoft.VisualBasic.Right(Item1.Name, 2))
-            If Not Row.Item("Visible") Then
-                Item1.Enabled = False
-            End If
-            If Item1.DropDownItems.Count > 0 Then
-
-                For Each Item2 As ToolStripMenuItem In Item1.DropDownItems
-
-                    If Item2.DropDownItems.Count > 0 Then
-
-                        For Each Item3 As ToolStripMenuItem In Item2.DropDownItems
-                            Dim Row3 = BuscarPermisos(TablaDatos, Microsoft.VisualBasic.Right(Item3.Name, 2))
-                            If Not Row3.Item("Visible") Then
-                                Item3.Enabled = False
-                            End If
-
-                        Next
-                    Else
-                        Dim Row2 = BuscarPermisos(TablaDatos, Microsoft.VisualBasic.Right(Item2.Name, 2))
-                        If Not Row2.Item("Visible") Then
-                            Item2.Enabled = False
-                        End If
-
-                    End If
-
-
-                Next
-            End If
-
-
-        Next
+        
 
     End Sub
 
@@ -200,19 +208,25 @@
     End Sub
 
     Private Sub HToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles HToolStripMenuItem_25.Click
-        With New IngresoFrasesH("H")
+        Dim itemStrip As ToolStripMenuItem = TryCast(sender, ToolStripMenuItem)
+        Dim id As String = Microsoft.VisualBasic.Right(itemStrip.Name, 2)
+        With New IngresoFrasesH("H", id)
             .Show(Me)
         End With
     End Sub
 
     Private Sub PToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles PToolStripMenuItem_26.Click
-        With New IngresoFrasesH("P")
+        Dim itemStrip As ToolStripMenuItem = TryCast(sender, ToolStripMenuItem)
+        Dim id As String = Microsoft.VisualBasic.Right(itemStrip.Name, 2)
+        With New IngresoFrasesH("P", id)
             .Show(Me)
         End With
     End Sub
 
     Private Sub MateriasPrimasToolStripMenuItem1_Click(ByVal sender As Object, ByVal e As EventArgs) Handles MateriasPrimasToolStripMenuItem1_28.Click
-        With New IngresoDatosAdicMP("MP")
+        Dim itemStrip As ToolStripMenuItem = TryCast(sender, ToolStripMenuItem)
+        Dim id As String = Microsoft.VisualBasic.Right(itemStrip.Name, 2)
+        With New IngresoDatosAdicMP("MP", id)
             .Show(Me)
             .pnlConsultarDatos.Visible = False
             .masktxtCodigo.Focus()
@@ -221,7 +235,9 @@
     End Sub
 
     Private Sub ProductosTerminadosToolStripMenuItem1_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ProductosTerminadosToolStripMenuItem1_29.Click
-        With New IngresoDatosAdicMP("PT")
+        Dim itemStrip As ToolStripMenuItem = TryCast(sender, ToolStripMenuItem)
+        Dim id As String = Microsoft.VisualBasic.Right(itemStrip.Name, 2)
+        With New IngresoDatosAdicMP("PT", id)
             .Show(Me)
             .pnlConsultarDatos.Visible = False
             .masktxtCodigo.Focus()
@@ -260,7 +276,9 @@
     End Sub
 
     Private Sub LotesVencidosToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles LotesVencidosToolStripMenuItem_09.Click
-        With New VerificacionLoteVencidoMP
+        Dim itemStrip As ToolStripMenuItem = TryCast(sender, ToolStripMenuItem)
+        Dim id As String = Microsoft.VisualBasic.Right(itemStrip.Name, 2)
+        With New VerificacionLoteVencidoMP(id)
             .Show(Me)
         End With
     End Sub
@@ -272,19 +290,25 @@
     End Sub
 
     Private Sub IngresoDeEspecificacionesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles IngresoDeEspecificacionesToolStripMenuItem_14.Click
-        With New IngresoEspecificacionesPT
+        Dim itemStrip As ToolStripMenuItem = TryCast(sender, ToolStripMenuItem)
+        Dim id As String = Microsoft.VisualBasic.Right(itemStrip.Name, 2)
+        With New IngresoEspecificacionesPT(id)
             .Show(Me)
         End With
     End Sub
 
     Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem1_17.Click
-        With New IngresoEnsayosIntermediosPT
+        Dim itemStrip As ToolStripMenuItem = TryCast(sender, ToolStripMenuItem)
+        Dim id As String = Microsoft.VisualBasic.Right(itemStrip.Name, 2)
+        With New IngresoEnsayosIntermediosPT(id)
             .Show(Me)
         End With
     End Sub
 
     Private Sub ToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem2_20.Click
-        With New IngresoDatosMostrarEnCertificadosAnalisis
+        Dim itemStrip As ToolStripMenuItem = TryCast(sender, ToolStripMenuItem)
+        Dim id As String = Microsoft.VisualBasic.Right(itemStrip.Name, 2)
+        With New IngresoDatosMostrarEnCertificadosAnalisis("", "", False, id)
             .Show(Me)
         End With
     End Sub
@@ -312,25 +336,33 @@
     End Sub
 
     Private Sub MovimientosVariosDeLaboratorioToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MovimientosVariosDeLaboratorioToolStripMenuItem_32.Click
-        With New MovimientosVariosDeLaboratorio
+        Dim itemStrip As ToolStripMenuItem = TryCast(sender, ToolStripMenuItem)
+        Dim id As String = Microsoft.VisualBasic.Right(itemStrip.Name, 2)
+        With New MovimientosVariosDeLaboratorio(id)
             .Show(Me)
         End With
     End Sub
 
     Private Sub AutorizaciónDePedidosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AutorizaciónDePedidosToolStripMenuItem_22.Click
-        With New ListadoAutorizacionPedidos
+        Dim itemStrip As ToolStripMenuItem = TryCast(sender, ToolStripMenuItem)
+        Dim id As String = Microsoft.VisualBasic.Right(itemStrip.Name, 2)
+        With New ListadoAutorizacionPedidos(id)
             .Show(Me)
         End With
     End Sub
     
     Private Sub InformeDeRecepcionDeDrogaDeLaboratorioToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles InformeDeRecepcionDeDrogaDeLaboratorioToolStripMenuItem_31.Click
-        With New InformeRecepcionDrogaLAB
+        Dim itemStrip As ToolStripMenuItem = TryCast(sender, ToolStripMenuItem)
+        Dim id As String = Microsoft.VisualBasic.Right(itemStrip.Name, 2)
+        With New InformeRecepcionDrogaLAB(id)
             .Show(Me)
         End With
     End Sub
 
     Private Sub IngresoYActualizacionDeHojaDeProduccionToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles IngresoYActualizacionDeHojaDeProduccionToolStripMenuItem_33.Click
-        With New IngresoActualizacionHojaProduccionFarma
+        Dim itemStrip As ToolStripMenuItem = TryCast(sender, ToolStripMenuItem)
+        Dim id As String = Microsoft.VisualBasic.Right(itemStrip.Name, 2)
+        With New IngresoActualizacionHojaProduccionFarma(id)
             .Show(Me)
         End With
     End Sub

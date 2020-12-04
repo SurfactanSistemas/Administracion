@@ -23,11 +23,11 @@ Partial Class HistorialProforma
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LayoutPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.LayoutCabecera = New System.Windows.Forms.TableLayoutPanel()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -104,6 +104,8 @@ Partial Class HistorialProforma
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+        Me.cmb_Carpeta = New System.Windows.Forms.ComboBox()
+        Me.Label11 = New System.Windows.Forms.Label()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutCabecera.SuspendLayout()
         Me.LayoutCuerpoPrincipal.SuspendLayout()
@@ -138,7 +140,7 @@ Partial Class HistorialProforma
         Me.LayoutPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45.0!))
         Me.LayoutPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.LayoutPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.LayoutPrincipal.Size = New System.Drawing.Size(654, 523)
+        Me.LayoutPrincipal.Size = New System.Drawing.Size(654, 531)
         Me.LayoutPrincipal.TabIndex = 1
         '
         'LayoutCabecera
@@ -211,7 +213,7 @@ Partial Class HistorialProforma
         Me.LayoutCuerpoPrincipal.RowCount = 2
         Me.LayoutCuerpoPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 84.58244!))
         Me.LayoutCuerpoPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.41756!))
-        Me.LayoutCuerpoPrincipal.Size = New System.Drawing.Size(654, 478)
+        Me.LayoutCuerpoPrincipal.Size = New System.Drawing.Size(654, 486)
         Me.LayoutCuerpoPrincipal.TabIndex = 1
         '
         'Panel1
@@ -227,7 +229,7 @@ Partial Class HistorialProforma
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Margin = New System.Windows.Forms.Padding(0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(654, 404)
+        Me.Panel1.Size = New System.Drawing.Size(654, 411)
         Me.Panel1.TabIndex = 2
         '
         'txtNroProforma
@@ -252,7 +254,7 @@ Partial Class HistorialProforma
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.Padding = New System.Drawing.Point(0, 0)
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(634, 349)
+        Me.TabControl1.Size = New System.Drawing.Size(634, 364)
         Me.TabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed
         Me.TabControl1.TabIndex = 11
         '
@@ -482,8 +484,8 @@ Partial Class HistorialProforma
         '
         'Fecha
         '
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle8
         Me.Fecha.HeaderText = "Fecha"
         Me.Fecha.MaxInputLength = 12
         Me.Fecha.Name = "Fecha"
@@ -494,8 +496,8 @@ Partial Class HistorialProforma
         'Observacion
         '
         Me.Observacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.Observacion.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.Observacion.DefaultCellStyle = DataGridViewCellStyle13
         Me.Observacion.HeaderText = "Observación"
         Me.Observacion.MaxInputLength = 100
         Me.Observacion.Name = "Observacion"
@@ -530,12 +532,14 @@ Partial Class HistorialProforma
         'TabPage2
         '
         Me.TabPage2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.TabPage2.Controls.Add(Me.Label11)
+        Me.TabPage2.Controls.Add(Me.cmb_Carpeta)
         Me.TabPage2.Controls.Add(Me.MaskedTextBox1)
         Me.TabPage2.Controls.Add(Me.dgvArchivos)
         Me.TabPage2.Location = New System.Drawing.Point(4, 34)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(626, 311)
+        Me.TabPage2.Size = New System.Drawing.Size(626, 326)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "ARCHIVOS RELACIONADOS"
         '
@@ -561,16 +565,16 @@ Partial Class HistorialProforma
         Me.dgvArchivos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvArchivos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.FechaCreacion, Me.NombreArchivo, Me.Icono, Me.RutaArchivo})
         Me.dgvArchivos.ContextMenuStrip = Me.ContextMenuStrip1
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle10.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvArchivos.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle12.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvArchivos.DefaultCellStyle = DataGridViewCellStyle12
         Me.dgvArchivos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
-        Me.dgvArchivos.Location = New System.Drawing.Point(23, 18)
+        Me.dgvArchivos.Location = New System.Drawing.Point(23, 36)
         Me.dgvArchivos.MultiSelect = False
         Me.dgvArchivos.Name = "dgvArchivos"
         Me.dgvArchivos.RowTemplate.Height = 40
@@ -579,8 +583,8 @@ Partial Class HistorialProforma
         '
         'FechaCreacion
         '
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.FechaCreacion.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.FechaCreacion.DefaultCellStyle = DataGridViewCellStyle10
         Me.FechaCreacion.HeaderText = "Fecha de Creación"
         Me.FechaCreacion.MaxInputLength = 12
         Me.FechaCreacion.MinimumWidth = 100
@@ -592,8 +596,8 @@ Partial Class HistorialProforma
         'NombreArchivo
         '
         Me.NombreArchivo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.NombreArchivo.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.NombreArchivo.DefaultCellStyle = DataGridViewCellStyle11
         Me.NombreArchivo.HeaderText = "Nombre de Archivo"
         Me.NombreArchivo.Name = "NombreArchivo"
         Me.NombreArchivo.ReadOnly = True
@@ -953,9 +957,9 @@ Partial Class HistorialProforma
         Me.Panel2.Controls.Add(Me.btnArchivos)
         Me.Panel2.Controls.Add(Me.btnCerrar)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(3, 407)
+        Me.Panel2.Location = New System.Drawing.Point(3, 414)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(648, 68)
+        Me.Panel2.Size = New System.Drawing.Size(648, 69)
         Me.Panel2.TabIndex = 3
         '
         'btnNuevaEspecificacion
@@ -1001,11 +1005,34 @@ Partial Class HistorialProforma
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
+        'cmb_Carpeta
+        '
+        Me.cmb_Carpeta.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmb_Carpeta.FormattingEnabled = True
+        Me.cmb_Carpeta.Items.AddRange(New Object() {"General", "Proforma", "FDS", "Certificado", "Packing List"})
+        Me.cmb_Carpeta.Location = New System.Drawing.Point(128, 9)
+        Me.cmb_Carpeta.Name = "cmb_Carpeta"
+        Me.cmb_Carpeta.Size = New System.Drawing.Size(238, 21)
+        Me.cmb_Carpeta.TabIndex = 12
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.Label11.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label11.Location = New System.Drawing.Point(57, 9)
+        Me.Label11.Margin = New System.Windows.Forms.Padding(0)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(60, 18)
+        Me.Label11.TabIndex = 12
+        Me.Label11.Text = "Carpeta:"
+        Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
         'HistorialProforma
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(654, 523)
+        Me.ClientSize = New System.Drawing.Size(654, 531)
         Me.Controls.Add(Me.LayoutPrincipal)
         Me.MaximizeBox = False
         Me.Name = "HistorialProforma"
@@ -1112,4 +1139,6 @@ Partial Class HistorialProforma
     Friend WithEvents PegarArchivosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents GrupoNuevaObs As System.Windows.Forms.Panel
     Friend WithEvents GrupoEspecificacion As System.Windows.Forms.Panel
+    Friend WithEvents Label11 As System.Windows.Forms.Label
+    Friend WithEvents cmb_Carpeta As System.Windows.Forms.ComboBox
 End Class

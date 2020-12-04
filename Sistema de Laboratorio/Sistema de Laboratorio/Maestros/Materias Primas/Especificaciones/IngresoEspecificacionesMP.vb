@@ -14,18 +14,21 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
     Private WTipoProceso As TipoProcesosIngEspecif = Nothing
     Private IDOperadorGrabacion As Short = 0
 
-    Dim PermisoGrabar As Boolean
-    Sub New(ByVal ID As String)
+    Dim PermisoGrabar As Boolean = False
+    Sub New(Optional ByVal ID As String = "0")
 
         ' Llamada necesaria para el diseñador.
         InitializeComponent()
 
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
-        Dim SQLCnslt As String = "SELECT Escritura FROM PermisosPerfiles WHERE ID = '" & ID & "' AND Sistema = 'LABORATORIO' AND Perfil = '" & Operador.Perfil & "' AND Planta = '" & Operador.Base & "' ORDER BY ID"
-        Dim Row As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
-        If Row IsNot Nothing Then
-            PermisoGrabar = Row.Item("Escritura")
+        If Val(ID) <> 0 Then
+            Dim SQLCnslt As String = "SELECT Escritura FROM PermisosPerfiles WHERE ID = '" & ID & "' AND Sistema = 'LABORATORIO' AND Perfil = '" & Operador.Perfil & "' AND Planta = '" & Operador.Base & "' ORDER BY ID"
+            Dim Row As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+            If Row IsNot Nothing Then
+                PermisoGrabar = Row.Item("Escritura")
+            End If
         End If
+
     End Sub
 
 
@@ -48,6 +51,18 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
     Private Sub IngresoEspecificacionesPT_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         txtDescTerminado.BackColor = Globales.WBackColorTerciario
         btnLimpiar_Click(Nothing, Nothing)
+
+        If PermisoGrabar = False Then
+
+            btnGrabar.Enabled = False
+            btnAgregarRenglon.Enabled = False
+            btnImpresion.Enabled = False
+            btnConsultas.Enabled = False
+            dgvEspecif.ReadOnly = True
+            dgvEspecifIngles.ReadOnly = True
+        End If
+
+
     End Sub
 
     Private Sub txtCodigo_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtCodigo.KeyDown
@@ -1482,7 +1497,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
 
     Private Sub btnNotas_Click(sender As Object, e As EventArgs) Handles btnNotas.Click
         If txtCodigo.Text.Replace(" ", "").Length = 10 Then
-            With New NotasCertificadosAnalisis(txtCodigo.Text, True)
+            With New NotasCertificadosAnalisis(txtCodigo.Text, True, PermisoGrabar)
                 .Show(Me)
             End With
         End If

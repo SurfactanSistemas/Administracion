@@ -1,5 +1,18 @@
 ﻿Public Class MovimientosVariosDeLaboratorio
 
+    Dim PermisoGrabar As Boolean
+    Sub New(ByVal ID As String)
+
+        ' Llamada necesaria para el diseñador.
+        InitializeComponent()
+
+        ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
+        Dim SQLCnslt As String = "SELECT Escritura FROM PermisosPerfiles WHERE ID = '" & ID & "' AND Sistema = 'LABORATORIO' AND Perfil = '" & Operador.Perfil & "' AND Planta = '" & Operador.Base & "' ORDER BY ID"
+        Dim Row As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+        If Row IsNot Nothing Then
+            PermisoGrabar = Row.Item("Escritura")
+        End If
+    End Sub
     Private Sub cbxMP_DropDownClosed(ByVal sender As Object, ByVal e As EventArgs) Handles cbxMP.DropDownClosed
         If cbxMP.SelectedIndex = 0 Then
             mastxtCodigo.Text = ""
@@ -51,6 +64,19 @@
         cbxMP_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
         cbxAyuda.SelectedIndex = 0
         cbxTipoMovimiento_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+
+
+        If PermisoGrabar = False Then
+            btnGrabar.Enabled = False
+            txtObservaciones.ReadOnly = True
+            mastxtFecha.ReadOnly = True
+            cbxMP.Enabled = False
+            mastxtCodigo.ReadOnly = True
+            txtDescripcion.ReadOnly = True
+            txtCantidad.ReadOnly = True
+            txtES.ReadOnly = True
+            txtLote.ReadOnly = True
+        End If
 
     End Sub
 
@@ -456,6 +482,9 @@
         txtNroMovimiento.Text = 0
         txtNroMovimiento.Focus()
         btnGrabar.Enabled = True
+        If PermisoGrabar = False Then
+            btnGrabar.Enabled = False
+        End If
     End Sub
 
     Private Sub _ProcesoBusquedaMovVarios()
@@ -564,4 +593,6 @@
     Private Sub cbxTipoMovimiento_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbxTipoMovimiento.SelectedIndexChanged
         txtES.Text = IIf(cbxTipoMovimiento.SelectedIndex = 0, "E", "S")
     End Sub
+
+   
 End Class

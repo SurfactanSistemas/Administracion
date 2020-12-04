@@ -27,6 +27,26 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
     Private TablaCargaV As String = "CargaV"
     Private TablaCargaVIng As String = "CargaVIngles"
 
+
+
+    Dim PermisoGrabar As Boolean = False
+    Sub New(Optional ByVal ID As String = "0")
+
+        ' Llamada necesaria para el diseñador.
+        InitializeComponent()
+
+        ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
+        If Val(ID) <> 0 Then
+            Dim SQLCnslt As String = "SELECT Escritura FROM PermisosPerfiles WHERE ID = '" & ID & "' AND Sistema = 'LABORATORIO' AND Perfil = '" & Operador.Perfil & "' AND Planta = '" & Operador.Base & "' ORDER BY ID"
+            Dim Row As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+            If Row IsNot Nothing Then
+                PermisoGrabar = Row.Item("Escritura")
+            End If
+        End If
+
+    End Sub
+
+
     Private Sub btnCerrar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCerrar.Click
         Close()
     End Sub
@@ -62,8 +82,28 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
         txtPartida.Focus()
 
+        verificarPermiso()
+
     End Sub
 
+    Private Sub verificarPermiso()
+        If PermisoGrabar = False Then
+            btnGrabar.Enabled = False
+            btnActualizarEspecif.Enabled = False
+
+            txtLibros.ReadOnly = True
+            txtPaginas.ReadOnly = True
+            txtEnvases.ReadOnly = True
+            txtComponente.ReadOnly = True
+            txtLotePartida.ReadOnly = True
+            txtOOS.ReadOnly = True
+            txtDesvio.ReadOnly = True
+            txtCantidadEtiquetas.ReadOnly = True
+            txtArchivo.ReadOnly = True
+            txtConfecciono.ReadOnly = True
+
+        End If
+    End Sub
     Private Sub IngresoEnsayosIntermediosPT_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         If Not EsFarma() Then
             TablaPrueTer = "PrueTerNoFarma"
@@ -498,11 +538,13 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                 End If
 
                 If Val(txtEtapa.Text) = 99 Then
+
                     btnNotasCertAnalisis.Enabled = True
                     btnRevalida.Enabled = True
                     txtComponente.Enabled = True
                     txtLotePartida.Enabled = True
                     gbDatosAdicionales.Visible = True
+
                 End If
             End If
 
@@ -1856,7 +1898,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
     End Sub
 
     Private Sub btnNotasCertAnalisis_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnNotasCertAnalisis.Click
-        With New NotasCertificadosAnalisisFarmaPT(txtPartida.Text)
+        With New NotasCertificadosAnalisisFarmaPT(txtPartida.Text, PermisoGrabar)
             .ShowDialog(Me)
         End With
     End Sub

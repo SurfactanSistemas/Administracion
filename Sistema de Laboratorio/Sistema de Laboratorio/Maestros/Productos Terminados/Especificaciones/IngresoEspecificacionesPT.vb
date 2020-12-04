@@ -12,6 +12,20 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
     Private WAutorizado As Boolean = False
     Private WTipoProceso As TipoProcesosIngEspecif = Nothing
 
+    Dim PermisoGrabar As Boolean
+    Sub New(ByVal ID As String)
+
+        ' Llamada necesaria para el diseñador.
+        InitializeComponent()
+
+        ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
+        Dim SQLCnslt As String = "SELECT Escritura FROM PermisosPerfiles WHERE ID = '" & ID & "' AND Sistema = 'LABORATORIO' AND Perfil = '" & Operador.Perfil & "' AND Planta = '" & Operador.Base & "' ORDER BY ID"
+        Dim Row As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+        If Row IsNot Nothing Then
+            PermisoGrabar = Row.Item("Escritura")
+        End If
+    End Sub
+
     Private Sub btnLimpiar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLimpiar.Click
         For Each control As Control In {txtControlCambios, txtDescTerminado, txtEtapa, txtTerminado, txtTipoProceso, txtDescEtapa}
             control.Text = ""
@@ -38,6 +52,15 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
     Private Sub IngresoEspecificacionesPT_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         btnLimpiar_Click(Nothing, Nothing)
+
+        If PermisoGrabar = False Then
+            btnGrabar.Enabled = False
+            btnConsultas.Enabled = False
+            btnImpresion.Enabled = False
+            btnRevalidar.Enabled = False
+            AgregarRenglon.Enabled = False
+        End If
+
     End Sub
 
     Private Sub txtTerminado_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtTerminado.KeyDown
@@ -2456,7 +2479,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
         If txtTerminado.Text.Replace(" ", "").Length < 12 Then Exit Sub
 
-        With New NotasCertificadosAnalisis(txtTerminado.Text)
+        With New NotasCertificadosAnalisis(txtTerminado.Text, False, PermisoGrabar)
             .Show(Me)
         End With
     End Sub

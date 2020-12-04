@@ -3,14 +3,16 @@ Imports Util.Clases
 
 Public Class AutorizarPedido
     Private Pedido As String
+    Dim PermitirGrabar As Boolean
 
-    Sub New(ByVal Pedido As String)
+    Sub New(ByVal Pedido As String, ByVal PermitirGra As Boolean)
 
         ' This call is required by the designer.
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
         Me.Pedido = Pedido
+        PermitirGrabar = PermitirGra
     End Sub
 
     Private Sub AutorizarPedido_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -18,6 +20,8 @@ Public Class AutorizarPedido
             lbl.BackColor = Globales.WBackColorTerciario
             lbl.Text = ""
         Next
+
+        btnAutorizar.Enabled = PermitirGrabar
 
         lblPedido.Text = Pedido
         Dim WCamposLotes As String = ""

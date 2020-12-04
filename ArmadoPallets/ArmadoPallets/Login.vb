@@ -1,5 +1,8 @@
 ﻿Imports System.Configuration
 Imports ArmadoPallets.Clases
+Imports Util
+Imports Util.Clases.Conexion
+Imports Util.Clases.Query
 
 Public Class Login
     
@@ -10,6 +13,7 @@ Public Class Login
     Private Sub Login_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         cmbEntity.SelectedIndex = 0
         txtPsw.Text = ""
+        EmpresaDeTrabajo = "surfactansa"
     End Sub
 
     Private Sub btnAccept_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAccept.Click
@@ -25,6 +29,18 @@ Public Class Login
             Exit Sub
         End If
 
+        Dim WOperador As DataRow = GetSingle("SELECT Operador, Descripcion, SistemaExportacion FROM Operador WHERE UPPER(Clave) = '" & txtPsw.Text & "'", "SurfactanSa")
+
+        If IsNothing(WOperador) Then Throw New Exception("Clave Errónea")
+
+
+        With WOperador
+            Operador.Base = "SurfactanSa"
+            Operador.Codigo = IIf(IsDBNull(.Item("Operador")), 0, .Item("Operador"))
+            Operador.Clave = txtPsw.Text.Trim
+            Operador.Descripcion = IIf(IsDBNull(.Item("Descripcion")), "", .Item("Descripcion"))
+        End With
+        
         If Helper._EsPellital Then
             ' En caso de ser PELLITAL, validamos que la conexion se haga desde una pc con Permisos. Los mismos se definen segun nombre de PC.
 

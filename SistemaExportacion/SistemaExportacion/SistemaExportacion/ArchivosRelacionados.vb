@@ -1,6 +1,7 @@
 ﻿Imports System.Data.SqlClient
 Imports System.IO
 Imports Microsoft.VisualBasic.FileIO
+Imports Util.Clases.Helper
 
 Public Class ArchivosRelacionados
 
@@ -12,7 +13,7 @@ Public Class ArchivosRelacionados
             Return _NroProforma
         End Get
         Set(ByVal value As String)
-            _NroProforma = Helper.ceros(value, 6)
+            _NroProforma = ceros(value, 6)
         End Set
     End Property
 
@@ -44,7 +45,7 @@ Public Class ArchivosRelacionados
             Exit Sub
         End If
 
-        If txtNroProforma.Text.Trim.Length < 6 Then : txtNroProforma.Text = Helper.ceros(txtNroProforma.Text, 6) : End If
+        If txtNroProforma.Text.Trim.Length < 6 Then : txtNroProforma.Text = ceros(txtNroProforma.Text, 6) : End If
 
         WRutaArchivosRelacionados = _RutaCarpetaArchivos() & "\" & txtNroProforma.Text
 
@@ -112,7 +113,7 @@ Public Class ArchivosRelacionados
         Dim dr As SqlDataReader
 
         Try
-            cn.ConnectionString = Helper._ConectarA
+            cn.ConnectionString = _ConectarA()
             cn.Open()
             cm.Connection = cn
 
@@ -197,7 +198,7 @@ Public Class ArchivosRelacionados
 
     Private Sub _ProcesarDragDeArchivo(ByVal e As System.Windows.Forms.DragEventArgs)
 
-        If Trim(txtNroProforma.Text).Length < 6 Then : txtNroProforma.Text = Helper.ceros(txtNroProforma.Text, 6) : End If
+        If Trim(txtNroProforma.Text).Length < 6 Then : txtNroProforma.Text = ceros(txtNroProforma.Text, 6) : End If
 
         Dim WRutaArchivosRelacionados = _RutaCarpetaArchivos() & "\" & txtNroProforma.Text
         Dim archivos() As String = e.Data.GetData(DataFormats.FileDrop)

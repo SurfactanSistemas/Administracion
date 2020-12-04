@@ -1,8 +1,13 @@
 ﻿Imports System.Data.SqlClient
 Imports System.IO
+Imports ArmadoPallets
+Imports CrystalDecisions.Shared
 Imports Microsoft.Office.Interop
+Imports Util
+Imports Util.Clases.Helper
+Imports Util.Clases.Query
 
-Public Class Proforma
+Public Class Proforma : Implements IConsultaPedPrepo
 
     ' Para controles de grilla.
     Private Const YMARGEN = 1.5
@@ -18,13 +23,15 @@ Public Class Proforma
     Private VIAS_ESP = {"", "TERRESTRE", "AÉREA", "MARÍTIMA"}
     Private VIAS_ING = {"", "LAND ROUTE", "BY AIR", "BY SEA"}
 
+    Private NROPEDIDOPRO As String = ""
+
     Private _NroProforma As String
     Public Property NroProforma() As String
         Get
             Return _NroProforma
         End Get
         Set(ByVal value As String)
-            _NroProforma = Helper.ceros(value, 6)
+            _NroProforma = ceros(value, 6)
         End Set
     End Property
 
@@ -39,6 +46,10 @@ Public Class Proforma
             MOSTRAR_MSG_IDIOMAS = False
 
             txtNroProforma_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+
+            CargarDatosAdicionales()
+
+
         Else
             btnLimpiar.PerformClick()
         End If
@@ -74,7 +85,7 @@ Public Class Proforma
 
         End Try
 
-        txtNroProforma.Text = Helper.ceros(ultimo + 1, 6)
+        txtNroProforma.Text = ceros(ultimo + 1, 6)
     End Sub
 
     Private Sub Proforma_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Shown
@@ -82,7 +93,7 @@ Public Class Proforma
     End Sub
 
     Private Function _CS()
-        Return Helper._ConectarA()
+        Return _ConectarA()
         'Return Helper._ConectarA(empresa)
     End Function
 
@@ -126,10 +137,10 @@ Public Class Proforma
                 If Trim(.Cells(0).Value) <> "" Then
 
                     .Cells(1).Value = _TraerDescripcionProducto(.Cells(0).Value)
-                    .Cells(2).Value = Helper.formatonumerico(.Cells(2).Value)
-                    .Cells(3).Value = Helper.formatonumerico(.Cells(3).Value)
+                    .Cells(2).Value = formatonumerico(.Cells(2).Value)
+                    .Cells(3).Value = formatonumerico(.Cells(3).Value)
 
-                    .Cells(4).Value = Helper.formatonumerico((Val(.Cells(2).Value) * Val(.Cells(3).Value)))
+                    .Cells(4).Value = formatonumerico((Val(.Cells(2).Value) * Val(.Cells(3).Value)))
 
                 Else
                     Exit For
@@ -138,7 +149,8 @@ Public Class Proforma
             End With
         Next
 
-        _RecalcularTotal()
+        '_RecalcularTotal()
+        _NormalizarNumerosGrilla()
     End Sub
 
     Private Sub _LimpiarGrilla()
@@ -155,7 +167,7 @@ Public Class Proforma
 
     Private Sub _TraerProforma(ByVal NroProforma As String)
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT p.Renglon, p.Proforma, p.Estado, p.Fecha, p.FechaLimite, p.Cliente, c.Razon, p.Direccion, p.Localidad, p.CondPago, p.OCCliente, p.Condicion, p.Via, p.Observaciones, p.SubTotal, p.Flete, p.Seguro, p.Total, p.DescriTotal, p.Pais, p.CondPagoII, p.ObservacionesII, p.ObservacionesIII, p.DescriTotalII, p.Producto, p.Cantidad, p.Precio, p.Cerrada, p.PackingList, p.Idioma, p.Entregado FROM ProformaExportacion as p, Cliente as c WHERE Proforma = '" & NroProforma & "' AND p.Cliente = c.Cliente ORDER BY Renglon")
+        Dim cm As SqlCommand = New SqlCommand("SELECT p.Renglon, p.Proforma, p.Estado, p.Fecha, p.FechaLimite, p.Cliente, c.Razon, p.Direccion, p.Localidad, p.CondPago, p.OCCliente, p.Condicion, p.Via, p.Observaciones, p.SubTotal, p.Flete, p.Seguro, p.Total, p.DescriTotal, p.Pais, p.CondPagoII, p.ObservacionesII, p.ObservacionesIII, p.DescriTotalII, p.Producto, p.Cantidad, p.Precio, p.Cerrada, p.PackingList, p.Idioma, p.Entregado, p.Otros, p.MotivoOtros FROM ProformaExportacion as p, Cliente as c WHERE Proforma = '" & NroProforma & "' AND p.Cliente = c.Cliente ORDER BY Renglon")
         Dim dr As SqlDataReader
         Dim WRenglon, WEstado, WNroProforma, WFecha, WCliente, WDescripcionCliente, WDireccion, WLocalidad, WCondPago, WOCCliente, WCondicion, WVia, WObservaciones, WSubTotal, WFlete, WSeguro, WTotal, WDescripcionMonto, WPais, WCondPagoII, WObservacionesII, WObservacionesIII, WDescripcionMontoII, WRowIndex
         Dim WNroPedido, WNroFactura, WEntregado, WEnviarDocumentacion, WProformaCerrada, WPackingList, WIdioma, WFechaLimite
@@ -177,6 +189,8 @@ Public Class Proforma
         WFlete = 0.0
         WSeguro = 0.0
         WTotal = 0.0
+        Dim WOtros As Double = 0.0
+        Dim WMotivoOtros As String = ""
         WDescripcionMonto = ""
         WPais = ""
         WCondPagoII = ""
@@ -241,6 +255,10 @@ Public Class Proforma
                             WFechaLimite = IIf(IsDBNull(.Item("FechaLimite")), "", .Item("FechaLimite"))
                             WEntregado = IIf(IsDBNull(.Item("Entregado")), "", .Item("Entregado"))
 
+                            WOtros = IIf(IsDBNull(.Item("Otros")), 0.0, .Item("Otros"))
+                            WMotivoOtros = IIf(IsDBNull(.Item("MotivoOtros")), "", .Item("MotivoOtros"))
+
+
                             txtNroProforma.Text = WNroProforma
                             txtFecha.Text = WFecha
                             txtCliente.Text = WCliente
@@ -258,10 +276,15 @@ Public Class Proforma
                             txtDescripcionTotal.Text = WDescripcionMonto
                             txtDescripcionTotalII.Text = WDescripcionMontoII
                             txtPais.Text = WPais
-                            txtSubTotal.Text = Helper.formatonumerico(WSubTotal)
+                            txtSubTotal.Text = formatonumerico(WSubTotal)
                             cmbEstado.SelectedIndex = Val(WEstado)
                             cmbIdioma.SelectedIndex = Val(WIdioma)
                             txtFechaLimite.Text = WFechaLimite
+
+
+                            txt_MotivoOtros.Text = WMotivoOtros
+                            txt_Otros.Text = WOtros
+
 
                             If Val(WProformaCerrada) = 1 Then
                                 ckCerrado.Checked = True
@@ -275,8 +298,8 @@ Public Class Proforma
                             txtNroPedido.Text = WNroPedido
                             txtSaldoFactura.Text = ""
 
-                            txtFlete.Text = Helper.formatonumerico(WFlete)
-                            txtSeguro.Text = Helper.formatonumerico(WSeguro)
+                            txtFlete.Text = formatonumerico(WFlete)
+                            txtSeguro.Text = formatonumerico(WSeguro)
 
                             If UCase(WEntregado) = "X" then
                                 btnEntregado.Visible=False
@@ -328,7 +351,7 @@ Public Class Proforma
         If e.KeyData = Keys.Enter Then
             If Trim(txtNroProforma.Text) = "" Then : Exit Sub : End If
 
-            txtNroProforma.Text = Helper.ceros(txtNroProforma.Text, 6)
+            txtNroProforma.Text = ceros(txtNroProforma.Text, 6)
 
             Try
                 _TraerProforma(txtNroProforma.Text)
@@ -354,7 +377,7 @@ Public Class Proforma
                 Exit Sub
             End If
 
-            If Val(Helper.ordenaFecha(txtFecha.Text)) > Val(Helper.ordenaFecha(txtFechaLimite.Text)) Then
+            If Val(ordenaFecha(txtFecha.Text)) > Val(ordenaFecha(txtFechaLimite.Text)) Then
 
                 MsgBox("La fecha límite debe ser posterior a la fecha de la Proforma.", MsgBoxStyle.Exclamation)
 
@@ -363,7 +386,7 @@ Public Class Proforma
                 Exit Sub
             End If
 
-            If Helper._ValidarFecha(txtFechaLimite.Text) Then
+            If _ValidarFecha(txtFechaLimite.Text) Then
                 txtObservaciones.Focus()
             End If
 
@@ -378,7 +401,7 @@ Public Class Proforma
         If e.KeyData = Keys.Enter Then
             If Trim(txtFecha.Text.Replace("/", "")) = "" Then : Exit Sub : End If
 
-            If Helper._ValidarFecha(txtFecha.Text) Then
+            If _ValidarFecha(txtFecha.Text) Then
                 txtCliente.Focus()
             End If
 
@@ -398,7 +421,7 @@ Public Class Proforma
 
         Try
 
-            cn.ConnectionString = Helper._ConectarA
+            cn.ConnectionString = _ConectarA()
             cn.Open()
             cm.Connection = cn
 
@@ -563,6 +586,9 @@ Public Class Proforma
                 txtLocalidadCliente.Text = cliente("Localidad")
 
                 txtPais.Focus()
+
+                CargarDatosAdicionales()
+
             Else
                 MsgBox("Cliente inexistente.", MsgBoxStyle.Information)
                 txtCliente.Focus()
@@ -571,6 +597,37 @@ Public Class Proforma
         ElseIf e.KeyData = Keys.Escape Then
             txtCliente.Text = ""
         End If
+
+    End Sub
+
+    Private Sub CargarDatosAdicionales()
+        'CARGAMOS LOS DATOS ADICIONALES DE LAS ETIQUETAS
+        Try
+            Dim SQlCnslt As String = "SELECT EnvasesI, EnvasesII, EnvasesIII, EtiquetaI, EtiquetaII, " _
+                    & "Especif1, Especif2, Especif3, Especif4, Especif5 " _
+                    & "FROM ClienteEspecif WHERE Cliente = '" & UCase(txtCliente.Text) & "'"
+            Dim rowEspecif As DataRow = GetSingle(SQlCnslt, "SurfactanSa")
+            If rowEspecif IsNot Nothing Then
+                With rowEspecif
+                    txt_Envases.Text = OrDefault(.Item("EnvasesI"), "") & vbCrLf _
+                                     & OrDefault(.Item("EnvasesII"), "") & vbCrLf _
+                                     & OrDefault(.Item("EnvasesIII"), "")
+
+                    txt_Etiquetas.Text = OrDefault(.Item("EtiquetaI"), "") & vbCrLf _
+                                       & OrDefault(.Item("EtiquetaII"), "")
+
+                    txt_Otras.Text = OrDefault(.Item("Especif1"), "") & vbCrLf _
+                                   & OrDefault(.Item("Especif2"), "") & vbCrLf _
+                                   & OrDefault(.Item("Especif3"), "") & vbCrLf _
+                                   & OrDefault(.Item("Especif4"), "") & vbCrLf _
+                                   & OrDefault(.Item("Especif5"), "")
+                End With
+            End If
+        Catch ex As Exception
+
+        End Try
+     
+
 
     End Sub
 
@@ -598,7 +655,7 @@ Public Class Proforma
         End Try
 
         If resultados.Rows.Count > 0 Then
-            Return Helper._NormalizarFila(resultados.Rows(0))
+            Return _NormalizarFila(resultados.Rows(0))
         Else
             Return Nothing
         End If
@@ -707,7 +764,7 @@ Public Class Proforma
         End Try
 
         If resultados.Rows.Count > 0 Then
-            Return Helper._NormalizarFila(resultados.Rows(0))
+            Return _NormalizarFila(resultados.Rows(0))
         Else
             Return Nothing
         End If
@@ -822,7 +879,7 @@ Public Class Proforma
 
                 If msg.WParam.ToInt32() = Keys.Enter Then
 
-                    If valor <> "" Then
+                    If Val(valor) <> 0 Then
 
                         Select Case iCol
                             Case 2, 3
@@ -904,7 +961,7 @@ Public Class Proforma
             WTotal += Val(.Cells(2).Value)
             WTotal *= Val(.Cells(3).Value)
 
-            .Cells(4).Value = Helper.formatonumerico(WTotal)
+            .Cells(4).Value = formatonumerico(WTotal)
         End With
 
     End Sub
@@ -914,13 +971,13 @@ Public Class Proforma
 
         For Each row As DataGridViewRow In dgvProductos.Rows
             With row
-                .Cells(2).Value = IIf(.Cells(2).Value <> "", Helper.formatonumerico(.Cells(2).Value), "")
-                .Cells(3).Value = IIf(.Cells(3).Value <> "", Helper.formatonumerico(.Cells(3).Value), "")
+                .Cells(2).Value = IIf(Val(.Cells(2).Value) <> 0, formatonumerico(.Cells(2).Value), "")
+                .Cells(3).Value = IIf(Val(.Cells(3).Value) <> 0, formatonumerico(.Cells(3).Value), "")
                 WTotal += (Val(.Cells(2).Value) * Val(.Cells(3).Value))
             End With
         Next
 
-        txtSubTotal.Text = Helper.formatonumerico(WTotal)
+        txtTotal.Text = formatonumerico(WTotal)
         _RecalcularTotal()
     End Sub
 
@@ -930,7 +987,7 @@ Public Class Proforma
         End If
     End Sub
 
-    Private Sub NumerosConComas(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSubTotal.KeyPress, txtFlete.KeyPress, txtSeguro.KeyPress, txtTotal.KeyPress
+    Private Sub NumerosConComas(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSubTotal.KeyPress, txtFlete.KeyPress, txtSeguro.KeyPress, txtTotal.KeyPress, txt_Otros.KeyPress
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) And Not (CChar(".")) = e.KeyChar Then
             e.Handled = True
         End If
@@ -1144,7 +1201,7 @@ Public Class Proforma
         If File.Exists(_RutaArchivo) Then
 
             Try
-                File.Copy(_RutaArchivo, Helper._CarpetaArchivosProforma(txtNroProforma.Text) & "FDS" & AuxiDesc & AuxiCod & ".pdf", True)
+                File.Copy(_RutaArchivo, _CarpetaArchivosProforma(txtNroProforma.Text) & "FDS" & AuxiDesc & AuxiCod & ".pdf", True)
             Catch ex As Exception
                 'Throw New Exception("No se pudo copiar FDS a Carpeta de Archivos de la Proforma: " & txtNroProforma.Text & vbCrLf & "Motivo: " & ex.Message)
                 Return False
@@ -1158,6 +1215,7 @@ Public Class Proforma
 
 
     Private Sub btnAceptar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAceptar.Click
+        
         Dim cn As New SqlConnection()
         Dim trans As SqlTransaction = Nothing
         Dim cm As New SqlCommand()
@@ -1185,9 +1243,9 @@ Public Class Proforma
         WRenglon = 0
         XRenglon = ""
         WNroProforma = _Left(txtNroProforma.Text, 6)
-        XNroProforma = Helper.ceros(WNroProforma, 6)
+        XNroProforma = ceros(WNroProforma, 6)
         WFecha = txtFecha.Text
-        WFechaOrd = Helper.ordenaFecha(WFecha)
+        WFechaOrd = ordenaFecha(WFecha)
         WCliente = _Left(txtCliente.Text, 6)
         WDireccion = _Left(txtDireccionCliente.Text, 100)
         WLocalidad = _Left(txtLocalidadCliente.Text, 50)
@@ -1196,10 +1254,10 @@ Public Class Proforma
         WCondicion = Val(cmbCondicion.SelectedIndex)
         WVia = cmbVia.SelectedIndex.ToString()
         WObservaciones = _Left(txtObservaciones.Text, 100)
-        WSubTotal = Val(Helper.formatonumerico(txtSubTotal.Text))
-        WFlete = Val(Helper.formatonumerico(txtFlete.Text))
-        WSeguro = Val(Helper.formatonumerico(txtSeguro.Text))
-        WTotal = Val(Helper.formatonumerico(txtTotal.Text))
+        WSubTotal = Val(formatonumerico(txtSubTotal.Text))
+        WFlete = Val(formatonumerico(txtFlete.Text))
+        WSeguro = Val(formatonumerico(txtSeguro.Text))
+        WTotal = Val(formatonumerico(txtTotal.Text))
         WDescripcionMonto = UCase(_Left(txtDescripcionTotal.Text, 100))
         WPais = _Left(txtPais.Text, 15)
 
@@ -1212,7 +1270,7 @@ Public Class Proforma
         WIdioma = Trim(Str$(cmbIdioma.SelectedIndex))
 
         WFechaLimite = txtFechaLimite.Text
-        WFechaLimiteOrd = Helper.ordenaFecha(WFechaLimite)
+        WFechaLimiteOrd = ordenaFecha(WFechaLimite)
 
         If ckCerrado.Checked Then
             WProformaCerrada = "1"
@@ -1234,6 +1292,10 @@ Public Class Proforma
         WPrecio = 0.0
 
         WSinFDS = ""
+
+        Dim WOtros As Double = Val(txt_Otros.Text)
+        Dim WMotivoOtros As String = UCase(txt_MotivoOtros.Text)
+
 
         ' Validamos los datos minimos que se necesitan por lo menos para poder generar una proforma.
         If WCliente = "" Or Trim(WFecha).Length < 10 Then
@@ -1311,15 +1373,15 @@ Public Class Proforma
                     If WCant > 0 And WPrecio > 0 Then
                         WRenglon += 1
 
-                        XRenglon = Helper.ceros(WRenglon, 2)
+                        XRenglon = ceros(WRenglon, 2)
 
                         WClave = XNroProforma & XRenglon
 
-                        WSql = "INSERT INTO ProformaExportacion (Clave, Proforma, Renglon, Fecha, FechaOrd, Estado, Cliente, Direccion, Localidad, CondPago, CondPagoII, OCCliente, Condicion, Via, ViaDesc, Observaciones, ObservacionesII, ObservacionesIII, Producto, DescriProducto, Cantidad, Precio, SubTotal, Flete, Seguro, Total, DescriTotal, DescriTotalII, Pais, Cerrada, PackingList, EnviarDocumentacion, Idioma, FechaLimite, FechaLimiteOrd)" _
+                        WSql = "INSERT INTO ProformaExportacion (Clave, Proforma, Renglon, Fecha, FechaOrd, Estado, Cliente, Direccion, Localidad, CondPago, CondPagoII, OCCliente, Condicion, Via, ViaDesc, Observaciones, ObservacionesII, ObservacionesIII, Producto, DescriProducto, Cantidad, Precio, SubTotal, Flete, Seguro, Total, DescriTotal, DescriTotalII, Pais, Cerrada, PackingList, EnviarDocumentacion, Idioma, FechaLimite, FechaLimiteOrd, MotivoOtros, Otros)" _
                              & " VALUES " _
                              & " ('" & WClave & "', '" & XNroProforma & "', '" & XRenglon & "', '" & WFecha & "', '" & WFechaOrd & "', '" & WEstado & "', '" & WCliente & "', '" & WDireccion & "', '" & WLocalidad & "', '" & WCondPago & "', '" & WCondPagoII & "', '" & WOCCliente & "', '" & WCondicion & "', '" & WVia & "', '" & WViaDesc & "', " _
-                             & "'" & WObservaciones & "', '" & WObservacionesII & "', '" & WObservacionesIII & "', '" & WProd & "', '" & WDesc & "', " & Helper.formatonumerico(WCant) & ", " & Helper.formatonumerico(WPrecio) & ", " & Helper.formatonumerico(WSubTotal) & ", " & Helper.formatonumerico(WFlete) & ", " & Helper.formatonumerico(WSeguro) & ", " _
-                             & Helper.formatonumerico(WTotal) & ", '" & WDescripcionMonto & "', '" & WDescripcionMontoII & "', '" & WPais & "', '" & WProformaCerrada & "', '" & WPackingList & "', '" & WEnviarDoc & "', '" & WIdioma & "', '" & WFechaLimite & "', '" & WFechaLimiteOrd & "')"
+                             & "'" & WObservaciones & "', '" & WObservacionesII & "', '" & WObservacionesIII & "', '" & WProd & "', '" & WDesc & "', " & formatonumerico(WCant) & ", " & formatonumerico(WPrecio) & ", " & formatonumerico(WSubTotal) & ", " & formatonumerico(WFlete) & ", " & formatonumerico(WSeguro) & ", " _
+                             & formatonumerico(WTotal) & ", '" & WDescripcionMonto & "', '" & WDescripcionMontoII & "', '" & WPais & "', '" & WProformaCerrada & "', '" & WPackingList & "', '" & WEnviarDoc & "', '" & WIdioma & "', '" & WFechaLimite & "', '" & WFechaLimiteOrd & "', '" & WMotivoOtros & "', '" & WOtros & "')"
 
                         cm.CommandText = WSql
 
@@ -1345,6 +1407,20 @@ Public Class Proforma
         If Trim(WSinFDS) <> "" Then
             MsgBox("Los siguientes Productos, no poseen FDS: " & vbCrLf & WSinFDS, MsgBoxStyle.Information)
         End If
+
+
+        'ANDRES
+
+        If NROPEDIDOPRO <> "" Then
+            Dim SQLCnslt As String = "SELECT NroProforma FROM PedidoProformaExportacion WHERE NroProforma = '' AND NroPedido = '" & NROPEDIDOPRO & "'"
+            Dim Row As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+            If Row IsNot Nothing Then
+                SQLCnslt = "UPDATE PedidoProformaExportacion SET NroProforma = '" & txtNroProforma.Text & "' WHERE NroProforma = '' AND NroPedido = '" & NROPEDIDOPRO & "'"
+                ExecuteNonQueries("SurfactanSa", SQLCnslt)
+            End If
+        End If
+
+        'ANDRES
 
         txtNroProforma.Text = WNroProforma
         MOSTRAR_MSG_IDIOMAS = False
@@ -1388,11 +1464,14 @@ Public Class Proforma
             End Try
 
             If MsgBox("¿Desea notificar a Ventas sobre la aprobación de la actual Proforma?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+
                 _NotificarAVentas(XNroProforma)
             End If
 
+
         End If
 
+        
         btnVistaPrevia.PerformClick()
 
         'btnLimpiar.PerformClick()
@@ -1442,9 +1521,9 @@ Public Class Proforma
             oMsg.Subject = "Notificación de Aprobación de Proforma (Nº: " & NroProforma & ")"
             oMsg.Body = "Se encuentra APROBADA la Proforma Nº: " & NroProforma
 
-            If NroProforma.ToString.Length < 6 Then : Helper.ceros(NroProforma, 6) : End If
+            If NroProforma.ToString.Length < 6 Then : ceros(NroProforma, 6) : End If
 
-            WArchivoProforma = Helper._CarpetaArchivosProforma(NroProforma) & "Proforma" & NroProforma & ".pdf"
+            WArchivoProforma = _CarpetaArchivosProforma(NroProforma) & "Proforma" & NroProforma & ".pdf"
 
             If Not File.Exists(WArchivoProforma) Then
                 _ActualizarPDFProforma(NroProforma)
@@ -1458,7 +1537,7 @@ Public Class Proforma
 
             oMsg.Display()
 
-            'oMsg.Send()
+            oMsg.Send()
         Catch ex As Exception
             Throw New Exception("No se pudo crear el E-Mail solicitado." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
             Exit Sub
@@ -1514,6 +1593,8 @@ Public Class Proforma
 
         _TraerViasSegunIdioma()
 
+        NROPEDIDOPRO = ""
+
     End Sub
 
     Private Sub _ActualizarNombresProductos()
@@ -1526,13 +1607,13 @@ Public Class Proforma
 
         Try
 
-            cn.ConnectionString = Helper._ConectarA
+            cn.ConnectionString = _ConectarA()
             cn.Open()
             trans = cn.BeginTransaction
             cm.Connection = cn
             cm.Transaction = trans
 
-            Dim WNroProforma As String = Helper.ceros(txtNroProforma.Text, 6)
+            Dim WNroProforma As String = ceros(txtNroProforma.Text, 6)
 
             For Each row As DataGridViewRow In dgvProductos.Rows
                 With row
@@ -1581,7 +1662,7 @@ Public Class Proforma
             _ActualizarNombresProductos()
 
         Catch ex As Exception
-            Helper._MsgBoxConMotivo(ex, "Hubo un problema al querer traer los datos de los Productos de la Proforma para mostrar la Vista Previa.")
+            _MsgBoxConMotivo(ex, "Hubo un problema al querer traer los datos de los Productos de la Proforma para mostrar la Vista Previa.")
             Exit Sub
         End Try
 
@@ -1882,14 +1963,15 @@ Public Class Proforma
 
 
     Private Sub _RecalcularTotal()
-        txtSubTotal.Text = Helper.formatonumerico(txtSubTotal.Text)
-        txtFlete.Text = Helper.formatonumerico(txtFlete.Text)
-        txtSeguro.Text = Helper.formatonumerico(txtSeguro.Text)
-        txtTotal.Text = Helper.formatonumerico(txtTotal.Text)
+        txtSubTotal.Text = formatonumerico(txtSubTotal.Text)
+        txtFlete.Text = formatonumerico(txtFlete.Text)
+        txtSeguro.Text = formatonumerico(txtSeguro.Text)
+        txtTotal.Text = formatonumerico(txtTotal.Text)
+        txt_Otros.Text = formatonumerico(txt_Otros.Text)
 
-        txtTotal.Text = Val(txtSubTotal.Text) - Val(txtFlete.Text) - Val(txtSeguro.Text)
+        txtSubTotal.Text = Val(txtTotal.Text) - Val(txtFlete.Text) - Val(txtSeguro.Text) - Val(txt_Otros.Text)
 
-        txtTotal.Text = Helper.formatonumerico(txtTotal.Text)
+        txtSubTotal.Text = formatonumerico(txtSubTotal.Text)
     End Sub
 
     Private Sub txtFlete_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFlete.KeyDown
@@ -1905,16 +1987,18 @@ Public Class Proforma
     End Sub
 
     Private Sub txtSeguro_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSeguro.KeyDown
-
         If e.KeyData = Keys.Enter Then
-            txtTotal.Focus()
+
+            txt_MotivoOtros.Focus()
+
         ElseIf e.KeyData = Keys.Escape Then
             txtSeguro.Text = ""
         End If
+        
 
     End Sub
 
-    Private Sub RecalcularTotal_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSeguro.Leave, txtFlete.Leave
+    Private Sub RecalcularTotal_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSeguro.Leave, txtFlete.Leave, txt_Otros.Leave
         _RecalcularTotal()
     End Sub
 
@@ -2131,14 +2215,14 @@ Public Class Proforma
         Dim dr As SqlDataReader
 
         Try
-            If MsgBox("¿Está seguro de querer marcar como Entregada a la Proforma? Esta acción hará que la misma ya no se encuentre listada por defecto en el Listado Principal del Sistema de Exportación.") <> MsgBoxResult.Yes Then Exit Sub
+            If MsgBox("¿Está seguro de querer marcar como Entregada a la Proforma? Esta acción hará que la misma ya no se encuentre listada por defecto en el Listado Principal del Sistema de Exportación.", vbYesNo) = MsgBoxResult.No Then Exit Sub
 
-            cn.ConnectionString = Helper._ConectarA
+            cn.ConnectionString = _ConectarA()
             cn.Open()
             cm.Connection = cn
 
             Dim WFechaEntrega = Date.Now.ToString("dd/MM/yyyy")
-            Dim WFechaEntregaOrd = Helper.ordenaFecha(WFechaEntrega)
+            Dim WFechaEntregaOrd = ordenaFecha(WFechaEntrega)
 
             cm.CommandText = "UPDATE ProformaExportacion SET Entregado = 'X', FechaEntregado = '" & WFechaEntrega & "', FechaEntregadoOrd = '" & WFechaEntregaOrd & "' WHERE Proforma = '" & txtNroProforma.Text & "'"
 
@@ -2157,5 +2241,166 @@ Public Class Proforma
 
         End Try
         
+    End Sub
+
+    
+    Private Sub btn_TraerDatos_Click(sender As Object, e As EventArgs) Handles btn_TraerDatos.Click
+        With New ConsultaPedidosDeProforma
+            .Show(Me)
+        End With
+    End Sub
+
+    Public Sub PasarNroPedido(NroPedido As String) Implements IConsultaPedPrepo.PasarNroPedido
+        Dim SQLCnslt As String = "SELECT p.*, c.Razon  FROM PedidoProformaExportacion p INNER JOIN Cliente c ON p.Cliente = c.Cliente " _
+                                     & "WHERE NroPedido = '" & NroPedido & "' ORDER BY Renglon"
+        Dim Tabla As DataTable = GetAll(SQLCnslt, "SurfactanSa")
+
+        If Tabla.Rows.Count > 0 Then
+            Dim Posicion As Integer = 0
+            For Each row As DataRow In Tabla.Rows
+                With row
+                    If Posicion = 0 Then
+                        NROPEDIDOPRO = Trim(.Item("NroPedido"))
+                        txtFecha.Text = .Item("Fecha")
+                        txtCliente.Text = .Item("Cliente")
+                        txtDescripcionCliente.Text = .Item("Razon")
+                        txtCondicionPago.Text = .Item("CondPago")
+                        txtOCCliente.Text = .Item("OCCliente")
+                        cmbCondicion.SelectedIndex = .Item("Condicion")
+                        cmbIdioma.SelectedIndex = .Item("idioma")
+                        cmbVia.SelectedIndex = .Item("Via")
+                        txtDireccionCliente.Text = .Item("Direccion")
+                        txtLocalidadCliente.Text = .Item("Localidad")
+                        txtPais.Text = .Item("Pais")
+                        txtObservaciones.Text = .Item("Observaciones")
+                        txtObservacionesII.Text = .Item("ObservacionesII")
+                        txtObservacionesIII.Text = .Item("ObservacionesIII")
+                        txt_Contacto.Text = .Item("Contacto")
+                        txt_MailContacto.Text = .Item("MailContacto")
+                        txtSubTotal.Text = formatonumerico(.Item("Total"))
+                    End If
+                    Dim Saldo As Double = .Item("Cantidad") * .Item("Precio")
+                    dgvProductos.Rows(Posicion).Cells(0).Value = .Item("Producto")
+                    dgvProductos.Rows(Posicion).Cells(1).Value = .Item("DescriProducto")
+                    dgvProductos.Rows(Posicion).Cells(2).Value = .Item("Cantidad")
+                    dgvProductos.Rows(Posicion).Cells(3).Value = .Item("Precio")
+                    dgvProductos.Rows(Posicion).Cells(4).Value = formatonumerico(Saldo)
+                    Posicion += 1
+                End With
+
+            Next
+
+
+        End If
+        CargarDatosAdicionales()
+        _NormalizarNumerosGrilla()
+    End Sub
+
+    
+
+    Private Sub btn_GenerarBotaEmpaque_Click(sender As Object, e As EventArgs) Handles btn_GenerarNotaEmpaque.Click
+
+        Dim WRutaArchivosRelacionados = _RutaCarpetaArchivos() & "\" & txtNroProforma.Text & "\" & "Packing List\"
+
+        'ELIMINO CUALQUIERA DE LOS DOS QUE ESTUVIERA GENERADO PARA QUE SOLO QUEDE UNO
+        Dim WRutaArchivosRelacionadosI = _RutaCarpetaArchivos() & "\" & txtNroProforma.Text & "\" & "Packing List" & "\" & "Nota de Empaque.pdf"
+        Dim WRutaArchivosRelacionadosII = _RutaCarpetaArchivos() & "\" & txtNroProforma.Text & "\" & "Packing List" & "\" & "Nota de Empaque Ingles.pdf"
+
+        System.IO.File.Delete(WRutaArchivosRelacionadosI)
+        System.IO.File.Delete(WRutaArchivosRelacionadosII)
+
+        Select Case cmbIdioma.SelectedIndex
+
+            Case 0, 1
+                With New Util.VistaPrevia
+                    .Base = "SurfactanSa"
+                    .Reporte = New NotaEmpaque
+                    .Formula = "{ArmadoPallets.Proforma} = '" & txtNroProforma.Text & "' AND {ArmadoPallets.Proforma} = {ProformaExportacion.Proforma} AND {ProformaExportacion.Renglon} = '01'"
+                    '.Mostrar()
+                    '.Exportar("Nota de Empaque", ExportFormatType.PortableDocFormat, WRutaArchivosRelacionados)
+                    .GuardarPDF("Nota de Empaque", WRutaArchivosRelacionados)
+                End With
+            Case 2
+
+                With New Util.VistaPrevia
+                    .Base = "SurfactanSa"
+                    .Reporte = New NotaEmpaqueIngles
+                    .Formula = "{ArmadoPallets.Proforma} = '" & txtNroProforma.Text & "' AND {ArmadoPallets.Proforma} = {ProformaExportacion.Proforma} AND {ProformaExportacion.Renglon} = '01'"
+                    '.Mostrar()
+                    '.Exportar("Nota de Empaque Ingles", ExportFormatType.PortableDocFormat, WRutaArchivosRelacionados)
+                    .GuardarPDF("Nota de Empaque Ingles", WRutaArchivosRelacionados)
+                End With
+
+        End Select
+
+
+        GenerarRegistroEnHistorial()
+
+        MsgBox("Se genero la nota de empaque en la carpeta de Packing List")
+    End Sub
+
+    Private Sub GenerarRegistroEnHistorial()
+
+        Try
+            Dim WNro_Observacion As String = _ProximoNroObservacion()
+            Dim WRenglon As String = "01"
+            Dim WClave As String = WNro_Observacion.PadRight(6, "0") & WRenglon
+            Dim WProforma As String = Trim(txtNroProforma.Text)
+            Dim WObservaciones As String = "Se actualizo la Nota de Envases por " & Trim(Operador.Descripcion)
+            Dim WUsuario As String = Operador.Descripcion
+            Dim WFecha As String = Date.Today.ToString("dd/MM/yyyy")
+            Dim WFechaOrd As String = ordenaFecha(WFecha)
+
+            Dim SQLCnslt As String = ""
+
+            SQLCnslt = "INSERT INTO ProformaExportacionHistorial (Clave, NroObservacion, Renglon, Proforma, Usuario, Fecha, FechaOrd, Observaciones) " _
+                                  & "VALUES ('" & WClave & "'," & WNro_Observacion & ",'" & WRenglon & "','" & WProforma & "','" & WUsuario & "','" & WFecha & "','" & WFechaOrd & "','" & WObservaciones & "')"
+         
+            ExecuteNonQueries("SurfactanSa", SQLCnslt)
+
+        Catch ex As Exception
+            MsgBox("Hubo un error al generar el registro de historial para la proforma " & Trim(txtNroProforma.Text) & "")
+        End Try
+
+    End Sub
+
+    Private Function _ProximoNroObservacion()
+
+        Dim actual = 0
+        Dim SQLCnslt As String = "SELECT TOP 1 NroObservacion as NroActual FROM ProformaExportacionHistorial ORDER BY NroObservacion DESC"
+        Try
+            Dim RowObservacion As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+            If RowObservacion IsNot Nothing Then
+                actual = RowObservacion.Item("NroActual")
+
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer traer el próximo número de Observación de la Base de Datos.")
+
+        End Try
+
+        Return actual + 1
+
+    End Function
+
+    Private Sub txt_Otros_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_Otros.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            txtTotal.Focus()
+        ElseIf e.KeyData = Keys.Escape Then
+            txt_Otros.Text = ""
+        End If
+    End Sub
+
+    Private Sub txt_MotivoOtros_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_MotivoOtros.KeyDown
+        If e.KeyData = Keys.Enter Then
+
+            txt_Otros.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txt_MotivoOtros.Text = ""
+        End If
+
     End Sub
 End Class

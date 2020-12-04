@@ -1,5 +1,20 @@
 ﻿Public Class ListadoAutorizacionPedidos
 
+    Dim PermisoGrabar As Boolean
+    Sub New(ByVal id As String)
+
+        ' Llamada necesaria para el diseñador.
+        InitializeComponent()
+
+        ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
+        If Val(ID) <> 0 Then
+            Dim SQLCnslt As String = "SELECT Escritura FROM PermisosPerfiles WHERE ID = '" & ID & "' AND Sistema = 'LABORATORIO' AND Perfil = '" & Operador.Perfil & "' AND Planta = '" & Operador.Base & "' ORDER BY ID"
+            Dim Row As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+            If Row IsNot Nothing Then
+                PermisoGrabar = Row.Item("Escritura")
+            End If
+        End If
+    End Sub
     Private Sub ListadoAutorizacionPedidos_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         btnActualizar_Click(Nothing, Nothing)
     End Sub
@@ -17,7 +32,7 @@
     Private Sub dgvPedidos_CellMouseDoubleClick(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles dgvPedidos.CellMouseDoubleClick
         If e.RowIndex < 0 Then Exit Sub
 
-        With New AutorizarPedido(dgvPedidos.CurrentRow.Cells("Pedido").Value)
+        With New AutorizarPedido(dgvPedidos.CurrentRow.Cells("Pedido").Value, PermisoGrabar)
             .ShowDialog(Me)
         End With
 
