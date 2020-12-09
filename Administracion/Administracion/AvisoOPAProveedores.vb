@@ -120,6 +120,7 @@ Public Class AvisoOPAProveedores
 
                 Dim WFechasTransferencias As String = ""
                 Dim WFechasECheques As String = ""
+                Dim WFechasCompensaciones As String = ""
 
                 With row2
                     Dim WOrden As String = OrDefault(.Item("Orden"), "")
@@ -154,13 +155,11 @@ Public Class AvisoOPAProveedores
 
                                     Case 6 ' Compensación entre Cuentas Corrientes.
                                         EsPorTransferencia = Val(OrDefault(.Item("Cuenta"), "00")) = 5
-                                        '
-                                        ' TODO Ver bien cómo identificar una compensación.
-                                        '
+                                        
                                         WHayCompensaciones = Val(OrDefault(.Item("Cuenta"), "00")) = 5
 
-                                        If EsPorTransferencia And Not WFechasTransferencias.Contains(OrDefault(.Item("Fecha2"), "")) Then
-                                            WFechasTransferencias &= OrDefault(.Item("Fecha2"), "") & ","
+                                        If WHayCompensaciones And Not WFechasCompensaciones.Contains(OrDefault(.Item("Fecha2"), "")) Then
+                                            WFechasCompensaciones &= OrDefault(.Item("Fecha2"), "") & ","
                                         End If
 
                                         If EsPorTransferencia Then Exit For
@@ -196,7 +195,7 @@ Public Class AvisoOPAProveedores
                                 If _EsPellital() Then
                                     _EnviarAvisoOPDisponiblePellital(WProveedor, WDescProveedor, WOrden, EsPorTransferencia, WFechasTransferencias, PorTransferenciaYCheques, HayECheques:=WHayECheques, FechasECheques:=WFechasECheques, TipoOrd:=WTipoOrd)
                                 Else
-                                    _EnviarAvisoOPDisponible(WProveedor, WDescProveedor, WOrden, EsPorTransferencia, WFechasTransferencias, PorTransferenciaYCheques, HayECheques:=WHayECheques, FechasECheques:=WFechasECheques, TipoOrd:=WTipoOrd)
+                                    _EnviarAvisoOPDisponible(WProveedor, WDescProveedor, WOrden, EsPorTransferencia, WFechasTransferencias, PorTransferenciaYCheques, HayECheques:=WHayECheques, FechasECheques:=WFechasECheques, TipoOrd:=WTipoOrd, WHayCompensaciones:=WHayCompensaciones, WFechasCompensaciones:=WFechasCompensaciones)
                                 End If
 
                             End If
@@ -442,7 +441,7 @@ Public Class AvisoOPAProveedores
         Return WTabla
     End Function
 
-    Private Sub _EnviarAvisoOPDisponible(ByVal Proveedor As String, ByVal wDescProveedor As String, Optional ByVal OrdenPago As String = "", Optional ByVal EsPorTransferencia As Boolean = False, Optional ByVal wFechasTransferencias As String = "", Optional ByVal PorTransferenciaYCheques As Boolean = False, Optional ByVal HayECheques As Boolean = False, Optional ByVal FechasECheques As String = "", Optional ByVal TipoOrd As Integer = 0, Optional ByVal WHayCompensaciones As Boolean = False)
+    Private Sub _EnviarAvisoOPDisponible(ByVal Proveedor As String, ByVal wDescProveedor As String, Optional ByVal OrdenPago As String = "", Optional ByVal EsPorTransferencia As Boolean = False, Optional ByVal wFechasTransferencias As String = "", Optional ByVal PorTransferenciaYCheques As Boolean = False, Optional ByVal HayECheques As Boolean = False, Optional ByVal FechasECheques As String = "", Optional ByVal TipoOrd As Integer = 0, Optional ByVal WHayCompensaciones As Boolean = False, Optional ByVal WFechasCompensaciones As String = "")
 
         If Proveedor.Trim = "" Then Exit Sub
         If EsPorTransferencia And Trim(OrdenPago) = "" Then Exit Sub
@@ -482,19 +481,22 @@ Public Class AvisoOPAProveedores
                 If EsPorTransferencia Then
 
                     'WBody = "Informamos que durante el transcurso del día de hoy, SURFACTAN S.A. le realizará una transferencia"
-                    WBody = "Informamos que durante el transcurso del día de hoy, SURFACTAN S.A. le realizará un pago mediante los siguientes métodos de pagos: "
+                    WBody = "Informamos que durante el transcurso del día de hoy, SURFACTAN S.A. le realizará un pago mediante los siguientes métodos de pagos: " & "<br/>"
 
-                    WBody &= vbCrLf & "- Transferencia Bancaria"
+                    If Not WHayCompensaciones Then
+                        WBody &= vbCrLf & "- Transferencia Bancaria"
 
-                    If wFechasTransferencias.Trim <> "" Then
+                        If wFechasTransferencias.Trim <> "" Then
 
-                        If wFechasTransferencias.Split(",").Count > 1 Then
-                            WBody &= " con las siguientes fechas: "
-                        Else
-                            WBody &= " con fecha: "
+                            If wFechasTransferencias.Split(",").Count > 1 Then
+                                WBody &= " con las siguientes fechas: "
+                            Else
+                                WBody &= " con fecha: "
+                            End If
+
+                            WBody &= "<strong>" & wFechasTransferencias & "</strong>"
+
                         End If
-
-                        WBody &= "<strong>" & wFechasTransferencias & "</strong>"
 
                     End If
 
@@ -518,10 +520,20 @@ Public Class AvisoOPAProveedores
                     End If
 
                     If WHayCompensaciones Then
-                        '
-                        ' TODO Ver bien cuál es el texto a poner.
-                        '
+
                         WBody &= vbCrLf & "- Compensación de Pago."
+
+                        If WFechasCompensaciones.Trim <> "" Then
+
+                            If WFechasCompensaciones.Split(",").Count > 1 Then
+                                WBody &= " con las siguientes fechas: "
+                            Else
+                                WBody &= " con fecha: "
+                            End If
+
+                            WBody &= "<strong>" & WFechasCompensaciones & "</strong>."
+
+                        End If
                     End If
 
                     If PorTransferenciaYCheques Then
@@ -535,7 +547,7 @@ Public Class AvisoOPAProveedores
                 ElseIf HayECheques Then
 
                     'WBody = "Informamos que en el día de la fecha, SURFACTAN S.A. le ha realizado un pago a través de Cheque(s) Electrónico(s)"
-                    WBody = "Informamos que en el día de la fecha, SURFACTAN S.A. le ha realizado un pago mediante los siguientes metodos de pago:"
+                    WBody = "Informamos que en el día de la fecha, SURFACTAN S.A. le ha realizado un pago mediante los siguientes metodos de pago:" & "<br/>"
 
                     WBody &= vbCrLf & "- Cheque(s) Electrónico(s)"
 
@@ -552,10 +564,21 @@ Public Class AvisoOPAProveedores
                     End If
 
                     If WHayCompensaciones Then
-                        '
-                        ' TODO Ver bien cuál es el texto a poner.
-                        '
-                        WBody &= vbCrLf & "- Compensación de Pago."
+
+                        WBody &= vbCrLf & "- Compensación de Pago"
+
+                        If WFechasCompensaciones.Trim <> "" Then
+
+                            If WFechasCompensaciones.Split(",").Count > 1 Then
+                                WBody &= " con las siguientes fechas: "
+                            Else
+                                WBody &= " con fecha: "
+                            End If
+
+                            WBody &= "<strong>" & WFechasCompensaciones & "</strong>."
+
+                        End If
+
                     End If
 
                     If PorTransferenciaYCheques Then
