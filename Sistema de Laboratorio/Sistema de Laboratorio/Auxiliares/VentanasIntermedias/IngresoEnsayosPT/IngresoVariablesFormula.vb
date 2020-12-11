@@ -93,7 +93,7 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
 
 
 
-    Sub New(ByVal Formula As String, ByVal Variables(,) As String, ByVal Valor As String, Optional ByVal Grilla As DataGridView = Nothing, Optional ByVal Decimales As Object = Nothing, Optional ByVal Renglon As Integer = -1, Optional ByVal Referencias(,) As String = Nothing)
+    Sub New(ByVal Formula As String, ByVal Variables(,) As String, ByVal Valor As String, Optional ByVal Grilla As DataGridView = Nothing, Optional ByVal Decimales As Object = Nothing, Optional ByVal Renglon As Integer = -1, Optional ByVal Referencias(,) As String = Nothing, Optional ByVal WDesdeCargaResultados As Boolean = False)
 
         ' This call is required by the designer.
         InitializeComponent()
@@ -119,6 +119,8 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
             Dim t As String = _Right(Valor, Valor.Replace(".", "").Replace(",", "").Length - aux)
             txtDecimales.Text = t.Length
         End If
+
+        txtDecimales.Enabled = Not WDesdeCargaResultados
 
     End Sub
 
@@ -166,6 +168,7 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
 
     Private Sub _CargarDatosFormulaDefault()
         Dim wultima As Short = 1
+        Dim regex As New Regex("R[0-9]{1,2}")
 
         For i = 1 To 10
             Variables(i, 1) = Trim(Variables(i, 1))
@@ -177,6 +180,11 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
 
         For i = 1 To 10
             If Variables(i, 1) <> "" Then
+
+                If regex.IsMatch(Variables(i, 1)) Then
+                    Continue For
+                End If
+
                 dgvVariables.Rows.Add(i, Variables(i, 1), Variables(i, 2).Replace(",", "."))
                 wultima += 1
             End If
@@ -192,8 +200,7 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
         '
         ' Definimos las Referencias.
         '
-        Dim regex As New Regex("R[0-9]{1,2}")
-
+        
         For Each m As Match In regex.Matches(Formula)
 
             Dim renglon As Integer = Val(m.Value.ToString.Replace("R", ""))
@@ -277,6 +284,11 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
                 End If
             Next
         End With
+
+        For i As Integer = 1 To 10
+            Referencias(i, 1) = OrDefault(Referencias(i, 1), "")
+            Referencias(i, 2) = OrDefault(Referencias(i, 2), "")
+        Next
 
         With parser.Values
             For i = 1 To 10
@@ -377,6 +389,11 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
                 ListaSQLCnslt.Add(SQLCnslt)
 
                 ExecuteNonQueries("Surfactan_II", ListaSQLCnslt.ToArray())
+
+                Dim WOwner As INotificaActualizacion = TryCast(Owner, INotificaActualizacion)
+
+                If WOwner IsNot Nothing Then WOwner._ProcesarNotificaActualizacion()
+
                 Exit Sub
             End If
         End If

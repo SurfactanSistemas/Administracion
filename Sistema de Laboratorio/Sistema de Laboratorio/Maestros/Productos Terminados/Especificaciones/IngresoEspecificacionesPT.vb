@@ -173,7 +173,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                     Dim WInformaEspecif = OrDefault(.Item("InformaEspecif"), "0")
                     Dim WFormulaEspecif = OrDefault(.Item("FormulaEspecif"), "")
                     Dim WSubEtapas = Val(OrDefault(.Item("SubEtapas"), "")) = 1
-                    Dim WImpreParametro = _GenerarImpreParametro(WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif, WInformaEspecif)
+                    Dim WImpreParametro = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif, WInformaEspecif)
 
                     If Val(WTipoEspecif) = 0 And WImpreParametro <> "" Then WImpreParametro &= " (c)"
 
@@ -467,7 +467,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                     Dim WMenorIgualEspecif = OrDefault(.Item("MenorIgualEspecif"), "0")
                     Dim WInformaEspecif = OrDefault(.Item("InformaEspecif"), "0")
                     Dim WFormulaEspecif = OrDefault(.Item("FormulaEspecif"), "")
-                    Dim WImpreParametro = _GenerarImpreParametro(WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif, WInformaEspecif)
+                    Dim WImpreParametro = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif, WInformaEspecif)
 
                     If Val(WTipoEspecif) = 0 And WImpreParametro <> "" Then WImpreParametro &= " (c)"
 
@@ -557,7 +557,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                 Dim WInformaEspecif = OrDefault(.Item("InformaEspecif"), "0")
                 Dim WFormulaEspecif = OrDefault(.Item("FormulaEspecif"), "")
                 Dim WSubEtapas = Val(OrDefault(.Item("SubEtapas"), "")) = 1
-                Dim WImpreParametro = _GenerarImpreParametro(WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif, WInformaEspecif)
+                Dim WImpreParametro = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif, WInformaEspecif)
 
                 If Val(WTipoEspecif) = 0 And WImpreParametro <> "" Then WImpreParametro &= " (c)"
 
@@ -632,13 +632,16 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
         TabControl1.SelectTab(1)
     End Sub
 
-    Private Function _GenerarImpreParametro(ByVal wDesdeEspecif As String, ByVal wHastaEspecif As String, ByVal wUnidadEspecif As String, ByVal wMenorIgualEspecif As String, WInformaEspecif As String) As String
+    Private Function _GenerarImpreParametro(ByVal WTipoEspecif As String, ByVal wDesdeEspecif As String, ByVal wHastaEspecif As String, ByVal wUnidadEspecif As String, ByVal wMenorIgualEspecif As String, WInformaEspecif As String) As String
 
+        WTipoEspecif = OrDefault(Trim(WTipoEspecif), "")
         wDesdeEspecif = OrDefault(Trim(wDesdeEspecif), "")
         wHastaEspecif = OrDefault(Trim(wHastaEspecif), "")
         wUnidadEspecif = OrDefault(Trim(wUnidadEspecif), "")
         wMenorIgualEspecif = OrDefault(Trim(wMenorIgualEspecif), "")
         WInformaEspecif = OrDefault(Trim(WInformaEspecif), "")
+
+        If Val(WInformaEspecif) = 0 And Val(WTipoEspecif) = 2 Then Return "Informativo"
 
         If Val(wDesdeEspecif) = 0 And Val(wHastaEspecif) = 0 Then Return "Cumple Ensayo"
 
@@ -652,7 +655,9 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
             If Val(wDesdeEspecif) = 0 And Val(wHastaEspecif) <> 0 Then
 
-                If Val(wMenorIgualEspecif) = 1 Then Return String.Format("Máximo {0} {1}", wHastaEspecif, wUnidadEspecif)
+                If Val(wMenorIgualEspecif) = 1 Then
+                    Return String.Format("Máximo {0} {1}", wHastaEspecif, wUnidadEspecif)
+                End If
 
                 Return String.Format("Menor a {0} {1}", wHastaEspecif, wUnidadEspecif)
 
@@ -698,7 +703,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                 WParametrosFormula(i) = Trim(OrDefault(.Cells("Variable" & i).Value, ""))
             Next
 
-            Dim frm As New IngresoParametrosEspecificaciones(WEnsayo, WDescEnsayo, WParametro, WTipo, WInforma, WMenorIgual, WDesde, WHasta, WUnidad, WFarmacopea, WFormula, WParametrosFormula)
+            Dim frm As New IngresoParametrosEspecificaciones(txtTerminado.Text, WEnsayo, WDescEnsayo, WParametro, WTipo, WInforma, WMenorIgual, WDesde, WHasta, WUnidad, WFarmacopea, WFormula, WParametrosFormula)
             frm.ShowDialog(Me)
 
             dgvEspecif.Focus()
@@ -719,8 +724,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
             .Cells("Farmacopea").Value = WFarmacopea
             .Cells("FormulaEspecif").Value = Formula
 
-            Dim WImpreParametro = _GenerarImpreParametro(Desde, Hasta, Unidad, MenorIgual, Informa)
-
+            Dim WImpreParametro = _GenerarImpreParametro(Tipo, Desde, Hasta, Unidad, MenorIgual, Informa)
 
             If Val(Tipo) = 0 And WImpreParametro <> "" Then WImpreParametro &= " (c)"
 
@@ -2722,7 +2726,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
             With row
 
-                WObservacion1 = _GenerarImpreParametro(OrDefault(.Item("DesdeEspecif"), ""), OrDefault(.Item("HastaEspecif"), ""), OrDefault(.Item("UnidadEspecif"), ""), OrDefault(.Item("MenorIgualEspecif"), ""), OrDefault(.Item("InformaEspecif"), ""))
+                WObservacion1 = _GenerarImpreParametro(OrDefault(.Item("TipoEspecif"), ""), OrDefault(.Item("DesdeEspecif"), ""), OrDefault(.Item("HastaEspecif"), ""), OrDefault(.Item("UnidadEspecif"), ""), OrDefault(.Item("MenorIgualEspecif"), ""), OrDefault(.Item("InformaEspecif"), ""))
 
                 WSqls.Add(String.Format("UPDATE " & WTablaCargaV & " SET Observacion1 = '{1}' WHERE Clave = '{0}'", .Item("Clave"), _Left(WObservacion1.Trim, 100)))
 

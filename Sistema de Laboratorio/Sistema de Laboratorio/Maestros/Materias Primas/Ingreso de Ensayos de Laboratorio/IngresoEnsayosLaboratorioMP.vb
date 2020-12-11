@@ -190,7 +190,7 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad, IA
 							Dim WMenorIgualEspecif = OrDefault(.Item("MenorIgualEspecif"), "")
 							Dim WInformaEspecif = OrDefault(.Item("InformaEspecif"), "")
 							Dim WFormulaEspecif = OrDefault(.Item("FormulaEspecif"), "")
-                            Dim WImpreResultado = _GenerarImpreParametro(WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif, WInformaEspecif)
+                            Dim WImpreResultado = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif, WInformaEspecif)
 
 							Dim WOperadorID = Trim(OrDefault(.Item("OperadorLabora"), ""))
 
@@ -218,7 +218,7 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad, IA
 
 							Dim WDescripcion = "" 'OrDefault(.Item("Ensayo"), 0)
 
-							WResultado = _GenerarImpreResultado(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WValor)
+                            WResultado = _GenerarImpreResultado(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WValor, WMenorIgualEspecif, WInformaEspecif)
 
 							Dim r = dgvEnsayos.Rows.Add
 
@@ -410,7 +410,7 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad, IA
 				Dim WMenorIgualEspecif = OrDefault(.Item("MenorIgualEspecif"), "")
 				Dim WInformaEspecif = OrDefault(.Item("InformaEspecif"), "")
 				Dim WFormula = Trim(OrDefault(.Item("FormulaEspecif"), ""))
-                Dim WImpreParametro = _GenerarImpreParametro(WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif, WInformaEspecif)
+                Dim WImpreParametro = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif, WInformaEspecif)
 
 				Dim WFormulas(10) As String
 
@@ -489,11 +489,14 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad, IA
 		Directory.CreateDirectory(_CarpetaEtapaIntermedia)
 	End Sub
 
-    Private Function _GenerarImpreParametro(ByVal wDesdeEspecif As String, ByVal wHastaEspecif As String, ByVal wUnidadEspecif As String, ByVal wMenorIgualEspecif As String, ByVal WInformaEspecif As String) As String
+    Private Function _GenerarImpreParametro(ByVal WTipoEspecif As String, ByVal wDesdeEspecif As String, ByVal wHastaEspecif As String, ByVal wUnidadEspecif As String, ByVal wMenorIgualEspecif As String, ByVal WInformaEspecif As String) As String
+
+        If Val(WInformaEspecif) = 0 And Val(WTipoEspecif) = 2 Then Return "Informativo"
 
         If Val(wDesdeEspecif) = 0 And Val(wHastaEspecif) = 0 Then Return "Cumple Ensayo"
         If Trim(wDesdeEspecif) = "" And Trim(wHastaEspecif) = "" Then Return ""
 
+        WTipoEspecif = Trim(WTipoEspecif)
         wDesdeEspecif = Trim(wDesdeEspecif)
         wHastaEspecif = Trim(wHastaEspecif)
         wUnidadEspecif = Trim(wUnidadEspecif)
@@ -512,7 +515,9 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad, IA
 
             If Val(wDesdeEspecif) = 0 And Val(wHastaEspecif) <> 0 Then
 
-                If Val(wMenorIgualEspecif) = 1 Then Return String.Format("Máximo {0} {1}", wHastaEspecif, wUnidadEspecif)
+                If Val(wMenorIgualEspecif) = 1 Then
+                    Return String.Format("Máximo {0} {1}", wHastaEspecif, wUnidadEspecif)
+                End If
 
                 Return String.Format("Menor a {0} {1}", wHastaEspecif, wUnidadEspecif)
 
@@ -617,8 +622,10 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad, IA
 
 							With dgvEnsayos.Rows(.RowIndex)
 
-								WTipo = OrDefault(.Cells("TipoEspecif").Value, "")
-								WDesde = OrDefault(.Cells("DesdeEspecif").Value, "")
+                                Dim WMenosIgual As String = OrDefault(.Cells("MenorIgualEspecif").Value, "")
+                                Dim WInforma As String = OrDefault(.Cells("InformaEspecif").Value, "")
+                                WTipo = OrDefault(.Cells("TipoEspecif").Value, "")
+                                WDesde = OrDefault(.Cells("DesdeEspecif").Value, "")
 								WHasta = OrDefault(.Cells("HastaEspecif").Value, "")
 								WUnidad = OrDefault(.Cells("UnidadEspecif").Value, "")
 								WFormula = Trim(OrDefault(.Cells("FormulaEspecif").Value, ""))
@@ -643,7 +650,7 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad, IA
 
 								End If
 
-								Dim WResultado As String = _GenerarImpreResultado(WTipo, WDesde, WHasta, WUnidad, WValor)
+                                Dim WResultado As String = _GenerarImpreResultado(WTipo, WDesde, WHasta, WUnidad, WValor, WMenosIgual, WInforma)
 
 								WDecimales = _CalcularCantidadDecimales(WDesde)
 								If Val(WDecimales) < _CalcularCantidadDecimales(WHasta) Then WDecimales = _CalcularCantidadDecimales(WHasta)
@@ -883,7 +890,7 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad, IA
 
 						Dim WOperadorLabora As String = WIDOperadorAnalista
 
-						WResultado = _GenerarImpreResultado(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WValor)
+                        WResultado = _GenerarImpreResultado(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WValor, WMenorIgualEspecif, WInformaEspecif)
 
 						WRenglon += 1
 
@@ -1041,7 +1048,7 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad, IA
 
 						Dim WOperadorLabora As String = WIDOperadorAnalista
 
-						WResultado = _GenerarImpreResultado(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WValor)
+                        WResultado = _GenerarImpreResultado(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WValor, WMenorIgualEspecif, WInformaEspecif)
 
 						WRenglon += 1
 
@@ -1615,42 +1622,46 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad, IA
 		Return True
 	End Function
 
-	Private Function _GenerarImpreResultado(ByVal wTipoEspecif As Object, ByVal wDesdeEspecif As Object, ByVal wHastaEspecif As Object, ByVal wUnidadEspecif As Object, ByVal wValor As Object) As Object
+    Private Function _GenerarImpreResultado(ByVal wTipoEspecif As Object, ByVal wDesdeEspecif As Object, ByVal wHastaEspecif As Object, ByVal wUnidadEspecif As Object, ByVal wValor As Object, ByVal WMenorIgualEspecif As String, ByVal WInformaEspecif As String) As Object
 
-		If wValor = "" Then Return ""
+        If wValor = "" Then Return ""
 
-		If UCase(Trim(wValor)) = "P" Then Return "PENDIENTE"
+        If UCase(Trim(wValor)) = "P" Then Return "PENDIENTE"
 
-		If Val(wTipoEspecif) = 1 Or Val(wTipoEspecif) = 2 Then
+        wUnidadEspecif = Trim(wUnidadEspecif)
+        wHastaEspecif = Trim(wHastaEspecif)
 
-			If Val(wDesdeEspecif) = 0 And Val(wHastaEspecif) = 9999 Then Return "CUMPLE"
+        If Val(wTipoEspecif) = 1 Or Val(wTipoEspecif) = 2 Then
 
-			Dim WValido As Double = 0
+            If Val(wDesdeEspecif) = 0 And Val(wHastaEspecif) = 9999 Then Return "CUMPLE"
 
-			If Not Double.TryParse(wValor.ToString, WValido) Then Return ""
+            Dim WValido As Double = 0
 
-			Dim WDecimales As Short = _CalcularCantidadDecimales(wDesdeEspecif, 0)
+            If Not Double.TryParse(wValor.ToString, WValido) Then Return ""
 
-			If WDecimales < _CalcularCantidadDecimales(wHastaEspecif, 0) Then WDecimales = _CalcularCantidadDecimales(wHastaEspecif, 0)
+            Dim WDecimales As Short = _CalcularCantidadDecimales(wDesdeEspecif, 0)
 
-			wValor = formatonumerico(wValor, WDecimales)
+            If WDecimales < _CalcularCantidadDecimales(wHastaEspecif, 0) Then WDecimales = _CalcularCantidadDecimales(wHastaEspecif, 0)
 
-			Return String.Format("{0} {1}", wValor, wUnidadEspecif)
+            wValor = formatonumerico(wValor, WDecimales)
 
-		Else
+            Return String.Format("{0} {1}", wValor, wUnidadEspecif)
+        ElseIf Val(wTipoEspecif) = 0 And Val(WMenorIgualEspecif) = 1 And Val(WInformaEspecif) = 1 Then
+            Return String.Format("< {0} {1}", wHastaEspecif, wUnidadEspecif)
+        Else
 
-			Select Case UCase(wValor)
-				Case "S"
-					Return "CUMPLE"
-				Case "N"
-					Return "NO CUMPLE"
-				Case Else
-					Return ""
-			End Select
+            Select Case UCase(wValor)
+                Case "S"
+                    Return "CUMPLE"
+                Case "N"
+                    Return "NO CUMPLE"
+                Case Else
+                    Return ""
+            End Select
 
-		End If
+        End If
 
-	End Function
+    End Function
 
 	Private Sub _ValidarDatos()
 		'
@@ -1796,18 +1807,19 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad, IA
 		'
         Dim WPrueterFarmaI As DataTable = GetAll("SELECT Clave, TipoEspecif, DesdeEspecif, HastaEspecif, UnidadEspecif, MenorIgualEspecif, InformaEspecif, Valor FROM " & TablaPrueTer & " WHERE Partida = '" & txtPartida.Text & "' ORDER By Clave")
 
-		Dim WClave, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif, WImpreParametro As String
+        Dim WClave, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif, WImpreParametro, WTipoEspecif As String
 
 		For Each row As DataRow In WPrueterFarmaI.Rows
 			With row
 				WClave = OrDefault(.Item("Clave"), "")
-				WDesdeEspecif = OrDefault(.Item("DesdeEspecif"), "")
-				WHastaEspecif = OrDefault(.Item("HastaEspecif"), "")
+                WTipoEspecif = OrDefault(.Item("TipoEspecif"), "")
+                WDesdeEspecif = OrDefault(.Item("DesdeEspecif"), "")
+                WHastaEspecif = OrDefault(.Item("HastaEspecif"), "")
 				WUnidadEspecif = OrDefault(.Item("UnidadEspecif"), "")
 				WMenorIgualEspecif = OrDefault(.Item("MenorIgualEspecif"), "")
                 Dim WInformaEspecif = OrDefault(.Item("InformaEspecif"), "")
                 Dim WValor = Trim(OrDefault(.Item("Valor"), ""))
-                WImpreParametro = _GenerarImpreParametro(WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif, WInformaEspecif)
+                WImpreParametro = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif, WInformaEspecif)
 
 				If WClave.Trim <> "" Then
 					ExecuteNonQueries({"UPDATE " & TablaPrueTer & " SET  Impre1 = '" & WImpreParametro & "', Impre2 = '" & WValor & "' WHERE Clave = '" & WClave & "'"})

@@ -193,6 +193,7 @@
     <Compile Include="Clases\Entidades\ProductoTerminado.vb" />
     <Compile Include="Clases\Enumeraciones.vb" />
     <Compile Include="Clases\Helper.vb" />
+    <Compile Include="Clases\Interfaces\INotificaActualizacion.vb" />
     <Compile Include="Clases\Operador.vb" />
     <Compile Include="Clases\Query.vb" />
     <Compile Include="ConsDeEspefXVersion.Designer.vb">
@@ -218,6 +219,12 @@
       <DependentUpon>ImpresionEtiquetasMuestras.vb</DependentUpon>
     </Compile>
     <Compile Include="ImpresionEtiquetasMuestras.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListadoTerminadosFormulas.Designer.vb">
+      <DependentUpon>ListadoTerminadosFormulas.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ListadoTerminadosFormulas.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Maestros\Informe de Recepcion De Drogas de laboratorio\BuscadorOrdenCompraXProvee.Designer.vb">
@@ -739,6 +746,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ImpresionEtiquetasMuestras.resx">
       <DependentUpon>ImpresionEtiquetasMuestras.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListadoTerminadosFormulas.resx">
+      <DependentUpon>ListadoTerminadosFormulas.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Maestros\Informe de Recepcion De Drogas de laboratorio\BuscadorOrdenCompraXProvee.resx">
       <DependentUpon>BuscadorOrdenCompraXProvee.vb</DependentUpon>

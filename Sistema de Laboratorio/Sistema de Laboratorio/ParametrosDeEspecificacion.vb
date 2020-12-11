@@ -1,13 +1,13 @@
 ﻿Imports System.Text.RegularExpressions
 Imports Util
 
-Public Class ParametrosDeEspecificacion
+Public Class ParametrosDeEspecificacion : Implements INotificaActualizacion
     Dim Renglon As Integer
-
+    Private ReadOnly Terminado As String
 
     Dim WparametrosFormula(11) As String
 
-    Sub New(Optional ByVal Fila As Integer = 0)
+    Sub New(Optional ByVal Terminado As String = "", Optional ByVal Fila As Integer = 0)
 
 
         ' Llamada necesaria para el diseñador.
@@ -16,9 +16,9 @@ Public Class ParametrosDeEspecificacion
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
 
         Renglon = Fila
+        Me.Terminado = Terminado
 
-        If Renglon > 0 Then _PoblarGrilla(Renglon)
-
+        If Renglon > 0 And Terminado.Trim <> "" Then _PoblarGrilla(Renglon)
 
     End Sub
 
@@ -27,7 +27,7 @@ Public Class ParametrosDeEspecificacion
 
         Dim SQLCnslt As String
 
-        SQLCnslt = "SELECT * FROM FormulasDeEnsayos WHERE Renglon = '" & Renglon & "'"
+        SQLCnslt = "SELECT * FROM FormulasDeEnsayos WHERE Renglon = '" & Renglon & "' And Terminado = '" & Terminado & "'"
 
         Dim row As DataRow = GetSingle(SQLCnslt, "Surfactan_II")
 
@@ -49,7 +49,6 @@ Public Class ParametrosDeEspecificacion
 
         End If
 
-
     End Sub
 
     Private Sub btnAceptar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAceptar.Click
@@ -64,7 +63,7 @@ Public Class ParametrosDeEspecificacion
 
         Dim SQLCnslt As String
 
-        SQLCnslt = "SELECT Descripcion, Formula, Var1, Var2, Var3, Var4, Var5, Var6, Var7, Var8, Var9, Var10, AnalistaLab, EstadoVerificado FROM FormulasDeEnsayos WHERE Renglon = '" & Renglon & "'"
+        SQLCnslt = "SELECT Descripcion, Formula, Var1, Var2, Var3, Var4, Var5, Var6, Var7, Var8, Var9, Var10, AnalistaLab, EstadoVerificado FROM FormulasDeEnsayos WHERE Renglon = '" & Renglon & "' and Terminado  = '" & Terminado & "'"
 
         Dim row As DataRow = GetSingle(SQLCnslt, "Surfactan_II")
 
@@ -285,7 +284,7 @@ Public Class ParametrosDeEspecificacion
             Exit Sub
         End If
 
-        SQLCnslt = "SELECT * FROM FormulasDeEnsayos WHERE Renglon = '" & Renglon & "'"
+        SQLCnslt = "SELECT * FROM FormulasDeEnsayos WHERE Renglon = '" & Renglon & "' And Terminado = '" & Terminado & "'"
 
         Dim row As DataRow = GetSingle(SQLCnslt, "Surfactan_II")
 
@@ -325,5 +324,13 @@ Public Class ParametrosDeEspecificacion
 
     Private Sub txtFormula_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtFormula.KeyPress
         e.Handled = Not {"v", "V", "r", "R", "/", "(", ")", "[", "]", "^", "+", "-", "*"}.ToList().Any(Function(v) CChar(v) = e.KeyChar) And Not Char.IsNumber(e.KeyChar) And Not Chr(Keys.Back) = e.KeyChar And Not Chr(Keys.Delete) = e.KeyChar
+    End Sub
+
+    Public Sub _ProcesarNotificaActualizacion() Implements INotificaActualizacion._ProcesarNotificaActualizacion
+        Dim WOwner As INotificaActualizacion = TryCast(Owner, INotificaActualizacion)
+
+        If WOwner IsNot Nothing Then WOwner._ProcesarNotificaActualizacion()
+
+        Close()
     End Sub
 End Class

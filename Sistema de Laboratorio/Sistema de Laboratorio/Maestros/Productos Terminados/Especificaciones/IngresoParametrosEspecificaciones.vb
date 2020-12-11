@@ -13,8 +13,9 @@
     Private WEnsayo As String
     Private WDescEnsayo As String
     Private WParametro As String
+    Private Terminado As String
 
-    Sub New(ByVal Ensayo As String, ByVal DescEnsayo As String, ByVal Parametro As String, ByVal Tipo As Integer, ByVal Informa As Integer, ByVal MenorIgual As Integer, ByVal Desde As String, ByVal Hasta As String, ByVal Unidad As String, ByVal Farmacopea As String, ByVal Formula As String, ByVal ParametrosFormula() As String)
+    Sub New(ByVal Terminado As String, ByVal Ensayo As String, ByVal DescEnsayo As String, ByVal Parametro As String, ByVal Tipo As Integer, ByVal Informa As Integer, ByVal MenorIgual As Integer, ByVal Desde As String, ByVal Hasta As String, ByVal Unidad As String, ByVal Farmacopea As String, ByVal Formula As String, ByVal ParametrosFormula() As String)
 
         ' This call is required by the designer.
         InitializeComponent()
@@ -32,6 +33,7 @@
         WParametro = Parametro
         WParametrosFormula = ParametrosFormula
         WFormula = Formula
+        Me.Terminado = Terminado
 
     End Sub
 
@@ -162,6 +164,8 @@
         Else
             ckHabDesdeHasta.Checked = True
             ckHabDesdeHasta_Click(Nothing, Nothing)
+            ckInforma.Enabled = True
+            ckInforma.Checked = True
 
             txtFormula.Focus()
         End If
@@ -200,7 +204,7 @@
             WDesde = IIf(ckHabDesdeHasta.Checked, txtDesde.Text, "")
             WHasta = IIf(ckHabDesdeHasta.Checked, txtHasta.Text, "")
             WUnidad = IIf(ckHabDesdeHasta.Checked, txtUnidad.Text, "")
-            WInforma = 0
+            WInforma = 1
             WMenorIgual = IIf(ckMenorIgual.Checked, 1, 0)
         End If
 
@@ -218,7 +222,7 @@
     End Sub
 
     Private Sub btnDefinirFormula_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDefinirFormula.Click
-        Dim frm As New DefinicionFormulaEspecificacion(txtFormula.Text, WParametrosFormula)
+        Dim frm As New DefinicionFormulaEspecificacion(Terminado, txtFormula.Text, WParametrosFormula)
         frm.ShowDialog(Me)
     End Sub
 
