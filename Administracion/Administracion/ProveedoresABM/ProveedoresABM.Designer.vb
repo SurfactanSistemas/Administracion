@@ -38,6 +38,7 @@ Partial Class ProveedoresABM
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.ckAceptaTransferencias = New System.Windows.Forms.CheckBox()
         Me.ckAceptaCheques = New System.Windows.Forms.CheckBox()
         Me.btnEvaluacion = New System.Windows.Forms.Button()
         Me.GrupoConsultas = New System.Windows.Forms.Panel()
@@ -139,7 +140,8 @@ Partial Class ProveedoresABM
         Me.txtCAIVto = New System.Windows.Forms.MaskedTextBox()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.txtCAI = New Administracion.CustomTextBox()
-        Me.ckAceptaTransferencias = New System.Windows.Forms.CheckBox()
+        Me.CustomLabel37 = New Administracion.CustomLabel()
+        Me.txtCbu = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -158,7 +160,7 @@ Partial Class ProveedoresABM
         Me.GroupBox1.Controls.Add(Me.btnUltimoRegistro)
         Me.GroupBox1.Controls.Add(Me.btnAnteriorRegistro)
         Me.GroupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.GroupBox1.Location = New System.Drawing.Point(551, 474)
+        Me.GroupBox1.Location = New System.Drawing.Point(551, 486)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(200, 50)
         Me.GroupBox1.TabIndex = 76
@@ -320,10 +322,10 @@ Partial Class ProveedoresABM
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.GrupoConsultas)
         Me.Panel2.Controls.Add(Me.ckAceptaTransferencias)
         Me.Panel2.Controls.Add(Me.ckAceptaCheques)
         Me.Panel2.Controls.Add(Me.btnEvaluacion)
-        Me.Panel2.Controls.Add(Me.GrupoConsultas)
         Me.Panel2.Controls.Add(Me.CKBProveedorInactivo)
         Me.Panel2.Controls.Add(Me.txtClienteAsociadoDescripcion)
         Me.Panel2.Controls.Add(Me.txtClienteAsociado)
@@ -331,6 +333,7 @@ Partial Class ProveedoresABM
         Me.Panel2.Controls.Add(Me.CustomLabel25)
         Me.Panel2.Controls.Add(Me.txtCheque)
         Me.Panel2.Controls.Add(Me.GroupBox2)
+        Me.Panel2.Controls.Add(Me.txtCbu)
         Me.Panel2.Controls.Add(Me.txtPaginaWeb)
         Me.Panel2.Controls.Add(Me.txtCUIT)
         Me.Panel2.Controls.Add(Me.cmbCalificacion)
@@ -375,6 +378,7 @@ Partial Class ProveedoresABM
         Me.Panel2.Controls.Add(Me.txtEmail)
         Me.Panel2.Controls.Add(Me.CustomLabel9)
         Me.Panel2.Controls.Add(Me.CustomLabel11)
+        Me.Panel2.Controls.Add(Me.CustomLabel37)
         Me.Panel2.Controls.Add(Me.txtObservaciones)
         Me.Panel2.Controls.Add(Me.CustomLabel30)
         Me.Panel2.Controls.Add(Me.CustomLabel10)
@@ -391,8 +395,21 @@ Partial Class ProveedoresABM
         Me.Panel2.Controls.Add(Me.GroupBox5)
         Me.Panel2.Location = New System.Drawing.Point(0, 34)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(763, 437)
+        Me.Panel2.Size = New System.Drawing.Size(763, 450)
         Me.Panel2.TabIndex = 84
+        '
+        'ckAceptaTransferencias
+        '
+        Me.ckAceptaTransferencias.AutoSize = True
+        Me.ckAceptaTransferencias.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.ckAceptaTransferencias.Font = New System.Drawing.Font("Arial", 7.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ckAceptaTransferencias.ForeColor = System.Drawing.SystemColors.Control
+        Me.ckAceptaTransferencias.Location = New System.Drawing.Point(148, 98)
+        Me.ckAceptaTransferencias.Name = "ckAceptaTransferencias"
+        Me.ckAceptaTransferencias.Size = New System.Drawing.Size(157, 16)
+        Me.ckAceptaTransferencias.TabIndex = 115
+        Me.ckAceptaTransferencias.Text = "ACEPTA TRANSFERENCIAS"
+        Me.ckAceptaTransferencias.UseVisualStyleBackColor = True
         '
         'ckAceptaCheques
         '
@@ -413,9 +430,9 @@ Partial Class ProveedoresABM
         Me.btnEvaluacion.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnEvaluacion.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnEvaluacion.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnEvaluacion.Location = New System.Drawing.Point(640, 393)
+        Me.btnEvaluacion.Location = New System.Drawing.Point(642, 415)
         Me.btnEvaluacion.Name = "btnEvaluacion"
-        Me.btnEvaluacion.Size = New System.Drawing.Size(102, 27)
+        Me.btnEvaluacion.Size = New System.Drawing.Size(102, 25)
         Me.btnEvaluacion.TabIndex = 113
         Me.btnEvaluacion.Text = "EVALUACIÓN"
         Me.ToolTip1.SetToolTip(Me.btnEvaluacion, "Evaluación de Proveedor por MP")
@@ -424,7 +441,7 @@ Partial Class ProveedoresABM
         'GrupoConsultas
         '
         Me.GrupoConsultas.Controls.Add(Me.GroupBox4)
-        Me.GrupoConsultas.Location = New System.Drawing.Point(124, 116)
+        Me.GrupoConsultas.Location = New System.Drawing.Point(124, 26)
         Me.GrupoConsultas.Name = "GrupoConsultas"
         Me.GrupoConsultas.Size = New System.Drawing.Size(506, 220)
         Me.GrupoConsultas.TabIndex = 98
@@ -477,7 +494,7 @@ Partial Class ProveedoresABM
         'txtClienteAsociadoDescripcion
         '
         Me.txtClienteAsociadoDescripcion.Font = New System.Drawing.Font("Arial Narrow", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtClienteAsociadoDescripcion.Location = New System.Drawing.Point(184, 410)
+        Me.txtClienteAsociadoDescripcion.Location = New System.Drawing.Point(172, 415)
         Me.txtClienteAsociadoDescripcion.MaxLength = 255
         Me.txtClienteAsociadoDescripcion.Name = "txtClienteAsociadoDescripcion"
         Me.txtClienteAsociadoDescripcion.ReadOnly = True
@@ -487,7 +504,7 @@ Partial Class ProveedoresABM
         '
         'txtClienteAsociado
         '
-        Me.txtClienteAsociado.Location = New System.Drawing.Point(124, 410)
+        Me.txtClienteAsociado.Location = New System.Drawing.Point(112, 415)
         Me.txtClienteAsociado.MaxLength = 6
         Me.txtClienteAsociado.Name = "txtClienteAsociado"
         Me.txtClienteAsociado.Size = New System.Drawing.Size(59, 20)
@@ -501,7 +518,7 @@ Partial Class ProveedoresABM
         Me.CustomLabel26.ControlAssociationKey = 11
         Me.CustomLabel26.Font = New System.Drawing.Font("Arial", 8.0!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel26.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel26.Location = New System.Drawing.Point(15, 411)
+        Me.CustomLabel26.Location = New System.Drawing.Point(3, 416)
         Me.CustomLabel26.Name = "CustomLabel26"
         Me.CustomLabel26.Size = New System.Drawing.Size(100, 14)
         Me.CustomLabel26.TabIndex = 109
@@ -638,7 +655,7 @@ Partial Class ProveedoresABM
         '
         'txtPaginaWeb
         '
-        Me.txtPaginaWeb.Location = New System.Drawing.Point(124, 388)
+        Me.txtPaginaWeb.Location = New System.Drawing.Point(112, 390)
         Me.txtPaginaWeb.MaxLength = 50
         Me.txtPaginaWeb.Name = "txtPaginaWeb"
         Me.txtPaginaWeb.Size = New System.Drawing.Size(237, 20)
@@ -695,9 +712,9 @@ Partial Class ProveedoresABM
         Me.btnCUFE.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnCUFE.ForeColor = System.Drawing.SystemColors.Control
         Me.btnCUFE.LabelAssociationKey = -1
-        Me.btnCUFE.Location = New System.Drawing.Point(557, 393)
+        Me.btnCUFE.Location = New System.Drawing.Point(559, 415)
         Me.btnCUFE.Name = "btnCUFE"
-        Me.btnCUFE.Size = New System.Drawing.Size(77, 27)
+        Me.btnCUFE.Size = New System.Drawing.Size(77, 25)
         Me.btnCUFE.TabIndex = 95
         Me.btnCUFE.Text = "CUFE"
         Me.ToolTip1.SetToolTip(Me.btnCUFE, "Datos CUFE")
@@ -712,9 +729,9 @@ Partial Class ProveedoresABM
         Me.btnContactos.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnContactos.ForeColor = System.Drawing.SystemColors.Control
         Me.btnContactos.LabelAssociationKey = -1
-        Me.btnContactos.Location = New System.Drawing.Point(367, 393)
+        Me.btnContactos.Location = New System.Drawing.Point(559, 388)
         Me.btnContactos.Name = "btnContactos"
-        Me.btnContactos.Size = New System.Drawing.Size(83, 27)
+        Me.btnContactos.Size = New System.Drawing.Size(83, 25)
         Me.btnContactos.TabIndex = 94
         Me.btnContactos.Text = "Contactos"
         Me.ToolTip1.SetToolTip(Me.btnContactos, "Contactos adicionales")
@@ -729,9 +746,9 @@ Partial Class ProveedoresABM
         Me.btnObservaciones.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnObservaciones.ForeColor = System.Drawing.SystemColors.Control
         Me.btnObservaciones.LabelAssociationKey = -1
-        Me.btnObservaciones.Location = New System.Drawing.Point(455, 393)
+        Me.btnObservaciones.Location = New System.Drawing.Point(647, 388)
         Me.btnObservaciones.Name = "btnObservaciones"
-        Me.btnObservaciones.Size = New System.Drawing.Size(97, 27)
+        Me.btnObservaciones.Size = New System.Drawing.Size(97, 25)
         Me.btnObservaciones.TabIndex = 94
         Me.btnObservaciones.Text = "Observaciones"
         Me.ToolTip1.SetToolTip(Me.btnObservaciones, "Observaciones adicionales sobre el Proveedor")
@@ -1254,7 +1271,7 @@ Partial Class ProveedoresABM
         Me.CustomLabel30.ControlAssociationKey = 11
         Me.CustomLabel30.Font = New System.Drawing.Font("Arial", 8.0!, System.Drawing.FontStyle.Bold)
         Me.CustomLabel30.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel30.Location = New System.Drawing.Point(46, 390)
+        Me.CustomLabel30.Location = New System.Drawing.Point(34, 392)
         Me.CustomLabel30.Name = "CustomLabel30"
         Me.CustomLabel30.Size = New System.Drawing.Size(69, 14)
         Me.CustomLabel30.TabIndex = 9
@@ -1656,7 +1673,7 @@ Partial Class ProveedoresABM
         Me.btnListado.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnListado.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnListado.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnListado.Location = New System.Drawing.Point(369, 482)
+        Me.btnListado.Location = New System.Drawing.Point(369, 494)
         Me.btnListado.Name = "btnListado"
         Me.btnListado.Size = New System.Drawing.Size(45, 37)
         Me.btnListado.TabIndex = 74
@@ -1675,7 +1692,7 @@ Partial Class ProveedoresABM
         Me.btnLimpiar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnLimpiar.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnLimpiar.Location = New System.Drawing.Point(89, 482)
+        Me.btnLimpiar.Location = New System.Drawing.Point(89, 494)
         Me.btnLimpiar.Name = "btnLimpiar"
         Me.btnLimpiar.Size = New System.Drawing.Size(45, 37)
         Me.btnLimpiar.TabIndex = 75
@@ -1694,7 +1711,7 @@ Partial Class ProveedoresABM
         Me.btnCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCerrar.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnCerrar.Location = New System.Drawing.Point(299, 482)
+        Me.btnCerrar.Location = New System.Drawing.Point(299, 494)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(45, 37)
         Me.btnCerrar.TabIndex = 73
@@ -1713,7 +1730,7 @@ Partial Class ProveedoresABM
         Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnConsulta.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnConsulta.Location = New System.Drawing.Point(159, 482)
+        Me.btnConsulta.Location = New System.Drawing.Point(159, 494)
         Me.btnConsulta.Name = "btnConsulta"
         Me.btnConsulta.Size = New System.Drawing.Size(45, 37)
         Me.btnConsulta.TabIndex = 71
@@ -1732,7 +1749,7 @@ Partial Class ProveedoresABM
         Me.btnEliminar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnEliminar.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnEliminar.Location = New System.Drawing.Point(229, 482)
+        Me.btnEliminar.Location = New System.Drawing.Point(229, 494)
         Me.btnEliminar.Name = "btnEliminar"
         Me.btnEliminar.Size = New System.Drawing.Size(45, 37)
         Me.btnEliminar.TabIndex = 72
@@ -1752,7 +1769,7 @@ Partial Class ProveedoresABM
         Me.btnAgregar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAgregar.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnAgregar.Location = New System.Drawing.Point(19, 482)
+        Me.btnAgregar.Location = New System.Drawing.Point(19, 494)
         Me.btnAgregar.Name = "btnAgregar"
         Me.btnAgregar.Size = New System.Drawing.Size(45, 37)
         Me.btnAgregar.TabIndex = 70
@@ -1761,7 +1778,7 @@ Partial Class ProveedoresABM
         '
         'txtCAIVto
         '
-        Me.txtCAIVto.Location = New System.Drawing.Point(663, 479)
+        Me.txtCAIVto.Location = New System.Drawing.Point(663, 491)
         Me.txtCAIVto.Mask = "00/00/0000"
         Me.txtCAIVto.Name = "txtCAIVto"
         Me.txtCAIVto.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -1773,7 +1790,7 @@ Partial Class ProveedoresABM
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(426, 484)
+        Me.Button2.Location = New System.Drawing.Point(426, 496)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(114, 34)
         Me.Button2.TabIndex = 97
@@ -1786,7 +1803,7 @@ Partial Class ProveedoresABM
         Me.txtCAI.Empty = True
         Me.txtCAI.EnterIndex = 29
         Me.txtCAI.LabelAssociationKey = 25
-        Me.txtCAI.Location = New System.Drawing.Point(652, 479)
+        Me.txtCAI.Location = New System.Drawing.Point(652, 491)
         Me.txtCAI.MaxLength = 14
         Me.txtCAI.Name = "txtCAI"
         Me.txtCAI.Size = New System.Drawing.Size(10, 20)
@@ -1795,24 +1812,33 @@ Partial Class ProveedoresABM
         Me.txtCAI.Validator = Administracion.ValidatorType.None
         Me.txtCAI.Visible = False
         '
-        'ckAceptaTransferencias
+        'CustomLabel37
         '
-        Me.ckAceptaTransferencias.AutoSize = True
-        Me.ckAceptaTransferencias.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.ckAceptaTransferencias.Font = New System.Drawing.Font("Arial", 7.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ckAceptaTransferencias.ForeColor = System.Drawing.SystemColors.Control
-        Me.ckAceptaTransferencias.Location = New System.Drawing.Point(148, 98)
-        Me.ckAceptaTransferencias.Name = "ckAceptaTransferencias"
-        Me.ckAceptaTransferencias.Size = New System.Drawing.Size(157, 16)
-        Me.ckAceptaTransferencias.TabIndex = 115
-        Me.ckAceptaTransferencias.Text = "ACEPTA TRANSFERENCIAS"
-        Me.ckAceptaTransferencias.UseVisualStyleBackColor = True
+        Me.CustomLabel37.AutoSize = True
+        Me.CustomLabel37.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.CustomLabel37.ControlAssociationKey = 11
+        Me.CustomLabel37.Font = New System.Drawing.Font("Arial", 8.0!, System.Drawing.FontStyle.Bold)
+        Me.CustomLabel37.ForeColor = System.Drawing.SystemColors.Control
+        Me.CustomLabel37.Location = New System.Drawing.Point(363, 392)
+        Me.CustomLabel37.Name = "CustomLabel37"
+        Me.CustomLabel37.Size = New System.Drawing.Size(29, 14)
+        Me.CustomLabel37.TabIndex = 9
+        Me.CustomLabel37.Text = "CBU"
+        '
+        'txtCbu
+        '
+        Me.txtCbu.Location = New System.Drawing.Point(398, 390)
+        Me.txtCbu.MaxLength = 22
+        Me.txtCbu.Name = "txtCbu"
+        Me.txtCbu.Size = New System.Drawing.Size(152, 20)
+        Me.txtCbu.TabIndex = 104
+        Me.txtCbu.Text = "1500037400008361660028"
         '
         'ProveedoresABM
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(761, 528)
+        Me.ClientSize = New System.Drawing.Size(761, 535)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.GroupBox1)
@@ -1963,4 +1989,6 @@ Partial Class ProveedoresABM
     Friend WithEvents cmbFormaPago As Administracion.CustomComboBox
     Friend WithEvents ckAceptaCheques As System.Windows.Forms.CheckBox
     Friend WithEvents ckAceptaTransferencias As System.Windows.Forms.CheckBox
+    Friend WithEvents txtCbu As System.Windows.Forms.TextBox
+    Friend WithEvents CustomLabel37 As Administracion.CustomLabel
 End Class

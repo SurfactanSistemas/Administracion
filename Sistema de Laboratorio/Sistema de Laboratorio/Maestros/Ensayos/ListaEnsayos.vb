@@ -3,10 +3,32 @@
 Public Class ListaEnsayos : Implements IActualizarPorNuevoIngreso, IListarReporteDesdeHastaBasico
 
     Dim WBase As String = "Surfactan_II"
+    Dim PermisoGrabar As Boolean
+
+    Sub New(Optional ByVal ID As String = "00")
+
+        ' Llamada necesaria para el diseñador.
+        InitializeComponent()
+
+        ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
+
+        Dim SQLCnslt As String = "SELECT Escritura FROM PermisosPerfiles WHERE ID = '" & ID & "' AND Sistema = 'LABORATORIO' AND Perfil = '" & Operador.Perfil & "' ORDER BY ID"
+        Dim Row As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+        If Row IsNot Nothing Then
+            PermisoGrabar = Row.Item("Escritura")
+        End If
+
+    End Sub
 
     Private Sub ListaEnsayos_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         _LeerDatos()
+        If PermisoGrabar = False Then
+            Button1.Enabled = False
+        End If
     End Sub
+
+    
+
 
     Private Sub _LeerDatos()
 
@@ -37,7 +59,7 @@ Public Class ListaEnsayos : Implements IActualizarPorNuevoIngreso, IListarReport
         Dim WCodigo As Short = OrDefault(dgvEnsayos.CurrentRow.Cells("Codigo").Value, 0)
 
         If WCodigo > 0 Then
-            With New IngresoEnsayos(WCodigo)
+            With New IngresoEnsayos(WCodigo, PermisoGrabar)
                 .Show(Me)
             End With
         End If
@@ -63,7 +85,7 @@ Public Class ListaEnsayos : Implements IActualizarPorNuevoIngreso, IListarReport
             Dim WEnsayo As DataRow = GetSingle("SELECT Codigo FROM Ensayos WHERE Codigo = '" & txtCodigo.Text & "'", WBase)
 
             If WEnsayo IsNot Nothing Then
-                With New IngresoEnsayos(txtCodigo.Text)
+                With New IngresoEnsayos(txtCodigo.Text, PermisoGrabar)
                     .ShowDialog(Me)
                 End With
 

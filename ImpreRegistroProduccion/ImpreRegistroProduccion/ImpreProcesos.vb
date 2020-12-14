@@ -198,7 +198,10 @@ Public Class ImpreProcesos
     End Sub
 
     Private Sub _EnviarAvisoPedidoAutorizado(ByVal WNroPedido As String)
-        Dim WPed As DataTable = GetAll("SELECT c.Razon, c.Provincia, t.Descripcion, p.* FROM Pedido p INNER JOIN Cliente c ON c.Cliente = p.Cliente INNER JOIN Terminado t ON t.Codigo = p.Terminado WHERE p.Pedido = '" & WNroPedido & "' And p.MarcaFactura = '1' ORDER BY p.Renglon", "SurfactanSa")
+        '
+        'TODO: Filtrar por otra cosa que no sa ]MarcaFactura = 1
+        '
+        Dim WPed As DataTable = GetAll("SELECT c.Razon, c.Provincia, t.Descripcion, p.* FROM Pedido p INNER JOIN Cliente c ON c.Cliente = p.Cliente INNER JOIN Terminado t ON t.Codigo = p.Terminado WHERE p.Pedido = '" & WNroPedido & "' And p.MarcaFactura = '1' And ISNULL(p.Facturado, 0) < ISNULL(p.Cantidad, 0) ORDER BY p.Renglon", "SurfactanSa")
         Dim WDir As String() = {"grodriguez", "hsein", "calidad3", "calidad2", "calidad", "ebiglieri", "isocalidad", "hmuller", "scoppiello", "sup3", "planta7"}
         Dim WDirecciones As String = ""
 
@@ -221,7 +224,7 @@ Public Class ImpreProcesos
             Dim esProductoReventa As Boolean = _EsProductoReventa(r("Terminado"))
             Dim WRutaCertificado As String = ""
             Dim WNombrePdf As String = ""
-            
+
             '
             ' Determino el tipo de Producto.
             '
@@ -247,6 +250,20 @@ Public Class ImpreProcesos
                 If Directory.Exists(WRutaCertificado) Then
 
                     Dim wcer As String() = Directory.GetFiles(WRutaCertificado, WNombrePdf, SearchOption.TopDirectoryOnly)
+
+                    If wcer.Count = 0 Then
+                        If esProductoReventa Then
+
+                            WNombrePdf = "*" & WPartida & ".pdf"
+                            wcer = Directory.GetFiles(WRutaCertificado, WNombrePdf, SearchOption.TopDirectoryOnly)
+
+                        Else
+
+                            wcer = Directory.GetFiles("\\193.168.0.2\w\impresion pdf\Certificados Analisis Farma Liberacion Pedidos\" & WNroPedido & "\" & WPartida & "\", WNombrePdf, SearchOption.TopDirectoryOnly)
+
+                        End If
+
+                    End If
 
                     WArchivos.AddRange(wcer)
 

@@ -1,12 +1,20 @@
-﻿Public Class IngresoFormulasEnsayo : Implements IGrabadoDeFormula, INotificaActualizacion
+Public Class IngresoFormulasEnsayo : Implements IGrabadoDeFormula, INotificaActualizacion
     Private ReadOnly Terminado As String
-    Sub New(Optional ByVal Terminado As String = "")
-
+    Dim PermisoGrabar As Boolean
+    Sub New(ByVal ID As String, Optional ByVal Terminado As String = "")
+    
         ' Llamada necesaria para el diseñador.
         InitializeComponent()
 
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
         Me.Terminado = Terminado
+
+        Dim SQLCnslt As String = "SELECT Escritura FROM PermisosPerfiles WHERE ID = '" & ID & "' AND Sistema = 'LABORATORIO' AND Perfil = '" & Operador.Perfil & "' ORDER BY ID"
+        Dim Row As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+        If Row IsNot Nothing Then
+            PermisoGrabar = Row.Item("Escritura")
+        End If
+
     End Sub
 
     Sub _GrabarFormulaMod(ByVal Formula As String, ByVal ParametrosFormula() As String, ByVal Descripcion As String, Optional ByVal Renglon As Integer = 0, Optional ByVal Moficado As Boolean = False) Implements IGrabadoDeFormula._GrabarFormulaMod

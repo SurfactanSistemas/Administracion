@@ -1285,6 +1285,23 @@ Public Class Compras
 
                 If _ComprobarExistenciaRemito(Trim(txtRemito.Text)) Then
 
+                    'ANDRES
+                    If DAOCompras.facturaPagada(txtNroInterno.Text) Then
+                        Dim SqlCnslt As String = "SELECT Remito FROM IvaComp WHERE NroInterno = '" & txtNroInterno.Text & "' "
+                        Dim row As DataRow = GetSingle(SqlCnslt, "SurfactanSa")
+
+                        If row IsNot Nothing Then
+                            If Val(txtRemito.Text) <> Val(row.Item("Remito")) Then
+                                If MsgBox("El Remito que guardado es diferente al ingresado. ¿Desea actualizarlo con el Nro " & txtRemito.Text & " ?", vbYesNo) = vbYes Then
+                                    SqlCnslt = "UPDATE IvaComp SET Remito = '" & txtRemito.Text & "' WHERE NroInterno = '" & txtNroInterno.Text & "'"
+                                    ExecuteNonQueries("SurfactanSa", {SqlCnslt})
+                                End If
+                                
+                            End If
+                        End If
+                    End If
+                    'ANDRES
+
                     _ValidoComoPymeNacion = _ComprobarPyme()
                     If _ValidoComoPymeNacion Then
                         _PedirDatosPymeNacion()
@@ -2381,6 +2398,7 @@ Public Class Compras
     Public Function DirecctorioVacio(ByVal Ruta As String) As Boolean
         Return Directory.EnumerateFileSystemEntries(Ruta).Any()
     End Function
+
 
 
 End Class
