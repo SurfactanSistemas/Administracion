@@ -525,7 +525,7 @@ Partial Class Pagos
         Me.pnlDifCamXFactura.Controls.Add(Me.btnAceptar)
         Me.pnlDifCamXFactura.Controls.Add(Me.GridPagosXFacturas)
         Me.pnlDifCamXFactura.Controls.Add(Me.CustomLabel1)
-        Me.pnlDifCamXFactura.Location = New System.Drawing.Point(149, 73)
+        Me.pnlDifCamXFactura.Location = New System.Drawing.Point(187, 126)
         Me.pnlDifCamXFactura.Name = "pnlDifCamXFactura"
         Me.pnlDifCamXFactura.Size = New System.Drawing.Size(474, 300)
         Me.pnlDifCamXFactura.TabIndex = 131

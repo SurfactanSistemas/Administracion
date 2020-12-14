@@ -4,5 +4,5 @@
     Public Shared Codigo As String = ""
     Public Shared CodigoResponsableSac As String = ""
     Public Shared Descripcion As String = ""
-
+    Public Shared Perfil As String = ""
 End Class

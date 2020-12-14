@@ -343,7 +343,9 @@
     <Compile Include="Maestros\Materias Primas\Ensayos\ProcesarListadoEnsayosEnMateriaPrima.Designer.vb">
       <DependentUpon>ProcesarListadoEnsayosEnMateriaPrima.vb</DependentUpon>
     </Compile>
-    <Compile Include="Maestros\Materias Primas\Ensayos\ProcesarListadoEnsayosEnMateriaPrima.vb" />
+    <Compile Include="Maestros\Materias Primas\Ensayos\ProcesarListadoEnsayosEnMateriaPrima.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Maestros\Materias Primas\Especificaciones\EspecificacionesMPPorVersion.Designer.vb">
       <DependentUpon>EspecificacionesMPPorVersion.vb</DependentUpon>
     </Compile>
@@ -1046,6 +1048,12 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Util\Util\Util.vbproj">
+      <Project>{cc5d60fd-9755-4c61-b96c-f56173586bb9}</Project>
+      <Name>Util</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
