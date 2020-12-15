@@ -5206,13 +5206,13 @@ Public Class Pagos
                 If .HasRows Then
                     .Read()
 
-                    WPrvDireccion = .Item("Direccion")
-                    WPrvCuit = .Item("Cuit")
-                    WPrvIb = .Item("NroIb")
-                    ZZTipoIb = .Item("CodIb")
-                    WTipoIbCaba = .Item("CodIbCaba")
-                    WTipoIva = Val(.Item("Iva"))
-                    ZZPorceIb = IIf(IsDBNull(.Item("PorceIb")), "0", .Item("PorceIb"))
+                    WPrvDireccion = OrDefault(.Item("Direccion"), "")
+                    WPrvCuit = OrDefault(.Item("Cuit"), "")
+                    WPrvIb = OrDefault(.Item("NroIb"), "")
+                    ZZTipoIb = OrDefault(.Item("CodIb"), "")
+                    WTipoIbCaba = OrDefault(.Item("CodIbCaba"), "")
+                    WTipoIva = Val(OrDefault(.Item("Iva"), ""))
+                    ZZPorceIb = OrDefault(.Item("PorceIb"), "0")
 
                 End If
             End With
