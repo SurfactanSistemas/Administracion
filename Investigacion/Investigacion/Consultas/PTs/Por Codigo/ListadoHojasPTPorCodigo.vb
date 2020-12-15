@@ -1,4 +1,6 @@
 ﻿
+Imports System.IO
+Imports System.Runtime.InteropServices
 Imports Util
 Imports Util.Interfaces
 Imports Util.Clases
@@ -808,145 +810,156 @@ Public Class ListadoHojasPTPorCodigo : Implements IAyudaMPs, IExportar
 
     Private Sub btnExportarListadoEnsayosPorPartida_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExportarListadoEnsayosPorPartida.Click
 
-        '
-        ' Creamos el Objeto Excel para comenzar a Trabajar.
-        '
-        'Dim oApp As New Excel.Application()
-        Dim OApp As New Excel.Application()
-        Dim oBook As Excel.Workbook = OApp.Workbooks.Add
-        Dim oSheet As Excel.Worksheet = OApp.ActiveSheet
+        Try
+            '
+            ' Creamos el Objeto Excel para comenzar a Trabajar.
+            '
+            'Dim oApp As New Excel.Application()
+            Dim OApp As New Excel.Application()
+            Dim oBook As Excel.Workbook = OApp.Workbooks.Add
+            Dim oSheet As Excel.Worksheet = OApp.ActiveSheet
 
-        OApp.Visible = False
+            OApp.Visible = False
+            OApp.Interactive = False
 
-        Dim celda As Excel.Range = oSheet.Cells(2, 1)
+            Dim celda As Excel.Range = oSheet.Cells(2, 1)
 
-        Dim WColumna As Integer = 2
-        Dim WFila As Integer = 3
+            Dim WColumna As Integer = 2
+            Dim WFila As Integer = 3
 
-        ProgressBar1.Value = 0
-        ProgressBar1.Maximum = dgvLaudos.Rows.Count
+            ProgressBar1.Value = 0
+            ProgressBar1.Maximum = dgvLaudos.Rows.Count
 
-        Dim tablaDatos As Data.DataTable = TryCast(dgvLaudos.DataSource, Data.DataTable)
+            Dim tablaDatos As Data.DataTable = TryCast(dgvLaudos.DataSource, Data.DataTable)
 
-        If tablaDatos Is Nothing Then Exit Sub
+            If tablaDatos Is Nothing Then Exit Sub
 
-        Dim WUltimaVersion As Integer = 0
+            Dim WUltimaVersion As Integer = 0
 
-        'For i = 0 To WUltimaColumna - 1
-        For Each row As DataRow In tablaDatos.Select("", "Version, Hoja Desc")
-            'Dim row As DataRow = tablaDatos.Rows(i)
+            'For i = 0 To WUltimaColumna - 1
+            For Each row As DataRow In tablaDatos.Select("", "Version, Hoja Desc")
+                'Dim row As DataRow = tablaDatos.Rows(i)
 
-            With row
+                With row
 
-                If OrDefault(.Item("idEstado"), 4) <> EstadosLaudos.SinActualizar Then
+                    If OrDefault(.Item("idEstado"), 4) <> EstadosLaudos.SinActualizar Then
 
-                    If WUltimaVersion < .Item("Version") Then
+                        If WUltimaVersion < .Item("Version") Then
 
-                        If WUltimaVersion = 0 Then
-                            oSheet = OApp.ActiveSheet
-                        Else
-                            oSheet = OApp.Sheets.Add
-                            oSheet.Activate()
-                            WColumna = 2
+                            If WUltimaVersion = 0 Then
+                                oSheet = OApp.ActiveSheet
+                            Else
+                                oSheet = OApp.Sheets.Add
+                                oSheet.Activate()
+                                WColumna = 2
+                            End If
+
+                            WUltimaVersion = .Item("Version")
+
+                            oSheet.Name = "Versión " & WUltimaVersion
+
                         End If
 
-                        WUltimaVersion = .Item("Version")
+                        celda = oSheet.Cells(2, 1)
 
-                        oSheet.Name = "Versión " & WUltimaVersion
+                        WColumna += 1
+                        celda = oSheet.Cells(3, WColumna)
+                        celda.Value = OrDefault(.Item("Hoja"), "")
+                        celda.EntireColumn.AutoFit()
+                        celda.BorderAround(LineStyle:=XlLineStyle.xlContinuous, Weight:=XlBorderWeight.xlMedium)
+                        celda.Font.Bold = True
+
+                        WFila = 3
+
+                        Dim WEnsayos As Data.DataTable = _TraerDatosEnsayosHoja(.Item("Hoja"))
+
+                        For Each ens As DataRow In WEnsayos.Rows
+                            With ens
+
+                                WFila += 1
+
+                                'oSheet.Cells(WFila, 1) = _TraerDescripcionEnsayo(Trim(ens.Item("Ensayo")))
+                                oSheet.Cells(WFila, 1) = Trim(ens.Item("Ensayo"))
+                                oSheet.Cells(WFila, 2) = Trim(ens.Item("ValorStd"))
+                                oSheet.Cells(2, WColumna) = ens.Item("Fecha")
+
+                                If Trim(ens.Item("Valor")) = "" Then
+                                    oSheet.Cells(WFila, WColumna) = Trim(ens.Item("ValorReg"))
+                                Else
+                                    oSheet.Cells(WFila, WColumna) = Trim(ens.Item("Valor"))
+                                    oSheet.Cells(WFila, 2) = Trim(ens.Item("ValorReg"))
+                                End If
+
+                            End With
+
+                            celda = oSheet.Cells(WFila, WColumna)
+                            celda.EntireColumn.AutoFit()
+                            celda.EntireColumn.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter
+                            celda.ColumnWidth = celda.ColumnWidth + 2
+                            celda.BorderAround(LineStyle:=XlLineStyle.xlContinuous, Weight:=XlBorderWeight.xlThin)
+
+                            celda = oSheet.Cells(2, WColumna)
+                            celda.EntireColumn.AutoFit()
+                            celda.EntireColumn.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter
+                            celda.ColumnWidth = celda.ColumnWidth + 2
+                            celda.BorderAround(LineStyle:=XlLineStyle.xlContinuous, Weight:=XlBorderWeight.xlThin)
+
+                        Next
 
                     End If
 
-                    celda = oSheet.Cells(2, 1)
+                End With
 
-                    WColumna += 1
-                    celda = oSheet.Cells(3, WColumna)
-                    celda.Value = OrDefault(.Item("Hoja"), "")
-                    celda.EntireColumn.AutoFit()
-                    celda.BorderAround(LineStyle:=XlLineStyle.xlContinuous, Weight:=XlBorderWeight.xlMedium)
-                    celda.Font.Bold = True
+                ProgressBar1.Increment(1)
 
-                    WFila = 3
+            Next
 
-                    Dim WEnsayos As Data.DataTable = _TraerDatosEnsayosHoja(.Item("Hoja"))
+            For Each sheet As Worksheet In OApp.Sheets
 
-                    For Each ens As DataRow In WEnsayos.Rows
-                        With ens
+                oSheet = sheet
+                oSheet.Activate()
 
-                            WFila += 1
+                celda = oSheet.Cells(2, 2)
+                celda.Value = "Fecha Ingreso"
+                celda.EntireColumn.AutoFit()
+                celda.BorderAround(LineStyle:=XlLineStyle.xlContinuous, Weight:=XlBorderWeight.xlMedium)
 
-                            'oSheet.Cells(WFila, 1) = _TraerDescripcionEnsayo(Trim(ens.Item("Ensayo")))
-                            oSheet.Cells(WFila, 1) = Trim(ens.Item("Ensayo"))
-                            oSheet.Cells(WFila, 2) = Trim(ens.Item("ValorStd"))
-                            oSheet.Cells(2, WColumna) = ens.Item("Fecha")
+                celda = oSheet.Cells(3, 1)
+                celda.Value = "Determinación Analítica"
+                celda.EntireColumn.AutoFit()
+                celda.BorderAround(LineStyle:=XlLineStyle.xlContinuous, Weight:=XlBorderWeight.xlMedium)
 
-                            If Trim(ens.Item("Valor")) = "" Then
-                                oSheet.Cells(WFila, WColumna) = Trim(ens.Item("ValorReg"))
-                            Else
-                                oSheet.Cells(WFila, WColumna) = Trim(ens.Item("Valor"))
-                                oSheet.Cells(WFila, 2) = Trim(ens.Item("ValorReg"))
-                            End If
+                celda = oSheet.Cells(3, 2)
+                celda.Value = "Especificación"
+                celda.EntireColumn.AutoFit()
+                celda.EntireColumn.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter
+                celda.BorderAround(LineStyle:=XlLineStyle.xlContinuous, Weight:=XlBorderWeight.xlMedium)
 
-                        End With
+            Next
 
-                        celda = oSheet.Cells(WFila, WColumna)
-                        celda.EntireColumn.AutoFit()
-                        celda.EntireColumn.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter
-                        celda.ColumnWidth = celda.ColumnWidth + 2
-                        celda.BorderAround(LineStyle:=XlLineStyle.xlContinuous, Weight:=XlBorderWeight.xlThin)
+            OApp.Visible = True
+            OApp.UserControl = True
+            OApp.Interactive = True
 
-                        celda = oSheet.Cells(2, WColumna)
-                        celda.EntireColumn.AutoFit()
-                        celda.EntireColumn.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter
-                        celda.ColumnWidth = celda.ColumnWidth + 2
-                        celda.BorderAround(LineStyle:=XlLineStyle.xlContinuous, Weight:=XlBorderWeight.xlThin)
+            ProgressBar1.Value = 0
 
-                    Next
+            '
+            'Cerramos la interfaz.
+            '
+            oSheet = Nothing
+            'oBook.Close(False)
+            'oBook.SaveAs()
+            'oBook = Nothing
 
-                End If
+            oBook.Close()
+            OApp.Quit()
 
-            End With
-
-            ProgressBar1.Increment(1)
-
-        Next
-
-        For Each sheet As Worksheet In OApp.Sheets
-
-            oSheet = sheet
-            oSheet.Activate()
-
-            celda = oSheet.Cells(2, 2)
-            celda.Value = "Fecha Ingreso"
-            celda.EntireColumn.AutoFit()
-            celda.BorderAround(LineStyle:=XlLineStyle.xlContinuous, Weight:=XlBorderWeight.xlMedium)
-
-            celda = oSheet.Cells(3, 1)
-            celda.Value = "Determinación Analítica"
-            celda.EntireColumn.AutoFit()
-            celda.BorderAround(LineStyle:=XlLineStyle.xlContinuous, Weight:=XlBorderWeight.xlMedium)
-
-            celda = oSheet.Cells(3, 2)
-            celda.Value = "Especificación"
-            celda.EntireColumn.AutoFit()
-            celda.EntireColumn.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter
-            celda.BorderAround(LineStyle:=XlLineStyle.xlContinuous, Weight:=XlBorderWeight.xlMedium)
-
-        Next
-
-        OApp.Visible = True
-        OApp.UserControl = True
-
-        ProgressBar1.Value = 0
-
-        '
-        'Cerramos la interfaz.
-        '
-        oSheet = Nothing
-        'oBook.Close(False)
-        'oBook.SaveAs()
-        oBook = Nothing
-        OApp.Quit()
-        OApp = Nothing
+            OApp = Nothing
+        Catch ex As COMException
+            Using sw As New StreamWriter(Environment.SpecialFolder.Desktop & "sql.txt")
+                sw.WriteLine(ex.Message & vbCrLf & ex.TargetSite.ToString & vbCrLf & ex.StackTrace)
+            End Using
+        End Try
 
     End Sub
 

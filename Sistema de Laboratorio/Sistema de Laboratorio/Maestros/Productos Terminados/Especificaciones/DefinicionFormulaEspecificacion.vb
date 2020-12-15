@@ -2,8 +2,9 @@
 
     Private WParametrosFormula(10) As String
     Private WFormula As String
+    Private Terminado As String
 
-    Sub New(ByVal Formula As String, ByVal ParametrosFormula() As String)
+    Sub New(ByVal Terminado As String, ByVal Formula As String, ByVal ParametrosFormula() As String)
 
         ' This call is required by the designer.
         InitializeComponent()
@@ -12,6 +13,7 @@
 
         WParametrosFormula = ParametrosFormula
         WFormula = Formula
+        Me.Terminado = Terminado
 
     End Sub
 
@@ -89,7 +91,7 @@
     End Sub
 
     Private Sub btnAyudaFormula_Click(sender As Object, e As EventArgs) Handles btnAyudaFormula.Click
-        With New IngresoFormulasEnsayo("00")
+        With New IngresoFormulasEnsayo(Terminado)
             .Show(Me)
         End With
     End Sub

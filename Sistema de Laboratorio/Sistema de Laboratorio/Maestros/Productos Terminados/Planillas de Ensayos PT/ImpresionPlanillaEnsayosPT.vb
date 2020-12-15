@@ -127,7 +127,8 @@ Public Class ImpresionPlanillaEnsayosPT : Implements IAyudaPTs
                     Dim WHastaEspecif As String = OrDefault(.Item("HastaEspecif"), "")
                     Dim WUnidadEspecif = OrDefault(.Item("UnidadEspecif"), "")
                     Dim WMenorIgualEspecif = OrDefault(.Item("MenorIgualEspecif"), "0")
-                    Dim WImpreParametro = _GenerarImpreParametro(WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif)
+                    Dim WInformaEspecif = OrDefault(.Item("InformaEspecif"), "0")
+                    Dim WImpreParametro = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif, WInformaEspecif)
 
                     If Val(WTipoEspecif) = 0 And WImpreParametro <> "" Then WImpreParametro &= " (c)"
 
@@ -281,7 +282,8 @@ Public Class ImpresionPlanillaEnsayosPT : Implements IAyudaPTs
                     Dim WHastaEspecif As String = OrDefault(.Item("HastaEspecif"), "")
                     Dim WUnidadEspecif = OrDefault(.Item("UnidadEspecif"), "")
                     Dim WMenorIgualEspecif = OrDefault(.Item("MenorIgualEspecif"), "0")
-                    Dim WImpreParametro = _GenerarImpreParametro(WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif)
+                    Dim WInformaEspecif = OrDefault(.Item("InformaEspecif"), "0")
+                    Dim WImpreParametro = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif, WInformaEspecif)
 
                     If Val(WTipoEspecif) = 0 And WImpreParametro <> "" Then WImpreParametro &= " (c)"
 
@@ -331,7 +333,8 @@ Public Class ImpresionPlanillaEnsayosPT : Implements IAyudaPTs
                 Dim WHastaEspecif As String = OrDefault(.Item("HastaEspecif"), "")
                 Dim WUnidadEspecif = OrDefault(.Item("UnidadEspecif"), "")
                 Dim WMenorIgualEspecif = OrDefault(.Item("MenorIgualEspecif"), "0")
-                Dim WImpreParametro = _GenerarImpreParametro(WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif)
+                Dim WInformaEspecif = OrDefault(.Item("InformaEspecif"), "0")
+                Dim WImpreParametro = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif, WInformaEspecif)
 
                 If Val(WTipoEspecif) = 0 And WImpreParametro <> "" Then WImpreParametro &= " (c)"
 
@@ -361,12 +364,15 @@ Public Class ImpresionPlanillaEnsayosPT : Implements IAyudaPTs
 
     End Sub
 
-    Private Function _GenerarImpreParametro(ByVal wDesdeEspecif As String, ByVal wHastaEspecif As String, ByVal wUnidadEspecif As String, ByVal wMenorIgualEspecif As String) As String
+    Private Function _GenerarImpreParametro(ByVal WTipoEspecif As String, ByVal wDesdeEspecif As String, ByVal wHastaEspecif As String, ByVal wUnidadEspecif As String, ByVal wMenorIgualEspecif As String, ByVal WInformaEspecif As String) As String
 
+        WTipoEspecif = OrDefault(Trim(WTipoEspecif), "")
         wDesdeEspecif = OrDefault(Trim(wDesdeEspecif), "")
         wHastaEspecif = OrDefault(Trim(wHastaEspecif), "")
         wUnidadEspecif = OrDefault(Trim(wUnidadEspecif), "")
         wMenorIgualEspecif = OrDefault(Trim(wMenorIgualEspecif), "")
+
+        If Val(WInformaEspecif) = 0 And Val(WTipoEspecif) = 2 Then Return "Informativo"
 
         If Val(wDesdeEspecif) = 0 And Val(wHastaEspecif) = 0 Then Return "Cumple Ensayo"
 
@@ -378,7 +384,9 @@ Public Class ImpresionPlanillaEnsayosPT : Implements IAyudaPTs
 
             If Val(wDesdeEspecif) = 0 And Val(wHastaEspecif) <> 0 Then
 
-                If Val(wMenorIgualEspecif) = 1 Then Return String.Format("Máximo {0} {1}", wHastaEspecif, wUnidadEspecif)
+                If Val(wMenorIgualEspecif) = 1 Then
+                    Return String.Format("Máximo {0} {1}", wHastaEspecif, wUnidadEspecif)
+                End If
 
                 Return String.Format("Menor a {0} {1}", wHastaEspecif, wUnidadEspecif)
 
@@ -386,7 +394,9 @@ Public Class ImpresionPlanillaEnsayosPT : Implements IAyudaPTs
 
             If Val(wDesdeEspecif) <> 0 And Val(wHastaEspecif) = 9999 Then
 
-                If Val(wMenorIgualEspecif) = 1 Then Return String.Format("Mínimo {0} {1}", wHastaEspecif, wUnidadEspecif)
+                If Val(wMenorIgualEspecif) = 1 Then
+                    Return String.Format("Mínimo {0} {1}", wHastaEspecif, wUnidadEspecif)
+                End If
 
                 Return String.Format("Mayor a {0} {1}", wHastaEspecif, wUnidadEspecif)
 

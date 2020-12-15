@@ -22,20 +22,23 @@ Partial Class IngresoFormulasEnsayo
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.DGV_Formulas = New Util.DBDataGridView()
-        Me.txtBuscador = New System.Windows.Forms.TextBox()
-        Me.btnAgregar = New System.Windows.Forms.Button()
-        Me.btnVolver = New System.Windows.Forms.Button()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
         Me.Renglon = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Formula = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.AnalistaLab = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Analista = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CheckVerificado = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.txtBuscador = New System.Windows.Forms.TextBox()
+        Me.btnAgregar = New System.Windows.Forms.Button()
+        Me.btnVolver = New System.Windows.Forms.Button()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.lblTerminado = New System.Windows.Forms.Label()
+        Me.lblDescTerminado = New System.Windows.Forms.Label()
         CType(Me.DGV_Formulas, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -46,18 +49,18 @@ Partial Class IngresoFormulasEnsayo
         Me.DGV_Formulas.AllowUserToDeleteRows = False
         Me.DGV_Formulas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_Formulas.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Renglon, Me.Descripcion, Me.Formula, Me.AnalistaLab, Me.Analista, Me.CheckVerificado})
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGV_Formulas.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGV_Formulas.DefaultCellStyle = DataGridViewCellStyle2
         Me.DGV_Formulas.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.DGV_Formulas.DoubleBuffered = True
         Me.DGV_Formulas.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
-        Me.DGV_Formulas.Location = New System.Drawing.Point(0, 115)
+        Me.DGV_Formulas.Location = New System.Drawing.Point(0, 145)
         Me.DGV_Formulas.Name = "DGV_Formulas"
         Me.DGV_Formulas.OrdenamientoColumnasHabilitado = True
         Me.DGV_Formulas.RowHeadersWidth = 15
@@ -67,9 +70,67 @@ Partial Class IngresoFormulasEnsayo
         Me.DGV_Formulas.Size = New System.Drawing.Size(589, 239)
         Me.DGV_Formulas.TabIndex = 0
         '
+        'Renglon
+        '
+        Me.Renglon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Renglon.DataPropertyName = "Renglon"
+        Me.Renglon.HeaderText = "Renglon"
+        Me.Renglon.Name = "Renglon"
+        Me.Renglon.ReadOnly = True
+        Me.Renglon.Visible = False
+        '
+        'Descripcion
+        '
+        Me.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Descripcion.DataPropertyName = "Descripcion"
+        Me.Descripcion.HeaderText = "Descripcion"
+        Me.Descripcion.MinimumWidth = 200
+        Me.Descripcion.Name = "Descripcion"
+        Me.Descripcion.ReadOnly = True
+        '
+        'Formula
+        '
+        Me.Formula.DataPropertyName = "Formula"
+        Me.Formula.HeaderText = "Formula"
+        Me.Formula.Name = "Formula"
+        Me.Formula.ReadOnly = True
+        Me.Formula.Width = 150
+        '
+        'AnalistaLab
+        '
+        Me.AnalistaLab.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.AnalistaLab.DataPropertyName = "AnalistaLab"
+        Me.AnalistaLab.HeaderText = "AnalistaLab"
+        Me.AnalistaLab.Name = "AnalistaLab"
+        Me.AnalistaLab.ReadOnly = True
+        Me.AnalistaLab.Visible = False
+        '
+        'Analista
+        '
+        Me.Analista.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Analista.DataPropertyName = "Analista"
+        Me.Analista.HeaderText = "Analista"
+        Me.Analista.Name = "Analista"
+        Me.Analista.ReadOnly = True
+        Me.Analista.Width = 69
+        '
+        'CheckVerificado
+        '
+        Me.CheckVerificado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.CheckVerificado.DataPropertyName = "CheckVerificado"
+        Me.CheckVerificado.FalseValue = "0"
+        Me.CheckVerificado.HeaderText = "Verif."
+        Me.CheckVerificado.IndeterminateValue = "0"
+        Me.CheckVerificado.Name = "CheckVerificado"
+        Me.CheckVerificado.ReadOnly = True
+        Me.CheckVerificado.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.CheckVerificado.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.CheckVerificado.TrueValue = "1"
+        Me.CheckVerificado.Width = 56
+        '
         'txtBuscador
         '
-        Me.txtBuscador.Location = New System.Drawing.Point(3, 89)
+        Me.txtBuscador.Location = New System.Drawing.Point(3, 121)
         Me.txtBuscador.Name = "txtBuscador"
         Me.txtBuscador.Size = New System.Drawing.Size(582, 20)
         Me.txtBuscador.TabIndex = 1
@@ -77,7 +138,7 @@ Partial Class IngresoFormulasEnsayo
         'btnAgregar
         '
         Me.btnAgregar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAgregar.Location = New System.Drawing.Point(3, 46)
+        Me.btnAgregar.Location = New System.Drawing.Point(3, 78)
         Me.btnAgregar.Name = "btnAgregar"
         Me.btnAgregar.Size = New System.Drawing.Size(158, 37)
         Me.btnAgregar.TabIndex = 2
@@ -86,7 +147,7 @@ Partial Class IngresoFormulasEnsayo
         '
         'btnVolver
         '
-        Me.btnVolver.Location = New System.Drawing.Point(167, 46)
+        Me.btnVolver.Location = New System.Drawing.Point(167, 78)
         Me.btnVolver.Name = "btnVolver"
         Me.btnVolver.Size = New System.Drawing.Size(140, 37)
         Me.btnVolver.TabIndex = 3
@@ -130,71 +191,47 @@ Partial Class IngresoFormulasEnsayo
         Me.Label2.TabIndex = 1
         Me.Label2.Text = "SURFACTAN S.A."
         '
-        'Renglon
+        'Label3
         '
-        Me.Renglon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Renglon.DataPropertyName = "Renglon"
-        Me.Renglon.HeaderText = "Renglon"
-        Me.Renglon.Name = "Renglon"
-        Me.Renglon.ReadOnly = True
-        Me.Renglon.Visible = False
-        Me.Renglon.Width = 53
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(11, 51)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(68, 13)
+        Me.Label3.TabIndex = 5
+        Me.Label3.Text = "PRODUCTO"
         '
-        'Descripcion
+        'lblTerminado
         '
-        Me.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.Descripcion.DataPropertyName = "Descripcion"
-        Me.Descripcion.HeaderText = "Descripcion"
-        Me.Descripcion.MinimumWidth = 200
-        Me.Descripcion.Name = "Descripcion"
-        Me.Descripcion.ReadOnly = True
+        Me.lblTerminado.BackColor = System.Drawing.Color.Cyan
+        Me.lblTerminado.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblTerminado.Location = New System.Drawing.Point(85, 46)
+        Me.lblTerminado.Name = "lblTerminado"
+        Me.lblTerminado.Padding = New System.Windows.Forms.Padding(5, 0, 0, 0)
+        Me.lblTerminado.Size = New System.Drawing.Size(85, 23)
+        Me.lblTerminado.TabIndex = 6
+        Me.lblTerminado.Text = "PT-99999-999"
+        Me.lblTerminado.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'Formula
+        'lblDescTerminado
         '
-        Me.Formula.DataPropertyName = "Formula"
-        Me.Formula.HeaderText = "Formula"
-        Me.Formula.Name = "Formula"
-        Me.Formula.ReadOnly = True
-        Me.Formula.Width = 150
-        '
-        'AnalistaLab
-        '
-        Me.AnalistaLab.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.AnalistaLab.DataPropertyName = "AnalistaLab"
-        Me.AnalistaLab.HeaderText = "AnalistaLab"
-        Me.AnalistaLab.Name = "AnalistaLab"
-        Me.AnalistaLab.ReadOnly = True
-        Me.AnalistaLab.Visible = False
-        Me.AnalistaLab.Width = 87
-        '
-        'Analista
-        '
-        Me.Analista.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Analista.DataPropertyName = "Analista"
-        Me.Analista.HeaderText = "Analista"
-        Me.Analista.Name = "Analista"
-        Me.Analista.ReadOnly = True
-        Me.Analista.Width = 69
-        '
-        'CheckVerificado
-        '
-        Me.CheckVerificado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.CheckVerificado.DataPropertyName = "CheckVerificado"
-        Me.CheckVerificado.FalseValue = "0"
-        Me.CheckVerificado.HeaderText = "Verif."
-        Me.CheckVerificado.IndeterminateValue = "0"
-        Me.CheckVerificado.Name = "CheckVerificado"
-        Me.CheckVerificado.ReadOnly = True
-        Me.CheckVerificado.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.CheckVerificado.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.CheckVerificado.TrueValue = "1"
-        Me.CheckVerificado.Width = 56
+        Me.lblDescTerminado.BackColor = System.Drawing.Color.Cyan
+        Me.lblDescTerminado.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblDescTerminado.Location = New System.Drawing.Point(176, 46)
+        Me.lblDescTerminado.Name = "lblDescTerminado"
+        Me.lblDescTerminado.Padding = New System.Windows.Forms.Padding(5, 0, 0, 0)
+        Me.lblDescTerminado.Size = New System.Drawing.Size(403, 23)
+        Me.lblDescTerminado.TabIndex = 6
+        Me.lblDescTerminado.Text = "PT-99999-999"
+        Me.lblDescTerminado.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'IngresoFormulasEnsayo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(589, 354)
+        Me.ClientSize = New System.Drawing.Size(589, 384)
+        Me.Controls.Add(Me.lblDescTerminado)
+        Me.Controls.Add(Me.lblTerminado)
+        Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.btnVolver)
         Me.Controls.Add(Me.btnAgregar)
@@ -224,4 +261,7 @@ Partial Class IngresoFormulasEnsayo
     Friend WithEvents AnalistaLab As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Analista As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents CheckVerificado As System.Windows.Forms.DataGridViewCheckBoxColumn
+    Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents lblTerminado As System.Windows.Forms.Label
+    Friend WithEvents lblDescTerminado As System.Windows.Forms.Label
 End Class
