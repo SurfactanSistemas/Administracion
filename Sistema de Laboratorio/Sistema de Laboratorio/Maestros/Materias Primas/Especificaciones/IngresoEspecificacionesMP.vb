@@ -490,7 +490,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
                 WParametrosFormula(i) = Trim(OrDefault(.Cells("Variable" & i).Value, ""))
             Next
 
-            Dim frm As New IngresoParametrosEspecificaciones(WEnsayo, WDescEnsayo, WParametro, WTipo, WInforma,
+            Dim frm As New IngresoParametrosEspecificaciones(txtCodigo.Text, WEnsayo, WDescEnsayo, WParametro, WTipo, WInforma,
                                                              WMenorIgual, WDesde, WHasta, WUnidad, WFarmacopea,
                                                              WFormula, WParametrosFormula)
             frm.ShowDialog(Me)

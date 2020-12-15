@@ -1,4 +1,6 @@
-﻿Public Class MenuPrincipal
+﻿Imports System.Text.RegularExpressions
+
+Public Class MenuPrincipal
 
     Const SISTEMA As String = "LABORATORIO"
 
@@ -13,7 +15,7 @@
         End With
 
         Dim posicion As Integer = -1
-        
+
         'For Each Item As ToolStripMenuItem In (New MenuPrincipal).MaestrosToolStripMenuItem.DropDownItems
         For Each Item As ToolStripMenuItem In (New MenuPrincipal).MenuStrip1.Items
             Dim ID As String = Microsoft.VisualBasic.Right(Item.Name, 2)
@@ -46,7 +48,7 @@
 
 
                 Next
-             End If
+            End If
         Next
         For Each Item As ToolStripMenuItem In (New MenuPrincipal).MenuStrip1.Items
             If Item.DropDownItems.Count > 0 Then
@@ -63,7 +65,7 @@
 
             End If
         Next
-        
+
         Return TablaItems
     End Function
 
@@ -83,13 +85,13 @@
                     Else
                         Item2.Enabled = False
                     End If
-                    
+
                 Next
             End If
-            
+
             Item1.Enabled = False
 
-            Next
+        Next
     End Sub
 
     Private Sub PermisosMenu()
@@ -157,10 +159,10 @@
     End Sub
 
     Private Sub MenuPrincipal_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
-       
+
         ' LotesVencidosToolStripMenuItem_09.Visible = (Base = "Surfactan_II" Or Base = "SurfactanSa")
         ' AutorizaciónDePedidosToolStripMenuItem_22.Visible = Base = "Surfactan_III"
-        
+
         PermisosMenu()
 
     End Sub
@@ -318,7 +320,7 @@
             .Show(Me)
         End With
     End Sub
-    
+
     Private Sub InformeDeRecepcionDeDrogaDeLaboratorioToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles InformeDeRecepcionDeDrogaDeLaboratorioToolStripMenuItem_31.Click
         With New InformeRecepcionDrogaLAB
             .Show(Me)
@@ -331,10 +333,15 @@
         End With
     End Sub
 
-    Private Sub IngresoFormulasDeEnsayosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles IngresoFormulasDeEnsayosToolStripMenuItem.Click
+    Private Sub IngresoFormulasDeEnsayosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles IngresoFormulasDeEnsayosToolStripMenuItem_02.Click
         'With New IngresoFormulasEnsa
         Dim itemStrip As ToolStripMenuItem = TryCast(sender, ToolStripMenuItem)
-        Dim id As String = Microsoft.VisualBasic.Right(itemStrip.Name, 2)yo
+        Dim id As String = Microsoft.VisualBasic.Right(itemStrip.Name, 2)
+
+        If Not (New Regex("([0-9]{2})$")).IsMatch(id) Then
+            id = 0
+        End If
+
         With New ListadoTerminadosFormulas(id)
             .Show(Me)
         End With

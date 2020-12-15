@@ -3,6 +3,29 @@ Imports Util.Clases.Query
 Imports Util.Clases.Helper
 Public Class ListadoTerminadosFormulas : Implements Util.IAyudaGeneral
 
+    Private ID_Permiso As Integer = 0
+    Private PermisoGrabar As Boolean = True
+
+    Sub New(Optional ByVal ID As String = "")
+
+        ' Llamada necesaria para el diseñador.
+        InitializeComponent()
+
+        ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
+
+        If Val(ID) <> 0 Then
+            ID_Permiso = Val(ID)
+
+            Dim SQLCnslt As String = "SELECT Escritura FROM PermisosPerfiles WHERE ID = '" & ID & "' AND Sistema = 'LABORATORIO' AND Perfil = '" & Operador.Perfil & "' ORDER BY ID"
+            Dim Row As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+            If Row IsNot Nothing Then
+                PermisoGrabar = Row.Item("Escritura")
+            End If
+
+        End If
+
+    End Sub
+
     Private Sub ListadoTerminadosFormulas_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim WDatos As DataTable = GetAll("SELECT DISTINCT f.Terminado AS Producto, t.Descripcion FROM FormulasDeEnsayos f INNER JOIN Terminado t ON t.Codigo = f.Terminado ORDER BY Terminado", "Surfactan_II")
 
@@ -18,7 +41,7 @@ Public Class ListadoTerminadosFormulas : Implements Util.IAyudaGeneral
 
         If WTerminado.Trim = "" Then Exit Sub
 
-        With New IngresoFormulasEnsayo(WTerminado)
+        With New IngresoFormulasEnsayo(ID_Permiso, WTerminado)
             .Show(Me)
         End With
 
