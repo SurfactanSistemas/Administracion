@@ -66,7 +66,7 @@
                 Dim WMenorIgualEspecif = OrDefault(.Item("MenorIgualEspecif"), "")
                 Dim WInformaEspecif = OrDefault(.Item("InformaEspecif"), "")
                 Dim WFormulaEspecif = OrDefault(.Item("FormulaEspecif"), "")
-                Dim WImpreResultado = _GenerarImpreParametro(WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif)
+                Dim WImpreResultado = _GenerarImpreParametro(WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif, WTipoEspecif, WInformaEspecif)
 
                 Dim WOperador = OrDefault(.Item("OperadorLabora"), "")
                 Dim WValor = Trim(OrDefault(.Item("ValorReal"), ""))
@@ -82,7 +82,7 @@
 
                 Dim WDescripcion As String
 
-                WResultado = _GenerarImpreResultado(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WValor)
+                WResultado = _GenerarImpreResultado(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WValor, WMenorIgualEspecif, WInformaEspecif)
 
                 Dim r = dgvEnsayos.Rows.Add
 
@@ -158,7 +158,8 @@
 
     End Function
 
-    Private Function _GenerarImpreParametro(ByVal wDesdeEspecif As String, ByVal wHastaEspecif As String, ByVal wUnidadEspecif As String, ByVal wMenorIgualEspecif As String) As String
+    Private Function _GenerarImpreParametro(ByVal wDesdeEspecif As String, ByVal wHastaEspecif As String, ByVal wUnidadEspecif As String, ByVal wMenorIgualEspecif As String, ByVal WTipoEspecif As String, ByVal WInformaEspecif As String) As String
+        If Val(WInformaEspecif) = 0 And Val(WTipoEspecif) = 2 Then Return "Informativo"
         If Val(wDesdeEspecif) = 0 And Val(wHastaEspecif) = 0 Then Return "Cumple Ensayo"
         If Trim(wDesdeEspecif) = "" And Trim(wHastaEspecif) = "" Then Return ""
 
@@ -196,11 +197,14 @@
         Return ""
     End Function
 
-    Private Function _GenerarImpreResultado(ByVal wTipoEspecif As Object, ByVal wDesdeEspecif As Object, ByVal wHastaEspecif As Object, ByVal wUnidadEspecif As Object, ByVal wValor As Object) As Object
+    Private Function _GenerarImpreResultado(ByVal wTipoEspecif As Object, ByVal wDesdeEspecif As Object, ByVal wHastaEspecif As Object, ByVal wUnidadEspecif As Object, ByVal wValor As Object, ByVal WMenorIgualEspecif As String, ByVal WInformaEspecif As String) As Object
 
         If wValor = "" Then Return ""
 
         If UCase(Trim(wValor)) = "P" Then Return "PENDIENTE"
+
+        wUnidadEspecif = Trim(wUnidadEspecif)
+        wHastaEspecif = Trim(wHastaEspecif)
 
         If Val(wTipoEspecif) = 1 Or Val(wTipoEspecif) = 2 Then
 
@@ -217,7 +221,8 @@
             wValor = formatonumerico(wValor, WDecimales)
 
             Return String.Format("{0} {1}", wValor, wUnidadEspecif)
-
+        ElseIf Val(wTipoEspecif) = 0 And Val(WMenorIgualEspecif) = 1 And Val(WInformaEspecif) = 1 Then
+            Return String.Format("< {0} {1}", wHastaEspecif, wUnidadEspecif)
         Else
 
             Select Case UCase(wValor)

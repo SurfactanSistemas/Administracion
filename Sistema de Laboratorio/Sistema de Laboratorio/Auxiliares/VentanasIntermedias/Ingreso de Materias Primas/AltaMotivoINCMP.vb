@@ -227,20 +227,24 @@ Public Class AltaMotivoINCMP
             Dim WHastaEspecif = OrDefault(.Item("HastaEspecif"), "")
             Dim WUnidadEspecif = OrDefault(.Item("UnidadEspecif"), "")
             Dim WMenorIgualEspecif = OrDefault(.Item("MenorIgualEspecif"), "")
-            Dim WImpreResultado = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif)
+            Dim WInformaEspecif = OrDefault(.Item("InformaEspecif"), "")
+            Dim WImpreResultado = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif, WInformaEspecif)
 
-            Dim WResultado = OrDefault(.Item("Resultado"), "") = _GenerarImpreResultado(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WValor)
+            Dim WResultado = OrDefault(.Item("Resultado"), "") = _GenerarImpreResultado(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WValor, WMenorIgualEspecif, WInformaEspecif)
 
             Return String.Format("{0} ({1}): {2} {3}", WEspecificacion, WImpreResultado, WResultado, WUnidadEspecif)
         End With
 
     End Function
 
-    Private Function _GenerarImpreResultado(ByVal wTipoEspecif As Object, ByVal wDesdeEspecif As Object, ByVal wHastaEspecif As Object, ByVal wUnidadEspecif As Object, ByVal wValor As Object) As Object
+    Private Function _GenerarImpreResultado(ByVal wTipoEspecif As Object, ByVal wDesdeEspecif As Object, ByVal wHastaEspecif As Object, ByVal wUnidadEspecif As Object, ByVal wValor As Object, ByVal WMenorIgualEspecif As String, ByVal WInformaEspecif As String) As Object
 
         If wValor = "" Then Return ""
 
         If UCase(Trim(wValor)) = "P" Then Return "PENDIENTE"
+
+        wUnidadEspecif = Trim(wUnidadEspecif)
+        wHastaEspecif = Trim(wHastaEspecif)
 
         If Val(wTipoEspecif) = 1 Or Val(wTipoEspecif) = 2 Then
 
@@ -257,7 +261,8 @@ Public Class AltaMotivoINCMP
             wValor = formatonumerico(wValor, WDecimales)
 
             Return String.Format("{0} {1}", wValor, wUnidadEspecif)
-
+        ElseIf Val(wTipoEspecif) = 0 And Val(WMenorIgualEspecif) = 1 And Val(WInformaEspecif) = 1 Then
+            Return String.Format("< {0} {1}", wHastaEspecif, wUnidadEspecif)
         Else
 
             Select Case UCase(wValor)
@@ -288,7 +293,9 @@ Public Class AltaMotivoINCMP
 
     End Function
 
-    Private Function _GenerarImpreParametro(ByVal wTipoEspecif As String, ByVal wDesdeEspecif As String, ByVal wHastaEspecif As String, ByVal wUnidadEspecif As String, ByVal wMenorIgualEspecif As String) As String
+    Private Function _GenerarImpreParametro(ByVal wTipoEspecif As String, ByVal wDesdeEspecif As String, ByVal wHastaEspecif As String, ByVal wUnidadEspecif As String, ByVal wMenorIgualEspecif As String, ByVal WInformaEspecif As String) As String
+
+        If Val(WInformaEspecif) = 0 And Val(wTipoEspecif) = 2 Then Return "Informativo"
         If Val(wDesdeEspecif) = 0 And Val(wHastaEspecif) = 0 Then Return "Cumple Ensayo"
         If Trim(wDesdeEspecif) = "" And Trim(wHastaEspecif) = "" Then Return ""
 

@@ -497,6 +497,7 @@ Namespace Entidades
             wMenorIgualEspecif = Trim(wMenorIgualEspecif)
             WInformaEspecif = Trim(WInformaEspecif)
 
+            If Val(WInformaEspecif) = 0 And Val(wTipoEspecif) = 2 Then Return "Informativo"
             If Val(wDesdeEspecif) = 0 And Val(wHastaEspecif) = 0 Then Return "Cumple Ensayo"
             If Val(wTipoEspecif) = 0 Then WParam = "Cumple Ensayo"
 
@@ -511,7 +512,11 @@ Namespace Entidades
                 If Val(wDesdeEspecif) = 0 And Val(wHastaEspecif) <> 0 Then
 
                     If Val(wMenorIgualEspecif) = 1 Then
-                        WParam = String.Format("Máximo {0} {1}", wHastaEspecif, wUnidadEspecif)
+                        If Val(wTipoEspecif) = 0 Then
+                            WParam = String.Format("< {0} {1}", wHastaEspecif, wUnidadEspecif)
+                        Else
+                            WParam = String.Format("Máximo {0} {1}", wHastaEspecif, wUnidadEspecif)
+                        End If
                     Else
                         WParam = String.Format("Menor a {0} {1}", wHastaEspecif, wUnidadEspecif)
                     End If

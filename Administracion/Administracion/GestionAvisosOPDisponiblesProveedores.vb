@@ -13,6 +13,7 @@ Public Class GestionAvisosOPDisponiblesProveedores
 
     Private Sub GestionAvisosOPDisponiblesProveedores_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         btnLimpiar_Click(Nothing, Nothing)
+        If _EsPellital() Then Label2.Text = "PELLITAL S.A."
     End Sub
 
     Private Sub GestionAvisosOPDisponiblesProveedores_Shown(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Shown
@@ -136,7 +137,7 @@ Public Class GestionAvisosOPDisponiblesProveedores
 
     End Function
 
-    Private Sub _EnviarAvisoOPDisponible(ByVal ZProveedor As String, ByVal wDescProveedor As String, Optional ByVal OrdenPago As String = "", Optional ByVal EsPorTransferencia As Boolean = False, Optional ByVal wFechasTransferencias As String = "", Optional ByVal PorTransferenciaYCheques As Boolean = False, Optional ByVal HayECheques As Boolean = False, Optional ByVal FechasECheques As String = "")
+    Private Sub _EnviarAvisoOPDisponible(ByVal ZProveedor As String, ByVal wDescProveedor As String, Optional ByVal OrdenPago As String = "", Optional ByVal EsPorTransferencia As Boolean = False, Optional ByVal wFechasTransferencias As String = "", Optional ByVal PorTransferenciaYCheques As Boolean = False, Optional ByVal HayECheques As Boolean = False, Optional ByVal FechasECheques As String = "", Optional ByVal WHayCompensaciones As Boolean = False, Optional ByVal WFechasCompensaciones As String = "")
 
         If ZProveedor.Trim = "" Then Exit Sub
         If EsPorTransferencia And Trim(OrdenPago) = "" Then Exit Sub
@@ -171,28 +172,30 @@ Public Class GestionAvisosOPDisponiblesProveedores
                 If EsPorTransferencia Then
 
                     'WBody = "Informamos que en el día de la fecha, SURFACTAN S.A. le ha realizado una transferencia"
-                    WBody = "Informamos que durante el transcurso del día de hoy, SURFACTAN S.A. le realizará una transferencia"
+                    'WBody = "Informamos que durante el transcurso del día de hoy, SURFACTAN S.A. le realizará una transferencia"
+                    WBody = "Informamos que durante el transcurso del día de hoy, SURFACTAN S.A. le realizará un pago mediante los siguientes métodos de pagos: " & "<br/>"
 
-                    If wFechasTransferencias.Trim <> "" Then
+                    If Not WHayCompensaciones Then
+                        WBody &= "<br/>" & "- Transferencia Bancaria"
 
-                        If wFechasTransferencias.Split(",").Count > 1 Then
-                            WBody &= " con las siguientes fechas: "
-                        Else
-                            WBody &= " con fecha: "
+                        If wFechasTransferencias.Trim <> "" Then
+
+                            If wFechasTransferencias.Split(",").Count > 1 Then
+                                WBody &= " con las siguientes fechas: "
+                            Else
+                                WBody &= " con fecha: "
+                            End If
+
+                            WBody &= "<strong>" & wFechasTransferencias & "</strong>"
+
                         End If
 
-                        WBody &= "<strong>" & wFechasTransferencias & "</strong>"
-
                     End If
 
-                    If PorTransferenciaYCheques Then
-                        WBody &= "." & "<br/>" & "<br/>" & "Además tiene Cheque(s) para retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir de la <strong>semana próxima</strong>, los <strong>Martes y Jueves</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
-                    Else
-                        WBody &= "." & "<br/>" & "<br/>" & "Adjuntamos Orden de Pago y retenciones si correspondiesen."
-                    End If
                     If HayECheques Then
 
-                        WBody &= " y a través de Cheque(s) Electrónico(s)"
+                        'WBody &= " y a través de Cheque(s) Electrónico(s)"
+                        WBody &= "<br/>" & "- Cheque(s) Electrónico(s)"
 
                         If FechasECheques.Trim <> "" Then
 
@@ -208,9 +211,36 @@ Public Class GestionAvisosOPDisponiblesProveedores
 
                     End If
 
+                    If WHayCompensaciones Then
+
+                        WBody &= "<br/>" & "- Compensación de Pago"
+
+                        If WFechasCompensaciones.Trim <> "" Then
+
+                            If WFechasCompensaciones.Split(",").Count > 1 Then
+                                WBody &= " con las siguientes fechas: "
+                            Else
+                                WBody &= " con fecha: "
+                            End If
+
+                            WBody &= "<strong>" & WFechasCompensaciones & "</strong>."
+
+                        End If
+                    End If
+
+                    If PorTransferenciaYCheques Then
+                        'WBody &= "." & "<br/>" & "<br/>" & "Además tiene Cheque(s) para retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir de la <strong>semana próxima</strong>, los <strong>Martes y Jueves</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
+                        WBody &= "<br/>" & "- Cheque(s) que deberá retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir de la <strong>semana próxima</strong>, los <strong>Martes y Juevess</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>."
+                    Else
+                        WBody &= "." & "<br/>" & "<br/>" & "Adjuntamos Orden de Pago y retenciones si correspondiesen."
+                    End If
+
                 ElseIf HayECheques Then
 
-                    WBody = "Informamos que en el día de la fecha, SURFACTAN S.A. le ha realizado un pago a través de Cheque(s) Electrónico(s)"
+                    'WBody = "Informamos que en el día de la fecha, SURFACTAN S.A. le ha realizado un pago a través de Cheque(s) Electrónico(s)"
+                    WBody = "Informamos que en el día de la fecha, SURFACTAN S.A. le ha realizado un pago mediante los siguientes metodos de pago:" & "<br/>"
+
+                    WBody &= "<br/>" & "- Cheque(s) Electrónico(s)"
 
                     If FechasECheques.Trim <> "" Then
 
@@ -224,8 +254,27 @@ Public Class GestionAvisosOPDisponiblesProveedores
 
                     End If
 
+                    If WHayCompensaciones Then
+
+                        WBody &= "<br/>" & "- Compensación de Pago."
+
+                        If WFechasCompensaciones.Trim <> "" Then
+
+                            If WFechasCompensaciones.Split(",").Count > 1 Then
+                                WBody &= " con las siguientes fechas: "
+                            Else
+                                WBody &= " con fecha: "
+                            End If
+
+                            WBody &= "<strong>" & WFechasCompensaciones & "</strong>."
+
+                        End If
+
+                    End If
+
                     If PorTransferenciaYCheques Then
-                        WBody &= "." & "<br/>" & "<br/>" & "Además tiene Cheque(s) para retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir de la <strong>semana próxima</strong>, los <strong>Martes y Jueves</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
+                        'WBody &= "." & "<br/>" & "<br/>" & "Además tiene Cheque(s) para retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir de la <strong>semana próxima</strong>, los <strong>Martes y Jueves</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
+                        WBody &= vbCrLf & "- Cheque(s) que deberá retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir de la <strong>semana próxima</strong>, los <strong>Martes y Juevess</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>."
                     Else
                         WBody &= "." & "<br/>" & "<br/>" & "Adjuntamos Orden de Pago y retenciones si correspondiesen."
                     End If
@@ -258,6 +307,146 @@ Public Class GestionAvisosOPDisponiblesProveedores
                 Next
 
                 _EnviarEmail(WMailOp, "", "Orden de Pago - SURFACTAN S.A. - ", WBody, WAdjuntos.ToArray)
+
+                _MarcarOPComoEnviada(OrdenPago)
+
+            End If
+
+        Catch ex As System.Exception
+            Throw New System.Exception("Hubo un problema al querer procesar el envío de mail por OP Disponible." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+    End Sub
+
+    Private Sub _EnviarAvisoOPDisponiblePellital(ByVal ZProveedor As String, ByVal wDescProveedor As String, Optional ByVal OrdenPago As String = "", Optional ByVal EsPorTransferencia As Boolean = False, Optional ByVal wFechasTransferencias As String = "", Optional ByVal PorTransferenciaYCheques As Boolean = False, Optional ByVal HayECheques As Boolean = False, Optional ByVal FechasECheques As String = "")
+
+        If ZProveedor.Trim = "" Then Exit Sub
+        If EsPorTransferencia And Trim(OrdenPago) = "" Then Exit Sub
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT ISNULL(MailOP, '') MailOP FROM Proveedor WHERE Proveedor = '" & ZProveedor & "'")
+        Dim dr As SqlDataReader
+
+        Try
+
+            cn.ConnectionString = _ConectarA()
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+
+                dr.Read()
+
+                Dim WMailOp As String = dr.Item("MailOp")
+
+                If Trim(WMailOp) = "" Then Exit Sub
+
+                '
+                ' SACAR DESPUES. SOLO PRUEBA.
+                '
+                ' WMailOp = "sistemas@surfactan.com.ar"
+
+                Dim WBody = ""
+
+                If EsPorTransferencia Then
+
+                    'WBody = "Informamos que en el día de la fecha, SURFACTAN S.A. le ha realizado una transferencia"
+                    WBody = "Informamos que durante el transcurso del día de hoy, PELLITAL S.A. le realizará una transferencia"
+
+                    If wFechasTransferencias.Trim <> "" Then
+
+                        If wFechasTransferencias.Split(",").Count > 1 Then
+                            WBody &= " con las siguientes fechas: "
+                        Else
+                            WBody &= " con fecha: "
+                        End If
+
+                        WBody &= "<strong>" & wFechasTransferencias & "</strong>"
+
+                    End If
+
+                    If PorTransferenciaYCheques Then
+                        WBody &= "." & "<br/>" & "<br/>" & "Además tiene Cheque(s) para retirar por nuestras oficinas <em>(Tucumán 3475, B1644CAQ Victoria, Buenos Aires)</em>, a partir de la <strong>semana próxima</strong>, los <strong>Martes y Jueves</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
+                    Else
+                        WBody &= "." & "<br/>" & "<br/>" & "Adjuntamos Orden de Pago y retenciones si correspondiesen."
+                    End If
+                    If HayECheques Then
+
+                        WBody &= " y a través de Cheque(s) Electrónico(s)"
+
+                        If FechasECheques.Trim <> "" Then
+
+                            If FechasECheques.Split(",").Count > 1 Then
+                                WBody &= " con las siguientes fechas: "
+                            Else
+                                WBody &= " con fecha: "
+                            End If
+
+                            WBody &= "<strong>" & FechasECheques.TrimEnd(",") & "</strong>"
+
+                        End If
+
+                    End If
+
+                ElseIf HayECheques Then
+
+                    WBody = "Informamos que en el día de la fecha, PELLITAL S.A. le ha realizado un pago a través de Cheque(s) Electrónico(s)"
+
+                    If FechasECheques.Trim <> "" Then
+
+                        If FechasECheques.Split(",").Count > 1 Then
+                            WBody &= " con las siguientes fechas: "
+                        Else
+                            WBody &= " con fecha: "
+                        End If
+
+                        WBody &= "<strong>" & FechasECheques & "</strong>"
+
+                    End If
+
+                    If PorTransferenciaYCheques Then
+                        WBody &= "." & "<br/>" & "<br/>" & "Además tiene Cheque(s) para retirar por nuestras oficinas <em>(Tucumán 3475, B1644 Victoria, Buenos Aires)</em>, a partir de la <strong>semana próxima</strong>, los <strong>Martes y Jueves</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
+                    Else
+                        WBody &= "." & "<br/>" & "<br/>" & "Adjuntamos Orden de Pago y retenciones si correspondiesen."
+                    End If
+
+                Else
+
+                    WBody = "Informamos que se encuentra a su disposición un pago que podrá ser retirado por nuestras oficinas <em>(Tucumán 3475, B1644CAQ Victoria, Buenos Aires)</em>, a partir del Lunes 02/11/2020, los <strong>Martes y Jueves</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
+
+                End If
+
+                If Trim(wDescProveedor) <> "" Then
+                    WBody = "Sres. <strong>" & wDescProveedor.Trim.ToUpper & "</strong> <br/>" & "<br/>" & WBody
+                End If
+
+                'Select Case ZProveedor
+                '    Case "10167878480", "10000000100", "10071081483", "10069345023", "10066352912"
+                '        WBody = WBody & "<br/>" & "<br/>" & "En caso de cualquier consulta, por favor dirigirla a <strong><em>fgmonti@surfactan.com.ar</em></strong>"
+                'End Select
+
+                Dim WAdjuntos As New List(Of String)
+
+                If EsPorTransferencia And Not PorTransferenciaYCheques Then
+                    WAdjuntos = _PrepararAdjuntos(OrdenPago)
+                End If
+
+                For Each wAdjunto As String In WAdjuntos
+                    If Not File.Exists(wAdjunto) Then
+                        Throw New System.Exception("No existe el archivo " & wAdjunto)
+                    End If
+                Next
+
+                _EnviarEmail(WMailOp, "", "Orden de Pago - PELLITAL S.A. - ", WBody, WAdjuntos.ToArray)
 
                 _MarcarOPComoEnviada(OrdenPago)
 
@@ -377,7 +566,11 @@ Public Class GestionAvisosOPDisponiblesProveedores
                 'WFirmaAct &= "<h4>" & "<p>- Viernes 20/12/2019 y 27/12/2019, los pagos se realizarán en forma normal.</p>"
                 'WFirmaAct &= "" & "<p>- Los días 30/12/2019 y 31/12/2019, <strong>SURFACTAN</strong> no tendrá actividades.</p>"
                 'WFirmaAct &= "" & "<p>- Los pagos del 03/01/2020, se trasladan al día 10/01/2020.</p></h4>"
-                .HTMLBody = "<p>" & _body & "</p>" & "<br/><br/><p><strong>Atentamente</strong><br/>SURFACTAN S.A</p>" & WFirmaAct & .HTMLBody
+                If _EsPellital() Then
+                    .HTMLBody = "<p>" & _body & "</p>" & "<br/><br/><p><strong>Atentamente</strong><br/>PELLITAL S.A</p>" & WFirmaAct & .HTMLBody
+                Else
+                    .HTMLBody = "<p>" & _body & "</p>" & "<br/><br/><p><strong>Atentamente</strong><br/>SURFACTAN S.A</p>" & WFirmaAct & .HTMLBody
+                End If
 
                 For Each adjunto As String In _adjuntos
                     If Trim(adjunto) <> "" Then
@@ -407,6 +600,7 @@ Public Class GestionAvisosOPDisponiblesProveedores
 
         For Each row2 As DataGridViewRow In dgvPagos.Rows
             Dim WFechasTransferencias As String = ""
+            Dim WFechasCompensaciones As String = ""
             Dim WFechasECheques As String = ""
             With row2
                 Dim WOrden As String = OrDefault(.Cells("Orden").Value, "")
@@ -427,6 +621,7 @@ Public Class GestionAvisosOPDisponiblesProveedores
                 Dim WOrdenPago As DataTable = _TraerDatosOrdenPago(WOrden)
                 Dim EsPorTransferencia As Boolean = False
                 Dim WHayECheques As Boolean = False
+                Dim WHayCompensaciones As Boolean = False
                 Dim PorTransferenciaYCheques As Boolean = False
                 Dim WProveedor As String = ""
 
@@ -449,9 +644,11 @@ Public Class GestionAvisosOPDisponiblesProveedores
 
                                 Case 6 ' Compensación entre Cuentas Corrientes.
                                     EsPorTransferencia = Val(OrDefault(.Item("Cuenta"), "00")) = 5
+                                    
+                                    WHayCompensaciones = Val(OrDefault(.Item("Cuenta"), "00")) = 5
 
-                                    If EsPorTransferencia And Not WFechasTransferencias.Contains(OrDefault(.Item("Fecha2"), "")) Then
-                                        WFechasTransferencias &= OrDefault(.Item("Fecha2"), "") & ","
+                                    If WHayCompensaciones And Not WFechasCompensaciones.Contains(OrDefault(.Item("Fecha2"), "")) Then
+                                        WFechasCompensaciones &= OrDefault(.Item("Fecha2"), "") & ","
                                     End If
 
                                     If EsPorTransferencia Then Exit For
@@ -481,7 +678,12 @@ Public Class GestionAvisosOPDisponiblesProveedores
 
                             WFechasTransferencias = WFechasTransferencias.TrimEnd(",")
 
-                            _EnviarAvisoOPDisponible(WProveedor, WDescProveedor, WOrden, EsPorTransferencia, WFechasTransferencias, PorTransferenciaYCheques, HayECheques:=WHayECheques, FechasECheques:=WFechasECheques)
+                            If _EsPellital() Then
+                                _EnviarAvisoOPDisponiblePellital(WProveedor, WDescProveedor, WOrden, EsPorTransferencia, WFechasTransferencias, PorTransferenciaYCheques, HayECheques:=WHayECheques, FechasECheques:=WFechasECheques)
+                            Else
+                                _EnviarAvisoOPDisponible(WProveedor, WDescProveedor, WOrden, EsPorTransferencia, WFechasTransferencias, PorTransferenciaYCheques, HayECheques:=WHayECheques, FechasECheques:=WFechasECheques, WHayCompensaciones:=WHayCompensaciones, WFechasCompensaciones:=WFechasCompensaciones)
+                            End If
+
 
                         End If
 

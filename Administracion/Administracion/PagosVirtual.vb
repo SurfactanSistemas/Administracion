@@ -34,7 +34,7 @@ Public Class PagosVirtual
     ' Utilizado para poder ser usado con consulta de cta cte prv por pantalla.
     Private _SoloLectura As String = False
 
-    Dim XTiporeg, XNumero2, XFecha2, XBanco2, XImporte2, XDestino, XEstado, XVencimiento, XVencimiento1, XTotal, XSaldo, XSaldoUs, XOrdFecha, XOrdVencimiento, XImpre, XNeto, XDate, XParam, XSql As String
+    Dim XTiporeg, XNumero2, XFecha2, XBanco2, XImporte2, XDestino, XEstado, XVencimiento, XVencimiento1, XTotal, XSaldo, XSaldoUs, XOrdFecha, XOrdVencimiento, XImpre, XNeto, XDate, XParam, XSql, XCBU, XCuitProveedor As String
 
     Public Property SoloLectura As Boolean
         Get
@@ -4028,7 +4028,7 @@ Public Class PagosVirtual
         Dim XOrdenPago As String = IIf(Trim(txtOrdenPago.Text) = "", "0", Trim(txtOrdenPago.Text))
         Dim XEmpCuit = "30-54916508-3"
         Dim WEmpresa = "SURFACTAN S.A."
-        Dim XRazon, XCuitProveedor, WTipo, WLetra, WPunto, WNumero, ClaveCtaprv, WCtaProveedor, WCtaEfectivo, WCtaCheques, ClaveBanco As String
+        Dim XRazon, WTipo, WLetra, WPunto, WNumero, ClaveCtaprv, WCtaProveedor, WCtaEfectivo, WCtaCheques, ClaveBanco As String
         Dim WRenglon, XTotal, XCantidad As Double
         Dim WImpresion(15, 10) As String
         Dim WImpre2(15, 10) As String
@@ -4065,7 +4065,7 @@ Public Class PagosVirtual
 
         ' Sacamos el resto de informacion del proveedor.
         Try
-            cm.CommandText = "SELECT Cuit, Nombre FROM Proveedor WHERE Proveedor = '" & Trim(txtProveedor.Text) & "'"
+            cm.CommandText = "SELECT Cuit, Nombre, Cbu FROM Proveedor WHERE Proveedor = '" & Trim(txtProveedor.Text) & "'"
             dr = cm.ExecuteReader()
 
             If dr.HasRows Then
@@ -4073,6 +4073,7 @@ Public Class PagosVirtual
                 dr.Read()
                 XRazon = dr.Item("Nombre")
                 XCuitProveedor = dr.Item("Cuit")
+                XCBU = Trim(OrDefault(dr.Item("Cbu"), ""))
 
             End If
 
@@ -4357,6 +4358,7 @@ Public Class PagosVirtual
         frm.Reporte = crdoc
         frm.Reporte.SetParameterValue("EsTransferencia", 0)
         frm.Reporte.SetParameterValue("CuitProv", XCuitProveedor)
+        frm.Reporte.SetParameterValue("CbuProv", XCBU)
 
         Dim WFechasTransferencias = ""
         Dim WOrdenPago As DataTable = _TraerDatosOrdenPago(txtOrdenPago.Text)
@@ -4746,6 +4748,13 @@ Public Class PagosVirtual
         crdoc.SetDataSource(Tabla)
 
         crdoc.SetParameterValue("MostrarFirma", 0)
+        
+
+        If _EsPellital() Then
+            crdoc.SetParameterValue("TipoFirma", 1)
+        Else
+            crdoc.SetParameterValue("TipoFirma", 0)
+        End If
 
         If GenerarPDF Then
 
@@ -4763,6 +4772,9 @@ Public Class PagosVirtual
         Else
             With VistaPrevia
                 .Reporte = crdoc
+                .Reporte.SetParameterValue("EsTransferencia", 0)
+                .Reporte.SetParameterValue("CuitProv", XCuitProveedor)
+                .Reporte.SetParameterValue("CbuProv", XCBU)
                 '.Mostrar()
                 .Imprimir()
                 .Dispose()
@@ -5104,6 +5116,12 @@ Public Class PagosVirtual
         crdoc.SetDataSource(Tabla)
 
         crdoc.SetParameterValue("MostrarFirma", 0)
+
+        If _EsPellital() Then
+            crdoc.SetParameterValue("TipoFirma", 1)
+        Else
+            crdoc.SetParameterValue("TipoFirma", 0)
+        End If
 
         If GenerarPDF Then
 
@@ -5611,6 +5629,12 @@ Public Class PagosVirtual
 
         crdoc.SetParameterValue("MostrarFirma", 0)
 
+        If _EsPellital() Then
+            crdoc.SetParameterValue("TipoFirma", 1)
+        Else
+            crdoc.SetParameterValue("TipoFirma", 0)
+        End If
+
         If GenerarPDF Then
 
             crdoc.SetParameterValue("MostrarFirma", 1)
@@ -5734,6 +5758,12 @@ Public Class PagosVirtual
         crdoc.SetDataSource(Tabla)
 
         crdoc.SetParameterValue("MostrarFirma", 0)
+
+        If _EsPellital() Then
+            crdoc.SetParameterValue("TipoFirma", 1)
+        Else
+            crdoc.SetParameterValue("TipoFirma", 0)
+        End If
 
         If GenerarPDF Then
 
