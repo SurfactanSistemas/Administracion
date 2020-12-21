@@ -875,11 +875,11 @@ Public Class Depositos
                             WFecha2 = IIf(IsDBNull(.Item("Fecha2")), "", Trim(.Item("Fecha2")))
                             WImporte2 = IIf(IsDBNull(.Item("Importe2")), "0", Proceso.formatonumerico(Trim(.Item("Importe2"))))
                             WObservaciones2 = IIf(IsDBNull(.Item("Observaciones2")), "", Trim(.Item("Observaciones2")))
-                            WVirtual = OrDefault(.Item("ChequeVirtual"), "0")
+                            WVirtual = IIf(IsDBNull(.Item("ChequeVirtual")), 0, Trim(.Item("ChequeVirtual")))
 
                             'Cambiamos el valor de los radio butons segun el tipo de cheque para
                             'hacerlo visible al usuario
-                            If WVirtual = 1 Then
+                            If Val(WVirtual) = 1 Then
                                 rbChElectronicos.Checked = True
                             Else
                                 rbChFisicos.Checked = True

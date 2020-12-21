@@ -18,7 +18,7 @@ Imports System
 Imports System.ComponentModel
 
 
-Public Class Reporte__Listado_Grilla
+Public Class Reporte_Listado_Grilla
     Inherits ReportClass
     
     Public Sub New()
@@ -27,7 +27,7 @@ Public Class Reporte__Listado_Grilla
     
     Public Overrides Property ResourceName() As String
         Get
-            Return "Reporte_ Listado_Grilla.rpt"
+            Return "Reporte_Listado_Grilla.rpt"
         End Get
         Set
             'Do nothing
@@ -45,7 +45,7 @@ Public Class Reporte__Listado_Grilla
     
     Public Overrides Property FullResourceName() As String
         Get
-            Return "Sistema_Solicitud_Fondos.Reporte_ Listado_Grilla.rpt"
+            Return "Sistema_Solicitud_Fondos.Reporte_Listado_Grilla.rpt"
         End Get
         Set
             'Do nothing
@@ -91,10 +91,18 @@ Public Class Reporte__Listado_Grilla
             Return Me.ReportDefinition.Sections(4)
         End Get
     End Property
+    
+    <Browsable(false),  _
+     DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
+    Public ReadOnly Property Parameter_SubTitulo() As CrystalDecisions.[Shared].IParameterField
+        Get
+            Return Me.DataDefinition.ParameterFields(0)
+        End Get
+    End Property
 End Class
 
 <System.Drawing.ToolboxBitmapAttribute(GetType(CrystalDecisions.[Shared].ExportOptions), "report.bmp")>  _
-Public Class CachedReporte__Listado_Grilla
+Public Class CachedReporte_Listado_Grilla
     Inherits Component
     Implements ICachedReport
     
@@ -136,7 +144,7 @@ Public Class CachedReporte__Listado_Grilla
     End Property
     
     Public Overridable Function CreateReport() As CrystalDecisions.CrystalReports.Engine.ReportDocument Implements CrystalDecisions.ReportSource.ICachedReport.CreateReport
-        Dim rpt As Reporte__Listado_Grilla = New Reporte__Listado_Grilla()
+        Dim rpt As Reporte_Listado_Grilla = New Reporte_Listado_Grilla()
         rpt.Site = Me.Site
         Return rpt
     End Function

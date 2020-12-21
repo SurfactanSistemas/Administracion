@@ -15,4 +15,10 @@
             .Show()
         End With
     End Sub
+
+    Private Sub AutoGestionarSolicitudesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AutoGestionarSolicitudesToolStripMenuItem.Click
+        With New AutoGestionSolicitudes
+            .Show()
+        End With
+    End Sub
 End Class

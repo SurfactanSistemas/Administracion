@@ -183,7 +183,7 @@ Public Class EnvioEmailClientes
         Try
             cn.ConnectionString = Helper._ConectarA() '"Data Source=193.168.0.7;Initial Catalog=SurfactanSA;User ID=usuarioadmin; Password=usuarioadmin"
 
-            cm.CommandText = "select distinct CtaCte.Cliente, Cliente.Razon, Cliente.EmailFactura as Email, Cliente.Rubro FROM Cliente, CtaCte WHERE Cliente.Cliente = CtaCte.Cliente and CtaCte.OrdFecha >= " & _FechaUltimo & " and Cliente.EmailFactura <> '' ORDER BY Razon"
+            cm.CommandText = "select distinct CtaCte.Cliente, Cliente.Razon, Cliente.EmailFacturaII as Email, Cliente.Rubro FROM Cliente, CtaCte WHERE Cliente.Cliente = CtaCte.Cliente and CtaCte.OrdFecha >= " & _FechaUltimo & " and Cliente.EmailFacturaII <> '' ORDER BY Razon"
             cm.Connection = cn
 
             cn.Open()

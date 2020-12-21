@@ -27,10 +27,11 @@ Partial Class MenuPrincipal
         Me.label1 = New System.Windows.Forms.Label()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.MaestrosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ProcesosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.FinDeSistemasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.IngresoDeSolicitudToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GestionSolicitudesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ProcesosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.FinDeSistemasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AutoGestionarSolicitudesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.panel1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -81,10 +82,22 @@ Partial Class MenuPrincipal
         '
         'MaestrosToolStripMenuItem
         '
-        Me.MaestrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IngresoDeSolicitudToolStripMenuItem, Me.GestionSolicitudesToolStripMenuItem})
+        Me.MaestrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IngresoDeSolicitudToolStripMenuItem, Me.GestionSolicitudesToolStripMenuItem, Me.AutoGestionarSolicitudesToolStripMenuItem})
         Me.MaestrosToolStripMenuItem.Name = "MaestrosToolStripMenuItem"
         Me.MaestrosToolStripMenuItem.Size = New System.Drawing.Size(67, 20)
         Me.MaestrosToolStripMenuItem.Text = "Maestros"
+        '
+        'IngresoDeSolicitudToolStripMenuItem
+        '
+        Me.IngresoDeSolicitudToolStripMenuItem.Name = "IngresoDeSolicitudToolStripMenuItem"
+        Me.IngresoDeSolicitudToolStripMenuItem.Size = New System.Drawing.Size(210, 22)
+        Me.IngresoDeSolicitudToolStripMenuItem.Text = "Ingreso de Solicitud"
+        '
+        'GestionSolicitudesToolStripMenuItem
+        '
+        Me.GestionSolicitudesToolStripMenuItem.Name = "GestionSolicitudesToolStripMenuItem"
+        Me.GestionSolicitudesToolStripMenuItem.Size = New System.Drawing.Size(210, 22)
+        Me.GestionSolicitudesToolStripMenuItem.Text = "Gestion Solicitudes"
         '
         'ProcesosToolStripMenuItem
         '
@@ -96,20 +109,14 @@ Partial Class MenuPrincipal
         'FinDeSistemasToolStripMenuItem
         '
         Me.FinDeSistemasToolStripMenuItem.Name = "FinDeSistemasToolStripMenuItem"
-        Me.FinDeSistemasToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.FinDeSistemasToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
         Me.FinDeSistemasToolStripMenuItem.Text = "Fin de Sistema"
         '
-        'IngresoDeSolicitudToolStripMenuItem
+        'AutoGestionarSolicitudesToolStripMenuItem
         '
-        Me.IngresoDeSolicitudToolStripMenuItem.Name = "IngresoDeSolicitudToolStripMenuItem"
-        Me.IngresoDeSolicitudToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
-        Me.IngresoDeSolicitudToolStripMenuItem.Text = "Ingreso de Solicitud"
-        '
-        'GestionSolicitudesToolStripMenuItem
-        '
-        Me.GestionSolicitudesToolStripMenuItem.Name = "GestionSolicitudesToolStripMenuItem"
-        Me.GestionSolicitudesToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
-        Me.GestionSolicitudesToolStripMenuItem.Text = "Gestion Solicitudes"
+        Me.AutoGestionarSolicitudesToolStripMenuItem.Name = "AutoGestionarSolicitudesToolStripMenuItem"
+        Me.AutoGestionarSolicitudesToolStripMenuItem.Size = New System.Drawing.Size(210, 22)
+        Me.AutoGestionarSolicitudesToolStripMenuItem.Text = "AutoGestionar Solicitudes"
         '
         'MenuPrincipal
         '
@@ -137,5 +144,6 @@ Partial Class MenuPrincipal
     Friend WithEvents FinDeSistemasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents IngresoDeSolicitudToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents GestionSolicitudesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents AutoGestionarSolicitudesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

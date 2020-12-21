@@ -6,6 +6,16 @@ Imports Util.Clases.Helper
 Public Class Login
 
     Private WEmpresasAcceso As DataTable
+    Dim SiguienteVentana As String
+    Sub New(ByVal Accion As String)
+
+        ' Llamada necesaria para el diseñador.
+        InitializeComponent()
+
+        ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
+
+        SiguienteVentana = Accion
+    End Sub
 
     Private Sub btnCerrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrar.Click
         Close()
@@ -20,7 +30,7 @@ Public Class Login
 
             With .Rows
                 .Add("SURFACTAN", "SurfactanSa")
-                .Add("PELLITAL", "Pelitall_II") ' Está asi en la Base de Datos.
+                ' .Add("PELLITAL", "Pelitall_II") ' Está asi en la Base de Datos.
             End With
 
         End With
@@ -50,24 +60,38 @@ Public Class Login
 
             Conexion.EmpresaDeTrabajo = WBaseDatos
 
-            Dim WOperador As DataRow = GetSingle("SELECT Operador, Descripcion, SistemaExportacion FROM Operador WHERE UPPER(Clave) = '" & txtClave.Text & "'", WBaseDatos)
+            Dim WOperador As DataRow = GetSingle("SELECT Operador, Descripcion, SolicitudFondosEdicion FROM Operador WHERE UPPER(Clave) = '" & txtClave.Text & "'", WBaseDatos)
 
             If IsNothing(WOperador) Then Throw New Exception("Clave Errónea")
 
-            'Dim PermisoSistemaExportacion As Integer
+            Dim PermisoSistemaSolicitud As String
             With WOperador
                 Operador.Base = WBaseDatos
                 Operador.Codigo = OrDefault(.Item("Operador"), 0)
                 Operador.Clave = txtClave.Text.Trim
                 Operador.Descripcion = OrDefault(.Item("Descripcion"), "")
-                '  PermisoSistemaExportacion = IIf(IsDBNull(.Item("SistemaExportacion")), 0, .Item("SistemaExportacion"))
+                PermisoSistemaSolicitud = IIf(IsDBNull(.Item("SolicitudFondosEdicion")), "N", .Item("SolicitudFondosEdicion"))
             End With
 
-   
-                    Dim frm As New MenuPrincipal()
-                    frm.Show()
-            
-                    Close()
+
+            If SiguienteVentana = "Crear" Then
+                With New Ingreso_Solicitud
+                    .Show()
+                End With
+            Else
+                If PermisoSistemaSolicitud = "S" Then
+                    With New Gestion_Solicitudes
+                        .Show()
+                    End With
+                Else
+                    With New AutoGestionSolicitudes
+                        .Show()
+                    End With
+                End If
+
+            End If
+
+            Close()
 
 
         Catch ex As Exception

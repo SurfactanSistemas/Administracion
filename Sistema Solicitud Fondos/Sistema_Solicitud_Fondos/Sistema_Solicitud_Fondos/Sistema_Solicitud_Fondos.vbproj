@@ -96,12 +96,19 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoGestionSolicitudes.Designer.vb">
+      <DependentUpon>AutoGestionSolicitudes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="AutoGestionSolicitudes.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Consulta.Designer.vb">
       <DependentUpon>Consulta.vb</DependentUpon>
     </Compile>
     <Compile Include="Consulta.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Interface\IContraseña.vb" />
     <Compile Include="Reporte\DBAuxi.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -152,10 +159,10 @@
     <Compile Include="Reporte\DBAuxi.vb">
       <DependentUpon>DBAuxi.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Reporte\Reporte_ Listado_Grilla.vb">
+    <Compile Include="Reporte\Reporte_Listado_Grilla.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Reporte_ Listado_Grilla.rpt</DependentUpon>
+      <DependentUpon>Reporte_Listado_Grilla.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reporte\Reporte_SolicitudFondos.vb">
@@ -164,8 +171,17 @@
       <DependentUpon>Reporte_SolicitudFondos.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="SoliContra.Designer.vb">
+      <DependentUpon>SoliContra.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SoliContra.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AutoGestionSolicitudes.resx">
+      <DependentUpon>AutoGestionSolicitudes.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Consulta.resx">
       <DependentUpon>Consulta.vb</DependentUpon>
     </EmbeddedResource>
@@ -187,13 +203,16 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reporte\Reporte_ Listado_Grilla.rpt">
+    <EmbeddedResource Include="Reporte\Reporte_Listado_Grilla.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>Reporte_ Listado_Grilla.vb</LastGenOutput>
+      <LastGenOutput>Reporte_Listado_Grilla.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reporte\Reporte_SolicitudFondos.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Reporte_SolicitudFondos.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SoliContra.resx">
+      <DependentUpon>SoliContra.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

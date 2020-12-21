@@ -474,6 +474,12 @@
     <Compile Include="ModificaIntereses.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="MostrarSoliFondos.Designer.vb">
+      <DependentUpon>MostrarSoliFondos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MostrarSoliFondos.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1215,6 +1221,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModificaIntereses.resx">
       <DependentUpon>ModificaIntereses.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MostrarSoliFondos.resx">
+      <DependentUpon>MostrarSoliFondos.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PagosVirtual.resx">
       <DependentUpon>PagosVirtual.vb</DependentUpon>
@@ -2017,6 +2026,10 @@
     <None Include="Resources\add.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Sistema Solicitud Fondos\Sistema_Solicitud_Fondos\Sistema_Solicitud_Fondos\Sistema_Solicitud_Fondos.vbproj">
+      <Project>{15e68989-1893-44cb-b220-17ab73b4626c}</Project>
+      <Name>Sistema_Solicitud_Fondos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Util\Util\Util.vbproj">
       <Project>{CC5D60FD-9755-4C61-B96C-F56173586BB9}</Project>
       <Name>Util</Name>
@@ -2049,6 +2062,9 @@
     <None Include="Resources\pdf_icon1.png" />
     <None Include="Resources\imagen_icono1.png" />
     <None Include="Resources\archivo_default1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>

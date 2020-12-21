@@ -1,4 +1,6 @@
 ﻿Imports System.Configuration
+Imports Sistema_Solicitud_Fondos
+Imports Util
 
 Public Class MenuPrincipal
     ReadOnly forms As New List(Of Form)
@@ -348,5 +350,18 @@ Public Class MenuPrincipal
         With New InformeRep_SinFac_registradas
             .Show(Me)
         End With
+    End Sub
+
+    Private Sub SolicitudDeFondosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SolicitudDeFondosToolStripMenuItem.Click
+        With New Sistema_Solicitud_Fondos.Login("Crear")
+            .Show()
+        End With
+    End Sub
+
+    Private Sub GestionarSolicitudDeFondosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GestionarSolicitudDeFondosToolStripMenuItem.Click
+        With New Sistema_Solicitud_Fondos.Login("Gestion")
+            .Show()
+        End With
+
     End Sub
 End Class

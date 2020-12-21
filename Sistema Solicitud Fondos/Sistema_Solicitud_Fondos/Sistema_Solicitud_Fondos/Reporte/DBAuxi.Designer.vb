@@ -465,7 +465,7 @@ Partial Public Class DBAuxi
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-        Public Overloads Function AddListadoGrillaRow(ByVal NroSolicitud As String, ByVal Solicitante As String, ByVal Fecha As String, ByVal OrdFecha As String, ByVal Tipo As String, ByVal Destino As String, ByVal Titulo As String, ByVal Moneda As String, ByVal Importe As String, ByVal FechaRequerida As String, ByVal OrdFechaRequerida As String) As ListadoGrillaRow
+        Public Overloads Function AddListadoGrillaRow(ByVal NroSolicitud As Integer, ByVal Solicitante As String, ByVal Fecha As String, ByVal OrdFecha As String, ByVal Tipo As String, ByVal Destino As String, ByVal Titulo As String, ByVal Moneda As String, ByVal Importe As Double, ByVal FechaRequerida As String, ByVal OrdFechaRequerida As String) As ListadoGrillaRow
             Dim rowListadoGrillaRow As ListadoGrillaRow = CType(Me.NewRow, ListadoGrillaRow)
             Dim columnValuesArray() As Object = New Object() {NroSolicitud, Solicitante, Fecha, OrdFecha, Tipo, Destino, Titulo, Moneda, Importe, FechaRequerida, OrdFechaRequerida}
             rowListadoGrillaRow.ItemArray = columnValuesArray
@@ -506,7 +506,7 @@ Partial Public Class DBAuxi
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Private Sub InitClass()
-            Me.columnNroSolicitud = New Global.System.Data.DataColumn("NroSolicitud", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnNroSolicitud = New Global.System.Data.DataColumn("NroSolicitud", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnNroSolicitud)
             Me.columnSolicitante = New Global.System.Data.DataColumn("Solicitante", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnSolicitante)
@@ -522,7 +522,7 @@ Partial Public Class DBAuxi
             MyBase.Columns.Add(Me.columnTitulo)
             Me.columnMoneda = New Global.System.Data.DataColumn("Moneda", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnMoneda)
-            Me.columnImporte = New Global.System.Data.DataColumn("Importe", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnImporte = New Global.System.Data.DataColumn("Importe", GetType(Double), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnImporte)
             Me.columnFechaRequerida = New Global.System.Data.DataColumn("FechaRequerida", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnFechaRequerida)
@@ -674,15 +674,15 @@ Partial Public Class DBAuxi
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-        Public Property NroSolicitud() As String
+        Public Property NroSolicitud() As Integer
             Get
                 Try
-                    Return CType(Me(Me.tableListadoGrilla.NroSolicitudColumn), String)
+                    Return CType(Me(Me.tableListadoGrilla.NroSolicitudColumn), Integer)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("El valor de la columna 'NroSolicitud' de la tabla 'ListadoGrilla' es DBNull.", e)
                 End Try
             End Get
-            Set(value As String)
+            Set(value As Integer)
                 Me(Me.tableListadoGrilla.NroSolicitudColumn) = value
             End Set
         End Property
@@ -794,15 +794,15 @@ Partial Public Class DBAuxi
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-        Public Property Importe() As String
+        Public Property Importe() As Double
             Get
                 Try
-                    Return CType(Me(Me.tableListadoGrilla.ImporteColumn), String)
+                    Return CType(Me(Me.tableListadoGrilla.ImporteColumn), Double)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("El valor de la columna 'Importe' de la tabla 'ListadoGrilla' es DBNull.", e)
                 End Try
             End Get
-            Set(value As String)
+            Set(value As Double)
                 Me(Me.tableListadoGrilla.ImporteColumn) = value
             End Set
         End Property

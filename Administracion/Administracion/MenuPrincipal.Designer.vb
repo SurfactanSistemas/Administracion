@@ -76,6 +76,7 @@ Partial Class MenuPrincipal
         Me.ListadoDeProyeccionDeCuentaCorrientesDeProveedoresAnaliticosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EnvíoDeEmailPorAnticipoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EnvíoDeAvisoDeOPAProveedoresPorEMailToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.InformeRecepcionSinFacturasRegistradasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProcesosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem4 = New System.Windows.Forms.ToolStripMenuItem()
@@ -99,7 +100,8 @@ Partial Class MenuPrincipal
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.btnCambio = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.InformeRecepcionSinFacturasRegistradasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SolicitudDeFondosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GestionarSolicitudDeFondosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
@@ -440,9 +442,15 @@ Partial Class MenuPrincipal
         Me.EnvíoDeAvisoDeOPAProveedoresPorEMailToolStripMenuItem.Size = New System.Drawing.Size(443, 22)
         Me.EnvíoDeAvisoDeOPAProveedoresPorEMailToolStripMenuItem.Text = "Envío de Aviso de OP por E-Mail a Proveedores"
         '
+        'InformeRecepcionSinFacturasRegistradasToolStripMenuItem
+        '
+        Me.InformeRecepcionSinFacturasRegistradasToolStripMenuItem.Name = "InformeRecepcionSinFacturasRegistradasToolStripMenuItem"
+        Me.InformeRecepcionSinFacturasRegistradasToolStripMenuItem.Size = New System.Drawing.Size(443, 22)
+        Me.InformeRecepcionSinFacturasRegistradasToolStripMenuItem.Text = "Informe Recepcion Sin Facturas Registradas"
+        '
         'ProcesosToolStripMenuItem
         '
-        Me.ProcesosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.ToolStripMenuItem4, Me.ToolStripSeparator1, Me.ToolStripMenuItem5, Me.ToolStripMenuItem3, Me.SifereToolStripMenuItem, Me.RetencionEsOpToolStripMenuItem, Me.RetencionesRecibvosaToolStripMenuItem, Me.ToolStripMenuItem2, Me.ToolStripMenuItem6, Me.ToolStripMenuItem7, Me.ToolStripMenuItem9, Me.ToolStripMenuItem10, Me.ToolStripMenuItem11, Me.ArqueoDeChequesToolStripMenuItem, Me.ToolStripSeparator2, Me.FinDelSistemaToolStripMenuItem})
+        Me.ProcesosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.ToolStripMenuItem4, Me.ToolStripSeparator1, Me.ToolStripMenuItem5, Me.ToolStripMenuItem3, Me.SifereToolStripMenuItem, Me.RetencionEsOpToolStripMenuItem, Me.RetencionesRecibvosaToolStripMenuItem, Me.ToolStripMenuItem2, Me.ToolStripMenuItem6, Me.ToolStripMenuItem7, Me.ToolStripMenuItem9, Me.ToolStripMenuItem10, Me.ToolStripMenuItem11, Me.ArqueoDeChequesToolStripMenuItem, Me.SolicitudDeFondosToolStripMenuItem, Me.GestionarSolicitudDeFondosToolStripMenuItem, Me.ToolStripSeparator2, Me.FinDelSistemaToolStripMenuItem})
         Me.ProcesosToolStripMenuItem.Name = "ProcesosToolStripMenuItem"
         Me.ProcesosToolStripMenuItem.Size = New System.Drawing.Size(66, 20)
         Me.ProcesosToolStripMenuItem.Text = "Procesos"
@@ -540,13 +548,13 @@ Partial Class MenuPrincipal
         'PrincipalToolStripMenuItem
         '
         Me.PrincipalToolStripMenuItem.Name = "PrincipalToolStripMenuItem"
-        Me.PrincipalToolStripMenuItem.Size = New System.Drawing.Size(133, 22)
+        Me.PrincipalToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.PrincipalToolStripMenuItem.Text = "Principal"
         '
         'SecundarioToolStripMenuItem
         '
         Me.SecundarioToolStripMenuItem.Name = "SecundarioToolStripMenuItem"
-        Me.SecundarioToolStripMenuItem.Size = New System.Drawing.Size(133, 22)
+        Me.SecundarioToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.SecundarioToolStripMenuItem.Text = "Secundario"
         '
         'ToolStripSeparator2
@@ -600,11 +608,17 @@ Partial Class MenuPrincipal
         Me.Button1.UseVisualStyleBackColor = True
         Me.Button1.Visible = False
         '
-        'InformeRecepcionSinFacturasRegistradasToolStripMenuItem
+        'SolicitudDeFondosToolStripMenuItem
         '
-        Me.InformeRecepcionSinFacturasRegistradasToolStripMenuItem.Name = "InformeRecepcionSinFacturasRegistradasToolStripMenuItem"
-        Me.InformeRecepcionSinFacturasRegistradasToolStripMenuItem.Size = New System.Drawing.Size(443, 22)
-        Me.InformeRecepcionSinFacturasRegistradasToolStripMenuItem.Text = "Informe Recepcion Sin Facturas Registradas"
+        Me.SolicitudDeFondosToolStripMenuItem.Name = "SolicitudDeFondosToolStripMenuItem"
+        Me.SolicitudDeFondosToolStripMenuItem.Size = New System.Drawing.Size(375, 22)
+        Me.SolicitudDeFondosToolStripMenuItem.Text = "Solicitud de Fondos"
+        '
+        'GestionarSolicitudDeFondosToolStripMenuItem
+        '
+        Me.GestionarSolicitudDeFondosToolStripMenuItem.Name = "GestionarSolicitudDeFondosToolStripMenuItem"
+        Me.GestionarSolicitudDeFondosToolStripMenuItem.Size = New System.Drawing.Size(375, 22)
+        Me.GestionarSolicitudDeFondosToolStripMenuItem.Text = "Gestionar Solicitud de Fondos"
         '
         'MenuPrincipal
         '
@@ -704,4 +718,6 @@ Partial Class MenuPrincipal
     Friend WithEvents SecundarioToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents OrdenDePagoVirtualToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents InformeRecepcionSinFacturasRegistradasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents SolicitudDeFondosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents GestionarSolicitudDeFondosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class

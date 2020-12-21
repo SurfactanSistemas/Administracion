@@ -18,6 +18,7 @@ Public Class Pagos
     Dim _TipoConsulta As Integer = Nothing
     Private WCertificadoGan, WCertificadoIb, WCertificadoIbCiudad, WCertificadoIVA As String
 
+    Dim NroSoliInterno As Integer = 0
     Public Property GenerarPDF As Boolean
 
     Private WGrillaReferencia As DataGridView
@@ -49,7 +50,7 @@ Public Class Pagos
 
 
 
-        Text = "Ingreso de Pagos a Proveedores                                                                                                                        " & Globals.NombreEmpresa()
+        Text = "Ingreso de Pagos a Proveedores  " & Globals.NombreEmpresa()
 
         If SoloLectura Then
             Dim botones As New List(Of Button) From {btnAgregar, btnCalcular, btnCarpetas, btnChequesTerceros, btnConsulta, btnCtaCte, btnImprimir, btnLimpiar}
@@ -68,6 +69,9 @@ Public Class Pagos
         End If
 
         _PurgarSaldosCtaCtePrvs()
+
+        btn_ConsultaSoliFondos.Visible = False
+
     End Sub
 
     Private Function _TraerDatosProveedorTipoProvinciaEmbargo() As Object
@@ -1029,6 +1033,57 @@ Public Class Pagos
         End Try
     End Sub
 
+
+    Private Sub _ListarSolicitudesFondos()
+        Dim XClaves As New List(Of Object)
+        Dim _Item As String
+        'Dim SQLCnslt As String = "SELECT NroSolicitud, Descripcion = iif(Proveedor = '', Cuenta, Proveedor), Tipo, Moneda, Importe FROM SolicitudFondos WHERE Estado = 'AUTORIZO' AND OrdenPago = '' ORDER BY NroSolicitud"
+
+        Dim SQLCnslt As String = "SELECT s.NroSolicitud, Descripcion= IIF(s.Tipo = 1, 'Pago Prov.',  'Varios'), Destino = IIF(s.Proveedor = '',c.Descripcion, p.Nombre), s.Tipo, Moneda, s.Importe FROM SolicitudFondos s LEFT JOIN Proveedor p ON s.Proveedor = p.Proveedor LEFT JOIN Cuenta c ON s.Cuenta = c.Cuenta WHERE s.Estado = 'AUTORIZO' AND s.OrdenPago = '' ORDER BY s.NroSolicitud"
+
+        Try
+            Dim TablaSoli As DataTable = GetAll(SQLCnslt, "SurfactanSa")
+
+            If TablaSoli.Rows.Count > 0 Then
+                For Each row As DataRow In TablaSoli.Rows
+
+                    With row
+                        Dim Tipo As String
+                        If Val(.Item("Tipo")) = 1 Then
+                            Tipo = "Pago Prov."
+                        Else
+                            Tipo = "Varios"
+                        End If
+                        Dim Moneda As String
+                        If Val(.Item("moneda")) = 1 Then
+                            Moneda = "$"
+                        Else
+                            Moneda = "U$D"
+                        End If
+                        _Item = LSet(Trim(.Item("NroSolicitud")), 6) & "   " & Tipo & "   " & Moneda & "  " & formatonumerico(.Item("Importe")) & "    " & Trim(.Item("Descripcion"))
+
+                        lstConsulta.Items.Add(_Item)
+
+                        XClaves.Add({_Item, .Item("NroSolicitud")})
+
+
+                    End With
+
+                Next
+                _Claves = XClaves
+
+                _HabilitarConsulta()
+
+            Else
+                _InhabilitarConsulta()
+            End If
+        Catch ex As System.Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+        End Try
+
+    End Sub
+
+
     Private Sub _ListarCuentasContables()
         Dim XClaves As New List(Of Object)
         Dim _Item As String
@@ -1118,6 +1173,171 @@ Public Class Pagos
         mostrarProveedor(proveedor)
 
     End Sub
+    Private Sub _TraerSolicitudFondos(ByVal _Item As String, Optional ByVal indice As Integer = Nothing)
+        Dim zzClave As String
+
+        If IsNothing(_Claves) Then
+            Exit Sub
+        End If
+
+        If _Claves.Count = 0 Then
+            Exit Sub
+        End If
+
+        zzClave = _ObtenerClaveConsulta(_Item)
+
+        '  ' Comprobamos que no se haya utilizado antes.
+        '  If _CtaCteYaUtilizada(zzClave) Then
+        '      MsgBox("La Cta Cte indicada ya se encuentra en utilización.", MsgBoxStyle.Information)
+        '      Exit Sub
+        '  End If
+
+        ' Comprobamos que aun haya lugar para seguir cancelando Facturas.
+        If gridPagos.Rows.Cast(Of DataGridViewRow).Count(Function(r) Val(OrDefault(r.Cells("Importe").Value, "")) <> 0) >= 30 Then
+            MsgBox("La cantidad de facturas a cancelar supera las " & XMAXFILAS, MsgBoxStyle.Information)
+            Exit Sub
+        End If
+
+        Dim EsCuenta As String = "N"
+
+        'BUSCAMOS LOS DATOS DE LA SOLICITUD DE FONDOS
+        Dim SQLCnslt As String
+        SQLCnslt = "SELECT * FROM SolicitudFondos WHERE NroSolicitud = '" & zzClave & "'"
+        Dim RowSoli As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+
+        If RowSoli IsNot Nothing Then
+            With RowSoli
+                NroSoliInterno = zzClave
+                If Trim(.Item("Proveedor")) = "" Then
+                    'Es Cuenta
+                    txtObservaciones.Text = IIf(IsDBNull(.Item("Titulo")), "", .Item("Titulo"))
+                    optVarios.Checked = True
+
+                    Dim XRow = 0
+
+                    For i = 0 To XMAXFILAS - 1
+                        If gridPagos.Rows(i).Cells(0).Value = "" Then
+                            XRow = i
+                            Exit For
+                        End If
+                    Next
+                    With gridPagos.Rows(XRow)
+                        .Cells(0).Value = ""
+                        .Cells(1).Value = ""
+                        .Cells(2).Value = ""
+                        .Cells(3).Value = NroSoliInterno
+                        If RowSoli.Item("Moneda") = 1 Then
+                            .Cells(4).Value = formatonumerico(RowSoli.Item("Importe"))
+                        Else
+                            Dim Calculo As Double = RowSoli.Item("Importe") * traerParidad()
+                            .Cells(4).Value = formatonumerico(Calculo)
+                        End If
+                    End With
+
+                    EsCuenta = "S"
+
+                Else
+                    'Es un Proveedor
+                    txtProveedor.Text = .Item("Proveedor")
+
+                    txtObservaciones.Text = IIf(IsDBNull(.Item("Titulo")), "", .Item("Titulo"))
+                    optAnticipos.Checked = True
+
+                    Dim XRow = 0
+
+                    For i = 0 To XMAXFILAS - 1
+                        If gridPagos.Rows(i).Cells(0).Value = "" Then
+                            XRow = i
+                            Exit For
+                        End If
+                    Next
+                    With gridPagos.Rows(XRow)
+                        .Cells(0).Value = ""
+                        .Cells(1).Value = ""
+                        .Cells(2).Value = ""
+                        .Cells(3).Value = NroSoliInterno
+                        If RowSoli.Item("Moneda") = 1 Then
+                            .Cells(4).Value = formatonumerico(RowSoli.Item("Importe"))
+                        Else
+                            Dim Calculo As Double = RowSoli.Item("Importe") * traerParidad()
+                            .Cells(4).Value = formatonumerico(Calculo)
+                        End If
+                    End With
+
+
+
+                    'gridPagos_Enter(gridPagos, New KeyEventArgs(Keys.Enter))
+                End If
+            End With
+        End If
+
+        If Not IsNothing(indice) Then
+            lstConsulta.Items(indice) = ""
+        End If
+
+        If txtProveedor.Text <> "" Then
+            txtProveedor_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+        End If
+
+        
+        _RecalcularRetenciones()
+
+       
+
+        Dim ZZPagos As Double = 0
+        Dim formaPagos As Double = 0
+        Dim total As Double
+        Dim WRecalcular = gridPagos.Rows.Cast(Of DataGridViewRow)().Any(Function(row) Val(row.Cells(4).Value) <> 0)
+
+        'Recalculamos las retenciones.
+        If WRecalcular And Not _ExisteOrdenDePago(txtOrdenPago.Text) Then
+            _RecalcularRetenciones()
+        End If
+
+        total = Val(_NormalizarNumero(txtIVA.Text)) + Val(_NormalizarNumero(txtGanancias.Text)) + Val(_NormalizarNumero(txtIBCiudad.Text)) + Val(_NormalizarNumero(txtIngresosBrutos.Text))
+
+        For Each row As DataGridViewRow In gridPagos.Rows
+            If Not row.IsNewRow Then
+                row.Cells(4).Value = IIf(Trim(row.Cells(4).Value) <> "", formatonumerico(row.Cells(4).Value), "")
+                ZZPagos += Val(_NormalizarNumero(row.Cells(4).Value))
+            End If
+        Next
+
+        For Each row As DataGridViewRow In gridFormaPagos.Rows
+            If Not row.IsNewRow Then
+                row.Cells(5).Value = IIf(Trim(row.Cells(5).Value) <> "", formatonumerico(row.Cells(5).Value), "")
+                formaPagos += Val(_NormalizarNumero(row.Cells(5).Value))
+            End If
+        Next
+        txtTotal.Text = formatonumerico(total)
+        lblPagos.Text = formatonumerico(ZZPagos)
+        lblFormaPagos.Text = formatonumerico(formaPagos + total)
+        lblDiferencia.Text = formatonumerico(ZZPagos - formaPagos - total)
+
+        If EsCuenta = "S" Then
+
+            WCuenta(gridPagos.CurrentRow.Index, "1") = OrDefault(RowSoli.Item("Cuenta"), "")
+
+            gridPagos.Focus()
+
+            If gridPagos.CurrentCell.ColumnIndex = 4 Then
+                SendKeys.Send("{ENTER}")
+
+            End If
+            gridPagos.CurrentCell = gridPagos.CurrentRow.Cells(5)
+
+            If gridPagos.CurrentCell.ColumnIndex = 5 Then
+                SendKeys.Send("{ENTER}")
+            End If
+
+            'txtCuenta.Text 
+            'txtCuenta_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+        End If
+
+    End Sub
+
+   
+
 
     Private Sub _TraerCtaCte(ByVal _Item As String, Optional ByVal indice As Integer = Nothing)
         Dim zzClave As String
@@ -1346,6 +1566,8 @@ Public Class Pagos
                     '        ckNoCalcRetenciones_CheckedChanged(Nothing, Nothing)
                     '    End If
 
+
+               
                     With gridPagos.Rows(XRow)
                         .Cells(0).Value = XTipo
                         .Cells(1).Value = XLetra
@@ -1645,6 +1867,12 @@ Public Class Pagos
 
         txtFormasPagosAceptadas.Text = ""
         txtFormasPagosAceptadas.Visible = False
+
+        btn_ConsultaSoliFondos.Visible = False
+
+        'CAMBIAMOS EL SOLO LECTURA A FALSE 
+        'POR SI SOLICITUD DE FONDOS LO DESHABILITO
+        txtProveedor.ReadOnly = False
 
     End Sub
 
@@ -2574,6 +2802,22 @@ Public Class Pagos
         Finally
             cn.Close()
         End Try
+
+        Try
+            If btn_ConsultaSoliFondos.Visible = True Then
+                'SI ESTA VISIBLE EL BOTON DE SOLICITUD FONDOS
+                'ACTUALIZAMOS LA TABLA CON EL NUMERO DE ORDEN DE PAGO
+                Dim SQLCnlst As String = "UPDATE SolicitudFondos SET OrdenPago = '" & Trim(txtOrdenPago.Text) & "' WHERE NroSolicitud = '" & NroSoliInterno & "'"
+                ExecuteNonQueries("SurfactanSa", {SQLCnlst})
+            End If
+        Catch ex As System.Exception
+            MsgBox("Hubo un problema al querer Actualizar los datos en la tabla Solicitud de Fondos", MsgBoxStyle.Critical)
+            Exit Sub
+        End Try
+        
+
+
+
 
         'MsgBox("El número de orden asignado es: " & WOrdPago)
 
@@ -6076,15 +6320,27 @@ Public Class Pagos
 
                 Select Case .SelectedIndex
                     Case 0
-                        _ListarProveedores()
+                        'CHEQUEAMOS QUE SI EL BOTON ESTA ACTIVO NO PUEDE CAMBIAR EL PROVEEDOR
+                        If btn_ConsultaSoliFondos.Visible = False Then
+                            _ListarProveedores()
+                        End If
                     Case 1
-                        _ListarCtasCtes()
+                        'CHEQUEAMOS QUE SI EL BOTON ESTA ACTIVO NO PUEDE SELECCIONAR CUENTA CORRIENTE
+                        If btn_ConsultaSoliFondos.Visible = False Then
+                            _ListarCtasCtes()
+                        End If
                     Case 2
                         _ListarChequesTerceros()
                     Case 3
                         _ListarDocumentos()
                     Case 4
-                        _ListarCuentasContables()
+                        'CHEQUEAMOS QUE SI EL BOTON ESTA ACTIVO NO PUEDE SELECCIONAR CUENTA 
+                        If btn_ConsultaSoliFondos.Visible = False Then
+                            _ListarCuentasContables()
+                        End If
+                    Case 5
+                        lstConsulta.Items.Clear()
+                        _ListarSolicitudesFondos()
                 End Select
 
             End With
@@ -6141,6 +6397,7 @@ Public Class Pagos
                 Case 0
                     mostrarProveedor(lstConsulta.SelectedItem.ToString)
                     btnCtaCte_Click(Nothing, Nothing)
+                    btn_ConsultaSoliFondos.Visible = False
                 Case 1
                     ' Ctas Ctes
                     If Trim(lstConsulta.SelectedItem) = "" Or Not optCtaCte.Checked Then
@@ -6148,14 +6405,26 @@ Public Class Pagos
                     End If
 
                     _TraerCtaCte(lstConsulta.SelectedItem, lstConsulta.SelectedIndex)
-
+                    btn_ConsultaSoliFondos.Visible = False
                 Case 2
                     If Trim(lstConsulta.SelectedItem) = "" Then
                         Exit Sub
                     End If
 
                     _TraerChequeDeTercero(lstConsulta.SelectedItem, lstConsulta.SelectedIndex)
+
+                Case 5
+                    If Trim(lstConsulta.SelectedItem) = "" Then
+                        Exit Sub
+                    End If
+
+                    _TraerSolicitudFondos(lstConsulta.SelectedItem, lstConsulta.SelectedIndex)
+                    'CAMBIO PROVEEDOR A SOLO LECTURA QUE NO LO CAMBIEN
+                    txtProveedor.ReadOnly = True
+                    btn_ConsultaSoliFondos.Visible = True
+
                 Case Else
+                    btn_ConsultaSoliFondos.Visible = False
                     Exit Sub
             End Select
 
@@ -6482,7 +6751,7 @@ Public Class Pagos
 
                     End If
 
-                    acumProv += CaculoRetencionIngresosBrutos(Val(WTipoIb), WPorceIb, Val(ZZSuma))
+                    acumProv += CaculoRetencionIngresosBrutos(Val(WTipoIb), Val(WPorceIb), Val(ZZSuma))
                 Else
                     Exit For
                 End If
@@ -7853,5 +8122,16 @@ Public Class Pagos
 
     Private Sub rbChElectronico_MouseClick(sender As Object, e As MouseEventArgs) Handles rbChFisico.MouseClick, rbChElectronico.MouseClick
         btnChequesTerceros_Click(Nothing, Nothing)
+    End Sub
+
+ 
+    
+    Private Sub btn_ConsultaSoliFondos_Click(sender As Object, e As EventArgs) Handles btn_ConsultaSoliFondos.Click
+
+        If NroSoliInterno <> 0 Then
+            With New MostrarSoliFondos(NroSoliInterno, traerParidad())
+                .Show(Me)
+            End With
+        End If
     End Sub
 End Class

@@ -33,7 +33,6 @@ Partial Class Gestion_Solicitudes
         Me.chk_SegundaSemana = New System.Windows.Forms.CheckBox()
         Me.chk_TercerSemana = New System.Windows.Forms.CheckBox()
         Me.chk_SemanaActual = New System.Windows.Forms.CheckBox()
-        Me.DGV_Solicitudes = New Util.DBDataGridView()
         Me.txt_Filtro = New System.Windows.Forms.TextBox()
         Me.btn_Cerrar = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -41,6 +40,9 @@ Partial Class Gestion_Solicitudes
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txt_TotalDolares = New System.Windows.Forms.TextBox()
+        Me.btn_ImprimeListado = New System.Windows.Forms.Button()
+        Me.DGV_Solicitudes = New Util.DBDataGridView()
+        Me.chk = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.NroSolicitud = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Solicitante = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -52,7 +54,8 @@ Partial Class Gestion_Solicitudes
         Me.Importe = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FechaRequerida = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.OrdFechaRequerida = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.btn_ImprimeListado = New System.Windows.Forms.Button()
+        Me.Estado = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btn_Autorizar = New System.Windows.Forms.Button()
         Me.panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         CType(Me.DGV_Solicitudes, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -159,31 +162,6 @@ Partial Class Gestion_Solicitudes
         Me.chk_SemanaActual.Text = "Semana Actual"
         Me.chk_SemanaActual.UseVisualStyleBackColor = True
         '
-        'DGV_Solicitudes
-        '
-        Me.DGV_Solicitudes.AllowUserToAddRows = False
-        Me.DGV_Solicitudes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGV_Solicitudes.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NroSolicitud, Me.Solicitante, Me.Fecha, Me.OrdFecha, Me.Tipo, Me.Destino, Me.Titulo, Me.Moneda, Me.Importe, Me.FechaRequerida, Me.OrdFechaRequerida})
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGV_Solicitudes.DefaultCellStyle = DataGridViewCellStyle2
-        Me.DGV_Solicitudes.DoubleBuffered = True
-        Me.DGV_Solicitudes.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.DGV_Solicitudes.Location = New System.Drawing.Point(12, 111)
-        Me.DGV_Solicitudes.Name = "DGV_Solicitudes"
-        Me.DGV_Solicitudes.OrdenamientoColumnasHabilitado = True
-        Me.DGV_Solicitudes.RowHeadersWidth = 15
-        Me.DGV_Solicitudes.RowTemplate.Height = 20
-        Me.DGV_Solicitudes.ShowCellToolTips = False
-        Me.DGV_Solicitudes.SinClickDerecho = False
-        Me.DGV_Solicitudes.Size = New System.Drawing.Size(778, 314)
-        Me.DGV_Solicitudes.TabIndex = 8
-        '
         'txt_Filtro
         '
         Me.txt_Filtro.Location = New System.Drawing.Point(365, 85)
@@ -249,6 +227,51 @@ Partial Class Gestion_Solicitudes
         Me.txt_TotalDolares.TabIndex = 14
         Me.txt_TotalDolares.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
+        'btn_ImprimeListado
+        '
+        Me.btn_ImprimeListado.Location = New System.Drawing.Point(13, 431)
+        Me.btn_ImprimeListado.Name = "btn_ImprimeListado"
+        Me.btn_ImprimeListado.Size = New System.Drawing.Size(75, 38)
+        Me.btn_ImprimeListado.TabIndex = 16
+        Me.btn_ImprimeListado.Text = "IMPRIME LISTADO"
+        Me.btn_ImprimeListado.UseVisualStyleBackColor = True
+        '
+        'DGV_Solicitudes
+        '
+        Me.DGV_Solicitudes.AllowUserToAddRows = False
+        Me.DGV_Solicitudes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DGV_Solicitudes.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.chk, Me.NroSolicitud, Me.Solicitante, Me.Fecha, Me.OrdFecha, Me.Tipo, Me.Destino, Me.Titulo, Me.Moneda, Me.Importe, Me.FechaRequerida, Me.OrdFechaRequerida, Me.Estado})
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGV_Solicitudes.DefaultCellStyle = DataGridViewCellStyle2
+        Me.DGV_Solicitudes.DoubleBuffered = True
+        Me.DGV_Solicitudes.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
+        Me.DGV_Solicitudes.Location = New System.Drawing.Point(12, 111)
+        Me.DGV_Solicitudes.Name = "DGV_Solicitudes"
+        Me.DGV_Solicitudes.OrdenamientoColumnasHabilitado = True
+        Me.DGV_Solicitudes.RowHeadersWidth = 15
+        Me.DGV_Solicitudes.RowTemplate.Height = 20
+        Me.DGV_Solicitudes.ShowCellToolTips = False
+        Me.DGV_Solicitudes.SinClickDerecho = False
+        Me.DGV_Solicitudes.Size = New System.Drawing.Size(778, 314)
+        Me.DGV_Solicitudes.TabIndex = 8
+        '
+        'chk
+        '
+        Me.chk.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.chk.DataPropertyName = "chk"
+        Me.chk.FalseValue = "false"
+        Me.chk.HeaderText = ""
+        Me.chk.Name = "chk"
+        Me.chk.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.chk.TrueValue = "true"
+        Me.chk.Width = 19
+        '
         'NroSolicitud
         '
         Me.NroSolicitud.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
@@ -256,7 +279,7 @@ Partial Class Gestion_Solicitudes
         Me.NroSolicitud.HeaderText = "Nro Soli"
         Me.NroSolicitud.Name = "NroSolicitud"
         Me.NroSolicitud.ReadOnly = True
-        Me.NroSolicitud.Width = 69
+        Me.NroSolicitud.Width = 49
         '
         'Solicitante
         '
@@ -349,20 +372,31 @@ Partial Class Gestion_Solicitudes
         Me.OrdFechaRequerida.ReadOnly = True
         Me.OrdFechaRequerida.Visible = False
         '
-        'btn_ImprimeListado
+        'Estado
         '
-        Me.btn_ImprimeListado.Location = New System.Drawing.Point(13, 431)
-        Me.btn_ImprimeListado.Name = "btn_ImprimeListado"
-        Me.btn_ImprimeListado.Size = New System.Drawing.Size(75, 38)
-        Me.btn_ImprimeListado.TabIndex = 16
-        Me.btn_ImprimeListado.Text = "IMPRIME LISTADO"
-        Me.btn_ImprimeListado.UseVisualStyleBackColor = True
+        Me.Estado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Estado.DataPropertyName = "Estado"
+        Me.Estado.HeaderText = "Estado"
+        Me.Estado.Name = "Estado"
+        Me.Estado.ReadOnly = True
+        Me.Estado.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Estado.Width = 65
+        '
+        'btn_Autorizar
+        '
+        Me.btn_Autorizar.Location = New System.Drawing.Point(115, 431)
+        Me.btn_Autorizar.Name = "btn_Autorizar"
+        Me.btn_Autorizar.Size = New System.Drawing.Size(82, 38)
+        Me.btn_Autorizar.TabIndex = 17
+        Me.btn_Autorizar.Text = "AUTORIZAR MARCADOS"
+        Me.btn_Autorizar.UseVisualStyleBackColor = True
         '
         'Gestion_Solicitudes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(798, 473)
+        Me.Controls.Add(Me.btn_Autorizar)
         Me.Controls.Add(Me.btn_ImprimeListado)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.txt_TotalDolares)
@@ -401,6 +435,8 @@ Partial Class Gestion_Solicitudes
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents txt_TotalDolares As System.Windows.Forms.TextBox
+    Friend WithEvents btn_ImprimeListado As System.Windows.Forms.Button
+    Friend WithEvents chk As System.Windows.Forms.DataGridViewCheckBoxColumn
     Friend WithEvents NroSolicitud As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Solicitante As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Fecha As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -412,5 +448,6 @@ Partial Class Gestion_Solicitudes
     Friend WithEvents Importe As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents FechaRequerida As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents OrdFechaRequerida As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents btn_ImprimeListado As System.Windows.Forms.Button
+    Friend WithEvents Estado As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents btn_Autorizar As System.Windows.Forms.Button
 End Class

@@ -2,9 +2,11 @@
 Imports Util.Clases.Query
 Imports Util.Clases.Helper
 
-Public Class Gestion_Solicitudes : Implements IActualizaSolicitudes
+Public Class Gestion_Solicitudes : Implements IActualizaSolicitudes, IContraseña
 
     Dim FinalLoad As String = "NO"
+    Dim Fechas(3, 1) As String
+
     Private Sub btn_Cerrar_Click(sender As Object, e As EventArgs) Handles btn_Cerrar.Click
         Close()
     End Sub
@@ -18,9 +20,9 @@ Public Class Gestion_Solicitudes : Implements IActualizaSolicitudes
                                  & "Tipo = IIF(s.Tipo = 1, 'Pago Prov.',  'Varios'), " _
                                  & "Destino = IIF(s.Proveedor = '',c.Descripcion, p.Nombre), s.Titulo, " _
                                  & "Moneda = IIF(s.Moneda = 2, 'U$D',  '$'), s.Importe, s.FechaRequerida, " _
-                                 & "s.OrdFechaRequerida " _
+                                 & "s.OrdFechaRequerida, Estado = IIF(s.Estado = '', '', s.Estado) " _
                                  & "FROM SolicitudFondos s LEFT JOIN Proveedor p ON s.Proveedor = p.Proveedor " _
-                                 & "LEFT JOIN Cuenta c ON s.Cuenta = c.Cuenta WHERE s.OrdenPago = ''"
+                                 & "LEFT JOIN Cuenta c ON s.Cuenta = c.Cuenta WHERE s.OrdenPago = '' ORDER BY s.NroSolicitud"
         Try
             Dim tablaSoli As DataTable = GetAll(SQLCnslt, "SurfactanSa")
             If tablaSoli.Rows.Count > 0 Then
@@ -31,9 +33,6 @@ Public Class Gestion_Solicitudes : Implements IActualizaSolicitudes
             AplicarFiltro()
 
             FinalLoad = "SI"
-
-
-
 
 
         Catch ex As Exception
@@ -132,8 +131,20 @@ Public Class Gestion_Solicitudes : Implements IActualizaSolicitudes
 
         ordenaRangosFechas(RangosFechas)
 
+        CargaFechasAGlobal(RangosFechas)
+
     End Sub
 
+    Private Sub CargaFechasAGlobal(ByVal RangosFechas As Object)
+        Fechas(0, 0) = DesOrdenaFecha(RangosFechas(0, 0))
+        Fechas(0, 1) = DesOrdenaFecha(RangosFechas(0, 1))
+        Fechas(1, 0) = DesOrdenaFecha(RangosFechas(1, 0))
+        Fechas(1, 1) = DesOrdenaFecha(RangosFechas(1, 1))
+        Fechas(2, 0) = DesOrdenaFecha(RangosFechas(2, 0))
+        Fechas(2, 1) = DesOrdenaFecha(RangosFechas(2, 1))
+        Fechas(3, 0) = DesOrdenaFecha(RangosFechas(3, 0))
+        Fechas(3, 1) = DesOrdenaFecha(RangosFechas(3, 1))
+    End Sub
     Private Sub ordenaRangosFechas(ByRef RangosFechas As Object)
         RangosFechas(0, 0) = ordenaFecha(RangosFechas(0, 0))
         RangosFechas(0, 1) = ordenaFecha(RangosFechas(0, 1))
@@ -215,9 +226,11 @@ Public Class Gestion_Solicitudes : Implements IActualizaSolicitudes
 
 
     Private Sub DGV_Solicitudes_CellMouseDoubleClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DGV_Solicitudes.CellMouseDoubleClick
-        With New Ingreso_Solicitud(DGV_Solicitudes.CurrentRow.Cells(0).Value)
-            .Show(Me)
-        End With
+        If e.ColumnIndex > -1 Then
+            With New Ingreso_Solicitud(DGV_Solicitudes.CurrentRow.Cells(0).Value)
+                .Show(Me)
+            End With
+        End If
     End Sub
 
     Public Sub ActualizaGrilla() Implements IActualizaSolicitudes.ActualizaGrilla
@@ -230,20 +243,139 @@ Public Class Gestion_Solicitudes : Implements IActualizaSolicitudes
 
     Private Sub btn_ImprimeListado_Click(sender As Object, e As EventArgs) Handles btn_ImprimeListado.Click
 
+
+        Dim SubTitulo As String = ""
+
+        SubTitulo = GenerarSubTitulo()
+
+
+
         Dim Tablareporte As DataTable = New DBAuxi.ListadoGrillaDataTable
 
         For Each row As DataGridViewRow In DGV_Solicitudes.Rows
-
-            Tablareporte.Rows.Add(row)
+            With row
+                Tablareporte.Rows.Add(.Cells("NroSolicitud").Value, .Cells("Solicitante").Value, .Cells("Fecha").Value,
+                                      .Cells("OrdFecha").Value, .Cells("Tipo").Value, .Cells("Destino").Value,
+                                      .Cells("Titulo").Value, .Cells("Moneda").Value, .Cells("Importe").Value,
+                                      .Cells("FechaRequerida").Value, .Cells("OrdFechaRequerida").Value)
+            End With
         Next
 
+
+
         With New VistaPrevia
-            .Reporte = New Reporte__Listado_Grilla()
+            .Reporte = New Reporte_Listado_Grilla()
             .Reporte.SetDataSource(Tablareporte)
-
-
+            .Reporte.SetParameterValue(0, SubTitulo)
+            .Mostrar()
         End With
 
 
+    End Sub
+
+    Private Function GenerarSubTitulo()
+        Dim SubTitulo As String = "Rango Fechas: "
+
+
+        If chk_SemanaActual.Checked Then
+            SubTitulo = SubTitulo & Fechas(0, 0) & " a " & Fechas(0, 1)
+        End If
+
+        If chk_SegundaSemana.Checked Then
+            If chk_SemanaActual.Checked Then
+                SubTitulo = SubTitulo.Replace(Fechas(0, 1), Fechas(1, 1))
+            Else
+                SubTitulo = SubTitulo & Fechas(1, 0) & " a " & Fechas(1, 1)
+            End If
+
+        End If
+
+        If chk_TercerSemana.Checked Then
+            If chk_SegundaSemana.Checked Then
+                SubTitulo = SubTitulo.Replace(Fechas(1, 1), Fechas(2, 1))
+            Else
+                If chk_SemanaActual.Checked Then
+                    SubTitulo = SubTitulo & " - "
+                End If
+                SubTitulo = SubTitulo & Fechas(2, 0) & " a " & Fechas(2, 1)
+            End If
+
+        End If
+
+        If chk_CuartaSemana.Checked Then
+            If chk_TercerSemana.Checked Then
+                SubTitulo = SubTitulo.Replace(Fechas(2, 1), Fechas(3, 1))
+            Else
+                If chk_SemanaActual.Checked Or chk_SegundaSemana.Checked Then
+                    SubTitulo = SubTitulo & " - "
+                End If
+                SubTitulo = SubTitulo & Fechas(3, 0) & " a " & Fechas(3, 1)
+            End If
+
+        End If
+
+        If chk_SinFecha.Checked Then
+            SubTitulo = SubTitulo & " - Sin Fechas"
+        End If
+
+        Return SubTitulo
+
+    End Function
+
+    Private Sub DGV_Solicitudes_RowHeaderMouseDoubleClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DGV_Solicitudes.RowHeaderMouseDoubleClick
+        If MsgBox("¿Desea rechazar la solicitud de fondos Nro: " & DGV_Solicitudes.CurrentRow.Cells("NroSolicitud").Value & " ?", vbYesNo) = vbYes Then
+            With New SoliContra(DGV_Solicitudes.CurrentRow.Cells("NroSolicitud").Value)
+                .Show(Me)
+            End With
+        End If
+    End Sub
+
+    Public Sub Autorizado(Permiso As String, NroSolicutud As Integer) Implements IContraseña.Autorizado
+        If Permiso = "S" Then
+            Try
+                'Dim SQLCnslt As String = "Delete FROM SolicitudFondos WHERE NroSolicitud = '" & NroSolicutud & "'"
+                Dim SQLCnslt As String = "UPDATE SolicitudFondos SET Estado = 'RECHAZADO' WHERE NroSolicitud = '" & NroSolicutud & "'"
+
+                ExecuteNonQueries("SurfactanSa", SQLCnslt)
+
+                MsgBox("Se rechazo la solicitud Nro " & NroSolicutud)
+
+                ActualizaGrilla()
+            Catch ex As Exception
+
+            End Try
+        End If
+    End Sub
+
+    Public Sub AutorizarSolicitudes() Implements IContraseña.AutorizarSolicitudes
+        Dim listaAutorizar As New List(Of String)
+        Dim SQLCnslt As String = ""
+        For Each row As DataGridViewRow In DGV_Solicitudes.Rows
+            With row
+                If .Cells("chk").Value = True Then
+                    SQLCnslt = "UPDATE SolicitudFondos SET Estado = 'AUTORIZO' WHERE NroSolicitud = '" & .Cells("NroSolicitud").Value & "'"
+                    listaAutorizar.Add(SQLCnslt)
+                End If
+            End With
+        Next
+
+        Try
+            ExecuteNonQueries("SurfactanSa", listaAutorizar.ToArray())
+
+            ActualizaGrilla()
+
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+
+    Private Sub btn_Autorizar_Click(sender As Object, e As EventArgs) Handles btn_Autorizar.Click
+        If MsgBox("¿Desea autorizar las solicitudes marcadas?", vbYesNo) = vbYes Then
+            With New SoliContra()
+                .Show(Me)
+            End With
+        End If
+        
     End Sub
 End Class

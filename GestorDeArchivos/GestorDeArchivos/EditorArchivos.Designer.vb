@@ -22,6 +22,7 @@ Partial Class EditorArchivos
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
@@ -34,8 +35,11 @@ Partial Class EditorArchivos
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.OpenFileDialog2 = New System.Windows.Forms.OpenFileDialog()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.PegarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.dgvArchivos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
+        Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Button3
@@ -72,6 +76,7 @@ Partial Class EditorArchivos
         Me.dgvArchivos.AllowUserToDeleteRows = False
         Me.dgvArchivos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvArchivos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.FechaArchivo, Me.DescArchivo, Me.Icono, Me.PathArchivo})
+        Me.dgvArchivos.ContextMenuStrip = Me.ContextMenuStrip1
         Me.dgvArchivos.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.dgvArchivos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.dgvArchivos.Location = New System.Drawing.Point(0, 100)
@@ -156,6 +161,18 @@ Partial Class EditorArchivos
         '
         Me.OpenFileDialog2.FileName = "OpenFileDialog2"
         '
+        'ContextMenuStrip1
+        '
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PegarToolStripMenuItem})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(105, 26)
+        '
+        'PegarToolStripMenuItem
+        '
+        Me.PegarToolStripMenuItem.Name = "PegarToolStripMenuItem"
+        Me.PegarToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.PegarToolStripMenuItem.Text = "Pegar"
+        '
         'EditorArchivos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -170,6 +187,7 @@ Partial Class EditorArchivos
         CType(Me.dgvArchivos, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        Me.ContextMenuStrip1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -186,4 +204,6 @@ Partial Class EditorArchivos
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents OpenFileDialog2 As System.Windows.Forms.OpenFileDialog
+    Friend WithEvents ContextMenuStrip1 As System.Windows.Forms.ContextMenuStrip
+    Friend WithEvents PegarToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class

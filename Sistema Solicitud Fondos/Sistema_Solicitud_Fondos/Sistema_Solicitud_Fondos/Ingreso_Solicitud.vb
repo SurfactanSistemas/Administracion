@@ -7,7 +7,7 @@ Imports Util
 Public Class Ingreso_Solicitud : Implements IConsulta
 
     Dim CarpetaAux As String = "C:\" & "Auxiliar_SolicitudFondos"
-    Dim RutaGuardar As String = "\\193.168.0.2\g$\vb\NET\ArchivosRelacionadosSoliitudFondos"
+    Dim RutaGuardar As String = "\\193.168.0.2\g$\vb\NET\ArchivosRelacionadosSolicitudFondos"
 
     Dim NRO_SOLICITUD As Integer = 0
     Sub New(Optional ByVal NroSoli As Integer = 0)
@@ -40,6 +40,7 @@ Public Class Ingreso_Solicitud : Implements IConsulta
                 cbx_Tipo.SelectedIndex = rowsoli.Item("Tipo")
 
                 txt_Solicitante.Text = rowsoli.Item("Solicitante")
+                txt_Titulo.Text = rowsoli.Item("Titulo")
                 txt_Concepto.Text = rowsoli.Item("Concepto")
                 txt_FechaSolicitud.Text = rowsoli.Item("Fecha")
 
@@ -502,14 +503,19 @@ Public Class Ingreso_Solicitud : Implements IConsulta
 
     Private Sub btn_Adjuntar_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
-
-
-        If Not Directory.Exists(CarpetaAux) Then
-            Directory.CreateDirectory(CarpetaAux)
+        If NRO_SOLICITUD = 0 Then
+            If Not Directory.Exists(CarpetaAux) Then
+                Directory.CreateDirectory(CarpetaAux)
+            End If
+            With New EditorArchivos(2, CarpetaAux)
+                .Show()
+            End With
+        Else
+            With New EditorArchivos(2, RutaGuardar & "\" & NRO_SOLICITUD)
+                .Show()
+            End With
         End If
-        With New EditorArchivos(2, CarpetaAux)
-            .Show()
-        End With
+
 
         '  With New EditorArchivos(2, RutaGuardar & "\" & txtNroInterno.Text)
         '      .Show()
