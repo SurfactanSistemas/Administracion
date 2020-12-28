@@ -189,9 +189,115 @@ Public Class AutorizarPedido
         End If
     End Sub
 
-    Private Sub dgvDatos_CellMouseEnter(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvDatos.CellMouseEnter
-        If e.ColumnIndex = dgvDatos.Columns("Partida").Index Then
-            ToolTip1.Show("Haga Doble Click sobre la partida para ver los detalles de la Hoja de Producción, sus ensayos y movimientos.", sender, 10000)
-        End If
+    Private Sub dgvDatos_CellMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgvDatos.CellMouseClick
+        If e.ColumnIndex <> dgvDatos.Columns("CoA").Index Then Exit Sub
+
+        Dim tipo As String = UCase(dgvDatos.CurrentRow.Cells("CoA").Value)
+
+        Select Case tipo
+            Case "GENERAR"
+
+                '
+                ' En caso de ser producto de Reventa, solamente se copia el archivo correspondiente.
+                '
+                If _EsProductoReventa(dgvDatos.CurrentRow) Then
+                    MsgBox("Es producto de reventa!")
+                Else
+                    Dim path As String = _GenerarCoA(dgvDatos.CurrentRow)
+
+                    If path.Trim <> "" AndAlso System.IO.File.Exists(path) Then
+                        With dgvDatos.CurrentRow
+                            .Cells("CoA").Value = "Ver"
+                            .Cells("PathCoA").Value = path
+                        End With
+                    End If
+                End If
+
+            Case "VER"
+
+        End Select
+
     End Sub
+
+    Private Function _EsProductoReventa(ByVal row As DataGridViewRow) As Boolean
+
+        Dim WProd As String = _DeterminarProducto(row)
+
+        Return _EsProductoReventa(WProd)
+
+    End Function
+
+    Private Function _EsProductoReventa(ByVal Prod As String) As Boolean
+
+        Dim WProd As DataRow = GetSingle("SELECT Tipo FROM codigomono WHERE Codigo = " + "'" & Prod & "'", "SurfactanSa")
+
+        If WProd IsNot Nothing Then
+            Return Val(OrDefault(WProd("Tipo"), "")) = 0
+        End If
+
+        Return False
+
+    End Function
+
+    Private Function _GenerarCoA(row As DataGridViewRow) As String
+
+        '
+        ' Busco el producto al que corresponde la partida.
+        '
+        Dim WProducto As String = _DeterminarProducto(row)
+
+        Dim WPartida As String = UCase(OrDefault(row.Cells("Partida").Value, ""))
+        Dim WCanti As String = formatonumerico(OrDefault(row.Cells("Canti").Value, ""))
+
+        '
+        ' Esto no deberia pasar, pero en caso de no encontrar absolutamente nada, nos vamos a cara de perro.
+        '
+        If WProducto.Trim = "" OrElse WProducto.Replace(" ", "").Length < 12 Then Return ""
+
+        Dim WPed As DataRow = GetSingle("SELECT Cliente FROM Pedido WHERE Pedido = '" & Pedido & "'", "SurfactanSa")
+
+        If WPed Is Nothing Then Return ""
+
+        Dim WCliente As String = OrDefault(WPed("Cliente"), "")
+
+        Dim WNombrePDF As String = String.Format("Certificado {0} {1} Pda {2}.pdf", Pedido, WCliente, WPartida)
+        Dim WRuta As String = Pedido & "\"
+
+        With New EmisionCertificadoAnalisis
+            .WindowState = FormWindowState.Minimized
+            .Show()
+            .txtCantidad.Text = WCanti
+            .txtCliente.Text = WCliente
+            .txtPartida.Text = WPartida
+            .lblTerminado.Text = WProducto
+            .cmbTipoSalida.SelectedIndex = 3
+            ._EmitirCertificado(True, WNombrePDF, WRuta)
+            .Close()
+        End With
+
+        Return String.Format("{0}\{1}\{2}", OrDefault(Configuration.ConfigurationManager.AppSettings("PATH_COAS_FARMA"), ""), WRuta.Replace(Chr(34), ""), WNombrePDF)
+
+    End Function
+
+    Private Function _DeterminarProducto(row As DataGridViewRow) As String
+
+        Dim WProducto As String = UCase(OrDefault(row.Cells("Producto").Value, ""))
+
+        '
+        ' En caso de estar en blanco, busco el proximo en la fila superior.
+        '
+        If WProducto.Trim = "" Then
+            For i As Integer = row.Index To 0 Step -1
+                Dim prod As String = OrDefault(dgvDatos.Rows(i).Cells("Producto").Value, "").ToString.Trim
+
+                If prod <> "" Then
+                    WProducto = prod
+                    Exit For
+                End If
+            Next
+        End If
+
+        Return WProducto
+
+    End Function
 End Class

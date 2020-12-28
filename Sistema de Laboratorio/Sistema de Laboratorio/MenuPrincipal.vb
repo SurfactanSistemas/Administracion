@@ -106,6 +106,9 @@ Public Class MenuPrincipal
         For Each Item1 As ToolStripMenuItem In Me.MenuStrip1.Items
             Dim ID As String = Microsoft.VisualBasic.Right(Item1.Name, 2)
             Dim Row = BuscarPermisos(TablaDatos, Microsoft.VisualBasic.Right(Item1.Name, 2))
+
+            If Row Is Nothing Then Continue For
+
             If Not Row.Item("Visible") Then
                 Item1.Enabled = False
             End If
@@ -130,10 +133,8 @@ Public Class MenuPrincipal
 
                     End If
 
-
                 Next
             End If
-
 
         Next
 

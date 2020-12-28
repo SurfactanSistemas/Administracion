@@ -1057,6 +1057,10 @@
     <None Include="SGA\SGA1.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\ImpreRegistroProduccion\ImpreRegistroProduccion\ImpreProcesosFarma.vbproj">
+      <Project>{0e49f09f-b585-46dc-8e31-ac298d67372e}</Project>
+      <Name>ImpreProcesosFarma</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Util\Util\Util.vbproj">
       <Project>{CC5D60FD-9755-4C61-B96C-F56173586BB9}</Project>
       <Name>Util</Name>

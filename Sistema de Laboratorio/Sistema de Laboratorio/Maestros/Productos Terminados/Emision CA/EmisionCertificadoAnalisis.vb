@@ -1,4 +1,6 @@
-﻿Imports Util
+﻿Imports System.IO
+Imports System.Text.RegularExpressions
+Imports Util
 Imports CrystalDecisions.CrystalReports.Engine
 Imports CrystalDecisions.Shared
 Imports Laboratorio.Entidades
@@ -6,6 +8,7 @@ Imports Laboratorio.Entidades
 Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
 
     Private ReadOnly WDescParametrosIngles As New Dictionary(Of String, String) From {{"Menor a", "Less than"}, {"Mayor a", "Greater than"}, {"Máximo", "Maximum"}, {"Mínimo", "Minimum"}, {"Informativo", "Informative"}, {"Cumple Ensayo", "Conform to test"}, {"Cumple", "Complies"}}
+    Private WPorCmd As Boolean = False
 
     Private Sub btnLimpiar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLimpiar.Click
         For Each c As Control In {txtCliente, txtPartida, txtCantidad, lblDescCliente, lblDescProducto, lblDescProductocliente, lblTerminado}
@@ -42,6 +45,12 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
     End Sub
 
     Private Sub btnAceptar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAceptar.Click
+        _EmitirCertificado()
+    End Sub
+
+    Public Sub _EmitirCertificado(Optional ByVal PorCmd As Boolean = False, Optional ByVal WNombreCert As String = "", Optional ByVal WRutaCert As String = "")
+
+        Me.WPorCmd = PorCmd
 
         If Val(txtCantidad.Text) = 0 Then txtCantidad.Text = "1"
         If txtCliente.Text.Trim = "" Then txtCliente.Text = "S00102"
@@ -53,7 +62,7 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
 
         If WCliente Is Nothing Then
             MsgBox("El Cliente no es válido", MsgBoxStyle.Exclamation)
-            Exit Sub
+            Return
         End If
 
         Dim WBase As String = "Surfactan_III"
@@ -75,7 +84,7 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
 
         If WPrueterFarma.Rows.Count = 0 Then
             MsgBox("No se ha encontrado pruebas ingresadas para el Lote Indicado.", MsgBoxStyle.Exclamation)
-            Exit Sub
+            Return
         End If
 
         '
@@ -106,7 +115,7 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
         '
         If WAltaCertificado.Rows.Count = 0 Then
             MsgBox("No se encuentra definido el Certificado de Análisis para este Producto.", MsgBoxStyle.Exclamation)
-            Exit Sub
+            Return
         Else
             For Each row As DataRow In WPrueterFarma.Rows
                 With row
@@ -167,12 +176,12 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
             With row
 
                 .Item("Std") = ProductoTerminado._GenerarImpreParametro(
-                        OrDefault(.Item("TipoEspecif"), ""),
-                        OrDefault(.Item("DesdeEspecif"), ""),
-                        OrDefault(.Item("HastaEspecif"), ""),
-                        OrDefault(.Item("UnidadEspecif"), ""),
-                        OrDefault(.Item("MenorIgualEspecif"), ""),
-                        OrDefault(.Item("InformaEspecif"), ""))
+                    OrDefault(.Item("TipoEspecif"), ""),
+                    OrDefault(.Item("DesdeEspecif"), ""),
+                    OrDefault(.Item("HastaEspecif"), ""),
+                    OrDefault(.Item("UnidadEspecif"), ""),
+                    OrDefault(.Item("MenorIgualEspecif"), ""),
+                    OrDefault(.Item("InformaEspecif"), ""))
 
                 '
                 ' Ajustamos en caso de que sea el certificado en inglés.
@@ -364,7 +373,19 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
             End With
 
             WTipoRepote = 1
-            _GenerarCertificadoAnalisisFarma(rpt, WTipoRepote, txtPartida.Text, cmbTipoSalida.SelectedIndex)
+
+            Dim wTipoSalida As Integer = cmbTipoSalida.SelectedIndex
+
+            If wTipoSalida = 2 Or wTipoSalida = 3 Then
+                wTipoSalida = 8
+
+                If cmbTipoSalida.SelectedIndex = 2 Then wTipoSalida = 3
+                If cmbTipoSalida.SelectedIndex = 3 Then wTipoSalida = 6
+                If cmbTipoSalida.SelectedIndex = 3 And WPorCmd Then wTipoSalida = 7
+
+            End If
+
+            _GenerarCertificadoAnalisisFarma(rpt, WTipoRepote, txtPartida.Text, wTipoSalida, WNombrePDF:=WNombreCert, WRutaCert:=WRutaCert)
 
         Else
 
@@ -398,7 +419,19 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
             End With
 
             WTipoRepote = 2
-            _GenerarCertificadoAnalisisFarma(rpt, WTipoRepote, txtPartida.Text, cmbTipoSalida.SelectedIndex)
+
+            Dim wTipoSalida As Integer = cmbTipoSalida.SelectedIndex
+
+            If wTipoSalida = 2 Or wTipoSalida = 3 Then
+
+                wTipoSalida = 3
+
+                If cmbTipoSalida.SelectedIndex = 3 Then wTipoSalida = 6
+                If cmbTipoSalida.SelectedIndex = 3 And WPorCmd Then wTipoSalida = 7
+
+            End If
+
+            _GenerarCertificadoAnalisisFarma(rpt, WTipoRepote, txtPartida.Text, wTipoSalida, WNombrePDF:=WNombreCert, WRutaCert:=WRutaCert)
 
             If WImpreCargaVNotas.Trim <> "" Then
 
@@ -418,15 +451,15 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
                 End With
 
                 WTipoRepote = 3
-                _GenerarCertificadoAnalisisFarma(rpt, WTipoRepote, txtPartida.Text, cmbTipoSalida.SelectedIndex)
+
+                _GenerarCertificadoAnalisisFarma(rpt, WTipoRepote, txtPartida.Text, wTipoSalida, WNombrePDF:=WNombreCert, WRutaCert:=WRutaCert)
 
             End If
 
         End If
-
     End Sub
 
-    Private Sub _GenerarCertificadoAnalisisFarma(ByVal rpt As ReportDocument, ByVal WTipoReporte As Integer, ByVal wPartida As Integer, ByVal wTipoSalida As Integer, Optional ByVal WNombrePDF As String = "")
+    Private Sub _GenerarCertificadoAnalisisFarma(ByVal rpt As ReportDocument, ByVal WTipoReporte As Integer, ByVal wPartida As Integer, ByVal wTipoSalida As Integer, Optional ByVal WNombrePDF As String = "", Optional ByVal WRutaCert As String = "")
 
         'rpt.SetParameterValue("MostrarLogo", 0)
         'rpt.SetParameterValue("MostrarPie", 0)
@@ -434,10 +467,17 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
         rpt.SetParameterValue("MostrarLogo", 1)
         rpt.SetParameterValue("MostrarPie", 1)
 
-        With New VistaPrevia
+        With New Util.VistaPrevia
             .Reporte = rpt
             .Base = Base
+
             Dim WNombre As String = WNombrePDF
+            Dim WRuta As String = ""
+
+            If wTipoSalida = 4 Then WRuta = "C:\ImpreCertificados\"
+            If wTipoSalida = 7 Then WRuta = "C:\ImpreCertificados\" & wPartida
+
+            If WRuta.Trim <> "" AndAlso Not Directory.Exists(WRuta) Then Directory.CreateDirectory(WRuta)
 
             If WNombre.Trim = "" Then
 
@@ -448,22 +488,91 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
                     Case 3
                         WNombre &= " - Segunda"
                 End Select
+            Else
+
+                Dim match = Regex.Split(WNombrePDF, "[\w+\.pdf]+$")
+
+                If match.Count > 0 AndAlso match(0).Trim <> "" And wTipoSalida <> 7 Then
+                    wTipoSalida = 4
+                    WRuta = match(0)
+                    WNombre = WNombrePDF.Replace(WRuta, "")
+                End If
 
             End If
 
             If Not UCase(WNombre).EndsWith("PDF") And WNombre.Trim <> "" Then WNombre &= ".pdf"
+            If WRuta.EndsWith(Chr(34)) Then WRuta = WRuta.Substring(0, WRuta.IndexOf(Chr(34))) & "\"
+
+            'Select Case wTipoSalida
+            '    Case 0
+            '        .Mostrar()
+            '    Case 1
+            '        .Imprimir()
+            '    Case 2
+            '        .Exportar(WNombre, ExportFormatType.PortableDocFormat)
+            'End Select
+
+            Dim WPathTempCertificado As String = "C:\ImpreCertificados\" & wPartida & "\"
 
             Select Case wTipoSalida
-                Case 0
-                    .Mostrar()
-                Case 1
+                Case 1, 6
                     .Imprimir()
                 Case 2
-                    .Exportar(WNombre, ExportFormatType.PortableDocFormat)
+                    .Mostrar()
+                Case 8
+                    If Directory.Exists("C:\ImpreCertificados\" & wPartida) Then Directory.Delete("C:\ImpreCertificados\" & wPartida, True)
+                    .Exportar(WNombre, CrystalDecisions.Shared.ExportFormatType.PortableDocFormat)
+                Case 3
+
+                    If WNombre.ToUpper.EndsWith("PRIMERA.PDF") Then
+                        Directory.Delete("C:\ImpreCertificados\" & wPartida, True)
+                        .Exportar(WNombre, CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, "C:\ImpreCertificados\" & wPartida)
+                    Else
+                        .Exportar(WNombre, CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, "C:\ImpreCertificados\" & wPartida)
+                        .MergePDFs(WPathTempCertificado, WNombre)
+                        With New SaveFileDialog
+                            .InitialDirectory = "C:\"
+                            .RestoreDirectory = True
+                            .DefaultExt = "pdf"
+                            If .ShowDialog() = Windows.Forms.DialogResult.OK Then
+                                File.Copy(WPathTempCertificado & WNombre, .FileName)
+                            End If
+                        End With
+                    End If
+
+                Case 4, 7
+
+                    If wTipoSalida = 7 And (WTipoReporte = 2 Or WTipoReporte = 1) Then Directory.Delete(WPathTempCertificado, True)
+
+                    .Exportar(WTipoReporte & "-" & WNombre, CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, WRuta)
+
+                    If wTipoSalida = 7 And WTipoReporte <> 2 Then
+
+                        If Not WRuta.EndsWith("\") Then WRuta &= "\"
+                        If Not WRutaCert.EndsWith("\") Then WRutaCert &= "\"
+
+                        .MergePDFs(WRuta, WNombrePDF)
+
+                        Dim WPathCoas As String = OrDefault(Configuration.ConfigurationManager.AppSettings("PATH_COAS_FARMA"), "")
+
+                        If WPathCoas.Trim = "" Then
+                            MsgBox("No se encuentra definido el PATH_COAS_FARMA", MsgBoxStyle.Exclamation)
+                            Exit Sub
+                        End If
+
+                        Dim WPathCertificadoServidor As String = WPathCoas & WRutaCert.Replace(Chr(34), "")
+
+                        If Not Directory.Exists(WPathCertificadoServidor) Then Directory.CreateDirectory(WPathCertificadoServidor)
+
+                        File.Copy(WPathTempCertificado & WNombrePDF, WPathCertificadoServidor & WNombrePDF, True)
+
+                    End If
+                Case 5
+                    .Exportar(WNombre, CrystalDecisions.Shared.ExportFormatType.WordForWindows)
             End Select
 
-        End With
 
+        End With
     End Sub
 
     Private Function _ObtenerNotasExtrasDePT() As String

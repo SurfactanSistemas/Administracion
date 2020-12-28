@@ -34,6 +34,8 @@ Partial Class AutorizarPedido
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnCerrar = New System.Windows.Forms.Button()
+        Me.btnAutorizar = New System.Windows.Forms.Button()
         Me.lblDescCliente = New System.Windows.Forms.Label()
         Me.lblCliente = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -54,8 +56,8 @@ Partial Class AutorizarPedido
         Me.Canti = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Venc75 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Revalida = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.btnAutorizar = New System.Windows.Forms.Button()
-        Me.btnCerrar = New System.Windows.Forms.Button()
+        Me.CoA = New System.Windows.Forms.DataGridViewLinkColumn()
+        Me.PathCoA = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -76,7 +78,7 @@ Partial Class AutorizarPedido
         'Label2
         '
         Me.Label2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.Control
@@ -89,7 +91,7 @@ Partial Class AutorizarPedido
         'Label1
         '
         Me.Label1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.Control
@@ -119,6 +121,25 @@ Partial Class AutorizarPedido
         Me.GroupBox1.Size = New System.Drawing.Size(741, 78)
         Me.GroupBox1.TabIndex = 4
         Me.GroupBox1.TabStop = False
+        '
+        'btnCerrar
+        '
+        Me.btnCerrar.Location = New System.Drawing.Point(608, 42)
+        Me.btnCerrar.Name = "btnCerrar"
+        Me.btnCerrar.Size = New System.Drawing.Size(121, 28)
+        Me.btnCerrar.TabIndex = 1
+        Me.btnCerrar.Text = "CERRAR"
+        Me.btnCerrar.UseVisualStyleBackColor = True
+        '
+        'btnAutorizar
+        '
+        Me.btnAutorizar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAutorizar.Location = New System.Drawing.Point(481, 42)
+        Me.btnAutorizar.Name = "btnAutorizar"
+        Me.btnAutorizar.Size = New System.Drawing.Size(121, 28)
+        Me.btnAutorizar.TabIndex = 1
+        Me.btnAutorizar.Text = "AUTORIZAR"
+        Me.btnAutorizar.UseVisualStyleBackColor = True
         '
         'lblDescCliente
         '
@@ -248,7 +269,7 @@ Partial Class AutorizarPedido
         Me.dgvDatos.AllowUserToAddRows = False
         Me.dgvDatos.AllowUserToDeleteRows = False
         Me.dgvDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvDatos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Producto, Me.Descripcion, Me.Cantidad, Me.Entregar, Me.Partida, Me.Canti, Me.Venc75, Me.Revalida})
+        Me.dgvDatos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Producto, Me.Descripcion, Me.Cantidad, Me.Entregar, Me.Partida, Me.Canti, Me.Venc75, Me.Revalida, Me.CoA, Me.PathCoA})
         DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
         DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -362,24 +383,24 @@ Partial Class AutorizarPedido
         Me.Revalida.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.Revalida.Width = 61
         '
-        'btnAutorizar
+        'CoA
         '
-        Me.btnAutorizar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAutorizar.Location = New System.Drawing.Point(481, 42)
-        Me.btnAutorizar.Name = "btnAutorizar"
-        Me.btnAutorizar.Size = New System.Drawing.Size(121, 28)
-        Me.btnAutorizar.TabIndex = 1
-        Me.btnAutorizar.Text = "AUTORIZAR"
-        Me.btnAutorizar.UseVisualStyleBackColor = True
+        Me.CoA.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.CoA.DataPropertyName = "CoA"
+        Me.CoA.HeaderText = "CoA"
+        Me.CoA.Name = "CoA"
+        Me.CoA.ReadOnly = True
+        Me.CoA.Text = "Generar"
+        Me.CoA.UseColumnTextForLinkValue = True
+        Me.CoA.Width = 39
         '
-        'btnCerrar
+        'PathCoA
         '
-        Me.btnCerrar.Location = New System.Drawing.Point(608, 42)
-        Me.btnCerrar.Name = "btnCerrar"
-        Me.btnCerrar.Size = New System.Drawing.Size(121, 28)
-        Me.btnCerrar.TabIndex = 1
-        Me.btnCerrar.Text = "CERRAR"
-        Me.btnCerrar.UseVisualStyleBackColor = True
+        Me.PathCoA.DataPropertyName = "PathCoA"
+        Me.PathCoA.HeaderText = "PathCoA"
+        Me.PathCoA.Name = "PathCoA"
+        Me.PathCoA.ReadOnly = True
+        Me.PathCoA.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
         'AutorizarPedido
         '
@@ -418,6 +439,9 @@ Partial Class AutorizarPedido
     Friend WithEvents lblPedido As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents dgvDatos As Util.DBDataGridView
+    Friend WithEvents btnCerrar As System.Windows.Forms.Button
+    Friend WithEvents btnAutorizar As System.Windows.Forms.Button
+    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents Producto As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Cantidad As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -426,7 +450,6 @@ Partial Class AutorizarPedido
     Friend WithEvents Canti As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Venc75 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Revalida As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents btnCerrar As System.Windows.Forms.Button
-    Friend WithEvents btnAutorizar As System.Windows.Forms.Button
-    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
+    Friend WithEvents CoA As System.Windows.Forms.DataGridViewLinkColumn
+    Friend WithEvents PathCoA As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

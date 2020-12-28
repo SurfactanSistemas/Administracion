@@ -1,8 +1,8 @@
 Public Class IngresoFormulasEnsayo : Implements IGrabadoDeFormula, INotificaActualizacion
     Private ReadOnly Terminado As String
     Dim PermisoGrabar As Boolean
-    Sub New(ByVal ID As String, Optional ByVal Terminado As String = "")
-    
+    Sub New(ByVal ID As String, ByVal Terminado As String)
+
         ' Llamada necesaria para el diseñador.
         InitializeComponent()
 

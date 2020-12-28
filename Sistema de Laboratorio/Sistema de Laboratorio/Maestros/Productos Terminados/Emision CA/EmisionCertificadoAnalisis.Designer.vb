@@ -282,7 +282,7 @@ Partial Class EmisionCertificadoAnalisis
         '
         Me.cmbTipoSalida.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbTipoSalida.FormattingEnabled = True
-        Me.cmbTipoSalida.Items.AddRange(New Object() {"PANTALLA", "IMPRESORA", "PDF"})
+        Me.cmbTipoSalida.Items.AddRange(New Object() {"PANTALLA", "IMPRESORA", "PDF", "IMPRIMIR C/ MEMBRETE"})
         Me.cmbTipoSalida.Location = New System.Drawing.Point(111, 26)
         Me.cmbTipoSalida.Name = "cmbTipoSalida"
         Me.cmbTipoSalida.Size = New System.Drawing.Size(121, 21)
