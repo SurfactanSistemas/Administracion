@@ -306,7 +306,7 @@ Public Class GestionAvisosOPDisponiblesProveedores
                     End If
                 Next
 
-                _EnviarEmail(WMailOp, "", "Orden de Pago - SURFACTAN S.A. - ", WBody, WAdjuntos.ToArray)
+                _EnviarEmail(WMailOp, "mlarias@surfactan.com.ar", "Orden de Pago - SURFACTAN S.A. - ", WBody, WAdjuntos.ToArray)
 
                 _MarcarOPComoEnviada(OrdenPago)
 
