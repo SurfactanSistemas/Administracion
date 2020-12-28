@@ -906,9 +906,9 @@ Public Class AvisoOPAProveedores
                 '  WFirmaAct &= "" & "<p>- Los pagos del 03/01/2020, se trasladan al día 10/01/2020.</p></h4>"
 
                 If _EsPellital() Then
-                    .HTMLBody = "<p>" & _body & "</p>" & "<br/><br/><p><strong>Atentamente</strong><br/>SURFACTAN S.A</p>" & WFirmaAct & .HTMLBody
-                Else
                     .HTMLBody = "<p>" & _body & "</p>" & "<br/><br/><p><strong>Atentamente</strong><br/>PELLITAL S.A</p>" & WFirmaAct & .HTMLBody
+                Else
+                    .HTMLBody = "<p>" & _body & "</p>" & "<br/><br/><p><strong>Atentamente</strong><br/>SURFACTAN S.A</p>" & WFirmaAct & .HTMLBody
                 End If
 
                 For Each adjunto As String In _adjuntos
