@@ -157,6 +157,10 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
                     .Item("Valor") = Trim(.Item("Valor"))
 
                 End If
+
+                Debug.Print(.Item("Valor"))
+                Debug.Print(.Item("Std"))
+
             End With
         Next
 
@@ -190,8 +194,11 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
                     .Item("Std") = _ReemplazarDescripcionParametroPorIngles(.Item("Std"))
 
                     If OrDefault(.Item("Valor"), "").ToString.Contains("Cumple") Then .Item("Valor") = "Complies"
+                    If OrDefault(.Item("Valor"), "").ToString.Contains("CUMPLE") Then .Item("Valor") = "Complies"
 
                 End If
+
+                Debug.Print("Std: " & .Item("Std"))
 
             End With
         Next
@@ -303,7 +310,7 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
         Dim WImpreNotasExternas As String = ""
 
         If WMetodos.Rows.Count > 0 Then
-            WImpreMetodos &= "Metodología Interna: "
+            WImpreMetodos &= IIf(cmbIdioma.SelectedIndex = 1, "Specification of Surfactan. Method No ", "Metodología Interna: ")
             For Each row As DataRow In WMetodos.Rows
                 If row.Item("Metodo") <> 0 Then WImpreMetodos &= row.Item("Metodo") & ", "
             Next
@@ -376,6 +383,8 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
 
             Dim wTipoSalida As Integer = cmbTipoSalida.SelectedIndex
 
+            If wTipoSalida = 0 Then wTipoSalida = 1
+
             If wTipoSalida = 2 Or wTipoSalida = 3 Then
                 wTipoSalida = 8
 
@@ -421,6 +430,8 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
             WTipoRepote = 2
 
             Dim wTipoSalida As Integer = cmbTipoSalida.SelectedIndex
+
+            If wTipoSalida = 0 Then wTipoSalida = 1
 
             If wTipoSalida = 2 Or wTipoSalida = 3 Then
 
@@ -515,9 +526,9 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
             Dim WPathTempCertificado As String = "C:\ImpreCertificados\" & wPartida & "\"
 
             Select Case wTipoSalida
-                Case 1, 6
+                Case 2, 6
                     .Imprimir()
-                Case 2
+                Case 1
                     .Mostrar()
                 Case 8
                     If Directory.Exists("C:\ImpreCertificados\" & wPartida) Then Directory.Delete("C:\ImpreCertificados\" & wPartida, True)
@@ -630,9 +641,8 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
     Private Function _ReemplazarDescripcionParametroPorIngles(ByVal Parametro As String) As String
 
         For Each pair As KeyValuePair(Of String, String) In WDescParametrosIngles
-            If Parametro.Contains(pair.Key) Then
-                Return Parametro.Replace(pair.Key, pair.Value)
-            End If
+            If Parametro.Contains(pair.Key) Then Return Parametro.Replace(pair.Key, pair.Value)
+            If Parametro.Contains(pair.Key.ToUpper) Then Return Parametro.Replace(pair.Key.ToUpper, pair.Value)
         Next
 
         Return Parametro

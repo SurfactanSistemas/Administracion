@@ -512,11 +512,12 @@ Namespace Entidades
                 If Val(wDesdeEspecif) = 0 And Val(wHastaEspecif) <> 0 Then
 
                     If Val(wMenorIgualEspecif) = 1 Then
-                        If Val(wTipoEspecif) = 0 Then
-                            WParam = String.Format("< {0} {1}", wHastaEspecif, wUnidadEspecif)
-                        Else
-                            WParam = String.Format("Máximo {0} {1}", wHastaEspecif, wUnidadEspecif)
-                        End If
+                        'If Val(wTipoEspecif) = 0 Then
+                        '    WParam = String.Format("< {0} {1}", wHastaEspecif, wUnidadEspecif)
+                        'Else
+
+                        'End If
+                        WParam = String.Format("Máximo {0} {1}", wHastaEspecif, wUnidadEspecif)
                     Else
                         WParam = String.Format("Menor a {0} {1}", wHastaEspecif, wUnidadEspecif)
                     End If
