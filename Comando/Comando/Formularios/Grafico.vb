@@ -337,6 +337,8 @@ Public Class Grafico
 
                 If Not IsDBNull(Tabla.Rows(i).Item(1)) AndAlso Not WLineas.Contains(Tabla.Rows(i).Item(1)) Then
 
+                    Debug.Print(Tabla.Rows(i).Item(1))
+
                     WLineas(WIndiceLineas) = Tabla.Rows(i).Item(1)
                     WIndiceLineas += 1
 
@@ -371,7 +373,12 @@ Public Class Grafico
 
             Titulo &= " -" & vbCrLf & "- Periodos: " & _Right(Tabla.Rows(0).Item(16), 4)
 
+            Dim x = Tabla.Rows(0)
+
+
             For i = 1 To Tabla.Rows.Count - 1
+
+                x = Tabla.Rows(i)
 
                 Titulo &= ", " & _Right(Tabla.Rows(i).Item(WUltimoMes), 4)
 
@@ -387,6 +394,8 @@ Public Class Grafico
         WIndice3 = 0
 
         For Each _row As DataRow In Tabla.Rows
+
+            Debug.Print(_row.Item("Titulo1"))
 
             aux = "Período: " & _row.Item("Titulo1")
 

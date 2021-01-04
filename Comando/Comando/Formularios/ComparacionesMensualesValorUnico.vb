@@ -504,33 +504,37 @@ Public Class ComparacionesMensualesValorUnico
 
         _datos.Clear()
 
-        For i = 1 To datos.Rows.Count / 9
+        For i = 1 To datos.Rows.Count / 10
             _row = _datos.NewRow()
             _datos.Rows.Add(_row)
         Next
 
-        Dim aux = -9
+        Dim aux = -10
 
         For i = 0 To _datos.Rows.Count - 1
 
             With _datos.Rows(i)
 
-                aux += 9
+                aux += 10
+
+                Dim k = datos.Rows(aux)
 
                 ' Asignamos los datos generales segun el primer registro de cada año.
                 .Item("Tipo") = datos.Rows(aux).Item("Tipo")
                 .Item("Corte") = datos.Rows(aux).Item("Corte")
                 .Item("Titulo") = datos.Rows(aux).Item("Titulo")
+                Debug.Print(.Item("Titulo"))
                 .Item("Descripcion") = "Consolidado"
 
                 ' Extraemos los datos de las fechas e inicializamos los valores de cada uno en cero.
                 For j = 1 To 12
                     .Item("Valor" & j) = 0
+                    Debug.Print(datos.Rows(aux).Item("Titulo" & j))
                     .Item("Titulo" & j) = datos.Rows(aux).Item("Titulo" & j)
                 Next
 
                 ' Recorremos los datos de todas las lineas por mes y vamos consolidando en el mes correspondiente.
-                For x = aux To aux + 8
+                For x = aux To aux + 9
 
                     For j = 1 To 12
 
