@@ -357,7 +357,7 @@ Public Class ComparacionesMensualesValorUnico
                 _FormatearAnual(datos)
 
                 ds.Tables.Add(datos)
-            Case 2
+            Case 2, 3
 
                 Dim anios(4) As Integer
 
@@ -1914,9 +1914,10 @@ Public Class ComparacionesMensualesValorUnico
                 Case 1 ' Ex anual
 
                     .Tipo = 3
-                Case 2 ' Ex Comparativo Mensual
+                Case 2, 3 ' Ex Comparativo Mensual
 
                     .Tipo = 4
+                    .ComparativoAnualizado = ckComparativoMensualPeriodosAnual.Checked
             End Select
 
             If rbMensualComparativo.Checked Then
@@ -2712,7 +2713,7 @@ Public Class ComparacionesMensualesValorUnico
             gbComparativoDiario.Enabled = False
             gbMensualComparativo.Enabled = False
             cmbPeriodo.Enabled = True
-            cmbPeriodo.DataSource = {"Mensual", "Comparativo Entre Lineas", "Comparativo Entre Periodos"}
+            cmbPeriodo.DataSource = {"Mensual", "Comparativo Entre Lineas", "Comparativo Entre Periodos", "Comparativo Entre Periodos Acumulado por Año"}
             txtMesDesde.Focus()
         End If
 

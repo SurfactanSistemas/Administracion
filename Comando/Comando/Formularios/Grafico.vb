@@ -15,6 +15,7 @@ Public Class Grafico
     Public Property Tipo As Integer
 
     Public Property Titulo As String
+    Public Property ComparativoAnualizado As Boolean = False
 
     Public WColorBasico
 
@@ -380,7 +381,7 @@ Public Class Grafico
 
                 x = Tabla.Rows(i)
 
-                Titulo &= ", " & _Right(Tabla.Rows(i).Item(WUltimoMes), 4)
+                If Not Titulo.Contains(_Right(Tabla.Rows(i).Item(WUltimoMes), 4)) Then Titulo &= ", " & _Right(Tabla.Rows(i).Item(WUltimoMes), 4)
 
             Next
 
@@ -439,11 +440,11 @@ Public Class Grafico
 
                     'If i = 12 Then Stop
 
-                    wacu = 0.0
+                    If Not ComparativoAnualizado Then wacu = 0.0
 
                     If Not IsDBNull(.Item("Valor" & i)) Then
 
-                        wacu = Val(formatonumerico(.Item("Valor" & i)))
+                        wacu += Val(formatonumerico(.Item("Valor" & i)))
 
                     End If
 
@@ -456,7 +457,7 @@ Public Class Grafico
                         Exit For
                     End If
 
-                    Chart1.Series(WSeries(WIndice3)).Points.AddXY(ztemp, wacu)
+                    If Not ComparativoAnualizado Then Chart1.Series(WSeries(WIndice3)).Points.AddXY(ztemp, wacu)
 
                     If Not WValores.Contains(.Item(2)) Then
 
@@ -464,6 +465,8 @@ Public Class Grafico
 
                         WIndice2 += 1
                     End If
+
+                    If ComparativoAnualizado AndAlso Trim(OrDefault(WValores(WIndice2 - 1), "")) <> "" Then ztemp = WValores(WIndice2 - 1)
 
                     If Not _wValoresDibujados.Contains(.Item(2)) Then
                         _wValoresDibujados(WIndice) = .Item(2)
@@ -476,6 +479,8 @@ Public Class Grafico
                 Next
 
             End With
+
+            If ComparativoAnualizado Then Chart1.Series(WSeries(WIndice3)).Points.AddXY(ztemp, wacu)
 
             wacu = 0.0
             WIndice3 += 1
@@ -754,6 +759,8 @@ Public Class Grafico
     End Sub
 
     Private Sub _HabilitarLabels()
+
+        ' Dim WAcum As Double = Chart1.Series.ToList.Sum(Function(s) s.Points.ToList.Sum(Function(p) p.YValues(0)))
 
         For Each serie In Chart1.Series
             _LabelsComoPorcentaje(serie)
@@ -1064,13 +1071,15 @@ Public Class Grafico
 
     End Sub
 
-    Private Sub _LabelsComoPorcentaje(ByVal serie As Series)
+    Private Sub _LabelsComoPorcentaje(ByVal serie As Series, Optional ByVal WAcum As Double = 0)
         Dim aux As Double
 
         aux = 0.0
 
         If serie.Points.Count > 1 Then
             aux = serie.Points.Sum(Function(p) p.YValues(0))
+            'ElseIf ComparativoAnualizado Then
+            'aux = WAcum
         End If
 
         ' Seguir trabajando en las leyendas de las diferencias.
@@ -1098,18 +1107,24 @@ Public Class Grafico
                         ComoPorce = False
 
                         For i = 0 To WConPorce.Length - 1
-                            If UCase(serie.Name).Contains(WConPorce(i)) Then
+                            If UCase(serie.Name).Contains(WConPorce(i)) Or UCase(.AxisLabel).Contains(WConPorce(i)) Then
                                 ComoPorce = True
                                 Exit For
                             End If
                         Next
+
+                        'If ComparativoAnualizado Then aux = .YValues(0)
 
                         If aux = 0 Then
                             ComoPorce = False
                         End If
 
                         If ComoPorce Then
+                            'If ComparativoAnualizado Then
+                            '    .Label = .YValues(0) & " " & "( % " & formatonumerico((.YValues(0) * 100) / aux) & " )"
+                            'Else
                             .Label = "% " & formatonumerico((.YValues(0) * 100) / aux)
+                            'End If
                         Else
                             .Label = formatonumerico(.YValues(0))
                         End If
