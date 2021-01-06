@@ -567,7 +567,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
             If Val(wDesdeEspecif) <> 0 And Val(wHastaEspecif) = 9999 Then
 
-                If Val(wMenorIgualEspecif) = 1 Then Return String.Format("Mínimo {0} {1}", wHastaEspecif, wUnidadEspecif)
+                If Val(wMenorIgualEspecif) = 1 Then Return String.Format("Mínimo {0} {1}", wDesdeEspecif, wUnidadEspecif)
 
                 Return String.Format("Mayor a {0} {1}", wHastaEspecif, wUnidadEspecif)
 

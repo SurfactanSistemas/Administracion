@@ -357,7 +357,7 @@ Public Class AutorizarPedido
 
             If Not IO.File.Exists(path) Then
 
-                WNombrePDF = String.Format("{0} P{1}.pdf", WProducto, WPartida)
+                WNombrePDF = String.Format("{0} {1}.pdf", WProducto, WPartida)
 
                 path = String.Format("{0}\{1}", WRuta, WNombrePDF)
 

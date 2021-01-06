@@ -612,7 +612,7 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
             For Each r As DataRow In WRenglonesCargaVNotas.Rows
                 Dim n() As DataRow = WCargaVNotas.Select("Nota = '" & r.Item("Nota") & "'", "Renglon")
                 For Each _n As DataRow In n
-                    WImpreCargaVNotas &= Trim(_n.Item("Observacion")) & " "
+                    WImpreCargaVNotas &= Trim(_n.Item("Observacion")) & ""
                 Next
                 WImpreCargaVNotas &= vbCrLf
             Next
@@ -630,7 +630,7 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
                 WDato = GetSingle("SELECT Descripcion = RTRIM(DescriEtiquetaIngles) + ' ' + RTRIM(DescripcionIngles) FROM Terminado WHERE Codigo = '" & lblTerminado.Text & "'")
             End If
         Else
-            WDato = GetSingle("SELECT Descripcion = CASE WHEN RTRIM(ISNULL(DescriEtiqueta, '')) <> '' THEN RTRIM(DescriEtiqueta) ELSE Descripcion END FROM Terminado WHERE Codigo = '" & lblTerminado.Text & "'")
+            WDato = GetSingle("SELECT Descripcion = CASE WHEN RTRIM(ISNULL(DescriEtiqueta, '')) <> '' THEN concat(Descripcion, ' - ', RTRIM(DescriEtiqueta)) ELSE Descripcion END FROM Terminado WHERE Codigo = '" & lblTerminado.Text & "'")
         End If
 
         If WDato IsNot Nothing Then Return Trim(OrDefault(WDato.Item("Descripcion"), ""))
@@ -748,6 +748,8 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
             If Trim(txtCliente.Text) = "" Then : Exit Sub : End If
 
             lblDescCliente.Text = ""
+
+            txtCliente.Text = Util.Clases.Helper.FormatoCodigoCliente(txtCliente.Text)
 
             Dim WCliente As DataRow = GetSingle("SELECT Razon FROM Cliente WHERE Cliente = '" & txtCliente.Text & "'")
 
