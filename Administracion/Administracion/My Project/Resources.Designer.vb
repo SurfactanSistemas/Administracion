@@ -403,6 +403,16 @@ Namespace My.Resources
         '''<summary>
         '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property istockphoto_964877162_170667a() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("istockphoto-964877162-170667a", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property Limpiar() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("Limpiar", resourceCulture)
@@ -526,6 +536,16 @@ Namespace My.Resources
         Friend ReadOnly Property Sin_título_2() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("Sin_título_2", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property Solicitud_Fondos() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Solicitud_Fondos", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

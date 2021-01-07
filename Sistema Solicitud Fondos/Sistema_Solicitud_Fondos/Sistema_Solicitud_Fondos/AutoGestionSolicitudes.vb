@@ -10,10 +10,10 @@ Public Class AutoGestionSolicitudes
 
     Private Sub CargarGrilla()
         Dim SQLCnslt As String = "SELECT s.NroSolicitud, s.Solicitante, s.Fecha, s.OrdFecha, " _
-                                 & "Tipo = IIF(s.Tipo = 1, 'Pago Prov.',  'Varios'), " _
+                                 & "Tipo = IIF(s.Tipo = 1, 'Prov.',  'Varios'), " _
                                  & "Destino = IIF(s.Proveedor = '',c.Descripcion, p.Nombre), s.Titulo, " _
                                  & "Moneda = IIF(s.Moneda = 2, 'U$D',  '$'), s.Importe, s.FechaRequerida, " _
-                                 & "s.OrdFechaRequerida " _
+                                 & "s.OrdFechaRequerida, Estado = IIF(s.Estado = '', '', s.Estado) " _
                                  & "FROM SolicitudFondos s LEFT JOIN Proveedor p ON s.Proveedor = p.Proveedor " _
                                  & "LEFT JOIN Cuenta c ON s.Cuenta = c.Cuenta " _
                                  & "WHERE s.OrdenPago = '' AND s.Solicitante = '" & Operador.Descripcion & "'" _
@@ -23,16 +23,25 @@ Public Class AutoGestionSolicitudes
             If tablaSoli.Rows.Count > 0 Then
                 DGV_Solicitudes.DataSource = tablaSoli
             End If
-
+            PintarAutorizadosRechazados()
 
         Catch ex As Exception
 
         End Try
     End Sub
 
-
-
-
+    Private Sub PintarAutorizadosRechazados()
+        For Each row As DataGridViewRow In DGV_Solicitudes.Rows
+            With row
+                If Trim(IIf(IsDBNull(.Cells("Estado").Value), "", .Cells("Estado").Value)) = "AUTORIZO" Then
+                    row.DefaultCellStyle.BackColor = Color.Green
+                End If
+                If Trim(IIf(IsDBNull(.Cells("Estado").Value), "", .Cells("Estado").Value)) = "RECHAZADO" Then
+                    row.DefaultCellStyle.BackColor = Color.Red
+                End If
+            End With
+        Next
+    End Sub
     Private Sub DGV_Solicitudes_CellMouseDoubleClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DGV_Solicitudes.CellMouseDoubleClick
         If e.ColumnIndex > -1 Then
             With New Ingreso_Solicitud(DGV_Solicitudes.CurrentRow.Cells(0).Value)
@@ -92,10 +101,8 @@ Public Class AutoGestionSolicitudes
         Dim Filtro As String = ""
         
         Filtro = Filtro & "(convert(NroSolicitud, System.String) LIKE '%" & txt_Filtro.Text & "%' OR Solicitante LIKE '%" & txt_Filtro.Text & "%' " _
-                                                & "OR Fecha LIKE '%" & txt_Filtro.Text & "%' OR Tipo LIKE '%" & txt_Filtro.Text & "%' " _
-                                                & "OR Destino LIKE '%" & txt_Filtro.Text & "%' OR Titulo LIKE '%" & txt_Filtro.Text & "%' " _
-                                                & "OR Moneda LIKE '%" & txt_Filtro.Text & "%' OR convert(Importe, System.String) LIKE '%" & txt_Filtro.Text & "%' " _
-                                                & "OR FechaRequerida LIKE '%" & txt_Filtro.Text & "%')"
+                                                & "OR Fecha LIKE '%" & txt_Filtro.Text & "%' OR Destino LIKE '%" & txt_Filtro.Text & "%'" _
+                                                & " OR Titulo LIKE '%" & txt_Filtro.Text & "%' OR FechaRequerida LIKE '%" & txt_Filtro.Text & "%')"
 
         'APLICO EL FILTRO
         Dim tabla As DataTable = DGV_Solicitudes.DataSource
@@ -103,6 +110,8 @@ Public Class AutoGestionSolicitudes
         tabla.DefaultView.RowFilter = Filtro
 
         ActualizarTotales()
+
+        PintarAutorizadosRechazados()
 
     End Sub
 
@@ -136,12 +145,32 @@ Public Class AutoGestionSolicitudes
     Private Sub btn_ImprimeListado_Click(sender As Object, e As EventArgs) Handles btn_ImprimeListado.Click
         Dim Tablareporte As DataTable = New DBAuxi.ListadoGrillaDataTable
 
+        Dim ImportePesos As Double
+        Dim ImporteDolares As Double
+
+
         For Each row As DataGridViewRow In DGV_Solicitudes.Rows
             With row
+
+                If Trim(.Cells("Moneda").Value) = "$" Then
+                    ImportePesos = .Cells("Importe").Value
+                    ImporteDolares = 0.0
+                Else
+                    ImportePesos = 0.0
+                    ImporteDolares = .Cells("Importe").Value
+                End If
+
+                Dim SQLCnslt As String = "SELECT Efectivo_Chk, Transferencia_Chk, ECheq_Chk, CheqTerceros_Chk, CheqPropio_Chk " _
+                                         & "FROM SolicitudFondos WHERE NroSolicitud = '" & .Cells("NroSolicitud").Value & "'"
+                Dim RowSoli As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+
+
                 Tablareporte.Rows.Add(.Cells("NroSolicitud").Value, .Cells("Solicitante").Value, .Cells("Fecha").Value,
-                                      .Cells("OrdFecha").Value, .Cells("Tipo").Value, .Cells("Destino").Value,
-                                      .Cells("Titulo").Value, .Cells("Moneda").Value, .Cells("Importe").Value,
-                                      .Cells("FechaRequerida").Value, .Cells("OrdFechaRequerida").Value)
+                                                .Cells("OrdFecha").Value, .Cells("Tipo").Value, .Cells("Destino").Value,
+                                                .Cells("Titulo").Value, .Cells("Moneda").Value, ImportePesos,
+                                                .Cells("FechaRequerida").Value, .Cells("OrdFechaRequerida").Value, ImporteDolares,
+                                                RowSoli.Item("Efectivo_Chk"), RowSoli.Item("Transferencia_Chk"), RowSoli.Item("ECheq_Chk"),
+                                                RowSoli.Item("CheqTerceros_Chk"), RowSoli.Item("CheqPropio_Chk"))
             End With
         Next
 

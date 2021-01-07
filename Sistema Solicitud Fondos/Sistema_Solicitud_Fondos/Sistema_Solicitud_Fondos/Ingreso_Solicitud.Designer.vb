@@ -43,6 +43,7 @@ Partial Class Ingreso_Solicitud
         Me.Label9 = New System.Windows.Forms.Label()
         Me.chk_Efectivo = New System.Windows.Forms.CheckBox()
         Me.gp_FormasDePago = New System.Windows.Forms.GroupBox()
+        Me.chk_ChequePropio = New System.Windows.Forms.CheckBox()
         Me.chk_ChequeTerceros = New System.Windows.Forms.CheckBox()
         Me.chk_Echeq = New System.Windows.Forms.CheckBox()
         Me.chk_Tranferencia = New System.Windows.Forms.CheckBox()
@@ -52,13 +53,35 @@ Partial Class Ingreso_Solicitud
         Me.txt_CuentaDescrip = New System.Windows.Forms.TextBox()
         Me.btn_Grabar = New System.Windows.Forms.Button()
         Me.btn_Cancelar = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btn_Adjuntar = New System.Windows.Forms.Button()
         Me.btn_MostrarSolicitud = New System.Windows.Forms.Button()
         Me.btn_Limpiar = New System.Windows.Forms.Button()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.txt_Titulo = New System.Windows.Forms.TextBox()
+        Me.txt_Observaciones = New System.Windows.Forms.TextBox()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.gbx_Retenciones = New System.Windows.Forms.GroupBox()
+        Me.txt_TotalRetenciones = New System.Windows.Forms.TextBox()
+        Me.Label21 = New System.Windows.Forms.Label()
+        Me.txt_TotalApagar = New System.Windows.Forms.TextBox()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.txt_ImportePesos = New System.Windows.Forms.TextBox()
+        Me.txt_Paridad = New System.Windows.Forms.TextBox()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.txt_RetIVA = New System.Windows.Forms.TextBox()
+        Me.txt_RetIBru = New System.Windows.Forms.TextBox()
+        Me.txt_RetIBCiudad = New System.Windows.Forms.TextBox()
+        Me.txt_RetGanancia = New System.Windows.Forms.TextBox()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.lbl_TipoDolar = New System.Windows.Forms.Label()
+        Me.cbx_TipoDolar = New System.Windows.Forms.ComboBox()
         Me.panel1.SuspendLayout()
         Me.gp_FormasDePago.SuspendLayout()
+        Me.gbx_Retenciones.SuspendLayout()
         Me.SuspendLayout()
         '
         'panel1
@@ -206,7 +229,7 @@ Partial Class Ingreso_Solicitud
         Me.cbx_Moneda.Items.AddRange(New Object() {"", "Pesos", "Dolares"})
         Me.cbx_Moneda.Location = New System.Drawing.Point(59, 170)
         Me.cbx_Moneda.Name = "cbx_Moneda"
-        Me.cbx_Moneda.Size = New System.Drawing.Size(121, 21)
+        Me.cbx_Moneda.Size = New System.Drawing.Size(77, 21)
         Me.cbx_Moneda.TabIndex = 17
         '
         'Label8
@@ -220,7 +243,7 @@ Partial Class Ingreso_Solicitud
         '
         'txt_Importe
         '
-        Me.txt_Importe.Location = New System.Drawing.Point(244, 171)
+        Me.txt_Importe.Location = New System.Drawing.Point(348, 171)
         Me.txt_Importe.Name = "txt_Importe"
         Me.txt_Importe.Size = New System.Drawing.Size(100, 20)
         Me.txt_Importe.TabIndex = 19
@@ -228,7 +251,7 @@ Partial Class Ingreso_Solicitud
         '
         'txt_FechaRequerida
         '
-        Me.txt_FechaRequerida.Location = New System.Drawing.Point(97, 204)
+        Me.txt_FechaRequerida.Location = New System.Drawing.Point(107, 277)
         Me.txt_FechaRequerida.Mask = "00/00/0000"
         Me.txt_FechaRequerida.Name = "txt_FechaRequerida"
         Me.txt_FechaRequerida.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -238,7 +261,7 @@ Partial Class Ingreso_Solicitud
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(196, 173)
+        Me.Label9.Location = New System.Drawing.Point(300, 173)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(42, 13)
         Me.Label9.TabIndex = 21
@@ -256,16 +279,27 @@ Partial Class Ingreso_Solicitud
         '
         'gp_FormasDePago
         '
+        Me.gp_FormasDePago.Controls.Add(Me.chk_ChequePropio)
         Me.gp_FormasDePago.Controls.Add(Me.chk_ChequeTerceros)
         Me.gp_FormasDePago.Controls.Add(Me.chk_Echeq)
         Me.gp_FormasDePago.Controls.Add(Me.chk_Tranferencia)
         Me.gp_FormasDePago.Controls.Add(Me.chk_Efectivo)
-        Me.gp_FormasDePago.Location = New System.Drawing.Point(10, 232)
+        Me.gp_FormasDePago.Location = New System.Drawing.Point(11, 297)
         Me.gp_FormasDePago.Name = "gp_FormasDePago"
-        Me.gp_FormasDePago.Size = New System.Drawing.Size(304, 76)
+        Me.gp_FormasDePago.Size = New System.Drawing.Size(395, 76)
         Me.gp_FormasDePago.TabIndex = 23
         Me.gp_FormasDePago.TabStop = False
         Me.gp_FormasDePago.Text = "Formas de Pago"
+        '
+        'chk_ChequePropio
+        '
+        Me.chk_ChequePropio.AutoSize = True
+        Me.chk_ChequePropio.Location = New System.Drawing.Point(276, 28)
+        Me.chk_ChequePropio.Name = "chk_ChequePropio"
+        Me.chk_ChequePropio.Size = New System.Drawing.Size(96, 17)
+        Me.chk_ChequePropio.TabIndex = 26
+        Me.chk_ChequePropio.Text = "Cheque Propio"
+        Me.chk_ChequePropio.UseVisualStyleBackColor = True
         '
         'chk_ChequeTerceros
         '
@@ -299,17 +333,17 @@ Partial Class Ingreso_Solicitud
         '
         'txt_Concepto
         '
-        Me.txt_Concepto.Location = New System.Drawing.Point(70, 338)
-        Me.txt_Concepto.MaxLength = 100
+        Me.txt_Concepto.Location = New System.Drawing.Point(71, 431)
+        Me.txt_Concepto.MaxLength = 200
         Me.txt_Concepto.Multiline = True
         Me.txt_Concepto.Name = "txt_Concepto"
-        Me.txt_Concepto.Size = New System.Drawing.Size(359, 38)
+        Me.txt_Concepto.Size = New System.Drawing.Size(359, 79)
         Me.txt_Concepto.TabIndex = 24
         '
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(2, 207)
+        Me.Label10.Location = New System.Drawing.Point(12, 280)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(89, 13)
         Me.Label10.TabIndex = 25
@@ -318,7 +352,7 @@ Partial Class Ingreso_Solicitud
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(11, 341)
+        Me.Label11.Location = New System.Drawing.Point(12, 434)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(40, 13)
         Me.Label11.TabIndex = 26
@@ -351,14 +385,14 @@ Partial Class Ingreso_Solicitud
         Me.btn_Cancelar.Text = "CANCELAR"
         Me.btn_Cancelar.UseVisualStyleBackColor = True
         '
-        'Button1
+        'btn_Adjuntar
         '
-        Me.Button1.Location = New System.Drawing.Point(457, 152)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 45)
-        Me.Button1.TabIndex = 30
-        Me.Button1.Text = "ADJUNTAR ARCHIVOS"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btn_Adjuntar.Location = New System.Drawing.Point(457, 152)
+        Me.btn_Adjuntar.Name = "btn_Adjuntar"
+        Me.btn_Adjuntar.Size = New System.Drawing.Size(75, 45)
+        Me.btn_Adjuntar.TabIndex = 30
+        Me.btn_Adjuntar.Text = "ADJUNTAR ARCHIVOS"
+        Me.btn_Adjuntar.UseVisualStyleBackColor = True
         '
         'btn_MostrarSolicitud
         '
@@ -382,7 +416,7 @@ Partial Class Ingreso_Solicitud
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(12, 311)
+        Me.Label12.Location = New System.Drawing.Point(12, 407)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(33, 13)
         Me.Label12.TabIndex = 33
@@ -390,22 +424,244 @@ Partial Class Ingreso_Solicitud
         '
         'txt_Titulo
         '
-        Me.txt_Titulo.Location = New System.Drawing.Point(70, 311)
+        Me.txt_Titulo.Location = New System.Drawing.Point(71, 404)
         Me.txt_Titulo.MaxLength = 30
         Me.txt_Titulo.Name = "txt_Titulo"
         Me.txt_Titulo.Size = New System.Drawing.Size(359, 20)
         Me.txt_Titulo.TabIndex = 34
         '
+        'txt_Observaciones
+        '
+        Me.txt_Observaciones.Location = New System.Drawing.Point(71, 378)
+        Me.txt_Observaciones.MaxLength = 100
+        Me.txt_Observaciones.Name = "txt_Observaciones"
+        Me.txt_Observaciones.Size = New System.Drawing.Size(359, 20)
+        Me.txt_Observaciones.TabIndex = 36
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(2, 374)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(67, 26)
+        Me.Label13.TabIndex = 35
+        Me.Label13.Text = "Observacion" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "    de Pago"
+        '
+        'gbx_Retenciones
+        '
+        Me.gbx_Retenciones.Controls.Add(Me.txt_TotalRetenciones)
+        Me.gbx_Retenciones.Controls.Add(Me.Label21)
+        Me.gbx_Retenciones.Controls.Add(Me.txt_TotalApagar)
+        Me.gbx_Retenciones.Controls.Add(Me.Label19)
+        Me.gbx_Retenciones.Controls.Add(Me.Label20)
+        Me.gbx_Retenciones.Controls.Add(Me.txt_ImportePesos)
+        Me.gbx_Retenciones.Controls.Add(Me.txt_Paridad)
+        Me.gbx_Retenciones.Controls.Add(Me.Label18)
+        Me.gbx_Retenciones.Controls.Add(Me.Label17)
+        Me.gbx_Retenciones.Controls.Add(Me.Label16)
+        Me.gbx_Retenciones.Controls.Add(Me.Label15)
+        Me.gbx_Retenciones.Controls.Add(Me.txt_RetIVA)
+        Me.gbx_Retenciones.Controls.Add(Me.txt_RetIBru)
+        Me.gbx_Retenciones.Controls.Add(Me.txt_RetIBCiudad)
+        Me.gbx_Retenciones.Controls.Add(Me.txt_RetGanancia)
+        Me.gbx_Retenciones.Controls.Add(Me.Label14)
+        Me.gbx_Retenciones.Location = New System.Drawing.Point(2, 193)
+        Me.gbx_Retenciones.Name = "gbx_Retenciones"
+        Me.gbx_Retenciones.Size = New System.Drawing.Size(450, 83)
+        Me.gbx_Retenciones.TabIndex = 37
+        Me.gbx_Retenciones.TabStop = False
+        Me.gbx_Retenciones.Text = "Retenciones"
+        '
+        'txt_TotalRetenciones
+        '
+        Me.txt_TotalRetenciones.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txt_TotalRetenciones.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txt_TotalRetenciones.Location = New System.Drawing.Point(363, 19)
+        Me.txt_TotalRetenciones.Name = "txt_TotalRetenciones"
+        Me.txt_TotalRetenciones.ReadOnly = True
+        Me.txt_TotalRetenciones.Size = New System.Drawing.Size(84, 20)
+        Me.txt_TotalRetenciones.TabIndex = 20
+        Me.txt_TotalRetenciones.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label21
+        '
+        Me.Label21.AutoSize = True
+        Me.Label21.Location = New System.Drawing.Point(296, 47)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(53, 26)
+        Me.Label21.TabIndex = 47
+        Me.Label21.Text = "     Total " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "   a Pagar" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        '
+        'txt_TotalApagar
+        '
+        Me.txt_TotalApagar.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txt_TotalApagar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txt_TotalApagar.Location = New System.Drawing.Point(363, 51)
+        Me.txt_TotalApagar.Name = "txt_TotalApagar"
+        Me.txt_TotalApagar.ReadOnly = True
+        Me.txt_TotalApagar.Size = New System.Drawing.Size(84, 20)
+        Me.txt_TotalApagar.TabIndex = 46
+        Me.txt_TotalApagar.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Location = New System.Drawing.Point(157, 60)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(74, 13)
+        Me.Label19.TabIndex = 45
+        Me.Label19.Text = "Importe Pesos"
+        '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.Location = New System.Drawing.Point(6, 60)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(43, 13)
+        Me.Label20.TabIndex = 44
+        Me.Label20.Text = "Paridad"
+        '
+        'txt_ImportePesos
+        '
+        Me.txt_ImportePesos.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txt_ImportePesos.Location = New System.Drawing.Point(231, 57)
+        Me.txt_ImportePesos.Name = "txt_ImportePesos"
+        Me.txt_ImportePesos.ReadOnly = True
+        Me.txt_ImportePesos.Size = New System.Drawing.Size(64, 20)
+        Me.txt_ImportePesos.TabIndex = 43
+        Me.txt_ImportePesos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txt_Paridad
+        '
+        Me.txt_Paridad.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txt_Paridad.Location = New System.Drawing.Point(88, 57)
+        Me.txt_Paridad.Name = "txt_Paridad"
+        Me.txt_Paridad.ReadOnly = True
+        Me.txt_Paridad.Size = New System.Drawing.Size(64, 20)
+        Me.txt_Paridad.TabIndex = 42
+        Me.txt_Paridad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Location = New System.Drawing.Point(169, 38)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(56, 13)
+        Me.Label18.TabIndex = 41
+        Me.Label18.Text = "Ret. I.V.A."
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Location = New System.Drawing.Point(164, 17)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(66, 13)
+        Me.Label17.TabIndex = 40
+        Me.Label17.Text = "Ret. I.Brutos"
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Location = New System.Drawing.Point(6, 38)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(76, 13)
+        Me.Label16.TabIndex = 39
+        Me.Label16.Text = "Ret. IB Ciudad"
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(6, 17)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(76, 13)
+        Me.Label15.TabIndex = 38
+        Me.Label15.Text = "Ret. Ganancia"
+        '
+        'txt_RetIVA
+        '
+        Me.txt_RetIVA.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txt_RetIVA.Location = New System.Drawing.Point(231, 35)
+        Me.txt_RetIVA.Name = "txt_RetIVA"
+        Me.txt_RetIVA.ReadOnly = True
+        Me.txt_RetIVA.Size = New System.Drawing.Size(64, 20)
+        Me.txt_RetIVA.TabIndex = 25
+        Me.txt_RetIVA.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txt_RetIBru
+        '
+        Me.txt_RetIBru.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txt_RetIBru.Location = New System.Drawing.Point(231, 14)
+        Me.txt_RetIBru.Name = "txt_RetIBru"
+        Me.txt_RetIBru.ReadOnly = True
+        Me.txt_RetIBru.Size = New System.Drawing.Size(64, 20)
+        Me.txt_RetIBru.TabIndex = 24
+        Me.txt_RetIBru.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txt_RetIBCiudad
+        '
+        Me.txt_RetIBCiudad.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txt_RetIBCiudad.Location = New System.Drawing.Point(88, 35)
+        Me.txt_RetIBCiudad.Name = "txt_RetIBCiudad"
+        Me.txt_RetIBCiudad.ReadOnly = True
+        Me.txt_RetIBCiudad.Size = New System.Drawing.Size(64, 20)
+        Me.txt_RetIBCiudad.TabIndex = 23
+        Me.txt_RetIBCiudad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txt_RetGanancia
+        '
+        Me.txt_RetGanancia.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txt_RetGanancia.Location = New System.Drawing.Point(88, 14)
+        Me.txt_RetGanancia.Name = "txt_RetGanancia"
+        Me.txt_RetGanancia.ReadOnly = True
+        Me.txt_RetGanancia.Size = New System.Drawing.Size(64, 20)
+        Me.txt_RetGanancia.TabIndex = 22
+        Me.txt_RetGanancia.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(295, 19)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(67, 26)
+        Me.Label14.TabIndex = 21
+        Me.Label14.Text = "     Total " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Retenciones"
+        '
+        'lbl_TipoDolar
+        '
+        Me.lbl_TipoDolar.AutoSize = True
+        Me.lbl_TipoDolar.Location = New System.Drawing.Point(146, 174)
+        Me.lbl_TipoDolar.Name = "lbl_TipoDolar"
+        Me.lbl_TipoDolar.Size = New System.Drawing.Size(42, 13)
+        Me.lbl_TipoDolar.TabIndex = 39
+        Me.lbl_TipoDolar.Text = "T.Dolar"
+        Me.lbl_TipoDolar.Visible = False
+        '
+        'cbx_TipoDolar
+        '
+        Me.cbx_TipoDolar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbx_TipoDolar.FormattingEnabled = True
+        Me.cbx_TipoDolar.Items.AddRange(New Object() {"", "Divisa", "Nacion", "Informado"})
+        Me.cbx_TipoDolar.Location = New System.Drawing.Point(193, 171)
+        Me.cbx_TipoDolar.Name = "cbx_TipoDolar"
+        Me.cbx_TipoDolar.Size = New System.Drawing.Size(104, 21)
+        Me.cbx_TipoDolar.TabIndex = 38
+        Me.cbx_TipoDolar.Visible = False
+        '
         'Ingreso_Solicitud
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(539, 384)
+        Me.ClientSize = New System.Drawing.Size(539, 514)
+        Me.Controls.Add(Me.lbl_TipoDolar)
+        Me.Controls.Add(Me.cbx_TipoDolar)
+        Me.Controls.Add(Me.gbx_Retenciones)
+        Me.Controls.Add(Me.txt_Observaciones)
+        Me.Controls.Add(Me.Label13)
         Me.Controls.Add(Me.txt_Titulo)
         Me.Controls.Add(Me.Label12)
         Me.Controls.Add(Me.btn_Limpiar)
         Me.Controls.Add(Me.btn_MostrarSolicitud)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.btn_Adjuntar)
         Me.Controls.Add(Me.btn_Cancelar)
         Me.Controls.Add(Me.btn_Grabar)
         Me.Controls.Add(Me.txt_CuentaDescrip)
@@ -435,6 +691,8 @@ Partial Class Ingreso_Solicitud
         Me.panel1.PerformLayout()
         Me.gp_FormasDePago.ResumeLayout(False)
         Me.gp_FormasDePago.PerformLayout()
+        Me.gbx_Retenciones.ResumeLayout(False)
+        Me.gbx_Retenciones.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -469,9 +727,31 @@ Partial Class Ingreso_Solicitud
     Friend WithEvents txt_CuentaDescrip As System.Windows.Forms.TextBox
     Friend WithEvents btn_Grabar As System.Windows.Forms.Button
     Friend WithEvents btn_Cancelar As System.Windows.Forms.Button
-    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents btn_Adjuntar As System.Windows.Forms.Button
     Friend WithEvents btn_MostrarSolicitud As System.Windows.Forms.Button
     Friend WithEvents btn_Limpiar As System.Windows.Forms.Button
     Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents txt_Titulo As System.Windows.Forms.TextBox
+    Friend WithEvents chk_ChequePropio As System.Windows.Forms.CheckBox
+    Friend WithEvents txt_Observaciones As System.Windows.Forms.TextBox
+    Friend WithEvents Label13 As System.Windows.Forms.Label
+    Friend WithEvents gbx_Retenciones As System.Windows.Forms.GroupBox
+    Friend WithEvents txt_TotalRetenciones As System.Windows.Forms.TextBox
+    Friend WithEvents Label14 As System.Windows.Forms.Label
+    Friend WithEvents Label18 As System.Windows.Forms.Label
+    Friend WithEvents Label17 As System.Windows.Forms.Label
+    Friend WithEvents Label16 As System.Windows.Forms.Label
+    Friend WithEvents Label15 As System.Windows.Forms.Label
+    Friend WithEvents txt_RetIVA As System.Windows.Forms.TextBox
+    Friend WithEvents txt_RetIBru As System.Windows.Forms.TextBox
+    Friend WithEvents txt_RetIBCiudad As System.Windows.Forms.TextBox
+    Friend WithEvents txt_RetGanancia As System.Windows.Forms.TextBox
+    Friend WithEvents Label21 As System.Windows.Forms.Label
+    Friend WithEvents txt_TotalApagar As System.Windows.Forms.TextBox
+    Friend WithEvents Label19 As System.Windows.Forms.Label
+    Friend WithEvents Label20 As System.Windows.Forms.Label
+    Friend WithEvents txt_ImportePesos As System.Windows.Forms.TextBox
+    Friend WithEvents txt_Paridad As System.Windows.Forms.TextBox
+    Friend WithEvents lbl_TipoDolar As System.Windows.Forms.Label
+    Friend WithEvents cbx_TipoDolar As System.Windows.Forms.ComboBox
 End Class

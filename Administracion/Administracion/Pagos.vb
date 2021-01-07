@@ -5,6 +5,7 @@ Imports System.IO
 Imports Util.Clases
 Imports CrystalDecisions.CrystalReports.Engine
 Imports Microsoft.Office.Interop.Outlook
+Imports Sistema_Solicitud_Fondos
 
 Public Class Pagos
     Dim pagos As New List(Of DetalleCompraCuentaCorriente)
@@ -34,7 +35,7 @@ Public Class Pagos
     Private _SoloLectura As String = False
 
     Dim XTiporeg, XNumero2, XFecha2, XBanco2, XImporte2, XDestino, XEstado, XVencimiento, XVencimiento1, XTotal, XSaldo, XSaldoUs, XOrdFecha, XOrdVencimiento, XImpre, XNeto, XDate, XParam, XSql As String
-    
+
     Public Property SoloLectura As Boolean
         Get
             Return _SoloLectura
@@ -1043,9 +1044,29 @@ Public Class Pagos
     Private Sub _ListarSolicitudesFondos()
         Dim XClaves As New List(Of Object)
         Dim _Item As String
+
+        Dim SQLCnslt As String
+        Dim Filtro As String = ""
+
+        If Trim(txtProveedor.Text) <> "" Then
+            SQLCnslt = "Select Proveedor FROM Proveedor WHERE Proveedor = '" & Trim(txtProveedor.Text) & "'"
+            Dim row As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+            If row IsNot Nothing Then
+                Filtro = "AND s.Proveedor = '" & Trim(txtProveedor.Text) & "'"
+            Else
+                MsgBox("No es Proveedor valido el ingresado")
+                Exit Sub
+            End If
+            
+        End If
         'Dim SQLCnslt As String = "SELECT NroSolicitud, Descripcion = iif(Proveedor = '', Cuenta, Proveedor), Tipo, Moneda, Importe FROM SolicitudFondos WHERE Estado = 'AUTORIZO' AND OrdenPago = '' ORDER BY NroSolicitud"
 
-        Dim SQLCnslt As String = "SELECT s.NroSolicitud, Descripcion= IIF(s.Tipo = 1, 'Pago Prov.',  'Varios'), Destino = IIF(s.Proveedor = '',c.Descripcion, p.Nombre), s.Tipo, Moneda, s.Importe FROM SolicitudFondos s LEFT JOIN Proveedor p ON s.Proveedor = p.Proveedor LEFT JOIN Cuenta c ON s.Cuenta = c.Cuenta WHERE s.Estado = 'AUTORIZO' AND s.OrdenPago = '' ORDER BY s.NroSolicitud"
+        SQLCnslt = "SELECT s.NroSolicitud, Descripcion= IIF(s.Tipo = 1, 'Pago Prov.',  'Varios'), " _
+                                 & "Destino = IIF(s.Proveedor = '',c.Descripcion, p.Nombre), s.Tipo, Moneda, s.Importe " _
+                                 & "FROM SolicitudFondos s LEFT JOIN Proveedor p ON s.Proveedor = p.Proveedor " _
+                                 & "LEFT JOIN Cuenta c ON s.Cuenta = c.Cuenta " _
+                                 & "WHERE s.Estado = 'AUTORIZO' AND s.OrdenPago = '' " & Filtro & " " _
+                                 & "ORDER BY s.NroSolicitud"
 
         Try
             Dim TablaSoli As DataTable = GetAll(SQLCnslt, "SurfactanSa")
@@ -1066,7 +1087,7 @@ Public Class Pagos
                         Else
                             Moneda = "U$D"
                         End If
-                        _Item = LSet(Trim(.Item("NroSolicitud")), 6) & "   " & Tipo & "   " & Moneda & "  " & formatonumerico(.Item("Importe")) & "    " & Trim(.Item("Descripcion"))
+                        _Item = LSet(Trim(.Item("NroSolicitud")), 6) & "   " & Tipo & "   " & Moneda & "  " & formatonumerico(.Item("Importe")) & "    " & Trim(.Item("Destino"))
 
                         lstConsulta.Items.Add(_Item)
 
@@ -1079,6 +1100,8 @@ Public Class Pagos
                 _Claves = XClaves
 
                 _HabilitarConsulta()
+
+                _TipoConsulta = 5
 
             Else
                 _InhabilitarConsulta()
@@ -1285,10 +1308,10 @@ Public Class Pagos
             txtProveedor_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
         End If
 
-        
+
         _RecalcularRetenciones()
 
-       
+
 
         Dim ZZPagos As Double = 0
         Dim formaPagos As Double = 0
@@ -1342,7 +1365,7 @@ Public Class Pagos
 
     End Sub
 
-   
+
 
 
     Private Sub _TraerCtaCte(ByVal _Item As String, Optional ByVal indice As Integer = Nothing)
@@ -1573,7 +1596,7 @@ Public Class Pagos
                     '    End If
 
 
-               
+
                     With gridPagos.Rows(XRow)
                         .Cells(0).Value = XTipo
                         .Cells(1).Value = XLetra
@@ -1886,11 +1909,11 @@ Public Class Pagos
         Return traerParidad(txtFechaParidad.Text)
     End Function
 
-    Private Function traerParidad(ByVal ZZfecha As String) As String
+    Private Function traerParidad(ByVal ZZfecha As String, Optional ByVal Essoli As Boolean = False) As String
         ZZfecha = _Normalizarfecha(ZZfecha)
         Dim ZZParidad As String = "0"
         Dim cn As New SqlConnection()
-        Dim cm As New SqlCommand("SELECT CambioDivisa FROM Cambios WHERE Fecha = '" & Trim(ZZfecha) & "'")
+        Dim cm As New SqlCommand("SELECT Cambio, CambioDivisa FROM Cambios WHERE Fecha = '" & Trim(ZZfecha) & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)
@@ -1903,9 +1926,24 @@ Public Class Pagos
                     If .HasRows Then
                         .Read()
 
-                        If Not IsDBNull(.Item("CambioDivisa")) Then
-                            ZZParidad = _NormalizarNumero(.Item("CambioDivisa").ToString(), 4)
+                        If Essoli = False Then
+                            If Not IsDBNull(.Item("CambioDivisa")) Then
+                                ZZParidad = _NormalizarNumero(.Item("CambioDivisa").ToString(), 4)
+                            End If
+
+                        Else
+                            Dim SQLCnslt As String = "SELECT TipoDolar FROM SOlicitudFondos WHERE NroSolicitud = '" & NroSoliInterno & "'"
+                            Dim RowSoli As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+                            If RowSoli IsNot Nothing Then
+                                If RowSoli.Item("TipoDolar") = 2 Then
+                                    ZZParidad = _NormalizarNumero(.Item("Cambio").ToString(), 4)
+                                Else
+                                    ZZParidad = _NormalizarNumero(.Item("CambioDivisa").ToString(), 4)
+                                End If
+
+                            End If
                         End If
+                       
 
                     Else
                         If Not GenerarPDF Then MsgBox("No hay Paridad cargada para la fecha " & ZZfecha, MsgBoxStyle.Critical)
@@ -2802,6 +2840,7 @@ Public Class Pagos
             cm.CommandText = ZSql
             cm.ExecuteNonQuery()
 
+
         Catch ex As System.Exception
             MsgBox("Hubo un problema al querer Actualizar los datos de certificados de Retenciones de la Orden de Pagos en la Base de Datos." & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
             Exit Sub
@@ -2815,9 +2854,21 @@ Public Class Pagos
                 'ACTUALIZAMOS LA TABLA CON EL NUMERO DE ORDEN DE PAGO
                 Dim SQLCnlst As String = "UPDATE SolicitudFondos SET OrdenPago = '" & Trim(txtOrdenPago.Text) & "' WHERE NroSolicitud = '" & NroSoliInterno & "'"
                 ExecuteNonQueries("SurfactanSa", {SQLCnlst})
+
+
+                Dim WFormula As String = "{SolicitudFondos.NroSolicitud} = " & NroSoliInterno & ""
+
+                With New VistaPrevia
+                    .Reporte = New Reporte_SolicitudFondos
+                    .Formula = WFormula
+                    '.Formula = "{SolicitudFondos.NroSolicitud} > " & (NRO_SOLICITUD - 1) & " AND {SolicitudFondos.NroSolicitud} < " & (NRO_SOLICITUD + 1) & ""
+
+                    .Imprimir()
+                End With
+
             End If
         Catch ex As System.Exception
-            MsgBox("Hubo un problema al querer Actualizar los datos en la tabla Solicitud de Fondos", MsgBoxStyle.Critical)
+            MsgBox("Hubo un problema al querer Actualizar los datos en la tabla Solicitud de Fondos o al imprimir la solicitud", MsgBoxStyle.Critical)
             Exit Sub
         End Try
         
@@ -2849,7 +2900,7 @@ Public Class Pagos
         ' Imprimimos los comprobantes pertinentes.
         btnImprimir.PerformClick()
 
-        'btnEnviarAviso_Click(Nothing, Nothing)
+        btnEnviarAviso_Click(Nothing, Nothing)
 
         ' Limpiamos pantalla.
         btnLimpiar.PerformClick()
@@ -6381,10 +6432,7 @@ Public Class Pagos
                         If btn_ConsultaSoliFondos.Visible = False Then
                             _ListarCuentasContables()
                         End If
-                    Case 5
-                        lstConsulta.Items.Clear()
-                        _ListarSolicitudesFondos()
-                End Select
+                  End Select
 
             End With
 
@@ -6465,6 +6513,9 @@ Public Class Pagos
                     'CAMBIO PROVEEDOR A SOLO LECTURA QUE NO LO CAMBIEN
                     txtProveedor.ReadOnly = True
                     btn_ConsultaSoliFondos.Visible = True
+
+                    btnConsulta_Click(Nothing, Nothing)
+                    btn_ConsultaSoliFondos_Click(Nothing, Nothing)
 
                 Case Else
                     btn_ConsultaSoliFondos.Visible = False
@@ -8361,9 +8412,14 @@ Public Class Pagos
     Private Sub btn_ConsultaSoliFondos_Click(sender As Object, e As EventArgs) Handles btn_ConsultaSoliFondos.Click
 
         If NroSoliInterno <> 0 Then
-            With New MostrarSoliFondos(NroSoliInterno, traerParidad())
+            With New MostrarSoliFondos(NroSoliInterno, traerParidad(txtFechaParidad.Text, True))
                 .Show(Me)
             End With
         End If
+    End Sub
+
+    Private Sub btn_ListarSolicitudesFondos_Click(sender As Object, e As EventArgs) Handles btn_ListarSolicitudesFondos.Click
+        lstConsulta.Items.Clear()
+        _ListarSolicitudesFondos()
     End Sub
 End Class

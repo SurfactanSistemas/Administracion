@@ -36,8 +36,8 @@ Partial Class MostrarSoliFondos
         Me.Label6 = New System.Windows.Forms.Label()
         Me.txt_DescripDestino = New System.Windows.Forms.TextBox()
         Me.dgv_FormasPago = New Util.DBDataGridView()
-        Me.Label7 = New System.Windows.Forms.Label()
         Me.FormaPago = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.txt_ImporteTotal = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
@@ -45,6 +45,12 @@ Partial Class MostrarSoliFondos
         Me.txt_Detalle = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.btn_Cerrar = New System.Windows.Forms.Button()
+        Me.txt_DetalleDePago = New System.Windows.Forms.TextBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.txt_Titulo = New System.Windows.Forms.TextBox()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.txt_TipoParidad = New System.Windows.Forms.TextBox()
         Me.panel1.SuspendLayout()
         CType(Me.dgv_FormasPago, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -176,24 +182,15 @@ Partial Class MostrarSoliFondos
         Me.dgv_FormasPago.DefaultCellStyle = DataGridViewCellStyle1
         Me.dgv_FormasPago.DoubleBuffered = True
         Me.dgv_FormasPago.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.dgv_FormasPago.Location = New System.Drawing.Point(10, 241)
+        Me.dgv_FormasPago.Location = New System.Drawing.Point(10, 268)
         Me.dgv_FormasPago.Name = "dgv_FormasPago"
         Me.dgv_FormasPago.OrdenamientoColumnasHabilitado = True
         Me.dgv_FormasPago.RowHeadersWidth = 15
         Me.dgv_FormasPago.RowTemplate.Height = 20
         Me.dgv_FormasPago.ShowCellToolTips = False
         Me.dgv_FormasPago.SinClickDerecho = False
-        Me.dgv_FormasPago.Size = New System.Drawing.Size(399, 118)
+        Me.dgv_FormasPago.Size = New System.Drawing.Size(399, 132)
         Me.dgv_FormasPago.TabIndex = 16
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(7, 224)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(84, 13)
-        Me.Label7.TabIndex = 17
-        Me.Label7.Text = "Formas de Pago"
         '
         'FormaPago
         '
@@ -201,6 +198,15 @@ Partial Class MostrarSoliFondos
         Me.FormaPago.HeaderText = "Formas de Pago"
         Me.FormaPago.Name = "FormaPago"
         Me.FormaPago.ReadOnly = True
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(7, 251)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(84, 13)
+        Me.Label7.TabIndex = 17
+        Me.Label7.Text = "Formas de Pago"
         '
         'Label8
         '
@@ -243,7 +249,7 @@ Partial Class MostrarSoliFondos
         '
         Me.txt_Detalle.BackColor = System.Drawing.Color.Aqua
         Me.txt_Detalle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txt_Detalle.Location = New System.Drawing.Point(81, 173)
+        Me.txt_Detalle.Location = New System.Drawing.Point(81, 201)
         Me.txt_Detalle.MaxLength = 100
         Me.txt_Detalle.Multiline = True
         Me.txt_Detalle.Name = "txt_Detalle"
@@ -253,7 +259,7 @@ Partial Class MostrarSoliFondos
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(12, 176)
+        Me.Label10.Location = New System.Drawing.Point(7, 204)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(40, 13)
         Me.Label10.TabIndex = 23
@@ -268,11 +274,73 @@ Partial Class MostrarSoliFondos
         Me.btn_Cerrar.Text = "CERRAR"
         Me.btn_Cerrar.UseVisualStyleBackColor = True
         '
+        'txt_DetalleDePago
+        '
+        Me.txt_DetalleDePago.BackColor = System.Drawing.Color.Aqua
+        Me.txt_DetalleDePago.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txt_DetalleDePago.Location = New System.Drawing.Point(75, 406)
+        Me.txt_DetalleDePago.MaxLength = 100
+        Me.txt_DetalleDePago.Multiline = True
+        Me.txt_DetalleDePago.Name = "txt_DetalleDePago"
+        Me.txt_DetalleDePago.Size = New System.Drawing.Size(328, 54)
+        Me.txt_DetalleDePago.TabIndex = 25
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(12, 409)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(55, 26)
+        Me.Label11.TabIndex = 26
+        Me.Label11.Text = "Detalle de" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "    Pago"
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(7, 178)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(33, 13)
+        Me.Label12.TabIndex = 30
+        Me.Label12.Text = "Titulo"
+        '
+        'txt_Titulo
+        '
+        Me.txt_Titulo.BackColor = System.Drawing.Color.Aqua
+        Me.txt_Titulo.Location = New System.Drawing.Point(81, 175)
+        Me.txt_Titulo.Name = "txt_Titulo"
+        Me.txt_Titulo.Size = New System.Drawing.Size(328, 20)
+        Me.txt_Titulo.TabIndex = 29
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(221, 150)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(56, 13)
+        Me.Label13.TabIndex = 32
+        Me.Label13.Text = "Tipo Dolar"
+        Me.Label13.Visible = False
+        '
+        'txt_TipoParidad
+        '
+        Me.txt_TipoParidad.BackColor = System.Drawing.Color.Aqua
+        Me.txt_TipoParidad.Location = New System.Drawing.Point(284, 147)
+        Me.txt_TipoParidad.Name = "txt_TipoParidad"
+        Me.txt_TipoParidad.Size = New System.Drawing.Size(107, 20)
+        Me.txt_TipoParidad.TabIndex = 31
+        Me.txt_TipoParidad.Visible = False
+        '
         'MostrarSoliFondos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(415, 368)
+        Me.ClientSize = New System.Drawing.Size(415, 464)
+        Me.Controls.Add(Me.Label13)
+        Me.Controls.Add(Me.txt_TipoParidad)
+        Me.Controls.Add(Me.Label12)
+        Me.Controls.Add(Me.txt_Titulo)
+        Me.Controls.Add(Me.Label11)
+        Me.Controls.Add(Me.txt_DetalleDePago)
         Me.Controls.Add(Me.btn_Cerrar)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.txt_Detalle)
@@ -293,6 +361,7 @@ Partial Class MostrarSoliFondos
         Me.Controls.Add(Me.txt_NroSolicitud)
         Me.Controls.Add(Me.panel1)
         Me.Name = "MostrarSoliFondos"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.panel1.ResumeLayout(False)
         Me.panel1.PerformLayout()
         CType(Me.dgv_FormasPago, System.ComponentModel.ISupportInitialize).EndInit()
@@ -322,4 +391,10 @@ Partial Class MostrarSoliFondos
     Friend WithEvents txt_Detalle As System.Windows.Forms.TextBox
     Friend WithEvents Label10 As System.Windows.Forms.Label
     Friend WithEvents btn_Cerrar As System.Windows.Forms.Button
+    Friend WithEvents txt_DetalleDePago As System.Windows.Forms.TextBox
+    Friend WithEvents Label11 As System.Windows.Forms.Label
+    Friend WithEvents Label12 As System.Windows.Forms.Label
+    Friend WithEvents txt_Titulo As System.Windows.Forms.TextBox
+    Friend WithEvents Label13 As System.Windows.Forms.Label
+    Friend WithEvents txt_TipoParidad As System.Windows.Forms.TextBox
 End Class

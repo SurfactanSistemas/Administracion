@@ -75,13 +75,6 @@ Partial Class Recibos
         Me.CustomLabel3 = New Administracion.CustomLabel()
         Me.txtRecibo = New Administracion.CustomTextBox()
         Me.gridFormasPago2 = New System.Windows.Forms.DataGridView()
-        Me.Tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.numero = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.banco = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.importe = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Lectora = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NroCuit = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.txtCliente = New Administracion.CustomTextBox()
         Me.txtNombre = New Administracion.CustomTextBox()
         Me.txtRetGanancias = New Administracion.CustomTextBox()
@@ -116,6 +109,13 @@ Partial Class Recibos
         Me.btnLimpiar = New Administracion.CustomButton()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.Tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.numero = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.banco = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.importe = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Lectora = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NroCuit = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -676,77 +676,8 @@ Partial Class Recibos
         Me.gridFormasPago2.RowHeadersDefaultCellStyle = DataGridViewCellStyle14
         Me.gridFormasPago2.RowHeadersWidth = 20
         Me.gridFormasPago2.ShowCellToolTips = False
-        Me.gridFormasPago2.Size = New System.Drawing.Size(381, 194)
+        Me.gridFormasPago2.Size = New System.Drawing.Size(388, 194)
         Me.gridFormasPago2.TabIndex = 119
-        '
-        'Tipo
-        '
-        Me.Tipo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Tipo.DefaultCellStyle = DataGridViewCellStyle9
-        Me.Tipo.FillWeight = 53.0!
-        Me.Tipo.HeaderText = "Tipo"
-        Me.Tipo.MaxInputLength = 2
-        Me.Tipo.Name = "Tipo"
-        Me.Tipo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Tipo.Width = 34
-        '
-        'numero
-        '
-        Me.numero.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.numero.DefaultCellStyle = DataGridViewCellStyle10
-        Me.numero.FillWeight = 180.0!
-        Me.numero.HeaderText = "Numero/Cta"
-        Me.numero.MaxInputLength = 8
-        Me.numero.Name = "numero"
-        Me.numero.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.numero.Width = 70
-        '
-        'fecha
-        '
-        Me.fecha.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.fecha.DefaultCellStyle = DataGridViewCellStyle11
-        Me.fecha.FillWeight = 120.0!
-        Me.fecha.HeaderText = "Fecha"
-        Me.fecha.MaxInputLength = 10
-        Me.fecha.Name = "fecha"
-        Me.fecha.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.fecha.Width = 90
-        '
-        'banco
-        '
-        Me.banco.FillWeight = 90.0!
-        Me.banco.HeaderText = "Banco"
-        Me.banco.Name = "banco"
-        Me.banco.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'importe
-        '
-        Me.importe.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle12.Format = "N2"
-        DataGridViewCellStyle12.NullValue = Nothing
-        Me.importe.DefaultCellStyle = DataGridViewCellStyle12
-        Me.importe.FillWeight = 80.0!
-        Me.importe.HeaderText = "Importe ($)"
-        Me.importe.Name = "importe"
-        Me.importe.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.importe.Width = 63
-        '
-        'Lectora
-        '
-        Me.Lectora.HeaderText = "Lectora"
-        Me.Lectora.Name = "Lectora"
-        Me.Lectora.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Lectora.Visible = False
-        '
-        'NroCuit
-        '
-        Me.NroCuit.HeaderText = "NroCuit"
-        Me.NroCuit.Name = "NroCuit"
-        Me.NroCuit.Visible = False
         '
         'txtCliente
         '
@@ -1241,6 +1172,77 @@ Partial Class Recibos
         Me.Panel3.Size = New System.Drawing.Size(883, 60)
         Me.Panel3.TabIndex = 134
         '
+        'Tipo
+        '
+        Me.Tipo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Tipo.DefaultCellStyle = DataGridViewCellStyle9
+        Me.Tipo.FillWeight = 53.0!
+        Me.Tipo.HeaderText = "Tipo"
+        Me.Tipo.MaxInputLength = 2
+        Me.Tipo.Name = "Tipo"
+        Me.Tipo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Tipo.Width = 25
+        '
+        'numero
+        '
+        Me.numero.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.numero.DefaultCellStyle = DataGridViewCellStyle10
+        Me.numero.FillWeight = 180.0!
+        Me.numero.HeaderText = "Numero/Cta"
+        Me.numero.MaxInputLength = 8
+        Me.numero.Name = "numero"
+        Me.numero.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.numero.Width = 60
+        '
+        'fecha
+        '
+        Me.fecha.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.fecha.DefaultCellStyle = DataGridViewCellStyle11
+        Me.fecha.FillWeight = 120.0!
+        Me.fecha.HeaderText = "Fecha"
+        Me.fecha.MaxInputLength = 10
+        Me.fecha.Name = "fecha"
+        Me.fecha.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.fecha.Width = 43
+        '
+        'banco
+        '
+        Me.banco.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.banco.FillWeight = 90.0!
+        Me.banco.HeaderText = "Banco"
+        Me.banco.Name = "banco"
+        Me.banco.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.banco.Width = 44
+        '
+        'importe
+        '
+        Me.importe.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle12.Format = "N2"
+        DataGridViewCellStyle12.NullValue = Nothing
+        Me.importe.DefaultCellStyle = DataGridViewCellStyle12
+        Me.importe.FillWeight = 80.0!
+        Me.importe.HeaderText = "Importe ($)"
+        Me.importe.Name = "importe"
+        Me.importe.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.importe.Width = 75
+        '
+        'Lectora
+        '
+        Me.Lectora.HeaderText = "Lectora"
+        Me.Lectora.Name = "Lectora"
+        Me.Lectora.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Lectora.Visible = False
+        '
+        'NroCuit
+        '
+        Me.NroCuit.HeaderText = "NroCuit"
+        Me.NroCuit.Name = "NroCuit"
+        Me.NroCuit.Visible = False
+        '
         'Recibos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1324,13 +1326,6 @@ Partial Class Recibos
     Friend WithEvents CustomLabel14 As Administracion.CustomLabel
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents gridFormasPago2 As System.Windows.Forms.DataGridView
-    Friend WithEvents Tipo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents numero As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents fecha As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents banco As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents importe As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Lectora As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents NroCuit As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents btnCargarDatosFCE As System.Windows.Forms.Button
     Friend WithEvents txtCostoFCE As Administracion.CustomTextBox
     Friend WithEvents CustomLabel15 As Administracion.CustomLabel
@@ -1342,4 +1337,11 @@ Partial Class Recibos
     Friend WithEvents Importe2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ImporteMax As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents btnDetallesDifCambio As Administracion.CustomButton
+    Friend WithEvents Tipo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents numero As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents fecha As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents banco As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents importe As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Lectora As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents NroCuit As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

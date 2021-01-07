@@ -33,11 +33,13 @@ Partial Class inicio
         Me.txt_TituloMail = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txt_CuerpoMail = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.txt_ContraUsuario = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(167, 227)
+        Me.Button1.Location = New System.Drawing.Point(167, 252)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 23)
         Me.Button1.TabIndex = 0
@@ -50,6 +52,7 @@ Partial Class inicio
         Me.txtAccion.Name = "txtAccion"
         Me.txtAccion.Size = New System.Drawing.Size(37, 20)
         Me.txtAccion.TabIndex = 1
+        Me.txtAccion.Text = "3"
         '
         'txtRuta
         '
@@ -57,6 +60,7 @@ Partial Class inicio
         Me.txtRuta.Name = "txtRuta"
         Me.txtRuta.Size = New System.Drawing.Size(283, 20)
         Me.txtRuta.TabIndex = 2
+        Me.txtRuta.Text = "C:\Users\soporte3\Desktop\pruebaGestor"
         '
         'Label1
         '
@@ -79,7 +83,7 @@ Partial Class inicio
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(52, 102)
+        Me.Label3.Location = New System.Drawing.Point(52, 127)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(26, 13)
         Me.Label3.TabIndex = 6
@@ -87,7 +91,7 @@ Partial Class inicio
         '
         'txt_Mail
         '
-        Me.txt_Mail.Location = New System.Drawing.Point(101, 99)
+        Me.txt_Mail.Location = New System.Drawing.Point(101, 124)
         Me.txt_Mail.Name = "txt_Mail"
         Me.txt_Mail.Size = New System.Drawing.Size(283, 20)
         Me.txt_Mail.TabIndex = 5
@@ -95,7 +99,7 @@ Partial Class inicio
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(40, 128)
+        Me.Label4.Location = New System.Drawing.Point(40, 153)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(55, 13)
         Me.Label4.TabIndex = 8
@@ -103,7 +107,7 @@ Partial Class inicio
         '
         'txt_TituloMail
         '
-        Me.txt_TituloMail.Location = New System.Drawing.Point(101, 125)
+        Me.txt_TituloMail.Location = New System.Drawing.Point(101, 150)
         Me.txt_TituloMail.Name = "txt_TituloMail"
         Me.txt_TituloMail.Size = New System.Drawing.Size(283, 20)
         Me.txt_TituloMail.TabIndex = 7
@@ -111,7 +115,7 @@ Partial Class inicio
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(35, 154)
+        Me.Label5.Location = New System.Drawing.Point(35, 179)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(63, 13)
         Me.Label5.TabIndex = 10
@@ -119,17 +123,36 @@ Partial Class inicio
         '
         'txt_CuerpoMail
         '
-        Me.txt_CuerpoMail.Location = New System.Drawing.Point(101, 151)
+        Me.txt_CuerpoMail.Location = New System.Drawing.Point(101, 176)
         Me.txt_CuerpoMail.Multiline = True
         Me.txt_CuerpoMail.Name = "txt_CuerpoMail"
         Me.txt_CuerpoMail.Size = New System.Drawing.Size(283, 48)
         Me.txt_CuerpoMail.TabIndex = 9
         '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(21, 87)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(77, 13)
+        Me.Label6.TabIndex = 12
+        Me.Label6.Text = "Contra Usuario"
+        '
+        'txt_ContraUsuario
+        '
+        Me.txt_ContraUsuario.Location = New System.Drawing.Point(101, 84)
+        Me.txt_ContraUsuario.Name = "txt_ContraUsuario"
+        Me.txt_ContraUsuario.Size = New System.Drawing.Size(283, 20)
+        Me.txt_ContraUsuario.TabIndex = 11
+        Me.txt_ContraUsuario.Text = "olula"
+        '
         'inicio
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(405, 262)
+        Me.ClientSize = New System.Drawing.Size(405, 283)
+        Me.Controls.Add(Me.Label6)
+        Me.Controls.Add(Me.txt_ContraUsuario)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.txt_CuerpoMail)
         Me.Controls.Add(Me.Label4)
@@ -158,4 +181,6 @@ Partial Class inicio
     Friend WithEvents txt_TituloMail As System.Windows.Forms.TextBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents txt_CuerpoMail As System.Windows.Forms.TextBox
+    Friend WithEvents Label6 As System.Windows.Forms.Label
+    Friend WithEvents txt_ContraUsuario As System.Windows.Forms.TextBox
 End Class

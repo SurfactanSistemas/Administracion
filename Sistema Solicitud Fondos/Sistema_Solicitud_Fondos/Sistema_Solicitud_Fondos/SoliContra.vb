@@ -21,7 +21,7 @@
                 If UCase(txt_Contraseña.Text) = "AUTORIZO" Then
                     Dim Wowner As IContraseña = TryCast(Owner, IContraseña)
 
-                    If NroSolicitud <> 0 Then
+                    If NroSolicitud < 0 Then
                         If Wowner IsNot Nothing Then
                             Wowner.Autorizado("S", NroSolicitud)
                             Close()

@@ -2041,6 +2041,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Firma.JPG" />
+    <None Include="Resources\istockphoto-964877162-170667a1.jpg" />
+    <None Include="Resources\istockphoto-964877162-170667a.jpg" />
+    <None Include="Resources\Solicitud_Fondos.bmp" />
     <None Include="Resources\firmapelli.JPG" />
     <None Include="Resources\Image1.png" />
     <None Include="Resources\icono.png" />

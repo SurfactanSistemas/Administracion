@@ -11,8 +11,8 @@
 
         Dim SQLCnlst As String = "SELECT s.NroSolicitud, s.Solicitante, Tipo = IIF(s.Tipo = 1, 'Pago Prov.',  'Varios'), " _
                                  & "Destino = IIF(s.Proveedor = '',c.Descripcion, p.Nombre), s.Titulo, s.Concepto, " _
-                                 & "Moneda = IIF(s.Moneda = 2, 'U$D',  '$'), s.Importe, s.Proveedor, s.Cuenta, " _
-                                 & "Efectivo_Chk, Transferencia_Chk, ECheq_Chk , CheqTerceros_Chk " _
+                                 & "Moneda = IIF(s.Moneda = 2, 'U$D',  '$'), s.TipoDolar, s.Importe, s.Proveedor, s.Cuenta, ObservacionesPago, " _
+                                 & "Efectivo_Chk, Transferencia_Chk, ECheq_Chk, CheqTerceros_Chk, CheqPropio_Chk " _
                                  & "FROM SolicitudFondos s LEFT JOIN Proveedor p ON s.Proveedor = p.Proveedor " _
                                  & "LEFT JOIN Cuenta c ON s.Cuenta = c.Cuenta WHERE s.NroSolicitud = '" & NroSoli & "'   ORDER BY s.NroSolicitud"
 
@@ -43,7 +43,11 @@
 
                 End If
 
-                txt_Detalle.Text = .Item("Concepto")
+                txt_Titulo.Text = Trim(IIf(IsDBNull(.Item("Titulo")), "", .Item("Titulo")))
+
+                txt_Detalle.Text = Trim(IIf(IsDBNull(.Item("Concepto")), "", .Item("Concepto")))
+
+                txt_DetalleDePago.Text = Trim(IIf(IsDBNull(.Item("ObservacionesPago")), "", .Item("ObservacionesPago")))
 
                 If .Item("Efectivo_Chk") Then
                     dgv_FormasPago.Rows.Add("Efectivo")
@@ -57,9 +61,18 @@
                 If .Item("ECheq_Chk") Then
                     dgv_FormasPago.Rows.Add("Cheques Electronicos")
                 End If
+                If .Item("CheqPropio_Chk") Then
+                    dgv_FormasPago.Rows.Add("Cheques Propio")
+                End If
                 
             End With
         End If
 
     End Sub
+
+    Private Sub btn_Cerrar_Click(sender As Object, e As EventArgs) Handles btn_Cerrar.Click
+        Close()
+    End Sub
+
+    
 End Class

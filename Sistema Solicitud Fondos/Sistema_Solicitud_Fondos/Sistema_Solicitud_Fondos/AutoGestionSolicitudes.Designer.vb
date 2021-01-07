@@ -22,8 +22,8 @@ Partial Class AutoGestionSolicitudes
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.label1 = New System.Windows.Forms.Label()
@@ -31,6 +31,11 @@ Partial Class AutoGestionSolicitudes
         Me.btn_Cerrar = New System.Windows.Forms.Button()
         Me.txt_Filtro = New System.Windows.Forms.TextBox()
         Me.DGV_Solicitudes = New Util.DBDataGridView()
+        Me.btn_ImprimeListado = New System.Windows.Forms.Button()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.txt_TotalDolares = New System.Windows.Forms.TextBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.txt_TotalPesos = New System.Windows.Forms.TextBox()
         Me.NroSolicitud = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Solicitante = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -42,11 +47,7 @@ Partial Class AutoGestionSolicitudes
         Me.Importe = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FechaRequerida = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.OrdFechaRequerida = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.btn_ImprimeListado = New System.Windows.Forms.Button()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.txt_TotalDolares = New System.Windows.Forms.TextBox()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.txt_TotalPesos = New System.Windows.Forms.TextBox()
+        Me.Estado = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.panel1.SuspendLayout()
         CType(Me.DGV_Solicitudes, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -115,15 +116,15 @@ Partial Class AutoGestionSolicitudes
         '
         Me.DGV_Solicitudes.AllowUserToAddRows = False
         Me.DGV_Solicitudes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGV_Solicitudes.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NroSolicitud, Me.Solicitante, Me.Fecha, Me.OrdFecha, Me.Tipo, Me.Destino, Me.Titulo, Me.Moneda, Me.Importe, Me.FechaRequerida, Me.OrdFechaRequerida})
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGV_Solicitudes.DefaultCellStyle = DataGridViewCellStyle6
+        Me.DGV_Solicitudes.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NroSolicitud, Me.Solicitante, Me.Fecha, Me.OrdFecha, Me.Tipo, Me.Destino, Me.Titulo, Me.Moneda, Me.Importe, Me.FechaRequerida, Me.OrdFechaRequerida, Me.Estado})
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGV_Solicitudes.DefaultCellStyle = DataGridViewCellStyle2
         Me.DGV_Solicitudes.DoubleBuffered = True
         Me.DGV_Solicitudes.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.DGV_Solicitudes.Location = New System.Drawing.Point(7, 89)
@@ -136,6 +137,55 @@ Partial Class AutoGestionSolicitudes
         Me.DGV_Solicitudes.Size = New System.Drawing.Size(778, 287)
         Me.DGV_Solicitudes.TabIndex = 12
         '
+        'btn_ImprimeListado
+        '
+        Me.btn_ImprimeListado.Location = New System.Drawing.Point(21, 380)
+        Me.btn_ImprimeListado.Name = "btn_ImprimeListado"
+        Me.btn_ImprimeListado.Size = New System.Drawing.Size(75, 38)
+        Me.btn_ImprimeListado.TabIndex = 21
+        Me.btn_ImprimeListado.Text = "IMPRIME LISTADO"
+        Me.btn_ImprimeListado.UseVisualStyleBackColor = True
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(575, 393)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(70, 13)
+        Me.Label5.TabIndex = 20
+        Me.Label5.Text = "Total Dolares"
+        '
+        'txt_TotalDolares
+        '
+        Me.txt_TotalDolares.BackColor = System.Drawing.Color.Cyan
+        Me.txt_TotalDolares.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txt_TotalDolares.Location = New System.Drawing.Point(651, 390)
+        Me.txt_TotalDolares.Name = "txt_TotalDolares"
+        Me.txt_TotalDolares.ReadOnly = True
+        Me.txt_TotalDolares.Size = New System.Drawing.Size(124, 20)
+        Me.txt_TotalDolares.TabIndex = 19
+        Me.txt_TotalDolares.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(368, 393)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(63, 13)
+        Me.Label4.TabIndex = 18
+        Me.Label4.Text = "Total Pesos"
+        '
+        'txt_TotalPesos
+        '
+        Me.txt_TotalPesos.BackColor = System.Drawing.Color.Cyan
+        Me.txt_TotalPesos.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txt_TotalPesos.Location = New System.Drawing.Point(437, 390)
+        Me.txt_TotalPesos.Name = "txt_TotalPesos"
+        Me.txt_TotalPesos.ReadOnly = True
+        Me.txt_TotalPesos.Size = New System.Drawing.Size(124, 20)
+        Me.txt_TotalPesos.TabIndex = 17
+        Me.txt_TotalPesos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
         'NroSolicitud
         '
         Me.NroSolicitud.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
@@ -143,7 +193,7 @@ Partial Class AutoGestionSolicitudes
         Me.NroSolicitud.HeaderText = "Nro Soli"
         Me.NroSolicitud.Name = "NroSolicitud"
         Me.NroSolicitud.ReadOnly = True
-        Me.NroSolicitud.Width = 49
+        Me.NroSolicitud.Width = 69
         '
         'Solicitante
         '
@@ -210,10 +260,10 @@ Partial Class AutoGestionSolicitudes
         '
         Me.Importe.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Importe.DataPropertyName = "Importe"
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle5.Format = "N2"
-        DataGridViewCellStyle5.NullValue = Nothing
-        Me.Importe.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle1.Format = "N2"
+        DataGridViewCellStyle1.NullValue = Nothing
+        Me.Importe.DefaultCellStyle = DataGridViewCellStyle1
         Me.Importe.HeaderText = "Importe"
         Me.Importe.Name = "Importe"
         Me.Importe.ReadOnly = True
@@ -236,54 +286,11 @@ Partial Class AutoGestionSolicitudes
         Me.OrdFechaRequerida.ReadOnly = True
         Me.OrdFechaRequerida.Visible = False
         '
-        'btn_ImprimeListado
+        'Estado
         '
-        Me.btn_ImprimeListado.Location = New System.Drawing.Point(21, 380)
-        Me.btn_ImprimeListado.Name = "btn_ImprimeListado"
-        Me.btn_ImprimeListado.Size = New System.Drawing.Size(75, 38)
-        Me.btn_ImprimeListado.TabIndex = 21
-        Me.btn_ImprimeListado.Text = "IMPRIME LISTADO"
-        Me.btn_ImprimeListado.UseVisualStyleBackColor = True
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(575, 393)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(70, 13)
-        Me.Label5.TabIndex = 20
-        Me.Label5.Text = "Total Dolares"
-        '
-        'txt_TotalDolares
-        '
-        Me.txt_TotalDolares.BackColor = System.Drawing.Color.Cyan
-        Me.txt_TotalDolares.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txt_TotalDolares.Location = New System.Drawing.Point(651, 390)
-        Me.txt_TotalDolares.Name = "txt_TotalDolares"
-        Me.txt_TotalDolares.ReadOnly = True
-        Me.txt_TotalDolares.Size = New System.Drawing.Size(124, 20)
-        Me.txt_TotalDolares.TabIndex = 19
-        Me.txt_TotalDolares.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(368, 393)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(63, 13)
-        Me.Label4.TabIndex = 18
-        Me.Label4.Text = "Total Pesos"
-        '
-        'txt_TotalPesos
-        '
-        Me.txt_TotalPesos.BackColor = System.Drawing.Color.Cyan
-        Me.txt_TotalPesos.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txt_TotalPesos.Location = New System.Drawing.Point(437, 390)
-        Me.txt_TotalPesos.Name = "txt_TotalPesos"
-        Me.txt_TotalPesos.ReadOnly = True
-        Me.txt_TotalPesos.Size = New System.Drawing.Size(124, 20)
-        Me.txt_TotalPesos.TabIndex = 17
-        Me.txt_TotalPesos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.Estado.DataPropertyName = "Estado"
+        Me.Estado.HeaderText = "Estado"
+        Me.Estado.Name = "Estado"
         '
         'AutoGestionSolicitudes
         '
@@ -315,6 +322,11 @@ Partial Class AutoGestionSolicitudes
     Friend WithEvents btn_Cerrar As System.Windows.Forms.Button
     Friend WithEvents txt_Filtro As System.Windows.Forms.TextBox
     Friend WithEvents DGV_Solicitudes As Util.DBDataGridView
+    Friend WithEvents btn_ImprimeListado As System.Windows.Forms.Button
+    Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents txt_TotalDolares As System.Windows.Forms.TextBox
+    Friend WithEvents Label4 As System.Windows.Forms.Label
+    Friend WithEvents txt_TotalPesos As System.Windows.Forms.TextBox
     Friend WithEvents NroSolicitud As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Solicitante As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Fecha As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -326,9 +338,5 @@ Partial Class AutoGestionSolicitudes
     Friend WithEvents Importe As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents FechaRequerida As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents OrdFechaRequerida As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents btn_ImprimeListado As System.Windows.Forms.Button
-    Friend WithEvents Label5 As System.Windows.Forms.Label
-    Friend WithEvents txt_TotalDolares As System.Windows.Forms.TextBox
-    Friend WithEvents Label4 As System.Windows.Forms.Label
-    Friend WithEvents txt_TotalPesos As System.Windows.Forms.TextBox
+    Friend WithEvents Estado As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class
