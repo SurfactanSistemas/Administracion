@@ -360,16 +360,16 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
         '
         ' En caso de tener lugar, mandamos en una misma hoja. Caso contrario, enviamos en dos hojas.
         '
-        If dt.Rows.Count <= 28 Then
+        If dt.Rows.Count <= 28 And (WImpreCargaVNotas.Trim.Length + WImpreNotasExternas.Trim.Length) <= 1000 Then
 
             rpt = New certificadonuevofarma
             With rpt
                 .SetDataSource(dt)
                 .SetParameterValue("MetodoInterno", WImpreMetodos & Space(10) & WLoteOriginal)
 
-                .SetParameterValue("Nota2", WImpreNotasExternas)
+                .SetParameterValue("Nota2", WImpreNotasExternas.Trim)
                 .SetParameterValue("Nota3", "")
-                .SetParameterValue("Nota6", WImpreCargaVNotas)
+                .SetParameterValue("Nota6", WImpreCargaVNotas.Trim)
                 .SetParameterValue("ImpreVto", WImpreVto)
                 .SetParameterValue("CodRnpa", WCodRNPA)
                 .SetParameterValue("EnIngles", cmbIdioma.SelectedIndex = 1)

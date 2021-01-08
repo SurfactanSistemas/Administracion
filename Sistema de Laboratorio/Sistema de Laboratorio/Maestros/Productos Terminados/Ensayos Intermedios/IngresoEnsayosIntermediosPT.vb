@@ -714,6 +714,8 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                                 WDecimales = _CalcularCantidadDecimales(WDesde)
                                 If Val(WDecimales) < _CalcularCantidadDecimales(WHasta) Then WDecimales = _CalcularCantidadDecimales(WHasta)
 
+                                If WDecimales = 0 Then WDecimales = _CalcularCantidadDecimales(WValor)
+
                                 .Cells("Resultado").Value = WResultado
                                 .Cells("Valor").Value = WValor
 
@@ -1273,6 +1275,8 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
             Dim WDecimales As Short = _CalcularCantidadDecimales(wDesdeEspecif, 0)
 
             If WDecimales < _CalcularCantidadDecimales(wHastaEspecif, 0) Then WDecimales = _CalcularCantidadDecimales(wHastaEspecif, 0)
+
+            If WDecimales = 0 Then WDecimales = _CalcularCantidadDecimales(wValor)
 
             wValor = formatonumerico(wValor, WDecimales)
 
