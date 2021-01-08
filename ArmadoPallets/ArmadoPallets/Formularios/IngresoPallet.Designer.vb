@@ -22,10 +22,10 @@ Partial Class IngresoPallet
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LayoutPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.LayoutMenu = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel4 = New System.Windows.Forms.Panel()
@@ -64,15 +64,15 @@ Partial Class IngresoPallet
         Me.Panel7 = New System.Windows.Forms.Panel()
         Me.txtFechaAux2 = New System.Windows.Forms.MaskedTextBox()
         Me.txtFechaAux = New System.Windows.Forms.MaskedTextBox()
-        Me.dgvProductos = New System.Windows.Forms.DataGridView()
-        Me.Terminado = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DescTerminado = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Partida = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Envase = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DescEnvase = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CantidadUnidades = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.KgUnidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Tara = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.KgUnidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CantidadUnidades = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DescEnvase = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Envase = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Partida = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DescTerminado = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Terminado = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.dgvProductos = New System.Windows.Forms.DataGridView()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutMenu.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -513,6 +513,72 @@ Partial Class IngresoPallet
         Me.txtFechaAux.Size = New System.Drawing.Size(71, 13)
         Me.txtFechaAux.TabIndex = 1
         '
+        'Tara
+        '
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Tara.DefaultCellStyle = DataGridViewCellStyle4
+        Me.Tara.HeaderText = "Tara x Unidad"
+        Me.Tara.Name = "Tara"
+        '
+        'KgUnidad
+        '
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.KgUnidad.DefaultCellStyle = DataGridViewCellStyle3
+        Me.KgUnidad.HeaderText = "Kg x Unidad"
+        Me.KgUnidad.Name = "KgUnidad"
+        Me.KgUnidad.Width = 90
+        '
+        'CantidadUnidades
+        '
+        Me.CantidadUnidades.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.CantidadUnidades.DefaultCellStyle = DataGridViewCellStyle2
+        Me.CantidadUnidades.HeaderText = "Cant Envases"
+        Me.CantidadUnidades.MaxInputLength = 3
+        Me.CantidadUnidades.Name = "CantidadUnidades"
+        Me.CantidadUnidades.Width = 98
+        '
+        'DescEnvase
+        '
+        Me.DescEnvase.HeaderText = "Descripcion"
+        Me.DescEnvase.MinimumWidth = 150
+        Me.DescEnvase.Name = "DescEnvase"
+        Me.DescEnvase.ReadOnly = True
+        Me.DescEnvase.Width = 150
+        '
+        'Envase
+        '
+        Me.Envase.HeaderText = "Envase"
+        Me.Envase.MaxInputLength = 10
+        Me.Envase.Name = "Envase"
+        Me.Envase.ReadOnly = True
+        Me.Envase.Width = 70
+        '
+        'Partida
+        '
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Partida.DefaultCellStyle = DataGridViewCellStyle1
+        Me.Partida.HeaderText = "Partida"
+        Me.Partida.MaxInputLength = 6
+        Me.Partida.Name = "Partida"
+        Me.Partida.Width = 80
+        '
+        'DescTerminado
+        '
+        Me.DescTerminado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.DescTerminado.HeaderText = "Descripcion"
+        Me.DescTerminado.MinimumWidth = 100
+        Me.DescTerminado.Name = "DescTerminado"
+        Me.DescTerminado.ReadOnly = True
+        '
+        'Terminado
+        '
+        Me.Terminado.HeaderText = "Terminado"
+        Me.Terminado.MaxInputLength = 12
+        Me.Terminado.Name = "Terminado"
+        Me.Terminado.ReadOnly = True
+        Me.Terminado.Width = 80
+        '
         'dgvProductos
         '
         Me.dgvProductos.AllowUserToAddRows = False
@@ -527,72 +593,6 @@ Partial Class IngresoPallet
         Me.dgvProductos.ShowCellToolTips = False
         Me.dgvProductos.Size = New System.Drawing.Size(827, 175)
         Me.dgvProductos.TabIndex = 3
-        '
-        'Terminado
-        '
-        Me.Terminado.HeaderText = "Terminado"
-        Me.Terminado.MaxInputLength = 12
-        Me.Terminado.Name = "Terminado"
-        Me.Terminado.ReadOnly = True
-        Me.Terminado.Width = 80
-        '
-        'DescTerminado
-        '
-        Me.DescTerminado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.DescTerminado.HeaderText = "Descripcion"
-        Me.DescTerminado.MinimumWidth = 100
-        Me.DescTerminado.Name = "DescTerminado"
-        Me.DescTerminado.ReadOnly = True
-        '
-        'Partida
-        '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Partida.DefaultCellStyle = DataGridViewCellStyle1
-        Me.Partida.HeaderText = "Partida"
-        Me.Partida.MaxInputLength = 6
-        Me.Partida.Name = "Partida"
-        Me.Partida.Width = 80
-        '
-        'Envase
-        '
-        Me.Envase.HeaderText = "Envase"
-        Me.Envase.MaxInputLength = 10
-        Me.Envase.Name = "Envase"
-        Me.Envase.ReadOnly = True
-        Me.Envase.Width = 70
-        '
-        'DescEnvase
-        '
-        Me.DescEnvase.HeaderText = "Descripcion"
-        Me.DescEnvase.MinimumWidth = 150
-        Me.DescEnvase.Name = "DescEnvase"
-        Me.DescEnvase.ReadOnly = True
-        Me.DescEnvase.Width = 150
-        '
-        'CantidadUnidades
-        '
-        Me.CantidadUnidades.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.CantidadUnidades.DefaultCellStyle = DataGridViewCellStyle2
-        Me.CantidadUnidades.HeaderText = "Cant Envases"
-        Me.CantidadUnidades.MaxInputLength = 3
-        Me.CantidadUnidades.Name = "CantidadUnidades"
-        Me.CantidadUnidades.Width = 98
-        '
-        'KgUnidad
-        '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.KgUnidad.DefaultCellStyle = DataGridViewCellStyle3
-        Me.KgUnidad.HeaderText = "Kg x Unidad"
-        Me.KgUnidad.Name = "KgUnidad"
-        Me.KgUnidad.Width = 90
-        '
-        'Tara
-        '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Tara.DefaultCellStyle = DataGridViewCellStyle4
-        Me.Tara.HeaderText = "Tara x Unidad"
-        Me.Tara.Name = "Tara"
         '
         'IngresoPallet
         '
@@ -639,7 +639,6 @@ Partial Class IngresoPallet
     Friend WithEvents txtAltura As System.Windows.Forms.TextBox
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents dgvProductos As System.Windows.Forms.DataGridView
     Friend WithEvents Panel6 As System.Windows.Forms.Panel
     Friend WithEvents lblTotalKgNetos As System.Windows.Forms.Label
     Friend WithEvents lblTotalKgBrutos As System.Windows.Forms.Label
@@ -662,6 +661,9 @@ Partial Class IngresoPallet
     Friend WithEvents txtDisponible As System.Windows.Forms.MaskedTextBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents btnAgregarPT As System.Windows.Forms.Button
+    Friend WithEvents btn_ActualizarDatosEnvases As System.Windows.Forms.Button
+    Friend WithEvents txt_Base As System.Windows.Forms.TextBox
+    Friend WithEvents dgvProductos As System.Windows.Forms.DataGridView
     Friend WithEvents Terminado As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DescTerminado As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Partida As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -670,6 +672,4 @@ Partial Class IngresoPallet
     Friend WithEvents CantidadUnidades As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents KgUnidad As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Tara As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents btn_ActualizarDatosEnvases As System.Windows.Forms.Button
-    Friend WithEvents txt_Base As System.Windows.Forms.TextBox
 End Class
