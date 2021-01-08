@@ -38,7 +38,7 @@ Module Proceso
     End Function
 
     Public Function _EsPellital() As Boolean
-        Return ClasesCompartidas.Globals.empresa.Equals("PELLITAL")
+        Return ClasesCompartidas.Globals.empresa.ToUpper.Equals("PELLITAL") Or ClasesCompartidas.Globals.empresa.ToUpper.Equals("PELITALL")
     End Function
 
     Public Sub _PurgarSaldosCtaCtePrvs()
