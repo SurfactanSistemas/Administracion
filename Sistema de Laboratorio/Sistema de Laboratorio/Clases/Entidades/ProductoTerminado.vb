@@ -245,18 +245,22 @@ Namespace Entidades
                     End If
 
                 Else
-                    Dim WDatosMono() As String = _CalculaMonoOtro(Partida, WEmpresaHoja)
+                    If EsMono(Producto) Then
 
-                    If WDatosMono(0) = "-1" And WDatosMono(1) = "-1" Then Return {"", ""}
+                        Dim WDatosMono() As String = _CalculaMonoOtro(Partida, WEmpresaHoja)
 
-                    If Trim(WDatosMono(1)) <> "" Then
-                        WVencimiento = WDatosMono(1)
+                        If WDatosMono(0) = "-1" And WDatosMono(1) = "-1" Then Return {"", ""}
+
+                        If Trim(WDatosMono(1)) <> "" Then
+                            WVencimiento = WDatosMono(1)
+                        End If
+
+                        If Trim(WDatosMono(0)) <> "" Then
+                            WElaboracion = WDatosMono(0)
+                        End If
+
                     End If
-
-                    If Trim(WDatosMono(0)) <> "" Then
-                        WElaboracion = WDatosMono(0)
-                    End If
-
+                    
                     If WVencimiento <> "" Then
                         If Val(ordenaFecha(WVencimiento)) < Val(WFechaActualOrd) Then
                             If Not SoloConsulta Then
