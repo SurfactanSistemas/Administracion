@@ -40,6 +40,7 @@ Partial Class IngresoParametrosEspecificaciones
         Me.rbNumerico = New System.Windows.Forms.RadioButton()
         Me.rbCumpleNoCumple = New System.Windows.Forms.RadioButton()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.ckHabDesdeHasta = New System.Windows.Forms.CheckBox()
         Me.txtHasta = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.txtDesde = New System.Windows.Forms.TextBox()
@@ -57,7 +58,6 @@ Partial Class IngresoParametrosEspecificaciones
         Me.txtFormula = New System.Windows.Forms.TextBox()
         Me.btnDefinirFormula = New System.Windows.Forms.Button()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.ckHabDesdeHasta = New System.Windows.Forms.CheckBox()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -123,6 +123,7 @@ Partial Class IngresoParametrosEspecificaciones
         'txtParametro
         '
         Me.txtParametro.Location = New System.Drawing.Point(103, 47)
+        Me.txtParametro.MaxLength = 70
         Me.txtParametro.Name = "txtParametro"
         Me.txtParametro.Size = New System.Drawing.Size(301, 20)
         Me.txtParametro.TabIndex = 1
@@ -140,6 +141,7 @@ Partial Class IngresoParametrosEspecificaciones
         'txtFarmacopea
         '
         Me.txtFarmacopea.Location = New System.Drawing.Point(103, 73)
+        Me.txtFarmacopea.MaxLength = 20
         Me.txtFarmacopea.Name = "txtFarmacopea"
         Me.txtFarmacopea.Size = New System.Drawing.Size(67, 20)
         Me.txtFarmacopea.TabIndex = 2
@@ -243,6 +245,15 @@ Partial Class IngresoParametrosEspecificaciones
         Me.GroupBox3.TabIndex = 5
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Rango de Valores"
+        '
+        'ckHabDesdeHasta
+        '
+        Me.ckHabDesdeHasta.AutoSize = True
+        Me.ckHabDesdeHasta.Location = New System.Drawing.Point(20, 24)
+        Me.ckHabDesdeHasta.Name = "ckHabDesdeHasta"
+        Me.ckHabDesdeHasta.Size = New System.Drawing.Size(15, 14)
+        Me.ckHabDesdeHasta.TabIndex = 8
+        Me.ckHabDesdeHasta.UseVisualStyleBackColor = True
         '
         'txtHasta
         '
@@ -369,6 +380,7 @@ Partial Class IngresoParametrosEspecificaciones
         '
         Me.txtFormula.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtFormula.Location = New System.Drawing.Point(68, 21)
+        Me.txtFormula.MaxLength = 100
         Me.txtFormula.Name = "txtFormula"
         Me.txtFormula.Size = New System.Drawing.Size(251, 20)
         Me.txtFormula.TabIndex = 5
@@ -390,15 +402,6 @@ Partial Class IngresoParametrosEspecificaciones
         Me.Label8.Size = New System.Drawing.Size(47, 13)
         Me.Label8.TabIndex = 0
         Me.Label8.Text = "Fórmula:"
-        '
-        'ckHabDesdeHasta
-        '
-        Me.ckHabDesdeHasta.AutoSize = True
-        Me.ckHabDesdeHasta.Location = New System.Drawing.Point(20, 24)
-        Me.ckHabDesdeHasta.Name = "ckHabDesdeHasta"
-        Me.ckHabDesdeHasta.Size = New System.Drawing.Size(15, 14)
-        Me.ckHabDesdeHasta.TabIndex = 8
-        Me.ckHabDesdeHasta.UseVisualStyleBackColor = True
         '
         'IngresoParametrosEspecificaciones
         '

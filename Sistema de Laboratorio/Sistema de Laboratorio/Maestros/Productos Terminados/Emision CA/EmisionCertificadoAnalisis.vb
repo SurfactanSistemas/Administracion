@@ -131,6 +131,23 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
         Dim WCargaV As DataTable = GetAll("SELECT cv.*, StdII = cv.Valor, DescEnsayo = e.Descripcion FROM " & WTablaCargaV & " cv LEFT OUTER JOIN Ensayos e ON e.Codigo = cv.Ensayo WHERE cv.Terminado = '" & lblTerminado.Text & "' And cv.Paso = '99' ORDER BY cv.Renglon", WBase)
 
         '
+        ' Verificamos que los datos de los ensayos se encuentren actualizados a la última versión de las especificaciones.
+        '
+        Dim WFechaGrabacionEnsayos As String = OrDefault(WPrueterFarma.Rows(0)("FechaGrabacion"), "")
+        Dim WFechaGrabacionEnsayosOrd As Integer = Val(ordenaFecha(WFechaGrabacionEnsayos))
+
+        Dim WFechaGrabacionEspecif As String = OrDefault(WCargaV.Rows(0)("FechaGrabacion"), "")
+        Dim WFechaGrabacionEspecifOrd As Integer = Val(ordenaFecha(WFechaGrabacionEspecif))
+
+        If WFechaGrabacionEspecifOrd > 0 AndAlso WFechaGrabacionEnsayosOrd > 0 AndAlso WFechaGrabacionEspecifOrd > WFechaGrabacionEnsayosOrd Then
+            MsgBox(String.Format("Se ha modificado la especificación de este producto el día {1} y se debe validar nuevamente los resultados para su control. (Fecha Ultima Validación: {0})", WFechaGrabacionEnsayos, WFechaGrabacionEspecif), MsgBoxStyle.Exclamation)
+            Exit Sub
+        ElseIf WFechaGrabacionEnsayosOrd = 0 Then
+            MsgBox("Se debe revalidar nuevamente los resultados para su control", MsgBoxStyle.Exclamation)
+            Exit Sub
+        End If
+
+        '
         ' En caso de que sea Inglés el Idioma definido, se reemplaza los valores y unidades.
         '
         If cmbIdioma.SelectedIndex = 1 Then
@@ -360,7 +377,7 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
         '
         ' En caso de tener lugar, mandamos en una misma hoja. Caso contrario, enviamos en dos hojas.
         '
-        If dt.Rows.Count <= 28 And (WImpreCargaVNotas.Trim.Length + WImpreNotasExternas.Trim.Length) <= 1000 Then
+        If dt.Rows.Count <= 28 And (WImpreCargaVNotas.Trim.Length + WImpreNotasExternas.Trim.Length) <= 1050 Then
 
             rpt = New certificadonuevofarma
             With rpt
@@ -624,18 +641,23 @@ Public Class EmisionCertificadoAnalisis : Implements IAyudaGeneral
         Dim WDato As DataRow = Nothing
 
         If cmbIdioma.SelectedIndex = 1 Then
+
             If txtCliente.Text = "L00118" Then
                 WDato = GetSingle("SELECT Descripcion = RTRIM(Linea2)  + ' ' + RTRIM(Linea3) FROM etilehman WHERE Codigo = '" & lblTerminado.Text & "'", "SurfactanSA")
             Else
                 WDato = GetSingle("SELECT Descripcion = RTRIM(DescriEtiquetaIngles) + ' ' + RTRIM(DescripcionIngles) FROM Terminado WHERE Codigo = '" & lblTerminado.Text & "'")
             End If
+
+            If WDato Is Nothing Then MsgBox("No se ha cargado el nombre para el Producto " & lblTerminado.Text, MsgBoxStyle.Information)
+
         Else
             WDato = GetSingle("SELECT Descripcion = CASE WHEN RTRIM(ISNULL(DescriEtiqueta, '')) <> '' THEN concat(Descripcion, ' - ', RTRIM(DescriEtiqueta)) ELSE Descripcion END FROM Terminado WHERE Codigo = '" & lblTerminado.Text & "'")
         End If
 
         If WDato IsNot Nothing Then Return Trim(OrDefault(WDato.Item("Descripcion"), ""))
 
-        Return ""
+        Return lblDescProducto.Text
+
     End Function
 
     Private Function _ReemplazarDescripcionParametroPorIngles(ByVal Parametro As String) As String

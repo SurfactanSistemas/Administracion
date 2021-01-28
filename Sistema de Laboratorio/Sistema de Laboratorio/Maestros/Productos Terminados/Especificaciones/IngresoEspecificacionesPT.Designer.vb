@@ -92,14 +92,14 @@ Partial Class IngresoEspecificacionesPT
         Me.Variable10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.dgvEspecifIngles = New Util.DBDataGridView()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.NroRenglonIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.EnsayoIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.EspecificacionIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DescEnsayoIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FarmacopeaIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.UnidadEspecifIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -759,6 +759,7 @@ Partial Class IngresoEspecificacionesPT
         '
         Me.DescEnsayoIngles.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.DescEnsayoIngles.HeaderText = "Descripción Parámetro Inglés"
+        Me.DescEnsayoIngles.MaxInputLength = 70
         Me.DescEnsayoIngles.MinimumWidth = 150
         Me.DescEnsayoIngles.Name = "DescEnsayoIngles"
         '
@@ -766,6 +767,7 @@ Partial Class IngresoEspecificacionesPT
         '
         Me.FarmacopeaIngles.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.FarmacopeaIngles.HeaderText = "Farmacopea"
+        Me.FarmacopeaIngles.MaxInputLength = 20
         Me.FarmacopeaIngles.Name = "FarmacopeaIngles"
         Me.FarmacopeaIngles.Width = 91
         '
@@ -773,6 +775,7 @@ Partial Class IngresoEspecificacionesPT
         '
         Me.UnidadEspecifIngles.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.UnidadEspecifIngles.HeaderText = "Unidad"
+        Me.UnidadEspecifIngles.MaxInputLength = 20
         Me.UnidadEspecifIngles.MinimumWidth = 80
         Me.UnidadEspecifIngles.Name = "UnidadEspecifIngles"
         Me.UnidadEspecifIngles.Width = 80
@@ -839,12 +842,6 @@ Partial Class IngresoEspecificacionesPT
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents btnHistorialCambios As System.Windows.Forms.Button
     Friend WithEvents AgregarRenglon As System.Windows.Forms.Button
-    Friend WithEvents NroRenglonIngles As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents EnsayoIngles As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents EspecificacionIngles As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DescEnsayoIngles As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents FarmacopeaIngles As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents UnidadEspecifIngles As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ckSubEtapas As System.Windows.Forms.CheckBox
     Friend WithEvents NroRenglon As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Ensayo As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -870,4 +867,10 @@ Partial Class IngresoEspecificacionesPT
     Friend WithEvents Variable9 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Variable10 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
+    Friend WithEvents NroRenglonIngles As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents EnsayoIngles As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents EspecificacionIngles As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DescEnsayoIngles As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents FarmacopeaIngles As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents UnidadEspecifIngles As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class
