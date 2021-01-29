@@ -399,6 +399,10 @@ Public Class ImpreCrystal
                         Dim viewer As New ReportViewer("Facturas", txtNombreReporte, txtFormula, txtNombrePdf, "")
                         viewer.descargarComoPDF()
 
+                        If File.Exists(txtNombreBusqueda) Then
+                            File.Copy(txtNombreBusqueda, "\\193.168.0.2\g$\vb\NET\Sistema de ventas\Facturas\" & txtTipoCompro & " 0009-" & ceros(txtOrden, 8) & ".pdf")
+                        End If
+
                 End Select
 
             Case 7

@@ -11,6 +11,8 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Util", "..\Util\Util\Util.v
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Sistema_Solicitud_Fondos", "..\Sistema Solicitud Fondos\Sistema_Solicitud_Fondos\Sistema_Solicitud_Fondos\Sistema_Solicitud_Fondos.vbproj", "{15E68989-1893-44CB-B220-17AB73B4626C}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "GestorDeArchivos", "..\GestorDeArchivos\GestorDeArchivos\GestorDeArchivos.vbproj", "{1D565298-D39D-47EE-A7D2-3E8ED6E228DE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -76,6 +78,20 @@ Global
 		{15E68989-1893-44CB-B220-17AB73B4626C}.Release|x64.ActiveCfg = Release|Any CPU
 		{15E68989-1893-44CB-B220-17AB73B4626C}.Release|x86.ActiveCfg = Release|x86
 		{15E68989-1893-44CB-B220-17AB73B4626C}.Release|x86.Build.0 = Release|x86
+		{1D565298-D39D-47EE-A7D2-3E8ED6E228DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D565298-D39D-47EE-A7D2-3E8ED6E228DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D565298-D39D-47EE-A7D2-3E8ED6E228DE}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{1D565298-D39D-47EE-A7D2-3E8ED6E228DE}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{1D565298-D39D-47EE-A7D2-3E8ED6E228DE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1D565298-D39D-47EE-A7D2-3E8ED6E228DE}.Debug|x86.ActiveCfg = Debug|x86
+		{1D565298-D39D-47EE-A7D2-3E8ED6E228DE}.Debug|x86.Build.0 = Debug|x86
+		{1D565298-D39D-47EE-A7D2-3E8ED6E228DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D565298-D39D-47EE-A7D2-3E8ED6E228DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D565298-D39D-47EE-A7D2-3E8ED6E228DE}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{1D565298-D39D-47EE-A7D2-3E8ED6E228DE}.Release|Mixed Platforms.Build.0 = Release|x86
+		{1D565298-D39D-47EE-A7D2-3E8ED6E228DE}.Release|x64.ActiveCfg = Release|Any CPU
+		{1D565298-D39D-47EE-A7D2-3E8ED6E228DE}.Release|x86.ActiveCfg = Release|x86
+		{1D565298-D39D-47EE-A7D2-3E8ED6E228DE}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

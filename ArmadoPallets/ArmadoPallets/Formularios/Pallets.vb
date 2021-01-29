@@ -285,37 +285,54 @@ Public Class Pallets
                 If RowPro IsNot Nothing Then
                     Idioma = RowPro.Item("Idioma")
                 End If
+
+                'COMPROBAMOS QUE EXISTA LA CARPETA SINO LA CREAMOS
+
+                If Not Directory.Exists(WRutaArchivosRelacionados) Then
+                    Directory.CreateDirectory(WRutaArchivosRelacionados)
+                End If
+
                 'ELIMINO CUALQUIERA DE LOS DOS QUE ESTUVIERA GENERADO PARA QUE SOLO QUEDE UNO
-                Dim WRutaArchivosRelacionadosI = _RutaCarpetaArchivos() & "\" & txtProforma.Text & "\" & "Packing List" & "\" & "Nota de Empaque.pdf"
-                Dim WRutaArchivosRelacionadosII = _RutaCarpetaArchivos() & "\" & txtProforma.Text & "\" & "Packing List" & "\" & "Nota de Empaque Ingles.pdf"
+                Dim WRutaArchivosRelacionadosI = WRutaArchivosRelacionados & "\" & "Nota de Empaque.pdf"
+                Dim WRutaArchivosRelacionadosII = WRutaArchivosRelacionados & "\" & "Nota de Empaque Ingles.pdf"
 
                 System.IO.File.Delete(WRutaArchivosRelacionadosI)
                 System.IO.File.Delete(WRutaArchivosRelacionadosII)
 
+                'CREAMOS UNA TABLA EN MEMORIA PARA MOSTRAR LOS DATOS
+                Dim TablaNotaEmpaque As DataTable = New DBAuxi.TablaNotaEmpaqueDataTable
+
+                'Para el Mostrarlo ne el reporte en el reporte
+                Dim TotalPesoBruto As Double = 0
+
+                CargaTablaParaNotaEmpaque(txtProforma.Text, TablaNotaEmpaque, TotalPesoBruto)
+
                 Select Case Idioma
 
                     Case 0, 1
+
+
                         With New Util.VistaPrevia
-                            .Base = "SurfactanSa"
-                            .Reporte = New NotaEmpaque
-                            .Formula = "{ArmadoPallets.Proforma} = '" & txtProforma.Text & "' AND {ArmadoPallets.Proforma} = {ProformaExportacion.Proforma} AND {ProformaExportacion.Renglon} = '01'"
+                            .Reporte = New ReporteNotaEmpaque()
+                            .Reporte.SetDataSource(TablaNotaEmpaque)
+                            .Reporte.SetParameterValue(0, TotalPesoBruto)
                             '.Mostrar()
                             .Exportar("Nota de Empaque", ExportFormatType.PortableDocFormat, WRutaArchivosRelacionados)
-                            '.GuardarPDF("Nota de Empaque", WRutaArchivosRelacionados)
+                            '.GuardarPDF("Nota de Empaque Ingles", WRutaArchivosRelacionados)
                         End With
+                        
                     Case 2
 
                         With New Util.VistaPrevia
-                            .Base = "SurfactanSa"
-                            .Reporte = New NotaEmpaqueIngles
-                            .Formula = "{ArmadoPallets.Proforma} = '" & txtProforma.Text & "' AND {ArmadoPallets.Proforma} = {ProformaExportacion.Proforma} AND {ProformaExportacion.Renglon} = '01'"
+                            .Reporte = New ReporteNotaEmpaqueIngles()
+                            .Reporte.SetDataSource(TablaNotaEmpaque)
+                            .Reporte.SetParameterValue(0, TotalPesoBruto)
                             '.Mostrar()
                             .Exportar("Nota de Empaque Ingles", ExportFormatType.PortableDocFormat, WRutaArchivosRelacionados)
-                            '.GuardarPDF("Nota de Empaque", WRutaArchivosRelacionados)
+                            '.GuardarPDF("Nota de Empaque Ingles", WRutaArchivosRelacionados)
                         End With
 
                 End Select
-
 
                 GenerarRegistroEnHistorial()
 
@@ -329,6 +346,141 @@ Public Class Pallets
 
     End Sub
 
+    Private Sub CargaTablaParaNotaEmpaque(ByVal Proforma As String, ByRef TablaNotaEmpaque As DataTable, ByRef TotalPesoBruto As Double)
+
+        Dim SQLCnslt As String = "SELECT Cliente, Localidad, Pais, Factura FROM ProformaExportacion WHERE Proforma = '" & Proforma & "' And (Renglon = '01' OR Renglon = '1')"
+
+        Dim WLocalidad As String = ""
+        Dim WPais As String = ""
+        Dim WFactura As String = ""
+        Dim WRazon As String = ""
+
+        Try
+            Dim RowProfExp As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+            If RowProfExp IsNot Nothing Then
+                With RowProfExp
+                    WRazon = ObtenerRazon(.Item("Cliente"))
+                    WLocalidad = .Item("Localidad")
+                    WPais = .Item("Pais")
+                    WFactura = IIf(IsDBNull(.Item("Factura")), "", .Item("Factura"))
+                    WFactura = Trim(WFactura).PadLeft(8, "0")
+                End With
+
+            End If
+            'OBTENGO LA CANTIDAD DE PALLETES
+            SQLCnslt = "SELECT NroPallets = MAX(Pallet) FROM ArmadoPallets WHERE Proforma = '" & Proforma & "'"
+            Dim RowNroPallets As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+
+            SQLCnslt = "SELECT Proforma, Pallet, CodigoPallet, CodigoEnvase, Bultos, KgBultos, Partida, Producto, TamanioBase, Altura FROM ArmadoPallets WHERE Proforma = '" & Proforma & "'"
+            Dim TablaPro As DataTable = GetAll(SQLCnslt, "SurfactanSa")
+            If TablaPro.Rows.Count > 0 Then
+                Dim CantidadDePallets As Integer = RowNroPallets.Item("NroPallets")
+                Dim PalletAnterior As Integer = 0
+                For i = 1 To CantidadDePallets
+                    For Each Row As DataRow In TablaPro.Rows
+                        With Row
+                            Dim PalletActual As Integer = .Item("Pallet")
+                            If PalletActual = i Then
+
+                                Dim WPallet As Integer = i
+                                Dim WCodPallet As String = .Item("CodigoPallet")
+                                Dim WDescripPallet As String = ObtenerDescPallet(WCodPallet)
+                                Dim WTaraPallet As Double
+                                'Para no volver a tener el peso de los pallet cuando es el mismo pallet
+                                If PalletAnterior <> PalletActual Then
+                                    WTaraPallet = ObtenerTara(WCodPallet)
+                                Else
+                                    WTaraPallet = 0
+                                End If
+
+                                PalletAnterior = PalletActual
+                                Dim WCodigoBultos As String = .Item("CodigoEnvase")
+                                Dim WDescripBultos As String = ObtenerDescPallet(WCodigoBultos)
+                                Dim WTaraBultos As Double = ObtenerTara(WCodigoBultos)
+                                Dim WBultos As Integer = .Item("Bultos")
+                                Dim WKGBultos As Double = .Item("KgBultos")
+                                Dim WPartida As Double = .Item("Partida")
+                                Dim WProducto As String = .Item("Producto")
+                                Dim WDescripProductoIngles As String = ObtenerDescpProductoIngles(WProducto)
+                                Dim WDescripProducto As String = ObtenerDescpProducto(WProducto)
+                                Dim WtamanioBase As String = IIf(IsDBNull(.Item("TamanioBase")), "", .Item("TamanioBase"))
+                                Dim WDescripcionPackingListIngles As String = ObtenerDescripPackingListIngles(WCodigoBultos)
+                                Dim WAltura As Double = .Item("Altura")
+                                Dim WKgNeto As Double = (WKGBultos * WBultos)
+                                'Dim WKgNeto As Double = (WKGBultos * WBultos) + (WTaraBultos * WBultos)
+                                TablaNotaEmpaque.Rows.Add(Proforma, WPallet, WCodPallet, WDescripPallet, WTaraPallet,
+                                                          WBultos, WCodigoBultos, WDescripBultos, WTaraBultos,
+                                                          WKGBultos, WKgNeto, WLocalidad, WPais, WFactura, WRazon,
+                                                          WProducto, WDescripProductoIngles, WDescripProducto,
+                                                          WPartida, WDescripcionPackingListIngles, WtamanioBase, WAltura)
+                                Dim pesolinea As Double = (WBultos * (WKGBultos + WTaraBultos)) + WTaraPallet
+                                TotalPesoBruto += pesolinea
+                                'MsgBox(pesolinea)
+                            End If
+                        End With
+                    Next
+                Next
+
+            End If
+        Catch ex As Exception
+
+        End Try
+
+    End Sub
+
+
+    Private Function ObtenerDescripPackingListIngles(ByVal Codigo As String) As String
+        Dim SQLCnslt As String = "SELECT DescPackingListIngles FROM Articulo WHERE Codigo = '" & Codigo & "'"
+        Dim Row As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+        If Row IsNot Nothing Then
+            Dim DescPackingListIngles As String = IIf(IsDBNull(Row.Item("DescPackingListIngles")), "", Row.Item("DescPackingListIngles"))
+            Return DescPackingListIngles
+        End If
+        Return ""
+    End Function
+    Private Function ObtenerDescpProducto(ByVal Codigo As String) As String
+        Dim SQLCnslt As String = "SELECT Descripcion FROM Terminado WHERE Codigo = '" & Codigo & "'"
+        Dim Row As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+        If Row IsNot Nothing Then
+            Return Trim(Row.Item("Descripcion"))
+        End If
+        Return ""
+    End Function
+
+    Private Function ObtenerDescpProductoIngles(ByVal Codigo As String) As String
+        Dim SQLCnslt As String = "SELECT DescripcionIngles FROM Terminado WHERE Codigo = '" & Codigo & "'"
+        Dim Row As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+        If Row IsNot Nothing Then
+            Return Trim(Row.Item("DescripcionIngles"))
+        End If
+        Return ""
+    End Function
+
+    Private Function ObtenerTara(ByVal Codigo As String) As String
+        Dim SQLCnslt As String = "SELECT Tara FROM Articulo WHERE Codigo = '" & Codigo & "'"
+        Dim Row As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+        If Row IsNot Nothing Then
+            Return Trim(Row.Item("Tara"))
+        End If
+        Return ""
+    End Function
+    Private Function ObtenerDescPallet(ByVal Codigo As String) As String
+        Dim SQLCnslt As String = "SELECT Descripcion FROM Articulo WHERE Codigo = '" & Codigo & "'"
+        Dim Row As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+        If Row IsNot Nothing Then
+            Return Trim(Row.Item("Descripcion"))
+        End If
+        Return ""
+    End Function
+
+    Private Function ObtenerRazon(ByVal Cliente As String) As String
+        Dim SQLCnslt As String = "SELECT Razon FROM Cliente WHERE Cliente = '" & Cliente & "'"
+        Dim Row As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+        If Row IsNot Nothing Then
+            Return Trim(Row.Item("Razon"))
+        End If
+        Return ""
+    End Function
     Private Sub _AvisarReaperturaPorEmail()
 
 
@@ -478,39 +630,37 @@ Public Class Pallets
             Idioma = RowPro.Item("Idioma")
         End If
 
-        Select Case Idioma
+        'CREAMOS UNA TABLA EN MEMORIA PARA MOSTRAR LOS DATOS
+        Dim TablaNotaEmpaque As DataTable = New DBAuxi.TablaNotaEmpaqueDataTable
+
+        'Para el Mostrarlo ne el reporte en el reporte
+        Dim TotalPesoBruto As Double = 0
+
+        CargaTablaParaNotaEmpaque(txtProforma.Text, TablaNotaEmpaque, TotalPesoBruto)
+
+                Select Idioma
 
             Case 0, 1
+
                 With New Util.VistaPrevia
-                    .Base = "SurfactanSa"
-                    .Reporte = New NotaEmpaque
-                    .Formula = "{ArmadoPallets.Proforma} = '" & txtProforma.Text & "' AND {ArmadoPallets.Proforma} = {ProformaExportacion.Proforma} AND {ProformaExportacion.Renglon} = '01'"
+                    .Reporte = New ReporteNotaEmpaque()
+                    .Reporte.SetDataSource(TablaNotaEmpaque)
+                    .Reporte.SetParameterValue(0, TotalPesoBruto)
                     .Mostrar()
-                    '.Exportar("Nota de Empaque", ExportFormatType.PortableDocFormat, WRutaArchivosRelacionados)
-                    '.GuardarPDF("Nota de Empaque", WRutaArchivosRelacionados)
                 End With
             Case 2
                 With New Util.VistaPrevia
-                    .Base = "SurfactanSa"
-                    .Reporte = New NotaEmpaqueIngles
-                    .Formula = "{ArmadoPallets.Proforma} = '" & txtProforma.Text & "' AND {ArmadoPallets.Proforma} = {ProformaExportacion.Proforma} AND {ProformaExportacion.Renglon} = '01'"
+                    .Reporte = New ReporteNotaEmpaqueIngles()
+                    .Reporte.SetDataSource(TablaNotaEmpaque)
+                    .Reporte.SetParameterValue(0, TotalPesoBruto)
                     .Mostrar()
-                    ' .Exportar("Nota de Empaque Ingles", ExportFormatType.PortableDocFormat, WRutaArchivosRelacionados)
-                    '.GuardarPDF("Nota de Empaque", WRutaArchivosRelacionados)
                 End With
 
         End Select
 
-
-        '  Dim frm As New VistaPrevia()
-        '  frm.Reporte = New NotaEmpaque
-        '  frm.Formula = "{ArmadoPallets.Proforma} = '" & txtProforma.Text & "' AND {ArmadoPallets.Proforma} = {ProformaExportacion.Proforma} AND {ProformaExportacion.Renglon} = '01'"
-        '  frm.Mostrar()
-
-
         Cursor = Cursors.Default
-        btn.Enabled = True
-        btn.Cursor = Cursors.Hand
+                btn.Enabled = True
+                btn.Cursor = Cursors.Hand
     End Sub
 
     Private Sub btnInfoProforma_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnInfoProforma.Click
@@ -566,9 +716,14 @@ Public Class Pallets
 
             Dim WRutaArchivosRelacionadosI = _RutaCarpetaArchivos() & "\" & txtProforma.Text & "\" & "Packing List" & "\" & "Nota de Empaque.pdf"
             Dim WRutaArchivosRelacionadosII = _RutaCarpetaArchivos() & "\" & txtProforma.Text & "\" & "Packing List" & "\" & "Nota de Empaque Ingles.pdf"
-            
-            System.IO.File.Delete(WRutaArchivosRelacionadosI)
-            System.IO.File.Delete(WRutaArchivosRelacionadosII)
+
+            Try
+                System.IO.File.Delete(WRutaArchivosRelacionadosI)
+                System.IO.File.Delete(WRutaArchivosRelacionadosII)
+            Catch ex As Exception
+
+            End Try
+           
 
 
 

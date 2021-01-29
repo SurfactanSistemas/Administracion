@@ -115,9 +115,14 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
             this.TB_DescTemas = new System.Windows.Forms.ComboBox();
             this.TB_CodTemas = new System.Windows.Forms.ComboBox();
             this.BT_Eliminar = new System.Windows.Forms.Button();
+            this.DGV_Temas = new System.Windows.Forms.DataGridView();
+            this.Curso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Necesaria = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Deseable = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Agregado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BTModifTema = new System.Windows.Forms.Button();
             this.BTAgregarTema = new System.Windows.Forms.Button();
-            this.DGV_Temas = new System.Windows.Forms.DataGridView();
             this.label4 = new System.Windows.Forms.Label();
             this.TB_Fecha = new System.Windows.Forms.DateTimePicker();
             this.TB_DecPerfil = new System.Windows.Forms.TextBox();
@@ -128,11 +133,6 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
             this.label1 = new System.Windows.Forms.Label();
             this.LFechaAviso = new System.Windows.Forms.Label();
             this.TB_Codigo = new System.Windows.Forms.TextBox();
-            this.Curso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Necesaria = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Deseable = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Agregado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -820,6 +820,7 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
             this.textBox8.Size = new System.Drawing.Size(99, 26);
             this.textBox8.TabIndex = 47;
             this.textBox8.Text = "   EDUCACION";
+         
             // 
             // TB_Tareas3
             // 
@@ -985,34 +986,6 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
             this.BT_Eliminar.Visible = false;
             this.BT_Eliminar.Click += new System.EventHandler(this.BT_Eliminar_Click);
             // 
-            // BTModifTema
-            // 
-            this.BTModifTema.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.editar_cursos;
-            this.BTModifTema.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BTModifTema.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BTModifTema.ForeColor = System.Drawing.SystemColors.Control;
-            this.BTModifTema.Location = new System.Drawing.Point(691, 372);
-            this.BTModifTema.Margin = new System.Windows.Forms.Padding(0);
-            this.BTModifTema.Name = "BTModifTema";
-            this.BTModifTema.Size = new System.Drawing.Size(47, 41);
-            this.BTModifTema.TabIndex = 66;
-            this.BTModifTema.UseVisualStyleBackColor = true;
-            this.BTModifTema.Visible = false;
-            this.BTModifTema.Click += new System.EventHandler(this.BTModifTema_Click);
-            // 
-            // BTAgregarTema
-            // 
-            this.BTAgregarTema.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.agregar_cursos;
-            this.BTAgregarTema.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BTAgregarTema.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BTAgregarTema.ForeColor = System.Drawing.SystemColors.Control;
-            this.BTAgregarTema.Location = new System.Drawing.Point(691, 362);
-            this.BTAgregarTema.Name = "BTAgregarTema";
-            this.BTAgregarTema.Size = new System.Drawing.Size(45, 62);
-            this.BTAgregarTema.TabIndex = 65;
-            this.BTAgregarTema.UseVisualStyleBackColor = true;
-            this.BTAgregarTema.Click += new System.EventHandler(this.BTAgregarTema_Click);
-            // 
             // DGV_Temas
             // 
             this.DGV_Temas.AllowUserToAddRows = false;
@@ -1047,6 +1020,82 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
             this.DGV_Temas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Temas_CellClick);
             this.DGV_Temas.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGV_Temas_CellMouseClick);
             this.DGV_Temas.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGV_Temas_RowHeaderMouseDoubleClick);
+            // 
+            // Curso
+            // 
+            this.Curso.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Curso.DataPropertyName = "Curso";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
+            this.Curso.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Curso.HeaderText = "Tema";
+            this.Curso.Name = "Curso";
+            this.Curso.ReadOnly = true;
+            this.Curso.Width = 59;
+            // 
+            // Descripcion
+            // 
+            this.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Descripcion.DataPropertyName = "Descripcion";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.Descripcion.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Descripcion.HeaderText = "Descripcion";
+            this.Descripcion.Name = "Descripcion";
+            this.Descripcion.ReadOnly = true;
+            // 
+            // Necesaria
+            // 
+            this.Necesaria.DataPropertyName = "Necesaria";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Necesaria.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Necesaria.HeaderText = "Necesaria";
+            this.Necesaria.Name = "Necesaria";
+            this.Necesaria.ReadOnly = true;
+            // 
+            // Deseable
+            // 
+            this.Deseable.DataPropertyName = "Deseable";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Deseable.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Deseable.HeaderText = "Deseable";
+            this.Deseable.Name = "Deseable";
+            this.Deseable.ReadOnly = true;
+            // 
+            // Agregado
+            // 
+            this.Agregado.DataPropertyName = "Agregado";
+            this.Agregado.HeaderText = "Agregado";
+            this.Agregado.Name = "Agregado";
+            this.Agregado.ReadOnly = true;
+            this.Agregado.Visible = false;
+            // 
+            // BTModifTema
+            // 
+            this.BTModifTema.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.editar_cursos;
+            this.BTModifTema.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BTModifTema.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTModifTema.ForeColor = System.Drawing.SystemColors.Control;
+            this.BTModifTema.Location = new System.Drawing.Point(691, 372);
+            this.BTModifTema.Margin = new System.Windows.Forms.Padding(0);
+            this.BTModifTema.Name = "BTModifTema";
+            this.BTModifTema.Size = new System.Drawing.Size(47, 41);
+            this.BTModifTema.TabIndex = 66;
+            this.BTModifTema.UseVisualStyleBackColor = true;
+            this.BTModifTema.Visible = false;
+            this.BTModifTema.Click += new System.EventHandler(this.BTModifTema_Click);
+            // 
+            // BTAgregarTema
+            // 
+            this.BTAgregarTema.BackgroundImage = global::Modulo_Capacitacion.Properties.Resources.agregar_cursos;
+            this.BTAgregarTema.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BTAgregarTema.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTAgregarTema.ForeColor = System.Drawing.SystemColors.Control;
+            this.BTAgregarTema.Location = new System.Drawing.Point(691, 362);
+            this.BTAgregarTema.Name = "BTAgregarTema";
+            this.BTAgregarTema.Size = new System.Drawing.Size(45, 62);
+            this.BTAgregarTema.TabIndex = 65;
+            this.BTAgregarTema.UseVisualStyleBackColor = true;
+            this.BTAgregarTema.Click += new System.EventHandler(this.BTAgregarTema_Click);
             // 
             // label4
             // 
@@ -1156,54 +1205,6 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
             this.TB_Codigo.Size = new System.Drawing.Size(84, 20);
             this.TB_Codigo.TabIndex = 5;
             this.TB_Codigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // Curso
-            // 
-            this.Curso.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Curso.DataPropertyName = "Curso";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
-            this.Curso.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Curso.HeaderText = "Tema";
-            this.Curso.Name = "Curso";
-            this.Curso.ReadOnly = true;
-            this.Curso.Width = 59;
-            // 
-            // Descripcion
-            // 
-            this.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Descripcion.DataPropertyName = "Descripcion";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.Descripcion.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Descripcion.HeaderText = "Descripcion";
-            this.Descripcion.Name = "Descripcion";
-            this.Descripcion.ReadOnly = true;
-            // 
-            // Necesaria
-            // 
-            this.Necesaria.DataPropertyName = "Necesaria";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Necesaria.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Necesaria.HeaderText = "Necesaria";
-            this.Necesaria.Name = "Necesaria";
-            this.Necesaria.ReadOnly = true;
-            // 
-            // Deseable
-            // 
-            this.Deseable.DataPropertyName = "Deseable";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Deseable.DefaultCellStyle = dataGridViewCellStyle4;
-            this.Deseable.HeaderText = "Deseable";
-            this.Deseable.Name = "Deseable";
-            this.Deseable.ReadOnly = true;
-            // 
-            // Agregado
-            // 
-            this.Agregado.DataPropertyName = "Agregado";
-            this.Agregado.HeaderText = "Agregado";
-            this.Agregado.Name = "Agregado";
-            this.Agregado.ReadOnly = true;
-            this.Agregado.Visible = false;
             // 
             // AgModPerfil
             // 

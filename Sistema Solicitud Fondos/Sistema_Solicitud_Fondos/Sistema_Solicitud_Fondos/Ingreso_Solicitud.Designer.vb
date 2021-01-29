@@ -79,6 +79,7 @@ Partial Class Ingreso_Solicitud
         Me.Label14 = New System.Windows.Forms.Label()
         Me.lbl_TipoDolar = New System.Windows.Forms.Label()
         Me.cbx_TipoDolar = New System.Windows.Forms.ComboBox()
+        Me.btn_Autorizar = New System.Windows.Forms.Button()
         Me.panel1.SuspendLayout()
         Me.gp_FormasDePago.SuspendLayout()
         Me.gbx_Retenciones.SuspendLayout()
@@ -369,36 +370,36 @@ Partial Class Ingreso_Solicitud
         '
         'btn_Grabar
         '
-        Me.btn_Grabar.Location = New System.Drawing.Point(457, 50)
+        Me.btn_Grabar.Location = New System.Drawing.Point(454, 54)
         Me.btn_Grabar.Name = "btn_Grabar"
-        Me.btn_Grabar.Size = New System.Drawing.Size(75, 45)
+        Me.btn_Grabar.Size = New System.Drawing.Size(82, 45)
         Me.btn_Grabar.TabIndex = 28
         Me.btn_Grabar.Text = "GRABAR"
         Me.btn_Grabar.UseVisualStyleBackColor = True
         '
         'btn_Cancelar
         '
-        Me.btn_Cancelar.Location = New System.Drawing.Point(457, 101)
+        Me.btn_Cancelar.Location = New System.Drawing.Point(454, 105)
         Me.btn_Cancelar.Name = "btn_Cancelar"
-        Me.btn_Cancelar.Size = New System.Drawing.Size(75, 45)
+        Me.btn_Cancelar.Size = New System.Drawing.Size(82, 45)
         Me.btn_Cancelar.TabIndex = 29
         Me.btn_Cancelar.Text = "CANCELAR"
         Me.btn_Cancelar.UseVisualStyleBackColor = True
         '
         'btn_Adjuntar
         '
-        Me.btn_Adjuntar.Location = New System.Drawing.Point(457, 152)
+        Me.btn_Adjuntar.Location = New System.Drawing.Point(454, 156)
         Me.btn_Adjuntar.Name = "btn_Adjuntar"
-        Me.btn_Adjuntar.Size = New System.Drawing.Size(75, 45)
+        Me.btn_Adjuntar.Size = New System.Drawing.Size(82, 45)
         Me.btn_Adjuntar.TabIndex = 30
         Me.btn_Adjuntar.Text = "ADJUNTAR ARCHIVOS"
         Me.btn_Adjuntar.UseVisualStyleBackColor = True
         '
         'btn_MostrarSolicitud
         '
-        Me.btn_MostrarSolicitud.Location = New System.Drawing.Point(457, 255)
+        Me.btn_MostrarSolicitud.Location = New System.Drawing.Point(454, 259)
         Me.btn_MostrarSolicitud.Name = "btn_MostrarSolicitud"
-        Me.btn_MostrarSolicitud.Size = New System.Drawing.Size(75, 45)
+        Me.btn_MostrarSolicitud.Size = New System.Drawing.Size(82, 45)
         Me.btn_MostrarSolicitud.TabIndex = 31
         Me.btn_MostrarSolicitud.Text = "IMPRIMIR"
         Me.btn_MostrarSolicitud.UseVisualStyleBackColor = True
@@ -406,9 +407,9 @@ Partial Class Ingreso_Solicitud
         '
         'btn_Limpiar
         '
-        Me.btn_Limpiar.Location = New System.Drawing.Point(457, 203)
+        Me.btn_Limpiar.Location = New System.Drawing.Point(454, 207)
         Me.btn_Limpiar.Name = "btn_Limpiar"
-        Me.btn_Limpiar.Size = New System.Drawing.Size(75, 45)
+        Me.btn_Limpiar.Size = New System.Drawing.Size(82, 45)
         Me.btn_Limpiar.TabIndex = 32
         Me.btn_Limpiar.Text = "LIMPIAR"
         Me.btn_Limpiar.UseVisualStyleBackColor = True
@@ -647,11 +648,21 @@ Partial Class Ingreso_Solicitud
         Me.cbx_TipoDolar.TabIndex = 38
         Me.cbx_TipoDolar.Visible = False
         '
+        'btn_Autorizar
+        '
+        Me.btn_Autorizar.Location = New System.Drawing.Point(454, 379)
+        Me.btn_Autorizar.Name = "btn_Autorizar"
+        Me.btn_Autorizar.Size = New System.Drawing.Size(82, 45)
+        Me.btn_Autorizar.TabIndex = 40
+        Me.btn_Autorizar.Text = "AUTORIZAR"
+        Me.btn_Autorizar.UseVisualStyleBackColor = True
+        '
         'Ingreso_Solicitud
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(539, 514)
+        Me.Controls.Add(Me.btn_Autorizar)
         Me.Controls.Add(Me.lbl_TipoDolar)
         Me.Controls.Add(Me.cbx_TipoDolar)
         Me.Controls.Add(Me.gbx_Retenciones)
@@ -754,4 +765,5 @@ Partial Class Ingreso_Solicitud
     Friend WithEvents txt_Paridad As System.Windows.Forms.TextBox
     Friend WithEvents lbl_TipoDolar As System.Windows.Forms.Label
     Friend WithEvents cbx_TipoDolar As System.Windows.Forms.ComboBox
+    Friend WithEvents btn_Autorizar As System.Windows.Forms.Button
 End Class

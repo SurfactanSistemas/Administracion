@@ -4,7 +4,7 @@ Public Class ActualizarDatosEnvases
     Private Sub txt_Codigo_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_Codigo.KeyDown
         Select Case e.KeyData
             Case Keys.Enter
-                If txt_Codigo.Text.Length = 10 Then
+            If txt_Codigo.Text.Length = 10 Then
                     Try
                         Dim SQLCnslt As String = "SELECT Descripcion, TamanioBase, Tara, DescPackingList, DescPackingListIngles FROM Articulo WHERE Codigo = '" & txt_Codigo.Text & "'"
                         Dim RowArt As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
@@ -12,7 +12,7 @@ Public Class ActualizarDatosEnvases
                             txt_Descripcion.Text = RowArt.Item("Descripcion")
                             txt_DescPackingList.Text = RowArt.Item("DescPackingList")
                             txt_TamanioBase.Text = RowArt.Item("TamanioBase")
-                            txt_Tara.Text = RowArt.Item("Tara")
+                            txt_Tara.Text = formatonumerico(RowArt.Item("Tara"))
                             txt_DescInglesPackingList.Text = RowArt.Item("DescPackingListIngles")
                             txt_DescPackingList.Focus()
                         End If

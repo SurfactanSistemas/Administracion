@@ -1,4 +1,5 @@
-﻿Imports System.IO
+﻿Imports System.Diagnostics.Eventing.Reader
+Imports System.IO
 Imports System.Text.RegularExpressions
 Imports Microsoft.VisualBasic.FileIO
 Imports Microsoft.Office.Interop
@@ -314,7 +315,7 @@ Public Class EditorArchivos : Implements SelectorCarpetas
     ''' DragEventArgs ''' Path to the actual file or temp file
     ''' Returns the full path to the file being dropped or to a temp file that contains the file in memory (for use with Outlook or other program drag drops)
     Friend Function _ProcesarDragDeArchivo(ByVal e As System.Windows.Forms.DragEventArgs) As String
-        
+
         Try
             If e.Data.GetDataPresent(DataFormats.FileDrop) Then
                 Dim archivos() As String = e.Data.GetData(DataFormats.FileDrop)
@@ -414,9 +415,14 @@ Public Class EditorArchivos : Implements SelectorCarpetas
                     DragDesdeOutLOOK = True
 
                     'LLAMAMOS A LA VENTAN PARA QUE DIGA A QUE CARPETAS COPIAR
-                    With New SeleccionarCarpetas(WPath, True, Archivos)
-                        .Show(Me)
-                    End With
+                    If WAccion = 3 Then
+                        With New SeleccionarCarpetas(WPath, True, Archivos)
+                            .Show(Me)
+                        End With
+                    Else
+                        _SubirArchvios(Archivos)
+                    End If
+
 
                     ' _SubirArchvios(Archivos)
 
@@ -496,7 +502,7 @@ Public Class EditorArchivos : Implements SelectorCarpetas
 
     Private Sub _SubirArchvios(ByVal archivos As String(), Optional ByVal Carpetas As Object = Nothing)
 
-    
+
 
         Me.BringToFront()
         Me.Focus()
@@ -525,7 +531,7 @@ Public Class EditorArchivos : Implements SelectorCarpetas
 
                                 'Dim RutaAUsar As String = ObtenerRutaRadioButons()
                                 WDestino = Carpetas(i) & "\" & Path.GetFileName(archivo)
-                                
+
                                 Try
                                     If Not File.Exists(WDestino) Then
                                         File.Copy(archivo, WDestino)
@@ -615,10 +621,10 @@ Public Class EditorArchivos : Implements SelectorCarpetas
                                         Return
                                     End Try
                                 Next
-                               
+
                             End If
-                            
-                        
+
+
                         End If
 
 
@@ -777,7 +783,10 @@ Public Class EditorArchivos : Implements SelectorCarpetas
         '
         'Next
 
-        ActualizarCarpetas()
+        If WAccion = 3 Then
+            ActualizarCarpetas()
+        End If
+
 
     End Sub
 
@@ -815,12 +824,6 @@ Public Class EditorArchivos : Implements SelectorCarpetas
         Next
 
     End Function
-
-
-
-
-
-
 
     Private Function _ObtenerIconoSegunTipoArchivo(ByVal extension As String)
         Dim Wicono = Nothing
@@ -989,7 +992,7 @@ Public Class EditorArchivos : Implements SelectorCarpetas
         Catch ex As Exception
 
         End Try
-       
+
     End Sub
 
     Private Sub ActualizarEnHistorial(ByVal NombreViejo As String, ByVal NuevoNombre As String)
@@ -1025,7 +1028,7 @@ Public Class EditorArchivos : Implements SelectorCarpetas
                 End If
 
             Next
-            
+
         Catch ex As Exception
 
         End Try
@@ -1164,6 +1167,6 @@ Public Class EditorArchivos : Implements SelectorCarpetas
             'DEVOLVEMOS LA BANDERA A FALSE
             DragActivo = False
         End If
-        
+
     End Sub
 End Class

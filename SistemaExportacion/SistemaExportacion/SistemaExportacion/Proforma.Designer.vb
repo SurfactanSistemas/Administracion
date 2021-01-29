@@ -155,7 +155,7 @@ Partial Class Proforma
         Me.LayoutPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45.0!))
         Me.LayoutPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.LayoutPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.LayoutPrincipal.Size = New System.Drawing.Size(1034, 661)
+        Me.LayoutPrincipal.Size = New System.Drawing.Size(1028, 661)
         Me.LayoutPrincipal.TabIndex = 1
         '
         'LayoutCabecera
@@ -177,7 +177,7 @@ Partial Class Proforma
         Me.LayoutCabecera.RowCount = 1
         Me.LayoutCabecera.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.LayoutCabecera.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45.0!))
-        Me.LayoutCabecera.Size = New System.Drawing.Size(1034, 45)
+        Me.LayoutCabecera.Size = New System.Drawing.Size(1028, 45)
         Me.LayoutCabecera.TabIndex = 0
         '
         'Label3
@@ -187,7 +187,7 @@ Partial Class Proforma
         Me.Label3.Location = New System.Drawing.Point(241, 0)
         Me.Label3.Margin = New System.Windows.Forms.Padding(0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(613, 45)
+        Me.Label3.Size = New System.Drawing.Size(607, 45)
         Me.Label3.TabIndex = 2
         Me.Label3.Text = "- Proformas -"
         Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -208,7 +208,7 @@ Partial Class Proforma
         '
         Me.Label2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label2.Font = New System.Drawing.Font("Calibri", 16.0!, System.Drawing.FontStyle.Bold)
-        Me.Label2.Location = New System.Drawing.Point(857, 0)
+        Me.Label2.Location = New System.Drawing.Point(851, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(174, 45)
         Me.Label2.TabIndex = 1
@@ -229,7 +229,7 @@ Partial Class Proforma
         Me.LayoutCuerpoPrincipal.RowCount = 2
         Me.LayoutCuerpoPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.LayoutCuerpoPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 69.0!))
-        Me.LayoutCuerpoPrincipal.Size = New System.Drawing.Size(1034, 616)
+        Me.LayoutCuerpoPrincipal.Size = New System.Drawing.Size(1028, 616)
         Me.LayoutCuerpoPrincipal.TabIndex = 1
         '
         'Panel1
@@ -312,7 +312,7 @@ Partial Class Proforma
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Margin = New System.Windows.Forms.Padding(0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1034, 547)
+        Me.Panel1.Size = New System.Drawing.Size(1028, 547)
         Me.Panel1.TabIndex = 2
         '
         'txt_Otros
@@ -429,7 +429,7 @@ Partial Class Proforma
         Me.GrupoConsulta.Controls.Add(Me.lstFiltrada)
         Me.GrupoConsulta.Controls.Add(Me.lstConsulta)
         Me.GrupoConsulta.Controls.Add(Me.btnCerrarConsulta)
-        Me.GrupoConsulta.Location = New System.Drawing.Point(262, 88)
+        Me.GrupoConsulta.Location = New System.Drawing.Point(183, 147)
         Me.GrupoConsulta.Name = "GrupoConsulta"
         Me.GrupoConsulta.Size = New System.Drawing.Size(373, 321)
         Me.GrupoConsulta.TabIndex = 12
@@ -1201,6 +1201,7 @@ Partial Class Proforma
         Me.txtNroPedido.Name = "txtNroPedido"
         Me.txtNroPedido.Size = New System.Drawing.Size(79, 20)
         Me.txtNroPedido.TabIndex = 0
+        Me.txtNroPedido.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtOCCliente
         '
@@ -1254,7 +1255,7 @@ Partial Class Proforma
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(3, 550)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(1028, 63)
+        Me.Panel2.Size = New System.Drawing.Size(1022, 63)
         Me.Panel2.TabIndex = 3
         '
         'btnCerrar
@@ -1321,7 +1322,7 @@ Partial Class Proforma
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1034, 661)
+        Me.ClientSize = New System.Drawing.Size(1028, 661)
         Me.Controls.Add(Me.LayoutPrincipal)
         Me.Name = "Proforma"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen

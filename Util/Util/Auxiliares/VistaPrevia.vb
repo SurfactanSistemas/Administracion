@@ -152,7 +152,7 @@ Public Class VistaPrevia
             End With
         Else
 
-            If Not ruta.EndsWith("/") Then ruta &= "/"
+            If Not ruta.EndsWith("\") Then ruta &= "\"
 
             Directory.CreateDirectory(ruta)
 

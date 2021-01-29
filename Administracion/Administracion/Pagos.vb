@@ -1935,7 +1935,7 @@ Public Class Pagos
                             Dim SQLCnslt As String = "SELECT TipoDolar FROM SOlicitudFondos WHERE NroSolicitud = '" & NroSoliInterno & "'"
                             Dim RowSoli As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
                             If RowSoli IsNot Nothing Then
-                                If RowSoli.Item("TipoDolar") = 2 Then
+                                If IIf(IsDBNull(RowSoli.Item("TipoDolar")), 0, RowSoli.Item("TipoDolar")) = 2 Then
                                     ZZParidad = _NormalizarNumero(.Item("Cambio").ToString(), 4)
                                 Else
                                     ZZParidad = _NormalizarNumero(.Item("CambioDivisa").ToString(), 4)
@@ -3409,6 +3409,9 @@ Public Class Pagos
 
     Private Sub optTransferencias_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optTransferencias.CheckedChanged
         If optTransferencias.Checked Then
+            'HABILITAMOS LOS CAMPOS EN CASO DE QUE VINIERA DE UN PAGO VARIOS
+            txtProveedor.Enabled = True
+            txtRazonSocial.Enabled = True
 
             If Val(txtBanco.Text) = 0 Then
                 txtBanco.Enabled = True
@@ -3428,6 +3431,9 @@ Public Class Pagos
 
     Private Sub optAnticipos_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optAnticipos.CheckedChanged
         If optAnticipos.Checked Then
+            'HABILITAMOS LOS CAMPOS EN CASO DE QUE VINIERA DE UN PAGO VARIOS
+            txtProveedor.Enabled = True
+            txtRazonSocial.Enabled = True
             'gridPagos.Rows.Clear()
             '_LimpiarGrillas()
             With gridPagos
@@ -3443,6 +3449,14 @@ Public Class Pagos
 
     Private Sub optVarios_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optVarios.CheckedChanged
         If optVarios.Checked Then
+            If Trim(txtProveedor.Text) <> "" Then
+                txtProveedor.Text = ""
+                txtRazonSocial.Text = ""
+                MsgBox("Se limpio el campo proveedor ya que al ser pago varios no puede ser a proveedores", vbExclamation, vbOK)
+            End If
+            'SI ES VARIOS NO PUEDE SER PROVEEDOR, POR ESO SE LIMPIA Y SE BLOQUEA
+            txtProveedor.Enabled = False
+            txtRazonSocial.Enabled = False
             '_LimpiarGrillas()
             With gridPagos
                 '.Rows.Clear()
@@ -3458,6 +3472,9 @@ Public Class Pagos
 
     Private Sub optChequeRechazado_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optChequeRechazado.CheckedChanged
         If optChequeRechazado.Checked Then
+            'HABILITAMOS LOS CAMPOS EN CASO DE QUE VINIERA DE UN PAGO VARIOS
+            txtProveedor.Enabled = True
+            txtRazonSocial.Enabled = True
             '_LimpiarGrillas()
             With gridPagos
                 '.Rows.Clear()
@@ -3474,6 +3491,9 @@ Public Class Pagos
 
     Private Sub optCtaCte_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optCtaCte.CheckedChanged
         If optCtaCte.Checked Then
+            'HABILITAMOS LOS CAMPOS EN CASO DE QUE VINIERA DE UN PAGO VARIOS
+            txtProveedor.Enabled = True
+            txtRazonSocial.Enabled = True
             '_LimpiarGrillas()
             'gridPagos.Rows.Clear()
             Try
@@ -3517,7 +3537,7 @@ Public Class Pagos
                     btnEnviarAviso.Enabled = True
                     btnActualizarCarpetas.Visible = True
 
-
+                    CargarNrosCuentas(txtOrdenPago.Text)
 
                 Catch ex As System.Exception
 
@@ -3545,6 +3565,21 @@ Public Class Pagos
             txtOrdenPago.Text = ""
         End If
     End Sub
+
+    Private Sub CargarNrosCuentas(ByVal OrdenPago As String)
+        'PARA PODER CONSULTAR LOS NUMEROS DE CUENTAS
+        Dim SQLCnslt As String = "SELECT Cuenta FROM Pagos WHERE Orden = '" & OrdenPago & "' AND Cuenta <> '' ORDER BY Clave"
+        Dim TablaCuentas As DataTable = GetAll(SQLCnslt, "SurfactanSa")
+        If TablaCuentas.Rows.Count > 0 Then
+            Dim i As Integer = 0
+            For Each row As DataRow In TablaCuentas.Rows
+                WCuenta(i, 1) = row.Item("Cuenta")
+                i += 1
+            Next
+
+        End If
+    End Sub
+
 
     Private Function _EsNumero(ByVal keycode As Integer) As Boolean
         Return (keycode >= 48 And keycode <= 57) Or (keycode >= 96 And keycode <= 105)
@@ -5237,6 +5272,10 @@ Public Class Pagos
                     End If
                 End If
 
+                If CDbl(XImpre4) < 300 Then
+                    Continue For
+                End If
+
                 WImpoRetenido = WImpoRetenido + WRete
 
                 If ZZPorceIbCaba <> 0 Then
@@ -6432,7 +6471,7 @@ Public Class Pagos
                         If btn_ConsultaSoliFondos.Visible = False Then
                             _ListarCuentasContables()
                         End If
-                  End Select
+                End Select
 
             End With
 
@@ -6763,6 +6802,7 @@ Public Class Pagos
     End Sub
 
     Private Sub _RecalcularIBCABA()
+
 
         Dim ZZSuma, acumCaba
 
@@ -8407,12 +8447,18 @@ Public Class Pagos
         btnChequesTerceros_Click(Nothing, Nothing)
     End Sub
 
- 
-    
+
+
     Private Sub btn_ConsultaSoliFondos_Click(sender As Object, e As EventArgs) Handles btn_ConsultaSoliFondos.Click
 
         If NroSoliInterno <> 0 Then
-            With New MostrarSoliFondos(NroSoliInterno, traerParidad(txtFechaParidad.Text, True))
+            Dim Paridad As String = traerParidad(txtFechaParidad.Text, True)
+            If Val(txtParidad.Text) <> Val(Paridad) Then
+                MsgBox("Se modifico la paridad a la asignada en la solicitud de fondos")
+                txtParidad.Text = Paridad
+            End If
+
+            With New MostrarSoliFondos(NroSoliInterno, txtParidad.Text)
                 .Show(Me)
             End With
         End If
@@ -8422,4 +8468,43 @@ Public Class Pagos
         lstConsulta.Items.Clear()
         _ListarSolicitudesFondos()
     End Sub
+
+    Private Sub gridFormaPagos_CellLeave(sender As Object, e As DataGridViewCellEventArgs) Handles gridFormaPagos.CellLeave
+
+        If gridFormaPagos.Focused Or gridFormaPagos.IsCurrentCellInEditMode Then ' Detectamos los ENTER tanto si solo estan en foco o si estan en edición una celda.
+            gridFormaPagos.CommitEdit(DataGridViewDataErrorContexts.Commit) ' Guardamos todos los datos que no hayan sido confirmados.
+
+            Dim iCol = gridFormaPagos.CurrentCell.ColumnIndex
+            Dim iRow = gridFormaPagos.CurrentCell.RowIndex
+            If iCol = 3 Then
+                Dim valor = gridFormaPagos.Rows(iRow).Cells(iCol).Value
+                If gridFormaPagos.Rows(iRow).Cells(0).Value = "02" Or gridFormaPagos.Rows(iRow).Cells(0).Value = "04" Or gridFormaPagos.Rows(iRow).Cells(0).Value = "03" Then
+
+                    'LO LIMPIO ANTES DE CARGARLO
+                    gridFormaPagos.Rows(iRow).Cells(iCol + 1).Value = ""
+
+                    Dim banco As Banco = DAOBanco.buscarBancoPorCodigo(valor)
+                    If Not IsNothing(banco) Then
+                        gridFormaPagos.Rows(iRow).Cells(iCol + 1).Value = banco.nombre
+                    Else
+
+                        If Trim(gridFormaPagos.Rows(iRow).Cells(iCol + 1).Value) = "" Then
+                            MsgBox("El codigo de banco es incorrecto, verificar", MsgBoxStyle.Information)
+
+                            gridFormaPagos.CurrentCell = gridFormaPagos.Rows(iRow).Cells(iCol)
+
+                            If Not gridFormaPagos.Focused Then
+                                gridFormaPagos.Focus()
+                            End If
+
+                        End If
+
+                    End If
+                End If
+            End If
+        End If
+
+    End Sub
+
+
 End Class

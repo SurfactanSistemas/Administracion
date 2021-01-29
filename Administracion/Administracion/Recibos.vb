@@ -4651,7 +4651,7 @@ Public Class Recibos
         ' Ahora asignamos los datos de los cheques.
         For w = 0 To 39
 
-            If Val(WCheques(w, 4)) <> 0 And (Val(WCheques(w, 0)) = 2 Or Val(WCheques(w, 0)) = 3) Then
+            If Val(WCheques(w, 4)) <> 0 And (Val(WCheques(w, 0)) = 2 Or Val(WCheques(w, 0)) = 3 Or Val(WCheques(w, 0)) = 7) Then
 
                 If WCRenglon < 20 Then
 
@@ -4906,7 +4906,7 @@ Public Class Recibos
                         WCheques(WRCheques, 3) = row.Cells(3).Value
                         WCheques(WRCheques, 4) = _NormalizarNumero(row.Cells(4).Value)
 
-                        If Val(WCheques(WRCheques, 4)) <> 0 And (Val(WCheques(WRCheques, 0)) = 2 Or Val(WCheques(WRCheques, 0)) = 3) Then
+                        If Val(WCheques(WRCheques, 4)) <> 0 And (Val(WCheques(WRCheques, 0)) = 2 Or Val(WCheques(WRCheques, 0)) = 3 Or Val(WCheques(WRCheques, 0)) = 7) Then
                             Cheque = Cheque + Val(WCheques(WRCheques, 4))
                         End If
 

@@ -22,8 +22,8 @@ Partial Class Gestion_Solicitudes
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.label1 = New System.Windows.Forms.Label()
@@ -240,14 +240,14 @@ Partial Class Gestion_Solicitudes
         Me.DGV_Solicitudes.AllowUserToAddRows = False
         Me.DGV_Solicitudes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_Solicitudes.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.chk, Me.NroSolicitud, Me.Solicitante, Me.Fecha, Me.OrdFecha, Me.Tipo, Me.Destino, Me.Titulo, Me.Moneda, Me.Importe, Me.FechaRequerida, Me.OrdFechaRequerida, Me.Estado})
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGV_Solicitudes.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGV_Solicitudes.DefaultCellStyle = DataGridViewCellStyle2
         Me.DGV_Solicitudes.DoubleBuffered = True
         Me.DGV_Solicitudes.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.DGV_Solicitudes.Location = New System.Drawing.Point(12, 111)
@@ -345,10 +345,10 @@ Partial Class Gestion_Solicitudes
         '
         Me.Importe.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Importe.DataPropertyName = "Importe"
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle3.Format = "N2"
-        DataGridViewCellStyle3.NullValue = Nothing
-        Me.Importe.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle1.Format = "N2"
+        DataGridViewCellStyle1.NullValue = Nothing
+        Me.Importe.DefaultCellStyle = DataGridViewCellStyle1
         Me.Importe.HeaderText = "Importe"
         Me.Importe.Name = "Importe"
         Me.Importe.ReadOnly = True
@@ -383,12 +383,14 @@ Partial Class Gestion_Solicitudes
         '
         'btn_Autorizar
         '
+        Me.btn_Autorizar.Enabled = False
         Me.btn_Autorizar.Location = New System.Drawing.Point(115, 431)
         Me.btn_Autorizar.Name = "btn_Autorizar"
         Me.btn_Autorizar.Size = New System.Drawing.Size(82, 38)
         Me.btn_Autorizar.TabIndex = 17
         Me.btn_Autorizar.Text = "AUTORIZAR MARCADOS"
         Me.btn_Autorizar.UseVisualStyleBackColor = True
+        Me.btn_Autorizar.Visible = False
         '
         'btn_Eliminar
         '

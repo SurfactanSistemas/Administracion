@@ -194,22 +194,30 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Reportes\NotaEmpaque.vb">
+    <Compile Include="Reportes\DBAuxi.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>NotaEmpaque.rpt</DependentUpon>
-      <SubType>Component</SubType>
+      <DependentUpon>DBAuxi.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Reportes\NotaEmpaqueIngles.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NotaEmpaqueIngles.rpt</DependentUpon>
-      <SubType>Component</SubType>
+    <Compile Include="Reportes\DBAuxi.vb">
+      <DependentUpon>DBAuxi.xsd</DependentUpon>
     </Compile>
     <Compile Include="Reportes\PlanillaPallets.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PlanillaPallets.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ReporteNotaEmpaque.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteNotaEmpaque.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ReporteNotaEmpaqueIngles.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteNotaEmpaqueIngles.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\VistaPrevia.Designer.vb">
@@ -262,17 +270,17 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\NotaEmpaque.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>NotaEmpaque.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\NotaEmpaqueIngles.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>NotaEmpaqueIngles.vb</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\PlanillaPallets.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>PlanillaPallets.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ReporteNotaEmpaque.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteNotaEmpaque.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ReporteNotaEmpaqueIngles.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteNotaEmpaqueIngles.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\VistaPrevia.resx">
       <DependentUpon>VistaPrevia.vb</DependentUpon>
@@ -290,6 +298,17 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Reportes\DBAuxi.xsc">
+      <DependentUpon>DBAuxi.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\DBAuxi.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DBAuxi.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Reportes\DBAuxi.xss">
+      <DependentUpon>DBAuxi.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>

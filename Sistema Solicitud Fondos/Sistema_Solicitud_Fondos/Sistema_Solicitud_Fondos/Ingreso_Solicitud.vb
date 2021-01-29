@@ -5,7 +5,7 @@ Imports Util.Clases.Helper
 Imports GestorDeArchivos
 Imports Util
 
-Public Class Ingreso_Solicitud : Implements IConsulta
+Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
 
     Dim CarpetaAux As String = "C:\" & "Auxiliar_SolicitudFondos"
     Dim RutaGuardar As String = "\\193.168.0.2\g$\vb\NET\ArchivosRelacionadosSolicitudFondos"
@@ -52,7 +52,7 @@ Public Class Ingreso_Solicitud : Implements IConsulta
         If NroSoli <> 0 Then
 
 
-           
+
 
             'CARGAMOS EL REGISTRO
             SQLCnslt = "SELECT * FROM SolicitudFondos WHERE NroSolicitud = '" & NroSoli & "'"
@@ -61,6 +61,11 @@ Public Class Ingreso_Solicitud : Implements IConsulta
 
                 NRO_SOLICITUD = NroSoli
 
+                'SI YA ESTA AUTORIZADA SACAMOS EL BOTON DE AUTORIZAR
+                Dim EstadoSoli As String = IIf(IsDBNull(rowsoli.Item("Estado")), "", rowsoli.Item("Estado"))
+                If Trim(UCase(EstadoSoli)) = "AUTORIZO" Then
+                    btn_Autorizar.Visible = False
+                End If
                 cbx_Moneda.SelectedIndex = rowsoli.Item("Moneda")
                 cbx_TipoDolar.SelectedIndex = IIf(IsDBNull(rowsoli.Item("TipoDolar")), 0, rowsoli.Item("TipoDolar"))
                 If cbx_Moneda.SelectedIndex = 2 Then
@@ -121,7 +126,7 @@ Public Class Ingreso_Solicitud : Implements IConsulta
 
                 'EN CASO DE QUE SEA EN DOLARES MULTIPLICAMOS EL VALOR POR LA PARIDAD
                 If WParidad <> 0 Then
-                    MultiplicaPorParidad()
+                    Multiplicaporparidad()
                 End If
 
                 txt_Importe_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
@@ -177,7 +182,7 @@ Public Class Ingreso_Solicitud : Implements IConsulta
         Else
             txt_ImportePesos.Text = formatonumerico(txt_Importe.Text)
         End If
-        
+
     End Sub
 
     Private Function _BuscarParidad(ByVal ZZFecha As String) As Double
@@ -248,6 +253,12 @@ Public Class Ingreso_Solicitud : Implements IConsulta
         '
         '    VALIDACIONES
         '
+        If Trim(txt_FechaRequerida.Text.Replace("/", "")) <> "" Then
+            If ValidaTiempoFecha(txt_FechaRequerida.Text) = "N" Then
+                Exit Sub
+            End If
+        End If
+
         Select Case cbx_Tipo.SelectedIndex
             Case 0
                 MsgBox("Debe seleccionar un tipo de solicitud", vbExclamation)
@@ -308,6 +319,9 @@ Public Class Ingreso_Solicitud : Implements IConsulta
             MsgBox("Se debe ingresar un Detalle", vbExclamation)
             Exit Sub
         End If
+
+
+
 
         '
         '  FIN DE VALIDACIONES
@@ -619,7 +633,9 @@ Public Class Ingreso_Solicitud : Implements IConsulta
                     txt_Observaciones.Focus()
                 Else
                     If ValidaFecha(txt_FechaRequerida.Text) = "S" Then
-                        txt_Observaciones.Focus()
+                        If ValidaTiempoFecha(txt_FechaRequerida.Text) = "S" Then
+                            txt_Observaciones.Focus()
+                        End If
                     Else
                         MsgBox("La fecha Requerida no es valida, verificar", vbExclamation)
                         txt_FechaRequerida.SelectAll()
@@ -629,6 +645,28 @@ Public Class Ingreso_Solicitud : Implements IConsulta
                 txt_FechaRequerida.Text = ""
         End Select
     End Sub
+
+    Private Function ValidaTiempoFecha(ByVal Fecha As String)
+        Dim DateFecha As Date = Date.Today
+        DateFecha = DateFecha.AddMonths(1)
+        Dim OrdFechaMax As String = DateFecha.ToString("yyyyMMdd")
+        Dim OrdFechaActual As String = Date.Today.ToString("yyyyMMdd")
+        Dim OrdFecha As String = ordenaFecha(Fecha)
+        Dim Resultado As String = "S"
+        'CONSULTAMOS SI LA FECHA ES MENOR A LA FECHA ACTUAL
+        If OrdFecha < OrdFechaActual Then
+            MsgBox("La fecha requerida no puede ser menor a la fecha actual")
+            Return "N"
+        End If
+        'CONSULTAMOS SI LA FECHA ES MAYOR A UN MES DE LA FECHA ACTUAL
+        If OrdFecha > OrdFechaMax Then
+            MsgBox("La fecha requerida no puede superar el mes desde la fecha actual")
+            Return "N"
+        End If
+
+        Return "S"
+    End Function
+
 
     Private Sub txt_Observaciones_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_Observaciones.KeyDown
         Select Case e.KeyData
@@ -646,7 +684,7 @@ Public Class Ingreso_Solicitud : Implements IConsulta
                 If Trim(txt_Titulo.Text) <> "" Then
                     txt_Concepto.Focus()
                 End If
-                Case Keys.Escape
+            Case Keys.Escape
                 txt_Titulo.Text = ""
         End Select
     End Sub
@@ -654,7 +692,7 @@ Public Class Ingreso_Solicitud : Implements IConsulta
 
     Private Sub txt_Concepto_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_Concepto.KeyDown
         Select Case e.KeyData
-          
+
             Case Keys.Escape
                 txt_Concepto.Text = ""
         End Select
@@ -835,7 +873,7 @@ Public Class Ingreso_Solicitud : Implements IConsulta
         Catch ex As Exception
 
         End Try
-      
+
     End Sub
 
     'CALCULO DE RETENCIONES
@@ -1157,7 +1195,7 @@ Public Class Ingreso_Solicitud : Implements IConsulta
         Return Val(formatonumerico(Trim(znumero), decimales))
     End Function
 
-    
+
     Private Sub cbx_TipoDolar_DropDownClosed(sender As Object, e As EventArgs) Handles cbx_TipoDolar.DropDownClosed
         'OBTENEMOS LA PARIDAD
         Try
@@ -1198,5 +1236,42 @@ Public Class Ingreso_Solicitud : Implements IConsulta
         End Select
     End Sub
 
-   
+
+    Private Sub btn_Autorizar_Click(sender As Object, e As EventArgs) Handles btn_Autorizar.Click
+        If MsgBox("¿Desea autorizar la solicitud?", vbYesNo) = vbYes Then
+            With New SoliContra()
+                .Show(Me)
+            End With
+        End If
+    End Sub
+
+    Public Sub Autorizado(Permiso As String, NroSolicutud As Integer) Implements IContraseña.Autorizado
+        Throw New NotImplementedException
+    End Sub
+
+    Public Sub AutorizarSolicitudes() Implements IContraseña.AutorizarSolicitudes
+        'EJECUTAMOS EL GRABAR PARA QUE SE ACTUALIZE LAS MODIFICACIONES
+        btn_Grabar_Click(Nothing, Nothing)
+
+        Dim listaAutorizar As New List(Of String)
+        Dim SQLCnslt As String = ""
+
+        SQLCnslt = "UPDATE SolicitudFondos SET Estado = 'AUTORIZO' WHERE NroSolicitud = '" & NRO_SOLICITUD & "'"
+        listaAutorizar.Add(SQLCnslt)
+
+        Try
+            ExecuteNonQueries("SurfactanSa", listaAutorizar.ToArray())
+
+
+            Dim Wowner As IActualizaSolicitudes = TryCast(Owner, IActualizaSolicitudes)
+
+            If Wowner IsNot Nothing Then
+                Wowner.ActualizaGrilla()
+                Close()
+            End If
+
+        Catch ex As Exception
+
+        End Try
+    End Sub
 End Class

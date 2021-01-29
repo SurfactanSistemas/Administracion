@@ -36,6 +36,21 @@
                     txt_Importe.Text = formatonumerico(.Item("Importe"))
                     Dim Total As Double = .Item("Importe") * Paridad
                     txt_ImporteTotal.Text = formatonumerico(Total)
+
+                    'MOSTRAMOS TAMBIEN EL TIPO DE DOLAR
+                    Label13.Visible = True
+                    txt_TipoParidad.Visible = True
+                    Select Case IIf(IsDBNull(.Item("TipoDolar")), 0, .Item("TipoDolar"))
+                        Case 0
+                            txt_TipoParidad.Text = ""
+                        Case 1
+                            txt_TipoParidad.Text = "Divisa"
+                        Case 2
+                            txt_TipoParidad.Text = "Nacion"
+                        Case 3
+                            txt_TipoParidad.Text = "Informado"
+                    End Select
+                    
                 Else
                     Label6.Visible = False
                     txt_Importe.Visible = False

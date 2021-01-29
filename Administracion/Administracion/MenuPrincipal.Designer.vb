@@ -102,6 +102,7 @@ Partial Class MenuPrincipal
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.btnCambio = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.ConsultaTiposDeCambioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
@@ -117,7 +118,7 @@ Partial Class MenuPrincipal
         '
         'MaestrosToolStripMenuItem
         '
-        Me.MaestrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IngresosDeCuentasContablesToolStripMenuItem, Me.IngresoDeProveedoresToolStripMenuItem, Me.IngresoDeBancosToolStripMenuItem, Me.IngresoDeRubrosDeProveedoresToolStripMenuItem, Me.EnvioEnEMailAProveedoresToolStripMenuItem, Me.EnvioEnEMailAClientesToolStripMenuItem})
+        Me.MaestrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IngresosDeCuentasContablesToolStripMenuItem, Me.IngresoDeProveedoresToolStripMenuItem, Me.IngresoDeBancosToolStripMenuItem, Me.IngresoDeRubrosDeProveedoresToolStripMenuItem, Me.ConsultaTiposDeCambioToolStripMenuItem, Me.EnvioEnEMailAProveedoresToolStripMenuItem, Me.EnvioEnEMailAClientesToolStripMenuItem})
         Me.MaestrosToolStripMenuItem.Name = "MaestrosToolStripMenuItem"
         Me.MaestrosToolStripMenuItem.Size = New System.Drawing.Size(67, 20)
         Me.MaestrosToolStripMenuItem.Text = "Maestros"
@@ -620,6 +621,12 @@ Partial Class MenuPrincipal
         Me.Button1.UseVisualStyleBackColor = True
         Me.Button1.Visible = False
         '
+        'ConsultaTiposDeCambioToolStripMenuItem
+        '
+        Me.ConsultaTiposDeCambioToolStripMenuItem.Name = "ConsultaTiposDeCambioToolStripMenuItem"
+        Me.ConsultaTiposDeCambioToolStripMenuItem.Size = New System.Drawing.Size(253, 22)
+        Me.ConsultaTiposDeCambioToolStripMenuItem.Text = "Consulta Tipos de Cambio"
+        '
         'MenuPrincipal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -720,4 +727,5 @@ Partial Class MenuPrincipal
     Friend WithEvents InformeRecepcionSinFacturasRegistradasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SolicitudDeFondosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents GestionarSolicitudDeFondosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ConsultaTiposDeCambioToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class

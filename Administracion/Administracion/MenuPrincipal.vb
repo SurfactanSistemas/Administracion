@@ -365,4 +365,9 @@ Public Class MenuPrincipal
 
     End Sub
 
+    Private Sub ConsultaTiposDeCambioToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ConsultaTiposDeCambioToolStripMenuItem.Click
+        With New ConsultaTiposDeCambios
+            .Show()
+        End With
+    End Sub
 End Class

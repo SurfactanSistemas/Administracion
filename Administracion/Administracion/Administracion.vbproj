@@ -286,6 +286,12 @@
     <Compile Include="ConsultaRemitos.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ConsultaTiposDeCambios.Designer.vb">
+      <DependentUpon>ConsultaTiposDeCambios.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ConsultaTiposDeCambios.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="DetallesRemitosProveedor.Designer.vb">
       <DependentUpon>DetallesRemitosProveedor.vb</DependentUpon>
     </Compile>
@@ -1128,6 +1134,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ConsultaRemitos.resx">
       <DependentUpon>ConsultaRemitos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConsultaTiposDeCambios.resx">
+      <DependentUpon>ConsultaTiposDeCambios.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DetallesRemitosProveedor.resx">
       <DependentUpon>DetallesRemitosProveedor.vb</DependentUpon>
@@ -2026,6 +2035,10 @@
     <None Include="Resources\add.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\GestorDeArchivos\GestorDeArchivos\GestorDeArchivos.vbproj">
+      <Project>{1d565298-d39d-47ee-a7d2-3e8ed6e228de}</Project>
+      <Name>GestorDeArchivos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Sistema Solicitud Fondos\Sistema_Solicitud_Fondos\Sistema_Solicitud_Fondos\Sistema_Solicitud_Fondos.vbproj">
       <Project>{15e68989-1893-44cb-b220-17ab73b4626c}</Project>
       <Name>Sistema_Solicitud_Fondos</Name>

@@ -306,6 +306,7 @@ Partial Class MostrarSoliFondos
         'txt_Titulo
         '
         Me.txt_Titulo.BackColor = System.Drawing.Color.Aqua
+        Me.txt_Titulo.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txt_Titulo.Location = New System.Drawing.Point(81, 175)
         Me.txt_Titulo.Name = "txt_Titulo"
         Me.txt_Titulo.Size = New System.Drawing.Size(328, 20)

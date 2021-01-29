@@ -69,6 +69,7 @@ namespace Modulo_Capacitacion
             this.temasNoRçealizadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resumenDeCursosRealizadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.promedioDeCalificaciónDeCapacitaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listadoDeLegajosSinActualizarAFechaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cronogramaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.planillaDeCapacitaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cronogramaPorSectorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -79,7 +80,6 @@ namespace Modulo_Capacitacion
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.listadoDeLegajosSinActualizarAFechaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -235,6 +235,7 @@ namespace Modulo_Capacitacion
             this.listados2ToolStripMenuItem.Name = "listados2ToolStripMenuItem";
             this.listados2ToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
             this.listados2ToolStripMenuItem.Text = "Listados";
+            
             // 
             // maestrosToolStripMenuItem1
             // 
@@ -377,6 +378,13 @@ namespace Modulo_Capacitacion
             this.promedioDeCalificaciónDeCapacitaciónToolStripMenuItem.Text = "Promedio de Calificación de Capacitación";
             this.promedioDeCalificaciónDeCapacitaciónToolStripMenuItem.Click += new System.EventHandler(this.promedioDeCalificaciónDeCapacitaciónToolStripMenuItem_Click);
             // 
+            // listadoDeLegajosSinActualizarAFechaToolStripMenuItem
+            // 
+            this.listadoDeLegajosSinActualizarAFechaToolStripMenuItem.Name = "listadoDeLegajosSinActualizarAFechaToolStripMenuItem";
+            this.listadoDeLegajosSinActualizarAFechaToolStripMenuItem.Size = new System.Drawing.Size(312, 22);
+            this.listadoDeLegajosSinActualizarAFechaToolStripMenuItem.Text = "Listado de Legajos sin Actualizar a Fecha";
+            this.listadoDeLegajosSinActualizarAFechaToolStripMenuItem.Click += new System.EventHandler(this.listadoDeLegajosSinActualizarAFechaToolStripMenuItem_Click);
+            // 
             // cronogramaToolStripMenuItem
             // 
             this.cronogramaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -466,13 +474,6 @@ namespace Modulo_Capacitacion
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(784, 538);
             this.tableLayoutPanel1.TabIndex = 4;
-            // 
-            // listadoDeLegajosSinActualizarAFechaToolStripMenuItem
-            // 
-            this.listadoDeLegajosSinActualizarAFechaToolStripMenuItem.Name = "listadoDeLegajosSinActualizarAFechaToolStripMenuItem";
-            this.listadoDeLegajosSinActualizarAFechaToolStripMenuItem.Size = new System.Drawing.Size(312, 22);
-            this.listadoDeLegajosSinActualizarAFechaToolStripMenuItem.Text = "Listado de Legajos sin Actualizar a Fecha";
-            this.listadoDeLegajosSinActualizarAFechaToolStripMenuItem.Click += new System.EventHandler(this.listadoDeLegajosSinActualizarAFechaToolStripMenuItem_Click);
             // 
             // Form1
             // 

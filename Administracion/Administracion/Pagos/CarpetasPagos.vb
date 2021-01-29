@@ -244,13 +244,18 @@ Public Class CarpetasPagos
     End Sub
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
-        _AsignarCarpetas()
-        Me.Close()
+        If ValidarTodosLosTextBox() Then
+            _AsignarCarpetas()
+            Me.Close()
+        End If
+    End Sub
+    
+    Private Sub CarpetasPagos_FormClosing(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
+        If ValidarTodosLosTextBox() Then
+            _AsignarCarpetas()
+        End If
     End Sub
 
-    Private Sub CarpetasPagos_FormClosing(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
-        _AsignarCarpetas()
-    End Sub
 
     Private Sub _AsignarCarpetas()
         _Carpetas(1) = txtCarpeta1.Text
@@ -277,5 +282,24 @@ Public Class CarpetasPagos
             e.Handled = True
         End If
     End Sub
+
+
+    Private Function ValidarTodosLosTextBox() As Boolean
+        Dim Respuesta As Boolean = True
+        For Each control As TextBox In Me.Panel2.Controls.OfType(Of TextBox)()
+            If Trim(control.Text) <> "" Then
+                If Not _ValidarCarpeta(Trim(control.Text)) Then
+                    MsgBox("Se detecto una carpeta no valida." & vbCrLf _
+                           & "Puede revisar los numeros ingresados y dar Enter " _
+                           & "en el campo para saber si es valido", vbExclamation, vbOK)
+                    Respuesta = False
+                    Return Respuesta
+                End If
+            End If
+
+        Next
+
+        Return Respuesta
+    End Function
 
 End Class

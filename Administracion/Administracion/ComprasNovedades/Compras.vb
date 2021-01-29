@@ -391,8 +391,26 @@ Public Class Compras
         Next
     End Sub
 
+    Private Function validarDespacho(ByVal Despacho As String) As Boolean
+        Dim WDespacho As String = Despacho.Replace(" ", "")
+        If WDespacho.Length = 0 Or WDespacho.Length = 16 Then
+            Return True
+        Else
+            Return False
+        End If
+
+
+
+    End Function
+
+
     Private Sub btnAgregar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAgregar.Click
         Dim validoComoPymenacion As Boolean
+
+        If validarDespacho(txtDespacho.Text) = False Then
+            MsgBox("Verificar el campo despacho, debe ser vacio o tener 16 caracteres")
+            Exit Sub
+        End If
 
         _EliminarFilasEnBlanco()
 
@@ -1604,6 +1622,11 @@ Public Class Compras
 
         If e.KeyData = Keys.Enter Then
 
+            If validarDespacho(txtDespacho.Text) = False Then
+                MsgBox("Verificar el campo despacho, debe ser vacio o tener 16 caracteres")
+                Exit Sub
+            End If
+
             Dim WCuenta As CuentaContable
             If IsNothing(proveedor) Then
                 WCuenta = DAOProveedor.cuentaDefault
@@ -2337,14 +2360,21 @@ Public Class Compras
             If Not Directory.Exists(CarpetaAux) Then
                 Directory.CreateDirectory(CarpetaAux)
             End If
-            With New EditorArchivos(2, CarpetaAux)
-                'With New EditorArchivos(2, RutaGuardar & "\Auxiliar")
+
+            With New GestorDeArchivos.EditorArchivos(2, CarpetaAux)
                 .Show()
             End With
+            ' With New EditorArchivos(2, CarpetaAux)
+            '     'With New EditorArchivos(2, RutaGuardar & "\Auxiliar")
+            '     .Show()
+            ' End With
         Else
             With New EditorArchivos(2, RutaGuardar & "\" & txtNroInterno.Text)
                 .Show()
             End With
+            'With New EditorArchivos(2, RutaGuardar & "\" & txtNroInterno.Text)
+            '    .Show()
+            'End With
         End If
        
     End Sub

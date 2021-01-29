@@ -1,10 +1,13 @@
 ﻿Imports System.Data.SqlClient
 Imports System.IO
 Imports Microsoft.Office.Interop.Outlook
+Imports System.Text.RegularExpressions
 
 Public Class AvisoOPAProveedores
 
     Private WNoEnviados(,) As String = New String(1000, 2) {}
+    Private WNoEnviadosPorERRORDEMAIL(,) As String = New String(1000, 2) {}
+    Dim WIndiceNoEnviadosPorERRORDEMAIL As Integer = 0
     Dim WIndiceNoEnviados As Integer = 0
     Private WPorComando As Boolean = True
     Private WBCC As String = ""
@@ -193,13 +196,14 @@ Public Class AvisoOPAProveedores
                             Dim WTipoOrd As Integer = Val(OrDefault(.Item("TipoOrd"), ""))
 
                             If Trim(WProveedor) <> "" Then
-
-                                If Not _EnviarAvisoSegunSelectivoSemanal(WProveedor, WFechaOP) Then Continue For
+                                'DESCOMENTAR
+                                ' If Not _EnviarAvisoSegunSelectivoSemanal(WProveedor, WFechaOP) Then Continue For
 
                                 WFechasTransferencias = WFechasTransferencias.TrimEnd(",")
 
                                 If _EsPellital() Then
-                                    _EnviarAvisoOPDisponiblePellital(WProveedor, WDescProveedor, WOrden, EsPorTransferencia, WFechasTransferencias, PorTransferenciaYCheques, HayECheques:=WHayECheques, FechasECheques:=WFechasECheques, TipoOrd:=WTipoOrd)
+                                    'DESCOMENTAR
+                                    '_EnviarAvisoOPDisponiblePellital(WProveedor, WDescProveedor, WOrden, EsPorTransferencia, WFechasTransferencias, PorTransferenciaYCheques, HayECheques:=WHayECheques, FechasECheques:=WFechasECheques, TipoOrd:=WTipoOrd)
                                 Else
                                     _EnviarAvisoOPDisponible(WProveedor, WDescProveedor, WOrden, EsPorTransferencia, WFechasTransferencias, PorTransferenciaYCheques, HayECheques:=WHayECheques, FechasECheques:=WFechasECheques, TipoOrd:=WTipoOrd, WHayCompensaciones:=WHayCompensaciones, WFechasCompensaciones:=WFechasCompensaciones)
                                 End If
@@ -249,6 +253,13 @@ Public Class AvisoOPAProveedores
 
             End If
 
+            'INCLUIDO POR ANDRES
+            'DESCOMENTAR Cambiar borrar el not del WporComando
+            If WIndiceNoEnviadosPorERRORDEMAIL > 0 And Not WPorComando Then
+                EnviarMailAviso_MalCargados()
+            End If
+            'FIN INCLUCION
+
             If Not WPorComando Then
                 MsgBox("¡Proceso finalizado correctamente!", MsgBoxStyle.Information)
             Else
@@ -265,6 +276,53 @@ Public Class AvisoOPAProveedores
 
     End Sub
 
+    Private Sub EnviarMailAviso_MalCargados()
+        
+
+        Try
+            'Direccion donde se mandan los proveedores con mails incorrectos
+            Dim WMailAEnviar As String = "andy_fdra@hotmail.com"
+
+            Dim WBody As String = ""
+
+
+            WBody = "Se intento enviar un mail de aviso de Orden de Pago a los siguientes Proveedores, " & "<br/>" _
+                    & " debido a que se detectaron caracteres no permitidos en el mail asignado a Orden de Pago." & "<br/>"
+
+
+            For i = 1 To WIndiceNoEnviadosPorERRORDEMAIL
+                Dim Proveedor As String = WNoEnviadosPorERRORDEMAIL(i, 0)
+                Dim OrdenPago As String = WNoEnviadosPorERRORDEMAIL(i, 1)
+                
+
+                WBody &= " - Proveedor : "
+                WBody &= "<strong>" & Proveedor & "  " & _TraerDescProveedor(Proveedor) & "</strong>"
+                WBody &= " Para la Orden Nro: "
+                WBody &= "<strong>" & OrdenPago & "</strong>" & "<br/>"
+
+            Next
+
+            Dim WAsunto As String = "Proveedores Con Mails a Revisar"
+
+
+            Dim WAdjuntos As New List(Of String)
+            
+            'For Each wAdjunto As String In WAdjuntos
+            '    If Not File.Exists(wAdjunto) Then
+            '        Throw New System.Exception("No existe el archivo " & wAdjunto)
+            '    End If
+            'Next
+
+            WBCC = "andy.fdra@gmail.com"
+
+            _EnviarEmail(WMailAEnviar, WBCC, WAsunto, WBody, WAdjuntos.ToArray)
+            
+
+        Catch ex As System.Exception
+            Throw New System.Exception("Hubo un problema al querer procesar el envío de mail por OP Disponible." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        End Try
+
+    End Sub
     Private Function _EnviarAvisoSegunSelectivoSemanal(ByVal wProveedor As String, ByVal wFechaOp As String) As Boolean
 
         Dim WFechaInicial As String = ""
@@ -447,6 +505,20 @@ Public Class AvisoOPAProveedores
         Return WTabla
     End Function
 
+    '
+    'INCLUIDO POR ANDRES
+    '
+    Public Shared Function ValidarCorreo(ByVal correo As String) As Boolean
+        Dim sreg As String = "^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-0-9a-z]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$"
+        Dim rgx As Regex = New Regex(sreg)
+        Dim rgxok As Match = rgx.Match(correo)
+        Return rgxok.Success
+    End Function
+
+    '
+    'FIN INCLUSION
+    '
+
     Private Sub _EnviarAvisoOPDisponible(ByVal Proveedor As String, ByVal wDescProveedor As String, Optional ByVal OrdenPago As String = "", Optional ByVal EsPorTransferencia As Boolean = False, Optional ByVal wFechasTransferencias As String = "", Optional ByVal PorTransferenciaYCheques As Boolean = False, Optional ByVal HayECheques As Boolean = False, Optional ByVal FechasECheques As String = "", Optional ByVal TipoOrd As Integer = 0, Optional ByVal WHayCompensaciones As Boolean = False, Optional ByVal WFechasCompensaciones As String = "")
 
         If Proveedor.Trim = "" Then Exit Sub
@@ -476,6 +548,25 @@ Public Class AvisoOPAProveedores
                     WNoEnviados(WIndiceNoEnviados, 1) = OrdenPago
                     Exit Sub
                 End If
+
+                '
+                'PARTE AGREGADA PARA COMPROBAR QUE EL MAIL ESTE ESCRITO CORRECTAMENTE
+                '20/01/2021
+                '
+                If ValidarCorreo(Trim(LCase(WMailOp))) Then
+                    ' MsgBox("el mail esta bien", vbExclamation)
+                Else
+                    'MsgBox("contiene caracter no valido verificar", vbExclamation)
+                    WIndiceNoEnviadosPorERRORDEMAIL += 1
+                    WNoEnviadosPorERRORDEMAIL(WIndiceNoEnviadosPorERRORDEMAIL, 0) = Proveedor
+                    WNoEnviadosPorERRORDEMAIL(WIndiceNoEnviadosPorERRORDEMAIL, 1) = OrdenPago
+                    Exit Sub
+                End If
+                '
+                'FIN INCLUCION ANDRES
+                '
+
+
 
                 '
                 ' SACAR DESPUES. SOLO PRUEBA.
@@ -622,23 +713,25 @@ Public Class AvisoOPAProveedores
                 Next
 
                 Dim WAsunto As String = "ORDEN DE PAGO - SURFACTAN S.A. - "
+                'DESCOMENTAR
+                'WBCC &= "mlarias@surfactan.com.ar;"
+                
+                ' If TipoOrd = 2 Then ' Si es Anticipo
+                '     'WBCC &= "juanfs@surfactan.com.ar"
+                '     WMailOp = "juanfs@surfactan.com.ar;"
+                '     WAsunto = "ANTICIPO DE PAGO - SURFACTAN S.A. - "
+                ' End If
+                '
 
-                WBCC &= "mlarias@surfactan.com.ar;"
+                '_EnviarEmail(WMailOp, WBCC, WAsunto, WBody, WAdjuntos.ToArray)
 
-                If TipoOrd = 2 Then ' Si es Anticipo
-                    'WBCC &= "juanfs@surfactan.com.ar"
-                    WMailOp = "juanfs@surfactan.com.ar;"
-                    WAsunto = "ANTICIPO DE PAGO - SURFACTAN S.A. - "
-                End If
-
-                _EnviarEmail(WMailOp, WBCC, WAsunto, WBody, WAdjuntos.ToArray)
-
-                If WPorComando Then
-                    WBCC &= "recepcion@surfactan.com.ar;"
-                End If
-
-                _MarcarOPComoEnviada(OrdenPago)
-
+                '  If WPorComando Then
+                '      WBCC &= "recepcion@surfactan.com.ar;"
+                '  End If
+                '
+                '
+                '_MarcarOPComoEnviada(OrdenPago)
+                'DESCOMENTAR
             End If
 
         Catch ex As System.Exception
@@ -653,15 +746,14 @@ Public Class AvisoOPAProveedores
         End Try
 
     End Sub
-
-    Private Sub _EnviarAvisoOPDisponiblePellital(ByVal Proveedor As String, ByVal wDescProveedor As String, Optional ByVal OrdenPago As String = "", Optional ByVal EsPorTransferencia As Boolean = False, Optional ByVal wFechasTransferencias As String = "", Optional ByVal PorTransferenciaYCheques As Boolean = False, Optional ByVal HayECheques As Boolean = False, Optional ByVal FechasECheques As String = "", Optional ByVal TipoOrd As Integer = 0)
+       Private Sub _EnviarAvisoOPDisponiblePellital(ByVal Proveedor As String, ByVal wDescProveedor As String, Optional ByVal OrdenPago As String = "", Optional ByVal EsPorTransferencia As Boolean = False, Optional ByVal wFechasTransferencias As String = "", Optional ByVal PorTransferenciaYCheques As Boolean = False, Optional ByVal HayECheques As Boolean = False, Optional ByVal FechasECheques As String = "", Optional ByVal TipoOrd As Integer = 0)
 
         If Proveedor.Trim = "" Then Exit Sub
         If EsPorTransferencia And Trim(OrdenPago) = "" Then Exit Sub
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT ISNULL(MailOP, '') MailOP FROM Proveedor WHERE Proveedor = '" & Proveedor & "'")
-        Dim dr As SqlDataReader
+    Dim cn As SqlConnection = New SqlConnection()
+    Dim cm As SqlCommand = New SqlCommand("SELECT ISNULL(MailOP, '') MailOP FROM Proveedor WHERE Proveedor = '" & Proveedor & "'")
+    Dim dr As SqlDataReader
 
         Try
 
@@ -675,7 +767,7 @@ Public Class AvisoOPAProveedores
 
                 dr.Read()
 
-                Dim WMailOp As String = dr.Item("MailOp")
+    Dim WMailOp As String = dr.Item("MailOp")
 
                 If WMailOp.Trim = "" Then
                     WIndiceNoEnviados += 1
@@ -684,12 +776,12 @@ Public Class AvisoOPAProveedores
                     Exit Sub
                 End If
 
-                '
-                ' SACAR DESPUES. SOLO PRUEBA.
-                '
-                ' WMailOp = "sistemas@surfactan.com.ar"
+    '
+    ' SACAR DESPUES. SOLO PRUEBA.
+    '
+    ' WMailOp = "sistemas@surfactan.com.ar"
 
-                Dim WBody = ""
+    Dim WBody = ""
 
                 If EsPorTransferencia Then
 
@@ -708,7 +800,7 @@ Public Class AvisoOPAProveedores
                     End If
 
                     If PorTransferenciaYCheques Then
-                        'WBody &= "." & "<br/>" & "<br/>" & "Así mismo, tiene Cheque(s) para retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir del día <strong>" & txtAPartirFecha.Text & "</strong> los <strong>Martes y Jueves</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
+    'WBody &= "." & "<br/>" & "<br/>" & "Así mismo, tiene Cheque(s) para retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir del día <strong>" & txtAPartirFecha.Text & "</strong> los <strong>Martes y Jueves</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
                         WBody &= "." & "<br/>" & "<br/>" & "Así mismo, tiene Cheque(s) para retirar por nuestras oficinas <em>(Tucumán 3475, B1644CAQ Victoria, Buenos Aires)</em>, a partir de la <strong>semana próxima</strong> los <strong>Martes y Jueves</strong> en el horario de <strong>08:00 a 15:00 hs.</strong>"
                     Else
                         WBody &= "." & "<br/>" & "<br/>" & "Adjuntamos Orden de Pago y retenciones si correspondiesen."
@@ -768,12 +860,12 @@ Public Class AvisoOPAProveedores
                     WBody = "Sres. <strong>" & wDescProveedor.Trim.ToUpper & "</strong> <br/>" & "<br/>" & WBody
                 End If
 
-                'Select Case Proveedor
-                '    Case "10167878480", "10000000100", "10071081483", "10069345023", "10066352912"
-                '        WBody = WBody & "<br/>" & "<br/>" & "En caso de cualquier consulta, por favor dirigirla a <strong><em>fgmonti@surfactan.com.ar</em></strong>"
-                'End Select
+    'Select Case Proveedor
+    '    Case "10167878480", "10000000100", "10071081483", "10069345023", "10066352912"
+    '        WBody = WBody & "<br/>" & "<br/>" & "En caso de cualquier consulta, por favor dirigirla a <strong><em>fgmonti@surfactan.com.ar</em></strong>"
+    'End Select
 
-                Dim WAdjuntos As New List(Of String)
+    Dim WAdjuntos As New List(Of String)
 
                 If EsPorTransferencia And Not PorTransferenciaYCheques Then
                     WAdjuntos = _PrepararAdjuntos(OrdenPago)
@@ -785,11 +877,11 @@ Public Class AvisoOPAProveedores
                     End If
                 Next
 
-                Dim WAsunto As String = "ORDEN DE PAGO - PELLITAL S.A. - "
+    Dim WAsunto As String = "ORDEN DE PAGO - PELLITAL S.A. - "
 
                 If TipoOrd = 2 Then ' Si es Anticipo
-                    'WBCC &= "svitale@pellital.com.ar;"
-                    
+    'WBCC &= "svitale@pellital.com.ar;"
+
                     WAsunto = "ANTICIPO DE PAGO - PELLITAL S.A. - "
 
                 End If
@@ -797,7 +889,7 @@ Public Class AvisoOPAProveedores
                 _EnviarEmail(WMailOp, WBCC, WAsunto, WBody, WAdjuntos.ToArray)
 
                 If WPorComando Then
-                    'WBCC = "svitale@pellital.com.ar;"
+    'WBCC = "svitale@pellital.com.ar;"
                 End If
 
                 _MarcarOPComoEnviada(OrdenPago)

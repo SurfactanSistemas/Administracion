@@ -18,7 +18,7 @@ Imports System
 Imports System.ComponentModel
 
 
-Public Class NotaEmpaqueIngles
+Public Class ReporteNotaEmpaqueIngles
     Inherits ReportClass
     
     Public Sub New()
@@ -27,7 +27,7 @@ Public Class NotaEmpaqueIngles
     
     Public Overrides Property ResourceName() As String
         Get
-            Return "NotaEmpaqueIngles.rpt"
+            Return "ReporteNotaEmpaqueIngles.rpt"
         End Get
         Set
             'Do nothing
@@ -45,7 +45,7 @@ Public Class NotaEmpaqueIngles
     
     Public Overrides Property FullResourceName() As String
         Get
-            Return "ArmadoPallets.NotaEmpaqueIngles.rpt"
+            Return "ArmadoPallets.ReporteNotaEmpaqueIngles.rpt"
         End Get
         Set
             'Do nothing
@@ -123,10 +123,18 @@ Public Class NotaEmpaqueIngles
             Return Me.ReportDefinition.Sections(8)
         End Get
     End Property
+    
+    <Browsable(false),  _
+     DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
+    Public ReadOnly Property Parameter_Total_Peso_Brutos() As CrystalDecisions.[Shared].IParameterField
+        Get
+            Return Me.DataDefinition.ParameterFields(0)
+        End Get
+    End Property
 End Class
 
 <System.Drawing.ToolboxBitmapAttribute(GetType(CrystalDecisions.[Shared].ExportOptions), "report.bmp")>  _
-Public Class CachedNotaEmpaqueIngles
+Public Class CachedReporteNotaEmpaqueIngles
     Inherits Component
     Implements ICachedReport
     
@@ -168,7 +176,7 @@ Public Class CachedNotaEmpaqueIngles
     End Property
     
     Public Overridable Function CreateReport() As CrystalDecisions.CrystalReports.Engine.ReportDocument Implements CrystalDecisions.ReportSource.ICachedReport.CreateReport
-        Dim rpt As NotaEmpaqueIngles = New NotaEmpaqueIngles()
+        Dim rpt As ReporteNotaEmpaqueIngles = New ReporteNotaEmpaqueIngles()
         rpt.Site = Me.Site
         Return rpt
     End Function

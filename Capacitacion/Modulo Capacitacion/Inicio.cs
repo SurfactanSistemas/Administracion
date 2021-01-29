@@ -206,5 +206,7 @@ namespace Modulo_Capacitacion
         {
             _Abrir(new Listados.ListadoLegajosAActualizarAFecha.ListadoLegajosActualizarAFecha());
         }
+
+      
     }
 }
