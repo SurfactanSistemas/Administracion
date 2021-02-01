@@ -255,7 +255,7 @@ Public Class AvisoOPAProveedores
 
             'INCLUIDO POR ANDRES
             'DESCOMENTAR Cambiar borrar el not del WporComando
-            If WIndiceNoEnviadosPorERRORDEMAIL > 0 And Not WPorComando Then
+            If WIndiceNoEnviadosPorERRORDEMAIL > 0 And WPorComando Then
                 EnviarMailAviso_MalCargados()
             End If
             'FIN INCLUCION
@@ -277,18 +277,14 @@ Public Class AvisoOPAProveedores
     End Sub
 
     Private Sub EnviarMailAviso_MalCargados()
-        
 
         Try
             'Direccion donde se mandan los proveedores con mails incorrectos
-            Dim WMailAEnviar As String = "andy_fdra@hotmail.com"
+            Dim WMailAEnviar As String = "recepcion@surfactan.com.ar"
 
             Dim WBody As String = ""
 
-
-            WBody = "Se intento enviar un mail de aviso de Orden de Pago a los siguientes Proveedores, " & "<br/>" _
-                    & " debido a que se detectaron caracteres no permitidos en el mail asignado a Orden de Pago." & "<br/>"
-
+            WBody = "A los siguientes proveedores no se pudo enviar el mail de Aviso de Orden de Pago, debido a errores de tipeo en la dirección de mail correspondiente." & "<br/>"
 
             For i = 1 To WIndiceNoEnviadosPorERRORDEMAIL
                 Dim Proveedor As String = WNoEnviadosPorERRORDEMAIL(i, 0)
@@ -302,24 +298,17 @@ Public Class AvisoOPAProveedores
 
             Next
 
-            Dim WAsunto As String = "Proveedores Con Mails a Revisar"
-
+            'Dim WAsunto As String = "Proveedores Con Mails a Revisar"
+            Dim WAsunto As String = "Notificación de no envío de Aviso de OP a Proveedores por error en direcciones."
 
             Dim WAdjuntos As New List(Of String)
-            
-            'For Each wAdjunto As String In WAdjuntos
-            '    If Not File.Exists(wAdjunto) Then
-            '        Throw New System.Exception("No existe el archivo " & wAdjunto)
-            '    End If
-            'Next
 
-            WBCC = "andy.fdra@gmail.com"
+            WBCC = "soporte@surfactan.com.ar"
 
             _EnviarEmail(WMailAEnviar, WBCC, WAsunto, WBody, WAdjuntos.ToArray)
-            
 
         Catch ex As System.Exception
-            Throw New System.Exception("Hubo un problema al querer procesar el envío de mail por OP Disponible." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+            If Not WPorComando Then Throw New System.Exception("Hubo un problema al querer procesar el envío de mail por OP Disponible." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
         End Try
 
     End Sub
@@ -357,7 +346,7 @@ Public Class AvisoOPAProveedores
             End If
 
         Catch ex As System.Exception
-            Throw New System.Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+            If Not WPorComando Then Throw New System.Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
         Finally
 
             dr = Nothing
@@ -385,7 +374,7 @@ Public Class AvisoOPAProveedores
             cm.ExecuteNonQuery()
 
         Catch ex As System.Exception
-            Throw New System.Exception("No se pudo marcar la Orden de Pago '" & OrdenPago & "' como 'ENVIADA'." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+            If Not WPorComando Then Throw New System.Exception("No se pudo marcar la Orden de Pago '" & OrdenPago & "' como 'ENVIADA'." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
         Finally
 
             cn.Close()
@@ -418,7 +407,7 @@ Public Class AvisoOPAProveedores
             End If
 
         Catch ex As System.Exception
-            Throw New System.Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+            If Not WPorComando Then Throw New System.Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
         Finally
 
             dr = Nothing
@@ -492,7 +481,7 @@ Public Class AvisoOPAProveedores
             End If
 
         Catch ex As System.Exception
-            Throw New System.Exception("Hubo un problema al querer consultar los Proveedores con OP." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+            If Not WPorComando Then Throw New System.Exception("Hubo un problema al querer consultar los Proveedores con OP." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
         Finally
 
             dr = Nothing
@@ -508,17 +497,28 @@ Public Class AvisoOPAProveedores
     '
     'INCLUIDO POR ANDRES
     '
-    Public Shared Function ValidarCorreo(ByVal correo As String) As Boolean
-        Dim sreg As String = "^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-0-9a-z]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$"
+    Public Shared Function FormatoCorreoValido(ByVal correo As String) As Boolean
+        '
+        ' La siguiente expresión regular permite direcciones del siguiente estilo:
+        '   sop+surfac@mail.com
+        '   sop.surfac@mail.com.ar
+        '   sop_surfac@mail.com
+        '   sopsurfac@mail.com.ar
+        ' Exige que lo posterior al @ tenga el formato mail.com o mail.com.ar
+        '   Ej: sop+surfac@mail.com
+        '
+        '   Toma como invalido lo siguiente: soporte@surfactan
+        '
+        Dim sreg As String = "^[a-zA-Z0-9.+_]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
         Dim rgx As Regex = New Regex(sreg)
-        Dim rgxok As Match = rgx.Match(correo)
-        Return rgxok.Success
+
+        Return rgx.IsMatch(correo)
+
     End Function
 
     '
     'FIN INCLUSION
     '
-
     Private Sub _EnviarAvisoOPDisponible(ByVal Proveedor As String, ByVal wDescProveedor As String, Optional ByVal OrdenPago As String = "", Optional ByVal EsPorTransferencia As Boolean = False, Optional ByVal wFechasTransferencias As String = "", Optional ByVal PorTransferenciaYCheques As Boolean = False, Optional ByVal HayECheques As Boolean = False, Optional ByVal FechasECheques As String = "", Optional ByVal TipoOrd As Integer = 0, Optional ByVal WHayCompensaciones As Boolean = False, Optional ByVal WFechasCompensaciones As String = "")
 
         If Proveedor.Trim = "" Then Exit Sub
@@ -553,9 +553,7 @@ Public Class AvisoOPAProveedores
                 'PARTE AGREGADA PARA COMPROBAR QUE EL MAIL ESTE ESCRITO CORRECTAMENTE
                 '20/01/2021
                 '
-                If ValidarCorreo(Trim(LCase(WMailOp))) Then
-                    ' MsgBox("el mail esta bien", vbExclamation)
-                Else
+                If Not FormatoCorreoValido(Trim(LCase(WMailOp))) Then
                     'MsgBox("contiene caracter no valido verificar", vbExclamation)
                     WIndiceNoEnviadosPorERRORDEMAIL += 1
                     WNoEnviadosPorERRORDEMAIL(WIndiceNoEnviadosPorERRORDEMAIL, 0) = Proveedor
@@ -708,14 +706,18 @@ Public Class AvisoOPAProveedores
 
                 For Each wAdjunto As String In WAdjuntos
                     If Not File.Exists(wAdjunto) Then
-                        Throw New System.Exception("No existe el archivo " & wAdjunto)
+                        If Not WPorComando Then
+                            Throw New System.Exception("No existe el archivo " & wAdjunto)
+                        Else
+                            Exit Sub
+                        End If
                     End If
                 Next
 
                 Dim WAsunto As String = "ORDEN DE PAGO - SURFACTAN S.A. - "
                 'DESCOMENTAR
                 'WBCC &= "mlarias@surfactan.com.ar;"
-                
+
                 ' If TipoOrd = 2 Then ' Si es Anticipo
                 '     'WBCC &= "juanfs@surfactan.com.ar"
                 '     WMailOp = "juanfs@surfactan.com.ar;"
@@ -735,7 +737,7 @@ Public Class AvisoOPAProveedores
             End If
 
         Catch ex As System.Exception
-            Throw New System.Exception("Hubo un problema al querer procesar el envío de mail por OP Disponible." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+            If Not WPorComando Then Throw New System.Exception("Hubo un problema al querer procesar el envío de mail por OP Disponible." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
         Finally
 
             dr = Nothing
@@ -873,7 +875,11 @@ Public Class AvisoOPAProveedores
 
                 For Each wAdjunto As String In WAdjuntos
                     If Not File.Exists(wAdjunto) Then
-                        Throw New System.Exception("No existe el archivo " & wAdjunto)
+                        If Not WPorComando Then
+                            Throw New System.Exception("No existe el archivo " & wAdjunto)
+                        Else
+                            Exit Sub
+                        End If
                     End If
                 Next
 
@@ -897,7 +903,7 @@ Public Class AvisoOPAProveedores
             End If
 
         Catch ex As System.Exception
-            Throw New System.Exception("Hubo un problema al querer procesar el envío de mail por OP Disponible." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+            If Not WPorComando Then Throw New System.Exception("Hubo un problema al querer procesar el envío de mail por OP Disponible." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
         Finally
 
             dr = Nothing
@@ -947,7 +953,7 @@ Public Class AvisoOPAProveedores
                 End If
 
             Catch ex As System.Exception
-                Throw New System.Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+                If Not WPorComando Then Throw New System.Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
             Finally
 
                 dr = Nothing
@@ -1027,7 +1033,7 @@ Public Class AvisoOPAProveedores
             _Mail = Nothing
 
         Catch ex As System.Exception
-            Throw New System.Exception("Ocurrió un problema al querer enviar Aviso de Orden de Pago disponible." & vbCrLf & vbCrLf & " Motivo: " & ex.Message)
+            If Not WPorComando Then Throw New System.Exception("Ocurrió un problema al querer enviar Aviso de Orden de Pago disponible." & vbCrLf & vbCrLf & " Motivo: " & ex.Message)
         Finally
             _Outlook = Nothing
         End Try

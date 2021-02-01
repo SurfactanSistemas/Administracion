@@ -1,6 +1,4 @@
 ﻿Imports System.Configuration
-Imports Sistema_Solicitud_Fondos
-Imports Util
 
 Public Class MenuPrincipal
     ReadOnly forms As New List(Of Form)

@@ -1,8 +1,11 @@
 ﻿Imports System.Data.SqlClient
 Imports System.IO
 Imports Microsoft.Office.Interop.Outlook
+Imports System.Text.RegularExpressions
 
 Public Class GestionAvisosOPDisponiblesProveedores
+
+    Private WProveedoresConMailsSinEnviar As New List(Of String)
 
     Private Sub btnLimpiar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLimpiar.Click
         txtFecha.Text = Date.Now.ToString("dd/MM/yyyy")
@@ -161,6 +164,11 @@ Public Class GestionAvisosOPDisponiblesProveedores
                 Dim WMailOp As String = dr.Item("MailOp")
 
                 If Trim(WMailOp) = "" Then Exit Sub
+
+                If Not FormatoCorreoValido(WMailOp) Then
+                    WProveedoresConMailsSinEnviar.Add(String.Format("{0} ({1}) -  {2}", ZProveedor, wDescProveedor, WMailOp))
+                    Exit Sub
+                End If
 
                 '
                 ' SACAR DESPUES. SOLO PRUEBA.
@@ -324,6 +332,25 @@ Public Class GestionAvisosOPDisponiblesProveedores
         End Try
 
     End Sub
+
+    Public Shared Function FormatoCorreoValido(ByVal correo As String) As Boolean
+        '
+        ' La siguiente expresión regular permite direcciones del siguiente estilo:
+        '   sop+surfac@mail.com
+        '   sop.surfac@mail.com.ar
+        '   sop_surfac@mail.com
+        '   sopsurfac@mail.com.ar
+        ' Exige que lo posterior al @ tenga el formato mail.com o mail.com.ar
+        '   Ej: sop+surfac@mail.com
+        '
+        '   Toma como invalido lo siguiente: soporte@surfactan
+        '
+        Dim sreg As String = "^[a-zA-Z0-9.+_]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
+        Dim rgx As Regex = New Regex(sreg)
+
+        Return rgx.IsMatch(correo)
+
+    End Function
 
     Private Sub _EnviarAvisoOPDisponiblePellital(ByVal ZProveedor As String, ByVal wDescProveedor As String, Optional ByVal OrdenPago As String = "", Optional ByVal EsPorTransferencia As Boolean = False, Optional ByVal wFechasTransferencias As String = "", Optional ByVal PorTransferenciaYCheques As Boolean = False, Optional ByVal HayECheques As Boolean = False, Optional ByVal FechasECheques As String = "")
 
@@ -598,6 +625,8 @@ Public Class GestionAvisosOPDisponiblesProveedores
         ProgressBar1.Value = 0
         ProgressBar1.Maximum = dgvPagos.Rows.Count + 1
 
+        WProveedoresConMailsSinEnviar.Clear()
+
         For Each row2 As DataGridViewRow In dgvPagos.Rows
             Dim WFechasTransferencias As String = ""
             Dim WFechasCompensaciones As String = ""
@@ -644,7 +673,7 @@ Public Class GestionAvisosOPDisponiblesProveedores
 
                                 Case 6 ' Compensación entre Cuentas Corrientes.
                                     EsPorTransferencia = Val(OrDefault(.Item("Cuenta"), "00")) = 5
-                                    
+
                                     WHayCompensaciones = Val(OrDefault(.Item("Cuenta"), "00")) = 5
 
                                     If WHayCompensaciones And Not WFechasCompensaciones.Contains(OrDefault(.Item("Fecha2"), "")) Then
@@ -696,6 +725,13 @@ Public Class GestionAvisosOPDisponiblesProveedores
         Next
 
         ProgressBar1.Value = 0
+
+        '
+        ' Avisamos, en caso de existir, que hay proveedores con error en sus mails.
+        '
+        If WProveedoresConMailsSinEnviar.Count > 0 Then
+            MsgBox("Los siguientes proveedores tienen problemas con el formato de su casilla de mail: " & vbCrLf & vbCrLf & String.Join(vbCrLf, WProveedoresConMailsSinEnviar))
+        End If
 
         btnLimpiar_Click(Nothing, Nothing)
 

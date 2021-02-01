@@ -6,6 +6,10 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "EvaluacionProvMPFarma", "EvaluacionProvMPFarma\EvaluacionProvMPFarma.vbproj", "{27070567-9E32-498F-83BF-641C853E8ACA}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Administracion", "Administracion\Administracion.vbproj", "{D0AB16CA-EAF0-49C9-8319-EA4B24006A9F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{15E68989-1893-44CB-B220-17AB73B4626C} = {15E68989-1893-44CB-B220-17AB73B4626C}
+		{1D565298-D39D-47EE-A7D2-3E8ED6E228DE} = {1D565298-D39D-47EE-A7D2-3E8ED6E228DE}
+	EndProjectSection
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Util", "..\Util\Util\Util.vbproj", "{CC5D60FD-9755-4C61-B96C-F56173586BB9}"
 EndProject

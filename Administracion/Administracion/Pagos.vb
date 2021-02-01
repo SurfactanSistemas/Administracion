@@ -2,6 +2,7 @@
 Imports System.Data.SqlClient
 Imports System.Globalization
 Imports System.IO
+Imports System.Text.RegularExpressions
 Imports Util.Clases
 Imports CrystalDecisions.CrystalReports.Engine
 Imports Microsoft.Office.Interop.Outlook
@@ -2881,6 +2882,7 @@ Public Class Pagos
         txtOrdenPago.Text = WOrdPago
 
         If txtProveedor.Text <> "" Then
+
             Dim WEmailOp_ As DataRow = GetSingle("SELECT MailOp FROM Proveedor WHERE Proveedor = '" & txtProveedor.Text & "'")
 
             Dim Wpasa As Boolean = False
@@ -2891,6 +2893,8 @@ Public Class Pagos
 
             If Not Wpasa Then
                 MsgBox("El Proveedor (" & txtProveedor.Text & ")  " & txtRazonSocial.Text.ToUpper.Trim & ", no tiene cargado un mail donde enviar el Aviso de OP.", MsgBoxStyle.Information)
+            ElseIf Not FormatoCorreoValido(WEmailOp_(0)) Then
+                MsgBox("El Proveedor (" & txtProveedor.Text & ")  " & txtRazonSocial.Text.ToUpper.Trim & ", no tiene cargado un mail con FORMATO VALIDO donde enviar el Aviso de OP.", MsgBoxStyle.Information)
             End If
 
         End If
@@ -2905,6 +2909,28 @@ Public Class Pagos
         ' Limpiamos pantalla.
         btnLimpiar.PerformClick()
     End Sub
+
+    Public Shared Function FormatoCorreoValido(ByVal correo As String) As Boolean
+
+        correo = Trim(OrDefault(correo, ""))
+
+        '
+        ' La siguiente expresión regular permite direcciones del siguiente estilo:
+        '   sop+surfac@mail.com
+        '   sop.surfac@mail.com.ar
+        '   sop_surfac@mail.com
+        '   sopsurfac@mail.com.ar
+        ' Exige que lo posterior al @ tenga el formato mail.com o mail.com.ar
+        '   Ej: sop+surfac@mail.com
+        '
+        '   Toma como invalido lo siguiente: soporte@surfactan
+        '
+        Dim sreg As String = "^[a-zA-Z0-9.+_]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
+        Dim rgx As Regex = New Regex(sreg)
+
+        Return rgx.IsMatch(correo)
+
+    End Function
 
     Private Sub crearNotasCreditoDebito()
         Dim interno As String
