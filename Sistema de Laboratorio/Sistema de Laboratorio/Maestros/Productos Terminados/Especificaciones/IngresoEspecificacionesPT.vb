@@ -688,7 +688,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
             If Val(wDesdeEspecif) <> 0 And Val(wHastaEspecif) = 9999 Then
 
-                If Val(wMenorIgualEspecif) = 1 Then Return String.Format("Mínimo {0} {1}", wHastaEspecif, wUnidadEspecif)
+                If Val(wMenorIgualEspecif) = 1 Then Return String.Format("Mínimo {0} {1}", wDesdeEspecif, wUnidadEspecif)
 
                 Return String.Format("Mayor a {0} {1}", wHastaEspecif, wUnidadEspecif)
 
@@ -1495,74 +1495,64 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
         '
         If Val(txtEtapa.Text) = 99 Then
 
-            If MsgBox("Falta Cargar Descripciones en Ingles" & vbCrLf & "¿Desea guardarlas de igual manera?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+            Dim WInglesVacios As Boolean = dgvEspecifIngles.Rows.Cast(Of DataGridViewRow).ToList.Where(Function(r) Trim(OrDefault(r.Cells("EspecificacionIngles").Value, "")) <> "" AndAlso Trim(OrDefault(r.Cells("DescEnsayoIngles").Value, "")) = "").Count > 0
 
-
-
-                WRenglon = 0
-
-                WConsultas.Add("DELETE FROM CargaVIngles WHERE Terminado = '" & txtTerminado.Text & "' And Paso = '99'")
-
-                '
-                ' Grabamos los datos de cada renglon.
-                '
-                For Each row As DataGridViewRow In dgvEspecifIngles.Rows
-
-                    Dim WValor, WFarmacopea, WUnidadEspecif As String
-
-                    With row
-
-                        WValor = OrDefault(.Cells("DescEnsayoIngles").Value, "")
-                        WFarmacopea = OrDefault(.Cells("FarmacopeaIngles").Value, "")
-                        WUnidadEspecif = OrDefault(.Cells("UnidadEspecifIngles").Value, "")
-
-                        Dim ZSql, XPaso, Auxi As String
-
-                        WRenglon += 1
-
-                        XPaso = txtEtapa.Text.PadLeft(4, "0")
-                        Auxi = WRenglon.ToString.PadLeft(2, "0")
-
-                        Dim WClave = txtTerminado.Text + XPaso + Auxi
-
-                        ZSql = ""
-                        ZSql = ZSql & "INSERT INTO CargaVIngles ("
-                        ZSql = ZSql & "Clave ,"
-                        ZSql = ZSql & "Terminado ,"
-                        ZSql = ZSql & "Paso ,"
-                        ZSql = ZSql & "Renglon ,"
-                        ZSql = ZSql & "Valor ,"
-                        ZSql = ZSql & "Farmacopea ,"
-                        ZSql = ZSql & "UnidadEspecif "
-                        ZSql = ZSql & ")"
-                        ZSql = ZSql & "Values ("
-                        ZSql = ZSql & "'" & WClave & "',"
-                        ZSql = ZSql & "'" & txtTerminado.Text & "',"
-                        ZSql = ZSql & "'" & txtEtapa.Text & "',"
-                        ZSql = ZSql & "'" & Trim(Str$(WRenglon)) & "',"
-                        ZSql = ZSql & "'" & WValor & "',"
-                        ZSql = ZSql & "'" & WFarmacopea & "',"
-                        ZSql = ZSql & "'" & WUnidadEspecif & "'"
-                        ZSql = ZSql & ")"
-
-                        WConsultas.Add(ZSql)
-
-                    End With
-                Next
-
-            Else
-                'Si Responde que no no se graba nada
+            If WInglesVacios AndAlso MsgBox("Falta Cargar Descripciones en Ingles" & vbCrLf & "¿Desea guardarlas de igual manera?", MsgBoxStyle.YesNo) <> MsgBoxResult.Yes Then
                 Exit Sub
-
             End If
 
+            WRenglon = 0
 
+            WConsultas.Add("DELETE FROM CargaVIngles WHERE Terminado = '" & txtTerminado.Text & "' And Paso = '99'")
 
+            '
+            ' Grabamos los datos de cada renglon.
+            '
+            For Each row As DataGridViewRow In dgvEspecifIngles.Rows
 
+                Dim WValor, WFarmacopea, WUnidadEspecif As String
+
+                With row
+
+                    WValor = OrDefault(.Cells("DescEnsayoIngles").Value, "")
+                    WFarmacopea = OrDefault(.Cells("FarmacopeaIngles").Value, "")
+                    WUnidadEspecif = OrDefault(.Cells("UnidadEspecifIngles").Value, "")
+
+                    Dim ZSql, XPaso, Auxi As String
+
+                    WRenglon += 1
+
+                    XPaso = txtEtapa.Text.PadLeft(4, "0")
+                    Auxi = WRenglon.ToString.PadLeft(2, "0")
+
+                    Dim WClave = txtTerminado.Text + XPaso + Auxi
+
+                    ZSql = ""
+                    ZSql = ZSql & "INSERT INTO CargaVIngles ("
+                    ZSql = ZSql & "Clave ,"
+                    ZSql = ZSql & "Terminado ,"
+                    ZSql = ZSql & "Paso ,"
+                    ZSql = ZSql & "Renglon ,"
+                    ZSql = ZSql & "Valor ,"
+                    ZSql = ZSql & "Farmacopea ,"
+                    ZSql = ZSql & "UnidadEspecif "
+                    ZSql = ZSql & ")"
+                    ZSql = ZSql & "Values ("
+                    ZSql = ZSql & "'" & WClave & "',"
+                    ZSql = ZSql & "'" & txtTerminado.Text & "',"
+                    ZSql = ZSql & "'" & txtEtapa.Text & "',"
+                    ZSql = ZSql & "'" & Trim(Str$(WRenglon)) & "',"
+                    ZSql = ZSql & "'" & WValor & "',"
+                    ZSql = ZSql & "'" & WFarmacopea & "',"
+                    ZSql = ZSql & "'" & WUnidadEspecif & "'"
+                    ZSql = ZSql & ")"
+
+                    WConsultas.Add(ZSql)
+
+                End With
+            Next
 
         End If
-
-
 
         Dim WObservacion(10) As String
 

@@ -61,7 +61,7 @@ Public Class ListadoTerminadosFormulas : Implements Util.IAyudaGeneral
 
         Dim WTerminado As String = OrDefault(row.Cells("Codigo").Value, "")
 
-        With New IngresoFormulasEnsayo(WTerminado)
+        With New IngresoFormulasEnsayo(ID_Permiso, WTerminado)
             .Show(Me)
             .btnAgregar.PerformClick()
         End With

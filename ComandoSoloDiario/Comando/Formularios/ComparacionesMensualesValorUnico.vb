@@ -357,7 +357,7 @@ Public Class ComparacionesMensualesValorUnico
                 _FormatearAnual(datos)
 
                 ds.Tables.Add(datos)
-            Case 2
+            Case 2, 3
 
                 Dim anios(4) As Integer
 
@@ -512,18 +512,18 @@ Public Class ComparacionesMensualesValorUnico
 
         _datos.Clear()
 
-        For i = 1 To datos.Rows.Count / 9
+        For i = 1 To datos.Rows.Count / 10
             _row = _datos.NewRow()
             _datos.Rows.Add(_row)
         Next
 
-        Dim aux = -9
+        Dim aux = -10
 
         For i = 0 To _datos.Rows.Count - 1
 
             With _datos.Rows(i)
 
-                aux += 9
+                aux += 10
 
                 ' Asignamos los datos generales segun el primer registro de cada año.
                 .Item("Tipo") = datos.Rows(aux).Item("Tipo")
@@ -538,7 +538,7 @@ Public Class ComparacionesMensualesValorUnico
                 Next
 
                 ' Recorremos los datos de todas las lineas por mes y vamos consolidando en el mes correspondiente.
-                For x = aux To aux + 8
+                For x = aux To aux + 9
 
                     For j = 1 To 12
 
@@ -1914,9 +1914,10 @@ Public Class ComparacionesMensualesValorUnico
                 Case 1 ' Ex anual
 
                     .Tipo = 3
-                Case 2 ' Ex Comparativo Mensual
+                Case 2, 3 ' Ex Comparativo Mensual
 
                     .Tipo = 4
+                    .ComparativoAnualizado = ckComparativoMensualPeriodosAnual.Checked
             End Select
 
             If rbMensualComparativo.Checked Then
@@ -2712,7 +2713,7 @@ Public Class ComparacionesMensualesValorUnico
             gbComparativoDiario.Enabled = False
             gbMensualComparativo.Enabled = False
             cmbPeriodo.Enabled = True
-            cmbPeriodo.DataSource = {"Mensual", "Comparativo Entre Lineas", "Comparativo Entre Periodos"}
+            cmbPeriodo.DataSource = {"Mensual", "Comparativo Entre Lineas", "Comparativo Entre Periodos", "Comparativo Entre Periodos Acumulado por Año"}
             txtMesDesde.Focus()
         End If
 

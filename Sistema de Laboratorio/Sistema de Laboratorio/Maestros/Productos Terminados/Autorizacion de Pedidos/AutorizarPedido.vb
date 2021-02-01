@@ -1,9 +1,11 @@
-﻿Imports Util
+﻿Imports System.IO
+Imports Util
 Imports Util.Clases
 
 Public Class AutorizarPedido
     Private Pedido As String
     Dim PermitirGrabar As Boolean
+    Private ZRowReventa As DataGridViewRow = Nothing
 
     Sub New(ByVal Pedido As String, ByVal PermitirGra As Boolean)
 
@@ -24,6 +26,14 @@ Public Class AutorizarPedido
         btnAutorizar.Enabled = PermitirGrabar
 
         lblPedido.Text = Pedido
+        _CargarDatos()
+
+    End Sub
+
+    Private Sub _CargarDatos()
+
+        dgvDatos.Rows.Clear()
+
         Dim WCamposLotes As String = ""
 
         For i = 1 To 12
@@ -52,6 +62,10 @@ Public Class AutorizarPedido
                 WEntrega = formatonumerico(OrDefault(row.Item("AEntregar"), "0"))
                 WPartida = OrDefault(row.Item("Partidas"), "0")
 
+                '
+                ' Si tiene mas de un lote cargado, dejo el primer renglon del producto sin lotes ni partidas ni boton de CoA.
+                ' Voy desglosando luego una fila por lote.
+                '
                 If Val(OrDefault(.Item("Lote1"), "")) <> 0 And Val(OrDefault(.Item("Lote2"), "")) <> 0 Then
 
                     With dgvDatos.Rows(dgvDatos.Rows.Add)
@@ -61,6 +75,8 @@ Public Class AutorizarPedido
                         .Cells("Entregar").Value = WEntrega
                         .Cells("Partida").Value = IIf(Val(WPartida) = -1, "VARIOS", WPartida)
                         .Cells("Canti").Value = ""
+                        .Cells("CoA").Value = ""
+                        .Cells("PathCoa").Value = ""
                     End With
 
                     For x = 1 To 12
@@ -89,12 +105,31 @@ Public Class AutorizarPedido
                                 .Cells("Venc75").Value = WVenc(0)
                                 .Cells("Revalida").Value = WVenc(1)
                                 .DefaultCellStyle.BackColor = Globales.WBackColorCuaternario
+
+                                .Cells("CoA").Value = "Generar"
+                                .Cells("PathCoa").Value = ""
+
                             End With
+
+                            Dim path As String = _PathArchivoCoa(dgvDatos.Rows(r))
+
+                            If path <> "" Then
+
+                                If path.EndsWith(".pdf") Then
+                                    If File.Exists(path) Then
+                                        With dgvDatos.Rows(r)
+                                            .Cells("CoA").Value = "Ver"
+                                            .Cells("PathCoa").Value = path
+                                        End With
+                                    End If
+                                End If
+
+                            End If
                         End If
                     Next
                 Else
-
-                    With dgvDatos.Rows(dgvDatos.Rows.Add)
+                    Dim i = dgvDatos.Rows.Add
+                    With dgvDatos.Rows(i)
                         .Cells("Producto").Value = WProducto
                         .Cells("Descripcion").Value = WDescripcion
                         .Cells("Cantidad").Value = WCantidad
@@ -106,13 +141,32 @@ Public Class AutorizarPedido
 
                         .Cells("Venc75").Value = WVenc(0)
                         .Cells("Revalida").Value = WVenc(1)
+
+                        .Cells("CoA").Value = "Generar"
+                        .Cells("PathCoa").Value = ""
+
                     End With
+
+                    Dim path As String = _PathArchivoCoa(dgvDatos.Rows(i))
+
+                    If path <> "" Then
+
+                        If path.EndsWith(".pdf") Then
+                            If File.Exists(path) Then
+                                With dgvDatos.Rows(i)
+                                    .Cells("CoA").Value = "Ver"
+                                    .Cells("PathCoa").Value = path
+                                End With
+                            End If
+                        End If
+
+                    End If
 
                 End If
 
             End With
-        Next
 
+        Next
     End Sub
 
     Private Function _DeterminarVencimientos(ByVal Partida As String) As String()
@@ -193,9 +247,214 @@ Public Class AutorizarPedido
         End If
     End Sub
 
-    Private Sub dgvDatos_CellMouseEnter(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvDatos.CellMouseEnter
-        If e.ColumnIndex = dgvDatos.Columns("Partida").Index Then
-            ToolTip1.Show("Haga Doble Click sobre la partida para ver los detalles de la Hoja de Producción, sus ensayos y movimientos.", sender, 10000)
-        End If
+    Private Sub dgvDatos_CellMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgvDatos.CellMouseClick
+        If e.ColumnIndex <> dgvDatos.Columns("CoA").Index Then Exit Sub
+
+        '
+        ' Esto evita errores cuando el click del mouse cuelga y termina soltando el click en otra celda, arrastrando la seleccion a varias celdas.
+        '
+
+        For Each c As DataGridViewCell In dgvDatos.SelectedCells
+            dgvDatos.Rows(c.RowIndex).Selected = True
+        Next
+
+        If dgvDatos.SelectedRows.Count < 1 Then Exit Sub
+
+        Dim row As DataGridViewRow = dgvDatos.SelectedRows(0)
+
+        dgvDatos.ClearSelection()
+
+        Dim tipo As String = UCase(row.Cells("CoA").Value)
+
+        Select Case tipo
+            Case "GENERAR"
+
+                '
+                ' En caso de ser producto de Reventa, solamente se copia el archivo correspondiente.
+                '
+                If _EsProductoReventa(row) Then
+                    Dim path As String = _PathArchivoCoa(row)
+
+                    If path <> "" Then
+
+                        If Not path.EndsWith(".pdf") Then
+
+                            If Not Directory.Exists(path) Then Directory.CreateDirectory(path)
+
+                        End If
+
+                        Process.Start(path)
+
+                        MsgBox("Presione ACEPTAR cuando haya cargado el CoA correspondiente.", MsgBoxStyle.Information)
+
+                        _CargarDatos()
+
+                    End If
+
+                    'MsgBox("Es producto de reventa!")
+                Else
+                    Dim path As String = _GenerarCoA(row)
+
+                    If path.Trim <> "" AndAlso System.IO.File.Exists(path) Then
+                        With row
+                            .Cells("CoA").Value = "Ver"
+                            .Cells("PathCoA").Value = path
+                        End With
+
+                        Process.Start(path)
+
+                    End If
+                End If
+
+            Case "VER"
+
+                With row
+                    .Cells("CoA").Value = "Ver"
+                    Dim path As String = OrDefault(.Cells("PathCoA").Value, "")
+
+                    If path.Trim <> "" AndAlso System.IO.File.Exists(path) Then
+                        Process.Start(path)
+                    End If
+
+                End With
+
+        End Select
+
     End Sub
+
+    Private Function _EsProductoReventa(ByVal row As DataGridViewRow) As Boolean
+
+        Dim WProd As String = _DeterminarProducto(row)
+
+        Return _EsProductoReventa(WProd)
+
+    End Function
+
+    Private Function _PathArchivoCoa(ByVal row As DataGridViewRow) As String
+
+        '
+        ' Busco el producto al que corresponde la partida.
+        '
+        Dim WProducto As String = _DeterminarProducto(row)
+
+        Dim WPartida As String = UCase(OrDefault(row.Cells("Partida").Value, ""))
+
+        '
+        ' Esto no deberia pasar, pero en caso de no encontrar absolutamente nada, nos vamos a cara de perro.
+        '
+        If WProducto.Trim = "" OrElse WProducto.Replace(" ", "").Length < 12 Then Return ""
+
+        Dim WPed As DataRow = GetSingle("SELECT Cliente FROM Pedido WHERE Pedido = '" & Pedido & "'", "SurfactanSa")
+
+        If WPed Is Nothing Then Return ""
+
+        Dim WCliente As String = OrDefault(WPed("Cliente"), "")
+
+        If _EsProductoReventa(WProducto) Then
+            '
+            ' Verifica si existe el archivo con el primer formato.
+            '
+            Dim WNombrePDF As String = String.Format("{0} P{1}* *LP*.pdf", WProducto, WPartida)
+            Dim WRuta As String = OrDefault(Configuration.ConfigurationManager.AppSettings("PATH_COAS_FARMA_REVENTA"), "") & "\"
+
+            Dim path As String = String.Format("{0}\{1}", WRuta, WNombrePDF)
+
+            If Not IO.File.Exists(path) Then
+
+                WNombrePDF = String.Format("{0} {1}.pdf", WProducto, WPartida)
+
+                path = String.Format("{0}\{1}", WRuta, WNombrePDF)
+
+                If Not IO.File.Exists(path) Then
+                    path = String.Format("{0}", WRuta)
+                End If
+
+            End If
+
+            Return path
+
+        Else
+
+            Dim WNombrePDF As String = String.Format("Certificado {0} {1} Pda {2}.pdf", Pedido, WCliente, WPartida)
+            Dim WRuta As String = Pedido & "\"
+
+            Return String.Format("{0}\{1}\{2}", OrDefault(Configuration.ConfigurationManager.AppSettings("PATH_COAS_FARMA"), ""), WRuta.Replace(Chr(34), ""), WNombrePDF)
+
+        End If
+
+    End Function
+
+    Private Function _EsProductoReventa(ByVal Prod As String) As Boolean
+
+        Dim WProd As DataRow = GetSingle("SELECT Tipo FROM codigomono WHERE Codigo = " + "'" & Prod & "'", "SurfactanSa")
+
+        If WProd IsNot Nothing Then
+            Return Val(OrDefault(WProd("Tipo"), "")) = 0
+        End If
+
+        Return False
+
+    End Function
+
+    Private Function _GenerarCoA(row As DataGridViewRow) As String
+
+        '
+        ' Busco el producto al que corresponde la partida.
+        '
+        Dim WProducto As String = _DeterminarProducto(row)
+
+        Dim WPartida As String = UCase(OrDefault(row.Cells("Partida").Value, ""))
+        Dim WCanti As String = formatonumerico(OrDefault(row.Cells("Canti").Value, ""))
+
+        '
+        ' Esto no deberia pasar, pero en caso de no encontrar absolutamente nada, nos vamos a cara de perro.
+        '
+        If WProducto.Trim = "" OrElse WProducto.Replace(" ", "").Length < 12 Then Return ""
+
+        Dim WPed As DataRow = GetSingle("SELECT Cliente FROM Pedido WHERE Pedido = '" & Pedido & "'", "SurfactanSa")
+
+        If WPed Is Nothing Then Return ""
+
+        Dim WCliente As String = OrDefault(WPed("Cliente"), "")
+
+        Dim WNombrePDF As String = String.Format("Certificado {0} {1} Pda {2}.pdf", Pedido, WCliente, WPartida)
+        Dim WRuta As String = Pedido & "\"
+
+        With New EmisionCertificadoAnalisis
+            .WindowState = FormWindowState.Minimized
+            .Show()
+            .txtCantidad.Text = WCanti
+            .txtCliente.Text = WCliente
+            .txtPartida.Text = WPartida
+            .lblTerminado.Text = WProducto
+            .cmbTipoSalida.SelectedIndex = 3
+            ._EmitirCertificado(True, WNombrePDF, WRuta)
+            .Close()
+        End With
+
+        Return String.Format("{0}\{1}\{2}", OrDefault(Configuration.ConfigurationManager.AppSettings("PATH_COAS_FARMA"), ""), WRuta.Replace(Chr(34), ""), WNombrePDF)
+
+    End Function
+
+    Private Function _DeterminarProducto(row As DataGridViewRow) As String
+
+        Dim WProducto As String = UCase(OrDefault(row.Cells("Producto").Value, ""))
+
+        '
+        ' En caso de estar en blanco, busco el proximo en la fila superior.
+        '
+        If WProducto.Trim = "" Then
+            For i As Integer = row.Index To 0 Step -1
+                Dim prod As String = OrDefault(dgvDatos.Rows(i).Cells("Producto").Value, "").ToString.Trim
+
+                If prod <> "" Then
+                    WProducto = prod
+                    Exit For
+                End If
+            Next
+        End If
+
+        Return WProducto
+
+    End Function
 End Class

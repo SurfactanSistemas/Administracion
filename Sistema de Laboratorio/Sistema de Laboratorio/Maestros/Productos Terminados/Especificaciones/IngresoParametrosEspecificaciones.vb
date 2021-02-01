@@ -153,6 +153,7 @@
             txtDesde.Enabled = True
             txtHasta.Enabled = True
             txtUnidad.Enabled = True
+            ckMenorIgual.Enabled = True
             txtDesde.Focus()
         ElseIf rbCumpleNoCumple.Checked Then
             txtDesde.Enabled = ckHabDesdeHasta.Checked

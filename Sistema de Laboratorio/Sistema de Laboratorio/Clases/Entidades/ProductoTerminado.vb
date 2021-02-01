@@ -109,7 +109,7 @@ Namespace Entidades
                 End If
             Next
 
-            If Val(WVida) <> 0 Then WVencimiento = "01" & "/" & WMes.ToString.PadLeft(2, "0") & "/" & WAnio.ToString.PadLeft(4, "0")
+            If Val(WVida) <> 0 Then WVencimiento = _Left(WElaboracion, 2).PadLeft(2, "0") & "/" & WMes.ToString.PadLeft(2, "0") & "/" & WAnio.ToString.PadLeft(4, "0")
 
             '
             ' Determinamos si la Hoja de Producción, se trata de una mezcla y guardamos el Lote mas antiguo para la validación de Vencimiento posterior.
@@ -162,63 +162,65 @@ Namespace Entidades
             Dim WFechaActual = Date.Now.ToString("dd/MM/yyyy")
             Dim WFechaActualOrd = ordenaFecha(WFechaActual)
 
-            If WTipoPro = "FA" Then
-                If WMezcla = "S" And WEmpresaHoja = "Surfactan_III" Then
+            If WMezcla = "S" And WEmpresaHoja = "Surfactan_III" Then
 
-                    If Val(WMezclaPartida) = 999999 Then
-                        MsgBox("Es una Hoja de produccion de mezcla y no se informaron las partidas a utilizar")
-                        Return {"", ""}
-                    End If
+                If Val(WMezclaPartida) = 999999 Then
+                    MsgBox("Es una Hoja de produccion de mezcla y no se informaron las partidas a utilizar")
+                    Return {"", ""}
+                End If
 
-                    '
-                    ' Verifico la fecha de vencimiento de la hoja mas antigua.
-                    '
-                    Dim WHojaMezcla As DataRow = GetSingle("SELECT Fecha, Revalida, MesesRevalida, FechaRevalida FROM Hoja WHERE Hoja = '" & WMezclaPartida & "' And Producto = '" & WMezclaCodTerminado & "' And Renglon = 1", WEmpresaHoja)
+                '
+                ' Verifico la fecha de vencimiento de la hoja mas antigua.
+                '
+                Dim WHojaMezcla As DataRow = GetSingle("SELECT Fecha, Revalida, MesesRevalida, FechaRevalida FROM Hoja WHERE Hoja = '" & WMezclaPartida & "' And Producto = '" & WMezclaCodTerminado & "' And Renglon = 1", WEmpresaHoja)
 
-                    If WHojaMezcla IsNot Nothing Then
+                If WHojaMezcla IsNot Nothing Then
 
-                        With WHojaMezcla
+                    With WHojaMezcla
 
-                            Dim WFechaAuxi As String = OrDefault(.Item("Fecha"), "00/00/0000")
-                            WElaboracion = WFechaAuxi
+                        Dim WFechaAuxi As String = OrDefault(.Item("Fecha"), "00/00/0000")
+                        WElaboracion = WFechaAuxi
 
-                            Dim WMesMezcla As Integer = Val(Mid(WFechaAuxi, 4, 2))
-                            Dim WAnioMezcla As Integer = Val(_Left(WFechaAuxi, 4))
-                            Dim WVidaMezcla As Integer = WVida
+                        Dim WMesMezcla As Integer = Val(Mid(WFechaAuxi, 4, 2))
+                        Dim WAnioMezcla As Integer = Val(_Left(WFechaAuxi, 4))
+                        Dim WVidaMezcla As Integer = WVida
 
-                            Dim WRevalidaMezcla As Integer = OrDefault(.Item("Revalida"), 0)
-                            Dim WMesesRevalidaMezcla As Integer = OrDefault(.Item("MesesRevalida"), 0)
-                            Dim WFechaRevalidaMezcla As String = OrDefault(.Item("FechaRevalida"), "00/00/0000")
+                        Dim WRevalidaMezcla As Integer = OrDefault(.Item("Revalida"), 0)
+                        Dim WMesesRevalidaMezcla As Integer = OrDefault(.Item("MesesRevalida"), 0)
+                        Dim WFechaRevalidaMezcla As String = OrDefault(.Item("FechaRevalida"), "00/00/0000")
 
-                            If WRevalidaMezcla <> 0 Then
-                                WMesMezcla = Mid(WFechaRevalidaMezcla, 4, 2)
-                                WAnioMezcla = _Left(WFechaRevalidaMezcla, 4)
-                                WVidaMezcla = WMesesRevalidaMezcla
+                        If WRevalidaMezcla <> 0 Then
+                            WMesMezcla = Mid(WFechaRevalidaMezcla, 4, 2)
+                            WAnioMezcla = _Left(WFechaRevalidaMezcla, 4)
+                            WVidaMezcla = WMesesRevalidaMezcla
+                        End If
+
+                        For Ciclo = 1 To WVidaMezcla
+                            WMesMezcla += 1
+                            If WMesMezcla > 12 Then
+                                WAnioMezcla += 1
+                                WMesMezcla = 1
                             End If
+                        Next Ciclo
 
-                            For Ciclo = 1 To WVidaMezcla
-                                WMesMezcla += 1
-                                If WMesMezcla > 12 Then
-                                    WAnioMezcla += 1
-                                    WMesMezcla = 1
-                                End If
-                            Next Ciclo
+                        If Val(WVidaMezcla) <> 0 Then WVencimiento = _Left(WElaboracion, 2).PadLeft(2, "0") & "/" & WMesMezcla.ToString.PadLeft(2, "0") & "/" & WAnioMezcla.ToString.PadLeft(4, "0")
 
-                            If Val(WVidaMezcla) <> 0 Then WVencimiento = "01" & "/" & WMesMezcla.ToString.PadLeft(2, "0") & "/" & WAnioMezcla.ToString.PadLeft(4, "0")
+                    End With
+                End If
 
-                        End With
-                    End If
+            Else
 
+                If WTipoPro = "FA" Then
                     '
                     ' Verificamos si se trata de un Mono Producto.
                     '
-                    Dim WBuscaMono As DataRow = GetSingle("SELECT Codigo FROM CodigoMono WHERE Codigo = '" & WMezclaCodTerminado & "'", "SurfactanSa")
+                    Dim WBuscaMono As DataRow = GetSingle("SELECT Codigo FROM CodigoMono WHERE Codigo = '" & Producto & "'", "SurfactanSa")
 
                     If WBuscaMono IsNot Nothing Or WLinea = 20 Or WLinea = 28 Then
 
                         Dim WDatosMono() As String
 
-                        WDatosMono = _CalculaMonoOtro(WMezclaPartida, WEmpresaHoja)
+                        WDatosMono = _CalculaMonoOtro(Partida, WEmpresaHoja)
 
                         If WDatosMono(0) = "-1" And WDatosMono(1) = "-1" Then Return {"", "", ""}
 
@@ -243,18 +245,21 @@ Namespace Entidades
                         End If
 
                     End If
-
                 Else
-                    Dim WDatosMono() As String = _CalculaMonoOtro(Partida, WEmpresaHoja)
+                    If EsMono(Producto) Then
 
-                    If WDatosMono(0) = "-1" And WDatosMono(1) = "-1" Then Return {"", ""}
+                        Dim WDatosMono() As String = _CalculaMonoOtro(Partida, WEmpresaHoja)
 
-                    If Trim(WDatosMono(1)) <> "" Then
-                        WVencimiento = WDatosMono(1)
-                    End If
+                        If WDatosMono(0) = "-1" And WDatosMono(1) = "-1" Then Return {"", ""}
 
-                    If Trim(WDatosMono(0)) <> "" Then
-                        WElaboracion = WDatosMono(0)
+                        If Trim(WDatosMono(1)) <> "" Then
+                            WVencimiento = WDatosMono(1)
+                        End If
+
+                        If Trim(WDatosMono(0)) <> "" Then
+                            WElaboracion = WDatosMono(0)
+                        End If
+
                     End If
 
                     If WVencimiento <> "" Then
@@ -267,32 +272,148 @@ Namespace Entidades
                         End If
                     End If
                 End If
-            Else
 
-                Dim WDatosMono() As String = _CalculaMonoOtro(Partida, WEmpresaHoja)
-
-                If WDatosMono(0) = "-1" And WDatosMono(1) = "-1" Then Return {"", ""}
-
-                If Trim(WDatosMono(0)) <> "" Then
-                    WElaboracion = WDatosMono(0)
-                End If
-
-                If Trim(WDatosMono(1)) <> "" Then
-                    WVencimiento = WDatosMono(1)
-
-                    If WVencimiento <> "" Then
-                        If Val(ordenaFecha(WVencimiento)) < Val(WFechaActualOrd) Then
-                            If Not SoloConsulta Then
-                                MsgBox("La Partida se encuentra vencida " + Chr(13) + _
-                                       "Por favor comuniquese con el laboratorio para su revalida", MsgBoxStyle.Exclamation)
-                                Return {"", ""}
-                            End If
-                        End If
-                    End If
-
-                End If
             End If
-            
+
+            'If WTipoPro = "FA" Then
+            '    If WMezcla = "S" And WEmpresaHoja = "Surfactan_III" Then
+
+            '        If Val(WMezclaPartida) = 999999 Then
+            '            MsgBox("Es una Hoja de produccion de mezcla y no se informaron las partidas a utilizar")
+            '            Return {"", ""}
+            '        End If
+
+            '        '
+            '        ' Verifico la fecha de vencimiento de la hoja mas antigua.
+            '        '
+            '        Dim WHojaMezcla As DataRow = GetSingle("SELECT Fecha, Revalida, MesesRevalida, FechaRevalida FROM Hoja WHERE Hoja = '" & WMezclaPartida & "' And Producto = '" & WMezclaCodTerminado & "' And Renglon = 1", WEmpresaHoja)
+
+            '        If WHojaMezcla IsNot Nothing Then
+
+            '            With WHojaMezcla
+
+            '                Dim WFechaAuxi As String = OrDefault(.Item("Fecha"), "00/00/0000")
+            '                WElaboracion = WFechaAuxi
+
+            '                Dim WMesMezcla As Integer = Val(Mid(WFechaAuxi, 4, 2))
+            '                Dim WAnioMezcla As Integer = Val(_Left(WFechaAuxi, 4))
+            '                Dim WVidaMezcla As Integer = WVida
+
+            '                Dim WRevalidaMezcla As Integer = OrDefault(.Item("Revalida"), 0)
+            '                Dim WMesesRevalidaMezcla As Integer = OrDefault(.Item("MesesRevalida"), 0)
+            '                Dim WFechaRevalidaMezcla As String = OrDefault(.Item("FechaRevalida"), "00/00/0000")
+
+            '                If WRevalidaMezcla <> 0 Then
+            '                    WMesMezcla = Mid(WFechaRevalidaMezcla, 4, 2)
+            '                    WAnioMezcla = _Left(WFechaRevalidaMezcla, 4)
+            '                    WVidaMezcla = WMesesRevalidaMezcla
+            '                End If
+
+            '                For Ciclo = 1 To WVidaMezcla
+            '                    WMesMezcla += 1
+            '                    If WMesMezcla > 12 Then
+            '                        WAnioMezcla += 1
+            '                        WMesMezcla = 1
+            '                    End If
+            '                Next Ciclo
+
+            '                If Val(WVidaMezcla) <> 0 Then WVencimiento = _Left(WElaboracion, 2).PadLeft(2, "0") & "/" & WMesMezcla.ToString.PadLeft(2, "0") & "/" & WAnioMezcla.ToString.PadLeft(4, "0")
+
+            '            End With
+            '        End If
+
+            '    Else
+
+            '        If WTipoPro = "FA" Then
+            '            '
+            '            ' Verificamos si se trata de un Mono Producto.
+            '            '
+            '            Dim WBuscaMono As DataRow = GetSingle("SELECT Codigo FROM CodigoMono WHERE Codigo = '" & WMezclaCodTerminado & "'", "SurfactanSa")
+
+            '            If WBuscaMono IsNot Nothing Or WLinea = 20 Or WLinea = 28 Then
+
+            '                Dim WDatosMono() As String
+
+            '                WDatosMono = _CalculaMonoOtro(WMezclaPartida, WEmpresaHoja)
+
+            '                If WDatosMono(0) = "-1" And WDatosMono(1) = "-1" Then Return {"", "", ""}
+
+            '                If Trim(WDatosMono(1)) <> "" Then
+            '                    WVencimiento = WDatosMono(1)
+            '                End If
+
+            '                If Trim(WDatosMono(0)) <> "" Then
+            '                    WElaboracion = WDatosMono(0)
+            '                End If
+
+            '                If WDatosMono(3).Trim <> "" Then WLoteOriginal = WDatosMono(3).Trim
+
+            '                If WVencimiento <> "" Then
+            '                    If Val(ordenaFecha(WVencimiento)) < Val(WFechaActualOrd) Then
+            '                        If Not SoloConsulta Then
+            '                            MsgBox("La Partida se encuentra vencida " + Chr(13) + _
+            '                "Por favor comuniquese con el laboratorio para su revalida", MsgBoxStyle.Exclamation)
+            '                            Return {"", ""}
+            '                        End If
+            '                    End If
+            '                End If
+
+            '            End If
+
+            '        End If
+
+            '        If EsMono(Producto) Then
+
+            '            Dim WDatosMono() As String = _CalculaMonoOtro(Partida, WEmpresaHoja)
+
+            '            If WDatosMono(0) = "-1" And WDatosMono(1) = "-1" Then Return {"", ""}
+
+            '            If Trim(WDatosMono(1)) <> "" Then
+            '                WVencimiento = WDatosMono(1)
+            '            End If
+
+            '            If Trim(WDatosMono(0)) <> "" Then
+            '                WElaboracion = WDatosMono(0)
+            '            End If
+
+            '        End If
+
+            '        If WVencimiento <> "" Then
+            '            If Val(ordenaFecha(WVencimiento)) < Val(WFechaActualOrd) Then
+            '                If Not SoloConsulta Then
+            '                    MsgBox("La Partida se encuentra vencida " + Chr(13) + _
+            '        "Por favor comuniquese con el laboratorio para su revalida", MsgBoxStyle.Exclamation)
+            '                    Return {"", ""}
+            '                End If
+            '            End If
+            '        End If
+            '    End If
+            'Else
+
+            '    Dim WDatosMono() As String = _CalculaMonoOtro(Partida, WEmpresaHoja)
+
+            '    If WDatosMono(0) = "-1" And WDatosMono(1) = "-1" Then Return {"", ""}
+
+            '    If Trim(WDatosMono(0)) <> "" Then
+            '        WElaboracion = WDatosMono(0)
+            '    End If
+
+            '    If Trim(WDatosMono(1)) <> "" Then
+            '        WVencimiento = WDatosMono(1)
+
+            '        If WVencimiento <> "" Then
+            '            If Val(ordenaFecha(WVencimiento)) < Val(WFechaActualOrd) Then
+            '                If Not SoloConsulta Then
+            '                    MsgBox("La Partida se encuentra vencida " + Chr(13) + _
+            '                           "Por favor comuniquese con el laboratorio para su revalida", MsgBoxStyle.Exclamation)
+            '                    Return {"", ""}
+            '                End If
+            '            End If
+            '        End If
+
+            '    End If
+            'End If
+
             Return {WElaboracion, WVencimiento, WLoteOriginal}
         End Function
 
@@ -512,11 +633,12 @@ Namespace Entidades
                 If Val(wDesdeEspecif) = 0 And Val(wHastaEspecif) <> 0 Then
 
                     If Val(wMenorIgualEspecif) = 1 Then
-                        If Val(wTipoEspecif) = 0 Then
-                            WParam = String.Format("< {0} {1}", wHastaEspecif, wUnidadEspecif)
-                        Else
-                            WParam = String.Format("Máximo {0} {1}", wHastaEspecif, wUnidadEspecif)
-                        End If
+                        'If Val(wTipoEspecif) = 0 Then
+                        '    WParam = String.Format("< {0} {1}", wHastaEspecif, wUnidadEspecif)
+                        'Else
+
+                        'End If
+                        WParam = String.Format("Máximo {0} {1}", wHastaEspecif, wUnidadEspecif)
                     Else
                         WParam = String.Format("Menor a {0} {1}", wHastaEspecif, wUnidadEspecif)
                     End If
@@ -527,7 +649,7 @@ Namespace Entidades
                 If Val(wDesdeEspecif) <> 0 And Val(wHastaEspecif) = 9999 Then
 
                     If Val(wMenorIgualEspecif) = 1 Then
-                        WParam = String.Format("Mínimo {0} {1}", wHastaEspecif, wUnidadEspecif)
+                        WParam = String.Format("Mínimo {0} {1}", wDesdeEspecif, wUnidadEspecif)
                     Else
                         WParam = String.Format("Mayor a {0} {1}", wHastaEspecif, wUnidadEspecif)
                     End If

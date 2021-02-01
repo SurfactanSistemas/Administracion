@@ -2811,6 +2811,10 @@ Public Class IngresoPruebasEnsayo
 
                 End If
 
+                If Not dr.IsClosed Then
+                    dr.Close()
+                End If
+
                 ' Recuperamos el tipo de Moneda.
                 If Val(WOrden(1)) <> 0 And Val(WPtaOrden(1)) <> 0 Then
 
@@ -2832,6 +2836,10 @@ Public Class IngresoPruebasEnsayo
 
                     End If
 
+                End If
+
+                If Not dr.IsClosed Then
+                    dr.Close()
                 End If
 
                 ' Recuperamos el tipo de Moneda.
@@ -2936,38 +2944,15 @@ Public Class IngresoPruebasEnsayo
 
         If String.IsNullOrEmpty(WMateriaPrima) Then Return 0
 
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT Costo2 FROM Articulo WHERE Codigo = '" & WMateriaPrima & "'")
-        Dim dr As SqlDataReader
-
         Try
+            Dim dato As DataRow = Util.Clases.Query.GetSingle("SELECT Costo2 FROM Articulo WHERE Codigo = '" & WMateriaPrima & "'", "SurfactanSa")
 
-            cn.ConnectionString = Helper._ConectarA
-            cn.Open()
-            cm.Connection = cn
+            If dato IsNot Nothing Then Return Util.Clases.Helper.OrDefault(dato("Costo2"), 0)
 
-            dr = cm.ExecuteReader()
-
-            If dr.HasRows Then
-                dr.Read()
-
-                Return IIf(IsDBNull(dr.Item("Costo2")), 0, dr.Item("Costo2"))
-
-            Else
-
-                Return 0
-
-            End If
+            Return 0
 
         Catch ex As Exception
             Throw New Exception("Hubo un problema al querer consultar el Costo Standard y Estimado del " & WMateriaPrima & " en la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
-        Finally
-
-            dr = Nothing
-            cn.Close()
-            cn = Nothing
-            cm = Nothing
-
         End Try
 
     End Function
@@ -2979,81 +2964,59 @@ Public Class IngresoPruebasEnsayo
         Dim WProductos(100, 2) As String
         Dim WMateriasPrimas(100, 3) As String
         Dim WTipo = "", WArticulo1 = "", WArticulo2 = "", WCantidad = 0.0, WVector = 0.0
-        Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand()
-        Dim dr As SqlDataReader
         Dim WIndiceProductos = 1
         Dim WIndiceMateriasPrimas = 0
 
         Try
             WProductos(1, 1) = wProducto
             WProductos(1, 2) = "1"
-
-            cn.ConnectionString = Helper._ConectarA
-            cn.Open()
-            cm.Connection = cn
-
-            dr = Nothing
-
+            
             For i = 1 To WProductos.Length
 
-                If Not IsNothing(WProductos(i, 1)) AndAlso Trim(WProductos(i, 1)) <> "" Then
+                If Trim(Util.Clases.Helper.OrDefault(WProductos(i, 1), "")) <> "" Then
 
-                    cm.CommandText = "SELECT Tipo, Articulo1, Articulo2, Cantidad FROM Composicion WHERE Terminado = '" & WProductos(i, 1) & "' ORDER BY Clave"
+                    Dim WDatos As DataTable = Util.Clases.Query.GetAll("SELECT Tipo, Articulo1, Articulo2, Cantidad FROM Composicion WHERE Terminado = '" & WProductos(i, 1) & "' ORDER BY Clave", "SurfactanSa")
 
-                    dr = cm.ExecuteReader()
+                    For Each d As DataRow In WDatos.Rows
 
-                    If dr.HasRows Then
+                        With d
 
-                        With dr
-                            Do While .Read()
+                            WTipo = IIf(IsDBNull(.Item("Tipo")), "", .Item("Tipo"))
+                            WArticulo1 = IIf(IsDBNull(.Item("Articulo1")), "", .Item("Articulo1"))
+                            WArticulo2 = IIf(IsDBNull(.Item("Articulo2")), "", .Item("Articulo2"))
+                            WCantidad = IIf(IsDBNull(.Item("Cantidad")), "", .Item("Cantidad"))
 
-                                WTipo = IIf(IsDBNull(.Item("Tipo")), "", .Item("Tipo"))
-                                WArticulo1 = IIf(IsDBNull(.Item("Articulo1")), "", .Item("Articulo1"))
-                                WArticulo2 = IIf(IsDBNull(.Item("Articulo2")), "", .Item("Articulo2"))
-                                WCantidad = IIf(IsDBNull(.Item("Cantidad")), "", .Item("Cantidad"))
+                            Select Case UCase(WTipo)
+                                Case "T"
 
+                                    If UCase(wProducto) <> UCase(WArticulo2) Then
 
-                                Select Case UCase(WTipo)
-                                    Case "T"
+                                        WIndiceProductos += 1
+                                        WProductos(WIndiceProductos, 1) = WArticulo2
+                                        WProductos(WIndiceProductos, 2) = Str$(WCantidad * Val(WProductos(i, 2)))
 
-                                        If UCase(wProducto) <> UCase(WArticulo2) Then
+                                    End If
 
-                                            WIndiceProductos += 1
-                                            WProductos(WIndiceProductos, 1) = WArticulo2
-                                            WProductos(WIndiceProductos, 2) = Str$(WCantidad * Val(WProductos(i, 2)))
+                                Case "M"
 
-                                        End If
+                                    WIndiceMateriasPrimas += 1
+                                    WMateriasPrimas(WIndiceMateriasPrimas, 1) = WArticulo1
+                                    WMateriasPrimas(WIndiceMateriasPrimas, 2) = Str$(WCantidad)
+                                    WMateriasPrimas(WIndiceMateriasPrimas, 3) = Str$(Val(WProductos(i, 2)))
 
-                                    Case "M"
-
-                                        WIndiceMateriasPrimas += 1
-                                        WMateriasPrimas(WIndiceMateriasPrimas, 1) = WArticulo1
-                                        WMateriasPrimas(WIndiceMateriasPrimas, 2) = Str$(WCantidad)
-                                        WMateriasPrimas(WIndiceMateriasPrimas, 3) = Str$(Val(WProductos(i, 2)))
-
-                                    Case Else
-                                        Continue For
-                                End Select
-
-                            Loop
-
-                            If Not .IsClosed Then
-                                .Close()
-                            End If
+                                Case Else
+                                    Continue For
+                            End Select
 
                         End With
 
-                    End If
+                    Next
+
                 Else
                     Exit For
                 End If
 
             Next
-
-            If Not IsNothing(dr) AndAlso Not dr.IsClosed Then
-                dr.Close()
-            End If
 
             For i = 1 To WIndiceMateriasPrimas
 
@@ -3069,13 +3032,6 @@ Public Class IngresoPruebasEnsayo
 
         Catch ex As Exception
             Throw New Exception("Hubo un problema al querer consultar la Composición del " & wProducto & " la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
-        Finally
-
-            dr = Nothing
-            cn.Close()
-            cn = Nothing
-            cm = Nothing
-
         End Try
 
         Return WCosto

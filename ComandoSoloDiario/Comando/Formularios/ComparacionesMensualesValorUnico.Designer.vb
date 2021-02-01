@@ -22,12 +22,13 @@ Partial Class ComparacionesMensualesValorUnico
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.btnGenerar = New System.Windows.Forms.Button()
         Me.cmbTipoGrafico = New System.Windows.Forms.ComboBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.ckBlanqueadores = New System.Windows.Forms.CheckBox()
         Me.ckPapel = New System.Windows.Forms.CheckBox()
         Me.ckVarios = New System.Windows.Forms.CheckBox()
         Me.ckFazonQuimicos = New System.Windows.Forms.CheckBox()
@@ -101,7 +102,7 @@ Partial Class ComparacionesMensualesValorUnico
         Me.ckRecurtientes = New System.Windows.Forms.CheckBox()
         Me.ckAceitesNaturales = New System.Windows.Forms.CheckBox()
         Me.ckConsolidadoPellital = New System.Windows.Forms.CheckBox()
-        Me.ckBlanqueadores = New System.Windows.Forms.CheckBox()
+        Me.ckComparativoMensualPeriodosAnual = New System.Windows.Forms.CheckBox()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -160,6 +161,16 @@ Partial Class ComparacionesMensualesValorUnico
         Me.GroupBox2.TabIndex = 4
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Lineas a Comparar"
+        '
+        'ckBlanqueadores
+        '
+        Me.ckBlanqueadores.AutoSize = True
+        Me.ckBlanqueadores.Location = New System.Drawing.Point(129, 137)
+        Me.ckBlanqueadores.Name = "ckBlanqueadores"
+        Me.ckBlanqueadores.Size = New System.Drawing.Size(126, 22)
+        Me.ckBlanqueadores.TabIndex = 1
+        Me.ckBlanqueadores.Text = "Blanqueadores"
+        Me.ckBlanqueadores.UseVisualStyleBackColor = True
         '
         'ckPapel
         '
@@ -483,33 +494,33 @@ Partial Class ComparacionesMensualesValorUnico
         '
         'DataGridView1
         '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle2
         Me.DataGridView1.Location = New System.Drawing.Point(12, 486)
         Me.DataGridView1.Name = "DataGridView1"
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
         Me.DataGridView1.Size = New System.Drawing.Size(953, 188)
         Me.DataGridView1.TabIndex = 8
         '
@@ -966,21 +977,23 @@ Partial Class ComparacionesMensualesValorUnico
         Me.ckConsolidadoPellital.Text = "Consolidado"
         Me.ckConsolidadoPellital.UseVisualStyleBackColor = True
         '
-        'ckBlanqueadores
+        'ckComparativoMensualPeriodosAnual
         '
-        Me.ckBlanqueadores.AutoSize = True
-        Me.ckBlanqueadores.Location = New System.Drawing.Point(129, 137)
-        Me.ckBlanqueadores.Name = "ckBlanqueadores"
-        Me.ckBlanqueadores.Size = New System.Drawing.Size(126, 22)
-        Me.ckBlanqueadores.TabIndex = 1
-        Me.ckBlanqueadores.Text = "Blanqueadores"
-        Me.ckBlanqueadores.UseVisualStyleBackColor = True
+        Me.ckComparativoMensualPeriodosAnual.AutoSize = True
+        Me.ckComparativoMensualPeriodosAnual.Location = New System.Drawing.Point(227, 223)
+        Me.ckComparativoMensualPeriodosAnual.Name = "ckComparativoMensualPeriodosAnual"
+        Me.ckComparativoMensualPeriodosAnual.Size = New System.Drawing.Size(254, 17)
+        Me.ckComparativoMensualPeriodosAnual.TabIndex = 16
+        Me.ckComparativoMensualPeriodosAnual.Text = "Comparativo Mensual entre Periodos Anualizado"
+        Me.ckComparativoMensualPeriodosAnual.UseVisualStyleBackColor = True
+        Me.ckComparativoMensualPeriodosAnual.Visible = False
         '
         'ComparacionesMensualesValorUnico
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(708, 463)
+        Me.Controls.Add(Me.ckComparativoMensualPeriodosAnual)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.PanelSeleccionAnios)
         Me.Controls.Add(Me.gbMensualComparativo)
@@ -1031,6 +1044,7 @@ Partial Class ComparacionesMensualesValorUnico
         Me.gbLineasPellital.ResumeLayout(False)
         Me.gbLineasPellital.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents btnGenerar As System.Windows.Forms.Button
@@ -1110,4 +1124,5 @@ Partial Class ComparacionesMensualesValorUnico
     Friend WithEvents ckAceitesNaturales As System.Windows.Forms.CheckBox
     Friend WithEvents ckConsolidadoPellital As System.Windows.Forms.CheckBox
     Friend WithEvents ckBlanqueadores As System.Windows.Forms.CheckBox
+    Friend WithEvents ckComparativoMensualPeriodosAnual As System.Windows.Forms.CheckBox
 End Class

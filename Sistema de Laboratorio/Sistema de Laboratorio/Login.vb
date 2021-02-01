@@ -113,7 +113,13 @@ Public Class Login
                 Operador.Codigo = OrDefault(.Item("Operador"), 0)
                 Operador.Clave = txtClave.Text.Trim
                 Operador.Descripcion = OrDefault(.Item("Descripcion"), "")
-                Operador.Perfil = OrDefault(.Item("Perfil"), "")
+
+                Operador.Perfil = 0
+
+                Dim Op As DataRow = GetSingle("SELECT Perfil FROM Operador WHERE UPPER(Clave) = '" & txtClave.Text.ToUpper & "'", "SurfactanSa")
+
+                If Op IsNot Nothing Then Operador.Perfil = OrDefault(Op.Item("Perfil"), "")
+
             End With
 
             Dim frm As New MenuPrincipal()

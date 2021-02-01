@@ -349,7 +349,7 @@ Public Class ComparacionesMensualesValorUnico
                 _FormatearAnual(datos)
 
                 ds.Tables.Add(datos)
-            Case 2
+            Case 2, 3
 
                 Dim anios(4) As Integer
 
@@ -504,33 +504,37 @@ Public Class ComparacionesMensualesValorUnico
 
         _datos.Clear()
 
-        For i = 1 To datos.Rows.Count / 9
+        For i = 1 To datos.Rows.Count / 10
             _row = _datos.NewRow()
             _datos.Rows.Add(_row)
         Next
 
-        Dim aux = -9
+        Dim aux = -10
 
         For i = 0 To _datos.Rows.Count - 1
 
             With _datos.Rows(i)
 
-                aux += 9
+                aux += 10
+
+                Dim k = datos.Rows(aux)
 
                 ' Asignamos los datos generales segun el primer registro de cada año.
                 .Item("Tipo") = datos.Rows(aux).Item("Tipo")
                 .Item("Corte") = datos.Rows(aux).Item("Corte")
                 .Item("Titulo") = datos.Rows(aux).Item("Titulo")
+                Debug.Print(.Item("Titulo"))
                 .Item("Descripcion") = "Consolidado"
 
                 ' Extraemos los datos de las fechas e inicializamos los valores de cada uno en cero.
                 For j = 1 To 12
                     .Item("Valor" & j) = 0
+                    Debug.Print(datos.Rows(aux).Item("Titulo" & j))
                     .Item("Titulo" & j) = datos.Rows(aux).Item("Titulo" & j)
                 Next
 
                 ' Recorremos los datos de todas las lineas por mes y vamos consolidando en el mes correspondiente.
-                For x = aux To aux + 8
+                For x = aux To aux + 9
 
                     For j = 1 To 12
 
@@ -1834,7 +1838,6 @@ Public Class ComparacionesMensualesValorUnico
     Private Sub btnGenerar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnGenerar.Click
         Dim tabla As DataSet
 
-
         '
         ' VERIFICAMOS SI ES UNA COMPARACIÓN DIARIA. EN CASO DE QUE SI, LO PROCESAMOS A PARTE.
         '
@@ -1903,12 +1906,16 @@ Public Class ComparacionesMensualesValorUnico
                     Else
                         .Tipo = 2
                     End If
+
                 Case 1 ' Ex anual
 
                     .Tipo = 3
-                Case 2 ' Ex Comparativo Mensual
+                Case 2, 3 ' Ex Comparativo Mensual
 
                     .Tipo = 4
+
+                    .ComparativoAnualizado = ckComparativoMensualPeriodosAnual.Checked
+
             End Select
 
             If rbMensualComparativo.Checked Then
@@ -2298,6 +2305,7 @@ Public Class ComparacionesMensualesValorUnico
     Private Sub _ProcesarPeriodo()
 
         GroupBox2.Enabled = True
+        ckComparativoMensualPeriodosAnual.Checked = False
 
         If rbDiaria.Checked Then
 
@@ -2314,7 +2322,9 @@ Public Class ComparacionesMensualesValorUnico
                     If Globales.EmpresaActual = 0 Then ckConsolidado.Checked = True
                     If Globales.EmpresaActual = 1 Then ckConsolidadoPellital.Checked = True
 
-                Case 2
+                Case 2, 3 ' Normal y Anualizado.
+
+                    ckComparativoMensualPeriodosAnual.Checked = cmbPeriodo.SelectedIndex = 3
 
                     If clbAniosAComparar.Items.Count = 0 Then
                         Dim WAnioHasta, WAnioDesde
@@ -2362,7 +2372,6 @@ Public Class ComparacionesMensualesValorUnico
 
                         Next
                     End If
-
 
                     If ckConsolidado.Checked And Globales.EmpresaActual = 0 Then
                         ckConsolidado.Checked = False
@@ -2704,7 +2713,7 @@ Public Class ComparacionesMensualesValorUnico
             gbComparativoDiario.Enabled = False
             gbMensualComparativo.Enabled = False
             cmbPeriodo.Enabled = True
-            cmbPeriodo.DataSource = {"Mensual", "Comparativo Entre Lineas", "Comparativo Entre Periodos"}
+            cmbPeriodo.DataSource = {"Mensual", "Comparativo Entre Lineas", "Comparativo Entre Periodos", "Comparativo Entre Periodos Acumulado por Año"}
             txtMesDesde.Focus()
         End If
 

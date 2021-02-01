@@ -408,6 +408,15 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
                 End If
 
+                For Each row As DataGridViewRow In dgvEnsayos.Rows
+
+                    Dim WTipoEspecif = Val(OrDefault(row.Cells("TipoEspecif").Value, ""))
+                    Dim WValor = Trim(OrDefault(row.Cells("Valor").Value, ""))
+
+                    If Not _ValidarDato(row) Or (WTipoEspecif = 0 AndAlso WValor = "N") Then row.DefaultCellStyle.BackColor = Color.Coral
+
+                Next
+
                 btnGrabar.Text = "ACTUALIZAR"
 
             Else
@@ -609,7 +618,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
             If Val(wDesdeEspecif) <> 0 And Val(wHastaEspecif) = 9999 Then
 
-                If Val(wMenorIgualEspecif) = 1 Then Return String.Format("Mínimo {0} {1}", wHastaEspecif, wUnidadEspecif)
+                If Val(wMenorIgualEspecif) = 1 Then Return String.Format("Mínimo {0} {1}", wDesdeEspecif, wUnidadEspecif)
 
                 Return String.Format("Mayor a {0} {1}", wHastaEspecif, wUnidadEspecif)
 
@@ -652,6 +661,8 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                 Dim iRow = .CurrentCell.RowIndex
 
                 If msg.WParam.ToInt32() = Keys.Enter Then
+
+                    dgvEnsayos.Rows(.CurrentCell.RowIndex).DefaultCellStyle.BackColor = dgvEnsayos.DefaultCellStyle.BackColor
 
                     If Not _ProcesarValorGrilla(.CurrentCell) Then Return True
 
@@ -756,6 +767,8 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                                 WDecimales = _CalcularCantidadDecimales(WDesde)
                                 If Val(WDecimales) < _CalcularCantidadDecimales(WHasta) Then WDecimales = _CalcularCantidadDecimales(WHasta)
 
+                                If WDecimales = 0 Then WDecimales = _CalcularCantidadDecimales(WValor)
+
                                 .Cells("Resultado").Value = WResultado
                                 .Cells("Valor").Value = WValor
 
@@ -771,9 +784,9 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
                             End With
 
-                            If Not _ValidarDato(dgvEnsayos.Rows(.RowIndex)) Then
-                                MsgBox("Resultado fuera de especificación", MsgBoxStyle.Information)
-                                'Return False
+                            If Not _ValidarDato(dgvEnsayos.Rows(.RowIndex)) Or (WTipo = 0 AndAlso WValor = "N") Then
+                                dgvEnsayos.Rows(.RowIndex).DefaultCellStyle.BackColor = Color.Coral
+                                'MsgBox("Resultado fuera de especificación", MsgBoxStyle.Information)
                             End If
 
                         End If
@@ -971,6 +984,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                     ZSql = ZSql & "INSERT INTO " & WTabla & " ("
                     ZSql = ZSql & "Clave ,"
                     If Val(txtEtapa.Text) <> 99 Then ZSql = ZSql & "Paso , SubEtapa ,"
+                    If Val(txtEtapa.Text) = 99 Then ZSql = ZSql & "FechaGrabacion ,"
                     ZSql = ZSql & "Tipo ,"
                     ZSql = ZSql & "Partida ,"
                     ZSql = ZSql & "Renglon ,"
@@ -1012,6 +1026,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                     ZSql = ZSql & "Values ("
                     ZSql = ZSql & "'" & WClave & "',"
                     If Val(txtEtapa.Text) <> 99 Then ZSql = ZSql & "'" & Trim(txtEtapa.Text) & "', '" & Val(txtSubEtapa.Text) & "',"
+                    If Val(txtEtapa.Text) = 99 Then ZSql = ZSql & "'" & Date.Now.ToString("dd/MM/yyyy") & "', "
                     ZSql = ZSql & "'" & "1" & "',"
                     ZSql = ZSql & "'" & WPartida.left(6) & "',"
                     ZSql = ZSql & "'" & WRenglon.left(2) & "',"
@@ -1277,9 +1292,15 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
                         Dim WValorNum As Double = Val(formatonumerico(WValor, 10))
 
-                        If Val(WMenorIgual) = 0 And (WValorNum < WMin Or WValorNum > WMax) Then Return False
+                        '
+                        ' Conjunto [WMin, WMax].
+                        '
+                        If Val(WMenorIgual) = 1 And (WValorNum < WMin Or WValorNum > WMax) Then Return False
 
-                        If Val(WMenorIgual) = 1 And (WValorNum < WMin Or WValorNum >= WMax) Then Return False
+                        '
+                        ' Conjunto [WMin, WMax).
+                        '
+                        If Val(WMenorIgual) = 0 And (WValorNum < WMin Or WValorNum >= WMax) Then Return False
 
                     End If
 
@@ -1315,6 +1336,8 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
             Dim WDecimales As Short = _CalcularCantidadDecimales(wDesdeEspecif, 0)
 
             If WDecimales < _CalcularCantidadDecimales(wHastaEspecif, 0) Then WDecimales = _CalcularCantidadDecimales(wHastaEspecif, 0)
+
+            If WDecimales = 0 Then WDecimales = _CalcularCantidadDecimales(wValor)
 
             wValor = formatonumerico(wValor, WDecimales)
 
@@ -1667,7 +1690,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                         .Cells("EspecificacionIngles").Value = String.Format("{0} ({1})", WEspecificacion, WUnidadEspecif)
                     End If
 
-                    .Cells("UnidadEspecif").Value = WUnidadEspecif
+                    '.Cells("UnidadEspecif").Value = WUnidadEspecif
                 End With
 
                 WRenglon += 1

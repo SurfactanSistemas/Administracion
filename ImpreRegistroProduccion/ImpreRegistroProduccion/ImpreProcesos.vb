@@ -484,7 +484,9 @@ Public Class ImpreProcesos
 
     End Sub
 
-    Private Sub _GenerarCertificadoAnalisisFarma(ByVal WTipoReporte As Integer, ByVal wPartida As Integer, ByVal wTipoSalida As Integer, Optional ByVal WNombrePDF As String = "", Optional ByVal Ruta As String = "")
+    Public Shared Sub _GenerarCertificadoAnalisisFarma(ByVal WTipoReporte As Integer, ByVal wPartida As Integer, ByVal wTipoSalida As Integer, Optional ByVal WNombrePDF As String = "", Optional ByVal Ruta As String = "")
+
+
 
         Dim frm As New ReportDocument
         Dim WFormulas() As String

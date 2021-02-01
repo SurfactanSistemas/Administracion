@@ -22,12 +22,13 @@ Partial Class ComparacionesMensualesValorUnico
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.btnGenerar = New System.Windows.Forms.Button()
         Me.cmbTipoGrafico = New System.Windows.Forms.ComboBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.ckBlanqueadores = New System.Windows.Forms.CheckBox()
         Me.ckPapel = New System.Windows.Forms.CheckBox()
         Me.ckVarios = New System.Windows.Forms.CheckBox()
         Me.ckFazonQuimicos = New System.Windows.Forms.CheckBox()
@@ -101,7 +102,7 @@ Partial Class ComparacionesMensualesValorUnico
         Me.ckRecurtientes = New System.Windows.Forms.CheckBox()
         Me.ckAceitesNaturales = New System.Windows.Forms.CheckBox()
         Me.ckConsolidadoPellital = New System.Windows.Forms.CheckBox()
-        Me.ckBlanqueadores = New System.Windows.Forms.CheckBox()
+        Me.ckComparativoMensualPeriodosAnual = New System.Windows.Forms.CheckBox()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -122,10 +123,10 @@ Partial Class ComparacionesMensualesValorUnico
         '
         'btnGenerar
         '
-        Me.btnGenerar.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
-        Me.btnGenerar.Location = New System.Drawing.Point(395, 405)
+        Me.btnGenerar.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+        Me.btnGenerar.Location = New System.Drawing.Point(418, 383)
         Me.btnGenerar.Name = "btnGenerar"
-        Me.btnGenerar.Size = New System.Drawing.Size(153, 38)
+        Me.btnGenerar.Size = New System.Drawing.Size(135, 38)
         Me.btnGenerar.TabIndex = 0
         Me.btnGenerar.Text = "Graficar"
         Me.btnGenerar.UseVisualStyleBackColor = True
@@ -154,12 +155,22 @@ Partial Class ComparacionesMensualesValorUnico
         Me.GroupBox2.Controls.Add(Me.ckQuimicos)
         Me.GroupBox2.Controls.Add(Me.ckConsolidado)
         Me.GroupBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
-        Me.GroupBox2.Location = New System.Drawing.Point(418, 233)
+        Me.GroupBox2.Location = New System.Drawing.Point(418, 212)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(270, 159)
+        Me.GroupBox2.Size = New System.Drawing.Size(270, 162)
         Me.GroupBox2.TabIndex = 4
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Lineas a Comparar"
+        '
+        'ckBlanqueadores
+        '
+        Me.ckBlanqueadores.AutoSize = True
+        Me.ckBlanqueadores.Location = New System.Drawing.Point(129, 137)
+        Me.ckBlanqueadores.Name = "ckBlanqueadores"
+        Me.ckBlanqueadores.Size = New System.Drawing.Size(130, 22)
+        Me.ckBlanqueadores.TabIndex = 1
+        Me.ckBlanqueadores.Text = "Blanqueadores "
+        Me.ckBlanqueadores.UseVisualStyleBackColor = True
         '
         'ckPapel
         '
@@ -273,7 +284,7 @@ Partial Class ComparacionesMensualesValorUnico
         Me.GroupBox3.Controls.Add(Me.ckPedidos)
         Me.GroupBox3.Controls.Add(Me.ckTodosValores)
         Me.GroupBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
-        Me.GroupBox3.Location = New System.Drawing.Point(12, 264)
+        Me.GroupBox3.Location = New System.Drawing.Point(12, 243)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(375, 181)
         Me.GroupBox3.TabIndex = 4
@@ -418,7 +429,7 @@ Partial Class ComparacionesMensualesValorUnico
         Me.GroupBox4.Controls.Add(Me.rbMonto)
         Me.GroupBox4.Controls.Add(Me.ckPorcentajeAtrasos)
         Me.GroupBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
-        Me.GroupBox4.Location = New System.Drawing.Point(19, 141)
+        Me.GroupBox4.Location = New System.Drawing.Point(19, 120)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(27, 19)
         Me.GroupBox4.TabIndex = 7
@@ -453,7 +464,7 @@ Partial Class ComparacionesMensualesValorUnico
         Me.GroupBox5.Controls.Add(Me.btnSeleccionarAnios)
         Me.GroupBox5.Controls.Add(Me.cmbPeriodo)
         Me.GroupBox5.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
-        Me.GroupBox5.Location = New System.Drawing.Point(418, 144)
+        Me.GroupBox5.Location = New System.Drawing.Point(418, 123)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.Size = New System.Drawing.Size(270, 83)
         Me.GroupBox5.TabIndex = 7
@@ -473,9 +484,10 @@ Partial Class ComparacionesMensualesValorUnico
         'cmbPeriodo
         '
         Me.cmbPeriodo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbPeriodo.DropDownWidth = 300
         Me.cmbPeriodo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
         Me.cmbPeriodo.FormattingEnabled = True
-        Me.cmbPeriodo.Items.AddRange(New Object() {"Mensual", "Comparativo Entre Lineas", "Comparativo Entre Periodos"})
+        Me.cmbPeriodo.Items.AddRange(New Object() {"Mensual", "Comparativo Entre Lineas", "Comparativo Entre Periodos", "Comparativo Entre Periodos Acumulado por Año"})
         Me.cmbPeriodo.Location = New System.Drawing.Point(25, 22)
         Me.cmbPeriodo.Name = "cmbPeriodo"
         Me.cmbPeriodo.Size = New System.Drawing.Size(221, 24)
@@ -483,33 +495,33 @@ Partial Class ComparacionesMensualesValorUnico
         '
         'DataGridView1
         '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle13
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle14
         Me.DataGridView1.Location = New System.Drawing.Point(12, 486)
         Me.DataGridView1.Name = "DataGridView1"
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle15.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle15
         Me.DataGridView1.Size = New System.Drawing.Size(953, 188)
         Me.DataGridView1.TabIndex = 8
         '
@@ -560,7 +572,7 @@ Partial Class ComparacionesMensualesValorUnico
         Me.gbDesde.Controls.Add(Me.Label4)
         Me.gbDesde.Controls.Add(Me.Label3)
         Me.gbDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
-        Me.gbDesde.Location = New System.Drawing.Point(150, 90)
+        Me.gbDesde.Location = New System.Drawing.Point(150, 69)
         Me.gbDesde.Name = "gbDesde"
         Me.gbDesde.Size = New System.Drawing.Size(265, 51)
         Me.gbDesde.TabIndex = 10
@@ -593,7 +605,7 @@ Partial Class ComparacionesMensualesValorUnico
         Me.gbHasta.Controls.Add(Me.Label5)
         Me.gbHasta.Controls.Add(Me.Label6)
         Me.gbHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
-        Me.gbHasta.Location = New System.Drawing.Point(418, 90)
+        Me.gbHasta.Location = New System.Drawing.Point(418, 69)
         Me.gbHasta.Name = "gbHasta"
         Me.gbHasta.Size = New System.Drawing.Size(230, 51)
         Me.gbHasta.TabIndex = 10
@@ -641,7 +653,7 @@ Partial Class ComparacionesMensualesValorUnico
         'PanelSeleccionAnios
         '
         Me.PanelSeleccionAnios.Controls.Add(Me.GroupBox1)
-        Me.PanelSeleccionAnios.Location = New System.Drawing.Point(208, 100)
+        Me.PanelSeleccionAnios.Location = New System.Drawing.Point(208, 79)
         Me.PanelSeleccionAnios.Name = "PanelSeleccionAnios"
         Me.PanelSeleccionAnios.Size = New System.Drawing.Size(294, 213)
         Me.PanelSeleccionAnios.TabIndex = 11
@@ -684,7 +696,7 @@ Partial Class ComparacionesMensualesValorUnico
         Me.GroupBox9.Controls.Add(Me.rbDiaria)
         Me.GroupBox9.Controls.Add(Me.rbMenusal)
         Me.GroupBox9.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.GroupBox9.Location = New System.Drawing.Point(12, 90)
+        Me.GroupBox9.Location = New System.Drawing.Point(12, 69)
         Me.GroupBox9.Name = "GroupBox9"
         Me.GroupBox9.Size = New System.Drawing.Size(132, 166)
         Me.GroupBox9.TabIndex = 12
@@ -728,7 +740,7 @@ Partial Class ComparacionesMensualesValorUnico
         Me.gbComparativoDiario.Controls.Add(Me.ckSumarDiario)
         Me.gbComparativoDiario.Controls.Add(Me.txtFechaDiaria)
         Me.gbComparativoDiario.Controls.Add(Me.Label10)
-        Me.gbComparativoDiario.Location = New System.Drawing.Point(150, 146)
+        Me.gbComparativoDiario.Location = New System.Drawing.Point(150, 125)
         Me.gbComparativoDiario.Name = "gbComparativoDiario"
         Me.gbComparativoDiario.Size = New System.Drawing.Size(263, 57)
         Me.gbComparativoDiario.TabIndex = 13
@@ -769,7 +781,7 @@ Partial Class ComparacionesMensualesValorUnico
         '
         Me.gbMensualComparativo.Controls.Add(Me.txtMesComparativo)
         Me.gbMensualComparativo.Controls.Add(Me.Label1)
-        Me.gbMensualComparativo.Location = New System.Drawing.Point(150, 204)
+        Me.gbMensualComparativo.Location = New System.Drawing.Point(150, 183)
         Me.gbMensualComparativo.Name = "gbMensualComparativo"
         Me.gbMensualComparativo.Size = New System.Drawing.Size(263, 52)
         Me.gbMensualComparativo.TabIndex = 13
@@ -805,7 +817,7 @@ Partial Class ComparacionesMensualesValorUnico
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(708, 59)
+        Me.Panel1.Size = New System.Drawing.Size(707, 59)
         Me.Panel1.TabIndex = 14
         '
         'Label7
@@ -815,7 +827,7 @@ Partial Class ComparacionesMensualesValorUnico
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label7.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label7.Location = New System.Drawing.Point(508, 21)
+        Me.Label7.Location = New System.Drawing.Point(507, 21)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(155, 20)
         Me.Label7.TabIndex = 0
@@ -830,16 +842,16 @@ Partial Class ComparacionesMensualesValorUnico
         Me.Label2.ForeColor = System.Drawing.SystemColors.Control
         Me.Label2.Location = New System.Drawing.Point(31, 21)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(177, 20)
+        Me.Label2.Size = New System.Drawing.Size(211, 20)
         Me.Label2.TabIndex = 0
-        Me.Label2.Text = "- Sistema Comando -"
+        Me.Label2.Text = "SISTEMA DE COMANDO"
         '
         'Button3
         '
-        Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
-        Me.Button3.Location = New System.Drawing.Point(553, 404)
+        Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+        Me.Button3.Location = New System.Drawing.Point(553, 383)
         Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(148, 38)
+        Me.Button3.Size = New System.Drawing.Size(135, 38)
         Me.Button3.TabIndex = 0
         Me.Button3.Text = "Cambiar Empresa"
         Me.Button3.UseVisualStyleBackColor = True
@@ -857,9 +869,9 @@ Partial Class ComparacionesMensualesValorUnico
         Me.gbLineasPellital.Controls.Add(Me.ckAceitesNaturales)
         Me.gbLineasPellital.Controls.Add(Me.ckConsolidadoPellital)
         Me.gbLineasPellital.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!)
-        Me.gbLineasPellital.Location = New System.Drawing.Point(418, 233)
+        Me.gbLineasPellital.Location = New System.Drawing.Point(418, 212)
         Me.gbLineasPellital.Name = "gbLineasPellital"
-        Me.gbLineasPellital.Size = New System.Drawing.Size(270, 165)
+        Me.gbLineasPellital.Size = New System.Drawing.Size(270, 166)
         Me.gbLineasPellital.TabIndex = 4
         Me.gbLineasPellital.TabStop = False
         Me.gbLineasPellital.Text = "Lineas a Comparar"
@@ -964,21 +976,23 @@ Partial Class ComparacionesMensualesValorUnico
         Me.ckConsolidadoPellital.Text = "Consolidado"
         Me.ckConsolidadoPellital.UseVisualStyleBackColor = True
         '
-        'ckBlanqueadores
+        'ckComparativoMensualPeriodosAnual
         '
-        Me.ckBlanqueadores.AutoSize = True
-        Me.ckBlanqueadores.Location = New System.Drawing.Point(129, 137)
-        Me.ckBlanqueadores.Name = "ckBlanqueadores"
-        Me.ckBlanqueadores.Size = New System.Drawing.Size(130, 22)
-        Me.ckBlanqueadores.TabIndex = 1
-        Me.ckBlanqueadores.Text = "Blanqueadores "
-        Me.ckBlanqueadores.UseVisualStyleBackColor = True
+        Me.ckComparativoMensualPeriodosAnual.AutoSize = True
+        Me.ckComparativoMensualPeriodosAnual.Location = New System.Drawing.Point(447, 46)
+        Me.ckComparativoMensualPeriodosAnual.Name = "ckComparativoMensualPeriodosAnual"
+        Me.ckComparativoMensualPeriodosAnual.Size = New System.Drawing.Size(254, 17)
+        Me.ckComparativoMensualPeriodosAnual.TabIndex = 15
+        Me.ckComparativoMensualPeriodosAnual.Text = "Comparativo Mensual entre Periodos Anualizado"
+        Me.ckComparativoMensualPeriodosAnual.UseVisualStyleBackColor = True
+        Me.ckComparativoMensualPeriodosAnual.Visible = False
         '
         'ComparacionesMensualesValorUnico
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(708, 463)
+        Me.ClientSize = New System.Drawing.Size(707, 431)
+        Me.Controls.Add(Me.ckComparativoMensualPeriodosAnual)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.PanelSeleccionAnios)
         Me.Controls.Add(Me.gbMensualComparativo)
@@ -1028,6 +1042,7 @@ Partial Class ComparacionesMensualesValorUnico
         Me.gbLineasPellital.ResumeLayout(False)
         Me.gbLineasPellital.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents btnGenerar As System.Windows.Forms.Button
@@ -1107,4 +1122,5 @@ Partial Class ComparacionesMensualesValorUnico
     Friend WithEvents ckAceitesNaturales As System.Windows.Forms.CheckBox
     Friend WithEvents ckConsolidadoPellital As System.Windows.Forms.CheckBox
     Friend WithEvents ckBlanqueadores As System.Windows.Forms.CheckBox
+    Friend WithEvents ckComparativoMensualPeriodosAnual As System.Windows.Forms.CheckBox
 End Class

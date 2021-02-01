@@ -15,6 +15,7 @@ Public Class Grafico
     Public Property Tipo As Integer
 
     Public Property Titulo As String
+    Public Property ComparativoAnualizado As Boolean = False
 
     Public WColorBasico
 
@@ -380,7 +381,7 @@ Public Class Grafico
 
             For i = 1 To Tabla.Rows.Count - 1
 
-                Titulo &= ", " & _Right(Tabla.Rows(i).Item(WUltimoMes), 4)
+                If Not Titulo.Contains(_Right(Tabla.Rows(i).Item(WUltimoMes), 4)) Then Titulo &= ", " & _Right(Tabla.Rows(i).Item(WUltimoMes), 4)
 
             Next
 
@@ -436,8 +437,8 @@ Public Class Grafico
                 For i = 1 To 12
 
                     'If i = 12 Then Stop
-
-                    wacu = 0.0
+                    
+                    If Not ComparativoAnualizado Then wacu = 0.0
 
                     If Not IsDBNull(.Item("Valor" & i)) Then
 
@@ -454,7 +455,7 @@ Public Class Grafico
                         Exit For
                     End If
 
-                    Chart1.Series(WSeries(WIndice3)).Points.AddXY(ztemp, wacu)
+                    If Not ComparativoAnualizado Then Chart1.Series(WSeries(WIndice3)).Points.AddXY(ztemp, wacu)
 
                     If Not WValores.Contains(.Item(2)) Then
 
@@ -462,6 +463,8 @@ Public Class Grafico
 
                         WIndice2 += 1
                     End If
+
+                    If ComparativoAnualizado AndAlso Trim(OrDefault(WValores(WIndice2 - 1), "")) <> "" Then ztemp = WValores(WIndice2 - 1)
 
                     If Not _wValoresDibujados.Contains(.Item(2)) Then
                         _wValoresDibujados(WIndice) = .Item(2)
@@ -474,6 +477,8 @@ Public Class Grafico
                 Next
 
             End With
+
+            If ComparativoAnualizado Then Chart1.Series(WSeries(WIndice3)).Points.AddXY(ztemp, wacu)
 
             wacu = 0.0
             WIndice3 += 1
