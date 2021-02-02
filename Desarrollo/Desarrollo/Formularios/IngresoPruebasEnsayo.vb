@@ -4218,27 +4218,29 @@ Public Class IngresoPruebasEnsayo
         ' Determinamos en que plantas se van a realizar las altas.
         Select Case Val(wEmpresa)
 
-            Case 3
+            Case 1, 3, 5, 6, 7, 10, 11
                 WEmpresas(1) = 1
                 WEmpresas(2) = 3
                 WEmpresas(3) = 5
                 WEmpresas(4) = 6
                 WEmpresas(5) = 7
+                WEmpresas(5) = 10
+                WEmpresas(5) = 11
 
-            Case 4
+            Case 2, 4, 8, 9
                 WEmpresas(1) = 2
                 WEmpresas(2) = 4
                 WEmpresas(3) = 8
                 WEmpresas(4) = 9
 
-            Case 5
-                WEmpresas(1) = 2
-                WEmpresas(2) = 4
-                WEmpresas(3) = 8
-                WEmpresas(4) = 9
+                'Case 5
+                '    WEmpresas(1) = 2
+                '    WEmpresas(2) = 4
+                '    WEmpresas(3) = 8
+                '    WEmpresas(4) = 9
 
-            Case 10
-                WEmpresas(1) = 10
+                'Case 10
+                '    WEmpresas(1) = 10
 
         End Select
 
