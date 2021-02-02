@@ -1,4 +1,5 @@
 ﻿Imports System.IO
+Imports Microsoft.Office.Interop.Outlook
 Imports Util
 Imports Util.Clases
 
@@ -44,7 +45,7 @@ Public Class AutorizarPedido
 
         Dim WDatos As DataTable = GetAll("SELECT p.Pedido, Producto = p.Terminado, t.Descripcion, Cantidad = (p.Cantidad - p.Facturado), AEntregar = p.Cantidad1, p.Renglon, p.Cliente, c.Razon, p.Fecha, p.FecEntrega, Tipo = CASE p.TipoPed WHEN 0 THEN 'NORMAL' WHEN 1 THEN 'A FECHA' WHEN 2 THEN 'FECHA LIMITE' WHEN 3 THEN 'URGENTE' WHEN 4 THEN 'RETIRA CLIENTE' WHEN 5 THEN 'MUESTRA' ELSE '' END, " & WCamposLotes & ", Partidas = CASE WHEN ISNULL(Lote1, 0) <> 0 And ISNULL(Lote2, 0) <> 0 THEN -1 ELSE Lote1 END from Pedido p INNER JOIN Cliente c ON c.Cliente = p.Cliente INNER JOIN Terminado t ON t.Codigo = p.Terminado where p.Pedido = '" & Pedido & "' ORDER BY p.Renglon", "SurfactanSa")
 
-        For Each row As Datarow In WDatos.Rows
+        For Each row As DataRow In WDatos.Rows
             With row
                 If .Item("Renglon") = 1 Then
                     lblCliente.Text = Trim(OrDefault(.Item("Cliente"), ""))
@@ -230,8 +231,209 @@ Public Class AutorizarPedido
     Private Sub btnAutorizar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAutorizar.Click
         If MsgBox("¿Se encuentra seguro de querér autorizar el actual Pedido?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
             ExecuteNonQueries("SurfactanSa", {"UPDATE Pedido SET MarcaFactura = '1' WHERE Pedido = '" & Pedido & "'"})
+
+            '
+            ' Enviamos el mail correspondiente a los involucrados en Farma y al Cliente.
+            '
+            _EnviarAvisoPedidoAutorizado(Pedido)
+
             Close()
         End If
+    End Sub
+
+    Private Sub _EnviarAvisoPedidoAutorizado(ByVal WNroPedido As String)
+        '
+        'TODO: Filtrar por otra cosa que no sa ]MarcaFactura = 1
+        '
+        Dim WPed As DataTable = GetAll("SELECT c.Razon, c.Provincia, c.EmailFactura, t.Descripcion, p.* FROM Pedido p INNER JOIN Cliente c ON c.Cliente = p.Cliente INNER JOIN Terminado t ON t.Codigo = p.Terminado WHERE p.Pedido = '" & WNroPedido & "' And p.MarcaFactura = '1' And ISNULL(p.Facturado, 0) < ISNULL(p.Cantidad, 0) ORDER BY p.Renglon", "SurfactanSa")
+        Dim WDir As String() = {"grodriguez", "hsein", "calidad3", "calidad2", "calidad", "ebiglieri", "isocalidad", "hmuller", "scoppiello", "sup3", "planta7"}
+        Dim WDirecciones As String = ""
+
+        If WPed.Rows.Count = 0 Then Exit Sub
+
+        Dim WEnIngles As Boolean = Val(OrDefault(WPed.Rows(0)("Provincia"), "")) = 24
+        Dim WDescCliente As String = Trim(UCase((OrDefault(WPed.Rows(0)("Razon"), ""))))
+        Dim WEmailFactura As String = Trim(UCase((OrDefault(WPed.Rows(0)("EmailFactura"), ""))))
+
+        WDir.ToList().ForEach(Sub(d) WDirecciones &= d & "@surfactan.com.ar;")
+
+        If WDirecciones = "" Then Exit Sub
+
+        Dim WAsunto As String = "El Pedido " & WNroPedido & " de " & WDescCliente & ", ha sido autorizado."
+        Dim WCuerpo As String = "Se notifica que el pedido " & WNroPedido & ", se encuentra autorizado por Aseg. de la Calidad." & vbCrLf & vbCrLf & "Se adjuntan los FDS y Certificados correspondientes a los Productos y Partidas involucradas."
+
+        Dim WArchivos As New List(Of String)
+
+        For Each r As DataRow In WPed.Rows
+
+            Dim esProductoReventa As Boolean = _EsProductoReventa(r("Terminado"))
+            Dim WRutaCertificado As String = ""
+            Dim WNombrePdf As String = ""
+
+            '
+            ' Determino el tipo de Producto.
+            '
+            If esProductoReventa Then
+                WRutaCertificado = "\\193.168.0.2\w\impresion pdf\Certificados Analisis Farma Reventa\"
+            Else
+                WRutaCertificado = "\\193.168.0.2\w\impresion pdf\Certificados Analisis Farma Liberacion Pedidos\" & WNroPedido & "\"
+            End If
+
+            For i = 1 To 12
+
+                Dim WPartida As String = OrDefault(r("Lote" & i), "")
+                Dim WCantidad As String = formatonumerico(OrDefault(r("CantiLote" & i), "0"))
+
+                If Val(WPartida) = 0 Or Val(WCantidad) = 0 Then Continue For
+
+                If esProductoReventa Then
+                    WNombrePdf = "*" & "P" & WPartida & "* LP*.pdf"
+                Else
+                    WNombrePdf = "*" & "Pda " & WPartida & "*.pdf"
+                End If
+
+                If Directory.Exists(WRutaCertificado) Then
+
+                    Dim wcer As String() = Directory.GetFiles(WRutaCertificado, WNombrePdf, SearchOption.TopDirectoryOnly)
+
+                    If wcer.Count = 0 Then
+                        If esProductoReventa Then
+
+                            WNombrePdf = "*" & WPartida & ".pdf"
+                            wcer = Directory.GetFiles(WRutaCertificado, WNombrePdf, SearchOption.TopDirectoryOnly)
+
+                        Else
+
+                            wcer = Directory.GetFiles("\\193.168.0.2\w\impresion pdf\Certificados Analisis Farma Liberacion Pedidos\" & WNroPedido & "\" & WPartida & "\", WNombrePdf, SearchOption.TopDirectoryOnly)
+
+                        End If
+
+                    End If
+
+                    WArchivos.AddRange(wcer)
+
+                    If wcer.Count = 0 Then
+                        MsgBox("No se encontró el CoA correspondiente a la partida " & WPartida, MsgBoxStyle.Exclamation)
+                        Exit Sub
+                    End If
+
+                Else
+                    MsgBox("No se encontró el CoA correspondiente a la partida " & WPartida, MsgBoxStyle.Exclamation)
+                    Exit Sub
+                End If
+
+                '
+                ' Agregamos los adicionales que pidiesen haber (Ej: Informes de Particulas, Informes de Ionics, etc).
+                '
+                Dim WBuscarAdicionales As String = "\\193.168.0.2\w\impresion pdf\Documentacion Adicional Pedidos\" & WPartida & "\"
+
+                If Directory.Exists(WBuscarAdicionales) Then
+
+                    Dim WAdicionales As String() = Directory.GetFiles(WBuscarAdicionales, "*", SearchOption.TopDirectoryOnly)
+
+                    WArchivos.AddRange(WAdicionales)
+
+                End If
+
+            Next
+
+            '
+            ' Buscamos el FDS del Producto.
+            '
+            Dim WTer As String = r("Terminado")
+            WTer = Microsoft.VisualBasic.Right(WTer.Replace(" ", "").Replace("/", "").Replace("-", "").PadLeft(8, "0"), 8)
+            Dim WBuscarEn As String = "\\193.168.0.2\w\impresion pdf\FDS\"
+
+            Dim WFDSs As String() = Directory.GetFiles(WBuscarEn, String.Format("FDS*{0}*.pdf", WTer), SearchOption.TopDirectoryOnly)
+
+            Dim arch As String = ""
+
+            For Each wfdS As String In WFDSs
+
+                wfdS = UCase(wfdS)
+
+                If WEnIngles Then
+                    If wfdS.Contains("-ING") Or wfdS.Contains(" ING") Then
+                        arch = wfdS
+                        Exit For
+                    End If
+                Else
+                    If Not wfdS.Contains("-ING") And Not wfdS.Contains(" ING") Then
+                        arch = wfdS
+                        Exit For
+                    End If
+                End If
+
+                If arch.Trim = "" Then arch = wfdS
+
+            Next
+
+            If arch.Trim <> "" Then WArchivos.Add(arch)
+
+        Next
+
+        '
+        ' Consultamos si quiere enviar aviso al Cliente. Por ahora, únicamente se muestra por pantalla.
+        '
+        If WEmailFactura <> "" Then
+            If MsgBox("¿Enviar aviso con documentación adjunta al Cliente? " & vbCrLf & vbCrLf & "La misma se enviará a la casilla: ( " & WEmailFactura & ") ", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+
+                MsgBox("Por encontrarnos en un periodo de prueba, la casilla que figurará en el mail será 'gferreyra@surfactan.com.ar'", MsgBoxStyle.Information)
+
+                WDirecciones = WEmailFactura
+                WAsunto = "Pedido #" & WNroPedido & " - Documentación - SURFACTAN S.A."
+
+                WCuerpo = "Estimado Cliente." & vbCrLf & "Le enviamos los Certificados de Análisis y Fichas de Seguridad correspondiente al pedido que estarán recibiendo en breve." & vbCrLf & vbCrLf & "<strong>Saludos cordiales.</strong>" & vbCrLf & "<strong>Aseguramiento de Calidad</strong>" & vbCrLf & "<strong>Surfactan S.A.</strong>"
+
+                '_EnviarMail(WDirecciones, WAsunto, WCuerpo, String.Join(";", WArchivos.ToArray()), False)
+                _EnviarMail("gferreyra@surfactan.com.ar", WAsunto, WCuerpo, String.Join(";", WArchivos.ToArray()), False, CCO:=WDirecciones)
+
+            End If
+        Else
+            MsgBox("El Cliente no tiene cargado una casilla de correo para enviar la documentación pertinente.")
+        End If
+
+    End Sub
+
+    Private Sub _EnviarMail(wDestinatarios As String, wAsunto As String, wCuerpo As String, wAdjuntos As String, Optional ByVal EnvioAutomatico As Boolean = True, Optional ByVal CCO As String = "")
+        Dim oApp As _Application
+        Dim oMsg As _MailItem
+
+        Try
+            oApp = New Application()
+
+            oMsg = oApp.CreateItem(OlItemType.olMailItem)
+
+            Dim el = oMsg.GetInspector
+
+            oMsg.HTMLBody = "<p>" & wCuerpo.Replace(vbCrLf, "<br/>") & "<p>" & oMsg.HTMLBody
+
+            oMsg.Subject = wAsunto
+            'oMsg.Body = wCuerpo
+
+            ' Modificar por los E-Mails que correspondan.
+            oMsg.To = wDestinatarios
+            oMsg.BCC = CCO
+
+            If wAdjuntos.Split(";").Count > 0 Then
+
+                For Each archivosAdjunto As String In wAdjuntos.Split(";")
+
+                    If archivosAdjunto.Trim <> "" Then oMsg.Attachments.Add(archivosAdjunto)
+
+                Next
+
+            End If
+
+            If EnvioAutomatico Then
+                oMsg.Send()
+            Else
+                oMsg.Display()
+            End If
+
+        Catch ex As System.Exception
+            Throw New System.Exception("No se pudo crear el E-Mail solicitado." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        End Try
     End Sub
 
     Private Sub dgvDatos_CellMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgvDatos.CellMouseDoubleClick
