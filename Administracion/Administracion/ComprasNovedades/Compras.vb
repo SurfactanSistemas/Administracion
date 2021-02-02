@@ -2364,12 +2364,13 @@ Public Class Compras
             With New GestorDeArchivos.EditorArchivos(2, CarpetaAux)
                 .Show()
             End With
+
             ' With New EditorArchivos(2, CarpetaAux)
             '     'With New EditorArchivos(2, RutaGuardar & "\Auxiliar")
             '     .Show()
             ' End With
         Else
-            With New EditorArchivos(2, RutaGuardar & "\" & txtNroInterno.Text)
+            With New GestorDeArchivos.EditorArchivos(2, RutaGuardar & "\" & txtNroInterno.Text)
                 .Show()
             End With
             'With New EditorArchivos(2, RutaGuardar & "\" & txtNroInterno.Text)

@@ -342,9 +342,9 @@ Public Class EditorArchivos : Implements SelectorCarpetas
                     fileName.Append(Convert.ToChar(fileGroupDescriptor(i)))
                     System.Math.Min(System.Threading.Interlocked.Increment(i), i - 1)
                 End While
+
                 theStream.Close()
-
-
+                'theStream.SetLength(0)
 
                 ' We should have the file name or if its a email the subject line. Create our temp file based on the temp path and this info
                 Directory.CreateDirectory("C:\Temporales")
@@ -386,6 +386,7 @@ Public Class EditorArchivos : Implements SelectorCarpetas
                     ms.Position = 0
                     ms.Read(FileBytes, 0, CInt(ms.Length))
                     ms.Close()
+                    'ms.SetLength(0)
                     ' save the raw data into our temp file
                     Dim fs As FileStream = New FileStream(myTempFile, FileMode.OpenOrCreate, FileAccess.Write)
                     fs.Write(FileBytes, 0, FileBytes.Length)
@@ -1125,6 +1126,8 @@ Public Class EditorArchivos : Implements SelectorCarpetas
                     End With
 
                 Next
+
+                ms.SetLength(0)
 
                 _SubirArchvios(Archivos, VectorCarpetas)
                 'LUEGO DE PASAR LOS ARCHIVOS A LA CARPETA DESTINO LOS BORRAMOS DE LA TEMPORAL
