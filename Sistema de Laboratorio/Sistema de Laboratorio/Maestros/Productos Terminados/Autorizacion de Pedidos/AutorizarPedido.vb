@@ -376,6 +376,7 @@ Public Class AutorizarPedido
         ' Consultamos si quiere enviar aviso al Cliente. Por ahora, únicamente se muestra por pantalla.
         '
         If WEmailFactura <> "" Then
+
             If MsgBox("¿Enviar aviso con documentación adjunta al Cliente? " & vbCrLf & vbCrLf & "La misma se enviará a la casilla: ( " & WEmailFactura & ") ", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
 
                 MsgBox("Por encontrarnos en un periodo de prueba, la casilla que figurará en el mail será 'gferreyra@surfactan.com.ar'", MsgBoxStyle.Information)
@@ -385,12 +386,12 @@ Public Class AutorizarPedido
 
                 WCuerpo = "Estimado Cliente." & vbCrLf & "Le enviamos los Certificados de Análisis y Fichas de Seguridad correspondiente al pedido que estarán recibiendo en breve." & vbCrLf & vbCrLf & "<strong>Saludos cordiales.</strong>" & vbCrLf & "<strong>Aseguramiento de Calidad</strong>" & vbCrLf & "<strong>Surfactan S.A.</strong>"
 
-                '_EnviarMail(WDirecciones, WAsunto, WCuerpo, String.Join(";", WArchivos.ToArray()), False)
+                '_EnviarMail(WEmailFactura, WAsunto, WCuerpo, String.Join(";", WArchivos.ToArray()), False, CCO:=WDirecciones)
                 _EnviarMail("gferreyra@surfactan.com.ar", WAsunto, WCuerpo, String.Join(";", WArchivos.ToArray()), False, CCO:=WDirecciones)
 
             End If
         Else
-            MsgBox("El Cliente no tiene cargado una casilla de correo para enviar la documentación pertinente.")
+            MsgBox("El Cliente no tiene cargado una casilla de correo para enviar la documentación pertinente.", MsgBoxStyle.Information)
         End If
 
     End Sub
