@@ -345,13 +345,13 @@ Public Class EditorArchivos : Implements SelectorCarpetas
 
                 theStream.Close()
                 'theStream.SetLength(0)
-
+                If Directory.Exists("C:\Temporales") Then Directory.Delete("C:\Temporales", True)
                 ' We should have the file name or if its a email the subject line. Create our temp file based on the temp path and this info
                 Directory.CreateDirectory("C:\Temporales")
                 ' Dim myTempFile As String = "C:\Temporales\" + fileName.ToString()
 
                 Dim NombreArchivo As String = fileName.ToString()
-                NombreArchivo = Regex.Replace(NombreArchivo, "[^\w\\-]", "")
+                NombreArchivo = Regex.Replace(NombreArchivo, "[^\w\s\-]", "")
 
 
 
@@ -929,7 +929,7 @@ Public Class EditorArchivos : Implements SelectorCarpetas
 
     Private Sub dgvArchivos_DragOver(sender As Object, e As DragEventArgs) Handles dgvArchivos.DragOver
         'MsgBox("")
-        TopMost = True
+        'TopMost = True
     End Sub
 
     Private Sub dgvArchivos_DragLeave(sender As Object, e As EventArgs) Handles dgvArchivos.DragLeave
@@ -1038,7 +1038,7 @@ Public Class EditorArchivos : Implements SelectorCarpetas
         Select Case e.KeyData
             Case Keys.Enter
                 If Trim(txt_NuevoNombre.Text) <> "" Then
-                    txt_NuevoNombre.Text = Regex.Replace(txt_NuevoNombre.Text, "[^\w\\-]", " ")
+                    txt_NuevoNombre.Text = Regex.Replace(txt_NuevoNombre.Text, "[^\w\s\-]", " ")
                     CambiarNombre(txt_NuevoNombre.Text)
                     pnl_CambioNombre.Visible = False
                 End If
@@ -1089,13 +1089,19 @@ Public Class EditorArchivos : Implements SelectorCarpetas
 
 
                 Dim NombreArchivo As String = fileName.ToString()
-                NombreArchivo = Regex.Replace(NombreArchivo, "[^\w\\-]", "")
-
-
+                '
+                ' Se modifica la Expresion Regular. Tenia el problema de que eliminaba, en algunos casos, el punto de la extesion del archivo.
+                '
+                'NombreArchivo = Regex.Replace(NombreArchivo, "[^\w\\-]", "")
+                NombreArchivo = Regex.Replace(NombreArchivo, "[^\w\s\-]", "") ' reemplaza todo lo que no sea un caracter, espacio, punto y el guion medio.
 
                 Dim Extencion As String = obtenerExtencion(fileName.ToString())
                 removerExtencion(NombreArchivo, Extencion)
+
+                If Directory.Exists("C:\Temporales") Then Directory.Delete("C:\Temporales", True)
+
                 Directory.CreateDirectory("C:\Temporales")
+
                 Dim theFile As String = "C:\Temporales\" & NombreArchivo & Extencion
 
 

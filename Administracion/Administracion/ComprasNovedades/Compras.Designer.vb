@@ -32,10 +32,6 @@ Partial Class Compras
         Me.optCtaCte = New System.Windows.Forms.RadioButton()
         Me.optEfectivo = New System.Windows.Forms.RadioButton()
         Me.gridAsientos = New System.Windows.Forms.DataGridView()
-        Me.Cuenta = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Debito = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Credito = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -43,13 +39,19 @@ Partial Class Compras
         Me.btn_Adjuntar = New System.Windows.Forms.Button()
         Me.ckMarcaDifCambio = New System.Windows.Forms.CheckBox()
         Me.ckChequeRechazado = New System.Windows.Forms.CheckBox()
-        Me.CustomButton1 = New Administracion.CustomButton()
         Me.txtVtoCAI = New System.Windows.Forms.MaskedTextBox()
         Me.txtFechaIVA = New System.Windows.Forms.MaskedTextBox()
         Me.txtFechaVto2 = New System.Windows.Forms.MaskedTextBox()
         Me.txtFechaVto1 = New System.Windows.Forms.MaskedTextBox()
         Me.txtFechaEmision = New System.Windows.Forms.MaskedTextBox()
         Me.CBLetra = New System.Windows.Forms.ComboBox()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+        Me.Cuenta = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Debito = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Credito = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CustomButton1 = New Administracion.CustomButton()
         Me.txtNumero = New Administracion.CustomTextBox()
         Me.CustomLabel4 = New Administracion.CustomLabel()
         Me.txtCAI = New Administracion.CustomTextBox()
@@ -95,7 +97,6 @@ Partial Class Compras
         Me.cmbTipo = New Administracion.CustomComboBox()
         Me.txtPunto = New Administracion.CustomTextBox()
         Me.txtTipo = New Administracion.CustomTextBox()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.btnApertura = New Administracion.CustomButton()
         Me.btnConsulta = New Administracion.CustomButton()
         Me.btnCerrar = New Administracion.CustomButton()
@@ -103,7 +104,6 @@ Partial Class Compras
         Me.btnEliminar = New Administracion.CustomButton()
         Me.btnConsultaNroFactura = New Administracion.CustomButton()
         Me.btnLimpiar = New Administracion.CustomButton()
-        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.gbTipo.SuspendLayout()
         CType(Me.gridAsientos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
@@ -174,39 +174,11 @@ Partial Class Compras
         Me.gridAsientos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Cuenta, Me.Descripcion, Me.Debito, Me.Credito})
         Me.gridAsientos.Location = New System.Drawing.Point(40, 224)
         Me.gridAsientos.Name = "gridAsientos"
+        Me.gridAsientos.RowHeadersWidth = 15
+        Me.gridAsientos.RowTemplate.Height = 21
         Me.gridAsientos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
         Me.gridAsientos.Size = New System.Drawing.Size(734, 286)
         Me.gridAsientos.TabIndex = 52
-        '
-        'Cuenta
-        '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Cuenta.DefaultCellStyle = DataGridViewCellStyle1
-        Me.Cuenta.HeaderText = "Cuenta"
-        Me.Cuenta.Name = "Cuenta"
-        '
-        'Descripcion
-        '
-        Me.Descripcion.HeaderText = "Descripción"
-        Me.Descripcion.Name = "Descripcion"
-        Me.Descripcion.ReadOnly = True
-        Me.Descripcion.Width = 350
-        '
-        'Debito
-        '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Debito.DefaultCellStyle = DataGridViewCellStyle2
-        Me.Debito.HeaderText = "Débito"
-        Me.Debito.Name = "Debito"
-        Me.Debito.Width = 120
-        '
-        'Credito
-        '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Credito.DefaultCellStyle = DataGridViewCellStyle3
-        Me.Credito.HeaderText = "Crédito"
-        Me.Credito.Name = "Credito"
-        Me.Credito.Width = 120
         '
         'Panel1
         '
@@ -342,28 +314,6 @@ Partial Class Compras
         Me.ckChequeRechazado.Text = "Cheque Rechazado"
         Me.ckChequeRechazado.UseVisualStyleBackColor = True
         '
-        'CustomButton1
-        '
-        Me.CustomButton1.BackColor = System.Drawing.SystemColors.Control
-        Me.CustomButton1.BackgroundImage = Global.Administracion.My.Resources.Resources.Consulta_Dat_N1
-        Me.CustomButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.CustomButton1.Cleanable = False
-        Me.CustomButton1.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.CustomButton1.EnterIndex = -1
-        Me.CustomButton1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.CustomButton1.FlatAppearance.BorderSize = 0
-        Me.CustomButton1.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.CustomButton1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.CustomButton1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.CustomButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.CustomButton1.LabelAssociationKey = -1
-        Me.CustomButton1.Location = New System.Drawing.Point(749, 63)
-        Me.CustomButton1.Name = "CustomButton1"
-        Me.CustomButton1.Size = New System.Drawing.Size(31, 23)
-        Me.CustomButton1.TabIndex = 64
-        Me.ToolTip1.SetToolTip(Me.CustomButton1, "Consultar Detalles de Remitos")
-        Me.CustomButton1.UseVisualStyleBackColor = False
-        '
         'txtVtoCAI
         '
         Me.txtVtoCAI.Location = New System.Drawing.Point(716, 39)
@@ -431,6 +381,64 @@ Partial Class Compras
         Me.CBLetra.Name = "CBLetra"
         Me.CBLetra.Size = New System.Drawing.Size(36, 21)
         Me.CBLetra.TabIndex = 62
+        '
+        'OpenFileDialog1
+        '
+        Me.OpenFileDialog1.FileName = "OpenFileDialog1"
+        '
+        'Cuenta
+        '
+        Me.Cuenta.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Cuenta.DefaultCellStyle = DataGridViewCellStyle1
+        Me.Cuenta.HeaderText = "Cuenta"
+        Me.Cuenta.Name = "Cuenta"
+        Me.Cuenta.Width = 66
+        '
+        'Descripcion
+        '
+        Me.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Descripcion.HeaderText = "Descripción"
+        Me.Descripcion.Name = "Descripcion"
+        Me.Descripcion.ReadOnly = True
+        '
+        'Debito
+        '
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Debito.DefaultCellStyle = DataGridViewCellStyle2
+        Me.Debito.HeaderText = "Débito"
+        Me.Debito.Name = "Debito"
+        Me.Debito.Width = 120
+        '
+        'Credito
+        '
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Credito.DefaultCellStyle = DataGridViewCellStyle3
+        Me.Credito.HeaderText = "Crédito"
+        Me.Credito.Name = "Credito"
+        Me.Credito.Width = 120
+        '
+        'CustomButton1
+        '
+        Me.CustomButton1.BackColor = System.Drawing.SystemColors.Control
+        Me.CustomButton1.BackgroundImage = Global.Administracion.My.Resources.Resources.Consulta_Dat_N1
+        Me.CustomButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.CustomButton1.Cleanable = False
+        Me.CustomButton1.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.CustomButton1.EnterIndex = -1
+        Me.CustomButton1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.CustomButton1.FlatAppearance.BorderSize = 0
+        Me.CustomButton1.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.CustomButton1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.CustomButton1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.CustomButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.CustomButton1.LabelAssociationKey = -1
+        Me.CustomButton1.Location = New System.Drawing.Point(749, 63)
+        Me.CustomButton1.Name = "CustomButton1"
+        Me.CustomButton1.Size = New System.Drawing.Size(31, 23)
+        Me.CustomButton1.TabIndex = 64
+        Me.ToolTip1.SetToolTip(Me.CustomButton1, "Consultar Detalles de Remitos")
+        Me.CustomButton1.UseVisualStyleBackColor = False
         '
         'txtNumero
         '
@@ -547,6 +555,7 @@ Partial Class Compras
         Me.txtNroInterno.EnterIndex = 1
         Me.txtNroInterno.LabelAssociationKey = 1
         Me.txtNroInterno.Location = New System.Drawing.Point(143, 14)
+        Me.txtNroInterno.MaxLength = 6
         Me.txtNroInterno.Name = "txtNroInterno"
         Me.txtNroInterno.Size = New System.Drawing.Size(83, 20)
         Me.txtNroInterno.TabIndex = 26
@@ -933,7 +942,6 @@ Partial Class Compras
         '
         Me.txtParidad.Cleanable = True
         Me.txtParidad.Empty = True
-        Me.txtParidad.Enabled = False
         Me.txtParidad.EnterIndex = 13
         Me.txtParidad.LabelAssociationKey = 14
         Me.txtParidad.Location = New System.Drawing.Point(651, 90)
@@ -1158,10 +1166,6 @@ Partial Class Compras
         Me.ToolTip1.SetToolTip(Me.btnLimpiar, "Limpiar Formulario")
         Me.btnLimpiar.UseVisualStyleBackColor = True
         '
-        'OpenFileDialog1
-        '
-        Me.OpenFileDialog1.FileName = "OpenFileDialog1"
-        '
         'Compras
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1261,11 +1265,11 @@ Partial Class Compras
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents CustomButton1 As Administracion.CustomButton
     Friend WithEvents ckChequeRechazado As System.Windows.Forms.CheckBox
+    Friend WithEvents ckMarcaDifCambio As System.Windows.Forms.CheckBox
+    Friend WithEvents btn_Adjuntar As System.Windows.Forms.Button
+    Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
     Friend WithEvents Cuenta As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Debito As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Credito As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ckMarcaDifCambio As System.Windows.Forms.CheckBox
-    Friend WithEvents btn_Adjuntar As System.Windows.Forms.Button
-    Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
 End Class

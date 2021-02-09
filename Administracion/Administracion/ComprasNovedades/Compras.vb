@@ -1524,7 +1524,16 @@ Public Class Compras
 
         If e.KeyData = Keys.Enter Then
             'txtParidad.Text = CustomConvert.toStringWithTwoDecimalPlaces(Val(txtParidad.Text))
-            _SaltarA(txtNeto)
+
+            '
+            ' Actualizamos la paridad a cara de perro si es que ya existe la factura.
+            '
+            Dim WComp As DataRow = GetSingle("SELECT NroInterno FROM IvaComp WHERE NroInterno = '" & txtNroInterno.Text & "'")
+            If WComp IsNot Nothing Then
+                ExecuteNonQueries({"UPDATE IvaComp SET Paridad = '" & formatonumerico(txtParidad.Text) & "' WHERE NroInterno = '" & txtNroInterno.Text & "'"})
+            End If
+
+            _SaltarA(txtIVA21)
         ElseIf e.KeyData = Keys.Escape Then
             txtParidad.Text = ""
         End If
@@ -1906,13 +1915,13 @@ Public Class Compras
     End Sub
 
     Private Sub _DeterminarParidad()
-        txtParidad.Empty = cmbFormaPago.SelectedIndex <> 2
-        If txtParidad.Empty Then
-            txtParidad.Enabled = False
+        'txtParidad.Empty = cmbFormaPago.SelectedIndex <> 2
+        If cmbFormaPago.SelectedIndex <> 2 Then
+            'txtParidad.Enabled = False
             txtParidad.Text = ""
             _SaltarA(txtNeto)
         Else
-            txtParidad.Enabled = True
+            'txtParidad.Enabled = True
             txtParidad.Text = "0.00"
             _SaltarA(txtParidad)
         End If

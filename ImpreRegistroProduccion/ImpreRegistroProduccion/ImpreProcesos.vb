@@ -201,7 +201,7 @@ Public Class ImpreProcesos
         '
         'TODO: Filtrar por otra cosa que no sa ]MarcaFactura = 1
         '
-        Dim WPed As DataTable = GetAll("SELECT c.Razon, c.Provincia, t.Descripcion, p.* FROM Pedido p INNER JOIN Cliente c ON c.Cliente = p.Cliente INNER JOIN Terminado t ON t.Codigo = p.Terminado WHERE p.Pedido = '" & WNroPedido & "' And p.MarcaFactura = '1' And ISNULL(p.Facturado, 0) < ISNULL(p.Cantidad, 0) ORDER BY p.Renglon", "SurfactanSa")
+        Dim WPed As DataTable = GetAll("SELECT c.Razon, c.Provincia, c.EmailCoa, t.Descripcion, p.* FROM Pedido p INNER JOIN Cliente c ON c.Cliente = p.Cliente INNER JOIN Terminado t ON t.Codigo = p.Terminado WHERE p.Pedido = '" & WNroPedido & "' And p.MarcaFactura = '1' And ISNULL(p.Facturado, 0) < ISNULL(p.Cantidad, 0) ORDER BY p.Renglon", "SurfactanSa")
         Dim WDir As String() = {"grodriguez", "hsein", "calidad3", "calidad2", "calidad", "ebiglieri", "isocalidad", "hmuller", "scoppiello", "sup3", "planta7"}
         Dim WDirecciones As String = ""
 
@@ -209,13 +209,31 @@ Public Class ImpreProcesos
 
         Dim WEnIngles As Boolean = Val(OrDefault(WPed.Rows(0)("Provincia"), "")) = 24
         Dim WDescCliente As String = Trim(UCase((OrDefault(WPed.Rows(0)("Razon"), ""))))
+        Dim WEmailCoa As String = Trim(LCase((OrDefault(WPed.Rows(0)("EmailCoa"), ""))))
+        Dim WCodCliente As String = Trim(UCase((OrDefault(WPed.Rows(0)("Cliente"), ""))))
 
         WDir.ToList().ForEach(Sub(d) WDirecciones &= d & "@surfactan.com.ar;")
 
-        If WDirecciones = "" Or WPed.Rows.Count = 0 Then Exit Sub
+        If WDirecciones = "" Then Exit Sub
+        If WEmailCoa = "" Then
 
-        Dim WAsunto As String = "El Pedido " & WNroPedido & " de " & WDescCliente & ", ha sido autorizado."
-        Dim WCuerpo As String = "Se notifica que el pedido " & WNroPedido & ", se encuentra autorizado por Aseg. de la Calidad." & vbCrLf & vbCrLf & "Se adjuntan los FDS y Certificados correspondientes a los Productos y Partidas involucradas."
+            With New ActualizarMailCoaCliente(WCodCliente)
+                .ShowDialog(Me)
+            End With
+
+            Dim WCli As DataRow = GetSingle("SELECT EmailCoa FROM Cliente WHERE Cliente = '" & WCodCliente & "'")
+
+            If WCli IsNot Nothing Then
+                WEmailCoa = Trim(LCase((OrDefault(WCli("EmailCoa"), ""))))
+            End If
+
+            'MsgBox("El Cliente no tiene cargado una dirección de mail como destino para enviar la documentación.", MsgBoxStyle.Exclamation)
+        End If
+
+        'Dim WAsunto As String = "El Pedido " & WNroPedido & " de " & WDescCliente & ", ha sido autorizado."
+        Dim WAsunto As String = "Pedido #" & WNroPedido & " - Cliente " & WDescCliente & " - Documentación - SURFACTAN S.A."
+        'Dim WCuerpo As String = "Se notifica que el pedido " & WNroPedido & ", se encuentra autorizado por Aseg. de la Calidad." & vbCrLf & vbCrLf & "Se adjuntan los FDS y Certificados correspondientes a los Productos y Partidas involucradas."
+        Dim WCuerpo As String = "Estimado Cliente." & vbCrLf & "Le enviamos los Certificados de Análisis y Fichas de Seguridad correspondiente al pedido que estarán recibiendo en breve." & vbCrLf & vbCrLf & "<strong>Saludos cordiales.</strong>" & vbCrLf & "<strong>Aseguramiento de Calidad</strong>" & vbCrLf & "<strong>Surfactan S.A.</strong>"
 
         Dim WArchivos As New List(Of String)
 
@@ -344,7 +362,7 @@ Public Class ImpreProcesos
 
         Next
 
-        _EnviarMail(WDirecciones, WAsunto, WCuerpo, String.Join(";", WArchivos.ToArray()), False)
+        _EnviarMail(WEmailCoa, WAsunto, WCuerpo, String.Join(";", WArchivos.ToArray()), False, WDirecciones)
 
     End Sub
 
@@ -419,7 +437,7 @@ Public Class ImpreProcesos
 
     End Sub
 
-    Private Sub _EnviarMail(wDestinatarios As String, wAsunto As String, wCuerpo As String, wAdjuntos As String, Optional ByVal EnvioAutomatico As Boolean = True)
+    Private Sub _EnviarMail(wDestinatarios As String, wAsunto As String, wCuerpo As String, wAdjuntos As String, Optional ByVal EnvioAutomatico As Boolean = True, Optional ByVal CCO As String = "")
         Dim oApp As _Application
         Dim oMsg As _MailItem
 
@@ -428,10 +446,12 @@ Public Class ImpreProcesos
 
             oMsg = oApp.CreateItem(OlItemType.olMailItem)
             oMsg.Subject = wAsunto
-            oMsg.Body = wCuerpo
+            'oMsg.Body = wCuerpo
+            oMsg.HTMLBody = wCuerpo
 
             ' Modificar por los E-Mails que correspondan.
             oMsg.To = wDestinatarios
+            oMsg.BCC = CCO
 
             If wAdjuntos.Split(";").Count > 0 Then
 

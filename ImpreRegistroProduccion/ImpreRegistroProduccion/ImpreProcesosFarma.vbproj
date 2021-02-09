@@ -116,6 +116,12 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActualizarMailCoaCliente.Designer.vb">
+      <DependentUpon>ActualizarMailCoaCliente.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ActualizarMailCoaCliente.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Clases\Conexion.vb" />
     <Compile Include="Clases\Helper.vb" />
     <Compile Include="Clases\Query.vb" />
@@ -331,6 +337,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ActualizarMailCoaCliente.resx">
+      <DependentUpon>ActualizarMailCoaCliente.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ImpreProcesos.resx">
       <DependentUpon>ImpreProcesos.vb</DependentUpon>
     </EmbeddedResource>

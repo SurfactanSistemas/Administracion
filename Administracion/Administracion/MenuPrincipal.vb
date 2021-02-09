@@ -352,20 +352,20 @@ Public Class MenuPrincipal
 
     Private Sub SolicitudDeFondosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SolicitudDeFondosToolStripMenuItem.Click
         With New Sistema_Solicitud_Fondos.Login("Crear")
-            .Show()
+            .Show(Me)
         End With
     End Sub
 
     Private Sub GestionarSolicitudDeFondosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GestionarSolicitudDeFondosToolStripMenuItem.Click
         With New Sistema_Solicitud_Fondos.Login("Gestion")
-            .Show()
+            .Show(Me)
         End With
 
     End Sub
 
     Private Sub ConsultaTiposDeCambioToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ConsultaTiposDeCambioToolStripMenuItem.Click
         With New ConsultaTiposDeCambios
-            .Show()
+            .Show(Me)
         End With
     End Sub
 End Class

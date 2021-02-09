@@ -118,11 +118,11 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
 
 
 
-                chk_Efectivo.Checked = rowsoli.Item("Efectivo_Chk")
-                chk_Tranferencia.Checked = rowsoli.Item("Transferencia_Chk")
-                chk_Echeq.Checked = rowsoli.Item("ECheq_Chk")
-                chk_ChequeTerceros.Checked = rowsoli.Item("CheqTerceros_Chk")
-                chk_ChequePropio.Checked = rowsoli.Item("CheqPropio_Chk")
+                chk_Efectivo.Checked = OrDefault(rowsoli.Item("Efectivo_Chk"), 0) = 1
+                chk_Tranferencia.Checked = OrDefault(rowsoli.Item("Transferencia_Chk"), 0) = 1
+                chk_Echeq.Checked = OrDefault(rowsoli.Item("ECheq_Chk"), 0) = 1
+                chk_ChequeTerceros.Checked = OrDefault(rowsoli.Item("CheqTerceros_Chk"), 0) = 1
+                chk_ChequePropio.Checked = OrDefault(rowsoli.Item("CheqPropio_Chk"), 0) = 1
 
                 'EN CASO DE QUE SEA EN DOLARES MULTIPLICAMOS EL VALOR POR LA PARIDAD
                 If WParidad <> 0 Then
