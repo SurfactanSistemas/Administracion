@@ -211,9 +211,9 @@ namespace Modulo_Capacitacion.Maestros.Legajos
                     row.Cells[0].Value = item.Codigo;
                     row.Cells[1].Value = item.Descripcion;
                     //necesario
-                    row.Cells[2].Value = item.Necesaria == 1 ? "X" : "";
+                    row.Cells[2].Value = item.Necesaria;
                     //deseable
-                    row.Cells[3].Value = item.Deseable == 1 ? "X" : "";
+                    row.Cells[3].Value = item.Deseable;
                     //combo
                     // DataGridViewComboBoxColumn Estado = new DataGridViewComboBoxColumn();
                     // Estado.DisplayStyle = DataGridViewComboBoxDisplayStyle.DropDownButton;
@@ -365,8 +365,8 @@ namespace Modulo_Capacitacion.Maestros.Legajos
                 row.CreateCells(DGV_Temas);
                 row.Cells[0].Value = item.Codigo;
                 row.Cells[1].Value = item.Descripcion;
-                row.Cells[2].Value = item.Necesaria == 1 ? "X" : "";
-                row.Cells[3].Value = item.Deseable == 1 ? "X" : "";
+                row.Cells[2].Value = item.Necesaria;
+                row.Cells[3].Value = item.Deseable;
                 row.Cells[4].Value = "";
 
                 DGV_Temas.Rows.Add(row);
@@ -718,8 +718,8 @@ namespace Modulo_Capacitacion.Maestros.Legajos
                 {
                     Codigo = int.Parse(row.Cells[0].Value.ToString()),
                     Descripcion = row.Cells[1].Value.ToString(),
-                    Necesaria = row.Cells[2].Value.ToString() == "X" ? 1 : 0,
-                    Deseable = row.Cells[3].Value.ToString() == "X" ? 1 : 0
+                    Necesaria = row.Cells[2].Value.ToString(),
+                    Deseable = row.Cells[3].Value.ToString()
                 };
                 string EstaCurs = row.Cells[4].Value == null ? "" : row.Cells[4].Value.ToString();
                 string result = BuscarEstado(EstaCurs);

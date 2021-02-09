@@ -181,8 +181,8 @@ namespace Negocio
                     //T = T.BuscarUno(T.Codigo.ToString(), renglon);
                     T = T.BuscarUno_Tema(T.Codigo.ToString());
                     //T.Descripcion = T.
-                    T.Necesaria = item["NecesariaCurso"].ToString() == "X" ? 1 : 0;
-                    T.Deseable = item["DeseableCurso"].ToString() == "X" ? 1 : 0;
+                    T.Necesaria = item["NecesariaCurso"].ToString();
+                    T.Deseable = item["DeseableCurso"].ToString();
                     obj.Temas.Add(T);
                     renglon++;
                 }

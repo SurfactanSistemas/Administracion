@@ -345,7 +345,6 @@ namespace Modulo_Capacitacion.Maestros.Temas
             this.TB_Codigo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Codigo.Location = new System.Drawing.Point(128, 21);
             this.TB_Codigo.Name = "TB_Codigo";
-            this.TB_Codigo.ReadOnly = true;
             this.TB_Codigo.Size = new System.Drawing.Size(84, 20);
             this.TB_Codigo.TabIndex = 5;
             this.TB_Codigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;

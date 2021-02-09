@@ -40,6 +40,7 @@ namespace Modulo_Capacitacion.Maestros.Temas
             CargarCombo();
             CargarCampos(this.TemaAModificar);
             TB_Descripcion.Focus();
+            TB_Codigo.ReadOnly = true;
         }
 
         private void CargarREsponsables()

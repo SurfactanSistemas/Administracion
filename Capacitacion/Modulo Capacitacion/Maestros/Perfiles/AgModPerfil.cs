@@ -118,7 +118,7 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
         {
             int Codigo = P.Codigo;
 
-            P.ListarCursos(Codigo);
+            //P.ListarCursos(Codigo);
 
             dtTemasInicio = P.ListarCursos(Codigo);
 
@@ -623,8 +623,8 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
                 {
                     Codigo = int.Parse(row.Cells[0].Value.ToString()),
                     Descripcion = row.Cells[1].Value.ToString(),
-                    Necesaria = row.Cells[2].Value.ToString() == "X" ? 1 : 0,
-                    Deseable = row.Cells[3].Value.ToString() == "X" ? 1 : 0
+                    Necesaria = row.Cells[2].Value.ToString().Trim() != "" ? "X" : "",
+                    Deseable = row.Cells[3].Value.ToString().Trim() != "" ? "X" : ""
                 };
 
                 Temas.Add(_Tema);
@@ -1486,6 +1486,11 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
                     celdaOtra.Value = "";
                 }
             }
+        }
+
+        private void DGV_Temas_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DGV_Temas_RowHeaderMouseDoubleClick(sender, e);
         }
 
       

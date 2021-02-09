@@ -820,7 +820,6 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
             this.textBox8.Size = new System.Drawing.Size(99, 26);
             this.textBox8.TabIndex = 47;
             this.textBox8.Text = "   EDUCACION";
-         
             // 
             // TB_Tareas3
             // 
@@ -910,9 +909,9 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
             this.groupBox1.Controls.Add(this.CB_Deseable);
             this.groupBox1.Controls.Add(this.TB_DescTemas);
             this.groupBox1.Controls.Add(this.TB_CodTemas);
-            this.groupBox1.Location = new System.Drawing.Point(16, 312);
+            this.groupBox1.Location = new System.Drawing.Point(8, 312);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(748, 51);
+            this.groupBox1.Size = new System.Drawing.Size(758, 51);
             this.groupBox1.TabIndex = 105;
             this.groupBox1.TabStop = false;
             // 
@@ -1000,7 +999,7 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
             this.Deseable,
             this.Agregado});
             this.DGV_Temas.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.DGV_Temas.Location = new System.Drawing.Point(16, 20);
+            this.DGV_Temas.Location = new System.Drawing.Point(8, 9);
             this.DGV_Temas.Margin = new System.Windows.Forms.Padding(0);
             this.DGV_Temas.Name = "DGV_Temas";
             this.DGV_Temas.ReadOnly = true;
@@ -1013,12 +1012,14 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.DGV_Temas.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.DGV_Temas.RowHeadersWidth = 15;
+            this.DGV_Temas.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.DGV_Temas.RowTemplate.Height = 18;
             this.DGV_Temas.ShowCellToolTips = false;
-            this.DGV_Temas.Size = new System.Drawing.Size(748, 285);
+            this.DGV_Temas.Size = new System.Drawing.Size(758, 301);
             this.DGV_Temas.TabIndex = 7;
             this.DGV_Temas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Temas_CellClick);
             this.DGV_Temas.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGV_Temas_CellMouseClick);
+            this.DGV_Temas.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGV_Temas_RowHeaderMouseClick);
             this.DGV_Temas.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGV_Temas_RowHeaderMouseDoubleClick);
             // 
             // Curso

@@ -173,8 +173,8 @@ namespace Modulo_Capacitacion.Maestros.VersionPerfiles
                 row.CreateCells(DGV_Temas);
                 row.Cells[0].Value = item.Codigo;
                 row.Cells[1].Value = item.Descripcion;
-                row.Cells[2].Value = item.Necesaria == 1 ? "X" : "";
-                row.Cells[3].Value = item.Deseable == 1 ? "X" : "";
+                row.Cells[2].Value = item.Necesaria;
+                row.Cells[3].Value = item.Deseable;
 
                 DGV_Temas.Rows.Add(row);
             }

@@ -17,8 +17,8 @@ namespace Negocio
         public Responsable ResponsableIII;
         public int ResponsableIV;
 
-        public int Deseable;
-        public int Necesaria;
+        public string Deseable;
+        public string Necesaria;
         public string Estado;
         public object Observacion;
         public string EstadoCurso;

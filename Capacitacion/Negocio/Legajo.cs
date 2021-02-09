@@ -140,8 +140,8 @@ namespace Negocio
                 var claper1 = Perfil.Codigo.ToString().PadLeft(6, '0');
                 var claper2 = "1".PadLeft(2, '0');
 
-                string nece = t.Necesaria == 1 ? "X" : "";
-                string dese = t.Deseable == 1 ? "X" : "";
+                string nece = t.Necesaria;
+                string dese = t.Deseable;
 
                 //int estado = ObtenerEstado(t.Estado);
 
@@ -243,8 +243,8 @@ namespace Negocio
                     //T = T.BuscarUno(T.Codigo.ToString(), renglon);
                     T = T.BuscarUno_Tema(T.Codigo.ToString());
                     //T.Descripcion = T.
-                    T.Necesaria = item["NecesariaCurso"].ToString() == "X" ? 1 : 0;
-                    T.Deseable = item["DeseableCurso"].ToString() == "X" ? 1 : 0;
+                    T.Necesaria = item["NecesariaCurso"].ToString();
+                    T.Deseable = item["DeseableCurso"].ToString();
                     T.EstadoCurso = item["EstadoCurso"].ToString();
                     T.EstaCurso = int.Parse(item["EstaCurso"].ToString());
                     obj.Temas.Add(T);
