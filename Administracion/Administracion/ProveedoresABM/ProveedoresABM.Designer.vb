@@ -38,12 +38,12 @@ Partial Class ProveedoresABM
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.ckAceptaTransferencias = New System.Windows.Forms.CheckBox()
-        Me.ckAceptaCheques = New System.Windows.Forms.CheckBox()
-        Me.btnEvaluacion = New System.Windows.Forms.Button()
         Me.GrupoConsultas = New System.Windows.Forms.Panel()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.btnCerrarConsultas = New Administracion.CustomButton()
+        Me.ckAceptaTransferencias = New System.Windows.Forms.CheckBox()
+        Me.ckAceptaCheques = New System.Windows.Forms.CheckBox()
+        Me.btnEvaluacion = New System.Windows.Forms.Button()
         Me.CKBProveedorInactivo = New System.Windows.Forms.CheckBox()
         Me.txtClienteAsociadoDescripcion = New System.Windows.Forms.TextBox()
         Me.txtClienteAsociado = New System.Windows.Forms.TextBox()
@@ -57,6 +57,7 @@ Partial Class ProveedoresABM
         Me.txtNroIB = New Administracion.CustomTextBox()
         Me.txtPorcelProv = New Administracion.CustomTextBox()
         Me.CustomLabel19 = New Administracion.CustomLabel()
+        Me.txtCbu = New System.Windows.Forms.TextBox()
         Me.txtPaginaWeb = New System.Windows.Forms.TextBox()
         Me.txtCUIT = New System.Windows.Forms.MaskedTextBox()
         Me.cmbCalificacion = New Administracion.CustomComboBox()
@@ -101,6 +102,7 @@ Partial Class ProveedoresABM
         Me.txtEmail = New Administracion.CustomTextBox()
         Me.CustomLabel9 = New Administracion.CustomLabel()
         Me.CustomLabel11 = New Administracion.CustomLabel()
+        Me.CustomLabel37 = New Administracion.CustomLabel()
         Me.txtObservaciones = New Administracion.CustomTextBox()
         Me.CustomLabel30 = New Administracion.CustomLabel()
         Me.CustomLabel10 = New Administracion.CustomLabel()
@@ -140,8 +142,6 @@ Partial Class ProveedoresABM
         Me.txtCAIVto = New System.Windows.Forms.MaskedTextBox()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.txtCAI = New Administracion.CustomTextBox()
-        Me.CustomLabel37 = New Administracion.CustomLabel()
-        Me.txtCbu = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -398,46 +398,6 @@ Partial Class ProveedoresABM
         Me.Panel2.Size = New System.Drawing.Size(763, 450)
         Me.Panel2.TabIndex = 84
         '
-        'ckAceptaTransferencias
-        '
-        Me.ckAceptaTransferencias.AutoSize = True
-        Me.ckAceptaTransferencias.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.ckAceptaTransferencias.Font = New System.Drawing.Font("Arial", 7.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ckAceptaTransferencias.ForeColor = System.Drawing.SystemColors.Control
-        Me.ckAceptaTransferencias.Location = New System.Drawing.Point(148, 98)
-        Me.ckAceptaTransferencias.Name = "ckAceptaTransferencias"
-        Me.ckAceptaTransferencias.Size = New System.Drawing.Size(157, 16)
-        Me.ckAceptaTransferencias.TabIndex = 115
-        Me.ckAceptaTransferencias.Text = "ACEPTA TRANSFERENCIAS"
-        Me.ckAceptaTransferencias.UseVisualStyleBackColor = True
-        '
-        'ckAceptaCheques
-        '
-        Me.ckAceptaCheques.AutoSize = True
-        Me.ckAceptaCheques.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.ckAceptaCheques.Font = New System.Drawing.Font("Arial", 7.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ckAceptaCheques.ForeColor = System.Drawing.SystemColors.Control
-        Me.ckAceptaCheques.Location = New System.Drawing.Point(38, 98)
-        Me.ckAceptaCheques.Name = "ckAceptaCheques"
-        Me.ckAceptaCheques.Size = New System.Drawing.Size(105, 16)
-        Me.ckAceptaCheques.TabIndex = 114
-        Me.ckAceptaCheques.Text = "ACEPTA E-CHEQ"
-        Me.ckAceptaCheques.UseVisualStyleBackColor = True
-        '
-        'btnEvaluacion
-        '
-        Me.btnEvaluacion.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.btnEvaluacion.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnEvaluacion.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.btnEvaluacion.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnEvaluacion.Location = New System.Drawing.Point(642, 415)
-        Me.btnEvaluacion.Name = "btnEvaluacion"
-        Me.btnEvaluacion.Size = New System.Drawing.Size(102, 25)
-        Me.btnEvaluacion.TabIndex = 113
-        Me.btnEvaluacion.Text = "EVALUACIÓN"
-        Me.ToolTip1.SetToolTip(Me.btnEvaluacion, "Evaluación de Proveedor por MP")
-        Me.btnEvaluacion.UseVisualStyleBackColor = False
-        '
         'GrupoConsultas
         '
         Me.GrupoConsultas.Controls.Add(Me.GroupBox4)
@@ -479,6 +439,46 @@ Partial Class ProveedoresABM
         Me.btnCerrarConsultas.Text = "Cerrar"
         Me.ToolTip1.SetToolTip(Me.btnCerrarConsultas, "Cerrar Ventana de Consultas")
         Me.btnCerrarConsultas.UseVisualStyleBackColor = False
+        '
+        'ckAceptaTransferencias
+        '
+        Me.ckAceptaTransferencias.AutoSize = True
+        Me.ckAceptaTransferencias.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.ckAceptaTransferencias.Font = New System.Drawing.Font("Arial", 7.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ckAceptaTransferencias.ForeColor = System.Drawing.SystemColors.Control
+        Me.ckAceptaTransferencias.Location = New System.Drawing.Point(148, 98)
+        Me.ckAceptaTransferencias.Name = "ckAceptaTransferencias"
+        Me.ckAceptaTransferencias.Size = New System.Drawing.Size(157, 16)
+        Me.ckAceptaTransferencias.TabIndex = 115
+        Me.ckAceptaTransferencias.Text = "ACEPTA TRANSFERENCIAS"
+        Me.ckAceptaTransferencias.UseVisualStyleBackColor = True
+        '
+        'ckAceptaCheques
+        '
+        Me.ckAceptaCheques.AutoSize = True
+        Me.ckAceptaCheques.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.ckAceptaCheques.Font = New System.Drawing.Font("Arial", 7.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ckAceptaCheques.ForeColor = System.Drawing.SystemColors.Control
+        Me.ckAceptaCheques.Location = New System.Drawing.Point(38, 98)
+        Me.ckAceptaCheques.Name = "ckAceptaCheques"
+        Me.ckAceptaCheques.Size = New System.Drawing.Size(105, 16)
+        Me.ckAceptaCheques.TabIndex = 114
+        Me.ckAceptaCheques.Text = "ACEPTA E-CHEQ"
+        Me.ckAceptaCheques.UseVisualStyleBackColor = True
+        '
+        'btnEvaluacion
+        '
+        Me.btnEvaluacion.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.btnEvaluacion.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnEvaluacion.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.btnEvaluacion.ForeColor = System.Drawing.SystemColors.Control
+        Me.btnEvaluacion.Location = New System.Drawing.Point(642, 415)
+        Me.btnEvaluacion.Name = "btnEvaluacion"
+        Me.btnEvaluacion.Size = New System.Drawing.Size(102, 25)
+        Me.btnEvaluacion.TabIndex = 113
+        Me.btnEvaluacion.Text = "EVALUACIÓN"
+        Me.ToolTip1.SetToolTip(Me.btnEvaluacion, "Evaluación de Proveedor por MP")
+        Me.btnEvaluacion.UseVisualStyleBackColor = False
         '
         'CKBProveedorInactivo
         '
@@ -652,6 +652,15 @@ Partial Class ProveedoresABM
         Me.CustomLabel19.Size = New System.Drawing.Size(67, 17)
         Me.CustomLabel19.TabIndex = 70
         Me.CustomLabel19.Text = "Porcel I.B."
+        '
+        'txtCbu
+        '
+        Me.txtCbu.Location = New System.Drawing.Point(398, 390)
+        Me.txtCbu.MaxLength = 22
+        Me.txtCbu.Name = "txtCbu"
+        Me.txtCbu.Size = New System.Drawing.Size(152, 20)
+        Me.txtCbu.TabIndex = 104
+        Me.txtCbu.Text = "1500037400008361660028"
         '
         'txtPaginaWeb
         '
@@ -1251,6 +1260,19 @@ Partial Class ProveedoresABM
         Me.CustomLabel11.TabIndex = 10
         Me.CustomLabel11.Text = "CUIT"
         '
+        'CustomLabel37
+        '
+        Me.CustomLabel37.AutoSize = True
+        Me.CustomLabel37.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.CustomLabel37.ControlAssociationKey = 11
+        Me.CustomLabel37.Font = New System.Drawing.Font("Arial", 8.0!, System.Drawing.FontStyle.Bold)
+        Me.CustomLabel37.ForeColor = System.Drawing.SystemColors.Control
+        Me.CustomLabel37.Location = New System.Drawing.Point(363, 392)
+        Me.CustomLabel37.Name = "CustomLabel37"
+        Me.CustomLabel37.Size = New System.Drawing.Size(29, 14)
+        Me.CustomLabel37.TabIndex = 9
+        Me.CustomLabel37.Text = "CBU"
+        '
         'txtObservaciones
         '
         Me.txtObservaciones.Cleanable = True
@@ -1812,33 +1834,11 @@ Partial Class ProveedoresABM
         Me.txtCAI.Validator = Administracion.ValidatorType.None
         Me.txtCAI.Visible = False
         '
-        'CustomLabel37
-        '
-        Me.CustomLabel37.AutoSize = True
-        Me.CustomLabel37.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
-        Me.CustomLabel37.ControlAssociationKey = 11
-        Me.CustomLabel37.Font = New System.Drawing.Font("Arial", 8.0!, System.Drawing.FontStyle.Bold)
-        Me.CustomLabel37.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel37.Location = New System.Drawing.Point(363, 392)
-        Me.CustomLabel37.Name = "CustomLabel37"
-        Me.CustomLabel37.Size = New System.Drawing.Size(29, 14)
-        Me.CustomLabel37.TabIndex = 9
-        Me.CustomLabel37.Text = "CBU"
-        '
-        'txtCbu
-        '
-        Me.txtCbu.Location = New System.Drawing.Point(398, 390)
-        Me.txtCbu.MaxLength = 22
-        Me.txtCbu.Name = "txtCbu"
-        Me.txtCbu.Size = New System.Drawing.Size(152, 20)
-        Me.txtCbu.TabIndex = 104
-        Me.txtCbu.Text = "1500037400008361660028"
-        '
         'ProveedoresABM
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(761, 535)
+        Me.ClientSize = New System.Drawing.Size(761, 543)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.GroupBox1)

@@ -270,6 +270,9 @@ Public Class MenuPrincipal
         Dim PermisoOp = (From N In WPermitidos Where UCase(Trim(N)) = UCase(Trim(WNombrePC))).Any()
 
         OrdenDePagoVirtualToolStripMenuItem.Visible = PermisoOp
+        SolicitudDeFondosToolStripMenuItem.Visible = Not _EsPellital
+        GestionarSolicitudDeFondosToolStripMenuItem.Visible = Not _EsPellital()
+        InformeRecepcionSinFacturasRegistradasToolStripMenuItem.Visible = Not _EsPellital()
 
     End Sub
 
