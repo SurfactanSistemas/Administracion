@@ -80,7 +80,8 @@ Module Query
             If q.Length = 0 Then Throw New Exception("No se han pasado consultas para ejecutar.")
 
             Using cn As New SqlConnection
-                cn.ConnectionString = _ConectarA(Conexion.EmpresaDeTrabajo) 'ConfigurationManager.ConnectionStrings("CS").ToString
+                Dim wbase As String = IIf(_EsPellital, "Pellital_III", "SurfactanSa")
+                cn.ConnectionString = _ConectarA(wbase) 'ConfigurationManager.ConnectionStrings("CS").ToString
                 cn.Open()
                 trans = cn.BeginTransaction
 
