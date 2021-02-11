@@ -59,6 +59,8 @@ namespace Modulo_Capacitacion.Listados.LegajosporPerfil
             this.ClientSize = new System.Drawing.Size(784, 562);
             this.Controls.Add(this.CRVInforme);
             this.Name = "ImpreInforme";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.ImpreInforme_Load);
             this.ResumeLayout(false);
 
