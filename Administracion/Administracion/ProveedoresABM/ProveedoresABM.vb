@@ -19,7 +19,7 @@ Public Class ProveedoresABM
     Private Const VALIDA_CUIT = "54327654321"
 
     Private TipoConsulta As String
-    Private Const MAIN_HEIGHT = 560
+    Private Const MAIN_HEIGHT = 580
     'Private Const EXPANDED_HEIGHT = 720
     Private WBColorAntRazon As Color
     Private WColorAntRazon As Color
@@ -192,6 +192,7 @@ Public Class ProveedoresABM
                     & "ContactoTelefono3 = '" & Mid(Trim(_Contacto3.Item3), 1, 50) & "', " _
                     & "ContactoEmail3 = '" & Mid(Trim(_Contacto3.Item4), 1, 50) & "', " _
                     & "ClienteAsociado = '" & Mid(Trim(txtClienteAsociado.Text), 1, 6) & "', " _
+                    & "Cbu = '" & Trim(txtCbu.Text) & "', " _
                     & "Inhabilitado = '" & Trim(_Inhabilitado) & "' " _
                     & " WHERE Proveedor = '" & Trim(txtCodigo.Text) & "'"
 
