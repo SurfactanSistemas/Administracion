@@ -10,6 +10,7 @@
     End Sub
 
     Private Sub btnMasTarde_Click(sender As Object, e As EventArgs) Handles btnMasTarde.Click
+        DialogResult = Windows.Forms.DialogResult.Cancel
         Close()
     End Sub
 
@@ -17,11 +18,15 @@
 
         ExecuteNonQueries({"UPDATE Cliente SET EmailCoa = '" & TextBox1.Text & "' WHERE Cliente = '" & Cliente & "'"})
 
+        DialogResult = Windows.Forms.DialogResult.OK
+
         Close()
 
     End Sub
 
     Private Sub TextBox1_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox1.KeyDown
-        btnAceptar_Click(Nothing, Nothing)
+        If e.KeyCode = Keys.Enter Then
+            btnAceptar_Click(Nothing, Nothing)
+        End If
     End Sub
 End Class
