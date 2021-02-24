@@ -196,14 +196,15 @@ Public Class AvisoOPAProveedores
                             Dim WTipoOrd As Integer = Val(OrDefault(.Item("TipoOrd"), ""))
 
                             If Trim(WProveedor) <> "" Then
-                                'DESCOMENTAR
-                                ' If Not _EnviarAvisoSegunSelectivoSemanal(WProveedor, WFechaOP) Then Continue For
+
+
+                                If Not _EnviarAvisoSegunSelectivoSemanal(WProveedor, WFechaOP) Then Continue For
 
                                 WFechasTransferencias = WFechasTransferencias.TrimEnd(",")
 
                                 If _EsPellital() Then
-                                    'DESCOMENTAR
-                                    '_EnviarAvisoOPDisponiblePellital(WProveedor, WDescProveedor, WOrden, EsPorTransferencia, WFechasTransferencias, PorTransferenciaYCheques, HayECheques:=WHayECheques, FechasECheques:=WFechasECheques, TipoOrd:=WTipoOrd)
+
+                                    _EnviarAvisoOPDisponiblePellital(WProveedor, WDescProveedor, WOrden, EsPorTransferencia, WFechasTransferencias, PorTransferenciaYCheques, HayECheques:=WHayECheques, FechasECheques:=WFechasECheques, TipoOrd:=WTipoOrd)
                                 Else
                                     _EnviarAvisoOPDisponible(WProveedor, WDescProveedor, WOrden, EsPorTransferencia, WFechasTransferencias, PorTransferenciaYCheques, HayECheques:=WHayECheques, FechasECheques:=WFechasECheques, TipoOrd:=WTipoOrd, WHayCompensaciones:=WHayCompensaciones, WFechasCompensaciones:=WFechasCompensaciones)
                                 End If
@@ -254,9 +255,9 @@ Public Class AvisoOPAProveedores
             End If
 
             'INCLUIDO POR ANDRES
-            'DESCOMENTAR Cambiar borrar el not del WporComando
+
             If WIndiceNoEnviadosPorERRORDEMAIL > 0 And WPorComando Then
-                EnviarMailAviso_MalCargados()
+                ' EnviarMailAviso_MalCargados()
             End If
             'FIN INCLUCION
 
@@ -303,7 +304,7 @@ Public Class AvisoOPAProveedores
 
             Dim WAdjuntos As New List(Of String)
 
-            WBCC = "soporte@surfactan.com.ar"
+            WBCC = "aam@surfactan.com.ar"
 
             _EnviarEmail(WMailAEnviar, WBCC, WAsunto, WBody, WAdjuntos.ToArray)
 
@@ -498,6 +499,90 @@ Public Class AvisoOPAProveedores
     'INCLUIDO POR ANDRES
     '
     Public Shared Function FormatoCorreoValido(ByVal correo As String) As Boolean
+        correo = Trim(correo)
+        Dim Listmails As New List(Of String)
+
+        'EN CASO DE TENER PUNTO Y COMO LOS SEPARAMOS PARA COMPROBARLOS POR SEPARADO
+        If correo.Contains(";") Then
+            Listmails.AddRange(Split(correo, ";"))
+        End If
+
+        If Listmails.Count > 0 Then
+            'ESTE CAMINO ES SI SON VARIOS MAILS
+            For Each mail As String In Listmails
+
+                Dim MailInpeccionar = Trim(mail)
+                'POR CADA UNO COMPROBAMOS SI TIENEN LOS SIGNOS "<" Y ">" Y EXTRAEMOS LE MAIL DE ADENTRO
+                If MailInpeccionar.Contains("<") And MailInpeccionar.Contains(">") Then
+                    Dim Inicio As String = -1
+                    Dim Final As String = -1
+                    For i = 0 To Len(MailInpeccionar) - 1
+                        If MailInpeccionar.Chars(i) = "<" Then
+                            Inicio = i + 1
+                        End If
+                        If MailInpeccionar.Chars(i) = ">" Then
+                            Final = i
+                        End If
+                    Next
+
+                    If Inicio <> -1 And Final <> -1 Then
+                        MailInpeccionar = MailInpeccionar.Substring(Inicio, (Final - Inicio))
+                    End If
+
+                End If
+
+                '
+                ' La siguiente expresión regular permite direcciones del siguiente estilo:
+                '   sop+surfac@mail.com
+                '   sop.surfac@mail.com.ar
+                '   sop_surfac@mail.com
+                '   sopsurfac@mail.com.ar
+                ' Exige que lo posterior al @ tenga el formato mail.com o mail.com.ar
+                '   Ej: sop+surfac@mail.com
+                '
+                '   Toma como invalido lo siguiente: soporte@surfactan
+                '
+
+                Dim sregVarios As String = "^[a-zA-Z0-9.+_]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
+                Dim rgxVarios As Regex = New Regex(sregVarios)
+
+                If rgxVarios.IsMatch(MailInpeccionar) = False Then
+                    Dim sreg2 As String = "^[a-zA-Z0-9.+_]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)?\.(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
+                    Dim rgx2 As Regex = New Regex(sreg2)
+                    If rgx2.IsMatch(MailInpeccionar) = False Then
+                        Return False
+                    End If
+
+                End If
+            Next
+
+            Return True
+
+        End If
+
+
+        'ESTE CAMINO ES SI NO SON VARIOS MAILS
+
+
+        If correo.Contains("<") And correo.Contains(">") Then
+            Dim Inicio As Integer = -1
+            Dim Final As Integer = -1
+            For i = 0 To Len(correo) - 1
+                If correo.Chars(i) = "<" Then
+                    Inicio = i + 1
+                End If
+                If correo.Chars(i) = ">" Then
+                    Final = i
+                End If
+            Next
+
+            If Inicio <> -1 And Final <> -1 Then
+                correo = correo.Substring(Inicio, (Final - Inicio))
+            End If
+
+        End If
+
+
         '
         ' La siguiente expresión regular permite direcciones del siguiente estilo:
         '   sop+surfac@mail.com
@@ -509,10 +594,19 @@ Public Class AvisoOPAProveedores
         '
         '   Toma como invalido lo siguiente: soporte@surfactan
         '
+
+
         Dim sreg As String = "^[a-zA-Z0-9.+_]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
         Dim rgx As Regex = New Regex(sreg)
 
-        Return rgx.IsMatch(correo)
+        If rgx.IsMatch(correo) = False Then
+            Dim sreg2 As String = "^[a-zA-Z0-9.+_]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)?\.(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
+            Dim rgx2 As Regex = New Regex(sreg2)
+            Return rgx2.IsMatch(correo)
+        Else
+            Return rgx.IsMatch(correo)
+        End If
+
 
     End Function
 
@@ -555,9 +649,21 @@ Public Class AvisoOPAProveedores
                 '
                 If Not FormatoCorreoValido(Trim(LCase(WMailOp))) Then
                     'MsgBox("contiene caracter no valido verificar", vbExclamation)
-                    WIndiceNoEnviadosPorERRORDEMAIL += 1
-                    WNoEnviadosPorERRORDEMAIL(WIndiceNoEnviadosPorERRORDEMAIL, 0) = Proveedor
-                    WNoEnviadosPorERRORDEMAIL(WIndiceNoEnviadosPorERRORDEMAIL, 1) = OrdenPago
+
+                    'CONSULTAMOS SI SE ENCUENTA EN LA TABLA
+                    Dim SQLCnslt As String = "SELECT Proveedor FROM ListaProvOPMailIncorrecto WHERE Proveedor = '" & Proveedor & "'"
+                    Dim RowMailIncorrectos As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+                    If RowMailIncorrectos Is Nothing Then
+                        ' SINO SE ENCUENTRA LO CARGAMOS EN EL MAIL AUTOMATICO
+                        WIndiceNoEnviadosPorERRORDEMAIL += 1
+                        WNoEnviadosPorERRORDEMAIL(WIndiceNoEnviadosPorERRORDEMAIL, 0) = Proveedor
+                        WNoEnviadosPorERRORDEMAIL(WIndiceNoEnviadosPorERRORDEMAIL, 1) = OrdenPago
+                        ' LO GRABAMOS EN LA TABLA
+                        SQLCnslt = "INSERT INTO ListaProvOPMailIncorrecto(Proveedor) VALUES('" & Proveedor & "')"
+                        ExecuteNonQueries("SurfactanSa", {SQLCnslt})
+                    End If
+
+                    'Y SALTEAMOS EL ENVIO DE MAIL
                     Exit Sub
                 End If
                 '
@@ -694,8 +800,8 @@ Public Class AvisoOPAProveedores
                 End If
 
                 Select Case Proveedor
-                    Case "10167878480", "10000000100", "10071081483", "10069345023", "10066352912"
-                        WBody = WBody & "<br/>" & "<br/>" & "En caso de cualquier consulta, por favor dirigirla a <strong><em>fgmonti@surfactan.com.ar</em></strong>"
+                    Case "10167878480", "10000000100", "10071081483", "10069345023", "10066352912", "10023969933", "10014123562"
+                        WBody = WBody & "<br/>" & "<br/>" & "En caso de cualquier consulta, por favor dirigirla a strong><em>facturacion@surfactan.com.ar</em></strong> o <strong><em>biglesias@surfactan.com.ar</em></strong>"
                 End Select
 
                 Dim WAdjuntos As New List(Of String)
@@ -714,26 +820,56 @@ Public Class AvisoOPAProveedores
                     End If
                 Next
 
+                WBCC &= "mlarias@surfactan.com.ar;"
+
                 Dim WAsunto As String = "ORDEN DE PAGO - SURFACTAN S.A. - "
-                'DESCOMENTAR
-                'WBCC &= "mlarias@surfactan.com.ar;"
 
-                ' If TipoOrd = 2 Then ' Si es Anticipo
-                '     'WBCC &= "juanfs@surfactan.com.ar"
-                '     WMailOp = "juanfs@surfactan.com.ar;"
-                '     WAsunto = "ANTICIPO DE PAGO - SURFACTAN S.A. - "
-                ' End If
+                If TipoOrd = 2 Then ' Si es Anticipo
+                    WAsunto = "ANTICIPO DE PAGO - SURFACTAN S.A. - "
+
+                    If EsPorTransferencia Then
+                        If HayECheques Then
+                            If PorTransferenciaYCheques Then
+                                'SI TIENE CHEQUES SE ENVIA A JUAN
+                                WMailOp = "juanfs@surfactan.com.ar;"
+                            End If
+                        End If
+                    Else
+                        If HayECheques Then
+                            If PorTransferenciaYCheques Then
+                                'SI TIENE CHEQUES SE ENVIA A JUAN
+                                WMailOp = "juanfs@surfactan.com.ar;"
+                            End If
+                        End If
+                    End If
+
+
+                End If
+
+
+
+                _EnviarEmail(WMailOp, WBCC, WAsunto, WBody, WAdjuntos.ToArray)
+
+                If WPorComando Then
+                    WBCC = "recepcion@surfactan.com.ar;"
+                End If
+
+
+                _MarcarOPComoEnviada(OrdenPago)
+
+                '
+                ' INCLUIDO POR ANDRES 24/02/2021
+                '
+                Dim SQLCnst As String = "SELECT Proveedor FROM ListaProvOPMailIncorrecto WHERE Proveedor = '" & Proveedor & "'"
+                Dim RowMailIncorrec As DataRow = GetSingle(SQLCnst, "SurfactanSa")
+                If RowMailIncorrec IsNot Nothing Then
+                    SQLCnst = "DELETE FROM ListaProvOPMailIncorrecto WHERE Proveedor = '" & Proveedor & "'"
+                    ExecuteNonQueries("SurfactanSa", {SQLCnst})
+                End If
+                '
+                ' FIN INCLUCION 24/02/2021
                 '
 
-                '_EnviarEmail(WMailOp, WBCC, WAsunto, WBody, WAdjuntos.ToArray)
-
-                '  If WPorComando Then
-                '      WBCC &= "recepcion@surfactan.com.ar;"
-                '  End If
-                '
-                '
-                '_MarcarOPComoEnviada(OrdenPago)
-                'DESCOMENTAR
             End If
 
         Catch ex As System.Exception

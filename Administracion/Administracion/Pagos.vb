@@ -600,6 +600,8 @@ Public Class Pagos
         WPorceIb = proveedor.porceIBProvincia
         WPorceIbCaba = proveedor.porceIBCABA
 
+
+
         txtFormasPagosAceptadas.Visible = False
 
         'Dim Prov As DataRow = GetSingle("SELECT AceptaCheques, AceptaTransferencias FROM Proveedor WHERE Proveedor = '" & txtProveedor.Text & "'")
@@ -2244,7 +2246,7 @@ Public Class Pagos
                     ZSql &= " '" & XPunto1 & "', '" & XNumero1 & "', " & Str(XImporte1) & ", '" & XTipo2 & "', '" & ZZNumero2 & "',"
                     ZSql &= " '" & ZZFecha2 & "', '" & ZZBanco2 & "', " & ZZImporte2 & ", '" & XObservaciones2 & "', '" & XEmpresa & "',"
                     ZSql &= " '" & XConcepto & "', '" & XObservaciones & "', " & Str(XImporte) & ", '" & XFechaOrd2 & "', '" & XConsecionaria & "',"
-                    ZSql &= " " & XImpolist & ", '" & XCuenta & "', " & XImpoNeto & ", " & Str$(XRetIbCiudad) & ", '', '', '', '', '', '', " & XParidad & ")"
+                    ZSql &= " " & XImpolist & ", '" & XCuenta & "', '" & formatonumerico(XImpoNeto) & "', " & Str$(XRetIbCiudad) & ", '', '', '', '', '', '', " & XParidad & ")"
 
 
                     SQLConnector.conexionSql(cn, cm)
@@ -2810,7 +2812,7 @@ Public Class Pagos
 
             If WEsAnticipo Then
 
-                Select Case txtProveedor.Text
+                Select txtProveedor.Text
                     Case "10167878480", "10000000100", "10071081483", "10069345023", "10066352912", "10023969933", "10014123562"
                         If MsgBox("Se detectó que está grabando un Anticipo. ¿Desea que se envíe la OP por Mail?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
                             btnEnviarAviso_Click(Nothing, Nothing)
@@ -2904,7 +2906,8 @@ Public Class Pagos
         ' Imprimimos los comprobantes pertinentes.
         btnImprimir.PerformClick()
 
-        btnEnviarAviso_Click(Nothing, Nothing)
+        'SOLO ENVIAMOS MAIL SI ES ANTICIPO Y DESPACHANTE DE ADUANA Y EL USUARIO RESPONDE QUE SI
+        ' btnEnviarAviso_Click(Nothing, Nothing)
 
         ' Limpiamos pantalla.
         btnLimpiar.PerformClick()
@@ -2912,7 +2915,91 @@ Public Class Pagos
 
     Public Shared Function FormatoCorreoValido(ByVal correo As String) As Boolean
 
-        correo = Trim(OrDefault(correo, ""))
+        correo = Trim(correo)
+        Dim Listmails As New List(Of String)
+
+        'EN CASO DE TENER PUNTO Y COMO LOS SEPARAMOS PARA COMPROBARLOS POR SEPARADO
+        If correo.Contains(";") Then
+            Listmails.AddRange(Split(correo, ";"))
+        End If
+
+        If Listmails.Count > 0 Then
+            'ESTE CAMINO ES SI SON VARIOS MAILS
+            For Each mail As String In Listmails
+
+                Dim MailInpeccionar = Trim(mail)
+                'POR CADA UNO COMPROBAMOS SI TIENEN LOS SIGNOS "<" Y ">" Y EXTRAEMOS LE MAIL DE ADENTRO
+                If MailInpeccionar.Contains("<") And MailInpeccionar.Contains(">") Then
+                    Dim Inicio As String = -1
+                    Dim Final As String = -1
+                    For i = 0 To Len(MailInpeccionar) - 1
+                        If MailInpeccionar.Chars(i) = "<" Then
+                            Inicio = i + 1
+                        End If
+                        If MailInpeccionar.Chars(i) = ">" Then
+                            Final = i
+                        End If
+                    Next
+
+                    If Inicio <> -1 And Final <> -1 Then
+                        MailInpeccionar = MailInpeccionar.Substring(Inicio, (Final - Inicio))
+                    End If
+
+                End If
+
+
+
+                '
+                ' La siguiente expresión regular permite direcciones del siguiente estilo:
+                '   sop+surfac@mail.com
+                '   sop.surfac@mail.com.ar
+                '   sop_surfac@mail.com
+                '   sopsurfac@mail.com.ar
+                ' Exige que lo posterior al @ tenga el formato mail.com o mail.com.ar
+                '   Ej: sop+surfac@mail.com
+                '
+                '   Toma como invalido lo siguiente: soporte@surfactan
+                '
+
+                Dim sregVarios As String = "^[a-zA-Z0-9.+_]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
+                Dim rgxVarios As Regex = New Regex(sregVarios)
+
+                If rgxVarios.IsMatch(MailInpeccionar) = False Then
+                    Dim sreg2 As String = "^[a-zA-Z0-9.+_]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)?\.(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
+                    Dim rgx2 As Regex = New Regex(sreg2)
+                    If rgx2.IsMatch(MailInpeccionar) = False Then
+                        Return False
+                    End If
+
+                End If
+            Next
+
+            Return True
+
+        End If
+
+
+        'ESTE CAMINO ES SI NO SON VARIOS MAILS
+
+
+        If correo.Contains("<") And correo.Contains(">") Then
+            Dim Inicio As Integer = -1
+            Dim Final As Integer = -1
+            For i = 0 To Len(correo) - 1
+                If correo.Chars(i) = "<" Then
+                    Inicio = i + 1
+                End If
+                If correo.Chars(i) = ">" Then
+                    Final = i
+                End If
+            Next
+
+            If Inicio <> -1 And Final <> -1 Then
+                correo = correo.Substring(Inicio, (Final - Inicio))
+            End If
+
+        End If
+
 
         '
         ' La siguiente expresión regular permite direcciones del siguiente estilo:
@@ -2925,10 +3012,19 @@ Public Class Pagos
         '
         '   Toma como invalido lo siguiente: soporte@surfactan
         '
+
+
         Dim sreg As String = "^[a-zA-Z0-9.+_]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
         Dim rgx As Regex = New Regex(sreg)
 
-        Return rgx.IsMatch(correo)
+        If rgx.IsMatch(correo) = False Then
+            Dim sreg2 As String = "^[a-zA-Z0-9.+_]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)?\.(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
+            Dim rgx2 As Regex = New Regex(sreg2)
+            Return rgx2.IsMatch(correo)
+        Else
+            Return rgx.IsMatch(correo)
+        End If
+
 
     End Function
 
@@ -6842,7 +6938,7 @@ Public Class Pagos
 
                         ZZSuma = Val(.Cells(4).Value) / 1.21
 
-                        acumCaba += CaculoRetencionIngresosBrutosCaba(Val(WTipoIbCaba), WPorceIbCaba, Val(ZZSuma))
+                        acumCaba += CaculoRetencionIngresosBrutosCaba(Val(WTipoIbCaba), Val(formatonumerico(WPorceIbCaba)), Val(ZZSuma))
                     Else
                         Exit For
                     End If
@@ -6911,7 +7007,7 @@ Public Class Pagos
 
                     End If
 
-                    acumProv += CaculoRetencionIngresosBrutos(Val(WTipoIb), Val(WPorceIb), Val(ZZSuma))
+                    acumProv += CaculoRetencionIngresosBrutos(Val(WTipoIb), Val(formatonumerico(WPorceIb)), Val(ZZSuma))
                 Else
                     Exit For
                 End If
@@ -7794,8 +7890,9 @@ Public Class Pagos
                 End If
 
                 Select Case Proveedor
-                    Case "10167878480", "10000000100", "10071081483", "10069345023", "10066352912"
-                        WBody = WBody & "<br/>" & "<br/>" & "En caso de cualquier consulta, por favor dirigirla a <strong><em>fgmonti@surfactan.com.ar</em></strong>"
+
+                    Case "10167878480", "10000000100", "10071081483", "10069345023", "10066352912", "10023969933", "10014123562"
+                        WBody = WBody & "<br/>" & "<br/>" & "En caso de cualquier consulta, por favor dirigirla a <strong><em>facturacion@surfactan.com.ar</em></strong> o <strong><em>biglesias@surfactan.com.ar</em></strong>"
                 End Select
 
                 Dim WAdjuntos As New List(Of String)
@@ -7810,7 +7907,8 @@ Public Class Pagos
                     End If
                 Next
 
-                _EnviarEmail(WMailOp, "mlarias@surfactan.com.ar", "Orden de Pago - SURFACTAN S.A. - ", WBody, WAdjuntos.ToArray)
+                '_EnviarEmail(WMailOp, "mlarias@surfactan.com.ar", "Orden de Pago - SURFACTAN S.A. - ", WBody, WAdjuntos.ToArray)
+                _EnviarEmail(WMailOp, "", "Orden de Pago - SURFACTAN S.A. - ", WBody, WAdjuntos.ToArray)
 
                 _MarcarOPComoEnviada(OrdenPago)
 

@@ -217,9 +217,9 @@ Public Class ListadoIncidencias : Implements INuevaIncidencia, ISeleccionNuevaIn
         ' Filtro por Tipo de Producto.
         '
         If rbTipoMP.Checked Then
-            ZSql &= " And ISNULL(TipoProd, '') = 'M' "
+            ZSql &= " And (ISNULL(TipoProd, '') = 'M' OR len(rtrim(Producto)) = 10)"
         ElseIf rbTipoPT.Checked Then
-            ZSql &= " And ISNULL(TipoProd, '') = 'T' "
+            ZSql &= " And (ISNULL(TipoProd, '') = 'T' OR len(rtrim(Producto)) = 12)"
         End If
 
         ZSql &= " Order by Ano desc, "

@@ -224,7 +224,7 @@ Public Class Pallets
 
     Private Sub _AvisarPorEmail(ByVal wProforma As String)
 
-        If MsgBox("¿Desea avisar por Email que ya se encuentra disponible el PackingList de la Proforma '" & wProforma & "' a Federico Monti (fgmonti@surfactan.com.ar)?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+        If MsgBox("¿Desea avisar por Email que ya se encuentra disponible el PackingList de la Proforma '" & wProforma & "'", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
 
             Dim oApp As Outlook._Application
             Dim oMsg As Outlook._MailItem
@@ -232,7 +232,8 @@ Public Class Pallets
             Dim cn As SqlConnection = New SqlConnection()
             Dim cm As SqlCommand = New SqlCommand("")
             Dim trans As SqlTransaction = Nothing
-
+            'DEVUELVE TRUE SI ES FARMA FALSE SINO ES FARMA
+            Dim EsFarma As Boolean = VerificarFarma(wProforma)
             Try
                 If wProforma.ToString.Length < 6 Then : Helper.ceros(wProforma, 6) : End If
 
@@ -259,9 +260,16 @@ Public Class Pallets
 
                 'oMsg.Attachments.Add(WArchivoProforma)
 
-                ' Modificar por los E-Mails que correspondan.
-                oMsg.To = Configuration.ConfigurationManager.AppSettings("AVISO_PACKINGLIST") '"gferreyra@surfactan.com.ar"
-                'oMsg.To = "nsoto@surfactan.com.ar"
+                If EsFarma Then
+                    ' Modificar por los E-Mails que correspondan.
+                    oMsg.To = Configuration.ConfigurationManager.AppSettings("AVISO_PACKINGLIST_FARMA") '"gferreyra@surfactan.com.ar"
+                    'oMsg.To = "nsoto@surfactan.com.ar"
+                Else
+                    ' Modificar por los E-Mails que correspondan.
+                    oMsg.To = Configuration.ConfigurationManager.AppSettings("AVISO_PACKINGLIST") '"gferreyra@surfactan.com.ar"
+                    'oMsg.To = "nsoto@surfactan.com.ar"
+                End If
+
 
                 'oMsg.Display()
 
@@ -270,7 +278,12 @@ Public Class Pallets
 
                 trans.Commit()
 
-                MsgBox("Aviso Enviado correctamente a <Federico García Monti> fgmonti@surfactan.com.ar", MsgBoxStyle.Information)
+                If EsFarma Then
+                    MsgBox("Aviso Enviado correctamente a Hernan Copiello, German Rodriguez y Beatriz Iglecias", MsgBoxStyle.Information)
+                Else
+                    MsgBox("Aviso Enviado correctamente a Hernan Copiello y Beatriz Iglecias", MsgBoxStyle.Information)
+                End If
+
 
                 lblAvisoPackingList.Visible = False
 
@@ -320,7 +333,7 @@ Public Class Pallets
                             .Exportar("Nota de Empaque", ExportFormatType.PortableDocFormat, WRutaArchivosRelacionados)
                             '.GuardarPDF("Nota de Empaque Ingles", WRutaArchivosRelacionados)
                         End With
-                        
+
                     Case 2
 
                         With New Util.VistaPrevia
@@ -345,6 +358,34 @@ Public Class Pallets
         End If
 
     End Sub
+
+    Private Function VerificarFarma(ByVal wProforma As String) As Boolean
+
+        Dim EsFarma As Boolean = False
+        Dim SQLCnslt As String = "SELECT Producto FROM ProformaExportacion WHERE Proforma = '" & wProforma & "'"
+        Dim RowProf As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+        If RowProf IsNot Nothing Then
+            SQLCnslt = "SELECT Linea FROM TERMINADO WHERE Codigo = '" & RowProf.Item("Producto") & "'"
+            Dim RowLinea As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+            If RowLinea IsNot Nothing Then
+
+                Dim Codprod As String = Mid(RowProf.Item("Producto"), 4, 5)
+                If Val(Codprod) >= 25000 And Val(Codprod) <= 25999 Then
+                    EsFarma = True
+                End If
+                Select Case RowLinea.Item("linea")
+                    Case 10, 20, 22, 24, 25, 26, 27, 28, 29, 30
+                        EsFarma = True
+                End Select
+
+                Return EsFarma
+            End If
+        End If
+
+        MsgBox("Hubo un problema al querer verificar si es un producto FARMA")
+        Return False
+
+    End Function
 
     Private Sub CargaTablaParaNotaEmpaque(ByVal Proforma As String, ByRef TablaNotaEmpaque As DataTable, ByRef TotalPesoBruto As Double)
 
@@ -511,7 +552,7 @@ Public Class Pallets
 
             ' trans.Commit()
 
-            MsgBox("Aviso Enviado correctamente a <Federico García Monti> fgmonti@surfactan.com.ar", MsgBoxStyle.Information)
+            MsgBox("Aviso Enviado correctamente", MsgBoxStyle.Information)
 
 
         Catch ex As Exception
@@ -638,7 +679,7 @@ Public Class Pallets
 
         CargaTablaParaNotaEmpaque(txtProforma.Text, TablaNotaEmpaque, TotalPesoBruto)
 
-                Select Idioma
+        Select Case Idioma
 
             Case 0, 1
 
@@ -659,8 +700,8 @@ Public Class Pallets
         End Select
 
         Cursor = Cursors.Default
-                btn.Enabled = True
-                btn.Cursor = Cursors.Hand
+        btn.Enabled = True
+        btn.Cursor = Cursors.Hand
     End Sub
 
     Private Sub btnInfoProforma_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnInfoProforma.Click
@@ -700,7 +741,7 @@ Public Class Pallets
     End Sub
 
     Private Sub btn_ReAbrirPackinglist_Click(sender As Object, e As EventArgs) Handles btn_ReAbrirPackinglist.Click
-        If MsgBox("¿Desea re abrir el Packing List? Se generara una registro de re apertura y se informara a Federico.", vbYesNo) = vbNo Then
+        If MsgBox("¿Desea re abrir el Packing List? Se generara una registro de re apertura y se informara a Beatriz Iglesias y Hernan Copiello.", vbYesNo) = vbNo Then
             Exit Sub
         End If
         Try
@@ -723,7 +764,7 @@ Public Class Pallets
             Catch ex As Exception
 
             End Try
-           
+
 
 
 

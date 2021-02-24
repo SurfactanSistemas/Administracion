@@ -891,7 +891,7 @@ Public Class EditorArchivos : Implements SelectorCarpetas
 
                 _CargarArchivosRelacionados()
 
-                'SI SE ENVIO EL MAIL, LO ENVIAMOS
+                'SI SE ENVIO EL MAIL, NO LO ENVIAMOS
                 If Mailenviado = False Then
                     If WMail <> "" Then
                         EnviarMail()

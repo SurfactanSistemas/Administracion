@@ -39,15 +39,15 @@ Partial Class MenuPrincipal
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
-        Me.MaestrosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ListadoDeIncidenciasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.IndiceGeneralDeAccionesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ConfiguraciónToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TiposDeSolicitudSACToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ResponsablesSACToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CentrosSACToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EstadosDeINCToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TiposDeINCToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MaestrosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ListadoDeIncidenciasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.IndiceGeneralDeAccionesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProcesosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CerrarSistemaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LayoutPrincipal.SuspendLayout()
@@ -72,7 +72,7 @@ Partial Class MenuPrincipal
         Me.LayoutPrincipal.RowCount = 2
         Me.LayoutPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 46.0!))
         Me.LayoutPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.LayoutPrincipal.Size = New System.Drawing.Size(1041, 463)
+        Me.LayoutPrincipal.Size = New System.Drawing.Size(1028, 463)
         Me.LayoutPrincipal.TabIndex = 0
         '
         'LayoutMenu
@@ -90,14 +90,14 @@ Partial Class MenuPrincipal
         Me.LayoutMenu.Name = "LayoutMenu"
         Me.LayoutMenu.RowCount = 1
         Me.LayoutMenu.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.LayoutMenu.Size = New System.Drawing.Size(1041, 46)
+        Me.LayoutMenu.Size = New System.Drawing.Size(1028, 46)
         Me.LayoutMenu.TabIndex = 0
         '
         'Panel4
         '
         Me.Panel4.Controls.Add(Me.Label2)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel4.Location = New System.Drawing.Point(794, 0)
+        Me.Panel4.Location = New System.Drawing.Point(781, 0)
         Me.Panel4.Margin = New System.Windows.Forms.Padding(0)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(247, 46)
@@ -144,7 +144,7 @@ Partial Class MenuPrincipal
         Me.Panel1.Location = New System.Drawing.Point(0, 46)
         Me.Panel1.Margin = New System.Windows.Forms.Padding(0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1041, 417)
+        Me.Panel1.Size = New System.Drawing.Size(1028, 417)
         Me.Panel1.TabIndex = 1
         '
         'GroupBox1
@@ -215,9 +215,46 @@ Partial Class MenuPrincipal
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ConfiguraciónToolStripMenuItem, Me.MaestrosToolStripMenuItem, Me.ProcesosToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(1041, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(1028, 24)
         Me.MenuStrip1.TabIndex = 0
         Me.MenuStrip1.Text = "MenuStrip1"
+        '
+        'ConfiguraciónToolStripMenuItem
+        '
+        Me.ConfiguraciónToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TiposDeSolicitudSACToolStripMenuItem, Me.ResponsablesSACToolStripMenuItem, Me.CentrosSACToolStripMenuItem, Me.EstadosDeINCToolStripMenuItem, Me.TiposDeINCToolStripMenuItem})
+        Me.ConfiguraciónToolStripMenuItem.Name = "ConfiguraciónToolStripMenuItem"
+        Me.ConfiguraciónToolStripMenuItem.Size = New System.Drawing.Size(67, 20)
+        Me.ConfiguraciónToolStripMenuItem.Text = "Maestros"
+        '
+        'TiposDeSolicitudSACToolStripMenuItem
+        '
+        Me.TiposDeSolicitudSACToolStripMenuItem.Name = "TiposDeSolicitudSACToolStripMenuItem"
+        Me.TiposDeSolicitudSACToolStripMenuItem.Size = New System.Drawing.Size(200, 22)
+        Me.TiposDeSolicitudSACToolStripMenuItem.Text = "Tipos de Solicitud (SAC)"
+        '
+        'ResponsablesSACToolStripMenuItem
+        '
+        Me.ResponsablesSACToolStripMenuItem.Name = "ResponsablesSACToolStripMenuItem"
+        Me.ResponsablesSACToolStripMenuItem.Size = New System.Drawing.Size(200, 22)
+        Me.ResponsablesSACToolStripMenuItem.Text = "Responsables (SAC)"
+        '
+        'CentrosSACToolStripMenuItem
+        '
+        Me.CentrosSACToolStripMenuItem.Name = "CentrosSACToolStripMenuItem"
+        Me.CentrosSACToolStripMenuItem.Size = New System.Drawing.Size(200, 22)
+        Me.CentrosSACToolStripMenuItem.Text = "Centros (SAC)"
+        '
+        'EstadosDeINCToolStripMenuItem
+        '
+        Me.EstadosDeINCToolStripMenuItem.Name = "EstadosDeINCToolStripMenuItem"
+        Me.EstadosDeINCToolStripMenuItem.Size = New System.Drawing.Size(200, 22)
+        Me.EstadosDeINCToolStripMenuItem.Text = "Estados de INC"
+        '
+        'TiposDeINCToolStripMenuItem
+        '
+        Me.TiposDeINCToolStripMenuItem.Name = "TiposDeINCToolStripMenuItem"
+        Me.TiposDeINCToolStripMenuItem.Size = New System.Drawing.Size(200, 22)
+        Me.TiposDeINCToolStripMenuItem.Text = "Tipos de INC"
         '
         'MaestrosToolStripMenuItem
         '
@@ -238,43 +275,6 @@ Partial Class MenuPrincipal
         Me.IndiceGeneralDeAccionesToolStripMenuItem.Size = New System.Drawing.Size(230, 22)
         Me.IndiceGeneralDeAccionesToolStripMenuItem.Text = "Indice General de Acciones"
         '
-        'ConfiguraciónToolStripMenuItem
-        '
-        Me.ConfiguraciónToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TiposDeSolicitudSACToolStripMenuItem, Me.ResponsablesSACToolStripMenuItem, Me.CentrosSACToolStripMenuItem, Me.EstadosDeINCToolStripMenuItem, Me.TiposDeINCToolStripMenuItem})
-        Me.ConfiguraciónToolStripMenuItem.Name = "ConfiguraciónToolStripMenuItem"
-        Me.ConfiguraciónToolStripMenuItem.Size = New System.Drawing.Size(67, 20)
-        Me.ConfiguraciónToolStripMenuItem.Text = "Maestros"
-        '
-        'TiposDeSolicitudSACToolStripMenuItem
-        '
-        Me.TiposDeSolicitudSACToolStripMenuItem.Name = "TiposDeSolicitudSACToolStripMenuItem"
-        Me.TiposDeSolicitudSACToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
-        Me.TiposDeSolicitudSACToolStripMenuItem.Text = "Tipos de Solicitud (SAC)"
-        '
-        'ResponsablesSACToolStripMenuItem
-        '
-        Me.ResponsablesSACToolStripMenuItem.Name = "ResponsablesSACToolStripMenuItem"
-        Me.ResponsablesSACToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
-        Me.ResponsablesSACToolStripMenuItem.Text = "Responsables (SAC)"
-        '
-        'CentrosSACToolStripMenuItem
-        '
-        Me.CentrosSACToolStripMenuItem.Name = "CentrosSACToolStripMenuItem"
-        Me.CentrosSACToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
-        Me.CentrosSACToolStripMenuItem.Text = "Centros (SAC)"
-        '
-        'EstadosDeINCToolStripMenuItem
-        '
-        Me.EstadosDeINCToolStripMenuItem.Name = "EstadosDeINCToolStripMenuItem"
-        Me.EstadosDeINCToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
-        Me.EstadosDeINCToolStripMenuItem.Text = "Estados de INC"
-        '
-        'TiposDeINCToolStripMenuItem
-        '
-        Me.TiposDeINCToolStripMenuItem.Name = "TiposDeINCToolStripMenuItem"
-        Me.TiposDeINCToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
-        Me.TiposDeINCToolStripMenuItem.Text = "Tipos de INC"
-        '
         'ProcesosToolStripMenuItem
         '
         Me.ProcesosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CerrarSistemaToolStripMenuItem})
@@ -290,7 +290,7 @@ Partial Class MenuPrincipal
         '
         'MenuPrincipal
         '
-        Me.ClientSize = New System.Drawing.Size(1041, 463)
+        Me.ClientSize = New System.Drawing.Size(1028, 463)
         Me.Controls.Add(Me.LayoutPrincipal)
         Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "MenuPrincipal"
