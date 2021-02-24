@@ -218,14 +218,19 @@ Public Class ImpreProcesos
         If WEmailCoa = "" Then
 
             With New ActualizarMailCoaCliente(WCodCliente)
-                .ShowDialog(Me)
+                Dim WResultado As DialogResult = .ShowDialog()
+
+                If WResultado = Windows.Forms.DialogResult.OK Then
+
+                    Dim WCli As DataRow = GetSingle("SELECT EmailCoa FROM Cliente WHERE Cliente = '" & WCodCliente & "'")
+
+                    If WCli IsNot Nothing Then
+                        WEmailCoa = Trim(LCase((OrDefault(WCli("EmailCoa"), ""))))
+                    End If
+
+                End If
+
             End With
-
-            Dim WCli As DataRow = GetSingle("SELECT EmailCoa FROM Cliente WHERE Cliente = '" & WCodCliente & "'")
-
-            If WCli IsNot Nothing Then
-                WEmailCoa = Trim(LCase((OrDefault(WCli("EmailCoa"), ""))))
-            End If
 
             'MsgBox("El Cliente no tiene cargado una dirección de mail como destino para enviar la documentación.", MsgBoxStyle.Exclamation)
         End If

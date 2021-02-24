@@ -126,14 +126,14 @@ namespace Negocio
                     + " DeseableI,DeseableII,DeseableIII,DeseableIV,DeseableV, Equivalencias, Fisica, OtrosI, OtrosII, Curso,NecesariaCurso, DeseableCurso,"
                     + " Version,NecesariaVI, NecesariaVII, NecesariaVIII, DeseableVI,DeseableVII,DeseableVIII,EquivalenciasII, Responsable, ResponsableII)"
                     + " values"
-                    + "('" + clave1 + clave2 + "'," + Codigo + "," + renglon + ",'" + Descripcion + "','" + Vigencia + "'," + sector.Codigo + ",'" + TareasI + "','"
+                    + "('" + clave1 + clave2 + "','" + Codigo + "','" + renglon + "','" + Descripcion + "','" + Vigencia + "','" + sector.Codigo + "','" + TareasI + "','"
                     + TareasII + "','" + TareasIII
                     + "','" + DescriI + "','" + DescriII + "','" + DescriIII + "','" + DescriIV + "','" + DescriV + "','" + ObservaI + "','" + ObservaII + "','"
-                    + ObservaIII + "','" + ObservaIV + "','" + ObservaV + "'," + NecesariaI + "," + NecesariaII + "," + NecesariaIII + "," + NecesariaIV
-                    + "," + NecesariaV + "," + DeseableI + "," + DeseableII + "," + DeseableIII + "," + DeseableIV + "," + DeseableV + ",'" + EquivalenciasI + "','"
-                    + Fisica + "','" + OtrosI + "','" + OtrosII + "'," + int.Parse(fila[0].ToString()) + ", '" + fila[2] + "', '" + fila[3] + "'," + Version + "," + NecesariaVI
-                    + "," + NecesariaVII + "," + NecesariaVIII + "," + DeseableVI + "," + DeseableVII + "," + DeseableVIII + ",'" + EquivalenciasII + "',"
-                    + R.Codigo + "," + R2.Codigo + ")";
+                    + ObservaIII + "','" + ObservaIV + "','" + ObservaV + "','" + NecesariaI + "','" + NecesariaII + "','" + NecesariaIII + "','" + NecesariaIV
+                    + "','" + NecesariaV + "','" + DeseableI + "','" + DeseableII + "','" + DeseableIII + "','" + DeseableIV + "','" + DeseableV + "','" + EquivalenciasI + "','"
+                    + Fisica + "','" + OtrosI + "','" + OtrosII + "','" + int.Parse(fila[0].ToString()) + "', '" + fila[2] + "', '" + fila[3] + "','" + Version + "','" + NecesariaVI
+                    + "','" + NecesariaVII + "','" + NecesariaVIII + "','" + DeseableVI + "','" + DeseableVII + "','" + DeseableVIII + "','" + EquivalenciasII + "',"
+                    + R.Codigo + "','" + R2.Codigo + "')";
 
                     repo.Agregar(consulta);
                 }
@@ -171,14 +171,14 @@ namespace Negocio
                 + " DeseableI,DeseableII,DeseableIII,DeseableIV,DeseableV, Equivalencias, Fisica, OtrosI, OtrosII, Curso,NecesariaCurso, DeseableCurso,"
                 + " Version,NecesariaVI, NecesariaVII, NecesariaVIII, DeseableVI,DeseableVII,DeseableVIII,EquivalenciasII, Responsable, ResponsableII)"
                 + " values"
-                + "('" + clave1 + clave2 + "'," + Codigo + "," + renglon + ",'" + Descripcion + "','" + Vigencia + "'," + sector.Codigo + ",'" + TareasI + "','"
+                + "('" + clave1 + clave2 + "','" + Codigo + "','" + renglon + "','" + Descripcion + "','" + Vigencia + "','" + sector.Codigo + "','" + TareasI + "','"
                 + TareasII + "','" + TareasIII
                 + "','" + DescriI + "','" + DescriII + "','" + DescriIII + "','" + DescriIV + "','" + DescriV + "','" + ObservaI + "','" + ObservaII + "','"
-                + ObservaIII + "','" + ObservaIV + "','" + ObservaV + "'," + NecesariaI + "," + NecesariaII + "," + NecesariaIII + "," + NecesariaIV
-                + "," + NecesariaV + "," + DeseableI + "," + DeseableII + "," + DeseableIII + "," + DeseableIV + "," + DeseableV + ",'" + EquivalenciasI + "','"
-                + Fisica + "','" + OtrosI + "','" + OtrosII + "'," + t.Codigo + "," + t.Necesaria + "," + t.Deseable + "," + Version + "," + NecesariaVI
-                + "," + NecesariaVII + "," + NecesariaVIII + "," + DeseableVI + "," + DeseableVII + "," + DeseableVIII + ",'" + EquivalenciasII + "',"
-                + R.Codigo + "," + R2.Codigo + ")";
+                + ObservaIII + "','" + ObservaIV + "','" + ObservaV + "','" + NecesariaI + "','" + NecesariaII + "','" + NecesariaIII + "','" + NecesariaIV
+                + "','" + NecesariaV + "','" + DeseableI + "','" + DeseableII + "','" + DeseableIII + "','" + DeseableIV + "','" + DeseableV + "','" + EquivalenciasI + "','"
+                + Fisica + "','" + OtrosI + "','" + OtrosII + "','" + t.Codigo + "','" + t.Necesaria + "','" + t.Deseable + "','" + Version + "','" + NecesariaVI
+                + "','" + NecesariaVII + "','" + NecesariaVIII + "','" + DeseableVI + "','" + DeseableVII + "','" + DeseableVIII + "','" + EquivalenciasII + "','"
+                + R.Codigo + "','" + R2.Codigo + "')";
                 
                 repo.Agregar(consulta);
 

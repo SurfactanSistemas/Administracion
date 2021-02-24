@@ -310,7 +310,7 @@ namespace Negocio
             Conexion repo = new Conexion();
 
             string consulta = "update Legajo set "
-            + " Descripcion = '" + L.Descripcion + "', FIngreso = '" + L.FIngreso + "', Perfil = '" + L.Perfil.Codigo + "',"
+            + " Descripcion = '" + L.Descripcion + "', FIngreso = '" + L.FIngreso + "', Perfil = '" + L.Perfil.Codigo + "', ClavePerfil = '" + L.Perfil.Codigo.ToString().PadLeft(6, '0') + "01',"
             + " EstadoI = '" + L.EstadoI + "', EstadoII = '" + L.EstadoII + "', EstadoIII = '" + L.EstadoIII + "',"
             + " EstadoIV = '" + L.EstadoIV + "', EstadoV = '" + L.EstadoV + "', EstadoVI = '" + L.EstadoVI + "',"
             + " EstadoVII = '" + L.EstadoVII + "', EstadoVIII = '" + L.EstadoVIII + "', EstadoIX = '" + L.EstadoIX + "',"

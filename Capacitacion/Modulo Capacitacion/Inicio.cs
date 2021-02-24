@@ -207,6 +207,9 @@ namespace Modulo_Capacitacion
             _Abrir(new Listados.ListadoLegajosAActualizarAFecha.ListadoLegajosActualizarAFecha());
         }
 
-      
+        private void listadoDePerfilDePuestoYLegajosAsociadosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _Abrir(new Listados.ListadoPerfilPuestoConLegajosAsociados.Linio());
+        }
     }
 }

@@ -80,6 +80,7 @@ namespace Modulo_Capacitacion
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.listadoDePerfilDePuestoYLegajosAsociadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -235,7 +236,6 @@ namespace Modulo_Capacitacion
             this.listados2ToolStripMenuItem.Name = "listados2ToolStripMenuItem";
             this.listados2ToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
             this.listados2ToolStripMenuItem.Text = "Listados";
-            
             // 
             // maestrosToolStripMenuItem1
             // 
@@ -288,7 +288,8 @@ namespace Modulo_Capacitacion
             // 
             this.competenciasYNecesidadesDeCapacitaciónToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.informeDeCompetenciaYNecesidadDeCapacitaciónToolStripMenuItem,
-            this.listadoPorLegajosPendientesToolStripMenuItem});
+            this.listadoPorLegajosPendientesToolStripMenuItem,
+            this.listadoDePerfilDePuestoYLegajosAsociadosToolStripMenuItem});
             this.competenciasYNecesidadesDeCapacitaciónToolStripMenuItem.Name = "competenciasYNecesidadesDeCapacitaciónToolStripMenuItem";
             this.competenciasYNecesidadesDeCapacitaciónToolStripMenuItem.Size = new System.Drawing.Size(316, 22);
             this.competenciasYNecesidadesDeCapacitaciónToolStripMenuItem.Text = "Competencias y Necesidades de Capacitación";
@@ -475,6 +476,13 @@ namespace Modulo_Capacitacion
             this.tableLayoutPanel1.Size = new System.Drawing.Size(784, 538);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
+            // listadoDePerfilDePuestoYLegajosAsociadosToolStripMenuItem
+            // 
+            this.listadoDePerfilDePuestoYLegajosAsociadosToolStripMenuItem.Name = "listadoDePerfilDePuestoYLegajosAsociadosToolStripMenuItem";
+            this.listadoDePerfilDePuestoYLegajosAsociadosToolStripMenuItem.Size = new System.Drawing.Size(361, 22);
+            this.listadoDePerfilDePuestoYLegajosAsociadosToolStripMenuItem.Text = "Listado de Perfil de Puesto y Legajos Asociados";
+            this.listadoDePerfilDePuestoYLegajosAsociadosToolStripMenuItem.Click += new System.EventHandler(this.listadoDePerfilDePuestoYLegajosAsociadosToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(784, 562);
@@ -542,6 +550,7 @@ namespace Modulo_Capacitacion
         private ToolStripMenuItem promedioDeCalificaciónDeCapacitaciónToolStripMenuItem;
         private ToolStripMenuItem listadoDeCronogramaTentativoToolStripMenuItem;
         private ToolStripMenuItem listadoDeLegajosSinActualizarAFechaToolStripMenuItem;
+        private ToolStripMenuItem listadoDePerfilDePuestoYLegajosAsociadosToolStripMenuItem;
     }
 }
 
