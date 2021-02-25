@@ -3017,14 +3017,13 @@ Public Class Pagos
         Dim sreg As String = "^[a-zA-Z0-9.+_]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
         Dim rgx As Regex = New Regex(sreg)
 
-        If rgx.IsMatch(correo) = False Then
+        If Not rgx.IsMatch(correo) Then
             Dim sreg2 As String = "^[a-zA-Z0-9.+_]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)?\.(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
             Dim rgx2 As Regex = New Regex(sreg2)
-            Return rgx2.IsMatch(correo)
-        Else
-            Return rgx.IsMatch(correo)
+            Return rgx2.IsMatch(correo)    
         End If
 
+        Return rgx.IsMatch(correo)
 
     End Function
 
