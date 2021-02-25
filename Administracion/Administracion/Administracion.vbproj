@@ -125,9 +125,6 @@
     </WarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ClasesCompartidas">
-      <HintPath>..\..\ClasesCompartidas\ClasesCompartidas\bin\x86\Debug\ClasesCompartidas.dll</HintPath>
-    </Reference>
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
       <Private>False</Private>
     </Reference>
@@ -2034,6 +2031,10 @@
     <None Include="Resources\add.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\ClasesCompartidas\ClasesCompartidas\ClasesCompartidas.vbproj">
+      <Project>{1793FAC7-20CD-43B7-BDF8-35ADEA3E45E2}</Project>
+      <Name>ClasesCompartidas</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\GestorDeArchivos\GestorDeArchivos\GestorDeArchivos.vbproj">
       <Project>{1d565298-d39d-47ee-a7d2-3e8ed6e228de}</Project>
       <Name>GestorDeArchivos</Name>

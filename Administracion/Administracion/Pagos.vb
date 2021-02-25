@@ -1,8 +1,8 @@
-﻿Imports ClasesCompartidas
-Imports System.Data.SqlClient
+﻿Imports System.Data.SqlClient
 Imports System.Globalization
 Imports System.IO
 Imports System.Text.RegularExpressions
+Imports ClasesCompartidas
 Imports Util.Clases
 Imports CrystalDecisions.CrystalReports.Engine
 Imports Microsoft.Office.Interop.Outlook
@@ -52,7 +52,7 @@ Public Class Pagos
 
 
 
-        Text = "Ingreso de Pagos a Proveedores  " & Globals.NombreEmpresa()
+        Text = "Ingreso de Pagos a Proveedores  " & ClasesCompartidas.Globals.NombreEmpresa()
 
         If SoloLectura Then
             Dim botones As New List(Of Button) From {btnAgregar, btnCalcular, btnCarpetas, btnChequesTerceros, btnConsulta, btnCtaCte, btnImprimir, btnLimpiar}
