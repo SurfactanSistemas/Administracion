@@ -368,15 +368,15 @@ Public Class ImpreCrystal
                     End If
                 End If
 
-                If File.Exists("C:\Orden\FactuQr.bmp") Then
-                    File.Copy("C:\Orden\FactuQr.bmp", "\\193.168.0.2\g$\vb\NET\Sistema de ventas\Facturas\qr" & ceros(txtOrden, 8) & ".bmp")
-                End If
+                'If File.Exists("C:\Orden\FactuQr.bmp") Then
+                '    File.Copy("C:\Orden\FactuQr.bmp", "\\193.168.0.2\g$\vb\NET\Sistema de ventas\Facturas\qr" & ceros(txtOrden, 8) & ".bmp")
+                'End If
 
                 txtUno = "{ImpreFactura.Numero} in " + x + "0" + x + " to " + x + "999999" + x
                 txtDos = ""
                 txtFormula = txtUno + txtDos
 
-                rpt.SetParameterValue("QR", "\\193.168.0.2\g$\vb\NET\Sistema de ventas\Facturas\qr" & ceros(txtOrden, 8) & ".bmp")
+                rpt.SetParameterValue("QR", "C:\Orden\FactuQr.bmp")
 
                 Select Case txtDestino
                     Case 0
