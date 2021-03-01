@@ -55,7 +55,7 @@ Partial Class ListaEnsayos
         'Label2
         '
         Me.Label2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.Control
@@ -68,7 +68,7 @@ Partial Class ListaEnsayos
         'Label1
         '
         Me.Label1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.Control
@@ -113,6 +113,7 @@ Partial Class ListaEnsayos
         Me.dgvEnsayos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.dgvEnsayos.Location = New System.Drawing.Point(5, 139)
         Me.dgvEnsayos.Name = "dgvEnsayos"
+        Me.dgvEnsayos.OrdenamientoColumnasHabilitado = True
         Me.dgvEnsayos.ReadOnly = True
         Me.dgvEnsayos.RowHeadersWidth = 15
         Me.dgvEnsayos.RowTemplate.Height = 20
@@ -162,6 +163,7 @@ Partial Class ListaEnsayos
         'txtCodigo
         '
         Me.txtCodigo.Location = New System.Drawing.Point(69, 55)
+        Me.txtCodigo.MaxLength = 6
         Me.txtCodigo.Name = "txtCodigo"
         Me.txtCodigo.Size = New System.Drawing.Size(42, 20)
         Me.txtCodigo.TabIndex = 9

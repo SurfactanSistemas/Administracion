@@ -145,8 +145,12 @@ Public Class EspecificacionesMPPorVersion : Implements IAyudaMPs
     End Sub
 
     Private Sub btnImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImprimir.Click
+        Try
+            EspecificacionesMP.MostrarVersionPorPantalla(txtCodigo.Text, txtVersion.Text)
+        Catch ex As Exception
 
-        EspecificacionesMP.MostrarVersionPorPantalla(txtCodigo.Text, txtVersion.Text)
+        End Try
+
 
     End Sub
 

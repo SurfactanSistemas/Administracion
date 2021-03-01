@@ -30,6 +30,15 @@ Public Class ListaEnsayos : Implements IActualizarPorNuevoIngreso, IListarReport
     
 
 
+    Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtCodigo.KeyPress
+        If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
+            e.Handled = True
+        End If
+    End Sub
+
+
+
+
     Private Sub _LeerDatos()
 
         If Helper._EsPellital Then WBase = "Pelitall_II"
