@@ -438,7 +438,7 @@ Public Class ImpreCrystal
                         End With
 
                         If File.Exists(txtNombreBusqueda) Then
-                            File.Copy(txtNombreBusqueda, "\\193.168.0.2\g$\vb\NET\Sistema de ventas\Facturas\" & txtTipoCompro & " 0009-" & ceros(txtOrden, 8) & ".pdf")
+                            File.Copy(txtNombreBusqueda, "\\193.168.0.2\g$\vb\NET\Sistema de ventas\Facturas\" & txtTipoCompro & " 0009-" & ceros(txtOrden, 8) & ".pdf", True)
                         End If
 
                 End Select
