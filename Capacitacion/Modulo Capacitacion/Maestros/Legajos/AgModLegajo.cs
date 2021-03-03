@@ -496,7 +496,7 @@ namespace Modulo_Capacitacion.Maestros.Legajos
             if (!AModificar)
             {
                 TB_DescPerfil.Text = "";
-                DTP_Fecha.Text = DateTime.Now.ToShortDateString();
+                DTP_Fecha.Text = DateTime.Now.ToString("dd/MM/yyyy");
                 TB_Version.Text = "1";
                 TB_CodSector.Text = "";
                 TB_DescSec.Text = "";
