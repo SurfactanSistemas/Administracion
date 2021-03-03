@@ -14,6 +14,8 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
 
     Private RenglonID As Integer
 
+    Private Terminado As String
+
 
 
     Protected Overrides Function ProcessCmdKey(ByRef msg As Message, ByVal keyData As Keys) As Boolean
@@ -93,7 +95,7 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
 
 
 
-    Sub New(ByVal Formula As String, ByVal Variables(,) As String, ByVal Valor As String, Optional ByVal Grilla As DataGridView = Nothing, Optional ByVal Decimales As Object = Nothing, Optional ByVal Renglon As Integer = -1, Optional ByVal Referencias(,) As String = Nothing, Optional ByVal WDesdeCargaResultados As Boolean = False)
+    Sub New(ByVal Formula As String, ByVal Variables(,) As String, ByVal Valor As String, Optional ByVal Grilla As DataGridView = Nothing, Optional ByVal Decimales As Object = Nothing, Optional ByVal Renglon As Integer = -1, Optional ByVal Referencias(,) As String = Nothing, Optional ByVal WDesdeCargaResultados As Boolean = False, Optional ByVal WTerminado As String = "")
 
         ' This call is required by the designer.
         InitializeComponent()
@@ -114,6 +116,8 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
         Dim aux As Integer = Valor.IndexOfAny({",", "."})
 
         RenglonID = Renglon
+
+        Terminado = WTerminado
 
         If aux > 0 Then
             Dim t As String = _Right(Valor, Valor.Replace(".", "").Replace(",", "").Length - aux)
@@ -376,9 +380,9 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
 
                 For Each RowDGV As DataGridViewRow In dgvVariables.Rows
 
-                    SQLCnslt = "INSERT INTO FormulasVerificadasValores (IDRenglon, Formula, Variable , Valor ,AnalistaLab, ResultadoVerificado, Fila)" &
+                    SQLCnslt = "INSERT INTO FormulasVerificadasValores (IDRenglon, Formula, Variable , Valor ,AnalistaLab, ResultadoVerificado, Fila, Terminado)" &
                     "VALUES('" & RenglonID & "', '" & txtFormula.Text & "', '" & RowDGV.Cells("Variable").Value &
-                        "' , '" & RowDGV.Cells("WValor").Value & "' , '" & WDatos.Item("Operador") & "', '" & txtValorEstandar.Text & "','" & Fila & "')"
+                        "' , '" & RowDGV.Cells("WValor").Value & "' , '" & WDatos.Item("Operador") & "', '" & txtValorEstandar.Text & "','" & Fila & "','" & Terminado & "')"
 
                     Fila += 1
 
