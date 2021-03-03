@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Modulo_Capacitacion.Listados.ListadoPerfilPuestoConLegajosAsociados
@@ -91,12 +93,9 @@ namespace Modulo_Capacitacion.Listados.ListadoPerfilPuestoConLegajosAsociados
             {
                 if (rbPorSector.Checked)
                 {
-                    DataTable perfiles = Util.Clases.Query.GetAll("SELECT DISTINCT Perfil FROM Legajo WHERE Sector = '" + cmbSectores.SelectedValue + "' AND ISNULL(FEgreso, '') in ('', '00/00/0000')", "SurfactanSa");
+                    DataTable perfiles = Util.Clases.Query.GetAll("SELECT DISTINCT Perfil FROM Legajo WHERE Sector = '" + cmbSectores.SelectedValue + "' AND ISNULL(FEgreso, '') in ('', '00/00/0000', '  /  /    ')", "SurfactanSa");
 
-                    foreach (DataRow perfil in perfiles.Rows)
-                    {
-                        _ReportarPerfil(int.Parse(perfil[0].ToString()));
-                    }
+                    _ReportarPerfil(perfiles);
                 }
                 else
                 {
@@ -109,16 +108,42 @@ namespace Modulo_Capacitacion.Listados.ListadoPerfilPuestoConLegajosAsociados
             }
         }
 
-        private static void _ReportarPerfil(int perfil)
+        private static void _ReportarPerfil(DataTable perfiles)
+        {
+            DataTable tabla = (new DataView(perfiles)).ToTable(true, "Perfil");
+
+            MostrarReporte(tabla);
+        }
+
+        private static void MostrarReporte(int Desd, int Hast)
         {
             Negocio.Perfil P = new Negocio.Perfil();
-
-            var Desd = perfil;
-            ;
-            var Hast = Desd;
-
+            
             DataTable dtInforme = P.ListarPerfilEsp(Desd, Hast);
 
+            _Procesar(dtInforme);
+        }
+
+        private static void MostrarReporte(DataTable tabla)
+        {
+
+            Negocio.Perfil P = new Negocio.Perfil();
+
+            List<string> perfiles = (from DataRow row in tabla.Rows select row["Perfil"].ToString()).ToList();
+
+            if (perfiles.Count <= 0)
+            {
+                MessageBox.Show("No se encuentran resultados que mostrar.");
+                return;
+            }
+
+            DataTable dtInforme = P.ListarPerfilEsp(perfiles.ToArray());
+
+            _Procesar(dtInforme);
+        }
+
+        private static void _Procesar(DataTable dtInforme)
+        {
             DSInforme Ds = new DSInforme();
 
             int filas = dtInforme.Rows.Count;
@@ -151,6 +176,15 @@ namespace Modulo_Capacitacion.Listados.ListadoPerfilPuestoConLegajosAsociados
             frmII.Show();
         }
 
+        private static void _ReportarPerfil(int perfil)
+        {
+            Negocio.Perfil P = new Negocio.Perfil();
+
+            DataTable dtInforme = P.ListarPerfilEsp(perfil, perfil);
+
+            _Procesar(dtInforme);
+        }
+
         private void BT_Imprimir_Click(object sender, EventArgs e)
         {
             try
@@ -174,6 +208,12 @@ namespace Modulo_Capacitacion.Listados.ListadoPerfilPuestoConLegajosAsociados
         private void Inicio_Shown(object sender, EventArgs e)
         {
             cmbSectores.Focus();
+        }
+
+        private void rbPorSector_MouseClick(object sender, MouseEventArgs e)
+        {
+            cmbPerfiles.Enabled = rbPorPerfil.Checked;
+            cmbSectores.Enabled = rbPorSector.Checked;
         }
     }
 }

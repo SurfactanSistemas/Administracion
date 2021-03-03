@@ -33,7 +33,7 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
             CargarTemasIni();
             CargarREsponsables();
             BuscarMaxCodigo();
-            TB_Fecha.Text = DateTime.Now.ToShortDateString();
+            TB_Fecha.Text = DateTime.Now.ToString("dd/MM/yyyy");
         }
 
         public AgModPerfil(Perfil PerfilAModificar)
@@ -275,7 +275,7 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
             if (!AModificar)
             {
                 TB_DecPerfil.Text = "";
-                TB_Fecha.Text = DateTime.Now.ToShortDateString();
+                TB_Fecha.Text = DateTime.Now.ToString("dd/MM/yyyy"); //DateTime.Now.ToShortDateString();
                 TB_Version.Text = "1";
                 TB_CodSec.Text = "";
                 TB_DescSector.Text = "";
@@ -408,7 +408,7 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
 
                         //COLOCO LA FECHA DEL DIA 
                         DateTime Hoy = DateTime.Today;
-                        P.Vigencia = Hoy.ToString("d");
+                        P.Vigencia = DateTime.Now.ToString("dd/MM/yyyy"); //Hoy.ToString("d");
 
                         //SUMO UNO A VERSION
                         
@@ -504,7 +504,7 @@ namespace Modulo_Capacitacion.Maestros.Perfiles
             PerVer.DesdeVigencia = PerfilViejo.Vigencia;
             //COLOCO LA FECHA DEL DIA QUE SE ESTA MODIFICANDO EL NUEVO PERFIL
             DateTime Hoy = DateTime.Today;
-            PerVer.HastaVigencia = Hoy.ToString("d");
+            PerVer.HastaVigencia = DateTime.Now.ToString("dd/MM/yyyy");  //Hoy.ToString("d");
 
             PerVer.Version = PerfilViejo.Version;
             PerVer.sector = PerfilViejo.sector;

@@ -54,7 +54,7 @@ Partial Class ListarReporteDesdeHastaBasico
         'Label2
         '
         Me.Label2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.Control
@@ -67,7 +67,7 @@ Partial Class ListarReporteDesdeHastaBasico
         'lblTitulo
         '
         Me.lblTitulo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.lblTitulo.AutoSize = True
         Me.lblTitulo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTitulo.ForeColor = System.Drawing.SystemColors.Control
@@ -138,6 +138,7 @@ Partial Class ListarReporteDesdeHastaBasico
         'txtHasta
         '
         Me.txtHasta.Location = New System.Drawing.Point(66, 53)
+        Me.txtHasta.MaxLength = 6
         Me.txtHasta.Name = "txtHasta"
         Me.txtHasta.Size = New System.Drawing.Size(65, 20)
         Me.txtHasta.TabIndex = 1
@@ -145,6 +146,7 @@ Partial Class ListarReporteDesdeHastaBasico
         'txtDesde
         '
         Me.txtDesde.Location = New System.Drawing.Point(66, 22)
+        Me.txtDesde.MaxLength = 6
         Me.txtDesde.Name = "txtDesde"
         Me.txtDesde.Size = New System.Drawing.Size(65, 20)
         Me.txtDesde.TabIndex = 1

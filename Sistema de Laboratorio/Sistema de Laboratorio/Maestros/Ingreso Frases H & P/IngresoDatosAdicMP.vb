@@ -431,7 +431,7 @@
                         DGV_FrasesHIngles.DataSource = tabla
                     End If
                     sqlConsulta = "SELECT Codigo, Descripcion = TRIM(DescripcionIngles) + ' ' + TRIM(DescripcionInglesII) + ' ' + TRIM(DescripcionInglesIII) FROM FrasehIngles WHERE Codigo = '" & WCodigo & "'"
-                    Dim tabla2 As DataTable = GetAll(sqlConsulta)
+                    Dim tabla2 As DataTable = GetAll(sqlConsulta, "SurfactanSa")
                     If (tabla2.Rows.Count) Then
                         For Each datar As DataRow In tabla2.Rows
                             Dim dr As DataRow
@@ -456,7 +456,7 @@
                     End If
                     sqlConsulta = "SELECT Codigo, Descripcion = TRIM(DescripcionIngles) + ' ' + TRIM(DescripcionInglesII) + ' ' + TRIM(DescripcionInglesIII) FROM FrasePIngles WHERE Codigo = '" & WCodigo & "'"
 
-                    Dim tabla2 As DataTable = GetAll(sqlConsulta)
+                    Dim tabla2 As DataTable = GetAll(sqlConsulta, "SurfactanSa")
                     If (tabla2.Rows.Count) Then
                         For Each datar As DataRow In tabla2.Rows
                             Dim dr As DataRow
@@ -2244,7 +2244,7 @@
         Select Case e.KeyData
             Case Keys.Enter
 
-                txtSecundario.Focus()
+                txtIntervencion.Focus()
 
             Case Keys.Escape
 
@@ -2268,7 +2268,7 @@
         Select Case e.KeyData
             Case Keys.Enter
 
-                txtIntervencion.Focus()
+                txtEmbalaje.Focus()
 
             Case Keys.Escape
                 txtRiesgo.Text = ""
@@ -2279,7 +2279,7 @@
         Select Case e.KeyData
             Case Keys.Enter
 
-                txtEmbalaje.Focus()
+                txtSecundario.Focus()
 
             Case Keys.Escape
                 txtIntervencion.Text = ""

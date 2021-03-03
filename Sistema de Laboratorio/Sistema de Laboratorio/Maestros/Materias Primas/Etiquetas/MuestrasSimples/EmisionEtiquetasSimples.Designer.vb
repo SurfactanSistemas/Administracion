@@ -29,10 +29,12 @@ Partial Class EmisionEtiquetasSimples
         Me.lblDescMP = New System.Windows.Forms.Label()
         Me.txtFecha = New System.Windows.Forms.MaskedTextBox()
         Me.txtCodigo = New System.Windows.Forms.MaskedTextBox()
+        Me.txtLotePrv = New System.Windows.Forms.TextBox()
         Me.txtAnalista = New System.Windows.Forms.TextBox()
         Me.txtCantEtiq = New System.Windows.Forms.TextBox()
         Me.txtInforme = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -40,8 +42,6 @@ Partial Class EmisionEtiquetasSimples
         Me.btnEmitir = New System.Windows.Forms.Button()
         Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.btnCerrar = New System.Windows.Forms.Button()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.txtLotePrv = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
@@ -60,7 +60,7 @@ Partial Class EmisionEtiquetasSimples
         'Label2
         '
         Me.Label2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.Control
@@ -73,7 +73,7 @@ Partial Class EmisionEtiquetasSimples
         'Label1
         '
         Me.Label1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.Control
@@ -139,10 +139,21 @@ Partial Class EmisionEtiquetasSimples
         Me.txtCodigo.TabIndex = 2
         Me.txtCodigo.Text = "AA000000"
         '
+        'txtLotePrv
+        '
+        Me.txtLotePrv.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtLotePrv.Location = New System.Drawing.Point(402, 84)
+        Me.txtLotePrv.MaxLength = 20
+        Me.txtLotePrv.Name = "txtLotePrv"
+        Me.txtLotePrv.Size = New System.Drawing.Size(102, 20)
+        Me.txtLotePrv.TabIndex = 1
+        Me.txtLotePrv.Text = "XX"
+        '
         'txtAnalista
         '
         Me.txtAnalista.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtAnalista.Location = New System.Drawing.Point(227, 85)
+        Me.txtAnalista.MaxLength = 3
         Me.txtAnalista.Name = "txtAnalista"
         Me.txtAnalista.Size = New System.Drawing.Size(49, 20)
         Me.txtAnalista.TabIndex = 1
@@ -151,6 +162,7 @@ Partial Class EmisionEtiquetasSimples
         'txtCantEtiq
         '
         Me.txtCantEtiq.Location = New System.Drawing.Point(89, 85)
+        Me.txtCantEtiq.MaxLength = 4
         Me.txtCantEtiq.Name = "txtCantEtiq"
         Me.txtCantEtiq.Size = New System.Drawing.Size(49, 20)
         Me.txtCantEtiq.TabIndex = 1
@@ -160,6 +172,7 @@ Partial Class EmisionEtiquetasSimples
         'txtInforme
         '
         Me.txtInforme.Location = New System.Drawing.Point(89, 28)
+        Me.txtInforme.MaxLength = 6
         Me.txtInforme.Name = "txtInforme"
         Me.txtInforme.Size = New System.Drawing.Size(49, 20)
         Me.txtInforme.TabIndex = 1
@@ -174,6 +187,15 @@ Partial Class EmisionEtiquetasSimples
         Me.Label5.Size = New System.Drawing.Size(42, 13)
         Me.Label5.TabIndex = 0
         Me.Label5.Text = "FECHA"
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(290, 88)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(106, 13)
+        Me.Label8.TabIndex = 0
+        Me.Label8.Text = "LOTE PROVEEDOR"
         '
         'Label7
         '
@@ -240,24 +262,6 @@ Partial Class EmisionEtiquetasSimples
         Me.btnCerrar.TabIndex = 5
         Me.btnCerrar.Text = "CERRAR"
         Me.btnCerrar.UseVisualStyleBackColor = True
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(290, 88)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(106, 13)
-        Me.Label8.TabIndex = 0
-        Me.Label8.Text = "LOTE PROVEEDOR"
-        '
-        'txtLotePrv
-        '
-        Me.txtLotePrv.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.txtLotePrv.Location = New System.Drawing.Point(402, 84)
-        Me.txtLotePrv.Name = "txtLotePrv"
-        Me.txtLotePrv.Size = New System.Drawing.Size(102, 20)
-        Me.txtLotePrv.TabIndex = 1
-        Me.txtLotePrv.Text = "XX"
         '
         'EmisionEtiquetasSimples
         '

@@ -414,6 +414,30 @@
     <Compile Include="ProveedoresABM\ProveedoresABM.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Reportes\imprefacturalocaldolarnuevonet.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>imprefacturalocaldolarnuevonet.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\imprefacturalocalpesosnuevonet.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>imprefacturalocalpesosnuevonet.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\imprefacturalocalpesosnuevonetc55.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>imprefacturalocalpesosnuevonetc55.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\imprefacturalocalpesosnuevopesosnet.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>imprefacturalocalpesosnuevopesosnet.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\impreordenimportacionplantaiiinet.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -713,6 +737,22 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ProveedoresABM\ProveedoresABM.resx">
       <DependentUpon>ProveedoresABM.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\imprefacturalocaldolarnuevonet.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>imprefacturalocaldolarnuevonet.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\imprefacturalocalpesosnuevonet.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>imprefacturalocalpesosnuevonet.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\imprefacturalocalpesosnuevonetc55.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>imprefacturalocalpesosnuevonetc55.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\imprefacturalocalpesosnuevopesosnet.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>imprefacturalocalpesosnuevopesosnet.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\impreordenimportacionplantaiiinet.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

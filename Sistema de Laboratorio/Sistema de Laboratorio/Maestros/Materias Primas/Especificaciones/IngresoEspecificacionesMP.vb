@@ -1465,39 +1465,44 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
     End Sub
 
     Private Sub _MoverDatosGrillaINGLESUnRenglon(ByVal DesdeRenglon As Integer)
-        Dim indexAnterior = dgvEspecifIngles.Rows.Count - 1
-        dgvEspecifIngles.Rows.Add()
-        Dim IndexDondeCopio As Integer = dgvEspecifIngles.Rows.Count - 1
-        Do
-            Dim WDondeCopio As DataGridViewRow = dgvEspecifIngles.Rows(IndexDondeCopio)
-            If DesdeRenglon = indexAnterior Then
+        Try
+            Dim indexAnterior = dgvEspecifIngles.Rows.Count - 1
+            dgvEspecifIngles.Rows.Add()
+            Dim IndexDondeCopio As Integer = dgvEspecifIngles.Rows.Count - 1
+            Do
+                Dim WDondeCopio As DataGridViewRow = dgvEspecifIngles.Rows(IndexDondeCopio)
+                If DesdeRenglon = indexAnterior Then
 
-                WDondeCopio.Cells("NroRenglonIngles").Value = DesdeRenglon + 2
-                WDondeCopio.Cells("EnsayoIngles").Value = ""
-                WDondeCopio.Cells("EspecificacionIngles").Value = ""
-                WDondeCopio.Cells("DescEnsayoIngles").Value = ""
-                WDondeCopio.Cells("FarmacopeaIngles").Value = ""
-                WDondeCopio.Cells("UnidadEspecifIngles").Value = ""
+                    WDondeCopio.Cells("NroRenglonIngles").Value = DesdeRenglon + 2
+                    WDondeCopio.Cells("EnsayoIngles").Value = ""
+                    WDondeCopio.Cells("EspecificacionIngles").Value = ""
+                    WDondeCopio.Cells("DescEnsayoIngles").Value = ""
+                    WDondeCopio.Cells("FarmacopeaIngles").Value = ""
+                    WDondeCopio.Cells("UnidadEspecifIngles").Value = ""
 
-                Exit Do
+                    Exit Do
 
-            Else
+                Else
 
-                Dim WDesdeDondeCopio As DataGridViewRow = dgvEspecifIngles.Rows(indexAnterior)
+                    Dim WDesdeDondeCopio As DataGridViewRow = dgvEspecifIngles.Rows(indexAnterior)
 
-                WDondeCopio.Cells("NroRenglonIngles").Value = WDesdeDondeCopio.Cells("NroRenglonIngles").Value + 1
-                WDondeCopio.Cells("EnsayoIngles").Value = WDesdeDondeCopio.Cells("EnsayoIngles").Value
-                WDondeCopio.Cells("EspecificacionIngles").Value = WDesdeDondeCopio.Cells("EspecificacionIngles").Value
-                WDondeCopio.Cells("DescEnsayoIngles").Value = WDesdeDondeCopio.Cells("DescEnsayoIngles").Value
-                WDondeCopio.Cells("FarmacopeaIngles").Value = WDesdeDondeCopio.Cells("FarmacopeaIngles").Value
-                WDondeCopio.Cells("UnidadEspecifIngles").Value = WDesdeDondeCopio.Cells("UnidadEspecifIngles").Value()
+                    WDondeCopio.Cells("NroRenglonIngles").Value = WDesdeDondeCopio.Cells("NroRenglonIngles").Value + 1
+                    WDondeCopio.Cells("EnsayoIngles").Value = WDesdeDondeCopio.Cells("EnsayoIngles").Value
+                    WDondeCopio.Cells("EspecificacionIngles").Value = WDesdeDondeCopio.Cells("EspecificacionIngles").Value
+                    WDondeCopio.Cells("DescEnsayoIngles").Value = WDesdeDondeCopio.Cells("DescEnsayoIngles").Value
+                    WDondeCopio.Cells("FarmacopeaIngles").Value = WDesdeDondeCopio.Cells("FarmacopeaIngles").Value
+                    WDondeCopio.Cells("UnidadEspecifIngles").Value = WDesdeDondeCopio.Cells("UnidadEspecifIngles").Value()
 
-                indexAnterior -= 1
-                IndexDondeCopio -= 1
+                    indexAnterior -= 1
+                    IndexDondeCopio -= 1
 
-            End If
+                End If
 
-        Loop
+            Loop
+        Catch ex As Exception
+
+        End Try
+      
     End Sub
 
     Private Sub btnNotas_Click(sender As Object, e As EventArgs) Handles btnNotas.Click

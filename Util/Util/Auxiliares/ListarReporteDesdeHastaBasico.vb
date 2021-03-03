@@ -18,6 +18,7 @@ Public Class ListarReporteDesdeHastaBasico
         Close()
     End Sub
 
+
     Private Sub txtDesde_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDesde.KeyDown
 
         If e.KeyData = Keys.Enter Then
@@ -76,7 +77,7 @@ Public Class ListarReporteDesdeHastaBasico
         Dim WOwner As IListarReporteDesdeHastaBasico = TryCast(Owner, IListarReporteDesdeHastaBasico)
 
         If WOwner IsNot Nothing Then WOwner._ProcesarListarReporteDesdeHastaBasico(WDesde, WHasta, WTipoVisualizacion)
-
+        
     End Sub
 
     Private Sub ListarReporteDesdeHastaBasico_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
@@ -86,6 +87,8 @@ Public Class ListarReporteDesdeHastaBasico
     Private Sub ListarReporteDesdeHastaBasico_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
     End Sub
+
+    
 End Class
 
 Public Class ListadoReporteEventArgs
