@@ -113,6 +113,7 @@ namespace Modulo_Capacitacion.Listados.ListadoPerfilPuestoConLegajosAsociados
             this.cmbPerfiles.DropDownHeight = 150;
             this.cmbPerfiles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbPerfiles.DropDownWidth = 500;
+            this.cmbPerfiles.Enabled = false;
             this.cmbPerfiles.FormattingEnabled = true;
             this.cmbPerfiles.IntegralHeight = false;
             this.cmbPerfiles.Items.AddRange(new object[] {
@@ -147,6 +148,7 @@ namespace Modulo_Capacitacion.Listados.ListadoPerfilPuestoConLegajosAsociados
             this.rbPorPerfil.TabIndex = 86;
             this.rbPorPerfil.Text = "POR PERFIL";
             this.rbPorPerfil.UseVisualStyleBackColor = true;
+            this.rbPorPerfil.MouseClick += new System.Windows.Forms.MouseEventHandler(this.rbPorSector_MouseClick);
             // 
             // rbPorSector
             // 
@@ -159,6 +161,7 @@ namespace Modulo_Capacitacion.Listados.ListadoPerfilPuestoConLegajosAsociados
             this.rbPorSector.TabStop = true;
             this.rbPorSector.Text = "POR SECTOR";
             this.rbPorSector.UseVisualStyleBackColor = true;
+            this.rbPorSector.MouseClick += new System.Windows.Forms.MouseEventHandler(this.rbPorSector_MouseClick);
             // 
             // BT_Pantalla
             // 

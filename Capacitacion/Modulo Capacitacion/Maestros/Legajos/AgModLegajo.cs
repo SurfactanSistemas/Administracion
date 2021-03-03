@@ -220,7 +220,7 @@ namespace Modulo_Capacitacion.Maestros.Legajos
                     // Estado.HeaderText = "Estado";
                     //Estado. = 1;
                     row.Cells[4].Value = _BuscarEstadoCurso(item.Codigo);
-                    //ObtenerValor(item.EstaCurso);
+                    //ObtenerValor(item.EstaCurso); .
                     //observacion
                     //row.Cells[5].Value = item.Observacion;
                     row.Cells[5].Value = item.EstadoCurso;
@@ -233,7 +233,6 @@ namespace Modulo_Capacitacion.Maestros.Legajos
 
         private string _BuscarEstadoCurso(int WCodigoCurso)
         {
-
             try
             {
                 using (SqlConnection conn = new SqlConnection())
@@ -288,7 +287,6 @@ namespace Modulo_Capacitacion.Maestros.Legajos
                     return "No Evalua";
                 case 8:
                     return "Cumple Act";
-
                 default:
                     return "";
             }
@@ -307,16 +305,13 @@ namespace Modulo_Capacitacion.Maestros.Legajos
                     TB_FechaIng.Text = L.FIngreso;
                 }
 
-                DateTime FEgresoParse;
-                DateTime.TryParse(L.FEgreso, out FEgresoParse);
-
-                if (FEgresoParse.ToString("d/M/yyyy") == "1/1/0001")
+                if (L.FEgreso.Replace(" ", "").Length < 10)
                 {
                     TB_FechaEgreso.Text = "00/00/0000";
                 }
                 else
                 {
-                    TB_FechaEgreso.Text = FEgresoParse.ToShortDateString();
+                    TB_FechaEgreso.Text = L.FEgreso;
                     TB_FechaEgreso.BackColor = Color.Red;
                 }
 

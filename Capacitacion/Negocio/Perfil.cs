@@ -485,5 +485,26 @@ namespace Negocio
 
             return repo.Listar(consulta);
         }
+
+        public DataTable ListarPerfilEsp(string[] perfiles)
+        {
+            Conexion repo = new Conexion();
+            string consulta = "select T.Codigo, T.Descripcion, T.Vigencia, T.Sector,  S.Descripcion,  T.Version,"
+                + " T.TareasI, T.TareasII, T.TareasIII, T.DescriI as EspPrim, "
+                + " T.ObservaI as ObservPrim, T.NecesariaI as NecPrim, T.DeseableI as DesPrim ,"
+                + " T.DescriII as EspSec, T.ObservaII as ObservSec, T.NecesariaII as NecSec, T.DeseableII as DesSec, T.DescriIII as EspTerc,"
+                + " T.ObservaIII as ObservTerc, T.NecesariaIII as NecTerc, T.DeseableIII as DesTerc,"
+                + " T.DescriIV as EspIdioma, T.ObservaIV as ObservIdioma, T.NecesariaIV as NecIdioma, T.DeseableIV as Desidioma,"
+                + " T.DescriV as EspExp, T.ObservaV as ObservExp, T.NecesariaV as NecExp, T.DeseableV as DesExp,"
+                + " T.Fisica as EspCondFis, T.NecesariaVI as NecCondFis, T.DeseableVI as DesCondFis,"
+                + " T.OtrosI as EspOtrosI, T.NecesariaVII as NecOtrosI, T.DeseableVII as DesOtrosI,"
+                + " T.OtrosII as EspOtrosII, T.NecesariaVIII as NecOtrosII, T.DeseableVIII as DesOtrosII,"
+                + " T.Equivalencias as EquivI, T.EquivalenciasII as EquivII, T.Curso, C.descripcion, T.NecesariaCurso, T.DeseableCurso"
+                + " from Tarea T inner join Sector S on S.codigo = T.Sector inner join Curso C on C.Codigo = T.Curso"
+                + "  where T.Codigo in (" + string.Join(",", perfiles) + ") order by T.codigo, T.Renglon asc";
+
+
+            return repo.Listar(consulta);
+        }
     }
 }
