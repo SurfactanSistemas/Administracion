@@ -323,7 +323,7 @@ Public Class ParametrosDeEspecificacion : Implements INotificaActualizacion
                 WReferencias(WRenglon, 1) = mt.Value
             Next
 
-            With New IngresoVariablesFormula(WFormula, Wvariables, Wvalor, Nothing, Nothing, Renglon, WReferencias)
+            With New IngresoVariablesFormula(WFormula, Wvariables, Wvalor, Nothing, Nothing, Renglon, WReferencias, False, Terminado)
                 .Show(Me)
             End With
         End If

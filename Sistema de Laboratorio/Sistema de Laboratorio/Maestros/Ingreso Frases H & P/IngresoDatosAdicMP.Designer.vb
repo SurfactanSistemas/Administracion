@@ -22,12 +22,13 @@ Partial Class IngresoDatosAdicMP
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtNombreArticulo = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -62,15 +63,7 @@ Partial Class IngresoDatosAdicMP
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.DGV_FrasesH = New Util.DBDataGridView()
-        Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DescripcionH = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ObservacionesH = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
-        Me.DGV_FrasesP = New Util.DBDataGridView()
-        Me.CodigoFraseP = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DescripcionFraseP = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Observaciones = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.txtTipoEtiqueta = New System.Windows.Forms.TextBox()
         Me.lblTipoEtiqueta = New System.Windows.Forms.Label()
@@ -93,25 +86,13 @@ Partial Class IngresoDatosAdicMP
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
-        Me.DGV_DemoCompPeligrosos = New Util.DBDataGridView()
-        Me.Denominacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage6 = New System.Windows.Forms.TabPage()
-        Me.DGV_FrasesHIngles = New Util.DBDataGridView()
-        Me.CodigoFraseHINgles = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DescripcionFraseHINgles = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage7 = New System.Windows.Forms.TabPage()
-        Me.DGV_FrasesPIngles = New Util.DBDataGridView()
-        Me.CodigoFrasesPIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DescripcionFrasesPIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.pnlConsultarDatos = New System.Windows.Forms.Panel()
         Me.btnAnteriorPag = New System.Windows.Forms.Button()
         Me.btnVolverConsultarDatos = New System.Windows.Forms.Button()
         Me.txtConsultaDatos = New System.Windows.Forms.TextBox()
         Me.LstboxConsultaDatos = New System.Windows.Forms.ListBox()
-        Me.DGV_Consulta = New Util.DBDataGridView()
-        Me.Codigo1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ObservacionesConsulta = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.masktxtCodigo = New System.Windows.Forms.MaskedTextBox()
         Me.btnGrabar = New System.Windows.Forms.Button()
         Me.btnLimpiar = New System.Windows.Forms.Button()
@@ -121,6 +102,26 @@ Partial Class IngresoDatosAdicMP
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Label22 = New System.Windows.Forms.Label()
         Me.Label21 = New System.Windows.Forms.Label()
+        Me.DGV_Consulta = New Util.DBDataGridView()
+        Me.Codigo1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ObservacionesConsulta = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DGV_FrasesH = New Util.DBDataGridView()
+        Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DescripcionH = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ObservacionesH = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DGV_FrasesP = New Util.DBDataGridView()
+        Me.CodigoFraseP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DescripcionFraseP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Observaciones = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DGV_DemoCompPeligrosos = New Util.DBDataGridView()
+        Me.Denominacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DGV_FrasesHIngles = New Util.DBDataGridView()
+        Me.CodigoFraseHINgles = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DescripcionFraseHINgles = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DGV_FrasesPIngles = New Util.DBDataGridView()
+        Me.CodigoFrasesPIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DescripcionFrasesPIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.PictureBox9, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -133,19 +134,19 @@ Partial Class IngresoDatosAdicMP
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage2.SuspendLayout()
-        CType(Me.DGV_FrasesH, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage3.SuspendLayout()
-        CType(Me.DGV_FrasesP, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage4.SuspendLayout()
         Me.TabPage5.SuspendLayout()
-        CType(Me.DGV_DemoCompPeligrosos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage6.SuspendLayout()
-        CType(Me.DGV_FrasesHIngles, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage7.SuspendLayout()
-        CType(Me.DGV_FrasesPIngles, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlConsultarDatos.SuspendLayout()
-        CType(Me.DGV_Consulta, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
+        CType(Me.DGV_Consulta, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DGV_FrasesH, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DGV_FrasesP, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DGV_DemoCompPeligrosos, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DGV_FrasesHIngles, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DGV_FrasesPIngles, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
@@ -530,64 +531,6 @@ Partial Class IngresoDatosAdicMP
         Me.TabPage2.Text = "FRASES H"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
-        'DGV_FrasesH
-        '
-        Me.DGV_FrasesH.AllowUserToAddRows = False
-        Me.DGV_FrasesH.AllowUserToOrderColumns = True
-        Me.DGV_FrasesH.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGV_FrasesH.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Codigo, Me.DescripcionH, Me.ObservacionesH})
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGV_FrasesH.DefaultCellStyle = DataGridViewCellStyle1
-        Me.DGV_FrasesH.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.DGV_FrasesH.DoubleBuffered = True
-        Me.DGV_FrasesH.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.DGV_FrasesH.Location = New System.Drawing.Point(3, 3)
-        Me.DGV_FrasesH.Name = "DGV_FrasesH"
-        Me.DGV_FrasesH.OrdenamientoColumnasHabilitado = False
-        Me.DGV_FrasesH.ReadOnly = True
-        Me.DGV_FrasesH.RowHeadersWidth = 15
-        Me.DGV_FrasesH.RowTemplate.Height = 20
-        Me.DGV_FrasesH.ShowCellToolTips = False
-        Me.DGV_FrasesH.SinClickDerecho = False
-        Me.DGV_FrasesH.Size = New System.Drawing.Size(779, 318)
-        Me.DGV_FrasesH.TabIndex = 0
-        '
-        'Codigo
-        '
-        Me.Codigo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Codigo.DataPropertyName = "Codigo"
-        Me.Codigo.HeaderText = "Codigo"
-        Me.Codigo.Name = "Codigo"
-        Me.Codigo.ReadOnly = True
-        Me.Codigo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Codigo.Width = 46
-        '
-        'DescripcionH
-        '
-        Me.DescripcionH.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.DescripcionH.DataPropertyName = "Descripcion"
-        Me.DescripcionH.HeaderText = "Descripcion"
-        Me.DescripcionH.MaxInputLength = 450
-        Me.DescripcionH.Name = "DescripcionH"
-        Me.DescripcionH.ReadOnly = True
-        Me.DescripcionH.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'ObservacionesH
-        '
-        Me.ObservacionesH.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.ObservacionesH.DataPropertyName = "Observaciones"
-        Me.ObservacionesH.HeaderText = "Observaciones"
-        Me.ObservacionesH.Name = "ObservacionesH"
-        Me.ObservacionesH.ReadOnly = True
-        Me.ObservacionesH.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.ObservacionesH.Width = 84
-        '
         'TabPage3
         '
         Me.TabPage3.Controls.Add(Me.DGV_FrasesP)
@@ -599,64 +542,6 @@ Partial Class IngresoDatosAdicMP
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "FRASES P"
         Me.TabPage3.UseVisualStyleBackColor = True
-        '
-        'DGV_FrasesP
-        '
-        Me.DGV_FrasesP.AllowUserToAddRows = False
-        Me.DGV_FrasesP.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGV_FrasesP.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CodigoFraseP, Me.DescripcionFraseP, Me.Observaciones})
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGV_FrasesP.DefaultCellStyle = DataGridViewCellStyle2
-        Me.DGV_FrasesP.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.DGV_FrasesP.DoubleBuffered = True
-        Me.DGV_FrasesP.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.DGV_FrasesP.Location = New System.Drawing.Point(3, 3)
-        Me.DGV_FrasesP.Name = "DGV_FrasesP"
-        Me.DGV_FrasesP.OrdenamientoColumnasHabilitado = False
-        Me.DGV_FrasesP.ReadOnly = True
-        Me.DGV_FrasesP.RowHeadersWidth = 15
-        Me.DGV_FrasesP.RowTemplate.Height = 20
-        Me.DGV_FrasesP.ShowCellToolTips = False
-        Me.DGV_FrasesP.SinClickDerecho = False
-        Me.DGV_FrasesP.Size = New System.Drawing.Size(779, 318)
-        Me.DGV_FrasesP.TabIndex = 1
-        '
-        'CodigoFraseP
-        '
-        Me.CodigoFraseP.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.CodigoFraseP.DataPropertyName = "Codigo"
-        Me.CodigoFraseP.HeaderText = "Codigo"
-        Me.CodigoFraseP.Name = "CodigoFraseP"
-        Me.CodigoFraseP.ReadOnly = True
-        Me.CodigoFraseP.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.CodigoFraseP.Width = 46
-        '
-        'DescripcionFraseP
-        '
-        Me.DescripcionFraseP.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.DescripcionFraseP.DataPropertyName = "Descripcion"
-        Me.DescripcionFraseP.HeaderText = "Descripcion"
-        Me.DescripcionFraseP.MaxInputLength = 450
-        Me.DescripcionFraseP.Name = "DescripcionFraseP"
-        Me.DescripcionFraseP.ReadOnly = True
-        Me.DescripcionFraseP.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'Observaciones
-        '
-        Me.Observaciones.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Observaciones.DataPropertyName = "Observaciones"
-        Me.Observaciones.HeaderText = "Observaciones"
-        Me.Observaciones.MaxInputLength = 100
-        Me.Observaciones.Name = "Observaciones"
-        Me.Observaciones.ReadOnly = True
-        Me.Observaciones.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Observaciones.Width = 84
         '
         'TabPage4
         '
@@ -878,40 +763,6 @@ Partial Class IngresoDatosAdicMP
         Me.TabPage5.Text = "DENOMINACION COMP. PELIGROSOS"
         Me.TabPage5.UseVisualStyleBackColor = True
         '
-        'DGV_DemoCompPeligrosos
-        '
-        Me.DGV_DemoCompPeligrosos.AllowUserToAddRows = False
-        Me.DGV_DemoCompPeligrosos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGV_DemoCompPeligrosos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Denominacion})
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGV_DemoCompPeligrosos.DefaultCellStyle = DataGridViewCellStyle3
-        Me.DGV_DemoCompPeligrosos.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.DGV_DemoCompPeligrosos.DoubleBuffered = True
-        Me.DGV_DemoCompPeligrosos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.DGV_DemoCompPeligrosos.Location = New System.Drawing.Point(3, 3)
-        Me.DGV_DemoCompPeligrosos.Name = "DGV_DemoCompPeligrosos"
-        Me.DGV_DemoCompPeligrosos.OrdenamientoColumnasHabilitado = False
-        Me.DGV_DemoCompPeligrosos.RowHeadersWidth = 15
-        Me.DGV_DemoCompPeligrosos.RowTemplate.Height = 20
-        Me.DGV_DemoCompPeligrosos.ShowCellToolTips = False
-        Me.DGV_DemoCompPeligrosos.SinClickDerecho = False
-        Me.DGV_DemoCompPeligrosos.Size = New System.Drawing.Size(779, 318)
-        Me.DGV_DemoCompPeligrosos.TabIndex = 0
-        '
-        'Denominacion
-        '
-        Me.Denominacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.Denominacion.DataPropertyName = "Denominacion"
-        Me.Denominacion.HeaderText = "Denominaciones"
-        Me.Denominacion.Name = "Denominacion"
-        Me.Denominacion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
         'TabPage6
         '
         Me.TabPage6.Controls.Add(Me.DGV_FrasesHIngles)
@@ -921,54 +772,6 @@ Partial Class IngresoDatosAdicMP
         Me.TabPage6.TabIndex = 5
         Me.TabPage6.Text = "FRASES H (INGLÉS)"
         Me.TabPage6.UseVisualStyleBackColor = True
-        '
-        'DGV_FrasesHIngles
-        '
-        Me.DGV_FrasesHIngles.AllowUserToAddRows = False
-        Me.DGV_FrasesHIngles.AllowUserToOrderColumns = True
-        Me.DGV_FrasesHIngles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGV_FrasesHIngles.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CodigoFraseHINgles, Me.DescripcionFraseHINgles})
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGV_FrasesHIngles.DefaultCellStyle = DataGridViewCellStyle4
-        Me.DGV_FrasesHIngles.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.DGV_FrasesHIngles.DoubleBuffered = True
-        Me.DGV_FrasesHIngles.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.DGV_FrasesHIngles.Location = New System.Drawing.Point(0, 0)
-        Me.DGV_FrasesHIngles.Name = "DGV_FrasesHIngles"
-        Me.DGV_FrasesHIngles.OrdenamientoColumnasHabilitado = False
-        Me.DGV_FrasesHIngles.ReadOnly = True
-        Me.DGV_FrasesHIngles.RowHeadersWidth = 15
-        Me.DGV_FrasesHIngles.RowTemplate.Height = 20
-        Me.DGV_FrasesHIngles.ShowCellToolTips = False
-        Me.DGV_FrasesHIngles.SinClickDerecho = False
-        Me.DGV_FrasesHIngles.Size = New System.Drawing.Size(785, 324)
-        Me.DGV_FrasesHIngles.TabIndex = 1
-        '
-        'CodigoFraseHINgles
-        '
-        Me.CodigoFraseHINgles.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.CodigoFraseHINgles.DataPropertyName = "Codigo"
-        Me.CodigoFraseHINgles.HeaderText = "Codigo"
-        Me.CodigoFraseHINgles.Name = "CodigoFraseHINgles"
-        Me.CodigoFraseHINgles.ReadOnly = True
-        Me.CodigoFraseHINgles.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.CodigoFraseHINgles.Width = 46
-        '
-        'DescripcionFraseHINgles
-        '
-        Me.DescripcionFraseHINgles.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.DescripcionFraseHINgles.DataPropertyName = "Descripcion"
-        Me.DescripcionFraseHINgles.HeaderText = "Descripcion"
-        Me.DescripcionFraseHINgles.MaxInputLength = 450
-        Me.DescripcionFraseHINgles.Name = "DescripcionFraseHINgles"
-        Me.DescripcionFraseHINgles.ReadOnly = True
-        Me.DescripcionFraseHINgles.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
         'TabPage7
         '
@@ -980,54 +783,6 @@ Partial Class IngresoDatosAdicMP
         Me.TabPage7.Text = "FRASES P (INGLÉS)"
         Me.TabPage7.UseVisualStyleBackColor = True
         '
-        'DGV_FrasesPIngles
-        '
-        Me.DGV_FrasesPIngles.AllowUserToAddRows = False
-        Me.DGV_FrasesPIngles.AllowUserToOrderColumns = True
-        Me.DGV_FrasesPIngles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGV_FrasesPIngles.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CodigoFrasesPIngles, Me.DescripcionFrasesPIngles})
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGV_FrasesPIngles.DefaultCellStyle = DataGridViewCellStyle5
-        Me.DGV_FrasesPIngles.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.DGV_FrasesPIngles.DoubleBuffered = True
-        Me.DGV_FrasesPIngles.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.DGV_FrasesPIngles.Location = New System.Drawing.Point(0, 0)
-        Me.DGV_FrasesPIngles.Name = "DGV_FrasesPIngles"
-        Me.DGV_FrasesPIngles.OrdenamientoColumnasHabilitado = False
-        Me.DGV_FrasesPIngles.ReadOnly = True
-        Me.DGV_FrasesPIngles.RowHeadersWidth = 15
-        Me.DGV_FrasesPIngles.RowTemplate.Height = 20
-        Me.DGV_FrasesPIngles.ShowCellToolTips = False
-        Me.DGV_FrasesPIngles.SinClickDerecho = False
-        Me.DGV_FrasesPIngles.Size = New System.Drawing.Size(785, 324)
-        Me.DGV_FrasesPIngles.TabIndex = 2
-        '
-        'CodigoFrasesPIngles
-        '
-        Me.CodigoFrasesPIngles.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.CodigoFrasesPIngles.DataPropertyName = "Codigo"
-        Me.CodigoFrasesPIngles.HeaderText = "Codigo"
-        Me.CodigoFrasesPIngles.Name = "CodigoFrasesPIngles"
-        Me.CodigoFrasesPIngles.ReadOnly = True
-        Me.CodigoFrasesPIngles.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.CodigoFrasesPIngles.Width = 46
-        '
-        'DescripcionFrasesPIngles
-        '
-        Me.DescripcionFrasesPIngles.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.DescripcionFrasesPIngles.DataPropertyName = "Descripcion"
-        Me.DescripcionFrasesPIngles.HeaderText = "Descripcion"
-        Me.DescripcionFrasesPIngles.MaxInputLength = 450
-        Me.DescripcionFrasesPIngles.Name = "DescripcionFrasesPIngles"
-        Me.DescripcionFrasesPIngles.ReadOnly = True
-        Me.DescripcionFrasesPIngles.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
         'pnlConsultarDatos
         '
         Me.pnlConsultarDatos.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
@@ -1036,7 +791,7 @@ Partial Class IngresoDatosAdicMP
         Me.pnlConsultarDatos.Controls.Add(Me.txtConsultaDatos)
         Me.pnlConsultarDatos.Controls.Add(Me.LstboxConsultaDatos)
         Me.pnlConsultarDatos.Controls.Add(Me.DGV_Consulta)
-        Me.pnlConsultarDatos.Location = New System.Drawing.Point(119, 134)
+        Me.pnlConsultarDatos.Location = New System.Drawing.Point(102, 154)
         Me.pnlConsultarDatos.Name = "pnlConsultarDatos"
         Me.pnlConsultarDatos.Size = New System.Drawing.Size(537, 272)
         Me.pnlConsultarDatos.TabIndex = 1
@@ -1077,53 +832,6 @@ Partial Class IngresoDatosAdicMP
         Me.LstboxConsultaDatos.Name = "LstboxConsultaDatos"
         Me.LstboxConsultaDatos.Size = New System.Drawing.Size(476, 130)
         Me.LstboxConsultaDatos.TabIndex = 1
-        '
-        'DGV_Consulta
-        '
-        Me.DGV_Consulta.AllowUserToAddRows = False
-        Me.DGV_Consulta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGV_Consulta.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Codigo1, Me.Descripcion, Me.ObservacionesConsulta})
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGV_Consulta.DefaultCellStyle = DataGridViewCellStyle6
-        Me.DGV_Consulta.DoubleBuffered = True
-        Me.DGV_Consulta.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.DGV_Consulta.Location = New System.Drawing.Point(9, 54)
-        Me.DGV_Consulta.Name = "DGV_Consulta"
-        Me.DGV_Consulta.OrdenamientoColumnasHabilitado = True
-        Me.DGV_Consulta.RowHeadersWidth = 15
-        Me.DGV_Consulta.RowTemplate.Height = 20
-        Me.DGV_Consulta.ShowCellToolTips = False
-        Me.DGV_Consulta.SinClickDerecho = False
-        Me.DGV_Consulta.Size = New System.Drawing.Size(476, 130)
-        Me.DGV_Consulta.TabIndex = 4
-        '
-        'Codigo1
-        '
-        Me.Codigo1.DataPropertyName = "Codigo"
-        Me.Codigo1.HeaderText = "Codigo"
-        Me.Codigo1.Name = "Codigo1"
-        Me.Codigo1.ReadOnly = True
-        '
-        'Descripcion
-        '
-        Me.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.Descripcion.DataPropertyName = "Descripcion"
-        Me.Descripcion.HeaderText = "Descripcion"
-        Me.Descripcion.Name = "Descripcion"
-        Me.Descripcion.ReadOnly = True
-        '
-        'ObservacionesConsulta
-        '
-        Me.ObservacionesConsulta.DataPropertyName = "Observaciones"
-        Me.ObservacionesConsulta.HeaderText = "Observaciones"
-        Me.ObservacionesConsulta.Name = "ObservacionesConsulta"
-        Me.ObservacionesConsulta.ReadOnly = True
         '
         'masktxtCodigo
         '
@@ -1223,6 +931,307 @@ Partial Class IngresoDatosAdicMP
         Me.Label21.TabIndex = 1
         Me.Label21.Text = "SURFACTAN S.A."
         '
+        'DGV_Consulta
+        '
+        Me.DGV_Consulta.AllowUserToAddRows = False
+        Me.DGV_Consulta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DGV_Consulta.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Codigo1, Me.Descripcion, Me.ObservacionesConsulta})
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGV_Consulta.DefaultCellStyle = DataGridViewCellStyle6
+        Me.DGV_Consulta.DoubleBuffered = True
+        Me.DGV_Consulta.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
+        Me.DGV_Consulta.Location = New System.Drawing.Point(9, 54)
+        Me.DGV_Consulta.Name = "DGV_Consulta"
+        Me.DGV_Consulta.OrdenamientoColumnasHabilitado = True
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGV_Consulta.RowHeadersDefaultCellStyle = DataGridViewCellStyle7
+        Me.DGV_Consulta.RowHeadersWidth = 15
+        Me.DGV_Consulta.RowTemplate.Height = 20
+        Me.DGV_Consulta.ShowCellToolTips = False
+        Me.DGV_Consulta.SinClickDerecho = False
+        Me.DGV_Consulta.Size = New System.Drawing.Size(476, 130)
+        Me.DGV_Consulta.TabIndex = 4
+        '
+        'Codigo1
+        '
+        Me.Codigo1.DataPropertyName = "Codigo"
+        Me.Codigo1.HeaderText = "Codigo"
+        Me.Codigo1.Name = "Codigo1"
+        Me.Codigo1.ReadOnly = True
+        '
+        'Descripcion
+        '
+        Me.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Descripcion.DataPropertyName = "Descripcion"
+        Me.Descripcion.HeaderText = "Descripcion"
+        Me.Descripcion.Name = "Descripcion"
+        Me.Descripcion.ReadOnly = True
+        '
+        'ObservacionesConsulta
+        '
+        Me.ObservacionesConsulta.DataPropertyName = "Observaciones"
+        Me.ObservacionesConsulta.HeaderText = "Observaciones"
+        Me.ObservacionesConsulta.Name = "ObservacionesConsulta"
+        Me.ObservacionesConsulta.ReadOnly = True
+        '
+        'DGV_FrasesH
+        '
+        Me.DGV_FrasesH.AllowUserToAddRows = False
+        Me.DGV_FrasesH.AllowUserToOrderColumns = True
+        Me.DGV_FrasesH.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DGV_FrasesH.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Codigo, Me.DescripcionH, Me.ObservacionesH})
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGV_FrasesH.DefaultCellStyle = DataGridViewCellStyle1
+        Me.DGV_FrasesH.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.DGV_FrasesH.DoubleBuffered = True
+        Me.DGV_FrasesH.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
+        Me.DGV_FrasesH.Location = New System.Drawing.Point(3, 3)
+        Me.DGV_FrasesH.Name = "DGV_FrasesH"
+        Me.DGV_FrasesH.OrdenamientoColumnasHabilitado = False
+        Me.DGV_FrasesH.ReadOnly = True
+        Me.DGV_FrasesH.RowHeadersWidth = 15
+        Me.DGV_FrasesH.RowTemplate.Height = 20
+        Me.DGV_FrasesH.ShowCellToolTips = False
+        Me.DGV_FrasesH.SinClickDerecho = False
+        Me.DGV_FrasesH.Size = New System.Drawing.Size(779, 348)
+        Me.DGV_FrasesH.TabIndex = 0
+        '
+        'Codigo
+        '
+        Me.Codigo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Codigo.DataPropertyName = "Codigo"
+        Me.Codigo.HeaderText = "Codigo"
+        Me.Codigo.Name = "Codigo"
+        Me.Codigo.ReadOnly = True
+        Me.Codigo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Codigo.Width = 46
+        '
+        'DescripcionH
+        '
+        Me.DescripcionH.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.DescripcionH.DataPropertyName = "Descripcion"
+        Me.DescripcionH.HeaderText = "Descripcion"
+        Me.DescripcionH.MaxInputLength = 450
+        Me.DescripcionH.Name = "DescripcionH"
+        Me.DescripcionH.ReadOnly = True
+        Me.DescripcionH.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'ObservacionesH
+        '
+        Me.ObservacionesH.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.ObservacionesH.DataPropertyName = "Observaciones"
+        Me.ObservacionesH.HeaderText = "Observaciones"
+        Me.ObservacionesH.Name = "ObservacionesH"
+        Me.ObservacionesH.ReadOnly = True
+        Me.ObservacionesH.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.ObservacionesH.Width = 84
+        '
+        'DGV_FrasesP
+        '
+        Me.DGV_FrasesP.AllowUserToAddRows = False
+        Me.DGV_FrasesP.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DGV_FrasesP.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CodigoFraseP, Me.DescripcionFraseP, Me.Observaciones})
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGV_FrasesP.DefaultCellStyle = DataGridViewCellStyle2
+        Me.DGV_FrasesP.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.DGV_FrasesP.DoubleBuffered = True
+        Me.DGV_FrasesP.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
+        Me.DGV_FrasesP.Location = New System.Drawing.Point(3, 3)
+        Me.DGV_FrasesP.Name = "DGV_FrasesP"
+        Me.DGV_FrasesP.OrdenamientoColumnasHabilitado = False
+        Me.DGV_FrasesP.ReadOnly = True
+        Me.DGV_FrasesP.RowHeadersWidth = 15
+        Me.DGV_FrasesP.RowTemplate.Height = 20
+        Me.DGV_FrasesP.ShowCellToolTips = False
+        Me.DGV_FrasesP.SinClickDerecho = False
+        Me.DGV_FrasesP.Size = New System.Drawing.Size(779, 348)
+        Me.DGV_FrasesP.TabIndex = 1
+        '
+        'CodigoFraseP
+        '
+        Me.CodigoFraseP.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.CodigoFraseP.DataPropertyName = "Codigo"
+        Me.CodigoFraseP.HeaderText = "Codigo"
+        Me.CodigoFraseP.Name = "CodigoFraseP"
+        Me.CodigoFraseP.ReadOnly = True
+        Me.CodigoFraseP.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.CodigoFraseP.Width = 46
+        '
+        'DescripcionFraseP
+        '
+        Me.DescripcionFraseP.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.DescripcionFraseP.DataPropertyName = "Descripcion"
+        Me.DescripcionFraseP.HeaderText = "Descripcion"
+        Me.DescripcionFraseP.MaxInputLength = 450
+        Me.DescripcionFraseP.Name = "DescripcionFraseP"
+        Me.DescripcionFraseP.ReadOnly = True
+        Me.DescripcionFraseP.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'Observaciones
+        '
+        Me.Observaciones.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Observaciones.DataPropertyName = "Observaciones"
+        Me.Observaciones.HeaderText = "Observaciones"
+        Me.Observaciones.MaxInputLength = 100
+        Me.Observaciones.Name = "Observaciones"
+        Me.Observaciones.ReadOnly = True
+        Me.Observaciones.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Observaciones.Width = 84
+        '
+        'DGV_DemoCompPeligrosos
+        '
+        Me.DGV_DemoCompPeligrosos.AllowUserToAddRows = False
+        Me.DGV_DemoCompPeligrosos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DGV_DemoCompPeligrosos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Denominacion})
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGV_DemoCompPeligrosos.DefaultCellStyle = DataGridViewCellStyle3
+        Me.DGV_DemoCompPeligrosos.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.DGV_DemoCompPeligrosos.DoubleBuffered = True
+        Me.DGV_DemoCompPeligrosos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
+        Me.DGV_DemoCompPeligrosos.Location = New System.Drawing.Point(3, 3)
+        Me.DGV_DemoCompPeligrosos.Name = "DGV_DemoCompPeligrosos"
+        Me.DGV_DemoCompPeligrosos.OrdenamientoColumnasHabilitado = False
+        Me.DGV_DemoCompPeligrosos.RowHeadersWidth = 15
+        Me.DGV_DemoCompPeligrosos.RowTemplate.Height = 20
+        Me.DGV_DemoCompPeligrosos.ShowCellToolTips = False
+        Me.DGV_DemoCompPeligrosos.SinClickDerecho = False
+        Me.DGV_DemoCompPeligrosos.Size = New System.Drawing.Size(779, 318)
+        Me.DGV_DemoCompPeligrosos.TabIndex = 0
+        '
+        'Denominacion
+        '
+        Me.Denominacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Denominacion.DataPropertyName = "Denominacion"
+        Me.Denominacion.HeaderText = "Denominaciones"
+        Me.Denominacion.Name = "Denominacion"
+        Me.Denominacion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'DGV_FrasesHIngles
+        '
+        Me.DGV_FrasesHIngles.AllowUserToAddRows = False
+        Me.DGV_FrasesHIngles.AllowUserToOrderColumns = True
+        Me.DGV_FrasesHIngles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DGV_FrasesHIngles.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CodigoFraseHINgles, Me.DescripcionFraseHINgles})
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGV_FrasesHIngles.DefaultCellStyle = DataGridViewCellStyle4
+        Me.DGV_FrasesHIngles.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.DGV_FrasesHIngles.DoubleBuffered = True
+        Me.DGV_FrasesHIngles.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
+        Me.DGV_FrasesHIngles.Location = New System.Drawing.Point(0, 0)
+        Me.DGV_FrasesHIngles.Name = "DGV_FrasesHIngles"
+        Me.DGV_FrasesHIngles.OrdenamientoColumnasHabilitado = False
+        Me.DGV_FrasesHIngles.ReadOnly = True
+        Me.DGV_FrasesHIngles.RowHeadersWidth = 15
+        Me.DGV_FrasesHIngles.RowTemplate.Height = 20
+        Me.DGV_FrasesHIngles.ShowCellToolTips = False
+        Me.DGV_FrasesHIngles.SinClickDerecho = False
+        Me.DGV_FrasesHIngles.Size = New System.Drawing.Size(785, 324)
+        Me.DGV_FrasesHIngles.TabIndex = 1
+        '
+        'CodigoFraseHINgles
+        '
+        Me.CodigoFraseHINgles.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.CodigoFraseHINgles.DataPropertyName = "Codigo"
+        Me.CodigoFraseHINgles.HeaderText = "Codigo"
+        Me.CodigoFraseHINgles.Name = "CodigoFraseHINgles"
+        Me.CodigoFraseHINgles.ReadOnly = True
+        Me.CodigoFraseHINgles.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.CodigoFraseHINgles.Width = 46
+        '
+        'DescripcionFraseHINgles
+        '
+        Me.DescripcionFraseHINgles.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.DescripcionFraseHINgles.DataPropertyName = "Descripcion"
+        Me.DescripcionFraseHINgles.HeaderText = "Descripcion"
+        Me.DescripcionFraseHINgles.MaxInputLength = 450
+        Me.DescripcionFraseHINgles.Name = "DescripcionFraseHINgles"
+        Me.DescripcionFraseHINgles.ReadOnly = True
+        Me.DescripcionFraseHINgles.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'DGV_FrasesPIngles
+        '
+        Me.DGV_FrasesPIngles.AllowUserToAddRows = False
+        Me.DGV_FrasesPIngles.AllowUserToOrderColumns = True
+        Me.DGV_FrasesPIngles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DGV_FrasesPIngles.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CodigoFrasesPIngles, Me.DescripcionFrasesPIngles})
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGV_FrasesPIngles.DefaultCellStyle = DataGridViewCellStyle5
+        Me.DGV_FrasesPIngles.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.DGV_FrasesPIngles.DoubleBuffered = True
+        Me.DGV_FrasesPIngles.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
+        Me.DGV_FrasesPIngles.Location = New System.Drawing.Point(0, 0)
+        Me.DGV_FrasesPIngles.Name = "DGV_FrasesPIngles"
+        Me.DGV_FrasesPIngles.OrdenamientoColumnasHabilitado = False
+        Me.DGV_FrasesPIngles.ReadOnly = True
+        Me.DGV_FrasesPIngles.RowHeadersWidth = 15
+        Me.DGV_FrasesPIngles.RowTemplate.Height = 20
+        Me.DGV_FrasesPIngles.ShowCellToolTips = False
+        Me.DGV_FrasesPIngles.SinClickDerecho = False
+        Me.DGV_FrasesPIngles.Size = New System.Drawing.Size(785, 324)
+        Me.DGV_FrasesPIngles.TabIndex = 2
+        '
+        'CodigoFrasesPIngles
+        '
+        Me.CodigoFrasesPIngles.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.CodigoFrasesPIngles.DataPropertyName = "Codigo"
+        Me.CodigoFrasesPIngles.HeaderText = "Codigo"
+        Me.CodigoFrasesPIngles.Name = "CodigoFrasesPIngles"
+        Me.CodigoFrasesPIngles.ReadOnly = True
+        Me.CodigoFrasesPIngles.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.CodigoFrasesPIngles.Width = 46
+        '
+        'DescripcionFrasesPIngles
+        '
+        Me.DescripcionFrasesPIngles.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.DescripcionFrasesPIngles.DataPropertyName = "Descripcion"
+        Me.DescripcionFrasesPIngles.HeaderText = "Descripcion"
+        Me.DescripcionFrasesPIngles.MaxInputLength = 450
+        Me.DescripcionFrasesPIngles.Name = "DescripcionFrasesPIngles"
+        Me.DescripcionFrasesPIngles.ReadOnly = True
+        Me.DescripcionFrasesPIngles.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
         'IngresoDatosAdicMP
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1259,22 +1268,22 @@ Partial Class IngresoDatosAdicMP
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage2.ResumeLayout(False)
-        CType(Me.DGV_FrasesH, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage3.ResumeLayout(False)
-        CType(Me.DGV_FrasesP, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage4.ResumeLayout(False)
         Me.TabPage4.PerformLayout()
         Me.TabPage5.ResumeLayout(False)
-        CType(Me.DGV_DemoCompPeligrosos, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage6.ResumeLayout(False)
-        CType(Me.DGV_FrasesHIngles, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage7.ResumeLayout(False)
-        CType(Me.DGV_FrasesPIngles, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlConsultarDatos.ResumeLayout(False)
         Me.pnlConsultarDatos.PerformLayout()
-        CType(Me.DGV_Consulta, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
+        CType(Me.DGV_Consulta, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DGV_FrasesH, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DGV_FrasesP, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DGV_DemoCompPeligrosos, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DGV_FrasesHIngles, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DGV_FrasesPIngles, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

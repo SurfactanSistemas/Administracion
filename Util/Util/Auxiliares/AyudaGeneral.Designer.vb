@@ -26,12 +26,12 @@ Partial Class AyudaGeneral
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.lblTitulo = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.dgvDatos = New Util.DBDataGridView()
-        Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.dgvDatos = New Util.DBDataGridView()
+        Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         CType(Me.dgvDatos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -73,6 +73,31 @@ Partial Class AyudaGeneral
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "SURFACTAN S.A."
         '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(166, 324)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(142, 39)
+        Me.Button1.TabIndex = 5
+        Me.Button1.Text = "CERRAR"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(18, 67)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(35, 13)
+        Me.Label3.TabIndex = 6
+        Me.Label3.Text = "Filtrar:"
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(59, 63)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(408, 20)
+        Me.TextBox1.TabIndex = 7
+        '
         'dgvDatos
         '
         Me.dgvDatos.AllowUserToAddRows = False
@@ -105,13 +130,13 @@ Partial Class AyudaGeneral
         '
         'Codigo
         '
-        Me.Codigo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Codigo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
         Me.Codigo.DataPropertyName = "Codigo"
         Me.Codigo.HeaderText = "Código"
         Me.Codigo.Name = "Codigo"
         Me.Codigo.ReadOnly = True
         Me.Codigo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Codigo.Width = 46
+        Me.Codigo.Width = 90
         '
         'Descripcion
         '
@@ -121,31 +146,6 @@ Partial Class AyudaGeneral
         Me.Descripcion.Name = "Descripcion"
         Me.Descripcion.ReadOnly = True
         Me.Descripcion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(166, 324)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(142, 39)
-        Me.Button1.TabIndex = 5
-        Me.Button1.Text = "CERRAR"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(18, 67)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(35, 13)
-        Me.Label3.TabIndex = 6
-        Me.Label3.Text = "Filtrar:"
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Location = New System.Drawing.Point(59, 63)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(408, 20)
-        Me.TextBox1.TabIndex = 7
         '
         'AyudaGeneral
         '
@@ -174,8 +174,8 @@ Partial Class AyudaGeneral
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents dgvDatos As Util.DBDataGridView
     Friend WithEvents Button1 As System.Windows.Forms.Button
-    Friend WithEvents Codigo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
+    Friend WithEvents Codigo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

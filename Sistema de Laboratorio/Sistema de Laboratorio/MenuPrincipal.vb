@@ -1,6 +1,6 @@
 ﻿Imports System.Text.RegularExpressions
 
-Public Class MenuPrincipal
+Public Class MenuPrincipal 
 
     Const SISTEMA As String = "LABORATORIO"
 
@@ -143,7 +143,7 @@ Public Class MenuPrincipal
 
         'DeshabilitarTodos()
 
-        
+
 
     End Sub
 

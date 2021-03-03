@@ -814,10 +814,10 @@ Public Class ProveedoresABM
     End Sub
 
     Private Sub btnListado_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnListado.Click
-        With VistaPrevia
-            .Reporte = New ListadoResumidoProveedores
-            .Mostrar()
+        With New elegir_Listado_Prov
+            .Show(Me)
         End With
+
     End Sub
 
     Private Sub btnLimpiar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLimpiar.Click
@@ -1761,4 +1761,6 @@ Public Class ProveedoresABM
         GC.Collect()
 
     End Sub
+
+    
 End Class

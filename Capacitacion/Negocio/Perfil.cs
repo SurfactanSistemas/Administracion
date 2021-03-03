@@ -132,7 +132,7 @@ namespace Negocio
                     + ObservaIII + "','" + ObservaIV + "','" + ObservaV + "','" + NecesariaI + "','" + NecesariaII + "','" + NecesariaIII + "','" + NecesariaIV
                     + "','" + NecesariaV + "','" + DeseableI + "','" + DeseableII + "','" + DeseableIII + "','" + DeseableIV + "','" + DeseableV + "','" + EquivalenciasI + "','"
                     + Fisica + "','" + OtrosI + "','" + OtrosII + "','" + int.Parse(fila[0].ToString()) + "', '" + fila[2] + "', '" + fila[3] + "','" + Version + "','" + NecesariaVI
-                    + "','" + NecesariaVII + "','" + NecesariaVIII + "','" + DeseableVI + "','" + DeseableVII + "','" + DeseableVIII + "','" + EquivalenciasII + "',"
+                    + "','" + NecesariaVII + "','" + NecesariaVIII + "','" + DeseableVI + "','" + DeseableVII + "','" + DeseableVIII + "','" + EquivalenciasII + "', '"
                     + R.Codigo + "','" + R2.Codigo + "')";
 
                     repo.Agregar(consulta);

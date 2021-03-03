@@ -125,7 +125,8 @@
     </WarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ClasesCompartidas">
+    <Reference Include="ClasesCompartidas, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\ClasesCompartidas\ClasesCompartidas\bin\x86\Debug\ClasesCompartidas.dll</HintPath>
     </Reference>
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
@@ -301,6 +302,12 @@
       <DependentUpon>EditorArchivos.vb</DependentUpon>
     </Compile>
     <Compile Include="EditorArchivos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="elegir_Listado_Prov.Designer.vb">
+      <DependentUpon>elegir_Listado_Prov.vb</DependentUpon>
+    </Compile>
+    <Compile Include="elegir_Listado_Prov.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="EnvioEmailProveedores.Designer.vb">
@@ -774,6 +781,12 @@
       <DependentUpon>DifCambioRecibos.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\ListadoCalidadProveedores.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ListadoCalidadProveedores.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\ListadoCtaCtePrvSelectivoPrueba1.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1143,6 +1156,9 @@
     <EmbeddedResource Include="EditorArchivos.resx">
       <DependentUpon>EditorArchivos.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="elegir_Listado_Prov.resx">
+      <DependentUpon>elegir_Listado_Prov.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EnvioEmailProveedores.resx">
       <DependentUpon>EnvioEmailProveedores.vb</DependentUpon>
     </EmbeddedResource>
@@ -1375,6 +1391,10 @@
     <EmbeddedResource Include="Reportes\DifCambioRecibos.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>DifCambioRecibos.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ListadoCalidadProveedores.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ListadoCalidadProveedores.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\ListadoCtaCtePrvSelectivoPrueba.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

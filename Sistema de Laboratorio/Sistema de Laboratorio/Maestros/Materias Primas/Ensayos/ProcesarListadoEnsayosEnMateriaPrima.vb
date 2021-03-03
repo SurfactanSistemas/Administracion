@@ -11,6 +11,7 @@ Public Class ProcesarListadoEnsayosEnMateriaPrima : Implements IListarReporteDes
         ' Add any initialization after the InitializeComponent() call.
         AddHandler frm.WOnKeyDown, AddressOf _OnKeyDownEnsayos
 
+
         frm.Show(Owner)
 
         Hide()

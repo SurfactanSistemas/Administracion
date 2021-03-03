@@ -1346,7 +1346,7 @@ Public Class IngresoActualizacionHojaProduccionFarma
                 WStockReservado = formatonumerico(OrDefault(tablahoja.Item(0), 0), 3)
 
                 If Val(WStockReservado) > 0 Then
-                    MsgBox(String.Format("Stock Total:  {1} Kgs{0}Stock Reservado:  {2} Kgs{0}Stock Disponible:  {3}{0}", vbCrLf, WStock, Val(WStockReservado), WStock - Val(WStockReservado)))
+                    MsgBox(String.Format("Stock Total:  {1} Kgs{0}Stock Reservado:  {2} Kgs{0}Stock Disponible:  {3} Kgs {0}", vbCrLf, WStock, Val(WStockReservado), WStock - Val(WStockReservado)))
                 End If
 
                 If VerificaDatosHoja <> "N" Then
@@ -1398,7 +1398,7 @@ Public Class IngresoActualizacionHojaProduccionFarma
                 WStockReservado = formatonumerico(OrDefault(tablahoja.Item(0), 0), 3)
 
                 If Val(WStockReservado) > 0 Then
-                    MsgBox(String.Format("Stock Total:  {1} Kgs{0}Stock Reservado:  {2} Kgs{0}Stock Disponible:  {3}{0}", vbCrLf, WStock, Val(WStockReservado), WStock - Val(WStockReservado)))
+                    MsgBox(String.Format("Stock Total:  {1} Kgs{0}Stock Reservado:  {2} Kgs{0}Stock Disponible:  {3} Kgs{0}", vbCrLf, WStock, Val(WStockReservado), WStock - Val(WStockReservado)))
                 End If
 
                 If VerificaDatosHoja <> "N" Then
@@ -2205,10 +2205,11 @@ Public Class IngresoActualizacionHojaProduccionFarma
     Private Sub btnBlockNotas_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnBlockNotas.Click
         Try
             If pnlAgenda.Visible = False Then
-                If File.Exists("H" + txtHojaProduccion.Text + ".rtf") Then
-                    rtxtAgenda.LoadFile("H" + txtHojaProduccion.Text + ".rtf", 0)
+                If File.Exists("\\193.168.0.2\g$\vb\NET\Sistema de Laboratorio\BlockNotas\H" + txtHojaProduccion.Text + ".rtf") Then
+                    rtxtAgenda.LoadFile("\\193.168.0.2\g$\vb\NET\Sistema de Laboratorio\BlockNotas\H" + txtHojaProduccion.Text + ".rtf", 0)
                 Else
-                    rtxtAgenda.LoadFile("blanco.rtf", 0)
+                    'rtxtAgenda.LoadFile("blanco.rtf", 0)
+                    rtxtAgenda.LoadFile("\\193.168.0.2\g$\vb\NET\Sistema de Laboratorio\BlockNotas\blanco.rtf", 1)
                 End If
                 pnlAgenda.Visible = True
                 rtxtAgenda.Focus()
@@ -2216,7 +2217,10 @@ Public Class IngresoActualizacionHojaProduccionFarma
             Else
 
                 If PermisoGrabar Then
-                    rtxtAgenda.SaveFile("H" + txtHojaProduccion.Text + ".rtf", 0)
+                    If Val(txtHojaProduccion.Text) > 0 Then
+                        rtxtAgenda.SaveFile("\\193.168.0.2\g$\vb\NET\Sistema de Laboratorio\BlockNotas\H" + txtHojaProduccion.Text + ".rtf", 0)
+                    End If
+
                 End If
                 
                 pnlAgenda.Visible = False
@@ -2312,5 +2316,6 @@ Public Class IngresoActualizacionHojaProduccionFarma
 
         End If
     End Sub
+
 
 End Class
