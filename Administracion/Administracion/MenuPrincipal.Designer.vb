@@ -28,6 +28,7 @@ Partial Class MenuPrincipal
         Me.IngresoDeProveedoresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.IngresoDeBancosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.IngresoDeRubrosDeProveedoresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ConsultaTiposDeCambioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EnvioEnEMailAProveedoresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EnvioEnEMailAClientesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NovedadesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -102,7 +103,6 @@ Partial Class MenuPrincipal
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.btnCambio = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.ConsultaTiposDeCambioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
@@ -146,6 +146,12 @@ Partial Class MenuPrincipal
         Me.IngresoDeRubrosDeProveedoresToolStripMenuItem.Name = "IngresoDeRubrosDeProveedoresToolStripMenuItem"
         Me.IngresoDeRubrosDeProveedoresToolStripMenuItem.Size = New System.Drawing.Size(253, 22)
         Me.IngresoDeRubrosDeProveedoresToolStripMenuItem.Text = "Ingreso de Rubros de Proveedores"
+        '
+        'ConsultaTiposDeCambioToolStripMenuItem
+        '
+        Me.ConsultaTiposDeCambioToolStripMenuItem.Name = "ConsultaTiposDeCambioToolStripMenuItem"
+        Me.ConsultaTiposDeCambioToolStripMenuItem.Size = New System.Drawing.Size(253, 22)
+        Me.ConsultaTiposDeCambioToolStripMenuItem.Text = "Consulta Tipos de Cambio"
         '
         'EnvioEnEMailAProveedoresToolStripMenuItem
         '
@@ -263,12 +269,14 @@ Partial Class MenuPrincipal
         Me.SolicitudDeFondosToolStripMenuItem.Name = "SolicitudDeFondosToolStripMenuItem"
         Me.SolicitudDeFondosToolStripMenuItem.Size = New System.Drawing.Size(350, 22)
         Me.SolicitudDeFondosToolStripMenuItem.Text = "Solicitud de Fondos"
+        Me.SolicitudDeFondosToolStripMenuItem.Visible = False
         '
         'GestionarSolicitudDeFondosToolStripMenuItem
         '
         Me.GestionarSolicitudDeFondosToolStripMenuItem.Name = "GestionarSolicitudDeFondosToolStripMenuItem"
         Me.GestionarSolicitudDeFondosToolStripMenuItem.Size = New System.Drawing.Size(350, 22)
         Me.GestionarSolicitudDeFondosToolStripMenuItem.Text = "Gestionar Solicitud de Fondos"
+        Me.GestionarSolicitudDeFondosToolStripMenuItem.Visible = False
         '
         'ListadosToolStripMenuItem
         '
@@ -620,12 +628,6 @@ Partial Class MenuPrincipal
         Me.Button1.Text = "Button1"
         Me.Button1.UseVisualStyleBackColor = True
         Me.Button1.Visible = False
-        '
-        'ConsultaTiposDeCambioToolStripMenuItem
-        '
-        Me.ConsultaTiposDeCambioToolStripMenuItem.Name = "ConsultaTiposDeCambioToolStripMenuItem"
-        Me.ConsultaTiposDeCambioToolStripMenuItem.Size = New System.Drawing.Size(253, 22)
-        Me.ConsultaTiposDeCambioToolStripMenuItem.Text = "Consulta Tipos de Cambio"
         '
         'MenuPrincipal
         '
