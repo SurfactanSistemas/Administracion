@@ -1034,6 +1034,10 @@ Public Class ImpreProcesos
 
         Dim WVers, WFechaVersion, WTipoProceso As String
 
+        WVers = ""
+        WFechaVersion = ""
+        WTipoProceso = ""
+
         If Not IsNothing(WCargaIII) Then
 
             WVers = OrDefault(WCargaIII.Item("Version"), "")

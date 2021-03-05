@@ -80,7 +80,7 @@
 
                 If Val(WTipoEspecif) = 0 And WImpreResultado <> "" Then WImpreResultado &= " (c)"
 
-                Dim WDescripcion As String
+                Dim WDescripcion As String = ""
 
                 WResultado = _GenerarImpreResultado(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WValor, WMenorIgualEspecif, WInformaEspecif)
 
