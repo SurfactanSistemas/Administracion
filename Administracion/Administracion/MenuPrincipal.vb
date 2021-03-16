@@ -1,5 +1,6 @@
 ﻿Imports System.Configuration
-
+Imports Sistema_Carga_de_E_cheques
+Imports Util
 Public Class MenuPrincipal
     ReadOnly forms As New List(Of Form)
     Dim loginOpen As Boolean = False
@@ -274,8 +275,8 @@ Public Class MenuPrincipal
         GestionarSolicitudDeFondosToolStripMenuItem.Visible = Not _EsPellital()
         InformeRecepcionSinFacturasRegistradasToolStripMenuItem.Visible = Not _EsPellital()
 
-        SolicitudDeFondosToolStripMenuItem.Visible = False
-        GestionarSolicitudDeFondosToolStripMenuItem.Visible = False
+        'SolicitudDeFondosToolStripMenuItem.Visible = False
+        'GestionarSolicitudDeFondosToolStripMenuItem.Visible = False
 
     End Sub
 
@@ -357,20 +358,50 @@ Public Class MenuPrincipal
     End Sub
 
     Private Sub SolicitudDeFondosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SolicitudDeFondosToolStripMenuItem.Click
-        With New Sistema_Solicitud_Fondos.Login("Crear")
-            .Show(Me)
-        End With
+        If Operador.Clave = "" Then
+            With New Sistema_Solicitud_Fondos.Login("Crear")
+                .Show(Me)
+            End With
+        Else
+            With New Sistema_Solicitud_Fondos.Ingreso_Solicitud
+                .Show()
+            End With
+        End If
+        
     End Sub
 
     Private Sub GestionarSolicitudDeFondosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GestionarSolicitudDeFondosToolStripMenuItem.Click
-        With New Sistema_Solicitud_Fondos.Login("Gestion")
-            .Show(Me)
-        End With
+        If operador.clave = "" Then
+            With New Sistema_Solicitud_Fondos.Login("Gestion")
+                .Show(Me)
+            End With
+        Else
+            Dim PermisoSistemaSolicitud As String = ""
+            Dim WOperador As DataRow = GetSingle("SELECT SolicitudFondosEdicion FROM Operador WHERE UPPER(Clave) = '" & Operador.Clave & "'", "SurfactanSa")
+            If WOperador IsNot Nothing Then
+                PermisoSistemaSolicitud = IIf(IsDBNull(WOperador.Item("SolicitudFondosEdicion")), "N", WOperador.Item("SolicitudFondosEdicion"))
+                If PermisoSistemaSolicitud = "S" Then
+                    With New Sistema_Solicitud_Fondos.Gestion_Solicitudes
+                        .Show()
+                    End With
+                Else
+                    With New Sistema_Solicitud_Fondos.AutoGestionSolicitudes
+                        .Show()
+                    End With
+                End If
+            End If
+        End If
 
     End Sub
-
+    
     Private Sub ConsultaTiposDeCambioToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ConsultaTiposDeCambioToolStripMenuItem.Click
         With New ConsultaTiposDeCambios
+            .Show(Me)
+        End With
+    End Sub
+
+    Private Sub ImportarEchequesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportarEchequesToolStripMenuItem.Click
+        With New CargadorDeTxt
             .Show(Me)
         End With
     End Sub

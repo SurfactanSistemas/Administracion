@@ -7404,7 +7404,7 @@ Public Class Pagos
                         Dim ZZFecha = ZZFecha2
 
                         Select Case Val(XTipo2)
-                            Case 2, 3
+                            Case 2, 3, 7
 
                                 ZZCicloDia = 0
 

@@ -26,7 +26,7 @@ Public Class CargaDatosFrases
         txtDescripcion.Text = txtDescripcion.Text.Trim().PadRight(450, " ") 'Rellenamos los espacios vacio con " " para poder hacer el substring
         If FRASE = "H" Then
             SQLCnlst = "SELECT * FROM FraseH WHERE Codigo = '" & txtCodigo.Text & "'"
-            Dim row As DataRow = GetSingle(SQLCnlst)
+            Dim row As DataRow = GetSingle(SQLCnlst, "SurfactanSa")
             If row Is Nothing Then
                 SQLCnlst = "INSERT INTO FraseH (Codigo , Descripcion, DescripcionII, DescripcionIII, Observa) values ('" & txtCodigo.Text.Trim() & " ', '" & txtDescripcion.Text.Substring(0, 249).Trim() & "', '" & txtDescripcion.Text.Substring(250, 100).Trim() & "', '" & txtDescripcion.Text.Substring(350, 100).Trim() & "', '" & txtObservaciones.Text.Trim() & "')"
 
@@ -36,7 +36,7 @@ Public Class CargaDatosFrases
             End If
         Else
             SQLCnlst = "SELECT * FROM FraseP WHERE Codigo = '" & txtCodigo.Text & "'"
-            Dim row As DataRow = GetSingle(SQLCnlst)
+            Dim row As DataRow = GetSingle(SQLCnlst, "SurfactanSa")
             If row Is Nothing Then
                 SQLCnlst = "INSERT INTO FraseP (Codigo ,  Descripcion, DescripcionII, DescripcionIII, Observa) values ('" & txtCodigo.Text.Trim() & " ', '" & txtDescripcion.Text.Substring(0, 249).Trim() & "', '" & txtDescripcion.Text.Substring(250, 100).Trim() & "', '" & txtDescripcion.Text.Substring(350, 100).Trim() & "', '" & txtObservaciones.Text.Trim() & "' "
 
@@ -46,7 +46,7 @@ Public Class CargaDatosFrases
             End If
         End If
 
-        ExecuteNonQueries(SQLCnlst)
+        ExecuteNonQueries("SurfactanSa", SQLCnlst)
 
         Dim Woner As IFrasesHP = TryCast(Owner, IFrasesHP)
 

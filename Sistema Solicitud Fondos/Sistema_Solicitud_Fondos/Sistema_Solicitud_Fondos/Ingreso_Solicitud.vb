@@ -16,6 +16,10 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
     Dim WParidad As Double = 0
     Dim ZCambioDivisa As Double
 
+    Dim VALIDACIONES As Boolean = True
+
+
+
     Sub New(Optional ByVal NroSoli As Integer = 0)
 
         ' Llamada necesaria para el diseñador.
@@ -118,11 +122,16 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
 
 
 
-                chk_Efectivo.Checked = OrDefault(rowsoli.Item("Efectivo_Chk"), 0) = 1
-                chk_Tranferencia.Checked = OrDefault(rowsoli.Item("Transferencia_Chk"), 0) = 1
-                chk_Echeq.Checked = OrDefault(rowsoli.Item("ECheq_Chk"), 0) = 1
-                chk_ChequeTerceros.Checked = OrDefault(rowsoli.Item("CheqTerceros_Chk"), 0) = 1
-                chk_ChequePropio.Checked = OrDefault(rowsoli.Item("CheqPropio_Chk"), 0) = 1
+                'chk_Efectivo.Checked = OrDefault(rowsoli.Item("Efectivo_Chk"), 0) = 1
+                chk_Efectivo.Checked = IIf(IsDBNull(rowsoli.Item("Efectivo_Chk")), 0, rowsoli.Item("Efectivo_Chk"))
+                'chk_Tranferencia.Checked = OrDefault(rowsoli.Item("Transferencia_Chk"), 0) = 1
+                chk_Tranferencia.Checked = IIf(IsDBNull(rowsoli.Item("Transferencia_Chk")), 0, rowsoli.Item("Transferencia_Chk"))
+                'chk_Echeq.Checked = OrDefault(rowsoli.Item("ECheq_Chk"), 0) = 1
+                chk_Echeq.Checked = IIf(IsDBNull(rowsoli.Item("ECheq_Chk")), 0, rowsoli.Item("ECheq_Chk"))
+                'chk_ChequeTerceros.Checked = OrDefault(rowsoli.Item("CheqTerceros_Chk"), 0) = 1
+                chk_ChequeTerceros.Checked = IIf(IsDBNull(rowsoli.Item("CheqTerceros_Chk")), 0, rowsoli.Item("CheqTerceros_Chk"))
+                'chk_ChequePropio.Checked = OrDefault(rowsoli.Item("CheqPropio_Chk"), 0) = 1
+                chk_ChequePropio.Checked = IIf(IsDBNull(rowsoli.Item("CheqPropio_Chk")), 0, rowsoli.Item("CheqPropio_Chk"))
 
                 'EN CASO DE QUE SEA EN DOLARES MULTIPLICAMOS EL VALOR POR LA PARIDAD
                 If WParidad <> 0 Then
@@ -249,12 +258,15 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
 
     Private Sub btn_Grabar_Click(sender As Object, e As EventArgs) Handles btn_Grabar.Click
         Dim SQLCnslt As String
-
+        Dim ValidacionesOk As Boolean = True
+        VALIDACIONES = ValidacionesOk
         '
         '    VALIDACIONES
         '
         If Trim(txt_FechaRequerida.Text.Replace("/", "")) <> "" Then
             If ValidaTiempoFecha(txt_FechaRequerida.Text) = "N" Then
+                ValidacionesOk = False
+                VALIDACIONES = ValidacionesOk
                 Exit Sub
             End If
         End If
@@ -262,6 +274,8 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
         Select Case cbx_Tipo.SelectedIndex
             Case 0
                 MsgBox("Debe seleccionar un tipo de solicitud", vbExclamation)
+                ValidacionesOk = False
+                VALIDACIONES = ValidacionesOk
                 Exit Sub
             Case 1
                 If Trim(txt_Proveedor.Text) <> "" Then
@@ -269,10 +283,14 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
                     Dim rowProveedor As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
                     If rowProveedor Is Nothing Then
                         MsgBox("El proveedor ingresado no es valido verificar", vbExclamation)
+                        ValidacionesOk = False
+                        VALIDACIONES = ValidacionesOk
                         Exit Sub
                     End If
                 Else
                     MsgBox("Debe ingresarse un proovedpr", vbExclamation)
+                    ValidacionesOk = False
+                    VALIDACIONES = ValidacionesOk
                     Exit Sub
                 End If
 
@@ -282,41 +300,57 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
                     Dim rowCuenta As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
                     If rowCuenta Is Nothing Then
                         MsgBox("La Cuenta ingresada no es valida verificar", vbExclamation)
+                        ValidacionesOk = False
+                        VALIDACIONES = ValidacionesOk
                         Exit Sub
                     End If
                 Else
                     MsgBox("Debe ingresarse una Cuenta", vbExclamation)
+                    ValidacionesOk = False
+                    VALIDACIONES = ValidacionesOk
                     Exit Sub
                 End If
         End Select
 
         If cbx_Moneda.SelectedIndex = 0 Then
             MsgBox("No se selecciono el tipo de moneda", vbExclamation)
+            ValidacionesOk = False
+            VALIDACIONES = ValidacionesOk
             Exit Sub
         End If
 
         If cbx_Moneda.SelectedIndex = 2 And cbx_TipoDolar.SelectedIndex = 0 Then
             MsgBox("No se selecciono el tipo de Dolar", vbExclamation)
+            ValidacionesOk = False
+            VALIDACIONES = ValidacionesOk
             Exit Sub
         End If
 
         If Val(txt_Importe.Text) = 0 Then
             MsgBox("No se puede generar una solicitud con un valor de importe igual a 0", vbExclamation)
+            ValidacionesOk = False
+            VALIDACIONES = ValidacionesOk
             Exit Sub
         End If
 
         If (chk_Efectivo.Checked = False And chk_Tranferencia.Checked = False And chk_Echeq.Checked = False And chk_ChequeTerceros.Checked = False) Then
             MsgBox("Se debe seleccionar al menos una forma de pago", vbExclamation)
+            ValidacionesOk = False
+            VALIDACIONES = ValidacionesOk
             Exit Sub
         End If
 
         If Trim(txt_Titulo.Text) = "" Then
             MsgBox("Se debe ingresar un Titulo", vbExclamation)
+            ValidacionesOk = False
+            VALIDACIONES = ValidacionesOk
             Exit Sub
         End If
 
         If Trim(txt_Concepto.Text) = "" Then
             MsgBox("Se debe ingresar un Detalle", vbExclamation)
+            ValidacionesOk = False
+            VALIDACIONES = ValidacionesOk
             Exit Sub
         End If
 
@@ -1255,6 +1289,10 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
 
         Dim listaAutorizar As New List(Of String)
         Dim SQLCnslt As String = ""
+
+        If VALIDACIONES = False Then
+            Exit Sub
+        End If
 
         SQLCnslt = "UPDATE SolicitudFondos SET Estado = 'AUTORIZO' WHERE NroSolicitud = '" & NRO_SOLICITUD & "'"
         listaAutorizar.Add(SQLCnslt)

@@ -35,6 +35,7 @@ Partial Class SeleccionarCarpetas
         Me.btn_Aceptar = New System.Windows.Forms.Button()
         Me.CANCELAR = New System.Windows.Forms.Button()
         Me.gbx_Carpetas = New System.Windows.Forms.GroupBox()
+        Me.chk_Despacho = New System.Windows.Forms.CheckBox()
         Me.Panel1.SuspendLayout()
         Me.gbx_Carpetas.SuspendLayout()
         Me.SuspendLayout()
@@ -144,7 +145,7 @@ Partial Class SeleccionarCarpetas
         '
         'btn_Aceptar
         '
-        Me.btn_Aceptar.Location = New System.Drawing.Point(41, 162)
+        Me.btn_Aceptar.Location = New System.Drawing.Point(41, 176)
         Me.btn_Aceptar.Name = "btn_Aceptar"
         Me.btn_Aceptar.Size = New System.Drawing.Size(75, 23)
         Me.btn_Aceptar.TabIndex = 71
@@ -153,7 +154,7 @@ Partial Class SeleccionarCarpetas
         '
         'CANCELAR
         '
-        Me.CANCELAR.Location = New System.Drawing.Point(135, 161)
+        Me.CANCELAR.Location = New System.Drawing.Point(135, 175)
         Me.CANCELAR.Name = "CANCELAR"
         Me.CANCELAR.Size = New System.Drawing.Size(75, 23)
         Me.CANCELAR.TabIndex = 72
@@ -162,6 +163,7 @@ Partial Class SeleccionarCarpetas
         '
         'gbx_Carpetas
         '
+        Me.gbx_Carpetas.Controls.Add(Me.chk_Despacho)
         Me.gbx_Carpetas.Controls.Add(Me.chk_General)
         Me.gbx_Carpetas.Controls.Add(Me.chk_Proforma)
         Me.gbx_Carpetas.Controls.Add(Me.chk_SIMI)
@@ -172,16 +174,26 @@ Partial Class SeleccionarCarpetas
         Me.gbx_Carpetas.Controls.Add(Me.chk_COAS)
         Me.gbx_Carpetas.Location = New System.Drawing.Point(14, 38)
         Me.gbx_Carpetas.Name = "gbx_Carpetas"
-        Me.gbx_Carpetas.Size = New System.Drawing.Size(217, 119)
+        Me.gbx_Carpetas.Size = New System.Drawing.Size(217, 132)
         Me.gbx_Carpetas.TabIndex = 73
         Me.gbx_Carpetas.TabStop = False
         Me.gbx_Carpetas.Text = "GroupBox1"
+        '
+        'chk_Despacho
+        '
+        Me.chk_Despacho.AutoSize = True
+        Me.chk_Despacho.Location = New System.Drawing.Point(71, 113)
+        Me.chk_Despacho.Name = "chk_Despacho"
+        Me.chk_Despacho.Size = New System.Drawing.Size(75, 17)
+        Me.chk_Despacho.TabIndex = 71
+        Me.chk_Despacho.Text = "Despacho"
+        Me.chk_Despacho.UseVisualStyleBackColor = True
         '
         'SeleccionarCarpetas
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(245, 190)
+        Me.ClientSize = New System.Drawing.Size(245, 204)
         Me.Controls.Add(Me.gbx_Carpetas)
         Me.Controls.Add(Me.CANCELAR)
         Me.Controls.Add(Me.btn_Aceptar)
@@ -207,4 +219,5 @@ Partial Class SeleccionarCarpetas
     Friend WithEvents btn_Aceptar As System.Windows.Forms.Button
     Friend WithEvents CANCELAR As System.Windows.Forms.Button
     Friend WithEvents gbx_Carpetas As System.Windows.Forms.GroupBox
+    Friend WithEvents chk_Despacho As System.Windows.Forms.CheckBox
 End Class

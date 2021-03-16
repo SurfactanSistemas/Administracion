@@ -29,6 +29,9 @@ Public Class Gestion_Solicitudes : Implements IActualizaSolicitudes, IContraseñ
             Dim tablaSoli As DataTable = GetAll(SQLCnslt, "SurfactanSa")
             If tablaSoli.Rows.Count > 0 Then
                 DGV_Solicitudes.DataSource = tablaSoli
+            Else
+                tablaSoli = New DBAuxi.GrillaGestorDataTable()
+                DGV_Solicitudes.DataSource = tablaSoli
             End If
 
 
@@ -441,5 +444,13 @@ Public Class Gestion_Solicitudes : Implements IActualizaSolicitudes, IContraseñ
                 .Show(Me)
             End With
         End If
+    End Sub
+
+    Private Sub DGV_Solicitudes_Sorted(sender As Object, e As EventArgs) Handles DGV_Solicitudes.Sorted
+        PintarAutorizadosRechazados()
+    End Sub
+
+    Private Sub btn_ActualizarGrilla_Click(sender As Object, e As EventArgs) Handles btn_ActualizarGrilla.Click
+        ActualizaGrilla()
     End Sub
 End Class

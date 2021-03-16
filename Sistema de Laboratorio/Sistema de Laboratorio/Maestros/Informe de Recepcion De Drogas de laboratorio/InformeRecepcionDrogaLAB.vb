@@ -329,7 +329,7 @@
                     Dim SQLCnslt As String = "SELECT Tipo FROM Orden WHERE Orden = '" & txtOrdenCompra.Text & "'"
                     Dim roworden As DataRow = GetSingle(SQLCnslt)
                     If roworden IsNot Nothing Then
-                        TipoOrden = roworden.Item("Tipo")
+                        TipoOrden = IIf(IsDBNull(roworden.Item("Tipo")), 0, roworden.Item("Tipo"))
                     End If
                     Dim auxiliar As String = txtOrdenCompra.Text
                     _LimpiarForm()

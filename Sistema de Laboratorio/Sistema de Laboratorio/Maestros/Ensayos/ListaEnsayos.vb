@@ -59,7 +59,7 @@ Public Class ListaEnsayos : Implements IActualizarPorNuevoIngreso, IListarReport
     End Sub
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
-        With New IngresoEnsayos
+        With New IngresoEnsayos(0, PermisoGrabar)
             .Show(Me)
         End With
     End Sub

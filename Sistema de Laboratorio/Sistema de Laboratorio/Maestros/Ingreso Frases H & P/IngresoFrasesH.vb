@@ -90,7 +90,7 @@
     End Sub
 
     Private Sub btnAgregarFrase_Click(sender As Object, e As EventArgs) Handles btnAgregarFrase.Click
-        With New CargaDatosFrases(FRASE)
+        With New CargaDatosFrases(FRASE, "", "", "", PermisoGrabar)
             .Show(Me)
         End With
     End Sub

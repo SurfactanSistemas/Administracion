@@ -44,6 +44,8 @@
                             VectorChk(contador) = RutaBase & "\BL"
                         Case "chk_INVOICE"
                             VectorChk(contador) = RutaBase & "\INVOICE"
+                        Case "chk_Despacho"
+                            VectorChk(contador) = RutaBase & "\Despacho"
                     End Select
                     contador += 1
                 End If

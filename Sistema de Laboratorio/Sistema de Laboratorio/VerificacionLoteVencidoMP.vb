@@ -337,10 +337,11 @@ Public Class VerificacionLoteVencidoMP
 
             Dim NroAjuste As Integer
             Dim SQLCnslt As String
-            SQLCnslt = "Select MAX(Codigo), Codigo FROM Movvar"
+            SQLCnslt = "Select MAX(Codigo) as Codigo FROM Movvar"
 
             Dim Fila As DataRow = GetSingle(SQLCnslt, _AQueEmpresa(Empresa))
-            If Fila.Item("Codigo") <> "" Then
+            'If Fila.Item("Codigo") <> "" Then
+            If Fila IsNot Nothing Then
                 NroAjuste = Fila.Item("Codigo") + 1
             Else
                 NroAjuste = 1
@@ -428,10 +429,10 @@ Public Class VerificacionLoteVencidoMP
                         tabla = GetAll(SQLCnslt, _AQueEmpresa(Empresa))
 
                         If tabla.Rows.Count > 0 Then
-                            GClave = tabla.Rows(0).Item("Clave")
+                            GClave = Trim(tabla.Rows(0).Item("Clave"))
                             GSaldo = (tabla.Rows(0).Item("Saldo") - cantidad).ToString()
 
-                            SQLCnslt = "UPDATE Guia SET Clave = '" & GClave & "', WDate = '" & GDate & "', Saldo = '" & GSaldo & "' WHERE Clave = '" & GClave & "'"
+                            SQLCnslt = "UPDATE Guia SET Clave = '" & GClave & "', WDate = '" & GDate & "', Saldo = '" & formatonumerico(GSaldo) & "' WHERE Clave = '" & GClave & "'"
                             ExecuteNonQueries(_AQueEmpresa(Empresa), (SQLCnslt))
                         End If
                     End If

@@ -184,4 +184,8 @@ Public Class AutoGestionSolicitudes
         End With
 
     End Sub
+
+    Private Sub DGV_Solicitudes_Sorted(sender As Object, e As EventArgs) Handles DGV_Solicitudes.Sorted
+        PintarAutorizadosRechazados()
+    End Sub
 End Class

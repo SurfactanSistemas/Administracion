@@ -65,6 +65,8 @@ Partial Class EditorArchivos
         Me.btn_Cancelar = New System.Windows.Forms.Button()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.Img_Despacho = New System.Windows.Forms.Button()
+        Me.rbn_Despacho = New System.Windows.Forms.RadioButton()
         CType(Me.dgvArchivos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -238,6 +240,8 @@ Partial Class EditorArchivos
         '
         'gbx_Carpetas
         '
+        Me.gbx_Carpetas.Controls.Add(Me.Img_Despacho)
+        Me.gbx_Carpetas.Controls.Add(Me.rbn_Despacho)
         Me.gbx_Carpetas.Controls.Add(Me.lbl_CarpetasCompletas)
         Me.gbx_Carpetas.Controls.Add(Me.Img_INVOIS)
         Me.gbx_Carpetas.Controls.Add(Me.Img_BL)
@@ -502,6 +506,28 @@ Partial Class EditorArchivos
         Me.Label5.TabIndex = 2
         Me.Label5.Text = "Ingrese Nuevo Nombre"
         '
+        'Img_Despacho
+        '
+        Me.Img_Despacho.BackgroundImage = CType(resources.GetObject("Img_Despacho.BackgroundImage"), System.Drawing.Image)
+        Me.Img_Despacho.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Img_Despacho.Enabled = False
+        Me.Img_Despacho.Location = New System.Drawing.Point(605, 38)
+        Me.Img_Despacho.Name = "Img_Despacho"
+        Me.Img_Despacho.Size = New System.Drawing.Size(21, 20)
+        Me.Img_Despacho.TabIndex = 26
+        Me.Img_Despacho.UseVisualStyleBackColor = True
+        Me.Img_Despacho.Visible = False
+        '
+        'rbn_Despacho
+        '
+        Me.rbn_Despacho.AutoSize = True
+        Me.rbn_Despacho.Location = New System.Drawing.Point(508, 42)
+        Me.rbn_Despacho.Name = "rbn_Despacho"
+        Me.rbn_Despacho.Size = New System.Drawing.Size(95, 17)
+        Me.rbn_Despacho.TabIndex = 25
+        Me.rbn_Despacho.Text = "(00) Despacho"
+        Me.rbn_Despacho.UseVisualStyleBackColor = True
+        '
         'EditorArchivos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -573,4 +599,6 @@ Partial Class EditorArchivos
     Friend WithEvents btn_Cancelar As System.Windows.Forms.Button
     Friend WithEvents Panel3 As System.Windows.Forms.Panel
     Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents Img_Despacho As System.Windows.Forms.Button
+    Friend WithEvents rbn_Despacho As System.Windows.Forms.RadioButton
 End Class

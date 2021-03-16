@@ -1,6 +1,15 @@
-﻿Imports Util.Clases.Helper
+﻿Imports System.Globalization
+Imports Util.Clases.Helper
 Imports Util.Clases.Query
+Imports System.IO
+Imports System.Text.RegularExpressions
+Imports Microsoft.VisualBasic.FileIO
+
+
+
 Public Class CargadorDeTxt
+
+    Dim DragActivo As Boolean = False
 
     Sub New()
 
@@ -12,24 +21,37 @@ Public Class CargadorDeTxt
 
     End Sub
 
-    Private Sub CargadorDeTxt_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        txt_Archivo.Text = "C:\Users\soporte3\Desktop\lucas91000075943309202012181152518740000251841507314ConsultaChequesRecibidos.txt"
-    End Sub
+
 
     Private Sub btn_ObtenerDatos_Click(sender As Object, e As EventArgs) Handles btn_ObtenerDatos.Click
-        If Trim(txt_Archivo.Text) <> "" Then
-            Dim Tabla = txt_A_Datatable(txt_Archivo.Text, True, ";")
-
-            RemoverDatosInesesarios(Tabla)
-
-            Dim ChequesAgregar As DataTable = ListaFiltrada(Tabla)
-
-            ' With ChequesAgregar.Columns
-            '     .Add("chk")
-            ' End With
-
-            dgv_Cheques.DataSource = Tabla
+        Dim tablafinal As DataTable
+        Dim Primera As Integer = 1
+        If DGV_RutasArchivos.Rows.Count > 0 Then
+            For Each row As DataGridViewRow In DGV_RutasArchivos.Rows
+                If Primera = 1 Then
+                    tablafinal = txt_A_Datatable(row.Cells("Rutas").Value, True, ";")
+                    RemoverDatosInesesarios(tablafinal)
+                    Primera += 1
+                Else
+                    Dim Tabla = txt_A_Datatable(row.Cells("Rutas").Value, True, ";")
+                    RemoverDatosInesesarios(Tabla)
+                    For Each rowTabla As DataRow In Tabla.Rows
+                        tablafinal.ImportRow(rowTabla)
+                    Next
+                End If
+                
+            Next
+            dgv_Cheques.DataSource = tablafinal
         End If
+
+        If dgv_Cheques.Columns("Monto") IsNot Nothing Then
+            dgv_Cheques.Columns("Monto").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            For Each rowCheques As DataGridViewRow In dgv_Cheques.Rows
+                rowCheques.Cells("monto").Value = formatonumerico(rowCheques.Cells("monto").Value)
+            Next
+        End If
+
+
     End Sub
 
 
@@ -55,11 +77,11 @@ Public Class CargadorDeTxt
             Dim WBancoEmisor As String = rowTabla.Item(1)
             Dim AuxFechaPago As Date = rowTabla.Item(2)
             Dim WFechaPago As String = AuxFechaPago.ToString("dd/MM/yyyy")
-            Dim WOrdFechaPago As String = ordenafecha(WFechaPago)
+            Dim WOrdFechaPago As String = ordenaFecha(WFechaPago)
             Dim WCuitEmisor As String = rowTabla.Item(3)
             Dim AuxFechaEmision As Date = rowTabla.Item(4)
             Dim WFechaEmision As String = AuxFechaEmision.ToString("dd/MM/yyyy")
-            Dim WOrdFechaEmision As String = ordenafecha(WFechaEmision)
+            Dim WOrdFechaEmision As String = ordenaFecha(WFechaEmision)
             Dim WCaracterCheque As String = rowTabla.Item(5)
             Dim WModoCheque As String = rowTabla.Item(6)
             Dim WCuitEndoso As String = rowTabla.Item(7)
@@ -73,7 +95,7 @@ Public Class CargadorDeTxt
 
     Private Sub RemoverDatosInesesarios(ByRef Tabla As DataTable)
         For i As Integer = 40 To 0 Step -1
-            If i = 1 Or i = 2 Or i = 5 Or i = 6 Or i = 7 Or i = 10 Or i = 20 Or i = 23 Or i = 24 Then
+            If i = 1 Or i = 2 Or i = 4 Or i = 5 Or i = 6 Or i = 7 Or i = 10 Or i = 20 Or i = 23 Or i = 24 Then
                 Continue For
             End If
             Tabla.Columns.RemoveAt(i)
@@ -152,4 +174,60 @@ Public Class CargadorDeTxt
 
 
 
+    Private Sub txt_Archivo_DragDrop(sender As Object, e As DragEventArgs) Handles DGV_RutasArchivos.DragDrop
+        _ProcesarDragDeArchivo(e)
+    End Sub
+
+    Friend Function _ProcesarDragDeArchivo(ByVal e As System.Windows.Forms.DragEventArgs) As String
+
+        Try
+            If e.Data.GetDataPresent(DataFormats.FileDrop) Then
+                Dim archivos() As String = e.Data.GetData(DataFormats.FileDrop)
+                'CAMBIAMOS LA BANDERA PARA SABER QUE ESTAMOS ARRASTRANDO UN ARCHIVO
+                DragActivo = True
+
+                For Each archivo In archivos
+                    DGV_RutasArchivos.Rows.Add(archivo)
+                Next
+
+
+                'With New SeleccionarCarpetas(WPath, True, archivos)
+                '    .Show(Me)
+                'End With
+                DragActivo = True
+                '_SubirArchvios(archivos)
+
+                ' We have a file so lets pass it to the calling form
+                ' Dim Filename As String() = CType(e.Data.GetData(DataFormats.FileDrop), String())
+                ' HandleFileDrops = Filename(0)
+
+            End If
+        Catch ex As System.Exception
+            MsgBox("No se puede copiar el archivo desde la memoria.Por favor guarde el archivo en su equipo y luego arrastrelo al sistema.", "Error ")
+            _ProcesarDragDeArchivo = String.Empty
+        Finally
+            TopMost = False
+        End Try
+
+    End Function
+
+    Private Sub txt_Archivo_DragEnter(sender As Object, e As DragEventArgs) Handles DGV_RutasArchivos.DragEnter
+        _PermitirDrag(e)
+    End Sub
+    Private Sub _PermitirDrag(ByVal e As DragEventArgs)
+        If e.Data.GetDataPresent(DataFormats.FileDrop) Then
+            e.Effect = DragDropEffects.Copy
+        End If
+
+        ' Make sure that the format is a file drop.
+
+        If (e.Data.GetDataPresent("FileGroupDescriptor")) Then
+            e.Effect = DragDropEffects.Copy
+        End If
+
+    End Sub
+
+    Private Sub txt_Archivo_DragLeave(sender As Object, e As EventArgs) Handles DGV_RutasArchivos.DragLeave
+        TopMost = False
+    End Sub
 End Class

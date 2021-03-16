@@ -78,7 +78,7 @@ Partial Class MenuPrincipal
         '
         'MaestrosToolStripMenuItem_34
         '
-        Me.MaestrosToolStripMenuItem_34.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.menu_01, Me.IngresoFormulasDeEnsayosToolStripMenuItem_02, Me.menu_03, Me.ProductosTerminadosToolStripMenuItem_13, Me.FHToolStripMenuItem_24, Me.DatosAdicionalesToolStripMenuItem_27, Me.EmisionDeEtiquetasToolStripMenuItem_30, Me.InformeDeRecepcionDeDrogaDeLaboratorioToolStripMenuItem_31, Me.MovimientosVariosDeLaboratorioToolStripMenuItem_32, Me.IngresoYActualizacionDeHojaDeProduccionToolStripMenuItem_33})
+        Me.MaestrosToolStripMenuItem_34.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.menu_01, Me.IngresoFormulasDeEnsayosToolStripMenuItem_02, Me.menu_03, Me.ProductosTerminadosToolStripMenuItem_13, Me.FHToolStripMenuItem_24, Me.DatosAdicionalesToolStripMenuItem_27, Me.EmisionDeEtiquetasToolStripMenuItem_30, Me.MovimientosVariosDeLaboratorioToolStripMenuItem_32, Me.InformeDeRecepcionDeDrogaDeLaboratorioToolStripMenuItem_31, Me.IngresoYActualizacionDeHojaDeProduccionToolStripMenuItem_33})
         Me.MaestrosToolStripMenuItem_34.Name = "MaestrosToolStripMenuItem_34"
         Me.MaestrosToolStripMenuItem_34.Size = New System.Drawing.Size(67, 20)
         Me.MaestrosToolStripMenuItem_34.Text = "Maestros"

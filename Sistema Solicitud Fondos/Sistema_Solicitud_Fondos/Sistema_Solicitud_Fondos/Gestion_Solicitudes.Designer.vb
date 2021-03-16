@@ -57,6 +57,7 @@ Partial Class Gestion_Solicitudes
         Me.Estado = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btn_Autorizar = New System.Windows.Forms.Button()
         Me.btn_Eliminar = New System.Windows.Forms.Button()
+        Me.btn_ActualizarGrilla = New System.Windows.Forms.Button()
         Me.panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         CType(Me.DGV_Solicitudes, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -163,9 +164,9 @@ Partial Class Gestion_Solicitudes
         '
         'txt_Filtro
         '
-        Me.txt_Filtro.Location = New System.Drawing.Point(365, 85)
+        Me.txt_Filtro.Location = New System.Drawing.Point(452, 85)
         Me.txt_Filtro.Name = "txt_Filtro"
-        Me.txt_Filtro.Size = New System.Drawing.Size(538, 20)
+        Me.txt_Filtro.Size = New System.Drawing.Size(451, 20)
         Me.txt_Filtro.TabIndex = 9
         '
         'btn_Cerrar
@@ -180,7 +181,7 @@ Partial Class Gestion_Solicitudes
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(365, 63)
+        Me.Label3.Location = New System.Drawing.Point(452, 70)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(29, 13)
         Me.Label3.TabIndex = 11
@@ -401,11 +402,21 @@ Partial Class Gestion_Solicitudes
         Me.btn_Eliminar.Text = "ELIMINAR MARCADOS"
         Me.btn_Eliminar.UseVisualStyleBackColor = True
         '
+        'btn_ActualizarGrilla
+        '
+        Me.btn_ActualizarGrilla.Location = New System.Drawing.Point(360, 48)
+        Me.btn_ActualizarGrilla.Name = "btn_ActualizarGrilla"
+        Me.btn_ActualizarGrilla.Size = New System.Drawing.Size(86, 57)
+        Me.btn_ActualizarGrilla.TabIndex = 19
+        Me.btn_ActualizarGrilla.Text = "ACTUALIZAR GRILLA"
+        Me.btn_ActualizarGrilla.UseVisualStyleBackColor = True
+        '
         'Gestion_Solicitudes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(915, 473)
+        Me.Controls.Add(Me.btn_ActualizarGrilla)
         Me.Controls.Add(Me.btn_Eliminar)
         Me.Controls.Add(Me.btn_Autorizar)
         Me.Controls.Add(Me.btn_ImprimeListado)
@@ -462,4 +473,5 @@ Partial Class Gestion_Solicitudes
     Friend WithEvents OrdFechaRequerida As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Estado As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents btn_Eliminar As System.Windows.Forms.Button
+    Friend WithEvents btn_ActualizarGrilla As System.Windows.Forms.Button
 End Class

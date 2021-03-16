@@ -107,7 +107,7 @@ Public Class EditorArchivos : Implements SelectorCarpetas
 
         Dim Nombre_Para_rbn As String
         Dim CantidadArchivos As Integer
-        For i = 0 To 7
+        For i = 0 To 8
             Select Case i
                 Case 0
                     CantidadArchivos = 0
@@ -222,6 +222,20 @@ Public Class EditorArchivos : Implements SelectorCarpetas
                     Nombre_Para_rbn = "(" & (CantidadArchivos).ToString.PadLeft(2, "0") & ") INVOICE"
                     rbn_INVOIS.Text = Nombre_Para_rbn
                     'cmb_Carpeta.Items.Add(_item)
+                Case 8
+                    CantidadArchivos = 0
+                    For Each Archivo As String In Directory.GetFiles(WPath & "\Despacho")
+                        CantidadArchivos += 1
+                    Next
+                    If CantidadArchivos > 0 Then
+                        Img_Despacho.Visible = True
+                    Else
+                        Img_Despacho.Visible = False
+                        MostrarMensaje = False
+                    End If
+                    Nombre_Para_rbn = "(" & (CantidadArchivos).ToString.PadLeft(2, "0") & ") Despacho"
+                    rbn_Despacho.Text = Nombre_Para_rbn
+                    'cmb_Carpeta.Items.Add(_item)
 
             End Select
         Next
@@ -268,6 +282,10 @@ Public Class EditorArchivos : Implements SelectorCarpetas
                 Case 6
                     If Not Directory.Exists(WPath & "\INVOICE") Then
                         Directory.CreateDirectory(WPath & "\INVOICE")
+                    End If
+                Case 7
+                    If Not Directory.Exists(WPath & "\Despacho") Then
+                        Directory.CreateDirectory(WPath & "\Despacho")
                     End If
             End Select
         Next
@@ -322,9 +340,16 @@ Public Class EditorArchivos : Implements SelectorCarpetas
                 'CAMBIAMOS LA BANDERA PARA SABER QUE ESTAMOS ARRASTRANDO UN ARCHIVO
                 DragActivo = True
                 'LLAMAMOS A LA VENTAN PARA QUE DIGA A QUE CARPETAS COPIAR
-                With New SeleccionarCarpetas(WPath, True, archivos)
-                    .Show(Me)
-                End With
+                If WAccion = 3 Then
+                    With New SeleccionarCarpetas(WPath, True, archivos)
+                        .Show(Me)
+                    End With
+                Else
+                    _SubirArchvios(archivos)
+                End If
+                'With New SeleccionarCarpetas(WPath, True, archivos)
+                '    .Show(Me)
+                'End With
                 DragActivo = True
                 '_SubirArchvios(archivos)
 
@@ -353,8 +378,7 @@ Public Class EditorArchivos : Implements SelectorCarpetas
                 Dim NombreArchivo As String = fileName.ToString()
                 NombreArchivo = Regex.Replace(NombreArchivo, "[^\w\s\-]", "")
 
-
-
+                
                 Dim Extencion As String = obtenerExtencion(fileName.ToString())
                 removerExtencion(NombreArchivo, Extencion)
                 Dim myTempFile As String = "C:\Temporales\" & NombreArchivo & Extencion
@@ -817,6 +841,8 @@ Public Class EditorArchivos : Implements SelectorCarpetas
                             RutaCarpeta = WPath & "\BL"
                         Case "rbn_INVOIS"
                             RutaCarpeta = WPath & "\INVOICE"
+                        Case "rbn_Despacho"
+                            RutaCarpeta = WPath & "\Despacho"
                     End Select
                     Return RutaCarpeta
                 End If
@@ -923,7 +949,7 @@ Public Class EditorArchivos : Implements SelectorCarpetas
     ' End Sub
 
 
-    Private Sub rbn_General_Click(sender As Object, e As EventArgs) Handles rbn_General.Click, rbn_Proforma.Click, rbn_SIMI.Click, rbn_PackingList.Click, rbn_OrdenDeCompra.Click, rbn_INVOIS.Click, rbn_COAS.Click, rbn_BL.Click
+    Private Sub rbn_General_Click(sender As Object, e As EventArgs) Handles rbn_General.Click, rbn_Proforma.Click, rbn_SIMI.Click, rbn_PackingList.Click, rbn_OrdenDeCompra.Click, rbn_INVOIS.Click, rbn_COAS.Click, rbn_BL.Click, rbn_Despacho.Click
         _CargarArchivosRelacionados()
     End Sub
 

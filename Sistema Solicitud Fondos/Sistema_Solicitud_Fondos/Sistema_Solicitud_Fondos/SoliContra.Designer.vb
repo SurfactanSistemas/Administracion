@@ -27,6 +27,7 @@ Partial Class SoliContra
         Me.label1 = New System.Windows.Forms.Label()
         Me.txt_Contraseña = New System.Windows.Forms.TextBox()
         Me.btn_Cancelar = New System.Windows.Forms.Button()
+        Me.btn_Aceptar = New System.Windows.Forms.Button()
         Me.panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -75,18 +76,28 @@ Partial Class SoliContra
         '
         'btn_Cancelar
         '
-        Me.btn_Cancelar.Location = New System.Drawing.Point(110, 77)
+        Me.btn_Cancelar.Location = New System.Drawing.Point(161, 77)
         Me.btn_Cancelar.Name = "btn_Cancelar"
         Me.btn_Cancelar.Size = New System.Drawing.Size(75, 38)
         Me.btn_Cancelar.TabIndex = 9
         Me.btn_Cancelar.Text = "CANCELAR"
         Me.btn_Cancelar.UseVisualStyleBackColor = True
         '
+        'btn_Aceptar
+        '
+        Me.btn_Aceptar.Location = New System.Drawing.Point(57, 77)
+        Me.btn_Aceptar.Name = "btn_Aceptar"
+        Me.btn_Aceptar.Size = New System.Drawing.Size(75, 38)
+        Me.btn_Aceptar.TabIndex = 10
+        Me.btn_Aceptar.Text = "ACEPTAR"
+        Me.btn_Aceptar.UseVisualStyleBackColor = True
+        '
         'SoliContra
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(296, 128)
+        Me.Controls.Add(Me.btn_Aceptar)
         Me.Controls.Add(Me.btn_Cancelar)
         Me.Controls.Add(Me.txt_Contraseña)
         Me.Controls.Add(Me.panel1)
@@ -103,4 +114,5 @@ Partial Class SoliContra
     Private WithEvents label1 As System.Windows.Forms.Label
     Friend WithEvents txt_Contraseña As System.Windows.Forms.TextBox
     Friend WithEvents btn_Cancelar As System.Windows.Forms.Button
+    Friend WithEvents btn_Aceptar As System.Windows.Forms.Button
 End Class

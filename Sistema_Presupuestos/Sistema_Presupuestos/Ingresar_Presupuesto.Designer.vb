@@ -30,17 +30,22 @@ Partial Class Ingresar_Presupuesto
         Me.txt_Descrip_Prov = New System.Windows.Forms.TextBox()
         Me.txt_Monto = New System.Windows.Forms.TextBox()
         Me.txt_Codigo_Prov = New System.Windows.Forms.TextBox()
-        Me.TextBox6 = New System.Windows.Forms.TextBox()
+        Me.txt_NroPresupuesto = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.MaskedTextBox1 = New System.Windows.Forms.MaskedTextBox()
+        Me.txt_Fecha = New System.Windows.Forms.MaskedTextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.txt_FormaPago = New System.Windows.Forms.TextBox()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.btn_Adjuntar = New System.Windows.Forms.Button()
+        Me.btn_CerrarPresupuesto = New System.Windows.Forms.Button()
         Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.btn_Grabar = New System.Windows.Forms.Button()
+        Me.cbx_Moneda = New System.Windows.Forms.ComboBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.btn_Cerrar = New System.Windows.Forms.Button()
         Me.panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -81,7 +86,7 @@ Partial Class Ingresar_Presupuesto
         '
         'txt_Titulo
         '
-        Me.txt_Titulo.Location = New System.Drawing.Point(87, 78)
+        Me.txt_Titulo.Location = New System.Drawing.Point(92, 106)
         Me.txt_Titulo.MaxLength = 50
         Me.txt_Titulo.Name = "txt_Titulo"
         Me.txt_Titulo.Size = New System.Drawing.Size(366, 20)
@@ -89,8 +94,8 @@ Partial Class Ingresar_Presupuesto
         '
         'txt_Descripcion
         '
-        Me.txt_Descripcion.Location = New System.Drawing.Point(87, 104)
-        Me.txt_Descripcion.MaxLength = 300
+        Me.txt_Descripcion.Location = New System.Drawing.Point(92, 132)
+        Me.txt_Descripcion.MaxLength = 500
         Me.txt_Descripcion.Multiline = True
         Me.txt_Descripcion.Name = "txt_Descripcion"
         Me.txt_Descripcion.Size = New System.Drawing.Size(366, 89)
@@ -99,37 +104,39 @@ Partial Class Ingresar_Presupuesto
         'txt_Descrip_Prov
         '
         Me.txt_Descrip_Prov.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txt_Descrip_Prov.Location = New System.Drawing.Point(167, 46)
+        Me.txt_Descrip_Prov.Location = New System.Drawing.Point(185, 74)
         Me.txt_Descrip_Prov.Name = "txt_Descrip_Prov"
         Me.txt_Descrip_Prov.ReadOnly = True
-        Me.txt_Descrip_Prov.Size = New System.Drawing.Size(195, 20)
+        Me.txt_Descrip_Prov.Size = New System.Drawing.Size(273, 20)
         Me.txt_Descrip_Prov.TabIndex = 11
         '
         'txt_Monto
         '
-        Me.txt_Monto.Location = New System.Drawing.Point(87, 240)
+        Me.txt_Monto.Location = New System.Drawing.Point(92, 259)
+        Me.txt_Monto.MaxLength = 20
         Me.txt_Monto.Name = "txt_Monto"
         Me.txt_Monto.Size = New System.Drawing.Size(100, 20)
         Me.txt_Monto.TabIndex = 12
         '
         'txt_Codigo_Prov
         '
-        Me.txt_Codigo_Prov.Location = New System.Drawing.Point(87, 46)
+        Me.txt_Codigo_Prov.Location = New System.Drawing.Point(92, 74)
         Me.txt_Codigo_Prov.Name = "txt_Codigo_Prov"
-        Me.txt_Codigo_Prov.Size = New System.Drawing.Size(74, 20)
+        Me.txt_Codigo_Prov.Size = New System.Drawing.Size(87, 20)
         Me.txt_Codigo_Prov.TabIndex = 13
         '
-        'TextBox6
+        'txt_NroPresupuesto
         '
-        Me.TextBox6.Location = New System.Drawing.Point(131, 309)
-        Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.Size = New System.Drawing.Size(100, 20)
-        Me.TextBox6.TabIndex = 14
+        Me.txt_NroPresupuesto.Location = New System.Drawing.Point(92, 46)
+        Me.txt_NroPresupuesto.Name = "txt_NroPresupuesto"
+        Me.txt_NroPresupuesto.ReadOnly = True
+        Me.txt_NroPresupuesto.Size = New System.Drawing.Size(74, 20)
+        Me.txt_NroPresupuesto.TabIndex = 14
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(5, 81)
+        Me.Label3.Location = New System.Drawing.Point(1, 109)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(33, 13)
         Me.Label3.TabIndex = 15
@@ -138,26 +145,25 @@ Partial Class Ingresar_Presupuesto
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(5, 107)
+        Me.Label4.Location = New System.Drawing.Point(1, 135)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(63, 13)
         Me.Label4.TabIndex = 16
         Me.Label4.Text = "Descripcion"
         '
-        'MaskedTextBox1
+        'txt_Fecha
         '
-        Me.MaskedTextBox1.Location = New System.Drawing.Point(422, 46)
-        Me.MaskedTextBox1.Mask = "00/00/0000"
-        Me.MaskedTextBox1.Name = "MaskedTextBox1"
-        Me.MaskedTextBox1.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.MaskedTextBox1.Size = New System.Drawing.Size(68, 20)
-        Me.MaskedTextBox1.TabIndex = 17
-        Me.MaskedTextBox1.Text = "77777777"
+        Me.txt_Fecha.Location = New System.Drawing.Point(390, 48)
+        Me.txt_Fecha.Mask = "00/00/0000"
+        Me.txt_Fecha.Name = "txt_Fecha"
+        Me.txt_Fecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txt_Fecha.Size = New System.Drawing.Size(68, 20)
+        Me.txt_Fecha.TabIndex = 17
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(5, 49)
+        Me.Label5.Location = New System.Drawing.Point(1, 77)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(56, 13)
         Me.Label5.TabIndex = 18
@@ -166,7 +172,7 @@ Partial Class Ingresar_Presupuesto
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(383, 49)
+        Me.Label6.Location = New System.Drawing.Point(351, 51)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(37, 13)
         Me.Label6.TabIndex = 19
@@ -175,7 +181,7 @@ Partial Class Ingresar_Presupuesto
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(5, 204)
+        Me.Label7.Location = New System.Drawing.Point(1, 232)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(79, 13)
         Me.Label7.TabIndex = 20
@@ -183,55 +189,106 @@ Partial Class Ingresar_Presupuesto
         '
         'txt_FormaPago
         '
-        Me.txt_FormaPago.Location = New System.Drawing.Point(87, 201)
-        Me.txt_FormaPago.MaxLength = 50
+        Me.txt_FormaPago.Location = New System.Drawing.Point(92, 229)
+        Me.txt_FormaPago.MaxLength = 100
         Me.txt_FormaPago.Name = "txt_FormaPago"
         Me.txt_FormaPago.Size = New System.Drawing.Size(366, 20)
         Me.txt_FormaPago.TabIndex = 21
         '
-        'Button1
+        'btn_Adjuntar
         '
-        Me.Button1.Location = New System.Drawing.Point(459, 78)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 35)
-        Me.Button1.TabIndex = 22
-        Me.Button1.Text = "   Adjuntar " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Documentos"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btn_Adjuntar.Location = New System.Drawing.Point(464, 61)
+        Me.btn_Adjuntar.Name = "btn_Adjuntar"
+        Me.btn_Adjuntar.Size = New System.Drawing.Size(75, 44)
+        Me.btn_Adjuntar.TabIndex = 22
+        Me.btn_Adjuntar.Text = "   Adjuntar " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Documentos"
+        Me.btn_Adjuntar.UseVisualStyleBackColor = True
         '
-        'Button2
+        'btn_CerrarPresupuesto
         '
-        Me.Button2.Location = New System.Drawing.Point(460, 120)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 38)
-        Me.Button2.TabIndex = 23
-        Me.Button2.Text = "Cerrar Presupuesto"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.btn_CerrarPresupuesto.Location = New System.Drawing.Point(464, 111)
+        Me.btn_CerrarPresupuesto.Name = "btn_CerrarPresupuesto"
+        Me.btn_CerrarPresupuesto.Size = New System.Drawing.Size(75, 44)
+        Me.btn_CerrarPresupuesto.TabIndex = 23
+        Me.btn_CerrarPresupuesto.Text = "Cerrar Presupuesto"
+        Me.btn_CerrarPresupuesto.UseVisualStyleBackColor = True
         '
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(5, 243)
+        Me.Label8.Location = New System.Drawing.Point(1, 262)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(37, 13)
         Me.Label8.TabIndex = 24
         Me.Label8.Text = "Monto"
         '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(3, 49)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(89, 13)
+        Me.Label9.TabIndex = 25
+        Me.Label9.Text = "Nro. Presupuesto"
+        '
+        'btn_Grabar
+        '
+        Me.btn_Grabar.Location = New System.Drawing.Point(464, 161)
+        Me.btn_Grabar.Name = "btn_Grabar"
+        Me.btn_Grabar.Size = New System.Drawing.Size(75, 44)
+        Me.btn_Grabar.TabIndex = 26
+        Me.btn_Grabar.Text = "Grabar"
+        Me.btn_Grabar.UseVisualStyleBackColor = True
+        '
+        'cbx_Moneda
+        '
+        Me.cbx_Moneda.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbx_Moneda.FormattingEnabled = True
+        Me.cbx_Moneda.Items.AddRange(New Object() {"Pesos ($)", "Dolares (U$S)"})
+        Me.cbx_Moneda.Location = New System.Drawing.Point(272, 258)
+        Me.cbx_Moneda.Name = "cbx_Moneda"
+        Me.cbx_Moneda.Size = New System.Drawing.Size(121, 21)
+        Me.cbx_Moneda.TabIndex = 27
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(215, 261)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(46, 13)
+        Me.Label10.TabIndex = 28
+        Me.Label10.Text = "Moneda"
+        '
+        'btn_Cerrar
+        '
+        Me.btn_Cerrar.Location = New System.Drawing.Point(464, 211)
+        Me.btn_Cerrar.Name = "btn_Cerrar"
+        Me.btn_Cerrar.Size = New System.Drawing.Size(75, 44)
+        Me.btn_Cerrar.TabIndex = 29
+        Me.btn_Cerrar.Text = "Cerrar"
+        Me.btn_Cerrar.UseVisualStyleBackColor = True
+        '
         'Ingresar_Presupuesto
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(543, 340)
+        Me.ClientSize = New System.Drawing.Size(543, 288)
+        Me.Controls.Add(Me.btn_Cerrar)
+        Me.Controls.Add(Me.Label10)
+        Me.Controls.Add(Me.cbx_Moneda)
+        Me.Controls.Add(Me.btn_Grabar)
+        Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.Label8)
-        Me.Controls.Add(Me.Button2)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.btn_CerrarPresupuesto)
+        Me.Controls.Add(Me.btn_Adjuntar)
         Me.Controls.Add(Me.txt_FormaPago)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.MaskedTextBox1)
+        Me.Controls.Add(Me.txt_Fecha)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.TextBox6)
+        Me.Controls.Add(Me.txt_NroPresupuesto)
         Me.Controls.Add(Me.txt_Codigo_Prov)
         Me.Controls.Add(Me.txt_Monto)
         Me.Controls.Add(Me.txt_Descrip_Prov)
@@ -253,15 +310,20 @@ Partial Class Ingresar_Presupuesto
     Friend WithEvents txt_Descrip_Prov As System.Windows.Forms.TextBox
     Friend WithEvents txt_Monto As System.Windows.Forms.TextBox
     Friend WithEvents txt_Codigo_Prov As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox6 As System.Windows.Forms.TextBox
+    Friend WithEvents txt_NroPresupuesto As System.Windows.Forms.TextBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Label4 As System.Windows.Forms.Label
-    Friend WithEvents MaskedTextBox1 As System.Windows.Forms.MaskedTextBox
+    Friend WithEvents txt_Fecha As System.Windows.Forms.MaskedTextBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents txt_FormaPago As System.Windows.Forms.TextBox
-    Friend WithEvents Button1 As System.Windows.Forms.Button
-    Friend WithEvents Button2 As System.Windows.Forms.Button
+    Friend WithEvents btn_Adjuntar As System.Windows.Forms.Button
+    Friend WithEvents btn_CerrarPresupuesto As System.Windows.Forms.Button
     Friend WithEvents Label8 As System.Windows.Forms.Label
+    Friend WithEvents Label9 As System.Windows.Forms.Label
+    Friend WithEvents btn_Grabar As System.Windows.Forms.Button
+    Friend WithEvents cbx_Moneda As System.Windows.Forms.ComboBox
+    Friend WithEvents Label10 As System.Windows.Forms.Label
+    Friend WithEvents btn_Cerrar As System.Windows.Forms.Button
 End Class

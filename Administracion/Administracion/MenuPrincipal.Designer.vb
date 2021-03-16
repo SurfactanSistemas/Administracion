@@ -28,6 +28,7 @@ Partial Class MenuPrincipal
         Me.IngresoDeProveedoresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.IngresoDeBancosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.IngresoDeRubrosDeProveedoresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ConsultaTiposDeCambioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EnvioEnEMailAProveedoresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EnvioEnEMailAClientesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NovedadesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -102,7 +103,7 @@ Partial Class MenuPrincipal
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.btnCambio = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.ConsultaTiposDeCambioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ImportarEchequesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
@@ -147,6 +148,12 @@ Partial Class MenuPrincipal
         Me.IngresoDeRubrosDeProveedoresToolStripMenuItem.Size = New System.Drawing.Size(253, 22)
         Me.IngresoDeRubrosDeProveedoresToolStripMenuItem.Text = "Ingreso de Rubros de Proveedores"
         '
+        'ConsultaTiposDeCambioToolStripMenuItem
+        '
+        Me.ConsultaTiposDeCambioToolStripMenuItem.Name = "ConsultaTiposDeCambioToolStripMenuItem"
+        Me.ConsultaTiposDeCambioToolStripMenuItem.Size = New System.Drawing.Size(253, 22)
+        Me.ConsultaTiposDeCambioToolStripMenuItem.Text = "Consulta Tipos de Cambio"
+        '
         'EnvioEnEMailAProveedoresToolStripMenuItem
         '
         Me.EnvioEnEMailAProveedoresToolStripMenuItem.Name = "EnvioEnEMailAProveedoresToolStripMenuItem"
@@ -161,7 +168,7 @@ Partial Class MenuPrincipal
         '
         'NovedadesToolStripMenuItem
         '
-        Me.NovedadesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IngresoDeNovedadesToolStripMenuItem, Me.ConsultaDeRemitosToolStripMenuItem, Me.AplicacionDeCorpobantesToolStripMenuItem, Me.IngresoDePagosToolStripMenuItem, Me.DepositosToolStripMenuItem, Me.RecibosToolStripMenuItem, Me.ConsultaDeChequesToolStripMenuItem, Me.InteresesToolStripMenuItem, Me.SeleccionDeRecibosAAplicarDifverenciaDeCambioToolStripMenuItem, Me.IngresoDeProveedorAPagoSemanalToolStripMenuItem, Me.OrdenDePagoVirtualToolStripMenuItem, Me.SolicitudDeFondosToolStripMenuItem, Me.GestionarSolicitudDeFondosToolStripMenuItem})
+        Me.NovedadesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IngresoDeNovedadesToolStripMenuItem, Me.ConsultaDeRemitosToolStripMenuItem, Me.AplicacionDeCorpobantesToolStripMenuItem, Me.IngresoDePagosToolStripMenuItem, Me.DepositosToolStripMenuItem, Me.RecibosToolStripMenuItem, Me.ConsultaDeChequesToolStripMenuItem, Me.InteresesToolStripMenuItem, Me.SeleccionDeRecibosAAplicarDifverenciaDeCambioToolStripMenuItem, Me.IngresoDeProveedorAPagoSemanalToolStripMenuItem, Me.OrdenDePagoVirtualToolStripMenuItem, Me.SolicitudDeFondosToolStripMenuItem, Me.GestionarSolicitudDeFondosToolStripMenuItem, Me.ImportarEchequesToolStripMenuItem})
         Me.NovedadesToolStripMenuItem.Name = "NovedadesToolStripMenuItem"
         Me.NovedadesToolStripMenuItem.Size = New System.Drawing.Size(78, 20)
         Me.NovedadesToolStripMenuItem.Text = "Novedades"
@@ -621,11 +628,11 @@ Partial Class MenuPrincipal
         Me.Button1.UseVisualStyleBackColor = True
         Me.Button1.Visible = False
         '
-        'ConsultaTiposDeCambioToolStripMenuItem
+        'ImportarEchequesToolStripMenuItem
         '
-        Me.ConsultaTiposDeCambioToolStripMenuItem.Name = "ConsultaTiposDeCambioToolStripMenuItem"
-        Me.ConsultaTiposDeCambioToolStripMenuItem.Size = New System.Drawing.Size(253, 22)
-        Me.ConsultaTiposDeCambioToolStripMenuItem.Text = "Consulta Tipos de Cambio"
+        Me.ImportarEchequesToolStripMenuItem.Name = "ImportarEchequesToolStripMenuItem"
+        Me.ImportarEchequesToolStripMenuItem.Size = New System.Drawing.Size(350, 22)
+        Me.ImportarEchequesToolStripMenuItem.Text = "Importar E-cheques"
         '
         'MenuPrincipal
         '
@@ -728,4 +735,5 @@ Partial Class MenuPrincipal
     Friend WithEvents SolicitudDeFondosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents GestionarSolicitudDeFondosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ConsultaTiposDeCambioToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ImportarEchequesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class
