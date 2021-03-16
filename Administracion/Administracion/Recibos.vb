@@ -3163,12 +3163,11 @@ Public Class Recibos
                                 If Len(Trim(valor)) = 6 Then
                                     Dim _mes As String = Mid(valor, 4, 2)
 
-                                    Select Case Val(_mes)
-                                        Case Is < 5
-                                            valor = Mid(valor, 1, 2) & "/" & _mes & "/" & "2021"
-                                        Case Else
-                                            valor = Mid(valor, 1, 2) & "/" & _mes & "/" & "2020"
-                                    End Select
+                                    If Val(_mes) < Date.Now.Month Then
+                                        txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & Date.Now.AddYears(1).ToString("yyyy")
+                                    Else
+                                        txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & Date.Now.ToString("yyyy")
+                                    End If
 
                                 End If
 
@@ -3557,7 +3556,10 @@ Public Class Recibos
     End Sub
 
     Private Function _ChequeVencido(ByVal fecha_cheque As String) As Boolean
-        Return IsDate(fecha_cheque) And IsDate(txtFecha.Text) And DateDiff(DateInterval.Day, CDate(fecha_cheque), CDate(txtFecha.Text)) > 30
+        Dim Wfecha, fecha_recibo As DateTime
+        If Not DateTime.TryParseExact(txtFecha.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture, DateTimeStyles.None, fecha_recibo) Then Return False
+        If Not DateTime.TryParseExact(fecha_cheque, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture, DateTimeStyles.None, Wfecha) Then Return False
+        Return DateDiff(DateInterval.Day, Wfecha, fecha_recibo) > 30
     End Function
 
     Private Sub _PedirClaveCheque(ByVal row As Integer)
@@ -5612,13 +5614,12 @@ Public Class Recibos
             ' Completamos el año de manera automatica
             If Len(Trim(txtFechaAux.Text)) = 6 Then
                 Dim _mes As String = Mid(txtFechaAux.Text, 4, 2)
-
-                Select Case Val(_mes)
-                    Case Is < 5
-                        txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & "2021"
-                    Case Else
-                        txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & "2020"
-                End Select
+                
+                If Val(_mes) < Date.Now.Month Then
+                    txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & Date.Now.AddYears(1).ToString("yyyy")
+                Else
+                    txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & Date.Now.ToString("yyyy")
+                End If
 
             End If
 

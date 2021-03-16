@@ -6700,14 +6700,14 @@ Public Class Pagos
             'Debug.Print(_ValidarFecha(Trim(txtFechaAux.Text)))
 
             If Len(Trim(txtFechaAux.Text)) = 6 Then
+
                 Dim _mes As String = Mid(txtFechaAux.Text, 4, 2)
 
-                Select Case Val(_mes)
-                    Case Is < 5
-                        txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & "2021"
-                    Case Else
-                        txtFechaAux.Text = txtFechaAux.Text & Mid(txtFecha.Text, 7, 4)
-                End Select
+                If Val(_mes) < Date.Now.Month Then
+                    txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & Date.Now.AddYears(1).ToString("yyyy")
+                Else
+                    txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & Date.Now.ToString("yyyy")
+                End If
 
             End If
 

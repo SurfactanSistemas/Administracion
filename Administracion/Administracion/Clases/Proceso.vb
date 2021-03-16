@@ -584,10 +584,10 @@ Module Proceso
             _Fecha(0) = Val(_Fecha(0)).ToString() ' 03 => 3, 12 => 12
             _Fecha(1) = Val(_Fecha(1)).ToString() ' 04 => 4, 12 => 12
             _Fecha(2) = Val(_Fecha(2)).ToString() ' 2000 => 2000, 0201 => 201
+            Dim WFecha As DateTime
 
-            fecha = Date.ParseExact(fecha, "d/M/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo).ToString("dd/MM/yyyy")
+            Return DateTime.TryParseExact(fecha, "dd/MM/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo, Globalization.DateTimeStyles.None, WFecha)
 
-            Return True
         Catch ex As Exception
             Return False
         End Try
