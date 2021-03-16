@@ -305,11 +305,14 @@ namespace Modulo_Capacitacion.Maestros.Legajos
                     TB_FechaIng.Text = L.FIngreso;
                 }
 
-                if (L.FEgreso.Replace(" ", "").Length < 10)
+                TB_FechaEgreso.Text = L.FEgreso;
+
+                if (TB_FechaEgreso.Text.Replace(" ", "").Length < 10)
                 {
                     TB_FechaEgreso.Text = "00/00/0000";
                 }
-                else
+
+                if (TB_FechaEgreso.Text != "00/00/0000")
                 {
                     TB_FechaEgreso.Text = L.FEgreso;
                     TB_FechaEgreso.BackColor = Color.Red;
