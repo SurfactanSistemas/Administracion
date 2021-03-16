@@ -2178,8 +2178,8 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
     Private Sub _ActualizarVersionEspecificacion(ByVal ZGrabaEspe As String(,))
 
-        Dim ZSql As String
-        Dim ZVersion As String
+        Dim ZSql As String = ""
+        Dim ZVersion As String = ""
         Dim WConsultasII As New List(Of String)
 
         Dim WEspecifUnifica As DataTable = GetAll("SELECT Ensayo1, Ensayo2, Ensayo3, Ensayo4, Ensayo5, Ensayo6, Ensayo7, Ensayo8, Ensayo9, Ensayo10, " _

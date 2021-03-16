@@ -728,7 +728,7 @@ Public Class Depositos
                             End If
 
                             ZSql = ""
-                            ZSql = ZSql + "SELECT Estado2 FROM Recibos WHERE Recibo = '" & WControlaMarcaRecibos(i) & "' AND (TipoReg = '02' OR TipoReg = '2')"
+                            ZSql = ZSql + "SELECT Estado2 FROM Recibos WHERE Recibo = '" & WControlaMarcaRecibos(i) & "' AND (TipoReg = '02' OR TipoReg = '2' OR TipoReg = '07' OR TipoReg = '7')"
 
                             cm.CommandText = ZSql
                             dr = cm.ExecuteReader()

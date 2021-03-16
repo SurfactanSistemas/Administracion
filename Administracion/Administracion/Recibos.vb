@@ -4951,7 +4951,7 @@ Public Class Recibos
                                     Bonos = Bonos + Val(Vector(Ciclo, 9))
                             End Select
                         End If
-                    Case 2
+                    Case 2, 7
                         'Cheque = Cheque + Val(Vector(Ciclo, 9))
                     Case Else
                         Documento = Documento + Val(Vector(Ciclo, 9))

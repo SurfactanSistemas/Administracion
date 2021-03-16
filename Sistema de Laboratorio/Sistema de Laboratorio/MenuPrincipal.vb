@@ -107,6 +107,9 @@ Public Class MenuPrincipal
             For Each Item1 As ToolStripMenuItem In Me.MenuStrip1.Items
                 Dim ID As String = Microsoft.VisualBasic.Right(Item1.Name, 2)
                 Dim Row = BuscarPermisos(TablaDatos, Microsoft.VisualBasic.Right(Item1.Name, 2))
+
+                If Row Is Nothing Then Continue For
+
                 If Not Row.Item("Visible") Then
                     Item1.Enabled = False
                 End If
@@ -118,6 +121,9 @@ Public Class MenuPrincipal
 
                             For Each Item3 As ToolStripMenuItem In Item2.DropDownItems
                                 Dim Row3 = BuscarPermisos(TablaDatos, Microsoft.VisualBasic.Right(Item3.Name, 2))
+
+                                If Row3 Is Nothing Then Continue For
+
                                 If Not Row3.Item("Visible") Then
                                     Item3.Enabled = False
                                 End If
@@ -125,6 +131,9 @@ Public Class MenuPrincipal
                             Next
                         Else
                             Dim Row2 = BuscarPermisos(TablaDatos, Microsoft.VisualBasic.Right(Item2.Name, 2))
+
+                            If Row2 Is Nothing Then Continue For
+
                             If Not Row2.Item("Visible") Then
                                 Item2.Enabled = False
                             End If
@@ -154,6 +163,8 @@ Public Class MenuPrincipal
                 Return row
             End If
         Next
+
+        Return Nothing
 
     End Function
 

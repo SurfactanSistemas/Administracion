@@ -347,34 +347,64 @@ Public Class ImpreCrystal
                 REM genera la factura
                 txtNombre = ""
 
+                Dim rpt As ReportDocument = Nothing
+
                 If txtProceso = 4 Then
                     txtNombreReporte = "N:\net\crystal\ImpreFacturaLocalDolarNuevoNet.rpt"
+                    rpt = New imprefacturalocaldolarnuevonet
                     REM txtNombreReporte = "c:\orden\crystal\ImpreFacturaLocalDolarNuevoNet.rpt"
                 Else
                     If txtProceso = 5 Then
                         txtNombreReporte = "N:\net\crystal\ImpreFacturaLocalPesosNuevoPesosNet.rpt"
+                        rpt = New imprefacturalocalpesosnuevopesosnet
                     Else
                         If txtProceso = 6 Then
                             txtNombreReporte = "N:\net\crystal\ImpreFacturaLocalPesosNuevoNet.rpt"
+                            rpt = New imprefacturalocalpesosnuevonet
                         Else
                             txtNombreReporte = "N:\net\crystal\ImpreFacturaLocalPesosNuevoNetC55.rpt"
+                            rpt = New imprefacturalocalpesosnuevonetc55
                         End If
                     End If
                 End If
+
+                'If File.Exists("C:\Orden\FactuQr.bmp") Then
+                '    File.Copy("C:\Orden\FactuQr.bmp", "\\193.168.0.2\g$\vb\NET\Sistema de ventas\Facturas\qr" & ceros(txtOrden, 8) & ".bmp")
+                'End If
 
                 txtUno = "{ImpreFactura.Numero} in " + x + "0" + x + " to " + x + "999999" + x
                 txtDos = ""
                 txtFormula = txtUno + txtDos
 
+                rpt.SetParameterValue("QR", "C:\Orden\FactuQr.bmp")
+
                 Select Case txtDestino
                     Case 0
                         REM Dim viewer As New ReportViewer("Especificaciones de Ordenes de Compra", "N:\net\crystal\ListaEspePdfNet.rpt", txtFormula, "")
-                        Dim viewer As New ReportViewer("Facturas", txtNombreReporte, txtFormula, "", "")
-                        viewer.Show()
+                        'Dim viewer As New ReportViewer("Facturas", txtNombreReporte, txtFormula, "", "")
+                        'viewer.Show()
+
+                        With New VistaPrevia
+                            .Base = "SurfactanSa"
+                            .Reporte = rpt
+                            '.Reporte.SetParameterValue(0, txtNombre)
+                            .Formula = txtFormula
+                            .Mostrar()
+                            '.Exportar(txtNombrePdf, ExportFormatType.PortableDocFormat, "c:\Orden")
+                        End With
 
                     Case 1
-                        Dim viewer As New ReportViewer("Facturas", txtNombreReporte, txtFormula, "", "")
-                        viewer.imprimirReporte()
+                        'Dim viewer As New ReportViewer("Facturas", txtNombreReporte, txtFormula, "", "")
+                        'viewer.imprimirReporte()
+
+                        With New VistaPrevia
+                            .Base = "SurfactanSa"
+                            .Reporte = rpt
+                            '.Reporte.SetParameterValue(0, txtNombre)
+                            .Formula = txtFormula
+                            .Imprimir()
+                            '.Exportar(txtNombrePdf, ExportFormatType.PortableDocFormat, "c:\Orden")
+                        End With
 
                     Case Else
                         txtTipoCompro = ""
@@ -396,11 +426,19 @@ Public Class ImpreCrystal
                             File.Delete(txtNombreBusqueda)
                         End If
 
-                        Dim viewer As New ReportViewer("Facturas", txtNombreReporte, txtFormula, txtNombrePdf, "")
-                        viewer.descargarComoPDF()
+                        'Dim viewer As New ReportViewer("Facturas", txtNombreReporte, txtFormula, txtNombrePdf, "")
+                        'viewer.descargarComoPDF()
+
+                        With New VistaPrevia
+                            .Base = "SurfactanSa"
+                            .Reporte = rpt
+                            '.Reporte.SetParameterValue(0, txtNombre)
+                            .Formula = txtFormula
+                            .Exportar(txtNombrePdf, ExportFormatType.PortableDocFormat, "c:\Orden")
+                        End With
 
                         If File.Exists(txtNombreBusqueda) Then
-                            File.Copy(txtNombreBusqueda, "\\193.168.0.2\g$\vb\NET\Sistema de ventas\Facturas\" & txtTipoCompro & " 0009-" & ceros(txtOrden, 8) & ".pdf")
+                            File.Copy(txtNombreBusqueda, "\\193.168.0.2\g$\vb\NET\Sistema de ventas\Facturas\" & txtTipoCompro & " 0009-" & ceros(txtOrden, 8) & ".pdf", True)
                         End If
 
                 End Select

@@ -707,6 +707,10 @@
             EstadoSi = 1
             EstadoNo = 0
             WEstado2 = ""
+            WEstado1 = ""
+
+            WCertificado1 = 0
+            WCertificado2 = 0
 
             If CertificadoNo = 1 Then
                 WCertificado1 = 0

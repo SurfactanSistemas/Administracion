@@ -270,12 +270,14 @@ Partial Class MenuPrincipal
         Me.SolicitudDeFondosToolStripMenuItem.Name = "SolicitudDeFondosToolStripMenuItem"
         Me.SolicitudDeFondosToolStripMenuItem.Size = New System.Drawing.Size(350, 22)
         Me.SolicitudDeFondosToolStripMenuItem.Text = "Solicitud de Fondos"
+        Me.SolicitudDeFondosToolStripMenuItem.Visible = False
         '
         'GestionarSolicitudDeFondosToolStripMenuItem
         '
         Me.GestionarSolicitudDeFondosToolStripMenuItem.Name = "GestionarSolicitudDeFondosToolStripMenuItem"
         Me.GestionarSolicitudDeFondosToolStripMenuItem.Size = New System.Drawing.Size(350, 22)
         Me.GestionarSolicitudDeFondosToolStripMenuItem.Text = "Gestionar Solicitud de Fondos"
+        Me.GestionarSolicitudDeFondosToolStripMenuItem.Visible = False
         '
         'ListadosToolStripMenuItem
         '
@@ -628,12 +630,15 @@ Partial Class MenuPrincipal
         Me.Button1.UseVisualStyleBackColor = True
         Me.Button1.Visible = False
         '
+<<<<<<< HEAD
         'ImportarEchequesToolStripMenuItem
         '
         Me.ImportarEchequesToolStripMenuItem.Name = "ImportarEchequesToolStripMenuItem"
         Me.ImportarEchequesToolStripMenuItem.Size = New System.Drawing.Size(350, 22)
         Me.ImportarEchequesToolStripMenuItem.Text = "Importar E-cheques"
         '
+=======
+>>>>>>> f8369ffe8e045266dbca77f3f2d3fbdd739646cb
         'MenuPrincipal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
