@@ -630,15 +630,14 @@ Partial Class MenuPrincipal
         Me.Button1.UseVisualStyleBackColor = True
         Me.Button1.Visible = False
         '
-<<<<<<< HEAD
+
         'ImportarEchequesToolStripMenuItem
         '
         Me.ImportarEchequesToolStripMenuItem.Name = "ImportarEchequesToolStripMenuItem"
         Me.ImportarEchequesToolStripMenuItem.Size = New System.Drawing.Size(350, 22)
         Me.ImportarEchequesToolStripMenuItem.Text = "Importar E-cheques"
         '
-=======
->>>>>>> f8369ffe8e045266dbca77f3f2d3fbdd739646cb
+
         'MenuPrincipal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
