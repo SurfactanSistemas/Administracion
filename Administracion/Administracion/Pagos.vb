@@ -6700,14 +6700,14 @@ Public Class Pagos
             'Debug.Print(_ValidarFecha(Trim(txtFechaAux.Text)))
 
             If Len(Trim(txtFechaAux.Text)) = 6 Then
+
                 Dim _mes As String = Mid(txtFechaAux.Text, 4, 2)
 
-                Select Case Val(_mes)
-                    Case Is < 5
-                        txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & "2021"
-                    Case Else
-                        txtFechaAux.Text = txtFechaAux.Text & Mid(txtFecha.Text, 7, 4)
-                End Select
+                If Val(_mes) < Date.Now.Month Then
+                    txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & Date.Now.AddYears(1).ToString("yyyy")
+                Else
+                    txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & Date.Now.ToString("yyyy")
+                End If
 
             End If
 
@@ -7872,7 +7872,8 @@ Public Class Pagos
                     End If
 
                     If PorTransferenciaYCheques Then
-                        WBody &= "<br/>" & "- Cheque(s) que deberá retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir del día de <strong>mañana</strong>, los <strong>Martes y Juevess</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>."
+                        'WBody &= "<br/>" & "- Cheque(s) que deberá retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir del día de <strong>mañana</strong>, los <strong>Martes y Juevess</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>."
+                        WBody &= "<br/>" & "- Cheque(s) que deberá retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir de la <strong>semana próxima</strong>, los días <strong>Martes y Juevess</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>."
                         'WBody &= "." & "<br/>" & "<br/>" & "Además tiene Cheque(s) para retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir de la <strong>semana próxima</strong>, los <strong>Martes y Juevess</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
                     Else
                         WBody &= "." & "<br/>" & "<br/>" & "Adjuntamos Orden de Pago y retenciones si correspondiesen."
@@ -7880,7 +7881,7 @@ Public Class Pagos
 
                 Else
 
-                    WBody = "Informamos que se encuentra a su disposición un pago que podrá ser retirado por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir del día de <strong>mañana</strong>, los <strong>Martes y Jueves</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
+                    WBody = "Informamos que se encuentra a su disposición un pago que podrá ser retirado por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir de la <strong>semana próxima</strong>, los días <strong>Martes y Jueves</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
 
                 End If
 
@@ -8009,7 +8010,7 @@ Public Class Pagos
 
                 Else
 
-                    WBody = "Informamos que se encuentra a su disposición un pago que podrá ser retirado por nuestras oficinas <em>(Tucumán 3475, B1644 Victoria, Buenos Aires)</em>, a partir del Lunes 02/11/2020, los <strong>Martes y Jueves</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
+                    WBody = "Informamos que se encuentra a su disposición un pago que podrá ser retirado por nuestras oficinas <em>(Tucumán 3475, B1644 Victoria, Buenos Aires)</em>, a partir de la <strong>semana próxima</strong>, los días <strong>Martes y Jueves</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
 
                 End If
 
