@@ -54,6 +54,7 @@ Partial Class ParametrosDeEspecificacion
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnVerificar = New System.Windows.Forms.Button()
+        Me.btnTraer = New System.Windows.Forms.Button()
         Me.GroupBox2.SuspendLayout()
         Me.gbVariables.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -61,7 +62,7 @@ Partial Class ParametrosDeEspecificacion
         '
         'btnCancelar
         '
-        Me.btnCancelar.Location = New System.Drawing.Point(433, 294)
+        Me.btnCancelar.Location = New System.Drawing.Point(517, 294)
         Me.btnCancelar.Name = "btnCancelar"
         Me.btnCancelar.Size = New System.Drawing.Size(155, 36)
         Me.btnCancelar.TabIndex = 11
@@ -71,7 +72,7 @@ Partial Class ParametrosDeEspecificacion
         'btnAceptar
         '
         Me.btnAceptar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAceptar.Location = New System.Drawing.Point(104, 294)
+        Me.btnAceptar.Location = New System.Drawing.Point(20, 294)
         Me.btnAceptar.Name = "btnAceptar"
         Me.btnAceptar.Size = New System.Drawing.Size(163, 36)
         Me.btnAceptar.TabIndex = 12
@@ -376,12 +377,21 @@ Partial Class ParametrosDeEspecificacion
         '
         'btnVerificar
         '
-        Me.btnVerificar.Location = New System.Drawing.Point(272, 294)
+        Me.btnVerificar.Location = New System.Drawing.Point(191, 294)
         Me.btnVerificar.Name = "btnVerificar"
         Me.btnVerificar.Size = New System.Drawing.Size(155, 36)
         Me.btnVerificar.TabIndex = 13
         Me.btnVerificar.Text = "VERIFICAR"
         Me.btnVerificar.UseVisualStyleBackColor = True
+        '
+        'btnTraer
+        '
+        Me.btnTraer.Location = New System.Drawing.Point(354, 294)
+        Me.btnTraer.Name = "btnTraer"
+        Me.btnTraer.Size = New System.Drawing.Size(155, 36)
+        Me.btnTraer.TabIndex = 11
+        Me.btnTraer.Text = "TRAER FÓRMULA"
+        Me.btnTraer.UseVisualStyleBackColor = True
         '
         'ParametrosDeEspecificacion
         '
@@ -389,6 +399,7 @@ Partial Class ParametrosDeEspecificacion
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(693, 336)
         Me.Controls.Add(Me.btnVerificar)
+        Me.Controls.Add(Me.btnTraer)
         Me.Controls.Add(Me.btnCancelar)
         Me.Controls.Add(Me.btnAceptar)
         Me.Controls.Add(Me.GroupBox2)
@@ -440,4 +451,5 @@ Partial Class ParametrosDeEspecificacion
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents btnVerificar As System.Windows.Forms.Button
+    Friend WithEvents btnTraer As System.Windows.Forms.Button
 End Class

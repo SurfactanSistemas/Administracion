@@ -1,9 +1,10 @@
 ﻿Imports System.Text.RegularExpressions
 Imports Util
 
-Public Class ParametrosDeEspecificacion : Implements INotificaActualizacion
+Public Class ParametrosDeEspecificacion : Implements INotificaActualizacion, ITraerFormulaOtroCodigo, IAyudaGeneral
     Dim Renglon As Integer
     Private ReadOnly Terminado As String
+    Dim WID As String
 
     Dim WparametrosFormula(11) As String
 
@@ -41,18 +42,19 @@ Public Class ParametrosDeEspecificacion : Implements INotificaActualizacion
 
         If row IsNot Nothing Then
 
-            txtVar1.Text = Trim(IIf(IsDBNull(row.Item("Var1")), "", row.Item("Var1")))
-            txtVar2.Text = Trim(IIf(IsDBNull(row.Item("Var2")), "", row.Item("Var2")))
-            txtVar3.Text = Trim(IIf(IsDBNull(row.Item("Var3")), "", row.Item("Var3")))
-            txtVar4.Text = Trim(IIf(IsDBNull(row.Item("Var4")), "", row.Item("Var4")))
-            txtVar5.Text = Trim(IIf(IsDBNull(row.Item("Var5")), "", row.Item("Var5")))
-            txtVar6.Text = Trim(IIf(IsDBNull(row.Item("Var6")), "", row.Item("Var6")))
-            txtVar7.Text = Trim(IIf(IsDBNull(row.Item("Var7")), "", row.Item("Var7")))
-            txtVar8.Text = Trim(IIf(IsDBNull(row.Item("Var8")), "", row.Item("Var8")))
-            txtVar9.Text = Trim(IIf(IsDBNull(row.Item("Var9")), "", row.Item("Var9")))
-            txtVar10.Text = Trim(IIf(IsDBNull(row.Item("Var10")), "", row.Item("Var10")))
+            txtVar1.Text = Trim(OrDefault(row.Item("Var1"), ""))
+            txtVar2.Text = Trim(OrDefault(row.Item("Var2"), ""))
+            txtVar3.Text = Trim(OrDefault(row.Item("Var3"), ""))
+            txtVar4.Text = Trim(OrDefault(row.Item("Var4"), ""))
+            txtVar5.Text = Trim(OrDefault(row.Item("Var5"), ""))
+            txtVar6.Text = Trim(OrDefault(row.Item("Var6"), ""))
+            txtVar7.Text = Trim(OrDefault(row.Item("Var7"), ""))
+            txtVar8.Text = Trim(OrDefault(row.Item("Var8"), ""))
+            txtVar9.Text = Trim(OrDefault(row.Item("Var9"), ""))
+            txtVar10.Text = Trim(OrDefault(row.Item("Var10"), ""))
 
-            txtDescripcion.Text = Trim(IIf(IsDBNull(row.Item("Descripcion")), "", row.Item("Descripcion")))
+            txtDescripcion.Text = Trim(OrDefault(row.Item("Descripcion"), ""))
+            If Renglon = 0 And txtDescripcion.Text <> "" Then txtDescripcion.Text = "<--" & txtDescripcion.Text & "-->"
             txtFormula.Text = Trim(IIf(IsDBNull(row.Item("Formula")), "", row.Item("Formula")))
 
         End If
@@ -340,5 +342,54 @@ Public Class ParametrosDeEspecificacion : Implements INotificaActualizacion
         If WOwner IsNot Nothing Then WOwner._ProcesarNotificaActualizacion()
 
         Close()
+    End Sub
+
+    Private Sub btnTraer_Click(sender As Object, e As EventArgs) Handles btnTraer.Click
+
+        With New Util.AyudaGeneral(GetAll("SELECT Codigo, Descripcion FROM Terminado ORDER BY Codigo"), "SELECCIONE EL CODIGO DEL PRODUCTO")
+            .ShowDialog(Me)
+        End With
+
+    End Sub
+
+    Public Sub _ProcesarTraerFormulaOtroCodigo(ByVal _di As String, ByVal WRenglon As Object, ByVal Termi As String) Implements ITraerFormulaOtroCodigo._ProcesarTraerFormulaOtroCodigo
+        WID = _di
+        Dim SQLCnslt As String
+
+        SQLCnslt = "SELECT * FROM FormulasDeEnsayos WHERE Renglon = '" & WRenglon & "' And Terminado = '" & Termi & "'"
+
+        Dim row As DataRow = GetSingle(SQLCnslt, "Surfactan_II")
+
+        If row IsNot Nothing Then
+
+            txtVar1.Text = Trim(OrDefault(row.Item("Var1"), ""))
+            txtVar2.Text = Trim(OrDefault(row.Item("Var2"), ""))
+            txtVar3.Text = Trim(OrDefault(row.Item("Var3"), ""))
+            txtVar4.Text = Trim(OrDefault(row.Item("Var4"), ""))
+            txtVar5.Text = Trim(OrDefault(row.Item("Var5"), ""))
+            txtVar6.Text = Trim(OrDefault(row.Item("Var6"), ""))
+            txtVar7.Text = Trim(OrDefault(row.Item("Var7"), ""))
+            txtVar8.Text = Trim(OrDefault(row.Item("Var8"), ""))
+            txtVar9.Text = Trim(OrDefault(row.Item("Var9"), ""))
+            txtVar10.Text = Trim(OrDefault(row.Item("Var10"), ""))
+
+            txtDescripcion.Text = Trim(OrDefault(row.Item("Descripcion"), ""))
+            If Renglon = 0 And txtDescripcion.Text <> "" Then txtDescripcion.Text = "<--" & txtDescripcion.Text & "-->"
+            txtFormula.Text = Trim(IIf(IsDBNull(row.Item("Formula")), "", row.Item("Formula")))
+
+        End If
+
+        txtVar1.Focus()
+
+    End Sub
+
+    Public Sub _ProcesarAyudaGeneral(row As DataGridViewRow) Implements IAyudaGeneral._ProcesarAyudaGeneral
+        Dim WTerminado As String = OrDefault(row.Cells("Codigo").Value, "")
+
+        With New IngresoFormulasEnsayo(WID, WTerminado)
+            .Show(Me)
+            '.btnAgregar.PerformClick()
+        End With
+
     End Sub
 End Class

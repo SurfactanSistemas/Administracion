@@ -1,13 +1,17 @@
 Public Class IngresoFormulasEnsayo : Implements IGrabadoDeFormula, INotificaActualizacion
     Private ReadOnly Terminado As String
     Dim PermisoGrabar As Boolean
-    Sub New(ByVal ID As String, ByVal Terminado As String)
+    Dim ForzarNuevo As Boolean
+    Dim WID As String = ""
+    Sub New(ByVal ID As String, ByVal Terminado As String, Optional ByVal ForzarNuevo As Boolean = False)
 
         ' Llamada necesaria para el diseñador.
         InitializeComponent()
 
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
         Me.Terminado = Terminado
+        Me.ForzarNuevo = ForzarNuevo
+        WID = ID
 
         Dim SQLCnslt As String = "SELECT Escritura FROM PermisosPerfiles WHERE ID = '" & ID & "' AND Sistema = 'LABORATORIO' AND Perfil = '" & Operador.Perfil & "' AND Planta = '" & Operador.Base & "' ORDER BY ID"
         Dim Row As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
@@ -185,10 +189,18 @@ Public Class IngresoFormulasEnsayo : Implements IGrabadoDeFormula, INotificaActu
 
             Me.Close()
             Exit Sub
+        Else
+            Dim WOwner As ITraerFormulaOtroCodigo = TryCast(Owner, ITraerFormulaOtroCodigo)
+            If WOwner IsNot Nothing Then
+                WOwner._ProcesarTraerFormulaOtroCodigo(0, OrDefault(DGV_Formulas.CurrentRow.Cells("Renglon").Value, 0), Terminado)
+                Me.Close()
+                Exit Sub
+            End If
         End If
 
         If e.ColumnIndex <> -1 Then
-            With New ParametrosDeEspecificacion(Terminado, DGV_Formulas.CurrentRow.Cells("Renglon").Value, PermisoGrabar)
+            Dim fila As Object = IIf(forzarnuevo, 0, DGV_Formulas.CurrentRow.Cells("Renglon").Value)
+            With New ParametrosDeEspecificacion(Terminado, fila, PermisoGrabar)
                 .Show(Me)
             End With
         End If
