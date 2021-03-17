@@ -27,6 +27,12 @@ Partial Class ParametrosDeEspecificacion
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.txtDescripcion = New System.Windows.Forms.TextBox()
         Me.Label14 = New System.Windows.Forms.Label()
+        Me.txtAdic1 = New System.Windows.Forms.TextBox()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.txtAdic2 = New System.Windows.Forms.TextBox()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.txtAdic3 = New System.Windows.Forms.TextBox()
+        Me.Label15 = New System.Windows.Forms.Label()
         Me.txtFormula = New System.Windows.Forms.TextBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.gbVariables = New System.Windows.Forms.GroupBox()
@@ -55,6 +61,10 @@ Partial Class ParametrosDeEspecificacion
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnVerificar = New System.Windows.Forms.Button()
         Me.btnTraer = New System.Windows.Forms.Button()
+        Me.txtDecAdic3 = New System.Windows.Forms.TextBox()
+        Me.txtDecAdic2 = New System.Windows.Forms.TextBox()
+        Me.txtDecAdic1 = New System.Windows.Forms.TextBox()
+        Me.Label18 = New System.Windows.Forms.Label()
         Me.GroupBox2.SuspendLayout()
         Me.gbVariables.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -62,7 +72,7 @@ Partial Class ParametrosDeEspecificacion
         '
         'btnCancelar
         '
-        Me.btnCancelar.Location = New System.Drawing.Point(517, 294)
+        Me.btnCancelar.Location = New System.Drawing.Point(517, 378)
         Me.btnCancelar.Name = "btnCancelar"
         Me.btnCancelar.Size = New System.Drawing.Size(155, 36)
         Me.btnCancelar.TabIndex = 11
@@ -72,7 +82,7 @@ Partial Class ParametrosDeEspecificacion
         'btnAceptar
         '
         Me.btnAceptar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAceptar.Location = New System.Drawing.Point(20, 294)
+        Me.btnAceptar.Location = New System.Drawing.Point(20, 378)
         Me.btnAceptar.Name = "btnAceptar"
         Me.btnAceptar.Size = New System.Drawing.Size(163, 36)
         Me.btnAceptar.TabIndex = 12
@@ -83,11 +93,21 @@ Partial Class ParametrosDeEspecificacion
         '
         Me.GroupBox2.Controls.Add(Me.txtDescripcion)
         Me.GroupBox2.Controls.Add(Me.Label14)
+        Me.GroupBox2.Controls.Add(Me.txtDecAdic1)
+        Me.GroupBox2.Controls.Add(Me.txtAdic1)
+        Me.GroupBox2.Controls.Add(Me.txtDecAdic2)
+        Me.GroupBox2.Controls.Add(Me.Label18)
+        Me.GroupBox2.Controls.Add(Me.Label17)
+        Me.GroupBox2.Controls.Add(Me.txtAdic2)
+        Me.GroupBox2.Controls.Add(Me.txtDecAdic3)
+        Me.GroupBox2.Controls.Add(Me.Label16)
+        Me.GroupBox2.Controls.Add(Me.txtAdic3)
+        Me.GroupBox2.Controls.Add(Me.Label15)
         Me.GroupBox2.Controls.Add(Me.txtFormula)
         Me.GroupBox2.Controls.Add(Me.Label13)
-        Me.GroupBox2.Location = New System.Drawing.Point(8, 189)
+        Me.GroupBox2.Location = New System.Drawing.Point(8, 182)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(677, 99)
+        Me.GroupBox2.Size = New System.Drawing.Size(677, 192)
         Me.GroupBox2.TabIndex = 10
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Fórmula"
@@ -95,7 +115,7 @@ Partial Class ParametrosDeEspecificacion
         'txtDescripcion
         '
         Me.txtDescripcion.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.txtDescripcion.Location = New System.Drawing.Point(87, 48)
+        Me.txtDescripcion.Location = New System.Drawing.Point(87, 140)
         Me.txtDescripcion.MaxLength = 200
         Me.txtDescripcion.Multiline = True
         Me.txtDescripcion.Name = "txtDescripcion"
@@ -105,15 +125,69 @@ Partial Class ParametrosDeEspecificacion
         'Label14
         '
         Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(15, 51)
+        Me.Label14.Location = New System.Drawing.Point(15, 143)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(66, 13)
         Me.Label14.TabIndex = 2
         Me.Label14.Text = "Descripcion:"
         '
+        'txtAdic1
+        '
+        Me.txtAdic1.Location = New System.Drawing.Point(87, 39)
+        Me.txtAdic1.MaxLength = 100
+        Me.txtAdic1.Name = "txtAdic1"
+        Me.txtAdic1.Size = New System.Drawing.Size(547, 20)
+        Me.txtAdic1.TabIndex = 1
+        Me.txtAdic1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Location = New System.Drawing.Point(29, 42)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(52, 13)
+        Me.Label17.TabIndex = 0
+        Me.Label17.Text = "F. Adic 1:"
+        '
+        'txtAdic2
+        '
+        Me.txtAdic2.Location = New System.Drawing.Point(87, 65)
+        Me.txtAdic2.MaxLength = 100
+        Me.txtAdic2.Name = "txtAdic2"
+        Me.txtAdic2.Size = New System.Drawing.Size(547, 20)
+        Me.txtAdic2.TabIndex = 1
+        Me.txtAdic2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Location = New System.Drawing.Point(29, 68)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(52, 13)
+        Me.Label16.TabIndex = 0
+        Me.Label16.Text = "F. Adic 2:"
+        '
+        'txtAdic3
+        '
+        Me.txtAdic3.Location = New System.Drawing.Point(87, 91)
+        Me.txtAdic3.MaxLength = 100
+        Me.txtAdic3.Name = "txtAdic3"
+        Me.txtAdic3.Size = New System.Drawing.Size(547, 20)
+        Me.txtAdic3.TabIndex = 1
+        Me.txtAdic3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(29, 94)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(52, 13)
+        Me.Label15.TabIndex = 0
+        Me.Label15.Text = "F. Adic 3:"
+        '
         'txtFormula
         '
-        Me.txtFormula.Location = New System.Drawing.Point(87, 22)
+        Me.txtFormula.Location = New System.Drawing.Point(87, 117)
         Me.txtFormula.MaxLength = 100
         Me.txtFormula.Name = "txtFormula"
         Me.txtFormula.Size = New System.Drawing.Size(583, 20)
@@ -123,11 +197,11 @@ Partial Class ParametrosDeEspecificacion
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(24, 25)
+        Me.Label13.Location = New System.Drawing.Point(20, 120)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(57, 13)
+        Me.Label13.Size = New System.Drawing.Size(61, 13)
         Me.Label13.TabIndex = 0
-        Me.Label13.Text = "Definición:"
+        Me.Label13.Text = "Form. Final:"
         '
         'gbVariables
         '
@@ -151,7 +225,7 @@ Partial Class ParametrosDeEspecificacion
         Me.gbVariables.Controls.Add(Me.txtVar1)
         Me.gbVariables.Controls.Add(Me.Label7)
         Me.gbVariables.Controls.Add(Me.Label3)
-        Me.gbVariables.Location = New System.Drawing.Point(7, 59)
+        Me.gbVariables.Location = New System.Drawing.Point(7, 52)
         Me.gbVariables.Name = "gbVariables"
         Me.gbVariables.Size = New System.Drawing.Size(678, 129)
         Me.gbVariables.TabIndex = 9
@@ -377,7 +451,7 @@ Partial Class ParametrosDeEspecificacion
         '
         'btnVerificar
         '
-        Me.btnVerificar.Location = New System.Drawing.Point(191, 294)
+        Me.btnVerificar.Location = New System.Drawing.Point(191, 378)
         Me.btnVerificar.Name = "btnVerificar"
         Me.btnVerificar.Size = New System.Drawing.Size(155, 36)
         Me.btnVerificar.TabIndex = 13
@@ -386,18 +460,54 @@ Partial Class ParametrosDeEspecificacion
         '
         'btnTraer
         '
-        Me.btnTraer.Location = New System.Drawing.Point(354, 294)
+        Me.btnTraer.Location = New System.Drawing.Point(354, 378)
         Me.btnTraer.Name = "btnTraer"
         Me.btnTraer.Size = New System.Drawing.Size(155, 36)
         Me.btnTraer.TabIndex = 11
         Me.btnTraer.Text = "TRAER FÓRMULA"
         Me.btnTraer.UseVisualStyleBackColor = True
         '
+        'txtDecAdic3
+        '
+        Me.txtDecAdic3.Location = New System.Drawing.Point(640, 91)
+        Me.txtDecAdic3.MaxLength = 100
+        Me.txtDecAdic3.Name = "txtDecAdic3"
+        Me.txtDecAdic3.Size = New System.Drawing.Size(30, 20)
+        Me.txtDecAdic3.TabIndex = 1
+        Me.txtDecAdic3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'txtDecAdic2
+        '
+        Me.txtDecAdic2.Location = New System.Drawing.Point(640, 65)
+        Me.txtDecAdic2.MaxLength = 100
+        Me.txtDecAdic2.Name = "txtDecAdic2"
+        Me.txtDecAdic2.Size = New System.Drawing.Size(30, 20)
+        Me.txtDecAdic2.TabIndex = 1
+        Me.txtDecAdic2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'txtDecAdic1
+        '
+        Me.txtDecAdic1.Location = New System.Drawing.Point(640, 39)
+        Me.txtDecAdic1.MaxLength = 100
+        Me.txtDecAdic1.Name = "txtDecAdic1"
+        Me.txtDecAdic1.Size = New System.Drawing.Size(30, 20)
+        Me.txtDecAdic1.TabIndex = 1
+        Me.txtDecAdic1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Location = New System.Drawing.Point(642, 16)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(27, 13)
+        Me.Label18.TabIndex = 0
+        Me.Label18.Text = "Dec"
+        '
         'ParametrosDeEspecificacion
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(693, 336)
+        Me.ClientSize = New System.Drawing.Size(693, 418)
         Me.Controls.Add(Me.btnVerificar)
         Me.Controls.Add(Me.btnTraer)
         Me.Controls.Add(Me.btnCancelar)
@@ -452,4 +562,14 @@ Partial Class ParametrosDeEspecificacion
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents btnVerificar As System.Windows.Forms.Button
     Friend WithEvents btnTraer As System.Windows.Forms.Button
+    Friend WithEvents txtAdic1 As System.Windows.Forms.TextBox
+    Friend WithEvents Label17 As System.Windows.Forms.Label
+    Friend WithEvents txtAdic2 As System.Windows.Forms.TextBox
+    Friend WithEvents Label16 As System.Windows.Forms.Label
+    Friend WithEvents txtAdic3 As System.Windows.Forms.TextBox
+    Friend WithEvents Label15 As System.Windows.Forms.Label
+    Friend WithEvents txtDecAdic1 As System.Windows.Forms.TextBox
+    Friend WithEvents txtDecAdic2 As System.Windows.Forms.TextBox
+    Friend WithEvents Label18 As System.Windows.Forms.Label
+    Friend WithEvents txtDecAdic3 As System.Windows.Forms.TextBox
 End Class

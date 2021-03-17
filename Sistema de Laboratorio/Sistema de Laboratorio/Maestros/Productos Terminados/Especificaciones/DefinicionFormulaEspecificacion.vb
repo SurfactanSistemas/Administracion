@@ -113,7 +113,7 @@
     End Sub
 
     Private Sub _GrabarFormulaMod(ByVal Formula As String, ByVal ParametrosFormula() As String, ByVal Descripcion As String, Optional ByVal Renglon As Integer = 0, Optional _
-                         ByVal Modificado As Boolean = False) Implements IGrabadoDeFormula._GrabarFormulaMod
+                         ByVal Modificado As Boolean = False, Optional ByVal adic1 As String = "", Optional ByVal adic2 As String = "", Optional ByVal adic3 As String = "", Optional ByVal decadic1 As String = "", Optional ByVal decadic2 As String = "", Optional ByVal decadic3 As String = "") Implements IGrabadoDeFormula._GrabarFormulaMod
 
     End Sub
 End Class

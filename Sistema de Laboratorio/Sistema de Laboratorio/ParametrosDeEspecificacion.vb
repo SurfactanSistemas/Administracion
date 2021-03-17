@@ -5,7 +5,7 @@ Public Class ParametrosDeEspecificacion : Implements INotificaActualizacion, ITr
     Dim Renglon As Integer
     Private ReadOnly Terminado As String
     Dim WID As String
-
+    
     Dim WparametrosFormula(11) As String
 
     Sub New(Optional ByVal Terminado As String = "", Optional ByVal Fila As Integer = 0, Optional ByVal Permiso As Boolean = False)
@@ -52,6 +52,12 @@ Public Class ParametrosDeEspecificacion : Implements INotificaActualizacion, ITr
             txtVar8.Text = Trim(OrDefault(row.Item("Var8"), ""))
             txtVar9.Text = Trim(OrDefault(row.Item("Var9"), ""))
             txtVar10.Text = Trim(OrDefault(row.Item("Var10"), ""))
+            txtAdic1.Text = Trim(OrDefault(row.Item("FormulaAdic1"), ""))
+            txtAdic2.Text = Trim(OrDefault(row.Item("FormulaAdic2"), ""))
+            txtAdic3.Text = Trim(OrDefault(row.Item("FormulaAdic3"), ""))
+            txtDecAdic1.Text = Trim(OrDefault(row.Item("FormulaAdic1Dec"), "2"))
+            txtDecAdic2.Text = Trim(OrDefault(row.Item("FormulaAdic2Dec"), "2"))
+            txtDecAdic3.Text = Trim(OrDefault(row.Item("FormulaAdic3Dec"), "2"))
 
             txtDescripcion.Text = Trim(OrDefault(row.Item("Descripcion"), ""))
             If Renglon = 0 And txtDescripcion.Text <> "" Then txtDescripcion.Text = "<--" & txtDescripcion.Text & "-->"
@@ -104,7 +110,7 @@ Public Class ParametrosDeEspecificacion : Implements INotificaActualizacion, ITr
                 Dim WOwner As IGrabadoDeFormula = TryCast(Owner, IGrabadoDeFormula)
 
                 If WOwner IsNot Nothing Then
-                    WOwner._GrabarFormulaMod(txtFormula.Text, WparametrosFormula, txtDescripcion.Text, Renglon, Mofidicado)
+                    WOwner._GrabarFormulaMod(txtFormula.Text, WparametrosFormula, txtDescripcion.Text, Renglon, Mofidicado, txtAdic1.Text, txtAdic2.Text, txtAdic3.Text, txtDecAdic1.Text, txtDecAdic2.Text, txtDecAdic3.Text)
                     Close()
                 End If
 
@@ -115,7 +121,7 @@ Public Class ParametrosDeEspecificacion : Implements INotificaActualizacion, ITr
         Dim WOwner2 As IGrabadoDeFormula = TryCast(Owner, IGrabadoDeFormula)
 
         If WOwner2 IsNot Nothing Then
-            WOwner2._GrabarFormulaMod(txtFormula.Text, WparametrosFormula, txtDescripcion.Text, Renglon, False)
+            WOwner2._GrabarFormulaMod(txtFormula.Text, WparametrosFormula, txtDescripcion.Text, Renglon, False, txtAdic1.Text, txtAdic2.Text, txtAdic3.Text, txtDecAdic1.Text, txtDecAdic2.Text, txtDecAdic3.Text)
             Close()
         End If
 
@@ -249,11 +255,50 @@ Public Class ParametrosDeEspecificacion : Implements INotificaActualizacion, ITr
         Select Case e.KeyData
             Case Keys.Enter
 
+                txtAdic1.Focus()
+
+            Case Keys.Escape
+
+                txtAdic1.Text = ""
+
+        End Select
+    End Sub
+
+    Private Sub txtAdic1_KeyDown(sender As Object, e As KeyEventArgs) Handles txtAdic1.KeyDown
+        Select Case e.KeyData
+            Case Keys.Enter
+
+                txtAdic2.Focus()
+
+            Case Keys.Escape
+
+                txtAdic1.Text = ""
+
+        End Select
+    End Sub
+
+    Private Sub txtAdic2_KeyDown(sender As Object, e As KeyEventArgs) Handles txtAdic2.KeyDown
+        Select Case e.KeyData
+            Case Keys.Enter
+
+                txtAdic3.Focus()
+
+            Case Keys.Escape
+
+                txtAdic2.Text = ""
+
+        End Select
+    End Sub
+
+    Private Sub txtAdic3_KeyDown(sender As Object, e As KeyEventArgs) Handles txtAdic3.KeyDown
+        Select Case e.KeyData
+            Case Keys.Enter
+
                 txtFormula.Focus()
 
             Case Keys.Escape
 
-                txtVar10.Text = ""
+                txtAdic3.Text = ""
 
         End Select
     End Sub
@@ -325,15 +370,25 @@ Public Class ParametrosDeEspecificacion : Implements INotificaActualizacion, ITr
                 WReferencias(WRenglon, 1) = mt.Value
             Next
 
-            With New IngresoVariablesFormula(WFormula, Wvariables, Wvalor, Nothing, Nothing, Renglon, WReferencias, False, Terminado)
+            Dim WAdicionales(2, 1) As String
+
+            WAdicionales(0, 0) = txtAdic1.Text.Trim
+            WAdicionales(1, 0) = txtAdic2.Text.Trim
+            WAdicionales(2, 0) = txtAdic3.Text.Trim
+
+            WAdicionales(0, 1) = txtDecAdic1.Text.Trim
+            WAdicionales(1, 1) = txtDecAdic2.Text.Trim
+            WAdicionales(2, 1) = txtDecAdic3.Text.Trim
+
+            With New IngresoVariablesFormula(WFormula, Wvariables, Wvalor, Nothing, Nothing, Renglon, WReferencias, False, Terminado, WAdicionales)
                 .Show(Me)
             End With
         End If
 
     End Sub
 
-    Private Sub txtFormula_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtFormula.KeyPress
-        e.Handled = Not {"v", "V", "r", "R", "/", "(", ")", "[", "]", "^", "+", "-", "*"}.ToList().Any(Function(v) CChar(v) = e.KeyChar) And Not Char.IsNumber(e.KeyChar) And Not Chr(Keys.Back) = e.KeyChar And Not Chr(Keys.Delete) = e.KeyChar
+    Private Sub txtFormula_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtFormula.KeyPress, txtAdic1.KeyPress, txtAdic2.KeyPress, txtAdic3.KeyPress, txtDecAdic1.KeyPress, txtDecAdic2.KeyPress, txtDecAdic3.KeyPress
+        e.Handled = Not {"v", "V", "r", "R", "F", "A", "/", "(", ")", "[", "]", "^", "+", "-", "*"}.ToList().Any(Function(v) CChar(v) = e.KeyChar) And Not Char.IsNumber(e.KeyChar) And Not Chr(Keys.Back) = e.KeyChar And Not Chr(Keys.Delete) = e.KeyChar
     End Sub
 
     Public Sub _ProcesarNotificaActualizacion() Implements INotificaActualizacion._ProcesarNotificaActualizacion
@@ -346,7 +401,7 @@ Public Class ParametrosDeEspecificacion : Implements INotificaActualizacion, ITr
 
     Private Sub btnTraer_Click(sender As Object, e As EventArgs) Handles btnTraer.Click
 
-        With New Util.AyudaGeneral(GetAll("SELECT Codigo, Descripcion FROM Terminado ORDER BY Codigo"), "SELECCIONE EL CODIGO DEL PRODUCTO")
+        With New Util.AyudaGeneral(GetAll("SELECT distinct f.Terminado As Codigo, t.Descripcion FROM SurfactanSa.dbo.Terminado t INNER JOIN Surfactan_II.dbo.FormulasDeEnsayos f ON f.Terminado = t.Codigo ORDER BY f.Terminado, t.Descripcion"), "SELECCIONE EL CODIGO DEL PRODUCTO")
             .ShowDialog(Me)
         End With
 
@@ -372,6 +427,12 @@ Public Class ParametrosDeEspecificacion : Implements INotificaActualizacion, ITr
             txtVar8.Text = Trim(OrDefault(row.Item("Var8"), ""))
             txtVar9.Text = Trim(OrDefault(row.Item("Var9"), ""))
             txtVar10.Text = Trim(OrDefault(row.Item("Var10"), ""))
+            txtAdic1.Text = Trim(OrDefault(row.Item("FormulaAdic1"), ""))
+            txtAdic2.Text = Trim(OrDefault(row.Item("FormulaAdic2"), ""))
+            txtAdic3.Text = Trim(OrDefault(row.Item("FormulaAdic3"), ""))
+            txtDecAdic1.Text = Trim(OrDefault(row.Item("FormulaAdic1dec"), "2"))
+            txtDecAdic2.Text = Trim(OrDefault(row.Item("FormulaAdic2dec"), "2"))
+            txtDecAdic3.Text = Trim(OrDefault(row.Item("FormulaAdic3dec"), "2"))
 
             txtDescripcion.Text = Trim(OrDefault(row.Item("Descripcion"), ""))
             If Renglon = 0 And txtDescripcion.Text <> "" Then txtDescripcion.Text = "<--" & txtDescripcion.Text & "-->"
@@ -392,4 +453,21 @@ Public Class ParametrosDeEspecificacion : Implements INotificaActualizacion, ITr
         End With
 
     End Sub
+
+    Private Sub txtDecAdic1_KeyDown(sender As Object, e As KeyEventArgs) Handles txtDecAdic1.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            txtAdic2.Focus()
+        ElseIf e.KeyCode = Keys.Escape Then
+            txtDecAdic1.Text = ""
+        End If
+    End Sub
+
+    Private Sub txtDecAdic2_KeyDown(sender As Object, e As KeyEventArgs) Handles txtDecAdic2.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            txtAdic3.Focus()
+        ElseIf e.KeyCode = Keys.Escape Then
+            txtDecAdic2.Text = ""
+        End If
+    End Sub
+
 End Class

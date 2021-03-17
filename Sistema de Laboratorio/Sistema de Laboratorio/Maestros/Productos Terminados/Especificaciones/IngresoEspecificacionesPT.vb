@@ -11,6 +11,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
     Private WAutorizado As Boolean = False
     Private WTipoProceso As TipoProcesosIngEspecif = Nothing
+    Private Wdicionales() As String = New String(2) {}
 
     Dim PermisoGrabar As Boolean
     Sub New(ByVal ID As String)
@@ -580,6 +581,9 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                 Dim WInformaEspecif = OrDefault(.Item("InformaEspecif"), "0")
                 Dim WFormulaEspecif = OrDefault(.Item("FormulaEspecif"), "")
                 Dim WSubEtapas = Val(OrDefault(.Item("SubEtapas"), "")) = 1
+                Dim WAdic1 = Trim(OrDefault(.Item("FormulaAdic1"), ""))
+                Dim WAdic2 = Trim(OrDefault(.Item("FormulaAdic2"), ""))
+                Dim WAdic3 = Trim(OrDefault(.Item("FormulaAdic3"), ""))
                 Dim WImpreParametro = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif, WInformaEspecif)
 
                 If Val(WTipoEspecif) = 0 And WImpreParametro <> "" Then WImpreParametro &= " (c)"
@@ -604,6 +608,9 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                     .Cells("InformaEspecif").Value = WInformaEspecif
                     .Cells("Parametro").Value = Trim(WImpreParametro)
                     .Cells("FormulaEspecif").Value = WFormulaEspecif
+                    .Cells("FormulaAdic1").Value = WAdic1
+                    .Cells("FormulaAdic2").Value = WAdic2
+                    .Cells("FormulaAdic3").Value = WAdic3
 
                     For i = 1 To 10
                         .Cells("Variable" & i).Value = Trim(OrDefault(row.Item("Variable" & i), ""))
@@ -721,12 +728,17 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
             Dim WParametro As String = OrDefault(.Cells("DescEnsayo").Value, "")
             Dim WFormula As String = OrDefault(.Cells("FormulaEspecif").Value, "")
             Dim WParametrosFormula(10) As String
+            Dim WAdicionales(2) As String
+
+            WAdicionales(0) = OrDefault(.Cells("FormulaAdic1").Value, "")
+            WAdicionales(1) = OrDefault(.Cells("FormulaAdic2").Value, "")
+            WAdicionales(2) = OrDefault(.Cells("FormulaAdic3").Value, "")
 
             For i = 1 To 10
                 WParametrosFormula(i) = Trim(OrDefault(.Cells("Variable" & i).Value, ""))
             Next
 
-            Dim frm As New IngresoParametrosEspecificaciones(txtTerminado.Text, WEnsayo, WDescEnsayo, WParametro, WTipo, WInforma, WMenorIgual, WDesde, WHasta, WUnidad, WFarmacopea, WFormula, WParametrosFormula)
+            Dim frm As New IngresoParametrosEspecificaciones(txtTerminado.Text, WEnsayo, WDescEnsayo, WParametro, WTipo, WInforma, WMenorIgual, WDesde, WHasta, WUnidad, WFarmacopea, WFormula, WParametrosFormula, WAdicionales)
             frm.ShowDialog(Me)
 
             dgvEspecif.Focus()

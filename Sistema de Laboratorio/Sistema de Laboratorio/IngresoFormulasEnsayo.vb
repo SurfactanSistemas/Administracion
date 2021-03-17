@@ -25,7 +25,7 @@ Public Class IngresoFormulasEnsayo : Implements IGrabadoDeFormula, INotificaActu
 
     End Sub
 
-    Sub _GrabarFormulaMod(ByVal Formula As String, ByVal ParametrosFormula() As String, ByVal Descripcion As String, Optional ByVal Renglon As Integer = 0, Optional ByVal Moficado As Boolean = False) Implements IGrabadoDeFormula._GrabarFormulaMod
+    Sub _GrabarFormulaMod(ByVal Formula As String, ByVal ParametrosFormula() As String, ByVal Descripcion As String, Optional ByVal Renglon As Integer = 0, Optional ByVal Moficado As Boolean = False, Optional ByVal adic1 As String = "", Optional ByVal adic2 As String = "", Optional ByVal adic3 As String = "", Optional ByVal decadic1 As String = "", Optional ByVal decadic2 As String = "", Optional ByVal decadic3 As String = "") Implements IGrabadoDeFormula._GrabarFormulaMod
 
         Dim listSQLCnslt As New List(Of String)
 
@@ -68,6 +68,8 @@ Public Class IngresoFormulasEnsayo : Implements IGrabadoDeFormula, INotificaActu
             End If
 
         End If
+
+        listSQLCnslt.Add("UPDATE FormulasDeEnsayos SET FormulaAdic1 = '" & adic1 & "', FormulaAdic2 = '" & adic2 & "', FormulaAdic3 = '" & adic3 & "', FormulaAdic1dec = '" & decadic1 & "', FormulaAdic2dec = '" & decadic2 & "', FormulaAdic3dec = '" & decadic3 & "' WHERE Terminado = '" & Terminado & "' And Renglon = '" & Renglon & "'")
 
         ExecuteNonQueries("Surfactan_II", listSQLCnslt.ToArray())
 

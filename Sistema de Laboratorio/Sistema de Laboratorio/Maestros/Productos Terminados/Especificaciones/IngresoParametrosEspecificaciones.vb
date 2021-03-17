@@ -10,12 +10,13 @@
     Private WFarmacopea As String
     Private WFormula As String
     Private WParametrosFormula(10) As String
+    Private WAdicionales(2) As String
     Private WEnsayo As String
     Private WDescEnsayo As String
     Private WParametro As String
     Private Terminado As String
 
-    Sub New(ByVal Terminado As String, ByVal Ensayo As String, ByVal DescEnsayo As String, ByVal Parametro As String, ByVal Tipo As Integer, ByVal Informa As Integer, ByVal MenorIgual As Integer, ByVal Desde As String, ByVal Hasta As String, ByVal Unidad As String, ByVal Farmacopea As String, ByVal Formula As String, ByVal ParametrosFormula() As String)
+    Sub New(ByVal Terminado As String, ByVal Ensayo As String, ByVal DescEnsayo As String, ByVal Parametro As String, ByVal Tipo As Integer, ByVal Informa As Integer, ByVal MenorIgual As Integer, ByVal Desde As String, ByVal Hasta As String, ByVal Unidad As String, ByVal Farmacopea As String, ByVal Formula As String, ByVal ParametrosFormula() As String, ByVal Adicionales() As String)
 
         ' This call is required by the designer.
         InitializeComponent()
@@ -32,6 +33,7 @@
         WDescEnsayo = DescEnsayo
         WParametro = Parametro
         WParametrosFormula = ParametrosFormula
+        Wadicionales = adicionales
         WFormula = Formula
         Me.Terminado = Terminado
 
