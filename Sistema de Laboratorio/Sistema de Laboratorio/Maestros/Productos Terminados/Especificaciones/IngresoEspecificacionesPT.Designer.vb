@@ -29,9 +29,9 @@ Partial Class IngresoEspecificacionesPT
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -67,6 +67,16 @@ Partial Class IngresoEspecificacionesPT
         Me.Cantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.dgvEspecif = New Util.DBDataGridView()
+        Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.dgvEspecifIngles = New Util.DBDataGridView()
+        Me.NroRenglonIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.EnsayoIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.EspecificacionIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DescEnsayoIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FarmacopeaIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.UnidadEspecifIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.NroRenglon = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Ensayo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Especificacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -90,16 +100,9 @@ Partial Class IngresoEspecificacionesPT
         Me.Variable8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Variable9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Variable10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TabPage3 = New System.Windows.Forms.TabPage()
-        Me.dgvEspecifIngles = New Util.DBDataGridView()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
-        Me.NroRenglonIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.EnsayoIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.EspecificacionIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DescEnsayoIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FarmacopeaIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.UnidadEspecifIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FormulaAdic1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FormulaAdic2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FormulaAdic3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -496,7 +499,7 @@ Partial Class IngresoEspecificacionesPT
         Me.dgvEspecif.AllowUserToAddRows = False
         Me.dgvEspecif.AllowUserToDeleteRows = False
         Me.dgvEspecif.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvEspecif.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NroRenglon, Me.Ensayo, Me.Especificacion, Me.DescEnsayo, Me.Farmacopea, Me.TipoEspecif, Me.DesdeEspecif, Me.HastaEspecif, Me.UnidadEspecif, Me.MenorIgualEspecif, Me.InformaEspecif, Me.Parametro, Me.FormulaEspecif, Me.Variable1, Me.Variable2, Me.Variable3, Me.Variable4, Me.Variable5, Me.Variable6, Me.Variable7, Me.Variable8, Me.Variable9, Me.Variable10})
+        Me.dgvEspecif.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NroRenglon, Me.Ensayo, Me.Especificacion, Me.DescEnsayo, Me.Farmacopea, Me.TipoEspecif, Me.DesdeEspecif, Me.HastaEspecif, Me.UnidadEspecif, Me.MenorIgualEspecif, Me.InformaEspecif, Me.Parametro, Me.FormulaEspecif, Me.Variable1, Me.Variable2, Me.Variable3, Me.Variable4, Me.Variable5, Me.Variable6, Me.Variable7, Me.Variable8, Me.Variable9, Me.Variable10, Me.FormulaAdic1, Me.FormulaAdic2, Me.FormulaAdic3})
         DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
         DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -517,183 +520,6 @@ Partial Class IngresoEspecificacionesPT
         Me.dgvEspecif.SinClickDerecho = False
         Me.dgvEspecif.Size = New System.Drawing.Size(905, 264)
         Me.dgvEspecif.TabIndex = 0
-        '
-        'NroRenglon
-        '
-        Me.NroRenglon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.NroRenglon.HeaderText = "Nro."
-        Me.NroRenglon.Name = "NroRenglon"
-        Me.NroRenglon.ReadOnly = True
-        Me.NroRenglon.Width = 52
-        '
-        'Ensayo
-        '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Ensayo.DefaultCellStyle = DataGridViewCellStyle4
-        Me.Ensayo.HeaderText = "Ens."
-        Me.Ensayo.Name = "Ensayo"
-        Me.Ensayo.Width = 40
-        '
-        'Especificacion
-        '
-        Me.Especificacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Especificacion.HeaderText = "Descripción Ensayo"
-        Me.Especificacion.MinimumWidth = 250
-        Me.Especificacion.Name = "Especificacion"
-        Me.Especificacion.ReadOnly = True
-        Me.Especificacion.Width = 250
-        '
-        'DescEnsayo
-        '
-        Me.DescEnsayo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.DescEnsayo.HeaderText = "Descripción Parámetro"
-        Me.DescEnsayo.MinimumWidth = 150
-        Me.DescEnsayo.Name = "DescEnsayo"
-        Me.DescEnsayo.ReadOnly = True
-        '
-        'Farmacopea
-        '
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Farmacopea.DefaultCellStyle = DataGridViewCellStyle5
-        Me.Farmacopea.HeaderText = "Farmacopea"
-        Me.Farmacopea.Name = "Farmacopea"
-        Me.Farmacopea.ReadOnly = True
-        Me.Farmacopea.Width = 75
-        '
-        'TipoEspecif
-        '
-        Me.TipoEspecif.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.TipoEspecif.HeaderText = "TipoEspecif"
-        Me.TipoEspecif.Name = "TipoEspecif"
-        Me.TipoEspecif.ReadOnly = True
-        Me.TipoEspecif.Visible = False
-        '
-        'DesdeEspecif
-        '
-        Me.DesdeEspecif.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.DesdeEspecif.HeaderText = "DesdeEspecif"
-        Me.DesdeEspecif.Name = "DesdeEspecif"
-        Me.DesdeEspecif.ReadOnly = True
-        Me.DesdeEspecif.Visible = False
-        '
-        'HastaEspecif
-        '
-        Me.HastaEspecif.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.HastaEspecif.HeaderText = "HastaEspecif"
-        Me.HastaEspecif.Name = "HastaEspecif"
-        Me.HastaEspecif.ReadOnly = True
-        Me.HastaEspecif.Visible = False
-        '
-        'UnidadEspecif
-        '
-        Me.UnidadEspecif.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.UnidadEspecif.HeaderText = "UnidadEspecif"
-        Me.UnidadEspecif.Name = "UnidadEspecif"
-        Me.UnidadEspecif.ReadOnly = True
-        Me.UnidadEspecif.Visible = False
-        '
-        'MenorIgualEspecif
-        '
-        Me.MenorIgualEspecif.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.MenorIgualEspecif.HeaderText = "MenorIgualEspecif"
-        Me.MenorIgualEspecif.Name = "MenorIgualEspecif"
-        Me.MenorIgualEspecif.ReadOnly = True
-        Me.MenorIgualEspecif.Visible = False
-        '
-        'InformaEspecif
-        '
-        Me.InformaEspecif.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.InformaEspecif.HeaderText = "InformaEspecif"
-        Me.InformaEspecif.Name = "InformaEspecif"
-        Me.InformaEspecif.ReadOnly = True
-        Me.InformaEspecif.Visible = False
-        '
-        'Parametro
-        '
-        Me.Parametro.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Parametro.HeaderText = "Parametro"
-        Me.Parametro.MinimumWidth = 150
-        Me.Parametro.Name = "Parametro"
-        Me.Parametro.ReadOnly = True
-        Me.Parametro.Width = 150
-        '
-        'FormulaEspecif
-        '
-        Me.FormulaEspecif.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.FormulaEspecif.HeaderText = "FormulaEspecif"
-        Me.FormulaEspecif.Name = "FormulaEspecif"
-        Me.FormulaEspecif.ReadOnly = True
-        Me.FormulaEspecif.Visible = False
-        '
-        'Variable1
-        '
-        Me.Variable1.HeaderText = "Variable1"
-        Me.Variable1.Name = "Variable1"
-        Me.Variable1.ReadOnly = True
-        Me.Variable1.Visible = False
-        '
-        'Variable2
-        '
-        Me.Variable2.HeaderText = "Variable2"
-        Me.Variable2.Name = "Variable2"
-        Me.Variable2.ReadOnly = True
-        Me.Variable2.Visible = False
-        '
-        'Variable3
-        '
-        Me.Variable3.HeaderText = "Variable3"
-        Me.Variable3.Name = "Variable3"
-        Me.Variable3.ReadOnly = True
-        Me.Variable3.Visible = False
-        '
-        'Variable4
-        '
-        Me.Variable4.HeaderText = "Variable4"
-        Me.Variable4.Name = "Variable4"
-        Me.Variable4.ReadOnly = True
-        Me.Variable4.Visible = False
-        '
-        'Variable5
-        '
-        Me.Variable5.HeaderText = "Variable5"
-        Me.Variable5.Name = "Variable5"
-        Me.Variable5.ReadOnly = True
-        Me.Variable5.Visible = False
-        '
-        'Variable6
-        '
-        Me.Variable6.HeaderText = "Variable6"
-        Me.Variable6.Name = "Variable6"
-        Me.Variable6.ReadOnly = True
-        Me.Variable6.Visible = False
-        '
-        'Variable7
-        '
-        Me.Variable7.HeaderText = "Variable7"
-        Me.Variable7.Name = "Variable7"
-        Me.Variable7.ReadOnly = True
-        Me.Variable7.Visible = False
-        '
-        'Variable8
-        '
-        Me.Variable8.HeaderText = "Variable8"
-        Me.Variable8.Name = "Variable8"
-        Me.Variable8.ReadOnly = True
-        Me.Variable8.Visible = False
-        '
-        'Variable9
-        '
-        Me.Variable9.HeaderText = "Variable9"
-        Me.Variable9.Name = "Variable9"
-        Me.Variable9.ReadOnly = True
-        Me.Variable9.Visible = False
-        '
-        'Variable10
-        '
-        Me.Variable10.HeaderText = "Variable10"
-        Me.Variable10.Name = "Variable10"
-        Me.Variable10.ReadOnly = True
-        Me.Variable10.Visible = False
         '
         'TabPage3
         '
@@ -780,6 +606,214 @@ Partial Class IngresoEspecificacionesPT
         Me.UnidadEspecifIngles.Name = "UnidadEspecifIngles"
         Me.UnidadEspecifIngles.Width = 80
         '
+        'NroRenglon
+        '
+        Me.NroRenglon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.NroRenglon.HeaderText = "Nro."
+        Me.NroRenglon.Name = "NroRenglon"
+        Me.NroRenglon.ReadOnly = True
+        Me.NroRenglon.Width = 52
+        '
+        'Ensayo
+        '
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Ensayo.DefaultCellStyle = DataGridViewCellStyle4
+        Me.Ensayo.HeaderText = "Ens."
+        Me.Ensayo.Name = "Ensayo"
+        Me.Ensayo.Width = 40
+        '
+        'Especificacion
+        '
+        Me.Especificacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Especificacion.HeaderText = "Descripción Ensayo"
+        Me.Especificacion.MinimumWidth = 250
+        Me.Especificacion.Name = "Especificacion"
+        Me.Especificacion.ReadOnly = True
+        Me.Especificacion.Width = 250
+        '
+        'DescEnsayo
+        '
+        Me.DescEnsayo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.DescEnsayo.HeaderText = "Descripción Parámetro"
+        Me.DescEnsayo.MinimumWidth = 150
+        Me.DescEnsayo.Name = "DescEnsayo"
+        Me.DescEnsayo.ReadOnly = True
+        '
+        'Farmacopea
+        '
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Farmacopea.DefaultCellStyle = DataGridViewCellStyle5
+        Me.Farmacopea.HeaderText = "Farmacopea"
+        Me.Farmacopea.Name = "Farmacopea"
+        Me.Farmacopea.ReadOnly = True
+        Me.Farmacopea.Width = 75
+        '
+        'TipoEspecif
+        '
+        Me.TipoEspecif.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.TipoEspecif.HeaderText = "TipoEspecif"
+        Me.TipoEspecif.Name = "TipoEspecif"
+        Me.TipoEspecif.ReadOnly = True
+        Me.TipoEspecif.Visible = False
+        Me.TipoEspecif.Width = 88
+        '
+        'DesdeEspecif
+        '
+        Me.DesdeEspecif.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.DesdeEspecif.HeaderText = "DesdeEspecif"
+        Me.DesdeEspecif.Name = "DesdeEspecif"
+        Me.DesdeEspecif.ReadOnly = True
+        Me.DesdeEspecif.Visible = False
+        Me.DesdeEspecif.Width = 98
+        '
+        'HastaEspecif
+        '
+        Me.HastaEspecif.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.HastaEspecif.HeaderText = "HastaEspecif"
+        Me.HastaEspecif.Name = "HastaEspecif"
+        Me.HastaEspecif.ReadOnly = True
+        Me.HastaEspecif.Visible = False
+        Me.HastaEspecif.Width = 95
+        '
+        'UnidadEspecif
+        '
+        Me.UnidadEspecif.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.UnidadEspecif.HeaderText = "UnidadEspecif"
+        Me.UnidadEspecif.Name = "UnidadEspecif"
+        Me.UnidadEspecif.ReadOnly = True
+        Me.UnidadEspecif.Visible = False
+        Me.UnidadEspecif.Width = 101
+        '
+        'MenorIgualEspecif
+        '
+        Me.MenorIgualEspecif.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.MenorIgualEspecif.HeaderText = "MenorIgualEspecif"
+        Me.MenorIgualEspecif.Name = "MenorIgualEspecif"
+        Me.MenorIgualEspecif.ReadOnly = True
+        Me.MenorIgualEspecif.Visible = False
+        Me.MenorIgualEspecif.Width = 120
+        '
+        'InformaEspecif
+        '
+        Me.InformaEspecif.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.InformaEspecif.HeaderText = "InformaEspecif"
+        Me.InformaEspecif.Name = "InformaEspecif"
+        Me.InformaEspecif.ReadOnly = True
+        Me.InformaEspecif.Visible = False
+        Me.InformaEspecif.Width = 102
+        '
+        'Parametro
+        '
+        Me.Parametro.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Parametro.HeaderText = "Parametro"
+        Me.Parametro.MinimumWidth = 150
+        Me.Parametro.Name = "Parametro"
+        Me.Parametro.ReadOnly = True
+        Me.Parametro.Width = 150
+        '
+        'FormulaEspecif
+        '
+        Me.FormulaEspecif.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.FormulaEspecif.HeaderText = "FormulaEspecif"
+        Me.FormulaEspecif.Name = "FormulaEspecif"
+        Me.FormulaEspecif.ReadOnly = True
+        Me.FormulaEspecif.Visible = False
+        Me.FormulaEspecif.Width = 104
+        '
+        'Variable1
+        '
+        Me.Variable1.HeaderText = "Variable1"
+        Me.Variable1.Name = "Variable1"
+        Me.Variable1.ReadOnly = True
+        Me.Variable1.Visible = False
+        '
+        'Variable2
+        '
+        Me.Variable2.HeaderText = "Variable2"
+        Me.Variable2.Name = "Variable2"
+        Me.Variable2.ReadOnly = True
+        Me.Variable2.Visible = False
+        '
+        'Variable3
+        '
+        Me.Variable3.HeaderText = "Variable3"
+        Me.Variable3.Name = "Variable3"
+        Me.Variable3.ReadOnly = True
+        Me.Variable3.Visible = False
+        '
+        'Variable4
+        '
+        Me.Variable4.HeaderText = "Variable4"
+        Me.Variable4.Name = "Variable4"
+        Me.Variable4.ReadOnly = True
+        Me.Variable4.Visible = False
+        '
+        'Variable5
+        '
+        Me.Variable5.HeaderText = "Variable5"
+        Me.Variable5.Name = "Variable5"
+        Me.Variable5.ReadOnly = True
+        Me.Variable5.Visible = False
+        '
+        'Variable6
+        '
+        Me.Variable6.HeaderText = "Variable6"
+        Me.Variable6.Name = "Variable6"
+        Me.Variable6.ReadOnly = True
+        Me.Variable6.Visible = False
+        '
+        'Variable7
+        '
+        Me.Variable7.HeaderText = "Variable7"
+        Me.Variable7.Name = "Variable7"
+        Me.Variable7.ReadOnly = True
+        Me.Variable7.Visible = False
+        '
+        'Variable8
+        '
+        Me.Variable8.HeaderText = "Variable8"
+        Me.Variable8.Name = "Variable8"
+        Me.Variable8.ReadOnly = True
+        Me.Variable8.Visible = False
+        '
+        'Variable9
+        '
+        Me.Variable9.HeaderText = "Variable9"
+        Me.Variable9.Name = "Variable9"
+        Me.Variable9.ReadOnly = True
+        Me.Variable9.Visible = False
+        '
+        'Variable10
+        '
+        Me.Variable10.HeaderText = "Variable10"
+        Me.Variable10.Name = "Variable10"
+        Me.Variable10.ReadOnly = True
+        Me.Variable10.Visible = False
+        '
+        'FormulaAdic1
+        '
+        Me.FormulaAdic1.DataPropertyName = "FormulaAdic1"
+        Me.FormulaAdic1.HeaderText = "FormulaAdic1"
+        Me.FormulaAdic1.Name = "FormulaAdic1"
+        Me.FormulaAdic1.ReadOnly = True
+        Me.FormulaAdic1.Visible = False
+        '
+        'FormulaAdic2
+        '
+        Me.FormulaAdic2.DataPropertyName = "FormulaAdic2"
+        Me.FormulaAdic2.HeaderText = "FormulaAdic2"
+        Me.FormulaAdic2.Name = "FormulaAdic2"
+        Me.FormulaAdic2.ReadOnly = True
+        Me.FormulaAdic2.Visible = False
+        '
+        'FormulaAdic3
+        '
+        Me.FormulaAdic3.DataPropertyName = "FormulaAdic3"
+        Me.FormulaAdic3.HeaderText = "FormulaAdic3"
+        Me.FormulaAdic3.Name = "FormulaAdic3"
+        Me.FormulaAdic3.ReadOnly = True
+        Me.FormulaAdic3.Visible = False
+        '
         'IngresoEspecificacionesPT
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -843,6 +877,13 @@ Partial Class IngresoEspecificacionesPT
     Friend WithEvents btnHistorialCambios As System.Windows.Forms.Button
     Friend WithEvents AgregarRenglon As System.Windows.Forms.Button
     Friend WithEvents ckSubEtapas As System.Windows.Forms.CheckBox
+    Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
+    Friend WithEvents NroRenglonIngles As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents EnsayoIngles As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents EspecificacionIngles As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DescEnsayoIngles As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents FarmacopeaIngles As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents UnidadEspecifIngles As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents NroRenglon As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Ensayo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Especificacion As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -866,11 +907,7 @@ Partial Class IngresoEspecificacionesPT
     Friend WithEvents Variable8 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Variable9 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Variable10 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
-    Friend WithEvents NroRenglonIngles As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents EnsayoIngles As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents EspecificacionIngles As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DescEnsayoIngles As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents FarmacopeaIngles As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents UnidadEspecifIngles As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents FormulaAdic1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents FormulaAdic2 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents FormulaAdic3 As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

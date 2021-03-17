@@ -522,7 +522,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
 
             Dim frm As New IngresoParametrosEspecificaciones(txtCodigo.Text, WEnsayo, WDescEnsayo, WParametro, WTipo, WInforma,
                                                              WMenorIgual, WDesde, WHasta, WUnidad, WFarmacopea,
-                                                             WFormula, WParametrosFormula)
+                                                             WFormula, WParametrosFormula, {})
             frm.ShowDialog(Me)
 
             dgvEspecif.CurrentCell = dgvEspecif.Rows(.Index).Cells("Ensayo")
