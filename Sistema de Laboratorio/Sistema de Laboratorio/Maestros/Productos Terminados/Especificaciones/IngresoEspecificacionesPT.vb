@@ -210,8 +210,8 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                     With dgvEspecif.Rows(r)
                         .Cells("Ensayo").Value = WEns
                         .Cells("Especificacion").Value = ""
-                        .Cells("DescEnsayo").Value = Trim(WEspecificacion)
-                        .Cells("Farmacopea").Value = Trim(WFarmacopea)
+                        .Cells("DescEnsayo").Value = Trim(WEspecificacion).left(50)
+                        .Cells("Farmacopea").Value = Trim(WFarmacopea).left(20)
                         .Cells("TipoEspecif").Value = WTipoEspecif
                         .Cells("DesdeEspecif").Value = WDesdeEspecif
                         .Cells("HastaEspecif").Value = WHastaEspecif
@@ -891,6 +891,12 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                 WVariable8 = OrDefault(.Cells("Variable8").Value, "")
                 WVariable9 = OrDefault(.Cells("Variable9").Value, "")
                 WVariable10 = OrDefault(.Cells("Variable10").Value, "")
+                Dim WFormulaAdic1 = OrDefault(.Cells("FormulaAdic1").Value, "")
+                Dim WFormulaAdic2 = OrDefault(.Cells("FormulaAdic2").Value, "")
+                Dim WFormulaAdic3 = OrDefault(.Cells("FormulaAdic3").Value, "")
+                Dim WFormulaAdic1dec = OrDefault(.Cells("FormulaAdic1dec").Value, "")
+                Dim WFormulaAdic2dec = OrDefault(.Cells("FormulaAdic2dec").Value, "")
+                Dim WFormulaAdic3dec = OrDefault(.Cells("FormulaAdic3dec").Value, "")
 
                 Dim ZSql, XPaso, Auxi As String
 
@@ -930,6 +936,12 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                 ZSql = ZSql & "Variable8 ,"
                 ZSql = ZSql & "Variable9 ,"
                 ZSql = ZSql & "Variable10 ,"
+                ZSql = ZSql & "FormulaAdic1 ,"
+                ZSql = ZSql & "FormulaAdic2 ,"
+                ZSql = ZSql & "FormulaAdic3 ,"
+                ZSql = ZSql & "FormulaAdic1dec ,"
+                ZSql = ZSql & "FormulaAdic2dec ,"
+                ZSql = ZSql & "FormulaAdic3dec ,"
                 ZSql = ZSql & "Corte )"
                 ZSql = ZSql & "Values ("
                 ZSql = ZSql & "'" & WClave & "',"
@@ -959,6 +971,12 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                 ZSql = ZSql & "'" & WVariable8 & "',"
                 ZSql = ZSql & "'" & WVariable9 & "',"
                 ZSql = ZSql & "'" & WVariable10 & "',"
+                ZSql = ZSql & "'" & WFormulaAdic1 & "',"
+                ZSql = ZSql & "'" & WFormulaAdic2 & "',"
+                ZSql = ZSql & "'" & WFormulaAdic3 & "',"
+                ZSql = ZSql & "'" & WFormulaAdic1dec & "',"
+                ZSql = ZSql & "'" & WFormulaAdic2dec & "',"
+                ZSql = ZSql & "'" & WFormulaAdic3dec & "',"
                 ZSql = ZSql & "'" & WCorte & "')"
 
                 WConsultas.Add(ZSql)
@@ -1064,10 +1082,6 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
         WConsultas.Add("UPDATE CargaVNoFarma SET SubEtapas = '" & WSubEtapas & "', Observacion1 = '" & Trim(WObservacion(1)) & "', Observacion2 = '" & Trim(WObservacion(2)) & "', Observacion3 = '" & Trim(WObservacion(3)) & "', Observacion4 = '" & Trim(WObservacion(4)) & "', Observacion5 = '" & Trim(WObservacion(5)) & "', Observacion6 = '" & Trim(WObservacion(6)) & "', Observacion7 = '" & Trim(WObservacion(7)) & "', Observacion8 = '" & Trim(WObservacion(8)) & "', Observacion9 = '" & Trim(WObservacion(9)) & "', Observacion10 = '" & Trim(WObservacion(10)) & "' WHERE Terminado = '" & txtTerminado.Text & "' And Paso = '" & txtEtapa.Text & "'")
 
         ExecuteNonQueries("Surfactan_II", WConsultas.ToArray)
-
-
-
-
 
     End Sub
 
@@ -1405,6 +1419,12 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                 WVariable8 = OrDefault(.Cells("Variable8").Value, "")
                 WVariable9 = OrDefault(.Cells("Variable9").Value, "")
                 WVariable10 = OrDefault(.Cells("Variable10").Value, "")
+                Dim WFormulaAdic1 = OrDefault(.Cells("FormulaAdic1").Value, "")
+                Dim WFormulaAdic2 = OrDefault(.Cells("FormulaAdic2").Value, "")
+                Dim WFormulaAdic3 = OrDefault(.Cells("FormulaAdic3").Value, "")
+                Dim WFormulaAdic1dec = OrDefault(.Cells("FormulaAdic1dec").Value, "")
+                Dim WFormulaAdic2dec = OrDefault(.Cells("FormulaAdic2dec").Value, "")
+                Dim WFormulaAdic3dec = OrDefault(.Cells("FormulaAdic3dec").Value, "")
 
                 Dim ZSql, XPaso, Auxi As String
 
@@ -1444,22 +1464,28 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                 ZSql = ZSql & "Variable8 ,"
                 ZSql = ZSql & "Variable9 ,"
                 ZSql = ZSql & "Variable10 ,"
+                ZSql = ZSql & "FormulaAdic1 ,"
+                ZSql = ZSql & "FormulaAdic2 ,"
+                ZSql = ZSql & "FormulaAdic3 ,"
+                ZSql = ZSql & "FormulaAdic1dec ,"
+                ZSql = ZSql & "FormulaAdic2dec ,"
+                ZSql = ZSql & "FormulaAdic3dec ,"
                 ZSql = ZSql & "Corte )"
                 ZSql = ZSql & "Values ("
                 ZSql = ZSql & "'" & WClave & "',"
                 ZSql = ZSql & "'" & txtTerminado.Text & "',"
                 ZSql = ZSql & "'" & txtEtapa.Text & "',"
-                ZSql = ZSql & "'" & WDescPaso & "',"
-                ZSql = ZSql & "'" & txtControlCambios.Text & "',"
+                ZSql = ZSql & "'" & WDescPaso.left(50) & "',"
+                ZSql = ZSql & "'" & txtControlCambios.Text.left(100) & "',"
                 ZSql = ZSql & "'" & Trim(Str$(WRenglon)) & "',"
                 ZSql = ZSql & "'" & WEnsayo & "',"
-                ZSql = ZSql & "'" & WDescEnsayo & "',"
-                ZSql = ZSql & "'" & WValor & "',"
+                ZSql = ZSql & "'" & WDescEnsayo.left(50) & "',"
+                ZSql = ZSql & "'" & WValor.left(70) & "',"
                 ZSql = ZSql & "'" & WTipoEspecif & "',"
                 ZSql = ZSql & "'" & WInformaEspecif & "',"
                 ZSql = ZSql & "'" & WMenorIgualEspecif & "',"
-                ZSql = ZSql & "'" & WFarmacopea & "',"
-                ZSql = ZSql & "'" & WUnidadEspecif & "',"
+                ZSql = ZSql & "'" & WFarmacopea.left(20) & "',"
+                ZSql = ZSql & "'" & WUnidadEspecif.left(20) & "',"
                 ZSql = ZSql & "'" & WDesdeEspecif & "',"
                 ZSql = ZSql & "'" & WHastaEspecif & "',"
                 ZSql = ZSql & "'" & WFormulaEspecif & "',"
@@ -1473,6 +1499,12 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                 ZSql = ZSql & "'" & WVariable8 & "',"
                 ZSql = ZSql & "'" & WVariable9 & "',"
                 ZSql = ZSql & "'" & WVariable10 & "',"
+                ZSql = ZSql & "'" & WFormulaAdic1 & "',"
+                ZSql = ZSql & "'" & WFormulaAdic2 & "',"
+                ZSql = ZSql & "'" & WFormulaAdic3 & "',"
+                ZSql = ZSql & "'" & WFormulaAdic1dec & "',"
+                ZSql = ZSql & "'" & WFormulaAdic2dec & "',"
+                ZSql = ZSql & "'" & WFormulaAdic3dec & "',"
                 ZSql = ZSql & "'" & WCorte & "')"
 
                 WConsultas.Add(ZSql)
@@ -1554,9 +1586,9 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                     ZSql = ZSql & "'" & txtTerminado.Text & "',"
                     ZSql = ZSql & "'" & txtEtapa.Text & "',"
                     ZSql = ZSql & "'" & Trim(Str$(WRenglon)) & "',"
-                    ZSql = ZSql & "'" & WValor & "',"
-                    ZSql = ZSql & "'" & WFarmacopea & "',"
-                    ZSql = ZSql & "'" & WUnidadEspecif & "'"
+                    ZSql = ZSql & "'" & WValor.left(70) & "',"
+                    ZSql = ZSql & "'" & WFarmacopea.left(20) & "',"
+                    ZSql = ZSql & "'" & WUnidadEspecif.left(20) & "'"
                     ZSql = ZSql & ")"
 
                     WConsultas.Add(ZSql)
