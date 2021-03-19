@@ -143,7 +143,7 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
             lblValorEstandar.Visible = True
 
             Dim SQLCnslt As String
-            SQLCnslt = "SELECT * FROM FormulasVerificadasValores WHERE IDRenglon = '" & RenglonID & "' ORDER BY Fila ASC"
+            SQLCnslt = "SELECT * FROM FormulasVerificadasValores WHERE IDRenglon = '" & RenglonID & "' And Terminado = '" & Terminado & "' ORDER BY Fila ASC"
             Dim Dtabla As DataTable = GetAll(SQLCnslt, "Surfactan_II")
 
             If Dtabla.Rows.Count > 0 Then
@@ -203,33 +203,37 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
             End If
         Next
 
-        For Each m As Match In regex.Matches(Formula.Replace("FA1", Adicionales(0, 0)).Replace("FA2", Adicionales(1, 0)).Replace("FA3", Adicionales(2, 0)))
+        Formula = Formula.Replace("FA1", Adicionales(0, 0)).Replace("FA2", Adicionales(1, 0)).Replace("FA3", Adicionales(2, 0))
 
-            Dim renglon As Integer = Val(m.Value.ToString.Replace("R", ""))
+        If DGV Is Nothing Then
+            For Each m As Match In regex.Matches(Formula)
 
-            If wultima <= 10 Then
+                Dim renglon As Integer = Val(m.Value.ToString.Replace("R", ""))
 
-                Dim salir As Boolean
+                If wultima <= 10 Then
 
-                For Each row As DataGridViewRow In dgvVariables.Rows
-                    If row.Cells("Variable").Value = "R" & renglon Then
-                        salir = True
-                        Continue For
-                    End If
-                Next
+                    Dim salir As Boolean
 
-                If salir Then Continue For
+                    For Each row As DataGridViewRow In dgvVariables.Rows
+                        If row.Cells("Variable").Value = "R" & renglon Then
+                            salir = True
+                            Continue For
+                        End If
+                    Next
 
-                dgvVariables.Rows.Add(wultima, "R" & renglon, "0")
-                wultima += 1
-            End If
+                    If salir Then Continue For
 
-        Next
+                    dgvVariables.Rows.Add(wultima, "R" & renglon, "0")
+                    wultima += 1
+                End If
+
+            Next
+        End If
 
         '
         ' Definimos las Referencias.
         '
-        For Each m As Match In regex.Matches(Formula.Replace("FA1", Adicionales(0, 0)).Replace("FA2", Adicionales(1, 0)).Replace("FA3", Adicionales(2, 0)))
+        For Each m As Match In regex.Matches(Formula)
 
             Dim renglon As Integer = Val(m.Value.ToString.Replace("R", ""))
 
@@ -270,13 +274,16 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
         With dgvVariables
             For i = 1 To dgvVariables.Rows.Count
 
-                If .Rows(i - 1).Cells("WValor").Value.ToString.StartsWith(".") Then .Rows(i - 1).Cells("WValor").Value = "0" & .Rows(i - 1).Cells("WValor").Value
+                Dim ZValor As String = OrDefault(.Rows(i - 1).Cells("WValor").Value, "")
 
-                If Not .Rows(i - 1).Cells("Variable").Value.ToString.StartsWith("R") Then
+                If ZValor.ToString.StartsWith(".") Then .Rows(i - 1).Cells("WValor").Value = "0" & ZValor
+
+                Dim ZVariable As String = OrDefault(.Rows(i - 1).Cells("Variable").Value, "")
+                If Not ZVariable.ToString.StartsWith("R") Then
 
                     Variables(i, 0) = OrDefault(.Rows(i - 1).Cells("idVariable").Value, "")
-                    Variables(i, 1) = OrDefault(.Rows(i - 1).Cells("Variable").Value, "")
-                    Variables(i, 2) = OrDefault(.Rows(i - 1).Cells("WValor").Value, "0").ToString.Replace(",", ".")
+                    Variables(i, 1) = OrDefault(ZVariable, "")
+                    Variables(i, 2) = OrDefault(ZValor, "0").ToString.Replace(",", ".")
 
                     If Val(Variables(i, 2)) = 0 Then Variables(i, 2) = "0"
 
@@ -286,13 +293,17 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
 
             For i = 1 To dgvVariables.Rows.Count
 
-                If .Rows(i - 1).Cells("WValor").Value.ToString.StartsWith(".") Then .Rows(i - 1).Cells("WValor").Value = "0" & .Rows(i - 1).Cells("WValor").Value
+                Dim ZValor As String = OrDefault(.Rows(i - 1).Cells("WValor").Value, "")
 
-                If .Rows(i - 1).Cells("Variable").Value.ToString.StartsWith("R") Then
+                If ZValor.ToString.StartsWith(".") Then .Rows(i - 1).Cells("WValor").Value = "0" & ZValor
+
+                Dim ZVariable As String = OrDefault(.Rows(i - 1).Cells("Variable").Value, "")
+
+                If ZVariable.ToString.StartsWith("R") Then
 
                     Referencias(i, 0) = OrDefault(.Rows(i - 1).Cells("idVariable").Value, "")
-                    Referencias(i, 1) = OrDefault(.Rows(i - 1).Cells("Variable").Value, "")
-                    Referencias(i, 2) = OrDefault(.Rows(i - 1).Cells("WValor").Value, "0").ToString.Replace(",", ".")
+                    Referencias(i, 1) = OrDefault(ZVariable, "")
+                    Referencias(i, 2) = OrDefault(ZValor, "0").ToString.Replace(",", ".")
 
                     If Val(Referencias(i, 2)) = 0 Then Referencias(i, 2) = "0"
 
@@ -438,7 +449,7 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
 
                 Dim Fila As Integer = 1
 
-                SQLCnslt = "DELETE  FROM FormulasVerificadasValores WHERE IDRenglon = '" & RenglonID & "'"
+                SQLCnslt = "DELETE  FROM FormulasVerificadasValores WHERE IDRenglon = '" & RenglonID & "' And Terminado = '" & Terminado & "'"
 
                 ListaSQLCnslt.Add(SQLCnslt)
 
@@ -470,10 +481,6 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
         Dim frm As New IngresoClaveSeguridad
         frm.ShowDialog(Me)
 
-
-
     End Sub
-
-
 
 End Class

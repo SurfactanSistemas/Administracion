@@ -1,10 +1,11 @@
 ﻿Public Class DefinicionFormulaEspecificacion : Implements IGrabadoDeFormula
 
     Private WParametrosFormula(10) As String
+    Private Adicionales(2, 1) As String
     Private WFormula As String
     Private Terminado As String
 
-    Sub New(ByVal Terminado As String, ByVal Formula As String, ByVal ParametrosFormula() As String)
+    Sub New(ByVal Terminado As String, ByVal Formula As String, ByVal ParametrosFormula() As String, ByVal Adicionales(,) As String)
 
         ' This call is required by the designer.
         InitializeComponent()
@@ -12,6 +13,7 @@
         ' Add any initialization after the InitializeComponent() call.
 
         WParametrosFormula = ParametrosFormula
+        Me.Adicionales = Adicionales
         WFormula = Formula
         Me.Terminado = Terminado
 
@@ -45,7 +47,7 @@
 
         Dim WOwner As IDefinicionFormulaEspecificacion = TryCast(Owner, IDefinicionFormulaEspecificacion)
 
-        If WOwner IsNot Nothing Then WOwner._ProcesarDefinicionFormulaEspecificacion(txtFormula.Text.Trim, WParametrosFormula)
+        If WOwner IsNot Nothing Then WOwner._ProcesarDefinicionFormulaEspecificacion(txtFormula.Text.Trim, WParametrosFormula, Adicionales)
 
         Close()
 
@@ -97,7 +99,7 @@
     End Sub
 
 
-    Public Sub _GrabarFormula(Formula As String, ParametrosFormula As String(), Descripcion As String, Optional Renglon As Integer = 0) Implements IGrabadoDeFormula._GrabarFormula
+    Public Sub _GrabarFormula(Formula As String, ParametrosFormula As String(), Descripcion As String, Optional Renglon As Integer = 0, Optional ByVal Adic(,) As String = Nothing) Implements IGrabadoDeFormula._GrabarFormula
         txtVar1.Text = Trim(ParametrosFormula(1))
         txtVar2.Text = Trim(ParametrosFormula(2))
         txtVar3.Text = Trim(ParametrosFormula(3))
@@ -108,6 +110,8 @@
         txtVar8.Text = Trim(ParametrosFormula(8))
         txtVar9.Text = Trim(ParametrosFormula(9))
         txtVar10.Text = Trim(ParametrosFormula(10))
+
+        Adicionales = Adic
 
         txtFormula.Text = Trim(Formula)
     End Sub

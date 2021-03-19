@@ -97,7 +97,7 @@ Public Class IngresoFormulasEnsayo : Implements IGrabadoDeFormula, INotificaActu
 
     End Sub
 
-    Public Sub _GrabarFormula(Formula As String, ParametrosFormula As String(), Descripcion As String, Optional Renglon As Integer = 0) Implements IGrabadoDeFormula._GrabarFormula
+    Public Sub _GrabarFormula(Formula As String, ParametrosFormula As String(), Descripcion As String, Optional Renglon As Integer = 0, Optional ByVal Adic(,) As String = Nothing) Implements IGrabadoDeFormula._GrabarFormula
         Throw New NotImplementedException
     End Sub
 
@@ -178,6 +178,7 @@ Public Class IngresoFormulasEnsayo : Implements IGrabadoDeFormula, INotificaActu
         If _owner IsNot Nothing Then
 
             Dim ArrayParametros() As String = New String(11) {}
+            Dim WAdic(2, 1) As String
 
             Dim SQLCnslt = "SELECT * FROM FormulasDeEnsayos WHERE Renglon = '" & OrDefault(DGV_Formulas.CurrentRow.Cells("Renglon").Value, 0) & "' And Terminado = '" & Terminado & "'"
 
@@ -187,7 +188,12 @@ Public Class IngresoFormulasEnsayo : Implements IGrabadoDeFormula, INotificaActu
                 ArrayParametros(i) = row.Item("Var" & i)
             Next
 
-            _owner._GrabarFormula(row.Item("Formula"), ArrayParametros, row.Item("Descripcion"))
+            For i = 1 To 3
+                WAdic(i - 1, 0) = OrDefault(row.Item("FormulaAdic" & i), "")
+                WAdic(i - 1, 1) = OrDefault(row.Item("FormulaAdic" & i & "dec"), "")
+            Next
+
+            _owner._GrabarFormula(row.Item("Formula"), ArrayParametros, row.Item("Descripcion"), adicionales:=WAdic)
 
             Me.Close()
             Exit Sub

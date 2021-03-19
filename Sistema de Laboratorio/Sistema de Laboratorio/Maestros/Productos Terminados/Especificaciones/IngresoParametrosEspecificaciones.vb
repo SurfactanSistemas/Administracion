@@ -10,13 +10,13 @@
     Private WFarmacopea As String
     Private WFormula As String
     Private WParametrosFormula(10) As String
-    Private WAdicionales(2) As String
+    Private WAdicionales(2, 1) As String
     Private WEnsayo As String
     Private WDescEnsayo As String
     Private WParametro As String
     Private Terminado As String
 
-    Sub New(ByVal Terminado As String, ByVal Ensayo As String, ByVal DescEnsayo As String, ByVal Parametro As String, ByVal Tipo As Integer, ByVal Informa As Integer, ByVal MenorIgual As Integer, ByVal Desde As String, ByVal Hasta As String, ByVal Unidad As String, ByVal Farmacopea As String, ByVal Formula As String, ByVal ParametrosFormula() As String, ByVal Adicionales() As String)
+    Sub New(ByVal Terminado As String, ByVal Ensayo As String, ByVal DescEnsayo As String, ByVal Parametro As String, ByVal Tipo As Integer, ByVal Informa As Integer, ByVal MenorIgual As Integer, ByVal Desde As String, ByVal Hasta As String, ByVal Unidad As String, ByVal Farmacopea As String, ByVal Formula As String, ByVal ParametrosFormula() As String, ByVal Adicionales(,) As String)
 
         ' This call is required by the designer.
         InitializeComponent()
@@ -33,7 +33,7 @@
         WDescEnsayo = DescEnsayo
         WParametro = Parametro
         WParametrosFormula = ParametrosFormula
-        Wadicionales = adicionales
+        WAdicionales = Adicionales
         WFormula = Formula
         Me.Terminado = Terminado
 
@@ -213,19 +213,20 @@
 
         Dim WOwner As IIngresoParametrosEspecificaciones = TryCast(Owner, IIngresoParametrosEspecificaciones)
 
-        If WOwner IsNot Nothing Then WOwner._ProcesarIngresoParametrosEspecificaciones(WParametro, WTipo, WInforma, WMenorIgual, WDesde, WHasta, WUnidad, WFarmacopea, WFormula, WParametrosFormula)
+        If WOwner IsNot Nothing Then WOwner._ProcesarIngresoParametrosEspecificaciones(WParametro, WTipo, WInforma, WMenorIgual, WDesde, WHasta, WUnidad, WFarmacopea, WFormula, WParametrosFormula, WAdicionales)
 
         Close()
     End Sub
 
-    Public Sub _ProcesarDefinicionFormulaEspecificacion(ByVal Formula As String, ByVal ParametrosFormula As String()) Implements IDefinicionFormulaEspecificacion._ProcesarDefinicionFormulaEspecificacion
+    Public Sub _ProcesarDefinicionFormulaEspecificacion(ByVal Formula As String, ByVal ParametrosFormula As String(), ByVal Adic(,) As String) Implements IDefinicionFormulaEspecificacion._ProcesarDefinicionFormulaEspecificacion
         txtFormula.Text = Formula
         WParametrosFormula = ParametrosFormula
+        WAdicionales = Adic
         txtFormula.Focus()
     End Sub
 
     Private Sub btnDefinirFormula_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDefinirFormula.Click
-        Dim frm As New DefinicionFormulaEspecificacion(Terminado, txtFormula.Text, WParametrosFormula)
+        Dim frm As New DefinicionFormulaEspecificacion(Terminado, txtFormula.Text, WParametrosFormula, Adicionales:=WAdicionales)
         frm.ShowDialog(Me)
     End Sub
 

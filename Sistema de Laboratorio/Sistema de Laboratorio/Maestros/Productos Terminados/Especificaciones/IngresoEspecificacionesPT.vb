@@ -728,11 +728,14 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
             Dim WParametro As String = OrDefault(.Cells("DescEnsayo").Value, "")
             Dim WFormula As String = OrDefault(.Cells("FormulaEspecif").Value, "")
             Dim WParametrosFormula(10) As String
-            Dim WAdicionales(2) As String
+            Dim WAdicionales(2, 1) As String
 
-            WAdicionales(0) = OrDefault(.Cells("FormulaAdic1").Value, "")
-            WAdicionales(1) = OrDefault(.Cells("FormulaAdic2").Value, "")
-            WAdicionales(2) = OrDefault(.Cells("FormulaAdic3").Value, "")
+            WAdicionales(0, 0) = OrDefault(.Cells("FormulaAdic1").Value, "")
+            WAdicionales(1, 0) = OrDefault(.Cells("FormulaAdic2").Value, "")
+            WAdicionales(2, 0) = OrDefault(.Cells("FormulaAdic3").Value, "")
+            WAdicionales(0, 1) = OrDefault(.Cells("FormulaAdic1dec").Value, "")
+            WAdicionales(1, 1) = OrDefault(.Cells("FormulaAdic2dec").Value, "")
+            WAdicionales(2, 1) = OrDefault(.Cells("FormulaAdic3dec").Value, "")
 
             For i = 1 To 10
                 WParametrosFormula(i) = Trim(OrDefault(.Cells("Variable" & i).Value, ""))
@@ -747,7 +750,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
     End Sub
 
-    Public Sub _ProcesarIngresoParametrosEspecificaciones(ByVal WParametro As String, ByVal Tipo As Integer, ByVal Informa As Integer, ByVal MenorIgual As Integer, ByVal Desde As String, ByVal Hasta As String, ByVal Unidad As String, ByVal WFarmacopea As String, ByVal Formula As String, ByVal ParametrosFormula() As String) Implements IIngresoParametrosEspecificaciones._ProcesarIngresoParametrosEspecificaciones
+    Public Sub _ProcesarIngresoParametrosEspecificaciones(ByVal WParametro As String, ByVal Tipo As Integer, ByVal Informa As Integer, ByVal MenorIgual As Integer, ByVal Desde As String, ByVal Hasta As String, ByVal Unidad As String, ByVal WFarmacopea As String, ByVal Formula As String, ByVal ParametrosFormula() As String, ByVal Adic(,) As String) Implements IIngresoParametrosEspecificaciones._ProcesarIngresoParametrosEspecificaciones
         With dgvEspecif.CurrentRow
             .Cells("DescEnsayo").Value = WParametro
             .Cells("TipoEspecif").Value = Tipo
@@ -758,6 +761,12 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
             .Cells("UnidadEspecif").Value = Unidad
             .Cells("Farmacopea").Value = WFarmacopea
             .Cells("FormulaEspecif").Value = Formula
+            .Cells("FormulaAdic1").Value = Adic(0, 0)
+            .Cells("FormulaAdic2").Value = Adic(1, 0)
+            .Cells("FormulaAdic3").Value = Adic(2, 0)
+            .Cells("FormulaAdic1dec").Value = formatonumerico(Adic(0, 1))
+            .Cells("FormulaAdic2dec").Value = formatonumerico(Adic(1, 1))
+            .Cells("FormulaAdic3dec").Value = formatonumerico(Adic(2, 1))
 
             Dim WImpreParametro = _GenerarImpreParametro(Tipo, Desde, Hasta, Unidad, MenorIgual, Informa)
 

@@ -533,7 +533,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
 
     End Sub
 
-    Public Sub _ProcesarIngresoParametrosEspecificaciones(ByVal WParametro As String, ByVal Tipo As Integer, ByVal Informa As Integer, ByVal MenorIgual As Integer, ByVal Desde As String, ByVal Hasta As String, ByVal Unidad As String, ByVal WFarmacopea As String, ByVal Formula As String, ByVal ParametrosFormula() As String) Implements IIngresoParametrosEspecificaciones._ProcesarIngresoParametrosEspecificaciones
+    Public Sub _ProcesarIngresoParametrosEspecificaciones(ByVal WParametro As String, ByVal Tipo As Integer, ByVal Informa As Integer, ByVal MenorIgual As Integer, ByVal Desde As String, ByVal Hasta As String, ByVal Unidad As String, ByVal WFarmacopea As String, ByVal Formula As String, ByVal ParametrosFormula() As String, ByVal Adic(,) As String) Implements IIngresoParametrosEspecificaciones._ProcesarIngresoParametrosEspecificaciones
         With dgvEspecif.CurrentRow
             .Cells("DescEnsayo").Value = WParametro
             .Cells("TipoEspecif").Value = Tipo
@@ -544,6 +544,12 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
             .Cells("UnidadEspecif").Value = Unidad
             .Cells("Farmacopea").Value = WFarmacopea
             .Cells("FormulaEspecif").Value = Formula
+            .Cells("FormulaAdic1").Value = Adic(0, 0)
+            .Cells("FormulaAdic2").Value = Adic(1, 0)
+            .Cells("FormulaAdic3").Value = Adic(2, 0)
+            .Cells("FormulaAdic1dec").Value = formatonumerico(Adic(0, 1))
+            .Cells("FormulaAdic2dec").Value = formatonumerico(Adic(1, 1))
+            .Cells("FormulaAdic3dec").Value = formatonumerico(Adic(2, 1))
 
             Dim WImpreParametro = _GenerarImpreParametro(Tipo, Desde, Hasta, Unidad, MenorIgual, Informa)
 
