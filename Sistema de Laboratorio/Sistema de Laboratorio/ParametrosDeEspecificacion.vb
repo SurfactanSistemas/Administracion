@@ -5,10 +5,11 @@ Public Class ParametrosDeEspecificacion : Implements INotificaActualizacion, ITr
     Dim Renglon As Integer
     Private ReadOnly Terminado As String
     Dim WID As String
+    Private WDecimales As Integer = 2
     
     Dim WparametrosFormula(11) As String
 
-    Sub New(Optional ByVal Terminado As String = "", Optional ByVal Fila As Integer = 0, Optional ByVal Permiso As Boolean = False)
+    Sub New(Optional ByVal Terminado As String = "", Optional ByVal Fila As Integer = 0, Optional ByVal Permiso As Boolean = False, Optional ByVal Decimales As Integer = 2)
 
         ' Llamada necesaria para el diseñador.
         InitializeComponent()
@@ -17,6 +18,7 @@ Public Class ParametrosDeEspecificacion : Implements INotificaActualizacion, ITr
 
         Renglon = Fila
         Me.Terminado = Terminado
+        Me.WDecimales = Decimales
 
         If Permiso = False Then
             For Each c As TextBox In Me.gbVariables.Controls.OfType(Of TextBox)()
@@ -58,6 +60,7 @@ Public Class ParametrosDeEspecificacion : Implements INotificaActualizacion, ITr
             txtDecAdic1.Text = Trim(OrDefault(row.Item("FormulaAdic1Dec"), "2"))
             txtDecAdic2.Text = Trim(OrDefault(row.Item("FormulaAdic2Dec"), "2"))
             txtDecAdic3.Text = Trim(OrDefault(row.Item("FormulaAdic3Dec"), "2"))
+            WDecimales = Val(Trim(OrDefault(row.Item("Decimales"), "2")))
 
             txtDescripcion.Text = Trim(OrDefault(row.Item("Descripcion"), ""))
             If Renglon = 0 And txtDescripcion.Text <> "" Then txtDescripcion.Text = "<--" & txtDescripcion.Text & "-->"
@@ -127,11 +130,7 @@ Public Class ParametrosDeEspecificacion : Implements INotificaActualizacion, ITr
         End If
 
     End Sub
-
-    Private Sub ParametrosDeEspecificacion_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-    End Sub
-
+    
     Private Sub btnCancelar_Click(sender As Object, e As EventArgs) Handles btnCancelar.Click
         Me.Close()
     End Sub
@@ -350,6 +349,7 @@ Public Class ParametrosDeEspecificacion : Implements INotificaActualizacion, ITr
             Dim WReferencias(11, 2) As String
             Dim WFormula As String = Trim(txtFormula.Text)
             Dim Wvalor As String = ""
+            WDecimales = OrDefault(row("Decimales"), 2)
             Dim WRenglon As Short = 0
 
             For i = 1 To 10
@@ -381,7 +381,7 @@ Public Class ParametrosDeEspecificacion : Implements INotificaActualizacion, ITr
             WAdicionales(1, 1) = txtDecAdic2.Text.Trim
             WAdicionales(2, 1) = txtDecAdic3.Text.Trim
 
-            With New IngresoVariablesFormula(WFormula, Wvariables, Wvalor, Nothing, Nothing, Renglon, WReferencias, False, Terminado, WAdicionales)
+            With New IngresoVariablesFormula(WFormula, Wvariables, Wvalor, Nothing, WDecimales, Renglon, WReferencias, False, Terminado, WAdicionales)
                 .Show(Me)
             End With
         End If
@@ -434,6 +434,7 @@ Public Class ParametrosDeEspecificacion : Implements INotificaActualizacion, ITr
             txtDecAdic1.Text = Trim(OrDefault(row.Item("FormulaAdic1dec"), "2"))
             txtDecAdic2.Text = Trim(OrDefault(row.Item("FormulaAdic2dec"), "2"))
             txtDecAdic3.Text = Trim(OrDefault(row.Item("FormulaAdic3dec"), "2"))
+            WDecimales = Val(OrDefault(row.Item("Decimales"), "2"))
 
             txtDescripcion.Text = Trim(OrDefault(row.Item("Descripcion"), ""))
             If Renglon = 0 And txtDescripcion.Text <> "" Then txtDescripcion.Text = "<--" & txtDescripcion.Text & "-->"

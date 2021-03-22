@@ -1722,6 +1722,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                 WMenorIgualEspecif = OrDefault(.Item("MenorIgualEspecif"), "")
                 WInformaEspecif = OrDefault(.Item("InformaEspecif"), "")
                 WFormulaEspecif = OrDefault(.Item("FormulaEspecif"), "")
+                Dim WDecimalesFormula As String = OrDefault(.Item("Decimales"), "")
                 WImpreParametro = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif, WInformaEspecif)
 
                 Dim WFormulas(10) As String
@@ -1750,6 +1751,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                     .Cells("InformaEspecif").Value = WInformaEspecif
                     .Cells("FormulaEspecif").Value = WFormulaEspecif
                     .Cells("Parametro").Value = Trim(WImpreParametro)
+                    .Cells("Decimales").Value = Trim(WDecimalesFormula)
 
                     For i = 1 To 10
                         .Cells("Variable" & i).Value = Trim(WFormulas(i))

@@ -3959,6 +3959,12 @@ Partial Public Class DBAuxi
 
         Private columnDescFormula As Global.System.Data.DataColumn
 
+        Private columnFA1 As Global.System.Data.DataColumn
+
+        Private columnFA2 As Global.System.Data.DataColumn
+
+        Private columnFA3 As Global.System.Data.DataColumn
+
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public Sub New()
@@ -4059,6 +4065,30 @@ Partial Public Class DBAuxi
         End Property
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public ReadOnly Property FA1Column() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnFA1
+            End Get
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public ReadOnly Property FA2Column() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnFA2
+            End Get
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public ReadOnly Property FA3Column() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnFA3
+            End Get
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
          Global.System.ComponentModel.Browsable(False)> _
         Public ReadOnly Property Count() As Integer
@@ -4095,9 +4125,9 @@ Partial Public Class DBAuxi
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-        Public Overloads Function AddTablaImprePlanillaValidacionesRow(ByVal Producto As String, ByVal DescProducto As String, ByVal Formula As String, ByVal Resultado As String, ByVal Variable As String, ByVal Valor As String, ByVal DescFormula As String) As TablaImprePlanillaValidacionesRow
+        Public Overloads Function AddTablaImprePlanillaValidacionesRow(ByVal Producto As String, ByVal DescProducto As String, ByVal Formula As String, ByVal Resultado As String, ByVal Variable As String, ByVal Valor As String, ByVal DescFormula As String, ByVal FA1 As String, ByVal FA2 As String, ByVal FA3 As String) As TablaImprePlanillaValidacionesRow
             Dim rowTablaImprePlanillaValidacionesRow As TablaImprePlanillaValidacionesRow = CType(Me.NewRow, TablaImprePlanillaValidacionesRow)
-            Dim columnValuesArray() As Object = New Object() {Nothing, Producto, DescProducto, Formula, Resultado, Variable, Valor, DescFormula}
+            Dim columnValuesArray() As Object = New Object() {Nothing, Producto, DescProducto, Formula, Resultado, Variable, Valor, DescFormula, FA1, FA2, FA3}
             rowTablaImprePlanillaValidacionesRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowTablaImprePlanillaValidacionesRow)
             Return rowTablaImprePlanillaValidacionesRow
@@ -4128,6 +4158,9 @@ Partial Public Class DBAuxi
             Me.columnVariable = MyBase.Columns("Variable")
             Me.columnValor = MyBase.Columns("Valor")
             Me.columnDescFormula = MyBase.Columns("DescFormula")
+            Me.columnFA1 = MyBase.Columns("FA1")
+            Me.columnFA2 = MyBase.Columns("FA2")
+            Me.columnFA3 = MyBase.Columns("FA3")
         End Sub
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
@@ -4149,6 +4182,12 @@ Partial Public Class DBAuxi
             MyBase.Columns.Add(Me.columnValor)
             Me.columnDescFormula = New Global.System.Data.DataColumn("DescFormula", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnDescFormula)
+            Me.columnFA1 = New Global.System.Data.DataColumn("FA1", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnFA1)
+            Me.columnFA2 = New Global.System.Data.DataColumn("FA2", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnFA2)
+            Me.columnFA3 = New Global.System.Data.DataColumn("FA3", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnFA3)
             Me.columnID.AutoIncrement = True
             Me.columnID.AutoIncrementSeed = -1
             Me.columnID.AutoIncrementStep = -1
@@ -6992,6 +7031,54 @@ Partial Public Class DBAuxi
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Property FA1() As String
+            Get
+                Try
+                    Return CType(Me(Me.tableTablaImprePlanillaValidaciones.FA1Column), String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("El valor de la columna 'FA1' de la tabla 'TablaImprePlanillaValidaciones' es DBNu" & _
+                            "ll.", e)
+                End Try
+            End Get
+            Set(value As String)
+                Me(Me.tableTablaImprePlanillaValidaciones.FA1Column) = value
+            End Set
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Property FA2() As String
+            Get
+                Try
+                    Return CType(Me(Me.tableTablaImprePlanillaValidaciones.FA2Column), String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("El valor de la columna 'FA2' de la tabla 'TablaImprePlanillaValidaciones' es DBNu" & _
+                            "ll.", e)
+                End Try
+            End Get
+            Set(value As String)
+                Me(Me.tableTablaImprePlanillaValidaciones.FA2Column) = value
+            End Set
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Property FA3() As String
+            Get
+                Try
+                    Return CType(Me(Me.tableTablaImprePlanillaValidaciones.FA3Column), String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("El valor de la columna 'FA3' de la tabla 'TablaImprePlanillaValidaciones' es DBNu" & _
+                            "ll.", e)
+                End Try
+            End Get
+            Set(value As String)
+                Me(Me.tableTablaImprePlanillaValidaciones.FA3Column) = value
+            End Set
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public Function IsIDNull() As Boolean
             Return Me.IsNull(Me.tableTablaImprePlanillaValidaciones.IDColumn)
         End Function
@@ -7084,6 +7171,42 @@ Partial Public Class DBAuxi
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public Sub SetDescFormulaNull()
             Me(Me.tableTablaImprePlanillaValidaciones.DescFormulaColumn) = Global.System.Convert.DBNull
+        End Sub
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Function IsFA1Null() As Boolean
+            Return Me.IsNull(Me.tableTablaImprePlanillaValidaciones.FA1Column)
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Sub SetFA1Null()
+            Me(Me.tableTablaImprePlanillaValidaciones.FA1Column) = Global.System.Convert.DBNull
+        End Sub
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Function IsFA2Null() As Boolean
+            Return Me.IsNull(Me.tableTablaImprePlanillaValidaciones.FA2Column)
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Sub SetFA2Null()
+            Me(Me.tableTablaImprePlanillaValidaciones.FA2Column) = Global.System.Convert.DBNull
+        End Sub
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Function IsFA3Null() As Boolean
+            Return Me.IsNull(Me.tableTablaImprePlanillaValidaciones.FA3Column)
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Sub SetFA3Null()
+            Me(Me.tableTablaImprePlanillaValidaciones.FA3Column) = Global.System.Convert.DBNull
         End Sub
     End Class
 

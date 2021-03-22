@@ -372,7 +372,36 @@ Public Class ImpresionPlanillaEnsayosPT : Implements IAyudaPTs
         wUnidadEspecif = OrDefault(Trim(wUnidadEspecif), "")
         wMenorIgualEspecif = OrDefault(Trim(wMenorIgualEspecif), "")
 
-        If Val(WInformaEspecif) = 0 And Val(WTipoEspecif) = 2 Then Return "Informativo"
+        If Val(WInformaEspecif) = 0 And Val(WTipoEspecif) = 2 Then
+            If Val(wDesdeEspecif) <> 0 Or Val(wHastaEspecif) <> 9999 Then
+
+                If Val(wDesdeEspecif) <> 0 And Val(wHastaEspecif) <> 0 Then
+                    Return String.Format("Informativo ({0} - {1} {2})", wDesdeEspecif, wHastaEspecif, wUnidadEspecif)
+                End If
+
+                If Val(wDesdeEspecif) = 0 And Val(wHastaEspecif) <> 0 Then
+
+                    If Val(wMenorIgualEspecif) = 1 Then
+                        Return String.Format("Informativo (Máximo {0} {1})", wHastaEspecif, wUnidadEspecif)
+                    End If
+
+                    Return String.Format("Informativo (Menor a {0} {1})", wHastaEspecif, wUnidadEspecif)
+
+                End If
+
+                If Val(wDesdeEspecif) <> 0 And Val(wHastaEspecif) = 9999 Then
+
+                    If Val(wMenorIgualEspecif) = 1 Then
+                        Return String.Format("Informativo (Mínimo {0} {1})", wDesdeEspecif, wUnidadEspecif)
+                    End If
+
+                    Return String.Format("Informativo (Mayor a {0} {1})", wHastaEspecif, wUnidadEspecif)
+
+                End If
+
+            End If
+            Return "Informativo"
+        End If
 
         If Val(wDesdeEspecif) = 0 And Val(wHastaEspecif) = 0 Then Return "Cumple Ensayo"
 

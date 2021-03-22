@@ -113,7 +113,7 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
         DGV = Grilla
 
         txtDecimales.Text = Me.Decimales
-        txtDecimales.Text = IIf(Valor.Trim = "", "2", "0")
+        txtDecimales.Text = IIf(Valor.Trim = "" And txtDecimales.Text = "", "2", txtDecimales.Text)
 
         Dim aux As Integer = Valor.IndexOfAny({",", "."})
 
@@ -477,7 +477,7 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
                     ListaSQLCnslt.Add(SQLCnslt)
                 Next
 
-                SQLCnslt = "UPDATE FormulasDeEnsayos SET EstadoVerificado = 1, Analistalab = '" & WDatos.Item("Operador") & "' WHERE Renglon = '" & RenglonID & "'"
+                SQLCnslt = "UPDATE FormulasDeEnsayos SET EstadoVerificado = 1, Analistalab = '" & WDatos.Item("Operador") & "', Decimales = '" & Decimales & "' WHERE Renglon = '" & RenglonID & "' And Terminado = '" & Terminado & "'"
                 ListaSQLCnslt.Add(SQLCnslt)
 
                 ExecuteNonQueries("Surfactan_II", ListaSQLCnslt.ToArray())

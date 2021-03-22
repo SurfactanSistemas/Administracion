@@ -208,7 +208,7 @@
             WHasta = IIf(ckHabDesdeHasta.Checked, txtHasta.Text, "")
             WUnidad = IIf(ckHabDesdeHasta.Checked, txtUnidad.Text, "")
             WInforma = 1
-            WMenorIgual = IIf(ckMenorIgual.Checked, 1, 0)
+            WMenorIgual = IIf(ckMenorIgual.Checked, 0, 1)
         End If
 
         Dim WOwner As IIngresoParametrosEspecificaciones = TryCast(Owner, IIngresoParametrosEspecificaciones)

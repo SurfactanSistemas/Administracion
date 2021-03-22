@@ -19,26 +19,6 @@
 
         Dim tabla As DataTable = GetAll(SQLCnslt, "Surfactan_II")
 
-        tabla.Columns.Add("FormulaFinal")
-
-        For Each row As datarow In tabla.rows
-
-            Dim WForm As String = Trim(OrDefault(row("Formula"), ""))
-
-            Dim WFa1, WFa2, WFa3 As String
-
-            WFa1 = Trim(OrDefault(row("FormulaAdic1"), ""))
-            WFa2 = Trim(OrDefault(row("FormulaAdic2"), ""))
-            WFa3 = Trim(OrDefault(row("FormulaAdic3"), ""))
-
-            WForm = WForm.Replace("FA1", WFa1).Replace("FA2", WFa2).Replace("FA3", WFa3).Replace(" ", "")
-
-            WForm = WForm.Replace("(", "( ").Replace(")", " )").Replace("*", " * ").Replace("/", " / ").Replace("+", " + ").Replace("-", " - ")
-
-            row("FormulaFinal") = WForm
-
-        Next
-
         DbDataGridView1.DataSource = tabla
 
         Dim datos As DataTable = New DBAuxi.TablaImprePlanillaValidacionesDataTable
@@ -47,14 +27,22 @@
 
             Dim r As DataRow = datos.NewRow
 
+            Dim WForm As String = row("Formula").ToString.Replace("(", "( ").Replace(")", " )").Replace("*", " * ").Replace("/", " / ").Replace("+", " + ").Replace("-", " - ")
+            Dim WFa1 As String = Trim(OrDefault(row("FormulaAdic1"), "")).Replace("(", "( ").Replace(")", " )").Replace("*", " * ").Replace("/", " / ").Replace("+", " + ").Replace("-", " - ")
+            Dim WFa2 As String = Trim(OrDefault(row("FormulaAdic2"), "")).Replace("(", "( ").Replace(")", " )").Replace("*", " * ").Replace("/", " / ").Replace("+", " + ").Replace("-", " - ")
+            Dim WFa3 As String = Trim(OrDefault(row("FormulaAdic3"), "")).Replace("(", "( ").Replace(")", " )").Replace("*", " * ").Replace("/", " / ").Replace("+", " + ").Replace("-", " - ")
+
             With r
                 .Item("Producto") = row("Terminado")
                 .Item("DescProducto") = row("DescProducto")
-                .Item("Formula") = row("FormulaFinal")
+                .Item("Formula") = WForm
                 .Item("DescFormula") = row("DescFormula")
                 .Item("Resultado") = row("ResultadoVerificado")
                 .Item("Variable") = row("Variable")
                 .Item("Valor") = row("Valor")
+                .Item("FA1") = WFa1
+                .Item("FA2") = WFa2
+                .Item("FA3") = WFa3
             End With
 
             datos.Rows.Add(r)

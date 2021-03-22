@@ -2939,4 +2939,8 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
         Loop
     End Sub
+
+    Private Sub dgvEspecif_CellErrorTextChanged(sender As Object, e As DataGridViewCellEventArgs) Handles dgvEspecif.CellErrorTextChanged
+
+    End Sub
 End Class
