@@ -261,66 +261,77 @@ Partial Class ImpresionPlanillaEnsayosPT
         '
         Me.TipoEspecif.HeaderText = "TipoEspecif"
         Me.TipoEspecif.Name = "TipoEspecif"
+        Me.TipoEspecif.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.TipoEspecif.Visible = False
         '
         'Var1
         '
         Me.Var1.HeaderText = "Var1"
         Me.Var1.Name = "Var1"
+        Me.Var1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.Var1.Visible = False
         '
         'Var2
         '
         Me.Var2.HeaderText = "Var2"
         Me.Var2.Name = "Var2"
+        Me.Var2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.Var2.Visible = False
         '
         'Var3
         '
         Me.Var3.HeaderText = "Var3"
         Me.Var3.Name = "Var3"
+        Me.Var3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.Var3.Visible = False
         '
         'Var4
         '
         Me.Var4.HeaderText = "Var4"
         Me.Var4.Name = "Var4"
+        Me.Var4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.Var4.Visible = False
         '
         'Var5
         '
         Me.Var5.HeaderText = "Var5"
         Me.Var5.Name = "Var5"
+        Me.Var5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.Var5.Visible = False
         '
         'Var6
         '
         Me.Var6.HeaderText = "Var6"
         Me.Var6.Name = "Var6"
+        Me.Var6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.Var6.Visible = False
         '
         'Var7
         '
         Me.Var7.HeaderText = "Var7"
         Me.Var7.Name = "Var7"
+        Me.Var7.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.Var7.Visible = False
         '
         'Var8
         '
         Me.Var8.HeaderText = "Var8"
         Me.Var8.Name = "Var8"
+        Me.Var8.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.Var8.Visible = False
         '
         'Var9
         '
         Me.Var9.HeaderText = "Var9"
         Me.Var9.Name = "Var9"
+        Me.Var9.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.Var9.Visible = False
         '
         'Var10
         '
         Me.Var10.HeaderText = "Var10"
         Me.Var10.Name = "Var10"
+        Me.Var10.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.Var10.Visible = False
         '
         'ImpresionPlanillaEnsayosPT

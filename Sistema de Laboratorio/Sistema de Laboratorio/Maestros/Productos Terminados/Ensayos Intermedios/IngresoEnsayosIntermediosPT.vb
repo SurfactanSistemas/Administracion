@@ -289,6 +289,13 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                         Dim WMenorIgualEspecif = OrDefault(.Item("MenorIgualEspecif"), "")
                         Dim WInformaEspecif = OrDefault(.Item("InformaEspecif"), "")
                         Dim WFormulaEspecif = OrDefault(.Item("FormulaEspecif"), "")
+                        Dim WFormulaAdic1 = Trim(OrDefault(.Item("FormulaAdic1"), ""))
+                        Dim WFormulaAdic2 = Trim(OrDefault(.Item("FormulaAdic2"), ""))
+                        Dim WFormulaAdic3 = Trim(OrDefault(.Item("FormulaAdic3"), ""))
+                        Dim WFormulaAdic1dec = Trim(OrDefault(.Item("FormulaAdic1dec"), ""))
+                        Dim WFormulaAdic2dec = Trim(OrDefault(.Item("FormulaAdic2dec"), ""))
+                        Dim WFormulaAdic3dec = Trim(OrDefault(.Item("FormulaAdic3dec"), ""))
+
                         Dim WImpreResultado = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif, WInformaEspecif)
 
                         Dim WOperador = OrDefault(.Item("OperadorLabora"), "")
@@ -338,6 +345,12 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                             .Cells("InformaEspecif").Value = WInformaEspecif
                             .Cells("Parametro").Value = Trim(WImpreResultado)
                             .Cells("FormulaEspecif").Value = Trim(WFormulaEspecif)
+                            .Cells("FormulaAdic1").Value = Trim(WFormulaAdic1)
+                            .Cells("FormulaAdic2").Value = Trim(WFormulaAdic2)
+                            .Cells("FormulaAdic3").Value = Trim(WFormulaAdic3)
+                            .Cells("FormulaAdic1dec").Value = Trim(WFormulaAdic1dec)
+                            .Cells("FormulaAdic2dec").Value = Trim(WFormulaAdic2dec)
+                            .Cells("FormulaAdic3dec").Value = Trim(WFormulaAdic3dec)
 
                             .Cells("OperadorLabora").Value = Trim(WOperador)
 
@@ -979,7 +992,12 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                     Dim WFormulaEspecif As String = OrDefault(.Cells("FormulaEspecif").Value, "")
                     Dim WParametro As String = Trim(OrDefault(.Cells("Parametro").Value, ""))
 
-
+                    Dim WFormulaAdic1 As String = OrDefault(.Cells("FormulaAdic1").Value, "")
+                    Dim WFormulaAdic2 As String = OrDefault(.Cells("FormulaAdic2").Value, "")
+                    Dim WFormulaAdic3 As String = OrDefault(.Cells("FormulaAdic3").Value, "")
+                    Dim WFormulaAdic1dec As String = OrDefault(.Cells("FormulaAdic1dec").Value, "")
+                    Dim WFormulaAdic2dec As String = OrDefault(.Cells("FormulaAdic2dec").Value, "")
+                    Dim WFormulaAdic3dec As String = OrDefault(.Cells("FormulaAdic3dec").Value, "")
 
                     Dim WOperadorLabora As String = WIDOperadorAnalista ' Se lo obtiene cuando se valida la contraseña.
 
@@ -1034,6 +1052,12 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                     ZSql = ZSql & "Impre1 ,"
                     ZSql = ZSql & "Impre2 ,"
                     ZSql = ZSql & "FormulaEspecif ,"
+                    ZSql = ZSql & "FormulaAdic1 ,"
+                    ZSql = ZSql & "FormulaAdic2 ,"
+                    ZSql = ZSql & "FormulaAdic3 ,"
+                    ZSql = ZSql & "FormulaAdic1dec ,"
+                    ZSql = ZSql & "FormulaAdic2dec ,"
+                    ZSql = ZSql & "FormulaAdic3dec ,"
 
                     For i = 1 To 10
                         ZSql = ZSql & "Variable" & i & " ,"
@@ -1076,10 +1100,23 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                     ZSql = ZSql & "'" & WParametro.left(100) & "',"
                     ZSql = ZSql & "'" & WTipoProceso.left(100) & "',"
                     ZSql = ZSql & "'" & WFormulaEspecif & "',"
+                    ZSql = ZSql & "'" & WFormulaAdic1 & "',"
+                    ZSql = ZSql & "'" & WFormulaAdic2 & "',"
+                    ZSql = ZSql & "'" & WFormulaAdic3 & "',"
+                    ZSql = ZSql & "'" & WFormulaAdic1dec & "',"
+                    ZSql = ZSql & "'" & WFormulaAdic2dec & "',"
+                    ZSql = ZSql & "'" & WFormulaAdic3dec & "',"
 
                     For i = 1 To 10
+
                         ZSql = ZSql & "'" & WFormulas(i, 1) & "',"
-                        ZSql = ZSql & "'" & WFormulas(i, 2) & "',"
+
+                        Dim tmp As String = ""
+
+                        If (New Regex("[0-9]+[\,\.][0-9]+")).IsMatch(WFormulas(i, 2)) Then tmp = WFormulas(i, 2)
+
+                        ZSql = ZSql & "'" & tmp & "',"
+
                     Next
 
                     If WNoGrabaIniciales = False Then
@@ -1220,8 +1257,45 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                 If Val(WTipo) = 2 Then
 
                     Dim WFormula As String = OrDefault(.Cells("FormulaEspecif").Value, "")
-
+                    
                     Dim parser As New ExpressionParser()
+
+                    Dim regex As New Regex("R[0-9]{1,2}")
+
+                    For x = 1 To 3
+
+                        Dim v = OrDefault(.Cells("FormulaAdic" & x).Value, "")
+                        Dim d = OrDefault(.Cells("FormulaAdic" & x & "dec").Value, "")
+
+                        If v <> "" Then
+
+                            parser.Values.Clear()
+
+                            For i = 1 To 10
+                                If v.ToLower.Contains("v" & i) Then
+                                    Dim WValor As String = OrDefault(.Cells("VariableValor" & i).Value, "0").Replace(",", ".")
+                                    parser.Values.Add("v" & i, WValor)
+                                End If
+                            Next
+
+                            For Each m As Match In regex.Matches(v)
+
+                                Dim renglon As Integer = Val(m.Value.ToString.Replace("R", ""))
+
+                                If renglon <= dgvEnsayos.Rows.Count Then
+                                    parser.Values.Add(LCase(m.Value), OrDefault(dgvEnsayos.Rows(renglon - 1).Cells("Valor").Value, "0").ToString.Replace(",", ""))
+                                End If
+
+                            Next
+            
+                            Dim WVal = formatonumerico(parser.Parse(v), Val(d))
+
+                            WFormula = WFormula.Replace("FA" & x, WVal)
+
+                        End If
+                    Next
+
+                    parser.Values.Clear()
 
                     For i = 1 To 10
 
@@ -1232,8 +1306,6 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                         parser.Values.Add("v" & i, WValor)
 
                     Next
-
-                    Dim regex As New Regex("R[1-9]{1,2}")
 
                     For Each m As Match In regex.Matches(WFormula)
 

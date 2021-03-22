@@ -117,11 +117,12 @@ Public Class ParametrosDeEspecificacion : Implements INotificaActualizacion, ITr
             End If
         End If
 
-
         Dim WOwner2 As IGrabadoDeFormula = TryCast(Owner, IGrabadoDeFormula)
 
         If WOwner2 IsNot Nothing Then
+
             WOwner2._GrabarFormulaMod(txtFormula.Text, WparametrosFormula, txtDescripcion.Text, Renglon, False, txtAdic1.Text, txtAdic2.Text, txtAdic3.Text, txtDecAdic1.Text, txtDecAdic2.Text, txtDecAdic3.Text)
+
             Close()
         End If
 

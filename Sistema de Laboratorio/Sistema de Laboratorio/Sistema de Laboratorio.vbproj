@@ -228,6 +228,12 @@
     <Compile Include="ListadoTerminadosFormulas.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Maestros\Formulas\ImprePlanillaValidaciones.Designer.vb">
+      <DependentUpon>ImprePlanillaValidaciones.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\Formulas\ImprePlanillaValidaciones.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Maestros\Informe de Recepcion De Drogas de laboratorio\BuscadorOrdenCompraXProvee.Designer.vb">
       <DependentUpon>BuscadorOrdenCompraXProvee.vb</DependentUpon>
     </Compile>
@@ -483,6 +489,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReporteListadoEnsayosII.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Formulas\PlanillaValidaciones.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PlanillaValidaciones.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\Ingreso Datos Adicionales MP\ReporteDatosAdiciolesMP.vb">
@@ -751,6 +763,9 @@
     <EmbeddedResource Include="ListadoTerminadosFormulas.resx">
       <DependentUpon>ListadoTerminadosFormulas.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\Formulas\ImprePlanillaValidaciones.resx">
+      <DependentUpon>ImprePlanillaValidaciones.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Maestros\Informe de Recepcion De Drogas de laboratorio\BuscadorOrdenCompraXProvee.resx">
       <DependentUpon>BuscadorOrdenCompraXProvee.vb</DependentUpon>
     </EmbeddedResource>
@@ -872,6 +887,10 @@
     <EmbeddedResource Include="Reportes\Ensayos\ReporteListadoEnsayosII.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteListadoEnsayosII.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Formulas\PlanillaValidaciones.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PlanillaValidaciones.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Ingreso Datos Adicionales MP\ReporteDatosAdiciolesMP.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

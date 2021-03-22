@@ -238,6 +238,19 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
             Dim renglon As Integer = Val(m.Value.ToString.Replace("R", ""))
 
             If DGV IsNot Nothing AndAlso renglon <= DGV.Rows.Count And wultima <= 10 Then
+
+                Dim salir As Boolean
+
+                For Each row As DataGridViewRow In dgvVariables.Rows
+                    salir = False
+                    If row.Cells("Variable").Value = "R" & renglon Then
+                        salir = True
+                        Continue For
+                    End If
+                Next
+
+                If salir Then Continue For
+
                 Dim x = dgvVariables.Rows.Add(wultima, m.Value, OrDefault(DGV.Rows(renglon - 1).Cells("Valor").Value, "0").ToString.Replace(",", "."))
                 dgvVariables.Rows(x).Cells("WValor").ReadOnly = True
                 wultima += 1
@@ -471,7 +484,15 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
 
                 Dim WOwner As INotificaActualizacion = TryCast(Owner, INotificaActualizacion)
 
-                If WOwner IsNot Nothing Then WOwner._ProcesarNotificaActualizacion()
+                If WOwner IsNot Nothing Then
+                    WOwner._ProcesarNotificaActualizacion()
+
+                    If MsgBox("¿Quiere imprimir la planilla de Validación?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                        With New ImprePlanillaValidaciones(Terminado, RenglonID)
+                            .Show()
+                        End With
+                    End If
+                End If
 
                 Exit Sub
             End If

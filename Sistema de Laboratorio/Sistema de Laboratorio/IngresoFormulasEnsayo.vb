@@ -239,4 +239,16 @@ Public Class IngresoFormulasEnsayo : Implements IGrabadoDeFormula, INotificaActu
     Public Sub _ProcesarNotificaActualizacion() Implements INotificaActualizacion._ProcesarNotificaActualizacion
         _CargarDatos()
     End Sub
+
+    Private Sub btnPlanillaValidaciones_Click(sender As Object, e As EventArgs) Handles btnPlanillaValidaciones.Click
+
+        If DGV_Formulas.SelectedRows.Count = 0 Then
+            MsgBox("Debe seleccionar un ensayo para imprimir la planilla.", MsgBoxStyle.Information)
+            Exit Sub
+        End If
+        
+        With New ImprePlanillaValidaciones(lblTerminado.Text, DGV_Formulas.SelectedRows(0).Cells("Renglon").Value)
+            .Show(Me)
+        End With
+    End Sub
 End Class
