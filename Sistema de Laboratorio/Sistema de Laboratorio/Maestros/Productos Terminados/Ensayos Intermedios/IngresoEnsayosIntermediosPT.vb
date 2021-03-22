@@ -1113,7 +1113,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
                         Dim tmp As String = ""
 
-                        If (New Regex("[0-9]+[\,\.][0-9]+")).IsMatch(WFormulas(i, 2)) Then tmp = WFormulas(i, 2)
+                        If (New Regex("[0-9]+[\,\.]?[0-9]+")).IsMatch(WFormulas(i, 2)) Then tmp = WFormulas(i, 2)
 
                         ZSql = ZSql & "'" & tmp & "',"
 
@@ -1175,7 +1175,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                 '
                 ' REALIZAMOS IMPRESION CON REDUCCION AL 80%
                 '
-                If EsFarma() Then _GenerarReporteResultadosCalidad(txtPartida.Text, 1, WImpre(0), WImpre(1), WImpre(2), WImpre(3))
+                'If EsFarma() Then _GenerarReporteResultadosCalidad(txtPartida.Text, 1, WImpre(0), WImpre(1), WImpre(2), WImpre(3))
                 '
                 ' REALIZAMOS IMPRESION CON REDUCCION AL 100%
                 '
@@ -1274,6 +1274,9 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                             For i = 1 To 10
                                 If v.ToLower.Contains("v" & i) Then
                                     Dim WValor As String = OrDefault(.Cells("VariableValor" & i).Value, "0").Replace(",", ".")
+
+                                    If Val(WValor) = 0 Then WValor = "0.00000000000000000000001"
+
                                     parser.Values.Add("v" & i, WValor)
                                 End If
                             Next
@@ -1283,7 +1286,11 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                                 Dim renglon As Integer = Val(m.Value.ToString.Replace("R", ""))
 
                                 If renglon <= dgvEnsayos.Rows.Count Then
-                                    parser.Values.Add(LCase(m.Value), OrDefault(dgvEnsayos.Rows(renglon - 1).Cells("Valor").Value, "0").ToString.Replace(",", ""))
+                                    Dim z As String = OrDefault(dgvEnsayos.Rows(renglon - 1).Cells("Valor").Value, "0").ToString.Replace(",", "")
+
+                                    If Val(z) = 0 Then z = "0.00000000000000000000001"
+
+                                    parser.Values.Add(LCase(m.Value), z)
                                 End If
 
                             Next
