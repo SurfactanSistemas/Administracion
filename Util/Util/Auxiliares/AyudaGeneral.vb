@@ -36,8 +36,11 @@
 
         Dim WOwner As IAyudaGeneral = TryCast(Owner, IAyudaGeneral)
 
+        DialogResult = Windows.Forms.DialogResult.No
+
         If WOwner IsNot Nothing Then
             Hide()
+            DialogResult = Windows.Forms.DialogResult.OK
             WOwner._ProcesarAyudaGeneral(dgvDatos.CurrentRow)
         End If
 

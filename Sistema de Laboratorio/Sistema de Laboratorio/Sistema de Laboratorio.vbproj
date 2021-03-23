@@ -194,6 +194,7 @@
     <Compile Include="Clases\Enumeraciones.vb" />
     <Compile Include="Clases\Helper.vb" />
     <Compile Include="Clases\Interfaces\INotificaActualizacion.vb" />
+    <Compile Include="Clases\Interfaces\ITraerFormulaOtroCodigo.vb" />
     <Compile Include="Clases\Operador.vb" />
     <Compile Include="Clases\Query.vb" />
     <Compile Include="ConsDeEspefXVersion.Designer.vb">

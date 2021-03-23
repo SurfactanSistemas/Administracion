@@ -7,6 +7,7 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
     Public Property Formula As String
     Public Property Variables As String(,)
     Public Property Referencias As String(,)
+    Public Property Adicionales As String(,)
     Public Property Valor As String
     Public Property Decimales As String
 
@@ -95,7 +96,7 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
 
 
 
-    Sub New(ByVal Formula As String, ByVal Variables(,) As String, ByVal Valor As String, Optional ByVal Grilla As DataGridView = Nothing, Optional ByVal Decimales As Object = Nothing, Optional ByVal Renglon As Integer = -1, Optional ByVal Referencias(,) As String = Nothing, Optional ByVal WDesdeCargaResultados As Boolean = False, Optional ByVal WTerminado As String = "")
+    Sub New(ByVal Formula As String, ByVal Variables(,) As String, ByVal Valor As String, Optional ByVal Grilla As DataGridView = Nothing, Optional ByVal Decimales As Object = Nothing, Optional ByVal Renglon As Integer = -1, Optional ByVal Referencias(,) As String = Nothing, Optional ByVal WDesdeCargaResultados As Boolean = False, Optional ByVal WTerminado As String = "", Optional ByVal WAdicionales(,) As String = Nothing)
 
         ' This call is required by the designer.
         InitializeComponent()
@@ -104,6 +105,7 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
 
         Me.Variables = Variables
         Me.Referencias = OrDefault(Referencias, New String(11, 2) {})
+        Me.Adicionales = OrDefault(WAdicionales, New String(2, 1) {})
         Me.Decimales = OrDefault(Decimales, 2)
         Me.Formula = Trim(Formula)
         Me.Valor = Valor.Replace(",", ".")
@@ -201,11 +203,33 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
             End If
         Next
 
+        For Each m As Match In regex.Matches(Formula.Replace("FA1", Adicionales(0, 0)).Replace("FA2", Adicionales(1, 0)).Replace("FA3", Adicionales(2, 0)))
+
+            Dim renglon As Integer = Val(m.Value.ToString.Replace("R", ""))
+
+            If wultima <= 10 Then
+
+                Dim salir As Boolean
+
+                For Each row As DataGridViewRow In dgvVariables.Rows
+                    If row.Cells("Variable").Value = "R" & renglon Then
+                        salir = True
+                        Continue For
+                    End If
+                Next
+
+                If salir Then Continue For
+
+                dgvVariables.Rows.Add(wultima, "R" & renglon, "0")
+                wultima += 1
+            End If
+
+        Next
+
         '
         ' Definimos las Referencias.
         '
-        
-        For Each m As Match In regex.Matches(Formula)
+        For Each m As Match In regex.Matches(Formula.Replace("FA1", Adicionales(0, 0)).Replace("FA2", Adicionales(1, 0)).Replace("FA3", Adicionales(2, 0)))
 
             Dim renglon As Integer = Val(m.Value.ToString.Replace("R", ""))
 
@@ -214,7 +238,7 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
                 dgvVariables.Rows(x).Cells("WValor").ReadOnly = True
                 wultima += 1
             End If
-            
+
         Next
 
         For i = wultima To 10
@@ -233,6 +257,8 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
     Private Sub btnAceptar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAceptar.Click
 
         DialogResult = Windows.Forms.DialogResult.OK
+
+        Dim WForm As String = Formula
 
         '
         ' Reasignamos los valores de las variables.
@@ -281,9 +307,45 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
         '
         Dim parser As New ExpressionParser()
 
+        For x = 0 To 2
+            If Adicionales(x, 0) <> "" Then
+
+                parser.Values.Clear()
+
+                With parser.Values
+                    For i = 1 To 10
+                        If Variables(i, 1).Trim <> "" And Adicionales(x, 0).ToLower.Contains("v" & Variables(i, 0)) Then
+                            .Add("v" & i, Variables(i, 2))
+                        End If
+                    Next
+                End With
+
+                For i As Integer = 1 To 10
+                    Referencias(i, 1) = OrDefault(Referencias(i, 1), "")
+                    Referencias(i, 2) = OrDefault(Referencias(i, 2), "")
+                Next
+
+                With parser.Values
+                    For i = 1 To 10
+                        If Referencias(i, 1).Trim <> "" And Referencias(i, 2).Trim <> "" And Adicionales(x, 0).ToUpper.Contains(Referencias(i, 1)) Then
+                            If Val(Referencias(i, 2)) = 0 Then Referencias(i, 2) = "0"
+                            .Add(Referencias(i, 1).ToLower, Referencias(i, 2))
+                        End If
+                    Next
+                End With
+
+                Valor = formatonumerico(parser.Parse(Adicionales(x, 0)), Val(Adicionales(x, 1)))
+
+                WForm = WForm.Replace("FA" & (x + 1), Valor)
+
+            End If
+        Next
+
+        parser.Values.Clear()
+        
         With parser.Values
             For i = 1 To 10
-                If Variables(i, 1).Trim <> "" And Formula.ToLower.Contains("v" & Variables(i, 0)) Then
+                If Variables(i, 1).Trim <> "" And WForm.ToLower.Contains("v" & Variables(i, 0)) Then
                     .Add("v" & i, Variables(i, 2))
                 End If
             Next
@@ -296,12 +358,14 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
 
         With parser.Values
             For i = 1 To 10
-                If Referencias(i, 1).Trim <> "" And Referencias(i, 2).Trim <> "" And Formula.ToUpper.Contains(Referencias(i, 1)) Then
+                If Referencias(i, 1).Trim <> "" And Referencias(i, 2).Trim <> "" And WForm.ToUpper.Contains(Referencias(i, 1)) Then
                     If Val(Referencias(i, 2)) = 0 Then Referencias(i, 2) = "0"
                     .Add(Referencias(i, 1).ToLower, Referencias(i, 2))
                 End If
             Next
         End With
+
+        'Formula = Formula.Replace("FA1", Adicionales(0)).Replace("FA2", Adicionales(1)).Replace("FA3", Adicionales(2))
 
         'Dim regex As New Regex("R[0-9]{1,2}")
 
@@ -309,7 +373,7 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
         '    If regex.IsMatch(OrDefault(row.Cells("Variable").Value, "")) Then parser.Values.Add(LCase(row.Cells("Variable").Value.ToString), OrDefault(row.Cells("WValor").Value, "0").ToString.Replace(",", "."))
         'Next
 
-        Valor = formatonumerico(parser.Parse(Formula), Val(txtDecimales.Text))
+        Valor = formatonumerico(parser.Parse(WForm), Val(txtDecimales.Text))
 
         If Not regex.IsMatch(Valor, "\d") Then
             MsgBox("El resultado del cálculo no es correcto.", MsgBoxStyle.Exclamation)
