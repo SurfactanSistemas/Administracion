@@ -15,7 +15,7 @@
     End Sub
     Private Sub ImprePlanillaValidaciones_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        Dim SQLCnslt = "SELECT fe.Descripcion As DescFormula, fe.FormulaAdic1, fe.FormulaAdic2, fe.FormulaAdic3, fe.FormulaAdic1dec, fe.FormulaAdic2dec, fe.FormulaAdic3dec, fv.*, t.Descripcion DescProducto FROM FormulasDeEnsayos fe INNER JOIN FormulasVerificadasValores fv ON fv.Terminado = fe.Terminado AND fv.IDRenglon = fe.Renglon INNER JOIN SurfactanSa.dbo.Terminado t ON t.Codigo = fv.Terminado WHERE fv.Terminado = '" & WProducto & "' And fv.Variable <> '' AND fv.IDRenglon = '" & WRenglon & "' Order By fv.IDRenglon, fv.Fila"
+        Dim SQLCnslt = "SELECT fe.Descripcion As DescFormula, fe.Formula As FormulaOrig, fe.FormulaAdic1, fe.FormulaAdic2, fe.FormulaAdic3, fe.FormulaAdic1dec, fe.FormulaAdic2dec, fe.FormulaAdic3dec, fe.FechaVerificacion, fe.ReferenciaVerificacion, fe.PartidaVerificacion, fv.*, t.Descripcion DescProducto FROM FormulasDeEnsayos fe INNER JOIN FormulasVerificadasValores fv ON fv.Terminado = fe.Terminado AND fv.IDRenglon = fe.Renglon INNER JOIN SurfactanSa.dbo.Terminado t ON t.Codigo = fv.Terminado WHERE fv.Terminado = '" & WProducto & "' And fv.Variable <> '' AND fv.IDRenglon = '" & WRenglon & "' Order By fv.IDRenglon, fv.Fila"
 
         Dim tabla As DataTable = GetAll(SQLCnslt, "Surfactan_II")
 
@@ -23,23 +23,37 @@
 
         Dim datos As DataTable = New DBAuxi.TablaImprePlanillaValidacionesDataTable
 
+        Dim WUnidad As String = ""
+
         For Each row As datarow In tabla.rows
 
             Dim r As DataRow = datos.NewRow
 
-            Dim WForm As String = row("Formula").ToString.Replace("(", "( ").Replace(")", " )").Replace("*", " * ").Replace("/", " / ").Replace("+", " + ").Replace("-", " - ")
+            Dim WForm As String = row("FormulaOrig").ToString.Replace("(", "( ").Replace(")", " )").Replace("*", " * ").Replace("/", " / ").Replace("+", " + ").Replace("-", " - ")
             Dim WFa1 As String = Trim(OrDefault(row("FormulaAdic1"), "")).Replace("(", "( ").Replace(")", " )").Replace("*", " * ").Replace("/", " / ").Replace("+", " + ").Replace("-", " - ")
             Dim WFa2 As String = Trim(OrDefault(row("FormulaAdic2"), "")).Replace("(", "( ").Replace(")", " )").Replace("*", " * ").Replace("/", " / ").Replace("+", " + ").Replace("-", " - ")
             Dim WFa3 As String = Trim(OrDefault(row("FormulaAdic3"), "")).Replace("(", "( ").Replace(")", " )").Replace("*", " * ").Replace("/", " / ").Replace("+", " + ").Replace("-", " - ")
+
+            If Trim(WUnidad) = "" Then
+                Dim WEspe As DataRow = GetSingle("SELECT TOP 1 UnidadEspecif FROM CargaV WHERE Terminado = '" & WProducto & "' AND rtrim(FormulaEspecif) = '" & WForm.Replace(" ", "").Trim & "'")
+
+                If WEspe IsNot Nothing Then
+                    WUnidad = Trim(OrDefault(WEspe("UnidadEspecif"), ""))
+                End If
+
+            End If
 
             With r
                 .Item("Producto") = row("Terminado")
                 .Item("DescProducto") = row("DescProducto")
                 .Item("Formula") = WForm
                 .Item("DescFormula") = row("DescFormula")
-                .Item("Resultado") = row("ResultadoVerificado")
+                .Item("Resultado") = Trim(Trim(row("ResultadoVerificado")) & " " & WUnidad).Trim
                 .Item("Variable") = row("Variable")
                 .Item("Valor") = row("Valor")
+                .Item("Fecha") = row("FechaVerificacion")
+                .Item("Referencia") = row("ReferenciaVerificacion")
+                .Item("Partida") = row("PartidaVerificacion")
                 .Item("FA1") = WFa1
                 .Item("FA2") = WFa2
                 .Item("FA3") = WFa3

@@ -504,4 +504,9 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
 
     End Sub
 
+    Private Sub btnDatosReferencia_Click(sender As Object, e As EventArgs) Handles btnDatosReferencia.Click
+        With New ActualizacionDatosRefVerificacion(Terminado, RenglonID)
+            .Show(Me)
+        End With
+    End Sub
 End Class

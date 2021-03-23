@@ -193,6 +193,7 @@
     <Compile Include="Clases\Entidades\ProductoTerminado.vb" />
     <Compile Include="Clases\Enumeraciones.vb" />
     <Compile Include="Clases\Helper.vb" />
+    <Compile Include="Clases\Interfaces\IImprimirPlanillaVerificacion.vb" />
     <Compile Include="Clases\Interfaces\INotificaActualizacion.vb" />
     <Compile Include="Clases\Interfaces\ITraerFormulaOtroCodigo.vb" />
     <Compile Include="Clases\Operador.vb" />
@@ -226,6 +227,12 @@
       <DependentUpon>ListadoTerminadosFormulas.vb</DependentUpon>
     </Compile>
     <Compile Include="ListadoTerminadosFormulas.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maestros\Formulas\ActualizacionDatosRefVerificacion.Designer.vb">
+      <DependentUpon>ActualizacionDatosRefVerificacion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Maestros\Formulas\ActualizacionDatosRefVerificacion.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Maestros\Formulas\ImprePlanillaValidaciones.Designer.vb">
@@ -762,6 +769,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ListadoTerminadosFormulas.resx">
       <DependentUpon>ListadoTerminadosFormulas.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maestros\Formulas\ActualizacionDatosRefVerificacion.resx">
+      <DependentUpon>ActualizacionDatosRefVerificacion.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Maestros\Formulas\ImprePlanillaValidaciones.resx">
       <DependentUpon>ImprePlanillaValidaciones.vb</DependentUpon>

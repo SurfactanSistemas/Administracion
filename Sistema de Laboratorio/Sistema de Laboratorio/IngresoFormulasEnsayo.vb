@@ -1,4 +1,4 @@
-Public Class IngresoFormulasEnsayo : Implements IGrabadoDeFormula, INotificaActualizacion
+Public Class IngresoFormulasEnsayo : Implements IGrabadoDeFormula, INotificaActualizacion, IImprimirPlanillaVerificacion
     Private ReadOnly Terminado As String
     Dim PermisoGrabar As Boolean
     Dim ForzarNuevo As Boolean
@@ -246,9 +246,37 @@ Public Class IngresoFormulasEnsayo : Implements IGrabadoDeFormula, INotificaActu
             MsgBox("Debe seleccionar un ensayo para imprimir la planilla.", MsgBoxStyle.Information)
             Exit Sub
         End If
-        
-        With New ImprePlanillaValidaciones(lblTerminado.Text, DGV_Formulas.SelectedRows(0).Cells("Renglon").Value)
+
+        Dim ZRenglon As Integer = DGV_Formulas.SelectedRows(0).Cells("Renglon").Value
+
+        Dim datos As DataRow = GetSingle("SELECT Top 1 FechaVerificacion, ReferenciaVerificacion, PartidaVerificacion FROM FormulasDeEnsayos WHERE Terminado = '" & lblTerminado.Text & "' And Renglon = '" & ZRenglon & "' Order by Renglon", "Surfactan_II")
+
+        Dim WFecha, WRef, WPart As String
+
+        If datos Is Nothing Then Exit Sub
+
+        WFecha = OrDefault(datos("FechaVerificacion"), "")
+        WRef = OrDefault(datos("ReferenciaVerificacion"), "")
+        WPart = OrDefault(datos("PartidaVerificacion"), "")
+
+        If WFecha.Replace(" ", "").Length < 10 Or Trim(WRef) = "" Or Val(WPart) = 0 Then
+
+            With New ActualizacionDatosRefVerificacion(lblTerminado.Text, ZRenglon)
+                .Show(Me)
+            End With
+
+            Exit Sub
+        End If
+
+        _ProcesarImprimirPlanillaVerificacion(lblTerminado.Text, ZRenglon)
+
+    End Sub
+
+    Public Sub _ProcesarImprimirPlanillaVerificacion(Ter As String, Ren As Integer) Implements IImprimirPlanillaVerificacion._ProcesarImprimirPlanillaVerificacion
+
+        With New ImprePlanillaValidaciones(Ter, Ren)
             .Show(Me)
         End With
+
     End Sub
 End Class

@@ -880,7 +880,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                 Exit Sub
             End If
 
-            If Not _ValidarValoresIngresados() And Not WEsPorDesvio Then
+            If Not _ValidarValoresIngresados() And Not WEsPorDesvio And Val(txtEtapa.Text) = 99 Then
 
                 If MsgBox("Algunos de los valores indicados, no se encuentran dentro de los valores especificados para este Producto y etapa." & vbCrLf & vbCrLf & vbCrLf & "¿Desea Continuar con la Grabación por Desvío?", MsgBoxStyle.YesNoCancel) <> MsgBoxResult.Yes Then
                     WEsPorDesvio = False
@@ -1005,7 +1005,19 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
                     For i = 1 To 10
                         WFormulas(i, 1) = Trim(OrDefault(.Cells("Variable" & i).Value, ""))
-                        WFormulas(i, 2) = Trim(OrDefault(.Cells("VariableValor" & i).Value, "")).Replace(",", ".")
+
+                        If WFormulas(i, 1).StartsWith("R") Then
+
+                            Dim renglon As Integer = Val(WFormulas(i, 1).Replace("R", ""))
+
+                            If renglon < 1 Then Continue For
+
+                            WFormulas(i, 2) = OrDefault(dgvEnsayos.Rows(renglon - 1).Cells("Valor").Value, "").ToString.Replace(",", ".")
+
+                        Else
+                            WFormulas(i, 2) = Trim(OrDefault(.Cells("VariableValor" & i).Value, "")).Replace(",", ".")
+                        End If
+
                     Next
 
                     WResultado = _GenerarImpreResultado(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WValor, WMenorIgualEspecif, WInformaEspecif)
@@ -1440,7 +1452,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
             wValor = formatonumerico(wValor, WDecimales)
 
             Return String.Format("{0} {1}", wValor, wUnidadEspecif)
-        ElseIf Val(wTipoEspecif) = 0 And Val(WMenorIgualEspecif) = 1 And Val(WInformaEspecif) = 1 Then
+        ElseIf Val(wTipoEspecif) = 0 And Val(WMenorIgualEspecif) = 1 And Val(WInformaEspecif) = 1 And Val(wHastaEspecif) <> 0 Then
             Return String.Format("< {0} {1}", wHastaEspecif, wUnidadEspecif)
         Else
 
@@ -1484,18 +1496,21 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
             '
             ' Verificamos si se ha grabado anteriormente por Desvio, en este caso se considera Bloqueado e imposible de ser actualizado por este medio.
             '
-            Dim WDesvio As DataRow = GetSingle("SELECT TOP 1 PorDesvio, NroDesvio FROM PrueterFarmaIntermedio WHERE Producto = '" & txtCodigo.Text & "' AND Partida = '" & txtPartida.Text & "' AND Paso = '" & txtEtapa.Text & "' And Renglon = 1")
+            If Val(txtEtapa.Text) = 99 Then
 
-            If WDesvio IsNot Nothing Then
-                With WDesvio
-                    Dim WPorDesvio As Integer = OrDefault(.Item("PorDesvio"), 0)
-                    Dim WNroDesvio As String = OrDefault(.Item("NroDesvio"), "")
+                Dim WDesvio As DataRow = GetSingle("SELECT TOP 1 PorDesvio, NroDesvio FROM PrueterFarmaIntermedio WHERE Producto = '" & txtCodigo.Text & "' AND Partida = '" & txtPartida.Text & "' AND Paso = '" & txtEtapa.Text & "' And Renglon = 1")
 
-                    If WPorDesvio = 1 And WNroDesvio.Trim <> "" Then Throw New Exception("Los resultados informados para esta Etapa, se encuentran Bloqueados debido a que fueron ingresados por Desvío.")
+                If WDesvio IsNot Nothing Then
+                    With WDesvio
+                        Dim WPorDesvio As Integer = OrDefault(.Item("PorDesvio"), 0)
+                        Dim WNroDesvio As String = OrDefault(.Item("NroDesvio"), "")
 
-                End With
+                        If WPorDesvio = 1 And WNroDesvio.Trim <> "" Then Throw New Exception("Los resultados informados para esta Etapa, se encuentran Bloqueados debido a que fueron ingresados por Desvío.")
+
+                    End With
+                End If
+
             End If
-
 
             '
             ' Validamos en caso de tener informado un componente si tiene o no un lote/partida valido/a.

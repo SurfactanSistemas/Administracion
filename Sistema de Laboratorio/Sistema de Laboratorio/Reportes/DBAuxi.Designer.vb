@@ -3965,6 +3965,12 @@ Partial Public Class DBAuxi
 
         Private columnFA3 As Global.System.Data.DataColumn
 
+        Private columnFecha As Global.System.Data.DataColumn
+
+        Private columnReferencia As Global.System.Data.DataColumn
+
+        Private columnPartida As Global.System.Data.DataColumn
+
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public Sub New()
@@ -4089,6 +4095,30 @@ Partial Public Class DBAuxi
         End Property
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public ReadOnly Property FechaColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnFecha
+            End Get
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public ReadOnly Property ReferenciaColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnReferencia
+            End Get
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public ReadOnly Property PartidaColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnPartida
+            End Get
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
          Global.System.ComponentModel.Browsable(False)> _
         Public ReadOnly Property Count() As Integer
@@ -4125,9 +4155,9 @@ Partial Public Class DBAuxi
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-        Public Overloads Function AddTablaImprePlanillaValidacionesRow(ByVal Producto As String, ByVal DescProducto As String, ByVal Formula As String, ByVal Resultado As String, ByVal Variable As String, ByVal Valor As String, ByVal DescFormula As String, ByVal FA1 As String, ByVal FA2 As String, ByVal FA3 As String) As TablaImprePlanillaValidacionesRow
+        Public Overloads Function AddTablaImprePlanillaValidacionesRow(ByVal Producto As String, ByVal DescProducto As String, ByVal Formula As String, ByVal Resultado As String, ByVal Variable As String, ByVal Valor As String, ByVal DescFormula As String, ByVal FA1 As String, ByVal FA2 As String, ByVal FA3 As String, ByVal Fecha As String, ByVal Referencia As String, ByVal Partida As String) As TablaImprePlanillaValidacionesRow
             Dim rowTablaImprePlanillaValidacionesRow As TablaImprePlanillaValidacionesRow = CType(Me.NewRow, TablaImprePlanillaValidacionesRow)
-            Dim columnValuesArray() As Object = New Object() {Nothing, Producto, DescProducto, Formula, Resultado, Variable, Valor, DescFormula, FA1, FA2, FA3}
+            Dim columnValuesArray() As Object = New Object() {Nothing, Producto, DescProducto, Formula, Resultado, Variable, Valor, DescFormula, FA1, FA2, FA3, Fecha, Referencia, Partida}
             rowTablaImprePlanillaValidacionesRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowTablaImprePlanillaValidacionesRow)
             Return rowTablaImprePlanillaValidacionesRow
@@ -4161,6 +4191,9 @@ Partial Public Class DBAuxi
             Me.columnFA1 = MyBase.Columns("FA1")
             Me.columnFA2 = MyBase.Columns("FA2")
             Me.columnFA3 = MyBase.Columns("FA3")
+            Me.columnFecha = MyBase.Columns("Fecha")
+            Me.columnReferencia = MyBase.Columns("Referencia")
+            Me.columnPartida = MyBase.Columns("Partida")
         End Sub
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
@@ -4188,6 +4221,12 @@ Partial Public Class DBAuxi
             MyBase.Columns.Add(Me.columnFA2)
             Me.columnFA3 = New Global.System.Data.DataColumn("FA3", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnFA3)
+            Me.columnFecha = New Global.System.Data.DataColumn("Fecha", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnFecha)
+            Me.columnReferencia = New Global.System.Data.DataColumn("Referencia", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnReferencia)
+            Me.columnPartida = New Global.System.Data.DataColumn("Partida", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnPartida)
             Me.columnID.AutoIncrement = True
             Me.columnID.AutoIncrementSeed = -1
             Me.columnID.AutoIncrementStep = -1
@@ -7079,6 +7118,54 @@ Partial Public Class DBAuxi
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Property Fecha() As String
+            Get
+                Try
+                    Return CType(Me(Me.tableTablaImprePlanillaValidaciones.FechaColumn), String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("El valor de la columna 'Fecha' de la tabla 'TablaImprePlanillaValidaciones' es DB" & _
+                            "Null.", e)
+                End Try
+            End Get
+            Set(value As String)
+                Me(Me.tableTablaImprePlanillaValidaciones.FechaColumn) = value
+            End Set
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Property Referencia() As String
+            Get
+                Try
+                    Return CType(Me(Me.tableTablaImprePlanillaValidaciones.ReferenciaColumn), String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("El valor de la columna 'Referencia' de la tabla 'TablaImprePlanillaValidaciones' " & _
+                            "es DBNull.", e)
+                End Try
+            End Get
+            Set(value As String)
+                Me(Me.tableTablaImprePlanillaValidaciones.ReferenciaColumn) = value
+            End Set
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Property Partida() As String
+            Get
+                Try
+                    Return CType(Me(Me.tableTablaImprePlanillaValidaciones.PartidaColumn), String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("El valor de la columna 'Partida' de la tabla 'TablaImprePlanillaValidaciones' es " & _
+                            "DBNull.", e)
+                End Try
+            End Get
+            Set(value As String)
+                Me(Me.tableTablaImprePlanillaValidaciones.PartidaColumn) = value
+            End Set
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public Function IsIDNull() As Boolean
             Return Me.IsNull(Me.tableTablaImprePlanillaValidaciones.IDColumn)
         End Function
@@ -7207,6 +7294,42 @@ Partial Public Class DBAuxi
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public Sub SetFA3Null()
             Me(Me.tableTablaImprePlanillaValidaciones.FA3Column) = Global.System.Convert.DBNull
+        End Sub
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Function IsFechaNull() As Boolean
+            Return Me.IsNull(Me.tableTablaImprePlanillaValidaciones.FechaColumn)
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Sub SetFechaNull()
+            Me(Me.tableTablaImprePlanillaValidaciones.FechaColumn) = Global.System.Convert.DBNull
+        End Sub
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Function IsReferenciaNull() As Boolean
+            Return Me.IsNull(Me.tableTablaImprePlanillaValidaciones.ReferenciaColumn)
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Sub SetReferenciaNull()
+            Me(Me.tableTablaImprePlanillaValidaciones.ReferenciaColumn) = Global.System.Convert.DBNull
+        End Sub
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Function IsPartidaNull() As Boolean
+            Return Me.IsNull(Me.tableTablaImprePlanillaValidaciones.PartidaColumn)
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Sub SetPartidaNull()
+            Me(Me.tableTablaImprePlanillaValidaciones.PartidaColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
 
