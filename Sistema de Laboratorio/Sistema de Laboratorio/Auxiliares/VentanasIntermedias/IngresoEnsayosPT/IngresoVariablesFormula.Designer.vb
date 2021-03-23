@@ -22,8 +22,8 @@ Partial Class IngresoVariablesFormula
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -41,6 +41,8 @@ Partial Class IngresoVariablesFormula
         Me.txtValorEstandar = New System.Windows.Forms.TextBox()
         Me.lblValorEstandar = New System.Windows.Forms.Label()
         Me.btnDatosReferencia = New System.Windows.Forms.Button()
+        Me.txtUnidad = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         CType(Me.dgvVariables, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -90,14 +92,14 @@ Partial Class IngresoVariablesFormula
         Me.dgvVariables.AllowUserToDeleteRows = False
         Me.dgvVariables.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvVariables.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdVariable, Me.Variable, Me.WValor, Me.ReferenciaARenglon})
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvVariables.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvVariables.DefaultCellStyle = DataGridViewCellStyle10
         Me.dgvVariables.DoubleBuffered = True
         Me.dgvVariables.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.dgvVariables.Location = New System.Drawing.Point(10, 108)
@@ -129,8 +131,8 @@ Partial Class IngresoVariablesFormula
         'WValor
         '
         Me.WValor.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.WValor.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.WValor.DefaultCellStyle = DataGridViewCellStyle9
         Me.WValor.HeaderText = "Valor"
         Me.WValor.Name = "WValor"
         Me.WValor.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
@@ -205,16 +207,16 @@ Partial Class IngresoVariablesFormula
         '
         'txtValorEstandar
         '
-        Me.txtValorEstandar.Location = New System.Drawing.Point(201, 282)
+        Me.txtValorEstandar.Location = New System.Drawing.Point(174, 281)
         Me.txtValorEstandar.Name = "txtValorEstandar"
-        Me.txtValorEstandar.Size = New System.Drawing.Size(100, 20)
+        Me.txtValorEstandar.Size = New System.Drawing.Size(54, 20)
         Me.txtValorEstandar.TabIndex = 8
         Me.txtValorEstandar.Visible = False
         '
         'lblValorEstandar
         '
         Me.lblValorEstandar.AutoSize = True
-        Me.lblValorEstandar.Location = New System.Drawing.Point(119, 285)
+        Me.lblValorEstandar.Location = New System.Drawing.Point(92, 285)
         Me.lblValorEstandar.Name = "lblValorEstandar"
         Me.lblValorEstandar.Size = New System.Drawing.Size(76, 13)
         Me.lblValorEstandar.TabIndex = 9
@@ -230,12 +232,33 @@ Partial Class IngresoVariablesFormula
         Me.btnDatosReferencia.Text = "DATOS DE REFERENCIA"
         Me.btnDatosReferencia.UseVisualStyleBackColor = True
         '
+        'txtUnidad
+        '
+        Me.txtUnidad.Location = New System.Drawing.Point(285, 281)
+        Me.txtUnidad.MaxLength = 15
+        Me.txtUnidad.Name = "txtUnidad"
+        Me.txtUnidad.Size = New System.Drawing.Size(54, 20)
+        Me.txtUnidad.TabIndex = 8
+        Me.txtUnidad.Visible = False
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(238, 285)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(41, 13)
+        Me.Label3.TabIndex = 9
+        Me.Label3.Text = "Unidad"
+        Me.Label3.Visible = False
+        '
         'IngresoVariablesFormula
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(430, 368)
+        Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.lblValorEstandar)
+        Me.Controls.Add(Me.txtUnidad)
         Me.Controls.Add(Me.txtValorEstandar)
         Me.Controls.Add(Me.btnDatosReferencia)
         Me.Controls.Add(Me.btnCancelar)
@@ -276,4 +299,6 @@ Partial Class IngresoVariablesFormula
     Friend WithEvents WValor As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ReferenciaARenglon As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents btnDatosReferencia As System.Windows.Forms.Button
+    Friend WithEvents txtUnidad As System.Windows.Forms.TextBox
+    Friend WithEvents Label3 As System.Windows.Forms.Label
 End Class

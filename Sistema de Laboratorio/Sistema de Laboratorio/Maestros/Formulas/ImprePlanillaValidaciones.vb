@@ -15,7 +15,7 @@
     End Sub
     Private Sub ImprePlanillaValidaciones_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        Dim SQLCnslt = "SELECT fe.Descripcion As DescFormula, fe.Formula As FormulaOrig, fe.FormulaAdic1, fe.FormulaAdic2, fe.FormulaAdic3, fe.FormulaAdic1dec, fe.FormulaAdic2dec, fe.FormulaAdic3dec, fe.FechaVerificacion, fe.ReferenciaVerificacion, fe.PartidaVerificacion, fv.*, t.Descripcion DescProducto FROM FormulasDeEnsayos fe INNER JOIN FormulasVerificadasValores fv ON fv.Terminado = fe.Terminado AND fv.IDRenglon = fe.Renglon INNER JOIN SurfactanSa.dbo.Terminado t ON t.Codigo = fv.Terminado WHERE fv.Terminado = '" & WProducto & "' And fv.Variable <> '' AND fv.IDRenglon = '" & WRenglon & "' Order By fv.IDRenglon, fv.Fila"
+        Dim SQLCnslt = "SELECT fe.Descripcion As DescFormula, fe.Formula As FormulaOrig, fe.FormulaAdic1, fe.FormulaAdic2, fe.FormulaAdic3, fe.FormulaAdic1dec, fe.FormulaAdic2dec, fe.FormulaAdic3dec, fe.FechaVerificacion, fe.ReferenciaVerificacion, fe.PartidaVerificacion, fe.Unidad, fv.*, t.Descripcion DescProducto FROM FormulasDeEnsayos fe INNER JOIN FormulasVerificadasValores fv ON fv.Terminado = fe.Terminado AND fv.IDRenglon = fe.Renglon INNER JOIN SurfactanSa.dbo.Terminado t ON t.Codigo = fv.Terminado WHERE fv.Terminado = '" & WProducto & "' And fv.Variable <> '' AND fv.IDRenglon = '" & WRenglon & "' Order By fv.IDRenglon, fv.Fila"
 
         Dim tabla As DataTable = GetAll(SQLCnslt, "Surfactan_II")
 
@@ -35,10 +35,17 @@
             Dim WFa3 As String = Trim(OrDefault(row("FormulaAdic3"), "")).Replace("(", "( ").Replace(")", " )").Replace("*", " * ").Replace("/", " / ").Replace("+", " + ").Replace("-", " - ")
 
             If Trim(WUnidad) = "" Then
-                Dim WEspe As DataRow = GetSingle("SELECT TOP 1 UnidadEspecif FROM CargaV WHERE Terminado = '" & WProducto & "' AND rtrim(FormulaEspecif) = '" & WForm.Replace(" ", "").Trim & "'")
 
-                If WEspe IsNot Nothing Then
-                    WUnidad = Trim(OrDefault(WEspe("UnidadEspecif"), ""))
+                WUnidad = Trim(OrDefault(row("Unidad"), ""))
+
+                If WUnidad.Trim = "" Then
+
+                    Dim WEspe As DataRow = GetSingle("SELECT TOP 1 UnidadEspecif FROM CargaV WHERE Terminado = '" & WProducto & "' AND rtrim(FormulaEspecif) = '" & WForm.Replace(" ", "").Trim & "'")
+
+                    If WEspe IsNot Nothing Then
+                        WUnidad = Trim(OrDefault(WEspe("UnidadEspecif"), ""))
+                    End If
+
                 End If
 
             End If

@@ -52,7 +52,7 @@
         rbCumpleNoCumple.Checked = WTipoEspecif = 0
         rbNumerico.Checked = WTipoEspecif = 1
         rbFormula.Checked = WTipoEspecif = 2
-        ckMenorIgual.Checked = WMenorIgualEspecif = 1
+        ckMenorIgual.Checked = WMenorIgualEspecif = 0
 
         rbCumpleNoCumple_Click(Nothing, Nothing)
 
@@ -193,7 +193,7 @@
         WFarmacopea = txtFarmacopea.Text.Trim
         Dim WTipo As Integer = 0
         Dim WInforma As Integer = IIf(ckInforma.Checked, 1, 0)
-        Dim WMenorIgual As Integer = IIf(ckMenorIgual.Checked, 1, 0)
+        Dim WMenorIgual As Integer = IIf(ckMenorIgual.Checked, 0, 1)
         Dim WDesde As String = txtDesde.Text
         Dim WHasta As String = txtHasta.Text
         Dim WUnidad As String = txtUnidad.Text

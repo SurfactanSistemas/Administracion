@@ -87,7 +87,7 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
 
 
 
-    Private Sub NumerosConComas(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtValorEstandar.KeyPress
+    Private Sub NumerosConComas(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtValorEstandar.KeyPress, txtUnidad.KeyPress
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) And Not (CChar(".")) = e.KeyChar Then
             e.Handled = True
         End If
@@ -96,7 +96,7 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
 
 
 
-    Sub New(ByVal Formula As String, ByVal Variables(,) As String, ByVal Valor As String, Optional ByVal Grilla As DataGridView = Nothing, Optional ByVal Decimales As Object = Nothing, Optional ByVal Renglon As Integer = -1, Optional ByVal Referencias(,) As String = Nothing, Optional ByVal WDesdeCargaResultados As Boolean = False, Optional ByVal WTerminado As String = "", Optional ByVal WAdicionales(,) As String = Nothing)
+    Sub New(ByVal Formula As String, ByVal Variables(,) As String, ByVal Valor As String, Optional ByVal Grilla As DataGridView = Nothing, Optional ByVal Decimales As Object = Nothing, Optional ByVal Renglon As Integer = -1, Optional ByVal Referencias(,) As String = Nothing, Optional ByVal WDesdeCargaResultados As Boolean = False, Optional ByVal WTerminado As String = "", Optional ByVal WAdicionales(,) As String = Nothing, Optional ByVal Unidad As String = "")
 
         ' This call is required by the designer.
         InitializeComponent()
@@ -127,6 +127,7 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
         End If
 
         txtDecimales.Enabled = Not WDesdeCargaResultados
+        txtUnidad.Text = Unidad.Trim
 
     End Sub
 
@@ -477,7 +478,7 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
                     ListaSQLCnslt.Add(SQLCnslt)
                 Next
 
-                SQLCnslt = "UPDATE FormulasDeEnsayos SET EstadoVerificado = 1, Analistalab = '" & WDatos.Item("Operador") & "', Decimales = '" & Decimales & "' WHERE Renglon = '" & RenglonID & "' And Terminado = '" & Terminado & "'"
+                SQLCnslt = "UPDATE FormulasDeEnsayos SET EstadoVerificado = 1, Analistalab = '" & WDatos.Item("Operador") & "', Decimales = '" & Decimales & "', Unidad = '" & txtUnidad.Text & "' WHERE Renglon = '" & RenglonID & "' And Terminado = '" & Terminado & "'"
                 ListaSQLCnslt.Add(SQLCnslt)
 
                 ExecuteNonQueries("Surfactan_II", ListaSQLCnslt.ToArray())
@@ -508,5 +509,23 @@ Public Class IngresoVariablesFormula : Implements IIngresoClaveSeguridad
         With New ActualizacionDatosRefVerificacion(Terminado, RenglonID)
             .Show(Me)
         End With
+    End Sub
+
+    Private Sub txtValorEstandar_KeyDown(sender As Object, e As KeyEventArgs) Handles txtValorEstandar.KeyDown
+        Select Case e.KeyCode
+            Case Keys.Enter
+                txtUnidad.Focus()
+            Case Keys.Escape
+                txtValorEstandar.Text = ""
+        End Select
+
+    End Sub
+
+    Private Sub txtUnidad_KeyDown(sender As Object, e As KeyEventArgs) Handles txtUnidad.KeyDown
+        Select Case e.KeyCode
+            Case Keys.Escape
+                txtUnidad.Text = ""
+        End Select
+
     End Sub
 End Class

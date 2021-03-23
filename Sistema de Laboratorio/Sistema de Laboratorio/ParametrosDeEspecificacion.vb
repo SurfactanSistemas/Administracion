@@ -61,6 +61,7 @@ Public Class ParametrosDeEspecificacion : Implements INotificaActualizacion, ITr
             txtDecAdic2.Text = Trim(OrDefault(row.Item("FormulaAdic2Dec"), "2"))
             txtDecAdic3.Text = Trim(OrDefault(row.Item("FormulaAdic3Dec"), "2"))
             WDecimales = Val(Trim(OrDefault(row.Item("Decimales"), "2")))
+            WDecimales = Val(Trim(OrDefault(row.Item("Unidad"), "")))
 
             txtDescripcion.Text = Trim(OrDefault(row.Item("Descripcion"), ""))
             If Renglon = 0 And txtDescripcion.Text <> "" Then txtDescripcion.Text = "<--" & txtDescripcion.Text & "-->"
@@ -350,6 +351,7 @@ Public Class ParametrosDeEspecificacion : Implements INotificaActualizacion, ITr
             Dim WFormula As String = Trim(txtFormula.Text)
             Dim Wvalor As String = ""
             WDecimales = OrDefault(row("Decimales"), 2)
+            Dim WUnidad As String = OrDefault(row("Unidad"), "")
             Dim WRenglon As Short = 0
 
             For i = 1 To 10
@@ -381,7 +383,7 @@ Public Class ParametrosDeEspecificacion : Implements INotificaActualizacion, ITr
             WAdicionales(1, 1) = txtDecAdic2.Text.Trim
             WAdicionales(2, 1) = txtDecAdic3.Text.Trim
 
-            With New IngresoVariablesFormula(WFormula, Wvariables, Wvalor, Nothing, WDecimales, Renglon, WReferencias, False, Terminado, WAdicionales)
+            With New IngresoVariablesFormula(WFormula, Wvariables, Wvalor, Nothing, WDecimales, Renglon, WReferencias, False, Terminado, WAdicionales, Unidad:=WUnidad)
                 .Show(Me)
             End With
         End If
