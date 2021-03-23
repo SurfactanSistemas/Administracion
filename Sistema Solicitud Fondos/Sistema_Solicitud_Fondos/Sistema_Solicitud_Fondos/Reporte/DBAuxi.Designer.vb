@@ -352,6 +352,8 @@ Partial Public Class DBAuxi
 
         Private columnCheqPropio_Chk As Global.System.Data.DataColumn
 
+        Private columnTarjeta_Chk As Global.System.Data.DataColumn
+
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public Sub New()
@@ -524,6 +526,14 @@ Partial Public Class DBAuxi
         End Property
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public ReadOnly Property Tarjeta_ChkColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTarjeta_Chk
+            End Get
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
          Global.System.ComponentModel.Browsable(False)> _
         Public ReadOnly Property Count() As Integer
@@ -577,9 +587,10 @@ Partial Public Class DBAuxi
                     ByVal Transferencia_Chk As Boolean, _
                     ByVal ECheq_Chk As Boolean, _
                     ByVal CheqTerceros_Chk As Boolean, _
-                    ByVal CheqPropio_Chk As Boolean) As ListadoGrillaRow
+                    ByVal CheqPropio_Chk As Boolean, _
+                    ByVal Tarjeta_Chk As Boolean) As ListadoGrillaRow
             Dim rowListadoGrillaRow As ListadoGrillaRow = CType(Me.NewRow, ListadoGrillaRow)
-            Dim columnValuesArray() As Object = New Object() {NroSolicitud, Solicitante, Fecha, OrdFecha, Tipo, Destino, Titulo, Moneda, Importe, FechaRequerida, OrdFechaRequerida, ImporteDolares, Efectivo_Chk, Transferencia_Chk, ECheq_Chk, CheqTerceros_Chk, CheqPropio_Chk}
+            Dim columnValuesArray() As Object = New Object() {NroSolicitud, Solicitante, Fecha, OrdFecha, Tipo, Destino, Titulo, Moneda, Importe, FechaRequerida, OrdFechaRequerida, ImporteDolares, Efectivo_Chk, Transferencia_Chk, ECheq_Chk, CheqTerceros_Chk, CheqPropio_Chk, Tarjeta_Chk}
             rowListadoGrillaRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowListadoGrillaRow)
             Return rowListadoGrillaRow
@@ -619,6 +630,7 @@ Partial Public Class DBAuxi
             Me.columnECheq_Chk = MyBase.Columns("ECheq_Chk")
             Me.columnCheqTerceros_Chk = MyBase.Columns("CheqTerceros_Chk")
             Me.columnCheqPropio_Chk = MyBase.Columns("CheqPropio_Chk")
+            Me.columnTarjeta_Chk = MyBase.Columns("Tarjeta_Chk")
         End Sub
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
@@ -658,6 +670,8 @@ Partial Public Class DBAuxi
             MyBase.Columns.Add(Me.columnCheqTerceros_Chk)
             Me.columnCheqPropio_Chk = New Global.System.Data.DataColumn("CheqPropio_Chk", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnCheqPropio_Chk)
+            Me.columnTarjeta_Chk = New Global.System.Data.DataColumn("Tarjeta_Chk", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnTarjeta_Chk)
         End Sub
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
@@ -1469,6 +1483,21 @@ Partial Public Class DBAuxi
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Property Tarjeta_Chk() As Boolean
+            Get
+                Try
+                    Return CType(Me(Me.tableListadoGrilla.Tarjeta_ChkColumn), Boolean)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("El valor de la columna 'Tarjeta_Chk' de la tabla 'ListadoGrilla' es DBNull.", e)
+                End Try
+            End Get
+            Set(value As Boolean)
+                Me(Me.tableListadoGrilla.Tarjeta_ChkColumn) = value
+            End Set
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public Function IsNroSolicitudNull() As Boolean
             Return Me.IsNull(Me.tableListadoGrilla.NroSolicitudColumn)
         End Function
@@ -1669,6 +1698,18 @@ Partial Public Class DBAuxi
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public Sub SetCheqPropio_ChkNull()
             Me(Me.tableListadoGrilla.CheqPropio_ChkColumn) = Global.System.Convert.DBNull
+        End Sub
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Function IsTarjeta_ChkNull() As Boolean
+            Return Me.IsNull(Me.tableListadoGrilla.Tarjeta_ChkColumn)
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Sub SetTarjeta_ChkNull()
+            Me(Me.tableListadoGrilla.Tarjeta_ChkColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
 

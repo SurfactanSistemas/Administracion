@@ -3136,6 +3136,14 @@ Public Class Recibos
                         If iCol = 1 Or iCol = 2 Or iCol = 3 Then
 
                             If iCol = 1 Then
+
+                                'VALIDAMOS SI TIENE 8 DIGITOS EL CHEQUE
+                                If gridFormasPago2.CurrentRow.Cells(0).Value = 2 Or gridFormasPago2.CurrentRow.Cells(0).Value = 7 Then
+                                    If Len(gridFormasPago2.CurrentRow.Cells(1).Value) <> 8 Then
+                                        MsgBox("Para los cheques se deben completar los 8 digitos", vbExclamation)
+                                    End If
+                                End If
+
                                 With gridFormasPago2
                                     .CurrentCell = .Rows(iRow).Cells(iCol + 1)
 
@@ -5614,7 +5622,7 @@ Public Class Recibos
             ' Completamos el año de manera automatica
             If Len(Trim(txtFechaAux.Text)) = 6 Then
                 Dim _mes As String = Mid(txtFechaAux.Text, 4, 2)
-                
+
                 If Val(_mes) < Date.Now.Month Then
                     txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & Date.Now.AddYears(1).ToString("yyyy")
                 Else
@@ -5691,9 +5699,9 @@ Public Class Recibos
 
     Private Sub gridRecibos_CellEnter(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles gridFormasPago2.CellEnter
         With gridFormasPago2
+         
             If e.ColumnIndex = 2 Then
-
-                Dim _location As Point = .GetCellDisplayRectangle(2, e.RowIndex, False).Location
+               Dim _location As Point = .GetCellDisplayRectangle(2, e.RowIndex, False).Location
 
                 .ClearSelection()
                 _location.Y += .Location.Y + (.CurrentCell.Size.Height / 4) - 1.5
@@ -5929,4 +5937,5 @@ Public Class Recibos
         Next
     End Sub
 
+  
 End Class

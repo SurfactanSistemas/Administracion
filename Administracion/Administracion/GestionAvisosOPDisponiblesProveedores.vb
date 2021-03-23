@@ -237,9 +237,13 @@ Public Class GestionAvisosOPDisponiblesProveedores
                     End If
 
                     If PorTransferenciaYCheques Then
+                        Dim DiaARetirar As Date
+                        Dim DiaARetirarTexto As String
+                        TraerProximoMartesOJueves(DiaARetirar, DiaARetirarTexto)
                         'WBody &= "." & "<br/>" & "<br/>" & "Además tiene Cheque(s) para retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir de la <strong>semana próxima</strong>, los <strong>Martes y Jueves</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
                         'WBody &= "<br/>" & "- Cheque(s) que deberá retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir del día de <strong>mañana</strong>, los <strong>Martes y Juevess</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>."
-                        WBody &= "<br/>" & "- Cheque(s) que deberá retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir de la <strong>semana próxima</strong>, los días <strong>Martes y Juevess</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>."
+                        'WBody &= "<br/>" & "- Cheque(s) que deberá retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir de la <strong>semana próxima</strong>, los días <strong>Martes y Juevess</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>."
+                        WBody &= "<br/>" & "- Cheque(s) que deberá retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir del <strong>" & DiaARetirarTexto & " " & DiaARetirar.ToString("dd/MM/yyyy") & "</strong>, los <strong>Martes y Jueves</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>."
                     Else
                         WBody &= "." & "<br/>" & "<br/>" & "Adjuntamos Orden de Pago y retenciones si correspondiesen."
                     End If
@@ -282,8 +286,12 @@ Public Class GestionAvisosOPDisponiblesProveedores
                     End If
 
                     If PorTransferenciaYCheques Then
+                        Dim DiaARetirar As Date
+                        Dim DiaARetirarTexto As String
+                        TraerProximoMartesOJueves(DiaARetirar, DiaARetirarTexto)
                         'WBody &= "." & "<br/>" & "<br/>" & "Además tiene Cheque(s) para retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir de la <strong>semana próxima</strong>, los <strong>Martes y Jueves</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
-                        WBody &= vbCrLf & "- Cheque(s) que deberá retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir de la <strong>semana próxima</strong>, los días <strong>Martes y Juevess</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>."
+                        'WBody &= vbCrLf & "- Cheque(s) que deberá retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir de la <strong>semana próxima</strong>, los días <strong>Martes y Juevess</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>."
+                        WBody &= vbCrLf & "- Cheque(s) que deberá retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>,  a partir del <strong>" & DiaARetirarTexto & " " & DiaARetirar.ToString("dd/MM/yyyy") & "</strong>, los <strong>Martes y Jueves</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>."
                     Else
                         WBody &= "." & "<br/>" & "<br/>" & "Adjuntamos Orden de Pago y retenciones si correspondiesen."
                     End If
@@ -334,6 +342,20 @@ Public Class GestionAvisosOPDisponiblesProveedores
 
     End Sub
 
+    Private Sub TraerProximoMartesOJueves(ByRef DiaARetirar As Date, ByRef DiaARetirarTexto As String)
+        DiaARetirar = Date.Today
+        For i = 1 To 10
+            DiaARetirar = DiaARetirar.AddDays(1)
+            Select Case DiaARetirar.DayOfWeek
+                Case 2 'MARTES
+                    DiaARetirarTexto = "Martes"
+                    Exit Sub
+                Case 4 'JUEVES
+                    DiaARetirarTexto = "Jueves"
+                    Exit Sub
+            End Select
+        Next
+    End Sub
     Public Shared Function FormatoCorreoValido(ByVal correo As String) As Boolean
         '
         ' La siguiente expresión regular permite direcciones del siguiente estilo:

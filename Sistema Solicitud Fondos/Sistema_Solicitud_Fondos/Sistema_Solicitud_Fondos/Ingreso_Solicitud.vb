@@ -20,7 +20,7 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
 
 
 
-    Sub New(Optional ByVal NroSoli As Integer = 0)
+    Sub New(Optional ByVal NroSoli As Integer = 0, Optional ByVal MostrarAutorizar As String = "No_Mostrar")
 
         ' Llamada necesaria para el diseñador.
         InitializeComponent()
@@ -55,7 +55,9 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
         Dim SQLCnslt As String = ""
         If NroSoli <> 0 Then
 
-
+            If MostrarAutorizar = "Mostrar" Then
+                btn_Autorizar.Visible = True
+            End If
 
 
             'CARGAMOS EL REGISTRO
@@ -65,11 +67,6 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
 
                 NRO_SOLICITUD = NroSoli
 
-                'SI YA ESTA AUTORIZADA SACAMOS EL BOTON DE AUTORIZAR
-                Dim EstadoSoli As String = IIf(IsDBNull(rowsoli.Item("Estado")), "", rowsoli.Item("Estado"))
-                If Trim(UCase(EstadoSoli)) = "AUTORIZO" Then
-                    btn_Autorizar.Visible = False
-                End If
                 cbx_Moneda.SelectedIndex = rowsoli.Item("Moneda")
                 cbx_TipoDolar.SelectedIndex = IIf(IsDBNull(rowsoli.Item("TipoDolar")), 0, rowsoli.Item("TipoDolar"))
                 If cbx_Moneda.SelectedIndex = 2 Then
@@ -84,9 +81,26 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
 
                 End If
 
+
+
+                'SI YA ESTA AUTORIZADA SACAMOS EL BOTON DE AUTORIZAR
+                Dim EstadoSoli As String = IIf(IsDBNull(rowsoli.Item("Estado")), "", rowsoli.Item("Estado"))
+                If Trim(UCase(EstadoSoli)) = "AUTORIZO" Then
+                    btn_Autorizar.Visible = False
+                   
+                End If
+
                 'OBTENEMOS LA PARIDAD
                 Try
-                    ZCambioDivisa = _BuscarParidad(Date.Today.ToString("dd/MM/yyyy"))
+                    'SI EL TIPO DE DOLAR ES INFORMADO< TRAEMOS EL VALOR DE LA TABLA
+                    If cbx_TipoDolar.SelectedIndex = 3 Then
+                        ZCambioDivisa = rowsoli.Item("ParidadInformada")
+                        'Y BLOQUEAMOS LA PARIDAD INGRESADA
+                        txt_Paridad.ReadOnly = True
+                    Else
+                        ZCambioDivisa = _BuscarParidad(Date.Today.ToString("dd/MM/yyyy"))
+                    End If
+
                 Catch ex As System.Exception
                     MsgBox(ex.Message, MsgBoxStyle.Critical)
                 End Try
@@ -101,11 +115,11 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
 
                 cbx_Tipo.SelectedIndex = rowsoli.Item("Tipo")
 
-                txt_Solicitante.Text = IIf(IsDBNull(rowsoli.Item("Solicitante")), "", rowsoli.Item("Solicitante"))
-                txt_Observaciones.Text = IIf(IsDBNull(rowsoli.Item("ObservacionesPago")), "", rowsoli.Item("ObservacionesPago"))
-                txt_Titulo.Text = IIf(IsDBNull(rowsoli.Item("Titulo")), "", rowsoli.Item("Titulo"))
-                txt_Concepto.Text = IIf(IsDBNull(rowsoli.Item("Concepto")), "", rowsoli.Item("Concepto"))
-                txt_FechaSolicitud.Text = IIf(IsDBNull(rowsoli.Item("Fecha")), "", rowsoli.Item("Fecha"))
+                txt_Solicitante.Text = Trim(IIf(IsDBNull(rowsoli.Item("Solicitante")), "", rowsoli.Item("Solicitante")))
+                txt_Observaciones.Text = Trim(IIf(IsDBNull(rowsoli.Item("ObservacionesPago")), "", rowsoli.Item("ObservacionesPago")))
+                txt_Titulo.Text = Trim(IIf(IsDBNull(rowsoli.Item("Titulo")), "", rowsoli.Item("Titulo")))
+                txt_Concepto.Text = Trim(IIf(IsDBNull(rowsoli.Item("Concepto")), "", rowsoli.Item("Concepto")))
+                txt_FechaSolicitud.Text = Trim(IIf(IsDBNull(rowsoli.Item("Fecha")), "", rowsoli.Item("Fecha")))
 
                 txt_Proveedor.Text = IIf(IsDBNull(rowsoli.Item("Proveedor")), "", Trim(rowsoli.Item("Proveedor")))
                 If Trim(txt_Proveedor.Text) <> "" Then
@@ -132,6 +146,7 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
                 chk_ChequeTerceros.Checked = IIf(IsDBNull(rowsoli.Item("CheqTerceros_Chk")), 0, rowsoli.Item("CheqTerceros_Chk"))
                 'chk_ChequePropio.Checked = OrDefault(rowsoli.Item("CheqPropio_Chk"), 0) = 1
                 chk_ChequePropio.Checked = IIf(IsDBNull(rowsoli.Item("CheqPropio_Chk")), 0, rowsoli.Item("CheqPropio_Chk"))
+                chk_Tarjeta.Checked = IIf(IsDBNull(rowsoli.Item("Tarjeta_Chk")), 0, rowsoli.Item("Tarjeta_Chk"))
 
                 'EN CASO DE QUE SEA EN DOLARES MULTIPLICAMOS EL VALOR POR LA PARIDAD
                 If WParidad <> 0 Then
@@ -152,7 +167,7 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
                     CantidadArchivos += 1
                 Next
                 'SI HAY PINTAMOS LE BOTON DE VERDEE
-                If CantidadArchivos > 0 Then
+                If CantidadArchivos > 1 Then
                     btn_Adjuntar.BackColor = Color.Green
                     btn_Adjuntar.ForeColor = Color.White
                 End If
@@ -244,7 +259,7 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
 
 
 
-    Private Sub NumerosConComas(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txt_Importe.KeyPress
+    Private Sub NumerosConComas(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txt_Importe.KeyPress, txt_Paridad.KeyPress
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) And Not (CChar(".")) = e.KeyChar Then
             e.Handled = True
         End If
@@ -333,7 +348,7 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
             Exit Sub
         End If
 
-        If (chk_Efectivo.Checked = False And chk_Tranferencia.Checked = False And chk_Echeq.Checked = False And chk_ChequeTerceros.Checked = False) Then
+        If (chk_Efectivo.Checked = False And chk_Tranferencia.Checked = False And chk_Echeq.Checked = False And chk_ChequeTerceros.Checked = False And chk_ChequePropio.Checked = False And chk_Tarjeta.Checked = False) Then
             MsgBox("Se debe seleccionar al menos una forma de pago", vbExclamation)
             ValidacionesOk = False
             VALIDACIONES = ValidacionesOk
@@ -361,7 +376,7 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
         '  FIN DE VALIDACIONES
         '
 
-
+        Dim Estado As String = ""
         Try
 
             'SI ESTA EDITANDO USO EL NUMERO DE EDICION Y BORRO EL REGISTRO EN CASO CONTRARIO OBTENGO EL SIGUIENTE NUMERO
@@ -376,7 +391,15 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
                 End If
             Else
                 NroSolicitud = NRO_SOLICITUD
+
                 Try
+                    SQLCnslt = "SELECT Estado FROM SolicitudFondos WHERE NroSolicitud = '" & NroSolicitud & "'"
+                    Dim RowSoli As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+                    If RowSoli IsNot Nothing Then
+                        Estado = Trim(IIf(IsDBNull(RowSoli.Item("Estado")), "", RowSoli.Item("Estado")))
+                    End If
+
+
                     SQLCnslt = "DELETE FROM SolicitudFondos WHERE NroSolicitud = '" & NroSolicitud & "'"
                     ExecuteNonQueries("SurfactanSa", SQLCnslt)
                 Catch ex As Exception
@@ -400,6 +423,23 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
             End Select
 
 
+            Dim agregado_1 As String = ""
+            Dim agregado_2 As String = ""
+
+            If Estado <> "" Then
+                agregado_1 = "Estado, "
+                agregado_2 = "'" & Estado & "', "
+            End If
+
+            Dim ParidadInformada_1 As String = ""
+            Dim ParidadInformada_2 As String = ""
+
+            If cbx_TipoDolar.SelectedItem = "Informado" Then
+                ParidadInformada_1 = "ParidadInformada, "
+                ParidadInformada_2 = "'" & formatonumerico(txt_Paridad.Text) & "', "
+            End If
+            
+
 
             SQLCnslt = "INSERT INTO SolicitudFondos(" _
                        & "NroSolicitud, " _
@@ -420,8 +460,14 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
                        & "Echeq_chk, " _
                        & "CheqTerceros_chk, " _
                        & "CheqPropio_chk, " _
+                       & "Tarjeta_chk, " _
                        & "FechaRequerida, " _
                        & "OrdFechaRequerida, " _
+                       & "" & agregado_1 & "" _
+                       & "" & ParidadInformada_1 & "" _
+                       & "MarcaPopUp, " _
+                       & "MarcaPopUp_Pachi, " _
+                       & "Operador_Sector, " _
                        & "OrdenPago)" _
                        & " VALUES(" _
                        & "'" & NroSolicitud & "', " _
@@ -441,8 +487,14 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
                        & "'" & chk_Echeq.Checked & "', " _
                        & "'" & chk_ChequeTerceros.Checked & "', " _
                        & "'" & chk_ChequePropio.Checked & "', " _
+                       & "'" & chk_Tarjeta.Checked & "', " _
                        & "'" & txt_FechaRequerida.Text & "', " _
                        & "'" & ordenaFecha(txt_FechaRequerida.Text) & "', " _
+                       & "" & agregado_2 & " " _
+                       & "" & ParidadInformada_2 & " " _
+                       & "'" & "" & "', " _
+                       & "'" & "" & "', " _
+                       & "'" & Trim(Operador.Solifondos_Sector) & "', " _
                        & "'" & "" & "') "
 
             ExecuteNonQueries("SurfactanSa", SQLCnslt)
@@ -466,6 +518,12 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
                 End With
             End If
 
+            If NRO_SOLICITUD = 0 Then
+                GuardarSolicitudOriginal(NroSolicitud)
+            End If
+
+
+
             Dim Wowner As IActualizaSolicitudes = TryCast(Owner, IActualizaSolicitudes)
 
             If Wowner IsNot Nothing Then
@@ -486,6 +544,24 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
 
     End Sub
 
+    Private Sub GuardarSolicitudOriginal(ByVal NroSolicitud As Integer)
+        Dim WFormula As String = "{SolicitudFondos.NroSolicitud} = " & NroSolicitud & ""
+
+        With New VistaPrevia
+            .Reporte = New Reporte_SolicitudFondos
+            .Formula = WFormula
+            '.Formula = "{SolicitudFondos.NroSolicitud} > " & (NRO_SOLICITUD - 1) & " AND {SolicitudFondos.NroSolicitud} < " & (NRO_SOLICITUD + 1) & ""
+            Dim UbicacionGrabar As String = RutaGuardar & "\" & NroSolicitud
+            If Not Directory.Exists(UbicacionGrabar) Then
+                Directory.CreateDirectory(UbicacionGrabar)
+            End If
+
+            .GuardarPDF("SolicitudOriginal_" & NroSolicitud.ToString(), UbicacionGrabar & "\")
+
+        End With
+       
+    End Sub
+    
     Private Sub Ingreso_Solicitud_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         cbx_Tipo.Focus()
     End Sub
@@ -769,11 +845,11 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
             If Not Directory.Exists(CarpetaAux) Then
                 Directory.CreateDirectory(CarpetaAux)
             End If
-            With New EditorArchivos(2, CarpetaAux)
+            With New EditorArchivos(2, CarpetaAux, Operador.Clave)
                 .Show()
             End With
         Else
-            With New EditorArchivos(2, RutaGuardar & "\" & NRO_SOLICITUD)
+            With New EditorArchivos(2, RutaGuardar & "\" & NRO_SOLICITUD, Operador.Clave)
                 .Show()
             End With
         End If
@@ -1231,23 +1307,38 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
 
 
     Private Sub cbx_TipoDolar_DropDownClosed(sender As Object, e As EventArgs) Handles cbx_TipoDolar.DropDownClosed
-        'OBTENEMOS LA PARIDAD
-        Try
-            ZCambioDivisa = _BuscarParidad(Date.Today.ToString("dd/MM/yyyy"))
-        Catch ex As System.Exception
-            MsgBox(ex.Message, MsgBoxStyle.Critical)
-        End Try
 
-        If ZCambioDivisa = 0 Then
-            If cbx_TipoDolar.SelectedIndex <> 0 Then
-                MsgBox("La fecha " & Date.Today.ToString("dd/MM/yyyy") & " no tiene informado paridad, se de cargar para calcular las retenciones", MsgBoxStyle.Information)
+        'SI SE SELECCIONA INFORMADO SE DEBE CARGAR LA PARIDAD MANUALMENTE
+        If cbx_TipoDolar.SelectedItem = "Informado" Then
+            WParidad = 0
+        Else
+            Try
+                'OBTENEMOS LA PARIDAD
+                ZCambioDivisa = _BuscarParidad(Date.Today.ToString("dd/MM/yyyy"))
+            Catch ex As System.Exception
+                MsgBox(ex.Message, MsgBoxStyle.Critical)
+            End Try
+
+            If ZCambioDivisa = 0 Then
+                If cbx_TipoDolar.SelectedIndex <> 0 Then
+                    MsgBox("La fecha " & Date.Today.ToString("dd/MM/yyyy") & " no tiene informado paridad, se de cargar para calcular las retenciones", MsgBoxStyle.Information)
+                End If
+
             End If
-
+            WParidad = ZCambioDivisa
+            txt_Paridad.ReadOnly = True
         End If
-
-        WParidad = ZCambioDivisa
+        
 
         txt_Paridad.Text = WParidad
+
+        If WParidad = 0 And cbx_TipoDolar.SelectedItem = "Informado" Then
+            txt_Paridad.ReadOnly = False
+            txt_Paridad.SelectAll()
+            txt_Paridad.Focus()
+        End If
+
+
     End Sub
 
     Private Sub cbx_TipoDolar_KeyDown(sender As Object, e As KeyEventArgs) Handles cbx_TipoDolar.KeyDown
@@ -1272,10 +1363,42 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
 
 
     Private Sub btn_Autorizar_Click(sender As Object, e As EventArgs) Handles btn_Autorizar.Click
+        'LO TUVE QUE PONER ACA ESTE CAST SINO PERDIA LA REFERENCIA NO SE PORQUE
+        Dim Wowner As IActualizaSolicitudes = TryCast(Owner, IActualizaSolicitudes)
+
         If MsgBox("¿Desea autorizar la solicitud?", vbYesNo) = vbYes Then
-            With New SoliContra()
-                .Show(Me)
-            End With
+            If Trim(Operador.Clave) = "" Then
+                With New SoliContra()
+                    .Show(Me)
+                End With
+            Else
+                Try
+                    Dim SQLCnslts As String = "SELECT SolicitudFondosEdicion FROM Operador WHERE UPPER(Clave) = '" & UCase(Operador.Clave) & "'"
+                    Dim Row As DataRow = GetSingle(SQLCnslts, "SurfactanSa")
+
+                    If Row IsNot Nothing Then
+                        Dim PermisoSistemaSolicitud As String = IIf(IsDBNull(Row.Item("SolicitudFondosEdicion")), "N", Row.Item("SolicitudFondosEdicion"))
+                        'If UCase(txt_Contraseña.Text) = "AUTORIZO" Then
+                        If PermisoSistemaSolicitud = "S" Then
+
+                            '    Autorizado("S", NRO_SOLICITUD)
+                            '
+                            'Else
+
+                            AutorizarSolicitudes()
+                            'Dim Wowner As IActualizaSolicitudes = TryCast(Owner, IActualizaSolicitudes)
+                            If Wowner IsNot Nothing Then
+                                Wowner.ActualizaGrilla()
+                            End If
+                            Close()
+                        End If
+                    End If
+
+
+                Catch ex As Exception
+
+                End Try
+            End If
         End If
     End Sub
 
@@ -1300,16 +1423,31 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
         Try
             ExecuteNonQueries("SurfactanSa", listaAutorizar.ToArray())
 
-
             Dim Wowner As IActualizaSolicitudes = TryCast(Owner, IActualizaSolicitudes)
 
             If Wowner IsNot Nothing Then
                 Wowner.ActualizaGrilla()
-                Close()
             End If
 
         Catch ex As Exception
 
         End Try
+       
     End Sub
+    
+    Private Sub txt_Paridad_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_Paridad.KeyDown
+        Select Case e.KeyData
+            Case Keys.Enter
+                WParidad = Val(formatonumerico(txt_Paridad.Text))
+            Case Keys.Escape
+                txt_Paridad.Text = "0.00"
+                txt_Paridad.SelectAll()
+        End Select
+    End Sub
+
+    Private Sub txt_Paridad_Leave(sender As Object, e As EventArgs) Handles txt_Paridad.Leave
+        WParidad = Val(formatonumerico(txt_Paridad.Text))
+        txt_Paridad.Text = Val(formatonumerico(txt_Paridad.Text))
+    End Sub
+
 End Class

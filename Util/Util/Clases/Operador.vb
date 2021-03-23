@@ -5,4 +5,5 @@
     Public Shared CodigoResponsableSac As String = ""
     Public Shared Descripcion As String = ""
     Public Shared Perfil As String = ""
+    Public Shared Solifondos_Sector As String = ""
 End Class

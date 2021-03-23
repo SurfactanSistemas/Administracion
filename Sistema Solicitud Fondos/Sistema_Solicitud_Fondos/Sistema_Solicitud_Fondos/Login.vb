@@ -7,7 +7,8 @@ Public Class Login
 
     Private WEmpresasAcceso As DataTable
     Dim SiguienteVentana As String
-    Sub New(ByVal Accion As String)
+    Dim PermitirGestion As String = ""
+    Sub New(ByVal Accion As String, Optional ByVal Externo As String = "")
 
         ' Llamada necesaria para el diseñador.
         InitializeComponent()
@@ -15,6 +16,9 @@ Public Class Login
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
 
         SiguienteVentana = Accion
+        If Externo <> "" Then
+            PermitirGestion = Externo
+        End If
     End Sub
 
     Private Sub btnCerrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrar.Click
@@ -60,7 +64,7 @@ Public Class Login
 
             Conexion.EmpresaDeTrabajo = WBaseDatos
 
-            Dim WOperador As DataRow = GetSingle("SELECT Operador, Descripcion, SolicitudFondosEdicion FROM Operador WHERE UPPER(Clave) = '" & txtClave.Text & "'", WBaseDatos)
+            Dim WOperador As DataRow = GetSingle("SELECT Operador, Descripcion, SolicitudFondosEdicion, SoliFondos_Sector FROM Operador WHERE UPPER(Clave) = '" & txtClave.Text & "'", WBaseDatos)
 
             If IsNothing(WOperador) Then Throw New Exception("Clave Errónea")
 
@@ -71,6 +75,7 @@ Public Class Login
                 Operador.Clave = txtClave.Text.Trim
                 Operador.Descripcion = OrDefault(.Item("Descripcion"), "")
                 PermisoSistemaSolicitud = IIf(IsDBNull(.Item("SolicitudFondosEdicion")), "N", .Item("SolicitudFondosEdicion"))
+                Operador.Solifondos_Sector = OrDefault(.Item("SoliFondos_Sector"), "")
             End With
 
 
@@ -80,9 +85,16 @@ Public Class Login
                 End With
             Else
                 If PermisoSistemaSolicitud = "S" Then
-                    With New Gestion_Solicitudes
-                        .Show()
-                    End With
+                    If PermitirGestion = "" Then
+                        With New Gestion_Solicitudes
+                            .Show()
+                        End With
+                    Else
+                        With New AutoGestionSolicitudes
+                            .Show()
+                        End With
+                    End If
+                    
                 Else
                     With New AutoGestionSolicitudes
                         .Show()

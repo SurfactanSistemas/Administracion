@@ -886,10 +886,14 @@ Public Class EditorArchivos : Implements SelectorCarpetas
                     Dim WArchivos() = .FileNames
 
                     If WArchivos.Length > 0 Then
-                        With New SeleccionarCarpetas(WPath, True, WArchivos)
-                            .Show(Me)
-                        End With
-                        '_SubirArchvios(WArchivos)
+                        If WAccion = 3 Then
+                            With New SeleccionarCarpetas(WPath, True, WArchivos)
+                                .Show(Me)
+                            End With
+                        Else
+                            _SubirArchvios(WArchivos)
+                        End If
+                        
                     End If
 
                 End If

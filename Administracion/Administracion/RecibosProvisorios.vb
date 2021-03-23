@@ -1233,6 +1233,16 @@ Public Class RecibosProvisorios
 
                         If iCol = 1 Or iCol = 2 Or iCol = 3 Then ' Avanzamos a la siguiente celda continua.
 
+                            If iCol = 1 Then
+                                'VALIDAMOS SI TIENE 8 DIGITOS EL CHEQUE
+                                If gridRecibos.CurrentRow.Cells(0).Value = 2 Or gridRecibos.CurrentRow.Cells(0).Value = 7 Then
+                                    If Len(gridRecibos.CurrentRow.Cells(1).Value) <> 8 Then
+                                        MsgBox("Para los cheques se deben completar los 8 digitos", vbExclamation)
+                                    End If
+                                End If
+                            End If
+                            
+
                             If iCol = 2 Then
                                 ' Completamos el año de manera automatica
                                 If Len(Trim(valor)) = 6 Then

@@ -21,6 +21,7 @@ Public Class Pagos
     Private WCertificadoGan, WCertificadoIb, WCertificadoIbCiudad, WCertificadoIVA As String
 
     Dim NroSoliInterno As Integer = 0
+    Dim ParidadAnterior As String = ""
     Public Property GenerarPDF As Boolean
 
     Private WGrillaReferencia As DataGridView
@@ -1245,6 +1246,7 @@ Public Class Pagos
                     txtObservaciones.Text = IIf(IsDBNull(.Item("Titulo")), "", .Item("Titulo"))
                     optVarios.Checked = True
 
+                   
                     Dim XRow = 0
 
                     For i = 0 To XMAXFILAS - 1
@@ -1261,9 +1263,22 @@ Public Class Pagos
                         If RowSoli.Item("Moneda") = 1 Then
                             .Cells(4).Value = formatonumerico(RowSoli.Item("Importe"))
                         Else
-                            Dim Calculo As Double = RowSoli.Item("Importe") * traerParidad()
-                            .Cells(4).Value = formatonumerico(Calculo)
-                        End If
+                            If IIf(IsDBNull(RowSoli.Item("ParidadInformada")), 0, RowSoli.Item("ParidadInformada")) <> 0 Then
+                               txtParidad.Text = formatonumerico(RowSoli.Item("ParidadInformada"))
+                                Dim Calculo As Double = RowSoli.Item("Importe") * Val(formatonumerico(txtParidad.Text))
+                                .Cells(4).Value = formatonumerico(Calculo)
+                            Else
+                                Dim auxpari As Double = traerParidad(txtFechaParidad.Text, True)
+                                'Guardo el valor de la paridad previa para saber despues si informo que se modifico
+                                ParidadAnterior = txtParidad.Text
+                                txtParidad.Text = auxpari
+                                txtParidad.Text = formatonumerico(txtParidad.Text)
+                                Dim Calculo As Double = RowSoli.Item("Importe") * Val(formatonumerico(txtParidad.Text))
+                                .Cells(4).Value = formatonumerico(Calculo)
+                            End If
+                            
+
+                            End If
                     End With
 
                     EsCuenta = "S"
@@ -1275,6 +1290,10 @@ Public Class Pagos
                     txtObservaciones.Text = IIf(IsDBNull(.Item("Titulo")), "", .Item("Titulo"))
                     optAnticipos.Checked = True
 
+                    If IIf(IsDBNull(RowSoli.Item("ParidadInformada")), 0, RowSoli.Item("ParidadInformada")) <> 0 Then
+                        txtParidad.Text = formatonumerico(RowSoli.Item("ParidadInformada"))
+                    End If
+
                     Dim XRow = 0
 
                     For i = 0 To XMAXFILAS - 1
@@ -1291,8 +1310,19 @@ Public Class Pagos
                         If RowSoli.Item("Moneda") = 1 Then
                             .Cells(4).Value = formatonumerico(RowSoli.Item("Importe"))
                         Else
-                            Dim Calculo As Double = RowSoli.Item("Importe") * traerParidad()
-                            .Cells(4).Value = formatonumerico(Calculo)
+                            If IIf(IsDBNull(RowSoli.Item("ParidadInformada")), 0, RowSoli.Item("ParidadInformada")) <> 0 Then
+                                txtParidad.Text = formatonumerico(RowSoli.Item("ParidadInformada"))
+                                Dim Calculo As Double = RowSoli.Item("Importe") * Val(formatonumerico(txtParidad.Text))
+                                .Cells(4).Value = formatonumerico(Calculo)
+                            Else
+                                Dim auxpari As Double = traerParidad(txtFechaParidad.Text, True)
+                                'Guardo el valor de la paridad previa para saber despues si informo que se modifico
+                                ParidadAnterior = txtParidad.Text
+                                txtParidad.Text = auxpari
+                                txtParidad.Text = formatonumerico(txtParidad.Text)
+                                Dim Calculo As Double = RowSoli.Item("Importe") * Val(formatonumerico(txtParidad.Text))
+                                .Cells(4).Value = formatonumerico(Calculo)
+                            End If
                         End If
                     End With
 
@@ -1935,13 +1965,20 @@ Public Class Pagos
                             End If
 
                         Else
-                            Dim SQLCnslt As String = "SELECT TipoDolar FROM SOlicitudFondos WHERE NroSolicitud = '" & NroSoliInterno & "'"
+                            Dim SQLCnslt As String = "SELECT TipoDolar, ParidadInformada FROM SOlicitudFondos WHERE NroSolicitud = '" & NroSoliInterno & "'"
                             Dim RowSoli As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
                             If RowSoli IsNot Nothing Then
                                 If IIf(IsDBNull(RowSoli.Item("TipoDolar")), 0, RowSoli.Item("TipoDolar")) = 2 Then
                                     ZZParidad = _NormalizarNumero(.Item("Cambio").ToString(), 4)
                                 Else
-                                    ZZParidad = _NormalizarNumero(.Item("CambioDivisa").ToString(), 4)
+
+                                    If IIf(IsDBNull(RowSoli.Item("TipoDolar")), 0, RowSoli.Item("TipoDolar")) = 1 Then
+                                        ZZParidad = _NormalizarNumero(.Item("CambioDivisa").ToString(), 4)
+                                    Else
+                                        ZZParidad = formatonumerico(RowSoli.Item("ParidadInformada"))
+                                    End If
+
+
                                 End If
 
                             End If
@@ -7872,17 +7909,23 @@ Public Class Pagos
                     End If
 
                     If PorTransferenciaYCheques Then
+                        Dim DiaARetirar As Date
+                        Dim DiaARetirarTexto As String
+                        TraerProximoMartesOJueves(DiaARetirar, DiaARetirarTexto)
                         'WBody &= "<br/>" & "- Cheque(s) que deberá retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir del día de <strong>mañana</strong>, los <strong>Martes y Juevess</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>."
-                        WBody &= "<br/>" & "- Cheque(s) que deberá retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir de la <strong>semana próxima</strong>, los días <strong>Martes y Juevess</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>."
+                        ' WBody &= "<br/>" & "- Cheque(s) que deberá retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir de la <strong>semana próxima</strong>, los días <strong>Martes y Juevess</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>."
+                        WBody &= "<br/>" & "- Cheque(s) que deberá retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir del <strong>" & DiaARetirarTexto & " " & DiaARetirar.ToString("dd/MM/yyyy") & "</strong>, los <strong>Martes y Jueves</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>."
                         'WBody &= "." & "<br/>" & "<br/>" & "Además tiene Cheque(s) para retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir de la <strong>semana próxima</strong>, los <strong>Martes y Juevess</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
                     Else
                         WBody &= "." & "<br/>" & "<br/>" & "Adjuntamos Orden de Pago y retenciones si correspondiesen."
                     End If
 
                 Else
-
-                    WBody = "Informamos que se encuentra a su disposición un pago que podrá ser retirado por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir de la <strong>semana próxima</strong>, los días <strong>Martes y Jueves</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
-
+                    Dim DiaARetirar As Date
+                    Dim DiaARetirarTexto As String
+                    TraerProximoMartesOJueves(DiaARetirar, DiaARetirarTexto)
+                    'WBody = "Informamos que se encuentra a su disposición un pago que podrá ser retirado por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir de la <strong>semana próxima</strong>, los días <strong>Martes y Jueves</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
+                    WBody = "Informamos que se encuentra a su disposición un pago que podrá ser retirado por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir del <strong>" & DiaARetirarTexto & " " & DiaARetirar.ToString("dd/MM/yyyy") & "</strong>, los <strong>Martes y Jueves</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
                 End If
 
                 If Trim(DescProveedor) <> "" Then
@@ -7923,6 +7966,21 @@ Public Class Pagos
         End Try
     End Sub
 
+    Private Sub TraerProximoMartesOJueves(ByRef DiaARetirar As Date, ByRef DiaARetirarTexto As String)
+        DiaARetirar = Date.Today
+        For i = 1 To 10
+            DiaARetirar = DiaARetirar.AddDays(1)
+            Select Case DiaARetirar.DayOfWeek
+                Case 2 'MARTES
+                    DiaARetirarTexto = "Martes"
+                    Exit Sub
+                Case 4 'JUEVES
+                    DiaARetirarTexto = "Jueves"
+                    Exit Sub
+            End Select
+        Next
+    End Sub
+    
     Private Sub _EnviarAvisoOPDisponiblePellital(ByVal Proveedor As String, ByVal DescProveedor As String, Optional ByVal OrdenPago As String = "", Optional ByVal EsPorTransferencia As Boolean = False, Optional ByVal wFechasTransferencias As String = "", Optional ByVal PorTransferenciaYCheques As Boolean = False, Optional ByVal HayECheques As Boolean = False, Optional ByVal FechasECheques As String = "")
 
         If Proveedor.Trim = "" Then Exit Sub
@@ -8577,12 +8635,14 @@ Public Class Pagos
 
         If NroSoliInterno <> 0 Then
             Dim Paridad As String = traerParidad(txtFechaParidad.Text, True)
-            If Val(txtParidad.Text) <> Val(Paridad) Then
+            'If Val(txtParidad.Text) <> Val(formatonumerico(Paridad)) Then
+            If Val(ParidadAnterior) <> Val(formatonumerico(Paridad)) Then
                 MsgBox("Se modifico la paridad a la asignada en la solicitud de fondos")
-                txtParidad.Text = Paridad
+                ParidadAnterior = txtParidad.Text
+                '  txtParidad.Text = Paridad
             End If
 
-            With New MostrarSoliFondos(NroSoliInterno, txtParidad.Text)
+            With New MostrarSoliFondos(NroSoliInterno, Val(formatonumerico(txtParidad.Text)))
                 .Show(Me)
             End With
         End If
@@ -8631,4 +8691,5 @@ Public Class Pagos
     End Sub
 
 
+   
 End Class

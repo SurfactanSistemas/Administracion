@@ -24,7 +24,7 @@ Public Class Gestion_Solicitudes : Implements IActualizaSolicitudes, IContraseñ
                                  & "FROM SolicitudFondos s LEFT JOIN Proveedor p ON s.Proveedor = p.Proveedor " _
                                  & "LEFT JOIN Cuenta c ON s.Cuenta = c.Cuenta WHERE s.OrdenPago = '' " _
                                  & "AND (s.Estado = 'AUTORIZO' OR s.Estado = '' OR s.Estado is NULL) " _
-                                 & "ORDER BY s.NroSolicitud"
+                                 & "ORDER BY s.OrdFecha asc"
         Try
             Dim tablaSoli As DataTable = GetAll(SQLCnslt, "SurfactanSa")
             If tablaSoli.Rows.Count > 0 Then
@@ -251,7 +251,7 @@ Public Class Gestion_Solicitudes : Implements IActualizaSolicitudes, IContraseñ
 
     Private Sub DGV_Solicitudes_CellMouseDoubleClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DGV_Solicitudes.CellMouseDoubleClick
         If e.ColumnIndex > -1 Then
-            With New Ingreso_Solicitud(DGV_Solicitudes.CurrentRow.Cells(1).Value)
+            With New Ingreso_Solicitud(DGV_Solicitudes.CurrentRow.Cells(1).Value, "Mostrar")
                 .Show(Me)
             End With
         End If
@@ -292,7 +292,7 @@ Public Class Gestion_Solicitudes : Implements IActualizaSolicitudes, IContraseñ
                         ImporteDolares = .Cells("Importe").Value
                     End If
 
-                    Dim SQLCnslt As String = "SELECT Efectivo_Chk, Transferencia_Chk, ECheq_Chk, CheqTerceros_Chk, CheqPropio_Chk " _
+                    Dim SQLCnslt As String = "SELECT Efectivo_Chk, Transferencia_Chk, ECheq_Chk, CheqTerceros_Chk, CheqPropio_Chk, Tarjeta_Chk  " _
                                              & "FROM SolicitudFondos WHERE NroSolicitud = '" & .Cells("NroSolicitud").Value & "'"
                     Dim RowSoli As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
 
@@ -301,7 +301,7 @@ Public Class Gestion_Solicitudes : Implements IActualizaSolicitudes, IContraseñ
                                           .Cells("Titulo").Value, .Cells("Moneda").Value, ImportePesos,
                                           .Cells("FechaRequerida").Value, .Cells("OrdFechaRequerida").Value, ImporteDolares,
                                           RowSoli.Item("Efectivo_Chk"), RowSoli.Item("Transferencia_Chk"), RowSoli.Item("ECheq_Chk"),
-                                          RowSoli.Item("CheqTerceros_Chk"), RowSoli.Item("CheqPropio_Chk"))
+                                          RowSoli.Item("CheqTerceros_Chk"), RowSoli.Item("CheqPropio_Chk"), RowSoli.Item("Tarjeta_Chk"))
                 End If
 
             End With
@@ -385,7 +385,18 @@ Public Class Gestion_Solicitudes : Implements IActualizaSolicitudes, IContraseñ
                     If row.Cells("chk").Value = True Then
                         Dim SQLCnslt As String = "UPDATE SolicitudFondos SET Estado = 'RECHAZADO' WHERE NroSolicitud = '" & row.Cells("NroSolicitud").Value & "'"
                         ListaConsultas.Add(SQLCnslt)
-
+                        
+                        Try
+                            SQLCnslt = "SELECT Email FROM Operador WHERE Descripcion = '" & row.Cells("Solicitante").Value & "'"
+                            Dim rowope As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+                            'SE AVISA POR MAIL QUE NO SE RECHAZO SU SOLICITUD
+                            If rowope IsNot Nothing Then
+                                _EnviarEmail(rowope.Item("Email"), "Rechazo de Solicitud de Fondos", "Se a rechazado la solicitud de fondos numero : " & row.Cells("NroSolicitud").Value & " Para " & Trim(row.Cells("Destino").Value) & " con un monto de " & row.Cells("Moneda").Value & " " & row.Cells("Importe").Value & "", Nothing, True)
+                            End If
+                        Catch ex As Exception
+                            MsgBox("No se puedo enviar el mail de aviso. Este operador no debe tener un mail cargado o esta mal escrito", vbExclamation)
+                        End Try
+                        
                         contador += 1
                     End If
                 Next
@@ -440,9 +451,32 @@ Public Class Gestion_Solicitudes : Implements IActualizaSolicitudes, IContraseñ
 
     Private Sub btn_Eliminar_Click(sender As Object, e As EventArgs) Handles btn_Eliminar.Click
         If MsgBox("¿Desea rechazar y eliminar las solicitudes marcadas?", vbYesNo) = vbYes Then
-            With New SoliContra(-1)
-                .Show(Me)
-            End With
+
+            If Trim(Operador.Clave) = "" Then
+                With New SoliContra(-1)
+                    .Show(Me)
+                End With
+            Else
+                Try
+                    Dim SQLCnslts As String = "SELECT SolicitudFondosEdicion FROM Operador WHERE UPPER(Clave) = '" & UCase(Operador.Clave) & "'"
+                    Dim Row As DataRow = GetSingle(SQLCnslts, "SurfactanSa")
+
+                    If Row IsNot Nothing Then
+                        Dim PermisoSistemaSolicitud As String = IIf(IsDBNull(Row.Item("SolicitudFondosEdicion")), "N", Row.Item("SolicitudFondosEdicion"))
+                        'If UCase(txt_Contraseña.Text) = "AUTORIZO" Then
+                        If PermisoSistemaSolicitud = "S" Then
+
+                            Autorizado("S", 0)
+                            
+                        End If
+                    End If
+
+
+                Catch ex As Exception
+
+                End Try
+            End If
+
         End If
     End Sub
 

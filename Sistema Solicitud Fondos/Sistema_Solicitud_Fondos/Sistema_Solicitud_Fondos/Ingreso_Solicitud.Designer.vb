@@ -80,6 +80,7 @@ Partial Class Ingreso_Solicitud
         Me.lbl_TipoDolar = New System.Windows.Forms.Label()
         Me.cbx_TipoDolar = New System.Windows.Forms.ComboBox()
         Me.btn_Autorizar = New System.Windows.Forms.Button()
+        Me.chk_Tarjeta = New System.Windows.Forms.CheckBox()
         Me.panel1.SuspendLayout()
         Me.gp_FormasDePago.SuspendLayout()
         Me.gbx_Retenciones.SuspendLayout()
@@ -280,6 +281,7 @@ Partial Class Ingreso_Solicitud
         '
         'gp_FormasDePago
         '
+        Me.gp_FormasDePago.Controls.Add(Me.chk_Tarjeta)
         Me.gp_FormasDePago.Controls.Add(Me.chk_ChequePropio)
         Me.gp_FormasDePago.Controls.Add(Me.chk_ChequeTerceros)
         Me.gp_FormasDePago.Controls.Add(Me.chk_Echeq)
@@ -383,7 +385,7 @@ Partial Class Ingreso_Solicitud
         Me.btn_Cancelar.Name = "btn_Cancelar"
         Me.btn_Cancelar.Size = New System.Drawing.Size(82, 45)
         Me.btn_Cancelar.TabIndex = 29
-        Me.btn_Cancelar.Text = "CANCELAR"
+        Me.btn_Cancelar.Text = "SALIR"
         Me.btn_Cancelar.UseVisualStyleBackColor = True
         '
         'btn_Adjuntar
@@ -656,6 +658,17 @@ Partial Class Ingreso_Solicitud
         Me.btn_Autorizar.TabIndex = 40
         Me.btn_Autorizar.Text = "AUTORIZAR"
         Me.btn_Autorizar.UseVisualStyleBackColor = True
+        Me.btn_Autorizar.Visible = False
+        '
+        'chk_Tarjeta
+        '
+        Me.chk_Tarjeta.AutoSize = True
+        Me.chk_Tarjeta.Location = New System.Drawing.Point(276, 51)
+        Me.chk_Tarjeta.Name = "chk_Tarjeta"
+        Me.chk_Tarjeta.Size = New System.Drawing.Size(59, 17)
+        Me.chk_Tarjeta.TabIndex = 27
+        Me.chk_Tarjeta.Text = "Tarjeta"
+        Me.chk_Tarjeta.UseVisualStyleBackColor = True
         '
         'Ingreso_Solicitud
         '
@@ -766,4 +779,5 @@ Partial Class Ingreso_Solicitud
     Friend WithEvents lbl_TipoDolar As System.Windows.Forms.Label
     Friend WithEvents cbx_TipoDolar As System.Windows.Forms.ComboBox
     Friend WithEvents btn_Autorizar As System.Windows.Forms.Button
+    Friend WithEvents chk_Tarjeta As System.Windows.Forms.CheckBox
 End Class

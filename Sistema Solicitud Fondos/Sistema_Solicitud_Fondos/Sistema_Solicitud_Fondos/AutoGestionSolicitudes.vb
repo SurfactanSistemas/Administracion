@@ -9,6 +9,12 @@ Public Class AutoGestionSolicitudes
     End Sub
 
     Private Sub CargarGrilla()
+
+        Dim Filtro As String = ""
+        If Not chk_Rechazados.checked Then
+            'Filtro = "AND (upper(s.Estado) <> 'RECHAZADO' or s.Estado IS NULL)"
+            Filtro = "AND (upper(s.Estado) = 'AUTORIZO' or s.Estado IS NULL)"
+        End If
         Dim SQLCnslt As String = "SELECT s.NroSolicitud, s.Solicitante, s.Fecha, s.OrdFecha, " _
                                  & "Tipo = IIF(s.Tipo = 1, 'Prov.',  'Varios'), " _
                                  & "Destino = IIF(s.Proveedor = '',c.Descripcion, p.Nombre), s.Titulo, " _
@@ -16,15 +22,16 @@ Public Class AutoGestionSolicitudes
                                  & "s.OrdFechaRequerida, Estado = IIF(s.Estado = '', '', s.Estado) " _
                                  & "FROM SolicitudFondos s LEFT JOIN Proveedor p ON s.Proveedor = p.Proveedor " _
                                  & "LEFT JOIN Cuenta c ON s.Cuenta = c.Cuenta " _
-                                 & "WHERE s.OrdenPago = '' AND s.Solicitante = '" & Operador.Descripcion & "'" _
-                                 & "ORDER BY s.NroSolicitud"
+                                 & "WHERE s.OrdenPago = '' AND (s.Solicitante = '" & Trim(Operador.Descripcion) & "' OR s.Operador_Sector = '" & Trim(Operador.Solifondos_Sector) & "')" _
+                                 & "" & Filtro & "" _
+                                 & "ORDER BY s.OrdFecha asc"
         Try
             Dim tablaSoli As DataTable = GetAll(SQLCnslt, "SurfactanSa")
             If tablaSoli.Rows.Count > 0 Then
                 DGV_Solicitudes.DataSource = tablaSoli
             End If
             PintarAutorizadosRechazados()
-
+            ActualizarTotales()
         Catch ex As Exception
 
         End Try
@@ -187,5 +194,53 @@ Public Class AutoGestionSolicitudes
 
     Private Sub DGV_Solicitudes_Sorted(sender As Object, e As EventArgs) Handles DGV_Solicitudes.Sorted
         PintarAutorizadosRechazados()
+    End Sub
+
+    Private Sub chk_Rechazados_CheckedChanged(sender As Object, e As EventArgs) Handles chk_Rechazados.CheckedChanged
+        CargarGrilla()
+    End Sub
+
+    
+    
+    Private Sub btn_EliminarSolicitud_Click(sender As Object, e As EventArgs) Handles btn_EliminarSolicitud.Click
+        If MsgBox("¿Desea rechazar y eliminar la solicitudes seleccionada?", vbYesNo) = vbYes Then
+          
+                    Try
+                        Dim ListaConsultas As New List(Of String)
+                        Dim contador As Integer = 0
+                    For Each row As DataGridViewRow In DGV_Solicitudes.SelectedRows
+
+                    Dim SQLCnslt As String = "UPDATE SolicitudFondos SET Estado = 'ELIMINADA' WHERE NroSolicitud = '" & row.Cells("NroSolicitud").Value & "'"
+                    ListaConsultas.Add(SQLCnslt)
+
+                    ' Try
+                    '     SQLCnslt = "SELECT Email FROM Operador WHERE Descripcion = '" & row.Cells("Solicitante").Value & "'"
+                    '     Dim rowope As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+                    '     'SE AVISA POR MAIL QUE NO SE RECHAZO SU SOLICITUD
+                    '     If rowope IsNot Nothing Then
+                    '         _EnviarEmail(rowope.Item("Email"), "Rechazo de Solicitud de Fondos", "Se a rechazado la solicitud de fondos numero : " & row.Cells("NroSolicitud").Value & " Para " & Trim(row.Cells("Destino").Value) & " con un monto de " & row.Cells("Moneda").Value & " " & row.Cells("Importe").Value & "", Nothing, True)
+                    '     End If
+                    ' Catch ex As Exception
+                    '     MsgBox("No se puedo enviar el mail de aviso. Este operador no debe tener un mail cargado o esta mal escrito", vbExclamation)
+                    ' End Try
+
+                    contador += 1
+
+                Next
+
+                ExecuteNonQueries("SurfactanSa", ListaConsultas.ToArray())
+                ' 'Dim SQLCnslt As String = "Delete FROM SolicitudFondos WHERE NroSolicitud = '" & NroSolicutud & "'"
+                ' Dim SQLCnslt As String = "UPDATE SolicitudFondos SET Estado = 'RECHAZADO' WHERE NroSolicitud = '" & NroSolicutud & "'"
+                ' 
+                ' ExecuteNonQueries("SurfactanSa", SQLCnslt)
+
+                MsgBox("Se rechazaron " & contador & " solicitudes")
+
+                CargarGrilla()
+            Catch ex As Exception
+
+            End Try
+        End If
+
     End Sub
 End Class
