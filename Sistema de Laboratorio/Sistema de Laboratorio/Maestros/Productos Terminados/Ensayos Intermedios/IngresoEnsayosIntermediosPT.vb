@@ -780,7 +780,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                                     WAdicionales(i - 1, 1) = Trim(OrDefault(.Cells("FormulaAdic" & i & "dec").Value, ""))
                                 Next
 
-                                If WFormula <> "" Then
+                                If WFormula <> "" And Val(WTipo) = 2 Then
 
                                     With New IngresoVariablesFormula(WFormula, WVariables, WValor, dgvEnsayos, WDecimales, WDesdeCargaResultados:=True, WAdicionales:=WAdicionales)
                                         Dim WDialogResult = .ShowDialog(Me)
