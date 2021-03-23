@@ -77,6 +77,8 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
         btnReimprimir.Visible = False
         btnPoolEnsayos.Enabled = False
         gbDatosAdicionales.Visible = False
+        lblPool.Visible = False
+        txtPool.Visible = False
 
         txtEtapa.ReadOnly = Not EsFarma()
 
@@ -295,6 +297,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                         Dim WFormulaAdic1dec = Trim(OrDefault(.Item("FormulaAdic1dec"), ""))
                         Dim WFormulaAdic2dec = Trim(OrDefault(.Item("FormulaAdic2dec"), ""))
                         Dim WFormulaAdic3dec = Trim(OrDefault(.Item("FormulaAdic3dec"), ""))
+                        txtPool.Text = Trim(OrDefault(.Item("Pool"), ""))
 
                         Dim WImpreResultado = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif, WInformaEspecif)
 
@@ -588,9 +591,14 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                 dgvEnsayos.CurrentCell = dgvEnsayos.Item("Valor", 0)
                 If txtSubEtapa.Visible And Val(txtSubEtapa.Text) = 0 Then
                     txtSubEtapa.Focus()
+                ElseIf txtSubEtapa.Visible And Val(txtSubEtapa.Text) <> 0 And txtPool.Text.Trim <> "" Then
+                    txtPool.Visible = True
+                    lblPool.Visible = True
+                    txtPool.Focus()
                 Else
                     dgvEnsayos.Focus()
                 End If
+
             Else
                 txtSubEtapa.Visible = False
                 txtEtapa.Focus()
@@ -742,7 +750,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                     Case "VALOR"
                         Dim WValor As String = Trim(UCase(OrDefault(.Value, "")))
 
-                        If WValor = "P" And Val(OrDefault(dgvEnsayos.Rows(.RowIndex).Cells("TipoEspecif").Value, "")) <> 2 Then
+                        If WValor = "P" Then 'And Val(OrDefault(dgvEnsayos.Rows(.RowIndex).Cells("TipoEspecif").Value, "")) <> 2 Then
                             dgvEnsayos.Rows(.RowIndex).Cells("Valor").Value = WValor
                             dgvEnsayos.Rows(.RowIndex).Cells("Resultado").Value = "PENDIENTE"
                         Else
@@ -1070,6 +1078,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                     ZSql = ZSql & "FormulaAdic1dec ,"
                     ZSql = ZSql & "FormulaAdic2dec ,"
                     ZSql = ZSql & "FormulaAdic3dec ,"
+                    ZSql = ZSql & "Pool ,"
 
                     For i = 1 To 10
                         ZSql = ZSql & "Variable" & i & " ,"
@@ -1118,6 +1127,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                     ZSql = ZSql & "'" & WFormulaAdic1dec & "',"
                     ZSql = ZSql & "'" & WFormulaAdic2dec & "',"
                     ZSql = ZSql & "'" & WFormulaAdic3dec & "',"
+                    ZSql = ZSql & "'" & txtPool.Text & "',"
 
                     For i = 1 To 10
 
@@ -1266,10 +1276,10 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
             With row
                 WTipo = OrDefault(.Cells("TipoEspecif").Value, "")
 
-                If Val(WTipo) = 2 Then
+                If Val(WTipo) = 2 AndAlso OrDefault(.Cells("Valor").Value, "") <> "P" Then
 
                     Dim WFormula As String = OrDefault(.Cells("FormulaEspecif").Value, "")
-                    
+
                     Dim parser As New ExpressionParser()
 
                     Dim regex As New Regex("R[0-9]{1,2}")
@@ -1306,7 +1316,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                                 End If
 
                             Next
-            
+
                             Dim WVal = formatonumerico(parser.Parse(v), Val(d))
 
                             WFormula = WFormula.Replace("FA" & x, WVal)
@@ -1509,7 +1519,8 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
                     End With
                 End If
-
+            ElseIf txtSubEtapa.Visible And Val(txtSubEtapa.Text) = 0 And txtPool.Text.Trim = "" Then
+                Throw New Exception("No se ingresó el Pool correspondiente a la Sub Etapa.")
             End If
 
             '
@@ -2233,6 +2244,21 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
         Else
             MsgBox("Los tipos de datos no son compatibles entre si", MsgBoxStyle.Exclamation)
         End If
+
+    End Sub
+
+    Private Sub TextBox1_KeyDown(sender As Object, e As KeyEventArgs) Handles txtPool.KeyDown
+
+        Select Case e.KeyCode
+            Case Keys.Enter
+                If dgvEnsayos.Rows.Count > 0 Then
+                    dgvEnsayos.Focus()
+                Else
+                    txtSubEtapa.Focus()
+                End If
+            Case Keys.Escape
+                txtPool.Text = ""
+        End Select
 
     End Sub
 End Class
