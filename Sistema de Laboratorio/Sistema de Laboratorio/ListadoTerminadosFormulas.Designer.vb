@@ -30,11 +30,13 @@ Partial Class ListadoTerminadosFormulas
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtBuscador = New System.Windows.Forms.TextBox()
         Me.DGV_Formulas = New Util.DBDataGridView()
+        Me.Producto = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.btnVolver = New System.Windows.Forms.Button()
         Me.btnAgregar = New System.Windows.Forms.Button()
-        Me.Producto = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.rbMP = New System.Windows.Forms.RadioButton()
+        Me.rbPT = New System.Windows.Forms.RadioButton()
         Me.Panel1.SuspendLayout()
         CType(Me.DGV_Formulas, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -126,34 +128,6 @@ Partial Class ListadoTerminadosFormulas
         Me.DGV_Formulas.Size = New System.Drawing.Size(608, 242)
         Me.DGV_Formulas.TabIndex = 5
         '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(14, 58)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(51, 13)
-        Me.Label3.TabIndex = 10
-        Me.Label3.Text = "BUSCAR"
-        '
-        'btnVolver
-        '
-        Me.btnVolver.Location = New System.Drawing.Point(454, 80)
-        Me.btnVolver.Name = "btnVolver"
-        Me.btnVolver.Size = New System.Drawing.Size(140, 37)
-        Me.btnVolver.TabIndex = 12
-        Me.btnVolver.Text = "CERRAR"
-        Me.btnVolver.UseVisualStyleBackColor = True
-        '
-        'btnAgregar
-        '
-        Me.btnAgregar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAgregar.Location = New System.Drawing.Point(290, 80)
-        Me.btnAgregar.Name = "btnAgregar"
-        Me.btnAgregar.Size = New System.Drawing.Size(158, 37)
-        Me.btnAgregar.TabIndex = 11
-        Me.btnAgregar.Text = "AGREGAR"
-        Me.btnAgregar.UseVisualStyleBackColor = True
-        '
         'Producto
         '
         Me.Producto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
@@ -172,11 +146,63 @@ Partial Class ListadoTerminadosFormulas
         Me.Descripcion.Name = "Descripcion"
         Me.Descripcion.ReadOnly = True
         '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(14, 58)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(51, 13)
+        Me.Label3.TabIndex = 10
+        Me.Label3.Text = "BUSCAR"
+        '
+        'btnVolver
+        '
+        Me.btnVolver.Location = New System.Drawing.Point(474, 80)
+        Me.btnVolver.Name = "btnVolver"
+        Me.btnVolver.Size = New System.Drawing.Size(120, 37)
+        Me.btnVolver.TabIndex = 12
+        Me.btnVolver.Text = "CERRAR"
+        Me.btnVolver.UseVisualStyleBackColor = True
+        '
+        'btnAgregar
+        '
+        Me.btnAgregar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAgregar.Location = New System.Drawing.Point(346, 80)
+        Me.btnAgregar.Name = "btnAgregar"
+        Me.btnAgregar.Size = New System.Drawing.Size(120, 37)
+        Me.btnAgregar.TabIndex = 11
+        Me.btnAgregar.Text = "AGREGAR"
+        Me.btnAgregar.UseVisualStyleBackColor = True
+        '
+        'rbMP
+        '
+        Me.rbMP.AutoSize = True
+        Me.rbMP.Location = New System.Drawing.Point(243, 90)
+        Me.rbMP.Name = "rbMP"
+        Me.rbMP.Size = New System.Drawing.Size(95, 17)
+        Me.rbMP.TabIndex = 13
+        Me.rbMP.Text = "MAT. PRIMAS"
+        Me.rbMP.UseVisualStyleBackColor = True
+        '
+        'rbPT
+        '
+        Me.rbPT.AutoSize = True
+        Me.rbPT.Checked = True
+        Me.rbPT.Location = New System.Drawing.Point(101, 90)
+        Me.rbPT.Name = "rbPT"
+        Me.rbPT.Size = New System.Drawing.Size(134, 17)
+        Me.rbPT.TabIndex = 13
+        Me.rbPT.TabStop = True
+        Me.rbPT.Text = "PROD. TERMINADOS"
+        Me.rbPT.UseVisualStyleBackColor = True
+        '
         'ListadoTerminadosFormulas
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(608, 365)
+        Me.Controls.Add(Me.rbPT)
+        Me.Controls.Add(Me.rbMP)
         Me.Controls.Add(Me.btnVolver)
         Me.Controls.Add(Me.btnAgregar)
         Me.Controls.Add(Me.Label3)
@@ -205,4 +231,6 @@ Partial Class ListadoTerminadosFormulas
     Friend WithEvents btnAgregar As System.Windows.Forms.Button
     Friend WithEvents Producto As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents rbMP As System.Windows.Forms.RadioButton
+    Friend WithEvents rbPT As System.Windows.Forms.RadioButton
 End Class

@@ -105,6 +105,7 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.dgvEnsayos = New Util.DBDataGridView()
+        Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Ensayo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Especificacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Farmacopea = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -145,7 +146,12 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.Decimales = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.OperadorIniciales = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.OperadorID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.FormulaAdic1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FormulaAdic2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FormulaAdic3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FormulaAdic1dec = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FormulaAdic2dec = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FormulaAdic3dec = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.gbDatosAdicionales.SuspendLayout()
@@ -988,7 +994,7 @@ Partial Class IngresoEnsayosLaboratorioMP
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgvEnsayos.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.dgvEnsayos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvEnsayos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Ensayo, Me.Especificacion, Me.Farmacopea, Me.Valor, Me.ValorBandera, Me.Resultado, Me.Parametro, Me.Descripcion, Me.TipoEspecif, Me.DesdeEspecif, Me.HastaEspecif, Me.UnidadEspecif, Me.MenorIgualEspecif, Me.InformaEspecif, Me.Observaciones, Me.FormulaEspecif, Me.Variable1, Me.Variable2, Me.Variable3, Me.Variable4, Me.Variable5, Me.Variable6, Me.Variable7, Me.Variable8, Me.Variable9, Me.Variable10, Me.VariableValor1, Me.VariableValor2, Me.VariableValor3, Me.VariableValor4, Me.VariableValor5, Me.VariableValor6, Me.VariableValor7, Me.VariableValor8, Me.VariableValor9, Me.VariableValor10, Me.EspecificacionIngles, Me.Decimales, Me.OperadorIniciales, Me.OperadorID})
+        Me.dgvEnsayos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Ensayo, Me.Especificacion, Me.Farmacopea, Me.Valor, Me.ValorBandera, Me.Resultado, Me.Parametro, Me.Descripcion, Me.TipoEspecif, Me.DesdeEspecif, Me.HastaEspecif, Me.UnidadEspecif, Me.MenorIgualEspecif, Me.InformaEspecif, Me.Observaciones, Me.FormulaEspecif, Me.Variable1, Me.Variable2, Me.Variable3, Me.Variable4, Me.Variable5, Me.Variable6, Me.Variable7, Me.Variable8, Me.Variable9, Me.Variable10, Me.VariableValor1, Me.VariableValor2, Me.VariableValor3, Me.VariableValor4, Me.VariableValor5, Me.VariableValor6, Me.VariableValor7, Me.VariableValor8, Me.VariableValor9, Me.VariableValor10, Me.EspecificacionIngles, Me.Decimales, Me.OperadorIniciales, Me.OperadorID, Me.FormulaAdic1, Me.FormulaAdic2, Me.FormulaAdic3, Me.FormulaAdic1dec, Me.FormulaAdic2dec, Me.FormulaAdic3dec})
         DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
         DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1017,6 +1023,16 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.dgvEnsayos.SinClickDerecho = False
         Me.dgvEnsayos.Size = New System.Drawing.Size(992, 285)
         Me.dgvEnsayos.TabIndex = 4
+        '
+        'Panel2
+        '
+        Me.Panel2.Controls.Add(Me.GroupBox2)
+        Me.Panel2.Controls.Add(Me.GroupBox3)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel2.Location = New System.Drawing.Point(3, 349)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(992, 102)
+        Me.Panel2.TabIndex = 5
         '
         'Ensayo
         '
@@ -1326,15 +1342,47 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.OperadorID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.OperadorID.Visible = False
         '
-        'Panel2
+        'FormulaAdic1
         '
-        Me.Panel2.Controls.Add(Me.GroupBox2)
-        Me.Panel2.Controls.Add(Me.GroupBox3)
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(3, 349)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(992, 102)
-        Me.Panel2.TabIndex = 5
+        Me.FormulaAdic1.HeaderText = "FormulaAdic1"
+        Me.FormulaAdic1.Name = "FormulaAdic1"
+        Me.FormulaAdic1.ReadOnly = True
+        Me.FormulaAdic1.Visible = False
+        '
+        'FormulaAdic2
+        '
+        Me.FormulaAdic2.HeaderText = "FormulaAdic2"
+        Me.FormulaAdic2.Name = "FormulaAdic2"
+        Me.FormulaAdic2.ReadOnly = True
+        Me.FormulaAdic2.Visible = False
+        '
+        'FormulaAdic3
+        '
+        Me.FormulaAdic3.HeaderText = "FormulaAdic3"
+        Me.FormulaAdic3.Name = "FormulaAdic3"
+        Me.FormulaAdic3.ReadOnly = True
+        Me.FormulaAdic3.Visible = False
+        '
+        'FormulaAdic1dec
+        '
+        Me.FormulaAdic1dec.HeaderText = "FormulaAdic1dec"
+        Me.FormulaAdic1dec.Name = "FormulaAdic1dec"
+        Me.FormulaAdic1dec.ReadOnly = True
+        Me.FormulaAdic1dec.Visible = False
+        '
+        'FormulaAdic2dec
+        '
+        Me.FormulaAdic2dec.HeaderText = "FormulaAdic2dec"
+        Me.FormulaAdic2dec.Name = "FormulaAdic2dec"
+        Me.FormulaAdic2dec.ReadOnly = True
+        Me.FormulaAdic2dec.Visible = False
+        '
+        'FormulaAdic3dec
+        '
+        Me.FormulaAdic3dec.HeaderText = "FormulaAdic3dec"
+        Me.FormulaAdic3dec.Name = "FormulaAdic3dec"
+        Me.FormulaAdic3dec.ReadOnly = True
+        Me.FormulaAdic3dec.Visible = False
         '
         'IngresoEnsayosLaboratorioMP
         '
@@ -1476,4 +1524,10 @@ Partial Class IngresoEnsayosLaboratorioMP
     Friend WithEvents Decimales As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents OperadorIniciales As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents OperadorID As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents FormulaAdic1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents FormulaAdic2 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents FormulaAdic3 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents FormulaAdic1dec As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents FormulaAdic2dec As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents FormulaAdic3dec As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

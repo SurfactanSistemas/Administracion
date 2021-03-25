@@ -404,7 +404,15 @@ Public Class ParametrosDeEspecificacion : Implements INotificaActualizacion, ITr
 
     Private Sub btnTraer_Click(sender As Object, e As EventArgs) Handles btnTraer.Click
 
-        With New Util.AyudaGeneral(GetAll("SELECT distinct f.Terminado As Codigo, t.Descripcion FROM SurfactanSa.dbo.Terminado t INNER JOIN Surfactan_II.dbo.FormulasDeEnsayos f ON f.Terminado = t.Codigo ORDER BY f.Terminado, t.Descripcion"), "SELECCIONE EL CODIGO DEL PRODUCTO")
+        Dim tabla As DataTable = Nothing
+
+        If Terminado.Replace(" ", "").Length = 10 Then
+            tabla = GetAll("SELECT distinct f.Terminado As Codigo, t.Descripcion FROM SurfactanSa.dbo.Terminado t INNER JOIN Surfactan_II.dbo.FormulasDeEnsayos f ON f.Terminado = t.Codigo ORDER BY f.Terminado, t.Descripcion")
+        Else
+            tabla = GetAll("SELECT distinct f.Terminado As Codigo, a.Descripcion FROM SurfactanSa.dbo.Articulo a INNER JOIN Surfactan_II.dbo.FormulasDeEnsayos f ON f.Terminado = a.Codigo ORDER BY f.Terminado, a.Descripcion")
+        End If
+
+        With New Util.AyudaGeneral(tabla, "SELECCIONE EL CODIGO DEL PRODUCTO")
             .ShowDialog(Me)
         End With
 

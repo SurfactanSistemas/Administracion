@@ -584,6 +584,10 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                 Dim WAdic1 = Trim(OrDefault(.Item("FormulaAdic1"), ""))
                 Dim WAdic2 = Trim(OrDefault(.Item("FormulaAdic2"), ""))
                 Dim WAdic3 = Trim(OrDefault(.Item("FormulaAdic3"), ""))
+                Dim WAdic1dec = Trim(OrDefault(.Item("FormulaAdic1dec"), ""))
+                Dim WAdic2dec = Trim(OrDefault(.Item("FormulaAdic2dec"), ""))
+                Dim WAdic3dec = Trim(OrDefault(.Item("FormulaAdic3dec"), ""))
+
                 Dim WImpreParametro = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif, WInformaEspecif)
 
                 If Val(WTipoEspecif) = 0 And WImpreParametro <> "" Then WImpreParametro &= " (c)"
@@ -611,6 +615,9 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                     .Cells("FormulaAdic1").Value = WAdic1
                     .Cells("FormulaAdic2").Value = WAdic2
                     .Cells("FormulaAdic3").Value = WAdic3
+                    .Cells("FormulaAdic1dec").Value = WAdic1dec
+                    .Cells("FormulaAdic2dec").Value = WAdic2dec
+                    .Cells("FormulaAdic3dec").Value = WAdic3dec
 
                     For i = 1 To 10
                         .Cells("Variable" & i).Value = Trim(OrDefault(row.Item("Variable" & i), ""))

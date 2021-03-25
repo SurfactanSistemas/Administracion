@@ -401,6 +401,12 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
                     Dim WInformaEspecif = OrDefault(.Item("InformaEspecif"), "0")
                     Dim WFormulaEspecif = OrDefault(.Item("FormulaEspecif"), "")
                     Dim WImpreParametro = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif, WInformaEspecif)
+                    Dim WAdic1 = Trim(OrDefault(.Item("FormulaAdic1"), ""))
+                    Dim WAdic2 = Trim(OrDefault(.Item("FormulaAdic2"), ""))
+                    Dim WAdic3 = Trim(OrDefault(.Item("FormulaAdic3"), ""))
+                    Dim WAdic1dec = Trim(OrDefault(.Item("FormulaAdic1dec"), ""))
+                    Dim WAdic2dec = Trim(OrDefault(.Item("FormulaAdic2dec"), ""))
+                    Dim WAdic3dec = Trim(OrDefault(.Item("FormulaAdic3dec"), ""))
 
                     If Val(WTipoEspecif) = 0 And WImpreParametro <> "" Then WImpreParametro &= " (c)"
 
@@ -422,6 +428,12 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
                         .Cells("InformaEspecif").Value = WInformaEspecif
                         .Cells("Parametro").Value = Trim(WImpreParametro)
                         .Cells("FormulaEspecif").Value = WFormulaEspecif
+                        .Cells("FormulaAdic1").Value = WAdic1
+                        .Cells("FormulaAdic2").Value = WAdic2
+                        .Cells("FormulaAdic3").Value = WAdic3
+                        .Cells("FormulaAdic1dec").Value = WAdic1dec
+                        .Cells("FormulaAdic2dec").Value = WAdic2dec
+                        .Cells("FormulaAdic3dec").Value = WAdic3dec
 
                         For i = 1 To 10
                             .Cells("Variable" & i).Value = Trim(OrDefault(row.Item("Variable" & i), ""))
@@ -515,6 +527,14 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
             Dim WParametro As String = OrDefault(.Cells("DescEnsayo").Value, "")
             Dim WFormula As String = OrDefault(.Cells("FormulaEspecif").Value, "")
             Dim WParametrosFormula(10) As String
+            Dim WAdicionales(2, 1) As String
+
+            WAdicionales(0, 0) = OrDefault(.Cells("FormulaAdic1").Value, "")
+            WAdicionales(1, 0) = OrDefault(.Cells("FormulaAdic2").Value, "")
+            WAdicionales(2, 0) = OrDefault(.Cells("FormulaAdic3").Value, "")
+            WAdicionales(0, 1) = OrDefault(.Cells("FormulaAdic1dec").Value, "")
+            WAdicionales(1, 1) = OrDefault(.Cells("FormulaAdic2dec").Value, "")
+            WAdicionales(2, 1) = OrDefault(.Cells("FormulaAdic3dec").Value, "")
 
             For i = 1 To 10
                 WParametrosFormula(i) = Trim(OrDefault(.Cells("Variable" & i).Value, ""))
@@ -522,7 +542,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
 
             Dim frm As New IngresoParametrosEspecificaciones(txtCodigo.Text, WEnsayo, WDescEnsayo, WParametro, WTipo, WInforma,
                                                              WMenorIgual, WDesde, WHasta, WUnidad, WFarmacopea,
-                                                             WFormula, WParametrosFormula, {})
+                                                             WFormula, WParametrosFormula, WAdicionales)
             frm.ShowDialog(Me)
 
             dgvEspecif.CurrentCell = dgvEspecif.Rows(.Index).Cells("Ensayo")
@@ -702,6 +722,12 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
                 WVariable8 = OrDefault(.Cells("Variable8").Value, "")
                 WVariable9 = OrDefault(.Cells("Variable9").Value, "")
                 WVariable10 = OrDefault(.Cells("Variable10").Value, "")
+                Dim WFormulaAdic1 = OrDefault(.Cells("FormulaAdic1").Value, "")
+                Dim WFormulaAdic2 = OrDefault(.Cells("FormulaAdic2").Value, "")
+                Dim WFormulaAdic3 = OrDefault(.Cells("FormulaAdic3").Value, "")
+                Dim WFormulaAdic1dec = OrDefault(.Cells("FormulaAdic1dec").Value, "")
+                Dim WFormulaAdic2dec = OrDefault(.Cells("FormulaAdic2dec").Value, "")
+                Dim WFormulaAdic3dec = OrDefault(.Cells("FormulaAdic3dec").Value, "")
 
                 Dim ZSql, XPaso, Auxi As String
 
@@ -741,6 +767,12 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
                 ZSql = ZSql & "Variable8 ,"
                 ZSql = ZSql & "Variable9 ,"
                 ZSql = ZSql & "Variable10 ,"
+                ZSql = ZSql & "FormulaAdic1 ,"
+                ZSql = ZSql & "FormulaAdic2 ,"
+                ZSql = ZSql & "FormulaAdic3 ,"
+                ZSql = ZSql & "FormulaAdic1dec ,"
+                ZSql = ZSql & "FormulaAdic2dec ,"
+                ZSql = ZSql & "FormulaAdic3dec ,"
                 ZSql = ZSql & "FechaGrabacion ,"
                 ZSql = ZSql & "[Version] ,"
                 ZSql = ZSql & "Operador ,"
@@ -773,6 +805,12 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
                 ZSql = ZSql & "'" & WVariable8 & "',"
                 ZSql = ZSql & "'" & WVariable9 & "',"
                 ZSql = ZSql & "'" & WVariable10 & "',"
+                ZSql = ZSql & "'" & WFormulaAdic1 & "',"
+                ZSql = ZSql & "'" & WFormulaAdic2 & "',"
+                ZSql = ZSql & "'" & WFormulaAdic3 & "',"
+                ZSql = ZSql & "'" & WFormulaAdic1dec & "',"
+                ZSql = ZSql & "'" & WFormulaAdic2dec & "',"
+                ZSql = ZSql & "'" & WFormulaAdic3dec & "',"
                 ZSql = ZSql & "'" & txtFecha.Text & "',"
                 ZSql = ZSql & "'" & txtVersion.Text & "',"
                 ZSql = ZSql & "'" & IDOperadorGrabacion & "',"

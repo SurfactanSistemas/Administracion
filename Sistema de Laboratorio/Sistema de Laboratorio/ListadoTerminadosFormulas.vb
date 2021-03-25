@@ -27,7 +27,18 @@ Public Class ListadoTerminadosFormulas : Implements Util.IAyudaGeneral
     End Sub
 
     Private Sub ListadoTerminadosFormulas_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim WDatos As DataTable = GetAll("SELECT DISTINCT f.Terminado AS Producto, t.Descripcion FROM FormulasDeEnsayos f INNER JOIN Terminado t ON t.Codigo = f.Terminado ORDER BY Terminado", "Surfactan_II")
+        _CargarProductos()
+    End Sub
+
+    Private Sub _CargarProductos()
+
+        Dim WDatos As DataTable = Nothing
+
+        If rbPT.Checked Then
+            WDatos = GetAll("SELECT DISTINCT f.Terminado AS Producto, t.Descripcion FROM Surfactan_II.dbo.FormulasDeEnsayos f INNER JOIN SurfactanSa.dbo.Terminado t ON t.Codigo = f.Terminado ORDER BY Terminado", "Surfactan_II")
+        Else
+            WDatos = GetAll("SELECT DISTINCT f.Terminado AS Producto, a.Descripcion FROM Surfactan_II.dbo.FormulasDeEnsayos f INNER JOIN SurfactanSa.dbo.Articulo a ON a.Codigo = f.Terminado ORDER BY Terminado", "Surfactan_II")
+        End If
 
         DGV_Formulas.DataSource = WDatos
 
@@ -52,7 +63,15 @@ Public Class ListadoTerminadosFormulas : Implements Util.IAyudaGeneral
     End Sub
 
     Private Sub btnAgregar_Click(sender As Object, e As EventArgs) Handles btnAgregar.Click
-        With New Util.AyudaGeneral(GetAll("SELECT Codigo, Descripcion FROM Terminado ORDER BY Codigo"), "SELECCIONE EL CODIGO DEL PRODUCTO")
+        Dim datos As DataTable = Nothing
+
+        If rbPT.Checked Then
+            datos = GetAll("SELECT Codigo, Descripcion FROM Terminado ORDER BY Codigo")
+        Else
+            datos = GetAll("SELECT Codigo, Descripcion FROM Articulo ORDER BY Codigo")
+        End If
+
+        With New Util.AyudaGeneral(datos, "SELECCIONE EL CODIGO DEL PRODUCTO")
             .ShowDialog(Me)
         End With
     End Sub
@@ -66,5 +85,9 @@ Public Class ListadoTerminadosFormulas : Implements Util.IAyudaGeneral
             .btnAgregar.PerformClick()
         End With
 
+    End Sub
+
+    Private Sub rbPT_Click(sender As Object, e As EventArgs) Handles rbPT.Click, rbMP.Click
+        _CargarProductos()
     End Sub
 End Class
