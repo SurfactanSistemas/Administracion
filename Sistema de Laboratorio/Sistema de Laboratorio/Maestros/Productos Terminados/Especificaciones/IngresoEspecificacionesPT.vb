@@ -345,27 +345,27 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
                     If Val(WEnsayo) = 0 Then Continue For
 
-                    WValor = Trim(OrDefault(.Item("Valor" & i), ""))
-                    WDesde = Trim(OrDefault(.Item("Desde" & i), ""))
-                    WHasta = Trim(OrDefault(.Item("Hasta" & i), ""))
+                    WValor = Trim(OrDefault(.Item("Valor" & i & i), ""))
+                    'WDesde = Trim(OrDefault(.Item("Desde" & i), ""))
+                    'WHasta = Trim(OrDefault(.Item("Hasta" & i), ""))
 
-                    WTipoEspecif = IIf(WDesde = "" And WHasta = "", "0", "1")
-                    WInformaEspecif = IIf(Val(WTipoEspecif) = 0, "0", "1")
+                    'WTipoEspecif = IIf(WDesde = "" And WHasta = "", "0", "1")
+                    'WInformaEspecif = IIf(Val(WTipoEspecif) = 0, "0", "1")
 
                 End With
 
-                Dim r As DataRow = WCargaVFormatoViejo.NewRow
+                'Dim r As DataRow = WCargaVFormatoViejo.NewRow
 
-                With r
-                    .Item("Ensayo") = WEnsayo
-                    .Item("Valor") = WValor
-                    .Item("DesdeEspecif") = WDesde
-                    .Item("HastaEspecif") = WHasta
-                    .Item("TipoEspecif") = WTipoEspecif
-                    .Item("InformaEspecif") = WInformaEspecif
+                With WCargaVFormatoViejo.Rows(i - 1)
+                    '.Item("Ensayo") = WEnsayo
+                    .Item("Valor") &= WValor
+                    '.Item("DesdeEspecif") = WDesde
+                    '.Item("HastaEspecif") = WHasta
+                    '.Item("TipoEspecif") = WTipoEspecif
+                    '.Item("InformaEspecif") = WInformaEspecif
                 End With
 
-                WCargaVFormatoViejo.Rows.Add(r)
+                'WCargaVFormatoViejo.Rows(i).Add(r)
 
             Next
 
@@ -488,7 +488,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                     Dim WDesdeEspecif As String = OrDefault(.Item("DesdeEspecif"), "")
                     Dim WHastaEspecif As String = OrDefault(.Item("HastaEspecif"), "")
                     Dim WUnidadEspecif = OrDefault(.Item("UnidadEspecif"), "")
-                    Dim WMenorIgualEspecif = OrDefault(.Item("MenorIgualEspecif"), "0")
+                    Dim WMenorIgualEspecif = OrDefault(.Item("MenorIgualEspecif"), "1")
                     Dim WInformaEspecif = OrDefault(.Item("InformaEspecif"), "0")
                     Dim WFormulaEspecif = OrDefault(.Item("FormulaEspecif"), "")
                     Dim WImpreParametro = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif, WInformaEspecif)
@@ -1337,6 +1337,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                 columnas &= "Ensayo" & i & " = '" & OrDefault(.Cells("Ensayo").Value, "") & "',"
 
                 Dim WValor As String = OrDefault(.Cells("DescEnsayo").Value, "").ToString.Trim.PadRight(100, " ")
+
 
                 columnas &= "Valor" & i & " = '" & WValor.left(50) & "', Valor" & i & i & " = '" & WValor.right(50) & "',"
                 columnas &= "Desde" & i & " = '" & Trim(OrDefault(.Cells("DesdeEspecif").Value, "")) & "',"

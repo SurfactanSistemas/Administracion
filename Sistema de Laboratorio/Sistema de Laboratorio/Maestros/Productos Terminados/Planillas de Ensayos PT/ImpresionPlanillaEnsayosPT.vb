@@ -53,8 +53,8 @@ Public Class ImpresionPlanillaEnsayosPT : Implements IAyudaPTs
 
     End Function
 
-    Private Sub SoloNumero(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txtEtapa.KeyPress
-        If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
+    Private Sub NumerosConComas(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtEtapa.KeyPress
+        If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) And Not (CChar(".")) = e.KeyChar Then
             e.Handled = True
         End If
     End Sub
