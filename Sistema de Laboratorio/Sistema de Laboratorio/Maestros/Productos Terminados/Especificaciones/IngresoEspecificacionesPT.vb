@@ -345,7 +345,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
                     If Val(WEnsayo) = 0 Then Continue For
 
-                    WValor = Trim(OrDefault(.Item("Valor" & i & i), ""))
+                    WValor = " " & Trim(OrDefault(.Item("Valor" & i & i), ""))
                     'WDesde = Trim(OrDefault(.Item("Desde" & i), ""))
                     'WHasta = Trim(OrDefault(.Item("Hasta" & i), ""))
 
@@ -1167,7 +1167,10 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
         _GrabarVersionEspecificacionPTNOFarma()
 
-        With New IngresoDatosMostrarEnCertificadosAnalisis(txtTerminado.Text, "S00102", True)
+        '
+        ' 20 = ID DE VENTANA DE ING DE DATOS A MOSTRAR EN CERTIFICADOS DE ANALISIS.
+        '
+        With New IngresoDatosMostrarEnCertificadosAnalisis(txtTerminado.Text, "S00102", 20)
             .ShowDialog(Me)
         End With
 
@@ -1497,7 +1500,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                 ZSql = ZSql & "'" & Trim(Str$(WRenglon)) & "',"
                 ZSql = ZSql & "'" & WEnsayo & "',"
                 ZSql = ZSql & "'" & WDescEnsayo.left(50) & "',"
-                ZSql = ZSql & "'" & WValor.left(70) & "',"
+                ZSql = ZSql & "'" & WValor.left(100) & "',"
                 ZSql = ZSql & "'" & WTipoEspecif & "',"
                 ZSql = ZSql & "'" & WInformaEspecif & "',"
                 ZSql = ZSql & "'" & WMenorIgualEspecif & "',"
