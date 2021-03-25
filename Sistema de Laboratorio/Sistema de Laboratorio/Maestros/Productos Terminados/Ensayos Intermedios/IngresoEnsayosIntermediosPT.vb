@@ -1748,6 +1748,12 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                 WMenorIgualEspecif = OrDefault(.Item("MenorIgualEspecif"), "")
                 WInformaEspecif = OrDefault(.Item("InformaEspecif"), "")
                 WFormulaEspecif = OrDefault(.Item("FormulaEspecif"), "")
+                Dim WFormulaAdic1 As String = OrDefault(.Item("FormulaAdic1"), "")
+                Dim WFormulaAdic2 As String = OrDefault(.Item("FormulaAdic2"), "")
+                Dim WFormulaAdic3 As String = OrDefault(.Item("FormulaAdic3"), "")
+                Dim WFormulaAdic1dec As String = OrDefault(.Item("FormulaAdic1dec"), "")
+                Dim WFormulaAdic2dec As String = OrDefault(.Item("FormulaAdic2dec"), "")
+                Dim WFormulaAdic3dec As String = OrDefault(.Item("FormulaAdic3dec"), "")
                 Dim WDecimalesFormula As String = OrDefault(.Item("Decimales"), "")
                 WImpreParametro = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif, WInformaEspecif)
 
@@ -1778,6 +1784,12 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                     .Cells("FormulaEspecif").Value = WFormulaEspecif
                     .Cells("Parametro").Value = Trim(WImpreParametro)
                     .Cells("Decimales").Value = Trim(WDecimalesFormula)
+                    .Cells("FormulaAdic1").Value = Trim(WFormulaAdic1)
+                    .Cells("FormulaAdic2").Value = Trim(WFormulaAdic2)
+                    .Cells("FormulaAdic3").Value = Trim(WFormulaAdic3)
+                    .Cells("FormulaAdic1dec").Value = Trim(WFormulaAdic1dec)
+                    .Cells("FormulaAdic2dec").Value = Trim(WFormulaAdic2dec)
+                    .Cells("FormulaAdic3dec").Value = Trim(WFormulaAdic3dec)
 
                     For i = 1 To 10
                         .Cells("Variable" & i).Value = Trim(WFormulas(i))
