@@ -965,7 +965,11 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
             Dim WPrueterFarma As DataRow
 
-            WPrueterFarma = GetSingle("SELECT TOP 1 Clave FROM PrueterFarmaIntermedio WHERE Partida = '" & WPartida & "' And Producto = '" & WCodigo & "' And Paso = '" & WEtapa & "' And subEtapa = '" & Val(txtSubEtapa.Text) & "'")
+            If Operador.IDBase = 5 Then
+                WPrueterFarma = GetSingle("SELECT TOP 1 Clave FROM " & TablaPrueTer & " WHERE Partida = '" & WPartida & "' And Producto = '" & WCodigo & "' And Paso = '" & WEtapa & "' And subEtapa = '" & Val(txtSubEtapa.Text) & "'")
+            Else
+                WPrueterFarma = GetSingle("SELECT TOP 1 Clave FROM " & TablaPrueTer & " WHERE Partida = '" & WPartida & "' And Producto = '" & WCodigo & "'")
+            End If
 
             If Val(WEtapa) = 99 Then
 
@@ -1040,7 +1044,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
 
                     ZSql = ZSql & "INSERT INTO " & WTabla & " ("
                     ZSql = ZSql & "Clave ,"
-                    If Val(txtEtapa.Text) <> 99 Then ZSql = ZSql & "Paso , SubEtapa ,"
+                    If Val(txtEtapa.Text) <> 99 And Val(Operador.IDBase) = 5 Then ZSql = ZSql & "Paso , SubEtapa ,"
                     If Val(txtEtapa.Text) = 99 Then ZSql = ZSql & "FechaGrabacion ,"
                     ZSql = ZSql & "Tipo ,"
                     ZSql = ZSql & "Partida ,"
@@ -1089,7 +1093,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
                     ZSql = ZSql & "OperadorLabora)"
                     ZSql = ZSql & "Values ("
                     ZSql = ZSql & "'" & WClave & "',"
-                    If Val(txtEtapa.Text) <> 99 Then ZSql = ZSql & "'" & Trim(txtEtapa.Text) & "', '" & Val(txtSubEtapa.Text) & "',"
+                    If Val(txtEtapa.Text) <> 99 And Val(Operador.IDBase) = 5 Then ZSql = ZSql & "'" & Trim(txtEtapa.Text) & "', '" & Val(txtSubEtapa.Text) & "',"
                     If Val(txtEtapa.Text) = 99 Then ZSql = ZSql & "'" & Date.Now.ToString("dd/MM/yyyy") & "', "
                     ZSql = ZSql & "'" & "1" & "',"
                     ZSql = ZSql & "'" & WPartida.left(6) & "',"

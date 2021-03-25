@@ -805,7 +805,6 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                 MsgBox("Falta ingresar la Descripcion del ensayo en Ingles")
             End If
 
-
         End With
 
     End Sub
