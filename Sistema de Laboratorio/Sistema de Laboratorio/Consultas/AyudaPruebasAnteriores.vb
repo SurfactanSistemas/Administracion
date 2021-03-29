@@ -1,6 +1,7 @@
 ﻿Public Class AyudaPruebasAnteriores
 
-    Sub New(ByVal WDatos As DataTable)
+    Private EsMP As Boolean = False
+    Sub New(ByVal WDatos As DataTable, Optional ByVal EsMP As Boolean = False)
 
         ' Llamada necesaria para el diseñador.
         InitializeComponent()
@@ -8,6 +9,15 @@
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
 
         dgvDatos.DataSource = WDatos
+
+        Me.EsMP = EsMP
+
+        If Me.EsMP Then
+            rbFinales.Checked = True
+            rbPooles.Checked = False
+            rbFinales.Visible = True
+            rbPooles.Visible = False
+        End If
 
     End Sub
 
@@ -23,7 +33,7 @@
 
         Dim WOwner As IAyudaPruebasAnteriores = TryCast(Owner, IAyudaPruebasAnteriores)
         
-        If WOwner IsNot Nothing Then WOwner._ProcesarAyudaPruebasAnteriores(dgvDatos.CurrentRow.Cells("LotePartida").Value)
+        If WOwner IsNot Nothing Then WOwner._ProcesarAyudaPruebasAnteriores(dgvDatos.CurrentRow.Cells("LotePartida").Value, EsMP)
 
         Close()
 
@@ -35,5 +45,27 @@
 
     Private Sub btnBorrar_Click(sender As Object, e As EventArgs) Handles btnBorrar.Click
         Close()
+    End Sub
+
+    Private Sub AyudaPruebasAnteriores_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
+
+    Private Sub rbPooles_Click(sender As Object, e As EventArgs) Handles rbPooles.Click, rbFinales.Click
+        If EsMP Then
+
+            Dim WDatos As DataTable = Nothing
+
+            dgvDatos.Columns("Pool").Visible = rbPooles.Checked
+
+            If rbFinales.Checked Then
+                WDatos = GetAll("SELECT Pool = 0, ptf.Fecha, ptf.Lote as LotePartida, ptf.Producto As Codigo, a.Descripcion FROM PrueArt ptf INNER JOIN Articulo a ON a.Codigo = ptf.Producto ORDER BY ptf.FechaOrd DESC, ptf.Lote DESC")
+            Else
+                WDatos = GetAll("SELECT ptf.Pool, ptf.Fecha, ptf.LoteProv as LotePartida, ptf.Producto As Codigo, a.Descripcion FROM PrueArtNuevoPooles ptf INNER JOIN Articulo a ON a.Codigo = ptf.Producto ORDER BY ptf.FechaOrd DESC, ptf.Pool DESC, ptf.LoteProv DESC")
+            End If
+
+            dgvDatos.DataSource = WDatos
+
+        End If
     End Sub
 End Class

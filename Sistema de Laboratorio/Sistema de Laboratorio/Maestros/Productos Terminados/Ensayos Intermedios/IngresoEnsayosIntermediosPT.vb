@@ -2093,7 +2093,7 @@ Public Class IngresoEnsayosIntermediosPT : Implements INotasEnsayosProductosTerm
         End With
     End Sub
 
-    Public Sub _ProcesarAyudaPruebasAnteriores(LotePartida As String) Implements IAyudaPruebasAnteriores._ProcesarAyudaPruebasAnteriores
+    Public Sub _ProcesarAyudaPruebasAnteriores(LotePartida As String, ByVal EsMP As Boolean) Implements IAyudaPruebasAnteriores._ProcesarAyudaPruebasAnteriores
         txtPartida.Text = LotePartida
         txtPartida_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
         txtEtapa.Text = "99"

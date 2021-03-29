@@ -22,11 +22,11 @@ Partial Class AyudaPruebasAnteriores
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle30 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle26 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle27 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle28 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle29 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -34,6 +34,9 @@ Partial Class AyudaPruebasAnteriores
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txtFiltrar = New System.Windows.Forms.TextBox()
         Me.dgvDatos = New Util.DBDataGridView()
+        Me.rbFinales = New System.Windows.Forms.RadioButton()
+        Me.rbPooles = New System.Windows.Forms.RadioButton()
+        Me.Pool = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LotePartida = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -82,9 +85,9 @@ Partial Class AyudaPruebasAnteriores
         'btnBorrar
         '
         Me.btnBorrar.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.btnBorrar.Location = New System.Drawing.Point(189, 286)
+        Me.btnBorrar.Location = New System.Drawing.Point(372, 290)
         Me.btnBorrar.Name = "btnBorrar"
-        Me.btnBorrar.Size = New System.Drawing.Size(144, 34)
+        Me.btnBorrar.Size = New System.Drawing.Size(144, 49)
         Me.btnBorrar.TabIndex = 3
         Me.btnBorrar.Text = "CERRAR"
         Me.btnBorrar.UseVisualStyleBackColor = True
@@ -115,15 +118,15 @@ Partial Class AyudaPruebasAnteriores
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvDatos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Fecha, Me.LotePartida, Me.Codigo, Me.Descripcion})
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvDatos.DefaultCellStyle = DataGridViewCellStyle5
+        Me.dgvDatos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Pool, Me.Fecha, Me.LotePartida, Me.Codigo, Me.Descripcion})
+        DataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle30.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle30.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle30.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle30.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle30.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle30.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvDatos.DefaultCellStyle = DataGridViewCellStyle30
         Me.dgvDatos.DoubleBuffered = True
         Me.dgvDatos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.dgvDatos.Location = New System.Drawing.Point(7, 87)
@@ -134,15 +137,46 @@ Partial Class AyudaPruebasAnteriores
         Me.dgvDatos.RowTemplate.Height = 20
         Me.dgvDatos.ShowCellToolTips = False
         Me.dgvDatos.SinClickDerecho = False
-        Me.dgvDatos.Size = New System.Drawing.Size(509, 193)
+        Me.dgvDatos.Size = New System.Drawing.Size(509, 197)
         Me.dgvDatos.TabIndex = 6
+        '
+        'rbFinales
+        '
+        Me.rbFinales.AutoSize = True
+        Me.rbFinales.Checked = True
+        Me.rbFinales.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbFinales.Location = New System.Drawing.Point(99, 306)
+        Me.rbFinales.Name = "rbFinales"
+        Me.rbFinales.Size = New System.Drawing.Size(76, 17)
+        Me.rbFinales.TabIndex = 7
+        Me.rbFinales.TabStop = True
+        Me.rbFinales.Text = "FINALES"
+        Me.rbFinales.UseVisualStyleBackColor = True
+        '
+        'rbPooles
+        '
+        Me.rbPooles.AutoSize = True
+        Me.rbPooles.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbPooles.Location = New System.Drawing.Point(206, 306)
+        Me.rbPooles.Name = "rbPooles"
+        Me.rbPooles.Size = New System.Drawing.Size(74, 17)
+        Me.rbPooles.TabIndex = 7
+        Me.rbPooles.Text = "POOLES"
+        Me.rbPooles.UseVisualStyleBackColor = True
+        '
+        'Pool
+        '
+        Me.Pool.HeaderText = "Pool"
+        Me.Pool.Name = "Pool"
+        Me.Pool.ReadOnly = True
+        Me.Pool.Visible = False
         '
         'Fecha
         '
         Me.Fecha.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Fecha.DataPropertyName = "Fecha"
-        DataGridViewCellStyle1.Padding = New System.Windows.Forms.Padding(5, 0, 0, 0)
-        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle26.Padding = New System.Windows.Forms.Padding(5, 0, 0, 0)
+        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle26
         Me.Fecha.HeaderText = "Fecha"
         Me.Fecha.Name = "Fecha"
         Me.Fecha.ReadOnly = True
@@ -153,9 +187,9 @@ Partial Class AyudaPruebasAnteriores
         '
         Me.LotePartida.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.LotePartida.DataPropertyName = "LotePartida"
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle2.Padding = New System.Windows.Forms.Padding(0, 0, 5, 0)
-        Me.LotePartida.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle27.Padding = New System.Windows.Forms.Padding(0, 0, 5, 0)
+        Me.LotePartida.DefaultCellStyle = DataGridViewCellStyle27
         Me.LotePartida.HeaderText = "Lote/Pda"
         Me.LotePartida.Name = "LotePartida"
         Me.LotePartida.ReadOnly = True
@@ -166,8 +200,8 @@ Partial Class AyudaPruebasAnteriores
         '
         Me.Codigo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Codigo.DataPropertyName = "Codigo"
-        DataGridViewCellStyle3.Padding = New System.Windows.Forms.Padding(5, 0, 0, 0)
-        Me.Codigo.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle28.Padding = New System.Windows.Forms.Padding(5, 0, 0, 0)
+        Me.Codigo.DefaultCellStyle = DataGridViewCellStyle28
         Me.Codigo.HeaderText = "Código"
         Me.Codigo.Name = "Codigo"
         Me.Codigo.ReadOnly = True
@@ -178,8 +212,8 @@ Partial Class AyudaPruebasAnteriores
         '
         Me.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.Descripcion.DataPropertyName = "Descripcion"
-        DataGridViewCellStyle4.Padding = New System.Windows.Forms.Padding(5, 0, 0, 0)
-        Me.Descripcion.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle29.Padding = New System.Windows.Forms.Padding(5, 0, 0, 0)
+        Me.Descripcion.DefaultCellStyle = DataGridViewCellStyle29
         Me.Descripcion.HeaderText = "Descripción"
         Me.Descripcion.Name = "Descripcion"
         Me.Descripcion.ReadOnly = True
@@ -189,7 +223,9 @@ Partial Class AyudaPruebasAnteriores
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(522, 324)
+        Me.ClientSize = New System.Drawing.Size(522, 346)
+        Me.Controls.Add(Me.rbPooles)
+        Me.Controls.Add(Me.rbFinales)
         Me.Controls.Add(Me.dgvDatos)
         Me.Controls.Add(Me.txtFiltrar)
         Me.Controls.Add(Me.Label3)
@@ -212,6 +248,9 @@ Partial Class AyudaPruebasAnteriores
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents txtFiltrar As System.Windows.Forms.TextBox
     Friend WithEvents dgvDatos As Util.DBDataGridView
+    Friend WithEvents rbFinales As System.Windows.Forms.RadioButton
+    Friend WithEvents rbPooles As System.Windows.Forms.RadioButton
+    Friend WithEvents Pool As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Fecha As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents LotePartida As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Codigo As System.Windows.Forms.DataGridViewTextBoxColumn
