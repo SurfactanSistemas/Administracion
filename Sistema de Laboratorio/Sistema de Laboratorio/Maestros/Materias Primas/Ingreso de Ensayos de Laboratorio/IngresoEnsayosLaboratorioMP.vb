@@ -116,7 +116,7 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad, IA
 		If e.KeyData = Keys.Enter Then
 			If Trim(txtPartida.Text) = "" Then : Exit Sub : End If
 
-            Dim WLaudo As DataRow = GetSingle("SELECT Articulo, Orden, Informe FROM Laudo WHERE Laudo = '" & txtPartida.Text & "' And Renglon in ('1', '01') And SubEtapa = '" & txtEtapa.Text & "'")
+            Dim WLaudo As DataRow = GetSingle("SELECT Articulo, Orden, Informe, PartiOri FROM Laudo WHERE Laudo = '" & txtPartida.Text & "' And Renglon in ('1', '01')")
 
 			If IsNothing(WLaudo) Then Exit Sub
 
@@ -124,7 +124,8 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad, IA
 				txtCodigo.Text = OrDefault(.Item("Articulo"), "")
 				txtOrden.Text = OrDefault(.Item("Orden"), "")
 				txtInforme.Text = OrDefault(.Item("Informe"), "")
-			End With
+                txtLoteProveedor.Text = OrDefault(.Item("PartiOri"), "")
+            End With
             'txtEtapa.Text = "99"
             lblTipoProceso.Text = ""
 
@@ -1162,7 +1163,7 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad, IA
                     '
                     ' Damos por cerrados los pooles al momento de grabar el ensayo final correspondiente al informe y lote de Proveedor del Producto Laudado.
                     '
-                    WSqls.Add("UPDATE PrueArtNuevoPooles SET Partida = '" & txtPartida.Text & "' WHERE Informe = '" & txtInforme.Text & "' And LoteProv = '" & txtLoteProveedor.Text & "' And Producto = '" & txtCodigo.Text & "' And Partida = ''")
+                    WSqls.Add("UPDATE PrueArtNuevoPooles SET Prueba = '" & txtPartida.Text & "' WHERE Informe = '" & txtInforme.Text & "' And LoteProv = '" & txtLoteProveedor.Text & "' And Producto = '" & txtCodigo.Text & "' And Prueba = ''")
 
                 End If
 
@@ -1392,10 +1393,10 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad, IA
 		'
 		' Busco próxima guía.
 		'
-		Dim WUltGuia As DataRow = GetSingle("SELECT Ultima = MAX(Codigo) FROM Guia WHERE TipoMov = '0'")
-		Dim WCodigoGuia As String = "1"
+        Dim WUltGuia As DataRow = GetSingle("SELECT TOP 1 Codigo FROM Guia WHERE TipoMov = '0' Order By FechaOrd DESC, Clave DESC")
+        Dim WCodigoGuia As Integer = 0
 
-		If WUltGuia IsNot Nothing Then WCodigoGuia = Val(OrDefault(WUltGuia.Item("Ultima"), "")) + 1
+        If WUltGuia IsNot Nothing Then WCodigoGuia = OrDefault(WUltGuia.Item("Codigo"), 0) + 1
 
 		WCantidadLaudo = formatonumerico(WCantidadLaudo)
 
