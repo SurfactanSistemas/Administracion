@@ -66,7 +66,7 @@ Public Class ListadoTerminadosFormulas : Implements Util.IAyudaGeneral
         Dim datos As DataTable = Nothing
 
         If rbPT.Checked Then
-            datos = GetAll("SELECT Codigo, Descripcion FROM Terminado ORDER BY Codigo")
+            datos = GetAll("SELECT Codigo, Descripcion FROM Terminado WHERE Codigo > 'PT-00004-100' AND LEFT(Codigo, 2) NOT IN ('NK', 'RE') ORDER BY Codigo")
         Else
             datos = GetAll("SELECT Codigo, Descripcion FROM Articulo ORDER BY Codigo")
         End If

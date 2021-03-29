@@ -406,7 +406,7 @@ Public Class ParametrosDeEspecificacion : Implements INotificaActualizacion, ITr
 
         Dim tabla As DataTable = Nothing
 
-        If Terminado.Replace(" ", "").Length = 10 Then
+        If Terminado.Replace(" ", "").Length = 12 Then
             tabla = GetAll("SELECT distinct f.Terminado As Codigo, t.Descripcion FROM SurfactanSa.dbo.Terminado t INNER JOIN Surfactan_II.dbo.FormulasDeEnsayos f ON f.Terminado = t.Codigo ORDER BY f.Terminado, t.Descripcion")
         Else
             tabla = GetAll("SELECT distinct f.Terminado As Codigo, a.Descripcion FROM SurfactanSa.dbo.Articulo a INNER JOIN Surfactan_II.dbo.FormulasDeEnsayos f ON f.Terminado = a.Codigo ORDER BY f.Terminado, a.Descripcion")
