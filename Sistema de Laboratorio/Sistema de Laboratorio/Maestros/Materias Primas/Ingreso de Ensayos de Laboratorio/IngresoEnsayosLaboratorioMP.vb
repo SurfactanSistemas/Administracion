@@ -2425,13 +2425,14 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad, IA
     Private Sub btnConsulta_Click(sender As Object, e As EventArgs) Handles btnConsulta.Click
 
         Dim WDatos As DataTable = GetAll("SELECT ptf.Fecha, ptf.Lote as LotePartida, ptf.Producto As Codigo, a.Descripcion FROM PrueArt ptf INNER JOIN Articulo a ON a.Codigo = ptf.Producto ORDER BY ptf.FechaOrd DESC, ptf.Lote DESC")
+
         With New AyudaPruebasAnteriores(WDatos)
             .ShowDialog(Me)
         End With
 
     End Sub
 
-    Public Sub _ProcesarAyudaPruebasAnteriores(LotePartida As String) Implements IAyudaPruebasAnteriores._ProcesarAyudaPruebasAnteriores
+    Public Sub _ProcesarAyudaPruebasAnteriores(LotePartida As String, ByVal EsMP As Boolean) Implements IAyudaPruebasAnteriores._ProcesarAyudaPruebasAnteriores
         txtPartida.Text = LotePartida
         txtPartida_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
         rbFinal.Checked = True
