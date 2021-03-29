@@ -3,59 +3,79 @@ Imports System.IO
 Module Query
 
     Public Function GetSingle(ByVal q As String, Optional ByVal WBase As String = "", Optional ByVal TmbPellital As Boolean = False) As DataRow
+        Try
+            If WBase.Trim = "" Then WBase = Operador.Base
 
-        If WBase.Trim = "" Then WBase = Operador.Base
+            Dim tabla As New DataTable
 
-        Dim tabla As New DataTable
+            Using cn As New SqlConnection
 
-        Using cn As New SqlConnection
+                cn.ConnectionString = _ConectarA(WBase, TmbPellital) 'ConfigurationManager.ConnectionStrings("CS").ToString
+                cn.Open()
 
-            cn.ConnectionString = _ConectarA(WBase, TmbPellital) 'ConfigurationManager.ConnectionStrings("CS").ToString
-            cn.Open()
+                Using cm As New SqlCommand(q)
 
-            Using cm As New SqlCommand(q)
+                    cm.Connection = cn
 
-                cm.Connection = cn
+                    Using dr As SqlDataReader = cm.ExecuteReader(CommandBehavior.SingleResult)
+                        tabla.Load(dr)
+                    End Using
 
-                Using dr As SqlDataReader = cm.ExecuteReader(CommandBehavior.SingleResult)
-                    tabla.Load(dr)
                 End Using
 
             End Using
 
-        End Using
+            If tabla.Rows.Count > 0 Then Return tabla.Rows(0)
 
-        If tabla.Rows.Count > 0 Then Return tabla.Rows(0)
+            Return Nothing
 
-        Return Nothing
+        Catch ex As Exception
+
+            'Using sw As New StreamWriter("C:\sql.txt")
+            Using sw As New StreamWriter("sql.txt")
+                sw.WriteLine(q)
+            End Using
+
+            Throw New Exception(ex.Message)
+        End Try
 
     End Function
 
     Public Function GetAll(ByVal q As String, Optional ByVal WBase As String = "", Optional ByVal TmbPellital As Boolean = False) As DataTable
 
         If WBase.Trim = "" Then WBase = Operador.Base
+        Try
 
-        Dim tabla As New DataTable
+            Dim tabla As New DataTable
 
-        Using cn As New SqlConnection
+            Using cn As New SqlConnection
 
-            cn.ConnectionString = _ConectarA(WBase, TmbPellital) 'ConfigurationManager.ConnectionStrings("CS").ToString
-            cn.Open()
+                cn.ConnectionString = _ConectarA(WBase, TmbPellital) 'ConfigurationManager.ConnectionStrings("CS").ToString
+                cn.Open()
 
-            Using cm As New SqlCommand(q)
+                Using cm As New SqlCommand(q)
 
-                cm.Connection = cn
+                    cm.Connection = cn
 
-                Using dr As SqlDataReader = cm.ExecuteReader
-                    tabla.Load(dr)
+                    Using dr As SqlDataReader = cm.ExecuteReader
+                        tabla.Load(dr)
+                    End Using
+
                 End Using
 
             End Using
 
-        End Using
+            Return tabla
 
-        Return tabla
+        Catch ex As Exception
 
+            'Using sw As New StreamWriter("C:\sql.txt")
+            Using sw As New StreamWriter("sql.txt")
+                sw.WriteLine(q)
+            End Using
+
+            Throw New Exception(ex.Message)
+        End Try
     End Function
 
     Public Function ExecuteQueryRead(ByVal q As String, Optional ByVal WBase As String = "SurfactanSa") As SqlDataReader

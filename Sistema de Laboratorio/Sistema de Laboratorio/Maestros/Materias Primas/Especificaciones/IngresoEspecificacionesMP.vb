@@ -45,6 +45,9 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
         WAutorizado = False
         WTipoProceso = Nothing
 
+        rbFinal.Checked = True
+        txtPaso.Text = "99"
+
         txtCodigo.Focus()
     End Sub
 
@@ -143,7 +146,16 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
 
     Private Sub _CargarDatosEspecifMP()
 
-        Dim WCargaV As DataTable = GetAll("SELECT * FROM CargaVMP WHERE Articulo = '" & txtCodigo.Text & "' Order By Clave", "Surfactan_II")
+        Dim WCargaV As DataTable = GetAll("SELECT * FROM CargaVMP WHERE Articulo = '" & txtCodigo.Text & "' And Paso = '" & txtPaso.Text & "' Order By Clave", "Surfactan_II")
+
+        If WCargaV.Rows.Count = 0 Then
+            WCargaV = GetAll("SELECT * FROM CargaVMP WHERE Articulo = '" & txtCodigo.Text & "' And Paso = '99' Order By Clave", "Surfactan_II")
+
+            If WCargaV.Rows.Count > 0 And rbPool.Checked Then
+                MsgBox("No se tienen cargados datos para los pooles, asi que se trajo los datos de la etapa final para que se utilice como Template.", MsgBoxStyle.Information)
+            End If
+
+        End If
 
         dgvEspecif.Rows.Clear()
 
@@ -157,14 +169,18 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
             '
             ' Cargamos los valores en Inglés.
             '
-            Dim WCargaVIngles As DataTable = GetAll("SELECT Valor, Farmacopea, UnidadEspecif FROM CargaVMPIngles WHERE Articulo = '" & txtCodigo.Text & "' And Paso = '99' Order By Clave", "Surfactan_II")
+            Dim WCargaVIngles As DataTable = GetAll("SELECT Valor, Farmacopea, UnidadEspecif FROM CargaVMPIngles WHERE Articulo = '" & txtCodigo.Text & "' And Paso = '" & txtPaso.Text & "' Order By Clave", "Surfactan_II")
+
+            If WCargaVIngles.Rows.Count = 0 Then GetAll("SELECT Valor, Farmacopea, UnidadEspecif FROM CargaVMPIngles WHERE Articulo = '" & txtCodigo.Text & "' And Paso = '99' Order By Clave", "Surfactan_II")
 
             If WCargaVIngles.Rows.Count = 0 Then Return
 
             _PoblarEspecificacionesIngles(WCargaVIngles)
 
-
         Else
+
+            txtPaso.Text = "99"
+            rbFinal.Checked = True
 
             '
             ' Traemos los datos en el formato viejo y lo ajustamos para presentarlo como el nuevo.
@@ -186,6 +202,11 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
 
             For i = 1 To 10
                 WCargaVFormatoViejo.Columns.Add("Variable" & i)
+            Next
+
+            For i = 1 To 3
+                WCargaVFormatoViejo.Columns.Add("FormulaAdic" & i)
+                WCargaVFormatoViejo.Columns.Add("FormulaAdic" & i & "dec")
             Next
 
             If WEspecificacionesUnifica Is Nothing Then
@@ -614,10 +635,13 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
 
         Dim WSqls As New List(Of String)
 
-        '
-        ' Generamos la grabación en el formato viejo.
-        '
-        WSqls.AddRange(_PrepararGrabarEnFormatoViejo())
+        If rbFinal.Checked Then
+            '
+            ' Generamos la grabación en el formato viejo.
+            '
+            WSqls.AddRange(_PrepararGrabarEnFormatoViejo())
+
+        End If
 
         If WActualizaVersion Then
             WSqls.Add("INSERT INTO CargaVMPVersion (Clave,Articulo,Paso,Renglon,Fecha,Ensayo,Valor,DesEnsayo,Partida,CantidadPartida,DesPaso," _
@@ -662,12 +686,12 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
         '
         Dim WNotas As DataRow = GetSingle("SELECT Observacion1, Observacion2, Observacion3, Observacion4, Observacion5, Observacion6, Observacion7, " _
                                           & "Observacion8, Observacion9, Observacion10 FROM CargaVMP WHERE Articulo = '" & txtCodigo.Text & "'" _
-                                          & "And Paso = '99' And Renglon = 1", "Surfactan_II")
+                                          & "And Paso = '" & txtPaso.Text & "' And Renglon = 1", "Surfactan_II")
 
         '
         ' Borramos el registro anterior si lo hubiese.
         '
-        WConsultas.Add("DELETE FROM CargaVMP WHERE Articulo = '" & txtCodigo.Text & "' And Paso = '99'")
+        WConsultas.Add("DELETE FROM CargaVMP WHERE Articulo = '" & txtCodigo.Text & "' And Paso = '" & txtPaso.Text & "'")
 
         Dim WDescPaso, WCorte As String
 
@@ -733,7 +757,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
 
                 WRenglon += 1
 
-                XPaso = "0099"
+                XPaso = txtPaso.Text.PadRight(4, "0") ' "0099"
                 Auxi = WRenglon.ToString.PadLeft(2, "0")
 
                 Dim WClave = txtCodigo.Text + XPaso + Auxi
@@ -780,7 +804,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
                 ZSql = ZSql & "Values ("
                 ZSql = ZSql & "'" & WClave & "',"
                 ZSql = ZSql & "'" & txtCodigo.Text & "',"
-                ZSql = ZSql & "'" & "99" & "',"
+                ZSql = ZSql & "'" & txtPaso.Text & "',"
                 ZSql = ZSql & "'" & WDescPaso & "',"
                 ZSql = ZSql & "'" & txtControlCambios.Text & "',"
                 ZSql = ZSql & "'" & Trim(Str$(WRenglon)) & "',"
@@ -848,7 +872,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
         '
         WRenglon = 0
 
-        WConsultas.Add("DELETE FROM CargaVMPIngles WHERE Articulo = '" & txtCodigo.Text & "' And Paso = '99'")
+        WConsultas.Add("DELETE FROM CargaVMPIngles WHERE Articulo = '" & txtCodigo.Text & "' And Paso = '" & txtPaso.Text & "'")
 
         '
         ' Grabamos los datos de cada renglon.
@@ -870,7 +894,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
 
                 WRenglon += 1
 
-                XPaso = "0099"
+                XPaso = txtPaso.Text.PadRight(4, "0") '"0099"
                 Auxi = WRenglon.ToString.PadLeft(2, "0")
 
                 Dim WClave = txtCodigo.Text + XPaso + Auxi
@@ -888,7 +912,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
                 ZSql = ZSql & "Values ("
                 ZSql = ZSql & "'" & WClave & "',"
                 ZSql = ZSql & "'" & txtCodigo.Text & "',"
-                ZSql = ZSql & "'" & "99" & "',"
+                ZSql = ZSql & "'" & txtPaso.Text & "',"
                 ZSql = ZSql & "'" & Trim(Str$(WRenglon)) & "',"
                 ZSql = ZSql & "'" & WValor & "',"
                 ZSql = ZSql & "'" & WFarmacopea & "',"
@@ -916,7 +940,7 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
                        & "Observacion5 = '" & Trim(WObservacion(5)) & "', Observacion6 = '" & Trim(WObservacion(6)) & "'," _
                        & "Observacion7 = '" & Trim(WObservacion(7)) & "', Observacion8 = '" & Trim(WObservacion(8)) & "'," _
                        & "Observacion9 = '" & Trim(WObservacion(9)) & "', Observacion10 = '" & Trim(WObservacion(10)) & "' " _
-                       & "WHERE Articulo = '" & txtCodigo.Text & "' And Paso = '99'")
+                       & "WHERE Articulo = '" & txtCodigo.Text & "' And Paso = '" & txtPaso.Text & "'")
 
         Return WConsultas
 
@@ -1602,5 +1626,29 @@ Public Class IngresoEspecificacionesMP : Implements IIngresoParametrosEspecifica
             .Formula = "{CargaV.Articulo}='" & txtCodigo.Text & "'"
             .Mostrar()
         End With
+    End Sub
+
+    Private Sub txtPaso_KeyDown(sender As Object, e As KeyEventArgs) Handles txtPaso.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtPaso.Text) = "" Then : Exit Sub : End If
+
+            _CargarDatosMP()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtPaso.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPaso.KeyPress
+        If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub rbFinal_Click(sender As Object, e As EventArgs) Handles rbPool.Click, rbFinal.Click
+        txtPaso.Text = IIf(rbFinal.Checked, "99", "1")
+        txtCodigo_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
     End Sub
 End Class

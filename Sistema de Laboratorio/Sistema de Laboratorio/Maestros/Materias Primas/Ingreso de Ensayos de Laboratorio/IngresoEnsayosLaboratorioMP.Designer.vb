@@ -35,6 +35,9 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.rbPool = New System.Windows.Forms.RadioButton()
+        Me.rbFinal = New System.Windows.Forms.RadioButton()
+        Me.txtPool = New System.Windows.Forms.TextBox()
         Me.btnPoolEnsayos = New System.Windows.Forms.Button()
         Me.txtInforme = New System.Windows.Forms.TextBox()
         Me.txtOrden = New System.Windows.Forms.TextBox()
@@ -43,6 +46,7 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.Label26 = New System.Windows.Forms.Label()
         Me.txtLoteProveedor = New System.Windows.Forms.TextBox()
         Me.txtPartida = New System.Windows.Forms.TextBox()
+        Me.lblIDPool = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txtFecha = New System.Windows.Forms.MaskedTextBox()
         Me.Label28 = New System.Windows.Forms.Label()
@@ -105,7 +109,6 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.dgvEnsayos = New Util.DBDataGridView()
-        Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Ensayo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Especificacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Farmacopea = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -152,6 +155,7 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.FormulaAdic1dec = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FormulaAdic2dec = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FormulaAdic3dec = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.gbDatosAdicionales.SuspendLayout()
@@ -201,6 +205,9 @@ Partial Class IngresoEnsayosLaboratorioMP
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.rbPool)
+        Me.GroupBox1.Controls.Add(Me.rbFinal)
+        Me.GroupBox1.Controls.Add(Me.txtPool)
         Me.GroupBox1.Controls.Add(Me.btnPoolEnsayos)
         Me.GroupBox1.Controls.Add(Me.txtInforme)
         Me.GroupBox1.Controls.Add(Me.txtOrden)
@@ -209,6 +216,7 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.GroupBox1.Controls.Add(Me.Label26)
         Me.GroupBox1.Controls.Add(Me.txtLoteProveedor)
         Me.GroupBox1.Controls.Add(Me.txtPartida)
+        Me.GroupBox1.Controls.Add(Me.lblIDPool)
         Me.GroupBox1.Controls.Add(Me.Label5)
         Me.GroupBox1.Controls.Add(Me.txtFecha)
         Me.GroupBox1.Controls.Add(Me.Label28)
@@ -220,10 +228,41 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.GroupBox1.Controls.Add(Me.gbDatosAdicionales)
         Me.GroupBox1.Location = New System.Drawing.Point(3, 3)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(989, 49)
+        Me.GroupBox1.Size = New System.Drawing.Size(989, 70)
         Me.GroupBox1.TabIndex = 3
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Datos Materia Prima"
+        '
+        'rbPool
+        '
+        Me.rbPool.AutoSize = True
+        Me.rbPool.Location = New System.Drawing.Point(371, 46)
+        Me.rbPool.Name = "rbPool"
+        Me.rbPool.Size = New System.Drawing.Size(54, 17)
+        Me.rbPool.TabIndex = 5
+        Me.rbPool.TabStop = True
+        Me.rbPool.Text = "POOL"
+        Me.rbPool.UseVisualStyleBackColor = True
+        '
+        'rbFinal
+        '
+        Me.rbFinal.AutoSize = True
+        Me.rbFinal.Location = New System.Drawing.Point(295, 46)
+        Me.rbFinal.Name = "rbFinal"
+        Me.rbFinal.Size = New System.Drawing.Size(55, 17)
+        Me.rbFinal.TabIndex = 5
+        Me.rbFinal.TabStop = True
+        Me.rbFinal.Text = "FINAL"
+        Me.rbFinal.UseVisualStyleBackColor = True
+        '
+        'txtPool
+        '
+        Me.txtPool.Location = New System.Drawing.Point(439, 44)
+        Me.txtPool.MaxLength = 2
+        Me.txtPool.Name = "txtPool"
+        Me.txtPool.Size = New System.Drawing.Size(30, 20)
+        Me.txtPool.TabIndex = 2
+        Me.txtPool.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'btnPoolEnsayos
         '
@@ -238,7 +277,7 @@ Partial Class IngresoEnsayosLaboratorioMP
         '
         'txtInforme
         '
-        Me.txtInforme.Location = New System.Drawing.Point(676, 20)
+        Me.txtInforme.Location = New System.Drawing.Point(686, 20)
         Me.txtInforme.MaxLength = 6
         Me.txtInforme.Name = "txtInforme"
         Me.txtInforme.Size = New System.Drawing.Size(49, 20)
@@ -248,7 +287,7 @@ Partial Class IngresoEnsayosLaboratorioMP
         '
         'txtOrden
         '
-        Me.txtOrden.Location = New System.Drawing.Point(576, 20)
+        Me.txtOrden.Location = New System.Drawing.Point(586, 20)
         Me.txtOrden.MaxLength = 6
         Me.txtOrden.Name = "txtOrden"
         Me.txtOrden.Size = New System.Drawing.Size(48, 20)
@@ -259,7 +298,7 @@ Partial Class IngresoEnsayosLaboratorioMP
         'Label27
         '
         Me.Label27.AutoSize = True
-        Me.Label27.Location = New System.Drawing.Point(628, 24)
+        Me.Label27.Location = New System.Drawing.Point(638, 24)
         Me.Label27.Name = "Label27"
         Me.Label27.Size = New System.Drawing.Size(45, 13)
         Me.Label27.TabIndex = 0
@@ -279,7 +318,7 @@ Partial Class IngresoEnsayosLaboratorioMP
         'Label26
         '
         Me.Label26.AutoSize = True
-        Me.Label26.Location = New System.Drawing.Point(549, 24)
+        Me.Label26.Location = New System.Drawing.Point(559, 24)
         Me.Label26.Name = "Label26"
         Me.Label26.Size = New System.Drawing.Size(25, 13)
         Me.Label26.TabIndex = 0
@@ -287,7 +326,7 @@ Partial Class IngresoEnsayosLaboratorioMP
         '
         'txtLoteProveedor
         '
-        Me.txtLoteProveedor.Location = New System.Drawing.Point(868, 20)
+        Me.txtLoteProveedor.Location = New System.Drawing.Point(161, 44)
         Me.txtLoteProveedor.MaxLength = 30
         Me.txtLoteProveedor.Name = "txtLoteProveedor"
         Me.txtLoteProveedor.Size = New System.Drawing.Size(115, 20)
@@ -296,13 +335,23 @@ Partial Class IngresoEnsayosLaboratorioMP
         '
         'txtPartida
         '
-        Me.txtPartida.Location = New System.Drawing.Point(764, 20)
+        Me.txtPartida.Location = New System.Drawing.Point(57, 44)
         Me.txtPartida.MaxLength = 6
         Me.txtPartida.Name = "txtPartida"
         Me.txtPartida.Size = New System.Drawing.Size(52, 20)
         Me.txtPartida.TabIndex = 2
         Me.txtPartida.Text = "300000"
         Me.txtPartida.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'lblIDPool
+        '
+        Me.lblIDPool.AutoSize = True
+        Me.lblIDPool.Location = New System.Drawing.Point(777, 24)
+        Me.lblIDPool.Name = "lblIDPool"
+        Me.lblIDPool.Size = New System.Drawing.Size(38, 13)
+        Me.lblIDPool.TabIndex = 0
+        Me.lblIDPool.Text = "Etapa:"
+        Me.lblIDPool.Visible = False
         '
         'Label5
         '
@@ -316,7 +365,7 @@ Partial Class IngresoEnsayosLaboratorioMP
         '
         'txtFecha
         '
-        Me.txtFecha.Location = New System.Drawing.Point(478, 20)
+        Me.txtFecha.Location = New System.Drawing.Point(478, 19)
         Me.txtFecha.Mask = "00/00/0000"
         Me.txtFecha.Name = "txtFecha"
         Me.txtFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -328,7 +377,7 @@ Partial Class IngresoEnsayosLaboratorioMP
         'Label28
         '
         Me.Label28.AutoSize = True
-        Me.Label28.Location = New System.Drawing.Point(822, 24)
+        Me.Label28.Location = New System.Drawing.Point(115, 48)
         Me.Label28.Name = "Label28"
         Me.Label28.Size = New System.Drawing.Size(41, 13)
         Me.Label28.TabIndex = 0
@@ -336,7 +385,7 @@ Partial Class IngresoEnsayosLaboratorioMP
         '
         'txtCodigo
         '
-        Me.txtCodigo.Location = New System.Drawing.Point(57, 20)
+        Me.txtCodigo.Location = New System.Drawing.Point(57, 19)
         Me.txtCodigo.Mask = ">LL-000-000"
         Me.txtCodigo.Name = "txtCodigo"
         Me.txtCodigo.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -347,7 +396,7 @@ Partial Class IngresoEnsayosLaboratorioMP
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(729, 24)
+        Me.Label4.Location = New System.Drawing.Point(22, 48)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(31, 13)
         Me.Label4.TabIndex = 0
@@ -358,7 +407,7 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.txtDescMP.BackColor = System.Drawing.Color.Cyan
         Me.txtDescMP.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.txtDescMP.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDescMP.Location = New System.Drawing.Point(123, 20)
+        Me.txtDescMP.Location = New System.Drawing.Point(123, 19)
         Me.txtDescMP.Name = "txtDescMP"
         Me.txtDescMP.Size = New System.Drawing.Size(309, 20)
         Me.txtDescMP.TabIndex = 0
@@ -368,7 +417,7 @@ Partial Class IngresoEnsayosLaboratorioMP
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(436, 24)
+        Me.Label6.Location = New System.Drawing.Point(436, 23)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(40, 13)
         Me.Label6.TabIndex = 0
@@ -377,7 +426,7 @@ Partial Class IngresoEnsayosLaboratorioMP
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(13, 24)
+        Me.Label3.Location = New System.Drawing.Point(13, 23)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(43, 13)
         Me.Label3.TabIndex = 0
@@ -397,9 +446,9 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.gbDatosAdicionales.Controls.Add(Me.Label8)
         Me.gbDatosAdicionales.Controls.Add(Me.txtRevalida)
         Me.gbDatosAdicionales.Controls.Add(Me.Label9)
-        Me.gbDatosAdicionales.Location = New System.Drawing.Point(16, 41)
+        Me.gbDatosAdicionales.Location = New System.Drawing.Point(16, 61)
         Me.gbDatosAdicionales.Name = "gbDatosAdicionales"
-        Me.gbDatosAdicionales.Size = New System.Drawing.Size(519, 37)
+        Me.gbDatosAdicionales.Size = New System.Drawing.Size(519, 17)
         Me.gbDatosAdicionales.TabIndex = 4
         Me.gbDatosAdicionales.TabStop = False
         Me.gbDatosAdicionales.Visible = False
@@ -974,7 +1023,7 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 49)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 3
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 76.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 108.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
@@ -1006,7 +1055,7 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.dgvEnsayos.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvEnsayos.DoubleBuffered = True
         Me.dgvEnsayos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.dgvEnsayos.Location = New System.Drawing.Point(3, 58)
+        Me.dgvEnsayos.Location = New System.Drawing.Point(3, 79)
         Me.dgvEnsayos.Name = "dgvEnsayos"
         Me.dgvEnsayos.OrdenamientoColumnasHabilitado = False
         DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -1021,18 +1070,8 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.dgvEnsayos.RowTemplate.Height = 20
         Me.dgvEnsayos.ShowCellToolTips = False
         Me.dgvEnsayos.SinClickDerecho = False
-        Me.dgvEnsayos.Size = New System.Drawing.Size(992, 285)
+        Me.dgvEnsayos.Size = New System.Drawing.Size(992, 264)
         Me.dgvEnsayos.TabIndex = 4
-        '
-        'Panel2
-        '
-        Me.Panel2.Controls.Add(Me.GroupBox2)
-        Me.Panel2.Controls.Add(Me.GroupBox3)
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(3, 349)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(992, 102)
-        Me.Panel2.TabIndex = 5
         '
         'Ensayo
         '
@@ -1050,7 +1089,7 @@ Partial Class IngresoEnsayosLaboratorioMP
         '
         Me.Especificacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.Especificacion.HeaderText = "Especificación"
-        Me.Especificacion.MinimumWidth = 150
+        Me.Especificacion.MinimumWidth = 301
         Me.Especificacion.Name = "Especificacion"
         Me.Especificacion.ReadOnly = True
         Me.Especificacion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
@@ -1311,7 +1350,7 @@ Partial Class IngresoEnsayosLaboratorioMP
         '
         'EspecificacionIngles
         '
-        Me.EspecificacionIngles.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.EspecificacionIngles.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
         Me.EspecificacionIngles.DataPropertyName = "EspecificacionIngles"
         Me.EspecificacionIngles.HeaderText = "Especif. Inglés"
         Me.EspecificacionIngles.MinimumWidth = 200
@@ -1330,10 +1369,12 @@ Partial Class IngresoEnsayosLaboratorioMP
         '
         'OperadorIniciales
         '
+        Me.OperadorIniciales.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
         Me.OperadorIniciales.HeaderText = "Opera."
         Me.OperadorIniciales.Name = "OperadorIniciales"
         Me.OperadorIniciales.ReadOnly = True
         Me.OperadorIniciales.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.OperadorIniciales.Width = 75
         '
         'OperadorID
         '
@@ -1347,6 +1388,7 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.FormulaAdic1.HeaderText = "FormulaAdic1"
         Me.FormulaAdic1.Name = "FormulaAdic1"
         Me.FormulaAdic1.ReadOnly = True
+        Me.FormulaAdic1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.FormulaAdic1.Visible = False
         '
         'FormulaAdic2
@@ -1354,6 +1396,7 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.FormulaAdic2.HeaderText = "FormulaAdic2"
         Me.FormulaAdic2.Name = "FormulaAdic2"
         Me.FormulaAdic2.ReadOnly = True
+        Me.FormulaAdic2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.FormulaAdic2.Visible = False
         '
         'FormulaAdic3
@@ -1361,6 +1404,7 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.FormulaAdic3.HeaderText = "FormulaAdic3"
         Me.FormulaAdic3.Name = "FormulaAdic3"
         Me.FormulaAdic3.ReadOnly = True
+        Me.FormulaAdic3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.FormulaAdic3.Visible = False
         '
         'FormulaAdic1dec
@@ -1368,6 +1412,7 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.FormulaAdic1dec.HeaderText = "FormulaAdic1dec"
         Me.FormulaAdic1dec.Name = "FormulaAdic1dec"
         Me.FormulaAdic1dec.ReadOnly = True
+        Me.FormulaAdic1dec.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.FormulaAdic1dec.Visible = False
         '
         'FormulaAdic2dec
@@ -1375,6 +1420,7 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.FormulaAdic2dec.HeaderText = "FormulaAdic2dec"
         Me.FormulaAdic2dec.Name = "FormulaAdic2dec"
         Me.FormulaAdic2dec.ReadOnly = True
+        Me.FormulaAdic2dec.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.FormulaAdic2dec.Visible = False
         '
         'FormulaAdic3dec
@@ -1382,7 +1428,18 @@ Partial Class IngresoEnsayosLaboratorioMP
         Me.FormulaAdic3dec.HeaderText = "FormulaAdic3dec"
         Me.FormulaAdic3dec.Name = "FormulaAdic3dec"
         Me.FormulaAdic3dec.ReadOnly = True
+        Me.FormulaAdic3dec.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.FormulaAdic3dec.Visible = False
+        '
+        'Panel2
+        '
+        Me.Panel2.Controls.Add(Me.GroupBox2)
+        Me.Panel2.Controls.Add(Me.GroupBox3)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel2.Location = New System.Drawing.Point(3, 349)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(992, 102)
+        Me.Panel2.TabIndex = 5
         '
         'IngresoEnsayosLaboratorioMP
         '
@@ -1484,6 +1541,9 @@ Partial Class IngresoEnsayosLaboratorioMP
     Friend WithEvents txtLoteProveedor As System.Windows.Forms.TextBox
     Friend WithEvents Label28 As System.Windows.Forms.Label
     Friend WithEvents btnConsulta As System.Windows.Forms.Button
+    Friend WithEvents rbPool As System.Windows.Forms.RadioButton
+    Friend WithEvents rbFinal As System.Windows.Forms.RadioButton
+    Friend WithEvents txtPool As System.Windows.Forms.TextBox
     Friend WithEvents Ensayo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Especificacion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Farmacopea As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -1530,4 +1590,5 @@ Partial Class IngresoEnsayosLaboratorioMP
     Friend WithEvents FormulaAdic1dec As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents FormulaAdic2dec As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents FormulaAdic3dec As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents lblIDPool As System.Windows.Forms.Label
 End Class
