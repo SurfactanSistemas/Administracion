@@ -1,4 +1,4 @@
-Public Class IngresoFormulasEnsayo : Implements IGrabadoDeFormula, INotificaActualizacion
+Public Class IngresoFormulasEnsayo : Implements IGrabadoDeFormula, INotificaActualizacion, IImprimirPlanillaVerificacion
     Private ReadOnly Terminado As String
     Dim PermisoGrabar As Boolean
     Dim ForzarNuevo As Boolean
@@ -25,7 +25,7 @@ Public Class IngresoFormulasEnsayo : Implements IGrabadoDeFormula, INotificaActu
 
     End Sub
 
-    Sub _GrabarFormulaMod(ByVal Formula As String, ByVal ParametrosFormula() As String, ByVal Descripcion As String, Optional ByVal Renglon As Integer = 0, Optional ByVal Moficado As Boolean = False, Optional ByVal adic1 As String = "", Optional ByVal adic2 As String = "", Optional ByVal adic3 As String = "", Optional ByVal decadic1 As String = "", Optional ByVal decadic2 As String = "", Optional ByVal decadic3 As String = "") Implements IGrabadoDeFormula._GrabarFormulaMod
+    Sub _GrabarFormulaMod(ByVal Formula As String, ByVal ParametrosFormula() As String, ByVal Descripcion As String, Optional ByVal Renglon As Integer = 0, Optional ByVal Moficado As Boolean = False, Optional ByVal adic1 As String = "", Optional ByVal adic2 As String = "", Optional ByVal adic3 As String = "", Optional ByVal decadic1 As String = "", Optional ByVal decadic2 As String = "", Optional ByVal decadic3 As String = "", Optional ByVal Decimales As Integer = 2) Implements IGrabadoDeFormula._GrabarFormulaMod
 
         Dim listSQLCnslt As New List(Of String)
 
@@ -69,7 +69,7 @@ Public Class IngresoFormulasEnsayo : Implements IGrabadoDeFormula, INotificaActu
 
         End If
 
-        listSQLCnslt.Add("UPDATE FormulasDeEnsayos SET FormulaAdic1 = '" & adic1 & "', FormulaAdic2 = '" & adic2 & "', FormulaAdic3 = '" & adic3 & "', FormulaAdic1dec = '" & decadic1 & "', FormulaAdic2dec = '" & decadic2 & "', FormulaAdic3dec = '" & decadic3 & "' WHERE Terminado = '" & Terminado & "' And Renglon = '" & Renglon & "'")
+        listSQLCnslt.Add("UPDATE FormulasDeEnsayos SET FormulaAdic1 = '" & adic1 & "', FormulaAdic2 = '" & adic2 & "', FormulaAdic3 = '" & adic3 & "', FormulaAdic1dec = '" & decadic1 & "', FormulaAdic2dec = '" & decadic2 & "', FormulaAdic3dec = '" & decadic3 & "', Decimales = '" & Decimales & "' WHERE Terminado = '" & Terminado & "' And Renglon = '" & Renglon & "'")
 
         ExecuteNonQueries("Surfactan_II", listSQLCnslt.ToArray())
 
@@ -97,7 +97,7 @@ Public Class IngresoFormulasEnsayo : Implements IGrabadoDeFormula, INotificaActu
 
     End Sub
 
-    Public Sub _GrabarFormula(Formula As String, ParametrosFormula As String(), Descripcion As String, Optional Renglon As Integer = 0) Implements IGrabadoDeFormula._GrabarFormula
+    Public Sub _GrabarFormula(Formula As String, ParametrosFormula As String(), Descripcion As String, Optional Renglon As Integer = 0, Optional ByVal Adic(,) As String = Nothing) Implements IGrabadoDeFormula._GrabarFormula
         Throw New NotImplementedException
     End Sub
 
@@ -178,6 +178,7 @@ Public Class IngresoFormulasEnsayo : Implements IGrabadoDeFormula, INotificaActu
         If _owner IsNot Nothing Then
 
             Dim ArrayParametros() As String = New String(11) {}
+            Dim WAdic(2, 1) As String
 
             Dim SQLCnslt = "SELECT * FROM FormulasDeEnsayos WHERE Renglon = '" & OrDefault(DGV_Formulas.CurrentRow.Cells("Renglon").Value, 0) & "' And Terminado = '" & Terminado & "'"
 
@@ -187,7 +188,12 @@ Public Class IngresoFormulasEnsayo : Implements IGrabadoDeFormula, INotificaActu
                 ArrayParametros(i) = row.Item("Var" & i)
             Next
 
-            _owner._GrabarFormula(row.Item("Formula"), ArrayParametros, row.Item("Descripcion"))
+            For i = 1 To 3
+                WAdic(i - 1, 0) = OrDefault(row.Item("FormulaAdic" & i), "")
+                WAdic(i - 1, 1) = OrDefault(row.Item("FormulaAdic" & i & "dec"), "")
+            Next
+
+            _owner._GrabarFormula(row.Item("Formula"), ArrayParametros, row.Item("Descripcion"), adicionales:=WAdic)
 
             Me.Close()
             Exit Sub
@@ -232,5 +238,45 @@ Public Class IngresoFormulasEnsayo : Implements IGrabadoDeFormula, INotificaActu
 
     Public Sub _ProcesarNotificaActualizacion() Implements INotificaActualizacion._ProcesarNotificaActualizacion
         _CargarDatos()
+    End Sub
+
+    Private Sub btnPlanillaValidaciones_Click(sender As Object, e As EventArgs) Handles btnPlanillaValidaciones.Click
+
+        If DGV_Formulas.SelectedRows.Count = 0 Then
+            MsgBox("Debe seleccionar un ensayo para imprimir la planilla.", MsgBoxStyle.Information)
+            Exit Sub
+        End If
+
+        Dim ZRenglon As Integer = DGV_Formulas.SelectedRows(0).Cells("Renglon").Value
+
+        Dim datos As DataRow = GetSingle("SELECT Top 1 FechaVerificacion, ReferenciaVerificacion, PartidaVerificacion FROM FormulasDeEnsayos WHERE Terminado = '" & lblTerminado.Text & "' And Renglon = '" & ZRenglon & "' Order by Renglon", "Surfactan_II")
+
+        Dim WFecha, WRef, WPart As String
+
+        If datos Is Nothing Then Exit Sub
+
+        WFecha = OrDefault(datos("FechaVerificacion"), "")
+        WRef = OrDefault(datos("ReferenciaVerificacion"), "")
+        WPart = OrDefault(datos("PartidaVerificacion"), "")
+
+        If WFecha.Replace(" ", "").Length < 10 Or Trim(WRef) = "" Or Val(WPart) = 0 Then
+
+            With New ActualizacionDatosRefVerificacion(lblTerminado.Text, ZRenglon)
+                .Show(Me)
+            End With
+
+            Exit Sub
+        End If
+
+        _ProcesarImprimirPlanillaVerificacion(lblTerminado.Text, ZRenglon)
+
+    End Sub
+
+    Public Sub _ProcesarImprimirPlanillaVerificacion(Ter As String, Ren As Integer) Implements IImprimirPlanillaVerificacion._ProcesarImprimirPlanillaVerificacion
+
+        With New ImprePlanillaValidaciones(Ter, Ren)
+            .Show(Me)
+        End With
+
     End Sub
 End Class

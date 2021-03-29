@@ -123,7 +123,7 @@ Partial Class IngresoParametrosEspecificaciones
         'txtParametro
         '
         Me.txtParametro.Location = New System.Drawing.Point(103, 47)
-        Me.txtParametro.MaxLength = 70
+        Me.txtParametro.MaxLength = 140
         Me.txtParametro.Name = "txtParametro"
         Me.txtParametro.Size = New System.Drawing.Size(301, 20)
         Me.txtParametro.TabIndex = 1

@@ -1,6 +1,5 @@
 ﻿Imports System.Data.SqlClient
 Imports System.IO
-Imports Util.Clases
 
 Namespace Clases
     Public Class Query
@@ -82,6 +81,7 @@ Namespace Clases
         Public Shared Sub ExecuteNonQueries(ByVal ParamArray q As String())
 
             Dim trans As SqlTransaction = Nothing
+            Dim W As String = ""
             Try
                 If q.Length = 0 Then Throw New Exception("No se han pasado consultas para ejecutar.")
 
@@ -96,13 +96,8 @@ Namespace Clases
                         cm.Transaction = trans
 
                         For Each _q As String In q
-                            Debug.Print(_q)
 
-                            'Using sw As New StreamWriter("C:\sql.txt")
-                            Using sw As New StreamWriter(Environment.SpecialFolder.Desktop & "sql.txt")
-                                sw.WriteLine(_q)
-                            End Using
-
+                            W = _q
                             cm.CommandText = _q
                             cm.ExecuteNonQuery()
 
@@ -114,6 +109,12 @@ Namespace Clases
 
             Catch ex As Exception
                 If Not IsNothing(trans) AndAlso Not IsNothing(trans.Connection) Then trans.Rollback()
+
+                'Using sw As New StreamWriter("C:\sql.txt")
+                Using sw As New StreamWriter("sql.txt")
+                    sw.WriteLine(W)
+                End Using
+
                 Throw New Exception(ex.Message)
             End Try
         End Sub
@@ -129,6 +130,7 @@ Namespace Clases
         Public Shared Sub ExecuteNonQueries(ByVal empresa As String, ByVal ParamArray q As String())
 
             Dim trans As SqlTransaction = Nothing
+            Dim W As String = ""
             Try
                 If q.Length = 0 Then Throw New Exception("No se han pasado consultas para ejecutar.")
 
@@ -144,6 +146,7 @@ Namespace Clases
 
                         For Each _q As String In q
                             Debug.Print(_q)
+                            W = _q
                             cm.CommandText = _q
                             cm.ExecuteNonQuery()
                         Next
@@ -154,6 +157,11 @@ Namespace Clases
 
             Catch ex As Exception
                 If Not IsNothing(trans) AndAlso Not IsNothing(trans.Connection) Then trans.Rollback()
+                'Using sw As New StreamWriter("C:\sql.txt")
+                Using sw As New StreamWriter("sql.txt")
+                    sw.WriteLine(W)
+                End Using
+
                 Throw New Exception(ex.Message)
             End Try
         End Sub

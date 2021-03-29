@@ -39,6 +39,7 @@ Partial Class IngresoFormulasEnsayo
         Me.Label3 = New System.Windows.Forms.Label()
         Me.lblTerminado = New System.Windows.Forms.Label()
         Me.lblDescTerminado = New System.Windows.Forms.Label()
+        Me.btnPlanillaValidaciones = New System.Windows.Forms.Button()
         CType(Me.DGV_Formulas, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -224,6 +225,16 @@ Partial Class IngresoFormulasEnsayo
         Me.lblDescTerminado.Text = "PT-99999-999"
         Me.lblDescTerminado.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
+        'btnPlanillaValidaciones
+        '
+        Me.btnPlanillaValidaciones.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnPlanillaValidaciones.Location = New System.Drawing.Point(404, 78)
+        Me.btnPlanillaValidaciones.Name = "btnPlanillaValidaciones"
+        Me.btnPlanillaValidaciones.Size = New System.Drawing.Size(181, 37)
+        Me.btnPlanillaValidaciones.TabIndex = 2
+        Me.btnPlanillaValidaciones.Text = "PLANILLA VALIDACIONES"
+        Me.btnPlanillaValidaciones.UseVisualStyleBackColor = True
+        '
         'IngresoFormulasEnsayo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -234,6 +245,7 @@ Partial Class IngresoFormulasEnsayo
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.btnVolver)
+        Me.Controls.Add(Me.btnPlanillaValidaciones)
         Me.Controls.Add(Me.btnAgregar)
         Me.Controls.Add(Me.txtBuscador)
         Me.Controls.Add(Me.DGV_Formulas)
@@ -264,4 +276,5 @@ Partial Class IngresoFormulasEnsayo
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents lblTerminado As System.Windows.Forms.Label
     Friend WithEvents lblDescTerminado As System.Windows.Forms.Label
+    Friend WithEvents btnPlanillaValidaciones As System.Windows.Forms.Button
 End Class

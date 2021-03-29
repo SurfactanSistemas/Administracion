@@ -210,8 +210,8 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                     With dgvEspecif.Rows(r)
                         .Cells("Ensayo").Value = WEns
                         .Cells("Especificacion").Value = ""
-                        .Cells("DescEnsayo").Value = Trim(WEspecificacion)
-                        .Cells("Farmacopea").Value = Trim(WFarmacopea)
+                        .Cells("DescEnsayo").Value = Trim(WEspecificacion).left(50)
+                        .Cells("Farmacopea").Value = Trim(WFarmacopea).left(20)
                         .Cells("TipoEspecif").Value = WTipoEspecif
                         .Cells("DesdeEspecif").Value = WDesdeEspecif
                         .Cells("HastaEspecif").Value = WHastaEspecif
@@ -345,27 +345,27 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
                     If Val(WEnsayo) = 0 Then Continue For
 
-                    WValor = Trim(OrDefault(.Item("Valor" & i), ""))
-                    WDesde = Trim(OrDefault(.Item("Desde" & i), ""))
-                    WHasta = Trim(OrDefault(.Item("Hasta" & i), ""))
+                    WValor = " " & Trim(OrDefault(.Item("Valor" & i & i), ""))
+                    'WDesde = Trim(OrDefault(.Item("Desde" & i), ""))
+                    'WHasta = Trim(OrDefault(.Item("Hasta" & i), ""))
 
-                    WTipoEspecif = IIf(WDesde = "" And WHasta = "", "0", "1")
-                    WInformaEspecif = IIf(Val(WTipoEspecif) = 0, "0", "1")
+                    'WTipoEspecif = IIf(WDesde = "" And WHasta = "", "0", "1")
+                    'WInformaEspecif = IIf(Val(WTipoEspecif) = 0, "0", "1")
 
                 End With
 
-                Dim r As DataRow = WCargaVFormatoViejo.NewRow
+                'Dim r As DataRow = WCargaVFormatoViejo.NewRow
 
-                With r
-                    .Item("Ensayo") = WEnsayo
-                    .Item("Valor") = WValor
-                    .Item("DesdeEspecif") = WDesde
-                    .Item("HastaEspecif") = WHasta
-                    .Item("TipoEspecif") = WTipoEspecif
-                    .Item("InformaEspecif") = WInformaEspecif
+                With WCargaVFormatoViejo.Rows(i - 1)
+                    '.Item("Ensayo") = WEnsayo
+                    .Item("Valor") &= WValor
+                    '.Item("DesdeEspecif") = WDesde
+                    '.Item("HastaEspecif") = WHasta
+                    '.Item("TipoEspecif") = WTipoEspecif
+                    '.Item("InformaEspecif") = WInformaEspecif
                 End With
 
-                WCargaVFormatoViejo.Rows.Add(r)
+                'WCargaVFormatoViejo.Rows(i).Add(r)
 
             Next
 
@@ -488,7 +488,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                     Dim WDesdeEspecif As String = OrDefault(.Item("DesdeEspecif"), "")
                     Dim WHastaEspecif As String = OrDefault(.Item("HastaEspecif"), "")
                     Dim WUnidadEspecif = OrDefault(.Item("UnidadEspecif"), "")
-                    Dim WMenorIgualEspecif = OrDefault(.Item("MenorIgualEspecif"), "0")
+                    Dim WMenorIgualEspecif = OrDefault(.Item("MenorIgualEspecif"), "1")
                     Dim WInformaEspecif = OrDefault(.Item("InformaEspecif"), "0")
                     Dim WFormulaEspecif = OrDefault(.Item("FormulaEspecif"), "")
                     Dim WImpreParametro = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif, WInformaEspecif)
@@ -584,6 +584,10 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                 Dim WAdic1 = Trim(OrDefault(.Item("FormulaAdic1"), ""))
                 Dim WAdic2 = Trim(OrDefault(.Item("FormulaAdic2"), ""))
                 Dim WAdic3 = Trim(OrDefault(.Item("FormulaAdic3"), ""))
+                Dim WAdic1dec = Trim(OrDefault(.Item("FormulaAdic1dec"), ""))
+                Dim WAdic2dec = Trim(OrDefault(.Item("FormulaAdic2dec"), ""))
+                Dim WAdic3dec = Trim(OrDefault(.Item("FormulaAdic3dec"), ""))
+
                 Dim WImpreParametro = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif, WInformaEspecif)
 
                 If Val(WTipoEspecif) = 0 And WImpreParametro <> "" Then WImpreParametro &= " (c)"
@@ -611,6 +615,9 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                     .Cells("FormulaAdic1").Value = WAdic1
                     .Cells("FormulaAdic2").Value = WAdic2
                     .Cells("FormulaAdic3").Value = WAdic3
+                    .Cells("FormulaAdic1dec").Value = WAdic1dec
+                    .Cells("FormulaAdic2dec").Value = WAdic2dec
+                    .Cells("FormulaAdic3dec").Value = WAdic3dec
 
                     For i = 1 To 10
                         .Cells("Variable" & i).Value = Trim(OrDefault(row.Item("Variable" & i), ""))
@@ -728,11 +735,14 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
             Dim WParametro As String = OrDefault(.Cells("DescEnsayo").Value, "")
             Dim WFormula As String = OrDefault(.Cells("FormulaEspecif").Value, "")
             Dim WParametrosFormula(10) As String
-            Dim WAdicionales(2) As String
+            Dim WAdicionales(2, 1) As String
 
-            WAdicionales(0) = OrDefault(.Cells("FormulaAdic1").Value, "")
-            WAdicionales(1) = OrDefault(.Cells("FormulaAdic2").Value, "")
-            WAdicionales(2) = OrDefault(.Cells("FormulaAdic3").Value, "")
+            WAdicionales(0, 0) = OrDefault(.Cells("FormulaAdic1").Value, "")
+            WAdicionales(1, 0) = OrDefault(.Cells("FormulaAdic2").Value, "")
+            WAdicionales(2, 0) = OrDefault(.Cells("FormulaAdic3").Value, "")
+            WAdicionales(0, 1) = OrDefault(.Cells("FormulaAdic1dec").Value, "")
+            WAdicionales(1, 1) = OrDefault(.Cells("FormulaAdic2dec").Value, "")
+            WAdicionales(2, 1) = OrDefault(.Cells("FormulaAdic3dec").Value, "")
 
             For i = 1 To 10
                 WParametrosFormula(i) = Trim(OrDefault(.Cells("Variable" & i).Value, ""))
@@ -747,7 +757,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
     End Sub
 
-    Public Sub _ProcesarIngresoParametrosEspecificaciones(ByVal WParametro As String, ByVal Tipo As Integer, ByVal Informa As Integer, ByVal MenorIgual As Integer, ByVal Desde As String, ByVal Hasta As String, ByVal Unidad As String, ByVal WFarmacopea As String, ByVal Formula As String, ByVal ParametrosFormula() As String) Implements IIngresoParametrosEspecificaciones._ProcesarIngresoParametrosEspecificaciones
+    Public Sub _ProcesarIngresoParametrosEspecificaciones(ByVal WParametro As String, ByVal Tipo As Integer, ByVal Informa As Integer, ByVal MenorIgual As Integer, ByVal Desde As String, ByVal Hasta As String, ByVal Unidad As String, ByVal WFarmacopea As String, ByVal Formula As String, ByVal ParametrosFormula() As String, ByVal Adic(,) As String) Implements IIngresoParametrosEspecificaciones._ProcesarIngresoParametrosEspecificaciones
         With dgvEspecif.CurrentRow
             .Cells("DescEnsayo").Value = WParametro
             .Cells("TipoEspecif").Value = Tipo
@@ -758,6 +768,12 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
             .Cells("UnidadEspecif").Value = Unidad
             .Cells("Farmacopea").Value = WFarmacopea
             .Cells("FormulaEspecif").Value = Formula
+            .Cells("FormulaAdic1").Value = Adic(0, 0)
+            .Cells("FormulaAdic2").Value = Adic(1, 0)
+            .Cells("FormulaAdic3").Value = Adic(2, 0)
+            .Cells("FormulaAdic1dec").Value = formatonumerico(Adic(0, 1))
+            .Cells("FormulaAdic2dec").Value = formatonumerico(Adic(1, 1))
+            .Cells("FormulaAdic3dec").Value = formatonumerico(Adic(2, 1))
 
             Dim WImpreParametro = _GenerarImpreParametro(Tipo, Desde, Hasta, Unidad, MenorIgual, Informa)
 
@@ -788,7 +804,6 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
             If dgvEspecifIngles.Rows(index).Cells("DescEnsayoIngles").Value = "" Then
                 MsgBox("Falta ingresar la Descripcion del ensayo en Ingles")
             End If
-
 
         End With
 
@@ -891,6 +906,12 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                 WVariable8 = OrDefault(.Cells("Variable8").Value, "")
                 WVariable9 = OrDefault(.Cells("Variable9").Value, "")
                 WVariable10 = OrDefault(.Cells("Variable10").Value, "")
+                Dim WFormulaAdic1 = OrDefault(.Cells("FormulaAdic1").Value, "")
+                Dim WFormulaAdic2 = OrDefault(.Cells("FormulaAdic2").Value, "")
+                Dim WFormulaAdic3 = OrDefault(.Cells("FormulaAdic3").Value, "")
+                Dim WFormulaAdic1dec = OrDefault(.Cells("FormulaAdic1dec").Value, "")
+                Dim WFormulaAdic2dec = OrDefault(.Cells("FormulaAdic2dec").Value, "")
+                Dim WFormulaAdic3dec = OrDefault(.Cells("FormulaAdic3dec").Value, "")
 
                 Dim ZSql, XPaso, Auxi As String
 
@@ -930,6 +951,12 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                 ZSql = ZSql & "Variable8 ,"
                 ZSql = ZSql & "Variable9 ,"
                 ZSql = ZSql & "Variable10 ,"
+                ZSql = ZSql & "FormulaAdic1 ,"
+                ZSql = ZSql & "FormulaAdic2 ,"
+                ZSql = ZSql & "FormulaAdic3 ,"
+                ZSql = ZSql & "FormulaAdic1dec ,"
+                ZSql = ZSql & "FormulaAdic2dec ,"
+                ZSql = ZSql & "FormulaAdic3dec ,"
                 ZSql = ZSql & "Corte )"
                 ZSql = ZSql & "Values ("
                 ZSql = ZSql & "'" & WClave & "',"
@@ -959,6 +986,12 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                 ZSql = ZSql & "'" & WVariable8 & "',"
                 ZSql = ZSql & "'" & WVariable9 & "',"
                 ZSql = ZSql & "'" & WVariable10 & "',"
+                ZSql = ZSql & "'" & WFormulaAdic1 & "',"
+                ZSql = ZSql & "'" & WFormulaAdic2 & "',"
+                ZSql = ZSql & "'" & WFormulaAdic3 & "',"
+                ZSql = ZSql & "'" & WFormulaAdic1dec & "',"
+                ZSql = ZSql & "'" & WFormulaAdic2dec & "',"
+                ZSql = ZSql & "'" & WFormulaAdic3dec & "',"
                 ZSql = ZSql & "'" & WCorte & "')"
 
                 WConsultas.Add(ZSql)
@@ -1065,10 +1098,6 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
         ExecuteNonQueries("Surfactan_II", WConsultas.ToArray)
 
-
-
-
-
     End Sub
 
     Private Sub _GrabarEspecificacionPTNoFarma()
@@ -1137,7 +1166,10 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
         _GrabarVersionEspecificacionPTNOFarma()
 
-        With New IngresoDatosMostrarEnCertificadosAnalisis(txtTerminado.Text, "S00102", True)
+        '
+        ' 20 = ID DE VENTANA DE ING DE DATOS A MOSTRAR EN CERTIFICADOS DE ANALISIS.
+        '
+        With New IngresoDatosMostrarEnCertificadosAnalisis(txtTerminado.Text, "S00102", 20)
             .ShowDialog(Me)
         End With
 
@@ -1308,6 +1340,7 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
 
                 Dim WValor As String = OrDefault(.Cells("DescEnsayo").Value, "").ToString.Trim.PadRight(100, " ")
 
+
                 columnas &= "Valor" & i & " = '" & WValor.left(50) & "', Valor" & i & i & " = '" & WValor.right(50) & "',"
                 columnas &= "Desde" & i & " = '" & Trim(OrDefault(.Cells("DesdeEspecif").Value, "")) & "',"
                 columnas &= "Hasta" & i & " = '" & Trim(OrDefault(.Cells("HastaEspecif").Value, "")) & "',"
@@ -1405,6 +1438,12 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                 WVariable8 = OrDefault(.Cells("Variable8").Value, "")
                 WVariable9 = OrDefault(.Cells("Variable9").Value, "")
                 WVariable10 = OrDefault(.Cells("Variable10").Value, "")
+                Dim WFormulaAdic1 = OrDefault(.Cells("FormulaAdic1").Value, "")
+                Dim WFormulaAdic2 = OrDefault(.Cells("FormulaAdic2").Value, "")
+                Dim WFormulaAdic3 = OrDefault(.Cells("FormulaAdic3").Value, "")
+                Dim WFormulaAdic1dec = OrDefault(.Cells("FormulaAdic1dec").Value, "")
+                Dim WFormulaAdic2dec = OrDefault(.Cells("FormulaAdic2dec").Value, "")
+                Dim WFormulaAdic3dec = OrDefault(.Cells("FormulaAdic3dec").Value, "")
 
                 Dim ZSql, XPaso, Auxi As String
 
@@ -1444,22 +1483,28 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                 ZSql = ZSql & "Variable8 ,"
                 ZSql = ZSql & "Variable9 ,"
                 ZSql = ZSql & "Variable10 ,"
+                ZSql = ZSql & "FormulaAdic1 ,"
+                ZSql = ZSql & "FormulaAdic2 ,"
+                ZSql = ZSql & "FormulaAdic3 ,"
+                ZSql = ZSql & "FormulaAdic1dec ,"
+                ZSql = ZSql & "FormulaAdic2dec ,"
+                ZSql = ZSql & "FormulaAdic3dec ,"
                 ZSql = ZSql & "Corte )"
                 ZSql = ZSql & "Values ("
                 ZSql = ZSql & "'" & WClave & "',"
                 ZSql = ZSql & "'" & txtTerminado.Text & "',"
                 ZSql = ZSql & "'" & txtEtapa.Text & "',"
-                ZSql = ZSql & "'" & WDescPaso & "',"
-                ZSql = ZSql & "'" & txtControlCambios.Text & "',"
+                ZSql = ZSql & "'" & WDescPaso.left(50) & "',"
+                ZSql = ZSql & "'" & txtControlCambios.Text.left(100) & "',"
                 ZSql = ZSql & "'" & Trim(Str$(WRenglon)) & "',"
                 ZSql = ZSql & "'" & WEnsayo & "',"
-                ZSql = ZSql & "'" & WDescEnsayo & "',"
-                ZSql = ZSql & "'" & WValor & "',"
+                ZSql = ZSql & "'" & WDescEnsayo.left(50) & "',"
+                ZSql = ZSql & "'" & WValor.left(100) & "',"
                 ZSql = ZSql & "'" & WTipoEspecif & "',"
                 ZSql = ZSql & "'" & WInformaEspecif & "',"
                 ZSql = ZSql & "'" & WMenorIgualEspecif & "',"
-                ZSql = ZSql & "'" & WFarmacopea & "',"
-                ZSql = ZSql & "'" & WUnidadEspecif & "',"
+                ZSql = ZSql & "'" & WFarmacopea.left(20) & "',"
+                ZSql = ZSql & "'" & WUnidadEspecif.left(20) & "',"
                 ZSql = ZSql & "'" & WDesdeEspecif & "',"
                 ZSql = ZSql & "'" & WHastaEspecif & "',"
                 ZSql = ZSql & "'" & WFormulaEspecif & "',"
@@ -1473,6 +1518,12 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                 ZSql = ZSql & "'" & WVariable8 & "',"
                 ZSql = ZSql & "'" & WVariable9 & "',"
                 ZSql = ZSql & "'" & WVariable10 & "',"
+                ZSql = ZSql & "'" & WFormulaAdic1 & "',"
+                ZSql = ZSql & "'" & WFormulaAdic2 & "',"
+                ZSql = ZSql & "'" & WFormulaAdic3 & "',"
+                ZSql = ZSql & "'" & WFormulaAdic1dec & "',"
+                ZSql = ZSql & "'" & WFormulaAdic2dec & "',"
+                ZSql = ZSql & "'" & WFormulaAdic3dec & "',"
                 ZSql = ZSql & "'" & WCorte & "')"
 
                 WConsultas.Add(ZSql)
@@ -1554,9 +1605,9 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
                     ZSql = ZSql & "'" & txtTerminado.Text & "',"
                     ZSql = ZSql & "'" & txtEtapa.Text & "',"
                     ZSql = ZSql & "'" & Trim(Str$(WRenglon)) & "',"
-                    ZSql = ZSql & "'" & WValor & "',"
-                    ZSql = ZSql & "'" & WFarmacopea & "',"
-                    ZSql = ZSql & "'" & WUnidadEspecif & "'"
+                    ZSql = ZSql & "'" & WValor.left(70) & "',"
+                    ZSql = ZSql & "'" & WFarmacopea.left(20) & "',"
+                    ZSql = ZSql & "'" & WUnidadEspecif.left(20) & "'"
                     ZSql = ZSql & ")"
 
                     WConsultas.Add(ZSql)
@@ -2897,5 +2948,9 @@ Public Class IngresoEspecificacionesPT : Implements IIngresoParametrosEspecifica
             End If
 
         Loop
+    End Sub
+
+    Private Sub dgvEspecif_CellErrorTextChanged(sender As Object, e As DataGridViewCellEventArgs) Handles dgvEspecif.CellErrorTextChanged
+
     End Sub
 End Class

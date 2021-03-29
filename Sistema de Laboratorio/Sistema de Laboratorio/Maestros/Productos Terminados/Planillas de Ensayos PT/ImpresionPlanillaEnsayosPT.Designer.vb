@@ -22,8 +22,8 @@ Partial Class ImpresionPlanillaEnsayosPT
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -133,7 +133,7 @@ Partial Class ImpresionPlanillaEnsayosPT
         Me.lblDescTerminado.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblDescTerminado.Location = New System.Drawing.Point(162, 55)
         Me.lblDescTerminado.Name = "lblDescTerminado"
-        Me.lblDescTerminado.Size = New System.Drawing.Size(349, 23)
+        Me.lblDescTerminado.Size = New System.Drawing.Size(341, 23)
         Me.lblDescTerminado.TabIndex = 5
         Me.lblDescTerminado.Text = "Código:"
         Me.lblDescTerminado.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -142,7 +142,7 @@ Partial Class ImpresionPlanillaEnsayosPT
         '
         Me.Label4.Anchor = System.Windows.Forms.AnchorStyles.Right
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(514, 60)
+        Me.Label4.Location = New System.Drawing.Point(508, 60)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(38, 13)
         Me.Label4.TabIndex = 5
@@ -151,10 +151,10 @@ Partial Class ImpresionPlanillaEnsayosPT
         'txtEtapa
         '
         Me.txtEtapa.Anchor = System.Windows.Forms.AnchorStyles.Right
-        Me.txtEtapa.Location = New System.Drawing.Point(555, 56)
+        Me.txtEtapa.Location = New System.Drawing.Point(547, 56)
         Me.txtEtapa.MaxLength = 2
         Me.txtEtapa.Name = "txtEtapa"
-        Me.txtEtapa.Size = New System.Drawing.Size(26, 20)
+        Me.txtEtapa.Size = New System.Drawing.Size(35, 20)
         Me.txtEtapa.TabIndex = 7
         Me.txtEtapa.Text = "99"
         Me.txtEtapa.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -193,15 +193,15 @@ Partial Class ImpresionPlanillaEnsayosPT
         Me.dgvEspecif.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvEspecif.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvEspecif.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Ensayo, Me.Descripcion, Me.DescParametros, Me.Parametro, Me.TipoEspecif, Me.Var1, Me.Var2, Me.Var3, Me.Var4, Me.Var5, Me.Var6, Me.Var7, Me.Var8, Me.Var9, Me.Var10})
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.Padding = New System.Windows.Forms.Padding(3, 0, 0, 0)
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvEspecif.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle4.Padding = New System.Windows.Forms.Padding(3, 0, 0, 0)
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvEspecif.DefaultCellStyle = DataGridViewCellStyle4
         Me.dgvEspecif.DoubleBuffered = True
         Me.dgvEspecif.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.dgvEspecif.Location = New System.Drawing.Point(9, 86)
@@ -218,10 +218,10 @@ Partial Class ImpresionPlanillaEnsayosPT
         '
         Me.Ensayo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Ensayo.DataPropertyName = "Ensayo"
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle1.Format = "#00"
-        DataGridViewCellStyle1.NullValue = Nothing
-        Me.Ensayo.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle3.Format = "#00"
+        DataGridViewCellStyle3.NullValue = Nothing
+        Me.Ensayo.DefaultCellStyle = DataGridViewCellStyle3
         Me.Ensayo.HeaderText = "Ens"
         Me.Ensayo.Name = "Ensayo"
         Me.Ensayo.ReadOnly = True
@@ -261,66 +261,77 @@ Partial Class ImpresionPlanillaEnsayosPT
         '
         Me.TipoEspecif.HeaderText = "TipoEspecif"
         Me.TipoEspecif.Name = "TipoEspecif"
+        Me.TipoEspecif.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.TipoEspecif.Visible = False
         '
         'Var1
         '
         Me.Var1.HeaderText = "Var1"
         Me.Var1.Name = "Var1"
+        Me.Var1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.Var1.Visible = False
         '
         'Var2
         '
         Me.Var2.HeaderText = "Var2"
         Me.Var2.Name = "Var2"
+        Me.Var2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.Var2.Visible = False
         '
         'Var3
         '
         Me.Var3.HeaderText = "Var3"
         Me.Var3.Name = "Var3"
+        Me.Var3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.Var3.Visible = False
         '
         'Var4
         '
         Me.Var4.HeaderText = "Var4"
         Me.Var4.Name = "Var4"
+        Me.Var4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.Var4.Visible = False
         '
         'Var5
         '
         Me.Var5.HeaderText = "Var5"
         Me.Var5.Name = "Var5"
+        Me.Var5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.Var5.Visible = False
         '
         'Var6
         '
         Me.Var6.HeaderText = "Var6"
         Me.Var6.Name = "Var6"
+        Me.Var6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.Var6.Visible = False
         '
         'Var7
         '
         Me.Var7.HeaderText = "Var7"
         Me.Var7.Name = "Var7"
+        Me.Var7.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.Var7.Visible = False
         '
         'Var8
         '
         Me.Var8.HeaderText = "Var8"
         Me.Var8.Name = "Var8"
+        Me.Var8.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.Var8.Visible = False
         '
         'Var9
         '
         Me.Var9.HeaderText = "Var9"
         Me.Var9.Name = "Var9"
+        Me.Var9.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.Var9.Visible = False
         '
         'Var10
         '
         Me.Var10.HeaderText = "Var10"
         Me.Var10.Name = "Var10"
+        Me.Var10.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.Var10.Visible = False
         '
         'ImpresionPlanillaEnsayosPT
