@@ -1,63 +1,81 @@
 ﻿Imports System.Data.SqlClient
 Imports System.IO
-Imports Laboratorio.Clases
-
 Module Query
 
     Public Function GetSingle(ByVal q As String, Optional ByVal WBase As String = "", Optional ByVal TmbPellital As Boolean = False) As DataRow
+        Try
+            If WBase.Trim = "" Then WBase = Operador.Base
 
-        If WBase.Trim = "" Then WBase = Operador.Base
+            Dim tabla As New DataTable
 
-        Dim tabla As New DataTable
+            Using cn As New SqlConnection
 
-        Using cn As New SqlConnection
+                cn.ConnectionString = _ConectarA(WBase, TmbPellital) 'ConfigurationManager.ConnectionStrings("CS").ToString
+                cn.Open()
 
-            cn.ConnectionString = _ConectarA(WBase, TmbPellital) 'ConfigurationManager.ConnectionStrings("CS").ToString
-            cn.Open()
+                Using cm As New SqlCommand(q)
 
-            Using cm As New SqlCommand(q)
+                    cm.Connection = cn
 
-                cm.Connection = cn
+                    Using dr As SqlDataReader = cm.ExecuteReader(CommandBehavior.SingleResult)
+                        tabla.Load(dr)
+                    End Using
 
-                Using dr As SqlDataReader = cm.ExecuteReader(CommandBehavior.SingleResult)
-                    tabla.Load(dr)
                 End Using
 
             End Using
 
-        End Using
+            If tabla.Rows.Count > 0 Then Return tabla.Rows(0)
 
-        If tabla.Rows.Count > 0 Then Return tabla.Rows(0)
+            Return Nothing
 
-        Return Nothing
+        Catch ex As Exception
+
+            'Using sw As New StreamWriter("C:\sql.txt")
+            Using sw As New StreamWriter("sql.txt")
+                sw.WriteLine(q)
+            End Using
+
+            Throw New Exception(ex.Message)
+        End Try
 
     End Function
 
     Public Function GetAll(ByVal q As String, Optional ByVal WBase As String = "", Optional ByVal TmbPellital As Boolean = False) As DataTable
 
         If WBase.Trim = "" Then WBase = Operador.Base
+        Try
 
-        Dim tabla As New DataTable
+            Dim tabla As New DataTable
 
-        Using cn As New SqlConnection
+            Using cn As New SqlConnection
 
-            cn.ConnectionString = _ConectarA(WBase, TmbPellital) 'ConfigurationManager.ConnectionStrings("CS").ToString
-            cn.Open()
+                cn.ConnectionString = _ConectarA(WBase, TmbPellital) 'ConfigurationManager.ConnectionStrings("CS").ToString
+                cn.Open()
 
-            Using cm As New SqlCommand(q)
+                Using cm As New SqlCommand(q)
 
-                cm.Connection = cn
+                    cm.Connection = cn
 
-                Using dr As SqlDataReader = cm.ExecuteReader
-                    tabla.Load(dr)
+                    Using dr As SqlDataReader = cm.ExecuteReader
+                        tabla.Load(dr)
+                    End Using
+
                 End Using
 
             End Using
 
-        End Using
+            Return tabla
 
-        Return tabla
+        Catch ex As Exception
 
+            'Using sw As New StreamWriter("C:\sql.txt")
+            Using sw As New StreamWriter("sql.txt")
+                sw.WriteLine(q)
+            End Using
+
+            Throw New Exception(ex.Message)
+        End Try
     End Function
 
     Public Function ExecuteQueryRead(ByVal q As String, Optional ByVal WBase As String = "SurfactanSa") As SqlDataReader
@@ -81,6 +99,7 @@ Module Query
     Public Sub ExecuteNonQueries(ByVal ParamArray q As String())
 
         Dim trans As SqlTransaction = Nothing
+        Dim s As String = ""
         Try
             If q.Length = 0 Then Throw New Exception("No se han pasado consultas para ejecutar.")
 
@@ -95,13 +114,7 @@ Module Query
                     cm.Transaction = trans
 
                     For Each _q As String In q
-                        Debug.Print(_q)
-
-                        'Using sw As New StreamWriter("C:\sql.txt")
-                        Using sw As New StreamWriter(Environment.SpecialFolder.Desktop & "sql.txt")
-                            sw.WriteLine(_q)
-                        End Using
-
+                        s = _q
                         cm.CommandText = _q
                         cm.ExecuteNonQuery()
 
@@ -113,6 +126,12 @@ Module Query
 
         Catch ex As Exception
             If Not IsNothing(trans) AndAlso Not IsNothing(trans.Connection) Then trans.Rollback()
+
+            'Using sw As New StreamWriter("C:\sql.txt")
+            Using sw As New StreamWriter("sql.txt")
+                sw.WriteLine(s)
+            End Using
+
             Throw New Exception(ex.Message)
         End Try
     End Sub
@@ -124,6 +143,7 @@ Module Query
     Public Sub ExecuteNonQueries(ByVal empresa As String, ByVal ParamArray q As String())
 
         Dim trans As SqlTransaction = Nothing
+        Dim s As String = ""
         Try
             If q.Length = 0 Then Throw New Exception("No se han pasado consultas para ejecutar.")
 
@@ -138,7 +158,7 @@ Module Query
                     cm.Transaction = trans
 
                     For Each _q As String In q
-                        Debug.Print(_q)
+                        s = _q
                         cm.CommandText = _q
                         cm.ExecuteNonQuery()
                     Next
@@ -149,6 +169,11 @@ Module Query
 
         Catch ex As Exception
             If Not IsNothing(trans) AndAlso Not IsNothing(trans.Connection) Then trans.Rollback()
+            'Using sw As New StreamWriter("C:\sql.txt")
+            Using sw As New StreamWriter("sql.txt")
+                sw.WriteLine(s)
+            End Using
+
             Throw New Exception(ex.Message)
         End Try
     End Sub

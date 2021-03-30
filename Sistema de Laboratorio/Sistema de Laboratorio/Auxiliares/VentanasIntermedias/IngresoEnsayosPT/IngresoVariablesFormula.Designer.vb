@@ -28,6 +28,10 @@ Partial Class IngresoVariablesFormula
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.dgvVariables = New Util.DBDataGridView()
+        Me.IdVariable = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Variable = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.WValor = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ReferenciaARenglon = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.txtDecimales = New System.Windows.Forms.TextBox()
@@ -36,10 +40,9 @@ Partial Class IngresoVariablesFormula
         Me.btnCancelar = New System.Windows.Forms.Button()
         Me.txtValorEstandar = New System.Windows.Forms.TextBox()
         Me.lblValorEstandar = New System.Windows.Forms.Label()
-        Me.IdVariable = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Variable = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.WValor = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ReferenciaARenglon = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnDatosReferencia = New System.Windows.Forms.Button()
+        Me.txtUnidad = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         CType(Me.dgvVariables, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -54,7 +57,7 @@ Partial Class IngresoVariablesFormula
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(428, 49)
+        Me.Panel1.Size = New System.Drawing.Size(430, 49)
         Me.Panel1.TabIndex = 4
         '
         'Label2
@@ -64,7 +67,7 @@ Partial Class IngresoVariablesFormula
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label2.Location = New System.Drawing.Point(234, 12)
+        Me.Label2.Location = New System.Drawing.Point(236, 12)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(179, 24)
         Me.Label2.TabIndex = 0
@@ -108,6 +111,37 @@ Partial Class IngresoVariablesFormula
         Me.dgvVariables.SinClickDerecho = False
         Me.dgvVariables.Size = New System.Drawing.Size(409, 168)
         Me.dgvVariables.TabIndex = 5
+        '
+        'IdVariable
+        '
+        Me.IdVariable.HeaderText = "ID"
+        Me.IdVariable.MinimumWidth = 40
+        Me.IdVariable.Name = "IdVariable"
+        Me.IdVariable.ReadOnly = True
+        Me.IdVariable.Width = 40
+        '
+        'Variable
+        '
+        Me.Variable.HeaderText = "Variable"
+        Me.Variable.MinimumWidth = 200
+        Me.Variable.Name = "Variable"
+        Me.Variable.ReadOnly = True
+        Me.Variable.Width = 200
+        '
+        'WValor
+        '
+        Me.WValor.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.WValor.DefaultCellStyle = DataGridViewCellStyle1
+        Me.WValor.HeaderText = "Valor"
+        Me.WValor.Name = "WValor"
+        Me.WValor.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        '
+        'ReferenciaARenglon
+        '
+        Me.ReferenciaARenglon.HeaderText = "ReferenciaARenglon"
+        Me.ReferenciaARenglon.Name = "ReferenciaARenglon"
+        Me.ReferenciaARenglon.Visible = False
         '
         'GroupBox1
         '
@@ -155,78 +189,78 @@ Partial Class IngresoVariablesFormula
         'btnAceptar
         '
         Me.btnAceptar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAceptar.Location = New System.Drawing.Point(87, 308)
+        Me.btnAceptar.Location = New System.Drawing.Point(18, 308)
         Me.btnAceptar.Name = "btnAceptar"
-        Me.btnAceptar.Size = New System.Drawing.Size(119, 33)
+        Me.btnAceptar.Size = New System.Drawing.Size(119, 48)
         Me.btnAceptar.TabIndex = 7
         Me.btnAceptar.Text = "ACEPTAR"
         Me.btnAceptar.UseVisualStyleBackColor = True
         '
         'btnCancelar
         '
-        Me.btnCancelar.Location = New System.Drawing.Point(222, 308)
+        Me.btnCancelar.Location = New System.Drawing.Point(161, 308)
         Me.btnCancelar.Name = "btnCancelar"
-        Me.btnCancelar.Size = New System.Drawing.Size(119, 33)
+        Me.btnCancelar.Size = New System.Drawing.Size(119, 48)
         Me.btnCancelar.TabIndex = 7
         Me.btnCancelar.Text = "CANCELAR"
         Me.btnCancelar.UseVisualStyleBackColor = True
         '
         'txtValorEstandar
         '
-        Me.txtValorEstandar.Location = New System.Drawing.Point(201, 282)
+        Me.txtValorEstandar.Location = New System.Drawing.Point(174, 281)
         Me.txtValorEstandar.Name = "txtValorEstandar"
-        Me.txtValorEstandar.Size = New System.Drawing.Size(100, 20)
+        Me.txtValorEstandar.Size = New System.Drawing.Size(54, 20)
         Me.txtValorEstandar.TabIndex = 8
         Me.txtValorEstandar.Visible = False
         '
         'lblValorEstandar
         '
         Me.lblValorEstandar.AutoSize = True
-        Me.lblValorEstandar.Location = New System.Drawing.Point(119, 285)
+        Me.lblValorEstandar.Location = New System.Drawing.Point(92, 285)
         Me.lblValorEstandar.Name = "lblValorEstandar"
         Me.lblValorEstandar.Size = New System.Drawing.Size(76, 13)
         Me.lblValorEstandar.TabIndex = 9
         Me.lblValorEstandar.Text = "Valor Estandar"
         Me.lblValorEstandar.Visible = False
         '
-        'IdVariable
+        'btnDatosReferencia
         '
-        Me.IdVariable.HeaderText = "ID"
-        Me.IdVariable.MinimumWidth = 40
-        Me.IdVariable.Name = "IdVariable"
-        Me.IdVariable.ReadOnly = True
-        Me.IdVariable.Width = 40
+        Me.btnDatosReferencia.Location = New System.Drawing.Point(294, 308)
+        Me.btnDatosReferencia.Name = "btnDatosReferencia"
+        Me.btnDatosReferencia.Size = New System.Drawing.Size(119, 48)
+        Me.btnDatosReferencia.TabIndex = 7
+        Me.btnDatosReferencia.Text = "DATOS DE REFERENCIA"
+        Me.btnDatosReferencia.UseVisualStyleBackColor = True
         '
-        'Variable
+        'txtUnidad
         '
-        Me.Variable.HeaderText = "Variable"
-        Me.Variable.MinimumWidth = 200
-        Me.Variable.Name = "Variable"
-        Me.Variable.ReadOnly = True
-        Me.Variable.Width = 200
+        Me.txtUnidad.Location = New System.Drawing.Point(285, 281)
+        Me.txtUnidad.MaxLength = 15
+        Me.txtUnidad.Name = "txtUnidad"
+        Me.txtUnidad.Size = New System.Drawing.Size(54, 20)
+        Me.txtUnidad.TabIndex = 8
+        Me.txtUnidad.Visible = False
         '
-        'WValor
+        'Label3
         '
-        Me.WValor.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.WValor.DefaultCellStyle = DataGridViewCellStyle1
-        Me.WValor.HeaderText = "Valor"
-        Me.WValor.Name = "WValor"
-        Me.WValor.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
-        'ReferenciaARenglon
-        '
-        Me.ReferenciaARenglon.HeaderText = "ReferenciaARenglon"
-        Me.ReferenciaARenglon.Name = "ReferenciaARenglon"
-        Me.ReferenciaARenglon.Visible = False
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(238, 285)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(41, 13)
+        Me.Label3.TabIndex = 9
+        Me.Label3.Text = "Unidad"
+        Me.Label3.Visible = False
         '
         'IngresoVariablesFormula
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(428, 350)
+        Me.ClientSize = New System.Drawing.Size(430, 368)
+        Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.lblValorEstandar)
+        Me.Controls.Add(Me.txtUnidad)
         Me.Controls.Add(Me.txtValorEstandar)
+        Me.Controls.Add(Me.btnDatosReferencia)
         Me.Controls.Add(Me.btnCancelar)
         Me.Controls.Add(Me.btnAceptar)
         Me.Controls.Add(Me.GroupBox1)
@@ -264,4 +298,7 @@ Partial Class IngresoVariablesFormula
     Friend WithEvents Variable As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents WValor As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ReferenciaARenglon As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents btnDatosReferencia As System.Windows.Forms.Button
+    Friend WithEvents txtUnidad As System.Windows.Forms.TextBox
+    Friend WithEvents Label3 As System.Windows.Forms.Label
 End Class

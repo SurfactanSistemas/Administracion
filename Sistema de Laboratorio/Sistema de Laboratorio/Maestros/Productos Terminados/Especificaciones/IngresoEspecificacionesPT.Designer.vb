@@ -103,6 +103,10 @@ Partial Class IngresoEspecificacionesPT
         Me.FormulaAdic1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FormulaAdic2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FormulaAdic3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FormulaAdic1dec = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FormulaAdic2dec = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FormulaAdic3dec = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SegundoRenglon = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -499,7 +503,7 @@ Partial Class IngresoEspecificacionesPT
         Me.dgvEspecif.AllowUserToAddRows = False
         Me.dgvEspecif.AllowUserToDeleteRows = False
         Me.dgvEspecif.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvEspecif.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NroRenglon, Me.Ensayo, Me.Especificacion, Me.DescEnsayo, Me.Farmacopea, Me.TipoEspecif, Me.DesdeEspecif, Me.HastaEspecif, Me.UnidadEspecif, Me.MenorIgualEspecif, Me.InformaEspecif, Me.Parametro, Me.FormulaEspecif, Me.Variable1, Me.Variable2, Me.Variable3, Me.Variable4, Me.Variable5, Me.Variable6, Me.Variable7, Me.Variable8, Me.Variable9, Me.Variable10, Me.FormulaAdic1, Me.FormulaAdic2, Me.FormulaAdic3})
+        Me.dgvEspecif.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NroRenglon, Me.Ensayo, Me.Especificacion, Me.DescEnsayo, Me.Farmacopea, Me.TipoEspecif, Me.DesdeEspecif, Me.HastaEspecif, Me.UnidadEspecif, Me.MenorIgualEspecif, Me.InformaEspecif, Me.Parametro, Me.FormulaEspecif, Me.Variable1, Me.Variable2, Me.Variable3, Me.Variable4, Me.Variable5, Me.Variable6, Me.Variable7, Me.Variable8, Me.Variable9, Me.Variable10, Me.FormulaAdic1, Me.FormulaAdic2, Me.FormulaAdic3, Me.FormulaAdic1dec, Me.FormulaAdic2dec, Me.FormulaAdic3dec, Me.SegundoRenglon})
         DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
         DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -576,6 +580,7 @@ Partial Class IngresoEspecificacionesPT
         '
         Me.EspecificacionIngles.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.EspecificacionIngles.HeaderText = "Descripción Ensayo"
+        Me.EspecificacionIngles.MaxInputLength = 50
         Me.EspecificacionIngles.MinimumWidth = 250
         Me.EspecificacionIngles.Name = "EspecificacionIngles"
         Me.EspecificacionIngles.ReadOnly = True
@@ -610,6 +615,7 @@ Partial Class IngresoEspecificacionesPT
         '
         Me.NroRenglon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.NroRenglon.HeaderText = "Nro."
+        Me.NroRenglon.MaxInputLength = 2
         Me.NroRenglon.Name = "NroRenglon"
         Me.NroRenglon.ReadOnly = True
         Me.NroRenglon.Width = 52
@@ -619,6 +625,7 @@ Partial Class IngresoEspecificacionesPT
         DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         Me.Ensayo.DefaultCellStyle = DataGridViewCellStyle4
         Me.Ensayo.HeaderText = "Ens."
+        Me.Ensayo.MaxInputLength = 4
         Me.Ensayo.Name = "Ensayo"
         Me.Ensayo.Width = 40
         '
@@ -626,6 +633,7 @@ Partial Class IngresoEspecificacionesPT
         '
         Me.Especificacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Especificacion.HeaderText = "Descripción Ensayo"
+        Me.Especificacion.MaxInputLength = 50
         Me.Especificacion.MinimumWidth = 250
         Me.Especificacion.Name = "Especificacion"
         Me.Especificacion.ReadOnly = True
@@ -635,6 +643,7 @@ Partial Class IngresoEspecificacionesPT
         '
         Me.DescEnsayo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.DescEnsayo.HeaderText = "Descripción Parámetro"
+        Me.DescEnsayo.MaxInputLength = 100
         Me.DescEnsayo.MinimumWidth = 150
         Me.DescEnsayo.Name = "DescEnsayo"
         Me.DescEnsayo.ReadOnly = True
@@ -644,6 +653,7 @@ Partial Class IngresoEspecificacionesPT
         DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Farmacopea.DefaultCellStyle = DataGridViewCellStyle5
         Me.Farmacopea.HeaderText = "Farmacopea"
+        Me.Farmacopea.MaxInputLength = 20
         Me.Farmacopea.Name = "Farmacopea"
         Me.Farmacopea.ReadOnly = True
         Me.Farmacopea.Width = 75
@@ -706,6 +716,7 @@ Partial Class IngresoEspecificacionesPT
         '
         Me.Parametro.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Parametro.HeaderText = "Parametro"
+        Me.Parametro.MaxInputLength = 50
         Me.Parametro.MinimumWidth = 150
         Me.Parametro.Name = "Parametro"
         Me.Parametro.ReadOnly = True
@@ -814,6 +825,34 @@ Partial Class IngresoEspecificacionesPT
         Me.FormulaAdic3.ReadOnly = True
         Me.FormulaAdic3.Visible = False
         '
+        'FormulaAdic1dec
+        '
+        Me.FormulaAdic1dec.HeaderText = "FormulaAdic1dec"
+        Me.FormulaAdic1dec.Name = "FormulaAdic1dec"
+        Me.FormulaAdic1dec.ReadOnly = True
+        Me.FormulaAdic1dec.Visible = False
+        '
+        'FormulaAdic2dec
+        '
+        Me.FormulaAdic2dec.HeaderText = "FormulaAdic2dec"
+        Me.FormulaAdic2dec.Name = "FormulaAdic2dec"
+        Me.FormulaAdic2dec.ReadOnly = True
+        Me.FormulaAdic2dec.Visible = False
+        '
+        'FormulaAdic3dec
+        '
+        Me.FormulaAdic3dec.HeaderText = "FormulaAdic3dec"
+        Me.FormulaAdic3dec.Name = "FormulaAdic3dec"
+        Me.FormulaAdic3dec.ReadOnly = True
+        Me.FormulaAdic3dec.Visible = False
+        '
+        'SegundoRenglon
+        '
+        Me.SegundoRenglon.HeaderText = "SegundoRenglon"
+        Me.SegundoRenglon.Name = "SegundoRenglon"
+        Me.SegundoRenglon.ReadOnly = True
+        Me.SegundoRenglon.Visible = False
+        '
         'IngresoEspecificacionesPT
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -910,4 +949,8 @@ Partial Class IngresoEspecificacionesPT
     Friend WithEvents FormulaAdic1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents FormulaAdic2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents FormulaAdic3 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents FormulaAdic1dec As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents FormulaAdic2dec As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents FormulaAdic3dec As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents SegundoRenglon As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

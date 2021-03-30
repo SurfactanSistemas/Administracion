@@ -33,6 +33,8 @@ Partial Class IngresoEspecificacionesMP
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.rbPool = New System.Windows.Forms.RadioButton()
+        Me.rbFinal = New System.Windows.Forms.RadioButton()
         Me.btnNotas = New System.Windows.Forms.Button()
         Me.btnAgregarRenglon = New System.Windows.Forms.Button()
         Me.txtCas = New System.Windows.Forms.TextBox()
@@ -51,12 +53,14 @@ Partial Class IngresoEspecificacionesMP
         Me.btnGrabar = New System.Windows.Forms.Button()
         Me.txtCondicionMuestreo = New System.Windows.Forms.TextBox()
         Me.txtControlCambios = New System.Windows.Forms.TextBox()
+        Me.txtPaso = New System.Windows.Forms.TextBox()
         Me.txtDescIngles = New System.Windows.Forms.TextBox()
         Me.txtDescTerminado = New System.Windows.Forms.TextBox()
         Me.txtCodigo = New System.Windows.Forms.MaskedTextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
@@ -84,6 +88,12 @@ Partial Class IngresoEspecificacionesMP
         Me.Variable8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Variable9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Variable10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FormulaAdic1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FormulaAdic2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FormulaAdic3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FormulaAdic1dec = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FormulaAdic2dec = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FormulaAdic3dec = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.dgvEspecifIngles = New Util.DBDataGridView()
         Me.NroRenglonIngles = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -141,6 +151,8 @@ Partial Class IngresoEspecificacionesMP
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.rbPool)
+        Me.GroupBox1.Controls.Add(Me.rbFinal)
         Me.GroupBox1.Controls.Add(Me.btnNotas)
         Me.GroupBox1.Controls.Add(Me.btnAgregarRenglon)
         Me.GroupBox1.Controls.Add(Me.txtCas)
@@ -159,18 +171,42 @@ Partial Class IngresoEspecificacionesMP
         Me.GroupBox1.Controls.Add(Me.btnGrabar)
         Me.GroupBox1.Controls.Add(Me.txtCondicionMuestreo)
         Me.GroupBox1.Controls.Add(Me.txtControlCambios)
+        Me.GroupBox1.Controls.Add(Me.txtPaso)
         Me.GroupBox1.Controls.Add(Me.txtDescIngles)
         Me.GroupBox1.Controls.Add(Me.txtDescTerminado)
         Me.GroupBox1.Controls.Add(Me.txtCodigo)
         Me.GroupBox1.Controls.Add(Me.Label4)
         Me.GroupBox1.Controls.Add(Me.Label5)
         Me.GroupBox1.Controls.Add(Me.Label6)
+        Me.GroupBox1.Controls.Add(Me.Label11)
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Location = New System.Drawing.Point(8, 55)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(899, 159)
         Me.GroupBox1.TabIndex = 3
         Me.GroupBox1.TabStop = False
+        '
+        'rbPool
+        '
+        Me.rbPool.AutoSize = True
+        Me.rbPool.Location = New System.Drawing.Point(572, 14)
+        Me.rbPool.Name = "rbPool"
+        Me.rbPool.Size = New System.Drawing.Size(68, 17)
+        Me.rbPool.TabIndex = 10
+        Me.rbPool.Text = "POOLES"
+        Me.rbPool.UseVisualStyleBackColor = True
+        '
+        'rbFinal
+        '
+        Me.rbFinal.AutoSize = True
+        Me.rbFinal.Checked = True
+        Me.rbFinal.Location = New System.Drawing.Point(516, 14)
+        Me.rbFinal.Name = "rbFinal"
+        Me.rbFinal.Size = New System.Drawing.Size(55, 17)
+        Me.rbFinal.TabIndex = 10
+        Me.rbFinal.TabStop = True
+        Me.rbFinal.Text = "FINAL"
+        Me.rbFinal.UseVisualStyleBackColor = True
         '
         'btnNotas
         '
@@ -359,6 +395,19 @@ Partial Class IngresoEspecificacionesMP
         Me.txtControlCambios.Text = "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO" & _
     "OOOOOOOOOOOOOOOOOOO"
         '
+        'txtPaso
+        '
+        Me.txtPaso.BackColor = System.Drawing.SystemColors.Window
+        Me.txtPaso.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtPaso.Location = New System.Drawing.Point(612, 137)
+        Me.txtPaso.Name = "txtPaso"
+        Me.txtPaso.Size = New System.Drawing.Size(23, 20)
+        Me.txtPaso.TabIndex = 2
+        Me.txtPaso.TabStop = False
+        Me.txtPaso.Text = "99"
+        Me.txtPaso.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtPaso.Visible = False
+        '
         'txtDescIngles
         '
         Me.txtDescIngles.BackColor = System.Drawing.SystemColors.Window
@@ -374,10 +423,10 @@ Partial Class IngresoEspecificacionesMP
         '
         Me.txtDescTerminado.BackColor = System.Drawing.Color.Cyan
         Me.txtDescTerminado.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.txtDescTerminado.Location = New System.Drawing.Point(142, 12)
+        Me.txtDescTerminado.Location = New System.Drawing.Point(144, 12)
         Me.txtDescTerminado.Name = "txtDescTerminado"
         Me.txtDescTerminado.ReadOnly = True
-        Me.txtDescTerminado.Size = New System.Drawing.Size(492, 20)
+        Me.txtDescTerminado.Size = New System.Drawing.Size(366, 20)
         Me.txtDescTerminado.TabIndex = 2
         Me.txtDescTerminado.TabStop = False
         Me.txtDescTerminado.Text = "NOMBRE DE PRODUCTO TEMINADO"
@@ -418,6 +467,16 @@ Partial Class IngresoEspecificacionesMP
         Me.Label6.Size = New System.Drawing.Size(97, 13)
         Me.Label6.TabIndex = 0
         Me.Label6.Text = "Descripción Inglés:"
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(571, 140)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(38, 13)
+        Me.Label11.TabIndex = 0
+        Me.Label11.Text = "Etapa:"
+        Me.Label11.Visible = False
         '
         'Label3
         '
@@ -460,7 +519,7 @@ Partial Class IngresoEspecificacionesMP
         Me.dgvEspecif.AllowUserToAddRows = False
         Me.dgvEspecif.AllowUserToDeleteRows = False
         Me.dgvEspecif.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvEspecif.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NroRenglon, Me.Ensayo, Me.Especificacion, Me.DescEnsayo, Me.Farmacopea, Me.TipoEspecif, Me.DesdeEspecif, Me.HastaEspecif, Me.UnidadEspecif, Me.MenorIgualEspecif, Me.InformaEspecif, Me.Parametro, Me.FormulaEspecif, Me.Variable1, Me.Variable2, Me.Variable3, Me.Variable4, Me.Variable5, Me.Variable6, Me.Variable7, Me.Variable8, Me.Variable9, Me.Variable10})
+        Me.dgvEspecif.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NroRenglon, Me.Ensayo, Me.Especificacion, Me.DescEnsayo, Me.Farmacopea, Me.TipoEspecif, Me.DesdeEspecif, Me.HastaEspecif, Me.UnidadEspecif, Me.MenorIgualEspecif, Me.InformaEspecif, Me.Parametro, Me.FormulaEspecif, Me.Variable1, Me.Variable2, Me.Variable3, Me.Variable4, Me.Variable5, Me.Variable6, Me.Variable7, Me.Variable8, Me.Variable9, Me.Variable10, Me.FormulaAdic1, Me.FormulaAdic2, Me.FormulaAdic3, Me.FormulaAdic1dec, Me.FormulaAdic2dec, Me.FormulaAdic3dec})
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
         DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -658,6 +717,48 @@ Partial Class IngresoEspecificacionesMP
         Me.Variable10.ReadOnly = True
         Me.Variable10.Visible = False
         '
+        'FormulaAdic1
+        '
+        Me.FormulaAdic1.HeaderText = "FormulaAdic1"
+        Me.FormulaAdic1.Name = "FormulaAdic1"
+        Me.FormulaAdic1.ReadOnly = True
+        Me.FormulaAdic1.Visible = False
+        '
+        'FormulaAdic2
+        '
+        Me.FormulaAdic2.HeaderText = "FormulaAdic2"
+        Me.FormulaAdic2.Name = "FormulaAdic2"
+        Me.FormulaAdic2.ReadOnly = True
+        Me.FormulaAdic2.Visible = False
+        '
+        'FormulaAdic3
+        '
+        Me.FormulaAdic3.HeaderText = "FormulaAdic3"
+        Me.FormulaAdic3.Name = "FormulaAdic3"
+        Me.FormulaAdic3.ReadOnly = True
+        Me.FormulaAdic3.Visible = False
+        '
+        'FormulaAdic1dec
+        '
+        Me.FormulaAdic1dec.HeaderText = "FormulaAdic1dec"
+        Me.FormulaAdic1dec.Name = "FormulaAdic1dec"
+        Me.FormulaAdic1dec.ReadOnly = True
+        Me.FormulaAdic1dec.Visible = False
+        '
+        'FormulaAdic2dec
+        '
+        Me.FormulaAdic2dec.HeaderText = "FormulaAdic2dec"
+        Me.FormulaAdic2dec.Name = "FormulaAdic2dec"
+        Me.FormulaAdic2dec.ReadOnly = True
+        Me.FormulaAdic2dec.Visible = False
+        '
+        'FormulaAdic3dec
+        '
+        Me.FormulaAdic3dec.HeaderText = "FormulaAdic3dec"
+        Me.FormulaAdic3dec.Name = "FormulaAdic3dec"
+        Me.FormulaAdic3dec.ReadOnly = True
+        Me.FormulaAdic3dec.Visible = False
+        '
         'TabPage3
         '
         Me.TabPage3.BackColor = System.Drawing.SystemColors.Control
@@ -805,6 +906,12 @@ Partial Class IngresoEspecificacionesMP
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents btnAgregarRenglon As System.Windows.Forms.Button
     Friend WithEvents btnNotas As System.Windows.Forms.Button
+    Friend WithEvents NroRenglonIngles As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents EnsayoIngles As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents EspecificacionIngles As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DescEnsayoIngles As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents FarmacopeaIngles As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents UnidadEspecifIngles As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents NroRenglon As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Ensayo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Especificacion As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -828,10 +935,14 @@ Partial Class IngresoEspecificacionesMP
     Friend WithEvents Variable8 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Variable9 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Variable10 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents NroRenglonIngles As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents EnsayoIngles As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents EspecificacionIngles As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DescEnsayoIngles As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents FarmacopeaIngles As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents UnidadEspecifIngles As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents FormulaAdic1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents FormulaAdic2 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents FormulaAdic3 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents FormulaAdic1dec As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents FormulaAdic2dec As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents FormulaAdic3dec As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents txtPaso As System.Windows.Forms.TextBox
+    Friend WithEvents Label11 As System.Windows.Forms.Label
+    Friend WithEvents rbPool As System.Windows.Forms.RadioButton
+    Friend WithEvents rbFinal As System.Windows.Forms.RadioButton
 End Class

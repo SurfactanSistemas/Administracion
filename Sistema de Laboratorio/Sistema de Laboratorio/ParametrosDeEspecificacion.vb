@@ -5,10 +5,11 @@ Public Class ParametrosDeEspecificacion : Implements INotificaActualizacion, ITr
     Dim Renglon As Integer
     Private ReadOnly Terminado As String
     Dim WID As String
+    Private WDecimales As Integer = 2
     
     Dim WparametrosFormula(11) As String
 
-    Sub New(Optional ByVal Terminado As String = "", Optional ByVal Fila As Integer = 0, Optional ByVal Permiso As Boolean = False)
+    Sub New(Optional ByVal Terminado As String = "", Optional ByVal Fila As Integer = 0, Optional ByVal Permiso As Boolean = False, Optional ByVal Decimales As Integer = 2)
 
         ' Llamada necesaria para el diseñador.
         InitializeComponent()
@@ -17,6 +18,7 @@ Public Class ParametrosDeEspecificacion : Implements INotificaActualizacion, ITr
 
         Renglon = Fila
         Me.Terminado = Terminado
+        Me.WDecimales = Decimales
 
         If Permiso = False Then
             For Each c As TextBox In Me.gbVariables.Controls.OfType(Of TextBox)()
@@ -58,6 +60,8 @@ Public Class ParametrosDeEspecificacion : Implements INotificaActualizacion, ITr
             txtDecAdic1.Text = Trim(OrDefault(row.Item("FormulaAdic1Dec"), "2"))
             txtDecAdic2.Text = Trim(OrDefault(row.Item("FormulaAdic2Dec"), "2"))
             txtDecAdic3.Text = Trim(OrDefault(row.Item("FormulaAdic3Dec"), "2"))
+            WDecimales = Val(Trim(OrDefault(row.Item("Decimales"), "2")))
+            WDecimales = Val(Trim(OrDefault(row.Item("Unidad"), "")))
 
             txtDescripcion.Text = Trim(OrDefault(row.Item("Descripcion"), ""))
             If Renglon = 0 And txtDescripcion.Text <> "" Then txtDescripcion.Text = "<--" & txtDescripcion.Text & "-->"
@@ -117,20 +121,17 @@ Public Class ParametrosDeEspecificacion : Implements INotificaActualizacion, ITr
             End If
         End If
 
-
         Dim WOwner2 As IGrabadoDeFormula = TryCast(Owner, IGrabadoDeFormula)
 
         If WOwner2 IsNot Nothing Then
+
             WOwner2._GrabarFormulaMod(txtFormula.Text, WparametrosFormula, txtDescripcion.Text, Renglon, False, txtAdic1.Text, txtAdic2.Text, txtAdic3.Text, txtDecAdic1.Text, txtDecAdic2.Text, txtDecAdic3.Text)
+
             Close()
         End If
 
     End Sub
-
-    Private Sub ParametrosDeEspecificacion_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-    End Sub
-
+    
     Private Sub btnCancelar_Click(sender As Object, e As EventArgs) Handles btnCancelar.Click
         Me.Close()
     End Sub
@@ -349,6 +350,8 @@ Public Class ParametrosDeEspecificacion : Implements INotificaActualizacion, ITr
             Dim WReferencias(11, 2) As String
             Dim WFormula As String = Trim(txtFormula.Text)
             Dim Wvalor As String = ""
+            WDecimales = OrDefault(row("Decimales"), 2)
+            Dim WUnidad As String = OrDefault(row("Unidad"), "")
             Dim WRenglon As Short = 0
 
             For i = 1 To 10
@@ -380,7 +383,7 @@ Public Class ParametrosDeEspecificacion : Implements INotificaActualizacion, ITr
             WAdicionales(1, 1) = txtDecAdic2.Text.Trim
             WAdicionales(2, 1) = txtDecAdic3.Text.Trim
 
-            With New IngresoVariablesFormula(WFormula, Wvariables, Wvalor, Nothing, Nothing, Renglon, WReferencias, False, Terminado, WAdicionales)
+            With New IngresoVariablesFormula(WFormula, Wvariables, Wvalor, Nothing, WDecimales, Renglon, WReferencias, False, Terminado, WAdicionales, Unidad:=WUnidad)
                 .Show(Me)
             End With
         End If
@@ -401,7 +404,15 @@ Public Class ParametrosDeEspecificacion : Implements INotificaActualizacion, ITr
 
     Private Sub btnTraer_Click(sender As Object, e As EventArgs) Handles btnTraer.Click
 
-        With New Util.AyudaGeneral(GetAll("SELECT distinct f.Terminado As Codigo, t.Descripcion FROM SurfactanSa.dbo.Terminado t INNER JOIN Surfactan_II.dbo.FormulasDeEnsayos f ON f.Terminado = t.Codigo ORDER BY f.Terminado, t.Descripcion"), "SELECCIONE EL CODIGO DEL PRODUCTO")
+        Dim tabla As DataTable = Nothing
+
+        If Terminado.Replace(" ", "").Length = 12 Then
+            tabla = GetAll("SELECT distinct f.Terminado As Codigo, t.Descripcion FROM SurfactanSa.dbo.Terminado t INNER JOIN Surfactan_II.dbo.FormulasDeEnsayos f ON f.Terminado = t.Codigo ORDER BY f.Terminado, t.Descripcion")
+        Else
+            tabla = GetAll("SELECT distinct f.Terminado As Codigo, a.Descripcion FROM SurfactanSa.dbo.Articulo a INNER JOIN Surfactan_II.dbo.FormulasDeEnsayos f ON f.Terminado = a.Codigo ORDER BY f.Terminado, a.Descripcion")
+        End If
+
+        With New Util.AyudaGeneral(tabla, "SELECCIONE EL CODIGO DEL PRODUCTO")
             .ShowDialog(Me)
         End With
 
@@ -433,6 +444,7 @@ Public Class ParametrosDeEspecificacion : Implements INotificaActualizacion, ITr
             txtDecAdic1.Text = Trim(OrDefault(row.Item("FormulaAdic1dec"), "2"))
             txtDecAdic2.Text = Trim(OrDefault(row.Item("FormulaAdic2dec"), "2"))
             txtDecAdic3.Text = Trim(OrDefault(row.Item("FormulaAdic3dec"), "2"))
+            WDecimales = Val(OrDefault(row.Item("Decimales"), "2"))
 
             txtDescripcion.Text = Trim(OrDefault(row.Item("Descripcion"), ""))
             If Renglon = 0 And txtDescripcion.Text <> "" Then txtDescripcion.Text = "<--" & txtDescripcion.Text & "-->"
