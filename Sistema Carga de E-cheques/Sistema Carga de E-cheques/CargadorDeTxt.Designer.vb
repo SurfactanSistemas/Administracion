@@ -32,6 +32,8 @@ Partial Class CargadorDeTxt
         Me.chk = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.DGV_RutasArchivos = New Util.DBDataGridView()
         Me.Rutas = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btn_CargarEnTabla = New System.Windows.Forms.Button()
+        Me.btn_Eliminar = New System.Windows.Forms.Button()
         Me.panel1.SuspendLayout()
         CType(Me.dgv_Cheques, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DGV_RutasArchivos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -147,11 +149,31 @@ Partial Class CargadorDeTxt
         Me.Rutas.HeaderText = "Rutas"
         Me.Rutas.Name = "Rutas"
         '
+        'btn_CargarEnTabla
+        '
+        Me.btn_CargarEnTabla.Location = New System.Drawing.Point(576, 56)
+        Me.btn_CargarEnTabla.Name = "btn_CargarEnTabla"
+        Me.btn_CargarEnTabla.Size = New System.Drawing.Size(75, 43)
+        Me.btn_CargarEnTabla.TabIndex = 12
+        Me.btn_CargarEnTabla.Text = "Cargar en BaseDatos"
+        Me.btn_CargarEnTabla.UseVisualStyleBackColor = True
+        '
+        'btn_Eliminar
+        '
+        Me.btn_Eliminar.Location = New System.Drawing.Point(399, 366)
+        Me.btn_Eliminar.Name = "btn_Eliminar"
+        Me.btn_Eliminar.Size = New System.Drawing.Size(75, 43)
+        Me.btn_Eliminar.TabIndex = 13
+        Me.btn_Eliminar.Text = "Eliminar marcados"
+        Me.btn_Eliminar.UseVisualStyleBackColor = True
+        '
         'CargadorDeTxt
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(817, 361)
+        Me.ClientSize = New System.Drawing.Size(817, 421)
+        Me.Controls.Add(Me.btn_Eliminar)
+        Me.Controls.Add(Me.btn_CargarEnTabla)
         Me.Controls.Add(Me.DGV_RutasArchivos)
         Me.Controls.Add(Me.btn_ObtenerDatos)
         Me.Controls.Add(Me.dgv_Cheques)
@@ -172,4 +194,6 @@ Partial Class CargadorDeTxt
     Friend WithEvents chk As System.Windows.Forms.DataGridViewCheckBoxColumn
     Friend WithEvents DGV_RutasArchivos As Util.DBDataGridView
     Friend WithEvents Rutas As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents btn_CargarEnTabla As System.Windows.Forms.Button
+    Friend WithEvents btn_Eliminar As System.Windows.Forms.Button
 End Class

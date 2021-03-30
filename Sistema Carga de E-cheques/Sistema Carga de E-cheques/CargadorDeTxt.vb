@@ -2,6 +2,7 @@
 Imports Util.Clases.Helper
 Imports Util.Clases.Query
 Imports System.IO
+Imports System.Security.Cryptography
 Imports System.Text.RegularExpressions
 Imports Microsoft.VisualBasic.FileIO
 
@@ -39,7 +40,7 @@ Public Class CargadorDeTxt
                         tablafinal.ImportRow(rowTabla)
                     Next
                 End If
-                
+
             Next
             dgv_Cheques.DataSource = tablafinal
         End If
@@ -95,7 +96,7 @@ Public Class CargadorDeTxt
 
     Private Sub RemoverDatosInesesarios(ByRef Tabla As DataTable)
         For i As Integer = 40 To 0 Step -1
-            If i = 1 Or i = 2 Or i = 4 Or i = 5 Or i = 6 Or i = 7 Or i = 10 Or i = 20 Or i = 23 Or i = 24 Then
+            If i = 0 Or i = 1 Or i = 2 Or i = 4 Or i = 5 Or i = 6 Or i = 7 Or i = 10 Or i = 20 Or i = 23 Or i = 24 Then
                 Continue For
             End If
             Tabla.Columns.RemoveAt(i)
@@ -230,4 +231,81 @@ Public Class CargadorDeTxt
     Private Sub txt_Archivo_DragLeave(sender As Object, e As EventArgs) Handles DGV_RutasArchivos.DragLeave
         TopMost = False
     End Sub
+
+    Private Sub btn_Eliminar_Click(sender As Object, e As EventArgs) Handles btn_Eliminar.Click
+        Dim listaEliminar As New List(Of Integer)
+        Dim contadorFila As Integer = 0
+        For Each row As DataGridViewRow In dgv_Cheques.Rows
+            If row.Cells.Item("Chk").Value = True Then
+                listaEliminar.Add(contadorFila)
+            End If
+            contadorFila += 1
+        Next
+        listaEliminar.Sort()
+        listaEliminar.Reverse()
+        Dim tabla As DataTable = dgv_Cheques.DataSource
+        For i = 0 To listaEliminar.Count - 1
+            tabla.Rows.RemoveAt(listaEliminar.Item(i))
+        Next
+
+    End Sub
+
+    Private Sub btn_CargarEnTabla_Click(sender As Object, e As EventArgs) Handles btn_CargarEnTabla.Click
+
+        Dim SQLCnslt As String = ""
+        Dim ListaSQLCnslt As New List(Of String)
+
+        Dim tabla As DataTable = dgv_Cheques.DataSource
+        For Each rowTabla As DataRow In Tabla.Rows
+
+            Dim WRazonEmisor As String = rowTabla.Item(0)
+            Dim WNCheque As String = rowTabla.Item(1)
+            Dim WBancoEmisor As String = rowTabla.Item(2)
+            Dim WImporte As Double = Val(rowTabla.Item(3))
+            Dim AuxFechaPago As Date = rowTabla.Item(4)
+            Dim WFechaPago As String = AuxFechaPago.ToString("dd/MM/yyyy")
+            Dim WOrdFechaPago As String = ordenaFecha(WFechaPago)
+            Dim WCuitEmisor As String = rowTabla.Item(5)
+            Dim AuxFechaEmision As Date = rowTabla.Item(6)
+            Dim WFechaEmision As String = AuxFechaEmision.ToString("dd/MM/yyyy")
+            Dim WOrdFechaEmision As String = ordenaFecha(WFechaEmision)
+            Dim WCaracterCheque As String = rowTabla.Item(7)
+            Dim WModoCheque As String = rowTabla.Item(8)
+            Dim WCuitEndoso As String = rowTabla.Item(9)
+            Dim WRazonEndoso As String = rowTabla.Item(10)
+
+            Dim WCLAVE As String = WNCheque & "-" & WCuitEmisor & "-" & formatonumerico(WImporte.ToString())
+
+            If VerificarExiste(WCLAVE) Then
+                Continue For
+            End If
+
+            SQLCnslt = "INSERT INTO Carga_ChequesE (Clave, NroCheque, BancoEmisor, Importe, FechaPago, OrdFechaPago, CuitEmisor, " _
+                        & "Emisor_Razon, FechaEmisor , OrdFechaEmisor, Caracter_Cheque, Modo_Cheque, Endoso_Documento, Endoso_Razon) " _
+                        & "VALUES('" & WCLAVE & "', '" & WNCheque & "', '" & WBancoEmisor & "', '" & formatonumerico(WImporte) & "', '" & WFechaPago & "', " _
+                        & "'" & WOrdFechaPago & "', '" & WCuitEmisor & "', '" & WRazonEmisor & "', '" & WFechaEmision & "', '" & WOrdFechaEmision & "', " _
+                        & "'" & WCaracterCheque & "', '" & WModoCheque & "', '" & WCuitEndoso & "', '" & WRazonEndoso & "')"
+
+            ListaSQLCnslt.Add(SQLCnslt)
+
+        Next
+        Try
+            If ListaSQLCnslt.Count > 0 Then
+                ExecuteNonQueries("SurfactanSa", ListaSQLCnslt.ToArray())
+            End If
+        Catch ex As Exception
+
+        End Try
+        
+    End Sub
+    Private Function VerificarExiste(ByVal WCLAVE As String)
+        Dim SQLCnslt As String = "SELECT Clave FROM Carga_ChequesE WHERE Clave = '" & WCLAVE & "'"
+        Dim RowCarga As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+        If RowCarga IsNot Nothing Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+
 End Class

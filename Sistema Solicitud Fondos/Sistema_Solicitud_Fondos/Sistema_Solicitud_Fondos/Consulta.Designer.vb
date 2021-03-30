@@ -31,9 +31,9 @@ Partial Class Consulta
         Me.cbx_Opcion = New System.Windows.Forms.ComboBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.DGV_Consulta = New Util.DBDataGridView()
+        Me.btn_Cancelar = New System.Windows.Forms.Button()
         Me.Codigo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.btn_Cancelar = New System.Windows.Forms.Button()
         Me.panel1.SuspendLayout()
         CType(Me.DGV_Consulta, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -134,21 +134,6 @@ Partial Class Consulta
         Me.DGV_Consulta.Size = New System.Drawing.Size(450, 252)
         Me.DGV_Consulta.TabIndex = 12
         '
-        'Codigo
-        '
-        Me.Codigo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Codigo.DataPropertyName = "Codigo"
-        Me.Codigo.HeaderText = "Codigo"
-        Me.Codigo.Name = "Codigo"
-        Me.Codigo.Width = 65
-        '
-        'Descripcion
-        '
-        Me.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.Descripcion.DataPropertyName = "Descripcion"
-        Me.Descripcion.HeaderText = "Descripcion"
-        Me.Descripcion.Name = "Descripcion"
-        '
         'btn_Cancelar
         '
         Me.btn_Cancelar.Location = New System.Drawing.Point(209, 361)
@@ -157,6 +142,23 @@ Partial Class Consulta
         Me.btn_Cancelar.TabIndex = 13
         Me.btn_Cancelar.Text = "CANCELAR"
         Me.btn_Cancelar.UseVisualStyleBackColor = True
+        '
+        'Codigo
+        '
+        Me.Codigo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Codigo.DataPropertyName = "Codigo"
+        Me.Codigo.HeaderText = "Codigo"
+        Me.Codigo.Name = "Codigo"
+        Me.Codigo.ReadOnly = True
+        Me.Codigo.Width = 65
+        '
+        'Descripcion
+        '
+        Me.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Descripcion.DataPropertyName = "Descripcion"
+        Me.Descripcion.HeaderText = "Descripcion"
+        Me.Descripcion.Name = "Descripcion"
+        Me.Descripcion.ReadOnly = True
         '
         'Consulta
         '

@@ -51,6 +51,8 @@ Public Class ProveedoresABM
         cmbEstado.BackColor = WBColorAntEstado
         cmbEstado.ForeColor = WColorAntEstado 'Color.White
 
+        cbx_TipoDolar.SelectedIndex = 0
+
         _ContraerFormulario()
 
         setDefaults()
@@ -193,7 +195,8 @@ Public Class ProveedoresABM
                     & "ContactoEmail3 = '" & Mid(Trim(_Contacto3.Item4), 1, 50) & "', " _
                     & "ClienteAsociado = '" & Mid(Trim(txtClienteAsociado.Text), 1, 6) & "', " _
                     & "Cbu = '" & Trim(txtCbu.Text) & "', " _
-                    & "Inhabilitado = '" & Trim(_Inhabilitado) & "' " _
+                    & "Inhabilitado = '" & Trim(_Inhabilitado) & "', " _
+                    & "TipoDolar = '" & Trim(cbx_TipoDolar.SelectedIndex) & "' " _
                     & " WHERE Proveedor = '" & Trim(txtCodigo.Text) & "'"
 
         Try
@@ -445,6 +448,8 @@ Public Class ProveedoresABM
 
         proveedor.Inhabilitado = IIf(CKBProveedorInactivo.Checked, "1", "0")
 
+        proveedor.TipoDolar = cbx_TipoDolar.SelectedIndex
+
         Try
             DAOProveedor.agregarProveedor(proveedor)
 
@@ -478,7 +483,7 @@ Public Class ProveedoresABM
             cn.Open()
             cm.Connection = cn
 
-            cm.CommandText = "UPDATE Proveedor SET MailOp = '" & txtMailOp.Text.Trim & "', Cbu = '" & txtCbu.Text.Trim & "' WHERE Proveedor = '" & WProveedor & "'"
+            cm.CommandText = "UPDATE Proveedor SET MailOp = '" & txtMailOp.Text.Trim & "', Cbu = '" & txtCbu.Text.Trim & "', TipoDolar = '" & cbx_TipoDolar.SelectedIndex & "' WHERE Proveedor = '" & WProveedor & "'"
 
             cm.ExecuteNonQuery()
 
@@ -632,6 +637,9 @@ Public Class ProveedoresABM
 
         txtMailOp.Text = _ProveedorMailOp().Trim
 
+        cbx_TipoDolar.SelectedIndex = traerTipoDolar(proveedor.id)
+
+
         ' Verificas si se encuentra en estado
         If Val(proveedor.estado) = 2 Then
             cmbEstado.BackColor = Color.Red
@@ -652,6 +660,13 @@ Public Class ProveedoresABM
 
     End Sub
 
+    Private Function traerTipoDolar(ByVal Proveedor As String) As Integer
+        Dim SQLCnslt As String = "SELECT TipoDolar FROM Proveedor WHERE Proveedor = '" & Proveedor & "'"
+        Dim RowProveedor As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+        If RowProveedor IsNot Nothing Then
+            Return IIf(IsDBNull(RowProveedor.Item("TipoDolar")), 0, RowProveedor.Item("TipoDolar"))
+        End If
+    End Function
     Private Function _ProveedorEmbargado() As Boolean
         Dim embargado = False
         Dim cn = New SqlConnection()

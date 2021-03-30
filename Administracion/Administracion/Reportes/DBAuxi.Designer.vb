@@ -2634,6 +2634,8 @@ Partial Public Class DBAuxi
 
         Private columnAceptaTransf As Global.System.Data.DataColumn
 
+        Private columnTipoDolar As Global.System.Data.DataColumn
+
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public Sub New()
@@ -3070,6 +3072,14 @@ Partial Public Class DBAuxi
         End Property
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public ReadOnly Property TipoDolarColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTipoDolar
+            End Get
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
          Global.System.ComponentModel.Browsable(False)> _
         Public ReadOnly Property Count() As Integer
@@ -3156,9 +3166,10 @@ Partial Public Class DBAuxi
                     ByVal FormaPago As String, _
                     ByVal NombreCheque As String, _
                     ByVal AceptaECheque As Boolean, _
-                    ByVal AceptaTransf As Boolean) As impCtaCtePrvNetRow
+                    ByVal AceptaTransf As Boolean, _
+                    ByVal TipoDolar As Integer) As impCtaCtePrvNetRow
             Dim rowimpCtaCtePrvNetRow As impCtaCtePrvNetRow = CType(Me.NewRow, impCtaCtePrvNetRow)
-            Dim columnValuesArray() As Object = New Object() {Clave, Proveedor, Letra, Tipo, Punto, Numero, Fecha, Estado, Vencimiento, Vencimiento1, Total, Saldo, OrdFecha, OrdVencimiento, Impre, Empresa, SaldoList, NroInterno, Orden, Acumulado, Titulo, Titulo4, Titulo3, Titulo2, Titulo1, Impre1, Impre2, Impre3, Impre4, Impre5, TituloII, RetIb, RetGanan, AcuNeto, Paridad, TotalUs, SaldoUs, AcumulaUs, Pago, PesosOrig, DifCambio, AcumDifCambio, AcumPesosOrig, MarcaVirtual, Nombre, ImpreCuitCliente, FormaPago, NombreCheque, AceptaECheque, AceptaTransf}
+            Dim columnValuesArray() As Object = New Object() {Clave, Proveedor, Letra, Tipo, Punto, Numero, Fecha, Estado, Vencimiento, Vencimiento1, Total, Saldo, OrdFecha, OrdVencimiento, Impre, Empresa, SaldoList, NroInterno, Orden, Acumulado, Titulo, Titulo4, Titulo3, Titulo2, Titulo1, Impre1, Impre2, Impre3, Impre4, Impre5, TituloII, RetIb, RetGanan, AcuNeto, Paridad, TotalUs, SaldoUs, AcumulaUs, Pago, PesosOrig, DifCambio, AcumDifCambio, AcumPesosOrig, MarcaVirtual, Nombre, ImpreCuitCliente, FormaPago, NombreCheque, AceptaECheque, AceptaTransf, TipoDolar}
             rowimpCtaCtePrvNetRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowimpCtaCtePrvNetRow)
             Return rowimpCtaCtePrvNetRow
@@ -3231,6 +3242,7 @@ Partial Public Class DBAuxi
             Me.columnNombreCheque = MyBase.Columns("NombreCheque")
             Me.columnAceptaECheque = MyBase.Columns("AceptaECheque")
             Me.columnAceptaTransf = MyBase.Columns("AceptaTransf")
+            Me.columnTipoDolar = MyBase.Columns("TipoDolar")
         End Sub
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
@@ -3336,6 +3348,8 @@ Partial Public Class DBAuxi
             MyBase.Columns.Add(Me.columnAceptaECheque)
             Me.columnAceptaTransf = New Global.System.Data.DataColumn("AceptaTransf", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnAceptaTransf)
+            Me.columnTipoDolar = New Global.System.Data.DataColumn("TipoDolar", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnTipoDolar)
             Me.columnTitulo4.Caption = "Titulo"
             Me.columnTitulo3.Caption = "Titulo"
             Me.columnTitulo2.Caption = "Titulo"
@@ -5939,6 +5953,21 @@ Partial Public Class DBAuxi
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Property TipoDolar() As Integer
+            Get
+                Try
+                    Return CType(Me(Me.tableimpCtaCtePrvNet.TipoDolarColumn), Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("El valor de la columna 'TipoDolar' de la tabla 'impCtaCtePrvNet' es DBNull.", e)
+                End Try
+            End Get
+            Set(value As Integer)
+                Me(Me.tableimpCtaCtePrvNet.TipoDolarColumn) = value
+            End Set
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public Function IsClaveNull() As Boolean
             Return Me.IsNull(Me.tableimpCtaCtePrvNet.ClaveColumn)
         End Function
@@ -6535,6 +6564,18 @@ Partial Public Class DBAuxi
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public Sub SetAceptaTransfNull()
             Me(Me.tableimpCtaCtePrvNet.AceptaTransfColumn) = Global.System.Convert.DBNull
+        End Sub
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Function IsTipoDolarNull() As Boolean
+            Return Me.IsNull(Me.tableimpCtaCtePrvNet.TipoDolarColumn)
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Sub SetTipoDolarNull()
+            Me(Me.tableimpCtaCtePrvNet.TipoDolarColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
 

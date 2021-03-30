@@ -13,6 +13,7 @@ Public Class Gestion_Solicitudes : Implements IActualizaSolicitudes, IContraseñ
 
     Private Sub Gestion_Solicitudes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         CargarGrilla()
+        Marcar_VistosPopup()
     End Sub
 
     Private Sub CargarGrilla()
@@ -24,11 +25,11 @@ Public Class Gestion_Solicitudes : Implements IActualizaSolicitudes, IContraseñ
                                  & "FROM SolicitudFondos s LEFT JOIN Proveedor p ON s.Proveedor = p.Proveedor " _
                                  & "LEFT JOIN Cuenta c ON s.Cuenta = c.Cuenta WHERE s.OrdenPago = '' " _
                                  & "AND (s.Estado = 'AUTORIZO' OR s.Estado = '' OR s.Estado is NULL) " _
-                                 & "ORDER BY s.OrdFecha asc"
+                                 & "ORDER BY s.OrdFechaRequerida asc"
         Try
             Dim tablaSoli As DataTable = GetAll(SQLCnslt, "SurfactanSa")
             If tablaSoli.Rows.Count > 0 Then
-                DGV_Solicitudes.DataSource = tablaSoli
+               DGV_Solicitudes.DataSource = tablaSoli
             Else
                 tablaSoli = New DBAuxi.GrillaGestorDataTable()
                 DGV_Solicitudes.DataSource = tablaSoli
@@ -48,7 +49,16 @@ Public Class Gestion_Solicitudes : Implements IActualizaSolicitudes, IContraseñ
         End Try
     End Sub
 
+    Private Sub Marcar_VistosPopup()
+        Try
+            Dim SQLCnslt As String = "UPDATE SolicitudFondos SET MarcaPopUp = 'X' WHERE MarcaPopup <> 'X'"
+            ExecuteNonQueries("SurfactanSa", SQLCnslt)
+        Catch ex As Exception
 
+        End Try
+
+
+    End Sub
     Private Sub PintarAutorizadosRechazados()
         For Each row As DataGridViewRow In DGV_Solicitudes.Rows
             With row

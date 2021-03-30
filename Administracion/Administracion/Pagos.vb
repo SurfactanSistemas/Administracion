@@ -2849,7 +2849,7 @@ Public Class Pagos
 
             If WEsAnticipo Then
 
-                Select txtProveedor.Text
+                Select Case txtProveedor.Text
                     Case "10167878480", "10000000100", "10071081483", "10069345023", "10066352912", "10023969933", "10014123562"
                         If MsgBox("Se detectó que está grabando un Anticipo. ¿Desea que se envíe la OP por Mail?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
                             btnEnviarAviso_Click(Nothing, Nothing)
@@ -2858,6 +2858,7 @@ Public Class Pagos
                 End Select
 
             End If
+
 
             ' Actualizamos los numero de Certificados de Retenciones y datos historicos.
             ZSql = ""
@@ -2892,7 +2893,7 @@ Public Class Pagos
             If btn_ConsultaSoliFondos.Visible = True Then
                 'SI ESTA VISIBLE EL BOTON DE SOLICITUD FONDOS
                 'ACTUALIZAMOS LA TABLA CON EL NUMERO DE ORDEN DE PAGO
-                Dim SQLCnlst As String = "UPDATE SolicitudFondos SET OrdenPago = '" & Trim(txtOrdenPago.Text) & "' WHERE NroSolicitud = '" & NroSoliInterno & "'"
+                Dim SQLCnlst As String = "UPDATE SolicitudFondos SET OrdenPago = '" & Trim(txtOrdenPago.Text) & "', MarcaPopUp_Pachi = 'X' WHERE NroSolicitud = '" & NroSoliInterno & "'"
                 ExecuteNonQueries("SurfactanSa", {SQLCnlst})
 
 

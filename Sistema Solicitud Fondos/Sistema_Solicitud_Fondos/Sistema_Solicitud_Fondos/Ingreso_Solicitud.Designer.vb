@@ -43,6 +43,7 @@ Partial Class Ingreso_Solicitud
         Me.Label9 = New System.Windows.Forms.Label()
         Me.chk_Efectivo = New System.Windows.Forms.CheckBox()
         Me.gp_FormasDePago = New System.Windows.Forms.GroupBox()
+        Me.chk_Tarjeta = New System.Windows.Forms.CheckBox()
         Me.chk_ChequePropio = New System.Windows.Forms.CheckBox()
         Me.chk_ChequeTerceros = New System.Windows.Forms.CheckBox()
         Me.chk_Echeq = New System.Windows.Forms.CheckBox()
@@ -80,7 +81,8 @@ Partial Class Ingreso_Solicitud
         Me.lbl_TipoDolar = New System.Windows.Forms.Label()
         Me.cbx_TipoDolar = New System.Windows.Forms.ComboBox()
         Me.btn_Autorizar = New System.Windows.Forms.Button()
-        Me.chk_Tarjeta = New System.Windows.Forms.CheckBox()
+        Me.Label22 = New System.Windows.Forms.Label()
+        Me.txt_Concepto_Pago = New System.Windows.Forms.TextBox()
         Me.panel1.SuspendLayout()
         Me.gp_FormasDePago.SuspendLayout()
         Me.gbx_Retenciones.SuspendLayout()
@@ -293,6 +295,16 @@ Partial Class Ingreso_Solicitud
         Me.gp_FormasDePago.TabIndex = 23
         Me.gp_FormasDePago.TabStop = False
         Me.gp_FormasDePago.Text = "Formas de Pago"
+        '
+        'chk_Tarjeta
+        '
+        Me.chk_Tarjeta.AutoSize = True
+        Me.chk_Tarjeta.Location = New System.Drawing.Point(276, 51)
+        Me.chk_Tarjeta.Name = "chk_Tarjeta"
+        Me.chk_Tarjeta.Size = New System.Drawing.Size(59, 17)
+        Me.chk_Tarjeta.TabIndex = 27
+        Me.chk_Tarjeta.Text = "Tarjeta"
+        Me.chk_Tarjeta.UseVisualStyleBackColor = True
         '
         'chk_ChequePropio
         '
@@ -660,21 +672,31 @@ Partial Class Ingreso_Solicitud
         Me.btn_Autorizar.UseVisualStyleBackColor = True
         Me.btn_Autorizar.Visible = False
         '
-        'chk_Tarjeta
+        'Label22
         '
-        Me.chk_Tarjeta.AutoSize = True
-        Me.chk_Tarjeta.Location = New System.Drawing.Point(276, 51)
-        Me.chk_Tarjeta.Name = "chk_Tarjeta"
-        Me.chk_Tarjeta.Size = New System.Drawing.Size(59, 17)
-        Me.chk_Tarjeta.TabIndex = 27
-        Me.chk_Tarjeta.Text = "Tarjeta"
-        Me.chk_Tarjeta.UseVisualStyleBackColor = True
+        Me.Label22.AutoSize = True
+        Me.Label22.Location = New System.Drawing.Point(3, 530)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(68, 39)
+        Me.Label22.TabIndex = 42
+        Me.Label22.Text = "Banco y" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & " Fecha de" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Acrediitacion"
+        '
+        'txt_Concepto_Pago
+        '
+        Me.txt_Concepto_Pago.Location = New System.Drawing.Point(71, 527)
+        Me.txt_Concepto_Pago.MaxLength = 200
+        Me.txt_Concepto_Pago.Multiline = True
+        Me.txt_Concepto_Pago.Name = "txt_Concepto_Pago"
+        Me.txt_Concepto_Pago.Size = New System.Drawing.Size(359, 79)
+        Me.txt_Concepto_Pago.TabIndex = 41
         '
         'Ingreso_Solicitud
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(539, 514)
+        Me.ClientSize = New System.Drawing.Size(539, 608)
+        Me.Controls.Add(Me.Label22)
+        Me.Controls.Add(Me.txt_Concepto_Pago)
         Me.Controls.Add(Me.btn_Autorizar)
         Me.Controls.Add(Me.lbl_TipoDolar)
         Me.Controls.Add(Me.cbx_TipoDolar)
@@ -710,7 +732,9 @@ Partial Class Ingreso_Solicitud
         Me.Controls.Add(Me.txt_FechaSolicitud)
         Me.Controls.Add(Me.txt_Solicitante)
         Me.Controls.Add(Me.panel1)
+        Me.Location = New System.Drawing.Point(20, 20)
         Me.Name = "Ingreso_Solicitud"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.panel1.ResumeLayout(False)
         Me.panel1.PerformLayout()
         Me.gp_FormasDePago.ResumeLayout(False)
@@ -780,4 +804,6 @@ Partial Class Ingreso_Solicitud
     Friend WithEvents cbx_TipoDolar As System.Windows.Forms.ComboBox
     Friend WithEvents btn_Autorizar As System.Windows.Forms.Button
     Friend WithEvents chk_Tarjeta As System.Windows.Forms.CheckBox
+    Friend WithEvents Label22 As System.Windows.Forms.Label
+    Friend WithEvents txt_Concepto_Pago As System.Windows.Forms.TextBox
 End Class

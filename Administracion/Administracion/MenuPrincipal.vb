@@ -275,8 +275,8 @@ Public Class MenuPrincipal
         GestionarSolicitudDeFondosToolStripMenuItem.Visible = Not _EsPellital()
         InformeRecepcionSinFacturasRegistradasToolStripMenuItem.Visible = Not _EsPellital()
 
-        SolicitudDeFondosToolStripMenuItem.Visible = False
-        GestionarSolicitudDeFondosToolStripMenuItem.Visible = False
+        'SolicitudDeFondosToolStripMenuItem.Visible = False
+        'GestionarSolicitudDeFondosToolStripMenuItem.Visible = False
         ImportarEchequesToolStripMenuItem.Visible = False
         
     End Sub

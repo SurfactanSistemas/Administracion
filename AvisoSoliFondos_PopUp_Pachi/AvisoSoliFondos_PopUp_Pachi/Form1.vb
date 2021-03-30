@@ -10,7 +10,7 @@ Public Class Form1
         Me.BringToFront()
         Me.WindowState = FormWindowState.Normal
         TopMost = True
-        Dim SQLCnslt As String = "SELECT MarcaPopUp FROM SolicitudFondos WHERE MarcaPopUp <> 'X'"
+        Dim SQLCnslt As String = "SELECT MarcaPopUp_Pachi FROM SolicitudFondos WHERE MarcaPopUp_Pachi <> 'X' AND Estado = 'AUTORIZO' "
         Dim RowPopUp As DataTable = getall(SQLCnslt, "SurfactanSa")
         If RowPopUp.Rows.Count = 0 Then
             Close()

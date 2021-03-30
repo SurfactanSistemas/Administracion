@@ -73,6 +73,9 @@
       <HintPath>..\packages\ADGV.0.1.0.10\lib\net40\AdvancedDataGridView.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="ClasesCompartidas">
+      <HintPath>..\..\..\..\ClasesCompartidas\ClasesCompartidas\bin\x86\Debug\ClasesCompartidas.dll</HintPath>
+    </Reference>
     <Reference Include="CRVsPackageLib, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>

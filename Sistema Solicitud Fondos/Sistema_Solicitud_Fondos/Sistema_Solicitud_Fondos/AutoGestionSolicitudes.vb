@@ -24,7 +24,7 @@ Public Class AutoGestionSolicitudes
                                  & "LEFT JOIN Cuenta c ON s.Cuenta = c.Cuenta " _
                                  & "WHERE s.OrdenPago = '' AND (s.Solicitante = '" & Trim(Operador.Descripcion) & "' OR s.Operador_Sector = '" & Trim(Operador.Solifondos_Sector) & "')" _
                                  & "" & Filtro & "" _
-                                 & "ORDER BY s.OrdFecha asc"
+                                 & "ORDER BY s.OrdFechaRequerida asc"
         Try
             Dim tablaSoli As DataTable = GetAll(SQLCnslt, "SurfactanSa")
             If tablaSoli.Rows.Count > 0 Then

@@ -55,6 +55,19 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
         Dim SQLCnslt As String = ""
         If NroSoli <> 0 Then
 
+            SQLCnslt = "SELECT SolicitudFondosEdicion FROM Operador WHERE Clave = '" & Operador.Clave & "'"
+            Dim rowOperador As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+            If rowOperador IsNot Nothing Then
+                Dim SolifondosEdicion As String = IIf(IsDBNull(rowOperador.Item("SolicitudFondosEdicion")), "", rowOperador.Item("SolicitudFondosEdicion"))
+                If SolifondosEdicion = "S" Then
+                    Me.Size = New Size(555, 649)
+                    Me.MaximumSize = New Size(555, 649)
+                Else
+                    Me.Size = New Size(555, 555)
+                    Me.MaximumSize = New Size(555, 555)
+                End If
+            End If
+
             If MostrarAutorizar = "Mostrar" Then
                 btn_Autorizar.Visible = True
             End If
@@ -87,7 +100,7 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
                 Dim EstadoSoli As String = IIf(IsDBNull(rowsoli.Item("Estado")), "", rowsoli.Item("Estado"))
                 If Trim(UCase(EstadoSoli)) = "AUTORIZO" Then
                     btn_Autorizar.Visible = False
-                   
+
                 End If
 
                 'OBTENEMOS LA PARIDAD
@@ -119,6 +132,7 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
                 txt_Observaciones.Text = Trim(IIf(IsDBNull(rowsoli.Item("ObservacionesPago")), "", rowsoli.Item("ObservacionesPago")))
                 txt_Titulo.Text = Trim(IIf(IsDBNull(rowsoli.Item("Titulo")), "", rowsoli.Item("Titulo")))
                 txt_Concepto.Text = Trim(IIf(IsDBNull(rowsoli.Item("Concepto")), "", rowsoli.Item("Concepto")))
+                txt_Concepto_Pago.Text = Trim(IIf(IsDBNull(rowsoli.Item("Concepto_Pago")), "", rowsoli.Item("Concepto_Pago")))
                 txt_FechaSolicitud.Text = Trim(IIf(IsDBNull(rowsoli.Item("Fecha")), "", rowsoli.Item("Fecha")))
 
                 txt_Proveedor.Text = IIf(IsDBNull(rowsoli.Item("Proveedor")), "", Trim(rowsoli.Item("Proveedor")))
@@ -179,11 +193,12 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
             'DESHABILITAMOS LOS CAMPOS QUE NO PUEDE EDITAR
             btn_Limpiar.Visible = False
 
-            '  chk_Echeq.Enabled = False
-            '  chk_Efectivo.Enabled = False
-            '  chk_Tranferencia.Enabled = False
-            '  chk_ChequeTerceros.Enabled = False
-            '  chk_ChequePropio.Enabled = False
+            'chk_Echeq.Enabled = False
+            'chk_Efectivo.Enabled = False
+            'chk_Tranferencia.Enabled = False
+            'chk_ChequeTerceros.Enabled = False
+            'chk_ChequePropio.Enabled = False
+
 
             cbx_Tipo.Enabled = False
             cbx_Moneda.Enabled = False
@@ -195,6 +210,22 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
             txt_Cuenta.ReadOnly = True
             txt_Proveedor.ReadOnly = True
             txt_Importe.ReadOnly = True
+
+            Dim EstadoSoli2 As String = IIf(IsDBNull(rowsoli.Item("Estado")), "", rowsoli.Item("Estado"))
+            If Trim(UCase(EstadoSoli2)) <> "AUTORIZO" Then
+                cbx_Tipo.Enabled = True
+                cbx_Moneda.Enabled = True
+                cbx_TipoDolar.Enabled = True
+
+                txt_Titulo.ReadOnly = False
+                txt_Concepto.ReadOnly = False
+                txt_Solicitante.ReadOnly = False
+                txt_FechaSolicitud.ReadOnly = False
+                txt_Cuenta.ReadOnly = False
+                txt_Proveedor.ReadOnly = False
+                txt_Importe.ReadOnly = False
+
+            End If
         End If
 
     End Sub
@@ -452,6 +483,7 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
                        & "ObservacionesPago, " _
                        & "Titulo, " _
                        & "Concepto, " _
+                       & "Concepto_Pago, " _
                        & "Moneda, " _
                        & "TipoDolar, " _
                        & "Importe, " _
@@ -479,6 +511,7 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
                        & "'" & Trim(txt_Observaciones.Text) & "', " _
                        & "'" & Trim(txt_Titulo.Text) & "', " _
                        & "'" & Trim(txt_Concepto.Text) & "', " _
+                       & "'" & Trim(txt_Concepto_Pago.Text) & "', " _
                        & "'" & cbx_Moneda.SelectedIndex & "', " _
                        & "'" & cbx_TipoDolar.SelectedIndex & "', " _
                        & "'" & formatonumerico(txt_Importe.Text) & "', " _
@@ -651,6 +684,9 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
                     If RowProveedor IsNot Nothing Then
                         txt_ProveedorDescrip.Text = Trim(RowProveedor.Item("Nombre"))
                         cbx_Moneda.Focus()
+                        If Val(txt_Importe.Text) > 0 Then
+                            preprarcalculos()
+                        End If
                     Else
                         MsgBox("No se encontro un proveedor con ese codigo, verifique", vbExclamation)
                         txt_Proveedor.SelectAll()
@@ -698,11 +734,19 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
                     If cbx_Moneda.SelectedIndex = 2 Then
                         lbl_TipoDolar.Visible = True
                         cbx_TipoDolar.Visible = True
+                        If Val(txt_Paridad.Text) > 0 And Val(txt_Importe.Text) > 0 Then
+                            preprarcalculos()
+                        End If
                     Else
                         lbl_TipoDolar.Visible = False
                         cbx_TipoDolar.Visible = False
+                        If Val(txt_Importe.Text) > 0 Then
+                            preprarcalculos()
+                        End If
                     End If
                     txt_Importe.Focus()
+
+                   
                 End If
 
         End Select
@@ -712,12 +756,18 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
         If cbx_Moneda.SelectedIndex = 2 Then
             lbl_TipoDolar.Visible = True
             cbx_TipoDolar.Visible = True
+            If Val(txt_Paridad.Text) > 0 And Val(txt_Importe.Text) > 0 Then
+                preprarcalculos()
+            End If
         Else
             lbl_TipoDolar.Visible = False
             cbx_TipoDolar.Visible = False
+            If Val(txt_Importe.Text) > 0 Then
+                preprarcalculos()
+            End If
         End If
         txt_Importe.Focus()
-
+        
     End Sub
 
     Private Sub txt_Importe_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_Importe.KeyDown
@@ -725,17 +775,20 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
             Case Keys.Enter
 
                 If Val(txt_Importe.Text) > 0 Then
-                    txt_Importe.Text = formatonumerico(txt_Importe.Text)
-                    Multiplicaporparidad()
-                    _RecalcularRetenciones()
-                    txt_TotalApagar.Text = formatonumerico(Val(txt_ImportePesos.Text) - Val(txt_TotalRetenciones.Text))
-                    txt_FechaRequerida.Focus()
+                    preprarcalculos()
                 End If
             Case Keys.Escape
                 txt_Importe.Text = ""
         End Select
     End Sub
 
+    Private Sub preprarcalculos()
+        txt_Importe.Text = formatonumerico(txt_Importe.Text)
+        Multiplicaporparidad()
+        _RecalcularRetenciones()
+        txt_TotalApagar.Text = formatonumerico(Val(txt_ImportePesos.Text) - Val(txt_TotalRetenciones.Text))
+        txt_FechaRequerida.Focus()
+    End Sub
     Private Sub txt_FechaRequerida_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_FechaRequerida.KeyDown
         Select Case e.KeyData
             Case Keys.Enter
@@ -830,10 +883,16 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
                 txt_Proveedor.Text = Trim(Codigo)
                 txt_ProveedorDescrip.Text = Trim(Descripcion)
                 cbx_Moneda.Focus()
+                If Val(txt_Importe.Text) > 0 Then
+                    preprarcalculos()
+                End If
             Case 1
                 txt_Cuenta.Text = Trim(Codigo)
                 txt_CuentaDescrip.Text = Trim(Descripcion)
                 cbx_Moneda.Focus()
+                If Val(txt_Importe.Text) > 0 Then
+                    preprarcalculos()
+                End If
         End Select
     End Sub
 
@@ -1339,6 +1398,10 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
         End If
 
 
+        If Val(txt_Paridad.Text) > 0 And Val(txt_Importe.Text) > 0 Then
+            preprarcalculos()
+        End If
+
     End Sub
 
     Private Sub cbx_TipoDolar_KeyDown(sender As Object, e As KeyEventArgs) Handles cbx_TipoDolar.KeyDown
@@ -1358,6 +1421,11 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
                 WParidad = ZCambioDivisa
 
                 txt_Paridad.Text = WParidad
+
+
+                If Val(txt_Paridad.Text) > 0 And Val(txt_Importe.Text) > 0 Then
+                    preprarcalculos()
+                End If
         End Select
     End Sub
 
@@ -1439,6 +1507,9 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
         Select Case e.KeyData
             Case Keys.Enter
                 WParidad = Val(formatonumerico(txt_Paridad.Text))
+                If Val(txt_Paridad.Text) > 0 And Val(txt_Importe.Text) > 0 Then
+                    preprarcalculos()
+                End If
             Case Keys.Escape
                 txt_Paridad.Text = "0.00"
                 txt_Paridad.SelectAll()
@@ -1448,6 +1519,9 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
     Private Sub txt_Paridad_Leave(sender As Object, e As EventArgs) Handles txt_Paridad.Leave
         WParidad = Val(formatonumerico(txt_Paridad.Text))
         txt_Paridad.Text = Val(formatonumerico(txt_Paridad.Text))
+        If Val(txt_Paridad.Text) > 0 And Val(txt_Importe.Text) > 0 Then
+            preprarcalculos()
+        End If
     End Sub
 
 End Class
