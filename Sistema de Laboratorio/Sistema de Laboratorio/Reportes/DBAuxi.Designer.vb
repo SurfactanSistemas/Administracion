@@ -3580,6 +3580,8 @@ Partial Public Class DBAuxi
 
         Private columnVariables As Global.System.Data.DataColumn
 
+        Private columnPool As Global.System.Data.DataColumn
+
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public Sub New()
@@ -3704,6 +3706,14 @@ Partial Public Class DBAuxi
         End Property
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public ReadOnly Property PoolColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnPool
+            End Get
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
          Global.System.ComponentModel.Browsable(False)> _
         Public ReadOnly Property Count() As Integer
@@ -3740,9 +3750,9 @@ Partial Public Class DBAuxi
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-        Public Overloads Function AddPlanilllaEnsayosRow(ByVal Codigo As String, ByVal Descripcion As String, ByVal Ensayo As Integer, ByVal DescEnsayo As String, ByVal DescParametro As String, ByVal Parametro As String, ByVal Titulo As String, ByVal Etapa As String, ByVal Renglon As Integer, ByVal Variables As String) As PlanilllaEnsayosRow
+        Public Overloads Function AddPlanilllaEnsayosRow(ByVal Codigo As String, ByVal Descripcion As String, ByVal Ensayo As Integer, ByVal DescEnsayo As String, ByVal DescParametro As String, ByVal Parametro As String, ByVal Titulo As String, ByVal Etapa As String, ByVal Renglon As Integer, ByVal Variables As String, ByVal Pool As String) As PlanilllaEnsayosRow
             Dim rowPlanilllaEnsayosRow As PlanilllaEnsayosRow = CType(Me.NewRow, PlanilllaEnsayosRow)
-            Dim columnValuesArray() As Object = New Object() {Nothing, Codigo, Descripcion, Ensayo, DescEnsayo, DescParametro, Parametro, Titulo, Etapa, Renglon, Variables}
+            Dim columnValuesArray() As Object = New Object() {Nothing, Codigo, Descripcion, Ensayo, DescEnsayo, DescParametro, Parametro, Titulo, Etapa, Renglon, Variables, Pool}
             rowPlanilllaEnsayosRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowPlanilllaEnsayosRow)
             Return rowPlanilllaEnsayosRow
@@ -3776,6 +3786,7 @@ Partial Public Class DBAuxi
             Me.columnEtapa = MyBase.Columns("Etapa")
             Me.columnRenglon = MyBase.Columns("Renglon")
             Me.columnVariables = MyBase.Columns("Variables")
+            Me.columnPool = MyBase.Columns("Pool")
         End Sub
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
@@ -3803,6 +3814,8 @@ Partial Public Class DBAuxi
             MyBase.Columns.Add(Me.columnRenglon)
             Me.columnVariables = New Global.System.Data.DataColumn("Variables", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnVariables)
+            Me.columnPool = New Global.System.Data.DataColumn("Pool", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnPool)
             Me.columnID.AutoIncrement = True
             Me.columnID.AutoIncrementSeed = -1
             Me.columnID.AutoIncrementStep = -1
@@ -6794,6 +6807,21 @@ Partial Public Class DBAuxi
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Property Pool() As String
+            Get
+                Try
+                    Return CType(Me(Me.tablePlanilllaEnsayos.PoolColumn), String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("El valor de la columna 'Pool' de la tabla 'PlanilllaEnsayos' es DBNull.", e)
+                End Try
+            End Get
+            Set(value As String)
+                Me(Me.tablePlanilllaEnsayos.PoolColumn) = value
+            End Set
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public Function IsIDNull() As Boolean
             Return Me.IsNull(Me.tablePlanilllaEnsayos.IDColumn)
         End Function
@@ -6922,6 +6950,18 @@ Partial Public Class DBAuxi
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public Sub SetVariablesNull()
             Me(Me.tablePlanilllaEnsayos.VariablesColumn) = Global.System.Convert.DBNull
+        End Sub
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Function IsPoolNull() As Boolean
+            Return Me.IsNull(Me.tablePlanilllaEnsayos.PoolColumn)
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Sub SetPoolNull()
+            Me(Me.tablePlanilllaEnsayos.PoolColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
 

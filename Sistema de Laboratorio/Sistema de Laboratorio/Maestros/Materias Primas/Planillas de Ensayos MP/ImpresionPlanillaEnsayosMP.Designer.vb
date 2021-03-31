@@ -33,11 +33,26 @@ Partial Class ImpresionPlanillaEnsayosMP
         Me.lblDescripcion = New System.Windows.Forms.Label()
         Me.btnAyuda = New System.Windows.Forms.Button()
         Me.btnCerrar = New System.Windows.Forms.Button()
+        Me.rbFinal = New System.Windows.Forms.RadioButton()
+        Me.rbPool = New System.Windows.Forms.RadioButton()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.txtCantPooles = New System.Windows.Forms.TextBox()
         Me.dgvEspecif = New Util.DBDataGridView()
         Me.Ensayo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DescParametros = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Parametro = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TipoEspecif = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Var1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Var2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Var3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Var4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Var5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Var6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Var7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Var8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Var9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Var10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         CType(Me.dgvEspecif, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -94,7 +109,7 @@ Partial Class ImpresionPlanillaEnsayosMP
         '
         Me.Label3.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(11, 60)
+        Me.Label3.Location = New System.Drawing.Point(9, 59)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(43, 13)
         Me.Label3.TabIndex = 5
@@ -103,7 +118,7 @@ Partial Class ImpresionPlanillaEnsayosMP
         'txtCodigo
         '
         Me.txtCodigo.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.txtCodigo.Location = New System.Drawing.Point(81, 56)
+        Me.txtCodigo.Location = New System.Drawing.Point(79, 55)
         Me.txtCodigo.Mask = ">LL-000-000"
         Me.txtCodigo.Name = "txtCodigo"
         Me.txtCodigo.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -118,9 +133,9 @@ Partial Class ImpresionPlanillaEnsayosMP
         Me.lblDescripcion.BackColor = System.Drawing.Color.Cyan
         Me.lblDescripcion.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblDescripcion.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDescripcion.Location = New System.Drawing.Point(150, 55)
+        Me.lblDescripcion.Location = New System.Drawing.Point(148, 54)
         Me.lblDescripcion.Name = "lblDescripcion"
-        Me.lblDescripcion.Size = New System.Drawing.Size(432, 23)
+        Me.lblDescripcion.Size = New System.Drawing.Size(225, 23)
         Me.lblDescripcion.TabIndex = 5
         Me.lblDescripcion.Text = "Código:"
         Me.lblDescripcion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -132,7 +147,7 @@ Partial Class ImpresionPlanillaEnsayosMP
         Me.btnAyuda.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.btnAyuda.FlatAppearance.BorderSize = 0
         Me.btnAyuda.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAyuda.Location = New System.Drawing.Point(53, 56)
+        Me.btnAyuda.Location = New System.Drawing.Point(51, 55)
         Me.btnAyuda.Name = "btnAyuda"
         Me.btnAyuda.Size = New System.Drawing.Size(24, 21)
         Me.btnAyuda.TabIndex = 4
@@ -149,6 +164,48 @@ Partial Class ImpresionPlanillaEnsayosMP
         Me.btnCerrar.Text = "CERRAR"
         Me.btnCerrar.UseVisualStyleBackColor = True
         '
+        'rbFinal
+        '
+        Me.rbFinal.AutoSize = True
+        Me.rbFinal.Checked = True
+        Me.rbFinal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbFinal.Location = New System.Drawing.Point(380, 57)
+        Me.rbFinal.Name = "rbFinal"
+        Me.rbFinal.Size = New System.Drawing.Size(60, 17)
+        Me.rbFinal.TabIndex = 7
+        Me.rbFinal.TabStop = True
+        Me.rbFinal.Text = "FINAL"
+        Me.rbFinal.UseVisualStyleBackColor = True
+        '
+        'rbPool
+        '
+        Me.rbPool.AutoSize = True
+        Me.rbPool.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbPool.Location = New System.Drawing.Point(446, 57)
+        Me.rbPool.Name = "rbPool"
+        Me.rbPool.Size = New System.Drawing.Size(58, 17)
+        Me.rbPool.TabIndex = 7
+        Me.rbPool.TabStop = True
+        Me.rbPool.Text = "POOL"
+        Me.rbPool.UseVisualStyleBackColor = True
+        '
+        'Label4
+        '
+        Me.Label4.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(510, 59)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(42, 13)
+        Me.Label4.TabIndex = 5
+        Me.Label4.Text = "Pooles:"
+        '
+        'txtCantPooles
+        '
+        Me.txtCantPooles.Location = New System.Drawing.Point(553, 56)
+        Me.txtCantPooles.Name = "txtCantPooles"
+        Me.txtCantPooles.Size = New System.Drawing.Size(31, 20)
+        Me.txtCantPooles.TabIndex = 8
+        '
         'dgvEspecif
         '
         Me.dgvEspecif.AllowUserToAddRows = False
@@ -158,7 +215,7 @@ Partial Class ImpresionPlanillaEnsayosMP
         Me.dgvEspecif.AllowUserToResizeRows = False
         Me.dgvEspecif.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvEspecif.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvEspecif.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Ensayo, Me.Descripcion, Me.DescParametros, Me.Parametro})
+        Me.dgvEspecif.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Ensayo, Me.Descripcion, Me.DescParametros, Me.Parametro, Me.TipoEspecif, Me.Var1, Me.Var2, Me.Var3, Me.Var4, Me.Var5, Me.Var6, Me.Var7, Me.Var8, Me.Var9, Me.Var10})
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
         DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -223,13 +280,104 @@ Partial Class ImpresionPlanillaEnsayosMP
         Me.Parametro.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.Parametro.Width = 64
         '
+        'TipoEspecif
+        '
+        Me.TipoEspecif.HeaderText = "TipoEspecif"
+        Me.TipoEspecif.Name = "TipoEspecif"
+        Me.TipoEspecif.ReadOnly = True
+        Me.TipoEspecif.Visible = False
+        '
+        'Var1
+        '
+        Me.Var1.HeaderText = "Var1"
+        Me.Var1.Name = "Var1"
+        Me.Var1.ReadOnly = True
+        Me.Var1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Var1.Visible = False
+        '
+        'Var2
+        '
+        Me.Var2.HeaderText = "Var2"
+        Me.Var2.Name = "Var2"
+        Me.Var2.ReadOnly = True
+        Me.Var2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Var2.Visible = False
+        '
+        'Var3
+        '
+        Me.Var3.HeaderText = "Var3"
+        Me.Var3.Name = "Var3"
+        Me.Var3.ReadOnly = True
+        Me.Var3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Var3.Visible = False
+        '
+        'Var4
+        '
+        Me.Var4.HeaderText = "Var4"
+        Me.Var4.Name = "Var4"
+        Me.Var4.ReadOnly = True
+        Me.Var4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Var4.Visible = False
+        '
+        'Var5
+        '
+        Me.Var5.HeaderText = "Var5"
+        Me.Var5.Name = "Var5"
+        Me.Var5.ReadOnly = True
+        Me.Var5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Var5.Visible = False
+        '
+        'Var6
+        '
+        Me.Var6.HeaderText = "Var6"
+        Me.Var6.Name = "Var6"
+        Me.Var6.ReadOnly = True
+        Me.Var6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Var6.Visible = False
+        '
+        'Var7
+        '
+        Me.Var7.HeaderText = "Var7"
+        Me.Var7.Name = "Var7"
+        Me.Var7.ReadOnly = True
+        Me.Var7.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Var7.Visible = False
+        '
+        'Var8
+        '
+        Me.Var8.HeaderText = "Var8"
+        Me.Var8.Name = "Var8"
+        Me.Var8.ReadOnly = True
+        Me.Var8.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Var8.Visible = False
+        '
+        'Var9
+        '
+        Me.Var9.HeaderText = "Var9"
+        Me.Var9.Name = "Var9"
+        Me.Var9.ReadOnly = True
+        Me.Var9.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Var9.Visible = False
+        '
+        'Var10
+        '
+        Me.Var10.HeaderText = "Var10"
+        Me.Var10.Name = "Var10"
+        Me.Var10.ReadOnly = True
+        Me.Var10.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Var10.Visible = False
+        '
         'ImpresionPlanillaEnsayosMP
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(593, 341)
+        Me.Controls.Add(Me.txtCantPooles)
+        Me.Controls.Add(Me.rbPool)
+        Me.Controls.Add(Me.rbFinal)
         Me.Controls.Add(Me.txtCodigo)
         Me.Controls.Add(Me.lblDescripcion)
+        Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.btnAyuda)
         Me.Controls.Add(Me.btnCerrar)
@@ -258,8 +406,23 @@ Partial Class ImpresionPlanillaEnsayosMP
     Friend WithEvents lblDescripcion As System.Windows.Forms.Label
     Friend WithEvents btnAyuda As System.Windows.Forms.Button
     Friend WithEvents btnCerrar As System.Windows.Forms.Button
+    Friend WithEvents rbFinal As System.Windows.Forms.RadioButton
+    Friend WithEvents rbPool As System.Windows.Forms.RadioButton
+    Friend WithEvents Label4 As System.Windows.Forms.Label
+    Friend WithEvents txtCantPooles As System.Windows.Forms.TextBox
     Friend WithEvents Ensayo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DescParametros As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Parametro As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents TipoEspecif As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Var1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Var2 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Var3 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Var4 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Var5 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Var6 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Var7 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Var8 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Var9 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Var10 As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

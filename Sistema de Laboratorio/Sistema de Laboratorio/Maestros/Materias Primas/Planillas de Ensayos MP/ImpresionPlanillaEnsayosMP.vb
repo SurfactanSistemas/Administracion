@@ -46,19 +46,13 @@ Public Class ImpresionPlanillaEnsayosMP : Implements Util.Interfaces.IAyudaMPs
                 Exit Sub
             End If
 
-            For Each row As DataGridViewRow In dgvEspecif.Rows
-                With row
-                    .Cells("Descripcion").Value = _TraerDescripcionEnsayo(.Cells("Ensayo").Value)
-                End With
-            Next
-
         ElseIf e.KeyData = Keys.Escape Then
             txtCodigo.Text = ""
         End If
 
     End Sub
 
-    Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs)
+    Private Sub SoloNumero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtCantPooles.KeyPress
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
             e.Handled = True
         End If
@@ -83,7 +77,9 @@ Public Class ImpresionPlanillaEnsayosMP : Implements Util.Interfaces.IAyudaMPs
 
     Private Sub _CargarDatosEspecifMP()
 
-        Dim WCargaV As DataTable = GetAll("SELECT * FROM CargaVMP WHERE Articulo = '" & txtCodigo.Text & "' Order By Clave", "Surfactan_II")
+        Dim WEtapa As String = IIf(rbFinal.Checked, "99", "1")
+
+        Dim WCargaV As DataTable = GetAll("SELECT * FROM CargaVMP WHERE Articulo = '" & txtCodigo.Text & "' And Paso = '" & WEtapa & "' Order By Clave", "Surfactan_II")
 
         dgvEspecif.Rows.Clear()
 
@@ -110,11 +106,31 @@ Public Class ImpresionPlanillaEnsayosMP : Implements Util.Interfaces.IAyudaMPs
                     .Cells("Descripcion").Value = ""
                     .Cells("DescParametros").Value = Trim(WEspecificacion)
                     .Cells("Parametro").Value = Trim(WImpreParametro)
+                    .Cells("Var1").Value = OrDefault(row.Item("Variable1"), "")
+                    .Cells("Var2").Value = OrDefault(row.Item("Variable2"), "")
+                    .Cells("Var3").Value = OrDefault(row.Item("Variable3"), "")
+                    .Cells("Var4").Value = OrDefault(row.Item("Variable4"), "")
+                    .Cells("Var5").Value = OrDefault(row.Item("Variable5"), "")
+                    .Cells("Var6").Value = OrDefault(row.Item("Variable6"), "")
+                    .Cells("Var7").Value = OrDefault(row.Item("Variable7"), "")
+                    .Cells("Var8").Value = OrDefault(row.Item("Variable8"), "")
+                    .Cells("Var9").Value = OrDefault(row.Item("Variable9"), "")
+                    .Cells("Var10").Value = OrDefault(row.Item("Variable10"), "")
                 End With
 
             End With
 
         Next
+
+        For Each row As DataGridViewRow In dgvEspecif.Rows
+            With row
+                .Cells("Descripcion").Value = _TraerDescripcionEnsayo(.Cells("Ensayo").Value)
+            End With
+        Next
+
+        txtCantPooles.Enabled = rbPool.Checked
+
+        If rbPool.Checked Then txtCantPooles.Focus()
 
     End Sub
 
@@ -125,11 +141,48 @@ Public Class ImpresionPlanillaEnsayosMP : Implements Util.Interfaces.IAyudaMPs
         wUnidadEspecif = OrDefault(Trim(wUnidadEspecif), "")
         wMenorIgualEspecif = OrDefault(Trim(wMenorIgualEspecif), "")
 
-        If Val(WInformaEspecif) = 0 And Val(wTipoEspecif) = 2 Then Return "Informativo"
+        If Val(WInformaEspecif) = 0 And Val(wTipoEspecif) = 2 Then
+            If Val(wDesdeEspecif) <> 0 Or Val(wHastaEspecif) <> 9999 Then
+
+                If Val(wDesdeEspecif) <> 0 And Val(wHastaEspecif) = 9999 Then
+
+                    If Val(wMenorIgualEspecif) = 1 Then
+                        Return String.Format("Informativo (Mínimo {0} {1})", wDesdeEspecif, wUnidadEspecif)
+                    End If
+
+                    Return String.Format("Informativo (Mayor a {0} {1})", wHastaEspecif, wUnidadEspecif)
+
+                End If
+
+                If Val(wDesdeEspecif) <> 0 And Val(wHastaEspecif) <> 0 Then
+                    Return String.Format("Informativo ({0} - {1} {2})", wDesdeEspecif, wHastaEspecif, wUnidadEspecif)
+                End If
+
+                If Val(wDesdeEspecif) = 0 And Val(wHastaEspecif) <> 0 Then
+
+                    If Val(wMenorIgualEspecif) = 1 Then
+                        Return String.Format("Informativo (Máximo {0} {1})", wHastaEspecif, wUnidadEspecif)
+                    End If
+
+                    Return String.Format("Informativo (Menor a {0} {1})", wHastaEspecif, wUnidadEspecif)
+
+                End If
+
+            End If
+            Return "Informativo"
+        End If
 
         If Val(wDesdeEspecif) = 0 And Val(wHastaEspecif) = 0 Then Return "Cumple Ensayo"
 
         If Val(wDesdeEspecif) <> 0 Or Val(wHastaEspecif) <> 9999 Then
+
+            If Val(wDesdeEspecif) <> 0 And Val(wHastaEspecif) = 9999 Then
+
+                If Val(wMenorIgualEspecif) = 1 Then Return String.Format("Mínimo {0} {1}", wDesdeEspecif, wUnidadEspecif)
+
+                Return String.Format("Mayor a {0} {1}", wHastaEspecif, wUnidadEspecif)
+
+            End If
 
             If Val(wDesdeEspecif) <> 0 And Val(wHastaEspecif) <> 0 Then
                 Return String.Format("{0} - {1} {2}", wDesdeEspecif, wHastaEspecif, wUnidadEspecif)
@@ -145,14 +198,6 @@ Public Class ImpresionPlanillaEnsayosMP : Implements Util.Interfaces.IAyudaMPs
 
             End If
 
-            If Val(wDesdeEspecif) <> 0 And Val(wHastaEspecif) = 9999 Then
-
-                If Val(wMenorIgualEspecif) = 1 Then Return String.Format("Mínimo {0} {1}", wDesdeEspecif, wUnidadEspecif)
-
-                Return String.Format("Mayor a {0} {1}", wHastaEspecif, wUnidadEspecif)
-
-            End If
-
         End If
 
         Return ""
@@ -161,25 +206,63 @@ Public Class ImpresionPlanillaEnsayosMP : Implements Util.Interfaces.IAyudaMPs
     Private Sub btnImprimir_Click(sender As Object, e As EventArgs) Handles btnImprimir.Click
         If dgvEspecif.Rows.Count = 0 Then Exit Sub
 
+        Dim Renglon As Integer = 1
         Dim WTabla As DataTable = New DBAuxi.PlanilllaEnsayosDataTable
 
-        For Each row As DataGridViewRow In dgvEspecif.Rows
-            Dim r As DataRow = WTabla.NewRow
-            With r
-                .Item("Ensayo") = row.Cells("Ensayo").Value
-                .Item("DescEnsayo") = row.Cells("Descripcion").Value
-                .Item("DescParametro") = row.Cells("DescParametros").Value
-                .Item("Parametro") = row.Cells("Parametro").Value
-                .Item("Titulo") = "Materia Prima"
-                .Item("Codigo") = txtCodigo.Text
-                .Item("Descripcion") = lblDescripcion.Text
-                .Item("Etapa") = ""
-            End With
-            WTabla.Rows.Add(r)
+        txtCantPooles.Text = Val(txtCantPooles.Text)
+
+        If Val(txtCantPooles.Text) = 0 Then txtCantPooles.Text = 1
+
+        Dim WCantPooles As Integer = 0
+
+        For x As Integer = 1 To Val(txtCantPooles.Text)
+
+            WCantPooles += 1
+
+            For Each row As DataGridViewRow In dgvEspecif.Rows
+                Dim r As DataRow = WTabla.NewRow
+                With r
+                    .Item("Ensayo") = row.Cells("Ensayo").Value
+                    .Item("DescEnsayo") = row.Cells("Descripcion").Value
+                    .Item("DescParametro") = row.Cells("DescParametros").Value
+                    .Item("Parametro") = row.Cells("Parametro").Value
+                    .Item("Titulo") = "Materia Prima"
+                    .Item("Codigo") = txtCodigo.Text
+                    .Item("Descripcion") = lblDescripcion.Text
+                    .Item("Etapa") = IIf(rbFinal.Checked, "FINAL", "POOL")
+                    .Item("Renglon") = Renglon
+                    .Item("Variables") = ""
+                    .Item("Pool") = IIf(rbFinal.Checked, "", WCantPooles)
+                End With
+                WTabla.Rows.Add(r)
+
+                If row.Cells("TipoEspecif").Value = 2 Then
+                    For i = 1 To 10
+                        If Trim(row.Cells("Var" & i).Value) <> "" Then
+                            Dim d As DataRow = WTabla.NewRow
+                            With d
+                                '.Item("Ensayo") = "" 'row.Cells("Ensayo").Value
+                                .Item("Variables") = row.Cells("Var" & i).Value
+                                .Item("DescParametro") = "" 'row.Cells("DescParametros").Value
+                                .Item("Parametro") = "" 'row.Cells("Parametro").Value
+                                .Item("Titulo") = "Materia Prima"
+                                .Item("Codigo") = txtCodigo.Text
+                                .Item("Descripcion") = lblDescripcion.Text
+                                .Item("Etapa") = IIf(rbFinal.Checked, "FINAL", "POOL")
+                                .Item("Renglon") = Renglon
+                                .Item("Pool") = IIf(rbFinal.Checked, "", WCantPooles)
+                            End With
+                            WTabla.Rows.Add(d)
+                        End If
+                    Next
+                End If
+
+                Renglon += 1
+            Next
         Next
 
         With New Util.VistaPrevia
-            .Reporte = New PlanillaEnsayos
+            .Reporte = New PlanillaEnsayosMP
             .Reporte.SetDataSource(WTabla)
             '.Mostrar()
             .Imprimir()
@@ -198,5 +281,9 @@ Public Class ImpresionPlanillaEnsayosMP : Implements Util.Interfaces.IAyudaMPs
 
     Private Sub ImpresionPlanillaEnsayosMP_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         txtCodigo.Focus()
+    End Sub
+
+    Private Sub rbFinal_Click(sender As Object, e As EventArgs) Handles rbPool.Click, rbFinal.Click
+        _CargarDatosEspecifMP()
     End Sub
 End Class
