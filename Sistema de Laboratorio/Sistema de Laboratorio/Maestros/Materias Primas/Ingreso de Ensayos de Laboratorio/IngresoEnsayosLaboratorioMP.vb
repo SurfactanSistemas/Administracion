@@ -439,6 +439,11 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad, IA
 
             Else
                 _CargarEspecificacionesGenerales()
+
+                If rbFinal.Checked Then
+                    _TraerDatosDePooles()
+                End If
+
             End If
 
             _BuscarDescripcionArticulo()
@@ -447,22 +452,160 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad, IA
             txtEtapa.Text = ""
         End If
 
-	End Sub
+    End Sub
+
+    Private Sub _TraerDatosDePooles()
+
+        Dim WDatos As DataTable = GetAll("SELECT * FROM PrueArtNuevoPooles WHERE Producto = '" & txtCodigo.Text & "' And SubEtapa = '1' And Informe = '" & txtInforme.Text & "' And LoteProv = '" & txtLoteProveedor.Text & "' And Prueba = '' Order By Prueba, Renglon")
+
+        ' Determinamos los Pooles existentes.
+        Dim WPooles As DataTable = (New DataView(WDatos)).ToTable(True, "Pool")
+
+        Dim WMenorGral As Double = 9999
+        Dim WIDValoraPool As Integer = 0
+
+        For Each pool As Datarow In WPooles.Rows
+
+            ' Buscar los string que representen a las distintas valoraciones (nombres de ensayos).
+            Dim WValoras() As DataRow = WDatos.Select("(Valor LIKE 'VALORACION%' OR Valor LIKE 'VALORACIÓN%') And Pool = '" & pool(0) & "'")
+
+            Dim WMenor As Double = 9999
+            Dim WID As Double = 0
+
+            For Each valora As DataRow In WValoras
+
+                If Val(OrDefault(valora("Resultado"), "")) > WMenor Then
+                    WMenor = Val(OrDefault(valora("Resultado"), ""))
+                    WID = pool(0)
+                End If
+
+            Next
+
+            If WMenor < WMenorGral Then
+                WMenorGral = WMenor
+                WIDValoraPool = WID
+            End If
+
+        Next
+
+        If WMenorGral = 9999 Then Exit Sub
+
+        ' Con el ID del ensayo, recupero los datos de ese Pool y reemplazo los datos en la grilla.
+        For Each row As DataRow In WDatos.Select("Pool = '" & WIDValoraPool & "'", "ID")
+
+            ' Busco el renglon del ensayo en la grilla.
+            For Each en As Datagridviewrow In dgvEnsayos.Rows
+                If UCase(Trim(OrDefault(en.Cells("Valor").Value, ""))) = UCase(Trim(OrDefault(row("Valor"), ""))) Then
+                    With row
+                        Dim WEns = OrDefault(.Item("Codigo"), "")
+                        Dim WEspecificacion = OrDefault(.Item("Valor"), "")
+                        Dim WValor = Trim(OrDefault(.Item("ValorReal"), ""))
+                        Dim WResultado As String
+                        Dim WFarmacopea = OrDefault(.Item("Farmacopea"), "")
+                        Dim WTipoEspecif = OrDefault(.Item("TipoEspecif"), "")
+                        Dim WDesdeEspecif = OrDefault(.Item("DesdeEspecif"), "")
+                        Dim WHastaEspecif = OrDefault(.Item("HastaEspecif"), "")
+                        Dim WUnidadEspecif = OrDefault(.Item("UnidadEspecif"), "")
+                        Dim WMenorIgualEspecif = OrDefault(.Item("MenorIgualEspecif"), "")
+                        Dim WInformaEspecif = OrDefault(.Item("InformaEspecif"), "")
+                        Dim WFormulaEspecif = OrDefault(.Item("FormulaEspecif"), "")
+                        Dim WImpreResultado = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif, WInformaEspecif)
+
+                        Dim WOperadorID = Trim(OrDefault(.Item("OperadorLabora"), ""))
+
+                        Dim WFormulaAdic1 As String = Trim(OrDefault(.Item("FormulaAdic1"), ""))
+                        Dim WFormulaAdic2 As String = Trim(OrDefault(.Item("FormulaAdic2"), ""))
+                        Dim WFormulaAdic3 As String = Trim(OrDefault(.Item("FormulaAdic3"), ""))
+                        Dim WFormulaAdic1dec As String = Trim(OrDefault(.Item("FormulaAdic1dec"), ""))
+                        Dim WFormulaAdic2dec As String = Trim(OrDefault(.Item("FormulaAdic2dec"), ""))
+                        Dim WFormulaAdic3dec As String = Trim(OrDefault(.Item("FormulaAdic3dec"), ""))
+
+                        Dim WFormulas(10, 2) As String
+
+                        For i = 1 To 10
+                            WFormulas(i, 1) = Trim(OrDefault(.Item("Variable" & i), ""))
+                            WFormulas(i, 2) = Trim(OrDefault(.Item("VariableValor" & i), "0"))
+                        Next
+
+                        If Val(WTipoEspecif) = 0 And WImpreResultado <> "" Then WImpreResultado &= " (c)"
+
+                        Dim WDescripcion = "" 'OrDefault(.Item("Ensayo"), 0)
+
+                        WResultado = _GenerarImpreResultado(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WValor, WMenorIgualEspecif, WInformaEspecif)
+
+                        With en
+                            .Cells("Ensayo").Value = WEns
+                            .Cells("Valor").Value = Trim(UCase(WValor))
+                            .Cells("Resultado").Value = Trim(WResultado)
+                            .Cells("Especificacion").Value = Trim(WEspecificacion)
+                            .Cells("Descripcion").Value = Trim(WDescripcion)
+                            .Cells("Farmacopea").Value = Trim(WFarmacopea)
+                            .Cells("TipoEspecif").Value = WTipoEspecif
+                            .Cells("DesdeEspecif").Value = WDesdeEspecif
+                            .Cells("HastaEspecif").Value = WHastaEspecif
+                            .Cells("UnidadEspecif").Value = WUnidadEspecif
+                            .Cells("MenorIgualEspecif").Value = WMenorIgualEspecif
+                            .Cells("InformaEspecif").Value = WInformaEspecif
+                            .Cells("Parametro").Value = Trim(WImpreResultado)
+                            .Cells("FormulaEspecif").Value = Trim(WFormulaEspecif)
+                            .Cells("FormulaAdic1").Value = Trim(WFormulaAdic1)
+                            .Cells("FormulaAdic2").Value = Trim(WFormulaAdic2)
+                            .Cells("FormulaAdic3").Value = Trim(WFormulaAdic3)
+                            .Cells("FormulaAdic1dec").Value = Trim(WFormulaAdic1dec)
+                            .Cells("FormulaAdic2dec").Value = Trim(WFormulaAdic2dec)
+                            .Cells("FormulaAdic3dec").Value = Trim(WFormulaAdic3dec)
+
+                            For i = 1 To 10
+                                .Cells("Variable" & i).Value = Trim(WFormulas(i, 1))
+                                .Cells("VariableValor" & i).Value = WFormulas(i, 2)
+                            Next
+
+                            .Cells("Decimales").Value = ""
+
+                            Dim WDecimales As String = .Cells("Decimales").Value
+
+                            If WDecimales.Trim = "" Then
+                                WDecimales = _CalcularCantidadDecimales(WDesdeEspecif)
+                                If Val(WDecimales) < _CalcularCantidadDecimales(WHastaEspecif) Then WDecimales = _CalcularCantidadDecimales(WHastaEspecif)
+                            End If
+
+                            .Cells("Resultado").Value = WResultado
+                            .Cells("Valor").Value = WValor
+
+                            If Double.TryParse(WValor, Nothing) Then
+                                .Cells("Valor").Value = formatonumerico(WValor, WDecimales)
+                            End If
+
+                            .Cells("Decimales").Value = WDecimales
+
+                            .Cells("OperadorID").Value = WOperadorID
+                            .Cells("ValorBandera").Value = .Cells("Valor").Value
+
+                        End With
+
+                    End With
+
+                End If
+            Next
+
+        Next
+
+    End Sub
 
 
-	Private Sub _BuscarDescripcionArticulo()
-		If txtCodigo.Text.Replace(" ", "").Length < 10 Then : Exit Sub : End If
+    Private Sub _BuscarDescripcionArticulo()
+        If txtCodigo.Text.Replace(" ", "").Length < 10 Then : Exit Sub : End If
 
-		Dim WMP As DataRow = GetSingle("SELECT Descripcion FROM Articulo WHERE Codigo = '" & txtCodigo.Text & "'")
+        Dim WMP As DataRow = GetSingle("SELECT Descripcion FROM Articulo WHERE Codigo = '" & txtCodigo.Text & "'")
 
-		txtDescMP.Text = ""
+        txtDescMP.Text = ""
 
-		If WMP IsNot Nothing Then
+        If WMP IsNot Nothing Then
 
-			txtDescMP.Text = Trim(OrDefault(WMP.Item("Descripcion"), "")).ToUpper
-		End If
+            txtDescMP.Text = Trim(OrDefault(WMP.Item("Descripcion"), "")).ToUpper
+        End If
 
-	End Sub
+    End Sub
 
 	Private Sub _CargarEspecificacionesGenerales()
 
@@ -1325,12 +1468,31 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad, IA
                 End With
             End If
 
-            ' todo implementar impresiones.
+            If rbFinal.Checked Then
 
-            btnLimpiar.PerformClick()
+                ' todo implementar envio por mail de Ensayos pooles y final del producto.
 
-            txtCodigo.Focus()
+                btnLimpiar.PerformClick()
 
+            ElseIf MsgBox("¿Sigue cargando Pooles para esta Materia Prima?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+
+                '
+                ' Se deja los datos de identificación para mejorar la rapides en el ingreso y se dejan solamente los datos de individualización.
+                '
+                rbFinal_Click(Nothing, Nothing)
+                txtPool.Focus()
+
+            ElseIf MsgBox("¿Sigue cargando Pooles para esta Materia Prima?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+
+                ' todo implementar envio por mail de Ensayos por mail.
+
+            Else
+
+                btnLimpiar.PerformClick()
+
+            End If
+
+            
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
         End Try
