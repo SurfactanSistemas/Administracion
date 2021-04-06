@@ -643,7 +643,10 @@ Public Class Pagos
 
                 If Not IsNothing(proveedor) Then
                     mostrarProveedor(proveedor)
-
+                    'incluido Andres
+                    txtFechaParidad.Text = txtFecha.Text
+                    txtParidad.Text = traerParidad()
+                    'Fin Inclusion
                     btnCtaCte.PerformClick()
                 Else
                     txtRazonSocial.Text = ""
@@ -1204,6 +1207,11 @@ Public Class Pagos
         End If
 
         mostrarProveedor(proveedor)
+
+        'incluido Andres
+        txtFechaParidad.Text = txtFecha.Text
+        txtParidad.Text = traerParidad()
+        'Fin Inclusion
 
     End Sub
     Private Sub _TraerSolicitudFondos(ByVal _Item As String, Optional ByVal indice As Integer = Nothing)
@@ -1960,9 +1968,41 @@ Public Class Pagos
                         .Read()
 
                         If Essoli = False Then
-                            If Not IsDBNull(.Item("CambioDivisa")) Then
-                                ZZParidad = _NormalizarNumero(.Item("CambioDivisa").ToString(), 4)
+                            If Trim(txtProveedor.Text) <> "" Then
+                                Dim SQlCnslt As String = "SELECT TipoDolar FROM Proveedor WHERE Proveedor = '" & Trim(txtProveedor.Text) & "'"
+                                Dim rowProv As DataRow = GetSingle(SQlCnslt, "SurfactanSa")
+                                If rowProv IsNot Nothing Then
+                                    Dim tipodolar As Integer = IIf(IsDBNull(rowProv.Item("TipoDolar")), 0, rowProv.Item("TipoDolar"))
+                                    Select Case tipodolar
+                                        Case 0, 1
+                                            If tipodolar <> 0 Then
+                                                If Val(txtParidad.Text) <> Val(_NormalizarNumero(.Item("CambioDivisa").ToString(), 4)) Then
+                                                    MsgBox("Este proveedor tiene asignada la paridad Divisa. Se actualizará el valor de paridad", vbExclamation)
+                                                End If
+                                            Else
+                                                If Val(txtParidad.Text) <> Val(_NormalizarNumero(.Item("CambioDivisa").ToString(), 4)) Then
+                                                    MsgBox("Este proveedor tiene asignada paridad. Se actualizará el valor de paridad a Divisa", vbExclamation)
+                                                End If
+                                            End If
+
+                                                If Not IsDBNull(.Item("CambioDivisa")) Then
+                                                    ZZParidad = _NormalizarNumero(.Item("CambioDivisa").ToString(), 4)
+                                                End If
+                                        Case 2
+                                            If Val(txtParidad.Text) <> Val(_NormalizarNumero(.Item("Cambio").ToString(), 4)) Then
+                                                MsgBox("Este proveedor tiene asignada la paridad Nacion. Se actualizará el valor de paridad", vbExclamation)
+                                            End If
+                                            If Not IsDBNull(.Item("Cambio")) Then
+                                                ZZParidad = _NormalizarNumero(.Item("Cambio").ToString(), 4)
+                                            End If
+                                    End Select
+                                End If
+                            Else
+                                If Not IsDBNull(.Item("CambioDivisa")) Then
+                                    ZZParidad = _NormalizarNumero(.Item("CambioDivisa").ToString(), 4)
+                                End If
                             End If
+                            
 
                         Else
                             Dim SQLCnslt As String = "SELECT TipoDolar, ParidadInformada FROM SOlicitudFondos WHERE NroSolicitud = '" & NroSoliInterno & "'"
@@ -6685,6 +6725,7 @@ Public Class Pagos
             Select Case _TipoConsulta
                 Case 0
                     mostrarProveedor(lstConsulta.SelectedItem.ToString)
+                   
                     btnCtaCte_Click(Nothing, Nothing)
                     btn_ConsultaSoliFondos.Visible = False
                 Case 1
@@ -8692,5 +8733,6 @@ Public Class Pagos
     End Sub
 
 
+   
    
 End Class

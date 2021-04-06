@@ -113,6 +113,13 @@
     </Compile>
     <Compile Include="DaoAcumulado.vb" />
     <Compile Include="Interface\IContraseña.vb" />
+    <Compile Include="Interface\IMotivoRechazo.vb" />
+    <Compile Include="MotivoRechazo.Designer.vb">
+      <DependentUpon>MotivoRechazo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MotivoRechazo.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Proceso.vb" />
     <Compile Include="Reporte\DBAuxi.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -201,6 +208,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MenuPrincipal.resx">
       <DependentUpon>MenuPrincipal.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MotivoRechazo.resx">
+      <DependentUpon>MotivoRechazo.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

@@ -2,7 +2,7 @@
 Imports Util.Clases.Query
 Imports Util.Clases.Helper
 
-Public Class Gestion_Solicitudes : Implements IActualizaSolicitudes, IContraseña
+Public Class Gestion_Solicitudes : Implements IActualizaSolicitudes, IContraseña, IMotivoRechazo
 
     Dim FinalLoad As String = "NO"
     Dim Fechas(3, 1) As String
@@ -51,7 +51,17 @@ Public Class Gestion_Solicitudes : Implements IActualizaSolicitudes, IContraseñ
 
     Private Sub Marcar_VistosPopup()
         Try
-            Dim SQLCnslt As String = "UPDATE SolicitudFondos SET MarcaPopUp = 'X' WHERE MarcaPopup <> 'X'"
+            'Dim SQLCnslt As String = "UPDATE SolicitudFondos SET MarcaPopUp = 'X' WHERE MarcaPopup <> 'X'"
+            Dim SQLCnslt As String
+            Select Case UCase(Operador.Clave)
+                Case "XINGO"
+                    SQLCnslt = "UPDATE SolicitudFondos SET MarcaPopUp_Alejandro = 'X' WHERE MarcaPopup_Alejandro <> 'X'"
+                Case "SERGIO"
+                    SQLCnslt = "UPDATE SolicitudFondos SET MarcaPopUp_Sergio = 'X' WHERE MarcaPopup_Sergio <> 'X'"
+                Case "LUCAS2021"
+                    SQLCnslt = "UPDATE SolicitudFondos SET MarcaPopup_Lucas = 'X' WHERE MarcaPopup_Lucas <> 'X'"
+            End Select
+
             ExecuteNonQueries("SurfactanSa", SQLCnslt)
         Catch ex As Exception
 
@@ -388,41 +398,10 @@ Public Class Gestion_Solicitudes : Implements IActualizaSolicitudes, IContraseñ
 
     Public Sub Autorizado(Permiso As String, NroSolicutud As Integer) Implements IContraseña.Autorizado
         If Permiso = "S" Then
-            Try
-                Dim ListaConsultas As New List(Of String)
-                Dim contador As Integer = 0
-                For Each row As DataGridViewRow In DGV_Solicitudes.Rows
-                    If row.Cells("chk").Value = True Then
-                        Dim SQLCnslt As String = "UPDATE SolicitudFondos SET Estado = 'RECHAZADO' WHERE NroSolicitud = '" & row.Cells("NroSolicitud").Value & "'"
-                        ListaConsultas.Add(SQLCnslt)
-                        
-                        Try
-                            SQLCnslt = "SELECT Email FROM Operador WHERE Descripcion = '" & row.Cells("Solicitante").Value & "'"
-                            Dim rowope As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
-                            'SE AVISA POR MAIL QUE NO SE RECHAZO SU SOLICITUD
-                            If rowope IsNot Nothing Then
-                                _EnviarEmail(rowope.Item("Email"), "Rechazo de Solicitud de Fondos", "Se a rechazado la solicitud de fondos numero : " & row.Cells("NroSolicitud").Value & " Para " & Trim(row.Cells("Destino").Value) & " con un monto de " & row.Cells("Moneda").Value & " " & row.Cells("Importe").Value & "", Nothing, True)
-                            End If
-                        Catch ex As Exception
-                            MsgBox("No se puedo enviar el mail de aviso. Este operador no debe tener un mail cargado o esta mal escrito", vbExclamation)
-                        End Try
-                        
-                        contador += 1
-                    End If
-                Next
-
-                ExecuteNonQueries("SurfactanSa", ListaConsultas.ToArray())
-                ' 'Dim SQLCnslt As String = "Delete FROM SolicitudFondos WHERE NroSolicitud = '" & NroSolicutud & "'"
-                ' Dim SQLCnslt As String = "UPDATE SolicitudFondos SET Estado = 'RECHAZADO' WHERE NroSolicitud = '" & NroSolicutud & "'"
-                ' 
-                ' ExecuteNonQueries("SurfactanSa", SQLCnslt)
-
-                MsgBox("Se rechazaron " & contador & " solicitudes")
-
-                ActualizaGrilla()
-            Catch ex As Exception
-
-            End Try
+            With New MotivoRechazo
+                .Show(Me)
+            End With
+            
         End If
     End Sub
 
@@ -496,5 +475,44 @@ Public Class Gestion_Solicitudes : Implements IActualizaSolicitudes, IContraseñ
 
     Private Sub btn_ActualizarGrilla_Click(sender As Object, e As EventArgs) Handles btn_ActualizarGrilla.Click
         ActualizaGrilla()
+    End Sub
+
+    Public Sub PasaMotivo(Motivo As String) Implements IMotivoRechazo.PasaMotivo
+        Try
+            Dim ListaConsultas As New List(Of String)
+            Dim contador As Integer = 0
+            For Each row As DataGridViewRow In DGV_Solicitudes.Rows
+                If row.Cells("chk").Value = True Then
+                    Dim SQLCnslt As String = "UPDATE SolicitudFondos SET Estado = 'RECHAZADO' WHERE NroSolicitud = '" & row.Cells("NroSolicitud").Value & "'"
+                    ListaConsultas.Add(SQLCnslt)
+
+                    Try
+                        SQLCnslt = "SELECT Email FROM Operador WHERE Descripcion = '" & row.Cells("Solicitante").Value & "'"
+                        Dim rowope As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+                        'SE AVISA POR MAIL QUE NO SE RECHAZO SU SOLICITUD
+                        If rowope IsNot Nothing Then
+                            _EnviarEmail(rowope.Item("Email"), "Rechazo de Solicitud de Fondos", "Se a rechazado la solicitud de fondos numero : " & row.Cells("NroSolicitud").Value & " Para " & Trim(row.Cells("Destino").Value) & " con un monto de " & row.Cells("Moneda").Value & " " & row.Cells("Importe").Value & "" & vbCrLf & "Por el motivo: " & Motivo, Nothing, True)
+                        End If
+
+                    Catch ex As Exception
+                        MsgBox("No se puedo enviar el mail de aviso. Este operador no debe tener un mail cargado o esta mal escrito", vbExclamation)
+                    End Try
+
+                    contador += 1
+                End If
+            Next
+
+            ExecuteNonQueries("SurfactanSa", ListaConsultas.ToArray())
+            ' 'Dim SQLCnslt As String = "Delete FROM SolicitudFondos WHERE NroSolicitud = '" & NroSolicutud & "'"
+            ' Dim SQLCnslt As String = "UPDATE SolicitudFondos SET Estado = 'RECHAZADO' WHERE NroSolicitud = '" & NroSolicutud & "'"
+            ' 
+            ' ExecuteNonQueries("SurfactanSa", SQLCnslt)
+
+            MsgBox("Se rechazaron " & contador & " solicitudes")
+
+            ActualizaGrilla()
+        Catch ex As Exception
+
+        End Try
     End Sub
 End Class

@@ -27,6 +27,22 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
 
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
 
+
+
+        Dim SQLCnslt As String = "SELECT SolicitudFondosEdicion FROM Operador WHERE Clave = '" & Operador.Clave & "'"
+        Dim rowOperador As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+        If rowOperador IsNot Nothing Then
+            Dim SolifondosEdicion As String = IIf(IsDBNull(rowOperador.Item("SolicitudFondosEdicion")), "", rowOperador.Item("SolicitudFondosEdicion"))
+            If SolifondosEdicion = "S" Then
+                Me.Size = New Size(555, 649)
+                Me.MaximumSize = New Size(555, 649)
+            Else
+                Me.Size = New Size(555, 555)
+                Me.MaximumSize = New Size(555, 555)
+            End If
+        End If
+
+
         txt_FechaSolicitud.Text = Date.Today.ToString("dd/MM/yyyy")
         txt_CuentaDescrip.Enabled = False
         txt_Cuenta.Enabled = False
@@ -52,21 +68,10 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
 
 
 
-        Dim SQLCnslt As String = ""
+        SQLCnslt = ""
         If NroSoli <> 0 Then
 
-            SQLCnslt = "SELECT SolicitudFondosEdicion FROM Operador WHERE Clave = '" & Operador.Clave & "'"
-            Dim rowOperador As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
-            If rowOperador IsNot Nothing Then
-                Dim SolifondosEdicion As String = IIf(IsDBNull(rowOperador.Item("SolicitudFondosEdicion")), "", rowOperador.Item("SolicitudFondosEdicion"))
-                If SolifondosEdicion = "S" Then
-                    Me.Size = New Size(555, 649)
-                    Me.MaximumSize = New Size(555, 649)
-                Else
-                    Me.Size = New Size(555, 555)
-                    Me.MaximumSize = New Size(555, 555)
-                End If
-            End If
+           
 
             If MostrarAutorizar = "Mostrar" Then
                 btn_Autorizar.Visible = True
@@ -193,16 +198,17 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
             'DESHABILITAMOS LOS CAMPOS QUE NO PUEDE EDITAR
             btn_Limpiar.Visible = False
 
-            'chk_Echeq.Enabled = False
-            'chk_Efectivo.Enabled = False
-            'chk_Tranferencia.Enabled = False
-            'chk_ChequeTerceros.Enabled = False
-            'chk_ChequePropio.Enabled = False
-
+            chk_Echeq.Enabled = False
+            chk_Efectivo.Enabled = False
+            chk_Tranferencia.Enabled = False
+            chk_ChequeTerceros.Enabled = False
+            chk_ChequePropio.Enabled = False
+            chk_Tarjeta.Enabled = False
 
             cbx_Tipo.Enabled = False
             cbx_Moneda.Enabled = False
 
+            txt_FechaRequerida.ReadOnly = True
             txt_Titulo.ReadOnly = True
             txt_Concepto.ReadOnly = True
             txt_Solicitante.ReadOnly = True
@@ -210,6 +216,7 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
             txt_Cuenta.ReadOnly = True
             txt_Proveedor.ReadOnly = True
             txt_Importe.ReadOnly = True
+            txt_Observaciones.ReadOnly = True
 
             Dim EstadoSoli2 As String = IIf(IsDBNull(rowsoli.Item("Estado")), "", rowsoli.Item("Estado"))
             If Trim(UCase(EstadoSoli2)) <> "AUTORIZO" Then
@@ -224,6 +231,15 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
                 txt_Cuenta.ReadOnly = False
                 txt_Proveedor.ReadOnly = False
                 txt_Importe.ReadOnly = False
+                txt_Observaciones.ReadOnly = False
+                txt_FechaRequerida.ReadOnly = False
+
+                chk_ChequePropio.Enabled = True
+                chk_Tranferencia.Enabled = True
+                chk_ChequeTerceros.Enabled = True
+                chk_Tarjeta.Enabled = True
+                chk_Efectivo.Enabled = True
+                chk_Echeq.Enabled = True
 
             End If
         End If
@@ -499,6 +515,9 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
                        & "" & ParidadInformada_1 & "" _
                        & "MarcaPopUp, " _
                        & "MarcaPopUp_Pachi, " _
+                       & "MarcaPopUp_Alejandro, " _
+                       & "MarcaPopUp_Sergio, " _
+                       & "MarcaPopUp_Lucas, " _
                        & "Operador_Sector, " _
                        & "OrdenPago)" _
                        & " VALUES(" _
@@ -525,6 +544,9 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
                        & "'" & ordenaFecha(txt_FechaRequerida.Text) & "', " _
                        & "" & agregado_2 & " " _
                        & "" & ParidadInformada_2 & " " _
+                       & "'" & "" & "', " _
+                       & "'" & "" & "', " _
+                       & "'" & "" & "', " _
                        & "'" & "" & "', " _
                        & "'" & "" & "', " _
                        & "'" & Trim(Operador.Solifondos_Sector) & "', " _
@@ -866,10 +888,13 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
     End Sub
 
     Private Sub txt_Proveedor_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles txt_Proveedor.MouseDoubleClick
-        With New Consulta()
-            .Show(Me)
-        End With
+        If txt_Proveedor.ReadOnly = False Then
+            With New Consulta()
+                .Show(Me)
+            End With
+        End If
     End Sub
+
 
     Private Sub txt_Cuenta_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles txt_Cuenta.MouseDoubleClick
         With New Consulta(1)

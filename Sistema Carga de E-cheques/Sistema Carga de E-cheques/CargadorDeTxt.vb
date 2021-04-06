@@ -1,28 +1,46 @@
-﻿Imports System.Globalization
-Imports Util.Clases.Helper
+﻿Imports Util.Clases.Helper
 Imports Util.Clases.Query
+Imports System.Configuration
 Imports System.IO
-Imports System.Security.Cryptography
-Imports System.Text.RegularExpressions
-Imports Microsoft.VisualBasic.FileIO
-
 
 
 Public Class CargadorDeTxt
 
     Dim DragActivo As Boolean = False
-
+    Dim RutaCarpeta As String
     Sub New()
 
         ' Llamada necesaria para el diseñador.
         InitializeComponent()
 
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
+        RutaCarpeta = ConfigurationSettings.AppSettings("ARCHIVOS_A_CARGAR")
 
-
+        CargarArchivos()
     End Sub
 
+    Private Sub CargarArchivos()
+        If Directory.Exists(RutaCarpeta) Then
+            For Each file As String In Directory.GetFiles(RutaCarpeta)
+                DGV_RutasArchivos.Rows.Add(file)
+            Next
+            btn_ObtenerDatos_Click(Nothing, Nothing)
+            btn_CargarEnTabla_Click(Nothing, Nothing)
 
+
+            Dim listaArchivos As New List(Of String)
+            For Each file As String In Directory.GetFiles(RutaCarpeta)
+                listaArchivos.Add(file)
+            Next
+
+            For Each item As DataGridViewRow In DGV_RutasArchivos.Rows
+                File.Delete(item.Cells(0).Value)
+            Next
+
+        Else
+
+        End If
+    End Sub
 
     Private Sub btn_ObtenerDatos_Click(sender As Object, e As EventArgs) Handles btn_ObtenerDatos.Click
         Dim tablafinal As DataTable
@@ -112,6 +130,8 @@ Public Class CargadorDeTxt
         ' Leer el contenido del archivo de texto en una matriz 
         Dim sr As IO.StreamReader = New IO.StreamReader(filename)
         Dim txtlines() As String = sr.ReadToEnd.Split({Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
+
+        sr.Close()
 
         ''No devuelve nada si no hay nada en el archivo de texto
         If txtlines.Count = 0 Then
@@ -256,7 +276,7 @@ Public Class CargadorDeTxt
         Dim ListaSQLCnslt As New List(Of String)
 
         Dim tabla As DataTable = dgv_Cheques.DataSource
-        For Each rowTabla As DataRow In Tabla.Rows
+        For Each rowTabla As DataRow In tabla.Rows
 
             Dim WRazonEmisor As String = rowTabla.Item(0)
             Dim WNCheque As String = rowTabla.Item(1)
@@ -296,7 +316,7 @@ Public Class CargadorDeTxt
         Catch ex As Exception
 
         End Try
-        
+
     End Sub
     Private Function VerificarExiste(ByVal WCLAVE As String)
         Dim SQLCnslt As String = "SELECT Clave FROM Carga_ChequesE WHERE Clave = '" & WCLAVE & "'"
