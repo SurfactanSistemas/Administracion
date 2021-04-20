@@ -28,33 +28,33 @@ Partial Public Class DBAuxi
     Private tableListadoGrilla As ListadoGrillaDataTable
     
     Private tableGrillaGestor As GrillaGestorDataTable
-
+    
     Private _schemaSerializationMode As Global.System.Data.SchemaSerializationMode = Global.System.Data.SchemaSerializationMode.IncludeSchema
-
-    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
     Public Sub New()
-        MyBase.New()
-        Me.BeginInit()
-        Me.InitClass()
+        MyBase.New
+        Me.BeginInit
+        Me.InitClass
         Dim schemaChangedHandler As Global.System.ComponentModel.CollectionChangeEventHandler = AddressOf Me.SchemaChanged
         AddHandler MyBase.Tables.CollectionChanged, schemaChangedHandler
         AddHandler MyBase.Relations.CollectionChanged, schemaChangedHandler
-        Me.EndInit()
+        Me.EndInit
     End Sub
-
-    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
     Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
-        MyBase.New(info, context, False)
-        If (Me.IsBinarySerialized(info, context) = True) Then
-            Me.InitVars(False)
+        MyBase.New(info, context, false)
+        If (Me.IsBinarySerialized(info, context) = true) Then
+            Me.InitVars(false)
             Dim schemaChangedHandler1 As Global.System.ComponentModel.CollectionChangeEventHandler = AddressOf Me.SchemaChanged
             AddHandler Me.Tables.CollectionChanged, schemaChangedHandler1
             AddHandler Me.Relations.CollectionChanged, schemaChangedHandler1
             Return
         End If
-        Dim strSchema As String = CType(info.GetValue("XmlSchema", GetType(String)), String)
+        Dim strSchema As String = CType(info.GetValue("XmlSchema", GetType(String)),String)
         If (Me.DetermineSchemaSerializationMode(info, context) = Global.System.Data.SchemaSerializationMode.IncludeSchema) Then
             Dim ds As Global.System.Data.DataSet = New Global.System.Data.DataSet()
             ds.ReadXmlSchema(New Global.System.Xml.XmlTextReader(New Global.System.IO.StringReader(strSchema)))
@@ -70,8 +70,8 @@ Partial Public Class DBAuxi
             Me.Locale = ds.Locale
             Me.CaseSensitive = ds.CaseSensitive
             Me.EnforceConstraints = ds.EnforceConstraints
-            Me.Merge(ds, False, Global.System.Data.MissingSchemaAction.Add)
-            Me.InitVars()
+            Me.Merge(ds, false, Global.System.Data.MissingSchemaAction.Add)
+            Me.InitVars
         Else
             Me.ReadXmlSchema(New Global.System.Xml.XmlTextReader(New Global.System.IO.StringReader(strSchema)))
         End If
@@ -80,92 +80,92 @@ Partial Public Class DBAuxi
         AddHandler MyBase.Tables.CollectionChanged, schemaChangedHandler
         AddHandler Me.Relations.CollectionChanged, schemaChangedHandler
     End Sub
-
-    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-     Global.System.ComponentModel.Browsable(False), _
-     Global.System.ComponentModel.DesignerSerializationVisibility(Global.System.ComponentModel.DesignerSerializationVisibility.Content)> _
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+     Global.System.ComponentModel.Browsable(false),  _
+     Global.System.ComponentModel.DesignerSerializationVisibility(Global.System.ComponentModel.DesignerSerializationVisibility.Content)>  _
     Public ReadOnly Property ListadoGrilla() As ListadoGrillaDataTable
         Get
             Return Me.tableListadoGrilla
         End Get
     End Property
-
-    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-     Global.System.ComponentModel.Browsable(False), _
-     Global.System.ComponentModel.DesignerSerializationVisibility(Global.System.ComponentModel.DesignerSerializationVisibility.Content)> _
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+     Global.System.ComponentModel.Browsable(false),  _
+     Global.System.ComponentModel.DesignerSerializationVisibility(Global.System.ComponentModel.DesignerSerializationVisibility.Content)>  _
     Public ReadOnly Property GrillaGestor() As GrillaGestorDataTable
         Get
             Return Me.tableGrillaGestor
         End Get
     End Property
-
-    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-     Global.System.ComponentModel.BrowsableAttribute(True), _
-     Global.System.ComponentModel.DesignerSerializationVisibilityAttribute(Global.System.ComponentModel.DesignerSerializationVisibility.Visible)> _
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+     Global.System.ComponentModel.BrowsableAttribute(true),  _
+     Global.System.ComponentModel.DesignerSerializationVisibilityAttribute(Global.System.ComponentModel.DesignerSerializationVisibility.Visible)>  _
     Public Overrides Property SchemaSerializationMode() As Global.System.Data.SchemaSerializationMode
         Get
             Return Me._schemaSerializationMode
         End Get
-        Set(value As Global.System.Data.SchemaSerializationMode)
+        Set
             Me._schemaSerializationMode = value
         End Set
     End Property
-
-    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-     Global.System.ComponentModel.DesignerSerializationVisibilityAttribute(Global.System.ComponentModel.DesignerSerializationVisibility.Hidden)> _
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+     Global.System.ComponentModel.DesignerSerializationVisibilityAttribute(Global.System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
     Public Shadows ReadOnly Property Tables() As Global.System.Data.DataTableCollection
         Get
             Return MyBase.Tables
         End Get
     End Property
-
-    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-     Global.System.ComponentModel.DesignerSerializationVisibilityAttribute(Global.System.ComponentModel.DesignerSerializationVisibility.Hidden)> _
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+     Global.System.ComponentModel.DesignerSerializationVisibilityAttribute(Global.System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
     Public Shadows ReadOnly Property Relations() As Global.System.Data.DataRelationCollection
         Get
             Return MyBase.Relations
         End Get
     End Property
-
-    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
     Protected Overrides Sub InitializeDerivedDataSet()
-        Me.BeginInit()
-        Me.InitClass()
-        Me.EndInit()
+        Me.BeginInit
+        Me.InitClass
+        Me.EndInit
     End Sub
-
-    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
     Public Overrides Function Clone() As Global.System.Data.DataSet
-        Dim cln As DBAuxi = CType(MyBase.Clone, DBAuxi)
-        cln.InitVars()
+        Dim cln As DBAuxi = CType(MyBase.Clone,DBAuxi)
+        cln.InitVars
         cln.SchemaSerializationMode = Me.SchemaSerializationMode
         Return cln
     End Function
-
-    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
     Protected Overrides Function ShouldSerializeTables() As Boolean
-        Return False
+        Return false
     End Function
-
-    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
     Protected Overrides Function ShouldSerializeRelations() As Boolean
-        Return False
+        Return false
     End Function
-
-    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
     Protected Overrides Sub ReadXmlSerializable(ByVal reader As Global.System.Xml.XmlReader)
         If (Me.DetermineSchemaSerializationMode(reader) = Global.System.Data.SchemaSerializationMode.IncludeSchema) Then
-            Me.Reset()
+            Me.Reset
             Dim ds As Global.System.Data.DataSet = New Global.System.Data.DataSet()
             ds.ReadXml(reader)
             If (Not (ds.Tables("ListadoGrilla")) Is Nothing) Then
@@ -180,82 +180,82 @@ Partial Public Class DBAuxi
             Me.Locale = ds.Locale
             Me.CaseSensitive = ds.CaseSensitive
             Me.EnforceConstraints = ds.EnforceConstraints
-            Me.Merge(ds, False, Global.System.Data.MissingSchemaAction.Add)
-            Me.InitVars()
+            Me.Merge(ds, false, Global.System.Data.MissingSchemaAction.Add)
+            Me.InitVars
         Else
             Me.ReadXml(reader)
-            Me.InitVars()
+            Me.InitVars
         End If
     End Sub
-
-    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
     Protected Overrides Function GetSchemaSerializable() As Global.System.Xml.Schema.XmlSchema
         Dim stream As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
         Me.WriteXmlSchema(New Global.System.Xml.XmlTextWriter(stream, Nothing))
         stream.Position = 0
         Return Global.System.Xml.Schema.XmlSchema.Read(New Global.System.Xml.XmlTextReader(stream), Nothing)
     End Function
-
-    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
     Friend Overloads Sub InitVars()
-        Me.InitVars(True)
+        Me.InitVars(true)
     End Sub
-
-    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
     Friend Overloads Sub InitVars(ByVal initTable As Boolean)
-        Me.tableListadoGrilla = CType(MyBase.Tables("ListadoGrilla"), ListadoGrillaDataTable)
-        If (initTable = True) Then
+        Me.tableListadoGrilla = CType(MyBase.Tables("ListadoGrilla"),ListadoGrillaDataTable)
+        If (initTable = true) Then
             If (Not (Me.tableListadoGrilla) Is Nothing) Then
-                Me.tableListadoGrilla.InitVars()
+                Me.tableListadoGrilla.InitVars
             End If
         End If
-        Me.tableGrillaGestor = CType(MyBase.Tables("GrillaGestor"), GrillaGestorDataTable)
-        If (initTable = True) Then
+        Me.tableGrillaGestor = CType(MyBase.Tables("GrillaGestor"),GrillaGestorDataTable)
+        If (initTable = true) Then
             If (Not (Me.tableGrillaGestor) Is Nothing) Then
-                Me.tableGrillaGestor.InitVars()
+                Me.tableGrillaGestor.InitVars
             End If
         End If
     End Sub
-
-    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
     Private Sub InitClass()
         Me.DataSetName = "DBAuxi"
         Me.Prefix = ""
         Me.Namespace = "http://tempuri.org/DBAuxi.xsd"
-        Me.EnforceConstraints = True
+        Me.EnforceConstraints = true
         Me.SchemaSerializationMode = Global.System.Data.SchemaSerializationMode.IncludeSchema
         Me.tableListadoGrilla = New ListadoGrillaDataTable()
         MyBase.Tables.Add(Me.tableListadoGrilla)
         Me.tableGrillaGestor = New GrillaGestorDataTable()
         MyBase.Tables.Add(Me.tableGrillaGestor)
     End Sub
-
-    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
     Private Function ShouldSerializeListadoGrilla() As Boolean
-        Return False
+        Return false
     End Function
-
-    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
     Private Function ShouldSerializeGrillaGestor() As Boolean
-        Return False
+        Return false
     End Function
-
-    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
     Private Sub SchemaChanged(ByVal sender As Object, ByVal e As Global.System.ComponentModel.CollectionChangeEventArgs)
         If (e.Action = Global.System.ComponentModel.CollectionChangeAction.Remove) Then
-            Me.InitVars()
+            Me.InitVars
         End If
     End Sub
-
-    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
     Public Shared Function GetTypedDataSetSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
         Dim ds As DBAuxi = New DBAuxi()
         Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType()
@@ -268,91 +268,93 @@ Partial Public Class DBAuxi
         If xs.Contains(dsSchema.TargetNamespace) Then
             Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
             Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
-            Try
+            Try 
                 Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
                 dsSchema.Write(s1)
                 Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
                 Do While schemas.MoveNext
-                    schema = CType(schemas.Current, Global.System.Xml.Schema.XmlSchema)
+                    schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
                     s2.SetLength(0)
                     schema.Write(s2)
                     If (s1.Length = s2.Length) Then
                         s1.Position = 0
                         s2.Position = 0
-
-                        Do While ((s1.Position <> s1.Length) _
+                        
+                        Do While ((s1.Position <> s1.Length)  _
                                     AndAlso (s1.ReadByte = s2.ReadByte))
-
-
+                            
+                            
                         Loop
                         If (s1.Position = s1.Length) Then
                             Return type
                         End If
                     End If
-
+                    
                 Loop
             Finally
                 If (Not (s1) Is Nothing) Then
-                    s1.Close()
+                    s1.Close
                 End If
                 If (Not (s2) Is Nothing) Then
-                    s2.Close()
+                    s2.Close
                 End If
             End Try
         End If
         xs.Add(dsSchema)
         Return type
     End Function
-
-    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+    
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
     Public Delegate Sub ListadoGrillaRowChangeEventHandler(ByVal sender As Object, ByVal e As ListadoGrillaRowChangeEvent)
-
-    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+    
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
     Public Delegate Sub GrillaGestorRowChangeEventHandler(ByVal sender As Object, ByVal e As GrillaGestorRowChangeEvent)
-
+    
     '''<summary>
     '''Represents the strongly named DataTable class.
     '''</summary>
-    <Global.System.Serializable(), _
-     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")> _
+    <Global.System.Serializable(),  _
+     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
     Partial Public Class ListadoGrillaDataTable
         Inherits Global.System.Data.TypedTableBase(Of ListadoGrillaRow)
-
+        
         Private columnNroSolicitud As Global.System.Data.DataColumn
-
+        
         Private columnSolicitante As Global.System.Data.DataColumn
-
+        
         Private columnFecha As Global.System.Data.DataColumn
-
+        
         Private columnOrdFecha As Global.System.Data.DataColumn
-
+        
         Private columnTipo As Global.System.Data.DataColumn
-
+        
         Private columnDestino As Global.System.Data.DataColumn
-
+        
         Private columnTitulo As Global.System.Data.DataColumn
-
+        
         Private columnMoneda As Global.System.Data.DataColumn
-
+        
         Private columnImporte As Global.System.Data.DataColumn
-
+        
         Private columnFechaRequerida As Global.System.Data.DataColumn
-
+        
         Private columnOrdFechaRequerida As Global.System.Data.DataColumn
-
+        
         Private columnImporteDolares As Global.System.Data.DataColumn
-
+        
         Private columnEfectivo_Chk As Global.System.Data.DataColumn
-
+        
         Private columnTransferencia_Chk As Global.System.Data.DataColumn
-
+        
         Private columnECheq_Chk As Global.System.Data.DataColumn
-
+        
         Private columnCheqTerceros_Chk As Global.System.Data.DataColumn
-
+        
         Private columnCheqPropio_Chk As Global.System.Data.DataColumn
-
+        
         Private columnTarjeta_Chk As Global.System.Data.DataColumn
+        
+        Private columnDebitoAutomatico_Chk As Global.System.Data.DataColumn
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
@@ -534,6 +536,14 @@ Partial Public Class DBAuxi
         End Property
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public ReadOnly Property DebitoAutomatico_ChkColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnDebitoAutomatico_Chk
+            End Get
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
          Global.System.ComponentModel.Browsable(False)> _
         Public ReadOnly Property Count() As Integer
@@ -588,9 +598,10 @@ Partial Public Class DBAuxi
                     ByVal ECheq_Chk As Boolean, _
                     ByVal CheqTerceros_Chk As Boolean, _
                     ByVal CheqPropio_Chk As Boolean, _
-                    ByVal Tarjeta_Chk As Boolean) As ListadoGrillaRow
+                    ByVal Tarjeta_Chk As Boolean, _
+                    ByVal DebitoAutomatico_Chk As Boolean) As ListadoGrillaRow
             Dim rowListadoGrillaRow As ListadoGrillaRow = CType(Me.NewRow, ListadoGrillaRow)
-            Dim columnValuesArray() As Object = New Object() {NroSolicitud, Solicitante, Fecha, OrdFecha, Tipo, Destino, Titulo, Moneda, Importe, FechaRequerida, OrdFechaRequerida, ImporteDolares, Efectivo_Chk, Transferencia_Chk, ECheq_Chk, CheqTerceros_Chk, CheqPropio_Chk, Tarjeta_Chk}
+            Dim columnValuesArray() As Object = New Object() {NroSolicitud, Solicitante, Fecha, OrdFecha, Tipo, Destino, Titulo, Moneda, Importe, FechaRequerida, OrdFechaRequerida, ImporteDolares, Efectivo_Chk, Transferencia_Chk, ECheq_Chk, CheqTerceros_Chk, CheqPropio_Chk, Tarjeta_Chk, DebitoAutomatico_Chk}
             rowListadoGrillaRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowListadoGrillaRow)
             Return rowListadoGrillaRow
@@ -631,6 +642,7 @@ Partial Public Class DBAuxi
             Me.columnCheqTerceros_Chk = MyBase.Columns("CheqTerceros_Chk")
             Me.columnCheqPropio_Chk = MyBase.Columns("CheqPropio_Chk")
             Me.columnTarjeta_Chk = MyBase.Columns("Tarjeta_Chk")
+            Me.columnDebitoAutomatico_Chk = MyBase.Columns("DebitoAutomatico_Chk")
         End Sub
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
@@ -672,6 +684,8 @@ Partial Public Class DBAuxi
             MyBase.Columns.Add(Me.columnCheqPropio_Chk)
             Me.columnTarjeta_Chk = New Global.System.Data.DataColumn("Tarjeta_Chk", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnTarjeta_Chk)
+            Me.columnDebitoAutomatico_Chk = New Global.System.Data.DataColumn("DebitoAutomatico_Chk", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnDebitoAutomatico_Chk)
         End Sub
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
@@ -1498,6 +1512,22 @@ Partial Public Class DBAuxi
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Property DebitoAutomatico_Chk() As Boolean
+            Get
+                Try
+                    Return CType(Me(Me.tableListadoGrilla.DebitoAutomatico_ChkColumn), Boolean)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("El valor de la columna 'DebitoAutomatico_Chk' de la tabla 'ListadoGrilla' es DBNu" & _
+                            "ll.", e)
+                End Try
+            End Get
+            Set(value As Boolean)
+                Me(Me.tableListadoGrilla.DebitoAutomatico_ChkColumn) = value
+            End Set
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public Function IsNroSolicitudNull() As Boolean
             Return Me.IsNull(Me.tableListadoGrilla.NroSolicitudColumn)
         End Function
@@ -1711,440 +1741,452 @@ Partial Public Class DBAuxi
         Public Sub SetTarjeta_ChkNull()
             Me(Me.tableListadoGrilla.Tarjeta_ChkColumn) = Global.System.Convert.DBNull
         End Sub
-    End Class
 
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Function IsDebitoAutomatico_ChkNull() As Boolean
+            Return Me.IsNull(Me.tableListadoGrilla.DebitoAutomatico_ChkColumn)
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Sub SetDebitoAutomatico_ChkNull()
+            Me(Me.tableListadoGrilla.DebitoAutomatico_ChkColumn) = Global.System.Convert.DBNull
+        End Sub
+    End Class
+    
     '''<summary>
     '''Represents strongly named DataRow class.
     '''</summary>
     Partial Public Class GrillaGestorRow
         Inherits Global.System.Data.DataRow
-
+        
         Private tableGrillaGestor As GrillaGestorDataTable
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
             MyBase.New(rb)
-            Me.tableGrillaGestor = CType(Me.Table, GrillaGestorDataTable)
+            Me.tableGrillaGestor = CType(Me.Table,GrillaGestorDataTable)
         End Sub
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property Chk() As String
             Get
-                Try
-                    Return CType(Me(Me.tableGrillaGestor.ChkColumn), String)
+                Try 
+                    Return CType(Me(Me.tableGrillaGestor.ChkColumn),String)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("El valor de la columna 'Chk' de la tabla 'GrillaGestor' es DBNull.", e)
                 End Try
             End Get
-            Set(value As String)
+            Set
                 Me(Me.tableGrillaGestor.ChkColumn) = value
             End Set
         End Property
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property NroSolicitud() As String
             Get
-                Try
-                    Return CType(Me(Me.tableGrillaGestor.NroSolicitudColumn), String)
+                Try 
+                    Return CType(Me(Me.tableGrillaGestor.NroSolicitudColumn),String)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("El valor de la columna 'NroSolicitud' de la tabla 'GrillaGestor' es DBNull.", e)
                 End Try
             End Get
-            Set(value As String)
+            Set
                 Me(Me.tableGrillaGestor.NroSolicitudColumn) = value
             End Set
         End Property
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property Solicitante() As String
             Get
-                Try
-                    Return CType(Me(Me.tableGrillaGestor.SolicitanteColumn), String)
+                Try 
+                    Return CType(Me(Me.tableGrillaGestor.SolicitanteColumn),String)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("El valor de la columna 'Solicitante' de la tabla 'GrillaGestor' es DBNull.", e)
                 End Try
             End Get
-            Set(value As String)
+            Set
                 Me(Me.tableGrillaGestor.SolicitanteColumn) = value
             End Set
         End Property
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property Fecha() As String
             Get
-                Try
-                    Return CType(Me(Me.tableGrillaGestor.FechaColumn), String)
+                Try 
+                    Return CType(Me(Me.tableGrillaGestor.FechaColumn),String)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("El valor de la columna 'Fecha' de la tabla 'GrillaGestor' es DBNull.", e)
                 End Try
             End Get
-            Set(value As String)
+            Set
                 Me(Me.tableGrillaGestor.FechaColumn) = value
             End Set
         End Property
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property OrdFecha() As String
             Get
-                Try
-                    Return CType(Me(Me.tableGrillaGestor.OrdFechaColumn), String)
+                Try 
+                    Return CType(Me(Me.tableGrillaGestor.OrdFechaColumn),String)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("El valor de la columna 'OrdFecha' de la tabla 'GrillaGestor' es DBNull.", e)
                 End Try
             End Get
-            Set(value As String)
+            Set
                 Me(Me.tableGrillaGestor.OrdFechaColumn) = value
             End Set
         End Property
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property Tipo() As String
             Get
-                Try
-                    Return CType(Me(Me.tableGrillaGestor.TipoColumn), String)
+                Try 
+                    Return CType(Me(Me.tableGrillaGestor.TipoColumn),String)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("El valor de la columna 'Tipo' de la tabla 'GrillaGestor' es DBNull.", e)
                 End Try
             End Get
-            Set(value As String)
+            Set
                 Me(Me.tableGrillaGestor.TipoColumn) = value
             End Set
         End Property
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property Destino() As String
             Get
-                Try
-                    Return CType(Me(Me.tableGrillaGestor.DestinoColumn), String)
+                Try 
+                    Return CType(Me(Me.tableGrillaGestor.DestinoColumn),String)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("El valor de la columna 'Destino' de la tabla 'GrillaGestor' es DBNull.", e)
                 End Try
             End Get
-            Set(value As String)
+            Set
                 Me(Me.tableGrillaGestor.DestinoColumn) = value
             End Set
         End Property
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property Titulo() As String
             Get
-                Try
-                    Return CType(Me(Me.tableGrillaGestor.TituloColumn), String)
+                Try 
+                    Return CType(Me(Me.tableGrillaGestor.TituloColumn),String)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("El valor de la columna 'Titulo' de la tabla 'GrillaGestor' es DBNull.", e)
                 End Try
             End Get
-            Set(value As String)
+            Set
                 Me(Me.tableGrillaGestor.TituloColumn) = value
             End Set
         End Property
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property Moneda() As String
             Get
-                Try
-                    Return CType(Me(Me.tableGrillaGestor.MonedaColumn), String)
+                Try 
+                    Return CType(Me(Me.tableGrillaGestor.MonedaColumn),String)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("El valor de la columna 'Moneda' de la tabla 'GrillaGestor' es DBNull.", e)
                 End Try
             End Get
-            Set(value As String)
+            Set
                 Me(Me.tableGrillaGestor.MonedaColumn) = value
             End Set
         End Property
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property Importe() As String
             Get
-                Try
-                    Return CType(Me(Me.tableGrillaGestor.ImporteColumn), String)
+                Try 
+                    Return CType(Me(Me.tableGrillaGestor.ImporteColumn),String)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("El valor de la columna 'Importe' de la tabla 'GrillaGestor' es DBNull.", e)
                 End Try
             End Get
-            Set(value As String)
+            Set
                 Me(Me.tableGrillaGestor.ImporteColumn) = value
             End Set
         End Property
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property FechaRequerida() As String
             Get
-                Try
-                    Return CType(Me(Me.tableGrillaGestor.FechaRequeridaColumn), String)
+                Try 
+                    Return CType(Me(Me.tableGrillaGestor.FechaRequeridaColumn),String)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("El valor de la columna 'FechaRequerida' de la tabla 'GrillaGestor' es DBNull.", e)
                 End Try
             End Get
-            Set(value As String)
+            Set
                 Me(Me.tableGrillaGestor.FechaRequeridaColumn) = value
             End Set
         End Property
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property OrdFechaRequerida() As String
             Get
-                Try
-                    Return CType(Me(Me.tableGrillaGestor.OrdFechaRequeridaColumn), String)
+                Try 
+                    Return CType(Me(Me.tableGrillaGestor.OrdFechaRequeridaColumn),String)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("El valor de la columna 'OrdFechaRequerida' de la tabla 'GrillaGestor' es DBNull.", e)
                 End Try
             End Get
-            Set(value As String)
+            Set
                 Me(Me.tableGrillaGestor.OrdFechaRequeridaColumn) = value
             End Set
         End Property
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property Estado() As String
             Get
-                Try
-                    Return CType(Me(Me.tableGrillaGestor.EstadoColumn), String)
+                Try 
+                    Return CType(Me(Me.tableGrillaGestor.EstadoColumn),String)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("El valor de la columna 'Estado' de la tabla 'GrillaGestor' es DBNull.", e)
                 End Try
             End Get
-            Set(value As String)
+            Set
                 Me(Me.tableGrillaGestor.EstadoColumn) = value
             End Set
         End Property
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IsChkNull() As Boolean
             Return Me.IsNull(Me.tableGrillaGestor.ChkColumn)
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetChkNull()
             Me(Me.tableGrillaGestor.ChkColumn) = Global.System.Convert.DBNull
         End Sub
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IsNroSolicitudNull() As Boolean
             Return Me.IsNull(Me.tableGrillaGestor.NroSolicitudColumn)
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetNroSolicitudNull()
             Me(Me.tableGrillaGestor.NroSolicitudColumn) = Global.System.Convert.DBNull
         End Sub
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IsSolicitanteNull() As Boolean
             Return Me.IsNull(Me.tableGrillaGestor.SolicitanteColumn)
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetSolicitanteNull()
             Me(Me.tableGrillaGestor.SolicitanteColumn) = Global.System.Convert.DBNull
         End Sub
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IsFechaNull() As Boolean
             Return Me.IsNull(Me.tableGrillaGestor.FechaColumn)
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetFechaNull()
             Me(Me.tableGrillaGestor.FechaColumn) = Global.System.Convert.DBNull
         End Sub
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IsOrdFechaNull() As Boolean
             Return Me.IsNull(Me.tableGrillaGestor.OrdFechaColumn)
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetOrdFechaNull()
             Me(Me.tableGrillaGestor.OrdFechaColumn) = Global.System.Convert.DBNull
         End Sub
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IsTipoNull() As Boolean
             Return Me.IsNull(Me.tableGrillaGestor.TipoColumn)
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetTipoNull()
             Me(Me.tableGrillaGestor.TipoColumn) = Global.System.Convert.DBNull
         End Sub
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IsDestinoNull() As Boolean
             Return Me.IsNull(Me.tableGrillaGestor.DestinoColumn)
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetDestinoNull()
             Me(Me.tableGrillaGestor.DestinoColumn) = Global.System.Convert.DBNull
         End Sub
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IsTituloNull() As Boolean
             Return Me.IsNull(Me.tableGrillaGestor.TituloColumn)
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetTituloNull()
             Me(Me.tableGrillaGestor.TituloColumn) = Global.System.Convert.DBNull
         End Sub
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IsMonedaNull() As Boolean
             Return Me.IsNull(Me.tableGrillaGestor.MonedaColumn)
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetMonedaNull()
             Me(Me.tableGrillaGestor.MonedaColumn) = Global.System.Convert.DBNull
         End Sub
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IsImporteNull() As Boolean
             Return Me.IsNull(Me.tableGrillaGestor.ImporteColumn)
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetImporteNull()
             Me(Me.tableGrillaGestor.ImporteColumn) = Global.System.Convert.DBNull
         End Sub
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IsFechaRequeridaNull() As Boolean
             Return Me.IsNull(Me.tableGrillaGestor.FechaRequeridaColumn)
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetFechaRequeridaNull()
             Me(Me.tableGrillaGestor.FechaRequeridaColumn) = Global.System.Convert.DBNull
         End Sub
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IsOrdFechaRequeridaNull() As Boolean
             Return Me.IsNull(Me.tableGrillaGestor.OrdFechaRequeridaColumn)
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetOrdFechaRequeridaNull()
             Me(Me.tableGrillaGestor.OrdFechaRequeridaColumn) = Global.System.Convert.DBNull
         End Sub
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IsEstadoNull() As Boolean
             Return Me.IsNull(Me.tableGrillaGestor.EstadoColumn)
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetEstadoNull()
             Me(Me.tableGrillaGestor.EstadoColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
-
+    
     '''<summary>
     '''Row event argument class
     '''</summary>
-    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
     Public Class ListadoGrillaRowChangeEvent
         Inherits Global.System.EventArgs
-
+        
         Private eventRow As ListadoGrillaRow
-
+        
         Private eventAction As Global.System.Data.DataRowAction
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub New(ByVal row As ListadoGrillaRow, ByVal action As Global.System.Data.DataRowAction)
-            MyBase.New()
+            MyBase.New
             Me.eventRow = row
             Me.eventAction = action
         End Sub
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public ReadOnly Property Row() As ListadoGrillaRow
             Get
                 Return Me.eventRow
             End Get
         End Property
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public ReadOnly Property Action() As Global.System.Data.DataRowAction
             Get
                 Return Me.eventAction
             End Get
         End Property
     End Class
-
+    
     '''<summary>
     '''Row event argument class
     '''</summary>
-    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
     Public Class GrillaGestorRowChangeEvent
         Inherits Global.System.EventArgs
-
+        
         Private eventRow As GrillaGestorRow
-
+        
         Private eventAction As Global.System.Data.DataRowAction
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub New(ByVal row As GrillaGestorRow, ByVal action As Global.System.Data.DataRowAction)
-            MyBase.New()
+            MyBase.New
             Me.eventRow = row
             Me.eventAction = action
         End Sub
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public ReadOnly Property Row() As GrillaGestorRow
             Get
                 Return Me.eventRow
             End Get
         End Property
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public ReadOnly Property Action() As Global.System.Data.DataRowAction
             Get
                 Return Me.eventAction

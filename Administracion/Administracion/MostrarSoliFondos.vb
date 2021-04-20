@@ -12,7 +12,7 @@
             Dim SQLCnlst As String = "SELECT s.NroSolicitud, s.Solicitante, Tipo = IIF(s.Tipo = 1, 'Pago Prov.',  'Varios'), " _
                                  & "Destino = IIF(s.Proveedor = '',c.Descripcion, p.Nombre), s.Titulo, s.Concepto_Pago, " _
                                  & "Moneda = IIF(s.Moneda = 2, 'U$D',  '$'), s.TipoDolar, s.Importe, s.Proveedor, s.Cuenta, ObservacionesPago, " _
-                                 & "Efectivo_Chk, Transferencia_Chk, ECheq_Chk, CheqTerceros_Chk, CheqPropio_Chk, Tarjeta_Chk " _
+                                 & "Efectivo_Chk, Transferencia_Chk, ECheq_Chk, CheqTerceros_Chk, CheqPropio_Chk, Tarjeta_Chk, DebitoAutomatico_Chk " _
                                  & "FROM SolicitudFondos s LEFT JOIN Proveedor p ON s.Proveedor = p.Proveedor " _
                                  & "LEFT JOIN Cuenta c ON s.Cuenta = c.Cuenta WHERE s.NroSolicitud = '" & NroSoli & "'   ORDER BY s.NroSolicitud"
 
@@ -81,6 +81,9 @@
                     End If
                     If .Item("Tarjeta_Chk") Then
                         dgv_FormasPago.Rows.Add("Tarjeta")
+                    End If
+                    If .Item("DebitoAutomatico_Chk") Then
+                        dgv_FormasPago.Rows.Add("Debito Automatico")
                     End If
 
                 End With

@@ -43,10 +43,29 @@ Public Class Gestion_Solicitudes : Implements IActualizaSolicitudes, IContraseñ
             FinalLoad = "SI"
 
             ActualizarTotales()
-
+            
         Catch ex As Exception
 
         End Try
+    End Sub
+
+    Private Sub CambiarNumeroMillones(ByVal TotalPesos As Double, ByVal TotalDolares As Double)
+
+        ' Valores numéricos que deseamos formatear.
+        '
+        'Dim valorNumericoEntero As Decimal = 25693929D
+        'Dim valorNumericoDecimal As Decimal = 35878.3826D
+
+        ' Mostramos el resultado con el carácter separador de miles
+        ' existente en la cultura del subproceso actual. 
+        '
+        txt_TotalPesos.Text = String.Format("{0:N2}", TotalPesos)
+
+        ' Mostramos el resultado con los caracteres separadores de miles
+        ' y decimal, incluyendo tres dígitos decimales. 
+        '
+        txt_TotalDolares.Text = String.Format("{0:N2}", TotalDolares) ' 
+
     End Sub
 
     Private Sub Marcar_VistosPopup()
@@ -106,6 +125,8 @@ Public Class Gestion_Solicitudes : Implements IActualizaSolicitudes, IContraseñ
         txt_TotalDolares.Text = formatonumerico(txt_TotalDolares.Text)
         txt_TotalPesos.Text = formatonumerico(txt_TotalPesos.Text)
 
+        CambiarNumeroMillones(Val(txt_TotalPesos.Text), Val(txt_TotalDolares.Text))
+
     End Sub
     Private Sub AplicarFiltro()
 
@@ -154,7 +175,7 @@ Public Class Gestion_Solicitudes : Implements IActualizaSolicitudes, IContraseñ
         tabla.DefaultView.RowFilter = Filtro
 
         ActualizarTotales()
-
+        
         PintarAutorizadosRechazados()
 
     End Sub
@@ -312,7 +333,7 @@ Public Class Gestion_Solicitudes : Implements IActualizaSolicitudes, IContraseñ
                         ImporteDolares = .Cells("Importe").Value
                     End If
 
-                    Dim SQLCnslt As String = "SELECT Efectivo_Chk, Transferencia_Chk, ECheq_Chk, CheqTerceros_Chk, CheqPropio_Chk, Tarjeta_Chk  " _
+                    Dim SQLCnslt As String = "SELECT Efectivo_Chk, Transferencia_Chk, ECheq_Chk, CheqTerceros_Chk, CheqPropio_Chk, Tarjeta_Chk, DebitoAutomatico_Chk  " _
                                              & "FROM SolicitudFondos WHERE NroSolicitud = '" & .Cells("NroSolicitud").Value & "'"
                     Dim RowSoli As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
 
@@ -321,7 +342,7 @@ Public Class Gestion_Solicitudes : Implements IActualizaSolicitudes, IContraseñ
                                           .Cells("Titulo").Value, .Cells("Moneda").Value, ImportePesos,
                                           .Cells("FechaRequerida").Value, .Cells("OrdFechaRequerida").Value, ImporteDolares,
                                           RowSoli.Item("Efectivo_Chk"), RowSoli.Item("Transferencia_Chk"), RowSoli.Item("ECheq_Chk"),
-                                          RowSoli.Item("CheqTerceros_Chk"), RowSoli.Item("CheqPropio_Chk"), RowSoli.Item("Tarjeta_Chk"))
+                                          RowSoli.Item("CheqTerceros_Chk"), RowSoli.Item("CheqPropio_Chk"), RowSoli.Item("Tarjeta_Chk"), RowSoli.Item("DebitoAutomatico_Chk"))
                 End If
 
             End With

@@ -514,6 +514,35 @@ Public Class RecibosProvisorios
             txtRecibo.Text = _TraerProximoNumeroDeReciboProvisorio()
         End If
 
+
+
+        'VALIDO LOS CAMPOS DE NUMERO DE CHEQUE
+        For Each row In gridRecibos.Rows
+
+            With row
+
+                If (Val(OrDefault(.Cells("tipo").value, "")) = 2 Or Val(OrDefault(.Cells("tipo").value, "")) = 7) Then .Cells("banco").Value = _GenerarCodigoBanco(.Cells("banco").Value)
+
+                If Not IsNothing(.Cells(0).Value) AndAlso (Val(.Cells(0).Value) = 2 Or Val(.Cells(0).Value) = 7) Then
+
+                    ' Controlamos que no se ingrese un numero = 0 para los cheques.
+                    If IsNothing(.Cells(1).Value) OrElse Val(.Cells(1).Value) = 0 Then
+                        MsgBox("Se debe informar un numero valido para el cheque.", MsgBoxStyle.Exclamation)
+                        Exit Sub
+                    Else
+                        If Len(.Cells(1).Value) <> 8 Then
+                            MsgBox("Se debe informar 8 caracteres para el cheque.", MsgBoxStyle.Exclamation)
+                            Exit Sub
+                        End If
+                    End If
+
+                End If
+            End With
+
+        Next
+
+
+
         For Each control As Control In Panel2.Controls
 
             If TypeOf (control) Is TextBox Then
@@ -527,7 +556,7 @@ Public Class RecibosProvisorios
             End If
 
         Next
-
+        
         For Each row As DataGridViewRow In gridRecibos.Rows
             With row
                 Dim WTipo As String = If(.Cells("Tipo").Value, "")

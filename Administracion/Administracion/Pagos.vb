@@ -644,8 +644,8 @@ Public Class Pagos
                 If Not IsNothing(proveedor) Then
                     mostrarProveedor(proveedor)
                     'incluido Andres
-                    txtFechaParidad.Text = txtFecha.Text
-                    txtParidad.Text = traerParidad()
+                    'txtFechaParidad.Text = txtFecha.Text
+                    'txtParidad.Text = traerParidad()
                     'Fin Inclusion
                     btnCtaCte.PerformClick()
                 Else
@@ -1209,8 +1209,8 @@ Public Class Pagos
         mostrarProveedor(proveedor)
 
         'incluido Andres
-        txtFechaParidad.Text = txtFecha.Text
-        txtParidad.Text = traerParidad()
+        'txtFechaParidad.Text = txtFecha.Text
+        'txtParidad.Text = traerParidad()
         'Fin Inclusion
 
     End Sub
@@ -2015,7 +2015,7 @@ Public Class Pagos
                                     If IIf(IsDBNull(RowSoli.Item("TipoDolar")), 0, RowSoli.Item("TipoDolar")) = 1 Then
                                         ZZParidad = _NormalizarNumero(.Item("CambioDivisa").ToString(), 4)
                                     Else
-                                        ZZParidad = formatonumerico(RowSoli.Item("ParidadInformada"))
+                                        ZZParidad = formatonumerico(IIf(IsDBNull(RowSoli.Item("ParidadInformada")), 0, RowSoli.Item("ParidadInformada")))
                                     End If
 
 
@@ -2936,6 +2936,35 @@ Public Class Pagos
                 Dim SQLCnlst As String = "UPDATE SolicitudFondos SET OrdenPago = '" & Trim(txtOrdenPago.Text) & "', MarcaPopUp_Pachi = 'X' WHERE NroSolicitud = '" & NroSoliInterno & "'"
                 ExecuteNonQueries("SurfactanSa", {SQLCnlst})
 
+                Try 'PARA ENVIAR MAIL AVISO A LAS CUENTAS
+                    SQLCnlst = "SELECT Tipo, Solicitante, Cuenta FROM SolicitudFondos WHERE NroSolicitud = '" & NroSoliInterno & "'"
+                    Dim RowSoli As DataRow = GetSingle(SQLCnlst, "SurfactanSa")
+                    If RowSoli IsNot Nothing Then
+                        If Val(RowSoli.Item("Tipo")) = 2 Then
+                            SQLCnlst = "SELECT Email FROM Operador WHERE Descripcion = '" & RowSoli.Item("Solicitante") & "'"
+                            Dim Rowope As DataRow = GetSingle(SQLCnlst, "SurfactanSa")
+                            If Rowope IsNot Nothing Then
+                                SQLCnlst = "SELECT  Descripcion FROM Cuenta WHERE Cuenta = '" & Trim(RowSoli.Item("Cuenta")) & "'"
+                                Dim RowCuenta As DataRow = GetSingle(SQLCnlst, "SurfactanSa")
+                                If RowCuenta IsNot Nothing Then
+                                    Dim Mail As String = IIf(IsDBNull(Rowope.Item("Email")), "", Rowope.Item("Email"))
+                                    If Mail <> "" Then
+                                        Dim WAsunto As String = "ORDEN PAGO SOLICITUD FONDOS: " & NroSoliInterno
+                                        Dim WCuerpo As String = "Acaba de generarse el pago para la solicitud de Fondos Nro. <strong>" & NroSoliInterno & "</strong> <br/>" _
+                                                            & "Para el numero de cuenta <strong>" & RowSoli.Item("Cuenta") & " " & RowCuenta.Item("Descripcion") & "</strong>"
+                                        _EnviarEmail(Mail, "", WAsunto, WCuerpo, Nothing)
+                                    End If
+                                End If
+                            End If
+                        End If                        
+                    End If
+
+                Catch ex As System.Exception
+                    MsgBox("No se pudo enviar el mail de infome de pago al que solicito este pago", MsgBoxStyle.Critical)
+                End Try
+
+
+
 
                 Dim WFormula As String = "{SolicitudFondos.NroSolicitud} = " & NroSoliInterno & ""
 
@@ -2952,7 +2981,7 @@ Public Class Pagos
             MsgBox("Hubo un problema al querer Actualizar los datos en la tabla Solicitud de Fondos o al imprimir la solicitud", MsgBoxStyle.Critical)
             Exit Sub
         End Try
-        
+
 
 
 
@@ -8261,11 +8290,14 @@ Public Class Pagos
                     .HTMLBody = "<p>" & _body & "</p>" & "<br/><br/><p><strong>Atentamente</strong><br/>SURFACTAN S.A</p>" & WFirmaAct & .HTMLBody
                 End If
 
-                For Each adjunto As String In _adjuntos
-                    If Trim(adjunto) <> "" Then
-                        .Attachments.Add(adjunto)
-                    End If
-                Next
+                If _adjuntos IsNot Nothing Then
+                    For Each adjunto As String In _adjuntos
+                        If Trim(adjunto) <> "" Then
+                            .Attachments.Add(adjunto)
+                        End If
+                    Next
+                End If
+                
 
                 .Send()
                 '.Display()

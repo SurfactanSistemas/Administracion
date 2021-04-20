@@ -64,7 +64,7 @@ Public Class Login
             End With
 
             Select Case PermisoSistemaExportacion
-                Case 1
+                Case 1, 3
                     Dim frm As New MenuPrincipal()
                     frm.Show()
                 Case 2

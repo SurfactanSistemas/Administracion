@@ -114,6 +114,18 @@
     <Compile Include="DaoAcumulado.vb" />
     <Compile Include="Interface\IContraseña.vb" />
     <Compile Include="Interface\IMotivoRechazo.vb" />
+    <Compile Include="Mail_Reclamo.Designer.vb">
+      <DependentUpon>Mail_Reclamo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Mail_Reclamo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mail_Reclamo_Historial.Designer.vb">
+      <DependentUpon>Mail_Reclamo_Historial.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Mail_Reclamo_Historial.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="MotivoRechazo.Designer.vb">
       <DependentUpon>MotivoRechazo.vb</DependentUpon>
     </Compile>
@@ -206,6 +218,12 @@
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Mail_Reclamo.resx">
+      <DependentUpon>Mail_Reclamo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mail_Reclamo_Historial.resx">
+      <DependentUpon>Mail_Reclamo_Historial.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MenuPrincipal.resx">
       <DependentUpon>MenuPrincipal.vb</DependentUpon>
     </EmbeddedResource>
@@ -231,7 +249,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Reporte\DBAuxi.xsc">
       <DependentUpon>DBAuxi.xsd</DependentUpon>
     </None>

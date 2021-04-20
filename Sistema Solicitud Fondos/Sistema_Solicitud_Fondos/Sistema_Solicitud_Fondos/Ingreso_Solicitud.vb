@@ -9,6 +9,8 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
 
     Dim CarpetaAux As String = "C:\" & "Auxiliar_SolicitudFondos"
     Dim RutaGuardar As String = "\\193.168.0.2\g$\vb\NET\ArchivosRelacionadosSolicitudFondos"
+    ' Dim RutaGuardar As String = "C:\Users\soporte3\Desktop\Solifondos probar achivos"
+
 
     Dim LimpiaGrabar As String = "NO"
     Dim NRO_SOLICITUD As Integer = 0
@@ -77,6 +79,8 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
                 btn_Autorizar.Visible = True
             End If
 
+            'MOSTRAMOS EL BOTON DE MAILS
+            btn_MailReclamo.Visible = True
 
             'CARGAMOS EL REGISTRO
             SQLCnslt = "SELECT * FROM SolicitudFondos WHERE NroSolicitud = '" & NroSoli & "'"
@@ -166,6 +170,7 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
                 'chk_ChequePropio.Checked = OrDefault(rowsoli.Item("CheqPropio_Chk"), 0) = 1
                 chk_ChequePropio.Checked = IIf(IsDBNull(rowsoli.Item("CheqPropio_Chk")), 0, rowsoli.Item("CheqPropio_Chk"))
                 chk_Tarjeta.Checked = IIf(IsDBNull(rowsoli.Item("Tarjeta_Chk")), 0, rowsoli.Item("Tarjeta_Chk"))
+                chk_DebitoAutomatico.Checked = IIf(IsDBNull(rowsoli.Item("DebitoAutomatico_Chk")), 0, rowsoli.Item("DebitoAutomatico_Chk"))
 
                 'EN CASO DE QUE SEA EN DOLARES MULTIPLICAMOS EL VALOR POR LA PARIDAD
                 If WParidad <> 0 Then
@@ -204,6 +209,7 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
             chk_ChequeTerceros.Enabled = False
             chk_ChequePropio.Enabled = False
             chk_Tarjeta.Enabled = False
+            chk_DebitoAutomatico.Enabled = False
 
             cbx_Tipo.Enabled = False
             cbx_Moneda.Enabled = False
@@ -240,6 +246,7 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
                 chk_Tarjeta.Enabled = True
                 chk_Efectivo.Enabled = True
                 chk_Echeq.Enabled = True
+                chk_DebitoAutomatico.Enabled = True
 
             End If
         End If
@@ -350,7 +357,7 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
                         Exit Sub
                     End If
                 Else
-                    MsgBox("Debe ingresarse un proovedpr", vbExclamation)
+                    MsgBox("Debe ingresarse un proveedor", vbExclamation)
                     ValidacionesOk = False
                     VALIDACIONES = ValidacionesOk
                     Exit Sub
@@ -395,7 +402,7 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
             Exit Sub
         End If
 
-        If (chk_Efectivo.Checked = False And chk_Tranferencia.Checked = False And chk_Echeq.Checked = False And chk_ChequeTerceros.Checked = False And chk_ChequePropio.Checked = False And chk_Tarjeta.Checked = False) Then
+        If (chk_Efectivo.Checked = False And chk_Tranferencia.Checked = False And chk_Echeq.Checked = False And chk_ChequeTerceros.Checked = False And chk_ChequePropio.Checked = False And chk_Tarjeta.Checked = False And chk_DebitoAutomatico.Checked = False) Then
             MsgBox("Se debe seleccionar al menos una forma de pago", vbExclamation)
             ValidacionesOk = False
             VALIDACIONES = ValidacionesOk
@@ -422,6 +429,15 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
         '
         '  FIN DE VALIDACIONES
         '
+
+        Dim Sector As String
+
+        SQLCnslt = "SELECT SoliFondos_Sector FROM Operador WHERE Descripcion = '" & Trim(txt_Solicitante.Text) & "'"
+        Dim RowOpe As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+        If RowOpe IsNot Nothing Then
+            Sector = Trim(RowOpe.Item("SoliFondos_Sector"))
+        End If
+
 
         Dim Estado As String = ""
         Try
@@ -509,6 +525,7 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
                        & "CheqTerceros_chk, " _
                        & "CheqPropio_chk, " _
                        & "Tarjeta_chk, " _
+                       & "DebitoAutomatico_chk, " _
                        & "FechaRequerida, " _
                        & "OrdFechaRequerida, " _
                        & "" & agregado_1 & "" _
@@ -540,16 +557,17 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
                        & "'" & chk_ChequeTerceros.Checked & "', " _
                        & "'" & chk_ChequePropio.Checked & "', " _
                        & "'" & chk_Tarjeta.Checked & "', " _
+                       & "'" & chk_DebitoAutomatico.Checked & "', " _
                        & "'" & txt_FechaRequerida.Text & "', " _
                        & "'" & ordenaFecha(txt_FechaRequerida.Text) & "', " _
                        & "" & agregado_2 & " " _
                        & "" & ParidadInformada_2 & " " _
+                       & "'" & "X" & "', " _
                        & "'" & "" & "', " _
                        & "'" & "" & "', " _
                        & "'" & "" & "', " _
                        & "'" & "" & "', " _
-                       & "'" & "" & "', " _
-                       & "'" & Trim(Operador.Solifondos_Sector) & "', " _
+                       & "'" & Sector & "', " _
                        & "'" & "" & "') "
 
             ExecuteNonQueries("SurfactanSa", SQLCnslt)
@@ -961,9 +979,9 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
 
         End Try
 
-        For Each archivo As String In Directory.GetFiles("C:\Auxiliar")
+        For Each archivo As String In Directory.GetFiles(CarpetaAux)
             Try
-                Dim NombreArchivo As String = archivo.Remove(0, ("C:\Auxiliar\").Length)
+                Dim NombreArchivo As String = archivo.Remove(0, (CarpetaAux).Length)
                 If Not File.Exists(WDestino & "\" & NombreArchivo) Then
                     'Si no existe lo copio
                     File.Move(archivo, WDestino & "\" & NombreArchivo)
@@ -1549,4 +1567,11 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
         End If
     End Sub
 
+    Private Sub btn_MailReclamo_Click(sender As Object, e As EventArgs) Handles btn_MailReclamo.Click
+        With New Mail_Reclamo(NRO_SOLICITUD)
+            .Show(Me)
+        End With
+    End Sub
+
+    
 End Class
