@@ -1238,11 +1238,13 @@ Public Class RecibosProvisorios
                                 If Len(Trim(valor)) = 6 Then
                                     Dim _mes As String = Mid(valor, 4, 2)
 
-                                    If Val(_mes) < Date.Now.Month Then
-                                        txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & "2022"
-                                    Else
-                                        txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & "2021"
-                                    End If
+                                    'If Val(_mes) < Date.Now.Month Then
+                                    '    txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & "2022"
+                                    'Else
+                                    '    txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & Date.Now.ToString("yyyy")
+                                    'End If
+
+                                    txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & Date.Now.ToString("yyyy")
 
                                 End If
                                 If _ChequeVencido(valor) Then
@@ -1717,11 +1719,13 @@ Public Class RecibosProvisorios
             If Len(Trim(txtFechaAux.Text)) = 6 Then
                 Dim _mes As String = Mid(txtFechaAux.Text, 4, 2)
 
-                If Val(_mes) < Date.Now.Month Then
-                    txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & Date.Now.AddYears(1).ToString("yyyy")
-                Else
-                    txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & Date.Now.ToString("yyyy")
-                End If
+                'If Val(_mes) < Date.Now.Month Then
+                '    txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & Date.Now.AddYears(1).ToString("yyyy")
+                'Else
+                '    txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & Date.Now.ToString("yyyy")
+                'End If
+
+                txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & Date.Now.ToString("yyyy")
 
             End If
 
