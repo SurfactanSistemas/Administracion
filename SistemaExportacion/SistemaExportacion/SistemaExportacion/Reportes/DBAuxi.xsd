@@ -12,7 +12,7 @@
   <xs:element name="DBAuxi" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DBAuxi" msprop:Generator_UserDSName="DBAuxi">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="TablaReporteExcel" msprop:Generator_TableClassName="TablaReporteExcelDataTable" msprop:Generator_TableVarName="tableTablaReporteExcel" msprop:Generator_TablePropName="TablaReporteExcel" msprop:Generator_RowDeletingName="TablaReporteExcelRowDeleting" msprop:Generator_RowChangingName="TablaReporteExcelRowChanging" msprop:Generator_RowEvHandlerName="TablaReporteExcelRowChangeEventHandler" msprop:Generator_RowDeletedName="TablaReporteExcelRowDeleted" msprop:Generator_UserTableName="TablaReporteExcel" msprop:Generator_RowChangedName="TablaReporteExcelRowChanged" msprop:Generator_RowEvArgName="TablaReporteExcelRowChangeEvent" msprop:Generator_RowClassName="TablaReporteExcelRow">
+        <xs:element name="TablaReporteExcel" msprop:Generator_TableClassName="TablaReporteExcelDataTable" msprop:Generator_TableVarName="tableTablaReporteExcel" msprop:Generator_RowChangedName="TablaReporteExcelRowChanged" msprop:Generator_TablePropName="TablaReporteExcel" msprop:Generator_RowDeletingName="TablaReporteExcelRowDeleting" msprop:Generator_RowChangingName="TablaReporteExcelRowChanging" msprop:Generator_RowEvHandlerName="TablaReporteExcelRowChangeEventHandler" msprop:Generator_RowDeletedName="TablaReporteExcelRowDeleted" msprop:Generator_RowClassName="TablaReporteExcelRow" msprop:Generator_UserTableName="TablaReporteExcel" msprop:Generator_RowEvArgName="TablaReporteExcelRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="NroProforma" msprop:Generator_ColumnVarNameInTable="columnNroProforma" msprop:Generator_ColumnPropNameInRow="NroProforma" msprop:Generator_ColumnPropNameInTable="NroProformaColumn" msprop:Generator_UserColumnName="NroProforma" type="xs:string" minOccurs="0" />
@@ -34,6 +34,7 @@
               <xs:element name="Permiso_de_Embarque" msprop:Generator_ColumnVarNameInTable="columnPermiso_de_Embarque" msprop:Generator_ColumnPropNameInRow="Permiso_de_Embarque" msprop:Generator_ColumnPropNameInTable="Permiso_de_EmbarqueColumn" msprop:Generator_UserColumnName="Permiso_de_Embarque" type="xs:string" minOccurs="0" />
               <xs:element name="BL" msprop:Generator_ColumnVarNameInTable="columnBL" msprop:Generator_ColumnPropNameInRow="BL" msprop:Generator_ColumnPropNameInTable="BLColumn" msprop:Generator_UserColumnName="BL" type="xs:string" minOccurs="0" />
               <xs:element name="Forwarder" msprop:Generator_ColumnVarNameInTable="columnForwarder" msprop:Generator_ColumnPropNameInRow="Forwarder" msprop:Generator_ColumnPropNameInTable="ForwarderColumn" msprop:Generator_UserColumnName="Forwarder" type="xs:string" minOccurs="0" />
+              <xs:element name="Fecha_Cobro" msprop:Generator_ColumnVarNameInTable="columnFecha_Cobro" msprop:Generator_ColumnPropNameInRow="Fecha_Cobro" msprop:Generator_ColumnPropNameInTable="Fecha_CobroColumn" msprop:Generator_UserColumnName="Fecha_Cobro" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

@@ -39,118 +39,131 @@ Partial Class inicio
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(167, 252)
+        Me.Button1.Location = New System.Drawing.Point(223, 310)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.Size = New System.Drawing.Size(100, 28)
         Me.Button1.TabIndex = 0
         Me.Button1.Text = "Aceptar"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'txtAccion
         '
-        Me.txtAccion.Location = New System.Drawing.Point(101, 32)
+        Me.txtAccion.Location = New System.Drawing.Point(135, 39)
+        Me.txtAccion.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtAccion.Name = "txtAccion"
-        Me.txtAccion.Size = New System.Drawing.Size(37, 20)
+        Me.txtAccion.Size = New System.Drawing.Size(48, 22)
         Me.txtAccion.TabIndex = 1
-        Me.txtAccion.Text = "3"
+        Me.txtAccion.Text = "4"
         '
         'txtRuta
         '
-        Me.txtRuta.Location = New System.Drawing.Point(101, 58)
+        Me.txtRuta.Location = New System.Drawing.Point(135, 71)
+        Me.txtRuta.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtRuta.Name = "txtRuta"
-        Me.txtRuta.Size = New System.Drawing.Size(283, 20)
+        Me.txtRuta.Size = New System.Drawing.Size(376, 22)
         Me.txtRuta.TabIndex = 2
-        Me.txtRuta.Text = "C:\Users\soporte3\Desktop\pruebaGestor"
+        Me.txtRuta.Text = "C:\Users\soporte3\Desktop\Gestor de archivos caso 4"
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(12, 35)
+        Me.Label1.Location = New System.Drawing.Point(16, 43)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(79, 13)
+        Me.Label1.Size = New System.Drawing.Size(102, 17)
         Me.Label1.TabIndex = 3
         Me.Label1.Text = "Tipo de Accion"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(52, 61)
+        Me.Label2.Location = New System.Drawing.Point(69, 75)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(30, 13)
+        Me.Label2.Size = New System.Drawing.Size(38, 17)
         Me.Label2.TabIndex = 4
         Me.Label2.Text = "Ruta"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(52, 127)
+        Me.Label3.Location = New System.Drawing.Point(69, 156)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(26, 13)
+        Me.Label3.Size = New System.Drawing.Size(33, 17)
         Me.Label3.TabIndex = 6
         Me.Label3.Text = "Mail"
         '
         'txt_Mail
         '
-        Me.txt_Mail.Location = New System.Drawing.Point(101, 124)
+        Me.txt_Mail.Location = New System.Drawing.Point(135, 153)
+        Me.txt_Mail.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txt_Mail.Name = "txt_Mail"
-        Me.txt_Mail.Size = New System.Drawing.Size(283, 20)
+        Me.txt_Mail.Size = New System.Drawing.Size(376, 22)
         Me.txt_Mail.TabIndex = 5
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(40, 153)
+        Me.Label4.Location = New System.Drawing.Point(53, 188)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(55, 13)
+        Me.Label4.Size = New System.Drawing.Size(72, 17)
         Me.Label4.TabIndex = 8
         Me.Label4.Text = "Titulo Mail"
         '
         'txt_TituloMail
         '
-        Me.txt_TituloMail.Location = New System.Drawing.Point(101, 150)
+        Me.txt_TituloMail.Location = New System.Drawing.Point(135, 185)
+        Me.txt_TituloMail.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txt_TituloMail.Name = "txt_TituloMail"
-        Me.txt_TituloMail.Size = New System.Drawing.Size(283, 20)
+        Me.txt_TituloMail.Size = New System.Drawing.Size(376, 22)
         Me.txt_TituloMail.TabIndex = 7
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(35, 179)
+        Me.Label5.Location = New System.Drawing.Point(47, 220)
+        Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(63, 13)
+        Me.Label5.Size = New System.Drawing.Size(83, 17)
         Me.Label5.TabIndex = 10
         Me.Label5.Text = "Cuerpo Mail"
         '
         'txt_CuerpoMail
         '
-        Me.txt_CuerpoMail.Location = New System.Drawing.Point(101, 176)
+        Me.txt_CuerpoMail.Location = New System.Drawing.Point(135, 217)
+        Me.txt_CuerpoMail.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txt_CuerpoMail.Multiline = True
         Me.txt_CuerpoMail.Name = "txt_CuerpoMail"
-        Me.txt_CuerpoMail.Size = New System.Drawing.Size(283, 48)
+        Me.txt_CuerpoMail.Size = New System.Drawing.Size(376, 58)
         Me.txt_CuerpoMail.TabIndex = 9
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(21, 87)
+        Me.Label6.Location = New System.Drawing.Point(28, 107)
+        Me.Label6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(77, 13)
+        Me.Label6.Size = New System.Drawing.Size(103, 17)
         Me.Label6.TabIndex = 12
         Me.Label6.Text = "Contra Usuario"
         '
         'txt_ContraUsuario
         '
-        Me.txt_ContraUsuario.Location = New System.Drawing.Point(101, 84)
+        Me.txt_ContraUsuario.Location = New System.Drawing.Point(135, 103)
+        Me.txt_ContraUsuario.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txt_ContraUsuario.Name = "txt_ContraUsuario"
-        Me.txt_ContraUsuario.Size = New System.Drawing.Size(283, 20)
+        Me.txt_ContraUsuario.Size = New System.Drawing.Size(376, 22)
         Me.txt_ContraUsuario.TabIndex = 11
         Me.txt_ContraUsuario.Text = "olula"
         '
         'inicio
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(405, 283)
+        Me.ClientSize = New System.Drawing.Size(540, 348)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.txt_ContraUsuario)
         Me.Controls.Add(Me.Label5)
@@ -164,6 +177,7 @@ Partial Class inicio
         Me.Controls.Add(Me.txtRuta)
         Me.Controls.Add(Me.txtAccion)
         Me.Controls.Add(Me.Button1)
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "inicio"
         Me.Text = "inicio"
         Me.ResumeLayout(False)

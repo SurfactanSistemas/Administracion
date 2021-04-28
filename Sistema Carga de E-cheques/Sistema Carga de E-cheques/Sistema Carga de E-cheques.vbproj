@@ -111,6 +111,12 @@
     <Compile Include="CargadorDeTxt.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="CarteldeProcesados.Designer.vb">
+      <DependentUpon>CarteldeProcesados.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CarteldeProcesados.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="MenuPrincipal.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -137,6 +143,9 @@
   <ItemGroup>
     <EmbeddedResource Include="CargadorDeTxt.resx">
       <DependentUpon>CargadorDeTxt.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CarteldeProcesados.resx">
+      <DependentUpon>CarteldeProcesados.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MenuPrincipal.resx">
       <DependentUpon>MenuPrincipal.vb</DependentUpon>

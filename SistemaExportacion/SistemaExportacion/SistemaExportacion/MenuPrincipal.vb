@@ -70,7 +70,8 @@ Public Class MenuPrincipal : Implements IActualizaGrillaProforma
         Dim WProforma, WFecha, WCliente, WRazon, WPais, WTotal, WORDFechaLimite, WPackingList, WRowIndex, WEntregado
 
         ' nuevas variables proforma
-        Dim WMV_Buque, WETD_FechaSalida, WOrd_ETD_FechaSalida, WETA_FechaArribo, WOrd_ETA_FechaArribo, WPermiso_de_Embarque, WBL, WForwarder, WCombox_Estado, WFecha_Limite As String
+        Dim WMV_Buque, WETD_FechaSalida, WOrd_ETD_FechaSalida, WETA_FechaArribo, WOrd_ETA_FechaArribo,
+            WPermiso_de_Embarque, WBL, WForwarder, WCombox_Estado, WFecha_Limite, WFechaCobro As String
         Dim WPesoNeto As Double
         Dim WCondicion As Integer
         'fin nuevas variables
@@ -83,7 +84,7 @@ Public Class MenuPrincipal : Implements IActualizaGrillaProforma
 
         If ckMostrarEntregadas.Checked Then WFiltro = ""
 
-        Dim ZSql = "SELECT DISTINCT p.Proforma, p.FechaOrd, p.Fecha, p.Cliente, c.Razon, p.Pais, p.Total,p.FechaLimite, p.FechaLimiteOrd, p.PackingList, isnull(p.Entregado, '') as Entregado, p.Condicion, p.MV_Buque, p.ETD_FechaSalida, p.ETA_FechaArribo, p.Permiso_de_Embarque, p.BL, p.Forwarder, p.Combox_Estado, p.PesoNeto FROM ProformaExportacion as p, Cliente as c WHERE p.Cliente = c.Cliente  " & WFiltro & "  ORDER BY p.FechaOrd, p.Proforma"
+        Dim ZSql = "SELECT DISTINCT p.Proforma, p.FechaOrd, p.Fecha, p.Cliente, c.Razon, p.Pais, p.Total,p.FechaLimite, p.FechaLimiteOrd, p.PackingList, isnull(p.Entregado, '') as Entregado, p.Condicion, p.MV_Buque, p.ETD_FechaSalida, p.ETA_FechaArribo, p.Permiso_de_Embarque, p.BL, p.Forwarder, p.Combox_Estado, p.PesoNeto, p.FechaCobro, p.OrdFechaCobro FROM ProformaExportacion as p, Cliente as c WHERE p.Cliente = c.Cliente  " & WFiltro & "  ORDER BY p.FechaOrd, p.Proforma"
 
         Try
 
@@ -139,6 +140,7 @@ Public Class MenuPrincipal : Implements IActualizaGrillaProforma
                         WBL = IIf(IsDBNull(.Item("BL")), "", .Item("BL"))
                         WPesoNeto = IIf(IsDBNull(.Item("PesoNeto")), 0.0, .Item("PesoNeto"))
                         WCombox_Estado = IIf(IsDBNull(.Item("Combox_Estado")), "", .Item("Combox_Estado"))
+                        WFechaCobro = IIf(IsDBNull(.Item("FechaCobro")), "", .Item("FechaCobro"))
                         'FIN NUEVAS INCLUCIONES
 
 
@@ -171,6 +173,7 @@ Public Class MenuPrincipal : Implements IActualizaGrillaProforma
                         .Cells("BL").Value = Trim(WBL)
                         .Cells("Peso_Neto").Value = formatonumerico(WPesoNeto)
                         .Cells("Combox_Estado").Value = Trim(WCombox_Estado)
+                        .Cells("Fecha_Cobro").Value = WFechaCobro
 
                     End With
 
@@ -692,12 +695,12 @@ Public Class MenuPrincipal : Implements IActualizaGrillaProforma
         Dim num1, num2
 
         Select Case e.Column.Index
-            Case 0, 5, 15
+            Case 0, 5, 16
 
                 num1 = CDbl(e.CellValue1)
                 num2 = CDbl(e.CellValue2)
 
-            Case 1, 10, 13, 14
+            Case 1, 11, 14, 15, 20
 
                 num1 = ordenaFecha(e.CellValue1)
                 num2 = ordenaFecha(e.CellValue2)
@@ -746,7 +749,7 @@ Public Class MenuPrincipal : Implements IActualizaGrillaProforma
                                            .Cells("Pais").Value, .Cells("Total").Value, .Cells("Combox_Estado").Value, .Cells("FechaLimite").Value,
                                            .Cells("PackingList").Value, .Cells("Entregado").Value, .Cells("Fecha_Limite").Value, .Cells("Incoterm").Value,
                                            .Cells("MV_Buque").Value, .Cells("ETD_FechaSalida").Value, .Cells("ETA_FechaArribo").Value, .Cells("Peso_Neto").Value,
-                                            .Cells("Permiso_de_Embarque").Value, .Cells("BL").Value, .Cells("Forwarder").Value)
+                                            .Cells("Permiso_de_Embarque").Value, .Cells("BL").Value, .Cells("Forwarder").Value, .Cells("Fecha_Cobro").Value)
                 End With
             Next
 
@@ -804,7 +807,7 @@ Public Class MenuPrincipal : Implements IActualizaGrillaProforma
                                            .Cells("Pais").Value, .Cells("Total").Value, .Cells("Combox_Estado").Value, .Cells("FechaLimite").Value,
                                            .Cells("PackingList").Value, .Cells("Entregado").Value, .Cells("Fecha_Limite").Value, .Cells("Incoterm").Value,
                                            .Cells("MV_Buque").Value, .Cells("ETD_FechaSalida").Value, .Cells("ETA_FechaArribo").Value, .Cells("Peso_Neto").Value,
-                                            .Cells("Permiso_de_Embarque").Value, .Cells("BL").Value, .Cells("Forwarder").Value)
+                                            .Cells("Permiso_de_Embarque").Value, .Cells("BL").Value, .Cells("Forwarder").Value, .Cells("Fecha_Cobro").Value)
                 End With
             Next
 

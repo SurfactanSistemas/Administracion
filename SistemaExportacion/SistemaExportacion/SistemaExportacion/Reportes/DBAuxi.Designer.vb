@@ -321,6 +321,8 @@ Partial Public Class DBAuxi
 
         Private columnForwarder As Global.System.Data.DataColumn
 
+        Private columnFecha_Cobro As Global.System.Data.DataColumn
+
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public Sub New()
@@ -509,6 +511,14 @@ Partial Public Class DBAuxi
         End Property
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public ReadOnly Property Fecha_CobroColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnFecha_Cobro
+            End Get
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
          Global.System.ComponentModel.Browsable(False)> _
         Public ReadOnly Property Count() As Integer
@@ -564,9 +574,10 @@ Partial Public Class DBAuxi
                     ByVal Peso_Neto As Double, _
                     ByVal Permiso_de_Embarque As String, _
                     ByVal BL As String, _
-                    ByVal Forwarder As String) As TablaReporteExcelRow
+                    ByVal Forwarder As String, _
+                    ByVal Fecha_Cobro As String) As TablaReporteExcelRow
             Dim rowTablaReporteExcelRow As TablaReporteExcelRow = CType(Me.NewRow, TablaReporteExcelRow)
-            Dim columnValuesArray() As Object = New Object() {NroProforma, Fecha, Cliente, Razon, Pais, Total, Combox_Estado, FechaLimite, PackingList, Entregado, Fecha_Limite, Incoterm, MV_Buque, ETD_FechaSalida, ETA_FechaArribo, Peso_Neto, Permiso_de_Embarque, BL, Forwarder}
+            Dim columnValuesArray() As Object = New Object() {NroProforma, Fecha, Cliente, Razon, Pais, Total, Combox_Estado, FechaLimite, PackingList, Entregado, Fecha_Limite, Incoterm, MV_Buque, ETD_FechaSalida, ETA_FechaArribo, Peso_Neto, Permiso_de_Embarque, BL, Forwarder, Fecha_Cobro}
             rowTablaReporteExcelRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowTablaReporteExcelRow)
             Return rowTablaReporteExcelRow
@@ -608,6 +619,7 @@ Partial Public Class DBAuxi
             Me.columnPermiso_de_Embarque = MyBase.Columns("Permiso_de_Embarque")
             Me.columnBL = MyBase.Columns("BL")
             Me.columnForwarder = MyBase.Columns("Forwarder")
+            Me.columnFecha_Cobro = MyBase.Columns("Fecha_Cobro")
         End Sub
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
@@ -651,6 +663,8 @@ Partial Public Class DBAuxi
             MyBase.Columns.Add(Me.columnBL)
             Me.columnForwarder = New Global.System.Data.DataColumn("Forwarder", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnForwarder)
+            Me.columnFecha_Cobro = New Global.System.Data.DataColumn("Fecha_Cobro", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnFecha_Cobro)
         End Sub
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
@@ -1086,6 +1100,21 @@ Partial Public Class DBAuxi
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Property Fecha_Cobro() As String
+            Get
+                Try
+                    Return CType(Me(Me.tableTablaReporteExcel.Fecha_CobroColumn), String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("El valor de la columna 'Fecha_Cobro' de la tabla 'TablaReporteExcel' es DBNull.", e)
+                End Try
+            End Get
+            Set(value As String)
+                Me(Me.tableTablaReporteExcel.Fecha_CobroColumn) = value
+            End Set
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public Function IsNroProformaNull() As Boolean
             Return Me.IsNull(Me.tableTablaReporteExcel.NroProformaColumn)
         End Function
@@ -1310,6 +1339,18 @@ Partial Public Class DBAuxi
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public Sub SetForwarderNull()
             Me(Me.tableTablaReporteExcel.ForwarderColumn) = Global.System.Convert.DBNull
+        End Sub
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Function IsFecha_CobroNull() As Boolean
+            Return Me.IsNull(Me.tableTablaReporteExcel.Fecha_CobroColumn)
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Sub SetFecha_CobroNull()
+            Me(Me.tableTablaReporteExcel.Fecha_CobroColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     

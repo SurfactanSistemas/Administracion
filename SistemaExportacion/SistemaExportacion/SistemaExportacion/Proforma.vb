@@ -1,5 +1,6 @@
 ﻿Imports System.Data.SqlClient
 Imports System.IO
+Imports System.Text.RegularExpressions
 Imports Microsoft.VisualBasic.FileIO
 Imports ArmadoPallets
 Imports CrystalDecisions.Shared
@@ -32,6 +33,9 @@ Public Class Proforma : Implements IConsultaPedPrepo
     Private Const EXTENSIONES_PERMITIDAS = "*.docx|*.doc|*.xls|*.xlsx|*.xlsm|*.pdf|*.bmp|*.png|*.jpg|*.jpeg|*.ico|*.txt"
     Private TIPO_ESPECIFICACIONES() As String = {"", "Envase", "Entrega", "Varios"}
 
+
+    Dim DragActivo As Boolean = False
+    Dim DragDesdeOutLOOK As Boolean = False
 
 
     Public Property NroProforma() As String
@@ -69,11 +73,38 @@ Public Class Proforma : Implements IConsultaPedPrepo
                     btnEntregado.Enabled = False
                     End If
             End If
+
+            If txtNroPedido.Text <> "" Then
+                Buscar_NroFactura_Y_SaldoFactura(txtNroPedido.Text)
+            End If
+
+
         Else
             btnLimpiar.PerformClick()
         End If
 
     End Sub
+
+
+    Private Sub Buscar_NroFactura_Y_SaldoFactura(ByVal NroPedido As String)
+        Dim SQLCnslt As String = "SELECT Numero, SaldoUs FROM CtaCte WHERE Pedido = '" & Trim(NroPedido) & "'"
+        Try
+            Dim RowCtaCte As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+            If RowCtaCte IsNot Nothing Then
+                txtNroFactura.Text = Microsoft.VisualBasic.Right(RowCtaCte.Item("Numero"),4)
+                txtSaldoFactura.Text = RowCtaCte.Item("SaldoUs")
+                'SETEO EL NUMERO PARA QUE SE SEPARE POR MILES
+                txtSaldoFactura.Text = String.Format("{0:N2}", Val(txtSaldoFactura.Text))
+            Else
+                txtNroFactura.Text = ""
+                txtSaldoFactura.Text = ""
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+
 
     Private Sub _TraerProximoNroProforma()
         Dim cn As SqlConnection = New SqlConnection()
@@ -186,13 +217,13 @@ Public Class Proforma : Implements IConsultaPedPrepo
 
     Private Sub _TraerProforma(ByVal NroProforma As String)
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT p.Renglon, p.Proforma, p.Estado, p.Fecha, p.FechaLimite, p.Cliente, c.Razon, p.Direccion, p.Localidad, p.CondPago, p.OCCliente, p.Condicion, p.Via, p.Observaciones, p.SubTotal, p.Flete, p.Seguro, p.Total, p.DescriTotal, p.Pais, p.CondPagoII, p.ObservacionesII, p.ObservacionesIII, p.DescriTotalII, p.Producto, p.Cantidad, p.Precio, p.Cerrada, p.PackingList, p.Idioma, p.Entregado, p.Otros, p.MotivoOtros, p.Factura, p.Pedido, p.MV_Buque, p.ETD_FechaSalida, p.ETA_FechaArribo, p.Permiso_de_Embarque, p.BL, p.Forwarder, p.Combox_Estado FROM ProformaExportacion as p, Cliente as c WHERE Proforma = '" & NroProforma & "' AND p.Cliente = c.Cliente ORDER BY Renglon")
+        Dim cm As SqlCommand = New SqlCommand("SELECT p.Renglon, p.Proforma, p.Estado, p.Fecha, p.FechaLimite, p.Cliente, c.Razon, p.Direccion, p.Localidad, p.CondPago, p.OCCliente, p.Condicion, p.Via, p.Observaciones, p.SubTotal, p.Flete, p.Seguro, p.Total, p.DescriTotal, p.Pais, p.CondPagoII, p.ObservacionesII, p.ObservacionesIII, p.DescriTotalII, p.Producto, p.Cantidad, p.Precio, p.Cerrada, p.PackingList, p.Idioma, p.Entregado, p.Otros, p.MotivoOtros, p.Factura, p.Pedido, p.MV_Buque, p.ETD_FechaSalida, p.ETA_FechaArribo, p.Permiso_de_Embarque, p.BL, p.Forwarder, p.Combox_Estado, p.FechaCobro FROM ProformaExportacion as p, Cliente as c WHERE Proforma = '" & NroProforma & "' AND p.Cliente = c.Cliente ORDER BY Renglon")
         Dim dr As SqlDataReader
         Dim WRenglon, WEstado, WNroProforma, WFecha, WCliente, WDescripcionCliente, WDireccion, WLocalidad, WCondPago, WOCCliente, WCondicion, WVia, WObservaciones, WSubTotal, WFlete, WSeguro, WTotal, WDescripcionMonto, WPais, WCondPagoII, WObservacionesII, WObservacionesIII, WDescripcionMontoII, WRowIndex
         Dim WNroPedido, WNroFactura, WEntregado, WEnviarDocumentacion, WProformaCerrada, WPackingList, WIdioma, WFechaLimite
 
         'Creo variables nuevas 
-        dim WMV, WETD, WETA, WPermisoEmbarque, WBL, WForwarder, WEstadoGrilla as String
+        Dim WMV, WETD, WETA, WPermisoEmbarque, WBL, WForwarder, WEstadoGrilla, WFechaCobro As String
         'fin crear variables nuevas 08/04/2021
 
 
@@ -290,6 +321,7 @@ Public Class Proforma : Implements IConsultaPedPrepo
                             WBL = IIf(IsDBNull(.Item("BL")), "", .Item("BL"))
                             WForwarder = IIf(IsDBNull(.Item("Forwarder")), "", .Item("Forwarder"))
                             WEstadoGrilla = IIf(IsDBNull(.Item("Combox_Estado")), "", .Item("Combox_Estado"))
+                            WFechaCobro = IIf(IsDBNull(.Item("FechaCobro")), "", .Item("FechaCobro"))
                             'fin carga variables nuevas 08/04/2021
 
 
@@ -328,6 +360,7 @@ Public Class Proforma : Implements IConsultaPedPrepo
                             txt_BL.Text = WBL
                             txt_Forwarder.Text = WForwarder
                             cbx_EstadoGrilla.SelectedItem = WEstadoGrilla
+                            txtFechaCobro.Text = WFechaCobro
                             'fin carga campos nuevos 08/04/2021
 
 
@@ -1318,6 +1351,8 @@ Public Class Proforma : Implements IConsultaPedPrepo
         WPais = _Left(txtPais.Text, 15)
         Dim WNroFactura As String = txtNroFactura.Text
         Dim WNroPedido As String = txtNroPedido.Text
+        Dim WFechaCobro As String = txtFechaCobro.Text
+        Dim WFechaCobroOrd As String = ordenaFecha(txtFechaCobro.Text)
 
         WCondPagoII = _Left(Trim(txtCondicionPagoII.Text), 50)
         WObservacionesII = _Left(Trim(txtObservacionesII.Text), 100)
@@ -1467,12 +1502,12 @@ Public Class Proforma : Implements IConsultaPedPrepo
                         WSql = "INSERT INTO ProformaExportacion (Clave, Proforma, Renglon, Fecha, FechaOrd, Estado, Cliente, Direccion, Localidad, CondPago, CondPagoII, OCCliente," _
                              & " Condicion, Via, ViaDesc, Observaciones, ObservacionesII, ObservacionesIII, Producto, DescriProducto, Cantidad, Precio, SubTotal, Flete, Seguro, Total," _
                              & " DescriTotal, DescriTotalII, Pais, Cerrada, PackingList, EnviarDocumentacion, Idioma, FechaLimite, FechaLimiteOrd, MotivoOtros, Otros, Factura, Pedido," _
-                             & " MV_Buque, ETD_FechaSalida, Ord_ETD_FechaSalida, ETA_FechaArribo, Ord_ETA_FechaArribo, Permiso_de_Embarque, BL, Forwarder, PesoNeto, Combox_Estado)" _
+                             & " MV_Buque, ETD_FechaSalida, Ord_ETD_FechaSalida, ETA_FechaArribo, Ord_ETA_FechaArribo, Permiso_de_Embarque, BL, Forwarder, PesoNeto, Combox_Estado, FechaCobro, OrdFechaCobro)" _
                              & " VALUES " _
                              & " ('" & WClave & "', '" & XNroProforma & "', '" & XRenglon & "', '" & WFecha & "', '" & WFechaOrd & "', '" & WEstado & "', '" & WCliente & "', '" & WDireccion & "', '" & WLocalidad & "', '" & WCondPago & "', '" & WCondPagoII & "', '" & WOCCliente & "', '" & WCondicion & "', '" & WVia & "', '" & WViaDesc & "', " _
                              & "'" & WObservaciones & "', '" & WObservacionesII & "', '" & WObservacionesIII & "', '" & WProd & "', '" & WDesc & "', '" & formatonumerico(WCant) & "', '" & formatonumerico(WPrecio) & "', '" & formatonumerico(WSubTotal) & "', '" & formatonumerico(WFlete) & "', '" & formatonumerico(WSeguro) & "', '" _
                              & formatonumerico(WTotal) & "', '" & WDescripcionMonto & "', '" & WDescripcionMontoII & "', '" & WPais & "', '" & WProformaCerrada & "', '" & WPackingList & "', '" & WEnviarDoc & "', '" & WIdioma & "', '" & WFechaLimite & "', '" & WFechaLimiteOrd & "', '" & WMotivoOtros & "', '" & WOtros & "', '" & WNroFactura & "', '" & WNroPedido & "' , " _
-                             & "'" & WMV & "', '" & WETD & "', '" & WOrdETD & "', '" & WETA & "', '" & WOrdETA & "', '" & WPermisoEmbarque & "', '" & WBL & "', '" & WForwarder & "', '" & formatonumerico(WPesoNeto) & "', '" & WEstadoGrilla & "')"
+                             & "'" & WMV & "', '" & WETD & "', '" & WOrdETD & "', '" & WETA & "', '" & WOrdETA & "', '" & WPermisoEmbarque & "', '" & WBL & "', '" & WForwarder & "', '" & formatonumerico(WPesoNeto) & "', '" & WEstadoGrilla & "', '" & WFechaCobro & "', '" & WFechaCobroOrd & "')"
                         cm.CommandText = WSql
 
                         cm.ExecuteNonQuery()
@@ -1565,14 +1600,14 @@ Public Class Proforma : Implements IConsultaPedPrepo
         If Wowner IsNot Nothing Then
             Wowner.ActualizaGrilla()
         End If
-        
+
         btnVistaPrevia.PerformClick()
 
         'btnLimpiar.PerformClick()
         btnCerrar.PerformClick()
 
         MenuPrincipal.btnLimpiarFiltros.PerformClick()
-        
+
     End Sub
 
     Private Sub _ActualizarPDFProforma(ByVal WNroProforma As String)
@@ -1673,7 +1708,7 @@ Public Class Proforma : Implements IConsultaPedPrepo
 
         GrupoConsulta.Visible = False
 
-        gbEntregado.Visible=False
+        gbEntregado.Visible = False
 
         txtFechaAux.Visible = False
 
@@ -2088,7 +2123,7 @@ Public Class Proforma : Implements IConsultaPedPrepo
         ElseIf e.KeyData = Keys.Escape Then
             txtSeguro.Text = ""
         End If
-        
+
 
     End Sub
 
@@ -2172,7 +2207,7 @@ Public Class Proforma : Implements IConsultaPedPrepo
     Private Sub txtFechaAux_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtFechaAux.DoubleClick
         If Trim(txtFechaAux.Text.Replace("-", "")) = "" Then
             ' Abrimos la Consulta de Productos que el Cliente Puede Comprar.
-            
+
             btnConsulta.PerformClick()
             lstOpcionesConsulta.SelectedIndex = 1
             lstOpcionesConsulta_MouseClick(Nothing, Nothing)
@@ -2303,7 +2338,7 @@ Public Class Proforma : Implements IConsultaPedPrepo
         End Try
     End Sub
 
-    Private Sub btnEntregado_Click( ByVal sender As System.Object,  ByVal e As System.EventArgs) Handles btnEntregado.Click
+    Private Sub btnEntregado_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEntregado.Click
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand()
         Dim dr As SqlDataReader
@@ -2334,10 +2369,10 @@ Public Class Proforma : Implements IConsultaPedPrepo
             cm = Nothing
 
         End Try
-        
+
     End Sub
 
-    
+
     Private Sub btn_TraerDatos_Click(sender As Object, e As EventArgs) Handles btn_TraerDatos.Click
         With New ConsultaPedidosDeProforma
             .Show(Me)
@@ -2390,7 +2425,7 @@ Public Class Proforma : Implements IConsultaPedPrepo
         _NormalizarNumerosGrilla()
     End Sub
 
-    
+
 
     Private Sub btn_GenerarBotaEmpaque_Click(sender As Object, e As EventArgs) Handles btn_GenerarNotaEmpaque.Click
 
@@ -2410,7 +2445,7 @@ Public Class Proforma : Implements IConsultaPedPrepo
         Dim TablaNotaEmpaque As DataTable = New ArmadoPallets.DBAuxi.TablaNotaEmpaqueDataTable
 
         Dim TotalPesoBruto As Double = 0
-        
+
         CargaTablaParaNotaEmpaqueIngles(_NroProforma, TablaNotaEmpaque, TotalPesoBruto)
 
         Select Case cmbIdioma.SelectedIndex
@@ -2601,7 +2636,7 @@ Public Class Proforma : Implements IConsultaPedPrepo
 
             SQLCnslt = "INSERT INTO ProformaExportacionHistorial (Clave, NroObservacion, Renglon, Proforma, Usuario, Fecha, FechaOrd, Observaciones) " _
                                   & "VALUES ('" & WClave & "'," & WNro_Observacion & ",'" & WRenglon & "','" & WProforma & "','" & WUsuario & "','" & WFecha & "','" & WFechaOrd & "','" & WObservaciones & "')"
-         
+
             ExecuteNonQueries("SurfactanSa", SQLCnslt)
 
         Catch ex As Exception
@@ -2650,13 +2685,13 @@ Public Class Proforma : Implements IConsultaPedPrepo
 
     End Sub
 
-  
+
     Private Sub txt_Contacto_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_Contacto.KeyDown
 
         If e.KeyData = Keys.Enter Then
 
             txt_MailContacto.Focus()
-            
+
         ElseIf e.KeyData = Keys.Escape Then
             txt_Contacto.Text = ""
         End If
@@ -2697,7 +2732,7 @@ Public Class Proforma : Implements IConsultaPedPrepo
                 End If
             End If
 
-            
+
 
         ElseIf e.KeyData = Keys.Escape Then
             txt_ETD_FechaSalida.Text = ""
@@ -2760,7 +2795,9 @@ Public Class Proforma : Implements IConsultaPedPrepo
     Private Sub txtNroPedido_KeyDown(sender As Object, e As KeyEventArgs) Handles txtNroPedido.KeyDown
         If e.KeyData = Keys.Enter Then
 
-            txtNroFactura.Focus()
+            If txtNroPedido.Text <> "" Then
+                Buscar_NroFactura_Y_SaldoFactura(txtNroPedido.Text)
+            End If
 
         ElseIf e.KeyData = Keys.Escape Then
             txtNroPedido.Text = ""
@@ -2769,19 +2806,33 @@ Public Class Proforma : Implements IConsultaPedPrepo
 
     Private Sub txtNroFactura_KeyDown(sender As Object, e As KeyEventArgs) Handles txtNroFactura.KeyDown
         If e.KeyData = Keys.Enter Then
+            Dim NroFactura As String = ""
+            If txtNroFactura.Text.Length = 4 Then
+                NroFactura = "0081" & txtNroFactura.Text
+                BuscarCliente_Saldo_Factura(NroFactura)
+            Else
+                If txtNroFactura.Text.Length = 6 Then
+                    NroFactura = txtNroFactura.Text.PadLeft(8, "0")
+                    BuscarCliente_Saldo_Factura(NroFactura)
+                End If
 
-            txtSaldoFactura.Focus()
+            End If
+            'txtSaldoFactura.Focus()
 
         ElseIf e.KeyData = Keys.Escape Then
             txtNroFactura.Text = ""
         End If
     End Sub
 
+    Private Sub BuscarCliente_Saldo_Factura(ByVal NroFactura As String)
+
+    End Sub
+
     Private Sub cbx_EstadoGrilla_KeyDown(sender As Object, e As KeyEventArgs) Handles cbx_EstadoGrilla.KeyDown
         If e.KeyData = Keys.Enter Then
 
             txtObservaciones.Focus()
-            
+
         End If
     End Sub
 
@@ -2807,7 +2858,7 @@ Public Class Proforma : Implements IConsultaPedPrepo
 
         txtFechaAux.Visible = False
 
-        txtFecha.Text = Date.Now.ToString("dd/MM/yyyy")
+        ' txtFecha.Text = Date.Now.ToString("dd/MM/yyyy")
 
         WRow = -1
         Wcol = -1
@@ -3201,7 +3252,7 @@ Public Class Proforma : Implements IConsultaPedPrepo
 
         GrupoNuevaObs.Visible = True
         btn_LimpiarObservacion.PerformClick()
-        txtFecha.Focus()
+        txtFechObservacion.Focus()
     End Sub
 
     Private Sub btnNuevaEspecificacion_Click(sender As Object, e As EventArgs) Handles btnNuevaEspecificacion.Click
@@ -3301,7 +3352,7 @@ Public Class Proforma : Implements IConsultaPedPrepo
 
     End Sub
 
-    
+
     Private Sub btn_AceptarObservaciones_Click(sender As Object, e As EventArgs) Handles btn_AceptarObservaciones.Click
 
         Dim cn As New SqlConnection()
@@ -3321,7 +3372,7 @@ Public Class Proforma : Implements IConsultaPedPrepo
 
         ZSql = ""
         WNroProforma = ceros(txtNroProforma.Text, 6)
-        WFecha = txtFecha.Text
+        WFecha = txtFechObservacion.Text
         WFechaOrd = ordenaFecha(WFecha)
         WCliente = txtCliente.Text
         WObservacion = Trim(txtObservacion.Text)
@@ -3453,9 +3504,9 @@ Public Class Proforma : Implements IConsultaPedPrepo
     Private Function _DatosValidos() As Boolean
 
         ' Validamos que la fecha indicada sea correcta.
-        If Not _ValidarFecha(txtFecha.Text) Then
+        If Not _ValidarFecha(txtFechObservacion.Text) Then
             MsgBox("La fecha indicada no es válida", MsgBoxStyle.Critical)
-            txtFecha.Focus()
+            txtFechObservacion.Focus()
             Return False
         End If
 
@@ -3600,7 +3651,7 @@ Public Class Proforma : Implements IConsultaPedPrepo
 
         ZSql = ""
         WNroProforma = ceros(txtNroProforma.Text, 6)
-        WFecha = txtFecha.Text
+        WFecha = txtFechaEspecificacion.Text
         WFechaOrd = ordenaFecha(WFecha)
         WTipo = cmbTipoEspecificacion.SelectedIndex
         WEspecificacion = Trim(txtEspecificacion.Text)
@@ -3911,33 +3962,226 @@ Public Class Proforma : Implements IConsultaPedPrepo
         _ProcesarDragDeArchivo(e)
     End Sub
 
-    Private Sub _ProcesarDragDeArchivo(ByVal e As System.Windows.Forms.DragEventArgs)
-
+    'Private Sub _ProcesarDragDeArchivo(ByVal e As System.Windows.Forms.DragEventArgs)
+    Friend Function _ProcesarDragDeArchivo(ByVal e As System.Windows.Forms.DragEventArgs) As String
         If Trim(txtNroProforma.Text).Length < 6 Then : txtNroProforma.Text = ceros(txtNroProforma.Text, 6) : End If
 
-        Dim archivos() As String = e.Data.GetData(DataFormats.FileDrop)
+        'Dim archivos() As String = e.Data.GetData(DataFormats.FileDrop)
 
 
-        If archivos.Length = 0 Then : Exit Sub : End If
+        'If archivos.Length = 0 Then : Exit Sub : End If
 
-        _SubirArchivos(archivos)
+        '_SubirArchivos(archivos)
 
-        'If WCantCorrectas > 0 Then
-        '    MsgBox("Se subieron correctamente " & WCantCorrectas & " Archivo(s)", MsgBoxStyle.Information)
-        'End If
+        '_CargarArchivosRelacionados()
 
-        _CargarArchivosRelacionados()
+        Try
+            If e.Data.GetDataPresent(DataFormats.FileDrop) Then
+                Dim archivos() As String = e.Data.GetData(DataFormats.FileDrop)
+                'CAMBIAMOS LA BANDERA PARA SABER QUE ESTAMOS ARRASTRANDO UN ARCHIVO
+                DragActivo = True
+                'LLAMAMOS A LA VENTAN PARA QUE DIGA A QUE CARPETAS COPIAR
+
+
+                _SubirArchivos(archivos)
+
+
+                'With New SeleccionarCarpetas(WPath, True, archivos)
+                '    .Show(Me)
+                'End With
+                DragActivo = True
+                '_SubirArchvios(archivos)
+
+                ' We have a file so lets pass it to the calling form
+                ' Dim Filename As String() = CType(e.Data.GetData(DataFormats.FileDrop), String())
+                ' HandleFileDrops = Filename(0)
+            ElseIf e.Data.GetDataPresent("FileGroupDescriptor") Then
+                ' We have a embedded file. First lets try to get the file name out of memory
+                Dim theStream As Stream = CType(e.Data.GetData("FileGroupDescriptor"), Stream)
+                Dim fileGroupDescriptor(512) As Byte
+                theStream.Read(fileGroupDescriptor, 0, 512)
+                Dim fileName As System.Text.StringBuilder = New System.Text.StringBuilder("")
+                Dim i As Integer = 76
+                While Not (fileGroupDescriptor(i) = 0)
+                    fileName.Append(Convert.ToChar(fileGroupDescriptor(i)))
+                    System.Math.Min(System.Threading.Interlocked.Increment(i), i - 1)
+                End While
+
+                theStream.Close()
+                'theStream.SetLength(0)
+                If Directory.Exists("C:\Temporales") Then Directory.Delete("C:\Temporales", True)
+                ' We should have the file name or if its a email the subject line. Create our temp file based on the temp path and this info
+                Directory.CreateDirectory("C:\Temporales")
+                ' Dim myTempFile As String = "C:\Temporales\" + fileName.ToString()
+
+                Dim NombreArchivo As String = fileName.ToString()
+                NombreArchivo = Regex.Replace(NombreArchivo, "[^\w\s\-]", "")
+
+
+                Dim Extencion As String = obtenerExtencion(fileName.ToString())
+                removerExtencion(NombreArchivo, Extencion)
+                Dim myTempFile As String = "C:\Temporales\" & NombreArchivo & Extencion
+
+
+
+
+                ' Look to see if this is a email message. If so save that temporarily and get the temp file.
+                If InStr(myTempFile, ".msg") > 0 Then
+                    Dim objOL As New Microsoft.Office.Interop.Outlook.Application
+                    Dim objMI As Microsoft.Office.Interop.Outlook.MailItem
+                    If objOL.ActiveExplorer.Selection.Count > 1 Then
+                        MsgBox("You can only drag and drop one item at a time into this screen. The first item you selected will be used.", vbExclamation)
+                    End If
+                    For Each objMI In objOL.ActiveExplorer.Selection()
+                        objMI.SaveAs(myTempFile)
+                        Exit For
+                    Next
+                    objOL = Nothing
+                    objMI = Nothing
+                Else
+
+
+
+                    ' If its a attachment we need to pull the file itself out of memory
+                    Dim ms As MemoryStream = CType(e.Data.GetData("FileContents", True), MemoryStream)
+                    Dim FileBytes(CInt(ms.Length)) As Byte
+                    ' read the raw data into our variable
+                    ms.Position = 0
+                    ms.Read(FileBytes, 0, CInt(ms.Length))
+                    ms.Close()
+                    'ms.SetLength(0)
+                    ' save the raw data into our temp file
+                    Dim fs As FileStream = New FileStream(myTempFile, FileMode.OpenOrCreate, FileAccess.Write)
+                    fs.Write(FileBytes, 0, FileBytes.Length)
+                    fs.Close()
+                End If
+                ' Make sure we have a actual file and also if we do make sure we erase it when done
+                If File.Exists(myTempFile) Then
+                    ' Assign the file name to the add dialog
+                    _ProcesarDragDeArchivo = myTempFile
+                    Dim Archivos(15) As String
+                    Dim posicion As Integer = -1
+                    For Each WNombreArchivo As String In Directory.GetFiles("C:\Temporales").Where(Function(s) EXTENSIONES_PERMITIDAS.Contains(Path.GetExtension(s).ToLower()))
+
+                        Dim InfoArchivo As FileInfo
+                        InfoArchivo = FileSystem.GetFileInfo(WNombreArchivo)
+
+                        With InfoArchivo
+                            posicion += 1
+                            Archivos(posicion) = Trim(.FullName)
+                        End With
+
+                    Next
+                    'CAMBIAMOS LA BANDERA PARA SABER QUE ESTAMOS ARRASTRANDO UN ARCHIVO
+                    DragActivo = True
+                    'TAMBIEN CAMBIAMOS LA DE OUTLOOK PARA SABER QUE 
+                    'HAY QUE BORRAR LOS ARCHIVOS DE LA CARPETA AUXILIAR
+                    DragDesdeOutLOOK = True
+
+                    'LLAMAMOS A LA VENTAN PARA QUE DIGA A QUE CARPETAS COPIAR
+
+
+                    _SubirArchivos(Archivos)
+
+
+
+
+                    ' _SubirArchvios(Archivos)
+
+                    ' 'LUEGO DE PASAR LOS ARCHIVOS A LA CARPETA DESTINO LOS BORRAMOS DE LA TEMPORAL
+                    ' For Each Ruta As String In Archivos
+                    '     If Ruta IsNot Nothing Then
+                    '         File.Delete(Ruta)
+                    '     End If
+                    '
+                    'Next
+                Else
+                    _ProcesarDragDeArchivo = String.Empty
+                End If
+            Else
+                Throw New System.Exception("An exception has occurred.")
+            End If
+
+
+            _CargarArchivosRelacionados()
+
+
+        Catch ex As System.Exception
+            MsgBox("No se puede copiar el archivo desde la memoria.Por favor guarde el archivo en su equipo y luego arrastrelo al sistema.", "Error ")
+            _ProcesarDragDeArchivo = String.Empty
+        Finally
+            TopMost = False
+        End Try
+
+    End Function
+
+
+    Private Sub removerExtencion(ByRef NombreArchivo As String, ByVal Extension As String)
+        Dim CantNombre As Integer = NombreArchivo.Length
+        Dim CantExtension As Integer = Extension.Length - 1
+
+        Dim posicionDeInicio As Integer = CantNombre - CantExtension
+
+        NombreArchivo = NombreArchivo.Remove(posicionDeInicio, CantExtension)
 
     End Sub
 
-    Private Sub dgvArchivos_DragEnter(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles dgvArchivos.DragEnter
+    Private Function obtenerExtencion(ByVal nombreArchivo As String) As String
+
+        If nombreArchivo.Contains(".rar") Then
+            Return ".rar"
+        End If
+        If nombreArchivo.Contains(".zip") Then
+            Return ".zip"
+        End If
+        If nombreArchivo.Contains(".txt") Then
+            Return ".txt"
+        End If
+        If nombreArchivo.Contains(".xlsx") Then
+            Return ".xlsx"
+        End If
+        If nombreArchivo.Contains(".xls") Then
+            Return ".xls"
+        End If
+        If nombreArchivo.Contains(".docx") Then
+            Return ".docx"
+        End If
+        If nombreArchivo.Contains(".doc") Then
+            Return ".doc"
+        End If
+        If nombreArchivo.Contains(".pdf") Then
+            Return ".pdf"
+        End If
+        If nombreArchivo.Contains(".jpeg") Then
+            Return ".jpeg"
+        End If
+        If nombreArchivo.Contains(".jpg") Then
+            Return ".jpg"
+        End If
+        If nombreArchivo.Contains(".png") Then
+            Return ".png"
+        End If
+        If nombreArchivo.Contains(".bmp") Then
+            Return ".bmp"
+        End If
+
+    End Function
+
+    Private Sub dgvArchivos_DragEnter(ByVal sender As Object, ByVal e As DragEventArgs) Handles dgvArchivos.DragEnter
         _PermitirDrag(e)
     End Sub
 
-    Private Sub _PermitirDrag(ByVal e As System.Windows.Forms.DragEventArgs)
+    Private Sub _PermitirDrag(ByVal e As DragEventArgs)
         If e.Data.GetDataPresent(DataFormats.FileDrop) Then
             e.Effect = DragDropEffects.Copy
         End If
+
+        ' Make sure that the format is a file drop.
+
+        If (e.Data.GetDataPresent("FileGroupDescriptor")) Then
+            e.Effect = DragDropEffects.Copy
+        End If
+
     End Sub
 
     Private Sub dgvArchivos_RowHeaderMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgvArchivos.RowHeaderMouseDoubleClick
@@ -4157,4 +4401,30 @@ Public Class Proforma : Implements IConsultaPedPrepo
 
     End Sub
 
+    Private Sub dgvArchivos_DragLeave(sender As Object, e As EventArgs) Handles dgvArchivos.DragLeave
+        TopMost = False
+    End Sub
+
+ 
+    Private Sub txtFechaCobro_KeyDown(sender As Object, e As KeyEventArgs) Handles txtFechaCobro.KeyDown
+        If e.KeyData = Keys.Enter Then
+
+            If Trim(txtFechaCobro.Text.Replace("/", "")) = "" Then
+                txt_PermisoDeEmbarque.Focus()
+            Else
+
+                If ValidaFecha(txtFechaCobro.Text) = "S" Then
+
+                    txtNroPedido.Focus()
+                Else
+                    MsgBox("Se ingreso una fecha invalida, verificar")
+                    txtFechaCobro.SelectAll()
+                End If
+            End If
+
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtFechaCobro.Text = ""
+        End If
+    End Sub
 End Class

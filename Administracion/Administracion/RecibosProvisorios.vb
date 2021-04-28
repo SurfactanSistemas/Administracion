@@ -3,7 +3,7 @@ Imports System.Data.SqlClient
 Imports CrystalDecisions.CrystalReports.Engine
 Imports System.Globalization
 
-Public Class RecibosProvisorios
+Public Class RecibosProvisorios : Implements IPaseEcheques
     Private WRow, Wcol As Integer
     Private Const YMARGEN = 183
     Private Const XMARGEN = 65
@@ -484,7 +484,6 @@ Public Class RecibosProvisorios
         Try
 
             dr = cm.ExecuteReader()
-
             If dr.HasRows Then
                 dr.Read()
 
@@ -507,6 +506,7 @@ Public Class RecibosProvisorios
     End Function
 
     Private Sub btnAgregar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregar.Click
+
         Dim validador As New Validator
         Dim _tipoRec = 0
 
@@ -629,11 +629,36 @@ Public Class RecibosProvisorios
                 Exit Sub
             End Try
 
+            Marcar_ECheques_ComoUsado()
+
+
             MsgBox("Recibo provisorio guardado con exito!", MsgBoxStyle.Information)
             btnLimpiar.PerformClick()
 
         End If
     End Sub
+
+    Private Sub Marcar_ECheques_ComoUsado()
+        Dim ListaSQlCnslt As New List(Of String)
+        Try
+            For Each rowCheque As DataGridViewRow In gridRecibos.Rows
+                If Val(rowCheque.Cells("Tipo").Value) = 7 Then
+                    Dim SQLCnslt As String = "UPDATE  Carga_ChequesE SET Marca_Usado = 'X' WHERE Clave = '" & rowCheque.Cells("ClaveCheque").Value & "'"
+                    ListaSQlCnslt.Add(SQLCnslt)
+                End If
+            Next
+
+            If ListaSQlCnslt.Count > 0 Then
+                ExecuteNonQueries("SurfactanSa", ListaSQlCnslt.ToArray())
+            End If
+
+
+        Catch ex As Exception
+            MsgBox("Hubo un error al intentar marcar como usados los E-Cheques.", MsgBoxStyle.Information)
+            Exit Sub
+        End Try
+    End Sub
+
 
     Private Sub _ActualizarComprobantesIbRestantes(ByVal s As String)
 
@@ -2128,5 +2153,57 @@ Public Class RecibosProvisorios
                 End If
             End With
         Next
+    End Sub
+
+    Private Sub btn_VerEcheq_Click(sender As Object, e As EventArgs) Handles btn_VerEcheq.Click
+        Dim WCuitCliente As String
+        If txtCliente.Text <> "" Then
+            WCuitCliente = obtenercuitCliente(txtCliente.Text)
+        End If
+        If WCuitCliente = "" Then
+            With New Listado_ECheques_Cargacheques()
+                .Show(Me)
+            End With
+        Else
+            With New Listado_ECheques_Cargacheques(WCuitCliente)
+                .Show(Me)
+            End With
+        End If
+        
+    End Sub
+
+    Private Function obtenercuitCliente(ByVal codCliente As String) As String
+        Dim SQLCnslt As String = "SELECT Cuit FROM Cliente WHERE Cliente = '" & codCliente & "'"
+        Dim RowCli As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+        If RowCli IsNot Nothing Then
+            Dim WCuit As String = RowCli.Item("Cuit").ToString().Replace("-", "")
+            Return WCuit
+        End If
+        Return ""
+    End Function
+    Public Sub PasaECheques(Numero As String, Fecha As String, Banco As String, Importe As Double, Clave As String) Implements IPaseEcheques.PasaECheques
+
+        For Each Datarow As DataGridViewRow In gridRecibos.Rows
+            If Datarow.Cells("ClaveCheque").Value = Clave Then
+                MsgBox("Ya se encuentra cargado dicho cheque en la grilla", vbExclamation)
+                Exit Sub
+            End If
+        Next
+
+        Dim filaAModificar As Integer = gridRecibos.Rows.Count - 1
+        gridRecibos.Rows(filaAModificar).Cells("Tipo").Value = "07"
+        gridRecibos.Rows(filaAModificar).Cells("numero").Value = Numero
+        gridRecibos.Rows(filaAModificar).Cells("Fecha").Value = Fecha
+        gridRecibos.Rows(filaAModificar).Cells("banco").Value = Banco
+        gridRecibos.Rows(filaAModificar).Cells("importe").Value = Importe
+        gridRecibos.Rows(filaAModificar).Cells("ClaveCheque").Value = Clave
+
+        gridRecibos.Focus()
+        gridRecibos.CurrentCell = gridRecibos.Rows(filaAModificar).Cells("importe")
+        If gridRecibos.CurrentCell.ColumnIndex = 4 Then
+            SendKeys.Send("{ENTER}")
+
+        End If
+
     End Sub
 End Class

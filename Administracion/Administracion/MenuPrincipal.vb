@@ -277,7 +277,7 @@ Public Class MenuPrincipal
 
         'SolicitudDeFondosToolStripMenuItem.Visible = False
         'GestionarSolicitudDeFondosToolStripMenuItem.Visible = False
-        ImportarEchequesToolStripMenuItem.Visible = False
+        'ImportarEchequesToolStripMenuItem.Visible = False
         
     End Sub
 

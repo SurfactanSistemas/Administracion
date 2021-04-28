@@ -33,6 +33,24 @@ Partial Class MenuPrincipal
         Me.Label2 = New System.Windows.Forms.Label()
         Me.LayoutCuerpoPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.dgvPrincipal = New System.Windows.Forms.DataGridView()
+        Me.Menustrip_Grilla = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.btn_Exportar_Excel = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnAperturaArchivos = New System.Windows.Forms.Button()
+        Me.btnHistorialProforma = New System.Windows.Forms.Button()
+        Me.btnNuevaProforma = New System.Windows.Forms.Button()
+        Me.LayoutFiltros = New System.Windows.Forms.TableLayoutPanel()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.ckMostrarEntregadas = New System.Windows.Forms.CheckBox()
+        Me.btnLimpiarFiltros = New System.Windows.Forms.Button()
+        Me.cmbTipoFiltro = New System.Windows.Forms.ComboBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.txtFiltrarPor = New System.Windows.Forms.TextBox()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.NroProforma = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Cliente = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -53,24 +71,7 @@ Partial Class MenuPrincipal
         Me.Permiso_de_Embarque = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.BL = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Forwarder = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Menustrip_Grilla = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.btnAperturaArchivos = New System.Windows.Forms.Button()
-        Me.btnHistorialProforma = New System.Windows.Forms.Button()
-        Me.btnNuevaProforma = New System.Windows.Forms.Button()
-        Me.LayoutFiltros = New System.Windows.Forms.TableLayoutPanel()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.ckMostrarEntregadas = New System.Windows.Forms.CheckBox()
-        Me.btnLimpiarFiltros = New System.Windows.Forms.Button()
-        Me.cmbTipoFiltro = New System.Windows.Forms.ComboBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.txtFiltrarPor = New System.Windows.Forms.TextBox()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.btn_Exportar_Excel = New System.Windows.Forms.Button()
+        Me.Fecha_Cobro = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutCabecera.SuspendLayout()
         Me.LayoutCuerpoPrincipal.SuspendLayout()
@@ -168,7 +169,7 @@ Partial Class MenuPrincipal
         Me.dgvPrincipal.AllowUserToAddRows = False
         Me.dgvPrincipal.AllowUserToDeleteRows = False
         Me.dgvPrincipal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvPrincipal.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NroProforma, Me.Fecha, Me.Cliente, Me.Razon, Me.Pais, Me.Total, Me.Combox_Estado, Me.FechaLimite, Me.PackingList, Me.PackingListImg, Me.Entregado, Me.Fecha_Limite, Me.Incoterm, Me.MV_Buque, Me.ETD_FechaSalida, Me.ETA_FechaArribo, Me.Peso_Neto, Me.Permiso_de_Embarque, Me.BL, Me.Forwarder})
+        Me.dgvPrincipal.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NroProforma, Me.Fecha, Me.Cliente, Me.Razon, Me.Pais, Me.Total, Me.Combox_Estado, Me.FechaLimite, Me.PackingList, Me.PackingListImg, Me.Entregado, Me.Fecha_Limite, Me.Incoterm, Me.MV_Buque, Me.ETD_FechaSalida, Me.ETA_FechaArribo, Me.Peso_Neto, Me.Permiso_de_Embarque, Me.BL, Me.Forwarder, Me.Fecha_Cobro})
         Me.dgvPrincipal.ContextMenuStrip = Me.Menustrip_Grilla
         Me.dgvPrincipal.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvPrincipal.Location = New System.Drawing.Point(132, 18)
@@ -177,176 +178,6 @@ Partial Class MenuPrincipal
         Me.dgvPrincipal.ReadOnly = True
         Me.dgvPrincipal.Size = New System.Drawing.Size(1099, 430)
         Me.dgvPrincipal.TabIndex = 0
-        '
-        'NroProforma
-        '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.NroProforma.DefaultCellStyle = DataGridViewCellStyle1
-        Me.NroProforma.HeaderText = "Nro Proforma"
-        Me.NroProforma.MaxInputLength = 6
-        Me.NroProforma.Name = "NroProforma"
-        Me.NroProforma.ReadOnly = True
-        Me.NroProforma.Width = 55
-        '
-        'Fecha
-        '
-        Me.Fecha.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle2
-        Me.Fecha.HeaderText = "Fecha"
-        Me.Fecha.MaxInputLength = 10
-        Me.Fecha.Name = "Fecha"
-        Me.Fecha.ReadOnly = True
-        Me.Fecha.Width = 76
-        '
-        'Cliente
-        '
-        Me.Cliente.HeaderText = "Cliente"
-        Me.Cliente.MaxInputLength = 6
-        Me.Cliente.Name = "Cliente"
-        Me.Cliente.ReadOnly = True
-        Me.Cliente.Width = 50
-        '
-        'Razon
-        '
-        Me.Razon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Razon.HeaderText = "Razon Social"
-        Me.Razon.Name = "Razon"
-        Me.Razon.ReadOnly = True
-        Me.Razon.Width = 110
-        '
-        'Pais
-        '
-        Me.Pais.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Pais.HeaderText = "Pais"
-        Me.Pais.Name = "Pais"
-        Me.Pais.ReadOnly = True
-        Me.Pais.Width = 64
-        '
-        'Total
-        '
-        Me.Total.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Total.DefaultCellStyle = DataGridViewCellStyle3
-        Me.Total.HeaderText = "Monto Total"
-        Me.Total.Name = "Total"
-        Me.Total.ReadOnly = True
-        Me.Total.Width = 103
-        '
-        'Combox_Estado
-        '
-        Me.Combox_Estado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Combox_Estado.HeaderText = "Estado"
-        Me.Combox_Estado.Name = "Combox_Estado"
-        Me.Combox_Estado.ReadOnly = True
-        Me.Combox_Estado.Width = 81
-        '
-        'FechaLimite
-        '
-        Me.FechaLimite.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.FechaLimite.HeaderText = "OrdFechaLimite"
-        Me.FechaLimite.MaxInputLength = 8
-        Me.FechaLimite.Name = "FechaLimite"
-        Me.FechaLimite.ReadOnly = True
-        Me.FechaLimite.Visible = False
-        '
-        'PackingList
-        '
-        Me.PackingList.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.PackingList.HeaderText = "PackingList"
-        Me.PackingList.Name = "PackingList"
-        Me.PackingList.ReadOnly = True
-        Me.PackingList.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.PackingList.Visible = False
-        '
-        'PackingListImg
-        '
-        Me.PackingListImg.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.PackingListImg.HeaderText = "Packing List"
-        Me.PackingListImg.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom
-        Me.PackingListImg.Name = "PackingListImg"
-        Me.PackingListImg.ReadOnly = True
-        Me.PackingListImg.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.PackingListImg.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.PackingListImg.Width = 104
-        '
-        'Entregado
-        '
-        Me.Entregado.HeaderText = "Entregado"
-        Me.Entregado.Name = "Entregado"
-        Me.Entregado.ReadOnly = True
-        Me.Entregado.Visible = False
-        '
-        'Fecha_Limite
-        '
-        Me.Fecha_Limite.HeaderText = "Fecha Limite"
-        Me.Fecha_Limite.Name = "Fecha_Limite"
-        Me.Fecha_Limite.ReadOnly = True
-        Me.Fecha_Limite.Width = 70
-        '
-        'Incoterm
-        '
-        Me.Incoterm.HeaderText = "Incoterm"
-        Me.Incoterm.Name = "Incoterm"
-        Me.Incoterm.ReadOnly = True
-        Me.Incoterm.Width = 55
-        '
-        'MV_Buque
-        '
-        Me.MV_Buque.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.MV_Buque.HeaderText = "M.V."
-        Me.MV_Buque.Name = "MV_Buque"
-        Me.MV_Buque.ReadOnly = True
-        Me.MV_Buque.Width = 65
-        '
-        'ETD_FechaSalida
-        '
-        Me.ETD_FechaSalida.HeaderText = "E.T.D"
-        Me.ETD_FechaSalida.Name = "ETD_FechaSalida"
-        Me.ETD_FechaSalida.ReadOnly = True
-        Me.ETD_FechaSalida.Width = 70
-        '
-        'ETA_FechaArribo
-        '
-        Me.ETA_FechaArribo.HeaderText = "E.T.A"
-        Me.ETA_FechaArribo.Name = "ETA_FechaArribo"
-        Me.ETA_FechaArribo.ReadOnly = True
-        Me.ETA_FechaArribo.Width = 70
-        '
-        'Peso_Neto
-        '
-        Me.Peso_Neto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Peso_Neto.DefaultCellStyle = DataGridViewCellStyle4
-        Me.Peso_Neto.HeaderText = "Peso Neto"
-        Me.Peso_Neto.Name = "Peso_Neto"
-        Me.Peso_Neto.ReadOnly = True
-        Me.Peso_Neto.Width = 95
-        '
-        'Permiso_de_Embarque
-        '
-        Me.Permiso_de_Embarque.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Permiso_de_Embarque.HeaderText = "Permiso de Embarque"
-        Me.Permiso_de_Embarque.Name = "Permiso_de_Embarque"
-        Me.Permiso_de_Embarque.ReadOnly = True
-        Me.Permiso_de_Embarque.Width = 162
-        '
-        'BL
-        '
-        Me.BL.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.BL.HeaderText = "BL"
-        Me.BL.MinimumWidth = 45
-        Me.BL.Name = "BL"
-        Me.BL.ReadOnly = True
-        Me.BL.Width = 54
-        '
-        'Forwarder
-        '
-        Me.Forwarder.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Forwarder.HeaderText = "Forwarder"
-        Me.Forwarder.Name = "Forwarder"
-        Me.Forwarder.ReadOnly = True
-        Me.Forwarder.Width = 101
         '
         'Menustrip_Grilla
         '
@@ -374,6 +205,20 @@ Partial Class MenuPrincipal
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(112, 466)
         Me.Panel1.TabIndex = 1
+        '
+        'btn_Exportar_Excel
+        '
+        Me.btn_Exportar_Excel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btn_Exportar_Excel.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btn_Exportar_Excel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btn_Exportar_Excel.Location = New System.Drawing.Point(7, 385)
+        Me.btn_Exportar_Excel.Margin = New System.Windows.Forms.Padding(13, 12, 0, 12)
+        Me.btn_Exportar_Excel.Name = "btn_Exportar_Excel"
+        Me.btn_Exportar_Excel.Size = New System.Drawing.Size(99, 69)
+        Me.btn_Exportar_Excel.TabIndex = 4
+        Me.btn_Exportar_Excel.Text = "Exportar a Excel"
+        Me.ToolTip1.SetToolTip(Me.btn_Exportar_Excel, "Abrir Formulario para Alta / Consulta de Proforma")
+        Me.btn_Exportar_Excel.UseVisualStyleBackColor = True
         '
         'Button1
         '
@@ -547,20 +392,183 @@ Partial Class MenuPrincipal
         Me.txtFiltrarPor.Size = New System.Drawing.Size(217, 23)
         Me.txtFiltrarPor.TabIndex = 0
         '
-        'btn_Exportar_Excel
+        'NroProforma
         '
-        Me.btn_Exportar_Excel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btn_Exportar_Excel.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btn_Exportar_Excel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btn_Exportar_Excel.Location = New System.Drawing.Point(7, 385)
-        Me.btn_Exportar_Excel.Margin = New System.Windows.Forms.Padding(13, 12, 0, 12)
-        Me.btn_Exportar_Excel.Name = "btn_Exportar_Excel"
-        Me.btn_Exportar_Excel.Size = New System.Drawing.Size(99, 69)
-        Me.btn_Exportar_Excel.TabIndex = 4
-        Me.btn_Exportar_Excel.Text = "Exportar a Excel"
-        Me.ToolTip1.SetToolTip(Me.btn_Exportar_Excel, "Abrir Formulario para Alta / Consulta de Proforma")
-        Me.btn_Exportar_Excel.UseVisualStyleBackColor = True
-        Me.btn_Exportar_Excel.Visible = False
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.NroProforma.DefaultCellStyle = DataGridViewCellStyle1
+        Me.NroProforma.HeaderText = "Nro Proforma"
+        Me.NroProforma.MaxInputLength = 6
+        Me.NroProforma.Name = "NroProforma"
+        Me.NroProforma.ReadOnly = True
+        Me.NroProforma.Width = 55
+        '
+        'Fecha
+        '
+        Me.Fecha.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle2
+        Me.Fecha.HeaderText = "Fecha"
+        Me.Fecha.MaxInputLength = 10
+        Me.Fecha.Name = "Fecha"
+        Me.Fecha.ReadOnly = True
+        Me.Fecha.Width = 76
+        '
+        'Cliente
+        '
+        Me.Cliente.HeaderText = "Cliente"
+        Me.Cliente.MaxInputLength = 6
+        Me.Cliente.Name = "Cliente"
+        Me.Cliente.ReadOnly = True
+        Me.Cliente.Width = 50
+        '
+        'Razon
+        '
+        Me.Razon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Razon.HeaderText = "Razon Social"
+        Me.Razon.Name = "Razon"
+        Me.Razon.ReadOnly = True
+        Me.Razon.Width = 110
+        '
+        'Pais
+        '
+        Me.Pais.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Pais.HeaderText = "Pais"
+        Me.Pais.Name = "Pais"
+        Me.Pais.ReadOnly = True
+        Me.Pais.Width = 64
+        '
+        'Total
+        '
+        Me.Total.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Total.DefaultCellStyle = DataGridViewCellStyle3
+        Me.Total.HeaderText = "Monto Total"
+        Me.Total.Name = "Total"
+        Me.Total.ReadOnly = True
+        Me.Total.Width = 103
+        '
+        'Combox_Estado
+        '
+        Me.Combox_Estado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Combox_Estado.HeaderText = "Estado"
+        Me.Combox_Estado.Name = "Combox_Estado"
+        Me.Combox_Estado.ReadOnly = True
+        Me.Combox_Estado.Width = 81
+        '
+        'FechaLimite
+        '
+        Me.FechaLimite.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.FechaLimite.HeaderText = "OrdFechaLimite"
+        Me.FechaLimite.MaxInputLength = 8
+        Me.FechaLimite.Name = "FechaLimite"
+        Me.FechaLimite.ReadOnly = True
+        Me.FechaLimite.Visible = False
+        Me.FechaLimite.Width = 137
+        '
+        'PackingList
+        '
+        Me.PackingList.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.PackingList.HeaderText = "PackingList"
+        Me.PackingList.Name = "PackingList"
+        Me.PackingList.ReadOnly = True
+        Me.PackingList.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.PackingList.Visible = False
+        Me.PackingList.Width = 109
+        '
+        'PackingListImg
+        '
+        Me.PackingListImg.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.PackingListImg.HeaderText = "Packing List"
+        Me.PackingListImg.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom
+        Me.PackingListImg.Name = "PackingListImg"
+        Me.PackingListImg.ReadOnly = True
+        Me.PackingListImg.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.PackingListImg.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.PackingListImg.Width = 104
+        '
+        'Entregado
+        '
+        Me.Entregado.HeaderText = "Entregado"
+        Me.Entregado.Name = "Entregado"
+        Me.Entregado.ReadOnly = True
+        Me.Entregado.Visible = False
+        '
+        'Fecha_Limite
+        '
+        Me.Fecha_Limite.HeaderText = "Fecha Limite"
+        Me.Fecha_Limite.Name = "Fecha_Limite"
+        Me.Fecha_Limite.ReadOnly = True
+        Me.Fecha_Limite.Width = 70
+        '
+        'Incoterm
+        '
+        Me.Incoterm.HeaderText = "Incoterm"
+        Me.Incoterm.Name = "Incoterm"
+        Me.Incoterm.ReadOnly = True
+        Me.Incoterm.Width = 55
+        '
+        'MV_Buque
+        '
+        Me.MV_Buque.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.MV_Buque.HeaderText = "M.V."
+        Me.MV_Buque.Name = "MV_Buque"
+        Me.MV_Buque.ReadOnly = True
+        Me.MV_Buque.Width = 65
+        '
+        'ETD_FechaSalida
+        '
+        Me.ETD_FechaSalida.HeaderText = "E.T.D"
+        Me.ETD_FechaSalida.Name = "ETD_FechaSalida"
+        Me.ETD_FechaSalida.ReadOnly = True
+        Me.ETD_FechaSalida.Width = 70
+        '
+        'ETA_FechaArribo
+        '
+        Me.ETA_FechaArribo.HeaderText = "E.T.A"
+        Me.ETA_FechaArribo.Name = "ETA_FechaArribo"
+        Me.ETA_FechaArribo.ReadOnly = True
+        Me.ETA_FechaArribo.Width = 70
+        '
+        'Peso_Neto
+        '
+        Me.Peso_Neto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Peso_Neto.DefaultCellStyle = DataGridViewCellStyle4
+        Me.Peso_Neto.HeaderText = "Peso Neto"
+        Me.Peso_Neto.Name = "Peso_Neto"
+        Me.Peso_Neto.ReadOnly = True
+        Me.Peso_Neto.Width = 95
+        '
+        'Permiso_de_Embarque
+        '
+        Me.Permiso_de_Embarque.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Permiso_de_Embarque.HeaderText = "Permiso de Embarque"
+        Me.Permiso_de_Embarque.Name = "Permiso_de_Embarque"
+        Me.Permiso_de_Embarque.ReadOnly = True
+        Me.Permiso_de_Embarque.Width = 162
+        '
+        'BL
+        '
+        Me.BL.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.BL.HeaderText = "BL"
+        Me.BL.MinimumWidth = 45
+        Me.BL.Name = "BL"
+        Me.BL.ReadOnly = True
+        Me.BL.Width = 54
+        '
+        'Forwarder
+        '
+        Me.Forwarder.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Forwarder.HeaderText = "Forwarder"
+        Me.Forwarder.Name = "Forwarder"
+        Me.Forwarder.ReadOnly = True
+        Me.Forwarder.Width = 101
+        '
+        'Fecha_Cobro
+        '
+        Me.Fecha_Cobro.HeaderText = "Fecha Cobro"
+        Me.Fecha_Cobro.Name = "Fecha_Cobro"
+        Me.Fecha_Cobro.ReadOnly = True
         '
         'MenuPrincipal
         '
@@ -606,6 +614,9 @@ Partial Class MenuPrincipal
     Friend WithEvents btnAperturaArchivos As System.Windows.Forms.Button
     Friend WithEvents btnLimpiarFiltros As System.Windows.Forms.Button
     Friend WithEvents ckMostrarEntregadas As System.Windows.Forms.CheckBox
+    Friend WithEvents Menustrip_Grilla As System.Windows.Forms.ContextMenuStrip
+    Friend WithEvents ToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents btn_Exportar_Excel As System.Windows.Forms.Button
     Friend WithEvents NroProforma As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Fecha As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Cliente As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -626,8 +637,6 @@ Partial Class MenuPrincipal
     Friend WithEvents Permiso_de_Embarque As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents BL As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Forwarder As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Menustrip_Grilla As System.Windows.Forms.ContextMenuStrip
-    Friend WithEvents ToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents btn_Exportar_Excel As System.Windows.Forms.Button
+    Friend WithEvents Fecha_Cobro As System.Windows.Forms.DataGridViewTextBoxColumn
 
 End Class

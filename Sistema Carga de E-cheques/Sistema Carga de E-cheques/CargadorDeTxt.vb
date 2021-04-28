@@ -25,7 +25,7 @@ Public Class CargadorDeTxt
                 DGV_RutasArchivos.Rows.Add(file)
             Next
             btn_ObtenerDatos_Click(Nothing, Nothing)
-            btn_CargarEnTabla_Click(Nothing, Nothing)
+            'btn_CargarEnTabla_Click(Nothing, Nothing)
 
 
             Dim listaArchivos As New List(Of String)
@@ -61,6 +61,7 @@ Public Class CargadorDeTxt
 
             Next
             dgv_Cheques.DataSource = tablafinal
+
         End If
 
         If dgv_Cheques.Columns("Monto") IsNot Nothing Then
@@ -271,53 +272,91 @@ Public Class CargadorDeTxt
     End Sub
 
     Private Sub btn_CargarEnTabla_Click(sender As Object, e As EventArgs) Handles btn_CargarEnTabla.Click
-
-        Dim SQLCnslt As String = ""
-        Dim ListaSQLCnslt As New List(Of String)
-
-        Dim tabla As DataTable = dgv_Cheques.DataSource
-        For Each rowTabla As DataRow In tabla.Rows
-
-            Dim WRazonEmisor As String = rowTabla.Item(0)
-            Dim WNCheque As String = rowTabla.Item(1)
-            Dim WBancoEmisor As String = rowTabla.Item(2)
-            Dim WImporte As Double = Val(rowTabla.Item(3))
-            Dim AuxFechaPago As Date = rowTabla.Item(4)
-            Dim WFechaPago As String = AuxFechaPago.ToString("dd/MM/yyyy")
-            Dim WOrdFechaPago As String = ordenaFecha(WFechaPago)
-            Dim WCuitEmisor As String = rowTabla.Item(5)
-            Dim AuxFechaEmision As Date = rowTabla.Item(6)
-            Dim WFechaEmision As String = AuxFechaEmision.ToString("dd/MM/yyyy")
-            Dim WOrdFechaEmision As String = ordenaFecha(WFechaEmision)
-            Dim WCaracterCheque As String = rowTabla.Item(7)
-            Dim WModoCheque As String = rowTabla.Item(8)
-            Dim WCuitEndoso As String = rowTabla.Item(9)
-            Dim WRazonEndoso As String = rowTabla.Item(10)
-
-            Dim WCLAVE As String = WNCheque & "-" & WCuitEmisor & "-" & formatonumerico(WImporte.ToString())
-
-            If VerificarExiste(WCLAVE) Then
-                Continue For
-            End If
-
-            SQLCnslt = "INSERT INTO Carga_ChequesE (Clave, NroCheque, BancoEmisor, Importe, FechaPago, OrdFechaPago, CuitEmisor, " _
-                        & "Emisor_Razon, FechaEmisor , OrdFechaEmisor, Caracter_Cheque, Modo_Cheque, Endoso_Documento, Endoso_Razon) " _
-                        & "VALUES('" & WCLAVE & "', '" & WNCheque & "', '" & WBancoEmisor & "', '" & formatonumerico(WImporte) & "', '" & WFechaPago & "', " _
-                        & "'" & WOrdFechaPago & "', '" & WCuitEmisor & "', '" & WRazonEmisor & "', '" & WFechaEmision & "', '" & WOrdFechaEmision & "', " _
-                        & "'" & WCaracterCheque & "', '" & WModoCheque & "', '" & WCuitEndoso & "', '" & WRazonEndoso & "')"
-
-            ListaSQLCnslt.Add(SQLCnslt)
-
-        Next
+        Dim Cantidad_Grabada As Integer = 0
+        Dim Cantidad_YaExistentes As Integer = 0
         Try
-            If ListaSQLCnslt.Count > 0 Then
-                ExecuteNonQueries("SurfactanSa", ListaSQLCnslt.ToArray())
-            End If
-        Catch ex As Exception
+            Dim SQLCnslt As String = ""
+            Dim ListaSQLCnslt As New List(Of String)
 
+            Dim tabla As DataTable = dgv_Cheques.DataSource
+            For Each rowTabla As DataRow In tabla.Rows
+
+                Dim WRazonEmisor As String = rowTabla.Item(0)
+                Dim WNCheque As String = rowTabla.Item(1)
+                Dim WBancoEmisor As String = rowTabla.Item(2)
+                Dim WImporte As Double = Val(rowTabla.Item(3))
+                Dim AuxFechaPago As Date = rowTabla.Item(4)
+                Dim WFechaPago As String = AuxFechaPago.ToString("dd/MM/yyyy")
+                Dim WOrdFechaPago As String = ordenaFecha(WFechaPago)
+                Dim WCuitEmisor As String = rowTabla.Item(5)
+                Dim AuxFechaEmision As Date = rowTabla.Item(6)
+                Dim WFechaEmision As String = AuxFechaEmision.ToString("dd/MM/yyyy")
+                Dim WOrdFechaEmision As String = ordenaFecha(WFechaEmision)
+                Dim WCaracterCheque As String = rowTabla.Item(7)
+                Dim WModoCheque As String = rowTabla.Item(8)
+                Dim WCuitEndoso As String = rowTabla.Item(9)
+                Dim WRazonEndoso As String = rowTabla.Item(10)
+
+                Dim WCLAVE As String = WNCheque & "-" & WCuitEmisor & "-" & formatonumerico(WImporte.ToString())
+
+                If VerificarExiste(WCLAVE) Then
+                    Cantidad_YaExistentes += 1
+                    CambiarColor_en_Grilla(WNCheque, WCuitEmisor, WImporte, False)
+                    Continue For
+                End If
+
+                SQLCnslt = "INSERT INTO Carga_ChequesE (Clave, NroCheque, BancoEmisor, Importe, FechaPago, OrdFechaPago, CuitEmisor, " _
+                            & "Emisor_Razon, FechaEmisor , OrdFechaEmisor, Caracter_Cheque, Modo_Cheque, Endoso_Documento, Endoso_Razon, Marca_Usado) " _
+                            & "VALUES('" & WCLAVE & "', '" & WNCheque & "', '" & WBancoEmisor & "', '" & formatonumerico(WImporte) & "', '" & WFechaPago & "', " _
+                            & "'" & WOrdFechaPago & "', '" & WCuitEmisor & "', '" & WRazonEmisor & "', '" & WFechaEmision & "', '" & WOrdFechaEmision & "', " _
+                            & "'" & WCaracterCheque & "', '" & WModoCheque & "', '" & WCuitEndoso & "', '" & WRazonEndoso & "', '" & "" & "')"
+
+                ListaSQLCnslt.Add(SQLCnslt)
+
+                Cantidad_Grabada += 1
+                CambiarColor_en_Grilla(WNCheque, WCuitEmisor, WImporte, True)
+
+            Next
+            Try
+                If ListaSQLCnslt.Count > 0 Then
+                    ExecuteNonQueries("SurfactanSa", ListaSQLCnslt.ToArray())
+                End If
+
+
+            Catch ex As Exception
+                MsgBox("No se puedieron grabar los cheques en la tabla.", vbExclamation)
+                Exit Sub
+            End Try
+
+            With New CarteldeProcesados(Cantidad_Grabada, Cantidad_YaExistentes)
+                .Show()
+            End With
+        Catch ex As Exception
+            MsgBox("No se encontraron cheques en la tabla.", vbExclamation)
+            Exit Sub
         End Try
+        
+        
 
     End Sub
+
+    Private Sub CambiarColor_en_Grilla(ByVal WNCheque As String, ByVal WCuitEmisor As String, ByVal WImporte As Double, ByVal Accion As Boolean)
+        For Each row As DataGridViewRow In dgv_Cheques.Rows
+            With row
+                If (.Cells(1).Value = WNCheque) And (.Cells(5).Value = WCuitEmisor) And (Val(.Cells(3).Value) = Val(WImporte)) Then
+                    If Accion = True Then
+                        row.DefaultCellStyle.BackColor = Color.Green
+                        row.DefaultCellStyle.ForeColor = Color.White
+                    Else
+                        row.DefaultCellStyle.BackColor = Color.Red
+                        row.DefaultCellStyle.ForeColor = Color.White
+                    End If
+
+                End If
+            End With
+        Next
+    End Sub
+
     Private Function VerificarExiste(ByVal WCLAVE As String)
         Dim SQLCnslt As String = "SELECT Clave FROM Carga_ChequesE WHERE Clave = '" & WCLAVE & "'"
         Dim RowCarga As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
