@@ -1472,6 +1472,32 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad, IA
 
                 ' todo implementar envio por mail de Ensayos pooles y final del producto.
 
+                Dim ZDescProducto, ZClave, ZLaudo, ZProducto, ZFecha, ZCodigo, ZResultado, ZConfecciono, ZFarmacopea, ZLoteProveedor, ZEnvases, ZLibros, ZPaginas, ZNroOOS, ZNotaExterna1, ZNotaExterna2, ZNotaExterna3, ZImpre1, ZImpre2, ZArchiva, ZDescEnsayos, ZCantidad As String
+
+                ZDescProducto = txtDescMP.Text.Trim
+                ZLaudo = txtPartida.Text
+                ZProducto = txtCodigo.Text
+                ZFecha = txtFecha.Text
+                ZConfecciono = txtConfecciono.Text.Trim
+                ZLoteProveedor = txtLoteProveedor.Text.Trim
+                ZEnvases = txtEnvases.Text.Trim
+                ZLibros = txtLibros.Text.Trim
+                ZPaginas = txtPaginas.Text.Trim
+                ZNroOOS = txtOOS.Text.Trim
+                ZNotaExterna1 = ""
+                ZNotaExterna2 = ""
+                ZNotaExterna3 = ""
+                ZImpre1 = ""
+                ZImpre2 = ""
+                ZArchiva = txtArchivo.Text.Trim
+                ZCantidad = "0.00"
+
+                For Each row As datagridviewrow In dgvEnsayos.rows
+
+
+
+                Next
+
                 btnLimpiar.PerformClick()
 
             ElseIf MsgBox("¿Sigue cargando Pooles para esta Materia Prima?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
