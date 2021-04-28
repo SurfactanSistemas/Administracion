@@ -3,7 +3,7 @@ Imports System.Data.SqlClient
 Imports CrystalDecisions.CrystalReports.Engine
 Imports System.Globalization
 
-Public Class RecibosProvisorios
+Public Class RecibosProvisorios : Implements IPaseEcheques
     Private WRow, Wcol As Integer
     Private Const YMARGEN = 183
     Private Const XMARGEN = 65
@@ -484,7 +484,6 @@ Public Class RecibosProvisorios
         Try
 
             dr = cm.ExecuteReader()
-
             If dr.HasRows Then
                 dr.Read()
 
@@ -507,12 +506,42 @@ Public Class RecibosProvisorios
     End Function
 
     Private Sub btnAgregar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregar.Click
+
         Dim validador As New Validator
         Dim _tipoRec = 0
 
         If Val(txtRecibo.Text) = 0 Then
             txtRecibo.Text = _TraerProximoNumeroDeReciboProvisorio()
         End If
+
+
+
+        'VALIDO LOS CAMPOS DE NUMERO DE CHEQUE
+        For Each row In gridRecibos.Rows
+
+            With row
+
+                If (Val(OrDefault(.Cells("tipo").value, "")) = 2 Or Val(OrDefault(.Cells("tipo").value, "")) = 7) Then .Cells("banco").Value = _GenerarCodigoBanco(.Cells("banco").Value)
+
+                If Not IsNothing(.Cells(0).Value) AndAlso (Val(.Cells(0).Value) = 2 Or Val(.Cells(0).Value) = 7) Then
+
+                    ' Controlamos que no se ingrese un numero = 0 para los cheques.
+                    If IsNothing(.Cells(1).Value) OrElse Val(.Cells(1).Value) = 0 Then
+                        MsgBox("Se debe informar un numero valido para el cheque.", MsgBoxStyle.Exclamation)
+                        Exit Sub
+                    Else
+                        If Len(.Cells(1).Value) <> 8 Then
+                            MsgBox("Se debe informar 8 caracteres para el cheque.", MsgBoxStyle.Exclamation)
+                            Exit Sub
+                        End If
+                    End If
+
+                End If
+            End With
+
+        Next
+
+
 
         For Each control As Control In Panel2.Controls
 
@@ -527,7 +556,7 @@ Public Class RecibosProvisorios
             End If
 
         Next
-
+        
         For Each row As DataGridViewRow In gridRecibos.Rows
             With row
                 Dim WTipo As String = If(.Cells("Tipo").Value, "")
@@ -600,11 +629,36 @@ Public Class RecibosProvisorios
                 Exit Sub
             End Try
 
+            Marcar_ECheques_ComoUsado()
+
+
             MsgBox("Recibo provisorio guardado con exito!", MsgBoxStyle.Information)
             btnLimpiar.PerformClick()
 
         End If
     End Sub
+
+    Private Sub Marcar_ECheques_ComoUsado()
+        Dim ListaSQlCnslt As New List(Of String)
+        Try
+            For Each rowCheque As DataGridViewRow In gridRecibos.Rows
+                If Val(rowCheque.Cells("Tipo").Value) = 7 Then
+                    Dim SQLCnslt As String = "UPDATE  Carga_ChequesE SET Marca_Usado = 'X' WHERE Clave = '" & rowCheque.Cells("ClaveCheque").Value & "'"
+                    ListaSQlCnslt.Add(SQLCnslt)
+                End If
+            Next
+
+            If ListaSQlCnslt.Count > 0 Then
+                ExecuteNonQueries("SurfactanSa", ListaSQlCnslt.ToArray())
+            End If
+
+
+        Catch ex As Exception
+            MsgBox("Hubo un error al intentar marcar como usados los E-Cheques.", MsgBoxStyle.Information)
+            Exit Sub
+        End Try
+    End Sub
+
 
     Private Sub _ActualizarComprobantesIbRestantes(ByVal s As String)
 
@@ -1233,6 +1287,16 @@ Public Class RecibosProvisorios
 
                         If iCol = 1 Or iCol = 2 Or iCol = 3 Then ' Avanzamos a la siguiente celda continua.
 
+                            If iCol = 1 Then
+                                'VALIDAMOS SI TIENE 8 DIGITOS EL CHEQUE
+                                If gridRecibos.CurrentRow.Cells(0).Value = 2 Or gridRecibos.CurrentRow.Cells(0).Value = 7 Then
+                                    If Len(gridRecibos.CurrentRow.Cells(1).Value) <> 8 Then
+                                        MsgBox("Para los cheques se deben completar los 8 digitos", vbExclamation)
+                                    End If
+                                End If
+                            End If
+                            
+
                             If iCol = 2 Then
                                 ' Completamos el año de manera automatica
                                 If Len(Trim(valor)) = 6 Then
@@ -1724,7 +1788,6 @@ Public Class RecibosProvisorios
                 'Else
                 '    txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & Date.Now.ToString("yyyy")
                 'End If
-
                 txtFechaAux.Text = Mid(txtFechaAux.Text, 1, 2) & "/" & _mes & "/" & Date.Now.ToString("yyyy")
 
             End If
@@ -2090,5 +2153,57 @@ Public Class RecibosProvisorios
                 End If
             End With
         Next
+    End Sub
+
+    Private Sub btn_VerEcheq_Click(sender As Object, e As EventArgs) Handles btn_VerEcheq.Click
+        Dim WCuitCliente As String
+        If txtCliente.Text <> "" Then
+            WCuitCliente = obtenercuitCliente(txtCliente.Text)
+        End If
+        If WCuitCliente = "" Then
+            With New Listado_ECheques_Cargacheques()
+                .Show(Me)
+            End With
+        Else
+            With New Listado_ECheques_Cargacheques(WCuitCliente)
+                .Show(Me)
+            End With
+        End If
+        
+    End Sub
+
+    Private Function obtenercuitCliente(ByVal codCliente As String) As String
+        Dim SQLCnslt As String = "SELECT Cuit FROM Cliente WHERE Cliente = '" & codCliente & "'"
+        Dim RowCli As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+        If RowCli IsNot Nothing Then
+            Dim WCuit As String = RowCli.Item("Cuit").ToString().Replace("-", "")
+            Return WCuit
+        End If
+        Return ""
+    End Function
+    Public Sub PasaECheques(Numero As String, Fecha As String, Banco As String, Importe As Double, Clave As String) Implements IPaseEcheques.PasaECheques
+
+        For Each Datarow As DataGridViewRow In gridRecibos.Rows
+            If Datarow.Cells("ClaveCheque").Value = Clave Then
+                MsgBox("Ya se encuentra cargado dicho cheque en la grilla", vbExclamation)
+                Exit Sub
+            End If
+        Next
+
+        Dim filaAModificar As Integer = gridRecibos.Rows.Count - 1
+        gridRecibos.Rows(filaAModificar).Cells("Tipo").Value = "07"
+        gridRecibos.Rows(filaAModificar).Cells("numero").Value = Numero
+        gridRecibos.Rows(filaAModificar).Cells("Fecha").Value = Fecha
+        gridRecibos.Rows(filaAModificar).Cells("banco").Value = Banco
+        gridRecibos.Rows(filaAModificar).Cells("importe").Value = Importe
+        gridRecibos.Rows(filaAModificar).Cells("ClaveCheque").Value = Clave
+
+        gridRecibos.Focus()
+        gridRecibos.CurrentCell = gridRecibos.Rows(filaAModificar).Cells("importe")
+        If gridRecibos.CurrentCell.ColumnIndex = 4 Then
+            SendKeys.Send("{ENTER}")
+
+        End If
+
     End Sub
 End Class

@@ -142,6 +142,9 @@ Partial Class ProveedoresABM
         Me.txtCAIVto = New System.Windows.Forms.MaskedTextBox()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.txtCAI = New Administracion.CustomTextBox()
+        Me.gb_TipoDolar = New System.Windows.Forms.GroupBox()
+        Me.CustomLabel40 = New Administracion.CustomLabel()
+        Me.cbx_TipoDolar = New Administracion.CustomComboBox()
         Me.GroupBox1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -150,6 +153,7 @@ Partial Class ProveedoresABM
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
+        Me.gb_TipoDolar.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -322,6 +326,7 @@ Partial Class ProveedoresABM
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.gb_TipoDolar)
         Me.Panel2.Controls.Add(Me.GrupoConsultas)
         Me.Panel2.Controls.Add(Me.ckAceptaTransferencias)
         Me.Panel2.Controls.Add(Me.ckAceptaCheques)
@@ -1834,6 +1839,50 @@ Partial Class ProveedoresABM
         Me.txtCAI.Validator = Administracion.ValidatorType.None
         Me.txtCAI.Visible = False
         '
+        'gb_TipoDolar
+        '
+        Me.gb_TipoDolar.Controls.Add(Me.CustomLabel40)
+        Me.gb_TipoDolar.Controls.Add(Me.cbx_TipoDolar)
+        Me.gb_TipoDolar.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.gb_TipoDolar.ForeColor = System.Drawing.SystemColors.Control
+        Me.gb_TipoDolar.Location = New System.Drawing.Point(6, 266)
+        Me.gb_TipoDolar.Margin = New System.Windows.Forms.Padding(0)
+        Me.gb_TipoDolar.Name = "gb_TipoDolar"
+        Me.gb_TipoDolar.Padding = New System.Windows.Forms.Padding(0)
+        Me.gb_TipoDolar.Size = New System.Drawing.Size(93, 67)
+        Me.gb_TipoDolar.TabIndex = 106
+        Me.gb_TipoDolar.TabStop = False
+        Me.gb_TipoDolar.Text = "Tipo Dolar"
+        '
+        'CustomLabel40
+        '
+        Me.CustomLabel40.AutoSize = True
+        Me.CustomLabel40.BackColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(139, Byte), Integer), CType(CType(82, Byte), Integer))
+        Me.CustomLabel40.ControlAssociationKey = 23
+        Me.CustomLabel40.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.CustomLabel40.ForeColor = System.Drawing.SystemColors.Control
+        Me.CustomLabel40.Location = New System.Drawing.Point(8, 20)
+        Me.CustomLabel40.Name = "CustomLabel40"
+        Me.CustomLabel40.Size = New System.Drawing.Size(34, 14)
+        Me.CustomLabel40.TabIndex = 100
+        Me.CustomLabel40.Text = "Dolar"
+        '
+        'cbx_TipoDolar
+        '
+        Me.cbx_TipoDolar.Cleanable = True
+        Me.cbx_TipoDolar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbx_TipoDolar.Empty = True
+        Me.cbx_TipoDolar.EnterIndex = 31
+        Me.cbx_TipoDolar.Font = New System.Drawing.Font("Calibri", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.cbx_TipoDolar.FormattingEnabled = True
+        Me.cbx_TipoDolar.Items.AddRange(New Object() {"", "Divisa", "Nacion"})
+        Me.cbx_TipoDolar.LabelAssociationKey = 27
+        Me.cbx_TipoDolar.Location = New System.Drawing.Point(8, 38)
+        Me.cbx_TipoDolar.Name = "cbx_TipoDolar"
+        Me.cbx_TipoDolar.Size = New System.Drawing.Size(68, 21)
+        Me.cbx_TipoDolar.TabIndex = 99
+        Me.cbx_TipoDolar.Validator = Administracion.ValidatorType.None
+        '
         'ProveedoresABM
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1869,6 +1918,8 @@ Partial Class ProveedoresABM
         Me.GroupBox3.PerformLayout()
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
+        Me.gb_TipoDolar.ResumeLayout(False)
+        Me.gb_TipoDolar.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1991,4 +2042,7 @@ Partial Class ProveedoresABM
     Friend WithEvents ckAceptaTransferencias As System.Windows.Forms.CheckBox
     Friend WithEvents txtCbu As System.Windows.Forms.TextBox
     Friend WithEvents CustomLabel37 As Administracion.CustomLabel
+    Friend WithEvents gb_TipoDolar As System.Windows.Forms.GroupBox
+    Friend WithEvents CustomLabel40 As Administracion.CustomLabel
+    Friend WithEvents cbx_TipoDolar As Administracion.CustomComboBox
 End Class

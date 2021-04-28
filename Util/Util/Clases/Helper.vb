@@ -718,11 +718,14 @@ Namespace Clases
                 ' Modificar por los E-Mails que correspondan.
                 oMsg.To = Direccion
 
-                For Each archivosAdjunto As String In ArchivosAdjuntos
+                If ArchivosAdjuntos IsNot Nothing Then
+                    For Each archivosAdjunto As String In ArchivosAdjuntos
 
-                    oMsg.Attachments.Add(archivosAdjunto)
+                        oMsg.Attachments.Add(archivosAdjunto)
 
-                Next
+                    Next
+                End If
+                
 
                 If EnvioAutomatico Then
                     oMsg.Send()

@@ -22,8 +22,8 @@ Partial Class Gestion_Solicitudes
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.label1 = New System.Windows.Forms.Label()
@@ -71,7 +71,7 @@ Partial Class Gestion_Solicitudes
         Me.panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.panel1.Location = New System.Drawing.Point(0, 0)
         Me.panel1.Name = "panel1"
-        Me.panel1.Size = New System.Drawing.Size(915, 40)
+        Me.panel1.Size = New System.Drawing.Size(1022, 40)
         Me.panel1.TabIndex = 6
         '
         'Label2
@@ -80,7 +80,7 @@ Partial Class Gestion_Solicitudes
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold)
         Me.Label2.ForeColor = System.Drawing.Color.White
-        Me.Label2.Location = New System.Drawing.Point(739, 10)
+        Me.Label2.Location = New System.Drawing.Point(846, 10)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(155, 20)
         Me.Label2.TabIndex = 0
@@ -166,12 +166,12 @@ Partial Class Gestion_Solicitudes
         '
         Me.txt_Filtro.Location = New System.Drawing.Point(452, 85)
         Me.txt_Filtro.Name = "txt_Filtro"
-        Me.txt_Filtro.Size = New System.Drawing.Size(451, 20)
+        Me.txt_Filtro.Size = New System.Drawing.Size(558, 20)
         Me.txt_Filtro.TabIndex = 9
         '
         'btn_Cerrar
         '
-        Me.btn_Cerrar.Location = New System.Drawing.Point(828, 46)
+        Me.btn_Cerrar.Location = New System.Drawing.Point(935, 46)
         Me.btn_Cerrar.Name = "btn_Cerrar"
         Me.btn_Cerrar.Size = New System.Drawing.Size(75, 33)
         Me.btn_Cerrar.TabIndex = 10
@@ -191,7 +191,7 @@ Partial Class Gestion_Solicitudes
         '
         Me.txt_TotalPesos.BackColor = System.Drawing.Color.Cyan
         Me.txt_TotalPesos.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txt_TotalPesos.Location = New System.Drawing.Point(565, 441)
+        Me.txt_TotalPesos.Location = New System.Drawing.Point(672, 441)
         Me.txt_TotalPesos.Name = "txt_TotalPesos"
         Me.txt_TotalPesos.ReadOnly = True
         Me.txt_TotalPesos.Size = New System.Drawing.Size(124, 20)
@@ -201,7 +201,7 @@ Partial Class Gestion_Solicitudes
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(496, 444)
+        Me.Label4.Location = New System.Drawing.Point(603, 444)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(63, 13)
         Me.Label4.TabIndex = 13
@@ -210,7 +210,7 @@ Partial Class Gestion_Solicitudes
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(703, 444)
+        Me.Label5.Location = New System.Drawing.Point(810, 444)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(70, 13)
         Me.Label5.TabIndex = 15
@@ -220,7 +220,7 @@ Partial Class Gestion_Solicitudes
         '
         Me.txt_TotalDolares.BackColor = System.Drawing.Color.Cyan
         Me.txt_TotalDolares.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txt_TotalDolares.Location = New System.Drawing.Point(779, 441)
+        Me.txt_TotalDolares.Location = New System.Drawing.Point(886, 441)
         Me.txt_TotalDolares.Name = "txt_TotalDolares"
         Me.txt_TotalDolares.ReadOnly = True
         Me.txt_TotalDolares.Size = New System.Drawing.Size(124, 20)
@@ -241,14 +241,14 @@ Partial Class Gestion_Solicitudes
         Me.DGV_Solicitudes.AllowUserToAddRows = False
         Me.DGV_Solicitudes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_Solicitudes.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.chk, Me.NroSolicitud, Me.Solicitante, Me.Fecha, Me.OrdFecha, Me.Tipo, Me.Destino, Me.Titulo, Me.Moneda, Me.Importe, Me.FechaRequerida, Me.OrdFechaRequerida, Me.Estado})
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGV_Solicitudes.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGV_Solicitudes.DefaultCellStyle = DataGridViewCellStyle4
         Me.DGV_Solicitudes.DoubleBuffered = True
         Me.DGV_Solicitudes.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.DGV_Solicitudes.Location = New System.Drawing.Point(12, 111)
@@ -258,7 +258,7 @@ Partial Class Gestion_Solicitudes
         Me.DGV_Solicitudes.RowTemplate.Height = 20
         Me.DGV_Solicitudes.ShowCellToolTips = False
         Me.DGV_Solicitudes.SinClickDerecho = False
-        Me.DGV_Solicitudes.Size = New System.Drawing.Size(891, 314)
+        Me.DGV_Solicitudes.Size = New System.Drawing.Size(998, 314)
         Me.DGV_Solicitudes.TabIndex = 8
         '
         'chk
@@ -346,10 +346,10 @@ Partial Class Gestion_Solicitudes
         '
         Me.Importe.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Importe.DataPropertyName = "Importe"
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle1.Format = "N2"
-        DataGridViewCellStyle1.NullValue = Nothing
-        Me.Importe.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle3.Format = "N2"
+        DataGridViewCellStyle3.NullValue = Nothing
+        Me.Importe.DefaultCellStyle = DataGridViewCellStyle3
         Me.Importe.HeaderText = "Importe"
         Me.Importe.Name = "Importe"
         Me.Importe.ReadOnly = True
@@ -395,11 +395,11 @@ Partial Class Gestion_Solicitudes
         '
         'btn_Eliminar
         '
-        Me.btn_Eliminar.Location = New System.Drawing.Point(390, 431)
+        Me.btn_Eliminar.Location = New System.Drawing.Point(515, 431)
         Me.btn_Eliminar.Name = "btn_Eliminar"
         Me.btn_Eliminar.Size = New System.Drawing.Size(82, 38)
         Me.btn_Eliminar.TabIndex = 18
-        Me.btn_Eliminar.Text = "ELIMINAR MARCADOS"
+        Me.btn_Eliminar.Text = "RECHAZAR MARCADOS"
         Me.btn_Eliminar.UseVisualStyleBackColor = True
         '
         'btn_ActualizarGrilla
@@ -415,7 +415,7 @@ Partial Class Gestion_Solicitudes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(915, 473)
+        Me.ClientSize = New System.Drawing.Size(1022, 473)
         Me.Controls.Add(Me.btn_ActualizarGrilla)
         Me.Controls.Add(Me.btn_Eliminar)
         Me.Controls.Add(Me.btn_Autorizar)

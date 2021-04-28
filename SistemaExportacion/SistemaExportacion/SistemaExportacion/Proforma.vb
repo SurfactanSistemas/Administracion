@@ -1,5 +1,7 @@
 ﻿Imports System.Data.SqlClient
 Imports System.IO
+Imports System.Text.RegularExpressions
+Imports Microsoft.VisualBasic.FileIO
 Imports ArmadoPallets
 Imports CrystalDecisions.Shared
 Imports Microsoft.Office.Interop
@@ -26,6 +28,16 @@ Public Class Proforma : Implements IConsultaPedPrepo
     Private NROPEDIDOPRO As String = ""
 
     Private _NroProforma As String
+
+    ' Constantes
+    Private Const EXTENSIONES_PERMITIDAS = "*.docx|*.doc|*.xls|*.xlsx|*.xlsm|*.pdf|*.bmp|*.png|*.jpg|*.jpeg|*.ico|*.txt"
+    Private TIPO_ESPECIFICACIONES() As String = {"", "Envase", "Entrega", "Varios"}
+
+
+    Dim DragActivo As Boolean = False
+    Dim DragDesdeOutLOOK As Boolean = False
+
+
     Public Property NroProforma() As String
         Get
             Return _NroProforma
@@ -49,12 +61,50 @@ Public Class Proforma : Implements IConsultaPedPrepo
 
             CargarDatosAdicionales()
 
+            Dim WOperador As DataRow = GetSingle("SELECT SistemaExportacion FROM Operador WHERE UPPER(Clave) = '" & Operador.Clave & "'", "SurfactanSa")
+            If WOperador IsNot Nothing Then
+                If WOperador.Item("SistemaExportacion") = 3 Then
+                    btnAceptar.Enabled = False
+                    btnEliminar.Enabled = False
+                    btnConsulta.Enabled = False
+                    btnHistorialArchivosRelacionados.Enabled = False
+                    btn_TraerDatos.Enabled = False
+                    btn_GenerarNotaEmpaque.Enabled = False
+                    btnEntregado.Enabled = False
+                    End If
+            End If
+
+            If txtNroPedido.Text <> "" Then
+                Buscar_NroFactura_Y_SaldoFactura(txtNroPedido.Text)
+            End If
+
 
         Else
             btnLimpiar.PerformClick()
         End If
 
     End Sub
+
+
+    Private Sub Buscar_NroFactura_Y_SaldoFactura(ByVal NroPedido As String)
+        Dim SQLCnslt As String = "SELECT Numero, SaldoUs FROM CtaCte WHERE Pedido = '" & Trim(NroPedido) & "'"
+        Try
+            Dim RowCtaCte As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+            If RowCtaCte IsNot Nothing Then
+                txtNroFactura.Text = Microsoft.VisualBasic.Right(RowCtaCte.Item("Numero"),4)
+                txtSaldoFactura.Text = RowCtaCte.Item("SaldoUs")
+                'SETEO EL NUMERO PARA QUE SE SEPARE POR MILES
+                txtSaldoFactura.Text = String.Format("{0:N2}", Val(txtSaldoFactura.Text))
+            Else
+                txtNroFactura.Text = ""
+                txtSaldoFactura.Text = ""
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+
 
     Private Sub _TraerProximoNroProforma()
         Dim cn As SqlConnection = New SqlConnection()
@@ -167,10 +217,15 @@ Public Class Proforma : Implements IConsultaPedPrepo
 
     Private Sub _TraerProforma(ByVal NroProforma As String)
         Dim cn As SqlConnection = New SqlConnection()
-        Dim cm As SqlCommand = New SqlCommand("SELECT p.Renglon, p.Proforma, p.Estado, p.Fecha, p.FechaLimite, p.Cliente, c.Razon, p.Direccion, p.Localidad, p.CondPago, p.OCCliente, p.Condicion, p.Via, p.Observaciones, p.SubTotal, p.Flete, p.Seguro, p.Total, p.DescriTotal, p.Pais, p.CondPagoII, p.ObservacionesII, p.ObservacionesIII, p.DescriTotalII, p.Producto, p.Cantidad, p.Precio, p.Cerrada, p.PackingList, p.Idioma, p.Entregado, p.Otros, p.MotivoOtros, p.Factura, p.Pedido FROM ProformaExportacion as p, Cliente as c WHERE Proforma = '" & NroProforma & "' AND p.Cliente = c.Cliente ORDER BY Renglon")
+        Dim cm As SqlCommand = New SqlCommand("SELECT p.Renglon, p.Proforma, p.Estado, p.Fecha, p.FechaLimite, p.Cliente, c.Razon, p.Direccion, p.Localidad, p.CondPago, p.OCCliente, p.Condicion, p.Via, p.Observaciones, p.SubTotal, p.Flete, p.Seguro, p.Total, p.DescriTotal, p.Pais, p.CondPagoII, p.ObservacionesII, p.ObservacionesIII, p.DescriTotalII, p.Producto, p.Cantidad, p.Precio, p.Cerrada, p.PackingList, p.Idioma, p.Entregado, p.Otros, p.MotivoOtros, p.Factura, p.Pedido, p.MV_Buque, p.ETD_FechaSalida, p.ETA_FechaArribo, p.Permiso_de_Embarque, p.BL, p.Forwarder, p.Combox_Estado, p.FechaCobro FROM ProformaExportacion as p, Cliente as c WHERE Proforma = '" & NroProforma & "' AND p.Cliente = c.Cliente ORDER BY Renglon")
         Dim dr As SqlDataReader
         Dim WRenglon, WEstado, WNroProforma, WFecha, WCliente, WDescripcionCliente, WDireccion, WLocalidad, WCondPago, WOCCliente, WCondicion, WVia, WObservaciones, WSubTotal, WFlete, WSeguro, WTotal, WDescripcionMonto, WPais, WCondPagoII, WObservacionesII, WObservacionesIII, WDescripcionMontoII, WRowIndex
         Dim WNroPedido, WNroFactura, WEntregado, WEnviarDocumentacion, WProformaCerrada, WPackingList, WIdioma, WFechaLimite
+
+        'Creo variables nuevas 
+        Dim WMV, WETD, WETA, WPermisoEmbarque, WBL, WForwarder, WEstadoGrilla, WFechaCobro As String
+        'fin crear variables nuevas 08/04/2021
+
 
         WRenglon = 0
         WEstado = 0
@@ -258,6 +313,17 @@ Public Class Proforma : Implements IConsultaPedPrepo
                             WOtros = IIf(IsDBNull(.Item("Otros")), 0.0, .Item("Otros"))
                             WMotivoOtros = IIf(IsDBNull(.Item("MotivoOtros")), "", .Item("MotivoOtros"))
 
+                            'Cargo variables nuevas 
+                            WMV = IIf(IsDBNull(.Item("MV_Buque")), "", .Item("MV_Buque"))
+                            WETD = IIf(IsDBNull(.Item("ETD_FechaSalida")), "", .Item("ETD_FechaSalida"))
+                            WETA = IIf(IsDBNull(.Item("ETA_FechaArribo")), "", .Item("ETA_FechaArribo"))
+                            WPermisoEmbarque = IIf(IsDBNull(.Item("Permiso_de_Embarque")), "", .Item("Permiso_de_Embarque"))
+                            WBL = IIf(IsDBNull(.Item("BL")), "", .Item("BL"))
+                            WForwarder = IIf(IsDBNull(.Item("Forwarder")), "", .Item("Forwarder"))
+                            WEstadoGrilla = IIf(IsDBNull(.Item("Combox_Estado")), "", .Item("Combox_Estado"))
+                            WFechaCobro = IIf(IsDBNull(.Item("FechaCobro")), "", .Item("FechaCobro"))
+                            'fin carga variables nuevas 08/04/2021
+
 
                             txtNroProforma.Text = WNroProforma
                             txtFecha.Text = WFecha
@@ -285,6 +351,20 @@ Public Class Proforma : Implements IConsultaPedPrepo
                             txt_MotivoOtros.Text = WMotivoOtros
                             txt_Otros.Text = WOtros
 
+
+                            'Cargo los campos con las variables nuevas 
+                            txt_MV.Text = WMV
+                            txt_ETD_FechaSalida.Text = WETD
+                            txt_ETA_FechaArriba.Text = WETA
+                            txt_PermisoDeEmbarque.Text = WPermisoEmbarque
+                            txt_BL.Text = WBL
+                            txt_Forwarder.Text = WForwarder
+                            cbx_EstadoGrilla.SelectedItem = WEstadoGrilla
+                            txtFechaCobro.Text = WFechaCobro
+                            'fin carga campos nuevos 08/04/2021
+
+
+
                             WNroFactura = IIf(IsDBNull(.Item("Factura")), "", .Item("Factura"))
                             WNroFactura = Trim(WNroFactura)
                             WNroPedido = IIf(IsDBNull(.Item("Pedido")), "", .Item("Pedido"))
@@ -306,8 +386,8 @@ Public Class Proforma : Implements IConsultaPedPrepo
                             txtFlete.Text = formatonumerico(WFlete)
                             txtSeguro.Text = formatonumerico(WSeguro)
 
-                            If UCase(WEntregado) = "X" then
-                                btnEntregado.Visible=False
+                            If UCase(WEntregado) = "X" Then
+                                btnEntregado.Visible = False
                                 gbEntregado.Visible = True
                             End If
 
@@ -378,7 +458,7 @@ Public Class Proforma : Implements IConsultaPedPrepo
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtFechaLimite.Text.Replace("/", "")) = "" Then
-                txtObservaciones.Focus()
+                txtNroPedido.Focus()
                 Exit Sub
             End If
 
@@ -392,7 +472,7 @@ Public Class Proforma : Implements IConsultaPedPrepo
             End If
 
             If _ValidarFecha(txtFechaLimite.Text) Then
-                txtObservaciones.Focus()
+                txtNroPedido.Focus()
             End If
 
         ElseIf e.KeyData = Keys.Escape Then
@@ -631,7 +711,7 @@ Public Class Proforma : Implements IConsultaPedPrepo
         Catch ex As Exception
 
         End Try
-     
+
 
 
     End Sub
@@ -710,12 +790,12 @@ Public Class Proforma : Implements IConsultaPedPrepo
 
     End Sub
 
-    Private Sub txtOCCliente_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtOCCliente.KeyDown, txtSaldoFactura.KeyDown, txtNroPedido.KeyDown, txtNroFactura.KeyDown
+    Private Sub txtOCCliente_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtOCCliente.KeyDown, txtSaldoFactura.KeyDown
 
         If e.KeyData = Keys.Enter Then
-
-            cmbCondicion.Focus()
-            cmbCondicion.DroppedDown = True
+            txt_Contacto.Focus()
+            'cmbCondicion.Focus()
+            'cmbCondicion.DroppedDown = True
 
         ElseIf e.KeyData = Keys.Escape Then
             txtOCCliente.Text = ""
@@ -1220,7 +1300,9 @@ Public Class Proforma : Implements IConsultaPedPrepo
 
 
     Private Sub btnAceptar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAceptar.Click
-        
+
+
+
         Dim cn As New SqlConnection()
         Dim trans As SqlTransaction = Nothing
         Dim cm As New SqlCommand()
@@ -1229,7 +1311,9 @@ Public Class Proforma : Implements IConsultaPedPrepo
         Dim WCondPagoII, WObservacionesII, WObservacionesIII, WDescripcionMontoII, WProformaCerrada, WPackingList, WEnviarDoc, WIdioma, WViaDesc, WEntregado, WEntregadoFecha, WEntregadoFechaOrd
         Dim WProd As String, WDescriProducto, WCant, WPrecio, WDesc, WSinFDS, WFechaLimite, WFechaLimiteOrd
 
-
+        'Nuevas variables para la grilla
+        Dim WMV, WETD, WOrdETD, WETA, WOrdETA, WPermisoEmbarque, WBL, WForwarder, WEstadoGrilla As String
+        Dim WPesoNeto As Double
         'If Me.Bloqueado Then
 
         '    MsgBox("No se puede modificar una Proforma que ya se encuentra Aprobada.", MsgBoxStyle.Information)
@@ -1267,6 +1351,8 @@ Public Class Proforma : Implements IConsultaPedPrepo
         WPais = _Left(txtPais.Text, 15)
         Dim WNroFactura As String = txtNroFactura.Text
         Dim WNroPedido As String = txtNroPedido.Text
+        Dim WFechaCobro As String = txtFechaCobro.Text
+        Dim WFechaCobroOrd As String = ordenaFecha(txtFechaCobro.Text)
 
         WCondPagoII = _Left(Trim(txtCondicionPagoII.Text), 50)
         WObservacionesII = _Left(Trim(txtObservacionesII.Text), 100)
@@ -1337,6 +1423,26 @@ Public Class Proforma : Implements IConsultaPedPrepo
 
         'WViaDesc = UCase(Trim(cmbVia.SelectedText))
 
+        'CARGO LAS NUEVAS VARIABLES DE LA GRILLA 
+
+        WMV = Trim(txt_MV.Text)
+        WETA = Trim(txt_ETA_FechaArriba.Text)
+        WOrdETA = ordenaFecha(txt_ETA_FechaArriba.Text)
+        WETD = Trim(txt_ETD_FechaSalida.Text)
+        WOrdETD = ordenaFecha(txt_ETD_FechaSalida.Text)
+        WPermisoEmbarque = Trim(txt_PermisoDeEmbarque.Text)
+        WBL = Trim(txt_BL.Text)
+        WForwarder = Trim(txt_Forwarder.Text)
+        WEstadoGrilla = cbx_EstadoGrilla.SelectedItem
+
+
+        'Calculo Peso Neto
+        WPesoNeto = 0
+        For Each row As DataGridViewRow In dgvProductos.Rows
+            WPesoNeto += Val(row.Cells.Item("Cantidad").Value)
+        Next
+
+
         'Try
         cn.ConnectionString = _CS() ' TRUE: Para testing en local.
 
@@ -1384,12 +1490,24 @@ Public Class Proforma : Implements IConsultaPedPrepo
 
                         WClave = XNroProforma & XRenglon
 
-                        WSql = "INSERT INTO ProformaExportacion (Clave, Proforma, Renglon, Fecha, FechaOrd, Estado, Cliente, Direccion, Localidad, CondPago, CondPagoII, OCCliente, Condicion, Via, ViaDesc, Observaciones, ObservacionesII, ObservacionesIII, Producto, DescriProducto, Cantidad, Precio, SubTotal, Flete, Seguro, Total, DescriTotal, DescriTotalII, Pais, Cerrada, PackingList, EnviarDocumentacion, Idioma, FechaLimite, FechaLimiteOrd, MotivoOtros, Otros, Factura, Pedido)" _
+                        'WSql = "INSERT INTO ProformaExportacion (Clave, Proforma, Renglon, Fecha, FechaOrd, Estado, Cliente, Direccion, Localidad, CondPago, CondPagoII, OCCliente," _
+                        '     & " Condicion, Via, ViaDesc, Observaciones, ObservacionesII, ObservacionesIII, Producto, DescriProducto, Cantidad, Precio, SubTotal, Flete, Seguro, Total," _
+                        '     & " DescriTotal, DescriTotalII, Pais, Cerrada, PackingList, EnviarDocumentacion, Idioma, FechaLimite, FechaLimiteOrd, MotivoOtros, Otros, Factura, Pedido," _
+                        '     & " MV_Buque, ETD_FechaSalida, Ord_ETD_FechaSalida, ETA_FechaArribo, Ord_ETA_FechaArribo, Permiso_de_Embarque, BL, Forwarder, PesoNeto, Combox_Estado)" _
+                        '     & " VALUES " _
+                        '     & " ('" & WClave & "', '" & XNroProforma & "', '" & XRenglon & "', '" & WFecha & "', '" & WFechaOrd & "', '" & WEstado & "', '" & WCliente & "', '" & WDireccion & "', '" & WLocalidad & "', '" & WCondPago & "', '" & WCondPagoII & "', '" & WOCCliente & "', '" & WCondicion & "', '" & WVia & "', '" & WViaDesc & "', " _
+                        '     & "'" & WObservaciones & "', '" & WObservacionesII & "', '" & WObservacionesIII & "', '" & WProd & "', '" & WDesc & "', " & formatonumerico(WCant) & ", " & formatonumerico(WPrecio) & ", " & formatonumerico(WSubTotal) & ", " & formatonumerico(WFlete) & ", " & formatonumerico(WSeguro) & ", " _
+                        '     & formatonumerico(WTotal) & ", '" & WDescripcionMonto & "', '" & WDescripcionMontoII & "', '" & WPais & "', '" & WProformaCerrada & "', '" & WPackingList & "', '" & WEnviarDoc & "', '" & WIdioma & "', '" & WFechaLimite & "', '" & WFechaLimiteOrd & "', '" & WMotivoOtros & "', '" & WOtros & "', '" & WNroFactura & "', '" & WNroPedido & "' , " _
+                        '     & "'" & WMV & "', '" & WETD & "', '" & WOrdETD & "', '" & WETA & "', '" & WOrdETA & "', '" & WPermisoEmbarque & "', '" & WBL & "', '" & WForwarder & "', " & formatonumerico(WPesoNeto) & ", '" & WEstadoGrilla & "')"
+                        WSql = "INSERT INTO ProformaExportacion (Clave, Proforma, Renglon, Fecha, FechaOrd, Estado, Cliente, Direccion, Localidad, CondPago, CondPagoII, OCCliente," _
+                             & " Condicion, Via, ViaDesc, Observaciones, ObservacionesII, ObservacionesIII, Producto, DescriProducto, Cantidad, Precio, SubTotal, Flete, Seguro, Total," _
+                             & " DescriTotal, DescriTotalII, Pais, Cerrada, PackingList, EnviarDocumentacion, Idioma, FechaLimite, FechaLimiteOrd, MotivoOtros, Otros, Factura, Pedido," _
+                             & " MV_Buque, ETD_FechaSalida, Ord_ETD_FechaSalida, ETA_FechaArribo, Ord_ETA_FechaArribo, Permiso_de_Embarque, BL, Forwarder, PesoNeto, Combox_Estado, FechaCobro, OrdFechaCobro)" _
                              & " VALUES " _
                              & " ('" & WClave & "', '" & XNroProforma & "', '" & XRenglon & "', '" & WFecha & "', '" & WFechaOrd & "', '" & WEstado & "', '" & WCliente & "', '" & WDireccion & "', '" & WLocalidad & "', '" & WCondPago & "', '" & WCondPagoII & "', '" & WOCCliente & "', '" & WCondicion & "', '" & WVia & "', '" & WViaDesc & "', " _
-                             & "'" & WObservaciones & "', '" & WObservacionesII & "', '" & WObservacionesIII & "', '" & WProd & "', '" & WDesc & "', " & formatonumerico(WCant) & ", " & formatonumerico(WPrecio) & ", " & formatonumerico(WSubTotal) & ", " & formatonumerico(WFlete) & ", " & formatonumerico(WSeguro) & ", " _
-                             & formatonumerico(WTotal) & ", '" & WDescripcionMonto & "', '" & WDescripcionMontoII & "', '" & WPais & "', '" & WProformaCerrada & "', '" & WPackingList & "', '" & WEnviarDoc & "', '" & WIdioma & "', '" & WFechaLimite & "', '" & WFechaLimiteOrd & "', '" & WMotivoOtros & "', '" & WOtros & "', '" & WNroFactura & "', '" & WNroPedido & "')"
-
+                             & "'" & WObservaciones & "', '" & WObservacionesII & "', '" & WObservacionesIII & "', '" & WProd & "', '" & WDesc & "', '" & formatonumerico(WCant) & "', '" & formatonumerico(WPrecio) & "', '" & formatonumerico(WSubTotal) & "', '" & formatonumerico(WFlete) & "', '" & formatonumerico(WSeguro) & "', '" _
+                             & formatonumerico(WTotal) & "', '" & WDescripcionMonto & "', '" & WDescripcionMontoII & "', '" & WPais & "', '" & WProformaCerrada & "', '" & WPackingList & "', '" & WEnviarDoc & "', '" & WIdioma & "', '" & WFechaLimite & "', '" & WFechaLimiteOrd & "', '" & WMotivoOtros & "', '" & WOtros & "', '" & WNroFactura & "', '" & WNroPedido & "' , " _
+                             & "'" & WMV & "', '" & WETD & "', '" & WOrdETD & "', '" & WETA & "', '" & WOrdETA & "', '" & WPermisoEmbarque & "', '" & WBL & "', '" & WForwarder & "', '" & formatonumerico(WPesoNeto) & "', '" & WEstadoGrilla & "', '" & WFechaCobro & "', '" & WFechaCobroOrd & "')"
                         cm.CommandText = WSql
 
                         cm.ExecuteNonQuery()
@@ -1478,7 +1596,11 @@ Public Class Proforma : Implements IConsultaPedPrepo
 
         End If
 
-        
+        Dim Wowner As IActualizaGrillaProforma = TryCast(Owner, IActualizaGrillaProforma)
+        If Wowner IsNot Nothing Then
+            Wowner.ActualizaGrilla()
+        End If
+
         btnVistaPrevia.PerformClick()
 
         'btnLimpiar.PerformClick()
@@ -1586,7 +1708,7 @@ Public Class Proforma : Implements IConsultaPedPrepo
 
         GrupoConsulta.Visible = False
 
-        gbEntregado.Visible=False
+        gbEntregado.Visible = False
 
         txtFechaAux.Visible = False
 
@@ -1941,21 +2063,21 @@ Public Class Proforma : Implements IConsultaPedPrepo
 
     End Sub
 
-    Private Sub btnHistorialArchivosRelacionados_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnHistorialArchivosRelacionados.Click
-
-        If Trim(txtNroProforma.Text) <> "" Then
-
-            With HistorialProforma
-
-                .NroProforma = txtNroProforma.Text
-
-                .Show()
-
-            End With
-
-        End If
-
-    End Sub
+    ' Private Sub btnHistorialArchivosRelacionados_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnHistorialArchivosRelacionados.Click
+    '
+    '     If Trim(txtNroProforma.Text) <> "" Then
+    '
+    '         With HistorialProforma
+    '
+    '             .NroProforma = txtNroProforma.Text
+    '
+    '             .Show()
+    '
+    '         End With
+    '
+    '     End If
+    '
+    ' End Sub
 
     Private Sub txtSubTotal_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSubTotal.KeyDown
 
@@ -2001,7 +2123,7 @@ Public Class Proforma : Implements IConsultaPedPrepo
         ElseIf e.KeyData = Keys.Escape Then
             txtSeguro.Text = ""
         End If
-        
+
 
     End Sub
 
@@ -2085,7 +2207,7 @@ Public Class Proforma : Implements IConsultaPedPrepo
     Private Sub txtFechaAux_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtFechaAux.DoubleClick
         If Trim(txtFechaAux.Text.Replace("-", "")) = "" Then
             ' Abrimos la Consulta de Productos que el Cliente Puede Comprar.
-            
+
             btnConsulta.PerformClick()
             lstOpcionesConsulta.SelectedIndex = 1
             lstOpcionesConsulta_MouseClick(Nothing, Nothing)
@@ -2216,7 +2338,7 @@ Public Class Proforma : Implements IConsultaPedPrepo
         End Try
     End Sub
 
-    Private Sub btnEntregado_Click( ByVal sender As System.Object,  ByVal e As System.EventArgs) Handles btnEntregado.Click
+    Private Sub btnEntregado_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEntregado.Click
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand()
         Dim dr As SqlDataReader
@@ -2247,10 +2369,10 @@ Public Class Proforma : Implements IConsultaPedPrepo
             cm = Nothing
 
         End Try
-        
+
     End Sub
 
-    
+
     Private Sub btn_TraerDatos_Click(sender As Object, e As EventArgs) Handles btn_TraerDatos.Click
         With New ConsultaPedidosDeProforma
             .Show(Me)
@@ -2303,7 +2425,7 @@ Public Class Proforma : Implements IConsultaPedPrepo
         _NormalizarNumerosGrilla()
     End Sub
 
-    
+
 
     Private Sub btn_GenerarBotaEmpaque_Click(sender As Object, e As EventArgs) Handles btn_GenerarNotaEmpaque.Click
 
@@ -2320,10 +2442,10 @@ Public Class Proforma : Implements IConsultaPedPrepo
 
 
         'CREAMOS UNA TABLA EN MEMORIA PARA MOSTRAR LOS DATOS
-        Dim TablaNotaEmpaque As DataTable = New DBAuxi.TablaNotaEmpaqueDataTable
+        Dim TablaNotaEmpaque As DataTable = New ArmadoPallets.DBAuxi.TablaNotaEmpaqueDataTable
 
         Dim TotalPesoBruto As Double = 0
-        
+
         CargaTablaParaNotaEmpaqueIngles(_NroProforma, TablaNotaEmpaque, TotalPesoBruto)
 
         Select Case cmbIdioma.SelectedIndex
@@ -2514,7 +2636,7 @@ Public Class Proforma : Implements IConsultaPedPrepo
 
             SQLCnslt = "INSERT INTO ProformaExportacionHistorial (Clave, NroObservacion, Renglon, Proforma, Usuario, Fecha, FechaOrd, Observaciones) " _
                                   & "VALUES ('" & WClave & "'," & WNro_Observacion & ",'" & WRenglon & "','" & WProforma & "','" & WUsuario & "','" & WFecha & "','" & WFechaOrd & "','" & WObservaciones & "')"
-         
+
             ExecuteNonQueries("SurfactanSa", SQLCnslt)
 
         Catch ex As Exception
@@ -2561,5 +2683,1748 @@ Public Class Proforma : Implements IConsultaPedPrepo
             txt_MotivoOtros.Text = ""
         End If
 
+    End Sub
+
+
+    Private Sub txt_Contacto_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_Contacto.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+
+            txt_MailContacto.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txt_Contacto.Text = ""
+        End If
+    End Sub
+
+    Private Sub txt_MailContacto_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_MailContacto.KeyDown
+        If e.KeyData = Keys.Enter Then
+
+            txt_MV.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txt_MailContacto.Text = ""
+        End If
+    End Sub
+
+    Private Sub txt_MV_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_MV.KeyDown
+        If e.KeyData = Keys.Enter Then
+
+            txt_ETD_FechaSalida.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txt_MV.Text = ""
+        End If
+    End Sub
+
+    Private Sub txt_ETD_FechaSalida_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_ETD_FechaSalida.KeyDown
+        If e.KeyData = Keys.Enter Then
+
+            If Trim(txt_ETD_FechaSalida.Text.Replace("/", "")) = "" Then
+                txt_ETA_FechaArriba.Focus()
+            Else
+                If ValidaFecha(txt_ETD_FechaSalida.Text) = "S" Then
+
+                    txt_ETA_FechaArriba.Focus()
+                Else
+                    MsgBox("Se ingreso una fecha invalida, verificar")
+                    txt_ETD_FechaSalida.SelectAll()
+                End If
+            End If
+
+
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txt_ETD_FechaSalida.Text = ""
+        End If
+    End Sub
+
+    Private Sub txt_ETA_FechaArriba_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_ETA_FechaArriba.KeyDown
+        If e.KeyData = Keys.Enter Then
+
+            If Trim(txt_ETA_FechaArriba.Text.Replace("/", "")) = "" Then
+                txt_PermisoDeEmbarque.Focus()
+            Else
+
+                If ValidaFecha(txt_ETA_FechaArriba.Text) = "S" Then
+
+                    txt_PermisoDeEmbarque.Focus()
+                Else
+                    MsgBox("Se ingreso una fecha invalida, verificar")
+                    txt_ETA_FechaArriba.SelectAll()
+                End If
+            End If
+
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txt_ETD_FechaSalida.Text = ""
+        End If
+    End Sub
+
+    Private Sub txt_PermisoDeEmbarque_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_PermisoDeEmbarque.KeyDown
+        If e.KeyData = Keys.Enter Then
+
+            txt_BL.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            _txt_PermisoDeEmbarque.Text = ""
+        End If
+    End Sub
+
+    Private Sub txt_BL_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_BL.KeyDown
+        If e.KeyData = Keys.Enter Then
+
+            txt_Forwarder.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txt_BL.Text = ""
+        End If
+    End Sub
+
+    Private Sub txt_Forwarder_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_Forwarder.KeyDown
+        If e.KeyData = Keys.Enter Then
+
+            cbx_EstadoGrilla.Focus()
+            cbx_EstadoGrilla.DroppedDown = True
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txt_Forwarder.Text = ""
+        End If
+    End Sub
+
+    Private Sub txtNroPedido_KeyDown(sender As Object, e As KeyEventArgs) Handles txtNroPedido.KeyDown
+        If e.KeyData = Keys.Enter Then
+
+            If txtNroPedido.Text <> "" Then
+                Buscar_NroFactura_Y_SaldoFactura(txtNroPedido.Text)
+            End If
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtNroPedido.Text = ""
+        End If
+    End Sub
+
+    Private Sub txtNroFactura_KeyDown(sender As Object, e As KeyEventArgs) Handles txtNroFactura.KeyDown
+        If e.KeyData = Keys.Enter Then
+            Dim NroFactura As String = ""
+            If txtNroFactura.Text.Length = 4 Then
+                NroFactura = "0081" & txtNroFactura.Text
+                BuscarCliente_Saldo_Factura(NroFactura)
+            Else
+                If txtNroFactura.Text.Length = 6 Then
+                    NroFactura = txtNroFactura.Text.PadLeft(8, "0")
+                    BuscarCliente_Saldo_Factura(NroFactura)
+                End If
+
+            End If
+            'txtSaldoFactura.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtNroFactura.Text = ""
+        End If
+    End Sub
+
+    Private Sub BuscarCliente_Saldo_Factura(ByVal NroFactura As String)
+
+    End Sub
+
+    Private Sub cbx_EstadoGrilla_KeyDown(sender As Object, e As KeyEventArgs) Handles cbx_EstadoGrilla.KeyDown
+        If e.KeyData = Keys.Enter Then
+
+            txtObservaciones.Focus()
+
+        End If
+    End Sub
+
+    Private Sub HistorialProforma(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
+        cmb_Carpeta.SelectedIndex = 0
+
+        If Not IsNothing(Me.NroProforma) Then
+            Try
+                _LimpiarTodo()
+
+                txtNroProforma.Text = ceros(Me.NroProforma, 6)
+
+                _TraerHistorialYArchivos()
+
+                TabControl1.SelectTab(0)
+
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Critical)
+                Me.Close()
+            End Try
+        End If
+
+        txtFechaAux.Visible = False
+
+        ' txtFecha.Text = Date.Now.ToString("dd/MM/yyyy")
+
+        WRow = -1
+        Wcol = -1
+
+    End Sub
+
+    Private Sub _TraerHistorialYArchivos()
+
+        _BuscarClienteProforma()
+
+        _MostrarHistorial()
+
+        _CargarArchivosRelacionados()
+
+        _MostrarEspecificaciones()
+
+    End Sub
+
+    Private Sub _BuscarClienteProforma()
+        If Trim(txtNroProforma.Text) = "" Then : Exit Sub : End If
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT DISTINCT p.Cliente, c.Razon FROM ProformaExportacion as p, Cliente as c WHERE Proforma = '" & txtNroProforma.Text & "' AND p.Cliente = c.Cliente")
+        Dim dr As SqlDataReader
+
+        Try
+            cn.ConnectionString = _ConectarA()
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+                dr.Read()
+
+                With dr
+                    txtCliente.Text = IIf(IsDBNull(.Item("Cliente")), "", .Item("Cliente"))
+                    txtDescripcionCliente.Text = IIf(IsDBNull(.Item("Razon")), "", .Item("Razon"))
+                End With
+
+            End If
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar los datos del Cliente correspondiente a la Proforma en la Base de Datos.", MsgBoxStyle.Critical)
+            Exit Sub
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+    End Sub
+
+    Private Sub _MostrarHistorial()
+        'If IsNothing(Me.Proforma) Then : Exit Sub : End If
+
+        GrupoNuevaObs.Visible = False
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand()
+        Dim dr As SqlDataReader
+        Dim WClave, WFecha, WFechaOrd, WNroObservacion, WNroObsAnt, WObservacion, WUsuario, XRenglon, ZSql, WRefPrimeraFilaObs
+
+        ZSql = ""
+        ZSql &= "SELECT DISTINCT h.Clave, h.NroObservacion, h.Renglon, h.Fecha, h.FechaOrd, h.Usuario, h.Observaciones, p.Cliente, c.Razon"
+        ZSql &= " FROM ProformaExportacionHistorial as h, ProformaExportacion as p, Cliente as c"
+        ZSql &= " WHERE h.Proforma = '" & txtNroProforma.Text & "' AND p.Proforma = h.Proforma AND c.Cliente = p.Cliente ORDER BY h.FechaOrd, h.NroObservacion, h.Renglon"
+
+        Try
+            cn.ConnectionString = _CS()
+            cn.Open()
+            cm.CommandText = ZSql
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            btn_LimpiarObservacion.PerformClick()
+
+            dgvHistorial.Rows.Clear()
+
+            If dr.HasRows Then
+
+
+
+                WRefPrimeraFilaObs = 0
+                WNroObsAnt = -1
+
+                Do While dr.Read()
+
+                    WClave = ""
+                    WFecha = ""
+                    WFechaOrd = 0
+                    WObservacion = ""
+                    WUsuario = ""
+                    WNroObservacion = 0
+
+                    txtCliente.Text = IIf(IsDBNull(dr.Item("Cliente")), "", dr.Item("Cliente"))
+                    txtDescripcionCliente.Text = IIf(IsDBNull(dr.Item("Razon")), "", dr.Item("Razon"))
+
+                    XRenglon = dgvHistorial.Rows.Add
+
+                    WFecha = IIf(IsDBNull(dr.Item("Fecha")), "", dr.Item("Fecha"))
+                    WNroObservacion = IIf(IsDBNull(dr.Item("NroObservacion")), 0, dr.Item("NroObservacion"))
+                    WFechaOrd = IIf(IsDBNull(dr.Item("FechaOrd")), "", dr.Item("FechaOrd"))
+                    WObservacion = IIf(IsDBNull(dr.Item("Observaciones")), "", dr.Item("Observaciones"))
+                    WClave = IIf(IsDBNull(dr.Item("Clave")), "", dr.Item("Clave"))
+                    WUsuario = IIf(IsDBNull(dr.Item("Usuario")), "", dr.Item("Usuario"))
+
+                    With dgvHistorial.Rows(XRenglon)
+
+                        .Cells("Fecha").Value = WFecha
+                        .Cells("FechaOrd").Value = WFechaOrd
+                        .Cells("Clave").Value = WClave
+                        .Cells("Observacion").Value = Trim(WObservacion)
+                        .Cells("Usuario").Value = Trim(WUsuario)
+                        '.Cells("NroObservacion").Value = WNroObservacion
+
+                        If WNroObservacion = WNroObsAnt Then
+
+                            If WNroObservacion & WRefPrimeraFilaObs = dgvHistorial.Rows(XRenglon - 1).Cells("NroObservacion").Value Then
+                                .Cells("Fecha").Value = ""
+                                .Cells("Usuario").Value = ""
+                            End If
+
+                            .Cells("NroObservacion").Value = WNroObservacion & WRefPrimeraFilaObs
+                        Else
+                            WNroObsAnt = WNroObservacion
+                            WRefPrimeraFilaObs = ceros(XRenglon, 4)
+                            .Cells("NroObservacion").Value = WNroObservacion & WRefPrimeraFilaObs
+                        End If
+
+                    End With
+
+                Loop
+
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos.")
+            Exit Sub
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+    End Sub
+
+    Private Sub _CargarArchivosRelacionados()
+        Dim WRutaArchivosRelacionados As String = ""
+
+        dgvArchivos.Rows.Clear()
+
+        If Not Directory.Exists(_RutaCarpetaArchivos) Then
+            Throw New Exception("No se ha logrado tener acceso a la Carpeta Compartida de Archivos Relacionados.")
+            Exit Sub
+        End If
+
+        If txtNroProforma.Text.Trim.Length < 6 Then : txtNroProforma.Text = ceros(txtNroProforma.Text, 6) : End If
+
+        Select Case cmb_Carpeta.SelectedItem
+            Case "General"
+                WRutaArchivosRelacionados = _RutaCarpetaArchivos() & "\" & txtNroProforma.Text
+            Case "Proforma"
+                WRutaArchivosRelacionados = _RutaCarpetaArchivos() & "\" & txtNroProforma.Text & "\Proforma"
+            Case "FDS"
+                WRutaArchivosRelacionados = _RutaCarpetaArchivos() & "\" & txtNroProforma.Text & "\FDS"
+            Case "Certificado"
+                WRutaArchivosRelacionados = _RutaCarpetaArchivos() & "\" & txtNroProforma.Text & "\Certificado"
+            Case "Packing List"
+                WRutaArchivosRelacionados = _RutaCarpetaArchivos() & "\" & txtNroProforma.Text & "\Packing List"
+        End Select
+        'WRutaArchivosRelacionados = _RutaCarpetaArchivos() & "\" & txtNroProforma.Text
+
+        ' Creamos la Carpeta en caso de que no exista aún.
+        If Not Directory.Exists(WRutaArchivosRelacionados) Then
+            Try
+                Directory.CreateDirectory(WRutaArchivosRelacionados)
+            Catch ex As Exception
+                Throw New Exception(ex.Message)
+            End Try
+        End If
+
+        Dim InfoArchivo As FileInfo
+
+
+        ' Recorremos unicamente aquellos archivos que tengan una extensión que esté entre las permitidas por la aplicación.
+        For Each WNombreArchivo As String In Directory.GetFiles(WRutaArchivosRelacionados).Where(Function(s) EXTENSIONES_PERMITIDAS.Contains(Path.GetExtension(s).ToLower()))
+
+            InfoArchivo = FileSystem.GetFileInfo(WNombreArchivo)
+
+            With InfoArchivo
+                dgvArchivos.Rows.Add(.CreationTime.ToString("dd/MM/yyyy"), UCase(.Name), _ObtenerIconoSegunTipoArchivo(.Extension), .FullName)
+            End With
+
+        Next
+
+    End Sub
+
+
+    Private Function _ObtenerIconoSegunTipoArchivo(ByVal extension As String)
+        Dim icono = Nothing
+
+        'My.Resources.pdf_icon
+
+
+        Select Case UCase(extension)
+
+            Case ".DOC", ".DOCX"
+                icono = My.Resources.Word_icon
+            Case ".XLS", ".XLSX", ".XLSM"
+                icono = My.Resources.Excel_icon
+            Case ".PDF"
+                icono = My.Resources.pdf_icono
+            Case ".JPG", ".JPEG", ".BMP", ".ICO", ".PNG"
+                icono = My.Resources.imagen_icono
+            Case ".TXT"
+                icono = My.Resources.txt_icono
+            Case Else
+                icono = My.Resources.archivo_default
+        End Select
+
+
+        Return icono
+    End Function
+
+
+    Private Sub _MostrarEspecificaciones()
+        'If IsNothing(Me.Proforma) Then : Exit Sub : End If
+
+        GrupoNuevaObs.Visible = False
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand()
+        Dim dr As SqlDataReader
+        Dim auxi = 0
+        Dim WClave, WFecha, WFechaOrd, WNroEspecificacion, WNroObsAnt, WEspecificacion, WUsuario, XRenglon, ZSql, WRefPrimeraFilaEsp, WRenglon, WTipoEsp
+
+        ZSql = ""
+        ZSql &= "SELECT DISTINCT e.Clave, e.NroEspecificacion, e.Renglon, e.Fecha, e.FechaOrd, e.Usuario, e.Especificacion, e.Tipo"
+        ZSql &= " FROM ProformaExportacionEspecificaciones as e"
+        ZSql &= " WHERE e.Proforma = '" & txtNroProforma.Text & "' ORDER BY e.FechaOrd, e.NroEspecificacion, e.Renglon"
+
+        Try
+            cn.ConnectionString = _CS()
+            cn.Open()
+            cm.CommandText = ZSql
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            btnLimpiarFormularioEspecificacion.PerformClick()
+
+            dgvEspecificaciones.Rows.Clear()
+
+            If dr.HasRows Then
+
+
+
+                WRefPrimeraFilaEsp = 0
+                WNroObsAnt = -1
+
+                Do While dr.Read()
+
+                    WClave = ""
+                    WFecha = ""
+                    WFechaOrd = 0
+                    WEspecificacion = ""
+                    WUsuario = ""
+                    WRenglon = ""
+                    WNroEspecificacion = 0
+                    WTipoEsp = 0
+
+                    'txtCliente.Text = IIf(IsDBNull(dr.Item("Cliente")), "", dr.Item("Cliente"))
+                    'txtDescripcionCliente.Text = IIf(IsDBNull(dr.Item("Razon")), "", dr.Item("Razon"))
+
+                    XRenglon = dgvEspecificaciones.Rows.Add
+
+                    WFecha = IIf(IsDBNull(dr.Item("Fecha")), "", dr.Item("Fecha"))
+                    WNroEspecificacion = IIf(IsDBNull(dr.Item("NroEspecificacion")), 0, dr.Item("NroEspecificacion"))
+                    WFechaOrd = IIf(IsDBNull(dr.Item("FechaOrd")), "", dr.Item("FechaOrd"))
+                    WEspecificacion = IIf(IsDBNull(dr.Item("Especificacion")), "", dr.Item("Especificacion"))
+                    WClave = IIf(IsDBNull(dr.Item("Clave")), "", dr.Item("Clave"))
+                    WRenglon = IIf(IsDBNull(dr.Item("Renglon")), "", dr.Item("Renglon"))
+                    WUsuario = IIf(IsDBNull(dr.Item("Usuario")), "", dr.Item("Usuario"))
+                    WTipoEsp = IIf(IsDBNull(dr.Item("Tipo")), 0, Val(dr.Item("Tipo")))
+
+                    With dgvEspecificaciones.Rows(XRenglon)
+
+                        .Cells("FechaEspecificacion").Value = WFecha
+                        '.Cells("FechaOrd").Value = WFechaOrd
+                        .Cells("NroEspecificacion").Value = WNroEspecificacion
+                        .Cells("Especificacion").Value = Trim(WEspecificacion)
+                        .Cells("UsuarioEspecificacion").Value = Trim(WUsuario)
+                        '.Cells("NroObservacion").Value = WNroObservacion
+                        .Cells("TipoEspecificacion").Value = TIPO_ESPECIFICACIONES(WTipoEsp)
+
+                        If WNroEspecificacion = WNroObsAnt Then
+
+                            auxi = XRenglon - 1
+
+                            auxi = IIf(auxi < 0, 0, auxi)
+
+                            If WNroEspecificacion = dgvEspecificaciones.Rows(auxi).Cells("NroEspecificacion").Value Then
+                                .Cells("FechaEspecificacion").Value = ""
+                                .Cells("UsuarioEspecificacion").Value = ""
+                                .Cells("TipoEspecificacion").Value = ""
+                            End If
+
+                            .Cells("NroEspecificacion").Value = WNroEspecificacion '& WRefPrimeraFilaEsp
+                            .Cells("RenglonEspecificacion").Value = WRenglon '& WRefPrimeraFilaEsp
+                        Else
+                            WNroObsAnt = WNroEspecificacion
+                            WRefPrimeraFilaEsp = ceros(XRenglon, 4)
+                            .Cells("NroEspecificacion").Value = WNroEspecificacion '& WRefPrimeraFilaEsp
+                            .Cells("RenglonEspecificacion").Value = WRenglon '& WRefPrimeraFilaEsp
+                        End If
+
+                    End With
+
+                Loop
+
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos.")
+            Exit Sub
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+    End Sub
+
+    Private Sub _LimpiarTodo()
+
+        dgvArchivos.Rows.Clear()
+        dgvHistorial.Rows.Clear()
+        txtCliente.Text = ""
+        txtDescripcionCliente.Text = ""
+        txtNroProforma.Text = ""
+
+        btnNuevaObservacion.Visible = True
+        btnArchivos.Visible = False
+        btnNuevaEspecificacion.Visible = False
+
+        TabControl1.SelectTab(0)
+        txtNroProforma.Focus()
+
+    End Sub
+
+
+    Private Sub TabControl1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TabControl1.SelectedIndexChanged
+
+        Select Case TabControl1.SelectedIndex
+            Case 0 ' Historial
+                btnNuevaObservacion.Visible = True
+                btnArchivos.Visible = False
+                btnNuevaEspecificacion.Visible = False
+            Case 1 ' Archivos
+                btnNuevaObservacion.Visible = False
+                btnArchivos.Visible = True
+                btnNuevaEspecificacion.Visible = False
+                _CargarArchivosRelacionados()
+            Case 2 ' Especificaciones
+                btnNuevaObservacion.Visible = False
+                btnArchivos.Visible = False
+                btnNuevaEspecificacion.Visible = True
+        End Select
+
+    End Sub
+
+    Private Sub btnNuevaObservacion_Click(sender As Object, e As EventArgs) Handles btnNuevaObservacion.Click
+        If Not _ExisteProforma(NroProforma) Then
+            txtNroProforma.Focus()
+            txtNroProforma.SelectAll()
+            Exit Sub
+        End If
+
+        TabControl1.SelectTab(0)
+
+        GrupoNuevaObs.Visible = True
+        btn_LimpiarObservacion.PerformClick()
+        txtFechObservacion.Focus()
+    End Sub
+
+    Private Sub btnNuevaEspecificacion_Click(sender As Object, e As EventArgs) Handles btnNuevaEspecificacion.Click
+        TabControl1.SelectTab(2)
+        GrupoEspecificacion.Visible = True
+        btnLimpiarFormularioEspecificacion.PerformClick()
+    End Sub
+
+    Private Sub btnArchivos_Click(sender As Object, e As EventArgs) Handles btnArchivos.Click
+        ' Abrimos ventana de archivos Relacionados.
+        'With ArchivosRelacionados
+        '    .NroProforma = txtNroProforma.Text
+        '    .Show()
+        'End With
+
+        TabControl1.SelectTab(1)
+        'Process.Start("explorer.exe", "C:\")
+        Try
+            _AdjuntarArchivos()
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Exit Sub
+        End Try
+
+    End Sub
+    Private Sub _AdjuntarArchivos()
+        Dim _ArchivosAdjuntos() As String
+
+        OpenFileDialog1.FileName = ""
+
+        If OpenFileDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+
+            _ArchivosAdjuntos = OpenFileDialog1.FileNames
+
+            'txtNombreArchivoAdjunto.Text = _ArchivoAdjunto
+
+            _SubirArchivos(_ArchivosAdjuntos)
+
+        End If
+
+        OpenFileDialog1.Dispose()
+
+        _TraerHistorialYArchivos()
+
+
+    End Sub
+
+    Private Sub _SubirArchivos(ByVal archivos() As String)
+
+        Dim WRutaArchivosRelacionados As String
+        Select Case cmb_Carpeta.SelectedItem
+            Case "General"
+                WRutaArchivosRelacionados = _RutaCarpetaArchivos() & "\" & txtNroProforma.Text
+            Case "Proforma"
+                WRutaArchivosRelacionados = _RutaCarpetaArchivos() & "\" & txtNroProforma.Text & "\Proforma"
+            Case "FDS"
+                WRutaArchivosRelacionados = _RutaCarpetaArchivos() & "\" & txtNroProforma.Text & "\FDS"
+            Case "Certificado"
+                WRutaArchivosRelacionados = _RutaCarpetaArchivos() & "\" & txtNroProforma.Text & "\Certificado"
+            Case "Packing List"
+                WRutaArchivosRelacionados = _RutaCarpetaArchivos() & "\" & txtNroProforma.Text & "\Packing List"
+        End Select
+
+        'Dim WRutaArchivosRelacionados = _RutaCarpetaArchivos() & "\" & txtNroProforma.Text
+        Dim WDestino As String = ""
+        Dim WCantCorrectas = 0
+
+        For Each archivo In archivos
+
+            If File.Exists(archivo) Then
+
+                If EXTENSIONES_PERMITIDAS.Contains(Path.GetExtension(archivo).ToLower()) Then
+
+                    WDestino = WRutaArchivosRelacionados & "\" & Path.GetFileName(archivo)
+
+                    Try
+                        If Not File.Exists(WDestino) Then
+                            File.Copy(archivo, WDestino)
+                            WCantCorrectas += 1
+                        Else
+                            If MsgBox("El Archivo " & Path.GetFileName(archivo) & ", ya existe en la carpeta. ¿Desea sobreescribir el archivo existente?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                                File.Copy(archivo, WDestino, True)
+                                WCantCorrectas += 1
+                            End If
+                        End If
+
+                    Catch ex As Exception
+                        MsgBox(ex.Message, MsgBoxStyle.Critical)
+                        Exit Sub
+                    End Try
+
+                End If
+
+            End If
+
+        Next
+
+    End Sub
+
+
+    Private Sub btn_AceptarObservaciones_Click(sender As Object, e As EventArgs) Handles btn_AceptarObservaciones.Click
+
+        Dim cn As New SqlConnection()
+        Dim cm As New SqlCommand()
+        Dim trans As SqlTransaction = Nothing
+
+        Dim WClave, WRenglon, XRenglon, WNroProforma, WFecha, WFechaOrd, WCliente, WObservacion, WUsuario, WNroObservacion, WClaveObs, ZSql
+        Dim WFila = "", WFilasAGrabar() As String
+        Dim WParrafosAGrabar() As String
+
+        cn.ConnectionString = _CS()
+        cn.Open()
+
+        trans = cn.BeginTransaction
+        cm.Connection = cn
+        cm.Transaction = trans
+
+        ZSql = ""
+        WNroProforma = ceros(txtNroProforma.Text, 6)
+        WFecha = txtFechObservacion.Text
+        WFechaOrd = ordenaFecha(WFecha)
+        WCliente = txtCliente.Text
+        WObservacion = Trim(txtObservacion.Text)
+        WClaveObs = Trim(WClaveObservacion.Text)
+
+        WUsuario = txtUsuario.Text
+
+        ' Validamos datos minimos antes de grabar.
+        If Not _DatosValidos() Then
+            Exit Sub
+        End If
+
+        ' Chequeamos si se trata de la actualización de un renglon existente.
+        ' Si tiene clave, es una actualizacion y recuperamos el nro de referencia.
+        If WClaveObs = "" Then
+
+            Try
+                WNroObservacion = _ProximoNroObservacion()
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Critical)
+                Exit Sub
+            End Try
+
+        Else
+
+            WNroObservacion = Mid(WClaveObs, 1, WClaveObs.ToString.Length - 4)
+
+        End If
+
+        Try
+
+            ZSql = ""
+            ZSql = "DELETE FROM ProformaExportacionHistorial WHERE NroObservacion = '" & WNroObservacion & "'"
+
+            cm.CommandText = ZSql
+
+            cm.ExecuteNonQuery()
+
+            ' Aca calculamos y grabamos todas las filas correspondientes.
+
+            WObservacion = Trim(WObservacion)
+
+            ' Separamos los párrafos para conservar el formato del comentario.
+            WParrafosAGrabar = WObservacion.ToString.Split(vbCrLf)
+
+            WRenglon = 0
+
+            For i = 0 To WParrafosAGrabar.Length - 1
+
+                If WParrafosAGrabar(i) <> "" Then
+
+                    ' Redondeamos el párrafo a un multiplo de 100 (max de caracteres por linea.)
+                    If WParrafosAGrabar(i).Length <= 100 Then
+                        WParrafosAGrabar(i) = LSet(WParrafosAGrabar(i), 100) ' - (WParrafosAGrabar(i).Length Mod 100))
+                    Else
+                        WParrafosAGrabar(i) = LSet(WParrafosAGrabar(i), WParrafosAGrabar(i).Length + (100 - (WParrafosAGrabar(i).Length Mod 100)))
+                    End If
+
+                    ' Calculamos el numero de filas a grabar.
+
+                    ReDim WFilasAGrabar((WParrafosAGrabar(i).Length / 100))
+
+
+                    ' Por cada fila, cortamos trozos del parrafo cada 100 caracteres.
+                    For x = 0 To WFilasAGrabar.Length - 1
+
+                        WFilasAGrabar(x) = Trim(Mid(WParrafosAGrabar(i), (x * 100) + 1, 100))
+
+                        ' Grabamos unicamente aquellos que no sean nueva fila y tengan contenido.
+                        If Trim(WFilasAGrabar(x)) <> "" And WFilasAGrabar(x) <> vbLf Then
+                            WRenglon += 1
+
+                            XRenglon = ceros(WRenglon, 2)
+
+                            WClave = ceros(WNroObservacion, 6) + XRenglon
+
+                            ZSql = ""
+                            ZSql = "INSERT INTO ProformaExportacionHistorial (Clave, NroObservacion, Renglon, Proforma, Usuario, Fecha, FechaOrd, Observaciones) "
+                            ZSql &= "VALUES "
+                            ZSql &= "('" & WClave & "'," & WNroObservacion & ",'" & XRenglon & "','" & WNroProforma & "','" & WUsuario & "','" & WFecha & "','" & WFechaOrd & "','" & WFilasAGrabar(x) & "')"
+
+                            cm.CommandText = ZSql
+
+                            cm.ExecuteNonQuery()
+                        End If
+
+                    Next
+
+                End If
+
+            Next
+
+        Catch ex As Exception
+            If Not IsNothing(trans) Then
+                trans.Rollback()
+            End If
+            cn.Close()
+            MsgBox("No se pudo grabar la observación en la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
+            Exit Sub
+        End Try
+
+        trans.Commit()
+
+        ' Aca consultamos si quiere enviar este mismo contenido por email. Abrimos un nuevo email, sin enviarlo automaticamente.
+        If MsgBox("¿Desea enviar este comentario por E-Mail?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+            _AbrirNuevoEmail(Trim(txtObservacion.Text))
+        End If
+
+
+        'MsgBox("La observación ha sido grabada con exito.", MsgBoxStyle.Information)
+
+        _TraerHistorialYArchivos()
+
+        ' Despues de cargar todo el historial, no posicionamos en la primer fila de ese comentario creado/actualizado.
+        For Each row As DataGridViewRow In dgvHistorial.Rows
+            If row.Cells("Clave").Value = WClaveObs Then
+                row.Cells(0).Selected = True
+                Exit For
+            End If
+        Next
+
+        'btnVistaPrevia.PerformClick()
+
+        'btnLimpiar.PerformClick()
+        GrupoNuevaObs.Visible = False
+
+    End Sub
+
+    Private Function _DatosValidos() As Boolean
+
+        ' Validamos que la fecha indicada sea correcta.
+        If Not _ValidarFecha(txtFechObservacion.Text) Then
+            MsgBox("La fecha indicada no es válida", MsgBoxStyle.Critical)
+            txtFechObservacion.Focus()
+            Return False
+        End If
+
+        ' Validamos que se haya cargado algun nombre de usuario.
+        If Trim(txtUsuario.Text) = "" Then
+            MsgBox("Debe indicarse un usuario al que le corresponda la presente observación", MsgBoxStyle.Critical)
+            txtUsuario.Focus()
+            Return False
+        End If
+
+        ' Validamos que se haya cargado contenido para grabar una observacion.
+        ' Se eliminan todos los caracteres de Nueva Linea y de Acarreo antes de validar.
+        If Trim(txtObservacion.Text.Replace(vbCrLf, "").Replace(vbLf, "")) = "" Then
+            MsgBox("La observacioón no puede estar vacía.", MsgBoxStyle.Critical)
+            txtObservacion.Focus()
+            Return False
+        End If
+
+        Return True
+
+    End Function
+
+    Private Sub _AbrirNuevoEmail(ByVal body)
+        Dim oApp As Outlook._Application
+        Dim oMsg As Outlook._MailItem
+
+        Try
+            oApp = New Outlook.Application()
+
+            oMsg = oApp.CreateItem(Outlook.OlItemType.olMailItem)
+            oMsg.Subject = ""
+            oMsg.Body = body
+            oMsg.To = ""
+
+            oMsg.Display()
+
+        Catch ex As Exception
+            Throw New Exception("No se pudo crear el E-Mail solicitado." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+            Exit Sub
+        End Try
+
+    End Sub
+
+    Private Sub btn_EliminarObservacion_Click(sender As Object, e As EventArgs) Handles btn_EliminarObservacion.Click
+        If Trim(WClaveObservacion.Text) = "" Then : Exit Sub : End If
+
+        If MsgBox("¿Está seguro de que quiere eliminar la observación actual?", MsgBoxStyle.YesNo, MsgBoxStyle.Question) = MsgBoxResult.No Then
+            Exit Sub
+        End If
+
+        Try
+            _EliminarObservacion(WClaveObservacion.Text)
+        Catch ex As Exception
+            MsgBox("No se pudo eliminar la observación de la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
+            Exit Sub
+        End Try
+    End Sub
+
+    Private Sub _EliminarObservacion(ByVal WClave As String)
+        WClave = Trim(WClave)
+        If WClave = "" Then : Exit Sub : End If
+
+        Dim cn As New SqlConnection()
+        Dim cm As New SqlCommand()
+        Dim WNroObs = Mid(WClave, 1, WClave.Length - 4)
+
+        Try
+            cn.ConnectionString = _CS()
+            cn.Open()
+            cm.Connection = cn
+            cm.CommandText = "DELETE FROM ProformaExportacionHistorial WHERE NroObservacion = '" & WNroObs & "'"
+
+            cm.ExecuteNonQuery()
+
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+            Exit Sub
+        Finally
+
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        btn_LimpiarObservacion.PerformClick()
+
+        _TraerHistorialYArchivos()
+
+    End Sub
+
+    Private Sub btn_LimpiarObservacion_Click(sender As Object, e As EventArgs) Handles btn_LimpiarObservacion.Click
+        txtObservacion.Text = ""
+
+        'If Trim(WClaveObservacion.Text) = "" Then
+        txtUsuario.Text = ""
+        txtFechObservacion.Text = Date.Now.ToString("dd/MM/yyyy")
+        WClaveObservacion.Text = ""
+        'End If
+
+        txtFechObservacion.Focus()
+    End Sub
+
+    Private Sub btnEnviarPorEmail_Click(sender As Object, e As EventArgs) Handles btnEnviarPorEmail.Click
+        Dim WObservacion As String = ""
+        Dim WNroObservacion As Integer = 0
+
+        Try
+
+            If Trim(txtObservacion.Text) = "" Then : Exit Sub : End If
+
+            _AbrirNuevoEmail(txtObservacion.Text)
+
+        Catch ex As Exception
+            MsgBox("Hubo un problema al querer consultar la Base de Datos.", MsgBoxStyle.Critical)
+            Exit Sub
+        End Try
+
+    End Sub
+
+    Private Sub btnCerrarFormObs_Click(sender As Object, e As EventArgs) Handles btnCerrarFormObs.Click
+        btn_LimpiarObservacion.PerformClick()
+        GrupoNuevaObs.Visible = False
+    End Sub
+
+    Private Sub btnAgregarEspecificacion_Click(sender As Object, e As EventArgs) Handles btnAgregarEspecificacion.Click
+
+        Dim cn As New SqlConnection()
+        Dim cm As New SqlCommand()
+        Dim trans As SqlTransaction = Nothing
+
+        Dim WClave, WRenglon, XRenglon, WNroProforma, WFecha, WFechaOrd, WTipo, WEspecificacion, WUsuario, WNroEspecif, WClaveEsp, ZSql
+        Dim WFila = "", WFilasAGrabar() As String
+        Dim WParrafosAGrabar() As String
+
+        cn.ConnectionString = _CS()
+        cn.Open()
+
+        trans = cn.BeginTransaction
+        cm.Connection = cn
+        cm.Transaction = trans
+
+        ZSql = ""
+        WNroProforma = ceros(txtNroProforma.Text, 6)
+        WFecha = txtFechaEspecificacion.Text
+        WFechaOrd = ordenaFecha(WFecha)
+        WTipo = cmbTipoEspecificacion.SelectedIndex
+        WEspecificacion = Trim(txtEspecificacion.Text)
+        WClaveEsp = Trim(WNroEspecificacion.Text)
+
+        WUsuario = txtUsuarioEspecificacion.Text
+
+        ' Validamos datos minimos antes de grabar.
+        If Not _DatosEspecificacionValidos() Then
+            txtFechaEspecificacion.Focus()
+            Exit Sub
+        End If
+
+        ' Chequeamos si se trata de la actualización de un renglon existente.
+        ' Si tiene clave, es una actualizacion y recuperamos el nro de referencia.
+        If WClaveEsp = "" Then
+
+            Try
+                WNroEspecif = _ProximoNroEspecificacion()
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Critical)
+                Exit Sub
+            End Try
+
+        Else
+
+            WNroEspecif = Val(WClaveEsp) 'Mid(WClaveEsp, 1, WClaveEsp.ToString.Length - 4)
+
+        End If
+
+        Try
+
+            ZSql = ""
+            ZSql = "DELETE FROM ProformaExportacionEspecificaciones WHERE NroEspecificacion = '" & WNroEspecif & "'"
+
+            cm.CommandText = ZSql
+
+            cm.ExecuteNonQuery()
+
+            ' Aca calculamos y grabamos todas las filas correspondientes.
+
+            WEspecificacion = Trim(WEspecificacion)
+
+            ' Separamos los párrafos para conservar el formato del comentario.
+            WParrafosAGrabar = WEspecificacion.ToString.Split(vbCrLf)
+
+            WRenglon = 0
+
+            For i = 0 To WParrafosAGrabar.Length - 1
+
+                If WParrafosAGrabar(i) <> "" And WParrafosAGrabar(i) <> vbLf Then
+
+                    ' Redondeamos el párrafo a un multiplo de 100 (max de caracteres por linea.)
+                    If WParrafosAGrabar(i).Length <= 100 Then
+                        WParrafosAGrabar(i) = LSet(WParrafosAGrabar(i), 100)
+                    Else
+                        WParrafosAGrabar(i) = LSet(WParrafosAGrabar(i), WParrafosAGrabar(i).Length + (100 - (WParrafosAGrabar(i).Length Mod 100)))
+                    End If
+
+                    ' Calculamos el numero de filas a grabar.
+                    ReDim WFilasAGrabar((WParrafosAGrabar(i).Length / 100))
+
+                    ' Por cada fila, cortamos trozos del parrafo cada 100 caracteres.
+                    For x = 0 To WFilasAGrabar.Length - 1
+
+                        WFilasAGrabar(x) = Trim(Mid(WParrafosAGrabar(i), (x * 100) + 1, 100))
+
+                        ' Grabamos unicamente aquellos que no sean nueva fila y tengan contenido.
+                        If Trim(WFilasAGrabar(x)) <> "" And WFilasAGrabar(x) <> vbLf Then
+                            WRenglon += 1
+
+                            XRenglon = ceros(WRenglon, 2)
+
+                            WClave = ceros(WNroEspecif, 6) + XRenglon
+
+                            ZSql = ""
+                            ZSql = "INSERT INTO ProformaExportacionEspecificaciones (Clave, NroEspecificacion, Renglon, Proforma, Especificacion, Tipo, Fecha, FechaOrd, Usuario) "
+                            ZSql &= "VALUES "
+                            ZSql &= "('" & WClave & "'," & WNroEspecif & ",'" & XRenglon & "','" & WNroProforma & "','" & WFilasAGrabar(x) & "','" & WTipo & "','" & WFecha & "','" & WFechaOrd & "','" & WUsuario & "')"
+
+                            cm.CommandText = ZSql
+
+                            cm.ExecuteNonQuery()
+                        End If
+
+                    Next
+
+                End If
+
+            Next
+
+        Catch ex As Exception
+            If Not IsNothing(trans) Then
+                trans.Rollback()
+            End If
+            cn.Close()
+            MsgBox("No se pudo grabar la Especificacion en la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
+            Exit Sub
+        End Try
+
+        trans.Commit()
+
+        ' Aca consultamos si quiere enviar este mismo contenido por email. Abrimos un nuevo email, sin enviarlo automaticamente.
+        If MsgBox("¿Desea enviar esta Especificación por E-Mail?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+            Try
+                _AbrirNuevoEmail(Trim(txtEspecificacion.Text))
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Critical)
+            End Try
+        End If
+
+
+        'MsgBox("La observación ha sido grabada con exito.", MsgBoxStyle.Information)
+
+        _TraerHistorialYArchivos()
+
+        ' Despues de cargar todo el historial, no posicionamos en la primer fila de ese comentario creado/actualizado.
+        If dgvEspecificaciones.Rows.Count > 0 Then
+            For Each row As DataGridViewRow In dgvEspecificaciones.Rows
+                If row.Cells("NroEspecificacion").Value = WNroEspecif And Val(row.Cells("RenglonEspecificacion").Value) = 1 Then
+                    row.Cells(0).Selected = True
+                    Exit For
+                End If
+            Next
+        End If
+
+        'btnVistaPrevia.PerformClick()
+
+        'btnLimpiar.PerformClick()
+        GrupoEspecificacion.Visible = False
+
+    End Sub
+
+    Private Function _ProximoNroEspecificacion()
+        Dim actual = 0
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT TOP 1 NroEspecificacion as NroActual FROM ProformaExportacionEspecificaciones ORDER BY NroEspecificacion DESC")
+        Dim dr As SqlDataReader
+
+        Try
+
+            cn.ConnectionString = _CS()
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+                dr.Read()
+
+                actual = IIf(IsDBNull(dr.Item("NroActual")), 0, dr.Item("NroActual"))
+
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer traer el próximo número de Espeficación de la Base de Datos.")
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        Return actual + 1
+
+    End Function
+
+    Private Function _DatosEspecificacionValidos()
+
+        If Not _ExisteProforma(NroProforma) Then
+            Return False
+        End If
+
+        If Not _ValidarFecha(txtFechaEspecificacion.Text) Then
+            MsgBox("La fecha de Especificación indicada no es una fecha válida.", MsgBoxStyle.Exclamation)
+            Return False
+        End If
+
+        If Trim(txtEspecificacion.Text) = "" Then
+            MsgBox("Debe cargar alguna especificación antes de grabar.", MsgBoxStyle.Exclamation)
+            Return False
+        End If
+
+        If Trim(txtUsuarioEspecificacion.Text) = "" Then
+            MsgBox("Debe indicar quién carga la nueva especificación.", MsgBoxStyle.Exclamation)
+            Return False
+        End If
+
+        If Val(cmbTipoEspecificacion.SelectedIndex) < 1 Then
+            MsgBox("Debe indicar de qué Tipo de Especificación se trata.", MsgBoxStyle.Exclamation)
+            Return False
+        End If
+
+        Return True
+    End Function
+
+    Private Sub btnEliminarEspecificacion_Click(sender As Object, e As EventArgs) Handles btnEliminarEspecificacion.Click
+        If Trim(WNroEspecificacion.Text) = "" Then : Exit Sub : End If
+
+        If MsgBox("¿Está seguro de que quiere eliminar la especificación actual?", MsgBoxStyle.YesNo, MsgBoxStyle.Question) = MsgBoxResult.No Then
+            Exit Sub
+        End If
+
+        Try
+            _EliminarEspecificacion(WNroEspecificacion.Text)
+
+        Catch ex As Exception
+            MsgBox("No se pudo eliminar la observación de la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Critical)
+            Exit Sub
+        End Try
+
+        btnCerrarFormularioEspecificacion.PerformClick()
+    End Sub
+
+    Private Sub _EliminarEspecificacion(ByVal WClave As String)
+        WClave = Trim(WClave)
+        If WClave = "" Then : Exit Sub : End If
+
+        Dim cn As New SqlConnection()
+        Dim cm As New SqlCommand()
+        'Dim WNroObs = Mid(WClave, 1, WClave.Length - 4)
+
+        Try
+            cn.ConnectionString = _CS()
+            cn.Open()
+            cm.Connection = cn
+            cm.CommandText = "DELETE FROM ProformaExportacionEspecificaciones WHERE NroEspecificacion = '" & WClave & "'"
+
+            cm.ExecuteNonQuery()
+
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+            Exit Sub
+        Finally
+
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+        btnLimpiarFormularioEspecificacion.PerformClick()
+
+        _TraerHistorialYArchivos()
+
+    End Sub
+
+    Private Sub btnLimpiarFormularioEspecificacion_Click(sender As Object, e As EventArgs) Handles btnLimpiarFormularioEspecificacion.Click
+        GrupoEspecificacion.Visible = True
+        txtFechaEspecificacion.Text = Date.Now.ToString("dd/MM/yyyy")
+        cmbTipoEspecificacion.SelectedIndex = 0
+        txtEspecificacion.Text = ""
+        WNroEspecificacion.Text = ""
+        txtFechaEspecificacion.Focus()
+    End Sub
+
+    Private Sub btnEnviarEmailEspecificacion_Click(sender As Object, e As EventArgs) Handles btnEnviarEmailEspecificacion.Click
+        If Trim(txtEspecificacion.Text) <> "" Then
+            Try
+                _AbrirNuevoEmail(Trim(txtEspecificacion.Text))
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Critical)
+            End Try
+        End If
+    End Sub
+
+    Private Sub btnCerrarFormularioEspecificacion_Click(sender As Object, e As EventArgs) Handles btnCerrarFormularioEspecificacion.Click
+        GrupoEspecificacion.Visible = False
+    End Sub
+
+    Private Sub cmb_Carpeta_DropDownClosed(sender As Object, e As EventArgs) Handles cmb_Carpeta.DropDownClosed
+        _CargarArchivosRelacionados()
+    End Sub
+
+    Private Sub dgvArchivos_CellContentDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvArchivos.CellContentDoubleClick
+        With dgvArchivos.Rows(e.RowIndex)
+            If Not IsNothing(.Cells("RutaArchivo").Value) Then
+
+                Try
+                    Process.Start(.Cells("RutaArchivo").Value, "f")
+                Catch ex As Exception
+                    MsgBox(ex.Message)
+                End Try
+
+            End If
+        End With
+    End Sub
+
+    Private Sub dgvArchivos_CellDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvArchivos.CellDoubleClick
+        If dgvArchivos.SelectedRows.Count > 0 Then : Exit Sub : End If
+        With dgvArchivos.Rows(e.RowIndex)
+
+            If Not IsNothing(.Cells("RutaArchivo").Value) Then
+
+                Try
+                    Process.Start(.Cells("RutaArchivo").Value, "f")
+                Catch ex As Exception
+                    MsgBox(ex.Message)
+                End Try
+
+            End If
+        End With
+    End Sub
+
+    Private Sub dgvArchivos_DragDrop(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles dgvArchivos.DragDrop
+        _ProcesarDragDeArchivo(e)
+    End Sub
+
+    'Private Sub _ProcesarDragDeArchivo(ByVal e As System.Windows.Forms.DragEventArgs)
+    Friend Function _ProcesarDragDeArchivo(ByVal e As System.Windows.Forms.DragEventArgs) As String
+        If Trim(txtNroProforma.Text).Length < 6 Then : txtNroProforma.Text = ceros(txtNroProforma.Text, 6) : End If
+
+        'Dim archivos() As String = e.Data.GetData(DataFormats.FileDrop)
+
+
+        'If archivos.Length = 0 Then : Exit Sub : End If
+
+        '_SubirArchivos(archivos)
+
+        '_CargarArchivosRelacionados()
+
+        Try
+            If e.Data.GetDataPresent(DataFormats.FileDrop) Then
+                Dim archivos() As String = e.Data.GetData(DataFormats.FileDrop)
+                'CAMBIAMOS LA BANDERA PARA SABER QUE ESTAMOS ARRASTRANDO UN ARCHIVO
+                DragActivo = True
+                'LLAMAMOS A LA VENTAN PARA QUE DIGA A QUE CARPETAS COPIAR
+
+
+                _SubirArchivos(archivos)
+
+
+                'With New SeleccionarCarpetas(WPath, True, archivos)
+                '    .Show(Me)
+                'End With
+                DragActivo = True
+                '_SubirArchvios(archivos)
+
+                ' We have a file so lets pass it to the calling form
+                ' Dim Filename As String() = CType(e.Data.GetData(DataFormats.FileDrop), String())
+                ' HandleFileDrops = Filename(0)
+            ElseIf e.Data.GetDataPresent("FileGroupDescriptor") Then
+                ' We have a embedded file. First lets try to get the file name out of memory
+                Dim theStream As Stream = CType(e.Data.GetData("FileGroupDescriptor"), Stream)
+                Dim fileGroupDescriptor(512) As Byte
+                theStream.Read(fileGroupDescriptor, 0, 512)
+                Dim fileName As System.Text.StringBuilder = New System.Text.StringBuilder("")
+                Dim i As Integer = 76
+                While Not (fileGroupDescriptor(i) = 0)
+                    fileName.Append(Convert.ToChar(fileGroupDescriptor(i)))
+                    System.Math.Min(System.Threading.Interlocked.Increment(i), i - 1)
+                End While
+
+                theStream.Close()
+                'theStream.SetLength(0)
+                If Directory.Exists("C:\Temporales") Then Directory.Delete("C:\Temporales", True)
+                ' We should have the file name or if its a email the subject line. Create our temp file based on the temp path and this info
+                Directory.CreateDirectory("C:\Temporales")
+                ' Dim myTempFile As String = "C:\Temporales\" + fileName.ToString()
+
+                Dim NombreArchivo As String = fileName.ToString()
+                NombreArchivo = Regex.Replace(NombreArchivo, "[^\w\s\-]", "")
+
+
+                Dim Extencion As String = obtenerExtencion(fileName.ToString())
+                removerExtencion(NombreArchivo, Extencion)
+                Dim myTempFile As String = "C:\Temporales\" & NombreArchivo & Extencion
+
+
+
+
+                ' Look to see if this is a email message. If so save that temporarily and get the temp file.
+                If InStr(myTempFile, ".msg") > 0 Then
+                    Dim objOL As New Microsoft.Office.Interop.Outlook.Application
+                    Dim objMI As Microsoft.Office.Interop.Outlook.MailItem
+                    If objOL.ActiveExplorer.Selection.Count > 1 Then
+                        MsgBox("You can only drag and drop one item at a time into this screen. The first item you selected will be used.", vbExclamation)
+                    End If
+                    For Each objMI In objOL.ActiveExplorer.Selection()
+                        objMI.SaveAs(myTempFile)
+                        Exit For
+                    Next
+                    objOL = Nothing
+                    objMI = Nothing
+                Else
+
+
+
+                    ' If its a attachment we need to pull the file itself out of memory
+                    Dim ms As MemoryStream = CType(e.Data.GetData("FileContents", True), MemoryStream)
+                    Dim FileBytes(CInt(ms.Length)) As Byte
+                    ' read the raw data into our variable
+                    ms.Position = 0
+                    ms.Read(FileBytes, 0, CInt(ms.Length))
+                    ms.Close()
+                    'ms.SetLength(0)
+                    ' save the raw data into our temp file
+                    Dim fs As FileStream = New FileStream(myTempFile, FileMode.OpenOrCreate, FileAccess.Write)
+                    fs.Write(FileBytes, 0, FileBytes.Length)
+                    fs.Close()
+                End If
+                ' Make sure we have a actual file and also if we do make sure we erase it when done
+                If File.Exists(myTempFile) Then
+                    ' Assign the file name to the add dialog
+                    _ProcesarDragDeArchivo = myTempFile
+                    Dim Archivos(15) As String
+                    Dim posicion As Integer = -1
+                    For Each WNombreArchivo As String In Directory.GetFiles("C:\Temporales").Where(Function(s) EXTENSIONES_PERMITIDAS.Contains(Path.GetExtension(s).ToLower()))
+
+                        Dim InfoArchivo As FileInfo
+                        InfoArchivo = FileSystem.GetFileInfo(WNombreArchivo)
+
+                        With InfoArchivo
+                            posicion += 1
+                            Archivos(posicion) = Trim(.FullName)
+                        End With
+
+                    Next
+                    'CAMBIAMOS LA BANDERA PARA SABER QUE ESTAMOS ARRASTRANDO UN ARCHIVO
+                    DragActivo = True
+                    'TAMBIEN CAMBIAMOS LA DE OUTLOOK PARA SABER QUE 
+                    'HAY QUE BORRAR LOS ARCHIVOS DE LA CARPETA AUXILIAR
+                    DragDesdeOutLOOK = True
+
+                    'LLAMAMOS A LA VENTAN PARA QUE DIGA A QUE CARPETAS COPIAR
+
+
+                    _SubirArchivos(Archivos)
+
+
+
+
+                    ' _SubirArchvios(Archivos)
+
+                    ' 'LUEGO DE PASAR LOS ARCHIVOS A LA CARPETA DESTINO LOS BORRAMOS DE LA TEMPORAL
+                    ' For Each Ruta As String In Archivos
+                    '     If Ruta IsNot Nothing Then
+                    '         File.Delete(Ruta)
+                    '     End If
+                    '
+                    'Next
+                Else
+                    _ProcesarDragDeArchivo = String.Empty
+                End If
+            Else
+                Throw New System.Exception("An exception has occurred.")
+            End If
+
+
+            _CargarArchivosRelacionados()
+
+
+        Catch ex As System.Exception
+            MsgBox("No se puede copiar el archivo desde la memoria.Por favor guarde el archivo en su equipo y luego arrastrelo al sistema.", "Error ")
+            _ProcesarDragDeArchivo = String.Empty
+        Finally
+            TopMost = False
+        End Try
+
+    End Function
+
+
+    Private Sub removerExtencion(ByRef NombreArchivo As String, ByVal Extension As String)
+        Dim CantNombre As Integer = NombreArchivo.Length
+        Dim CantExtension As Integer = Extension.Length - 1
+
+        Dim posicionDeInicio As Integer = CantNombre - CantExtension
+
+        NombreArchivo = NombreArchivo.Remove(posicionDeInicio, CantExtension)
+
+    End Sub
+
+    Private Function obtenerExtencion(ByVal nombreArchivo As String) As String
+
+        If nombreArchivo.Contains(".rar") Then
+            Return ".rar"
+        End If
+        If nombreArchivo.Contains(".zip") Then
+            Return ".zip"
+        End If
+        If nombreArchivo.Contains(".txt") Then
+            Return ".txt"
+        End If
+        If nombreArchivo.Contains(".xlsx") Then
+            Return ".xlsx"
+        End If
+        If nombreArchivo.Contains(".xls") Then
+            Return ".xls"
+        End If
+        If nombreArchivo.Contains(".docx") Then
+            Return ".docx"
+        End If
+        If nombreArchivo.Contains(".doc") Then
+            Return ".doc"
+        End If
+        If nombreArchivo.Contains(".pdf") Then
+            Return ".pdf"
+        End If
+        If nombreArchivo.Contains(".jpeg") Then
+            Return ".jpeg"
+        End If
+        If nombreArchivo.Contains(".jpg") Then
+            Return ".jpg"
+        End If
+        If nombreArchivo.Contains(".png") Then
+            Return ".png"
+        End If
+        If nombreArchivo.Contains(".bmp") Then
+            Return ".bmp"
+        End If
+
+    End Function
+
+    Private Sub dgvArchivos_DragEnter(ByVal sender As Object, ByVal e As DragEventArgs) Handles dgvArchivos.DragEnter
+        _PermitirDrag(e)
+    End Sub
+
+    Private Sub _PermitirDrag(ByVal e As DragEventArgs)
+        If e.Data.GetDataPresent(DataFormats.FileDrop) Then
+            e.Effect = DragDropEffects.Copy
+        End If
+
+        ' Make sure that the format is a file drop.
+
+        If (e.Data.GetDataPresent("FileGroupDescriptor")) Then
+            e.Effect = DragDropEffects.Copy
+        End If
+
+    End Sub
+
+    Private Sub dgvArchivos_RowHeaderMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgvArchivos.RowHeaderMouseDoubleClick
+
+        With dgvArchivos.Rows(e.RowIndex)
+
+            Dim WRutaArchivo = .Cells("RutaArchivo").Value
+
+            If IsNothing(WRutaArchivo) Then : Exit Sub : End If
+
+            If Trim(WRutaArchivo) = "" Then : Exit Sub : End If
+
+            If Not File.Exists(WRutaArchivo) Then : Exit Sub : End If
+
+            If MsgBox("¿Está seguro de que quiere eliminar el archivo de manera definitiva?", MsgBoxStyle.YesNo) = MsgBoxResult.No Then : Exit Sub : End If
+
+            Try
+                File.Delete(WRutaArchivo)
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Critical)
+                Exit Sub
+            End Try
+
+            _TraerHistorialYArchivos()
+
+            TabControl1.SelectTab(1)
+        End With
+
+    End Sub
+
+    Private Sub txtFechaEspecificacion_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFechaEspecificacion.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtFechaEspecificacion.Text).Length < 10 Then : Exit Sub : End If
+
+            If _ValidarFecha(txtFechaEspecificacion.Text) Then
+
+                cmbTipoEspecificacion.Focus()
+                cmbTipoEspecificacion.DroppedDown = True
+
+            End If
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtFechaEspecificacion.Clear()
+        End If
+
+    End Sub
+
+    Private Sub cmbTipoEspecificacion_DropDownClosed(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbTipoEspecificacion.DropDownClosed
+        If cmbTipoEspecificacion.SelectedIndex > 0 Then
+            txtUsuarioEspecificacion.Focus()
+        End If
+    End Sub
+
+    Private Sub cmbTipoEspecificacion_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbTipoEspecificacion.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Val(cmbTipoEspecificacion.Text) < 0 Then : Exit Sub : End If
+
+            txtUsuarioEspecificacion.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            cmbTipoEspecificacion.SelectedIndex = 0
+        End If
+
+    End Sub
+
+    Private Sub txtUsuarioEspecificacion_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtUsuarioEspecificacion.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtUsuarioEspecificacion.Text) = "" Then : Exit Sub : End If
+
+            txtEspecificacion.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtUsuarioEspecificacion.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtFechObservacion_KeyDown(sender As Object, e As KeyEventArgs) Handles txtFechObservacion.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtFechObservacion.Text.Replace("/", "")) = "" Then : Exit Sub : End If
+
+            If _ValidarFecha(txtFechObservacion.Text) Then
+                txtUsuario.Focus()
+            End If
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtFechObservacion.Clear()
+        End If
+    End Sub
+
+    Private Sub txtUsuario_KeyDown(sender As Object, e As KeyEventArgs) Handles txtUsuario.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtUsuario.Text) = "" Then : Exit Sub : End If
+
+            txtObservacion.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtUsuario.Text = ""
+        End If
+    End Sub
+
+    Private Sub dgvHistorial_RowHeaderMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgvHistorial.RowHeaderMouseDoubleClick
+
+        ' Verificamos que tenga una clave de Observacion para poder eliminar.
+        With dgvHistorial.Rows(e.RowIndex)
+
+            If Not IsNothing(.Cells("NroObservacion").Value) Then
+                If Trim(.Cells("NroObservacion").Value) <> "" Then
+
+                    If MsgBox("¿Está seguro de querer eliminar la observacion indicada?", MsgBoxStyle.YesNo) = MsgBoxResult.No Then : Exit Sub : End If
+
+                    Try
+                        _EliminarObservacion(.Cells("NroObservacion").Value)
+                    Catch ex As Exception
+                        MsgBox(ex.Message, MsgBoxStyle.Critical)
+                        Exit Sub
+                    End Try
+
+                End If
+            End If
+
+        End With
+
+    End Sub
+
+    Private Sub _CargarEspecificacion(ByVal NroEspecificacion)
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT * FROM ProformaExportacionEspecificaciones WHERE NroEspecificacion = '" & Val(NroEspecificacion) & "' ORDER BY Renglon")
+        Dim dr As SqlDataReader
+        Dim WClave, WNroEspec, WRenglon, WProforma, WEspecificacion, WTipo, WFecha, WFechaOrd, WUsuario
+
+
+        Try
+            cn.ConnectionString = _CS()
+            cn.Open()
+            cm.Connection = cn
+            dr = cm.ExecuteReader()
+
+            'btnLimpiarFormularioEspecificacion.PerformClick()
+            txtFechaEspecificacion.Text = ""
+            cmbTipoEspecificacion.SelectedIndex = 0
+            txtUsuarioEspecificacion.Text = ""
+            txtEspecificacion.Text = ""
+
+            If dr.HasRows Then
+
+                WClave = ""
+                WNroEspec = ""
+                WRenglon = ""
+                WEspecificacion = ""
+                WTipo = 0
+                WFecha = ""
+                WFechaOrd = ""
+                WUsuario = ""
+
+                Do While dr.Read()
+
+                    WClave = IIf(IsDBNull(dr.Item("Clave")), "", dr.Item("Clave"))
+                    WNroEspec = IIf(IsDBNull(dr.Item("NroEspecificacion")), "", dr.Item("NroEspecificacion"))
+                    WRenglon = IIf(IsDBNull(dr.Item("Renglon")), "", dr.Item("Renglon"))
+                    WProforma = IIf(IsDBNull(dr.Item("Proforma")), "", dr.Item("Proforma"))
+                    WEspecificacion = IIf(IsDBNull(dr.Item("Especificacion")), "", dr.Item("Especificacion"))
+                    WTipo = IIf(IsDBNull(dr.Item("Tipo")), 0, dr.Item("Tipo"))
+                    WFecha = IIf(IsDBNull(dr.Item("Fecha")), "", dr.Item("Fecha"))
+                    WFechaOrd = IIf(IsDBNull(dr.Item("FechaOrd")), "", dr.Item("FechaOrd"))
+                    WUsuario = IIf(IsDBNull(dr.Item("Usuario")), "", dr.Item("Usuario"))
+
+                    txtFechaEspecificacion.Text = WFecha
+                    cmbTipoEspecificacion.SelectedIndex = WTipo
+                    txtUsuarioEspecificacion.Text = Trim(WUsuario)
+                    txtEspecificacion.Text &= Trim(WEspecificacion) & vbCrLf
+
+                    WNroEspecificacion.Text = Val(WNroEspec)
+
+                Loop
+
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer recuperar la Especificación desde la Base de Datos.")
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
+    End Sub
+    Private Sub dgvEspecificaciones_CellContentDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvEspecificaciones.CellContentDoubleClick
+
+        With dgvEspecificaciones.CurrentRow
+
+            If Not IsNothing(.Cells("NroEspecificacion").Value) Then
+                If Val(.Cells("NroEspecificacion").Value) > 0 Then
+
+                    Try
+                        _CargarEspecificacion(.Cells("NroEspecificacion").Value)
+                    Catch ex As Exception
+                        MsgBox(ex.Message, MsgBoxStyle.Critical)
+                        Exit Sub
+                    End Try
+
+                    GrupoEspecificacion.Visible = True
+
+                End If
+            End If
+
+        End With
+
+    End Sub
+
+    Private Sub dgvArchivos_DragLeave(sender As Object, e As EventArgs) Handles dgvArchivos.DragLeave
+        TopMost = False
+    End Sub
+
+ 
+    Private Sub txtFechaCobro_KeyDown(sender As Object, e As KeyEventArgs) Handles txtFechaCobro.KeyDown
+        If e.KeyData = Keys.Enter Then
+
+            If Trim(txtFechaCobro.Text.Replace("/", "")) = "" Then
+                txt_PermisoDeEmbarque.Focus()
+            Else
+
+                If ValidaFecha(txtFechaCobro.Text) = "S" Then
+
+                    txtNroPedido.Focus()
+                Else
+                    MsgBox("Se ingreso una fecha invalida, verificar")
+                    txtFechaCobro.SelectAll()
+                End If
+            End If
+
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtFechaCobro.Text = ""
+        End If
     End Sub
 End Class

@@ -99,9 +99,10 @@ Public Class ListadoRecibos
         End Try
 
         With VistaPrevia
-            .Formula = "{Recibos.Fechaord}>='" & Proceso.ordenaFecha(txtDesdeFecha.Text) & "' AND {Recibos.Fechaord}<='" & Proceso.ordenaFecha(txthastafecha.Text) & "' and {Recibos.Cliente} = {Cliente.Cliente}"
-
+            
             .Reporte = New WListadoRecibos
+
+            .Formula = "{Recibos.Fechaord}>='" & Proceso.ordenaFecha(txtDesdeFecha.Text) & "' AND {Recibos.Fechaord}<='" & Proceso.ordenaFecha(txthastafecha.Text) & "' and {Recibos.Cliente} = {Cliente.Cliente}"
 
             Select Case TipoImpresion
 

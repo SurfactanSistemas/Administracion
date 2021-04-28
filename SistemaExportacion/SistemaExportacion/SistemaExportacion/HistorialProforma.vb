@@ -1822,4 +1822,8 @@ Public Class HistorialProforma
     Private Sub cmb_Carpeta_DropDownClosed(sender As Object, e As EventArgs) Handles cmb_Carpeta.DropDownClosed
         _CargarArchivosRelacionados()
     End Sub
+
+    
+ 
+    
 End Class

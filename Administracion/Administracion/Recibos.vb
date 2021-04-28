@@ -1115,14 +1115,19 @@ Public Class Recibos
 
             With row
 
-                If Val(OrDefault(.Cells("tipo").value, "")) = 2 Then .Cells("banco").Value = _GenerarCodigoBanco(.Cells("banco").Value)
+                If (Val(OrDefault(.Cells("tipo").value, "")) = 2 Or Val(OrDefault(.Cells("tipo").value, "")) = 7) Then .Cells("banco").Value = _GenerarCodigoBanco(.Cells("banco").Value)
 
-                If Not IsNothing(.Cells(0).Value) AndAlso (Val(.Cells(0).Value) = 2 Or Val(.Cells(0).Value) = 5) Then
+                If Not IsNothing(.Cells(0).Value) AndAlso (Val(.Cells(0).Value) = 2 Or Val(.Cells(0).Value) = 7) Then
 
                     ' Controlamos que no se ingrese un numero = 0 para los cheques.
                     If IsNothing(.Cells(1).Value) OrElse Val(.Cells(1).Value) = 0 Then
                         MsgBox("Se debe informar un numero valido para el cheque.", MsgBoxStyle.Exclamation)
                         Exit Sub
+                    Else
+                        If Len(.Cells(1).Value) <> 8 Then
+                            MsgBox("Se debe informar 8 caracteres para el cheque.", MsgBoxStyle.Exclamation)
+                            Exit Sub
+                        End If
                     End If
 
                 End If
@@ -3136,6 +3141,14 @@ Public Class Recibos
                         If iCol = 1 Or iCol = 2 Or iCol = 3 Then
 
                             If iCol = 1 Then
+
+                                'VALIDAMOS SI TIENE 8 DIGITOS EL CHEQUE
+                                If gridFormasPago2.CurrentRow.Cells(0).Value = 2 Or gridFormasPago2.CurrentRow.Cells(0).Value = 7 Then
+                                    If Len(gridFormasPago2.CurrentRow.Cells(1).Value) <> 8 Then
+                                        MsgBox("Para los cheques se deben completar los 8 digitos", vbExclamation)
+                                    End If
+                                End If
+
                                 With gridFormasPago2
                                     .CurrentCell = .Rows(iRow).Cells(iCol + 1)
 
@@ -5695,9 +5708,9 @@ Public Class Recibos
 
     Private Sub gridRecibos_CellEnter(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles gridFormasPago2.CellEnter
         With gridFormasPago2
+         
             If e.ColumnIndex = 2 Then
-
-                Dim _location As Point = .GetCellDisplayRectangle(2, e.RowIndex, False).Location
+               Dim _location As Point = .GetCellDisplayRectangle(2, e.RowIndex, False).Location
 
                 .ClearSelection()
                 _location.Y += .Location.Y + (.CurrentCell.Size.Height / 4) - 1.5
@@ -5933,4 +5946,5 @@ Public Class Recibos
         Next
     End Sub
 
+  
 End Class

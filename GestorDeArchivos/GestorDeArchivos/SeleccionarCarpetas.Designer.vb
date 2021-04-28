@@ -46,8 +46,9 @@ Partial Class SeleccionarCarpetas
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(245, 34)
+        Me.Panel1.Size = New System.Drawing.Size(327, 42)
         Me.Panel1.TabIndex = 62
         '
         'Label1
@@ -57,18 +58,20 @@ Partial Class SeleccionarCarpetas
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label1.Location = New System.Drawing.Point(6, 8)
+        Me.Label1.Location = New System.Drawing.Point(8, 10)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(132, 19)
+        Me.Label1.Size = New System.Drawing.Size(161, 24)
         Me.Label1.TabIndex = 2
         Me.Label1.Text = "Elija donde copiar"
         '
         'chk_General
         '
         Me.chk_General.AutoSize = True
-        Me.chk_General.Location = New System.Drawing.Point(17, 23)
+        Me.chk_General.Location = New System.Drawing.Point(23, 28)
+        Me.chk_General.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.chk_General.Name = "chk_General"
-        Me.chk_General.Size = New System.Drawing.Size(63, 17)
+        Me.chk_General.Size = New System.Drawing.Size(81, 21)
         Me.chk_General.TabIndex = 63
         Me.chk_General.Text = "General"
         Me.chk_General.UseVisualStyleBackColor = True
@@ -76,9 +79,10 @@ Partial Class SeleccionarCarpetas
         'chk_Proforma
         '
         Me.chk_Proforma.AutoSize = True
-        Me.chk_Proforma.Location = New System.Drawing.Point(17, 46)
+        Me.chk_Proforma.Location = New System.Drawing.Point(23, 57)
+        Me.chk_Proforma.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.chk_Proforma.Name = "chk_Proforma"
-        Me.chk_Proforma.Size = New System.Drawing.Size(68, 17)
+        Me.chk_Proforma.Size = New System.Drawing.Size(88, 21)
         Me.chk_Proforma.TabIndex = 64
         Me.chk_Proforma.Text = "Proforma"
         Me.chk_Proforma.UseVisualStyleBackColor = True
@@ -86,9 +90,10 @@ Partial Class SeleccionarCarpetas
         'chk_SIMI
         '
         Me.chk_SIMI.AutoSize = True
-        Me.chk_SIMI.Location = New System.Drawing.Point(17, 69)
+        Me.chk_SIMI.Location = New System.Drawing.Point(23, 85)
+        Me.chk_SIMI.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.chk_SIMI.Name = "chk_SIMI"
-        Me.chk_SIMI.Size = New System.Drawing.Size(48, 17)
+        Me.chk_SIMI.Size = New System.Drawing.Size(56, 21)
         Me.chk_SIMI.TabIndex = 65
         Me.chk_SIMI.Text = "SIMI"
         Me.chk_SIMI.UseVisualStyleBackColor = True
@@ -96,9 +101,10 @@ Partial Class SeleccionarCarpetas
         'chk_OrdenCompra
         '
         Me.chk_OrdenCompra.AutoSize = True
-        Me.chk_OrdenCompra.Location = New System.Drawing.Point(17, 92)
+        Me.chk_OrdenCompra.Location = New System.Drawing.Point(23, 113)
+        Me.chk_OrdenCompra.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.chk_OrdenCompra.Name = "chk_OrdenCompra"
-        Me.chk_OrdenCompra.Size = New System.Drawing.Size(94, 17)
+        Me.chk_OrdenCompra.Size = New System.Drawing.Size(123, 21)
         Me.chk_OrdenCompra.TabIndex = 66
         Me.chk_OrdenCompra.Text = "Orden Compra"
         Me.chk_OrdenCompra.UseVisualStyleBackColor = True
@@ -106,9 +112,10 @@ Partial Class SeleccionarCarpetas
         'chk_PackingList
         '
         Me.chk_PackingList.AutoSize = True
-        Me.chk_PackingList.Location = New System.Drawing.Point(113, 23)
+        Me.chk_PackingList.Location = New System.Drawing.Point(151, 28)
+        Me.chk_PackingList.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.chk_PackingList.Name = "chk_PackingList"
-        Me.chk_PackingList.Size = New System.Drawing.Size(84, 17)
+        Me.chk_PackingList.Size = New System.Drawing.Size(106, 21)
         Me.chk_PackingList.TabIndex = 67
         Me.chk_PackingList.Text = "Packing List"
         Me.chk_PackingList.UseVisualStyleBackColor = True
@@ -116,9 +123,10 @@ Partial Class SeleccionarCarpetas
         'chk_COAS
         '
         Me.chk_COAS.AutoSize = True
-        Me.chk_COAS.Location = New System.Drawing.Point(113, 46)
+        Me.chk_COAS.Location = New System.Drawing.Point(151, 57)
+        Me.chk_COAS.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.chk_COAS.Name = "chk_COAS"
-        Me.chk_COAS.Size = New System.Drawing.Size(55, 17)
+        Me.chk_COAS.Size = New System.Drawing.Size(68, 21)
         Me.chk_COAS.TabIndex = 68
         Me.chk_COAS.Text = "COAS"
         Me.chk_COAS.UseVisualStyleBackColor = True
@@ -126,9 +134,10 @@ Partial Class SeleccionarCarpetas
         'chk_BL
         '
         Me.chk_BL.AutoSize = True
-        Me.chk_BL.Location = New System.Drawing.Point(113, 69)
+        Me.chk_BL.Location = New System.Drawing.Point(151, 85)
+        Me.chk_BL.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.chk_BL.Name = "chk_BL"
-        Me.chk_BL.Size = New System.Drawing.Size(39, 17)
+        Me.chk_BL.Size = New System.Drawing.Size(47, 21)
         Me.chk_BL.TabIndex = 69
         Me.chk_BL.Text = "BL"
         Me.chk_BL.UseVisualStyleBackColor = True
@@ -136,27 +145,30 @@ Partial Class SeleccionarCarpetas
         'chk_INVOICE
         '
         Me.chk_INVOICE.AutoSize = True
-        Me.chk_INVOICE.Location = New System.Drawing.Point(113, 92)
+        Me.chk_INVOICE.Location = New System.Drawing.Point(151, 113)
+        Me.chk_INVOICE.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.chk_INVOICE.Name = "chk_INVOICE"
-        Me.chk_INVOICE.Size = New System.Drawing.Size(69, 17)
+        Me.chk_INVOICE.Size = New System.Drawing.Size(84, 21)
         Me.chk_INVOICE.TabIndex = 70
         Me.chk_INVOICE.Text = "INVOICE"
         Me.chk_INVOICE.UseVisualStyleBackColor = True
         '
         'btn_Aceptar
         '
-        Me.btn_Aceptar.Location = New System.Drawing.Point(41, 176)
+        Me.btn_Aceptar.Location = New System.Drawing.Point(55, 217)
+        Me.btn_Aceptar.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btn_Aceptar.Name = "btn_Aceptar"
-        Me.btn_Aceptar.Size = New System.Drawing.Size(75, 23)
+        Me.btn_Aceptar.Size = New System.Drawing.Size(100, 28)
         Me.btn_Aceptar.TabIndex = 71
         Me.btn_Aceptar.Text = "ACEPTAR"
         Me.btn_Aceptar.UseVisualStyleBackColor = True
         '
         'CANCELAR
         '
-        Me.CANCELAR.Location = New System.Drawing.Point(135, 175)
+        Me.CANCELAR.Location = New System.Drawing.Point(180, 215)
+        Me.CANCELAR.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.CANCELAR.Name = "CANCELAR"
-        Me.CANCELAR.Size = New System.Drawing.Size(75, 23)
+        Me.CANCELAR.Size = New System.Drawing.Size(100, 28)
         Me.CANCELAR.TabIndex = 72
         Me.CANCELAR.Text = "CANCELAR"
         Me.CANCELAR.UseVisualStyleBackColor = True
@@ -172,9 +184,11 @@ Partial Class SeleccionarCarpetas
         Me.gbx_Carpetas.Controls.Add(Me.chk_BL)
         Me.gbx_Carpetas.Controls.Add(Me.chk_PackingList)
         Me.gbx_Carpetas.Controls.Add(Me.chk_COAS)
-        Me.gbx_Carpetas.Location = New System.Drawing.Point(14, 38)
+        Me.gbx_Carpetas.Location = New System.Drawing.Point(19, 47)
+        Me.gbx_Carpetas.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.gbx_Carpetas.Name = "gbx_Carpetas"
-        Me.gbx_Carpetas.Size = New System.Drawing.Size(217, 132)
+        Me.gbx_Carpetas.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.gbx_Carpetas.Size = New System.Drawing.Size(289, 162)
         Me.gbx_Carpetas.TabIndex = 73
         Me.gbx_Carpetas.TabStop = False
         Me.gbx_Carpetas.Text = "GroupBox1"
@@ -182,22 +196,24 @@ Partial Class SeleccionarCarpetas
         'chk_Despacho
         '
         Me.chk_Despacho.AutoSize = True
-        Me.chk_Despacho.Location = New System.Drawing.Point(71, 113)
+        Me.chk_Despacho.Location = New System.Drawing.Point(95, 139)
+        Me.chk_Despacho.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.chk_Despacho.Name = "chk_Despacho"
-        Me.chk_Despacho.Size = New System.Drawing.Size(75, 17)
+        Me.chk_Despacho.Size = New System.Drawing.Size(94, 21)
         Me.chk_Despacho.TabIndex = 71
         Me.chk_Despacho.Text = "Despacho"
         Me.chk_Despacho.UseVisualStyleBackColor = True
         '
         'SeleccionarCarpetas
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(245, 204)
+        Me.ClientSize = New System.Drawing.Size(327, 251)
         Me.Controls.Add(Me.gbx_Carpetas)
         Me.Controls.Add(Me.CANCELAR)
         Me.Controls.Add(Me.btn_Aceptar)
         Me.Controls.Add(Me.Panel1)
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "SeleccionarCarpetas"
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()

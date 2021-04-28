@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DBAuxi" targetNamespace="http://tempuri.org/DBAuxi.xsd" xmlns:mstns="http://tempuri.org/DBAuxi.xsd" xmlns="http://tempuri.org/DBAuxi.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DBAuxi" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DBAuxi" msprop:Generator_UserDSName="DBAuxi">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="TablaReporteExcel" msprop:Generator_TableClassName="TablaReporteExcelDataTable" msprop:Generator_TableVarName="tableTablaReporteExcel" msprop:Generator_RowChangedName="TablaReporteExcelRowChanged" msprop:Generator_TablePropName="TablaReporteExcel" msprop:Generator_RowDeletingName="TablaReporteExcelRowDeleting" msprop:Generator_RowChangingName="TablaReporteExcelRowChanging" msprop:Generator_RowEvHandlerName="TablaReporteExcelRowChangeEventHandler" msprop:Generator_RowDeletedName="TablaReporteExcelRowDeleted" msprop:Generator_RowClassName="TablaReporteExcelRow" msprop:Generator_UserTableName="TablaReporteExcel" msprop:Generator_RowEvArgName="TablaReporteExcelRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="NroProforma" msprop:Generator_ColumnVarNameInTable="columnNroProforma" msprop:Generator_ColumnPropNameInRow="NroProforma" msprop:Generator_ColumnPropNameInTable="NroProformaColumn" msprop:Generator_UserColumnName="NroProforma" type="xs:string" minOccurs="0" />
+              <xs:element name="Fecha" msprop:Generator_ColumnVarNameInTable="columnFecha" msprop:Generator_ColumnPropNameInRow="Fecha" msprop:Generator_ColumnPropNameInTable="FechaColumn" msprop:Generator_UserColumnName="Fecha" type="xs:string" minOccurs="0" />
+              <xs:element name="Cliente" msprop:Generator_ColumnVarNameInTable="columnCliente" msprop:Generator_ColumnPropNameInRow="Cliente" msprop:Generator_ColumnPropNameInTable="ClienteColumn" msprop:Generator_UserColumnName="Cliente" type="xs:string" minOccurs="0" />
+              <xs:element name="Razon" msprop:Generator_ColumnVarNameInTable="columnRazon" msprop:Generator_ColumnPropNameInRow="Razon" msprop:Generator_ColumnPropNameInTable="RazonColumn" msprop:Generator_UserColumnName="Razon" type="xs:string" minOccurs="0" />
+              <xs:element name="Pais" msprop:Generator_ColumnVarNameInTable="columnPais" msprop:Generator_ColumnPropNameInRow="Pais" msprop:Generator_ColumnPropNameInTable="PaisColumn" msprop:Generator_UserColumnName="Pais" type="xs:string" minOccurs="0" />
+              <xs:element name="Total" msprop:Generator_ColumnVarNameInTable="columnTotal" msprop:Generator_ColumnPropNameInRow="Total" msprop:Generator_ColumnPropNameInTable="TotalColumn" msprop:Generator_UserColumnName="Total" type="xs:double" minOccurs="0" />
+              <xs:element name="Combox_Estado" msprop:Generator_ColumnVarNameInTable="columnCombox_Estado" msprop:Generator_ColumnPropNameInRow="Combox_Estado" msprop:Generator_ColumnPropNameInTable="Combox_EstadoColumn" msprop:Generator_UserColumnName="Combox_Estado" type="xs:string" minOccurs="0" />
+              <xs:element name="FechaLimite" msprop:Generator_ColumnVarNameInTable="columnFechaLimite" msprop:Generator_ColumnPropNameInRow="FechaLimite" msprop:Generator_ColumnPropNameInTable="FechaLimiteColumn" msprop:Generator_UserColumnName="FechaLimite" type="xs:string" minOccurs="0" />
+              <xs:element name="PackingList" msprop:Generator_ColumnVarNameInTable="columnPackingList" msprop:Generator_ColumnPropNameInRow="PackingList" msprop:Generator_ColumnPropNameInTable="PackingListColumn" msprop:Generator_UserColumnName="PackingList" type="xs:string" minOccurs="0" />
+              <xs:element name="Entregado" msprop:Generator_ColumnVarNameInTable="columnEntregado" msprop:Generator_ColumnPropNameInRow="Entregado" msprop:Generator_ColumnPropNameInTable="EntregadoColumn" msprop:Generator_UserColumnName="Entregado" type="xs:string" minOccurs="0" />
+              <xs:element name="Fecha_Limite" msprop:Generator_ColumnVarNameInTable="columnFecha_Limite" msprop:Generator_ColumnPropNameInRow="Fecha_Limite" msprop:Generator_ColumnPropNameInTable="Fecha_LimiteColumn" msprop:Generator_UserColumnName="Fecha_Limite" type="xs:string" minOccurs="0" />
+              <xs:element name="Incoterm" msprop:Generator_ColumnVarNameInTable="columnIncoterm" msprop:Generator_ColumnPropNameInRow="Incoterm" msprop:Generator_ColumnPropNameInTable="IncotermColumn" msprop:Generator_UserColumnName="Incoterm" type="xs:string" minOccurs="0" />
+              <xs:element name="MV_Buque" msprop:Generator_ColumnVarNameInTable="columnMV_Buque" msprop:Generator_ColumnPropNameInRow="MV_Buque" msprop:Generator_ColumnPropNameInTable="MV_BuqueColumn" msprop:Generator_UserColumnName="MV_Buque" type="xs:string" minOccurs="0" />
+              <xs:element name="ETD_FechaSalida" msprop:Generator_ColumnVarNameInTable="columnETD_FechaSalida" msprop:Generator_ColumnPropNameInRow="ETD_FechaSalida" msprop:Generator_ColumnPropNameInTable="ETD_FechaSalidaColumn" msprop:Generator_UserColumnName="ETD_FechaSalida" type="xs:string" minOccurs="0" />
+              <xs:element name="ETA_FechaArribo" msprop:Generator_ColumnVarNameInTable="columnETA_FechaArribo" msprop:Generator_ColumnPropNameInRow="ETA_FechaArribo" msprop:Generator_ColumnPropNameInTable="ETA_FechaArriboColumn" msprop:Generator_UserColumnName="ETA_FechaArribo" type="xs:string" minOccurs="0" />
+              <xs:element name="Peso_Neto" msprop:Generator_ColumnVarNameInTable="columnPeso_Neto" msprop:Generator_ColumnPropNameInRow="Peso_Neto" msprop:Generator_ColumnPropNameInTable="Peso_NetoColumn" msprop:Generator_UserColumnName="Peso_Neto" type="xs:double" minOccurs="0" />
+              <xs:element name="Permiso_de_Embarque" msprop:Generator_ColumnVarNameInTable="columnPermiso_de_Embarque" msprop:Generator_ColumnPropNameInRow="Permiso_de_Embarque" msprop:Generator_ColumnPropNameInTable="Permiso_de_EmbarqueColumn" msprop:Generator_UserColumnName="Permiso_de_Embarque" type="xs:string" minOccurs="0" />
+              <xs:element name="BL" msprop:Generator_ColumnVarNameInTable="columnBL" msprop:Generator_ColumnPropNameInRow="BL" msprop:Generator_ColumnPropNameInTable="BLColumn" msprop:Generator_UserColumnName="BL" type="xs:string" minOccurs="0" />
+              <xs:element name="Forwarder" msprop:Generator_ColumnVarNameInTable="columnForwarder" msprop:Generator_ColumnPropNameInRow="Forwarder" msprop:Generator_ColumnPropNameInTable="ForwarderColumn" msprop:Generator_UserColumnName="Forwarder" type="xs:string" minOccurs="0" />
+              <xs:element name="Fecha_Cobro" msprop:Generator_ColumnVarNameInTable="columnFecha_Cobro" msprop:Generator_ColumnPropNameInRow="Fecha_Cobro" msprop:Generator_ColumnPropNameInTable="Fecha_CobroColumn" msprop:Generator_UserColumnName="Fecha_Cobro" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

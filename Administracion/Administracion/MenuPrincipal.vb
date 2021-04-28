@@ -277,7 +277,8 @@ Public Class MenuPrincipal
 
         'SolicitudDeFondosToolStripMenuItem.Visible = False
         'GestionarSolicitudDeFondosToolStripMenuItem.Visible = False
-
+        'ImportarEchequesToolStripMenuItem.Visible = False
+        
     End Sub
 
     Private Sub EnvíoDeAvisoDeOPAProveedoresPorEMailToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles EnvíoDeAvisoDeOPAProveedoresPorEMailToolStripMenuItem.Click

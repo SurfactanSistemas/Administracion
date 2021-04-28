@@ -3,7 +3,9 @@
     Private ReadOnly RutaBase As String
     Private ReadOnly DragOn As Boolean
     Private ReadOnly Warchivos As Object
-    Sub New(ByVal ruta As String, Optional ByVal Drag As Boolean = False, Optional ByVal Archivos As Object = Nothing)
+    Private ReadOnly WAccion As Integer
+    Sub New(ByVal ruta As String, Optional ByVal Drag As Boolean = False, Optional ByVal Archivos As Object = Nothing,
+            Optional ByVal Accion As Integer = 3)
 
         ' Llamada necesaria para el diseñador.
         InitializeComponent()
@@ -12,11 +14,27 @@
         RutaBase = ruta
         DragOn = Drag
         Warchivos = Archivos
+        WAccion = Accion
+
+       
+
     End Sub
     Private Sub CANCELAR_Click(sender As Object, e As EventArgs) Handles CANCELAR.Click
         Close()
     End Sub
 
+    Private Sub BloquearOtrasCarpetas()
+        chk_BL.Enabled = False
+        chk_SIMI.Enabled = False
+        chk_General.Enabled = False
+        chk_INVOICE.Enabled = False
+        chk_Despacho.Enabled = False
+        chk_Proforma.Enabled = False
+        chk_OrdenCompra.Enabled = False
+        chk_PackingList.Enabled = False
+
+
+    End Sub
     Private Sub btn_Aceptar_Click(sender As Object, e As EventArgs) Handles btn_Aceptar.Click
         Dim VectorChk(7) As String
         For i = 0 To 7
@@ -68,4 +86,9 @@
     End Sub
 
   
+    Private Sub SeleccionarCarpetas_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If WAccion = 4 Then
+            BloquearOtrasCarpetas()
+        End If
+    End Sub
 End Class

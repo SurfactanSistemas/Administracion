@@ -147,7 +147,7 @@ namespace Vista
                         );
 
                         NumEtiquetaActual++;
-                        if(dr[1].ToString().Length <25)
+                        if(dr[1].ToString().Length <23)
                         {
                             int EtiquetaAcambiar;
                             EtiquetaAcambiar = AqueEtiquetaCambioFontFrascos(NumEtiquetaActual);

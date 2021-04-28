@@ -738,9 +738,13 @@ Public Class AvisoOPAProveedores
                     End If
 
                     If PorTransferenciaYCheques Then
+                        Dim DiaARetirar As Date
+                        Dim DiaARetirarTexto As String
+                        TraerProximoMartesOJueves(DiaARetirar, DiaARetirarTexto)
                         'WBody &= "." & "<br/>" & "<br/>" & "Así mismo, tiene Cheque(s) para retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir del día <strong>" & txtAPartirFecha.Text & "</strong> los <strong>Martes y Jueves</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
                         'WBody &= "." & "<br/>" & "<br/>" & "Así mismo, tiene Cheque(s) para retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir de la <strong>semana próxima</strong> los <strong>Martes y Jueves</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
-                        WBody &= vbCrLf & "- Cheque(s) que deberá retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir del día de <strong>mañana</strong>, los <strong>Martes y Juevess</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>."
+                        'WBody &= vbCrLf & "- Cheque(s) que deberá retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir del día de <strong>mañana</strong>, los <strong>Martes y Juevess</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>."
+                        WBody &= vbCrLf & "- Cheque(s) que deberá retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir del <strong>" & DiaARetirarTexto & " " & DiaARetirar.ToString("dd/MM/yyyy") & "</strong>, los <strong>Martes y Jueves</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>."
                     Else
                         WBody &= "." & "<br/>" & "<br/>" & "Adjuntamos Orden de Pago y retenciones si correspondiesen."
                     End If
@@ -783,16 +787,22 @@ Public Class AvisoOPAProveedores
                     End If
 
                     If PorTransferenciaYCheques Then
+                        Dim DiaARetirar As Date
+                        Dim DiaARetirarTexto As String
+                        TraerProximoMartesOJueves(DiaARetirar, DiaARetirarTexto)
                         'WBody &= "." & "<br/>" & "<br/>" & "Además tiene Cheque(s) para retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir de la <strong>semana próxima</strong>, los <strong>Martes y Jueves</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
-                        WBody &= vbCrLf & "- Cheque(s) que deberá retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir del día de <strong>mañana</strong>, los <strong>Martes y Juevess</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>."
-                    Else
-                        WBody &= "." & "<br/>" & "<br/>" & "Adjuntamos Orden de Pago y retenciones si correspondiesen."
-                    End If
+                        'WBody &= vbCrLf & "- Cheque(s) que deberá retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir del día de <strong>mañana</strong>, los <strong>Martes y Juevess</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>."
+                        WBody &= vbCrLf & "- Cheque(s) que deberá retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, los <strong>Martes y Jueves</strong> a partir del <strong>" & DiaARetirarTexto & " " & DiaARetirar.ToString("dd/MM/yyyy") & "</strong>, los <strong>Martes y Jueves</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>."
+                Else
+                    WBody &= "." & "<br/>" & "<br/>" & "Adjuntamos Orden de Pago y retenciones si correspondiesen."
+                End If
 
                 Else
-
+                    Dim DiaARetirar As Date
+                    Dim DiaARetirarTexto As String
+                    TraerProximoMartesOJueves(DiaARetirar, DiaARetirarTexto)
                     'WBody = "Informamos que se encuentra a su disposición un pago que podrá ser retirado por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir del día de <strong>mañana</strong>, los <strong>Martes y Jueves</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
-                    WBody = "Informamos que se encuentra a su disposición un pago que podrá ser retirado por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir de la <strong>semana próxima</strong>, los días <strong>Martes y Jueves</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
+                    WBody = "Informamos que se encuentra a su disposición un pago que podrá ser retirado por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir del <strong>" & DiaARetirarTexto & " " & DiaARetirar.ToString("dd/MM/yyyy") & "</strong>, los <strong>Martes y Jueves</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
 
                 End If
 
@@ -885,6 +895,22 @@ Public Class AvisoOPAProveedores
         End Try
 
     End Sub
+
+    Private Sub TraerProximoMartesOJueves(ByRef DiaARetirar As Date, ByRef DiaARetirarTexto As String)
+        DiaARetirar = Date.Today
+        For i = 1 To 10
+            DiaARetirar = DiaARetirar.AddDays(1)
+            Select Case DiaARetirar.DayOfWeek
+                Case 2 'MARTES
+                    DiaARetirarTexto = "Martes"
+                    Exit Sub
+                Case 4 'JUEVES
+                    DiaARetirarTexto = "Jueves"
+                    Exit Sub
+            End Select
+        Next
+    End Sub
+
        Private Sub _EnviarAvisoOPDisponiblePellital(ByVal Proveedor As String, ByVal wDescProveedor As String, Optional ByVal OrdenPago As String = "", Optional ByVal EsPorTransferencia As Boolean = False, Optional ByVal wFechasTransferencias As String = "", Optional ByVal PorTransferenciaYCheques As Boolean = False, Optional ByVal HayECheques As Boolean = False, Optional ByVal FechasECheques As String = "", Optional ByVal TipoOrd As Integer = 0)
 
         If Proveedor.Trim = "" Then Exit Sub

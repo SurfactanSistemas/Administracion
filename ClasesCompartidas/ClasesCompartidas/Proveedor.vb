@@ -1,7 +1,7 @@
 ﻿Public Class Proveedor
     Public id As String
     Public razonSocial, direccion, codPostal, localidad, telefono, email, observaciones, cuit, nombreCheque, cai, observacionCompleta, cufe1, cufe2, cufe3, diasPlazo, numeroIB, numeroSEDRONAR As String
-    Public provincia, region, tipo, codIva, condicionIB1, condicionIB2, categoria, categoriaCalif, tipoInscripcionIB, certificados, estado, calificacion As Nullable(Of Integer)
+    Public provincia, region, tipo, codIva, condicionIB1, condicionIB2, categoria, categoriaCalif, tipoInscripcionIB, certificados, estado, calificacion, TipoDolar As Nullable(Of Integer)
     Public vtoSEDRONAR, vtoCategoria, vtoCAI, vtoCertificados, vtoCalificacion, dirCUFE1, dirCUFE2, dirCUFE3, Inhabilitado, RawRubro As String
     Public porceIBProvincia, porceIBCABA As Double
     Public cuenta As CuentaContable

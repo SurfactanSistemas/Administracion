@@ -261,9 +261,9 @@ Partial Class MostrarSoliFondos
         Me.Label10.AutoSize = True
         Me.Label10.Location = New System.Drawing.Point(7, 204)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(40, 13)
+        Me.Label10.Size = New System.Drawing.Size(46, 26)
         Me.Label10.TabIndex = 23
-        Me.Label10.Text = "Detalle"
+        Me.Label10.Text = "Banco y" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & " Fecha"
         '
         'btn_Cerrar
         '
@@ -288,11 +288,11 @@ Partial Class MostrarSoliFondos
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(12, 409)
+        Me.Label11.Location = New System.Drawing.Point(2, 409)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(55, 26)
+        Me.Label11.Size = New System.Drawing.Size(67, 26)
         Me.Label11.TabIndex = 26
-        Me.Label11.Text = "Detalle de" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "    Pago"
+        Me.Label11.Text = "Observacion" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & " de Pago"
         '
         'Label12
         '

@@ -43,6 +43,8 @@ Partial Class EditorArchivos
         Me.cmb_Carpeta = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.gbx_Carpetas = New System.Windows.Forms.GroupBox()
+        Me.Img_Despacho = New System.Windows.Forms.Button()
+        Me.rbn_Despacho = New System.Windows.Forms.RadioButton()
         Me.lbl_CarpetasCompletas = New System.Windows.Forms.Label()
         Me.Img_INVOIS = New System.Windows.Forms.Button()
         Me.Img_BL = New System.Windows.Forms.Button()
@@ -65,8 +67,7 @@ Partial Class EditorArchivos
         Me.btn_Cancelar = New System.Windows.Forms.Button()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.Img_Despacho = New System.Windows.Forms.Button()
-        Me.rbn_Despacho = New System.Windows.Forms.RadioButton()
+        Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         CType(Me.dgvArchivos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -77,27 +78,30 @@ Partial Class EditorArchivos
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(490, 72)
+        Me.Button3.Location = New System.Drawing.Point(653, 89)
+        Me.Button3.Margin = New System.Windows.Forms.Padding(4)
         Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(164, 23)
+        Me.Button3.Size = New System.Drawing.Size(219, 28)
         Me.Button3.TabIndex = 58
         Me.Button3.Text = "CERRAR"
         Me.Button3.UseVisualStyleBackColor = True
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(173, 72)
+        Me.Button2.Location = New System.Drawing.Point(231, 89)
+        Me.Button2.Margin = New System.Windows.Forms.Padding(4)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(164, 23)
+        Me.Button2.Size = New System.Drawing.Size(219, 28)
         Me.Button2.TabIndex = 59
         Me.Button2.Text = "Eliminar Archivo(s)"
         Me.Button2.UseVisualStyleBackColor = True
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(3, 72)
+        Me.Button1.Location = New System.Drawing.Point(4, 89)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(4)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(164, 23)
+        Me.Button1.Size = New System.Drawing.Size(219, 28)
         Me.Button1.TabIndex = 57
         Me.Button1.Text = "Agregar Archivo(s)"
         Me.Button1.UseVisualStyleBackColor = True
@@ -112,13 +116,14 @@ Partial Class EditorArchivos
         Me.dgvArchivos.ContextMenuStrip = Me.ContextMenuStrip1
         Me.dgvArchivos.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.dgvArchivos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.dgvArchivos.Location = New System.Drawing.Point(0, 103)
+        Me.dgvArchivos.Location = New System.Drawing.Point(0, 127)
+        Me.dgvArchivos.Margin = New System.Windows.Forms.Padding(4)
         Me.dgvArchivos.Name = "dgvArchivos"
         Me.dgvArchivos.ReadOnly = True
         Me.dgvArchivos.RowHeadersWidth = 15
         Me.dgvArchivos.RowTemplate.Height = 30
         Me.dgvArchivos.ShowCellToolTips = False
-        Me.dgvArchivos.Size = New System.Drawing.Size(658, 244)
+        Me.dgvArchivos.Size = New System.Drawing.Size(877, 300)
         Me.dgvArchivos.TabIndex = 56
         '
         'FechaArchivo
@@ -127,7 +132,7 @@ Partial Class EditorArchivos
         Me.FechaArchivo.HeaderText = "Fecha"
         Me.FechaArchivo.Name = "FechaArchivo"
         Me.FechaArchivo.ReadOnly = True
-        Me.FechaArchivo.Width = 62
+        Me.FechaArchivo.Width = 76
         '
         'DescArchivo
         '
@@ -161,20 +166,21 @@ Partial Class EditorArchivos
         '
         'ContextMenuStrip1
         '
+        Me.ContextMenuStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PegarToolStripMenuItem, Me.CambiarNombreToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(167, 48)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(194, 52)
         '
         'PegarToolStripMenuItem
         '
         Me.PegarToolStripMenuItem.Name = "PegarToolStripMenuItem"
-        Me.PegarToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
+        Me.PegarToolStripMenuItem.Size = New System.Drawing.Size(193, 24)
         Me.PegarToolStripMenuItem.Text = "Pegar"
         '
         'CambiarNombreToolStripMenuItem
         '
         Me.CambiarNombreToolStripMenuItem.Name = "CambiarNombreToolStripMenuItem"
-        Me.CambiarNombreToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
+        Me.CambiarNombreToolStripMenuItem.Size = New System.Drawing.Size(193, 24)
         Me.CambiarNombreToolStripMenuItem.Text = "Cambiar Nombre"
         '
         'Label2
@@ -184,9 +190,10 @@ Partial Class EditorArchivos
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Calibri", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label2.Location = New System.Drawing.Point(490, 24)
+        Me.Label2.Location = New System.Drawing.Point(653, 30)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(156, 26)
+        Me.Label2.Size = New System.Drawing.Size(195, 33)
         Me.Label2.TabIndex = 3
         Me.Label2.Text = "SURFACTAN S.A."
         '
@@ -197,9 +204,10 @@ Partial Class EditorArchivos
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label1.Location = New System.Drawing.Point(12, 19)
+        Me.Label1.Location = New System.Drawing.Point(16, 23)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(138, 19)
+        Me.Label1.Size = New System.Drawing.Size(168, 24)
         Me.Label1.TabIndex = 2
         Me.Label1.Text = "Gestor de Archivos"
         '
@@ -210,8 +218,9 @@ Partial Class EditorArchivos
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(658, 54)
+        Me.Panel1.Size = New System.Drawing.Size(877, 66)
         Me.Panel1.TabIndex = 61
         '
         'OpenFileDialog2
@@ -222,18 +231,20 @@ Partial Class EditorArchivos
         '
         Me.cmb_Carpeta.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmb_Carpeta.FormattingEnabled = True
-        Me.cmb_Carpeta.Location = New System.Drawing.Point(356, 72)
+        Me.cmb_Carpeta.Location = New System.Drawing.Point(475, 89)
+        Me.cmb_Carpeta.Margin = New System.Windows.Forms.Padding(4)
         Me.cmb_Carpeta.Name = "cmb_Carpeta"
-        Me.cmb_Carpeta.Size = New System.Drawing.Size(121, 21)
+        Me.cmb_Carpeta.Size = New System.Drawing.Size(160, 24)
         Me.cmb_Carpeta.TabIndex = 62
         Me.cmb_Carpeta.Visible = False
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(356, 57)
+        Me.Label3.Location = New System.Drawing.Point(475, 70)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(44, 13)
+        Me.Label3.Size = New System.Drawing.Size(58, 17)
         Me.Label3.TabIndex = 63
         Me.Label3.Text = "Carpeta"
         Me.Label3.Visible = False
@@ -259,22 +270,49 @@ Partial Class EditorArchivos
         Me.gbx_Carpetas.Controls.Add(Me.rbn_SIMI)
         Me.gbx_Carpetas.Controls.Add(Me.rbn_Proforma)
         Me.gbx_Carpetas.Controls.Add(Me.rbn_General)
-        Me.gbx_Carpetas.Location = New System.Drawing.Point(7, 110)
+        Me.gbx_Carpetas.Location = New System.Drawing.Point(9, 135)
+        Me.gbx_Carpetas.Margin = New System.Windows.Forms.Padding(4)
         Me.gbx_Carpetas.Name = "gbx_Carpetas"
-        Me.gbx_Carpetas.Size = New System.Drawing.Size(633, 64)
+        Me.gbx_Carpetas.Padding = New System.Windows.Forms.Padding(4)
+        Me.gbx_Carpetas.Size = New System.Drawing.Size(844, 79)
         Me.gbx_Carpetas.TabIndex = 64
         Me.gbx_Carpetas.TabStop = False
         Me.gbx_Carpetas.Text = "Carpetas"
         Me.gbx_Carpetas.Visible = False
+        '
+        'Img_Despacho
+        '
+        Me.Img_Despacho.BackgroundImage = CType(resources.GetObject("Img_Despacho.BackgroundImage"), System.Drawing.Image)
+        Me.Img_Despacho.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Img_Despacho.Enabled = False
+        Me.Img_Despacho.Location = New System.Drawing.Point(807, 47)
+        Me.Img_Despacho.Margin = New System.Windows.Forms.Padding(4)
+        Me.Img_Despacho.Name = "Img_Despacho"
+        Me.Img_Despacho.Size = New System.Drawing.Size(28, 25)
+        Me.Img_Despacho.TabIndex = 26
+        Me.Img_Despacho.UseVisualStyleBackColor = True
+        Me.Img_Despacho.Visible = False
+        '
+        'rbn_Despacho
+        '
+        Me.rbn_Despacho.AutoSize = True
+        Me.rbn_Despacho.Location = New System.Drawing.Point(677, 52)
+        Me.rbn_Despacho.Margin = New System.Windows.Forms.Padding(4)
+        Me.rbn_Despacho.Name = "rbn_Despacho"
+        Me.rbn_Despacho.Size = New System.Drawing.Size(123, 21)
+        Me.rbn_Despacho.TabIndex = 25
+        Me.rbn_Despacho.Text = "(00) Despacho"
+        Me.rbn_Despacho.UseVisualStyleBackColor = True
         '
         'lbl_CarpetasCompletas
         '
         Me.lbl_CarpetasCompletas.AutoSize = True
         Me.lbl_CarpetasCompletas.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbl_CarpetasCompletas.ForeColor = System.Drawing.Color.Green
-        Me.lbl_CarpetasCompletas.Location = New System.Drawing.Point(483, 13)
+        Me.lbl_CarpetasCompletas.Location = New System.Drawing.Point(644, 16)
+        Me.lbl_CarpetasCompletas.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl_CarpetasCompletas.Name = "lbl_CarpetasCompletas"
-        Me.lbl_CarpetasCompletas.Size = New System.Drawing.Size(143, 26)
+        Me.lbl_CarpetasCompletas.Size = New System.Drawing.Size(180, 34)
         Me.lbl_CarpetasCompletas.TabIndex = 24
         Me.lbl_CarpetasCompletas.Text = "SE CARGARON TODOS" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "      LOS ARCHIVOS"
         '
@@ -283,9 +321,10 @@ Partial Class EditorArchivos
         Me.Img_INVOIS.BackgroundImage = CType(resources.GetObject("Img_INVOIS.BackgroundImage"), System.Drawing.Image)
         Me.Img_INVOIS.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.Img_INVOIS.Enabled = False
-        Me.Img_INVOIS.Location = New System.Drawing.Point(481, 38)
+        Me.Img_INVOIS.Location = New System.Drawing.Point(641, 47)
+        Me.Img_INVOIS.Margin = New System.Windows.Forms.Padding(4)
         Me.Img_INVOIS.Name = "Img_INVOIS"
-        Me.Img_INVOIS.Size = New System.Drawing.Size(21, 20)
+        Me.Img_INVOIS.Size = New System.Drawing.Size(28, 25)
         Me.Img_INVOIS.TabIndex = 23
         Me.Img_INVOIS.UseVisualStyleBackColor = True
         Me.Img_INVOIS.Visible = False
@@ -295,9 +334,10 @@ Partial Class EditorArchivos
         Me.Img_BL.BackgroundImage = CType(resources.GetObject("Img_BL.BackgroundImage"), System.Drawing.Image)
         Me.Img_BL.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.Img_BL.Enabled = False
-        Me.Img_BL.Location = New System.Drawing.Point(454, 16)
+        Me.Img_BL.Location = New System.Drawing.Point(605, 20)
+        Me.Img_BL.Margin = New System.Windows.Forms.Padding(4)
         Me.Img_BL.Name = "Img_BL"
-        Me.Img_BL.Size = New System.Drawing.Size(21, 20)
+        Me.Img_BL.Size = New System.Drawing.Size(28, 25)
         Me.Img_BL.TabIndex = 22
         Me.Img_BL.UseVisualStyleBackColor = True
         Me.Img_BL.Visible = False
@@ -307,9 +347,10 @@ Partial Class EditorArchivos
         Me.Img_COAS.BackgroundImage = CType(resources.GetObject("Img_COAS.BackgroundImage"), System.Drawing.Image)
         Me.Img_COAS.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.Img_COAS.Enabled = False
-        Me.Img_COAS.Location = New System.Drawing.Point(343, 38)
+        Me.Img_COAS.Location = New System.Drawing.Point(457, 47)
+        Me.Img_COAS.Margin = New System.Windows.Forms.Padding(4)
         Me.Img_COAS.Name = "Img_COAS"
-        Me.Img_COAS.Size = New System.Drawing.Size(21, 20)
+        Me.Img_COAS.Size = New System.Drawing.Size(28, 25)
         Me.Img_COAS.TabIndex = 21
         Me.Img_COAS.UseVisualStyleBackColor = True
         Me.Img_COAS.Visible = False
@@ -319,9 +360,10 @@ Partial Class EditorArchivos
         Me.Img_PackingList.BackgroundImage = CType(resources.GetObject("Img_PackingList.BackgroundImage"), System.Drawing.Image)
         Me.Img_PackingList.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.Img_PackingList.Enabled = False
-        Me.Img_PackingList.Location = New System.Drawing.Point(371, 15)
+        Me.Img_PackingList.Location = New System.Drawing.Point(495, 18)
+        Me.Img_PackingList.Margin = New System.Windows.Forms.Padding(4)
         Me.Img_PackingList.Name = "Img_PackingList"
-        Me.Img_PackingList.Size = New System.Drawing.Size(21, 20)
+        Me.Img_PackingList.Size = New System.Drawing.Size(28, 25)
         Me.Img_PackingList.TabIndex = 20
         Me.Img_PackingList.UseVisualStyleBackColor = True
         Me.Img_PackingList.Visible = False
@@ -331,9 +373,10 @@ Partial Class EditorArchivos
         Me.Img_OrdenDeCompra.BackgroundImage = CType(resources.GetObject("Img_OrdenDeCompra.BackgroundImage"), System.Drawing.Image)
         Me.Img_OrdenDeCompra.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.Img_OrdenDeCompra.Enabled = False
-        Me.Img_OrdenDeCompra.Location = New System.Drawing.Point(239, 38)
+        Me.Img_OrdenDeCompra.Location = New System.Drawing.Point(319, 47)
+        Me.Img_OrdenDeCompra.Margin = New System.Windows.Forms.Padding(4)
         Me.Img_OrdenDeCompra.Name = "Img_OrdenDeCompra"
-        Me.Img_OrdenDeCompra.Size = New System.Drawing.Size(21, 20)
+        Me.Img_OrdenDeCompra.Size = New System.Drawing.Size(28, 25)
         Me.Img_OrdenDeCompra.TabIndex = 19
         Me.Img_OrdenDeCompra.UseVisualStyleBackColor = True
         Me.Img_OrdenDeCompra.Visible = False
@@ -343,9 +386,10 @@ Partial Class EditorArchivos
         Me.Img_SIMI.BackgroundImage = CType(resources.GetObject("Img_SIMI.BackgroundImage"), System.Drawing.Image)
         Me.Img_SIMI.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.Img_SIMI.Enabled = False
-        Me.Img_SIMI.Location = New System.Drawing.Point(190, 15)
+        Me.Img_SIMI.Location = New System.Drawing.Point(253, 18)
+        Me.Img_SIMI.Margin = New System.Windows.Forms.Padding(4)
         Me.Img_SIMI.Name = "Img_SIMI"
-        Me.Img_SIMI.Size = New System.Drawing.Size(21, 20)
+        Me.Img_SIMI.Size = New System.Drawing.Size(28, 25)
         Me.Img_SIMI.TabIndex = 18
         Me.Img_SIMI.UseVisualStyleBackColor = True
         Me.Img_SIMI.Visible = False
@@ -355,9 +399,10 @@ Partial Class EditorArchivos
         Me.Img_Proforma.BackgroundImage = CType(resources.GetObject("Img_Proforma.BackgroundImage"), System.Drawing.Image)
         Me.Img_Proforma.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.Img_Proforma.Enabled = False
-        Me.Img_Proforma.Location = New System.Drawing.Point(94, 38)
+        Me.Img_Proforma.Location = New System.Drawing.Point(125, 47)
+        Me.Img_Proforma.Margin = New System.Windows.Forms.Padding(4)
         Me.Img_Proforma.Name = "Img_Proforma"
-        Me.Img_Proforma.Size = New System.Drawing.Size(21, 20)
+        Me.Img_Proforma.Size = New System.Drawing.Size(28, 25)
         Me.Img_Proforma.TabIndex = 17
         Me.Img_Proforma.UseVisualStyleBackColor = True
         Me.Img_Proforma.Visible = False
@@ -367,9 +412,10 @@ Partial Class EditorArchivos
         Me.Img_General.BackgroundImage = CType(resources.GetObject("Img_General.BackgroundImage"), System.Drawing.Image)
         Me.Img_General.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.Img_General.Enabled = False
-        Me.Img_General.Location = New System.Drawing.Point(92, 15)
+        Me.Img_General.Location = New System.Drawing.Point(123, 18)
+        Me.Img_General.Margin = New System.Windows.Forms.Padding(4)
         Me.Img_General.Name = "Img_General"
-        Me.Img_General.Size = New System.Drawing.Size(21, 20)
+        Me.Img_General.Size = New System.Drawing.Size(28, 25)
         Me.Img_General.TabIndex = 16
         Me.Img_General.UseVisualStyleBackColor = True
         Me.Img_General.Visible = False
@@ -377,9 +423,10 @@ Partial Class EditorArchivos
         'rbn_INVOIS
         '
         Me.rbn_INVOIS.AutoSize = True
-        Me.rbn_INVOIS.Location = New System.Drawing.Point(398, 42)
+        Me.rbn_INVOIS.Location = New System.Drawing.Point(531, 52)
+        Me.rbn_INVOIS.Margin = New System.Windows.Forms.Padding(4)
         Me.rbn_INVOIS.Name = "rbn_INVOIS"
-        Me.rbn_INVOIS.Size = New System.Drawing.Size(85, 17)
+        Me.rbn_INVOIS.Size = New System.Drawing.Size(108, 21)
         Me.rbn_INVOIS.TabIndex = 7
         Me.rbn_INVOIS.Text = "(00) IN VOIS"
         Me.rbn_INVOIS.UseVisualStyleBackColor = True
@@ -387,9 +434,10 @@ Partial Class EditorArchivos
         'rbn_BL
         '
         Me.rbn_BL.AutoSize = True
-        Me.rbn_BL.Location = New System.Drawing.Point(398, 19)
+        Me.rbn_BL.Location = New System.Drawing.Point(531, 23)
+        Me.rbn_BL.Margin = New System.Windows.Forms.Padding(4)
         Me.rbn_BL.Name = "rbn_BL"
-        Me.rbn_BL.Size = New System.Drawing.Size(59, 17)
+        Me.rbn_BL.Size = New System.Drawing.Size(76, 21)
         Me.rbn_BL.TabIndex = 6
         Me.rbn_BL.Text = "(00) BL"
         Me.rbn_BL.UseVisualStyleBackColor = True
@@ -397,9 +445,10 @@ Partial Class EditorArchivos
         'rbn_COAS
         '
         Me.rbn_COAS.AutoSize = True
-        Me.rbn_COAS.Location = New System.Drawing.Point(269, 41)
+        Me.rbn_COAS.Location = New System.Drawing.Point(359, 50)
+        Me.rbn_COAS.Margin = New System.Windows.Forms.Padding(4)
         Me.rbn_COAS.Name = "rbn_COAS"
-        Me.rbn_COAS.Size = New System.Drawing.Size(75, 17)
+        Me.rbn_COAS.Size = New System.Drawing.Size(97, 21)
         Me.rbn_COAS.TabIndex = 5
         Me.rbn_COAS.Text = "(00) COAS"
         Me.rbn_COAS.UseVisualStyleBackColor = True
@@ -407,9 +456,10 @@ Partial Class EditorArchivos
         'rbn_PackingList
         '
         Me.rbn_PackingList.AutoSize = True
-        Me.rbn_PackingList.Location = New System.Drawing.Point(269, 19)
+        Me.rbn_PackingList.Location = New System.Drawing.Point(359, 23)
+        Me.rbn_PackingList.Margin = New System.Windows.Forms.Padding(4)
         Me.rbn_PackingList.Name = "rbn_PackingList"
-        Me.rbn_PackingList.Size = New System.Drawing.Size(104, 17)
+        Me.rbn_PackingList.Size = New System.Drawing.Size(135, 21)
         Me.rbn_PackingList.TabIndex = 4
         Me.rbn_PackingList.Text = "(00) Packing List"
         Me.rbn_PackingList.UseVisualStyleBackColor = True
@@ -417,9 +467,10 @@ Partial Class EditorArchivos
         'rbn_OrdenDeCompra
         '
         Me.rbn_OrdenDeCompra.AutoSize = True
-        Me.rbn_OrdenDeCompra.Location = New System.Drawing.Point(116, 41)
+        Me.rbn_OrdenDeCompra.Location = New System.Drawing.Point(155, 50)
+        Me.rbn_OrdenDeCompra.Margin = New System.Windows.Forms.Padding(4)
         Me.rbn_OrdenDeCompra.Name = "rbn_OrdenDeCompra"
-        Me.rbn_OrdenDeCompra.Size = New System.Drawing.Size(129, 17)
+        Me.rbn_OrdenDeCompra.Size = New System.Drawing.Size(172, 21)
         Me.rbn_OrdenDeCompra.TabIndex = 3
         Me.rbn_OrdenDeCompra.Text = "(00) Orden de Compra"
         Me.rbn_OrdenDeCompra.UseVisualStyleBackColor = True
@@ -427,9 +478,10 @@ Partial Class EditorArchivos
         'rbn_SIMI
         '
         Me.rbn_SIMI.AutoSize = True
-        Me.rbn_SIMI.Location = New System.Drawing.Point(116, 20)
+        Me.rbn_SIMI.Location = New System.Drawing.Point(155, 25)
+        Me.rbn_SIMI.Margin = New System.Windows.Forms.Padding(4)
         Me.rbn_SIMI.Name = "rbn_SIMI"
-        Me.rbn_SIMI.Size = New System.Drawing.Size(68, 17)
+        Me.rbn_SIMI.Size = New System.Drawing.Size(85, 21)
         Me.rbn_SIMI.TabIndex = 2
         Me.rbn_SIMI.Text = "(00) SIMI"
         Me.rbn_SIMI.UseVisualStyleBackColor = True
@@ -437,9 +489,10 @@ Partial Class EditorArchivos
         'rbn_Proforma
         '
         Me.rbn_Proforma.AutoSize = True
-        Me.rbn_Proforma.Location = New System.Drawing.Point(9, 41)
+        Me.rbn_Proforma.Location = New System.Drawing.Point(12, 50)
+        Me.rbn_Proforma.Margin = New System.Windows.Forms.Padding(4)
         Me.rbn_Proforma.Name = "rbn_Proforma"
-        Me.rbn_Proforma.Size = New System.Drawing.Size(88, 17)
+        Me.rbn_Proforma.Size = New System.Drawing.Size(117, 21)
         Me.rbn_Proforma.TabIndex = 1
         Me.rbn_Proforma.Text = "(00) Proforma"
         Me.rbn_Proforma.UseVisualStyleBackColor = True
@@ -448,9 +501,10 @@ Partial Class EditorArchivos
         '
         Me.rbn_General.AutoSize = True
         Me.rbn_General.Checked = True
-        Me.rbn_General.Location = New System.Drawing.Point(9, 20)
+        Me.rbn_General.Location = New System.Drawing.Point(12, 25)
+        Me.rbn_General.Margin = New System.Windows.Forms.Padding(4)
         Me.rbn_General.Name = "rbn_General"
-        Me.rbn_General.Size = New System.Drawing.Size(83, 17)
+        Me.rbn_General.Size = New System.Drawing.Size(110, 21)
         Me.rbn_General.TabIndex = 0
         Me.rbn_General.TabStop = True
         Me.rbn_General.Text = "(00) General"
@@ -461,24 +515,27 @@ Partial Class EditorArchivos
         Me.pnl_CambioNombre.Controls.Add(Me.txt_NuevoNombre)
         Me.pnl_CambioNombre.Controls.Add(Me.btn_Cancelar)
         Me.pnl_CambioNombre.Controls.Add(Me.Panel3)
-        Me.pnl_CambioNombre.Location = New System.Drawing.Point(221, 175)
+        Me.pnl_CambioNombre.Location = New System.Drawing.Point(295, 215)
+        Me.pnl_CambioNombre.Margin = New System.Windows.Forms.Padding(4)
         Me.pnl_CambioNombre.Name = "pnl_CambioNombre"
-        Me.pnl_CambioNombre.Size = New System.Drawing.Size(200, 100)
+        Me.pnl_CambioNombre.Size = New System.Drawing.Size(267, 123)
         Me.pnl_CambioNombre.TabIndex = 65
         Me.pnl_CambioNombre.Visible = False
         '
         'txt_NuevoNombre
         '
-        Me.txt_NuevoNombre.Location = New System.Drawing.Point(3, 44)
+        Me.txt_NuevoNombre.Location = New System.Drawing.Point(4, 54)
+        Me.txt_NuevoNombre.Margin = New System.Windows.Forms.Padding(4)
         Me.txt_NuevoNombre.Name = "txt_NuevoNombre"
-        Me.txt_NuevoNombre.Size = New System.Drawing.Size(194, 20)
+        Me.txt_NuevoNombre.Size = New System.Drawing.Size(257, 22)
         Me.txt_NuevoNombre.TabIndex = 64
         '
         'btn_Cancelar
         '
-        Me.btn_Cancelar.Location = New System.Drawing.Point(61, 70)
+        Me.btn_Cancelar.Location = New System.Drawing.Point(81, 86)
+        Me.btn_Cancelar.Margin = New System.Windows.Forms.Padding(4)
         Me.btn_Cancelar.Name = "btn_Cancelar"
-        Me.btn_Cancelar.Size = New System.Drawing.Size(75, 23)
+        Me.btn_Cancelar.Size = New System.Drawing.Size(100, 28)
         Me.btn_Cancelar.TabIndex = 63
         Me.btn_Cancelar.Text = "Cancelar"
         Me.btn_Cancelar.UseVisualStyleBackColor = True
@@ -489,8 +546,9 @@ Partial Class EditorArchivos
         Me.Panel3.Controls.Add(Me.Label5)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel3.Location = New System.Drawing.Point(0, 0)
+        Me.Panel3.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(200, 30)
+        Me.Panel3.Size = New System.Drawing.Size(267, 37)
         Me.Panel3.TabIndex = 62
         '
         'Label5
@@ -500,39 +558,18 @@ Partial Class EditorArchivos
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label5.Location = New System.Drawing.Point(16, 7)
+        Me.Label5.Location = New System.Drawing.Point(21, 9)
+        Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(167, 19)
+        Me.Label5.Size = New System.Drawing.Size(202, 24)
         Me.Label5.TabIndex = 2
         Me.Label5.Text = "Ingrese Nuevo Nombre"
         '
-        'Img_Despacho
-        '
-        Me.Img_Despacho.BackgroundImage = CType(resources.GetObject("Img_Despacho.BackgroundImage"), System.Drawing.Image)
-        Me.Img_Despacho.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.Img_Despacho.Enabled = False
-        Me.Img_Despacho.Location = New System.Drawing.Point(605, 38)
-        Me.Img_Despacho.Name = "Img_Despacho"
-        Me.Img_Despacho.Size = New System.Drawing.Size(21, 20)
-        Me.Img_Despacho.TabIndex = 26
-        Me.Img_Despacho.UseVisualStyleBackColor = True
-        Me.Img_Despacho.Visible = False
-        '
-        'rbn_Despacho
-        '
-        Me.rbn_Despacho.AutoSize = True
-        Me.rbn_Despacho.Location = New System.Drawing.Point(508, 42)
-        Me.rbn_Despacho.Name = "rbn_Despacho"
-        Me.rbn_Despacho.Size = New System.Drawing.Size(95, 17)
-        Me.rbn_Despacho.TabIndex = 25
-        Me.rbn_Despacho.Text = "(00) Despacho"
-        Me.rbn_Despacho.UseVisualStyleBackColor = True
-        '
         'EditorArchivos
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(658, 347)
+        Me.ClientSize = New System.Drawing.Size(877, 427)
         Me.Controls.Add(Me.pnl_CambioNombre)
         Me.Controls.Add(Me.gbx_Carpetas)
         Me.Controls.Add(Me.Label3)
@@ -542,6 +579,7 @@ Partial Class EditorArchivos
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.dgvArchivos)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "EditorArchivos"
         CType(Me.dgvArchivos, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ContextMenuStrip1.ResumeLayout(False)
@@ -601,4 +639,5 @@ Partial Class EditorArchivos
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents Img_Despacho As System.Windows.Forms.Button
     Friend WithEvents rbn_Despacho As System.Windows.Forms.RadioButton
+    Friend WithEvents SaveFileDialog1 As System.Windows.Forms.SaveFileDialog
 End Class

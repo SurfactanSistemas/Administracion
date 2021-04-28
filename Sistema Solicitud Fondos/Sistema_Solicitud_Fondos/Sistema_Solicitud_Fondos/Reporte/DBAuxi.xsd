@@ -32,6 +32,8 @@
               <xs:element name="ECheq_Chk" msprop:Generator_ColumnVarNameInTable="columnECheq_Chk" msprop:Generator_ColumnPropNameInRow="ECheq_Chk" msprop:Generator_ColumnPropNameInTable="ECheq_ChkColumn" msprop:Generator_UserColumnName="ECheq_Chk" type="xs:boolean" minOccurs="0" />
               <xs:element name="CheqTerceros_Chk" msprop:Generator_ColumnVarNameInTable="columnCheqTerceros_Chk" msprop:Generator_ColumnPropNameInRow="CheqTerceros_Chk" msprop:Generator_ColumnPropNameInTable="CheqTerceros_ChkColumn" msprop:Generator_UserColumnName="CheqTerceros_Chk" type="xs:boolean" minOccurs="0" />
               <xs:element name="CheqPropio_Chk" msprop:Generator_ColumnVarNameInTable="columnCheqPropio_Chk" msprop:Generator_ColumnPropNameInRow="CheqPropio_Chk" msprop:Generator_ColumnPropNameInTable="CheqPropio_ChkColumn" msprop:Generator_UserColumnName="CheqPropio_Chk" type="xs:boolean" minOccurs="0" />
+              <xs:element name="Tarjeta_Chk" msprop:Generator_ColumnVarNameInTable="columnTarjeta_Chk" msprop:Generator_ColumnPropNameInRow="Tarjeta_Chk" msprop:Generator_ColumnPropNameInTable="Tarjeta_ChkColumn" msprop:Generator_UserColumnName="Tarjeta_Chk" type="xs:boolean" minOccurs="0" />
+              <xs:element name="DebitoAutomatico_Chk" msprop:Generator_ColumnVarNameInTable="columnDebitoAutomatico_Chk" msprop:Generator_ColumnPropNameInRow="DebitoAutomatico_Chk" msprop:Generator_ColumnPropNameInTable="DebitoAutomatico_ChkColumn" msprop:Generator_UserColumnName="DebitoAutomatico_Chk" type="xs:boolean" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

@@ -29,9 +29,9 @@ Partial Class MenuPrincipal
         Me.MaestrosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.IngresoDeSolicitudToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GestionSolicitudesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AutoGestionarSolicitudesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProcesosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FinDeSistemasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AutoGestionarSolicitudesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.panel1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -99,6 +99,12 @@ Partial Class MenuPrincipal
         Me.GestionSolicitudesToolStripMenuItem.Size = New System.Drawing.Size(210, 22)
         Me.GestionSolicitudesToolStripMenuItem.Text = "Gestion Solicitudes"
         '
+        'AutoGestionarSolicitudesToolStripMenuItem
+        '
+        Me.AutoGestionarSolicitudesToolStripMenuItem.Name = "AutoGestionarSolicitudesToolStripMenuItem"
+        Me.AutoGestionarSolicitudesToolStripMenuItem.Size = New System.Drawing.Size(210, 22)
+        Me.AutoGestionarSolicitudesToolStripMenuItem.Text = "AutoGestionar Solicitudes"
+        '
         'ProcesosToolStripMenuItem
         '
         Me.ProcesosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FinDeSistemasToolStripMenuItem})
@@ -111,12 +117,6 @@ Partial Class MenuPrincipal
         Me.FinDeSistemasToolStripMenuItem.Name = "FinDeSistemasToolStripMenuItem"
         Me.FinDeSistemasToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
         Me.FinDeSistemasToolStripMenuItem.Text = "Fin de Sistema"
-        '
-        'AutoGestionarSolicitudesToolStripMenuItem
-        '
-        Me.AutoGestionarSolicitudesToolStripMenuItem.Name = "AutoGestionarSolicitudesToolStripMenuItem"
-        Me.AutoGestionarSolicitudesToolStripMenuItem.Size = New System.Drawing.Size(210, 22)
-        Me.AutoGestionarSolicitudesToolStripMenuItem.Text = "AutoGestionar Solicitudes"
         '
         'MenuPrincipal
         '

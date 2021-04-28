@@ -330,6 +330,7 @@
     </Compile>
     <Compile Include="Interfaces\IArqueoCheques.vb" />
     <Compile Include="Interfaces\IAyudaProveedores.vb" />
+    <Compile Include="Interfaces\IPaseEcheques.vb" />
     <Compile Include="Listados\ConsultaDatosFactura.Designer.vb">
       <DependentUpon>ConsultaDatosFactura.vb</DependentUpon>
     </Compile>
@@ -478,6 +479,12 @@
       <DependentUpon>ListadoPagosImportaciones.vb</DependentUpon>
     </Compile>
     <Compile Include="Listados\ListadoPagosImportaciones.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listado_ECheques_Cargacheques.Designer.vb">
+      <DependentUpon>Listado_ECheques_Cargacheques.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listado_ECheques_Cargacheques.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ModificaIntereses.Designer.vb">
@@ -1242,6 +1249,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\ListadoValoresEnCarteraCuit.resx">
       <DependentUpon>ListadoValoresEnCarteraCuit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listado_ECheques_Cargacheques.resx">
+      <DependentUpon>Listado_ECheques_Cargacheques.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModificaIntereses.resx">
       <DependentUpon>ModificaIntereses.vb</DependentUpon>

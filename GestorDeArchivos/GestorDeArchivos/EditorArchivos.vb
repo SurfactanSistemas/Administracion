@@ -13,6 +13,7 @@ Public Class EditorArchivos : Implements SelectorCarpetas
     Private ReadOnly WTituloMail
     Private ReadOnly WCuerpoMail
     Private ReadOnly WOperador
+    Private ReadOnly WHabilitado
 
     Dim DragActivo As Boolean = False
     Dim DragDesdeOutLOOK As Boolean = False
@@ -55,6 +56,8 @@ Public Class EditorArchivos : Implements SelectorCarpetas
         Button1.Enabled = Habilitado
         Button2.Enabled = Habilitado
 
+        WHabilitado = Habilitado
+
     End Sub
 
     Private Sub AgregarArchivosEvalProvMP_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
@@ -62,20 +65,20 @@ Public Class EditorArchivos : Implements SelectorCarpetas
         ' Creamos la carpeta que contendrá los archivos en caso de que no se encuentre creada ya.
         '
         Select Case WAccion
-            Case 1
+            Case 1 ' Abre el archivo que se le manda
                 Try
                     Process.Start(WPath, "f")
                     Me.Close()
                 Catch ex As System.Exception
                     MsgBox(ex.Message)
                 End Try
-            Case 2
+            Case 2 ' Abre la carpeta y muestra su contenido
                 If Not Directory.Exists(WPath) Then
                     Directory.CreateDirectory(WPath)
                 End If
 
                 _CargarArchivosRelacionados()
-            Case 3
+            Case 3 ' Crea carpetas varias internas
                 If Not Directory.Exists(WPath) Then
                     Directory.CreateDirectory(WPath)
                 End If
@@ -95,9 +98,43 @@ Public Class EditorArchivos : Implements SelectorCarpetas
 
                 _CargarArchivosRelacionados()
 
+            Case 4 ' Caso laboratorio solo deja ver COAS y Copiar Archivos
+                Me.Size = New Size(674, 462)
+                gbx_Carpetas.Visible = True
+
+                crearCarpetas(WPath)
+
+                ActualizarCarpetas()
+
+
+                'Marco la carpeta que quiero mostrar
+                rbn_COAS.Checked = True
+
+                'Deshabilito las siguientes opciones
+                Moficaciones_ParaCaso4()
+
+                _CargarArchivosRelacionados()
+
         End Select
 
     End Sub
+
+
+    Private Sub Moficaciones_ParaCaso4()
+        rbn_BL.Enabled = False
+        rbn_SIMI.Enabled = False
+        rbn_INVOIS.Enabled = False
+        rbn_General.Enabled = False
+        rbn_Despacho.Enabled = False
+        rbn_Proforma.Enabled = False
+        rbn_PackingList.Enabled = False
+        rbn_OrdenDeCompra.Enabled = False
+
+
+
+
+    End Sub
+
 
     Private Sub ActualizarCarpetas()
 
@@ -301,11 +338,27 @@ Public Class EditorArchivos : Implements SelectorCarpetas
         If e.RowIndex < 0 Then Exit Sub
         With dgvArchivos.Rows(e.RowIndex)
             If Not IsNothing(.Cells("PathArchivo").Value) Then
-                Try
-                    Process.Start(.Cells("PathArchivo").Value, "f")
-                Catch ex As System.Exception
-                    MsgBox(ex.Message)
-                End Try
+                If WAccion = 4 Then
+                    Try
+                        Dim DireccionDestino As String = ""
+                        SaveFileDialog1.FileName = .Cells("DescArchivo").Value
+                        If (SaveFileDialog1.ShowDialog() = DialogResult.OK) Then
+                            DireccionDestino = SaveFileDialog1.FileName ' & obtenerExtencion(.Cells("PathArchivo").Value)
+                            File.Copy(.Cells("PathArchivo").Value, DireccionDestino, True)
+                        End If
+
+                    Catch ex As Exception
+
+                    End Try
+                    
+                Else
+                    Try
+                        Process.Start(.Cells("PathArchivo").Value, "f")
+                    Catch ex As System.Exception
+                        MsgBox(ex.Message)
+                    End Try
+                End If
+                
             End If
         End With
     End Sub
@@ -340,12 +393,18 @@ Public Class EditorArchivos : Implements SelectorCarpetas
                 'CAMBIAMOS LA BANDERA PARA SABER QUE ESTAMOS ARRASTRANDO UN ARCHIVO
                 DragActivo = True
                 'LLAMAMOS A LA VENTAN PARA QUE DIGA A QUE CARPETAS COPIAR
-                If WAccion = 3 Then
-                    With New SeleccionarCarpetas(WPath, True, archivos)
-                        .Show(Me)
-                    End With
-                Else
-                    _SubirArchvios(archivos)
+                If WHabilitado = True Then
+                    If WAccion = 3 Or WAccion = 4 Then
+
+                        With New SeleccionarCarpetas(WPath, True, archivos, WAccion)
+                            .Show(Me)
+                        End With
+
+                    Else
+                        If WHabilitado = True Then
+                            _SubirArchvios(archivos)
+                        End If
+                    End If
                 End If
                 'With New SeleccionarCarpetas(WPath, True, archivos)
                 '    .Show(Me)
@@ -378,7 +437,7 @@ Public Class EditorArchivos : Implements SelectorCarpetas
                 Dim NombreArchivo As String = fileName.ToString()
                 NombreArchivo = Regex.Replace(NombreArchivo, "[^\w\s\-]", "")
 
-                
+
                 Dim Extencion As String = obtenerExtencion(fileName.ToString())
                 removerExtencion(NombreArchivo, Extencion)
                 Dim myTempFile As String = "C:\Temporales\" & NombreArchivo & Extencion
@@ -440,13 +499,16 @@ Public Class EditorArchivos : Implements SelectorCarpetas
                     DragDesdeOutLOOK = True
 
                     'LLAMAMOS A LA VENTAN PARA QUE DIGA A QUE CARPETAS COPIAR
-                    If WAccion = 3 Then
-                        With New SeleccionarCarpetas(WPath, True, Archivos)
-                            .Show(Me)
-                        End With
-                    Else
-                        _SubirArchvios(Archivos)
+                    If WHabilitado = True Then
+                        If WAccion = 3 Or WAccion = 4 Then
+                            With New SeleccionarCarpetas(WPath, True, Archivos, WAccion)
+                                .Show(Me)
+                            End With
+                        Else
+                            _SubirArchvios(Archivos)
+                        End If
                     End If
+
 
 
                     ' _SubirArchvios(Archivos)
@@ -759,7 +821,7 @@ Public Class EditorArchivos : Implements SelectorCarpetas
             Throw New Exception("No se ha logrado tener acceso a la Carpeta Compartida de Archivos Relacionados.")
             Exit Sub
         End If
-        If WAccion = 3 Then
+        If WAccion = 3 Or WAccion = 4 Then
 
             WRutaArchivosRelacionados = ObtenerRutaRadioButons()
 
@@ -808,7 +870,7 @@ Public Class EditorArchivos : Implements SelectorCarpetas
         '
         'Next
 
-        If WAccion = 3 Then
+        If WAccion = 3 Or WAccion = 4 Then
             ActualizarCarpetas()
         End If
 
@@ -886,10 +948,14 @@ Public Class EditorArchivos : Implements SelectorCarpetas
                     Dim WArchivos() = .FileNames
 
                     If WArchivos.Length > 0 Then
-                        With New SeleccionarCarpetas(WPath, True, WArchivos)
-                            .Show(Me)
-                        End With
-                        '_SubirArchvios(WArchivos)
+                        If WAccion = 3 Or WAccion = 4 Then
+                            With New SeleccionarCarpetas(WPath, True, WArchivos, WAccion)
+                                .Show(Me)
+                            End With
+                        Else
+                            _SubirArchvios(WArchivos)
+                        End If
+                        
                     End If
 
                 End If
@@ -938,10 +1004,13 @@ Public Class EditorArchivos : Implements SelectorCarpetas
     End Sub
 
     Private Sub PegarToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PegarToolStripMenuItem.Click
-        With New SeleccionarCarpetas(WPath)
-            .Show(Me)
-        End With
 
+        If WHabilitado = True Then
+            With New SeleccionarCarpetas(WPath, False, Nothing, WAccion)
+                .Show(Me)
+            End With
+        End If
+        
     End Sub
 
     ' Private Sub cmb_Carpeta_DropDownClosed(sender As Object, e As EventArgs) Handles cmb_Carpeta.DropDownClosed

@@ -59,6 +59,9 @@
     <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
@@ -130,6 +133,7 @@
     <Compile Include="HistorialProforma.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Interface\IActualizaGrillaProforma.vb" />
     <Compile Include="Interface\IConsultaCliente.vb" />
     <Compile Include="Interface\IConsultaPedidos.vb" />
     <Compile Include="Interface\IConsultaPedPrepo.vb" />
@@ -175,10 +179,24 @@
     <Compile Include="Proforma.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Reportes\DBAuxi.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DBAuxi.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\DBAuxi.vb">
+      <DependentUpon>DBAuxi.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\ProformaVistaPrevia.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ProformaVistaPrevia.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ReporteExportarExcel.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteExportarExcel.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\VistaPrevia.Designer.vb">
@@ -238,6 +256,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ProformaVistaPrevia1.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ReporteExportarExcel.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteExportarExcel.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\VistaPrevia.resx">
       <DependentUpon>VistaPrevia.vb</DependentUpon>
     </EmbeddedResource>
@@ -260,6 +282,17 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Reportes\DBAuxi.xsc">
+      <DependentUpon>DBAuxi.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\DBAuxi.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DBAuxi.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Reportes\DBAuxi.xss">
+      <DependentUpon>DBAuxi.xsd</DependentUpon>
+    </None>
     <None Include="Resources\Aceptar N2.png" />
   </ItemGroup>
   <ItemGroup>

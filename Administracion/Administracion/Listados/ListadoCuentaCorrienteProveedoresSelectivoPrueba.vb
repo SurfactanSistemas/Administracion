@@ -459,6 +459,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Dim varPago, varEmpresa As Integer
         Dim varAcumulaNeto, varAcumulaNetoII, varAcumulaIva, varPesosOrig, varDifCambio, AcumPesosOrig, AcumPesosOrigII, AcumDifCambio As Double
         Dim varRetIbI, varRetIbII As Double
+        Dim varTipoDolar As Integer
 
         'Try
 
@@ -503,7 +504,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
 
             If Trim(varProveedor) <> "" Then
 
-                Dim datosProveedor As DataRow = GetSingle("SELECT Proveedor, Nombre, NombreCheque, ImpreCuitCliente, FormaPago, AceptaCheques, AceptaTransferencias FROM Proveedor WHERE Proveedor = '" & varProveedor & "'", IIf(_EsPellital, "Pellital_III", "SurfactanSa"))
+                Dim datosProveedor As DataRow = GetSingle("SELECT Proveedor, Nombre, NombreCheque, ImpreCuitCliente, FormaPago, AceptaCheques, AceptaTransferencias, TipoDolar FROM Proveedor WHERE Proveedor = '" & varProveedor & "'", IIf(_EsPellital, "Pellital_III", "SurfactanSa"))
 
                 varAcumulado = 0
                 varAcumulaIva = 0
@@ -872,6 +873,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
                                 .Item("FormaPago") = OrDefault(datosProveedor("FormaPago"), "")
                                 .Item("AceptaECheque") = Val(OrDefault(datosProveedor("AceptaCheques"), "")) = 1
                                 .Item("AceptaTransf") = Val(OrDefault(datosProveedor("AceptaTransferencias"), "")) = 1
+                                .Item("TipoDolar") = IIf(IsDBNull(datosProveedor("TipoDolar")), 0, datosProveedor("TipoDolar"))
                             End With
 
                             WTabla.Rows.Add(r2)
