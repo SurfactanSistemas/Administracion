@@ -1218,7 +1218,6 @@ namespace Modulo_Capacitacion.Novedades
 
         private void btnImprimir_Click(object sender, EventArgs e)
         {
-
             if (!_ExisteCursada(txtCodigo.Text))
             {
                 MessageBox.Show("No existe ninguna cursada con el codigo indicado");
