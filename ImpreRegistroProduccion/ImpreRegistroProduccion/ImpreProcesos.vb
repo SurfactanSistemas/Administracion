@@ -238,7 +238,7 @@ Public Class ImpreProcesos
         'Dim WAsunto As String = "El Pedido " & WNroPedido & " de " & WDescCliente & ", ha sido autorizado."
         Dim WAsunto As String = "Pedido #" & WNroPedido & " - Cliente " & WDescCliente & " - Documentación - SURFACTAN S.A."
         'Dim WCuerpo As String = "Se notifica que el pedido " & WNroPedido & ", se encuentra autorizado por Aseg. de la Calidad." & vbCrLf & vbCrLf & "Se adjuntan los FDS y Certificados correspondientes a los Productos y Partidas involucradas."
-        Dim WCuerpo As String = "Estimado Cliente." & vbCrLf & "Le enviamos los Certificados de Análisis y Fichas de Seguridad correspondiente al pedido que estarán recibiendo en breve." & vbCrLf & vbCrLf & "<strong>Saludos cordiales.</strong>" & vbCrLf & "<strong>Aseguramiento de Calidad</strong>" & vbCrLf & "<strong>Surfactan S.A.</strong>"
+        Dim WCuerpo As String = "Estimado Cliente." & vbCrLf & "Le enviamos los Certificados de Análisis y Fichas de Seguridad correspondiente al pedido que estarán recibiendo en breve." & vbCrLf & vbCrLf & "<br><br><strong>Saludos cordiales.</strong>" & vbCrLf & "<br><strong>Aseguramiento de Calidad</strong>" & vbCrLf & "<br><br><strong>Surfactan S.A.</strong>"
 
         Dim WArchivos As New List(Of String)
 
