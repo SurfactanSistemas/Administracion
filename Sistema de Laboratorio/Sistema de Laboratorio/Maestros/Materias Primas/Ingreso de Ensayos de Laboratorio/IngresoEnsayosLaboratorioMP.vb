@@ -1472,6 +1472,8 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad, IA
 
                 ' todo implementar envio por mail de Ensayos pooles y final del producto.
 
+                _ImprimirResultadosFinales()
+
                 btnLimpiar.PerformClick()
 
             ElseIf MsgBox("¿Sigue cargando Pooles para esta Materia Prima?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
@@ -1492,26 +1494,130 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad, IA
 
             End If
 
-            
+
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
         End Try
 
-	End Sub
+    End Sub
 
-	Private Function _CalcularSaldoOCInforme() As String
-		Dim WLaudado, WInformado As Double
-		WLaudado = 0
-		WInformado = 0
+    Private Sub _ImprimirResultadosFinales(Optional ByVal MandarPorMail As Boolean = False)
 
-		Dim WInf As DataRow = GetSingle("SELECT Total = SUM(Cantidad) FROM Informe WHERE Orden = '" & txtOrden.Text & "' And Articulo = '" & txtCodigo.Text & "' GROUP BY Orden, Articulo")
-		If WInf IsNot Nothing Then WInformado = OrDefault(WInf.Item("Total"), 0)
+        Dim ZDescProducto, ZClave, ZLaudo, ZProducto, ZFecha, ZCodigo, ZResultado, ZConfecciono, ZFarmacopea, ZLoteProveedor, ZEnvases, ZLibros, ZPaginas, ZNroOOS, ZNotaExterna1, ZNotaExterna2, ZNotaExterna3, ZImpre1, ZImpre2, ZArchiva, ZDescEnsayos, ZCantidad As String
 
-		Dim WOrden As DataRow = GetSingle("SELECT Total = SUM(Liberada + Devuelta) FROM Laudo WHERE Orden = '" & txtOrden.Text & "' And Articulo = '" & txtCodigo.Text & "'")
-		If WOrden IsNot Nothing Then WLaudado = OrDefault(WOrden.Item("Total"), 0)
+        ZDescProducto = txtDescMP.Text.Trim
+        ZLaudo = txtPartida.Text
+        ZProducto = txtCodigo.Text
+        ZFecha = txtFecha.Text
+        ZConfecciono = txtConfecciono.Text.Trim
+        ZLoteProveedor = txtLoteProveedor.Text.Trim
+        ZEnvases = txtEnvases.Text.Trim
+        ZLibros = txtLibros.Text.Trim
+        ZPaginas = txtPaginas.Text.Trim
+        ZNroOOS = txtOOS.Text.Trim
+        ZArchiva = txtArchivo.Text.Trim
 
-		Return formatonumerico(WInformado - WLaudado)
-	End Function
+        ' Las MPs no llevan notas externas ya que no se venden directamente, sino bajo codigo de PT.
+        ZNotaExterna1 = ""
+        ZNotaExterna2 = ""
+        ZNotaExterna3 = ""
+
+        ' 1 y dos salen de la base y son particulares a cada renglon de ensayo.
+        ZImpre1 = ""
+        ZImpre2 = ""
+
+        ZCantidad = "0.00"
+
+        Dim WPrueart As DataTable = GetAll("SELECT Clave, Valor, Resultado, Codigo, Farmacopea, TipoEspecif, DesdeEspecif, HastaEspecif, UnidadEspecif, MenorIgualEspecif, InformaEspecif, Valor FROM PrueartNuevo WHERE Prueba IN ('1" & txtPartida.Text & "', '2" & txtPartida.Text & "') ORDER By Clave")
+
+        Dim WClave, WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif, WImpreParametro As String
+
+        Dim tabla As DataTable = New DBAuxi.TablaEnsayosIngresadosMpDataTable
+
+        For Each row As DataRow In WPrueart.Rows
+
+            ZDescEnsayos = ""
+            ZResultado = ""
+            ZFarmacopea = ""
+            ZCodigo = ""
+
+            With row
+                WClave = OrDefault(.Item("Clave"), "")
+                WTipoEspecif = OrDefault(.Item("TipoEspecif"), "")
+                WDesdeEspecif = OrDefault(.Item("DesdeEspecif"), "")
+                WHastaEspecif = OrDefault(.Item("HastaEspecif"), "")
+                WUnidadEspecif = OrDefault(.Item("UnidadEspecif"), "")
+                WMenorIgualEspecif = OrDefault(.Item("MenorIgualEspecif"), "")
+                Dim WValor = Trim(OrDefault(.Item("Valor"), ""))
+                Dim WInformaEspecif = Trim(OrDefault(.Item("InformaEspecif"), ""))
+                WImpreParametro = _GenerarImpreParametro(WTipoEspecif, WDesdeEspecif, WHastaEspecif, WUnidadEspecif, WMenorIgualEspecif, WInformaEspecif)
+
+                If WClave.Trim <> "" Then
+
+                    ZImpre1 = WImpreParametro
+                    ZImpre2 = WValor
+
+                    ZDescEnsayos = OrDefault(.Item("Valor"), "")
+                    ZResultado = OrDefault(.Item("Resultado"), "")
+                    ZFarmacopea = OrDefault(.Item("Farmacopea"), "")
+                    ZCodigo = OrDefault(.Item("Codigo"), "")
+
+                End If
+
+            End With
+
+            Dim r As DataRow = tabla.NewRow
+
+            With r
+                .Item("Clave") = WClave
+                .Item("DescProducto") = ZDescProducto
+                .Item("Laudo") = ZLaudo
+                .Item("Producto") = ZProducto
+                .Item("Fecha") = ZFecha
+                .Item("Codigo") = ZCodigo
+                .Item("Resultado") = ZResultado
+                .Item("Confecciono") = ZConfecciono
+                .Item("Farmacopea") = ZFarmacopea
+                .Item("LoteProveedor") = ZLoteProveedor
+                .Item("Envases") = ZEnvases
+                .Item("Libros") = ZLibros
+                .Item("Paginas") = ZPaginas
+                .Item("NroOOS") = ZNroOOS
+                .Item("NotaExterna1") = ZNotaExterna1
+                .Item("NotaExterna2") = ZNotaExterna2
+                .Item("NotaExterna3") = ZNotaExterna3
+                .Item("Impre1") = ZImpre1
+                .Item("Impre2") = ZImpre2
+                .Item("Archiva") = ZArchiva
+                .Item("DescEnsayos") = ZDescEnsayos
+                .Item("Cantidad") = ZCantidad
+            End With
+
+            tabla.Rows.Add(r)
+
+        Next
+
+        With New VistaPrevia
+            .Reporte = New imprecalidadresultadomp
+            .Reporte.SetDataSource(tabla)
+            .Exportar("C:", ExportFormatType.PortableDocFormat)
+            .Mostrar()
+        End With
+    End Sub
+
+    Private Function _CalcularSaldoOCInforme() As String
+        Dim WLaudado, WInformado As Double
+        WLaudado = 0
+        WInformado = 0
+
+        Dim WInf As DataRow = GetSingle("SELECT Total = SUM(Cantidad) FROM Informe WHERE Orden = '" & txtOrden.Text & "' And Articulo = '" & txtCodigo.Text & "' GROUP BY Orden, Articulo")
+        If WInf IsNot Nothing Then WInformado = OrDefault(WInf.Item("Total"), 0)
+
+        Dim WOrden As DataRow = GetSingle("SELECT Total = SUM(Liberada + Devuelta) FROM Laudo WHERE Orden = '" & txtOrden.Text & "' And Articulo = '" & txtCodigo.Text & "'")
+        If WOrden IsNot Nothing Then WLaudado = OrDefault(WOrden.Item("Total"), 0)
+
+        Return formatonumerico(WInformado - WLaudado)
+    End Function
 
 	Private Function _EsProveedorA() As Boolean
 		Dim WProv As DataRow = GetSingle("SELECT p.CategoriaI FROM Orden o INNER JOIN SurfactanSa.dbo.Proveedor p ON o.Proveedor = p.Proveedor And o.Renglon = 1 WHERE o.Orden = '" & txtOrden.Text & "'")
@@ -2630,5 +2736,9 @@ Public Class IngresoEnsayosLaboratorioMP : Implements IIngresoClaveSeguridad, IA
             txtPool.Text = ""
         End If
 
+    End Sub
+
+    Private Sub txtCodigo_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles txtCodigo.MouseDoubleClick
+        _ImprimirResultadosFinales()
     End Sub
 End Class
