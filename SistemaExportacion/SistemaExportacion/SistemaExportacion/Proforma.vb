@@ -1354,6 +1354,7 @@ Public Class Proforma : Implements IConsultaPedPrepo
         Dim WFechaCobro As String = txtFechaCobro.Text
         Dim WFechaCobroOrd As String = ordenaFecha(txtFechaCobro.Text)
 
+        
         WCondPagoII = _Left(Trim(txtCondicionPagoII.Text), 50)
         WObservacionesII = _Left(Trim(txtObservacionesII.Text), 100)
         WObservacionesIII = _Left(Trim(txtObservacionesIII.Text), 100)
@@ -1418,6 +1419,17 @@ Public Class Proforma : Implements IConsultaPedPrepo
             If Val(WFechaOrd) >= Val(WFechaLimiteOrd) Then
                 MsgBox("La fecha límite debe ser posterior a la fecha de creación de la Proforma.", MsgBoxStyle.Exclamation)
                 Exit Sub
+            End If
+        End If
+
+        'Validamos que la fecha de cobro sea posterior a la fecha de la proforma y de no serlo consultamos si desea grabar igualmente
+
+        If WFechaCobro.Replace("/", "") <> "" Then
+            If WFechaOrd >= WFechaCobroOrd Then
+                If MsgBox("La fecha de cobro es anterior al fecha de la proforma." & vbCrLf & "¿Desea continuar?", vbYesNo) = vbNo Then
+                    txtFechaCobro.Focus()
+                    Exit Sub
+                End If
             End If
         End If
 

@@ -117,6 +117,7 @@ Public Class EditorArchivos : Implements SelectorCarpetas
 
         End Select
 
+        TopMost = True
     End Sub
 
 

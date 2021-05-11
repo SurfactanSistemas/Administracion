@@ -16,6 +16,10 @@ Public Class CargadorDeTxt
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
         RutaCarpeta = ConfigurationSettings.AppSettings("ARCHIVOS_A_CARGAR")
 
+        If Not Directory.Exists(RutaCarpeta) Then
+            Directory.CreateDirectory(RutaCarpeta)
+        End If
+
         CargarArchivos()
     End Sub
 
@@ -296,6 +300,8 @@ Public Class CargadorDeTxt
                 Dim WModoCheque As String = rowTabla.Item(8)
                 Dim WCuitEndoso As String = rowTabla.Item(9)
                 Dim WRazonEndoso As String = rowTabla.Item(10)
+                Dim WFechaGrabacion As String = Date.Today.ToString("dd/MM/yyyy")
+                Dim WOrdFechaGrabacion As String = ordenaFecha(WFechaGrabacion)
 
                 Dim WCLAVE As String = WNCheque & "-" & WCuitEmisor & "-" & formatonumerico(WImporte.ToString())
 
@@ -305,11 +311,11 @@ Public Class CargadorDeTxt
                     Continue For
                 End If
 
-                SQLCnslt = "INSERT INTO Carga_ChequesE (Clave, NroCheque, BancoEmisor, Importe, FechaPago, OrdFechaPago, CuitEmisor, " _
-                            & "Emisor_Razon, FechaEmisor , OrdFechaEmisor, Caracter_Cheque, Modo_Cheque, Endoso_Documento, Endoso_Razon, Marca_Usado) " _
+                SQLCnslt = "INSERT INTO Carga_ChequesE (Clave, NroCheque, BancoEmisor, Importe, FechaPago, OrdFechaPago, CuitEmisor, Emisor_Razon, " _
+                            & "FechaEmisor , OrdFechaEmisor, Caracter_Cheque, Modo_Cheque, Endoso_Documento, Endoso_Razon, Marca_Usado,FechaGrabacion, OrdFechaGrabacion) " _
                             & "VALUES('" & WCLAVE & "', '" & WNCheque & "', '" & WBancoEmisor & "', '" & formatonumerico(WImporte) & "', '" & WFechaPago & "', " _
                             & "'" & WOrdFechaPago & "', '" & WCuitEmisor & "', '" & WRazonEmisor & "', '" & WFechaEmision & "', '" & WOrdFechaEmision & "', " _
-                            & "'" & WCaracterCheque & "', '" & WModoCheque & "', '" & WCuitEndoso & "', '" & WRazonEndoso & "', '" & "" & "')"
+                            & "'" & WCaracterCheque & "', '" & WModoCheque & "', '" & WCuitEndoso & "', '" & WRazonEndoso & "', '" & "" & "', '" & WFechaGrabacion & "', '" & WOrdFechaGrabacion & "')"
 
                 ListaSQLCnslt.Add(SQLCnslt)
 

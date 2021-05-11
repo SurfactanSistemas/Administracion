@@ -1,7 +1,8 @@
-﻿Imports Util.Clases.Query
+﻿Imports Sistema_Solicitud_Fondos
+Imports Util.Clases.Query
 Public Class Form1
 
-    Private Sub btn_Aceptar_Click(sender As Object, e As EventArgs) Handles btn_Aceptar.Click
+    Private Sub btn_Aceptar_Click(sender As Object, e As EventArgs) Handles btn_Cerrar.Click
         Close()
     End Sub
 
@@ -14,8 +15,17 @@ Public Class Form1
         Dim RowPopUp As DataTable = getall(SQLCnslt, "SurfactanSa")
         If RowPopUp.Rows.Count = 0 Then
             Close()
+        Else
+            SQLCnslt = "UPDATE SolicitudFondos SET MarcaPopUp_Sergio = 'X'"
+            ExecuteNonQueries("SurfactanSa", SQLCnslt)
         End If
 
+    End Sub
+
+    Private Sub btn_Abrir_Click(sender As Object, e As EventArgs) Handles btn_Abrir.Click
+        With New MenuPrincipal()
+            .Show(Me)
+        End With
     End Sub
 End Class
 

@@ -481,6 +481,18 @@
     <Compile Include="Listados\ListadoPagosImportaciones.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Listados\Listado_ECheques_SinUsar.Designer.vb">
+      <DependentUpon>Listado_ECheques_SinUsar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\Listado_ECheques_SinUsar.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\Listado_Echeques_UsadosXFecha.Designer.vb">
+      <DependentUpon>Listado_Echeques_UsadosXFecha.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\Listado_Echeques_UsadosXFecha.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Listado_ECheques_Cargacheques.Designer.vb">
       <DependentUpon>Listado_ECheques_Cargacheques.vb</DependentUpon>
     </Compile>
@@ -800,6 +812,12 @@
       <DependentUpon>ListadoCtaCtePrvSelectivoPrueba.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\ReporteEchequesSinUsar.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteEchequesSinUsar.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\ReporteImpcybnetResumidoParaExcel.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -866,6 +884,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReporteImputa2netExportacionExcel.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ReporteListadoEchequesUsadosAFecha.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteListadoEchequesUsadosAFecha.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\Reporte_InformeSinFacturasRegistradas.vb">
@@ -1250,6 +1274,12 @@
     <EmbeddedResource Include="Listados\ListadoValoresEnCarteraCuit.resx">
       <DependentUpon>ListadoValoresEnCarteraCuit.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Listado_ECheques_SinUsar.resx">
+      <DependentUpon>Listado_ECheques_SinUsar.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Listado_Echeques_UsadosXFecha.resx">
+      <DependentUpon>Listado_Echeques_UsadosXFecha.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Listado_ECheques_Cargacheques.resx">
       <DependentUpon>Listado_ECheques_Cargacheques.vb</DependentUpon>
     </EmbeddedResource>
@@ -1410,6 +1440,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ListadoCtaCtePrvSelectivoPrueba1.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ReporteEchequesSinUsar.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteEchequesSinUsar.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\ReporteImpcybnetResumidoParaExcel.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteImpcybnetResumidoParaExcel.vb</LastGenOutput>
@@ -1449,6 +1483,10 @@
     <EmbeddedResource Include="Reportes\ReporteImputa2netExportacionExcel.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteImputa2netExportacionExcel.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ReporteListadoEchequesUsadosAFecha.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteListadoEchequesUsadosAFecha.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Reporte_InformeSinFacturasRegistradas.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

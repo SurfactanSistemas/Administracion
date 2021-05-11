@@ -137,6 +137,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Sistema Solicitud Fondos\Sistema_Solicitud_Fondos\Sistema_Solicitud_Fondos\Sistema_Solicitud_Fondos.vbproj">
+      <Project>{15e68989-1893-44cb-b220-17ab73b4626c}</Project>
+      <Name>Sistema_Solicitud_Fondos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Util\Util\Util.vbproj">
       <Project>{cc5d60fd-9755-4c61-b96c-f56173586bb9}</Project>
       <Name>Util</Name>

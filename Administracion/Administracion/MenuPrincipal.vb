@@ -406,4 +406,16 @@ Public Class MenuPrincipal
             .Show(Me)
         End With
     End Sub
+
+    Private Sub ListadoEChequesSinUsarToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ListadoEChequesSinUsarToolStripMenuItem.Click
+        With New Listado_ECheques_SinUsar
+            .Show(Me)
+        End With
+    End Sub
+
+    Private Sub ListadoEChequesUtilizadosAFechaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ListadoEChequesUtilizadosAFechaToolStripMenuItem.Click
+        With New Listado_Echeques_UsadosXFecha
+            .Show(Me)
+        End With
+    End Sub
 End Class

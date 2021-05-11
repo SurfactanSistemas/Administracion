@@ -55,7 +55,6 @@ Public Class Depositos
         '
         Try
             If _ExisteDeposito(txtNroDeposito.Text) Then
-                MsgBox("Ya existe un Deposito con este número. No se puede actualizar los datos del mismo.", MsgBoxStyle.Exclamation)
                 Return False
             End If
         Catch ex As Exception
@@ -787,6 +786,16 @@ Public Class Depositos
 
             btnLimpiar_Click(sender, e)
         Else
+            Try
+                If _ExisteDeposito(txtNroDeposito.Text) Then
+                    If MsgBox("Ya existe un Deposito con este número. No se puede actualizar los datos del mismo." & vbCrLf & "¿Desea reimprimir el informe?", vbYesNo) = vbYes Then
+                        _ImprimirDeposito()
+                    End If
+                End If
+            Catch ex As Exception
+               
+            End Try
+
             txtNroDeposito.Focus()
         End If
     End Sub

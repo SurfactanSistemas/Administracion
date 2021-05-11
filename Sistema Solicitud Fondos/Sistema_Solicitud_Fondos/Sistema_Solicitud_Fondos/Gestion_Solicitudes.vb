@@ -14,6 +14,7 @@ Public Class Gestion_Solicitudes : Implements IActualizaSolicitudes, IContraseñ
     Private Sub Gestion_Solicitudes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         CargarGrilla()
         Marcar_VistosPopup()
+        TopMost = True
     End Sub
 
     Private Sub CargarGrilla()

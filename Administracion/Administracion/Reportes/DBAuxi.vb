@@ -1,8 +1,12 @@
 ﻿
 
 Partial Public Class DBAuxi
-    Partial Class _tablaChequesEliminadosDataTable
+    Partial Class EChequesSinUsarAFechaDataTable
+
+
+      
 
     End Class
 
+  
 End Class

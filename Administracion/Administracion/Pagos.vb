@@ -4748,6 +4748,8 @@ Public Class Pagos
                             WImpre2(Impre2, 1) = .Cells(1).Value
                         End If
 
+                        WImpre2(Impre2, 0) = .Cells(0).Value
+
                         WImpre2(Impre2, 2) = .Cells(4).Value
                         WImpre2(Impre2, 3) = .Cells(5).Value
                         WImpre2(Impre2, 4) = .Cells(2).Value
@@ -4778,7 +4780,7 @@ Public Class Pagos
         End If
 
         ' ACA IMPRIMIR ORDEN DE PAGO.
-        Dim WFecha1, WNumero1, WComprobante1, WDescripcion1, WNumero2, WBanco2, WFecha2 As String
+        Dim WFecha1, WNumero1, WComprobante1, WDescripcion1, WNumero2, WBanco2, WFecha2, WTipo2 As String
         Dim WImporte1, WImporte2 As Double
         Dim Tabla As New DataTable("Detalles")
         Dim row As DataRow
@@ -4802,6 +4804,7 @@ Public Class Pagos
             WBanco2 = ""
             WImporte2 = 0
             WFecha2 = ""
+            Wtipo2 = ""
 
             WRenglon += 1
 
@@ -4814,6 +4817,7 @@ Public Class Pagos
             End If
 
             If Val(WImpre2(WCiclo, 3)) <> 0 Then
+                Wtipo2 = WImpre2(WCiclo, 0)
                 WNumero2 = WImpre2(WCiclo, 1)
                 WBanco2 = WImpre2(WCiclo, 2)
                 WImporte2 = Val(formatonumerico(WImpre2(WCiclo, 3)))
@@ -4848,6 +4852,7 @@ Public Class Pagos
                 .Item("Empresa") = WEmpresa '"Surfactan S.A."
                 .Item("Cuit") = XEmpCuit
                 .Item("Paridad") = Val(formatonumerico(XParidadTotal))
+                .Item("Tipo2") = WTipo2
 
             End With
 
@@ -4881,6 +4886,7 @@ Public Class Pagos
                     .Item("Empresa") = WEmpresa '"Surfactan S.A."
                     .Item("Cuit") = XEmpCuit
                     .Item("Paridad") = Val(formatonumerico(XParidadTotal))
+                    .Item("Tipo2") = WTipo2
                 End With
 
                 Tabla.Rows.Add(row)
@@ -6666,6 +6672,7 @@ Public Class Pagos
             .Columns.Add("Empresa")
             .Columns.Add("Cuit")
             .Columns.Add("Paridad").DataType = Type.GetType("System.Double")
+            .Columns.Add("Tipo2")
         End With
     End Sub
 

@@ -25,8 +25,9 @@ Partial Class Form1
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.btn_Aceptar = New System.Windows.Forms.Button()
+        Me.btn_Cerrar = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
+        Me.btn_Abrir = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -37,8 +38,9 @@ Partial Class Form1
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(361, 49)
+        Me.Panel1.Size = New System.Drawing.Size(481, 60)
         Me.Panel1.TabIndex = 4
         '
         'Label2
@@ -48,9 +50,10 @@ Partial Class Form1
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label2.Location = New System.Drawing.Point(195, 14)
+        Me.Label2.Location = New System.Drawing.Point(260, 17)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(155, 20)
+        Me.Label2.Size = New System.Drawing.Size(192, 25)
         Me.Label2.TabIndex = 0
         Me.Label2.Text = "SURFACTAN S.A."
         '
@@ -61,40 +64,56 @@ Partial Class Form1
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label1.Location = New System.Drawing.Point(18, 17)
+        Me.Label1.Location = New System.Drawing.Point(24, 21)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(70, 15)
+        Me.Label1.Size = New System.Drawing.Size(84, 18)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "INFORME"
         '
-        'btn_Aceptar
+        'btn_Cerrar
         '
-        Me.btn_Aceptar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btn_Aceptar.Location = New System.Drawing.Point(114, 211)
-        Me.btn_Aceptar.Name = "btn_Aceptar"
-        Me.btn_Aceptar.Size = New System.Drawing.Size(136, 51)
-        Me.btn_Aceptar.TabIndex = 7
-        Me.btn_Aceptar.Text = "ACEPTAR"
-        Me.btn_Aceptar.UseVisualStyleBackColor = True
+        Me.btn_Cerrar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btn_Cerrar.Location = New System.Drawing.Point(239, 260)
+        Me.btn_Cerrar.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btn_Cerrar.Name = "btn_Cerrar"
+        Me.btn_Cerrar.Size = New System.Drawing.Size(181, 63)
+        Me.btn_Cerrar.TabIndex = 7
+        Me.btn_Cerrar.Text = "CERRAR"
+        Me.btn_Cerrar.UseVisualStyleBackColor = True
         '
         'Label3
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(20, 75)
+        Me.Label3.Location = New System.Drawing.Point(27, 92)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(320, 111)
+        Me.Label3.Size = New System.Drawing.Size(393, 138)
         Me.Label3.TabIndex = 6
         Me.Label3.Text = "SE DETECTARON" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & " SOLICITUDES DE" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FONDOS  NUEVAS"
         '
+        'btn_Abrir
+        '
+        Me.btn_Abrir.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btn_Abrir.Location = New System.Drawing.Point(35, 260)
+        Me.btn_Abrir.Margin = New System.Windows.Forms.Padding(4)
+        Me.btn_Abrir.Name = "btn_Abrir"
+        Me.btn_Abrir.Size = New System.Drawing.Size(181, 63)
+        Me.btn_Abrir.TabIndex = 13
+        Me.btn_Abrir.Text = "ABRIR"
+        Me.btn_Abrir.UseVisualStyleBackColor = True
+        '
         'Form1
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(361, 284)
-        Me.Controls.Add(Me.btn_Aceptar)
+        Me.ClientSize = New System.Drawing.Size(481, 350)
+        Me.Controls.Add(Me.btn_Abrir)
+        Me.Controls.Add(Me.btn_Cerrar)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Panel1)
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "Form1"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Panel1.ResumeLayout(False)
@@ -106,7 +125,8 @@ Partial Class Form1
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents btn_Aceptar As System.Windows.Forms.Button
+    Friend WithEvents btn_Cerrar As System.Windows.Forms.Button
     Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents btn_Abrir As System.Windows.Forms.Button
 
 End Class

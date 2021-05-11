@@ -85,16 +85,11 @@ Public Class Login
                 End With
             Else
                 If PermisoSistemaSolicitud = "S" Then
-                    If PermitirGestion = "" Then
-                        With New Gestion_Solicitudes
-                            .Show()
-                        End With
-                    Else
-                        With New AutoGestionSolicitudes
-                            .Show()
-                        End With
-                    End If
-                    
+
+                    With New Gestion_Solicitudes
+                        .Show()
+                    End With
+
                 Else
                     With New AutoGestionSolicitudes
                         .Show()

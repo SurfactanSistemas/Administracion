@@ -108,12 +108,38 @@ Public Class Listado_ECheques_Cargacheques
         If Wowner IsNot Nothing Then
             With dvg_ECheques.CurrentRow
                 .DefaultCellStyle.BackColor = Color.DarkCyan
-                Wowner.PasaECheques(.Cells("NroCheque").Value, .Cells("FechaPago").Value, .Cells("BancoEmisor").Value, .Cells("Importe").Value, .Cells("Clave").Value)
+                Dim WBancoEmisor As String = Trim(.Cells("BancoEmisor").Value)
+                If WBancoEmisor.Length > 24 Then
+                    WBancoEmisor = Microsoft.VisualBasic.Left(WBancoEmisor, 24)
+                    WBancoEmisor = _GenerarCodigoBanco(WBancoEmisor)
+                Else
+                    WBancoEmisor = _GenerarCodigoBanco(WBancoEmisor)
+                End If
+                Wowner.PasaECheques(.Cells("NroCheque").Value, .Cells("FechaPago").Value, WBancoEmisor, .Cells("Importe").Value, .Cells("Clave").Value)
             End With
 
         End If
     End Sub
 
+    Private Function _GenerarCodigoBanco(ByVal ZBanco As String) As String
+        If WCuit <> "" Then
+
+            Dim Cuit As String = Microsoft.VisualBasic.Left(WCuit, 2) & "-" & Mid(WCuit, 3, 8) & "-" & Microsoft.VisualBasic.Right(WCuit, 1)
+
+            Dim SQLCnslt As String = "SELECT Cliente FROM Cliente WHERE Cuit = '" & Cuit & "'"
+            Dim rowCliente As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+
+            If rowCliente IsNot Nothing Then
+                If ZBanco.Trim = "" Then Return ""
+
+                ZBanco = ZBanco.Split("/")(0) ' Agarramos el nombre del banco, sin el cod del cliente.
+
+                Return ZBanco & "/" & Mid(rowCliente.Item("Cliente"), 1, 1) & Val(Mid(rowCliente.Item("Cliente"), 2, 6)).ToString()
+            End If
+
+        End If
+        
+    End Function
 
     Private Sub dvg_ECheques_SortCompare(sender As Object, e As DataGridViewSortCompareEventArgs) Handles dvg_ECheques.SortCompare
         Dim num1, num2
