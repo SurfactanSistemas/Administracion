@@ -20,7 +20,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
 
     Private Sub _CargarProveedoresPreCargados()
         Dim cn = New SqlConnection()
-        Dim cm = New SqlCommand("SELECT ps.Proveedor, ps.FechaOrd, p.Nombre, ps.Observaciones, ps.Desde, ps.Hasta, ps.EnviarAvisoOp FROM ProveedorSelectivo as ps, Proveedor as p WHERE ps.Fecha = '" & txtFechaPago.Text & "' AND ps.Proveedor = p.Proveedor")
+        Dim cm = New SqlCommand("SELECT DISTINCT ps.Proveedor, ps.FechaOrd, p.Nombre, ps.Observaciones, ps.Desde, ps.Hasta, ps.EnviarAvisoOp FROM ProveedorSelectivo as ps, Proveedor as p WHERE ps.Fecha = '" & txtFechaPago.Text & "' AND ps.Proveedor = p.Proveedor")
         Dim dr As SqlDataReader
         Dim WObservaciones = ""
 
@@ -218,9 +218,6 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
 
     Private Sub _GuardarProveedores()
         Dim ZSql, WProveedor, WFecha, WFechaOrd, WObservaciones, WDesde, WHasta
-        Dim cn As New SqlConnection()
-        Dim cm As New SqlCommand()
-        Dim trans As SqlTransaction = Nothing
 
         If GRilla.Rows.Count > 0 Then
 
@@ -228,7 +225,13 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
                 Throw New Exception("Debe colocar la fecha para la cual se está preparando el listado.")
             End If
 
-            SQLConnector.conexionSql(cn, cm)
+            WFecha = txtFechaPago.Text 'Date.Now.ToString("dd/MM/yyyy")
+            WFechaOrd = ordenaFecha(WFecha)
+
+            WDesde = txtDesde.Text
+            WHasta = txtHasta.Text
+
+            Dim WSqls As New List(Of String)
 
             For Each row As DataGridViewRow In GRilla.Rows
 
@@ -237,44 +240,17 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
                         If Trim(.Cells(0).Value) <> "" Then
 
                             WProveedor = Trim(.Cells(0).Value)
-                            WFecha = txtFechaPago.Text 'Date.Now.ToString("dd/MM/yyyy")
-                            WFechaOrd = ordenaFecha(WFecha)
                             WObservaciones = IIf(IsNothing(.Cells(2).Value), "", .Cells(2).Value)
                             Dim WEnviarAviso = OrDefault(.Cells("EnviarAviso").Value, "X")
-                            WDesde = txtDesde.Text
-                            WHasta = txtHasta.Text
 
-                            If Not _ExisteProveedorCargado(WProveedor, WFecha) Then
+                            WSqls.Add("DELETE FROM ProveedorSelectivo WHERE Fecha = '" & WFecha & "' And Proveedor = '" & WProveedor & "'")
 
-                                ZSql = ""
-                                ZSql &= "INSERT INTO ProveedorSelectivo "
-                                ZSql &= "(Proveedor, Fecha, FechaOrd, Observaciones, Desde, Hasta, EnviarAvisoOp) "
-                                ZSql &= "VALUES ('" & WProveedor & "', '" & WFecha & "', '" & WFechaOrd & "', '" & WObservaciones & "', '" & WDesde & "', '" & WHasta & "', '" & WEnviarAviso & "') "
+                            ZSql = ""
+                            ZSql &= "INSERT INTO ProveedorSelectivo "
+                            ZSql &= "(Proveedor, Fecha, FechaOrd, Observaciones, Desde, Hasta, EnviarAvisoOp) "
+                            ZSql &= "VALUES ('" & WProveedor & "', '" & WFecha & "', '" & WFechaOrd & "', '" & WObservaciones & "', '" & WDesde & "', '" & WHasta & "', '" & WEnviarAviso & "') "
 
-                            Else
-
-                                ZSql = ""
-                                ZSql &= "UPDATE ProveedorSelectivo "
-                                ZSql &= "SET Observaciones = '" & WObservaciones & "', Desde = '" & WDesde & "', Hasta = '" & WHasta & "', EnviarAvisoOp = '" & WEnviarAviso & "' "
-                                ZSql &= " WHERE Proveedor = '" & WProveedor & "' And Fecha = '" & WFecha & "' "
-
-                            End If
-
-                            Try
-                                'cn.Open()
-                                cm.CommandText = ZSql
-                                cm.ExecuteNonQuery()
-
-                            Catch ex As Exception
-                                If Not IsNothing(trans) Then
-                                    trans.Rollback()
-                                End If
-                                Throw New Exception(ex.Message)
-                            Finally
-                                'cn.Close()
-
-                            End Try
-
+                            WSqls.Add(ZSql)
 
                         End If
                     End With
@@ -282,45 +258,13 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
 
             Next
 
-            If cn.State = 1 Then
-                Try
-                    trans.Commit()
-                    cn.Close()
-                Catch ex As Exception
-
-                End Try
+            If WSqls.Count > 0 Then
+                Util.Clases.Query.ExecuteNonQueries("SurfactanSa", WSqls.ToArray)
             End If
+
         End If
 
     End Sub
-
-    Private Function _ExisteProveedorCargado(ByVal WProv As String, ByVal WFecha As String) As Boolean
-
-        Dim cn = New SqlConnection()
-        Dim cm = New SqlCommand("SELECT Proveedor, Fecha FROM ProveedorSelectivo WHERE Proveedor = '" & WProv & "' AND Fecha = '" & WFecha & "'")
-        Dim dr As SqlDataReader
-
-        Try
-
-            cn.ConnectionString = _ConectarA
-            cn.Open()
-            cm.Connection = cn
-
-            dr = cm.ExecuteReader()
-
-            Return dr.HasRows
-
-        Catch ex As Exception
-            Throw New Exception("Hubo un problema al querer consultar la preexistencia del Proveedor desde la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
-        Finally
-
-            dr = Nothing
-            cn.Close()
-            cn = Nothing
-            cm = Nothing
-
-        End Try
-    End Function
 
     Private Sub btnAcepta_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAcepta.Click
         Try
