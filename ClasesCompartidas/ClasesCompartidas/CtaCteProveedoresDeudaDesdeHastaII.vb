@@ -32,8 +32,8 @@
         nroInterno = nroInterno2
         Clave = clave2
         Proveedor = proveedor2
-        pago = pago2
-        paridad = paridad2
+        pago = CInt(pago2)
+        paridad = CInt(paridad2)
     End Sub
 
 End Class

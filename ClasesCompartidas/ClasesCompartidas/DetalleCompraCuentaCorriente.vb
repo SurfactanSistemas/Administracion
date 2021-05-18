@@ -1,6 +1,7 @@
 ﻿Public Class DetalleCompraCuentaCorriente
     Public tipo, punto, numero, letra, fecha, impresion As String
-    Public saldo, total, paridad As Double
+    Public saldo As String
+    Public total, paridad As Double
     Public numInterno, pago As Integer
     Public proveedor As Proveedor
 
@@ -13,26 +14,15 @@
         numero = nro
         letra = letraString
         fecha = fechaString
-        saldo = restante
+        saldo = restante.ToString
         total = valorTotal
-        numInterno = interno
+        numInterno = CInt(interno)
         proveedor = prov
         pago = pago2
         paridad = paridad2
     End Sub
 
-    Public Function igualA(ByVal cuenta As DetalleCompraCuentaCorriente)
-        Return tipo = cuenta.tipo And
-            punto = cuenta.punto And
-            numero = cuenta.numero And
-            letra = cuenta.letra And
-            fecha = cuenta.fecha And
-            saldo = cuenta.saldo And
-            numInterno = cuenta.numInterno And
-            codigoProveedor() = cuenta.codigoProveedor
-    End Function
-
-    Public Function codigoProveedor()
+    Public Function codigoProveedor() As String
         If IsNothing(proveedor) Then
             Return ""
         End If
@@ -40,28 +30,28 @@
     End Function
 
     Public Overrides Function ToString() As String
-        Return impresion & " - " & letra & " - " & punto & " - " & numero & " - " & fecha & " - " & asDoubleString(saldo).PadLeft(10, "_")
+        Return impresion & " - " & letra & " - " & punto & " - " & numero & " - " & fecha & " - " & asDoubleString(saldo).PadLeft(10, CType("_", Char))
     End Function
 
-    Private Function asDoubleString(ByVal value) As String
+    Private Function asDoubleString(ByVal value As String) As String
         Dim originalString As String = value.ToString
         If originalString.IndexOf(",") = -1 Then
-            Return originalString & "," & "".PadLeft(2, "0")
+            Return originalString & "," & "".PadLeft(2, CType("0", Char))
         Else
             Dim difference As Integer = originalString.Count - originalString.IndexOf(",") - 1
             If difference < 2 Then
-                Return originalString & "".PadLeft(2 - difference, "0")
+                Return originalString & "".PadLeft(2 - difference, CType("0", Char))
             End If
         End If
         Return originalString
         Return value.ToString
     End Function
 
-    Public Function esClausulaDolar()
+    Public Function esClausulaDolar() As Boolean
         Return pago = 2
     End Function
 
-    Public Function montoDolar()
-        Return saldo / paridad
+    Public Function montoDolar() As Double
+        Return Val(saldo) / paridad
     End Function
 End Class

@@ -26,52 +26,8 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
     End Sub
 
     Private Sub _CargarProveedoresPreCargados()
-        Dim _Proveedores As New List(Of Object)
-        'Dim _CargadosHaceMasDeUnaSemana As Integer = 0
-        'Dim _FechaLimite As String = _DeterminarFechaLimite()
-
-        GRilla.DataSource = GetAll("SELECT ps.Proveedor, p.Nombre, ps.EnviarAvisoOp FROM ProveedorSelectivo ps INNER JOIN Proveedor p ON p.Proveedor = ps.Proveedor WHERE ps.Fecha = '" & txtFechaEmision.Text & "' ORDER BY p.Nombre")
-
-        Exit Sub
-
-        Dim cn = New SqlConnection()
-        Dim cm = New SqlCommand("SELECT Proveedor, FechaOrd, EnviarAvisoOp FROM ProveedorSelectivo WHERE Fecha = '" & txtFechaEmision.Text & "'")
-        Dim dr As SqlDataReader
-
-        SQLConnector.conexionSql(cn, cm)
-
-        Try
-
-            GRilla.Rows.Clear()
-            dr = cm.ExecuteReader()
-
-            If dr.HasRows Then
-
-                Do While dr.Read()
-
-                    _Proveedores.Add({dr.Item("Proveedor"), dr.Item("FechaOrd")})
-
-                Loop
-                'Else
-                'MsgBox("No hay proveedores que listar.", MsgBoxStyle.Information)
-            End If
-
-        Catch ex As Exception
-            MsgBox("Hubo un problema al querer consultar los Proveedores Selectivos precargados en la Base de Datos.", MsgBoxStyle.Critical)
-        Finally
-
-            dr = Nothing
-            cn.Close()
-            cn = Nothing
-            cm = Nothing
-
-        End Try
-
-        For Each _Proveedor As Object In _Proveedores
-            _CargarProveedor(DAOProveedor.buscarProveedorPorCodigo(_Proveedor(0)))
-        Next
-
-        GRilla.Sort(GRilla.Columns(1), ListSortDirection.Ascending)
+        
+        GRilla.DataSource = GetAll("SELECT DISTINCT ps.Proveedor, p.Nombre, ps.EnviarAvisoOp FROM ProveedorSelectivo ps INNER JOIN Proveedor p ON p.Proveedor = ps.Proveedor WHERE ps.Fecha = '" & txtFechaEmision.Text & "' ORDER BY p.Nombre")
 
     End Sub
 
@@ -80,21 +36,20 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
             MsgBox("Proveedor incorrecto")
         Else
 
-
             If txtFechaEmision.Text.Replace(" ", "").Length < 10 Then
                 MsgBox("Debe indicarse una fecha de Pago antes de cargar un Proveedor.", MsgBoxStyle.Exclamation)
                 txtFechaEmision.Focus()
                 Exit Sub
             End If
 
-            If TryCast(GRilla.DataSource, DataTable) IsNot Nothing Then GRilla.DataSource = Nothing
-
-            varRenglon = GRilla.Rows.Add()
-            GRilla.Item(0, varRenglon).Value = CampoProveedor.id
-            GRilla.Item(1, varRenglon).Value = CampoProveedor.razonSocial
-
-            GRilla.CommitEdit(DataGridViewDataErrorContexts.Commit)
-            GRilla.CurrentCell = GRilla(0, 0)
+            With GRilla
+                If TryCast(.DataSource, DataTable) IsNot Nothing Then .DataSource = Nothing
+                varRenglon = .Rows.Add()
+                .Item(0, varRenglon).Value = CampoProveedor.id
+                .Item(1, varRenglon).Value = CampoProveedor.razonSocial
+                .CommitEdit(DataGridViewDataErrorContexts.Commit)
+                .CurrentCell = GRilla(0, 0)
+            End With
 
             txtDesdeProveedor.Text = ""
             txtRazon.Text = ""
@@ -432,15 +387,9 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Pantalla
     End Enum
 
-    Private Sub _Imprimir(ByVal TipoImpresion As Reporte)
-
-        Dim ds As New DBAuxi
+    Private Sub _Imprimir()
 
         Dim WTabla As DataTable = New DBAuxi.impCtaCtePrvNetDataTable 'ds.Tables("impCtaCtePrvNet")
-
-        Dim txtUno, txtDos As String
-        Dim txtFormula As String
-        Dim x As Char = Chr(34)
 
         Dim WOrden = 0
         Dim txtEmpresa As String
@@ -459,16 +408,6 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Dim varPago, varEmpresa As Integer
         Dim varAcumulaNeto, varAcumulaNetoII, varAcumulaIva, varPesosOrig, varDifCambio, AcumPesosOrig, AcumPesosOrigII, AcumDifCambio As Double
         Dim varRetIbI, varRetIbII As Double
-        Dim varTipoDolar As Integer
-
-        'Try
-
-        '    _LimpiarImpCtaCtePrvNet()
-
-        'Catch ex As Exception
-        '    MsgBox(ex.Message)
-        '    Exit Sub
-        'End Try
 
         txtEmpresa = "Surfactan S.A."
         varEmpresa = 1
@@ -1259,7 +1198,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
     End Sub
 
     Private Sub BackgroundWorker1_DoWork(sender As Object, e As DoWorkEventArgs) Handles BackgroundWorker1.DoWork
-        _Imprimir(WTipoSalida)
+        _Imprimir()
     End Sub
 
     Private Sub BackgroundWorker1_ProgressChanged(sender As Object, e As ProgressChangedEventArgs) Handles BackgroundWorker1.ProgressChanged

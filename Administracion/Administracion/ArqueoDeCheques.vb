@@ -163,6 +163,8 @@ Public Class ArqueoDeCheques: implements IArqueoCheques
         If fechaOrd > RangoFechas(8, 1) Then
             Return {Label16.Text, 8}
         End If
+
+        Return {"", -1}
     End Function
     Private Sub RecuperarDatosRegistroCheques(Optional ByVal Traer As Boolean = False)
         Dim SQLCnslt As String

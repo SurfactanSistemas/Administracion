@@ -35,8 +35,8 @@ Public Class ProcesoCiti
         Dim VectorII(10000, 21) As String
         Dim WIndice = 0, WIndice2 = 0
         Dim WDestino, nombreArchivo2 As String
-        Dim escritor As System.IO.StreamWriter
-        Dim escritor2 As System.IO.StreamWriter
+        Dim escritor As System.IO.StreamWriter = Nothing
+        Dim escritor2 As System.IO.StreamWriter = Nothing
 
         ProgressBar1.Value = 0
         GroupBox1.Visible = True
@@ -170,6 +170,21 @@ Public Class ProcesoCiti
             Dim WDespacho, WLetra, WTipo, WPunto, WNumero, WProveedor, WNeto, WExento, WIva5, WIva21, WIva27, WIva105, WIb, WNroInterno As String
             Dim WImpre = ""
             Dim WIvaCompAdicional As DataTable
+
+            WDespacho = ""
+            WLetra = ""
+            WTipo = ""
+            WPunto = ""
+            WNumero = ""
+            WProveedor = ""
+            WNeto = ""
+            WExento = ""
+            WIva5 = ""
+            WIva21 = ""
+            WIva27 = ""
+            WIva105 = ""
+            WIb = ""
+            WNroInterno = ""
 
             WIndice2 = 0
 

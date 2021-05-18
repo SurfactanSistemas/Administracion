@@ -1827,7 +1827,7 @@ Public Class PagosVirtual
     End Function
 
     Private Sub btnAgregar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAgregar.Click
-        Dim XParidad, WEntra
+        Dim XParidad
         Dim XOrden, XRenglon, XProveedor, XFecha, XFechaOrd, XImporte, XRetencion, XRetotra, XRetIbCiudad, XRetIva, XObservaciones, XCuenta, XTipoOrd, XTipo1, XLetra1, XPunto1, XNumero1, XImporte1, XObservaciones2, XImpoNeto, XTipo2, XNumero2, XFecha2, XFechaOrd2, XBanco2, XImporte2, XEmpresa, XClave, XRetganancias, XConcepto, XConsecionaria, XImpolist, XCuit, ImporteCheque, NumeroCheque, FechaCheque, BancoCheque, WLetra, WTipo, WPunto, WNumero, ZSql, XClaveCtaprv, XTipoRecibo, XClaveRecibo, XClaveCtaCte
         Dim _banco As Banco = Nothing
         Dim cn = New SqlConnection()
@@ -2539,6 +2539,13 @@ Public Class PagosVirtual
             cn.Open()
             cm.CommandText = "SELECT * FROM Proveedor WHERE Proveedor = '" & txtProveedor.Text & "'"
             Dim _TipoProv, _TipoIva, _TipoIb, _TipoIbCaba, _PorceIb, _PorceIbCaba As String
+
+            _TipoProv = ""
+            _TipoIva = ""
+            _TipoIb = ""
+            _TipoIbCaba = ""
+            _PorceIb = ""
+            _PorceIbCaba = ""
 
             Using dr As SqlDataReader = cm.ExecuteReader
 
@@ -4443,7 +4450,7 @@ Public Class PagosVirtual
         Dim WEmpCuit = "30-54916508-3"
         Dim WNroIb = "902-913585-2"
         Dim ImpreCopia(2) As String
-        Dim WLetra, WTipo, WPunto, WNumero, WImporte, ZZClaveCtaCtePrv, XImpre1, XImpre2, XImpre3, WPrvDireccion, WPrvCuit, WPrvIb
+        Dim WLetra, WTipo, WPunto, WNumero, WImporte, ZZClaveCtaCtePrv, XImpre1, XImpre2, XImpre3, WPrvDireccion, WPrvCuit, WPrvIb As String
         Dim WBruto, WNeto, WReteIva
         Dim WCategoria
         Dim WRenglon = 0
@@ -4451,6 +4458,18 @@ Public Class PagosVirtual
         Dim cn = New SqlConnection()
         Dim cm = New SqlCommand("SELECT Direccion, Cuit, NroIb, CodIb, CodIbCaba, Iva, Tipo, PorceIb, PorceIbCaba FROM Proveedor WHERE Proveedor = '" & Trim(txtProveedor.Text) & "'")
         Dim dr As SqlDataReader
+
+        WLetra = ""
+        WTipo = ""
+        WPunto = ""
+        WNumero = ""
+        ZZClaveCtaCtePrv = ""
+        XImpre1 = ""
+        XImpre2 = ""
+        XImpre3 = ""
+        WPrvDireccion = ""
+        WPrvCuit = ""
+        WPrvIb = ""
 
         ' CAMBIAMOS INFORMACION EMPRESA SEGUN SEA O NO PELLITAL
         If _EsPellital() Then
@@ -4786,14 +4805,16 @@ Public Class PagosVirtual
         Dim Tabla As New DataTable("Detalles")
         Dim row As DataRow
         Dim crdoc As ReportDocument = New OrdenPagoComprobanteIBCABA
-        Dim WTipoIbCaba, WTipoiva, WPorceIbCaba As String
+        Dim ZTipoIbCaba As String = ""
+        Dim ZTipoiva As String = ""
+        Dim ZPorceIbCaba As String = ""
         Dim WEmpNombre = "SURFACTAN S.A."
         Dim WEmpDireccion = "Malvinas Argentinas 4589"
         Dim WEmpLocalidad = "1644 Victoria Bs.As. Argentina"
         Dim WEmpCuit = "30-54916508-3"
         Dim WNroIb = "902-913585-2"
         Dim ImpreCopia(2) As String
-        Dim WLetra, WTipo, WPunto, WNumero, ZZClaveCtaCtePrv, XImpre1, XImpre2, XImpre3, XImpre4, WImpre4, WPrvDireccion, WPrvCuit, WPrvIb
+        Dim WLetra, WTipo, WPunto, WNumero, ZZClaveCtaCtePrv, XImpre1, XImpre2, XImpre3, XImpre4, WImpre4, WPrvDireccion, WPrvCuit, WPrvIb As String
         Dim WCategoria, WPorce1 As String
         Dim WImpoRetenido As Double
         Dim WRete As Double
@@ -4802,6 +4823,20 @@ Public Class PagosVirtual
         Dim cn = New SqlConnection()
         Dim cm = New SqlCommand("SELECT Direccion, Cuit, NroIb, CodIb, CodIbCaba, Iva, Tipo, PorceIb, PorceIbCaba FROM Proveedor WHERE Proveedor = '" & Trim(txtProveedor.Text) & "'")
         Dim dr As SqlDataReader
+
+        WLetra = ""
+        WTipo = ""
+        WPunto = ""
+        WNumero = ""
+        ZZClaveCtaCtePrv = ""
+        XImpre1 = ""
+        XImpre2 = ""
+        XImpre3 = ""
+        XImpre4 = ""
+        WImpre4 = ""
+        WPrvDireccion = ""
+        WPrvCuit = ""
+        WPrvIb = ""
 
         ' CAMBIAMOS INFORMACION EMPRESA SEGUN SEA O NO PELLITAL
         If _EsPellital() Then
@@ -4826,9 +4861,9 @@ Public Class PagosVirtual
                     WPrvCuit = .Item("Cuit")
                     WPrvIb = .Item("NroIb")
                     WTipoIb = .Item("CodIb")
-                    WTipoIbCaba = .Item("CodIbCaba")
-                    WTipoiva = Val(.Item("Iva"))
-                    WPorceIbCaba = IIf(IsDBNull(.Item("PorceIbCaba")), "0", .Item("PorceIbCaba"))
+                    ZTipoIbCaba = .Item("CodIbCaba")
+                    ZTipoiva = Val(.Item("Iva"))
+                    ZPorceIbCaba = IIf(IsDBNull(.Item("PorceIbCaba")), "0", .Item("PorceIbCaba"))
 
                 End If
             End With
@@ -4847,11 +4882,11 @@ Public Class PagosVirtual
             With _ProvHist
                 If Val(.Item("RetencionesRegistradas")) = 1 Then
                     WTipoIb = .Item("TipoIb")
-                    WTipoIbCaba = .Item("TipoIbCaba")
-                    WTipoiva = Val(.Item("TipoIva"))
+                    ZTipoIbCaba = .Item("TipoIbCaba")
+                    ZTipoiva = Val(.Item("TipoIva"))
                     WPorceIb = formatonumerico(.Item("PorceIb"))
-                    WPorceIbCaba = formatonumerico(.Item("PorceIbCaba"))
-                    WPorceIbCaba = WPorceIbCaba.Replace(".", ",")
+                    ZPorceIbCaba = formatonumerico(.Item("PorceIbCaba"))
+                    ZPorceIbCaba = ZPorceIbCaba.Replace(".", ",")
                 End If
             End With
         End If
@@ -4942,16 +4977,16 @@ Public Class PagosVirtual
 
                 WImpre4 = Val(.Cells(4).Value)
 
-                If WTipoiva = 2 Then
+                If ZTipoiva = 2 Then
                     WImpre4 = WImpre4 / 1.21
                 End If
 
                 XImpre4 = WImpre4
 
-                If Val(WPorceIbCaba) <> 0 Then
-                    WRete = CDbl(XImpre4) * (CDbl(WPorceIbCaba) / 100)
+                If Val(ZPorceIbCaba) <> 0 Then
+                    WRete = CDbl(XImpre4) * (CDbl(ZPorceIbCaba) / 100)
                 Else
-                    If WTipoIbCaba = 3 Then
+                    If ZTipoIbCaba = 3 Then
                         WRete = CDbl(XImpre4) * (6 / 100)
                     Else
                         WRete = CDbl(XImpre4) * (6 / 100)
@@ -4960,18 +4995,18 @@ Public Class PagosVirtual
 
                 WImpoRetenido = WImpoRetenido + WRete
 
-                If WPorceIbCaba <> 0 Then
-                    WCategoria = "SUJETO A RETENCION " & WPorceIbCaba & "%"
+                If ZPorceIbCaba <> 0 Then
+                    WCategoria = "SUJETO A RETENCION " & ZPorceIbCaba & "%"
                 Else
-                    If WTipoIbCaba = 3 Then
+                    If ZTipoIbCaba = 3 Then
                         WCategoria = "SUJETO A RETENCION 6%"
                     Else
                         WCategoria = "SUJETO A RETENCION 6%"
                     End If
                 End If
 
-                If Val(WPorceIbCaba) <> 0 Then
-                    WPorce1 = WPorceIbCaba
+                If Val(ZPorceIbCaba) <> 0 Then
+                    WPorce1 = ZPorceIbCaba
                 Else
                     WPorce1 = 6
                 End If
@@ -5185,7 +5220,8 @@ Public Class PagosVirtual
         Dim Tabla As New DataTable("Detalles")
         Dim row As DataRow
         Dim crdoc As ReportDocument = New OrdenPagoComprobanteIB
-        Dim WTipoIb, WPorceIb As String
+        Dim ZTipoIb As String = ""
+        Dim ZPorceIb As String = ""
         Dim WEmpNombre = "SURFACTAN S.A."
         Dim WEmpDireccion = "Malvinas Argentinas 4589"
         Dim WEmpLocalidad = "1644 Victoria Bs.As. Argentina"
@@ -5201,6 +5237,20 @@ Public Class PagosVirtual
         Dim cn = New SqlConnection()
         Dim cm = New SqlCommand("SELECT Direccion, Cuit, NroIb, CodIb, CodIbCaba, Iva, Tipo, PorceIb, PorceIbCaba FROM Proveedor WHERE Proveedor = '" & Trim(txtProveedor.Text) & "'")
         Dim dr As SqlDataReader
+
+        WLetra = ""
+        WTipo = ""
+        WPunto = ""
+        WNumero = ""
+        ZZClaveCtaCtePrv = ""
+        XImpre1 = ""
+        XImpre2 = ""
+        XImpre3 = ""
+        XImpre4 = ""
+        WImpre4 = ""
+        WPrvDireccion = ""
+        WPrvCuit = ""
+        WPrvIb = ""
 
         ' CAMBIAMOS INFORMACION EMPRESA SEGUN SEA O NO PELLITAL
         If _EsPellital() Then
@@ -5224,10 +5274,10 @@ Public Class PagosVirtual
                     WPrvDireccion = .Item("Direccion")
                     WPrvCuit = .Item("Cuit")
                     WPrvIb = .Item("NroIb")
-                    WTipoIb = .Item("CodIb")
+                    ZTipoIb = .Item("CodIb")
                     WTipoIbCaba = .Item("CodIbCaba")
                     WTipoIva = Val(.Item("Iva"))
-                    WPorceIb = IIf(IsDBNull(.Item("PorceIb")), "0", .Item("PorceIb"))
+                    ZPorceIb = IIf(IsDBNull(.Item("PorceIb")), "0", .Item("PorceIb"))
 
                 End If
             End With
@@ -5245,12 +5295,12 @@ Public Class PagosVirtual
         If Not IsNothing(_ProvHist) Then
             With _ProvHist
                 If Val(.Item("RetencionesRegistradas")) = 1 Then
-                    WTipoIb = .Item("TipoIb")
+                    ZTipoIb = .Item("TipoIb")
                     WTipoIbCaba = .Item("TipoIbCaba")
                     WTipoIva = Val(.Item("TipoIva"))
-                    WPorceIb = formatonumerico(.Item("PorceIb"))
+                    ZPorceIb = formatonumerico(.Item("PorceIb"))
                     WPorceIbCaba = formatonumerico(.Item("PorceIbCaba"))
-                    WPorceIb = WPorceIb.Replace(".", ",")
+                    ZPorceIb = ZPorceIb.Replace(".", ",")
                 End If
             End With
         End If
@@ -5343,9 +5393,9 @@ Public Class PagosVirtual
                     XImpre4 = WImpre4
 
                     If Val(ZFechaCompa) >= 20071201 Then
-                        Select Case WTipoIb
+                        Select Case ZTipoIb
                             Case 0, 1
-                                WRete = CDbl(XImpre4) * (CDbl(WPorceIb) / 100)
+                                WRete = CDbl(XImpre4) * (CDbl(ZPorceIb) / 100)
                                 WImpoRetenido = WImpoRetenido + WRete
 
                                 WRenglon = WRenglon + 1
@@ -5372,9 +5422,9 @@ Public Class PagosVirtual
                                 row.Item("Tipo1") = XImpre1
                                 row.Item("Numero1") = XImpre2
                                 row.Item("Fecha1") = XImpre3
-                                row.Item("Categoria1") = IIf(Val(XImpre4) <> 0, "SUJETO A RETENCION " & CDbl(WPorceIb) & " %", "")
+                                row.Item("Categoria1") = IIf(Val(XImpre4) <> 0, "SUJETO A RETENCION " & CDbl(ZPorceIb) & " %", "")
                                 row.Item("Importe1") = CDbl(XImpre4)
-                                row.Item("Porce1") = IIf(Val(XImpre4) <> 0, CDbl(WPorceIb), 0)
+                                row.Item("Porce1") = IIf(Val(XImpre4) <> 0, CDbl(ZPorceIb), 0)
                                 row.Item("Retencion1") = WRete
 
                                 Tabla.Rows.Add(row)
@@ -5402,9 +5452,9 @@ Public Class PagosVirtual
                                     row.Item("Tipo1") = XImpre1
                                     row.Item("Numero1") = XImpre2
                                     row.Item("Fecha1") = XImpre3
-                                    row.Item("Categoria1") = IIf(Val(XImpre4) <> 0, "SUJETO A RETENCION " & CDbl(WPorceIb) & " %", "")
+                                    row.Item("Categoria1") = IIf(Val(XImpre4) <> 0, "SUJETO A RETENCION " & CDbl(ZPorceIb) & " %", "")
                                     row.Item("Importe1") = CDbl(XImpre4)
-                                    row.Item("Porce1") = IIf(Val(XImpre4) <> 0, CDbl(WPorceIb), 0)
+                                    row.Item("Porce1") = IIf(Val(XImpre4) <> 0, CDbl(ZPorceIb), 0)
                                     row.Item("Retencion1") = WRete
 
                                     Tabla.Rows.Add(row)
@@ -5412,9 +5462,9 @@ Public Class PagosVirtual
 
                         End Select
                     Else
-                        Select Case WTipoIb
+                        Select Case ZTipoIb
                             Case 0
-                                WPorceIb = "0,75"
+                                ZPorceIb = "0,75"
                                 WRete = Val(XImpre4) * (0.75 / 100)
                                 Call redondeo(WRete)
                                 WImpoRetenido = WImpoRetenido + WRete
@@ -5443,9 +5493,9 @@ Public Class PagosVirtual
                                 row.Item("Tipo1") = XImpre1
                                 row.Item("Numero1") = XImpre2
                                 row.Item("Fecha1") = XImpre3
-                                row.Item("Categoria1") = "SUJETO A RETENCION " & CDbl(WPorceIb) & " %"
+                                row.Item("Categoria1") = "SUJETO A RETENCION " & CDbl(ZPorceIb) & " %"
                                 row.Item("Importe1") = CDbl(XImpre4)
-                                row.Item("Porce1") = CDbl(WPorceIb)
+                                row.Item("Porce1") = CDbl(ZPorceIb)
                                 row.Item("Retencion1") = WRete
 
                                 Tabla.Rows.Add(row)
@@ -5473,16 +5523,16 @@ Public Class PagosVirtual
                                     row.Item("Tipo1") = XImpre1
                                     row.Item("Numero1") = XImpre2
                                     row.Item("Fecha1") = XImpre3
-                                    row.Item("Categoria1") = "SUJETO A RETENCION " & CDbl(WPorceIb) & " %"
+                                    row.Item("Categoria1") = "SUJETO A RETENCION " & CDbl(ZPorceIb) & " %"
                                     row.Item("Importe1") = CDbl(XImpre4)
-                                    row.Item("Porce1") = CDbl(WPorceIb)
+                                    row.Item("Porce1") = CDbl(ZPorceIb)
                                     row.Item("Retencion1") = WRete
 
                                     Tabla.Rows.Add(row)
                                 End If
 
                             Case Else
-                                WPorceIb = "1,75"
+                                ZPorceIb = "1,75"
                                 WRete = Val(XImpre4) * (1.75 / 100)
                                 Call redondeo(WRete)
                                 WImpoRetenido = WImpoRetenido + WRete
@@ -5511,9 +5561,9 @@ Public Class PagosVirtual
                                 row.Item("Tipo1") = XImpre1
                                 row.Item("Numero1") = XImpre2
                                 row.Item("Fecha1") = XImpre3
-                                row.Item("Categoria1") = "SUJETO A RETENCION " & CDbl(WPorceIb) & " %"
+                                row.Item("Categoria1") = "SUJETO A RETENCION " & CDbl(ZPorceIb) & " %"
                                 row.Item("Importe1") = CDbl(XImpre4)
-                                row.Item("Porce1") = CDbl(WPorceIb)
+                                row.Item("Porce1") = CDbl(ZPorceIb)
                                 row.Item("Retencion1") = WRete
 
                                 Tabla.Rows.Add(row)
@@ -5541,9 +5591,9 @@ Public Class PagosVirtual
                                     row.Item("Tipo1") = XImpre1
                                     row.Item("Numero1") = XImpre2
                                     row.Item("Fecha1") = XImpre3
-                                    row.Item("Categoria1") = "SUJETO A RETENCION " & CDbl(WPorceIb) & " %"
+                                    row.Item("Categoria1") = "SUJETO A RETENCION " & CDbl(ZPorceIb) & " %"
                                     row.Item("Importe1") = CDbl(XImpre4)
-                                    row.Item("Porce1") = CDbl(WPorceIb)
+                                    row.Item("Porce1") = CDbl(ZPorceIb)
                                     row.Item("Retencion1") = WRete
 
                                     Tabla.Rows.Add(row)
@@ -7057,9 +7107,9 @@ Public Class PagosVirtual
             End If
         Next
 
+        Return False
+
     End Function
-
-
 
     Private Sub txtFechaAux_Leave(ByVal sender As Object, ByVal e As EventArgs) Handles txtFechaAux.Leave
         If WRow >= 0 And Wcol >= 0 Then

@@ -36,7 +36,7 @@
         End If
     End Function
 
-    Public Function codigoProveedor()
+    Public Function codigoProveedor() As String
         If IsNothing(proveedor) Then
             Return ""
         Else

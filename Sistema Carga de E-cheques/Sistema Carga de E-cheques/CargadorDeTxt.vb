@@ -1,6 +1,6 @@
-﻿Imports Util.Clases.Helper
+﻿Imports System.Configuration
+Imports Util.Clases.Helper
 Imports Util.Clases.Query
-Imports System.Configuration
 Imports System.IO
 
 
@@ -14,7 +14,7 @@ Public Class CargadorDeTxt
         InitializeComponent()
 
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
-        RutaCarpeta = ConfigurationSettings.AppSettings("ARCHIVOS_A_CARGAR")
+        RutaCarpeta = ConfigurationManager.AppSettings("ARCHIVOS_A_CARGAR")
 
         If Not Directory.Exists(RutaCarpeta) Then
             Directory.CreateDirectory(RutaCarpeta)
@@ -47,7 +47,7 @@ Public Class CargadorDeTxt
     End Sub
 
     Private Sub btn_ObtenerDatos_Click(sender As Object, e As EventArgs) Handles btn_ObtenerDatos.Click
-        Dim tablafinal As DataTable
+        Dim tablafinal As new DataTable
         Dim Primera As Integer = 1
         If DGV_RutasArchivos.Rows.Count > 0 Then
             For Each row As DataGridViewRow In DGV_RutasArchivos.Rows
@@ -78,54 +78,14 @@ Public Class CargadorDeTxt
 
     End Sub
 
-
-    Private Function ListaFiltrada(ByVal Tabla As DataTable) As DataTable
-        Dim TablaFiltrada As New DataTable
-        With TablaFiltrada.Columns
-            .Add("N.Cheque")
-            .Add("BancoEmisor")
-            .Add("FechaPago")
-            .Add("CuitEmisor")
-            .Add("FechaEmision")
-            .Add("CaracterCheque")
-            .Add("ModoCheque")
-            .Add("CuitEndoso")
-            .Add("RazonEndoso")
-        End With
-
-        Dim SQLCnslt As String = ""
-
-        For Each rowTabla As DataRow In Tabla.Rows
-
-            Dim WNCheque As String = rowTabla.Item(0)
-            Dim WBancoEmisor As String = rowTabla.Item(1)
-            Dim AuxFechaPago As Date = rowTabla.Item(2)
-            Dim WFechaPago As String = AuxFechaPago.ToString("dd/MM/yyyy")
-            Dim WOrdFechaPago As String = ordenaFecha(WFechaPago)
-            Dim WCuitEmisor As String = rowTabla.Item(3)
-            Dim AuxFechaEmision As Date = rowTabla.Item(4)
-            Dim WFechaEmision As String = AuxFechaEmision.ToString("dd/MM/yyyy")
-            Dim WOrdFechaEmision As String = ordenaFecha(WFechaEmision)
-            Dim WCaracterCheque As String = rowTabla.Item(5)
-            Dim WModoCheque As String = rowTabla.Item(6)
-            Dim WCuitEndoso As String = rowTabla.Item(7)
-            Dim WRazonEndoso As String = rowTabla.Item(8)
-
-
-            SQLCnslt = ""
-        Next
-
-    End Function
-
     Private Sub RemoverDatosInesesarios(ByRef Tabla As DataTable)
+
         For i As Integer = 40 To 0 Step -1
             If i = 0 Or i = 1 Or i = 2 Or i = 4 Or i = 5 Or i = 6 Or i = 7 Or i = 10 Or i = 20 Or i = 23 Or i = 24 Then
                 Continue For
             End If
             Tabla.Columns.RemoveAt(i)
         Next
-
-
 
     End Sub
     Private Function txt_A_Datatable(ByVal filename As String, ByVal header As Boolean, ByVal delimiter As String) As DataTable
@@ -234,6 +194,8 @@ Public Class CargadorDeTxt
         Finally
             TopMost = False
         End Try
+
+        Return ""
 
     End Function
 
