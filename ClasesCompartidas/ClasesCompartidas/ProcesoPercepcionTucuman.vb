@@ -24,8 +24,8 @@
         numero = numero2
         neto = neto2
         cuit = cuit2
-        ibtucu = ibtucu2
-        porceibtucu = porceibtucu2
+        ibtucu = ibtucu2.ToString
+        porceibtucu = porceibtucu2.ToString
 
     End Sub
 

@@ -3813,7 +3813,10 @@ Public Class Recibos
         For Ciclo = 0 To 19
 
             If Val(Vector(Ciclo, 9)) <> 0 Then
-                Dim _cuenta As Object = _CuentasContables.FindLast(Function(c) c(0) = Ciclo)
+
+                Dim _c = Ciclo
+
+                Dim _cuenta As Object = _CuentasContables.FindLast(Function(c) c(0) = _c)
                 Select Case Val(Vector(Ciclo, 5))
                     Case 1
                         If IsNothing(_cuenta) Then
@@ -4480,7 +4483,11 @@ Public Class Recibos
         '
         ' AJUSTE PARA NUEVO DISEÑO.
         '
-        Dim WRecibo, WImpre1, WSigno, WImporte1, WIndice
+        Dim WRecibo = ""
+        Dim WImpre1 = ""
+        Dim WSigno = ""
+        Dim WImporte1 = ""
+        Dim WIndice = ""
         Dim WLeyendas(40) As String
 
         WLeyendas(1) = "Efectivo:"

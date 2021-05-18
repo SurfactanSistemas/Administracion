@@ -387,15 +387,9 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Pantalla
     End Enum
 
-    Private Sub _Imprimir(ByVal TipoImpresion As Reporte)
-
-        Dim ds As New DBAuxi
+    Private Sub _Imprimir()
 
         Dim WTabla As DataTable = New DBAuxi.impCtaCtePrvNetDataTable 'ds.Tables("impCtaCtePrvNet")
-
-        Dim txtUno, txtDos As String
-        Dim txtFormula As String
-        Dim x As Char = Chr(34)
 
         Dim WOrden = 0
         Dim txtEmpresa As String
@@ -414,16 +408,6 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Dim varPago, varEmpresa As Integer
         Dim varAcumulaNeto, varAcumulaNetoII, varAcumulaIva, varPesosOrig, varDifCambio, AcumPesosOrig, AcumPesosOrigII, AcumDifCambio As Double
         Dim varRetIbI, varRetIbII As Double
-        Dim varTipoDolar As Integer
-
-        'Try
-
-        '    _LimpiarImpCtaCtePrvNet()
-
-        'Catch ex As Exception
-        '    MsgBox(ex.Message)
-        '    Exit Sub
-        'End Try
 
         txtEmpresa = "Surfactan S.A."
         varEmpresa = 1
@@ -1214,7 +1198,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
     End Sub
 
     Private Sub BackgroundWorker1_DoWork(sender As Object, e As DoWorkEventArgs) Handles BackgroundWorker1.DoWork
-        _Imprimir(WTipoSalida)
+        _Imprimir()
     End Sub
 
     Private Sub BackgroundWorker1_ProgressChanged(sender As Object, e As ProgressChangedEventArgs) Handles BackgroundWorker1.ProgressChanged

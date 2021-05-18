@@ -25,7 +25,7 @@
         tipo = tipoRec
     End Sub
 
-    Public Function codigoCliente()
+    Public Function codigoCliente() As String
         If IsNothing(cliente) Then
             Return ""
         End If

@@ -430,7 +430,7 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
         '  FIN DE VALIDACIONES
         '
 
-        Dim Sector As String
+        Dim Sector As String = ""
 
         SQLCnslt = "SELECT SoliFondos_Sector FROM Operador WHERE Descripcion = '" & Trim(txt_Solicitante.Text) & "'"
         Dim RowOpe As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
@@ -474,7 +474,7 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
 
 
 
-            Dim ProvCuenta As String
+            Dim ProvCuenta As String = ""
             Select Case cbx_Tipo.SelectedIndex
 
                 Case 1
@@ -1173,72 +1173,19 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
 
     Private Function _CalcularSaldoBaseRetencionesGanancias(ByVal WTipoIva As Integer) As Object
 
-        Dim varAcuNeto = 0
-        Dim varAcuRetenido = 0
-        Dim varAcuAnticipo = 0
-        Dim varAcuBruto = 0
-        Dim varAcuIva = 0
-
-        Dim varOrdFecha As String = Mid(ordenaFecha(Date.Today.ToString("dd/MM/yyyy")), 3, 4)
-
-        Dim CampoAcumulado As LeeAcumulado = DaoAcumulado.buscarAcumulado(txt_Proveedor.Text, varOrdFecha)
-
-        If Not IsNothing(CampoAcumulado) Then
-
-            varAcuNeto = CampoAcumulado.neto
-            varAcuRetenido = CampoAcumulado.retenido
-            varAcuAnticipo = CampoAcumulado.anticipo
-            varAcuBruto = CampoAcumulado.bruto
-            varAcuIva = CampoAcumulado.iva
-
-        End If
-
         Dim ZZBase, ZZSumaNeto
 
         ZZBase = 0.0
         ZZSumaNeto = 0.0
 
         ' Recalculo sobre porcentaje neto en Iva Comp.
-        'For Each row As DataGridViewRow In gridPagos.Rows
-        '    With row
-        Dim ZTipo, ZNumero, ZPunto, ZLetra, ZImporte, ZTotal
-        Dim ZNeto, ZIva, ZIva5, ZIva27, ZIva105, ZIb, ZExento, ZPorce, ZZSuma
-        Dim ZFactura As DataRow
+        
+        Dim ZImporte As Double
+        Dim ZZSuma As Double
 
         If Trim(txt_ImportePesos.Text) <> "" Then
-            'ZTipo = .Cells(0).Value
-            'ZLetra = .Cells(1).Value
-            'ZPunto = .Cells(2).Value
-            'ZNumero = .Cells(3).Value
-            ZImporte = txt_ImportePesos.Text '.Cells(4).Value
-
-            'ZFactura = _BuscarCompra(txtProveedor.Text, ZTipo, ZPunto, ZLetra, ZNumero)
-
-            'If Not IsNothing(ZFactura) Then
-            '
-            '    ZNeto = _NormalizarNumero(ZFactura.Item("Neto"))
-            '    ZIva = _NormalizarNumero(ZFactura.Item("Iva21"))
-            '    ZIva5 = _NormalizarNumero(ZFactura.Item("Iva5"))
-            '    ZIva27 = _NormalizarNumero(ZFactura.Item("Iva27"))
-            '    ZIva105 = _NormalizarNumero(ZFactura.Item("Iva105"))
-            '    ZIb = _NormalizarNumero(ZFactura.Item("Ib"))
-            '    ZExento = _NormalizarNumero(ZFactura.Item("Exento"))
-            '
-            '    ZTotal = ZNeto + ZIva + ZIva27 + ZIva105 + ZIb + ZIva5 + ZExento
-            '
-            '
-            '    If Val(ZImporte) = Val(ZTotal) Then
-            '
-            '        ZZSuma = ZNeto
-            '
-            '    Else
-            '
-            '        ZPorce = Val(ZImporte) / ZTotal
-            '
-            '        ZZSuma = ZNeto * ZPorce
-            '    End If
-            '
-            'Else
+            
+            ZImporte = txt_ImportePesos.Text
 
             ZZSuma = Val(ZImporte) / 1.21
 
@@ -1246,16 +1193,9 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
 
         ZZBase += Val(ZImporte)
         ZZSumaNeto += ZZSuma
-        '        Else
-        'Exit For
-        '        End If
-        '    End With
-        'Next
 
-        If Val(WTipoIva) = 2 Then
-            ZZBase = ZZSumaNeto
-        End If
-        Return ZZBase
+        Return IIf(Val(WTipoIva) = 2, ZZSumaNeto, ZZBase)
+
     End Function
 
     Private Sub _RecalcularRetencionIVA()
@@ -1313,9 +1253,8 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
     Private Sub _RecalcularIBProvincia(ByRef WIngresosBrutos As Double, ByVal WTipoIb As String, ByVal WPorceIb As String)
         Dim acumProv
 
-        Dim ZTipo, ZNumero, ZPunto, ZLetra, ZImporte, ZTotal
-        Dim ZNeto, ZIva, ZIva5, ZIva27, ZIva105, ZIb, ZExento, ZPorce, ZZSuma
-        Dim ZFactura As DataRow
+        Dim ZImporte
+        Dim ZZSuma
 
         acumProv = 0
 

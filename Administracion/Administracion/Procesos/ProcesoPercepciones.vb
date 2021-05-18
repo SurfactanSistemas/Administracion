@@ -56,7 +56,12 @@ Public Class ProcesoPercepciones
         Dim WIndice = 0
         Dim XCodigo = "A0009000"
         Dim nombreArchivo1, nombreArchivo2, nombreArchivo3 As String
-        Dim escritor, escritor1, escritor2, escritor3 As System.IO.StreamWriter
+
+        nombreArchivo1 = ""
+        nombreArchivo2 = ""
+        nombreArchivo3 = ""
+
+        Dim escritor, escritor1, escritor2, escritor3 As New System.IO.StreamWriter("")
 
         If Proceso._EsPellital() Then
             XCodigo = "A0006000"

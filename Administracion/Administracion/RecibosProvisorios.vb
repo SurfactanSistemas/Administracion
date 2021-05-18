@@ -2156,7 +2156,7 @@ Public Class RecibosProvisorios : Implements IPaseEcheques
     End Sub
 
     Private Sub btn_VerEcheq_Click(sender As Object, e As EventArgs) Handles btn_VerEcheq.Click
-        Dim WCuitCliente As String
+        Dim WCuitCliente As String = ""
         If txtCliente.Text <> "" Then
             WCuitCliente = obtenercuitCliente(txtCliente.Text)
         End If

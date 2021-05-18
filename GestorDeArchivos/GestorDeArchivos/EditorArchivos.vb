@@ -533,6 +533,8 @@ Public Class EditorArchivos : Implements SelectorCarpetas
             TopMost = False
         End Try
 
+        Return ""
+
     End Function
 
     Private Sub removerExtencion(ByRef NombreArchivo As String, ByVal Extension As String)
@@ -583,6 +585,8 @@ Public Class EditorArchivos : Implements SelectorCarpetas
         If nombreArchivo.Contains(".bmp") Then
             Return ".bmp"
         End If
+
+        Return ""
 
     End Function
 
@@ -906,11 +910,12 @@ Public Class EditorArchivos : Implements SelectorCarpetas
                         Case "rbn_Despacho"
                             RutaCarpeta = WPath & "\Despacho"
                     End Select
-                    Return RutaCarpeta
                 End If
 
             End If
         Next
+
+        Return RutaCarpeta
 
     End Function
 
@@ -1035,14 +1040,15 @@ Public Class EditorArchivos : Implements SelectorCarpetas
         Try
             Dim SQLCnslt As String = "SELECT Operador FROM HistorialGestorArchivos WHERE RutaArchivo = '" & RutaArchivo & "'"
             Dim RowHistorial As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
-            If RowHistorial IsNot Nothing Then
-                Return RowHistorial.Item("Operador")
-            Else
-                Return ""
-            End If
-        Catch ex As Exception
 
+            If RowHistorial IsNot Nothing Then Return RowHistorial.Item("Operador")
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
         End Try
+
+        Return ""
+
     End Function
 
     Private Sub GenerarRegistroHistorial(ByVal RutaArchivo As String, ByVal Operador As String)

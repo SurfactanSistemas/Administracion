@@ -84,7 +84,7 @@
         total = Math.Abs(total)
     End Sub
 
-    Public Function usaCuotas()
+    Public Function usaCuotas() As Boolean
         Return pagoPyme(0) > 0
     End Function
 

@@ -32,7 +32,7 @@ Public Class ProcesoPercepcionesGananciasAduana
     Private Sub btnAcepta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAcepta.Click
         Dim Vector(10000, 5) As String
         Dim WIndice = 0
-        Dim escritor As System.IO.StreamWriter
+        Dim escritor As System.IO.StreamWriter = Nothing
 
         ProgressBar1.Value = 0
         GroupBox1.Visible = True

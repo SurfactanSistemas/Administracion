@@ -594,23 +594,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         End If
 
     End Sub
-
-    'Private Sub GRilla_RowHeaderMouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles GRilla.RowHeaderMouseDoubleClick
-    '    Dim row As DataGridViewRow = GRilla.Rows(e.RowIndex)
-
-    '    If row.IsNewRow Then : Exit Sub : End If
-
-    '    If MsgBox("¿Eliminar renglón?", MsgBoxStyle.YesNo) = MsgBoxResult.No Then : Exit Sub : End If
-
-    '    Try
-    '        GRilla.Rows.Remove(row)
-    '    Catch ex As Exception
-    '        MsgBox("Hubo un problema al querer eliminar la fila. Motivo: " & ex.Message, MsgBoxStyle.Critical)
-    '        Exit Sub
-    '    End Try
-
-    'End Sub
-
+    
     Private Sub btnLimpiarTodo_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLimpiarTodo.Click
         txtCodProveedor.Text = ""
         txtFechaPago.Clear()
@@ -634,7 +618,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
     End Sub
 
     Private Sub btnCargarSelectivoWeb_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCargarSelectivoWeb.Click
-        Dim WSelectivoWebConfig = GetSingle("SELECT * FROM ProveedorSelectivoWebConfig WHERE ISNULL(Habilitado, '0') = '1'")
+        Dim WSelectivoWebConfig = GetSingle("SELECT DISTINCT * FROM ProveedorSelectivoWebConfig WHERE ISNULL(Habilitado, '0') = '1'")
 
         If WSelectivoWebConfig Is Nothing Then
             MsgBox("No hay una Fecha habilitada para Proveedores Selectivos por Web.", MsgBoxStyle.Information)
@@ -644,7 +628,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
         Dim WIDSelectivo As String = WSelectivoWebConfig.Item("ID")
         Dim WFechaSelectivo As String = WSelectivoWebConfig.Item("FechaSelectivo")
 
-        Dim WProveedoresSelectivoWeb As DataTable = GetAll("SELECT p.Proveedor, p.Nombre FROM ProveedorSelectivoWeb psw INNER JOIN ProveedorWeb pw ON pw.ID = psw.IDProveedor INNER JOIN Proveedor p ON p.Cuit = pw.Cuit WHERE psw.IDFechaSelectivo = '" & WIDSelectivo & "'")
+        Dim WProveedoresSelectivoWeb As DataTable = GetAll("SELECT DISTINCT p.Proveedor, p.Nombre FROM ProveedorSelectivoWeb psw INNER JOIN ProveedorWeb pw ON pw.ID = psw.IDProveedor INNER JOIN Proveedor p ON p.Cuit = pw.Cuit WHERE psw.IDFechaSelectivo = '" & WIDSelectivo & "'")
 
         WSinMensajes = True
 

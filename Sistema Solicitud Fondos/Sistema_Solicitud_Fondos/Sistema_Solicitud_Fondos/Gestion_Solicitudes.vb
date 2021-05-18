@@ -71,7 +71,7 @@ Public Class Gestion_Solicitudes : Implements IActualizaSolicitudes, IContraseñ
     Private Sub Marcar_VistosPopup()
         Try
             'Dim SQLCnslt As String = "UPDATE SolicitudFondos SET MarcaPopUp = 'X' WHERE MarcaPopup <> 'X'"
-            Dim SQLCnslt As String
+            Dim SQLCnslt As String = ""
             Select Case UCase(Operador.Clave)
                 Case "XINGO"
                     SQLCnslt = "UPDATE SolicitudFondos SET MarcaPopUp_Alejandro = 'X' WHERE MarcaPopup_Alejandro <> 'X'"

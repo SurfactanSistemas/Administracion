@@ -7,7 +7,7 @@ Public Class Globals
         Return empresa & " S.A."
     End Function
 
-    Public Shared Function reportPathWithName(ByVal reportName As String)
+    Public Shared Function reportPathWithName(ByVal reportName As String) As String
         Dim path As String
         Try
             path = ConfigurationManager.AppSettings("reportsLocation")
@@ -24,7 +24,7 @@ Public Class Globals
 
     End Function
 
-    Public Shared Function connectionWorksFor(ByVal connectionName As String)
+    Public Shared Function connectionWorksFor(ByVal connectionName As String) As Boolean
         Try
             Return SQLConnector.tryConnection(ConfigurationManager.ConnectionStrings(connectionName).ConnectionString)
         Catch ex As Exception

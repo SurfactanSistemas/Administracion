@@ -15,7 +15,6 @@ Public Class DaoAcumulado
                 '
                 Dim cn As SqlConnection = New SqlConnection()
                 Dim cm As SqlCommand = New SqlCommand("")
-                Dim dr As SqlDataReader
 
                 cn.ConnectionString = Proceso._ConectarA
                 cn.Open()
