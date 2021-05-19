@@ -2176,7 +2176,7 @@ Public Class RecibosProvisorios : Implements IPaseEcheques
                 .Show(Me)
             End With
         Else
-            Dim WCuitCliente As String
+
             If txtCliente.Text <> "" Then
                 WCuitCliente = obtenercuitCliente(txtCliente.Text)
             End If
