@@ -145,7 +145,9 @@ Public Class Listado_ECheques_Cargacheques
 
             Return ZBanco & "/" & Mid(WCliente, 1, 1) & Val(Mid(WCliente, 2, 6)).ToString()
         End If
-        
+
+        Return ""
+
     End Function
 
     Private Sub dvg_ECheques_SortCompare(sender As Object, e As DataGridViewSortCompareEventArgs) Handles dvg_ECheques.SortCompare

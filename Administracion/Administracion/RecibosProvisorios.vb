@@ -2176,16 +2176,17 @@ Public Class RecibosProvisorios : Implements IPaseEcheques
                 .Show(Me)
             End With
         Else
-            Dim WCuitCliente As String
+            Dim ZCuitCliente As String = ""
+
             If txtCliente.Text <> "" Then
-                WCuitCliente = obtenercuitCliente(txtCliente.Text)
+                ZCuitCliente = obtenercuitCliente(txtCliente.Text)
             End If
-            If WCuitCliente = "" Then
+            If ZCuitCliente = "" Then
                 With New Listado_ECheques_Cargacheques("", txtCliente.Text)
                     .Show(Me)
                 End With
             Else
-                With New Listado_ECheques_Cargacheques(WCuitCliente)
+                With New Listado_ECheques_Cargacheques(ZCuitCliente)
                     .Show(Me)
                 End With
             End If

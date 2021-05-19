@@ -47,7 +47,7 @@ Public Class CargadorDeTxt
     End Sub
 
     Private Sub btn_ObtenerDatos_Click(sender As Object, e As EventArgs) Handles btn_ObtenerDatos.Click
-        Dim tablafinal As new DataTable
+        Dim tablafinal As New DataTable
         Dim Primera As Integer = 1
         If DGV_RutasArchivos.Rows.Count > 0 Then
             For Each row As DataGridViewRow In DGV_RutasArchivos.Rows
@@ -303,8 +303,8 @@ Public Class CargadorDeTxt
             MsgBox("No se encontraron cheques en la tabla.", vbExclamation)
             Exit Sub
         End Try
-        
-        
+
+
 
     End Sub
 
