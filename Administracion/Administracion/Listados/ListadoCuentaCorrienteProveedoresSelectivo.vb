@@ -23,7 +23,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivo
         'Dim _CargadosHaceMasDeUnaSemana As Integer = 0
         'Dim _FechaLimite As String = _DeterminarFechaLimite()
         Dim cn = New SqlConnection()
-        Dim cm = New SqlCommand("SELECT Proveedor, FechaOrd FROM ProveedorSelectivo WHERE Fecha = '" & txtFechaEmision.Text & "'")
+        Dim cm = New SqlCommand("SELECT DISTINCT Proveedor, FechaOrd FROM ProveedorSelectivo WHERE Fecha = '" & txtFechaEmision.Text & "'")
         Dim dr As SqlDataReader
 
         SQLConnector.conexionSql(cn, cm)

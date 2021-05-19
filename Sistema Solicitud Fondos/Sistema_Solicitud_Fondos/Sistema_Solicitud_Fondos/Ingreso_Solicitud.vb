@@ -1196,7 +1196,7 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
 
         If Trim(txt_ImportePesos.Text) <> "" Then
             
-            ZImporte = Val(txt_ImportePesos.Text)
+            ZImporte = Val(formatonumerico(txt_ImportePesos.Text))
 
             ZZSuma = Val(ZImporte) / 1.21
 
