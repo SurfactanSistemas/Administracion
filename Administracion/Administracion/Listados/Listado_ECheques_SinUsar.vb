@@ -14,7 +14,7 @@
                             & "FechaEmisor, OrdFechaEmisor, Caracter_Cheque, Modo_Cheque, Endoso_Documento, Endoso_Razon, FechaGrabacion " _
                             & " FROM Carga_ChequesE " _
                             & "WHERE Marca_usado <> 'X' " _
-                            & "ORDER BY OrdFechaGrabacion desc"
+                            & "ORDER BY OrdFechaGrabacion ASC"
 
 
 
@@ -33,7 +33,7 @@
 
                     Dim WCuitEmisor As String = .Item("Endoso_Documento")
                     Dim WRazonEmisor As String = .Item("Endoso_Razon")
-                    Dim WFechaGrabacion As String = .Item("FechaGrabacion")
+                    Dim WFechaGrabacion As String = IIf(IsDBNull(.Item("FechaGrabacion")), "", .Item("FechaGrabacion"))
 
                     If WCuitEmisor = "" Then
                         WCuitEmisor = .Item("CuitEmisor")

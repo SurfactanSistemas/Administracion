@@ -6,6 +6,19 @@ Public Class Gestion_Solicitudes : Implements IActualizaSolicitudes, IContraseñ
 
     Dim FinalLoad As String = "NO"
     Dim Fechas(3, 1) As String
+    Dim listaFilasAPintar As New List(Of Integer)
+
+    Sub New(Optional ByVal FilasApintar As List(Of Integer) = Nothing)
+
+        ' Llamada necesaria para el diseñador.
+        InitializeComponent()
+
+        ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
+        If FilasApintar IsNot Nothing Then
+            listaFilasAPintar.AddRange(FilasApintar.ToArray())
+        End If
+
+    End Sub
 
     Private Sub btn_Cerrar_Click(sender As Object, e As EventArgs) Handles btn_Cerrar.Click
         Close()
@@ -14,6 +27,7 @@ Public Class Gestion_Solicitudes : Implements IActualizaSolicitudes, IContraseñ
     Private Sub Gestion_Solicitudes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         CargarGrilla()
         Marcar_VistosPopup()
+
         TopMost = True
     End Sub
 
@@ -44,6 +58,8 @@ Public Class Gestion_Solicitudes : Implements IActualizaSolicitudes, IContraseñ
             FinalLoad = "SI"
 
             ActualizarTotales()
+
+            MarcarSolicitudesNuevas()
             
         Catch ex As Exception
 
@@ -69,6 +85,16 @@ Public Class Gestion_Solicitudes : Implements IActualizaSolicitudes, IContraseñ
 
     End Sub
 
+    Private Sub MarcarSolicitudesNuevas()
+        For Each row As DataGridViewRow In DGV_Solicitudes.Rows
+            For Each item As Integer In listaFilasAPintar
+                If Val(row.Cells("NroSolicitud").Value) = item Then
+                    row.Cells("Nrosolicitud").Style.BackColor = Color.Gold
+                End If
+            Next
+        Next
+    End Sub
+    
     Private Sub Marcar_VistosPopup()
         Try
             'Dim SQLCnslt As String = "UPDATE SolicitudFondos SET MarcaPopUp = 'X' WHERE MarcaPopup <> 'X'"
@@ -86,8 +112,7 @@ Public Class Gestion_Solicitudes : Implements IActualizaSolicitudes, IContraseñ
         Catch ex As Exception
 
         End Try
-
-
+        
     End Sub
     Private Sub PintarAutorizadosRechazados()
         For Each row As DataGridViewRow In DGV_Solicitudes.Rows

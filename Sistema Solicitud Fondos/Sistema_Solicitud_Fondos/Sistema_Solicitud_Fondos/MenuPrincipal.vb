@@ -3,7 +3,30 @@ Imports Util.Operador
 Imports Util.Clases.Query
 Public Class MenuPrincipal
     Dim PermisoGrabar As String = ""
-  
+    Dim listaFilasAPintar As New List(Of Integer)
+
+    Sub New()
+
+        ' Llamada necesaria para el diseñador.
+        InitializeComponent()
+
+        ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
+
+    End Sub
+
+
+    Sub New(ByVal FilasAPintar As List(Of Integer))
+
+        ' Llamada necesaria para el diseñador.
+        InitializeComponent()
+
+        If FilasAPintar Is Nothing Then FilasAPintar = New List(Of Integer)
+
+        ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
+        listaFilasAPintar.AddRange(FilasAPintar.ToArray())
+
+    End Sub
+
     Private Sub FinDeSistemasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FinDeSistemasToolStripMenuItem.Click
         Close()
     End Sub
@@ -32,7 +55,7 @@ Public Class MenuPrincipal
     Private Sub AutoGestionarSolicitudesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AutoGestionarSolicitudesToolStripMenuItem.Click
         If Operador.Clave = "" Then
 
-            With New Sistema_Solicitud_Fondos.Login("Gestion", "Externo")
+            With New Sistema_Solicitud_Fondos.Login("Gestion", "Externo", listaFilasAPintar)
                 .Show(Me)
             End With
 
@@ -44,7 +67,7 @@ Public Class MenuPrincipal
             End If
 
             If PermisoGrabar = "S" Then
-                With New Sistema_Solicitud_Fondos.Gestion_Solicitudes
+                With New Sistema_Solicitud_Fondos.Gestion_Solicitudes(listaFilasAPintar)
                     .Show()
                 End With
             Else

@@ -440,6 +440,10 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
 
 
         Dim Estado As String = ""
+        Dim Marca_Lucas As String = ""
+        Dim Marca_Alejandro As String = ""
+        Dim Marca_Sergio As String = ""
+
         Try
 
             'SI ESTA EDITANDO USO EL NUMERO DE EDICION Y BORRO EL REGISTRO EN CASO CONTRARIO OBTENGO EL SIGUIENTE NUMERO
@@ -456,11 +460,18 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
                 NroSolicitud = NRO_SOLICITUD
 
                 Try
-                    SQLCnslt = "SELECT Estado FROM SolicitudFondos WHERE NroSolicitud = '" & NroSolicitud & "'"
+                    SQLCnslt = "SELECT MarcaPopUp_Alejandro, MarcaPopUp_Sergio, MarcaPopUp_Lucas, Estado FROM SolicitudFondos WHERE NroSolicitud = '" & NroSolicitud & "'"
                     Dim RowSoli As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
                     If RowSoli IsNot Nothing Then
                         Estado = Trim(IIf(IsDBNull(RowSoli.Item("Estado")), "", RowSoli.Item("Estado")))
+                        Marca_Alejandro = Trim(IIf(IsDBNull(RowSoli.Item("MarcaPopUp_Alejandro")), "", RowSoli.Item("MarcaPopUp_Alejandro")))
+                        Marca_Lucas = Trim(IIf(IsDBNull(RowSoli.Item("MarcaPopUp_Lucas")), "", RowSoli.Item("MarcaPopUp_Lucas")))
+                        Marca_Sergio = Trim(IIf(IsDBNull(RowSoli.Item("MarcaPopUp_Sergio")), "", RowSoli.Item("MarcaPopUp_Sergio")))
                     End If
+
+
+
+
 
 
                     SQLCnslt = "DELETE FROM SolicitudFondos WHERE NroSolicitud = '" & NroSolicitud & "'"
@@ -564,9 +575,9 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
                        & "" & ParidadInformada_2 & " " _
                        & "'" & "X" & "', " _
                        & "'" & "" & "', " _
-                       & "'" & "" & "', " _
-                       & "'" & "" & "', " _
-                       & "'" & "" & "', " _
+                       & "'" & Marca_Alejandro & "', " _
+                       & "'" & Marca_Sergio & "', " _
+                       & "'" & Marca_Lucas & "', " _
                        & "'" & Sector & "', " _
                        & "'" & "" & "') "
 
@@ -1079,8 +1090,8 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
                 .Reporte = New Reporte_SolicitudFondos
                 .Formula = WFormula
                 '.Formula = "{SolicitudFondos.NroSolicitud} > " & (NRO_SOLICITUD - 1) & " AND {SolicitudFondos.NroSolicitud} < " & (NRO_SOLICITUD + 1) & ""
-
-                .Mostrar()
+                .Imprimir()
+                '.Mostrar()
             End With
         Catch ex As Exception
 
@@ -1514,7 +1525,7 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
     End Sub
 
     Public Sub Autorizado(Permiso As String, NroSolicutud As Integer) Implements IContraseña.Autorizado
-        Throw New NotImplementedException
+        'Throw New NotImplementedException
     End Sub
 
     Public Sub AutorizarSolicitudes() Implements IContraseña.AutorizarSolicitudes

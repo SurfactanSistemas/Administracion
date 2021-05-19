@@ -2,6 +2,8 @@
 Imports System.Data.SqlClient
 Imports CrystalDecisions.CrystalReports.Engine
 Imports System.Globalization
+Imports System.IO
+Imports Util.Clases.Helper
 
 Public Class RecibosProvisorios : Implements IPaseEcheques
     Private WRow, Wcol As Integer
@@ -556,7 +558,7 @@ Public Class RecibosProvisorios : Implements IPaseEcheques
             End If
 
         Next
-        
+
         For Each row As DataGridViewRow In gridRecibos.Rows
             With row
                 Dim WTipo As String = If(.Cells("Tipo").Value, "")
@@ -1295,7 +1297,7 @@ Public Class RecibosProvisorios : Implements IPaseEcheques
                                     End If
                                 End If
                             End If
-                            
+
 
                             If iCol = 2 Then
                                 ' Completamos el año de manera automatica
@@ -2156,20 +2158,38 @@ Public Class RecibosProvisorios : Implements IPaseEcheques
     End Sub
 
     Private Sub btn_VerEcheq_Click(sender As Object, e As EventArgs) Handles btn_VerEcheq.Click
-        Dim WCuitCliente As String
         If txtCliente.Text <> "" Then
-            WCuitCliente = obtenercuitCliente(txtCliente.Text)
+            Dim SQLCnslt As String = "SELECT Cliente FROM Cliente WHERE Cliente = '" & txtCliente.Text & "'"
+            Dim rowCliente As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+            If rowCliente Is Nothing Then
+                MsgBox("Ingrese un Cliente valido primero", vbExclamation)
+                Exit Sub
+            End If
+        Else
+            MsgBox("Ingrese un cliente primero", vbExclamation)
+            Exit Sub
         End If
-        If WCuitCliente = "" Then
-            With New Listado_ECheques_Cargacheques()
+
+        If chk_TraerTodosEChques.Checked = True Then
+            With New Listado_ECheques_Cargacheques("", txtCliente.Text)
                 .Show(Me)
             End With
         Else
-            With New Listado_ECheques_Cargacheques(WCuitCliente)
-                .Show(Me)
-            End With
+            Dim WCuitCliente As String
+            If txtCliente.Text <> "" Then
+                WCuitCliente = obtenercuitCliente(txtCliente.Text)
+            End If
+            If WCuitCliente = "" Then
+                With New Listado_ECheques_Cargacheques("", txtCliente.Text)
+                    .Show(Me)
+                End With
+            Else
+                With New Listado_ECheques_Cargacheques(WCuitCliente)
+                    .Show(Me)
+                End With
+            End If
         End If
-        
+
     End Sub
 
     Private Function obtenercuitCliente(ByVal codCliente As String) As String
@@ -2183,6 +2203,9 @@ Public Class RecibosProvisorios : Implements IPaseEcheques
     End Function
     Public Sub PasaECheques(Numero As String, Fecha As String, Banco As String, Importe As Double, Clave As String) Implements IPaseEcheques.PasaECheques
 
+
+
+
         For Each Datarow As DataGridViewRow In gridRecibos.Rows
             If Datarow.Cells("ClaveCheque").Value = Clave Then
                 MsgBox("Ya se encuentra cargado dicho cheque en la grilla", vbExclamation)
@@ -2191,6 +2214,12 @@ Public Class RecibosProvisorios : Implements IPaseEcheques
         Next
 
         Dim filaAModificar As Integer = gridRecibos.Rows.Count - 1
+
+        If gridRecibos.Rows(filaAModificar).Cells("importe").Value <> "" Then
+            gridRecibos.Rows.Add()
+            filaAModificar += 1
+        End If
+
         gridRecibos.Rows(filaAModificar).Cells("Tipo").Value = "07"
         gridRecibos.Rows(filaAModificar).Cells("numero").Value = Numero
         gridRecibos.Rows(filaAModificar).Cells("Fecha").Value = Fecha
@@ -2205,5 +2234,80 @@ Public Class RecibosProvisorios : Implements IPaseEcheques
 
         End If
 
+    End Sub
+
+    Private Sub btn_InformarFinCarga_Click(sender As Object, e As EventArgs) Handles btn_InformarFinCarga.Click
+        Dim RutaAuxiar As String = "C:\Auxiliar_ReciProv"
+        If Not Directory.Exists(RutaAuxiar) Then
+            Directory.CreateDirectory(RutaAuxiar)
+        End If
+        Dim SQLCnslt As String
+
+        Dim TablaReporte As DataTable = New DBAuxi.EChequesSinUsarAFechaDataTable()
+
+
+        SQLCnslt = "SELECT Recibo, Clave, Numero2, Banco2, Importe2, Fecha2, Estado2, Cliente " _
+                            & " FROM RecibosProvi " _
+                            & "WHERE Tipo2 = '07' " _
+                            & "AND FechaOrd = '" & Date.Today.ToString("yyyyMMdd") & "' " _
+                            & "ORDER BY Recibo DESC"
+
+
+
+
+        Dim TablaEcheques As DataTable = GetAll(SQLCnslt, "SurfactanSa")
+
+        If TablaEcheques.Rows.Count > 0 Then
+            For Each row As DataRow In TablaEcheques.Rows
+                With row
+
+                    Dim WRecibo As String = .Item("Recibo")
+
+                    Dim WClave As String = .Item("Clave")
+                    Dim WNroCheque As String = .Item("Numero2")
+                    Dim WBanco As String = .Item("Banco2")
+                    Dim WImporte As Double = .Item("Importe2")
+                    Dim WFechaPago As String = .Item("Fecha2")
+
+
+                    Dim WCliente As String = .Item("Cliente")
+                    Dim WRazonCliente As String = ""
+
+                    SQLCnslt = "SELECT Razon FROM Cliente WHERE Cliente = '" & WCliente & "'"
+                    Dim RowCliente As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+                    If RowCliente IsNot Nothing Then
+                        WRazonCliente = RowCliente.Item("Razon")
+                    End If
+
+                    TablaReporte.Rows.Add(WRecibo, WClave, WNroCheque, WBanco, WImporte, WFechaPago, WCliente, WRazonCliente)
+
+                End With
+
+            Next
+        End If
+        If TablaReporte.Rows.Count > 0 Then
+            With New VistaPrevia
+                .Reporte = New ReporteListadoEchequesUsadosAFecha
+                .Reporte.SetDataSource(TablaReporte)
+
+                .GuardarPDF("Cheques_Usados" & Date.Today.ToString("dd-MM-yyyy"), RutaAuxiar & "\")
+
+                'Genero la lista de archivos
+                Dim listaArchivos As New List(Of String)
+                For Each archivo As String In Directory.GetFiles(RutaAuxiar)
+                    listaArchivos.Add(archivo)
+                Next
+                If listaArchivos.Count > 0 Then
+                    _EnviarEmail("lam@surfactan.com.ar", "Aviso Finalizada carga de E-cheques del " & Date.Today.ToString("dd-MM-yyyy"), "", listaArchivos.ToArray(), True)
+                    MsgBox("El mail fue enviado con exito", vbInformation)
+                End If
+
+                'Limpio los archivos
+                For Each archivo As String In Directory.GetFiles(RutaAuxiar)
+                    File.Delete(archivo)
+                Next
+
+            End With
+        End If
     End Sub
 End Class

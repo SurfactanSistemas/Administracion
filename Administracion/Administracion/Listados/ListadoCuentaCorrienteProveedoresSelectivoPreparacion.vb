@@ -20,7 +20,7 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPreparacion
 
     Private Sub _CargarProveedoresPreCargados()
         Dim cn = New SqlConnection()
-        Dim cm = New SqlCommand("SELECT ps.Proveedor, ps.FechaOrd, p.Nombre, ps.Observaciones, ps.Desde, ps.Hasta, ps.EnviarAvisoOp FROM ProveedorSelectivo as ps, Proveedor as p WHERE ps.Fecha = '" & txtFechaPago.Text & "' AND ps.Proveedor = p.Proveedor")
+        Dim cm = New SqlCommand("SELECT distinct ps.Proveedor, ps.FechaOrd, p.Nombre, ps.Observaciones, ps.Desde, ps.Hasta, ps.EnviarAvisoOp FROM ProveedorSelectivo as ps, Proveedor as p WHERE ps.Fecha = '" & txtFechaPago.Text & "' AND ps.Proveedor = p.Proveedor")
         Dim dr As SqlDataReader
         Dim WObservaciones = ""
 

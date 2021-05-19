@@ -195,6 +195,8 @@ Public Class DAOCompras
                                       compra.formaPago, compra.proveedor.cai, compra.proveedor.vtoCAI, compra.iva105, compra.despacho, compra.remito, compra.soloIVA, _
                                       compra.RetIB1, compra.RetIB2, compra.RetIB3, compra.RetIB4, compra.RetIB5, compra.RetIB6, compra.RetIB7, compra.RetIB8, compra.RetIB9, compra.RetIB10, compra.RetIB11, compra.RetIB12, compra.RetIB13, compra.RetIB14, String.Join("", compra.fechaEmision.Split("/").Reverse))
         agregarImputaciones(compra.imputaciones)
+
+       
     End Sub
 
     Private Shared Sub agregarImputaciones(ByVal imputaciones As List(Of Imputac))

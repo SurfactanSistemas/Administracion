@@ -8,7 +8,8 @@ Public Class Login
     Private WEmpresasAcceso As DataTable
     Dim SiguienteVentana As String
     Dim PermitirGestion As String = ""
-    Sub New(ByVal Accion As String, Optional ByVal Externo As String = "")
+    Dim listaFilasAPintar As New List(Of Integer)
+    Sub New(ByVal Accion As String, Optional ByVal Externo As String = "", Optional ByVal FilasAPintar As List(Of Integer) = Nothing)
 
         ' Llamada necesaria para el diseñador.
         InitializeComponent()
@@ -19,6 +20,13 @@ Public Class Login
         If Externo <> "" Then
             PermitirGestion = Externo
         End If
+
+
+        If FilasAPintar IsNot Nothing Then
+            listaFilasAPintar.AddRange(FilasAPintar.ToArray())
+        End If
+
+
     End Sub
 
     Private Sub btnCerrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrar.Click
@@ -86,7 +94,7 @@ Public Class Login
             Else
                 If PermisoSistemaSolicitud = "S" Then
 
-                    With New Gestion_Solicitudes
+                    With New Gestion_Solicitudes(listaFilasAPintar)
                         .Show()
                     End With
 

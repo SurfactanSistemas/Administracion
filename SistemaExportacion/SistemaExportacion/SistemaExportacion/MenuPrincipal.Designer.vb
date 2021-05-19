@@ -27,6 +27,8 @@ Partial Class MenuPrincipal
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LayoutPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.LayoutCabecera = New System.Windows.Forms.TableLayoutPanel()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -72,6 +74,8 @@ Partial Class MenuPrincipal
         Me.BL = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Forwarder = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Fecha_Cobro = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NroFactura = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SaldoFactura = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutCabecera.SuspendLayout()
         Me.LayoutCuerpoPrincipal.SuspendLayout()
@@ -169,7 +173,7 @@ Partial Class MenuPrincipal
         Me.dgvPrincipal.AllowUserToAddRows = False
         Me.dgvPrincipal.AllowUserToDeleteRows = False
         Me.dgvPrincipal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvPrincipal.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NroProforma, Me.Fecha, Me.Cliente, Me.Razon, Me.Pais, Me.Total, Me.Combox_Estado, Me.FechaLimite, Me.PackingList, Me.PackingListImg, Me.Entregado, Me.Fecha_Limite, Me.Incoterm, Me.MV_Buque, Me.ETD_FechaSalida, Me.ETA_FechaArribo, Me.Peso_Neto, Me.Permiso_de_Embarque, Me.BL, Me.Forwarder, Me.Fecha_Cobro})
+        Me.dgvPrincipal.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NroProforma, Me.Fecha, Me.Cliente, Me.Razon, Me.Pais, Me.Total, Me.Combox_Estado, Me.FechaLimite, Me.PackingList, Me.PackingListImg, Me.Entregado, Me.Fecha_Limite, Me.Incoterm, Me.MV_Buque, Me.ETD_FechaSalida, Me.ETA_FechaArribo, Me.Peso_Neto, Me.Permiso_de_Embarque, Me.BL, Me.Forwarder, Me.Fecha_Cobro, Me.NroFactura, Me.SaldoFactura})
         Me.dgvPrincipal.ContextMenuStrip = Me.Menustrip_Grilla
         Me.dgvPrincipal.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvPrincipal.Location = New System.Drawing.Point(132, 18)
@@ -570,6 +574,22 @@ Partial Class MenuPrincipal
         Me.Fecha_Cobro.Name = "Fecha_Cobro"
         Me.Fecha_Cobro.ReadOnly = True
         '
+        'NroFactura
+        '
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.NroFactura.DefaultCellStyle = DataGridViewCellStyle5
+        Me.NroFactura.HeaderText = "Nro. Factura"
+        Me.NroFactura.Name = "NroFactura"
+        Me.NroFactura.ReadOnly = True
+        '
+        'SaldoFactura
+        '
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.SaldoFactura.DefaultCellStyle = DataGridViewCellStyle6
+        Me.SaldoFactura.HeaderText = "Saldo Factura"
+        Me.SaldoFactura.Name = "SaldoFactura"
+        Me.SaldoFactura.ReadOnly = True
+        '
         'MenuPrincipal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -638,5 +658,7 @@ Partial Class MenuPrincipal
     Friend WithEvents BL As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Forwarder As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Fecha_Cobro As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents NroFactura As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents SaldoFactura As System.Windows.Forms.DataGridViewTextBoxColumn
 
 End Class

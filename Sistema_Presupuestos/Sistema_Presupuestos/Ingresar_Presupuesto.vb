@@ -1,4 +1,5 @@
-﻿Imports GestorDeArchivos
+﻿Imports System.IO
+Imports GestorDeArchivos
 Imports Util
 Imports Util.Clases.Query
 Imports Util.Clases.Helper
@@ -6,7 +7,10 @@ Imports Util.Clases.Conexion
 
 Public Class Ingresar_Presupuesto : Implements IAyudaProv
 
+    Dim CarpetaAux As String = "C:\Auxiliar_Solicitud_Presupuestos"
+    Dim RutaGuardar As String = "\\193.168.0.2\g$\vb\NET\ArchivosRelacionados_SolicitudesPresupuestos\Presu_"
 
+    Dim Bandera_NuevaSoli As Boolean
 
     Sub New(ByVal NroPresupuesto As String)
 
@@ -16,13 +20,17 @@ Public Class Ingresar_Presupuesto : Implements IAyudaProv
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
 
         If NroPresupuesto = 0 Then
-            txt_NroPresupuesto.Text = ObtenerNroPresupuesto()
+
             txt_Fecha.Text = Date.Today.ToString("dd/MM/yyyy")
             cbx_Moneda.SelectedIndex = 0
+            Bandera_NuevaSoli = True
+            Me.Size = New Size(560, 325)
+            Me.MaximumSize = New Size(560, 325)
         Else
+            Bandera_NuevaSoli = False
             txt_NroPresupuesto.Text = NroPresupuesto
             Try
-                Dim SQLCnslt As String = "SELECT * FROM SolicitudPresupuesto WHERE NroPresupuesto = '" & NroPresupuesto & "'"
+                Dim SQLCnslt As String = "SELECT * FROM Solicitud_Presupuesto WHERE NroPresupuesto = '" & NroPresupuesto & "'"
                 Dim RowPresu As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
 
                 If RowPresu IsNot Nothing Then
@@ -34,8 +42,16 @@ Public Class Ingresar_Presupuesto : Implements IAyudaProv
                     txt_FormaPago.Text = RowPresu.Item("FormaPago")
                     txt_Monto.Text = RowPresu.Item("Monto")
                     cbx_Moneda.SelectedIndex = RowPresu.Item("Moneda")
+                    txt_novedades.Text = RowPresu.Item("Novedades")
                 End If
 
+                txt_Monto.ReadOnly = True
+                cbx_Moneda.Enabled = False
+
+                Calcular_Pagado_y_Saldo()
+
+                Me.Size = New Size(560, 460)
+                Me.MaximumSize = New Size(560, 460)
             Catch ex As Exception
 
             End Try
@@ -45,8 +61,48 @@ Public Class Ingresar_Presupuesto : Implements IAyudaProv
 
     End Sub
 
+
+    Private Sub Calcular_Pagado_y_Saldo()
+        If txt_NroPresupuesto.Text <> "" Then
+            ' Pago(PESOS) = 1 , Pago(DOLARES) = 2
+            Dim SQLCnslt As String = "SELECT Neto, Paridad, Pago, Fecha FROM IvaComp WHERE Proveedor = '" & txt_Codigo_Prov.Text & "' AND NroPresupuesto = '" & txt_NroPresupuesto.Text & "'"
+            Dim Tablaivacomp As DataTable = GetAll(SQLCnslt, "SurfactanSa")
+            If Tablaivacomp.Rows.Count > 0 Then
+                Dim TotalPagado As Double = 0
+                For Each row As DataRow In Tablaivacomp.Rows
+                    Dim Neto As Double = row.Item("Neto")
+                    Dim Pago As Integer = row.Item("Pago")
+                    Dim Paridad As Double = row.Item("Paridad")
+                    If Val(Paridad) = 0 Then
+                        SQLCnslt = "Select Cambio from Cambios WHERE "
+                    End If
+
+                    If Pago = 1 Then
+                        TotalPagado += Neto
+                    Else
+                        TotalPagado += (Neto / Paridad)
+                    End If
+
+                Next
+
+                txt_Pagado.Text = TotalPagado
+                txt_Saldo.Text = (Val(txt_Monto.Text) - TotalPagado)
+
+            Else
+                txt_Pagado.Text = 0
+                txt_Saldo.Text = txt_Monto.Text
+            End If
+
+            txt_Pagado.Text = formatonumerico(txt_Pagado.Text)
+            txt_Saldo.Text = formatonumerico(txt_Saldo.Text)
+
+        End If
+        
+
+    End Sub
+
     Private Function ObtenerNroPresupuesto() As Integer
-        Dim SQLCnslt As String = "SELECT NroMax = Max(NroPresupuesto) + 1 FROM SolicitudPresupuesto"
+        Dim SQLCnslt As String = "SELECT NroMax = Max(NroPresupuesto) + 1 FROM Solicitud_Presupuesto"
         Dim RowSol As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
 
         If RowSol IsNot Nothing Then
@@ -190,19 +246,46 @@ Public Class Ingresar_Presupuesto : Implements IAyudaProv
             Exit Sub
         End If
 
-
         'Obtener con solicitando la clave
-        Dim QuienGraba As String = Operador.Clave
+        
 
         Try
-            Dim SQLCnslt As String = "DELETE FROM SolicitudPresupuesto WHERE NroPresupuesto = '" & Trim(txt_NroPresupuesto.Text) & "'"
-            ExecuteNonQueries("SurfactanSa", SQLCnslt)
 
-            SQLCnslt = "INSERT INTO SolicitudPresupuesto (NroPresupuesto, Fecha, OrdFecha, Proveedor, ProvDescp, Titulo, Descripcion, FormaPago, Moneda, Monto, QuienAprobo, Estado ) " _
+
+            Dim QuienGraba As String
+
+            Dim SQLCnslt As String = "SELECT Descripcion FROM Operador WHERE Clave = '" & Operador.Clave & "'"
+            Dim RowOperador As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+            If RowOperador IsNot Nothing Then
+                QuienGraba = RowOperador.Item("Descripcion")
+            Else
+                QuienGraba = ""
+            End If
+
+
+            If Bandera_NuevaSoli = True Then
+
+                txt_NroPresupuesto.Text = ObtenerNroPresupuesto()
+
+                SQLCnslt = "INSERT INTO Solicitud_Presupuesto (NroPresupuesto, Fecha, OrdFecha, Proveedor, ProvDescp, Titulo, Descripcion, FormaPago, Moneda, Monto, Saldo, QuienGraba, Estado , Novedades) " _
                         & "VALUES('" & txt_NroPresupuesto.Text & "', '" & txt_Fecha.Text & "', '" & ordenaFecha(txt_Fecha.Text) & "', '" & txt_Codigo_Prov.Text & "', '" & txt_Descrip_Prov.Text & "', " _
-                        & "'" & Trim(txt_Titulo.Text) & "', '" & Trim(txt_Descripcion.Text) & "', '" & Trim(txt_FormaPago.Text) & "', '" & cbx_Moneda.SelectedIndex & "', '" & formatonumerico(txt_Monto.Text) & "', '" & QuienGraba & "', '" & "Pendiente" & "')"
+                        & "'" & Trim(txt_Titulo.Text) & "', '" & Trim(txt_Descripcion.Text) & "', '" & Trim(txt_FormaPago.Text) & "', '" & cbx_Moneda.SelectedIndex & "', " _
+                        & "'" & formatonumerico(txt_Monto.Text) & "', '" & formatonumerico(txt_Monto.Text) & "', '" & QuienGraba & "', '" & "Pendiente" & "', '" & txt_novedades.Text & "')"
+            Else
+                SQLCnslt = "UPDATE Solicitud_Presupuesto SET Titulo = '" & Trim(txt_Titulo.Text) & "' , Descripcion = '" & Trim(txt_Descripcion.Text) & "' , " _
+                            & "FormaPago = '" & Trim(txt_FormaPago.Text) & "' ,QuienGraba = '" & QuienGraba & "' , Novedades = '" & txt_novedades.Text & "' " _
+                            & "WHERE NroPresupuesto = '" & txt_NroPresupuesto.Text & "'"
+            End If
+
 
             ExecuteNonQueries("SurfactanSa", SQLCnslt)
+
+          
+            If DirecctorioVacio(CarpetaAux) Then
+                _SubirArchvios(txt_NroPresupuesto.Text)
+            End If
+
+
 
             Dim Wowner As IActualzarDGV = TryCast(Owner, IActualzarDGV)
 
@@ -218,9 +301,57 @@ Public Class Ingresar_Presupuesto : Implements IAyudaProv
 
     End Sub
 
+
+    Private Sub _SubirArchvios(ByVal NroPresu As String)
+
+        Dim WDestino = RutaGuardar & NroPresu
+        Dim WCantCorrectas = 0
+
+        'If RutaArchivo.Length = 0 Then : Return : End If
+
+        Try
+            'Verificamos sino existe la carpeta, sino existe la creamos
+            If (Not Directory.Exists(WDestino)) Then
+                Directory.CreateDirectory(WDestino)
+            End If
+        Catch ex As Exception
+
+        End Try
+
+        For Each archivo As String In Directory.GetFiles(CarpetaAux)
+            Try
+                Dim NombreArchivo As String = archivo.Remove(0, (CarpetaAux).Length)
+                If Not File.Exists(WDestino & "\" & NombreArchivo) Then
+                    'Si no existe lo copio
+                    File.Move(archivo, WDestino & "\" & NombreArchivo)
+                    WCantCorrectas += 1
+                    File.Delete(archivo)
+                Else
+                    'sino llegan a haber borrado los archivos y le adjuntan uno
+                    ' que ya existe con el mismo nombre consutamos si sobre escribir
+                    If MsgBox("El Archivo """ & Path.GetFileName(archivo) & """, ya existe en la carpeta. ¿Desea sobreescribir el archivo existente?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                        File.Delete(WDestino & "\" & NombreArchivo)
+                        File.Move(archivo, WDestino & "\" & NombreArchivo)
+                        WCantCorrectas += 1
+
+                    End If
+                End If
+
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Critical)
+                Return
+            End Try
+        Next
+
+
+
+    End Sub
+    Public Function DirecctorioVacio(ByVal Ruta As String) As Boolean
+        Return Directory.EnumerateFileSystemEntries(Ruta).Any()
+    End Function
     Private Sub btn_CerrarPresupuesto_Click(sender As Object, e As EventArgs) Handles btn_CerrarPresupuesto.Click
         Try
-            Dim SQLCnslt As String = "UPDATE SolicitudPresupuesto SET Estado = 'Cerrada' WHERE NroPresupuesto = '" & txt_NroPresupuesto.Text & "'"
+            Dim SQLCnslt As String = "UPDATE Solicitud_Presupuesto SET Estado = 'Cerrada' WHERE NroPresupuesto = '" & txt_NroPresupuesto.Text & "'"
 
             ExecuteNonQueries("SurfactanSa", SQLCnslt)
 
@@ -238,12 +369,21 @@ Public Class Ingresar_Presupuesto : Implements IAyudaProv
     End Sub
 
     Private Sub btn_Adjuntar_Click(sender As Object, e As EventArgs) Handles btn_Adjuntar.Click
+        Dim WPath As String
+        If Not Directory.Exists("C:\Auxiliar_Solicitud_Presupuestos") Then
+            Directory.CreateDirectory("C:\Auxiliar_Solicitud_Presupuestos")
+        End If
+        If Bandera_NuevaSoli = True Then
+            WPath = CarpetaAux
+        Else
+            WPath = RutaGuardar & Trim(txt_NroPresupuesto.Text)
+        End If
 
-        Dim WPath As String = "\\193.168.0.2\g$\vb\NET\ArchivosRelacionados_SolicitudesPresupuestos\Presu_" & Trim(txt_NroPresupuesto.Text)
         With New EditorArchivos(2, WPath, Operador.Clave)
             .Show()
         End With
     End Sub
 
 
+   
 End Class

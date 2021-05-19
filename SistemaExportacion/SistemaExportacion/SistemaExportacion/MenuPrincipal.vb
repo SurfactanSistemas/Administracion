@@ -71,7 +71,7 @@ Public Class MenuPrincipal : Implements IActualizaGrillaProforma
 
         ' nuevas variables proforma
         Dim WMV_Buque, WETD_FechaSalida, WOrd_ETD_FechaSalida, WETA_FechaArribo, WOrd_ETA_FechaArribo,
-            WPermiso_de_Embarque, WBL, WForwarder, WCombox_Estado, WFecha_Limite, WFechaCobro As String
+            WPermiso_de_Embarque, WBL, WForwarder, WCombox_Estado, WFecha_Limite, WFechaCobro, WNroFactura, WSaldoFactura, WNroPedido As String
         Dim WPesoNeto As Double
         Dim WCondicion As Integer
         'fin nuevas variables
@@ -84,7 +84,7 @@ Public Class MenuPrincipal : Implements IActualizaGrillaProforma
 
         If ckMostrarEntregadas.Checked Then WFiltro = ""
 
-        Dim ZSql = "SELECT DISTINCT p.Proforma, p.FechaOrd, p.Fecha, p.Cliente, c.Razon, p.Pais, p.Total,p.FechaLimite, p.FechaLimiteOrd, p.PackingList, isnull(p.Entregado, '') as Entregado, p.Condicion, p.MV_Buque, p.ETD_FechaSalida, p.ETA_FechaArribo, p.Permiso_de_Embarque, p.BL, p.Forwarder, p.Combox_Estado, p.PesoNeto, p.FechaCobro, p.OrdFechaCobro FROM ProformaExportacion as p, Cliente as c WHERE p.Cliente = c.Cliente  " & WFiltro & "  ORDER BY p.FechaOrd, p.Proforma"
+        Dim ZSql = "SELECT DISTINCT p.Proforma, p.FechaOrd, p.Fecha, p.Cliente, c.Razon, p.Pais, p.Total,p.FechaLimite, p.FechaLimiteOrd, p.PackingList, isnull(p.Entregado, '') as Entregado, p.Condicion, p.MV_Buque, p.ETD_FechaSalida, p.ETA_FechaArribo, p.Permiso_de_Embarque, p.BL, p.Forwarder, p.Combox_Estado, p.PesoNeto, p.FechaCobro, p.OrdFechaCobro, p.Pedido, p.Factura FROM ProformaExportacion as p, Cliente as c WHERE p.Cliente = c.Cliente  " & WFiltro & "  ORDER BY p.FechaOrd, p.Proforma"
 
         Try
 
@@ -141,6 +141,21 @@ Public Class MenuPrincipal : Implements IActualizaGrillaProforma
                         WPesoNeto = IIf(IsDBNull(.Item("PesoNeto")), 0.0, .Item("PesoNeto"))
                         WCombox_Estado = IIf(IsDBNull(.Item("Combox_Estado")), "", .Item("Combox_Estado"))
                         WFechaCobro = IIf(IsDBNull(.Item("FechaCobro")), "", .Item("FechaCobro"))
+
+
+                        WNroFactura = IIf(IsDBNull(.Item("Factura")), "", .Item("Factura"))
+                        WNroFactura = Trim(WNroFactura)
+                        WNroPedido = IIf(IsDBNull(.Item("Pedido")), "", .Item("Pedido"))
+                        WNroPedido = Trim(WNroPedido)
+
+
+
+                        If WNroFactura <> "" Then
+                            Buscar_NroFactura_Y_SaldoFactura(WNroPedido, WNroFactura, WSaldoFactura)
+                        Else
+                            WSaldoFactura = "0.00"
+                        End If
+                        
                         'FIN NUEVAS INCLUCIONES
 
 
@@ -174,6 +189,8 @@ Public Class MenuPrincipal : Implements IActualizaGrillaProforma
                         .Cells("Peso_Neto").Value = formatonumerico(WPesoNeto)
                         .Cells("Combox_Estado").Value = Trim(WCombox_Estado)
                         .Cells("Fecha_Cobro").Value = WFechaCobro
+                        .Cells("NroFactura").Value = WNroFactura
+                        .Cells("SaldoFactura").Value = WSaldoFactura
 
                     End With
 
@@ -200,6 +217,24 @@ Public Class MenuPrincipal : Implements IActualizaGrillaProforma
 
     End Sub
 
+
+    Private Sub Buscar_NroFactura_Y_SaldoFactura(ByVal NroPedido As String, ByRef NroFactura As String, ByRef SaldoFactura As String)
+        Dim SQLCnslt As String = "SELECT Numero, SaldoUs FROM CtaCte WHERE Pedido = '" & Trim(NroPedido) & "'"
+        Try
+            Dim RowCtaCte As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+            If RowCtaCte IsNot Nothing Then
+                NroFactura = Microsoft.VisualBasic.Right(RowCtaCte.Item("Numero"), 4)
+                SaldoFactura = RowCtaCte.Item("SaldoUs")
+                'SETEO EL NUMERO PARA QUE SE SEPARE POR MILES
+                SaldoFactura = String.Format("{0:N2}", Val(SaldoFactura))
+            Else
+                NroFactura = ""
+                SaldoFactura = ""
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
     Private Function obtenerCondicion(ByVal incoterm As Integer) As String
         Dim Condicion As String
         Select Case incoterm
@@ -695,7 +730,7 @@ Public Class MenuPrincipal : Implements IActualizaGrillaProforma
         Dim num1, num2
 
         Select Case e.Column.Index
-            Case 0, 5, 16
+            Case 0, 5, 16, 22
 
                 num1 = CDbl(e.CellValue1)
                 num2 = CDbl(e.CellValue2)

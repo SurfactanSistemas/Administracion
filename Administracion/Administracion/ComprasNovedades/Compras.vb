@@ -6,7 +6,7 @@ Imports System.IO
 Imports Microsoft.VisualBasic.CompilerServices
 
 
-Public Class Compras
+Public Class Compras : Implements IPasa_NumeroPresupuesto
 
     'Variables de adjuntar archivos
     Private Const EXTENSIONES_PERMITIDAS = "*.bmp|*.png|*.jpg|*.jpeg|*.pdf|*.doc|*.docx|*.xls|*.xlsx"
@@ -90,6 +90,8 @@ Public Class Compras
         _RetIB15 = ""
         _RetIB16 = ""
 
+        txt_NroPresup.Text = ""
+
         If Directory.Exists("C:\Auxiliar") Then Directory.Delete("C:\Auxiliar", True)
 
         Directory.CreateDirectory("C:\Auxiliar")
@@ -99,7 +101,7 @@ Public Class Compras
         '        File.Delete(archivo)
         '    Next
         'End If
-        
+
         Array.Clear(_PyMENacion, 0, _PyMENacion.Length)
         Array.Clear(ImpoIb, 0, ImpoIb.Length)
 
@@ -132,6 +134,24 @@ Public Class Compras
 
         _MostrarCAI(proveedor)
         diasPlazo = _ExtraerSoloNumeros(proveedorAMostrar.diasPlazo)
+
+        Buscar_Presupuestos(proveedorAMostrar.id, proveedorAMostrar.razonSocial)
+
+    End Sub
+
+
+    Private Sub Buscar_Presupuestos(ByVal Proveedor As String, ByVal Razon As String)
+
+        Dim SQLCnslt As String = "SELECT NroPresupuesto FROM Solicitud_Presupuesto WHERE Proveedor = '" & Proveedor & "' AND Estado = 'Pendiente'"
+        Dim TablaPresu As DataTable = GetAll(SQLCnslt, "SurfactanSa")
+        If TablaPresu.Rows.Count > 0 Then
+            If MsgBox("Se detectaron presupuestos para este proveedor." & vbCrLf & " ¿Desea asociar este factura a un presupuesto?", vbYesNo) = vbYes Then
+                With New Consulta_Presupuesto(Proveedor, Razon)
+                    .Show(Me)
+                End With
+            End If
+        End If
+
     End Sub
 
     Private Sub _MostrarCAI(ByVal _proveedor As Proveedor)
@@ -496,7 +516,12 @@ Public Class Compras
                 _SubirArchvios(compra.nroInterno)
             End If
 
+            Try
+                Dim SQLCnslt As String = "UPDATE IvaComp SET NroPresupuesto = '" & compra.NroPresupuesto & "' WHERE NroInterno = '" & compra.nroInterno & "'"
+                ExecuteNonQueries("SurfactanSa", {SQLCnslt})
+            Catch ex As Exception
 
+            End Try
 
             MsgBox("El número de Factura asignado es: " & compra.nroInterno, MsgBoxStyle.Information)
 
@@ -582,7 +607,7 @@ Public Class Compras
                                  asDouble(txtIVARG.Text) * multiplicadorPorNotaDeCredito, asDouble(txtIVA27.Text) * multiplicadorPorNotaDeCredito,
                                  asDouble(txtPercIB.Text) * multiplicadorPorNotaDeCredito, asDouble(txtNoGravado.Text) * multiplicadorPorNotaDeCredito,
                                  asDouble(txtIVA10.Text) * multiplicadorPorNotaDeCredito, asDouble(txtTotal.Text) * multiplicadorPorNotaDeCredito, IIf(chkSoloIVA.Checked, 1, 0),
-                                 txtRemito.Text, txtDespacho.Text, asDouble(_RetIB1), asDouble(_RetIB2), asDouble(_RetIB3), asDouble(_RetIB4), asDouble(_RetIB5), asDouble(_RetIB6), asDouble(_RetIB7), asDouble(_RetIB8), asDouble(_RetIB9), asDouble(_RetIB10), asDouble(_RetIB11), asDouble(_RetIB12), asDouble(_RetIB13), asDouble(_RetIB14))
+                                 txtRemito.Text, txtDespacho.Text, asDouble(_RetIB1), asDouble(_RetIB2), asDouble(_RetIB3), asDouble(_RetIB4), asDouble(_RetIB5), asDouble(_RetIB6), asDouble(_RetIB7), asDouble(_RetIB8), asDouble(_RetIB9), asDouble(_RetIB10), asDouble(_RetIB11), asDouble(_RetIB12), asDouble(_RetIB13), asDouble(_RetIB14), txt_NroPresup.Text)
         crearImputaciones(compra)
         Return compra
     End Function
@@ -1314,7 +1339,7 @@ Public Class Compras
                                     SqlCnslt = "UPDATE IvaComp SET Remito = '" & txtRemito.Text & "' WHERE NroInterno = '" & txtNroInterno.Text & "'"
                                     ExecuteNonQueries("SurfactanSa", {SqlCnslt})
                                 End If
-                                
+
                             End If
                         End If
                     End If
@@ -2386,7 +2411,7 @@ Public Class Compras
             '    .Show()
             'End With
         End If
-       
+
     End Sub
 
 
@@ -2440,5 +2465,7 @@ Public Class Compras
     End Function
 
 
-
+    Public Sub PasaNroPresu(NumeroPresupuesto As String) Implements IPasa_NumeroPresupuesto.PasaNroPresu
+        txt_NroPresup.Text = NumeroPresupuesto
+    End Sub
 End Class

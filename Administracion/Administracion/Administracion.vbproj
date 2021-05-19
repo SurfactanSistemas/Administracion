@@ -330,6 +330,7 @@
     </Compile>
     <Compile Include="Interfaces\IArqueoCheques.vb" />
     <Compile Include="Interfaces\IAyudaProveedores.vb" />
+    <Compile Include="Interfaces\IPasa_NumeroPresupuesto.vb" />
     <Compile Include="Interfaces\IPaseEcheques.vb" />
     <Compile Include="Listados\ConsultaDatosFactura.Designer.vb">
       <DependentUpon>ConsultaDatosFactura.vb</DependentUpon>
@@ -1084,6 +1085,12 @@
     <Compile Include="ReportViewer.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Resources\Consulta_Presupuesto.Designer.vb">
+      <DependentUpon>Consulta_Presupuesto.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Consulta_Presupuesto.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="RubrosProveedorABM.Designer.vb">
       <DependentUpon>RubrosProveedorABM.vb</DependentUpon>
     </Compile>
@@ -1577,6 +1584,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReportViewer.resx">
       <DependentUpon>ReportViewer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Consulta_Presupuesto.resx">
+      <DependentUpon>Consulta_Presupuesto.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RubrosProveedorABM.resx">
       <DependentUpon>RubrosProveedorABM.vb</DependentUpon>

@@ -23,11 +23,46 @@ Public Class Form1 : Implements IActualzarDGV
         If Modo = "COMPLETO" Then
             filtro = ""
         End If
-        Dim SQLCnslt As String = "SELECT NroPresu = NroPresupuesto, Proveedor = trim(ProvDescp), Titulo = Trim(Titulo), Fecha, FormaPago = Trim(FormaPago), Monto, Moneda = IIF(Moneda = 0, 'Pesos ($)', 'Dolares (U$S)') FROM SolicitudPresupuesto " & filtro & " ORDER BY NroPresupuesto"
+        Dim SQLCnslt As String = "SELECT NroPresu = NroPresupuesto, Cod_Proveedor = Proveedor, Proveedor = trim(ProvDescp), Titulo = Trim(Titulo), Fecha, FormaPago = Trim(FormaPago), Monto, Moneda = IIF(Moneda = 0, 'Pesos ($)', 'Dolares (U$S)') FROM Solicitud_Presupuesto " & filtro & " ORDER BY NroPresupuesto"
         Dim TablaPresu As DataTable = GetAll(SQLCnslt, "SurfactanSa")
 
         dgv_Presupuestos.DataSource = TablaPresu
 
+        Calcular_Pagado_y_Saldo()
+
+    End Sub
+
+    Private Sub Calcular_Pagado_y_Saldo()
+        For Each RowDgv As DataGridViewRow In dgv_Presupuestos.Rows
+            ' Pago(PESOS) = 1 , Pago(DOLARES) = 2
+            Dim SQLCnslt As String = "SELECT Neto, Paridad, Pago, Fecha FROM IvaComp WHERE Proveedor = '" & RowDgv.Cells("Cod_Proveedor").Value & "' AND NroPresupuesto = '" & RowDgv.Cells("NroPresu").Value & "'"
+            Dim Tablaivacomp As DataTable = GetAll(SQLCnslt, "SurfactanSa")
+            If Tablaivacomp.Rows.Count > 0 Then
+                Dim TotalPagado As Double = 0
+                For Each row As DataRow In Tablaivacomp.Rows
+                    Dim Neto As Double = row.Item("Neto")
+                    Dim Pago As Integer = row.Item("Pago")
+                    Dim Paridad As Double = row.Item("Paridad")
+                    If Val(Paridad) = 0 Then
+                        SQLCnslt = "Select Cambio from Cambios WHERE "
+                    End If
+
+                    If Pago = 1 Then
+                        TotalPagado += Neto
+                    Else
+                        TotalPagado += (Neto / Paridad)
+                    End If
+
+                Next
+
+                RowDgv.Cells("Pagado").Value = TotalPagado
+                RowDgv.Cells("Saldo").Value = (RowDgv.Cells("Monto").Value - TotalPagado)
+
+            Else
+                RowDgv.Cells("Pagado").Value = 0
+                RowDgv.Cells("Saldo").Value = RowDgv.Cells("Monto").Value
+            End If
+        Next
     End Sub
 
     Public Sub RefrescaDGV() Implements IActualzarDGV.RefrescaDGV

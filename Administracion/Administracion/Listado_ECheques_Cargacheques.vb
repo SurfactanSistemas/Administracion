@@ -3,14 +3,16 @@ Imports Util.Clases.Query
 Public Class Listado_ECheques_Cargacheques
 
     Dim WCuit As String
+    Dim WCliente As String
 
-    Sub New(Optional ByVal Cuit As String = "")
+    Sub New(Optional ByVal Cuit As String = "", Optional ByVal Cliente As String = "")
 
         ' Llamada necesaria para el diseñador.
         InitializeComponent()
 
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
         WCuit = Cuit
+        WCliente = Cliente
         Cargar_Echeques()
 
     End Sub
@@ -136,7 +138,12 @@ Public Class Listado_ECheques_Cargacheques
 
                 Return ZBanco & "/" & Mid(rowCliente.Item("Cliente"), 1, 1) & Val(Mid(rowCliente.Item("Cliente"), 2, 6)).ToString()
             End If
+        Else
+            If ZBanco.Trim = "" Then Return ""
 
+            ZBanco = ZBanco.Split("/")(0) ' Agarramos el nombre del banco, sin el cod del cliente.
+
+            Return ZBanco & "/" & Mid(WCliente, 1, 1) & Val(Mid(WCliente, 2, 6)).ToString()
         End If
         
     End Function

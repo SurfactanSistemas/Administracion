@@ -2,7 +2,7 @@
     Public nroInterno As Integer
     Public proveedor As Proveedor
     Public formaPago, tipoPago As Integer
-    Public tipoDocumento, tipoDocumentoDescripcion, letra, numero, fechaEmision, fechaIVA, fechaVto1, fechaVto2, remito, despacho, punto As String
+    Public tipoDocumento, tipoDocumentoDescripcion, letra, numero, fechaEmision, fechaIVA, fechaVto1, fechaVto2, remito, despacho, punto, NroPresupuesto As String
     Public paridad, neto, iva21, ivaRG, iva27, percibidoIB, exento, iva105, total As Double
     Public RetIB1, RetIB2, RetIB3, RetIB4, RetIB5, RetIB6, RetIB7, RetIB8, RetIB9, RetIB10, RetIB11, RetIB12, RetIB13, RetIB14 As Double
     Public soloIVA As Integer
@@ -19,7 +19,7 @@
                    Optional ByVal _RetIB5 As Double = 0, Optional ByVal _RetIB6 As Double = 0, Optional ByVal _RetIB7 As Double = 0,
                    Optional ByVal _RetIB8 As Double = 0, Optional ByVal _RetIB9 As Double = 0, Optional ByVal _RetIB10 As Double = 0,
                    Optional ByVal _RetIB11 As Double = 0, Optional ByVal _RetIB12 As Double = 0, Optional ByVal _RetIB13 As Double = 0,
-                   Optional ByVal _RetIB14 As Double = 0)
+                   Optional ByVal _RetIB14 As Double = 0, Optional ByVal _NroPresupuesto As String = "")
         nroInterno = interno
         proveedor = prov
         tipoDocumento = tipoDoc
@@ -59,6 +59,7 @@
         RetIB12 = _RetIB12
         RetIB13 = _RetIB13
         RetIB14 = _RetIB14
+        NroPresupuesto = _NroPresupuesto
     End Sub
 
     Public Sub agregarImputaciones(ByVal listaImputaciones As List(Of Imputac))

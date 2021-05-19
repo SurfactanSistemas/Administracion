@@ -38,7 +38,7 @@ Partial Class Form1
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
-        Me.Panel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(481, 60)
         Me.Panel1.TabIndex = 5
@@ -75,7 +75,7 @@ Partial Class Form1
         '
         Me.btn_Cerrar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_Cerrar.Location = New System.Drawing.Point(243, 254)
-        Me.btn_Cerrar.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btn_Cerrar.Margin = New System.Windows.Forms.Padding(4)
         Me.btn_Cerrar.Name = "btn_Cerrar"
         Me.btn_Cerrar.Size = New System.Drawing.Size(181, 63)
         Me.btn_Cerrar.TabIndex = 9
@@ -113,7 +113,7 @@ Partial Class Form1
         Me.Controls.Add(Me.btn_Cerrar)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Panel1)
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "Form1"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Panel1.ResumeLayout(False)

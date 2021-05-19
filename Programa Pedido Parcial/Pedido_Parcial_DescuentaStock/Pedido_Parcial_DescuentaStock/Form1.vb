@@ -141,7 +141,7 @@ Public Class Form1 : Implements IPasaCodigo
     Private Sub txt_Partida_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_Partida.KeyDown
         Select Case e.KeyData
             Case Keys.Enter
-               
+
             Case Keys.Escape
                 txt_Partida.Text = ""
         End Select
@@ -167,11 +167,11 @@ Public Class Form1 : Implements IPasaCodigo
 
             If WEntra = "N" Then
                 SQLCnslt = "SELECT Saldo FROM Guia WHERE Articulo = '" & WCodigo & "' " _
-                         & "AND Lote = '" & txt_Partida.Text & "' AND Marca <> 'X' " _
+                         & "AND Lote = '" & txt_Partida.Text & "' AND Marca <> 'X'  " _
                          & "ORDER BY Saldo DESC, FechaOrd"
                 Dim RowGuia As DataRow = GetSingle(SQLCnslt, BaseConsultar)
                 If RowGuia IsNot Nothing Then
-                    WCantidad = IIf(IsDBNull(RowHoja.Item("Saldo")), 0, RowHoja.Item("Saldo"))
+                    WCantidad = IIf(IsDBNull(RowGuia.Item("Saldo")), 0, RowGuia.Item("Saldo"))
                 End If
             End If
 
@@ -190,11 +190,11 @@ Public Class Form1 : Implements IPasaCodigo
 
             If WEntra = "N" Then
                 SQLCnslt = "SELECT Saldo FROM Guia WHERE Terminado = '" & txt_Producto.Text & "' " _
-                         & "AND Lote = '" & txt_Partida.Text & "' AND Marca <> 'X' " _
+                         & "AND Lote = '" & txt_Partida.Text & "' AND Marca <> 'X'  " _
                          & "ORDER BY saldo DESC, FechaOrd"
                 Dim RowGuia As DataRow = GetSingle(SQLCnslt, BaseConsultar)
                 If RowGuia IsNot Nothing Then
-                    WCantidad = IIf(IsDBNull(RowHoja.Item("Saldo")), 0, RowHoja.Item("Saldo"))
+                    WCantidad = IIf(IsDBNull(RowGuia.Item("Saldo")), 0, RowGuia.Item("Saldo"))
                 End If
             End If
 
@@ -216,10 +216,10 @@ Public Class Form1 : Implements IPasaCodigo
 
     Private Sub DescontarStock()
 
-        GenerarRegistroEstadistica()
+        ' GenerarRegistroEstadistica()
 
         If txt_Producto.Text.StartsWith("DY") Then
-            ActualzarSaldosDY()
+            '     ActualzarSaldosDY()
         Else
             ActualzarSaldosTerminado()
         End If
@@ -287,7 +287,7 @@ Public Class Form1 : Implements IPasaCodigo
 
                 End If
 
-                Dim WClave As String = txt_Partida.Text & "01" ' La CLAVE es Laudo & Renglon
+                Dim WClave As String = RowTermi.Item("Clave")
 
                 SQLCnslt = "UPDATE Guia SET Saldo = '" & WSaldo & "', WDate = '" & WDate & "' WHERE Clave = '" & WClave & "'"
 
@@ -362,12 +362,16 @@ Public Class Form1 : Implements IPasaCodigo
                     WSaldo = Str$(RowTermi.Item("Saldo") - Val(txt_Cant_Restar.Text))
 
                 End If
+                'Obtengo el Clave de la guia
+               
 
-                Dim WClave As String = txt_Partida.Text & "01" ' LA CLAVE ES LOTE & Renglon
+                Dim WClave As String = RowTermi.Item("Clave")
 
                 SQLCnslt = "UPDATE Guia SET Saldo = '" & WSaldo & "', WDate = '" & WDate & "' WHERE Clave = '" & WClave & "'"
 
                 ListaSQLCnslt.Add(SQLCnslt)
+
+
             End If
 
         End If
@@ -391,80 +395,80 @@ Public Class Form1 : Implements IPasaCodigo
         
         If rowEstadistica IsNot Nothing Then
             With rowEstadistica
-                WClave = .Item("Clave")
-                WTipo = .Item("Tipo")
-                WNumero = .Item("Numero")
-                WRenglon = .Item("Renglon")
-                Warticulo = .Item("Articulo")
-                WCantidad = .Item("Cantidad")
-                WPrecio = .Item("Precio")
-                WPrecioUs = .Item("PrecioUs")
+                WClave = OrDefault(.Item("Clave"), "")
+                WTipo = OrDefault(.Item("Tipo"), 0)
+                WNumero = OrDefault(.Item("Numero"), 0)
+                WRenglon = OrDefault(.Item("Renglon"), 0)
+                WArticulo = OrDefault(.Item("Articulo"), "")
+                WCantidad = OrDefault(.Item("Cantidad"), 0)
+                WPrecio = OrDefault(.Item("Precio"), 0)
+                WPrecioUs = OrDefault(.Item("PrecioUs"), 0)
                 WImporte = .Item("Importe")
                 WImporteUs = .Item("ImporteUs")
-                WCliente = .Item("Cliente")
-                WParidad = .Item("Paridad")
-                WVendedor = .Item("Vendedor")
-                WRubro = .Item("Rubro")
-                WLinea = .Item("Linea")
-                WCosto1 = .Item("Costo1")
-                WCosto2 = .Item("Costo2")
-                WCoeficiente = .Item("Coeficiente")
-                WPedido = .Item("Pedido")
-                WFecha = .Item("Fecha")
-                WImporte1 = .Item("Importe1")
-                WImporte2 = .Item("Importe2")
-                WImporte3 = .Item("Importe3")
-                WImporte4 = .Item("Importe4")
-                WOrdFecha = .Item("OrdFecha")
-                WWArticulo = .Item("WArticulo")
-                WRemito = .Item("Remito")
-                WWDate = .Item("WDate")
-                Wwcantidad = .Item("wcantidad")
-                Wwimporte = .Item("wimporte")
-                Wwimporteus = .Item("wimporteus")
-                WMarca = .Item("Marca")
-                WLote1 = .Item("Lote1")
-                wCanti1 = .Item("Canti1")
-                WLote2 = .Item("Lote2")
-                WCanti2 = .Item("Canti2")
-                WLote3 = .Item("Lote3")
-                wCanti3 = .Item("Canti3")
-                WLote4 = .Item("Lote4")
-                wCanti4 = .Item("Canti4")
-                WLote5 = .Item("Lote5")
-                WCanti5 = .Item("Canti5")
+                WCliente = OrDefault(.Item("Cliente"), "")
+                WParidad = OrDefault(.Item("Paridad"), 0)
+                WVendedor = OrDefault(.Item("Vendedor"), 0)
+                WRubro = OrDefault(.Item("Rubro"), 0)
+                WLinea = OrDefault(.Item("Linea"), 0)
+                WCosto1 = OrDefault(.Item("Costo1"), 0)
+                WCosto2 = OrDefault(.Item("Costo2"), 0)
+                WCoeficiente = OrDefault(.Item("Coeficiente"), 0)
+                WPedido = OrDefault(.Item("Pedido"), 0)
+                WFecha = OrDefault(.Item("Fecha"), "")
+                WImporte1 = OrDefault(.Item("Importe1"), 0)
+                WImporte2 = OrDefault(.Item("Importe2"), 0)
+                WImporte3 = OrDefault(.Item("Importe3"), 0)
+                WImporte4 = OrDefault(.Item("Importe4"), 0)
+                WOrdFecha = OrDefault(.Item("OrdFecha"), "")
+                WWArticulo = OrDefault(.Item("WArticulo"), "")
+                WRemito = OrDefault(.Item("Remito"), "")
+                WWDate = OrDefault(.Item("WDate"), "")
+                Wwcantidad = OrDefault(.Item("wcantidad"), 0)
+                Wwimporte = OrDefault(.Item("wimporte"), 0)
+                Wwimporteus = OrDefault(.Item("wimporteus"), 0)
+                WMarca = OrDefault(.Item("Marca"), "")
+                WLote1 = OrDefault(.Item("Lote1"), 0)
+                WCanti1 = OrDefault(.Item("Canti1"), 0)
+                WLote2 = OrDefault(.Item("Lote2"), 0)
+                WCanti2 = OrDefault(.Item("Canti2"), 0)
+                WLote3 = OrDefault(.Item("Lote3"), 0)
+                WCanti3 = OrDefault(.Item("Canti3"), 0)
+                WLote4 = OrDefault(.Item("Lote4"), 0)
+                WCanti4 = OrDefault(.Item("Canti4"), 0)
+                WLote5 = OrDefault(.Item("Lote5"), 0)
+                WCanti5 = OrDefault(.Item("Canti5"), 0)
                 WEntrada = IIf(IsDBNull(.Item("Entrada")), 0, .Item("Entrada"))
                 WTipopro = IIf(IsDBNull(.Item("Tipopro")), "", .Item("Tipopro"))
                 WHoja = IIf(IsDBNull(.Item("Hoja")), 0, .Item("Hoja"))
                 WEmpresa = IIf(IsDBNull(.Item("Empresa")), 0, .Item("Empresa"))
                 WMarcaant = IIf(IsDBNull(.Item("Marcaant")), "", .Item("Marcaant"))
-                WTipoProDy = .Item("TipoProDy")
-                WArticuloDy = .Item("ArticuloDy")
-                WEnv1 = .Item("Env1")
-                wCantiEnv1 = .Item("CantiEnv1")
-                WEnv2 = .Item("Env2")
-                wCantiEnv2 = .Item("CantiEnv2")
-                WEnv3 = .Item("Env3")
-                wCantiEnv3 = .Item("CantiEnv3")
-                WEnv4 = .Item("Env4")
-                wCantiEnv4 = .Item("CantiEnv4")
-                WEnv5 = .Item("Env5")
-                wCantiEnv5 = .Item("CantiEnv5")
+                WTipoProDy = OrDefault(.Item("TipoProDy"), "")
+                WArticuloDy = OrDefault(.Item("ArticuloDy"), "")
+                WEnv1 = OrDefault(.Item("Env1"), 0)
+                WCantiEnv1 = OrDefault(.Item("CantiEnv1"), 0)
+                WEnv2 = OrDefault(.Item("Env2"), 0)
+                WCantiEnv2 = OrDefault(.Item("CantiEnv2"), 0)
+                WEnv3 = OrDefault(.Item("Env3"), 0)
+                WCantiEnv3 = OrDefault(.Item("CantiEnv3"), 0)
+                WEnv4 = OrDefault(.Item("Env4"), 0)
+                WCantiEnv4 = OrDefault(.Item("CantiEnv4"), 0)
+                WEnv5 = OrDefault(.Item("Env5"), 0)
+                WCantiEnv5 = OrDefault(.Item("CantiEnv5"), 0)
                 WNroEntrada = IIf(IsDBNull(.Item("NroEntrada")), 0, .Item("NroEntrada"))
                 WFechaEntrada = IIf(IsDBNull(.Item("FechaEntrada")), "", .Item("FechaEntrada"))
                 WNroPedido = IIf(IsDBNull(.Item("NroPedido")), 0, .Item("NroPedido"))
                 WFechaPedido = IIf(IsDBNull(.Item("FechaPedido")), "", .Item("FechaPedido"))
                 WLoteOriginal = IIf(IsDBNull(.Item("LoteOriginal")), 0, .Item("LoteOriginal"))
                 WObservaDevol = IIf(IsDBNull(.Item("ObservaDevol")), "", .Item("ObservaDevol"))
-                WLoteAdicional = .Item("LoteAdicional")
-                WEnvAdicional = .Item("EnvAdicional")
+                WLoteAdicional = IIf(IsDBNull(.Item("LoteAdicional")), "", .Item("LoteAdicional"))
+                WEnvAdicional = IIf(IsDBNull(.Item("EnvAdicional")), "", .Item("EnvAdicional"))
                 WClaveCtaCte = IIf(IsDBNull(.Item("ClaveCtaCte")), "", .Item("ClaveCtaCte"))
                 WImpreTerminado = IIf(IsDBNull(.Item("ImpreTerminado")), "", .Item("ImpreTerminado"))
                 WImpreCantidad = IIf(IsDBNull(.Item("ImpreCantidad")), 0, .Item("ImpreCantidad"))
                 WImpreTipo = IIf(IsDBNull(.Item("ImpreTipo")), "", .Item("ImpreTipo"))
                 WImpreNumeros = IIf(IsDBNull(.Item("ImpreNumeros")), "", .Item("ImpreNumeros"))
                 WImpreBruto = IIf(IsDBNull(.Item("ImpreBruto")), 0, .Item("ImpreBruto"))
-                WTitulo = .Item("Titulo")
+                WTitulo = IIf(IsDBNull(.Item("Titulo")), "", .Item("Titulo"))
                 WDescriTerminado = IIf(IsDBNull(.Item("DescriTerminado")), "", .Item("DescriTerminado"))
                 WDescriTerminadoII = .Item("DescriTerminadoII")
                 WMarcaMono = IIf(IsDBNull(.Item("MarcaMono")), "", .Item("MarcaMono"))
@@ -510,7 +514,7 @@ Public Class Form1 : Implements IPasaCodigo
                             & "EnvAdicional, ClaveCtaCte, ImpreTerminado, ImpreCantidad, ImpreTipo, ImpreNumeros, " _
                             & "ImpreBruto, Titulo, DescriTerminado, DescriTerminadoII, MarcaMono) " _
                             & "Values( " _
-                            & "'" & WClave & "', '" & WTipo & "', '" & WNumero & "', '" & WRenglon & "', '" & WArticulo & "', '" & formatonumerico(WCantidad) & "', '" & formatonumerico(WPrecio) & "', '" & formatonumerico(WPrecioUs) & "', " _
+                            & "'" & WClave & "', '" & WTipo & "', '" & WNumero & "', '" & NuevoRenglon & "', '" & WArticulo & "', '" & formatonumerico(WCantidad) & "', '" & formatonumerico(WPrecio) & "', '" & formatonumerico(WPrecioUs) & "', " _
                             & "'" & formatonumerico(WImporte) & "', '" & formatonumerico(WImporteUs) & "', '" & WCliente & "', '" & formatonumerico(WParidad) & "', '" & WVendedor & "', '" & WRubro & "', '" & WLinea & "', '" & WCosto1 & "', '" & WCosto2 & "', '" & WCoeficiente & "', " _
                             & "'" & WPedido & "', '" & WFecha & "', '" & WImporte1 & "', '" & WImporte2 & "', '" & WImporte3 & "', '" & WImporte4 & "', '" & WOrdFecha & "', '" & WWArticulo & "', '" & WRemito & "', '" & WWDate & "', " _
                             & "'" & Wwcantidad & "', '" & Wwimporte & "', '" & Wwimporteus & "', '" & WMarca & "', '" & WLote1 & "', '" & formatonumerico(WCanti1) & "', '" & WLote2 & "', '" & WCanti2 & "', '" & WLote3 & "', '" & WCanti3 & "', '" & WLote4 & "', " _
@@ -558,6 +562,9 @@ Public Class Form1 : Implements IPasaCodigo
         If Validarlote = True Then
             DescontarStock()
             btn_Limpiar_Click(Nothing, Nothing)
+            MsgBox("Grabacion Efectuada con Exito", vbInformation)
+        Else
+            MsgBox("La partida es erronea", vbExclamation)
         End If
 
     End Sub
@@ -566,5 +573,12 @@ Public Class Form1 : Implements IPasaCodigo
         txt_Pedido.Text = ""
         LimpiarForm()
         txt_Pedido.Focus()
+    End Sub
+
+   
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.BringToFront()
+        Me.WindowState = FormWindowState.Normal
+        TopMost = True
     End Sub
 End Class
