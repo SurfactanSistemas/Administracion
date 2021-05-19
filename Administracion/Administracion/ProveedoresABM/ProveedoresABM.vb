@@ -666,6 +666,8 @@ Public Class ProveedoresABM
         If RowProveedor IsNot Nothing Then
             Return IIf(IsDBNull(RowProveedor.Item("TipoDolar")), 0, RowProveedor.Item("TipoDolar"))
         End If
+
+        Return 0
     End Function
     Private Function _ProveedorEmbargado() As Boolean
         Dim embargado = False

@@ -2158,6 +2158,7 @@ Public Class RecibosProvisorios : Implements IPaseEcheques
     End Sub
 
     Private Sub btn_VerEcheq_Click(sender As Object, e As EventArgs) Handles btn_VerEcheq.Click
+        Dim WCuitCliente As String = ""
         If txtCliente.Text <> "" Then
             Dim SQLCnslt As String = "SELECT Cliente FROM Cliente WHERE Cliente = '" & txtCliente.Text & "'"
             Dim rowCliente As DataRow = GetSingle(SQLCnslt, "SurfactanSa")

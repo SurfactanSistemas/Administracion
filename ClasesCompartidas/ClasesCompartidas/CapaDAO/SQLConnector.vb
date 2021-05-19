@@ -11,7 +11,7 @@ Public Class SQLConnector
         cn.Open()
     End Sub
 
-    Public Shared Function tryConnection(ByVal connectionString As String)
+    Public Shared Function tryConnection(ByVal connectionString As String) As Boolean
         Try
             Dim connection As New SqlConnection
             connection.ConnectionString = connectionString
@@ -54,14 +54,14 @@ Public Class SQLConnector
         Return _executeProcedureWithReturnValue(procedure, args, values)
     End Function
 
-    Private Shared Function procedurePrefix()
+    Private Shared Function procedurePrefix() As String
         Return "PR_"
     End Function
 
     Private Shared Sub _executeProcedure(ByVal procedureName As String, ByVal args As List(Of String), ByVal ParamArray values() As Object)
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand()
-        Dim procedure As String = procedurePrefix() & procedureName
+        Dim procedure As String = procedurePrefix().ToString & procedureName
 
         Try
             conexionSql(cn, cm)
@@ -86,7 +86,7 @@ Public Class SQLConnector
         Dim cm As SqlCommand = New SqlCommand()
         Dim dr As SqlDataReader
         Dim dt As DataTable = New DataTable()
-        Dim procedure As String = procedurePrefix() & procedureName
+        Dim procedure As String = procedurePrefix().ToString & procedureName
 
         Try
             conexionSql(cn, cm)
@@ -110,7 +110,7 @@ Public Class SQLConnector
     Private Shared Function _executeProcedureWithReturnValue(ByVal procedureName As String, ByVal args As List(Of String), ByVal ParamArray values() As Object) As Integer
         Dim cn As SqlConnection = New SqlConnection()
         Dim cm As SqlCommand = New SqlCommand()
-        Dim procedure As String = procedurePrefix() & procedureName
+        Dim procedure As String = procedurePrefix().ToString & procedureName
 
         Try
             conexionSql(cn, cm)
@@ -122,7 +122,7 @@ Public Class SQLConnector
             End If
             cm.Parameters.Add("@RETURN_VALUE", SqlDbType.Int).Direction = ParameterDirection.ReturnValue
             cm.ExecuteNonQuery()
-            Return Val(cm.Parameters("@RETURN_VALUE").Value)
+            Return CInt(cm.Parameters("@RETURN_VALUE").Value)
         Catch e As Exception
             Return -1
         Finally
@@ -137,7 +137,7 @@ Public Class SQLConnector
         Dim cm As SqlCommand = New SqlCommand()
         Dim dr As SqlDataReader
         Dim dt As DataTable = New DataTable()
-        Dim procedure As String = procedurePrefix() & procedureName
+        Dim procedure As String = procedurePrefix().ToString & procedureName
 
         Try
             conexionSql(cn, cm)
@@ -166,7 +166,7 @@ Public Class SQLConnector
         Dim cm As SqlCommand = New SqlCommand()
         Dim dr As SqlDataReader
         Dim dt As DataTable = New DataTable()
-        Dim procedure As String = procedurePrefix() & procedureName
+        Dim procedure As String = procedurePrefix().ToString & procedureName
 
         Dim args As List(Of String) = New List(Of String)
         Try
@@ -189,7 +189,7 @@ Public Class SQLConnector
     End Function
 
 
-    Private Shared Function _validateArgumentsAndParameters(ByVal args As List(Of String), ByVal ParamArray values() As Object)
+    Private Shared Function _validateArgumentsAndParameters(ByVal args As List(Of String), ByVal ParamArray values() As Object) As Boolean
 
         If (Not args Is Nothing And Not values Is Nothing) Then
             If (args.Count <> values.Length) Then

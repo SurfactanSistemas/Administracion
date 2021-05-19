@@ -30,6 +30,12 @@ Public Class Mail_Reclamo
         Dim WFecha, WFechaOrd, WAsunto, WCuerpo, WEnvio As String
         Dim SQLCnslt As String
 
+        WFecha = ""
+        WFechaOrd = ""
+        WAsunto = ""
+        WCuerpo = ""
+        WEnvio = ""
+
         WFecha = Date.Today.ToString("dd/MM/yyyy")
         WFechaOrd = ordenaFecha(WFecha)
 

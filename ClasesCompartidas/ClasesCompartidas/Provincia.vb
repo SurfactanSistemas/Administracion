@@ -11,7 +11,7 @@
         Return nombre
     End Function
 
-    Public ReadOnly Property valueMember
+    Public ReadOnly Property valueMember As Integer
         Get
             Return id
         End Get

@@ -5,20 +5,6 @@ Public Class DAOProveedor
 
     Public Shared Sub agregarProveedor(ByVal proveedor As Proveedor)
         Try
-            'SQLConnector.executeProcedure("alta_proveedor", proveedor.id, proveedor.razonSocial, proveedor.direccion, proveedor.localidad, _
-            '                          proveedor.provincia, proveedor.codPostal, proveedor.region, proveedor.telefono, proveedor.diasPlazo, _
-            '                          proveedor.email, proveedor.observaciones, proveedor.cuit, proveedor.tipo, proveedor.codIva, _
-            '                          proveedor.codigoCuenta, proveedor.nombreCheque, proveedor.condicionIB1, proveedor.condicionIB2, _
-            '                          proveedor.numeroIB, proveedor.porceIBProvincia, proveedor.porceIBCABA, proveedor.RawRubro, _
-            '                          proveedor.numeroSEDRONAR, proveedor.vtoSEDRONAR, proveedor.categoria, proveedor.categoriaCalif, _
-            '                          proveedor.vtoCategoria, proveedor.tipoInscripcionIB, proveedor.cai, proveedor.vtoCAI, _
-            '                          proveedor.certificados, proveedor.vtoCertificados, proveedor.estado, proveedor.calificacion, _
-            '                          proveedor.vtoCalificacion, proveedor.observacionCompleta, proveedor.cufe1, proveedor.cufe2, _
-            '                          proveedor.cufe3, proveedor.dirCUFE1, proveedor.dirCUFE2, proveedor.dirCUFE3, _
-            '                          proveedor.PaginaWeb(0).ToString, proveedor.contacto1(0).ToString, proveedor.contacto1(1).ToString, proveedor.contacto1(2).ToString, proveedor.contacto1(3).ToString, _
-            '                          proveedor.contacto2(0).ToString, proveedor.contacto2(1).ToString, proveedor.contacto2(2).ToString, proveedor.contacto2(3).ToString, _
-            '                          proveedor.contacto3(0).ToString, proveedor.contacto3(1).ToString, proveedor.contacto3(2).ToString, proveedor.contacto3(3).ToString, proveedor.cliente.id, proveedor.Inhabilitado)
-
             Dim ZSql, WProveedor, WNombre, WDireccion, WLocalidad, WProvincia, WPostal, WRegion, WTelefono, WDias, WEmail, WObservaciones, WCuit, WTipo, WIva, WCuenta, WNombreCheque, WCodIb, WCodIbCaba, WNroIb, WPorceIb, WPorceIbCaba, WRubro, WNroInsc, WFechaNroInsc, WCategoriaI, WCategoriaII, WFechaCategoria, WIbCiudadII, WCai, WVtoCai, WIso, WVtoIso, WEstado, WCalifica, WFechaCalifica, WObservacionesII, WCufe, WCufeII, WCufeIII, WDirCufe, WDirCufeII, WDirCufeIII, WOrdFechaCalifica, WOrdFechaCategoria, WOrdFechaNroInsc, WWdate, WPaginaWeb, WContactoNombre1, WContactoCargo1, WContactoTelefono1, WContactoEmail1, WContactoNombre2, WContactoCargo2, WContactoTelefono2, WContactoEmail2, WContactoNombre3, WContactoCargo3, WContactoTelefono3, WContactoEmail3, WClienteAsociado, WInhabilitado, WEmbargo As String
             Dim WtipoDolar As Integer
             With proveedor

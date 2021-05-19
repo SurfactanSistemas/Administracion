@@ -36,7 +36,7 @@ Public Class ConsultaDatosFactura
     End Sub
 
     Private Sub _ObtenerDatosDeNroInterno(ByVal _NroInterno)
-        Dim XProveedor As String
+        Dim XProveedor As String = ""
 
         Dim cs As String = Configuration.ConfigurationManager.ConnectionStrings(ClasesCompartidas.Globals.empresa).ToString '"Data Source=193.168.0.7;Initial Catalog=#EMPRESA#;User ID=usuarioadmin; Password=usuarioadmin"
         Dim XCs = ""

@@ -443,7 +443,7 @@ Public Class EvaluacionProveedorMateriaPrima : Implements IAyudaProveedores, Uti
     End Sub
 
     Private Function YesNOMSGBOX(ByVal nombreAr As String) As Boolean
-        Dim Msg, Style, Title, Help, Ctxt, Response
+        Dim Msg, Style, Title, Response
         Msg = "¿Desea sobre escribir el Archivo " & nombreAr & "?"    ' Define message.
         Style = vbYesNo + vbCritical + vbDefaultButton2    ' Define buttons.
         Title = "Alerta"    ' Define title. 

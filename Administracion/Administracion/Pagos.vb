@@ -2869,6 +2869,13 @@ Public Class Pagos
             cm.CommandText = "SELECT * FROM Proveedor WHERE Proveedor = '" & txtProveedor.Text & "'"
             Dim _TipoProv, _TipoIva, _TipoIb, _TipoIbCaba, _PorceIb, _PorceIbCaba As String
 
+            _TipoProv = ""
+            _TipoIva = ""
+            _TipoIb = ""
+            _TipoIbCaba = ""
+            _PorceIb = ""
+            _PorceIbCaba = ""
+
             Using dr As SqlDataReader = cm.ExecuteReader
 
                 With dr
@@ -4991,7 +4998,7 @@ Public Class Pagos
         Dim WEmpCuit = "30-54916508-3"
         Dim WNroIb = "902-913585-2"
         Dim ImpreCopia(2) As String
-        Dim WLetra, WTipo, WPunto, WNumero, WImporte, ZZClaveCtaCtePrv, XImpre1, XImpre2, XImpre3, WPrvDireccion, WPrvCuit, WPrvIb
+        Dim WLetra, WTipo, WPunto, WNumero, WImporte, ZZClaveCtaCtePrv, XImpre1, XImpre2, XImpre3, WPrvDireccion, WPrvCuit, WPrvIb As String
         Dim WBruto, WNeto, WReteIva
         Dim WCategoria
         Dim WRenglon = 0
@@ -4999,6 +5006,19 @@ Public Class Pagos
         Dim cn = New SqlConnection()
         Dim cm = New SqlCommand("SELECT Direccion, Cuit, NroIb, CodIb, CodIbCaba, Iva, Tipo, PorceIb, PorceIbCaba FROM Proveedor WHERE Proveedor = '" & Trim(txtProveedor.Text) & "'")
         Dim dr As SqlDataReader
+
+        WLetra = ""
+        WTipo = ""
+        WPunto = ""
+        WNumero = ""
+        WImporte = ""
+        ZZClaveCtaCtePrv = ""
+        XImpre1 = ""
+        XImpre2 = ""
+        XImpre3 = ""
+        WPrvDireccion = ""
+        WPrvCuit = ""
+        WPrvIb = ""
 
         ' CAMBIAMOS INFORMACION EMPRESA SEGUN SEA O NO PELLITAL
         If _EsPellital() Then
@@ -5359,6 +5379,14 @@ Public Class Pagos
         End If
 
         SQLConnector.conexionSql(cn, cm)
+
+        WPrvDireccion = ""
+        WPrvCuit = ""
+        WPrvIb = 0
+        WTipoIb = 0
+        ZZTipoIbCaba = 0
+        ZZTipoiva = 0
+        ZZPorceIbCaba = 0
 
         Try
 
@@ -5738,7 +5766,8 @@ Public Class Pagos
         Dim Tabla As New DataTable("Detalles")
         Dim row As DataRow
         Dim crdoc As ReportDocument = New OrdenPagoComprobanteIB
-        Dim ZZTipoIb, ZZPorceIb As String
+        Dim ZZTipoIb As String = ""
+        Dim ZZPorceIb As String = ""
         Dim WEmpNombre = "SURFACTAN S.A."
         Dim WEmpDireccion = "Malvinas Argentinas 4589"
         Dim WEmpLocalidad = "1644 Victoria Bs.As. Argentina"
@@ -5754,6 +5783,20 @@ Public Class Pagos
         Dim cn = New SqlConnection()
         Dim cm = New SqlCommand("SELECT Direccion, Cuit, NroIb, CodIb, CodIbCaba, Iva, Tipo, PorceIb, PorceIbCaba FROM Proveedor WHERE Proveedor = '" & Trim(txtProveedor.Text) & "'")
         Dim dr As SqlDataReader
+
+        WLetra = ""
+        WTipo = ""
+        WPunto = ""
+        WNumero = ""
+        ZZClaveCtaCtePrv = ""
+        XImpre1 = ""
+        XImpre2 = ""
+        XImpre3 = ""
+        XImpre4 = ""
+        WImpre4 = ""
+        WPrvDireccion = ""
+        WPrvCuit = ""
+        WPrvIb = ""
 
         ' CAMBIAMOS INFORMACION EMPRESA SEGUN SEA O NO PELLITAL
         If _EsPellital() Then
@@ -7988,21 +8031,21 @@ Public Class Pagos
 
                     If PorTransferenciaYCheques Then
                         Dim DiaARetirar As Date
-                        Dim DiaARetirarTexto As String
+                        Dim DiaARetirarTexto As String = ""
+
                         TraerProximoMartesOJueves(DiaARetirar, DiaARetirarTexto)
-                        'WBody &= "<br/>" & "- Cheque(s) que deberá retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir del día de <strong>mañana</strong>, los <strong>Martes y Juevess</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>."
-                        ' WBody &= "<br/>" & "- Cheque(s) que deberá retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir de la <strong>semana próxima</strong>, los días <strong>Martes y Juevess</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>."
+
                         WBody &= "<br/>" & "- Cheque(s) que deberá retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir del <strong>" & DiaARetirarTexto & " " & DiaARetirar.ToString("dd/MM/yyyy") & "</strong>, los <strong>Martes y Jueves</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>."
-                        'WBody &= "." & "<br/>" & "<br/>" & "Además tiene Cheque(s) para retirar por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir de la <strong>semana próxima</strong>, los <strong>Martes y Juevess</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
                     Else
                         WBody &= "." & "<br/>" & "<br/>" & "Adjuntamos Orden de Pago y retenciones si correspondiesen."
                     End If
 
                 Else
                     Dim DiaARetirar As Date
-                    Dim DiaARetirarTexto As String
+                    Dim DiaARetirarTexto As String = ""
+
                     TraerProximoMartesOJueves(DiaARetirar, DiaARetirarTexto)
-                    'WBody = "Informamos que se encuentra a su disposición un pago que podrá ser retirado por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir de la <strong>semana próxima</strong>, los días <strong>Martes y Jueves</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
+
                     WBody = "Informamos que se encuentra a su disposición un pago que podrá ser retirado por nuestras oficinas <em>(Malvinas Argentinas 4495, B1644CAQ Victoria, Buenos Aires)</em>, a partir del <strong>" & DiaARetirarTexto & " " & DiaARetirar.ToString("dd/MM/yyyy") & "</strong>, los <strong>Martes y Jueves</strong> en el horario de <strong>14:00 a 17:00 hs.</strong>"
                 End If
 

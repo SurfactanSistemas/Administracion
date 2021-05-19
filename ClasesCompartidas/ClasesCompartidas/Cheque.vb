@@ -15,10 +15,10 @@
     End Sub
 
     Public Function Orden() As String
-        Return String.Join("", fechaCheque.Split("/").Reverse)
+        Return String.Join("", fechaCheque.Split(CType("/", Char)).Reverse)
     End Function
 
-    Public Function igualA(ByVal otroCheque As Cheque)
+    Public Function igualA(ByVal otroCheque As Cheque) As Boolean
         Return identificacion = otroCheque.identificacion And
         fechaCheque = otroCheque.fechaCheque And
         banco = otroCheque.banco And
@@ -27,17 +27,17 @@
     End Function
 
     Public Overrides Function ToString() As String
-        Return fechaCheque & " - " & identificacion & " - " & asDoubleString(valorImporte).PadLeft(10, "_") & " - " & banco
+        Return fechaCheque & " - " & identificacion & " - " & asDoubleString(valorImporte.ToString).PadLeft(10, CType("_", Char)) & " - " & banco
     End Function
 
-    Private Function asDoubleString(ByVal value) As String
+    Private Function asDoubleString(ByVal value As String) As String
         Dim originalString As String = value.ToString
         If originalString.IndexOf(",") = -1 Then
-            Return originalString & "," & "".PadLeft(2, "0")
+            Return originalString & "," & "".PadLeft(2, CType("0", Char))
         Else
             Dim difference As Integer = originalString.Count - originalString.IndexOf(",") - 1
             If difference < 2 Then
-                Return originalString & "".PadLeft(2 - difference, "0")
+                Return originalString & "".PadLeft(2 - difference, CType("0", Char))
             End If
         End If
         Return originalString
