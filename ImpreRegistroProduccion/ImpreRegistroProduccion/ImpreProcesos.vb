@@ -10,7 +10,7 @@ Public Class ImpreProcesos
     Dim WTipoVencimiento As Integer = 0
 
     Private Sub ImpreRegistroProduccion_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
+      
         Try
 
             If Environment.GetCommandLineArgs.Length > 1 Then

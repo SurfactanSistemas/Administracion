@@ -516,6 +516,12 @@ Public Class RecibosProvisorios : Implements IPaseEcheques
             txtRecibo.Text = _TraerProximoNumeroDeReciboProvisorio()
         End If
 
+        'VERIFICAMOS SI EL RECIBO PROVISORIO EXISTE
+        'DE EXISTIR VERICAMOS SI ES DE EL MISMO DIA. 
+        'SI NO LO ES CONSULTAMOS SI DESEA MODIFICAR LA FECHA
+        'A LA FECHA ACTUAL PARA QUE LUEGO LOS E-CHEQUES
+        'SALGAN EN EL LISTADO DEL FIN DEL DIA
+        VerificarExisteYFecha()
 
 
         'VALIDO LOS CAMPOS DE NUMERO DE CHEQUE
@@ -640,6 +646,17 @@ Public Class RecibosProvisorios : Implements IPaseEcheques
         End If
     End Sub
 
+    Private Sub VerificarExisteYFecha()
+        Dim SQLCnslt As String = "SELECT Recibo FROM RecibosProvi WHERE Recibo = '" & txtRecibo.Text & "'"
+        Dim RowRecibo As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+        If RowRecibo IsNot Nothing Then
+            If txtFecha.Text <> Date.Today.ToString("dd/MM/yyyy") Then
+                If MsgBox("La fecha de este recibo provisorio no es la de hoy." & vbCrLf & "Esto hara que los E-cheques que se carguen en este recibo no figuren en el listado generado por el boton de Final Carga Diario " & vbCrLf & "¿Desea actualizar la fecha a la fecha de hoy?", vbYesNo) = vbYes Then
+                    txtFecha.Text = Date.Today.ToString("dd/MM/yyyy")
+                End If
+            End If
+        End If
+    End Sub
     Private Sub Marcar_ECheques_ComoUsado()
         Dim ListaSQlCnslt As New List(Of String)
         Try
@@ -2158,7 +2175,7 @@ Public Class RecibosProvisorios : Implements IPaseEcheques
     End Sub
 
     Private Sub btn_VerEcheq_Click(sender As Object, e As EventArgs) Handles btn_VerEcheq.Click
-        Dim WCuitCliente As String = ""
+
         If txtCliente.Text <> "" Then
             Dim SQLCnslt As String = "SELECT Cliente FROM Cliente WHERE Cliente = '" & txtCliente.Text & "'"
             Dim rowCliente As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
@@ -2176,7 +2193,7 @@ Public Class RecibosProvisorios : Implements IPaseEcheques
                 .Show(Me)
             End With
         Else
-
+            Dim ZCuitCliente As String = ""
             If txtCliente.Text <> "" Then
                 ZCuitCliente = obtenercuitCliente(txtCliente.Text)
             End If
@@ -2299,7 +2316,7 @@ Public Class RecibosProvisorios : Implements IPaseEcheques
                     listaArchivos.Add(archivo)
                 Next
                 If listaArchivos.Count > 0 Then
-                    _EnviarEmail("lam@surfactan.com.ar", "Aviso Finalizada carga de E-cheques del " & Date.Today.ToString("dd-MM-yyyy"), "", listaArchivos.ToArray(), True)
+                   _EnviarEmail("lam@surfactan.com.ar;aam@surfactan.com.ar;sergiol@surfactan.com.ar", "Aviso Finalizada carga de E-cheques del " & Date.Today.ToString("dd-MM-yyyy"), "", listaArchivos.ToArray(), True)
                     MsgBox("El mail fue enviado con exito", vbInformation)
                 End If
 

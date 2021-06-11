@@ -111,7 +111,18 @@ Public Class MenuPrincipal
     End Sub
 
     Private Sub IngresoDePagosToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles IngresoDePagosToolStripMenuItem.Click
-        abrir(New Pagos)
+        If Operador.Clave = "" Then
+            With New Login("OrdenCompra")
+                .Show(Me)
+            End With
+        Else
+
+            Dim WOperador As DataRow = GetSingle("SELECT Operador FROM Operador WHERE UPPER(Clave) = '" & Operador.Clave & "'", "SurfactanSa")
+            If WOperador IsNot Nothing Then
+                abrir(New Pagos)
+            End If
+        End If
+        
     End Sub
 
     Private Sub ListadoDeValoresEnCarteraToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ListadoDeValoresEnCarteraToolStripMenuItem.Click

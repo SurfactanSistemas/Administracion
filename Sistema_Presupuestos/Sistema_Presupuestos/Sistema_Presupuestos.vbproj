@@ -121,10 +121,22 @@
     </Compile>
     <Compile Include="Interface\IActualzarDGV.vb" />
     <Compile Include="Interface\IAyudaProv.vb" />
+    <Compile Include="Listado_Facturas_A_Presupuesto.Designer.vb">
+      <DependentUpon>Listado_Facturas_A_Presupuesto.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listado_Facturas_A_Presupuesto.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Login.designer.vb">
       <DependentUpon>Login.vb</DependentUpon>
     </Compile>
     <Compile Include="Login.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MostrarFactura.Designer.vb">
+      <DependentUpon>MostrarFactura.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MostrarFactura.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -153,8 +165,14 @@
     <EmbeddedResource Include="Ingresar_Presupuesto.resx">
       <DependentUpon>Ingresar_Presupuesto.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Listado_Facturas_A_Presupuesto.resx">
+      <DependentUpon>Listado_Facturas_A_Presupuesto.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MostrarFactura.resx">
+      <DependentUpon>MostrarFactura.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

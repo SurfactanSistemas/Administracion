@@ -56,9 +56,9 @@ Partial Class Form1
         Me.panel1.Controls.Add(Me.label1)
         Me.panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.panel1.Location = New System.Drawing.Point(0, 0)
-        Me.panel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.panel1.Margin = New System.Windows.Forms.Padding(4)
         Me.panel1.Name = "panel1"
-        Me.panel1.Size = New System.Drawing.Size(993, 49)
+        Me.panel1.Size = New System.Drawing.Size(1334, 49)
         Me.panel1.TabIndex = 7
         '
         'Label2
@@ -67,7 +67,7 @@ Partial Class Form1
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold)
         Me.Label2.ForeColor = System.Drawing.Color.White
-        Me.Label2.Location = New System.Drawing.Point(759, 12)
+        Me.Label2.Location = New System.Drawing.Point(1100, 12)
         Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(192, 25)
@@ -100,7 +100,7 @@ Partial Class Form1
         'txt_filtro
         '
         Me.txt_filtro.Location = New System.Drawing.Point(16, 79)
-        Me.txt_filtro.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txt_filtro.Margin = New System.Windows.Forms.Padding(4)
         Me.txt_filtro.Name = "txt_filtro"
         Me.txt_filtro.Size = New System.Drawing.Size(355, 22)
         Me.txt_filtro.TabIndex = 10
@@ -109,7 +109,7 @@ Partial Class Form1
         '
         Me.CheckBox1.AutoSize = True
         Me.CheckBox1.Location = New System.Drawing.Point(380, 81)
-        Me.CheckBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.CheckBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.CheckBox1.Name = "CheckBox1"
         Me.CheckBox1.Size = New System.Drawing.Size(202, 21)
         Me.CheckBox1.TabIndex = 11
@@ -119,7 +119,7 @@ Partial Class Form1
         'btn_NuevoPresupuesto
         '
         Me.btn_NuevoPresupuesto.Location = New System.Drawing.Point(592, 59)
-        Me.btn_NuevoPresupuesto.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btn_NuevoPresupuesto.Margin = New System.Windows.Forms.Padding(4)
         Me.btn_NuevoPresupuesto.Name = "btn_NuevoPresupuesto"
         Me.btn_NuevoPresupuesto.Size = New System.Drawing.Size(100, 47)
         Me.btn_NuevoPresupuesto.TabIndex = 12
@@ -128,8 +128,8 @@ Partial Class Form1
         '
         'btn_Cerrar
         '
-        Me.btn_Cerrar.Location = New System.Drawing.Point(877, 59)
-        Me.btn_Cerrar.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btn_Cerrar.Location = New System.Drawing.Point(1213, 59)
+        Me.btn_Cerrar.Margin = New System.Windows.Forms.Padding(4)
         Me.btn_Cerrar.Name = "btn_Cerrar"
         Me.btn_Cerrar.Size = New System.Drawing.Size(100, 47)
         Me.btn_Cerrar.TabIndex = 13
@@ -159,7 +159,7 @@ Partial Class Form1
         Me.dgv_Presupuestos.RowTemplate.Height = 20
         Me.dgv_Presupuestos.ShowCellToolTips = False
         Me.dgv_Presupuestos.SinClickDerecho = False
-        Me.dgv_Presupuestos.Size = New System.Drawing.Size(961, 373)
+        Me.dgv_Presupuestos.Size = New System.Drawing.Size(1297, 435)
         Me.dgv_Presupuestos.TabIndex = 8
         '
         'NroPresu
@@ -261,7 +261,7 @@ Partial Class Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(993, 486)
+        Me.ClientSize = New System.Drawing.Size(1334, 559)
         Me.Controls.Add(Me.btn_Cerrar)
         Me.Controls.Add(Me.btn_NuevoPresupuesto)
         Me.Controls.Add(Me.CheckBox1)
@@ -270,7 +270,7 @@ Partial Class Form1
         Me.Controls.Add(Me.panel1)
         Me.Controls.Add(Me.dgv_Presupuestos)
         Me.Location = New System.Drawing.Point(20, 20)
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "Form1"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.panel1.ResumeLayout(False)

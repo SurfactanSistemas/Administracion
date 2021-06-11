@@ -23,7 +23,7 @@ Public Class Form1 : Implements IActualzarDGV
         If Modo = "COMPLETO" Then
             filtro = ""
         End If
-        Dim SQLCnslt As String = "SELECT NroPresu = NroPresupuesto, Cod_Proveedor = Proveedor, Proveedor = trim(ProvDescp), Titulo = Trim(Titulo), Fecha, FormaPago = Trim(FormaPago), Monto, Moneda = IIF(Moneda = 0, 'Pesos ($)', 'Dolares (U$S)') FROM Solicitud_Presupuesto " & filtro & " ORDER BY NroPresupuesto"
+        Dim SQLCnslt As String = "SELECT NroPresu = NroPresupuesto, Cod_Proveedor = Proveedor, Proveedor = ProvDescp, Titulo = Titulo, Fecha, FormaPago = FormaPago, Monto, Moneda = IIF(Moneda = 0, 'Pesos ($)', 'Dolares (U$S)') FROM Solicitud_Presupuesto " & filtro & " ORDER BY NroPresupuesto"
         Dim TablaPresu As DataTable = GetAll(SQLCnslt, "SurfactanSa")
 
         dgv_Presupuestos.DataSource = TablaPresu

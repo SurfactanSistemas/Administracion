@@ -73,7 +73,7 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
         SQLCnslt = ""
         If NroSoli <> 0 Then
 
-           
+
 
             If MostrarAutorizar = "Mostrar" Then
                 btn_Autorizar.Visible = True
@@ -104,6 +104,10 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
                 End If
 
 
+                'CARGO LA FECHA PAGO Y LA HAGO VISIBLE
+                txt_FechaEmitirOrdenPago.Text = IIf(IsDBNull(rowsoli.Item("FechaEmitirOrdenPago")), "", rowsoli.Item("FechaEmitirOrdenPago"))
+                txt_FechaEmitirOrdenPago.Visible = True
+                lbl_FechaEmitirOrdenPago.Visible = True
 
                 'SI YA ESTA AUTORIZADA SACAMOS EL BOTON DE AUTORIZAR
                 Dim EstadoSoli As String = IIf(IsDBNull(rowsoli.Item("Estado")), "", rowsoli.Item("Estado"))
@@ -423,7 +427,14 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
             Exit Sub
         End If
 
+        If Trim(txt_FechaEmitirOrdenPago.Text.Replace("/", "")) <> "" Then
 
+            If ValidaFecha(txt_FechaEmitirOrdenPago.Text) = "N" Then
+                MsgBox("La Fecha de Orden de pago es invalida", vbExclamation)
+                Exit Sub
+            End If
+
+        End If
 
 
         '
@@ -512,7 +523,18 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
                 ParidadInformada_1 = "ParidadInformada, "
                 ParidadInformada_2 = "'" & formatonumerico(txt_Paridad.Text) & "', "
             End If
-            
+
+
+            Dim WFechaEmitirOrdenPago As String = ""
+            Dim WORDFechaEmitirOrdenPago As String = ""
+
+            If Trim(txt_FechaEmitirOrdenPago.Text.Replace("/", "")) = "" Then
+                WFechaEmitirOrdenPago = ""
+                WORDFechaEmitirOrdenPago = ""
+            Else
+                WFechaEmitirOrdenPago = Trim(txt_FechaEmitirOrdenPago.Text)
+                WORDFechaEmitirOrdenPago = ordenaFecha(txt_FechaEmitirOrdenPago.Text)
+            End If
 
 
             SQLCnslt = "INSERT INTO SolicitudFondos(" _
@@ -541,6 +563,8 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
                        & "OrdFechaRequerida, " _
                        & "" & agregado_1 & "" _
                        & "" & ParidadInformada_1 & "" _
+                       & "FechaEmitirOrdenPago, " _
+                       & "OrdFechaEmitirOrdenPago, " _
                        & "MarcaPopUp, " _
                        & "MarcaPopUp_Pachi, " _
                        & "MarcaPopUp_Alejandro, " _
@@ -573,6 +597,8 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
                        & "'" & ordenaFecha(txt_FechaRequerida.Text) & "', " _
                        & "" & agregado_2 & " " _
                        & "" & ParidadInformada_2 & " " _
+                       & "'" & WFechaEmitirOrdenPago & "', " _
+                       & "'" & WORDFechaEmitirOrdenPago & "', " _
                        & "'" & "X" & "', " _
                        & "'" & "" & "', " _
                        & "'" & Marca_Alejandro & "', " _
@@ -1524,4 +1550,5 @@ Public Class Ingreso_Solicitud : Implements IConsulta, IContraseña
     End Sub
 
     
+  
 End Class

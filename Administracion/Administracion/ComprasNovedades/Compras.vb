@@ -135,8 +135,9 @@ Public Class Compras : Implements IPasa_NumeroPresupuesto
         _MostrarCAI(proveedor)
         diasPlazo = _ExtraerSoloNumeros(proveedorAMostrar.diasPlazo)
 
+        'INCLUIDO ANDRES
         Buscar_Presupuestos(proveedorAMostrar.id, proveedorAMostrar.razonSocial)
-
+        'FIN INCLUSION ANDRES
     End Sub
 
 
@@ -516,12 +517,16 @@ Public Class Compras : Implements IPasa_NumeroPresupuesto
                 _SubirArchvios(compra.nroInterno)
             End If
 
-            Try
-                Dim SQLCnslt As String = "UPDATE IvaComp SET NroPresupuesto = '" & compra.NroPresupuesto & "' WHERE NroInterno = '" & compra.nroInterno & "'"
-                ExecuteNonQueries("SurfactanSa", {SQLCnslt})
-            Catch ex As Exception
+            'INCLUIDO ANDRES            
+            If compra.NroPresupuesto <> "" Then
+                Try
+                    Dim SQLCnslt As String = "UPDATE IvaComp SET NroPresupuesto = '" & compra.NroPresupuesto & "' WHERE NroInterno = '" & compra.nroInterno & "'"
+                    ExecuteNonQueries("SurfactanSa", {SQLCnslt})
+                Catch ex As Exception
 
-            End Try
+                End Try
+            End If
+            ' FIN INCLUCION ANDRES
 
             MsgBox("El número de Factura asignado es: " & compra.nroInterno, MsgBoxStyle.Information)
 
@@ -1024,11 +1029,22 @@ Public Class Compras : Implements IPasa_NumeroPresupuesto
 
             _BuscarCompraPorNumeroInterno()
 
+            'Incluido Andres
+            BuscarSiTieneAsignadoPresupuesto()
+            'Fin Inclucion Andres
+
         ElseIf e.KeyData = Keys.Escape Then
             txtNroInterno.Text = ""
         End If
     End Sub
 
+    Private Sub BuscarSiTieneAsignadoPresupuesto()
+        Dim SQLCnslt As String = "SELECT NroPresupuesto FROM IvaComp WHERE NroInterno = '" & txtNroInterno.Text & "'"
+        Dim RowIva As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+        If RowIva IsNot Nothing Then
+            txt_NroPresup.Text = IIf(IsDBNull(RowIva.Item("NroPresupuesto")), "", RowIva.Item("NroPresupuesto"))
+        End If
+    End Sub
     Private Sub _BuscarCompraPorNumeroInterno()
         Dim interno As String = txtNroInterno.Text
         Dim compra As Compra = DAOCompras.buscarCompraPorCodigo(interno)

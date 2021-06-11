@@ -43,6 +43,7 @@ Partial Class Ingreso_Solicitud
         Me.Label9 = New System.Windows.Forms.Label()
         Me.chk_Efectivo = New System.Windows.Forms.CheckBox()
         Me.gp_FormasDePago = New System.Windows.Forms.GroupBox()
+        Me.chk_DebitoAutomatico = New System.Windows.Forms.CheckBox()
         Me.chk_Tarjeta = New System.Windows.Forms.CheckBox()
         Me.chk_ChequePropio = New System.Windows.Forms.CheckBox()
         Me.chk_ChequeTerceros = New System.Windows.Forms.CheckBox()
@@ -84,7 +85,8 @@ Partial Class Ingreso_Solicitud
         Me.Label22 = New System.Windows.Forms.Label()
         Me.txt_Concepto_Pago = New System.Windows.Forms.TextBox()
         Me.btn_MailReclamo = New System.Windows.Forms.Button()
-        Me.chk_DebitoAutomatico = New System.Windows.Forms.CheckBox()
+        Me.txt_FechaEmitirOrdenPago = New System.Windows.Forms.MaskedTextBox()
+        Me.lbl_FechaEmitirOrdenPago = New System.Windows.Forms.Label()
         Me.panel1.SuspendLayout()
         Me.gp_FormasDePago.SuspendLayout()
         Me.gbx_Retenciones.SuspendLayout()
@@ -320,6 +322,17 @@ Partial Class Ingreso_Solicitud
         Me.gp_FormasDePago.TabIndex = 23
         Me.gp_FormasDePago.TabStop = False
         Me.gp_FormasDePago.Text = "Formas de Pago"
+        '
+        'chk_DebitoAutomatico
+        '
+        Me.chk_DebitoAutomatico.AutoSize = True
+        Me.chk_DebitoAutomatico.Location = New System.Drawing.Point(449, 32)
+        Me.chk_DebitoAutomatico.Margin = New System.Windows.Forms.Padding(4)
+        Me.chk_DebitoAutomatico.Name = "chk_DebitoAutomatico"
+        Me.chk_DebitoAutomatico.Size = New System.Drawing.Size(145, 21)
+        Me.chk_DebitoAutomatico.TabIndex = 28
+        Me.chk_DebitoAutomatico.Text = "Debito Automatico"
+        Me.chk_DebitoAutomatico.UseVisualStyleBackColor = True
         '
         'chk_Tarjeta
         '
@@ -727,7 +740,7 @@ Partial Class Ingreso_Solicitud
         '
         'btn_Autorizar
         '
-        Me.btn_Autorizar.Location = New System.Drawing.Point(605, 466)
+        Me.btn_Autorizar.Location = New System.Drawing.Point(605, 534)
         Me.btn_Autorizar.Margin = New System.Windows.Forms.Padding(4)
         Me.btn_Autorizar.Name = "btn_Autorizar"
         Me.btn_Autorizar.Size = New System.Drawing.Size(109, 55)
@@ -758,7 +771,7 @@ Partial Class Ingreso_Solicitud
         '
         'btn_MailReclamo
         '
-        Me.btn_MailReclamo.Location = New System.Drawing.Point(605, 530)
+        Me.btn_MailReclamo.Location = New System.Drawing.Point(605, 382)
         Me.btn_MailReclamo.Margin = New System.Windows.Forms.Padding(4)
         Me.btn_MailReclamo.Name = "btn_MailReclamo"
         Me.btn_MailReclamo.Size = New System.Drawing.Size(109, 55)
@@ -767,22 +780,35 @@ Partial Class Ingreso_Solicitud
         Me.btn_MailReclamo.UseVisualStyleBackColor = True
         Me.btn_MailReclamo.Visible = False
         '
-        'chk_DebitoAutomatico
+        'txt_FechaEmitirOrdenPago
         '
-        Me.chk_DebitoAutomatico.AutoSize = True
-        Me.chk_DebitoAutomatico.Location = New System.Drawing.Point(449, 32)
-        Me.chk_DebitoAutomatico.Margin = New System.Windows.Forms.Padding(4)
-        Me.chk_DebitoAutomatico.Name = "chk_DebitoAutomatico"
-        Me.chk_DebitoAutomatico.Size = New System.Drawing.Size(145, 21)
-        Me.chk_DebitoAutomatico.TabIndex = 28
-        Me.chk_DebitoAutomatico.Text = "Debito Automatico"
-        Me.chk_DebitoAutomatico.UseVisualStyleBackColor = True
+        Me.txt_FechaEmitirOrdenPago.Location = New System.Drawing.Point(605, 501)
+        Me.txt_FechaEmitirOrdenPago.Margin = New System.Windows.Forms.Padding(4)
+        Me.txt_FechaEmitirOrdenPago.Mask = "00/00/0000"
+        Me.txt_FechaEmitirOrdenPago.Name = "txt_FechaEmitirOrdenPago"
+        Me.txt_FechaEmitirOrdenPago.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txt_FechaEmitirOrdenPago.Size = New System.Drawing.Size(89, 22)
+        Me.txt_FechaEmitirOrdenPago.TabIndex = 44
+        Me.txt_FechaEmitirOrdenPago.Visible = False
+        '
+        'lbl_FechaEmitirOrdenPago
+        '
+        Me.lbl_FechaEmitirOrdenPago.AutoSize = True
+        Me.lbl_FechaEmitirOrdenPago.Location = New System.Drawing.Point(597, 460)
+        Me.lbl_FechaEmitirOrdenPago.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lbl_FechaEmitirOrdenPago.Name = "lbl_FechaEmitirOrdenPago"
+        Me.lbl_FechaEmitirOrdenPago.Size = New System.Drawing.Size(109, 34)
+        Me.lbl_FechaEmitirOrdenPago.TabIndex = 45
+        Me.lbl_FechaEmitirOrdenPago.Text = "   Fecha Emitir" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & " Orden de Pago"
+        Me.lbl_FechaEmitirOrdenPago.Visible = False
         '
         'Ingreso_Solicitud
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(719, 748)
+        Me.Controls.Add(Me.lbl_FechaEmitirOrdenPago)
+        Me.Controls.Add(Me.txt_FechaEmitirOrdenPago)
         Me.Controls.Add(Me.btn_MailReclamo)
         Me.Controls.Add(Me.Label22)
         Me.Controls.Add(Me.txt_Concepto_Pago)
@@ -898,4 +924,6 @@ Partial Class Ingreso_Solicitud
     Friend WithEvents txt_Concepto_Pago As System.Windows.Forms.TextBox
     Friend WithEvents btn_MailReclamo As System.Windows.Forms.Button
     Friend WithEvents chk_DebitoAutomatico As System.Windows.Forms.CheckBox
+    Friend WithEvents txt_FechaEmitirOrdenPago As System.Windows.Forms.MaskedTextBox
+    Friend WithEvents lbl_FechaEmitirOrdenPago As System.Windows.Forms.Label
 End Class

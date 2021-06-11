@@ -333,7 +333,7 @@ Public Class Depositos
         Dim cn = New SqlConnection()
         Dim filtro As String
         If rbChFisicos.Checked = True Then
-            filtro = ""
+            filtro = "AND Tipo2 = '02'"
         Else
             filtro = "AND Tipo2 = '07'"
         End If
@@ -1370,6 +1370,22 @@ Public Class Depositos
         Return clave
     End Function
 
+    Private Function BuscaSiEsEchequesDeCargaEcheques(ByVal ClaveCheque As String) As Boolean
+        'VERIFICO SI EXISTE EN PROVISORIO CON EL FORMATO TRAIDO 
+        'DE EL SISTEMA DE CARGA E-CHQUES
+        Dim SQLCnslt As String = "SELECT ClaveCheque FROM RecibosProvi WHERE ClaveCheque = '" & ClaveCheque & "' AND Tipo2 = '" & "07" & "'"
+        Dim RowProvi As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+        If RowProvi IsNot Nothing Then
+            Return True
+        End If
+
+        Return False
+
+    End Function
+
+
+
+
     Private Function _ProcesarCheque(ByVal row As Integer, ByVal ClaveCheque As String) As Boolean
 
         Dim WNumero, WFecha, WBanco, WImporte, WClave As String
@@ -1380,8 +1396,11 @@ Public Class Depositos
 
 
         If Not _FormatoValidoDeCheque(ClaveCheque) Then
-            MsgBox("El formato del cheque no es valido.", MsgBoxStyle.Exclamation)
-            Return False
+            If Not BuscaSiEsEchequesDeCargaEcheques(ClaveCheque) Then
+                MsgBox("El formato del cheque no es valido.", MsgBoxStyle.Exclamation)
+                Return False
+            End If
+            
         End If
 
         WClave = _BuscarClaveRecibo(ClaveCheque)
@@ -1459,7 +1478,7 @@ Public Class Depositos
                 .Cells(3).ReadOnly = True
                 .Cells(4).ReadOnly = True
                 .Cells(5).ReadOnly = True
-                
+
             End With
         Else
             MsgBox("Hubo un problema al querer cargar el cheque correspondiente.", MsgBoxStyle.Exclamation)

@@ -268,6 +268,8 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
                 Return "Nula"
             Case 3
                 Return "Cerrada"
+            Case 4
+                Return ""
             Case Else
                 Return ""
         End Select
@@ -285,6 +287,8 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
                 Return "Nula"
             Case 3
                 Return "Efectiva"
+            Case 4
+                Return ""
             Case Else
                 Return ""
         End Select
@@ -1332,6 +1336,8 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
                 Return 2
             Case "Cerrada"
                 Return 3
+            Case ""
+                Return 4
             Case Else
                 Return 0
         End Select
@@ -1349,6 +1355,8 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
                 Return 2
             Case "Efectiva"
                 Return 3
+            Case ""
+                Return 4
             Case Else
                 Return 0
         End Select

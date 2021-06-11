@@ -48,6 +48,8 @@ Public Class DetallesEnsayosPT
             .Add("ValorStd")
             .Add("ValorReg")
             .Add("Valor")
+            .Add("Desde")
+            .Add("Hasta")
         End With
 
         Dim WDatosEnsayos As DataRow = Nothing
@@ -80,6 +82,8 @@ Public Class DetallesEnsayosPT
                     r.Item("ValorStd") = ""
                     r.Item("ValorReg") = OrDefault(.Item("Valor" & i), "")
                     r.Item("Valor") = "" 'OrDefault(.Item("ValorNumero" & i), "")
+                    r.Item("Desde") = ""
+                    r.Item("Hasta") = ""
 
                     If Trim(r.Item("ValorReg")) <> "" Then WEnsayos.Rows.Add(r)
                     'WEnsayos.Rows.Add(r)
@@ -109,6 +113,8 @@ Public Class DetallesEnsayosPT
                         If Val(OrDefault(WEspecif.Item("Ensayo" & i), "")) <> 0 Then
                             WEnsayos.Rows(WRenglonEns).Item("Ensayo") = OrDefault(WEspecif.Item("Ensayo" & i), "")
                             WEnsayos.Rows(WRenglonEns).Item("ValorStd") = Trim(OrDefault(WEspecif.Item("Valor" & i), "")) & " " & Trim(OrDefault(WEspecif.Item("Valor" & i & "" & i), ""))
+                            WEnsayos.Rows(WRenglonEns).Item("Desde") = Trim(OrDefault(WEspecif.Item("Desde" & i), ""))
+                            WEnsayos.Rows(WRenglonEns).Item("Hasta") = Trim(OrDefault(WEspecif.Item("Hasta" & i), ""))
                             WRenglonEns += 1
                         End If
                     End If

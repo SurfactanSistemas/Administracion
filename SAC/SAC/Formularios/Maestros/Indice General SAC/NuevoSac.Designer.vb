@@ -26,33 +26,29 @@ Partial Class NuevoSac
     <DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle32 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle33 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle31 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle39 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle34 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle35 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle36 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle37 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle38 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle29 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle30 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle40 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle41 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle42 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle43 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle25 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle26 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle27 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle28 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.btnProximoNumeroLibre = New System.Windows.Forms.Button()
         Me.cmbEstado = New System.Windows.Forms.ComboBox()
@@ -115,17 +111,6 @@ Partial Class NuevoSac
         Me.Label12 = New System.Windows.Forms.Label()
         Me.btnInmovilizarAcciones = New System.Windows.Forms.Button()
         Me.dgvVerificaciones = New System.Windows.Forms.DataGridView()
-        Me.VerIdAcciones = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.VerAcciones = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.VerResponsableI = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.VerDescResponsableI = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.VerFechaI = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.VerEstadoI = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.VerResponsableII = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.VerDescResponsableII = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.VerFechaII = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.VerEstadoII = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.VerComentario = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.MovilizarInmovilizarAccionesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Label21 = New System.Windows.Forms.Label()
@@ -177,6 +162,17 @@ Partial Class NuevoSac
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+        Me.VerIdAcciones = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.VerAcciones = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.VerResponsableI = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.VerDescResponsableI = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.VerFechaI = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.VerEstadoI = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.VerResponsableII = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.VerDescResponsableII = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.VerFechaII = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.VerEstadoII = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.VerComentario = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -254,7 +250,7 @@ Partial Class NuevoSac
         Me.cmbEstado.Items.AddRange(New Object() {"", "Iniciada", "Investigación", "Implementación", "Implementación a Verificar", "Implementación Verificada", "Cerrada"})
         Me.cmbEstado.Location = New System.Drawing.Point(365, 46)
         Me.cmbEstado.Name = "cmbEstado"
-        Me.cmbEstado.Size = New System.Drawing.Size(121, 21)
+        Me.cmbEstado.Size = New System.Drawing.Size(121, 25)
         Me.cmbEstado.TabIndex = 3
         '
         'cmbOrigen
@@ -263,7 +259,7 @@ Partial Class NuevoSac
         Me.cmbOrigen.Items.AddRange(New Object() {"", "Auditoría", "Reclamo", "I. de No Conformidad", "Proceso / Sist", "Otro"})
         Me.cmbOrigen.Location = New System.Drawing.Point(196, 46)
         Me.cmbOrigen.Name = "cmbOrigen"
-        Me.cmbOrigen.Size = New System.Drawing.Size(121, 21)
+        Me.cmbOrigen.Size = New System.Drawing.Size(121, 25)
         Me.cmbOrigen.TabIndex = 3
         '
         'txtFecha
@@ -272,7 +268,7 @@ Partial Class NuevoSac
         Me.txtFecha.Mask = "00/00/0000"
         Me.txtFecha.Name = "txtFecha"
         Me.txtFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtFecha.Size = New System.Drawing.Size(68, 20)
+        Me.txtFecha.Size = New System.Drawing.Size(68, 23)
         Me.txtFecha.TabIndex = 2
         Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -325,7 +321,7 @@ Partial Class NuevoSac
         Me.Label4.AutoSize = True
         Me.Label4.Location = New System.Drawing.Point(417, 24)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(44, 13)
+        Me.Label4.Size = New System.Drawing.Size(58, 17)
         Me.Label4.TabIndex = 1
         Me.Label4.Text = "Numero"
         '
@@ -333,7 +329,7 @@ Partial Class NuevoSac
         '
         Me.txtNumero.Location = New System.Drawing.Point(464, 20)
         Me.txtNumero.Name = "txtNumero"
-        Me.txtNumero.Size = New System.Drawing.Size(53, 20)
+        Me.txtNumero.Size = New System.Drawing.Size(53, 23)
         Me.txtNumero.TabIndex = 0
         Me.txtNumero.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -342,7 +338,7 @@ Partial Class NuevoSac
         Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(337, 24)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(26, 13)
+        Me.Label2.Size = New System.Drawing.Size(33, 17)
         Me.Label2.TabIndex = 1
         Me.Label2.Text = "Año"
         '
@@ -350,7 +346,7 @@ Partial Class NuevoSac
         '
         Me.txtAnio.Location = New System.Drawing.Point(366, 20)
         Me.txtAnio.Name = "txtAnio"
-        Me.txtAnio.Size = New System.Drawing.Size(45, 20)
+        Me.txtAnio.Size = New System.Drawing.Size(45, 23)
         Me.txtAnio.TabIndex = 0
         Me.txtAnio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -359,7 +355,7 @@ Partial Class NuevoSac
         Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(573, 49)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(38, 13)
+        Me.Label5.Size = New System.Drawing.Size(50, 17)
         Me.Label5.TabIndex = 1
         Me.Label5.Text = "Centro"
         '
@@ -367,7 +363,7 @@ Partial Class NuevoSac
         '
         Me.txtCentro.Location = New System.Drawing.Point(617, 45)
         Me.txtCentro.Name = "txtCentro"
-        Me.txtCentro.Size = New System.Drawing.Size(32, 20)
+        Me.txtCentro.Size = New System.Drawing.Size(32, 23)
         Me.txtCentro.TabIndex = 0
         Me.txtCentro.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -376,7 +372,7 @@ Partial Class NuevoSac
         Me.Label10.AutoSize = True
         Me.Label10.Location = New System.Drawing.Point(321, 50)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(40, 13)
+        Me.Label10.Size = New System.Drawing.Size(52, 17)
         Me.Label10.TabIndex = 1
         Me.Label10.Text = "Estado"
         '
@@ -385,7 +381,7 @@ Partial Class NuevoSac
         Me.Label9.AutoSize = True
         Me.Label9.Location = New System.Drawing.Point(152, 50)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(38, 13)
+        Me.Label9.Size = New System.Drawing.Size(51, 17)
         Me.Label9.TabIndex = 1
         Me.Label9.Text = "Origen"
         '
@@ -394,7 +390,7 @@ Partial Class NuevoSac
         Me.Label8.AutoSize = True
         Me.Label8.Location = New System.Drawing.Point(30, 50)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(37, 13)
+        Me.Label8.Size = New System.Drawing.Size(47, 17)
         Me.Label8.TabIndex = 1
         Me.Label8.Text = "Fecha"
         '
@@ -403,7 +399,7 @@ Partial Class NuevoSac
         Me.Label13.AutoSize = True
         Me.Label13.Location = New System.Drawing.Point(542, 100)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(69, 13)
+        Me.Label13.Size = New System.Drawing.Size(91, 17)
         Me.Label13.TabIndex = 1
         Me.Label13.Text = "Responsable"
         '
@@ -412,7 +408,7 @@ Partial Class NuevoSac
         Me.Label7.AutoSize = True
         Me.Label7.Location = New System.Drawing.Point(39, 50)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(28, 13)
+        Me.Label7.Size = New System.Drawing.Size(36, 17)
         Me.Label7.TabIndex = 1
         Me.Label7.Text = "Tipo"
         '
@@ -420,7 +416,7 @@ Partial Class NuevoSac
         '
         Me.txtResponsable.Location = New System.Drawing.Point(617, 96)
         Me.txtResponsable.Name = "txtResponsable"
-        Me.txtResponsable.Size = New System.Drawing.Size(32, 20)
+        Me.txtResponsable.Size = New System.Drawing.Size(32, 23)
         Me.txtResponsable.TabIndex = 0
         Me.txtResponsable.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -429,7 +425,7 @@ Partial Class NuevoSac
         Me.Label11.AutoSize = True
         Me.Label11.Location = New System.Drawing.Point(573, 76)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(38, 13)
+        Me.Label11.Size = New System.Drawing.Size(51, 17)
         Me.Label11.TabIndex = 1
         Me.Label11.Text = "Emisor"
         '
@@ -437,7 +433,7 @@ Partial Class NuevoSac
         '
         Me.txtEmisor.Location = New System.Drawing.Point(617, 70)
         Me.txtEmisor.Name = "txtEmisor"
-        Me.txtEmisor.Size = New System.Drawing.Size(32, 20)
+        Me.txtEmisor.Size = New System.Drawing.Size(32, 23)
         Me.txtEmisor.TabIndex = 0
         Me.txtEmisor.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -446,7 +442,7 @@ Partial Class NuevoSac
         Me.Label16.AutoSize = True
         Me.Label16.Location = New System.Drawing.Point(8, 101)
         Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(59, 13)
+        Me.Label16.Size = New System.Drawing.Size(77, 17)
         Me.Label16.TabIndex = 1
         Me.Label16.Text = "Referencia"
         '
@@ -454,7 +450,7 @@ Partial Class NuevoSac
         '
         Me.txtReferencia.Location = New System.Drawing.Point(76, 97)
         Me.txtReferencia.Name = "txtReferencia"
-        Me.txtReferencia.Size = New System.Drawing.Size(460, 20)
+        Me.txtReferencia.Size = New System.Drawing.Size(460, 23)
         Me.txtReferencia.TabIndex = 0
         '
         'Label15
@@ -462,7 +458,7 @@ Partial Class NuevoSac
         Me.Label15.AutoSize = True
         Me.Label15.Location = New System.Drawing.Point(34, 78)
         Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(33, 13)
+        Me.Label15.Size = New System.Drawing.Size(43, 17)
         Me.Label15.TabIndex = 1
         Me.Label15.Text = "Titulo"
         '
@@ -470,7 +466,7 @@ Partial Class NuevoSac
         '
         Me.txtTitulo.Location = New System.Drawing.Point(76, 74)
         Me.txtTitulo.Name = "txtTitulo"
-        Me.txtTitulo.Size = New System.Drawing.Size(460, 20)
+        Me.txtTitulo.Size = New System.Drawing.Size(460, 23)
         Me.txtTitulo.TabIndex = 0
         '
         'Label1
@@ -478,7 +474,7 @@ Partial Class NuevoSac
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(39, 24)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(28, 13)
+        Me.Label1.Size = New System.Drawing.Size(36, 17)
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "Tipo"
         '
@@ -486,7 +482,7 @@ Partial Class NuevoSac
         '
         Me.txtTipo.Location = New System.Drawing.Point(76, 20)
         Me.txtTipo.Name = "txtTipo"
-        Me.txtTipo.Size = New System.Drawing.Size(31, 20)
+        Me.txtTipo.Size = New System.Drawing.Size(31, 23)
         Me.txtTipo.TabIndex = 0
         Me.txtTipo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -580,7 +576,7 @@ Partial Class NuevoSac
         Me.TabPage2.Location = New System.Drawing.Point(4, 29)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(1029, 333)
+        Me.TabPage2.Size = New System.Drawing.Size(1029, 315)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Acciones"
         '
@@ -591,7 +587,7 @@ Partial Class NuevoSac
         Me.txtFechaAux.Mask = "00/00/0000"
         Me.txtFechaAux.Name = "txtFechaAux"
         Me.txtFechaAux.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtFechaAux.Size = New System.Drawing.Size(58, 13)
+        Me.txtFechaAux.Size = New System.Drawing.Size(58, 16)
         Me.txtFechaAux.TabIndex = 2
         Me.txtFechaAux.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.txtFechaAux.Visible = False
@@ -600,38 +596,22 @@ Partial Class NuevoSac
         '
         Me.dgvAcciones.AllowUserToAddRows = False
         Me.dgvAcciones.AllowUserToDeleteRows = False
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvAcciones.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.dgvAcciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvAcciones.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.idAccion, Me.Acciones, Me.Responsable, Me.DescResponsable, Me.Plazo})
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvAcciones.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle32.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle32.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle32.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle32.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle32.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle32.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvAcciones.DefaultCellStyle = DataGridViewCellStyle32
         Me.dgvAcciones.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.dgvAcciones.Location = New System.Drawing.Point(6, 6)
         Me.dgvAcciones.Name = "dgvAcciones"
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvAcciones.RowHeadersDefaultCellStyle = DataGridViewCellStyle7
         Me.dgvAcciones.RowHeadersWidth = 20
-        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvAcciones.RowsDefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle33.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvAcciones.RowsDefaultCellStyle = DataGridViewCellStyle33
         Me.dgvAcciones.RowTemplate.Height = 20
         Me.dgvAcciones.ShowCellToolTips = False
         Me.dgvAcciones.Size = New System.Drawing.Size(1013, 293)
@@ -639,8 +619,8 @@ Partial Class NuevoSac
         '
         'idAccion
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.idAccion.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.idAccion.DefaultCellStyle = DataGridViewCellStyle13
         Me.idAccion.HeaderText = "Nº"
         Me.idAccion.Name = "idAccion"
         Me.idAccion.ReadOnly = True
@@ -650,8 +630,8 @@ Partial Class NuevoSac
         'Acciones
         '
         Me.Acciones.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Acciones.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Acciones.DefaultCellStyle = DataGridViewCellStyle18
         Me.Acciones.HeaderText = "Acciones Correctivas"
         Me.Acciones.MaxInputLength = 150
         Me.Acciones.Name = "Acciones"
@@ -660,12 +640,12 @@ Partial Class NuevoSac
         'Responsable
         '
         Me.Responsable.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Responsable.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Responsable.DefaultCellStyle = DataGridViewCellStyle19
         Me.Responsable.HeaderText = "Resp."
         Me.Responsable.Name = "Responsable"
         Me.Responsable.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Responsable.Width = 41
+        Me.Responsable.Width = 51
         '
         'DescResponsable
         '
@@ -674,13 +654,13 @@ Partial Class NuevoSac
         Me.DescResponsable.MaxInputLength = 150
         Me.DescResponsable.Name = "DescResponsable"
         Me.DescResponsable.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.DescResponsable.Width = 69
+        Me.DescResponsable.Width = 88
         '
         'Plazo
         '
         Me.Plazo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Plazo.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Plazo.DefaultCellStyle = DataGridViewCellStyle31
         Me.Plazo.HeaderText = "Plazo"
         Me.Plazo.MaxInputLength = 10
         Me.Plazo.MinimumWidth = 70
@@ -698,7 +678,7 @@ Partial Class NuevoSac
         Me.TabPage3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TabPage3.Location = New System.Drawing.Point(4, 29)
         Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Size = New System.Drawing.Size(1029, 333)
+        Me.TabPage3.Size = New System.Drawing.Size(1029, 315)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Implementaciones"
         '
@@ -709,7 +689,7 @@ Partial Class NuevoSac
         Me.txtFechaAux2.Mask = "00/00/0000"
         Me.txtFechaAux2.Name = "txtFechaAux2"
         Me.txtFechaAux2.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtFechaAux2.Size = New System.Drawing.Size(58, 13)
+        Me.txtFechaAux2.Size = New System.Drawing.Size(58, 16)
         Me.txtFechaAux2.TabIndex = 3
         Me.txtFechaAux2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.txtFechaAux2.Visible = False
@@ -720,28 +700,20 @@ Partial Class NuevoSac
         Me.dgvImplementaciones.AllowUserToDeleteRows = False
         Me.dgvImplementaciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvImplementaciones.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ImpleIdAccion, Me.ImpleAcciones, Me.ImpleResponsable, Me.ImpleDescResponsable, Me.ImpleFecha, Me.Estado, Me.Comentarios})
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvImplementaciones.DefaultCellStyle = DataGridViewCellStyle14
         Me.dgvImplementaciones.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.dgvImplementaciones.Location = New System.Drawing.Point(5, 6)
         Me.dgvImplementaciones.Name = "dgvImplementaciones"
         Me.dgvImplementaciones.RowHeadersWidth = 20
-        DataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvImplementaciones.RowsDefaultCellStyle = DataGridViewCellStyle15
+        DataGridViewCellStyle39.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvImplementaciones.RowsDefaultCellStyle = DataGridViewCellStyle39
         Me.dgvImplementaciones.RowTemplate.Height = 20
         Me.dgvImplementaciones.Size = New System.Drawing.Size(1015, 293)
         Me.dgvImplementaciones.TabIndex = 1
         '
         'ImpleIdAccion
         '
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.ImpleIdAccion.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.ImpleIdAccion.DefaultCellStyle = DataGridViewCellStyle34
         Me.ImpleIdAccion.HeaderText = "Nº"
         Me.ImpleIdAccion.Name = "ImpleIdAccion"
         Me.ImpleIdAccion.ReadOnly = True
@@ -751,8 +723,8 @@ Partial Class NuevoSac
         'ImpleAcciones
         '
         Me.ImpleAcciones.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.ImpleAcciones.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle35.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.ImpleAcciones.DefaultCellStyle = DataGridViewCellStyle35
         Me.ImpleAcciones.HeaderText = "Acciones Correctivas"
         Me.ImpleAcciones.MaxInputLength = 150
         Me.ImpleAcciones.Name = "ImpleAcciones"
@@ -762,12 +734,12 @@ Partial Class NuevoSac
         'ImpleResponsable
         '
         Me.ImpleResponsable.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.ImpleResponsable.DefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.ImpleResponsable.DefaultCellStyle = DataGridViewCellStyle36
         Me.ImpleResponsable.HeaderText = "Resp."
         Me.ImpleResponsable.Name = "ImpleResponsable"
         Me.ImpleResponsable.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.ImpleResponsable.Width = 41
+        Me.ImpleResponsable.Width = 51
         '
         'ImpleDescResponsable
         '
@@ -776,13 +748,13 @@ Partial Class NuevoSac
         Me.ImpleDescResponsable.MaxInputLength = 150
         Me.ImpleDescResponsable.Name = "ImpleDescResponsable"
         Me.ImpleDescResponsable.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.ImpleDescResponsable.Width = 69
+        Me.ImpleDescResponsable.Width = 88
         '
         'ImpleFecha
         '
         Me.ImpleFecha.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.ImpleFecha.DefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.ImpleFecha.DefaultCellStyle = DataGridViewCellStyle37
         Me.ImpleFecha.HeaderText = "Fecha"
         Me.ImpleFecha.MinimumWidth = 70
         Me.ImpleFecha.Name = "ImpleFecha"
@@ -792,8 +764,8 @@ Partial Class NuevoSac
         'Estado
         '
         Me.Estado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle13.NullValue = " "
-        Me.Estado.DefaultCellStyle = DataGridViewCellStyle13
+        DataGridViewCellStyle38.NullValue = " "
+        Me.Estado.DefaultCellStyle = DataGridViewCellStyle38
         Me.Estado.HeaderText = "Estado"
         Me.Estado.Items.AddRange(New Object() {"", "Imple.", "Nula"})
         Me.Estado.MinimumWidth = 70
@@ -826,7 +798,7 @@ Partial Class NuevoSac
         Me.TabPage4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TabPage4.Location = New System.Drawing.Point(4, 29)
         Me.TabPage4.Name = "TabPage4"
-        Me.TabPage4.Size = New System.Drawing.Size(1029, 333)
+        Me.TabPage4.Size = New System.Drawing.Size(1029, 315)
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "Verificación"
         '
@@ -837,7 +809,7 @@ Partial Class NuevoSac
         Me.txtFechaAux4.Mask = "00/00/0000"
         Me.txtFechaAux4.Name = "txtFechaAux4"
         Me.txtFechaAux4.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtFechaAux4.Size = New System.Drawing.Size(58, 13)
+        Me.txtFechaAux4.Size = New System.Drawing.Size(58, 16)
         Me.txtFechaAux4.TabIndex = 10
         Me.txtFechaAux4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.txtFechaAux4.Visible = False
@@ -849,7 +821,7 @@ Partial Class NuevoSac
         Me.txtFechaAux3.Mask = "00/00/0000"
         Me.txtFechaAux3.Name = "txtFechaAux3"
         Me.txtFechaAux3.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txtFechaAux3.Size = New System.Drawing.Size(58, 13)
+        Me.txtFechaAux3.Size = New System.Drawing.Size(58, 16)
         Me.txtFechaAux3.TabIndex = 9
         Me.txtFechaAux3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.txtFechaAux3.Visible = False
@@ -911,149 +883,47 @@ Partial Class NuevoSac
         '
         Me.dgvVerificaciones.AllowUserToAddRows = False
         Me.dgvVerificaciones.AllowUserToDeleteRows = False
-        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle16.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvVerificaciones.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle16
+        DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle24.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle24.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle24.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle24.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle24.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvVerificaciones.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle24
         Me.dgvVerificaciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvVerificaciones.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.VerIdAcciones, Me.VerAcciones, Me.VerResponsableI, Me.VerDescResponsableI, Me.VerFechaI, Me.VerEstadoI, Me.VerResponsableII, Me.VerDescResponsableII, Me.VerFechaII, Me.VerEstadoII, Me.VerComentario})
         Me.dgvVerificaciones.ContextMenuStrip = Me.ContextMenuStrip1
-        DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle21.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle21.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle21.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle21.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle21.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvVerificaciones.DefaultCellStyle = DataGridViewCellStyle21
         Me.dgvVerificaciones.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.dgvVerificaciones.Location = New System.Drawing.Point(6, 29)
         Me.dgvVerificaciones.Name = "dgvVerificaciones"
-        DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle22.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle22.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle22.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvVerificaciones.RowHeadersDefaultCellStyle = DataGridViewCellStyle22
+        DataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle29.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle29.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle29.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle29.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle29.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle29.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvVerificaciones.RowHeadersDefaultCellStyle = DataGridViewCellStyle29
         Me.dgvVerificaciones.RowHeadersWidth = 15
-        DataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvVerificaciones.RowsDefaultCellStyle = DataGridViewCellStyle23
+        DataGridViewCellStyle30.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvVerificaciones.RowsDefaultCellStyle = DataGridViewCellStyle30
         Me.dgvVerificaciones.RowTemplate.Height = 20
         Me.dgvVerificaciones.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.ColumnHeaderSelect
         Me.dgvVerificaciones.Size = New System.Drawing.Size(1013, 288)
         Me.dgvVerificaciones.TabIndex = 6
         '
-        'VerIdAcciones
-        '
-        Me.VerIdAcciones.HeaderText = "Nº"
-        Me.VerIdAcciones.Name = "VerIdAcciones"
-        Me.VerIdAcciones.ReadOnly = True
-        Me.VerIdAcciones.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.VerIdAcciones.Width = 35
-        '
-        'VerAcciones
-        '
-        Me.VerAcciones.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.VerAcciones.DefaultCellStyle = DataGridViewCellStyle17
-        Me.VerAcciones.HeaderText = "Acciones Correctivas"
-        Me.VerAcciones.MinimumWidth = 200
-        Me.VerAcciones.Name = "VerAcciones"
-        Me.VerAcciones.ReadOnly = True
-        Me.VerAcciones.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.VerAcciones.Width = 200
-        '
-        'VerResponsableI
-        '
-        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.VerResponsableI.DefaultCellStyle = DataGridViewCellStyle18
-        Me.VerResponsableI.HeaderText = "Resp."
-        Me.VerResponsableI.Name = "VerResponsableI"
-        Me.VerResponsableI.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.VerResponsableI.Width = 45
-        '
-        'VerDescResponsableI
-        '
-        Me.VerDescResponsableI.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.VerDescResponsableI.HeaderText = "Descripción"
-        Me.VerDescResponsableI.MaxInputLength = 150
-        Me.VerDescResponsableI.MinimumWidth = 100
-        Me.VerDescResponsableI.Name = "VerDescResponsableI"
-        Me.VerDescResponsableI.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'VerFechaI
-        '
-        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.VerFechaI.DefaultCellStyle = DataGridViewCellStyle19
-        Me.VerFechaI.HeaderText = "Fecha"
-        Me.VerFechaI.Name = "VerFechaI"
-        Me.VerFechaI.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.VerFechaI.Width = 70
-        '
-        'VerEstadoI
-        '
-        Me.VerEstadoI.HeaderText = "Estado"
-        Me.VerEstadoI.Items.AddRange(New Object() {"No Imple.", "Implem.", "Nula", "Cerrada"})
-        Me.VerEstadoI.Name = "VerEstadoI"
-        Me.VerEstadoI.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
-        'VerResponsableII
-        '
-        Me.VerResponsableII.HeaderText = "Resp."
-        Me.VerResponsableII.Name = "VerResponsableII"
-        Me.VerResponsableII.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.VerResponsableII.Width = 45
-        '
-        'VerDescResponsableII
-        '
-        Me.VerDescResponsableII.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.VerDescResponsableII.HeaderText = "Descripción"
-        Me.VerDescResponsableII.MaxInputLength = 150
-        Me.VerDescResponsableII.MinimumWidth = 100
-        Me.VerDescResponsableII.Name = "VerDescResponsableII"
-        Me.VerDescResponsableII.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'VerFechaII
-        '
-        DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.VerFechaII.DefaultCellStyle = DataGridViewCellStyle20
-        Me.VerFechaII.HeaderText = "Fecha"
-        Me.VerFechaII.Name = "VerFechaII"
-        Me.VerFechaII.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.VerFechaII.Width = 70
-        '
-        'VerEstadoII
-        '
-        Me.VerEstadoII.HeaderText = "Estado"
-        Me.VerEstadoII.Items.AddRange(New Object() {"No Efect.", "Parc. Efect.", "Nula", "Efectiva"})
-        Me.VerEstadoII.Name = "VerEstadoII"
-        Me.VerEstadoII.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
-        'VerComentario
-        '
-        Me.VerComentario.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.VerComentario.HeaderText = "Comentarios"
-        Me.VerComentario.MaxInputLength = 100
-        Me.VerComentario.MinimumWidth = 100
-        Me.VerComentario.Name = "VerComentario"
-        Me.VerComentario.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
         'ContextMenuStrip1
         '
+        Me.ContextMenuStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MovilizarInmovilizarAccionesToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(237, 26)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(282, 28)
         '
         'MovilizarInmovilizarAccionesToolStripMenuItem
         '
         Me.MovilizarInmovilizarAccionesToolStripMenuItem.Name = "MovilizarInmovilizarAccionesToolStripMenuItem"
-        Me.MovilizarInmovilizarAccionesToolStripMenuItem.Size = New System.Drawing.Size(236, 22)
+        Me.MovilizarInmovilizarAccionesToolStripMenuItem.Size = New System.Drawing.Size(281, 24)
         Me.MovilizarInmovilizarAccionesToolStripMenuItem.Text = "Movilizar/Inmovilizar Acciones"
         '
         'Label21
@@ -1062,7 +932,7 @@ Partial Class NuevoSac
         Me.Label21.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label21.Location = New System.Drawing.Point(195, 8)
         Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(64, 13)
+        Me.Label21.Size = New System.Drawing.Size(84, 17)
         Me.Label21.TabIndex = 1
         Me.Label21.Text = "Referencias"
         '
@@ -1075,7 +945,7 @@ Partial Class NuevoSac
         Me.TabPage5.Location = New System.Drawing.Point(4, 29)
         Me.TabPage5.Name = "TabPage5"
         Me.TabPage5.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage5.Size = New System.Drawing.Size(1029, 333)
+        Me.TabPage5.Size = New System.Drawing.Size(1029, 315)
         Me.TabPage5.TabIndex = 4
         Me.TabPage5.Text = "Comentarios"
         '
@@ -1099,7 +969,7 @@ Partial Class NuevoSac
         Me.TabPage6.Location = New System.Drawing.Point(4, 29)
         Me.TabPage6.Name = "TabPage6"
         Me.TabPage6.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage6.Size = New System.Drawing.Size(1029, 333)
+        Me.TabPage6.Size = New System.Drawing.Size(1029, 315)
         Me.TabPage6.TabIndex = 5
         Me.TabPage6.Text = "Archivos"
         '
@@ -1144,7 +1014,7 @@ Partial Class NuevoSac
         Me.FechaArchivo.HeaderText = "Fecha"
         Me.FechaArchivo.Name = "FechaArchivo"
         Me.FechaArchivo.ReadOnly = True
-        Me.FechaArchivo.Width = 62
+        Me.FechaArchivo.Width = 76
         '
         'DescArchivo
         '
@@ -1172,15 +1042,16 @@ Partial Class NuevoSac
         '
         'ContextMenuStrip2
         '
+        Me.ContextMenuStrip2.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.ContextMenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EliminarArchivoToolStripMenuItem})
         Me.ContextMenuStrip2.Name = "ContextMenuStrip2"
-        Me.ContextMenuStrip2.Size = New System.Drawing.Size(162, 26)
+        Me.ContextMenuStrip2.Size = New System.Drawing.Size(187, 28)
         Me.ContextMenuStrip2.Text = "Eliminar Archivo"
         '
         'EliminarArchivoToolStripMenuItem
         '
         Me.EliminarArchivoToolStripMenuItem.Name = "EliminarArchivoToolStripMenuItem"
-        Me.EliminarArchivoToolStripMenuItem.Size = New System.Drawing.Size(161, 22)
+        Me.EliminarArchivoToolStripMenuItem.Size = New System.Drawing.Size(186, 24)
         Me.EliminarArchivoToolStripMenuItem.Text = "Eliminar Archivo"
         '
         'TabPage7
@@ -1191,7 +1062,7 @@ Partial Class NuevoSac
         Me.TabPage7.Location = New System.Drawing.Point(4, 29)
         Me.TabPage7.Name = "TabPage7"
         Me.TabPage7.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage7.Size = New System.Drawing.Size(1029, 333)
+        Me.TabPage7.Size = New System.Drawing.Size(1029, 315)
         Me.TabPage7.TabIndex = 6
         Me.TabPage7.Text = "INC's Vinculados"
         Me.TabPage7.ToolTipText = "Doble Click sobre Informe de No Conformidad para ver la información del mismo"
@@ -1216,8 +1087,8 @@ Partial Class NuevoSac
         '
         Me.Incidencia.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Incidencia.DataPropertyName = "Incidencia"
-        DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Incidencia.DefaultCellStyle = DataGridViewCellStyle24
+        DataGridViewCellStyle40.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Incidencia.DefaultCellStyle = DataGridViewCellStyle40
         Me.Incidencia.HeaderText = "Nro"
         Me.Incidencia.Name = "Incidencia"
         Me.Incidencia.ReadOnly = True
@@ -1227,19 +1098,19 @@ Partial Class NuevoSac
         '
         Me.Numero.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Numero.DataPropertyName = "Numero"
-        DataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Numero.DefaultCellStyle = DataGridViewCellStyle25
+        DataGridViewCellStyle41.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Numero.DefaultCellStyle = DataGridViewCellStyle41
         Me.Numero.HeaderText = "Nro"
         Me.Numero.Name = "Numero"
         Me.Numero.ReadOnly = True
-        Me.Numero.Width = 49
+        Me.Numero.Width = 60
         '
         'Tipo
         '
         Me.Tipo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Tipo.DataPropertyName = "Tipo"
-        DataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Tipo.DefaultCellStyle = DataGridViewCellStyle26
+        DataGridViewCellStyle42.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Tipo.DefaultCellStyle = DataGridViewCellStyle42
         Me.Tipo.HeaderText = "Tipo"
         Me.Tipo.Name = "Tipo"
         Me.Tipo.ReadOnly = True
@@ -1249,12 +1120,12 @@ Partial Class NuevoSac
         '
         Me.Ano.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.Ano.DataPropertyName = "Ano"
-        DataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Ano.DefaultCellStyle = DataGridViewCellStyle27
+        DataGridViewCellStyle43.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Ano.DefaultCellStyle = DataGridViewCellStyle43
         Me.Ano.HeaderText = "Año"
         Me.Ano.Name = "Ano"
         Me.Ano.ReadOnly = True
-        Me.Ano.Width = 51
+        Me.Ano.Width = 62
         '
         'Renglon
         '
@@ -1271,7 +1142,7 @@ Partial Class NuevoSac
         Me.DescTipo.HeaderText = "Tipo"
         Me.DescTipo.Name = "DescTipo"
         Me.DescTipo.ReadOnly = True
-        Me.DescTipo.Width = 53
+        Me.DescTipo.Width = 65
         '
         'Fecha
         '
@@ -1280,7 +1151,7 @@ Partial Class NuevoSac
         Me.Fecha.HeaderText = "Fecha"
         Me.Fecha.Name = "Fecha"
         Me.Fecha.ReadOnly = True
-        Me.Fecha.Width = 62
+        Me.Fecha.Width = 76
         '
         'FechaOrd
         '
@@ -1306,7 +1177,7 @@ Partial Class NuevoSac
         Me.DescEstado.HeaderText = "Estado"
         Me.DescEstado.Name = "DescEstado"
         Me.DescEstado.ReadOnly = True
-        Me.DescEstado.Width = 65
+        Me.DescEstado.Width = 81
         '
         'Titulo
         '
@@ -1462,7 +1333,7 @@ Partial Class NuevoSac
         Me.Label3.ForeColor = System.Drawing.SystemColors.Control
         Me.Label3.Location = New System.Drawing.Point(25, 9)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(100, 18)
+        Me.Label3.Size = New System.Drawing.Size(128, 23)
         Me.Label3.TabIndex = 0
         Me.Label3.Text = "Ingreso de SAC"
         '
@@ -1475,7 +1346,7 @@ Partial Class NuevoSac
         Me.Label6.ForeColor = System.Drawing.SystemColors.Control
         Me.Label6.Location = New System.Drawing.Point(917, 9)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(108, 18)
+        Me.Label6.Size = New System.Drawing.Size(140, 23)
         Me.Label6.TabIndex = 0
         Me.Label6.Text = "SURFACTAN S.A."
         '
@@ -1545,6 +1416,101 @@ Partial Class NuevoSac
         'OpenFileDialog1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
+        '
+        'VerIdAcciones
+        '
+        Me.VerIdAcciones.HeaderText = "Nº"
+        Me.VerIdAcciones.Name = "VerIdAcciones"
+        Me.VerIdAcciones.ReadOnly = True
+        Me.VerIdAcciones.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.VerIdAcciones.Width = 35
+        '
+        'VerAcciones
+        '
+        Me.VerAcciones.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        DataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.VerAcciones.DefaultCellStyle = DataGridViewCellStyle25
+        Me.VerAcciones.HeaderText = "Acciones Correctivas"
+        Me.VerAcciones.MinimumWidth = 200
+        Me.VerAcciones.Name = "VerAcciones"
+        Me.VerAcciones.ReadOnly = True
+        Me.VerAcciones.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.VerAcciones.Width = 200
+        '
+        'VerResponsableI
+        '
+        DataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.VerResponsableI.DefaultCellStyle = DataGridViewCellStyle26
+        Me.VerResponsableI.HeaderText = "Resp."
+        Me.VerResponsableI.Name = "VerResponsableI"
+        Me.VerResponsableI.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.VerResponsableI.Width = 45
+        '
+        'VerDescResponsableI
+        '
+        Me.VerDescResponsableI.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.VerDescResponsableI.HeaderText = "Descripción"
+        Me.VerDescResponsableI.MaxInputLength = 150
+        Me.VerDescResponsableI.MinimumWidth = 100
+        Me.VerDescResponsableI.Name = "VerDescResponsableI"
+        Me.VerDescResponsableI.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'VerFechaI
+        '
+        DataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.VerFechaI.DefaultCellStyle = DataGridViewCellStyle27
+        Me.VerFechaI.HeaderText = "Fecha"
+        Me.VerFechaI.Name = "VerFechaI"
+        Me.VerFechaI.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.VerFechaI.Width = 70
+        '
+        'VerEstadoI
+        '
+        Me.VerEstadoI.HeaderText = "Estado"
+        Me.VerEstadoI.Items.AddRange(New Object() {"No Imple.", "Implem.", "Nula", "Cerrada", ""})
+        Me.VerEstadoI.Name = "VerEstadoI"
+        Me.VerEstadoI.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        '
+        'VerResponsableII
+        '
+        Me.VerResponsableII.HeaderText = "Resp."
+        Me.VerResponsableII.Name = "VerResponsableII"
+        Me.VerResponsableII.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.VerResponsableII.Width = 45
+        '
+        'VerDescResponsableII
+        '
+        Me.VerDescResponsableII.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.VerDescResponsableII.HeaderText = "Descripción"
+        Me.VerDescResponsableII.MaxInputLength = 150
+        Me.VerDescResponsableII.MinimumWidth = 100
+        Me.VerDescResponsableII.Name = "VerDescResponsableII"
+        Me.VerDescResponsableII.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'VerFechaII
+        '
+        DataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.VerFechaII.DefaultCellStyle = DataGridViewCellStyle28
+        Me.VerFechaII.HeaderText = "Fecha"
+        Me.VerFechaII.Name = "VerFechaII"
+        Me.VerFechaII.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.VerFechaII.Width = 70
+        '
+        'VerEstadoII
+        '
+        Me.VerEstadoII.HeaderText = "Estado"
+        Me.VerEstadoII.Items.AddRange(New Object() {"No Efect.", "Parc. Efect.", "Nula", "Efectiva", ""})
+        Me.VerEstadoII.Name = "VerEstadoII"
+        Me.VerEstadoII.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        '
+        'VerComentario
+        '
+        Me.VerComentario.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.VerComentario.HeaderText = "Comentarios"
+        Me.VerComentario.MaxInputLength = 100
+        Me.VerComentario.MinimumWidth = 100
+        Me.VerComentario.Name = "VerComentario"
+        Me.VerComentario.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
         'NuevoSac
         '
@@ -1682,17 +1648,6 @@ Partial Class NuevoSac
     Friend WithEvents ImpleFecha As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Estado As System.Windows.Forms.DataGridViewComboBoxColumn
     Friend WithEvents Comentarios As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents VerIdAcciones As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents VerAcciones As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents VerResponsableI As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents VerDescResponsableI As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents VerFechaI As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents VerEstadoI As System.Windows.Forms.DataGridViewComboBoxColumn
-    Friend WithEvents VerResponsableII As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents VerDescResponsableII As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents VerFechaII As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents VerEstadoII As System.Windows.Forms.DataGridViewComboBoxColumn
-    Friend WithEvents VerComentario As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Incidencia As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Numero As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Tipo As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -1713,4 +1668,15 @@ Partial Class NuevoSac
     Friend WithEvents Responsable As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DescResponsable As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Plazo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents VerIdAcciones As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents VerAcciones As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents VerResponsableI As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents VerDescResponsableI As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents VerFechaI As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents VerEstadoI As System.Windows.Forms.DataGridViewComboBoxColumn
+    Friend WithEvents VerResponsableII As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents VerDescResponsableII As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents VerFechaII As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents VerEstadoII As System.Windows.Forms.DataGridViewComboBoxColumn
+    Friend WithEvents VerComentario As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

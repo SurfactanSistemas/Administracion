@@ -102,7 +102,7 @@ Public Class Ingresar_Presupuesto : Implements IAyudaProv
     End Sub
 
     Private Function ObtenerNroPresupuesto() As Integer
-        Dim SQLCnslt As String = "SELECT NroMax = Max(NroPresupuesto) + 1 FROM Solicitud_Presupuesto"
+        Dim SQLCnslt As String = "SELECT NroMax = Max(NroPresupuesto) FROM Solicitud_Presupuesto"
         Dim RowSol As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
 
         If RowSol IsNot Nothing Then
@@ -293,6 +293,8 @@ Public Class Ingresar_Presupuesto : Implements IAyudaProv
                 Wowner.RefrescaDGV()
             End If
 
+            MsgBox("Se grabo correctamente el presupuesto", vbInformation)
+
             Close()
 
         Catch ex As Exception
@@ -350,22 +352,25 @@ Public Class Ingresar_Presupuesto : Implements IAyudaProv
         Return Directory.EnumerateFileSystemEntries(Ruta).Any()
     End Function
     Private Sub btn_CerrarPresupuesto_Click(sender As Object, e As EventArgs) Handles btn_CerrarPresupuesto.Click
-        Try
-            Dim SQLCnslt As String = "UPDATE Solicitud_Presupuesto SET Estado = 'Cerrada' WHERE NroPresupuesto = '" & txt_NroPresupuesto.Text & "'"
+        If MsgBox("¿Esta seguro que desea cerrar este presupuesto?", vbYesNo) = vbYes Then
+            Try
+                Dim SQLCnslt As String = "UPDATE Solicitud_Presupuesto SET Estado = 'Cerrada' WHERE NroPresupuesto = '" & txt_NroPresupuesto.Text & "'"
 
-            ExecuteNonQueries("SurfactanSa", SQLCnslt)
+                ExecuteNonQueries("SurfactanSa", SQLCnslt)
 
-            Dim Wowner As IActualzarDGV = TryCast(Owner, IActualzarDGV)
+                Dim Wowner As IActualzarDGV = TryCast(Owner, IActualzarDGV)
 
-            If Wowner IsNot Nothing Then
-                Wowner.RefrescaDGV()
-            End If
+                If Wowner IsNot Nothing Then
+                    Wowner.RefrescaDGV()
+                End If
 
-            Close()
+                Close()
 
-        Catch ex As Exception
+            Catch ex As Exception
 
-        End Try
+            End Try
+        End If
+        
     End Sub
 
     Private Sub btn_Adjuntar_Click(sender As Object, e As EventArgs) Handles btn_Adjuntar.Click
@@ -386,4 +391,11 @@ Public Class Ingresar_Presupuesto : Implements IAyudaProv
 
 
    
+    Private Sub txt_Pagado_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles txt_Pagado.MouseDoubleClick
+        With New Listado_Facturas_A_Presupuesto(txt_NroPresupuesto.Text)
+            .Show()
+        End With
+    End Sub
+
+    
 End Class

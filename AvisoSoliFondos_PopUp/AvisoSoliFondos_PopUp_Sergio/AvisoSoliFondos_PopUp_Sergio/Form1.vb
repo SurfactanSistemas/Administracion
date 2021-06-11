@@ -21,10 +21,10 @@ Public Class Form1
                 listaFilasApintar.Add(RowPopUp("NroSolicitud"))
             Next
 
-            ' SQLCnslt = "UPDATE SolicitudFondos SET MarcaPopUp_Sergio = 'X'"
-            ' ExecuteNonQueries("SurfactanSa", SQLCnslt)
+            SQLCnslt = "UPDATE SolicitudFondos SET MarcaPopUp_Sergio = 'X'"
+            ExecuteNonQueries("SurfactanSa", SQLCnslt)
 
-            '            Me.Show()
+            'Me.Show()
             Me.BringToFront()
             Me.WindowState = FormWindowState.Normal
 

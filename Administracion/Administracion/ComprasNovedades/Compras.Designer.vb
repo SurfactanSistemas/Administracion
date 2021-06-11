@@ -40,20 +40,18 @@ Partial Class Compras
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.PanelPrincipal = New System.Windows.Forms.Panel()
+        Me.txt_NroPresup = New Administracion.CustomTextBox()
+        Me.CustomLabel3 = New Administracion.CustomLabel()
         Me.btn_Adjuntar = New System.Windows.Forms.Button()
         Me.ckMarcaDifCambio = New System.Windows.Forms.CheckBox()
         Me.ckChequeRechazado = New System.Windows.Forms.CheckBox()
+        Me.CustomButton1 = New Administracion.CustomButton()
         Me.txtVtoCAI = New System.Windows.Forms.MaskedTextBox()
         Me.txtFechaIVA = New System.Windows.Forms.MaskedTextBox()
         Me.txtFechaVto2 = New System.Windows.Forms.MaskedTextBox()
         Me.txtFechaVto1 = New System.Windows.Forms.MaskedTextBox()
         Me.txtFechaEmision = New System.Windows.Forms.MaskedTextBox()
         Me.CBLetra = New System.Windows.Forms.ComboBox()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
-        Me.txt_NroPresup = New Administracion.CustomTextBox()
-        Me.CustomLabel3 = New Administracion.CustomLabel()
-        Me.CustomButton1 = New Administracion.CustomButton()
         Me.txtNumero = New Administracion.CustomTextBox()
         Me.CustomLabel4 = New Administracion.CustomLabel()
         Me.txtCAI = New Administracion.CustomTextBox()
@@ -99,6 +97,7 @@ Partial Class Compras
         Me.cmbTipo = New Administracion.CustomComboBox()
         Me.txtPunto = New Administracion.CustomTextBox()
         Me.txtTipo = New Administracion.CustomTextBox()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.btnApertura = New Administracion.CustomButton()
         Me.btnConsulta = New Administracion.CustomButton()
         Me.btnCerrar = New Administracion.CustomButton()
@@ -106,6 +105,7 @@ Partial Class Compras
         Me.btnEliminar = New Administracion.CustomButton()
         Me.btnConsultaNroFactura = New Administracion.CustomButton()
         Me.btnLimpiar = New Administracion.CustomButton()
+        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.gbTipo.SuspendLayout()
         CType(Me.gridAsientos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
@@ -186,7 +186,7 @@ Partial Class Compras
         Me.gridAsientos.RowHeadersWidth = 15
         Me.gridAsientos.RowTemplate.Height = 21
         Me.gridAsientos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        Me.gridAsientos.Size = New System.Drawing.Size(979, 352)
+        Me.gridAsientos.Size = New System.Drawing.Size(979, 297)
         Me.gridAsientos.TabIndex = 52
         '
         'Cuenta
@@ -322,8 +322,37 @@ Partial Class Compras
         Me.PanelPrincipal.Location = New System.Drawing.Point(0, 60)
         Me.PanelPrincipal.Margin = New System.Windows.Forms.Padding(4)
         Me.PanelPrincipal.Name = "PanelPrincipal"
-        Me.PanelPrincipal.Size = New System.Drawing.Size(1085, 678)
+        Me.PanelPrincipal.Size = New System.Drawing.Size(1085, 625)
         Me.PanelPrincipal.TabIndex = 63
+        '
+        'txt_NroPresup
+        '
+        Me.txt_NroPresup.Cleanable = True
+        Me.txt_NroPresup.Empty = False
+        Me.txt_NroPresup.EnterIndex = 6
+        Me.txt_NroPresup.LabelAssociationKey = 7
+        Me.txt_NroPresup.Location = New System.Drawing.Point(1000, 148)
+        Me.txt_NroPresup.Margin = New System.Windows.Forms.Padding(4)
+        Me.txt_NroPresup.MaxLength = 8
+        Me.txt_NroPresup.Name = "txt_NroPresup"
+        Me.txt_NroPresup.ReadOnly = True
+        Me.txt_NroPresup.Size = New System.Drawing.Size(70, 22)
+        Me.txt_NroPresup.TabIndex = 68
+        Me.txt_NroPresup.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txt_NroPresup.Validator = Administracion.ValidatorType.Numeric
+        '
+        'CustomLabel3
+        '
+        Me.CustomLabel3.AutoSize = True
+        Me.CustomLabel3.ControlAssociationKey = 7
+        Me.CustomLabel3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.CustomLabel3.ForeColor = System.Drawing.SystemColors.Control
+        Me.CustomLabel3.Location = New System.Drawing.Point(894, 147)
+        Me.CustomLabel3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.CustomLabel3.Name = "CustomLabel3"
+        Me.CustomLabel3.Size = New System.Drawing.Size(109, 23)
+        Me.CustomLabel3.TabIndex = 67
+        Me.CustomLabel3.Text = "Nro. Presup."
         '
         'btn_Adjuntar
         '
@@ -363,6 +392,29 @@ Partial Class Compras
         Me.ckChequeRechazado.TabIndex = 65
         Me.ckChequeRechazado.Text = "Cheque Rechazado"
         Me.ckChequeRechazado.UseVisualStyleBackColor = True
+        '
+        'CustomButton1
+        '
+        Me.CustomButton1.BackColor = System.Drawing.SystemColors.Control
+        Me.CustomButton1.BackgroundImage = Global.Administracion.My.Resources.Resources.Consulta_Dat_N1
+        Me.CustomButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.CustomButton1.Cleanable = False
+        Me.CustomButton1.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.CustomButton1.EnterIndex = -1
+        Me.CustomButton1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.CustomButton1.FlatAppearance.BorderSize = 0
+        Me.CustomButton1.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
+        Me.CustomButton1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.CustomButton1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.CustomButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.CustomButton1.LabelAssociationKey = -1
+        Me.CustomButton1.Location = New System.Drawing.Point(999, 78)
+        Me.CustomButton1.Margin = New System.Windows.Forms.Padding(4)
+        Me.CustomButton1.Name = "CustomButton1"
+        Me.CustomButton1.Size = New System.Drawing.Size(41, 28)
+        Me.CustomButton1.TabIndex = 64
+        Me.ToolTip1.SetToolTip(Me.CustomButton1, "Consultar Detalles de Remitos")
+        Me.CustomButton1.UseVisualStyleBackColor = False
         '
         'txtVtoCAI
         '
@@ -438,62 +490,6 @@ Partial Class Compras
         Me.CBLetra.Size = New System.Drawing.Size(47, 24)
         Me.CBLetra.TabIndex = 62
         '
-        'OpenFileDialog1
-        '
-        Me.OpenFileDialog1.FileName = "OpenFileDialog1"
-        '
-        'txt_NroPresup
-        '
-        Me.txt_NroPresup.Cleanable = True
-        Me.txt_NroPresup.Empty = False
-        Me.txt_NroPresup.EnterIndex = 6
-        Me.txt_NroPresup.LabelAssociationKey = 7
-        Me.txt_NroPresup.Location = New System.Drawing.Point(1000, 148)
-        Me.txt_NroPresup.Margin = New System.Windows.Forms.Padding(4)
-        Me.txt_NroPresup.MaxLength = 8
-        Me.txt_NroPresup.Name = "txt_NroPresup"
-        Me.txt_NroPresup.ReadOnly = True
-        Me.txt_NroPresup.Size = New System.Drawing.Size(70, 22)
-        Me.txt_NroPresup.TabIndex = 68
-        Me.txt_NroPresup.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txt_NroPresup.Validator = Administracion.ValidatorType.Numeric
-        '
-        'CustomLabel3
-        '
-        Me.CustomLabel3.AutoSize = True
-        Me.CustomLabel3.ControlAssociationKey = 7
-        Me.CustomLabel3.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.CustomLabel3.ForeColor = System.Drawing.SystemColors.Control
-        Me.CustomLabel3.Location = New System.Drawing.Point(894, 147)
-        Me.CustomLabel3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.CustomLabel3.Name = "CustomLabel3"
-        Me.CustomLabel3.Size = New System.Drawing.Size(109, 23)
-        Me.CustomLabel3.TabIndex = 67
-        Me.CustomLabel3.Text = "Nro. Presup."
-        '
-        'CustomButton1
-        '
-        Me.CustomButton1.BackColor = System.Drawing.SystemColors.Control
-        Me.CustomButton1.BackgroundImage = Global.Administracion.My.Resources.Resources.Consulta_Dat_N1
-        Me.CustomButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.CustomButton1.Cleanable = False
-        Me.CustomButton1.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.CustomButton1.EnterIndex = -1
-        Me.CustomButton1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
-        Me.CustomButton1.FlatAppearance.BorderSize = 0
-        Me.CustomButton1.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
-        Me.CustomButton1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
-        Me.CustomButton1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.CustomButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.CustomButton1.LabelAssociationKey = -1
-        Me.CustomButton1.Location = New System.Drawing.Point(999, 78)
-        Me.CustomButton1.Margin = New System.Windows.Forms.Padding(4)
-        Me.CustomButton1.Name = "CustomButton1"
-        Me.CustomButton1.Size = New System.Drawing.Size(41, 28)
-        Me.CustomButton1.TabIndex = 64
-        Me.ToolTip1.SetToolTip(Me.CustomButton1, "Consultar Detalles de Remitos")
-        Me.CustomButton1.UseVisualStyleBackColor = False
-        '
         'txtNumero
         '
         Me.txtNumero.Cleanable = True
@@ -544,7 +540,7 @@ Partial Class Compras
         Me.lblCredito.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblCredito.ControlAssociationKey = -1
         Me.lblCredito.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.lblCredito.Location = New System.Drawing.Point(873, 639)
+        Me.lblCredito.Location = New System.Drawing.Point(873, 585)
         Me.lblCredito.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblCredito.Name = "lblCredito"
         Me.lblCredito.Size = New System.Drawing.Size(156, 25)
@@ -601,7 +597,7 @@ Partial Class Compras
         Me.lblDebito.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblDebito.ControlAssociationKey = -1
         Me.lblDebito.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.lblDebito.Location = New System.Drawing.Point(709, 639)
+        Me.lblDebito.Location = New System.Drawing.Point(709, 585)
         Me.lblDebito.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblDebito.Name = "lblDebito"
         Me.lblDebito.Size = New System.Drawing.Size(156, 25)
@@ -1131,7 +1127,7 @@ Partial Class Compras
         Me.btnApertura.FlatAppearance.BorderSize = 0
         Me.btnApertura.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control
         Me.btnApertura.LabelAssociationKey = -1
-        Me.btnApertura.Location = New System.Drawing.Point(613, 764)
+        Me.btnApertura.Location = New System.Drawing.Point(613, 702)
         Me.btnApertura.Margin = New System.Windows.Forms.Padding(4)
         Me.btnApertura.Name = "btnApertura"
         Me.btnApertura.Size = New System.Drawing.Size(203, 53)
@@ -1154,7 +1150,7 @@ Partial Class Compras
         Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnConsulta.LabelAssociationKey = -1
-        Me.btnConsulta.Location = New System.Drawing.Point(384, 764)
+        Me.btnConsulta.Location = New System.Drawing.Point(384, 702)
         Me.btnConsulta.Margin = New System.Windows.Forms.Padding(4)
         Me.btnConsulta.Name = "btnConsulta"
         Me.btnConsulta.Size = New System.Drawing.Size(92, 53)
@@ -1176,7 +1172,7 @@ Partial Class Compras
         Me.btnCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCerrar.LabelAssociationKey = -1
-        Me.btnCerrar.Location = New System.Drawing.Point(499, 764)
+        Me.btnCerrar.Location = New System.Drawing.Point(499, 702)
         Me.btnCerrar.Margin = New System.Windows.Forms.Padding(4)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(92, 53)
@@ -1198,7 +1194,7 @@ Partial Class Compras
         Me.btnAgregar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAgregar.LabelAssociationKey = -1
-        Me.btnAgregar.Location = New System.Drawing.Point(40, 764)
+        Me.btnAgregar.Location = New System.Drawing.Point(40, 702)
         Me.btnAgregar.Margin = New System.Windows.Forms.Padding(4)
         Me.btnAgregar.Name = "btnAgregar"
         Me.btnAgregar.Size = New System.Drawing.Size(92, 53)
@@ -1220,7 +1216,7 @@ Partial Class Compras
         Me.btnEliminar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnEliminar.LabelAssociationKey = -1
-        Me.btnEliminar.Location = New System.Drawing.Point(155, 764)
+        Me.btnEliminar.Location = New System.Drawing.Point(155, 702)
         Me.btnEliminar.Margin = New System.Windows.Forms.Padding(4)
         Me.btnEliminar.Name = "btnEliminar"
         Me.btnEliminar.Size = New System.Drawing.Size(92, 53)
@@ -1240,7 +1236,7 @@ Partial Class Compras
         Me.btnConsultaNroFactura.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
         Me.btnConsultaNroFactura.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnConsultaNroFactura.LabelAssociationKey = -1
-        Me.btnConsultaNroFactura.Location = New System.Drawing.Point(839, 764)
+        Me.btnConsultaNroFactura.Location = New System.Drawing.Point(839, 702)
         Me.btnConsultaNroFactura.Margin = New System.Windows.Forms.Padding(4)
         Me.btnConsultaNroFactura.Name = "btnConsultaNroFactura"
         Me.btnConsultaNroFactura.Size = New System.Drawing.Size(203, 53)
@@ -1264,7 +1260,7 @@ Partial Class Compras
         Me.btnLimpiar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnLimpiar.LabelAssociationKey = -1
-        Me.btnLimpiar.Location = New System.Drawing.Point(269, 764)
+        Me.btnLimpiar.Location = New System.Drawing.Point(269, 702)
         Me.btnLimpiar.Margin = New System.Windows.Forms.Padding(4)
         Me.btnLimpiar.Name = "btnLimpiar"
         Me.btnLimpiar.Size = New System.Drawing.Size(92, 53)
@@ -1272,11 +1268,15 @@ Partial Class Compras
         Me.ToolTip1.SetToolTip(Me.btnLimpiar, "Limpiar Formulario")
         Me.btnLimpiar.UseVisualStyleBackColor = True
         '
+        'OpenFileDialog1
+        '
+        Me.OpenFileDialog1.FileName = "OpenFileDialog1"
+        '
         'Compras
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1081, 841)
+        Me.ClientSize = New System.Drawing.Size(1081, 761)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.PanelPrincipal)
         Me.Controls.Add(Me.btnApertura)

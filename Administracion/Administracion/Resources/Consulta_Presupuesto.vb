@@ -25,6 +25,8 @@
         Dim Wowner As IPasa_NumeroPresupuesto = TryCast(Owner, IPasa_NumeroPresupuesto)
         If Wowner IsNot Nothing Then
             Wowner.PasaNroPresu(dgv_Presupuestos.CurrentRow.Cells("NroPresupuesto").Value)
+
         End If
+        Me.Close()
     End Sub
 End Class

@@ -216,10 +216,10 @@ Public Class Form1 : Implements IPasaCodigo
 
     Private Sub DescontarStock()
 
-        ' GenerarRegistroEstadistica()
+        GenerarRegistroEstadistica()
 
         If txt_Producto.Text.StartsWith("DY") Then
-            '     ActualzarSaldosDY()
+            ActualzarSaldosDY()
         Else
             ActualzarSaldosTerminado()
         End If
@@ -470,7 +470,7 @@ Public Class Form1 : Implements IPasaCodigo
                 WImpreBruto = IIf(IsDBNull(.Item("ImpreBruto")), 0, .Item("ImpreBruto"))
                 WTitulo = IIf(IsDBNull(.Item("Titulo")), "", .Item("Titulo"))
                 WDescriTerminado = IIf(IsDBNull(.Item("DescriTerminado")), "", .Item("DescriTerminado"))
-                WDescriTerminadoII = .Item("DescriTerminadoII")
+                WDescriTerminadoII = IIf(IsDBNull(.Item("DescriTerminadoII")), "", .Item("DescriTerminadoII"))
                 WMarcaMono = IIf(IsDBNull(.Item("MarcaMono")), "", .Item("MarcaMono"))
 
                 Dim NuevoRenglon As Integer = 0
