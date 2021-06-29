@@ -4,9 +4,11 @@ Imports System.IO
 Imports System.Text.RegularExpressions
 Imports ClasesCompartidas
 Imports Util.Clases
+Imports Util.Clases.Helper
 Imports CrystalDecisions.CrystalReports.Engine
 Imports Microsoft.Office.Interop.Outlook
 Imports Sistema_Solicitud_Fondos
+Imports Util
 
 Public Class Pagos
     Dim pagos As New List(Of DetalleCompraCuentaCorriente)
@@ -555,6 +557,7 @@ Public Class Pagos
         Return WImpoNeto
     End Function
 
+
     Private Sub mostrarFormaPagos(ByVal formaPagos As List(Of FormaPago))
         'gridFormaPagos.Rows.Clear()
 
@@ -1064,7 +1067,7 @@ Public Class Pagos
                 MsgBox("No es Proveedor valido el ingresado")
                 Exit Sub
             End If
-            
+
         End If
         'Dim SQLCnslt As String = "SELECT NroSolicitud, Descripcion = iif(Proveedor = '', Cuenta, Proveedor), Tipo, Moneda, Importe FROM SolicitudFondos WHERE Estado = 'AUTORIZO' AND OrdenPago = '' ORDER BY NroSolicitud"
 
@@ -1254,7 +1257,7 @@ Public Class Pagos
                     txtObservaciones.Text = IIf(IsDBNull(.Item("Titulo")), "", .Item("Titulo"))
                     optVarios.Checked = True
 
-                   
+
                     Dim XRow = 0
 
                     For i = 0 To XMAXFILAS - 1
@@ -1272,7 +1275,7 @@ Public Class Pagos
                             .Cells(4).Value = formatonumerico(RowSoli.Item("Importe"))
                         Else
                             If IIf(IsDBNull(RowSoli.Item("ParidadInformada")), 0, RowSoli.Item("ParidadInformada")) <> 0 Then
-                               txtParidad.Text = formatonumerico(RowSoli.Item("ParidadInformada"))
+                                txtParidad.Text = formatonumerico(RowSoli.Item("ParidadInformada"))
                                 Dim Calculo As Double = RowSoli.Item("Importe") * Val(formatonumerico(txtParidad.Text))
                                 .Cells(4).Value = formatonumerico(Calculo)
                             Else
@@ -1284,9 +1287,9 @@ Public Class Pagos
                                 Dim Calculo As Double = RowSoli.Item("Importe") * Val(formatonumerico(txtParidad.Text))
                                 .Cells(4).Value = formatonumerico(Calculo)
                             End If
-                            
 
-                            End If
+
+                        End If
                     End With
 
                     EsCuenta = "S"
@@ -1985,9 +1988,9 @@ Public Class Pagos
                                                 End If
                                             End If
 
-                                                If Not IsDBNull(.Item("CambioDivisa")) Then
-                                                    ZZParidad = _NormalizarNumero(.Item("CambioDivisa").ToString(), 4)
-                                                End If
+                                            If Not IsDBNull(.Item("CambioDivisa")) Then
+                                                ZZParidad = _NormalizarNumero(.Item("CambioDivisa").ToString(), 4)
+                                            End If
                                         Case 2
                                             If Val(txtParidad.Text) <> Val(_NormalizarNumero(.Item("Cambio").ToString(), 4)) Then
                                                 MsgBox("Este proveedor tiene asignada la paridad Nacion. Se actualizará el valor de paridad", vbExclamation)
@@ -2002,7 +2005,7 @@ Public Class Pagos
                                     ZZParidad = _NormalizarNumero(.Item("CambioDivisa").ToString(), 4)
                                 End If
                             End If
-                            
+
 
                         Else
                             Dim SQLCnslt As String = "SELECT TipoDolar, ParidadInformada FROM SOlicitudFondos WHERE NroSolicitud = '" & NroSoliInterno & "'"
@@ -2023,7 +2026,7 @@ Public Class Pagos
 
                             End If
                         End If
-                       
+
 
                     Else
                         If Not GenerarPDF Then MsgBox("No hay Paridad cargada para la fecha " & ZZfecha, MsgBoxStyle.Critical)
@@ -2158,7 +2161,32 @@ Public Class Pagos
         Return siguiente
     End Function
 
+    Private Function VerificarPermisoDeGrabarOrden() As Boolean
+        Dim Respuesta As Boolean = False
+        Dim SQLCnslt As String = "SELECT PermisoGrabarOrdenPago FROM Operador WHERE Clave = '" & Operador.Clave & "'"
+        Dim rowOperador As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+        If rowOperador IsNot Nothing Then
+            Dim Valor As String = IIf(IsDBNull(rowOperador.Item("PermisoGrabarOrdenPago")), "N", rowOperador.Item("PermisoGrabarOrdenPago"))
+            If Valor = "S" Then
+                Respuesta = True
+            End If
+        End If
+
+        Return Respuesta
+    End Function
+
     Private Sub btnAgregar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAgregar.Click
+
+        
+        'SE AGREGO UN CAMPO PARA DEJAR GRABAR SOLO A CIERTOS USUARIOS
+        'AGREGADO ANDRES
+        If Not VerificarPermisoDeGrabarOrden() Then
+            MsgBox("Usted no es un usurio permitido para grabar ordenes de pago.", vbExclamation)
+            Exit Sub
+        End If
+        'FIN AGREGADO ANDRES
+
+
         Dim XParidad, WEntra
         Dim XOrden, XRenglon, XProveedor, XFecha, XFechaOrd, XImporte, XRetencion, XRetotra, XRetIbCiudad, XRetIva, XObservaciones, XCuenta, XTipoOrd, XTipo1, XLetra1, XPunto1, XNumero1, XImporte1, XObservaciones2, XImpoNeto, XTipo2, ZZNumero2, ZZFecha2, XFechaOrd2, ZZBanco2, ZZImporte2, XEmpresa, ZZClave, XRetganancias, XConcepto, XConsecionaria, XImpolist, XCuit, ImporteCheque, NumeroCheque, FechaCheque, BancoCheque, WLetra, WTipo, WPunto, WNumero, ZSql, XClaveCtaprv, XTipoRecibo, XClaveRecibo, XClaveCtaCte
         Dim _banco As Banco
@@ -2899,7 +2927,7 @@ Public Class Pagos
                 Select Case txtProveedor.Text
                     Case "10167878480", "10000000100", "10071081483", "10069345023", "10066352912", "10023969933", "10014123562"
                         If MsgBox("Se detectó que está grabando un Anticipo. ¿Desea que se envíe la OP por Mail?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
-                            btnEnviarAviso_Click(Nothing, Nothing)
+                              btnEnviarAviso_Click(Nothing, Nothing)
                             WTipoAvisoMailOp = "1"
                         End If
                 End Select
@@ -2941,8 +2969,10 @@ Public Class Pagos
                 'SI ESTA VISIBLE EL BOTON DE SOLICITUD FONDOS
                 'ACTUALIZAMOS LA TABLA CON EL NUMERO DE ORDEN DE PAGO
                 Dim SQLCnlst As String = "UPDATE SolicitudFondos SET OrdenPago = '" & Trim(txtOrdenPago.Text) & "', MarcaPopUp_Pachi = 'X' WHERE NroSolicitud = '" & NroSoliInterno & "'"
-                ExecuteNonQueries("SurfactanSa", {SQLCnlst})
 
+
+                ExecuteNonQueries("SurfactanSa", {SQLCnlst})
+                
                 Try 'PARA ENVIAR MAIL AVISO A LAS CUENTAS
                     SQLCnlst = "SELECT Tipo, Solicitante, Cuenta FROM SolicitudFondos WHERE NroSolicitud = '" & NroSoliInterno & "'"
                     Dim RowSoli As DataRow = GetSingle(SQLCnlst, "SurfactanSa")
@@ -2959,6 +2989,7 @@ Public Class Pagos
                                         Dim WAsunto As String = "ORDEN PAGO SOLICITUD FONDOS: " & NroSoliInterno
                                         Dim WCuerpo As String = "Acaba de generarse el pago para la solicitud de Fondos Nro. <strong>" & NroSoliInterno & "</strong> <br/>" _
                                                             & "Para el numero de cuenta <strong>" & RowSoli.Item("Cuenta") & " " & RowCuenta.Item("Descripcion") & "</strong>"
+
                                         _EnviarEmail(Mail, "", WAsunto, WCuerpo, Nothing)
                                     End If
                                 End If
@@ -2982,6 +3013,8 @@ Public Class Pagos
 
                     .Imprimir()
                 End With
+
+                BuscarArchivosParaImprimirEnCarpetaSolicitudFondos(NroSoliInterno)
 
             End If
         Catch ex As System.Exception
@@ -3017,8 +3050,36 @@ Public Class Pagos
 
         txtOrdenPago_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
 
-        ' Imprimimos los comprobantes pertinentes.
-        btnImprimir.PerformClick()
+        'INCLUIDO ANDRES 11/06
+        Dim Imprime As Boolean = False
+        Dim SQLCnslt As String = ""
+        Imprime = True
+        SQLCnslt = "UPDATE Pagos SET OperadorClave = '" & Operador.Clave & "' WHERE Orden = '" & WOrdPago & "'"
+        ' Select Case UCase(Operador.Clave)
+        ' 
+        '     Case "39235"
+        '         Imprime = True
+        '         SQLCnslt = "UPDATE Pagos SET OperadorClave = '" & Operador.Clave & "', Impreso_Sergio_Lucas = '" & "X" & "' WHERE Orden = '" & WOrdPago & "'"
+        ' 
+        '     Case "XINGO", "SERGIO", "LUCAS2021", "LOGOUT"
+        '         If MsgBox("¿Desea imprimir?", vbYesNo) = vbYes Then
+        '             Imprime = True
+        '             SQLCnslt = "UPDATE Pagos SET OperadorClave = '" & Operador.Clave & "', Impreso_Sergio_Lucas = '" & "X" & "' WHERE Orden = '" & WOrdPago & "'"
+        '         Else
+        '             SQLCnslt = "UPDATE Pagos SET OperadorClave = '" & Operador.Clave & "', Impreso_Sergio_Lucas = '" & "" & "' WHERE Orden = '" & WOrdPago & "'"
+        '         End If
+        ' End Select
+
+        If SQLCnslt <> "" Then
+            ExecuteNonQueries("SurfactanSa", {SQLCnslt})
+        End If
+
+        'FIN INCLUIDO ANDRES 11/06
+
+        If Imprime = True Then
+            ' Imprimimos los comprobantes pertinentes.
+            btnImprimir.PerformClick()
+        End If
 
         'SOLO ENVIAMOS MAIL SI ES ANTICIPO Y DESPACHANTE DE ADUANA Y EL USUARIO RESPONDE QUE SI
         ' btnEnviarAviso_Click(Nothing, Nothing)
@@ -3027,6 +3088,52 @@ Public Class Pagos
         btnLimpiar.PerformClick()
     End Sub
 
+
+    Private Sub BuscarArchivosParaImprimirEnCarpetaSolicitudFondos(ByVal NroSoliInterno As String)
+        Dim RutaCarpeta As String = "Z:\vb\NET\ArchivosRelacionadosSolicitudFondos\" & NroSoliInterno
+        For Each archivo As String In Directory.GetFiles(RutaCarpeta)
+            If archivo = "Z:\vb\NET\ArchivosRelacionadosSolicitudFondos\103\SolicitudOriginal_" & NroSoliInterno & ".pdf" Then
+                Continue For
+            End If
+
+            '  Dim Esperas As Integer = 0
+            '  Using p As New Process
+            '      p.StartInfo.FileName = archivo
+            '      p.StartInfo.Verb = "Print"
+            ' 
+            '      p.Start()
+            ' 
+            '      Threading.Thread.Sleep(500) ' tiempo X para que el programa cliente se active he imprima
+            ' 
+            '      p.CloseMainWindow() ' Cierre ventana cliente
+            '      ' si la ventana sigue abierta, se encicla hasta cerrarla.
+            '      While Not p.HasExited
+            '          Threading.Thread.Sleep(500)
+            '          Esperas += 1
+            '          p.CloseMainWindow()
+            '      End While
+            '  End Using
+            
+
+            Try
+                '' Imprimimos las hojas guardadas.
+                '' Recorremos e imprimimos los archivos copiados a la carpeta 
+             
+                Dim p = New Process()
+                p.StartInfo = New ProcessStartInfo
+
+                p.StartInfo.CreateNoWindow = True
+                p.StartInfo.Verb = "print"
+                p.StartInfo.FileName = archivo ''put the correct path here
+
+                p.Start()
+              
+            Catch ex As System.Exception
+
+            End Try
+            
+        Next
+    End Sub
     Public Shared Function FormatoCorreoValido(ByVal correo As String) As Boolean
 
         correo = Trim(correo)
@@ -4903,11 +5010,15 @@ Public Class Pagos
 
         crdoc.SetDataSource(Tabla)
 
+        Dim QuienFirma As String = ObtenerQuienFirma()
+
+
         Dim frm As New VistaPrevia
         frm.Reporte = crdoc
         frm.Reporte.SetParameterValue("EsTransferencia", 0)
         frm.Reporte.SetParameterValue("CuitProv", XCuitProveedor)
         frm.Reporte.SetParameterValue("CbuProv", XCBU)
+        frm.Reporte.SetParameterValue("FirmaAImprimir", QuienFirma)
 
         Dim WFechasTransferencias = ""
         Dim WFechasECheques As String = ""
@@ -4986,8 +5097,36 @@ Public Class Pagos
         If Val(txtIVA.Text) <> 0 Then
             _ImprimirComprobanteRetencionIva()
         End If
+
+        'ACTUALIZAMOS LA MARCA DE IMPRESION 
+        'SE ARREPINTIERON DE ESTO
+        'ActualizaImpresionOrden(Trim(txtOrdenPago.Text))
+
     End Sub
 
+    Private Sub ActualizaImpresionOrden(ByVal orden As String)
+        Dim SQLCnslt As String = "UPDATE Pagos SET Impreso_Sergio_Lucas = 'X' WHERE Orden = '" & orden & "'"
+        ExecuteNonQueries("SurfactanSa", {SQLCnslt})
+    End Sub
+    Private Function ObtenerQuienFirma() As String
+        Dim Respuesta As String = ""
+        Dim SQLCnslt As String = "SELECT OperadorClave FROM Pagos WHERE Orden = '" & txtOrdenPago.Text & "'"
+        Dim RowOrden As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+        If RowOrden IsNot Nothing Then
+            Dim OperadorClave As String = Trim(UCase(RowOrden.Item("OperadorClave")))
+            Select Case OperadorClave
+                Case "39235"
+                    Respuesta = "Pachi"
+                Case "XINGO"
+                    Respuesta = "Alejandro"
+                Case "SERGIO"
+                    Respuesta = "Sergio"
+                Case "LUCAS2021"
+                    Respuesta = "Lucas"
+            End Select
+        End If
+        Return Respuesta
+    End Function
     Private Sub _ImprimirComprobanteRetencionIva()
         Dim Tabla As New DataTable("Detalles")
         Dim row As DataRow
@@ -5325,12 +5464,16 @@ Public Class Pagos
             crdoc.SetParameterValue("TipoFirma", 0)
         End If
 
+        Dim QuienFirma As String = ObtenerQuienFirma()
+        crdoc.SetParameterValue("FirmaAImprimir", QuienFirma)
+
         If GenerarPDF Then
 
             crdoc.SetParameterValue("MostrarFirma", 1)
 
             Dim frm2 As New Util.VistaPrevia
             frm2.Reporte = crdoc
+
 
             Conexion.EmpresaDeTrabajo = "SurfactanSa"
 
@@ -5703,13 +5846,16 @@ Public Class Pagos
             crdoc.SetParameterValue("TipoFirma", 0)
         End If
 
+        Dim QuienFirma As String = ObtenerQuienFirma()
+        crdoc.SetParameterValue("FirmaAImprimir", QuienFirma)
+
         If GenerarPDF Then
 
             crdoc.SetParameterValue("MostrarFirma", 1)
 
             Dim frm2 As New Util.VistaPrevia
             frm2.Reporte = crdoc
-
+            
             Conexion.EmpresaDeTrabajo = "SurfactanSa"
 
             If _EsPellital() Then Conexion.EmpresaDeTrabajo = "PellitalSa"
@@ -6234,12 +6380,17 @@ Public Class Pagos
             crdoc.SetParameterValue("TipoFirma", 0)
         End If
 
+        Dim QuienFirma As String = ObtenerQuienFirma()
+        crdoc.SetParameterValue("FirmaAImprimir", QuienFirma)
+
+
         If GenerarPDF Then
 
             crdoc.SetParameterValue("MostrarFirma", 1)
 
             Dim frm2 As New Util.VistaPrevia
             frm2.Reporte = crdoc
+
 
             Conexion.EmpresaDeTrabajo = "SurfactanSa"
 
@@ -6363,6 +6514,9 @@ Public Class Pagos
         Else
             crdoc.SetParameterValue("TipoFirma", 0)
         End If
+
+        Dim QuienFirma As String = ObtenerQuienFirma()
+        crdoc.SetParameterValue("FirmaAImprimir", QuienFirma)
 
         If GenerarPDF Then
 

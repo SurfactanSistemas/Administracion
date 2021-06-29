@@ -84,6 +84,7 @@ Partial Class MenuPrincipal
         Me.ListadosEChequesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListadoEChequesSinUsarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListadoEChequesUtilizadosAFechaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ListadoPagosSinImprimirToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProcesosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem4 = New System.Windows.Forms.ToolStripMenuItem()
@@ -292,7 +293,7 @@ Partial Class MenuPrincipal
         '
         'ListadosToolStripMenuItem
         '
-        Me.ListadosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ConsultaDeCuentaCorrientePorPantallaToolStripMenuItem, Me.CuentaCorrienteDeProveedoresToolStripMenuItem, Me.SaldoDeCuentaCorrienteDeProveedoresToolStripMenuItem, Me.CuantaCorrienteDeProveedoresSelectivoToolStripMenuItem, Me.ListadoDeCuentaCorrienteDeProveedoresAFechaToolStripMenuItem, Me.ToolStripMenuItem8, Me.ListadosContablesToolStripMenuItem, Me.ListadoDeDepositosToolStripMenuItem, Me.ListadoDePagosPosdatadosToolStripMenuItem, Me.MovmietosDeBancosToolStripMenuItem, Me.ListadoDeValoresEnCarteraToolStripMenuItem, Me.ListadoDeChequesEmitidosToolStripMenuItem, Me.ListadoDeRetencionesDeIngresosBrutosToolStripMenuItem, Me.ControlDeRecibosProvisoriosToolStripMenuItem1, Me.ListadoDeDeudaDePymeNacionToolStripMenuItem1, Me.ListadoDeCuentasCorrientesDeProveedoresAnaliticosToolStripMenuItem, Me.ListadoDeProyeccionDeCuentaCorrientesDeProveedoresAnaliticosToolStripMenuItem, Me.EnvíoDeEmailPorAnticipoToolStripMenuItem, Me.EnvíoDeAvisoDeOPAProveedoresPorEMailToolStripMenuItem, Me.InformeRecepcionSinFacturasRegistradasToolStripMenuItem, Me.ListadosEChequesToolStripMenuItem})
+        Me.ListadosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ConsultaDeCuentaCorrientePorPantallaToolStripMenuItem, Me.CuentaCorrienteDeProveedoresToolStripMenuItem, Me.SaldoDeCuentaCorrienteDeProveedoresToolStripMenuItem, Me.CuantaCorrienteDeProveedoresSelectivoToolStripMenuItem, Me.ListadoDeCuentaCorrienteDeProveedoresAFechaToolStripMenuItem, Me.ToolStripMenuItem8, Me.ListadosContablesToolStripMenuItem, Me.ListadoDeDepositosToolStripMenuItem, Me.ListadoDePagosPosdatadosToolStripMenuItem, Me.MovmietosDeBancosToolStripMenuItem, Me.ListadoDeValoresEnCarteraToolStripMenuItem, Me.ListadoDeChequesEmitidosToolStripMenuItem, Me.ListadoDeRetencionesDeIngresosBrutosToolStripMenuItem, Me.ControlDeRecibosProvisoriosToolStripMenuItem1, Me.ListadoDeDeudaDePymeNacionToolStripMenuItem1, Me.ListadoDeCuentasCorrientesDeProveedoresAnaliticosToolStripMenuItem, Me.ListadoDeProyeccionDeCuentaCorrientesDeProveedoresAnaliticosToolStripMenuItem, Me.EnvíoDeEmailPorAnticipoToolStripMenuItem, Me.EnvíoDeAvisoDeOPAProveedoresPorEMailToolStripMenuItem, Me.InformeRecepcionSinFacturasRegistradasToolStripMenuItem, Me.ListadosEChequesToolStripMenuItem, Me.ListadoPagosSinImprimirToolStripMenuItem})
         Me.ListadosToolStripMenuItem.Name = "ListadosToolStripMenuItem"
         Me.ListadosToolStripMenuItem.Size = New System.Drawing.Size(75, 24)
         Me.ListadosToolStripMenuItem.Text = "Listados"
@@ -499,6 +500,13 @@ Partial Class MenuPrincipal
         Me.ListadoEChequesUtilizadosAFechaToolStripMenuItem.Name = "ListadoEChequesUtilizadosAFechaToolStripMenuItem"
         Me.ListadoEChequesUtilizadosAFechaToolStripMenuItem.Size = New System.Drawing.Size(330, 26)
         Me.ListadoEChequesUtilizadosAFechaToolStripMenuItem.Text = "Listado E-Cheques Utilizados a Fecha"
+        '
+        'ListadoPagosSinImprimirToolStripMenuItem
+        '
+        Me.ListadoPagosSinImprimirToolStripMenuItem.Name = "ListadoPagosSinImprimirToolStripMenuItem"
+        Me.ListadoPagosSinImprimirToolStripMenuItem.Size = New System.Drawing.Size(547, 26)
+        Me.ListadoPagosSinImprimirToolStripMenuItem.Text = "Listado Pagos Sin Imprimir"
+        Me.ListadoPagosSinImprimirToolStripMenuItem.Visible = False
         '
         'ProcesosToolStripMenuItem
         '
@@ -769,4 +777,5 @@ Partial Class MenuPrincipal
     Friend WithEvents ListadosEChequesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ListadoEChequesSinUsarToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ListadoEChequesUtilizadosAFechaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ListadoPagosSinImprimirToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class

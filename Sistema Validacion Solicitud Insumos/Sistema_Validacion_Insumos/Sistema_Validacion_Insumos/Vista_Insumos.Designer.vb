@@ -27,9 +27,6 @@ Partial Class Vista_Insumos
         Me.panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.label1 = New System.Windows.Forms.Label()
-        Me.dgv_Insumos = New Util.DBDataGridView()
-        Me.Cantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.txt_NroSoli = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -50,6 +47,9 @@ Partial Class Vista_Insumos
         Me.btn_Cerrar = New System.Windows.Forms.Button()
         Me.btn_Grabar = New System.Windows.Forms.Button()
         Me.cbx_Tipo = New System.Windows.Forms.ComboBox()
+        Me.dgv_Insumos = New Util.DBDataGridView()
+        Me.Cantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.panel1.SuspendLayout()
         CType(Me.dgv_Insumos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -91,48 +91,6 @@ Partial Class Vista_Insumos
         Me.label1.Size = New System.Drawing.Size(158, 20)
         Me.label1.TabIndex = 0
         Me.label1.Text = "Solicitud Insumos"
-        '
-        'dgv_Insumos
-        '
-        Me.dgv_Insumos.AllowUserToAddRows = False
-        Me.dgv_Insumos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgv_Insumos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Cantidad, Me.Descripcion})
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgv_Insumos.DefaultCellStyle = DataGridViewCellStyle2
-        Me.dgv_Insumos.DoubleBuffered = True
-        Me.dgv_Insumos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.dgv_Insumos.Location = New System.Drawing.Point(8, 161)
-        Me.dgv_Insumos.Name = "dgv_Insumos"
-        Me.dgv_Insumos.OrdenamientoColumnasHabilitado = True
-        Me.dgv_Insumos.RowHeadersWidth = 15
-        Me.dgv_Insumos.RowTemplate.Height = 20
-        Me.dgv_Insumos.ShowCellToolTips = False
-        Me.dgv_Insumos.SinClickDerecho = False
-        Me.dgv_Insumos.Size = New System.Drawing.Size(725, 272)
-        Me.dgv_Insumos.TabIndex = 11
-        '
-        'Cantidad
-        '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle1.Format = "N2"
-        DataGridViewCellStyle1.NullValue = Nothing
-        Me.Cantidad.DefaultCellStyle = DataGridViewCellStyle1
-        Me.Cantidad.HeaderText = "Cantidad"
-        Me.Cantidad.Name = "Cantidad"
-        Me.Cantidad.Width = 70
-        '
-        'Descripcion
-        '
-        Me.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.Descripcion.HeaderText = "Descripcion"
-        Me.Descripcion.MaxInputLength = 50
-        Me.Descripcion.Name = "Descripcion"
         '
         'txt_NroSoli
         '
@@ -322,6 +280,47 @@ Partial Class Vista_Insumos
         Me.cbx_Tipo.Name = "cbx_Tipo"
         Me.cbx_Tipo.Size = New System.Drawing.Size(167, 24)
         Me.cbx_Tipo.TabIndex = 31
+        '
+        'dgv_Insumos
+        '
+        Me.dgv_Insumos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgv_Insumos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Cantidad, Me.Descripcion})
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgv_Insumos.DefaultCellStyle = DataGridViewCellStyle2
+        Me.dgv_Insumos.DoubleBuffered = True
+        Me.dgv_Insumos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
+        Me.dgv_Insumos.Location = New System.Drawing.Point(8, 161)
+        Me.dgv_Insumos.Name = "dgv_Insumos"
+        Me.dgv_Insumos.OrdenamientoColumnasHabilitado = True
+        Me.dgv_Insumos.RowHeadersWidth = 15
+        Me.dgv_Insumos.RowTemplate.Height = 20
+        Me.dgv_Insumos.ShowCellToolTips = False
+        Me.dgv_Insumos.SinClickDerecho = False
+        Me.dgv_Insumos.Size = New System.Drawing.Size(725, 272)
+        Me.dgv_Insumos.TabIndex = 11
+        '
+        'Cantidad
+        '
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle1.Format = "N2"
+        DataGridViewCellStyle1.NullValue = Nothing
+        Me.Cantidad.DefaultCellStyle = DataGridViewCellStyle1
+        Me.Cantidad.HeaderText = "Cantidad"
+        Me.Cantidad.Name = "Cantidad"
+        Me.Cantidad.Width = 70
+        '
+        'Descripcion
+        '
+        Me.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Descripcion.HeaderText = "Descripcion"
+        Me.Descripcion.MaxInputLength = 50
+        Me.Descripcion.Name = "Descripcion"
         '
         'Vista_Insumos
         '

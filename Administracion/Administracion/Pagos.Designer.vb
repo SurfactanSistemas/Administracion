@@ -169,9 +169,9 @@ Partial Class Pagos
         Me.GroupBox1.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.Control
         Me.GroupBox1.Location = New System.Drawing.Point(13, 156)
-        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4)
         Me.GroupBox1.Size = New System.Drawing.Size(323, 122)
         Me.GroupBox1.TabIndex = 34
         Me.GroupBox1.TabStop = False
@@ -182,7 +182,7 @@ Partial Class Pagos
         Me.optTransferencias.AutoSize = True
         Me.optTransferencias.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold)
         Me.optTransferencias.Location = New System.Drawing.Point(185, 58)
-        Me.optTransferencias.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.optTransferencias.Margin = New System.Windows.Forms.Padding(4)
         Me.optTransferencias.Name = "optTransferencias"
         Me.optTransferencias.Size = New System.Drawing.Size(118, 22)
         Me.optTransferencias.TabIndex = 4
@@ -194,7 +194,7 @@ Partial Class Pagos
         Me.optAnticipos.AutoSize = True
         Me.optAnticipos.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold)
         Me.optAnticipos.Location = New System.Drawing.Point(185, 30)
-        Me.optAnticipos.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.optAnticipos.Margin = New System.Windows.Forms.Padding(4)
         Me.optAnticipos.Name = "optAnticipos"
         Me.optAnticipos.Size = New System.Drawing.Size(87, 22)
         Me.optAnticipos.TabIndex = 3
@@ -206,7 +206,7 @@ Partial Class Pagos
         Me.optChequeRechazado.AutoSize = True
         Me.optChequeRechazado.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold)
         Me.optChequeRechazado.Location = New System.Drawing.Point(15, 86)
-        Me.optChequeRechazado.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.optChequeRechazado.Margin = New System.Windows.Forms.Padding(4)
         Me.optChequeRechazado.Name = "optChequeRechazado"
         Me.optChequeRechazado.Size = New System.Drawing.Size(124, 22)
         Me.optChequeRechazado.TabIndex = 2
@@ -218,7 +218,7 @@ Partial Class Pagos
         Me.optVarios.AutoSize = True
         Me.optVarios.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold)
         Me.optVarios.Location = New System.Drawing.Point(15, 58)
-        Me.optVarios.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.optVarios.Margin = New System.Windows.Forms.Padding(4)
         Me.optVarios.Name = "optVarios"
         Me.optVarios.Size = New System.Drawing.Size(106, 22)
         Me.optVarios.TabIndex = 1
@@ -231,7 +231,7 @@ Partial Class Pagos
         Me.optCtaCte.Checked = True
         Me.optCtaCte.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold)
         Me.optCtaCte.Location = New System.Drawing.Point(15, 30)
-        Me.optCtaCte.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.optCtaCte.Margin = New System.Windows.Forms.Padding(4)
         Me.optCtaCte.Name = "optCtaCte"
         Me.optCtaCte.Size = New System.Drawing.Size(120, 22)
         Me.optCtaCte.TabIndex = 0
@@ -263,7 +263,7 @@ Partial Class Pagos
         Me.gridPagos.DefaultCellStyle = DataGridViewCellStyle6
         Me.gridPagos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.gridPagos.Location = New System.Drawing.Point(5, 290)
-        Me.gridPagos.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.gridPagos.Margin = New System.Windows.Forms.Padding(4)
         Me.gridPagos.Name = "gridPagos"
         Me.gridPagos.RowHeadersWidth = 25
         Me.gridPagos.Size = New System.Drawing.Size(499, 176)
@@ -373,7 +373,7 @@ Partial Class Pagos
         Me.gridFormaPagos.DefaultCellStyle = DataGridViewCellStyle13
         Me.gridFormaPagos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.gridFormaPagos.Location = New System.Drawing.Point(505, 290)
-        Me.gridFormaPagos.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.gridFormaPagos.Margin = New System.Windows.Forms.Padding(4)
         Me.gridFormaPagos.Name = "gridFormaPagos"
         Me.gridFormaPagos.RowHeadersWidth = 25
         Me.gridFormaPagos.Size = New System.Drawing.Size(517, 176)
@@ -525,9 +525,9 @@ Partial Class Pagos
         Me.Panel2.Controls.Add(Me.CustomLabel9)
         Me.Panel2.Controls.Add(Me.txtIBCiudad)
         Me.Panel2.Location = New System.Drawing.Point(-1, 0)
-        Me.Panel2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel2.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(1037, 550)
+        Me.Panel2.Size = New System.Drawing.Size(1037, 557)
         Me.Panel2.TabIndex = 73
         '
         'btn_ListarSolicitudesFondos
@@ -535,7 +535,7 @@ Partial Class Pagos
         Me.btn_ListarSolicitudesFondos.BackgroundImage = Global.Administracion.My.Resources.Resources.istockphoto_964877162_170667a
         Me.btn_ListarSolicitudesFondos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.btn_ListarSolicitudesFondos.Location = New System.Drawing.Point(231, 500)
-        Me.btn_ListarSolicitudesFondos.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btn_ListarSolicitudesFondos.Margin = New System.Windows.Forms.Padding(4)
         Me.btn_ListarSolicitudesFondos.Name = "btn_ListarSolicitudesFondos"
         Me.btn_ListarSolicitudesFondos.Size = New System.Drawing.Size(51, 47)
         Me.btn_ListarSolicitudesFondos.TabIndex = 136
@@ -547,7 +547,7 @@ Partial Class Pagos
         Me.btn_ConsultaSoliFondos.BackgroundImage = Global.Administracion.My.Resources.Resources.Consulta
         Me.btn_ConsultaSoliFondos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.btn_ConsultaSoliFondos.Location = New System.Drawing.Point(289, 500)
-        Me.btn_ConsultaSoliFondos.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btn_ConsultaSoliFondos.Margin = New System.Windows.Forms.Padding(4)
         Me.btn_ConsultaSoliFondos.Name = "btn_ConsultaSoliFondos"
         Me.btn_ConsultaSoliFondos.Size = New System.Drawing.Size(52, 47)
         Me.btn_ConsultaSoliFondos.TabIndex = 135
@@ -562,7 +562,7 @@ Partial Class Pagos
         Me.pnlDifCamXFactura.Controls.Add(Me.GridPagosXFacturas)
         Me.pnlDifCamXFactura.Controls.Add(Me.CustomLabel1)
         Me.pnlDifCamXFactura.Location = New System.Drawing.Point(124, 75)
-        Me.pnlDifCamXFactura.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlDifCamXFactura.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlDifCamXFactura.Name = "pnlDifCamXFactura"
         Me.pnlDifCamXFactura.Size = New System.Drawing.Size(632, 369)
         Me.pnlDifCamXFactura.TabIndex = 131
@@ -574,7 +574,7 @@ Partial Class Pagos
         Me.btnVolver.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnVolver.ForeColor = System.Drawing.SystemColors.Control
         Me.btnVolver.Location = New System.Drawing.Point(347, 316)
-        Me.btnVolver.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnVolver.Margin = New System.Windows.Forms.Padding(4)
         Me.btnVolver.Name = "btnVolver"
         Me.btnVolver.Size = New System.Drawing.Size(101, 46)
         Me.btnVolver.TabIndex = 132
@@ -589,7 +589,7 @@ Partial Class Pagos
         Me.btnAceptar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnAceptar.ForeColor = System.Drawing.SystemColors.Control
         Me.btnAceptar.Location = New System.Drawing.Point(181, 315)
-        Me.btnAceptar.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnAceptar.Margin = New System.Windows.Forms.Padding(4)
         Me.btnAceptar.Name = "btnAceptar"
         Me.btnAceptar.Size = New System.Drawing.Size(101, 46)
         Me.btnAceptar.TabIndex = 131
@@ -605,7 +605,7 @@ Partial Class Pagos
         Me.GridPagosXFacturas.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Check, Me.NumeroXFactura, Me.Tipo3, Me.Letra3, Me.Punto3, Me.Fecha, Me.ImportePesos, Me.Paridad, Me.ImporteDolares})
         Me.GridPagosXFacturas.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.GridPagosXFacturas.Location = New System.Drawing.Point(21, 39)
-        Me.GridPagosXFacturas.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GridPagosXFacturas.Margin = New System.Windows.Forms.Padding(4)
         Me.GridPagosXFacturas.Name = "GridPagosXFacturas"
         Me.GridPagosXFacturas.RowHeadersWidth = 25
         Me.GridPagosXFacturas.Size = New System.Drawing.Size(593, 271)
@@ -700,7 +700,7 @@ Partial Class Pagos
         Me.txtObservaciones.EnterIndex = 4
         Me.txtObservaciones.LabelAssociationKey = 4
         Me.txtObservaciones.Location = New System.Drawing.Point(120, 66)
-        Me.txtObservaciones.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtObservaciones.Margin = New System.Windows.Forms.Padding(4)
         Me.txtObservaciones.MaxLength = 100
         Me.txtObservaciones.Name = "txtObservaciones"
         Me.txtObservaciones.Size = New System.Drawing.Size(487, 22)
@@ -713,9 +713,9 @@ Partial Class Pagos
         Me.GroupBox3.Controls.Add(Me.rbChFisico)
         Me.GroupBox3.ForeColor = System.Drawing.SystemColors.Control
         Me.GroupBox3.Location = New System.Drawing.Point(401, 90)
-        Me.GroupBox3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox3.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox3.Padding = New System.Windows.Forms.Padding(4)
         Me.GroupBox3.Size = New System.Drawing.Size(207, 62)
         Me.GroupBox3.TabIndex = 133
         Me.GroupBox3.TabStop = False
@@ -725,7 +725,7 @@ Partial Class Pagos
         '
         Me.rbChElectronico.AutoSize = True
         Me.rbChElectronico.Location = New System.Drawing.Point(92, 23)
-        Me.rbChElectronico.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rbChElectronico.Margin = New System.Windows.Forms.Padding(4)
         Me.rbChElectronico.Name = "rbChElectronico"
         Me.rbChElectronico.Size = New System.Drawing.Size(99, 21)
         Me.rbChElectronico.TabIndex = 0
@@ -737,7 +737,7 @@ Partial Class Pagos
         Me.rbChFisico.AutoSize = True
         Me.rbChFisico.Checked = True
         Me.rbChFisico.Location = New System.Drawing.Point(9, 23)
-        Me.rbChFisico.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rbChFisico.Margin = New System.Windows.Forms.Padding(4)
         Me.rbChFisico.Name = "rbChFisico"
         Me.rbChFisico.Size = New System.Drawing.Size(65, 21)
         Me.rbChFisico.TabIndex = 0
@@ -765,7 +765,7 @@ Partial Class Pagos
         Me.btnDifCambioXFactura.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDifCambioXFactura.ForeColor = System.Drawing.SystemColors.Control
         Me.btnDifCambioXFactura.Location = New System.Drawing.Point(109, 471)
-        Me.btnDifCambioXFactura.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnDifCambioXFactura.Margin = New System.Windows.Forms.Padding(4)
         Me.btnDifCambioXFactura.Name = "btnDifCambioXFactura"
         Me.btnDifCambioXFactura.Size = New System.Drawing.Size(113, 76)
         Me.btnDifCambioXFactura.TabIndex = 130
@@ -779,7 +779,7 @@ Partial Class Pagos
         Me.ckCalculaDifCambio.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ckCalculaDifCambio.ForeColor = System.Drawing.SystemColors.Control
         Me.ckCalculaDifCambio.Location = New System.Drawing.Point(347, 258)
-        Me.ckCalculaDifCambio.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ckCalculaDifCambio.Margin = New System.Windows.Forms.Padding(4)
         Me.ckCalculaDifCambio.Name = "ckCalculaDifCambio"
         Me.ckCalculaDifCambio.Size = New System.Drawing.Size(159, 17)
         Me.ckCalculaDifCambio.TabIndex = 129
@@ -793,7 +793,7 @@ Partial Class Pagos
         Me.btnActualizarCarpetas.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnActualizarCarpetas.ForeColor = System.Drawing.SystemColors.Control
         Me.btnActualizarCarpetas.Location = New System.Drawing.Point(620, 150)
-        Me.btnActualizarCarpetas.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnActualizarCarpetas.Margin = New System.Windows.Forms.Padding(4)
         Me.btnActualizarCarpetas.Name = "btnActualizarCarpetas"
         Me.btnActualizarCarpetas.Size = New System.Drawing.Size(199, 28)
         Me.btnActualizarCarpetas.TabIndex = 128
@@ -807,7 +807,7 @@ Partial Class Pagos
         Me.btnEnviarAviso.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnEnviarAviso.ForeColor = System.Drawing.SystemColors.Control
         Me.btnEnviarAviso.Location = New System.Drawing.Point(429, 9)
-        Me.btnEnviarAviso.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnEnviarAviso.Margin = New System.Windows.Forms.Padding(4)
         Me.btnEnviarAviso.Name = "btnEnviarAviso"
         Me.btnEnviarAviso.Size = New System.Drawing.Size(177, 28)
         Me.btnEnviarAviso.TabIndex = 128
@@ -821,7 +821,7 @@ Partial Class Pagos
         Me.btnEliminarFila.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnEliminarFila.ForeColor = System.Drawing.SystemColors.Control
         Me.btnEliminarFila.Location = New System.Drawing.Point(347, 507)
-        Me.btnEliminarFila.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnEliminarFila.Margin = New System.Windows.Forms.Padding(4)
         Me.btnEliminarFila.Name = "btnEliminarFila"
         Me.btnEliminarFila.Size = New System.Drawing.Size(151, 28)
         Me.btnEliminarFila.TabIndex = 128
@@ -835,7 +835,7 @@ Partial Class Pagos
         Me.ckNoCalcRetenciones.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ckNoCalcRetenciones.ForeColor = System.Drawing.SystemColors.Control
         Me.ckNoCalcRetenciones.Location = New System.Drawing.Point(549, 257)
-        Me.ckNoCalcRetenciones.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ckNoCalcRetenciones.Margin = New System.Windows.Forms.Padding(4)
         Me.ckNoCalcRetenciones.Name = "ckNoCalcRetenciones"
         Me.ckNoCalcRetenciones.Size = New System.Drawing.Size(183, 19)
         Me.ckNoCalcRetenciones.TabIndex = 127
@@ -849,7 +849,7 @@ Partial Class Pagos
         Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button1.ForeColor = System.Drawing.SystemColors.Control
         Me.Button1.Location = New System.Drawing.Point(689, 254)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(4)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(36, 31)
         Me.Button1.TabIndex = 126
@@ -864,7 +864,7 @@ Partial Class Pagos
         Me.btnDifeCambio.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDifeCambio.ForeColor = System.Drawing.SystemColors.Control
         Me.btnDifeCambio.Location = New System.Drawing.Point(3, 471)
-        Me.btnDifeCambio.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnDifeCambio.Margin = New System.Windows.Forms.Padding(4)
         Me.btnDifeCambio.Name = "btnDifeCambio"
         Me.btnDifeCambio.Size = New System.Drawing.Size(104, 76)
         Me.btnDifeCambio.TabIndex = 126
@@ -876,7 +876,7 @@ Partial Class Pagos
         '
         Me.pnlPedirCuenta.Controls.Add(Me.GroupBox2)
         Me.pnlPedirCuenta.Location = New System.Drawing.Point(363, 346)
-        Me.pnlPedirCuenta.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlPedirCuenta.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlPedirCuenta.Name = "pnlPedirCuenta"
         Me.pnlPedirCuenta.Size = New System.Drawing.Size(289, 94)
         Me.pnlPedirCuenta.TabIndex = 125
@@ -889,9 +889,9 @@ Partial Class Pagos
         Me.GroupBox2.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold)
         Me.GroupBox2.ForeColor = System.Drawing.SystemColors.Control
         Me.GroupBox2.Location = New System.Drawing.Point(20, 4)
-        Me.GroupBox2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox2.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox2.Padding = New System.Windows.Forms.Padding(4)
         Me.GroupBox2.Size = New System.Drawing.Size(249, 79)
         Me.GroupBox2.TabIndex = 7
         Me.GroupBox2.TabStop = False
@@ -915,7 +915,7 @@ Partial Class Pagos
         Me.txtCuenta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.txtCuenta.LabelAssociationKey = 1
         Me.txtCuenta.Location = New System.Drawing.Point(61, 33)
-        Me.txtCuenta.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtCuenta.Margin = New System.Windows.Forms.Padding(4)
         Me.txtCuenta.MaxLength = 6
         Me.txtCuenta.Name = "txtCuenta"
         Me.txtCuenta.Size = New System.Drawing.Size(124, 23)
@@ -948,7 +948,7 @@ Partial Class Pagos
         Me.lstSeleccion.Items.AddRange(New Object() {"Proveedores", "Cuentas Corrientes", "Cheques Terceros", "Documentos", "Cuentas Contables"})
         Me.lstSeleccion.LabelAssociationKey = -1
         Me.lstSeleccion.Location = New System.Drawing.Point(620, 17)
-        Me.lstSeleccion.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.lstSeleccion.Margin = New System.Windows.Forms.Padding(4)
         Me.lstSeleccion.Name = "lstSeleccion"
         Me.lstSeleccion.Size = New System.Drawing.Size(401, 164)
         Me.lstSeleccion.TabIndex = 66
@@ -962,7 +962,7 @@ Partial Class Pagos
         Me.CLBFiltrado.ItemHeight = 16
         Me.CLBFiltrado.LabelAssociationKey = -1
         Me.CLBFiltrado.Location = New System.Drawing.Point(620, 47)
-        Me.CLBFiltrado.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.CLBFiltrado.Margin = New System.Windows.Forms.Padding(4)
         Me.CLBFiltrado.Name = "CLBFiltrado"
         Me.CLBFiltrado.Size = New System.Drawing.Size(401, 132)
         Me.CLBFiltrado.TabIndex = 73
@@ -971,7 +971,7 @@ Partial Class Pagos
         'txtFechaParidad
         '
         Me.txtFechaParidad.Location = New System.Drawing.Point(496, 155)
-        Me.txtFechaParidad.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtFechaParidad.Margin = New System.Windows.Forms.Padding(4)
         Me.txtFechaParidad.Mask = "00/00/0000"
         Me.txtFechaParidad.Name = "txtFechaParidad"
         Me.txtFechaParidad.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -982,7 +982,7 @@ Partial Class Pagos
         'txtFecha
         '
         Me.txtFecha.Location = New System.Drawing.Point(328, 12)
-        Me.txtFecha.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtFecha.Margin = New System.Windows.Forms.Padding(4)
         Me.txtFecha.Mask = "00/00/0000"
         Me.txtFecha.Name = "txtFecha"
         Me.txtFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -1117,7 +1117,7 @@ Partial Class Pagos
         Me.txtOrdenPago.EnterIndex = 1
         Me.txtOrdenPago.LabelAssociationKey = 1
         Me.txtOrdenPago.Location = New System.Drawing.Point(120, 12)
-        Me.txtOrdenPago.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtOrdenPago.Margin = New System.Windows.Forms.Padding(4)
         Me.txtOrdenPago.MaxLength = 6
         Me.txtOrdenPago.Name = "txtOrdenPago"
         Me.txtOrdenPago.Size = New System.Drawing.Size(99, 22)
@@ -1132,7 +1132,7 @@ Partial Class Pagos
         Me.txtProveedor.EnterIndex = 3
         Me.txtProveedor.LabelAssociationKey = 3
         Me.txtProveedor.Location = New System.Drawing.Point(120, 39)
-        Me.txtProveedor.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtProveedor.Margin = New System.Windows.Forms.Padding(4)
         Me.txtProveedor.MaxLength = 11
         Me.txtProveedor.Name = "txtProveedor"
         Me.txtProveedor.Size = New System.Drawing.Size(125, 22)
@@ -1148,7 +1148,7 @@ Partial Class Pagos
         Me.txtRazonSocial.EnterIndex = -1
         Me.txtRazonSocial.LabelAssociationKey = 3
         Me.txtRazonSocial.Location = New System.Drawing.Point(249, 39)
-        Me.txtRazonSocial.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtRazonSocial.Margin = New System.Windows.Forms.Padding(4)
         Me.txtRazonSocial.Name = "txtRazonSocial"
         Me.txtRazonSocial.ReadOnly = True
         Me.txtRazonSocial.Size = New System.Drawing.Size(357, 22)
@@ -1162,7 +1162,7 @@ Partial Class Pagos
         Me.txtBanco.EnterIndex = 5
         Me.txtBanco.LabelAssociationKey = 5
         Me.txtBanco.Location = New System.Drawing.Point(120, 94)
-        Me.txtBanco.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtBanco.Margin = New System.Windows.Forms.Padding(4)
         Me.txtBanco.MaxLength = 8
         Me.txtBanco.Name = "txtBanco"
         Me.txtBanco.Size = New System.Drawing.Size(33, 22)
@@ -1180,7 +1180,7 @@ Partial Class Pagos
         Me.txtFormasPagosAceptadas.EnterIndex = -1
         Me.txtFormasPagosAceptadas.LabelAssociationKey = 5
         Me.txtFormasPagosAceptadas.Location = New System.Drawing.Point(17, 124)
-        Me.txtFormasPagosAceptadas.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtFormasPagosAceptadas.Margin = New System.Windows.Forms.Padding(4)
         Me.txtFormasPagosAceptadas.Name = "txtFormasPagosAceptadas"
         Me.txtFormasPagosAceptadas.ReadOnly = True
         Me.txtFormasPagosAceptadas.Size = New System.Drawing.Size(375, 22)
@@ -1196,7 +1196,7 @@ Partial Class Pagos
         Me.txtNombreBanco.EnterIndex = -1
         Me.txtNombreBanco.LabelAssociationKey = 5
         Me.txtNombreBanco.Location = New System.Drawing.Point(157, 94)
-        Me.txtNombreBanco.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtNombreBanco.Margin = New System.Windows.Forms.Padding(4)
         Me.txtNombreBanco.Name = "txtNombreBanco"
         Me.txtNombreBanco.ReadOnly = True
         Me.txtNombreBanco.Size = New System.Drawing.Size(240, 22)
@@ -1236,7 +1236,7 @@ Partial Class Pagos
         Me.txtConsulta.EnterIndex = -1
         Me.txtConsulta.LabelAssociationKey = -1
         Me.txtConsulta.Location = New System.Drawing.Point(620, 17)
-        Me.txtConsulta.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtConsulta.Margin = New System.Windows.Forms.Padding(4)
         Me.txtConsulta.Name = "txtConsulta"
         Me.txtConsulta.Size = New System.Drawing.Size(399, 22)
         Me.txtConsulta.TabIndex = 55
@@ -1251,7 +1251,7 @@ Partial Class Pagos
         Me.lstConsulta.ItemHeight = 16
         Me.lstConsulta.LabelAssociationKey = -1
         Me.lstConsulta.Location = New System.Drawing.Point(619, 47)
-        Me.lstConsulta.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.lstConsulta.Margin = New System.Windows.Forms.Padding(4)
         Me.lstConsulta.Name = "lstConsulta"
         Me.lstConsulta.Size = New System.Drawing.Size(403, 132)
         Me.lstConsulta.TabIndex = 54
@@ -1264,7 +1264,7 @@ Partial Class Pagos
         Me.txtParidad.EnterIndex = 7
         Me.txtParidad.LabelAssociationKey = 7
         Me.txtParidad.Location = New System.Drawing.Point(420, 191)
-        Me.txtParidad.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtParidad.Margin = New System.Windows.Forms.Padding(4)
         Me.txtParidad.Name = "txtParidad"
         Me.txtParidad.ReadOnly = True
         Me.txtParidad.Size = New System.Drawing.Size(107, 22)
@@ -1279,7 +1279,7 @@ Partial Class Pagos
         Me.txtTotal.EnterIndex = -1
         Me.txtTotal.LabelAssociationKey = 12
         Me.txtTotal.Location = New System.Drawing.Point(899, 258)
-        Me.txtTotal.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtTotal.Margin = New System.Windows.Forms.Padding(4)
         Me.txtTotal.Name = "txtTotal"
         Me.txtTotal.ReadOnly = True
         Me.txtTotal.Size = New System.Drawing.Size(120, 22)
@@ -1298,7 +1298,7 @@ Partial Class Pagos
         Me.cmbTipo.Items.AddRange(New Object() {"Normal", "Cheque Rechazado"})
         Me.cmbTipo.LabelAssociationKey = 13
         Me.cmbTipo.Location = New System.Drawing.Point(420, 220)
-        Me.cmbTipo.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cmbTipo.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbTipo.Name = "cmbTipo"
         Me.cmbTipo.Size = New System.Drawing.Size(107, 24)
         Me.cmbTipo.TabIndex = 39
@@ -1377,7 +1377,7 @@ Partial Class Pagos
         Me.txtIVA.EnterIndex = -1
         Me.txtIVA.LabelAssociationKey = 11
         Me.txtIVA.Location = New System.Drawing.Point(899, 224)
-        Me.txtIVA.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtIVA.Margin = New System.Windows.Forms.Padding(4)
         Me.txtIVA.Name = "txtIVA"
         Me.txtIVA.ReadOnly = True
         Me.txtIVA.Size = New System.Drawing.Size(120, 22)
@@ -1406,7 +1406,7 @@ Partial Class Pagos
         Me.txtIngresosBrutos.EnterIndex = -1
         Me.txtIngresosBrutos.LabelAssociationKey = 9
         Me.txtIngresosBrutos.Location = New System.Drawing.Point(899, 191)
-        Me.txtIngresosBrutos.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtIngresosBrutos.Margin = New System.Windows.Forms.Padding(4)
         Me.txtIngresosBrutos.Name = "txtIngresosBrutos"
         Me.txtIngresosBrutos.ReadOnly = True
         Me.txtIngresosBrutos.Size = New System.Drawing.Size(120, 22)
@@ -1422,7 +1422,7 @@ Partial Class Pagos
         Me.txtGanancias.EnterIndex = -1
         Me.txtGanancias.LabelAssociationKey = 8
         Me.txtGanancias.Location = New System.Drawing.Point(660, 191)
-        Me.txtGanancias.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtGanancias.Margin = New System.Windows.Forms.Padding(4)
         Me.txtGanancias.Name = "txtGanancias"
         Me.txtGanancias.ReadOnly = True
         Me.txtGanancias.Size = New System.Drawing.Size(115, 22)
@@ -1464,7 +1464,7 @@ Partial Class Pagos
         Me.txtIBCiudad.EnterIndex = -1
         Me.txtIBCiudad.LabelAssociationKey = 10
         Me.txtIBCiudad.Location = New System.Drawing.Point(660, 222)
-        Me.txtIBCiudad.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtIBCiudad.Margin = New System.Windows.Forms.Padding(4)
         Me.txtIBCiudad.Name = "txtIBCiudad"
         Me.txtIBCiudad.ReadOnly = True
         Me.txtIBCiudad.Size = New System.Drawing.Size(115, 22)
@@ -1487,8 +1487,8 @@ Partial Class Pagos
         Me.btnCarpetas.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCarpetas.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCarpetas.LabelAssociationKey = -1
-        Me.btnCarpetas.Location = New System.Drawing.Point(471, 556)
-        Me.btnCarpetas.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnCarpetas.Location = New System.Drawing.Point(471, 565)
+        Me.btnCarpetas.Margin = New System.Windows.Forms.Padding(4)
         Me.btnCarpetas.Name = "btnCarpetas"
         Me.btnCarpetas.Size = New System.Drawing.Size(67, 66)
         Me.btnCarpetas.TabIndex = 80
@@ -1509,8 +1509,8 @@ Partial Class Pagos
         Me.btnImprimir.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnImprimir.LabelAssociationKey = -1
-        Me.btnImprimir.Location = New System.Drawing.Point(357, 556)
-        Me.btnImprimir.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnImprimir.Location = New System.Drawing.Point(357, 565)
+        Me.btnImprimir.Margin = New System.Windows.Forms.Padding(4)
         Me.btnImprimir.Name = "btnImprimir"
         Me.btnImprimir.Size = New System.Drawing.Size(67, 66)
         Me.btnImprimir.TabIndex = 79
@@ -1531,8 +1531,8 @@ Partial Class Pagos
         Me.btnCalcular.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCalcular.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCalcular.LabelAssociationKey = -1
-        Me.btnCalcular.Location = New System.Drawing.Point(584, 556)
-        Me.btnCalcular.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnCalcular.Location = New System.Drawing.Point(584, 565)
+        Me.btnCalcular.Margin = New System.Windows.Forms.Padding(4)
         Me.btnCalcular.Name = "btnCalcular"
         Me.btnCalcular.Size = New System.Drawing.Size(67, 66)
         Me.btnCalcular.TabIndex = 78
@@ -1553,8 +1553,8 @@ Partial Class Pagos
         Me.btnConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnConsulta.LabelAssociationKey = -1
-        Me.btnConsulta.Location = New System.Drawing.Point(165, 556)
-        Me.btnConsulta.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnConsulta.Location = New System.Drawing.Point(165, 565)
+        Me.btnConsulta.Margin = New System.Windows.Forms.Padding(4)
         Me.btnConsulta.Name = "btnConsulta"
         Me.btnConsulta.Size = New System.Drawing.Size(67, 66)
         Me.btnConsulta.TabIndex = 77
@@ -1575,8 +1575,8 @@ Partial Class Pagos
         Me.btnCtaCte.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCtaCte.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCtaCte.LabelAssociationKey = -1
-        Me.btnCtaCte.Location = New System.Drawing.Point(696, 556)
-        Me.btnCtaCte.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnCtaCte.Location = New System.Drawing.Point(696, 565)
+        Me.btnCtaCte.Margin = New System.Windows.Forms.Padding(4)
         Me.btnCtaCte.Name = "btnCtaCte"
         Me.btnCtaCte.Size = New System.Drawing.Size(77, 66)
         Me.btnCtaCte.TabIndex = 76
@@ -1597,8 +1597,8 @@ Partial Class Pagos
         Me.btnChequesTerceros.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnChequesTerceros.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnChequesTerceros.LabelAssociationKey = -1
-        Me.btnChequesTerceros.Location = New System.Drawing.Point(789, 556)
-        Me.btnChequesTerceros.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnChequesTerceros.Location = New System.Drawing.Point(789, 565)
+        Me.btnChequesTerceros.Margin = New System.Windows.Forms.Padding(4)
         Me.btnChequesTerceros.Name = "btnChequesTerceros"
         Me.btnChequesTerceros.Size = New System.Drawing.Size(119, 66)
         Me.btnChequesTerceros.TabIndex = 76
@@ -1619,8 +1619,8 @@ Partial Class Pagos
         Me.btnCerrar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCerrar.LabelAssociationKey = -1
-        Me.btnCerrar.Location = New System.Drawing.Point(916, 556)
-        Me.btnCerrar.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnCerrar.Location = New System.Drawing.Point(916, 565)
+        Me.btnCerrar.Margin = New System.Windows.Forms.Padding(4)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(67, 66)
         Me.btnCerrar.TabIndex = 76
@@ -1641,8 +1641,8 @@ Partial Class Pagos
         Me.btnLimpiar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnLimpiar.LabelAssociationKey = -1
-        Me.btnLimpiar.Location = New System.Drawing.Point(260, 556)
-        Me.btnLimpiar.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnLimpiar.Location = New System.Drawing.Point(260, 565)
+        Me.btnLimpiar.Margin = New System.Windows.Forms.Padding(4)
         Me.btnLimpiar.Name = "btnLimpiar"
         Me.btnLimpiar.Size = New System.Drawing.Size(67, 66)
         Me.btnLimpiar.TabIndex = 75
@@ -1663,8 +1663,8 @@ Partial Class Pagos
         Me.btnAgregar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAgregar.LabelAssociationKey = -1
-        Me.btnAgregar.Location = New System.Drawing.Point(52, 556)
-        Me.btnAgregar.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnAgregar.Location = New System.Drawing.Point(52, 565)
+        Me.btnAgregar.Margin = New System.Windows.Forms.Padding(4)
         Me.btnAgregar.Name = "btnAgregar"
         Me.btnAgregar.Size = New System.Drawing.Size(67, 66)
         Me.btnAgregar.TabIndex = 74
@@ -1675,7 +1675,7 @@ Partial Class Pagos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1035, 626)
+        Me.ClientSize = New System.Drawing.Size(1004, 638)
         Me.Controls.Add(Me.btnCarpetas)
         Me.Controls.Add(Me.btnImprimir)
         Me.Controls.Add(Me.btnCalcular)
@@ -1686,10 +1686,8 @@ Partial Class Pagos
         Me.Controls.Add(Me.btnLimpiar)
         Me.Controls.Add(Me.btnAgregar)
         Me.Controls.Add(Me.Panel2)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Location = New System.Drawing.Point(20, 5)
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.MaximizeBox = False
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "Pagos"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Text = "Ingreso de Pagos a Proveedores                                                   " & _

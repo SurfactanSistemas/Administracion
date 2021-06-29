@@ -90,9 +90,12 @@ Public Class Vista_Insumos
     End Sub
 
     Private Sub btn_Grabar_Click(sender As Object, e As EventArgs) Handles btn_Grabar.Click
-        Dim SQLCnslt As String = ""
-        Dim ListaSQLCnslt As New List(Of String)
 
+
+        Dim SQLCnslt As String = ""
+
+        Dim ListaSQLCnslt As New List(Of String)
+        
         Dim WObservaciones1, WObservaciones2, WObservaciones3, WObservaciones4, WObservaciones5, WObservaciones6, WObservaciones7 As String
         txt_Comentarios.Text = txt_Comentarios.Text.PadRight(350, " ")
         WObservaciones1 = txt_Comentarios.Text.Substring(0, 50)
@@ -105,22 +108,85 @@ Public Class Vista_Insumos
 
         Dim Renglon As Integer = 1
 
+        Dim Woperador As Integer
 
-        For Each dgvRow As DataGridViewRow In dgv_Insumos.Rows
-            SQLCnslt = "UPDATE Insumos_Provisorios SET Cantidad = '" & dgvRow.Cells("Cantidad").Value & "', " _
-                     & "Descripcion = '" & dgvRow.Cells("Descripcion").Value & "', " _
-                     & "Observaciones1 = '" & WObservaciones1 & "', " _
-                     & "Observaciones2 = '" & WObservaciones2 & "', " _
-                     & "Observaciones3 = '" & WObservaciones3 & "', " _
-                     & "Observaciones4 = '" & WObservaciones4 & "', " _
-                     & "Observaciones5 = '" & WObservaciones5 & "', " _
-                     & "Observaciones6 = '" & WObservaciones6 & "', " _
-                     & "Observaciones7 = '" & WObservaciones7 & "' " _
-                     & "WHERE Solicitud = '" & txt_NroSoli.Text & "' AND Renglon = '" & Renglon & "'"
+        Dim CantidadRegistrosEnBase As Integer = 0
+        SQLCnslt = "SELECT Operador FROM Insumos_Provisorios WHERE Solicitud = '" & txt_NroSoli.Text & "'"
+        Dim TablaContar As DataTable = GetAll(SQLCnslt, "SurfactanSa")
+        If TablaContar.Rows.Count > 0 Then
+            Woperador = TablaContar.Rows(0).Item("Operador")
+            CantidadRegistrosEnBase = TablaContar.Rows.Count
+        End If
 
+        If (dgv_Insumos.Rows.Count - 1) = CantidadRegistrosEnBase Then
+            For Each dgvRow As DataGridViewRow In dgv_Insumos.Rows
+                'SI CANTIDAD O DESCRIPCION ESTA VACIO NO GUARDAMOS EL RENGLON
+                If Val(dgvRow.Cells("Cantidad").Value) = 0 Or dgvRow.Cells("Descripcion").Value = "" Then
+                    Continue For
+                End If
+                SQLCnslt = "UPDATE Insumos_Provisorios SET Cantidad = '" & dgvRow.Cells("Cantidad").Value & "', " _
+                         & "Descripcion = '" & dgvRow.Cells("Descripcion").Value & "', " _
+                         & "Observaciones1 = '" & WObservaciones1 & "', " _
+                         & "Observaciones2 = '" & WObservaciones2 & "', " _
+                         & "Observaciones3 = '" & WObservaciones3 & "', " _
+                         & "Observaciones4 = '" & WObservaciones4 & "', " _
+                         & "Observaciones5 = '" & WObservaciones5 & "', " _
+                         & "Observaciones6 = '" & WObservaciones6 & "', " _
+                         & "Observaciones7 = '" & WObservaciones7 & "' " _
+                         & "WHERE Solicitud = '" & txt_NroSoli.Text & "' AND Renglon = '" & Renglon & "'"
+
+                ListaSQLCnslt.Add(SQLCnslt)
+                Renglon += 1
+            Next
+        Else
+            SQLCnslt = "DELETE FROM Insumos_Provisorios WHERE Solicitud = '" & txt_NroSoli.Text & "'"
             ListaSQLCnslt.Add(SQLCnslt)
-            Renglon += 1
-        Next
+            For Each dgvRow As DataGridViewRow In dgv_Insumos.Rows
+                'SI CANTIDAD O DESCRIPCION ESTA VACIO NO GUARDAMOS EL RENGLON
+                If Val(dgvRow.Cells("Cantidad").Value) = 0 Or dgvRow.Cells("Descripcion").Value = "" Then
+                    Continue For
+                End If
+                Dim AuxClave1 As String = txt_NroSoli.Text.PadLeft(6, "0")
+                Dim AuxClave2 As String = Renglon.ToString().PadLeft(2, "0")
+                Dim WClave As String = AuxClave1 & AuxClave2
+
+
+                SQLCnslt = "INSERT INTO Insumos_Provisorios(Clave, Solicitud, Renglon, Fecha, OrdFecha, Planta, " _
+                           & "Solicitante, Observaciones, Entrega, OrdEntrega, Cantidad, Descripcion, " _
+                           & " Observaciones1, Observaciones2, Observaciones3, Observaciones4, Observaciones5, Observaciones6, Observaciones7, " _
+                           & "EstadoItem, TipoSolicitud, Operador, EstadoPedido) " _
+                           & "VALUES(" _
+                           & "'" & WClave & "', " _
+                           & "'" & txt_NroSoli.Text & "', " _
+                           & "'" & Renglon & "', " _
+                           & "'" & txt_Fecha.Text & "', " _
+                           & "'" & ordenaFecha(txt_Fecha.Text) & "', " _
+                           & "'" & txt_Planta.Text & "', " _
+                           & "'" & txt_Solicitante.Text & "', " _
+                           & "'" & txt_Observaciones.Text & "', " _
+                           & "'" & txt_FechaEntrega.Text & "', " _
+                           & "'" & ordenaFecha(txt_FechaEntrega.Text) & "', " _
+                           & "'" & dgvRow.Cells("Cantidad").Value & "', " _
+                           & "'" & dgvRow.Cells("Descripcion").Value & "', " _
+                           & "'" & WObservaciones1 & "', " _
+                           & "'" & WObservaciones2 & "', " _
+                           & "'" & WObservaciones3 & "', " _
+                           & "'" & WObservaciones4 & "', " _
+                           & "'" & WObservaciones5 & "', " _
+                           & "'" & WObservaciones6 & "', " _
+                           & "'" & WObservaciones7 & "', " _
+                           & "'" & "" & "', " _
+                           & "'" & cbx_Tipo.SelectedIndex & "', " _
+                           & "'" & Woperador & "', " _
+                           & "'" & "Pendiente" & "' " _
+                           & ")"
+                
+
+                ListaSQLCnslt.Add(SQLCnslt)
+                Renglon += 1
+            Next
+        End If
+        
 
         Try
             ExecuteNonQueries("SurfactanSa", ListaSQLCnslt.ToArray())
@@ -128,6 +194,14 @@ Public Class Vista_Insumos
             If Wowner IsNot Nothing Then
                 Wowner.ActualizarGrilla()
             End If
+
+            If MsgBox("¿Desea enviar un mail de aviso?", vbYesNo) = vbYes Then
+                With New Mail_Modificacion(txt_NroSoli.Text)
+                    .Show()
+                End With
+
+            End If
+
             Close()
         Catch ex As Exception
             MsgBox("No se pudo actualizar la base de datos", vbExclamation)
@@ -279,4 +353,25 @@ Public Class Vista_Insumos
         End If
     End Sub
 
+    Private Sub dgv_Insumos_RowHeaderMouseDoubleClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgv_Insumos.RowHeaderMouseDoubleClick
+        If dgv_Insumos.SelectedRows.Count > 0 Then
+
+            If MsgBox("¿Desea eliminar la fila seleccionada?", MsgBoxStyle.YesNo) = DialogResult.Yes Then
+                Dim row As DataGridViewRow = dgv_Insumos.CurrentRow
+                Try
+                    dgv_Insumos.Rows.Remove(row)
+
+                    If dgv_Insumos.RowCount = 0 Then
+                        dgv_Insumos.Rows.Add()
+                    End If
+                Catch ex As Exception
+
+                End Try
+                
+            Else
+                dgv_Insumos.ClearSelection()
+            End If
+
+        End If
+    End Sub
 End Class

@@ -45,6 +45,9 @@
                 End With
 
             Next
+        Else
+            MsgBox("No se encontraron Cheques sin usar", vbExclamation)
+            Exit Sub
         End If
         If TablaReporte.Rows.Count > 0 Then
             With New VistaPrevia

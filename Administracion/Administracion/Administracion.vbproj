@@ -466,6 +466,12 @@
     <Compile Include="Listados\ListadoRetencionIBCiudad.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Listados\Listados_Pagos_SinImprimir.Designer.vb">
+      <DependentUpon>Listados_Pagos_SinImprimir.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\Listados_Pagos_SinImprimir.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Listados\ListadoValoresEnCarteraCuit.Designer.vb">
       <DependentUpon>ListadoValoresEnCarteraCuit.vb</DependentUpon>
     </Compile>
@@ -494,6 +500,18 @@
       <DependentUpon>Listado_ECheques_Cargacheques.vb</DependentUpon>
     </Compile>
     <Compile Include="Listado_ECheques_Cargacheques.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login.Designer.vb">
+      <DependentUpon>Login.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Login.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginOperador.Designer.vb">
+      <DependentUpon>LoginOperador.vb</DependentUpon>
+    </Compile>
+    <Compile Include="LoginOperador.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ModificaIntereses.Designer.vb">
@@ -1267,6 +1285,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\ListadoRetencionIBCiudad.resx">
       <DependentUpon>ListadoRetencionIBCiudad.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Listados_Pagos_SinImprimir.resx">
+      <DependentUpon>Listados_Pagos_SinImprimir.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Listados\ListadoValoresEnCarteraCuit.resx">
       <DependentUpon>ListadoValoresEnCarteraCuit.vb</DependentUpon>

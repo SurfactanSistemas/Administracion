@@ -346,6 +346,7 @@ Public Class ImpreCrystal
             Case 4, 5, 6, 10
                 REM genera la factura
                 txtNombre = ""
+                txtOrden = txtOrden.PadLeft(8, "0")
 
                 Dim rpt As ReportDocument = Nothing
 

@@ -10,7 +10,7 @@ Public Class Gestor_Insumos : Implements IActualizaGrilla
         Select Case UCase(Operador.Clave)
             Case "POLOK"
                 FiltroOperador = " WHERE PLANTA <> 'SI'"
-            Case "TANO"
+            Case "OLULA"
                 FiltroOperador = " WHERE PLANTA = 'SI'"
         End Select
 

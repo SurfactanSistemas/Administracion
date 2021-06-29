@@ -112,7 +112,7 @@ Public Class MenuPrincipal
 
     Private Sub IngresoDePagosToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles IngresoDePagosToolStripMenuItem.Click
         If Operador.Clave = "" Then
-            With New Login("OrdenCompra")
+            With New LoginOperador("OrdenCompra")
                 .Show(Me)
             End With
         Else
@@ -427,6 +427,12 @@ Public Class MenuPrincipal
     Private Sub ListadoEChequesUtilizadosAFechaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ListadoEChequesUtilizadosAFechaToolStripMenuItem.Click
         With New Listado_Echeques_UsadosXFecha
             .Show(Me)
+        End With
+    End Sub
+
+    Private Sub ListadoPagosSinImprimirToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ListadoPagosSinImprimirToolStripMenuItem.Click
+        With New Listados_Pagos_SinImprimir
+            .Show()
         End With
     End Sub
 End Class

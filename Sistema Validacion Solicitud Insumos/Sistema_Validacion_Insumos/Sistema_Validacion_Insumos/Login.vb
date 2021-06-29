@@ -79,7 +79,7 @@ Public Class Login
                         .Show()
                     End With
                     Close()
-                Case "TANO"
+                Case "OLULA"
                     With New Form1
                         .Show()
                     End With
@@ -139,7 +139,7 @@ Public Class Login
                 Case "POLOK"
                     frm.Show()
                     Close()
-                Case "TANO"
+                Case "OLULA"
                     frm.Show()
                     Close()
                 Case Else
