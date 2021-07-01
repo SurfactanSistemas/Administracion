@@ -17,11 +17,20 @@ Public Class Login
     Private Sub Login_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         cmbEntity.DataSource = Globals.connectionStringNames()
 
-        If Environment.GetCommandLineArgs().Length > 1 Then
+        If Environment.GetCommandLineArgs().Length = 2 Then
 
             Globals.empresa = "SURFACTAN"
 
             With New EvaluacionProveedorMateriaPrima("", True)
+                .Show()
+            End With
+
+            Close()
+        ElseIf Environment.GetCommandLineArgs().Length = 3 Then
+
+            Globals.empresa = "SURFACTAN"
+
+            With New AvisoOPAProveedores(True)
                 .Show()
             End With
 
@@ -54,6 +63,8 @@ Public Class Login
                 End If
 
             End If
+
+            Util.Operador.Base = IIf(_EsPellital, "pellitalSa", "SurfactanSa")
 
             MenuPrincipal.Show()
             Close()
