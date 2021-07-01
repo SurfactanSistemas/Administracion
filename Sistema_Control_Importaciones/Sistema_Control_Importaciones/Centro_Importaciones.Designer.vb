@@ -22,7 +22,7 @@ Partial Class Centro_Importaciones
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.DGV_Muestra = New Util.DBDataGridView()
         Me.lbl_ArticuloKg = New System.Windows.Forms.Label()
         Me.txt_Articulo = New System.Windows.Forms.TextBox()
@@ -64,6 +64,7 @@ Partial Class Centro_Importaciones
         Me.FEmbarque = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.SaldoLetra = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ProveedorCod = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.txt_Filtro = New System.Windows.Forms.TextBox()
         CType(Me.DGV_Muestra, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -75,14 +76,14 @@ Partial Class Centro_Importaciones
         Me.DGV_Muestra.AllowUserToOrderColumns = True
         Me.DGV_Muestra.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_Muestra.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Orden, Me.Pta, Me.Fecha, Me.Proveedor, Me.Mon, Me.Carpeta, Me.DJai, Me.Origen, Me.Incoterms, Me.Transporte, Me.FLLegada, Me.TPago, Me.Despacho, Me.PagoDes, Me.LetraTotal, Me.PagoLetra, Me.VtoLetra, Me.USPagadoLetra, Me.FEmbarque, Me.SaldoLetra, Me.ProveedorCod})
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGV_Muestra.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGV_Muestra.DefaultCellStyle = DataGridViewCellStyle2
         Me.DGV_Muestra.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.DGV_Muestra.DoubleBuffered = True
         Me.DGV_Muestra.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
@@ -302,6 +303,7 @@ Partial Class Centro_Importaciones
         '
         'Orden
         '
+        Me.Orden.DataPropertyName = "Orden"
         Me.Orden.HeaderText = "Orden"
         Me.Orden.Name = "Orden"
         Me.Orden.ReadOnly = True
@@ -310,6 +312,7 @@ Partial Class Centro_Importaciones
         'Pta
         '
         Me.Pta.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Pta.DataPropertyName = "Pta"
         Me.Pta.HeaderText = "Pta"
         Me.Pta.Name = "Pta"
         Me.Pta.ReadOnly = True
@@ -319,6 +322,7 @@ Partial Class Centro_Importaciones
         'Fecha
         '
         Me.Fecha.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Fecha.DataPropertyName = "Fecha"
         Me.Fecha.HeaderText = "Fecha"
         Me.Fecha.Name = "Fecha"
         Me.Fecha.ReadOnly = True
@@ -328,6 +332,7 @@ Partial Class Centro_Importaciones
         'Proveedor
         '
         Me.Proveedor.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Proveedor.DataPropertyName = "Proveedor"
         Me.Proveedor.HeaderText = "Proveedor"
         Me.Proveedor.Name = "Proveedor"
         Me.Proveedor.ReadOnly = True
@@ -336,6 +341,7 @@ Partial Class Centro_Importaciones
         'Mon
         '
         Me.Mon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Mon.DataPropertyName = "Mon"
         Me.Mon.HeaderText = "Mon"
         Me.Mon.Name = "Mon"
         Me.Mon.ReadOnly = True
@@ -344,6 +350,7 @@ Partial Class Centro_Importaciones
         'Carpeta
         '
         Me.Carpeta.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Carpeta.DataPropertyName = "Carpeta"
         Me.Carpeta.HeaderText = "Carpeta"
         Me.Carpeta.Name = "Carpeta"
         Me.Carpeta.ReadOnly = True
@@ -352,6 +359,7 @@ Partial Class Centro_Importaciones
         'DJai
         '
         Me.DJai.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.DJai.DataPropertyName = "DJai"
         Me.DJai.HeaderText = "DJai"
         Me.DJai.Name = "DJai"
         Me.DJai.ReadOnly = True
@@ -359,6 +367,7 @@ Partial Class Centro_Importaciones
         '
         'Origen
         '
+        Me.Origen.DataPropertyName = "Origen"
         Me.Origen.HeaderText = "Origen"
         Me.Origen.Name = "Origen"
         Me.Origen.ReadOnly = True
@@ -367,6 +376,7 @@ Partial Class Centro_Importaciones
         'Incoterms
         '
         Me.Incoterms.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Incoterms.DataPropertyName = "Incoterms"
         Me.Incoterms.HeaderText = "Incoterms"
         Me.Incoterms.Name = "Incoterms"
         Me.Incoterms.ReadOnly = True
@@ -375,6 +385,7 @@ Partial Class Centro_Importaciones
         'Transporte
         '
         Me.Transporte.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Transporte.DataPropertyName = "Transporte"
         Me.Transporte.HeaderText = "Transporte"
         Me.Transporte.Name = "Transporte"
         Me.Transporte.ReadOnly = True
@@ -383,6 +394,7 @@ Partial Class Centro_Importaciones
         'FLLegada
         '
         Me.FLLegada.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.FLLegada.DataPropertyName = "FLLegada"
         Me.FLLegada.HeaderText = "F.LLegada"
         Me.FLLegada.Name = "FLLegada"
         Me.FLLegada.ReadOnly = True
@@ -399,6 +411,7 @@ Partial Class Centro_Importaciones
         'Despacho
         '
         Me.Despacho.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Despacho.DataPropertyName = "Despacho"
         Me.Despacho.HeaderText = "Despacho"
         Me.Despacho.Name = "Despacho"
         Me.Despacho.ReadOnly = True
@@ -407,6 +420,7 @@ Partial Class Centro_Importaciones
         'PagoDes
         '
         Me.PagoDes.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.PagoDes.DataPropertyName = "PagoDes"
         Me.PagoDes.HeaderText = "Pago Des"
         Me.PagoDes.Name = "PagoDes"
         Me.PagoDes.ReadOnly = True
@@ -415,6 +429,7 @@ Partial Class Centro_Importaciones
         'LetraTotal
         '
         Me.LetraTotal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.LetraTotal.DataPropertyName = "LetraTotal"
         Me.LetraTotal.HeaderText = "Letra Total"
         Me.LetraTotal.Name = "LetraTotal"
         Me.LetraTotal.ReadOnly = True
@@ -423,6 +438,7 @@ Partial Class Centro_Importaciones
         'PagoLetra
         '
         Me.PagoLetra.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.PagoLetra.DataPropertyName = "PagoLetra"
         Me.PagoLetra.HeaderText = "Pago Letra"
         Me.PagoLetra.Name = "PagoLetra"
         Me.PagoLetra.ReadOnly = True
@@ -431,6 +447,7 @@ Partial Class Centro_Importaciones
         'VtoLetra
         '
         Me.VtoLetra.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.VtoLetra.DataPropertyName = "VtoLetra"
         Me.VtoLetra.HeaderText = "Vto Letra"
         Me.VtoLetra.Name = "VtoLetra"
         Me.VtoLetra.ReadOnly = True
@@ -439,6 +456,7 @@ Partial Class Centro_Importaciones
         'USPagadoLetra
         '
         Me.USPagadoLetra.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.USPagadoLetra.DataPropertyName = "USPagadoLetra"
         Me.USPagadoLetra.HeaderText = "U$S Pagado Letra"
         Me.USPagadoLetra.Name = "USPagadoLetra"
         Me.USPagadoLetra.ReadOnly = True
@@ -447,6 +465,7 @@ Partial Class Centro_Importaciones
         'FEmbarque
         '
         Me.FEmbarque.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.FEmbarque.DataPropertyName = "FEmbarque"
         Me.FEmbarque.HeaderText = "F.Embarque"
         Me.FEmbarque.Name = "FEmbarque"
         Me.FEmbarque.ReadOnly = True
@@ -455,6 +474,7 @@ Partial Class Centro_Importaciones
         'SaldoLetra
         '
         Me.SaldoLetra.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.SaldoLetra.DataPropertyName = "SaldoLetra"
         Me.SaldoLetra.HeaderText = "Saldo Letra"
         Me.SaldoLetra.Name = "SaldoLetra"
         Me.SaldoLetra.ReadOnly = True
@@ -462,16 +482,25 @@ Partial Class Centro_Importaciones
         '
         'ProveedorCod
         '
+        Me.ProveedorCod.DataPropertyName = "ProveedorCod"
         Me.ProveedorCod.HeaderText = "ProveedorCod"
         Me.ProveedorCod.Name = "ProveedorCod"
         Me.ProveedorCod.ReadOnly = True
         Me.ProveedorCod.Visible = False
+        '
+        'txt_Filtro
+        '
+        Me.txt_Filtro.Location = New System.Drawing.Point(277, 72)
+        Me.txt_Filtro.Name = "txt_Filtro"
+        Me.txt_Filtro.Size = New System.Drawing.Size(100, 22)
+        Me.txt_Filtro.TabIndex = 74
         '
         'Centro_Importaciones
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1580, 925)
+        Me.Controls.Add(Me.txt_Filtro)
         Me.Controls.Add(Me.panel1)
         Me.Controls.Add(Me.DGV_Muestra)
         Me.Controls.Add(Me.lbl_ArticuloKg)
@@ -540,5 +569,6 @@ Partial Class Centro_Importaciones
     Friend WithEvents FEmbarque As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents SaldoLetra As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ProveedorCod As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents txt_Filtro As System.Windows.Forms.TextBox
 
 End Class

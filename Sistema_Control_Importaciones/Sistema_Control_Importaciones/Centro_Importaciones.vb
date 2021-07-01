@@ -1938,4 +1938,36 @@ Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
     End Sub
 
 
+    Private Sub txt_Filtro_KeyUp(sender As Object, e As KeyEventArgs) Handles txt_Filtro.KeyUp
+        AplicarFiltro()
+    End Sub
+
+   
+
+    Private Sub AplicarFiltro()
+
+        Dim Filtro As String = ""
+
+        Filtro = Filtro & "(convert(Orden, System.String) LIKE '%" & txt_Filtro.Text & "%' OR Pta LIKE '%" & txt_Filtro.Text & "%' " _
+                                                & "OR Fecha LIKE '%" & txt_Filtro.Text & "%' OR Proveedor LIKE '%" & txt_Filtro.Text & "%'" _
+                                                & "OR Mon LIKE '%" & txt_Filtro.Text & "%' OR Carpeta LIKE '%" & txt_Filtro.Text & "%'" _
+                                                & "OR Djai LIKE '%" & txt_Filtro.Text & "%' OR Origen LIKE '%" & txt_Filtro.Text & "%'" _
+                                                & "OR Incoterms LIKE '%" & txt_Filtro.Text & "%' OR Transporte LIKE '%" & txt_Filtro.Text & "%'" _
+                                                & "OR FLLegada LIKE '%" & txt_Filtro.Text & "%' OR TPago LIKE '%" & txt_Filtro.Text & "%'" _
+                                                & "OR Despacho LIKE '%" & txt_Filtro.Text & "%' OR PagoDes LIKE '%" & txt_Filtro.Text & "%'" _
+                                                & "OR LetraTotal LIKE '%" & txt_Filtro.Text & "%' OR PagoLetra LIKE '%" & txt_Filtro.Text & "%'" _
+                                                & "OR VtoLetra LIKE '%" & txt_Filtro.Text & "%' OR USPagadoLetra LIKE '%" & txt_Filtro.Text & "%'" _
+                                                & "OR FEmbarque LIKE '%" & txt_Filtro.Text & "%' OR SaldoLetra LIKE '%" & txt_Filtro.Text & "%'" _
+                                                & "  OR ProveedorCod LIKE '%" & txt_Filtro.Text & "%')"
+
+        'APLICO EL FILTRO
+        Dim tabla As DataTable = DGV_Muestra.DataSource
+
+        tabla.DefaultView.RowFilter = Filtro
+
+       
+
+    End Sub
+
+
 End Class

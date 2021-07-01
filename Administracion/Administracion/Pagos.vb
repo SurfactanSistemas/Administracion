@@ -5110,10 +5110,14 @@ Public Class Pagos
     End Sub
     Private Function ObtenerQuienFirma() As String
         Dim Respuesta As String = ""
-        Dim SQLCnslt As String = "SELECT OperadorClave FROM Pagos WHERE Orden = '" & txtOrdenPago.Text & "'"
+        Dim SQLCnslt As String = "SELECT OperadorClave FROM Pagos WHERE Orden = '" & txtOrdenPago.Text & "' AND Renglon = 1"
         Dim RowOrden As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
         If RowOrden IsNot Nothing Then
-            Dim OperadorClave As String = Trim(UCase(RowOrden.Item("OperadorClave")))
+
+            Dim OperadorClave As String = OrDefault(RowOrden.Item("OperadorClave"), "")
+            If OperadorClave <> "" Then
+                OperadorClave = Trim(UCase(OperadorClave))
+            End If
             Select Case OperadorClave
                 Case "39235"
                     Respuesta = "Pachi"
@@ -5123,6 +5127,8 @@ Public Class Pagos
                     Respuesta = "Sergio"
                 Case "LUCAS2021"
                     Respuesta = "Lucas"
+                Case Else
+
             End Select
         End If
         Return Respuesta

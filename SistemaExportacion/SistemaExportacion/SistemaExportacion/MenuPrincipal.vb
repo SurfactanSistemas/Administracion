@@ -723,6 +723,7 @@ Public Class MenuPrincipal : Implements IActualizaGrillaProforma
         _CargarTodasLasProformas()
         cmbTipoFiltro.SelectedIndex = 0
         txtFiltrarPor.Focus()
+        txt_Producto.Text = ""
 
     End Sub
 
@@ -877,4 +878,31 @@ Public Class MenuPrincipal : Implements IActualizaGrillaProforma
 
         End Try
     End Sub
+
+    Private Sub btn_BuscarProducto_Click(sender As Object, e As EventArgs) Handles btn_BuscarProducto.Click
+        If txt_Producto.Text.Length = 12 Then
+
+            Dim auxproducto As String = txt_Producto.Text
+            btnLimpiarFiltros_Click(Nothing, Nothing)
+            txt_Producto.Text = auxproducto
+
+            Dim listaFilas As New List(Of DataGridViewRow)
+            For Each dgv_row As DataGridViewRow In dgvPrincipal.Rows
+
+                Dim SQLCnslt As String = "SELECT Producto FROM ProformaExportacion WHERE Proforma = '" & dgv_row.Cells("NroProforma").Value & "' AND Producto = '" & txt_Producto.Text & "'"
+                Dim RowCnslt As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+                If RowCnslt Is Nothing Then
+                    listaFilas.Add(dgv_row)
+                End If
+            Next
+
+            If listaFilas.Count > 0 Then
+                For Each row As DataGridViewRow In listaFilas
+                    dgvPrincipal.Rows.Remove(row)
+                Next
+            End If
+        End If
+    End Sub
+
+    
 End Class
