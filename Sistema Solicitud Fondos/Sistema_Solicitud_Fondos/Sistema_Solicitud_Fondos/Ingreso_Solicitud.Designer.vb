@@ -99,9 +99,8 @@ Partial Class Ingreso_Solicitud
         Me.panel1.Controls.Add(Me.label1)
         Me.panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.panel1.Location = New System.Drawing.Point(0, 0)
-        Me.panel1.Margin = New System.Windows.Forms.Padding(4)
         Me.panel1.Name = "panel1"
-        Me.panel1.Size = New System.Drawing.Size(719, 49)
+        Me.panel1.Size = New System.Drawing.Size(539, 40)
         Me.panel1.TabIndex = 5
         '
         'Label2
@@ -110,10 +109,9 @@ Partial Class Ingreso_Solicitud
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold)
         Me.Label2.ForeColor = System.Drawing.Color.White
-        Me.Label2.Location = New System.Drawing.Point(484, 12)
-        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label2.Location = New System.Drawing.Point(363, 10)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(192, 25)
+        Me.Label2.Size = New System.Drawing.Size(155, 20)
         Me.Label2.TabIndex = 0
         Me.Label2.Text = "SURFACTAN S.A."
         '
@@ -123,53 +121,48 @@ Partial Class Ingreso_Solicitud
         Me.label1.AutoSize = True
         Me.label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold)
         Me.label1.ForeColor = System.Drawing.Color.White
-        Me.label1.Location = New System.Drawing.Point(28, 15)
-        Me.label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.label1.Location = New System.Drawing.Point(21, 12)
         Me.label1.Name = "label1"
-        Me.label1.Size = New System.Drawing.Size(196, 20)
+        Me.label1.Size = New System.Drawing.Size(164, 17)
         Me.label1.TabIndex = 0
         Me.label1.Text = "INGRESO SOLICITUD"
         '
         'txt_Solicitante
         '
         Me.txt_Solicitante.BackColor = System.Drawing.Color.Cyan
-        Me.txt_Solicitante.Location = New System.Drawing.Point(79, 64)
-        Me.txt_Solicitante.Margin = New System.Windows.Forms.Padding(4)
+        Me.txt_Solicitante.Location = New System.Drawing.Point(59, 52)
         Me.txt_Solicitante.MaxLength = 20
         Me.txt_Solicitante.Name = "txt_Solicitante"
         Me.txt_Solicitante.ReadOnly = True
-        Me.txt_Solicitante.Size = New System.Drawing.Size(179, 22)
+        Me.txt_Solicitante.Size = New System.Drawing.Size(135, 20)
         Me.txt_Solicitante.TabIndex = 6
         '
         'txt_FechaSolicitud
         '
         Me.txt_FechaSolicitud.BackColor = System.Drawing.Color.Aqua
-        Me.txt_FechaSolicitud.Location = New System.Drawing.Point(388, 62)
-        Me.txt_FechaSolicitud.Margin = New System.Windows.Forms.Padding(4)
+        Me.txt_FechaSolicitud.Location = New System.Drawing.Point(291, 50)
         Me.txt_FechaSolicitud.Mask = "00/00/0000"
         Me.txt_FechaSolicitud.Name = "txt_FechaSolicitud"
         Me.txt_FechaSolicitud.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
         Me.txt_FechaSolicitud.ReadOnly = True
-        Me.txt_FechaSolicitud.Size = New System.Drawing.Size(89, 22)
+        Me.txt_FechaSolicitud.Size = New System.Drawing.Size(68, 20)
         Me.txt_FechaSolicitud.TabIndex = 7
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(3, 66)
-        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label3.Location = New System.Drawing.Point(2, 54)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(73, 17)
+        Me.Label3.Size = New System.Drawing.Size(56, 13)
         Me.Label3.TabIndex = 8
         Me.Label3.Text = "Solicitante"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(273, 66)
-        Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label4.Location = New System.Drawing.Point(205, 54)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(104, 17)
+        Me.Label4.Size = New System.Drawing.Size(80, 13)
         Me.Label4.TabIndex = 9
         Me.Label4.Text = "Fecha Solicitud"
         '
@@ -178,69 +171,62 @@ Partial Class Ingreso_Solicitud
         Me.cbx_Tipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbx_Tipo.FormattingEnabled = True
         Me.cbx_Tipo.Items.AddRange(New Object() {"", "Pago a Proveedores", "Varios"})
-        Me.cbx_Tipo.Location = New System.Drawing.Point(79, 96)
-        Me.cbx_Tipo.Margin = New System.Windows.Forms.Padding(4)
+        Me.cbx_Tipo.Location = New System.Drawing.Point(59, 78)
         Me.cbx_Tipo.Name = "cbx_Tipo"
-        Me.cbx_Tipo.Size = New System.Drawing.Size(160, 24)
+        Me.cbx_Tipo.Size = New System.Drawing.Size(121, 21)
         Me.cbx_Tipo.TabIndex = 10
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(33, 101)
-        Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label5.Location = New System.Drawing.Point(25, 82)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(36, 17)
+        Me.Label5.Size = New System.Drawing.Size(28, 13)
         Me.Label5.TabIndex = 11
         Me.Label5.Text = "Tipo"
         '
         'txt_Proveedor
         '
-        Me.txt_Proveedor.Location = New System.Drawing.Point(79, 130)
-        Me.txt_Proveedor.Margin = New System.Windows.Forms.Padding(4)
+        Me.txt_Proveedor.Location = New System.Drawing.Point(59, 106)
         Me.txt_Proveedor.MaxLength = 11
         Me.txt_Proveedor.Name = "txt_Proveedor"
-        Me.txt_Proveedor.Size = New System.Drawing.Size(101, 22)
+        Me.txt_Proveedor.Size = New System.Drawing.Size(77, 20)
         Me.txt_Proveedor.TabIndex = 12
         Me.txt_Proveedor.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txt_ProveedorDescrip
         '
         Me.txt_ProveedorDescrip.BackColor = System.Drawing.Color.Aqua
-        Me.txt_ProveedorDescrip.Location = New System.Drawing.Point(189, 130)
-        Me.txt_ProveedorDescrip.Margin = New System.Windows.Forms.Padding(4)
+        Me.txt_ProveedorDescrip.Location = New System.Drawing.Point(142, 106)
         Me.txt_ProveedorDescrip.Name = "txt_ProveedorDescrip"
         Me.txt_ProveedorDescrip.ReadOnly = True
-        Me.txt_ProveedorDescrip.Size = New System.Drawing.Size(381, 22)
+        Me.txt_ProveedorDescrip.Size = New System.Drawing.Size(287, 20)
         Me.txt_ProveedorDescrip.TabIndex = 13
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(3, 134)
-        Me.Label6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label6.Location = New System.Drawing.Point(2, 109)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(74, 17)
+        Me.Label6.Size = New System.Drawing.Size(56, 13)
         Me.Label6.TabIndex = 14
         Me.Label6.Text = "Proveedor"
         '
         'txt_Cuenta
         '
-        Me.txt_Cuenta.Location = New System.Drawing.Point(79, 171)
-        Me.txt_Cuenta.Margin = New System.Windows.Forms.Padding(4)
+        Me.txt_Cuenta.Location = New System.Drawing.Point(59, 139)
         Me.txt_Cuenta.MaxLength = 10
         Me.txt_Cuenta.Name = "txt_Cuenta"
-        Me.txt_Cuenta.Size = New System.Drawing.Size(101, 22)
+        Me.txt_Cuenta.Size = New System.Drawing.Size(77, 20)
         Me.txt_Cuenta.TabIndex = 15
         Me.txt_Cuenta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(9, 164)
-        Me.Label7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label7.Location = New System.Drawing.Point(7, 133)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(64, 34)
+        Me.Label7.Size = New System.Drawing.Size(49, 26)
         Me.Label7.TabIndex = 16
         Me.Label7.Text = "Cuenta " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Contable"
         '
@@ -249,58 +235,52 @@ Partial Class Ingreso_Solicitud
         Me.cbx_Moneda.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbx_Moneda.FormattingEnabled = True
         Me.cbx_Moneda.Items.AddRange(New Object() {"", "Pesos", "Dolares"})
-        Me.cbx_Moneda.Location = New System.Drawing.Point(79, 209)
-        Me.cbx_Moneda.Margin = New System.Windows.Forms.Padding(4)
+        Me.cbx_Moneda.Location = New System.Drawing.Point(59, 170)
         Me.cbx_Moneda.Name = "cbx_Moneda"
-        Me.cbx_Moneda.Size = New System.Drawing.Size(101, 24)
+        Me.cbx_Moneda.Size = New System.Drawing.Size(77, 21)
         Me.cbx_Moneda.TabIndex = 17
         '
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(9, 213)
-        Me.Label8.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label8.Location = New System.Drawing.Point(7, 173)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(59, 17)
+        Me.Label8.Size = New System.Drawing.Size(46, 13)
         Me.Label8.TabIndex = 18
         Me.Label8.Text = "Moneda"
         '
         'txt_Importe
         '
-        Me.txt_Importe.Location = New System.Drawing.Point(464, 210)
-        Me.txt_Importe.Margin = New System.Windows.Forms.Padding(4)
+        Me.txt_Importe.Location = New System.Drawing.Point(348, 171)
         Me.txt_Importe.Name = "txt_Importe"
-        Me.txt_Importe.Size = New System.Drawing.Size(132, 22)
+        Me.txt_Importe.Size = New System.Drawing.Size(100, 20)
         Me.txt_Importe.TabIndex = 19
         Me.txt_Importe.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txt_FechaRequerida
         '
-        Me.txt_FechaRequerida.Location = New System.Drawing.Point(143, 341)
-        Me.txt_FechaRequerida.Margin = New System.Windows.Forms.Padding(4)
+        Me.txt_FechaRequerida.Location = New System.Drawing.Point(107, 277)
         Me.txt_FechaRequerida.Mask = "00/00/0000"
         Me.txt_FechaRequerida.Name = "txt_FechaRequerida"
         Me.txt_FechaRequerida.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txt_FechaRequerida.Size = New System.Drawing.Size(89, 22)
+        Me.txt_FechaRequerida.Size = New System.Drawing.Size(68, 20)
         Me.txt_FechaRequerida.TabIndex = 20
         '
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(400, 213)
-        Me.Label9.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label9.Location = New System.Drawing.Point(300, 173)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(55, 17)
+        Me.Label9.Size = New System.Drawing.Size(42, 13)
         Me.Label9.TabIndex = 21
         Me.Label9.Text = "Importe"
         '
         'chk_Efectivo
         '
         Me.chk_Efectivo.AutoSize = True
-        Me.chk_Efectivo.Location = New System.Drawing.Point(9, 32)
-        Me.chk_Efectivo.Margin = New System.Windows.Forms.Padding(4)
+        Me.chk_Efectivo.Location = New System.Drawing.Point(7, 26)
         Me.chk_Efectivo.Name = "chk_Efectivo"
-        Me.chk_Efectivo.Size = New System.Drawing.Size(80, 21)
+        Me.chk_Efectivo.Size = New System.Drawing.Size(65, 17)
         Me.chk_Efectivo.TabIndex = 22
         Me.chk_Efectivo.Text = "Efectivo"
         Me.chk_Efectivo.UseVisualStyleBackColor = True
@@ -314,11 +294,9 @@ Partial Class Ingreso_Solicitud
         Me.gp_FormasDePago.Controls.Add(Me.chk_Echeq)
         Me.gp_FormasDePago.Controls.Add(Me.chk_Tranferencia)
         Me.gp_FormasDePago.Controls.Add(Me.chk_Efectivo)
-        Me.gp_FormasDePago.Location = New System.Drawing.Point(15, 366)
-        Me.gp_FormasDePago.Margin = New System.Windows.Forms.Padding(4)
+        Me.gp_FormasDePago.Location = New System.Drawing.Point(11, 297)
         Me.gp_FormasDePago.Name = "gp_FormasDePago"
-        Me.gp_FormasDePago.Padding = New System.Windows.Forms.Padding(4)
-        Me.gp_FormasDePago.Size = New System.Drawing.Size(588, 94)
+        Me.gp_FormasDePago.Size = New System.Drawing.Size(441, 76)
         Me.gp_FormasDePago.TabIndex = 23
         Me.gp_FormasDePago.TabStop = False
         Me.gp_FormasDePago.Text = "Formas de Pago"
@@ -326,10 +304,9 @@ Partial Class Ingreso_Solicitud
         'chk_DebitoAutomatico
         '
         Me.chk_DebitoAutomatico.AutoSize = True
-        Me.chk_DebitoAutomatico.Location = New System.Drawing.Point(449, 32)
-        Me.chk_DebitoAutomatico.Margin = New System.Windows.Forms.Padding(4)
+        Me.chk_DebitoAutomatico.Location = New System.Drawing.Point(337, 26)
         Me.chk_DebitoAutomatico.Name = "chk_DebitoAutomatico"
-        Me.chk_DebitoAutomatico.Size = New System.Drawing.Size(145, 21)
+        Me.chk_DebitoAutomatico.Size = New System.Drawing.Size(113, 17)
         Me.chk_DebitoAutomatico.TabIndex = 28
         Me.chk_DebitoAutomatico.Text = "Debito Automatico"
         Me.chk_DebitoAutomatico.UseVisualStyleBackColor = True
@@ -337,10 +314,9 @@ Partial Class Ingreso_Solicitud
         'chk_Tarjeta
         '
         Me.chk_Tarjeta.AutoSize = True
-        Me.chk_Tarjeta.Location = New System.Drawing.Point(317, 61)
-        Me.chk_Tarjeta.Margin = New System.Windows.Forms.Padding(4)
+        Me.chk_Tarjeta.Location = New System.Drawing.Point(238, 50)
         Me.chk_Tarjeta.Name = "chk_Tarjeta"
-        Me.chk_Tarjeta.Size = New System.Drawing.Size(75, 21)
+        Me.chk_Tarjeta.Size = New System.Drawing.Size(59, 17)
         Me.chk_Tarjeta.TabIndex = 27
         Me.chk_Tarjeta.Text = "Tarjeta"
         Me.chk_Tarjeta.UseVisualStyleBackColor = True
@@ -348,10 +324,9 @@ Partial Class Ingreso_Solicitud
         'chk_ChequePropio
         '
         Me.chk_ChequePropio.AutoSize = True
-        Me.chk_ChequePropio.Location = New System.Drawing.Point(317, 32)
-        Me.chk_ChequePropio.Margin = New System.Windows.Forms.Padding(4)
+        Me.chk_ChequePropio.Location = New System.Drawing.Point(238, 26)
         Me.chk_ChequePropio.Name = "chk_ChequePropio"
-        Me.chk_ChequePropio.Size = New System.Drawing.Size(124, 21)
+        Me.chk_ChequePropio.Size = New System.Drawing.Size(96, 17)
         Me.chk_ChequePropio.TabIndex = 26
         Me.chk_ChequePropio.Text = "Cheque Propio"
         Me.chk_ChequePropio.UseVisualStyleBackColor = True
@@ -359,10 +334,9 @@ Partial Class Ingreso_Solicitud
         'chk_ChequeTerceros
         '
         Me.chk_ChequeTerceros.AutoSize = True
-        Me.chk_ChequeTerceros.Location = New System.Drawing.Point(156, 61)
-        Me.chk_ChequeTerceros.Margin = New System.Windows.Forms.Padding(4)
+        Me.chk_ChequeTerceros.Location = New System.Drawing.Point(117, 50)
         Me.chk_ChequeTerceros.Name = "chk_ChequeTerceros"
-        Me.chk_ChequeTerceros.Size = New System.Drawing.Size(140, 21)
+        Me.chk_ChequeTerceros.Size = New System.Drawing.Size(108, 17)
         Me.chk_ChequeTerceros.TabIndex = 25
         Me.chk_ChequeTerceros.Text = "Cheque Terceros"
         Me.chk_ChequeTerceros.UseVisualStyleBackColor = True
@@ -370,10 +344,9 @@ Partial Class Ingreso_Solicitud
         'chk_Echeq
         '
         Me.chk_Echeq.AutoSize = True
-        Me.chk_Echeq.Location = New System.Drawing.Point(156, 32)
-        Me.chk_Echeq.Margin = New System.Windows.Forms.Padding(4)
+        Me.chk_Echeq.Location = New System.Drawing.Point(117, 26)
         Me.chk_Echeq.Name = "chk_Echeq"
-        Me.chk_Echeq.Size = New System.Drawing.Size(75, 21)
+        Me.chk_Echeq.Size = New System.Drawing.Size(60, 17)
         Me.chk_Echeq.TabIndex = 24
         Me.chk_Echeq.Text = "E-cheq"
         Me.chk_Echeq.UseVisualStyleBackColor = True
@@ -381,90 +354,81 @@ Partial Class Ingreso_Solicitud
         'chk_Tranferencia
         '
         Me.chk_Tranferencia.AutoSize = True
-        Me.chk_Tranferencia.Location = New System.Drawing.Point(9, 61)
-        Me.chk_Tranferencia.Margin = New System.Windows.Forms.Padding(4)
+        Me.chk_Tranferencia.Location = New System.Drawing.Point(7, 50)
         Me.chk_Tranferencia.Name = "chk_Tranferencia"
-        Me.chk_Tranferencia.Size = New System.Drawing.Size(118, 21)
+        Me.chk_Tranferencia.Size = New System.Drawing.Size(91, 17)
         Me.chk_Tranferencia.TabIndex = 23
         Me.chk_Tranferencia.Text = "Transferencia"
         Me.chk_Tranferencia.UseVisualStyleBackColor = True
         '
         'txt_Concepto
         '
-        Me.txt_Concepto.Location = New System.Drawing.Point(95, 530)
-        Me.txt_Concepto.Margin = New System.Windows.Forms.Padding(4)
+        Me.txt_Concepto.Location = New System.Drawing.Point(71, 431)
         Me.txt_Concepto.MaxLength = 200
         Me.txt_Concepto.Multiline = True
         Me.txt_Concepto.Name = "txt_Concepto"
-        Me.txt_Concepto.Size = New System.Drawing.Size(477, 96)
+        Me.txt_Concepto.Size = New System.Drawing.Size(359, 79)
         Me.txt_Concepto.TabIndex = 24
         '
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(16, 345)
-        Me.Label10.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label10.Location = New System.Drawing.Point(12, 280)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(117, 17)
+        Me.Label10.Size = New System.Drawing.Size(89, 13)
         Me.Label10.TabIndex = 25
         Me.Label10.Text = "Fecha Requerida"
         '
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(16, 534)
-        Me.Label11.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label11.Location = New System.Drawing.Point(12, 434)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(52, 17)
+        Me.Label11.Size = New System.Drawing.Size(40, 13)
         Me.Label11.TabIndex = 26
         Me.Label11.Text = "Detalle"
         '
         'txt_CuentaDescrip
         '
         Me.txt_CuentaDescrip.BackColor = System.Drawing.Color.Aqua
-        Me.txt_CuentaDescrip.Location = New System.Drawing.Point(189, 171)
-        Me.txt_CuentaDescrip.Margin = New System.Windows.Forms.Padding(4)
+        Me.txt_CuentaDescrip.Location = New System.Drawing.Point(142, 139)
         Me.txt_CuentaDescrip.Name = "txt_CuentaDescrip"
         Me.txt_CuentaDescrip.ReadOnly = True
-        Me.txt_CuentaDescrip.Size = New System.Drawing.Size(381, 22)
+        Me.txt_CuentaDescrip.Size = New System.Drawing.Size(287, 20)
         Me.txt_CuentaDescrip.TabIndex = 27
         '
         'btn_Grabar
         '
-        Me.btn_Grabar.Location = New System.Drawing.Point(605, 66)
-        Me.btn_Grabar.Margin = New System.Windows.Forms.Padding(4)
+        Me.btn_Grabar.Location = New System.Drawing.Point(454, 54)
         Me.btn_Grabar.Name = "btn_Grabar"
-        Me.btn_Grabar.Size = New System.Drawing.Size(109, 55)
+        Me.btn_Grabar.Size = New System.Drawing.Size(82, 45)
         Me.btn_Grabar.TabIndex = 28
         Me.btn_Grabar.Text = "GRABAR"
         Me.btn_Grabar.UseVisualStyleBackColor = True
         '
         'btn_Cancelar
         '
-        Me.btn_Cancelar.Location = New System.Drawing.Point(605, 129)
-        Me.btn_Cancelar.Margin = New System.Windows.Forms.Padding(4)
+        Me.btn_Cancelar.Location = New System.Drawing.Point(454, 105)
         Me.btn_Cancelar.Name = "btn_Cancelar"
-        Me.btn_Cancelar.Size = New System.Drawing.Size(109, 55)
+        Me.btn_Cancelar.Size = New System.Drawing.Size(82, 45)
         Me.btn_Cancelar.TabIndex = 29
         Me.btn_Cancelar.Text = "SALIR"
         Me.btn_Cancelar.UseVisualStyleBackColor = True
         '
         'btn_Adjuntar
         '
-        Me.btn_Adjuntar.Location = New System.Drawing.Point(605, 192)
-        Me.btn_Adjuntar.Margin = New System.Windows.Forms.Padding(4)
+        Me.btn_Adjuntar.Location = New System.Drawing.Point(454, 156)
         Me.btn_Adjuntar.Name = "btn_Adjuntar"
-        Me.btn_Adjuntar.Size = New System.Drawing.Size(109, 55)
+        Me.btn_Adjuntar.Size = New System.Drawing.Size(82, 45)
         Me.btn_Adjuntar.TabIndex = 30
         Me.btn_Adjuntar.Text = "ADJUNTAR ARCHIVOS"
         Me.btn_Adjuntar.UseVisualStyleBackColor = True
         '
         'btn_MostrarSolicitud
         '
-        Me.btn_MostrarSolicitud.Location = New System.Drawing.Point(605, 319)
-        Me.btn_MostrarSolicitud.Margin = New System.Windows.Forms.Padding(4)
+        Me.btn_MostrarSolicitud.Location = New System.Drawing.Point(454, 259)
         Me.btn_MostrarSolicitud.Name = "btn_MostrarSolicitud"
-        Me.btn_MostrarSolicitud.Size = New System.Drawing.Size(109, 55)
+        Me.btn_MostrarSolicitud.Size = New System.Drawing.Size(82, 45)
         Me.btn_MostrarSolicitud.TabIndex = 31
         Me.btn_MostrarSolicitud.Text = "IMPRIMIR"
         Me.btn_MostrarSolicitud.UseVisualStyleBackColor = True
@@ -472,10 +436,9 @@ Partial Class Ingreso_Solicitud
         '
         'btn_Limpiar
         '
-        Me.btn_Limpiar.Location = New System.Drawing.Point(605, 255)
-        Me.btn_Limpiar.Margin = New System.Windows.Forms.Padding(4)
+        Me.btn_Limpiar.Location = New System.Drawing.Point(454, 207)
         Me.btn_Limpiar.Name = "btn_Limpiar"
-        Me.btn_Limpiar.Size = New System.Drawing.Size(109, 55)
+        Me.btn_Limpiar.Size = New System.Drawing.Size(82, 45)
         Me.btn_Limpiar.TabIndex = 32
         Me.btn_Limpiar.Text = "LIMPIAR"
         Me.btn_Limpiar.UseVisualStyleBackColor = True
@@ -483,38 +446,34 @@ Partial Class Ingreso_Solicitud
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(16, 501)
-        Me.Label12.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label12.Location = New System.Drawing.Point(12, 407)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(43, 17)
+        Me.Label12.Size = New System.Drawing.Size(33, 13)
         Me.Label12.TabIndex = 33
         Me.Label12.Text = "Titulo"
         '
         'txt_Titulo
         '
-        Me.txt_Titulo.Location = New System.Drawing.Point(95, 497)
-        Me.txt_Titulo.Margin = New System.Windows.Forms.Padding(4)
+        Me.txt_Titulo.Location = New System.Drawing.Point(71, 404)
         Me.txt_Titulo.MaxLength = 30
         Me.txt_Titulo.Name = "txt_Titulo"
-        Me.txt_Titulo.Size = New System.Drawing.Size(477, 22)
+        Me.txt_Titulo.Size = New System.Drawing.Size(359, 20)
         Me.txt_Titulo.TabIndex = 34
         '
         'txt_Observaciones
         '
-        Me.txt_Observaciones.Location = New System.Drawing.Point(95, 465)
-        Me.txt_Observaciones.Margin = New System.Windows.Forms.Padding(4)
+        Me.txt_Observaciones.Location = New System.Drawing.Point(71, 378)
         Me.txt_Observaciones.MaxLength = 100
         Me.txt_Observaciones.Name = "txt_Observaciones"
-        Me.txt_Observaciones.Size = New System.Drawing.Size(477, 22)
+        Me.txt_Observaciones.Size = New System.Drawing.Size(359, 20)
         Me.txt_Observaciones.TabIndex = 36
         '
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(3, 460)
-        Me.Label13.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label13.Location = New System.Drawing.Point(2, 374)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(88, 34)
+        Me.Label13.Size = New System.Drawing.Size(67, 26)
         Me.Label13.TabIndex = 35
         Me.Label13.Text = "Observacion" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "    de Pago"
         '
@@ -536,11 +495,9 @@ Partial Class Ingreso_Solicitud
         Me.gbx_Retenciones.Controls.Add(Me.txt_RetIBCiudad)
         Me.gbx_Retenciones.Controls.Add(Me.txt_RetGanancia)
         Me.gbx_Retenciones.Controls.Add(Me.Label14)
-        Me.gbx_Retenciones.Location = New System.Drawing.Point(3, 238)
-        Me.gbx_Retenciones.Margin = New System.Windows.Forms.Padding(4)
+        Me.gbx_Retenciones.Location = New System.Drawing.Point(2, 193)
         Me.gbx_Retenciones.Name = "gbx_Retenciones"
-        Me.gbx_Retenciones.Padding = New System.Windows.Forms.Padding(4)
-        Me.gbx_Retenciones.Size = New System.Drawing.Size(600, 102)
+        Me.gbx_Retenciones.Size = New System.Drawing.Size(450, 83)
         Me.gbx_Retenciones.TabIndex = 37
         Me.gbx_Retenciones.TabStop = False
         Me.gbx_Retenciones.Text = "Retenciones"
@@ -549,21 +506,19 @@ Partial Class Ingreso_Solicitud
         '
         Me.txt_TotalRetenciones.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.txt_TotalRetenciones.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txt_TotalRetenciones.Location = New System.Drawing.Point(484, 23)
-        Me.txt_TotalRetenciones.Margin = New System.Windows.Forms.Padding(4)
+        Me.txt_TotalRetenciones.Location = New System.Drawing.Point(363, 19)
         Me.txt_TotalRetenciones.Name = "txt_TotalRetenciones"
         Me.txt_TotalRetenciones.ReadOnly = True
-        Me.txt_TotalRetenciones.Size = New System.Drawing.Size(111, 23)
+        Me.txt_TotalRetenciones.Size = New System.Drawing.Size(84, 20)
         Me.txt_TotalRetenciones.TabIndex = 20
         Me.txt_TotalRetenciones.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label21
         '
         Me.Label21.AutoSize = True
-        Me.Label21.Location = New System.Drawing.Point(395, 58)
-        Me.Label21.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label21.Location = New System.Drawing.Point(296, 47)
         Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(70, 34)
+        Me.Label21.Size = New System.Drawing.Size(53, 26)
         Me.Label21.TabIndex = 47
         Me.Label21.Text = "     Total " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "   a Pagar" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         '
@@ -571,157 +526,142 @@ Partial Class Ingreso_Solicitud
         '
         Me.txt_TotalApagar.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.txt_TotalApagar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txt_TotalApagar.Location = New System.Drawing.Point(484, 63)
-        Me.txt_TotalApagar.Margin = New System.Windows.Forms.Padding(4)
+        Me.txt_TotalApagar.Location = New System.Drawing.Point(363, 51)
         Me.txt_TotalApagar.Name = "txt_TotalApagar"
         Me.txt_TotalApagar.ReadOnly = True
-        Me.txt_TotalApagar.Size = New System.Drawing.Size(111, 23)
+        Me.txt_TotalApagar.Size = New System.Drawing.Size(84, 20)
         Me.txt_TotalApagar.TabIndex = 46
         Me.txt_TotalApagar.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label19
         '
         Me.Label19.AutoSize = True
-        Me.Label19.Location = New System.Drawing.Point(209, 74)
-        Me.Label19.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label19.Location = New System.Drawing.Point(157, 60)
         Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(98, 17)
+        Me.Label19.Size = New System.Drawing.Size(74, 13)
         Me.Label19.TabIndex = 45
         Me.Label19.Text = "Importe Pesos"
         '
         'Label20
         '
         Me.Label20.AutoSize = True
-        Me.Label20.Location = New System.Drawing.Point(8, 74)
-        Me.Label20.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label20.Location = New System.Drawing.Point(6, 60)
         Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(57, 17)
+        Me.Label20.Size = New System.Drawing.Size(43, 13)
         Me.Label20.TabIndex = 44
         Me.Label20.Text = "Paridad"
         '
         'txt_ImportePesos
         '
         Me.txt_ImportePesos.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txt_ImportePesos.Location = New System.Drawing.Point(308, 70)
-        Me.txt_ImportePesos.Margin = New System.Windows.Forms.Padding(4)
+        Me.txt_ImportePesos.Location = New System.Drawing.Point(231, 57)
         Me.txt_ImportePesos.Name = "txt_ImportePesos"
         Me.txt_ImportePesos.ReadOnly = True
-        Me.txt_ImportePesos.Size = New System.Drawing.Size(84, 22)
+        Me.txt_ImportePesos.Size = New System.Drawing.Size(64, 20)
         Me.txt_ImportePesos.TabIndex = 43
         Me.txt_ImportePesos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txt_Paridad
         '
         Me.txt_Paridad.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txt_Paridad.Location = New System.Drawing.Point(117, 70)
-        Me.txt_Paridad.Margin = New System.Windows.Forms.Padding(4)
+        Me.txt_Paridad.Location = New System.Drawing.Point(88, 57)
         Me.txt_Paridad.Name = "txt_Paridad"
         Me.txt_Paridad.ReadOnly = True
-        Me.txt_Paridad.Size = New System.Drawing.Size(84, 22)
+        Me.txt_Paridad.Size = New System.Drawing.Size(64, 20)
         Me.txt_Paridad.TabIndex = 42
         Me.txt_Paridad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label18
         '
         Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(225, 47)
-        Me.Label18.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label18.Location = New System.Drawing.Point(169, 38)
         Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(71, 17)
+        Me.Label18.Size = New System.Drawing.Size(56, 13)
         Me.Label18.TabIndex = 41
         Me.Label18.Text = "Ret. I.V.A."
         '
         'Label17
         '
         Me.Label17.AutoSize = True
-        Me.Label17.Location = New System.Drawing.Point(219, 21)
-        Me.Label17.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label17.Location = New System.Drawing.Point(164, 17)
         Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(86, 17)
+        Me.Label17.Size = New System.Drawing.Size(66, 13)
         Me.Label17.TabIndex = 40
         Me.Label17.Text = "Ret. I.Brutos"
         '
         'Label16
         '
         Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(8, 47)
-        Me.Label16.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label16.Location = New System.Drawing.Point(6, 38)
         Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(98, 17)
+        Me.Label16.Size = New System.Drawing.Size(76, 13)
         Me.Label16.TabIndex = 39
         Me.Label16.Text = "Ret. IB Ciudad"
         '
         'Label15
         '
         Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(8, 21)
-        Me.Label15.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label15.Location = New System.Drawing.Point(6, 17)
         Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(99, 17)
+        Me.Label15.Size = New System.Drawing.Size(76, 13)
         Me.Label15.TabIndex = 38
         Me.Label15.Text = "Ret. Ganancia"
         '
         'txt_RetIVA
         '
         Me.txt_RetIVA.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txt_RetIVA.Location = New System.Drawing.Point(308, 43)
-        Me.txt_RetIVA.Margin = New System.Windows.Forms.Padding(4)
+        Me.txt_RetIVA.Location = New System.Drawing.Point(231, 35)
         Me.txt_RetIVA.Name = "txt_RetIVA"
         Me.txt_RetIVA.ReadOnly = True
-        Me.txt_RetIVA.Size = New System.Drawing.Size(84, 22)
+        Me.txt_RetIVA.Size = New System.Drawing.Size(64, 20)
         Me.txt_RetIVA.TabIndex = 25
         Me.txt_RetIVA.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txt_RetIBru
         '
         Me.txt_RetIBru.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txt_RetIBru.Location = New System.Drawing.Point(308, 17)
-        Me.txt_RetIBru.Margin = New System.Windows.Forms.Padding(4)
+        Me.txt_RetIBru.Location = New System.Drawing.Point(231, 14)
         Me.txt_RetIBru.Name = "txt_RetIBru"
         Me.txt_RetIBru.ReadOnly = True
-        Me.txt_RetIBru.Size = New System.Drawing.Size(84, 22)
+        Me.txt_RetIBru.Size = New System.Drawing.Size(64, 20)
         Me.txt_RetIBru.TabIndex = 24
         Me.txt_RetIBru.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txt_RetIBCiudad
         '
         Me.txt_RetIBCiudad.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txt_RetIBCiudad.Location = New System.Drawing.Point(117, 43)
-        Me.txt_RetIBCiudad.Margin = New System.Windows.Forms.Padding(4)
+        Me.txt_RetIBCiudad.Location = New System.Drawing.Point(88, 35)
         Me.txt_RetIBCiudad.Name = "txt_RetIBCiudad"
         Me.txt_RetIBCiudad.ReadOnly = True
-        Me.txt_RetIBCiudad.Size = New System.Drawing.Size(84, 22)
+        Me.txt_RetIBCiudad.Size = New System.Drawing.Size(64, 20)
         Me.txt_RetIBCiudad.TabIndex = 23
         Me.txt_RetIBCiudad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txt_RetGanancia
         '
         Me.txt_RetGanancia.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txt_RetGanancia.Location = New System.Drawing.Point(117, 17)
-        Me.txt_RetGanancia.Margin = New System.Windows.Forms.Padding(4)
+        Me.txt_RetGanancia.Location = New System.Drawing.Point(88, 14)
         Me.txt_RetGanancia.Name = "txt_RetGanancia"
         Me.txt_RetGanancia.ReadOnly = True
-        Me.txt_RetGanancia.Size = New System.Drawing.Size(84, 22)
+        Me.txt_RetGanancia.Size = New System.Drawing.Size(64, 20)
         Me.txt_RetGanancia.TabIndex = 22
         Me.txt_RetGanancia.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label14
         '
         Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(393, 23)
-        Me.Label14.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label14.Location = New System.Drawing.Point(295, 19)
         Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(87, 34)
+        Me.Label14.Size = New System.Drawing.Size(67, 26)
         Me.Label14.TabIndex = 21
         Me.Label14.Text = "     Total " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Retenciones"
         '
         'lbl_TipoDolar
         '
         Me.lbl_TipoDolar.AutoSize = True
-        Me.lbl_TipoDolar.Location = New System.Drawing.Point(195, 214)
-        Me.lbl_TipoDolar.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lbl_TipoDolar.Location = New System.Drawing.Point(146, 174)
         Me.lbl_TipoDolar.Name = "lbl_TipoDolar"
-        Me.lbl_TipoDolar.Size = New System.Drawing.Size(55, 17)
+        Me.lbl_TipoDolar.Size = New System.Drawing.Size(42, 13)
         Me.lbl_TipoDolar.TabIndex = 39
         Me.lbl_TipoDolar.Text = "T.Dolar"
         Me.lbl_TipoDolar.Visible = False
@@ -731,19 +671,17 @@ Partial Class Ingreso_Solicitud
         Me.cbx_TipoDolar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbx_TipoDolar.FormattingEnabled = True
         Me.cbx_TipoDolar.Items.AddRange(New Object() {"", "Divisa", "Nacion", "Informado"})
-        Me.cbx_TipoDolar.Location = New System.Drawing.Point(257, 210)
-        Me.cbx_TipoDolar.Margin = New System.Windows.Forms.Padding(4)
+        Me.cbx_TipoDolar.Location = New System.Drawing.Point(193, 171)
         Me.cbx_TipoDolar.Name = "cbx_TipoDolar"
-        Me.cbx_TipoDolar.Size = New System.Drawing.Size(137, 24)
+        Me.cbx_TipoDolar.Size = New System.Drawing.Size(104, 21)
         Me.cbx_TipoDolar.TabIndex = 38
         Me.cbx_TipoDolar.Visible = False
         '
         'btn_Autorizar
         '
-        Me.btn_Autorizar.Location = New System.Drawing.Point(605, 534)
-        Me.btn_Autorizar.Margin = New System.Windows.Forms.Padding(4)
+        Me.btn_Autorizar.Location = New System.Drawing.Point(454, 434)
         Me.btn_Autorizar.Name = "btn_Autorizar"
-        Me.btn_Autorizar.Size = New System.Drawing.Size(109, 55)
+        Me.btn_Autorizar.Size = New System.Drawing.Size(82, 45)
         Me.btn_Autorizar.TabIndex = 40
         Me.btn_Autorizar.Text = "AUTORIZAR"
         Me.btn_Autorizar.UseVisualStyleBackColor = True
@@ -752,29 +690,26 @@ Partial Class Ingreso_Solicitud
         'Label22
         '
         Me.Label22.AutoSize = True
-        Me.Label22.Location = New System.Drawing.Point(4, 652)
-        Me.Label22.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label22.Location = New System.Drawing.Point(3, 530)
         Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(59, 34)
+        Me.Label22.Size = New System.Drawing.Size(46, 26)
         Me.Label22.TabIndex = 42
         Me.Label22.Text = "Banco y" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & " Fecha "
         '
         'txt_Concepto_Pago
         '
-        Me.txt_Concepto_Pago.Location = New System.Drawing.Point(95, 649)
-        Me.txt_Concepto_Pago.Margin = New System.Windows.Forms.Padding(4)
+        Me.txt_Concepto_Pago.Location = New System.Drawing.Point(71, 527)
         Me.txt_Concepto_Pago.MaxLength = 200
         Me.txt_Concepto_Pago.Multiline = True
         Me.txt_Concepto_Pago.Name = "txt_Concepto_Pago"
-        Me.txt_Concepto_Pago.Size = New System.Drawing.Size(477, 96)
+        Me.txt_Concepto_Pago.Size = New System.Drawing.Size(359, 79)
         Me.txt_Concepto_Pago.TabIndex = 41
         '
         'btn_MailReclamo
         '
-        Me.btn_MailReclamo.Location = New System.Drawing.Point(605, 382)
-        Me.btn_MailReclamo.Margin = New System.Windows.Forms.Padding(4)
+        Me.btn_MailReclamo.Location = New System.Drawing.Point(454, 310)
         Me.btn_MailReclamo.Name = "btn_MailReclamo"
-        Me.btn_MailReclamo.Size = New System.Drawing.Size(109, 55)
+        Me.btn_MailReclamo.Size = New System.Drawing.Size(82, 45)
         Me.btn_MailReclamo.TabIndex = 43
         Me.btn_MailReclamo.Text = "ENVIAR MAIL"
         Me.btn_MailReclamo.UseVisualStyleBackColor = True
@@ -782,31 +717,29 @@ Partial Class Ingreso_Solicitud
         '
         'txt_FechaEmitirOrdenPago
         '
-        Me.txt_FechaEmitirOrdenPago.Location = New System.Drawing.Point(605, 501)
-        Me.txt_FechaEmitirOrdenPago.Margin = New System.Windows.Forms.Padding(4)
+        Me.txt_FechaEmitirOrdenPago.Location = New System.Drawing.Point(454, 407)
         Me.txt_FechaEmitirOrdenPago.Mask = "00/00/0000"
         Me.txt_FechaEmitirOrdenPago.Name = "txt_FechaEmitirOrdenPago"
         Me.txt_FechaEmitirOrdenPago.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txt_FechaEmitirOrdenPago.Size = New System.Drawing.Size(89, 22)
+        Me.txt_FechaEmitirOrdenPago.Size = New System.Drawing.Size(68, 20)
         Me.txt_FechaEmitirOrdenPago.TabIndex = 44
         Me.txt_FechaEmitirOrdenPago.Visible = False
         '
         'lbl_FechaEmitirOrdenPago
         '
         Me.lbl_FechaEmitirOrdenPago.AutoSize = True
-        Me.lbl_FechaEmitirOrdenPago.Location = New System.Drawing.Point(597, 460)
-        Me.lbl_FechaEmitirOrdenPago.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lbl_FechaEmitirOrdenPago.Location = New System.Drawing.Point(448, 374)
         Me.lbl_FechaEmitirOrdenPago.Name = "lbl_FechaEmitirOrdenPago"
-        Me.lbl_FechaEmitirOrdenPago.Size = New System.Drawing.Size(109, 34)
+        Me.lbl_FechaEmitirOrdenPago.Size = New System.Drawing.Size(82, 26)
         Me.lbl_FechaEmitirOrdenPago.TabIndex = 45
         Me.lbl_FechaEmitirOrdenPago.Text = "   Fecha Emitir" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & " Orden de Pago"
         Me.lbl_FechaEmitirOrdenPago.Visible = False
         '
         'Ingreso_Solicitud
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(719, 748)
+        Me.ClientSize = New System.Drawing.Size(539, 608)
         Me.Controls.Add(Me.lbl_FechaEmitirOrdenPago)
         Me.Controls.Add(Me.txt_FechaEmitirOrdenPago)
         Me.Controls.Add(Me.btn_MailReclamo)
@@ -848,7 +781,6 @@ Partial Class Ingreso_Solicitud
         Me.Controls.Add(Me.txt_Solicitante)
         Me.Controls.Add(Me.panel1)
         Me.Location = New System.Drawing.Point(20, 20)
-        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "Ingreso_Solicitud"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.panel1.ResumeLayout(False)
