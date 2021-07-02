@@ -3107,6 +3107,8 @@ Public Class Pagos
 
             If Not Directory.Exists(RutaCarpeta) Then Throw New System.Exception("No se encuentra la carpeta base de la Solicitud. Path: " & _path)
 
+
+            'ACA FALTA MOFICAR PARA QUE IMPRIMA TODOS LOS ARCHIVOS MENOS LA SOLICITUD ORIGINAL
             Dim _file As String = RutaCarpeta & "\" & "SolicitudOriginal_" & _NroSoliInterno & ".pdf"
 
             If Not File.Exists(_file) Then Throw New System.Exception("No se encuentra el archivo. Path: " & _file)

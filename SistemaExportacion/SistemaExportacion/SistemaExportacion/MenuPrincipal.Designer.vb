@@ -69,6 +69,7 @@ Partial Class MenuPrincipal
         Me.LayoutFiltros = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.btn_BuscarProducto = New System.Windows.Forms.Button()
         Me.txt_Producto = New System.Windows.Forms.MaskedTextBox()
@@ -79,7 +80,8 @@ Partial Class MenuPrincipal
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtFiltrarPor = New System.Windows.Forms.TextBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
+        Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutCabecera.SuspendLayout()
         Me.LayoutCuerpoPrincipal.SuspendLayout()
@@ -525,6 +527,14 @@ Partial Class MenuPrincipal
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Filtrar datos"
         '
+        'ProgressBar1
+        '
+        Me.ProgressBar1.Location = New System.Drawing.Point(1094, 35)
+        Me.ProgressBar1.Name = "ProgressBar1"
+        Me.ProgressBar1.Size = New System.Drawing.Size(260, 23)
+        Me.ProgressBar1.TabIndex = 8
+        Me.ProgressBar1.Visible = False
+        '
         'Label5
         '
         Me.Label5.AutoSize = True
@@ -630,13 +640,13 @@ Partial Class MenuPrincipal
         Me.txtFiltrarPor.Size = New System.Drawing.Size(217, 23)
         Me.txtFiltrarPor.TabIndex = 0
         '
-        'ProgressBar1
+        'BackgroundWorker1
         '
-        Me.ProgressBar1.Location = New System.Drawing.Point(1094, 35)
-        Me.ProgressBar1.Name = "ProgressBar1"
-        Me.ProgressBar1.Size = New System.Drawing.Size(260, 23)
-        Me.ProgressBar1.TabIndex = 8
-        Me.ProgressBar1.Visible = False
+        Me.BackgroundWorker1.WorkerReportsProgress = True
+        '
+        'Timer1
+        '
+        Me.Timer1.Interval = 2000
         '
         'MenuPrincipal
         '
@@ -712,5 +722,7 @@ Partial Class MenuPrincipal
     Friend WithEvents txt_Producto As System.Windows.Forms.MaskedTextBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents ProgressBar1 As System.Windows.Forms.ProgressBar
+    Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
+    Friend WithEvents Timer1 As System.Windows.Forms.Timer
 
 End Class

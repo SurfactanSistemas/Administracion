@@ -24,8 +24,8 @@ Public Class Ingresar_Presupuesto : Implements IAyudaProv
             txt_Fecha.Text = Date.Today.ToString("dd/MM/yyyy")
             cbx_Moneda.SelectedIndex = 0
             Bandera_NuevaSoli = True
-            Me.Size = New Size(560, 325)
-            Me.MaximumSize = New Size(560, 325)
+            Me.Size = New Size(560, 320)
+            Me.MaximumSize = New Size(560, 320)
         Else
             Bandera_NuevaSoli = False
             txt_NroPresupuesto.Text = NroPresupuesto
@@ -398,4 +398,5 @@ Public Class Ingresar_Presupuesto : Implements IAyudaProv
     End Sub
 
     
+   
 End Class

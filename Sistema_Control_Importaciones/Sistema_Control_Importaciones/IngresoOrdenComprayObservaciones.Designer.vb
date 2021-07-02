@@ -22,14 +22,14 @@ Partial Class IngresoOrdenComprayObservaciones
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.label1 = New System.Windows.Forms.Label()
@@ -104,6 +104,22 @@ Partial Class IngresoOrdenComprayObservaciones
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.GroupBox7 = New System.Windows.Forms.GroupBox()
         Me.GroupBox8 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox9 = New System.Windows.Forms.GroupBox()
+        Me.Label28 = New System.Windows.Forms.Label()
+        Me.txt_BL = New System.Windows.Forms.TextBox()
+        Me.txt_Buque = New System.Windows.Forms.TextBox()
+        Me.cbx_Estado = New System.Windows.Forms.ComboBox()
+        Me.txt_FechaIngreso = New System.Windows.Forms.MaskedTextBox()
+        Me.Label31 = New System.Windows.Forms.Label()
+        Me.Label33 = New System.Windows.Forms.Label()
+        Me.Label34 = New System.Windows.Forms.Label()
+        Me.txt_Contenedor = New System.Windows.Forms.TextBox()
+        Me.Label29 = New System.Windows.Forms.Label()
+        Me.cbx_Tipo = New System.Windows.Forms.ComboBox()
+        Me.Label30 = New System.Windows.Forms.Label()
+        Me.txt_Despacho = New System.Windows.Forms.TextBox()
+        Me.Label32 = New System.Windows.Forms.Label()
+        Me.btn_AdjuntarArchivos = New System.Windows.Forms.Button()
         Me.panel1.SuspendLayout()
         CType(Me.DGV_Observaciones, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DGV_Orden, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -115,6 +131,7 @@ Partial Class IngresoOrdenComprayObservaciones
         Me.GroupBox6.SuspendLayout()
         Me.GroupBox7.SuspendLayout()
         Me.GroupBox8.SuspendLayout()
+        Me.GroupBox9.SuspendLayout()
         Me.SuspendLayout()
         '
         'panel1
@@ -159,14 +176,14 @@ Partial Class IngresoOrdenComprayObservaciones
         '
         Me.DGV_Observaciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_Observaciones.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Fecha, Me.Observaciones})
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGV_Observaciones.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGV_Observaciones.DefaultCellStyle = DataGridViewCellStyle2
         Me.DGV_Observaciones.DoubleBuffered = True
         Me.DGV_Observaciones.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.DGV_Observaciones.Location = New System.Drawing.Point(864, 70)
@@ -192,8 +209,8 @@ Partial Class IngresoOrdenComprayObservaciones
         'Observaciones
         '
         Me.Observaciones.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Observaciones.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Observaciones.DefaultCellStyle = DataGridViewCellStyle1
         Me.Observaciones.HeaderText = "Observaciones"
         Me.Observaciones.MaxInputLength = 80
         Me.Observaciones.Name = "Observaciones"
@@ -358,7 +375,7 @@ Partial Class IngresoOrdenComprayObservaciones
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(263, 148)
+        Me.Label12.Location = New System.Drawing.Point(349, 148)
         Me.Label12.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(75, 17)
@@ -371,9 +388,9 @@ Partial Class IngresoOrdenComprayObservaciones
         Me.Label9.Location = New System.Drawing.Point(8, 150)
         Me.Label9.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(36, 17)
+        Me.Label9.Size = New System.Drawing.Size(34, 17)
         Me.Label9.TabIndex = 119
-        Me.Label9.Text = "DJai"
+        Me.Label9.Text = "SIMI"
         '
         'Label6
         '
@@ -447,7 +464,7 @@ Partial Class IngresoOrdenComprayObservaciones
         '
         'txt_FechaDjai
         '
-        Me.txt_FechaDjai.Location = New System.Drawing.Point(266, 169)
+        Me.txt_FechaDjai.Location = New System.Drawing.Point(352, 169)
         Me.txt_FechaDjai.Margin = New System.Windows.Forms.Padding(4)
         Me.txt_FechaDjai.Mask = "00/00/0000"
         Me.txt_FechaDjai.Name = "txt_FechaDjai"
@@ -459,8 +476,9 @@ Partial Class IngresoOrdenComprayObservaciones
         '
         Me.txt_Djai.Location = New System.Drawing.Point(13, 169)
         Me.txt_Djai.Margin = New System.Windows.Forms.Padding(4)
+        Me.txt_Djai.MaxLength = 30
         Me.txt_Djai.Name = "txt_Djai"
-        Me.txt_Djai.Size = New System.Drawing.Size(244, 22)
+        Me.txt_Djai.Size = New System.Drawing.Size(324, 22)
         Me.txt_Djai.TabIndex = 110
         '
         'txt_PedidoImpo
@@ -484,7 +502,7 @@ Partial Class IngresoOrdenComprayObservaciones
         Me.Cbx_PagoDespacho.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.Cbx_PagoDespacho.FormattingEnabled = True
         Me.Cbx_PagoDespacho.Items.AddRange(New Object() {"Pendiente", "Efectuado"})
-        Me.Cbx_PagoDespacho.Location = New System.Drawing.Point(179, 38)
+        Me.Cbx_PagoDespacho.Location = New System.Drawing.Point(190, 125)
         Me.Cbx_PagoDespacho.Margin = New System.Windows.Forms.Padding(4)
         Me.Cbx_PagoDespacho.Name = "Cbx_PagoDespacho"
         Me.Cbx_PagoDespacho.Size = New System.Drawing.Size(160, 24)
@@ -493,7 +511,7 @@ Partial Class IngresoOrdenComprayObservaciones
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(175, 18)
+        Me.Label11.Location = New System.Drawing.Point(186, 105)
         Me.Label11.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(140, 17)
@@ -502,7 +520,7 @@ Partial Class IngresoOrdenComprayObservaciones
         '
         'txt_ImpoDespacho
         '
-        Me.txt_ImpoDespacho.Location = New System.Drawing.Point(11, 39)
+        Me.txt_ImpoDespacho.Location = New System.Drawing.Point(22, 126)
         Me.txt_ImpoDespacho.Margin = New System.Windows.Forms.Padding(4)
         Me.txt_ImpoDespacho.Name = "txt_ImpoDespacho"
         Me.txt_ImpoDespacho.Size = New System.Drawing.Size(132, 22)
@@ -511,7 +529,7 @@ Partial Class IngresoOrdenComprayObservaciones
         'Label18
         '
         Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(7, 19)
+        Me.Label18.Location = New System.Drawing.Point(18, 106)
         Me.Label18.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(143, 17)
@@ -641,7 +659,7 @@ Partial Class IngresoOrdenComprayObservaciones
         '
         Me.Label25.AutoSize = True
         Me.Label25.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label25.Location = New System.Drawing.Point(10, 71)
+        Me.Label25.Location = New System.Drawing.Point(18, 179)
         Me.Label25.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label25.Name = "Label25"
         Me.Label25.Size = New System.Drawing.Size(126, 34)
@@ -652,7 +670,7 @@ Partial Class IngresoOrdenComprayObservaciones
         '
         'txt_VtoDespacho
         '
-        Me.txt_VtoDespacho.Location = New System.Drawing.Point(144, 77)
+        Me.txt_VtoDespacho.Location = New System.Drawing.Point(152, 185)
         Me.txt_VtoDespacho.Margin = New System.Windows.Forms.Padding(4)
         Me.txt_VtoDespacho.Mask = "00/00/0000"
         Me.txt_VtoDespacho.Name = "txt_VtoDespacho"
@@ -706,8 +724,8 @@ Partial Class IngresoOrdenComprayObservaciones
         'Derechos
         '
         Me.Derechos.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Derechos.DefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Derechos.DefaultCellStyle = DataGridViewCellStyle3
         Me.Derechos.HeaderText = "% Derechos"
         Me.Derechos.Name = "Derechos"
         Me.Derechos.ReadOnly = True
@@ -723,8 +741,8 @@ Partial Class IngresoOrdenComprayObservaciones
         'Precio
         '
         Me.Precio.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Precio.DefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Precio.DefaultCellStyle = DataGridViewCellStyle4
         Me.Precio.HeaderText = "Precio"
         Me.Precio.Name = "Precio"
         Me.Precio.ReadOnly = True
@@ -733,8 +751,8 @@ Partial Class IngresoOrdenComprayObservaciones
         'Cantidad
         '
         Me.Cantidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Cantidad.DefaultCellStyle = DataGridViewCellStyle13
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Cantidad.DefaultCellStyle = DataGridViewCellStyle5
         Me.Cantidad.HeaderText = "Cantidad"
         Me.Cantidad.Name = "Cantidad"
         Me.Cantidad.ReadOnly = True
@@ -758,38 +776,38 @@ Partial Class IngresoOrdenComprayObservaciones
         'DGV_Orden
         '
         Me.DGV_Orden.AllowUserToAddRows = False
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGV_Orden.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle14
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGV_Orden.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle6
         Me.DGV_Orden.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_Orden.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Producto, Me.Descripcion, Me.Cantidad, Me.Precio, Me.PosicionArancelaria, Me.Derechos})
-        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle15.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle15.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGV_Orden.DefaultCellStyle = DataGridViewCellStyle15
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGV_Orden.DefaultCellStyle = DataGridViewCellStyle7
         Me.DGV_Orden.DoubleBuffered = True
         Me.DGV_Orden.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.DGV_Orden.Location = New System.Drawing.Point(8, 156)
         Me.DGV_Orden.Margin = New System.Windows.Forms.Padding(4)
         Me.DGV_Orden.Name = "DGV_Orden"
         Me.DGV_Orden.OrdenamientoColumnasHabilitado = True
-        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle16.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGV_Orden.RowHeadersDefaultCellStyle = DataGridViewCellStyle16
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGV_Orden.RowHeadersDefaultCellStyle = DataGridViewCellStyle8
         Me.DGV_Orden.RowHeadersWidth = 15
         Me.DGV_Orden.RowTemplate.Height = 20
         Me.DGV_Orden.ShowCellToolTips = False
@@ -856,6 +874,8 @@ Partial Class IngresoOrdenComprayObservaciones
         'GroupBox3
         '
         Me.GroupBox3.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.GroupBox3.Controls.Add(Me.Label32)
+        Me.GroupBox3.Controls.Add(Me.txt_Despacho)
         Me.GroupBox3.Controls.Add(Me.Label18)
         Me.GroupBox3.Controls.Add(Me.txt_ImpoDespacho)
         Me.GroupBox3.Controls.Add(Me.Label25)
@@ -864,7 +884,7 @@ Partial Class IngresoOrdenComprayObservaciones
         Me.GroupBox3.Controls.Add(Me.Cbx_PagoDespacho)
         Me.GroupBox3.Location = New System.Drawing.Point(1059, 501)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(366, 123)
+        Me.GroupBox3.Size = New System.Drawing.Size(366, 240)
         Me.GroupBox3.TabIndex = 151
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Despacho"
@@ -951,11 +971,181 @@ Partial Class IngresoOrdenComprayObservaciones
         Me.GroupBox8.TabIndex = 156
         Me.GroupBox8.TabStop = False
         '
+        'GroupBox9
+        '
+        Me.GroupBox9.BackColor = System.Drawing.Color.Orange
+        Me.GroupBox9.Controls.Add(Me.cbx_Tipo)
+        Me.GroupBox9.Controls.Add(Me.Label30)
+        Me.GroupBox9.Controls.Add(Me.txt_Contenedor)
+        Me.GroupBox9.Controls.Add(Me.Label29)
+        Me.GroupBox9.Controls.Add(Me.Label28)
+        Me.GroupBox9.Controls.Add(Me.txt_BL)
+        Me.GroupBox9.Controls.Add(Me.txt_Buque)
+        Me.GroupBox9.Controls.Add(Me.cbx_Estado)
+        Me.GroupBox9.Controls.Add(Me.txt_FechaIngreso)
+        Me.GroupBox9.Controls.Add(Me.Label31)
+        Me.GroupBox9.Controls.Add(Me.Label33)
+        Me.GroupBox9.Controls.Add(Me.Label34)
+        Me.GroupBox9.Location = New System.Drawing.Point(164, 629)
+        Me.GroupBox9.Name = "GroupBox9"
+        Me.GroupBox9.Size = New System.Drawing.Size(892, 112)
+        Me.GroupBox9.TabIndex = 154
+        Me.GroupBox9.TabStop = False
+        '
+        'Label28
+        '
+        Me.Label28.AutoSize = True
+        Me.Label28.Location = New System.Drawing.Point(544, 14)
+        Me.Label28.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label28.Name = "Label28"
+        Me.Label28.Size = New System.Drawing.Size(25, 17)
+        Me.Label28.TabIndex = 122
+        Me.Label28.Text = "BL"
+        '
+        'txt_BL
+        '
+        Me.txt_BL.Location = New System.Drawing.Point(547, 34)
+        Me.txt_BL.Margin = New System.Windows.Forms.Padding(4)
+        Me.txt_BL.MaxLength = 30
+        Me.txt_BL.Name = "txt_BL"
+        Me.txt_BL.Size = New System.Drawing.Size(324, 22)
+        Me.txt_BL.TabIndex = 107
+        '
+        'txt_Buque
+        '
+        Me.txt_Buque.Location = New System.Drawing.Point(547, 79)
+        Me.txt_Buque.Margin = New System.Windows.Forms.Padding(4)
+        Me.txt_Buque.MaxLength = 30
+        Me.txt_Buque.Name = "txt_Buque"
+        Me.txt_Buque.Size = New System.Drawing.Size(324, 22)
+        Me.txt_Buque.TabIndex = 110
+        '
+        'cbx_Estado
+        '
+        Me.cbx_Estado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbx_Estado.FormattingEnabled = True
+        Me.cbx_Estado.Items.AddRange(New Object() {"", "SIMI NO AP", "SIMI OK", "PRE EMBARQUE", "EMBARCADO", "ARRIBADO", "ENTREGADO"})
+        Me.cbx_Estado.Location = New System.Drawing.Point(14, 34)
+        Me.cbx_Estado.Margin = New System.Windows.Forms.Padding(4)
+        Me.cbx_Estado.Name = "cbx_Estado"
+        Me.cbx_Estado.Size = New System.Drawing.Size(160, 24)
+        Me.cbx_Estado.TabIndex = 112
+        '
+        'txt_FechaIngreso
+        '
+        Me.txt_FechaIngreso.Location = New System.Drawing.Point(384, 33)
+        Me.txt_FechaIngreso.Margin = New System.Windows.Forms.Padding(4)
+        Me.txt_FechaIngreso.Mask = "00/00/0000"
+        Me.txt_FechaIngreso.Name = "txt_FechaIngreso"
+        Me.txt_FechaIngreso.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
+        Me.txt_FechaIngreso.Size = New System.Drawing.Size(132, 22)
+        Me.txt_FechaIngreso.TabIndex = 115
+        '
+        'Label31
+        '
+        Me.Label31.AutoSize = True
+        Me.Label31.Location = New System.Drawing.Point(380, 14)
+        Me.Label31.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label31.Name = "Label31"
+        Me.Label31.Size = New System.Drawing.Size(118, 17)
+        Me.Label31.TabIndex = 117
+        Me.Label31.Text = "Fecha de Ingreso"
+        '
+        'Label33
+        '
+        Me.Label33.AutoSize = True
+        Me.Label33.Location = New System.Drawing.Point(542, 60)
+        Me.Label33.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label33.Name = "Label33"
+        Me.Label33.Size = New System.Drawing.Size(49, 17)
+        Me.Label33.TabIndex = 119
+        Me.Label33.Text = "Buque"
+        '
+        'Label34
+        '
+        Me.Label34.AutoSize = True
+        Me.Label34.Location = New System.Drawing.Point(10, 14)
+        Me.Label34.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label34.Name = "Label34"
+        Me.Label34.Size = New System.Drawing.Size(52, 17)
+        Me.Label34.TabIndex = 121
+        Me.Label34.Text = "Estado"
+        '
+        'txt_Contenedor
+        '
+        Me.txt_Contenedor.Location = New System.Drawing.Point(16, 81)
+        Me.txt_Contenedor.Margin = New System.Windows.Forms.Padding(4)
+        Me.txt_Contenedor.MaxLength = 30
+        Me.txt_Contenedor.Name = "txt_Contenedor"
+        Me.txt_Contenedor.Size = New System.Drawing.Size(514, 22)
+        Me.txt_Contenedor.TabIndex = 123
+        '
+        'Label29
+        '
+        Me.Label29.AutoSize = True
+        Me.Label29.Location = New System.Drawing.Point(11, 62)
+        Me.Label29.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label29.Name = "Label29"
+        Me.Label29.Size = New System.Drawing.Size(82, 17)
+        Me.Label29.TabIndex = 124
+        Me.Label29.Text = "Contenedor"
+        '
+        'cbx_Tipo
+        '
+        Me.cbx_Tipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbx_Tipo.FormattingEnabled = True
+        Me.cbx_Tipo.Items.AddRange(New Object() {"", "LCL", "FCL", "BODEGA"})
+        Me.cbx_Tipo.Location = New System.Drawing.Point(193, 34)
+        Me.cbx_Tipo.Margin = New System.Windows.Forms.Padding(4)
+        Me.cbx_Tipo.Name = "cbx_Tipo"
+        Me.cbx_Tipo.Size = New System.Drawing.Size(160, 24)
+        Me.cbx_Tipo.TabIndex = 125
+        '
+        'Label30
+        '
+        Me.Label30.AutoSize = True
+        Me.Label30.Location = New System.Drawing.Point(189, 14)
+        Me.Label30.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label30.Name = "Label30"
+        Me.Label30.Size = New System.Drawing.Size(36, 17)
+        Me.Label30.TabIndex = 126
+        Me.Label30.Text = "Tipo"
+        '
+        'txt_Despacho
+        '
+        Me.txt_Despacho.Location = New System.Drawing.Point(22, 60)
+        Me.txt_Despacho.Margin = New System.Windows.Forms.Padding(4)
+        Me.txt_Despacho.MaxLength = 20
+        Me.txt_Despacho.Name = "txt_Despacho"
+        Me.txt_Despacho.Size = New System.Drawing.Size(324, 22)
+        Me.txt_Despacho.TabIndex = 147
+        '
+        'Label32
+        '
+        Me.Label32.AutoSize = True
+        Me.Label32.Location = New System.Drawing.Point(19, 40)
+        Me.Label32.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label32.Name = "Label32"
+        Me.Label32.Size = New System.Drawing.Size(72, 17)
+        Me.Label32.TabIndex = 148
+        Me.Label32.Text = "Despacho"
+        '
+        'btn_AdjuntarArchivos
+        '
+        Me.btn_AdjuntarArchivos.Location = New System.Drawing.Point(18, 636)
+        Me.btn_AdjuntarArchivos.Name = "btn_AdjuntarArchivos"
+        Me.btn_AdjuntarArchivos.Size = New System.Drawing.Size(133, 96)
+        Me.btn_AdjuntarArchivos.TabIndex = 157
+        Me.btn_AdjuntarArchivos.Text = "ADJUNTAR ARCHIVOS"
+        Me.btn_AdjuntarArchivos.UseVisualStyleBackColor = True
+        '
         'IngresoOrdenComprayObservaciones
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1437, 636)
+        Me.ClientSize = New System.Drawing.Size(1437, 742)
+        Me.Controls.Add(Me.btn_AdjuntarArchivos)
+        Me.Controls.Add(Me.GroupBox9)
         Me.Controls.Add(Me.GroupBox8)
         Me.Controls.Add(Me.GroupBox7)
         Me.Controls.Add(Me.GroupBox6)
@@ -992,6 +1182,8 @@ Partial Class IngresoOrdenComprayObservaciones
         Me.GroupBox7.PerformLayout()
         Me.GroupBox8.ResumeLayout(False)
         Me.GroupBox8.PerformLayout()
+        Me.GroupBox9.ResumeLayout(False)
+        Me.GroupBox9.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1069,4 +1261,20 @@ Partial Class IngresoOrdenComprayObservaciones
     Friend WithEvents GroupBox6 As System.Windows.Forms.GroupBox
     Friend WithEvents GroupBox7 As System.Windows.Forms.GroupBox
     Friend WithEvents GroupBox8 As System.Windows.Forms.GroupBox
+    Friend WithEvents Label32 As System.Windows.Forms.Label
+    Friend WithEvents txt_Despacho As System.Windows.Forms.TextBox
+    Friend WithEvents GroupBox9 As System.Windows.Forms.GroupBox
+    Friend WithEvents cbx_Tipo As System.Windows.Forms.ComboBox
+    Friend WithEvents Label30 As System.Windows.Forms.Label
+    Friend WithEvents txt_Contenedor As System.Windows.Forms.TextBox
+    Friend WithEvents Label29 As System.Windows.Forms.Label
+    Friend WithEvents Label28 As System.Windows.Forms.Label
+    Friend WithEvents txt_BL As System.Windows.Forms.TextBox
+    Friend WithEvents txt_Buque As System.Windows.Forms.TextBox
+    Friend WithEvents cbx_Estado As System.Windows.Forms.ComboBox
+    Friend WithEvents txt_FechaIngreso As System.Windows.Forms.MaskedTextBox
+    Friend WithEvents Label31 As System.Windows.Forms.Label
+    Friend WithEvents Label33 As System.Windows.Forms.Label
+    Friend WithEvents Label34 As System.Windows.Forms.Label
+    Friend WithEvents btn_AdjuntarArchivos As System.Windows.Forms.Button
 End Class

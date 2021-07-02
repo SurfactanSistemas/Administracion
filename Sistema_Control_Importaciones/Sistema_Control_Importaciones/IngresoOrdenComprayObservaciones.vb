@@ -70,8 +70,9 @@ Public Class IngresoOrdenComprayObservaciones
         Dim WClave As String = CodOrdenAux + "01"
 
         SQLCnslt = "SELECT FechaEmbarque, FechaLlegada, PagoDespacho, ImpoDespacho, VtoDespacho, PagoLetra, EntregaI, " _
-            & "EntregaII, ImpoLetra, VtoLetra, VtoLetraII FROM Orden WHERE Clave = '" & WClave & "'"
-
+            & "EntregaII, ImpoLetra, VtoLetra, VtoLetraII, BL, Buque, Contenedor, Despacho, Tipo_cbx, Estado, FechaIngreso, FechaIngresoOrd " _
+            & "FROM Orden WHERE Clave = '" & WClave & "'"
+        
         Dim RowOrden As DataRow = GetSingle(SQLCnslt, BaseConectar)
 
         If RowOrden IsNot Nothing Then
@@ -86,8 +87,16 @@ Public Class IngresoOrdenComprayObservaciones
             txt_ImpoLetra.Text = IIf(IsDBNull(RowOrden.Item("ImpoLetra")), 0, RowOrden.Item("ImpoLetra"))
             txt_VtoLetra.Text = IIf(IsDBNull(RowOrden.Item("VtoLetra")), "  /  /    ", RowOrden.Item("VtoLetra"))
             txt_VtoLetraII.Text = IIf(IsDBNull(RowOrden.Item("VtoLetraII")), "  /  /    ", RowOrden.Item("VtoLetraII"))
+
+            txt_BL.Text = IIf(IsDBNull(RowOrden.Item("BL")), "", RowOrden.Item("BL"))
+            txt_Buque.Text = IIf(IsDBNull(RowOrden.Item("Buque")), "", RowOrden.Item("Buque"))
+            txt_Contenedor.Text = IIf(IsDBNull(RowOrden.Item("Contenedor")), "", RowOrden.Item("Contenedor"))
+            txt_Despacho.Text = IIf(IsDBNull(RowOrden.Item("Despacho")), "", RowOrden.Item("Despacho"))
+            cbx_Tipo.SelectedItem = IIf(IsDBNull(RowOrden.Item("Tipo_cbx")), "", Trim(RowOrden.Item("Tipo_cbx")))
+            cbx_Estado.SelectedItem = IIf(IsDBNull(RowOrden.Item("Estado")), "", Trim(RowOrden.Item("Estado")))
+            txt_FechaIngreso.Text = IIf(IsDBNull(RowOrden.Item("FechaIngreso")), "", RowOrden.Item("FechaIngreso"))
         End If
-        
+
         Dim SQLCnlst As String = "Select EntregaI FROM " & BaseConectar & ".dbo.Orden WHERE Orden = '" & NumeroOrden & "'"
 
         Dim Row As DataRow = GetSingle(SQLCnlst)
@@ -196,7 +205,7 @@ Public Class IngresoOrdenComprayObservaciones
                     Renglon += 1
 
                 Next
-                
+
                 For Each DGV_Row As DataGridViewRow In DGV_Orden.Rows
                     SQLCnlst = "SELECT Descripcion, Derechos, Posarance " _
                                 & "FROM Articulo WHERE Codigo = '" & DGV_Row.Cells("Producto").Value & "'"
@@ -259,7 +268,7 @@ Public Class IngresoOrdenComprayObservaciones
 
         'validoFecha DJai
 
-        If Trim(txt_FechaImpo.Text) <> "/  /" And txt_VtoLetraII.Text <> "00/00/0000" Then
+        If Trim(txt_FechaImpo.Text) <> "/  /" And txt_FechaImpo.Text <> "00/00/0000" Then
             If ValidaFecha(txt_FechaImpo.Text) <> "S" Then
                 MsgBox("Fecha de Fecha Impo Invalida", 0, "Actualizacion de Ordenes de Compra")
                 txt_FechaImpo.Focus()
@@ -268,11 +277,21 @@ Public Class IngresoOrdenComprayObservaciones
             End If
         End If
 
-        If Trim(txt_FechaDjai.Text) <> "/  /" And txt_VtoLetraII.Text <> "00/00/0000" Then
+        If Trim(txt_FechaDjai.Text) <> "/  /" And txt_FechaDjai.Text <> "00/00/0000" Then
             If ValidaFecha(txt_FechaDjai.Text) <> "S" Then
                 MsgBox("Fecha de Fecha Djai Invalida", 0, "Actualizacion de Ordenes de Compra")
                 txt_FechaDjai.Focus()
                 txt_FechaDjai.SelectAll()
+                Exit Sub
+            End If
+        End If
+
+
+        If Trim(txt_FechaIngreso.Text) <> "/  /" And txt_FechaIngreso.Text <> "00/00/0000" Then
+            If ValidaFecha(txt_FechaIngreso.Text) <> "S" Then
+                MsgBox("Fecha de Fecha ingreso Invalida", 0, "Actualizacion de Ordenes de Compra")
+                txt_FechaIngreso.Focus()
+                txt_FechaIngreso.SelectAll()
                 Exit Sub
             End If
         End If
@@ -383,6 +402,7 @@ Public Class IngresoOrdenComprayObservaciones
             Dim WOrdVtoDespacho As String = ordenaFecha(txt_VtoDespacho.Text)
             Dim WOrdVtoLetra As String = ordenaFecha(txt_VtoLetra.Text)
             Dim WOrdVtoLetraII As String = ordenaFecha(txt_VtoLetraII.Text)
+            Dim WOrdfechaingreso As String = ordenaFecha(txt_FechaIngreso.Text)
             Dim WMarca As String = "X"
 
             SQLCnsl = "UPDATE " & WBASEACONECTAR & ".dbo.Orden SET " _
@@ -412,7 +432,14 @@ Public Class IngresoOrdenComprayObservaciones
                         & "VtoLetraII = '" & txt_VtoLetraII.Text & "', " _
                         & "OrdVtoLetra = '" & WOrdVtoLetra & "', " _
                         & "OrdVtoLetraII ='" & WOrdVtoLetraII & "', " _
-                        & "Marca = '" & WMarca & "' " _
+                        & "BL = '" & Trim(txt_BL.Text) & "', " _
+                        & "Despacho = '" & Trim(txt_Despacho.Text) & "', " _
+                        & "Contenedor = '" & Trim(txt_Contenedor.Text) & "', " _
+                        & "Buque = '" & Trim(txt_Buque.Text) & "', " _
+                        & "Estado = '" & cbx_Estado.SelectedItem & "', " _
+                        & "Tipo_cbx = '" & cbx_Tipo.SelectedItem & "', " _
+                        & "FechaIngreso = '" & txt_FechaIngreso.Text & "', " _
+                        & "FechaIngresoOrd = '" & WOrdfechaingreso & "' " _
                         & "Where Orden = '" & WORDEN & "'"
 
             ListaSQLCnslt.Add(SQLCnsl)

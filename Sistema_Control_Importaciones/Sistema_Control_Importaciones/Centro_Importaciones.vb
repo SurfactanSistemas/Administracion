@@ -3,9 +3,6 @@ Imports Util.Clases.Query
 Imports Util.Clases.Helper
 Imports System.IO
 
-
-
-
 Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
     
     'VariablesGlobales en Version vieja

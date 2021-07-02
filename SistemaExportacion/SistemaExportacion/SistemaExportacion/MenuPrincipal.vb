@@ -1,4 +1,5 @@
-﻿Imports System.Data.SqlClient
+﻿Imports System.ComponentModel
+Imports System.Data.SqlClient
 Imports Microsoft.Office.Interop
 Imports System.Data
 Imports System.IO
@@ -52,6 +53,7 @@ Public Class MenuPrincipal : Implements IActualizaGrillaProforma
     End Sub
 
     Private Sub MenuPrincipal_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        
         _CargarTodasLasProformas()
 
         Dim WOperador As DataRow = GetSingle("SELECT SistemaExportacion FROM Operador WHERE UPPER(Clave) = '" & Operador.Clave & "'", "SurfactanSa")
@@ -61,9 +63,7 @@ Public Class MenuPrincipal : Implements IActualizaGrillaProforma
                 btnAperturaArchivos.Enabled = False
             End If
         End If
-
-
-
+        
     End Sub
 
     Public Sub _CargarTodasLasProformas()
@@ -882,37 +882,69 @@ Public Class MenuPrincipal : Implements IActualizaGrillaProforma
     Private Sub btn_BuscarProducto_Click(sender As Object, e As EventArgs) Handles btn_BuscarProducto.Click
         If txt_Producto.Text.Length = 12 Then
 
+            Timer1.Start()
+
+            CheckForIllegalCrossThreadCalls = False
+            ProgressBar1.Visible = True
+            ProgressBar1.Maximum = dgvPrincipal.Rows.Count * 2
+
             Dim auxproducto As String = txt_Producto.Text
             btnLimpiarFiltros_Click(Nothing, Nothing)
             txt_Producto.Text = auxproducto
 
-            ProgressBar1.Maximum = 100
-            ProgressBar1.Value = 0
-            ProgressBar1.Visible = True
+            
 
-            Dim listaFilas As New List(Of DataGridViewRow)
-            For Each dgv_row As DataGridViewRow In dgvPrincipal.Rows
+            If Not BackgroundWorker1.IsBusy Then BackgroundWorker1.RunWorkerAsync()
 
-                Dim SQLCnslt As String = "SELECT Producto FROM ProformaExportacion WHERE Proforma = '" & dgv_row.Cells("NroProforma").Value & "' AND Producto = '" & txt_Producto.Text & "'"
-                Dim RowCnslt As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
-                If RowCnslt Is Nothing Then
-                    listaFilas.Add(dgv_row)
-                    ProgressBar1.Value += 1
-                End If
-            Next
-
-            If listaFilas.Count > 0 Then
-                For Each row As DataGridViewRow In listaFilas
-                    dgvPrincipal.Rows.Remove(row)
-                    ProgressBar1.Value += 1
-                Next
-            End If
         End If
-        ProgressBar1.Value = 100
-        ProgressBar1.Visible = False
+
     End Sub
 
-    
+    Private Sub Timer1_Tick(ByVal sender As Object, ByVal e As EventArgs) Handles Timer1.Tick
+        If Not BackgroundWorker1.IsBusy Then BackgroundWorker1.RunWorkerAsync()
+        Timer1.Stop()
+    End Sub
+
+    Private Sub BackgroundWorker1_DoWork(ByVal sender As Object, ByVal e As DoWorkEventArgs) Handles BackgroundWorker1.DoWork
+        ProgressBar1.Visible = True
+
+        Dim listaFilas As New List(Of Integer)
+        For Each dgv_row As DataGridViewRow In dgvPrincipal.Rows
+
+            Dim SQLCnslt As String = "SELECT Producto FROM ProformaExportacion WHERE Proforma = '" & dgv_row.Cells("NroProforma").Value & "' AND Producto = '" & txt_Producto.Text & "'"
+            Dim RowCnslt As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
+            If RowCnslt Is Nothing Then
+                listaFilas.Add(dgv_row.Index)
+            End If
+            BackgroundWorker1.ReportProgress(1)
+        Next
+
+        listaFilas.Sort()
+        listaFilas.Reverse()
+
+        If listaFilas.Count > 0 Then
+            For Each index As Integer In listaFilas
+                dgvPrincipal.Rows.Remove(dgvPrincipal.Rows(index))
+                BackgroundWorker1.ReportProgress(1)
+            Next
+        End If
+        
+    End Sub
+
+    Private Sub BackgroundWorker1_ProgressChanged(ByVal sender As Object, ByVal e As ProgressChangedEventArgs) Handles BackgroundWorker1.ProgressChanged
+
+        ProgressBar1.Increment(1)
+        ProgressBar1.Refresh()
+       
+    End Sub
+
+    Private Sub BackgroundWorker1_RunWorkerCompleted(ByVal sender As Object, ByVal e As RunWorkerCompletedEventArgs) Handles BackgroundWorker1.RunWorkerCompleted
+
+        ProgressBar1.Value = 0
+        ProgressBar1.Visible = False
+
+    End Sub
+
     Private Sub txt_Producto_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_Producto.KeyDown
         Select Case e.KeyData
             Case Keys.Enter
