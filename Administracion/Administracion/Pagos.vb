@@ -3023,7 +3023,7 @@ Public Class Pagos
 
             End If
         Catch ex As System.Exception
-            MsgBox("Hubo un problema al querer Actualizar los datos en la tabla Solicitud de Fondos o al imprimir la solicitud", MsgBoxStyle.Critical)
+            MsgBox("Hubo un problema al querer Actualizar los datos en la tabla Solicitud de Fondos o al imprimir la solicitud. Motivo: " & ex.Message, MsgBoxStyle.Critical)
             Exit Sub
         End Try
 
@@ -3083,7 +3083,7 @@ Public Class Pagos
         '         End If
         ' End Select
 
-       
+
 
         'FIN INCLUIDO ANDRES 11/06
 
@@ -3100,50 +3100,29 @@ Public Class Pagos
     End Sub
 
 
-    Private Sub BuscarArchivosParaImprimirEnCarpetaSolicitudFondos(ByVal NroSoliInterno As String)
-        Dim RutaCarpeta As String = "\\193.168.0.2\g$\vb\NET\ArchivosRelacionadosSolicitudFondos\" & NroSoliInterno
-        For Each archivo As String In Directory.GetFiles(RutaCarpeta)
-            If archivo = "\\193.168.0.2\g$\vb\NET\ArchivosRelacionadosSolicitudFondos\103\SolicitudOriginal_" & NroSoliInterno & ".pdf" Then
-                Continue For
-            End If
+    Private Sub BuscarArchivosParaImprimirEnCarpetaSolicitudFondos(ByVal _NroSoliInterno As String)
+        Try
+            Dim _path As String = "\\193.168.0.2\g$\vb\NET\ArchivosRelacionadosSolicitudFondos\"
+            Dim RutaCarpeta As String = _path & "\" & _NroSoliInterno
 
-            '  Dim Esperas As Integer = 0
-            '  Using p As New Process
-            '      p.StartInfo.FileName = archivo
-            '      p.StartInfo.Verb = "Print"
-            ' 
-            '      p.Start()
-            ' 
-            '      Threading.Thread.Sleep(500) ' tiempo X para que el programa cliente se active he imprima
-            ' 
-            '      p.CloseMainWindow() ' Cierre ventana cliente
-            '      ' si la ventana sigue abierta, se encicla hasta cerrarla.
-            '      While Not p.HasExited
-            '          Threading.Thread.Sleep(500)
-            '          Esperas += 1
-            '          p.CloseMainWindow()
-            '      End While
-            '  End Using
-            
+            If Not Directory.Exists(RutaCarpeta) Then Throw New System.Exception("No se encuentra la carpeta base de la Solicitud. Path: " & _path)
 
-            Try
-                '' Imprimimos las hojas guardadas.
-                '' Recorremos e imprimimos los archivos copiados a la carpeta 
-             
-                Dim p = New Process()
-                p.StartInfo = New ProcessStartInfo
+            Dim _file As String = RutaCarpeta & "\" & "SolicitudOriginal_" & _NroSoliInterno & ".pdf"
 
-                p.StartInfo.CreateNoWindow = True
-                p.StartInfo.Verb = "print"
-                p.StartInfo.FileName = archivo ''put the correct path here
+            If Not File.Exists(_file) Then Throw New System.Exception("No se encuentra el archivo. Path: " & _file)
 
-                p.Start()
-              
-            Catch ex As System.Exception
+            Dim p = New Process()
+            p.StartInfo = New ProcessStartInfo
 
-            End Try
-            
-        Next
+            p.StartInfo.CreateNoWindow = True
+            p.StartInfo.Verb = "print"
+            p.StartInfo.FileName = _file ''put the correct path here
+
+            p.Start()
+
+        Catch ex As System.Exception
+            Throw New System.Exception(ex.Message)
+        End Try
     End Sub
     Public Shared Function FormatoCorreoValido(ByVal correo As String) As Boolean
 
@@ -3252,7 +3231,7 @@ Public Class Pagos
         If Not rgx.IsMatch(correo) Then
             Dim sreg2 As String = "^[a-zA-Z0-9.+_]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)?\.(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
             Dim rgx2 As Regex = New Regex(sreg2)
-            Return rgx2.IsMatch(correo)    
+            Return rgx2.IsMatch(correo)
         End If
 
         Return rgx.IsMatch(correo)
