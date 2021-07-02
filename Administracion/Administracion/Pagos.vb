@@ -2990,7 +2990,7 @@ Public Class Pagos
                                         Dim WCuerpo As String = "Acaba de generarse el pago para la solicitud de Fondos Nro. <strong>" & NroSoliInterno & "</strong> <br/>" _
                                                             & "Para el numero de cuenta <strong>" & RowSoli.Item("Cuenta") & " " & RowCuenta.Item("Descripcion") & "</strong>"
 
-                                        _EnviarEmail(Mail, "", WAsunto, WCuerpo, Nothing)
+                                        '_EnviarEmail(Mail, "", WAsunto, WCuerpo, Nothing)
                                     End If
                                 End If
                             End If
@@ -3014,7 +3014,12 @@ Public Class Pagos
                     .Imprimir()
                 End With
 
-                BuscarArchivosParaImprimirEnCarpetaSolicitudFondos(NroSoliInterno)
+                'Try
+                '    BuscarArchivosParaImprimirEnCarpetaSolicitudFondos(NroSoliInterno)
+                'Catch ex As System.Exception
+                '    MsgBox("Hubo un error al intentar imprimir archivos adjuntos de la solicitud de fondos", vbExclamation)
+                'End Try
+
 
             End If
         Catch ex As System.Exception
@@ -3051,10 +3056,18 @@ Public Class Pagos
         txtOrdenPago_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
 
         'INCLUIDO ANDRES 11/06
-        Dim Imprime As Boolean = False
-        Dim SQLCnslt As String = ""
-        Imprime = True
-        SQLCnslt = "UPDATE Pagos SET OperadorClave = '" & Operador.Clave & "' WHERE Orden = '" & WOrdPago & "'"
+        Try
+            Dim SQLCnslt As String = "UPDATE Pagos SET OperadorClave = '" & Operador.Clave & "' WHERE Orden = '" & WOrdPago & "'"
+            ExecuteNonQueries("SurfactanSa", {SQLCnslt})
+        Catch ex As System.Exception
+            MsgBox("Error al grabar quien grabo la orden de pago", vbExclamation)
+        End Try
+
+
+
+
+
+
         ' Select Case UCase(Operador.Clave)
         ' 
         '     Case "39235"
@@ -3070,16 +3083,14 @@ Public Class Pagos
         '         End If
         ' End Select
 
-        If SQLCnslt <> "" Then
-            ExecuteNonQueries("SurfactanSa", {SQLCnslt})
-        End If
+       
 
         'FIN INCLUIDO ANDRES 11/06
 
-        If Imprime = True Then
-            ' Imprimimos los comprobantes pertinentes.
-            btnImprimir.PerformClick()
-        End If
+
+        ' Imprimimos los comprobantes pertinentes.
+        btnImprimir.PerformClick()
+
 
         'SOLO ENVIAMOS MAIL SI ES ANTICIPO Y DESPACHANTE DE ADUANA Y EL USUARIO RESPONDE QUE SI
         ' btnEnviarAviso_Click(Nothing, Nothing)
@@ -3090,9 +3101,9 @@ Public Class Pagos
 
 
     Private Sub BuscarArchivosParaImprimirEnCarpetaSolicitudFondos(ByVal NroSoliInterno As String)
-        Dim RutaCarpeta As String = "Z:\vb\NET\ArchivosRelacionadosSolicitudFondos\" & NroSoliInterno
+        Dim RutaCarpeta As String = "\\193.168.0.2\g$\vb\NET\ArchivosRelacionadosSolicitudFondos\" & NroSoliInterno
         For Each archivo As String In Directory.GetFiles(RutaCarpeta)
-            If archivo = "Z:\vb\NET\ArchivosRelacionadosSolicitudFondos\103\SolicitudOriginal_" & NroSoliInterno & ".pdf" Then
+            If archivo = "\\193.168.0.2\g$\vb\NET\ArchivosRelacionadosSolicitudFondos\103\SolicitudOriginal_" & NroSoliInterno & ".pdf" Then
                 Continue For
             End If
 

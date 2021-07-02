@@ -69,6 +69,7 @@ Partial Class MenuPrincipal
         Me.LayoutFiltros = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.btn_BuscarProducto = New System.Windows.Forms.Button()
         Me.txt_Producto = New System.Windows.Forms.MaskedTextBox()
         Me.ckMostrarEntregadas = New System.Windows.Forms.CheckBox()
@@ -78,7 +79,7 @@ Partial Class MenuPrincipal
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtFiltrarPor = New System.Windows.Forms.TextBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.Label5 = New System.Windows.Forms.Label()
+        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.LayoutPrincipal.SuspendLayout()
         Me.LayoutCabecera.SuspendLayout()
         Me.LayoutCuerpoPrincipal.SuspendLayout()
@@ -106,7 +107,7 @@ Partial Class MenuPrincipal
         Me.LayoutPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55.0!))
         Me.LayoutPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 69.0!))
         Me.LayoutPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.LayoutPrincipal.Size = New System.Drawing.Size(1336, 590)
+        Me.LayoutPrincipal.Size = New System.Drawing.Size(1378, 590)
         Me.LayoutPrincipal.TabIndex = 0
         '
         'LayoutCabecera
@@ -127,7 +128,7 @@ Partial Class MenuPrincipal
         Me.LayoutCabecera.RowCount = 1
         Me.LayoutCabecera.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.LayoutCabecera.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55.0!))
-        Me.LayoutCabecera.Size = New System.Drawing.Size(1336, 55)
+        Me.LayoutCabecera.Size = New System.Drawing.Size(1378, 55)
         Me.LayoutCabecera.TabIndex = 0
         '
         'Label1
@@ -146,7 +147,7 @@ Partial Class MenuPrincipal
         '
         Me.Label2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label2.Font = New System.Drawing.Font("Calibri", 16.0!, System.Drawing.FontStyle.Bold)
-        Me.Label2.Location = New System.Drawing.Point(1100, 0)
+        Me.Label2.Location = New System.Drawing.Point(1142, 0)
         Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(232, 55)
@@ -168,7 +169,7 @@ Partial Class MenuPrincipal
         Me.LayoutCuerpoPrincipal.RowCount = 1
         Me.LayoutCuerpoPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.LayoutCuerpoPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 466.0!))
-        Me.LayoutCuerpoPrincipal.Size = New System.Drawing.Size(1336, 466)
+        Me.LayoutCuerpoPrincipal.Size = New System.Drawing.Size(1378, 466)
         Me.LayoutCuerpoPrincipal.TabIndex = 1
         '
         'dgvPrincipal
@@ -183,7 +184,7 @@ Partial Class MenuPrincipal
         Me.dgvPrincipal.Margin = New System.Windows.Forms.Padding(20, 18, 20, 18)
         Me.dgvPrincipal.Name = "dgvPrincipal"
         Me.dgvPrincipal.ReadOnly = True
-        Me.dgvPrincipal.Size = New System.Drawing.Size(1184, 430)
+        Me.dgvPrincipal.Size = New System.Drawing.Size(1226, 430)
         Me.dgvPrincipal.TabIndex = 0
         '
         'NroProforma
@@ -488,7 +489,7 @@ Partial Class MenuPrincipal
         Me.LayoutFiltros.Name = "LayoutFiltros"
         Me.LayoutFiltros.RowCount = 1
         Me.LayoutFiltros.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.LayoutFiltros.Size = New System.Drawing.Size(1336, 69)
+        Me.LayoutFiltros.Size = New System.Drawing.Size(1378, 69)
         Me.LayoutFiltros.TabIndex = 2
         '
         'Panel2
@@ -498,11 +499,12 @@ Partial Class MenuPrincipal
         Me.Panel2.Location = New System.Drawing.Point(0, 0)
         Me.Panel2.Margin = New System.Windows.Forms.Padding(0)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(1336, 69)
+        Me.Panel2.Size = New System.Drawing.Size(1378, 69)
         Me.Panel2.TabIndex = 0
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.ProgressBar1)
         Me.GroupBox1.Controls.Add(Me.Label5)
         Me.GroupBox1.Controls.Add(Me.btn_BuscarProducto)
         Me.GroupBox1.Controls.Add(Me.txt_Producto)
@@ -514,20 +516,33 @@ Partial Class MenuPrincipal
         Me.GroupBox1.Controls.Add(Me.txtFiltrarPor)
         Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.Control
-        Me.GroupBox1.Location = New System.Drawing.Point(13, 5)
+        Me.GroupBox1.Location = New System.Drawing.Point(13, 0)
         Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4)
-        Me.GroupBox1.Size = New System.Drawing.Size(1319, 53)
+        Me.GroupBox1.Size = New System.Drawing.Size(1361, 65)
         Me.GroupBox1.TabIndex = 3
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Filtrar datos"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Calibri", 11.0!, System.Drawing.FontStyle.Bold)
+        Me.Label5.ForeColor = System.Drawing.SystemColors.Control
+        Me.Label5.Location = New System.Drawing.Point(679, 26)
+        Me.Label5.Margin = New System.Windows.Forms.Padding(0)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(87, 23)
+        Me.Label5.TabIndex = 7
+        Me.Label5.Text = "Producto:"
+        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'btn_BuscarProducto
         '
         Me.btn_BuscarProducto.BackgroundImage = Global.SistemaExportacion.My.Resources.Resources.Consulta_Dat_N1
         Me.btn_BuscarProducto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btn_BuscarProducto.Location = New System.Drawing.Point(886, 14)
+        Me.btn_BuscarProducto.Location = New System.Drawing.Point(886, 22)
         Me.btn_BuscarProducto.Name = "btn_BuscarProducto"
         Me.btn_BuscarProducto.Size = New System.Drawing.Size(34, 32)
         Me.btn_BuscarProducto.TabIndex = 6
@@ -537,17 +552,17 @@ Partial Class MenuPrincipal
         '
         'txt_Producto
         '
-        Me.txt_Producto.Location = New System.Drawing.Point(769, 18)
+        Me.txt_Producto.Location = New System.Drawing.Point(769, 26)
         Me.txt_Producto.Mask = ">LL-00000-000"
         Me.txt_Producto.Name = "txt_Producto"
         Me.txt_Producto.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txt_Producto.Size = New System.Drawing.Size(111, 23)
+        Me.txt_Producto.Size = New System.Drawing.Size(117, 23)
         Me.txt_Producto.TabIndex = 5
         '
         'ckMostrarEntregadas
         '
         Me.ckMostrarEntregadas.AutoSize = True
-        Me.ckMostrarEntregadas.Location = New System.Drawing.Point(1089, 21)
+        Me.ckMostrarEntregadas.Location = New System.Drawing.Point(1100, 12)
         Me.ckMostrarEntregadas.Margin = New System.Windows.Forms.Padding(4)
         Me.ckMostrarEntregadas.Name = "ckMostrarEntregadas"
         Me.ckMostrarEntregadas.Size = New System.Drawing.Size(224, 21)
@@ -561,7 +576,7 @@ Partial Class MenuPrincipal
         Me.btnLimpiarFiltros.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnLimpiarFiltros.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnLimpiarFiltros.Font = New System.Drawing.Font("Calibri", 11.0!, System.Drawing.FontStyle.Bold)
-        Me.btnLimpiarFiltros.Location = New System.Drawing.Point(936, 14)
+        Me.btnLimpiarFiltros.Location = New System.Drawing.Point(936, 19)
         Me.btnLimpiarFiltros.Margin = New System.Windows.Forms.Padding(13, 12, 0, 12)
         Me.btnLimpiarFiltros.Name = "btnLimpiarFiltros"
         Me.btnLimpiarFiltros.Size = New System.Drawing.Size(137, 32)
@@ -575,7 +590,7 @@ Partial Class MenuPrincipal
         Me.cmbTipoFiltro.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmbTipoFiltro.FormattingEnabled = True
         Me.cmbTipoFiltro.Items.AddRange(New Object() {"", "Nro de Proforma", "Fecha", "Cliente", "País", "S/Packing List", "Vencidas (S/Packing List)", "Razon Social", "Fecha Limite", "M.V.", "E.T.D", "E.T.A", "Peso Neto", "Permiso de Embarque", "BL", "Forwarder", "Estado"})
-        Me.cmbTipoFiltro.Location = New System.Drawing.Point(86, 18)
+        Me.cmbTipoFiltro.Location = New System.Drawing.Point(86, 26)
         Me.cmbTipoFiltro.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbTipoFiltro.Name = "cmbTipoFiltro"
         Me.cmbTipoFiltro.Size = New System.Drawing.Size(143, 25)
@@ -586,7 +601,7 @@ Partial Class MenuPrincipal
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Calibri", 11.0!, System.Drawing.FontStyle.Bold)
         Me.Label3.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label3.Location = New System.Drawing.Point(5, 18)
+        Me.Label3.Location = New System.Drawing.Point(5, 26)
         Me.Label3.Margin = New System.Windows.Forms.Padding(0)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(84, 23)
@@ -599,7 +614,7 @@ Partial Class MenuPrincipal
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Calibri", 11.0!, System.Drawing.FontStyle.Bold)
         Me.Label4.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label4.Location = New System.Drawing.Point(236, 18)
+        Me.Label4.Location = New System.Drawing.Point(236, 26)
         Me.Label4.Margin = New System.Windows.Forms.Padding(0)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(206, 23)
@@ -609,30 +624,25 @@ Partial Class MenuPrincipal
         '
         'txtFiltrarPor
         '
-        Me.txtFiltrarPor.Location = New System.Drawing.Point(442, 18)
+        Me.txtFiltrarPor.Location = New System.Drawing.Point(442, 26)
         Me.txtFiltrarPor.Margin = New System.Windows.Forms.Padding(4)
         Me.txtFiltrarPor.Name = "txtFiltrarPor"
         Me.txtFiltrarPor.Size = New System.Drawing.Size(217, 23)
         Me.txtFiltrarPor.TabIndex = 0
         '
-        'Label5
+        'ProgressBar1
         '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Calibri", 11.0!, System.Drawing.FontStyle.Bold)
-        Me.Label5.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label5.Location = New System.Drawing.Point(679, 18)
-        Me.Label5.Margin = New System.Windows.Forms.Padding(0)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(87, 23)
-        Me.Label5.TabIndex = 7
-        Me.Label5.Text = "Producto:"
-        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.ProgressBar1.Location = New System.Drawing.Point(1094, 35)
+        Me.ProgressBar1.Name = "ProgressBar1"
+        Me.ProgressBar1.Size = New System.Drawing.Size(260, 23)
+        Me.ProgressBar1.TabIndex = 8
+        Me.ProgressBar1.Visible = False
         '
         'MenuPrincipal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1336, 590)
+        Me.ClientSize = New System.Drawing.Size(1378, 590)
         Me.Controls.Add(Me.LayoutPrincipal)
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "MenuPrincipal"
@@ -701,5 +711,6 @@ Partial Class MenuPrincipal
     Friend WithEvents btn_BuscarProducto As System.Windows.Forms.Button
     Friend WithEvents txt_Producto As System.Windows.Forms.MaskedTextBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents ProgressBar1 As System.Windows.Forms.ProgressBar
 
 End Class

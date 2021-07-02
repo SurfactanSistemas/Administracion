@@ -886,6 +886,10 @@ Public Class MenuPrincipal : Implements IActualizaGrillaProforma
             btnLimpiarFiltros_Click(Nothing, Nothing)
             txt_Producto.Text = auxproducto
 
+            ProgressBar1.Maximum = 100
+            ProgressBar1.Value = 0
+            ProgressBar1.Visible = True
+
             Dim listaFilas As New List(Of DataGridViewRow)
             For Each dgv_row As DataGridViewRow In dgvPrincipal.Rows
 
@@ -893,16 +897,30 @@ Public Class MenuPrincipal : Implements IActualizaGrillaProforma
                 Dim RowCnslt As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
                 If RowCnslt Is Nothing Then
                     listaFilas.Add(dgv_row)
+                    ProgressBar1.Value += 1
                 End If
             Next
 
             If listaFilas.Count > 0 Then
                 For Each row As DataGridViewRow In listaFilas
                     dgvPrincipal.Rows.Remove(row)
+                    ProgressBar1.Value += 1
                 Next
             End If
         End If
+        ProgressBar1.Value = 100
+        ProgressBar1.Visible = False
     End Sub
 
     
+    Private Sub txt_Producto_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_Producto.KeyDown
+        Select Case e.KeyData
+            Case Keys.Enter
+                If txt_Producto.Text.Length = 12 Then
+                    btn_BuscarProducto_Click(Nothing, Nothing)
+                End If
+            Case Keys.Escape
+                txt_Producto.Text = ""
+        End Select
+    End Sub
 End Class

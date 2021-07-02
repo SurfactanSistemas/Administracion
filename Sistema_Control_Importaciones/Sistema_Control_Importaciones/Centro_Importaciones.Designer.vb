@@ -22,27 +22,8 @@ Partial Class Centro_Importaciones
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.DGV_Muestra = New Util.DBDataGridView()
-        Me.lbl_ArticuloKg = New System.Windows.Forms.Label()
-        Me.txt_Articulo = New System.Windows.Forms.TextBox()
-        Me.lbl_Articulo = New System.Windows.Forms.Label()
-        Me.txt_SumaLetra = New System.Windows.Forms.TextBox()
-        Me.txt_SumaDespacho = New System.Windows.Forms.TextBox()
-        Me.chk_LetraPendiente = New System.Windows.Forms.CheckBox()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.cbx_Activas = New System.Windows.Forms.ComboBox()
-        Me.cbx_FiltroIII = New System.Windows.Forms.ComboBox()
-        Me.cbx_FiltroII = New System.Windows.Forms.ComboBox()
-        Me.cbx_FiltroI = New System.Windows.Forms.ComboBox()
-        Me.btn_Actualiza = New System.Windows.Forms.Button()
-        Me.btn_Djai = New System.Windows.Forms.Button()
-        Me.btn_Exportacion = New System.Windows.Forms.Button()
-        Me.panel1 = New System.Windows.Forms.Panel()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.label1 = New System.Windows.Forms.Label()
         Me.Orden = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Pta = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Fecha = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -64,6 +45,25 @@ Partial Class Centro_Importaciones
         Me.FEmbarque = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.SaldoLetra = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ProveedorCod = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.lbl_ArticuloKg = New System.Windows.Forms.Label()
+        Me.txt_Articulo = New System.Windows.Forms.TextBox()
+        Me.lbl_Articulo = New System.Windows.Forms.Label()
+        Me.txt_SumaLetra = New System.Windows.Forms.TextBox()
+        Me.txt_SumaDespacho = New System.Windows.Forms.TextBox()
+        Me.chk_LetraPendiente = New System.Windows.Forms.CheckBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.cbx_Activas = New System.Windows.Forms.ComboBox()
+        Me.cbx_FiltroIII = New System.Windows.Forms.ComboBox()
+        Me.cbx_FiltroII = New System.Windows.Forms.ComboBox()
+        Me.cbx_FiltroI = New System.Windows.Forms.ComboBox()
+        Me.btn_Actualiza = New System.Windows.Forms.Button()
+        Me.btn_Djai = New System.Windows.Forms.Button()
+        Me.btn_Exportacion = New System.Windows.Forms.Button()
+        Me.panel1 = New System.Windows.Forms.Panel()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.label1 = New System.Windows.Forms.Label()
         Me.txt_Filtro = New System.Windows.Forms.TextBox()
         CType(Me.DGV_Muestra, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel1.SuspendLayout()
@@ -76,14 +76,14 @@ Partial Class Centro_Importaciones
         Me.DGV_Muestra.AllowUserToOrderColumns = True
         Me.DGV_Muestra.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_Muestra.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Orden, Me.Pta, Me.Fecha, Me.Proveedor, Me.Mon, Me.Carpeta, Me.DJai, Me.Origen, Me.Incoterms, Me.Transporte, Me.FLLegada, Me.TPago, Me.Despacho, Me.PagoDes, Me.LetraTotal, Me.PagoLetra, Me.VtoLetra, Me.USPagadoLetra, Me.FEmbarque, Me.SaldoLetra, Me.ProveedorCod})
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGV_Muestra.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(232, Byte), Integer))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGV_Muestra.DefaultCellStyle = DataGridViewCellStyle1
         Me.DGV_Muestra.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.DGV_Muestra.DoubleBuffered = True
         Me.DGV_Muestra.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
@@ -97,6 +97,193 @@ Partial Class Centro_Importaciones
         Me.DGV_Muestra.SinClickDerecho = False
         Me.DGV_Muestra.Size = New System.Drawing.Size(1580, 780)
         Me.DGV_Muestra.TabIndex = 72
+        '
+        'Orden
+        '
+        Me.Orden.DataPropertyName = "Orden"
+        Me.Orden.HeaderText = "Orden"
+        Me.Orden.Name = "Orden"
+        Me.Orden.ReadOnly = True
+        Me.Orden.Width = 60
+        '
+        'Pta
+        '
+        Me.Pta.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Pta.DataPropertyName = "Pta"
+        Me.Pta.HeaderText = "Pta"
+        Me.Pta.Name = "Pta"
+        Me.Pta.ReadOnly = True
+        Me.Pta.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Pta.Width = 58
+        '
+        'Fecha
+        '
+        Me.Fecha.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Fecha.DataPropertyName = "Fecha"
+        Me.Fecha.HeaderText = "Fecha"
+        Me.Fecha.Name = "Fecha"
+        Me.Fecha.ReadOnly = True
+        Me.Fecha.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Fecha.Width = 76
+        '
+        'Proveedor
+        '
+        Me.Proveedor.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Proveedor.DataPropertyName = "Proveedor"
+        Me.Proveedor.HeaderText = "Proveedor"
+        Me.Proveedor.Name = "Proveedor"
+        Me.Proveedor.ReadOnly = True
+        Me.Proveedor.Width = 103
+        '
+        'Mon
+        '
+        Me.Mon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Mon.DataPropertyName = "Mon"
+        Me.Mon.HeaderText = "Mon"
+        Me.Mon.Name = "Mon"
+        Me.Mon.ReadOnly = True
+        Me.Mon.Width = 64
+        '
+        'Carpeta
+        '
+        Me.Carpeta.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Carpeta.DataPropertyName = "Carpeta"
+        Me.Carpeta.HeaderText = "Carpeta"
+        Me.Carpeta.Name = "Carpeta"
+        Me.Carpeta.ReadOnly = True
+        Me.Carpeta.Width = 87
+        '
+        'DJai
+        '
+        Me.DJai.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.DJai.DataPropertyName = "DJai"
+        Me.DJai.HeaderText = "DJai"
+        Me.DJai.Name = "DJai"
+        Me.DJai.ReadOnly = True
+        Me.DJai.Width = 65
+        '
+        'Origen
+        '
+        Me.Origen.DataPropertyName = "Origen"
+        Me.Origen.HeaderText = "Origen"
+        Me.Origen.Name = "Origen"
+        Me.Origen.ReadOnly = True
+        Me.Origen.Width = 80
+        '
+        'Incoterms
+        '
+        Me.Incoterms.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Incoterms.DataPropertyName = "Incoterms"
+        Me.Incoterms.HeaderText = "Incoterms"
+        Me.Incoterms.Name = "Incoterms"
+        Me.Incoterms.ReadOnly = True
+        Me.Incoterms.Width = 98
+        '
+        'Transporte
+        '
+        Me.Transporte.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Transporte.DataPropertyName = "Transporte"
+        Me.Transporte.HeaderText = "Transporte"
+        Me.Transporte.Name = "Transporte"
+        Me.Transporte.ReadOnly = True
+        Me.Transporte.Width = 107
+        '
+        'FLLegada
+        '
+        Me.FLLegada.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.FLLegada.DataPropertyName = "FLLegada"
+        Me.FLLegada.HeaderText = "F.LLegada"
+        Me.FLLegada.Name = "FLLegada"
+        Me.FLLegada.ReadOnly = True
+        Me.FLLegada.Width = 105
+        '
+        'TPago
+        '
+        Me.TPago.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.TPago.HeaderText = "T.Pago"
+        Me.TPago.Name = "TPago"
+        Me.TPago.ReadOnly = True
+        Me.TPago.Width = 83
+        '
+        'Despacho
+        '
+        Me.Despacho.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.Despacho.DataPropertyName = "Despacho"
+        Me.Despacho.HeaderText = "Despacho"
+        Me.Despacho.Name = "Despacho"
+        Me.Despacho.ReadOnly = True
+        Me.Despacho.Width = 101
+        '
+        'PagoDes
+        '
+        Me.PagoDes.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.PagoDes.DataPropertyName = "PagoDes"
+        Me.PagoDes.HeaderText = "Pago Des"
+        Me.PagoDes.Name = "PagoDes"
+        Me.PagoDes.ReadOnly = True
+        Me.PagoDes.Width = 91
+        '
+        'LetraTotal
+        '
+        Me.LetraTotal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.LetraTotal.DataPropertyName = "LetraTotal"
+        Me.LetraTotal.HeaderText = "Letra Total"
+        Me.LetraTotal.Name = "LetraTotal"
+        Me.LetraTotal.ReadOnly = True
+        Me.LetraTotal.Width = 98
+        '
+        'PagoLetra
+        '
+        Me.PagoLetra.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.PagoLetra.DataPropertyName = "PagoLetra"
+        Me.PagoLetra.HeaderText = "Pago Letra"
+        Me.PagoLetra.Name = "PagoLetra"
+        Me.PagoLetra.ReadOnly = True
+        Me.PagoLetra.Width = 99
+        '
+        'VtoLetra
+        '
+        Me.VtoLetra.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.VtoLetra.DataPropertyName = "VtoLetra"
+        Me.VtoLetra.HeaderText = "Vto Letra"
+        Me.VtoLetra.Name = "VtoLetra"
+        Me.VtoLetra.ReadOnly = True
+        Me.VtoLetra.Width = 88
+        '
+        'USPagadoLetra
+        '
+        Me.USPagadoLetra.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.USPagadoLetra.DataPropertyName = "USPagadoLetra"
+        Me.USPagadoLetra.HeaderText = "U$S Pagado Letra"
+        Me.USPagadoLetra.Name = "USPagadoLetra"
+        Me.USPagadoLetra.ReadOnly = True
+        Me.USPagadoLetra.Width = 141
+        '
+        'FEmbarque
+        '
+        Me.FEmbarque.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.FEmbarque.DataPropertyName = "FEmbarque"
+        Me.FEmbarque.HeaderText = "F.Embarque"
+        Me.FEmbarque.Name = "FEmbarque"
+        Me.FEmbarque.ReadOnly = True
+        Me.FEmbarque.Width = 114
+        '
+        'SaldoLetra
+        '
+        Me.SaldoLetra.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.SaldoLetra.DataPropertyName = "SaldoLetra"
+        Me.SaldoLetra.HeaderText = "Saldo Letra"
+        Me.SaldoLetra.Name = "SaldoLetra"
+        Me.SaldoLetra.ReadOnly = True
+        Me.SaldoLetra.Width = 101
+        '
+        'ProveedorCod
+        '
+        Me.ProveedorCod.DataPropertyName = "ProveedorCod"
+        Me.ProveedorCod.HeaderText = "ProveedorCod"
+        Me.ProveedorCod.Name = "ProveedorCod"
+        Me.ProveedorCod.ReadOnly = True
+        Me.ProveedorCod.Visible = False
         '
         'lbl_ArticuloKg
         '
@@ -300,193 +487,6 @@ Partial Class Centro_Importaciones
         Me.label1.Size = New System.Drawing.Size(215, 20)
         Me.label1.TabIndex = 0
         Me.label1.Text = "Centro de Importaciones"
-        '
-        'Orden
-        '
-        Me.Orden.DataPropertyName = "Orden"
-        Me.Orden.HeaderText = "Orden"
-        Me.Orden.Name = "Orden"
-        Me.Orden.ReadOnly = True
-        Me.Orden.Width = 60
-        '
-        'Pta
-        '
-        Me.Pta.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Pta.DataPropertyName = "Pta"
-        Me.Pta.HeaderText = "Pta"
-        Me.Pta.Name = "Pta"
-        Me.Pta.ReadOnly = True
-        Me.Pta.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Pta.Width = 58
-        '
-        'Fecha
-        '
-        Me.Fecha.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Fecha.DataPropertyName = "Fecha"
-        Me.Fecha.HeaderText = "Fecha"
-        Me.Fecha.Name = "Fecha"
-        Me.Fecha.ReadOnly = True
-        Me.Fecha.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Fecha.Width = 76
-        '
-        'Proveedor
-        '
-        Me.Proveedor.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Proveedor.DataPropertyName = "Proveedor"
-        Me.Proveedor.HeaderText = "Proveedor"
-        Me.Proveedor.Name = "Proveedor"
-        Me.Proveedor.ReadOnly = True
-        Me.Proveedor.Width = 103
-        '
-        'Mon
-        '
-        Me.Mon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Mon.DataPropertyName = "Mon"
-        Me.Mon.HeaderText = "Mon"
-        Me.Mon.Name = "Mon"
-        Me.Mon.ReadOnly = True
-        Me.Mon.Width = 64
-        '
-        'Carpeta
-        '
-        Me.Carpeta.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Carpeta.DataPropertyName = "Carpeta"
-        Me.Carpeta.HeaderText = "Carpeta"
-        Me.Carpeta.Name = "Carpeta"
-        Me.Carpeta.ReadOnly = True
-        Me.Carpeta.Width = 87
-        '
-        'DJai
-        '
-        Me.DJai.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.DJai.DataPropertyName = "DJai"
-        Me.DJai.HeaderText = "DJai"
-        Me.DJai.Name = "DJai"
-        Me.DJai.ReadOnly = True
-        Me.DJai.Width = 65
-        '
-        'Origen
-        '
-        Me.Origen.DataPropertyName = "Origen"
-        Me.Origen.HeaderText = "Origen"
-        Me.Origen.Name = "Origen"
-        Me.Origen.ReadOnly = True
-        Me.Origen.Width = 80
-        '
-        'Incoterms
-        '
-        Me.Incoterms.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Incoterms.DataPropertyName = "Incoterms"
-        Me.Incoterms.HeaderText = "Incoterms"
-        Me.Incoterms.Name = "Incoterms"
-        Me.Incoterms.ReadOnly = True
-        Me.Incoterms.Width = 98
-        '
-        'Transporte
-        '
-        Me.Transporte.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Transporte.DataPropertyName = "Transporte"
-        Me.Transporte.HeaderText = "Transporte"
-        Me.Transporte.Name = "Transporte"
-        Me.Transporte.ReadOnly = True
-        Me.Transporte.Width = 107
-        '
-        'FLLegada
-        '
-        Me.FLLegada.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.FLLegada.DataPropertyName = "FLLegada"
-        Me.FLLegada.HeaderText = "F.LLegada"
-        Me.FLLegada.Name = "FLLegada"
-        Me.FLLegada.ReadOnly = True
-        Me.FLLegada.Width = 105
-        '
-        'TPago
-        '
-        Me.TPago.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.TPago.HeaderText = "T.Pago"
-        Me.TPago.Name = "TPago"
-        Me.TPago.ReadOnly = True
-        Me.TPago.Width = 83
-        '
-        'Despacho
-        '
-        Me.Despacho.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.Despacho.DataPropertyName = "Despacho"
-        Me.Despacho.HeaderText = "Despacho"
-        Me.Despacho.Name = "Despacho"
-        Me.Despacho.ReadOnly = True
-        Me.Despacho.Width = 101
-        '
-        'PagoDes
-        '
-        Me.PagoDes.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.PagoDes.DataPropertyName = "PagoDes"
-        Me.PagoDes.HeaderText = "Pago Des"
-        Me.PagoDes.Name = "PagoDes"
-        Me.PagoDes.ReadOnly = True
-        Me.PagoDes.Width = 99
-        '
-        'LetraTotal
-        '
-        Me.LetraTotal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.LetraTotal.DataPropertyName = "LetraTotal"
-        Me.LetraTotal.HeaderText = "Letra Total"
-        Me.LetraTotal.Name = "LetraTotal"
-        Me.LetraTotal.ReadOnly = True
-        Me.LetraTotal.Width = 106
-        '
-        'PagoLetra
-        '
-        Me.PagoLetra.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.PagoLetra.DataPropertyName = "PagoLetra"
-        Me.PagoLetra.HeaderText = "Pago Letra"
-        Me.PagoLetra.Name = "PagoLetra"
-        Me.PagoLetra.ReadOnly = True
-        Me.PagoLetra.Width = 107
-        '
-        'VtoLetra
-        '
-        Me.VtoLetra.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.VtoLetra.DataPropertyName = "VtoLetra"
-        Me.VtoLetra.HeaderText = "Vto Letra"
-        Me.VtoLetra.Name = "VtoLetra"
-        Me.VtoLetra.ReadOnly = True
-        Me.VtoLetra.Width = 95
-        '
-        'USPagadoLetra
-        '
-        Me.USPagadoLetra.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.USPagadoLetra.DataPropertyName = "USPagadoLetra"
-        Me.USPagadoLetra.HeaderText = "U$S Pagado Letra"
-        Me.USPagadoLetra.Name = "USPagadoLetra"
-        Me.USPagadoLetra.ReadOnly = True
-        Me.USPagadoLetra.Width = 141
-        '
-        'FEmbarque
-        '
-        Me.FEmbarque.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.FEmbarque.DataPropertyName = "FEmbarque"
-        Me.FEmbarque.HeaderText = "F.Embarque"
-        Me.FEmbarque.Name = "FEmbarque"
-        Me.FEmbarque.ReadOnly = True
-        Me.FEmbarque.Width = 114
-        '
-        'SaldoLetra
-        '
-        Me.SaldoLetra.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.SaldoLetra.DataPropertyName = "SaldoLetra"
-        Me.SaldoLetra.HeaderText = "Saldo Letra"
-        Me.SaldoLetra.Name = "SaldoLetra"
-        Me.SaldoLetra.ReadOnly = True
-        Me.SaldoLetra.Width = 101
-        '
-        'ProveedorCod
-        '
-        Me.ProveedorCod.DataPropertyName = "ProveedorCod"
-        Me.ProveedorCod.HeaderText = "ProveedorCod"
-        Me.ProveedorCod.Name = "ProveedorCod"
-        Me.ProveedorCod.ReadOnly = True
-        Me.ProveedorCod.Visible = False
         '
         'txt_Filtro
         '

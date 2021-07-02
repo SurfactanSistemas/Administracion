@@ -7,8 +7,7 @@ Imports System.IO
 
 
 Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
-
-
+    
     'VariablesGlobales en Version vieja
     Dim Seleccion As String
     Dim SeleccionII As String
@@ -50,12 +49,39 @@ Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
 
     Private Sub Proceso_Click()
 
+        Dim TablaMuestra As New DataTable
+        With TablaMuestra.Columns
+            .Add("Orden")
+            .Add("Pta")
+            .Add("Fecha")
+            .Add("Proveedor")
+            .Add("Mon")
+            .Add("Carpeta")
+            .Add("Djai")
+            .Add("Origen")
+            .Add("Incoterms")
+            .Add("Transporte")
+            .Add("Fllegada")
+            .Add("TPago")
+            .Add("Despacho")
+            .Add("PagoDes")
+            .Add("LetraTotal")
+            .Add("PagoLetra")
+            .Add("VtoLetra")
+            .Add("USPagadoLetra")
+            .Add("FEmbarque")
+            .Add("SaldoLetra")
+            .Add("ProveedorCod")
+        End With
+
+
         If ZProcesa = "N" Then
             Exit Sub
         End If
-        
-        DGV_Muestra.Rows.Clear()
-        
+
+
+        'DGV_Muestra.Rows.Clear()
+
         If Seleccion = "" Then
             ColumnaOpcion = 0
         End If
@@ -67,7 +93,7 @@ Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
         If SeleccionV = "" Then
             ColumnaOpcionIII = 0
         End If
-        
+
         Dim VectorEmpresas(8) As String
 
         VectorEmpresas(1) = "SurfactanSa"
@@ -90,7 +116,7 @@ Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
         '     .Add("Empresa")
         ' End With
         Dim Lugar As Integer = 0
-        
+
         Dim LugarTabla As Integer = 0
         Dim TablaPasa As New System.Data.DataTable
         With TablaPasa.Columns
@@ -104,17 +130,17 @@ Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
             .Add("PagoDespacho")
             .Add("TipoPago")
         End With
-        
+
         If ZZCiclaProceso = "S" Then
 
             For CiclaEmpresa = 1 To 6
-                
+
                 SQLCnslt = "UPDATE Orden SET " _
                 & " MarcaActualiza = '" & "" & "'" _
                 & " Where MarcaActualiza IS NULL"
 
                 ExecuteNonQueries(VectorEmpresas(CiclaEmpresa), {SQLCnslt})
-                
+
                 SQLCnslt = "SELECT Orden, Carpeta, Impoletra, Impodespacho," _
                     & " Proveedor, PagoLetra = isnull(PagoLetra,'0'), PagoDespacho = isnull(PagoDespacho,'0'), TipoPago, Baja = isnull(Baja,'')" _
                     & " FROM Orden " _
@@ -124,15 +150,15 @@ Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
                     & " AND FechaOrd >= '20140101'" _
                     & " AND ((isnull(PagoLetra,'0') <> 1 And isnull(PagoDespacho,'0') <> 1) Or (isnull(Baja,'') <> 'S'))" _
                     & " ORDER BY Clave"
-                
+
                 Dim TablaOrden As System.Data.DataTable = GetAll(SQLCnslt, VectorEmpresas(CiclaEmpresa))
 
                 If TablaOrden.Rows.Count > 0 Then
 
                     For Each RowOrden As DataRow In TablaOrden.Rows
-                        
+
                         REM If Val(rstOrden!Carpeta) = 3515 Then Stop
-                        
+
                         TablaPasa.Rows.Add()
                         TablaPasa.Rows(LugarTabla).Item("Empresa") = VectorEmpresas(CiclaEmpresa)
                         TablaPasa.Rows(LugarTabla).Item("Orden") = RowOrden.Item("Orden")
@@ -145,11 +171,11 @@ Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
                         TablaPasa.Rows(LugarTabla).Item("TipoPago") = RowOrden.Item("TipoPago")
 
                         LugarTabla += 1
-                        
+
                     Next
-                    
+
                 End If
-                
+
                 ' Dim TablaPendienteII As New System.Data.DataTable
 
                 'With TablaPendienteII.Columns
@@ -282,9 +308,9 @@ Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
                     Dim TablaPagos As System.Data.DataTable = GetAll(SQLCnslt, Operador.Base)
 
                     If TablaPagos.Rows.Count > 0 Then
-                        
+
                         For Each RowPagos As DataRow In TablaPagos.Rows
-                            
+
                             Dim WWWOrden As String = RowPagos.Item("Orden")
                             Dim WWWObservaciones As String = Trim(RowPagos.Item("Observaciones2"))
 
@@ -354,18 +380,18 @@ Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
                                         Next Aaa
                                     End If
                                 End If
-                                
+
                             End If
-                            
+
                             ZZPagoDespachoII = "1"
-                            
+
                         Next
 
                     End If
-                    
+
                 End If
 
-                
+
                 For CicloII = 0 To TablaAnticipo.Rows.Count - 1
                     Dim WImporte As String = IIf(IsDBNull(TablaAnticipo.Rows(CicloII).Item("Importe")), "0", TablaAnticipo.Rows(CicloII).Item("Importe"))
                     ZZSuma = ZZSuma + Val(WImporte)
@@ -383,7 +409,7 @@ Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
 
                 Dim ZZGraba As String = "N"
                 Dim ZZGrabaII As String = "N"
-                
+
                 If ZZPagoLetra <> ZZPagoLetraII Then
                     ZZGraba = "S"
 
@@ -446,7 +472,7 @@ Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
                                 & " WHERE Orden = '" & ZZOrden & "'"
                         ExecuteNonQueries(ConectarA, {SQLCnslt})
                     End If
-                    
+
                 End If
 
             Next
@@ -455,15 +481,15 @@ Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
 
         End If
 
-        
+
         Dim WLugar As Integer = 0
         Dim ZZDesde As Integer
         Dim ZZHasta As Integer
 
-      
-            ' ESTOS VALORES SALEN DEL VECTOR DE EMPRESA
-            ZZDesde = 1
-            ZZHasta = 6
+
+        ' ESTOS VALORES SALEN DEL VECTOR DE EMPRESA
+        ZZDesde = 1
+        ZZHasta = 6
 
 
         Dim ZZSumaLetra As Double = 0
@@ -485,7 +511,7 @@ Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
             If chk_LetraPendiente.Checked Then
                 filtro = " AND PagoLetra = 0"
             End If
-            
+
 
             SQLCnslt = "SELECT o.Tipo, o.Recibida, o.Cantidad, o.Clave, o.Orden, o.fecha, o.fechaord, " _
                 & "o.Proveedor, o.Articulo, o.Cantidad, o.Precio, o.Condicion, o.Moneda, o.Carpeta, " _
@@ -500,7 +526,7 @@ Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
                 & " AND isnull(Orden,'0') <> '0'" _
                 & filtro _
                 & " ORDER BY o.Clave"
-            
+
 
             Dim tablaOrd As System.Data.DataTable = GetAll(SQLCnslt, VectorEmpresas(CiclaEmpresa))
 
@@ -530,106 +556,106 @@ Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
                             ZEntra = "N"
                         End If
                     End If
-                    
+
                     If ZEntra = "S" Then
-                        
-                        DGV_Muestra.Rows.Add()
-                        
-                        DGV_Muestra.Rows(WLugar).Cells("Orden").Value = RowOrd.Item("Orden")
+
+                        TablaMuestra.Rows.Add()
+
+                        TablaMuestra.Rows(WLugar).Item("Orden") = RowOrd.Item("Orden")
 
                         Select Case CiclaEmpresa
                             Case 1
-                                DGV_Muestra.Rows(WLugar).Cells("Pta").Value = "I"
+                                TablaMuestra.Rows(WLugar).Item("Pta") = "I"
                             Case 2
-                                DGV_Muestra.Rows(WLugar).Cells("Pta").Value = "II"
+                                TablaMuestra.Rows(WLugar).Item("Pta") = "II"
                             Case 3
-                                DGV_Muestra.Rows(WLugar).Cells("Pta").Value = "III"
+                                TablaMuestra.Rows(WLugar).Item("Pta") = "III"
                             Case 4
-                                DGV_Muestra.Rows(WLugar).Cells("Pta").Value = "V"
+                                TablaMuestra.Rows(WLugar).Item("Pta") = "V"
                             Case 5
-                                DGV_Muestra.Rows(WLugar).Cells("Pta").Value = "VI"
+                                TablaMuestra.Rows(WLugar).Item("Pta") = "VI"
                             Case 6
-                                DGV_Muestra.Rows(WLugar).Cells("Pta").Value = "VII"
+                                TablaMuestra.Rows(WLugar).Item("Pta") = "VII"
                             Case Else
                         End Select
 
                         'DGV_Muestra.Rows(WLugar).Cells("Fecha").Value = Microsoft.VisualBasic.Left$(RowOrd.Item("Fecha"), 5) + "/" + Mid$(RowOrd.Item("Fecha"), 9, 2)
-                        DGV_Muestra.Rows(WLugar).Cells("Fecha").Value = RowOrd.Item("Fecha")
+                        TablaMuestra.Rows(WLugar).Item("Fecha") = RowOrd.Item("Fecha")
 
-                        DGV_Muestra.Rows(WLugar).Cells("Proveedor").Value = RowOrd.Item("Nombre")
+                        TablaMuestra.Rows(WLugar).Item("Proveedor") = RowOrd.Item("Nombre")
 
                         Select Case RowOrd.Item("Moneda")
                             Case 0
-                                DGV_Muestra.Rows(WLugar).Cells("Mon").Value = "U$S"
+                                TablaMuestra.Rows(WLugar).Item("Mon") = "U$S"
                             Case 1
-                                DGV_Muestra.Rows(WLugar).Cells("Mon").Value = "$"
+                                TablaMuestra.Rows(WLugar).Item("Mon") = "$"
                             Case 2
-                                DGV_Muestra.Rows(WLugar).Cells("Mon").Value = "Eur"
+                                TablaMuestra.Rows(WLugar).Item("Mon") = "Eur"
                         End Select
 
-                        DGV_Muestra.Rows(WLugar).Cells("Carpeta").Value = RowOrd.Item("Carpeta")
+                        TablaMuestra.Rows(WLugar).Item("Carpeta") = RowOrd.Item("Carpeta")
 
                         Dim ZDJai As String = IIf(IsDBNull(RowOrd.Item("DJai")), "", RowOrd.Item("DJai"))
-                        DGV_Muestra.Rows(WLugar).Cells("Djai").Value = ZDJai
+                        TablaMuestra.Rows(WLugar).Item("Djai") = ZDJai
 
 
 
 
-                        DGV_Muestra.Rows(WLugar).Cells("Origen").Value = RowOrd.Item("Origen")
+                        TablaMuestra.Rows(WLugar).Item("Origen") = RowOrd.Item("Origen")
 
                         Select Case RowOrd.Item("Leyenda")
                             Case 1
-                                DGV_Muestra.Rows(WLugar).Cells("Incoterms").Value = "FOB"
+                                TablaMuestra.Rows(WLugar).Item("Incoterms") = "FOB"
                             Case 2
-                                DGV_Muestra.Rows(WLugar).Cells("Incoterms").Value = "CIF"
+                                TablaMuestra.Rows(WLugar).Item("Incoterms") = "CIF"
                             Case 3
-                                DGV_Muestra.Rows(WLugar).Cells("Incoterms").Value = "CFR"
+                                TablaMuestra.Rows(WLugar).Item("Incoterms") = "CFR"
                             Case 4
-                                DGV_Muestra.Rows(WLugar).Cells("Incoterms").Value = "CPT"
+                                TablaMuestra.Rows(WLugar).Item("Incoterms") = "CPT"
                             Case 5
-                                DGV_Muestra.Rows(WLugar).Cells("Incoterms").Value = "EXW"
+                                TablaMuestra.Rows(WLugar).Item("Incoterms") = "EXW"
                             Case 6
-                                DGV_Muestra.Rows(WLugar).Cells("Incoterms").Value = "FCA"
+                                TablaMuestra.Rows(WLugar).Item("Incoterms") = "FCA"
                             Case Else
-                                DGV_Muestra.Rows(WLugar).Cells("Incoterms").Value = ""
+                                TablaMuestra.Rows(WLugar).Item("Incoterms") = ""
                         End Select
 
                         Dim TipoImpo As Integer = IIf(IsDBNull(RowOrd.Item("TipoImpo")), 0, RowOrd.Item("TipoImpo"))
                         Select Case TipoImpo
                             Case 1
-                                DGV_Muestra.Rows(WLugar).Cells("Transporte").Value = "Maritimo"
+                                TablaMuestra.Rows(WLugar).Item("Transporte") = "Maritimo"
                             Case 2
-                                DGV_Muestra.Rows(WLugar).Cells("Transporte").Value = "Terrestre"
+                                TablaMuestra.Rows(WLugar).Item("Transporte") = "Terrestre"
                             Case 3
-                                DGV_Muestra.Rows(WLugar).Cells("Transporte").Value = "Aereo"
+                                TablaMuestra.Rows(WLugar).Item("Transporte") = "Aereo"
                             Case Else
-                                DGV_Muestra.Rows(WLugar).Cells("Transporte").Value = ""
+                                TablaMuestra.Rows(WLugar).Item("Transporte") = ""
                         End Select
 
-                        DGV_Muestra.Rows(WLugar).Cells("FLLegada").Value = IIf(IsDBNull(RowOrd.Item("FechaLlegada")), "", RowOrd.Item("FechaLlegada"))
+                        TablaMuestra.Rows(WLugar).Item("FLLegada") = IIf(IsDBNull(RowOrd.Item("FechaLlegada")), "", RowOrd.Item("FechaLlegada"))
 
                         Dim TipoPago As Integer = IIf(IsDBNull(RowOrd.Item("TipoPago")), 0, RowOrd.Item("TipoPago"))
                         Select Case TipoPago
                             Case 1
-                                DGV_Muestra.Rows(WLugar).Cells("TPago").Value = "Pago Anti."
+                                TablaMuestra.Rows(WLugar).Item("TPago") = "Pago Anti."
                             Case 2
-                                DGV_Muestra.Rows(WLugar).Cells("TPago").Value = "A la vista"
+                                TablaMuestra.Rows(WLugar).Item("TPago") = "A la vista"
                             Case 3
-                                DGV_Muestra.Rows(WLugar).Cells("TPago").Value = "Cta.Cte."
+                                TablaMuestra.Rows(WLugar).Item("TPago") = "Cta.Cte."
                             Case Else
-                                DGV_Muestra.Rows(WLugar).Cells("TPago").Value = ""
+                                TablaMuestra.Rows(WLugar).Item("TPago") = ""
                         End Select
 
-                        DGV_Muestra.Rows(WLugar).Cells("Despacho").Value = formatonumerico(IIf(IsDBNull(RowOrd.Item("ImpoDespacho")), "0", RowOrd.Item("ImpoDespacho")))
+                        TablaMuestra.Rows(WLugar).Item("Despacho") = formatonumerico(IIf(IsDBNull(RowOrd.Item("ImpoDespacho")), "0", RowOrd.Item("ImpoDespacho")))
 
 
                         Select Case RowOrd.Item("PagoDespacho")
                             Case 0
 
-                                ZZSumaDespacho = ZZSumaDespacho + Val(DGV_Muestra.Rows(WLugar).Cells("Despacho").Value)
-                                DGV_Muestra.Rows(WLugar).Cells("PagoDes").Value = "Pendiente"
+                                ZZSumaDespacho = ZZSumaDespacho + Val(TablaMuestra.Rows(WLugar).Item("Despacho"))
+                                TablaMuestra.Rows(WLugar).Item("PagoDes") = "Pendiente"
                             Case Else
-                                DGV_Muestra.Rows(WLugar).Cells("PagoDes").Value = "Pagado"
+                                TablaMuestra.Rows(WLugar).Item("PagoDes") = "Pagado"
                         End Select
 
 
@@ -637,15 +663,15 @@ Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
                         ' saaa = rstOrden!Carpeta
 
 
-                        DGV_Muestra.Rows(WLugar).Cells("LetraTotal").Value = formatonumerico(IIf(IsDBNull(RowOrd.Item("ImpoLetra")), "0", RowOrd.Item("ImpoLetra")))
+                        TablaMuestra.Rows(WLugar).Item("LetraTotal") = formatonumerico(IIf(IsDBNull(RowOrd.Item("ImpoLetra")), "0", RowOrd.Item("ImpoLetra")))
 
                         Select Case RowOrd.Item("PagoLetra")
                             Case 0
-                                DGV_Muestra.Rows(WLugar).Cells("PagoLetra").Value = "Pendiente"
+                                TablaMuestra.Rows(WLugar).Item("PagoLetra") = "Pendiente"
                             Case Else
-                                DGV_Muestra.Rows(WLugar).Cells("PagoLetra").Value = "Pagado"
+                                TablaMuestra.Rows(WLugar).Item("PagoLetra") = "Pagado"
                         End Select
-                        DGV_Muestra.Rows(WLugar).Cells("VtoLetra").Value = IIf(IsDBNull(RowOrd.Item("VtoLetra")), "0", RowOrd.Item("VtoLetra"))
+                        TablaMuestra.Rows(WLugar).Item("VtoLetra") = IIf(IsDBNull(RowOrd.Item("VtoLetra")), "0", RowOrd.Item("VtoLetra"))
 
                         If ColumnaOpcion = 15 Then
                             ZZSumaArticulo = ZZSumaArticulo + RowOrd.Item("Cantidad")
@@ -657,34 +683,28 @@ Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
 
                         'DGV_Muestra.Rows(WLugar).Cells("USPagadoLetra").Value = ""
 
-                        DGV_Muestra.Rows(WLugar).Cells("FEmbarque").Value = IIf(IsDBNull(RowOrd.Item("FechaEmbarque")), "", RowOrd.Item("FechaEmbarque"))
-                        DGV_Muestra.Rows(WLugar).Cells("SaldoLetra").Value = IIf(IsDBNull(RowOrd.Item("FechaDJai")), "", RowOrd.Item("FechaDJai"))
-                        DGV_Muestra.Rows(WLugar).Cells("ProveedorCod").Value = RowOrd.Item("Proveedor")
+                        TablaMuestra.Rows(WLugar).Item("FEmbarque") = IIf(IsDBNull(RowOrd.Item("FechaEmbarque")), "", RowOrd.Item("FechaEmbarque"))
+                        TablaMuestra.Rows(WLugar).Item("SaldoLetra") = IIf(IsDBNull(RowOrd.Item("FechaDJai")), "", RowOrd.Item("FechaDJai"))
+                        TablaMuestra.Rows(WLugar).Item("ProveedorCod") = RowOrd.Item("Proveedor")
 
-                        DGV_Muestra.Rows(WLugar).Cells("USPagadoLetra").Value = formatonumerico(IIf(IsDBNull(RowOrd.Item("pagoparcialletra")), "0", RowOrd.Item("pagoparcialletra")))
-
-
+                        TablaMuestra.Rows(WLugar).Item("USPagadoLetra") = formatonumerico(IIf(IsDBNull(RowOrd.Item("pagoparcialletra")), "0", RowOrd.Item("pagoparcialletra")))
+                        
                         REM Muestra.TextMatrix(WLugar, 5) = rstOrden!Articulo
                         REM Muestra.TextMatrix(WLugar, 6) = rstOrden!Cantidad
                         REM Muestra.TextMatrix(WLugar, 7) = rstOrden!Precio
                         REM Muestra.TextMatrix(WLugar, 12) = rstOrden!Derechos
-
-
-
+                        
                         WLugar += 1
 
                     End If
                 Next
-
-
-
-
-
+                
             End If
 
         Next CiclaEmpresa
 
-
+        'Paso la tabla como DataSource
+        DGV_Muestra.DataSource = TablaMuestra
 
         Dim ZZBorra As String = "N"
 
@@ -693,7 +713,7 @@ Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
 
         'ACUMULAMOS EL TOTAL DE LETRA PENDIENTE
         ZZSumaLetra = CalcularTotalLetraPendiente()
-       
+
 
 
 
@@ -802,7 +822,7 @@ Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
             lbl_ArticuloKg.Visible = True
             txt_Articulo.Visible = True
         End If
-        
+
     End Sub
 
     Private Function CalcularTotalLetraPendiente() As Double
@@ -971,70 +991,7 @@ Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
     Private Sub chk_LetraPendiente_CheckedChanged(sender As Object, e As EventArgs) Handles chk_LetraPendiente.CheckedChanged
         Proceso_Click()
     End Sub
-
-    ' Private Sub cbx_FiltroI_DropDownClosed(sender As Object, e As EventArgs) Handles cbx_FiltroI.DropDownClosed
-    '
-    '     ColumnaOpcion = cbx_FiltroI.SelectedIndex
-    '     ZZFiltroOrdenI = cbx_FiltroI.SelectedIndex
-    '     ZZTipoFiltro = 1
-    '
-    '
-    '
-    '     Select Case ColumnaOpcion
-    '         Case 0
-    '             Call Proceso_Click()
-    '
-    '         Case 1
-    '             With New Ventana_auxiliar(ColumnaOpcion, cbx_Activas.SelectedIndex)
-    '                 .Show(Me)
-    '             End With
-    '
-    '
-    '         Case 2
-    '             With New Ventana_auxiliar(ColumnaOpcion)
-    '                 .Show(Me)
-    '             End With
-    '
-    '
-    '         Case 3
-    '             With New Ventana_auxiliar(ColumnaOpcion)
-    '                 .Show(Me)
-    '             End With
-    '
-    '         Case 4, 6, 7
-    '             With New Ventana_auxiliar(ColumnaOpcion)
-    '                 .Show(Me)
-    '             End With
-    '
-    '
-    '         Case 5
-    '             With New Ventana_auxiliar(ColumnaOpcion)
-    '                 .Show(Me)
-    '             End With
-    '
-    '         Case 8, 9, 11, 12, 13
-    '             With New Ventana_auxiliar(ColumnaOpcion)
-    '                 .Show(Me)
-    '             End With
-    '         Case 10
-    '             With New Ventana_auxiliar(ColumnaOpcion)
-    '                 .Show(Me)
-    '             End With
-    '
-    '         Case 14
-    '             With New Ventana_auxiliar(ColumnaOpcion)
-    '                 .Show(Me)
-    '             End With
-    '
-    '         Case 15
-    '             With New Ventana_auxiliar(ColumnaOpcion)
-    '                 .Show(Me)
-    '             End With
-    '
-    '
-    '     End Select
-    ' End Sub
-
+    
     ' Public Sub PasaFiltro(Filtro As String) Implements ICentroImportaciones_auxiliar.PasaFiltro
     '     If Filtro <> "" Then
     '         Select Case ZZTipoFiltro
@@ -1503,171 +1460,7 @@ Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
     '
     '
     ' End Sub
-
-    ' Private Sub cbx_FiltroII_DropDownClosed(sender As Object, e As EventArgs) Handles cbx_FiltroII.DropDownClosed
-    '
-    '     Dim SelecionadoFiltro As Integer = cbx_FiltroII.SelectedIndex
-    '     ColumnaOpcionII = cbx_FiltroII.SelectedIndex
-    '
-    '
-    '
-    '     'LE AGREGO UN MAS 1 o 3 PARA QUE SE IGUALE A EL FILTRO I 
-    '     'QUE TIENE MAS VALORES
-    '     If SelecionadoFiltro > 0 Then
-    '         If SelecionadoFiltro >= 1 And SelecionadoFiltro <= 3 Then
-    '             SelecionadoFiltro += 1
-    '         Else
-    '             SelecionadoFiltro += 3
-    '         End If
-    '
-    '     End If
-    '
-    '     ZZFiltroOrdenII = cbx_FiltroII.SelectedIndex
-    '     ZZTipoFiltro = 2
-    '
-    '
-    '
-    '
-    '     Select Case SelecionadoFiltro
-    '         Case 0 'Vacio
-    '             '  Call Proceso_Click()
-    '
-    '         Case 1 'ORDEN
-    '             With New Ventana_auxiliar(SelecionadoFiltro)
-    '                 .Show(Me)
-    '             End With
-    '
-    '
-    '         Case 2 'PLANTA
-    '             With New Ventana_auxiliar(SelecionadoFiltro)
-    '                 .Show(Me)
-    '             End With
-    '
-    '
-    '         Case 3 'FECHA
-    '             With New Ventana_auxiliar(SelecionadoFiltro)
-    '                 .Show(Me)
-    '             End With
-    '
-    '         Case 4, 6, 7 '4- Proveedor/ 6-DJai / 7-Origen  
-    '             With New Ventana_auxiliar(SelecionadoFiltro)
-    '                 .Show(Me)
-    '             End With
-    '
-    '
-    '         Case 5 'Carpeta
-    '             With New Ventana_auxiliar(SelecionadoFiltro)
-    '                 .Show(Me)
-    '             End With
-    '
-    '         Case 8, 9, 11, 12, 13 '8-Incoterms /9-Transporte/11-TPago/12-PagoDespacho/13-PagoLetra
-    '             With New Ventana_auxiliar(SelecionadoFiltro)
-    '                 .Show(Me)
-    '             End With
-    '         Case 10 ' FLLegada
-    '             With New Ventana_auxiliar(SelecionadoFiltro)
-    '                 .Show(Me)
-    '             End With
-    '
-    '         Case 14 'VtoLetra
-    '             With New Ventana_auxiliar(SelecionadoFiltro)
-    '                 .Show(Me)
-    '             End With
-    '
-    '         Case 15 'M.Prima
-    '             With New Ventana_auxiliar(SelecionadoFiltro)
-    '                 .Show(Me)
-    '             End With
-    '
-    '
-    '     End Select
-    '
-    '
-    '
-    '
-    ' End Sub
-    '
-    ' Private Sub cbx_FiltroIII_DropDownClosed(sender As Object, e As EventArgs) Handles cbx_FiltroIII.DropDownClosed
-    '
-    '     Dim SelecionadoFiltro As Integer = cbx_FiltroIII.SelectedIndex
-    '     ColumnaOpcionIII = cbx_FiltroIII.SelectedIndex
-    '
-    '
-    '
-    '     'LE AGREGO UN MAS 1 o 3 PARA QUE SE IGUALE A EL FILTRO I 
-    '     'QUE TIENE MAS VALORES
-    '     If SelecionadoFiltro > 0 Then
-    '         If SelecionadoFiltro >= 1 And SelecionadoFiltro <= 3 Then
-    '             SelecionadoFiltro += 1
-    '         Else
-    '             SelecionadoFiltro += 3
-    '         End If
-    '
-    '     End If
-    '
-    '     ZZFiltroOrdenIII = cbx_FiltroIII.SelectedIndex
-    '     ZZTipoFiltro = 3
-    '
-    '
-    '
-    '
-    '     Select Case SelecionadoFiltro
-    '         Case 0 'Vacio
-    '             '  Call Proceso_Click()
-    '
-    '         Case 1 'ORDEN
-    '             With New Ventana_auxiliar(SelecionadoFiltro)
-    '                 .Show(Me)
-    '             End With
-    '
-    '
-    '         Case 2 'PLANTA
-    '             With New Ventana_auxiliar(SelecionadoFiltro)
-    '                 .Show(Me)
-    '             End With
-    '
-    '
-    '         Case 3 'FECHA
-    '             With New Ventana_auxiliar(SelecionadoFiltro)
-    '                 .Show(Me)
-    '             End With
-    '
-    '         Case 4, 6, 7 '4- Proveedor/ 6-DJai / 7-Origen  
-    '             With New Ventana_auxiliar(SelecionadoFiltro)
-    '                 .Show(Me)
-    '             End With
-    '
-    '
-    '         Case 5 'Carpeta
-    '             With New Ventana_auxiliar(SelecionadoFiltro)
-    '                 .Show(Me)
-    '             End With
-    '
-    '         Case 8, 9, 11, 12, 13 '8-Incoterms /9-Transporte/11-TPago/12-PagoDespacho/13-PagoLetra
-    '             With New Ventana_auxiliar(SelecionadoFiltro)
-    '                 .Show(Me)
-    '             End With
-    '         Case 10 ' FLLegada
-    '             With New Ventana_auxiliar(SelecionadoFiltro)
-    '                 .Show(Me)
-    '             End With
-    '
-    '         Case 14 'VtoLetra
-    '             With New Ventana_auxiliar(SelecionadoFiltro)
-    '                 .Show(Me)
-    '             End With
-    '
-    '         Case 15 'M.Prima
-    '             With New Ventana_auxiliar(SelecionadoFiltro)
-    '                 .Show(Me)
-    '             End With
-    '
-    '
-    '     End Select
-    '
-    '
-    ' End Sub
-
+    
     Private Sub DGV_Muestra_SortCompare(sender As Object, e As DataGridViewSortCompareEventArgs) Handles DGV_Muestra.SortCompare
         Dim num1, num2
 
@@ -1734,121 +1527,122 @@ Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
 
         e.Handled = True
 
+
     End Sub
 
-    ' Private Sub btn_Exportacion_Click(sender As Object, e As EventArgs) Handles btn_Exportacion.Click
-    '
-    '     Dim SQLCnlst As String = "DELETE ControlImpoImpre"
-    '
-    '     ExecuteNonQueries(Operador.Base, {SQLCnlst})
-    '
-    '     Dim ListaSQLCnslt As New List(Of String)
-    '
-    '     For Each DGVRow As DataGridViewRow In DGV_Muestra.SelectedRows
-    '
-    '         Dim ZOrden As String = DGVRow.Cells("Orden").Value
-    '         Dim ZPta As String = DGVRow.Cells("Pta").Value
-    '         Dim ZFecha As String = DGVRow.Cells("Fecha").Value
-    '         Dim ZProveedor As String = DGVRow.Cells("Proveedor").Value
-    '         Dim ZMoneda As String = DGVRow.Cells("Mon").Value
-    '         Dim ZCarpeta As String = DGVRow.Cells("Carpeta").Value
-    '         Dim ZDJai As String = DGVRow.Cells("Djai").Value
-    '         Dim ZOrigen As String = DGVRow.Cells("Origen").Value
-    '         Dim ZIncoterms As String = DGVRow.Cells("Incoterms").Value
-    '         Dim ZTransporte As String = DGVRow.Cells("Transporte").Value
-    '         Dim ZFLLegada As String = DGVRow.Cells("FLLegada").Value
-    '         Dim ZTPago As String = DGVRow.Cells("TPago").Value
-    '         Dim ZDespacho As String = DGVRow.Cells("Despacho").Value
-    '         Dim ZPagoDespacho As String = DGVRow.Cells("PagoDes").Value
-    '         Dim ZLetra As String = DGVRow.Cells("LetraTotal").Value
-    '         Dim ZPagoLetra As String = DGVRow.Cells("PagoLetra").Value
-    '         Dim ZVtoLetra As String = DGVRow.Cells("VtoLetra").Value
-    '         Dim ZPagoParcial As String = DGVRow.Cells("UsPagadoLetra").Value
-    '         Dim ZFEmbarque As String = DGVRow.Cells("FEmbarque").Value
-    '
-    '         Dim ZSumaI As String = "0"
-    '         If ZPagoDespacho = "Pendiente" Then
-    '             ZSumaI = ZDespacho
-    '         End If
-    '         Dim ZSumaII As String = "0"
-    '         If ZPagoLetra = "Pendiente" Then
-    '             ZSumaII = Str(Val(ZLetra) - Val(ZPagoParcial))
-    '             If Val(ZSumaII) < 0 Then
-    '                 ZSumaII = "0"
-    '             End If
-    '         End If
-    '
-    '
-    '         SQLCnlst = "INSERT INTO ControlImpoImpre (" _
-    '         & "Orden ," _
-    '         & "Pta ," _
-    '         & "Fecha ," _
-    '         & "Proveedor ," _
-    '         & "Moneda ," _
-    '         & "Carpeta ," _
-    '         & "Djai ," _
-    '         & "Origen ," _
-    '         & "Incoterms ," _
-    '         & "Transporte," _
-    '         & "FLLegada  ," _
-    '         & "TPago ," _
-    '         & "SumaI ," _
-    '         & "SumaII ," _
-    '         & "Despacho ," _
-    '         & "PagoDespacho ," _
-    '         & "Letra ," _
-    '         & "PagoLetra ," _
-    '         & "VtoLetra ," _
-    '         & "PagoParcial ," _
-    '         & "FEmbarque) " _
-    '         & "Values (" _
-    '         & "'" & ZOrden & "'," _
-    '         & "'" & ZPta & "'," _
-    '         & "'" & ZFecha & "'," _
-    '         & "'" & ZProveedor & "'," _
-    '         & "'" & ZMoneda & "'," _
-    '         & "'" & ZCarpeta & "'," _
-    '         & "'" & ZDJai & "'," _
-    '         & "'" & ZOrigen & "'," _
-    '         & "'" & ZIncoterms & "'," _
-    '         & "'" & ZTransporte & "'," _
-    '         & "'" & ZFLLegada & "'," _
-    '         & "'" & ZTPago & "'," _
-    '         & "'" & ZSumaI & "'," _
-    '         & "'" & ZSumaII & "'," _
-    '         & "'" & ZDespacho & "'," _
-    '         & "'" & ZPagoDespacho & "'," _
-    '         & "'" & ZLetra & "'," _
-    '         & "'" & ZPagoLetra & "'," _
-    '         & "'" & ZVtoLetra & "'," _
-    '         & "'" & ZPagoParcial & "'," _
-    '         & "'" & ZFEmbarque & "')"
-    '
-    '         ListaSQLCnslt.Add(SQLCnlst)
-    '     Next
-    '
-    '     If ListaSQLCnslt.Count > 0 Then
-    '         ExecuteNonQueries(Operador.Base, ListaSQLCnslt.ToArray())
-    '
-    '         With New VistaPrevia
-    '             .Reporte = New Reporte_CentroDe_Exportacion()
-    '
-    '             .Mostrar()
-    '         End With
-    '     End If
-    '
-    '
-    '
-    ' End Sub
-    '
-    ' Private Sub DGV_Muestra_MouseUp(sender As Object, e As MouseEventArgs) Handles DGV_Muestra.MouseUp
-    '
-    '     For Each cell As DataGridViewCell In DGV_Muestra.SelectedCells
-    '         DGV_Muestra.Rows(cell.RowIndex).Selected = True
-    '
-    '     Next
-    ' End Sub
-    '
+    Private Sub btn_Exportacion_Click(sender As Object, e As EventArgs) Handles btn_Exportacion.Click
+
+        Dim SQLCnlst As String = "DELETE ControlImpoImpre"
+
+        ExecuteNonQueries(Operador.Base, {SQLCnlst})
+
+        Dim ListaSQLCnslt As New List(Of String)
+
+        For Each DGVRow As DataGridViewRow In DGV_Muestra.SelectedRows
+
+            Dim ZOrden As String = DGVRow.Cells("Orden").Value
+            Dim ZPta As String = DGVRow.Cells("Pta").Value
+            Dim ZFecha As String = DGVRow.Cells("Fecha").Value
+            Dim ZProveedor As String = DGVRow.Cells("Proveedor").Value
+            Dim ZMoneda As String = DGVRow.Cells("Mon").Value
+            Dim ZCarpeta As String = DGVRow.Cells("Carpeta").Value
+            Dim ZDJai As String = DGVRow.Cells("Djai").Value
+            Dim ZOrigen As String = DGVRow.Cells("Origen").Value
+            Dim ZIncoterms As String = DGVRow.Cells("Incoterms").Value
+            Dim ZTransporte As String = DGVRow.Cells("Transporte").Value
+            Dim ZFLLegada As String = DGVRow.Cells("FLLegada").Value
+            Dim ZTPago As String = DGVRow.Cells("TPago").Value
+            Dim ZDespacho As String = DGVRow.Cells("Despacho").Value
+            Dim ZPagoDespacho As String = DGVRow.Cells("PagoDes").Value
+            Dim ZLetra As String = DGVRow.Cells("LetraTotal").Value
+            Dim ZPagoLetra As String = DGVRow.Cells("PagoLetra").Value
+            Dim ZVtoLetra As String = DGVRow.Cells("VtoLetra").Value
+            Dim ZPagoParcial As String = DGVRow.Cells("UsPagadoLetra").Value
+            Dim ZFEmbarque As String = DGVRow.Cells("FEmbarque").Value
+
+            Dim ZSumaI As String = "0"
+            If ZPagoDespacho = "Pendiente" Then
+                ZSumaI = ZDespacho
+            End If
+            Dim ZSumaII As String = "0"
+            If ZPagoLetra = "Pendiente" Then
+                ZSumaII = Str(Val(ZLetra) - Val(ZPagoParcial))
+                If Val(ZSumaII) < 0 Then
+                    ZSumaII = "0"
+                End If
+            End If
+
+
+            SQLCnlst = "INSERT INTO ControlImpoImpre (" _
+            & "Orden ," _
+            & "Pta ," _
+            & "Fecha ," _
+            & "Proveedor ," _
+            & "Moneda ," _
+            & "Carpeta ," _
+            & "Djai ," _
+            & "Origen ," _
+            & "Incoterms ," _
+            & "Transporte," _
+            & "FLLegada  ," _
+            & "TPago ," _
+            & "SumaI ," _
+            & "SumaII ," _
+            & "Despacho ," _
+            & "PagoDespacho ," _
+            & "Letra ," _
+            & "PagoLetra ," _
+            & "VtoLetra ," _
+            & "PagoParcial ," _
+            & "FEmbarque) " _
+            & "Values (" _
+            & "'" & ZOrden & "'," _
+            & "'" & ZPta & "'," _
+            & "'" & ZFecha & "'," _
+            & "'" & ZProveedor & "'," _
+            & "'" & ZMoneda & "'," _
+            & "'" & ZCarpeta & "'," _
+            & "'" & ZDJai & "'," _
+            & "'" & ZOrigen & "'," _
+            & "'" & ZIncoterms & "'," _
+            & "'" & ZTransporte & "'," _
+            & "'" & ZFLLegada & "'," _
+            & "'" & ZTPago & "'," _
+            & "'" & ZSumaI & "'," _
+            & "'" & ZSumaII & "'," _
+            & "'" & ZDespacho & "'," _
+            & "'" & ZPagoDespacho & "'," _
+            & "'" & ZLetra & "'," _
+            & "'" & ZPagoLetra & "'," _
+            & "'" & ZVtoLetra & "'," _
+            & "'" & ZPagoParcial & "'," _
+            & "'" & ZFEmbarque & "')"
+
+            ListaSQLCnslt.Add(SQLCnlst)
+        Next
+
+        If ListaSQLCnslt.Count > 0 Then
+            ExecuteNonQueries(Operador.Base, ListaSQLCnslt.ToArray())
+
+            With New VistaPrevia
+                .Reporte = New Reporte_CentroDe_Exportacion()
+
+                .Mostrar()
+            End With
+        End If
+
+
+
+    End Sub
+
+    Private Sub DGV_Muestra_MouseUp(sender As Object, e As MouseEventArgs) Handles DGV_Muestra.MouseUp
+
+        For Each cell As DataGridViewCell In DGV_Muestra.SelectedCells
+            DGV_Muestra.Rows(cell.RowIndex).Selected = True
+
+        Next
+    End Sub
+
     Private Sub DGV_Muestra_CellMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DGV_Muestra.CellMouseClick
         DGV_Muestra.Rows(DGV_Muestra.CurrentCell.RowIndex).Selected = True
     End Sub
@@ -1965,9 +1759,11 @@ Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
 
         tabla.DefaultView.RowFilter = Filtro
 
-       
-
+    End Sub
+    
+    Private Sub DGV_Muestra_Sorted(sender As Object, e As EventArgs) Handles DGV_Muestra.Sorted
+        ColorearCeldas()
     End Sub
 
-
+   
 End Class
