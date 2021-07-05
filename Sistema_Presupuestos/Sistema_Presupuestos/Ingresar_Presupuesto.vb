@@ -285,8 +285,6 @@ Public Class Ingresar_Presupuesto : Implements IAyudaProv
                 _SubirArchvios(txt_NroPresupuesto.Text)
             End If
 
-
-
             Dim Wowner As IActualzarDGV = TryCast(Owner, IActualzarDGV)
 
             If Wowner IsNot Nothing Then
@@ -298,7 +296,7 @@ Public Class Ingresar_Presupuesto : Implements IAyudaProv
             Close()
 
         Catch ex As Exception
-
+            MsgBox(ex.Message)
         End Try
 
     End Sub
@@ -349,6 +347,11 @@ Public Class Ingresar_Presupuesto : Implements IAyudaProv
 
     End Sub
     Public Function DirecctorioVacio(ByVal Ruta As String) As Boolean
+        '
+        ' Se crea la carpeta para que no haya que acordarse de crearla cada vez que se genera un acceso directo en una pc nueva.
+        '
+        If Not Directory.Exists(Ruta) Then Directory.CreateDirectory(Ruta)
+
         Return Directory.EnumerateFileSystemEntries(Ruta).Any()
     End Function
     Private Sub btn_CerrarPresupuesto_Click(sender As Object, e As EventArgs) Handles btn_CerrarPresupuesto.Click
