@@ -376,7 +376,7 @@ Public Class MenuPrincipal
             End With
         Else
             With New Sistema_Solicitud_Fondos.Ingreso_Solicitud
-                .Show()
+                .Show(Me)
             End With
         End If
         
@@ -394,11 +394,11 @@ Public Class MenuPrincipal
                 PermisoSistemaSolicitud = IIf(IsDBNull(WOperador.Item("SolicitudFondosEdicion")), "N", WOperador.Item("SolicitudFondosEdicion"))
                 If PermisoSistemaSolicitud = "S" Then
                     With New Sistema_Solicitud_Fondos.Gestion_Solicitudes
-                        .Show()
+                        .Show(Me)
                     End With
                 Else
                     With New Sistema_Solicitud_Fondos.AutoGestionSolicitudes
-                        .Show()
+                        .Show(Me)
                     End With
                 End If
             End If
@@ -432,7 +432,13 @@ Public Class MenuPrincipal
 
     Private Sub ListadoPagosSinImprimirToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ListadoPagosSinImprimirToolStripMenuItem.Click
         With New Listados_Pagos_SinImprimir
-            .Show()
+            .Show(Me)
+        End With
+    End Sub
+
+    Private Sub EmisiónDeNotaDeRetiroToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EmisiónDeNotaDeRetiroToolStripMenuItem.Click
+        With New EmisionNotaRetiro
+            .Show(Me)
         End With
     End Sub
 End Class
