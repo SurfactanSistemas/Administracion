@@ -23,12 +23,12 @@ Partial Class MenuPrincipal
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LayoutPrincipal = New System.Windows.Forms.TableLayoutPanel()
         Me.LayoutCabecera = New System.Windows.Forms.TableLayoutPanel()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -106,19 +106,19 @@ Partial Class MenuPrincipal
         Me.LayoutPrincipal.Margin = New System.Windows.Forms.Padding(0)
         Me.LayoutPrincipal.Name = "LayoutPrincipal"
         Me.LayoutPrincipal.RowCount = 3
-        Me.LayoutPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55.0!))
-        Me.LayoutPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 69.0!))
+        Me.LayoutPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45.0!))
+        Me.LayoutPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56.0!))
         Me.LayoutPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.LayoutPrincipal.Size = New System.Drawing.Size(1378, 590)
+        Me.LayoutPrincipal.Size = New System.Drawing.Size(1028, 479)
         Me.LayoutPrincipal.TabIndex = 0
         '
         'LayoutCabecera
         '
         Me.LayoutCabecera.BackColor = System.Drawing.Color.FromArgb(CType(CType(32, Byte), Integer), CType(CType(74, Byte), Integer), CType(CType(95, Byte), Integer))
         Me.LayoutCabecera.ColumnCount = 3
-        Me.LayoutCabecera.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 360.0!))
+        Me.LayoutCabecera.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 270.0!))
         Me.LayoutCabecera.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.LayoutCabecera.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 240.0!))
+        Me.LayoutCabecera.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 180.0!))
         Me.LayoutCabecera.Controls.Add(Me.Label1, 0, 0)
         Me.LayoutCabecera.Controls.Add(Me.Label2, 2, 0)
         Me.LayoutCabecera.Dock = System.Windows.Forms.DockStyle.Fill
@@ -129,8 +129,8 @@ Partial Class MenuPrincipal
         Me.LayoutCabecera.Name = "LayoutCabecera"
         Me.LayoutCabecera.RowCount = 1
         Me.LayoutCabecera.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.LayoutCabecera.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55.0!))
-        Me.LayoutCabecera.Size = New System.Drawing.Size(1378, 55)
+        Me.LayoutCabecera.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45.0!))
+        Me.LayoutCabecera.Size = New System.Drawing.Size(1028, 45)
         Me.LayoutCabecera.TabIndex = 0
         '
         'Label1
@@ -140,7 +140,7 @@ Partial Class MenuPrincipal
         Me.Label1.Location = New System.Drawing.Point(0, 0)
         Me.Label1.Margin = New System.Windows.Forms.Padding(0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(360, 55)
+        Me.Label1.Size = New System.Drawing.Size(270, 45)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Sistema de Exportaciones"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -149,10 +149,9 @@ Partial Class MenuPrincipal
         '
         Me.Label2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label2.Font = New System.Drawing.Font("Calibri", 16.0!, System.Drawing.FontStyle.Bold)
-        Me.Label2.Location = New System.Drawing.Point(1142, 0)
-        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label2.Location = New System.Drawing.Point(851, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(232, 55)
+        Me.Label2.Size = New System.Drawing.Size(174, 45)
         Me.Label2.TabIndex = 1
         Me.Label2.Text = "SURFACTAN S.A."
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -160,18 +159,18 @@ Partial Class MenuPrincipal
         'LayoutCuerpoPrincipal
         '
         Me.LayoutCuerpoPrincipal.ColumnCount = 2
-        Me.LayoutCuerpoPrincipal.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 112.0!))
+        Me.LayoutCuerpoPrincipal.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 84.0!))
         Me.LayoutCuerpoPrincipal.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.LayoutCuerpoPrincipal.Controls.Add(Me.dgvPrincipal, 1, 0)
         Me.LayoutCuerpoPrincipal.Controls.Add(Me.Panel1, 0, 0)
         Me.LayoutCuerpoPrincipal.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.LayoutCuerpoPrincipal.Location = New System.Drawing.Point(0, 124)
+        Me.LayoutCuerpoPrincipal.Location = New System.Drawing.Point(0, 101)
         Me.LayoutCuerpoPrincipal.Margin = New System.Windows.Forms.Padding(0)
         Me.LayoutCuerpoPrincipal.Name = "LayoutCuerpoPrincipal"
         Me.LayoutCuerpoPrincipal.RowCount = 1
         Me.LayoutCuerpoPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.LayoutCuerpoPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 466.0!))
-        Me.LayoutCuerpoPrincipal.Size = New System.Drawing.Size(1378, 466)
+        Me.LayoutCuerpoPrincipal.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 379.0!))
+        Me.LayoutCuerpoPrincipal.Size = New System.Drawing.Size(1028, 378)
         Me.LayoutCuerpoPrincipal.TabIndex = 1
         '
         'dgvPrincipal
@@ -182,17 +181,17 @@ Partial Class MenuPrincipal
         Me.dgvPrincipal.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NroProforma, Me.Fecha, Me.Cliente, Me.Razon, Me.Pais, Me.Total, Me.Combox_Estado, Me.FechaLimite, Me.PackingList, Me.PackingListImg, Me.Entregado, Me.Fecha_Limite, Me.Incoterm, Me.MV_Buque, Me.ETD_FechaSalida, Me.ETA_FechaArribo, Me.Peso_Neto, Me.Permiso_de_Embarque, Me.BL, Me.Forwarder, Me.Fecha_Cobro, Me.NroFactura, Me.SaldoFactura})
         Me.dgvPrincipal.ContextMenuStrip = Me.Menustrip_Grilla
         Me.dgvPrincipal.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.dgvPrincipal.Location = New System.Drawing.Point(132, 18)
-        Me.dgvPrincipal.Margin = New System.Windows.Forms.Padding(20, 18, 20, 18)
+        Me.dgvPrincipal.Location = New System.Drawing.Point(99, 15)
+        Me.dgvPrincipal.Margin = New System.Windows.Forms.Padding(15, 15, 15, 15)
         Me.dgvPrincipal.Name = "dgvPrincipal"
         Me.dgvPrincipal.ReadOnly = True
-        Me.dgvPrincipal.Size = New System.Drawing.Size(1226, 430)
+        Me.dgvPrincipal.Size = New System.Drawing.Size(914, 348)
         Me.dgvPrincipal.TabIndex = 0
         '
         'NroProforma
         '
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.NroProforma.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.NroProforma.DefaultCellStyle = DataGridViewCellStyle1
         Me.NroProforma.HeaderText = "Nro Proforma"
         Me.NroProforma.MaxInputLength = 6
         Me.NroProforma.Name = "NroProforma"
@@ -202,13 +201,13 @@ Partial Class MenuPrincipal
         'Fecha
         '
         Me.Fecha.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Fecha.DefaultCellStyle = DataGridViewCellStyle2
         Me.Fecha.HeaderText = "Fecha"
         Me.Fecha.MaxInputLength = 10
         Me.Fecha.Name = "Fecha"
         Me.Fecha.ReadOnly = True
-        Me.Fecha.Width = 76
+        Me.Fecha.Width = 62
         '
         'Cliente
         '
@@ -224,7 +223,7 @@ Partial Class MenuPrincipal
         Me.Razon.HeaderText = "Razon Social"
         Me.Razon.Name = "Razon"
         Me.Razon.ReadOnly = True
-        Me.Razon.Width = 110
+        Me.Razon.Width = 87
         '
         'Pais
         '
@@ -232,17 +231,17 @@ Partial Class MenuPrincipal
         Me.Pais.HeaderText = "Pais"
         Me.Pais.Name = "Pais"
         Me.Pais.ReadOnly = True
-        Me.Pais.Width = 64
+        Me.Pais.Width = 52
         '
         'Total
         '
         Me.Total.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Total.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Total.DefaultCellStyle = DataGridViewCellStyle3
         Me.Total.HeaderText = "Monto Total"
         Me.Total.Name = "Total"
         Me.Total.ReadOnly = True
-        Me.Total.Width = 103
+        Me.Total.Width = 82
         '
         'Combox_Estado
         '
@@ -250,7 +249,7 @@ Partial Class MenuPrincipal
         Me.Combox_Estado.HeaderText = "Estado"
         Me.Combox_Estado.Name = "Combox_Estado"
         Me.Combox_Estado.ReadOnly = True
-        Me.Combox_Estado.Width = 81
+        Me.Combox_Estado.Width = 65
         '
         'FechaLimite
         '
@@ -279,7 +278,7 @@ Partial Class MenuPrincipal
         Me.PackingListImg.ReadOnly = True
         Me.PackingListImg.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         Me.PackingListImg.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.PackingListImg.Width = 104
+        Me.PackingListImg.Width = 83
         '
         'Entregado
         '
@@ -308,7 +307,7 @@ Partial Class MenuPrincipal
         Me.MV_Buque.HeaderText = "M.V."
         Me.MV_Buque.Name = "MV_Buque"
         Me.MV_Buque.ReadOnly = True
-        Me.MV_Buque.Width = 65
+        Me.MV_Buque.Width = 54
         '
         'ETD_FechaSalida
         '
@@ -327,12 +326,12 @@ Partial Class MenuPrincipal
         'Peso_Neto
         '
         Me.Peso_Neto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Peso_Neto.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Peso_Neto.DefaultCellStyle = DataGridViewCellStyle4
         Me.Peso_Neto.HeaderText = "Peso Neto"
         Me.Peso_Neto.Name = "Peso_Neto"
         Me.Peso_Neto.ReadOnly = True
-        Me.Peso_Neto.Width = 95
+        Me.Peso_Neto.Width = 76
         '
         'Permiso_de_Embarque
         '
@@ -340,7 +339,7 @@ Partial Class MenuPrincipal
         Me.Permiso_de_Embarque.HeaderText = "Permiso de Embarque"
         Me.Permiso_de_Embarque.Name = "Permiso_de_Embarque"
         Me.Permiso_de_Embarque.ReadOnly = True
-        Me.Permiso_de_Embarque.Width = 162
+        Me.Permiso_de_Embarque.Width = 123
         '
         'BL
         '
@@ -349,7 +348,7 @@ Partial Class MenuPrincipal
         Me.BL.MinimumWidth = 45
         Me.BL.Name = "BL"
         Me.BL.ReadOnly = True
-        Me.BL.Width = 54
+        Me.BL.Width = 45
         '
         'Forwarder
         '
@@ -357,7 +356,7 @@ Partial Class MenuPrincipal
         Me.Forwarder.HeaderText = "Forwarder"
         Me.Forwarder.Name = "Forwarder"
         Me.Forwarder.ReadOnly = True
-        Me.Forwarder.Width = 101
+        Me.Forwarder.Width = 79
         '
         'Fecha_Cobro
         '
@@ -367,16 +366,16 @@ Partial Class MenuPrincipal
         '
         'NroFactura
         '
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.NroFactura.DefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.NroFactura.DefaultCellStyle = DataGridViewCellStyle5
         Me.NroFactura.HeaderText = "Nro. Factura"
         Me.NroFactura.Name = "NroFactura"
         Me.NroFactura.ReadOnly = True
         '
         'SaldoFactura
         '
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.SaldoFactura.DefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.SaldoFactura.DefaultCellStyle = DataGridViewCellStyle6
         Me.SaldoFactura.HeaderText = "Saldo Factura"
         Me.SaldoFactura.Name = "SaldoFactura"
         Me.SaldoFactura.ReadOnly = True
@@ -386,12 +385,12 @@ Partial Class MenuPrincipal
         Me.Menustrip_Grilla.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.Menustrip_Grilla.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1})
         Me.Menustrip_Grilla.Name = "Menustrip_Grilla"
-        Me.Menustrip_Grilla.Size = New System.Drawing.Size(234, 28)
+        Me.Menustrip_Grilla.Size = New System.Drawing.Size(197, 26)
         '
         'ToolStripMenuItem1
         '
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(233, 24)
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(196, 22)
         Me.ToolStripMenuItem1.Text = "Exportar Seleccionados"
         '
         'Panel1
@@ -405,7 +404,7 @@ Partial Class MenuPrincipal
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Margin = New System.Windows.Forms.Padding(0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(112, 466)
+        Me.Panel1.Size = New System.Drawing.Size(84, 378)
         Me.Panel1.TabIndex = 1
         '
         'btn_Exportar_Excel
@@ -413,10 +412,10 @@ Partial Class MenuPrincipal
         Me.btn_Exportar_Excel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.btn_Exportar_Excel.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btn_Exportar_Excel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btn_Exportar_Excel.Location = New System.Drawing.Point(7, 385)
-        Me.btn_Exportar_Excel.Margin = New System.Windows.Forms.Padding(13, 12, 0, 12)
+        Me.btn_Exportar_Excel.Location = New System.Drawing.Point(5, 313)
+        Me.btn_Exportar_Excel.Margin = New System.Windows.Forms.Padding(10, 10, 0, 10)
         Me.btn_Exportar_Excel.Name = "btn_Exportar_Excel"
-        Me.btn_Exportar_Excel.Size = New System.Drawing.Size(99, 69)
+        Me.btn_Exportar_Excel.Size = New System.Drawing.Size(74, 56)
         Me.btn_Exportar_Excel.TabIndex = 4
         Me.btn_Exportar_Excel.Text = "Exportar a Excel"
         Me.ToolTip1.SetToolTip(Me.btn_Exportar_Excel, "Abrir Formulario para Alta / Consulta de Proforma")
@@ -427,10 +426,10 @@ Partial Class MenuPrincipal
         Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.Button1.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Location = New System.Drawing.Point(7, 185)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(13, 12, 0, 12)
+        Me.Button1.Location = New System.Drawing.Point(5, 150)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(10, 10, 0, 10)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(99, 69)
+        Me.Button1.Size = New System.Drawing.Size(74, 56)
         Me.Button1.TabIndex = 3
         Me.Button1.Text = "Cerrar"
         Me.ToolTip1.SetToolTip(Me.Button1, "Cerrar Sistema")
@@ -441,10 +440,10 @@ Partial Class MenuPrincipal
         Me.btnAperturaArchivos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.btnAperturaArchivos.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnAperturaArchivos.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAperturaArchivos.Location = New System.Drawing.Point(7, 107)
-        Me.btnAperturaArchivos.Margin = New System.Windows.Forms.Padding(13, 12, 0, 12)
+        Me.btnAperturaArchivos.Location = New System.Drawing.Point(5, 87)
+        Me.btnAperturaArchivos.Margin = New System.Windows.Forms.Padding(10, 10, 0, 10)
         Me.btnAperturaArchivos.Name = "btnAperturaArchivos"
-        Me.btnAperturaArchivos.Size = New System.Drawing.Size(99, 69)
+        Me.btnAperturaArchivos.Size = New System.Drawing.Size(74, 56)
         Me.btnAperturaArchivos.TabIndex = 3
         Me.btnAperturaArchivos.Text = "Apertura por Articulos"
         Me.ToolTip1.SetToolTip(Me.btnAperturaArchivos, "Desplegar Información de Articulos por Proforma")
@@ -455,10 +454,10 @@ Partial Class MenuPrincipal
         Me.btnHistorialProforma.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.btnHistorialProforma.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnHistorialProforma.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnHistorialProforma.Location = New System.Drawing.Point(7, 261)
-        Me.btnHistorialProforma.Margin = New System.Windows.Forms.Padding(13, 12, 0, 12)
+        Me.btnHistorialProforma.Location = New System.Drawing.Point(5, 212)
+        Me.btnHistorialProforma.Margin = New System.Windows.Forms.Padding(10, 10, 0, 10)
         Me.btnHistorialProforma.Name = "btnHistorialProforma"
-        Me.btnHistorialProforma.Size = New System.Drawing.Size(99, 69)
+        Me.btnHistorialProforma.Size = New System.Drawing.Size(74, 56)
         Me.btnHistorialProforma.TabIndex = 3
         Me.btnHistorialProforma.Text = "Historial de Proforma"
         Me.ToolTip1.SetToolTip(Me.btnHistorialProforma, "Abrir Formulario para Alta / Consulta de Proforma")
@@ -470,10 +469,10 @@ Partial Class MenuPrincipal
         Me.btnNuevaProforma.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.btnNuevaProforma.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnNuevaProforma.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnNuevaProforma.Location = New System.Drawing.Point(7, 30)
-        Me.btnNuevaProforma.Margin = New System.Windows.Forms.Padding(13, 12, 0, 12)
+        Me.btnNuevaProforma.Location = New System.Drawing.Point(5, 24)
+        Me.btnNuevaProforma.Margin = New System.Windows.Forms.Padding(10, 10, 0, 10)
         Me.btnNuevaProforma.Name = "btnNuevaProforma"
-        Me.btnNuevaProforma.Size = New System.Drawing.Size(99, 69)
+        Me.btnNuevaProforma.Size = New System.Drawing.Size(74, 56)
         Me.btnNuevaProforma.TabIndex = 2
         Me.btnNuevaProforma.Text = "Nueva Proforma"
         Me.ToolTip1.SetToolTip(Me.btnNuevaProforma, "Abrir Formulario para Alta / Consulta de Proforma")
@@ -486,12 +485,12 @@ Partial Class MenuPrincipal
         Me.LayoutFiltros.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.LayoutFiltros.Controls.Add(Me.Panel2, 0, 0)
         Me.LayoutFiltros.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.LayoutFiltros.Location = New System.Drawing.Point(0, 55)
+        Me.LayoutFiltros.Location = New System.Drawing.Point(0, 45)
         Me.LayoutFiltros.Margin = New System.Windows.Forms.Padding(0)
         Me.LayoutFiltros.Name = "LayoutFiltros"
         Me.LayoutFiltros.RowCount = 1
         Me.LayoutFiltros.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.LayoutFiltros.Size = New System.Drawing.Size(1378, 69)
+        Me.LayoutFiltros.Size = New System.Drawing.Size(1028, 56)
         Me.LayoutFiltros.TabIndex = 2
         '
         'Panel2
@@ -501,7 +500,7 @@ Partial Class MenuPrincipal
         Me.Panel2.Location = New System.Drawing.Point(0, 0)
         Me.Panel2.Margin = New System.Windows.Forms.Padding(0)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(1378, 69)
+        Me.Panel2.Size = New System.Drawing.Size(1028, 56)
         Me.Panel2.TabIndex = 0
         '
         'GroupBox1
@@ -518,20 +517,19 @@ Partial Class MenuPrincipal
         Me.GroupBox1.Controls.Add(Me.txtFiltrarPor)
         Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.Control
-        Me.GroupBox1.Location = New System.Drawing.Point(13, 0)
-        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4)
+        Me.GroupBox1.Location = New System.Drawing.Point(10, 0)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4)
-        Me.GroupBox1.Size = New System.Drawing.Size(1361, 65)
+        Me.GroupBox1.Size = New System.Drawing.Size(1021, 53)
         Me.GroupBox1.TabIndex = 3
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Filtrar datos"
         '
         'ProgressBar1
         '
-        Me.ProgressBar1.Location = New System.Drawing.Point(1094, 35)
+        Me.ProgressBar1.Location = New System.Drawing.Point(820, 28)
+        Me.ProgressBar1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.ProgressBar1.Name = "ProgressBar1"
-        Me.ProgressBar1.Size = New System.Drawing.Size(260, 23)
+        Me.ProgressBar1.Size = New System.Drawing.Size(195, 19)
         Me.ProgressBar1.TabIndex = 8
         Me.ProgressBar1.Visible = False
         '
@@ -540,10 +538,10 @@ Partial Class MenuPrincipal
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Calibri", 11.0!, System.Drawing.FontStyle.Bold)
         Me.Label5.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label5.Location = New System.Drawing.Point(679, 26)
+        Me.Label5.Location = New System.Drawing.Point(509, 21)
         Me.Label5.Margin = New System.Windows.Forms.Padding(0)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(87, 23)
+        Me.Label5.Size = New System.Drawing.Size(68, 18)
         Me.Label5.TabIndex = 7
         Me.Label5.Text = "Producto:"
         Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -552,9 +550,10 @@ Partial Class MenuPrincipal
         '
         Me.btn_BuscarProducto.BackgroundImage = Global.SistemaExportacion.My.Resources.Resources.Consulta_Dat_N1
         Me.btn_BuscarProducto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btn_BuscarProducto.Location = New System.Drawing.Point(886, 22)
+        Me.btn_BuscarProducto.Location = New System.Drawing.Point(664, 18)
+        Me.btn_BuscarProducto.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.btn_BuscarProducto.Name = "btn_BuscarProducto"
-        Me.btn_BuscarProducto.Size = New System.Drawing.Size(34, 32)
+        Me.btn_BuscarProducto.Size = New System.Drawing.Size(26, 26)
         Me.btn_BuscarProducto.TabIndex = 6
         Me.btn_BuscarProducto.Text = "Button2"
         Me.ToolTip1.SetToolTip(Me.btn_BuscarProducto, "Buscar por Producto")
@@ -562,20 +561,20 @@ Partial Class MenuPrincipal
         '
         'txt_Producto
         '
-        Me.txt_Producto.Location = New System.Drawing.Point(769, 26)
+        Me.txt_Producto.Location = New System.Drawing.Point(577, 21)
+        Me.txt_Producto.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.txt_Producto.Mask = ">LL-00000-000"
         Me.txt_Producto.Name = "txt_Producto"
         Me.txt_Producto.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
-        Me.txt_Producto.Size = New System.Drawing.Size(117, 23)
+        Me.txt_Producto.Size = New System.Drawing.Size(89, 20)
         Me.txt_Producto.TabIndex = 5
         '
         'ckMostrarEntregadas
         '
         Me.ckMostrarEntregadas.AutoSize = True
-        Me.ckMostrarEntregadas.Location = New System.Drawing.Point(1100, 12)
-        Me.ckMostrarEntregadas.Margin = New System.Windows.Forms.Padding(4)
+        Me.ckMostrarEntregadas.Location = New System.Drawing.Point(825, 10)
         Me.ckMostrarEntregadas.Name = "ckMostrarEntregadas"
-        Me.ckMostrarEntregadas.Size = New System.Drawing.Size(224, 21)
+        Me.ckMostrarEntregadas.Size = New System.Drawing.Size(175, 17)
         Me.ckMostrarEntregadas.TabIndex = 4
         Me.ckMostrarEntregadas.Text = "Incluir Proformas Cerradas"
         Me.ckMostrarEntregadas.UseVisualStyleBackColor = True
@@ -586,10 +585,10 @@ Partial Class MenuPrincipal
         Me.btnLimpiarFiltros.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnLimpiarFiltros.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnLimpiarFiltros.Font = New System.Drawing.Font("Calibri", 11.0!, System.Drawing.FontStyle.Bold)
-        Me.btnLimpiarFiltros.Location = New System.Drawing.Point(936, 19)
-        Me.btnLimpiarFiltros.Margin = New System.Windows.Forms.Padding(13, 12, 0, 12)
+        Me.btnLimpiarFiltros.Location = New System.Drawing.Point(702, 15)
+        Me.btnLimpiarFiltros.Margin = New System.Windows.Forms.Padding(10, 10, 0, 10)
         Me.btnLimpiarFiltros.Name = "btnLimpiarFiltros"
-        Me.btnLimpiarFiltros.Size = New System.Drawing.Size(137, 32)
+        Me.btnLimpiarFiltros.Size = New System.Drawing.Size(103, 26)
         Me.btnLimpiarFiltros.TabIndex = 3
         Me.btnLimpiarFiltros.Text = "Limpiar Filtros"
         Me.btnLimpiarFiltros.UseVisualStyleBackColor = True
@@ -600,10 +599,9 @@ Partial Class MenuPrincipal
         Me.cmbTipoFiltro.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmbTipoFiltro.FormattingEnabled = True
         Me.cmbTipoFiltro.Items.AddRange(New Object() {"", "Nro de Proforma", "Fecha", "Cliente", "País", "S/Packing List", "Vencidas (S/Packing List)", "Razon Social", "Fecha Limite", "M.V.", "E.T.D", "E.T.A", "Peso Neto", "Permiso de Embarque", "BL", "Forwarder", "Estado"})
-        Me.cmbTipoFiltro.Location = New System.Drawing.Point(86, 26)
-        Me.cmbTipoFiltro.Margin = New System.Windows.Forms.Padding(4)
+        Me.cmbTipoFiltro.Location = New System.Drawing.Point(64, 21)
         Me.cmbTipoFiltro.Name = "cmbTipoFiltro"
-        Me.cmbTipoFiltro.Size = New System.Drawing.Size(143, 25)
+        Me.cmbTipoFiltro.Size = New System.Drawing.Size(108, 21)
         Me.cmbTipoFiltro.TabIndex = 2
         '
         'Label3
@@ -611,10 +609,10 @@ Partial Class MenuPrincipal
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Calibri", 11.0!, System.Drawing.FontStyle.Bold)
         Me.Label3.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label3.Location = New System.Drawing.Point(5, 26)
+        Me.Label3.Location = New System.Drawing.Point(4, 21)
         Me.Label3.Margin = New System.Windows.Forms.Padding(0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(84, 23)
+        Me.Label3.Size = New System.Drawing.Size(67, 18)
         Me.Label3.TabIndex = 1
         Me.Label3.Text = "Columna:"
         Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -624,20 +622,19 @@ Partial Class MenuPrincipal
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Calibri", 11.0!, System.Drawing.FontStyle.Bold)
         Me.Label4.ForeColor = System.Drawing.SystemColors.Control
-        Me.Label4.Location = New System.Drawing.Point(236, 26)
+        Me.Label4.Location = New System.Drawing.Point(177, 21)
         Me.Label4.Margin = New System.Windows.Forms.Padding(0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(206, 23)
+        Me.Label4.Size = New System.Drawing.Size(162, 18)
         Me.Label4.TabIndex = 1
         Me.Label4.Text = "Aquellos que contengan:"
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'txtFiltrarPor
         '
-        Me.txtFiltrarPor.Location = New System.Drawing.Point(442, 26)
-        Me.txtFiltrarPor.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtFiltrarPor.Location = New System.Drawing.Point(332, 21)
         Me.txtFiltrarPor.Name = "txtFiltrarPor"
-        Me.txtFiltrarPor.Size = New System.Drawing.Size(217, 23)
+        Me.txtFiltrarPor.Size = New System.Drawing.Size(164, 20)
         Me.txtFiltrarPor.TabIndex = 0
         '
         'BackgroundWorker1
@@ -650,11 +647,10 @@ Partial Class MenuPrincipal
         '
         'MenuPrincipal
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1378, 590)
+        Me.ClientSize = New System.Drawing.Size(1028, 479)
         Me.Controls.Add(Me.LayoutPrincipal)
-        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "MenuPrincipal"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized

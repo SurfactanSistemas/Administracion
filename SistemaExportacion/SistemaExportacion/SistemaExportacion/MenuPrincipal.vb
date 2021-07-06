@@ -908,36 +908,29 @@ Public Class MenuPrincipal : Implements IActualizaGrillaProforma
     Private Sub BackgroundWorker1_DoWork(ByVal sender As Object, ByVal e As DoWorkEventArgs) Handles BackgroundWorker1.DoWork
         ProgressBar1.Visible = True
 
-        Dim listaFilas As New List(Of Integer)
-        For Each dgv_row As DataGridViewRow In dgvPrincipal.Rows
+        Dim SQLCnslt As String = "SELECT Proforma FROM ProformaExportacion WHERE Producto = '" & txt_Producto.Text & "'"
+        Dim WProfs As DataTable = GetAll(SQLCnslt, "SurfactanSa")
 
-            Dim SQLCnslt As String = "SELECT Producto FROM ProformaExportacion WHERE Proforma = '" & dgv_row.Cells("NroProforma").Value & "' AND Producto = '" & txt_Producto.Text & "'"
-            Dim RowCnslt As DataRow = GetSingle(SQLCnslt, "SurfactanSa")
-            If RowCnslt Is Nothing Then
-                listaFilas.Add(dgv_row.Index)
-            End If
-            BackgroundWorker1.ReportProgress(1)
-        Next
+        BackgroundWorker1.ReportProgress(1, WProfs)
 
-        listaFilas.Sort()
-        listaFilas.Reverse()
-
-        If listaFilas.Count > 0 Then
-            For i = 0 To listaFilas.Count - 1
-                'For Each index As Integer In listaFilas
-                'dgvPrincipal.Rows.Remove(dgvPrincipal.Rows(index))
-                dgvPrincipal.Rows.Remove(dgvPrincipal.Rows(listaFilas(i)))
-                BackgroundWorker1.ReportProgress(1)
-            Next
-        End If
-        
     End Sub
 
     Private Sub BackgroundWorker1_ProgressChanged(ByVal sender As Object, ByVal e As ProgressChangedEventArgs) Handles BackgroundWorker1.ProgressChanged
 
-        ProgressBar1.Increment(1)
+        Dim ZProf As List(Of DataRow) = TryCast(e.UserState, DataTable).Rows.Cast(Of DataRow).ToList()
+
+        ProgressBar1.Value = dgvPrincipal.Rows.Count + 1
+
+        For Each dgv_row As DataGridViewRow In dgvPrincipal.Rows
+
+            dgv_row.Visible = ZProf.Exists(Function(r As DataRow) r("Proforma") = dgv_row.Cells("NroProforma").Value)
+
+            ProgressBar1.Increment(1)
+
+        Next
+
         ProgressBar1.Refresh()
-       
+
     End Sub
 
     Private Sub BackgroundWorker1_RunWorkerCompleted(ByVal sender As Object, ByVal e As RunWorkerCompletedEventArgs) Handles BackgroundWorker1.RunWorkerCompleted
@@ -957,4 +950,5 @@ Public Class MenuPrincipal : Implements IActualizaGrillaProforma
                 txt_Producto.Text = ""
         End Select
     End Sub
+
 End Class
