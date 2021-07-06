@@ -923,8 +923,10 @@ Public Class MenuPrincipal : Implements IActualizaGrillaProforma
         listaFilas.Reverse()
 
         If listaFilas.Count > 0 Then
-            For Each index As Integer In listaFilas
-                dgvPrincipal.Rows.Remove(dgvPrincipal.Rows(index))
+            For i = 0 To listaFilas.Count - 1
+                'For Each index As Integer In listaFilas
+                'dgvPrincipal.Rows.Remove(dgvPrincipal.Rows(index))
+                dgvPrincipal.Rows.Remove(dgvPrincipal.Rows(listaFilas(i)))
                 BackgroundWorker1.ReportProgress(1)
             Next
         End If

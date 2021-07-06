@@ -2990,7 +2990,7 @@ Public Class Pagos
                                         Dim WCuerpo As String = "Acaba de generarse el pago para la solicitud de Fondos Nro. <strong>" & NroSoliInterno & "</strong> <br/>" _
                                                             & "Para el numero de cuenta <strong>" & RowSoli.Item("Cuenta") & " " & RowCuenta.Item("Descripcion") & "</strong>"
 
-                                        '_EnviarEmail(Mail, "", WAsunto, WCuerpo, Nothing)
+                                        _EnviarEmail(Mail, "", WAsunto, WCuerpo, Nothing)
                                     End If
                                 End If
                             End If
@@ -3014,11 +3014,11 @@ Public Class Pagos
                     .Imprimir()
                 End With
 
-                'Try
-                '    BuscarArchivosParaImprimirEnCarpetaSolicitudFondos(NroSoliInterno)
-                'Catch ex As System.Exception
-                '    MsgBox("Hubo un error al intentar imprimir archivos adjuntos de la solicitud de fondos", vbExclamation)
-                'End Try
+                Try
+                    BuscarArchivosParaImprimirEnCarpetaSolicitudFondos(NroSoliInterno)
+                Catch ex As System.Exception
+                    MsgBox("Hubo un error al intentar imprimir archivos adjuntos de la solicitud de fondos", vbExclamation)
+                End Try
 
 
             End If
@@ -3103,25 +3103,29 @@ Public Class Pagos
     Private Sub BuscarArchivosParaImprimirEnCarpetaSolicitudFondos(ByVal _NroSoliInterno As String)
         Try
             Dim _path As String = "\\193.168.0.2\g$\vb\NET\ArchivosRelacionadosSolicitudFondos\"
-            Dim RutaCarpeta As String = _path & "\" & _NroSoliInterno
+            Dim RutaCarpeta As String = _path & _NroSoliInterno
 
             If Not Directory.Exists(RutaCarpeta) Then Throw New System.Exception("No se encuentra la carpeta base de la Solicitud. Path: " & _path)
 
 
             'ACA FALTA MOFICAR PARA QUE IMPRIMA TODOS LOS ARCHIVOS MENOS LA SOLICITUD ORIGINAL
-            Dim _file As String = RutaCarpeta & "\" & "SolicitudOriginal_" & _NroSoliInterno & ".pdf"
+            ' Dim _file As String = RutaCarpeta & "\" & "SolicitudOriginal_" & _NroSoliInterno & ".pdf"
+            For Each FileName As String In Directory.GetFiles(RutaCarpeta)
+                If FileName = RutaCarpeta & "\" & "SolicitudOriginal_" & _NroSoliInterno & ".pdf" Then
+                    Continue For
+                End If
+                'If Not File.Exists(_file) Then Throw New System.Exception("No se encuentra el archivo. Path: " & _file)
+                Dim p = New Process()
+                p.StartInfo = New ProcessStartInfo
 
-            If Not File.Exists(_file) Then Throw New System.Exception("No se encuentra el archivo. Path: " & _file)
+                p.StartInfo.CreateNoWindow = True
+                p.StartInfo.Verb = "print"
+                p.StartInfo.FileName = FileName ''put the correct path here
 
-            Dim p = New Process()
-            p.StartInfo = New ProcessStartInfo
+                p.Start()
 
-            p.StartInfo.CreateNoWindow = True
-            p.StartInfo.Verb = "print"
-            p.StartInfo.FileName = _file ''put the correct path here
-
-            p.Start()
-
+            Next
+            
         Catch ex As System.Exception
             Throw New System.Exception(ex.Message)
         End Try
