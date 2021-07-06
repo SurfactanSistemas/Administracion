@@ -1830,7 +1830,10 @@ Public Class Proforma : Implements IConsultaPedPrepo
     End Sub
 
     Private Function _RutaCarpetaArchivos()
-        Return Configuration.ConfigurationManager.AppSettings("ARCHIVOS_RELACIONADOS")
+        Dim WRuta As String = Configuration.ConfigurationManager.AppSettings("ARCHIVOS_RELACIONADOS")
+        If Not Directory.Exists(WRuta) Then Return Directory.CreateDirectory(WRuta)
+
+        Return WRuta
     End Function
 
     Private Sub txtObservacionesII_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtObservacionesII.KeyDown
