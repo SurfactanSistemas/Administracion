@@ -2,9 +2,10 @@
 Imports Util.Clases.Query
 Imports Util.Clases.Helper
 Imports System.IO
+Imports System.Windows.Forms.VisualStyles
 
 Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
-    
+
     'VariablesGlobales en Version vieja
     Dim Seleccion As String
     Dim SeleccionII As String
@@ -25,18 +26,8 @@ Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
     Dim FiltroVtoII As String
     Dim ZProcesa As String
 
+    Dim TipoOrd As Boolean = True
 
-
-    Dim ZZFiltroOrdenI As String
-    Dim ZZFiltroOrdenII As String
-    Dim ZZFiltroOrdenIII As String
-
-
-    Dim ZZColumnaI As Integer
-    Dim ZZColumnaII As Integer
-    Dim ZZColumnaIII As Integer
-
-    Dim ZZTipoFiltro As Integer
 
     'Fin de Globales
 
@@ -60,12 +51,12 @@ Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
             .Add("Transporte")
             .Add("Fllegada")
             .Add("TPago")
-            .Add("ImpoDespacho")
+            .Add("ImpoDespacho", Type.GetType("System.Decimal"))
             .Add("PagoDes")
-            .Add("LetraTotal")
+            .Add("LetraTotal", Type.GetType("System.Double"))
             .Add("PagoLetra")
             .Add("VtoLetra")
-            .Add("USPagadoLetra")
+            .Add("USPagadoLetra", Type.GetType("System.Double"))
             .Add("FEmbarque")
             .Add("SaldoLetra")
             .Add("ProveedorCod")
@@ -76,9 +67,16 @@ Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
             .Add("Tipo_cbx")
             .Add("Estado")
             .Add("FechaIngreso")
+            'Columnas invisibles para ordenar las fechas
+            .Add("FechaOrd")
+            .Add("FLlegadaOrd")
+            .Add("VtoLetraOrd")
+            .Add("FEmbarqueOrd")
+            .Add("SaldoLetraOrd")
+            .Add("FechaIngresoOrd")
         End With
 
-        
+
 
 
         If ZProcesa = "N" Then
@@ -172,7 +170,7 @@ Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
                 End If
 
             Next CiclaEmpresa
-            
+
 
             For Each RowPasa As DataRow In TablaPasa.Rows
 
@@ -504,6 +502,7 @@ Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
 
                         'DGV_Muestra.Rows(WLugar).Cells("Fecha").Value = Microsoft.VisualBasic.Left$(RowOrd.Item("Fecha"), 5) + "/" + Mid$(RowOrd.Item("Fecha"), 9, 2)
                         TablaMuestra.Rows(WLugar).Item("Fecha") = RowOrd.Item("Fecha")
+                        TablaMuestra.Rows(WLugar).Item("Fechaord") = ordenaFecha(RowOrd.Item("Fecha"))
 
                         TablaMuestra.Rows(WLugar).Item("Proveedor") = RowOrd.Item("Nombre")
 
@@ -520,7 +519,7 @@ Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
 
                         Dim ZDJai As String = IIf(IsDBNull(RowOrd.Item("DJai")), "", RowOrd.Item("DJai"))
                         TablaMuestra.Rows(WLugar).Item("Djai") = ZDJai
-                        
+
 
                         TablaMuestra.Rows(WLugar).Item("Origen") = RowOrd.Item("Origen")
 
@@ -554,6 +553,7 @@ Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
                         End Select
 
                         TablaMuestra.Rows(WLugar).Item("FLLegada") = IIf(IsDBNull(RowOrd.Item("FechaLlegada")), "", RowOrd.Item("FechaLlegada"))
+                        TablaMuestra.Rows(WLugar).Item("FLLegadaord") = ordenaFecha(TablaMuestra.Rows(WLugar).Item("FLLegada"))
 
                         Dim TipoPago As Integer = IIf(IsDBNull(RowOrd.Item("TipoPago")), 0, RowOrd.Item("TipoPago"))
                         Select Case TipoPago
@@ -567,7 +567,9 @@ Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
                                 TablaMuestra.Rows(WLugar).Item("TPago") = ""
                         End Select
 
-                        TablaMuestra.Rows(WLugar).Item("ImpoDespacho") = formatonumerico(IIf(IsDBNull(RowOrd.Item("ImpoDespacho")), "0", RowOrd.Item("ImpoDespacho")))
+
+                        Dim WImpoDespacho As String = formatonumerico(IIf(IsDBNull(RowOrd.Item("ImpoDespacho")), "0", RowOrd.Item("ImpoDespacho")))
+                        TablaMuestra.Rows(WLugar).Item("ImpoDespacho") = Val(WImpoDespacho)
 
                         Dim WPagoDespacho As Integer = OrDefault(RowOrd.Item("PagoDespacho"), 0)
                         Select Case WPagoDespacho
@@ -582,17 +584,19 @@ Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
 
                         ' saaa = rstOrden!Carpeta
 
+                        Dim WImpoLetra As String = formatonumerico(IIf(IsDBNull(RowOrd.Item("ImpoLetra")), "0", RowOrd.Item("ImpoLetra")))
+                        TablaMuestra.Rows(WLugar).Item("LetraTotal") = Val(WImpoLetra)
+                        'TablaMuestra.Rows(WLugar).Item("LetraTotal") = formatonumerico(IIf(IsDBNull(RowOrd.Item("ImpoLetra")), "0", RowOrd.Item("ImpoLetra")))
 
-                        TablaMuestra.Rows(WLugar).Item("LetraTotal") = formatonumerico(IIf(IsDBNull(RowOrd.Item("ImpoLetra")), "0", RowOrd.Item("ImpoLetra")))
 
-
-                        Select Case WPagoLetra
+                        Select Case WPagoletra
                             Case 0
                                 TablaMuestra.Rows(WLugar).Item("PagoLetra") = "Pendiente"
                             Case Else
                                 TablaMuestra.Rows(WLugar).Item("PagoLetra") = "Pagado"
                         End Select
                         TablaMuestra.Rows(WLugar).Item("VtoLetra") = IIf(IsDBNull(RowOrd.Item("VtoLetra")), "0", RowOrd.Item("VtoLetra"))
+                        TablaMuestra.Rows(WLugar).Item("VtoLetraord") = ordenaFecha(TablaMuestra.Rows(WLugar).Item("VtoLetra"))
 
                         If ColumnaOpcion = 15 Then
                             ZZSumaArticulo = ZZSumaArticulo + RowOrd.Item("Cantidad")
@@ -605,11 +609,17 @@ Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
                         'DGV_Muestra.Rows(WLugar).Cells("USPagadoLetra").Value = ""
 
                         TablaMuestra.Rows(WLugar).Item("FEmbarque") = IIf(IsDBNull(RowOrd.Item("FechaEmbarque")), "", RowOrd.Item("FechaEmbarque"))
+                        TablaMuestra.Rows(WLugar).Item("FEmbarqueord") = ordenaFecha(TablaMuestra.Rows(WLugar).Item("FEmbarque"))
+
                         TablaMuestra.Rows(WLugar).Item("SaldoLetra") = IIf(IsDBNull(RowOrd.Item("FechaDJai")), "", RowOrd.Item("FechaDJai"))
+                        TablaMuestra.Rows(WLugar).Item("SaldoLetraord") = ordenaFecha(TablaMuestra.Rows(WLugar).Item("SaldoLetra"))
                         TablaMuestra.Rows(WLugar).Item("ProveedorCod") = RowOrd.Item("Proveedor")
 
-                        TablaMuestra.Rows(WLugar).Item("USPagadoLetra") = formatonumerico(IIf(IsDBNull(RowOrd.Item("pagoparcialletra")), "0", RowOrd.Item("pagoparcialletra")))
-                        
+
+                        Dim Wpagoparcialletra As String = formatonumerico(IIf(IsDBNull(RowOrd.Item("pagoparcialletra")), "0", RowOrd.Item("pagoparcialletra")))
+                        TablaMuestra.Rows(WLugar).Item("USPagadoLetra") = Val(Wpagoparcialletra)
+                        'TablaMuestra.Rows(WLugar).Item("USPagadoLetra") = formatonumerico(IIf(IsDBNull(RowOrd.Item("pagoparcialletra")), "0", RowOrd.Item("pagoparcialletra")))
+
                         REM Muestra.TextMatrix(WLugar, 5) = rstOrden!Articulo
                         REM Muestra.TextMatrix(WLugar, 6) = rstOrden!Cantidad
                         REM Muestra.TextMatrix(WLugar, 7) = rstOrden!Precio
@@ -623,13 +633,14 @@ Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
                         TablaMuestra.Rows(WLugar).Item("Tipo_cbx") = Trim(OrDefault(RowOrd.Item("Tipo_cbx"), ""))
                         TablaMuestra.Rows(WLugar).Item("Estado") = Trim(OrDefault(RowOrd.Item("Estado"), ""))
                         TablaMuestra.Rows(WLugar).Item("FechaIngreso") = Trim(OrDefault(RowOrd.Item("FechaIngreso"), ""))
+                        TablaMuestra.Rows(WLugar).Item("FechaIngresoord") = ordenaFecha(TablaMuestra.Rows(WLugar).Item("FechaIngreso"))
 
-                        
+
                         WLugar += 1
 
                     End If
                 Next
-                
+
             End If
 
         Next CiclaEmpresa
@@ -645,7 +656,7 @@ Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
         'ACUMULAMOS EL TOTAL DE LETRA PENDIENTE
         ZZSumaLetra = CalcularTotalLetraPendiente()
 
-        
+
         txt_SumaDespacho.Text = formatonumerico(ZZSumaDespacho)
         txt_SumaLetra.Text = formatonumerico(ZZSumaLetra)
 
@@ -664,7 +675,7 @@ Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
         For Each rowMuestra As DataGridViewRow In DGV_Muestra.Rows
 
             Dim ZPagoLetra As String = rowMuestra.Cells("PagoLetra").Value
-            
+
             Select Case ZPagoLetra
                 Case "Pendiente"
                     ZZSumaLetra = ZZSumaLetra + Val(rowMuestra.Cells("LetraTotal").Value) - Val(rowMuestra.Cells("USPagadoLetra").Value)
@@ -798,7 +809,7 @@ Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
 
 
         'cbx_Ordenamiento.SelectedIndex = 5
-        
+
         cbx_Activas.SelectedIndex = 0
 
         ZProcesa = ""
@@ -825,7 +836,7 @@ Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
     Private Sub chk_DespachoPendiente_CheckedChanged(sender As Object, e As EventArgs) Handles chk_DespachoPendiente.CheckedChanged
         Proceso_Click()
     End Sub
-    
+
     ' Public Sub PasaFiltro(Filtro As String) Implements ICentroImportaciones_auxiliar.PasaFiltro
     '     If Filtro <> "" Then
     '         Select Case ZZTipoFiltro
@@ -1294,7 +1305,7 @@ Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
     '
     '
     ' End Sub
-    
+
     Private Sub DGV_Muestra_SortCompare(sender As Object, e As DataGridViewSortCompareEventArgs) Handles DGV_Muestra.SortCompare
         Dim num1, num2
 
@@ -1512,7 +1523,7 @@ Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
         With New IngresoOrdenComprayObservaciones(Worden, WCarpeta, WEmpresa)
             .Show()
         End With
-        
+
         'With New Ingreso_OrdenCompra(Worden, WCarpeta, WEmpresa)
         '    .Show()
         'End With
@@ -1522,55 +1533,12 @@ Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
         '    .Show()
         'End With
     End Sub
-
-    Private Sub dgv_DGV_Muestra_SortCompare(sender As Object, e As DataGridViewSortCompareEventArgs) Handles DGV_Muestra.SortCompare
-
-        Dim num1, num2
-
-        Select Case e.Column.Index
-            Case 1, 3, 4, 6, 7, 8, 9, 11, 13, 15
-                'String
-                num1 = e.CellValue1
-                num2 = e.CellValue2
-
-            Case 0, 5
-                'INTEGER
-                num1 = CInt(e.CellValue1)
-                num2 = CInt(e.CellValue2)
-
-            Case 12, 14, 17
-                'Double
-                num1 = CDbl(e.CellValue1)
-                num2 = CDbl(e.CellValue2)
-
-            Case 2, 10, 16, 18, 19
-                'Fechas
-                num1 = ordenaFecha(e.CellValue1)
-                num2 = ordenaFecha(e.CellValue2)
-
-
-            Case Else
-                Exit Sub
-        End Select
-
-        If num1 < num2 Then
-            e.SortResult = -1
-        ElseIf num1 = num2 Then
-            e.SortResult = 0
-        Else
-            e.SortResult = 1
-        End If
-
-        e.Handled = True
-
-    End Sub
-
-
+    
     Private Sub txt_Filtro_KeyUp(sender As Object, e As KeyEventArgs) Handles txt_Filtro.KeyUp
         AplicarFiltro()
     End Sub
 
-   
+
 
     Private Sub AplicarFiltro()
 
@@ -1594,10 +1562,235 @@ Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
         tabla.DefaultView.RowFilter = Filtro
 
     End Sub
-    
+
     Private Sub DGV_Muestra_Sorted(sender As Object, e As EventArgs) Handles DGV_Muestra.Sorted
         ColorearCeldas()
     End Sub
 
-   
+    Private Sub DGV_Muestra_ColumnHeaderMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DGV_Muestra.ColumnHeaderMouseClick
+        
+        If DGV_Muestra.Rows.Count > 0 Then
+            Select Case e.ColumnIndex
+                Case 0
+                    If TipoOrd Then
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "Orden asc"
+                        TipoOrd = False
+                    Else
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "Orden desc"
+                        TipoOrd = True
+                    End If
+                Case 1
+                    If TipoOrd Then
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "Pta asc"
+                        TipoOrd = False
+                    Else
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "Pta desc"
+                        TipoOrd = True
+                    End If
+                Case 2
+                    If TipoOrd Then
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "FechaOrd asc"
+                        TipoOrd = False
+                    Else
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "FechaOrd desc"
+                        TipoOrd = True
+                    End If
+                Case 3
+                    If TipoOrd Then
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "Proveedor asc"
+                        TipoOrd = False
+                    Else
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "Proveedor desc"
+                        TipoOrd = True
+                    End If
+                Case 4
+                    If TipoOrd Then
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "Mon asc"
+                        TipoOrd = False
+                    Else
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "Mon desc"
+                        TipoOrd = True
+                    End If
+                Case 5
+                    If TipoOrd Then
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "Carpeta asc"
+                        TipoOrd = False
+                    Else
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "Carpeta desc"
+                        TipoOrd = True
+                    End If
+                Case 6
+                    If TipoOrd Then
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "Djai asc"
+                        TipoOrd = False
+                    Else
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "Djai desc"
+                        TipoOrd = True
+                    End If
+                Case 7
+                    If TipoOrd Then
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "Origen asc"
+                        TipoOrd = False
+                    Else
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "Origen desc"
+                        TipoOrd = True
+                    End If
+                Case 8
+                    If TipoOrd Then
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "Incoterms asc"
+                        TipoOrd = False
+                    Else
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "Incoterms desc"
+                        TipoOrd = True
+                    End If
+                Case 9
+                    If TipoOrd Then
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "Transporte asc"
+                        TipoOrd = False
+                    Else
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "Transporte desc"
+                        TipoOrd = True
+                    End If
+                Case 10
+                    If TipoOrd Then
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "FllegadaOrd asc"
+                        TipoOrd = False
+                    Else
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "FllegadaOrd desc"
+                        TipoOrd = True
+                    End If
+                Case 11
+                    If TipoOrd Then
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "TPago asc"
+                        TipoOrd = False
+                    Else
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "TPago desc"
+                        TipoOrd = True
+                    End If
+                Case 12
+                    If TipoOrd Then
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "ImpoDespacho asc"
+
+                        TipoOrd = False
+                    Else
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "ImpoDespacho desc"
+                        TipoOrd = True
+                    End If
+                Case 13
+                    If TipoOrd Then
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "PagosDes asc"
+                        TipoOrd = False
+                    Else
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "PagosDes desc"
+                        TipoOrd = True
+                    End If
+                Case 14
+                    If TipoOrd Then
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "LetraTotal asc"
+                        TipoOrd = False
+                    Else
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "LetraTotal desc"
+                        TipoOrd = True
+                    End If
+                Case 15
+                    If TipoOrd Then
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "PagoLetra asc"
+                        TipoOrd = False
+                    Else
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "PagoLetra desc"
+                        TipoOrd = True
+                    End If
+                Case 16
+                    If TipoOrd Then
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "VtoLetraOrd asc"
+                        TipoOrd = False
+                    Else
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "VtoLetraOrd desc"
+                        TipoOrd = True
+                    End If
+                Case 17
+                    If TipoOrd Then
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "USPagadoLetra asc"
+                        TipoOrd = False
+                    Else
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "USPagadoLetra desc"
+                        TipoOrd = True
+                    End If
+                Case 18
+                    If TipoOrd Then
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "FEmbarqueOrd asc"
+                        TipoOrd = False
+                    Else
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "FEmbarqueOrd desc"
+                        TipoOrd = True
+                    End If
+                Case 19
+                    If TipoOrd Then
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "SaldoLetraOrd asc"
+                        TipoOrd = False
+                    Else
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "SaldoLetraOrd desc"
+                        TipoOrd = True
+                    End If
+                Case 21
+                    If TipoOrd Then
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "BL asc"
+                        TipoOrd = False
+                    Else
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "BL desc"
+                        TipoOrd = True
+                    End If
+                Case 22
+                    If TipoOrd Then
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "Buque asc"
+                        TipoOrd = False
+                    Else
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "Buque desc"
+                        TipoOrd = True
+                    End If
+                Case 23
+                    If TipoOrd Then
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "Contenedor asc"
+                        TipoOrd = False
+                    Else
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "Contenedor desc"
+                        TipoOrd = True
+                    End If
+                Case 24
+                    If TipoOrd Then
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "Despacho asc"
+                        TipoOrd = False
+                    Else
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "Despacho desc"
+                        TipoOrd = True
+                    End If
+                Case 25
+                    If TipoOrd Then
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "Tipo_cbx asc"
+                        TipoOrd = False
+                    Else
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "Tipo_cbx desc"
+                        TipoOrd = True
+                    End If
+                Case 26
+                    If TipoOrd Then
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "Estado asc"
+                        TipoOrd = False
+                    Else
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "Estado desc"
+                        TipoOrd = True
+                    End If
+                Case 27
+                    If TipoOrd Then
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "FechaIngresoOrd asc"
+                        TipoOrd = False
+                    Else
+                        TryCast(DGV_Muestra.DataSource, DataTable).DefaultView.Sort = "FechaIngresoOrd desc"
+                        TipoOrd = True
+                    End If
+
+            End Select
+
+        End If
+    End Sub
 End Class

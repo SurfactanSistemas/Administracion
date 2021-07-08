@@ -2927,7 +2927,8 @@ Public Class Pagos
                 Select Case txtProveedor.Text
                     Case "10167878480", "10000000100", "10071081483", "10069345023", "10066352912", "10023969933", "10014123562"
                         If MsgBox("Se detectó que está grabando un Anticipo. ¿Desea que se envíe la OP por Mail?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
-                              btnEnviarAviso_Click(Nothing, Nothing)
+                            'btnEnviarAviso_Click(Nothing, Nothing)
+                            'DESCOMENTAR
                             WTipoAvisoMailOp = "1"
                         End If
                 End Select
@@ -2990,7 +2991,8 @@ Public Class Pagos
                                         Dim WCuerpo As String = "Acaba de generarse el pago para la solicitud de Fondos Nro. <strong>" & NroSoliInterno & "</strong> <br/>" _
                                                             & "Para el numero de cuenta <strong>" & RowSoli.Item("Cuenta") & " " & RowCuenta.Item("Descripcion") & "</strong>"
 
-                                        _EnviarEmail(Mail, "", WAsunto, WCuerpo, Nothing)
+                                        ' _EnviarEmail(Mail, "", WAsunto, WCuerpo, Nothing)
+                                        ' DESCOMENTAR
                                     End If
                                 End If
                             End If
