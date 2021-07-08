@@ -2973,7 +2973,7 @@ Public Class Pagos
 
 
                 ExecuteNonQueries("SurfactanSa", {SQLCnlst})
-                
+
                 Try 'PARA ENVIAR MAIL AVISO A LAS CUENTAS
                     SQLCnlst = "SELECT Tipo, Solicitante, Cuenta FROM SolicitudFondos WHERE NroSolicitud = '" & NroSoliInterno & "'"
                     Dim RowSoli As DataRow = GetSingle(SQLCnlst, "SurfactanSa")
@@ -2996,7 +2996,7 @@ Public Class Pagos
                                     End If
                                 End If
                             End If
-                        End If                        
+                        End If
                     End If
 
                 Catch ex As System.Exception
@@ -3127,7 +3127,7 @@ Public Class Pagos
                 p.Start()
 
             Next
-            
+
         Catch ex As System.Exception
             Throw New System.Exception(ex.Message)
         End Try
