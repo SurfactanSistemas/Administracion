@@ -92,8 +92,12 @@ Public Class IngresoOrdenComprayObservaciones
             txt_Buque.Text = IIf(IsDBNull(RowOrden.Item("Buque")), "", RowOrden.Item("Buque"))
             txt_Contenedor.Text = IIf(IsDBNull(RowOrden.Item("Contenedor")), "", RowOrden.Item("Contenedor"))
             txt_Despacho.Text = IIf(IsDBNull(RowOrden.Item("Despacho")), "", RowOrden.Item("Despacho"))
-            cbx_Tipo.SelectedItem = IIf(IsDBNull(RowOrden.Item("Tipo_cbx")), "", Trim(RowOrden.Item("Tipo_cbx")))
-            cbx_Estado.SelectedItem = IIf(IsDBNull(RowOrden.Item("Estado")), "", Trim(RowOrden.Item("Estado")))
+            'cbx_Tipo.SelectedItem = IIf(IsDBNull(RowOrden.Item("Tipo_cbx")), "", Trim(RowOrden.Item("Tipo_cbx")))
+            Dim WTipo_cbx As String = OrDefault(RowOrden.Item("Tipo_cbx"), "")
+            cbx_Tipo.SelectedItem = Wtipo_cbx
+            'cbx_Estado.SelectedItem = IIf(IsDBNull(RowOrden.Item("Estado")), "", Trim(RowOrden.Item("Estado")))
+            Dim WEstado As String = OrDefault(RowOrden.Item("Estado"), "")
+            cbx_Estado.SelectedItem = WEstado
             txt_FechaIngreso.Text = IIf(IsDBNull(RowOrden.Item("FechaIngreso")), "", RowOrden.Item("FechaIngreso"))
         End If
 
