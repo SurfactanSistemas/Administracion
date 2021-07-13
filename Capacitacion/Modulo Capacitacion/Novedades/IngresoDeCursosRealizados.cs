@@ -19,6 +19,8 @@ namespace Modulo_Capacitacion.Novedades
 
         private int WTipoConsulta;
 
+        private bool WEnviarAvisoAResponsables = false;
+
         //bool Modificar = true;
         public IngresoDeCursosRealizados()
         {
@@ -279,6 +281,8 @@ namespace Modulo_Capacitacion.Novedades
                 cmb.SelectedIndex = 0;
             }
 
+            WEnviarAvisoAResponsables = false;
+
             pnlAyuda.Visible = false;
             WTipoConsulta = 0;
 
@@ -414,6 +418,18 @@ namespace Modulo_Capacitacion.Novedades
                         frm.Imprimir();
                     }
 
+                    // Se envía aviso a responsables en caso de que haya algún valor fuera del límite de Horas por planilla.
+                    if (WEnviarAvisoAResponsables)
+                    {
+                        VistaPrevia frm = new VistaPrevia();
+                        frm.CargarReporte(new planillacursada(), "{Cursadas.Curso} = {Curso.Codigo} AND {Cursadas.Legajo} = {Legajo.Codigo} AND {Legajo.Renglon} = 1 AND {Cursadas.Codigo} = " + WCodigo);
+                        
+                        frm.GuardarComoPDF("cursada.pdf", "c:/temp");
+                        
+                        frm.EnviarPorEmail("ggiachello@surfactan.com.ar", "c:/temp/cursada.pdf",
+                            "Aviso de nueva Cursada cargada", "Se ha cargado la Planilla de Cursada " + txtCodigo.Text + " con " + txtHoras.Text + ".", "aolano@surfactan.com.ar; ebiglieri@surfactan.com.ar");
+                    }
+
                     btnLimpiar.PerformClick();
                 }
 
@@ -424,6 +440,30 @@ namespace Modulo_Capacitacion.Novedades
         {
             // Verificamos que hayan legajos cargados.
             if (dgvGrilla.Rows.Count == 0) return false;
+
+            // Se agrega validación en la cantidad de horas cargadas.
+            txtHoras.Text = Helper.FormatoNumerico(txtHoras.Text);
+
+            double WHoras = double.Parse(txtHoras.Text);
+
+            if (WHoras == 0)
+            {
+                MessageBox.Show("Debe indicar la cantidad de Horas realizadas en la Cursada.");
+                return false;
+            }
+
+            WEnviarAvisoAResponsables = false;
+
+            // Límite de 10 Horas estimado por EB (13/07/2021).
+            if (WHoras >= 10)
+            {
+                if (MessageBox.Show("Está registrando " + txtHoras.Text + "Hs ¿Está seguro?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != System.Windows.Forms.DialogResult.Yes)
+                {
+                    return false;
+                }
+
+                WEnviarAvisoAResponsables = true;
+            }
 
             // Validamos que se haya cargado un tema.
             if (txtTema.Text.Trim() == "")

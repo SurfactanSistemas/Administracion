@@ -33,14 +33,19 @@ namespace Modulo_Capacitacion.Novedades
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.LBPerfil = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.dgvGrilla = new Util.DBDataGridView();
+            this.Legajo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DNI = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Sector = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Observaciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.asignarNuevoLegajoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copiarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -87,11 +92,6 @@ namespace Modulo_Capacitacion.Novedades
             this.dgvAyuda = new System.Windows.Forms.DataGridView();
             this.label9 = new System.Windows.Forms.Label();
             this.txtAyuda = new System.Windows.Forms.TextBox();
-            this.Legajo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DNI = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Sector = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Observaciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -181,14 +181,14 @@ namespace Modulo_Capacitacion.Novedades
             this.Sector,
             this.Observaciones});
             this.dgvGrilla.ContextMenuStrip = this.contextMenuStrip1;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(217)))), ((int)(((byte)(232)))));
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(170)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvGrilla.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(217)))), ((int)(((byte)(232)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(170)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvGrilla.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvGrilla.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvGrilla.DoubleBuffered = true;
             this.dgvGrilla.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
@@ -203,6 +203,53 @@ namespace Modulo_Capacitacion.Novedades
             this.dgvGrilla.TabIndex = 36;
             this.dgvGrilla.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvGrilla_RowHeaderMouseDoubleClick);
             this.dgvGrilla.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgvGrilla_MouseDown);
+            // 
+            // Legajo
+            // 
+            this.Legajo.DataPropertyName = "Legajo";
+            this.Legajo.HeaderText = "Legajo";
+            this.Legajo.Name = "Legajo";
+            this.Legajo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Legajo.Width = 45;
+            // 
+            // Nombre
+            // 
+            this.Nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Nombre.DataPropertyName = "Descripcion";
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Nombre.Width = 50;
+            // 
+            // DNI
+            // 
+            this.DNI.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.DNI.DefaultCellStyle = dataGridViewCellStyle2;
+            this.DNI.HeaderText = "DNI";
+            this.DNI.MinimumWidth = 100;
+            this.DNI.Name = "DNI";
+            this.DNI.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Sector
+            // 
+            this.Sector.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Sector.DataPropertyName = "Sector";
+            this.Sector.HeaderText = "Sector";
+            this.Sector.Name = "Sector";
+            this.Sector.ReadOnly = true;
+            this.Sector.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Sector.Width = 44;
+            // 
+            // Observaciones
+            // 
+            this.Observaciones.DataPropertyName = "Observaciones";
+            this.Observaciones.HeaderText = "Observaciones";
+            this.Observaciones.MaxInputLength = 50;
+            this.Observaciones.MinimumWidth = 300;
+            this.Observaciones.Name = "Observaciones";
+            this.Observaciones.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Observaciones.Width = 300;
             // 
             // contextMenuStrip1
             // 
@@ -557,6 +604,7 @@ namespace Modulo_Capacitacion.Novedades
             // 
             this.txtHoras.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtHoras.Location = new System.Drawing.Point(286, 43);
+            this.txtHoras.MaxLength = 6;
             this.txtHoras.Name = "txtHoras";
             this.txtHoras.Size = new System.Drawing.Size(54, 20);
             this.txtHoras.TabIndex = 47;
@@ -711,7 +759,7 @@ namespace Modulo_Capacitacion.Novedades
             this.dgvAyuda.ReadOnly = true;
             this.dgvAyuda.RowHeadersWidth = 5;
             this.dgvAyuda.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.dgvAyuda.Size = new System.Drawing.Size(482, 214);
+            this.dgvAyuda.Size = new System.Drawing.Size(483, 214);
             this.dgvAyuda.TabIndex = 2;
             this.dgvAyuda.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvAyuda_CellMouseDoubleClick);
             // 
@@ -732,53 +780,6 @@ namespace Modulo_Capacitacion.Novedades
             this.txtAyuda.TabIndex = 0;
             this.txtAyuda.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtAyuda_KeyDown);
             this.txtAyuda.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtAyuda_KeyUp);
-            // 
-            // Legajo
-            // 
-            this.Legajo.DataPropertyName = "Legajo";
-            this.Legajo.HeaderText = "Legajo";
-            this.Legajo.Name = "Legajo";
-            this.Legajo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Legajo.Width = 45;
-            // 
-            // Nombre
-            // 
-            this.Nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Nombre.DataPropertyName = "Descripcion";
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            this.Nombre.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Nombre.Width = 50;
-            // 
-            // DNI
-            // 
-            this.DNI.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.DNI.DefaultCellStyle = dataGridViewCellStyle3;
-            this.DNI.HeaderText = "DNI";
-            this.DNI.MinimumWidth = 100;
-            this.DNI.Name = "DNI";
-            this.DNI.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Sector
-            // 
-            this.Sector.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Sector.DataPropertyName = "Sector";
-            this.Sector.HeaderText = "Sector";
-            this.Sector.Name = "Sector";
-            this.Sector.ReadOnly = true;
-            this.Sector.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Sector.Width = 44;
-            // 
-            // Observaciones
-            // 
-            this.Observaciones.DataPropertyName = "Observaciones";
-            this.Observaciones.HeaderText = "Observaciones";
-            this.Observaciones.MaxInputLength = 50;
-            this.Observaciones.MinimumWidth = 300;
-            this.Observaciones.Name = "Observaciones";
-            this.Observaciones.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Observaciones.Width = 300;
             // 
             // IngresoDeCursosRealizados
             // 
