@@ -50,6 +50,7 @@ Partial Class MenuPrincipal
         Me.SolicitudDeFondosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GestionarSolicitudDeFondosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ImportarEchequesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EmisiónDeNotaDeRetiroToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ConsultaDeCuentaCorrientePorPantallaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CuentaCorrienteDeProveedoresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -108,7 +109,7 @@ Partial Class MenuPrincipal
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.btnCambio = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.EmisiónDeNotaDeRetiroToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PresupuestosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
@@ -174,7 +175,7 @@ Partial Class MenuPrincipal
         '
         'NovedadesToolStripMenuItem
         '
-        Me.NovedadesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IngresoDeNovedadesToolStripMenuItem, Me.ConsultaDeRemitosToolStripMenuItem, Me.AplicacionDeCorpobantesToolStripMenuItem, Me.IngresoDePagosToolStripMenuItem, Me.DepositosToolStripMenuItem, Me.RecibosToolStripMenuItem, Me.ConsultaDeChequesToolStripMenuItem, Me.InteresesToolStripMenuItem, Me.SeleccionDeRecibosAAplicarDifverenciaDeCambioToolStripMenuItem, Me.IngresoDeProveedorAPagoSemanalToolStripMenuItem, Me.OrdenDePagoVirtualToolStripMenuItem, Me.SolicitudDeFondosToolStripMenuItem, Me.GestionarSolicitudDeFondosToolStripMenuItem, Me.ImportarEchequesToolStripMenuItem, Me.EmisiónDeNotaDeRetiroToolStripMenuItem})
+        Me.NovedadesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IngresoDeNovedadesToolStripMenuItem, Me.ConsultaDeRemitosToolStripMenuItem, Me.AplicacionDeCorpobantesToolStripMenuItem, Me.IngresoDePagosToolStripMenuItem, Me.DepositosToolStripMenuItem, Me.RecibosToolStripMenuItem, Me.ConsultaDeChequesToolStripMenuItem, Me.InteresesToolStripMenuItem, Me.SeleccionDeRecibosAAplicarDifverenciaDeCambioToolStripMenuItem, Me.IngresoDeProveedorAPagoSemanalToolStripMenuItem, Me.OrdenDePagoVirtualToolStripMenuItem, Me.SolicitudDeFondosToolStripMenuItem, Me.GestionarSolicitudDeFondosToolStripMenuItem, Me.ImportarEchequesToolStripMenuItem, Me.EmisiónDeNotaDeRetiroToolStripMenuItem, Me.PresupuestosToolStripMenuItem})
         Me.NovedadesToolStripMenuItem.Name = "NovedadesToolStripMenuItem"
         Me.NovedadesToolStripMenuItem.Size = New System.Drawing.Size(78, 20)
         Me.NovedadesToolStripMenuItem.Text = "Novedades"
@@ -290,6 +291,12 @@ Partial Class MenuPrincipal
         Me.ImportarEchequesToolStripMenuItem.Name = "ImportarEchequesToolStripMenuItem"
         Me.ImportarEchequesToolStripMenuItem.Size = New System.Drawing.Size(350, 22)
         Me.ImportarEchequesToolStripMenuItem.Text = "Importar E-cheques"
+        '
+        'EmisiónDeNotaDeRetiroToolStripMenuItem
+        '
+        Me.EmisiónDeNotaDeRetiroToolStripMenuItem.Name = "EmisiónDeNotaDeRetiroToolStripMenuItem"
+        Me.EmisiónDeNotaDeRetiroToolStripMenuItem.Size = New System.Drawing.Size(350, 22)
+        Me.EmisiónDeNotaDeRetiroToolStripMenuItem.Text = "Emisión de Nota de Retiro"
         '
         'ListadosToolStripMenuItem
         '
@@ -668,11 +675,11 @@ Partial Class MenuPrincipal
         Me.Button1.UseVisualStyleBackColor = True
         Me.Button1.Visible = False
         '
-        'EmisiónDeNotaDeRetiroToolStripMenuItem
+        'PresupuestosToolStripMenuItem
         '
-        Me.EmisiónDeNotaDeRetiroToolStripMenuItem.Name = "EmisiónDeNotaDeRetiroToolStripMenuItem"
-        Me.EmisiónDeNotaDeRetiroToolStripMenuItem.Size = New System.Drawing.Size(350, 22)
-        Me.EmisiónDeNotaDeRetiroToolStripMenuItem.Text = "Emisión de Nota de Retiro"
+        Me.PresupuestosToolStripMenuItem.Name = "PresupuestosToolStripMenuItem"
+        Me.PresupuestosToolStripMenuItem.Size = New System.Drawing.Size(350, 22)
+        Me.PresupuestosToolStripMenuItem.Text = "Presupuestos"
         '
         'MenuPrincipal
         '
@@ -781,4 +788,5 @@ Partial Class MenuPrincipal
     Friend WithEvents ListadoEChequesUtilizadosAFechaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ListadoPagosSinImprimirToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents EmisiónDeNotaDeRetiroToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents PresupuestosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class

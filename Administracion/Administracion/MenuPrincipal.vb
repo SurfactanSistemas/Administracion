@@ -437,8 +437,32 @@ Public Class MenuPrincipal
     End Sub
 
     Private Sub EmisiónDeNotaDeRetiroToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EmisiónDeNotaDeRetiroToolStripMenuItem.Click
-        With New EmisionNotaRetiro
-            .Show(Me)
+        With New LoginNotaRetiro
+
+            Dim res = .ShowDialog(Me)
+
+            If res = Windows.Forms.DialogResult.OK Then
+
+                With New EmisionNotaRetiro
+                    .Show(Me)
+                End With
+
+            End If
+
         End With
+        
+    End Sub
+
+    Private Sub PresupuestosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PresupuestosToolStripMenuItem.Click
+        Try
+            '
+            ' Evitamos iniciar dos veces el proceso por error. Permitimos que falle de manera silenciosa.
+            '
+            If Process.GetProcessesByName("Sistema_presupuestos").Length > 0 Then Exit Sub
+            Process.Start("\\193.168.0.2\g$\vb\NET\Sistema Presupuestos\Debug\Sistema_presupuestos.exe")
+
+        Catch ex As Exception
+
+        End Try
     End Sub
 End Class

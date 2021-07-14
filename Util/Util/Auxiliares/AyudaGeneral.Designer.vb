@@ -161,7 +161,7 @@ Partial Class AyudaGeneral
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "AyudaGeneral"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         CType(Me.dgvDatos, System.ComponentModel.ISupportInitialize).EndInit()

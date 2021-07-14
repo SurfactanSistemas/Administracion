@@ -537,6 +537,12 @@
     <Compile Include="Novedades\Notas de retiro\EmisionNotaRetiro.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Novedades\Notas de retiro\LoginNotaRetiro.Designer.vb">
+      <DependentUpon>LoginNotaRetiro.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Novedades\Notas de retiro\LoginNotaRetiro.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Novedades\Notas de retiro\ReporteNotaRetiro.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1321,6 +1327,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Novedades\Notas de retiro\EmisionNotaRetiro.resx">
       <DependentUpon>EmisionNotaRetiro.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Novedades\Notas de retiro\LoginNotaRetiro.resx">
+      <DependentUpon>LoginNotaRetiro.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Novedades\Notas de retiro\ReporteNotaRetiro.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

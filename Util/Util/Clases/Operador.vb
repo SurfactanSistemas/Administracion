@@ -6,4 +6,5 @@
     Public Shared Descripcion As String = ""
     Public Shared Perfil As String = ""
     Public Shared Solifondos_Sector As String = ""
+    Public Shared FirmaDigital As String = ""
 End Class

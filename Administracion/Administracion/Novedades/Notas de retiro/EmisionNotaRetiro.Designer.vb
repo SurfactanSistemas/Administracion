@@ -46,21 +46,23 @@ Partial Class EmisionNotaRetiro
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.txtQueRetirar = New System.Windows.Forms.TextBox()
         Me.txtFechaRetiro = New System.Windows.Forms.MaskedTextBox()
+        Me.btnSugerirResp = New System.Windows.Forms.Button()
+        Me.btnSugerirDestinatarios = New System.Windows.Forms.Button()
         Me.btnConsulta = New System.Windows.Forms.Button()
+        Me.txtDireccion = New System.Windows.Forms.TextBox()
+        Me.Label12 = New System.Windows.Forms.Label()
         Me.txtHorarios = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.txtNombreRespRetiro = New System.Windows.Forms.TextBox()
         Me.txtMailRetira = New System.Windows.Forms.TextBox()
+        Me.Label13 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtMailDestinatario = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txtDestinatario = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.txtDireccion = New System.Windows.Forms.TextBox()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.txtNombreRespRetiro = New System.Windows.Forms.TextBox()
         Me.Panel2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -111,6 +113,8 @@ Partial Class EmisionNotaRetiro
         Me.GroupBox1.Controls.Add(Me.GroupBox5)
         Me.GroupBox1.Controls.Add(Me.GroupBox2)
         Me.GroupBox1.Controls.Add(Me.txtFechaRetiro)
+        Me.GroupBox1.Controls.Add(Me.btnSugerirResp)
+        Me.GroupBox1.Controls.Add(Me.btnSugerirDestinatarios)
         Me.GroupBox1.Controls.Add(Me.btnConsulta)
         Me.GroupBox1.Controls.Add(Me.txtDireccion)
         Me.GroupBox1.Controls.Add(Me.Label12)
@@ -315,6 +319,38 @@ Partial Class EmisionNotaRetiro
         Me.txtFechaRetiro.Text = "00000000"
         Me.txtFechaRetiro.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
+        'btnSugerirResp
+        '
+        Me.btnSugerirResp.BackgroundImage = Global.Administracion.My.Resources.Resources.Consulta_Dat_N1
+        Me.btnSugerirResp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnSugerirResp.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnSugerirResp.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnSugerirResp.FlatAppearance.BorderSize = 0
+        Me.btnSugerirResp.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnSugerirResp.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnSugerirResp.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSugerirResp.Location = New System.Drawing.Point(637, 65)
+        Me.btnSugerirResp.Name = "btnSugerirResp"
+        Me.btnSugerirResp.Size = New System.Drawing.Size(29, 21)
+        Me.btnSugerirResp.TabIndex = 2
+        Me.btnSugerirResp.UseVisualStyleBackColor = True
+        '
+        'btnSugerirDestinatarios
+        '
+        Me.btnSugerirDestinatarios.BackgroundImage = Global.Administracion.My.Resources.Resources.Consulta_Dat_N1
+        Me.btnSugerirDestinatarios.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnSugerirDestinatarios.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnSugerirDestinatarios.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control
+        Me.btnSugerirDestinatarios.FlatAppearance.BorderSize = 0
+        Me.btnSugerirDestinatarios.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control
+        Me.btnSugerirDestinatarios.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnSugerirDestinatarios.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSugerirDestinatarios.Location = New System.Drawing.Point(637, 41)
+        Me.btnSugerirDestinatarios.Name = "btnSugerirDestinatarios"
+        Me.btnSugerirDestinatarios.Size = New System.Drawing.Size(29, 21)
+        Me.btnSugerirDestinatarios.TabIndex = 2
+        Me.btnSugerirDestinatarios.UseVisualStyleBackColor = True
+        '
         'btnConsulta
         '
         Me.btnConsulta.BackgroundImage = Global.Administracion.My.Resources.Resources.Consulta_Dat_N1
@@ -331,6 +367,23 @@ Partial Class EmisionNotaRetiro
         Me.btnConsulta.TabIndex = 2
         Me.ToolTip1.SetToolTip(Me.btnConsulta, "Buscar datos desde Proveedor")
         Me.btnConsulta.UseVisualStyleBackColor = True
+        '
+        'txtDireccion
+        '
+        Me.txtDireccion.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtDireccion.Location = New System.Drawing.Point(136, 118)
+        Me.txtDireccion.Name = "txtDireccion"
+        Me.txtDireccion.Size = New System.Drawing.Size(530, 20)
+        Me.txtDireccion.TabIndex = 1
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(7, 122)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(128, 13)
+        Me.Label12.TabIndex = 0
+        Me.Label12.Text = "DIRECCION DE RETIRO"
         '
         'txtHorarios
         '
@@ -358,13 +411,29 @@ Partial Class EmisionNotaRetiro
         Me.Label5.TabIndex = 0
         Me.Label5.Text = "FECHA RETIRO"
         '
+        'txtNombreRespRetiro
+        '
+        Me.txtNombreRespRetiro.Location = New System.Drawing.Point(139, 67)
+        Me.txtNombreRespRetiro.Name = "txtNombreRespRetiro"
+        Me.txtNombreRespRetiro.Size = New System.Drawing.Size(175, 20)
+        Me.txtNombreRespRetiro.TabIndex = 1
+        '
         'txtMailRetira
         '
         Me.txtMailRetira.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower
         Me.txtMailRetira.Location = New System.Drawing.Point(390, 67)
         Me.txtMailRetira.Name = "txtMailRetira"
-        Me.txtMailRetira.Size = New System.Drawing.Size(276, 20)
+        Me.txtMailRetira.Size = New System.Drawing.Size(241, 20)
         Me.txtMailRetira.TabIndex = 1
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(6, 70)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(133, 13)
+        Me.Label13.TabIndex = 0
+        Me.Label13.Text = "NOMBRE RESP. RETIRO"
         '
         'Label4
         '
@@ -380,7 +449,7 @@ Partial Class EmisionNotaRetiro
         Me.txtMailDestinatario.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower
         Me.txtMailDestinatario.Location = New System.Drawing.Point(76, 42)
         Me.txtMailDestinatario.Name = "txtMailDestinatario"
-        Me.txtMailDestinatario.Size = New System.Drawing.Size(590, 20)
+        Me.txtMailDestinatario.Size = New System.Drawing.Size(555, 20)
         Me.txtMailDestinatario.TabIndex = 1
         '
         'Label3
@@ -408,40 +477,6 @@ Partial Class EmisionNotaRetiro
         Me.Label2.Size = New System.Drawing.Size(59, 13)
         Me.Label2.TabIndex = 0
         Me.Label2.Text = "SEÑORES"
-        '
-        'Label12
-        '
-        Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(7, 122)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(128, 13)
-        Me.Label12.TabIndex = 0
-        Me.Label12.Text = "DIRECCION DE RETIRO"
-        '
-        'txtDireccion
-        '
-        Me.txtDireccion.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.txtDireccion.Location = New System.Drawing.Point(136, 118)
-        Me.txtDireccion.Name = "txtDireccion"
-        Me.txtDireccion.Size = New System.Drawing.Size(530, 20)
-        Me.txtDireccion.TabIndex = 1
-        '
-        'Label13
-        '
-        Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(6, 70)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(133, 13)
-        Me.Label13.TabIndex = 0
-        Me.Label13.Text = "NOMBRE RESP. RETIRO"
-        '
-        'txtNombreRespRetiro
-        '
-        Me.txtNombreRespRetiro.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower
-        Me.txtNombreRespRetiro.Location = New System.Drawing.Point(139, 67)
-        Me.txtNombreRespRetiro.Name = "txtNombreRespRetiro"
-        Me.txtNombreRespRetiro.Size = New System.Drawing.Size(175, 20)
-        Me.txtNombreRespRetiro.TabIndex = 1
         '
         'EmisionNotaRetiro
         '
@@ -508,4 +543,6 @@ Partial Class EmisionNotaRetiro
     Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents txtNombreRespRetiro As System.Windows.Forms.TextBox
     Friend WithEvents Label13 As System.Windows.Forms.Label
+    Friend WithEvents btnSugerirDestinatarios As System.Windows.Forms.Button
+    Friend WithEvents btnSugerirResp As System.Windows.Forms.Button
 End Class

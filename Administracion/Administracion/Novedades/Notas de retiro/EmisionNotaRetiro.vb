@@ -3,6 +3,8 @@ Imports Util
 
 Public Class EmisionNotaRetiro : Implements Util.IAyudaGeneral
 
+    Private ControlAyuda As Control = Nothing
+
     Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles btnCerrar.Click
         If MsgBox("¿Está seguro/a de querer salir? Los datos no se guardarán.", MsgBoxStyle.YesNo) <> MsgBoxResult.Yes Then Exit Sub
         Close()
@@ -26,7 +28,14 @@ Public Class EmisionNotaRetiro : Implements Util.IAyudaGeneral
 
         If e.KeyData = Keys.Enter Then
 
-            If Trim(control.Text.Replace("/", "")) = "" Then : Exit Sub : End If
+            Dim Excluidos As New List(Of String)
+
+            ' ReSharper disable once LoopCanBeConvertedToQuery
+            For Each c As Control In {txtMailDestinatario, txtMailRetira, txtCoordinado}
+                Excluidos.Add(c.Name)
+            Next
+
+            If Trim(control.Text.Replace("/", "")) = "" And Not Excluidos.Contains(control.Name) Then Exit Sub
 
             Select Case control.Name
                 Case txtDestinatario.Name
@@ -78,6 +87,8 @@ Public Class EmisionNotaRetiro : Implements Util.IAyudaGeneral
     Private Sub btnEmitir_Click(sender As Object, e As EventArgs) Handles btnEmitir.Click
         If Not _DatosValidos() Then Exit Sub
 
+        guardarMails()
+
         Dim tabla As DataTable = New DBAuxi.NotaRetiroDataTable
 
         Dim r As DataRow = tabla.NewRow
@@ -102,6 +113,8 @@ Public Class EmisionNotaRetiro : Implements Util.IAyudaGeneral
 
         Dim reporte As ReportDocument = New ReporteNotaRetiro
         reporte.SetDataSource(tabla)
+        reporte.SetParameterValue("Firma", Operador.FirmaDigital)
+        reporte.SetParameterValue("Aclaracion", Operador.Descripcion)
 
         Dim WImprimir As Boolean = True
 
@@ -139,6 +152,22 @@ Public Class EmisionNotaRetiro : Implements Util.IAyudaGeneral
         End With
 
         limpiar()
+    End Sub
+
+    Private Sub guardarMails()
+
+        If txtMailDestinatario.Text.Trim <> "" Then
+            If GetSingle("SELECT ID FROM MailsSugeridos WHERE Mail = '" & txtMailDestinatario.Text & "' And Tipo = 0") Is Nothing Then
+                ExecuteNonQueries("SurfactanSa", {"INSERT INTO MailsSugeridos (Nombre, Mail, Tipo) VALUES ('" & txtDestinatario.Text & "', '" & txtMailDestinatario.Text & "', 0) "})
+            End If
+        End If
+
+        If txtMailRetira.Text.Trim <> "" Then
+            If GetSingle("SELECT ID FROM MailsSugeridos WHERE Mail = '" & txtMailRetira.Text & "' And Tipo = 1") Is Nothing Then
+                ExecuteNonQueries("SurfactanSa", {"INSERT INTO MailsSugeridos (Nombre, Mail, Tipo) VALUES ('" & txtNombreRespRetiro.Text & "', '" & txtMailRetira.Text & "', 1) "})
+            End If
+        End If
+
     End Sub
 
     Private Sub limpiar()
@@ -229,21 +258,56 @@ Public Class EmisionNotaRetiro : Implements Util.IAyudaGeneral
         End If
     End Sub
 
+    Private Sub hookControlAyuda(sender As Object, e As EventArgs) Handles btnConsulta.MouseClick, btnSugerirDestinatarios.MouseClick, btnSugerirResp.MouseClick
+        ControlAyuda = TryCast(sender, Control)
+    End Sub
+
     Private Sub btnConsulta_Click(sender As Object, e As EventArgs) Handles btnConsulta.Click
+
         With New Util.AyudaGeneral(GetAll("SELECT Proveedor As Codigo, Nombre as Descripcion FROM Proveedor WHERE Nombre <> '' And Provincia < 2 ORDER BY Nombre"), "PROVEEDORES")
             .Show(Me)
         End With
+
         txtNombreRespRetiro.Focus()
+
     End Sub
 
     Public Sub _ProcesarAyudaGeneral(row As DataGridViewRow) Implements IAyudaGeneral._ProcesarAyudaGeneral
-        Dim datos As DataRow = GetSingle("SELECT Nombre, Email, Direccion, Localidad FROM Proveedor WHERE Proveedor = '" & OrDefault(row.Cells("Codigo").Value, "") & "'")
 
-        If datos Is Nothing Then Exit Sub
+        If ControlAyuda Is Nothing Then Exit Sub
 
-        txtDestinatario.Text = OrDefault(datos("Nombre"), "")
-        txtMailDestinatario.Text = OrDefault(datos("Email"), "")
-        txtDireccion.Text = OrDefault(datos("Direccion"), "") & " - " & OrDefault(datos("Localidad"), "")
+        Select Case ControlAyuda.Name
+
+            Case btnConsulta.Name
+                Dim datos As DataRow = GetSingle("SELECT Nombre, Email, Direccion, Localidad FROM Proveedor WHERE Proveedor = '" & OrDefault(row.Cells("Codigo").Value, "") & "'")
+
+                If datos Is Nothing Then Exit Sub
+
+                txtDestinatario.Text = OrDefault(datos("Nombre"), "")
+                txtMailDestinatario.Text = OrDefault(datos("Email"), "")
+                txtDireccion.Text = OrDefault(datos("Direccion"), "") & " - " & OrDefault(datos("Localidad"), "")
+
+            Case btnSugerirDestinatarios.Name
+                txtMailDestinatario.Text = OrDefault(row.Cells("Descripcion").Value, "")
+            Case btnSugerirResp.Name
+                txtMailRetira.Text = OrDefault(row.Cells("Descripcion").Value, "")
+
+        End Select
+
+    End Sub
+
+    Private Sub btnSugerirDestinatarios_Click(sender As Object, e As EventArgs) Handles btnSugerirDestinatarios.Click
+
+        With New Util.AyudaGeneral(GetAll("SELECT Nombre As Codigo, Mail As Descripcion FROM MailsSugeridos WHERE Tipo = 0"), "MAILS SUGERIDOS")
+            .Show(Me)
+        End With
+
+    End Sub
+    Private Sub btnSugerirResp_Click(sender As Object, e As EventArgs) Handles btnSugerirResp.Click
+
+        With New Util.AyudaGeneral(GetAll("SELECT Nombre As Codigo, Mail As Descripcion FROM MailsSugeridos WHERE Tipo = 1"), "MAILS SUGERIDOS")
+            .Show(Me)
+        End With
 
     End Sub
 End Class
