@@ -100,6 +100,12 @@
       <DependentUpon>Centro_Importaciones.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="EnviarDocumentacion.Designer.vb">
+      <DependentUpon>EnviarDocumentacion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EnviarDocumentacion.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="IngresoObservaciones_Orden.Designer.vb">
       <DependentUpon>IngresoObservaciones_Orden.vb</DependentUpon>
     </Compile>
@@ -145,10 +151,19 @@
       <DependentUpon>Reporte_CentroDe_Exportacion.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\Reporte_EntregarDocumentacion.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte_EntregarDocumentacion.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Centro_Importaciones.resx">
       <DependentUpon>Centro_Importaciones.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EnviarDocumentacion.resx">
+      <DependentUpon>EnviarDocumentacion.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="IngresoObservaciones_Orden.resx">
       <DependentUpon>IngresoObservaciones_Orden.vb</DependentUpon>
@@ -172,6 +187,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Reporte_CentroDe_Exportacion.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Reporte_EntregarDocumentacion.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte_EntregarDocumentacion.vb</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -186,6 +205,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\GestorDeArchivos\GestorDeArchivos\GestorDeArchivos.vbproj">
+      <Project>{1d565298-d39d-47ee-a7d2-3e8ed6e228de}</Project>
+      <Name>GestorDeArchivos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Util\Util\Util.vbproj">
       <Project>{cc5d60fd-9755-4c61-b96c-f56173586bb9}</Project>
       <Name>Util</Name>

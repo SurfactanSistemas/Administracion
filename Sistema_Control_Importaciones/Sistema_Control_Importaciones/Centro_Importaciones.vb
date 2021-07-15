@@ -51,7 +51,7 @@ Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
             .Add("Transporte")
             .Add("Fllegada")
             .Add("TPago")
-            .Add("ImpoDespacho", Type.GetType("System.Decimal"))
+            .Add("ImpoDespacho", Type.GetType("System.Double"))
             .Add("PagoDes")
             .Add("LetraTotal", Type.GetType("System.Double"))
             .Add("PagoLetra")
@@ -1551,8 +1551,8 @@ Public Class Centro_Importaciones 'Implements ICentroImportaciones_auxiliar
                                                 & "OR Incoterms LIKE '%" & txt_Filtro.Text & "%' OR Transporte LIKE '%" & txt_Filtro.Text & "%'" _
                                                 & "OR FLLegada LIKE '%" & txt_Filtro.Text & "%' OR TPago LIKE '%" & txt_Filtro.Text & "%'" _
                                                 & "OR Despacho LIKE '%" & txt_Filtro.Text & "%' OR PagoDes LIKE '%" & txt_Filtro.Text & "%'" _
-                                                & "OR LetraTotal LIKE '%" & txt_Filtro.Text & "%' OR PagoLetra LIKE '%" & txt_Filtro.Text & "%'" _
-                                                & "OR VtoLetra LIKE '%" & txt_Filtro.Text & "%' OR USPagadoLetra LIKE '%" & txt_Filtro.Text & "%'" _
+                                                & "OR convert(LetraTotal, System.String) LIKE '%" & txt_Filtro.Text & "%' OR PagoLetra LIKE '%" & txt_Filtro.Text & "%'" _
+                                                & "OR VtoLetra LIKE '%" & txt_Filtro.Text & "%' OR convert(USPagadoLetra, System.String) LIKE '%" & txt_Filtro.Text & "%'" _
                                                 & "OR FEmbarque LIKE '%" & txt_Filtro.Text & "%' OR SaldoLetra LIKE '%" & txt_Filtro.Text & "%'" _
                                                 & "  OR ProveedorCod LIKE '%" & txt_Filtro.Text & "%')"
 

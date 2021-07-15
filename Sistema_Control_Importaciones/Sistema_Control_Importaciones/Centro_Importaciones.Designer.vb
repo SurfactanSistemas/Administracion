@@ -45,6 +45,8 @@ Partial Class Centro_Importaciones
         Me.label1 = New System.Windows.Forms.Label()
         Me.txt_Filtro = New System.Windows.Forms.TextBox()
         Me.chk_DespachoPendiente = New System.Windows.Forms.CheckBox()
+        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.DGV_Muestra = New Util.DBDataGridView()
         Me.Orden = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Pta = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -81,13 +83,15 @@ Partial Class Centro_Importaciones
         Me.SaldoLetraOrd = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FechaIngresoOrd = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.panel1.SuspendLayout()
+        Me.TableLayoutPanel1.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
         CType(Me.DGV_Muestra, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lbl_ArticuloKg
         '
         Me.lbl_ArticuloKg.AutoSize = True
-        Me.lbl_ArticuloKg.Location = New System.Drawing.Point(895, 109)
+        Me.lbl_ArticuloKg.Location = New System.Drawing.Point(894, 48)
         Me.lbl_ArticuloKg.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl_ArticuloKg.Name = "lbl_ArticuloKg"
         Me.lbl_ArticuloKg.Size = New System.Drawing.Size(36, 17)
@@ -97,7 +101,7 @@ Partial Class Centro_Importaciones
         'txt_Articulo
         '
         Me.txt_Articulo.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txt_Articulo.Location = New System.Drawing.Point(753, 106)
+        Me.txt_Articulo.Location = New System.Drawing.Point(752, 45)
         Me.txt_Articulo.Margin = New System.Windows.Forms.Padding(4)
         Me.txt_Articulo.Name = "txt_Articulo"
         Me.txt_Articulo.ReadOnly = True
@@ -107,7 +111,7 @@ Partial Class Centro_Importaciones
         'lbl_Articulo
         '
         Me.lbl_Articulo.AutoSize = True
-        Me.lbl_Articulo.Location = New System.Drawing.Point(689, 112)
+        Me.lbl_Articulo.Location = New System.Drawing.Point(688, 51)
         Me.lbl_Articulo.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl_Articulo.Name = "lbl_Articulo"
         Me.lbl_Articulo.Size = New System.Drawing.Size(55, 17)
@@ -117,7 +121,7 @@ Partial Class Centro_Importaciones
         'txt_SumaLetra
         '
         Me.txt_SumaLetra.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txt_SumaLetra.Location = New System.Drawing.Point(484, 106)
+        Me.txt_SumaLetra.Location = New System.Drawing.Point(499, 46)
         Me.txt_SumaLetra.Margin = New System.Windows.Forms.Padding(4)
         Me.txt_SumaLetra.Name = "txt_SumaLetra"
         Me.txt_SumaLetra.ReadOnly = True
@@ -127,7 +131,7 @@ Partial Class Centro_Importaciones
         'txt_SumaDespacho
         '
         Me.txt_SumaDespacho.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txt_SumaDespacho.Location = New System.Drawing.Point(245, 106)
+        Me.txt_SumaDespacho.Location = New System.Drawing.Point(254, 48)
         Me.txt_SumaDespacho.Margin = New System.Windows.Forms.Padding(4)
         Me.txt_SumaDespacho.Name = "txt_SumaDespacho"
         Me.txt_SumaDespacho.ReadOnly = True
@@ -137,7 +141,7 @@ Partial Class Centro_Importaciones
         'chk_LetraPendiente
         '
         Me.chk_LetraPendiente.AutoSize = True
-        Me.chk_LetraPendiente.Location = New System.Drawing.Point(992, 78)
+        Me.chk_LetraPendiente.Location = New System.Drawing.Point(991, 17)
         Me.chk_LetraPendiente.Margin = New System.Windows.Forms.Padding(4)
         Me.chk_LetraPendiente.Name = "chk_LetraPendiente"
         Me.chk_LetraPendiente.Size = New System.Drawing.Size(131, 21)
@@ -148,7 +152,7 @@ Partial Class Centro_Importaciones
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(411, 112)
+        Me.Label6.Location = New System.Drawing.Point(410, 51)
         Me.Label6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(72, 17)
@@ -158,7 +162,7 @@ Partial Class Centro_Importaciones
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(151, 112)
+        Me.Label5.Location = New System.Drawing.Point(150, 51)
         Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(84, 17)
@@ -168,7 +172,7 @@ Partial Class Centro_Importaciones
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(152, 79)
+        Me.Label3.Location = New System.Drawing.Point(151, 18)
         Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(39, 17)
@@ -180,7 +184,7 @@ Partial Class Centro_Importaciones
         Me.cbx_Activas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbx_Activas.FormattingEnabled = True
         Me.cbx_Activas.Items.AddRange(New Object() {"Activas", "Cerradas"})
-        Me.cbx_Activas.Location = New System.Drawing.Point(1133, 74)
+        Me.cbx_Activas.Location = New System.Drawing.Point(1132, 13)
         Me.cbx_Activas.Margin = New System.Windows.Forms.Padding(4)
         Me.cbx_Activas.Name = "cbx_Activas"
         Me.cbx_Activas.Size = New System.Drawing.Size(160, 24)
@@ -188,7 +192,7 @@ Partial Class Centro_Importaciones
         '
         'btn_Actualiza
         '
-        Me.btn_Actualiza.Location = New System.Drawing.Point(1171, 106)
+        Me.btn_Actualiza.Location = New System.Drawing.Point(1170, 45)
         Me.btn_Actualiza.Margin = New System.Windows.Forms.Padding(4)
         Me.btn_Actualiza.Name = "btn_Actualiza"
         Me.btn_Actualiza.Size = New System.Drawing.Size(100, 28)
@@ -198,7 +202,7 @@ Partial Class Centro_Importaciones
         '
         'btn_Djai
         '
-        Me.btn_Djai.Location = New System.Drawing.Point(8, 106)
+        Me.btn_Djai.Location = New System.Drawing.Point(7, 51)
         Me.btn_Djai.Margin = New System.Windows.Forms.Padding(4)
         Me.btn_Djai.Name = "btn_Djai"
         Me.btn_Djai.Size = New System.Drawing.Size(135, 28)
@@ -209,12 +213,12 @@ Partial Class Centro_Importaciones
         '
         'btn_Exportacion
         '
-        Me.btn_Exportacion.Location = New System.Drawing.Point(8, 73)
+        Me.btn_Exportacion.Location = New System.Drawing.Point(7, 12)
         Me.btn_Exportacion.Margin = New System.Windows.Forms.Padding(4)
         Me.btn_Exportacion.Name = "btn_Exportacion"
-        Me.btn_Exportacion.Size = New System.Drawing.Size(135, 28)
+        Me.btn_Exportacion.Size = New System.Drawing.Size(135, 53)
         Me.btn_Exportacion.TabIndex = 56
-        Me.btn_Exportacion.Text = "EXPORTACION"
+        Me.btn_Exportacion.Text = "EXPORTAR FILAS SELECCIONADAS"
         Me.btn_Exportacion.UseVisualStyleBackColor = True
         '
         'panel1
@@ -257,7 +261,7 @@ Partial Class Centro_Importaciones
         '
         'txt_Filtro
         '
-        Me.txt_Filtro.Location = New System.Drawing.Point(198, 76)
+        Me.txt_Filtro.Location = New System.Drawing.Point(197, 15)
         Me.txt_Filtro.Name = "txt_Filtro"
         Me.txt_Filtro.Size = New System.Drawing.Size(580, 22)
         Me.txt_Filtro.TabIndex = 74
@@ -265,13 +269,52 @@ Partial Class Centro_Importaciones
         'chk_DespachoPendiente
         '
         Me.chk_DespachoPendiente.AutoSize = True
-        Me.chk_DespachoPendiente.Location = New System.Drawing.Point(810, 76)
+        Me.chk_DespachoPendiente.Location = New System.Drawing.Point(809, 15)
         Me.chk_DespachoPendiente.Margin = New System.Windows.Forms.Padding(4)
         Me.chk_DespachoPendiente.Name = "chk_DespachoPendiente"
         Me.chk_DespachoPendiente.Size = New System.Drawing.Size(162, 21)
         Me.chk_DespachoPendiente.TabIndex = 75
         Me.chk_DespachoPendiente.Text = "Despacho Pendiente"
         Me.chk_DespachoPendiente.UseVisualStyleBackColor = True
+        '
+        'TableLayoutPanel1
+        '
+        Me.TableLayoutPanel1.ColumnCount = 1
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel1.Controls.Add(Me.GroupBox1, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.DGV_Muestra, 0, 1)
+        Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 62)
+        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+        Me.TableLayoutPanel1.RowCount = 2
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 87.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1741, 738)
+        Me.TableLayoutPanel1.TabIndex = 76
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.btn_Exportacion)
+        Me.GroupBox1.Controls.Add(Me.chk_DespachoPendiente)
+        Me.GroupBox1.Controls.Add(Me.btn_Djai)
+        Me.GroupBox1.Controls.Add(Me.txt_Filtro)
+        Me.GroupBox1.Controls.Add(Me.btn_Actualiza)
+        Me.GroupBox1.Controls.Add(Me.cbx_Activas)
+        Me.GroupBox1.Controls.Add(Me.Label3)
+        Me.GroupBox1.Controls.Add(Me.lbl_ArticuloKg)
+        Me.GroupBox1.Controls.Add(Me.Label5)
+        Me.GroupBox1.Controls.Add(Me.txt_Articulo)
+        Me.GroupBox1.Controls.Add(Me.Label6)
+        Me.GroupBox1.Controls.Add(Me.lbl_Articulo)
+        Me.GroupBox1.Controls.Add(Me.chk_LetraPendiente)
+        Me.GroupBox1.Controls.Add(Me.txt_SumaLetra)
+        Me.GroupBox1.Controls.Add(Me.txt_SumaDespacho)
+        Me.GroupBox1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GroupBox1.Location = New System.Drawing.Point(3, 3)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(1735, 81)
+        Me.GroupBox1.TabIndex = 0
+        Me.GroupBox1.TabStop = False
         '
         'DGV_Muestra
         '
@@ -287,9 +330,10 @@ Partial Class Centro_Importaciones
         DataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.White
         DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.DGV_Muestra.DefaultCellStyle = DataGridViewCellStyle5
+        Me.DGV_Muestra.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DGV_Muestra.DoubleBuffered = True
         Me.DGV_Muestra.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.DGV_Muestra.Location = New System.Drawing.Point(0, 154)
+        Me.DGV_Muestra.Location = New System.Drawing.Point(4, 91)
         Me.DGV_Muestra.Margin = New System.Windows.Forms.Padding(4)
         Me.DGV_Muestra.Name = "DGV_Muestra"
         Me.DGV_Muestra.OrdenamientoColumnasHabilitado = False
@@ -297,7 +341,7 @@ Partial Class Centro_Importaciones
         Me.DGV_Muestra.RowTemplate.Height = 20
         Me.DGV_Muestra.ShowCellToolTips = False
         Me.DGV_Muestra.SinClickDerecho = False
-        Me.DGV_Muestra.Size = New System.Drawing.Size(1728, 640)
+        Me.DGV_Muestra.Size = New System.Drawing.Size(1733, 643)
         Me.DGV_Muestra.TabIndex = 72
         '
         'Orden
@@ -636,29 +680,17 @@ Partial Class Centro_Importaciones
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1741, 800)
-        Me.Controls.Add(Me.chk_DespachoPendiente)
-        Me.Controls.Add(Me.txt_Filtro)
+        Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Controls.Add(Me.panel1)
-        Me.Controls.Add(Me.DGV_Muestra)
-        Me.Controls.Add(Me.lbl_ArticuloKg)
-        Me.Controls.Add(Me.txt_Articulo)
-        Me.Controls.Add(Me.lbl_Articulo)
-        Me.Controls.Add(Me.txt_SumaLetra)
-        Me.Controls.Add(Me.txt_SumaDespacho)
-        Me.Controls.Add(Me.chk_LetraPendiente)
-        Me.Controls.Add(Me.Label6)
-        Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.cbx_Activas)
-        Me.Controls.Add(Me.btn_Actualiza)
-        Me.Controls.Add(Me.btn_Djai)
-        Me.Controls.Add(Me.btn_Exportacion)
         Me.Name = "Centro_Importaciones"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.panel1.ResumeLayout(False)
         Me.panel1.PerformLayout()
+        Me.TableLayoutPanel1.ResumeLayout(False)
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         CType(Me.DGV_Muestra, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
     Friend WithEvents DGV_Muestra As Util.DBDataGridView
@@ -714,5 +746,7 @@ Partial Class Centro_Importaciones
     Friend WithEvents FembarqueOrd As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents SaldoLetraOrd As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents FechaIngresoOrd As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
 
 End Class

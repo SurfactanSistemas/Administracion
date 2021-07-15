@@ -1,4 +1,5 @@
-﻿Imports Util
+﻿Imports GestorDeArchivos
+Imports Util
 Imports Util.Clases.Query
 Imports Util.Clases.Helper
 
@@ -69,8 +70,11 @@ Public Class IngresoOrdenComprayObservaciones
 
         Dim WClave As String = CodOrdenAux + "01"
 
+
+
         SQLCnslt = "SELECT FechaEmbarque, FechaLlegada, PagoDespacho, ImpoDespacho, VtoDespacho, PagoLetra, EntregaI, " _
             & "EntregaII, ImpoLetra, VtoLetra, VtoLetraII, BL, Buque, Contenedor, Despacho, Tipo_cbx, Estado, FechaIngreso, FechaIngresoOrd " _
+            & "FechaCoordinacion, FechaCoordinacionOrd, HoraCoordinacion, EstadoSIMI, chk_DisponiblePagar " _
             & "FROM Orden WHERE Clave = '" & WClave & "'"
         
         Dim RowOrden As DataRow = GetSingle(SQLCnslt, BaseConectar)
@@ -94,11 +98,22 @@ Public Class IngresoOrdenComprayObservaciones
             txt_Despacho.Text = IIf(IsDBNull(RowOrden.Item("Despacho")), "", RowOrden.Item("Despacho"))
             'cbx_Tipo.SelectedItem = IIf(IsDBNull(RowOrden.Item("Tipo_cbx")), "", Trim(RowOrden.Item("Tipo_cbx")))
             Dim WTipo_cbx As String = OrDefault(RowOrden.Item("Tipo_cbx"), "")
-            cbx_Tipo.SelectedItem = Wtipo_cbx
+            cbx_Tipo.SelectedItem = Trim(WTipo_cbx)
             'cbx_Estado.SelectedItem = IIf(IsDBNull(RowOrden.Item("Estado")), "", Trim(RowOrden.Item("Estado")))
             Dim WEstado As String = OrDefault(RowOrden.Item("Estado"), "")
-            cbx_Estado.SelectedItem = WEstado
+            cbx_Estado.SelectedItem = Trim(WEstado)
             txt_FechaIngreso.Text = IIf(IsDBNull(RowOrden.Item("FechaIngreso")), "", RowOrden.Item("FechaIngreso"))
+
+            Dim WEstadoSImi As String = OrDefault(RowOrden.Item("EstadoSIMI"), "")
+            cbx_EstadoSIMI.SelectedItem = Trim(WEstadoSImi)
+
+            txtFechaCoordinacion.Text = OrDefault(RowOrden.Item("FechaCoordinacion"), "")
+            'txtFechaCoordinacion.Text = IIf(IsDBNull(RowOrden.Item("FechaCoordinacion")), "", RowOrden.Item("FechaCoordinacion"))
+            txt_HoraCoordinacion.Text = IIf(IsDBNull(RowOrden.Item("HoraCoordinacion")), "", RowOrden.Item("HoraCoordinacion"))
+
+            Dim WDisponiblepagar As Boolean = OrDefault(RowOrden.Item("chk_DisponiblePagar"), False)
+            Chk_DisponibleParaPagar.Checked = WDisponiblepagar
+
         End If
 
         Dim SQLCnlst As String = "Select EntregaI FROM " & BaseConectar & ".dbo.Orden WHERE Orden = '" & NumeroOrden & "'"
@@ -231,7 +246,26 @@ Public Class IngresoOrdenComprayObservaciones
             End If
         End If
     End Sub
-    
+
+
+    Private Function ValidarHora(ByVal Hora As String) As String
+        Dim Respuesta As String = "S"
+        Dim WHora As Integer = 0
+        WHora = Val(Microsoft.VisualBasic.Left(Hora, 2))
+        Dim WMin As Integer = 0
+        WMin = Val(Microsoft.VisualBasic.Right(Hora, 2))
+
+        If WHora > 23 Or WHora < 0 Then
+            Respuesta = "N"
+        End If
+
+        If WMin > 59 Or WMin < 0 Then
+            Respuesta = "N"
+        End If
+
+        Return Respuesta
+    End Function
+
     Private Sub btn_Grabar_Click(sender As Object, e As EventArgs) Handles btn_Grabar.Click
         'VALIDACIONES DE FECHA EN OBSERVACIONES
         If Trim(txt_FechaLlegada.Text) <> "/  /" And txt_FechaLlegada.Text <> "00/00/0000" Then
@@ -296,6 +330,24 @@ Public Class IngresoOrdenComprayObservaciones
                 MsgBox("Fecha de Fecha ingreso Invalida", 0, "Actualizacion de Ordenes de Compra")
                 txt_FechaIngreso.Focus()
                 txt_FechaIngreso.SelectAll()
+                Exit Sub
+            End If
+        End If
+
+        If Trim(txtFechaCoordinacion.Text) <> "/  /" And txtFechaCoordinacion.Text <> "00/00/0000" Then
+            If ValidaFecha(txtFechaCoordinacion.Text) <> "S" Then
+                MsgBox("Fecha de Fecha de Coordinacion Invalida", 0, "Actualizacion de Ordenes de Compra")
+                txtFechaCoordinacion.Focus()
+                txtFechaCoordinacion.SelectAll()
+                Exit Sub
+            End If
+        End If
+
+        If Trim(txt_HoraCoordinacion.Text) <> ":" Then
+            If ValidarHora(txt_HoraCoordinacion.Text) <> "S" Then
+                MsgBox("Fecha de Hora de Coordinacion Invalida", 0, "Actualizacion de Ordenes de Compra")
+                txt_HoraCoordinacion.Focus()
+                txt_HoraCoordinacion.SelectAll()
                 Exit Sub
             End If
         End If
@@ -443,8 +495,13 @@ Public Class IngresoOrdenComprayObservaciones
                         & "Estado = '" & cbx_Estado.SelectedItem & "', " _
                         & "Tipo_cbx = '" & cbx_Tipo.SelectedItem & "', " _
                         & "FechaIngreso = '" & txt_FechaIngreso.Text & "', " _
-                        & "FechaIngresoOrd = '" & WOrdfechaingreso & "' " _
-                        & "Where Orden = '" & WORDEN & "'"
+                        & "FechaIngresoOrd = '" & WOrdfechaingreso & "' ," _
+                        & "FechaCoordinacion = '" & txtFechaCoordinacion.Text & "', " _
+                        & "FechaCoordinacionOrd = '" & ordenaFecha(txtFechaCoordinacion.Text) & "', " _
+                        & "HoraCoordinacion = '" & txt_HoraCoordinacion.Text & "', " _
+                        & "EstadoSIMI = '" & cbx_EstadoSIMI.SelectedItem & "', " _
+                        & "chk_DisponiblePagar = '" & Chk_DisponibleParaPagar.Checked & "' " _
+            & "Where Orden = '" & WORDEN & "'"
 
             ListaSQLCnslt.Add(SQLCnsl)
 
@@ -461,5 +518,26 @@ Public Class IngresoOrdenComprayObservaciones
         If MsgBox("Los datos que no fueron grabados se perderan." & vbCrLf & " ¿Desea cerrar la ventana?", vbYesNo, "Aviso") = vbYes Then
             Close()
         End If
+    End Sub
+
+    Private Sub btn_EnviarDocumentacion_Click(sender As Object, e As EventArgs) Handles btn_EnviarDocumentacion.Click
+
+        With New EnviarDocumentacion(txt_Orden.Text, txt_Proveedor.Text, txt_DesProveedor.Text, WBASEACONECTAR)
+            .Show(Me)
+        End With
+    End Sub
+
+   
+    Private Sub btn_AdjuntarArchivos_Click(sender As Object, e As EventArgs) Handles btn_AdjuntarArchivos.Click
+        Dim WPath As String = "\\193.168.0.2\w\Impresion Pdf\Orden\" & Trim(txt_Orden.Text)
+        Dim Wmail As String = ""
+        Dim WTitulo As String = ""
+        Dim WCuerpoMail As String = ""
+
+
+        With New EditorArchivos(3, WPath, Operador.Clave, 1, Wmail, WTitulo, WCuerpoMail)
+            .Show()
+        End With
+
     End Sub
 End Class

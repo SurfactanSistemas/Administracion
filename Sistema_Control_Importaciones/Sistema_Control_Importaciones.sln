@@ -4,8 +4,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Sistema_Control_Importaciones", "Sistema_Control_Importaciones\Sistema_Control_Importaciones.vbproj", "{E54666A0-B450-476B-8F78-C7A262A5FCC2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1D565298-D39D-47EE-A7D2-3E8ED6E228DE} = {1D565298-D39D-47EE-A7D2-3E8ED6E228DE}
+	EndProjectSection
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Util", "..\Util\Util\Util.vbproj", "{CC5D60FD-9755-4C61-B96C-F56173586BB9}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "GestorDeArchivos", "..\GestorDeArchivos\GestorDeArchivos\GestorDeArchivos.vbproj", "{1D565298-D39D-47EE-A7D2-3E8ED6E228DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +50,20 @@ Global
 		{CC5D60FD-9755-4C61-B96C-F56173586BB9}.Release|x64.Build.0 = Release|x64
 		{CC5D60FD-9755-4C61-B96C-F56173586BB9}.Release|x86.ActiveCfg = Release|x86
 		{CC5D60FD-9755-4C61-B96C-F56173586BB9}.Release|x86.Build.0 = Release|x86
+		{1D565298-D39D-47EE-A7D2-3E8ED6E228DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D565298-D39D-47EE-A7D2-3E8ED6E228DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D565298-D39D-47EE-A7D2-3E8ED6E228DE}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{1D565298-D39D-47EE-A7D2-3E8ED6E228DE}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{1D565298-D39D-47EE-A7D2-3E8ED6E228DE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1D565298-D39D-47EE-A7D2-3E8ED6E228DE}.Debug|x86.ActiveCfg = Debug|x86
+		{1D565298-D39D-47EE-A7D2-3E8ED6E228DE}.Debug|x86.Build.0 = Debug|x86
+		{1D565298-D39D-47EE-A7D2-3E8ED6E228DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D565298-D39D-47EE-A7D2-3E8ED6E228DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D565298-D39D-47EE-A7D2-3E8ED6E228DE}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{1D565298-D39D-47EE-A7D2-3E8ED6E228DE}.Release|Mixed Platforms.Build.0 = Release|x86
+		{1D565298-D39D-47EE-A7D2-3E8ED6E228DE}.Release|x64.ActiveCfg = Release|Any CPU
+		{1D565298-D39D-47EE-A7D2-3E8ED6E228DE}.Release|x86.ActiveCfg = Release|x86
+		{1D565298-D39D-47EE-A7D2-3E8ED6E228DE}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
