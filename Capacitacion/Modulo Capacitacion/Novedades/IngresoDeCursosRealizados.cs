@@ -444,7 +444,7 @@ namespace Modulo_Capacitacion.Novedades
             // Se agrega validación en la cantidad de horas cargadas.
             txtHoras.Text = Helper.FormatoNumerico(txtHoras.Text);
 
-            double WHoras = double.Parse(txtHoras.Text);
+            double WHoras = double.Parse(txtHoras.Text.Replace(".", ","));
 
             if (WHoras == 0)
             {
