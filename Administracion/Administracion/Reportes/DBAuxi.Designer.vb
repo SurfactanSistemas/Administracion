@@ -4710,6 +4710,10 @@ Partial Public Class DBAuxi
 
         Private columnNumero As Global.System.Data.DataColumn
 
+        Private columnDireccion As Global.System.Data.DataColumn
+
+        Private columnNombreResp As Global.System.Data.DataColumn
+
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public Sub New()
@@ -4834,6 +4838,22 @@ Partial Public Class DBAuxi
         End Property
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public ReadOnly Property DireccionColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnDireccion
+            End Get
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public ReadOnly Property NombreRespColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnNombreResp
+            End Get
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
          Global.System.ComponentModel.Browsable(False)> _
         Public ReadOnly Property Count() As Integer
@@ -4870,9 +4890,9 @@ Partial Public Class DBAuxi
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-        Public Overloads Function AddNotaRetiroRow(ByVal Destino As String, ByVal FechaRetiro As String, ByVal Horarios As String, ByVal QueRetirar As String, ByVal ConQuien As String, ByVal SiCheque As Boolean, ByVal Monto As Double, ByVal FechaCheque As String, ByVal Banco As String, ByVal Notas As String, ByVal Numero As String) As NotaRetiroRow
+        Public Overloads Function AddNotaRetiroRow(ByVal Destino As String, ByVal FechaRetiro As String, ByVal Horarios As String, ByVal QueRetirar As String, ByVal ConQuien As String, ByVal SiCheque As Boolean, ByVal Monto As Double, ByVal FechaCheque As String, ByVal Banco As String, ByVal Notas As String, ByVal Numero As String, ByVal Direccion As String, ByVal NombreResp As String) As NotaRetiroRow
             Dim rowNotaRetiroRow As NotaRetiroRow = CType(Me.NewRow, NotaRetiroRow)
-            Dim columnValuesArray() As Object = New Object() {Destino, FechaRetiro, Horarios, QueRetirar, ConQuien, SiCheque, Monto, FechaCheque, Banco, Notas, Numero}
+            Dim columnValuesArray() As Object = New Object() {Destino, FechaRetiro, Horarios, QueRetirar, ConQuien, SiCheque, Monto, FechaCheque, Banco, Notas, Numero, Direccion, NombreResp}
             rowNotaRetiroRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowNotaRetiroRow)
             Return rowNotaRetiroRow
@@ -4906,6 +4926,8 @@ Partial Public Class DBAuxi
             Me.columnBanco = MyBase.Columns("Banco")
             Me.columnNotas = MyBase.Columns("Notas")
             Me.columnNumero = MyBase.Columns("Numero")
+            Me.columnDireccion = MyBase.Columns("Direccion")
+            Me.columnNombreResp = MyBase.Columns("NombreResp")
         End Sub
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
@@ -4933,6 +4955,10 @@ Partial Public Class DBAuxi
             MyBase.Columns.Add(Me.columnNotas)
             Me.columnNumero = New Global.System.Data.DataColumn("Numero", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnNumero)
+            Me.columnDireccion = New Global.System.Data.DataColumn("Direccion", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnDireccion)
+            Me.columnNombreResp = New Global.System.Data.DataColumn("NombreResp", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnNombreResp)
         End Sub
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
@@ -8764,6 +8790,36 @@ Partial Public Class DBAuxi
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Property Direccion() As String
+            Get
+                Try
+                    Return CType(Me(Me.tableNotaRetiro.DireccionColumn), String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("El valor de la columna 'Direccion' de la tabla 'NotaRetiro' es DBNull.", e)
+                End Try
+            End Get
+            Set(value As String)
+                Me(Me.tableNotaRetiro.DireccionColumn) = value
+            End Set
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Property NombreResp() As String
+            Get
+                Try
+                    Return CType(Me(Me.tableNotaRetiro.NombreRespColumn), String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("El valor de la columna 'NombreResp' de la tabla 'NotaRetiro' es DBNull.", e)
+                End Try
+            End Get
+            Set(value As String)
+                Me(Me.tableNotaRetiro.NombreRespColumn) = value
+            End Set
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public Function IsDestinoNull() As Boolean
             Return Me.IsNull(Me.tableNotaRetiro.DestinoColumn)
         End Function
@@ -8892,6 +8948,30 @@ Partial Public Class DBAuxi
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public Sub SetNumeroNull()
             Me(Me.tableNotaRetiro.NumeroColumn) = Global.System.Convert.DBNull
+        End Sub
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Function IsDireccionNull() As Boolean
+            Return Me.IsNull(Me.tableNotaRetiro.DireccionColumn)
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Sub SetDireccionNull()
+            Me(Me.tableNotaRetiro.DireccionColumn) = Global.System.Convert.DBNull
+        End Sub
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Function IsNombreRespNull() As Boolean
+            Return Me.IsNull(Me.tableNotaRetiro.NombreRespColumn)
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Sub SetNombreRespNull()
+            Me(Me.tableNotaRetiro.NombreRespColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     

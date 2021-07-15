@@ -81,6 +81,13 @@ namespace Modulo_Capacitacion.Listados
             {
                 WRutaArchivo = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
             }
+            else
+            {
+                if (!Directory.Exists(WRutaArchivo))
+                {
+                    Directory.CreateDirectory(WRutaArchivo);
+                }
+            }
 
             if (WNombreArchivo.Trim() == "") WNombreArchivo = "Reporte-" + DateTime.Now.ToString("dd-MM-yyyy") + ".pdf";
 
@@ -115,8 +122,11 @@ namespace Modulo_Capacitacion.Listados
 
                 Thread.Sleep(1000);
 
-                GuardarComoPDF(WNombreArchivo); //Guardamos el archivo pdf en el escritorio de manera temporal.
-                
+                if (!File.Exists(WNombreArchivo))
+                {
+                    GuardarComoPDF(WNombreArchivo); //Guardamos el archivo pdf en el escritorio de manera temporal.
+                }
+
                 var mailItem = (MailItem)oApp.CreateItem(OlItemType.olMailItem);
                 string WRutaArchivo = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\" + WNombreArchivo + ".pdf";
 
@@ -125,15 +135,6 @@ namespace Modulo_Capacitacion.Listados
                 mailItem.To = WDirecciones;
                 mailItem.Attachments.Add(WRutaArchivo);
 
-                // Si se pasaron las direcciones, se envia directamente el email, sino se abre en una ventana para que el usuario lo termine de completar.
-                //if (WDirecciones == "")
-                //{
-                //    mailItem.Display();
-                //}
-                //else
-                //{
-                //    mailItem.Send();   
-                //}
                 mailItem.Display();
                 
                 // Borramos el archivo temporal de el escritorio.

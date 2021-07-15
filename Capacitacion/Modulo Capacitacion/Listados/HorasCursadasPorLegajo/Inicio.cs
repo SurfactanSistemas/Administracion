@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using CrystalDecisions.CrystalReports.Engine;
 
 namespace Modulo_Capacitacion.Listados.HorasCursadasPorLegajo
 {
@@ -16,18 +17,22 @@ namespace Modulo_Capacitacion.Listados.HorasCursadasPorLegajo
         private void Inicio_Load(object sender, EventArgs e)
         {
             CB_Tipo.SelectedIndex = 0;
+            txtDesde.Text = "01/06/" + (DateTime.Now.Year - 1);
+            txtHasta.Text = "31/05/" + (DateTime.Now.Year);
         }
 
         private void BT_Pantalla_Click(object sender, EventArgs e)
         {
+            if (txtHasta.Text.Replace(" ", "").Length < 10 || txtDesde.Text.Replace(" ", "").Length < 10) return;
+
             var frm = _PrepararReporte();
             frm.Show();
         }
 
         private VistaPrevia _PrepararReporte()
         {
-            string hastaFecha = "31/05/" + (int.Parse(TB_AñoDesde.Text) + 1);
-            string desdeFecha = "01/06/" + TB_AñoDesde.Text;
+            string hastaFecha = txtHasta.Text; //"31/05/" + (int.Parse(TB_AñoDesde.Text) + 1);
+            string desdeFecha = txtDesde.Text; //"01/06/" + TB_AñoDesde.Text;
 
             Helper.PurgarOrdFechaCursadas();
             Helper._ReprocesoCursosProgramadosYNoProgramados(desdeFecha, hastaFecha, 1);
@@ -89,22 +94,6 @@ namespace Modulo_Capacitacion.Listados.HorasCursadasPorLegajo
 
                         progressBar1.Increment(1);
                     }
-
-                    //if (CB_Tipo.SelectedIndex == 0)
-                    //{
-                    //    cmd.CommandText =
-                    //        "UPDATE Legajo SET Puntaje = '0' WHERE RIGHT(ISNULL(FEgreso, '00/00/0000'), 4)*1 = 0 Or RIGHT(FEgreso, 4)*1 < " +
-                    //       Helper.Right(TB_AñoDesde.Text, 4) + "";
-                    //    cmd.ExecuteNonQuery();
-                    //    progressBar1.Increment(9);
-                    //}
-
-                    //if (CB_Tipo.SelectedIndex == 1)
-                    //{
-                    //    cmd.CommandText = "UPDATE Legajo SET Puntaje = '9' WHERE ISNULL(FEgreso, '  /  /    ') NOT IN ('00/00/0000', '  /  /    ')";
-                    //    cmd.ExecuteNonQuery();
-                    //    progressBar1.Increment(9);
-                    //}
                 }
             }
 
@@ -112,18 +101,24 @@ namespace Modulo_Capacitacion.Listados.HorasCursadasPorLegajo
             progressBar1.Value = 0;
 
             VistaPrevia frm = new VistaPrevia();
-            frm.CargarReporte(new wHorasCursadasPorLegajo(),
+            ReportDocument rpt = new wHorasCursadasPorLegajo();
+            rpt.SetParameterValue("Desde", txtDesde.Text);
+            rpt.SetParameterValue("Hasta", txtHasta.Text);
+
+            frm.CargarReporte(rpt,
                 "{Legajo.Renglon} = 1 AND {Legajo.Descripcion} <> '' AND {Legajo.HorasTotal} IN 0 TO 9999 AND {Legajo.Puntaje} = 0");
             return frm;
         }
 
         private void Inicio_Shown(object sender, EventArgs e)
         {
-            TB_AñoDesde.Focus();
+            txtDesde.Focus();
         }
 
         private void BT_Imprimir_Click(object sender, EventArgs e)
         {
+            if (txtHasta.Text.Replace(" ", "").Length < 10 || txtDesde.Text.Replace(" ", "").Length < 10) return;
+
             var frm = _PrepararReporte();
             frm.Imprimir();
         }
@@ -131,6 +126,22 @@ namespace Modulo_Capacitacion.Listados.HorasCursadasPorLegajo
         private void BT_Salir_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void txtDesde_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                if (txtDesde.Text.Replace(" ", "").Length < 10) return;
+
+                txtHasta.Focus();
+
+            }
+            else if (e.KeyData == Keys.Escape)
+            {
+                txtDesde.Text = "";
+            }
+	        
         }
     }
 }

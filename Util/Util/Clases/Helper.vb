@@ -10,6 +10,39 @@ Namespace Clases
 
     Public Class Helper
 
+        Public Shared Function FirmaDigital(ByVal operador As String, Optional ByVal Silenciar As Boolean = True) As String
+
+            If Val(operador) <= 0 Then
+                If Not Silenciar Then Throw New ArgumentException("El operador #0 no es un operador válido.")
+
+                Return ""
+            End If
+
+            '
+            ' Ruta donde se almacenarán las firmas.
+            '
+            Const WRutaFirmas As String = "\\193.168.0.2\g$\vb\net\firmasdigitales\#OPERADOR#.png"
+
+            Dim WFirmaParticular As String = WRutaFirmas.Replace("#OPERADOR#", operador)
+
+            Dim WExiste As Boolean = File.Exists(WFirmaParticular)
+
+            If Not WExiste Then
+                WFirmaParticular = WRutaFirmas.Replace("#OPERADOR#.png", operador & ".jpg")
+                WExiste = File.Exists(WFirmaParticular)
+            End If
+
+            If Not WExiste Then
+                If Not Silenciar Then Throw New ArgumentException("No se encuentra la firma asociada al Operador #" & operador)
+
+                Return ""
+
+            End If
+
+            Return WFirmaParticular
+
+        End Function
+
         Public Shared Function FormatoCodigoCliente(ByVal codigo As String) As String
             codigo = codigo.Replace(" ", "")
 
@@ -119,7 +152,7 @@ Namespace Clases
             Return row
 
         End Function
-        
+
         Public Shared Function _ConectarA(Optional ByVal empresa As String = "SurfactanSa", Optional ByVal TmbPellital As Boolean = False) As String
 
             Return Conexion._ConectarA(empresa, TmbPellital)
@@ -725,7 +758,7 @@ Namespace Clases
 
                     Next
                 End If
-                
+
 
                 If EnvioAutomatico Then
                     oMsg.Send()
@@ -777,6 +810,6 @@ Namespace Clases
             MsgBox(msg & vbCrLf & vbCrLf & "Motivo: " & ex.Message, MsgBoxStyle.Exclamation)
         End Sub
 
-        
+
     End Class
 End Namespace
