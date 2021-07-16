@@ -3112,6 +3112,22 @@ Public Class Pagos
             If Not Directory.Exists("C:\CarpetaParaImprimirVeps") Then
                 Directory.CreateDirectory("C:\CarpetaParaImprimirVeps")
             End If
+
+
+            If Directory.Exists("C:\CarpetaParaImprimirVeps") Then
+                'BORRO LOS ARCHIVOS QUE TENGA LA CARPETA
+                Dim listaArchivosBorrar As New List(Of String)
+                For Each archivo As String In Directory.GetFiles("C:\CarpetaParaImprimirVeps")
+                    listaArchivosBorrar.Add(archivo)
+                Next
+
+                If listaArchivosBorrar.Count > 0 Then
+                    For Each archivo As String In listaArchivosBorrar
+                        File.Delete(archivo)
+                    Next
+                End If
+            End If
+            
             'ACA FALTA MOFICAR PARA QUE IMPRIMA TODOS LOS ARCHIVOS MENOS LA SOLICITUD ORIGINAL
             ' Dim _file As String = RutaCarpeta & "\" & "SolicitudOriginal_" & _NroSoliInterno & ".pdf"
             Dim Cantidadarchivos As Integer = 1
@@ -3137,23 +3153,12 @@ Public Class Pagos
                 p.StartInfo.FileName = FileName ''put the correct path here
 
                 p.Start()
+
             Next
 
-            If Directory.Exists("C:\CarpetaParaImprimirVeps") Then
-                'BORRO LOS ARCHIVOS PARA PODER ELIMINAR LA CARPETA
-                Dim listaArchivosBorrar As New List(Of String)
-                For Each archivo As String In Directory.GetFiles("C:\CarpetaParaImprimirVeps")
-                    listaArchivosBorrar.Add(archivo)
-                Next
 
-                If listaArchivosBorrar.Count > 0 Then
-                    For Each archivo As String In listaArchivosBorrar
-                        File.Delete(archivo)
-                    Next
-                End If
+            '  System.Threading.Thread.Sleep(1000)
 
-                Directory.Delete("C:\CarpetaParaImprimirVeps")
-            End If
 
         Catch ex As System.Exception
             Throw New System.Exception(ex.Message)
@@ -8999,7 +9004,5 @@ Public Class Pagos
 
     End Sub
 
-
-   
-   
+ 
 End Class
